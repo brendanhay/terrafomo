@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -72,7 +73,6 @@ module Terrafomo.VSphere.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -80,7 +80,10 @@ import Terrafomo.VSphere.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -89,6 +92,7 @@ import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 import qualified Terrafomo.VSphere.Lens     as P
 import qualified Terrafomo.VSphere.Provider as P
 import qualified Terrafomo.VSphere.Types    as P
@@ -109,33 +113,34 @@ data ComputeClusterData s = ComputeClusterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeClusterData s) where
-    toObject ComputeClusterData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeClusterData s)
 computeClusterData _name =
-    TF.newDataSource "vsphere_compute_cluster" $
+    TF.newDataSource "vsphere_compute_cluster" TF.validator $
         ComputeClusterData'
             { _datacenterId = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (ComputeClusterData s) where
+    toObject ComputeClusterData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeClusterData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (ComputeClusterData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: ComputeClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: ComputeClusterData s)
+               (\s a -> s { _datacenterId = a } :: ComputeClusterData s)
 
 instance P.HasName (ComputeClusterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeClusterData s)
+               (\s a -> s { _name = a } :: ComputeClusterData s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
     computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
@@ -151,25 +156,27 @@ data CustomAttributeData s = CustomAttributeData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CustomAttributeData s) where
-    toObject CustomAttributeData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 customAttributeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CustomAttributeData s)
 customAttributeData _name =
-    TF.newDataSource "vsphere_custom_attribute" $
+    TF.newDataSource "vsphere_custom_attribute" TF.validator $
         CustomAttributeData'
             { _name = _name
             }
 
+instance TF.IsObject (CustomAttributeData s) where
+    toObject CustomAttributeData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CustomAttributeData s) where
+    validator = P.mempty
+
 instance P.HasName (CustomAttributeData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CustomAttributeData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CustomAttributeData s)
+               (\s a -> s { _name = a } :: CustomAttributeData s)
 
 instance s ~ s' => P.HasComputedManagedObjectType (TF.Ref s' (CustomAttributeData s)) (TF.Attr s P.Text) where
     computedManagedObjectType x = TF.compute (TF.refKey x) "_computedManagedObjectType"
@@ -186,24 +193,26 @@ data DatacenterData s = DatacenterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DatacenterData s) where
-    toObject DatacenterData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 datacenterData
     :: TF.DataSource P.Provider (DatacenterData s)
 datacenterData =
-    TF.newDataSource "vsphere_datacenter" $
+    TF.newDataSource "vsphere_datacenter" TF.validator $
         DatacenterData'
             { _name = TF.Nil
             }
 
+instance TF.IsObject (DatacenterData s) where
+    toObject DatacenterData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DatacenterData s) where
+    validator = P.mempty
+
 instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatacenterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DatacenterData s)
+               (\s a -> s { _name = a } :: DatacenterData s)
 
 -- | @vsphere_datastore@ DataSource.
 --
@@ -222,33 +231,34 @@ data DatastoreData s = DatastoreData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DatastoreData s) where
-    toObject DatastoreData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 datastoreData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DatastoreData s)
 datastoreData _name =
-    TF.newDataSource "vsphere_datastore" $
+    TF.newDataSource "vsphere_datastore" TF.validator $
         DatastoreData'
             { _datacenterId = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (DatastoreData s) where
+    toObject DatastoreData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DatastoreData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (DatastoreData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: DatastoreData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: DatastoreData s)
+               (\s a -> s { _datacenterId = a } :: DatastoreData s)
 
 instance P.HasName (DatastoreData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatastoreData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DatastoreData s)
+               (\s a -> s { _name = a } :: DatastoreData s)
 
 -- | @vsphere_datastore_cluster@ DataSource.
 --
@@ -266,33 +276,34 @@ data DatastoreClusterData s = DatastoreClusterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DatastoreClusterData s) where
-    toObject DatastoreClusterData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 datastoreClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DatastoreClusterData s)
 datastoreClusterData _name =
-    TF.newDataSource "vsphere_datastore_cluster" $
+    TF.newDataSource "vsphere_datastore_cluster" TF.validator $
         DatastoreClusterData'
             { _datacenterId = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (DatastoreClusterData s) where
+    toObject DatastoreClusterData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DatastoreClusterData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (DatastoreClusterData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: DatastoreClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: DatastoreClusterData s)
+               (\s a -> s { _datacenterId = a } :: DatastoreClusterData s)
 
 instance P.HasName (DatastoreClusterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatastoreClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DatastoreClusterData s)
+               (\s a -> s { _name = a } :: DatastoreClusterData s)
 
 -- | @vsphere_distributed_virtual_switch@ DataSource.
 --
@@ -311,33 +322,34 @@ data DistributedVirtualSwitchData s = DistributedVirtualSwitchData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DistributedVirtualSwitchData s) where
-    toObject DistributedVirtualSwitchData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 distributedVirtualSwitchData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DistributedVirtualSwitchData s)
 distributedVirtualSwitchData _name =
-    TF.newDataSource "vsphere_distributed_virtual_switch" $
+    TF.newDataSource "vsphere_distributed_virtual_switch" TF.validator $
         DistributedVirtualSwitchData'
             { _datacenterId = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (DistributedVirtualSwitchData s) where
+    toObject DistributedVirtualSwitchData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DistributedVirtualSwitchData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (DistributedVirtualSwitchData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: DistributedVirtualSwitchData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: DistributedVirtualSwitchData s)
+               (\s a -> s { _datacenterId = a } :: DistributedVirtualSwitchData s)
 
 instance P.HasName (DistributedVirtualSwitchData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DistributedVirtualSwitchData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DistributedVirtualSwitchData s)
+               (\s a -> s { _name = a } :: DistributedVirtualSwitchData s)
 
 instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedUplinks x = TF.compute (TF.refKey x) "_computedUplinks"
@@ -358,33 +370,34 @@ data HostData s = HostData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (HostData s) where
-    toObject HostData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 hostData
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.DataSource P.Provider (HostData s)
 hostData _datacenterId =
-    TF.newDataSource "vsphere_host" $
+    TF.newDataSource "vsphere_host" TF.validator $
         HostData'
             { _datacenterId = _datacenterId
             , _name = TF.Nil
             }
 
+instance TF.IsObject (HostData s) where
+    toObject HostData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (HostData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (HostData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: HostData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: HostData s)
+               (\s a -> s { _datacenterId = a } :: HostData s)
 
 instance P.HasName (HostData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: HostData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: HostData s)
+               (\s a -> s { _name = a } :: HostData s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (HostData s)) (TF.Attr s P.Text) where
     computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
@@ -406,33 +419,34 @@ data NetworkData s = NetworkData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NetworkData s) where
-    toObject NetworkData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (NetworkData s)
 networkData _name =
-    TF.newDataSource "vsphere_network" $
+    TF.newDataSource "vsphere_network" TF.validator $
         NetworkData'
             { _datacenterId = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (NetworkData s) where
+    toObject NetworkData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (NetworkData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (NetworkData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: NetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: NetworkData s)
+               (\s a -> s { _datacenterId = a } :: NetworkData s)
 
 instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: NetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: NetworkData s)
+               (\s a -> s { _name = a } :: NetworkData s)
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "_computedType"
@@ -454,32 +468,33 @@ data ResourcePoolData s = ResourcePoolData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ResourcePoolData s) where
-    toObject ResourcePoolData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 resourcePoolData
     :: TF.DataSource P.Provider (ResourcePoolData s)
 resourcePoolData =
-    TF.newDataSource "vsphere_resource_pool" $
+    TF.newDataSource "vsphere_resource_pool" TF.validator $
         ResourcePoolData'
             { _datacenterId = TF.Nil
             , _name = TF.Nil
             }
 
+instance TF.IsObject (ResourcePoolData s) where
+    toObject ResourcePoolData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ResourcePoolData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (ResourcePoolData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: ResourcePoolData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: ResourcePoolData s)
+               (\s a -> s { _datacenterId = a } :: ResourcePoolData s)
 
 instance P.HasName (ResourcePoolData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ResourcePoolData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ResourcePoolData s)
+               (\s a -> s { _name = a } :: ResourcePoolData s)
 
 -- | @vsphere_tag@ DataSource.
 --
@@ -496,34 +511,35 @@ data TagData s = TagData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TagData s) where
-    toObject TagData'{..} = catMaybes
-        [ TF.assign "category_id" <$> TF.attribute _categoryId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 tagData
     :: TF.Attr s P.Text -- ^ @category_id@ - 'P.categoryId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (TagData s)
 tagData _categoryId _name =
-    TF.newDataSource "vsphere_tag" $
+    TF.newDataSource "vsphere_tag" TF.validator $
         TagData'
             { _categoryId = _categoryId
             , _name = _name
             }
 
+instance TF.IsObject (TagData s) where
+    toObject TagData'{..} = P.catMaybes
+        [ TF.assign "category_id" <$> TF.attribute _categoryId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (TagData s) where
+    validator = P.mempty
+
 instance P.HasCategoryId (TagData s) (TF.Attr s P.Text) where
     categoryId =
         P.lens (_categoryId :: TagData s -> TF.Attr s P.Text)
-               (\s a -> s { _categoryId = a
-                          } :: TagData s)
+               (\s a -> s { _categoryId = a } :: TagData s)
 
 instance P.HasName (TagData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: TagData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: TagData s)
+               (\s a -> s { _name = a } :: TagData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -539,27 +555,29 @@ data TagCategoryData s = TagCategoryData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TagCategoryData s) where
-    toObject TagCategoryData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 tagCategoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (TagCategoryData s)
 tagCategoryData _name =
-    TF.newDataSource "vsphere_tag_category" $
+    TF.newDataSource "vsphere_tag_category" TF.validator $
         TagCategoryData'
             { _name = _name
             }
 
+instance TF.IsObject (TagCategoryData s) where
+    toObject TagCategoryData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (TagCategoryData s) where
+    validator = P.mempty
+
 instance P.HasName (TagCategoryData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: TagCategoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: TagCategoryData s)
+               (\s a -> s { _name = a } :: TagCategoryData s)
 
-instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAssociableTypes x = TF.compute (TF.refKey x) "_computedAssociableTypes"
 
 instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
@@ -590,46 +608,46 @@ data VirtualMachineData s = VirtualMachineData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VirtualMachineData s) where
-    toObject VirtualMachineData'{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "scsi_controller_scan_count" <$> TF.attribute _scsiControllerScanCount
-        ]
-
 virtualMachineData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (VirtualMachineData s)
 virtualMachineData _name =
-    TF.newDataSource "vsphere_virtual_machine" $
+    TF.newDataSource "vsphere_virtual_machine" TF.validator $
         VirtualMachineData'
             { _datacenterId = TF.Nil
             , _name = _name
             , _scsiControllerScanCount = TF.value 1
             }
 
+instance TF.IsObject (VirtualMachineData s) where
+    toObject VirtualMachineData'{..} = P.catMaybes
+        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "scsi_controller_scan_count" <$> TF.attribute _scsiControllerScanCount
+        ]
+
+instance TF.IsValid (VirtualMachineData s) where
+    validator = P.mempty
+
 instance P.HasDatacenterId (VirtualMachineData s) (TF.Attr s P.Text) where
     datacenterId =
         P.lens (_datacenterId :: VirtualMachineData s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a
-                          } :: VirtualMachineData s)
+               (\s a -> s { _datacenterId = a } :: VirtualMachineData s)
 
 instance P.HasName (VirtualMachineData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VirtualMachineData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: VirtualMachineData s)
+               (\s a -> s { _name = a } :: VirtualMachineData s)
 
 instance P.HasScsiControllerScanCount (VirtualMachineData s) (TF.Attr s P.Integer) where
     scsiControllerScanCount =
         P.lens (_scsiControllerScanCount :: VirtualMachineData s -> TF.Attr s P.Integer)
-               (\s a -> s { _scsiControllerScanCount = a
-                          } :: VirtualMachineData s)
+               (\s a -> s { _scsiControllerScanCount = a } :: VirtualMachineData s)
 
 instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedAlternateGuestName x = TF.compute (TF.refKey x) "_computedAlternateGuestName"
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [Disks s]) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (Disks s)]) where
     computedDisks x = TF.compute (TF.refKey x) "_computedDisks"
 
 instance s ~ s' => P.HasComputedFirmware (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
@@ -668,41 +686,41 @@ data VmfsDisksData s = VmfsDisksData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VmfsDisksData s) where
-    toObject VmfsDisksData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
-        , TF.assign "rescan" <$> TF.attribute _rescan
-        ]
-
 vmfsDisksData
     :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
     -> TF.DataSource P.Provider (VmfsDisksData s)
 vmfsDisksData _hostSystemId =
-    TF.newDataSource "vsphere_vmfs_disks" $
+    TF.newDataSource "vsphere_vmfs_disks" TF.validator $
         VmfsDisksData'
             { _filter = TF.Nil
             , _hostSystemId = _hostSystemId
             , _rescan = TF.Nil
             }
 
+instance TF.IsObject (VmfsDisksData s) where
+    toObject VmfsDisksData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
+        , TF.assign "rescan" <$> TF.attribute _rescan
+        ]
+
+instance TF.IsValid (VmfsDisksData s) where
+    validator = P.mempty
+
 instance P.HasFilter (VmfsDisksData s) (TF.Attr s P.Text) where
     filter =
         P.lens (_filter :: VmfsDisksData s -> TF.Attr s P.Text)
-               (\s a -> s { _filter = a
-                          } :: VmfsDisksData s)
+               (\s a -> s { _filter = a } :: VmfsDisksData s)
 
 instance P.HasHostSystemId (VmfsDisksData s) (TF.Attr s P.Text) where
     hostSystemId =
         P.lens (_hostSystemId :: VmfsDisksData s -> TF.Attr s P.Text)
-               (\s a -> s { _hostSystemId = a
-                          } :: VmfsDisksData s)
+               (\s a -> s { _hostSystemId = a } :: VmfsDisksData s)
 
 instance P.HasRescan (VmfsDisksData s) (TF.Attr s P.Bool) where
     rescan =
         P.lens (_rescan :: VmfsDisksData s -> TF.Attr s P.Bool)
-               (\s a -> s { _rescan = a
-                          } :: VmfsDisksData s)
+               (\s a -> s { _rescan = a } :: VmfsDisksData s)
 
 instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDisksData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDisks x = TF.compute (TF.refKey x) "_computedDisks"

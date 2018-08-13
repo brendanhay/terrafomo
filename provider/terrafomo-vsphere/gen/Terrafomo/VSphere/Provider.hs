@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.VSphere.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.VSphere.Settings
 
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
@@ -40,6 +43,7 @@ import qualified Prelude                 as P
 import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 import qualified Terrafomo.VSphere.Lens  as P
 import qualified Terrafomo.VSphere.Types as P
 
@@ -93,32 +97,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , TF.assign "client_debug" <$> _clientDebug
-                  , TF.assign "client_debug_path" <$> _clientDebugPath
-                  , TF.assign "client_debug_path_run" <$> _clientDebugPathRun
-                  , P.Just $ TF.assign "password" _password
-                  , TF.assign "persist_session" <$> _persistSession
-                  , TF.assign "rest_session_path" <$> _restSessionPath
-                  , P.Just $ TF.assign "user" _user
-                  , TF.assign "vcenter_server" <$> _vcenterServer
-                  , TF.assign "vim_session_path" <$> _vimSessionPath
-                  , TF.assign "vsphere_server" <$> _vsphereServer
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @password@ - 'P.password'
     -> P.Text -- ^ @user@ - 'P.user'
@@ -138,68 +116,86 @@ newProvider _password _user =
         , _vsphereServer = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+                  , TF.assign "client_debug" <$> _clientDebug
+                  , TF.assign "client_debug_path" <$> _clientDebugPath
+                  , TF.assign "client_debug_path_run" <$> _clientDebugPathRun
+                  , P.Just $ TF.assign "password" _password
+                  , TF.assign "persist_session" <$> _persistSession
+                  , TF.assign "rest_session_path" <$> _restSessionPath
+                  , P.Just $ TF.assign "user" _user
+                  , TF.assign "vcenter_server" <$> _vcenterServer
+                  , TF.assign "vim_session_path" <$> _vimSessionPath
+                  , TF.assign "vsphere_server" <$> _vsphereServer
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasAllowUnverifiedSsl (Provider) (P.Maybe P.Bool) where
     allowUnverifiedSsl =
         P.lens (_allowUnverifiedSsl :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _allowUnverifiedSsl = a
-                          } :: Provider)
+               (\s a -> s { _allowUnverifiedSsl = a } :: Provider)
 
 instance P.HasClientDebug (Provider) (P.Maybe P.Bool) where
     clientDebug =
         P.lens (_clientDebug :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _clientDebug = a
-                          } :: Provider)
+               (\s a -> s { _clientDebug = a } :: Provider)
 
 instance P.HasClientDebugPath (Provider) (P.Maybe P.Text) where
     clientDebugPath =
         P.lens (_clientDebugPath :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientDebugPath = a
-                          } :: Provider)
+               (\s a -> s { _clientDebugPath = a } :: Provider)
 
 instance P.HasClientDebugPathRun (Provider) (P.Maybe P.Text) where
     clientDebugPathRun =
         P.lens (_clientDebugPathRun :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientDebugPathRun = a
-                          } :: Provider)
+               (\s a -> s { _clientDebugPathRun = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Text) where
     password =
         P.lens (_password :: Provider -> P.Text)
-               (\s a -> s { _password = a
-                          } :: Provider)
+               (\s a -> s { _password = a } :: Provider)
 
 instance P.HasPersistSession (Provider) (P.Maybe P.Bool) where
     persistSession =
         P.lens (_persistSession :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _persistSession = a
-                          } :: Provider)
+               (\s a -> s { _persistSession = a } :: Provider)
 
 instance P.HasRestSessionPath (Provider) (P.Maybe P.Text) where
     restSessionPath =
         P.lens (_restSessionPath :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _restSessionPath = a
-                          } :: Provider)
+               (\s a -> s { _restSessionPath = a } :: Provider)
 
 instance P.HasUser (Provider) (P.Text) where
     user =
         P.lens (_user :: Provider -> P.Text)
-               (\s a -> s { _user = a
-                          } :: Provider)
+               (\s a -> s { _user = a } :: Provider)
 
 instance P.HasVcenterServer (Provider) (P.Maybe P.Text) where
     vcenterServer =
         P.lens (_vcenterServer :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _vcenterServer = a
-                          } :: Provider)
+               (\s a -> s { _vcenterServer = a } :: Provider)
 
 instance P.HasVimSessionPath (Provider) (P.Maybe P.Text) where
     vimSessionPath =
         P.lens (_vimSessionPath :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _vimSessionPath = a
-                          } :: Provider)
+               (\s a -> s { _vimSessionPath = a } :: Provider)
 
 instance P.HasVsphereServer (Provider) (P.Maybe P.Text) where
     vsphereServer =
         P.lens (_vsphereServer :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _vsphereServer = a
-                          } :: Provider)
+               (\s a -> s { _vsphereServer = a } :: Provider)
