@@ -62,4 +62,4 @@ regionsData =
         RegionsData'
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"

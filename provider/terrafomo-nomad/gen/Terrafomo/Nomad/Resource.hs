@@ -190,10 +190,10 @@ instance P.HasType' (AclTokenResource s) (TF.Attr s P.Text) where
                           } :: AclTokenResource s)
 
 instance s ~ s' => P.HasComputedAccessorId (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedAccessorId x = TF.compute (TF.refKey x) "accessor_id"
+    computedAccessorId x = TF.compute (TF.refKey x) "_computedAccessorId"
 
 instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedSecretId x = TF.compute (TF.refKey x) "secret_id"
+    computedSecretId x = TF.compute (TF.refKey x) "_computedSecretId"
 
 -- | @nomad_job@ Resource.
 --
