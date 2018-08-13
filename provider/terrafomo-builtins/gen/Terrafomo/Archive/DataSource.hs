@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.Archive.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.Archive.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -44,13 +47,14 @@ import qualified Terrafomo.Attribute        as TF
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @archive_file@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/Archive/archive_file terraform documentation>
 -- for more information.
 data FileData s = FileData'
-    { _excludes              :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _excludes              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @excludes@ - (Optional)
     --
     -- Conflicts with:
@@ -99,23 +103,12 @@ data FileData s = FileData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (FileData s) where
-    toObject FileData'{..} = catMaybes
-        [ TF.assign "excludes" <$> TF.attribute _excludes
-        , TF.assign "output_path" <$> TF.attribute _outputPath
-        , TF.assign "source_content" <$> TF.attribute _sourceContent
-        , TF.assign "source_content_filename" <$> TF.attribute _sourceContentFilename
-        , TF.assign "source_dir" <$> TF.attribute _sourceDir
-        , TF.assign "source_file" <$> TF.attribute _sourceFile
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 fileData
     :: TF.Attr s P.Text -- ^ @output_path@ - 'P.outputPath'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.DataSource P.Provider (FileData s)
 fileData _outputPath _type' =
-    TF.newDataSource "archive_file" $
+    TF.newDataSource "archive_file" TF.validator $
         FileData'
             { _excludes = TF.Nil
             , _outputPath = _outputPath
@@ -126,63 +119,80 @@ fileData _outputPath _type' =
             , _type' = _type'
             }
 
-instance P.HasExcludes (FileData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance TF.IsObject (FileData s) where
+    toObject FileData'{..} = P.catMaybes
+        [ TF.assign "excludes" <$> TF.attribute _excludes
+        , TF.assign "output_path" <$> TF.attribute _outputPath
+        , TF.assign "source_content" <$> TF.attribute _sourceContent
+        , TF.assign "source_content_filename" <$> TF.attribute _sourceContentFilename
+        , TF.assign "source_dir" <$> TF.attribute _sourceDir
+        , TF.assign "source_file" <$> TF.attribute _sourceFile
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (FileData s) where
+    validator = TF.fieldsValidator (\FileData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_excludes P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_excludes",
+                            [ "_sourceFile"                            , "_sourceContent"                            , "_sourceContentFilename"
+                            ])
+        , if (_sourceContent P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceContent",
+                            [ "_sourceFile"                            , "_excludes"                            , "_sourceDir"
+                            ])
+        , if (_sourceContentFilename P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceContentFilename",
+                            [ "_sourceFile"                            , "_excludes"                            , "_sourceDir"
+                            ])
+        , if (_sourceDir P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceDir",
+                            [ "_sourceFile"                            , "_sourceContent"                            , "_sourceContentFilename"
+                            ])
+        , if (_sourceFile P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceFile",
+                            [ "_sourceContent"                            , "_excludes"                            , "_sourceDir"                            , "_sourceContentFilename"
+                            ])
+        ])
+
+instance P.HasExcludes (FileData s) (TF.Attr s [TF.Attr s P.Text]) where
     excludes =
-        P.lens (_excludes :: FileData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _excludes = a
-                          , _sourceFile = TF.Nil
-                          , _sourceContent = TF.Nil
-                          , _sourceContentFilename = TF.Nil
-                          } :: FileData s)
+        P.lens (_excludes :: FileData s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _excludes = a } :: FileData s)
 
 instance P.HasOutputPath (FileData s) (TF.Attr s P.Text) where
     outputPath =
         P.lens (_outputPath :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputPath = a
-                          } :: FileData s)
+               (\s a -> s { _outputPath = a } :: FileData s)
 
 instance P.HasSourceContent (FileData s) (TF.Attr s P.Text) where
     sourceContent =
         P.lens (_sourceContent :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceContent = a
-                          , _sourceFile = TF.Nil
-                          , _excludes = TF.Nil
-                          , _sourceDir = TF.Nil
-                          } :: FileData s)
+               (\s a -> s { _sourceContent = a } :: FileData s)
 
 instance P.HasSourceContentFilename (FileData s) (TF.Attr s P.Text) where
     sourceContentFilename =
         P.lens (_sourceContentFilename :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceContentFilename = a
-                          , _sourceFile = TF.Nil
-                          , _excludes = TF.Nil
-                          , _sourceDir = TF.Nil
-                          } :: FileData s)
+               (\s a -> s { _sourceContentFilename = a } :: FileData s)
 
 instance P.HasSourceDir (FileData s) (TF.Attr s P.Text) where
     sourceDir =
         P.lens (_sourceDir :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceDir = a
-                          , _sourceFile = TF.Nil
-                          , _sourceContent = TF.Nil
-                          , _sourceContentFilename = TF.Nil
-                          } :: FileData s)
+               (\s a -> s { _sourceDir = a } :: FileData s)
 
 instance P.HasSourceFile (FileData s) (TF.Attr s P.Text) where
     sourceFile =
         P.lens (_sourceFile :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceFile = a
-                          , _sourceContent = TF.Nil
-                          , _excludes = TF.Nil
-                          , _sourceDir = TF.Nil
-                          , _sourceContentFilename = TF.Nil
-                          } :: FileData s)
+               (\s a -> s { _sourceFile = a } :: FileData s)
 
 instance P.HasType' (FileData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: FileData s)
+               (\s a -> s { _type' = a } :: FileData s)
 
 instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedOutputBase64sha256 x = TF.compute (TF.refKey x) "_computedOutputBase64sha256"

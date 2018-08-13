@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.TLS.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.TLS.Settings
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.TLS.Lens     as P
 import qualified Terrafomo.TLS.Provider as P
 import qualified Terrafomo.TLS.Types    as P
+import qualified Terrafomo.Validator    as TF
 
 -- | @tls_public_key@ DataSource.
 --
@@ -56,25 +60,27 @@ data PublicKeyData s = PublicKeyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (PublicKeyData s) where
-    toObject PublicKeyData'{..} = catMaybes
-        [ TF.assign "private_key_pem" <$> TF.attribute _privateKeyPem
-        ]
-
 publicKeyData
     :: TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> TF.DataSource P.Provider (PublicKeyData s)
 publicKeyData _privateKeyPem =
-    TF.newDataSource "tls_public_key" $
+    TF.newDataSource "tls_public_key" TF.validator $
         PublicKeyData'
             { _privateKeyPem = _privateKeyPem
             }
 
+instance TF.IsObject (PublicKeyData s) where
+    toObject PublicKeyData'{..} = P.catMaybes
+        [ TF.assign "private_key_pem" <$> TF.attribute _privateKeyPem
+        ]
+
+instance TF.IsValid (PublicKeyData s) where
+    validator = P.mempty
+
 instance P.HasPrivateKeyPem (PublicKeyData s) (TF.Attr s P.Text) where
     privateKeyPem =
         P.lens (_privateKeyPem :: PublicKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _privateKeyPem = a
-                          } :: PublicKeyData s)
+               (\s a -> s { _privateKeyPem = a } :: PublicKeyData s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
     computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"

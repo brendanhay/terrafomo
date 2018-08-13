@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,13 +25,15 @@ module Terrafomo.TLS.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
+import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Maybe          as P
+import qualified Data.Monoid         as P
 import qualified Data.Text           as P
 import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
@@ -40,6 +43,7 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.TLS.Lens  as P
 import qualified Terrafomo.TLS.Types as P
+import qualified Terrafomo.Validator as TF
 
 -- | @subject@ nested settings.
 data Subject s = Subject'
@@ -72,21 +76,6 @@ data Subject s = Subject'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Subject s)
-instance TF.IsValue  (Subject s)
-instance TF.IsObject (Subject s) where
-    toObject Subject'{..} = catMaybes
-        [ TF.assign "common_name" <$> TF.attribute _commonName
-        , TF.assign "country" <$> TF.attribute _country
-        , TF.assign "locality" <$> TF.attribute _locality
-        , TF.assign "organization" <$> TF.attribute _organization
-        , TF.assign "organizational_unit" <$> TF.attribute _organizationalUnit
-        , TF.assign "postal_code" <$> TF.attribute _postalCode
-        , TF.assign "province" <$> TF.attribute _province
-        , TF.assign "serial_number" <$> TF.attribute _serialNumber
-        , TF.assign "street_address" <$> TF.attribute _streetAddress
-        ]
-
 newSubject
     :: Subject s
 newSubject =
@@ -102,56 +91,65 @@ newSubject =
         , _streetAddress = TF.Nil
         }
 
+instance P.Hashable  (Subject s)
+instance TF.IsValue  (Subject s)
+instance TF.IsObject (Subject s) where
+    toObject Subject'{..} = P.catMaybes
+        [ TF.assign "common_name" <$> TF.attribute _commonName
+        , TF.assign "country" <$> TF.attribute _country
+        , TF.assign "locality" <$> TF.attribute _locality
+        , TF.assign "organization" <$> TF.attribute _organization
+        , TF.assign "organizational_unit" <$> TF.attribute _organizationalUnit
+        , TF.assign "postal_code" <$> TF.attribute _postalCode
+        , TF.assign "province" <$> TF.attribute _province
+        , TF.assign "serial_number" <$> TF.attribute _serialNumber
+        , TF.assign "street_address" <$> TF.attribute _streetAddress
+        ]
+
+instance TF.IsValid (Subject s) where
+    validator = P.mempty
+
 instance P.HasCommonName (Subject s) (TF.Attr s P.Text) where
     commonName =
         P.lens (_commonName :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _commonName = a
-                          } :: Subject s)
+               (\s a -> s { _commonName = a } :: Subject s)
 
 instance P.HasCountry (Subject s) (TF.Attr s P.Text) where
     country =
         P.lens (_country :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _country = a
-                          } :: Subject s)
+               (\s a -> s { _country = a } :: Subject s)
 
 instance P.HasLocality (Subject s) (TF.Attr s P.Text) where
     locality =
         P.lens (_locality :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _locality = a
-                          } :: Subject s)
+               (\s a -> s { _locality = a } :: Subject s)
 
 instance P.HasOrganization (Subject s) (TF.Attr s P.Text) where
     organization =
         P.lens (_organization :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _organization = a
-                          } :: Subject s)
+               (\s a -> s { _organization = a } :: Subject s)
 
 instance P.HasOrganizationalUnit (Subject s) (TF.Attr s P.Text) where
     organizationalUnit =
         P.lens (_organizationalUnit :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _organizationalUnit = a
-                          } :: Subject s)
+               (\s a -> s { _organizationalUnit = a } :: Subject s)
 
 instance P.HasPostalCode (Subject s) (TF.Attr s P.Text) where
     postalCode =
         P.lens (_postalCode :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _postalCode = a
-                          } :: Subject s)
+               (\s a -> s { _postalCode = a } :: Subject s)
 
 instance P.HasProvince (Subject s) (TF.Attr s P.Text) where
     province =
         P.lens (_province :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _province = a
-                          } :: Subject s)
+               (\s a -> s { _province = a } :: Subject s)
 
 instance P.HasSerialNumber (Subject s) (TF.Attr s P.Text) where
     serialNumber =
         P.lens (_serialNumber :: Subject s -> TF.Attr s P.Text)
-               (\s a -> s { _serialNumber = a
-                          } :: Subject s)
+               (\s a -> s { _serialNumber = a } :: Subject s)
 
 instance P.HasStreetAddress (Subject s) (TF.Attr s [TF.Attr s P.Text]) where
     streetAddress =
         P.lens (_streetAddress :: Subject s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _streetAddress = a
-                          } :: Subject s)
+               (\s a -> s { _streetAddress = a } :: Subject s)

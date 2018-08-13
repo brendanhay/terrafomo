@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.External.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.External.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.External.Types    as P
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @external@ DataSource.
 --
@@ -61,41 +65,41 @@ data Data s = Data'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (Data s) where
-    toObject Data'{..} = catMaybes
-        [ TF.assign "program" <$> TF.attribute _program
-        , TF.assign "query" <$> TF.attribute _query
-        , TF.assign "working_dir" <$> TF.attribute _workingDir
-        ]
-
 data'
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
     -> TF.DataSource P.Provider (Data s)
 data' _program =
-    TF.newDataSource "external" $
+    TF.newDataSource "external" TF.validator $
         Data'
             { _program = _program
             , _query = TF.Nil
             , _workingDir = TF.Nil
             }
 
+instance TF.IsObject (Data s) where
+    toObject Data'{..} = P.catMaybes
+        [ TF.assign "program" <$> TF.attribute _program
+        , TF.assign "query" <$> TF.attribute _query
+        , TF.assign "working_dir" <$> TF.attribute _workingDir
+        ]
+
+instance TF.IsValid (Data s) where
+    validator = P.mempty
+
 instance P.HasProgram (Data s) (TF.Attr s [TF.Attr s P.Text]) where
     program =
         P.lens (_program :: Data s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _program = a
-                          } :: Data s)
+               (\s a -> s { _program = a } :: Data s)
 
 instance P.HasQuery (Data s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     query =
         P.lens (_query :: Data s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _query = a
-                          } :: Data s)
+               (\s a -> s { _query = a } :: Data s)
 
 instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
     workingDir =
         P.lens (_workingDir :: Data s -> TF.Attr s P.Text)
-               (\s a -> s { _workingDir = a
-                          } :: Data s)
+               (\s a -> s { _workingDir = a } :: Data s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedResult x = TF.compute (TF.refKey x) "_computedResult"
