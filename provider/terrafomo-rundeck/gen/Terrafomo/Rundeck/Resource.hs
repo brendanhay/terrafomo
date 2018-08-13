@@ -256,10 +256,10 @@ instance P.HasSchedule (JobResource s) (TF.Attr s P.Text) where
                           } :: JobResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedPreserveOptionsOrder (TF.Ref s' (JobResource s)) (TF.Attr s P.Bool) where
-    computedPreserveOptionsOrder x = TF.compute (TF.refKey x) "preserve_options_order"
+    computedPreserveOptionsOrder x = TF.compute (TF.refKey x) "_computedPreserveOptionsOrder"
 
 -- | @rundeck_private_key@ Resource.
 --
@@ -430,7 +430,7 @@ instance P.HasSshKeyStoragePath (ProjectResource s) (TF.Attr s P.Text) where
                           } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedUiUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedUiUrl x = TF.compute (TF.refKey x) "ui_url"
+    computedUiUrl x = TF.compute (TF.refKey x) "_computedUiUrl"
 
 -- | @rundeck_public_key@ Resource.
 --
@@ -464,10 +464,10 @@ instance P.HasPath (PublicKeyResource s) (TF.Attr s P.Text) where
                           } :: PublicKeyResource s)
 
 instance s ~ s' => P.HasComputedDelete (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Bool) where
-    computedDelete x = TF.compute (TF.refKey x) "delete"
+    computedDelete x = TF.compute (TF.refKey x) "_computedDelete"
 
 instance s ~ s' => P.HasComputedKeyMaterial (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
-    computedKeyMaterial x = TF.compute (TF.refKey x) "key_material"
+    computedKeyMaterial x = TF.compute (TF.refKey x) "_computedKeyMaterial"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
