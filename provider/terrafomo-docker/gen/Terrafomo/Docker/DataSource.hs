@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.Docker.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.Docker.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.Docker.Types    as P
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @docker_registry_image@ DataSource.
 --
@@ -55,24 +59,26 @@ data RegistryImageData s = RegistryImageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RegistryImageData s) where
-    toObject RegistryImageData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 registryImageData
     :: TF.DataSource P.Provider (RegistryImageData s)
 registryImageData =
-    TF.newDataSource "docker_registry_image" $
+    TF.newDataSource "docker_registry_image" TF.validator $
         RegistryImageData'
             { _name = TF.Nil
             }
 
+instance TF.IsObject (RegistryImageData s) where
+    toObject RegistryImageData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (RegistryImageData s) where
+    validator = P.mempty
+
 instance P.HasName (RegistryImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RegistryImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RegistryImageData s)
+               (\s a -> s { _name = a } :: RegistryImageData s)
 
 instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
     computedSha256Digest x = TF.compute (TF.refKey x) "_computedSha256Digest"
