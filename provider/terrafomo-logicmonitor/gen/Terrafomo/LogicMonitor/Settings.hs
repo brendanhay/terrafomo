@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,13 +25,15 @@ module Terrafomo.LogicMonitor.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable                as P
 import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Maybe                   as P
+import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
 import qualified GHC.Generics                 as P
 import qualified Lens.Micro                   as P
@@ -40,6 +43,7 @@ import qualified Terrafomo.HCL                as TF
 import qualified Terrafomo.LogicMonitor.Lens  as P
 import qualified Terrafomo.LogicMonitor.Types as P
 import qualified Terrafomo.Name               as TF
+import qualified Terrafomo.Validator          as TF
 
 -- | @filters@ nested settings.
 data Filters s = Filters'
@@ -60,17 +64,6 @@ data Filters s = Filters'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Filters s)
-instance TF.IsValue  (Filters s)
-instance TF.IsObject (Filters s) where
-    toObject Filters'{..} = catMaybes
-        [ TF.assign "custom_property_name" <$> TF.attribute _customPropertyName
-        , TF.assign "custom_property_value" <$> TF.attribute _customPropertyValue
-        , TF.assign "operator" <$> TF.attribute _operator
-        , TF.assign "property" <$> TF.attribute _property
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newFilters
     :: Filters s
 newFilters =
@@ -82,32 +75,41 @@ newFilters =
         , _value = TF.Nil
         }
 
+instance P.Hashable  (Filters s)
+instance TF.IsValue  (Filters s)
+instance TF.IsObject (Filters s) where
+    toObject Filters'{..} = P.catMaybes
+        [ TF.assign "custom_property_name" <$> TF.attribute _customPropertyName
+        , TF.assign "custom_property_value" <$> TF.attribute _customPropertyValue
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "property" <$> TF.attribute _property
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (Filters s) where
+    validator = P.mempty
+
 instance P.HasCustomPropertyName (Filters s) (TF.Attr s P.Text) where
     customPropertyName =
         P.lens (_customPropertyName :: Filters s -> TF.Attr s P.Text)
-               (\s a -> s { _customPropertyName = a
-                          } :: Filters s)
+               (\s a -> s { _customPropertyName = a } :: Filters s)
 
 instance P.HasCustomPropertyValue (Filters s) (TF.Attr s P.Text) where
     customPropertyValue =
         P.lens (_customPropertyValue :: Filters s -> TF.Attr s P.Text)
-               (\s a -> s { _customPropertyValue = a
-                          } :: Filters s)
+               (\s a -> s { _customPropertyValue = a } :: Filters s)
 
 instance P.HasOperator (Filters s) (TF.Attr s P.Text) where
     operator =
         P.lens (_operator :: Filters s -> TF.Attr s P.Text)
-               (\s a -> s { _operator = a
-                          } :: Filters s)
+               (\s a -> s { _operator = a } :: Filters s)
 
 instance P.HasProperty (Filters s) (TF.Attr s P.Text) where
     property =
         P.lens (_property :: Filters s -> TF.Attr s P.Text)
-               (\s a -> s { _property = a
-                          } :: Filters s)
+               (\s a -> s { _property = a } :: Filters s)
 
 instance P.HasValue (Filters s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: Filters s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: Filters s)
+               (\s a -> s { _value = a } :: Filters s)
