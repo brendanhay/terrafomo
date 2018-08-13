@@ -31,8 +31,8 @@ format: $(STYLISH)
  $(wildcard provider/*/gen) \
  -type f \
  -name '*.hs' \
- -printf ' -> %p\n' \
- -exec $(STYLISH) -i {} \;
+ -print0 | \
+ xargs -0 -I % sh -c 'echo " -> %"; $(STYLISH) -i "%"'
 
 $(STYLISH):
 	stack install --nix stylish-haskell
