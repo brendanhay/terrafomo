@@ -113,25 +113,25 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
                           } :: DatabaseResource s)
 
 instance s ~ s' => P.HasComputedEncoding (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedEncoding x = TF.compute (TF.refKey x) "encoding"
+    computedEncoding x = TF.compute (TF.refKey x) "_computedEncoding"
 
 instance s ~ s' => P.HasComputedIsTemplate (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Bool) where
-    computedIsTemplate x = TF.compute (TF.refKey x) "is_template"
+    computedIsTemplate x = TF.compute (TF.refKey x) "_computedIsTemplate"
 
 instance s ~ s' => P.HasComputedLcCollate (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedLcCollate x = TF.compute (TF.refKey x) "lc_collate"
+    computedLcCollate x = TF.compute (TF.refKey x) "_computedLcCollate"
 
 instance s ~ s' => P.HasComputedLcCtype (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedLcCtype x = TF.compute (TF.refKey x) "lc_ctype"
+    computedLcCtype x = TF.compute (TF.refKey x) "_computedLcCtype"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "owner"
+    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
 
 instance s ~ s' => P.HasComputedTablespaceName (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedTablespaceName x = TF.compute (TF.refKey x) "tablespace_name"
+    computedTablespaceName x = TF.compute (TF.refKey x) "_computedTablespaceName"
 
 instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedTemplate x = TF.compute (TF.refKey x) "template"
+    computedTemplate x = TF.compute (TF.refKey x) "_computedTemplate"
 
 -- | @postgresql_extension@ Resource.
 --
@@ -164,10 +164,10 @@ instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
                           } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedSchema x = TF.compute (TF.refKey x) "schema"
+    computedSchema x = TF.compute (TF.refKey x) "_computedSchema"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @postgresql_role@ Resource.
 --
@@ -360,7 +360,7 @@ instance P.HasValidUntil (RoleResource s) (TF.Attr s P.Text) where
                           } :: RoleResource s)
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 -- | @postgresql_schema@ Resource.
 --
@@ -406,7 +406,7 @@ instance P.HasName (SchemaResource s) (TF.Attr s P.Text) where
                           } :: SchemaResource s)
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "owner"
+    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
 
 instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (Policy s)]) where
-    computedPolicy x = TF.compute (TF.refKey x) "policy"
+    computedPolicy x = TF.compute (TF.refKey x) "_computedPolicy"
