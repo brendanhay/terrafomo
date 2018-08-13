@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.OpenStack.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.OpenStack.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.OpenStack.Lens  as P
 import qualified Terrafomo.OpenStack.Types as P
 import qualified Terrafomo.Provider        as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | The @OpenStack@ Terraform provider configuration.
 --
@@ -144,44 +148,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "auth_url" <$> _authUrl
-                  , TF.assign "cacert_file" <$> _cacertFile
-                  , TF.assign "cert" <$> _cert
-                  , TF.assign "cloud" <$> _cloud
-                  , TF.assign "default_domain" <$> _defaultDomain
-                  , TF.assign "domain_id" <$> _domainId
-                  , TF.assign "domain_name" <$> _domainName
-                  , TF.assign "endpoint_type" <$> _endpointType
-                  , TF.assign "insecure" <$> _insecure
-                  , TF.assign "key" <$> _key
-                  , TF.assign "password" <$> _password
-                  , TF.assign "project_domain_id" <$> _projectDomainId
-                  , TF.assign "project_domain_name" <$> _projectDomainName
-                  , TF.assign "region" <$> _region
-                  , TF.assign "swauth" <$> _swauth
-                  , TF.assign "tenant_id" <$> _tenantId
-                  , TF.assign "tenant_name" <$> _tenantName
-                  , TF.assign "token" <$> _token
-                  , TF.assign "use_octavia" <$> _useOctavia
-                  , TF.assign "user_domain_id" <$> _userDomainId
-                  , TF.assign "user_domain_name" <$> _userDomainName
-                  , TF.assign "user_id" <$> _userId
-                  , TF.assign "user_name" <$> _userName
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: Provider
 newProvider =
@@ -211,140 +177,158 @@ newProvider =
         , _userName = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "auth_url" <$> _authUrl
+                  , TF.assign "cacert_file" <$> _cacertFile
+                  , TF.assign "cert" <$> _cert
+                  , TF.assign "cloud" <$> _cloud
+                  , TF.assign "default_domain" <$> _defaultDomain
+                  , TF.assign "domain_id" <$> _domainId
+                  , TF.assign "domain_name" <$> _domainName
+                  , TF.assign "endpoint_type" <$> _endpointType
+                  , TF.assign "insecure" <$> _insecure
+                  , TF.assign "key" <$> _key
+                  , TF.assign "password" <$> _password
+                  , TF.assign "project_domain_id" <$> _projectDomainId
+                  , TF.assign "project_domain_name" <$> _projectDomainName
+                  , TF.assign "region" <$> _region
+                  , TF.assign "swauth" <$> _swauth
+                  , TF.assign "tenant_id" <$> _tenantId
+                  , TF.assign "tenant_name" <$> _tenantName
+                  , TF.assign "token" <$> _token
+                  , TF.assign "use_octavia" <$> _useOctavia
+                  , TF.assign "user_domain_id" <$> _userDomainId
+                  , TF.assign "user_domain_name" <$> _userDomainName
+                  , TF.assign "user_id" <$> _userId
+                  , TF.assign "user_name" <$> _userName
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasAuthUrl (Provider) (P.Maybe P.Text) where
     authUrl =
         P.lens (_authUrl :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _authUrl = a
-                          } :: Provider)
+               (\s a -> s { _authUrl = a } :: Provider)
 
 instance P.HasCacertFile (Provider) (P.Maybe P.Text) where
     cacertFile =
         P.lens (_cacertFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _cacertFile = a
-                          } :: Provider)
+               (\s a -> s { _cacertFile = a } :: Provider)
 
 instance P.HasCert (Provider) (P.Maybe P.Text) where
     cert =
         P.lens (_cert :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _cert = a
-                          } :: Provider)
+               (\s a -> s { _cert = a } :: Provider)
 
 instance P.HasCloud (Provider) (P.Maybe P.Text) where
     cloud =
         P.lens (_cloud :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _cloud = a
-                          } :: Provider)
+               (\s a -> s { _cloud = a } :: Provider)
 
 instance P.HasDefaultDomain (Provider) (P.Maybe P.Text) where
     defaultDomain =
         P.lens (_defaultDomain :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _defaultDomain = a
-                          } :: Provider)
+               (\s a -> s { _defaultDomain = a } :: Provider)
 
 instance P.HasDomainId (Provider) (P.Maybe P.Text) where
     domainId =
         P.lens (_domainId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _domainId = a
-                          } :: Provider)
+               (\s a -> s { _domainId = a } :: Provider)
 
 instance P.HasDomainName (Provider) (P.Maybe P.Text) where
     domainName =
         P.lens (_domainName :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _domainName = a
-                          } :: Provider)
+               (\s a -> s { _domainName = a } :: Provider)
 
 instance P.HasEndpointType (Provider) (P.Maybe P.Text) where
     endpointType =
         P.lens (_endpointType :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _endpointType = a
-                          } :: Provider)
+               (\s a -> s { _endpointType = a } :: Provider)
 
 instance P.HasInsecure (Provider) (P.Maybe P.Bool) where
     insecure =
         P.lens (_insecure :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecure = a
-                          } :: Provider)
+               (\s a -> s { _insecure = a } :: Provider)
 
 instance P.HasKey (Provider) (P.Maybe P.Text) where
     key =
         P.lens (_key :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _key = a
-                          } :: Provider)
+               (\s a -> s { _key = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Maybe P.Text) where
     password =
         P.lens (_password :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _password = a
-                          } :: Provider)
+               (\s a -> s { _password = a } :: Provider)
 
 instance P.HasProjectDomainId (Provider) (P.Maybe P.Text) where
     projectDomainId =
         P.lens (_projectDomainId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _projectDomainId = a
-                          } :: Provider)
+               (\s a -> s { _projectDomainId = a } :: Provider)
 
 instance P.HasProjectDomainName (Provider) (P.Maybe P.Text) where
     projectDomainName =
         P.lens (_projectDomainName :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _projectDomainName = a
-                          } :: Provider)
+               (\s a -> s { _projectDomainName = a } :: Provider)
 
 instance P.HasRegion (Provider) (P.Maybe P.Text) where
     region =
         P.lens (_region :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _region = a
-                          } :: Provider)
+               (\s a -> s { _region = a } :: Provider)
 
 instance P.HasSwauth (Provider) (P.Maybe P.Bool) where
     swauth =
         P.lens (_swauth :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _swauth = a
-                          } :: Provider)
+               (\s a -> s { _swauth = a } :: Provider)
 
 instance P.HasTenantId (Provider) (P.Maybe P.Text) where
     tenantId =
         P.lens (_tenantId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _tenantId = a
-                          } :: Provider)
+               (\s a -> s { _tenantId = a } :: Provider)
 
 instance P.HasTenantName (Provider) (P.Maybe P.Text) where
     tenantName =
         P.lens (_tenantName :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _tenantName = a
-                          } :: Provider)
+               (\s a -> s { _tenantName = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Maybe P.Text) where
     token =
         P.lens (_token :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _token = a
-                          } :: Provider)
+               (\s a -> s { _token = a } :: Provider)
 
 instance P.HasUseOctavia (Provider) (P.Maybe P.Bool) where
     useOctavia =
         P.lens (_useOctavia :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _useOctavia = a
-                          } :: Provider)
+               (\s a -> s { _useOctavia = a } :: Provider)
 
 instance P.HasUserDomainId (Provider) (P.Maybe P.Text) where
     userDomainId =
         P.lens (_userDomainId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _userDomainId = a
-                          } :: Provider)
+               (\s a -> s { _userDomainId = a } :: Provider)
 
 instance P.HasUserDomainName (Provider) (P.Maybe P.Text) where
     userDomainName =
         P.lens (_userDomainName :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _userDomainName = a
-                          } :: Provider)
+               (\s a -> s { _userDomainName = a } :: Provider)
 
 instance P.HasUserId (Provider) (P.Maybe P.Text) where
     userId =
         P.lens (_userId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _userId = a
-                          } :: Provider)
+               (\s a -> s { _userId = a } :: Provider)
 
 instance P.HasUserName (Provider) (P.Maybe P.Text) where
     userName =
         P.lens (_userName :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _userName = a
-                          } :: Provider)
+               (\s a -> s { _userName = a } :: Provider)
