@@ -191,7 +191,7 @@ instance P.HasType' (AffinityGroupResource s) (TF.Attr s P.Text) where
                           } :: AffinityGroupResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AffinityGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @cloudstack_disk@ Resource.
 --
@@ -280,16 +280,16 @@ instance P.HasZone (DiskResource s) (TF.Attr s P.Text) where
                           } :: DiskResource s)
 
 instance s ~ s' => P.HasComputedDeviceId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Integer) where
-    computedDeviceId x = TF.compute (TF.refKey x) "device_id"
+    computedDeviceId x = TF.compute (TF.refKey x) "_computedDeviceId"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (DiskResource s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (DiskResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @cloudstack_egress_firewall@ Resource.
 --
@@ -565,28 +565,28 @@ instance P.HasZone (InstanceResource s) (TF.Attr s P.Text) where
                           } :: InstanceResource s)
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedGroup x = TF.compute (TF.refKey x) "group"
+    computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkId x = TF.compute (TF.refKey x) "network_id"
+    computedNetworkId x = TF.compute (TF.refKey x) "_computedNetworkId"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRootDiskSize (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Integer) where
-    computedRootDiskSize x = TF.compute (TF.refKey x) "root_disk_size"
+    computedRootDiskSize x = TF.compute (TF.refKey x) "_computedRootDiskSize"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @cloudstack_ipaddress@ Resource.
 --
@@ -651,13 +651,13 @@ instance P.HasZone (IpaddressResource s) (TF.Attr s P.Text) where
                           } :: IpaddressResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpaddressResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (IpaddressResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (IpaddressResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @cloudstack_loadbalancer_rule@ Resource.
 --
@@ -761,13 +761,13 @@ instance P.HasPublicPort (LoadbalancerRuleResource s) (TF.Attr s P.Integer) wher
                           } :: LoadbalancerRuleResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (LoadbalancerRuleResource s)) (TF.Attr s P.Text) where
-    computedProtocol x = TF.compute (TF.refKey x) "protocol"
+    computedProtocol x = TF.compute (TF.refKey x) "_computedProtocol"
 
 -- | @cloudstack_network@ Resource.
 --
@@ -869,25 +869,25 @@ instance P.HasZone (NetworkResource s) (TF.Attr s P.Text) where
                           } :: NetworkResource s)
 
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedDisplayText x = TF.compute (TF.refKey x) "display_text"
+    computedDisplayText x = TF.compute (TF.refKey x) "_computedDisplayText"
 
 instance s ~ s' => P.HasComputedEndip (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedEndip x = TF.compute (TF.refKey x) "endip"
+    computedEndip x = TF.compute (TF.refKey x) "_computedEndip"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedNetworkDomain (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedNetworkDomain x = TF.compute (TF.refKey x) "network_domain"
+    computedNetworkDomain x = TF.compute (TF.refKey x) "_computedNetworkDomain"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedStartip (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedStartip x = TF.compute (TF.refKey x) "startip"
+    computedStartip x = TF.compute (TF.refKey x) "_computedStartip"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @cloudstack_network_acl@ Resource.
 --
@@ -943,7 +943,7 @@ instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
                           } :: NetworkAclResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @cloudstack_network_acl_rule@ Resource.
 --
@@ -1062,7 +1062,7 @@ instance P.HasVirtualMachineId (NicResource s) (TF.Attr s P.Text) where
                           } :: NicResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (NicResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 -- | @cloudstack_port_forward@ Resource.
 --
@@ -1271,10 +1271,10 @@ instance P.HasVirtualMachineId (SecondaryIpaddressResource s) (TF.Attr s P.Text)
                           } :: SecondaryIpaddressResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SecondaryIpaddressResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedNicId (TF.Ref s' (SecondaryIpaddressResource s)) (TF.Attr s P.Text) where
-    computedNicId x = TF.compute (TF.refKey x) "nic_id"
+    computedNicId x = TF.compute (TF.refKey x) "_computedNicId"
 
 -- | @cloudstack_security_group@ Resource.
 --
@@ -1307,10 +1307,10 @@ instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
                           } :: SecurityGroupResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @cloudstack_security_group_rule@ Resource.
 --
@@ -1429,10 +1429,10 @@ instance P.HasPublicKey (SshKeypairResource s) (TF.Attr s P.Text) where
                           } :: SshKeypairResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeypairResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
 instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (SshKeypairResource s)) (TF.Attr s P.Text) where
-    computedPrivateKey x = TF.compute (TF.refKey x) "private_key"
+    computedPrivateKey x = TF.compute (TF.refKey x) "_computedPrivateKey"
 
 -- | @cloudstack_static_nat@ Resource.
 --
@@ -1477,10 +1477,10 @@ instance P.HasVirtualMachineId (StaticNatResource s) (TF.Attr s P.Text) where
                           } :: StaticNatResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StaticNatResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedVmGuestIp (TF.Ref s' (StaticNatResource s)) (TF.Attr s P.Text) where
-    computedVmGuestIp x = TF.compute (TF.refKey x) "vm_guest_ip"
+    computedVmGuestIp x = TF.compute (TF.refKey x) "_computedVmGuestIp"
 
 -- | @cloudstack_static_route@ Resource.
 --
@@ -1626,31 +1626,31 @@ instance P.HasZone (TemplateResource s) (TF.Attr s P.Text) where
                           } :: TemplateResource s)
 
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Text) where
-    computedDisplayText x = TF.compute (TF.refKey x) "display_text"
+    computedDisplayText x = TF.compute (TF.refKey x) "_computedDisplayText"
 
 instance s ~ s' => P.HasComputedIsDynamicallyScalable (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Bool) where
-    computedIsDynamicallyScalable x = TF.compute (TF.refKey x) "is_dynamically_scalable"
+    computedIsDynamicallyScalable x = TF.compute (TF.refKey x) "_computedIsDynamicallyScalable"
 
 instance s ~ s' => P.HasComputedIsExtractable (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Bool) where
-    computedIsExtractable x = TF.compute (TF.refKey x) "is_extractable"
+    computedIsExtractable x = TF.compute (TF.refKey x) "_computedIsExtractable"
 
 instance s ~ s' => P.HasComputedIsFeatured (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Bool) where
-    computedIsFeatured x = TF.compute (TF.refKey x) "is_featured"
+    computedIsFeatured x = TF.compute (TF.refKey x) "_computedIsFeatured"
 
 instance s ~ s' => P.HasComputedIsPublic (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Bool) where
-    computedIsPublic x = TF.compute (TF.refKey x) "is_public"
+    computedIsPublic x = TF.compute (TF.refKey x) "_computedIsPublic"
 
 instance s ~ s' => P.HasComputedIsReady (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Bool) where
-    computedIsReady x = TF.compute (TF.refKey x) "is_ready"
+    computedIsReady x = TF.compute (TF.refKey x) "_computedIsReady"
 
 instance s ~ s' => P.HasComputedPasswordEnabled (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Bool) where
-    computedPasswordEnabled x = TF.compute (TF.refKey x) "password_enabled"
+    computedPasswordEnabled x = TF.compute (TF.refKey x) "_computedPasswordEnabled"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (TemplateResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @cloudstack_vpc@ Resource.
 --
@@ -1719,19 +1719,19 @@ instance P.HasZone (VpcResource s) (TF.Attr s P.Text) where
                           } :: VpcResource s)
 
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedDisplayText x = TF.compute (TF.refKey x) "display_text"
+    computedDisplayText x = TF.compute (TF.refKey x) "_computedDisplayText"
 
 instance s ~ s' => P.HasComputedNetworkDomain (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedNetworkDomain x = TF.compute (TF.refKey x) "network_domain"
+    computedNetworkDomain x = TF.compute (TF.refKey x) "_computedNetworkDomain"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSourceNatIp (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedSourceNatIp x = TF.compute (TF.refKey x) "source_nat_ip"
+    computedSourceNatIp x = TF.compute (TF.refKey x) "_computedSourceNatIp"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @cloudstack_vpn_connection@ Resource.
 --
@@ -1866,16 +1866,16 @@ instance P.HasName (VpnCustomerGatewayResource s) (TF.Attr s P.Text) where
                           } :: VpnCustomerGatewayResource s)
 
 instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Bool) where
-    computedDpd x = TF.compute (TF.refKey x) "dpd"
+    computedDpd x = TF.compute (TF.refKey x) "_computedDpd"
 
 instance s ~ s' => P.HasComputedEspLifetime (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Integer) where
-    computedEspLifetime x = TF.compute (TF.refKey x) "esp_lifetime"
+    computedEspLifetime x = TF.compute (TF.refKey x) "_computedEspLifetime"
 
 instance s ~ s' => P.HasComputedIkeLifetime (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Integer) where
-    computedIkeLifetime x = TF.compute (TF.refKey x) "ike_lifetime"
+    computedIkeLifetime x = TF.compute (TF.refKey x) "_computedIkeLifetime"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (VpnCustomerGatewayResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @cloudstack_vpn_gateway@ Resource.
 --
@@ -1908,4 +1908,4 @@ instance P.HasVpcId (VpnGatewayResource s) (TF.Attr s P.Text) where
                           } :: VpnGatewayResource s)
 
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (VpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
+    computedPublicIp x = TF.compute (TF.refKey x) "_computedPublicIp"

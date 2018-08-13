@@ -34,6 +34,8 @@ module Terrafomo.CloudStack.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
 import qualified Data.List.NonEmpty         as P
@@ -123,7 +125,7 @@ instance P.HasVmGuestIp (Forward s) (TF.Attr s P.Text) where
                           } :: Forward s)
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (Forward s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "uuid"
+    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
 
 -- | @rule@ nested settings.
 data Rule s = Rule'
@@ -198,13 +200,13 @@ instance P.HasUserSecurityGroupList (Rule s) (TF.Attr s [TF.Attr s (TF.Attr s P.
                           } :: Rule s)
 
 instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (Rule s)) (TF.Attr s P.Integer) where
-    computedIcmpCode x = TF.compute (TF.refKey x) "icmp_code"
+    computedIcmpCode x = TF.compute (TF.refKey x) "_computedIcmpCode"
 
 instance s ~ s' => P.HasComputedIcmpType (TF.Ref s' (Rule s)) (TF.Attr s P.Integer) where
-    computedIcmpType x = TF.compute (TF.refKey x) "icmp_type"
+    computedIcmpType x = TF.compute (TF.refKey x) "_computedIcmpType"
 
 instance s ~ s' => P.HasComputedUuids (TF.Ref s' (Rule s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedUuids x = TF.compute (TF.refKey x) "uuids"
+    computedUuids x = TF.compute (TF.refKey x) "_computedUuids"
 
 -- | @filter@ nested settings.
 data Filter s = Filter'
