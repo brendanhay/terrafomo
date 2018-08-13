@@ -1,44 +1,12 @@
 {
     "settings": [],
-    "arguments": [
-        {
-            "default": "_apiKey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "REST API authentication key"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_key\"",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiKey",
-            "optional": false,
-            "label": "_apiKey"
-        },
-        {
-            "default": "_serverUrl",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Location of PowerDNS server"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"server_url\"",
-            "name": "server_url",
-            "method": "serverUrl",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasServerUrl",
-            "optional": false,
-            "label": "_serverUrl"
-        }
-    ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "recordResource",
+                "name": "RecordResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -47,13 +15,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_records",
@@ -62,13 +31,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"records\" <$> TF.attribute",
-                    "name": "records",
+                    "name": "_records",
                     "method": "records",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasRecords",
+                    "validate": false,
                     "optional": false,
-                    "label": "_records"
+                    "original": "records"
                 },
                 {
                     "default": "_ttl",
@@ -77,13 +47,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"ttl\" <$> TF.attribute",
-                    "name": "ttl",
+                    "name": "_ttl",
                     "method": "ttl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasTtl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_ttl"
+                    "original": "ttl"
                 },
                 {
                     "default": "_type'",
@@ -92,13 +63,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_zone",
@@ -107,17 +79,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"zone\" <$> TF.attribute",
-                    "name": "zone",
+                    "name": "_zone",
                     "method": "zone",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasZone",
+                    "validate": false,
                     "optional": false,
-                    "label": "_zone"
+                    "original": "zone"
                 }
             ],
-            "schema": "Resource",
             "name": "RecordResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -127,13 +100,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_records",
@@ -142,13 +116,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"records\" <$> TF.attribute",
-                    "name": "records",
+                    "name": "_records",
                     "method": "records",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasRecords",
+                    "validate": false,
                     "optional": false,
-                    "label": "_records"
+                    "original": "records"
                 },
                 {
                     "default": "_ttl",
@@ -157,13 +132,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"ttl\" <$> TF.attribute",
-                    "name": "ttl",
+                    "name": "_ttl",
                     "method": "ttl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasTtl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_ttl"
+                    "original": "ttl"
                 },
                 {
                     "default": "_type'",
@@ -172,13 +148,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "_zone",
@@ -187,19 +164,109 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"zone\" <$> TF.attribute",
-                    "name": "zone",
+                    "name": "_zone",
                     "method": "zone",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasZone",
+                    "validate": false,
                     "optional": false,
-                    "label": "_zone"
+                    "original": "zone"
                 }
             ],
+            "conflicts": [],
             "type": "RecordResource s",
             "original": "powerdns_record"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_apiKey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "REST API authentication key"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_key\"",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": false,
+                "original": "api_key"
+            },
+            {
+                "default": "_serverUrl",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Location of PowerDNS server"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"server_url\"",
+                "name": "_serverUrl",
+                "method": "serverUrl",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasServerUrl",
+                "validate": false,
+                "optional": false,
+                "original": "server_url"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_apiKey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "REST API authentication key"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_key\"",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": false,
+                "original": "api_key"
+            },
+            {
+                "default": "_serverUrl",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Location of PowerDNS server"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"server_url\"",
+                "name": "_serverUrl",
+                "method": "serverUrl",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasServerUrl",
+                "validate": false,
+                "optional": false,
+                "original": "server_url"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -209,43 +276,6 @@
         "microlens"
     ],
     "name": "PowerDNS",
-    "parameters": [
-        {
-            "default": "_apiKey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "REST API authentication key"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_key\"",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiKey",
-            "optional": false,
-            "label": "_apiKey"
-        },
-        {
-            "default": "_serverUrl",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Location of PowerDNS server"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"server_url\"",
-            "name": "server_url",
-            "method": "serverUrl",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasServerUrl",
-            "optional": false,
-            "label": "_serverUrl"
-        }
-    ],
     "package": "terrafomo-powerdns",
-    "type": "Provider",
     "original": "powerdns"
 }
