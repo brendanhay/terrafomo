@@ -886,6 +886,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedApplicationPorts (..)
     , HasComputedEnableFileEncryption (..)
     , HasComputedRestorePointInTime (..)
+    , HasComputedType (..)
     , HasComputedCertificateData (..)
     , HasComputedOsState (..)
     , HasComputedPerSiteScaling (..)
@@ -961,7 +962,6 @@ module Terrafomo.AzureRM.Lens
     , HasComputedBypass (..)
     , HasComputedMaxStalenessPrefix (..)
     , HasComputedKubeConfig (..)
-    , HasComputedType' (..)
     , HasComputedSourceDatabaseDeletionDate (..)
     , HasComputedOutboundIpAddresses (..)
     , HasComputedAccountTier (..)
@@ -5382,6 +5382,9 @@ class HasComputedEnableFileEncryption a b | a -> b where
 class HasComputedRestorePointInTime a b | a -> b where
     computedRestorePointInTime :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedCertificateData a b | a -> b where
     computedCertificateData :: a -> b
 
@@ -5606,9 +5609,6 @@ class HasComputedMaxStalenessPrefix a b | a -> b where
 
 class HasComputedKubeConfig a b | a -> b where
     computedKubeConfig :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedSourceDatabaseDeletionDate a b | a -> b where
     computedSourceDatabaseDeletionDate :: a -> b

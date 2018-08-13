@@ -30,17 +30,18 @@ import GHC.Base (($))
 
 import Terrafomo.AzureRM.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.List.NonEmpty     as P
-import qualified Data.Text              as P
-import qualified GHC.Generics           as P
-import qualified Lens.Micro             as P
-import qualified Prelude                as P
-import qualified Terrafomo.AzureRM.Lens as P
-import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Provider     as TF
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.AzureRM.Lens  as P
+import qualified Terrafomo.AzureRM.Types as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
 
 -- | The @AzureRM@ Terraform provider configuration.
 --
@@ -98,7 +99,7 @@ instance TF.IsSection Provider where
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "azurerm"
+    type ProviderType Provider = "provider"
 
 newProvider
     :: P.Text -- ^ @environment@ - 'P.environment'
