@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,7 +25,6 @@ module Terrafomo.DNSMadeEasy.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -32,7 +32,10 @@ import Terrafomo.DNSMadeEasy.Settings
 
 import qualified Data.Hashable                  as P
 import qualified Data.HashMap.Strict            as P
+import qualified Data.HashMap.Strict            as Map
 import qualified Data.List.NonEmpty             as P
+import qualified Data.Maybe                     as P
+import qualified Data.Monoid                    as P
 import qualified Data.Text                      as P
 import qualified GHC.Generics                   as P
 import qualified Lens.Micro                     as P
@@ -44,6 +47,7 @@ import qualified Terrafomo.DNSMadeEasy.Types    as P
 import qualified Terrafomo.HCL                  as TF
 import qualified Terrafomo.Name                 as TF
 import qualified Terrafomo.Schema               as TF
+import qualified Terrafomo.Validator            as TF
 
 -- | @dme_record@ Resource.
 --
@@ -97,25 +101,6 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RecordResource s) where
-    toObject RecordResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "domainid" <$> TF.attribute _domainid
-        , TF.assign "gtdLocation" <$> TF.attribute _gtdLocation
-        , TF.assign "hardLink" <$> TF.attribute _hardLink
-        , TF.assign "keywords" <$> TF.attribute _keywords
-        , TF.assign "mxLevel" <$> TF.attribute _mxLevel
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "redirectType" <$> TF.attribute _redirectType
-        , TF.assign "title" <$> TF.attribute _title
-        , TF.assign "ttl" <$> TF.attribute _ttl
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value" <$> TF.attribute _value
-        , TF.assign "weight" <$> TF.attribute _weight
-        ]
-
 recordResource
     :: TF.Attr s P.Text -- ^ @domainid@ - 'P.domainid'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -123,7 +108,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Resource P.Provider (RecordResource s)
 recordResource _domainid _name _type' _value =
-    TF.newResource "dme_record" $
+    TF.newResource "dme_record" TF.validator $
         RecordResource'
             { _description = TF.Nil
             , _domainid = _domainid
@@ -142,92 +127,99 @@ recordResource _domainid _name _type' _value =
             , _weight = TF.Nil
             }
 
+instance TF.IsObject (RecordResource s) where
+    toObject RecordResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "domainid" <$> TF.attribute _domainid
+        , TF.assign "gtdLocation" <$> TF.attribute _gtdLocation
+        , TF.assign "hardLink" <$> TF.attribute _hardLink
+        , TF.assign "keywords" <$> TF.attribute _keywords
+        , TF.assign "mxLevel" <$> TF.attribute _mxLevel
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "redirectType" <$> TF.attribute _redirectType
+        , TF.assign "title" <$> TF.attribute _title
+        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance TF.IsValid (RecordResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (RecordResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: RecordResource s)
+               (\s a -> s { _description = a } :: RecordResource s)
 
 instance P.HasDomainid (RecordResource s) (TF.Attr s P.Text) where
     domainid =
         P.lens (_domainid :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domainid = a
-                          } :: RecordResource s)
+               (\s a -> s { _domainid = a } :: RecordResource s)
 
 instance P.HasGtdLocation (RecordResource s) (TF.Attr s P.Text) where
     gtdLocation =
         P.lens (_gtdLocation :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _gtdLocation = a
-                          } :: RecordResource s)
+               (\s a -> s { _gtdLocation = a } :: RecordResource s)
 
 instance P.HasHardLink (RecordResource s) (TF.Attr s P.Bool) where
     hardLink =
         P.lens (_hardLink :: RecordResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _hardLink = a
-                          } :: RecordResource s)
+               (\s a -> s { _hardLink = a } :: RecordResource s)
 
 instance P.HasKeywords (RecordResource s) (TF.Attr s P.Text) where
     keywords =
         P.lens (_keywords :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _keywords = a
-                          } :: RecordResource s)
+               (\s a -> s { _keywords = a } :: RecordResource s)
 
 instance P.HasMxLevel (RecordResource s) (TF.Attr s P.Integer) where
     mxLevel =
         P.lens (_mxLevel :: RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _mxLevel = a
-                          } :: RecordResource s)
+               (\s a -> s { _mxLevel = a } :: RecordResource s)
 
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RecordResource s)
+               (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasPort (RecordResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a
-                          } :: RecordResource s)
+               (\s a -> s { _port = a } :: RecordResource s)
 
 instance P.HasPriority (RecordResource s) (TF.Attr s P.Integer) where
     priority =
         P.lens (_priority :: RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a
-                          } :: RecordResource s)
+               (\s a -> s { _priority = a } :: RecordResource s)
 
 instance P.HasRedirectType (RecordResource s) (TF.Attr s P.Text) where
     redirectType =
         P.lens (_redirectType :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _redirectType = a
-                          } :: RecordResource s)
+               (\s a -> s { _redirectType = a } :: RecordResource s)
 
 instance P.HasTitle (RecordResource s) (TF.Attr s P.Text) where
     title =
         P.lens (_title :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a
-                          } :: RecordResource s)
+               (\s a -> s { _title = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) (TF.Attr s P.Integer) where
     ttl =
         P.lens (_ttl :: RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _ttl = a
-                          } :: RecordResource s)
+               (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: RecordResource s)
+               (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: RecordResource s)
+               (\s a -> s { _value = a } :: RecordResource s)
 
 instance P.HasWeight (RecordResource s) (TF.Attr s P.Integer) where
     weight =
         P.lens (_weight :: RecordResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a
-                          } :: RecordResource s)
+               (\s a -> s { _weight = a } :: RecordResource s)
