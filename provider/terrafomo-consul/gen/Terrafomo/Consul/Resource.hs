@@ -126,7 +126,7 @@ instance P.HasTags (AgentServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: AgentServiceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 -- | @consul_catalog_entry@ Resource.
 --
@@ -193,7 +193,7 @@ instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
                           } :: CatalogEntryResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
 
 -- | @consul_intention@ Resource.
 --
@@ -325,7 +325,7 @@ instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
                           } :: KeyPrefixResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
 
 -- | @consul_keys@ Resource.
 --
@@ -368,10 +368,10 @@ instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
                           } :: KeysResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
 
 instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeysResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedVar x = TF.compute (TF.refKey x) "var"
+    computedVar x = TF.compute (TF.refKey x) "_computedVar"
 
 -- | @consul_node@ Resource.
 --
@@ -427,7 +427,7 @@ instance P.HasToken (NodeResource s) (TF.Attr s P.Text) where
                           } :: NodeResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
 
 -- | @consul_prepared_query@ Resource.
 --
@@ -437,10 +437,10 @@ data PreparedQueryResource s = PreparedQueryResource'
     { _datacenter  :: TF.Attr s P.Text
     -- ^ @datacenter@ - (Optional)
     --
-    , _dns         :: TF.Attr s [Dns s]
+    , _dns         :: TF.Attr s (Dns s)
     -- ^ @dns@ - (Optional)
     --
-    , _failover    :: TF.Attr s [Failover s]
+    , _failover    :: TF.Attr s (Failover s)
     -- ^ @failover@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -464,7 +464,7 @@ data PreparedQueryResource s = PreparedQueryResource'
     , _tags        :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ @tags@ - (Optional)
     --
-    , _template    :: TF.Attr s [Template s]
+    , _template    :: TF.Attr s (Template s)
     -- ^ @template@ - (Optional)
     --
     , _token       :: TF.Attr s P.Text
@@ -515,15 +515,15 @@ instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _datacenter = a
                           } :: PreparedQueryResource s)
 
-instance P.HasDns (PreparedQueryResource s) (TF.Attr s [Dns s]) where
+instance P.HasDns (PreparedQueryResource s) (TF.Attr s (Dns s)) where
     dns =
-        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s [Dns s])
+        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (Dns s))
                (\s a -> s { _dns = a
                           } :: PreparedQueryResource s)
 
-instance P.HasFailover (PreparedQueryResource s) (TF.Attr s [Failover s]) where
+instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (Failover s)) where
     failover =
-        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s [Failover s])
+        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (Failover s))
                (\s a -> s { _failover = a
                           } :: PreparedQueryResource s)
 
@@ -569,9 +569,9 @@ instance P.HasTags (PreparedQueryResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.
                (\s a -> s { _tags = a
                           } :: PreparedQueryResource s)
 
-instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s [Template s]) where
+instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (Template s)) where
     template =
-        P.lens (_template :: PreparedQueryResource s -> TF.Attr s [Template s])
+        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (Template s))
                (\s a -> s { _template = a
                           } :: PreparedQueryResource s)
 
@@ -646,10 +646,10 @@ instance P.HasTags (ServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
 
 instance s ~ s' => P.HasComputedServiceId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedServiceId x = TF.compute (TF.refKey x) "service_id"
+    computedServiceId x = TF.compute (TF.refKey x) "_computedServiceId"

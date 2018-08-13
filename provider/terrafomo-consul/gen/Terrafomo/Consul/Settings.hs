@@ -94,6 +94,8 @@ module Terrafomo.Consul.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -122,61 +124,61 @@ newTelemetry =
     Telemetry'
 
 instance s ~ s' => P.HasComputedCirconusApiApp (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusApiApp x = TF.compute (TF.refKey x) "circonus_api_app"
+    computedCirconusApiApp x = TF.compute (TF.refKey x) "_computedCirconusApiApp"
 
 instance s ~ s' => P.HasComputedCirconusApiToken (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusApiToken x = TF.compute (TF.refKey x) "circonus_api_token"
+    computedCirconusApiToken x = TF.compute (TF.refKey x) "_computedCirconusApiToken"
 
 instance s ~ s' => P.HasComputedCirconusApiUrl (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusApiUrl x = TF.compute (TF.refKey x) "circonus_api_url"
+    computedCirconusApiUrl x = TF.compute (TF.refKey x) "_computedCirconusApiUrl"
 
 instance s ~ s' => P.HasComputedCirconusBrokerId (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusBrokerId x = TF.compute (TF.refKey x) "circonus_broker_id"
+    computedCirconusBrokerId x = TF.compute (TF.refKey x) "_computedCirconusBrokerId"
 
 instance s ~ s' => P.HasComputedCirconusCheckId (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusCheckId x = TF.compute (TF.refKey x) "circonus_check_id"
+    computedCirconusCheckId x = TF.compute (TF.refKey x) "_computedCirconusCheckId"
 
 instance s ~ s' => P.HasComputedCirconusCheckTags (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusCheckTags x = TF.compute (TF.refKey x) "circonus_check_tags"
+    computedCirconusCheckTags x = TF.compute (TF.refKey x) "_computedCirconusCheckTags"
 
 instance s ~ s' => P.HasComputedCirconusDisplayName (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusDisplayName x = TF.compute (TF.refKey x) "circonus_display_name"
+    computedCirconusDisplayName x = TF.compute (TF.refKey x) "_computedCirconusDisplayName"
 
 instance s ~ s' => P.HasComputedCirconusForceMetricActivation (TF.Ref s' (Telemetry s)) (TF.Attr s P.Bool) where
-    computedCirconusForceMetricActivation x = TF.compute (TF.refKey x) "circonus_force_metric_activation"
+    computedCirconusForceMetricActivation x = TF.compute (TF.refKey x) "_computedCirconusForceMetricActivation"
 
 instance s ~ s' => P.HasComputedCirconusInstanceId (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusInstanceId x = TF.compute (TF.refKey x) "circonus_instance_id"
+    computedCirconusInstanceId x = TF.compute (TF.refKey x) "_computedCirconusInstanceId"
 
 instance s ~ s' => P.HasComputedCirconusSearchTag (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusSearchTag x = TF.compute (TF.refKey x) "circonus_search_tag"
+    computedCirconusSearchTag x = TF.compute (TF.refKey x) "_computedCirconusSearchTag"
 
 instance s ~ s' => P.HasComputedCirconusSelectTag (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusSelectTag x = TF.compute (TF.refKey x) "circonus_select_tag"
+    computedCirconusSelectTag x = TF.compute (TF.refKey x) "_computedCirconusSelectTag"
 
 instance s ~ s' => P.HasComputedCirconusSubmissionInterval (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusSubmissionInterval x = TF.compute (TF.refKey x) "circonus_submission_interval"
+    computedCirconusSubmissionInterval x = TF.compute (TF.refKey x) "_computedCirconusSubmissionInterval"
 
 instance s ~ s' => P.HasComputedCirconusSubmissionUrl (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedCirconusSubmissionUrl x = TF.compute (TF.refKey x) "circonus_submission_url"
+    computedCirconusSubmissionUrl x = TF.compute (TF.refKey x) "_computedCirconusSubmissionUrl"
 
 instance s ~ s' => P.HasComputedDogstatsdAddr (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedDogstatsdAddr x = TF.compute (TF.refKey x) "dogstatsd_addr"
+    computedDogstatsdAddr x = TF.compute (TF.refKey x) "_computedDogstatsdAddr"
 
 instance s ~ s' => P.HasComputedDogstatsdTags (TF.Ref s' (Telemetry s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDogstatsdTags x = TF.compute (TF.refKey x) "dogstatsd_tags"
+    computedDogstatsdTags x = TF.compute (TF.refKey x) "_computedDogstatsdTags"
 
 instance s ~ s' => P.HasComputedEnableHostname (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedEnableHostname x = TF.compute (TF.refKey x) "enable_hostname"
+    computedEnableHostname x = TF.compute (TF.refKey x) "_computedEnableHostname"
 
 instance s ~ s' => P.HasComputedStatsdAddr (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedStatsdAddr x = TF.compute (TF.refKey x) "statsd_addr"
+    computedStatsdAddr x = TF.compute (TF.refKey x) "_computedStatsdAddr"
 
 instance s ~ s' => P.HasComputedStatsiteAddr (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedStatsiteAddr x = TF.compute (TF.refKey x) "statsite_addr"
+    computedStatsiteAddr x = TF.compute (TF.refKey x) "_computedStatsiteAddr"
 
 instance s ~ s' => P.HasComputedStatsitePrefix (TF.Ref s' (Telemetry s)) (TF.Attr s P.Text) where
-    computedStatsitePrefix x = TF.compute (TF.refKey x) "statsite_prefix"
+    computedStatsitePrefix x = TF.compute (TF.refKey x) "_computedStatsitePrefix"
 
 -- | @query_options@ nested settings.
 data QueryOptions s = QueryOptions'
@@ -297,43 +299,43 @@ newService =
     Service'
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedCreateIndex (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedCreateIndex x = TF.compute (TF.refKey x) "create_index"
+    computedCreateIndex x = TF.compute (TF.refKey x) "_computedCreateIndex"
 
 instance s ~ s' => P.HasComputedEnableTagOverride (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedEnableTagOverride x = TF.compute (TF.refKey x) "enable_tag_override"
+    computedEnableTagOverride x = TF.compute (TF.refKey x) "_computedEnableTagOverride"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedModifyIndex (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedModifyIndex x = TF.compute (TF.refKey x) "modify_index"
+    computedModifyIndex x = TF.compute (TF.refKey x) "_computedModifyIndex"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNodeAddress (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedNodeAddress x = TF.compute (TF.refKey x) "node_address"
+    computedNodeAddress x = TF.compute (TF.refKey x) "_computedNodeAddress"
 
 instance s ~ s' => P.HasComputedNodeId (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedNodeId x = TF.compute (TF.refKey x) "node_id"
+    computedNodeId x = TF.compute (TF.refKey x) "_computedNodeId"
 
 instance s ~ s' => P.HasComputedNodeMeta (TF.Ref s' (Service s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedNodeMeta x = TF.compute (TF.refKey x) "node_meta"
+    computedNodeMeta x = TF.compute (TF.refKey x) "_computedNodeMeta"
 
 instance s ~ s' => P.HasComputedNodeName (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedNodeName x = TF.compute (TF.refKey x) "node_name"
+    computedNodeName x = TF.compute (TF.refKey x) "_computedNodeName"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (Service s)) (TF.Attr s P.Text) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedTaggedAddresses (TF.Ref s' (Service s)) (TF.Attr s (P.HashMap P.Text (TaggedAddresses s))) where
-    computedTaggedAddresses x = TF.compute (TF.refKey x) "tagged_addresses"
+    computedTaggedAddresses x = TF.compute (TF.refKey x) "_computedTaggedAddresses"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (Service s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @performance@ nested settings.
 data Performance s = Performance'
@@ -350,7 +352,7 @@ newPerformance =
     Performance'
 
 instance s ~ s' => P.HasComputedRaftMultiplier (TF.Ref s' (Performance s)) (TF.Attr s P.Text) where
-    computedRaftMultiplier x = TF.compute (TF.refKey x) "raft_multiplier"
+    computedRaftMultiplier x = TF.compute (TF.refKey x) "_computedRaftMultiplier"
 
 -- | @addresses@ nested settings.
 data Addresses s = Addresses'
@@ -367,16 +369,16 @@ newAddresses =
     Addresses'
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (Addresses s)) (TF.Attr s P.Text) where
-    computedDns x = TF.compute (TF.refKey x) "dns"
+    computedDns x = TF.compute (TF.refKey x) "_computedDns"
 
 instance s ~ s' => P.HasComputedHttp (TF.Ref s' (Addresses s)) (TF.Attr s P.Text) where
-    computedHttp x = TF.compute (TF.refKey x) "http"
+    computedHttp x = TF.compute (TF.refKey x) "_computedHttp"
 
 instance s ~ s' => P.HasComputedHttps (TF.Ref s' (Addresses s)) (TF.Attr s P.Text) where
-    computedHttps x = TF.compute (TF.refKey x) "https"
+    computedHttps x = TF.compute (TF.refKey x) "_computedHttps"
 
 instance s ~ s' => P.HasComputedRpc (TF.Ref s' (Addresses s)) (TF.Attr s P.Text) where
-    computedRpc x = TF.compute (TF.refKey x) "rpc"
+    computedRpc x = TF.compute (TF.refKey x) "_computedRpc"
 
 -- | @unix_sockets@ nested settings.
 data UnixSockets s = UnixSockets'
@@ -393,13 +395,13 @@ newUnixSockets =
     UnixSockets'
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (UnixSockets s)) (TF.Attr s P.Text) where
-    computedGroup x = TF.compute (TF.refKey x) "group"
+    computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
 
 instance s ~ s' => P.HasComputedMode (TF.Ref s' (UnixSockets s)) (TF.Attr s P.Text) where
-    computedMode x = TF.compute (TF.refKey x) "mode"
+    computedMode x = TF.compute (TF.refKey x) "_computedMode"
 
 instance s ~ s' => P.HasComputedUser (TF.Ref s' (UnixSockets s)) (TF.Attr s P.Text) where
-    computedUser x = TF.compute (TF.refKey x) "user"
+    computedUser x = TF.compute (TF.refKey x) "_computedUser"
 
 -- | @retry_join_gce@ nested settings.
 data RetryJoinGce s = RetryJoinGce'
@@ -416,16 +418,16 @@ newRetryJoinGce =
     RetryJoinGce'
 
 instance s ~ s' => P.HasComputedCredentialsFile (TF.Ref s' (RetryJoinGce s)) (TF.Attr s P.Text) where
-    computedCredentialsFile x = TF.compute (TF.refKey x) "credentials_file"
+    computedCredentialsFile x = TF.compute (TF.refKey x) "_computedCredentialsFile"
 
 instance s ~ s' => P.HasComputedProjectName (TF.Ref s' (RetryJoinGce s)) (TF.Attr s P.Text) where
-    computedProjectName x = TF.compute (TF.refKey x) "project_name"
+    computedProjectName x = TF.compute (TF.refKey x) "_computedProjectName"
 
 instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (RetryJoinGce s)) (TF.Attr s P.Text) where
-    computedTagValue x = TF.compute (TF.refKey x) "tag_value"
+    computedTagValue x = TF.compute (TF.refKey x) "_computedTagValue"
 
 instance s ~ s' => P.HasComputedZonePattern (TF.Ref s' (RetryJoinGce s)) (TF.Attr s P.Text) where
-    computedZonePattern x = TF.compute (TF.refKey x) "zone_pattern"
+    computedZonePattern x = TF.compute (TF.refKey x) "_computedZonePattern"
 
 -- | @retry_join_ec2@ nested settings.
 data RetryJoinEc2 s = RetryJoinEc2'
@@ -442,13 +444,13 @@ newRetryJoinEc2 =
     RetryJoinEc2'
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RetryJoinEc2 s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedTagKey (TF.Ref s' (RetryJoinEc2 s)) (TF.Attr s P.Text) where
-    computedTagKey x = TF.compute (TF.refKey x) "tag_key"
+    computedTagKey x = TF.compute (TF.refKey x) "_computedTagKey"
 
 instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (RetryJoinEc2 s)) (TF.Attr s P.Text) where
-    computedTagValue x = TF.compute (TF.refKey x) "tag_value"
+    computedTagValue x = TF.compute (TF.refKey x) "_computedTagValue"
 
 -- | @failover@ nested settings.
 data Failover s = Failover'
@@ -554,25 +556,25 @@ newPorts =
     Ports'
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedDns x = TF.compute (TF.refKey x) "dns"
+    computedDns x = TF.compute (TF.refKey x) "_computedDns"
 
 instance s ~ s' => P.HasComputedHttp (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedHttp x = TF.compute (TF.refKey x) "http"
+    computedHttp x = TF.compute (TF.refKey x) "_computedHttp"
 
 instance s ~ s' => P.HasComputedHttps (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedHttps x = TF.compute (TF.refKey x) "https"
+    computedHttps x = TF.compute (TF.refKey x) "_computedHttps"
 
 instance s ~ s' => P.HasComputedRpc (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedRpc x = TF.compute (TF.refKey x) "rpc"
+    computedRpc x = TF.compute (TF.refKey x) "_computedRpc"
 
 instance s ~ s' => P.HasComputedSerfLan (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedSerfLan x = TF.compute (TF.refKey x) "serf_lan"
+    computedSerfLan x = TF.compute (TF.refKey x) "_computedSerfLan"
 
 instance s ~ s' => P.HasComputedSerfWan (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedSerfWan x = TF.compute (TF.refKey x) "serf_wan"
+    computedSerfWan x = TF.compute (TF.refKey x) "_computedSerfWan"
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (Ports s)) (TF.Attr s P.Integer) where
-    computedServer x = TF.compute (TF.refKey x) "server"
+    computedServer x = TF.compute (TF.refKey x) "_computedServer"
 
 -- | @advertise_addrs@ nested settings.
 data AdvertiseAddrs s = AdvertiseAddrs'
@@ -589,13 +591,13 @@ newAdvertiseAddrs =
     AdvertiseAddrs'
 
 instance s ~ s' => P.HasComputedRpc (TF.Ref s' (AdvertiseAddrs s)) (TF.Attr s P.Text) where
-    computedRpc x = TF.compute (TF.refKey x) "rpc"
+    computedRpc x = TF.compute (TF.refKey x) "_computedRpc"
 
 instance s ~ s' => P.HasComputedSerfLan (TF.Ref s' (AdvertiseAddrs s)) (TF.Attr s P.Text) where
-    computedSerfLan x = TF.compute (TF.refKey x) "serf_lan"
+    computedSerfLan x = TF.compute (TF.refKey x) "_computedSerfLan"
 
 instance s ~ s' => P.HasComputedSerfWan (TF.Ref s' (AdvertiseAddrs s)) (TF.Attr s P.Text) where
-    computedSerfWan x = TF.compute (TF.refKey x) "serf_wan"
+    computedSerfWan x = TF.compute (TF.refKey x) "_computedSerfWan"
 
 -- | @template@ nested settings.
 data Template s = Template'
@@ -703,19 +705,19 @@ newNodes =
     Nodes'
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedMeta (TF.Ref s' (Nodes s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMeta x = TF.compute (TF.refKey x) "meta"
+    computedMeta x = TF.compute (TF.refKey x) "_computedMeta"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedTaggedAddresses (TF.Ref s' (Nodes s)) (TF.Attr s (P.HashMap P.Text (TaggedAddresses s))) where
-    computedTaggedAddresses x = TF.compute (TF.refKey x) "tagged_addresses"
+    computedTaggedAddresses x = TF.compute (TF.refKey x) "_computedTaggedAddresses"
 
 -- | @tagged_addresses@ nested settings.
 data TaggedAddresses s = TaggedAddresses'
@@ -732,10 +734,10 @@ newTaggedAddresses =
     TaggedAddresses'
 
 instance s ~ s' => P.HasComputedLan (TF.Ref s' (TaggedAddresses s)) (TF.Attr s P.Text) where
-    computedLan x = TF.compute (TF.refKey x) "lan"
+    computedLan x = TF.compute (TF.refKey x) "_computedLan"
 
 instance s ~ s' => P.HasComputedWan (TF.Ref s' (TaggedAddresses s)) (TF.Attr s P.Text) where
-    computedWan x = TF.compute (TF.refKey x) "wan"
+    computedWan x = TF.compute (TF.refKey x) "_computedWan"
 
 -- | @services@ nested settings.
 data Services s = Services'
@@ -752,7 +754,7 @@ newServices =
     Services'
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (Services s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 -- | @dns@ nested settings.
 data Dns s = Dns'
@@ -769,28 +771,28 @@ newDns =
     Dns'
 
 instance s ~ s' => P.HasComputedAllowStale (TF.Ref s' (Dns s)) (TF.Attr s P.Bool) where
-    computedAllowStale x = TF.compute (TF.refKey x) "allow_stale"
+    computedAllowStale x = TF.compute (TF.refKey x) "_computedAllowStale"
 
 instance s ~ s' => P.HasComputedEnableCompression (TF.Ref s' (Dns s)) (TF.Attr s P.Bool) where
-    computedEnableCompression x = TF.compute (TF.refKey x) "enable_compression"
+    computedEnableCompression x = TF.compute (TF.refKey x) "_computedEnableCompression"
 
 instance s ~ s' => P.HasComputedEnableTruncate (TF.Ref s' (Dns s)) (TF.Attr s P.Bool) where
-    computedEnableTruncate x = TF.compute (TF.refKey x) "enable_truncate"
+    computedEnableTruncate x = TF.compute (TF.refKey x) "_computedEnableTruncate"
 
 instance s ~ s' => P.HasComputedMaxStale (TF.Ref s' (Dns s)) (TF.Attr s P.Text) where
-    computedMaxStale x = TF.compute (TF.refKey x) "max_stale"
+    computedMaxStale x = TF.compute (TF.refKey x) "_computedMaxStale"
 
 instance s ~ s' => P.HasComputedNodeTtl (TF.Ref s' (Dns s)) (TF.Attr s P.Text) where
-    computedNodeTtl x = TF.compute (TF.refKey x) "node_ttl"
+    computedNodeTtl x = TF.compute (TF.refKey x) "_computedNodeTtl"
 
 instance s ~ s' => P.HasComputedOnlyPassing (TF.Ref s' (Dns s)) (TF.Attr s P.Bool) where
-    computedOnlyPassing x = TF.compute (TF.refKey x) "only_passing"
+    computedOnlyPassing x = TF.compute (TF.refKey x) "_computedOnlyPassing"
 
 instance s ~ s' => P.HasComputedRecursorTimeout (TF.Ref s' (Dns s)) (TF.Attr s P.Text) where
-    computedRecursorTimeout x = TF.compute (TF.refKey x) "recursor_timeout"
+    computedRecursorTimeout x = TF.compute (TF.refKey x) "_computedRecursorTimeout"
 
 instance s ~ s' => P.HasComputedServiceTtl (TF.Ref s' (Dns s)) (TF.Attr s P.Text) where
-    computedServiceTtl x = TF.compute (TF.refKey x) "service_ttl"
+    computedServiceTtl x = TF.compute (TF.refKey x) "_computedServiceTtl"
 
 instance s ~ s' => P.HasComputedUdpAnswerLimit (TF.Ref s' (Dns s)) (TF.Attr s P.Integer) where
-    computedUdpAnswerLimit x = TF.compute (TF.refKey x) "udp_answer_limit"
+    computedUdpAnswerLimit x = TF.compute (TF.refKey x) "_computedUdpAnswerLimit"
