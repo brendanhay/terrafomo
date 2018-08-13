@@ -151,16 +151,16 @@ instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Integer) where
                           } :: CloudNetworkPrivateResource s)
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
 
 instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (RegionsStatus s)]) where
-    computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
+    computedRegionsStatus x = TF.compute (TF.refKey x) "_computedRegionsStatus"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @ovh_cloud_network_private_subnet@ Resource.
 --
@@ -275,13 +275,13 @@ instance P.HasStart (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) whe
                           } :: CloudNetworkPrivateSubnetResource s)
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
+    computedGatewayIp x = TF.compute (TF.refKey x) "_computedGatewayIp"
 
 instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s [TF.Attr s (IpPools s)]) where
-    computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
+    computedIpPools x = TF.compute (TF.refKey x) "_computedIpPools"
 
 -- | @ovh_cloud_user@ Resource.
 --
@@ -325,19 +325,19 @@ instance P.HasProjectId (CloudUserResource s) (TF.Attr s P.Text) where
                           } :: CloudUserResource s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
 
 instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (CloudUserResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
+    computedOpenstackRc x = TF.compute (TF.refKey x) "_computedOpenstackRc"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedUsername (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedUsername x = TF.compute (TF.refKey x) "username"
+    computedUsername x = TF.compute (TF.refKey x) "_computedUsername"
 
 -- | @ovh_domain_zone_record@ Resource.
 --
@@ -578,7 +578,7 @@ instance P.HasWeight (IploadbalancingHttpRouteResource s) (TF.Attr s P.Integer) 
                           } :: IploadbalancingHttpRouteResource s)
 
 instance s ~ s' => P.HasComputedFrontendId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Integer) where
-    computedFrontendId x = TF.compute (TF.refKey x) "frontend_id"
+    computedFrontendId x = TF.compute (TF.refKey x) "_computedFrontendId"
 
 -- | @ovh_iploadbalancing_http_route_rule@ Resource.
 --
@@ -953,7 +953,7 @@ instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integ
                           } :: IploadbalancingTcpFarmServerResource s)
 
 instance s ~ s' => P.HasComputedCookie (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedCookie x = TF.compute (TF.refKey x) "cookie"
+    computedCookie x = TF.compute (TF.refKey x) "_computedCookie"
 
 -- | @ovh_publiccloud_private_network@ Resource.
 --
@@ -1009,16 +1009,16 @@ instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Integer)
                           } :: PubliccloudPrivateNetworkResource s)
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
 
 instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (RegionsStatus s)]) where
-    computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
+    computedRegionsStatus x = TF.compute (TF.refKey x) "_computedRegionsStatus"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @ovh_publiccloud_private_network_subnet@ Resource.
 --
@@ -1133,13 +1133,13 @@ instance P.HasStart (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Tex
                           } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
+    computedGatewayIp x = TF.compute (TF.refKey x) "_computedGatewayIp"
 
 instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s [TF.Attr s (IpPools s)]) where
-    computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
+    computedIpPools x = TF.compute (TF.refKey x) "_computedIpPools"
 
 -- | @ovh_publiccloud_user@ Resource.
 --
@@ -1183,19 +1183,19 @@ instance P.HasProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
                           } :: PubliccloudUserResource s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
 
 instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
+    computedOpenstackRc x = TF.compute (TF.refKey x) "_computedOpenstackRc"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedUsername (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedUsername x = TF.compute (TF.refKey x) "username"
+    computedUsername x = TF.compute (TF.refKey x) "_computedUsername"
 
 -- | @ovh_vrack_cloudproject@ Resource.
 --

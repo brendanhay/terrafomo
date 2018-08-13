@@ -106,12 +106,12 @@ module Terrafomo.OVH.Lens
     , HasComputedNameServers (..)
     , HasComputedCidr (..)
     , HasComputedZone (..)
+    , HasComputedType (..)
     , HasComputedIpv4 (..)
-    , HasComputedDefault' (..)
     , HasComputedEnd (..)
     , HasComputedUsername (..)
+    , HasComputedDefault (..)
     , HasComputedDhcp (..)
-    , HasComputedType' (..)
     , HasComputedDatacenterLocation (..)
     , HasComputedMetricsToken (..)
     , HasComputedFrontendId (..)
@@ -554,11 +554,11 @@ class HasComputedCidr a b | a -> b where
 class HasComputedZone a b | a -> b where
     computedZone :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedIpv4 a b | a -> b where
     computedIpv4 :: a -> b
-
-class HasComputedDefault' a b | a -> b where
-    computedDefault' :: a -> b
 
 class HasComputedEnd a b | a -> b where
     computedEnd :: a -> b
@@ -566,11 +566,11 @@ class HasComputedEnd a b | a -> b where
 class HasComputedUsername a b | a -> b where
     computedUsername :: a -> b
 
+class HasComputedDefault a b | a -> b where
+    computedDefault :: a -> b
+
 class HasComputedDhcp a b | a -> b where
     computedDhcp :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedDatacenterLocation a b | a -> b where
     computedDatacenterLocation :: a -> b

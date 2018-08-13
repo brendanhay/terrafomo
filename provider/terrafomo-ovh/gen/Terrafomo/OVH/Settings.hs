@@ -46,6 +46,8 @@ module Terrafomo.OVH.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
 import qualified Data.List.NonEmpty  as P
@@ -204,7 +206,7 @@ instance P.HasStatus (RegionsStatus s) (TF.Attr s P.Text) where
                           } :: RegionsStatus s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RegionsStatus s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 -- | @action@ nested settings.
 data Action s = Action'
@@ -271,19 +273,19 @@ newIpPools =
     IpPools'
 
 instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (IpPools s)) (TF.Attr s P.Bool) where
-    computedDhcp x = TF.compute (TF.refKey x) "dhcp"
+    computedDhcp x = TF.compute (TF.refKey x) "_computedDhcp"
 
 instance s ~ s' => P.HasComputedEnd (TF.Ref s' (IpPools s)) (TF.Attr s P.Text) where
-    computedEnd x = TF.compute (TF.refKey x) "end"
+    computedEnd x = TF.compute (TF.refKey x) "_computedEnd"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (IpPools s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IpPools s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedStart (TF.Ref s' (IpPools s)) (TF.Attr s P.Text) where
-    computedStart x = TF.compute (TF.refKey x) "start"
+    computedStart x = TF.compute (TF.refKey x) "_computedStart"
 
 -- | @orderable_zone@ nested settings.
 data OrderableZone s = OrderableZone'
@@ -300,10 +302,10 @@ newOrderableZone =
     OrderableZone'
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (OrderableZone s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPlanCode (TF.Ref s' (OrderableZone s)) (TF.Attr s P.Text) where
-    computedPlanCode x = TF.compute (TF.refKey x) "plan_code"
+    computedPlanCode x = TF.compute (TF.refKey x) "_computedPlanCode"
 
 -- | @services@ nested settings.
 data Services s = Services'
@@ -320,7 +322,7 @@ newServices =
     Services'
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Services s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Services s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"

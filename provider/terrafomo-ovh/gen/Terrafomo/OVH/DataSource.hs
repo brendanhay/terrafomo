@@ -116,19 +116,19 @@ instance P.HasProjectId (CloudRegionData s) (TF.Attr s P.Text) where
                           } :: CloudRegionData s)
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "continentCode"
+    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
+    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
 
 instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (Services s)]) where
-    computedServices x = TF.compute (TF.refKey x) "services"
+    computedServices x = TF.compute (TF.refKey x) "_computedServices"
 
 -- | @ovh_cloud_regions@ DataSource.
 --
@@ -161,7 +161,7 @@ instance P.HasProjectId (CloudRegionsData s) (TF.Attr s P.Text) where
                           } :: CloudRegionsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (CloudRegionsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedNames x = TF.compute (TF.refKey x) "names"
+    computedNames x = TF.compute (TF.refKey x) "_computedNames"
 
 -- | @ovh_domain_zone@ DataSource.
 --
@@ -194,16 +194,16 @@ instance P.HasName (DomainZoneData s) (TF.Attr s P.Text) where
                           } :: DomainZoneData s)
 
 instance s ~ s' => P.HasComputedDnssecSupported (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Bool) where
-    computedDnssecSupported x = TF.compute (TF.refKey x) "dnssec_supported"
+    computedDnssecSupported x = TF.compute (TF.refKey x) "_computedDnssecSupported"
 
 instance s ~ s' => P.HasComputedHasDnsAnycast (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Bool) where
-    computedHasDnsAnycast x = TF.compute (TF.refKey x) "has_dns_anycast"
+    computedHasDnsAnycast x = TF.compute (TF.refKey x) "_computedHasDnsAnycast"
 
 instance s ~ s' => P.HasComputedLastUpdate (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Text) where
-    computedLastUpdate x = TF.compute (TF.refKey x) "last_update"
+    computedLastUpdate x = TF.compute (TF.refKey x) "_computedLastUpdate"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DomainZoneData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
+    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
 
 -- | @ovh_iploadbalancing@ DataSource.
 --
@@ -222,43 +222,43 @@ iploadbalancingData =
         IploadbalancingData'
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
 
 instance s ~ s' => P.HasComputedIpLoadbalancing (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedIpLoadbalancing x = TF.compute (TF.refKey x) "ip_loadbalancing"
+    computedIpLoadbalancing x = TF.compute (TF.refKey x) "_computedIpLoadbalancing"
 
 instance s ~ s' => P.HasComputedIpv4 (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedIpv4 x = TF.compute (TF.refKey x) "ipv4"
+    computedIpv4 x = TF.compute (TF.refKey x) "_computedIpv4"
 
 instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
+    computedIpv6 x = TF.compute (TF.refKey x) "_computedIpv6"
 
 instance s ~ s' => P.HasComputedMetricsToken (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedMetricsToken x = TF.compute (TF.refKey x) "metrics_token"
+    computedMetricsToken x = TF.compute (TF.refKey x) "_computedMetricsToken"
 
 instance s ~ s' => P.HasComputedOffer (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedOffer x = TF.compute (TF.refKey x) "offer"
+    computedOffer x = TF.compute (TF.refKey x) "_computedOffer"
 
 instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (OrderableZone s)]) where
-    computedOrderableZone x = TF.compute (TF.refKey x) "orderable_zone"
+    computedOrderableZone x = TF.compute (TF.refKey x) "_computedOrderableZone"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "service_name"
+    computedServiceName x = TF.compute (TF.refKey x) "_computedServiceName"
 
 instance s ~ s' => P.HasComputedSslConfiguration (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedSslConfiguration x = TF.compute (TF.refKey x) "ssl_configuration"
+    computedSslConfiguration x = TF.compute (TF.refKey x) "_computedSslConfiguration"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedVrackEligibility (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Bool) where
-    computedVrackEligibility x = TF.compute (TF.refKey x) "vrack_eligibility"
+    computedVrackEligibility x = TF.compute (TF.refKey x) "_computedVrackEligibility"
 
 instance s ~ s' => P.HasComputedVrackName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedVrackName x = TF.compute (TF.refKey x) "vrack_name"
+    computedVrackName x = TF.compute (TF.refKey x) "_computedVrackName"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedZone x = TF.compute (TF.refKey x) "zone"
+    computedZone x = TF.compute (TF.refKey x) "_computedZone"
 
 -- | @ovh_me_paymentmean_bankaccount@ DataSource.
 --
@@ -311,14 +311,14 @@ instance P.HasUseOldest (MePaymentmeanBankaccountData s) (TF.Attr s P.Bool) wher
                (\s a -> s { _useOldest = a
                           } :: MePaymentmeanBankaccountData s)
 
-instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Bool) where
-    computedDefault' x = TF.compute (TF.refKey x) "default"
+instance s ~ s' => P.HasComputedDefault (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Bool) where
+    computedDefault x = TF.compute (TF.refKey x) "_computedDefault"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 -- | @ovh_me_paymentmean_creditcard@ DataSource.
 --
@@ -382,14 +382,14 @@ instance P.HasUseLastToExpire (MePaymentmeanCreditcardData s) (TF.Attr s P.Bool)
                (\s a -> s { _useLastToExpire = a
                           } :: MePaymentmeanCreditcardData s)
 
-instance s ~ s' => P.HasComputedDefault' (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Bool) where
-    computedDefault' x = TF.compute (TF.refKey x) "default"
+instance s ~ s' => P.HasComputedDefault (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Bool) where
+    computedDefault x = TF.compute (TF.refKey x) "_computedDefault"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 -- | @ovh_publiccloud_region@ DataSource.
 --
@@ -434,19 +434,19 @@ instance P.HasProjectId (PubliccloudRegionData s) (TF.Attr s P.Text) where
                           } :: PubliccloudRegionData s)
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "continentCode"
+    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
+    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenterLocation"
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
 
 instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (Services s)]) where
-    computedServices x = TF.compute (TF.refKey x) "services"
+    computedServices x = TF.compute (TF.refKey x) "_computedServices"
 
 -- | @ovh_publiccloud_regions@ DataSource.
 --
@@ -479,4 +479,4 @@ instance P.HasProjectId (PubliccloudRegionsData s) (TF.Attr s P.Text) where
                           } :: PubliccloudRegionsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (PubliccloudRegionsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedNames x = TF.compute (TF.refKey x) "names"
+    computedNames x = TF.compute (TF.refKey x) "_computedNames"
