@@ -26,6 +26,8 @@ module Terrafomo.Rancher.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
 import qualified Data.List.NonEmpty      as P
@@ -54,10 +56,10 @@ newMember =
     Member'
 
 instance s ~ s' => P.HasComputedExternalId (TF.Ref s' (Member s)) (TF.Attr s P.Text) where
-    computedExternalId x = TF.compute (TF.refKey x) "external_id"
+    computedExternalId x = TF.compute (TF.refKey x) "_computedExternalId"
 
 instance s ~ s' => P.HasComputedExternalIdType (TF.Ref s' (Member s)) (TF.Attr s P.Text) where
-    computedExternalIdType x = TF.compute (TF.refKey x) "external_id_type"
+    computedExternalIdType x = TF.compute (TF.refKey x) "_computedExternalIdType"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (Member s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
+    computedRole x = TF.compute (TF.refKey x) "_computedRole"

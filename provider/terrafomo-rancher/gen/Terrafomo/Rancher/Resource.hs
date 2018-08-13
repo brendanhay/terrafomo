@@ -166,37 +166,37 @@ instance P.HasName (CertificateResource s) (TF.Attr s P.Text) where
                           } :: CertificateResource s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
+    computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
 
 instance s ~ s' => P.HasComputedCertFingerprint (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
+    computedCertFingerprint x = TF.compute (TF.refKey x) "_computedCertFingerprint"
 
 instance s ~ s' => P.HasComputedCn (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedCn x = TF.compute (TF.refKey x) "cn"
+    computedCn x = TF.compute (TF.refKey x) "_computedCn"
 
 instance s ~ s' => P.HasComputedExpiresAt (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedExpiresAt x = TF.compute (TF.refKey x) "expires_at"
+    computedExpiresAt x = TF.compute (TF.refKey x) "_computedExpiresAt"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedIssuedAt (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedIssuedAt x = TF.compute (TF.refKey x) "issued_at"
+    computedIssuedAt x = TF.compute (TF.refKey x) "_computedIssuedAt"
 
 instance s ~ s' => P.HasComputedIssuer (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedIssuer x = TF.compute (TF.refKey x) "issuer"
+    computedIssuer x = TF.compute (TF.refKey x) "_computedIssuer"
 
 instance s ~ s' => P.HasComputedKeySize (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedKeySize x = TF.compute (TF.refKey x) "key_size"
+    computedKeySize x = TF.compute (TF.refKey x) "_computedKeySize"
 
 instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedSerialNumber x = TF.compute (TF.refKey x) "serial_number"
+    computedSerialNumber x = TF.compute (TF.refKey x) "_computedSerialNumber"
 
 instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
+    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "_computedSubjectAlternativeNames"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @rancher_environment@ Resource.
 --
@@ -240,16 +240,16 @@ instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
                           } :: EnvironmentResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (Member s)]) where
-    computedMember x = TF.compute (TF.refKey x) "member"
+    computedMember x = TF.compute (TF.refKey x) "_computedMember"
 
 instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
-    computedOrchestration x = TF.compute (TF.refKey x) "orchestration"
+    computedOrchestration x = TF.compute (TF.refKey x) "_computedOrchestration"
 
 instance s ~ s' => P.HasComputedProjectTemplateId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
-    computedProjectTemplateId x = TF.compute (TF.refKey x) "project_template_id"
+    computedProjectTemplateId x = TF.compute (TF.refKey x) "_computedProjectTemplateId"
 
 -- | @rancher_host@ Resource.
 --
@@ -328,7 +328,7 @@ instance P.HasName (HostResource s) (TF.Attr s P.Text) where
                           } :: HostResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @rancher_registration_token@ Resource.
 --
@@ -406,19 +406,19 @@ instance P.HasName (RegistrationTokenResource s) (TF.Attr s P.Text) where
                           } :: RegistrationTokenResource s)
 
 instance s ~ s' => P.HasComputedCommand (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedCommand x = TF.compute (TF.refKey x) "command"
+    computedCommand x = TF.compute (TF.refKey x) "_computedCommand"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedImage x = TF.compute (TF.refKey x) "image"
+    computedImage x = TF.compute (TF.refKey x) "_computedImage"
 
 instance s ~ s' => P.HasComputedRegistrationUrl (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedRegistrationUrl x = TF.compute (TF.refKey x) "registration_url"
+    computedRegistrationUrl x = TF.compute (TF.refKey x) "_computedRegistrationUrl"
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "token"
+    computedToken x = TF.compute (TF.refKey x) "_computedToken"
 
 -- | @rancher_registry@ Resource.
 --
@@ -486,7 +486,7 @@ instance P.HasServerAddress (RegistryResource s) (TF.Attr s P.Text) where
                           } :: RegistryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @rancher_registry_credential@ Resource.
 --
@@ -577,7 +577,7 @@ instance P.HasSecretValue (RegistryCredentialResource s) (TF.Attr s P.Text) wher
                           } :: RegistryCredentialResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @rancher_secret@ Resource.
 --
@@ -645,7 +645,7 @@ instance P.HasValue (SecretResource s) (TF.Attr s P.Text) where
                           } :: SecretResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @rancher_stack@ Resource.
 --
@@ -767,16 +767,16 @@ instance P.HasScope (StackResource s) (TF.Attr s P.Text) where
                           } :: StackResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedRenderedDockerCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
-    computedRenderedDockerCompose x = TF.compute (TF.refKey x) "rendered_docker_compose"
+    computedRenderedDockerCompose x = TF.compute (TF.refKey x) "_computedRenderedDockerCompose"
 
 instance s ~ s' => P.HasComputedRenderedRancherCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
-    computedRenderedRancherCompose x = TF.compute (TF.refKey x) "rendered_rancher_compose"
+    computedRenderedRancherCompose x = TF.compute (TF.refKey x) "_computedRenderedRancherCompose"
 
 instance s ~ s' => P.HasComputedStartOnCreate (TF.Ref s' (StackResource s)) (TF.Attr s P.Bool) where
-    computedStartOnCreate x = TF.compute (TF.refKey x) "start_on_create"
+    computedStartOnCreate x = TF.compute (TF.refKey x) "_computedStartOnCreate"
 
 -- | @rancher_volume@ Resource.
 --
@@ -844,4 +844,4 @@ instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
                           } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
