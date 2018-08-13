@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -116,7 +117,6 @@ module Terrafomo.AliCloud.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -124,7 +124,10 @@ import Terrafomo.AliCloud.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -136,6 +139,7 @@ import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @alicloud_db_instances@ DataSource.
 --
@@ -171,23 +175,10 @@ data DbInstancesData s = DbInstancesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DbInstancesData s) where
-    toObject DbInstancesData'{..} = catMaybes
-        [ TF.assign "connection_mode" <$> TF.attribute _connectionMode
-        , TF.assign "db_type" <$> TF.attribute _dbType
-        , TF.assign "engine" <$> TF.attribute _engine
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpcId
-        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
-        ]
-
 dbInstancesData
     :: TF.DataSource P.Provider (DbInstancesData s)
 dbInstancesData =
-    TF.newDataSource "alicloud_db_instances" $
+    TF.newDataSource "alicloud_db_instances" TF.validator $
         DbInstancesData'
             { _connectionMode = TF.Nil
             , _dbType = TF.Nil
@@ -200,61 +191,68 @@ dbInstancesData =
             , _vswitchId = TF.Nil
             }
 
+instance TF.IsObject (DbInstancesData s) where
+    toObject DbInstancesData'{..} = P.catMaybes
+        [ TF.assign "connection_mode" <$> TF.attribute _connectionMode
+        , TF.assign "db_type" <$> TF.attribute _dbType
+        , TF.assign "engine" <$> TF.attribute _engine
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
+        ]
+
+instance TF.IsValid (DbInstancesData s) where
+    validator = P.mempty
+
 instance P.HasConnectionMode (DbInstancesData s) (TF.Attr s P.Text) where
     connectionMode =
         P.lens (_connectionMode :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionMode = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _connectionMode = a } :: DbInstancesData s)
 
 instance P.HasDbType (DbInstancesData s) (TF.Attr s P.Text) where
     dbType =
         P.lens (_dbType :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbType = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _dbType = a } :: DbInstancesData s)
 
 instance P.HasEngine (DbInstancesData s) (TF.Attr s P.Text) where
     engine =
         P.lens (_engine :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _engine = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _engine = a } :: DbInstancesData s)
 
 instance P.HasNameRegex (DbInstancesData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _nameRegex = a } :: DbInstancesData s)
 
 instance P.HasOutputFile (DbInstancesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _outputFile = a } :: DbInstancesData s)
 
 instance P.HasStatus (DbInstancesData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _status = a } :: DbInstancesData s)
 
 instance P.HasTags (DbInstancesData s) (TF.Attr s P.Text) where
     tags =
         P.lens (_tags :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _tags = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _tags = a } :: DbInstancesData s)
 
 instance P.HasVpcId (DbInstancesData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _vpcId = a } :: DbInstancesData s)
 
 instance P.HasVswitchId (DbInstancesData s) (TF.Attr s P.Text) where
     vswitchId =
         P.lens (_vswitchId :: DbInstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _vswitchId = a
-                          } :: DbInstancesData s)
+               (\s a -> s { _vswitchId = a } :: DbInstancesData s)
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [Instances s]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
     computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
 -- | @alicloud_dns_domain_groups@ DataSource.
@@ -270,34 +268,35 @@ data DnsDomainGroupsData s = DnsDomainGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DnsDomainGroupsData s) where
-    toObject DnsDomainGroupsData'{..} = catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 dnsDomainGroupsData
     :: TF.DataSource P.Provider (DnsDomainGroupsData s)
 dnsDomainGroupsData =
-    TF.newDataSource "alicloud_dns_domain_groups" $
+    TF.newDataSource "alicloud_dns_domain_groups" TF.validator $
         DnsDomainGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
             }
 
+instance TF.IsObject (DnsDomainGroupsData s) where
+    toObject DnsDomainGroupsData'{..} = P.catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (DnsDomainGroupsData s) where
+    validator = P.mempty
+
 instance P.HasNameRegex (DnsDomainGroupsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: DnsDomainGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: DnsDomainGroupsData s)
+               (\s a -> s { _nameRegex = a } :: DnsDomainGroupsData s)
 
 instance P.HasOutputFile (DnsDomainGroupsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: DnsDomainGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: DnsDomainGroupsData s)
+               (\s a -> s { _outputFile = a } :: DnsDomainGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [Groups s]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
     computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
 
 -- | @alicloud_dns_domain_records@ DataSource.
@@ -331,23 +330,11 @@ data DnsDomainRecordsData s = DnsDomainRecordsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DnsDomainRecordsData s) where
-    toObject DnsDomainRecordsData'{..} = catMaybes
-        [ TF.assign "domain_name" <$> TF.attribute _domainName
-        , TF.assign "host_record_regex" <$> TF.attribute _hostRecordRegex
-        , TF.assign "is_locked" <$> TF.attribute _isLocked
-        , TF.assign "line" <$> TF.attribute _line
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value_regex" <$> TF.attribute _valueRegex
-        ]
-
 dnsDomainRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> TF.DataSource P.Provider (DnsDomainRecordsData s)
 dnsDomainRecordsData _domainName =
-    TF.newDataSource "alicloud_dns_domain_records" $
+    TF.newDataSource "alicloud_dns_domain_records" TF.validator $
         DnsDomainRecordsData'
             { _domainName = _domainName
             , _hostRecordRegex = TF.Nil
@@ -359,55 +346,62 @@ dnsDomainRecordsData _domainName =
             , _valueRegex = TF.Nil
             }
 
+instance TF.IsObject (DnsDomainRecordsData s) where
+    toObject DnsDomainRecordsData'{..} = P.catMaybes
+        [ TF.assign "domain_name" <$> TF.attribute _domainName
+        , TF.assign "host_record_regex" <$> TF.attribute _hostRecordRegex
+        , TF.assign "is_locked" <$> TF.attribute _isLocked
+        , TF.assign "line" <$> TF.attribute _line
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value_regex" <$> TF.attribute _valueRegex
+        ]
+
+instance TF.IsValid (DnsDomainRecordsData s) where
+    validator = P.mempty
+
 instance P.HasDomainName (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     domainName =
         P.lens (_domainName :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _domainName = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _domainName = a } :: DnsDomainRecordsData s)
 
 instance P.HasHostRecordRegex (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     hostRecordRegex =
         P.lens (_hostRecordRegex :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _hostRecordRegex = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _hostRecordRegex = a } :: DnsDomainRecordsData s)
 
 instance P.HasIsLocked (DnsDomainRecordsData s) (TF.Attr s P.Bool) where
     isLocked =
         P.lens (_isLocked :: DnsDomainRecordsData s -> TF.Attr s P.Bool)
-               (\s a -> s { _isLocked = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _isLocked = a } :: DnsDomainRecordsData s)
 
 instance P.HasLine (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     line =
         P.lens (_line :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _line = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _line = a } :: DnsDomainRecordsData s)
 
 instance P.HasOutputFile (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _outputFile = a } :: DnsDomainRecordsData s)
 
 instance P.HasStatus (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _status = a } :: DnsDomainRecordsData s)
 
 instance P.HasType' (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _type' = a } :: DnsDomainRecordsData s)
 
 instance P.HasValueRegex (DnsDomainRecordsData s) (TF.Attr s P.Text) where
     valueRegex =
         P.lens (_valueRegex :: DnsDomainRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _valueRegex = a
-                          } :: DnsDomainRecordsData s)
+               (\s a -> s { _valueRegex = a } :: DnsDomainRecordsData s)
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [Records s]) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (Records s)]) where
     computedRecords x = TF.compute (TF.refKey x) "_computedRecords"
 
 -- | @alicloud_dns_domains@ DataSource.
@@ -435,20 +429,10 @@ data DnsDomainsData s = DnsDomainsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DnsDomainsData s) where
-    toObject DnsDomainsData'{..} = catMaybes
-        [ TF.assign "ali_domain" <$> TF.attribute _aliDomain
-        , TF.assign "domain_name_regex" <$> TF.attribute _domainNameRegex
-        , TF.assign "group_name_regex" <$> TF.attribute _groupNameRegex
-        , TF.assign "instance_id" <$> TF.attribute _instanceId
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "version_code" <$> TF.attribute _versionCode
-        ]
-
 dnsDomainsData
     :: TF.DataSource P.Provider (DnsDomainsData s)
 dnsDomainsData =
-    TF.newDataSource "alicloud_dns_domains" $
+    TF.newDataSource "alicloud_dns_domains" TF.validator $
         DnsDomainsData'
             { _aliDomain = TF.Nil
             , _domainNameRegex = TF.Nil
@@ -458,43 +442,50 @@ dnsDomainsData =
             , _versionCode = TF.Nil
             }
 
+instance TF.IsObject (DnsDomainsData s) where
+    toObject DnsDomainsData'{..} = P.catMaybes
+        [ TF.assign "ali_domain" <$> TF.attribute _aliDomain
+        , TF.assign "domain_name_regex" <$> TF.attribute _domainNameRegex
+        , TF.assign "group_name_regex" <$> TF.attribute _groupNameRegex
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "version_code" <$> TF.attribute _versionCode
+        ]
+
+instance TF.IsValid (DnsDomainsData s) where
+    validator = P.mempty
+
 instance P.HasAliDomain (DnsDomainsData s) (TF.Attr s P.Bool) where
     aliDomain =
         P.lens (_aliDomain :: DnsDomainsData s -> TF.Attr s P.Bool)
-               (\s a -> s { _aliDomain = a
-                          } :: DnsDomainsData s)
+               (\s a -> s { _aliDomain = a } :: DnsDomainsData s)
 
 instance P.HasDomainNameRegex (DnsDomainsData s) (TF.Attr s P.Text) where
     domainNameRegex =
         P.lens (_domainNameRegex :: DnsDomainsData s -> TF.Attr s P.Text)
-               (\s a -> s { _domainNameRegex = a
-                          } :: DnsDomainsData s)
+               (\s a -> s { _domainNameRegex = a } :: DnsDomainsData s)
 
 instance P.HasGroupNameRegex (DnsDomainsData s) (TF.Attr s P.Text) where
     groupNameRegex =
         P.lens (_groupNameRegex :: DnsDomainsData s -> TF.Attr s P.Text)
-               (\s a -> s { _groupNameRegex = a
-                          } :: DnsDomainsData s)
+               (\s a -> s { _groupNameRegex = a } :: DnsDomainsData s)
 
 instance P.HasInstanceId (DnsDomainsData s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: DnsDomainsData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a
-                          } :: DnsDomainsData s)
+               (\s a -> s { _instanceId = a } :: DnsDomainsData s)
 
 instance P.HasOutputFile (DnsDomainsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: DnsDomainsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: DnsDomainsData s)
+               (\s a -> s { _outputFile = a } :: DnsDomainsData s)
 
 instance P.HasVersionCode (DnsDomainsData s) (TF.Attr s P.Text) where
     versionCode =
         P.lens (_versionCode :: DnsDomainsData s -> TF.Attr s P.Text)
-               (\s a -> s { _versionCode = a
-                          } :: DnsDomainsData s)
+               (\s a -> s { _versionCode = a } :: DnsDomainsData s)
 
-instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [Domains s]) where
+instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (Domains s)]) where
     computedDomains x = TF.compute (TF.refKey x) "_computedDomains"
 
 -- | @alicloud_dns_groups@ DataSource.
@@ -510,34 +501,35 @@ data DnsGroupsData s = DnsGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DnsGroupsData s) where
-    toObject DnsGroupsData'{..} = catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 dnsGroupsData
     :: TF.DataSource P.Provider (DnsGroupsData s)
 dnsGroupsData =
-    TF.newDataSource "alicloud_dns_groups" $
+    TF.newDataSource "alicloud_dns_groups" TF.validator $
         DnsGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
             }
 
+instance TF.IsObject (DnsGroupsData s) where
+    toObject DnsGroupsData'{..} = P.catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (DnsGroupsData s) where
+    validator = P.mempty
+
 instance P.HasNameRegex (DnsGroupsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: DnsGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: DnsGroupsData s)
+               (\s a -> s { _nameRegex = a } :: DnsGroupsData s)
 
 instance P.HasOutputFile (DnsGroupsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: DnsGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: DnsGroupsData s)
+               (\s a -> s { _outputFile = a } :: DnsGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [Groups s]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
     computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
 
 -- | @alicloud_dns_records@ DataSource.
@@ -571,23 +563,11 @@ data DnsRecordsData s = DnsRecordsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DnsRecordsData s) where
-    toObject DnsRecordsData'{..} = catMaybes
-        [ TF.assign "domain_name" <$> TF.attribute _domainName
-        , TF.assign "host_record_regex" <$> TF.attribute _hostRecordRegex
-        , TF.assign "is_locked" <$> TF.attribute _isLocked
-        , TF.assign "line" <$> TF.attribute _line
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value_regex" <$> TF.attribute _valueRegex
-        ]
-
 dnsRecordsData
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
     -> TF.DataSource P.Provider (DnsRecordsData s)
 dnsRecordsData _domainName =
-    TF.newDataSource "alicloud_dns_records" $
+    TF.newDataSource "alicloud_dns_records" TF.validator $
         DnsRecordsData'
             { _domainName = _domainName
             , _hostRecordRegex = TF.Nil
@@ -599,55 +579,62 @@ dnsRecordsData _domainName =
             , _valueRegex = TF.Nil
             }
 
+instance TF.IsObject (DnsRecordsData s) where
+    toObject DnsRecordsData'{..} = P.catMaybes
+        [ TF.assign "domain_name" <$> TF.attribute _domainName
+        , TF.assign "host_record_regex" <$> TF.attribute _hostRecordRegex
+        , TF.assign "is_locked" <$> TF.attribute _isLocked
+        , TF.assign "line" <$> TF.attribute _line
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value_regex" <$> TF.attribute _valueRegex
+        ]
+
+instance TF.IsValid (DnsRecordsData s) where
+    validator = P.mempty
+
 instance P.HasDomainName (DnsRecordsData s) (TF.Attr s P.Text) where
     domainName =
         P.lens (_domainName :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _domainName = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _domainName = a } :: DnsRecordsData s)
 
 instance P.HasHostRecordRegex (DnsRecordsData s) (TF.Attr s P.Text) where
     hostRecordRegex =
         P.lens (_hostRecordRegex :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _hostRecordRegex = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _hostRecordRegex = a } :: DnsRecordsData s)
 
 instance P.HasIsLocked (DnsRecordsData s) (TF.Attr s P.Bool) where
     isLocked =
         P.lens (_isLocked :: DnsRecordsData s -> TF.Attr s P.Bool)
-               (\s a -> s { _isLocked = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _isLocked = a } :: DnsRecordsData s)
 
 instance P.HasLine (DnsRecordsData s) (TF.Attr s P.Text) where
     line =
         P.lens (_line :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _line = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _line = a } :: DnsRecordsData s)
 
 instance P.HasOutputFile (DnsRecordsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _outputFile = a } :: DnsRecordsData s)
 
 instance P.HasStatus (DnsRecordsData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _status = a } :: DnsRecordsData s)
 
 instance P.HasType' (DnsRecordsData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _type' = a } :: DnsRecordsData s)
 
 instance P.HasValueRegex (DnsRecordsData s) (TF.Attr s P.Text) where
     valueRegex =
         P.lens (_valueRegex :: DnsRecordsData s -> TF.Attr s P.Text)
-               (\s a -> s { _valueRegex = a
-                          } :: DnsRecordsData s)
+               (\s a -> s { _valueRegex = a } :: DnsRecordsData s)
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [Records s]) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (Records s)]) where
     computedRecords x = TF.compute (TF.refKey x) "_computedRecords"
 
 -- | @alicloud_eips@ DataSource.
@@ -669,18 +656,10 @@ data EipsData s = EipsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EipsData s) where
-    toObject EipsData'{..} = catMaybes
-        [ TF.assign "ids" <$> TF.attribute _ids
-        , TF.assign "in_use" <$> TF.attribute _inUse
-        , TF.assign "ip_addresses" <$> TF.attribute _ipAddresses
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 eipsData
     :: TF.DataSource P.Provider (EipsData s)
 eipsData =
-    TF.newDataSource "alicloud_eips" $
+    TF.newDataSource "alicloud_eips" TF.validator $
         EipsData'
             { _ids = TF.Nil
             , _inUse = TF.Nil
@@ -688,31 +667,38 @@ eipsData =
             , _outputFile = TF.Nil
             }
 
+instance TF.IsObject (EipsData s) where
+    toObject EipsData'{..} = P.catMaybes
+        [ TF.assign "ids" <$> TF.attribute _ids
+        , TF.assign "in_use" <$> TF.attribute _inUse
+        , TF.assign "ip_addresses" <$> TF.attribute _ipAddresses
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (EipsData s) where
+    validator = P.mempty
+
 instance P.HasIds (EipsData s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     ids =
         P.lens (_ids :: EipsData s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _ids = a
-                          } :: EipsData s)
+               (\s a -> s { _ids = a } :: EipsData s)
 
 instance P.HasInUse (EipsData s) (TF.Attr s P.Bool) where
     inUse =
         P.lens (_inUse :: EipsData s -> TF.Attr s P.Bool)
-               (\s a -> s { _inUse = a
-                          } :: EipsData s)
+               (\s a -> s { _inUse = a } :: EipsData s)
 
 instance P.HasIpAddresses (EipsData s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     ipAddresses =
         P.lens (_ipAddresses :: EipsData s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _ipAddresses = a
-                          } :: EipsData s)
+               (\s a -> s { _ipAddresses = a } :: EipsData s)
 
 instance P.HasOutputFile (EipsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: EipsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: EipsData s)
+               (\s a -> s { _outputFile = a } :: EipsData s)
 
-instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [Eips s]) where
+instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (Eips s)]) where
     computedEips x = TF.compute (TF.refKey x) "_computedEips"
 
 -- | @alicloud_images@ DataSource.
@@ -734,18 +720,10 @@ data ImagesData s = ImagesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ImagesData s) where
-    toObject ImagesData'{..} = catMaybes
-        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "owners" <$> TF.attribute _owners
-        ]
-
 imagesData
     :: TF.DataSource P.Provider (ImagesData s)
 imagesData =
-    TF.newDataSource "alicloud_images" $
+    TF.newDataSource "alicloud_images" TF.validator $
         ImagesData'
             { _mostRecent = TF.value P.False
             , _nameRegex = TF.Nil
@@ -753,31 +731,38 @@ imagesData =
             , _owners = TF.Nil
             }
 
+instance TF.IsObject (ImagesData s) where
+    toObject ImagesData'{..} = P.catMaybes
+        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "owners" <$> TF.attribute _owners
+        ]
+
+instance TF.IsValid (ImagesData s) where
+    validator = P.mempty
+
 instance P.HasMostRecent (ImagesData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: ImagesData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: ImagesData s)
+               (\s a -> s { _mostRecent = a } :: ImagesData s)
 
 instance P.HasNameRegex (ImagesData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: ImagesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: ImagesData s)
+               (\s a -> s { _nameRegex = a } :: ImagesData s)
 
 instance P.HasOutputFile (ImagesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: ImagesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: ImagesData s)
+               (\s a -> s { _outputFile = a } :: ImagesData s)
 
 instance P.HasOwners (ImagesData s) (TF.Attr s P.Text) where
     owners =
         P.lens (_owners :: ImagesData s -> TF.Attr s P.Text)
-               (\s a -> s { _owners = a
-                          } :: ImagesData s)
+               (\s a -> s { _owners = a } :: ImagesData s)
 
-instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [Images s]) where
+instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (Images s)]) where
     computedImages x = TF.compute (TF.refKey x) "_computedImages"
 
 -- | @alicloud_instance_types@ DataSource.
@@ -814,23 +799,10 @@ data InstanceTypesData s = InstanceTypesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (InstanceTypesData s) where
-    toObject InstanceTypesData'{..} = catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
-        , TF.assign "cpu_core_count" <$> TF.attribute _cpuCoreCount
-        , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
-        , TF.assign "instance_type_family" <$> TF.attribute _instanceTypeFamily
-        , TF.assign "is_outdated" <$> TF.attribute _isOutdated
-        , TF.assign "memory_size" <$> TF.attribute _memorySize
-        , TF.assign "network_type" <$> TF.attribute _networkType
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "spot_strategy" <$> TF.attribute _spotStrategy
-        ]
-
 instanceTypesData
     :: TF.DataSource P.Provider (InstanceTypesData s)
 instanceTypesData =
-    TF.newDataSource "alicloud_instance_types" $
+    TF.newDataSource "alicloud_instance_types" TF.validator $
         InstanceTypesData'
             { _availabilityZone = TF.Nil
             , _cpuCoreCount = TF.Nil
@@ -843,61 +815,68 @@ instanceTypesData =
             , _spotStrategy = TF.Nil
             }
 
+instance TF.IsObject (InstanceTypesData s) where
+    toObject InstanceTypesData'{..} = P.catMaybes
+        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        , TF.assign "cpu_core_count" <$> TF.attribute _cpuCoreCount
+        , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
+        , TF.assign "instance_type_family" <$> TF.attribute _instanceTypeFamily
+        , TF.assign "is_outdated" <$> TF.attribute _isOutdated
+        , TF.assign "memory_size" <$> TF.attribute _memorySize
+        , TF.assign "network_type" <$> TF.attribute _networkType
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "spot_strategy" <$> TF.attribute _spotStrategy
+        ]
+
+instance TF.IsValid (InstanceTypesData s) where
+    validator = P.mempty
+
 instance P.HasAvailabilityZone (InstanceTypesData s) (TF.Attr s P.Text) where
     availabilityZone =
         P.lens (_availabilityZone :: InstanceTypesData s -> TF.Attr s P.Text)
-               (\s a -> s { _availabilityZone = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _availabilityZone = a } :: InstanceTypesData s)
 
 instance P.HasCpuCoreCount (InstanceTypesData s) (TF.Attr s P.Integer) where
     cpuCoreCount =
         P.lens (_cpuCoreCount :: InstanceTypesData s -> TF.Attr s P.Integer)
-               (\s a -> s { _cpuCoreCount = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _cpuCoreCount = a } :: InstanceTypesData s)
 
 instance P.HasInstanceChargeType (InstanceTypesData s) (TF.Attr s P.Text) where
     instanceChargeType =
         P.lens (_instanceChargeType :: InstanceTypesData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceChargeType = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _instanceChargeType = a } :: InstanceTypesData s)
 
 instance P.HasInstanceTypeFamily (InstanceTypesData s) (TF.Attr s P.Text) where
     instanceTypeFamily =
         P.lens (_instanceTypeFamily :: InstanceTypesData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceTypeFamily = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _instanceTypeFamily = a } :: InstanceTypesData s)
 
 instance P.HasIsOutdated (InstanceTypesData s) (TF.Attr s P.Bool) where
     isOutdated =
         P.lens (_isOutdated :: InstanceTypesData s -> TF.Attr s P.Bool)
-               (\s a -> s { _isOutdated = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _isOutdated = a } :: InstanceTypesData s)
 
 instance P.HasMemorySize (InstanceTypesData s) (TF.Attr s P.Double) where
     memorySize =
         P.lens (_memorySize :: InstanceTypesData s -> TF.Attr s P.Double)
-               (\s a -> s { _memorySize = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _memorySize = a } :: InstanceTypesData s)
 
 instance P.HasNetworkType (InstanceTypesData s) (TF.Attr s P.Text) where
     networkType =
         P.lens (_networkType :: InstanceTypesData s -> TF.Attr s P.Text)
-               (\s a -> s { _networkType = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _networkType = a } :: InstanceTypesData s)
 
 instance P.HasOutputFile (InstanceTypesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: InstanceTypesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _outputFile = a } :: InstanceTypesData s)
 
 instance P.HasSpotStrategy (InstanceTypesData s) (TF.Attr s P.Text) where
     spotStrategy =
         P.lens (_spotStrategy :: InstanceTypesData s -> TF.Attr s P.Text)
-               (\s a -> s { _spotStrategy = a
-                          } :: InstanceTypesData s)
+               (\s a -> s { _spotStrategy = a } :: InstanceTypesData s)
 
-instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [InstanceTypes s]) where
+instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypes s)]) where
     computedInstanceTypes x = TF.compute (TF.refKey x) "_computedInstanceTypes"
 
 -- | @alicloud_instances@ DataSource.
@@ -934,23 +913,10 @@ data InstancesData s = InstancesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (InstancesData s) where
-    toObject InstancesData'{..} = catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
-        , TF.assign "ids" <$> TF.attribute _ids
-        , TF.assign "image_id" <$> TF.attribute _imageId
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "vpc_id" <$> TF.attribute _vpcId
-        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
-        ]
-
 instancesData
     :: TF.DataSource P.Provider (InstancesData s)
 instancesData =
-    TF.newDataSource "alicloud_instances" $
+    TF.newDataSource "alicloud_instances" TF.validator $
         InstancesData'
             { _availabilityZone = TF.Nil
             , _ids = TF.Nil
@@ -963,61 +929,68 @@ instancesData =
             , _vswitchId = TF.Nil
             }
 
+instance TF.IsObject (InstancesData s) where
+    toObject InstancesData'{..} = P.catMaybes
+        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
+        , TF.assign "ids" <$> TF.attribute _ids
+        , TF.assign "image_id" <$> TF.attribute _imageId
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
+        ]
+
+instance TF.IsValid (InstancesData s) where
+    validator = P.mempty
+
 instance P.HasAvailabilityZone (InstancesData s) (TF.Attr s P.Text) where
     availabilityZone =
         P.lens (_availabilityZone :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _availabilityZone = a
-                          } :: InstancesData s)
+               (\s a -> s { _availabilityZone = a } :: InstancesData s)
 
 instance P.HasIds (InstancesData s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     ids =
         P.lens (_ids :: InstancesData s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _ids = a
-                          } :: InstancesData s)
+               (\s a -> s { _ids = a } :: InstancesData s)
 
 instance P.HasImageId (InstancesData s) (TF.Attr s P.Text) where
     imageId =
         P.lens (_imageId :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _imageId = a
-                          } :: InstancesData s)
+               (\s a -> s { _imageId = a } :: InstancesData s)
 
 instance P.HasNameRegex (InstancesData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: InstancesData s)
+               (\s a -> s { _nameRegex = a } :: InstancesData s)
 
 instance P.HasOutputFile (InstancesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: InstancesData s)
+               (\s a -> s { _outputFile = a } :: InstancesData s)
 
 instance P.HasStatus (InstancesData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: InstancesData s)
+               (\s a -> s { _status = a } :: InstancesData s)
 
 instance P.HasTags (InstancesData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
         P.lens (_tags :: InstancesData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a
-                          } :: InstancesData s)
+               (\s a -> s { _tags = a } :: InstancesData s)
 
 instance P.HasVpcId (InstancesData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a
-                          } :: InstancesData s)
+               (\s a -> s { _vpcId = a } :: InstancesData s)
 
 instance P.HasVswitchId (InstancesData s) (TF.Attr s P.Text) where
     vswitchId =
         P.lens (_vswitchId :: InstancesData s -> TF.Attr s P.Text)
-               (\s a -> s { _vswitchId = a
-                          } :: InstancesData s)
+               (\s a -> s { _vswitchId = a } :: InstancesData s)
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [Instances s]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
     computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
 -- | @alicloud_key_pairs@ DataSource.
@@ -1033,37 +1006,38 @@ data KeyPairsData s = KeyPairsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KeyPairsData s) where
-    toObject KeyPairsData'{..} = catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 keyPairsData
     :: TF.DataSource P.Provider (KeyPairsData s)
 keyPairsData =
-    TF.newDataSource "alicloud_key_pairs" $
+    TF.newDataSource "alicloud_key_pairs" TF.validator $
         KeyPairsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
             }
 
+instance TF.IsObject (KeyPairsData s) where
+    toObject KeyPairsData'{..} = P.catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (KeyPairsData s) where
+    validator = P.mempty
+
 instance P.HasNameRegex (KeyPairsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: KeyPairsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: KeyPairsData s)
+               (\s a -> s { _nameRegex = a } :: KeyPairsData s)
 
 instance P.HasOutputFile (KeyPairsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: KeyPairsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: KeyPairsData s)
+               (\s a -> s { _outputFile = a } :: KeyPairsData s)
 
 instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairsData s)) (TF.Attr s P.Bool) where
     computedFingerPrint x = TF.compute (TF.refKey x) "_computedFingerPrint"
 
-instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [KeyPairs s]) where
+instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairs s)]) where
     computedKeyPairs x = TF.compute (TF.refKey x) "_computedKeyPairs"
 
 -- | @alicloud_kms_keys@ DataSource.
@@ -1085,18 +1059,10 @@ data KmsKeysData s = KmsKeysData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsKeysData s) where
-    toObject KmsKeysData'{..} = catMaybes
-        [ TF.assign "description_regex" <$> TF.attribute _descriptionRegex
-        , TF.assign "ids" <$> TF.attribute _ids
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "status" <$> TF.attribute _status
-        ]
-
 kmsKeysData
     :: TF.DataSource P.Provider (KmsKeysData s)
 kmsKeysData =
-    TF.newDataSource "alicloud_kms_keys" $
+    TF.newDataSource "alicloud_kms_keys" TF.validator $
         KmsKeysData'
             { _descriptionRegex = TF.Nil
             , _ids = TF.Nil
@@ -1104,31 +1070,38 @@ kmsKeysData =
             , _status = TF.Nil
             }
 
+instance TF.IsObject (KmsKeysData s) where
+    toObject KmsKeysData'{..} = P.catMaybes
+        [ TF.assign "description_regex" <$> TF.attribute _descriptionRegex
+        , TF.assign "ids" <$> TF.attribute _ids
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance TF.IsValid (KmsKeysData s) where
+    validator = P.mempty
+
 instance P.HasDescriptionRegex (KmsKeysData s) (TF.Attr s P.Text) where
     descriptionRegex =
         P.lens (_descriptionRegex :: KmsKeysData s -> TF.Attr s P.Text)
-               (\s a -> s { _descriptionRegex = a
-                          } :: KmsKeysData s)
+               (\s a -> s { _descriptionRegex = a } :: KmsKeysData s)
 
 instance P.HasIds (KmsKeysData s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     ids =
         P.lens (_ids :: KmsKeysData s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _ids = a
-                          } :: KmsKeysData s)
+               (\s a -> s { _ids = a } :: KmsKeysData s)
 
 instance P.HasOutputFile (KmsKeysData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: KmsKeysData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: KmsKeysData s)
+               (\s a -> s { _outputFile = a } :: KmsKeysData s)
 
 instance P.HasStatus (KmsKeysData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: KmsKeysData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: KmsKeysData s)
+               (\s a -> s { _status = a } :: KmsKeysData s)
 
-instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [Keys s]) where
+instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (Keys s)]) where
     computedKeys x = TF.compute (TF.refKey x) "_computedKeys"
 
 -- | @alicloud_ram_account_alias@ DataSource.
@@ -1141,24 +1114,26 @@ data RamAccountAliasData s = RamAccountAliasData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RamAccountAliasData s) where
-    toObject RamAccountAliasData'{..} = catMaybes
-        [ TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 ramAccountAliasData
     :: TF.DataSource P.Provider (RamAccountAliasData s)
 ramAccountAliasData =
-    TF.newDataSource "alicloud_ram_account_alias" $
+    TF.newDataSource "alicloud_ram_account_alias" TF.validator $
         RamAccountAliasData'
             { _outputFile = TF.Nil
             }
 
+instance TF.IsObject (RamAccountAliasData s) where
+    toObject RamAccountAliasData'{..} = P.catMaybes
+        [ TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (RamAccountAliasData s) where
+    validator = P.mempty
+
 instance P.HasOutputFile (RamAccountAliasData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RamAccountAliasData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RamAccountAliasData s)
+               (\s a -> s { _outputFile = a } :: RamAccountAliasData s)
 
 instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (RamAccountAliasData s)) (TF.Attr s P.Text) where
     computedAccountAlias x = TF.compute (TF.refKey x) "_computedAccountAlias"
@@ -1173,24 +1148,26 @@ data RamAccountAliasesData s = RamAccountAliasesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RamAccountAliasesData s) where
-    toObject RamAccountAliasesData'{..} = catMaybes
-        [ TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 ramAccountAliasesData
     :: TF.DataSource P.Provider (RamAccountAliasesData s)
 ramAccountAliasesData =
-    TF.newDataSource "alicloud_ram_account_aliases" $
+    TF.newDataSource "alicloud_ram_account_aliases" TF.validator $
         RamAccountAliasesData'
             { _outputFile = TF.Nil
             }
 
+instance TF.IsObject (RamAccountAliasesData s) where
+    toObject RamAccountAliasesData'{..} = P.catMaybes
+        [ TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (RamAccountAliasesData s) where
+    validator = P.mempty
+
 instance P.HasOutputFile (RamAccountAliasesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RamAccountAliasesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RamAccountAliasesData s)
+               (\s a -> s { _outputFile = a } :: RamAccountAliasesData s)
 
 instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (RamAccountAliasesData s)) (TF.Attr s P.Text) where
     computedAccountAlias x = TF.compute (TF.refKey x) "_computedAccountAlias"
@@ -1217,19 +1194,10 @@ data RamGroupsData s = RamGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RamGroupsData s) where
-    toObject RamGroupsData'{..} = catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "policy_type" <$> TF.attribute _policyType
-        , TF.assign "user_name" <$> TF.attribute _userName
-        ]
-
 ramGroupsData
     :: TF.DataSource P.Provider (RamGroupsData s)
 ramGroupsData =
-    TF.newDataSource "alicloud_ram_groups" $
+    TF.newDataSource "alicloud_ram_groups" TF.validator $
         RamGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1238,37 +1206,44 @@ ramGroupsData =
             , _userName = TF.Nil
             }
 
+instance TF.IsObject (RamGroupsData s) where
+    toObject RamGroupsData'{..} = P.catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "policy_type" <$> TF.attribute _policyType
+        , TF.assign "user_name" <$> TF.attribute _userName
+        ]
+
+instance TF.IsValid (RamGroupsData s) where
+    validator = P.mempty
+
 instance P.HasNameRegex (RamGroupsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: RamGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: RamGroupsData s)
+               (\s a -> s { _nameRegex = a } :: RamGroupsData s)
 
 instance P.HasOutputFile (RamGroupsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RamGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RamGroupsData s)
+               (\s a -> s { _outputFile = a } :: RamGroupsData s)
 
 instance P.HasPolicyName (RamGroupsData s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: RamGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a
-                          } :: RamGroupsData s)
+               (\s a -> s { _policyName = a } :: RamGroupsData s)
 
 instance P.HasPolicyType (RamGroupsData s) (TF.Attr s P.Text) where
     policyType =
         P.lens (_policyType :: RamGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyType = a
-                          } :: RamGroupsData s)
+               (\s a -> s { _policyType = a } :: RamGroupsData s)
 
 instance P.HasUserName (RamGroupsData s) (TF.Attr s P.Text) where
     userName =
         P.lens (_userName :: RamGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _userName = a
-                          } :: RamGroupsData s)
+               (\s a -> s { _userName = a } :: RamGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [Groups s]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
     computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
 
 -- | @alicloud_ram_policies@ DataSource.
@@ -1296,20 +1271,10 @@ data RamPoliciesData s = RamPoliciesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RamPoliciesData s) where
-    toObject RamPoliciesData'{..} = catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _groupName
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "role_name" <$> TF.attribute _roleName
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "user_name" <$> TF.attribute _userName
-        ]
-
 ramPoliciesData
     :: TF.DataSource P.Provider (RamPoliciesData s)
 ramPoliciesData =
-    TF.newDataSource "alicloud_ram_policies" $
+    TF.newDataSource "alicloud_ram_policies" TF.validator $
         RamPoliciesData'
             { _groupName = TF.Nil
             , _nameRegex = TF.Nil
@@ -1319,43 +1284,50 @@ ramPoliciesData =
             , _userName = TF.Nil
             }
 
+instance TF.IsObject (RamPoliciesData s) where
+    toObject RamPoliciesData'{..} = P.catMaybes
+        [ TF.assign "group_name" <$> TF.attribute _groupName
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "role_name" <$> TF.attribute _roleName
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "user_name" <$> TF.attribute _userName
+        ]
+
+instance TF.IsValid (RamPoliciesData s) where
+    validator = P.mempty
+
 instance P.HasGroupName (RamPoliciesData s) (TF.Attr s P.Text) where
     groupName =
         P.lens (_groupName :: RamPoliciesData s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a
-                          } :: RamPoliciesData s)
+               (\s a -> s { _groupName = a } :: RamPoliciesData s)
 
 instance P.HasNameRegex (RamPoliciesData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: RamPoliciesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: RamPoliciesData s)
+               (\s a -> s { _nameRegex = a } :: RamPoliciesData s)
 
 instance P.HasOutputFile (RamPoliciesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RamPoliciesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RamPoliciesData s)
+               (\s a -> s { _outputFile = a } :: RamPoliciesData s)
 
 instance P.HasRoleName (RamPoliciesData s) (TF.Attr s P.Text) where
     roleName =
         P.lens (_roleName :: RamPoliciesData s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a
-                          } :: RamPoliciesData s)
+               (\s a -> s { _roleName = a } :: RamPoliciesData s)
 
 instance P.HasType' (RamPoliciesData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: RamPoliciesData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: RamPoliciesData s)
+               (\s a -> s { _type' = a } :: RamPoliciesData s)
 
 instance P.HasUserName (RamPoliciesData s) (TF.Attr s P.Text) where
     userName =
         P.lens (_userName :: RamPoliciesData s -> TF.Attr s P.Text)
-               (\s a -> s { _userName = a
-                          } :: RamPoliciesData s)
+               (\s a -> s { _userName = a } :: RamPoliciesData s)
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [Policies s]) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (Policies s)]) where
     computedPolicies x = TF.compute (TF.refKey x) "_computedPolicies"
 
 -- | @alicloud_ram_roles@ DataSource.
@@ -1377,18 +1349,10 @@ data RamRolesData s = RamRolesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RamRolesData s) where
-    toObject RamRolesData'{..} = catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "policy_type" <$> TF.attribute _policyType
-        ]
-
 ramRolesData
     :: TF.DataSource P.Provider (RamRolesData s)
 ramRolesData =
-    TF.newDataSource "alicloud_ram_roles" $
+    TF.newDataSource "alicloud_ram_roles" TF.validator $
         RamRolesData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
@@ -1396,31 +1360,38 @@ ramRolesData =
             , _policyType = TF.Nil
             }
 
+instance TF.IsObject (RamRolesData s) where
+    toObject RamRolesData'{..} = P.catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "policy_type" <$> TF.attribute _policyType
+        ]
+
+instance TF.IsValid (RamRolesData s) where
+    validator = P.mempty
+
 instance P.HasNameRegex (RamRolesData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: RamRolesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: RamRolesData s)
+               (\s a -> s { _nameRegex = a } :: RamRolesData s)
 
 instance P.HasOutputFile (RamRolesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RamRolesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RamRolesData s)
+               (\s a -> s { _outputFile = a } :: RamRolesData s)
 
 instance P.HasPolicyName (RamRolesData s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: RamRolesData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a
-                          } :: RamRolesData s)
+               (\s a -> s { _policyName = a } :: RamRolesData s)
 
 instance P.HasPolicyType (RamRolesData s) (TF.Attr s P.Text) where
     policyType =
         P.lens (_policyType :: RamRolesData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyType = a
-                          } :: RamRolesData s)
+               (\s a -> s { _policyType = a } :: RamRolesData s)
 
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [Roles s]) where
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (Roles s)]) where
     computedRoles x = TF.compute (TF.refKey x) "_computedRoles"
 
 -- | @alicloud_ram_users@ DataSource.
@@ -1445,19 +1416,10 @@ data RamUsersData s = RamUsersData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RamUsersData s) where
-    toObject RamUsersData'{..} = catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _groupName
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "policy_type" <$> TF.attribute _policyType
-        ]
-
 ramUsersData
     :: TF.DataSource P.Provider (RamUsersData s)
 ramUsersData =
-    TF.newDataSource "alicloud_ram_users" $
+    TF.newDataSource "alicloud_ram_users" TF.validator $
         RamUsersData'
             { _groupName = TF.Nil
             , _nameRegex = TF.Nil
@@ -1466,37 +1428,44 @@ ramUsersData =
             , _policyType = TF.Nil
             }
 
+instance TF.IsObject (RamUsersData s) where
+    toObject RamUsersData'{..} = P.catMaybes
+        [ TF.assign "group_name" <$> TF.attribute _groupName
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "policy_type" <$> TF.attribute _policyType
+        ]
+
+instance TF.IsValid (RamUsersData s) where
+    validator = P.mempty
+
 instance P.HasGroupName (RamUsersData s) (TF.Attr s P.Text) where
     groupName =
         P.lens (_groupName :: RamUsersData s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a
-                          } :: RamUsersData s)
+               (\s a -> s { _groupName = a } :: RamUsersData s)
 
 instance P.HasNameRegex (RamUsersData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: RamUsersData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: RamUsersData s)
+               (\s a -> s { _nameRegex = a } :: RamUsersData s)
 
 instance P.HasOutputFile (RamUsersData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RamUsersData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RamUsersData s)
+               (\s a -> s { _outputFile = a } :: RamUsersData s)
 
 instance P.HasPolicyName (RamUsersData s) (TF.Attr s P.Text) where
     policyName =
         P.lens (_policyName :: RamUsersData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a
-                          } :: RamUsersData s)
+               (\s a -> s { _policyName = a } :: RamUsersData s)
 
 instance P.HasPolicyType (RamUsersData s) (TF.Attr s P.Text) where
     policyType =
         P.lens (_policyType :: RamUsersData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyType = a
-                          } :: RamUsersData s)
+               (\s a -> s { _policyType = a } :: RamUsersData s)
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [Users s]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (Users s)]) where
     computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
 
 -- | @alicloud_regions@ DataSource.
@@ -1509,24 +1478,26 @@ data RegionsData s = RegionsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RegionsData s) where
-    toObject RegionsData'{..} = catMaybes
-        [ TF.assign "output_file" <$> TF.attribute _outputFile
-        ]
-
 regionsData
     :: TF.DataSource P.Provider (RegionsData s)
 regionsData =
-    TF.newDataSource "alicloud_regions" $
+    TF.newDataSource "alicloud_regions" TF.validator $
         RegionsData'
             { _outputFile = TF.Nil
             }
 
+instance TF.IsObject (RegionsData s) where
+    toObject RegionsData'{..} = P.catMaybes
+        [ TF.assign "output_file" <$> TF.attribute _outputFile
+        ]
+
+instance TF.IsValid (RegionsData s) where
+    validator = P.mempty
+
 instance P.HasOutputFile (RegionsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: RegionsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: RegionsData s)
+               (\s a -> s { _outputFile = a } :: RegionsData s)
 
 instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionsData s)) (TF.Attr s P.Bool) where
     computedCurrent x = TF.compute (TF.refKey x) "_computedCurrent"
@@ -1534,7 +1505,7 @@ instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionsData s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [Regions s]) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (Regions s)]) where
     computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
 
 -- | @alicloud_security_group_rules@ DataSource.
@@ -1562,21 +1533,11 @@ data SecurityGroupRulesData s = SecurityGroupRulesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SecurityGroupRulesData s) where
-    toObject SecurityGroupRulesData'{..} = catMaybes
-        [ TF.assign "direction" <$> TF.attribute _direction
-        , TF.assign "group_id" <$> TF.attribute _groupId
-        , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
-        , TF.assign "nic_type" <$> TF.attribute _nicType
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "policy" <$> TF.attribute _policy
-        ]
-
 securityGroupRulesData
     :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
     -> TF.DataSource P.Provider (SecurityGroupRulesData s)
 securityGroupRulesData _groupId =
-    TF.newDataSource "alicloud_security_group_rules" $
+    TF.newDataSource "alicloud_security_group_rules" TF.validator $
         SecurityGroupRulesData'
             { _direction = TF.Nil
             , _groupId = _groupId
@@ -1586,41 +1547,48 @@ securityGroupRulesData _groupId =
             , _policy = TF.Nil
             }
 
+instance TF.IsObject (SecurityGroupRulesData s) where
+    toObject SecurityGroupRulesData'{..} = P.catMaybes
+        [ TF.assign "direction" <$> TF.attribute _direction
+        , TF.assign "group_id" <$> TF.attribute _groupId
+        , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
+        , TF.assign "nic_type" <$> TF.attribute _nicType
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "policy" <$> TF.attribute _policy
+        ]
+
+instance TF.IsValid (SecurityGroupRulesData s) where
+    validator = P.mempty
+
 instance P.HasDirection (SecurityGroupRulesData s) (TF.Attr s P.Text) where
     direction =
         P.lens (_direction :: SecurityGroupRulesData s -> TF.Attr s P.Text)
-               (\s a -> s { _direction = a
-                          } :: SecurityGroupRulesData s)
+               (\s a -> s { _direction = a } :: SecurityGroupRulesData s)
 
 instance P.HasGroupId (SecurityGroupRulesData s) (TF.Attr s P.Text) where
     groupId =
         P.lens (_groupId :: SecurityGroupRulesData s -> TF.Attr s P.Text)
-               (\s a -> s { _groupId = a
-                          } :: SecurityGroupRulesData s)
+               (\s a -> s { _groupId = a } :: SecurityGroupRulesData s)
 
 instance P.HasIpProtocol (SecurityGroupRulesData s) (TF.Attr s P.Text) where
     ipProtocol =
         P.lens (_ipProtocol :: SecurityGroupRulesData s -> TF.Attr s P.Text)
-               (\s a -> s { _ipProtocol = a
-                          } :: SecurityGroupRulesData s)
+               (\s a -> s { _ipProtocol = a } :: SecurityGroupRulesData s)
 
 instance P.HasNicType (SecurityGroupRulesData s) (TF.Attr s P.Text) where
     nicType =
         P.lens (_nicType :: SecurityGroupRulesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nicType = a
-                          } :: SecurityGroupRulesData s)
+               (\s a -> s { _nicType = a } :: SecurityGroupRulesData s)
 
 instance P.HasOutputFile (SecurityGroupRulesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: SecurityGroupRulesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: SecurityGroupRulesData s)
+               (\s a -> s { _outputFile = a } :: SecurityGroupRulesData s)
 
 instance P.HasPolicy (SecurityGroupRulesData s) (TF.Attr s P.Text) where
     policy =
         P.lens (_policy :: SecurityGroupRulesData s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a
-                          } :: SecurityGroupRulesData s)
+               (\s a -> s { _policy = a } :: SecurityGroupRulesData s)
 
 instance s ~ s' => P.HasComputedGroupDesc (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
     computedGroupDesc x = TF.compute (TF.refKey x) "_computedGroupDesc"
@@ -1628,7 +1596,7 @@ instance s ~ s' => P.HasComputedGroupDesc (TF.Ref s' (SecurityGroupRulesData s))
 instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
     computedGroupName x = TF.compute (TF.refKey x) "_computedGroupName"
 
-instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [Rules s]) where
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (Rules s)]) where
     computedRules x = TF.compute (TF.refKey x) "_computedRules"
 
 -- | @alicloud_security_groups@ DataSource.
@@ -1647,42 +1615,42 @@ data SecurityGroupsData s = SecurityGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SecurityGroupsData s) where
-    toObject SecurityGroupsData'{..} = catMaybes
-        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "vpc_id" <$> TF.attribute _vpcId
-        ]
-
 securityGroupsData
     :: TF.DataSource P.Provider (SecurityGroupsData s)
 securityGroupsData =
-    TF.newDataSource "alicloud_security_groups" $
+    TF.newDataSource "alicloud_security_groups" TF.validator $
         SecurityGroupsData'
             { _nameRegex = TF.Nil
             , _outputFile = TF.Nil
             , _vpcId = TF.Nil
             }
 
+instance TF.IsObject (SecurityGroupsData s) where
+    toObject SecurityGroupsData'{..} = P.catMaybes
+        [ TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        ]
+
+instance TF.IsValid (SecurityGroupsData s) where
+    validator = P.mempty
+
 instance P.HasNameRegex (SecurityGroupsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: SecurityGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: SecurityGroupsData s)
+               (\s a -> s { _nameRegex = a } :: SecurityGroupsData s)
 
 instance P.HasOutputFile (SecurityGroupsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: SecurityGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: SecurityGroupsData s)
+               (\s a -> s { _outputFile = a } :: SecurityGroupsData s)
 
 instance P.HasVpcId (SecurityGroupsData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: SecurityGroupsData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a
-                          } :: SecurityGroupsData s)
+               (\s a -> s { _vpcId = a } :: SecurityGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [Groups s]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
     computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
 
 -- | @alicloud_vpcs@ DataSource.
@@ -1710,20 +1678,10 @@ data VpcsData s = VpcsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VpcsData s) where
-    toObject VpcsData'{..} = catMaybes
-        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
-        , TF.assign "is_default" <$> TF.attribute _isDefault
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
-        ]
-
 vpcsData
     :: TF.DataSource P.Provider (VpcsData s)
 vpcsData =
-    TF.newDataSource "alicloud_vpcs" $
+    TF.newDataSource "alicloud_vpcs" TF.validator $
         VpcsData'
             { _cidrBlock = TF.Nil
             , _isDefault = TF.Nil
@@ -1733,43 +1691,50 @@ vpcsData =
             , _vswitchId = TF.Nil
             }
 
+instance TF.IsObject (VpcsData s) where
+    toObject VpcsData'{..} = P.catMaybes
+        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "is_default" <$> TF.attribute _isDefault
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
+        ]
+
+instance TF.IsValid (VpcsData s) where
+    validator = P.mempty
+
 instance P.HasCidrBlock (VpcsData s) (TF.Attr s P.Text) where
     cidrBlock =
         P.lens (_cidrBlock :: VpcsData s -> TF.Attr s P.Text)
-               (\s a -> s { _cidrBlock = a
-                          } :: VpcsData s)
+               (\s a -> s { _cidrBlock = a } :: VpcsData s)
 
 instance P.HasIsDefault (VpcsData s) (TF.Attr s P.Bool) where
     isDefault =
         P.lens (_isDefault :: VpcsData s -> TF.Attr s P.Bool)
-               (\s a -> s { _isDefault = a
-                          } :: VpcsData s)
+               (\s a -> s { _isDefault = a } :: VpcsData s)
 
 instance P.HasNameRegex (VpcsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: VpcsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: VpcsData s)
+               (\s a -> s { _nameRegex = a } :: VpcsData s)
 
 instance P.HasOutputFile (VpcsData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: VpcsData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: VpcsData s)
+               (\s a -> s { _outputFile = a } :: VpcsData s)
 
 instance P.HasStatus (VpcsData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: VpcsData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: VpcsData s)
+               (\s a -> s { _status = a } :: VpcsData s)
 
 instance P.HasVswitchId (VpcsData s) (TF.Attr s P.Text) where
     vswitchId =
         P.lens (_vswitchId :: VpcsData s -> TF.Attr s P.Text)
-               (\s a -> s { _vswitchId = a
-                          } :: VpcsData s)
+               (\s a -> s { _vswitchId = a } :: VpcsData s)
 
-instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [Vpcs s]) where
+instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (Vpcs s)]) where
     computedVpcs x = TF.compute (TF.refKey x) "_computedVpcs"
 
 -- | @alicloud_vswitches@ DataSource.
@@ -1797,20 +1762,10 @@ data VswitchesData s = VswitchesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VswitchesData s) where
-    toObject VswitchesData'{..} = catMaybes
-        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
-        , TF.assign "is_default" <$> TF.attribute _isDefault
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "vpc_id" <$> TF.attribute _vpcId
-        , TF.assign "zone_id" <$> TF.attribute _zoneId
-        ]
-
 vswitchesData
     :: TF.DataSource P.Provider (VswitchesData s)
 vswitchesData =
-    TF.newDataSource "alicloud_vswitches" $
+    TF.newDataSource "alicloud_vswitches" TF.validator $
         VswitchesData'
             { _cidrBlock = TF.Nil
             , _isDefault = TF.Nil
@@ -1820,43 +1775,50 @@ vswitchesData =
             , _zoneId = TF.Nil
             }
 
+instance TF.IsObject (VswitchesData s) where
+    toObject VswitchesData'{..} = P.catMaybes
+        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
+        , TF.assign "is_default" <$> TF.attribute _isDefault
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        , TF.assign "zone_id" <$> TF.attribute _zoneId
+        ]
+
+instance TF.IsValid (VswitchesData s) where
+    validator = P.mempty
+
 instance P.HasCidrBlock (VswitchesData s) (TF.Attr s P.Text) where
     cidrBlock =
         P.lens (_cidrBlock :: VswitchesData s -> TF.Attr s P.Text)
-               (\s a -> s { _cidrBlock = a
-                          } :: VswitchesData s)
+               (\s a -> s { _cidrBlock = a } :: VswitchesData s)
 
 instance P.HasIsDefault (VswitchesData s) (TF.Attr s P.Bool) where
     isDefault =
         P.lens (_isDefault :: VswitchesData s -> TF.Attr s P.Bool)
-               (\s a -> s { _isDefault = a
-                          } :: VswitchesData s)
+               (\s a -> s { _isDefault = a } :: VswitchesData s)
 
 instance P.HasNameRegex (VswitchesData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: VswitchesData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: VswitchesData s)
+               (\s a -> s { _nameRegex = a } :: VswitchesData s)
 
 instance P.HasOutputFile (VswitchesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: VswitchesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: VswitchesData s)
+               (\s a -> s { _outputFile = a } :: VswitchesData s)
 
 instance P.HasVpcId (VswitchesData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: VswitchesData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a
-                          } :: VswitchesData s)
+               (\s a -> s { _vpcId = a } :: VswitchesData s)
 
 instance P.HasZoneId (VswitchesData s) (TF.Attr s P.Text) where
     zoneId =
         P.lens (_zoneId :: VswitchesData s -> TF.Attr s P.Text)
-               (\s a -> s { _zoneId = a
-                          } :: VswitchesData s)
+               (\s a -> s { _zoneId = a } :: VswitchesData s)
 
-instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [Vswitches s]) where
+instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (Vswitches s)]) where
     computedVswitches x = TF.compute (TF.refKey x) "_computedVswitches"
 
 -- | @alicloud_zones@ DataSource.
@@ -1890,22 +1852,10 @@ data ZonesData s = ZonesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ZonesData s) where
-    toObject ZonesData'{..} = catMaybes
-        [ TF.assign "available_disk_category" <$> TF.attribute _availableDiskCategory
-        , TF.assign "available_instance_type" <$> TF.attribute _availableInstanceType
-        , TF.assign "available_resource_creation" <$> TF.attribute _availableResourceCreation
-        , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
-        , TF.assign "multi" <$> TF.attribute _multi
-        , TF.assign "network_type" <$> TF.attribute _networkType
-        , TF.assign "output_file" <$> TF.attribute _outputFile
-        , TF.assign "spot_strategy" <$> TF.attribute _spotStrategy
-        ]
-
 zonesData
     :: TF.DataSource P.Provider (ZonesData s)
 zonesData =
-    TF.newDataSource "alicloud_zones" $
+    TF.newDataSource "alicloud_zones" TF.validator $
         ZonesData'
             { _availableDiskCategory = TF.Nil
             , _availableInstanceType = TF.Nil
@@ -1917,53 +1867,60 @@ zonesData =
             , _spotStrategy = TF.Nil
             }
 
+instance TF.IsObject (ZonesData s) where
+    toObject ZonesData'{..} = P.catMaybes
+        [ TF.assign "available_disk_category" <$> TF.attribute _availableDiskCategory
+        , TF.assign "available_instance_type" <$> TF.attribute _availableInstanceType
+        , TF.assign "available_resource_creation" <$> TF.attribute _availableResourceCreation
+        , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
+        , TF.assign "multi" <$> TF.attribute _multi
+        , TF.assign "network_type" <$> TF.attribute _networkType
+        , TF.assign "output_file" <$> TF.attribute _outputFile
+        , TF.assign "spot_strategy" <$> TF.attribute _spotStrategy
+        ]
+
+instance TF.IsValid (ZonesData s) where
+    validator = P.mempty
+
 instance P.HasAvailableDiskCategory (ZonesData s) (TF.Attr s P.Text) where
     availableDiskCategory =
         P.lens (_availableDiskCategory :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _availableDiskCategory = a
-                          } :: ZonesData s)
+               (\s a -> s { _availableDiskCategory = a } :: ZonesData s)
 
 instance P.HasAvailableInstanceType (ZonesData s) (TF.Attr s P.Text) where
     availableInstanceType =
         P.lens (_availableInstanceType :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _availableInstanceType = a
-                          } :: ZonesData s)
+               (\s a -> s { _availableInstanceType = a } :: ZonesData s)
 
 instance P.HasAvailableResourceCreation (ZonesData s) (TF.Attr s P.Text) where
     availableResourceCreation =
         P.lens (_availableResourceCreation :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _availableResourceCreation = a
-                          } :: ZonesData s)
+               (\s a -> s { _availableResourceCreation = a } :: ZonesData s)
 
 instance P.HasInstanceChargeType (ZonesData s) (TF.Attr s P.Text) where
     instanceChargeType =
         P.lens (_instanceChargeType :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceChargeType = a
-                          } :: ZonesData s)
+               (\s a -> s { _instanceChargeType = a } :: ZonesData s)
 
 instance P.HasMulti (ZonesData s) (TF.Attr s P.Bool) where
     multi =
         P.lens (_multi :: ZonesData s -> TF.Attr s P.Bool)
-               (\s a -> s { _multi = a
-                          } :: ZonesData s)
+               (\s a -> s { _multi = a } :: ZonesData s)
 
 instance P.HasNetworkType (ZonesData s) (TF.Attr s P.Text) where
     networkType =
         P.lens (_networkType :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _networkType = a
-                          } :: ZonesData s)
+               (\s a -> s { _networkType = a } :: ZonesData s)
 
 instance P.HasOutputFile (ZonesData s) (TF.Attr s P.Text) where
     outputFile =
         P.lens (_outputFile :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFile = a
-                          } :: ZonesData s)
+               (\s a -> s { _outputFile = a } :: ZonesData s)
 
 instance P.HasSpotStrategy (ZonesData s) (TF.Attr s P.Text) where
     spotStrategy =
         P.lens (_spotStrategy :: ZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _spotStrategy = a
-                          } :: ZonesData s)
+               (\s a -> s { _spotStrategy = a } :: ZonesData s)
 
-instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [Zones s]) where
+instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (Zones s)]) where
     computedZones x = TF.compute (TF.refKey x) "_computedZones"
