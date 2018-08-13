@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -36,7 +37,6 @@ module Terrafomo.GitHub.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -44,7 +44,10 @@ import Terrafomo.GitHub.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -56,6 +59,7 @@ import qualified Terrafomo.GitHub.Types    as P
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @github_ip_ranges@ DataSource.
 --
@@ -64,14 +68,17 @@ import qualified Terrafomo.Schema          as TF
 data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IpRangesData s) where
-    toObject _ = []
-
 ipRangesData
     :: TF.DataSource P.Provider (IpRangesData s)
 ipRangesData =
-    TF.newDataSource "github_ip_ranges" $
+    TF.newDataSource "github_ip_ranges" TF.validator $
         IpRangesData'
+
+instance TF.IsObject (IpRangesData s) where
+    toObject _ = []
+
+instance TF.IsValid (IpRangesData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedGit (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedGit x = TF.compute (TF.refKey x) "_computedGit"
@@ -104,34 +111,44 @@ data RepositoryData s = RepositoryData'
     -- * 'fullName'
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RepositoryData s) where
-    toObject RepositoryData'{..} = catMaybes
-        [ TF.assign "full_name" <$> TF.attribute _fullName
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 repositoryData
     :: TF.DataSource P.Provider (RepositoryData s)
 repositoryData =
-    TF.newDataSource "github_repository" $
+    TF.newDataSource "github_repository" TF.validator $
         RepositoryData'
             { _fullName = TF.Nil
             , _name = TF.Nil
             }
 
+instance TF.IsObject (RepositoryData s) where
+    toObject RepositoryData'{..} = P.catMaybes
+        [ TF.assign "full_name" <$> TF.attribute _fullName
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (RepositoryData s) where
+    validator = TF.fieldsValidator (\RepositoryData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_fullName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_fullName",
+                            [ "_name"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_fullName"
+                            ])
+        ])
+
 instance P.HasFullName (RepositoryData s) (TF.Attr s P.Text) where
     fullName =
         P.lens (_fullName :: RepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _fullName = a
-                          , _name = TF.Nil
-                          } :: RepositoryData s)
+               (\s a -> s { _fullName = a } :: RepositoryData s)
 
 instance P.HasName (RepositoryData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          , _fullName = TF.Nil
-                          } :: RepositoryData s)
+               (\s a -> s { _name = a } :: RepositoryData s)
 
 instance s ~ s' => P.HasComputedAllowMergeCommit (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
     computedAllowMergeCommit x = TF.compute (TF.refKey x) "_computedAllowMergeCommit"
@@ -197,25 +214,27 @@ data TeamData s = TeamData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TeamData s) where
-    toObject TeamData'{..} = catMaybes
-        [ TF.assign "slug" <$> TF.attribute _slug
-        ]
-
 teamData
     :: TF.Attr s P.Text -- ^ @slug@ - 'P.slug'
     -> TF.DataSource P.Provider (TeamData s)
 teamData _slug =
-    TF.newDataSource "github_team" $
+    TF.newDataSource "github_team" TF.validator $
         TeamData'
             { _slug = _slug
             }
 
+instance TF.IsObject (TeamData s) where
+    toObject TeamData'{..} = P.catMaybes
+        [ TF.assign "slug" <$> TF.attribute _slug
+        ]
+
+instance TF.IsValid (TeamData s) where
+    validator = P.mempty
+
 instance P.HasSlug (TeamData s) (TF.Attr s P.Text) where
     slug =
         P.lens (_slug :: TeamData s -> TF.Attr s P.Text)
-               (\s a -> s { _slug = a
-                          } :: TeamData s)
+               (\s a -> s { _slug = a } :: TeamData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -242,25 +261,27 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserData s) where
-    toObject UserData'{..} = catMaybes
-        [ TF.assign "username" <$> TF.attribute _username
-        ]
-
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> TF.DataSource P.Provider (UserData s)
 userData _username =
-    TF.newDataSource "github_user" $
+    TF.newDataSource "github_user" TF.validator $
         UserData'
             { _username = _username
             }
 
+instance TF.IsObject (UserData s) where
+    toObject UserData'{..} = P.catMaybes
+        [ TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (UserData s) where
+    validator = P.mempty
+
 instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: UserData s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a
-                          } :: UserData s)
+               (\s a -> s { _username = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedAvatarUrl x = TF.compute (TF.refKey x) "_computedAvatarUrl"
