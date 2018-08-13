@@ -1,8 +1,11 @@
 {
     "settings": [],
-    "arguments": [],
     "dataSources": [
         {
+            "con": {
+                "smart": "data'",
+                "name": "Data'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -11,13 +14,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"request_headers\" <$> TF.attribute",
-                    "name": "request_headers",
+                    "name": "_requestHeaders",
                     "method": "requestHeaders",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasRequestHeaders",
+                    "validate": false,
                     "optional": true,
-                    "label": "_requestHeaders"
+                    "original": "request_headers"
                 },
                 {
                     "default": "_url",
@@ -26,17 +30,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_url"
+                    "original": "url"
                 }
             ],
-            "schema": "DataSource",
             "name": "Data",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -45,13 +50,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"body\" <$> TF.attribute",
-                    "name": "body",
+                    "name": "_computedBody",
                     "method": "computedBody",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBody",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedBody"
+                    "original": "body"
                 }
             ],
             "parameters": [
@@ -62,20 +68,36 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_url"
+                    "original": "url"
                 }
             ],
+            "conflicts": [],
             "type": "Data s",
             "original": "http"
         }
     ],
     "resources": [],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -85,8 +107,6 @@
         "microlens"
     ],
     "name": "HTTP",
-    "parameters": [],
     "package": "terrafomo-builtins",
-    "type": "Provider",
     "original": "http"
 }
