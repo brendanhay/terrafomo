@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -44,7 +45,6 @@ module Terrafomo.Icinga2.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -52,7 +52,10 @@ import Terrafomo.Icinga2.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -64,6 +67,7 @@ import qualified Terrafomo.Icinga2.Provider as P
 import qualified Terrafomo.Icinga2.Types    as P
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @icinga2_checkcommand@ Resource.
 --
@@ -85,21 +89,13 @@ data CheckcommandResource s = CheckcommandResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CheckcommandResource s) where
-    toObject CheckcommandResource'{..} = catMaybes
-        [ TF.assign "arguments" <$> TF.attribute _arguments
-        , TF.assign "command" <$> TF.attribute _command
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "templates" <$> TF.attribute _templates
-        ]
-
 checkcommandResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @templates@ - 'P.templates'
     -> TF.Resource P.Provider (CheckcommandResource s)
 checkcommandResource _command _name _templates =
-    TF.newResource "icinga2_checkcommand" $
+    TF.newResource "icinga2_checkcommand" TF.validator $
         CheckcommandResource'
             { _arguments = TF.Nil
             , _command = _command
@@ -107,29 +103,36 @@ checkcommandResource _command _name _templates =
             , _templates = _templates
             }
 
+instance TF.IsObject (CheckcommandResource s) where
+    toObject CheckcommandResource'{..} = P.catMaybes
+        [ TF.assign "arguments" <$> TF.attribute _arguments
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "templates" <$> TF.attribute _templates
+        ]
+
+instance TF.IsValid (CheckcommandResource s) where
+    validator = P.mempty
+
 instance P.HasArguments (CheckcommandResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     arguments =
         P.lens (_arguments :: CheckcommandResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _arguments = a
-                          } :: CheckcommandResource s)
+               (\s a -> s { _arguments = a } :: CheckcommandResource s)
 
 instance P.HasCommand (CheckcommandResource s) (TF.Attr s P.Text) where
     command =
         P.lens (_command :: CheckcommandResource s -> TF.Attr s P.Text)
-               (\s a -> s { _command = a
-                          } :: CheckcommandResource s)
+               (\s a -> s { _command = a } :: CheckcommandResource s)
 
 instance P.HasName (CheckcommandResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CheckcommandResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CheckcommandResource s)
+               (\s a -> s { _name = a } :: CheckcommandResource s)
 
 instance P.HasTemplates (CheckcommandResource s) (TF.Attr s [TF.Attr s P.Text]) where
     templates =
         P.lens (_templates :: CheckcommandResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _templates = a
-                          } :: CheckcommandResource s)
+               (\s a -> s { _templates = a } :: CheckcommandResource s)
 
 -- | @icinga2_host@ Resource.
 --
@@ -157,23 +160,13 @@ data HostResource s = HostResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (HostResource s) where
-    toObject HostResource'{..} = catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "check_command" <$> TF.attribute _checkCommand
-        , TF.assign "groups" <$> TF.attribute _groups
-        , TF.assign "hostname" <$> TF.attribute _hostname
-        , TF.assign "templates" <$> TF.attribute _templates
-        , TF.assign "vars" <$> TF.attribute _vars
-        ]
-
 hostResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Resource P.Provider (HostResource s)
 hostResource _address _checkCommand _hostname =
-    TF.newResource "icinga2_host" $
+    TF.newResource "icinga2_host" TF.validator $
         HostResource'
             { _address = _address
             , _checkCommand = _checkCommand
@@ -183,41 +176,48 @@ hostResource _address _checkCommand _hostname =
             , _vars = TF.Nil
             }
 
+instance TF.IsObject (HostResource s) where
+    toObject HostResource'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "check_command" <$> TF.attribute _checkCommand
+        , TF.assign "groups" <$> TF.attribute _groups
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "templates" <$> TF.attribute _templates
+        , TF.assign "vars" <$> TF.attribute _vars
+        ]
+
+instance TF.IsValid (HostResource s) where
+    validator = P.mempty
+
 instance P.HasAddress (HostResource s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a
-                          } :: HostResource s)
+               (\s a -> s { _address = a } :: HostResource s)
 
 instance P.HasCheckCommand (HostResource s) (TF.Attr s P.Text) where
     checkCommand =
         P.lens (_checkCommand :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _checkCommand = a
-                          } :: HostResource s)
+               (\s a -> s { _checkCommand = a } :: HostResource s)
 
 instance P.HasGroups (HostResource s) (TF.Attr s [TF.Attr s P.Text]) where
     groups =
         P.lens (_groups :: HostResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _groups = a
-                          } :: HostResource s)
+               (\s a -> s { _groups = a } :: HostResource s)
 
 instance P.HasHostname (HostResource s) (TF.Attr s P.Text) where
     hostname =
         P.lens (_hostname :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a
-                          } :: HostResource s)
+               (\s a -> s { _hostname = a } :: HostResource s)
 
 instance P.HasTemplates (HostResource s) (TF.Attr s [TF.Attr s P.Text]) where
     templates =
         P.lens (_templates :: HostResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _templates = a
-                          } :: HostResource s)
+               (\s a -> s { _templates = a } :: HostResource s)
 
 instance P.HasVars (HostResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     vars =
         P.lens (_vars :: HostResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _vars = a
-                          } :: HostResource s)
+               (\s a -> s { _vars = a } :: HostResource s)
 
 -- | @icinga2_hostgroup@ Resource.
 --
@@ -234,34 +234,35 @@ data HostgroupResource s = HostgroupResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (HostgroupResource s) where
-    toObject HostgroupResource'{..} = catMaybes
-        [ TF.assign "display_name" <$> TF.attribute _displayName
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 hostgroupResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (HostgroupResource s)
 hostgroupResource _displayName _name =
-    TF.newResource "icinga2_hostgroup" $
+    TF.newResource "icinga2_hostgroup" TF.validator $
         HostgroupResource'
             { _displayName = _displayName
             , _name = _name
             }
 
+instance TF.IsObject (HostgroupResource s) where
+    toObject HostgroupResource'{..} = P.catMaybes
+        [ TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (HostgroupResource s) where
+    validator = P.mempty
+
 instance P.HasDisplayName (HostgroupResource s) (TF.Attr s P.Text) where
     displayName =
         P.lens (_displayName :: HostgroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _displayName = a
-                          } :: HostgroupResource s)
+               (\s a -> s { _displayName = a } :: HostgroupResource s)
 
 instance P.HasName (HostgroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: HostgroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: HostgroupResource s)
+               (\s a -> s { _name = a } :: HostgroupResource s)
 
 -- | @icinga2_notification@ Resource.
 --
@@ -291,23 +292,12 @@ data NotificationResource s = NotificationResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NotificationResource s) where
-    toObject NotificationResource'{..} = catMaybes
-        [ TF.assign "command" <$> TF.attribute _command
-        , TF.assign "hostname" <$> TF.attribute _hostname
-        , TF.assign "interval" <$> TF.attribute _interval
-        , TF.assign "servicename" <$> TF.attribute _servicename
-        , TF.assign "templates" <$> TF.attribute _templates
-        , TF.assign "users" <$> TF.attribute _users
-        , TF.assign "vars" <$> TF.attribute _vars
-        ]
-
 notificationResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Resource P.Provider (NotificationResource s)
 notificationResource _command _hostname =
-    TF.newResource "icinga2_notification" $
+    TF.newResource "icinga2_notification" TF.validator $
         NotificationResource'
             { _command = _command
             , _hostname = _hostname
@@ -318,47 +308,54 @@ notificationResource _command _hostname =
             , _vars = TF.Nil
             }
 
+instance TF.IsObject (NotificationResource s) where
+    toObject NotificationResource'{..} = P.catMaybes
+        [ TF.assign "command" <$> TF.attribute _command
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "servicename" <$> TF.attribute _servicename
+        , TF.assign "templates" <$> TF.attribute _templates
+        , TF.assign "users" <$> TF.attribute _users
+        , TF.assign "vars" <$> TF.attribute _vars
+        ]
+
+instance TF.IsValid (NotificationResource s) where
+    validator = P.mempty
+
 instance P.HasCommand (NotificationResource s) (TF.Attr s P.Text) where
     command =
         P.lens (_command :: NotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _command = a
-                          } :: NotificationResource s)
+               (\s a -> s { _command = a } :: NotificationResource s)
 
 instance P.HasHostname (NotificationResource s) (TF.Attr s P.Text) where
     hostname =
         P.lens (_hostname :: NotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a
-                          } :: NotificationResource s)
+               (\s a -> s { _hostname = a } :: NotificationResource s)
 
 instance P.HasInterval (NotificationResource s) (TF.Attr s P.Integer) where
     interval =
         P.lens (_interval :: NotificationResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _interval = a
-                          } :: NotificationResource s)
+               (\s a -> s { _interval = a } :: NotificationResource s)
 
 instance P.HasServicename (NotificationResource s) (TF.Attr s P.Text) where
     servicename =
         P.lens (_servicename :: NotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _servicename = a
-                          } :: NotificationResource s)
+               (\s a -> s { _servicename = a } :: NotificationResource s)
 
 instance P.HasTemplates (NotificationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     templates =
         P.lens (_templates :: NotificationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _templates = a
-                          } :: NotificationResource s)
+               (\s a -> s { _templates = a } :: NotificationResource s)
 
 instance P.HasUsers (NotificationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     users =
         P.lens (_users :: NotificationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _users = a
-                          } :: NotificationResource s)
+               (\s a -> s { _users = a } :: NotificationResource s)
 
 instance P.HasVars (NotificationResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     vars =
         P.lens (_vars :: NotificationResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _vars = a
-                          } :: NotificationResource s)
+               (\s a -> s { _vars = a } :: NotificationResource s)
 
 -- | @icinga2_service@ Resource.
 --
@@ -379,43 +376,43 @@ data ServiceResource s = ServiceResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceResource s) where
-    toObject ServiceResource'{..} = catMaybes
-        [ TF.assign "check_command" <$> TF.attribute _checkCommand
-        , TF.assign "hostname" <$> TF.attribute _hostname
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 serviceResource
     :: TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ServiceResource s)
 serviceResource _checkCommand _hostname _name =
-    TF.newResource "icinga2_service" $
+    TF.newResource "icinga2_service" TF.validator $
         ServiceResource'
             { _checkCommand = _checkCommand
             , _hostname = _hostname
             , _name = _name
             }
 
+instance TF.IsObject (ServiceResource s) where
+    toObject ServiceResource'{..} = P.catMaybes
+        [ TF.assign "check_command" <$> TF.attribute _checkCommand
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ServiceResource s) where
+    validator = P.mempty
+
 instance P.HasCheckCommand (ServiceResource s) (TF.Attr s P.Text) where
     checkCommand =
         P.lens (_checkCommand :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _checkCommand = a
-                          } :: ServiceResource s)
+               (\s a -> s { _checkCommand = a } :: ServiceResource s)
 
 instance P.HasHostname (ServiceResource s) (TF.Attr s P.Text) where
     hostname =
         P.lens (_hostname :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a
-                          } :: ServiceResource s)
+               (\s a -> s { _hostname = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ServiceResource s)
+               (\s a -> s { _name = a } :: ServiceResource s)
 
 -- | @icinga2_user@ Resource.
 --
@@ -431,30 +428,31 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserResource s) where
-    toObject UserResource'{..} = catMaybes
-        [ TF.assign "email" <$> TF.attribute _email
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (UserResource s)
 userResource _name =
-    TF.newResource "icinga2_user" $
+    TF.newResource "icinga2_user" TF.validator $
         UserResource'
             { _email = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (UserResource s) where
+    toObject UserResource'{..} = P.catMaybes
+        [ TF.assign "email" <$> TF.attribute _email
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (UserResource s) where
+    validator = P.mempty
+
 instance P.HasEmail (UserResource s) (TF.Attr s P.Text) where
     email =
         P.lens (_email :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a
-                          } :: UserResource s)
+               (\s a -> s { _email = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: UserResource s)
+               (\s a -> s { _name = a } :: UserResource s)
