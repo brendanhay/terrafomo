@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -28,7 +29,6 @@ module Terrafomo.NewRelic.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -36,7 +36,10 @@ import Terrafomo.NewRelic.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -48,6 +51,7 @@ import qualified Terrafomo.NewRelic.Lens     as P
 import qualified Terrafomo.NewRelic.Provider as P
 import qualified Terrafomo.NewRelic.Types    as P
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @newrelic_application@ DataSource.
 --
@@ -59,25 +63,27 @@ data ApplicationData s = ApplicationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ApplicationData s) where
-    toObject ApplicationData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 applicationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ApplicationData s)
 applicationData _name =
-    TF.newDataSource "newrelic_application" $
+    TF.newDataSource "newrelic_application" TF.validator $
         ApplicationData'
             { _name = _name
             }
 
+instance TF.IsObject (ApplicationData s) where
+    toObject ApplicationData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ApplicationData s) where
+    validator = P.mempty
+
 instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ApplicationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ApplicationData s)
+               (\s a -> s { _name = a } :: ApplicationData s)
 
 instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
     computedHostIds x = TF.compute (TF.refKey x) "_computedHostIds"
@@ -95,22 +101,24 @@ data KeyTransactionData s = KeyTransactionData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KeyTransactionData s) where
-    toObject KeyTransactionData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 keyTransactionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (KeyTransactionData s)
 keyTransactionData _name =
-    TF.newDataSource "newrelic_key_transaction" $
+    TF.newDataSource "newrelic_key_transaction" TF.validator $
         KeyTransactionData'
             { _name = _name
             }
 
+instance TF.IsObject (KeyTransactionData s) where
+    toObject KeyTransactionData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (KeyTransactionData s) where
+    validator = P.mempty
+
 instance P.HasName (KeyTransactionData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KeyTransactionData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: KeyTransactionData s)
+               (\s a -> s { _name = a } :: KeyTransactionData s)

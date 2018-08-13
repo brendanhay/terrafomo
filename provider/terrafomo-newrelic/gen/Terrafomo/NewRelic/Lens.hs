@@ -15,8 +15,7 @@ module Terrafomo.NewRelic.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasWhere (..)
-    , HasValueFunction (..)
+      HasValueFunction (..)
     , HasValue (..)
     , HasNotes (..)
     , HasType' (..)
@@ -34,6 +33,7 @@ module Terrafomo.NewRelic.Lens
     , HasApiUrl (..)
     , HasPriority (..)
     , HasProcessWhere (..)
+    , HasWhere' (..)
     , HasEntities (..)
     , HasCritical (..)
     , HasHeight (..)
@@ -73,14 +73,8 @@ module Terrafomo.NewRelic.Lens
 
 import GHC.Base ((.))
 
-import qualified Lens.Micro as P
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
-
-class HasWhere a b | a -> b where
-    where :: P.Lens' a b
-
-instance HasWhere a b => HasWhere (TF.Schema l p a) b where
-    where = TF.configuration . where
 
 class HasValueFunction a b | a -> b where
     valueFunction :: P.Lens' a b
@@ -189,6 +183,12 @@ class HasProcessWhere a b | a -> b where
 
 instance HasProcessWhere a b => HasProcessWhere (TF.Schema l p a) b where
     processWhere = TF.configuration . processWhere
+
+class HasWhere' a b | a -> b where
+    where' :: P.Lens' a b
+
+instance HasWhere' a b => HasWhere' (TF.Schema l p a) b where
+    where' = TF.configuration . where'
 
 class HasEntities a b | a -> b where
     entities :: P.Lens' a b

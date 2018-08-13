@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.NewRelic.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.NewRelic.Settings
 
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.NewRelic.Lens  as P
 import qualified Terrafomo.NewRelic.Types as P
 import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.Validator      as TF
 
 -- | The @NewRelic@ Terraform provider configuration.
 --
@@ -59,24 +63,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "api_key" _apiKey
-                  , TF.assign "api_url" <$> _apiUrl
-                  , TF.assign "infra_api_url" <$> _infraApiUrl
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @api_key@ - 'P.apiKey'
     -> Provider
@@ -87,20 +73,38 @@ newProvider _apiKey =
         , _infraApiUrl = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "api_key" _apiKey
+                  , TF.assign "api_url" <$> _apiUrl
+                  , TF.assign "infra_api_url" <$> _infraApiUrl
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasApiKey (Provider) (P.Text) where
     apiKey =
         P.lens (_apiKey :: Provider -> P.Text)
-               (\s a -> s { _apiKey = a
-                          } :: Provider)
+               (\s a -> s { _apiKey = a } :: Provider)
 
 instance P.HasApiUrl (Provider) (P.Maybe P.Text) where
     apiUrl =
         P.lens (_apiUrl :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _apiUrl = a
-                          } :: Provider)
+               (\s a -> s { _apiUrl = a } :: Provider)
 
 instance P.HasInfraApiUrl (Provider) (P.Maybe P.Text) where
     infraApiUrl =
         P.lens (_infraApiUrl :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _infraApiUrl = a
-                          } :: Provider)
+               (\s a -> s { _infraApiUrl = a } :: Provider)
