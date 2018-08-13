@@ -81,7 +81,7 @@ data DowntimeResource s = DowntimeResource'
     , _monitorId  :: TF.Attr s P.Integer
     -- ^ @monitor_id@ - (Optional)
     --
-    , _recurrence :: TF.Attr s [Recurrence s]
+    , _recurrence :: TF.Attr s (Recurrence s)
     -- ^ @recurrence@ - (Optional)
     --
     , _scope      :: TF.Attr s [TF.Attr s P.Text]
@@ -150,9 +150,9 @@ instance P.HasMonitorId (DowntimeResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _monitorId = a
                           } :: DowntimeResource s)
 
-instance P.HasRecurrence (DowntimeResource s) (TF.Attr s [Recurrence s]) where
+instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (Recurrence s)) where
     recurrence =
-        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s [Recurrence s])
+        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (Recurrence s))
                (\s a -> s { _recurrence = a
                           } :: DowntimeResource s)
 
@@ -463,10 +463,10 @@ instance P.HasType' (MonitorResource s) (TF.Attr s P.Text) where
                           } :: MonitorResource s)
 
 instance s ~ s' => P.HasComputedEvaluationDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Integer) where
-    computedEvaluationDelay x = TF.compute (TF.refKey x) "evaluation_delay"
+    computedEvaluationDelay x = TF.compute (TF.refKey x) "_computedEvaluationDelay"
 
 instance s ~ s' => P.HasComputedNewHostDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Integer) where
-    computedNewHostDelay x = TF.compute (TF.refKey x) "new_host_delay"
+    computedNewHostDelay x = TF.compute (TF.refKey x) "_computedNewHostDelay"
 
 -- | @datadog_timeboard@ Resource.
 --
@@ -636,4 +636,4 @@ instance P.HasRole (UserResource s) (TF.Attr s P.Text) where
                           } :: UserResource s)
 
 instance s ~ s' => P.HasComputedVerified (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
-    computedVerified x = TF.compute (TF.refKey x) "verified"
+    computedVerified x = TF.compute (TF.refKey x) "_computedVerified"
