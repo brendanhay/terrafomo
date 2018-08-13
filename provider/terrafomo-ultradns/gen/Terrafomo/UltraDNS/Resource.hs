@@ -177,7 +177,7 @@ instance P.HasZone (DirpoolResource s) (TF.Attr s P.Text) where
                           } :: DirpoolResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (DirpoolResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 -- | @ultradns_probe_http@ Resource.
 --
@@ -279,7 +279,7 @@ instance P.HasZone (ProbeHttpResource s) (TF.Attr s P.Text) where
                           } :: ProbeHttpResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProbeHttpResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ultradns_probe_ping@ Resource.
 --
@@ -381,7 +381,7 @@ instance P.HasZone (ProbePingResource s) (TF.Attr s P.Text) where
                           } :: ProbePingResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProbePingResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ultradns_rdpool@ Resource.
 --
@@ -471,7 +471,7 @@ instance P.HasZone (RdpoolResource s) (TF.Attr s P.Text) where
                           } :: RdpoolResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RdpoolResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 -- | @ultradns_record@ Resource.
 --
@@ -551,7 +551,7 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
                           } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 -- | @ultradns_tcpool@ Resource.
 --
@@ -686,4 +686,4 @@ instance P.HasZone (TcpoolResource s) (TF.Attr s P.Text) where
                           } :: TcpoolResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (TcpoolResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
