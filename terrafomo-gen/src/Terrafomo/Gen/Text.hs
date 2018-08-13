@@ -46,4 +46,5 @@ unreserved x
         , "in"
         , "do"
         , "pattern"
+        , "where"
         ]
