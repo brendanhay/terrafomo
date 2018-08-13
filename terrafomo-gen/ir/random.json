@@ -1,9 +1,12 @@
 {
     "settings": [],
-    "arguments": [],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "idResource",
+                "name": "IdResource'"
+            },
             "arguments": [
                 {
                     "default": "_byteLength",
@@ -12,13 +15,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"byte_length\" <$> TF.attribute",
-                    "name": "byte_length",
+                    "name": "_byteLength",
                     "method": "byteLength",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasByteLength",
+                    "validate": false,
                     "optional": false,
-                    "label": "_byteLength"
+                    "original": "byte_length"
                 },
                 {
                     "default": "TF.Nil",
@@ -27,13 +31,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"keepers\" <$> TF.attribute",
-                    "name": "keepers",
+                    "name": "_keepers",
                     "method": "keepers",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasKeepers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keepers"
+                    "original": "keepers"
                 },
                 {
                     "default": "TF.Nil",
@@ -42,17 +47,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"prefix\" <$> TF.attribute",
-                    "name": "prefix",
+                    "name": "_prefix",
                     "method": "prefix",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrefix",
+                    "validate": false,
                     "optional": true,
-                    "label": "_prefix"
+                    "original": "prefix"
                 }
             ],
-            "schema": "Resource",
             "name": "IdResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -61,13 +67,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"b64\" <$> TF.attribute",
-                    "name": "b64",
+                    "name": "_computedB64",
                     "method": "computedB64",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedB64",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedB64"
+                    "original": "b64"
                 },
                 {
                     "default": "TF.Nil",
@@ -76,13 +83,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"b64_std\" <$> TF.attribute",
-                    "name": "b64_std",
+                    "name": "_computedB64Std",
                     "method": "computedB64Std",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedB64Std",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedB64Std"
+                    "original": "b64_std"
                 },
                 {
                     "default": "TF.Nil",
@@ -91,13 +99,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"b64_url\" <$> TF.attribute",
-                    "name": "b64_url",
+                    "name": "_computedB64Url",
                     "method": "computedB64Url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedB64Url",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedB64Url"
+                    "original": "b64_url"
                 },
                 {
                     "default": "TF.Nil",
@@ -106,13 +115,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"dec\" <$> TF.attribute",
-                    "name": "dec",
+                    "name": "_computedDec",
                     "method": "computedDec",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDec",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDec"
+                    "original": "dec"
                 },
                 {
                     "default": "TF.Nil",
@@ -121,13 +131,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hex\" <$> TF.attribute",
-                    "name": "hex",
+                    "name": "_computedHex",
                     "method": "computedHex",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHex",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHex"
+                    "original": "hex"
                 }
             ],
             "parameters": [
@@ -138,19 +149,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"byte_length\" <$> TF.attribute",
-                    "name": "byte_length",
+                    "name": "_byteLength",
                     "method": "byteLength",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasByteLength",
+                    "validate": false,
                     "optional": false,
-                    "label": "_byteLength"
+                    "original": "byte_length"
                 }
             ],
+            "conflicts": [],
             "type": "IdResource s",
             "original": "random_id"
         },
         {
+            "con": {
+                "smart": "integerResource",
+                "name": "IntegerResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -159,13 +176,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"keepers\" <$> TF.attribute",
-                    "name": "keepers",
+                    "name": "_keepers",
                     "method": "keepers",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasKeepers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keepers"
+                    "original": "keepers"
                 },
                 {
                     "default": "_max",
@@ -174,13 +192,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"max\" <$> TF.attribute",
-                    "name": "max",
+                    "name": "_max",
                     "method": "max",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMax",
+                    "validate": false,
                     "optional": false,
-                    "label": "_max"
+                    "original": "max"
                 },
                 {
                     "default": "_min",
@@ -189,13 +208,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"min\" <$> TF.attribute",
-                    "name": "min",
+                    "name": "_min",
                     "method": "min",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMin",
+                    "validate": false,
                     "optional": false,
-                    "label": "_min"
+                    "original": "min"
                 },
                 {
                     "default": "TF.Nil",
@@ -204,17 +224,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"seed\" <$> TF.attribute",
-                    "name": "seed",
+                    "name": "_seed",
                     "method": "seed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSeed",
+                    "validate": false,
                     "optional": true,
-                    "label": "_seed"
+                    "original": "seed"
                 }
             ],
-            "schema": "Resource",
             "name": "IntegerResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -223,13 +244,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"result\" <$> TF.attribute",
-                    "name": "result",
+                    "name": "_computedResult",
                     "method": "computedResult",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedResult",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedResult"
+                    "original": "result"
                 }
             ],
             "parameters": [
@@ -240,13 +262,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"max\" <$> TF.attribute",
-                    "name": "max",
+                    "name": "_max",
                     "method": "max",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMax",
+                    "validate": false,
                     "optional": false,
-                    "label": "_max"
+                    "original": "max"
                 },
                 {
                     "default": "_min",
@@ -255,19 +278,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"min\" <$> TF.attribute",
-                    "name": "min",
+                    "name": "_min",
                     "method": "min",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMin",
+                    "validate": false,
                     "optional": false,
-                    "label": "_min"
+                    "original": "min"
                 }
             ],
+            "conflicts": [],
             "type": "IntegerResource s",
             "original": "random_integer"
         },
         {
+            "con": {
+                "smart": "petResource",
+                "name": "PetResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -276,13 +305,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"keepers\" <$> TF.attribute",
-                    "name": "keepers",
+                    "name": "_keepers",
                     "method": "keepers",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasKeepers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keepers"
+                    "original": "keepers"
                 },
                 {
                     "default": "TF.value 2",
@@ -291,13 +321,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"length\" <$> TF.attribute",
-                    "name": "length",
+                    "name": "_length",
                     "method": "length",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasLength",
+                    "validate": false,
                     "optional": true,
-                    "label": "_length"
+                    "original": "length"
                 },
                 {
                     "default": "TF.Nil",
@@ -306,13 +337,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"prefix\" <$> TF.attribute",
-                    "name": "prefix",
+                    "name": "_prefix",
                     "method": "prefix",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrefix",
+                    "validate": false,
                     "optional": true,
-                    "label": "_prefix"
+                    "original": "prefix"
                 },
                 {
                     "default": "TF.value \"-\"",
@@ -321,23 +353,29 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"separator\" <$> TF.attribute",
-                    "name": "separator",
+                    "name": "_separator",
                     "method": "separator",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSeparator",
+                    "validate": false,
                     "optional": true,
-                    "label": "_separator"
+                    "original": "separator"
                 }
             ],
-            "schema": "Resource",
             "name": "PetResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
+            "conflicts": [],
             "type": "PetResource s",
             "original": "random_pet"
         },
         {
+            "con": {
+                "smart": "shuffleResource",
+                "name": "ShuffleResource'"
+            },
             "arguments": [
                 {
                     "default": "_input",
@@ -346,13 +384,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"input\" <$> TF.attribute",
-                    "name": "input",
+                    "name": "_input",
                     "method": "input",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasInput",
+                    "validate": false,
                     "optional": false,
-                    "label": "_input"
+                    "original": "input"
                 },
                 {
                     "default": "TF.Nil",
@@ -361,13 +400,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"keepers\" <$> TF.attribute",
-                    "name": "keepers",
+                    "name": "_keepers",
                     "method": "keepers",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasKeepers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keepers"
+                    "original": "keepers"
                 },
                 {
                     "default": "TF.Nil",
@@ -376,13 +416,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"result_count\" <$> TF.attribute",
-                    "name": "result_count",
+                    "name": "_resultCount",
                     "method": "resultCount",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasResultCount",
+                    "validate": false,
                     "optional": true,
-                    "label": "_resultCount"
+                    "original": "result_count"
                 },
                 {
                     "default": "TF.Nil",
@@ -391,17 +432,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"seed\" <$> TF.attribute",
-                    "name": "seed",
+                    "name": "_seed",
                     "method": "seed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSeed",
+                    "validate": false,
                     "optional": true,
-                    "label": "_seed"
+                    "original": "seed"
                 }
             ],
-            "schema": "Resource",
             "name": "ShuffleResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -410,13 +452,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"result\" <$> TF.attribute",
-                    "name": "result",
+                    "name": "_computedResult",
                     "method": "computedResult",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedResult",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedResult"
+                    "original": "result"
                 }
             ],
             "parameters": [
@@ -427,19 +470,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"input\" <$> TF.attribute",
-                    "name": "input",
+                    "name": "_input",
                     "method": "input",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasInput",
+                    "validate": false,
                     "optional": false,
-                    "label": "_input"
+                    "original": "input"
                 }
             ],
+            "conflicts": [],
             "type": "ShuffleResource s",
             "original": "random_shuffle"
         },
         {
+            "con": {
+                "smart": "stringResource",
+                "name": "StringResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -448,13 +497,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"keepers\" <$> TF.attribute",
-                    "name": "keepers",
+                    "name": "_keepers",
                     "method": "keepers",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasKeepers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keepers"
+                    "original": "keepers"
                 },
                 {
                     "default": "_length",
@@ -463,13 +513,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"length\" <$> TF.attribute",
-                    "name": "length",
+                    "name": "_length",
                     "method": "length",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasLength",
+                    "validate": false,
                     "optional": false,
-                    "label": "_length"
+                    "original": "length"
                 },
                 {
                     "default": "TF.value P.True",
@@ -478,13 +529,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"lower\" <$> TF.attribute",
-                    "name": "lower",
+                    "name": "_lower",
                     "method": "lower",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLower",
+                    "validate": false,
                     "optional": true,
-                    "label": "_lower"
+                    "original": "lower"
                 },
                 {
                     "default": "TF.value 0",
@@ -493,13 +545,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"min_lower\" <$> TF.attribute",
-                    "name": "min_lower",
+                    "name": "_minLower",
                     "method": "minLower",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMinLower",
+                    "validate": false,
                     "optional": true,
-                    "label": "_minLower"
+                    "original": "min_lower"
                 },
                 {
                     "default": "TF.value 0",
@@ -508,13 +561,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"min_numeric\" <$> TF.attribute",
-                    "name": "min_numeric",
+                    "name": "_minNumeric",
                     "method": "minNumeric",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMinNumeric",
+                    "validate": false,
                     "optional": true,
-                    "label": "_minNumeric"
+                    "original": "min_numeric"
                 },
                 {
                     "default": "TF.value 0",
@@ -523,13 +577,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"min_special\" <$> TF.attribute",
-                    "name": "min_special",
+                    "name": "_minSpecial",
                     "method": "minSpecial",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMinSpecial",
+                    "validate": false,
                     "optional": true,
-                    "label": "_minSpecial"
+                    "original": "min_special"
                 },
                 {
                     "default": "TF.value 0",
@@ -538,13 +593,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"min_upper\" <$> TF.attribute",
-                    "name": "min_upper",
+                    "name": "_minUpper",
                     "method": "minUpper",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMinUpper",
+                    "validate": false,
                     "optional": true,
-                    "label": "_minUpper"
+                    "original": "min_upper"
                 },
                 {
                     "default": "TF.value P.True",
@@ -553,13 +609,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"number\" <$> TF.attribute",
-                    "name": "number",
+                    "name": "_number",
                     "method": "number",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasNumber",
+                    "validate": false,
                     "optional": true,
-                    "label": "_number"
+                    "original": "number"
                 },
                 {
                     "default": "TF.Nil",
@@ -568,13 +625,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"override_special\" <$> TF.attribute",
-                    "name": "override_special",
+                    "name": "_overrideSpecial",
                     "method": "overrideSpecial",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOverrideSpecial",
+                    "validate": false,
                     "optional": true,
-                    "label": "_overrideSpecial"
+                    "original": "override_special"
                 },
                 {
                     "default": "TF.value P.True",
@@ -583,13 +641,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"special\" <$> TF.attribute",
-                    "name": "special",
+                    "name": "_special",
                     "method": "special",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSpecial",
+                    "validate": false,
                     "optional": true,
-                    "label": "_special"
+                    "original": "special"
                 },
                 {
                     "default": "TF.value P.True",
@@ -598,17 +657,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"upper\" <$> TF.attribute",
-                    "name": "upper",
+                    "name": "_upper",
                     "method": "upper",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasUpper",
+                    "validate": false,
                     "optional": true,
-                    "label": "_upper"
+                    "original": "upper"
                 }
             ],
-            "schema": "Resource",
             "name": "StringResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -617,13 +677,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"result\" <$> TF.attribute",
-                    "name": "result",
+                    "name": "_computedResult",
                     "method": "computedResult",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedResult",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedResult"
+                    "original": "result"
                 }
             ],
             "parameters": [
@@ -634,19 +695,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"length\" <$> TF.attribute",
-                    "name": "length",
+                    "name": "_length",
                     "method": "length",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasLength",
+                    "validate": false,
                     "optional": false,
-                    "label": "_length"
+                    "original": "length"
                 }
             ],
+            "conflicts": [],
             "type": "StringResource s",
             "original": "random_string"
         },
         {
+            "con": {
+                "smart": "uuidResource",
+                "name": "UuidResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -655,17 +722,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"keepers\" <$> TF.attribute",
-                    "name": "keepers",
+                    "name": "_keepers",
                     "method": "keepers",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasKeepers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_keepers"
+                    "original": "keepers"
                 }
             ],
-            "schema": "Resource",
             "name": "UuidResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -674,20 +742,36 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"result\" <$> TF.attribute",
-                    "name": "result",
+                    "name": "_computedResult",
                     "method": "computedResult",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedResult",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedResult"
+                    "original": "result"
                 }
             ],
             "parameters": [],
+            "conflicts": [],
             "type": "UuidResource s",
             "original": "random_uuid"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -697,8 +781,6 @@
         "microlens"
     ],
     "name": "Random",
-    "parameters": [],
     "package": "terrafomo-builtins",
-    "type": "Provider",
     "original": "random"
 }
