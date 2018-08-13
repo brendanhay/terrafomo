@@ -62,7 +62,7 @@ newProvider =
 instance P.Hashable Provider
 
 instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
+    toSection x@Provider' =
         let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
