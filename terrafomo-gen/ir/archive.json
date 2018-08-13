@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newSource",
+                "name": "Source'"
+            },
             "arguments": [
                 {
                     "default": "_content",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": false,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "_filename",
@@ -24,16 +29,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "filename",
+                    "name": "_filename",
                     "method": "filename",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filename"
+                    "original": "filename"
                 }
             ],
             "name": "Source",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -43,13 +50,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": false,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "_filename",
@@ -58,23 +66,27 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "filename",
+                    "name": "_filename",
                     "method": "filename",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filename"
+                    "original": "filename"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Source s",
             "original": "source"
         }
     ],
-    "arguments": [],
     "dataSources": [
         {
+            "con": {
+                "smart": "fileData",
+                "name": "FileData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -83,29 +95,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"excludes\" <$> TF.attribute",
-                    "name": "excludes",
+                    "name": "_excludes",
                     "method": "excludes",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContent",
-                            "label": "_sourceContent"
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContentFilename",
-                            "label": "_sourceContentFilename"
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasExcludes",
+                    "validate": false,
                     "optional": true,
-                    "label": "_excludes"
+                    "original": "excludes"
                 },
                 {
                     "default": "_outputPath",
@@ -114,13 +127,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"output_path\" <$> TF.attribute",
-                    "name": "output_path",
+                    "name": "_outputPath",
                     "method": "outputPath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOutputPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_outputPath"
+                    "original": "output_path"
                 },
                 {
                     "default": "TF.Nil",
@@ -129,29 +143,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_content\" <$> TF.attribute",
-                    "name": "source_content",
+                    "name": "_sourceContent",
                     "method": "sourceContent",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "excludes",
-                            "label": "_excludes"
+                            "name": "_excludes",
+                            "method": "excludes"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceDir",
-                            "label": "_sourceDir"
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceContent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceContent"
+                    "original": "source_content"
                 },
                 {
                     "default": "TF.Nil",
@@ -160,29 +175,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_content_filename\" <$> TF.attribute",
-                    "name": "source_content_filename",
+                    "name": "_sourceContentFilename",
                     "method": "sourceContentFilename",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "excludes",
-                            "label": "_excludes"
+                            "name": "_excludes",
+                            "method": "excludes"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceDir",
-                            "label": "_sourceDir"
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceContentFilename",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceContentFilename"
+                    "original": "source_content_filename"
                 },
                 {
                     "default": "TF.Nil",
@@ -191,29 +207,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
-                    "name": "source_dir",
+                    "name": "_sourceDir",
                     "method": "sourceDir",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContent",
-                            "label": "_sourceContent"
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContentFilename",
-                            "label": "_sourceContentFilename"
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceDir",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceDir"
+                    "original": "source_dir"
                 },
                 {
                     "default": "TF.Nil",
@@ -222,34 +239,35 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_file\" <$> TF.attribute",
-                    "name": "source_file",
+                    "name": "_sourceFile",
                     "method": "sourceFile",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContent",
-                            "label": "_sourceContent"
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "excludes",
-                            "label": "_excludes"
+                            "name": "_excludes",
+                            "method": "excludes"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceDir",
-                            "label": "_sourceDir"
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContentFilename",
-                            "label": "_sourceContentFilename"
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceFile",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceFile"
+                    "original": "source_file"
                 },
                 {
                     "default": "_type'",
@@ -258,17 +276,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "DataSource",
             "name": "FileData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -279,13 +298,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_base64sha256\" <$> TF.attribute",
-                    "name": "output_base64sha256",
+                    "name": "_computedOutputBase64sha256",
                     "method": "computedOutputBase64sha256",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOutputBase64sha256",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputBase64sha256"
+                    "original": "output_base64sha256"
                 },
                 {
                     "default": "TF.Nil",
@@ -296,13 +316,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_md5\" <$> TF.attribute",
-                    "name": "output_md5",
+                    "name": "_computedOutputMd5",
                     "method": "computedOutputMd5",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOutputMd5",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputMd5"
+                    "original": "output_md5"
                 },
                 {
                     "default": "TF.Nil",
@@ -313,13 +334,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_sha\" <$> TF.attribute",
-                    "name": "output_sha",
+                    "name": "_computedOutputSha",
                     "method": "computedOutputSha",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOutputSha",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputSha"
+                    "original": "output_sha"
                 },
                 {
                     "default": "TF.Nil",
@@ -328,13 +350,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_size\" <$> TF.attribute",
-                    "name": "output_size",
+                    "name": "_computedOutputSize",
                     "method": "computedOutputSize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedOutputSize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputSize"
+                    "original": "output_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -343,7 +366,7 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_computedSource",
                     "method": "computedSource",
                     "conflicts": [
                         "_sourceFile",
@@ -353,8 +376,9 @@
                     ],
                     "type": "TF.Attr s [TF.Attr s (Source s)]",
                     "class": "HasComputedSource",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedSource"
+                    "original": "source"
                 }
             ],
             "parameters": [
@@ -365,13 +389,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"output_path\" <$> TF.attribute",
-                    "name": "output_path",
+                    "name": "_outputPath",
                     "method": "outputPath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOutputPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_outputPath"
+                    "original": "output_path"
                 },
                 {
                     "default": "_type'",
@@ -380,13 +405,181 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
+                }
+            ],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"excludes\" <$> TF.attribute",
+                    "name": "_excludes",
+                    "method": "excludes",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasExcludes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "excludes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_content\" <$> TF.attribute",
+                    "name": "_sourceContent",
+                    "method": "sourceContent",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_excludes",
+                            "method": "excludes"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceContent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_content"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_content_filename\" <$> TF.attribute",
+                    "name": "_sourceContentFilename",
+                    "method": "sourceContentFilename",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_excludes",
+                            "method": "excludes"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceContentFilename",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_content_filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
+                    "name": "_sourceDir",
+                    "method": "sourceDir",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceDir",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_dir"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_file\" <$> TF.attribute",
+                    "name": "_sourceFile",
+                    "method": "sourceFile",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_excludes",
+                            "method": "excludes"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceFile",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_file"
                 }
             ],
             "type": "FileData s",
@@ -395,6 +588,10 @@
     ],
     "resources": [
         {
+            "con": {
+                "smart": "fileResource",
+                "name": "FileResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -403,29 +600,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"excludes\" <$> TF.attribute",
-                    "name": "excludes",
+                    "name": "_excludes",
                     "method": "excludes",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContent",
-                            "label": "_sourceContent"
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContentFilename",
-                            "label": "_sourceContentFilename"
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasExcludes",
+                    "validate": false,
                     "optional": true,
-                    "label": "_excludes"
+                    "original": "excludes"
                 },
                 {
                     "default": "_outputPath",
@@ -434,13 +632,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_path\" <$> TF.attribute",
-                    "name": "output_path",
+                    "name": "_outputPath",
                     "method": "outputPath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOutputPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_outputPath"
+                    "original": "output_path"
                 },
                 {
                     "default": "TF.Nil",
@@ -449,29 +648,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_content\" <$> TF.attribute",
-                    "name": "source_content",
+                    "name": "_sourceContent",
                     "method": "sourceContent",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "excludes",
-                            "label": "_excludes"
+                            "name": "_excludes",
+                            "method": "excludes"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceDir",
-                            "label": "_sourceDir"
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceContent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceContent"
+                    "original": "source_content"
                 },
                 {
                     "default": "TF.Nil",
@@ -480,29 +680,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_content_filename\" <$> TF.attribute",
-                    "name": "source_content_filename",
+                    "name": "_sourceContentFilename",
                     "method": "sourceContentFilename",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "excludes",
-                            "label": "_excludes"
+                            "name": "_excludes",
+                            "method": "excludes"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceDir",
-                            "label": "_sourceDir"
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceContentFilename",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceContentFilename"
+                    "original": "source_content_filename"
                 },
                 {
                     "default": "TF.Nil",
@@ -511,29 +712,30 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
-                    "name": "source_dir",
+                    "name": "_sourceDir",
                     "method": "sourceDir",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceFile",
-                            "label": "_sourceFile"
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContent",
-                            "label": "_sourceContent"
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContentFilename",
-                            "label": "_sourceContentFilename"
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceDir",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceDir"
+                    "original": "source_dir"
                 },
                 {
                     "default": "TF.Nil",
@@ -542,34 +744,35 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source_file\" <$> TF.attribute",
-                    "name": "source_file",
+                    "name": "_sourceFile",
                     "method": "sourceFile",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContent",
-                            "label": "_sourceContent"
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "excludes",
-                            "label": "_excludes"
+                            "name": "_excludes",
+                            "method": "excludes"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceDir",
-                            "label": "_sourceDir"
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "sourceContentFilename",
-                            "label": "_sourceContentFilename"
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSourceFile",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sourceFile"
+                    "original": "source_file"
                 },
                 {
                     "default": "_type'",
@@ -578,17 +781,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "FileResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -599,13 +803,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_base64sha256\" <$> TF.attribute",
-                    "name": "output_base64sha256",
+                    "name": "_computedOutputBase64sha256",
                     "method": "computedOutputBase64sha256",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOutputBase64sha256",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputBase64sha256"
+                    "original": "output_base64sha256"
                 },
                 {
                     "default": "TF.Nil",
@@ -616,13 +821,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_md5\" <$> TF.attribute",
-                    "name": "output_md5",
+                    "name": "_computedOutputMd5",
                     "method": "computedOutputMd5",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOutputMd5",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputMd5"
+                    "original": "output_md5"
                 },
                 {
                     "default": "TF.Nil",
@@ -633,13 +839,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_sha\" <$> TF.attribute",
-                    "name": "output_sha",
+                    "name": "_computedOutputSha",
                     "method": "computedOutputSha",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOutputSha",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputSha"
+                    "original": "output_sha"
                 },
                 {
                     "default": "TF.Nil",
@@ -648,13 +855,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_size\" <$> TF.attribute",
-                    "name": "output_size",
+                    "name": "_computedOutputSize",
                     "method": "computedOutputSize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedOutputSize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOutputSize"
+                    "original": "output_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -663,7 +871,7 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_computedSource",
                     "method": "computedSource",
                     "conflicts": [
                         "_sourceFile",
@@ -673,8 +881,9 @@
                     ],
                     "type": "TF.Attr s [TF.Attr s (Source s)]",
                     "class": "HasComputedSource",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedSource"
+                    "original": "source"
                 }
             ],
             "parameters": [
@@ -685,13 +894,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"output_path\" <$> TF.attribute",
-                    "name": "output_path",
+                    "name": "_outputPath",
                     "method": "outputPath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOutputPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_outputPath"
+                    "original": "output_path"
                 },
                 {
                     "default": "_type'",
@@ -700,19 +910,201 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
+                }
+            ],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"excludes\" <$> TF.attribute",
+                    "name": "_excludes",
+                    "method": "excludes",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
+                        }
+                    ],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasExcludes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "excludes"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_content\" <$> TF.attribute",
+                    "name": "_sourceContent",
+                    "method": "sourceContent",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_excludes",
+                            "method": "excludes"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceContent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_content"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_content_filename\" <$> TF.attribute",
+                    "name": "_sourceContentFilename",
+                    "method": "sourceContentFilename",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_excludes",
+                            "method": "excludes"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceContentFilename",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_content_filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_dir\" <$> TF.attribute",
+                    "name": "_sourceDir",
+                    "method": "sourceDir",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceFile",
+                            "method": "sourceFile"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceDir",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_dir"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_file\" <$> TF.attribute",
+                    "name": "_sourceFile",
+                    "method": "sourceFile",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContent",
+                            "method": "sourceContent"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_excludes",
+                            "method": "excludes"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceDir",
+                            "method": "sourceDir"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_sourceContentFilename",
+                            "method": "sourceContentFilename"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceFile",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_file"
                 }
             ],
             "type": "FileResource s",
             "original": "archive_file"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -722,8 +1114,6 @@
         "microlens"
     ],
     "name": "Archive",
-    "parameters": [],
     "package": "terrafomo-builtins",
-    "type": "Provider",
     "original": "archive"
 }
