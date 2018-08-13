@@ -138,7 +138,7 @@ instance P.HasParent (GroupResource s) (TF.Attr s P.Text) where
                           } :: GroupResource s)
 
 instance s ~ s' => P.HasComputedParentGroupId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedParentGroupId x = TF.compute (TF.refKey x) "parent_group_id"
+    computedParentGroupId x = TF.compute (TF.refKey x) "_computedParentGroupId"
 
 -- | @clc_load_balancer@ Resource.
 --
@@ -206,7 +206,7 @@ instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
                           } :: LoadBalancerResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 -- | @clc_load_balancer_pool@ Resource.
 --
@@ -350,7 +350,7 @@ instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s [TF.Attr s (P.H
                           } :: PublicIpResource s)
 
 instance s ~ s' => P.HasComputedInternalIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedInternalIpAddress x = TF.compute (TF.refKey x) "internal_ip_address"
+    computedInternalIpAddress x = TF.compute (TF.refKey x) "_computedInternalIpAddress"
 
 -- | @clc_server@ Resource.
 --
@@ -552,22 +552,22 @@ instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
                           } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
+    computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
 
 instance s ~ s' => P.HasComputedModifiedDate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedModifiedDate x = TF.compute (TF.refKey x) "modified_date"
+    computedModifiedDate x = TF.compute (TF.refKey x) "_computedModifiedDate"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 instance s ~ s' => P.HasComputedPowerState (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPowerState x = TF.compute (TF.refKey x) "power_state"
+    computedPowerState x = TF.compute (TF.refKey x) "_computedPowerState"
 
 instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrivateIpAddress x = TF.compute (TF.refKey x) "private_ip_address"
+    computedPrivateIpAddress x = TF.compute (TF.refKey x) "_computedPrivateIpAddress"
 
 instance s ~ s' => P.HasComputedPublicIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIpAddress x = TF.compute (TF.refKey x) "public_ip_address"
+    computedPublicIpAddress x = TF.compute (TF.refKey x) "_computedPublicIpAddress"
