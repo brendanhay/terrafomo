@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -56,7 +57,6 @@ module Terrafomo.Scaleway.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -64,7 +64,10 @@ import Terrafomo.Scaleway.Settings
 
 import qualified Data.Hashable               as P
 import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
@@ -76,6 +79,7 @@ import qualified Terrafomo.Scaleway.Lens     as P
 import qualified Terrafomo.Scaleway.Provider as P
 import qualified Terrafomo.Scaleway.Types    as P
 import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
 -- | @scaleway_ip@ Resource.
 --
@@ -88,24 +92,26 @@ data IpResource s = IpResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IpResource s) where
-    toObject IpResource'{..} = catMaybes
-        [ TF.assign "reverse" <$> TF.attribute _reverse
-        ]
-
 ipResource
     :: TF.Resource P.Provider (IpResource s)
 ipResource =
-    TF.newResource "scaleway_ip" $
+    TF.newResource "scaleway_ip" TF.validator $
         IpResource'
             { _reverse = TF.Nil
             }
 
+instance TF.IsObject (IpResource s) where
+    toObject IpResource'{..} = P.catMaybes
+        [ TF.assign "reverse" <$> TF.attribute _reverse
+        ]
+
+instance TF.IsValid (IpResource s) where
+    validator = P.mempty
+
 instance P.HasReverse (IpResource s) (TF.Attr s P.Text) where
     reverse =
         P.lens (_reverse :: IpResource s -> TF.Attr s P.Text)
-               (\s a -> s { _reverse = a
-                          } :: IpResource s)
+               (\s a -> s { _reverse = a } :: IpResource s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "_computedIp"
@@ -132,42 +138,42 @@ data SecurityGroupResource s = SecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SecurityGroupResource s) where
-    toObject SecurityGroupResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "enable_default_security" <$> TF.attribute _enableDefaultSecurity
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 securityGroupResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (SecurityGroupResource s)
 securityGroupResource _description _name =
-    TF.newResource "scaleway_security_group" $
+    TF.newResource "scaleway_security_group" TF.validator $
         SecurityGroupResource'
             { _description = _description
             , _enableDefaultSecurity = TF.value P.True
             , _name = _name
             }
 
+instance TF.IsObject (SecurityGroupResource s) where
+    toObject SecurityGroupResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enable_default_security" <$> TF.attribute _enableDefaultSecurity
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SecurityGroupResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SecurityGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: SecurityGroupResource s)
+               (\s a -> s { _description = a } :: SecurityGroupResource s)
 
 instance P.HasEnableDefaultSecurity (SecurityGroupResource s) (TF.Attr s P.Bool) where
     enableDefaultSecurity =
         P.lens (_enableDefaultSecurity :: SecurityGroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableDefaultSecurity = a
-                          } :: SecurityGroupResource s)
+               (\s a -> s { _enableDefaultSecurity = a } :: SecurityGroupResource s)
 
 instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecurityGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SecurityGroupResource s)
+               (\s a -> s { _name = a } :: SecurityGroupResource s)
 
 -- | @scaleway_security_group_rule@ Resource.
 --
@@ -201,16 +207,6 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SecurityGroupRuleResource s) where
-    toObject SecurityGroupRuleResource'{..} = catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "direction" <$> TF.attribute _direction
-        , TF.assign "ip_range" <$> TF.attribute _ipRange
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "security_group" <$> TF.attribute _securityGroup
-        ]
-
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
@@ -219,7 +215,7 @@ securityGroupRuleResource
     -> TF.Attr s P.Text -- ^ @security_group@ - 'P.securityGroup'
     -> TF.Resource P.Provider (SecurityGroupRuleResource s)
 securityGroupRuleResource _action _direction _ipRange _protocol _securityGroup =
-    TF.newResource "scaleway_security_group_rule" $
+    TF.newResource "scaleway_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
             { _action = _action
             , _direction = _direction
@@ -229,41 +225,48 @@ securityGroupRuleResource _action _direction _ipRange _protocol _securityGroup =
             , _securityGroup = _securityGroup
             }
 
+instance TF.IsObject (SecurityGroupRuleResource s) where
+    toObject SecurityGroupRuleResource'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "direction" <$> TF.attribute _direction
+        , TF.assign "ip_range" <$> TF.attribute _ipRange
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "security_group" <$> TF.attribute _securityGroup
+        ]
+
+instance TF.IsValid (SecurityGroupRuleResource s) where
+    validator = P.mempty
+
 instance P.HasAction (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     action =
         P.lens (_action :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a
-                          } :: SecurityGroupRuleResource s)
+               (\s a -> s { _action = a } :: SecurityGroupRuleResource s)
 
 instance P.HasDirection (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     direction =
         P.lens (_direction :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _direction = a
-                          } :: SecurityGroupRuleResource s)
+               (\s a -> s { _direction = a } :: SecurityGroupRuleResource s)
 
 instance P.HasIpRange (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     ipRange =
         P.lens (_ipRange :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ipRange = a
-                          } :: SecurityGroupRuleResource s)
+               (\s a -> s { _ipRange = a } :: SecurityGroupRuleResource s)
 
 instance P.HasPort (SecurityGroupRuleResource s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: SecurityGroupRuleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a
-                          } :: SecurityGroupRuleResource s)
+               (\s a -> s { _port = a } :: SecurityGroupRuleResource s)
 
 instance P.HasProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a
-                          } :: SecurityGroupRuleResource s)
+               (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroup (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
     securityGroup =
         P.lens (_securityGroup :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _securityGroup = a
-                          } :: SecurityGroupRuleResource s)
+               (\s a -> s { _securityGroup = a } :: SecurityGroupRuleResource s)
 
 -- | @scaleway_server@ Resource.
 --
@@ -302,24 +305,11 @@ data ServerResource s = ServerResource'
     -- ^ @type@ - (Required)
     -- The instance type of the server
     --
-    , _volume            :: TF.Attr s [Volume s]
+    , _volume            :: TF.Attr s [TF.Attr s (Volume s)]
     -- ^ @volume@ - (Optional)
     -- Volumes attached to the server on creation
     --
     } deriving (P.Show, P.Eq, P.Generic)
-
-instance TF.IsObject (ServerResource s) where
-    toObject ServerResource'{..} = catMaybes
-        [ TF.assign "bootscript" <$> TF.attribute _bootscript
-        , TF.assign "dynamic_ip_required" <$> TF.attribute _dynamicIpRequired
-        , TF.assign "enable_ipv6" <$> TF.attribute _enableIpv6
-        , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "security_group" <$> TF.attribute _securityGroup
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "volume" <$> TF.attribute _volume
-        ]
 
 serverResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
@@ -327,7 +317,7 @@ serverResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (ServerResource s)
 serverResource _image _name _type' =
-    TF.newResource "scaleway_server" $
+    TF.newResource "scaleway_server" TF.validator $
         ServerResource'
             { _bootscript = TF.Nil
             , _dynamicIpRequired = TF.Nil
@@ -340,59 +330,70 @@ serverResource _image _name _type' =
             , _volume = TF.Nil
             }
 
+instance TF.IsObject (ServerResource s) where
+    toObject ServerResource'{..} = P.catMaybes
+        [ TF.assign "bootscript" <$> TF.attribute _bootscript
+        , TF.assign "dynamic_ip_required" <$> TF.attribute _dynamicIpRequired
+        , TF.assign "enable_ipv6" <$> TF.attribute _enableIpv6
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "security_group" <$> TF.attribute _securityGroup
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "volume" <$> TF.attribute _volume
+        ]
+
+instance TF.IsValid (ServerResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_volume"
+                  (_volume
+                      :: ServerResource s -> TF.Attr s [TF.Attr s (Volume s)])
+                  TF.validator
+
 instance P.HasBootscript (ServerResource s) (TF.Attr s P.Text) where
     bootscript =
         P.lens (_bootscript :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bootscript = a
-                          } :: ServerResource s)
+               (\s a -> s { _bootscript = a } :: ServerResource s)
 
 instance P.HasDynamicIpRequired (ServerResource s) (TF.Attr s P.Bool) where
     dynamicIpRequired =
         P.lens (_dynamicIpRequired :: ServerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _dynamicIpRequired = a
-                          } :: ServerResource s)
+               (\s a -> s { _dynamicIpRequired = a } :: ServerResource s)
 
 instance P.HasEnableIpv6 (ServerResource s) (TF.Attr s P.Bool) where
     enableIpv6 =
         P.lens (_enableIpv6 :: ServerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableIpv6 = a
-                          } :: ServerResource s)
+               (\s a -> s { _enableIpv6 = a } :: ServerResource s)
 
 instance P.HasImage (ServerResource s) (TF.Attr s P.Text) where
     image =
         P.lens (_image :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _image = a
-                          } :: ServerResource s)
+               (\s a -> s { _image = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ServerResource s)
+               (\s a -> s { _name = a } :: ServerResource s)
 
 instance P.HasSecurityGroup (ServerResource s) (TF.Attr s P.Text) where
     securityGroup =
         P.lens (_securityGroup :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _securityGroup = a
-                          } :: ServerResource s)
+               (\s a -> s { _securityGroup = a } :: ServerResource s)
 
 instance P.HasTags (ServerResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: ServerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a
-                          } :: ServerResource s)
+               (\s a -> s { _tags = a } :: ServerResource s)
 
 instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: ServerResource s)
+               (\s a -> s { _type' = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [Volume s]) where
+instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (Volume s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [Volume s])
-               (\s a -> s { _volume = a
-                          } :: ServerResource s)
+        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (Volume s)])
+               (\s a -> s { _volume = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedBootType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedBootType x = TF.compute (TF.refKey x) "_computedBootType"
@@ -423,25 +424,27 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SshKeyResource s) where
-    toObject SshKeyResource'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        ]
-
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Resource P.Provider (SshKeyResource s)
 sshKeyResource _key =
-    TF.newResource "scaleway_ssh_key" $
+    TF.newResource "scaleway_ssh_key" TF.validator $
         SshKeyResource'
             { _key = _key
             }
 
+instance TF.IsObject (SshKeyResource s) where
+    toObject SshKeyResource'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        ]
+
+instance TF.IsValid (SshKeyResource s) where
+    validator = P.mempty
+
 instance P.HasKey (SshKeyResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: SshKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: SshKeyResource s)
+               (\s a -> s { _key = a } :: SshKeyResource s)
 
 -- | @scaleway_token@ Resource.
 --
@@ -462,40 +465,40 @@ data TokenResource s = TokenResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (TokenResource s) where
-    toObject TokenResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "expires" <$> TF.attribute _expires
-        , TF.assign "password" <$> TF.attribute _password
-        ]
-
 tokenResource
     :: TF.Resource P.Provider (TokenResource s)
 tokenResource =
-    TF.newResource "scaleway_token" $
+    TF.newResource "scaleway_token" TF.validator $
         TokenResource'
             { _description = TF.Nil
             , _expires = TF.value P.False
             , _password = TF.Nil
             }
 
+instance TF.IsObject (TokenResource s) where
+    toObject TokenResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "expires" <$> TF.attribute _expires
+        , TF.assign "password" <$> TF.attribute _password
+        ]
+
+instance TF.IsValid (TokenResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (TokenResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: TokenResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: TokenResource s)
+               (\s a -> s { _description = a } :: TokenResource s)
 
 instance P.HasExpires (TokenResource s) (TF.Attr s P.Bool) where
     expires =
         P.lens (_expires :: TokenResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _expires = a
-                          } :: TokenResource s)
+               (\s a -> s { _expires = a } :: TokenResource s)
 
 instance P.HasPassword (TokenResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: TokenResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a
-                          } :: TokenResource s)
+               (\s a -> s { _password = a } :: TokenResource s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
     computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
@@ -534,43 +537,43 @@ data UserDataResource s = UserDataResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserDataResource s) where
-    toObject UserDataResource'{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "server" <$> TF.attribute _server
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 userDataResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Resource P.Provider (UserDataResource s)
 userDataResource _key _server _value =
-    TF.newResource "scaleway_user_data" $
+    TF.newResource "scaleway_user_data" TF.validator $
         UserDataResource'
             { _key = _key
             , _server = _server
             , _value = _value
             }
 
+instance TF.IsObject (UserDataResource s) where
+    toObject UserDataResource'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "server" <$> TF.attribute _server
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (UserDataResource s) where
+    validator = P.mempty
+
 instance P.HasKey (UserDataResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: UserDataResource s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: UserDataResource s)
+               (\s a -> s { _key = a } :: UserDataResource s)
 
 instance P.HasServer (UserDataResource s) (TF.Attr s P.Text) where
     server =
         P.lens (_server :: UserDataResource s -> TF.Attr s P.Text)
-               (\s a -> s { _server = a
-                          } :: UserDataResource s)
+               (\s a -> s { _server = a } :: UserDataResource s)
 
 instance P.HasValue (UserDataResource s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: UserDataResource s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: UserDataResource s)
+               (\s a -> s { _value = a } :: UserDataResource s)
 
 -- | @scaleway_volume@ Resource.
 --
@@ -591,43 +594,43 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VolumeResource s) where
-    toObject VolumeResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "size_in_gb" <$> TF.attribute _sizeInGb
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
 volumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @size_in_gb@ - 'P.sizeInGb'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (VolumeResource s)
 volumeResource _name _sizeInGb _type' =
-    TF.newResource "scaleway_volume" $
+    TF.newResource "scaleway_volume" TF.validator $
         VolumeResource'
             { _name = _name
             , _sizeInGb = _sizeInGb
             , _type' = _type'
             }
 
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size_in_gb" <$> TF.attribute _sizeInGb
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (VolumeResource s) where
+    validator = P.mempty
+
 instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: VolumeResource s)
+               (\s a -> s { _name = a } :: VolumeResource s)
 
 instance P.HasSizeInGb (VolumeResource s) (TF.Attr s P.Integer) where
     sizeInGb =
         P.lens (_sizeInGb :: VolumeResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _sizeInGb = a
-                          } :: VolumeResource s)
+               (\s a -> s { _sizeInGb = a } :: VolumeResource s)
 
 instance P.HasType' (VolumeResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a
-                          } :: VolumeResource s)
+               (\s a -> s { _type' = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedServer x = TF.compute (TF.refKey x) "_computedServer"
@@ -647,31 +650,32 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VolumeAttachmentResource s) where
-    toObject VolumeAttachmentResource'{..} = catMaybes
-        [ TF.assign "server" <$> TF.attribute _server
-        , TF.assign "volume" <$> TF.attribute _volume
-        ]
-
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @server@ - 'P.server'
     -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
     -> TF.Resource P.Provider (VolumeAttachmentResource s)
 volumeAttachmentResource _server _volume =
-    TF.newResource "scaleway_volume_attachment" $
+    TF.newResource "scaleway_volume_attachment" TF.validator $
         VolumeAttachmentResource'
             { _server = _server
             , _volume = _volume
             }
 
+instance TF.IsObject (VolumeAttachmentResource s) where
+    toObject VolumeAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "server" <$> TF.attribute _server
+        , TF.assign "volume" <$> TF.attribute _volume
+        ]
+
+instance TF.IsValid (VolumeAttachmentResource s) where
+    validator = P.mempty
+
 instance P.HasServer (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     server =
         P.lens (_server :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _server = a
-                          } :: VolumeAttachmentResource s)
+               (\s a -> s { _server = a } :: VolumeAttachmentResource s)
 
 instance P.HasVolume (VolumeAttachmentResource s) (TF.Attr s P.Text) where
     volume =
         P.lens (_volume :: VolumeAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _volume = a
-                          } :: VolumeAttachmentResource s)
+               (\s a -> s { _volume = a } :: VolumeAttachmentResource s)
