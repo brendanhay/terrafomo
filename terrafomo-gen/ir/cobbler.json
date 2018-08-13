@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newInterface",
+                "name": "Interface'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -9,16 +13,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
             "name": "Interface",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -27,13 +33,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"bonding_opts\" <$> TF.attribute",
-                    "name": "bonding_opts",
+                    "name": "_computedBondingOpts",
                     "method": "computedBondingOpts",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBondingOpts",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedBondingOpts"
+                    "original": "bonding_opts"
                 },
                 {
                     "default": "TF.Nil",
@@ -42,13 +49,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"bridge_opts\" <$> TF.attribute",
-                    "name": "bridge_opts",
+                    "name": "_computedBridgeOpts",
                     "method": "computedBridgeOpts",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBridgeOpts",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedBridgeOpts"
+                    "original": "bridge_opts"
                 },
                 {
                     "default": "TF.Nil",
@@ -57,13 +65,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cnames\" <$> TF.attribute",
-                    "name": "cnames",
+                    "name": "_computedCnames",
                     "method": "computedCnames",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedCnames",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedCnames"
+                    "original": "cnames"
                 },
                 {
                     "default": "TF.Nil",
@@ -72,13 +81,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"dhcp_tag\" <$> TF.attribute",
-                    "name": "dhcp_tag",
+                    "name": "_computedDhcpTag",
                     "method": "computedDhcpTag",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDhcpTag",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedDhcpTag"
+                    "original": "dhcp_tag"
                 },
                 {
                     "default": "TF.Nil",
@@ -87,13 +97,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"dns_name\" <$> TF.attribute",
-                    "name": "dns_name",
+                    "name": "_computedDnsName",
                     "method": "computedDnsName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDnsName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedDnsName"
+                    "original": "dns_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -102,13 +113,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "gateway",
+                    "name": "_computedGateway",
                     "method": "computedGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedGateway"
+                    "original": "gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -117,13 +129,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"interface_master\" <$> TF.attribute",
-                    "name": "interface_master",
+                    "name": "_computedInterfaceMaster",
                     "method": "computedInterfaceMaster",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInterfaceMaster",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedInterfaceMaster"
+                    "original": "interface_master"
                 },
                 {
                     "default": "TF.Nil",
@@ -132,13 +145,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"interface_type\" <$> TF.attribute",
-                    "name": "interface_type",
+                    "name": "_computedInterfaceType",
                     "method": "computedInterfaceType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInterfaceType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedInterfaceType"
+                    "original": "interface_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -147,13 +161,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ip_address\" <$> TF.attribute",
-                    "name": "ip_address",
+                    "name": "_computedIpAddress",
                     "method": "computedIpAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpAddress",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpAddress"
+                    "original": "ip_address"
                 },
                 {
                     "default": "TF.Nil",
@@ -162,13 +177,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv6_address\" <$> TF.attribute",
-                    "name": "ipv6_address",
+                    "name": "_computedIpv6Address",
                     "method": "computedIpv6Address",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6Address",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpv6Address"
+                    "original": "ipv6_address"
                 },
                 {
                     "default": "TF.Nil",
@@ -177,13 +193,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv6_default_gateway\" <$> TF.attribute",
-                    "name": "ipv6_default_gateway",
+                    "name": "_computedIpv6DefaultGateway",
                     "method": "computedIpv6DefaultGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6DefaultGateway",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpv6DefaultGateway"
+                    "original": "ipv6_default_gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -192,13 +209,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv6_mtu\" <$> TF.attribute",
-                    "name": "ipv6_mtu",
+                    "name": "_computedIpv6Mtu",
                     "method": "computedIpv6Mtu",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6Mtu",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpv6Mtu"
+                    "original": "ipv6_mtu"
                 },
                 {
                     "default": "TF.Nil",
@@ -207,13 +225,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv6_secondaries\" <$> TF.attribute",
-                    "name": "ipv6_secondaries",
+                    "name": "_computedIpv6Secondaries",
                     "method": "computedIpv6Secondaries",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedIpv6Secondaries",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpv6Secondaries"
+                    "original": "ipv6_secondaries"
                 },
                 {
                     "default": "TF.Nil",
@@ -222,13 +241,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv6_static_routes\" <$> TF.attribute",
-                    "name": "ipv6_static_routes",
+                    "name": "_computedIpv6StaticRoutes",
                     "method": "computedIpv6StaticRoutes",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedIpv6StaticRoutes",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpv6StaticRoutes"
+                    "original": "ipv6_static_routes"
                 },
                 {
                     "default": "TF.Nil",
@@ -237,13 +257,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mac_address\" <$> TF.attribute",
-                    "name": "mac_address",
+                    "name": "_computedMacAddress",
                     "method": "computedMacAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMacAddress",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMacAddress"
+                    "original": "mac_address"
                 },
                 {
                     "default": "TF.Nil",
@@ -252,13 +273,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"management\" <$> TF.attribute",
-                    "name": "management",
+                    "name": "_computedManagement",
                     "method": "computedManagement",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManagement",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedManagement"
+                    "original": "management"
                 },
                 {
                     "default": "TF.Nil",
@@ -267,13 +289,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"netmask\" <$> TF.attribute",
-                    "name": "netmask",
+                    "name": "_computedNetmask",
                     "method": "computedNetmask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetmask",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNetmask"
+                    "original": "netmask"
                 },
                 {
                     "default": "TF.Nil",
@@ -282,13 +305,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"static\" <$> TF.attribute",
-                    "name": "static",
+                    "name": "_computedStatic",
                     "method": "computedStatic",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedStatic",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedStatic"
+                    "original": "static"
                 },
                 {
                     "default": "TF.Nil",
@@ -297,13 +321,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"static_routes\" <$> TF.attribute",
-                    "name": "static_routes",
+                    "name": "_computedStaticRoutes",
                     "method": "computedStaticRoutes",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedStaticRoutes",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedStaticRoutes"
+                    "original": "static_routes"
                 },
                 {
                     "default": "TF.Nil",
@@ -312,13 +337,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_bridge\" <$> TF.attribute",
-                    "name": "virt_bridge",
+                    "name": "_computedVirtBridge",
                     "method": "computedVirtBridge",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtBridge",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtBridge"
+                    "original": "virt_bridge"
                 }
             ],
             "parameters": [
@@ -329,110 +355,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Interface s",
             "original": "interface"
-        }
-    ],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "The path or contents of an SSL CA certificate"
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"cacert_file\" <$>",
-            "name": "cacert_file",
-            "method": "cacertFile",
-            "conflicts": [],
-            "type": "P.Maybe P.Text",
-            "class": "HasCacertFile",
-            "optional": true,
-            "label": "_cacertFile"
-        },
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "Ignore SSL certificate warnings and errors."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"insecure\" <$>",
-            "name": "insecure",
-            "method": "insecure",
-            "conflicts": [],
-            "type": "P.Maybe P.Bool",
-            "class": "HasInsecure",
-            "optional": true,
-            "label": "_insecure"
-        },
-        {
-            "default": "_password",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The password for accessing Cobbler."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"password\"",
-            "name": "password",
-            "method": "password",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasPassword",
-            "optional": false,
-            "label": "_password"
-        },
-        {
-            "default": "_url",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Cobbler URL"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"url\"",
-            "name": "url",
-            "method": "url",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUrl",
-            "optional": false,
-            "label": "_url"
-        },
-        {
-            "default": "_username",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The username for accessing Cobbler."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"username\"",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUsername",
-            "optional": false,
-            "label": "_username"
         }
     ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "distroResource",
+                "name": "DistroResource'"
+            },
             "arguments": [
                 {
                     "default": "_breed",
@@ -441,13 +385,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"breed\" <$> TF.attribute",
-                    "name": "breed",
+                    "name": "_breed",
                     "method": "breed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBreed",
+                    "validate": false,
                     "optional": false,
-                    "label": "_breed"
+                    "original": "breed"
                 },
                 {
                     "default": "_initrd",
@@ -456,13 +401,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"initrd\" <$> TF.attribute",
-                    "name": "initrd",
+                    "name": "_initrd",
                     "method": "initrd",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasInitrd",
+                    "validate": false,
                     "optional": false,
-                    "label": "_initrd"
+                    "original": "initrd"
                 },
                 {
                     "default": "_kernel",
@@ -471,13 +417,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel\" <$> TF.attribute",
-                    "name": "kernel",
+                    "name": "_kernel",
                     "method": "kernel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKernel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_kernel"
+                    "original": "kernel"
                 },
                 {
                     "default": "_name",
@@ -486,13 +433,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_osVersion",
@@ -501,17 +449,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"os_version\" <$> TF.attribute",
-                    "name": "os_version",
+                    "name": "_osVersion",
                     "method": "osVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOsVersion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_osVersion"
+                    "original": "os_version"
                 }
             ],
-            "schema": "Resource",
             "name": "DistroResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -520,13 +469,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"arch\" <$> TF.attribute",
-                    "name": "arch",
+                    "name": "_computedArch",
                     "method": "computedArch",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedArch",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedArch"
+                    "original": "arch"
                 },
                 {
                     "default": "TF.Nil",
@@ -535,13 +485,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"boot_files\" <$> TF.attribute",
-                    "name": "boot_files",
+                    "name": "_computedBootFiles",
                     "method": "computedBootFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedBootFiles"
+                    "original": "boot_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -550,13 +501,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"comment\" <$> TF.attribute",
-                    "name": "comment",
+                    "name": "_computedComment",
                     "method": "computedComment",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedComment"
+                    "original": "comment"
                 },
                 {
                     "default": "TF.Nil",
@@ -565,13 +517,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"fetchable_files\" <$> TF.attribute",
-                    "name": "fetchable_files",
+                    "name": "_computedFetchableFiles",
                     "method": "computedFetchableFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFetchableFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedFetchableFiles"
+                    "original": "fetchable_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -580,13 +533,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel_options\" <$> TF.attribute",
-                    "name": "kernel_options",
+                    "name": "_computedKernelOptions",
                     "method": "computedKernelOptions",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptions",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKernelOptions"
+                    "original": "kernel_options"
                 },
                 {
                     "default": "TF.Nil",
@@ -595,13 +549,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel_options_post\" <$> TF.attribute",
-                    "name": "kernel_options_post",
+                    "name": "_computedKernelOptionsPost",
                     "method": "computedKernelOptionsPost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptionsPost",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKernelOptionsPost"
+                    "original": "kernel_options_post"
                 },
                 {
                     "default": "TF.Nil",
@@ -610,13 +565,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mgmt_classes\" <$> TF.attribute",
-                    "name": "mgmt_classes",
+                    "name": "_computedMgmtClasses",
                     "method": "computedMgmtClasses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMgmtClasses",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMgmtClasses"
+                    "original": "mgmt_classes"
                 },
                 {
                     "default": "TF.Nil",
@@ -625,13 +581,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"owners\" <$> TF.attribute",
-                    "name": "owners",
+                    "name": "_computedOwners",
                     "method": "computedOwners",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOwners"
+                    "original": "owners"
                 },
                 {
                     "default": "TF.Nil",
@@ -640,13 +597,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redhat_management_key\" <$> TF.attribute",
-                    "name": "redhat_management_key",
+                    "name": "_computedRedhatManagementKey",
                     "method": "computedRedhatManagementKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementKey",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRedhatManagementKey"
+                    "original": "redhat_management_key"
                 },
                 {
                     "default": "TF.Nil",
@@ -655,13 +613,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redhat_management_server\" <$> TF.attribute",
-                    "name": "redhat_management_server",
+                    "name": "_computedRedhatManagementServer",
                     "method": "computedRedhatManagementServer",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementServer",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRedhatManagementServer"
+                    "original": "redhat_management_server"
                 },
                 {
                     "default": "TF.Nil",
@@ -670,13 +629,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"template_files\" <$> TF.attribute",
-                    "name": "template_files",
+                    "name": "_computedTemplateFiles",
                     "method": "computedTemplateFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplateFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTemplateFiles"
+                    "original": "template_files"
                 }
             ],
             "parameters": [
@@ -687,13 +647,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"breed\" <$> TF.attribute",
-                    "name": "breed",
+                    "name": "_breed",
                     "method": "breed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBreed",
+                    "validate": false,
                     "optional": false,
-                    "label": "_breed"
+                    "original": "breed"
                 },
                 {
                     "default": "_initrd",
@@ -702,13 +663,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"initrd\" <$> TF.attribute",
-                    "name": "initrd",
+                    "name": "_initrd",
                     "method": "initrd",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasInitrd",
+                    "validate": false,
                     "optional": false,
-                    "label": "_initrd"
+                    "original": "initrd"
                 },
                 {
                     "default": "_kernel",
@@ -717,13 +679,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel\" <$> TF.attribute",
-                    "name": "kernel",
+                    "name": "_kernel",
                     "method": "kernel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKernel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_kernel"
+                    "original": "kernel"
                 },
                 {
                     "default": "_name",
@@ -732,13 +695,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_osVersion",
@@ -747,19 +711,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"os_version\" <$> TF.attribute",
-                    "name": "os_version",
+                    "name": "_osVersion",
                     "method": "osVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOsVersion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_osVersion"
+                    "original": "os_version"
                 }
             ],
+            "conflicts": [],
             "type": "DistroResource s",
             "original": "cobbler_distro"
         },
         {
+            "con": {
+                "smart": "kickstartFileResource",
+                "name": "KickstartFileResource'"
+            },
             "arguments": [
                 {
                     "default": "_body",
@@ -768,13 +738,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"body\" <$> TF.attribute",
-                    "name": "body",
+                    "name": "_body",
                     "method": "body",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBody",
+                    "validate": false,
                     "optional": false,
-                    "label": "_body"
+                    "original": "body"
                 },
                 {
                     "default": "_name",
@@ -783,17 +754,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "KickstartFileResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -803,13 +775,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"body\" <$> TF.attribute",
-                    "name": "body",
+                    "name": "_body",
                     "method": "body",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBody",
+                    "validate": false,
                     "optional": false,
-                    "label": "_body"
+                    "original": "body"
                 },
                 {
                     "default": "_name",
@@ -818,19 +791,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "KickstartFileResource s",
             "original": "cobbler_kickstart_file"
         },
         {
+            "con": {
+                "smart": "profileResource",
+                "name": "ProfileResource'"
+            },
             "arguments": [
                 {
                     "default": "_distro",
@@ -839,13 +818,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"distro\" <$> TF.attribute",
-                    "name": "distro",
+                    "name": "_distro",
                     "method": "distro",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDistro",
+                    "validate": false,
                     "optional": false,
-                    "label": "_distro"
+                    "original": "distro"
                 },
                 {
                     "default": "_name",
@@ -854,17 +834,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "ProfileResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -873,13 +854,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"boot_files\" <$> TF.attribute",
-                    "name": "boot_files",
+                    "name": "_computedBootFiles",
                     "method": "computedBootFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedBootFiles"
+                    "original": "boot_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -888,13 +870,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"comment\" <$> TF.attribute",
-                    "name": "comment",
+                    "name": "_computedComment",
                     "method": "computedComment",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedComment"
+                    "original": "comment"
                 },
                 {
                     "default": "TF.Nil",
@@ -903,13 +886,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enable_gpxe\" <$> TF.attribute",
-                    "name": "enable_gpxe",
+                    "name": "_computedEnableGpxe",
                     "method": "computedEnableGpxe",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnableGpxe",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedEnableGpxe"
+                    "original": "enable_gpxe"
                 },
                 {
                     "default": "TF.Nil",
@@ -918,13 +902,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enable_menu\" <$> TF.attribute",
-                    "name": "enable_menu",
+                    "name": "_computedEnableMenu",
                     "method": "computedEnableMenu",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnableMenu",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedEnableMenu"
+                    "original": "enable_menu"
                 },
                 {
                     "default": "TF.Nil",
@@ -933,13 +918,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"fetchable_files\" <$> TF.attribute",
-                    "name": "fetchable_files",
+                    "name": "_computedFetchableFiles",
                     "method": "computedFetchableFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFetchableFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedFetchableFiles"
+                    "original": "fetchable_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -948,13 +934,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel_options\" <$> TF.attribute",
-                    "name": "kernel_options",
+                    "name": "_computedKernelOptions",
                     "method": "computedKernelOptions",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptions",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKernelOptions"
+                    "original": "kernel_options"
                 },
                 {
                     "default": "TF.Nil",
@@ -963,13 +950,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel_options_post\" <$> TF.attribute",
-                    "name": "kernel_options_post",
+                    "name": "_computedKernelOptionsPost",
                     "method": "computedKernelOptionsPost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptionsPost",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKernelOptionsPost"
+                    "original": "kernel_options_post"
                 },
                 {
                     "default": "TF.Nil",
@@ -978,13 +966,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kickstart\" <$> TF.attribute",
-                    "name": "kickstart",
+                    "name": "_computedKickstart",
                     "method": "computedKickstart",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKickstart",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKickstart"
+                    "original": "kickstart"
                 },
                 {
                     "default": "TF.Nil",
@@ -993,13 +982,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ks_meta\" <$> TF.attribute",
-                    "name": "ks_meta",
+                    "name": "_computedKsMeta",
                     "method": "computedKsMeta",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKsMeta",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKsMeta"
+                    "original": "ks_meta"
                 },
                 {
                     "default": "TF.Nil",
@@ -1008,13 +998,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mgmt_classes\" <$> TF.attribute",
-                    "name": "mgmt_classes",
+                    "name": "_computedMgmtClasses",
                     "method": "computedMgmtClasses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMgmtClasses",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMgmtClasses"
+                    "original": "mgmt_classes"
                 },
                 {
                     "default": "TF.Nil",
@@ -1023,13 +1014,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mgmt_parameters\" <$> TF.attribute",
-                    "name": "mgmt_parameters",
+                    "name": "_computedMgmtParameters",
                     "method": "computedMgmtParameters",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMgmtParameters",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMgmtParameters"
+                    "original": "mgmt_parameters"
                 },
                 {
                     "default": "TF.Nil",
@@ -1038,13 +1030,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
-                    "name": "name_servers",
+                    "name": "_computedNameServers",
                     "method": "computedNameServers",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNameServers"
+                    "original": "name_servers"
                 },
                 {
                     "default": "TF.Nil",
@@ -1053,13 +1046,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name_servers_search\" <$> TF.attribute",
-                    "name": "name_servers_search",
+                    "name": "_computedNameServersSearch",
                     "method": "computedNameServersSearch",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServersSearch",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNameServersSearch"
+                    "original": "name_servers_search"
                 },
                 {
                     "default": "TF.Nil",
@@ -1068,13 +1062,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"owners\" <$> TF.attribute",
-                    "name": "owners",
+                    "name": "_computedOwners",
                     "method": "computedOwners",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOwners"
+                    "original": "owners"
                 },
                 {
                     "default": "TF.Nil",
@@ -1083,13 +1078,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"parent\" <$> TF.attribute",
-                    "name": "parent",
+                    "name": "_computedParent",
                     "method": "computedParent",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedParent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedParent"
+                    "original": "parent"
                 },
                 {
                     "default": "TF.Nil",
@@ -1098,13 +1094,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"proxy\" <$> TF.attribute",
-                    "name": "proxy",
+                    "name": "_computedProxy",
                     "method": "computedProxy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProxy",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedProxy"
+                    "original": "proxy"
                 },
                 {
                     "default": "TF.Nil",
@@ -1113,13 +1110,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redhat_management_key\" <$> TF.attribute",
-                    "name": "redhat_management_key",
+                    "name": "_computedRedhatManagementKey",
                     "method": "computedRedhatManagementKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementKey",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRedhatManagementKey"
+                    "original": "redhat_management_key"
                 },
                 {
                     "default": "TF.Nil",
@@ -1128,13 +1126,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redhat_management_server\" <$> TF.attribute",
-                    "name": "redhat_management_server",
+                    "name": "_computedRedhatManagementServer",
                     "method": "computedRedhatManagementServer",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementServer",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRedhatManagementServer"
+                    "original": "redhat_management_server"
                 },
                 {
                     "default": "TF.Nil",
@@ -1143,13 +1142,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"repos\" <$> TF.attribute",
-                    "name": "repos",
+                    "name": "_computedRepos",
                     "method": "computedRepos",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRepos",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRepos"
+                    "original": "repos"
                 },
                 {
                     "default": "TF.Nil",
@@ -1158,13 +1158,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"server\" <$> TF.attribute",
-                    "name": "server",
+                    "name": "_computedServer",
                     "method": "computedServer",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServer",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedServer"
+                    "original": "server"
                 },
                 {
                     "default": "TF.Nil",
@@ -1173,13 +1174,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"template_files\" <$> TF.attribute",
-                    "name": "template_files",
+                    "name": "_computedTemplateFiles",
                     "method": "computedTemplateFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplateFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTemplateFiles"
+                    "original": "template_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -1188,13 +1190,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"template_remote_kickstarts\" <$> TF.attribute",
-                    "name": "template_remote_kickstarts",
+                    "name": "_computedTemplateRemoteKickstarts",
                     "method": "computedTemplateRemoteKickstarts",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedTemplateRemoteKickstarts",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTemplateRemoteKickstarts"
+                    "original": "template_remote_kickstarts"
                 },
                 {
                     "default": "TF.Nil",
@@ -1203,13 +1206,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_auto_boot\" <$> TF.attribute",
-                    "name": "virt_auto_boot",
+                    "name": "_computedVirtAutoBoot",
                     "method": "computedVirtAutoBoot",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtAutoBoot",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtAutoBoot"
+                    "original": "virt_auto_boot"
                 },
                 {
                     "default": "TF.Nil",
@@ -1218,13 +1222,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_bridge\" <$> TF.attribute",
-                    "name": "virt_bridge",
+                    "name": "_computedVirtBridge",
                     "method": "computedVirtBridge",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtBridge",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtBridge"
+                    "original": "virt_bridge"
                 },
                 {
                     "default": "TF.Nil",
@@ -1233,13 +1238,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_cpus\" <$> TF.attribute",
-                    "name": "virt_cpus",
+                    "name": "_computedVirtCpus",
                     "method": "computedVirtCpus",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtCpus",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtCpus"
+                    "original": "virt_cpus"
                 },
                 {
                     "default": "TF.Nil",
@@ -1248,13 +1254,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_disk_driver\" <$> TF.attribute",
-                    "name": "virt_disk_driver",
+                    "name": "_computedVirtDiskDriver",
                     "method": "computedVirtDiskDriver",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtDiskDriver",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtDiskDriver"
+                    "original": "virt_disk_driver"
                 },
                 {
                     "default": "TF.Nil",
@@ -1263,13 +1270,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_file_size\" <$> TF.attribute",
-                    "name": "virt_file_size",
+                    "name": "_computedVirtFileSize",
                     "method": "computedVirtFileSize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtFileSize",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtFileSize"
+                    "original": "virt_file_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -1278,13 +1286,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_path\" <$> TF.attribute",
-                    "name": "virt_path",
+                    "name": "_computedVirtPath",
                     "method": "computedVirtPath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtPath",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtPath"
+                    "original": "virt_path"
                 },
                 {
                     "default": "TF.Nil",
@@ -1293,13 +1302,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_ram\" <$> TF.attribute",
-                    "name": "virt_ram",
+                    "name": "_computedVirtRam",
                     "method": "computedVirtRam",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtRam",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtRam"
+                    "original": "virt_ram"
                 },
                 {
                     "default": "TF.Nil",
@@ -1308,13 +1318,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_type\" <$> TF.attribute",
-                    "name": "virt_type",
+                    "name": "_computedVirtType",
                     "method": "computedVirtType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtType"
+                    "original": "virt_type"
                 }
             ],
             "parameters": [
@@ -1325,13 +1336,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"distro\" <$> TF.attribute",
-                    "name": "distro",
+                    "name": "_distro",
                     "method": "distro",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDistro",
+                    "validate": false,
                     "optional": false,
-                    "label": "_distro"
+                    "original": "distro"
                 },
                 {
                     "default": "_name",
@@ -1340,19 +1352,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "ProfileResource s",
             "original": "cobbler_profile"
         },
         {
+            "con": {
+                "smart": "repoResource",
+                "name": "RepoResource'"
+            },
             "arguments": [
                 {
                     "default": "_breed",
@@ -1361,13 +1379,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"breed\" <$> TF.attribute",
-                    "name": "breed",
+                    "name": "_breed",
                     "method": "breed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBreed",
+                    "validate": false,
                     "optional": false,
-                    "label": "_breed"
+                    "original": "breed"
                 },
                 {
                     "default": "_mirror",
@@ -1376,13 +1395,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mirror\" <$> TF.attribute",
-                    "name": "mirror",
+                    "name": "_mirror",
                     "method": "mirror",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMirror",
+                    "validate": false,
                     "optional": false,
-                    "label": "_mirror"
+                    "original": "mirror"
                 },
                 {
                     "default": "_name",
@@ -1391,17 +1411,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "RepoResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1410,13 +1431,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"apt_components\" <$> TF.attribute",
-                    "name": "apt_components",
+                    "name": "_computedAptComponents",
                     "method": "computedAptComponents",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedAptComponents",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedAptComponents"
+                    "original": "apt_components"
                 },
                 {
                     "default": "TF.Nil",
@@ -1425,13 +1447,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"apt_dists\" <$> TF.attribute",
-                    "name": "apt_dists",
+                    "name": "_computedAptDists",
                     "method": "computedAptDists",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedAptDists",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedAptDists"
+                    "original": "apt_dists"
                 },
                 {
                     "default": "TF.Nil",
@@ -1440,13 +1463,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"arch\" <$> TF.attribute",
-                    "name": "arch",
+                    "name": "_computedArch",
                     "method": "computedArch",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedArch",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedArch"
+                    "original": "arch"
                 },
                 {
                     "default": "TF.Nil",
@@ -1455,13 +1479,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"comment\" <$> TF.attribute",
-                    "name": "comment",
+                    "name": "_computedComment",
                     "method": "computedComment",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedComment"
+                    "original": "comment"
                 },
                 {
                     "default": "TF.Nil",
@@ -1470,13 +1495,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"createrepo_flags\" <$> TF.attribute",
-                    "name": "createrepo_flags",
+                    "name": "_computedCreaterepoFlags",
                     "method": "computedCreaterepoFlags",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreaterepoFlags",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedCreaterepoFlags"
+                    "original": "createrepo_flags"
                 },
                 {
                     "default": "TF.Nil",
@@ -1485,13 +1511,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"environment\" <$> TF.attribute",
-                    "name": "environment",
+                    "name": "_computedEnvironment",
                     "method": "computedEnvironment",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEnvironment",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedEnvironment"
+                    "original": "environment"
                 },
                 {
                     "default": "TF.Nil",
@@ -1500,13 +1527,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"keep_updated\" <$> TF.attribute",
-                    "name": "keep_updated",
+                    "name": "_computedKeepUpdated",
                     "method": "computedKeepUpdated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedKeepUpdated",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKeepUpdated"
+                    "original": "keep_updated"
                 },
                 {
                     "default": "TF.Nil",
@@ -1515,13 +1543,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mirror_locally\" <$> TF.attribute",
-                    "name": "mirror_locally",
+                    "name": "_computedMirrorLocally",
                     "method": "computedMirrorLocally",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedMirrorLocally",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMirrorLocally"
+                    "original": "mirror_locally"
                 },
                 {
                     "default": "TF.Nil",
@@ -1530,13 +1559,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"owners\" <$> TF.attribute",
-                    "name": "owners",
+                    "name": "_computedOwners",
                     "method": "computedOwners",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOwners"
+                    "original": "owners"
                 },
                 {
                     "default": "TF.Nil",
@@ -1545,13 +1575,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"proxy\" <$> TF.attribute",
-                    "name": "proxy",
+                    "name": "_computedProxy",
                     "method": "computedProxy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProxy",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedProxy"
+                    "original": "proxy"
                 },
                 {
                     "default": "TF.Nil",
@@ -1560,13 +1591,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rpm_list\" <$> TF.attribute",
-                    "name": "rpm_list",
+                    "name": "_computedRpmList",
                     "method": "computedRpmList",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRpmList",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRpmList"
+                    "original": "rpm_list"
                 }
             ],
             "parameters": [
@@ -1577,13 +1609,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"breed\" <$> TF.attribute",
-                    "name": "breed",
+                    "name": "_breed",
                     "method": "breed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBreed",
+                    "validate": false,
                     "optional": false,
-                    "label": "_breed"
+                    "original": "breed"
                 },
                 {
                     "default": "_mirror",
@@ -1592,13 +1625,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mirror\" <$> TF.attribute",
-                    "name": "mirror",
+                    "name": "_mirror",
                     "method": "mirror",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMirror",
+                    "validate": false,
                     "optional": false,
-                    "label": "_mirror"
+                    "original": "mirror"
                 },
                 {
                     "default": "_name",
@@ -1607,19 +1641,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "RepoResource s",
             "original": "cobbler_repo"
         },
         {
+            "con": {
+                "smart": "snippetResource",
+                "name": "SnippetResource'"
+            },
             "arguments": [
                 {
                     "default": "_body",
@@ -1628,13 +1668,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"body\" <$> TF.attribute",
-                    "name": "body",
+                    "name": "_body",
                     "method": "body",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBody",
+                    "validate": false,
                     "optional": false,
-                    "label": "_body"
+                    "original": "body"
                 },
                 {
                     "default": "_name",
@@ -1643,17 +1684,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "SnippetResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1663,13 +1705,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"body\" <$> TF.attribute",
-                    "name": "body",
+                    "name": "_body",
                     "method": "body",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBody",
+                    "validate": false,
                     "optional": false,
-                    "label": "_body"
+                    "original": "body"
                 },
                 {
                     "default": "_name",
@@ -1678,19 +1721,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SnippetResource s",
             "original": "cobbler_snippet"
         },
         {
+            "con": {
+                "smart": "systemResource",
+                "name": "SystemResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1699,13 +1748,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_profile",
@@ -1714,17 +1764,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"profile\" <$> TF.attribute",
-                    "name": "profile",
+                    "name": "_profile",
                     "method": "profile",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProfile",
+                    "validate": false,
                     "optional": false,
-                    "label": "_profile"
+                    "original": "profile"
                 }
             ],
-            "schema": "Resource",
             "name": "SystemResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1733,13 +1784,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"boot_files\" <$> TF.attribute",
-                    "name": "boot_files",
+                    "name": "_computedBootFiles",
                     "method": "computedBootFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBootFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedBootFiles"
+                    "original": "boot_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -1748,13 +1800,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"comment\" <$> TF.attribute",
-                    "name": "comment",
+                    "name": "_computedComment",
                     "method": "computedComment",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedComment",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedComment"
+                    "original": "comment"
                 },
                 {
                     "default": "TF.Nil",
@@ -1763,13 +1816,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"enable_gpxe\" <$> TF.attribute",
-                    "name": "enable_gpxe",
+                    "name": "_computedEnableGpxe",
                     "method": "computedEnableGpxe",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedEnableGpxe",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedEnableGpxe"
+                    "original": "enable_gpxe"
                 },
                 {
                     "default": "TF.Nil",
@@ -1778,13 +1832,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"fetchable_files\" <$> TF.attribute",
-                    "name": "fetchable_files",
+                    "name": "_computedFetchableFiles",
                     "method": "computedFetchableFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFetchableFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedFetchableFiles"
+                    "original": "fetchable_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -1793,13 +1848,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "gateway",
+                    "name": "_computedGateway",
                     "method": "computedGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedGateway"
+                    "original": "gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -1808,13 +1864,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_computedHostname",
                     "method": "computedHostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHostname",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedHostname"
+                    "original": "hostname"
                 },
                 {
                     "default": "TF.Nil",
@@ -1823,13 +1880,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"image\" <$> TF.attribute",
-                    "name": "image",
+                    "name": "_computedImage",
                     "method": "computedImage",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedImage",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedImage"
+                    "original": "image"
                 },
                 {
                     "default": "TF.Nil",
@@ -1838,13 +1896,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"interface\" <$> TF.attribute",
-                    "name": "interface",
+                    "name": "_computedInterface",
                     "method": "computedInterface",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Interface s)]",
                     "class": "HasComputedInterface",
+                    "validate": true,
                     "optional": true,
-                    "label": "_computedInterface"
+                    "original": "interface"
                 },
                 {
                     "default": "TF.Nil",
@@ -1853,13 +1912,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv6_default_device\" <$> TF.attribute",
-                    "name": "ipv6_default_device",
+                    "name": "_computedIpv6DefaultDevice",
                     "method": "computedIpv6DefaultDevice",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6DefaultDevice",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedIpv6DefaultDevice"
+                    "original": "ipv6_default_device"
                 },
                 {
                     "default": "TF.Nil",
@@ -1868,13 +1928,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel_options\" <$> TF.attribute",
-                    "name": "kernel_options",
+                    "name": "_computedKernelOptions",
                     "method": "computedKernelOptions",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptions",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKernelOptions"
+                    "original": "kernel_options"
                 },
                 {
                     "default": "TF.Nil",
@@ -1883,13 +1944,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kernel_options_post\" <$> TF.attribute",
-                    "name": "kernel_options_post",
+                    "name": "_computedKernelOptionsPost",
                     "method": "computedKernelOptionsPost",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKernelOptionsPost",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKernelOptionsPost"
+                    "original": "kernel_options_post"
                 },
                 {
                     "default": "TF.Nil",
@@ -1898,13 +1960,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"kickstart\" <$> TF.attribute",
-                    "name": "kickstart",
+                    "name": "_computedKickstart",
                     "method": "computedKickstart",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKickstart",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKickstart"
+                    "original": "kickstart"
                 },
                 {
                     "default": "TF.Nil",
@@ -1913,13 +1976,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ks_meta\" <$> TF.attribute",
-                    "name": "ks_meta",
+                    "name": "_computedKsMeta",
                     "method": "computedKsMeta",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKsMeta",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKsMeta"
+                    "original": "ks_meta"
                 },
                 {
                     "default": "TF.Nil",
@@ -1928,13 +1992,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ldap_enabled\" <$> TF.attribute",
-                    "name": "ldap_enabled",
+                    "name": "_computedLdapEnabled",
                     "method": "computedLdapEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedLdapEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedLdapEnabled"
+                    "original": "ldap_enabled"
                 },
                 {
                     "default": "TF.Nil",
@@ -1943,13 +2008,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ldap_type\" <$> TF.attribute",
-                    "name": "ldap_type",
+                    "name": "_computedLdapType",
                     "method": "computedLdapType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLdapType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedLdapType"
+                    "original": "ldap_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -1958,13 +2024,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mgmt_classes\" <$> TF.attribute",
-                    "name": "mgmt_classes",
+                    "name": "_computedMgmtClasses",
                     "method": "computedMgmtClasses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedMgmtClasses",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMgmtClasses"
+                    "original": "mgmt_classes"
                 },
                 {
                     "default": "TF.Nil",
@@ -1973,13 +2040,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"mgmt_parameters\" <$> TF.attribute",
-                    "name": "mgmt_parameters",
+                    "name": "_computedMgmtParameters",
                     "method": "computedMgmtParameters",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedMgmtParameters",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMgmtParameters"
+                    "original": "mgmt_parameters"
                 },
                 {
                     "default": "TF.Nil",
@@ -1988,13 +2056,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"monit_enabled\" <$> TF.attribute",
-                    "name": "monit_enabled",
+                    "name": "_computedMonitEnabled",
                     "method": "computedMonitEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedMonitEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedMonitEnabled"
+                    "original": "monit_enabled"
                 },
                 {
                     "default": "TF.Nil",
@@ -2003,13 +2072,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name_servers\" <$> TF.attribute",
-                    "name": "name_servers",
+                    "name": "_computedNameServers",
                     "method": "computedNameServers",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNameServers"
+                    "original": "name_servers"
                 },
                 {
                     "default": "TF.Nil",
@@ -2018,13 +2088,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name_servers_search\" <$> TF.attribute",
-                    "name": "name_servers_search",
+                    "name": "_computedNameServersSearch",
                     "method": "computedNameServersSearch",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNameServersSearch",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNameServersSearch"
+                    "original": "name_servers_search"
                 },
                 {
                     "default": "TF.Nil",
@@ -2033,13 +2104,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"netboot_enabled\" <$> TF.attribute",
-                    "name": "netboot_enabled",
+                    "name": "_computedNetbootEnabled",
                     "method": "computedNetbootEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedNetbootEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedNetbootEnabled"
+                    "original": "netboot_enabled"
                 },
                 {
                     "default": "TF.Nil",
@@ -2048,13 +2120,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"owners\" <$> TF.attribute",
-                    "name": "owners",
+                    "name": "_computedOwners",
                     "method": "computedOwners",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedOwners",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOwners"
+                    "original": "owners"
                 },
                 {
                     "default": "TF.Nil",
@@ -2063,13 +2136,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"power_address\" <$> TF.attribute",
-                    "name": "power_address",
+                    "name": "_computedPowerAddress",
                     "method": "computedPowerAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerAddress",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPowerAddress"
+                    "original": "power_address"
                 },
                 {
                     "default": "TF.Nil",
@@ -2078,13 +2152,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"power_id\" <$> TF.attribute",
-                    "name": "power_id",
+                    "name": "_computedPowerId",
                     "method": "computedPowerId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPowerId"
+                    "original": "power_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -2093,13 +2168,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"power_pass\" <$> TF.attribute",
-                    "name": "power_pass",
+                    "name": "_computedPowerPass",
                     "method": "computedPowerPass",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerPass",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPowerPass"
+                    "original": "power_pass"
                 },
                 {
                     "default": "TF.Nil",
@@ -2108,13 +2184,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"power_type\" <$> TF.attribute",
-                    "name": "power_type",
+                    "name": "_computedPowerType",
                     "method": "computedPowerType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPowerType"
+                    "original": "power_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -2123,13 +2200,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"power_user\" <$> TF.attribute",
-                    "name": "power_user",
+                    "name": "_computedPowerUser",
                     "method": "computedPowerUser",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerUser",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPowerUser"
+                    "original": "power_user"
                 },
                 {
                     "default": "TF.Nil",
@@ -2138,13 +2216,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"proxy\" <$> TF.attribute",
-                    "name": "proxy",
+                    "name": "_computedProxy",
                     "method": "computedProxy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedProxy",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedProxy"
+                    "original": "proxy"
                 },
                 {
                     "default": "TF.Nil",
@@ -2153,13 +2232,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redhat_management_key\" <$> TF.attribute",
-                    "name": "redhat_management_key",
+                    "name": "_computedRedhatManagementKey",
                     "method": "computedRedhatManagementKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementKey",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRedhatManagementKey"
+                    "original": "redhat_management_key"
                 },
                 {
                     "default": "TF.Nil",
@@ -2168,13 +2248,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"redhat_management_server\" <$> TF.attribute",
-                    "name": "redhat_management_server",
+                    "name": "_computedRedhatManagementServer",
                     "method": "computedRedhatManagementServer",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRedhatManagementServer",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedRedhatManagementServer"
+                    "original": "redhat_management_server"
                 },
                 {
                     "default": "TF.Nil",
@@ -2183,13 +2264,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"status\" <$> TF.attribute",
-                    "name": "status",
+                    "name": "_computedStatus",
                     "method": "computedStatus",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStatus",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedStatus"
+                    "original": "status"
                 },
                 {
                     "default": "TF.Nil",
@@ -2198,13 +2280,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"template_files\" <$> TF.attribute",
-                    "name": "template_files",
+                    "name": "_computedTemplateFiles",
                     "method": "computedTemplateFiles",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplateFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTemplateFiles"
+                    "original": "template_files"
                 },
                 {
                     "default": "TF.Nil",
@@ -2213,13 +2296,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"template_remote_kickstarts\" <$> TF.attribute",
-                    "name": "template_remote_kickstarts",
+                    "name": "_computedTemplateRemoteKickstarts",
                     "method": "computedTemplateRemoteKickstarts",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedTemplateRemoteKickstarts",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedTemplateRemoteKickstarts"
+                    "original": "template_remote_kickstarts"
                 },
                 {
                     "default": "TF.Nil",
@@ -2228,13 +2312,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_auto_boot\" <$> TF.attribute",
-                    "name": "virt_auto_boot",
+                    "name": "_computedVirtAutoBoot",
                     "method": "computedVirtAutoBoot",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtAutoBoot",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtAutoBoot"
+                    "original": "virt_auto_boot"
                 },
                 {
                     "default": "TF.Nil",
@@ -2243,13 +2328,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_cpus\" <$> TF.attribute",
-                    "name": "virt_cpus",
+                    "name": "_computedVirtCpus",
                     "method": "computedVirtCpus",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtCpus",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtCpus"
+                    "original": "virt_cpus"
                 },
                 {
                     "default": "TF.Nil",
@@ -2258,13 +2344,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_disk_driver\" <$> TF.attribute",
-                    "name": "virt_disk_driver",
+                    "name": "_computedVirtDiskDriver",
                     "method": "computedVirtDiskDriver",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtDiskDriver",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtDiskDriver"
+                    "original": "virt_disk_driver"
                 },
                 {
                     "default": "TF.Nil",
@@ -2273,13 +2360,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_file_size\" <$> TF.attribute",
-                    "name": "virt_file_size",
+                    "name": "_computedVirtFileSize",
                     "method": "computedVirtFileSize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtFileSize",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtFileSize"
+                    "original": "virt_file_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -2288,13 +2376,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_path\" <$> TF.attribute",
-                    "name": "virt_path",
+                    "name": "_computedVirtPath",
                     "method": "computedVirtPath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtPath",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtPath"
+                    "original": "virt_path"
                 },
                 {
                     "default": "TF.Nil",
@@ -2303,13 +2392,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_pxe_boot\" <$> TF.attribute",
-                    "name": "virt_pxe_boot",
+                    "name": "_computedVirtPxeBoot",
                     "method": "computedVirtPxeBoot",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedVirtPxeBoot",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtPxeBoot"
+                    "original": "virt_pxe_boot"
                 },
                 {
                     "default": "TF.Nil",
@@ -2318,13 +2408,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_ram\" <$> TF.attribute",
-                    "name": "virt_ram",
+                    "name": "_computedVirtRam",
                     "method": "computedVirtRam",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtRam",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtRam"
+                    "original": "virt_ram"
                 },
                 {
                     "default": "TF.Nil",
@@ -2333,13 +2424,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"virt_type\" <$> TF.attribute",
-                    "name": "virt_type",
+                    "name": "_computedVirtType",
                     "method": "computedVirtType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVirtType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedVirtType"
+                    "original": "virt_type"
                 }
             ],
             "parameters": [
@@ -2350,13 +2442,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_profile",
@@ -2365,19 +2458,181 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"profile\" <$> TF.attribute",
-                    "name": "profile",
+                    "name": "_profile",
                     "method": "profile",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProfile",
+                    "validate": false,
                     "optional": false,
-                    "label": "_profile"
+                    "original": "profile"
                 }
             ],
+            "conflicts": [],
             "type": "SystemResource s",
             "original": "cobbler_system"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The path or contents of an SSL CA certificate"
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"cacert_file\" <$>",
+                "name": "_cacertFile",
+                "method": "cacertFile",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasCacertFile",
+                "validate": false,
+                "optional": true,
+                "original": "cacert_file"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "Ignore SSL certificate warnings and errors."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"insecure\" <$>",
+                "name": "_insecure",
+                "method": "insecure",
+                "conflicts": [],
+                "type": "P.Maybe P.Bool",
+                "class": "HasInsecure",
+                "validate": false,
+                "optional": true,
+                "original": "insecure"
+            },
+            {
+                "default": "_password",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The password for accessing Cobbler."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"password\"",
+                "name": "_password",
+                "method": "password",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasPassword",
+                "validate": false,
+                "optional": false,
+                "original": "password"
+            },
+            {
+                "default": "_url",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Cobbler URL"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"url\"",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": false,
+                "original": "url"
+            },
+            {
+                "default": "_username",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The username for accessing Cobbler."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"username\"",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": false,
+                "original": "username"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_password",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The password for accessing Cobbler."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"password\"",
+                "name": "_password",
+                "method": "password",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasPassword",
+                "validate": false,
+                "optional": false,
+                "original": "password"
+            },
+            {
+                "default": "_url",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Cobbler URL"
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"url\"",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": false,
+                "original": "url"
+            },
+            {
+                "default": "_username",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The username for accessing Cobbler."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"username\"",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": false,
+                "original": "username"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -2387,60 +2642,6 @@
         "microlens"
     ],
     "name": "Cobbler",
-    "parameters": [
-        {
-            "default": "_password",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The password for accessing Cobbler."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"password\"",
-            "name": "password",
-            "method": "password",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasPassword",
-            "optional": false,
-            "label": "_password"
-        },
-        {
-            "default": "_url",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Cobbler URL"
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"url\"",
-            "name": "url",
-            "method": "url",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUrl",
-            "optional": false,
-            "label": "_url"
-        },
-        {
-            "default": "_username",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The username for accessing Cobbler."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"username\"",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUsername",
-            "optional": false,
-            "label": "_username"
-        }
-    ],
     "package": "terrafomo-cobbler",
-    "type": "Provider",
     "original": "cobbler"
 }
