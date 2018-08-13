@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newSubject",
+                "name": "Subject'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"common_name\" <$> TF.attribute",
-                    "name": "common_name",
+                    "name": "_commonName",
                     "method": "commonName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCommonName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_commonName"
+                    "original": "common_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,13 +29,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"country\" <$> TF.attribute",
-                    "name": "country",
+                    "name": "_country",
                     "method": "country",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCountry",
+                    "validate": false,
                     "optional": true,
-                    "label": "_country"
+                    "original": "country"
                 },
                 {
                     "default": "TF.Nil",
@@ -39,13 +45,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"locality\" <$> TF.attribute",
-                    "name": "locality",
+                    "name": "_locality",
                     "method": "locality",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLocality",
+                    "validate": false,
                     "optional": true,
-                    "label": "_locality"
+                    "original": "locality"
                 },
                 {
                     "default": "TF.Nil",
@@ -54,13 +61,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"organization\" <$> TF.attribute",
-                    "name": "organization",
+                    "name": "_organization",
                     "method": "organization",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOrganization",
+                    "validate": false,
                     "optional": true,
-                    "label": "_organization"
+                    "original": "organization"
                 },
                 {
                     "default": "TF.Nil",
@@ -69,13 +77,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"organizational_unit\" <$> TF.attribute",
-                    "name": "organizational_unit",
+                    "name": "_organizationalUnit",
                     "method": "organizationalUnit",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOrganizationalUnit",
+                    "validate": false,
                     "optional": true,
-                    "label": "_organizationalUnit"
+                    "original": "organizational_unit"
                 },
                 {
                     "default": "TF.Nil",
@@ -84,13 +93,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"postal_code\" <$> TF.attribute",
-                    "name": "postal_code",
+                    "name": "_postalCode",
                     "method": "postalCode",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPostalCode",
+                    "validate": false,
                     "optional": true,
-                    "label": "_postalCode"
+                    "original": "postal_code"
                 },
                 {
                     "default": "TF.Nil",
@@ -99,13 +109,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"province\" <$> TF.attribute",
-                    "name": "province",
+                    "name": "_province",
                     "method": "province",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProvince",
+                    "validate": false,
                     "optional": true,
-                    "label": "_province"
+                    "original": "province"
                 },
                 {
                     "default": "TF.Nil",
@@ -114,13 +125,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"serial_number\" <$> TF.attribute",
-                    "name": "serial_number",
+                    "name": "_serialNumber",
                     "method": "serialNumber",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSerialNumber",
+                    "validate": false,
                     "optional": true,
-                    "label": "_serialNumber"
+                    "original": "serial_number"
                 },
                 {
                     "default": "TF.Nil",
@@ -129,26 +141,31 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"street_address\" <$> TF.attribute",
-                    "name": "street_address",
+                    "name": "_streetAddress",
                     "method": "streetAddress",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasStreetAddress",
+                    "validate": false,
                     "optional": true,
-                    "label": "_streetAddress"
+                    "original": "street_address"
                 }
             ],
             "name": "Subject",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Subject s",
             "original": "subject"
         }
     ],
-    "arguments": [],
     "dataSources": [
         {
+            "con": {
+                "smart": "publicKeyData",
+                "name": "PublicKeyData'"
+            },
             "arguments": [
                 {
                     "default": "_privateKeyPem",
@@ -159,17 +176,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_privateKeyPem",
                     "method": "privateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKeyPem"
+                    "original": "private_key_pem"
                 }
             ],
-            "schema": "DataSource",
             "name": "PublicKeyData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -180,13 +198,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
-                    "name": "algorithm",
+                    "name": "_computedAlgorithm",
                     "method": "computedAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAlgorithm"
+                    "original": "algorithm"
                 },
                 {
                     "default": "TF.Nil",
@@ -195,13 +214,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_key_openssh\" <$> TF.attribute",
-                    "name": "public_key_openssh",
+                    "name": "_computedPublicKeyOpenssh",
                     "method": "computedPublicKeyOpenssh",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPublicKeyOpenssh",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublicKeyOpenssh"
+                    "original": "public_key_openssh"
                 },
                 {
                     "default": "TF.Nil",
@@ -210,13 +230,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_key_pem\" <$> TF.attribute",
-                    "name": "public_key_pem",
+                    "name": "_computedPublicKeyPem",
                     "method": "computedPublicKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPublicKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublicKeyPem"
+                    "original": "public_key_pem"
                 }
             ],
             "parameters": [
@@ -229,21 +250,27 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_privateKeyPem",
                     "method": "privateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKeyPem"
+                    "original": "private_key_pem"
                 }
             ],
+            "conflicts": [],
             "type": "PublicKeyData s",
             "original": "tls_public_key"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "certRequestResource",
+                "name": "CertRequestResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -254,13 +281,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"dns_names\" <$> TF.attribute",
-                    "name": "dns_names",
+                    "name": "_dnsNames",
                     "method": "dnsNames",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasDnsNames",
+                    "validate": false,
                     "optional": true,
-                    "label": "_dnsNames"
+                    "original": "dns_names"
                 },
                 {
                     "default": "TF.Nil",
@@ -271,13 +299,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ip_addresses\" <$> TF.attribute",
-                    "name": "ip_addresses",
+                    "name": "_ipAddresses",
                     "method": "ipAddresses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasIpAddresses",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ipAddresses"
+                    "original": "ip_addresses"
                 },
                 {
                     "default": "_keyAlgorithm",
@@ -288,13 +317,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
-                    "name": "key_algorithm",
+                    "name": "_keyAlgorithm",
                     "method": "keyAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_keyAlgorithm"
+                    "original": "key_algorithm"
                 },
                 {
                     "default": "_privateKeyPem",
@@ -305,13 +335,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_privateKeyPem",
                     "method": "privateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKeyPem"
+                    "original": "private_key_pem"
                 },
                 {
                     "default": "_subject",
@@ -320,17 +351,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"subject\" <$> TF.attribute",
-                    "name": "subject",
+                    "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [Subject s]",
+                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
                     "class": "HasSubject",
+                    "validate": true,
                     "optional": false,
-                    "label": "_subject"
+                    "original": "subject"
                 }
             ],
-            "schema": "Resource",
             "name": "CertRequestResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -339,13 +371,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert_request_pem\" <$> TF.attribute",
-                    "name": "cert_request_pem",
+                    "name": "_computedCertRequestPem",
                     "method": "computedCertRequestPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCertRequestPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCertRequestPem"
+                    "original": "cert_request_pem"
                 }
             ],
             "parameters": [
@@ -358,13 +391,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
-                    "name": "key_algorithm",
+                    "name": "_keyAlgorithm",
                     "method": "keyAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_keyAlgorithm"
+                    "original": "key_algorithm"
                 },
                 {
                     "default": "_privateKeyPem",
@@ -375,13 +409,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_privateKeyPem",
                     "method": "privateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKeyPem"
+                    "original": "private_key_pem"
                 },
                 {
                     "default": "_subject",
@@ -390,19 +425,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"subject\" <$> TF.attribute",
-                    "name": "subject",
+                    "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [Subject s]",
+                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
                     "class": "HasSubject",
+                    "validate": true,
                     "optional": false,
-                    "label": "_subject"
+                    "original": "subject"
                 }
             ],
+            "conflicts": [],
             "type": "CertRequestResource s",
             "original": "tls_cert_request"
         },
         {
+            "con": {
+                "smart": "locallySignedCertResource",
+                "name": "LocallySignedCertResource'"
+            },
             "arguments": [
                 {
                     "default": "_allowedUses",
@@ -413,13 +454,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
-                    "name": "allowed_uses",
+                    "name": "_allowedUses",
                     "method": "allowedUses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasAllowedUses",
+                    "validate": false,
                     "optional": false,
-                    "label": "_allowedUses"
+                    "original": "allowed_uses"
                 },
                 {
                     "default": "_caCertPem",
@@ -430,13 +472,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ca_cert_pem\" <$> TF.attribute",
-                    "name": "ca_cert_pem",
+                    "name": "_caCertPem",
                     "method": "caCertPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCaCertPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_caCertPem"
+                    "original": "ca_cert_pem"
                 },
                 {
                     "default": "_caKeyAlgorithm",
@@ -447,13 +490,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ca_key_algorithm\" <$> TF.attribute",
-                    "name": "ca_key_algorithm",
+                    "name": "_caKeyAlgorithm",
                     "method": "caKeyAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCaKeyAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_caKeyAlgorithm"
+                    "original": "ca_key_algorithm"
                 },
                 {
                     "default": "_caPrivateKeyPem",
@@ -464,13 +508,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ca_private_key_pem\" <$> TF.attribute",
-                    "name": "ca_private_key_pem",
+                    "name": "_caPrivateKeyPem",
                     "method": "caPrivateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCaPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_caPrivateKeyPem"
+                    "original": "ca_private_key_pem"
                 },
                 {
                     "default": "_certRequestPem",
@@ -481,13 +526,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"cert_request_pem\" <$> TF.attribute",
-                    "name": "cert_request_pem",
+                    "name": "_certRequestPem",
                     "method": "certRequestPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCertRequestPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_certRequestPem"
+                    "original": "cert_request_pem"
                 },
                 {
                     "default": "TF.value 0",
@@ -499,13 +545,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"early_renewal_hours\" <$> TF.attribute",
-                    "name": "early_renewal_hours",
+                    "name": "_earlyRenewalHours",
                     "method": "earlyRenewalHours",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasEarlyRenewalHours",
+                    "validate": false,
                     "optional": true,
-                    "label": "_earlyRenewalHours"
+                    "original": "early_renewal_hours"
                 },
                 {
                     "default": "TF.Nil",
@@ -516,13 +563,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"is_ca_certificate\" <$> TF.attribute",
-                    "name": "is_ca_certificate",
+                    "name": "_isCaCertificate",
                     "method": "isCaCertificate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIsCaCertificate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_isCaCertificate"
+                    "original": "is_ca_certificate"
                 },
                 {
                     "default": "_validityPeriodHours",
@@ -533,17 +581,18 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
-                    "name": "validity_period_hours",
+                    "name": "_validityPeriodHours",
                     "method": "validityPeriodHours",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasValidityPeriodHours",
+                    "validate": false,
                     "optional": false,
-                    "label": "_validityPeriodHours"
+                    "original": "validity_period_hours"
                 }
             ],
-            "schema": "Resource",
             "name": "LocallySignedCertResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -552,13 +601,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert_pem\" <$> TF.attribute",
-                    "name": "cert_pem",
+                    "name": "_computedCertPem",
                     "method": "computedCertPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCertPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCertPem"
+                    "original": "cert_pem"
                 },
                 {
                     "default": "TF.Nil",
@@ -567,13 +617,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"validity_end_time\" <$> TF.attribute",
-                    "name": "validity_end_time",
+                    "name": "_computedValidityEndTime",
                     "method": "computedValidityEndTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValidityEndTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedValidityEndTime"
+                    "original": "validity_end_time"
                 },
                 {
                     "default": "TF.Nil",
@@ -582,13 +633,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"validity_start_time\" <$> TF.attribute",
-                    "name": "validity_start_time",
+                    "name": "_computedValidityStartTime",
                     "method": "computedValidityStartTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValidityStartTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedValidityStartTime"
+                    "original": "validity_start_time"
                 }
             ],
             "parameters": [
@@ -601,13 +653,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
-                    "name": "allowed_uses",
+                    "name": "_allowedUses",
                     "method": "allowedUses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasAllowedUses",
+                    "validate": false,
                     "optional": false,
-                    "label": "_allowedUses"
+                    "original": "allowed_uses"
                 },
                 {
                     "default": "_caCertPem",
@@ -618,13 +671,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ca_cert_pem\" <$> TF.attribute",
-                    "name": "ca_cert_pem",
+                    "name": "_caCertPem",
                     "method": "caCertPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCaCertPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_caCertPem"
+                    "original": "ca_cert_pem"
                 },
                 {
                     "default": "_caKeyAlgorithm",
@@ -635,13 +689,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ca_key_algorithm\" <$> TF.attribute",
-                    "name": "ca_key_algorithm",
+                    "name": "_caKeyAlgorithm",
                     "method": "caKeyAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCaKeyAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_caKeyAlgorithm"
+                    "original": "ca_key_algorithm"
                 },
                 {
                     "default": "_caPrivateKeyPem",
@@ -652,13 +707,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ca_private_key_pem\" <$> TF.attribute",
-                    "name": "ca_private_key_pem",
+                    "name": "_caPrivateKeyPem",
                     "method": "caPrivateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCaPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_caPrivateKeyPem"
+                    "original": "ca_private_key_pem"
                 },
                 {
                     "default": "_certRequestPem",
@@ -669,13 +725,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"cert_request_pem\" <$> TF.attribute",
-                    "name": "cert_request_pem",
+                    "name": "_certRequestPem",
                     "method": "certRequestPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCertRequestPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_certRequestPem"
+                    "original": "cert_request_pem"
                 },
                 {
                     "default": "_validityPeriodHours",
@@ -686,19 +743,25 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
-                    "name": "validity_period_hours",
+                    "name": "_validityPeriodHours",
                     "method": "validityPeriodHours",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasValidityPeriodHours",
+                    "validate": false,
                     "optional": false,
-                    "label": "_validityPeriodHours"
+                    "original": "validity_period_hours"
                 }
             ],
+            "conflicts": [],
             "type": "LocallySignedCertResource s",
             "original": "tls_locally_signed_cert"
         },
         {
+            "con": {
+                "smart": "privateKeyResource",
+                "name": "PrivateKeyResource'"
+            },
             "arguments": [
                 {
                     "default": "_algorithm",
@@ -709,13 +772,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
-                    "name": "algorithm",
+                    "name": "_algorithm",
                     "method": "algorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_algorithm"
+                    "original": "algorithm"
                 },
                 {
                     "default": "TF.value \"P224\"",
@@ -726,13 +790,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ecdsa_curve\" <$> TF.attribute",
-                    "name": "ecdsa_curve",
+                    "name": "_ecdsaCurve",
                     "method": "ecdsaCurve",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasEcdsaCurve",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ecdsaCurve"
+                    "original": "ecdsa_curve"
                 },
                 {
                     "default": "TF.value 2048",
@@ -743,17 +808,18 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"rsa_bits\" <$> TF.attribute",
-                    "name": "rsa_bits",
+                    "name": "_rsaBits",
                     "method": "rsaBits",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRsaBits",
+                    "validate": false,
                     "optional": true,
-                    "label": "_rsaBits"
+                    "original": "rsa_bits"
                 }
             ],
-            "schema": "Resource",
             "name": "PrivateKeyResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -762,13 +828,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_computedPrivateKeyPem",
                     "method": "computedPrivateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPrivateKeyPem"
+                    "original": "private_key_pem"
                 },
                 {
                     "default": "TF.Nil",
@@ -777,13 +844,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_key_openssh\" <$> TF.attribute",
-                    "name": "public_key_openssh",
+                    "name": "_computedPublicKeyOpenssh",
                     "method": "computedPublicKeyOpenssh",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPublicKeyOpenssh",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublicKeyOpenssh"
+                    "original": "public_key_openssh"
                 },
                 {
                     "default": "TF.Nil",
@@ -792,13 +860,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_key_pem\" <$> TF.attribute",
-                    "name": "public_key_pem",
+                    "name": "_computedPublicKeyPem",
                     "method": "computedPublicKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPublicKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublicKeyPem"
+                    "original": "public_key_pem"
                 }
             ],
             "parameters": [
@@ -811,19 +880,25 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"algorithm\" <$> TF.attribute",
-                    "name": "algorithm",
+                    "name": "_algorithm",
                     "method": "algorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_algorithm"
+                    "original": "algorithm"
                 }
             ],
+            "conflicts": [],
             "type": "PrivateKeyResource s",
             "original": "tls_private_key"
         },
         {
+            "con": {
+                "smart": "selfSignedCertResource",
+                "name": "SelfSignedCertResource'"
+            },
             "arguments": [
                 {
                     "default": "_allowedUses",
@@ -834,13 +909,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
-                    "name": "allowed_uses",
+                    "name": "_allowedUses",
                     "method": "allowedUses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasAllowedUses",
+                    "validate": false,
                     "optional": false,
-                    "label": "_allowedUses"
+                    "original": "allowed_uses"
                 },
                 {
                     "default": "TF.Nil",
@@ -851,13 +927,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"dns_names\" <$> TF.attribute",
-                    "name": "dns_names",
+                    "name": "_dnsNames",
                     "method": "dnsNames",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasDnsNames",
+                    "validate": false,
                     "optional": true,
-                    "label": "_dnsNames"
+                    "original": "dns_names"
                 },
                 {
                     "default": "TF.value 0",
@@ -869,13 +946,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"early_renewal_hours\" <$> TF.attribute",
-                    "name": "early_renewal_hours",
+                    "name": "_earlyRenewalHours",
                     "method": "earlyRenewalHours",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasEarlyRenewalHours",
+                    "validate": false,
                     "optional": true,
-                    "label": "_earlyRenewalHours"
+                    "original": "early_renewal_hours"
                 },
                 {
                     "default": "TF.Nil",
@@ -886,13 +964,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"ip_addresses\" <$> TF.attribute",
-                    "name": "ip_addresses",
+                    "name": "_ipAddresses",
                     "method": "ipAddresses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasIpAddresses",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ipAddresses"
+                    "original": "ip_addresses"
                 },
                 {
                     "default": "TF.Nil",
@@ -903,13 +982,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"is_ca_certificate\" <$> TF.attribute",
-                    "name": "is_ca_certificate",
+                    "name": "_isCaCertificate",
                     "method": "isCaCertificate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIsCaCertificate",
+                    "validate": false,
                     "optional": true,
-                    "label": "_isCaCertificate"
+                    "original": "is_ca_certificate"
                 },
                 {
                     "default": "_keyAlgorithm",
@@ -920,13 +1000,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
-                    "name": "key_algorithm",
+                    "name": "_keyAlgorithm",
                     "method": "keyAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_keyAlgorithm"
+                    "original": "key_algorithm"
                 },
                 {
                     "default": "_privateKeyPem",
@@ -937,13 +1018,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_privateKeyPem",
                     "method": "privateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKeyPem"
+                    "original": "private_key_pem"
                 },
                 {
                     "default": "_subject",
@@ -952,13 +1034,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"subject\" <$> TF.attribute",
-                    "name": "subject",
+                    "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [Subject s]",
+                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
                     "class": "HasSubject",
+                    "validate": true,
                     "optional": false,
-                    "label": "_subject"
+                    "original": "subject"
                 },
                 {
                     "default": "_validityPeriodHours",
@@ -969,17 +1052,18 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
-                    "name": "validity_period_hours",
+                    "name": "_validityPeriodHours",
                     "method": "validityPeriodHours",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasValidityPeriodHours",
+                    "validate": false,
                     "optional": false,
-                    "label": "_validityPeriodHours"
+                    "original": "validity_period_hours"
                 }
             ],
-            "schema": "Resource",
             "name": "SelfSignedCertResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -988,13 +1072,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cert_pem\" <$> TF.attribute",
-                    "name": "cert_pem",
+                    "name": "_computedCertPem",
                     "method": "computedCertPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCertPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCertPem"
+                    "original": "cert_pem"
                 },
                 {
                     "default": "TF.Nil",
@@ -1003,13 +1088,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"validity_end_time\" <$> TF.attribute",
-                    "name": "validity_end_time",
+                    "name": "_computedValidityEndTime",
                     "method": "computedValidityEndTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValidityEndTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedValidityEndTime"
+                    "original": "validity_end_time"
                 },
                 {
                     "default": "TF.Nil",
@@ -1018,13 +1104,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"validity_start_time\" <$> TF.attribute",
-                    "name": "validity_start_time",
+                    "name": "_computedValidityStartTime",
                     "method": "computedValidityStartTime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedValidityStartTime",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedValidityStartTime"
+                    "original": "validity_start_time"
                 }
             ],
             "parameters": [
@@ -1037,13 +1124,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"allowed_uses\" <$> TF.attribute",
-                    "name": "allowed_uses",
+                    "name": "_allowedUses",
                     "method": "allowedUses",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasAllowedUses",
+                    "validate": false,
                     "optional": false,
-                    "label": "_allowedUses"
+                    "original": "allowed_uses"
                 },
                 {
                     "default": "_keyAlgorithm",
@@ -1054,13 +1142,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"key_algorithm\" <$> TF.attribute",
-                    "name": "key_algorithm",
+                    "name": "_keyAlgorithm",
                     "method": "keyAlgorithm",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyAlgorithm",
+                    "validate": false,
                     "optional": false,
-                    "label": "_keyAlgorithm"
+                    "original": "key_algorithm"
                 },
                 {
                     "default": "_privateKeyPem",
@@ -1071,13 +1160,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"private_key_pem\" <$> TF.attribute",
-                    "name": "private_key_pem",
+                    "name": "_privateKeyPem",
                     "method": "privateKeyPem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrivateKeyPem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_privateKeyPem"
+                    "original": "private_key_pem"
                 },
                 {
                     "default": "_subject",
@@ -1086,13 +1176,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"subject\" <$> TF.attribute",
-                    "name": "subject",
+                    "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [Subject s]",
+                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
                     "class": "HasSubject",
+                    "validate": true,
                     "optional": false,
-                    "label": "_subject"
+                    "original": "subject"
                 },
                 {
                     "default": "_validityPeriodHours",
@@ -1103,19 +1194,35 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"validity_period_hours\" <$> TF.attribute",
-                    "name": "validity_period_hours",
+                    "name": "_validityPeriodHours",
                     "method": "validityPeriodHours",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasValidityPeriodHours",
+                    "validate": false,
                     "optional": false,
-                    "label": "_validityPeriodHours"
+                    "original": "validity_period_hours"
                 }
             ],
+            "conflicts": [],
             "type": "SelfSignedCertResource s",
             "original": "tls_self_signed_cert"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -1125,8 +1232,6 @@
         "microlens"
     ],
     "name": "TLS",
-    "parameters": [],
     "package": "terrafomo-builtins",
-    "type": "Provider",
     "original": "tls"
 }
