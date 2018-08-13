@@ -508,16 +508,16 @@ instance P.HasVolumes (ContainerResource s) (TF.Attr s [TF.Attr s (Volumes s)]) 
                           } :: ContainerResource s)
 
 instance s ~ s' => P.HasComputedBridge (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedBridge x = TF.compute (TF.refKey x) "bridge"
+    computedBridge x = TF.compute (TF.refKey x) "_computedBridge"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedIpPrefixLength (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Integer) where
-    computedIpPrefixLength x = TF.compute (TF.refKey x) "ip_prefix_length"
+    computedIpPrefixLength x = TF.compute (TF.refKey x) "_computedIpPrefixLength"
 
 -- | @docker_image@ Resource.
 --
@@ -591,7 +591,7 @@ instance P.HasPullTriggers (ImageResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.
                           } :: ImageResource s)
 
 instance s ~ s' => P.HasComputedLatest (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedLatest x = TF.compute (TF.refKey x) "latest"
+    computedLatest x = TF.compute (TF.refKey x) "_computedLatest"
 
 -- | @docker_network@ Resource.
 --
@@ -657,16 +657,16 @@ instance P.HasName (NetworkResource s) (TF.Attr s P.Text) where
                           } :: NetworkResource s)
 
 instance s ~ s' => P.HasComputedDriver (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedDriver x = TF.compute (TF.refKey x) "driver"
+    computedDriver x = TF.compute (TF.refKey x) "_computedDriver"
 
 instance s ~ s' => P.HasComputedInternal (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Bool) where
-    computedInternal x = TF.compute (TF.refKey x) "internal"
+    computedInternal x = TF.compute (TF.refKey x) "_computedInternal"
 
 instance s ~ s' => P.HasComputedOptions (TF.Ref s' (NetworkResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedOptions x = TF.compute (TF.refKey x) "options"
+    computedOptions x = TF.compute (TF.refKey x) "_computedOptions"
 
 instance s ~ s' => P.HasComputedScope (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedScope x = TF.compute (TF.refKey x) "scope"
+    computedScope x = TF.compute (TF.refKey x) "_computedScope"
 
 -- | @docker_secret@ Resource.
 --
@@ -720,7 +720,7 @@ data ServiceResource s = ServiceResource'
     { _auth           :: TF.Attr s (P.HashMap P.Text (Auth s))
     -- ^ @auth@ - (Optional)
     --
-    , _convergeConfig :: TF.Attr s [ConvergeConfig s]
+    , _convergeConfig :: TF.Attr s (ConvergeConfig s)
     -- ^ @converge_config@ - (Optional)
     -- A configuration to ensure that a service converges aka reaches the desired
     -- that of all task up and running
@@ -729,15 +729,15 @@ data ServiceResource s = ServiceResource'
     -- ^ @name@ - (Required)
     -- Name of the service
     --
-    , _rollbackConfig :: TF.Attr s [RollbackConfig s]
+    , _rollbackConfig :: TF.Attr s (RollbackConfig s)
     -- ^ @rollback_config@ - (Optional)
     -- Specification for the rollback strategy of the service
     --
-    , _taskSpec       :: TF.Attr s [TaskSpec s]
+    , _taskSpec       :: TF.Attr s (TaskSpec s)
     -- ^ @task_spec@ - (Required)
     -- User modifiable task configuration
     --
-    , _updateConfig   :: TF.Attr s [UpdateConfig s]
+    , _updateConfig   :: TF.Attr s (UpdateConfig s)
     -- ^ @update_config@ - (Optional)
     -- Specification for the update strategy of the service
     --
@@ -755,7 +755,7 @@ instance TF.IsObject (ServiceResource s) where
 
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TaskSpec s] -- ^ @task_spec@ - 'P.taskSpec'
+    -> TF.Attr s (TaskSpec s) -- ^ @task_spec@ - 'P.taskSpec'
     -> TF.Resource P.Provider (ServiceResource s)
 serviceResource _name _taskSpec =
     TF.newResource "docker_service" $
@@ -774,9 +774,9 @@ instance P.HasAuth (ServiceResource s) (TF.Attr s (P.HashMap P.Text (Auth s))) w
                (\s a -> s { _auth = a
                           } :: ServiceResource s)
 
-instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s [ConvergeConfig s]) where
+instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s (ConvergeConfig s)) where
     convergeConfig =
-        P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s [ConvergeConfig s])
+        P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s (ConvergeConfig s))
                (\s a -> s { _convergeConfig = a
                           } :: ServiceResource s)
 
@@ -786,32 +786,32 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: ServiceResource s)
 
-instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s [RollbackConfig s]) where
+instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s (RollbackConfig s)) where
     rollbackConfig =
-        P.lens (_rollbackConfig :: ServiceResource s -> TF.Attr s [RollbackConfig s])
+        P.lens (_rollbackConfig :: ServiceResource s -> TF.Attr s (RollbackConfig s))
                (\s a -> s { _rollbackConfig = a
                           } :: ServiceResource s)
 
-instance P.HasTaskSpec (ServiceResource s) (TF.Attr s [TaskSpec s]) where
+instance P.HasTaskSpec (ServiceResource s) (TF.Attr s (TaskSpec s)) where
     taskSpec =
-        P.lens (_taskSpec :: ServiceResource s -> TF.Attr s [TaskSpec s])
+        P.lens (_taskSpec :: ServiceResource s -> TF.Attr s (TaskSpec s))
                (\s a -> s { _taskSpec = a
                           } :: ServiceResource s)
 
-instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s [UpdateConfig s]) where
+instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s (UpdateConfig s)) where
     updateConfig =
-        P.lens (_updateConfig :: ServiceResource s -> TF.Attr s [UpdateConfig s])
+        P.lens (_updateConfig :: ServiceResource s -> TF.Attr s (UpdateConfig s))
                (\s a -> s { _updateConfig = a
                           } :: ServiceResource s)
 
-instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s [EndpointSpec s]) where
-    computedEndpointSpec x = TF.compute (TF.refKey x) "endpoint_spec"
+instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s (EndpointSpec s)) where
+    computedEndpointSpec x = TF.compute (TF.refKey x) "_computedEndpointSpec"
 
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ServiceResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedLabels x = TF.compute (TF.refKey x) "labels"
+    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
 
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s [Mode s]) where
-    computedMode x = TF.compute (TF.refKey x) "mode"
+instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s (Mode s)) where
+    computedMode x = TF.compute (TF.refKey x) "_computedMode"
 
 -- | @docker_volume@ Resource.
 --
@@ -843,10 +843,10 @@ instance P.HasDriverOpts (VolumeResource s) (TF.Attr s (P.HashMap P.Text (TF.Att
                           } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedDriver (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedDriver x = TF.compute (TF.refKey x) "driver"
+    computedDriver x = TF.compute (TF.refKey x) "_computedDriver"
 
 instance s ~ s' => P.HasComputedMountpoint (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedMountpoint x = TF.compute (TF.refKey x) "mountpoint"
+    computedMountpoint x = TF.compute (TF.refKey x) "_computedMountpoint"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"

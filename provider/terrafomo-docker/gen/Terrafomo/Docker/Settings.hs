@@ -174,6 +174,8 @@ module Terrafomo.Docker.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -231,11 +233,11 @@ instance P.HasOs (Platforms s) (TF.Attr s P.Text) where
 
 -- | @privileges@ nested settings.
 data Privileges s = Privileges'
-    { _credentialSpec :: TF.Attr s [CredentialSpec s]
+    { _credentialSpec :: TF.Attr s (CredentialSpec s)
     -- ^ @credential_spec@ - (Optional)
     -- CredentialSpec for managed service account (Windows only)
     --
-    , _seLinuxContext :: TF.Attr s [SeLinuxContext s]
+    , _seLinuxContext :: TF.Attr s (SeLinuxContext s)
     -- ^ @se_linux_context@ - (Optional)
     -- SELinux labels of the container
     --
@@ -257,25 +259,25 @@ newPrivileges =
         , _seLinuxContext = TF.Nil
         }
 
-instance P.HasCredentialSpec (Privileges s) (TF.Attr s [CredentialSpec s]) where
+instance P.HasCredentialSpec (Privileges s) (TF.Attr s (CredentialSpec s)) where
     credentialSpec =
-        P.lens (_credentialSpec :: Privileges s -> TF.Attr s [CredentialSpec s])
+        P.lens (_credentialSpec :: Privileges s -> TF.Attr s (CredentialSpec s))
                (\s a -> s { _credentialSpec = a
                           } :: Privileges s)
 
-instance P.HasSeLinuxContext (Privileges s) (TF.Attr s [SeLinuxContext s]) where
+instance P.HasSeLinuxContext (Privileges s) (TF.Attr s (SeLinuxContext s)) where
     seLinuxContext =
-        P.lens (_seLinuxContext :: Privileges s -> TF.Attr s [SeLinuxContext s])
+        P.lens (_seLinuxContext :: Privileges s -> TF.Attr s (SeLinuxContext s))
                (\s a -> s { _seLinuxContext = a
                           } :: Privileges s)
 
 -- | @task_spec@ nested settings.
 data TaskSpec s = TaskSpec'
-    { _containerSpec :: TF.Attr s [ContainerSpec s]
+    { _containerSpec :: TF.Attr s (ContainerSpec s)
     -- ^ @container_spec@ - (Required)
     -- The spec for each container
     --
-    , _logDriver     :: TF.Attr s [LogDriver s]
+    , _logDriver     :: TF.Attr s (LogDriver s)
     -- ^ @log_driver@ - (Optional)
     -- Specifies the log driver to use for tasks created from this spec. If not
     -- present, the default one for the swarm will be used, finally falling back to
@@ -297,7 +299,7 @@ instance TF.IsObject (TaskSpec s) where
         ]
 
 newTaskSpec
-    :: TF.Attr s [ContainerSpec s] -- ^ @container_spec@ - 'P.containerSpec'
+    :: TF.Attr s (ContainerSpec s) -- ^ @container_spec@ - 'P.containerSpec'
     -> TaskSpec s
 newTaskSpec _containerSpec =
     TaskSpec'
@@ -306,15 +308,15 @@ newTaskSpec _containerSpec =
         , _networks = TF.Nil
         }
 
-instance P.HasContainerSpec (TaskSpec s) (TF.Attr s [ContainerSpec s]) where
+instance P.HasContainerSpec (TaskSpec s) (TF.Attr s (ContainerSpec s)) where
     containerSpec =
-        P.lens (_containerSpec :: TaskSpec s -> TF.Attr s [ContainerSpec s])
+        P.lens (_containerSpec :: TaskSpec s -> TF.Attr s (ContainerSpec s))
                (\s a -> s { _containerSpec = a
                           } :: TaskSpec s)
 
-instance P.HasLogDriver (TaskSpec s) (TF.Attr s [LogDriver s]) where
+instance P.HasLogDriver (TaskSpec s) (TF.Attr s (LogDriver s)) where
     logDriver =
-        P.lens (_logDriver :: TaskSpec s -> TF.Attr s [LogDriver s])
+        P.lens (_logDriver :: TaskSpec s -> TF.Attr s (LogDriver s))
                (\s a -> s { _logDriver = a
                           } :: TaskSpec s)
 
@@ -325,19 +327,19 @@ instance P.HasNetworks (TaskSpec s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) w
                           } :: TaskSpec s)
 
 instance s ~ s' => P.HasComputedForceUpdate (TF.Ref s' (TaskSpec s)) (TF.Attr s P.Integer) where
-    computedForceUpdate x = TF.compute (TF.refKey x) "force_update"
+    computedForceUpdate x = TF.compute (TF.refKey x) "_computedForceUpdate"
 
-instance s ~ s' => P.HasComputedPlacement (TF.Ref s' (TaskSpec s)) (TF.Attr s [Placement s]) where
-    computedPlacement x = TF.compute (TF.refKey x) "placement"
+instance s ~ s' => P.HasComputedPlacement (TF.Ref s' (TaskSpec s)) (TF.Attr s (Placement s)) where
+    computedPlacement x = TF.compute (TF.refKey x) "_computedPlacement"
 
-instance s ~ s' => P.HasComputedResources (TF.Ref s' (TaskSpec s)) (TF.Attr s [Resources s]) where
-    computedResources x = TF.compute (TF.refKey x) "resources"
+instance s ~ s' => P.HasComputedResources (TF.Ref s' (TaskSpec s)) (TF.Attr s (Resources s)) where
+    computedResources x = TF.compute (TF.refKey x) "_computedResources"
 
 instance s ~ s' => P.HasComputedRestartPolicy (TF.Ref s' (TaskSpec s)) (TF.Attr s (P.HashMap P.Text (RestartPolicy s))) where
-    computedRestartPolicy x = TF.compute (TF.refKey x) "restart_policy"
+    computedRestartPolicy x = TF.compute (TF.refKey x) "_computedRestartPolicy"
 
 instance s ~ s' => P.HasComputedRuntime (TF.Ref s' (TaskSpec s)) (TF.Attr s P.Text) where
-    computedRuntime x = TF.compute (TF.refKey x) "runtime"
+    computedRuntime x = TF.compute (TF.refKey x) "_computedRuntime"
 
 -- | @healthcheck@ nested settings.
 data Healthcheck s = Healthcheck'
@@ -524,7 +526,7 @@ data ContainerSpec s = ContainerSpec'
     -- Specification for mounts to be added to containers created as part of the
     -- service
     --
-    , _privileges :: TF.Attr s [Privileges s]
+    , _privileges :: TF.Attr s (Privileges s)
     -- ^ @privileges@ - (Optional)
     -- Security options for the container
     --
@@ -665,9 +667,9 @@ instance P.HasMounts (ContainerSpec s) (TF.Attr s [TF.Attr s (Mounts s)]) where
                (\s a -> s { _mounts = a
                           } :: ContainerSpec s)
 
-instance P.HasPrivileges (ContainerSpec s) (TF.Attr s [Privileges s]) where
+instance P.HasPrivileges (ContainerSpec s) (TF.Attr s (Privileges s)) where
     privileges =
-        P.lens (_privileges :: ContainerSpec s -> TF.Attr s [Privileges s])
+        P.lens (_privileges :: ContainerSpec s -> TF.Attr s (Privileges s))
                (\s a -> s { _privileges = a
                           } :: ContainerSpec s)
 
@@ -695,14 +697,14 @@ instance P.HasUser (ContainerSpec s) (TF.Attr s P.Text) where
                (\s a -> s { _user = a
                           } :: ContainerSpec s)
 
-instance s ~ s' => P.HasComputedDnsConfig (TF.Ref s' (ContainerSpec s)) (TF.Attr s [DnsConfig s]) where
-    computedDnsConfig x = TF.compute (TF.refKey x) "dns_config"
+instance s ~ s' => P.HasComputedDnsConfig (TF.Ref s' (ContainerSpec s)) (TF.Attr s (DnsConfig s)) where
+    computedDnsConfig x = TF.compute (TF.refKey x) "_computedDnsConfig"
 
-instance s ~ s' => P.HasComputedHealthcheck (TF.Ref s' (ContainerSpec s)) (TF.Attr s [Healthcheck s]) where
-    computedHealthcheck x = TF.compute (TF.refKey x) "healthcheck"
+instance s ~ s' => P.HasComputedHealthcheck (TF.Ref s' (ContainerSpec s)) (TF.Attr s (Healthcheck s)) where
+    computedHealthcheck x = TF.compute (TF.refKey x) "_computedHealthcheck"
 
 instance s ~ s' => P.HasComputedStopGracePeriod (TF.Ref s' (ContainerSpec s)) (TF.Attr s P.Text) where
-    computedStopGracePeriod x = TF.compute (TF.refKey x) "stop_grace_period"
+    computedStopGracePeriod x = TF.compute (TF.refKey x) "_computedStopGracePeriod"
 
 -- | @replicated@ nested settings.
 data Replicated s = Replicated'
@@ -776,7 +778,7 @@ instance P.HasOptions (LogDriver s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Te
 
 -- | @reservation@ nested settings.
 data Reservation s = Reservation'
-    { _genericResources :: TF.Attr s [GenericResources s]
+    { _genericResources :: TF.Attr s (GenericResources s)
     -- ^ @generic_resources@ - (Optional)
     -- User-defined resources can be either Integer resources (e.g, SSD=3) or
     -- String resources (e.g, GPU=UUID1)
@@ -810,9 +812,9 @@ newReservation =
         , _nanoCpus = TF.Nil
         }
 
-instance P.HasGenericResources (Reservation s) (TF.Attr s [GenericResources s]) where
+instance P.HasGenericResources (Reservation s) (TF.Attr s (GenericResources s)) where
     genericResources =
-        P.lens (_genericResources :: Reservation s -> TF.Attr s [GenericResources s])
+        P.lens (_genericResources :: Reservation s -> TF.Attr s (GenericResources s))
                (\s a -> s { _genericResources = a
                           } :: Reservation s)
 
@@ -1012,8 +1014,8 @@ instance P.HasGlobal (Mode s) (TF.Attr s P.Bool) where
                (\s a -> s { _global = a
                           } :: Mode s)
 
-instance s ~ s' => P.HasComputedReplicated (TF.Ref s' (Mode s)) (TF.Attr s [Replicated s]) where
-    computedReplicated x = TF.compute (TF.refKey x) "replicated"
+instance s ~ s' => P.HasComputedReplicated (TF.Ref s' (Mode s)) (TF.Attr s (Replicated s)) where
+    computedReplicated x = TF.compute (TF.refKey x) "_computedReplicated"
 
 -- | @rollback_config@ nested settings.
 data RollbackConfig s = RollbackConfig'
@@ -1173,7 +1175,7 @@ instance P.HasPropagation (BindOptions s) (TF.Attr s P.Text) where
 
 -- | @mounts@ nested settings.
 data Mounts s = Mounts'
-    { _bindOptions   :: TF.Attr s [BindOptions s]
+    { _bindOptions   :: TF.Attr s (BindOptions s)
     -- ^ @bind_options@ - (Optional)
     -- Optional configuration for the bind type
     --
@@ -1189,7 +1191,7 @@ data Mounts s = Mounts'
     -- ^ @target@ - (Required)
     -- Container path
     --
-    , _tmpfsOptions  :: TF.Attr s [TmpfsOptions s]
+    , _tmpfsOptions  :: TF.Attr s (TmpfsOptions s)
     -- ^ @tmpfs_options@ - (Optional)
     -- Optional configuration for the tmpfs type
     --
@@ -1197,7 +1199,7 @@ data Mounts s = Mounts'
     -- ^ @type@ - (Required)
     -- The mount type
     --
-    , _volumeOptions :: TF.Attr s [VolumeOptions s]
+    , _volumeOptions :: TF.Attr s (VolumeOptions s)
     -- ^ @volume_options@ - (Optional)
     -- Optional configuration for the volume type
     --
@@ -1232,9 +1234,9 @@ newMounts _source _target _type' =
         , _volumeOptions = TF.Nil
         }
 
-instance P.HasBindOptions (Mounts s) (TF.Attr s [BindOptions s]) where
+instance P.HasBindOptions (Mounts s) (TF.Attr s (BindOptions s)) where
     bindOptions =
-        P.lens (_bindOptions :: Mounts s -> TF.Attr s [BindOptions s])
+        P.lens (_bindOptions :: Mounts s -> TF.Attr s (BindOptions s))
                (\s a -> s { _bindOptions = a
                           } :: Mounts s)
 
@@ -1256,9 +1258,9 @@ instance P.HasTarget (Mounts s) (TF.Attr s P.Text) where
                (\s a -> s { _target = a
                           } :: Mounts s)
 
-instance P.HasTmpfsOptions (Mounts s) (TF.Attr s [TmpfsOptions s]) where
+instance P.HasTmpfsOptions (Mounts s) (TF.Attr s (TmpfsOptions s)) where
     tmpfsOptions =
-        P.lens (_tmpfsOptions :: Mounts s -> TF.Attr s [TmpfsOptions s])
+        P.lens (_tmpfsOptions :: Mounts s -> TF.Attr s (TmpfsOptions s))
                (\s a -> s { _tmpfsOptions = a
                           } :: Mounts s)
 
@@ -1268,15 +1270,15 @@ instance P.HasType' (Mounts s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a
                           } :: Mounts s)
 
-instance P.HasVolumeOptions (Mounts s) (TF.Attr s [VolumeOptions s]) where
+instance P.HasVolumeOptions (Mounts s) (TF.Attr s (VolumeOptions s)) where
     volumeOptions =
-        P.lens (_volumeOptions :: Mounts s -> TF.Attr s [VolumeOptions s])
+        P.lens (_volumeOptions :: Mounts s -> TF.Attr s (VolumeOptions s))
                (\s a -> s { _volumeOptions = a
                           } :: Mounts s)
 
 -- | @limits@ nested settings.
 data Limits s = Limits'
-    { _genericResources :: TF.Attr s [GenericResources s]
+    { _genericResources :: TF.Attr s (GenericResources s)
     -- ^ @generic_resources@ - (Optional)
     -- User-defined resources can be either Integer resources (e.g, SSD=3) or
     -- String resources (e.g, GPU=UUID1)
@@ -1310,9 +1312,9 @@ newLimits =
         , _nanoCpus = TF.Nil
         }
 
-instance P.HasGenericResources (Limits s) (TF.Attr s [GenericResources s]) where
+instance P.HasGenericResources (Limits s) (TF.Attr s (GenericResources s)) where
     genericResources =
-        P.lens (_genericResources :: Limits s -> TF.Attr s [GenericResources s])
+        P.lens (_genericResources :: Limits s -> TF.Attr s (GenericResources s))
                (\s a -> s { _genericResources = a
                           } :: Limits s)
 
@@ -1330,12 +1332,12 @@ instance P.HasNanoCpus (Limits s) (TF.Attr s P.Integer) where
 
 -- | @resources@ nested settings.
 data Resources s = Resources'
-    { _limits      :: TF.Attr s [Limits s]
+    { _limits      :: TF.Attr s (Limits s)
     -- ^ @limits@ - (Optional)
     -- Describes the resources which can be advertised by a node and requested by a
     -- task
     --
-    , _reservation :: TF.Attr s [Reservation s]
+    , _reservation :: TF.Attr s (Reservation s)
     -- ^ @reservation@ - (Optional)
     -- An object describing the resources which can be advertised by a node and
     -- requested by a task
@@ -1358,15 +1360,15 @@ newResources =
         , _reservation = TF.Nil
         }
 
-instance P.HasLimits (Resources s) (TF.Attr s [Limits s]) where
+instance P.HasLimits (Resources s) (TF.Attr s (Limits s)) where
     limits =
-        P.lens (_limits :: Resources s -> TF.Attr s [Limits s])
+        P.lens (_limits :: Resources s -> TF.Attr s (Limits s))
                (\s a -> s { _limits = a
                           } :: Resources s)
 
-instance P.HasReservation (Resources s) (TF.Attr s [Reservation s]) where
+instance P.HasReservation (Resources s) (TF.Attr s (Reservation s)) where
     reservation =
-        P.lens (_reservation :: Resources s -> TF.Attr s [Reservation s])
+        P.lens (_reservation :: Resources s -> TF.Attr s (Reservation s))
                (\s a -> s { _reservation = a
                           } :: Resources s)
 
@@ -1400,7 +1402,7 @@ instance P.HasPorts (EndpointSpec s) (TF.Attr s [TF.Attr s (Ports s)]) where
                           } :: EndpointSpec s)
 
 instance s ~ s' => P.HasComputedMode (TF.Ref s' (EndpointSpec s)) (TF.Attr s P.Text) where
-    computedMode x = TF.compute (TF.refKey x) "mode"
+    computedMode x = TF.compute (TF.refKey x) "_computedMode"
 
 -- | @dns_config@ nested settings.
 data DnsConfig s = DnsConfig'

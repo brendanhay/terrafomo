@@ -75,4 +75,4 @@ instance P.HasName (RegistryImageData s) (TF.Attr s P.Text) where
                           } :: RegistryImageData s)
 
 instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
-    computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
+    computedSha256Digest x = TF.compute (TF.refKey x) "_computedSha256Digest"
