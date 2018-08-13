@@ -501,7 +501,7 @@ instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (StaticIpPo
                           } :: NetworkResource s)
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "href"
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
 -- | @vcd_snat@ Resource.
 --
@@ -709,10 +709,10 @@ instance P.HasTemplateName (VappResource s) (TF.Attr s P.Text) where
                           } :: VappResource s)
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "href"
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 -- | @vcd_vapp_vm@ Resource.
 --
@@ -847,7 +847,7 @@ instance P.HasVappName (VappVmResource s) (TF.Attr s P.Text) where
                           } :: VappVmResource s)
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "href"
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"

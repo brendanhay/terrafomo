@@ -42,6 +42,8 @@ module Terrafomo.VCloudDirector.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable                  as P
 import qualified Data.HashMap.Strict            as P
 import qualified Data.List.NonEmpty             as P
@@ -260,7 +262,7 @@ instance P.HasSourcePort (Rule s) (TF.Attr s P.Text) where
                           } :: Rule s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Rule s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @dhcp_pool@ nested settings.
 data DhcpPool s = DhcpPool'
