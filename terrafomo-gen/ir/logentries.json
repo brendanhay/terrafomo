@@ -1,26 +1,11 @@
 {
     "settings": [],
-    "arguments": [
-        {
-            "default": "_accountKey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The Log Entries account key."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"account_key\"",
-            "name": "account_key",
-            "method": "accountKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAccountKey",
-            "optional": false,
-            "label": "_accountKey"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "logsetData",
+                "name": "LogsetData'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"nonlocation\"",
@@ -29,13 +14,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "location",
+                    "name": "_location",
                     "method": "location",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLocation",
+                    "validate": false,
                     "optional": true,
-                    "label": "_location"
+                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -44,17 +30,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "LogsetData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -64,21 +51,27 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "LogsetData s",
             "original": "logentries_logset"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "logResource",
+                "name": "LogResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -87,13 +80,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "filename",
+                    "name": "_filename",
                     "method": "filename",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilename",
+                    "validate": false,
                     "optional": true,
-                    "label": "_filename"
+                    "original": "filename"
                 },
                 {
                     "default": "_logsetId",
@@ -102,13 +96,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"logset_id\" <$> TF.attribute",
-                    "name": "logset_id",
+                    "name": "_logsetId",
                     "method": "logsetId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLogsetId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_logsetId"
+                    "original": "logset_id"
                 },
                 {
                     "default": "_name",
@@ -117,13 +112,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.value \"ACCOUNT_DEFAULT\"",
@@ -132,13 +128,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"retention_period\" <$> TF.attribute",
-                    "name": "retention_period",
+                    "name": "_retentionPeriod",
                     "method": "retentionPeriod",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRetentionPeriod",
+                    "validate": false,
                     "optional": true,
-                    "label": "_retentionPeriod"
+                    "original": "retention_period"
                 },
                 {
                     "default": "TF.value \"token\"",
@@ -147,13 +144,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": true,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -162,17 +160,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": true,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "LogResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -181,13 +180,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"token\" <$> TF.attribute",
-                    "name": "token",
+                    "name": "_computedToken",
                     "method": "computedToken",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedToken",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedToken"
+                    "original": "token"
                 }
             ],
             "parameters": [
@@ -198,13 +198,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"logset_id\" <$> TF.attribute",
-                    "name": "logset_id",
+                    "name": "_logsetId",
                     "method": "logsetId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLogsetId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_logsetId"
+                    "original": "logset_id"
                 },
                 {
                     "default": "_name",
@@ -213,19 +214,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "LogResource s",
             "original": "logentries_log"
         },
         {
+            "con": {
+                "smart": "logsetResource",
+                "name": "LogsetResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"nonlocation\"",
@@ -234,13 +241,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "location",
+                    "name": "_location",
                     "method": "location",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLocation",
+                    "validate": false,
                     "optional": true,
-                    "label": "_location"
+                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -249,17 +257,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "LogsetResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -269,19 +278,73 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "LogsetResource s",
             "original": "logentries_logset"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_accountKey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The Log Entries account key."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"account_key\"",
+                "name": "_accountKey",
+                "method": "accountKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAccountKey",
+                "validate": false,
+                "optional": false,
+                "original": "account_key"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_accountKey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The Log Entries account key."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"account_key\"",
+                "name": "_accountKey",
+                "method": "accountKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAccountKey",
+                "validate": false,
+                "optional": false,
+                "original": "account_key"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -291,26 +354,6 @@
         "microlens"
     ],
     "name": "Logentries",
-    "parameters": [
-        {
-            "default": "_accountKey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The Log Entries account key."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"account_key\"",
-            "name": "account_key",
-            "method": "accountKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAccountKey",
-            "optional": false,
-            "label": "_accountKey"
-        }
-    ],
     "package": "terrafomo-logentries",
-    "type": "Provider",
     "original": "logentries"
 }
