@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.Cloudflare.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.Cloudflare.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Cloudflare.Types as P
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Provider         as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | The @Cloudflare@ Terraform provider configuration.
 --
@@ -89,30 +93,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_client_logging" <$> _apiClientLogging
-                  , P.Just $ TF.assign "email" _email
-                  , TF.assign "max_backoff" <$> _maxBackoff
-                  , TF.assign "min_backoff" <$> _minBackoff
-                  , TF.assign "org_id" <$> _orgId
-                  , TF.assign "retries" <$> _retries
-                  , TF.assign "rps" <$> _rps
-                  , P.Just $ TF.assign "token" _token
-                  , TF.assign "use_org_from_zone" <$> _useOrgFromZone
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @email@ - 'P.email'
     -> P.Text -- ^ @token@ - 'P.token'
@@ -130,56 +110,74 @@ newProvider _email _token =
         , _useOrgFromZone = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "api_client_logging" <$> _apiClientLogging
+                  , P.Just $ TF.assign "email" _email
+                  , TF.assign "max_backoff" <$> _maxBackoff
+                  , TF.assign "min_backoff" <$> _minBackoff
+                  , TF.assign "org_id" <$> _orgId
+                  , TF.assign "retries" <$> _retries
+                  , TF.assign "rps" <$> _rps
+                  , P.Just $ TF.assign "token" _token
+                  , TF.assign "use_org_from_zone" <$> _useOrgFromZone
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasApiClientLogging (Provider) (P.Maybe P.Bool) where
     apiClientLogging =
         P.lens (_apiClientLogging :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _apiClientLogging = a
-                          } :: Provider)
+               (\s a -> s { _apiClientLogging = a } :: Provider)
 
 instance P.HasEmail (Provider) (P.Text) where
     email =
         P.lens (_email :: Provider -> P.Text)
-               (\s a -> s { _email = a
-                          } :: Provider)
+               (\s a -> s { _email = a } :: Provider)
 
 instance P.HasMaxBackoff (Provider) (P.Maybe P.Integer) where
     maxBackoff =
         P.lens (_maxBackoff :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _maxBackoff = a
-                          } :: Provider)
+               (\s a -> s { _maxBackoff = a } :: Provider)
 
 instance P.HasMinBackoff (Provider) (P.Maybe P.Integer) where
     minBackoff =
         P.lens (_minBackoff :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _minBackoff = a
-                          } :: Provider)
+               (\s a -> s { _minBackoff = a } :: Provider)
 
 instance P.HasOrgId (Provider) (P.Maybe P.Text) where
     orgId =
         P.lens (_orgId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _orgId = a
-                          } :: Provider)
+               (\s a -> s { _orgId = a } :: Provider)
 
 instance P.HasRetries (Provider) (P.Maybe P.Integer) where
     retries =
         P.lens (_retries :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _retries = a
-                          } :: Provider)
+               (\s a -> s { _retries = a } :: Provider)
 
 instance P.HasRps (Provider) (P.Maybe P.Integer) where
     rps =
         P.lens (_rps :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _rps = a
-                          } :: Provider)
+               (\s a -> s { _rps = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Text) where
     token =
         P.lens (_token :: Provider -> P.Text)
-               (\s a -> s { _token = a
-                          } :: Provider)
+               (\s a -> s { _token = a } :: Provider)
 
 instance P.HasUseOrgFromZone (Provider) (P.Maybe P.Text) where
     useOrgFromZone =
         P.lens (_useOrgFromZone :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _useOrgFromZone = a
-                          } :: Provider)
+               (\s a -> s { _useOrgFromZone = a } :: Provider)

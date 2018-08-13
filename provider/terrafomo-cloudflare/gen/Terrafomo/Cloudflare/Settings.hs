@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -88,13 +89,15 @@ module Terrafomo.Cloudflare.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -104,6 +107,7 @@ import qualified Terrafomo.Cloudflare.Lens  as P
 import qualified Terrafomo.Cloudflare.Types as P
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @pop_pools@ nested settings.
 data PopPools s = PopPools'
@@ -115,14 +119,6 @@ data PopPools s = PopPools'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (PopPools s)
-instance TF.IsValue  (PopPools s)
-instance TF.IsObject (PopPools s) where
-    toObject PopPools'{..} = catMaybes
-        [ TF.assign "pool_ids" <$> TF.attribute _poolIds
-        , TF.assign "pop" <$> TF.attribute _pop
-        ]
-
 newPopPools
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
     -> TF.Attr s P.Text -- ^ @pop@ - 'P.pop'
@@ -133,17 +129,26 @@ newPopPools _poolIds _pop =
         , _pop = _pop
         }
 
+instance P.Hashable  (PopPools s)
+instance TF.IsValue  (PopPools s)
+instance TF.IsObject (PopPools s) where
+    toObject PopPools'{..} = P.catMaybes
+        [ TF.assign "pool_ids" <$> TF.attribute _poolIds
+        , TF.assign "pop" <$> TF.attribute _pop
+        ]
+
+instance TF.IsValid (PopPools s) where
+    validator = P.mempty
+
 instance P.HasPoolIds (PopPools s) (TF.Attr s [TF.Attr s P.Text]) where
     poolIds =
         P.lens (_poolIds :: PopPools s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _poolIds = a
-                          } :: PopPools s)
+               (\s a -> s { _poolIds = a } :: PopPools s)
 
 instance P.HasPop (PopPools s) (TF.Attr s P.Text) where
     pop =
         P.lens (_pop :: PopPools s -> TF.Attr s P.Text)
-               (\s a -> s { _pop = a
-                          } :: PopPools s)
+               (\s a -> s { _pop = a } :: PopPools s)
 
 -- | @actions@ nested settings.
 data Actions s = Actions'
@@ -251,46 +256,6 @@ data Actions s = Actions'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Actions s)
-instance TF.IsValue  (Actions s)
-instance TF.IsObject (Actions s) where
-    toObject Actions'{..} = catMaybes
-        [ TF.assign "always_online" <$> TF.attribute _alwaysOnline
-        , TF.assign "always_use_https" <$> TF.attribute _alwaysUseHttps
-        , TF.assign "automatic_https_rewrites" <$> TF.attribute _automaticHttpsRewrites
-        , TF.assign "browser_cache_ttl" <$> TF.attribute _browserCacheTtl
-        , TF.assign "browser_check" <$> TF.attribute _browserCheck
-        , TF.assign "bypass_cache_on_cookie" <$> TF.attribute _bypassCacheOnCookie
-        , TF.assign "cache_by_device_type" <$> TF.attribute _cacheByDeviceType
-        , TF.assign "cache_deception_armor" <$> TF.attribute _cacheDeceptionArmor
-        , TF.assign "cache_level" <$> TF.attribute _cacheLevel
-        , TF.assign "cache_on_cookie" <$> TF.attribute _cacheOnCookie
-        , TF.assign "disable_apps" <$> TF.attribute _disableApps
-        , TF.assign "disable_performance" <$> TF.attribute _disablePerformance
-        , TF.assign "disable_railgun" <$> TF.attribute _disableRailgun
-        , TF.assign "disable_security" <$> TF.attribute _disableSecurity
-        , TF.assign "edge_cache_ttl" <$> TF.attribute _edgeCacheTtl
-        , TF.assign "email_obfuscation" <$> TF.attribute _emailObfuscation
-        , TF.assign "explicit_cache_control" <$> TF.attribute _explicitCacheControl
-        , TF.assign "forwarding_url" <$> TF.attribute _forwardingUrl
-        , TF.assign "host_header_override" <$> TF.attribute _hostHeaderOverride
-        , TF.assign "ip_geolocation" <$> TF.attribute _ipGeolocation
-        , TF.assign "mirage" <$> TF.attribute _mirage
-        , TF.assign "opportunistic_encryption" <$> TF.attribute _opportunisticEncryption
-        , TF.assign "origin_error_page_pass_thru" <$> TF.attribute _originErrorPagePassThru
-        , TF.assign "polish" <$> TF.attribute _polish
-        , TF.assign "resolve_override" <$> TF.attribute _resolveOverride
-        , TF.assign "respect_strong_etag" <$> TF.attribute _respectStrongEtag
-        , TF.assign "response_buffering" <$> TF.attribute _responseBuffering
-        , TF.assign "rocket_loader" <$> TF.attribute _rocketLoader
-        , TF.assign "security_level" <$> TF.attribute _securityLevel
-        , TF.assign "server_side_exclude" <$> TF.attribute _serverSideExclude
-        , TF.assign "sort_query_string_for_cache" <$> TF.attribute _sortQueryStringForCache
-        , TF.assign "ssl" <$> TF.attribute _ssl
-        , TF.assign "true_client_ip_header" <$> TF.attribute _trueClientIpHeader
-        , TF.assign "waf" <$> TF.attribute _waf
-        ]
-
 newActions
     :: Actions s
 newActions =
@@ -331,223 +296,239 @@ newActions =
         , _waf = TF.Nil
         }
 
+instance P.Hashable  (Actions s)
+instance TF.IsValue  (Actions s)
+instance TF.IsObject (Actions s) where
+    toObject Actions'{..} = P.catMaybes
+        [ TF.assign "always_online" <$> TF.attribute _alwaysOnline
+        , TF.assign "always_use_https" <$> TF.attribute _alwaysUseHttps
+        , TF.assign "automatic_https_rewrites" <$> TF.attribute _automaticHttpsRewrites
+        , TF.assign "browser_cache_ttl" <$> TF.attribute _browserCacheTtl
+        , TF.assign "browser_check" <$> TF.attribute _browserCheck
+        , TF.assign "bypass_cache_on_cookie" <$> TF.attribute _bypassCacheOnCookie
+        , TF.assign "cache_by_device_type" <$> TF.attribute _cacheByDeviceType
+        , TF.assign "cache_deception_armor" <$> TF.attribute _cacheDeceptionArmor
+        , TF.assign "cache_level" <$> TF.attribute _cacheLevel
+        , TF.assign "cache_on_cookie" <$> TF.attribute _cacheOnCookie
+        , TF.assign "disable_apps" <$> TF.attribute _disableApps
+        , TF.assign "disable_performance" <$> TF.attribute _disablePerformance
+        , TF.assign "disable_railgun" <$> TF.attribute _disableRailgun
+        , TF.assign "disable_security" <$> TF.attribute _disableSecurity
+        , TF.assign "edge_cache_ttl" <$> TF.attribute _edgeCacheTtl
+        , TF.assign "email_obfuscation" <$> TF.attribute _emailObfuscation
+        , TF.assign "explicit_cache_control" <$> TF.attribute _explicitCacheControl
+        , TF.assign "forwarding_url" <$> TF.attribute _forwardingUrl
+        , TF.assign "host_header_override" <$> TF.attribute _hostHeaderOverride
+        , TF.assign "ip_geolocation" <$> TF.attribute _ipGeolocation
+        , TF.assign "mirage" <$> TF.attribute _mirage
+        , TF.assign "opportunistic_encryption" <$> TF.attribute _opportunisticEncryption
+        , TF.assign "origin_error_page_pass_thru" <$> TF.attribute _originErrorPagePassThru
+        , TF.assign "polish" <$> TF.attribute _polish
+        , TF.assign "resolve_override" <$> TF.attribute _resolveOverride
+        , TF.assign "respect_strong_etag" <$> TF.attribute _respectStrongEtag
+        , TF.assign "response_buffering" <$> TF.attribute _responseBuffering
+        , TF.assign "rocket_loader" <$> TF.attribute _rocketLoader
+        , TF.assign "security_level" <$> TF.attribute _securityLevel
+        , TF.assign "server_side_exclude" <$> TF.attribute _serverSideExclude
+        , TF.assign "sort_query_string_for_cache" <$> TF.attribute _sortQueryStringForCache
+        , TF.assign "ssl" <$> TF.attribute _ssl
+        , TF.assign "true_client_ip_header" <$> TF.attribute _trueClientIpHeader
+        , TF.assign "waf" <$> TF.attribute _waf
+        ]
+
+instance TF.IsValid (Actions s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_forwardingUrl"
+                  (_forwardingUrl
+                      :: Actions s -> TF.Attr s (ForwardingUrl s))
+                  TF.validator
+
 instance P.HasAlwaysOnline (Actions s) (TF.Attr s P.Text) where
     alwaysOnline =
         P.lens (_alwaysOnline :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _alwaysOnline = a
-                          } :: Actions s)
+               (\s a -> s { _alwaysOnline = a } :: Actions s)
 
 instance P.HasAlwaysUseHttps (Actions s) (TF.Attr s P.Bool) where
     alwaysUseHttps =
         P.lens (_alwaysUseHttps :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _alwaysUseHttps = a
-                          } :: Actions s)
+               (\s a -> s { _alwaysUseHttps = a } :: Actions s)
 
 instance P.HasAutomaticHttpsRewrites (Actions s) (TF.Attr s P.Text) where
     automaticHttpsRewrites =
         P.lens (_automaticHttpsRewrites :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _automaticHttpsRewrites = a
-                          } :: Actions s)
+               (\s a -> s { _automaticHttpsRewrites = a } :: Actions s)
 
 instance P.HasBrowserCacheTtl (Actions s) (TF.Attr s P.Integer) where
     browserCacheTtl =
         P.lens (_browserCacheTtl :: Actions s -> TF.Attr s P.Integer)
-               (\s a -> s { _browserCacheTtl = a
-                          } :: Actions s)
+               (\s a -> s { _browserCacheTtl = a } :: Actions s)
 
 instance P.HasBrowserCheck (Actions s) (TF.Attr s P.Text) where
     browserCheck =
         P.lens (_browserCheck :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _browserCheck = a
-                          } :: Actions s)
+               (\s a -> s { _browserCheck = a } :: Actions s)
 
 instance P.HasBypassCacheOnCookie (Actions s) (TF.Attr s P.Text) where
     bypassCacheOnCookie =
         P.lens (_bypassCacheOnCookie :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _bypassCacheOnCookie = a
-                          } :: Actions s)
+               (\s a -> s { _bypassCacheOnCookie = a } :: Actions s)
 
 instance P.HasCacheByDeviceType (Actions s) (TF.Attr s P.Text) where
     cacheByDeviceType =
         P.lens (_cacheByDeviceType :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheByDeviceType = a
-                          } :: Actions s)
+               (\s a -> s { _cacheByDeviceType = a } :: Actions s)
 
 instance P.HasCacheDeceptionArmor (Actions s) (TF.Attr s P.Text) where
     cacheDeceptionArmor =
         P.lens (_cacheDeceptionArmor :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheDeceptionArmor = a
-                          } :: Actions s)
+               (\s a -> s { _cacheDeceptionArmor = a } :: Actions s)
 
 instance P.HasCacheLevel (Actions s) (TF.Attr s P.Text) where
     cacheLevel =
         P.lens (_cacheLevel :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheLevel = a
-                          } :: Actions s)
+               (\s a -> s { _cacheLevel = a } :: Actions s)
 
 instance P.HasCacheOnCookie (Actions s) (TF.Attr s P.Text) where
     cacheOnCookie =
         P.lens (_cacheOnCookie :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheOnCookie = a
-                          } :: Actions s)
+               (\s a -> s { _cacheOnCookie = a } :: Actions s)
 
 instance P.HasDisableApps (Actions s) (TF.Attr s P.Bool) where
     disableApps =
         P.lens (_disableApps :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableApps = a
-                          } :: Actions s)
+               (\s a -> s { _disableApps = a } :: Actions s)
 
 instance P.HasDisablePerformance (Actions s) (TF.Attr s P.Bool) where
     disablePerformance =
         P.lens (_disablePerformance :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disablePerformance = a
-                          } :: Actions s)
+               (\s a -> s { _disablePerformance = a } :: Actions s)
 
 instance P.HasDisableRailgun (Actions s) (TF.Attr s P.Bool) where
     disableRailgun =
         P.lens (_disableRailgun :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableRailgun = a
-                          } :: Actions s)
+               (\s a -> s { _disableRailgun = a } :: Actions s)
 
 instance P.HasDisableSecurity (Actions s) (TF.Attr s P.Bool) where
     disableSecurity =
         P.lens (_disableSecurity :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableSecurity = a
-                          } :: Actions s)
+               (\s a -> s { _disableSecurity = a } :: Actions s)
 
 instance P.HasEdgeCacheTtl (Actions s) (TF.Attr s P.Integer) where
     edgeCacheTtl =
         P.lens (_edgeCacheTtl :: Actions s -> TF.Attr s P.Integer)
-               (\s a -> s { _edgeCacheTtl = a
-                          } :: Actions s)
+               (\s a -> s { _edgeCacheTtl = a } :: Actions s)
 
 instance P.HasEmailObfuscation (Actions s) (TF.Attr s P.Text) where
     emailObfuscation =
         P.lens (_emailObfuscation :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _emailObfuscation = a
-                          } :: Actions s)
+               (\s a -> s { _emailObfuscation = a } :: Actions s)
 
 instance P.HasExplicitCacheControl (Actions s) (TF.Attr s P.Text) where
     explicitCacheControl =
         P.lens (_explicitCacheControl :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _explicitCacheControl = a
-                          } :: Actions s)
+               (\s a -> s { _explicitCacheControl = a } :: Actions s)
 
 instance P.HasForwardingUrl (Actions s) (TF.Attr s (ForwardingUrl s)) where
     forwardingUrl =
         P.lens (_forwardingUrl :: Actions s -> TF.Attr s (ForwardingUrl s))
-               (\s a -> s { _forwardingUrl = a
-                          } :: Actions s)
+               (\s a -> s { _forwardingUrl = a } :: Actions s)
 
 instance P.HasHostHeaderOverride (Actions s) (TF.Attr s P.Text) where
     hostHeaderOverride =
         P.lens (_hostHeaderOverride :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _hostHeaderOverride = a
-                          } :: Actions s)
+               (\s a -> s { _hostHeaderOverride = a } :: Actions s)
 
 instance P.HasIpGeolocation (Actions s) (TF.Attr s P.Text) where
     ipGeolocation =
         P.lens (_ipGeolocation :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _ipGeolocation = a
-                          } :: Actions s)
+               (\s a -> s { _ipGeolocation = a } :: Actions s)
 
 instance P.HasMirage (Actions s) (TF.Attr s P.Text) where
     mirage =
         P.lens (_mirage :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _mirage = a
-                          } :: Actions s)
+               (\s a -> s { _mirage = a } :: Actions s)
 
 instance P.HasOpportunisticEncryption (Actions s) (TF.Attr s P.Text) where
     opportunisticEncryption =
         P.lens (_opportunisticEncryption :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _opportunisticEncryption = a
-                          } :: Actions s)
+               (\s a -> s { _opportunisticEncryption = a } :: Actions s)
 
 instance P.HasOriginErrorPagePassThru (Actions s) (TF.Attr s P.Text) where
     originErrorPagePassThru =
         P.lens (_originErrorPagePassThru :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _originErrorPagePassThru = a
-                          } :: Actions s)
+               (\s a -> s { _originErrorPagePassThru = a } :: Actions s)
 
 instance P.HasPolish (Actions s) (TF.Attr s P.Text) where
     polish =
         P.lens (_polish :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _polish = a
-                          } :: Actions s)
+               (\s a -> s { _polish = a } :: Actions s)
 
 instance P.HasResolveOverride (Actions s) (TF.Attr s P.Text) where
     resolveOverride =
         P.lens (_resolveOverride :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _resolveOverride = a
-                          } :: Actions s)
+               (\s a -> s { _resolveOverride = a } :: Actions s)
 
 instance P.HasRespectStrongEtag (Actions s) (TF.Attr s P.Text) where
     respectStrongEtag =
         P.lens (_respectStrongEtag :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _respectStrongEtag = a
-                          } :: Actions s)
+               (\s a -> s { _respectStrongEtag = a } :: Actions s)
 
 instance P.HasResponseBuffering (Actions s) (TF.Attr s P.Text) where
     responseBuffering =
         P.lens (_responseBuffering :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _responseBuffering = a
-                          } :: Actions s)
+               (\s a -> s { _responseBuffering = a } :: Actions s)
 
 instance P.HasRocketLoader (Actions s) (TF.Attr s P.Text) where
     rocketLoader =
         P.lens (_rocketLoader :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _rocketLoader = a
-                          } :: Actions s)
+               (\s a -> s { _rocketLoader = a } :: Actions s)
 
 instance P.HasSecurityLevel (Actions s) (TF.Attr s P.Text) where
     securityLevel =
         P.lens (_securityLevel :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _securityLevel = a
-                          } :: Actions s)
+               (\s a -> s { _securityLevel = a } :: Actions s)
 
 instance P.HasServerSideExclude (Actions s) (TF.Attr s P.Text) where
     serverSideExclude =
         P.lens (_serverSideExclude :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _serverSideExclude = a
-                          } :: Actions s)
+               (\s a -> s { _serverSideExclude = a } :: Actions s)
 
 instance P.HasSortQueryStringForCache (Actions s) (TF.Attr s P.Text) where
     sortQueryStringForCache =
         P.lens (_sortQueryStringForCache :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _sortQueryStringForCache = a
-                          } :: Actions s)
+               (\s a -> s { _sortQueryStringForCache = a } :: Actions s)
 
 instance P.HasSsl (Actions s) (TF.Attr s P.Text) where
     ssl =
         P.lens (_ssl :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _ssl = a
-                          } :: Actions s)
+               (\s a -> s { _ssl = a } :: Actions s)
 
 instance P.HasTrueClientIpHeader (Actions s) (TF.Attr s P.Text) where
     trueClientIpHeader =
         P.lens (_trueClientIpHeader :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _trueClientIpHeader = a
-                          } :: Actions s)
+               (\s a -> s { _trueClientIpHeader = a } :: Actions s)
 
 instance P.HasWaf (Actions s) (TF.Attr s P.Text) where
     waf =
         P.lens (_waf :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _waf = a
-                          } :: Actions s)
+               (\s a -> s { _waf = a } :: Actions s)
 
 -- | @settings@ nested settings.
 data Settings s = Settings'
     deriving (P.Show, P.Eq, P.Generic)
+
+newSettings
+    :: Settings s
+newSettings =
+    Settings'
 
 instance P.Hashable  (Settings s)
 instance TF.IsValue  (Settings s)
 instance TF.IsObject (Settings s) where
     toObject Settings' = []
 
-newSettings
-    :: Settings s
-newSettings =
-    Settings'
+instance TF.IsValid (Settings s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
     computedAdvancedDdos x = TF.compute (TF.refKey x) "_computedAdvancedDdos"
@@ -685,13 +666,6 @@ data Correlate s = Correlate'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Correlate s)
-instance TF.IsValue  (Correlate s)
-instance TF.IsObject (Correlate s) where
-    toObject Correlate'{..} = catMaybes
-        [ TF.assign "by" <$> TF.attribute _by
-        ]
-
 newCorrelate
     :: Correlate s
 newCorrelate =
@@ -699,11 +673,20 @@ newCorrelate =
         { _by = TF.Nil
         }
 
+instance P.Hashable  (Correlate s)
+instance TF.IsValue  (Correlate s)
+instance TF.IsObject (Correlate s) where
+    toObject Correlate'{..} = P.catMaybes
+        [ TF.assign "by" <$> TF.attribute _by
+        ]
+
+instance TF.IsValid (Correlate s) where
+    validator = P.mempty
+
 instance P.HasBy (Correlate s) (TF.Attr s P.Text) where
     by =
         P.lens (_by :: Correlate s -> TF.Attr s P.Text)
-               (\s a -> s { _by = a
-                          } :: Correlate s)
+               (\s a -> s { _by = a } :: Correlate s)
 
 -- | @data@ nested settings.
 data Data' s = Data''
@@ -820,49 +803,6 @@ data Data' s = Data''
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Data' s)
-instance TF.IsValue  (Data' s)
-instance TF.IsObject (Data' s) where
-    toObject Data''{..} = catMaybes
-        [ TF.assign "algorithm" <$> TF.attribute _algorithm
-        , TF.assign "altitude" <$> TF.attribute _altitude
-        , TF.assign "certificate" <$> TF.attribute _certificate
-        , TF.assign "content" <$> TF.attribute _content
-        , TF.assign "digest" <$> TF.attribute _digest
-        , TF.assign "digest_type" <$> TF.attribute _digestType
-        , TF.assign "fingerprint" <$> TF.attribute _fingerprint
-        , TF.assign "flags" <$> TF.attribute _flags
-        , TF.assign "key_tag" <$> TF.attribute _keyTag
-        , TF.assign "lat_degrees" <$> TF.attribute _latDegrees
-        , TF.assign "lat_direction" <$> TF.attribute _latDirection
-        , TF.assign "lat_minutes" <$> TF.attribute _latMinutes
-        , TF.assign "lat_seconds" <$> TF.attribute _latSeconds
-        , TF.assign "long_degrees" <$> TF.attribute _longDegrees
-        , TF.assign "long_direction" <$> TF.attribute _longDirection
-        , TF.assign "long_minutes" <$> TF.attribute _longMinutes
-        , TF.assign "long_seconds" <$> TF.attribute _longSeconds
-        , TF.assign "matching_type" <$> TF.attribute _matchingType
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "order" <$> TF.attribute _order
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "precision_horz" <$> TF.attribute _precisionHorz
-        , TF.assign "precision_vert" <$> TF.attribute _precisionVert
-        , TF.assign "preference" <$> TF.attribute _preference
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "proto" <$> TF.attribute _proto
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "public_key" <$> TF.attribute _publicKey
-        , TF.assign "regex" <$> TF.attribute _regex
-        , TF.assign "replacement" <$> TF.attribute _replacement
-        , TF.assign "selector" <$> TF.attribute _selector
-        , TF.assign "service" <$> TF.attribute _service
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "usage" <$> TF.attribute _usage
-        , TF.assign "weight" <$> TF.attribute _weight
-        ]
-
 newData'
     :: Data' s
 newData' =
@@ -906,246 +846,258 @@ newData' =
         , _weight = TF.Nil
         }
 
+instance P.Hashable  (Data' s)
+instance TF.IsValue  (Data' s)
+instance TF.IsObject (Data' s) where
+    toObject Data''{..} = P.catMaybes
+        [ TF.assign "algorithm" <$> TF.attribute _algorithm
+        , TF.assign "altitude" <$> TF.attribute _altitude
+        , TF.assign "certificate" <$> TF.attribute _certificate
+        , TF.assign "content" <$> TF.attribute _content
+        , TF.assign "digest" <$> TF.attribute _digest
+        , TF.assign "digest_type" <$> TF.attribute _digestType
+        , TF.assign "fingerprint" <$> TF.attribute _fingerprint
+        , TF.assign "flags" <$> TF.attribute _flags
+        , TF.assign "key_tag" <$> TF.attribute _keyTag
+        , TF.assign "lat_degrees" <$> TF.attribute _latDegrees
+        , TF.assign "lat_direction" <$> TF.attribute _latDirection
+        , TF.assign "lat_minutes" <$> TF.attribute _latMinutes
+        , TF.assign "lat_seconds" <$> TF.attribute _latSeconds
+        , TF.assign "long_degrees" <$> TF.attribute _longDegrees
+        , TF.assign "long_direction" <$> TF.attribute _longDirection
+        , TF.assign "long_minutes" <$> TF.attribute _longMinutes
+        , TF.assign "long_seconds" <$> TF.attribute _longSeconds
+        , TF.assign "matching_type" <$> TF.attribute _matchingType
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "order" <$> TF.attribute _order
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "precision_horz" <$> TF.attribute _precisionHorz
+        , TF.assign "precision_vert" <$> TF.attribute _precisionVert
+        , TF.assign "preference" <$> TF.attribute _preference
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "proto" <$> TF.attribute _proto
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "public_key" <$> TF.attribute _publicKey
+        , TF.assign "regex" <$> TF.attribute _regex
+        , TF.assign "replacement" <$> TF.attribute _replacement
+        , TF.assign "selector" <$> TF.attribute _selector
+        , TF.assign "service" <$> TF.attribute _service
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "usage" <$> TF.attribute _usage
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance TF.IsValid (Data' s) where
+    validator = P.mempty
+
 instance P.HasAlgorithm (Data' s) (TF.Attr s P.Integer) where
     algorithm =
         P.lens (_algorithm :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _algorithm = a
-                          } :: Data' s)
+               (\s a -> s { _algorithm = a } :: Data' s)
 
 instance P.HasAltitude (Data' s) (TF.Attr s P.Double) where
     altitude =
         P.lens (_altitude :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _altitude = a
-                          } :: Data' s)
+               (\s a -> s { _altitude = a } :: Data' s)
 
 instance P.HasCertificate (Data' s) (TF.Attr s P.Text) where
     certificate =
         P.lens (_certificate :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _certificate = a
-                          } :: Data' s)
+               (\s a -> s { _certificate = a } :: Data' s)
 
 instance P.HasContent (Data' s) (TF.Attr s P.Text) where
     content =
         P.lens (_content :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a
-                          } :: Data' s)
+               (\s a -> s { _content = a } :: Data' s)
 
 instance P.HasDigest (Data' s) (TF.Attr s P.Text) where
     digest =
         P.lens (_digest :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _digest = a
-                          } :: Data' s)
+               (\s a -> s { _digest = a } :: Data' s)
 
 instance P.HasDigestType (Data' s) (TF.Attr s P.Integer) where
     digestType =
         P.lens (_digestType :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _digestType = a
-                          } :: Data' s)
+               (\s a -> s { _digestType = a } :: Data' s)
 
 instance P.HasFingerprint (Data' s) (TF.Attr s P.Text) where
     fingerprint =
         P.lens (_fingerprint :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _fingerprint = a
-                          } :: Data' s)
+               (\s a -> s { _fingerprint = a } :: Data' s)
 
 instance P.HasFlags (Data' s) (TF.Attr s P.Text) where
     flags =
         P.lens (_flags :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _flags = a
-                          } :: Data' s)
+               (\s a -> s { _flags = a } :: Data' s)
 
 instance P.HasKeyTag (Data' s) (TF.Attr s P.Integer) where
     keyTag =
         P.lens (_keyTag :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _keyTag = a
-                          } :: Data' s)
+               (\s a -> s { _keyTag = a } :: Data' s)
 
 instance P.HasLatDegrees (Data' s) (TF.Attr s P.Integer) where
     latDegrees =
         P.lens (_latDegrees :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _latDegrees = a
-                          } :: Data' s)
+               (\s a -> s { _latDegrees = a } :: Data' s)
 
 instance P.HasLatDirection (Data' s) (TF.Attr s P.Text) where
     latDirection =
         P.lens (_latDirection :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _latDirection = a
-                          } :: Data' s)
+               (\s a -> s { _latDirection = a } :: Data' s)
 
 instance P.HasLatMinutes (Data' s) (TF.Attr s P.Integer) where
     latMinutes =
         P.lens (_latMinutes :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _latMinutes = a
-                          } :: Data' s)
+               (\s a -> s { _latMinutes = a } :: Data' s)
 
 instance P.HasLatSeconds (Data' s) (TF.Attr s P.Double) where
     latSeconds =
         P.lens (_latSeconds :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _latSeconds = a
-                          } :: Data' s)
+               (\s a -> s { _latSeconds = a } :: Data' s)
 
 instance P.HasLongDegrees (Data' s) (TF.Attr s P.Integer) where
     longDegrees =
         P.lens (_longDegrees :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _longDegrees = a
-                          } :: Data' s)
+               (\s a -> s { _longDegrees = a } :: Data' s)
 
 instance P.HasLongDirection (Data' s) (TF.Attr s P.Text) where
     longDirection =
         P.lens (_longDirection :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _longDirection = a
-                          } :: Data' s)
+               (\s a -> s { _longDirection = a } :: Data' s)
 
 instance P.HasLongMinutes (Data' s) (TF.Attr s P.Integer) where
     longMinutes =
         P.lens (_longMinutes :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _longMinutes = a
-                          } :: Data' s)
+               (\s a -> s { _longMinutes = a } :: Data' s)
 
 instance P.HasLongSeconds (Data' s) (TF.Attr s P.Double) where
     longSeconds =
         P.lens (_longSeconds :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _longSeconds = a
-                          } :: Data' s)
+               (\s a -> s { _longSeconds = a } :: Data' s)
 
 instance P.HasMatchingType (Data' s) (TF.Attr s P.Integer) where
     matchingType =
         P.lens (_matchingType :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _matchingType = a
-                          } :: Data' s)
+               (\s a -> s { _matchingType = a } :: Data' s)
 
 instance P.HasName (Data' s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Data' s)
+               (\s a -> s { _name = a } :: Data' s)
 
 instance P.HasOrder (Data' s) (TF.Attr s P.Integer) where
     order =
         P.lens (_order :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _order = a
-                          } :: Data' s)
+               (\s a -> s { _order = a } :: Data' s)
 
 instance P.HasPort (Data' s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a
-                          } :: Data' s)
+               (\s a -> s { _port = a } :: Data' s)
 
 instance P.HasPrecisionHorz (Data' s) (TF.Attr s P.Double) where
     precisionHorz =
         P.lens (_precisionHorz :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _precisionHorz = a
-                          } :: Data' s)
+               (\s a -> s { _precisionHorz = a } :: Data' s)
 
 instance P.HasPrecisionVert (Data' s) (TF.Attr s P.Double) where
     precisionVert =
         P.lens (_precisionVert :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _precisionVert = a
-                          } :: Data' s)
+               (\s a -> s { _precisionVert = a } :: Data' s)
 
 instance P.HasPreference (Data' s) (TF.Attr s P.Integer) where
     preference =
         P.lens (_preference :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _preference = a
-                          } :: Data' s)
+               (\s a -> s { _preference = a } :: Data' s)
 
 instance P.HasPriority (Data' s) (TF.Attr s P.Integer) where
     priority =
         P.lens (_priority :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a
-                          } :: Data' s)
+               (\s a -> s { _priority = a } :: Data' s)
 
 instance P.HasProto (Data' s) (TF.Attr s P.Text) where
     proto =
         P.lens (_proto :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _proto = a
-                          } :: Data' s)
+               (\s a -> s { _proto = a } :: Data' s)
 
 instance P.HasProtocol (Data' s) (TF.Attr s P.Integer) where
     protocol =
         P.lens (_protocol :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _protocol = a
-                          } :: Data' s)
+               (\s a -> s { _protocol = a } :: Data' s)
 
 instance P.HasPublicKey (Data' s) (TF.Attr s P.Text) where
     publicKey =
         P.lens (_publicKey :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _publicKey = a
-                          } :: Data' s)
+               (\s a -> s { _publicKey = a } :: Data' s)
 
 instance P.HasRegex (Data' s) (TF.Attr s P.Text) where
     regex =
         P.lens (_regex :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _regex = a
-                          } :: Data' s)
+               (\s a -> s { _regex = a } :: Data' s)
 
 instance P.HasReplacement (Data' s) (TF.Attr s P.Text) where
     replacement =
         P.lens (_replacement :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _replacement = a
-                          } :: Data' s)
+               (\s a -> s { _replacement = a } :: Data' s)
 
 instance P.HasSelector (Data' s) (TF.Attr s P.Integer) where
     selector =
         P.lens (_selector :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _selector = a
-                          } :: Data' s)
+               (\s a -> s { _selector = a } :: Data' s)
 
 instance P.HasService (Data' s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a
-                          } :: Data' s)
+               (\s a -> s { _service = a } :: Data' s)
 
 instance P.HasSize (Data' s) (TF.Attr s P.Double) where
     size =
         P.lens (_size :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _size = a
-                          } :: Data' s)
+               (\s a -> s { _size = a } :: Data' s)
 
 instance P.HasTarget (Data' s) (TF.Attr s P.Text) where
     target =
         P.lens (_target :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a
-                          } :: Data' s)
+               (\s a -> s { _target = a } :: Data' s)
 
 instance P.HasType' (Data' s) (TF.Attr s P.Integer) where
     type' =
         P.lens (_type' :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _type' = a
-                          } :: Data' s)
+               (\s a -> s { _type' = a } :: Data' s)
 
 instance P.HasUsage (Data' s) (TF.Attr s P.Integer) where
     usage =
         P.lens (_usage :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _usage = a
-                          } :: Data' s)
+               (\s a -> s { _usage = a } :: Data' s)
 
 instance P.HasWeight (Data' s) (TF.Attr s P.Integer) where
     weight =
         P.lens (_weight :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a
-                          } :: Data' s)
+               (\s a -> s { _weight = a } :: Data' s)
 
 -- | @response@ nested settings.
 data Response s = Response'
     deriving (P.Show, P.Eq, P.Generic)
-
-instance P.Hashable  (Response s)
-instance TF.IsValue  (Response s)
-instance TF.IsObject (Response s) where
-    toObject Response' = []
 
 newResponse
     :: Response s
 newResponse =
     Response'
 
+instance P.Hashable  (Response s)
+instance TF.IsValue  (Response s)
+instance TF.IsObject (Response s) where
+    toObject Response' = []
+
+instance TF.IsValid (Response s) where
+    validator = P.mempty
+
 instance s ~ s' => P.HasComputedOriginTraffic (TF.Ref s' (Response s)) (TF.Attr s P.Bool) where
     computedOriginTraffic x = TF.compute (TF.refKey x) "_computedOriginTraffic"
 
-instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (Response s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Integer)]) where
+instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (Response s)) (TF.Attr s [TF.Attr s P.Integer]) where
     computedStatuses x = TF.compute (TF.refKey x) "_computedStatuses"
 
 -- | @action@ nested settings.
@@ -1161,15 +1113,6 @@ data Action s = Action'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Action s)
-instance TF.IsValue  (Action s)
-instance TF.IsObject (Action s) where
-    toObject Action'{..} = catMaybes
-        [ TF.assign "mode" <$> TF.attribute _mode
-        , TF.assign "response" <$> TF.attribute _response
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
 newAction
     :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
     -> TF.Attr s P.Integer -- ^ @timeout@ - 'P.timeout'
@@ -1181,23 +1124,36 @@ newAction _mode _timeout =
         , _timeout = _timeout
         }
 
+instance P.Hashable  (Action s)
+instance TF.IsValue  (Action s)
+instance TF.IsObject (Action s) where
+    toObject Action'{..} = P.catMaybes
+        [ TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "response" <$> TF.attribute _response
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (Action s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_response"
+                  (_response
+                      :: Action s -> TF.Attr s (Response s))
+                  TF.validator
+
 instance P.HasMode (Action s) (TF.Attr s P.Text) where
     mode =
         P.lens (_mode :: Action s -> TF.Attr s P.Text)
-               (\s a -> s { _mode = a
-                          } :: Action s)
+               (\s a -> s { _mode = a } :: Action s)
 
 instance P.HasResponse (Action s) (TF.Attr s (Response s)) where
     response =
         P.lens (_response :: Action s -> TF.Attr s (Response s))
-               (\s a -> s { _response = a
-                          } :: Action s)
+               (\s a -> s { _response = a } :: Action s)
 
 instance P.HasTimeout (Action s) (TF.Attr s P.Integer) where
     timeout =
         P.lens (_timeout :: Action s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeout = a
-                          } :: Action s)
+               (\s a -> s { _timeout = a } :: Action s)
 
 -- | @minify@ nested settings.
 data Minify s = Minify'
@@ -1212,15 +1168,6 @@ data Minify s = Minify'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Minify s)
-instance TF.IsValue  (Minify s)
-instance TF.IsObject (Minify s) where
-    toObject Minify'{..} = catMaybes
-        [ TF.assign "css" <$> TF.attribute _css
-        , TF.assign "html" <$> TF.attribute _html
-        , TF.assign "js" <$> TF.attribute _js
-        ]
-
 newMinify
     :: TF.Attr s P.Text -- ^ @css@ - 'P.css'
     -> TF.Attr s P.Text -- ^ @html@ - 'P.html'
@@ -1233,37 +1180,49 @@ newMinify _css _html _js =
         , _js = _js
         }
 
+instance P.Hashable  (Minify s)
+instance TF.IsValue  (Minify s)
+instance TF.IsObject (Minify s) where
+    toObject Minify'{..} = P.catMaybes
+        [ TF.assign "css" <$> TF.attribute _css
+        , TF.assign "html" <$> TF.attribute _html
+        , TF.assign "js" <$> TF.attribute _js
+        ]
+
+instance TF.IsValid (Minify s) where
+    validator = P.mempty
+
 instance P.HasCss (Minify s) (TF.Attr s P.Text) where
     css =
         P.lens (_css :: Minify s -> TF.Attr s P.Text)
-               (\s a -> s { _css = a
-                          } :: Minify s)
+               (\s a -> s { _css = a } :: Minify s)
 
 instance P.HasHtml (Minify s) (TF.Attr s P.Text) where
     html =
         P.lens (_html :: Minify s -> TF.Attr s P.Text)
-               (\s a -> s { _html = a
-                          } :: Minify s)
+               (\s a -> s { _html = a } :: Minify s)
 
 instance P.HasJs (Minify s) (TF.Attr s P.Text) where
     js =
         P.lens (_js :: Minify s -> TF.Attr s P.Text)
-               (\s a -> s { _js = a
-                          } :: Minify s)
+               (\s a -> s { _js = a } :: Minify s)
 
 -- | @initial_settings@ nested settings.
 data InitialSettings s = InitialSettings'
     deriving (P.Show, P.Eq, P.Generic)
+
+newInitialSettings
+    :: InitialSettings s
+newInitialSettings =
+    InitialSettings'
 
 instance P.Hashable  (InitialSettings s)
 instance TF.IsValue  (InitialSettings s)
 instance TF.IsObject (InitialSettings s) where
     toObject InitialSettings' = []
 
-newInitialSettings
-    :: InitialSettings s
-newInitialSettings =
-    InitialSettings'
+instance TF.IsValid (InitialSettings s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
     computedAdvancedDdos x = TF.compute (TF.refKey x) "_computedAdvancedDdos"
@@ -1407,15 +1366,6 @@ data Origins s = Origins'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Origins s)
-instance TF.IsValue  (Origins s)
-instance TF.IsObject (Origins s) where
-    toObject Origins'{..} = catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 newOrigins
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1427,45 +1377,46 @@ newOrigins _address _name =
         , _name = _name
         }
 
+instance P.Hashable  (Origins s)
+instance TF.IsValue  (Origins s)
+instance TF.IsObject (Origins s) where
+    toObject Origins'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (Origins s) where
+    validator = P.mempty
+
 instance P.HasAddress (Origins s) (TF.Attr s P.Text) where
     address =
         P.lens (_address :: Origins s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a
-                          } :: Origins s)
+               (\s a -> s { _address = a } :: Origins s)
 
 instance P.HasEnabled (Origins s) (TF.Attr s P.Bool) where
     enabled =
         P.lens (_enabled :: Origins s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a
-                          } :: Origins s)
+               (\s a -> s { _enabled = a } :: Origins s)
 
 instance P.HasName (Origins s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Origins s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Origins s)
+               (\s a -> s { _name = a } :: Origins s)
 
 -- | @header@ nested settings.
 data Header s = Header'
     { _header :: TF.Attr s P.Text
     -- ^ @header@ - (Required)
     --
-    , _values :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @values@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Header s)
-instance TF.IsValue  (Header s)
-instance TF.IsObject (Header s) where
-    toObject Header'{..} = catMaybes
-        [ TF.assign "header" <$> TF.attribute _header
-        , TF.assign "values" <$> TF.attribute _values
-        ]
-
 newHeader
     :: TF.Attr s P.Text -- ^ @header@ - 'P.header'
-    -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @values@ - 'P.values'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @values@ - 'P.values'
     -> Header s
 newHeader _header _values =
     Header'
@@ -1473,17 +1424,26 @@ newHeader _header _values =
         , _values = _values
         }
 
+instance P.Hashable  (Header s)
+instance TF.IsValue  (Header s)
+instance TF.IsObject (Header s) where
+    toObject Header'{..} = P.catMaybes
+        [ TF.assign "header" <$> TF.attribute _header
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (Header s) where
+    validator = P.mempty
+
 instance P.HasHeader (Header s) (TF.Attr s P.Text) where
     header =
         P.lens (_header :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _header = a
-                          } :: Header s)
+               (\s a -> s { _header = a } :: Header s)
 
-instance P.HasValues (Header s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasValues (Header s) (TF.Attr s [TF.Attr s P.Text]) where
     values =
-        P.lens (_values :: Header s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _values = a
-                          } :: Header s)
+        P.lens (_values :: Header s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: Header s)
 
 -- | @forwarding_url@ nested settings.
 data ForwardingUrl s = ForwardingUrl'
@@ -1495,14 +1455,6 @@ data ForwardingUrl s = ForwardingUrl'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (ForwardingUrl s)
-instance TF.IsValue  (ForwardingUrl s)
-instance TF.IsObject (ForwardingUrl s) where
-    toObject ForwardingUrl'{..} = catMaybes
-        [ TF.assign "status_code" <$> TF.attribute _statusCode
-        , TF.assign "url" <$> TF.attribute _url
-        ]
-
 newForwardingUrl
     :: TF.Attr s P.Integer -- ^ @status_code@ - 'P.statusCode'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
@@ -1513,17 +1465,26 @@ newForwardingUrl _statusCode _url =
         , _url = _url
         }
 
+instance P.Hashable  (ForwardingUrl s)
+instance TF.IsValue  (ForwardingUrl s)
+instance TF.IsObject (ForwardingUrl s) where
+    toObject ForwardingUrl'{..} = P.catMaybes
+        [ TF.assign "status_code" <$> TF.attribute _statusCode
+        , TF.assign "url" <$> TF.attribute _url
+        ]
+
+instance TF.IsValid (ForwardingUrl s) where
+    validator = P.mempty
+
 instance P.HasStatusCode (ForwardingUrl s) (TF.Attr s P.Integer) where
     statusCode =
         P.lens (_statusCode :: ForwardingUrl s -> TF.Attr s P.Integer)
-               (\s a -> s { _statusCode = a
-                          } :: ForwardingUrl s)
+               (\s a -> s { _statusCode = a } :: ForwardingUrl s)
 
 instance P.HasUrl (ForwardingUrl s) (TF.Attr s P.Text) where
     url =
         P.lens (_url :: ForwardingUrl s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a
-                          } :: ForwardingUrl s)
+               (\s a -> s { _url = a } :: ForwardingUrl s)
 
 -- | @mobile_redirect@ nested settings.
 data MobileRedirect s = MobileRedirect'
@@ -1538,15 +1499,6 @@ data MobileRedirect s = MobileRedirect'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (MobileRedirect s)
-instance TF.IsValue  (MobileRedirect s)
-instance TF.IsObject (MobileRedirect s) where
-    toObject MobileRedirect'{..} = catMaybes
-        [ TF.assign "mobile_subdomain" <$> TF.attribute _mobileSubdomain
-        , TF.assign "status" <$> TF.attribute _status
-        , TF.assign "strip_uri" <$> TF.attribute _stripUri
-        ]
-
 newMobileRedirect
     :: TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
     -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
@@ -1559,23 +1511,32 @@ newMobileRedirect _mobileSubdomain _status _stripUri =
         , _stripUri = _stripUri
         }
 
+instance P.Hashable  (MobileRedirect s)
+instance TF.IsValue  (MobileRedirect s)
+instance TF.IsObject (MobileRedirect s) where
+    toObject MobileRedirect'{..} = P.catMaybes
+        [ TF.assign "mobile_subdomain" <$> TF.attribute _mobileSubdomain
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "strip_uri" <$> TF.attribute _stripUri
+        ]
+
+instance TF.IsValid (MobileRedirect s) where
+    validator = P.mempty
+
 instance P.HasMobileSubdomain (MobileRedirect s) (TF.Attr s P.Text) where
     mobileSubdomain =
         P.lens (_mobileSubdomain :: MobileRedirect s -> TF.Attr s P.Text)
-               (\s a -> s { _mobileSubdomain = a
-                          } :: MobileRedirect s)
+               (\s a -> s { _mobileSubdomain = a } :: MobileRedirect s)
 
 instance P.HasStatus (MobileRedirect s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: MobileRedirect s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: MobileRedirect s)
+               (\s a -> s { _status = a } :: MobileRedirect s)
 
 instance P.HasStripUri (MobileRedirect s) (TF.Attr s P.Bool) where
     stripUri =
         P.lens (_stripUri :: MobileRedirect s -> TF.Attr s P.Bool)
-               (\s a -> s { _stripUri = a
-                          } :: MobileRedirect s)
+               (\s a -> s { _stripUri = a } :: MobileRedirect s)
 
 -- | @region_pools@ nested settings.
 data RegionPools s = RegionPools'
@@ -1587,14 +1548,6 @@ data RegionPools s = RegionPools'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (RegionPools s)
-instance TF.IsValue  (RegionPools s)
-instance TF.IsObject (RegionPools s) where
-    toObject RegionPools'{..} = catMaybes
-        [ TF.assign "pool_ids" <$> TF.attribute _poolIds
-        , TF.assign "region" <$> TF.attribute _region
-        ]
-
 newRegionPools
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
@@ -1605,31 +1558,43 @@ newRegionPools _poolIds _region =
         , _region = _region
         }
 
+instance P.Hashable  (RegionPools s)
+instance TF.IsValue  (RegionPools s)
+instance TF.IsObject (RegionPools s) where
+    toObject RegionPools'{..} = P.catMaybes
+        [ TF.assign "pool_ids" <$> TF.attribute _poolIds
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (RegionPools s) where
+    validator = P.mempty
+
 instance P.HasPoolIds (RegionPools s) (TF.Attr s [TF.Attr s P.Text]) where
     poolIds =
         P.lens (_poolIds :: RegionPools s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _poolIds = a
-                          } :: RegionPools s)
+               (\s a -> s { _poolIds = a } :: RegionPools s)
 
 instance P.HasRegion (RegionPools s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: RegionPools s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: RegionPools s)
+               (\s a -> s { _region = a } :: RegionPools s)
 
 -- | @match@ nested settings.
 data Match s = Match'
     deriving (P.Show, P.Eq, P.Generic)
+
+newMatch
+    :: Match s
+newMatch =
+    Match'
 
 instance P.Hashable  (Match s)
 instance TF.IsValue  (Match s)
 instance TF.IsObject (Match s) where
     toObject Match' = []
 
-newMatch
-    :: Match s
-newMatch =
-    Match'
+instance TF.IsValid (Match s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedRequest (TF.Ref s' (Match s)) (TF.Attr s (Request s)) where
     computedRequest x = TF.compute (TF.refKey x) "_computedRequest"
@@ -1641,15 +1606,18 @@ instance s ~ s' => P.HasComputedResponse (TF.Ref s' (Match s)) (TF.Attr s (Respo
 data SecurityHeader s = SecurityHeader'
     deriving (P.Show, P.Eq, P.Generic)
 
+newSecurityHeader
+    :: SecurityHeader s
+newSecurityHeader =
+    SecurityHeader'
+
 instance P.Hashable  (SecurityHeader s)
 instance TF.IsValue  (SecurityHeader s)
 instance TF.IsObject (SecurityHeader s) where
     toObject SecurityHeader' = []
 
-newSecurityHeader
-    :: SecurityHeader s
-newSecurityHeader =
-    SecurityHeader'
+instance TF.IsValid (SecurityHeader s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
     computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
@@ -1670,20 +1638,23 @@ instance s ~ s' => P.HasComputedPreload (TF.Ref s' (SecurityHeader s)) (TF.Attr 
 data Request s = Request'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Request s)
-instance TF.IsValue  (Request s)
-instance TF.IsObject (Request s) where
-    toObject Request' = []
-
 newRequest
     :: Request s
 newRequest =
     Request'
 
-instance s ~ s' => P.HasComputedMethods (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.Hashable  (Request s)
+instance TF.IsValue  (Request s)
+instance TF.IsObject (Request s) where
+    toObject Request' = []
+
+instance TF.IsValid (Request s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedMethods (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedMethods x = TF.compute (TF.refKey x) "_computedMethods"
 
-instance s ~ s' => P.HasComputedSchemes (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSchemes (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSchemes x = TF.compute (TF.refKey x) "_computedSchemes"
 
 instance s ~ s' => P.HasComputedUrlPattern (TF.Ref s' (Request s)) (TF.Attr s P.Text) where
