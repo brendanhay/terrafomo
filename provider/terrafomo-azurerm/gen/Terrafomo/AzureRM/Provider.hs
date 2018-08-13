@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.AzureRM.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.AzureRM.Settings
 
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.AzureRM.Types as P
 import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 
 -- | The @AzureRM@ Terraform provider configuration.
 --
@@ -77,30 +81,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "client_id" <$> _clientId
-                  , TF.assign "client_secret" <$> _clientSecret
-                  , P.Just $ TF.assign "environment" _environment
-                  , TF.assign "msi_endpoint" <$> _msiEndpoint
-                  , TF.assign "skip_credentials_validation" <$> _skipCredentialsValidation
-                  , TF.assign "skip_provider_registration" <$> _skipProviderRegistration
-                  , TF.assign "subscription_id" <$> _subscriptionId
-                  , TF.assign "tenant_id" <$> _tenantId
-                  , TF.assign "use_msi" <$> _useMsi
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Text -- ^ @environment@ - 'P.environment'
     -> Provider
@@ -117,56 +97,74 @@ newProvider _environment =
         , _useMsi = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "client_id" <$> _clientId
+                  , TF.assign "client_secret" <$> _clientSecret
+                  , P.Just $ TF.assign "environment" _environment
+                  , TF.assign "msi_endpoint" <$> _msiEndpoint
+                  , TF.assign "skip_credentials_validation" <$> _skipCredentialsValidation
+                  , TF.assign "skip_provider_registration" <$> _skipProviderRegistration
+                  , TF.assign "subscription_id" <$> _subscriptionId
+                  , TF.assign "tenant_id" <$> _tenantId
+                  , TF.assign "use_msi" <$> _useMsi
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasClientId (Provider) (P.Maybe P.Text) where
     clientId =
         P.lens (_clientId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientId = a
-                          } :: Provider)
+               (\s a -> s { _clientId = a } :: Provider)
 
 instance P.HasClientSecret (Provider) (P.Maybe P.Text) where
     clientSecret =
         P.lens (_clientSecret :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientSecret = a
-                          } :: Provider)
+               (\s a -> s { _clientSecret = a } :: Provider)
 
 instance P.HasEnvironment (Provider) (P.Text) where
     environment =
         P.lens (_environment :: Provider -> P.Text)
-               (\s a -> s { _environment = a
-                          } :: Provider)
+               (\s a -> s { _environment = a } :: Provider)
 
 instance P.HasMsiEndpoint (Provider) (P.Maybe P.Text) where
     msiEndpoint =
         P.lens (_msiEndpoint :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _msiEndpoint = a
-                          } :: Provider)
+               (\s a -> s { _msiEndpoint = a } :: Provider)
 
 instance P.HasSkipCredentialsValidation (Provider) (P.Maybe P.Bool) where
     skipCredentialsValidation =
         P.lens (_skipCredentialsValidation :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _skipCredentialsValidation = a
-                          } :: Provider)
+               (\s a -> s { _skipCredentialsValidation = a } :: Provider)
 
 instance P.HasSkipProviderRegistration (Provider) (P.Maybe P.Bool) where
     skipProviderRegistration =
         P.lens (_skipProviderRegistration :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _skipProviderRegistration = a
-                          } :: Provider)
+               (\s a -> s { _skipProviderRegistration = a } :: Provider)
 
 instance P.HasSubscriptionId (Provider) (P.Maybe P.Text) where
     subscriptionId =
         P.lens (_subscriptionId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _subscriptionId = a
-                          } :: Provider)
+               (\s a -> s { _subscriptionId = a } :: Provider)
 
 instance P.HasTenantId (Provider) (P.Maybe P.Text) where
     tenantId =
         P.lens (_tenantId :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _tenantId = a
-                          } :: Provider)
+               (\s a -> s { _tenantId = a } :: Provider)
 
 instance P.HasUseMsi (Provider) (P.Maybe P.Bool) where
     useMsi =
         P.lens (_useMsi :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _useMsi = a
-                          } :: Provider)
+               (\s a -> s { _useMsi = a } :: Provider)
