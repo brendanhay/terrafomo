@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newCommand",
+                "name": "Command'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,13 +29,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"inline_script\" <$> TF.attribute",
-                    "name": "inline_script",
+                    "name": "_inlineScript",
                     "method": "inlineScript",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasInlineScript",
+                    "validate": false,
                     "optional": true,
-                    "label": "_inlineScript"
+                    "original": "inline_script"
                 },
                 {
                     "default": "TF.Nil",
@@ -39,13 +45,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"job\" <$> TF.attribute",
-                    "name": "job",
+                    "name": "_job",
                     "method": "job",
                     "conflicts": [],
-                    "type": "TF.Attr s [Job s]",
+                    "type": "TF.Attr s [TF.Attr s (Job s)]",
                     "class": "HasJob",
+                    "validate": true,
                     "optional": true,
-                    "label": "_job"
+                    "original": "job"
                 },
                 {
                     "default": "TF.Nil",
@@ -54,13 +61,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"node_step_plugin\" <$> TF.attribute",
-                    "name": "node_step_plugin",
+                    "name": "_nodeStepPlugin",
                     "method": "nodeStepPlugin",
                     "conflicts": [],
-                    "type": "TF.Attr s [NodeStepPlugin s]",
+                    "type": "TF.Attr s [TF.Attr s (NodeStepPlugin s)]",
                     "class": "HasNodeStepPlugin",
+                    "validate": true,
                     "optional": true,
-                    "label": "_nodeStepPlugin"
+                    "original": "node_step_plugin"
                 },
                 {
                     "default": "TF.Nil",
@@ -69,13 +77,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"script_file\" <$> TF.attribute",
-                    "name": "script_file",
+                    "name": "_scriptFile",
                     "method": "scriptFile",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasScriptFile",
+                    "validate": false,
                     "optional": true,
-                    "label": "_scriptFile"
+                    "original": "script_file"
                 },
                 {
                     "default": "TF.Nil",
@@ -84,13 +93,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"script_file_args\" <$> TF.attribute",
-                    "name": "script_file_args",
+                    "name": "_scriptFileArgs",
                     "method": "scriptFileArgs",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasScriptFileArgs",
+                    "validate": false,
                     "optional": true,
-                    "label": "_scriptFileArgs"
+                    "original": "script_file_args"
                 },
                 {
                     "default": "TF.Nil",
@@ -99,13 +109,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"shell_command\" <$> TF.attribute",
-                    "name": "shell_command",
+                    "name": "_shellCommand",
                     "method": "shellCommand",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasShellCommand",
+                    "validate": false,
                     "optional": true,
-                    "label": "_shellCommand"
+                    "original": "shell_command"
                 },
                 {
                     "default": "TF.Nil",
@@ -114,23 +125,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"step_plugin\" <$> TF.attribute",
-                    "name": "step_plugin",
+                    "name": "_stepPlugin",
                     "method": "stepPlugin",
                     "conflicts": [],
-                    "type": "TF.Attr s [StepPlugin s]",
+                    "type": "TF.Attr s [TF.Attr s (StepPlugin s)]",
                     "class": "HasStepPlugin",
+                    "validate": true,
                     "optional": true,
-                    "label": "_stepPlugin"
+                    "original": "step_plugin"
                 }
             ],
             "name": "Command",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Command s",
             "original": "command"
         },
         {
+            "con": {
+                "smart": "newResourceModelSource",
+                "name": "ResourceModelSource'"
+            },
             "arguments": [
                 {
                     "default": "_config",
@@ -141,13 +158,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "config",
+                    "name": "_config",
                     "method": "config",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasConfig",
+                    "validate": false,
                     "optional": false,
-                    "label": "_config"
+                    "original": "config"
                 },
                 {
                     "default": "_type'",
@@ -158,16 +176,18 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "ResourceModelSource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -179,13 +199,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "config",
+                    "name": "_config",
                     "method": "config",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasConfig",
+                    "validate": false,
                     "optional": false,
-                    "label": "_config"
+                    "original": "config"
                 },
                 {
                     "default": "_type'",
@@ -196,20 +217,25 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "ResourceModelSource s",
             "original": "resource_model_source"
         },
         {
+            "con": {
+                "smart": "newStepPlugin",
+                "name": "StepPlugin'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -218,13 +244,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "config",
+                    "name": "_config",
                     "method": "config",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasConfig",
+                    "validate": false,
                     "optional": true,
-                    "label": "_config"
+                    "original": "config"
                 },
                 {
                     "default": "_type'",
@@ -233,16 +260,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "StepPlugin",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -252,20 +281,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "StepPlugin s",
             "original": "step_plugin"
         },
         {
+            "con": {
+                "smart": "newJob",
+                "name": "Job'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -274,13 +308,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"args\" <$> TF.attribute",
-                    "name": "args",
+                    "name": "_args",
                     "method": "args",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasArgs",
+                    "validate": false,
                     "optional": true,
-                    "label": "_args"
+                    "original": "args"
                 },
                 {
                     "default": "TF.Nil",
@@ -289,13 +324,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"group_name\" <$> TF.attribute",
-                    "name": "group_name",
+                    "name": "_groupName",
                     "method": "groupName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasGroupName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_groupName"
+                    "original": "group_name"
                 },
                 {
                     "default": "_name",
@@ -304,13 +340,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -319,16 +356,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"run_for_each_node\" <$> TF.attribute",
-                    "name": "run_for_each_node",
+                    "name": "_runForEachNode",
                     "method": "runForEachNode",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasRunForEachNode",
+                    "validate": false,
                     "optional": true,
-                    "label": "_runForEachNode"
+                    "original": "run_for_each_node"
                 }
             ],
             "name": "Job",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -338,20 +377,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Job s",
             "original": "job"
         },
         {
+            "con": {
+                "smart": "newOption",
+                "name": "Option'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -360,13 +404,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"allow_multiple_values\" <$> TF.attribute",
-                    "name": "allow_multiple_values",
+                    "name": "_allowMultipleValues",
                     "method": "allowMultipleValues",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAllowMultipleValues",
+                    "validate": false,
                     "optional": true,
-                    "label": "_allowMultipleValues"
+                    "original": "allow_multiple_values"
                 },
                 {
                     "default": "TF.Nil",
@@ -375,13 +420,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"default_value\" <$> TF.attribute",
-                    "name": "default_value",
+                    "name": "_defaultValue",
                     "method": "defaultValue",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDefaultValue",
+                    "validate": false,
                     "optional": true,
-                    "label": "_defaultValue"
+                    "original": "default_value"
                 },
                 {
                     "default": "TF.Nil",
@@ -390,13 +436,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -405,13 +452,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"exposed_to_scripts\" <$> TF.attribute",
-                    "name": "exposed_to_scripts",
+                    "name": "_exposedToScripts",
                     "method": "exposedToScripts",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasExposedToScripts",
+                    "validate": false,
                     "optional": true,
-                    "label": "_exposedToScripts"
+                    "original": "exposed_to_scripts"
                 },
                 {
                     "default": "TF.Nil",
@@ -420,13 +468,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"multi_value_delimiter\" <$> TF.attribute",
-                    "name": "multi_value_delimiter",
+                    "name": "_multiValueDelimiter",
                     "method": "multiValueDelimiter",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMultiValueDelimiter",
+                    "validate": false,
                     "optional": true,
-                    "label": "_multiValueDelimiter"
+                    "original": "multi_value_delimiter"
                 },
                 {
                     "default": "_name",
@@ -435,13 +484,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -450,13 +500,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"obscure_input\" <$> TF.attribute",
-                    "name": "obscure_input",
+                    "name": "_obscureInput",
                     "method": "obscureInput",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasObscureInput",
+                    "validate": false,
                     "optional": true,
-                    "label": "_obscureInput"
+                    "original": "obscure_input"
                 },
                 {
                     "default": "TF.Nil",
@@ -465,13 +516,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"require_predefined_choice\" <$> TF.attribute",
-                    "name": "require_predefined_choice",
+                    "name": "_requirePredefinedChoice",
                     "method": "requirePredefinedChoice",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasRequirePredefinedChoice",
+                    "validate": false,
                     "optional": true,
-                    "label": "_requirePredefinedChoice"
+                    "original": "require_predefined_choice"
                 },
                 {
                     "default": "TF.Nil",
@@ -480,13 +532,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"required\" <$> TF.attribute",
-                    "name": "required",
+                    "name": "_required",
                     "method": "required",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasRequired",
+                    "validate": false,
                     "optional": true,
-                    "label": "_required"
+                    "original": "required"
                 },
                 {
                     "default": "TF.Nil",
@@ -495,13 +548,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"validation_regex\" <$> TF.attribute",
-                    "name": "validation_regex",
+                    "name": "_validationRegex",
                     "method": "validationRegex",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValidationRegex",
+                    "validate": false,
                     "optional": true,
-                    "label": "_validationRegex"
+                    "original": "validation_regex"
                 },
                 {
                     "default": "TF.Nil",
@@ -510,13 +564,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value_choices\" <$> TF.attribute",
-                    "name": "value_choices",
+                    "name": "_valueChoices",
                     "method": "valueChoices",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasValueChoices",
+                    "validate": false,
                     "optional": true,
-                    "label": "_valueChoices"
+                    "original": "value_choices"
                 },
                 {
                     "default": "TF.Nil",
@@ -525,16 +580,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"value_choices_url\" <$> TF.attribute",
-                    "name": "value_choices_url",
+                    "name": "_valueChoicesUrl",
                     "method": "valueChoicesUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasValueChoicesUrl",
+                    "validate": false,
                     "optional": true,
-                    "label": "_valueChoicesUrl"
+                    "original": "value_choices_url"
                 }
             ],
             "name": "Option",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -544,20 +601,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Option s",
             "original": "option"
         },
         {
+            "con": {
+                "smart": "newNodeStepPlugin",
+                "name": "NodeStepPlugin'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -566,13 +628,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"config\" <$> TF.attribute",
-                    "name": "config",
+                    "name": "_config",
                     "method": "config",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasConfig",
+                    "validate": false,
                     "optional": true,
-                    "label": "_config"
+                    "original": "config"
                 },
                 {
                     "default": "_type'",
@@ -581,16 +644,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "NodeStepPlugin",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -600,76 +665,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "NodeStepPlugin s",
             "original": "node_step_plugin"
-        }
-    ],
-    "arguments": [
-        {
-            "default": "P.Nothing",
-            "computed": false,
-            "required": false,
-            "help": [
-                "If set, the Rundeck client will permit unverifiable SSL certificates."
-            ],
-            "forceNew": false,
-            "encoder": "TF.assign \"allow_unverified_ssl\" <$>",
-            "name": "allow_unverified_ssl",
-            "method": "allowUnverifiedSsl",
-            "conflicts": [],
-            "type": "P.Maybe P.Bool",
-            "class": "HasAllowUnverifiedSsl",
-            "optional": true,
-            "label": "_allowUnverifiedSsl"
-        },
-        {
-            "default": "_authToken",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Auth token to use with the Rundeck API."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"auth_token\"",
-            "name": "auth_token",
-            "method": "authToken",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAuthToken",
-            "optional": false,
-            "label": "_authToken"
-        },
-        {
-            "default": "_url",
-            "computed": false,
-            "required": true,
-            "help": [
-                "URL of the root of the target Rundeck server."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"url\"",
-            "name": "url",
-            "method": "url",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUrl",
-            "optional": false,
-            "label": "_url"
         }
     ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "jobResource",
+                "name": "JobResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -678,13 +695,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"allow_concurrent_executions\" <$> TF.attribute",
-                    "name": "allow_concurrent_executions",
+                    "name": "_allowConcurrentExecutions",
                     "method": "allowConcurrentExecutions",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAllowConcurrentExecutions",
+                    "validate": false,
                     "optional": true,
-                    "label": "_allowConcurrentExecutions"
+                    "original": "allow_concurrent_executions"
                 },
                 {
                     "default": "_command",
@@ -693,13 +711,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"command\" <$> TF.attribute",
-                    "name": "command",
+                    "name": "_command",
                     "method": "command",
                     "conflicts": [],
-                    "type": "TF.Attr s [Command s]",
+                    "type": "TF.Attr s [TF.Attr s (Command s)]",
                     "class": "HasCommand",
+                    "validate": true,
                     "optional": false,
-                    "label": "_command"
+                    "original": "command"
                 },
                 {
                     "default": "TF.value \"node-first\"",
@@ -708,13 +727,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"command_ordering_strategy\" <$> TF.attribute",
-                    "name": "command_ordering_strategy",
+                    "name": "_commandOrderingStrategy",
                     "method": "commandOrderingStrategy",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCommandOrderingStrategy",
+                    "validate": false,
                     "optional": true,
-                    "label": "_commandOrderingStrategy"
+                    "original": "command_ordering_strategy"
                 },
                 {
                     "default": "TF.Nil",
@@ -723,13 +743,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"continue_on_error\" <$> TF.attribute",
-                    "name": "continue_on_error",
+                    "name": "_continueOnError",
                     "method": "continueOnError",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasContinueOnError",
+                    "validate": false,
                     "optional": true,
-                    "label": "_continueOnError"
+                    "original": "continue_on_error"
                 },
                 {
                     "default": "_description",
@@ -738,13 +759,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": false,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -753,13 +775,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"group_name\" <$> TF.attribute",
-                    "name": "group_name",
+                    "name": "_groupName",
                     "method": "groupName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasGroupName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_groupName"
+                    "original": "group_name"
                 },
                 {
                     "default": "TF.value \"INFO\"",
@@ -768,13 +791,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"log_level\" <$> TF.attribute",
-                    "name": "log_level",
+                    "name": "_logLevel",
                     "method": "logLevel",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLogLevel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_logLevel"
+                    "original": "log_level"
                 },
                 {
                     "default": "TF.value 1",
@@ -783,13 +807,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"max_thread_count\" <$> TF.attribute",
-                    "name": "max_thread_count",
+                    "name": "_maxThreadCount",
                     "method": "maxThreadCount",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMaxThreadCount",
+                    "validate": false,
                     "optional": true,
-                    "label": "_maxThreadCount"
+                    "original": "max_thread_count"
                 },
                 {
                     "default": "_name",
@@ -798,13 +823,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -813,13 +839,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"node_filter_exclude_precedence\" <$> TF.attribute",
-                    "name": "node_filter_exclude_precedence",
+                    "name": "_nodeFilterExcludePrecedence",
                     "method": "nodeFilterExcludePrecedence",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasNodeFilterExcludePrecedence",
+                    "validate": false,
                     "optional": true,
-                    "label": "_nodeFilterExcludePrecedence"
+                    "original": "node_filter_exclude_precedence"
                 },
                 {
                     "default": "TF.Nil",
@@ -828,13 +855,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"node_filter_query\" <$> TF.attribute",
-                    "name": "node_filter_query",
+                    "name": "_nodeFilterQuery",
                     "method": "nodeFilterQuery",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNodeFilterQuery",
+                    "validate": false,
                     "optional": true,
-                    "label": "_nodeFilterQuery"
+                    "original": "node_filter_query"
                 },
                 {
                     "default": "TF.Nil",
@@ -843,13 +871,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"option\" <$> TF.attribute",
-                    "name": "option",
+                    "name": "_option",
                     "method": "option",
                     "conflicts": [],
-                    "type": "TF.Attr s [Option s]",
+                    "type": "TF.Attr s [TF.Attr s (Option s)]",
                     "class": "HasOption",
+                    "validate": true,
                     "optional": true,
-                    "label": "_option"
+                    "original": "option"
                 },
                 {
                     "default": "_projectName",
@@ -858,13 +887,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_name\" <$> TF.attribute",
-                    "name": "project_name",
+                    "name": "_projectName",
                     "method": "projectName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectName"
+                    "original": "project_name"
                 },
                 {
                     "default": "TF.Nil",
@@ -873,13 +903,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rank_attribute\" <$> TF.attribute",
-                    "name": "rank_attribute",
+                    "name": "_rankAttribute",
                     "method": "rankAttribute",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRankAttribute",
+                    "validate": false,
                     "optional": true,
-                    "label": "_rankAttribute"
+                    "original": "rank_attribute"
                 },
                 {
                     "default": "TF.value \"ascending\"",
@@ -888,13 +919,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rank_order\" <$> TF.attribute",
-                    "name": "rank_order",
+                    "name": "_rankOrder",
                     "method": "rankOrder",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRankOrder",
+                    "validate": false,
                     "optional": true,
-                    "label": "_rankOrder"
+                    "original": "rank_order"
                 },
                 {
                     "default": "TF.Nil",
@@ -903,17 +935,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"schedule\" <$> TF.attribute",
-                    "name": "schedule",
+                    "name": "_schedule",
                     "method": "schedule",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSchedule",
+                    "validate": false,
                     "optional": true,
-                    "label": "_schedule"
+                    "original": "schedule"
                 }
             ],
-            "schema": "Resource",
             "name": "JobResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -922,13 +955,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 },
                 {
                     "default": "TF.Nil",
@@ -937,13 +971,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"preserve_options_order\" <$> TF.attribute",
-                    "name": "preserve_options_order",
+                    "name": "_computedPreserveOptionsOrder",
                     "method": "computedPreserveOptionsOrder",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPreserveOptionsOrder",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPreserveOptionsOrder"
+                    "original": "preserve_options_order"
                 }
             ],
             "parameters": [
@@ -954,13 +989,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"command\" <$> TF.attribute",
-                    "name": "command",
+                    "name": "_command",
                     "method": "command",
                     "conflicts": [],
-                    "type": "TF.Attr s [Command s]",
+                    "type": "TF.Attr s [TF.Attr s (Command s)]",
                     "class": "HasCommand",
+                    "validate": true,
                     "optional": false,
-                    "label": "_command"
+                    "original": "command"
                 },
                 {
                     "default": "_description",
@@ -969,13 +1005,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": false,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -984,13 +1021,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_projectName",
@@ -999,19 +1037,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_name\" <$> TF.attribute",
-                    "name": "project_name",
+                    "name": "_projectName",
                     "method": "projectName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectName"
+                    "original": "project_name"
                 }
             ],
+            "conflicts": [],
             "type": "JobResource s",
             "original": "rundeck_job"
         },
         {
+            "con": {
+                "smart": "privateKeyResource",
+                "name": "PrivateKeyResource'"
+            },
             "arguments": [
                 {
                     "default": "_keyMaterial",
@@ -1022,13 +1066,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"key_material\" <$> TF.attribute",
-                    "name": "key_material",
+                    "name": "_keyMaterial",
                     "method": "keyMaterial",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyMaterial",
+                    "validate": false,
                     "optional": false,
-                    "label": "_keyMaterial"
+                    "original": "key_material"
                 },
                 {
                     "default": "_path",
@@ -1039,17 +1084,18 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
-            "schema": "Resource",
             "name": "PrivateKeyResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1061,13 +1107,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"key_material\" <$> TF.attribute",
-                    "name": "key_material",
+                    "name": "_keyMaterial",
                     "method": "keyMaterial",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasKeyMaterial",
+                    "validate": false,
                     "optional": false,
-                    "label": "_keyMaterial"
+                    "original": "key_material"
                 },
                 {
                     "default": "_path",
@@ -1078,19 +1125,25 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
+            "conflicts": [],
             "type": "PrivateKeyResource s",
             "original": "rundeck_private_key"
         },
         {
+            "con": {
+                "smart": "projectResource",
+                "name": "ProjectResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"jsch-ssh\"",
@@ -1099,13 +1152,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"default_node_executor_plugin\" <$> TF.attribute",
-                    "name": "default_node_executor_plugin",
+                    "name": "_defaultNodeExecutorPlugin",
                     "method": "defaultNodeExecutorPlugin",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDefaultNodeExecutorPlugin",
+                    "validate": false,
                     "optional": true,
-                    "label": "_defaultNodeExecutorPlugin"
+                    "original": "default_node_executor_plugin"
                 },
                 {
                     "default": "TF.value \"jsch-scp\"",
@@ -1114,13 +1168,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"default_node_file_copier_plugin\" <$> TF.attribute",
-                    "name": "default_node_file_copier_plugin",
+                    "name": "_defaultNodeFileCopierPlugin",
                     "method": "defaultNodeFileCopierPlugin",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDefaultNodeFileCopierPlugin",
+                    "validate": false,
                     "optional": true,
-                    "label": "_defaultNodeFileCopierPlugin"
+                    "original": "default_node_file_copier_plugin"
                 },
                 {
                     "default": "TF.value \"Managed by Terraform\"",
@@ -1131,13 +1186,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -1150,13 +1206,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"extra_config\" <$> TF.attribute",
-                    "name": "extra_config",
+                    "name": "_extraConfig",
                     "method": "extraConfig",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasExtraConfig",
+                    "validate": false,
                     "optional": true,
-                    "label": "_extraConfig"
+                    "original": "extra_config"
                 },
                 {
                     "default": "_name",
@@ -1167,13 +1224,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_resourceModelSource",
@@ -1182,13 +1240,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"resource_model_source\" <$> TF.attribute",
-                    "name": "resource_model_source",
+                    "name": "_resourceModelSource",
                     "method": "resourceModelSource",
                     "conflicts": [],
-                    "type": "TF.Attr s [ResourceModelSource s]",
+                    "type": "TF.Attr s [TF.Attr s (ResourceModelSource s)]",
                     "class": "HasResourceModelSource",
+                    "validate": true,
                     "optional": false,
-                    "label": "_resourceModelSource"
+                    "original": "resource_model_source"
                 },
                 {
                     "default": "TF.value \"privateKey\"",
@@ -1197,13 +1256,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ssh_authentication_type\" <$> TF.attribute",
-                    "name": "ssh_authentication_type",
+                    "name": "_sshAuthenticationType",
                     "method": "sshAuthenticationType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSshAuthenticationType",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sshAuthenticationType"
+                    "original": "ssh_authentication_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -1212,13 +1272,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ssh_key_file_path\" <$> TF.attribute",
-                    "name": "ssh_key_file_path",
+                    "name": "_sshKeyFilePath",
                     "method": "sshKeyFilePath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSshKeyFilePath",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sshKeyFilePath"
+                    "original": "ssh_key_file_path"
                 },
                 {
                     "default": "TF.Nil",
@@ -1227,17 +1288,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ssh_key_storage_path\" <$> TF.attribute",
-                    "name": "ssh_key_storage_path",
+                    "name": "_sshKeyStoragePath",
                     "method": "sshKeyStoragePath",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSshKeyStoragePath",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sshKeyStoragePath"
+                    "original": "ssh_key_storage_path"
                 }
             ],
-            "schema": "Resource",
             "name": "ProjectResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1246,13 +1308,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ui_url\" <$> TF.attribute",
-                    "name": "ui_url",
+                    "name": "_computedUiUrl",
                     "method": "computedUiUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUiUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUiUrl"
+                    "original": "ui_url"
                 }
             ],
             "parameters": [
@@ -1265,13 +1328,14 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_resourceModelSource",
@@ -1280,19 +1344,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"resource_model_source\" <$> TF.attribute",
-                    "name": "resource_model_source",
+                    "name": "_resourceModelSource",
                     "method": "resourceModelSource",
                     "conflicts": [],
-                    "type": "TF.Attr s [ResourceModelSource s]",
+                    "type": "TF.Attr s [TF.Attr s (ResourceModelSource s)]",
                     "class": "HasResourceModelSource",
+                    "validate": true,
                     "optional": false,
-                    "label": "_resourceModelSource"
+                    "original": "resource_model_source"
                 }
             ],
+            "conflicts": [],
             "type": "ProjectResource s",
             "original": "rundeck_project"
         },
         {
+            "con": {
+                "smart": "publicKeyResource",
+                "name": "PublicKeyResource'"
+            },
             "arguments": [
                 {
                     "default": "_path",
@@ -1303,17 +1373,18 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
-            "schema": "Resource",
             "name": "PublicKeyResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1325,13 +1396,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"delete\" <$> TF.attribute",
-                    "name": "delete",
+                    "name": "_computedDelete",
                     "method": "computedDelete",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedDelete",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedDelete"
+                    "original": "delete"
                 },
                 {
                     "default": "TF.Nil",
@@ -1342,13 +1414,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"key_material\" <$> TF.attribute",
-                    "name": "key_material",
+                    "name": "_computedKeyMaterial",
                     "method": "computedKeyMaterial",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedKeyMaterial",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedKeyMaterial"
+                    "original": "key_material"
                 },
                 {
                     "default": "TF.Nil",
@@ -1359,13 +1432,14 @@
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_computedUrl",
                     "method": "computedUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUrl",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUrl"
+                    "original": "url"
                 }
             ],
             "parameters": [
@@ -1378,19 +1452,127 @@
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
+            "conflicts": [],
             "type": "PublicKeyResource s",
             "original": "rundeck_public_key"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "If set, the Rundeck client will permit unverifiable SSL certificates."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"allow_unverified_ssl\" <$>",
+                "name": "_allowUnverifiedSsl",
+                "method": "allowUnverifiedSsl",
+                "conflicts": [],
+                "type": "P.Maybe P.Bool",
+                "class": "HasAllowUnverifiedSsl",
+                "validate": false,
+                "optional": true,
+                "original": "allow_unverified_ssl"
+            },
+            {
+                "default": "_authToken",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Auth token to use with the Rundeck API."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"auth_token\"",
+                "name": "_authToken",
+                "method": "authToken",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAuthToken",
+                "validate": false,
+                "optional": false,
+                "original": "auth_token"
+            },
+            {
+                "default": "_url",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "URL of the root of the target Rundeck server."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"url\"",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": false,
+                "original": "url"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_authToken",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Auth token to use with the Rundeck API."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"auth_token\"",
+                "name": "_authToken",
+                "method": "authToken",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAuthToken",
+                "validate": false,
+                "optional": false,
+                "original": "auth_token"
+            },
+            {
+                "default": "_url",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "URL of the root of the target Rundeck server."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"url\"",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": false,
+                "original": "url"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -1400,43 +1582,6 @@
         "microlens"
     ],
     "name": "Rundeck",
-    "parameters": [
-        {
-            "default": "_authToken",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Auth token to use with the Rundeck API."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"auth_token\"",
-            "name": "auth_token",
-            "method": "authToken",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAuthToken",
-            "optional": false,
-            "label": "_authToken"
-        },
-        {
-            "default": "_url",
-            "computed": false,
-            "required": true,
-            "help": [
-                "URL of the root of the target Rundeck server."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"url\"",
-            "name": "url",
-            "method": "url",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUrl",
-            "optional": false,
-            "label": "_url"
-        }
-    ],
     "package": "terrafomo-rundeck",
-    "type": "Provider",
     "original": "rundeck"
 }
