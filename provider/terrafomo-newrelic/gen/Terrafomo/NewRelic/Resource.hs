@@ -321,10 +321,10 @@ instance P.HasName (AlertPolicyResource s) (TF.Attr s P.Text) where
                           } :: AlertPolicyResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Integer) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Integer) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
 
 -- | @newrelic_alert_policy_channel@ Resource.
 --
@@ -443,7 +443,7 @@ instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (Widget s)]) wh
                           } :: DashboardResource s)
 
 instance s ~ s' => P.HasComputedDashboardUrl (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedDashboardUrl x = TF.compute (TF.refKey x) "dashboard_url"
+    computedDashboardUrl x = TF.compute (TF.refKey x) "_computedDashboardUrl"
 
 -- | @newrelic_infra_alert_condition@ Resource.
 --
@@ -453,7 +453,7 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     { _comparison :: TF.Attr s P.Text
     -- ^ @comparison@ - (Optional)
     --
-    , _critical :: TF.Attr s (P.NonEmpty (Critical s))
+    , _critical :: TF.Attr s (Critical s)
     -- ^ @critical@ - (Optional)
     --
     , _enabled :: TF.Attr s P.Bool
@@ -477,7 +477,7 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _warning :: TF.Attr s (P.NonEmpty (Warning s))
+    , _warning :: TF.Attr s (Warning s)
     -- ^ @warning@ - (Optional)
     --
     , _where :: TF.Attr s P.Text
@@ -527,9 +527,9 @@ instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _comparison = a
                           } :: InfraAlertConditionResource s)
 
-instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (P.NonEmpty (Critical s))) where
+instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (Critical s)) where
     critical =
-        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (P.NonEmpty (Critical s)))
+        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (Critical s))
                (\s a -> s { _critical = a
                           } :: InfraAlertConditionResource s)
 
@@ -575,9 +575,9 @@ instance P.HasType' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a
                           } :: InfraAlertConditionResource s)
 
-instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (P.NonEmpty (Warning s))) where
+instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (Warning s)) where
     warning =
-        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (P.NonEmpty (Warning s)))
+        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (Warning s))
                (\s a -> s { _warning = a
                           } :: InfraAlertConditionResource s)
 
@@ -588,10 +588,10 @@ instance P.HasWhere (InfraAlertConditionResource s) (TF.Attr s P.Text) where
                           } :: InfraAlertConditionResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Integer) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Integer) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
 
 -- | @newrelic_nrql_alert_condition@ Resource.
 --
@@ -604,7 +604,7 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nrql :: TF.Attr s (P.NonEmpty (Nrql s))
+    , _nrql :: TF.Attr s (Nrql s)
     -- ^ @nrql@ - (Required)
     --
     , _policyId :: TF.Attr s P.Integer
@@ -634,7 +634,7 @@ instance TF.IsObject (NrqlAlertConditionResource s) where
 
 nrqlAlertConditionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (P.NonEmpty (Nrql s)) -- ^ @nrql@ - 'P.nrql'
+    -> TF.Attr s (Nrql s) -- ^ @nrql@ - 'P.nrql'
     -> TF.Attr s P.Integer -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s (P.NonEmpty (Term s)) -- ^ @term@ - 'P.term'
     -> TF.Resource P.Provider (NrqlAlertConditionResource s)
@@ -662,9 +662,9 @@ instance P.HasName (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: NrqlAlertConditionResource s)
 
-instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (P.NonEmpty (Nrql s))) where
+instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (Nrql s)) where
     nrql =
-        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (Nrql s)))
+        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (Nrql s))
                (\s a -> s { _nrql = a
                           } :: NrqlAlertConditionResource s)
 

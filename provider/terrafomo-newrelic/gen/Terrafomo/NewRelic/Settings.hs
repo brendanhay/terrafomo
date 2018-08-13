@@ -42,6 +42,8 @@ module Terrafomo.NewRelic.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
 import qualified Data.List.NonEmpty       as P

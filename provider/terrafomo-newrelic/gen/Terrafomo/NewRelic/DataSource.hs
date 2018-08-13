@@ -80,10 +80,10 @@ instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
                           } :: ApplicationData s)
 
 instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
-    computedHostIds x = TF.compute (TF.refKey x) "host_ids"
+    computedHostIds x = TF.compute (TF.refKey x) "_computedHostIds"
 
 instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
-    computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
+    computedInstanceIds x = TF.compute (TF.refKey x) "_computedInstanceIds"
 
 -- | @newrelic_key_transaction@ DataSource.
 --
