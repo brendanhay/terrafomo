@@ -103,10 +103,10 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
                           } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @softlayer_virtual_guest@ Resource.
 --
@@ -332,7 +332,7 @@ instance P.HasUserData (VirtualGuestResource s) (TF.Attr s P.Text) where
                           } :: VirtualGuestResource s)
 
 instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
-    computedIpv4Address x = TF.compute (TF.refKey x) "ipv4_address"
+    computedIpv4Address x = TF.compute (TF.refKey x) "_computedIpv4Address"
 
 instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
-    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "ipv4_address_private"
+    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "_computedIpv4AddressPrivate"
