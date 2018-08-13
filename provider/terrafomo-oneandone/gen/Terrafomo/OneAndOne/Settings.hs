@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -80,13 +81,15 @@ module Terrafomo.OneAndOne.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -96,6 +99,7 @@ import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.OneAndOne.Lens  as P
 import qualified Terrafomo.OneAndOne.Types as P
+import qualified Terrafomo.Validator       as TF
 
 -- | @ips@ nested settings.
 data Ips s = Ips'
@@ -104,13 +108,6 @@ data Ips s = Ips'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Ips s)
-instance TF.IsValue  (Ips s)
-instance TF.IsObject (Ips s) where
-    toObject Ips'{..} = catMaybes
-        [ TF.assign "firewall_policy_id" <$> TF.attribute _firewallPolicyId
-        ]
-
 newIps
     :: Ips s
 newIps =
@@ -118,11 +115,20 @@ newIps =
         { _firewallPolicyId = TF.Nil
         }
 
+instance P.Hashable  (Ips s)
+instance TF.IsValue  (Ips s)
+instance TF.IsObject (Ips s) where
+    toObject Ips'{..} = P.catMaybes
+        [ TF.assign "firewall_policy_id" <$> TF.attribute _firewallPolicyId
+        ]
+
+instance TF.IsValid (Ips s) where
+    validator = P.mempty
+
 instance P.HasFirewallPolicyId (Ips s) (TF.Attr s P.Text) where
     firewallPolicyId =
         P.lens (_firewallPolicyId :: Ips s -> TF.Attr s P.Text)
-               (\s a -> s { _firewallPolicyId = a
-                          } :: Ips s)
+               (\s a -> s { _firewallPolicyId = a } :: Ips s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Ips s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -146,16 +152,6 @@ data Rules s = Rules'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Rules s)
-instance TF.IsValue  (Rules s)
-instance TF.IsObject (Rules s) where
-    toObject Rules'{..} = catMaybes
-        [ TF.assign "port_balancer" <$> TF.attribute _portBalancer
-        , TF.assign "port_server" <$> TF.attribute _portServer
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "source_ip" <$> TF.attribute _sourceIp
-        ]
-
 newRules
     :: TF.Attr s P.Integer -- ^ @port_balancer@ - 'P.portBalancer'
     -> TF.Attr s P.Integer -- ^ @port_server@ - 'P.portServer'
@@ -170,29 +166,38 @@ newRules _portBalancer _portServer _protocol _sourceIp =
         , _sourceIp = _sourceIp
         }
 
+instance P.Hashable  (Rules s)
+instance TF.IsValue  (Rules s)
+instance TF.IsObject (Rules s) where
+    toObject Rules'{..} = P.catMaybes
+        [ TF.assign "port_balancer" <$> TF.attribute _portBalancer
+        , TF.assign "port_server" <$> TF.attribute _portServer
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "source_ip" <$> TF.attribute _sourceIp
+        ]
+
+instance TF.IsValid (Rules s) where
+    validator = P.mempty
+
 instance P.HasPortBalancer (Rules s) (TF.Attr s P.Integer) where
     portBalancer =
         P.lens (_portBalancer :: Rules s -> TF.Attr s P.Integer)
-               (\s a -> s { _portBalancer = a
-                          } :: Rules s)
+               (\s a -> s { _portBalancer = a } :: Rules s)
 
 instance P.HasPortServer (Rules s) (TF.Attr s P.Integer) where
     portServer =
         P.lens (_portServer :: Rules s -> TF.Attr s P.Integer)
-               (\s a -> s { _portServer = a
-                          } :: Rules s)
+               (\s a -> s { _portServer = a } :: Rules s)
 
 instance P.HasProtocol (Rules s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: Rules s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a
-                          } :: Rules s)
+               (\s a -> s { _protocol = a } :: Rules s)
 
 instance P.HasSourceIp (Rules s) (TF.Attr s P.Text) where
     sourceIp =
         P.lens (_sourceIp :: Rules s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIp = a
-                          } :: Rules s)
+               (\s a -> s { _sourceIp = a } :: Rules s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -207,14 +212,6 @@ data Disk s = Disk'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Disk s)
-instance TF.IsValue  (Disk s)
-instance TF.IsObject (Disk s) where
-    toObject Disk'{..} = catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
 newDisk
     :: TF.Attr s [TF.Attr s (Critical s)] -- ^ @critical@ - 'P.critical'
     -> TF.Attr s [TF.Attr s (Warning s)] -- ^ @warning@ - 'P.warning'
@@ -225,17 +222,34 @@ newDisk _critical _warning =
         , _warning = _warning
         }
 
+instance P.Hashable  (Disk s)
+instance TF.IsValue  (Disk s)
+instance TF.IsObject (Disk s) where
+    toObject Disk'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (Disk s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_critical"
+                  (_critical
+                      :: Disk s -> TF.Attr s [TF.Attr s (Critical s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_warning"
+                  (_warning
+                      :: Disk s -> TF.Attr s [TF.Attr s (Warning s)])
+                  TF.validator
+
 instance P.HasCritical (Disk s) (TF.Attr s [TF.Attr s (Critical s)]) where
     critical =
         P.lens (_critical :: Disk s -> TF.Attr s [TF.Attr s (Critical s)])
-               (\s a -> s { _critical = a
-                          } :: Disk s)
+               (\s a -> s { _critical = a } :: Disk s)
 
 instance P.HasWarning (Disk s) (TF.Attr s [TF.Attr s (Warning s)]) where
     warning =
         P.lens (_warning :: Disk s -> TF.Attr s [TF.Attr s (Warning s)])
-               (\s a -> s { _warning = a
-                          } :: Disk s)
+               (\s a -> s { _warning = a } :: Disk s)
 
 -- | @internal_ping@ nested settings.
 data InternalPing s = InternalPing'
@@ -247,14 +261,6 @@ data InternalPing s = InternalPing'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (InternalPing s)
-instance TF.IsValue  (InternalPing s)
-instance TF.IsObject (InternalPing s) where
-    toObject InternalPing'{..} = catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
 newInternalPing
     :: TF.Attr s [TF.Attr s (Critical s)] -- ^ @critical@ - 'P.critical'
     -> TF.Attr s [TF.Attr s (Warning s)] -- ^ @warning@ - 'P.warning'
@@ -265,17 +271,34 @@ newInternalPing _critical _warning =
         , _warning = _warning
         }
 
+instance P.Hashable  (InternalPing s)
+instance TF.IsValue  (InternalPing s)
+instance TF.IsObject (InternalPing s) where
+    toObject InternalPing'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (InternalPing s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_critical"
+                  (_critical
+                      :: InternalPing s -> TF.Attr s [TF.Attr s (Critical s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_warning"
+                  (_warning
+                      :: InternalPing s -> TF.Attr s [TF.Attr s (Warning s)])
+                  TF.validator
+
 instance P.HasCritical (InternalPing s) (TF.Attr s [TF.Attr s (Critical s)]) where
     critical =
         P.lens (_critical :: InternalPing s -> TF.Attr s [TF.Attr s (Critical s)])
-               (\s a -> s { _critical = a
-                          } :: InternalPing s)
+               (\s a -> s { _critical = a } :: InternalPing s)
 
 instance P.HasWarning (InternalPing s) (TF.Attr s [TF.Attr s (Warning s)]) where
     warning =
         P.lens (_warning :: InternalPing s -> TF.Attr s [TF.Attr s (Warning s)])
-               (\s a -> s { _warning = a
-                          } :: InternalPing s)
+               (\s a -> s { _warning = a } :: InternalPing s)
 
 -- | @critical@ nested settings.
 data Critical s = Critical'
@@ -287,14 +310,6 @@ data Critical s = Critical'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Critical s)
-instance TF.IsValue  (Critical s)
-instance TF.IsObject (Critical s) where
-    toObject Critical'{..} = catMaybes
-        [ TF.assign "alert" <$> TF.attribute _alert
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newCritical
     :: TF.Attr s P.Bool -- ^ @alert@ - 'P.alert'
     -> TF.Attr s P.Integer -- ^ @value@ - 'P.value'
@@ -305,17 +320,26 @@ newCritical _alert _value =
         , _value = _value
         }
 
+instance P.Hashable  (Critical s)
+instance TF.IsValue  (Critical s)
+instance TF.IsObject (Critical s) where
+    toObject Critical'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (Critical s) where
+    validator = P.mempty
+
 instance P.HasAlert (Critical s) (TF.Attr s P.Bool) where
     alert =
         P.lens (_alert :: Critical s -> TF.Attr s P.Bool)
-               (\s a -> s { _alert = a
-                          } :: Critical s)
+               (\s a -> s { _alert = a } :: Critical s)
 
 instance P.HasValue (Critical s) (TF.Attr s P.Integer) where
     value =
         P.lens (_value :: Critical s -> TF.Attr s P.Integer)
-               (\s a -> s { _value = a
-                          } :: Critical s)
+               (\s a -> s { _value = a } :: Critical s)
 
 -- | @hdds@ nested settings.
 data Hdds s = Hdds'
@@ -327,14 +351,6 @@ data Hdds s = Hdds'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Hdds s)
-instance TF.IsValue  (Hdds s)
-instance TF.IsObject (Hdds s) where
-    toObject Hdds'{..} = catMaybes
-        [ TF.assign "disk_size" <$> TF.attribute _diskSize
-        , TF.assign "is_main" <$> TF.attribute _isMain
-        ]
-
 newHdds
     :: TF.Attr s P.Integer -- ^ @disk_size@ - 'P.diskSize'
     -> Hdds s
@@ -344,17 +360,26 @@ newHdds _diskSize =
         , _isMain = TF.Nil
         }
 
+instance P.Hashable  (Hdds s)
+instance TF.IsValue  (Hdds s)
+instance TF.IsObject (Hdds s) where
+    toObject Hdds'{..} = P.catMaybes
+        [ TF.assign "disk_size" <$> TF.attribute _diskSize
+        , TF.assign "is_main" <$> TF.attribute _isMain
+        ]
+
+instance TF.IsValid (Hdds s) where
+    validator = P.mempty
+
 instance P.HasDiskSize (Hdds s) (TF.Attr s P.Integer) where
     diskSize =
         P.lens (_diskSize :: Hdds s -> TF.Attr s P.Integer)
-               (\s a -> s { _diskSize = a
-                          } :: Hdds s)
+               (\s a -> s { _diskSize = a } :: Hdds s)
 
 instance P.HasIsMain (Hdds s) (TF.Attr s P.Bool) where
     isMain =
         P.lens (_isMain :: Hdds s -> TF.Attr s P.Bool)
-               (\s a -> s { _isMain = a
-                          } :: Hdds s)
+               (\s a -> s { _isMain = a } :: Hdds s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Hdds s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -369,14 +394,6 @@ data Servers s = Servers'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Servers s)
-instance TF.IsValue  (Servers s)
-instance TF.IsObject (Servers s) where
-    toObject Servers'{..} = catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 newServers
     :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -387,17 +404,26 @@ newServers _id _name =
         , _name = _name
         }
 
+instance P.Hashable  (Servers s)
+instance TF.IsValue  (Servers s)
+instance TF.IsObject (Servers s) where
+    toObject Servers'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (Servers s) where
+    validator = P.mempty
+
 instance P.HasId (Servers s) (TF.Attr s P.Text) where
     id =
         P.lens (_id :: Servers s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a
-                          } :: Servers s)
+               (\s a -> s { _id = a } :: Servers s)
 
 instance P.HasName (Servers s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: Servers s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: Servers s)
+               (\s a -> s { _name = a } :: Servers s)
 
 -- | @thresholds@ nested settings.
 data Thresholds s = Thresholds'
@@ -418,17 +444,6 @@ data Thresholds s = Thresholds'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Thresholds s)
-instance TF.IsValue  (Thresholds s)
-instance TF.IsObject (Thresholds s) where
-    toObject Thresholds'{..} = catMaybes
-        [ TF.assign "cpu" <$> TF.attribute _cpu
-        , TF.assign "disk" <$> TF.attribute _disk
-        , TF.assign "internal_ping" <$> TF.attribute _internalPing
-        , TF.assign "ram" <$> TF.attribute _ram
-        , TF.assign "transfer" <$> TF.attribute _transfer
-        ]
-
 newThresholds
     :: TF.Attr s [TF.Attr s (Cpu s)] -- ^ @cpu@ - 'P.cpu'
     -> TF.Attr s [TF.Attr s (Disk s)] -- ^ @disk@ - 'P.disk'
@@ -445,35 +460,64 @@ newThresholds _cpu _disk _internalPing _ram _transfer =
         , _transfer = _transfer
         }
 
+instance P.Hashable  (Thresholds s)
+instance TF.IsValue  (Thresholds s)
+instance TF.IsObject (Thresholds s) where
+    toObject Thresholds'{..} = P.catMaybes
+        [ TF.assign "cpu" <$> TF.attribute _cpu
+        , TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "internal_ping" <$> TF.attribute _internalPing
+        , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "transfer" <$> TF.attribute _transfer
+        ]
+
+instance TF.IsValid (Thresholds s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_cpu"
+                  (_cpu
+                      :: Thresholds s -> TF.Attr s [TF.Attr s (Cpu s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_disk"
+                  (_disk
+                      :: Thresholds s -> TF.Attr s [TF.Attr s (Disk s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_internalPing"
+                  (_internalPing
+                      :: Thresholds s -> TF.Attr s [TF.Attr s (InternalPing s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_ram"
+                  (_ram
+                      :: Thresholds s -> TF.Attr s [TF.Attr s (Ram s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_transfer"
+                  (_transfer
+                      :: Thresholds s -> TF.Attr s [TF.Attr s (Transfer s)])
+                  TF.validator
+
 instance P.HasCpu (Thresholds s) (TF.Attr s [TF.Attr s (Cpu s)]) where
     cpu =
         P.lens (_cpu :: Thresholds s -> TF.Attr s [TF.Attr s (Cpu s)])
-               (\s a -> s { _cpu = a
-                          } :: Thresholds s)
+               (\s a -> s { _cpu = a } :: Thresholds s)
 
 instance P.HasDisk (Thresholds s) (TF.Attr s [TF.Attr s (Disk s)]) where
     disk =
         P.lens (_disk :: Thresholds s -> TF.Attr s [TF.Attr s (Disk s)])
-               (\s a -> s { _disk = a
-                          } :: Thresholds s)
+               (\s a -> s { _disk = a } :: Thresholds s)
 
 instance P.HasInternalPing (Thresholds s) (TF.Attr s [TF.Attr s (InternalPing s)]) where
     internalPing =
         P.lens (_internalPing :: Thresholds s -> TF.Attr s [TF.Attr s (InternalPing s)])
-               (\s a -> s { _internalPing = a
-                          } :: Thresholds s)
+               (\s a -> s { _internalPing = a } :: Thresholds s)
 
 instance P.HasRam (Thresholds s) (TF.Attr s [TF.Attr s (Ram s)]) where
     ram =
         P.lens (_ram :: Thresholds s -> TF.Attr s [TF.Attr s (Ram s)])
-               (\s a -> s { _ram = a
-                          } :: Thresholds s)
+               (\s a -> s { _ram = a } :: Thresholds s)
 
 instance P.HasTransfer (Thresholds s) (TF.Attr s [TF.Attr s (Transfer s)]) where
     transfer =
         P.lens (_transfer :: Thresholds s -> TF.Attr s [TF.Attr s (Transfer s)])
-               (\s a -> s { _transfer = a
-                          } :: Thresholds s)
+               (\s a -> s { _transfer = a } :: Thresholds s)
 
 -- | @warning@ nested settings.
 data Warning s = Warning'
@@ -485,14 +529,6 @@ data Warning s = Warning'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Warning s)
-instance TF.IsValue  (Warning s)
-instance TF.IsObject (Warning s) where
-    toObject Warning'{..} = catMaybes
-        [ TF.assign "alert" <$> TF.attribute _alert
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 newWarning
     :: TF.Attr s P.Bool -- ^ @alert@ - 'P.alert'
     -> TF.Attr s P.Integer -- ^ @value@ - 'P.value'
@@ -503,17 +539,26 @@ newWarning _alert _value =
         , _value = _value
         }
 
+instance P.Hashable  (Warning s)
+instance TF.IsValue  (Warning s)
+instance TF.IsObject (Warning s) where
+    toObject Warning'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (Warning s) where
+    validator = P.mempty
+
 instance P.HasAlert (Warning s) (TF.Attr s P.Bool) where
     alert =
         P.lens (_alert :: Warning s -> TF.Attr s P.Bool)
-               (\s a -> s { _alert = a
-                          } :: Warning s)
+               (\s a -> s { _alert = a } :: Warning s)
 
 instance P.HasValue (Warning s) (TF.Attr s P.Integer) where
     value =
         P.lens (_value :: Warning s -> TF.Attr s P.Integer)
-               (\s a -> s { _value = a
-                          } :: Warning s)
+               (\s a -> s { _value = a } :: Warning s)
 
 -- | @ports@ nested settings.
 data Ports s = Ports'
@@ -531,16 +576,6 @@ data Ports s = Ports'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Ports s)
-instance TF.IsValue  (Ports s)
-instance TF.IsObject (Ports s) where
-    toObject Ports'{..} = catMaybes
-        [ TF.assign "alert_if" <$> TF.attribute _alertIf
-        , TF.assign "email_notification" <$> TF.attribute _emailNotification
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        ]
-
 newPorts
     :: TF.Attr s P.Bool -- ^ @email_notification@ - 'P.emailNotification'
     -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
@@ -553,29 +588,38 @@ newPorts _emailNotification _port =
         , _protocol = TF.Nil
         }
 
+instance P.Hashable  (Ports s)
+instance TF.IsValue  (Ports s)
+instance TF.IsObject (Ports s) where
+    toObject Ports'{..} = P.catMaybes
+        [ TF.assign "alert_if" <$> TF.attribute _alertIf
+        , TF.assign "email_notification" <$> TF.attribute _emailNotification
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        ]
+
+instance TF.IsValid (Ports s) where
+    validator = P.mempty
+
 instance P.HasAlertIf (Ports s) (TF.Attr s P.Text) where
     alertIf =
         P.lens (_alertIf :: Ports s -> TF.Attr s P.Text)
-               (\s a -> s { _alertIf = a
-                          } :: Ports s)
+               (\s a -> s { _alertIf = a } :: Ports s)
 
 instance P.HasEmailNotification (Ports s) (TF.Attr s P.Bool) where
     emailNotification =
         P.lens (_emailNotification :: Ports s -> TF.Attr s P.Bool)
-               (\s a -> s { _emailNotification = a
-                          } :: Ports s)
+               (\s a -> s { _emailNotification = a } :: Ports s)
 
 instance P.HasPort (Ports s) (TF.Attr s P.Integer) where
     port =
         P.lens (_port :: Ports s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a
-                          } :: Ports s)
+               (\s a -> s { _port = a } :: Ports s)
 
 instance P.HasProtocol (Ports s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: Ports s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a
-                          } :: Ports s)
+               (\s a -> s { _protocol = a } :: Ports s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Ports s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -593,15 +637,6 @@ data Processes s = Processes'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Processes s)
-instance TF.IsValue  (Processes s)
-instance TF.IsObject (Processes s) where
-    toObject Processes'{..} = catMaybes
-        [ TF.assign "alert_if" <$> TF.attribute _alertIf
-        , TF.assign "email_notification" <$> TF.attribute _emailNotification
-        , TF.assign "process" <$> TF.attribute _process
-        ]
-
 newProcesses
     :: TF.Attr s P.Bool -- ^ @email_notification@ - 'P.emailNotification'
     -> TF.Attr s P.Text -- ^ @process@ - 'P.process'
@@ -613,23 +648,32 @@ newProcesses _emailNotification _process =
         , _process = _process
         }
 
+instance P.Hashable  (Processes s)
+instance TF.IsValue  (Processes s)
+instance TF.IsObject (Processes s) where
+    toObject Processes'{..} = P.catMaybes
+        [ TF.assign "alert_if" <$> TF.attribute _alertIf
+        , TF.assign "email_notification" <$> TF.attribute _emailNotification
+        , TF.assign "process" <$> TF.attribute _process
+        ]
+
+instance TF.IsValid (Processes s) where
+    validator = P.mempty
+
 instance P.HasAlertIf (Processes s) (TF.Attr s P.Text) where
     alertIf =
         P.lens (_alertIf :: Processes s -> TF.Attr s P.Text)
-               (\s a -> s { _alertIf = a
-                          } :: Processes s)
+               (\s a -> s { _alertIf = a } :: Processes s)
 
 instance P.HasEmailNotification (Processes s) (TF.Attr s P.Bool) where
     emailNotification =
         P.lens (_emailNotification :: Processes s -> TF.Attr s P.Bool)
-               (\s a -> s { _emailNotification = a
-                          } :: Processes s)
+               (\s a -> s { _emailNotification = a } :: Processes s)
 
 instance P.HasProcess (Processes s) (TF.Attr s P.Text) where
     process =
         P.lens (_process :: Processes s -> TF.Attr s P.Text)
-               (\s a -> s { _process = a
-                          } :: Processes s)
+               (\s a -> s { _process = a } :: Processes s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Processes s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -644,14 +688,6 @@ data StorageServers s = StorageServers'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (StorageServers s)
-instance TF.IsValue  (StorageServers s)
-instance TF.IsObject (StorageServers s) where
-    toObject StorageServers'{..} = catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "rights" <$> TF.attribute _rights
-        ]
-
 newStorageServers
     :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
     -> TF.Attr s P.Text -- ^ @rights@ - 'P.rights'
@@ -662,17 +698,26 @@ newStorageServers _id _rights =
         , _rights = _rights
         }
 
+instance P.Hashable  (StorageServers s)
+instance TF.IsValue  (StorageServers s)
+instance TF.IsObject (StorageServers s) where
+    toObject StorageServers'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "rights" <$> TF.attribute _rights
+        ]
+
+instance TF.IsValid (StorageServers s) where
+    validator = P.mempty
+
 instance P.HasId (StorageServers s) (TF.Attr s P.Text) where
     id =
         P.lens (_id :: StorageServers s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a
-                          } :: StorageServers s)
+               (\s a -> s { _id = a } :: StorageServers s)
 
 instance P.HasRights (StorageServers s) (TF.Attr s P.Text) where
     rights =
         P.lens (_rights :: StorageServers s -> TF.Attr s P.Text)
-               (\s a -> s { _rights = a
-                          } :: StorageServers s)
+               (\s a -> s { _rights = a } :: StorageServers s)
 
 -- | @transfer@ nested settings.
 data Transfer s = Transfer'
@@ -684,14 +729,6 @@ data Transfer s = Transfer'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Transfer s)
-instance TF.IsValue  (Transfer s)
-instance TF.IsObject (Transfer s) where
-    toObject Transfer'{..} = catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
 newTransfer
     :: TF.Attr s [TF.Attr s (Critical s)] -- ^ @critical@ - 'P.critical'
     -> TF.Attr s [TF.Attr s (Warning s)] -- ^ @warning@ - 'P.warning'
@@ -702,17 +739,34 @@ newTransfer _critical _warning =
         , _warning = _warning
         }
 
+instance P.Hashable  (Transfer s)
+instance TF.IsValue  (Transfer s)
+instance TF.IsObject (Transfer s) where
+    toObject Transfer'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (Transfer s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_critical"
+                  (_critical
+                      :: Transfer s -> TF.Attr s [TF.Attr s (Critical s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_warning"
+                  (_warning
+                      :: Transfer s -> TF.Attr s [TF.Attr s (Warning s)])
+                  TF.validator
+
 instance P.HasCritical (Transfer s) (TF.Attr s [TF.Attr s (Critical s)]) where
     critical =
         P.lens (_critical :: Transfer s -> TF.Attr s [TF.Attr s (Critical s)])
-               (\s a -> s { _critical = a
-                          } :: Transfer s)
+               (\s a -> s { _critical = a } :: Transfer s)
 
 instance P.HasWarning (Transfer s) (TF.Attr s [TF.Attr s (Warning s)]) where
     warning =
         P.lens (_warning :: Transfer s -> TF.Attr s [TF.Attr s (Warning s)])
-               (\s a -> s { _warning = a
-                          } :: Transfer s)
+               (\s a -> s { _warning = a } :: Transfer s)
 
 -- | @ram@ nested settings.
 data Ram s = Ram'
@@ -724,14 +778,6 @@ data Ram s = Ram'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Ram s)
-instance TF.IsValue  (Ram s)
-instance TF.IsObject (Ram s) where
-    toObject Ram'{..} = catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
 newRam
     :: TF.Attr s [TF.Attr s (Critical s)] -- ^ @critical@ - 'P.critical'
     -> TF.Attr s [TF.Attr s (Warning s)] -- ^ @warning@ - 'P.warning'
@@ -742,17 +788,34 @@ newRam _critical _warning =
         , _warning = _warning
         }
 
+instance P.Hashable  (Ram s)
+instance TF.IsValue  (Ram s)
+instance TF.IsObject (Ram s) where
+    toObject Ram'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (Ram s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_critical"
+                  (_critical
+                      :: Ram s -> TF.Attr s [TF.Attr s (Critical s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_warning"
+                  (_warning
+                      :: Ram s -> TF.Attr s [TF.Attr s (Warning s)])
+                  TF.validator
+
 instance P.HasCritical (Ram s) (TF.Attr s [TF.Attr s (Critical s)]) where
     critical =
         P.lens (_critical :: Ram s -> TF.Attr s [TF.Attr s (Critical s)])
-               (\s a -> s { _critical = a
-                          } :: Ram s)
+               (\s a -> s { _critical = a } :: Ram s)
 
 instance P.HasWarning (Ram s) (TF.Attr s [TF.Attr s (Warning s)]) where
     warning =
         P.lens (_warning :: Ram s -> TF.Attr s [TF.Attr s (Warning s)])
-               (\s a -> s { _warning = a
-                          } :: Ram s)
+               (\s a -> s { _warning = a } :: Ram s)
 
 -- | @cpu@ nested settings.
 data Cpu s = Cpu'
@@ -764,14 +827,6 @@ data Cpu s = Cpu'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Cpu s)
-instance TF.IsValue  (Cpu s)
-instance TF.IsObject (Cpu s) where
-    toObject Cpu'{..} = catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
 newCpu
     :: TF.Attr s [TF.Attr s (Critical s)] -- ^ @critical@ - 'P.critical'
     -> TF.Attr s [TF.Attr s (Warning s)] -- ^ @warning@ - 'P.warning'
@@ -782,14 +837,31 @@ newCpu _critical _warning =
         , _warning = _warning
         }
 
+instance P.Hashable  (Cpu s)
+instance TF.IsValue  (Cpu s)
+instance TF.IsObject (Cpu s) where
+    toObject Cpu'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (Cpu s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_critical"
+                  (_critical
+                      :: Cpu s -> TF.Attr s [TF.Attr s (Critical s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_warning"
+                  (_warning
+                      :: Cpu s -> TF.Attr s [TF.Attr s (Warning s)])
+                  TF.validator
+
 instance P.HasCritical (Cpu s) (TF.Attr s [TF.Attr s (Critical s)]) where
     critical =
         P.lens (_critical :: Cpu s -> TF.Attr s [TF.Attr s (Critical s)])
-               (\s a -> s { _critical = a
-                          } :: Cpu s)
+               (\s a -> s { _critical = a } :: Cpu s)
 
 instance P.HasWarning (Cpu s) (TF.Attr s [TF.Attr s (Warning s)]) where
     warning =
         P.lens (_warning :: Cpu s -> TF.Attr s [TF.Attr s (Warning s)])
-               (\s a -> s { _warning = a
-                          } :: Cpu s)
+               (\s a -> s { _warning = a } :: Cpu s)
