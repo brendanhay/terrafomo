@@ -1,44 +1,12 @@
 {
     "settings": [],
-    "arguments": [
-        {
-            "default": "_apiKey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The API key for SoftLayer API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_key\"",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiKey",
-            "optional": false,
-            "label": "_apiKey"
-        },
-        {
-            "default": "_username",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The user name for SoftLayer API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"username\"",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUsername",
-            "optional": false,
-            "label": "_username"
-        }
-    ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "sshKeyResource",
+                "name": "SshKeyResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -47,13 +15,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -62,13 +31,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"notes\" <$> TF.attribute",
-                    "name": "notes",
+                    "name": "_notes",
                     "method": "notes",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasNotes",
+                    "validate": false,
                     "optional": true,
-                    "label": "_notes"
+                    "original": "notes"
                 },
                 {
                     "default": "_publicKey",
@@ -77,17 +47,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_key\" <$> TF.attribute",
-                    "name": "public_key",
+                    "name": "_publicKey",
                     "method": "publicKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicKey"
+                    "original": "public_key"
                 }
             ],
-            "schema": "Resource",
             "name": "SshKeyResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -96,13 +67,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"fingerprint\" <$> TF.attribute",
-                    "name": "fingerprint",
+                    "name": "_computedFingerprint",
                     "method": "computedFingerprint",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFingerprint",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedFingerprint"
+                    "original": "fingerprint"
                 },
                 {
                     "default": "TF.Nil",
@@ -111,13 +83,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -128,13 +101,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicKey",
@@ -143,19 +117,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_key\" <$> TF.attribute",
-                    "name": "public_key",
+                    "name": "_publicKey",
                     "method": "publicKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicKey"
+                    "original": "public_key"
                 }
             ],
+            "conflicts": [],
             "type": "SshKeyResource s",
             "original": "softlayer_ssh_key"
         },
         {
+            "con": {
+                "smart": "virtualGuestResource",
+                "name": "VirtualGuestResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -164,13 +144,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"backend_vlan_id\" <$> TF.attribute",
-                    "name": "backend_vlan_id",
+                    "name": "_backendVlanId",
                     "method": "backendVlanId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBackendVlanId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_backendVlanId"
+                    "original": "backend_vlan_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -179,13 +160,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"block_device_template_group_gid\" <$> TF.attribute",
-                    "name": "block_device_template_group_gid",
+                    "name": "_blockDeviceTemplateGroupGid",
                     "method": "blockDeviceTemplateGroupGid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBlockDeviceTemplateGroupGid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_blockDeviceTemplateGroupGid"
+                    "original": "block_device_template_group_gid"
                 },
                 {
                     "default": "_cpu",
@@ -194,13 +176,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"cpu\" <$> TF.attribute",
-                    "name": "cpu",
+                    "name": "_cpu",
                     "method": "cpu",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCpu",
+                    "validate": false,
                     "optional": false,
-                    "label": "_cpu"
+                    "original": "cpu"
                 },
                 {
                     "default": "TF.Nil",
@@ -209,13 +192,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"dedicated_acct_host_only\" <$> TF.attribute",
-                    "name": "dedicated_acct_host_only",
+                    "name": "_dedicatedAcctHostOnly",
                     "method": "dedicatedAcctHostOnly",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasDedicatedAcctHostOnly",
+                    "validate": false,
                     "optional": true,
-                    "label": "_dedicatedAcctHostOnly"
+                    "original": "dedicated_acct_host_only"
                 },
                 {
                     "default": "TF.Nil",
@@ -224,13 +208,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"disks\" <$> TF.attribute",
-                    "name": "disks",
+                    "name": "_disks",
                     "method": "disks",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Integer]",
                     "class": "HasDisks",
+                    "validate": false,
                     "optional": true,
-                    "label": "_disks"
+                    "original": "disks"
                 },
                 {
                     "default": "_domain",
@@ -239,13 +224,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "domain",
+                    "name": "_domain",
                     "method": "domain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDomain",
+                    "validate": false,
                     "optional": false,
-                    "label": "_domain"
+                    "original": "domain"
                 },
                 {
                     "default": "TF.Nil",
@@ -254,13 +240,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"frontend_vlan_id\" <$> TF.attribute",
-                    "name": "frontend_vlan_id",
+                    "name": "_frontendVlanId",
                     "method": "frontendVlanId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFrontendVlanId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_frontendVlanId"
+                    "original": "frontend_vlan_id"
                 },
                 {
                     "default": "_hourlyBilling",
@@ -269,13 +256,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"hourly_billing\" <$> TF.attribute",
-                    "name": "hourly_billing",
+                    "name": "_hourlyBilling",
                     "method": "hourlyBilling",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasHourlyBilling",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hourlyBilling"
+                    "original": "hourly_billing"
                 },
                 {
                     "default": "TF.Nil",
@@ -284,13 +272,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"image\" <$> TF.attribute",
-                    "name": "image",
+                    "name": "_image",
                     "method": "image",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasImage",
+                    "validate": false,
                     "optional": true,
-                    "label": "_image"
+                    "original": "image"
                 },
                 {
                     "default": "_localDisk",
@@ -299,13 +288,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"local_disk\" <$> TF.attribute",
-                    "name": "local_disk",
+                    "name": "_localDisk",
                     "method": "localDisk",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLocalDisk",
+                    "validate": false,
                     "optional": false,
-                    "label": "_localDisk"
+                    "original": "local_disk"
                 },
                 {
                     "default": "_name",
@@ -314,13 +304,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -329,13 +320,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"post_install_script_uri\" <$> TF.attribute",
-                    "name": "post_install_script_uri",
+                    "name": "_postInstallScriptUri",
                     "method": "postInstallScriptUri",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPostInstallScriptUri",
+                    "validate": false,
                     "optional": true,
-                    "label": "_postInstallScriptUri"
+                    "original": "post_install_script_uri"
                 },
                 {
                     "default": "TF.value P.False",
@@ -344,13 +336,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"private_network_only\" <$> TF.attribute",
-                    "name": "private_network_only",
+                    "name": "_privateNetworkOnly",
                     "method": "privateNetworkOnly",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasPrivateNetworkOnly",
+                    "validate": false,
                     "optional": true,
-                    "label": "_privateNetworkOnly"
+                    "original": "private_network_only"
                 },
                 {
                     "default": "TF.value 1000",
@@ -359,13 +352,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public_network_speed\" <$> TF.attribute",
-                    "name": "public_network_speed",
+                    "name": "_publicNetworkSpeed",
                     "method": "publicNetworkSpeed",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPublicNetworkSpeed",
+                    "validate": false,
                     "optional": true,
-                    "label": "_publicNetworkSpeed"
+                    "original": "public_network_speed"
                 },
                 {
                     "default": "_ram",
@@ -374,13 +368,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ram\" <$> TF.attribute",
-                    "name": "ram",
+                    "name": "_ram",
                     "method": "ram",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRam",
+                    "validate": false,
                     "optional": false,
-                    "label": "_ram"
+                    "original": "ram"
                 },
                 {
                     "default": "_region",
@@ -389,13 +384,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_region"
+                    "original": "region"
                 },
                 {
                     "default": "TF.Nil",
@@ -404,13 +400,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ssh_keys\" <$> TF.attribute",
-                    "name": "ssh_keys",
+                    "name": "_sshKeys",
                     "method": "sshKeys",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Integer]",
                     "class": "HasSshKeys",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sshKeys"
+                    "original": "ssh_keys"
                 },
                 {
                     "default": "TF.Nil",
@@ -419,17 +416,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"user_data\" <$> TF.attribute",
-                    "name": "user_data",
+                    "name": "_userData",
                     "method": "userData",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUserData",
+                    "validate": false,
                     "optional": true,
-                    "label": "_userData"
+                    "original": "user_data"
                 }
             ],
-            "schema": "Resource",
             "name": "VirtualGuestResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -438,13 +436,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv4_address\" <$> TF.attribute",
-                    "name": "ipv4_address",
+                    "name": "_computedIpv4Address",
                     "method": "computedIpv4Address",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv4Address",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIpv4Address"
+                    "original": "ipv4_address"
                 },
                 {
                     "default": "TF.Nil",
@@ -453,13 +452,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipv4_address_private\" <$> TF.attribute",
-                    "name": "ipv4_address_private",
+                    "name": "_computedIpv4AddressPrivate",
                     "method": "computedIpv4AddressPrivate",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv4AddressPrivate",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedIpv4AddressPrivate"
+                    "original": "ipv4_address_private"
                 }
             ],
             "parameters": [
@@ -470,13 +470,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"cpu\" <$> TF.attribute",
-                    "name": "cpu",
+                    "name": "_cpu",
                     "method": "cpu",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasCpu",
+                    "validate": false,
                     "optional": false,
-                    "label": "_cpu"
+                    "original": "cpu"
                 },
                 {
                     "default": "_domain",
@@ -485,13 +486,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "domain",
+                    "name": "_domain",
                     "method": "domain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDomain",
+                    "validate": false,
                     "optional": false,
-                    "label": "_domain"
+                    "original": "domain"
                 },
                 {
                     "default": "_hourlyBilling",
@@ -500,13 +502,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"hourly_billing\" <$> TF.attribute",
-                    "name": "hourly_billing",
+                    "name": "_hourlyBilling",
                     "method": "hourlyBilling",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasHourlyBilling",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hourlyBilling"
+                    "original": "hourly_billing"
                 },
                 {
                     "default": "_localDisk",
@@ -515,13 +518,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"local_disk\" <$> TF.attribute",
-                    "name": "local_disk",
+                    "name": "_localDisk",
                     "method": "localDisk",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLocalDisk",
+                    "validate": false,
                     "optional": false,
-                    "label": "_localDisk"
+                    "original": "local_disk"
                 },
                 {
                     "default": "_name",
@@ -530,13 +534,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_ram",
@@ -545,13 +550,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ram\" <$> TF.attribute",
-                    "name": "ram",
+                    "name": "_ram",
                     "method": "ram",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRam",
+                    "validate": false,
                     "optional": false,
-                    "label": "_ram"
+                    "original": "ram"
                 },
                 {
                     "default": "_region",
@@ -560,19 +566,109 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"region\" <$> TF.attribute",
-                    "name": "region",
+                    "name": "_region",
                     "method": "region",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_region"
+                    "original": "region"
                 }
             ],
+            "conflicts": [],
             "type": "VirtualGuestResource s",
             "original": "softlayer_virtual_guest"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_apiKey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API key for SoftLayer API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_key\"",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": false,
+                "original": "api_key"
+            },
+            {
+                "default": "_username",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The user name for SoftLayer API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"username\"",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": false,
+                "original": "username"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_apiKey",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API key for SoftLayer API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"api_key\"",
+                "name": "_apiKey",
+                "method": "apiKey",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasApiKey",
+                "validate": false,
+                "optional": false,
+                "original": "api_key"
+            },
+            {
+                "default": "_username",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The user name for SoftLayer API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"username\"",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": false,
+                "original": "username"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -582,43 +678,6 @@
         "microlens"
     ],
     "name": "SoftLayer",
-    "parameters": [
-        {
-            "default": "_apiKey",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The API key for SoftLayer API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"api_key\"",
-            "name": "api_key",
-            "method": "apiKey",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasApiKey",
-            "optional": false,
-            "label": "_apiKey"
-        },
-        {
-            "default": "_username",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The user name for SoftLayer API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"username\"",
-            "name": "username",
-            "method": "username",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUsername",
-            "optional": false,
-            "label": "_username"
-        }
-    ],
     "package": "terrafomo-softlayer",
-    "type": "Provider",
     "original": "softlayer"
 }
