@@ -1,8 +1,13 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newAttachments",
+                "name": "Attachments'"
+            },
             "arguments": [],
             "name": "Attachments",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -11,23 +16,29 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"href\" <$> TF.attribute",
-                    "name": "href",
+                    "name": "_computedHref",
                     "method": "computedHref",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHref",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedHref"
+                    "original": "href"
                 }
             ],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Attachments s",
             "original": "attachments"
         },
         {
+            "con": {
+                "smart": "newNetwork",
+                "name": "Network'"
+            },
             "arguments": [],
             "name": "Network",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -36,13 +47,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "address",
+                    "name": "_computedAddress",
                     "method": "computedAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAddress"
+                    "original": "address"
                 },
                 {
                     "default": "TF.Nil",
@@ -51,13 +63,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cidr\" <$> TF.attribute",
-                    "name": "cidr",
+                    "name": "_computedCidr",
                     "method": "computedCidr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedCidr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCidr"
+                    "original": "cidr"
                 },
                 {
                     "default": "TF.Nil",
@@ -66,13 +79,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"family\" <$> TF.attribute",
-                    "name": "family",
-                    "method": "computedFamily'",
+                    "name": "_computedFamily",
+                    "method": "computedFamily",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedFamily'",
+                    "class": "HasComputedFamily",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedFamily'"
+                    "original": "family"
                 },
                 {
                     "default": "TF.Nil",
@@ -81,13 +95,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "gateway",
+                    "name": "_computedGateway",
                     "method": "computedGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedGateway"
+                    "original": "gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -96,21 +111,26 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public\" <$> TF.attribute",
-                    "name": "public",
+                    "name": "_computedPublic",
                     "method": "computedPublic",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPublic",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublic"
+                    "original": "public"
                 }
             ],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Network s",
             "original": "network"
         },
         {
+            "con": {
+                "smart": "newSnapshotPolicies",
+                "name": "SnapshotPolicies'"
+            },
             "arguments": [
                 {
                     "default": "_snapshotCount",
@@ -119,13 +139,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"snapshot_count\" <$> TF.attribute",
-                    "name": "snapshot_count",
+                    "name": "_snapshotCount",
                     "method": "snapshotCount",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSnapshotCount",
+                    "validate": false,
                     "optional": false,
-                    "label": "_snapshotCount"
+                    "original": "snapshot_count"
                 },
                 {
                     "default": "_snapshotFrequency",
@@ -134,16 +155,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"snapshot_frequency\" <$> TF.attribute",
-                    "name": "snapshot_frequency",
+                    "name": "_snapshotFrequency",
                     "method": "snapshotFrequency",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSnapshotFrequency",
+                    "validate": false,
                     "optional": false,
-                    "label": "_snapshotFrequency"
+                    "original": "snapshot_frequency"
                 }
             ],
             "name": "SnapshotPolicies",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -153,13 +176,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"snapshot_count\" <$> TF.attribute",
-                    "name": "snapshot_count",
+                    "name": "_snapshotCount",
                     "method": "snapshotCount",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSnapshotCount",
+                    "validate": false,
                     "optional": false,
-                    "label": "_snapshotCount"
+                    "original": "snapshot_count"
                 },
                 {
                     "default": "_snapshotFrequency",
@@ -168,41 +192,27 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"snapshot_frequency\" <$> TF.attribute",
-                    "name": "snapshot_frequency",
+                    "name": "_snapshotFrequency",
                     "method": "snapshotFrequency",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSnapshotFrequency",
+                    "validate": false,
                     "optional": false,
-                    "label": "_snapshotFrequency"
+                    "original": "snapshot_frequency"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "SnapshotPolicies s",
             "original": "snapshot_policies"
         }
     ],
-    "arguments": [
-        {
-            "default": "_authToken",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The API auth key for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"auth_token\"",
-            "name": "auth_token",
-            "method": "authToken",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAuthToken",
-            "optional": false,
-            "label": "_authToken"
-        }
-    ],
     "dataSources": [
         {
+            "con": {
+                "smart": "precreatedIpBlockData",
+                "name": "PrecreatedIpBlockData'"
+            },
             "arguments": [
                 {
                     "default": "_addressFamily",
@@ -211,13 +221,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address_family\" <$> TF.attribute",
-                    "name": "address_family",
+                    "name": "_addressFamily",
                     "method": "addressFamily",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasAddressFamily",
+                    "validate": false,
                     "optional": false,
-                    "label": "_addressFamily"
+                    "original": "address_family"
                 },
                 {
                     "default": "_facility",
@@ -226,13 +237,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_projectId",
@@ -241,13 +253,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_public",
@@ -256,17 +269,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public\" <$> TF.attribute",
-                    "name": "public",
+                    "name": "_public",
                     "method": "public",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasPublic",
+                    "validate": false,
                     "optional": false,
-                    "label": "_public"
+                    "original": "public"
                 }
             ],
-            "schema": "DataSource",
             "name": "PrecreatedIpBlockData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -275,13 +289,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "address",
+                    "name": "_computedAddress",
                     "method": "computedAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAddress"
+                    "original": "address"
                 },
                 {
                     "default": "TF.Nil",
@@ -290,13 +305,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cidr\" <$> TF.attribute",
-                    "name": "cidr",
+                    "name": "_computedCidr",
                     "method": "computedCidr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedCidr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCidr"
+                    "original": "cidr"
                 },
                 {
                     "default": "TF.Nil",
@@ -305,13 +321,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cidr_notation\" <$> TF.attribute",
-                    "name": "cidr_notation",
+                    "name": "_computedCidrNotation",
                     "method": "computedCidrNotation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCidrNotation",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCidrNotation"
+                    "original": "cidr_notation"
                 },
                 {
                     "default": "TF.Nil",
@@ -320,13 +337,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "gateway",
+                    "name": "_computedGateway",
                     "method": "computedGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedGateway"
+                    "original": "gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -335,13 +353,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"manageable\" <$> TF.attribute",
-                    "name": "manageable",
+                    "name": "_computedManageable",
                     "method": "computedManageable",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManageable",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedManageable"
+                    "original": "manageable"
                 },
                 {
                     "default": "TF.Nil",
@@ -350,13 +369,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"management\" <$> TF.attribute",
-                    "name": "management",
+                    "name": "_computedManagement",
                     "method": "computedManagement",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManagement",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedManagement"
+                    "original": "management"
                 },
                 {
                     "default": "TF.Nil",
@@ -365,13 +385,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"netmask\" <$> TF.attribute",
-                    "name": "netmask",
+                    "name": "_computedNetmask",
                     "method": "computedNetmask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetmask",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedNetmask"
+                    "original": "netmask"
                 },
                 {
                     "default": "TF.Nil",
@@ -380,13 +401,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"network\" <$> TF.attribute",
-                    "name": "network",
+                    "name": "_computedNetwork",
                     "method": "computedNetwork",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetwork",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedNetwork"
+                    "original": "network"
                 },
                 {
                     "default": "TF.Nil",
@@ -395,13 +417,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"quantity\" <$> TF.attribute",
-                    "name": "quantity",
+                    "name": "_computedQuantity",
                     "method": "computedQuantity",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedQuantity",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedQuantity"
+                    "original": "quantity"
                 }
             ],
             "parameters": [
@@ -412,13 +435,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address_family\" <$> TF.attribute",
-                    "name": "address_family",
+                    "name": "_addressFamily",
                     "method": "addressFamily",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasAddressFamily",
+                    "validate": false,
                     "optional": false,
-                    "label": "_addressFamily"
+                    "original": "address_family"
                 },
                 {
                     "default": "_facility",
@@ -427,13 +451,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_projectId",
@@ -442,13 +467,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_public",
@@ -457,21 +483,27 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public\" <$> TF.attribute",
-                    "name": "public",
+                    "name": "_public",
                     "method": "public",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasPublic",
+                    "validate": false,
                     "optional": false,
-                    "label": "_public"
+                    "original": "public"
                 }
             ],
+            "conflicts": [],
             "type": "PrecreatedIpBlockData s",
             "original": "packet_precreated_ip_block"
         }
     ],
     "resources": [
         {
+            "con": {
+                "smart": "deviceResource",
+                "name": "DeviceResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -480,13 +512,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"always_pxe\" <$> TF.attribute",
-                    "name": "always_pxe",
+                    "name": "_alwaysPxe",
                     "method": "alwaysPxe",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasAlwaysPxe",
+                    "validate": false,
                     "optional": true,
-                    "label": "_alwaysPxe"
+                    "original": "always_pxe"
                 },
                 {
                     "default": "_billingCycle",
@@ -495,13 +528,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"billing_cycle\" <$> TF.attribute",
-                    "name": "billing_cycle",
+                    "name": "_billingCycle",
                     "method": "billingCycle",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBillingCycle",
+                    "validate": false,
                     "optional": false,
-                    "label": "_billingCycle"
+                    "original": "billing_cycle"
                 },
                 {
                     "default": "TF.Nil",
@@ -510,13 +544,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_facility",
@@ -525,13 +560,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_hostname",
@@ -540,13 +576,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_hostname",
                     "method": "hostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hostname"
+                    "original": "hostname"
                 },
                 {
                     "default": "TF.Nil",
@@ -555,13 +592,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"ipxe_script_url\" <$> TF.attribute",
-                    "name": "ipxe_script_url",
+                    "name": "_ipxeScriptUrl",
                     "method": "ipxeScriptUrl",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasIpxeScriptUrl",
+                    "validate": false,
                     "optional": true,
-                    "label": "_ipxeScriptUrl"
+                    "original": "ipxe_script_url"
                 },
                 {
                     "default": "_operatingSystem",
@@ -570,13 +608,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"operating_system\" <$> TF.attribute",
-                    "name": "operating_system",
+                    "name": "_operatingSystem",
                     "method": "operatingSystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOperatingSystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_operatingSystem"
+                    "original": "operating_system"
                 },
                 {
                     "default": "_plan",
@@ -585,13 +624,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"plan\" <$> TF.attribute",
-                    "name": "plan",
+                    "name": "_plan",
                     "method": "plan",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPlan",
+                    "validate": false,
                     "optional": false,
-                    "label": "_plan"
+                    "original": "plan"
                 },
                 {
                     "default": "_projectId",
@@ -600,13 +640,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -615,13 +656,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"storage\" <$> TF.attribute",
-                    "name": "storage",
+                    "name": "_storage",
                     "method": "storage",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasStorage",
+                    "validate": false,
                     "optional": true,
-                    "label": "_storage"
+                    "original": "storage"
                 },
                 {
                     "default": "TF.Nil",
@@ -630,13 +672,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"tags\" <$> TF.attribute",
-                    "name": "tags",
+                    "name": "_tags",
                     "method": "tags",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasTags",
+                    "validate": false,
                     "optional": true,
-                    "label": "_tags"
+                    "original": "tags"
                 },
                 {
                     "default": "TF.Nil",
@@ -645,17 +688,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"user_data\" <$> TF.attribute",
-                    "name": "user_data",
+                    "name": "_userData",
                     "method": "userData",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUserData",
+                    "validate": false,
                     "optional": true,
-                    "label": "_userData"
+                    "original": "user_data"
                 }
             ],
-            "schema": "Resource",
             "name": "DeviceResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -664,13 +708,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_private_ipv4\" <$> TF.attribute",
-                    "name": "access_private_ipv4",
+                    "name": "_computedAccessPrivateIpv4",
                     "method": "computedAccessPrivateIpv4",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAccessPrivateIpv4",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAccessPrivateIpv4"
+                    "original": "access_private_ipv4"
                 },
                 {
                     "default": "TF.Nil",
@@ -679,13 +724,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_public_ipv4\" <$> TF.attribute",
-                    "name": "access_public_ipv4",
+                    "name": "_computedAccessPublicIpv4",
                     "method": "computedAccessPublicIpv4",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAccessPublicIpv4",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAccessPublicIpv4"
+                    "original": "access_public_ipv4"
                 },
                 {
                     "default": "TF.Nil",
@@ -694,13 +740,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_public_ipv6\" <$> TF.attribute",
-                    "name": "access_public_ipv6",
+                    "name": "_computedAccessPublicIpv6",
                     "method": "computedAccessPublicIpv6",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAccessPublicIpv6",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAccessPublicIpv6"
+                    "original": "access_public_ipv6"
                 },
                 {
                     "default": "TF.Nil",
@@ -709,13 +756,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"created\" <$> TF.attribute",
-                    "name": "created",
+                    "name": "_computedCreated",
                     "method": "computedCreated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCreated"
+                    "original": "created"
                 },
                 {
                     "default": "TF.Nil",
@@ -724,13 +772,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"hardware_reservation_id\" <$> TF.attribute",
-                    "name": "hardware_reservation_id",
+                    "name": "_computedHardwareReservationId",
                     "method": "computedHardwareReservationId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHardwareReservationId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedHardwareReservationId"
+                    "original": "hardware_reservation_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -739,13 +788,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"locked\" <$> TF.attribute",
-                    "name": "locked",
+                    "name": "_computedLocked",
                     "method": "computedLocked",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedLocked",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedLocked"
+                    "original": "locked"
                 },
                 {
                     "default": "TF.Nil",
@@ -754,13 +804,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"network\" <$> TF.attribute",
-                    "name": "network",
+                    "name": "_computedNetwork",
                     "method": "computedNetwork",
                     "conflicts": [],
-                    "type": "TF.Attr s [Network s]",
+                    "type": "TF.Attr s [TF.Attr s (Network s)]",
                     "class": "HasComputedNetwork",
+                    "validate": true,
                     "optional": false,
-                    "label": "_computedNetwork"
+                    "original": "network"
                 },
                 {
                     "default": "TF.Nil",
@@ -769,13 +820,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_ipv4_subnet_size\" <$> TF.attribute",
-                    "name": "public_ipv4_subnet_size",
+                    "name": "_computedPublicIpv4SubnetSize",
                     "method": "computedPublicIpv4SubnetSize",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedPublicIpv4SubnetSize",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPublicIpv4SubnetSize"
+                    "original": "public_ipv4_subnet_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -784,13 +836,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"root_password\" <$> TF.attribute",
-                    "name": "root_password",
+                    "name": "_computedRootPassword",
                     "method": "computedRootPassword",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRootPassword",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRootPassword"
+                    "original": "root_password"
                 },
                 {
                     "default": "TF.Nil",
@@ -799,13 +852,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"state\" <$> TF.attribute",
-                    "name": "state",
+                    "name": "_computedState",
                     "method": "computedState",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedState",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedState"
+                    "original": "state"
                 },
                 {
                     "default": "TF.Nil",
@@ -814,13 +868,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"updated\" <$> TF.attribute",
-                    "name": "updated",
+                    "name": "_computedUpdated",
                     "method": "computedUpdated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUpdated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUpdated"
+                    "original": "updated"
                 }
             ],
             "parameters": [
@@ -831,13 +886,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"billing_cycle\" <$> TF.attribute",
-                    "name": "billing_cycle",
+                    "name": "_billingCycle",
                     "method": "billingCycle",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBillingCycle",
+                    "validate": false,
                     "optional": false,
-                    "label": "_billingCycle"
+                    "original": "billing_cycle"
                 },
                 {
                     "default": "_facility",
@@ -846,13 +902,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_hostname",
@@ -861,13 +918,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"hostname\" <$> TF.attribute",
-                    "name": "hostname",
+                    "name": "_hostname",
                     "method": "hostname",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHostname",
+                    "validate": false,
                     "optional": false,
-                    "label": "_hostname"
+                    "original": "hostname"
                 },
                 {
                     "default": "_operatingSystem",
@@ -876,13 +934,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"operating_system\" <$> TF.attribute",
-                    "name": "operating_system",
+                    "name": "_operatingSystem",
                     "method": "operatingSystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasOperatingSystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_operatingSystem"
+                    "original": "operating_system"
                 },
                 {
                     "default": "_plan",
@@ -891,13 +950,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"plan\" <$> TF.attribute",
-                    "name": "plan",
+                    "name": "_plan",
                     "method": "plan",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPlan",
+                    "validate": false,
                     "optional": false,
-                    "label": "_plan"
+                    "original": "plan"
                 },
                 {
                     "default": "_projectId",
@@ -906,19 +966,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 }
             ],
+            "conflicts": [],
             "type": "DeviceResource s",
             "original": "packet_device"
         },
         {
+            "con": {
+                "smart": "ipAttachmentResource",
+                "name": "IpAttachmentResource'"
+            },
             "arguments": [
                 {
                     "default": "_cidrNotation",
@@ -927,13 +993,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"cidr_notation\" <$> TF.attribute",
-                    "name": "cidr_notation",
+                    "name": "_cidrNotation",
                     "method": "cidrNotation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCidrNotation",
+                    "validate": false,
                     "optional": false,
-                    "label": "_cidrNotation"
+                    "original": "cidr_notation"
                 },
                 {
                     "default": "_deviceId",
@@ -942,17 +1009,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device_id\" <$> TF.attribute",
-                    "name": "device_id",
+                    "name": "_deviceId",
                     "method": "deviceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDeviceId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_deviceId"
+                    "original": "device_id"
                 }
             ],
-            "schema": "Resource",
             "name": "IpAttachmentResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -961,13 +1029,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "address",
+                    "name": "_computedAddress",
                     "method": "computedAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAddress"
+                    "original": "address"
                 },
                 {
                     "default": "TF.Nil",
@@ -976,13 +1045,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address_family\" <$> TF.attribute",
-                    "name": "address_family",
+                    "name": "_computedAddressFamily",
                     "method": "computedAddressFamily",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedAddressFamily",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAddressFamily"
+                    "original": "address_family"
                 },
                 {
                     "default": "TF.Nil",
@@ -991,13 +1061,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cidr\" <$> TF.attribute",
-                    "name": "cidr",
+                    "name": "_computedCidr",
                     "method": "computedCidr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedCidr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCidr"
+                    "original": "cidr"
                 },
                 {
                     "default": "TF.Nil",
@@ -1006,13 +1077,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "gateway",
+                    "name": "_computedGateway",
                     "method": "computedGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedGateway"
+                    "original": "gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -1021,13 +1093,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"manageable\" <$> TF.attribute",
-                    "name": "manageable",
+                    "name": "_computedManageable",
                     "method": "computedManageable",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManageable",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedManageable"
+                    "original": "manageable"
                 },
                 {
                     "default": "TF.Nil",
@@ -1036,13 +1109,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"management\" <$> TF.attribute",
-                    "name": "management",
+                    "name": "_computedManagement",
                     "method": "computedManagement",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManagement",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedManagement"
+                    "original": "management"
                 },
                 {
                     "default": "TF.Nil",
@@ -1051,13 +1125,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"netmask\" <$> TF.attribute",
-                    "name": "netmask",
+                    "name": "_computedNetmask",
                     "method": "computedNetmask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetmask",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedNetmask"
+                    "original": "netmask"
                 },
                 {
                     "default": "TF.Nil",
@@ -1066,13 +1141,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"network\" <$> TF.attribute",
-                    "name": "network",
+                    "name": "_computedNetwork",
                     "method": "computedNetwork",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetwork",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedNetwork"
+                    "original": "network"
                 },
                 {
                     "default": "TF.Nil",
@@ -1081,13 +1157,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public\" <$> TF.attribute",
-                    "name": "public",
+                    "name": "_computedPublic",
                     "method": "computedPublic",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPublic",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublic"
+                    "original": "public"
                 }
             ],
             "parameters": [
@@ -1098,13 +1175,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"cidr_notation\" <$> TF.attribute",
-                    "name": "cidr_notation",
+                    "name": "_cidrNotation",
                     "method": "cidrNotation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCidrNotation",
+                    "validate": false,
                     "optional": false,
-                    "label": "_cidrNotation"
+                    "original": "cidr_notation"
                 },
                 {
                     "default": "_deviceId",
@@ -1113,19 +1191,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device_id\" <$> TF.attribute",
-                    "name": "device_id",
+                    "name": "_deviceId",
                     "method": "deviceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDeviceId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_deviceId"
+                    "original": "device_id"
                 }
             ],
+            "conflicts": [],
             "type": "IpAttachmentResource s",
             "original": "packet_ip_attachment"
         },
         {
+            "con": {
+                "smart": "organizationResource",
+                "name": "OrganizationResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1134,13 +1218,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -1149,13 +1234,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"logo\" <$> TF.attribute",
-                    "name": "logo",
+                    "name": "_logo",
                     "method": "logo",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLogo",
+                    "validate": false,
                     "optional": true,
-                    "label": "_logo"
+                    "original": "logo"
                 },
                 {
                     "default": "_name",
@@ -1164,13 +1250,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1179,13 +1266,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"twitter\" <$> TF.attribute",
-                    "name": "twitter",
+                    "name": "_twitter",
                     "method": "twitter",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTwitter",
+                    "validate": false,
                     "optional": true,
-                    "label": "_twitter"
+                    "original": "twitter"
                 },
                 {
                     "default": "TF.Nil",
@@ -1194,17 +1282,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"website\" <$> TF.attribute",
-                    "name": "website",
+                    "name": "_website",
                     "method": "website",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasWebsite",
+                    "validate": false,
                     "optional": true,
-                    "label": "_website"
+                    "original": "website"
                 }
             ],
-            "schema": "Resource",
             "name": "OrganizationResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1213,13 +1302,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"created\" <$> TF.attribute",
-                    "name": "created",
+                    "name": "_computedCreated",
                     "method": "computedCreated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCreated"
+                    "original": "created"
                 },
                 {
                     "default": "TF.Nil",
@@ -1228,13 +1318,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"updated\" <$> TF.attribute",
-                    "name": "updated",
+                    "name": "_computedUpdated",
                     "method": "computedUpdated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUpdated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUpdated"
+                    "original": "updated"
                 }
             ],
             "parameters": [
@@ -1245,19 +1336,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "OrganizationResource s",
             "original": "packet_organization"
         },
         {
+            "con": {
+                "smart": "projectResource",
+                "name": "ProjectResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1266,17 +1363,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "ProjectResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1285,13 +1383,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"created\" <$> TF.attribute",
-                    "name": "created",
+                    "name": "_computedCreated",
                     "method": "computedCreated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCreated"
+                    "original": "created"
                 },
                 {
                     "default": "TF.Nil",
@@ -1300,13 +1399,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"organization_id\" <$> TF.attribute",
-                    "name": "organization_id",
+                    "name": "_computedOrganizationId",
                     "method": "computedOrganizationId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOrganizationId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedOrganizationId"
+                    "original": "organization_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1315,13 +1415,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"payment_method_id\" <$> TF.attribute",
-                    "name": "payment_method_id",
+                    "name": "_computedPaymentMethodId",
                     "method": "computedPaymentMethodId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPaymentMethodId",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedPaymentMethodId"
+                    "original": "payment_method_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1330,13 +1431,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"updated\" <$> TF.attribute",
-                    "name": "updated",
+                    "name": "_computedUpdated",
                     "method": "computedUpdated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUpdated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUpdated"
+                    "original": "updated"
                 }
             ],
             "parameters": [
@@ -1347,19 +1449,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "ProjectResource s",
             "original": "packet_project"
         },
         {
+            "con": {
+                "smart": "reservedIpBlockResource",
+                "name": "ReservedIpBlockResource'"
+            },
             "arguments": [
                 {
                     "default": "_facility",
@@ -1368,13 +1476,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_projectId",
@@ -1383,13 +1492,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_quantity",
@@ -1398,17 +1508,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"quantity\" <$> TF.attribute",
-                    "name": "quantity",
+                    "name": "_quantity",
                     "method": "quantity",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasQuantity",
+                    "validate": false,
                     "optional": false,
-                    "label": "_quantity"
+                    "original": "quantity"
                 }
             ],
-            "schema": "Resource",
             "name": "ReservedIpBlockResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1417,13 +1528,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "address",
+                    "name": "_computedAddress",
                     "method": "computedAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedAddress",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAddress"
+                    "original": "address"
                 },
                 {
                     "default": "TF.Nil",
@@ -1432,13 +1544,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"address_family\" <$> TF.attribute",
-                    "name": "address_family",
+                    "name": "_computedAddressFamily",
                     "method": "computedAddressFamily",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedAddressFamily",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedAddressFamily"
+                    "original": "address_family"
                 },
                 {
                     "default": "TF.Nil",
@@ -1447,13 +1560,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cidr\" <$> TF.attribute",
-                    "name": "cidr",
+                    "name": "_computedCidr",
                     "method": "computedCidr",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedCidr",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCidr"
+                    "original": "cidr"
                 },
                 {
                     "default": "TF.Nil",
@@ -1462,13 +1576,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"cidr_notation\" <$> TF.attribute",
-                    "name": "cidr_notation",
+                    "name": "_computedCidrNotation",
                     "method": "computedCidrNotation",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCidrNotation",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCidrNotation"
+                    "original": "cidr_notation"
                 },
                 {
                     "default": "TF.Nil",
@@ -1477,13 +1592,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"gateway\" <$> TF.attribute",
-                    "name": "gateway",
+                    "name": "_computedGateway",
                     "method": "computedGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedGateway",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedGateway"
+                    "original": "gateway"
                 },
                 {
                     "default": "TF.Nil",
@@ -1492,13 +1608,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"manageable\" <$> TF.attribute",
-                    "name": "manageable",
+                    "name": "_computedManageable",
                     "method": "computedManageable",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManageable",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedManageable"
+                    "original": "manageable"
                 },
                 {
                     "default": "TF.Nil",
@@ -1507,13 +1624,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"management\" <$> TF.attribute",
-                    "name": "management",
+                    "name": "_computedManagement",
                     "method": "computedManagement",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedManagement",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedManagement"
+                    "original": "management"
                 },
                 {
                     "default": "TF.Nil",
@@ -1522,13 +1640,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"netmask\" <$> TF.attribute",
-                    "name": "netmask",
+                    "name": "_computedNetmask",
                     "method": "computedNetmask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetmask",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedNetmask"
+                    "original": "netmask"
                 },
                 {
                     "default": "TF.Nil",
@@ -1537,13 +1656,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"network\" <$> TF.attribute",
-                    "name": "network",
+                    "name": "_computedNetwork",
                     "method": "computedNetwork",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedNetwork",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedNetwork"
+                    "original": "network"
                 },
                 {
                     "default": "TF.Nil",
@@ -1552,13 +1672,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"public\" <$> TF.attribute",
-                    "name": "public",
+                    "name": "_computedPublic",
                     "method": "computedPublic",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedPublic",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedPublic"
+                    "original": "public"
                 }
             ],
             "parameters": [
@@ -1569,13 +1690,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_projectId",
@@ -1584,13 +1706,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_quantity",
@@ -1599,19 +1722,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"quantity\" <$> TF.attribute",
-                    "name": "quantity",
+                    "name": "_quantity",
                     "method": "quantity",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasQuantity",
+                    "validate": false,
                     "optional": false,
-                    "label": "_quantity"
+                    "original": "quantity"
                 }
             ],
+            "conflicts": [],
             "type": "ReservedIpBlockResource s",
             "original": "packet_reserved_ip_block"
         },
         {
+            "con": {
+                "smart": "sshKeyResource",
+                "name": "SshKeyResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -1620,13 +1749,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicKey",
@@ -1635,17 +1765,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_key\" <$> TF.attribute",
-                    "name": "public_key",
+                    "name": "_publicKey",
                     "method": "publicKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicKey"
+                    "original": "public_key"
                 }
             ],
-            "schema": "Resource",
             "name": "SshKeyResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1654,13 +1785,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"created\" <$> TF.attribute",
-                    "name": "created",
+                    "name": "_computedCreated",
                     "method": "computedCreated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCreated"
+                    "original": "created"
                 },
                 {
                     "default": "TF.Nil",
@@ -1669,13 +1801,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"fingerprint\" <$> TF.attribute",
-                    "name": "fingerprint",
+                    "name": "_computedFingerprint",
                     "method": "computedFingerprint",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFingerprint",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedFingerprint"
+                    "original": "fingerprint"
                 },
                 {
                     "default": "TF.Nil",
@@ -1684,13 +1817,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"updated\" <$> TF.attribute",
-                    "name": "updated",
+                    "name": "_computedUpdated",
                     "method": "computedUpdated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUpdated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUpdated"
+                    "original": "updated"
                 }
             ],
             "parameters": [
@@ -1701,13 +1835,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_publicKey",
@@ -1716,19 +1851,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"public_key\" <$> TF.attribute",
-                    "name": "public_key",
+                    "name": "_publicKey",
                     "method": "publicKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPublicKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_publicKey"
+                    "original": "public_key"
                 }
             ],
+            "conflicts": [],
             "type": "SshKeyResource s",
             "original": "packet_ssh_key"
         },
         {
+            "con": {
+                "smart": "volumeResource",
+                "name": "VolumeResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1737,13 +1878,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_facility",
@@ -1752,13 +1894,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "TF.Nil",
@@ -1767,13 +1910,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"locked\" <$> TF.attribute",
-                    "name": "locked",
+                    "name": "_locked",
                     "method": "locked",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasLocked",
+                    "validate": false,
                     "optional": true,
-                    "label": "_locked"
+                    "original": "locked"
                 },
                 {
                     "default": "_plan",
@@ -1782,13 +1926,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"plan\" <$> TF.attribute",
-                    "name": "plan",
+                    "name": "_plan",
                     "method": "plan",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPlan",
+                    "validate": false,
                     "optional": false,
-                    "label": "_plan"
+                    "original": "plan"
                 },
                 {
                     "default": "_projectId",
@@ -1797,13 +1942,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_size",
@@ -1812,13 +1958,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_size"
+                    "original": "size"
                 },
                 {
                     "default": "TF.Nil",
@@ -1827,17 +1974,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"snapshot_policies\" <$> TF.attribute",
-                    "name": "snapshot_policies",
+                    "name": "_snapshotPolicies",
                     "method": "snapshotPolicies",
                     "conflicts": [],
-                    "type": "TF.Attr s [SnapshotPolicies s]",
+                    "type": "TF.Attr s [TF.Attr s (SnapshotPolicies s)]",
                     "class": "HasSnapshotPolicies",
+                    "validate": true,
                     "optional": true,
-                    "label": "_snapshotPolicies"
+                    "original": "snapshot_policies"
                 }
             ],
-            "schema": "Resource",
             "name": "VolumeResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -1846,13 +1994,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"attachments\" <$> TF.attribute",
-                    "name": "attachments",
+                    "name": "_computedAttachments",
                     "method": "computedAttachments",
                     "conflicts": [],
-                    "type": "TF.Attr s [Attachments s]",
+                    "type": "TF.Attr s [TF.Attr s (Attachments s)]",
                     "class": "HasComputedAttachments",
+                    "validate": true,
                     "optional": false,
-                    "label": "_computedAttachments"
+                    "original": "attachments"
                 },
                 {
                     "default": "TF.Nil",
@@ -1861,13 +2010,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"billing_cycle\" <$> TF.attribute",
-                    "name": "billing_cycle",
+                    "name": "_computedBillingCycle",
                     "method": "computedBillingCycle",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBillingCycle",
+                    "validate": false,
                     "optional": true,
-                    "label": "_computedBillingCycle"
+                    "original": "billing_cycle"
                 },
                 {
                     "default": "TF.Nil",
@@ -1876,13 +2026,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"created\" <$> TF.attribute",
-                    "name": "created",
+                    "name": "_computedCreated",
                     "method": "computedCreated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedCreated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedCreated"
+                    "original": "created"
                 },
                 {
                     "default": "TF.Nil",
@@ -1891,13 +2042,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_computedName",
                     "method": "computedName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedName"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1906,13 +2058,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"state\" <$> TF.attribute",
-                    "name": "state",
+                    "name": "_computedState",
                     "method": "computedState",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedState",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedState"
+                    "original": "state"
                 },
                 {
                     "default": "TF.Nil",
@@ -1921,13 +2074,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"updated\" <$> TF.attribute",
-                    "name": "updated",
+                    "name": "_computedUpdated",
                     "method": "computedUpdated",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUpdated",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedUpdated"
+                    "original": "updated"
                 }
             ],
             "parameters": [
@@ -1938,13 +2092,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"facility\" <$> TF.attribute",
-                    "name": "facility",
+                    "name": "_facility",
                     "method": "facility",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFacility",
+                    "validate": false,
                     "optional": false,
-                    "label": "_facility"
+                    "original": "facility"
                 },
                 {
                     "default": "_plan",
@@ -1953,13 +2108,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"plan\" <$> TF.attribute",
-                    "name": "plan",
+                    "name": "_plan",
                     "method": "plan",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPlan",
+                    "validate": false,
                     "optional": false,
-                    "label": "_plan"
+                    "original": "plan"
                 },
                 {
                     "default": "_projectId",
@@ -1968,13 +2124,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"project_id\" <$> TF.attribute",
-                    "name": "project_id",
+                    "name": "_projectId",
                     "method": "projectId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasProjectId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_projectId"
+                    "original": "project_id"
                 },
                 {
                     "default": "_size",
@@ -1983,19 +2140,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": false,
-                    "label": "_size"
+                    "original": "size"
                 }
             ],
+            "conflicts": [],
             "type": "VolumeResource s",
             "original": "packet_volume"
         },
         {
+            "con": {
+                "smart": "volumeAttachmentResource",
+                "name": "VolumeAttachmentResource'"
+            },
             "arguments": [
                 {
                     "default": "_deviceId",
@@ -2004,13 +2167,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device_id\" <$> TF.attribute",
-                    "name": "device_id",
+                    "name": "_deviceId",
                     "method": "deviceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDeviceId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_deviceId"
+                    "original": "device_id"
                 },
                 {
                     "default": "_volumeId",
@@ -2019,17 +2183,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
-                    "name": "volume_id",
+                    "name": "_volumeId",
                     "method": "volumeId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVolumeId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_volumeId"
+                    "original": "volume_id"
                 }
             ],
-            "schema": "Resource",
             "name": "VolumeAttachmentResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -2039,13 +2204,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device_id\" <$> TF.attribute",
-                    "name": "device_id",
+                    "name": "_deviceId",
                     "method": "deviceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDeviceId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_deviceId"
+                    "original": "device_id"
                 },
                 {
                     "default": "_volumeId",
@@ -2054,19 +2220,73 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
-                    "name": "volume_id",
+                    "name": "_volumeId",
                     "method": "volumeId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVolumeId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_volumeId"
+                    "original": "volume_id"
                 }
             ],
+            "conflicts": [],
             "type": "VolumeAttachmentResource s",
             "original": "packet_volume_attachment"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_authToken",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API auth key for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"auth_token\"",
+                "name": "_authToken",
+                "method": "authToken",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAuthToken",
+                "validate": false,
+                "optional": false,
+                "original": "auth_token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_authToken",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API auth key for API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"auth_token\"",
+                "name": "_authToken",
+                "method": "authToken",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAuthToken",
+                "validate": false,
+                "optional": false,
+                "original": "auth_token"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -2076,26 +2296,6 @@
         "microlens"
     ],
     "name": "Packet",
-    "parameters": [
-        {
-            "default": "_authToken",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The API auth key for API operations."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"auth_token\"",
-            "name": "auth_token",
-            "method": "authToken",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAuthToken",
-            "optional": false,
-            "label": "_authToken"
-        }
-    ],
     "package": "terrafomo-packet",
-    "type": "Provider",
     "original": "packet"
 }
