@@ -328,10 +328,10 @@ instance P.HasTeams (ApikeyResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: ApikeyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 -- | @ns1_datafeed@ Resource.
 --
@@ -387,7 +387,7 @@ instance P.HasSourceId (DatafeedResource s) (TF.Attr s P.Text) where
                           } :: DatafeedResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ns1_datasource@ Resource.
 --
@@ -443,7 +443,7 @@ instance P.HasSourcetype (DatasourceResource s) (TF.Attr s P.Text) where
                           } :: DatasourceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ns1_monitoringjob@ Resource.
 --
@@ -634,7 +634,7 @@ instance P.HasRules (MonitoringjobResource s) (TF.Attr s [Rules s]) where
                           } :: MonitoringjobResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ns1_notifylist@ Resource.
 --
@@ -678,7 +678,7 @@ instance P.HasNotifications (NotifylistResource s) (TF.Attr s [Notifications s])
                           } :: NotifylistResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ns1_record@ Resource.
 --
@@ -801,10 +801,10 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
                           } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
 -- | @ns1_team@ Resource.
 --
@@ -1046,7 +1046,7 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
                           } :: TeamResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ns1_user@ Resource.
 --
@@ -1334,7 +1334,7 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
                           } :: UserResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @ns1_zone@ Resource.
 --
@@ -1400,25 +1400,25 @@ instance P.HasZone (ZoneResource s) (TF.Attr s P.Text) where
                           } :: ZoneResource s)
 
 instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
+    computedDnsServers x = TF.compute (TF.refKey x) "_computedDnsServers"
 
 instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedExpiry x = TF.compute (TF.refKey x) "expiry"
+    computedExpiry x = TF.compute (TF.refKey x) "_computedExpiry"
 
 instance s ~ s' => P.HasComputedHostmaster (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedHostmaster x = TF.compute (TF.refKey x) "hostmaster"
+    computedHostmaster x = TF.compute (TF.refKey x) "_computedHostmaster"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedNxTtl x = TF.compute (TF.refKey x) "nx_ttl"
+    computedNxTtl x = TF.compute (TF.refKey x) "_computedNxTtl"
 
 instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedRefresh x = TF.compute (TF.refKey x) "refresh"
+    computedRefresh x = TF.compute (TF.refKey x) "_computedRefresh"
 
 instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedRetry x = TF.compute (TF.refKey x) "retry"
+    computedRetry x = TF.compute (TF.refKey x) "_computedRetry"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"

@@ -40,6 +40,7 @@ import qualified Prelude             as P
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.NS1.Lens  as P
+import qualified Terrafomo.NS1.Types as P
 import qualified Terrafomo.Provider  as TF
 
 -- | The @NS1@ Terraform provider configuration.
@@ -75,7 +76,7 @@ instance TF.IsSection Provider where
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "ns1"
+    type ProviderType Provider = "provider"
 
 newProvider
     :: Provider
