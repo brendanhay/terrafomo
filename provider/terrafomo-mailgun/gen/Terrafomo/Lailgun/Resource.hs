@@ -88,16 +88,16 @@ instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
                           } :: DomainResource s)
 
 instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [ReceivingRecords s]) where
-    computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
+    computedReceivingRecords x = TF.compute (TF.refKey x) "_computedReceivingRecords"
 
 instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [SendingRecords s]) where
-    computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
+    computedSendingRecords x = TF.compute (TF.refKey x) "_computedSendingRecords"
 
 instance s ~ s' => P.HasComputedSmtpLogin (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
+    computedSmtpLogin x = TF.compute (TF.refKey x) "_computedSmtpLogin"
 
 instance s ~ s' => P.HasComputedSpamAction (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
+    computedSpamAction x = TF.compute (TF.refKey x) "_computedSpamAction"
 
 instance s ~ s' => P.HasComputedWildcard (TF.Ref s' (DomainResource s)) (TF.Attr s P.Bool) where
-    computedWildcard x = TF.compute (TF.refKey x) "wildcard"
+    computedWildcard x = TF.compute (TF.refKey x) "_computedWildcard"

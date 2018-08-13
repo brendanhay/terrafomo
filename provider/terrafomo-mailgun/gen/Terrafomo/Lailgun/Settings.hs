@@ -30,6 +30,8 @@ module Terrafomo.Lailgun.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
 import qualified Data.List.NonEmpty      as P
@@ -58,16 +60,16 @@ newReceivingRecords =
     ReceivingRecords'
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ReceivingRecords s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
 
 instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (ReceivingRecords s)) (TF.Attr s P.Text) where
-    computedRecordType x = TF.compute (TF.refKey x) "record_type"
+    computedRecordType x = TF.compute (TF.refKey x) "_computedRecordType"
 
 instance s ~ s' => P.HasComputedValid (TF.Ref s' (ReceivingRecords s)) (TF.Attr s P.Text) where
-    computedValid x = TF.compute (TF.refKey x) "valid"
+    computedValid x = TF.compute (TF.refKey x) "_computedValid"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (ReceivingRecords s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 -- | @sending_records@ nested settings.
 data SendingRecords s = SendingRecords'
@@ -84,13 +86,13 @@ newSendingRecords =
     SendingRecords'
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SendingRecords s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (SendingRecords s)) (TF.Attr s P.Text) where
-    computedRecordType x = TF.compute (TF.refKey x) "record_type"
+    computedRecordType x = TF.compute (TF.refKey x) "_computedRecordType"
 
 instance s ~ s' => P.HasComputedValid (TF.Ref s' (SendingRecords s)) (TF.Attr s P.Text) where
-    computedValid x = TF.compute (TF.refKey x) "valid"
+    computedValid x = TF.compute (TF.refKey x) "_computedValid"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (SendingRecords s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
