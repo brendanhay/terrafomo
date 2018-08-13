@@ -34,8 +34,8 @@ module Terrafomo.Cloudflare.Settings
     , newCorrelate
 
     -- ** data
-    , Data (..)
-    , newData
+    , Data' (..)
+    , newData'
 
     -- ** response
     , Response (..)
@@ -89,6 +89,8 @@ module Terrafomo.Cloudflare.Settings
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
+
+import GHC.Base (($))
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
@@ -196,7 +198,7 @@ data Actions s = Actions'
     , _explicitCacheControl    :: TF.Attr s P.Text
     -- ^ @explicit_cache_control@ - (Optional)
     --
-    , _forwardingUrl           :: TF.Attr s (P.NonEmpty (ForwardingUrl s))
+    , _forwardingUrl           :: TF.Attr s (ForwardingUrl s)
     -- ^ @forwarding_url@ - (Optional)
     --
     , _hostHeaderOverride      :: TF.Attr s P.Text
@@ -431,9 +433,9 @@ instance P.HasExplicitCacheControl (Actions s) (TF.Attr s P.Text) where
                (\s a -> s { _explicitCacheControl = a
                           } :: Actions s)
 
-instance P.HasForwardingUrl (Actions s) (TF.Attr s (P.NonEmpty (ForwardingUrl s))) where
+instance P.HasForwardingUrl (Actions s) (TF.Attr s (ForwardingUrl s)) where
     forwardingUrl =
-        P.lens (_forwardingUrl :: Actions s -> TF.Attr s (P.NonEmpty (ForwardingUrl s)))
+        P.lens (_forwardingUrl :: Actions s -> TF.Attr s (ForwardingUrl s))
                (\s a -> s { _forwardingUrl = a
                           } :: Actions s)
 
@@ -548,133 +550,133 @@ newSettings =
     Settings'
 
 instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAdvancedDdos x = TF.compute (TF.refKey x) "advanced_ddos"
+    computedAdvancedDdos x = TF.compute (TF.refKey x) "_computedAdvancedDdos"
 
 instance s ~ s' => P.HasComputedAlwaysOnline (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAlwaysOnline x = TF.compute (TF.refKey x) "always_online"
+    computedAlwaysOnline x = TF.compute (TF.refKey x) "_computedAlwaysOnline"
 
 instance s ~ s' => P.HasComputedAlwaysUseHttps (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "always_use_https"
+    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "_computedAlwaysUseHttps"
 
 instance s ~ s' => P.HasComputedAutomaticHttpsRewrites (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "automatic_https_rewrites"
+    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "_computedAutomaticHttpsRewrites"
 
 instance s ~ s' => P.HasComputedBrotli (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedBrotli x = TF.compute (TF.refKey x) "brotli"
+    computedBrotli x = TF.compute (TF.refKey x) "_computedBrotli"
 
 instance s ~ s' => P.HasComputedBrowserCacheTtl (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "browser_cache_ttl"
+    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "_computedBrowserCacheTtl"
 
 instance s ~ s' => P.HasComputedBrowserCheck (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedBrowserCheck x = TF.compute (TF.refKey x) "browser_check"
+    computedBrowserCheck x = TF.compute (TF.refKey x) "_computedBrowserCheck"
 
 instance s ~ s' => P.HasComputedCacheLevel (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedCacheLevel x = TF.compute (TF.refKey x) "cache_level"
+    computedCacheLevel x = TF.compute (TF.refKey x) "_computedCacheLevel"
 
 instance s ~ s' => P.HasComputedChallengeTtl (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedChallengeTtl x = TF.compute (TF.refKey x) "challenge_ttl"
+    computedChallengeTtl x = TF.compute (TF.refKey x) "_computedChallengeTtl"
 
 instance s ~ s' => P.HasComputedCnameFlattening (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedCnameFlattening x = TF.compute (TF.refKey x) "cname_flattening"
+    computedCnameFlattening x = TF.compute (TF.refKey x) "_computedCnameFlattening"
 
 instance s ~ s' => P.HasComputedDevelopmentMode (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedDevelopmentMode x = TF.compute (TF.refKey x) "development_mode"
+    computedDevelopmentMode x = TF.compute (TF.refKey x) "_computedDevelopmentMode"
 
 instance s ~ s' => P.HasComputedEdgeCacheTtl (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "edge_cache_ttl"
+    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "_computedEdgeCacheTtl"
 
 instance s ~ s' => P.HasComputedEmailObfuscation (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedEmailObfuscation x = TF.compute (TF.refKey x) "email_obfuscation"
+    computedEmailObfuscation x = TF.compute (TF.refKey x) "_computedEmailObfuscation"
 
 instance s ~ s' => P.HasComputedHotlinkProtection (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedHotlinkProtection x = TF.compute (TF.refKey x) "hotlink_protection"
+    computedHotlinkProtection x = TF.compute (TF.refKey x) "_computedHotlinkProtection"
 
 instance s ~ s' => P.HasComputedHttp2 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedHttp2 x = TF.compute (TF.refKey x) "http2"
+    computedHttp2 x = TF.compute (TF.refKey x) "_computedHttp2"
 
 instance s ~ s' => P.HasComputedIpGeolocation (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedIpGeolocation x = TF.compute (TF.refKey x) "ip_geolocation"
+    computedIpGeolocation x = TF.compute (TF.refKey x) "_computedIpGeolocation"
 
 instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
+    computedIpv6 x = TF.compute (TF.refKey x) "_computedIpv6"
 
 instance s ~ s' => P.HasComputedMaxUpload (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedMaxUpload x = TF.compute (TF.refKey x) "max_upload"
+    computedMaxUpload x = TF.compute (TF.refKey x) "_computedMaxUpload"
 
 instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedMinTlsVersion x = TF.compute (TF.refKey x) "min_tls_version"
+    computedMinTlsVersion x = TF.compute (TF.refKey x) "_computedMinTlsVersion"
 
-instance s ~ s' => P.HasComputedMinify (TF.Ref s' (Settings s)) (TF.Attr s (P.NonEmpty (Minify s))) where
-    computedMinify x = TF.compute (TF.refKey x) "minify"
+instance s ~ s' => P.HasComputedMinify (TF.Ref s' (Settings s)) (TF.Attr s (Minify s)) where
+    computedMinify x = TF.compute (TF.refKey x) "_computedMinify"
 
 instance s ~ s' => P.HasComputedMirage (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedMirage x = TF.compute (TF.refKey x) "mirage"
+    computedMirage x = TF.compute (TF.refKey x) "_computedMirage"
 
-instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (Settings s)) (TF.Attr s (P.NonEmpty (MobileRedirect s))) where
-    computedMobileRedirect x = TF.compute (TF.refKey x) "mobile_redirect"
+instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (Settings s)) (TF.Attr s (MobileRedirect s)) where
+    computedMobileRedirect x = TF.compute (TF.refKey x) "_computedMobileRedirect"
 
 instance s ~ s' => P.HasComputedOpportunisticEncryption (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "opportunistic_encryption"
+    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "_computedOpportunisticEncryption"
 
 instance s ~ s' => P.HasComputedOriginErrorPagePassThru (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "origin_error_page_pass_thru"
+    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "_computedOriginErrorPagePassThru"
 
 instance s ~ s' => P.HasComputedPolish (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPolish x = TF.compute (TF.refKey x) "polish"
+    computedPolish x = TF.compute (TF.refKey x) "_computedPolish"
 
 instance s ~ s' => P.HasComputedPrefetchPreload (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPrefetchPreload x = TF.compute (TF.refKey x) "prefetch_preload"
+    computedPrefetchPreload x = TF.compute (TF.refKey x) "_computedPrefetchPreload"
 
 instance s ~ s' => P.HasComputedPrivacyPass (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPrivacyPass x = TF.compute (TF.refKey x) "privacy_pass"
+    computedPrivacyPass x = TF.compute (TF.refKey x) "_computedPrivacyPass"
 
 instance s ~ s' => P.HasComputedPseudoIpv4 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPseudoIpv4 x = TF.compute (TF.refKey x) "pseudo_ipv4"
+    computedPseudoIpv4 x = TF.compute (TF.refKey x) "_computedPseudoIpv4"
 
 instance s ~ s' => P.HasComputedResponseBuffering (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedResponseBuffering x = TF.compute (TF.refKey x) "response_buffering"
+    computedResponseBuffering x = TF.compute (TF.refKey x) "_computedResponseBuffering"
 
 instance s ~ s' => P.HasComputedRocketLoader (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedRocketLoader x = TF.compute (TF.refKey x) "rocket_loader"
+    computedRocketLoader x = TF.compute (TF.refKey x) "_computedRocketLoader"
 
-instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (Settings s)) (TF.Attr s (P.NonEmpty (SecurityHeader s))) where
-    computedSecurityHeader x = TF.compute (TF.refKey x) "security_header"
+instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (Settings s)) (TF.Attr s (SecurityHeader s)) where
+    computedSecurityHeader x = TF.compute (TF.refKey x) "_computedSecurityHeader"
 
 instance s ~ s' => P.HasComputedSecurityLevel (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSecurityLevel x = TF.compute (TF.refKey x) "security_level"
+    computedSecurityLevel x = TF.compute (TF.refKey x) "_computedSecurityLevel"
 
 instance s ~ s' => P.HasComputedServerSideExclude (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedServerSideExclude x = TF.compute (TF.refKey x) "server_side_exclude"
+    computedServerSideExclude x = TF.compute (TF.refKey x) "_computedServerSideExclude"
 
 instance s ~ s' => P.HasComputedSha1Support (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSha1Support x = TF.compute (TF.refKey x) "sha1_support"
+    computedSha1Support x = TF.compute (TF.refKey x) "_computedSha1Support"
 
 instance s ~ s' => P.HasComputedSortQueryStringForCache (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "sort_query_string_for_cache"
+    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "_computedSortQueryStringForCache"
 
 instance s ~ s' => P.HasComputedSsl (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSsl x = TF.compute (TF.refKey x) "ssl"
+    computedSsl x = TF.compute (TF.refKey x) "_computedSsl"
 
 instance s ~ s' => P.HasComputedTls12Only (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTls12Only x = TF.compute (TF.refKey x) "tls_1_2_only"
+    computedTls12Only x = TF.compute (TF.refKey x) "_computedTls12Only"
 
 instance s ~ s' => P.HasComputedTls13 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTls13 x = TF.compute (TF.refKey x) "tls_1_3"
+    computedTls13 x = TF.compute (TF.refKey x) "_computedTls13"
 
 instance s ~ s' => P.HasComputedTlsClientAuth (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTlsClientAuth x = TF.compute (TF.refKey x) "tls_client_auth"
+    computedTlsClientAuth x = TF.compute (TF.refKey x) "_computedTlsClientAuth"
 
 instance s ~ s' => P.HasComputedTrueClientIpHeader (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "true_client_ip_header"
+    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "_computedTrueClientIpHeader"
 
 instance s ~ s' => P.HasComputedWaf (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedWaf x = TF.compute (TF.refKey x) "waf"
+    computedWaf x = TF.compute (TF.refKey x) "_computedWaf"
 
 instance s ~ s' => P.HasComputedWebp (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedWebp x = TF.compute (TF.refKey x) "webp"
+    computedWebp x = TF.compute (TF.refKey x) "_computedWebp"
 
 instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedWebsockets x = TF.compute (TF.refKey x) "websockets"
+    computedWebsockets x = TF.compute (TF.refKey x) "_computedWebsockets"
 
 -- | @correlate@ nested settings.
 data Correlate s = Correlate'
@@ -704,7 +706,7 @@ instance P.HasBy (Correlate s) (TF.Attr s P.Text) where
                           } :: Correlate s)
 
 -- | @data@ nested settings.
-data Data s = Data'
+data Data' s = Data''
     { _algorithm     :: TF.Attr s P.Integer
     -- ^ @algorithm@ - (Optional)
     --
@@ -818,10 +820,10 @@ data Data s = Data'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Data s)
-instance TF.IsValue  (Data s)
-instance TF.IsObject (Data s) where
-    toObject Data'{..} = catMaybes
+instance P.Hashable  (Data' s)
+instance TF.IsValue  (Data' s)
+instance TF.IsObject (Data' s) where
+    toObject Data''{..} = catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
         , TF.assign "altitude" <$> TF.attribute _altitude
         , TF.assign "certificate" <$> TF.attribute _certificate
@@ -861,10 +863,10 @@ instance TF.IsObject (Data s) where
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-newData
-    :: Data s
-newData =
-    Data'
+newData'
+    :: Data' s
+newData' =
+    Data''
         { _algorithm = TF.Nil
         , _altitude = TF.Nil
         , _certificate = TF.Nil
@@ -904,227 +906,227 @@ newData =
         , _weight = TF.Nil
         }
 
-instance P.HasAlgorithm (Data s) (TF.Attr s P.Integer) where
+instance P.HasAlgorithm (Data' s) (TF.Attr s P.Integer) where
     algorithm =
-        P.lens (_algorithm :: Data s -> TF.Attr s P.Integer)
+        P.lens (_algorithm :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _algorithm = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasAltitude (Data s) (TF.Attr s P.Double) where
+instance P.HasAltitude (Data' s) (TF.Attr s P.Double) where
     altitude =
-        P.lens (_altitude :: Data s -> TF.Attr s P.Double)
+        P.lens (_altitude :: Data' s -> TF.Attr s P.Double)
                (\s a -> s { _altitude = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasCertificate (Data s) (TF.Attr s P.Text) where
+instance P.HasCertificate (Data' s) (TF.Attr s P.Text) where
     certificate =
-        P.lens (_certificate :: Data s -> TF.Attr s P.Text)
+        P.lens (_certificate :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _certificate = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasContent (Data s) (TF.Attr s P.Text) where
+instance P.HasContent (Data' s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: Data s -> TF.Attr s P.Text)
+        P.lens (_content :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _content = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasDigest (Data s) (TF.Attr s P.Text) where
+instance P.HasDigest (Data' s) (TF.Attr s P.Text) where
     digest =
-        P.lens (_digest :: Data s -> TF.Attr s P.Text)
+        P.lens (_digest :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _digest = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasDigestType (Data s) (TF.Attr s P.Integer) where
+instance P.HasDigestType (Data' s) (TF.Attr s P.Integer) where
     digestType =
-        P.lens (_digestType :: Data s -> TF.Attr s P.Integer)
+        P.lens (_digestType :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _digestType = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasFingerprint (Data s) (TF.Attr s P.Text) where
+instance P.HasFingerprint (Data' s) (TF.Attr s P.Text) where
     fingerprint =
-        P.lens (_fingerprint :: Data s -> TF.Attr s P.Text)
+        P.lens (_fingerprint :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _fingerprint = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasFlags (Data s) (TF.Attr s P.Text) where
+instance P.HasFlags (Data' s) (TF.Attr s P.Text) where
     flags =
-        P.lens (_flags :: Data s -> TF.Attr s P.Text)
+        P.lens (_flags :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _flags = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasKeyTag (Data s) (TF.Attr s P.Integer) where
+instance P.HasKeyTag (Data' s) (TF.Attr s P.Integer) where
     keyTag =
-        P.lens (_keyTag :: Data s -> TF.Attr s P.Integer)
+        P.lens (_keyTag :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _keyTag = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLatDegrees (Data s) (TF.Attr s P.Integer) where
+instance P.HasLatDegrees (Data' s) (TF.Attr s P.Integer) where
     latDegrees =
-        P.lens (_latDegrees :: Data s -> TF.Attr s P.Integer)
+        P.lens (_latDegrees :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _latDegrees = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLatDirection (Data s) (TF.Attr s P.Text) where
+instance P.HasLatDirection (Data' s) (TF.Attr s P.Text) where
     latDirection =
-        P.lens (_latDirection :: Data s -> TF.Attr s P.Text)
+        P.lens (_latDirection :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _latDirection = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLatMinutes (Data s) (TF.Attr s P.Integer) where
+instance P.HasLatMinutes (Data' s) (TF.Attr s P.Integer) where
     latMinutes =
-        P.lens (_latMinutes :: Data s -> TF.Attr s P.Integer)
+        P.lens (_latMinutes :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _latMinutes = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLatSeconds (Data s) (TF.Attr s P.Double) where
+instance P.HasLatSeconds (Data' s) (TF.Attr s P.Double) where
     latSeconds =
-        P.lens (_latSeconds :: Data s -> TF.Attr s P.Double)
+        P.lens (_latSeconds :: Data' s -> TF.Attr s P.Double)
                (\s a -> s { _latSeconds = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLongDegrees (Data s) (TF.Attr s P.Integer) where
+instance P.HasLongDegrees (Data' s) (TF.Attr s P.Integer) where
     longDegrees =
-        P.lens (_longDegrees :: Data s -> TF.Attr s P.Integer)
+        P.lens (_longDegrees :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _longDegrees = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLongDirection (Data s) (TF.Attr s P.Text) where
+instance P.HasLongDirection (Data' s) (TF.Attr s P.Text) where
     longDirection =
-        P.lens (_longDirection :: Data s -> TF.Attr s P.Text)
+        P.lens (_longDirection :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _longDirection = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLongMinutes (Data s) (TF.Attr s P.Integer) where
+instance P.HasLongMinutes (Data' s) (TF.Attr s P.Integer) where
     longMinutes =
-        P.lens (_longMinutes :: Data s -> TF.Attr s P.Integer)
+        P.lens (_longMinutes :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _longMinutes = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasLongSeconds (Data s) (TF.Attr s P.Double) where
+instance P.HasLongSeconds (Data' s) (TF.Attr s P.Double) where
     longSeconds =
-        P.lens (_longSeconds :: Data s -> TF.Attr s P.Double)
+        P.lens (_longSeconds :: Data' s -> TF.Attr s P.Double)
                (\s a -> s { _longSeconds = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasMatchingType (Data s) (TF.Attr s P.Integer) where
+instance P.HasMatchingType (Data' s) (TF.Attr s P.Integer) where
     matchingType =
-        P.lens (_matchingType :: Data s -> TF.Attr s P.Integer)
+        P.lens (_matchingType :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _matchingType = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasName (Data s) (TF.Attr s P.Text) where
+instance P.HasName (Data' s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Data s -> TF.Attr s P.Text)
+        P.lens (_name :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _name = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasOrder (Data s) (TF.Attr s P.Integer) where
+instance P.HasOrder (Data' s) (TF.Attr s P.Integer) where
     order =
-        P.lens (_order :: Data s -> TF.Attr s P.Integer)
+        P.lens (_order :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _order = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasPort (Data s) (TF.Attr s P.Integer) where
+instance P.HasPort (Data' s) (TF.Attr s P.Integer) where
     port =
-        P.lens (_port :: Data s -> TF.Attr s P.Integer)
+        P.lens (_port :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _port = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasPrecisionHorz (Data s) (TF.Attr s P.Double) where
+instance P.HasPrecisionHorz (Data' s) (TF.Attr s P.Double) where
     precisionHorz =
-        P.lens (_precisionHorz :: Data s -> TF.Attr s P.Double)
+        P.lens (_precisionHorz :: Data' s -> TF.Attr s P.Double)
                (\s a -> s { _precisionHorz = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasPrecisionVert (Data s) (TF.Attr s P.Double) where
+instance P.HasPrecisionVert (Data' s) (TF.Attr s P.Double) where
     precisionVert =
-        P.lens (_precisionVert :: Data s -> TF.Attr s P.Double)
+        P.lens (_precisionVert :: Data' s -> TF.Attr s P.Double)
                (\s a -> s { _precisionVert = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasPreference (Data s) (TF.Attr s P.Integer) where
+instance P.HasPreference (Data' s) (TF.Attr s P.Integer) where
     preference =
-        P.lens (_preference :: Data s -> TF.Attr s P.Integer)
+        P.lens (_preference :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _preference = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasPriority (Data s) (TF.Attr s P.Integer) where
+instance P.HasPriority (Data' s) (TF.Attr s P.Integer) where
     priority =
-        P.lens (_priority :: Data s -> TF.Attr s P.Integer)
+        P.lens (_priority :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _priority = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasProto (Data s) (TF.Attr s P.Text) where
+instance P.HasProto (Data' s) (TF.Attr s P.Text) where
     proto =
-        P.lens (_proto :: Data s -> TF.Attr s P.Text)
+        P.lens (_proto :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _proto = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasProtocol (Data s) (TF.Attr s P.Integer) where
+instance P.HasProtocol (Data' s) (TF.Attr s P.Integer) where
     protocol =
-        P.lens (_protocol :: Data s -> TF.Attr s P.Integer)
+        P.lens (_protocol :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _protocol = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasPublicKey (Data s) (TF.Attr s P.Text) where
+instance P.HasPublicKey (Data' s) (TF.Attr s P.Text) where
     publicKey =
-        P.lens (_publicKey :: Data s -> TF.Attr s P.Text)
+        P.lens (_publicKey :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _publicKey = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasRegex (Data s) (TF.Attr s P.Text) where
+instance P.HasRegex (Data' s) (TF.Attr s P.Text) where
     regex =
-        P.lens (_regex :: Data s -> TF.Attr s P.Text)
+        P.lens (_regex :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _regex = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasReplacement (Data s) (TF.Attr s P.Text) where
+instance P.HasReplacement (Data' s) (TF.Attr s P.Text) where
     replacement =
-        P.lens (_replacement :: Data s -> TF.Attr s P.Text)
+        P.lens (_replacement :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _replacement = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasSelector (Data s) (TF.Attr s P.Integer) where
+instance P.HasSelector (Data' s) (TF.Attr s P.Integer) where
     selector =
-        P.lens (_selector :: Data s -> TF.Attr s P.Integer)
+        P.lens (_selector :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _selector = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasService (Data s) (TF.Attr s P.Text) where
+instance P.HasService (Data' s) (TF.Attr s P.Text) where
     service =
-        P.lens (_service :: Data s -> TF.Attr s P.Text)
+        P.lens (_service :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _service = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasSize (Data s) (TF.Attr s P.Double) where
+instance P.HasSize (Data' s) (TF.Attr s P.Double) where
     size =
-        P.lens (_size :: Data s -> TF.Attr s P.Double)
+        P.lens (_size :: Data' s -> TF.Attr s P.Double)
                (\s a -> s { _size = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasTarget (Data s) (TF.Attr s P.Text) where
+instance P.HasTarget (Data' s) (TF.Attr s P.Text) where
     target =
-        P.lens (_target :: Data s -> TF.Attr s P.Text)
+        P.lens (_target :: Data' s -> TF.Attr s P.Text)
                (\s a -> s { _target = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasType' (Data s) (TF.Attr s P.Integer) where
+instance P.HasType' (Data' s) (TF.Attr s P.Integer) where
     type' =
-        P.lens (_type' :: Data s -> TF.Attr s P.Integer)
+        P.lens (_type' :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _type' = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasUsage (Data s) (TF.Attr s P.Integer) where
+instance P.HasUsage (Data' s) (TF.Attr s P.Integer) where
     usage =
-        P.lens (_usage :: Data s -> TF.Attr s P.Integer)
+        P.lens (_usage :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _usage = a
-                          } :: Data s)
+                          } :: Data' s)
 
-instance P.HasWeight (Data s) (TF.Attr s P.Integer) where
+instance P.HasWeight (Data' s) (TF.Attr s P.Integer) where
     weight =
-        P.lens (_weight :: Data s -> TF.Attr s P.Integer)
+        P.lens (_weight :: Data' s -> TF.Attr s P.Integer)
                (\s a -> s { _weight = a
-                          } :: Data s)
+                          } :: Data' s)
 
 -- | @response@ nested settings.
 data Response s = Response'
@@ -1141,17 +1143,17 @@ newResponse =
     Response'
 
 instance s ~ s' => P.HasComputedOriginTraffic (TF.Ref s' (Response s)) (TF.Attr s P.Bool) where
-    computedOriginTraffic x = TF.compute (TF.refKey x) "origin_traffic"
+    computedOriginTraffic x = TF.compute (TF.refKey x) "_computedOriginTraffic"
 
 instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (Response s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Integer)]) where
-    computedStatuses x = TF.compute (TF.refKey x) "statuses"
+    computedStatuses x = TF.compute (TF.refKey x) "_computedStatuses"
 
 -- | @action@ nested settings.
 data Action s = Action'
     { _mode     :: TF.Attr s P.Text
     -- ^ @mode@ - (Required)
     --
-    , _response :: TF.Attr s (P.NonEmpty (Response s))
+    , _response :: TF.Attr s (Response s)
     -- ^ @response@ - (Optional)
     --
     , _timeout  :: TF.Attr s P.Integer
@@ -1185,9 +1187,9 @@ instance P.HasMode (Action s) (TF.Attr s P.Text) where
                (\s a -> s { _mode = a
                           } :: Action s)
 
-instance P.HasResponse (Action s) (TF.Attr s (P.NonEmpty (Response s))) where
+instance P.HasResponse (Action s) (TF.Attr s (Response s)) where
     response =
-        P.lens (_response :: Action s -> TF.Attr s (P.NonEmpty (Response s)))
+        P.lens (_response :: Action s -> TF.Attr s (Response s))
                (\s a -> s { _response = a
                           } :: Action s)
 
@@ -1264,133 +1266,133 @@ newInitialSettings =
     InitialSettings'
 
 instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAdvancedDdos x = TF.compute (TF.refKey x) "advanced_ddos"
+    computedAdvancedDdos x = TF.compute (TF.refKey x) "_computedAdvancedDdos"
 
 instance s ~ s' => P.HasComputedAlwaysOnline (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAlwaysOnline x = TF.compute (TF.refKey x) "always_online"
+    computedAlwaysOnline x = TF.compute (TF.refKey x) "_computedAlwaysOnline"
 
 instance s ~ s' => P.HasComputedAlwaysUseHttps (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "always_use_https"
+    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "_computedAlwaysUseHttps"
 
 instance s ~ s' => P.HasComputedAutomaticHttpsRewrites (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "automatic_https_rewrites"
+    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "_computedAutomaticHttpsRewrites"
 
 instance s ~ s' => P.HasComputedBrotli (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedBrotli x = TF.compute (TF.refKey x) "brotli"
+    computedBrotli x = TF.compute (TF.refKey x) "_computedBrotli"
 
 instance s ~ s' => P.HasComputedBrowserCacheTtl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "browser_cache_ttl"
+    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "_computedBrowserCacheTtl"
 
 instance s ~ s' => P.HasComputedBrowserCheck (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedBrowserCheck x = TF.compute (TF.refKey x) "browser_check"
+    computedBrowserCheck x = TF.compute (TF.refKey x) "_computedBrowserCheck"
 
 instance s ~ s' => P.HasComputedCacheLevel (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedCacheLevel x = TF.compute (TF.refKey x) "cache_level"
+    computedCacheLevel x = TF.compute (TF.refKey x) "_computedCacheLevel"
 
 instance s ~ s' => P.HasComputedChallengeTtl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedChallengeTtl x = TF.compute (TF.refKey x) "challenge_ttl"
+    computedChallengeTtl x = TF.compute (TF.refKey x) "_computedChallengeTtl"
 
 instance s ~ s' => P.HasComputedCnameFlattening (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedCnameFlattening x = TF.compute (TF.refKey x) "cname_flattening"
+    computedCnameFlattening x = TF.compute (TF.refKey x) "_computedCnameFlattening"
 
 instance s ~ s' => P.HasComputedDevelopmentMode (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedDevelopmentMode x = TF.compute (TF.refKey x) "development_mode"
+    computedDevelopmentMode x = TF.compute (TF.refKey x) "_computedDevelopmentMode"
 
 instance s ~ s' => P.HasComputedEdgeCacheTtl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "edge_cache_ttl"
+    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "_computedEdgeCacheTtl"
 
 instance s ~ s' => P.HasComputedEmailObfuscation (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedEmailObfuscation x = TF.compute (TF.refKey x) "email_obfuscation"
+    computedEmailObfuscation x = TF.compute (TF.refKey x) "_computedEmailObfuscation"
 
 instance s ~ s' => P.HasComputedHotlinkProtection (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedHotlinkProtection x = TF.compute (TF.refKey x) "hotlink_protection"
+    computedHotlinkProtection x = TF.compute (TF.refKey x) "_computedHotlinkProtection"
 
 instance s ~ s' => P.HasComputedHttp2 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedHttp2 x = TF.compute (TF.refKey x) "http2"
+    computedHttp2 x = TF.compute (TF.refKey x) "_computedHttp2"
 
 instance s ~ s' => P.HasComputedIpGeolocation (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedIpGeolocation x = TF.compute (TF.refKey x) "ip_geolocation"
+    computedIpGeolocation x = TF.compute (TF.refKey x) "_computedIpGeolocation"
 
 instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
+    computedIpv6 x = TF.compute (TF.refKey x) "_computedIpv6"
 
 instance s ~ s' => P.HasComputedMaxUpload (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedMaxUpload x = TF.compute (TF.refKey x) "max_upload"
+    computedMaxUpload x = TF.compute (TF.refKey x) "_computedMaxUpload"
 
 instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedMinTlsVersion x = TF.compute (TF.refKey x) "min_tls_version"
+    computedMinTlsVersion x = TF.compute (TF.refKey x) "_computedMinTlsVersion"
 
-instance s ~ s' => P.HasComputedMinify (TF.Ref s' (InitialSettings s)) (TF.Attr s (P.NonEmpty (Minify s))) where
-    computedMinify x = TF.compute (TF.refKey x) "minify"
+instance s ~ s' => P.HasComputedMinify (TF.Ref s' (InitialSettings s)) (TF.Attr s (Minify s)) where
+    computedMinify x = TF.compute (TF.refKey x) "_computedMinify"
 
 instance s ~ s' => P.HasComputedMirage (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedMirage x = TF.compute (TF.refKey x) "mirage"
+    computedMirage x = TF.compute (TF.refKey x) "_computedMirage"
 
-instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (InitialSettings s)) (TF.Attr s (P.NonEmpty (MobileRedirect s))) where
-    computedMobileRedirect x = TF.compute (TF.refKey x) "mobile_redirect"
+instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (InitialSettings s)) (TF.Attr s (MobileRedirect s)) where
+    computedMobileRedirect x = TF.compute (TF.refKey x) "_computedMobileRedirect"
 
 instance s ~ s' => P.HasComputedOpportunisticEncryption (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "opportunistic_encryption"
+    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "_computedOpportunisticEncryption"
 
 instance s ~ s' => P.HasComputedOriginErrorPagePassThru (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "origin_error_page_pass_thru"
+    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "_computedOriginErrorPagePassThru"
 
 instance s ~ s' => P.HasComputedPolish (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPolish x = TF.compute (TF.refKey x) "polish"
+    computedPolish x = TF.compute (TF.refKey x) "_computedPolish"
 
 instance s ~ s' => P.HasComputedPrefetchPreload (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPrefetchPreload x = TF.compute (TF.refKey x) "prefetch_preload"
+    computedPrefetchPreload x = TF.compute (TF.refKey x) "_computedPrefetchPreload"
 
 instance s ~ s' => P.HasComputedPrivacyPass (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPrivacyPass x = TF.compute (TF.refKey x) "privacy_pass"
+    computedPrivacyPass x = TF.compute (TF.refKey x) "_computedPrivacyPass"
 
 instance s ~ s' => P.HasComputedPseudoIpv4 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPseudoIpv4 x = TF.compute (TF.refKey x) "pseudo_ipv4"
+    computedPseudoIpv4 x = TF.compute (TF.refKey x) "_computedPseudoIpv4"
 
 instance s ~ s' => P.HasComputedResponseBuffering (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedResponseBuffering x = TF.compute (TF.refKey x) "response_buffering"
+    computedResponseBuffering x = TF.compute (TF.refKey x) "_computedResponseBuffering"
 
 instance s ~ s' => P.HasComputedRocketLoader (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedRocketLoader x = TF.compute (TF.refKey x) "rocket_loader"
+    computedRocketLoader x = TF.compute (TF.refKey x) "_computedRocketLoader"
 
-instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (InitialSettings s)) (TF.Attr s (P.NonEmpty (SecurityHeader s))) where
-    computedSecurityHeader x = TF.compute (TF.refKey x) "security_header"
+instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (InitialSettings s)) (TF.Attr s (SecurityHeader s)) where
+    computedSecurityHeader x = TF.compute (TF.refKey x) "_computedSecurityHeader"
 
 instance s ~ s' => P.HasComputedSecurityLevel (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSecurityLevel x = TF.compute (TF.refKey x) "security_level"
+    computedSecurityLevel x = TF.compute (TF.refKey x) "_computedSecurityLevel"
 
 instance s ~ s' => P.HasComputedServerSideExclude (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedServerSideExclude x = TF.compute (TF.refKey x) "server_side_exclude"
+    computedServerSideExclude x = TF.compute (TF.refKey x) "_computedServerSideExclude"
 
 instance s ~ s' => P.HasComputedSha1Support (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSha1Support x = TF.compute (TF.refKey x) "sha1_support"
+    computedSha1Support x = TF.compute (TF.refKey x) "_computedSha1Support"
 
 instance s ~ s' => P.HasComputedSortQueryStringForCache (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "sort_query_string_for_cache"
+    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "_computedSortQueryStringForCache"
 
 instance s ~ s' => P.HasComputedSsl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSsl x = TF.compute (TF.refKey x) "ssl"
+    computedSsl x = TF.compute (TF.refKey x) "_computedSsl"
 
 instance s ~ s' => P.HasComputedTls12Only (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTls12Only x = TF.compute (TF.refKey x) "tls_1_2_only"
+    computedTls12Only x = TF.compute (TF.refKey x) "_computedTls12Only"
 
 instance s ~ s' => P.HasComputedTls13 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTls13 x = TF.compute (TF.refKey x) "tls_1_3"
+    computedTls13 x = TF.compute (TF.refKey x) "_computedTls13"
 
 instance s ~ s' => P.HasComputedTlsClientAuth (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTlsClientAuth x = TF.compute (TF.refKey x) "tls_client_auth"
+    computedTlsClientAuth x = TF.compute (TF.refKey x) "_computedTlsClientAuth"
 
 instance s ~ s' => P.HasComputedTrueClientIpHeader (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "true_client_ip_header"
+    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "_computedTrueClientIpHeader"
 
 instance s ~ s' => P.HasComputedWaf (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedWaf x = TF.compute (TF.refKey x) "waf"
+    computedWaf x = TF.compute (TF.refKey x) "_computedWaf"
 
 instance s ~ s' => P.HasComputedWebp (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedWebp x = TF.compute (TF.refKey x) "webp"
+    computedWebp x = TF.compute (TF.refKey x) "_computedWebp"
 
 instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedWebsockets x = TF.compute (TF.refKey x) "websockets"
+    computedWebsockets x = TF.compute (TF.refKey x) "_computedWebsockets"
 
 -- | @origins@ nested settings.
 data Origins s = Origins'
@@ -1629,11 +1631,11 @@ newMatch
 newMatch =
     Match'
 
-instance s ~ s' => P.HasComputedRequest (TF.Ref s' (Match s)) (TF.Attr s (P.NonEmpty (Request s))) where
-    computedRequest x = TF.compute (TF.refKey x) "request"
+instance s ~ s' => P.HasComputedRequest (TF.Ref s' (Match s)) (TF.Attr s (Request s)) where
+    computedRequest x = TF.compute (TF.refKey x) "_computedRequest"
 
-instance s ~ s' => P.HasComputedResponse (TF.Ref s' (Match s)) (TF.Attr s (P.NonEmpty (Response s))) where
-    computedResponse x = TF.compute (TF.refKey x) "response"
+instance s ~ s' => P.HasComputedResponse (TF.Ref s' (Match s)) (TF.Attr s (Response s)) where
+    computedResponse x = TF.compute (TF.refKey x) "_computedResponse"
 
 -- | @security_header@ nested settings.
 data SecurityHeader s = SecurityHeader'
@@ -1650,19 +1652,19 @@ newSecurityHeader =
     SecurityHeader'
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
 
 instance s ~ s' => P.HasComputedIncludeSubdomains (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedIncludeSubdomains x = TF.compute (TF.refKey x) "include_subdomains"
+    computedIncludeSubdomains x = TF.compute (TF.refKey x) "_computedIncludeSubdomains"
 
 instance s ~ s' => P.HasComputedMaxAge (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Integer) where
-    computedMaxAge x = TF.compute (TF.refKey x) "max_age"
+    computedMaxAge x = TF.compute (TF.refKey x) "_computedMaxAge"
 
 instance s ~ s' => P.HasComputedNosniff (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedNosniff x = TF.compute (TF.refKey x) "nosniff"
+    computedNosniff x = TF.compute (TF.refKey x) "_computedNosniff"
 
 instance s ~ s' => P.HasComputedPreload (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedPreload x = TF.compute (TF.refKey x) "preload"
+    computedPreload x = TF.compute (TF.refKey x) "_computedPreload"
 
 -- | @request@ nested settings.
 data Request s = Request'
@@ -1679,10 +1681,10 @@ newRequest =
     Request'
 
 instance s ~ s' => P.HasComputedMethods (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedMethods x = TF.compute (TF.refKey x) "methods"
+    computedMethods x = TF.compute (TF.refKey x) "_computedMethods"
 
 instance s ~ s' => P.HasComputedSchemes (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedSchemes x = TF.compute (TF.refKey x) "schemes"
+    computedSchemes x = TF.compute (TF.refKey x) "_computedSchemes"
 
 instance s ~ s' => P.HasComputedUrlPattern (TF.Ref s' (Request s)) (TF.Attr s P.Text) where
-    computedUrlPattern x = TF.compute (TF.refKey x) "url_pattern"
+    computedUrlPattern x = TF.compute (TF.refKey x) "_computedUrlPattern"

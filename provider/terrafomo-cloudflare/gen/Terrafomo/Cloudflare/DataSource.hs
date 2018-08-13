@@ -62,10 +62,10 @@ ipRangesData =
         IpRangesData'
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
 
 instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
+    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "_computedIpv4CidrBlocks"
 
 instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
+    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "_computedIpv6CidrBlocks"

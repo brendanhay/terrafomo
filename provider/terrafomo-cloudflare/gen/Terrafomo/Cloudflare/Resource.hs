@@ -162,22 +162,22 @@ instance P.HasZone (LoadBalancerResource s) (TF.Attr s P.Text) where
                           } :: LoadBalancerResource s)
 
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
+    computedCreatedOn x = TF.compute (TF.refKey x) "_computedCreatedOn"
 
 instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
+    computedModifiedOn x = TF.compute (TF.refKey x) "_computedModifiedOn"
 
 instance s ~ s' => P.HasComputedPopPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (PopPools s)]) where
-    computedPopPools x = TF.compute (TF.refKey x) "pop_pools"
+    computedPopPools x = TF.compute (TF.refKey x) "_computedPopPools"
 
 instance s ~ s' => P.HasComputedRegionPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (RegionPools s)]) where
-    computedRegionPools x = TF.compute (TF.refKey x) "region_pools"
+    computedRegionPools x = TF.compute (TF.refKey x) "_computedRegionPools"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
 
 -- | @cloudflare_load_balancer_monitor@ Resource.
 --
@@ -310,10 +310,10 @@ instance P.HasType' (LoadBalancerMonitorResource s) (TF.Attr s P.Text) where
                           } :: LoadBalancerMonitorResource s)
 
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerMonitorResource s)) (TF.Attr s P.Text) where
-    computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
+    computedCreatedOn x = TF.compute (TF.refKey x) "_computedCreatedOn"
 
 instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerMonitorResource s)) (TF.Attr s P.Text) where
-    computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
+    computedModifiedOn x = TF.compute (TF.refKey x) "_computedModifiedOn"
 
 -- | @cloudflare_load_balancer_pool@ Resource.
 --
@@ -413,20 +413,20 @@ instance P.HasOrigins (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s (Origin
                           } :: LoadBalancerPoolResource s)
 
 instance s ~ s' => P.HasComputedCheckRegions (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedCheckRegions x = TF.compute (TF.refKey x) "check_regions"
+    computedCheckRegions x = TF.compute (TF.refKey x) "_computedCheckRegions"
 
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
+    computedCreatedOn x = TF.compute (TF.refKey x) "_computedCreatedOn"
 
 instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
-    computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
+    computedModifiedOn x = TF.compute (TF.refKey x) "_computedModifiedOn"
 
 -- | @cloudflare_page_rule@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Cloudflare/cloudflare_page_rule terraform documentation>
 -- for more information.
 data PageRuleResource s = PageRuleResource'
-    { _actions  :: TF.Attr s (P.NonEmpty (Actions s))
+    { _actions  :: TF.Attr s (Actions s)
     -- ^ @actions@ - (Required)
     --
     , _priority :: TF.Attr s P.Integer
@@ -453,7 +453,7 @@ instance TF.IsObject (PageRuleResource s) where
         ]
 
 pageRuleResource
-    :: TF.Attr s (P.NonEmpty (Actions s)) -- ^ @actions@ - 'P.actions'
+    :: TF.Attr s (Actions s) -- ^ @actions@ - 'P.actions'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> TF.Resource P.Provider (PageRuleResource s)
@@ -467,9 +467,9 @@ pageRuleResource _actions _target _zone =
             , _zone = _zone
             }
 
-instance P.HasActions (PageRuleResource s) (TF.Attr s (P.NonEmpty (Actions s))) where
+instance P.HasActions (PageRuleResource s) (TF.Attr s (Actions s)) where
     actions =
-        P.lens (_actions :: PageRuleResource s -> TF.Attr s (P.NonEmpty (Actions s)))
+        P.lens (_actions :: PageRuleResource s -> TF.Attr s (Actions s))
                (\s a -> s { _actions = a
                           } :: PageRuleResource s)
 
@@ -498,20 +498,20 @@ instance P.HasZone (PageRuleResource s) (TF.Attr s P.Text) where
                           } :: PageRuleResource s)
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (PageRuleResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
 
 -- | @cloudflare_rate_limit@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Cloudflare/cloudflare_rate_limit terraform documentation>
 -- for more information.
 data RateLimitResource s = RateLimitResource'
-    { _action            :: TF.Attr s (P.NonEmpty (Action s))
+    { _action            :: TF.Attr s (Action s)
     -- ^ @action@ - (Required)
     --
     , _bypassUrlPatterns :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
     -- ^ @bypass_url_patterns@ - (Optional)
     --
-    , _correlate         :: TF.Attr s [Correlate s]
+    , _correlate         :: TF.Attr s (Correlate s)
     -- ^ @correlate@ - (Optional)
     --
     , _description       :: TF.Attr s P.Text
@@ -544,7 +544,7 @@ instance TF.IsObject (RateLimitResource s) where
         ]
 
 rateLimitResource
-    :: TF.Attr s (P.NonEmpty (Action s)) -- ^ @action@ - 'P.action'
+    :: TF.Attr s (Action s) -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Integer -- ^ @period@ - 'P.period'
     -> TF.Attr s P.Integer -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
@@ -562,9 +562,9 @@ rateLimitResource _action _period _threshold _zone =
             , _zone = _zone
             }
 
-instance P.HasAction (RateLimitResource s) (TF.Attr s (P.NonEmpty (Action s))) where
+instance P.HasAction (RateLimitResource s) (TF.Attr s (Action s)) where
     action =
-        P.lens (_action :: RateLimitResource s -> TF.Attr s (P.NonEmpty (Action s)))
+        P.lens (_action :: RateLimitResource s -> TF.Attr s (Action s))
                (\s a -> s { _action = a
                           } :: RateLimitResource s)
 
@@ -574,9 +574,9 @@ instance P.HasBypassUrlPatterns (RateLimitResource s) (TF.Attr s [TF.Attr s (TF.
                (\s a -> s { _bypassUrlPatterns = a
                           } :: RateLimitResource s)
 
-instance P.HasCorrelate (RateLimitResource s) (TF.Attr s [Correlate s]) where
+instance P.HasCorrelate (RateLimitResource s) (TF.Attr s (Correlate s)) where
     correlate =
-        P.lens (_correlate :: RateLimitResource s -> TF.Attr s [Correlate s])
+        P.lens (_correlate :: RateLimitResource s -> TF.Attr s (Correlate s))
                (\s a -> s { _correlate = a
                           } :: RateLimitResource s)
 
@@ -610,18 +610,18 @@ instance P.HasZone (RateLimitResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a
                           } :: RateLimitResource s)
 
-instance s ~ s' => P.HasComputedMatch (TF.Ref s' (RateLimitResource s)) (TF.Attr s [Match s]) where
-    computedMatch x = TF.compute (TF.refKey x) "match"
+instance s ~ s' => P.HasComputedMatch (TF.Ref s' (RateLimitResource s)) (TF.Attr s (Match s)) where
+    computedMatch x = TF.compute (TF.refKey x) "_computedMatch"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (RateLimitResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
 
 -- | @cloudflare_record@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Cloudflare/cloudflare_record terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _data'    :: TF.Attr s (P.HashMap P.Text (Data s))
+    { _data'    :: TF.Attr s (P.HashMap P.Text (Data' s))
     -- ^ @data@ - (Optional)
     --
     , _domain   :: TF.Attr s P.Text
@@ -667,9 +667,9 @@ recordResource _domain _name _type' =
             , _type' = _type'
             }
 
-instance P.HasData' (RecordResource s) (TF.Attr s (P.HashMap P.Text (Data s))) where
+instance P.HasData' (RecordResource s) (TF.Attr s (P.HashMap P.Text (Data' s))) where
     data' =
-        P.lens (_data' :: RecordResource s -> TF.Attr s (P.HashMap P.Text (Data s)))
+        P.lens (_data' :: RecordResource s -> TF.Attr s (P.HashMap P.Text (Data' s)))
                (\s a -> s { _data' = a
                           } :: RecordResource s)
 
@@ -704,28 +704,28 @@ instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
                           } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
+    computedCreatedOn x = TF.compute (TF.refKey x) "_computedCreatedOn"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (RecordResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
 
 instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
+    computedModifiedOn x = TF.compute (TF.refKey x) "_computedModifiedOn"
 
 instance s ~ s' => P.HasComputedProxiable (TF.Ref s' (RecordResource s)) (TF.Attr s P.Bool) where
-    computedProxiable x = TF.compute (TF.refKey x) "proxiable"
+    computedProxiable x = TF.compute (TF.refKey x) "_computedProxiable"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
 
 -- | @cloudflare_waf_rule@ Resource.
 --
@@ -782,10 +782,10 @@ instance P.HasZone (WafRuleResource s) (TF.Attr s P.Text) where
                           } :: WafRuleResource s)
 
 instance s ~ s' => P.HasComputedPackageId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
-    computedPackageId x = TF.compute (TF.refKey x) "package_id"
+    computedPackageId x = TF.compute (TF.refKey x) "_computedPackageId"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
 
 -- | @cloudflare_zone_settings_override@ Resource.
 --
@@ -817,20 +817,20 @@ instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: ZoneSettingsOverrideResource s)
 
-instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s [InitialSettings s]) where
-    computedInitialSettings x = TF.compute (TF.refKey x) "initial_settings"
+instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (InitialSettings s)) where
+    computedInitialSettings x = TF.compute (TF.refKey x) "_computedInitialSettings"
 
 instance s ~ s' => P.HasComputedInitialSettingsReadAt (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
-    computedInitialSettingsReadAt x = TF.compute (TF.refKey x) "initial_settings_read_at"
+    computedInitialSettingsReadAt x = TF.compute (TF.refKey x) "_computedInitialSettingsReadAt"
 
 instance s ~ s' => P.HasComputedReadonlySettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedReadonlySettings x = TF.compute (TF.refKey x) "readonly_settings"
+    computedReadonlySettings x = TF.compute (TF.refKey x) "_computedReadonlySettings"
 
-instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s [Settings s]) where
-    computedSettings x = TF.compute (TF.refKey x) "settings"
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (Settings s)) where
+    computedSettings x = TF.compute (TF.refKey x) "_computedSettings"
 
 instance s ~ s' => P.HasComputedZoneStatus (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
-    computedZoneStatus x = TF.compute (TF.refKey x) "zone_status"
+    computedZoneStatus x = TF.compute (TF.refKey x) "_computedZoneStatus"
 
 instance s ~ s' => P.HasComputedZoneType (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
-    computedZoneType x = TF.compute (TF.refKey x) "zone_type"
+    computedZoneType x = TF.compute (TF.refKey x) "_computedZoneType"
