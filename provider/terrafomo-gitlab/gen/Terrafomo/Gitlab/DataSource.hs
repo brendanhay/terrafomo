@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -28,7 +29,6 @@ module Terrafomo.Gitlab.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -36,7 +36,10 @@ import Terrafomo.Gitlab.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -48,6 +51,7 @@ import qualified Terrafomo.Gitlab.Types    as P
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @gitlab_project@ DataSource.
 --
@@ -59,25 +63,27 @@ data ProjectData s = ProjectData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ProjectData s) where
-    toObject ProjectData'{..} = catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        ]
-
 projectData
     :: TF.Attr s P.Integer -- ^ @id@ - 'P.id'
     -> TF.DataSource P.Provider (ProjectData s)
 projectData _id =
-    TF.newDataSource "gitlab_project" $
+    TF.newDataSource "gitlab_project" TF.validator $
         ProjectData'
             { _id = _id
             }
 
+instance TF.IsObject (ProjectData s) where
+    toObject ProjectData'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        ]
+
+instance TF.IsValid (ProjectData s) where
+    validator = P.mempty
+
 instance P.HasId (ProjectData s) (TF.Attr s P.Integer) where
     id =
         P.lens (_id :: ProjectData s -> TF.Attr s P.Integer)
-               (\s a -> s { _id = a
-                          } :: ProjectData s)
+               (\s a -> s { _id = a } :: ProjectData s)
 
 -- | @gitlab_user@ DataSource.
 --
@@ -89,22 +95,24 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (UserData s) where
-    toObject UserData'{..} = catMaybes
-        [ TF.assign "email" <$> TF.attribute _email
-        ]
-
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.DataSource P.Provider (UserData s)
 userData _email =
-    TF.newDataSource "gitlab_user" $
+    TF.newDataSource "gitlab_user" TF.validator $
         UserData'
             { _email = _email
             }
 
+instance TF.IsObject (UserData s) where
+    toObject UserData'{..} = P.catMaybes
+        [ TF.assign "email" <$> TF.attribute _email
+        ]
+
+instance TF.IsValid (UserData s) where
+    validator = P.mempty
+
 instance P.HasEmail (UserData s) (TF.Attr s P.Text) where
     email =
         P.lens (_email :: UserData s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a
-                          } :: UserData s)
+               (\s a -> s { _email = a } :: UserData s)
