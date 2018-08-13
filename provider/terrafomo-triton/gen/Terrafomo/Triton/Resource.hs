@@ -193,16 +193,16 @@ instance P.HasVlanId (FabricResource s) (TF.Attr s P.Integer) where
                           } :: FabricResource s)
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricResource s)) (TF.Attr s P.Bool) where
-    computedFabric x = TF.compute (TF.refKey x) "fabric"
+    computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricResource s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+    computedResolvers x = TF.compute (TF.refKey x) "_computedResolvers"
 
 instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedRoutes x = TF.compute (TF.refKey x) "routes"
+    computedRoutes x = TF.compute (TF.refKey x) "_computedRoutes"
 
 -- | @triton_firewall_rule@ Resource.
 --
@@ -260,7 +260,7 @@ instance P.HasRule (FirewallRuleResource s) (TF.Attr s P.Text) where
                           } :: FirewallRuleResource s)
 
 instance s ~ s' => P.HasComputedGlobal (TF.Ref s' (FirewallRuleResource s)) (TF.Attr s P.Bool) where
-    computedGlobal x = TF.compute (TF.refKey x) "global"
+    computedGlobal x = TF.compute (TF.refKey x) "_computedGlobal"
 
 -- | @triton_instance_template@ Resource.
 --
@@ -332,16 +332,16 @@ instance P.HasTemplateName (InstanceTemplateResource s) (TF.Attr s P.Text) where
                           } :: InstanceTemplateResource s)
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
 
 instance s ~ s' => P.HasComputedNetworks (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetworks x = TF.compute (TF.refKey x) "networks"
+    computedNetworks x = TF.compute (TF.refKey x) "_computedNetworks"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 instance s ~ s' => P.HasComputedUserdata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedUserdata x = TF.compute (TF.refKey x) "userdata"
+    computedUserdata x = TF.compute (TF.refKey x) "_computedUserdata"
 
 -- | @triton_key@ Resource.
 --
@@ -375,7 +375,7 @@ instance P.HasKey (KeyResource s) (TF.Attr s P.Text) where
                           } :: KeyResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @triton_machine@ Resource.
 --
@@ -394,7 +394,7 @@ data MachineResource s = MachineResource'
     -- ^ @cloud_config@ - (Optional)
     -- Copied to machine on boot
     --
-    , _cns :: TF.Attr s [Cns s]
+    , _cns :: TF.Attr s (Cns s)
     -- ^ @cns@ - (Optional)
     -- Container Name Service
     --
@@ -410,7 +410,7 @@ data MachineResource s = MachineResource'
     -- ^ @image@ - (Required)
     -- UUID of the image
     --
-    , _locality :: TF.Attr s [Locality s]
+    , _locality :: TF.Attr s (Locality s)
     -- ^ @locality@ - (Optional)
     -- UUID based locality hints for assisting placement behavior
     --
@@ -499,9 +499,9 @@ instance P.HasCloudConfig (MachineResource s) (TF.Attr s P.Text) where
                (\s a -> s { _cloudConfig = a
                           } :: MachineResource s)
 
-instance P.HasCns (MachineResource s) (TF.Attr s [Cns s]) where
+instance P.HasCns (MachineResource s) (TF.Attr s (Cns s)) where
     cns =
-        P.lens (_cns :: MachineResource s -> TF.Attr s [Cns s])
+        P.lens (_cns :: MachineResource s -> TF.Attr s (Cns s))
                (\s a -> s { _cns = a
                           } :: MachineResource s)
 
@@ -523,9 +523,9 @@ instance P.HasImage (MachineResource s) (TF.Attr s P.Text) where
                (\s a -> s { _image = a
                           } :: MachineResource s)
 
-instance P.HasLocality (MachineResource s) (TF.Attr s [Locality s]) where
+instance P.HasLocality (MachineResource s) (TF.Attr s (Locality s)) where
     locality =
-        P.lens (_locality :: MachineResource s -> TF.Attr s [Locality s])
+        P.lens (_locality :: MachineResource s -> TF.Attr s (Locality s))
                (\s a -> s { _locality = a
                           } :: MachineResource s)
 
@@ -566,43 +566,43 @@ instance P.HasUserScript (MachineResource s) (TF.Attr s P.Text) where
                           } :: MachineResource s)
 
 instance s ~ s' => P.HasComputedComputeNode (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedComputeNode x = TF.compute (TF.refKey x) "compute_node"
+    computedComputeNode x = TF.compute (TF.refKey x) "_computedComputeNode"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
 
 instance s ~ s' => P.HasComputedDataset (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedDataset x = TF.compute (TF.refKey x) "dataset"
+    computedDataset x = TF.compute (TF.refKey x) "_computedDataset"
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (MachineResource s)) (TF.Attr s P.Integer) where
-    computedDisk x = TF.compute (TF.refKey x) "disk"
+    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
 
 instance s ~ s' => P.HasComputedDomainNames (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDomainNames x = TF.compute (TF.refKey x) "domain_names"
+    computedDomainNames x = TF.compute (TF.refKey x) "_computedDomainNames"
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+    computedIps x = TF.compute (TF.refKey x) "_computedIps"
 
 instance s ~ s' => P.HasComputedMemory (TF.Ref s' (MachineResource s)) (TF.Attr s P.Integer) where
-    computedMemory x = TF.compute (TF.refKey x) "memory"
+    computedMemory x = TF.compute (TF.refKey x) "_computedMemory"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (Nic s)]) where
-    computedNic x = TF.compute (TF.refKey x) "nic"
+    computedNic x = TF.compute (TF.refKey x) "_computedNic"
 
 instance s ~ s' => P.HasComputedPrimaryip (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedPrimaryip x = TF.compute (TF.refKey x) "primaryip"
+    computedPrimaryip x = TF.compute (TF.refKey x) "_computedPrimaryip"
 
 instance s ~ s' => P.HasComputedRootAuthorizedKeys (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedRootAuthorizedKeys x = TF.compute (TF.refKey x) "root_authorized_keys"
+    computedRootAuthorizedKeys x = TF.compute (TF.refKey x) "_computedRootAuthorizedKeys"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "updated"
+    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
 
 -- | @triton_service_group@ Resource.
 --
@@ -649,7 +649,7 @@ instance P.HasTemplate (ServiceGroupResource s) (TF.Attr s P.Text) where
                           } :: ServiceGroupResource s)
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "capacity"
+    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
 
 -- | @triton_snapshot@ Resource.
 --
@@ -694,7 +694,7 @@ instance P.HasName (SnapshotResource s) (TF.Attr s P.Text) where
                           } :: SnapshotResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SnapshotResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 -- | @triton_vlan@ Resource.
 --

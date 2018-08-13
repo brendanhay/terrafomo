@@ -86,13 +86,13 @@ accountData =
         AccountData'
 
 instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (AccountData s)) (TF.Attr s P.Bool) where
-    computedCnsEnabled x = TF.compute (TF.refKey x) "cns_enabled"
+    computedCnsEnabled x = TF.compute (TF.refKey x) "_computedCnsEnabled"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedLogin x = TF.compute (TF.refKey x) "login"
+    computedLogin x = TF.compute (TF.refKey x) "_computedLogin"
 
 -- | @triton_datacenter@ DataSource.
 --
@@ -111,10 +111,10 @@ datacenterData =
         DatacenterData'
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
+    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @triton_fabric_network@ DataSource.
 --
@@ -159,34 +159,34 @@ instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Integer) where
                           } :: FabricNetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
-    computedFabric x = TF.compute (TF.refKey x) "fabric"
+    computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedInternetNat (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
-    computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
+    computedInternetNat x = TF.compute (TF.refKey x) "_computedInternetNat"
 
 instance s ~ s' => P.HasComputedProvisionEndIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedProvisionEndIp x = TF.compute (TF.refKey x) "provision_end_ip"
+    computedProvisionEndIp x = TF.compute (TF.refKey x) "_computedProvisionEndIp"
 
 instance s ~ s' => P.HasComputedProvisionStartIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedProvisionStartIp x = TF.compute (TF.refKey x) "provision_start_ip"
+    computedProvisionStartIp x = TF.compute (TF.refKey x) "_computedProvisionStartIp"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricNetworkData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+    computedResolvers x = TF.compute (TF.refKey x) "_computedResolvers"
 
 instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricNetworkData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedRoutes x = TF.compute (TF.refKey x) "routes"
+    computedRoutes x = TF.compute (TF.refKey x) "_computedRoutes"
 
 instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedSubnet x = TF.compute (TF.refKey x) "subnet"
+    computedSubnet x = TF.compute (TF.refKey x) "_computedSubnet"
 
 -- | @triton_fabric_vlan@ DataSource.
 --
@@ -376,10 +376,10 @@ instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
                           } :: NetworkData s)
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
-    computedFabric x = TF.compute (TF.refKey x) "fabric"
+    computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "public"
+    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
 
 -- | @triton_package@ DataSource.
 --
@@ -412,25 +412,25 @@ instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (Filter s)]) where
                           } :: PackageData s)
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedDisk x = TF.compute (TF.refKey x) "disk"
+    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
-    computedGroup x = TF.compute (TF.refKey x) "group"
+    computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
 
 instance s ~ s' => P.HasComputedLwps (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedLwps x = TF.compute (TF.refKey x) "lwps"
+    computedLwps x = TF.compute (TF.refKey x) "_computedLwps"
 
 instance s ~ s' => P.HasComputedMemory (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedMemory x = TF.compute (TF.refKey x) "memory"
+    computedMemory x = TF.compute (TF.refKey x) "_computedMemory"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedSwap (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedSwap x = TF.compute (TF.refKey x) "swap"
+    computedSwap x = TF.compute (TF.refKey x) "_computedSwap"
 
 instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedVcpus x = TF.compute (TF.refKey x) "vcpus"
+    computedVcpus x = TF.compute (TF.refKey x) "_computedVcpus"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"

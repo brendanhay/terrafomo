@@ -106,13 +106,13 @@ module Terrafomo.Triton.Lens
     , HasComputedIp (..)
     , HasComputedMemory (..)
     , HasComputedTags (..)
+    , HasComputedType (..)
     , HasComputedSwap (..)
     , HasComputedVcpus (..)
     , HasComputedUpdated (..)
     , HasComputedNetmask (..)
     , HasComputedNetworks (..)
     , HasComputedGroup (..)
-    , HasComputedType' (..)
     , HasComputedComputeNode (..)
     ) where
 
@@ -550,6 +550,9 @@ class HasComputedMemory a b | a -> b where
 class HasComputedTags a b | a -> b where
     computedTags :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedSwap a b | a -> b where
     computedSwap :: a -> b
 
@@ -567,9 +570,6 @@ class HasComputedNetworks a b | a -> b where
 
 class HasComputedGroup a b | a -> b where
     computedGroup :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedComputeNode a b | a -> b where
     computedComputeNode :: a -> b

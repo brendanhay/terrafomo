@@ -38,6 +38,8 @@ module Terrafomo.Triton.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -81,22 +83,22 @@ instance P.HasNetwork (Nic s) (TF.Attr s P.Text) where
                           } :: Nic s)
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 instance s ~ s' => P.HasComputedMac (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedMac x = TF.compute (TF.refKey x) "mac"
+    computedMac x = TF.compute (TF.refKey x) "_computedMac"
 
 instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
 
 instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (Nic s)) (TF.Attr s P.Bool) where
-    computedPrimary x = TF.compute (TF.refKey x) "primary"
+    computedPrimary x = TF.compute (TF.refKey x) "_computedPrimary"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 -- | @cns@ nested settings.
 data Cns s = Cns'
