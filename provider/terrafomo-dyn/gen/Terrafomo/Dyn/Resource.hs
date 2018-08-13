@@ -111,7 +111,7 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
                           } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
