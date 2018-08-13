@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -24,13 +25,15 @@ module Terrafomo.PostgreSQL.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -40,6 +43,7 @@ import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.PostgreSQL.Lens  as P
 import qualified Terrafomo.PostgreSQL.Types as P
+import qualified Terrafomo.Validator        as TF
 
 -- | @policy@ nested settings.
 data Policy s = Policy'
@@ -80,17 +84,6 @@ data Policy s = Policy'
     -- * 'usage'
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Policy s)
-instance TF.IsValue  (Policy s)
-instance TF.IsObject (Policy s) where
-    toObject Policy'{..} = catMaybes
-        [ TF.assign "create" <$> TF.attribute _create
-        , TF.assign "create_with_grant" <$> TF.attribute _createWithGrant
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "usage" <$> TF.attribute _usage
-        , TF.assign "usage_with_grant" <$> TF.attribute _usageWithGrant
-        ]
-
 newPolicy
     :: Policy s
 newPolicy =
@@ -102,36 +95,62 @@ newPolicy =
         , _usageWithGrant = TF.value P.False
         }
 
+instance P.Hashable  (Policy s)
+instance TF.IsValue  (Policy s)
+instance TF.IsObject (Policy s) where
+    toObject Policy'{..} = P.catMaybes
+        [ TF.assign "create" <$> TF.attribute _create
+        , TF.assign "create_with_grant" <$> TF.attribute _createWithGrant
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "usage" <$> TF.attribute _usage
+        , TF.assign "usage_with_grant" <$> TF.attribute _usageWithGrant
+        ]
+
+instance TF.IsValid (Policy s) where
+    validator = TF.fieldsValidator (\Policy'{..} -> Map.fromList $ P.catMaybes
+        [ if (_create P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_create",
+                            [ "_createWithGrant"
+                            ])
+        , if (_createWithGrant P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_createWithGrant",
+                            [ "_create"
+                            ])
+        , if (_usage P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_usage",
+                            [ "_usageWithGrant"
+                            ])
+        , if (_usageWithGrant P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_usageWithGrant",
+                            [ "_usage"
+                            ])
+        ])
+
 instance P.HasCreate (Policy s) (TF.Attr s P.Bool) where
     create =
         P.lens (_create :: Policy s -> TF.Attr s P.Bool)
-               (\s a -> s { _create = a
-                          , _createWithGrant = TF.value P.False
-                          } :: Policy s)
+               (\s a -> s { _create = a } :: Policy s)
 
 instance P.HasCreateWithGrant (Policy s) (TF.Attr s P.Bool) where
     createWithGrant =
         P.lens (_createWithGrant :: Policy s -> TF.Attr s P.Bool)
-               (\s a -> s { _createWithGrant = a
-                          , _create = TF.value P.False
-                          } :: Policy s)
+               (\s a -> s { _createWithGrant = a } :: Policy s)
 
 instance P.HasRole (Policy s) (TF.Attr s P.Text) where
     role =
         P.lens (_role :: Policy s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a
-                          } :: Policy s)
+               (\s a -> s { _role = a } :: Policy s)
 
 instance P.HasUsage (Policy s) (TF.Attr s P.Bool) where
     usage =
         P.lens (_usage :: Policy s -> TF.Attr s P.Bool)
-               (\s a -> s { _usage = a
-                          , _usageWithGrant = TF.value P.False
-                          } :: Policy s)
+               (\s a -> s { _usage = a } :: Policy s)
 
 instance P.HasUsageWithGrant (Policy s) (TF.Attr s P.Bool) where
     usageWithGrant =
         P.lens (_usageWithGrant :: Policy s -> TF.Attr s P.Bool)
-               (\s a -> s { _usageWithGrant = a
-                          , _usage = TF.value P.False
-                          } :: Policy s)
+               (\s a -> s { _usageWithGrant = a } :: Policy s)

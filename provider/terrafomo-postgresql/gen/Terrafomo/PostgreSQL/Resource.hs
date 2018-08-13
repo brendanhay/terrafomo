@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -36,7 +37,6 @@ module Terrafomo.PostgreSQL.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -44,7 +44,10 @@ import Terrafomo.PostgreSQL.Settings
 
 import qualified Data.Hashable                 as P
 import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Maybe                    as P
+import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
@@ -56,6 +59,7 @@ import qualified Terrafomo.PostgreSQL.Lens     as P
 import qualified Terrafomo.PostgreSQL.Provider as P
 import qualified Terrafomo.PostgreSQL.Types    as P
 import qualified Terrafomo.Schema              as TF
+import qualified Terrafomo.Validator           as TF
 
 -- | @postgresql_database@ Resource.
 --
@@ -76,41 +80,41 @@ data DatabaseResource s = DatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DatabaseResource s) where
-    toObject DatabaseResource'{..} = catMaybes
-        [ TF.assign "allow_connections" <$> TF.attribute _allowConnections
-        , TF.assign "connection_limit" <$> TF.attribute _connectionLimit
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (DatabaseResource s)
 databaseResource _name =
-    TF.newResource "postgresql_database" $
+    TF.newResource "postgresql_database" TF.validator $
         DatabaseResource'
             { _allowConnections = TF.value P.True
             , _connectionLimit = TF.value (-1)
             , _name = _name
             }
 
+instance TF.IsObject (DatabaseResource s) where
+    toObject DatabaseResource'{..} = P.catMaybes
+        [ TF.assign "allow_connections" <$> TF.attribute _allowConnections
+        , TF.assign "connection_limit" <$> TF.attribute _connectionLimit
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DatabaseResource s) where
+    validator = P.mempty
+
 instance P.HasAllowConnections (DatabaseResource s) (TF.Attr s P.Bool) where
     allowConnections =
         P.lens (_allowConnections :: DatabaseResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowConnections = a
-                          } :: DatabaseResource s)
+               (\s a -> s { _allowConnections = a } :: DatabaseResource s)
 
 instance P.HasConnectionLimit (DatabaseResource s) (TF.Attr s P.Integer) where
     connectionLimit =
         P.lens (_connectionLimit :: DatabaseResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _connectionLimit = a
-                          } :: DatabaseResource s)
+               (\s a -> s { _connectionLimit = a } :: DatabaseResource s)
 
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DatabaseResource s)
+               (\s a -> s { _name = a } :: DatabaseResource s)
 
 instance s ~ s' => P.HasComputedEncoding (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedEncoding x = TF.compute (TF.refKey x) "_computedEncoding"
@@ -143,25 +147,27 @@ data ExtensionResource s = ExtensionResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ExtensionResource s) where
-    toObject ExtensionResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 extensionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ExtensionResource s)
 extensionResource _name =
-    TF.newResource "postgresql_extension" $
+    TF.newResource "postgresql_extension" TF.validator $
         ExtensionResource'
             { _name = _name
             }
 
+instance TF.IsObject (ExtensionResource s) where
+    toObject ExtensionResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ExtensionResource s) where
+    validator = P.mempty
+
 instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ExtensionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ExtensionResource s)
+               (\s a -> s { _name = a } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
     computedSchema x = TF.compute (TF.refKey x) "_computedSchema"
@@ -235,29 +241,11 @@ data RoleResource s = RoleResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RoleResource s) where
-    toObject RoleResource'{..} = catMaybes
-        [ TF.assign "bypass_row_level_security" <$> TF.attribute _bypassRowLevelSecurity
-        , TF.assign "connection_limit" <$> TF.attribute _connectionLimit
-        , TF.assign "create_database" <$> TF.attribute _createDatabase
-        , TF.assign "create_role" <$> TF.attribute _createRole
-        , TF.assign "encrypted" <$> TF.attribute _encrypted
-        , TF.assign "encrypted_password" <$> TF.attribute _encryptedPassword
-        , TF.assign "inherit" <$> TF.attribute _inherit
-        , TF.assign "login" <$> TF.attribute _login
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "replication" <$> TF.attribute _replication
-        , TF.assign "skip_drop_role" <$> TF.attribute _skipDropRole
-        , TF.assign "skip_reassign_owned" <$> TF.attribute _skipReassignOwned
-        , TF.assign "superuser" <$> TF.attribute _superuser
-        , TF.assign "valid_until" <$> TF.attribute _validUntil
-        ]
-
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (RoleResource s)
 roleResource _name =
-    TF.newResource "postgresql_role" $
+    TF.newResource "postgresql_role" TF.validator $
         RoleResource'
             { _bypassRowLevelSecurity = TF.value P.False
             , _connectionLimit = TF.value (-1)
@@ -275,89 +263,96 @@ roleResource _name =
             , _validUntil = TF.value "infinity"
             }
 
+instance TF.IsObject (RoleResource s) where
+    toObject RoleResource'{..} = P.catMaybes
+        [ TF.assign "bypass_row_level_security" <$> TF.attribute _bypassRowLevelSecurity
+        , TF.assign "connection_limit" <$> TF.attribute _connectionLimit
+        , TF.assign "create_database" <$> TF.attribute _createDatabase
+        , TF.assign "create_role" <$> TF.attribute _createRole
+        , TF.assign "encrypted" <$> TF.attribute _encrypted
+        , TF.assign "encrypted_password" <$> TF.attribute _encryptedPassword
+        , TF.assign "inherit" <$> TF.attribute _inherit
+        , TF.assign "login" <$> TF.attribute _login
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "replication" <$> TF.attribute _replication
+        , TF.assign "skip_drop_role" <$> TF.attribute _skipDropRole
+        , TF.assign "skip_reassign_owned" <$> TF.attribute _skipReassignOwned
+        , TF.assign "superuser" <$> TF.attribute _superuser
+        , TF.assign "valid_until" <$> TF.attribute _validUntil
+        ]
+
+instance TF.IsValid (RoleResource s) where
+    validator = P.mempty
+
 instance P.HasBypassRowLevelSecurity (RoleResource s) (TF.Attr s P.Bool) where
     bypassRowLevelSecurity =
         P.lens (_bypassRowLevelSecurity :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _bypassRowLevelSecurity = a
-                          } :: RoleResource s)
+               (\s a -> s { _bypassRowLevelSecurity = a } :: RoleResource s)
 
 instance P.HasConnectionLimit (RoleResource s) (TF.Attr s P.Integer) where
     connectionLimit =
         P.lens (_connectionLimit :: RoleResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _connectionLimit = a
-                          } :: RoleResource s)
+               (\s a -> s { _connectionLimit = a } :: RoleResource s)
 
 instance P.HasCreateDatabase (RoleResource s) (TF.Attr s P.Bool) where
     createDatabase =
         P.lens (_createDatabase :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _createDatabase = a
-                          } :: RoleResource s)
+               (\s a -> s { _createDatabase = a } :: RoleResource s)
 
 instance P.HasCreateRole (RoleResource s) (TF.Attr s P.Bool) where
     createRole =
         P.lens (_createRole :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _createRole = a
-                          } :: RoleResource s)
+               (\s a -> s { _createRole = a } :: RoleResource s)
 
 instance P.HasEncrypted (RoleResource s) (TF.Attr s P.Text) where
     encrypted =
         P.lens (_encrypted :: RoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _encrypted = a
-                          } :: RoleResource s)
+               (\s a -> s { _encrypted = a } :: RoleResource s)
 
 instance P.HasEncryptedPassword (RoleResource s) (TF.Attr s P.Bool) where
     encryptedPassword =
         P.lens (_encryptedPassword :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _encryptedPassword = a
-                          } :: RoleResource s)
+               (\s a -> s { _encryptedPassword = a } :: RoleResource s)
 
 instance P.HasInherit (RoleResource s) (TF.Attr s P.Bool) where
     inherit =
         P.lens (_inherit :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _inherit = a
-                          } :: RoleResource s)
+               (\s a -> s { _inherit = a } :: RoleResource s)
 
 instance P.HasLogin (RoleResource s) (TF.Attr s P.Bool) where
     login =
         P.lens (_login :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _login = a
-                          } :: RoleResource s)
+               (\s a -> s { _login = a } :: RoleResource s)
 
 instance P.HasName (RoleResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RoleResource s)
+               (\s a -> s { _name = a } :: RoleResource s)
 
 instance P.HasReplication (RoleResource s) (TF.Attr s P.Bool) where
     replication =
         P.lens (_replication :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _replication = a
-                          } :: RoleResource s)
+               (\s a -> s { _replication = a } :: RoleResource s)
 
 instance P.HasSkipDropRole (RoleResource s) (TF.Attr s P.Bool) where
     skipDropRole =
         P.lens (_skipDropRole :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _skipDropRole = a
-                          } :: RoleResource s)
+               (\s a -> s { _skipDropRole = a } :: RoleResource s)
 
 instance P.HasSkipReassignOwned (RoleResource s) (TF.Attr s P.Bool) where
     skipReassignOwned =
         P.lens (_skipReassignOwned :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _skipReassignOwned = a
-                          } :: RoleResource s)
+               (\s a -> s { _skipReassignOwned = a } :: RoleResource s)
 
 instance P.HasSuperuser (RoleResource s) (TF.Attr s P.Bool) where
     superuser =
         P.lens (_superuser :: RoleResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _superuser = a
-                          } :: RoleResource s)
+               (\s a -> s { _superuser = a } :: RoleResource s)
 
 instance P.HasValidUntil (RoleResource s) (TF.Attr s P.Text) where
     validUntil =
         P.lens (_validUntil :: RoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _validUntil = a
-                          } :: RoleResource s)
+               (\s a -> s { _validUntil = a } :: RoleResource s)
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
     computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
@@ -377,33 +372,34 @@ data SchemaResource s = SchemaResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SchemaResource s) where
-    toObject SchemaResource'{..} = catMaybes
-        [ TF.assign "if_not_exists" <$> TF.attribute _ifNotExists
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 schemaResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (SchemaResource s)
 schemaResource _name =
-    TF.newResource "postgresql_schema" $
+    TF.newResource "postgresql_schema" TF.validator $
         SchemaResource'
             { _ifNotExists = TF.value P.True
             , _name = _name
             }
 
+instance TF.IsObject (SchemaResource s) where
+    toObject SchemaResource'{..} = P.catMaybes
+        [ TF.assign "if_not_exists" <$> TF.attribute _ifNotExists
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SchemaResource s) where
+    validator = P.mempty
+
 instance P.HasIfNotExists (SchemaResource s) (TF.Attr s P.Bool) where
     ifNotExists =
         P.lens (_ifNotExists :: SchemaResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _ifNotExists = a
-                          } :: SchemaResource s)
+               (\s a -> s { _ifNotExists = a } :: SchemaResource s)
 
 instance P.HasName (SchemaResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SchemaResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SchemaResource s)
+               (\s a -> s { _name = a } :: SchemaResource s)
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "_computedOwner"

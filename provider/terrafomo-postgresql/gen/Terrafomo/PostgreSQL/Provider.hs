@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.PostgreSQL.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.PostgreSQL.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.PostgreSQL.Lens  as P
 import qualified Terrafomo.PostgreSQL.Types as P
 import qualified Terrafomo.Provider         as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | The @PostgreSQL@ Terraform provider configuration.
 --
@@ -94,31 +98,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "connect_timeout" <$> _connectTimeout
-                  , TF.assign "database" <$> _database
-                  , P.Just $ TF.assign "expected_version" _expectedVersion
-                  , TF.assign "host" <$> _host
-                  , TF.assign "max_connections" <$> _maxConnections
-                  , TF.assign "password" <$> _password
-                  , TF.assign "port" <$> _port
-                  , TF.assign "ssl_mode" <$> _sslMode
-                  , TF.assign "sslmode" <$> _sslmode
-                  , TF.assign "username" <$> _username
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: Provider
 newProvider =
@@ -135,62 +114,80 @@ newProvider =
         , _username = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "connect_timeout" <$> _connectTimeout
+                  , TF.assign "database" <$> _database
+                  , P.Just $ TF.assign "expected_version" _expectedVersion
+                  , TF.assign "host" <$> _host
+                  , TF.assign "max_connections" <$> _maxConnections
+                  , TF.assign "password" <$> _password
+                  , TF.assign "port" <$> _port
+                  , TF.assign "ssl_mode" <$> _sslMode
+                  , TF.assign "sslmode" <$> _sslmode
+                  , TF.assign "username" <$> _username
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
 instance P.HasConnectTimeout (Provider) (P.Maybe P.Integer) where
     connectTimeout =
         P.lens (_connectTimeout :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _connectTimeout = a
-                          } :: Provider)
+               (\s a -> s { _connectTimeout = a } :: Provider)
 
 instance P.HasDatabase (Provider) (P.Maybe P.Text) where
     database =
         P.lens (_database :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _database = a
-                          } :: Provider)
+               (\s a -> s { _database = a } :: Provider)
 
 instance P.HasExpectedVersion (Provider) (P.Text) where
     expectedVersion =
         P.lens (_expectedVersion :: Provider -> P.Text)
-               (\s a -> s { _expectedVersion = a
-                          } :: Provider)
+               (\s a -> s { _expectedVersion = a } :: Provider)
 
 instance P.HasHost (Provider) (P.Maybe P.Text) where
     host =
         P.lens (_host :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _host = a
-                          } :: Provider)
+               (\s a -> s { _host = a } :: Provider)
 
 instance P.HasMaxConnections (Provider) (P.Maybe P.Integer) where
     maxConnections =
         P.lens (_maxConnections :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _maxConnections = a
-                          } :: Provider)
+               (\s a -> s { _maxConnections = a } :: Provider)
 
 instance P.HasPassword (Provider) (P.Maybe P.Text) where
     password =
         P.lens (_password :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _password = a
-                          } :: Provider)
+               (\s a -> s { _password = a } :: Provider)
 
 instance P.HasPort (Provider) (P.Maybe P.Integer) where
     port =
         P.lens (_port :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _port = a
-                          } :: Provider)
+               (\s a -> s { _port = a } :: Provider)
 
 instance P.HasSslMode (Provider) (P.Maybe P.Text) where
     sslMode =
         P.lens (_sslMode :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _sslMode = a
-                          } :: Provider)
+               (\s a -> s { _sslMode = a } :: Provider)
 
 instance P.HasSslmode (Provider) (P.Maybe P.Text) where
     sslmode =
         P.lens (_sslmode :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _sslmode = a
-                          } :: Provider)
+               (\s a -> s { _sslmode = a } :: Provider)
 
 instance P.HasUsername (Provider) (P.Maybe P.Text) where
     username =
         P.lens (_username :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _username = a
-                          } :: Provider)
+               (\s a -> s { _username = a } :: Provider)
