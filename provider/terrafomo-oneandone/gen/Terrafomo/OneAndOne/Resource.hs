@@ -729,7 +729,7 @@ instance P.HasReverseDns (PublicIpResource s) (TF.Attr s P.Text) where
                           } :: PublicIpResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 -- | @oneandone_server@ Resource.
 --
@@ -951,10 +951,10 @@ instance P.HasVcores (ServerResource s) (TF.Attr s P.Integer) where
                           } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [Ips s]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+    computedIps x = TF.compute (TF.refKey x) "_computedIps"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 -- | @oneandone_shared_storage@ Resource.
 --
@@ -1074,13 +1074,13 @@ instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
                           } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedMd5 x = TF.compute (TF.refKey x) "md5"
+    computedMd5 x = TF.compute (TF.refKey x) "_computedMd5"
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
 
 instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [Servers s]) where
-    computedServers x = TF.compute (TF.refKey x) "servers"
+    computedServers x = TF.compute (TF.refKey x) "_computedServers"
 
 -- | @oneandone_vpn@ Resource.
 --
@@ -1135,7 +1135,7 @@ instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
                           } :: VpnResource s)
 
 instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDownloadPath x = TF.compute (TF.refKey x) "download_path"
+    computedDownloadPath x = TF.compute (TF.refKey x) "_computedDownloadPath"
 
 instance s ~ s' => P.HasComputedFileName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedFileName x = TF.compute (TF.refKey x) "file_name"
+    computedFileName x = TF.compute (TF.refKey x) "_computedFileName"

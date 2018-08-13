@@ -82,6 +82,8 @@ module Terrafomo.OneAndOne.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
 import qualified Data.List.NonEmpty        as P
@@ -123,10 +125,10 @@ instance P.HasFirewallPolicyId (Ips s) (TF.Attr s P.Text) where
                           } :: Ips s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Ips s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (Ips s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 -- | @rules@ nested settings.
 data Rules s = Rules'
@@ -193,7 +195,7 @@ instance P.HasSourceIp (Rules s) (TF.Attr s P.Text) where
                           } :: Rules s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @disk@ nested settings.
 data Disk s = Disk'
@@ -355,7 +357,7 @@ instance P.HasIsMain (Hdds s) (TF.Attr s P.Bool) where
                           } :: Hdds s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Hdds s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @servers@ nested settings.
 data Servers s = Servers'
@@ -576,7 +578,7 @@ instance P.HasProtocol (Ports s) (TF.Attr s P.Text) where
                           } :: Ports s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Ports s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @processes@ nested settings.
 data Processes s = Processes'
@@ -630,7 +632,7 @@ instance P.HasProcess (Processes s) (TF.Attr s P.Text) where
                           } :: Processes s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (Processes s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @storage_servers@ nested settings.
 data StorageServers s = StorageServers'
