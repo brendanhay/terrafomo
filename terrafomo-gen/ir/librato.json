@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newStream",
+                "name": "Stream'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"color\" <$> TF.attribute",
-                    "name": "color",
+                    "name": "_color",
                     "method": "color",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasColor",
+                    "validate": false,
                     "optional": true,
-                    "label": "_color"
+                    "original": "color"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,29 +29,30 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"composite\" <$> TF.attribute",
-                    "name": "composite",
+                    "name": "_composite",
                     "method": "composite",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "source",
-                            "label": "_source"
+                            "name": "_source",
+                            "method": "source"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "metric",
-                            "label": "_metric"
+                            "name": "_metric",
+                            "method": "metric"
                         },
                         {
                             "default": "TF.Nil",
-                            "method": "groupFunction",
-                            "label": "_groupFunction"
+                            "name": "_groupFunction",
+                            "method": "groupFunction"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComposite",
+                    "validate": false,
                     "optional": true,
-                    "label": "_composite"
+                    "original": "composite"
                 },
                 {
                     "default": "TF.Nil",
@@ -55,19 +61,20 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"group_function\" <$> TF.attribute",
-                    "name": "group_function",
+                    "name": "_groupFunction",
                     "method": "groupFunction",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "composite",
-                            "label": "_composite"
+                            "name": "_composite",
+                            "method": "composite"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasGroupFunction",
+                    "validate": false,
                     "optional": true,
-                    "label": "_groupFunction"
+                    "original": "group_function"
                 },
                 {
                     "default": "TF.value (0 P./ 0)",
@@ -76,13 +83,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"max\" <$> TF.attribute",
-                    "name": "max",
+                    "name": "_max",
                     "method": "max",
                     "conflicts": [],
                     "type": "TF.Attr s P.Double",
                     "class": "HasMax",
+                    "validate": false,
                     "optional": true,
-                    "label": "_max"
+                    "original": "max"
                 },
                 {
                     "default": "TF.Nil",
@@ -91,19 +99,20 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"metric\" <$> TF.attribute",
-                    "name": "metric",
+                    "name": "_metric",
                     "method": "metric",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "composite",
-                            "label": "_composite"
+                            "name": "_composite",
+                            "method": "composite"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMetric",
+                    "validate": false,
                     "optional": true,
-                    "label": "_metric"
+                    "original": "metric"
                 },
                 {
                     "default": "TF.value (0 P./ 0)",
@@ -112,13 +121,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"min\" <$> TF.attribute",
-                    "name": "min",
+                    "name": "_min",
                     "method": "min",
                     "conflicts": [],
                     "type": "TF.Attr s P.Double",
                     "class": "HasMin",
+                    "validate": false,
                     "optional": true,
-                    "label": "_min"
+                    "original": "min"
                 },
                 {
                     "default": "TF.Nil",
@@ -127,13 +137,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -142,13 +153,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"period\" <$> TF.attribute",
-                    "name": "period",
+                    "name": "_period",
                     "method": "period",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPeriod",
+                    "validate": false,
                     "optional": true,
-                    "label": "_period"
+                    "original": "period"
                 },
                 {
                     "default": "TF.Nil",
@@ -157,19 +169,20 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "method": "composite",
-                            "label": "_composite"
+                            "name": "_composite",
+                            "method": "composite"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": true,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -178,13 +191,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"summary_function\" <$> TF.attribute",
-                    "name": "summary_function",
+                    "name": "_summaryFunction",
                     "method": "summaryFunction",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSummaryFunction",
+                    "validate": false,
                     "optional": true,
-                    "label": "_summaryFunction"
+                    "original": "summary_function"
                 },
                 {
                     "default": "TF.Nil",
@@ -193,13 +207,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"transform_function\" <$> TF.attribute",
-                    "name": "transform_function",
+                    "name": "_transformFunction",
                     "method": "transformFunction",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTransformFunction",
+                    "validate": false,
                     "optional": true,
-                    "label": "_transformFunction"
+                    "original": "transform_function"
                 },
                 {
                     "default": "TF.Nil",
@@ -208,13 +223,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"units_long\" <$> TF.attribute",
-                    "name": "units_long",
+                    "name": "_unitsLong",
                     "method": "unitsLong",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUnitsLong",
+                    "validate": false,
                     "optional": true,
-                    "label": "_unitsLong"
+                    "original": "units_long"
                 },
                 {
                     "default": "TF.Nil",
@@ -223,53 +239,52 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"units_short\" <$> TF.attribute",
-                    "name": "units_short",
+                    "name": "_unitsShort",
                     "method": "unitsShort",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUnitsShort",
+                    "validate": false,
                     "optional": true,
-                    "label": "_unitsShort"
+                    "original": "units_short"
                 }
             ],
             "name": "Stream",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
-            "type": "Stream s",
-            "original": "stream"
-        },
-        {
-            "arguments": [
+            "conflicts": [
                 {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"aggregate\" <$> TF.attribute",
-                    "name": "aggregate",
-                    "method": "aggregate",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAggregate",
-                    "optional": true,
-                    "label": "_aggregate"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"color\" <$> TF.attribute",
-                    "name": "color",
-                    "method": "color",
-                    "conflicts": [],
+                    "encoder": "TF.assign \"composite\" <$> TF.attribute",
+                    "name": "_composite",
+                    "method": "composite",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_source",
+                            "method": "source"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_metric",
+                            "method": "metric"
+                        },
+                        {
+                            "default": "TF.Nil",
+                            "name": "_groupFunction",
+                            "method": "groupFunction"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasColor",
+                    "class": "HasComposite",
+                    "validate": false,
                     "optional": true,
-                    "label": "_color"
+                    "original": "composite"
                 },
                 {
                     "default": "TF.Nil",
@@ -277,14 +292,21 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"display_max\" <$> TF.attribute",
-                    "name": "display_max",
-                    "method": "displayMax",
-                    "conflicts": [],
+                    "encoder": "TF.assign \"group_function\" <$> TF.attribute",
+                    "name": "_groupFunction",
+                    "method": "groupFunction",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_composite",
+                            "method": "composite"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasDisplayMax",
+                    "class": "HasGroupFunction",
+                    "validate": false,
                     "optional": true,
-                    "label": "_displayMax"
+                    "original": "group_function"
                 },
                 {
                     "default": "TF.Nil",
@@ -292,145 +314,21 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"display_min\" <$> TF.attribute",
-                    "name": "display_min",
-                    "method": "displayMin",
-                    "conflicts": [],
+                    "encoder": "TF.assign \"metric\" <$> TF.attribute",
+                    "name": "_metric",
+                    "method": "metric",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_composite",
+                            "method": "composite"
+                        }
+                    ],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasDisplayMin",
+                    "class": "HasMetric",
+                    "validate": false,
                     "optional": true,
-                    "label": "_displayMin"
-                },
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"display_stacked\" <$> TF.attribute",
-                    "name": "display_stacked",
-                    "method": "displayStacked",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasDisplayStacked",
-                    "optional": true,
-                    "label": "_displayStacked"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"display_units_long\" <$> TF.attribute",
-                    "name": "display_units_long",
-                    "method": "displayUnitsLong",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDisplayUnitsLong",
-                    "optional": true,
-                    "label": "_displayUnitsLong"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"display_units_short\" <$> TF.attribute",
-                    "name": "display_units_short",
-                    "method": "displayUnitsShort",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDisplayUnitsShort",
-                    "optional": true,
-                    "label": "_displayUnitsShort"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"gap_detection\" <$> TF.attribute",
-                    "name": "gap_detection",
-                    "method": "gapDetection",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasGapDetection",
-                    "optional": true,
-                    "label": "_gapDetection"
-                }
-            ],
-            "name": "Attributes",
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"created_by_ua\" <$> TF.attribute",
-                    "name": "created_by_ua",
-                    "method": "computedCreatedByUa",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedCreatedByUa",
-                    "optional": false,
-                    "label": "_computedCreatedByUa"
-                }
-            ],
-            "parameters": [],
-            "hashable": false,
-            "type": "Attributes s",
-            "original": "attributes"
-        },
-        {
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"detect_reset\" <$> TF.attribute",
-                    "name": "detect_reset",
-                    "method": "detectReset",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasDetectReset",
-                    "optional": true,
-                    "label": "_detectReset"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
-                    "name": "duration",
-                    "method": "duration",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasDuration",
-                    "optional": true,
-                    "label": "_duration"
-                },
-                {
-                    "default": "_metricName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
-                    "name": "metric_name",
-                    "method": "metricName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMetricName",
-                    "optional": false,
-                    "label": "_metricName"
+                    "original": "metric"
                 },
                 {
                     "default": "TF.Nil",
@@ -439,13 +337,254 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
+                    "method": "source",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_composite",
+                            "method": "composite"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                }
+            ],
+            "type": "Stream s",
+            "original": "stream"
+        },
+        {
+            "con": {
+                "smart": "newAttributes",
+                "name": "Attributes'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"aggregate\" <$> TF.attribute",
+                    "name": "_aggregate",
+                    "method": "aggregate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAggregate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "aggregate"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"color\" <$> TF.attribute",
+                    "name": "_color",
+                    "method": "color",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasColor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "color"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"display_max\" <$> TF.attribute",
+                    "name": "_displayMax",
+                    "method": "displayMax",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayMax",
+                    "validate": false,
+                    "optional": true,
+                    "original": "display_max"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"display_min\" <$> TF.attribute",
+                    "name": "_displayMin",
+                    "method": "displayMin",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayMin",
+                    "validate": false,
+                    "optional": true,
+                    "original": "display_min"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"display_stacked\" <$> TF.attribute",
+                    "name": "_displayStacked",
+                    "method": "displayStacked",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDisplayStacked",
+                    "validate": false,
+                    "optional": true,
+                    "original": "display_stacked"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"display_units_long\" <$> TF.attribute",
+                    "name": "_displayUnitsLong",
+                    "method": "displayUnitsLong",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayUnitsLong",
+                    "validate": false,
+                    "optional": true,
+                    "original": "display_units_long"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"display_units_short\" <$> TF.attribute",
+                    "name": "_displayUnitsShort",
+                    "method": "displayUnitsShort",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayUnitsShort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "display_units_short"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"gap_detection\" <$> TF.attribute",
+                    "name": "_gapDetection",
+                    "method": "gapDetection",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasGapDetection",
+                    "validate": false,
+                    "optional": true,
+                    "original": "gap_detection"
+                }
+            ],
+            "name": "Attributes",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"created_by_ua\" <$> TF.attribute",
+                    "name": "_computedCreatedByUa",
+                    "method": "computedCreatedByUa",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCreatedByUa",
+                    "validate": false,
+                    "optional": false,
+                    "original": "created_by_ua"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "Attributes s",
+            "original": "attributes"
+        },
+        {
+            "con": {
+                "smart": "newCondition",
+                "name": "Condition'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"detect_reset\" <$> TF.attribute",
+                    "name": "_detectReset",
+                    "method": "detectReset",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDetectReset",
+                    "validate": false,
+                    "optional": true,
+                    "original": "detect_reset"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
+                    "name": "_duration",
+                    "method": "duration",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDuration",
+                    "validate": false,
+                    "optional": true,
+                    "original": "duration"
+                },
+                {
+                    "default": "_metricName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
+                    "name": "_metricName",
+                    "method": "metricName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMetricName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "metric_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": true,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -454,13 +593,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"summary_function\" <$> TF.attribute",
-                    "name": "summary_function",
+                    "name": "_summaryFunction",
                     "method": "summaryFunction",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSummaryFunction",
+                    "validate": false,
                     "optional": true,
-                    "label": "_summaryFunction"
+                    "original": "summary_function"
                 },
                 {
                     "default": "TF.Nil",
@@ -469,13 +609,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"threshold\" <$> TF.attribute",
-                    "name": "threshold",
+                    "name": "_threshold",
                     "method": "threshold",
                     "conflicts": [],
                     "type": "TF.Attr s P.Double",
                     "class": "HasThreshold",
+                    "validate": false,
                     "optional": true,
-                    "label": "_threshold"
+                    "original": "threshold"
                 },
                 {
                     "default": "_type'",
@@ -484,16 +625,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
             "name": "Condition",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -503,13 +646,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
-                    "name": "metric_name",
+                    "name": "_metricName",
                     "method": "metricName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMetricName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_metricName"
+                    "original": "metric_name"
                 },
                 {
                     "default": "_type'",
@@ -518,59 +662,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Condition s",
             "original": "condition"
-        }
-    ],
-    "arguments": [
-        {
-            "default": "_email",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The email address for the Librato account."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"email\"",
-            "name": "email",
-            "method": "email",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasEmail",
-            "optional": false,
-            "label": "_email"
-        },
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The auth token for the Librato account."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
         }
     ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "alertResource",
+                "name": "AlertResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.True",
@@ -579,13 +692,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"active\" <$> TF.attribute",
-                    "name": "active",
+                    "name": "_active",
                     "method": "active",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasActive",
+                    "validate": false,
                     "optional": true,
-                    "label": "_active"
+                    "original": "active"
                 },
                 {
                     "default": "TF.Nil",
@@ -594,13 +708,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"attributes\" <$> TF.attribute",
-                    "name": "attributes",
+                    "name": "_attributes",
                     "method": "attributes",
                     "conflicts": [],
-                    "type": "TF.Attr s [Attributes s]",
+                    "type": "TF.Attr s (Attributes s)",
                     "class": "HasAttributes",
+                    "validate": true,
                     "optional": true,
-                    "label": "_attributes"
+                    "original": "attributes"
                 },
                 {
                     "default": "TF.Nil",
@@ -609,13 +724,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"condition\" <$> TF.attribute",
-                    "name": "condition",
+                    "name": "_condition",
                     "method": "condition",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Condition s)]",
                     "class": "HasCondition",
+                    "validate": true,
                     "optional": true,
-                    "label": "_condition"
+                    "original": "condition"
                 },
                 {
                     "default": "TF.Nil",
@@ -624,13 +740,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "_name",
@@ -639,13 +756,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.value 600",
@@ -654,13 +772,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rearm_seconds\" <$> TF.attribute",
-                    "name": "rearm_seconds",
+                    "name": "_rearmSeconds",
                     "method": "rearmSeconds",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRearmSeconds",
+                    "validate": false,
                     "optional": true,
-                    "label": "_rearmSeconds"
+                    "original": "rearm_seconds"
                 },
                 {
                     "default": "TF.Nil",
@@ -669,17 +788,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"services\" <$> TF.attribute",
-                    "name": "services",
+                    "name": "_services",
                     "method": "services",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TF.Attr s P.Text)]",
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasServices",
+                    "validate": false,
                     "optional": true,
-                    "label": "_services"
+                    "original": "services"
                 }
             ],
-            "schema": "Resource",
             "name": "AlertResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -689,19 +809,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "AlertResource s",
             "original": "librato_alert"
         },
         {
+            "con": {
+                "smart": "metricResource",
+                "name": "MetricResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -710,13 +836,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"attributes\" <$> TF.attribute",
-                    "name": "attributes",
+                    "name": "_attributes",
                     "method": "attributes",
                     "conflicts": [],
-                    "type": "TF.Attr s [Attributes s]",
+                    "type": "TF.Attr s (Attributes s)",
                     "class": "HasAttributes",
+                    "validate": true,
                     "optional": true,
-                    "label": "_attributes"
+                    "original": "attributes"
                 },
                 {
                     "default": "TF.Nil",
@@ -725,13 +852,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"composite\" <$> TF.attribute",
-                    "name": "composite",
+                    "name": "_composite",
                     "method": "composite",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComposite",
+                    "validate": false,
                     "optional": true,
-                    "label": "_composite"
+                    "original": "composite"
                 },
                 {
                     "default": "TF.Nil",
@@ -740,13 +868,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
-                    "name": "description",
+                    "name": "_description",
                     "method": "description",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
+                    "validate": false,
                     "optional": true,
-                    "label": "_description"
+                    "original": "description"
                 },
                 {
                     "default": "TF.Nil",
@@ -755,13 +884,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"display_name\" <$> TF.attribute",
-                    "name": "display_name",
+                    "name": "_displayName",
                     "method": "displayName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDisplayName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_displayName"
+                    "original": "display_name"
                 },
                 {
                     "default": "_name",
@@ -770,13 +900,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -785,13 +916,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"period\" <$> TF.attribute",
-                    "name": "period",
+                    "name": "_period",
                     "method": "period",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasPeriod",
+                    "validate": false,
                     "optional": true,
-                    "label": "_period"
+                    "original": "period"
                 },
                 {
                     "default": "_type'",
@@ -800,17 +932,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "MetricResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -820,13 +953,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
@@ -835,19 +969,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "MetricResource s",
             "original": "librato_metric"
         },
         {
+            "con": {
+                "smart": "serviceResource",
+                "name": "ServiceResource'"
+            },
             "arguments": [
                 {
                     "default": "_settings",
@@ -856,13 +996,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSettings",
+                    "validate": false,
                     "optional": false,
-                    "label": "_settings"
+                    "original": "settings"
                 },
                 {
                     "default": "_title",
@@ -871,13 +1012,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "title",
+                    "name": "_title",
                     "method": "title",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTitle",
+                    "validate": false,
                     "optional": false,
-                    "label": "_title"
+                    "original": "title"
                 },
                 {
                     "default": "_type'",
@@ -886,17 +1028,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "ServiceResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -905,13 +1048,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -922,13 +1066,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSettings",
+                    "validate": false,
                     "optional": false,
-                    "label": "_settings"
+                    "original": "settings"
                 },
                 {
                     "default": "_title",
@@ -937,13 +1082,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"title\" <$> TF.attribute",
-                    "name": "title",
+                    "name": "_title",
                     "method": "title",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTitle",
+                    "validate": false,
                     "optional": false,
-                    "label": "_title"
+                    "original": "title"
                 },
                 {
                     "default": "_type'",
@@ -952,19 +1098,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "ServiceResource s",
             "original": "librato_service"
         },
         {
+            "con": {
+                "smart": "spaceResource",
+                "name": "SpaceResource'"
+            },
             "arguments": [
                 {
                     "default": "_name",
@@ -973,17 +1125,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "Resource",
             "name": "SpaceResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -992,13 +1145,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -1009,19 +1163,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceResource s",
             "original": "librato_space"
         },
         {
+            "con": {
+                "smart": "spaceChartResource",
+                "name": "SpaceChartResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1030,13 +1190,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "label",
+                    "name": "_label",
                     "method": "label",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLabel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_label"
+                    "original": "label"
                 },
                 {
                     "default": "TF.value (0 P./ 0)",
@@ -1045,13 +1206,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"max\" <$> TF.attribute",
-                    "name": "max",
+                    "name": "_max",
                     "method": "max",
                     "conflicts": [],
                     "type": "TF.Attr s P.Double",
                     "class": "HasMax",
+                    "validate": false,
                     "optional": true,
-                    "label": "_max"
+                    "original": "max"
                 },
                 {
                     "default": "TF.value (0 P./ 0)",
@@ -1060,13 +1222,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"min\" <$> TF.attribute",
-                    "name": "min",
+                    "name": "_min",
                     "method": "min",
                     "conflicts": [],
                     "type": "TF.Attr s P.Double",
                     "class": "HasMin",
+                    "validate": false,
                     "optional": true,
-                    "label": "_min"
+                    "original": "min"
                 },
                 {
                     "default": "_name",
@@ -1075,13 +1238,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1090,13 +1254,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"related_space\" <$> TF.attribute",
-                    "name": "related_space",
+                    "name": "_relatedSpace",
                     "method": "relatedSpace",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasRelatedSpace",
+                    "validate": false,
                     "optional": true,
-                    "label": "_relatedSpace"
+                    "original": "related_space"
                 },
                 {
                     "default": "_spaceId",
@@ -1105,13 +1270,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space_id\" <$> TF.attribute",
-                    "name": "space_id",
+                    "name": "_spaceId",
                     "method": "spaceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSpaceId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_spaceId"
+                    "original": "space_id"
                 },
                 {
                     "default": "TF.Nil",
@@ -1120,13 +1286,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"stream\" <$> TF.attribute",
-                    "name": "stream",
+                    "name": "_stream",
                     "method": "stream",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s (Stream s)]",
                     "class": "HasStream",
+                    "validate": true,
                     "optional": true,
-                    "label": "_stream"
+                    "original": "stream"
                 },
                 {
                     "default": "_type'",
@@ -1135,17 +1302,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "SpaceChartResource",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1155,13 +1323,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_spaceId",
@@ -1170,13 +1339,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"space_id\" <$> TF.attribute",
-                    "name": "space_id",
+                    "name": "_spaceId",
                     "method": "spaceId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSpaceId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_spaceId"
+                    "original": "space_id"
                 },
                 {
                     "default": "_type'",
@@ -1185,19 +1355,109 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "SpaceChartResource s",
             "original": "librato_space_chart"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_email",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The email address for the Librato account."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"email\"",
+                "name": "_email",
+                "method": "email",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasEmail",
+                "validate": false,
+                "optional": false,
+                "original": "email"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The auth token for the Librato account."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_email",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The email address for the Librato account."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"email\"",
+                "name": "_email",
+                "method": "email",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasEmail",
+                "validate": false,
+                "optional": false,
+                "original": "email"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The auth token for the Librato account."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -1207,43 +1467,6 @@
         "microlens"
     ],
     "name": "Librato",
-    "parameters": [
-        {
-            "default": "_email",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The email address for the Librato account."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"email\"",
-            "name": "email",
-            "method": "email",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasEmail",
-            "optional": false,
-            "label": "_email"
-        },
-        {
-            "default": "_token",
-            "computed": false,
-            "required": true,
-            "help": [
-                "The auth token for the Librato account."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"token\"",
-            "name": "token",
-            "method": "token",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasToken",
-            "optional": false,
-            "label": "_token"
-        }
-    ],
     "package": "terrafomo-librato",
-    "type": "Provider",
     "original": "librato"
 }
