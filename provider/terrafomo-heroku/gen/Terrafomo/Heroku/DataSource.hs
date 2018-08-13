@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,7 +33,6 @@ module Terrafomo.Heroku.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -40,7 +40,10 @@ import Terrafomo.Heroku.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -52,6 +55,7 @@ import qualified Terrafomo.Heroku.Provider as P
 import qualified Terrafomo.Heroku.Types    as P
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @heroku_app@ DataSource.
 --
@@ -63,25 +67,27 @@ data AppData s = AppData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AppData s) where
-    toObject AppData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 appData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (AppData s)
 appData _name =
-    TF.newDataSource "heroku_app" $
+    TF.newDataSource "heroku_app" TF.validator $
         AppData'
             { _name = _name
             }
 
+instance TF.IsObject (AppData s) where
+    toObject AppData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (AppData s) where
+    validator = P.mempty
+
 instance P.HasName (AppData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: AppData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: AppData s)
+               (\s a -> s { _name = a } :: AppData s)
 
 instance s ~ s' => P.HasComputedAcm (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
     computedAcm x = TF.compute (TF.refKey x) "_computedAcm"
@@ -101,7 +107,7 @@ instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppData s)) (TF.Attr 
 instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
     computedInternalRouting x = TF.compute (TF.refKey x) "_computedInternalRouting"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [Organization s]) where
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s (Organization s)]) where
     computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
@@ -126,25 +132,27 @@ data SpaceData s = SpaceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SpaceData s) where
-    toObject SpaceData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 spaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SpaceData s)
 spaceData _name =
-    TF.newDataSource "heroku_space" $
+    TF.newDataSource "heroku_space" TF.validator $
         SpaceData'
             { _name = _name
             }
 
+instance TF.IsObject (SpaceData s) where
+    toObject SpaceData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SpaceData s) where
+    validator = P.mempty
+
 instance P.HasName (SpaceData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SpaceData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SpaceData s)
+               (\s a -> s { _name = a } :: SpaceData s)
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
     computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
@@ -174,25 +182,27 @@ data SpacePeeringInfoData s = SpacePeeringInfoData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SpacePeeringInfoData s) where
-    toObject SpacePeeringInfoData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 spacePeeringInfoData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SpacePeeringInfoData s)
 spacePeeringInfoData _name =
-    TF.newDataSource "heroku_space_peering_info" $
+    TF.newDataSource "heroku_space_peering_info" TF.validator $
         SpacePeeringInfoData'
             { _name = _name
             }
 
+instance TF.IsObject (SpacePeeringInfoData s) where
+    toObject SpacePeeringInfoData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SpacePeeringInfoData s) where
+    validator = P.mempty
+
 instance P.HasName (SpacePeeringInfoData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SpacePeeringInfoData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SpacePeeringInfoData s)
+               (\s a -> s { _name = a } :: SpacePeeringInfoData s)
 
 instance s ~ s' => P.HasComputedAwsAccountId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
     computedAwsAccountId x = TF.compute (TF.refKey x) "_computedAwsAccountId"
