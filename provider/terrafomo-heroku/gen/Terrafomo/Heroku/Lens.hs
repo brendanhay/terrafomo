@@ -80,13 +80,13 @@ module Terrafomo.Heroku.Lens
     , HasComputedVpcCidr (..)
     , HasComputedSpaceCidrBlock (..)
     , HasComputedInternalRouting (..)
+    , HasComputedType (..)
     , HasComputedIkeVersion (..)
     , HasComputedShield (..)
     , HasComputedToken (..)
     , HasComputedGitUrl (..)
     , HasComputedConfigVars (..)
     , HasComputedWebUrl (..)
-    , HasComputedType' (..)
     ) where
 
 import GHC.Base ((.))
@@ -382,6 +382,9 @@ class HasComputedSpaceCidrBlock a b | a -> b where
 class HasComputedInternalRouting a b | a -> b where
     computedInternalRouting :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedIkeVersion a b | a -> b where
     computedIkeVersion :: a -> b
 
@@ -399,6 +402,3 @@ class HasComputedConfigVars a b | a -> b where
 
 class HasComputedWebUrl a b | a -> b where
     computedWebUrl :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b

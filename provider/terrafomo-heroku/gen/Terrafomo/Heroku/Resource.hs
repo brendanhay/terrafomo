@@ -163,13 +163,13 @@ instance P.HasPlan (AddonResource s) (TF.Attr s P.Text) where
                           } :: AddonResource s)
 
 instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AddonResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
+    computedConfigVars x = TF.compute (TF.refKey x) "_computedConfigVars"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProviderId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedProviderId x = TF.compute (TF.refKey x) "provider_id"
+    computedProviderId x = TF.compute (TF.refKey x) "_computedProviderId"
 
 -- | @heroku_addon_attachment@ Resource.
 --
@@ -214,7 +214,7 @@ instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s P.Text) where
                           } :: AddonAttachmentResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @heroku_app@ Resource.
 --
@@ -303,25 +303,25 @@ instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
                           } :: AppResource s)
 
 instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedAllConfigVars x = TF.compute (TF.refKey x) "all_config_vars"
+    computedAllConfigVars x = TF.compute (TF.refKey x) "_computedAllConfigVars"
 
 instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
-    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
+    computedConfigVars x = TF.compute (TF.refKey x) "_computedConfigVars"
 
 instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedGitUrl x = TF.compute (TF.refKey x) "git_url"
+    computedGitUrl x = TF.compute (TF.refKey x) "_computedGitUrl"
 
 instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedHerokuHostname x = TF.compute (TF.refKey x) "heroku_hostname"
+    computedHerokuHostname x = TF.compute (TF.refKey x) "_computedHerokuHostname"
 
 instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppResource s)) (TF.Attr s P.Bool) where
-    computedInternalRouting x = TF.compute (TF.refKey x) "internal_routing"
+    computedInternalRouting x = TF.compute (TF.refKey x) "_computedInternalRouting"
 
 instance s ~ s' => P.HasComputedStack (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedStack x = TF.compute (TF.refKey x) "stack"
+    computedStack x = TF.compute (TF.refKey x) "_computedStack"
 
 instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
+    computedWebUrl x = TF.compute (TF.refKey x) "_computedWebUrl"
 
 -- | @heroku_app_feature@ Resource.
 --
@@ -419,7 +419,7 @@ instance P.HasSlugId (AppReleaseResource s) (TF.Attr s P.Text) where
                           } :: AppReleaseResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 -- | @heroku_cert@ Resource.
 --
@@ -476,10 +476,10 @@ instance P.HasPrivateKey (CertResource s) (TF.Attr s P.Text) where
                           } :: CertResource s)
 
 instance s ~ s' => P.HasComputedCname (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedCname x = TF.compute (TF.refKey x) "cname"
+    computedCname x = TF.compute (TF.refKey x) "_computedCname"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @heroku_domain@ Resource.
 --
@@ -524,7 +524,7 @@ instance P.HasHostname (DomainResource s) (TF.Attr s P.Text) where
                           } :: DomainResource s)
 
 instance s ~ s' => P.HasComputedCname (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedCname x = TF.compute (TF.refKey x) "cname"
+    computedCname x = TF.compute (TF.refKey x) "_computedCname"
 
 -- | @heroku_drain@ Resource.
 --
@@ -569,7 +569,7 @@ instance P.HasUrl (DrainResource s) (TF.Attr s P.Text) where
                           } :: DrainResource s)
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "token"
+    computedToken x = TF.compute (TF.refKey x) "_computedToken"
 
 -- | @heroku_formation@ Resource.
 --
@@ -722,7 +722,7 @@ instance P.HasStage (PipelineCouplingResource s) (TF.Attr s P.Text) where
                           } :: PipelineCouplingResource s)
 
 instance s ~ s' => P.HasComputedAppId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
-    computedAppId x = TF.compute (TF.refKey x) "app_id"
+    computedAppId x = TF.compute (TF.refKey x) "_computedAppId"
 
 -- | @heroku_space@ Resource.
 --
@@ -789,10 +789,10 @@ instance P.HasShield (SpaceResource s) (TF.Attr s P.Bool) where
                           } :: SpaceResource s)
 
 instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOutboundIps x = TF.compute (TF.refKey x) "outbound_ips"
+    computedOutboundIps x = TF.compute (TF.refKey x) "_computedOutboundIps"
 
 instance s ~ s' => P.HasComputedTrustedIpRanges (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedTrustedIpRanges x = TF.compute (TF.refKey x) "trusted_ip_ranges"
+    computedTrustedIpRanges x = TF.compute (TF.refKey x) "_computedTrustedIpRanges"
 
 -- | @heroku_space_app_access@ Resource.
 --
@@ -933,10 +933,10 @@ instance P.HasVpcPeeringConnectionId (SpacePeeringConnectionAccepterResource s) 
                           } :: SpacePeeringConnectionAccepterResource s)
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @heroku_space_vpn_connection@ Resource.
 --
@@ -1005,13 +1005,13 @@ instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
                           } :: SpaceVpnConnectionResource s)
 
 instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Integer) where
-    computedIkeVersion x = TF.compute (TF.refKey x) "ike_version"
+    computedIkeVersion x = TF.compute (TF.refKey x) "_computedIkeVersion"
 
 instance s ~ s' => P.HasComputedSpaceCidrBlock (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedSpaceCidrBlock x = TF.compute (TF.refKey x) "space_cidr_block"
+    computedSpaceCidrBlock x = TF.compute (TF.refKey x) "_computedSpaceCidrBlock"
 
 instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s [Tunnels s]) where
-    computedTunnels x = TF.compute (TF.refKey x) "tunnels"
+    computedTunnels x = TF.compute (TF.refKey x) "_computedTunnels"
 
 -- | @heroku_team_collaborator@ Resource.
 --

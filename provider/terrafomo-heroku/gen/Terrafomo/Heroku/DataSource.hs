@@ -84,37 +84,37 @@ instance P.HasName (AppData s) (TF.Attr s P.Text) where
                           } :: AppData s)
 
 instance s ~ s' => P.HasComputedAcm (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
-    computedAcm x = TF.compute (TF.refKey x) "acm"
+    computedAcm x = TF.compute (TF.refKey x) "_computedAcm"
 
 instance s ~ s' => P.HasComputedBuildpacks (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedBuildpacks x = TF.compute (TF.refKey x) "buildpacks"
+    computedBuildpacks x = TF.compute (TF.refKey x) "_computedBuildpacks"
 
 instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
+    computedConfigVars x = TF.compute (TF.refKey x) "_computedConfigVars"
 
 instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedGitUrl x = TF.compute (TF.refKey x) "git_url"
+    computedGitUrl x = TF.compute (TF.refKey x) "_computedGitUrl"
 
 instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedHerokuHostname x = TF.compute (TF.refKey x) "heroku_hostname"
+    computedHerokuHostname x = TF.compute (TF.refKey x) "_computedHerokuHostname"
 
 instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
-    computedInternalRouting x = TF.compute (TF.refKey x) "internal_routing"
+    computedInternalRouting x = TF.compute (TF.refKey x) "_computedInternalRouting"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [Organization s]) where
-    computedOrganization x = TF.compute (TF.refKey x) "organization"
+    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedSpace (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedSpace x = TF.compute (TF.refKey x) "space"
+    computedSpace x = TF.compute (TF.refKey x) "_computedSpace"
 
 instance s ~ s' => P.HasComputedStack (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedStack x = TF.compute (TF.refKey x) "stack"
+    computedStack x = TF.compute (TF.refKey x) "_computedStack"
 
 instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
+    computedWebUrl x = TF.compute (TF.refKey x) "_computedWebUrl"
 
 -- | @heroku_space@ DataSource.
 --
@@ -147,22 +147,22 @@ instance P.HasName (SpaceData s) (TF.Attr s P.Text) where
                           } :: SpaceData s)
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "organization"
+    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
 
 instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOutboundIps x = TF.compute (TF.refKey x) "outbound_ips"
+    computedOutboundIps x = TF.compute (TF.refKey x) "_computedOutboundIps"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedShield (TF.Ref s' (SpaceData s)) (TF.Attr s P.Bool) where
-    computedShield x = TF.compute (TF.refKey x) "shield"
+    computedShield x = TF.compute (TF.refKey x) "_computedShield"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedTrustedIpRanges (TF.Ref s' (SpaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTrustedIpRanges x = TF.compute (TF.refKey x) "trusted_ip_ranges"
+    computedTrustedIpRanges x = TF.compute (TF.refKey x) "_computedTrustedIpRanges"
 
 -- | @heroku_space_peering_info@ DataSource.
 --
@@ -195,19 +195,19 @@ instance P.HasName (SpacePeeringInfoData s) (TF.Attr s P.Text) where
                           } :: SpacePeeringInfoData s)
 
 instance s ~ s' => P.HasComputedAwsAccountId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
-    computedAwsAccountId x = TF.compute (TF.refKey x) "aws_account_id"
+    computedAwsAccountId x = TF.compute (TF.refKey x) "_computedAwsAccountId"
 
 instance s ~ s' => P.HasComputedAwsRegion (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
-    computedAwsRegion x = TF.compute (TF.refKey x) "aws_region"
+    computedAwsRegion x = TF.compute (TF.refKey x) "_computedAwsRegion"
 
 instance s ~ s' => P.HasComputedDynoCidrBlocks (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDynoCidrBlocks x = TF.compute (TF.refKey x) "dyno_cidr_blocks"
+    computedDynoCidrBlocks x = TF.compute (TF.refKey x) "_computedDynoCidrBlocks"
 
 instance s ~ s' => P.HasComputedUnavailableCidrBlocks (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUnavailableCidrBlocks x = TF.compute (TF.refKey x) "unavailable_cidr_blocks"
+    computedUnavailableCidrBlocks x = TF.compute (TF.refKey x) "_computedUnavailableCidrBlocks"
 
 instance s ~ s' => P.HasComputedVpcCidr (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Bool) where
-    computedVpcCidr x = TF.compute (TF.refKey x) "vpc_cidr"
+    computedVpcCidr x = TF.compute (TF.refKey x) "_computedVpcCidr"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"

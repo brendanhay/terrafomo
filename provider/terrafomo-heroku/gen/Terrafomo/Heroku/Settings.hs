@@ -34,6 +34,8 @@ module Terrafomo.Heroku.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -102,13 +104,13 @@ newOrganization =
     Organization'
 
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (Organization s)) (TF.Attr s P.Bool) where
-    computedLocked x = TF.compute (TF.refKey x) "locked"
+    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Organization s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPersonal (TF.Ref s' (Organization s)) (TF.Attr s P.Bool) where
-    computedPersonal x = TF.compute (TF.refKey x) "personal"
+    computedPersonal x = TF.compute (TF.refKey x) "_computedPersonal"
 
 -- | @tunnels@ nested settings.
 data Tunnels s = Tunnels'
@@ -125,7 +127,7 @@ newTunnels =
     Tunnels'
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (Tunnels s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 instance s ~ s' => P.HasComputedPreSharedKey (TF.Ref s' (Tunnels s)) (TF.Attr s P.Text) where
-    computedPreSharedKey x = TF.compute (TF.refKey x) "pre_shared_key"
+    computedPreSharedKey x = TF.compute (TF.refKey x) "_computedPreSharedKey"
