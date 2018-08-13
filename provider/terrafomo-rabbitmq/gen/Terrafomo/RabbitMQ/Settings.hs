@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,13 +33,15 @@ module Terrafomo.RabbitMQ.Settings
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
 import qualified Data.Hashable            as P
 import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
@@ -48,6 +51,7 @@ import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.RabbitMQ.Lens  as P
 import qualified Terrafomo.RabbitMQ.Types as P
+import qualified Terrafomo.Validator      as TF
 
 -- | @settings@ nested settings.
 data Settings s = Settings'
@@ -71,16 +75,6 @@ data Settings s = Settings'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Settings s)
-instance TF.IsValue  (Settings s)
-instance TF.IsObject (Settings s) where
-    toObject Settings'{..} = catMaybes
-        [ TF.assign "arguments" <$> TF.attribute _arguments
-        , TF.assign "arguments_json" <$> TF.attribute _argumentsJson
-        , TF.assign "auto_delete" <$> TF.attribute _autoDelete
-        , TF.assign "durable" <$> TF.attribute _durable
-        ]
-
 newSettings
     :: Settings s
 newSettings =
@@ -91,31 +85,49 @@ newSettings =
         , _durable = TF.value P.False
         }
 
+instance P.Hashable  (Settings s)
+instance TF.IsValue  (Settings s)
+instance TF.IsObject (Settings s) where
+    toObject Settings'{..} = P.catMaybes
+        [ TF.assign "arguments" <$> TF.attribute _arguments
+        , TF.assign "arguments_json" <$> TF.attribute _argumentsJson
+        , TF.assign "auto_delete" <$> TF.attribute _autoDelete
+        , TF.assign "durable" <$> TF.attribute _durable
+        ]
+
+instance TF.IsValid (Settings s) where
+    validator = TF.fieldsValidator (\Settings'{..} -> Map.fromList $ P.catMaybes
+        [ if (_arguments P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_arguments",
+                            [ "_argumentsJson"
+                            ])
+        , if (_argumentsJson P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_argumentsJson",
+                            [ "_arguments"
+                            ])
+        ])
+
 instance P.HasArguments (Settings s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     arguments =
         P.lens (_arguments :: Settings s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _arguments = a
-                          , _argumentsJson = TF.Nil
-                          } :: Settings s)
+               (\s a -> s { _arguments = a } :: Settings s)
 
 instance P.HasArgumentsJson (Settings s) (TF.Attr s P.Text) where
     argumentsJson =
         P.lens (_argumentsJson :: Settings s -> TF.Attr s P.Text)
-               (\s a -> s { _argumentsJson = a
-                          , _arguments = TF.Nil
-                          } :: Settings s)
+               (\s a -> s { _argumentsJson = a } :: Settings s)
 
 instance P.HasAutoDelete (Settings s) (TF.Attr s P.Bool) where
     autoDelete =
         P.lens (_autoDelete :: Settings s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoDelete = a
-                          } :: Settings s)
+               (\s a -> s { _autoDelete = a } :: Settings s)
 
 instance P.HasDurable (Settings s) (TF.Attr s P.Bool) where
     durable =
         P.lens (_durable :: Settings s -> TF.Attr s P.Bool)
-               (\s a -> s { _durable = a
-                          } :: Settings s)
+               (\s a -> s { _durable = a } :: Settings s)
 
 -- | @permissions@ nested settings.
 data Permissions s = Permissions'
@@ -130,15 +142,6 @@ data Permissions s = Permissions'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Permissions s)
-instance TF.IsValue  (Permissions s)
-instance TF.IsObject (Permissions s) where
-    toObject Permissions'{..} = catMaybes
-        [ TF.assign "configure" <$> TF.attribute _configure
-        , TF.assign "read" <$> TF.attribute _read
-        , TF.assign "write" <$> TF.attribute _write
-        ]
-
 newPermissions
     :: TF.Attr s P.Text -- ^ @configure@ - 'P.configure'
     -> TF.Attr s P.Text -- ^ @read@ - 'P.read'
@@ -151,23 +154,32 @@ newPermissions _configure _read _write =
         , _write = _write
         }
 
+instance P.Hashable  (Permissions s)
+instance TF.IsValue  (Permissions s)
+instance TF.IsObject (Permissions s) where
+    toObject Permissions'{..} = P.catMaybes
+        [ TF.assign "configure" <$> TF.attribute _configure
+        , TF.assign "read" <$> TF.attribute _read
+        , TF.assign "write" <$> TF.attribute _write
+        ]
+
+instance TF.IsValid (Permissions s) where
+    validator = P.mempty
+
 instance P.HasConfigure (Permissions s) (TF.Attr s P.Text) where
     configure =
         P.lens (_configure :: Permissions s -> TF.Attr s P.Text)
-               (\s a -> s { _configure = a
-                          } :: Permissions s)
+               (\s a -> s { _configure = a } :: Permissions s)
 
 instance P.HasRead (Permissions s) (TF.Attr s P.Text) where
     read =
         P.lens (_read :: Permissions s -> TF.Attr s P.Text)
-               (\s a -> s { _read = a
-                          } :: Permissions s)
+               (\s a -> s { _read = a } :: Permissions s)
 
 instance P.HasWrite (Permissions s) (TF.Attr s P.Text) where
     write =
         P.lens (_write :: Permissions s -> TF.Attr s P.Text)
-               (\s a -> s { _write = a
-                          } :: Permissions s)
+               (\s a -> s { _write = a } :: Permissions s)
 
 -- | @policy@ nested settings.
 data Policy s = Policy'
@@ -185,16 +197,6 @@ data Policy s = Policy'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Policy s)
-instance TF.IsValue  (Policy s)
-instance TF.IsObject (Policy s) where
-    toObject Policy'{..} = catMaybes
-        [ TF.assign "apply_to" <$> TF.attribute _applyTo
-        , TF.assign "definition" <$> TF.attribute _definition
-        , TF.assign "pattern" <$> TF.attribute _pattern'
-        , TF.assign "priority" <$> TF.attribute _priority
-        ]
-
 newPolicy
     :: TF.Attr s P.Text -- ^ @apply_to@ - 'P.applyTo'
     -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @definition@ - 'P.definition'
@@ -209,26 +211,35 @@ newPolicy _applyTo _definition _pattern' _priority =
         , _priority = _priority
         }
 
+instance P.Hashable  (Policy s)
+instance TF.IsValue  (Policy s)
+instance TF.IsObject (Policy s) where
+    toObject Policy'{..} = P.catMaybes
+        [ TF.assign "apply_to" <$> TF.attribute _applyTo
+        , TF.assign "definition" <$> TF.attribute _definition
+        , TF.assign "pattern" <$> TF.attribute _pattern'
+        , TF.assign "priority" <$> TF.attribute _priority
+        ]
+
+instance TF.IsValid (Policy s) where
+    validator = P.mempty
+
 instance P.HasApplyTo (Policy s) (TF.Attr s P.Text) where
     applyTo =
         P.lens (_applyTo :: Policy s -> TF.Attr s P.Text)
-               (\s a -> s { _applyTo = a
-                          } :: Policy s)
+               (\s a -> s { _applyTo = a } :: Policy s)
 
 instance P.HasDefinition (Policy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     definition =
         P.lens (_definition :: Policy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _definition = a
-                          } :: Policy s)
+               (\s a -> s { _definition = a } :: Policy s)
 
 instance P.HasPattern' (Policy s) (TF.Attr s P.Text) where
     pattern' =
         P.lens (_pattern' :: Policy s -> TF.Attr s P.Text)
-               (\s a -> s { _pattern' = a
-                          } :: Policy s)
+               (\s a -> s { _pattern' = a } :: Policy s)
 
 instance P.HasPriority (Policy s) (TF.Attr s P.Integer) where
     priority =
         P.lens (_priority :: Policy s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a
-                          } :: Policy s)
+               (\s a -> s { _priority = a } :: Policy s)
