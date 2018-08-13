@@ -124,7 +124,6 @@ module Terrafomo.Vault.Lens
     , HasComputedLeaseDuration (..)
     , HasComputedClientToken (..)
     , HasComputedRegion (..)
-    , HasComputedData' (..)
     , HasComputedSecurityToken (..)
     , HasComputedRoleId (..)
     , HasComputedAccessor (..)
@@ -143,6 +142,7 @@ module Terrafomo.Vault.Lens
     , HasComputedUser (..)
     , HasComputedPolicies (..)
     , HasComputedTagKey (..)
+    , HasComputedData (..)
     , HasComputedRole (..)
     , HasComputedAllowInstanceMigration (..)
     , HasComputedLeaseStartTime (..)
@@ -787,9 +787,6 @@ class HasComputedClientToken a b | a -> b where
 class HasComputedRegion a b | a -> b where
     computedRegion :: a -> b
 
-class HasComputedData' a b | a -> b where
-    computedData' :: a -> b
-
 class HasComputedSecurityToken a b | a -> b where
     computedSecurityToken :: a -> b
 
@@ -843,6 +840,9 @@ class HasComputedPolicies a b | a -> b where
 
 class HasComputedTagKey a b | a -> b where
     computedTagKey :: a -> b
+
+class HasComputedData a b | a -> b where
+    computedData :: a -> b
 
 class HasComputedRole a b | a -> b where
     computedRole :: a -> b

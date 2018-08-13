@@ -181,25 +181,25 @@ instance P.HasSecretId (ApproleAuthBackendLoginResource s) (TF.Attr s P.Text) wh
                           } :: ApproleAuthBackendLoginResource s)
 
 instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedAccessor x = TF.compute (TF.refKey x) "accessor"
+    computedAccessor x = TF.compute (TF.refKey x) "_computedAccessor"
 
 instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedClientToken x = TF.compute (TF.refKey x) "client_token"
+    computedClientToken x = TF.compute (TF.refKey x) "_computedClientToken"
 
 instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Integer) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
 
 instance s ~ s' => P.HasComputedLeaseStarted (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedLeaseStarted x = TF.compute (TF.refKey x) "lease_started"
+    computedLeaseStarted x = TF.compute (TF.refKey x) "_computedLeaseStarted"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
 
 instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedPolicies x = TF.compute (TF.refKey x) "policies"
+    computedPolicies x = TF.compute (TF.refKey x) "_computedPolicies"
 
 instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (ApproleAuthBackendLoginResource s)) (TF.Attr s P.Bool) where
-    computedRenewable x = TF.compute (TF.refKey x) "renewable"
+    computedRenewable x = TF.compute (TF.refKey x) "_computedRenewable"
 
 -- | @vault_approle_auth_backend_role@ Resource.
 --
@@ -360,7 +360,7 @@ instance P.HasTokenTtl (ApproleAuthBackendRoleResource s) (TF.Attr s P.Integer) 
                           } :: ApproleAuthBackendRoleResource s)
 
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleResource s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "role_id"
+    computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
 
 -- | @vault_approle_auth_backend_role_secret_id@ Resource.
 --
@@ -430,10 +430,10 @@ instance P.HasRoleName (ApproleAuthBackendRoleSecretIdResource s) (TF.Attr s P.T
                           } :: ApproleAuthBackendRoleSecretIdResource s)
 
 instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
-    computedAccessor x = TF.compute (TF.refKey x) "accessor"
+    computedAccessor x = TF.compute (TF.refKey x) "_computedAccessor"
 
 instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (ApproleAuthBackendRoleSecretIdResource s)) (TF.Attr s P.Text) where
-    computedSecretId x = TF.compute (TF.refKey x) "secret_id"
+    computedSecretId x = TF.compute (TF.refKey x) "_computedSecretId"
 
 -- | @vault_auth_backend@ Resource.
 --
@@ -479,7 +479,7 @@ instance P.HasType' (AuthBackendResource s) (TF.Attr s P.Text) where
                           } :: AuthBackendResource s)
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (AuthBackendResource s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+    computedPath x = TF.compute (TF.refKey x) "_computedPath"
 
 -- | @vault_aws_auth_backend_cert@ Resource.
 --
@@ -827,34 +827,34 @@ instance P.HasSignature (AwsAuthBackendLoginResource s) (TF.Attr s P.Text) where
                           } :: AwsAuthBackendLoginResource s)
 
 instance s ~ s' => P.HasComputedAccessor (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedAccessor x = TF.compute (TF.refKey x) "accessor"
+    computedAccessor x = TF.compute (TF.refKey x) "_computedAccessor"
 
 instance s ~ s' => P.HasComputedAuthType (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedAuthType x = TF.compute (TF.refKey x) "auth_type"
+    computedAuthType x = TF.compute (TF.refKey x) "_computedAuthType"
 
 instance s ~ s' => P.HasComputedClientToken (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedClientToken x = TF.compute (TF.refKey x) "client_token"
+    computedClientToken x = TF.compute (TF.refKey x) "_computedClientToken"
 
 instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Integer) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
 
 instance s ~ s' => P.HasComputedNonce (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedNonce x = TF.compute (TF.refKey x) "nonce"
+    computedNonce x = TF.compute (TF.refKey x) "_computedNonce"
 
 instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedPolicies x = TF.compute (TF.refKey x) "policies"
+    computedPolicies x = TF.compute (TF.refKey x) "_computedPolicies"
 
 instance s ~ s' => P.HasComputedRenewable (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Bool) where
-    computedRenewable x = TF.compute (TF.refKey x) "renewable"
+    computedRenewable x = TF.compute (TF.refKey x) "_computedRenewable"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (AwsAuthBackendLoginResource s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
+    computedRole x = TF.compute (TF.refKey x) "_computedRole"
 
 -- | @vault_aws_auth_backend_role@ Resource.
 --
@@ -1109,10 +1109,10 @@ instance P.HasTtl (AwsAuthBackendRoleResource s) (TF.Attr s P.Integer) where
                           } :: AwsAuthBackendRoleResource s)
 
 instance s ~ s' => P.HasComputedAllowInstanceMigration (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Bool) where
-    computedAllowInstanceMigration x = TF.compute (TF.refKey x) "allow_instance_migration"
+    computedAllowInstanceMigration x = TF.compute (TF.refKey x) "_computedAllowInstanceMigration"
 
 instance s ~ s' => P.HasComputedResolveAwsUniqueIds (TF.Ref s' (AwsAuthBackendRoleResource s)) (TF.Attr s P.Bool) where
-    computedResolveAwsUniqueIds x = TF.compute (TF.refKey x) "resolve_aws_unique_ids"
+    computedResolveAwsUniqueIds x = TF.compute (TF.refKey x) "_computedResolveAwsUniqueIds"
 
 -- | @vault_aws_auth_backend_role_tag@ Resource.
 --
@@ -1219,10 +1219,10 @@ instance P.HasRole (AwsAuthBackendRoleTagResource s) (TF.Attr s P.Text) where
                           } :: AwsAuthBackendRoleTagResource s)
 
 instance s ~ s' => P.HasComputedTagKey (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
-    computedTagKey x = TF.compute (TF.refKey x) "tag_key"
+    computedTagKey x = TF.compute (TF.refKey x) "_computedTagKey"
 
 instance s ~ s' => P.HasComputedTagValue (TF.Ref s' (AwsAuthBackendRoleTagResource s)) (TF.Attr s P.Text) where
-    computedTagValue x = TF.compute (TF.refKey x) "tag_value"
+    computedTagValue x = TF.compute (TF.refKey x) "_computedTagValue"
 
 -- | @vault_aws_auth_backend_sts_role@ Resource.
 --
@@ -1350,13 +1350,13 @@ instance P.HasSecretKey (AwsSecretBackendResource s) (TF.Attr s P.Text) where
                           } :: AwsSecretBackendResource s)
 
 instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Integer) where
-    computedDefaultLeaseTtlSeconds x = TF.compute (TF.refKey x) "default_lease_ttl_seconds"
+    computedDefaultLeaseTtlSeconds x = TF.compute (TF.refKey x) "_computedDefaultLeaseTtlSeconds"
 
 instance s ~ s' => P.HasComputedMaxLeaseTtlSeconds (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Integer) where
-    computedMaxLeaseTtlSeconds x = TF.compute (TF.refKey x) "max_lease_ttl_seconds"
+    computedMaxLeaseTtlSeconds x = TF.compute (TF.refKey x) "_computedMaxLeaseTtlSeconds"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AwsSecretBackendResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 -- | @vault_aws_secret_backend_role@ Resource.
 --
@@ -1447,7 +1447,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- ^ @backend@ - (Required)
     -- Unique name of the Vault mount to configure.
     --
-    , _cassandra        :: TF.Attr s [Cassandra s]
+    , _cassandra        :: TF.Attr s (Cassandra s)
     -- ^ @cassandra@ - (Optional)
     -- Connection parameters for the cassandra-database-plugin plugin.
     --
@@ -1459,7 +1459,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mssql'
     -- * 'postgresql'
     -- * 'hana'
-    , _hana             :: TF.Attr s [Hana s]
+    , _hana             :: TF.Attr s (Hana s)
     -- ^ @hana@ - (Optional)
     -- Connection parameters for the hana-database-plugin plugin.
     --
@@ -1471,7 +1471,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mysql'
     -- * 'mssql'
     -- * 'postgresql'
-    , _mongodb          :: TF.Attr s [Mongodb s]
+    , _mongodb          :: TF.Attr s (Mongodb s)
     -- ^ @mongodb@ - (Optional)
     -- Connection parameters for the mongodb-database-plugin plugin.
     --
@@ -1483,7 +1483,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mssql'
     -- * 'postgresql'
     -- * 'hana'
-    , _mssql            :: TF.Attr s [Mssql s]
+    , _mssql            :: TF.Attr s (Mssql s)
     -- ^ @mssql@ - (Optional)
     -- Connection parameters for the mssql-database-plugin plugin.
     --
@@ -1495,7 +1495,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mysql'
     -- * 'postgresql'
     -- * 'hana'
-    , _mysql            :: TF.Attr s [Mysql s]
+    , _mysql            :: TF.Attr s (Mysql s)
     -- ^ @mysql@ - (Optional)
     -- Connection parameters for the mysql-database-plugin plugin.
     --
@@ -1511,7 +1511,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- ^ @name@ - (Required)
     -- Name of the database connection.
     --
-    , _oracle           :: TF.Attr s [Oracle s]
+    , _oracle           :: TF.Attr s (Oracle s)
     -- ^ @oracle@ - (Optional)
     -- Connection parameters for the oracle-database-plugin plugin.
     --
@@ -1523,7 +1523,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mssql'
     -- * 'postgresql'
     -- * 'hana'
-    , _postgresql       :: TF.Attr s [Postgresql s]
+    , _postgresql       :: TF.Attr s (Postgresql s)
     -- ^ @postgresql@ - (Optional)
     -- Connection parameters for the postgresql-database-plugin plugin.
     --
@@ -1588,9 +1588,9 @@ instance P.HasBackend (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.T
                (\s a -> s { _backend = a
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Cassandra s]) where
+instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Cassandra s)) where
     cassandra =
-        P.lens (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Cassandra s])
+        P.lens (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Cassandra s))
                (\s a -> s { _cassandra = a
                           , _oracle = TF.Nil
                           , _mongodb = TF.Nil
@@ -1600,9 +1600,9 @@ instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) (TF.Attr s [
                           , _hana = TF.Nil
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasHana (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Hana s]) where
+instance P.HasHana (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Hana s)) where
     hana =
-        P.lens (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Hana s])
+        P.lens (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Hana s))
                (\s a -> s { _hana = a
                           , _cassandra = TF.Nil
                           , _oracle = TF.Nil
@@ -1612,9 +1612,9 @@ instance P.HasHana (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Hana 
                           , _postgresql = TF.Nil
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Mongodb s]) where
+instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Mongodb s)) where
     mongodb =
-        P.lens (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Mongodb s])
+        P.lens (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Mongodb s))
                (\s a -> s { _mongodb = a
                           , _cassandra = TF.Nil
                           , _oracle = TF.Nil
@@ -1624,9 +1624,9 @@ instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Mo
                           , _hana = TF.Nil
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMssql (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Mssql s]) where
+instance P.HasMssql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Mssql s)) where
     mssql =
-        P.lens (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Mssql s])
+        P.lens (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Mssql s))
                (\s a -> s { _mssql = a
                           , _cassandra = TF.Nil
                           , _oracle = TF.Nil
@@ -1636,9 +1636,9 @@ instance P.HasMssql (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Mssq
                           , _hana = TF.Nil
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMysql (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Mysql s]) where
+instance P.HasMysql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Mysql s)) where
     mysql =
-        P.lens (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Mysql s])
+        P.lens (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Mysql s))
                (\s a -> s { _mysql = a
                           , _cassandra = TF.Nil
                           , _oracle = TF.Nil
@@ -1654,9 +1654,9 @@ instance P.HasName (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text
                (\s a -> s { _name = a
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasOracle (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Oracle s]) where
+instance P.HasOracle (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Oracle s)) where
     oracle =
-        P.lens (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Oracle s])
+        P.lens (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Oracle s))
                (\s a -> s { _oracle = a
                           , _cassandra = TF.Nil
                           , _mongodb = TF.Nil
@@ -1666,9 +1666,9 @@ instance P.HasOracle (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Ora
                           , _hana = TF.Nil
                           } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasPostgresql (DatabaseSecretBackendConnectionResource s) (TF.Attr s [Postgresql s]) where
+instance P.HasPostgresql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (Postgresql s)) where
     postgresql =
-        P.lens (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s [Postgresql s])
+        P.lens (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (Postgresql s))
                (\s a -> s { _postgresql = a
                           , _cassandra = TF.Nil
                           , _oracle = TF.Nil
@@ -1941,10 +1941,10 @@ instance P.HasType' (MountResource s) (TF.Attr s P.Text) where
                           } :: MountResource s)
 
 instance s ~ s' => P.HasComputedDefaultLeaseTtlSeconds (TF.Ref s' (MountResource s)) (TF.Attr s P.Integer) where
-    computedDefaultLeaseTtlSeconds x = TF.compute (TF.refKey x) "default_lease_ttl_seconds"
+    computedDefaultLeaseTtlSeconds x = TF.compute (TF.refKey x) "_computedDefaultLeaseTtlSeconds"
 
 instance s ~ s' => P.HasComputedMaxLeaseTtlSeconds (TF.Ref s' (MountResource s)) (TF.Attr s P.Integer) where
-    computedMaxLeaseTtlSeconds x = TF.compute (TF.refKey x) "max_lease_ttl_seconds"
+    computedMaxLeaseTtlSeconds x = TF.compute (TF.refKey x) "_computedMaxLeaseTtlSeconds"
 
 -- | @vault_okta_auth_backend@ Resource.
 --
@@ -2053,10 +2053,10 @@ instance P.HasTtl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
                           } :: OktaAuthBackendResource s)
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (Group s)]) where
-    computedGroup x = TF.compute (TF.refKey x) "group"
+    computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
 
 instance s ~ s' => P.HasComputedUser (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (User s)]) where
-    computedUser x = TF.compute (TF.refKey x) "user"
+    computedUser x = TF.compute (TF.refKey x) "_computedUser"
 
 -- | @vault_okta_auth_backend_group@ Resource.
 --

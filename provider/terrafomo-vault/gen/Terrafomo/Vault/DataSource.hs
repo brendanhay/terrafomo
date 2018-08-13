@@ -97,7 +97,7 @@ instance P.HasRoleName (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
                           } :: ApproleAuthBackendRoleIdData s)
 
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleIdData s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "role_id"
+    computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
 
 -- | @vault_aws_access_credentials@ DataSource.
 --
@@ -157,25 +157,25 @@ instance P.HasType' (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
                           } :: AwsAccessCredentialsData s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
+    computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
 
 instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Integer) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
+    computedLeaseId x = TF.compute (TF.refKey x) "_computedLeaseId"
 
 instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Bool) where
-    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "_computedLeaseRenewable"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"
 
 instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
+    computedSecretKey x = TF.compute (TF.refKey x) "_computedSecretKey"
 
 instance s ~ s' => P.HasComputedSecurityToken (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedSecurityToken x = TF.compute (TF.refKey x) "security_token"
+    computedSecurityToken x = TF.compute (TF.refKey x) "_computedSecurityToken"
 
 -- | @vault_generic_secret@ DataSource.
 --
@@ -208,20 +208,20 @@ instance P.HasPath (GenericSecretData s) (TF.Attr s P.Text) where
                (\s a -> s { _path = a
                           } :: GenericSecretData s)
 
-instance s ~ s' => P.HasComputedData' (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedData' x = TF.compute (TF.refKey x) "data"
+instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedData x = TF.compute (TF.refKey x) "_computedData"
 
 instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedDataJson x = TF.compute (TF.refKey x) "data_json"
+    computedDataJson x = TF.compute (TF.refKey x) "_computedDataJson"
 
 instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Integer) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
+    computedLeaseId x = TF.compute (TF.refKey x) "_computedLeaseId"
 
 instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Bool) where
-    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "_computedLeaseRenewable"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"
