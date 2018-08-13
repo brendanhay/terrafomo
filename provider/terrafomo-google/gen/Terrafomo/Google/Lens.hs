@@ -700,6 +700,7 @@ module Terrafomo.Google.Lens
     , HasComputedFeatureSettings (..)
     , HasComputedZone (..)
     , HasComputedInitializeParams (..)
+    , HasComputedType (..)
     , HasComputedPrivateCluster (..)
     , HasComputedOauth2ClientId (..)
     , HasComputedMode (..)
@@ -707,7 +708,6 @@ module Terrafomo.Google.Lens
     , HasComputedIssueClientCertificate (..)
     , HasComputedAvailabilityType (..)
     , HasComputedCurrentLocationId (..)
-    , HasComputedFamily' (..)
     , HasComputedGatewayIpv4 (..)
     , HasComputedNodePool (..)
     , HasComputedNumLocalSsds (..)
@@ -737,6 +737,7 @@ module Terrafomo.Google.Lens
     , HasComputedFirstIpAddress (..)
     , HasComputedStateDetails (..)
     , HasComputedCommonName (..)
+    , HasComputedFamily (..)
     , HasComputedImageVersion (..)
     , HasComputedClusterUuid (..)
     , HasComputedBucket (..)
@@ -757,7 +758,6 @@ module Terrafomo.Google.Lens
     , HasComputedMaxConnectionsPerInstance (..)
     , HasComputedDefaultBucket (..)
     , HasComputedSplitHealthChecks (..)
-    , HasComputedType' (..)
     , HasComputedTimeout (..)
     , HasComputedSnapshotEncryptionKeySha256 (..)
     , HasComputedValidNodeVersions (..)
@@ -4094,6 +4094,9 @@ class HasComputedZone a b | a -> b where
 class HasComputedInitializeParams a b | a -> b where
     computedInitializeParams :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedPrivateCluster a b | a -> b where
     computedPrivateCluster :: a -> b
 
@@ -4114,9 +4117,6 @@ class HasComputedAvailabilityType a b | a -> b where
 
 class HasComputedCurrentLocationId a b | a -> b where
     computedCurrentLocationId :: a -> b
-
-class HasComputedFamily' a b | a -> b where
-    computedFamily' :: a -> b
 
 class HasComputedGatewayIpv4 a b | a -> b where
     computedGatewayIpv4 :: a -> b
@@ -4205,6 +4205,9 @@ class HasComputedStateDetails a b | a -> b where
 class HasComputedCommonName a b | a -> b where
     computedCommonName :: a -> b
 
+class HasComputedFamily a b | a -> b where
+    computedFamily :: a -> b
+
 class HasComputedImageVersion a b | a -> b where
     computedImageVersion :: a -> b
 
@@ -4264,9 +4267,6 @@ class HasComputedDefaultBucket a b | a -> b where
 
 class HasComputedSplitHealthChecks a b | a -> b where
     computedSplitHealthChecks :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedTimeout a b | a -> b where
     computedTimeout :: a -> b

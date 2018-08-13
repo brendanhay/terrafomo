@@ -518,6 +518,8 @@ module Terrafomo.Google.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
@@ -570,19 +572,19 @@ instance P.HasAliasIpRange (NetworkInterface s) (TF.Attr s [AliasIpRange s]) whe
                           } :: NetworkInterface s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedNetworkIp (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedNetworkIp x = TF.compute (TF.refKey x) "network_ip"
+    computedNetworkIp x = TF.compute (TF.refKey x) "_computedNetworkIp"
 
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedSubnetwork x = TF.compute (TF.refKey x) "subnetwork"
+    computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
 
 instance s ~ s' => P.HasComputedSubnetworkProject (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedSubnetworkProject x = TF.compute (TF.refKey x) "subnetwork_project"
+    computedSubnetworkProject x = TF.compute (TF.refKey x) "_computedSubnetworkProject"
 
 -- | @secondary_ip_range@ nested settings.
 data SecondaryIpRange s = SecondaryIpRange'
@@ -599,10 +601,10 @@ newSecondaryIpRange =
     SecondaryIpRange'
 
 instance s ~ s' => P.HasComputedIpCidrRange (TF.Ref s' (SecondaryIpRange s)) (TF.Attr s P.Text) where
-    computedIpCidrRange x = TF.compute (TF.refKey x) "ip_cidr_range"
+    computedIpCidrRange x = TF.compute (TF.refKey x) "_computedIpCidrRange"
 
 instance s ~ s' => P.HasComputedRangeName (TF.Ref s' (SecondaryIpRange s)) (TF.Attr s P.Text) where
-    computedRangeName x = TF.compute (TF.refKey x) "range_name"
+    computedRangeName x = TF.compute (TF.refKey x) "_computedRangeName"
 
 -- | @status@ nested settings.
 data Status s = Status'
@@ -619,16 +621,16 @@ newStatus =
     Status'
 
 instance s ~ s' => P.HasComputedDetails (TF.Ref s' (Status s)) (TF.Attr s P.Text) where
-    computedDetails x = TF.compute (TF.refKey x) "details"
+    computedDetails x = TF.compute (TF.refKey x) "_computedDetails"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (Status s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedStateStartTime (TF.Ref s' (Status s)) (TF.Attr s P.Text) where
-    computedStateStartTime x = TF.compute (TF.refKey x) "state_start_time"
+    computedStateStartTime x = TF.compute (TF.refKey x) "_computedStateStartTime"
 
 instance s ~ s' => P.HasComputedSubstate (TF.Ref s' (Status s)) (TF.Attr s P.Text) where
-    computedSubstate x = TF.compute (TF.refKey x) "substate"
+    computedSubstate x = TF.compute (TF.refKey x) "_computedSubstate"
 
 -- | @boot_disk@ nested settings.
 data BootDisk s = BootDisk'
@@ -645,22 +647,22 @@ newBootDisk =
     BootDisk'
 
 instance s ~ s' => P.HasComputedAutoDelete (TF.Ref s' (BootDisk s)) (TF.Attr s P.Bool) where
-    computedAutoDelete x = TF.compute (TF.refKey x) "auto_delete"
+    computedAutoDelete x = TF.compute (TF.refKey x) "_computedAutoDelete"
 
 instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (BootDisk s)) (TF.Attr s P.Text) where
-    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+    computedDeviceName x = TF.compute (TF.refKey x) "_computedDeviceName"
 
 instance s ~ s' => P.HasComputedDiskEncryptionKeyRaw (TF.Ref s' (BootDisk s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeyRaw x = TF.compute (TF.refKey x) "disk_encryption_key_raw"
+    computedDiskEncryptionKeyRaw x = TF.compute (TF.refKey x) "_computedDiskEncryptionKeyRaw"
 
 instance s ~ s' => P.HasComputedDiskEncryptionKeySha256 (TF.Ref s' (BootDisk s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "disk_encryption_key_sha256"
+    computedDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedDiskEncryptionKeySha256"
 
-instance s ~ s' => P.HasComputedInitializeParams (TF.Ref s' (BootDisk s)) (TF.Attr s [InitializeParams s]) where
-    computedInitializeParams x = TF.compute (TF.refKey x) "initialize_params"
+instance s ~ s' => P.HasComputedInitializeParams (TF.Ref s' (BootDisk s)) (TF.Attr s (InitializeParams s)) where
+    computedInitializeParams x = TF.compute (TF.refKey x) "_computedInitializeParams"
 
 instance s ~ s' => P.HasComputedSource (TF.Ref s' (BootDisk s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
+    computedSource x = TF.compute (TF.refKey x) "_computedSource"
 
 -- | @hive_config@ nested settings.
 data HiveConfig s = HiveConfig'
@@ -883,10 +885,10 @@ newAutoscaling =
     Autoscaling'
 
 instance s ~ s' => P.HasComputedMaxNodeCount (TF.Ref s' (Autoscaling s)) (TF.Attr s P.Integer) where
-    computedMaxNodeCount x = TF.compute (TF.refKey x) "max_node_count"
+    computedMaxNodeCount x = TF.compute (TF.refKey x) "_computedMaxNodeCount"
 
 instance s ~ s' => P.HasComputedMinNodeCount (TF.Ref s' (Autoscaling s)) (TF.Attr s P.Integer) where
-    computedMinNodeCount x = TF.compute (TF.refKey x) "min_node_count"
+    computedMinNodeCount x = TF.compute (TF.refKey x) "_computedMinNodeCount"
 
 -- | @config@ nested settings.
 data Config s = Config'
@@ -946,13 +948,13 @@ instance P.HasHttpEnabledState (HttpConfig s) (TF.Attr s P.Text) where
 
 -- | @list_policy@ nested settings.
 data ListPolicy s = ListPolicy'
-    { _allow :: TF.Attr s [Allow s]
+    { _allow :: TF.Attr s (Allow s)
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny  :: TF.Attr s [Deny s]
+    , _deny  :: TF.Attr s (Deny s)
     -- ^ @deny@ - (Optional)
     --
     -- Conflicts with:
@@ -976,22 +978,22 @@ newListPolicy =
         , _deny = TF.Nil
         }
 
-instance P.HasAllow (ListPolicy s) (TF.Attr s [Allow s]) where
+instance P.HasAllow (ListPolicy s) (TF.Attr s (Allow s)) where
     allow =
-        P.lens (_allow :: ListPolicy s -> TF.Attr s [Allow s])
+        P.lens (_allow :: ListPolicy s -> TF.Attr s (Allow s))
                (\s a -> s { _allow = a
                           , _deny = TF.Nil
                           } :: ListPolicy s)
 
-instance P.HasDeny (ListPolicy s) (TF.Attr s [Deny s]) where
+instance P.HasDeny (ListPolicy s) (TF.Attr s (Deny s)) where
     deny =
-        P.lens (_deny :: ListPolicy s -> TF.Attr s [Deny s])
+        P.lens (_deny :: ListPolicy s -> TF.Attr s (Deny s))
                (\s a -> s { _deny = a
                           , _allow = TF.Nil
                           } :: ListPolicy s)
 
 instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (ListPolicy s)) (TF.Attr s P.Text) where
-    computedSuggestedValue x = TF.compute (TF.refKey x) "suggested_value"
+    computedSuggestedValue x = TF.compute (TF.refKey x) "_computedSuggestedValue"
 
 -- | @named_port@ nested settings.
 data NamedPort s = NamedPort'
@@ -1008,10 +1010,10 @@ newNamedPort =
     NamedPort'
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NamedPort s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (NamedPort s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 -- | @disk@ nested settings.
 data Disk s = Disk'
@@ -1085,22 +1087,22 @@ instance P.HasSourceImage (Disk s) (TF.Attr s P.Text) where
                           } :: Disk s)
 
 instance s ~ s' => P.HasComputedBoot (TF.Ref s' (Disk s)) (TF.Attr s P.Bool) where
-    computedBoot x = TF.compute (TF.refKey x) "boot"
+    computedBoot x = TF.compute (TF.refKey x) "_computedBoot"
 
 instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+    computedDeviceName x = TF.compute (TF.refKey x) "_computedDeviceName"
 
 instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
+    computedDiskType x = TF.compute (TF.refKey x) "_computedDiskType"
 
 instance s ~ s' => P.HasComputedInterface (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedInterface x = TF.compute (TF.refKey x) "interface"
+    computedInterface x = TF.compute (TF.refKey x) "_computedInterface"
 
 instance s ~ s' => P.HasComputedMode (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedMode x = TF.compute (TF.refKey x) "mode"
+    computedMode x = TF.compute (TF.refKey x) "_computedMode"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (Disk s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @disk_encryption_key@ nested settings.
 data DiskEncryptionKey s = DiskEncryptionKey'
@@ -1130,7 +1132,7 @@ instance P.HasRawKey (DiskEncryptionKey s) (TF.Attr s P.Text) where
                           } :: DiskEncryptionKey s)
 
 instance s ~ s' => P.HasComputedSha256 (TF.Ref s' (DiskEncryptionKey s)) (TF.Attr s P.Text) where
-    computedSha256 x = TF.compute (TF.refKey x) "sha256"
+    computedSha256 x = TF.compute (TF.refKey x) "_computedSha256"
 
 -- | @settings@ nested settings.
 data Settings s = Settings'
@@ -1143,7 +1145,7 @@ data Settings s = Settings'
     , _diskAutoresize :: TF.Attr s P.Bool
     -- ^ @disk_autoresize@ - (Optional)
     --
-    , _maintenanceWindow :: TF.Attr s [MaintenanceWindow s]
+    , _maintenanceWindow :: TF.Attr s (MaintenanceWindow s)
     -- ^ @maintenance_window@ - (Optional)
     --
     , _pricingPlan :: TF.Attr s P.Text
@@ -1207,9 +1209,9 @@ instance P.HasDiskAutoresize (Settings s) (TF.Attr s P.Bool) where
                (\s a -> s { _diskAutoresize = a
                           } :: Settings s)
 
-instance P.HasMaintenanceWindow (Settings s) (TF.Attr s [MaintenanceWindow s]) where
+instance P.HasMaintenanceWindow (Settings s) (TF.Attr s (MaintenanceWindow s)) where
     maintenanceWindow =
-        P.lens (_maintenanceWindow :: Settings s -> TF.Attr s [MaintenanceWindow s])
+        P.lens (_maintenanceWindow :: Settings s -> TF.Attr s (MaintenanceWindow s))
                (\s a -> s { _maintenanceWindow = a
                           } :: Settings s)
 
@@ -1238,31 +1240,31 @@ instance P.HasUserLabels (Settings s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.
                           } :: Settings s)
 
 instance s ~ s' => P.HasComputedActivationPolicy (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedActivationPolicy x = TF.compute (TF.refKey x) "activation_policy"
+    computedActivationPolicy x = TF.compute (TF.refKey x) "_computedActivationPolicy"
 
 instance s ~ s' => P.HasComputedAvailabilityType (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAvailabilityType x = TF.compute (TF.refKey x) "availability_type"
+    computedAvailabilityType x = TF.compute (TF.refKey x) "_computedAvailabilityType"
 
-instance s ~ s' => P.HasComputedBackupConfiguration (TF.Ref s' (Settings s)) (TF.Attr s [BackupConfiguration s]) where
-    computedBackupConfiguration x = TF.compute (TF.refKey x) "backup_configuration"
+instance s ~ s' => P.HasComputedBackupConfiguration (TF.Ref s' (Settings s)) (TF.Attr s (BackupConfiguration s)) where
+    computedBackupConfiguration x = TF.compute (TF.refKey x) "_computedBackupConfiguration"
 
 instance s ~ s' => P.HasComputedCrashSafeReplication (TF.Ref s' (Settings s)) (TF.Attr s P.Bool) where
-    computedCrashSafeReplication x = TF.compute (TF.refKey x) "crash_safe_replication"
+    computedCrashSafeReplication x = TF.compute (TF.refKey x) "_computedCrashSafeReplication"
 
 instance s ~ s' => P.HasComputedDiskSize (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedDiskSize x = TF.compute (TF.refKey x) "disk_size"
+    computedDiskSize x = TF.compute (TF.refKey x) "_computedDiskSize"
 
 instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
+    computedDiskType x = TF.compute (TF.refKey x) "_computedDiskType"
 
-instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (Settings s)) (TF.Attr s [IpConfiguration s]) where
-    computedIpConfiguration x = TF.compute (TF.refKey x) "ip_configuration"
+instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (Settings s)) (TF.Attr s (IpConfiguration s)) where
+    computedIpConfiguration x = TF.compute (TF.refKey x) "_computedIpConfiguration"
 
-instance s ~ s' => P.HasComputedLocationPreference (TF.Ref s' (Settings s)) (TF.Attr s [LocationPreference s]) where
-    computedLocationPreference x = TF.compute (TF.refKey x) "location_preference"
+instance s ~ s' => P.HasComputedLocationPreference (TF.Ref s' (Settings s)) (TF.Attr s (LocationPreference s)) where
+    computedLocationPreference x = TF.compute (TF.refKey x) "_computedLocationPreference"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @bgp@ nested settings.
 data Bgp s = Bgp'
@@ -1426,21 +1428,21 @@ newPreemptibleWorkerConfig
 newPreemptibleWorkerConfig =
     PreemptibleWorkerConfig'
 
-instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (PreemptibleWorkerConfig s)) (TF.Attr s [DiskConfig s]) where
-    computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
+instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (PreemptibleWorkerConfig s)) (TF.Attr s (DiskConfig s)) where
+    computedDiskConfig x = TF.compute (TF.refKey x) "_computedDiskConfig"
 
 instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (PreemptibleWorkerConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceNames x = TF.compute (TF.refKey x) "instance_names"
+    computedInstanceNames x = TF.compute (TF.refKey x) "_computedInstanceNames"
 
 instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (PreemptibleWorkerConfig s)) (TF.Attr s P.Integer) where
-    computedNumInstances x = TF.compute (TF.refKey x) "num_instances"
+    computedNumInstances x = TF.compute (TF.refKey x) "_computedNumInstances"
 
 -- | @autoscaling_policy@ nested settings.
 data AutoscalingPolicy s = AutoscalingPolicy'
     { _cooldownPeriod           :: TF.Attr s P.Integer
     -- ^ @cooldown_period@ - (Optional)
     --
-    , _loadBalancingUtilization :: TF.Attr s [LoadBalancingUtilization s]
+    , _loadBalancingUtilization :: TF.Attr s (LoadBalancingUtilization s)
     -- ^ @load_balancing_utilization@ - (Optional)
     --
     , _maxReplicas              :: TF.Attr s P.Integer
@@ -1484,9 +1486,9 @@ instance P.HasCooldownPeriod (AutoscalingPolicy s) (TF.Attr s P.Integer) where
                (\s a -> s { _cooldownPeriod = a
                           } :: AutoscalingPolicy s)
 
-instance P.HasLoadBalancingUtilization (AutoscalingPolicy s) (TF.Attr s [LoadBalancingUtilization s]) where
+instance P.HasLoadBalancingUtilization (AutoscalingPolicy s) (TF.Attr s (LoadBalancingUtilization s)) where
     loadBalancingUtilization =
-        P.lens (_loadBalancingUtilization :: AutoscalingPolicy s -> TF.Attr s [LoadBalancingUtilization s])
+        P.lens (_loadBalancingUtilization :: AutoscalingPolicy s -> TF.Attr s (LoadBalancingUtilization s))
                (\s a -> s { _loadBalancingUtilization = a
                           } :: AutoscalingPolicy s)
 
@@ -1508,8 +1510,8 @@ instance P.HasMinReplicas (AutoscalingPolicy s) (TF.Attr s P.Integer) where
                (\s a -> s { _minReplicas = a
                           } :: AutoscalingPolicy s)
 
-instance s ~ s' => P.HasComputedCpuUtilization (TF.Ref s' (AutoscalingPolicy s)) (TF.Attr s [CpuUtilization s]) where
-    computedCpuUtilization x = TF.compute (TF.refKey x) "cpu_utilization"
+instance s ~ s' => P.HasComputedCpuUtilization (TF.Ref s' (AutoscalingPolicy s)) (TF.Attr s (CpuUtilization s)) where
+    computedCpuUtilization x = TF.compute (TF.refKey x) "_computedCpuUtilization"
 
 -- | @credentials@ nested settings.
 data Credentials s = Credentials'
@@ -1553,10 +1555,10 @@ newDailyMaintenanceWindow =
     DailyMaintenanceWindow'
 
 instance s ~ s' => P.HasComputedDuration (TF.Ref s' (DailyMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computedDuration x = TF.compute (TF.refKey x) "duration"
+    computedDuration x = TF.compute (TF.refKey x) "_computedDuration"
 
 instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (DailyMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+    computedStartTime x = TF.compute (TF.refKey x) "_computedStartTime"
 
 -- | @iap@ nested settings.
 data Iap s = Iap'
@@ -1573,10 +1575,10 @@ newIap =
     Iap'
 
 instance s ~ s' => P.HasComputedOauth2ClientId (TF.Ref s' (Iap s)) (TF.Attr s P.Text) where
-    computedOauth2ClientId x = TF.compute (TF.refKey x) "oauth2_client_id"
+    computedOauth2ClientId x = TF.compute (TF.refKey x) "_computedOauth2ClientId"
 
 instance s ~ s' => P.HasComputedOauth2ClientSecret (TF.Ref s' (Iap s)) (TF.Attr s P.Text) where
-    computedOauth2ClientSecret x = TF.compute (TF.refKey x) "oauth2_client_secret"
+    computedOauth2ClientSecret x = TF.compute (TF.refKey x) "_computedOauth2ClientSecret"
 
 -- | @disk_config@ nested settings.
 data DiskConfig s = DiskConfig'
@@ -1593,10 +1595,10 @@ newDiskConfig =
     DiskConfig'
 
 instance s ~ s' => P.HasComputedBootDiskSizeGb (TF.Ref s' (DiskConfig s)) (TF.Attr s P.Integer) where
-    computedBootDiskSizeGb x = TF.compute (TF.refKey x) "boot_disk_size_gb"
+    computedBootDiskSizeGb x = TF.compute (TF.refKey x) "_computedBootDiskSizeGb"
 
 instance s ~ s' => P.HasComputedNumLocalSsds (TF.Ref s' (DiskConfig s)) (TF.Attr s P.Integer) where
-    computedNumLocalSsds x = TF.compute (TF.refKey x) "num_local_ssds"
+    computedNumLocalSsds x = TF.compute (TF.refKey x) "_computedNumLocalSsds"
 
 -- | @attached_disk@ nested settings.
 data AttachedDisk s = AttachedDisk'
@@ -1627,16 +1629,16 @@ instance P.HasSource (AttachedDisk s) (TF.Attr s P.Text) where
                           } :: AttachedDisk s)
 
 instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (AttachedDisk s)) (TF.Attr s P.Text) where
-    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+    computedDeviceName x = TF.compute (TF.refKey x) "_computedDeviceName"
 
 instance s ~ s' => P.HasComputedDiskEncryptionKeyRaw (TF.Ref s' (AttachedDisk s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeyRaw x = TF.compute (TF.refKey x) "disk_encryption_key_raw"
+    computedDiskEncryptionKeyRaw x = TF.compute (TF.refKey x) "_computedDiskEncryptionKeyRaw"
 
 instance s ~ s' => P.HasComputedDiskEncryptionKeySha256 (TF.Ref s' (AttachedDisk s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "disk_encryption_key_sha256"
+    computedDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedDiskEncryptionKeySha256"
 
 instance s ~ s' => P.HasComputedMode (TF.Ref s' (AttachedDisk s)) (TF.Attr s P.Text) where
-    computedMode x = TF.compute (TF.refKey x) "mode"
+    computedMode x = TF.compute (TF.refKey x) "_computedMode"
 
 -- | @state_notification_config@ nested settings.
 data StateNotificationConfig s = StateNotificationConfig'
@@ -1681,10 +1683,10 @@ newManagement =
     Management'
 
 instance s ~ s' => P.HasComputedAutoRepair (TF.Ref s' (Management s)) (TF.Attr s P.Bool) where
-    computedAutoRepair x = TF.compute (TF.refKey x) "auto_repair"
+    computedAutoRepair x = TF.compute (TF.refKey x) "_computedAutoRepair"
 
 instance s ~ s' => P.HasComputedAutoUpgrade (TF.Ref s' (Management s)) (TF.Attr s P.Bool) where
-    computedAutoUpgrade x = TF.compute (TF.refKey x) "auto_upgrade"
+    computedAutoUpgrade x = TF.compute (TF.refKey x) "_computedAutoUpgrade"
 
 -- | @initialize_params@ nested settings.
 data InitializeParams s = InitializeParams'
@@ -1701,13 +1703,13 @@ newInitializeParams =
     InitializeParams'
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (InitializeParams s)) (TF.Attr s P.Text) where
-    computedImage x = TF.compute (TF.refKey x) "image"
+    computedImage x = TF.compute (TF.refKey x) "_computedImage"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (InitializeParams s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (InitializeParams s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (InitializeParams s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @cache_key_policy@ nested settings.
 data CacheKeyPolicy s = CacheKeyPolicy'
@@ -1724,19 +1726,19 @@ newCacheKeyPolicy =
     CacheKeyPolicy'
 
 instance s ~ s' => P.HasComputedIncludeHost (TF.Ref s' (CacheKeyPolicy s)) (TF.Attr s P.Bool) where
-    computedIncludeHost x = TF.compute (TF.refKey x) "include_host"
+    computedIncludeHost x = TF.compute (TF.refKey x) "_computedIncludeHost"
 
 instance s ~ s' => P.HasComputedIncludeProtocol (TF.Ref s' (CacheKeyPolicy s)) (TF.Attr s P.Bool) where
-    computedIncludeProtocol x = TF.compute (TF.refKey x) "include_protocol"
+    computedIncludeProtocol x = TF.compute (TF.refKey x) "_computedIncludeProtocol"
 
 instance s ~ s' => P.HasComputedIncludeQueryString (TF.Ref s' (CacheKeyPolicy s)) (TF.Attr s P.Bool) where
-    computedIncludeQueryString x = TF.compute (TF.refKey x) "include_query_string"
+    computedIncludeQueryString x = TF.compute (TF.refKey x) "_computedIncludeQueryString"
 
 instance s ~ s' => P.HasComputedQueryStringBlacklist (TF.Ref s' (CacheKeyPolicy s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedQueryStringBlacklist x = TF.compute (TF.refKey x) "query_string_blacklist"
+    computedQueryStringBlacklist x = TF.compute (TF.refKey x) "_computedQueryStringBlacklist"
 
 instance s ~ s' => P.HasComputedQueryStringWhitelist (TF.Ref s' (CacheKeyPolicy s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedQueryStringWhitelist x = TF.compute (TF.refKey x) "query_string_whitelist"
+    computedQueryStringWhitelist x = TF.compute (TF.refKey x) "_computedQueryStringWhitelist"
 
 -- | @master_auth@ nested settings.
 data MasterAuth s = MasterAuth'
@@ -1753,22 +1755,22 @@ newMasterAuth =
     MasterAuth'
 
 instance s ~ s' => P.HasComputedClientCertificate (TF.Ref s' (MasterAuth s)) (TF.Attr s P.Text) where
-    computedClientCertificate x = TF.compute (TF.refKey x) "client_certificate"
+    computedClientCertificate x = TF.compute (TF.refKey x) "_computedClientCertificate"
 
 instance s ~ s' => P.HasComputedClientCertificateConfig (TF.Ref s' (MasterAuth s)) (TF.Attr s [ClientCertificateConfig s]) where
-    computedClientCertificateConfig x = TF.compute (TF.refKey x) "client_certificate_config"
+    computedClientCertificateConfig x = TF.compute (TF.refKey x) "_computedClientCertificateConfig"
 
 instance s ~ s' => P.HasComputedClientKey (TF.Ref s' (MasterAuth s)) (TF.Attr s P.Text) where
-    computedClientKey x = TF.compute (TF.refKey x) "client_key"
+    computedClientKey x = TF.compute (TF.refKey x) "_computedClientKey"
 
 instance s ~ s' => P.HasComputedClusterCaCertificate (TF.Ref s' (MasterAuth s)) (TF.Attr s P.Text) where
-    computedClusterCaCertificate x = TF.compute (TF.refKey x) "cluster_ca_certificate"
+    computedClusterCaCertificate x = TF.compute (TF.refKey x) "_computedClusterCaCertificate"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (MasterAuth s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 instance s ~ s' => P.HasComputedUsername (TF.Ref s' (MasterAuth s)) (TF.Attr s P.Text) where
-    computedUsername x = TF.compute (TF.refKey x) "username"
+    computedUsername x = TF.compute (TF.refKey x) "_computedUsername"
 
 -- | @reference@ nested settings.
 data Reference s = Reference'
@@ -1785,7 +1787,7 @@ newReference =
     Reference'
 
 instance s ~ s' => P.HasComputedJobId (TF.Ref s' (Reference s)) (TF.Attr s P.Text) where
-    computedJobId x = TF.compute (TF.refKey x) "job_id"
+    computedJobId x = TF.compute (TF.refKey x) "_computedJobId"
 
 -- | @website@ nested settings.
 data Website s = Website'
@@ -1868,31 +1870,31 @@ newNodePool =
     NodePool'
 
 instance s ~ s' => P.HasComputedAutoscaling (TF.Ref s' (NodePool s)) (TF.Attr s [Autoscaling s]) where
-    computedAutoscaling x = TF.compute (TF.refKey x) "autoscaling"
+    computedAutoscaling x = TF.compute (TF.refKey x) "_computedAutoscaling"
 
 instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (NodePool s)) (TF.Attr s P.Integer) where
-    computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
+    computedInitialNodeCount x = TF.compute (TF.refKey x) "_computedInitialNodeCount"
 
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (NodePool s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
+    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "_computedInstanceGroupUrls"
 
 instance s ~ s' => P.HasComputedManagement (TF.Ref s' (NodePool s)) (TF.Attr s [Management s]) where
-    computedManagement x = TF.compute (TF.refKey x) "management"
+    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NodePool s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NodePool s)) (TF.Attr s P.Text) where
-    computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
+    computedNamePrefix x = TF.compute (TF.refKey x) "_computedNamePrefix"
 
 instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (NodePool s)) (TF.Attr s [NodeConfig s]) where
-    computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
+    computedNodeConfig x = TF.compute (TF.refKey x) "_computedNodeConfig"
 
 instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (NodePool s)) (TF.Attr s P.Integer) where
-    computedNodeCount x = TF.compute (TF.refKey x) "node_count"
+    computedNodeCount x = TF.compute (TF.refKey x) "_computedNodeCount"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (NodePool s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @master_authorized_networks_config@ nested settings.
 data MasterAuthorizedNetworksConfig s = MasterAuthorizedNetworksConfig'
@@ -1909,7 +1911,7 @@ newMasterAuthorizedNetworksConfig =
     MasterAuthorizedNetworksConfig'
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (MasterAuthorizedNetworksConfig s)) (TF.Attr s [TF.Attr s (CidrBlocks s)]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
 
 -- | @service_account@ nested settings.
 data ServiceAccount s = ServiceAccount'
@@ -1940,7 +1942,7 @@ instance P.HasScopes (ServiceAccount s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)
                           } :: ServiceAccount s)
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccount s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 -- | @apis@ nested settings.
 data Apis s = Apis'
@@ -1957,16 +1959,16 @@ newApis =
     Apis'
 
 instance s ~ s' => P.HasComputedMethods (TF.Ref s' (Apis s)) (TF.Attr s [Methods s]) where
-    computedMethods x = TF.compute (TF.refKey x) "methods"
+    computedMethods x = TF.compute (TF.refKey x) "_computedMethods"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Apis s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedSyntax (TF.Ref s' (Apis s)) (TF.Attr s P.Text) where
-    computedSyntax x = TF.compute (TF.refKey x) "syntax"
+    computedSyntax x = TF.compute (TF.refKey x) "_computedSyntax"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (Apis s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @taint@ nested settings.
 data Taint s = Taint'
@@ -1983,13 +1985,13 @@ newTaint =
     Taint'
 
 instance s ~ s' => P.HasComputedEffect (TF.Ref s' (Taint s)) (TF.Attr s P.Text) where
-    computedEffect x = TF.compute (TF.refKey x) "effect"
+    computedEffect x = TF.compute (TF.refKey x) "_computedEffect"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (Taint s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (Taint s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+    computedValue x = TF.compute (TF.refKey x) "_computedValue"
 
 -- | @test@ nested settings.
 data Test s = Test'
@@ -2062,7 +2064,7 @@ data Rule s = Rule'
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _match       :: TF.Attr s [Match s]
+    , _match       :: TF.Attr s (Match s)
     -- ^ @match@ - (Required)
     --
     , _preview     :: TF.Attr s P.Bool
@@ -2086,7 +2088,7 @@ instance TF.IsObject (Rule s) where
 
 newRule
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s [Match s] -- ^ @match@ - 'P.match'
+    -> TF.Attr s (Match s) -- ^ @match@ - 'P.match'
     -> TF.Attr s P.Integer -- ^ @priority@ - 'P.priority'
     -> Rule s
 newRule _action _match _priority =
@@ -2110,9 +2112,9 @@ instance P.HasDescription (Rule s) (TF.Attr s P.Text) where
                (\s a -> s { _description = a
                           } :: Rule s)
 
-instance P.HasMatch (Rule s) (TF.Attr s [Match s]) where
+instance P.HasMatch (Rule s) (TF.Attr s (Match s)) where
     match =
-        P.lens (_match :: Rule s -> TF.Attr s [Match s])
+        P.lens (_match :: Rule s -> TF.Attr s (Match s))
                (\s a -> s { _match = a
                           } :: Rule s)
 
@@ -2143,7 +2145,7 @@ newFeatureSettings =
     FeatureSettings'
 
 instance s ~ s' => P.HasComputedSplitHealthChecks (TF.Ref s' (FeatureSettings s)) (TF.Attr s P.Bool) where
-    computedSplitHealthChecks x = TF.compute (TF.refKey x) "split_health_checks"
+    computedSplitHealthChecks x = TF.compute (TF.refKey x) "_computedSplitHealthChecks"
 
 -- | @network@ nested settings.
 data Network s = Network'
@@ -2185,13 +2187,13 @@ instance P.HasSource (Network s) (TF.Attr s P.Text) where
                           } :: Network s)
 
 instance s ~ s' => P.HasComputedExternalAddress (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedExternalAddress x = TF.compute (TF.refKey x) "external_address"
+    computedExternalAddress x = TF.compute (TF.refKey x) "_computedExternalAddress"
 
 instance s ~ s' => P.HasComputedInternalAddress (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedInternalAddress x = TF.compute (TF.refKey x) "internal_address"
+    computedInternalAddress x = TF.compute (TF.refKey x) "_computedInternalAddress"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @build@ nested settings.
 data Build s = Build'
@@ -2400,7 +2402,7 @@ instance P.HasRequireSsl (IpConfiguration s) (TF.Attr s P.Bool) where
                           } :: IpConfiguration s)
 
 instance s ~ s' => P.HasComputedIpv4Enabled (TF.Ref s' (IpConfiguration s)) (TF.Attr s P.Bool) where
-    computedIpv4Enabled x = TF.compute (TF.refKey x) "ipv4_enabled"
+    computedIpv4Enabled x = TF.compute (TF.refKey x) "_computedIpv4Enabled"
 
 -- | @location_preference@ nested settings.
 data LocationPreference s = LocationPreference'
@@ -2540,17 +2542,17 @@ newMasterConfig
 newMasterConfig =
     MasterConfig'
 
-instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (MasterConfig s)) (TF.Attr s [DiskConfig s]) where
-    computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
+instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (MasterConfig s)) (TF.Attr s (DiskConfig s)) where
+    computedDiskConfig x = TF.compute (TF.refKey x) "_computedDiskConfig"
 
 instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (MasterConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceNames x = TF.compute (TF.refKey x) "instance_names"
+    computedInstanceNames x = TF.compute (TF.refKey x) "_computedInstanceNames"
 
 instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (MasterConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
+    computedMachineType x = TF.compute (TF.refKey x) "_computedMachineType"
 
 instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (MasterConfig s)) (TF.Attr s P.Integer) where
-    computedNumInstances x = TF.compute (TF.refKey x) "num_instances"
+    computedNumInstances x = TF.compute (TF.refKey x) "_computedNumInstances"
 
 -- | @backup_configuration@ nested settings.
 data BackupConfiguration s = BackupConfiguration'
@@ -2591,7 +2593,7 @@ instance P.HasEnabled (BackupConfiguration s) (TF.Attr s P.Bool) where
                           } :: BackupConfiguration s)
 
 instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (BackupConfiguration s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+    computedStartTime x = TF.compute (TF.refKey x) "_computedStartTime"
 
 -- | @gce_cluster_config@ nested settings.
 data GceClusterConfig s = GceClusterConfig'
@@ -2665,13 +2667,13 @@ instance P.HasTags (GceClusterConfig s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: GceClusterConfig s)
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (GceClusterConfig s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedServiceAccountScopes (TF.Ref s' (GceClusterConfig s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedServiceAccountScopes x = TF.compute (TF.refKey x) "service_account_scopes"
+    computedServiceAccountScopes x = TF.compute (TF.refKey x) "_computedServiceAccountScopes"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (GceClusterConfig s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "zone"
+    computedZone x = TF.compute (TF.refKey x) "_computedZone"
 
 -- | @https_health_check@ nested settings.
 data HttpsHealthCheck s = HttpsHealthCheck'
@@ -2787,10 +2789,10 @@ newCidrBlocks =
     CidrBlocks'
 
 instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (CidrBlocks s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
+    computedCidrBlock x = TF.compute (TF.refKey x) "_computedCidrBlock"
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (CidrBlocks s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
 
 -- | @mqtt_config@ nested settings.
 data MqttConfig s = MqttConfig'
@@ -2835,31 +2837,31 @@ newBackend =
     Backend'
 
 instance s ~ s' => P.HasComputedBalancingMode (TF.Ref s' (Backend s)) (TF.Attr s P.Text) where
-    computedBalancingMode x = TF.compute (TF.refKey x) "balancing_mode"
+    computedBalancingMode x = TF.compute (TF.refKey x) "_computedBalancingMode"
 
 instance s ~ s' => P.HasComputedCapacityScaler (TF.Ref s' (Backend s)) (TF.Attr s P.Double) where
-    computedCapacityScaler x = TF.compute (TF.refKey x) "capacity_scaler"
+    computedCapacityScaler x = TF.compute (TF.refKey x) "_computedCapacityScaler"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Backend s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (Backend s)) (TF.Attr s P.Text) where
-    computedGroup x = TF.compute (TF.refKey x) "group"
+    computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
 
 instance s ~ s' => P.HasComputedMaxConnections (TF.Ref s' (Backend s)) (TF.Attr s P.Integer) where
-    computedMaxConnections x = TF.compute (TF.refKey x) "max_connections"
+    computedMaxConnections x = TF.compute (TF.refKey x) "_computedMaxConnections"
 
 instance s ~ s' => P.HasComputedMaxConnectionsPerInstance (TF.Ref s' (Backend s)) (TF.Attr s P.Integer) where
-    computedMaxConnectionsPerInstance x = TF.compute (TF.refKey x) "max_connections_per_instance"
+    computedMaxConnectionsPerInstance x = TF.compute (TF.refKey x) "_computedMaxConnectionsPerInstance"
 
 instance s ~ s' => P.HasComputedMaxRate (TF.Ref s' (Backend s)) (TF.Attr s P.Integer) where
-    computedMaxRate x = TF.compute (TF.refKey x) "max_rate"
+    computedMaxRate x = TF.compute (TF.refKey x) "_computedMaxRate"
 
 instance s ~ s' => P.HasComputedMaxRatePerInstance (TF.Ref s' (Backend s)) (TF.Attr s P.Double) where
-    computedMaxRatePerInstance x = TF.compute (TF.refKey x) "max_rate_per_instance"
+    computedMaxRatePerInstance x = TF.compute (TF.refKey x) "_computedMaxRatePerInstance"
 
 instance s ~ s' => P.HasComputedMaxUtilization (TF.Ref s' (Backend s)) (TF.Attr s P.Double) where
-    computedMaxUtilization x = TF.compute (TF.refKey x) "max_utilization"
+    computedMaxUtilization x = TF.compute (TF.refKey x) "_computedMaxUtilization"
 
 -- | @methods@ nested settings.
 data Methods s = Methods'
@@ -2876,16 +2878,16 @@ newMethods =
     Methods'
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Methods s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedRequestType (TF.Ref s' (Methods s)) (TF.Attr s P.Text) where
-    computedRequestType x = TF.compute (TF.refKey x) "request_type"
+    computedRequestType x = TF.compute (TF.refKey x) "_computedRequestType"
 
 instance s ~ s' => P.HasComputedResponseType (TF.Ref s' (Methods s)) (TF.Attr s P.Text) where
-    computedResponseType x = TF.compute (TF.refKey x) "response_type"
+    computedResponseType x = TF.compute (TF.refKey x) "_computedResponseType"
 
 instance s ~ s' => P.HasComputedSyntax (TF.Ref s' (Methods s)) (TF.Attr s P.Text) where
-    computedSyntax x = TF.compute (TF.refKey x) "syntax"
+    computedSyntax x = TF.compute (TF.refKey x) "_computedSyntax"
 
 -- | @network_policy_config@ nested settings.
 data NetworkPolicyConfig s = NetworkPolicyConfig'
@@ -2902,7 +2904,7 @@ newNetworkPolicyConfig =
     NetworkPolicyConfig'
 
 instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (NetworkPolicyConfig s)) (TF.Attr s P.Bool) where
-    computedDisabled x = TF.compute (TF.refKey x) "disabled"
+    computedDisabled x = TF.compute (TF.refKey x) "_computedDisabled"
 
 -- | @path_rule@ nested settings.
 data PathRule s = PathRule'
@@ -3395,8 +3397,8 @@ instance P.HasPythonFileUris (PysparkConfig s) (TF.Attr s [TF.Attr s P.Text]) wh
                (\s a -> s { _pythonFileUris = a
                           } :: PysparkConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (PysparkConfig s)) (TF.Attr s [LoggingConfig s]) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (PysparkConfig s)) (TF.Attr s (LoggingConfig s)) where
+    computedLoggingConfig x = TF.compute (TF.refKey x) "_computedLoggingConfig"
 
 -- | @server_ca_cert@ nested settings.
 data ServerCaCert s = ServerCaCert'
@@ -3413,19 +3415,19 @@ newServerCaCert =
     ServerCaCert'
 
 instance s ~ s' => P.HasComputedCert (TF.Ref s' (ServerCaCert s)) (TF.Attr s P.Text) where
-    computedCert x = TF.compute (TF.refKey x) "cert"
+    computedCert x = TF.compute (TF.refKey x) "_computedCert"
 
 instance s ~ s' => P.HasComputedCommonName (TF.Ref s' (ServerCaCert s)) (TF.Attr s P.Text) where
-    computedCommonName x = TF.compute (TF.refKey x) "common_name"
+    computedCommonName x = TF.compute (TF.refKey x) "_computedCommonName"
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (ServerCaCert s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
 
 instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (ServerCaCert s)) (TF.Attr s P.Text) where
-    computedExpirationTime x = TF.compute (TF.refKey x) "expiration_time"
+    computedExpirationTime x = TF.compute (TF.refKey x) "_computedExpirationTime"
 
 instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (ServerCaCert s)) (TF.Attr s P.Text) where
-    computedSha1Fingerprint x = TF.compute (TF.refKey x) "sha1_fingerprint"
+    computedSha1Fingerprint x = TF.compute (TF.refKey x) "_computedSha1Fingerprint"
 
 -- | @cluster_config@ nested settings.
 data ClusterConfig s = ClusterConfig'
@@ -3477,22 +3479,22 @@ instance P.HasStagingBucket (ClusterConfig s) (TF.Attr s P.Text) where
                           } :: ClusterConfig s)
 
 instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ClusterConfig s)) (TF.Attr s P.Text) where
-    computedBucket x = TF.compute (TF.refKey x) "bucket"
+    computedBucket x = TF.compute (TF.refKey x) "_computedBucket"
 
-instance s ~ s' => P.HasComputedGceClusterConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s [GceClusterConfig s]) where
-    computedGceClusterConfig x = TF.compute (TF.refKey x) "gce_cluster_config"
+instance s ~ s' => P.HasComputedGceClusterConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s (GceClusterConfig s)) where
+    computedGceClusterConfig x = TF.compute (TF.refKey x) "_computedGceClusterConfig"
 
-instance s ~ s' => P.HasComputedMasterConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s [MasterConfig s]) where
-    computedMasterConfig x = TF.compute (TF.refKey x) "master_config"
+instance s ~ s' => P.HasComputedMasterConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s (MasterConfig s)) where
+    computedMasterConfig x = TF.compute (TF.refKey x) "_computedMasterConfig"
 
-instance s ~ s' => P.HasComputedPreemptibleWorkerConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s [PreemptibleWorkerConfig s]) where
-    computedPreemptibleWorkerConfig x = TF.compute (TF.refKey x) "preemptible_worker_config"
+instance s ~ s' => P.HasComputedPreemptibleWorkerConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s (PreemptibleWorkerConfig s)) where
+    computedPreemptibleWorkerConfig x = TF.compute (TF.refKey x) "_computedPreemptibleWorkerConfig"
 
-instance s ~ s' => P.HasComputedSoftwareConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s [SoftwareConfig s]) where
-    computedSoftwareConfig x = TF.compute (TF.refKey x) "software_config"
+instance s ~ s' => P.HasComputedSoftwareConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s (SoftwareConfig s)) where
+    computedSoftwareConfig x = TF.compute (TF.refKey x) "_computedSoftwareConfig"
 
-instance s ~ s' => P.HasComputedWorkerConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s [WorkerConfig s]) where
-    computedWorkerConfig x = TF.compute (TF.refKey x) "worker_config"
+instance s ~ s' => P.HasComputedWorkerConfig (TF.Ref s' (ClusterConfig s)) (TF.Attr s (WorkerConfig s)) where
+    computedWorkerConfig x = TF.compute (TF.refKey x) "_computedWorkerConfig"
 
 -- | @horizontal_pod_autoscaling@ nested settings.
 data HorizontalPodAutoscaling s = HorizontalPodAutoscaling'
@@ -3509,7 +3511,7 @@ newHorizontalPodAutoscaling =
     HorizontalPodAutoscaling'
 
 instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (HorizontalPodAutoscaling s)) (TF.Attr s P.Bool) where
-    computedDisabled x = TF.compute (TF.refKey x) "disabled"
+    computedDisabled x = TF.compute (TF.refKey x) "_computedDisabled"
 
 -- | @trigger_template@ nested settings.
 data TriggerTemplate s = TriggerTemplate'
@@ -3601,7 +3603,7 @@ data Version s = Version'
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _targetSize       :: TF.Attr s [TargetSize s]
+    , _targetSize       :: TF.Attr s (TargetSize s)
     -- ^ @target_size@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3638,9 +3640,9 @@ instance P.HasName (Version s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: Version s)
 
-instance P.HasTargetSize (Version s) (TF.Attr s [TargetSize s]) where
+instance P.HasTargetSize (Version s) (TF.Attr s (TargetSize s)) where
     targetSize =
-        P.lens (_targetSize :: Version s -> TF.Attr s [TargetSize s])
+        P.lens (_targetSize :: Version s -> TF.Attr s (TargetSize s))
                (\s a -> s { _targetSize = a
                           } :: Version s)
 
@@ -3699,10 +3701,10 @@ instance P.HasOverrideProperties (SoftwareConfig s) (TF.Attr s (P.HashMap P.Text
                           } :: SoftwareConfig s)
 
 instance s ~ s' => P.HasComputedImageVersion (TF.Ref s' (SoftwareConfig s)) (TF.Attr s P.Text) where
-    computedImageVersion x = TF.compute (TF.refKey x) "image_version"
+    computedImageVersion x = TF.compute (TF.refKey x) "_computedImageVersion"
 
 instance s ~ s' => P.HasComputedProperties (TF.Ref s' (SoftwareConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedProperties x = TF.compute (TF.refKey x) "properties"
+    computedProperties x = TF.compute (TF.refKey x) "_computedProperties"
 
 -- | @instances@ nested settings.
 data Instances s = Instances'
@@ -3745,7 +3747,7 @@ instance P.HasStatus (Instances s) (TF.Attr s P.Text) where
                           } :: Instances s)
 
 instance s ~ s' => P.HasComputedNamedPorts (TF.Ref s' (Instances s)) (TF.Attr s [NamedPorts s]) where
-    computedNamedPorts x = TF.compute (TF.refKey x) "named_ports"
+    computedNamedPorts x = TF.compute (TF.refKey x) "_computedNamedPorts"
 
 -- | @step@ nested settings.
 data Step s = Step'
@@ -3800,7 +3802,7 @@ newMaintenancePolicy =
     MaintenancePolicy'
 
 instance s ~ s' => P.HasComputedDailyMaintenanceWindow (TF.Ref s' (MaintenancePolicy s)) (TF.Attr s [DailyMaintenanceWindow s]) where
-    computedDailyMaintenanceWindow x = TF.compute (TF.refKey x) "daily_maintenance_window"
+    computedDailyMaintenanceWindow x = TF.compute (TF.refKey x) "_computedDailyMaintenanceWindow"
 
 -- | @url_dispatch_rule@ nested settings.
 data UrlDispatchRule s = UrlDispatchRule'
@@ -3817,13 +3819,13 @@ newUrlDispatchRule =
     UrlDispatchRule'
 
 instance s ~ s' => P.HasComputedDomain (TF.Ref s' (UrlDispatchRule s)) (TF.Attr s P.Text) where
-    computedDomain x = TF.compute (TF.refKey x) "domain"
+    computedDomain x = TF.compute (TF.refKey x) "_computedDomain"
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (UrlDispatchRule s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+    computedPath x = TF.compute (TF.refKey x) "_computedPath"
 
 instance s ~ s' => P.HasComputedService (TF.Ref s' (UrlDispatchRule s)) (TF.Attr s P.Text) where
-    computedService x = TF.compute (TF.refKey x) "service"
+    computedService x = TF.compute (TF.refKey x) "_computedService"
 
 -- | @source_image_encryption_key@ nested settings.
 data SourceImageEncryptionKey s = SourceImageEncryptionKey'
@@ -3853,7 +3855,7 @@ instance P.HasRawKey (SourceImageEncryptionKey s) (TF.Attr s P.Text) where
                           } :: SourceImageEncryptionKey s)
 
 instance s ~ s' => P.HasComputedSha256 (TF.Ref s' (SourceImageEncryptionKey s)) (TF.Attr s P.Text) where
-    computedSha256 x = TF.compute (TF.refKey x) "sha256"
+    computedSha256 x = TF.compute (TF.refKey x) "_computedSha256"
 
 -- | @cors@ nested settings.
 data Cors s = Cors'
@@ -3969,7 +3971,7 @@ newHttpLoadBalancing =
     HttpLoadBalancing'
 
 instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (HttpLoadBalancing s)) (TF.Attr s P.Bool) where
-    computedDisabled x = TF.compute (TF.refKey x) "disabled"
+    computedDisabled x = TF.compute (TF.refKey x) "_computedDisabled"
 
 -- | @node_config@ nested settings.
 data NodeConfig s = NodeConfig'
@@ -3986,49 +3988,49 @@ newNodeConfig =
     NodeConfig'
 
 instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Integer) where
-    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
+    computedDiskSizeGb x = TF.compute (TF.refKey x) "_computedDiskSizeGb"
 
 instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
+    computedDiskType x = TF.compute (TF.refKey x) "_computedDiskType"
 
 instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (NodeConfig s)) (TF.Attr s [GuestAccelerator s]) where
-    computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
+    computedGuestAccelerator x = TF.compute (TF.refKey x) "_computedGuestAccelerator"
 
 instance s ~ s' => P.HasComputedImageType (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Text) where
-    computedImageType x = TF.compute (TF.refKey x) "image_type"
+    computedImageType x = TF.compute (TF.refKey x) "_computedImageType"
 
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (NodeConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedLabels x = TF.compute (TF.refKey x) "labels"
+    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
 
 instance s ~ s' => P.HasComputedLocalSsdCount (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Integer) where
-    computedLocalSsdCount x = TF.compute (TF.refKey x) "local_ssd_count"
+    computedLocalSsdCount x = TF.compute (TF.refKey x) "_computedLocalSsdCount"
 
 instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
+    computedMachineType x = TF.compute (TF.refKey x) "_computedMachineType"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (NodeConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
 
 instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Text) where
-    computedMinCpuPlatform x = TF.compute (TF.refKey x) "min_cpu_platform"
+    computedMinCpuPlatform x = TF.compute (TF.refKey x) "_computedMinCpuPlatform"
 
 instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (NodeConfig s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedOauthScopes x = TF.compute (TF.refKey x) "oauth_scopes"
+    computedOauthScopes x = TF.compute (TF.refKey x) "_computedOauthScopes"
 
 instance s ~ s' => P.HasComputedPreemptible (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Bool) where
-    computedPreemptible x = TF.compute (TF.refKey x) "preemptible"
+    computedPreemptible x = TF.compute (TF.refKey x) "_computedPreemptible"
 
 instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (NodeConfig s)) (TF.Attr s P.Text) where
-    computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
+    computedServiceAccount x = TF.compute (TF.refKey x) "_computedServiceAccount"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NodeConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 instance s ~ s' => P.HasComputedTaint (TF.Ref s' (NodeConfig s)) (TF.Attr s [Taint s]) where
-    computedTaint x = TF.compute (TF.refKey x) "taint"
+    computedTaint x = TF.compute (TF.refKey x) "_computedTaint"
 
 instance s ~ s' => P.HasComputedWorkloadMetadataConfig (TF.Ref s' (NodeConfig s)) (TF.Attr s [WorkloadMetadataConfig s]) where
-    computedWorkloadMetadataConfig x = TF.compute (TF.refKey x) "workload_metadata_config"
+    computedWorkloadMetadataConfig x = TF.compute (TF.refKey x) "_computedWorkloadMetadataConfig"
 
 -- | @tcp_health_check@ nested settings.
 data TcpHealthCheck s = TcpHealthCheck'
@@ -4169,8 +4171,8 @@ instance P.HasScriptVariables (SparksqlConfig s) (TF.Attr s (P.HashMap P.Text (T
                (\s a -> s { _scriptVariables = a
                           } :: SparksqlConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (SparksqlConfig s)) (TF.Attr s [LoggingConfig s]) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (SparksqlConfig s)) (TF.Attr s (LoggingConfig s)) where
+    computedLoggingConfig x = TF.compute (TF.refKey x) "_computedLoggingConfig"
 
 -- | @workload_metadata_config@ nested settings.
 data WorkloadMetadataConfig s = WorkloadMetadataConfig'
@@ -4187,7 +4189,7 @@ newWorkloadMetadataConfig =
     WorkloadMetadataConfig'
 
 instance s ~ s' => P.HasComputedNodeMetadata (TF.Ref s' (WorkloadMetadataConfig s)) (TF.Attr s P.Text) where
-    computedNodeMetadata x = TF.compute (TF.refKey x) "node_metadata"
+    computedNodeMetadata x = TF.compute (TF.refKey x) "_computedNodeMetadata"
 
 -- | @endpoints@ nested settings.
 data Endpoints s = Endpoints'
@@ -4204,10 +4206,10 @@ newEndpoints =
     Endpoints'
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Endpoints s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Endpoints s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @guest_accelerator@ nested settings.
 data GuestAccelerator s = GuestAccelerator'
@@ -4224,10 +4226,10 @@ newGuestAccelerator =
     GuestAccelerator'
 
 instance s ~ s' => P.HasComputedCount (TF.Ref s' (GuestAccelerator s)) (TF.Attr s P.Integer) where
-    computedCount x = TF.compute (TF.refKey x) "count"
+    computedCount x = TF.compute (TF.refKey x) "_computedCount"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (GuestAccelerator s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (GuestAccelerator s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @alias_ip_range@ nested settings.
 data AliasIpRange s = AliasIpRange'
@@ -4369,8 +4371,8 @@ instance P.HasProperties (HadoopConfig s) (TF.Attr s (P.HashMap P.Text (TF.Attr 
                (\s a -> s { _properties = a
                           } :: HadoopConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (HadoopConfig s)) (TF.Attr s [LoggingConfig s]) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (HadoopConfig s)) (TF.Attr s (LoggingConfig s)) where
+    computedLoggingConfig x = TF.compute (TF.refKey x) "_computedLoggingConfig"
 
 -- | @ip_address@ nested settings.
 data IpAddress s = IpAddress'
@@ -4387,10 +4389,10 @@ newIpAddress =
     IpAddress'
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpAddress s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedTimeToRetire (TF.Ref s' (IpAddress s)) (TF.Attr s P.Text) where
-    computedTimeToRetire x = TF.compute (TF.refKey x) "time_to_retire"
+    computedTimeToRetire x = TF.compute (TF.refKey x) "_computedTimeToRetire"
 
 -- | @pod_security_policy_config@ nested settings.
 data PodSecurityPolicyConfig s = PodSecurityPolicyConfig'
@@ -4407,7 +4409,7 @@ newPodSecurityPolicyConfig =
     PodSecurityPolicyConfig'
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (PodSecurityPolicyConfig s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
 
 -- | @app_engine@ nested settings.
 data AppEngine s = AppEngine'
@@ -4424,34 +4426,34 @@ newAppEngine =
     AppEngine'
 
 instance s ~ s' => P.HasComputedAuthDomain (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedAuthDomain x = TF.compute (TF.refKey x) "auth_domain"
+    computedAuthDomain x = TF.compute (TF.refKey x) "_computedAuthDomain"
 
 instance s ~ s' => P.HasComputedCodeBucket (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedCodeBucket x = TF.compute (TF.refKey x) "code_bucket"
+    computedCodeBucket x = TF.compute (TF.refKey x) "_computedCodeBucket"
 
 instance s ~ s' => P.HasComputedDefaultBucket (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedDefaultBucket x = TF.compute (TF.refKey x) "default_bucket"
+    computedDefaultBucket x = TF.compute (TF.refKey x) "_computedDefaultBucket"
 
 instance s ~ s' => P.HasComputedDefaultHostname (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedDefaultHostname x = TF.compute (TF.refKey x) "default_hostname"
+    computedDefaultHostname x = TF.compute (TF.refKey x) "_computedDefaultHostname"
 
 instance s ~ s' => P.HasComputedFeatureSettings (TF.Ref s' (AppEngine s)) (TF.Attr s [FeatureSettings s]) where
-    computedFeatureSettings x = TF.compute (TF.refKey x) "feature_settings"
+    computedFeatureSettings x = TF.compute (TF.refKey x) "_computedFeatureSettings"
 
 instance s ~ s' => P.HasComputedGcrDomain (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedGcrDomain x = TF.compute (TF.refKey x) "gcr_domain"
+    computedGcrDomain x = TF.compute (TF.refKey x) "_computedGcrDomain"
 
 instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedLocationId x = TF.compute (TF.refKey x) "location_id"
+    computedLocationId x = TF.compute (TF.refKey x) "_computedLocationId"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedServingStatus (TF.Ref s' (AppEngine s)) (TF.Attr s P.Text) where
-    computedServingStatus x = TF.compute (TF.refKey x) "serving_status"
+    computedServingStatus x = TF.compute (TF.refKey x) "_computedServingStatus"
 
 instance s ~ s' => P.HasComputedUrlDispatchRule (TF.Ref s' (AppEngine s)) (TF.Attr s [UrlDispatchRule s]) where
-    computedUrlDispatchRule x = TF.compute (TF.refKey x) "url_dispatch_rule"
+    computedUrlDispatchRule x = TF.compute (TF.refKey x) "_computedUrlDispatchRule"
 
 -- | @time_partitioning@ nested settings.
 data TimePartitioning s = TimePartitioning'
@@ -4562,7 +4564,7 @@ instance P.HasEnforced (BooleanPolicy s) (TF.Attr s P.Bool) where
 
 -- | @match@ nested settings.
 data Match s = Match'
-    { _config        :: TF.Attr s [Config s]
+    { _config        :: TF.Attr s (Config s)
     -- ^ @config@ - (Required)
     --
     , _versionedExpr :: TF.Attr s P.Text
@@ -4579,7 +4581,7 @@ instance TF.IsObject (Match s) where
         ]
 
 newMatch
-    :: TF.Attr s [Config s] -- ^ @config@ - 'P.config'
+    :: TF.Attr s (Config s) -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Text -- ^ @versioned_expr@ - 'P.versionedExpr'
     -> Match s
 newMatch _config _versionedExpr =
@@ -4588,9 +4590,9 @@ newMatch _config _versionedExpr =
         , _versionedExpr = _versionedExpr
         }
 
-instance P.HasConfig (Match s) (TF.Attr s [Config s]) where
+instance P.HasConfig (Match s) (TF.Attr s (Config s)) where
     config =
-        P.lens (_config :: Match s -> TF.Attr s [Config s])
+        P.lens (_config :: Match s -> TF.Attr s (Config s))
                (\s a -> s { _config = a
                           } :: Match s)
 
@@ -4653,17 +4655,17 @@ newWorkerConfig
 newWorkerConfig =
     WorkerConfig'
 
-instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (WorkerConfig s)) (TF.Attr s [DiskConfig s]) where
-    computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
+instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (WorkerConfig s)) (TF.Attr s (DiskConfig s)) where
+    computedDiskConfig x = TF.compute (TF.refKey x) "_computedDiskConfig"
 
 instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (WorkerConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceNames x = TF.compute (TF.refKey x) "instance_names"
+    computedInstanceNames x = TF.compute (TF.refKey x) "_computedInstanceNames"
 
 instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (WorkerConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
+    computedMachineType x = TF.compute (TF.refKey x) "_computedMachineType"
 
 instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (WorkerConfig s)) (TF.Attr s P.Integer) where
-    computedNumInstances x = TF.compute (TF.refKey x) "num_instances"
+    computedNumInstances x = TF.compute (TF.refKey x) "_computedNumInstances"
 
 -- | @cpu_utilization@ nested settings.
 data CpuUtilization s = CpuUtilization'
@@ -4783,8 +4785,8 @@ instance P.HasScriptVariables (PigConfig s) (TF.Attr s (P.HashMap P.Text (TF.Att
                (\s a -> s { _scriptVariables = a
                           } :: PigConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (PigConfig s)) (TF.Attr s [LoggingConfig s]) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (PigConfig s)) (TF.Attr s (LoggingConfig s)) where
+    computedLoggingConfig x = TF.compute (TF.refKey x) "_computedLoggingConfig"
 
 -- | @condition@ nested settings.
 data Condition s = Condition'
@@ -4964,7 +4966,7 @@ instance P.HasLogBucket (Logging s) (TF.Attr s P.Text) where
                           } :: Logging s)
 
 instance s ~ s' => P.HasComputedLogObjectPrefix (TF.Ref s' (Logging s)) (TF.Attr s P.Text) where
-    computedLogObjectPrefix x = TF.compute (TF.refKey x) "log_object_prefix"
+    computedLogObjectPrefix x = TF.compute (TF.refKey x) "_computedLogObjectPrefix"
 
 -- | @spark_config@ nested settings.
 data SparkConfig s = SparkConfig'
@@ -5067,8 +5069,8 @@ instance P.HasProperties (SparkConfig s) (TF.Attr s (P.HashMap P.Text (TF.Attr s
                (\s a -> s { _properties = a
                           } :: SparkConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (SparkConfig s)) (TF.Attr s [LoggingConfig s]) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (SparkConfig s)) (TF.Attr s (LoggingConfig s)) where
+    computedLoggingConfig x = TF.compute (TF.refKey x) "_computedLoggingConfig"
 
 -- | @deny@ nested settings.
 data Deny s = Deny'
@@ -5171,7 +5173,7 @@ newCdnPolicy =
     CdnPolicy'
 
 instance s ~ s' => P.HasComputedCacheKeyPolicy (TF.Ref s' (CdnPolicy s)) (TF.Attr s [CacheKeyPolicy s]) where
-    computedCacheKeyPolicy x = TF.compute (TF.refKey x) "cache_key_policy"
+    computedCacheKeyPolicy x = TF.compute (TF.refKey x) "_computedCacheKeyPolicy"
 
 -- | @path_matcher@ nested settings.
 data PathMatcher s = PathMatcher'
@@ -5250,7 +5252,7 @@ newClientCertificateConfig =
     ClientCertificateConfig'
 
 instance s ~ s' => P.HasComputedIssueClientCertificate (TF.Ref s' (ClientCertificateConfig s)) (TF.Attr s P.Bool) where
-    computedIssueClientCertificate x = TF.compute (TF.refKey x) "issue_client_certificate"
+    computedIssueClientCertificate x = TF.compute (TF.refKey x) "_computedIssueClientCertificate"
 
 -- | @ssl_health_check@ nested settings.
 data SslHealthCheck s = SslHealthCheck'
@@ -5414,16 +5416,16 @@ newAddonsConfig =
     AddonsConfig'
 
 instance s ~ s' => P.HasComputedHorizontalPodAutoscaling (TF.Ref s' (AddonsConfig s)) (TF.Attr s [HorizontalPodAutoscaling s]) where
-    computedHorizontalPodAutoscaling x = TF.compute (TF.refKey x) "horizontal_pod_autoscaling"
+    computedHorizontalPodAutoscaling x = TF.compute (TF.refKey x) "_computedHorizontalPodAutoscaling"
 
 instance s ~ s' => P.HasComputedHttpLoadBalancing (TF.Ref s' (AddonsConfig s)) (TF.Attr s [HttpLoadBalancing s]) where
-    computedHttpLoadBalancing x = TF.compute (TF.refKey x) "http_load_balancing"
+    computedHttpLoadBalancing x = TF.compute (TF.refKey x) "_computedHttpLoadBalancing"
 
 instance s ~ s' => P.HasComputedKubernetesDashboard (TF.Ref s' (AddonsConfig s)) (TF.Attr s [KubernetesDashboard s]) where
-    computedKubernetesDashboard x = TF.compute (TF.refKey x) "kubernetes_dashboard"
+    computedKubernetesDashboard x = TF.compute (TF.refKey x) "_computedKubernetesDashboard"
 
 instance s ~ s' => P.HasComputedNetworkPolicyConfig (TF.Ref s' (AddonsConfig s)) (TF.Attr s [NetworkPolicyConfig s]) where
-    computedNetworkPolicyConfig x = TF.compute (TF.refKey x) "network_policy_config"
+    computedNetworkPolicyConfig x = TF.compute (TF.refKey x) "_computedNetworkPolicyConfig"
 
 -- | @scratch_disk@ nested settings.
 data ScratchDisk s = ScratchDisk'
@@ -5440,7 +5442,7 @@ newScratchDisk =
     ScratchDisk'
 
 instance s ~ s' => P.HasComputedInterface (TF.Ref s' (ScratchDisk s)) (TF.Attr s P.Text) where
-    computedInterface x = TF.compute (TF.refKey x) "interface"
+    computedInterface x = TF.compute (TF.refKey x) "_computedInterface"
 
 -- | @source_snapshot_encryption_key@ nested settings.
 data SourceSnapshotEncryptionKey s = SourceSnapshotEncryptionKey'
@@ -5470,7 +5472,7 @@ instance P.HasRawKey (SourceSnapshotEncryptionKey s) (TF.Attr s P.Text) where
                           } :: SourceSnapshotEncryptionKey s)
 
 instance s ~ s' => P.HasComputedSha256 (TF.Ref s' (SourceSnapshotEncryptionKey s)) (TF.Attr s P.Text) where
-    computedSha256 x = TF.compute (TF.refKey x) "sha256"
+    computedSha256 x = TF.compute (TF.refKey x) "_computedSha256"
 
 -- | @access_config@ nested settings.
 data AccessConfig s = AccessConfig'
@@ -5487,13 +5489,13 @@ newAccessConfig =
     AccessConfig'
 
 instance s ~ s' => P.HasComputedAssignedNatIp (TF.Ref s' (AccessConfig s)) (TF.Attr s P.Text) where
-    computedAssignedNatIp x = TF.compute (TF.refKey x) "assigned_nat_ip"
+    computedAssignedNatIp x = TF.compute (TF.refKey x) "_computedAssignedNatIp"
 
 instance s ~ s' => P.HasComputedNatIp (TF.Ref s' (AccessConfig s)) (TF.Attr s P.Text) where
-    computedNatIp x = TF.compute (TF.refKey x) "nat_ip"
+    computedNatIp x = TF.compute (TF.refKey x) "_computedNatIp"
 
 instance s ~ s' => P.HasComputedNetworkTier (TF.Ref s' (AccessConfig s)) (TF.Attr s P.Text) where
-    computedNetworkTier x = TF.compute (TF.refKey x) "network_tier"
+    computedNetworkTier x = TF.compute (TF.refKey x) "_computedNetworkTier"
 
 -- | @ip_allocation_policy@ nested settings.
 data IpAllocationPolicy s = IpAllocationPolicy'
@@ -5510,10 +5512,10 @@ newIpAllocationPolicy =
     IpAllocationPolicy'
 
 instance s ~ s' => P.HasComputedClusterSecondaryRangeName (TF.Ref s' (IpAllocationPolicy s)) (TF.Attr s P.Text) where
-    computedClusterSecondaryRangeName x = TF.compute (TF.refKey x) "cluster_secondary_range_name"
+    computedClusterSecondaryRangeName x = TF.compute (TF.refKey x) "_computedClusterSecondaryRangeName"
 
 instance s ~ s' => P.HasComputedServicesSecondaryRangeName (TF.Ref s' (IpAllocationPolicy s)) (TF.Attr s P.Text) where
-    computedServicesSecondaryRangeName x = TF.compute (TF.refKey x) "services_secondary_range_name"
+    computedServicesSecondaryRangeName x = TF.compute (TF.refKey x) "_computedServicesSecondaryRangeName"
 
 -- | @kubernetes_dashboard@ nested settings.
 data KubernetesDashboard s = KubernetesDashboard'
@@ -5530,7 +5532,7 @@ newKubernetesDashboard =
     KubernetesDashboard'
 
 instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (KubernetesDashboard s)) (TF.Attr s P.Bool) where
-    computedDisabled x = TF.compute (TF.refKey x) "disabled"
+    computedDisabled x = TF.compute (TF.refKey x) "_computedDisabled"
 
 -- | @placement@ nested settings.
 data Placement s = Placement'
@@ -5562,7 +5564,7 @@ instance P.HasClusterName (Placement s) (TF.Attr s P.Text) where
                           } :: Placement s)
 
 instance s ~ s' => P.HasComputedClusterUuid (TF.Ref s' (Placement s)) (TF.Attr s P.Text) where
-    computedClusterUuid x = TF.compute (TF.refKey x) "cluster_uuid"
+    computedClusterUuid x = TF.compute (TF.refKey x) "_computedClusterUuid"
 
 -- | @host_rule@ nested settings.
 data HostRule s = HostRule'
@@ -5630,10 +5632,10 @@ newNetworkPolicy =
     NetworkPolicy'
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (NetworkPolicy s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
 
 instance s ~ s' => P.HasComputedProvider (TF.Ref s' (NetworkPolicy s)) (TF.Attr s P.Text) where
-    computedProvider x = TF.compute (TF.refKey x) "provider"
+    computedProvider x = TF.compute (TF.refKey x) "_computedProvider"
 
 -- | @binding@ nested settings.
 data Binding s = Binding'

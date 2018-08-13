@@ -338,7 +338,7 @@ instance P.HasOrgId (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
                           } :: LoggingOrganizationSinkResource s)
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+    computedWriterIdentity x = TF.compute (TF.refKey x) "_computedWriterIdentity"
 
 -- | @google_logging_project_exclusion@ Resource.
 --
@@ -405,7 +405,7 @@ instance P.HasName (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
                           } :: LoggingProjectExclusionResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_logging_project_sink@ Resource.
 --
@@ -472,10 +472,10 @@ instance P.HasUniqueWriterIdentity (LoggingProjectSinkResource s) (TF.Attr s P.B
                           } :: LoggingProjectSinkResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
+    computedWriterIdentity x = TF.compute (TF.refKey x) "_computedWriterIdentity"
 
 -- | @google_organization_iam_binding@ Resource.
 --
@@ -532,7 +532,7 @@ instance P.HasRole (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
                           } :: OrganizationIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_organization_iam_custom_role@ Resource.
 --
@@ -688,7 +688,7 @@ instance P.HasRole (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
                           } :: OrganizationIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_organization_iam_policy@ Resource.
 --
@@ -733,14 +733,14 @@ instance P.HasPolicyData (OrganizationIamPolicyResource s) (TF.Attr s P.Text) wh
                           } :: OrganizationIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_organization_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Google/google_organization_policy terraform documentation>
 -- for more information.
 data OrganizationPolicyResource s = OrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s [BooleanPolicy s]
+    { _booleanPolicy :: TF.Attr s (BooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -750,7 +750,7 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     , _constraint    :: TF.Attr s P.Text
     -- ^ @constraint@ - (Required)
     --
-    , _listPolicy    :: TF.Attr s [ListPolicy s]
+    , _listPolicy    :: TF.Attr s (ListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -760,7 +760,7 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     , _orgId         :: TF.Attr s P.Text
     -- ^ @org_id@ - (Required)
     --
-    , _restorePolicy :: TF.Attr s [RestorePolicy s]
+    , _restorePolicy :: TF.Attr s (RestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -792,9 +792,9 @@ organizationPolicyResource _constraint _orgId =
             , _restorePolicy = TF.Nil
             }
 
-instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s [BooleanPolicy s]) where
+instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (BooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s [BooleanPolicy s])
+        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
                (\s a -> s { _booleanPolicy = a
                           , _listPolicy = TF.Nil
                           , _restorePolicy = TF.Nil
@@ -806,9 +806,9 @@ instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _constraint = a
                           } :: OrganizationPolicyResource s)
 
-instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s [ListPolicy s]) where
+instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (ListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s [ListPolicy s])
+        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
                (\s a -> s { _listPolicy = a
                           , _restorePolicy = TF.Nil
                           , _booleanPolicy = TF.Nil
@@ -820,29 +820,29 @@ instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _orgId = a
                           } :: OrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s [RestorePolicy s]) where
+instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (RestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s [RestorePolicy s])
+        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
                (\s a -> s { _restorePolicy = a
                           , _listPolicy = TF.Nil
                           , _booleanPolicy = TF.Nil
                           } :: OrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @google_project@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Google/google_project terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
-    { _appEngine         :: TF.Attr s [AppEngine s]
+    { _appEngine         :: TF.Attr s (AppEngine s)
     -- ^ @app_engine@ - (Optional)
     --
     , _autoCreateNetwork :: TF.Attr s P.Bool
@@ -887,9 +887,9 @@ projectResource _name _projectId =
             , _projectId = _projectId
             }
 
-instance P.HasAppEngine (ProjectResource s) (TF.Attr s [AppEngine s]) where
+instance P.HasAppEngine (ProjectResource s) (TF.Attr s (AppEngine s)) where
     appEngine =
-        P.lens (_appEngine :: ProjectResource s -> TF.Attr s [AppEngine s])
+        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (AppEngine s))
                (\s a -> s { _appEngine = a
                           } :: ProjectResource s)
 
@@ -924,22 +924,22 @@ instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
                           } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedFolderId x = TF.compute (TF.refKey x) "folder_id"
+    computedFolderId x = TF.compute (TF.refKey x) "_computedFolderId"
 
 instance s ~ s' => P.HasComputedNumber (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedNumber x = TF.compute (TF.refKey x) "number"
+    computedNumber x = TF.compute (TF.refKey x) "_computedNumber"
 
 instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedOrgId x = TF.compute (TF.refKey x) "org_id"
+    computedOrgId x = TF.compute (TF.refKey x) "_computedOrgId"
 
 instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
+    computedPolicyData x = TF.compute (TF.refKey x) "_computedPolicyData"
 
 instance s ~ s' => P.HasComputedPolicyEtag (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyEtag x = TF.compute (TF.refKey x) "policy_etag"
+    computedPolicyEtag x = TF.compute (TF.refKey x) "_computedPolicyEtag"
 
 instance s ~ s' => P.HasComputedSkipDelete (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Bool) where
-    computedSkipDelete x = TF.compute (TF.refKey x) "skip_delete"
+    computedSkipDelete x = TF.compute (TF.refKey x) "_computedSkipDelete"
 
 -- | @google_project_iam_binding@ Resource.
 --
@@ -995,7 +995,7 @@ instance P.HasRole (ProjectIamBindingResource s) (TF.Attr s P.Text) where
                           } :: ProjectIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_project_iam_custom_role@ Resource.
 --
@@ -1085,7 +1085,7 @@ instance P.HasTitle (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
                           } :: ProjectIamCustomRoleResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_project_iam_member@ Resource.
 --
@@ -1141,7 +1141,7 @@ instance P.HasRole (ProjectIamMemberResource s) (TF.Attr s P.Text) where
                           } :: ProjectIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_project_iam_policy@ Resource.
 --
@@ -1196,20 +1196,20 @@ instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
                           } :: ProjectIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRestorePolicy (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedRestorePolicy x = TF.compute (TF.refKey x) "restore_policy"
+    computedRestorePolicy x = TF.compute (TF.refKey x) "_computedRestorePolicy"
 
 -- | @google_project_organization_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Google/google_project_organization_policy terraform documentation>
 -- for more information.
 data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s [BooleanPolicy s]
+    { _booleanPolicy :: TF.Attr s (BooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1219,7 +1219,7 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     , _constraint    :: TF.Attr s P.Text
     -- ^ @constraint@ - (Required)
     --
-    , _listPolicy    :: TF.Attr s [ListPolicy s]
+    , _listPolicy    :: TF.Attr s (ListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1229,7 +1229,7 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     , _project       :: TF.Attr s P.Text
     -- ^ @project@ - (Required)
     --
-    , _restorePolicy :: TF.Attr s [RestorePolicy s]
+    , _restorePolicy :: TF.Attr s (RestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1261,9 +1261,9 @@ projectOrganizationPolicyResource _constraint _project =
             , _restorePolicy = TF.Nil
             }
 
-instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s [BooleanPolicy s]) where
+instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (BooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s [BooleanPolicy s])
+        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
                (\s a -> s { _booleanPolicy = a
                           , _listPolicy = TF.Nil
                           , _restorePolicy = TF.Nil
@@ -1275,9 +1275,9 @@ instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text
                (\s a -> s { _constraint = a
                           } :: ProjectOrganizationPolicyResource s)
 
-instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s [ListPolicy s]) where
+instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s [ListPolicy s])
+        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
                (\s a -> s { _listPolicy = a
                           , _restorePolicy = TF.Nil
                           , _booleanPolicy = TF.Nil
@@ -1289,22 +1289,22 @@ instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) w
                (\s a -> s { _project = a
                           } :: ProjectOrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s [RestorePolicy s]) where
+instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (RestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s [RestorePolicy s])
+        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
                (\s a -> s { _restorePolicy = a
                           , _listPolicy = TF.Nil
                           , _booleanPolicy = TF.Nil
                           } :: ProjectOrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @google_project_service@ Resource.
 --
@@ -1348,7 +1348,7 @@ instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
                           } :: ProjectServiceResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_project_services@ Resource.
 --
@@ -1392,7 +1392,7 @@ instance P.HasServices (ProjectServicesResource s) (TF.Attr s [TF.Attr s (TF.Att
                           } :: ProjectServicesResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_project_usage_export_bucket@ Resource.
 --
@@ -1436,7 +1436,7 @@ instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) whe
                           } :: ProjectUsageExportBucketResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_subscription@ Resource.
 --
@@ -1446,7 +1446,7 @@ data PubsubSubscriptionResource s = PubsubSubscriptionResource'
     { _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _pushConfig :: TF.Attr s [PushConfig s]
+    , _pushConfig :: TF.Attr s (PushConfig s)
     -- ^ @push_config@ - (Optional)
     --
     , _topic      :: TF.Attr s P.Text
@@ -1479,9 +1479,9 @@ instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: PubsubSubscriptionResource s)
 
-instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s [PushConfig s]) where
+instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PushConfig s)) where
     pushConfig =
-        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s [PushConfig s])
+        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PushConfig s))
                (\s a -> s { _pushConfig = a
                           } :: PubsubSubscriptionResource s)
 
@@ -1492,13 +1492,13 @@ instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
                           } :: PubsubSubscriptionResource s)
 
 instance s ~ s' => P.HasComputedAckDeadlineSeconds (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Integer) where
-    computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "ack_deadline_seconds"
+    computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "_computedAckDeadlineSeconds"
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+    computedPath x = TF.compute (TF.refKey x) "_computedPath"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_subscription_iam_binding@ Resource.
 --
@@ -1555,10 +1555,10 @@ instance P.HasSubscription (PubsubSubscriptionIamBindingResource s) (TF.Attr s P
                           } :: PubsubSubscriptionIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_subscription_iam_member@ Resource.
 --
@@ -1615,10 +1615,10 @@ instance P.HasSubscription (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.
                           } :: PubsubSubscriptionIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_subscription_iam_policy@ Resource.
 --
@@ -1663,10 +1663,10 @@ instance P.HasSubscription (PubsubSubscriptionIamPolicyResource s) (TF.Attr s P.
                           } :: PubsubSubscriptionIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_topic@ Resource.
 --
@@ -1699,7 +1699,7 @@ instance P.HasName (PubsubTopicResource s) (TF.Attr s P.Text) where
                           } :: PubsubTopicResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_topic_iam_binding@ Resource.
 --
@@ -1756,10 +1756,10 @@ instance P.HasTopic (PubsubTopicIamBindingResource s) (TF.Attr s P.Text) where
                           } :: PubsubTopicIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_topic_iam_member@ Resource.
 --
@@ -1816,10 +1816,10 @@ instance P.HasTopic (PubsubTopicIamMemberResource s) (TF.Attr s P.Text) where
                           } :: PubsubTopicIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_pubsub_topic_iam_policy@ Resource.
 --
@@ -1864,10 +1864,10 @@ instance P.HasTopic (PubsubTopicIamPolicyResource s) (TF.Attr s P.Text) where
                           } :: PubsubTopicIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_redis_instance@ Resource.
 --
@@ -1956,37 +1956,37 @@ instance P.HasTier (RedisInstanceResource s) (TF.Attr s P.Text) where
                           } :: RedisInstanceResource s)
 
 instance s ~ s' => P.HasComputedAlternativeLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedAlternativeLocationId x = TF.compute (TF.refKey x) "alternative_location_id"
+    computedAlternativeLocationId x = TF.compute (TF.refKey x) "_computedAlternativeLocationId"
 
 instance s ~ s' => P.HasComputedAuthorizedNetwork (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedAuthorizedNetwork x = TF.compute (TF.refKey x) "authorized_network"
+    computedAuthorizedNetwork x = TF.compute (TF.refKey x) "_computedAuthorizedNetwork"
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
 
 instance s ~ s' => P.HasComputedCurrentLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedCurrentLocationId x = TF.compute (TF.refKey x) "current_location_id"
+    computedCurrentLocationId x = TF.compute (TF.refKey x) "_computedCurrentLocationId"
 
 instance s ~ s' => P.HasComputedHost (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedHost x = TF.compute (TF.refKey x) "host"
+    computedHost x = TF.compute (TF.refKey x) "_computedHost"
 
 instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedLocationId x = TF.compute (TF.refKey x) "location_id"
+    computedLocationId x = TF.compute (TF.refKey x) "_computedLocationId"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRedisVersion (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedRedisVersion x = TF.compute (TF.refKey x) "redis_version"
+    computedRedisVersion x = TF.compute (TF.refKey x) "_computedRedisVersion"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedReservedIpRange (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedReservedIpRange x = TF.compute (TF.refKey x) "reserved_ip_range"
+    computedReservedIpRange x = TF.compute (TF.refKey x) "_computedReservedIpRange"
 
 -- | @google_resource_manager_lien@ Resource.
 --
@@ -2055,10 +2055,10 @@ instance P.HasRestrictions (ResourceManagerLienResource s) (TF.Attr s [TF.Attr s
                           } :: ResourceManagerLienResource s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (ResourceManagerLienResource s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceManagerLienResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @google_runtimeconfig_config@ Resource.
 --
@@ -2102,7 +2102,7 @@ instance P.HasName (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
                           } :: RuntimeconfigConfigResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_runtimeconfig_variable@ Resource.
 --
@@ -2177,10 +2177,10 @@ instance P.HasValue (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
                           } :: RuntimeconfigVariableResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
+    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
 
 -- | @google_service_account@ Resource.
 --
@@ -2235,16 +2235,16 @@ instance P.HasPolicyData (ServiceAccountResource s) (TF.Attr s P.Text) where
                           } :: ServiceAccountResource s)
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
+    computedUniqueId x = TF.compute (TF.refKey x) "_computedUniqueId"
 
 -- | @google_service_account_iam_binding@ Resource.
 --
@@ -2301,7 +2301,7 @@ instance P.HasServiceAccountId (ServiceAccountIamBindingResource s) (TF.Attr s P
                           } :: ServiceAccountIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_service_account_iam_member@ Resource.
 --
@@ -2358,7 +2358,7 @@ instance P.HasServiceAccountId (ServiceAccountIamMemberResource s) (TF.Attr s P.
                           } :: ServiceAccountIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_service_account_iam_policy@ Resource.
 --
@@ -2403,7 +2403,7 @@ instance P.HasServiceAccountId (ServiceAccountIamPolicyResource s) (TF.Attr s P.
                           } :: ServiceAccountIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_service_account_key@ Resource.
 --
@@ -2480,25 +2480,25 @@ instance P.HasServiceAccountId (ServiceAccountKeyResource s) (TF.Attr s P.Text) 
                           } :: ServiceAccountKeyResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKey x = TF.compute (TF.refKey x) "private_key"
+    computedPrivateKey x = TF.compute (TF.refKey x) "_computedPrivateKey"
 
 instance s ~ s' => P.HasComputedPrivateKeyEncrypted (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyEncrypted x = TF.compute (TF.refKey x) "private_key_encrypted"
+    computedPrivateKeyEncrypted x = TF.compute (TF.refKey x) "_computedPrivateKeyEncrypted"
 
 instance s ~ s' => P.HasComputedPrivateKeyFingerprint (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyFingerprint x = TF.compute (TF.refKey x) "private_key_fingerprint"
+    computedPrivateKeyFingerprint x = TF.compute (TF.refKey x) "_computedPrivateKeyFingerprint"
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
 
 instance s ~ s' => P.HasComputedValidAfter (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedValidAfter x = TF.compute (TF.refKey x) "valid_after"
+    computedValidAfter x = TF.compute (TF.refKey x) "_computedValidAfter"
 
 instance s ~ s' => P.HasComputedValidBefore (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedValidBefore x = TF.compute (TF.refKey x) "valid_before"
+    computedValidBefore x = TF.compute (TF.refKey x) "_computedValidBefore"
 
 -- | @google_sourcerepo_repository@ Resource.
 --
@@ -2531,13 +2531,13 @@ instance P.HasName (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
                           } :: SourcerepoRepositoryResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @google_spanner_database@ Resource.
 --
@@ -2593,10 +2593,10 @@ instance P.HasName (SpannerDatabaseResource s) (TF.Attr s P.Text) where
                           } :: SpannerDatabaseResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 -- | @google_spanner_database_iam_binding@ Resource.
 --
@@ -2665,10 +2665,10 @@ instance P.HasRole (SpannerDatabaseIamBindingResource s) (TF.Attr s P.Text) wher
                           } :: SpannerDatabaseIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_spanner_database_iam_member@ Resource.
 --
@@ -2737,10 +2737,10 @@ instance P.HasRole (SpannerDatabaseIamMemberResource s) (TF.Attr s P.Text) where
                           } :: SpannerDatabaseIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_spanner_database_iam_policy@ Resource.
 --
@@ -2797,10 +2797,10 @@ instance P.HasPolicyData (SpannerDatabaseIamPolicyResource s) (TF.Attr s P.Text)
                           } :: SpannerDatabaseIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_spanner_instance@ Resource.
 --
@@ -2867,13 +2867,13 @@ instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Integer) where
                           } :: SpannerInstanceResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 -- | @google_spanner_instance_iam_binding@ Resource.
 --
@@ -2930,10 +2930,10 @@ instance P.HasRole (SpannerInstanceIamBindingResource s) (TF.Attr s P.Text) wher
                           } :: SpannerInstanceIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_spanner_instance_iam_member@ Resource.
 --
@@ -2990,10 +2990,10 @@ instance P.HasRole (SpannerInstanceIamMemberResource s) (TF.Attr s P.Text) where
                           } :: SpannerInstanceIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_spanner_instance_iam_policy@ Resource.
 --
@@ -3038,10 +3038,10 @@ instance P.HasPolicyData (SpannerInstanceIamPolicyResource s) (TF.Attr s P.Text)
                           } :: SpannerInstanceIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_sql_database@ Resource.
 --
@@ -3086,16 +3086,16 @@ instance P.HasName (SqlDatabaseResource s) (TF.Attr s P.Text) where
                           } :: SqlDatabaseResource s)
 
 instance s ~ s' => P.HasComputedCharset (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCharset x = TF.compute (TF.refKey x) "charset"
+    computedCharset x = TF.compute (TF.refKey x) "_computedCharset"
 
 instance s ~ s' => P.HasComputedCollation (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCollation x = TF.compute (TF.refKey x) "collation"
+    computedCollation x = TF.compute (TF.refKey x) "_computedCollation"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 -- | @google_sql_database_instance@ Resource.
 --
@@ -3108,7 +3108,7 @@ data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
     , _region          :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
-    , _settings        :: TF.Attr s [Settings s]
+    , _settings        :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3121,7 +3121,7 @@ instance TF.IsObject (SqlDatabaseInstanceResource s) where
         ]
 
 sqlDatabaseInstanceResource
-    :: TF.Attr s [Settings s] -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
     -> TF.Resource P.Provider (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
     TF.newResource "google_sql_database_instance" $
@@ -3143,38 +3143,38 @@ instance P.HasRegion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _region = a
                           } :: SqlDatabaseInstanceResource s)
 
-instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s [Settings s]) where
+instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s [Settings s])
+        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a
                           } :: SqlDatabaseInstanceResource s)
 
 instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedConnectionName x = TF.compute (TF.refKey x) "connection_name"
+    computedConnectionName x = TF.compute (TF.refKey x) "_computedConnectionName"
 
 instance s ~ s' => P.HasComputedFirstIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedFirstIpAddress x = TF.compute (TF.refKey x) "first_ip_address"
+    computedFirstIpAddress x = TF.compute (TF.refKey x) "_computedFirstIpAddress"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [IpAddress s]) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedMasterInstanceName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedMasterInstanceName x = TF.compute (TF.refKey x) "master_instance_name"
+    computedMasterInstanceName x = TF.compute (TF.refKey x) "_computedMasterInstanceName"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
-instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [ReplicaConfiguration s]) where
-    computedReplicaConfiguration x = TF.compute (TF.refKey x) "replica_configuration"
+instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ReplicaConfiguration s)) where
+    computedReplicaConfiguration x = TF.compute (TF.refKey x) "_computedReplicaConfiguration"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [ServerCaCert s]) where
-    computedServerCaCert x = TF.compute (TF.refKey x) "server_ca_cert"
+instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ServerCaCert s)) where
+    computedServerCaCert x = TF.compute (TF.refKey x) "_computedServerCaCert"
 
 -- | @google_sql_user@ Resource.
 --
@@ -3241,7 +3241,7 @@ instance P.HasPassword (SqlUserResource s) (TF.Attr s P.Text) where
                           } :: SqlUserResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 -- | @google_storage_bucket@ Resource.
 --
@@ -3263,7 +3263,7 @@ data StorageBucketResource s = StorageBucketResource'
     , _location      :: TF.Attr s P.Text
     -- ^ @location@ - (Optional)
     --
-    , _logging       :: TF.Attr s [Logging s]
+    , _logging       :: TF.Attr s (Logging s)
     -- ^ @logging@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
@@ -3275,7 +3275,7 @@ data StorageBucketResource s = StorageBucketResource'
     , _storageClass  :: TF.Attr s P.Text
     -- ^ @storage_class@ - (Optional)
     --
-    , _versioning    :: TF.Attr s [Versioning s]
+    , _versioning    :: TF.Attr s (Versioning s)
     -- ^ @versioning@ - (Optional)
     --
     , _website       :: TF.Attr s [Website s]
@@ -3347,9 +3347,9 @@ instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
                (\s a -> s { _location = a
                           } :: StorageBucketResource s)
 
-instance P.HasLogging (StorageBucketResource s) (TF.Attr s [Logging s]) where
+instance P.HasLogging (StorageBucketResource s) (TF.Attr s (Logging s)) where
     logging =
-        P.lens (_logging :: StorageBucketResource s -> TF.Attr s [Logging s])
+        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (Logging s))
                (\s a -> s { _logging = a
                           } :: StorageBucketResource s)
 
@@ -3371,9 +3371,9 @@ instance P.HasStorageClass (StorageBucketResource s) (TF.Attr s P.Text) where
                (\s a -> s { _storageClass = a
                           } :: StorageBucketResource s)
 
-instance P.HasVersioning (StorageBucketResource s) (TF.Attr s [Versioning s]) where
+instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (Versioning s)) where
     versioning =
-        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s [Versioning s])
+        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (Versioning s))
                (\s a -> s { _versioning = a
                           } :: StorageBucketResource s)
 
@@ -3384,13 +3384,13 @@ instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [Website s]) where
                           } :: StorageBucketResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "project"
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
 -- | @google_storage_bucket_acl@ Resource.
 --
@@ -3445,7 +3445,7 @@ instance P.HasPredefinedAcl (StorageBucketAclResource s) (TF.Attr s P.Text) wher
                           } :: StorageBucketAclResource s)
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
+    computedRoleEntity x = TF.compute (TF.refKey x) "_computedRoleEntity"
 
 -- | @google_storage_bucket_iam_binding@ Resource.
 --
@@ -3502,7 +3502,7 @@ instance P.HasRole (StorageBucketIamBindingResource s) (TF.Attr s P.Text) where
                           } :: StorageBucketIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_storage_bucket_iam_member@ Resource.
 --
@@ -3559,7 +3559,7 @@ instance P.HasRole (StorageBucketIamMemberResource s) (TF.Attr s P.Text) where
                           } :: StorageBucketIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_storage_bucket_iam_policy@ Resource.
 --
@@ -3604,7 +3604,7 @@ instance P.HasPolicyData (StorageBucketIamPolicyResource s) (TF.Attr s P.Text) w
                           } :: StorageBucketIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 -- | @google_storage_bucket_object@ Resource.
 --
@@ -3745,16 +3745,16 @@ instance P.HasSource (StorageBucketObjectResource s) (TF.Attr s P.Text) where
                           } :: StorageBucketObjectResource s)
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedContentType x = TF.compute (TF.refKey x) "content_type"
+    computedContentType x = TF.compute (TF.refKey x) "_computedContentType"
 
 instance s ~ s' => P.HasComputedCrc32c (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedCrc32c x = TF.compute (TF.refKey x) "crc32c"
+    computedCrc32c x = TF.compute (TF.refKey x) "_computedCrc32c"
 
 instance s ~ s' => P.HasComputedMd5hash (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedMd5hash x = TF.compute (TF.refKey x) "md5hash"
+    computedMd5hash x = TF.compute (TF.refKey x) "_computedMd5hash"
 
 instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
+    computedStorageClass x = TF.compute (TF.refKey x) "_computedStorageClass"
 
 -- | @google_storage_default_object_acl@ Resource.
 --
@@ -3787,7 +3787,7 @@ instance P.HasBucket (StorageDefaultObjectAclResource s) (TF.Attr s P.Text) wher
                           } :: StorageDefaultObjectAclResource s)
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
+    computedRoleEntity x = TF.compute (TF.refKey x) "_computedRoleEntity"
 
 -- | @google_storage_notification@ Resource.
 --
@@ -3877,7 +3877,7 @@ instance P.HasTopic (StorageNotificationResource s) (TF.Attr s P.Text) where
                           } :: StorageNotificationResource s)
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 -- | @google_storage_object_acl@ Resource.
 --
@@ -3933,4 +3933,4 @@ instance P.HasPredefinedAcl (StorageObjectAclResource s) (TF.Attr s P.Text) wher
                           } :: StorageObjectAclResource s)
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
+    computedRoleEntity x = TF.compute (TF.refKey x) "_computedRoleEntity"
