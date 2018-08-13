@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -156,7 +157,6 @@ module Terrafomo.Google.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -164,7 +164,10 @@ import Terrafomo.Google.Settings
 
 import qualified Data.Hashable             as P
 import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
 import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
@@ -176,6 +179,7 @@ import qualified Terrafomo.Google.Types    as P
 import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
 -- | @google_active_folder@ DataSource.
 --
@@ -190,34 +194,35 @@ data ActiveFolderData s = ActiveFolderData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ActiveFolderData s) where
-    toObject ActiveFolderData'{..} = catMaybes
-        [ TF.assign "display_name" <$> TF.attribute _displayName
-        , TF.assign "parent" <$> TF.attribute _parent
-        ]
-
 activeFolderData
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
     -> TF.DataSource P.Provider (ActiveFolderData s)
 activeFolderData _displayName _parent =
-    TF.newDataSource "google_active_folder" $
+    TF.newDataSource "google_active_folder" TF.validator $
         ActiveFolderData'
             { _displayName = _displayName
             , _parent = _parent
             }
 
+instance TF.IsObject (ActiveFolderData s) where
+    toObject ActiveFolderData'{..} = P.catMaybes
+        [ TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "parent" <$> TF.attribute _parent
+        ]
+
+instance TF.IsValid (ActiveFolderData s) where
+    validator = P.mempty
+
 instance P.HasDisplayName (ActiveFolderData s) (TF.Attr s P.Text) where
     displayName =
         P.lens (_displayName :: ActiveFolderData s -> TF.Attr s P.Text)
-               (\s a -> s { _displayName = a
-                          } :: ActiveFolderData s)
+               (\s a -> s { _displayName = a } :: ActiveFolderData s)
 
 instance P.HasParent (ActiveFolderData s) (TF.Attr s P.Text) where
     parent =
         P.lens (_parent :: ActiveFolderData s -> TF.Attr s P.Text)
-               (\s a -> s { _parent = a
-                          } :: ActiveFolderData s)
+               (\s a -> s { _parent = a } :: ActiveFolderData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ActiveFolderData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
@@ -232,24 +237,26 @@ data BillingAccountData s = BillingAccountData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (BillingAccountData s) where
-    toObject BillingAccountData'{..} = catMaybes
-        [ TF.assign "billing_account" <$> TF.attribute _billingAccount
-        ]
-
 billingAccountData
     :: TF.DataSource P.Provider (BillingAccountData s)
 billingAccountData =
-    TF.newDataSource "google_billing_account" $
+    TF.newDataSource "google_billing_account" TF.validator $
         BillingAccountData'
             { _billingAccount = TF.Nil
             }
 
+instance TF.IsObject (BillingAccountData s) where
+    toObject BillingAccountData'{..} = P.catMaybes
+        [ TF.assign "billing_account" <$> TF.attribute _billingAccount
+        ]
+
+instance TF.IsValid (BillingAccountData s) where
+    validator = P.mempty
+
 instance P.HasBillingAccount (BillingAccountData s) (TF.Attr s P.Text) where
     billingAccount =
         P.lens (_billingAccount :: BillingAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _billingAccount = a
-                          } :: BillingAccountData s)
+               (\s a -> s { _billingAccount = a } :: BillingAccountData s)
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
@@ -260,7 +267,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (BillingAccountData s)) (TF.Attr
 instance s ~ s' => P.HasComputedOpen (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Bool) where
     computedOpen x = TF.compute (TF.refKey x) "_computedOpen"
 
-instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedProjectIds x = TF.compute (TF.refKey x) "_computedProjectIds"
 
 -- | @google_client_config@ DataSource.
@@ -270,14 +277,17 @@ instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (T
 data ClientConfigData s = ClientConfigData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ClientConfigData s) where
-    toObject _ = []
-
 clientConfigData
     :: TF.DataSource P.Provider (ClientConfigData s)
 clientConfigData =
-    TF.newDataSource "google_client_config" $
+    TF.newDataSource "google_client_config" TF.validator $
         ClientConfigData'
+
+instance TF.IsObject (ClientConfigData s) where
+    toObject _ = []
+
+instance TF.IsValid (ClientConfigData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAccessToken (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedAccessToken x = TF.compute (TF.refKey x) "_computedAccessToken"
@@ -304,41 +314,41 @@ data CloudfunctionsFunctionData s = CloudfunctionsFunctionData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CloudfunctionsFunctionData s) where
-    toObject CloudfunctionsFunctionData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        ]
-
 cloudfunctionsFunctionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData _name =
-    TF.newDataSource "google_cloudfunctions_function" $
+    TF.newDataSource "google_cloudfunctions_function" TF.validator $
         CloudfunctionsFunctionData'
             { _name = _name
             , _project = TF.Nil
             , _region = TF.Nil
             }
 
+instance TF.IsObject (CloudfunctionsFunctionData s) where
+    toObject CloudfunctionsFunctionData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (CloudfunctionsFunctionData s) where
+    validator = P.mempty
+
 instance P.HasName (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CloudfunctionsFunctionData s)
+               (\s a -> s { _name = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasProject (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: CloudfunctionsFunctionData s)
+               (\s a -> s { _project = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasRegion (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: CloudfunctionsFunctionData s)
+               (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
 
 instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Integer) where
     computedAvailableMemoryMb x = TF.compute (TF.refKey x) "_computedAvailableMemoryMb"
@@ -386,25 +396,27 @@ data ComputeAddressData s = ComputeAddressData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeAddressData s) where
-    toObject ComputeAddressData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeAddressData s)
 computeAddressData _name =
-    TF.newDataSource "google_compute_address" $
+    TF.newDataSource "google_compute_address" TF.validator $
         ComputeAddressData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeAddressData s) where
+    toObject ComputeAddressData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeAddressData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeAddressData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeAddressData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeAddressData s)
+               (\s a -> s { _name = a } :: ComputeAddressData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -434,44 +446,45 @@ data ComputeBackendServiceData s = ComputeBackendServiceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeBackendServiceData s) where
-    toObject ComputeBackendServiceData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
 computeBackendServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeBackendServiceData s)
 computeBackendServiceData _name =
-    TF.newDataSource "google_compute_backend_service" $
+    TF.newDataSource "google_compute_backend_service" TF.validator $
         ComputeBackendServiceData'
             { _name = _name
             , _project = TF.Nil
             }
 
+instance TF.IsObject (ComputeBackendServiceData s) where
+    toObject ComputeBackendServiceData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance TF.IsValid (ComputeBackendServiceData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeBackendServiceData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeBackendServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeBackendServiceData s)
+               (\s a -> s { _name = a } :: ComputeBackendServiceData s)
 
 instance P.HasProject (ComputeBackendServiceData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ComputeBackendServiceData s)
+               (\s a -> s { _project = a } :: ComputeBackendServiceData s)
 
 instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (Backend s)]) where
     computedBackend x = TF.compute (TF.refKey x) "_computedBackend"
 
-instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [CdnPolicy s]) where
+instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (CdnPolicy s)]) where
     computedCdnPolicy x = TF.compute (TF.refKey x) "_computedCdnPolicy"
 
 instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Integer) where
     computedConnectionDrainingTimeoutSec x = TF.compute (TF.refKey x) "_computedConnectionDrainingTimeoutSec"
 
-instance s ~ s' => P.HasComputedCustomRequestHeaders (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedCustomRequestHeaders (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCustomRequestHeaders x = TF.compute (TF.refKey x) "_computedCustomRequestHeaders"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
@@ -483,10 +496,10 @@ instance s ~ s' => P.HasComputedEnableCdn (TF.Ref s' (ComputeBackendServiceData 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
-instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedHealthChecks x = TF.compute (TF.refKey x) "_computedHealthChecks"
 
-instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [Iap s]) where
+instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (Iap s)]) where
     computedIap x = TF.compute (TF.refKey x) "_computedIap"
 
 instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
@@ -517,14 +530,17 @@ instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData
 data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeDefaultServiceAccountData s) where
-    toObject _ = []
-
 computeDefaultServiceAccountData
     :: TF.DataSource P.Provider (ComputeDefaultServiceAccountData s)
 computeDefaultServiceAccountData =
-    TF.newDataSource "google_compute_default_service_account" $
+    TF.newDataSource "google_compute_default_service_account" TF.validator $
         ComputeDefaultServiceAccountData'
+
+instance TF.IsObject (ComputeDefaultServiceAccountData s) where
+    toObject _ = []
+
+instance TF.IsValid (ComputeDefaultServiceAccountData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
@@ -542,25 +558,27 @@ data ComputeForwardingRuleData s = ComputeForwardingRuleData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeForwardingRuleData s) where
-    toObject ComputeForwardingRuleData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeForwardingRuleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeForwardingRuleData s)
 computeForwardingRuleData _name =
-    TF.newDataSource "google_compute_forwarding_rule" $
+    TF.newDataSource "google_compute_forwarding_rule" TF.validator $
         ComputeForwardingRuleData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeForwardingRuleData s) where
+    toObject ComputeForwardingRuleData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeForwardingRuleData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeForwardingRuleData s)
+               (\s a -> s { _name = a } :: ComputeForwardingRuleData s)
 
 instance s ~ s' => P.HasComputedBackendService (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
     computedBackendService x = TF.compute (TF.refKey x) "_computedBackendService"
@@ -583,7 +601,7 @@ instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeForwardingRuleData s)
 instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
     computedPortRange x = TF.compute (TF.refKey x) "_computedPortRange"
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedPorts x = TF.compute (TF.refKey x) "_computedPorts"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
@@ -611,25 +629,27 @@ data ComputeGlobalAddressData s = ComputeGlobalAddressData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeGlobalAddressData s) where
-    toObject ComputeGlobalAddressData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeGlobalAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeGlobalAddressData s)
 computeGlobalAddressData _name =
-    TF.newDataSource "google_compute_global_address" $
+    TF.newDataSource "google_compute_global_address" TF.validator $
         ComputeGlobalAddressData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeGlobalAddressData s) where
+    toObject ComputeGlobalAddressData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeGlobalAddressData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeGlobalAddressData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeGlobalAddressData s)
+               (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -650,14 +670,17 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeGlobalAddressData s)) 
 data ComputeImageData s = ComputeImageData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeImageData s) where
-    toObject _ = []
-
 computeImageData
     :: TF.DataSource P.Provider (ComputeImageData s)
 computeImageData =
-    TF.newDataSource "google_compute_image" $
+    TF.newDataSource "google_compute_image" TF.validator $
         ComputeImageData'
+
+instance TF.IsObject (ComputeImageData s) where
+    toObject _ = []
+
+instance TF.IsValid (ComputeImageData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArchiveSizeBytes (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Integer) where
     computedArchiveSizeBytes x = TF.compute (TF.refKey x) "_computedArchiveSizeBytes"
@@ -723,32 +746,34 @@ data ComputeInstanceGroupData s = ComputeInstanceGroupData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeInstanceGroupData s) where
-    toObject ComputeInstanceGroupData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeInstanceGroupData
     :: TF.DataSource P.Provider (ComputeInstanceGroupData s)
 computeInstanceGroupData =
-    TF.newDataSource "google_compute_instance_group" $
+    TF.newDataSource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupData'
             { _name = TF.Nil
             }
 
+instance TF.IsObject (ComputeInstanceGroupData s) where
+    toObject ComputeInstanceGroupData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeInstanceGroupData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeInstanceGroupData s)
+               (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [NamedPort s]) where
+instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (NamedPort s)]) where
     computedNamedPort x = TF.compute (TF.refKey x) "_computedNamedPort"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -773,14 +798,17 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupData s)) (T
 data ComputeLbIpRangesData s = ComputeLbIpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeLbIpRangesData s) where
-    toObject _ = []
-
 computeLbIpRangesData
     :: TF.DataSource P.Provider (ComputeLbIpRangesData s)
 computeLbIpRangesData =
-    TF.newDataSource "google_compute_lb_ip_ranges" $
+    TF.newDataSource "google_compute_lb_ip_ranges" TF.validator $
         ComputeLbIpRangesData'
+
+instance TF.IsObject (ComputeLbIpRangesData s) where
+    toObject _ = []
+
+instance TF.IsValid (ComputeLbIpRangesData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedHttpSslTcpInternal (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedHttpSslTcpInternal x = TF.compute (TF.refKey x) "_computedHttpSslTcpInternal"
@@ -801,33 +829,34 @@ data ComputeNetworkData s = ComputeNetworkData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeNetworkData s) where
-    toObject ComputeNetworkData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
 computeNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeNetworkData s)
 computeNetworkData _name =
-    TF.newDataSource "google_compute_network" $
+    TF.newDataSource "google_compute_network" TF.validator $
         ComputeNetworkData'
             { _name = _name
             , _project = TF.Nil
             }
 
+instance TF.IsObject (ComputeNetworkData s) where
+    toObject ComputeNetworkData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance TF.IsValid (ComputeNetworkData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeNetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeNetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeNetworkData s)
+               (\s a -> s { _name = a } :: ComputeNetworkData s)
 
 instance P.HasProject (ComputeNetworkData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ComputeNetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ComputeNetworkData s)
+               (\s a -> s { _project = a } :: ComputeNetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -848,16 +877,19 @@ instance s ~ s' => P.HasComputedSubnetworksSelfLinks (TF.Ref s' (ComputeNetworkD
 data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeRegionInstanceGroupData s) where
-    toObject _ = []
-
 computeRegionInstanceGroupData
     :: TF.DataSource P.Provider (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
-    TF.newDataSource "google_compute_region_instance_group" $
+    TF.newDataSource "google_compute_region_instance_group" TF.validator $
         ComputeRegionInstanceGroupData'
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [Instances s]) where
+instance TF.IsObject (ComputeRegionInstanceGroupData s) where
+    toObject _ = []
+
+instance TF.IsValid (ComputeRegionInstanceGroupData s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
     computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -885,24 +917,26 @@ data ComputeRegionsData s = ComputeRegionsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeRegionsData s) where
-    toObject ComputeRegionsData'{..} = catMaybes
-        [ TF.assign "status" <$> TF.attribute _status
-        ]
-
 computeRegionsData
     :: TF.DataSource P.Provider (ComputeRegionsData s)
 computeRegionsData =
-    TF.newDataSource "google_compute_regions" $
+    TF.newDataSource "google_compute_regions" TF.validator $
         ComputeRegionsData'
             { _status = TF.Nil
             }
 
+instance TF.IsObject (ComputeRegionsData s) where
+    toObject ComputeRegionsData'{..} = P.catMaybes
+        [ TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance TF.IsValid (ComputeRegionsData s) where
+    validator = P.mempty
+
 instance P.HasStatus (ComputeRegionsData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: ComputeRegionsData s)
+               (\s a -> s { _status = a } :: ComputeRegionsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "_computedNames"
@@ -923,44 +957,45 @@ data ComputeSslPolicyData s = ComputeSslPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeSslPolicyData s) where
-    toObject ComputeSslPolicyData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
 computeSslPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeSslPolicyData s)
 computeSslPolicyData _name =
-    TF.newDataSource "google_compute_ssl_policy" $
+    TF.newDataSource "google_compute_ssl_policy" TF.validator $
         ComputeSslPolicyData'
             { _name = _name
             , _project = TF.Nil
             }
 
+instance TF.IsObject (ComputeSslPolicyData s) where
+    toObject ComputeSslPolicyData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance TF.IsValid (ComputeSslPolicyData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeSslPolicyData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeSslPolicyData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeSslPolicyData s)
+               (\s a -> s { _name = a } :: ComputeSslPolicyData s)
 
 instance P.HasProject (ComputeSslPolicyData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ComputeSslPolicyData s)
+               (\s a -> s { _project = a } :: ComputeSslPolicyData s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
 
-instance s ~ s' => P.HasComputedCustomFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedCustomFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCustomFeatures x = TF.compute (TF.refKey x) "_computedCustomFeatures"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedEnabledFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedEnabledFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedEnabledFeatures x = TF.compute (TF.refKey x) "_computedEnabledFeatures"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
@@ -985,25 +1020,27 @@ data ComputeSubnetworkData s = ComputeSubnetworkData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeSubnetworkData s) where
-    toObject ComputeSubnetworkData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeSubnetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeSubnetworkData s)
 computeSubnetworkData _name =
-    TF.newDataSource "google_compute_subnetwork" $
+    TF.newDataSource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeSubnetworkData s) where
+    toObject ComputeSubnetworkData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeSubnetworkData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeSubnetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeSubnetworkData s)
+               (\s a -> s { _name = a } :: ComputeSubnetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -1026,7 +1063,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkData s)) (T
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [SecondaryIpRange s]) where
+instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [TF.Attr s (SecondaryIpRange s)]) where
     computedSecondaryIpRange x = TF.compute (TF.refKey x) "_computedSecondaryIpRange"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
@@ -1042,25 +1079,27 @@ data ComputeVpnGatewayData s = ComputeVpnGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeVpnGatewayData s) where
-    toObject ComputeVpnGatewayData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 computeVpnGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ComputeVpnGatewayData s)
 computeVpnGatewayData _name =
-    TF.newDataSource "google_compute_vpn_gateway" $
+    TF.newDataSource "google_compute_vpn_gateway" TF.validator $
         ComputeVpnGatewayData'
             { _name = _name
             }
 
+instance TF.IsObject (ComputeVpnGatewayData s) where
+    toObject ComputeVpnGatewayData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ComputeVpnGatewayData s) where
+    validator = P.mempty
+
 instance P.HasName (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ComputeVpnGatewayData s)
+               (\s a -> s { _name = a } :: ComputeVpnGatewayData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -1090,32 +1129,33 @@ data ComputeZonesData s = ComputeZonesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ComputeZonesData s) where
-    toObject ComputeZonesData'{..} = catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
-        , TF.assign "status" <$> TF.attribute _status
-        ]
-
 computeZonesData
     :: TF.DataSource P.Provider (ComputeZonesData s)
 computeZonesData =
-    TF.newDataSource "google_compute_zones" $
+    TF.newDataSource "google_compute_zones" TF.validator $
         ComputeZonesData'
             { _region = TF.Nil
             , _status = TF.Nil
             }
 
+instance TF.IsObject (ComputeZonesData s) where
+    toObject ComputeZonesData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        , TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance TF.IsValid (ComputeZonesData s) where
+    validator = P.mempty
+
 instance P.HasRegion (ComputeZonesData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ComputeZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ComputeZonesData s)
+               (\s a -> s { _region = a } :: ComputeZonesData s)
 
 instance P.HasStatus (ComputeZonesData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: ComputeZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a
-                          } :: ComputeZonesData s)
+               (\s a -> s { _status = a } :: ComputeZonesData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeZonesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "_computedNames"
@@ -1142,19 +1182,11 @@ data ContainerClusterData s = ContainerClusterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ContainerClusterData s) where
-    toObject ContainerClusterData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "zone" <$> TF.attribute _zone
-        ]
-
 containerClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ContainerClusterData s)
 containerClusterData _name =
-    TF.newDataSource "google_container_cluster" $
+    TF.newDataSource "google_container_cluster" TF.validator $
         ContainerClusterData'
             { _name = _name
             , _project = TF.Nil
@@ -1162,34 +1194,41 @@ containerClusterData _name =
             , _zone = TF.Nil
             }
 
+instance TF.IsObject (ContainerClusterData s) where
+    toObject ContainerClusterData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
+
+instance TF.IsValid (ContainerClusterData s) where
+    validator = P.mempty
+
 instance P.HasName (ContainerClusterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ContainerClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ContainerClusterData s)
+               (\s a -> s { _name = a } :: ContainerClusterData s)
 
 instance P.HasProject (ContainerClusterData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ContainerClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ContainerClusterData s)
+               (\s a -> s { _project = a } :: ContainerClusterData s)
 
 instance P.HasRegion (ContainerClusterData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ContainerClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ContainerClusterData s)
+               (\s a -> s { _region = a } :: ContainerClusterData s)
 
 instance P.HasZone (ContainerClusterData s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: ContainerClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _zone = a
-                          } :: ContainerClusterData s)
+               (\s a -> s { _zone = a } :: ContainerClusterData s)
 
-instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "_computedAdditionalZones"
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [AddonsConfig s]) where
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (AddonsConfig s)]) where
     computedAddonsConfig x = TF.compute (TF.refKey x) "_computedAddonsConfig"
 
 instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1213,19 +1252,19 @@ instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterDat
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstanceGroupUrls x = TF.compute (TF.refKey x) "_computedInstanceGroupUrls"
 
-instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [IpAllocationPolicy s]) where
+instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (IpAllocationPolicy s)]) where
     computedIpAllocationPolicy x = TF.compute (TF.refKey x) "_computedIpAllocationPolicy"
 
 instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedLoggingService x = TF.compute (TF.refKey x) "_computedLoggingService"
 
-instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [MaintenancePolicy s]) where
+instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MaintenancePolicy s)]) where
     computedMaintenancePolicy x = TF.compute (TF.refKey x) "_computedMaintenancePolicy"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [MasterAuth s]) where
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuth s)]) where
     computedMasterAuth x = TF.compute (TF.refKey x) "_computedMasterAuth"
 
-instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [MasterAuthorizedNetworksConfig s]) where
+instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuthorizedNetworksConfig s)]) where
     computedMasterAuthorizedNetworksConfig x = TF.compute (TF.refKey x) "_computedMasterAuthorizedNetworksConfig"
 
 instance s ~ s' => P.HasComputedMasterIpv4CidrBlock (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1243,19 +1282,19 @@ instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterDa
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [NetworkPolicy s]) where
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NetworkPolicy s)]) where
     computedNetworkPolicy x = TF.compute (TF.refKey x) "_computedNetworkPolicy"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [NodeConfig s]) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodeConfig s)]) where
     computedNodeConfig x = TF.compute (TF.refKey x) "_computedNodeConfig"
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [NodePool s]) where
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodePool s)]) where
     computedNodePool x = TF.compute (TF.refKey x) "_computedNodePool"
 
 instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedNodeVersion x = TF.compute (TF.refKey x) "_computedNodeVersion"
 
-instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [PodSecurityPolicyConfig s]) where
+instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (PodSecurityPolicyConfig s)]) where
     computedPodSecurityPolicyConfig x = TF.compute (TF.refKey x) "_computedPodSecurityPolicyConfig"
 
 instance s ~ s' => P.HasComputedPrivateCluster (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
@@ -1283,32 +1322,33 @@ data ContainerEngineVersionsData s = ContainerEngineVersionsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ContainerEngineVersionsData s) where
-    toObject ContainerEngineVersionsData'{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
-        , TF.assign "zone" <$> TF.attribute _zone
-        ]
-
 containerEngineVersionsData
     :: TF.DataSource P.Provider (ContainerEngineVersionsData s)
 containerEngineVersionsData =
-    TF.newDataSource "google_container_engine_versions" $
+    TF.newDataSource "google_container_engine_versions" TF.validator $
         ContainerEngineVersionsData'
             { _project = TF.Nil
             , _zone = TF.Nil
             }
 
+instance TF.IsObject (ContainerEngineVersionsData s) where
+    toObject ContainerEngineVersionsData'{..} = P.catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
+
+instance TF.IsValid (ContainerEngineVersionsData s) where
+    validator = P.mempty
+
 instance P.HasProject (ContainerEngineVersionsData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ContainerEngineVersionsData s)
+               (\s a -> s { _project = a } :: ContainerEngineVersionsData s)
 
 instance P.HasZone (ContainerEngineVersionsData s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
-               (\s a -> s { _zone = a
-                          } :: ContainerEngineVersionsData s)
+               (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
 
 instance s ~ s' => P.HasComputedDefaultClusterVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
     computedDefaultClusterVersion x = TF.compute (TF.refKey x) "_computedDefaultClusterVersion"
@@ -1344,19 +1384,11 @@ data ContainerRegistryImageData s = ContainerRegistryImageData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ContainerRegistryImageData s) where
-    toObject ContainerRegistryImageData'{..} = catMaybes
-        [ TF.assign "digest" <$> TF.attribute _digest
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "tag" <$> TF.attribute _tag
-        ]
-
 containerRegistryImageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ContainerRegistryImageData s)
 containerRegistryImageData _name =
-    TF.newDataSource "google_container_registry_image" $
+    TF.newDataSource "google_container_registry_image" TF.validator $
         ContainerRegistryImageData'
             { _digest = TF.Nil
             , _name = _name
@@ -1364,29 +1396,36 @@ containerRegistryImageData _name =
             , _tag = TF.Nil
             }
 
+instance TF.IsObject (ContainerRegistryImageData s) where
+    toObject ContainerRegistryImageData'{..} = P.catMaybes
+        [ TF.assign "digest" <$> TF.attribute _digest
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tag" <$> TF.attribute _tag
+        ]
+
+instance TF.IsValid (ContainerRegistryImageData s) where
+    validator = P.mempty
+
 instance P.HasDigest (ContainerRegistryImageData s) (TF.Attr s P.Text) where
     digest =
         P.lens (_digest :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _digest = a
-                          } :: ContainerRegistryImageData s)
+               (\s a -> s { _digest = a } :: ContainerRegistryImageData s)
 
 instance P.HasName (ContainerRegistryImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ContainerRegistryImageData s)
+               (\s a -> s { _name = a } :: ContainerRegistryImageData s)
 
 instance P.HasRegion (ContainerRegistryImageData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ContainerRegistryImageData s)
+               (\s a -> s { _region = a } :: ContainerRegistryImageData s)
 
 instance P.HasTag (ContainerRegistryImageData s) (TF.Attr s P.Text) where
     tag =
         P.lens (_tag :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _tag = a
-                          } :: ContainerRegistryImageData s)
+               (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
 
 instance s ~ s' => P.HasComputedImageUrl (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
     computedImageUrl x = TF.compute (TF.refKey x) "_computedImageUrl"
@@ -1404,24 +1443,26 @@ data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ContainerRegistryRepositoryData s) where
-    toObject ContainerRegistryRepositoryData'{..} = catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
-        ]
-
 containerRegistryRepositoryData
     :: TF.DataSource P.Provider (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
-    TF.newDataSource "google_container_registry_repository" $
+    TF.newDataSource "google_container_registry_repository" TF.validator $
         ContainerRegistryRepositoryData'
             { _region = TF.Nil
             }
 
+instance TF.IsObject (ContainerRegistryRepositoryData s) where
+    toObject ContainerRegistryRepositoryData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (ContainerRegistryRepositoryData s) where
+    validator = P.mempty
+
 instance P.HasRegion (ContainerRegistryRepositoryData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ContainerRegistryRepositoryData s)
+               (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerRegistryRepositoryData s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "_computedProject"
@@ -1442,33 +1483,34 @@ data DnsManagedZoneData s = DnsManagedZoneData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DnsManagedZoneData s) where
-    toObject DnsManagedZoneData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
 dnsManagedZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DnsManagedZoneData s)
 dnsManagedZoneData _name =
-    TF.newDataSource "google_dns_managed_zone" $
+    TF.newDataSource "google_dns_managed_zone" TF.validator $
         DnsManagedZoneData'
             { _name = _name
             , _project = TF.Nil
             }
 
+instance TF.IsObject (DnsManagedZoneData s) where
+    toObject DnsManagedZoneData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance TF.IsValid (DnsManagedZoneData s) where
+    validator = P.mempty
+
 instance P.HasName (DnsManagedZoneData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsManagedZoneData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DnsManagedZoneData s)
+               (\s a -> s { _name = a } :: DnsManagedZoneData s)
 
 instance P.HasProject (DnsManagedZoneData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: DnsManagedZoneData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: DnsManagedZoneData s)
+               (\s a -> s { _project = a } :: DnsManagedZoneData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -1476,7 +1518,7 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DnsManagedZoneData s)) (
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
     computedDnsName x = TF.compute (TF.refKey x) "_computedDnsName"
 
-instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
 
 -- | @google_folder@ DataSource.
@@ -1492,33 +1534,34 @@ data FolderData s = FolderData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (FolderData s) where
-    toObject FolderData'{..} = catMaybes
-        [ TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "lookup_organization" <$> TF.attribute _lookupOrganization
-        ]
-
 folderData
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.DataSource P.Provider (FolderData s)
 folderData _folder =
-    TF.newDataSource "google_folder" $
+    TF.newDataSource "google_folder" TF.validator $
         FolderData'
             { _folder = _folder
             , _lookupOrganization = TF.value P.False
             }
 
+instance TF.IsObject (FolderData s) where
+    toObject FolderData'{..} = P.catMaybes
+        [ TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "lookup_organization" <$> TF.attribute _lookupOrganization
+        ]
+
+instance TF.IsValid (FolderData s) where
+    validator = P.mempty
+
 instance P.HasFolder (FolderData s) (TF.Attr s P.Text) where
     folder =
         P.lens (_folder :: FolderData s -> TF.Attr s P.Text)
-               (\s a -> s { _folder = a
-                          } :: FolderData s)
+               (\s a -> s { _folder = a } :: FolderData s)
 
 instance P.HasLookupOrganization (FolderData s) (TF.Attr s P.Bool) where
     lookupOrganization =
         P.lens (_lookupOrganization :: FolderData s -> TF.Attr s P.Bool)
-               (\s a -> s { _lookupOrganization = a
-                          } :: FolderData s)
+               (\s a -> s { _lookupOrganization = a } :: FolderData s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
     computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
@@ -1548,25 +1591,31 @@ data IamPolicyData s = IamPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamPolicyData s) where
-    toObject IamPolicyData'{..} = catMaybes
-        [ TF.assign "binding" <$> TF.attribute _binding
-        ]
-
 iamPolicyData
     :: TF.Attr s [TF.Attr s (Binding s)] -- ^ @binding@ - 'P.binding'
     -> TF.DataSource P.Provider (IamPolicyData s)
 iamPolicyData _binding =
-    TF.newDataSource "google_iam_policy" $
+    TF.newDataSource "google_iam_policy" TF.validator $
         IamPolicyData'
             { _binding = _binding
             }
 
+instance TF.IsObject (IamPolicyData s) where
+    toObject IamPolicyData'{..} = P.catMaybes
+        [ TF.assign "binding" <$> TF.attribute _binding
+        ]
+
+instance TF.IsValid (IamPolicyData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_binding"
+                  (_binding
+                      :: IamPolicyData s -> TF.Attr s [TF.Attr s (Binding s)])
+                  TF.validator
+
 instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (Binding s)]) where
     binding =
         P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (Binding s)])
-               (\s a -> s { _binding = a
-                          } :: IamPolicyData s)
+               (\s a -> s { _binding = a } :: IamPolicyData s)
 
 instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
     computedPolicyData x = TF.compute (TF.refKey x) "_computedPolicyData"
@@ -1584,34 +1633,35 @@ data KmsSecretData s = KmsSecretData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsSecretData s) where
-    toObject KmsSecretData'{..} = catMaybes
-        [ TF.assign "ciphertext" <$> TF.attribute _ciphertext
-        , TF.assign "crypto_key" <$> TF.attribute _cryptoKey
-        ]
-
 kmsSecretData
     :: TF.Attr s P.Text -- ^ @ciphertext@ - 'P.ciphertext'
     -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
     -> TF.DataSource P.Provider (KmsSecretData s)
 kmsSecretData _ciphertext _cryptoKey =
-    TF.newDataSource "google_kms_secret" $
+    TF.newDataSource "google_kms_secret" TF.validator $
         KmsSecretData'
             { _ciphertext = _ciphertext
             , _cryptoKey = _cryptoKey
             }
 
+instance TF.IsObject (KmsSecretData s) where
+    toObject KmsSecretData'{..} = P.catMaybes
+        [ TF.assign "ciphertext" <$> TF.attribute _ciphertext
+        , TF.assign "crypto_key" <$> TF.attribute _cryptoKey
+        ]
+
+instance TF.IsValid (KmsSecretData s) where
+    validator = P.mempty
+
 instance P.HasCiphertext (KmsSecretData s) (TF.Attr s P.Text) where
     ciphertext =
         P.lens (_ciphertext :: KmsSecretData s -> TF.Attr s P.Text)
-               (\s a -> s { _ciphertext = a
-                          } :: KmsSecretData s)
+               (\s a -> s { _ciphertext = a } :: KmsSecretData s)
 
 instance P.HasCryptoKey (KmsSecretData s) (TF.Attr s P.Text) where
     cryptoKey =
         P.lens (_cryptoKey :: KmsSecretData s -> TF.Attr s P.Text)
-               (\s a -> s { _cryptoKey = a
-                          } :: KmsSecretData s)
+               (\s a -> s { _cryptoKey = a } :: KmsSecretData s)
 
 instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretData s)) (TF.Attr s P.Text) where
     computedPlaintext x = TF.compute (TF.refKey x) "_computedPlaintext"
@@ -1623,14 +1673,17 @@ instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretData s)) (TF.Attr
 data NetblockIpRangesData s = NetblockIpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NetblockIpRangesData s) where
-    toObject _ = []
-
 netblockIpRangesData
     :: TF.DataSource P.Provider (NetblockIpRangesData s)
 netblockIpRangesData =
-    TF.newDataSource "google_netblock_ip_ranges" $
+    TF.newDataSource "google_netblock_ip_ranges" TF.validator $
         NetblockIpRangesData'
+
+instance TF.IsObject (NetblockIpRangesData s) where
+    toObject _ = []
+
+instance TF.IsValid (NetblockIpRangesData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
@@ -1651,24 +1704,26 @@ data OrganizationData s = OrganizationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (OrganizationData s) where
-    toObject OrganizationData'{..} = catMaybes
-        [ TF.assign "organization" <$> TF.attribute _organization
-        ]
-
 organizationData
     :: TF.DataSource P.Provider (OrganizationData s)
 organizationData =
-    TF.newDataSource "google_organization" $
+    TF.newDataSource "google_organization" TF.validator $
         OrganizationData'
             { _organization = TF.Nil
             }
 
+instance TF.IsObject (OrganizationData s) where
+    toObject OrganizationData'{..} = P.catMaybes
+        [ TF.assign "organization" <$> TF.attribute _organization
+        ]
+
+instance TF.IsValid (OrganizationData s) where
+    validator = P.mempty
+
 instance P.HasOrganization (OrganizationData s) (TF.Attr s P.Text) where
     organization =
         P.lens (_organization :: OrganizationData s -> TF.Attr s P.Text)
-               (\s a -> s { _organization = a
-                          } :: OrganizationData s)
+               (\s a -> s { _organization = a } :: OrganizationData s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
     computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
@@ -1695,26 +1750,28 @@ data ProjectData s = ProjectData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ProjectData s) where
-    toObject ProjectData'{..} = catMaybes
-        [ TF.assign "project_id" <$> TF.attribute _projectId
-        ]
-
 projectData
     :: TF.DataSource P.Provider (ProjectData s)
 projectData =
-    TF.newDataSource "google_project" $
+    TF.newDataSource "google_project" TF.validator $
         ProjectData'
             { _projectId = TF.Nil
             }
 
+instance TF.IsObject (ProjectData s) where
+    toObject ProjectData'{..} = P.catMaybes
+        [ TF.assign "project_id" <$> TF.attribute _projectId
+        ]
+
+instance TF.IsValid (ProjectData s) where
+    validator = P.mempty
+
 instance P.HasProjectId (ProjectData s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: ProjectData s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a
-                          } :: ProjectData s)
+               (\s a -> s { _projectId = a } :: ProjectData s)
 
-instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [AppEngine s]) where
+instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (AppEngine s)]) where
     computedAppEngine x = TF.compute (TF.refKey x) "_computedAppEngine"
 
 instance s ~ s' => P.HasComputedAutoCreateNetwork (TF.Ref s' (ProjectData s)) (TF.Attr s P.Bool) where
@@ -1760,33 +1817,34 @@ data ServiceAccountData s = ServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceAccountData s) where
-    toObject ServiceAccountData'{..} = catMaybes
-        [ TF.assign "account_id" <$> TF.attribute _accountId
-        , TF.assign "project" <$> TF.attribute _project
-        ]
-
 serviceAccountData
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.DataSource P.Provider (ServiceAccountData s)
 serviceAccountData _accountId =
-    TF.newDataSource "google_service_account" $
+    TF.newDataSource "google_service_account" TF.validator $
         ServiceAccountData'
             { _accountId = _accountId
             , _project = TF.Nil
             }
 
+instance TF.IsObject (ServiceAccountData s) where
+    toObject ServiceAccountData'{..} = P.catMaybes
+        [ TF.assign "account_id" <$> TF.attribute _accountId
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance TF.IsValid (ServiceAccountData s) where
+    validator = P.mempty
+
 instance P.HasAccountId (ServiceAccountData s) (TF.Attr s P.Text) where
     accountId =
         P.lens (_accountId :: ServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _accountId = a
-                          } :: ServiceAccountData s)
+               (\s a -> s { _accountId = a } :: ServiceAccountData s)
 
 instance P.HasProject (ServiceAccountData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ServiceAccountData s)
+               (\s a -> s { _project = a } :: ServiceAccountData s)
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
@@ -1816,41 +1874,41 @@ data ServiceAccountKeyData s = ServiceAccountKeyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ServiceAccountKeyData s) where
-    toObject ServiceAccountKeyData'{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
-        , TF.assign "public_key_type" <$> TF.attribute _publicKeyType
-        , TF.assign "service_account_id" <$> TF.attribute _serviceAccountId
-        ]
-
 serviceAccountKeyData
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
     -> TF.DataSource P.Provider (ServiceAccountKeyData s)
 serviceAccountKeyData _serviceAccountId =
-    TF.newDataSource "google_service_account_key" $
+    TF.newDataSource "google_service_account_key" TF.validator $
         ServiceAccountKeyData'
             { _project = TF.Nil
             , _publicKeyType = TF.value "TYPE_X509_PEM_FILE"
             , _serviceAccountId = _serviceAccountId
             }
 
+instance TF.IsObject (ServiceAccountKeyData s) where
+    toObject ServiceAccountKeyData'{..} = P.catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "public_key_type" <$> TF.attribute _publicKeyType
+        , TF.assign "service_account_id" <$> TF.attribute _serviceAccountId
+        ]
+
+instance TF.IsValid (ServiceAccountKeyData s) where
+    validator = P.mempty
+
 instance P.HasProject (ServiceAccountKeyData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a
-                          } :: ServiceAccountKeyData s)
+               (\s a -> s { _project = a } :: ServiceAccountKeyData s)
 
 instance P.HasPublicKeyType (ServiceAccountKeyData s) (TF.Attr s P.Text) where
     publicKeyType =
         P.lens (_publicKeyType :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _publicKeyType = a
-                          } :: ServiceAccountKeyData s)
+               (\s a -> s { _publicKeyType = a } :: ServiceAccountKeyData s)
 
 instance P.HasServiceAccountId (ServiceAccountKeyData s) (TF.Attr s P.Text) where
     serviceAccountId =
         P.lens (_serviceAccountId :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceAccountId = a
-                          } :: ServiceAccountKeyData s)
+               (\s a -> s { _serviceAccountId = a } :: ServiceAccountKeyData s)
 
 instance s ~ s' => P.HasComputedKeyAlgorithm (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
     computedKeyAlgorithm x = TF.compute (TF.refKey x) "_computedKeyAlgorithm"
@@ -1892,24 +1950,12 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (StorageObjectSignedUrlData s) where
-    toObject StorageObjectSignedUrlData'{..} = catMaybes
-        [ TF.assign "bucket" <$> TF.attribute _bucket
-        , TF.assign "content_md5" <$> TF.attribute _contentMd5
-        , TF.assign "content_type" <$> TF.attribute _contentType
-        , TF.assign "credentials" <$> TF.attribute _credentials
-        , TF.assign "duration" <$> TF.attribute _duration
-        , TF.assign "extension_headers" <$> TF.attribute _extensionHeaders
-        , TF.assign "http_method" <$> TF.attribute _httpMethod
-        , TF.assign "path" <$> TF.attribute _path
-        ]
-
 storageObjectSignedUrlData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.DataSource P.Provider (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData _bucket _path =
-    TF.newDataSource "google_storage_object_signed_url" $
+    TF.newDataSource "google_storage_object_signed_url" TF.validator $
         StorageObjectSignedUrlData'
             { _bucket = _bucket
             , _contentMd5 = TF.Nil
@@ -1921,53 +1967,60 @@ storageObjectSignedUrlData _bucket _path =
             , _path = _path
             }
 
+instance TF.IsObject (StorageObjectSignedUrlData s) where
+    toObject StorageObjectSignedUrlData'{..} = P.catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "content_md5" <$> TF.attribute _contentMd5
+        , TF.assign "content_type" <$> TF.attribute _contentType
+        , TF.assign "credentials" <$> TF.attribute _credentials
+        , TF.assign "duration" <$> TF.attribute _duration
+        , TF.assign "extension_headers" <$> TF.attribute _extensionHeaders
+        , TF.assign "http_method" <$> TF.attribute _httpMethod
+        , TF.assign "path" <$> TF.attribute _path
+        ]
+
+instance TF.IsValid (StorageObjectSignedUrlData s) where
+    validator = P.mempty
+
 instance P.HasBucket (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _bucket = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _bucket = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasContentMd5 (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     contentMd5 =
         P.lens (_contentMd5 :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _contentMd5 = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _contentMd5 = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasContentType (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     contentType =
         P.lens (_contentType :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _contentType = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _contentType = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasCredentials (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     credentials =
         P.lens (_credentials :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _credentials = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _credentials = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasDuration (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     duration =
         P.lens (_duration :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _duration = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasExtensionHeaders (StorageObjectSignedUrlData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     extensionHeaders =
         P.lens (_extensionHeaders :: StorageObjectSignedUrlData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _extensionHeaders = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _extensionHeaders = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasHttpMethod (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     httpMethod =
         P.lens (_httpMethod :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _httpMethod = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _httpMethod = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasPath (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a
-                          } :: StorageObjectSignedUrlData s)
+               (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
 
 instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
     computedSignedUrl x = TF.compute (TF.refKey x) "_computedSignedUrl"
@@ -1979,14 +2032,17 @@ instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData
 data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (StorageProjectServiceAccountData s) where
-    toObject _ = []
-
 storageProjectServiceAccountData
     :: TF.DataSource P.Provider (StorageProjectServiceAccountData s)
 storageProjectServiceAccountData =
-    TF.newDataSource "google_storage_project_service_account" $
+    TF.newDataSource "google_storage_project_service_account" TF.validator $
         StorageProjectServiceAccountData'
+
+instance TF.IsObject (StorageProjectServiceAccountData s) where
+    toObject _ = []
+
+instance TF.IsValid (StorageProjectServiceAccountData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "_computedProject"
