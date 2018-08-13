@@ -34,6 +34,8 @@ module Terrafomo.Librato.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable           as P
 import qualified Data.HashMap.Strict     as P
 import qualified Data.List.NonEmpty      as P
@@ -331,7 +333,7 @@ instance P.HasGapDetection (Attributes s) (TF.Attr s P.Bool) where
                           } :: Attributes s)
 
 instance s ~ s' => P.HasComputedCreatedByUa (TF.Ref s' (Attributes s)) (TF.Attr s P.Text) where
-    computedCreatedByUa x = TF.compute (TF.refKey x) "created_by_ua"
+    computedCreatedByUa x = TF.compute (TF.refKey x) "_computedCreatedByUa"
 
 -- | @condition@ nested settings.
 data Condition s = Condition'

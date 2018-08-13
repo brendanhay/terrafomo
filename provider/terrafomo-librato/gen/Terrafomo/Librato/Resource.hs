@@ -69,7 +69,7 @@ data AlertResource s = AlertResource'
     { _active       :: TF.Attr s P.Bool
     -- ^ @active@ - (Optional)
     --
-    , _attributes   :: TF.Attr s [Attributes s]
+    , _attributes   :: TF.Attr s (Attributes s)
     -- ^ @attributes@ - (Optional)
     --
     , _condition    :: TF.Attr s [TF.Attr s (Condition s)]
@@ -121,9 +121,9 @@ instance P.HasActive (AlertResource s) (TF.Attr s P.Bool) where
                (\s a -> s { _active = a
                           } :: AlertResource s)
 
-instance P.HasAttributes (AlertResource s) (TF.Attr s [Attributes s]) where
+instance P.HasAttributes (AlertResource s) (TF.Attr s (Attributes s)) where
     attributes =
-        P.lens (_attributes :: AlertResource s -> TF.Attr s [Attributes s])
+        P.lens (_attributes :: AlertResource s -> TF.Attr s (Attributes s))
                (\s a -> s { _attributes = a
                           } :: AlertResource s)
 
@@ -162,7 +162,7 @@ instance P.HasServices (AlertResource s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text
 -- See the <https://www.terraform.io/docs/providers/Librato/librato_metric terraform documentation>
 -- for more information.
 data MetricResource s = MetricResource'
-    { _attributes  :: TF.Attr s [Attributes s]
+    { _attributes  :: TF.Attr s (Attributes s)
     -- ^ @attributes@ - (Optional)
     --
     , _composite   :: TF.Attr s P.Text
@@ -212,9 +212,9 @@ metricResource _name _type' =
             , _type' = _type'
             }
 
-instance P.HasAttributes (MetricResource s) (TF.Attr s [Attributes s]) where
+instance P.HasAttributes (MetricResource s) (TF.Attr s (Attributes s)) where
     attributes =
-        P.lens (_attributes :: MetricResource s -> TF.Attr s [Attributes s])
+        P.lens (_attributes :: MetricResource s -> TF.Attr s (Attributes s))
                (\s a -> s { _attributes = a
                           } :: MetricResource s)
 
@@ -309,7 +309,7 @@ instance P.HasType' (ServiceResource s) (TF.Attr s P.Text) where
                           } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @librato_space@ Resource.
 --
@@ -342,7 +342,7 @@ instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
                           } :: SpaceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
 -- | @librato_space_chart@ Resource.
 --
