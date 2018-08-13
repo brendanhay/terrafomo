@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -28,7 +29,6 @@ module Terrafomo.AWS.Resource06
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -36,7 +36,10 @@ import Terrafomo.AWS.Settings
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -48,6 +51,7 @@ import qualified Terrafomo.AWS.Types    as P
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_wafregional_web_acl_association@ Resource.
 --
@@ -62,34 +66,35 @@ data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResour
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (WafregionalWebAclAssociationResource s) where
-    toObject WafregionalWebAclAssociationResource'{..} = catMaybes
-        [ TF.assign "resource_arn" <$> TF.attribute _resourceArn
-        , TF.assign "web_acl_id" <$> TF.attribute _webAclId
-        ]
-
 wafregionalWebAclAssociationResource
     :: TF.Attr s P.Text -- ^ @resource_arn@ - 'P.resourceArn'
     -> TF.Attr s P.Text -- ^ @web_acl_id@ - 'P.webAclId'
     -> TF.Resource P.Provider (WafregionalWebAclAssociationResource s)
 wafregionalWebAclAssociationResource _resourceArn _webAclId =
-    TF.newResource "aws_wafregional_web_acl_association" $
+    TF.newResource "aws_wafregional_web_acl_association" TF.validator $
         WafregionalWebAclAssociationResource'
             { _resourceArn = _resourceArn
             , _webAclId = _webAclId
             }
 
+instance TF.IsObject (WafregionalWebAclAssociationResource s) where
+    toObject WafregionalWebAclAssociationResource'{..} = P.catMaybes
+        [ TF.assign "resource_arn" <$> TF.attribute _resourceArn
+        , TF.assign "web_acl_id" <$> TF.attribute _webAclId
+        ]
+
+instance TF.IsValid (WafregionalWebAclAssociationResource s) where
+    validator = P.mempty
+
 instance P.HasResourceArn (WafregionalWebAclAssociationResource s) (TF.Attr s P.Text) where
     resourceArn =
         P.lens (_resourceArn :: WafregionalWebAclAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceArn = a
-                          } :: WafregionalWebAclAssociationResource s)
+               (\s a -> s { _resourceArn = a } :: WafregionalWebAclAssociationResource s)
 
 instance P.HasWebAclId (WafregionalWebAclAssociationResource s) (TF.Attr s P.Text) where
     webAclId =
         P.lens (_webAclId :: WafregionalWebAclAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _webAclId = a
-                          } :: WafregionalWebAclAssociationResource s)
+               (\s a -> s { _webAclId = a } :: WafregionalWebAclAssociationResource s)
 
 -- | @aws_wafregional_xss_match_set@ Resource.
 --
@@ -104,30 +109,35 @@ data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (WafregionalXssMatchSetResource s) where
-    toObject WafregionalXssMatchSetResource'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "xss_match_tuple" <$> TF.attribute _xssMatchTuple
-        ]
-
 wafregionalXssMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (WafregionalXssMatchSetResource s)
 wafregionalXssMatchSetResource _name =
-    TF.newResource "aws_wafregional_xss_match_set" $
+    TF.newResource "aws_wafregional_xss_match_set" TF.validator $
         WafregionalXssMatchSetResource'
             { _name = _name
             , _xssMatchTuple = TF.Nil
             }
 
+instance TF.IsObject (WafregionalXssMatchSetResource s) where
+    toObject WafregionalXssMatchSetResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "xss_match_tuple" <$> TF.attribute _xssMatchTuple
+        ]
+
+instance TF.IsValid (WafregionalXssMatchSetResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_xssMatchTuple"
+                  (_xssMatchTuple
+                      :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTuple s)])
+                  TF.validator
+
 instance P.HasName (WafregionalXssMatchSetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: WafregionalXssMatchSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: WafregionalXssMatchSetResource s)
+               (\s a -> s { _name = a } :: WafregionalXssMatchSetResource s)
 
 instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.Attr s (XssMatchTuple s)]) where
     xssMatchTuple =
         P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTuple s)])
-               (\s a -> s { _xssMatchTuple = a
-                          } :: WafregionalXssMatchSetResource s)
+               (\s a -> s { _xssMatchTuple = a } :: WafregionalXssMatchSetResource s)

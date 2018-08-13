@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -340,7 +341,6 @@ module Terrafomo.AWS.DataSource01
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -348,7 +348,10 @@ import Terrafomo.AWS.Settings
 
 import qualified Data.Hashable          as P
 import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
@@ -360,6 +363,7 @@ import qualified Terrafomo.AWS.Types    as P
 import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_acm_certificate@ DataSource.
 --
@@ -380,19 +384,11 @@ data AcmCertificateData s = AcmCertificateData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AcmCertificateData s) where
-    toObject AcmCertificateData'{..} = catMaybes
-        [ TF.assign "domain" <$> TF.attribute _domain
-        , TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "statuses" <$> TF.attribute _statuses
-        , TF.assign "types" <$> TF.attribute _types
-        ]
-
 acmCertificateData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.DataSource P.Provider (AcmCertificateData s)
 acmCertificateData _domain =
-    TF.newDataSource "aws_acm_certificate" $
+    TF.newDataSource "aws_acm_certificate" TF.validator $
         AcmCertificateData'
             { _domain = _domain
             , _mostRecent = TF.value P.False
@@ -400,29 +396,36 @@ acmCertificateData _domain =
             , _types = TF.Nil
             }
 
+instance TF.IsObject (AcmCertificateData s) where
+    toObject AcmCertificateData'{..} = P.catMaybes
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "statuses" <$> TF.attribute _statuses
+        , TF.assign "types" <$> TF.attribute _types
+        ]
+
+instance TF.IsValid (AcmCertificateData s) where
+    validator = P.mempty
+
 instance P.HasDomain (AcmCertificateData s) (TF.Attr s P.Text) where
     domain =
         P.lens (_domain :: AcmCertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a
-                          } :: AcmCertificateData s)
+               (\s a -> s { _domain = a } :: AcmCertificateData s)
 
 instance P.HasMostRecent (AcmCertificateData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: AcmCertificateData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: AcmCertificateData s)
+               (\s a -> s { _mostRecent = a } :: AcmCertificateData s)
 
 instance P.HasStatuses (AcmCertificateData s) (TF.Attr s [TF.Attr s P.Text]) where
     statuses =
         P.lens (_statuses :: AcmCertificateData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _statuses = a
-                          } :: AcmCertificateData s)
+               (\s a -> s { _statuses = a } :: AcmCertificateData s)
 
 instance P.HasTypes (AcmCertificateData s) (TF.Attr s [TF.Attr s P.Text]) where
     types =
         P.lens (_types :: AcmCertificateData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _types = a
-                          } :: AcmCertificateData s)
+               (\s a -> s { _types = a } :: AcmCertificateData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -437,25 +440,27 @@ data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
-    toObject AcmpcaCertificateAuthorityData'{..} = catMaybes
-        [ TF.assign "arn" <$> TF.attribute _arn
-        ]
-
 acmpcaCertificateAuthorityData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.DataSource P.Provider (AcmpcaCertificateAuthorityData s)
 acmpcaCertificateAuthorityData _arn =
-    TF.newDataSource "aws_acmpca_certificate_authority" $
+    TF.newDataSource "aws_acmpca_certificate_authority" TF.validator $
         AcmpcaCertificateAuthorityData'
             { _arn = _arn
             }
 
+instance TF.IsObject (AcmpcaCertificateAuthorityData s) where
+    toObject AcmpcaCertificateAuthorityData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        ]
+
+instance TF.IsValid (AcmpcaCertificateAuthorityData s) where
+    validator = P.mempty
+
 instance P.HasArn (AcmpcaCertificateAuthorityData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: AcmpcaCertificateAuthorityData s -> TF.Attr s P.Text)
-               (\s a -> s { _arn = a
-                          } :: AcmpcaCertificateAuthorityData s)
+               (\s a -> s { _arn = a } :: AcmpcaCertificateAuthorityData s)
 
 instance s ~ s' => P.HasComputedCertificate (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
     computedCertificate x = TF.compute (TF.refKey x) "_computedCertificate"
@@ -472,7 +477,7 @@ instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (AcmpcaCertificateAuthorityD
 instance s ~ s' => P.HasComputedNotBefore (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
     computedNotBefore x = TF.compute (TF.refKey x) "_computedNotBefore"
 
-instance s ~ s' => P.HasComputedRevocationConfiguration (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s [RevocationConfiguration s]) where
+instance s ~ s' => P.HasComputedRevocationConfiguration (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s [TF.Attr s (RevocationConfiguration s)]) where
     computedRevocationConfiguration x = TF.compute (TF.refKey x) "_computedRevocationConfiguration"
 
 instance s ~ s' => P.HasComputedSerial (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
@@ -494,14 +499,17 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (AcmpcaCertificateAuthorityData 
 data AlbData s = AlbData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AlbData s) where
-    toObject _ = []
-
 albData
     :: TF.DataSource P.Provider (AlbData s)
 albData =
-    TF.newDataSource "aws_alb" $
+    TF.newDataSource "aws_alb" TF.validator $
         AlbData'
+
+instance TF.IsObject (AlbData s) where
+    toObject _ = []
+
+instance TF.IsValid (AlbData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (AlbData s)) (TF.Attr s (AccessLogs s)) where
     computedAccessLogs x = TF.compute (TF.refKey x) "_computedAccessLogs"
@@ -530,13 +538,13 @@ instance s ~ s' => P.HasComputedLoadBalancerType (TF.Ref s' (AlbData s)) (TF.Att
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AlbData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSubnetMapping (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s (SubnetMapping s)]) where
     computedSubnetMapping x = TF.compute (TF.refKey x) "_computedSubnetMapping"
 
-instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubnets x = TF.compute (TF.refKey x) "_computedSubnets"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AlbData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -555,14 +563,17 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (AlbData s)) (TF.Attr s P.Text
 data AlbListenerData s = AlbListenerData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AlbListenerData s) where
-    toObject _ = []
-
 albListenerData
     :: TF.DataSource P.Provider (AlbListenerData s)
 albListenerData =
-    TF.newDataSource "aws_alb_listener" $
+    TF.newDataSource "aws_alb_listener" TF.validator $
         AlbListenerData'
+
+instance TF.IsObject (AlbListenerData s) where
+    toObject _ = []
+
+instance TF.IsValid (AlbListenerData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -570,7 +581,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P.Text) where
     computedCertificateArn x = TF.compute (TF.refKey x) "_computedCertificateArn"
 
-instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (AlbListenerData s)) (TF.Attr s [DefaultAction s]) where
+instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (AlbListenerData s)) (TF.Attr s [TF.Attr s (DefaultAction s)]) where
     computedDefaultAction x = TF.compute (TF.refKey x) "_computedDefaultAction"
 
 instance s ~ s' => P.HasComputedLoadBalancerArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P.Text) where
@@ -592,14 +603,17 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (AlbListenerData s)) (TF.At
 data AlbTargetGroupData s = AlbTargetGroupData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AlbTargetGroupData s) where
-    toObject _ = []
-
 albTargetGroupData
     :: TF.DataSource P.Provider (AlbTargetGroupData s)
 albTargetGroupData =
-    TF.newDataSource "aws_alb_target_group" $
+    TF.newDataSource "aws_alb_target_group" TF.validator $
         AlbTargetGroupData'
+
+instance TF.IsObject (AlbTargetGroupData s) where
+    toObject _ = []
+
+instance TF.IsValid (AlbTargetGroupData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -656,19 +670,10 @@ data AmiData s = AmiData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AmiData s) where
-    toObject AmiData'{..} = catMaybes
-        [ TF.assign "executable_users" <$> TF.attribute _executableUsers
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "owners" <$> TF.attribute _owners
-        ]
-
 amiData
     :: TF.DataSource P.Provider (AmiData s)
 amiData =
-    TF.newDataSource "aws_ami" $
+    TF.newDataSource "aws_ami" TF.validator $
         AmiData'
             { _executableUsers = TF.Nil
             , _filter = TF.Nil
@@ -677,35 +682,46 @@ amiData =
             , _owners = TF.Nil
             }
 
+instance TF.IsObject (AmiData s) where
+    toObject AmiData'{..} = P.catMaybes
+        [ TF.assign "executable_users" <$> TF.attribute _executableUsers
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "owners" <$> TF.attribute _owners
+        ]
+
+instance TF.IsValid (AmiData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: AmiData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasExecutableUsers (AmiData s) (TF.Attr s [TF.Attr s P.Text]) where
     executableUsers =
         P.lens (_executableUsers :: AmiData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _executableUsers = a
-                          } :: AmiData s)
+               (\s a -> s { _executableUsers = a } :: AmiData s)
 
 instance P.HasFilter (AmiData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: AmiData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: AmiData s)
+               (\s a -> s { _filter = a } :: AmiData s)
 
 instance P.HasMostRecent (AmiData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: AmiData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: AmiData s)
+               (\s a -> s { _mostRecent = a } :: AmiData s)
 
 instance P.HasNameRegex (AmiData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: AmiData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: AmiData s)
+               (\s a -> s { _nameRegex = a } :: AmiData s)
 
 instance P.HasOwners (AmiData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: AmiData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a
-                          } :: AmiData s)
+               (\s a -> s { _owners = a } :: AmiData s)
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) where
     computedArchitecture x = TF.compute (TF.refKey x) "_computedArchitecture"
@@ -798,18 +814,10 @@ data AmiIdsData s = AmiIdsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AmiIdsData s) where
-    toObject AmiIdsData'{..} = catMaybes
-        [ TF.assign "executable_users" <$> TF.attribute _executableUsers
-        , TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        , TF.assign "owners" <$> TF.attribute _owners
-        ]
-
 amiIdsData
     :: TF.DataSource P.Provider (AmiIdsData s)
 amiIdsData =
-    TF.newDataSource "aws_ami_ids" $
+    TF.newDataSource "aws_ami_ids" TF.validator $
         AmiIdsData'
             { _executableUsers = TF.Nil
             , _filter = TF.Nil
@@ -817,29 +825,40 @@ amiIdsData =
             , _owners = TF.Nil
             }
 
+instance TF.IsObject (AmiIdsData s) where
+    toObject AmiIdsData'{..} = P.catMaybes
+        [ TF.assign "executable_users" <$> TF.attribute _executableUsers
+        , TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        , TF.assign "owners" <$> TF.attribute _owners
+        ]
+
+instance TF.IsValid (AmiIdsData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: AmiIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasExecutableUsers (AmiIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     executableUsers =
         P.lens (_executableUsers :: AmiIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _executableUsers = a
-                          } :: AmiIdsData s)
+               (\s a -> s { _executableUsers = a } :: AmiIdsData s)
 
 instance P.HasFilter (AmiIdsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: AmiIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: AmiIdsData s)
+               (\s a -> s { _filter = a } :: AmiIdsData s)
 
 instance P.HasNameRegex (AmiIdsData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: AmiIdsData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: AmiIdsData s)
+               (\s a -> s { _nameRegex = a } :: AmiIdsData s)
 
 instance P.HasOwners (AmiIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: AmiIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a
-                          } :: AmiIdsData s)
+               (\s a -> s { _owners = a } :: AmiIdsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (AmiIdsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "_computedIds"
@@ -854,25 +873,27 @@ data ApiGatewayRestApiData s = ApiGatewayRestApiData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ApiGatewayRestApiData s) where
-    toObject ApiGatewayRestApiData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 apiGatewayRestApiData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ApiGatewayRestApiData s)
 apiGatewayRestApiData _name =
-    TF.newDataSource "aws_api_gateway_rest_api" $
+    TF.newDataSource "aws_api_gateway_rest_api" TF.validator $
         ApiGatewayRestApiData'
             { _name = _name
             }
 
+instance TF.IsObject (ApiGatewayRestApiData s) where
+    toObject ApiGatewayRestApiData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ApiGatewayRestApiData s) where
+    validator = P.mempty
+
 instance P.HasName (ApiGatewayRestApiData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ApiGatewayRestApiData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ApiGatewayRestApiData s)
+               (\s a -> s { _name = a } :: ApiGatewayRestApiData s)
 
 instance s ~ s' => P.HasComputedRootResourceId (TF.Ref s' (ApiGatewayRestApiData s)) (TF.Attr s P.Text) where
     computedRootResourceId x = TF.compute (TF.refKey x) "_computedRootResourceId"
@@ -887,25 +908,27 @@ data ArnData s = ArnData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ArnData s) where
-    toObject ArnData'{..} = catMaybes
-        [ TF.assign "arn" <$> TF.attribute _arn
-        ]
-
 arnData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.DataSource P.Provider (ArnData s)
 arnData _arn =
-    TF.newDataSource "aws_arn" $
+    TF.newDataSource "aws_arn" TF.validator $
         ArnData'
             { _arn = _arn
             }
 
+instance TF.IsObject (ArnData s) where
+    toObject ArnData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        ]
+
+instance TF.IsValid (ArnData s) where
+    validator = P.mempty
+
 instance P.HasArn (ArnData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: ArnData s -> TF.Attr s P.Text)
-               (\s a -> s { _arn = a
-                          } :: ArnData s)
+               (\s a -> s { _arn = a } :: ArnData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ArnData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "_computedAccount"
@@ -932,24 +955,30 @@ data AutoscalingGroupsData s = AutoscalingGroupsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AutoscalingGroupsData s) where
-    toObject AutoscalingGroupsData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        ]
-
 autoscalingGroupsData
     :: TF.DataSource P.Provider (AutoscalingGroupsData s)
 autoscalingGroupsData =
-    TF.newDataSource "aws_autoscaling_groups" $
+    TF.newDataSource "aws_autoscaling_groups" TF.validator $
         AutoscalingGroupsData'
             { _filter = TF.Nil
             }
 
+instance TF.IsObject (AutoscalingGroupsData s) where
+    toObject AutoscalingGroupsData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance TF.IsValid (AutoscalingGroupsData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: AutoscalingGroupsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (AutoscalingGroupsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: AutoscalingGroupsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: AutoscalingGroupsData s)
+               (\s a -> s { _filter = a } :: AutoscalingGroupsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (AutoscalingGroupsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "_computedNames"
@@ -961,14 +990,17 @@ instance s ~ s' => P.HasComputedNames (TF.Ref s' (AutoscalingGroupsData s)) (TF.
 data AvailabilityZoneData s = AvailabilityZoneData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AvailabilityZoneData s) where
-    toObject _ = []
-
 availabilityZoneData
     :: TF.DataSource P.Provider (AvailabilityZoneData s)
 availabilityZoneData =
-    TF.newDataSource "aws_availability_zone" $
+    TF.newDataSource "aws_availability_zone" TF.validator $
         AvailabilityZoneData'
+
+instance TF.IsObject (AvailabilityZoneData s) where
+    toObject _ = []
+
+instance TF.IsValid (AvailabilityZoneData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AvailabilityZoneData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
@@ -992,24 +1024,26 @@ data AvailabilityZonesData s = AvailabilityZonesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (AvailabilityZonesData s) where
-    toObject AvailabilityZonesData'{..} = catMaybes
-        [ TF.assign "state" <$> TF.attribute _state
-        ]
-
 availabilityZonesData
     :: TF.DataSource P.Provider (AvailabilityZonesData s)
 availabilityZonesData =
-    TF.newDataSource "aws_availability_zones" $
+    TF.newDataSource "aws_availability_zones" TF.validator $
         AvailabilityZonesData'
             { _state = TF.Nil
             }
 
+instance TF.IsObject (AvailabilityZonesData s) where
+    toObject AvailabilityZonesData'{..} = P.catMaybes
+        [ TF.assign "state" <$> TF.attribute _state
+        ]
+
+instance TF.IsValid (AvailabilityZonesData s) where
+    validator = P.mempty
+
 instance P.HasState (AvailabilityZonesData s) (TF.Attr s P.Text) where
     state =
         P.lens (_state :: AvailabilityZonesData s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a
-                          } :: AvailabilityZonesData s)
+               (\s a -> s { _state = a } :: AvailabilityZonesData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (AvailabilityZonesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "_computedNames"
@@ -1024,25 +1058,27 @@ data BatchComputeEnvironmentData s = BatchComputeEnvironmentData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (BatchComputeEnvironmentData s) where
-    toObject BatchComputeEnvironmentData'{..} = catMaybes
-        [ TF.assign "compute_environment_name" <$> TF.attribute _computeEnvironmentName
-        ]
-
 batchComputeEnvironmentData
     :: TF.Attr s P.Text -- ^ @compute_environment_name@ - 'P.computeEnvironmentName'
     -> TF.DataSource P.Provider (BatchComputeEnvironmentData s)
 batchComputeEnvironmentData _computeEnvironmentName =
-    TF.newDataSource "aws_batch_compute_environment" $
+    TF.newDataSource "aws_batch_compute_environment" TF.validator $
         BatchComputeEnvironmentData'
             { _computeEnvironmentName = _computeEnvironmentName
             }
 
+instance TF.IsObject (BatchComputeEnvironmentData s) where
+    toObject BatchComputeEnvironmentData'{..} = P.catMaybes
+        [ TF.assign "compute_environment_name" <$> TF.attribute _computeEnvironmentName
+        ]
+
+instance TF.IsValid (BatchComputeEnvironmentData s) where
+    validator = P.mempty
+
 instance P.HasComputeEnvironmentName (BatchComputeEnvironmentData s) (TF.Attr s P.Text) where
     computeEnvironmentName =
         P.lens (_computeEnvironmentName :: BatchComputeEnvironmentData s -> TF.Attr s P.Text)
-               (\s a -> s { _computeEnvironmentName = a
-                          } :: BatchComputeEnvironmentData s)
+               (\s a -> s { _computeEnvironmentName = a } :: BatchComputeEnvironmentData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchComputeEnvironmentData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -1075,30 +1111,32 @@ data BatchJobQueueData s = BatchJobQueueData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (BatchJobQueueData s) where
-    toObject BatchJobQueueData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 batchJobQueueData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (BatchJobQueueData s)
 batchJobQueueData _name =
-    TF.newDataSource "aws_batch_job_queue" $
+    TF.newDataSource "aws_batch_job_queue" TF.validator $
         BatchJobQueueData'
             { _name = _name
             }
 
+instance TF.IsObject (BatchJobQueueData s) where
+    toObject BatchJobQueueData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (BatchJobQueueData s) where
+    validator = P.mempty
+
 instance P.HasName (BatchJobQueueData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: BatchJobQueueData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: BatchJobQueueData s)
+               (\s a -> s { _name = a } :: BatchJobQueueData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
-instance s ~ s' => P.HasComputedComputeEnvironmentOrder (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s [ComputeEnvironmentOrder s]) where
+instance s ~ s' => P.HasComputedComputeEnvironmentOrder (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s [TF.Attr s (ComputeEnvironmentOrder s)]) where
     computedComputeEnvironmentOrder x = TF.compute (TF.refKey x) "_computedComputeEnvironmentOrder"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Integer) where
@@ -1120,14 +1158,17 @@ instance s ~ s' => P.HasComputedStatusReason (TF.Ref s' (BatchJobQueueData s)) (
 data BillingServiceAccountData s = BillingServiceAccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (BillingServiceAccountData s) where
-    toObject _ = []
-
 billingServiceAccountData
     :: TF.DataSource P.Provider (BillingServiceAccountData s)
 billingServiceAccountData =
-    TF.newDataSource "aws_billing_service_account" $
+    TF.newDataSource "aws_billing_service_account" TF.validator $
         BillingServiceAccountData'
+
+instance TF.IsObject (BillingServiceAccountData s) where
+    toObject _ = []
+
+instance TF.IsValid (BillingServiceAccountData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BillingServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -1139,14 +1180,17 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (BillingServiceAccountData s)) (T
 data CallerIdentityData s = CallerIdentityData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CallerIdentityData s) where
-    toObject _ = []
-
 callerIdentityData
     :: TF.DataSource P.Provider (CallerIdentityData s)
 callerIdentityData =
-    TF.newDataSource "aws_caller_identity" $
+    TF.newDataSource "aws_caller_identity" TF.validator $
         CallerIdentityData'
+
+instance TF.IsObject (CallerIdentityData s) where
+    toObject _ = []
+
+instance TF.IsValid (CallerIdentityData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (CallerIdentityData s)) (TF.Attr s P.Text) where
     computedAccountId x = TF.compute (TF.refKey x) "_computedAccountId"
@@ -1164,14 +1208,17 @@ instance s ~ s' => P.HasComputedUserId (TF.Ref s' (CallerIdentityData s)) (TF.At
 data CanonicalUserIdData s = CanonicalUserIdData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CanonicalUserIdData s) where
-    toObject _ = []
-
 canonicalUserIdData
     :: TF.DataSource P.Provider (CanonicalUserIdData s)
 canonicalUserIdData =
-    TF.newDataSource "aws_canonical_user_id" $
+    TF.newDataSource "aws_canonical_user_id" TF.validator $
         CanonicalUserIdData'
+
+instance TF.IsObject (CanonicalUserIdData s) where
+    toObject _ = []
+
+instance TF.IsValid (CanonicalUserIdData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (CanonicalUserIdData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
@@ -1186,25 +1233,27 @@ data CloudformationExportData s = CloudformationExportData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CloudformationExportData s) where
-    toObject CloudformationExportData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 cloudformationExportData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudformationExportData s)
 cloudformationExportData _name =
-    TF.newDataSource "aws_cloudformation_export" $
+    TF.newDataSource "aws_cloudformation_export" TF.validator $
         CloudformationExportData'
             { _name = _name
             }
 
+instance TF.IsObject (CloudformationExportData s) where
+    toObject CloudformationExportData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CloudformationExportData s) where
+    validator = P.mempty
+
 instance P.HasName (CloudformationExportData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudformationExportData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CloudformationExportData s)
+               (\s a -> s { _name = a } :: CloudformationExportData s)
 
 instance s ~ s' => P.HasComputedExportingStackId (TF.Ref s' (CloudformationExportData s)) (TF.Attr s P.Text) where
     computedExportingStackId x = TF.compute (TF.refKey x) "_computedExportingStackId"
@@ -1222,27 +1271,29 @@ data CloudformationStackData s = CloudformationStackData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CloudformationStackData s) where
-    toObject CloudformationStackData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 cloudformationStackData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudformationStackData s)
 cloudformationStackData _name =
-    TF.newDataSource "aws_cloudformation_stack" $
+    TF.newDataSource "aws_cloudformation_stack" TF.validator $
         CloudformationStackData'
             { _name = _name
             }
 
+instance TF.IsObject (CloudformationStackData s) where
+    toObject CloudformationStackData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CloudformationStackData s) where
+    validator = P.mempty
+
 instance P.HasName (CloudformationStackData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudformationStackData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CloudformationStackData s)
+               (\s a -> s { _name = a } :: CloudformationStackData s)
 
-instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CloudformationStackData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CloudformationStackData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCapabilities x = TF.compute (TF.refKey x) "_computedCapabilities"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CloudformationStackData s)) (TF.Attr s P.Text) where
@@ -1254,7 +1305,7 @@ instance s ~ s' => P.HasComputedDisableRollback (TF.Ref s' (CloudformationStackD
 instance s ~ s' => P.HasComputedIamRoleArn (TF.Ref s' (CloudformationStackData s)) (TF.Attr s P.Text) where
     computedIamRoleArn x = TF.compute (TF.refKey x) "_computedIamRoleArn"
 
-instance s ~ s' => P.HasComputedNotificationArns (TF.Ref s' (CloudformationStackData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedNotificationArns (TF.Ref s' (CloudformationStackData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNotificationArns x = TF.compute (TF.refKey x) "_computedNotificationArns"
 
 instance s ~ s' => P.HasComputedOutputs (TF.Ref s' (CloudformationStackData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -1282,24 +1333,26 @@ data CloudtrailServiceAccountData s = CloudtrailServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CloudtrailServiceAccountData s) where
-    toObject CloudtrailServiceAccountData'{..} = catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
-        ]
-
 cloudtrailServiceAccountData
     :: TF.DataSource P.Provider (CloudtrailServiceAccountData s)
 cloudtrailServiceAccountData =
-    TF.newDataSource "aws_cloudtrail_service_account" $
+    TF.newDataSource "aws_cloudtrail_service_account" TF.validator $
         CloudtrailServiceAccountData'
             { _region = TF.Nil
             }
 
+instance TF.IsObject (CloudtrailServiceAccountData s) where
+    toObject CloudtrailServiceAccountData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (CloudtrailServiceAccountData s) where
+    validator = P.mempty
+
 instance P.HasRegion (CloudtrailServiceAccountData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: CloudtrailServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: CloudtrailServiceAccountData s)
+               (\s a -> s { _region = a } :: CloudtrailServiceAccountData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudtrailServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -1314,25 +1367,27 @@ data CloudwatchLogGroupData s = CloudwatchLogGroupData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CloudwatchLogGroupData s) where
-    toObject CloudwatchLogGroupData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 cloudwatchLogGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CloudwatchLogGroupData s)
 cloudwatchLogGroupData _name =
-    TF.newDataSource "aws_cloudwatch_log_group" $
+    TF.newDataSource "aws_cloudwatch_log_group" TF.validator $
         CloudwatchLogGroupData'
             { _name = _name
             }
 
+instance TF.IsObject (CloudwatchLogGroupData s) where
+    toObject CloudwatchLogGroupData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CloudwatchLogGroupData s) where
+    validator = P.mempty
+
 instance P.HasName (CloudwatchLogGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudwatchLogGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CloudwatchLogGroupData s)
+               (\s a -> s { _name = a } :: CloudwatchLogGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchLogGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -1350,25 +1405,27 @@ data CodecommitRepositoryData s = CodecommitRepositoryData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CodecommitRepositoryData s) where
-    toObject CodecommitRepositoryData'{..} = catMaybes
-        [ TF.assign "repository_name" <$> TF.attribute _repositoryName
-        ]
-
 codecommitRepositoryData
     :: TF.Attr s P.Text -- ^ @repository_name@ - 'P.repositoryName'
     -> TF.DataSource P.Provider (CodecommitRepositoryData s)
 codecommitRepositoryData _repositoryName =
-    TF.newDataSource "aws_codecommit_repository" $
+    TF.newDataSource "aws_codecommit_repository" TF.validator $
         CodecommitRepositoryData'
             { _repositoryName = _repositoryName
             }
 
+instance TF.IsObject (CodecommitRepositoryData s) where
+    toObject CodecommitRepositoryData'{..} = P.catMaybes
+        [ TF.assign "repository_name" <$> TF.attribute _repositoryName
+        ]
+
+instance TF.IsValid (CodecommitRepositoryData s) where
+    validator = P.mempty
+
 instance P.HasRepositoryName (CodecommitRepositoryData s) (TF.Attr s P.Text) where
     repositoryName =
         P.lens (_repositoryName :: CodecommitRepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _repositoryName = a
-                          } :: CodecommitRepositoryData s)
+               (\s a -> s { _repositoryName = a } :: CodecommitRepositoryData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CodecommitRepositoryData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -1392,30 +1449,32 @@ data CognitoUserPoolsData s = CognitoUserPoolsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CognitoUserPoolsData s) where
-    toObject CognitoUserPoolsData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 cognitoUserPoolsData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CognitoUserPoolsData s)
 cognitoUserPoolsData _name =
-    TF.newDataSource "aws_cognito_user_pools" $
+    TF.newDataSource "aws_cognito_user_pools" TF.validator $
         CognitoUserPoolsData'
             { _name = _name
             }
 
+instance TF.IsObject (CognitoUserPoolsData s) where
+    toObject CognitoUserPoolsData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CognitoUserPoolsData s) where
+    validator = P.mempty
+
 instance P.HasName (CognitoUserPoolsData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CognitoUserPoolsData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CognitoUserPoolsData s)
+               (\s a -> s { _name = a } :: CognitoUserPoolsData s)
 
-instance s ~ s' => P.HasComputedArns (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedArns (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedArns x = TF.compute (TF.refKey x) "_computedArns"
 
-instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "_computedIds"
 
 -- | @aws_db_cluster_snapshot@ DataSource.
@@ -1443,20 +1502,10 @@ data DbClusterSnapshotData s = DbClusterSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DbClusterSnapshotData s) where
-    toObject DbClusterSnapshotData'{..} = catMaybes
-        [ TF.assign "db_cluster_identifier" <$> TF.attribute _dbClusterIdentifier
-        , TF.assign "db_cluster_snapshot_identifier" <$> TF.attribute _dbClusterSnapshotIdentifier
-        , TF.assign "include_public" <$> TF.attribute _includePublic
-        , TF.assign "include_shared" <$> TF.attribute _includeShared
-        , TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "snapshot_type" <$> TF.attribute _snapshotType
-        ]
-
 dbClusterSnapshotData
     :: TF.DataSource P.Provider (DbClusterSnapshotData s)
 dbClusterSnapshotData =
-    TF.newDataSource "aws_db_cluster_snapshot" $
+    TF.newDataSource "aws_db_cluster_snapshot" TF.validator $
         DbClusterSnapshotData'
             { _dbClusterIdentifier = TF.Nil
             , _dbClusterSnapshotIdentifier = TF.Nil
@@ -1466,41 +1515,48 @@ dbClusterSnapshotData =
             , _snapshotType = TF.Nil
             }
 
+instance TF.IsObject (DbClusterSnapshotData s) where
+    toObject DbClusterSnapshotData'{..} = P.catMaybes
+        [ TF.assign "db_cluster_identifier" <$> TF.attribute _dbClusterIdentifier
+        , TF.assign "db_cluster_snapshot_identifier" <$> TF.attribute _dbClusterSnapshotIdentifier
+        , TF.assign "include_public" <$> TF.attribute _includePublic
+        , TF.assign "include_shared" <$> TF.attribute _includeShared
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "snapshot_type" <$> TF.attribute _snapshotType
+        ]
+
+instance TF.IsValid (DbClusterSnapshotData s) where
+    validator = P.mempty
+
 instance P.HasDbClusterIdentifier (DbClusterSnapshotData s) (TF.Attr s P.Text) where
     dbClusterIdentifier =
         P.lens (_dbClusterIdentifier :: DbClusterSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbClusterIdentifier = a
-                          } :: DbClusterSnapshotData s)
+               (\s a -> s { _dbClusterIdentifier = a } :: DbClusterSnapshotData s)
 
 instance P.HasDbClusterSnapshotIdentifier (DbClusterSnapshotData s) (TF.Attr s P.Text) where
     dbClusterSnapshotIdentifier =
         P.lens (_dbClusterSnapshotIdentifier :: DbClusterSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbClusterSnapshotIdentifier = a
-                          } :: DbClusterSnapshotData s)
+               (\s a -> s { _dbClusterSnapshotIdentifier = a } :: DbClusterSnapshotData s)
 
 instance P.HasIncludePublic (DbClusterSnapshotData s) (TF.Attr s P.Bool) where
     includePublic =
         P.lens (_includePublic :: DbClusterSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includePublic = a
-                          } :: DbClusterSnapshotData s)
+               (\s a -> s { _includePublic = a } :: DbClusterSnapshotData s)
 
 instance P.HasIncludeShared (DbClusterSnapshotData s) (TF.Attr s P.Bool) where
     includeShared =
         P.lens (_includeShared :: DbClusterSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeShared = a
-                          } :: DbClusterSnapshotData s)
+               (\s a -> s { _includeShared = a } :: DbClusterSnapshotData s)
 
 instance P.HasMostRecent (DbClusterSnapshotData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: DbClusterSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: DbClusterSnapshotData s)
+               (\s a -> s { _mostRecent = a } :: DbClusterSnapshotData s)
 
 instance P.HasSnapshotType (DbClusterSnapshotData s) (TF.Attr s P.Text) where
     snapshotType =
         P.lens (_snapshotType :: DbClusterSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotType = a
-                          } :: DbClusterSnapshotData s)
+               (\s a -> s { _snapshotType = a } :: DbClusterSnapshotData s)
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DbClusterSnapshotData s)) (TF.Attr s P.Integer) where
     computedAllocatedStorage x = TF.compute (TF.refKey x) "_computedAllocatedStorage"
@@ -1551,25 +1607,27 @@ data DbInstanceData s = DbInstanceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DbInstanceData s) where
-    toObject DbInstanceData'{..} = catMaybes
-        [ TF.assign "db_instance_identifier" <$> TF.attribute _dbInstanceIdentifier
-        ]
-
 dbInstanceData
     :: TF.Attr s P.Text -- ^ @db_instance_identifier@ - 'P.dbInstanceIdentifier'
     -> TF.DataSource P.Provider (DbInstanceData s)
 dbInstanceData _dbInstanceIdentifier =
-    TF.newDataSource "aws_db_instance" $
+    TF.newDataSource "aws_db_instance" TF.validator $
         DbInstanceData'
             { _dbInstanceIdentifier = _dbInstanceIdentifier
             }
 
+instance TF.IsObject (DbInstanceData s) where
+    toObject DbInstanceData'{..} = P.catMaybes
+        [ TF.assign "db_instance_identifier" <$> TF.attribute _dbInstanceIdentifier
+        ]
+
+instance TF.IsValid (DbInstanceData s) where
+    validator = P.mempty
+
 instance P.HasDbInstanceIdentifier (DbInstanceData s) (TF.Attr s P.Text) where
     dbInstanceIdentifier =
         P.lens (_dbInstanceIdentifier :: DbInstanceData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbInstanceIdentifier = a
-                          } :: DbInstanceData s)
+               (\s a -> s { _dbInstanceIdentifier = a } :: DbInstanceData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (DbInstanceData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
@@ -1701,20 +1759,10 @@ data DbSnapshotData s = DbSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DbSnapshotData s) where
-    toObject DbSnapshotData'{..} = catMaybes
-        [ TF.assign "db_instance_identifier" <$> TF.attribute _dbInstanceIdentifier
-        , TF.assign "db_snapshot_identifier" <$> TF.attribute _dbSnapshotIdentifier
-        , TF.assign "include_public" <$> TF.attribute _includePublic
-        , TF.assign "include_shared" <$> TF.attribute _includeShared
-        , TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "snapshot_type" <$> TF.attribute _snapshotType
-        ]
-
 dbSnapshotData
     :: TF.DataSource P.Provider (DbSnapshotData s)
 dbSnapshotData =
-    TF.newDataSource "aws_db_snapshot" $
+    TF.newDataSource "aws_db_snapshot" TF.validator $
         DbSnapshotData'
             { _dbInstanceIdentifier = TF.Nil
             , _dbSnapshotIdentifier = TF.Nil
@@ -1724,41 +1772,48 @@ dbSnapshotData =
             , _snapshotType = TF.Nil
             }
 
+instance TF.IsObject (DbSnapshotData s) where
+    toObject DbSnapshotData'{..} = P.catMaybes
+        [ TF.assign "db_instance_identifier" <$> TF.attribute _dbInstanceIdentifier
+        , TF.assign "db_snapshot_identifier" <$> TF.attribute _dbSnapshotIdentifier
+        , TF.assign "include_public" <$> TF.attribute _includePublic
+        , TF.assign "include_shared" <$> TF.attribute _includeShared
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "snapshot_type" <$> TF.attribute _snapshotType
+        ]
+
+instance TF.IsValid (DbSnapshotData s) where
+    validator = P.mempty
+
 instance P.HasDbInstanceIdentifier (DbSnapshotData s) (TF.Attr s P.Text) where
     dbInstanceIdentifier =
         P.lens (_dbInstanceIdentifier :: DbSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbInstanceIdentifier = a
-                          } :: DbSnapshotData s)
+               (\s a -> s { _dbInstanceIdentifier = a } :: DbSnapshotData s)
 
 instance P.HasDbSnapshotIdentifier (DbSnapshotData s) (TF.Attr s P.Text) where
     dbSnapshotIdentifier =
         P.lens (_dbSnapshotIdentifier :: DbSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _dbSnapshotIdentifier = a
-                          } :: DbSnapshotData s)
+               (\s a -> s { _dbSnapshotIdentifier = a } :: DbSnapshotData s)
 
 instance P.HasIncludePublic (DbSnapshotData s) (TF.Attr s P.Bool) where
     includePublic =
         P.lens (_includePublic :: DbSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includePublic = a
-                          } :: DbSnapshotData s)
+               (\s a -> s { _includePublic = a } :: DbSnapshotData s)
 
 instance P.HasIncludeShared (DbSnapshotData s) (TF.Attr s P.Bool) where
     includeShared =
         P.lens (_includeShared :: DbSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeShared = a
-                          } :: DbSnapshotData s)
+               (\s a -> s { _includeShared = a } :: DbSnapshotData s)
 
 instance P.HasMostRecent (DbSnapshotData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: DbSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: DbSnapshotData s)
+               (\s a -> s { _mostRecent = a } :: DbSnapshotData s)
 
 instance P.HasSnapshotType (DbSnapshotData s) (TF.Attr s P.Text) where
     snapshotType =
         P.lens (_snapshotType :: DbSnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotType = a
-                          } :: DbSnapshotData s)
+               (\s a -> s { _snapshotType = a } :: DbSnapshotData s)
 
 instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (DbSnapshotData s)) (TF.Attr s P.Integer) where
     computedAllocatedStorage x = TF.compute (TF.refKey x) "_computedAllocatedStorage"
@@ -1821,25 +1876,27 @@ data DxGatewayData s = DxGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DxGatewayData s) where
-    toObject DxGatewayData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 dxGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DxGatewayData s)
 dxGatewayData _name =
-    TF.newDataSource "aws_dx_gateway" $
+    TF.newDataSource "aws_dx_gateway" TF.validator $
         DxGatewayData'
             { _name = _name
             }
 
+instance TF.IsObject (DxGatewayData s) where
+    toObject DxGatewayData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DxGatewayData s) where
+    validator = P.mempty
+
 instance P.HasName (DxGatewayData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DxGatewayData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DxGatewayData s)
+               (\s a -> s { _name = a } :: DxGatewayData s)
 
 instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (DxGatewayData s)) (TF.Attr s P.Text) where
     computedAmazonSideAsn x = TF.compute (TF.refKey x) "_computedAmazonSideAsn"
@@ -1854,25 +1911,27 @@ data DynamodbTableData s = DynamodbTableData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (DynamodbTableData s) where
-    toObject DynamodbTableData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 dynamodbTableData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (DynamodbTableData s)
 dynamodbTableData _name =
-    TF.newDataSource "aws_dynamodb_table" $
+    TF.newDataSource "aws_dynamodb_table" TF.validator $
         DynamodbTableData'
             { _name = _name
             }
 
+instance TF.IsObject (DynamodbTableData s) where
+    toObject DynamodbTableData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DynamodbTableData s) where
+    validator = P.mempty
+
 instance P.HasName (DynamodbTableData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DynamodbTableData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: DynamodbTableData s)
+               (\s a -> s { _name = a } :: DynamodbTableData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -1913,7 +1972,7 @@ instance s ~ s' => P.HasComputedStreamViewType (TF.Ref s' (DynamodbTableData s))
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (TF.Attr s (Ttl s))) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (Ttl s)) where
     computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
 instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Integer) where
@@ -1941,19 +2000,10 @@ data EbsSnapshotData s = EbsSnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EbsSnapshotData s) where
-    toObject EbsSnapshotData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "owners" <$> TF.attribute _owners
-        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorableByUserIds
-        , TF.assign "snapshot_ids" <$> TF.attribute _snapshotIds
-        ]
-
 ebsSnapshotData
     :: TF.DataSource P.Provider (EbsSnapshotData s)
 ebsSnapshotData =
-    TF.newDataSource "aws_ebs_snapshot" $
+    TF.newDataSource "aws_ebs_snapshot" TF.validator $
         EbsSnapshotData'
             { _filter = TF.Nil
             , _mostRecent = TF.value P.False
@@ -1962,35 +2012,46 @@ ebsSnapshotData =
             , _snapshotIds = TF.Nil
             }
 
+instance TF.IsObject (EbsSnapshotData s) where
+    toObject EbsSnapshotData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorableByUserIds
+        , TF.assign "snapshot_ids" <$> TF.attribute _snapshotIds
+        ]
+
+instance TF.IsValid (EbsSnapshotData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: EbsSnapshotData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (EbsSnapshotData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: EbsSnapshotData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: EbsSnapshotData s)
+               (\s a -> s { _filter = a } :: EbsSnapshotData s)
 
 instance P.HasMostRecent (EbsSnapshotData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: EbsSnapshotData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: EbsSnapshotData s)
+               (\s a -> s { _mostRecent = a } :: EbsSnapshotData s)
 
 instance P.HasOwners (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a
-                          } :: EbsSnapshotData s)
+               (\s a -> s { _owners = a } :: EbsSnapshotData s)
 
 instance P.HasRestorableByUserIds (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) where
     restorableByUserIds =
         P.lens (_restorableByUserIds :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _restorableByUserIds = a
-                          } :: EbsSnapshotData s)
+               (\s a -> s { _restorableByUserIds = a } :: EbsSnapshotData s)
 
 instance P.HasSnapshotIds (EbsSnapshotData s) (TF.Attr s [TF.Attr s P.Text]) where
     snapshotIds =
         P.lens (_snapshotIds :: EbsSnapshotData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _snapshotIds = a
-                          } :: EbsSnapshotData s)
+               (\s a -> s { _snapshotIds = a } :: EbsSnapshotData s)
 
 instance s ~ s' => P.HasComputedDataEncryptionKeyId (TF.Ref s' (EbsSnapshotData s)) (TF.Attr s P.Text) where
     computedDataEncryptionKeyId x = TF.compute (TF.refKey x) "_computedDataEncryptionKeyId"
@@ -2041,40 +2102,44 @@ data EbsSnapshotIdsData s = EbsSnapshotIdsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EbsSnapshotIdsData s) where
-    toObject EbsSnapshotIdsData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "owners" <$> TF.attribute _owners
-        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorableByUserIds
-        ]
-
 ebsSnapshotIdsData
     :: TF.DataSource P.Provider (EbsSnapshotIdsData s)
 ebsSnapshotIdsData =
-    TF.newDataSource "aws_ebs_snapshot_ids" $
+    TF.newDataSource "aws_ebs_snapshot_ids" TF.validator $
         EbsSnapshotIdsData'
             { _filter = TF.Nil
             , _owners = TF.Nil
             , _restorableByUserIds = TF.Nil
             }
 
+instance TF.IsObject (EbsSnapshotIdsData s) where
+    toObject EbsSnapshotIdsData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "owners" <$> TF.attribute _owners
+        , TF.assign "restorable_by_user_ids" <$> TF.attribute _restorableByUserIds
+        ]
+
+instance TF.IsValid (EbsSnapshotIdsData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (EbsSnapshotIdsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: EbsSnapshotIdsData s)
+               (\s a -> s { _filter = a } :: EbsSnapshotIdsData s)
 
 instance P.HasOwners (EbsSnapshotIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     owners =
         P.lens (_owners :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _owners = a
-                          } :: EbsSnapshotIdsData s)
+               (\s a -> s { _owners = a } :: EbsSnapshotIdsData s)
 
 instance P.HasRestorableByUserIds (EbsSnapshotIdsData s) (TF.Attr s [TF.Attr s P.Text]) where
     restorableByUserIds =
         P.lens (_restorableByUserIds :: EbsSnapshotIdsData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _restorableByUserIds = a
-                          } :: EbsSnapshotIdsData s)
+               (\s a -> s { _restorableByUserIds = a } :: EbsSnapshotIdsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (EbsSnapshotIdsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "_computedIds"
@@ -2092,32 +2157,37 @@ data EbsVolumeData s = EbsVolumeData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EbsVolumeData s) where
-    toObject EbsVolumeData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "most_recent" <$> TF.attribute _mostRecent
-        ]
-
 ebsVolumeData
     :: TF.DataSource P.Provider (EbsVolumeData s)
 ebsVolumeData =
-    TF.newDataSource "aws_ebs_volume" $
+    TF.newDataSource "aws_ebs_volume" TF.validator $
         EbsVolumeData'
             { _filter = TF.Nil
             , _mostRecent = TF.value P.False
             }
 
+instance TF.IsObject (EbsVolumeData s) where
+    toObject EbsVolumeData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
+        ]
+
+instance TF.IsValid (EbsVolumeData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: EbsVolumeData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (EbsVolumeData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: EbsVolumeData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: EbsVolumeData s)
+               (\s a -> s { _filter = a } :: EbsVolumeData s)
 
 instance P.HasMostRecent (EbsVolumeData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: EbsVolumeData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: EbsVolumeData s)
+               (\s a -> s { _mostRecent = a } :: EbsVolumeData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EbsVolumeData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2159,25 +2229,27 @@ data EcrRepositoryData s = EcrRepositoryData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EcrRepositoryData s) where
-    toObject EcrRepositoryData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 ecrRepositoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (EcrRepositoryData s)
 ecrRepositoryData _name =
-    TF.newDataSource "aws_ecr_repository" $
+    TF.newDataSource "aws_ecr_repository" TF.validator $
         EcrRepositoryData'
             { _name = _name
             }
 
+instance TF.IsObject (EcrRepositoryData s) where
+    toObject EcrRepositoryData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (EcrRepositoryData s) where
+    validator = P.mempty
+
 instance P.HasName (EcrRepositoryData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EcrRepositoryData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: EcrRepositoryData s)
+               (\s a -> s { _name = a } :: EcrRepositoryData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcrRepositoryData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2198,25 +2270,27 @@ data EcsClusterData s = EcsClusterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EcsClusterData s) where
-    toObject EcsClusterData'{..} = catMaybes
-        [ TF.assign "cluster_name" <$> TF.attribute _clusterName
-        ]
-
 ecsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
     -> TF.DataSource P.Provider (EcsClusterData s)
 ecsClusterData _clusterName =
-    TF.newDataSource "aws_ecs_cluster" $
+    TF.newDataSource "aws_ecs_cluster" TF.validator $
         EcsClusterData'
             { _clusterName = _clusterName
             }
 
+instance TF.IsObject (EcsClusterData s) where
+    toObject EcsClusterData'{..} = P.catMaybes
+        [ TF.assign "cluster_name" <$> TF.attribute _clusterName
+        ]
+
+instance TF.IsValid (EcsClusterData s) where
+    validator = P.mempty
+
 instance P.HasClusterName (EcsClusterData s) (TF.Attr s P.Text) where
     clusterName =
         P.lens (_clusterName :: EcsClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterName = a
-                          } :: EcsClusterData s)
+               (\s a -> s { _clusterName = a } :: EcsClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2246,34 +2320,35 @@ data EcsContainerDefinitionData s = EcsContainerDefinitionData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EcsContainerDefinitionData s) where
-    toObject EcsContainerDefinitionData'{..} = catMaybes
-        [ TF.assign "container_name" <$> TF.attribute _containerName
-        , TF.assign "task_definition" <$> TF.attribute _taskDefinition
-        ]
-
 ecsContainerDefinitionData
     :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> TF.DataSource P.Provider (EcsContainerDefinitionData s)
 ecsContainerDefinitionData _containerName _taskDefinition =
-    TF.newDataSource "aws_ecs_container_definition" $
+    TF.newDataSource "aws_ecs_container_definition" TF.validator $
         EcsContainerDefinitionData'
             { _containerName = _containerName
             , _taskDefinition = _taskDefinition
             }
 
+instance TF.IsObject (EcsContainerDefinitionData s) where
+    toObject EcsContainerDefinitionData'{..} = P.catMaybes
+        [ TF.assign "container_name" <$> TF.attribute _containerName
+        , TF.assign "task_definition" <$> TF.attribute _taskDefinition
+        ]
+
+instance TF.IsValid (EcsContainerDefinitionData s) where
+    validator = P.mempty
+
 instance P.HasContainerName (EcsContainerDefinitionData s) (TF.Attr s P.Text) where
     containerName =
         P.lens (_containerName :: EcsContainerDefinitionData s -> TF.Attr s P.Text)
-               (\s a -> s { _containerName = a
-                          } :: EcsContainerDefinitionData s)
+               (\s a -> s { _containerName = a } :: EcsContainerDefinitionData s)
 
 instance P.HasTaskDefinition (EcsContainerDefinitionData s) (TF.Attr s P.Text) where
     taskDefinition =
         P.lens (_taskDefinition :: EcsContainerDefinitionData s -> TF.Attr s P.Text)
-               (\s a -> s { _taskDefinition = a
-                          } :: EcsContainerDefinitionData s)
+               (\s a -> s { _taskDefinition = a } :: EcsContainerDefinitionData s)
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (EcsContainerDefinitionData s)) (TF.Attr s P.Integer) where
     computedCpu x = TF.compute (TF.refKey x) "_computedCpu"
@@ -2312,34 +2387,35 @@ data EcsServiceData s = EcsServiceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EcsServiceData s) where
-    toObject EcsServiceData'{..} = catMaybes
-        [ TF.assign "cluster_arn" <$> TF.attribute _clusterArn
-        , TF.assign "service_name" <$> TF.attribute _serviceName
-        ]
-
 ecsServiceData
     :: TF.Attr s P.Text -- ^ @cluster_arn@ - 'P.clusterArn'
     -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
     -> TF.DataSource P.Provider (EcsServiceData s)
 ecsServiceData _clusterArn _serviceName =
-    TF.newDataSource "aws_ecs_service" $
+    TF.newDataSource "aws_ecs_service" TF.validator $
         EcsServiceData'
             { _clusterArn = _clusterArn
             , _serviceName = _serviceName
             }
 
+instance TF.IsObject (EcsServiceData s) where
+    toObject EcsServiceData'{..} = P.catMaybes
+        [ TF.assign "cluster_arn" <$> TF.attribute _clusterArn
+        , TF.assign "service_name" <$> TF.attribute _serviceName
+        ]
+
+instance TF.IsValid (EcsServiceData s) where
+    validator = P.mempty
+
 instance P.HasClusterArn (EcsServiceData s) (TF.Attr s P.Text) where
     clusterArn =
         P.lens (_clusterArn :: EcsServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterArn = a
-                          } :: EcsServiceData s)
+               (\s a -> s { _clusterArn = a } :: EcsServiceData s)
 
 instance P.HasServiceName (EcsServiceData s) (TF.Attr s P.Text) where
     serviceName =
         P.lens (_serviceName :: EcsServiceData s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceName = a
-                          } :: EcsServiceData s)
+               (\s a -> s { _serviceName = a } :: EcsServiceData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EcsServiceData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2366,25 +2442,27 @@ data EcsTaskDefinitionData s = EcsTaskDefinitionData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EcsTaskDefinitionData s) where
-    toObject EcsTaskDefinitionData'{..} = catMaybes
-        [ TF.assign "task_definition" <$> TF.attribute _taskDefinition
-        ]
-
 ecsTaskDefinitionData
     :: TF.Attr s P.Text -- ^ @task_definition@ - 'P.taskDefinition'
     -> TF.DataSource P.Provider (EcsTaskDefinitionData s)
 ecsTaskDefinitionData _taskDefinition =
-    TF.newDataSource "aws_ecs_task_definition" $
+    TF.newDataSource "aws_ecs_task_definition" TF.validator $
         EcsTaskDefinitionData'
             { _taskDefinition = _taskDefinition
             }
 
+instance TF.IsObject (EcsTaskDefinitionData s) where
+    toObject EcsTaskDefinitionData'{..} = P.catMaybes
+        [ TF.assign "task_definition" <$> TF.attribute _taskDefinition
+        ]
+
+instance TF.IsValid (EcsTaskDefinitionData s) where
+    validator = P.mempty
+
 instance P.HasTaskDefinition (EcsTaskDefinitionData s) (TF.Attr s P.Text) where
     taskDefinition =
         P.lens (_taskDefinition :: EcsTaskDefinitionData s -> TF.Attr s P.Text)
-               (\s a -> s { _taskDefinition = a
-                          } :: EcsTaskDefinitionData s)
+               (\s a -> s { _taskDefinition = a } :: EcsTaskDefinitionData s)
 
 instance s ~ s' => P.HasComputedFamily (TF.Ref s' (EcsTaskDefinitionData s)) (TF.Attr s P.Text) where
     computedFamily x = TF.compute (TF.refKey x) "_computedFamily"
@@ -2408,14 +2486,17 @@ instance s ~ s' => P.HasComputedTaskRoleArn (TF.Ref s' (EcsTaskDefinitionData s)
 data EfsFileSystemData s = EfsFileSystemData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EfsFileSystemData s) where
-    toObject _ = []
-
 efsFileSystemData
     :: TF.DataSource P.Provider (EfsFileSystemData s)
 efsFileSystemData =
-    TF.newDataSource "aws_efs_file_system" $
+    TF.newDataSource "aws_efs_file_system" TF.validator $
         EfsFileSystemData'
+
+instance TF.IsObject (EfsFileSystemData s) where
+    toObject _ = []
+
+instance TF.IsValid (EfsFileSystemData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedCreationToken (TF.Ref s' (EfsFileSystemData s)) (TF.Attr s P.Text) where
     computedCreationToken x = TF.compute (TF.refKey x) "_computedCreationToken"
@@ -2448,25 +2529,27 @@ data EfsMountTargetData s = EfsMountTargetData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EfsMountTargetData s) where
-    toObject EfsMountTargetData'{..} = catMaybes
-        [ TF.assign "mount_target_id" <$> TF.attribute _mountTargetId
-        ]
-
 efsMountTargetData
     :: TF.Attr s P.Text -- ^ @mount_target_id@ - 'P.mountTargetId'
     -> TF.DataSource P.Provider (EfsMountTargetData s)
 efsMountTargetData _mountTargetId =
-    TF.newDataSource "aws_efs_mount_target" $
+    TF.newDataSource "aws_efs_mount_target" TF.validator $
         EfsMountTargetData'
             { _mountTargetId = _mountTargetId
             }
 
+instance TF.IsObject (EfsMountTargetData s) where
+    toObject EfsMountTargetData'{..} = P.catMaybes
+        [ TF.assign "mount_target_id" <$> TF.attribute _mountTargetId
+        ]
+
+instance TF.IsValid (EfsMountTargetData s) where
+    validator = P.mempty
+
 instance P.HasMountTargetId (EfsMountTargetData s) (TF.Attr s P.Text) where
     mountTargetId =
         P.lens (_mountTargetId :: EfsMountTargetData s -> TF.Attr s P.Text)
-               (\s a -> s { _mountTargetId = a
-                          } :: EfsMountTargetData s)
+               (\s a -> s { _mountTargetId = a } :: EfsMountTargetData s)
 
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (EfsMountTargetData s)) (TF.Attr s P.Text) where
     computedDnsName x = TF.compute (TF.refKey x) "_computedDnsName"
@@ -2480,7 +2563,7 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EfsMountTargetData s)) (TF
 instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (EfsMountTargetData s)) (TF.Attr s P.Text) where
     computedNetworkInterfaceId x = TF.compute (TF.refKey x) "_computedNetworkInterfaceId"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (EfsMountTargetData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (EfsMountTargetData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (EfsMountTargetData s)) (TF.Attr s P.Text) where
@@ -2493,14 +2576,17 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (EfsMountTargetData s)) (TF.
 data EipData s = EipData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EipData s) where
-    toObject _ = []
-
 eipData
     :: TF.DataSource P.Provider (EipData s)
 eipData =
-    TF.newDataSource "aws_eip" $
+    TF.newDataSource "aws_eip" TF.validator $
         EipData'
+
+instance TF.IsObject (EipData s) where
+    toObject _ = []
+
+instance TF.IsValid (EipData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EipData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -2518,25 +2604,27 @@ data EksClusterData s = EksClusterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EksClusterData s) where
-    toObject EksClusterData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 eksClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (EksClusterData s)
 eksClusterData _name =
-    TF.newDataSource "aws_eks_cluster" $
+    TF.newDataSource "aws_eks_cluster" TF.validator $
         EksClusterData'
             { _name = _name
             }
 
+instance TF.IsObject (EksClusterData s) where
+    toObject EksClusterData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (EksClusterData s) where
+    validator = P.mempty
+
 instance P.HasName (EksClusterData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EksClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: EksClusterData s)
+               (\s a -> s { _name = a } :: EksClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EksClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2569,24 +2657,26 @@ data ElasticBeanstalkHostedZoneData s = ElasticBeanstalkHostedZoneData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElasticBeanstalkHostedZoneData s) where
-    toObject ElasticBeanstalkHostedZoneData'{..} = catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
-        ]
-
 elasticBeanstalkHostedZoneData
     :: TF.DataSource P.Provider (ElasticBeanstalkHostedZoneData s)
 elasticBeanstalkHostedZoneData =
-    TF.newDataSource "aws_elastic_beanstalk_hosted_zone" $
+    TF.newDataSource "aws_elastic_beanstalk_hosted_zone" TF.validator $
         ElasticBeanstalkHostedZoneData'
             { _region = TF.Nil
             }
 
+instance TF.IsObject (ElasticBeanstalkHostedZoneData s) where
+    toObject ElasticBeanstalkHostedZoneData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (ElasticBeanstalkHostedZoneData s) where
+    validator = P.mempty
+
 instance P.HasRegion (ElasticBeanstalkHostedZoneData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ElasticBeanstalkHostedZoneData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ElasticBeanstalkHostedZoneData s)
+               (\s a -> s { _region = a } :: ElasticBeanstalkHostedZoneData s)
 
 -- | @aws_elastic_beanstalk_solution_stack@ DataSource.
 --
@@ -2601,33 +2691,34 @@ data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
-    toObject ElasticBeanstalkSolutionStackData'{..} = catMaybes
-        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
-        , TF.assign "name_regex" <$> TF.attribute _nameRegex
-        ]
-
 elasticBeanstalkSolutionStackData
     :: TF.Attr s P.Text -- ^ @name_regex@ - 'P.nameRegex'
     -> TF.DataSource P.Provider (ElasticBeanstalkSolutionStackData s)
 elasticBeanstalkSolutionStackData _nameRegex =
-    TF.newDataSource "aws_elastic_beanstalk_solution_stack" $
+    TF.newDataSource "aws_elastic_beanstalk_solution_stack" TF.validator $
         ElasticBeanstalkSolutionStackData'
             { _mostRecent = TF.value P.False
             , _nameRegex = _nameRegex
             }
 
+instance TF.IsObject (ElasticBeanstalkSolutionStackData s) where
+    toObject ElasticBeanstalkSolutionStackData'{..} = P.catMaybes
+        [ TF.assign "most_recent" <$> TF.attribute _mostRecent
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
+        ]
+
+instance TF.IsValid (ElasticBeanstalkSolutionStackData s) where
+    validator = P.mempty
+
 instance P.HasMostRecent (ElasticBeanstalkSolutionStackData s) (TF.Attr s P.Bool) where
     mostRecent =
         P.lens (_mostRecent :: ElasticBeanstalkSolutionStackData s -> TF.Attr s P.Bool)
-               (\s a -> s { _mostRecent = a
-                          } :: ElasticBeanstalkSolutionStackData s)
+               (\s a -> s { _mostRecent = a } :: ElasticBeanstalkSolutionStackData s)
 
 instance P.HasNameRegex (ElasticBeanstalkSolutionStackData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: ElasticBeanstalkSolutionStackData s -> TF.Attr s P.Text)
-               (\s a -> s { _nameRegex = a
-                          } :: ElasticBeanstalkSolutionStackData s)
+               (\s a -> s { _nameRegex = a } :: ElasticBeanstalkSolutionStackData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ElasticBeanstalkSolutionStackData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
@@ -2642,25 +2733,27 @@ data ElasticacheClusterData s = ElasticacheClusterData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElasticacheClusterData s) where
-    toObject ElasticacheClusterData'{..} = catMaybes
-        [ TF.assign "cluster_id" <$> TF.attribute _clusterId
-        ]
-
 elasticacheClusterData
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.DataSource P.Provider (ElasticacheClusterData s)
 elasticacheClusterData _clusterId =
-    TF.newDataSource "aws_elasticache_cluster" $
+    TF.newDataSource "aws_elasticache_cluster" TF.validator $
         ElasticacheClusterData'
             { _clusterId = _clusterId
             }
 
+instance TF.IsObject (ElasticacheClusterData s) where
+    toObject ElasticacheClusterData'{..} = P.catMaybes
+        [ TF.assign "cluster_id" <$> TF.attribute _clusterId
+        ]
+
+instance TF.IsValid (ElasticacheClusterData s) where
+    validator = P.mempty
+
 instance P.HasClusterId (ElasticacheClusterData s) (TF.Attr s P.Text) where
     clusterId =
         P.lens (_clusterId :: ElasticacheClusterData s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterId = a
-                          } :: ElasticacheClusterData s)
+               (\s a -> s { _clusterId = a } :: ElasticacheClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2668,7 +2761,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElasticacheClusterData s)) (TF.A
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
 
-instance s ~ s' => P.HasComputedCacheNodes (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s [CacheNodes s]) where
+instance s ~ s' => P.HasComputedCacheNodes (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s [TF.Attr s (CacheNodes s)]) where
     computedCacheNodes x = TF.compute (TF.refKey x) "_computedCacheNodes"
 
 instance s ~ s' => P.HasComputedClusterAddress (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Text) where
@@ -2704,10 +2797,10 @@ instance s ~ s' => P.HasComputedPort (TF.Ref s' (ElasticacheClusterData s)) (TF.
 instance s ~ s' => P.HasComputedReplicationGroupId (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Text) where
     computedReplicationGroupId x = TF.compute (TF.refKey x) "_computedReplicationGroupId"
 
-instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroupIds x = TF.compute (TF.refKey x) "_computedSecurityGroupIds"
 
-instance s ~ s' => P.HasComputedSecurityGroupNames (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroupNames (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroupNames x = TF.compute (TF.refKey x) "_computedSecurityGroupNames"
 
 instance s ~ s' => P.HasComputedSnapshotRetentionLimit (TF.Ref s' (ElasticacheClusterData s)) (TF.Attr s P.Integer) where
@@ -2732,25 +2825,27 @@ data ElasticacheReplicationGroupData s = ElasticacheReplicationGroupData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElasticacheReplicationGroupData s) where
-    toObject ElasticacheReplicationGroupData'{..} = catMaybes
-        [ TF.assign "replication_group_id" <$> TF.attribute _replicationGroupId
-        ]
-
 elasticacheReplicationGroupData
     :: TF.Attr s P.Text -- ^ @replication_group_id@ - 'P.replicationGroupId'
     -> TF.DataSource P.Provider (ElasticacheReplicationGroupData s)
 elasticacheReplicationGroupData _replicationGroupId =
-    TF.newDataSource "aws_elasticache_replication_group" $
+    TF.newDataSource "aws_elasticache_replication_group" TF.validator $
         ElasticacheReplicationGroupData'
             { _replicationGroupId = _replicationGroupId
             }
 
+instance TF.IsObject (ElasticacheReplicationGroupData s) where
+    toObject ElasticacheReplicationGroupData'{..} = P.catMaybes
+        [ TF.assign "replication_group_id" <$> TF.attribute _replicationGroupId
+        ]
+
+instance TF.IsValid (ElasticacheReplicationGroupData s) where
+    validator = P.mempty
+
 instance P.HasReplicationGroupId (ElasticacheReplicationGroupData s) (TF.Attr s P.Text) where
     replicationGroupId =
         P.lens (_replicationGroupId :: ElasticacheReplicationGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _replicationGroupId = a
-                          } :: ElasticacheReplicationGroupData s)
+               (\s a -> s { _replicationGroupId = a } :: ElasticacheReplicationGroupData s)
 
 instance s ~ s' => P.HasComputedAuthTokenEnabled (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Bool) where
     computedAuthTokenEnabled x = TF.compute (TF.refKey x) "_computedAuthTokenEnabled"
@@ -2761,7 +2856,7 @@ instance s ~ s' => P.HasComputedAutomaticFailoverEnabled (TF.Ref s' (Elasticache
 instance s ~ s' => P.HasComputedConfigurationEndpointAddress (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Text) where
     computedConfigurationEndpointAddress x = TF.compute (TF.refKey x) "_computedConfigurationEndpointAddress"
 
-instance s ~ s' => P.HasComputedMemberClusters (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedMemberClusters (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedMemberClusters x = TF.compute (TF.refKey x) "_computedMemberClusters"
 
 instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (ElasticacheReplicationGroupData s)) (TF.Attr s P.Text) where
@@ -2795,30 +2890,32 @@ data ElbData s = ElbData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElbData s) where
-    toObject ElbData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 elbData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (ElbData s)
 elbData _name =
-    TF.newDataSource "aws_elb" $
+    TF.newDataSource "aws_elb" TF.validator $
         ElbData'
             { _name = _name
             }
 
+instance TF.IsObject (ElbData s) where
+    toObject ElbData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ElbData s) where
+    validator = P.mempty
+
 instance P.HasName (ElbData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ElbData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: ElbData s)
+               (\s a -> s { _name = a } :: ElbData s)
 
 instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (ElbData s)) (TF.Attr s (AccessLogs s)) where
     computedAccessLogs x = TF.compute (TF.refKey x) "_computedAccessLogs"
 
-instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAvailabilityZones x = TF.compute (TF.refKey x) "_computedAvailabilityZones"
 
 instance s ~ s' => P.HasComputedConnectionDraining (TF.Ref s' (ElbData s)) (TF.Attr s P.Bool) where
@@ -2839,7 +2936,7 @@ instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (ElbData s)) (TF.Attr s (
 instance s ~ s' => P.HasComputedIdleTimeout (TF.Ref s' (ElbData s)) (TF.Attr s P.Integer) where
     computedIdleTimeout x = TF.compute (TF.refKey x) "_computedIdleTimeout"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
 instance s ~ s' => P.HasComputedInternal (TF.Ref s' (ElbData s)) (TF.Attr s P.Bool) where
@@ -2848,7 +2945,7 @@ instance s ~ s' => P.HasComputedInternal (TF.Ref s' (ElbData s)) (TF.Attr s P.Bo
 instance s ~ s' => P.HasComputedListener (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s (Listener s)]) where
     computedListener x = TF.compute (TF.refKey x) "_computedListener"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSourceSecurityGroup (TF.Ref s' (ElbData s)) (TF.Attr s P.Text) where
@@ -2857,7 +2954,7 @@ instance s ~ s' => P.HasComputedSourceSecurityGroup (TF.Ref s' (ElbData s)) (TF.
 instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (ElbData s)) (TF.Attr s P.Text) where
     computedSourceSecurityGroupId x = TF.compute (TF.refKey x) "_computedSourceSecurityGroupId"
 
-instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (ElbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubnets x = TF.compute (TF.refKey x) "_computedSubnets"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElbData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -2876,24 +2973,26 @@ data ElbHostedZoneIdData s = ElbHostedZoneIdData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElbHostedZoneIdData s) where
-    toObject ElbHostedZoneIdData'{..} = catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
-        ]
-
 elbHostedZoneIdData
     :: TF.DataSource P.Provider (ElbHostedZoneIdData s)
 elbHostedZoneIdData =
-    TF.newDataSource "aws_elb_hosted_zone_id" $
+    TF.newDataSource "aws_elb_hosted_zone_id" TF.validator $
         ElbHostedZoneIdData'
             { _region = TF.Nil
             }
 
+instance TF.IsObject (ElbHostedZoneIdData s) where
+    toObject ElbHostedZoneIdData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (ElbHostedZoneIdData s) where
+    validator = P.mempty
+
 instance P.HasRegion (ElbHostedZoneIdData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ElbHostedZoneIdData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ElbHostedZoneIdData s)
+               (\s a -> s { _region = a } :: ElbHostedZoneIdData s)
 
 -- | @aws_elb_service_account@ DataSource.
 --
@@ -2905,24 +3004,26 @@ data ElbServiceAccountData s = ElbServiceAccountData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (ElbServiceAccountData s) where
-    toObject ElbServiceAccountData'{..} = catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
-        ]
-
 elbServiceAccountData
     :: TF.DataSource P.Provider (ElbServiceAccountData s)
 elbServiceAccountData =
-    TF.newDataSource "aws_elb_service_account" $
+    TF.newDataSource "aws_elb_service_account" TF.validator $
         ElbServiceAccountData'
             { _region = TF.Nil
             }
 
+instance TF.IsObject (ElbServiceAccountData s) where
+    toObject ElbServiceAccountData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (ElbServiceAccountData s) where
+    validator = P.mempty
+
 instance P.HasRegion (ElbServiceAccountData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ElbServiceAccountData s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a
-                          } :: ElbServiceAccountData s)
+               (\s a -> s { _region = a } :: ElbServiceAccountData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -2932,10 +3033,10 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbServiceAccountData s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_glue_script terraform documentation>
 -- for more information.
 data GlueScriptData s = GlueScriptData'
-    { _dagEdge  :: TF.Attr s [DagEdge s]
+    { _dagEdge  :: TF.Attr s [TF.Attr s (DagEdge s)]
     -- ^ @dag_edge@ - (Required)
     --
-    , _dagNode  :: TF.Attr s [DagNode s]
+    , _dagNode  :: TF.Attr s [TF.Attr s (DagNode s)]
     -- ^ @dag_node@ - (Required)
     --
     , _language :: TF.Attr s P.Text
@@ -2943,42 +3044,50 @@ data GlueScriptData s = GlueScriptData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (GlueScriptData s) where
-    toObject GlueScriptData'{..} = catMaybes
-        [ TF.assign "dag_edge" <$> TF.attribute _dagEdge
-        , TF.assign "dag_node" <$> TF.attribute _dagNode
-        , TF.assign "language" <$> TF.attribute _language
-        ]
-
 glueScriptData
-    :: TF.Attr s [DagEdge s] -- ^ @dag_edge@ - 'P.dagEdge'
-    -> TF.Attr s [DagNode s] -- ^ @dag_node@ - 'P.dagNode'
+    :: TF.Attr s [TF.Attr s (DagEdge s)] -- ^ @dag_edge@ - 'P.dagEdge'
+    -> TF.Attr s [TF.Attr s (DagNode s)] -- ^ @dag_node@ - 'P.dagNode'
     -> TF.DataSource P.Provider (GlueScriptData s)
 glueScriptData _dagEdge _dagNode =
-    TF.newDataSource "aws_glue_script" $
+    TF.newDataSource "aws_glue_script" TF.validator $
         GlueScriptData'
             { _dagEdge = _dagEdge
             , _dagNode = _dagNode
             , _language = TF.value "PYTHON"
             }
 
-instance P.HasDagEdge (GlueScriptData s) (TF.Attr s [DagEdge s]) where
-    dagEdge =
-        P.lens (_dagEdge :: GlueScriptData s -> TF.Attr s [DagEdge s])
-               (\s a -> s { _dagEdge = a
-                          } :: GlueScriptData s)
+instance TF.IsObject (GlueScriptData s) where
+    toObject GlueScriptData'{..} = P.catMaybes
+        [ TF.assign "dag_edge" <$> TF.attribute _dagEdge
+        , TF.assign "dag_node" <$> TF.attribute _dagNode
+        , TF.assign "language" <$> TF.attribute _language
+        ]
 
-instance P.HasDagNode (GlueScriptData s) (TF.Attr s [DagNode s]) where
+instance TF.IsValid (GlueScriptData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_dagEdge"
+                  (_dagEdge
+                      :: GlueScriptData s -> TF.Attr s [TF.Attr s (DagEdge s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_dagNode"
+                  (_dagNode
+                      :: GlueScriptData s -> TF.Attr s [TF.Attr s (DagNode s)])
+                  TF.validator
+
+instance P.HasDagEdge (GlueScriptData s) (TF.Attr s [TF.Attr s (DagEdge s)]) where
+    dagEdge =
+        P.lens (_dagEdge :: GlueScriptData s -> TF.Attr s [TF.Attr s (DagEdge s)])
+               (\s a -> s { _dagEdge = a } :: GlueScriptData s)
+
+instance P.HasDagNode (GlueScriptData s) (TF.Attr s [TF.Attr s (DagNode s)]) where
     dagNode =
-        P.lens (_dagNode :: GlueScriptData s -> TF.Attr s [DagNode s])
-               (\s a -> s { _dagNode = a
-                          } :: GlueScriptData s)
+        P.lens (_dagNode :: GlueScriptData s -> TF.Attr s [TF.Attr s (DagNode s)])
+               (\s a -> s { _dagNode = a } :: GlueScriptData s)
 
 instance P.HasLanguage (GlueScriptData s) (TF.Attr s P.Text) where
     language =
         P.lens (_language :: GlueScriptData s -> TF.Attr s P.Text)
-               (\s a -> s { _language = a
-                          } :: GlueScriptData s)
+               (\s a -> s { _language = a } :: GlueScriptData s)
 
 instance s ~ s' => P.HasComputedPythonScript (TF.Ref s' (GlueScriptData s)) (TF.Attr s P.Text) where
     computedPythonScript x = TF.compute (TF.refKey x) "_computedPythonScript"
@@ -2993,14 +3102,17 @@ instance s ~ s' => P.HasComputedScalaCode (TF.Ref s' (GlueScriptData s)) (TF.Att
 data IamAccountAliasData s = IamAccountAliasData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamAccountAliasData s) where
-    toObject _ = []
-
 iamAccountAliasData
     :: TF.DataSource P.Provider (IamAccountAliasData s)
 iamAccountAliasData =
-    TF.newDataSource "aws_iam_account_alias" $
+    TF.newDataSource "aws_iam_account_alias" TF.validator $
         IamAccountAliasData'
+
+instance TF.IsObject (IamAccountAliasData s) where
+    toObject _ = []
+
+instance TF.IsValid (IamAccountAliasData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (IamAccountAliasData s)) (TF.Attr s P.Text) where
     computedAccountAlias x = TF.compute (TF.refKey x) "_computedAccountAlias"
@@ -3015,25 +3127,27 @@ data IamGroupData s = IamGroupData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamGroupData s) where
-    toObject IamGroupData'{..} = catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _groupName
-        ]
-
 iamGroupData
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.DataSource P.Provider (IamGroupData s)
 iamGroupData _groupName =
-    TF.newDataSource "aws_iam_group" $
+    TF.newDataSource "aws_iam_group" TF.validator $
         IamGroupData'
             { _groupName = _groupName
             }
 
+instance TF.IsObject (IamGroupData s) where
+    toObject IamGroupData'{..} = P.catMaybes
+        [ TF.assign "group_name" <$> TF.attribute _groupName
+        ]
+
+instance TF.IsValid (IamGroupData s) where
+    validator = P.mempty
+
 instance P.HasGroupName (IamGroupData s) (TF.Attr s P.Text) where
     groupName =
         P.lens (_groupName :: IamGroupData s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a
-                          } :: IamGroupData s)
+               (\s a -> s { _groupName = a } :: IamGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3054,25 +3168,27 @@ data IamInstanceProfileData s = IamInstanceProfileData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamInstanceProfileData s) where
-    toObject IamInstanceProfileData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 iamInstanceProfileData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (IamInstanceProfileData s)
 iamInstanceProfileData _name =
-    TF.newDataSource "aws_iam_instance_profile" $
+    TF.newDataSource "aws_iam_instance_profile" TF.validator $
         IamInstanceProfileData'
             { _name = _name
             }
 
+instance TF.IsObject (IamInstanceProfileData s) where
+    toObject IamInstanceProfileData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (IamInstanceProfileData s) where
+    validator = P.mempty
+
 instance P.HasName (IamInstanceProfileData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IamInstanceProfileData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: IamInstanceProfileData s)
+               (\s a -> s { _name = a } :: IamInstanceProfileData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamInstanceProfileData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3102,25 +3218,27 @@ data IamPolicyData s = IamPolicyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamPolicyData s) where
-    toObject IamPolicyData'{..} = catMaybes
-        [ TF.assign "arn" <$> TF.attribute _arn
-        ]
-
 iamPolicyData
     :: TF.Attr s P.Text -- ^ @arn@ - 'P.arn'
     -> TF.DataSource P.Provider (IamPolicyData s)
 iamPolicyData _arn =
-    TF.newDataSource "aws_iam_policy" $
+    TF.newDataSource "aws_iam_policy" TF.validator $
         IamPolicyData'
             { _arn = _arn
             }
 
+instance TF.IsObject (IamPolicyData s) where
+    toObject IamPolicyData'{..} = P.catMaybes
+        [ TF.assign "arn" <$> TF.attribute _arn
+        ]
+
+instance TF.IsValid (IamPolicyData s) where
+    validator = P.mempty
+
 instance P.HasArn (IamPolicyData s) (TF.Attr s P.Text) where
     arn =
         P.lens (_arn :: IamPolicyData s -> TF.Attr s P.Text)
-               (\s a -> s { _arn = a
-                          } :: IamPolicyData s)
+               (\s a -> s { _arn = a } :: IamPolicyData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -3148,24 +3266,16 @@ data IamPolicyDocumentData s = IamPolicyDocumentData'
     , _sourceJson   :: TF.Attr s P.Text
     -- ^ @source_json@ - (Optional)
     --
-    , _statement    :: TF.Attr s [Statement s]
+    , _statement    :: TF.Attr s [TF.Attr s (Statement s)]
     -- ^ @statement@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamPolicyDocumentData s) where
-    toObject IamPolicyDocumentData'{..} = catMaybes
-        [ TF.assign "override_json" <$> TF.attribute _overrideJson
-        , TF.assign "policy_id" <$> TF.attribute _policyId
-        , TF.assign "source_json" <$> TF.attribute _sourceJson
-        , TF.assign "statement" <$> TF.attribute _statement
-        ]
-
 iamPolicyDocumentData
-    :: TF.Attr s [Statement s] -- ^ @statement@ - 'P.statement'
+    :: TF.Attr s [TF.Attr s (Statement s)] -- ^ @statement@ - 'P.statement'
     -> TF.DataSource P.Provider (IamPolicyDocumentData s)
 iamPolicyDocumentData _statement =
-    TF.newDataSource "aws_iam_policy_document" $
+    TF.newDataSource "aws_iam_policy_document" TF.validator $
         IamPolicyDocumentData'
             { _overrideJson = TF.Nil
             , _policyId = TF.Nil
@@ -3173,29 +3283,40 @@ iamPolicyDocumentData _statement =
             , _statement = _statement
             }
 
+instance TF.IsObject (IamPolicyDocumentData s) where
+    toObject IamPolicyDocumentData'{..} = P.catMaybes
+        [ TF.assign "override_json" <$> TF.attribute _overrideJson
+        , TF.assign "policy_id" <$> TF.attribute _policyId
+        , TF.assign "source_json" <$> TF.attribute _sourceJson
+        , TF.assign "statement" <$> TF.attribute _statement
+        ]
+
+instance TF.IsValid (IamPolicyDocumentData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_statement"
+                  (_statement
+                      :: IamPolicyDocumentData s -> TF.Attr s [TF.Attr s (Statement s)])
+                  TF.validator
+
 instance P.HasOverrideJson (IamPolicyDocumentData s) (TF.Attr s P.Text) where
     overrideJson =
         P.lens (_overrideJson :: IamPolicyDocumentData s -> TF.Attr s P.Text)
-               (\s a -> s { _overrideJson = a
-                          } :: IamPolicyDocumentData s)
+               (\s a -> s { _overrideJson = a } :: IamPolicyDocumentData s)
 
 instance P.HasPolicyId (IamPolicyDocumentData s) (TF.Attr s P.Text) where
     policyId =
         P.lens (_policyId :: IamPolicyDocumentData s -> TF.Attr s P.Text)
-               (\s a -> s { _policyId = a
-                          } :: IamPolicyDocumentData s)
+               (\s a -> s { _policyId = a } :: IamPolicyDocumentData s)
 
 instance P.HasSourceJson (IamPolicyDocumentData s) (TF.Attr s P.Text) where
     sourceJson =
         P.lens (_sourceJson :: IamPolicyDocumentData s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceJson = a
-                          } :: IamPolicyDocumentData s)
+               (\s a -> s { _sourceJson = a } :: IamPolicyDocumentData s)
 
-instance P.HasStatement (IamPolicyDocumentData s) (TF.Attr s [Statement s]) where
+instance P.HasStatement (IamPolicyDocumentData s) (TF.Attr s [TF.Attr s (Statement s)]) where
     statement =
-        P.lens (_statement :: IamPolicyDocumentData s -> TF.Attr s [Statement s])
-               (\s a -> s { _statement = a
-                          } :: IamPolicyDocumentData s)
+        P.lens (_statement :: IamPolicyDocumentData s -> TF.Attr s [TF.Attr s (Statement s)])
+               (\s a -> s { _statement = a } :: IamPolicyDocumentData s)
 
 instance s ~ s' => P.HasComputedJson (TF.Ref s' (IamPolicyDocumentData s)) (TF.Attr s P.Text) where
     computedJson x = TF.compute (TF.refKey x) "_computedJson"
@@ -3213,32 +3334,33 @@ data IamRoleData s = IamRoleData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamRoleData s) where
-    toObject IamRoleData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "role_name" <$> TF.attribute _roleName
-        ]
-
 iamRoleData
     :: TF.DataSource P.Provider (IamRoleData s)
 iamRoleData =
-    TF.newDataSource "aws_iam_role" $
+    TF.newDataSource "aws_iam_role" TF.validator $
         IamRoleData'
             { _name = TF.Nil
             , _roleName = TF.Nil
             }
 
+instance TF.IsObject (IamRoleData s) where
+    toObject IamRoleData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "role_name" <$> TF.attribute _roleName
+        ]
+
+instance TF.IsValid (IamRoleData s) where
+    validator = P.mempty
+
 instance P.HasName (IamRoleData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: IamRoleData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: IamRoleData s)
+               (\s a -> s { _name = a } :: IamRoleData s)
 
 instance P.HasRoleName (IamRoleData s) (TF.Attr s P.Text) where
     roleName =
         P.lens (_roleName :: IamRoleData s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a
-                          } :: IamRoleData s)
+               (\s a -> s { _roleName = a } :: IamRoleData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3286,40 +3408,40 @@ data IamServerCertificateData s = IamServerCertificateData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamServerCertificateData s) where
-    toObject IamServerCertificateData'{..} = catMaybes
-        [ TF.assign "latest" <$> TF.attribute _latest
-        , TF.assign "name_prefix" <$> TF.attribute _namePrefix
-        , TF.assign "path_prefix" <$> TF.attribute _pathPrefix
-        ]
-
 iamServerCertificateData
     :: TF.DataSource P.Provider (IamServerCertificateData s)
 iamServerCertificateData =
-    TF.newDataSource "aws_iam_server_certificate" $
+    TF.newDataSource "aws_iam_server_certificate" TF.validator $
         IamServerCertificateData'
             { _latest = TF.value P.False
             , _namePrefix = TF.Nil
             , _pathPrefix = TF.Nil
             }
 
+instance TF.IsObject (IamServerCertificateData s) where
+    toObject IamServerCertificateData'{..} = P.catMaybes
+        [ TF.assign "latest" <$> TF.attribute _latest
+        , TF.assign "name_prefix" <$> TF.attribute _namePrefix
+        , TF.assign "path_prefix" <$> TF.attribute _pathPrefix
+        ]
+
+instance TF.IsValid (IamServerCertificateData s) where
+    validator = P.mempty
+
 instance P.HasLatest (IamServerCertificateData s) (TF.Attr s P.Bool) where
     latest =
         P.lens (_latest :: IamServerCertificateData s -> TF.Attr s P.Bool)
-               (\s a -> s { _latest = a
-                          } :: IamServerCertificateData s)
+               (\s a -> s { _latest = a } :: IamServerCertificateData s)
 
 instance P.HasNamePrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
     namePrefix =
         P.lens (_namePrefix :: IamServerCertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _namePrefix = a
-                          } :: IamServerCertificateData s)
+               (\s a -> s { _namePrefix = a } :: IamServerCertificateData s)
 
 instance P.HasPathPrefix (IamServerCertificateData s) (TF.Attr s P.Text) where
     pathPrefix =
         P.lens (_pathPrefix :: IamServerCertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _pathPrefix = a
-                          } :: IamServerCertificateData s)
+               (\s a -> s { _pathPrefix = a } :: IamServerCertificateData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamServerCertificateData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3352,25 +3474,27 @@ data IamUserData s = IamUserData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IamUserData s) where
-    toObject IamUserData'{..} = catMaybes
-        [ TF.assign "user_name" <$> TF.attribute _userName
-        ]
-
 iamUserData
     :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
     -> TF.DataSource P.Provider (IamUserData s)
 iamUserData _userName =
-    TF.newDataSource "aws_iam_user" $
+    TF.newDataSource "aws_iam_user" TF.validator $
         IamUserData'
             { _userName = _userName
             }
 
+instance TF.IsObject (IamUserData s) where
+    toObject IamUserData'{..} = P.catMaybes
+        [ TF.assign "user_name" <$> TF.attribute _userName
+        ]
+
+instance TF.IsValid (IamUserData s) where
+    validator = P.mempty
+
 instance P.HasUserName (IamUserData s) (TF.Attr s P.Text) where
     userName =
         P.lens (_userName :: IamUserData s -> TF.Attr s P.Text)
-               (\s a -> s { _userName = a
-                          } :: IamUserData s)
+               (\s a -> s { _userName = a } :: IamUserData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamUserData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3391,14 +3515,17 @@ instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IamUserData s)) (TF.Attr s P.
 data InspectorRulesPackagesData s = InspectorRulesPackagesData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (InspectorRulesPackagesData s) where
-    toObject _ = []
-
 inspectorRulesPackagesData
     :: TF.DataSource P.Provider (InspectorRulesPackagesData s)
 inspectorRulesPackagesData =
-    TF.newDataSource "aws_inspector_rules_packages" $
+    TF.newDataSource "aws_inspector_rules_packages" TF.validator $
         InspectorRulesPackagesData'
+
+instance TF.IsObject (InspectorRulesPackagesData s) where
+    toObject _ = []
+
+instance TF.IsValid (InspectorRulesPackagesData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArns (TF.Ref s' (InspectorRulesPackagesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedArns x = TF.compute (TF.refKey x) "_computedArns"
@@ -3419,40 +3546,44 @@ data InstanceData s = InstanceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (InstanceData s) where
-    toObject InstanceData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "get_password_data" <$> TF.attribute _getPasswordData
-        , TF.assign "instance_id" <$> TF.attribute _instanceId
-        ]
-
 instanceData
     :: TF.DataSource P.Provider (InstanceData s)
 instanceData =
-    TF.newDataSource "aws_instance" $
+    TF.newDataSource "aws_instance" TF.validator $
         InstanceData'
             { _filter = TF.Nil
             , _getPasswordData = TF.value P.False
             , _instanceId = TF.Nil
             }
 
+instance TF.IsObject (InstanceData s) where
+    toObject InstanceData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "get_password_data" <$> TF.attribute _getPasswordData
+        , TF.assign "instance_id" <$> TF.attribute _instanceId
+        ]
+
+instance TF.IsValid (InstanceData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: InstanceData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (InstanceData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: InstanceData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: InstanceData s)
+               (\s a -> s { _filter = a } :: InstanceData s)
 
 instance P.HasGetPasswordData (InstanceData s) (TF.Attr s P.Bool) where
     getPasswordData =
         P.lens (_getPasswordData :: InstanceData s -> TF.Attr s P.Bool)
-               (\s a -> s { _getPasswordData = a
-                          } :: InstanceData s)
+               (\s a -> s { _getPasswordData = a } :: InstanceData s)
 
 instance P.HasInstanceId (InstanceData s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: InstanceData s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceId = a
-                          } :: InstanceData s)
+               (\s a -> s { _instanceId = a } :: InstanceData s)
 
 instance s ~ s' => P.HasComputedAmi (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedAmi x = TF.compute (TF.refKey x) "_computedAmi"
@@ -3466,7 +3597,7 @@ instance s ~ s' => P.HasComputedAssociatePublicIpAddress (TF.Ref s' (InstanceDat
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
 
-instance s ~ s' => P.HasComputedCreditSpecification (TF.Ref s' (InstanceData s)) (TF.Attr s [CreditSpecification s]) where
+instance s ~ s' => P.HasComputedCreditSpecification (TF.Ref s' (InstanceData s)) (TF.Attr s [TF.Attr s (CreditSpecification s)]) where
     computedCreditSpecification x = TF.compute (TF.refKey x) "_computedCreditSpecification"
 
 instance s ~ s' => P.HasComputedDisableApiTermination (TF.Ref s' (InstanceData s)) (TF.Attr s P.Bool) where
@@ -3523,7 +3654,7 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (InstanceData s)) (TF.Attr s
 instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (InstanceData s)) (TF.Attr s [TF.Attr s (RootBlockDevice s)]) where
     computedRootBlockDevice x = TF.compute (TF.refKey x) "_computedRootBlockDevice"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (InstanceData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (InstanceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSourceDestCheck (TF.Ref s' (InstanceData s)) (TF.Attr s P.Bool) where
@@ -3541,7 +3672,7 @@ instance s ~ s' => P.HasComputedTenancy (TF.Ref s' (InstanceData s)) (TF.Attr s 
 instance s ~ s' => P.HasComputedUserData (TF.Ref s' (InstanceData s)) (TF.Attr s P.Text) where
     computedUserData x = TF.compute (TF.refKey x) "_computedUserData"
 
-instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "_computedVpcSecurityGroupIds"
 
 -- | @aws_instances@ DataSource.
@@ -3552,37 +3683,42 @@ data InstancesData s = InstancesData'
     { _filter             :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _instanceStateNames :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _instanceStateNames :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @instance_state_names@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (InstancesData s) where
-    toObject InstancesData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "instance_state_names" <$> TF.attribute _instanceStateNames
-        ]
-
 instancesData
     :: TF.DataSource P.Provider (InstancesData s)
 instancesData =
-    TF.newDataSource "aws_instances" $
+    TF.newDataSource "aws_instances" TF.validator $
         InstancesData'
             { _filter = TF.Nil
             , _instanceStateNames = TF.Nil
             }
 
+instance TF.IsObject (InstancesData s) where
+    toObject InstancesData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "instance_state_names" <$> TF.attribute _instanceStateNames
+        ]
+
+instance TF.IsValid (InstancesData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: InstancesData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (InstancesData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: InstancesData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: InstancesData s)
+               (\s a -> s { _filter = a } :: InstancesData s)
 
-instance P.HasInstanceStateNames (InstancesData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance P.HasInstanceStateNames (InstancesData s) (TF.Attr s [TF.Attr s P.Text]) where
     instanceStateNames =
-        P.lens (_instanceStateNames :: InstancesData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _instanceStateNames = a
-                          } :: InstancesData s)
+        P.lens (_instanceStateNames :: InstancesData s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instanceStateNames = a } :: InstancesData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "_computedIds"
@@ -3606,26 +3742,32 @@ data InternetGatewayData s = InternetGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (InternetGatewayData s) where
-    toObject InternetGatewayData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        ]
-
 internetGatewayData
     :: TF.DataSource P.Provider (InternetGatewayData s)
 internetGatewayData =
-    TF.newDataSource "aws_internet_gateway" $
+    TF.newDataSource "aws_internet_gateway" TF.validator $
         InternetGatewayData'
             { _filter = TF.Nil
             }
 
+instance TF.IsObject (InternetGatewayData s) where
+    toObject InternetGatewayData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance TF.IsValid (InternetGatewayData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: InternetGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (InternetGatewayData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: InternetGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: InternetGatewayData s)
+               (\s a -> s { _filter = a } :: InternetGatewayData s)
 
-instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (InternetGatewayData s)) (TF.Attr s [Attachments s]) where
+instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (InternetGatewayData s)) (TF.Attr s [TF.Attr s (Attachments s)]) where
     computedAttachments x = TF.compute (TF.refKey x) "_computedAttachments"
 
 instance s ~ s' => P.HasComputedInternetGatewayId (TF.Ref s' (InternetGatewayData s)) (TF.Attr s P.Text) where
@@ -3641,14 +3783,17 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (InternetGatewayData s)) (TF.Att
 data IotEndpointData s = IotEndpointData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IotEndpointData s) where
-    toObject _ = []
-
 iotEndpointData
     :: TF.DataSource P.Provider (IotEndpointData s)
 iotEndpointData =
-    TF.newDataSource "aws_iot_endpoint" $
+    TF.newDataSource "aws_iot_endpoint" TF.validator $
         IotEndpointData'
+
+instance TF.IsObject (IotEndpointData s) where
+    toObject _ = []
+
+instance TF.IsValid (IotEndpointData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) (TF.Attr s P.Text) where
     computedEndpointAddress x = TF.compute (TF.refKey x) "_computedEndpointAddress"
@@ -3658,41 +3803,42 @@ instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ip_ranges terraform documentation>
 -- for more information.
 data IpRangesData s = IpRangesData'
-    { _regions  :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    { _regions  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @regions@ - (Optional)
     --
-    , _services :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)]
+    , _services :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @services@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (IpRangesData s) where
-    toObject IpRangesData'{..} = catMaybes
-        [ TF.assign "regions" <$> TF.attribute _regions
-        , TF.assign "services" <$> TF.attribute _services
-        ]
-
 ipRangesData
-    :: TF.Attr s [TF.Attr s (TF.Attr s P.Text)] -- ^ @services@ - 'P.services'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> TF.DataSource P.Provider (IpRangesData s)
 ipRangesData _services =
-    TF.newDataSource "aws_ip_ranges" $
+    TF.newDataSource "aws_ip_ranges" TF.validator $
         IpRangesData'
             { _regions = TF.Nil
             , _services = _services
             }
 
-instance P.HasRegions (IpRangesData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    regions =
-        P.lens (_regions :: IpRangesData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _regions = a
-                          } :: IpRangesData s)
+instance TF.IsObject (IpRangesData s) where
+    toObject IpRangesData'{..} = P.catMaybes
+        [ TF.assign "regions" <$> TF.attribute _regions
+        , TF.assign "services" <$> TF.attribute _services
+        ]
 
-instance P.HasServices (IpRangesData s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance TF.IsValid (IpRangesData s) where
+    validator = P.mempty
+
+instance P.HasRegions (IpRangesData s) (TF.Attr s [TF.Attr s P.Text]) where
+    regions =
+        P.lens (_regions :: IpRangesData s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _regions = a } :: IpRangesData s)
+
+instance P.HasServices (IpRangesData s) (TF.Attr s [TF.Attr s P.Text]) where
     services =
-        P.lens (_services :: IpRangesData s -> TF.Attr s [TF.Attr s (TF.Attr s P.Text)])
-               (\s a -> s { _services = a
-                          } :: IpRangesData s)
+        P.lens (_services :: IpRangesData s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _services = a } :: IpRangesData s)
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
@@ -3713,42 +3859,44 @@ data KinesisStreamData s = KinesisStreamData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KinesisStreamData s) where
-    toObject KinesisStreamData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 kinesisStreamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (KinesisStreamData s)
 kinesisStreamData _name =
-    TF.newDataSource "aws_kinesis_stream" $
+    TF.newDataSource "aws_kinesis_stream" TF.validator $
         KinesisStreamData'
             { _name = _name
             }
 
+instance TF.IsObject (KinesisStreamData s) where
+    toObject KinesisStreamData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (KinesisStreamData s) where
+    validator = P.mempty
+
 instance P.HasName (KinesisStreamData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KinesisStreamData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: KinesisStreamData s)
+               (\s a -> s { _name = a } :: KinesisStreamData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KinesisStreamData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
-instance s ~ s' => P.HasComputedClosedShards (TF.Ref s' (KinesisStreamData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedClosedShards (TF.Ref s' (KinesisStreamData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedClosedShards x = TF.compute (TF.refKey x) "_computedClosedShards"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (KinesisStreamData s)) (TF.Attr s P.Integer) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
 
-instance s ~ s' => P.HasComputedOpenShards (TF.Ref s' (KinesisStreamData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedOpenShards (TF.Ref s' (KinesisStreamData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedOpenShards x = TF.compute (TF.refKey x) "_computedOpenShards"
 
 instance s ~ s' => P.HasComputedRetentionPeriod (TF.Ref s' (KinesisStreamData s)) (TF.Attr s P.Integer) where
     computedRetentionPeriod x = TF.compute (TF.refKey x) "_computedRetentionPeriod"
 
-instance s ~ s' => P.HasComputedShardLevelMetrics (TF.Ref s' (KinesisStreamData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedShardLevelMetrics (TF.Ref s' (KinesisStreamData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedShardLevelMetrics x = TF.compute (TF.refKey x) "_computedShardLevelMetrics"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (KinesisStreamData s)) (TF.Attr s P.Text) where
@@ -3767,25 +3915,27 @@ data KmsAliasData s = KmsAliasData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsAliasData s) where
-    toObject KmsAliasData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 kmsAliasData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (KmsAliasData s)
 kmsAliasData _name =
-    TF.newDataSource "aws_kms_alias" $
+    TF.newDataSource "aws_kms_alias" TF.validator $
         KmsAliasData'
             { _name = _name
             }
 
+instance TF.IsObject (KmsAliasData s) where
+    toObject KmsAliasData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (KmsAliasData s) where
+    validator = P.mempty
+
 instance P.HasName (KmsAliasData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KmsAliasData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: KmsAliasData s)
+               (\s a -> s { _name = a } :: KmsAliasData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsAliasData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3812,42 +3962,42 @@ data KmsCiphertextData s = KmsCiphertextData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsCiphertextData s) where
-    toObject KmsCiphertextData'{..} = catMaybes
-        [ TF.assign "context" <$> TF.attribute _context
-        , TF.assign "key_id" <$> TF.attribute _keyId
-        , TF.assign "plaintext" <$> TF.attribute _plaintext
-        ]
-
 kmsCiphertextData
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s P.Text -- ^ @plaintext@ - 'P.plaintext'
     -> TF.DataSource P.Provider (KmsCiphertextData s)
 kmsCiphertextData _keyId _plaintext =
-    TF.newDataSource "aws_kms_ciphertext" $
+    TF.newDataSource "aws_kms_ciphertext" TF.validator $
         KmsCiphertextData'
             { _context = TF.Nil
             , _keyId = _keyId
             , _plaintext = _plaintext
             }
 
+instance TF.IsObject (KmsCiphertextData s) where
+    toObject KmsCiphertextData'{..} = P.catMaybes
+        [ TF.assign "context" <$> TF.attribute _context
+        , TF.assign "key_id" <$> TF.attribute _keyId
+        , TF.assign "plaintext" <$> TF.attribute _plaintext
+        ]
+
+instance TF.IsValid (KmsCiphertextData s) where
+    validator = P.mempty
+
 instance P.HasContext (KmsCiphertextData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     context =
         P.lens (_context :: KmsCiphertextData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _context = a
-                          } :: KmsCiphertextData s)
+               (\s a -> s { _context = a } :: KmsCiphertextData s)
 
 instance P.HasKeyId (KmsCiphertextData s) (TF.Attr s P.Text) where
     keyId =
         P.lens (_keyId :: KmsCiphertextData s -> TF.Attr s P.Text)
-               (\s a -> s { _keyId = a
-                          } :: KmsCiphertextData s)
+               (\s a -> s { _keyId = a } :: KmsCiphertextData s)
 
 instance P.HasPlaintext (KmsCiphertextData s) (TF.Attr s P.Text) where
     plaintext =
         P.lens (_plaintext :: KmsCiphertextData s -> TF.Attr s P.Text)
-               (\s a -> s { _plaintext = a
-                          } :: KmsCiphertextData s)
+               (\s a -> s { _plaintext = a } :: KmsCiphertextData s)
 
 instance s ~ s' => P.HasComputedCiphertextBlob (TF.Ref s' (KmsCiphertextData s)) (TF.Attr s P.Text) where
     computedCiphertextBlob x = TF.compute (TF.refKey x) "_computedCiphertextBlob"
@@ -3865,33 +4015,34 @@ data KmsKeyData s = KmsKeyData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsKeyData s) where
-    toObject KmsKeyData'{..} = catMaybes
-        [ TF.assign "grant_tokens" <$> TF.attribute _grantTokens
-        , TF.assign "key_id" <$> TF.attribute _keyId
-        ]
-
 kmsKeyData
     :: TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.DataSource P.Provider (KmsKeyData s)
 kmsKeyData _keyId =
-    TF.newDataSource "aws_kms_key" $
+    TF.newDataSource "aws_kms_key" TF.validator $
         KmsKeyData'
             { _grantTokens = TF.Nil
             , _keyId = _keyId
             }
 
+instance TF.IsObject (KmsKeyData s) where
+    toObject KmsKeyData'{..} = P.catMaybes
+        [ TF.assign "grant_tokens" <$> TF.attribute _grantTokens
+        , TF.assign "key_id" <$> TF.attribute _keyId
+        ]
+
+instance TF.IsValid (KmsKeyData s) where
+    validator = P.mempty
+
 instance P.HasGrantTokens (KmsKeyData s) (TF.Attr s [TF.Attr s P.Text]) where
     grantTokens =
         P.lens (_grantTokens :: KmsKeyData s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _grantTokens = a
-                          } :: KmsKeyData s)
+               (\s a -> s { _grantTokens = a } :: KmsKeyData s)
 
 instance P.HasKeyId (KmsKeyData s) (TF.Attr s P.Text) where
     keyId =
         P.lens (_keyId :: KmsKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _keyId = a
-                          } :: KmsKeyData s)
+               (\s a -> s { _keyId = a } :: KmsKeyData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeyData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -3942,33 +4093,38 @@ data KmsSecretData s = KmsSecretData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsSecretData s) where
-    toObject KmsSecretData'{..} = catMaybes
-        [ TF.assign "__has_dynamic_attributes" <$> TF.attribute _hasDynamicAttributes
-        , TF.assign "secret" <$> TF.attribute _secret
-        ]
-
 kmsSecretData
     :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@ - 'P.secret'
     -> TF.DataSource P.Provider (KmsSecretData s)
 kmsSecretData _secret =
-    TF.newDataSource "aws_kms_secret" $
+    TF.newDataSource "aws_kms_secret" TF.validator $
         KmsSecretData'
             { _hasDynamicAttributes = TF.Nil
             , _secret = _secret
             }
 
+instance TF.IsObject (KmsSecretData s) where
+    toObject KmsSecretData'{..} = P.catMaybes
+        [ TF.assign "__has_dynamic_attributes" <$> TF.attribute _hasDynamicAttributes
+        , TF.assign "secret" <$> TF.attribute _secret
+        ]
+
+instance TF.IsValid (KmsSecretData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_secret"
+                  (_secret
+                      :: KmsSecretData s -> TF.Attr s [TF.Attr s (Secret s)])
+                  TF.validator
+
 instance P.HasHasDynamicAttributes (KmsSecretData s) (TF.Attr s P.Text) where
     hasDynamicAttributes =
         P.lens (_hasDynamicAttributes :: KmsSecretData s -> TF.Attr s P.Text)
-               (\s a -> s { _hasDynamicAttributes = a
-                          } :: KmsSecretData s)
+               (\s a -> s { _hasDynamicAttributes = a } :: KmsSecretData s)
 
 instance P.HasSecret (KmsSecretData s) (TF.Attr s [TF.Attr s (Secret s)]) where
     secret =
         P.lens (_secret :: KmsSecretData s -> TF.Attr s [TF.Attr s (Secret s)])
-               (\s a -> s { _secret = a
-                          } :: KmsSecretData s)
+               (\s a -> s { _secret = a } :: KmsSecretData s)
 
 -- | @aws_kms_secrets@ DataSource.
 --
@@ -3980,25 +4136,31 @@ data KmsSecretsData s = KmsSecretsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (KmsSecretsData s) where
-    toObject KmsSecretsData'{..} = catMaybes
-        [ TF.assign "secret" <$> TF.attribute _secret
-        ]
-
 kmsSecretsData
     :: TF.Attr s [TF.Attr s (Secret s)] -- ^ @secret@ - 'P.secret'
     -> TF.DataSource P.Provider (KmsSecretsData s)
 kmsSecretsData _secret =
-    TF.newDataSource "aws_kms_secrets" $
+    TF.newDataSource "aws_kms_secrets" TF.validator $
         KmsSecretsData'
             { _secret = _secret
             }
 
+instance TF.IsObject (KmsSecretsData s) where
+    toObject KmsSecretsData'{..} = P.catMaybes
+        [ TF.assign "secret" <$> TF.attribute _secret
+        ]
+
+instance TF.IsValid (KmsSecretsData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_secret"
+                  (_secret
+                      :: KmsSecretsData s -> TF.Attr s [TF.Attr s (Secret s)])
+                  TF.validator
+
 instance P.HasSecret (KmsSecretsData s) (TF.Attr s [TF.Attr s (Secret s)]) where
     secret =
         P.lens (_secret :: KmsSecretsData s -> TF.Attr s [TF.Attr s (Secret s)])
-               (\s a -> s { _secret = a
-                          } :: KmsSecretsData s)
+               (\s a -> s { _secret = a } :: KmsSecretsData s)
 
 instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedPlaintext x = TF.compute (TF.refKey x) "_computedPlaintext"
@@ -4016,33 +4178,34 @@ data LambdaFunctionData s = LambdaFunctionData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LambdaFunctionData s) where
-    toObject LambdaFunctionData'{..} = catMaybes
-        [ TF.assign "function_name" <$> TF.attribute _functionName
-        , TF.assign "qualifier" <$> TF.attribute _qualifier
-        ]
-
 lambdaFunctionData
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.DataSource P.Provider (LambdaFunctionData s)
 lambdaFunctionData _functionName =
-    TF.newDataSource "aws_lambda_function" $
+    TF.newDataSource "aws_lambda_function" TF.validator $
         LambdaFunctionData'
             { _functionName = _functionName
             , _qualifier = TF.value "$LATEST"
             }
 
+instance TF.IsObject (LambdaFunctionData s) where
+    toObject LambdaFunctionData'{..} = P.catMaybes
+        [ TF.assign "function_name" <$> TF.attribute _functionName
+        , TF.assign "qualifier" <$> TF.attribute _qualifier
+        ]
+
+instance TF.IsValid (LambdaFunctionData s) where
+    validator = P.mempty
+
 instance P.HasFunctionName (LambdaFunctionData s) (TF.Attr s P.Text) where
     functionName =
         P.lens (_functionName :: LambdaFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _functionName = a
-                          } :: LambdaFunctionData s)
+               (\s a -> s { _functionName = a } :: LambdaFunctionData s)
 
 instance P.HasQualifier (LambdaFunctionData s) (TF.Attr s P.Text) where
     qualifier =
         P.lens (_qualifier :: LambdaFunctionData s -> TF.Attr s P.Text)
-               (\s a -> s { _qualifier = a
-                          } :: LambdaFunctionData s)
+               (\s a -> s { _qualifier = a } :: LambdaFunctionData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (LambdaFunctionData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -4117,42 +4280,42 @@ data LambdaInvocationData s = LambdaInvocationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LambdaInvocationData s) where
-    toObject LambdaInvocationData'{..} = catMaybes
-        [ TF.assign "function_name" <$> TF.attribute _functionName
-        , TF.assign "input" <$> TF.attribute _input
-        , TF.assign "qualifier" <$> TF.attribute _qualifier
-        ]
-
 lambdaInvocationData
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.Attr s P.Text -- ^ @input@ - 'P.input'
     -> TF.DataSource P.Provider (LambdaInvocationData s)
 lambdaInvocationData _functionName _input =
-    TF.newDataSource "aws_lambda_invocation" $
+    TF.newDataSource "aws_lambda_invocation" TF.validator $
         LambdaInvocationData'
             { _functionName = _functionName
             , _input = _input
             , _qualifier = TF.value "$LATEST"
             }
 
+instance TF.IsObject (LambdaInvocationData s) where
+    toObject LambdaInvocationData'{..} = P.catMaybes
+        [ TF.assign "function_name" <$> TF.attribute _functionName
+        , TF.assign "input" <$> TF.attribute _input
+        , TF.assign "qualifier" <$> TF.attribute _qualifier
+        ]
+
+instance TF.IsValid (LambdaInvocationData s) where
+    validator = P.mempty
+
 instance P.HasFunctionName (LambdaInvocationData s) (TF.Attr s P.Text) where
     functionName =
         P.lens (_functionName :: LambdaInvocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _functionName = a
-                          } :: LambdaInvocationData s)
+               (\s a -> s { _functionName = a } :: LambdaInvocationData s)
 
 instance P.HasInput (LambdaInvocationData s) (TF.Attr s P.Text) where
     input =
         P.lens (_input :: LambdaInvocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _input = a
-                          } :: LambdaInvocationData s)
+               (\s a -> s { _input = a } :: LambdaInvocationData s)
 
 instance P.HasQualifier (LambdaInvocationData s) (TF.Attr s P.Text) where
     qualifier =
         P.lens (_qualifier :: LambdaInvocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _qualifier = a
-                          } :: LambdaInvocationData s)
+               (\s a -> s { _qualifier = a } :: LambdaInvocationData s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (LambdaInvocationData s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "_computedResult"
@@ -4170,25 +4333,27 @@ data LaunchConfigurationData s = LaunchConfigurationData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LaunchConfigurationData s) where
-    toObject LaunchConfigurationData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 launchConfigurationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (LaunchConfigurationData s)
 launchConfigurationData _name =
-    TF.newDataSource "aws_launch_configuration" $
+    TF.newDataSource "aws_launch_configuration" TF.validator $
         LaunchConfigurationData'
             { _name = _name
             }
 
+instance TF.IsObject (LaunchConfigurationData s) where
+    toObject LaunchConfigurationData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (LaunchConfigurationData s) where
+    validator = P.mempty
+
 instance P.HasName (LaunchConfigurationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LaunchConfigurationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: LaunchConfigurationData s)
+               (\s a -> s { _name = a } :: LaunchConfigurationData s)
 
 instance s ~ s' => P.HasComputedAssociatePublicIpAddress (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Bool) where
     computedAssociatePublicIpAddress x = TF.compute (TF.refKey x) "_computedAssociatePublicIpAddress"
@@ -4220,10 +4385,10 @@ instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (LaunchConfigurationData s)) 
 instance s ~ s' => P.HasComputedPlacementTenancy (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
     computedPlacementTenancy x = TF.compute (TF.refKey x) "_computedPlacementTenancy"
 
-instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [RootBlockDevice s]) where
+instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [TF.Attr s (RootBlockDevice s)]) where
     computedRootBlockDevice x = TF.compute (TF.refKey x) "_computedRootBlockDevice"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSpotPrice (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
@@ -4235,7 +4400,7 @@ instance s ~ s' => P.HasComputedUserData (TF.Ref s' (LaunchConfigurationData s))
 instance s ~ s' => P.HasComputedVpcClassicLinkId (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s P.Text) where
     computedVpcClassicLinkId x = TF.compute (TF.refKey x) "_computedVpcClassicLinkId"
 
-instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchConfigurationData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedVpcClassicLinkSecurityGroups x = TF.compute (TF.refKey x) "_computedVpcClassicLinkSecurityGroups"
 
 -- | @aws_lb@ DataSource.
@@ -4245,14 +4410,17 @@ instance s ~ s' => P.HasComputedVpcClassicLinkSecurityGroups (TF.Ref s' (LaunchC
 data LbData s = LbData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LbData s) where
-    toObject _ = []
-
 lbData
     :: TF.DataSource P.Provider (LbData s)
 lbData =
-    TF.newDataSource "aws_lb" $
+    TF.newDataSource "aws_lb" TF.validator $
         LbData'
+
+instance TF.IsObject (LbData s) where
+    toObject _ = []
+
+instance TF.IsValid (LbData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (LbData s)) (TF.Attr s (AccessLogs s)) where
     computedAccessLogs x = TF.compute (TF.refKey x) "_computedAccessLogs"
@@ -4281,13 +4449,13 @@ instance s ~ s' => P.HasComputedLoadBalancerType (TF.Ref s' (LbData s)) (TF.Attr
 instance s ~ s' => P.HasComputedName (TF.Ref s' (LbData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (LbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (LbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSubnetMapping (TF.Ref s' (LbData s)) (TF.Attr s [TF.Attr s (SubnetMapping s)]) where
     computedSubnetMapping x = TF.compute (TF.refKey x) "_computedSubnetMapping"
 
-instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (LbData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (LbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubnets x = TF.compute (TF.refKey x) "_computedSubnets"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (LbData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -4306,14 +4474,17 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LbData s)) (TF.Attr s P.Text)
 data LbListenerData s = LbListenerData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LbListenerData s) where
-    toObject _ = []
-
 lbListenerData
     :: TF.DataSource P.Provider (LbListenerData s)
 lbListenerData =
-    TF.newDataSource "aws_lb_listener" $
+    TF.newDataSource "aws_lb_listener" TF.validator $
         LbListenerData'
+
+instance TF.IsObject (LbListenerData s) where
+    toObject _ = []
+
+instance TF.IsValid (LbListenerData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (LbListenerData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -4321,7 +4492,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (LbListenerData s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (LbListenerData s)) (TF.Attr s P.Text) where
     computedCertificateArn x = TF.compute (TF.refKey x) "_computedCertificateArn"
 
-instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (LbListenerData s)) (TF.Attr s [DefaultAction s]) where
+instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (LbListenerData s)) (TF.Attr s [TF.Attr s (DefaultAction s)]) where
     computedDefaultAction x = TF.compute (TF.refKey x) "_computedDefaultAction"
 
 instance s ~ s' => P.HasComputedLoadBalancerArn (TF.Ref s' (LbListenerData s)) (TF.Attr s P.Text) where
@@ -4343,14 +4514,17 @@ instance s ~ s' => P.HasComputedSslPolicy (TF.Ref s' (LbListenerData s)) (TF.Att
 data LbTargetGroupData s = LbTargetGroupData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (LbTargetGroupData s) where
-    toObject _ = []
-
 lbTargetGroupData
     :: TF.DataSource P.Provider (LbTargetGroupData s)
 lbTargetGroupData =
-    TF.newDataSource "aws_lb_target_group" $
+    TF.newDataSource "aws_lb_target_group" TF.validator $
         LbTargetGroupData'
+
+instance TF.IsObject (LbTargetGroupData s) where
+    toObject _ = []
+
+instance TF.IsValid (LbTargetGroupData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (LbTargetGroupData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -4392,14 +4566,17 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LbTargetGroupData s)) (TF.Attr
 data MqBrokerData s = MqBrokerData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (MqBrokerData s) where
-    toObject _ = []
-
 mqBrokerData
     :: TF.DataSource P.Provider (MqBrokerData s)
 mqBrokerData =
-    TF.newDataSource "aws_mq_broker" $
+    TF.newDataSource "aws_mq_broker" TF.validator $
         MqBrokerData'
+
+instance TF.IsObject (MqBrokerData s) where
+    toObject _ = []
+
+instance TF.IsValid (MqBrokerData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (MqBrokerData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
@@ -4428,7 +4605,7 @@ instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (MqBrokerData s)) (TF.A
 instance s ~ s' => P.HasComputedHostInstanceType (TF.Ref s' (MqBrokerData s)) (TF.Attr s P.Text) where
     computedHostInstanceType x = TF.compute (TF.refKey x) "_computedHostInstanceType"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (MqBrokerData s)) (TF.Attr s [Instances s]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
     computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
 instance s ~ s' => P.HasComputedMaintenanceWindowStartTime (TF.Ref s' (MqBrokerData s)) (TF.Attr s (MaintenanceWindowStartTime s)) where
@@ -4437,10 +4614,10 @@ instance s ~ s' => P.HasComputedMaintenanceWindowStartTime (TF.Ref s' (MqBrokerD
 instance s ~ s' => P.HasComputedPubliclyAccessible (TF.Ref s' (MqBrokerData s)) (TF.Attr s P.Bool) where
     computedPubliclyAccessible x = TF.compute (TF.refKey x) "_computedPubliclyAccessible"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
-instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubnetIds x = TF.compute (TF.refKey x) "_computedSubnetIds"
 
 instance s ~ s' => P.HasComputedUser (TF.Ref s' (MqBrokerData s)) (TF.Attr s [TF.Attr s (User s)]) where
@@ -4456,24 +4633,30 @@ data NatGatewayData s = NatGatewayData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NatGatewayData s) where
-    toObject NatGatewayData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        ]
-
 natGatewayData
     :: TF.DataSource P.Provider (NatGatewayData s)
 natGatewayData =
-    TF.newDataSource "aws_nat_gateway" $
+    TF.newDataSource "aws_nat_gateway" TF.validator $
         NatGatewayData'
             { _filter = TF.Nil
             }
 
+instance TF.IsObject (NatGatewayData s) where
+    toObject NatGatewayData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance TF.IsValid (NatGatewayData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: NatGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (NatGatewayData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NatGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: NatGatewayData s)
+               (\s a -> s { _filter = a } :: NatGatewayData s)
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (NatGatewayData s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "_computedAllocationId"
@@ -4515,34 +4698,39 @@ data NetworkAclsData s = NetworkAclsData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NetworkAclsData s) where
-    toObject NetworkAclsData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "vpc_id" <$> TF.attribute _vpcId
-        ]
-
 networkAclsData
     :: TF.DataSource P.Provider (NetworkAclsData s)
 networkAclsData =
-    TF.newDataSource "aws_network_acls" $
+    TF.newDataSource "aws_network_acls" TF.validator $
         NetworkAclsData'
             { _filter = TF.Nil
             , _vpcId = TF.Nil
             }
 
+instance TF.IsObject (NetworkAclsData s) where
+    toObject NetworkAclsData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        , TF.assign "vpc_id" <$> TF.attribute _vpcId
+        ]
+
+instance TF.IsValid (NetworkAclsData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: NetworkAclsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (NetworkAclsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NetworkAclsData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: NetworkAclsData s)
+               (\s a -> s { _filter = a } :: NetworkAclsData s)
 
 instance P.HasVpcId (NetworkAclsData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: NetworkAclsData s -> TF.Attr s P.Text)
-               (\s a -> s { _vpcId = a
-                          } :: NetworkAclsData s)
+               (\s a -> s { _vpcId = a } :: NetworkAclsData s)
 
-instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkAclsData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkAclsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "_computedIds"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkAclsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -4558,29 +4746,35 @@ data NetworkInterfaceData s = NetworkInterfaceData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NetworkInterfaceData s) where
-    toObject NetworkInterfaceData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        ]
-
 networkInterfaceData
     :: TF.DataSource P.Provider (NetworkInterfaceData s)
 networkInterfaceData =
-    TF.newDataSource "aws_network_interface" $
+    TF.newDataSource "aws_network_interface" TF.validator $
         NetworkInterfaceData'
             { _filter = TF.Nil
             }
 
+instance TF.IsObject (NetworkInterfaceData s) where
+    toObject NetworkInterfaceData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance TF.IsValid (NetworkInterfaceData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: NetworkInterfaceData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (NetworkInterfaceData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NetworkInterfaceData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: NetworkInterfaceData s)
+               (\s a -> s { _filter = a } :: NetworkInterfaceData s)
 
-instance s ~ s' => P.HasComputedAssociation (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [Association s]) where
+instance s ~ s' => P.HasComputedAssociation (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (Association s)]) where
     computedAssociation x = TF.compute (TF.refKey x) "_computedAssociation"
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [Attachment s]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (Attachment s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "_computedAttachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
@@ -4595,7 +4789,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr
 instance s ~ s' => P.HasComputedInterfaceType (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
     computedInterfaceType x = TF.compute (TF.refKey x) "_computedInterfaceType"
 
-instance s ~ s' => P.HasComputedIpv6Addresses (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedIpv6Addresses (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIpv6Addresses x = TF.compute (TF.refKey x) "_computedIpv6Addresses"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
@@ -4616,7 +4810,7 @@ instance s ~ s' => P.HasComputedPrivateIps (TF.Ref s' (NetworkInterfaceData s)) 
 instance s ~ s' => P.HasComputedRequesterId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
     computedRequesterId x = TF.compute (TF.refKey x) "_computedRequesterId"
 
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "_computedSecurityGroups"
 
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
@@ -4638,26 +4832,32 @@ data NetworkInterfacesData s = NetworkInterfacesData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (NetworkInterfacesData s) where
-    toObject NetworkInterfacesData'{..} = catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        ]
-
 networkInterfacesData
     :: TF.DataSource P.Provider (NetworkInterfacesData s)
 networkInterfacesData =
-    TF.newDataSource "aws_network_interfaces" $
+    TF.newDataSource "aws_network_interfaces" TF.validator $
         NetworkInterfacesData'
             { _filter = TF.Nil
             }
 
+instance TF.IsObject (NetworkInterfacesData s) where
+    toObject NetworkInterfacesData'{..} = P.catMaybes
+        [ TF.assign "filter" <$> TF.attribute _filter
+        ]
+
+instance TF.IsValid (NetworkInterfacesData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filter"
+                  (_filter
+                      :: NetworkInterfacesData s -> TF.Attr s [TF.Attr s (Filter s)])
+                  TF.validator
+
 instance P.HasFilter (NetworkInterfacesData s) (TF.Attr s [TF.Attr s (Filter s)]) where
     filter =
         P.lens (_filter :: NetworkInterfacesData s -> TF.Attr s [TF.Attr s (Filter s)])
-               (\s a -> s { _filter = a
-                          } :: NetworkInterfacesData s)
+               (\s a -> s { _filter = a } :: NetworkInterfacesData s)
 
-instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedIds (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "_computedIds"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfacesData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -4670,14 +4870,17 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkInterfacesData s)) (TF.A
 data PartitionData s = PartitionData'
     deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (PartitionData s) where
-    toObject _ = []
-
 partitionData
     :: TF.DataSource P.Provider (PartitionData s)
 partitionData =
-    TF.newDataSource "aws_partition" $
+    TF.newDataSource "aws_partition" TF.validator $
         PartitionData'
+
+instance TF.IsObject (PartitionData s) where
+    toObject _ = []
+
+instance TF.IsValid (PartitionData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedPartition (TF.Ref s' (PartitionData s)) (TF.Attr s P.Text) where
     computedPartition x = TF.compute (TF.refKey x) "_computedPartition"

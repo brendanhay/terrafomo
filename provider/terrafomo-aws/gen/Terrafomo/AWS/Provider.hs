@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -23,7 +24,6 @@ module Terrafomo.AWS.Provider
 
 import Data.Function ((&))
 import Data.Functor  ((<$>))
-import Data.Maybe    (catMaybes)
 import Data.Proxy    (Proxy (Proxy))
 
 import GHC.Base (($))
@@ -32,7 +32,10 @@ import Terrafomo.AWS.Settings
 
 import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
+import qualified Data.HashMap.Strict as Map
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Maybe          as P
+import qualified Data.Monoid         as P
 import qualified Data.Text           as P
 import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
@@ -42,6 +45,7 @@ import qualified Terrafomo.AWS.Types as P
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.Validator as TF
 
 -- | The @AWS@ Terraform provider configuration.
 --
@@ -148,41 +152,6 @@ data Provider = Provider'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable Provider
-
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "access_key" <$> _accessKey
-                  , TF.assign "allowed_account_ids" <$> _allowedAccountIds
-                  , TF.assign "assume_role" <$> _assumeRole
-                  , TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
-                  , TF.assign "endpoints" <$> _endpoints
-                  , TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
-                  , P.Just $ TF.assign "insecure" _insecure
-                  , TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
-                  , P.Just $ TF.assign "max_retries" _maxRetries
-                  , TF.assign "profile" <$> _profile
-                  , P.Just $ TF.assign "region" _region
-                  , P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
-                  , TF.assign "secret_key" <$> _secretKey
-                  , TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
-                  , P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
-                  , P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
-                  , P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
-                  , P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
-                  , P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
-                  , TF.assign "token" <$> _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
-
 newProvider
     :: P.Region -- ^ @region@ - 'P.region'
     -> Provider
@@ -210,124 +179,159 @@ newProvider _region =
         , _token = P.Nothing
         }
 
+instance P.Hashable Provider
+
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _accessKey
+                  , TF.assign "allowed_account_ids" <$> _allowedAccountIds
+                  , TF.assign "assume_role" <$> _assumeRole
+                  , TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
+                  , TF.assign "endpoints" <$> _endpoints
+                  , TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
+                  , P.Just $ TF.assign "insecure" _insecure
+                  , TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
+                  , P.Just $ TF.assign "max_retries" _maxRetries
+                  , TF.assign "profile" <$> _profile
+                  , P.Just $ TF.assign "region" _region
+                  , P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
+                  , TF.assign "secret_key" <$> _secretKey
+                  , TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
+                  , P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
+                  , P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
+                  , P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
+                  , P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
+                  , P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
+                  , TF.assign "token" <$> _token
+                  ])
+
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
+
+instance TF.IsValid (Provider) where
+    validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes
+        [ if (_allowedAccountIds P.== P.Nothing)
+              then P.Nothing
+              else P.Just ("_allowedAccountIds",
+                            [ "_forbiddenAccountIds"
+                            ])
+        , if (_forbiddenAccountIds P.== P.Nothing)
+              then P.Nothing
+              else P.Just ("_forbiddenAccountIds",
+                            [ "_allowedAccountIds"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_assumeRole"
+                  (_assumeRole
+                      :: Provider -> P.Maybe AssumeRole)
+                  TF.validator
+           P.<> TF.settingsValidator "_endpoints"
+                  (_endpoints
+                      :: Provider -> P.Maybe [Endpoints])
+                  TF.validator
+
 instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
     accessKey =
         P.lens (_accessKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _accessKey = a
-                          } :: Provider)
+               (\s a -> s { _accessKey = a } :: Provider)
 
 instance P.HasAllowedAccountIds (Provider) (P.Maybe [P.Text]) where
     allowedAccountIds =
         P.lens (_allowedAccountIds :: Provider -> P.Maybe [P.Text])
-               (\s a -> s { _allowedAccountIds = a
-                          , _forbiddenAccountIds = P.Nothing
-                          } :: Provider)
+               (\s a -> s { _allowedAccountIds = a } :: Provider)
 
 instance P.HasAssumeRole (Provider) (P.Maybe AssumeRole) where
     assumeRole =
         P.lens (_assumeRole :: Provider -> P.Maybe AssumeRole)
-               (\s a -> s { _assumeRole = a
-                          } :: Provider)
+               (\s a -> s { _assumeRole = a } :: Provider)
 
 instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
     dynamodbEndpoint =
         P.lens (_dynamodbEndpoint :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _dynamodbEndpoint = a
-                          } :: Provider)
+               (\s a -> s { _dynamodbEndpoint = a } :: Provider)
 
 instance P.HasEndpoints (Provider) (P.Maybe [Endpoints]) where
     endpoints =
         P.lens (_endpoints :: Provider -> P.Maybe [Endpoints])
-               (\s a -> s { _endpoints = a
-                          } :: Provider)
+               (\s a -> s { _endpoints = a } :: Provider)
 
 instance P.HasForbiddenAccountIds (Provider) (P.Maybe [P.Text]) where
     forbiddenAccountIds =
         P.lens (_forbiddenAccountIds :: Provider -> P.Maybe [P.Text])
-               (\s a -> s { _forbiddenAccountIds = a
-                          , _allowedAccountIds = P.Nothing
-                          } :: Provider)
+               (\s a -> s { _forbiddenAccountIds = a } :: Provider)
 
 instance P.HasInsecure (Provider) (P.Bool) where
     insecure =
         P.lens (_insecure :: Provider -> P.Bool)
-               (\s a -> s { _insecure = a
-                          } :: Provider)
+               (\s a -> s { _insecure = a } :: Provider)
 
 instance P.HasKinesisEndpoint (Provider) (P.Maybe P.Text) where
     kinesisEndpoint =
         P.lens (_kinesisEndpoint :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _kinesisEndpoint = a
-                          } :: Provider)
+               (\s a -> s { _kinesisEndpoint = a } :: Provider)
 
 instance P.HasMaxRetries (Provider) (P.Integer) where
     maxRetries =
         P.lens (_maxRetries :: Provider -> P.Integer)
-               (\s a -> s { _maxRetries = a
-                          } :: Provider)
+               (\s a -> s { _maxRetries = a } :: Provider)
 
 instance P.HasProfile (Provider) (P.Maybe P.Text) where
     profile =
         P.lens (_profile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _profile = a
-                          } :: Provider)
+               (\s a -> s { _profile = a } :: Provider)
 
 instance P.HasRegion (Provider) (P.Region) where
     region =
         P.lens (_region :: Provider -> P.Region)
-               (\s a -> s { _region = a
-                          } :: Provider)
+               (\s a -> s { _region = a } :: Provider)
 
 instance P.HasS3ForcePathStyle (Provider) (P.Bool) where
     s3ForcePathStyle =
         P.lens (_s3ForcePathStyle :: Provider -> P.Bool)
-               (\s a -> s { _s3ForcePathStyle = a
-                          } :: Provider)
+               (\s a -> s { _s3ForcePathStyle = a } :: Provider)
 
 instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
     secretKey =
         P.lens (_secretKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _secretKey = a
-                          } :: Provider)
+               (\s a -> s { _secretKey = a } :: Provider)
 
 instance P.HasSharedCredentialsFile (Provider) (P.Maybe P.Text) where
     sharedCredentialsFile =
         P.lens (_sharedCredentialsFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _sharedCredentialsFile = a
-                          } :: Provider)
+               (\s a -> s { _sharedCredentialsFile = a } :: Provider)
 
 instance P.HasSkipCredentialsValidation (Provider) (P.Bool) where
     skipCredentialsValidation =
         P.lens (_skipCredentialsValidation :: Provider -> P.Bool)
-               (\s a -> s { _skipCredentialsValidation = a
-                          } :: Provider)
+               (\s a -> s { _skipCredentialsValidation = a } :: Provider)
 
 instance P.HasSkipGetEc2Platforms (Provider) (P.Bool) where
     skipGetEc2Platforms =
         P.lens (_skipGetEc2Platforms :: Provider -> P.Bool)
-               (\s a -> s { _skipGetEc2Platforms = a
-                          } :: Provider)
+               (\s a -> s { _skipGetEc2Platforms = a } :: Provider)
 
 instance P.HasSkipMetadataApiCheck (Provider) (P.Bool) where
     skipMetadataApiCheck =
         P.lens (_skipMetadataApiCheck :: Provider -> P.Bool)
-               (\s a -> s { _skipMetadataApiCheck = a
-                          } :: Provider)
+               (\s a -> s { _skipMetadataApiCheck = a } :: Provider)
 
 instance P.HasSkipRegionValidation (Provider) (P.Bool) where
     skipRegionValidation =
         P.lens (_skipRegionValidation :: Provider -> P.Bool)
-               (\s a -> s { _skipRegionValidation = a
-                          } :: Provider)
+               (\s a -> s { _skipRegionValidation = a } :: Provider)
 
 instance P.HasSkipRequestingAccountId (Provider) (P.Bool) where
     skipRequestingAccountId =
         P.lens (_skipRequestingAccountId :: Provider -> P.Bool)
-               (\s a -> s { _skipRequestingAccountId = a
-                          } :: Provider)
+               (\s a -> s { _skipRequestingAccountId = a } :: Provider)
 
 instance P.HasToken (Provider) (P.Maybe P.Text) where
     token =
         P.lens (_token :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _token = a
-                          } :: Provider)
+               (\s a -> s { _token = a } :: Provider)
