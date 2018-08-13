@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newReplace",
+                "name": "Replace'"
+            },
             "arguments": [
                 {
                     "default": "_source",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -24,16 +29,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"verification\" <$> TF.attribute",
-                    "name": "verification",
+                    "name": "_verification",
                     "method": "verification",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVerification",
+                    "validate": false,
                     "optional": true,
-                    "label": "_verification"
+                    "original": "verification"
                 }
             ],
             "name": "Replace",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -43,20 +50,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Replace s",
             "original": "replace"
         },
         {
+            "con": {
+                "smart": "newDropin",
+                "name": "Dropin'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -65,13 +77,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "_name",
@@ -80,16 +93,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
             "name": "Dropin",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -99,20 +114,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Dropin s",
             "original": "dropin"
         },
         {
+            "con": {
+                "smart": "newContent",
+                "name": "Content'"
+            },
             "arguments": [
                 {
                     "default": "_content",
@@ -121,13 +141,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": false,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "TF.value \"text/plain\"",
@@ -136,16 +157,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"mime\" <$> TF.attribute",
-                    "name": "mime",
+                    "name": "_mime",
                     "method": "mime",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasMime",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mime"
+                    "original": "mime"
                 }
             ],
             "name": "Content",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -155,20 +178,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": false,
-                    "label": "_content"
+                    "original": "content"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Content s",
             "original": "content"
         },
         {
+            "con": {
+                "smart": "newPartition",
+                "name": "Partition'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -177,13 +205,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "label",
+                    "name": "_label",
                     "method": "label",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLabel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_label"
+                    "original": "label"
                 },
                 {
                     "default": "TF.Nil",
@@ -192,13 +221,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"number\" <$> TF.attribute",
-                    "name": "number",
+                    "name": "_number",
                     "method": "number",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasNumber",
+                    "validate": false,
                     "optional": true,
-                    "label": "_number"
+                    "original": "number"
                 },
                 {
                     "default": "TF.Nil",
@@ -207,13 +237,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"size\" <$> TF.attribute",
-                    "name": "size",
+                    "name": "_size",
                     "method": "size",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSize",
+                    "validate": false,
                     "optional": true,
-                    "label": "_size"
+                    "original": "size"
                 },
                 {
                     "default": "TF.Nil",
@@ -222,13 +253,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"start\" <$> TF.attribute",
-                    "name": "start",
+                    "name": "_start",
                     "method": "start",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasStart",
+                    "validate": false,
                     "optional": true,
-                    "label": "_start"
+                    "original": "start"
                 },
                 {
                     "default": "TF.Nil",
@@ -237,23 +269,29 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"type_guid\" <$> TF.attribute",
-                    "name": "type_guid",
+                    "name": "_typeGuid",
                     "method": "typeGuid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTypeGuid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_typeGuid"
+                    "original": "type_guid"
                 }
             ],
             "name": "Partition",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Partition s",
             "original": "partition"
         },
         {
+            "con": {
+                "smart": "newSource",
+                "name": "Source'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -262,13 +300,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"compression\" <$> TF.attribute",
-                    "name": "compression",
+                    "name": "_compression",
                     "method": "compression",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCompression",
+                    "validate": false,
                     "optional": true,
-                    "label": "_compression"
+                    "original": "compression"
                 },
                 {
                     "default": "TF.Nil",
@@ -277,13 +316,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": true,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -292,23 +332,29 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"verification\" <$> TF.attribute",
-                    "name": "verification",
+                    "name": "_verification",
                     "method": "verification",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVerification",
+                    "validate": false,
                     "optional": true,
-                    "label": "_verification"
+                    "original": "verification"
                 }
             ],
             "name": "Source",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
-            "hashable": false,
+            "conflicts": [],
             "type": "Source s",
             "original": "source"
         },
         {
+            "con": {
+                "smart": "newMount",
+                "name": "Mount'"
+            },
             "arguments": [
                 {
                     "default": "_device",
@@ -317,13 +363,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device\" <$> TF.attribute",
-                    "name": "device",
+                    "name": "_device",
                     "method": "device",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDevice",
+                    "validate": false,
                     "optional": false,
-                    "label": "_device"
+                    "original": "device"
                 },
                 {
                     "default": "_format",
@@ -332,13 +379,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"format\" <$> TF.attribute",
-                    "name": "format",
+                    "name": "_format",
                     "method": "format",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFormat",
+                    "validate": false,
                     "optional": false,
-                    "label": "_format"
+                    "original": "format"
                 },
                 {
                     "default": "TF.Nil",
@@ -347,13 +395,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"label\" <$> TF.attribute",
-                    "name": "label",
+                    "name": "_label",
                     "method": "label",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLabel",
+                    "validate": false,
                     "optional": true,
-                    "label": "_label"
+                    "original": "label"
                 },
                 {
                     "default": "TF.Nil",
@@ -362,13 +411,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"options\" <$> TF.attribute",
-                    "name": "options",
+                    "name": "_options",
                     "method": "options",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasOptions",
+                    "validate": false,
                     "optional": true,
-                    "label": "_options"
+                    "original": "options"
                 },
                 {
                     "default": "TF.Nil",
@@ -377,13 +427,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"uuid\" <$> TF.attribute",
-                    "name": "uuid",
+                    "name": "_uuid",
                     "method": "uuid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUuid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_uuid"
+                    "original": "uuid"
                 },
                 {
                     "default": "TF.Nil",
@@ -392,16 +443,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"wipe_filesystem\" <$> TF.attribute",
-                    "name": "wipe_filesystem",
+                    "name": "_wipeFilesystem",
                     "method": "wipeFilesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasWipeFilesystem",
+                    "validate": false,
                     "optional": true,
-                    "label": "_wipeFilesystem"
+                    "original": "wipe_filesystem"
                 }
             ],
             "name": "Mount",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -411,13 +464,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device\" <$> TF.attribute",
-                    "name": "device",
+                    "name": "_device",
                     "method": "device",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDevice",
+                    "validate": false,
                     "optional": false,
-                    "label": "_device"
+                    "original": "device"
                 },
                 {
                     "default": "_format",
@@ -426,20 +480,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"format\" <$> TF.attribute",
-                    "name": "format",
+                    "name": "_format",
                     "method": "format",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFormat",
+                    "validate": false,
                     "optional": false,
-                    "label": "_format"
+                    "original": "format"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Mount s",
             "original": "mount"
         },
         {
+            "con": {
+                "smart": "newAppend",
+                "name": "Append'"
+            },
             "arguments": [
                 {
                     "default": "_source",
@@ -448,13 +507,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -463,16 +523,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"verification\" <$> TF.attribute",
-                    "name": "verification",
+                    "name": "_verification",
                     "method": "verification",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasVerification",
+                    "validate": false,
                     "optional": true,
-                    "label": "_verification"
+                    "original": "verification"
                 }
             ],
             "name": "Append",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -482,23 +544,27 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSource",
+                    "validate": false,
                     "optional": false,
-                    "label": "_source"
+                    "original": "source"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "Append s",
             "original": "append"
         }
     ],
-    "arguments": [],
     "dataSources": [
         {
+            "con": {
+                "smart": "configData",
+                "name": "ConfigData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -507,13 +573,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"append\" <$> TF.attribute",
-                    "name": "append",
+                    "name": "_append",
                     "method": "append",
                     "conflicts": [],
-                    "type": "TF.Attr s [Append s]",
+                    "type": "TF.Attr s [TF.Attr s (Append s)]",
                     "class": "HasAppend",
+                    "validate": true,
                     "optional": true,
-                    "label": "_append"
+                    "original": "append"
                 },
                 {
                     "default": "TF.Nil",
@@ -522,13 +589,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"arrays\" <$> TF.attribute",
-                    "name": "arrays",
+                    "name": "_arrays",
                     "method": "arrays",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasArrays",
+                    "validate": false,
                     "optional": true,
-                    "label": "_arrays"
+                    "original": "arrays"
                 },
                 {
                     "default": "TF.Nil",
@@ -537,13 +605,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"directories\" <$> TF.attribute",
-                    "name": "directories",
+                    "name": "_directories",
                     "method": "directories",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasDirectories",
+                    "validate": false,
                     "optional": true,
-                    "label": "_directories"
+                    "original": "directories"
                 },
                 {
                     "default": "TF.Nil",
@@ -552,13 +621,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"disks\" <$> TF.attribute",
-                    "name": "disks",
+                    "name": "_disks",
                     "method": "disks",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasDisks",
+                    "validate": false,
                     "optional": true,
-                    "label": "_disks"
+                    "original": "disks"
                 },
                 {
                     "default": "TF.Nil",
@@ -567,13 +637,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"files\" <$> TF.attribute",
-                    "name": "files",
+                    "name": "_files",
                     "method": "files",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasFiles",
+                    "validate": false,
                     "optional": true,
-                    "label": "_files"
+                    "original": "files"
                 },
                 {
                     "default": "TF.Nil",
@@ -582,13 +653,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"filesystems\" <$> TF.attribute",
-                    "name": "filesystems",
+                    "name": "_filesystems",
                     "method": "filesystems",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasFilesystems",
+                    "validate": false,
                     "optional": true,
-                    "label": "_filesystems"
+                    "original": "filesystems"
                 },
                 {
                     "default": "TF.Nil",
@@ -597,13 +669,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"groups\" <$> TF.attribute",
-                    "name": "groups",
+                    "name": "_groups",
                     "method": "groups",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasGroups",
+                    "validate": false,
                     "optional": true,
-                    "label": "_groups"
+                    "original": "groups"
                 },
                 {
                     "default": "TF.Nil",
@@ -612,13 +685,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"links\" <$> TF.attribute",
-                    "name": "links",
+                    "name": "_links",
                     "method": "links",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasLinks",
+                    "validate": false,
                     "optional": true,
-                    "label": "_links"
+                    "original": "links"
                 },
                 {
                     "default": "TF.Nil",
@@ -627,13 +701,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"networkd\" <$> TF.attribute",
-                    "name": "networkd",
+                    "name": "_networkd",
                     "method": "networkd",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasNetworkd",
+                    "validate": false,
                     "optional": true,
-                    "label": "_networkd"
+                    "original": "networkd"
                 },
                 {
                     "default": "TF.Nil",
@@ -642,13 +717,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"replace\" <$> TF.attribute",
-                    "name": "replace",
+                    "name": "_replace",
                     "method": "replace",
                     "conflicts": [],
-                    "type": "TF.Attr s [Replace s]",
+                    "type": "TF.Attr s (Replace s)",
                     "class": "HasReplace",
+                    "validate": true,
                     "optional": true,
-                    "label": "_replace"
+                    "original": "replace"
                 },
                 {
                     "default": "TF.Nil",
@@ -657,13 +733,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"systemd\" <$> TF.attribute",
-                    "name": "systemd",
+                    "name": "_systemd",
                     "method": "systemd",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasSystemd",
+                    "validate": false,
                     "optional": true,
-                    "label": "_systemd"
+                    "original": "systemd"
                 },
                 {
                     "default": "TF.Nil",
@@ -672,17 +749,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"users\" <$> TF.attribute",
-                    "name": "users",
+                    "name": "_users",
                     "method": "users",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasUsers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_users"
+                    "original": "users"
                 }
             ],
-            "schema": "DataSource",
             "name": "ConfigData",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -691,20 +769,26 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"rendered\" <$> TF.attribute",
-                    "name": "rendered",
+                    "name": "_computedRendered",
                     "method": "computedRendered",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRendered",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedRendered"
+                    "original": "rendered"
                 }
             ],
             "parameters": [],
+            "conflicts": [],
             "type": "ConfigData s",
             "original": "ignition_config"
         },
         {
+            "con": {
+                "smart": "directoryData",
+                "name": "DirectoryData'"
+            },
             "arguments": [
                 {
                     "default": "_filesystem",
@@ -713,13 +797,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filesystem\" <$> TF.attribute",
-                    "name": "filesystem",
+                    "name": "_filesystem",
                     "method": "filesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilesystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filesystem"
+                    "original": "filesystem"
                 },
                 {
                     "default": "TF.Nil",
@@ -728,13 +813,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"gid\" <$> TF.attribute",
-                    "name": "gid",
+                    "name": "_gid",
                     "method": "gid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasGid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_gid"
+                    "original": "gid"
                 },
                 {
                     "default": "TF.Nil",
@@ -743,13 +829,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"mode\" <$> TF.attribute",
-                    "name": "mode",
+                    "name": "_mode",
                     "method": "mode",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMode",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mode"
+                    "original": "mode"
                 },
                 {
                     "default": "_path",
@@ -758,13 +845,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 },
                 {
                     "default": "TF.Nil",
@@ -773,17 +861,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"uid\" <$> TF.attribute",
-                    "name": "uid",
+                    "name": "_uid",
                     "method": "uid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasUid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_uid"
+                    "original": "uid"
                 }
             ],
-            "schema": "DataSource",
             "name": "DirectoryData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -793,13 +882,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filesystem\" <$> TF.attribute",
-                    "name": "filesystem",
+                    "name": "_filesystem",
                     "method": "filesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilesystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filesystem"
+                    "original": "filesystem"
                 },
                 {
                     "default": "_path",
@@ -808,19 +898,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
+            "conflicts": [],
             "type": "DirectoryData s",
             "original": "ignition_directory"
         },
         {
+            "con": {
+                "smart": "diskData",
+                "name": "DiskData'"
+            },
             "arguments": [
                 {
                     "default": "_device",
@@ -829,13 +925,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device\" <$> TF.attribute",
-                    "name": "device",
+                    "name": "_device",
                     "method": "device",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDevice",
+                    "validate": false,
                     "optional": false,
-                    "label": "_device"
+                    "original": "device"
                 },
                 {
                     "default": "TF.Nil",
@@ -844,13 +941,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"partition\" <$> TF.attribute",
-                    "name": "partition",
+                    "name": "_partition",
                     "method": "partition",
                     "conflicts": [],
-                    "type": "TF.Attr s [Partition s]",
+                    "type": "TF.Attr s [TF.Attr s (Partition s)]",
                     "class": "HasPartition",
+                    "validate": true,
                     "optional": true,
-                    "label": "_partition"
+                    "original": "partition"
                 },
                 {
                     "default": "TF.Nil",
@@ -859,17 +957,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"wipe_table\" <$> TF.attribute",
-                    "name": "wipe_table",
+                    "name": "_wipeTable",
                     "method": "wipeTable",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasWipeTable",
+                    "validate": false,
                     "optional": true,
-                    "label": "_wipeTable"
+                    "original": "wipe_table"
                 }
             ],
-            "schema": "DataSource",
             "name": "DiskData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -879,19 +978,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"device\" <$> TF.attribute",
-                    "name": "device",
+                    "name": "_device",
                     "method": "device",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDevice",
+                    "validate": false,
                     "optional": false,
-                    "label": "_device"
+                    "original": "device"
                 }
             ],
+            "conflicts": [],
             "type": "DiskData s",
             "original": "ignition_disk"
         },
         {
+            "con": {
+                "smart": "fileData",
+                "name": "FileData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -900,13 +1005,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
-                    "type": "TF.Attr s [Content s]",
+                    "type": "TF.Attr s (Content s)",
                     "class": "HasContent",
+                    "validate": true,
                     "optional": true,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "_filesystem",
@@ -915,13 +1021,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filesystem\" <$> TF.attribute",
-                    "name": "filesystem",
+                    "name": "_filesystem",
                     "method": "filesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilesystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filesystem"
+                    "original": "filesystem"
                 },
                 {
                     "default": "TF.Nil",
@@ -930,13 +1037,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"gid\" <$> TF.attribute",
-                    "name": "gid",
+                    "name": "_gid",
                     "method": "gid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasGid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_gid"
+                    "original": "gid"
                 },
                 {
                     "default": "TF.Nil",
@@ -945,13 +1053,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"mode\" <$> TF.attribute",
-                    "name": "mode",
+                    "name": "_mode",
                     "method": "mode",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasMode",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mode"
+                    "original": "mode"
                 },
                 {
                     "default": "_path",
@@ -960,13 +1069,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 },
                 {
                     "default": "TF.Nil",
@@ -975,13 +1085,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "source",
+                    "name": "_source",
                     "method": "source",
                     "conflicts": [],
-                    "type": "TF.Attr s [Source s]",
+                    "type": "TF.Attr s (Source s)",
                     "class": "HasSource",
+                    "validate": true,
                     "optional": true,
-                    "label": "_source"
+                    "original": "source"
                 },
                 {
                     "default": "TF.Nil",
@@ -990,17 +1101,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"uid\" <$> TF.attribute",
-                    "name": "uid",
+                    "name": "_uid",
                     "method": "uid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasUid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_uid"
+                    "original": "uid"
                 }
             ],
-            "schema": "DataSource",
             "name": "FileData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1010,13 +1122,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filesystem\" <$> TF.attribute",
-                    "name": "filesystem",
+                    "name": "_filesystem",
                     "method": "filesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilesystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filesystem"
+                    "original": "filesystem"
                 },
                 {
                     "default": "_path",
@@ -1025,19 +1138,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
+            "conflicts": [],
             "type": "FileData s",
             "original": "ignition_file"
         },
         {
+            "con": {
+                "smart": "filesystemData",
+                "name": "FilesystemData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1046,13 +1165,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"mount\" <$> TF.attribute",
-                    "name": "mount",
+                    "name": "_mount",
                     "method": "mount",
                     "conflicts": [],
-                    "type": "TF.Attr s [Mount s]",
+                    "type": "TF.Attr s (Mount s)",
                     "class": "HasMount",
+                    "validate": true,
                     "optional": true,
-                    "label": "_mount"
+                    "original": "mount"
                 },
                 {
                     "default": "TF.Nil",
@@ -1061,13 +1181,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1076,23 +1197,29 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": true,
-                    "label": "_path"
+                    "original": "path"
                 }
             ],
-            "schema": "DataSource",
             "name": "FilesystemData",
+            "threaded": true,
             "attributes": [],
             "parameters": [],
+            "conflicts": [],
             "type": "FilesystemData s",
             "original": "ignition_filesystem"
         },
         {
+            "con": {
+                "smart": "groupData",
+                "name": "GroupData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1101,13 +1228,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"gid\" <$> TF.attribute",
-                    "name": "gid",
+                    "name": "_gid",
                     "method": "gid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasGid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_gid"
+                    "original": "gid"
                 },
                 {
                     "default": "_name",
@@ -1116,13 +1244,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1131,17 +1260,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"password_hash\" <$> TF.attribute",
-                    "name": "password_hash",
+                    "name": "_passwordHash",
                     "method": "passwordHash",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPasswordHash",
+                    "validate": false,
                     "optional": true,
-                    "label": "_passwordHash"
+                    "original": "password_hash"
                 }
             ],
-            "schema": "DataSource",
             "name": "GroupData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1151,19 +1281,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "GroupData s",
             "original": "ignition_group"
         },
         {
+            "con": {
+                "smart": "linkData",
+                "name": "LinkData'"
+            },
             "arguments": [
                 {
                     "default": "_filesystem",
@@ -1172,13 +1308,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filesystem\" <$> TF.attribute",
-                    "name": "filesystem",
+                    "name": "_filesystem",
                     "method": "filesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilesystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filesystem"
+                    "original": "filesystem"
                 },
                 {
                     "default": "TF.Nil",
@@ -1187,13 +1324,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"gid\" <$> TF.attribute",
-                    "name": "gid",
+                    "name": "_gid",
                     "method": "gid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasGid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_gid"
+                    "original": "gid"
                 },
                 {
                     "default": "TF.Nil",
@@ -1202,13 +1340,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"hard\" <$> TF.attribute",
-                    "name": "hard",
+                    "name": "_hard",
                     "method": "hard",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasHard",
+                    "validate": false,
                     "optional": true,
-                    "label": "_hard"
+                    "original": "hard"
                 },
                 {
                     "default": "_path",
@@ -1217,13 +1356,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 },
                 {
                     "default": "_target",
@@ -1232,13 +1372,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "target",
+                    "name": "_target",
                     "method": "target",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTarget",
+                    "validate": false,
                     "optional": false,
-                    "label": "_target"
+                    "original": "target"
                 },
                 {
                     "default": "TF.Nil",
@@ -1247,17 +1388,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"uid\" <$> TF.attribute",
-                    "name": "uid",
+                    "name": "_uid",
                     "method": "uid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasUid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_uid"
+                    "original": "uid"
                 }
             ],
-            "schema": "DataSource",
             "name": "LinkData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1267,13 +1409,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"filesystem\" <$> TF.attribute",
-                    "name": "filesystem",
+                    "name": "_filesystem",
                     "method": "filesystem",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFilesystem",
+                    "validate": false,
                     "optional": false,
-                    "label": "_filesystem"
+                    "original": "filesystem"
                 },
                 {
                     "default": "_path",
@@ -1282,13 +1425,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "path",
+                    "name": "_path",
                     "method": "path",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPath",
+                    "validate": false,
                     "optional": false,
-                    "label": "_path"
+                    "original": "path"
                 },
                 {
                     "default": "_target",
@@ -1297,19 +1441,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"target\" <$> TF.attribute",
-                    "name": "target",
+                    "name": "_target",
                     "method": "target",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTarget",
+                    "validate": false,
                     "optional": false,
-                    "label": "_target"
+                    "original": "target"
                 }
             ],
+            "conflicts": [],
             "type": "LinkData s",
             "original": "ignition_link"
         },
         {
+            "con": {
+                "smart": "networkdUnitData",
+                "name": "NetworkdUnitData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1318,13 +1468,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "_name",
@@ -1333,17 +1484,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "NetworkdUnitData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1353,19 +1505,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "NetworkdUnitData s",
             "original": "ignition_networkd_unit"
         },
         {
+            "con": {
+                "smart": "raidData",
+                "name": "RaidData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1374,13 +1532,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"devices\" <$> TF.attribute",
-                    "name": "devices",
+                    "name": "_devices",
                     "method": "devices",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasDevices",
+                    "validate": false,
                     "optional": true,
-                    "label": "_devices"
+                    "original": "devices"
                 },
                 {
                     "default": "_level",
@@ -1389,13 +1548,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"level\" <$> TF.attribute",
-                    "name": "level",
+                    "name": "_level",
                     "method": "level",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLevel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_level"
+                    "original": "level"
                 },
                 {
                     "default": "_name",
@@ -1404,13 +1564,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1419,17 +1580,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"spares\" <$> TF.attribute",
-                    "name": "spares",
+                    "name": "_spares",
                     "method": "spares",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasSpares",
+                    "validate": false,
                     "optional": true,
-                    "label": "_spares"
+                    "original": "spares"
                 }
             ],
-            "schema": "DataSource",
             "name": "RaidData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1439,13 +1601,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"level\" <$> TF.attribute",
-                    "name": "level",
+                    "name": "_level",
                     "method": "level",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLevel",
+                    "validate": false,
                     "optional": false,
-                    "label": "_level"
+                    "original": "level"
                 },
                 {
                     "default": "_name",
@@ -1454,19 +1617,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "RaidData s",
             "original": "ignition_raid"
         },
         {
+            "con": {
+                "smart": "systemdUnitData",
+                "name": "SystemdUnitData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1475,13 +1644,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"content\" <$> TF.attribute",
-                    "name": "content",
+                    "name": "_content",
                     "method": "content",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasContent",
+                    "validate": false,
                     "optional": true,
-                    "label": "_content"
+                    "original": "content"
                 },
                 {
                     "default": "TF.Nil",
@@ -1490,13 +1660,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"dropin\" <$> TF.attribute",
-                    "name": "dropin",
+                    "name": "_dropin",
                     "method": "dropin",
                     "conflicts": [],
-                    "type": "TF.Attr s [Dropin s]",
+                    "type": "TF.Attr s [TF.Attr s (Dropin s)]",
                     "class": "HasDropin",
+                    "validate": true,
                     "optional": true,
-                    "label": "_dropin"
+                    "original": "dropin"
                 },
                 {
                     "default": "TF.value P.True",
@@ -1505,13 +1676,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"enabled\" <$> TF.attribute",
-                    "name": "enabled",
+                    "name": "_enabled",
                     "method": "enabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_enabled"
+                    "original": "enabled"
                 },
                 {
                     "default": "TF.Nil",
@@ -1520,13 +1692,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"mask\" <$> TF.attribute",
-                    "name": "mask",
+                    "name": "_mask",
                     "method": "mask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasMask",
+                    "validate": false,
                     "optional": true,
-                    "label": "_mask"
+                    "original": "mask"
                 },
                 {
                     "default": "_name",
@@ -1535,17 +1708,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
-            "schema": "DataSource",
             "name": "SystemdUnitData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1555,19 +1729,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "SystemdUnitData s",
             "original": "ignition_systemd_unit"
         },
         {
+            "con": {
+                "smart": "userData",
+                "name": "UserData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -1576,13 +1756,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"gecos\" <$> TF.attribute",
-                    "name": "gecos",
+                    "name": "_gecos",
                     "method": "gecos",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasGecos",
+                    "validate": false,
                     "optional": true,
-                    "label": "_gecos"
+                    "original": "gecos"
                 },
                 {
                     "default": "TF.Nil",
@@ -1591,13 +1772,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"groups\" <$> TF.attribute",
-                    "name": "groups",
+                    "name": "_groups",
                     "method": "groups",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasGroups",
+                    "validate": false,
                     "optional": true,
-                    "label": "_groups"
+                    "original": "groups"
                 },
                 {
                     "default": "TF.Nil",
@@ -1606,13 +1788,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"home_dir\" <$> TF.attribute",
-                    "name": "home_dir",
+                    "name": "_homeDir",
                     "method": "homeDir",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasHomeDir",
+                    "validate": false,
                     "optional": true,
-                    "label": "_homeDir"
+                    "original": "home_dir"
                 },
                 {
                     "default": "_name",
@@ -1621,13 +1804,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -1636,13 +1820,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"no_create_home\" <$> TF.attribute",
-                    "name": "no_create_home",
+                    "name": "_noCreateHome",
                     "method": "noCreateHome",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasNoCreateHome",
+                    "validate": false,
                     "optional": true,
-                    "label": "_noCreateHome"
+                    "original": "no_create_home"
                 },
                 {
                     "default": "TF.Nil",
@@ -1651,13 +1836,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"no_log_init\" <$> TF.attribute",
-                    "name": "no_log_init",
+                    "name": "_noLogInit",
                     "method": "noLogInit",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasNoLogInit",
+                    "validate": false,
                     "optional": true,
-                    "label": "_noLogInit"
+                    "original": "no_log_init"
                 },
                 {
                     "default": "TF.Nil",
@@ -1666,13 +1852,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"no_user_group\" <$> TF.attribute",
-                    "name": "no_user_group",
+                    "name": "_noUserGroup",
                     "method": "noUserGroup",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasNoUserGroup",
+                    "validate": false,
                     "optional": true,
-                    "label": "_noUserGroup"
+                    "original": "no_user_group"
                 },
                 {
                     "default": "TF.Nil",
@@ -1681,13 +1868,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"password_hash\" <$> TF.attribute",
-                    "name": "password_hash",
+                    "name": "_passwordHash",
                     "method": "passwordHash",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPasswordHash",
+                    "validate": false,
                     "optional": true,
-                    "label": "_passwordHash"
+                    "original": "password_hash"
                 },
                 {
                     "default": "TF.Nil",
@@ -1696,13 +1884,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"primary_group\" <$> TF.attribute",
-                    "name": "primary_group",
+                    "name": "_primaryGroup",
                     "method": "primaryGroup",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPrimaryGroup",
+                    "validate": false,
                     "optional": true,
-                    "label": "_primaryGroup"
+                    "original": "primary_group"
                 },
                 {
                     "default": "TF.Nil",
@@ -1711,13 +1900,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"shell\" <$> TF.attribute",
-                    "name": "shell",
+                    "name": "_shell",
                     "method": "shell",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasShell",
+                    "validate": false,
                     "optional": true,
-                    "label": "_shell"
+                    "original": "shell"
                 },
                 {
                     "default": "TF.Nil",
@@ -1726,13 +1916,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"ssh_authorized_keys\" <$> TF.attribute",
-                    "name": "ssh_authorized_keys",
+                    "name": "_sshAuthorizedKeys",
                     "method": "sshAuthorizedKeys",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasSshAuthorizedKeys",
+                    "validate": false,
                     "optional": true,
-                    "label": "_sshAuthorizedKeys"
+                    "original": "ssh_authorized_keys"
                 },
                 {
                     "default": "TF.Nil",
@@ -1741,13 +1932,14 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"system\" <$> TF.attribute",
-                    "name": "system",
+                    "name": "_system",
                     "method": "system",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasSystem",
+                    "validate": false,
                     "optional": true,
-                    "label": "_system"
+                    "original": "system"
                 },
                 {
                     "default": "TF.Nil",
@@ -1756,17 +1948,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"uid\" <$> TF.attribute",
-                    "name": "uid",
+                    "name": "_uid",
                     "method": "uid",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasUid",
+                    "validate": false,
                     "optional": true,
-                    "label": "_uid"
+                    "original": "uid"
                 }
             ],
-            "schema": "DataSource",
             "name": "UserData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -1776,20 +1969,36 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "UserData s",
             "original": "ignition_user"
         }
     ],
     "resources": [],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -1799,8 +2008,6 @@
         "microlens"
     ],
     "name": "Ignition",
-    "parameters": [],
     "package": "terrafomo-ignition",
-    "type": "Provider",
     "original": "ignition"
 }
