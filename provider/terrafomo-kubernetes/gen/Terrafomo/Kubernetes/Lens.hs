@@ -206,9 +206,9 @@ module Terrafomo.Kubernetes.Lens
     , HasComputedExternalIps (..)
     , HasComputedTargetPort (..)
     , HasComputedRequests (..)
+    , HasComputedType (..)
     , HasComputedSelfLink (..)
     , HasComputedSelector (..)
-    , HasComputedType' (..)
     , HasComputedHostname (..)
     , HasComputedLoadBalancerIngress (..)
     , HasComputedResources (..)
@@ -1266,14 +1266,14 @@ class HasComputedTargetPort a b | a -> b where
 class HasComputedRequests a b | a -> b where
     computedRequests :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedSelfLink a b | a -> b where
     computedSelfLink :: a -> b
 
 class HasComputedSelector a b | a -> b where
     computedSelector :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedHostname a b | a -> b where
     computedHostname :: a -> b

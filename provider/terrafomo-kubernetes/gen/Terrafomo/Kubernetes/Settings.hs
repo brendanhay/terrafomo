@@ -270,6 +270,8 @@ module Terrafomo.Kubernetes.Settings
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
 
+import GHC.Base (($))
+
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
 import qualified Data.List.NonEmpty         as P
@@ -305,7 +307,7 @@ data CephFs s = CephFs'
     -- The path to key ring for User, default is /etc/ceph/user.secret More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
     --
-    , _secretRef  :: TF.Attr s [SecretRef s]
+    , _secretRef  :: TF.Attr s (SecretRef s)
     -- ^ @secret_ref@ - (Optional)
     -- Reference to the authentication secret for User, default is empty. More
     -- info:
@@ -367,9 +369,9 @@ instance P.HasSecretFile (CephFs s) (TF.Attr s P.Text) where
                (\s a -> s { _secretFile = a
                           } :: CephFs s)
 
-instance P.HasSecretRef (CephFs s) (TF.Attr s [SecretRef s]) where
+instance P.HasSecretRef (CephFs s) (TF.Attr s (SecretRef s)) where
     secretRef =
-        P.lens (_secretRef :: CephFs s -> TF.Attr s [SecretRef s])
+        P.lens (_secretRef :: CephFs s -> TF.Attr s (SecretRef s))
                (\s a -> s { _secretRef = a
                           } :: CephFs s)
 
@@ -469,11 +471,11 @@ instance P.HasVolumeId (Cinder s) (TF.Attr s P.Text) where
 
 -- | @post_start@ nested settings.
 data PostStart s = PostStart'
-    { _exec      :: TF.Attr s [Exec s]
+    { _exec      :: TF.Attr s (Exec s)
     -- ^ @exec@ - (Optional)
     -- Exec specifies the action to take.
     --
-    , _httpGet   :: TF.Attr s [HttpGet s]
+    , _httpGet   :: TF.Attr s (HttpGet s)
     -- ^ @http_get@ - (Optional)
     -- Specifies the http request to perform.
     --
@@ -502,15 +504,15 @@ newPostStart =
         , _tcpSocket = TF.Nil
         }
 
-instance P.HasExec (PostStart s) (TF.Attr s [Exec s]) where
+instance P.HasExec (PostStart s) (TF.Attr s (Exec s)) where
     exec =
-        P.lens (_exec :: PostStart s -> TF.Attr s [Exec s])
+        P.lens (_exec :: PostStart s -> TF.Attr s (Exec s))
                (\s a -> s { _exec = a
                           } :: PostStart s)
 
-instance P.HasHttpGet (PostStart s) (TF.Attr s [HttpGet s]) where
+instance P.HasHttpGet (PostStart s) (TF.Attr s (HttpGet s)) where
     httpGet =
-        P.lens (_httpGet :: PostStart s -> TF.Attr s [HttpGet s])
+        P.lens (_httpGet :: PostStart s -> TF.Attr s (HttpGet s))
                (\s a -> s { _httpGet = a
                           } :: PostStart s)
 
@@ -592,7 +594,7 @@ instance P.HasDatasetUuid (Flocker s) (TF.Attr s P.Text) where
 
 -- | @readiness_probe@ nested settings.
 data ReadinessProbe s = ReadinessProbe'
-    { _exec                :: TF.Attr s [Exec s]
+    { _exec                :: TF.Attr s (Exec s)
     -- ^ @exec@ - (Optional)
     -- Exec specifies the action to take.
     --
@@ -601,7 +603,7 @@ data ReadinessProbe s = ReadinessProbe'
     -- Minimum consecutive failures for the probe to be considered failed after
     -- having succeeded.
     --
-    , _httpGet             :: TF.Attr s [HttpGet s]
+    , _httpGet             :: TF.Attr s (HttpGet s)
     -- ^ @http_get@ - (Optional)
     -- Specifies the http request to perform.
     --
@@ -660,9 +662,9 @@ newReadinessProbe =
         , _timeoutSeconds = TF.value 1
         }
 
-instance P.HasExec (ReadinessProbe s) (TF.Attr s [Exec s]) where
+instance P.HasExec (ReadinessProbe s) (TF.Attr s (Exec s)) where
     exec =
-        P.lens (_exec :: ReadinessProbe s -> TF.Attr s [Exec s])
+        P.lens (_exec :: ReadinessProbe s -> TF.Attr s (Exec s))
                (\s a -> s { _exec = a
                           } :: ReadinessProbe s)
 
@@ -672,9 +674,9 @@ instance P.HasFailureThreshold (ReadinessProbe s) (TF.Attr s P.Integer) where
                (\s a -> s { _failureThreshold = a
                           } :: ReadinessProbe s)
 
-instance P.HasHttpGet (ReadinessProbe s) (TF.Attr s [HttpGet s]) where
+instance P.HasHttpGet (ReadinessProbe s) (TF.Attr s (HttpGet s)) where
     httpGet =
-        P.lens (_httpGet :: ReadinessProbe s -> TF.Attr s [HttpGet s])
+        P.lens (_httpGet :: ReadinessProbe s -> TF.Attr s (HttpGet s))
                (\s a -> s { _httpGet = a
                           } :: ReadinessProbe s)
 
@@ -754,7 +756,7 @@ data Env s = Env'
     -- double $$, ie: $$(VAR_NAME). Escaped references will never be expanded,
     -- regardless of whether the variable exists or not. Defaults to "".
     --
-    , _valueFrom :: TF.Attr s [ValueFrom s]
+    , _valueFrom :: TF.Attr s (ValueFrom s)
     -- ^ @value_from@ - (Optional)
     -- Source for the environment variable's value
     --
@@ -791,9 +793,9 @@ instance P.HasValue (Env s) (TF.Attr s P.Text) where
                (\s a -> s { _value = a
                           } :: Env s)
 
-instance P.HasValueFrom (Env s) (TF.Attr s [ValueFrom s]) where
+instance P.HasValueFrom (Env s) (TF.Attr s (ValueFrom s)) where
     valueFrom =
-        P.lens (_valueFrom :: Env s -> TF.Attr s [ValueFrom s])
+        P.lens (_valueFrom :: Env s -> TF.Attr s (ValueFrom s))
                (\s a -> s { _valueFrom = a
                           } :: Env s)
 
@@ -892,91 +894,91 @@ instance P.HasItems (DownwardApi s) (TF.Attr s [Items s]) where
 
 -- | @persistent_volume_source@ nested settings.
 data PersistentVolumeSource s = PersistentVolumeSource'
-    { _awsElasticBlockStore :: TF.Attr s [AwsElasticBlockStore s]
+    { _awsElasticBlockStore :: TF.Attr s (AwsElasticBlockStore s)
     -- ^ @aws_elastic_block_store@ - (Optional)
     -- Represents an AWS Disk resource that is attached to a kubelet's host machine
     -- and then exposed to the pod. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#awselasticblockstore
     --
-    , _azureDisk            :: TF.Attr s [AzureDisk s]
+    , _azureDisk            :: TF.Attr s (AzureDisk s)
     -- ^ @azure_disk@ - (Optional)
     -- Represents an Azure Data Disk mount on the host and bind mount to the pod.
     --
-    , _azureFile            :: TF.Attr s [AzureFile s]
+    , _azureFile            :: TF.Attr s (AzureFile s)
     -- ^ @azure_file@ - (Optional)
     -- Represents an Azure File Service mount on the host and bind mount to the
     -- pod.
     --
-    , _cephFs               :: TF.Attr s [CephFs s]
+    , _cephFs               :: TF.Attr s (CephFs s)
     -- ^ @ceph_fs@ - (Optional)
     -- Represents a Ceph FS mount on the host that shares a pod's lifetime
     --
-    , _cinder               :: TF.Attr s [Cinder s]
+    , _cinder               :: TF.Attr s (Cinder s)
     -- ^ @cinder@ - (Optional)
     -- Represents a cinder volume attached and mounted on kubelets host machine.
     -- More info: http://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
     --
-    , _fc                   :: TF.Attr s [Fc s]
+    , _fc                   :: TF.Attr s (Fc s)
     -- ^ @fc@ - (Optional)
     -- Represents a Fibre Channel resource that is attached to a kubelet's host
     -- machine and then exposed to the pod.
     --
-    , _flexVolume           :: TF.Attr s [FlexVolume s]
+    , _flexVolume           :: TF.Attr s (FlexVolume s)
     -- ^ @flex_volume@ - (Optional)
     -- Represents a generic volume resource that is provisioned/attached using an
     -- exec based plugin. This is an alpha feature and may change in future.
     --
-    , _flocker              :: TF.Attr s [Flocker s]
+    , _flocker              :: TF.Attr s (Flocker s)
     -- ^ @flocker@ - (Optional)
     -- Represents a Flocker volume attached to a kubelet's host machine and exposed
     -- to the pod for its usage. This depends on the Flocker control service being
     -- running
     --
-    , _gcePersistentDisk    :: TF.Attr s [GcePersistentDisk s]
+    , _gcePersistentDisk    :: TF.Attr s (GcePersistentDisk s)
     -- ^ @gce_persistent_disk@ - (Optional)
     -- Represents a GCE Disk resource that is attached to a kubelet's host machine
     -- and then exposed to the pod. Provisioned by an admin. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#gcepersistentdisk
     --
-    , _glusterfs            :: TF.Attr s [Glusterfs s]
+    , _glusterfs            :: TF.Attr s (Glusterfs s)
     -- ^ @glusterfs@ - (Optional)
     -- Represents a Glusterfs volume that is attached to a host and exposed to the
     -- pod. Provisioned by an admin. More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md
     --
-    , _hostPath             :: TF.Attr s [HostPath s]
+    , _hostPath             :: TF.Attr s (HostPath s)
     -- ^ @host_path@ - (Optional)
     -- Represents a directory on the host. Provisioned by a developer or tester.
     -- This is useful for single-node development and testing only! On-host storage
     -- is not supported in any way and WILL NOT WORK in a multi-node cluster. More
     -- info: http://kubernetes.io/docs/user-guide/volumes#hostpath
     --
-    , _iscsi                :: TF.Attr s [Iscsi s]
+    , _iscsi                :: TF.Attr s (Iscsi s)
     -- ^ @iscsi@ - (Optional)
     -- Represents an ISCSI Disk resource that is attached to a kubelet's host
     -- machine and then exposed to the pod. Provisioned by an admin.
     --
-    , _nfs                  :: TF.Attr s [Nfs s]
+    , _nfs                  :: TF.Attr s (Nfs s)
     -- ^ @nfs@ - (Optional)
     -- Represents an NFS mount on the host. Provisioned by an admin. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#nfs
     --
-    , _photonPersistentDisk :: TF.Attr s [PhotonPersistentDisk s]
+    , _photonPersistentDisk :: TF.Attr s (PhotonPersistentDisk s)
     -- ^ @photon_persistent_disk@ - (Optional)
     -- Represents a PhotonController persistent disk attached and mounted on
     -- kubelets host machine
     --
-    , _quobyte              :: TF.Attr s [Quobyte s]
+    , _quobyte              :: TF.Attr s (Quobyte s)
     -- ^ @quobyte@ - (Optional)
     -- Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
     --
-    , _rbd                  :: TF.Attr s [Rbd s]
+    , _rbd                  :: TF.Attr s (Rbd s)
     -- ^ @rbd@ - (Optional)
     -- Represents a Rados Block Device mount on the host that shares a pod's
     -- lifetime. More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md
     --
-    , _vsphereVolume        :: TF.Attr s [VsphereVolume s]
+    , _vsphereVolume        :: TF.Attr s (VsphereVolume s)
     -- ^ @vsphere_volume@ - (Optional)
     -- Represents a vSphere volume attached and mounted on kubelets host machine
     --
@@ -1028,105 +1030,105 @@ newPersistentVolumeSource =
         , _vsphereVolume = TF.Nil
         }
 
-instance P.HasAwsElasticBlockStore (PersistentVolumeSource s) (TF.Attr s [AwsElasticBlockStore s]) where
+instance P.HasAwsElasticBlockStore (PersistentVolumeSource s) (TF.Attr s (AwsElasticBlockStore s)) where
     awsElasticBlockStore =
-        P.lens (_awsElasticBlockStore :: PersistentVolumeSource s -> TF.Attr s [AwsElasticBlockStore s])
+        P.lens (_awsElasticBlockStore :: PersistentVolumeSource s -> TF.Attr s (AwsElasticBlockStore s))
                (\s a -> s { _awsElasticBlockStore = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasAzureDisk (PersistentVolumeSource s) (TF.Attr s [AzureDisk s]) where
+instance P.HasAzureDisk (PersistentVolumeSource s) (TF.Attr s (AzureDisk s)) where
     azureDisk =
-        P.lens (_azureDisk :: PersistentVolumeSource s -> TF.Attr s [AzureDisk s])
+        P.lens (_azureDisk :: PersistentVolumeSource s -> TF.Attr s (AzureDisk s))
                (\s a -> s { _azureDisk = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasAzureFile (PersistentVolumeSource s) (TF.Attr s [AzureFile s]) where
+instance P.HasAzureFile (PersistentVolumeSource s) (TF.Attr s (AzureFile s)) where
     azureFile =
-        P.lens (_azureFile :: PersistentVolumeSource s -> TF.Attr s [AzureFile s])
+        P.lens (_azureFile :: PersistentVolumeSource s -> TF.Attr s (AzureFile s))
                (\s a -> s { _azureFile = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasCephFs (PersistentVolumeSource s) (TF.Attr s [CephFs s]) where
+instance P.HasCephFs (PersistentVolumeSource s) (TF.Attr s (CephFs s)) where
     cephFs =
-        P.lens (_cephFs :: PersistentVolumeSource s -> TF.Attr s [CephFs s])
+        P.lens (_cephFs :: PersistentVolumeSource s -> TF.Attr s (CephFs s))
                (\s a -> s { _cephFs = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasCinder (PersistentVolumeSource s) (TF.Attr s [Cinder s]) where
+instance P.HasCinder (PersistentVolumeSource s) (TF.Attr s (Cinder s)) where
     cinder =
-        P.lens (_cinder :: PersistentVolumeSource s -> TF.Attr s [Cinder s])
+        P.lens (_cinder :: PersistentVolumeSource s -> TF.Attr s (Cinder s))
                (\s a -> s { _cinder = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasFc (PersistentVolumeSource s) (TF.Attr s [Fc s]) where
+instance P.HasFc (PersistentVolumeSource s) (TF.Attr s (Fc s)) where
     fc =
-        P.lens (_fc :: PersistentVolumeSource s -> TF.Attr s [Fc s])
+        P.lens (_fc :: PersistentVolumeSource s -> TF.Attr s (Fc s))
                (\s a -> s { _fc = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasFlexVolume (PersistentVolumeSource s) (TF.Attr s [FlexVolume s]) where
+instance P.HasFlexVolume (PersistentVolumeSource s) (TF.Attr s (FlexVolume s)) where
     flexVolume =
-        P.lens (_flexVolume :: PersistentVolumeSource s -> TF.Attr s [FlexVolume s])
+        P.lens (_flexVolume :: PersistentVolumeSource s -> TF.Attr s (FlexVolume s))
                (\s a -> s { _flexVolume = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasFlocker (PersistentVolumeSource s) (TF.Attr s [Flocker s]) where
+instance P.HasFlocker (PersistentVolumeSource s) (TF.Attr s (Flocker s)) where
     flocker =
-        P.lens (_flocker :: PersistentVolumeSource s -> TF.Attr s [Flocker s])
+        P.lens (_flocker :: PersistentVolumeSource s -> TF.Attr s (Flocker s))
                (\s a -> s { _flocker = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasGcePersistentDisk (PersistentVolumeSource s) (TF.Attr s [GcePersistentDisk s]) where
+instance P.HasGcePersistentDisk (PersistentVolumeSource s) (TF.Attr s (GcePersistentDisk s)) where
     gcePersistentDisk =
-        P.lens (_gcePersistentDisk :: PersistentVolumeSource s -> TF.Attr s [GcePersistentDisk s])
+        P.lens (_gcePersistentDisk :: PersistentVolumeSource s -> TF.Attr s (GcePersistentDisk s))
                (\s a -> s { _gcePersistentDisk = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasGlusterfs (PersistentVolumeSource s) (TF.Attr s [Glusterfs s]) where
+instance P.HasGlusterfs (PersistentVolumeSource s) (TF.Attr s (Glusterfs s)) where
     glusterfs =
-        P.lens (_glusterfs :: PersistentVolumeSource s -> TF.Attr s [Glusterfs s])
+        P.lens (_glusterfs :: PersistentVolumeSource s -> TF.Attr s (Glusterfs s))
                (\s a -> s { _glusterfs = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasHostPath (PersistentVolumeSource s) (TF.Attr s [HostPath s]) where
+instance P.HasHostPath (PersistentVolumeSource s) (TF.Attr s (HostPath s)) where
     hostPath =
-        P.lens (_hostPath :: PersistentVolumeSource s -> TF.Attr s [HostPath s])
+        P.lens (_hostPath :: PersistentVolumeSource s -> TF.Attr s (HostPath s))
                (\s a -> s { _hostPath = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasIscsi (PersistentVolumeSource s) (TF.Attr s [Iscsi s]) where
+instance P.HasIscsi (PersistentVolumeSource s) (TF.Attr s (Iscsi s)) where
     iscsi =
-        P.lens (_iscsi :: PersistentVolumeSource s -> TF.Attr s [Iscsi s])
+        P.lens (_iscsi :: PersistentVolumeSource s -> TF.Attr s (Iscsi s))
                (\s a -> s { _iscsi = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasNfs (PersistentVolumeSource s) (TF.Attr s [Nfs s]) where
+instance P.HasNfs (PersistentVolumeSource s) (TF.Attr s (Nfs s)) where
     nfs =
-        P.lens (_nfs :: PersistentVolumeSource s -> TF.Attr s [Nfs s])
+        P.lens (_nfs :: PersistentVolumeSource s -> TF.Attr s (Nfs s))
                (\s a -> s { _nfs = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasPhotonPersistentDisk (PersistentVolumeSource s) (TF.Attr s [PhotonPersistentDisk s]) where
+instance P.HasPhotonPersistentDisk (PersistentVolumeSource s) (TF.Attr s (PhotonPersistentDisk s)) where
     photonPersistentDisk =
-        P.lens (_photonPersistentDisk :: PersistentVolumeSource s -> TF.Attr s [PhotonPersistentDisk s])
+        P.lens (_photonPersistentDisk :: PersistentVolumeSource s -> TF.Attr s (PhotonPersistentDisk s))
                (\s a -> s { _photonPersistentDisk = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasQuobyte (PersistentVolumeSource s) (TF.Attr s [Quobyte s]) where
+instance P.HasQuobyte (PersistentVolumeSource s) (TF.Attr s (Quobyte s)) where
     quobyte =
-        P.lens (_quobyte :: PersistentVolumeSource s -> TF.Attr s [Quobyte s])
+        P.lens (_quobyte :: PersistentVolumeSource s -> TF.Attr s (Quobyte s))
                (\s a -> s { _quobyte = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasRbd (PersistentVolumeSource s) (TF.Attr s [Rbd s]) where
+instance P.HasRbd (PersistentVolumeSource s) (TF.Attr s (Rbd s)) where
     rbd =
-        P.lens (_rbd :: PersistentVolumeSource s -> TF.Attr s [Rbd s])
+        P.lens (_rbd :: PersistentVolumeSource s -> TF.Attr s (Rbd s))
                (\s a -> s { _rbd = a
                           } :: PersistentVolumeSource s)
 
-instance P.HasVsphereVolume (PersistentVolumeSource s) (TF.Attr s [VsphereVolume s]) where
+instance P.HasVsphereVolume (PersistentVolumeSource s) (TF.Attr s (VsphereVolume s)) where
     vsphereVolume =
-        P.lens (_vsphereVolume :: PersistentVolumeSource s -> TF.Attr s [VsphereVolume s])
+        P.lens (_vsphereVolume :: PersistentVolumeSource s -> TF.Attr s (VsphereVolume s))
                (\s a -> s { _vsphereVolume = a
                           } :: PersistentVolumeSource s)
 
@@ -1204,84 +1206,84 @@ instance P.HasName (SecretRef s) (TF.Attr s P.Text) where
 
 -- | @volume@ nested settings.
 data Volume s = Volume'
-    { _awsElasticBlockStore  :: TF.Attr s [AwsElasticBlockStore s]
+    { _awsElasticBlockStore  :: TF.Attr s (AwsElasticBlockStore s)
     -- ^ @aws_elastic_block_store@ - (Optional)
     -- Represents an AWS Disk resource that is attached to a kubelet's host machine
     -- and then exposed to the pod. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#awselasticblockstore
     --
-    , _azureDisk             :: TF.Attr s [AzureDisk s]
+    , _azureDisk             :: TF.Attr s (AzureDisk s)
     -- ^ @azure_disk@ - (Optional)
     -- Represents an Azure Data Disk mount on the host and bind mount to the pod.
     --
-    , _azureFile             :: TF.Attr s [AzureFile s]
+    , _azureFile             :: TF.Attr s (AzureFile s)
     -- ^ @azure_file@ - (Optional)
     -- Represents an Azure File Service mount on the host and bind mount to the
     -- pod.
     --
-    , _cephFs                :: TF.Attr s [CephFs s]
+    , _cephFs                :: TF.Attr s (CephFs s)
     -- ^ @ceph_fs@ - (Optional)
     -- Represents a Ceph FS mount on the host that shares a pod's lifetime
     --
-    , _cinder                :: TF.Attr s [Cinder s]
+    , _cinder                :: TF.Attr s (Cinder s)
     -- ^ @cinder@ - (Optional)
     -- Represents a cinder volume attached and mounted on kubelets host machine.
     -- More info: http://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
     --
-    , _configMap             :: TF.Attr s [ConfigMap s]
+    , _configMap             :: TF.Attr s (ConfigMap s)
     -- ^ @config_map@ - (Optional)
     -- ConfigMap represents a configMap that should populate this volume
     --
-    , _downwardApi           :: TF.Attr s [DownwardApi s]
+    , _downwardApi           :: TF.Attr s (DownwardApi s)
     -- ^ @downward_api@ - (Optional)
     -- DownwardAPI represents downward API about the pod that should populate this
     -- volume
     --
-    , _emptyDir              :: TF.Attr s [EmptyDir s]
+    , _emptyDir              :: TF.Attr s (EmptyDir s)
     -- ^ @empty_dir@ - (Optional)
     -- EmptyDir represents a temporary directory that shares a pod's lifetime. More
     -- info: http://kubernetes.io/docs/user-guide/volumes#emptydir
     --
-    , _fc                    :: TF.Attr s [Fc s]
+    , _fc                    :: TF.Attr s (Fc s)
     -- ^ @fc@ - (Optional)
     -- Represents a Fibre Channel resource that is attached to a kubelet's host
     -- machine and then exposed to the pod.
     --
-    , _flexVolume            :: TF.Attr s [FlexVolume s]
+    , _flexVolume            :: TF.Attr s (FlexVolume s)
     -- ^ @flex_volume@ - (Optional)
     -- Represents a generic volume resource that is provisioned/attached using an
     -- exec based plugin. This is an alpha feature and may change in future.
     --
-    , _flocker               :: TF.Attr s [Flocker s]
+    , _flocker               :: TF.Attr s (Flocker s)
     -- ^ @flocker@ - (Optional)
     -- Represents a Flocker volume attached to a kubelet's host machine and exposed
     -- to the pod for its usage. This depends on the Flocker control service being
     -- running
     --
-    , _gcePersistentDisk     :: TF.Attr s [GcePersistentDisk s]
+    , _gcePersistentDisk     :: TF.Attr s (GcePersistentDisk s)
     -- ^ @gce_persistent_disk@ - (Optional)
     -- Represents a GCE Disk resource that is attached to a kubelet's host machine
     -- and then exposed to the pod. Provisioned by an admin. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#gcepersistentdisk
     --
-    , _gitRepo               :: TF.Attr s [GitRepo s]
+    , _gitRepo               :: TF.Attr s (GitRepo s)
     -- ^ @git_repo@ - (Optional)
     -- GitRepo represents a git repository at a particular revision.
     --
-    , _glusterfs             :: TF.Attr s [Glusterfs s]
+    , _glusterfs             :: TF.Attr s (Glusterfs s)
     -- ^ @glusterfs@ - (Optional)
     -- Represents a Glusterfs volume that is attached to a host and exposed to the
     -- pod. Provisioned by an admin. More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md
     --
-    , _hostPath              :: TF.Attr s [HostPath s]
+    , _hostPath              :: TF.Attr s (HostPath s)
     -- ^ @host_path@ - (Optional)
     -- Represents a directory on the host. Provisioned by a developer or tester.
     -- This is useful for single-node development and testing only! On-host storage
     -- is not supported in any way and WILL NOT WORK in a multi-node cluster. More
     -- info: http://kubernetes.io/docs/user-guide/volumes#hostpath
     --
-    , _iscsi                 :: TF.Attr s [Iscsi s]
+    , _iscsi                 :: TF.Attr s (Iscsi s)
     -- ^ @iscsi@ - (Optional)
     -- Represents an ISCSI Disk resource that is attached to a kubelet's host
     -- machine and then exposed to the pod. Provisioned by an admin.
@@ -1291,36 +1293,36 @@ data Volume s = Volume'
     -- Volume's name. Must be a DNS_LABEL and unique within the pod. More info:
     -- http://kubernetes.io/docs/user-guide/identifiers#names
     --
-    , _nfs                   :: TF.Attr s [Nfs s]
+    , _nfs                   :: TF.Attr s (Nfs s)
     -- ^ @nfs@ - (Optional)
     -- Represents an NFS mount on the host. Provisioned by an admin. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#nfs
     --
-    , _persistentVolumeClaim :: TF.Attr s [PersistentVolumeClaim s]
+    , _persistentVolumeClaim :: TF.Attr s (PersistentVolumeClaim s)
     -- ^ @persistent_volume_claim@ - (Optional)
     -- The specification of a persistent volume.
     --
-    , _photonPersistentDisk  :: TF.Attr s [PhotonPersistentDisk s]
+    , _photonPersistentDisk  :: TF.Attr s (PhotonPersistentDisk s)
     -- ^ @photon_persistent_disk@ - (Optional)
     -- Represents a PhotonController persistent disk attached and mounted on
     -- kubelets host machine
     --
-    , _quobyte               :: TF.Attr s [Quobyte s]
+    , _quobyte               :: TF.Attr s (Quobyte s)
     -- ^ @quobyte@ - (Optional)
     -- Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
     --
-    , _rbd                   :: TF.Attr s [Rbd s]
+    , _rbd                   :: TF.Attr s (Rbd s)
     -- ^ @rbd@ - (Optional)
     -- Represents a Rados Block Device mount on the host that shares a pod's
     -- lifetime. More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md
     --
-    , _secret                :: TF.Attr s [Secret s]
+    , _secret                :: TF.Attr s (Secret s)
     -- ^ @secret@ - (Optional)
     -- Secret represents a secret that should populate this volume. More info:
     -- http://kubernetes.io/docs/user-guide/volumes#secrets
     --
-    , _vsphereVolume         :: TF.Attr s [VsphereVolume s]
+    , _vsphereVolume         :: TF.Attr s (VsphereVolume s)
     -- ^ @vsphere_volume@ - (Optional)
     -- Represents a vSphere volume attached and mounted on kubelets host machine
     --
@@ -1386,99 +1388,99 @@ newVolume =
         , _vsphereVolume = TF.Nil
         }
 
-instance P.HasAwsElasticBlockStore (Volume s) (TF.Attr s [AwsElasticBlockStore s]) where
+instance P.HasAwsElasticBlockStore (Volume s) (TF.Attr s (AwsElasticBlockStore s)) where
     awsElasticBlockStore =
-        P.lens (_awsElasticBlockStore :: Volume s -> TF.Attr s [AwsElasticBlockStore s])
+        P.lens (_awsElasticBlockStore :: Volume s -> TF.Attr s (AwsElasticBlockStore s))
                (\s a -> s { _awsElasticBlockStore = a
                           } :: Volume s)
 
-instance P.HasAzureDisk (Volume s) (TF.Attr s [AzureDisk s]) where
+instance P.HasAzureDisk (Volume s) (TF.Attr s (AzureDisk s)) where
     azureDisk =
-        P.lens (_azureDisk :: Volume s -> TF.Attr s [AzureDisk s])
+        P.lens (_azureDisk :: Volume s -> TF.Attr s (AzureDisk s))
                (\s a -> s { _azureDisk = a
                           } :: Volume s)
 
-instance P.HasAzureFile (Volume s) (TF.Attr s [AzureFile s]) where
+instance P.HasAzureFile (Volume s) (TF.Attr s (AzureFile s)) where
     azureFile =
-        P.lens (_azureFile :: Volume s -> TF.Attr s [AzureFile s])
+        P.lens (_azureFile :: Volume s -> TF.Attr s (AzureFile s))
                (\s a -> s { _azureFile = a
                           } :: Volume s)
 
-instance P.HasCephFs (Volume s) (TF.Attr s [CephFs s]) where
+instance P.HasCephFs (Volume s) (TF.Attr s (CephFs s)) where
     cephFs =
-        P.lens (_cephFs :: Volume s -> TF.Attr s [CephFs s])
+        P.lens (_cephFs :: Volume s -> TF.Attr s (CephFs s))
                (\s a -> s { _cephFs = a
                           } :: Volume s)
 
-instance P.HasCinder (Volume s) (TF.Attr s [Cinder s]) where
+instance P.HasCinder (Volume s) (TF.Attr s (Cinder s)) where
     cinder =
-        P.lens (_cinder :: Volume s -> TF.Attr s [Cinder s])
+        P.lens (_cinder :: Volume s -> TF.Attr s (Cinder s))
                (\s a -> s { _cinder = a
                           } :: Volume s)
 
-instance P.HasConfigMap (Volume s) (TF.Attr s [ConfigMap s]) where
+instance P.HasConfigMap (Volume s) (TF.Attr s (ConfigMap s)) where
     configMap =
-        P.lens (_configMap :: Volume s -> TF.Attr s [ConfigMap s])
+        P.lens (_configMap :: Volume s -> TF.Attr s (ConfigMap s))
                (\s a -> s { _configMap = a
                           } :: Volume s)
 
-instance P.HasDownwardApi (Volume s) (TF.Attr s [DownwardApi s]) where
+instance P.HasDownwardApi (Volume s) (TF.Attr s (DownwardApi s)) where
     downwardApi =
-        P.lens (_downwardApi :: Volume s -> TF.Attr s [DownwardApi s])
+        P.lens (_downwardApi :: Volume s -> TF.Attr s (DownwardApi s))
                (\s a -> s { _downwardApi = a
                           } :: Volume s)
 
-instance P.HasEmptyDir (Volume s) (TF.Attr s [EmptyDir s]) where
+instance P.HasEmptyDir (Volume s) (TF.Attr s (EmptyDir s)) where
     emptyDir =
-        P.lens (_emptyDir :: Volume s -> TF.Attr s [EmptyDir s])
+        P.lens (_emptyDir :: Volume s -> TF.Attr s (EmptyDir s))
                (\s a -> s { _emptyDir = a
                           } :: Volume s)
 
-instance P.HasFc (Volume s) (TF.Attr s [Fc s]) where
+instance P.HasFc (Volume s) (TF.Attr s (Fc s)) where
     fc =
-        P.lens (_fc :: Volume s -> TF.Attr s [Fc s])
+        P.lens (_fc :: Volume s -> TF.Attr s (Fc s))
                (\s a -> s { _fc = a
                           } :: Volume s)
 
-instance P.HasFlexVolume (Volume s) (TF.Attr s [FlexVolume s]) where
+instance P.HasFlexVolume (Volume s) (TF.Attr s (FlexVolume s)) where
     flexVolume =
-        P.lens (_flexVolume :: Volume s -> TF.Attr s [FlexVolume s])
+        P.lens (_flexVolume :: Volume s -> TF.Attr s (FlexVolume s))
                (\s a -> s { _flexVolume = a
                           } :: Volume s)
 
-instance P.HasFlocker (Volume s) (TF.Attr s [Flocker s]) where
+instance P.HasFlocker (Volume s) (TF.Attr s (Flocker s)) where
     flocker =
-        P.lens (_flocker :: Volume s -> TF.Attr s [Flocker s])
+        P.lens (_flocker :: Volume s -> TF.Attr s (Flocker s))
                (\s a -> s { _flocker = a
                           } :: Volume s)
 
-instance P.HasGcePersistentDisk (Volume s) (TF.Attr s [GcePersistentDisk s]) where
+instance P.HasGcePersistentDisk (Volume s) (TF.Attr s (GcePersistentDisk s)) where
     gcePersistentDisk =
-        P.lens (_gcePersistentDisk :: Volume s -> TF.Attr s [GcePersistentDisk s])
+        P.lens (_gcePersistentDisk :: Volume s -> TF.Attr s (GcePersistentDisk s))
                (\s a -> s { _gcePersistentDisk = a
                           } :: Volume s)
 
-instance P.HasGitRepo (Volume s) (TF.Attr s [GitRepo s]) where
+instance P.HasGitRepo (Volume s) (TF.Attr s (GitRepo s)) where
     gitRepo =
-        P.lens (_gitRepo :: Volume s -> TF.Attr s [GitRepo s])
+        P.lens (_gitRepo :: Volume s -> TF.Attr s (GitRepo s))
                (\s a -> s { _gitRepo = a
                           } :: Volume s)
 
-instance P.HasGlusterfs (Volume s) (TF.Attr s [Glusterfs s]) where
+instance P.HasGlusterfs (Volume s) (TF.Attr s (Glusterfs s)) where
     glusterfs =
-        P.lens (_glusterfs :: Volume s -> TF.Attr s [Glusterfs s])
+        P.lens (_glusterfs :: Volume s -> TF.Attr s (Glusterfs s))
                (\s a -> s { _glusterfs = a
                           } :: Volume s)
 
-instance P.HasHostPath (Volume s) (TF.Attr s [HostPath s]) where
+instance P.HasHostPath (Volume s) (TF.Attr s (HostPath s)) where
     hostPath =
-        P.lens (_hostPath :: Volume s -> TF.Attr s [HostPath s])
+        P.lens (_hostPath :: Volume s -> TF.Attr s (HostPath s))
                (\s a -> s { _hostPath = a
                           } :: Volume s)
 
-instance P.HasIscsi (Volume s) (TF.Attr s [Iscsi s]) where
+instance P.HasIscsi (Volume s) (TF.Attr s (Iscsi s)) where
     iscsi =
-        P.lens (_iscsi :: Volume s -> TF.Attr s [Iscsi s])
+        P.lens (_iscsi :: Volume s -> TF.Attr s (Iscsi s))
                (\s a -> s { _iscsi = a
                           } :: Volume s)
 
@@ -1488,45 +1490,45 @@ instance P.HasName (Volume s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: Volume s)
 
-instance P.HasNfs (Volume s) (TF.Attr s [Nfs s]) where
+instance P.HasNfs (Volume s) (TF.Attr s (Nfs s)) where
     nfs =
-        P.lens (_nfs :: Volume s -> TF.Attr s [Nfs s])
+        P.lens (_nfs :: Volume s -> TF.Attr s (Nfs s))
                (\s a -> s { _nfs = a
                           } :: Volume s)
 
-instance P.HasPersistentVolumeClaim (Volume s) (TF.Attr s [PersistentVolumeClaim s]) where
+instance P.HasPersistentVolumeClaim (Volume s) (TF.Attr s (PersistentVolumeClaim s)) where
     persistentVolumeClaim =
-        P.lens (_persistentVolumeClaim :: Volume s -> TF.Attr s [PersistentVolumeClaim s])
+        P.lens (_persistentVolumeClaim :: Volume s -> TF.Attr s (PersistentVolumeClaim s))
                (\s a -> s { _persistentVolumeClaim = a
                           } :: Volume s)
 
-instance P.HasPhotonPersistentDisk (Volume s) (TF.Attr s [PhotonPersistentDisk s]) where
+instance P.HasPhotonPersistentDisk (Volume s) (TF.Attr s (PhotonPersistentDisk s)) where
     photonPersistentDisk =
-        P.lens (_photonPersistentDisk :: Volume s -> TF.Attr s [PhotonPersistentDisk s])
+        P.lens (_photonPersistentDisk :: Volume s -> TF.Attr s (PhotonPersistentDisk s))
                (\s a -> s { _photonPersistentDisk = a
                           } :: Volume s)
 
-instance P.HasQuobyte (Volume s) (TF.Attr s [Quobyte s]) where
+instance P.HasQuobyte (Volume s) (TF.Attr s (Quobyte s)) where
     quobyte =
-        P.lens (_quobyte :: Volume s -> TF.Attr s [Quobyte s])
+        P.lens (_quobyte :: Volume s -> TF.Attr s (Quobyte s))
                (\s a -> s { _quobyte = a
                           } :: Volume s)
 
-instance P.HasRbd (Volume s) (TF.Attr s [Rbd s]) where
+instance P.HasRbd (Volume s) (TF.Attr s (Rbd s)) where
     rbd =
-        P.lens (_rbd :: Volume s -> TF.Attr s [Rbd s])
+        P.lens (_rbd :: Volume s -> TF.Attr s (Rbd s))
                (\s a -> s { _rbd = a
                           } :: Volume s)
 
-instance P.HasSecret (Volume s) (TF.Attr s [Secret s]) where
+instance P.HasSecret (Volume s) (TF.Attr s (Secret s)) where
     secret =
-        P.lens (_secret :: Volume s -> TF.Attr s [Secret s])
+        P.lens (_secret :: Volume s -> TF.Attr s (Secret s))
                (\s a -> s { _secret = a
                           } :: Volume s)
 
-instance P.HasVsphereVolume (Volume s) (TF.Attr s [VsphereVolume s]) where
+instance P.HasVsphereVolume (Volume s) (TF.Attr s (VsphereVolume s)) where
     vsphereVolume =
-        P.lens (_vsphereVolume :: Volume s -> TF.Attr s [VsphereVolume s])
+        P.lens (_vsphereVolume :: Volume s -> TF.Attr s (VsphereVolume s))
                (\s a -> s { _vsphereVolume = a
                           } :: Volume s)
 
@@ -1843,10 +1845,10 @@ newLimits =
     Limits'
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (Limits s)) (TF.Attr s P.Text) where
-    computedCpu x = TF.compute (TF.refKey x) "cpu"
+    computedCpu x = TF.compute (TF.refKey x) "_computedCpu"
 
 instance s ~ s' => P.HasComputedMemory (TF.Ref s' (Limits s)) (TF.Attr s P.Text) where
-    computedMemory x = TF.compute (TF.refKey x) "memory"
+    computedMemory x = TF.compute (TF.refKey x) "_computedMemory"
 
 -- | @lifecycle@ nested settings.
 data Lifecycle s = Lifecycle'
@@ -1963,11 +1965,11 @@ newResources
 newResources =
     Resources'
 
-instance s ~ s' => P.HasComputedLimits (TF.Ref s' (Resources s)) (TF.Attr s [Limits s]) where
-    computedLimits x = TF.compute (TF.refKey x) "limits"
+instance s ~ s' => P.HasComputedLimits (TF.Ref s' (Resources s)) (TF.Attr s (Limits s)) where
+    computedLimits x = TF.compute (TF.refKey x) "_computedLimits"
 
-instance s ~ s' => P.HasComputedRequests (TF.Ref s' (Resources s)) (TF.Attr s [Requests s]) where
-    computedRequests x = TF.compute (TF.refKey x) "requests"
+instance s ~ s' => P.HasComputedRequests (TF.Ref s' (Resources s)) (TF.Attr s (Requests s)) where
+    computedRequests x = TF.compute (TF.refKey x) "_computedRequests"
 
 -- | @http_get@ nested settings.
 data HttpGet s = HttpGet'
@@ -2197,7 +2199,7 @@ data Rbd s = Rbd'
     -- More info:
     -- http://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
     --
-    , _secretRef    :: TF.Attr s [SecretRef s]
+    , _secretRef    :: TF.Attr s (SecretRef s)
     -- ^ @secret_ref@ - (Optional)
     -- Name of the authentication secret for RBDUser. If provided overrides
     -- keyring. Default is nil. More info:
@@ -2269,14 +2271,14 @@ instance P.HasReadOnly (Rbd s) (TF.Attr s P.Bool) where
                (\s a -> s { _readOnly = a
                           } :: Rbd s)
 
-instance P.HasSecretRef (Rbd s) (TF.Attr s [SecretRef s]) where
+instance P.HasSecretRef (Rbd s) (TF.Attr s (SecretRef s)) where
     secretRef =
-        P.lens (_secretRef :: Rbd s -> TF.Attr s [SecretRef s])
+        P.lens (_secretRef :: Rbd s -> TF.Attr s (SecretRef s))
                (\s a -> s { _secretRef = a
                           } :: Rbd s)
 
 instance s ~ s' => P.HasComputedKeyring (TF.Ref s' (Rbd s)) (TF.Attr s P.Text) where
-    computedKeyring x = TF.compute (TF.refKey x) "keyring"
+    computedKeyring x = TF.compute (TF.refKey x) "_computedKeyring"
 
 -- | @container@ nested settings.
 data Container s = Container'
@@ -2310,12 +2312,12 @@ data Container s = Container'
     -- ^ @image@ - (Optional)
     -- Docker image name. More info: http://kubernetes.io/docs/user-guide/images
     --
-    , _lifecycle              :: TF.Attr s [Lifecycle s]
+    , _lifecycle              :: TF.Attr s (Lifecycle s)
     -- ^ @lifecycle@ - (Optional)
     -- Actions that the management system should take in response to container
     -- lifecycle events
     --
-    , _livenessProbe          :: TF.Attr s [LivenessProbe s]
+    , _livenessProbe          :: TF.Attr s (LivenessProbe s)
     -- ^ @liveness_probe@ - (Optional)
     -- Periodic probe of container liveness. Container will be restarted if the
     -- probe fails. Cannot be updated. More info:
@@ -2335,13 +2337,13 @@ data Container s = Container'
     -- default "0.0.0.0" address inside a container will be accessible from the
     -- network. Cannot be updated.
     --
-    , _readinessProbe         :: TF.Attr s [ReadinessProbe s]
+    , _readinessProbe         :: TF.Attr s (ReadinessProbe s)
     -- ^ @readiness_probe@ - (Optional)
     -- Periodic probe of container service readiness. Container will be removed
     -- from service endpoints if the probe fails. Cannot be updated. More info:
     -- http://kubernetes.io/docs/user-guide/pod-states#container-probes
     --
-    , _securityContext        :: TF.Attr s [SecurityContext s]
+    , _securityContext        :: TF.Attr s (SecurityContext s)
     -- ^ @security_context@ - (Optional)
     -- Security options the pod should run with. More info:
     -- http://releases.k8s.io/HEAD/docs/design/security_context.md
@@ -2455,15 +2457,15 @@ instance P.HasImage (Container s) (TF.Attr s P.Text) where
                (\s a -> s { _image = a
                           } :: Container s)
 
-instance P.HasLifecycle (Container s) (TF.Attr s [Lifecycle s]) where
+instance P.HasLifecycle (Container s) (TF.Attr s (Lifecycle s)) where
     lifecycle =
-        P.lens (_lifecycle :: Container s -> TF.Attr s [Lifecycle s])
+        P.lens (_lifecycle :: Container s -> TF.Attr s (Lifecycle s))
                (\s a -> s { _lifecycle = a
                           } :: Container s)
 
-instance P.HasLivenessProbe (Container s) (TF.Attr s [LivenessProbe s]) where
+instance P.HasLivenessProbe (Container s) (TF.Attr s (LivenessProbe s)) where
     livenessProbe =
-        P.lens (_livenessProbe :: Container s -> TF.Attr s [LivenessProbe s])
+        P.lens (_livenessProbe :: Container s -> TF.Attr s (LivenessProbe s))
                (\s a -> s { _livenessProbe = a
                           } :: Container s)
 
@@ -2479,15 +2481,15 @@ instance P.HasPort (Container s) (TF.Attr s [Port s]) where
                (\s a -> s { _port = a
                           } :: Container s)
 
-instance P.HasReadinessProbe (Container s) (TF.Attr s [ReadinessProbe s]) where
+instance P.HasReadinessProbe (Container s) (TF.Attr s (ReadinessProbe s)) where
     readinessProbe =
-        P.lens (_readinessProbe :: Container s -> TF.Attr s [ReadinessProbe s])
+        P.lens (_readinessProbe :: Container s -> TF.Attr s (ReadinessProbe s))
                (\s a -> s { _readinessProbe = a
                           } :: Container s)
 
-instance P.HasSecurityContext (Container s) (TF.Attr s [SecurityContext s]) where
+instance P.HasSecurityContext (Container s) (TF.Attr s (SecurityContext s)) where
     securityContext =
-        P.lens (_securityContext :: Container s -> TF.Attr s [SecurityContext s])
+        P.lens (_securityContext :: Container s -> TF.Attr s (SecurityContext s))
                (\s a -> s { _securityContext = a
                           } :: Container s)
 
@@ -2528,10 +2530,10 @@ instance P.HasWorkingDir (Container s) (TF.Attr s P.Text) where
                           } :: Container s)
 
 instance s ~ s' => P.HasComputedImagePullPolicy (TF.Ref s' (Container s)) (TF.Attr s P.Text) where
-    computedImagePullPolicy x = TF.compute (TF.refKey x) "image_pull_policy"
+    computedImagePullPolicy x = TF.compute (TF.refKey x) "_computedImagePullPolicy"
 
-instance s ~ s' => P.HasComputedResources (TF.Ref s' (Container s)) (TF.Attr s [Resources s]) where
-    computedResources x = TF.compute (TF.refKey x) "resources"
+instance s ~ s' => P.HasComputedResources (TF.Ref s' (Container s)) (TF.Attr s (Resources s)) where
+    computedResources x = TF.compute (TF.refKey x) "_computedResources"
 
 -- | @persistent_volume_claim@ nested settings.
 data PersistentVolumeClaim s = PersistentVolumeClaim'
@@ -2715,23 +2717,23 @@ instance P.HasSubPath (VolumeMount s) (TF.Attr s P.Text) where
 
 -- | @value_from@ nested settings.
 data ValueFrom s = ValueFrom'
-    { _configMapKeyRef  :: TF.Attr s [ConfigMapKeyRef s]
+    { _configMapKeyRef  :: TF.Attr s (ConfigMapKeyRef s)
     -- ^ @config_map_key_ref@ - (Optional)
     -- Selects a key of a ConfigMap.
     --
-    , _fieldRef         :: TF.Attr s [FieldRef s]
+    , _fieldRef         :: TF.Attr s (FieldRef s)
     -- ^ @field_ref@ - (Optional)
     -- Selects a field of the pod: supports metadata.name, metadata.namespace,
     -- metadata.labels, metadata.annotations, spec.nodeName,
     -- spec.serviceAccountName, status.podIP..
     --
-    , _resourceFieldRef :: TF.Attr s [ResourceFieldRef s]
+    , _resourceFieldRef :: TF.Attr s (ResourceFieldRef s)
     -- ^ @resource_field_ref@ - (Optional)
     -- Selects a field of the pod: supports metadata.name, metadata.namespace,
     -- metadata.labels, metadata.annotations, spec.nodeName,
     -- spec.serviceAccountName, status.podIP..
     --
-    , _secretKeyRef     :: TF.Attr s [SecretKeyRef s]
+    , _secretKeyRef     :: TF.Attr s (SecretKeyRef s)
     -- ^ @secret_key_ref@ - (Optional)
     -- Selects a field of the pod: supports metadata.name, metadata.namespace,
     -- metadata.labels, metadata.annotations, spec.nodeName,
@@ -2759,27 +2761,27 @@ newValueFrom =
         , _secretKeyRef = TF.Nil
         }
 
-instance P.HasConfigMapKeyRef (ValueFrom s) (TF.Attr s [ConfigMapKeyRef s]) where
+instance P.HasConfigMapKeyRef (ValueFrom s) (TF.Attr s (ConfigMapKeyRef s)) where
     configMapKeyRef =
-        P.lens (_configMapKeyRef :: ValueFrom s -> TF.Attr s [ConfigMapKeyRef s])
+        P.lens (_configMapKeyRef :: ValueFrom s -> TF.Attr s (ConfigMapKeyRef s))
                (\s a -> s { _configMapKeyRef = a
                           } :: ValueFrom s)
 
-instance P.HasFieldRef (ValueFrom s) (TF.Attr s [FieldRef s]) where
+instance P.HasFieldRef (ValueFrom s) (TF.Attr s (FieldRef s)) where
     fieldRef =
-        P.lens (_fieldRef :: ValueFrom s -> TF.Attr s [FieldRef s])
+        P.lens (_fieldRef :: ValueFrom s -> TF.Attr s (FieldRef s))
                (\s a -> s { _fieldRef = a
                           } :: ValueFrom s)
 
-instance P.HasResourceFieldRef (ValueFrom s) (TF.Attr s [ResourceFieldRef s]) where
+instance P.HasResourceFieldRef (ValueFrom s) (TF.Attr s (ResourceFieldRef s)) where
     resourceFieldRef =
-        P.lens (_resourceFieldRef :: ValueFrom s -> TF.Attr s [ResourceFieldRef s])
+        P.lens (_resourceFieldRef :: ValueFrom s -> TF.Attr s (ResourceFieldRef s))
                (\s a -> s { _resourceFieldRef = a
                           } :: ValueFrom s)
 
-instance P.HasSecretKeyRef (ValueFrom s) (TF.Attr s [SecretKeyRef s]) where
+instance P.HasSecretKeyRef (ValueFrom s) (TF.Attr s (SecretKeyRef s)) where
     secretKeyRef =
-        P.lens (_secretKeyRef :: ValueFrom s -> TF.Attr s [SecretKeyRef s])
+        P.lens (_secretKeyRef :: ValueFrom s -> TF.Attr s (SecretKeyRef s))
                (\s a -> s { _secretKeyRef = a
                           } :: ValueFrom s)
 
@@ -2798,10 +2800,10 @@ newRequests =
     Requests'
 
 instance s ~ s' => P.HasComputedCpu (TF.Ref s' (Requests s)) (TF.Attr s P.Text) where
-    computedCpu x = TF.compute (TF.refKey x) "cpu"
+    computedCpu x = TF.compute (TF.refKey x) "_computedCpu"
 
 instance s ~ s' => P.HasComputedMemory (TF.Ref s' (Requests s)) (TF.Attr s P.Text) where
-    computedMemory x = TF.compute (TF.refKey x) "memory"
+    computedMemory x = TF.compute (TF.refKey x) "_computedMemory"
 
 -- | @photon_persistent_disk@ nested settings.
 data PhotonPersistentDisk s = PhotonPersistentDisk'
@@ -2878,12 +2880,12 @@ data InitContainer s = InitContainer'
     -- ^ @image@ - (Optional)
     -- Docker image name. More info: http://kubernetes.io/docs/user-guide/images
     --
-    , _lifecycle              :: TF.Attr s [Lifecycle s]
+    , _lifecycle              :: TF.Attr s (Lifecycle s)
     -- ^ @lifecycle@ - (Optional)
     -- Actions that the management system should take in response to container
     -- lifecycle events
     --
-    , _livenessProbe          :: TF.Attr s [LivenessProbe s]
+    , _livenessProbe          :: TF.Attr s (LivenessProbe s)
     -- ^ @liveness_probe@ - (Optional)
     -- Periodic probe of container liveness. Container will be restarted if the
     -- probe fails. Cannot be updated. More info:
@@ -2903,13 +2905,13 @@ data InitContainer s = InitContainer'
     -- default "0.0.0.0" address inside a container will be accessible from the
     -- network. Cannot be updated.
     --
-    , _readinessProbe         :: TF.Attr s [ReadinessProbe s]
+    , _readinessProbe         :: TF.Attr s (ReadinessProbe s)
     -- ^ @readiness_probe@ - (Optional)
     -- Periodic probe of container service readiness. Container will be removed
     -- from service endpoints if the probe fails. Cannot be updated. More info:
     -- http://kubernetes.io/docs/user-guide/pod-states#container-probes
     --
-    , _securityContext        :: TF.Attr s [SecurityContext s]
+    , _securityContext        :: TF.Attr s (SecurityContext s)
     -- ^ @security_context@ - (Optional)
     -- Security options the pod should run with. More info:
     -- http://releases.k8s.io/HEAD/docs/design/security_context.md
@@ -3023,15 +3025,15 @@ instance P.HasImage (InitContainer s) (TF.Attr s P.Text) where
                (\s a -> s { _image = a
                           } :: InitContainer s)
 
-instance P.HasLifecycle (InitContainer s) (TF.Attr s [Lifecycle s]) where
+instance P.HasLifecycle (InitContainer s) (TF.Attr s (Lifecycle s)) where
     lifecycle =
-        P.lens (_lifecycle :: InitContainer s -> TF.Attr s [Lifecycle s])
+        P.lens (_lifecycle :: InitContainer s -> TF.Attr s (Lifecycle s))
                (\s a -> s { _lifecycle = a
                           } :: InitContainer s)
 
-instance P.HasLivenessProbe (InitContainer s) (TF.Attr s [LivenessProbe s]) where
+instance P.HasLivenessProbe (InitContainer s) (TF.Attr s (LivenessProbe s)) where
     livenessProbe =
-        P.lens (_livenessProbe :: InitContainer s -> TF.Attr s [LivenessProbe s])
+        P.lens (_livenessProbe :: InitContainer s -> TF.Attr s (LivenessProbe s))
                (\s a -> s { _livenessProbe = a
                           } :: InitContainer s)
 
@@ -3047,15 +3049,15 @@ instance P.HasPort (InitContainer s) (TF.Attr s [Port s]) where
                (\s a -> s { _port = a
                           } :: InitContainer s)
 
-instance P.HasReadinessProbe (InitContainer s) (TF.Attr s [ReadinessProbe s]) where
+instance P.HasReadinessProbe (InitContainer s) (TF.Attr s (ReadinessProbe s)) where
     readinessProbe =
-        P.lens (_readinessProbe :: InitContainer s -> TF.Attr s [ReadinessProbe s])
+        P.lens (_readinessProbe :: InitContainer s -> TF.Attr s (ReadinessProbe s))
                (\s a -> s { _readinessProbe = a
                           } :: InitContainer s)
 
-instance P.HasSecurityContext (InitContainer s) (TF.Attr s [SecurityContext s]) where
+instance P.HasSecurityContext (InitContainer s) (TF.Attr s (SecurityContext s)) where
     securityContext =
-        P.lens (_securityContext :: InitContainer s -> TF.Attr s [SecurityContext s])
+        P.lens (_securityContext :: InitContainer s -> TF.Attr s (SecurityContext s))
                (\s a -> s { _securityContext = a
                           } :: InitContainer s)
 
@@ -3096,10 +3098,10 @@ instance P.HasWorkingDir (InitContainer s) (TF.Attr s P.Text) where
                           } :: InitContainer s)
 
 instance s ~ s' => P.HasComputedImagePullPolicy (TF.Ref s' (InitContainer s)) (TF.Attr s P.Text) where
-    computedImagePullPolicy x = TF.compute (TF.refKey x) "image_pull_policy"
+    computedImagePullPolicy x = TF.compute (TF.refKey x) "_computedImagePullPolicy"
 
-instance s ~ s' => P.HasComputedResources (TF.Ref s' (InitContainer s)) (TF.Attr s [Resources s]) where
-    computedResources x = TF.compute (TF.refKey x) "resources"
+instance s ~ s' => P.HasComputedResources (TF.Ref s' (InitContainer s)) (TF.Attr s (Resources s)) where
+    computedResources x = TF.compute (TF.refKey x) "_computedResources"
 
 -- | @spec@ nested settings.
 data Spec s = Spec'
@@ -3116,31 +3118,31 @@ newSpec =
     Spec'
 
 instance s ~ s' => P.HasComputedClusterIp (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
-    computedClusterIp x = TF.compute (TF.refKey x) "cluster_ip"
+    computedClusterIp x = TF.compute (TF.refKey x) "_computedClusterIp"
 
 instance s ~ s' => P.HasComputedExternalIps (TF.Ref s' (Spec s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedExternalIps x = TF.compute (TF.refKey x) "external_ips"
+    computedExternalIps x = TF.compute (TF.refKey x) "_computedExternalIps"
 
 instance s ~ s' => P.HasComputedExternalName (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
-    computedExternalName x = TF.compute (TF.refKey x) "external_name"
+    computedExternalName x = TF.compute (TF.refKey x) "_computedExternalName"
 
 instance s ~ s' => P.HasComputedLoadBalancerIp (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
-    computedLoadBalancerIp x = TF.compute (TF.refKey x) "load_balancer_ip"
+    computedLoadBalancerIp x = TF.compute (TF.refKey x) "_computedLoadBalancerIp"
 
 instance s ~ s' => P.HasComputedLoadBalancerSourceRanges (TF.Ref s' (Spec s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
-    computedLoadBalancerSourceRanges x = TF.compute (TF.refKey x) "load_balancer_source_ranges"
+    computedLoadBalancerSourceRanges x = TF.compute (TF.refKey x) "_computedLoadBalancerSourceRanges"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (Spec s)) (TF.Attr s (P.NonEmpty (Port s))) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedSelector (TF.Ref s' (Spec s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedSelector x = TF.compute (TF.refKey x) "selector"
+    computedSelector x = TF.compute (TF.refKey x) "_computedSelector"
 
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
-    computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
+    computedSessionAffinity x = TF.compute (TF.refKey x) "_computedSessionAffinity"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (Spec s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 -- | @metadata@ nested settings.
 data Metadata s = Metadata'
@@ -3188,19 +3190,19 @@ instance P.HasLabels (Metadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text
                           } :: Metadata s)
 
 instance s ~ s' => P.HasComputedGeneration (TF.Ref s' (Metadata s)) (TF.Attr s P.Integer) where
-    computedGeneration x = TF.compute (TF.refKey x) "generation"
+    computedGeneration x = TF.compute (TF.refKey x) "_computedGeneration"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Metadata s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedResourceVersion (TF.Ref s' (Metadata s)) (TF.Attr s P.Text) where
-    computedResourceVersion x = TF.compute (TF.refKey x) "resource_version"
+    computedResourceVersion x = TF.compute (TF.refKey x) "_computedResourceVersion"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (Metadata s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedUid (TF.Ref s' (Metadata s)) (TF.Attr s P.Text) where
-    computedUid x = TF.compute (TF.refKey x) "uid"
+    computedUid x = TF.compute (TF.refKey x) "_computedUid"
 
 -- | @match_expressions@ nested settings.
 data MatchExpressions s = MatchExpressions'
@@ -3423,7 +3425,7 @@ instance P.HasType' (Limit s) (TF.Attr s P.Text) where
                           } :: Limit s)
 
 instance s ~ s' => P.HasComputedDefaultRequest (TF.Ref s' (Limit s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedDefaultRequest x = TF.compute (TF.refKey x) "default_request"
+    computedDefaultRequest x = TF.compute (TF.refKey x) "_computedDefaultRequest"
 
 -- | @load_balancer_ingress@ nested settings.
 data LoadBalancerIngress s = LoadBalancerIngress'
@@ -3440,10 +3442,10 @@ newLoadBalancerIngress =
     LoadBalancerIngress'
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (LoadBalancerIngress s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadBalancerIngress s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 -- | @fc@ nested settings.
 data Fc s = Fc'
@@ -3516,7 +3518,7 @@ instance P.HasTargetWwNs (Fc s) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
 
 -- | @liveness_probe@ nested settings.
 data LivenessProbe s = LivenessProbe'
-    { _exec                :: TF.Attr s [Exec s]
+    { _exec                :: TF.Attr s (Exec s)
     -- ^ @exec@ - (Optional)
     -- Exec specifies the action to take.
     --
@@ -3525,7 +3527,7 @@ data LivenessProbe s = LivenessProbe'
     -- Minimum consecutive failures for the probe to be considered failed after
     -- having succeeded.
     --
-    , _httpGet             :: TF.Attr s [HttpGet s]
+    , _httpGet             :: TF.Attr s (HttpGet s)
     -- ^ @http_get@ - (Optional)
     -- Specifies the http request to perform.
     --
@@ -3584,9 +3586,9 @@ newLivenessProbe =
         , _timeoutSeconds = TF.value 1
         }
 
-instance P.HasExec (LivenessProbe s) (TF.Attr s [Exec s]) where
+instance P.HasExec (LivenessProbe s) (TF.Attr s (Exec s)) where
     exec =
-        P.lens (_exec :: LivenessProbe s -> TF.Attr s [Exec s])
+        P.lens (_exec :: LivenessProbe s -> TF.Attr s (Exec s))
                (\s a -> s { _exec = a
                           } :: LivenessProbe s)
 
@@ -3596,9 +3598,9 @@ instance P.HasFailureThreshold (LivenessProbe s) (TF.Attr s P.Integer) where
                (\s a -> s { _failureThreshold = a
                           } :: LivenessProbe s)
 
-instance P.HasHttpGet (LivenessProbe s) (TF.Attr s [HttpGet s]) where
+instance P.HasHttpGet (LivenessProbe s) (TF.Attr s (HttpGet s)) where
     httpGet =
-        P.lens (_httpGet :: LivenessProbe s -> TF.Attr s [HttpGet s])
+        P.lens (_httpGet :: LivenessProbe s -> TF.Attr s (HttpGet s))
                (\s a -> s { _httpGet = a
                           } :: LivenessProbe s)
 
@@ -3745,11 +3747,11 @@ instance P.HasName (ScaleTargetRef s) (TF.Attr s P.Text) where
 
 -- | @pre_stop@ nested settings.
 data PreStop s = PreStop'
-    { _exec      :: TF.Attr s [Exec s]
+    { _exec      :: TF.Attr s (Exec s)
     -- ^ @exec@ - (Optional)
     -- Exec specifies the action to take.
     --
-    , _httpGet   :: TF.Attr s [HttpGet s]
+    , _httpGet   :: TF.Attr s (HttpGet s)
     -- ^ @http_get@ - (Optional)
     -- Specifies the http request to perform.
     --
@@ -3778,15 +3780,15 @@ newPreStop =
         , _tcpSocket = TF.Nil
         }
 
-instance P.HasExec (PreStop s) (TF.Attr s [Exec s]) where
+instance P.HasExec (PreStop s) (TF.Attr s (Exec s)) where
     exec =
-        P.lens (_exec :: PreStop s -> TF.Attr s [Exec s])
+        P.lens (_exec :: PreStop s -> TF.Attr s (Exec s))
                (\s a -> s { _exec = a
                           } :: PreStop s)
 
-instance P.HasHttpGet (PreStop s) (TF.Attr s [HttpGet s]) where
+instance P.HasHttpGet (PreStop s) (TF.Attr s (HttpGet s)) where
     httpGet =
-        P.lens (_httpGet :: PreStop s -> TF.Attr s [HttpGet s])
+        P.lens (_httpGet :: PreStop s -> TF.Attr s (HttpGet s))
                (\s a -> s { _httpGet = a
                           } :: PreStop s)
 
@@ -3817,7 +3819,7 @@ data FlexVolume s = FlexVolume'
     -- Whether to force the ReadOnly setting in VolumeMounts. Defaults to false
     -- (read/write).
     --
-    , _secretRef :: TF.Attr s [SecretRef s]
+    , _secretRef :: TF.Attr s (SecretRef s)
     -- ^ @secret_ref@ - (Optional)
     -- Reference to the secret object containing sensitive information to pass to
     -- the plugin scripts. This may be empty if no secret object is specified. If
@@ -3873,9 +3875,9 @@ instance P.HasReadOnly (FlexVolume s) (TF.Attr s P.Bool) where
                (\s a -> s { _readOnly = a
                           } :: FlexVolume s)
 
-instance P.HasSecretRef (FlexVolume s) (TF.Attr s [SecretRef s]) where
+instance P.HasSecretRef (FlexVolume s) (TF.Attr s (SecretRef s)) where
     secretRef =
-        P.lens (_secretRef :: FlexVolume s -> TF.Attr s [SecretRef s])
+        P.lens (_secretRef :: FlexVolume s -> TF.Attr s (SecretRef s))
                (\s a -> s { _secretRef = a
                           } :: FlexVolume s)
 
@@ -4011,7 +4013,7 @@ data Template s = Template'
     -- Never. More info:
     -- http://kubernetes.io/docs/user-guide/pod-states#restartpolicy.
     --
-    , _securityContext :: TF.Attr s [SecurityContext s]
+    , _securityContext :: TF.Attr s (SecurityContext s)
     -- ^ @security_context@ - (Optional)
     -- SecurityContext holds pod-level security attributes and common container
     -- settings. Optional: Defaults to empty
@@ -4130,9 +4132,9 @@ instance P.HasRestartPolicy (Template s) (TF.Attr s P.Text) where
                (\s a -> s { _restartPolicy = a
                           } :: Template s)
 
-instance P.HasSecurityContext (Template s) (TF.Attr s [SecurityContext s]) where
+instance P.HasSecurityContext (Template s) (TF.Attr s (SecurityContext s)) where
     securityContext =
-        P.lens (_securityContext :: Template s -> TF.Attr s [SecurityContext s])
+        P.lens (_securityContext :: Template s -> TF.Attr s (SecurityContext s))
                (\s a -> s { _securityContext = a
                           } :: Template s)
 
@@ -4155,16 +4157,16 @@ instance P.HasVolume (Template s) (TF.Attr s [Volume s]) where
                           } :: Template s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (Template s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 instance s ~ s' => P.HasComputedImagePullSecrets (TF.Ref s' (Template s)) (TF.Attr s [ImagePullSecrets s]) where
-    computedImagePullSecrets x = TF.compute (TF.refKey x) "image_pull_secrets"
+    computedImagePullSecrets x = TF.compute (TF.refKey x) "_computedImagePullSecrets"
 
 instance s ~ s' => P.HasComputedNodeName (TF.Ref s' (Template s)) (TF.Attr s P.Text) where
-    computedNodeName x = TF.compute (TF.refKey x) "node_name"
+    computedNodeName x = TF.compute (TF.refKey x) "_computedNodeName"
 
 instance s ~ s' => P.HasComputedServiceAccountName (TF.Ref s' (Template s)) (TF.Attr s P.Text) where
-    computedServiceAccountName x = TF.compute (TF.refKey x) "service_account_name"
+    computedServiceAccountName x = TF.compute (TF.refKey x) "_computedServiceAccountName"
 
 -- | @iscsi@ nested settings.
 data Iscsi s = Iscsi'
@@ -4365,7 +4367,7 @@ data SecurityContext s = SecurityContext'
     -- The UID to run the entrypoint of the container process. Defaults to user
     -- specified in image metadata if unspecified
     --
-    , _seLinuxOptions     :: TF.Attr s [SeLinuxOptions s]
+    , _seLinuxOptions     :: TF.Attr s (SeLinuxOptions s)
     -- ^ @se_linux_options@ - (Optional)
     -- The SELinux context to be applied to all containers. If unspecified, the
     -- container runtime will allocate a random SELinux context for each container.
@@ -4421,9 +4423,9 @@ instance P.HasRunAsUser (SecurityContext s) (TF.Attr s P.Integer) where
                (\s a -> s { _runAsUser = a
                           } :: SecurityContext s)
 
-instance P.HasSeLinuxOptions (SecurityContext s) (TF.Attr s [SeLinuxOptions s]) where
+instance P.HasSeLinuxOptions (SecurityContext s) (TF.Attr s (SeLinuxOptions s)) where
     seLinuxOptions =
-        P.lens (_seLinuxOptions :: SecurityContext s -> TF.Attr s [SeLinuxOptions s])
+        P.lens (_seLinuxOptions :: SecurityContext s -> TF.Attr s (SeLinuxOptions s))
                (\s a -> s { _seLinuxOptions = a
                           } :: SecurityContext s)
 
@@ -4707,16 +4709,16 @@ newPort =
     Port'
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Port s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedNodePort (TF.Ref s' (Port s)) (TF.Attr s P.Integer) where
-    computedNodePort x = TF.compute (TF.refKey x) "node_port"
+    computedNodePort x = TF.compute (TF.refKey x) "_computedNodePort"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (Port s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "port"
+    computedPort x = TF.compute (TF.refKey x) "_computedPort"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (Port s)) (TF.Attr s P.Text) where
-    computedProtocol x = TF.compute (TF.refKey x) "protocol"
+    computedProtocol x = TF.compute (TF.refKey x) "_computedProtocol"
 
 instance s ~ s' => P.HasComputedTargetPort (TF.Ref s' (Port s)) (TF.Attr s P.Text) where
-    computedTargetPort x = TF.compute (TF.refKey x) "target_port"
+    computedTargetPort x = TF.compute (TF.refKey x) "_computedTargetPort"

@@ -54,7 +54,7 @@ import qualified Terrafomo.Schema              as TF
 -- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_service terraform documentation>
 -- for more information.
 data ServiceData s = ServiceData'
-    { _metadata :: TF.Attr s [Metadata s]
+    { _metadata :: TF.Attr s (Metadata s)
     -- ^ @metadata@ - (Required)
     -- Standard service's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
@@ -67,7 +67,7 @@ instance TF.IsObject (ServiceData s) where
         ]
 
 serviceData
-    :: TF.Attr s [Metadata s] -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.DataSource P.Provider (ServiceData s)
 serviceData _metadata =
     TF.newDataSource "kubernetes_service" $
@@ -75,24 +75,24 @@ serviceData _metadata =
             { _metadata = _metadata
             }
 
-instance P.HasMetadata (ServiceData s) (TF.Attr s [Metadata s]) where
+instance P.HasMetadata (ServiceData s) (TF.Attr s (Metadata s)) where
     metadata =
-        P.lens (_metadata :: ServiceData s -> TF.Attr s [Metadata s])
+        P.lens (_metadata :: ServiceData s -> TF.Attr s (Metadata s))
                (\s a -> s { _metadata = a
                           } :: ServiceData s)
 
 instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [LoadBalancerIngress s]) where
-    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
+    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "_computedLoadBalancerIngress"
 
-instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s [Spec s]) where
-    computedSpec x = TF.compute (TF.refKey x) "spec"
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (Spec s)) where
+    computedSpec x = TF.compute (TF.refKey x) "_computedSpec"
 
 -- | @kubernetes_storage_class@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_storage_class terraform documentation>
 -- for more information.
 data StorageClassData s = StorageClassData'
-    { _metadata :: TF.Attr s [Metadata s]
+    { _metadata :: TF.Attr s (Metadata s)
     -- ^ @metadata@ - (Required)
     -- Standard storage class's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
@@ -105,7 +105,7 @@ instance TF.IsObject (StorageClassData s) where
         ]
 
 storageClassData
-    :: TF.Attr s [Metadata s] -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.DataSource P.Provider (StorageClassData s)
 storageClassData _metadata =
     TF.newDataSource "kubernetes_storage_class" $
@@ -113,14 +113,14 @@ storageClassData _metadata =
             { _metadata = _metadata
             }
 
-instance P.HasMetadata (StorageClassData s) (TF.Attr s [Metadata s]) where
+instance P.HasMetadata (StorageClassData s) (TF.Attr s (Metadata s)) where
     metadata =
-        P.lens (_metadata :: StorageClassData s -> TF.Attr s [Metadata s])
+        P.lens (_metadata :: StorageClassData s -> TF.Attr s (Metadata s))
                (\s a -> s { _metadata = a
                           } :: StorageClassData s)
 
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedParameters x = TF.compute (TF.refKey x) "parameters"
+    computedParameters x = TF.compute (TF.refKey x) "_computedParameters"
 
 instance s ~ s' => P.HasComputedStorageProvisioner (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
-    computedStorageProvisioner x = TF.compute (TF.refKey x) "storage_provisioner"
+    computedStorageProvisioner x = TF.compute (TF.refKey x) "_computedStorageProvisioner"
