@@ -1,10 +1,11 @@
+{-# LANGUAGE RecordWildCards #-}
+
 module Terrafomo.Gen.Elab
-    ( elab
+    ( run
     , classes
     ) where
 
 import Control.Applicative        ((<|>))
-import Control.Arrow              ((&&&))
 import Control.Monad              ((>=>))
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
@@ -19,6 +20,8 @@ import Data.Text           (Text)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
+import Terrafomo.Gen.Name    (ConName, DataName, LabelName, VarName)
+import Terrafomo.Gen.Type    (Type)
 
 import Text.Show.Pretty (ppShow)
 
@@ -28,38 +31,46 @@ import qualified Control.Monad.State.Strict as State
 import qualified Data.Foldable              as Fold
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
+import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
+import qualified Data.Traversable           as Traverse
 import qualified Terrafomo.Gen.Go           as Go
+import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Text         as Text
+import qualified Terrafomo.Gen.Type         as Type
 
 type Elab =
     ReaderT (Config, Bool)
         (StateT (HashMap Text Settings)
             (Except String))
 
-elab :: Config -> Go.Provider -> Either String Provider
-elab cfg p =
+run :: Config -> Go.Provider -> Either String Provider
+run cfg provider =
     Except.runExcept $
         flip State.evalStateT mempty $
             flip Reader.runReaderT (cfg, False) $ do
+                resources   <-
+                    Traverse.for (Go.providerResources provider) $ \x ->
+                        elabResource (Go.resourceName x) (Go.resourceSchemas x)
 
-                args  <- arguments "provider" (Go.providerSchemas     p)
-                rs    <- resources Resource   (Go.providerResources   p)
-                ds    <- resources DataSource (Go.providerDataSources p)
+                datasources <-
+                    Traverse.for (Go.providerDataSources provider) $ \x ->
+                        elabDataSource (Go.resourceName x) (Go.resourceSchemas x)
 
-                types <- State.gets Map.elems
+                schema      <-
+                     elabSettings "provider" (Go.providerSchemas provider)
+
+                settings    <-
+                     State.gets (Map.elems . Map.delete "provider")
 
                 pure $! Provider'
                     { providerName         = configProviderName cfg
                     , providerPackage      = configPackage      cfg
                     , providerDependencies = configDependencies cfg
-                    , providerOriginal     = Go.providerName p
-                    , providerParameters   = parameters args
-                    , providerType         = Con "Provider"
-                    , providerArguments    = args
-                    , providerResources    = rs
-                    , providerDataSources  = ds
-                    , providerSettings     = types
+                    , providerResources    = resources
+                    , providerDataSources  = datasources
+                    , providerSettings     = settings
+                    , providerSchema       = schema
                     }
 
 classes :: Provider -> (HashSet Class, HashSet Class)
@@ -73,256 +84,267 @@ classes p = (lenses, getters)
                , classMethod = fieldMethod x
                }
 
-    args =  providerArguments p
-         ++ concatMap resourceArguments (providerResources    p)
-         ++ concatMap resourceArguments (providerDataSources  p)
-         ++ concatMap settingsArguments (providerSettings     p)
+    args =  concatMap schemaArguments  schemas
+    attrs = concatMap schemaAttributes schemas
 
-    attrs = concatMap resourceAttributes (providerResources   p)
-         ++ concatMap resourceAttributes (providerDataSources p)
-         ++ concatMap settingsAttributes (providerSettings    p)
+    schemas =
+           map fromResource   (providerResources   p)
+        ++ map fromDataSource (providerDataSources p)
+        ++ map fromSettings   (providerSchema p : providerSettings p)
 
-resources :: SchemaType -> [Go.Resource] -> Elab [Resource]
-resources styp =
-    traverse $ \x ->
-        resource styp (Go.resourceName x) (Go.resourceSchemas x)
+elabResource :: Text -> [Go.Schema] -> Elab Resource
+elabResource original =
+    withThreaded
+        . fmap Resource'
+            . elabSchema original (Name.resourceNames original)
 
-resource :: SchemaType -> Text -> [Go.Schema] -> Elab Resource
-resource styp orig xs =
-    threaded $ do
-        let name =
-                case styp of
-                    Resource   -> Text.resourceName   orig
-                    DataSource -> Text.dataSourceName orig
+elabDataSource :: Text -> [Go.Schema] -> Elab DataSource
+elabDataSource original =
+    withThreaded
+        . fmap DataSource'
+            . elabSchema original (Name.resourceNames original)
 
-        args  <- arguments  orig xs
-        attrs <- attributes orig xs
-        con   <- newCon name
+elabSettings :: Text -> [Go.Schema] -> Elab Settings
+elabSettings original schemas = do
+    settings <-
+        Settings' <$>
+            elabSchema original (Name.settingsNames original) schemas
 
-        pure $! Resource'
-            { resourceName       = name
-            , resourceOriginal   = orig
-            , resourceType       = con
-            , resourceSchema     = styp
-            , resourceParameters = parameters args
-            , resourceArguments  = args
-            , resourceAttributes = attrs
-            }
+    State.modify' (Map.insert original settings)
 
-parameters :: [Field a] -> [Field a]
-parameters =
+    pure settings
+
+elabSchema
+    :: Text
+    -> (DataName, ConName, VarName)
+    -> [Go.Schema]
+    -> Elab (Schema Conflict)
+elabSchema original (data_, con, smart) schemas = do
+    thread <- isThreaded
+    args   <- elabArguments  original schemas
+    attrs  <- elabAttributes original schemas
+    typ    <- elabType data_
+    pure $! Schema'
+        { schemaName       = data_
+        , schemaOriginal   = original
+        , schemaType       = typ
+        , schemaCon        = Con con smart
+        , schemaThreaded   = thread
+        , schemaParameters = filterParameters args
+        , schemaArguments  = args
+        , schemaAttributes = attrs
+        }
+
+elabNestedSchema :: Go.Schema -> Elab Type
+elabNestedSchema schema
+    | Just x <- Go.schemaSchema schema   =
+        fieldType
+            <$> elabField x
+    | Just x <- Go.schemaResource schema =
+        schemaType . fromSettings
+            <$> elabSettings (Go.resourceName x) (Go.resourceSchemas x)
+    | otherwise                          =
+        Except.throwError $
+            unlines [ "Expected Schema or Resource for "
+                   ++ show (Go.schemaType schema)
+                    , ppShow schema
+                    ]
+
+filterParameters :: [Field a] -> [Field a]
+filterParameters =
     filter $ \x ->
         case fieldDefault x of
             DefaultParam{} -> True
             _              -> False
 
-arguments :: Text -> [Go.Schema] -> Elab [Field Conflict]
-arguments name =
-    fmap conflictsWith
-        . traverse (field >=> applyRules name)
-        . filter (not . Go.schemaComputed)
+elabArguments :: Text -> [Go.Schema] -> Elab [Field Conflict]
+elabArguments name =
+    fmap applyConflicts
+        . traverse (elabField >=> applyRules name)
+            . filter (not . Go.schemaComputed)
 
-attributes :: Text -> [Go.Schema] -> Elab [Field Text]
-attributes name =
-    traverse (field >=> applyRules name)
+elabAttributes :: Text -> [Go.Schema] -> Elab [Field LabelName]
+elabAttributes name =
+    traverse (elabField >=> applyRules name)
         . filter Go.schemaComputed
+
+elabField :: Go.Schema -> Elab (Field LabelName)
+elabField schema = do
+    let original                = Go.schemaName schema
+        (label, class_, method) =
+             Name.fieldNames (Go.schemaComputed schema) original
+
+    thread   <- isThreaded
+    default_ <- elabDefault label schema
+
+    let encoder    =
+            case default_ of
+                DefaultNil{}
+                   | not thread -> "TF.assign " <> Text.quotes original <> " <$>"
+                _  | thread     -> "TF.assign " <> Text.quotes original <> " <$> TF.attribute"
+                   | otherwise  -> "P.Just $ TF.assign " <> Text.quotes original
+
+        applyMaybe =
+            case default_ of
+                DefaultNil{}
+                    | not thread -> Type.typeMaybe
+                _                -> id
+
+        applyList
+            | Go.schemaMaxItems schema == 1 = id
+            | Go.schemaMinItems schema > 0  = Type.typeList1
+            | otherwise                     = Type.typeList
+
+    typ      <-
+        case Go.schemaType schema of
+            Go.TypeString -> addThread Type.Text
+            Go.TypeInt    -> addThread Type.Integer
+            Go.TypeFloat  -> addThread Type.Double
+            Go.TypeBool   -> addThread Type.Bool
+            Go.TypeSet    ->
+                elabNestedSchema schema
+                    >>= addThread
+                    >>= addThread . applyList
+            Go.TypeList   ->
+                fmap applyList (elabNestedSchema schema)
+                    >>= addThread
+            Go.TypeMap    ->
+                fmap Type.typeMap
+                    ( elabNestedSchema schema
+                  <|> addThread Type.Text
+                    ) >>= addThread
+
+    pure $! Field'
+        { fieldName      = label
+        , fieldOriginal  = original
+        , fieldHelp      = newHelp (Go.schemaDescription schema)
+        , fieldClass     = class_
+        , fieldMethod    = method
+        , fieldType      = applyMaybe typ
+        , fieldOptional  = Go.schemaOptional schema
+        , fieldRequired  = Go.schemaRequired schema
+        , fieldComputed  = Go.schemaComputed schema
+        , fieldForceNew  = Go.schemaForceNew schema
+        , fieldEncoder   = encoder
+        , fieldDefault   = default_
+        , fieldConflicts =
+            Set.map Name.conflictName (Go.schemaConflictsWith schema)
+        }
+
+elabDefault
+    :: LabelName -- ^ The name of this field.
+    -> Go.Schema
+    -> Elab Default
+elabDefault label schema = do
+    thread <- isThreaded
+    traverse parseType (Go.schemaDefault schema)
+        >>= pure . go thread (Go.schemaRequired schema)
+  where
+    go thread required = \case
+        Just x  | thread    -> DefaultAttr x
+                | otherwise -> x
+        Nothing | required  -> DefaultParam label
+                | thread    -> DefaultNil "TF.Nil"
+                | otherwise -> DefaultNil "P.Nothing"
+
+    parseType value =
+        case Go.schemaType schema of
+            Go.TypeString -> pure $! DefaultText value
+            Go.TypeBool   -> DefaultBool    <$> parseBool  value
+            Go.TypeInt    -> DefaultInteger <$> parseInt   value
+            Go.TypeFloat  -> DefaultDouble  <$> parseFloat value
+            _             -> failure value
+
+    parseBool = \case
+        "true"  -> pure True
+        "false" -> pure False
+        value   -> failure value
+
+    parseInt value =
+        case Text.signed Text.decimal value of
+            Right (x, "") -> pure x
+            _             -> failure value
+
+    parseFloat value =
+        case value of
+            "NaN" -> pure (0 / 0)
+            _     ->
+                case Text.signed Text.double value of
+                    Right (x, "") -> pure x
+                    _             -> failure value
+
+    failure :: Text -> Elab a
+    failure value =
+        Except.throwError $
+            unwords [ "Unable to default"
+                    , show (Go.schemaType schema)
+                    , "with value"
+                    , Text.unpack value
+                    ]
+
+-- Overrides
 
 applyRules :: Text -> Field a -> Elab (Field a)
 applyRules name f = do
     cfg <- Reader.asks fst
     pure $! f
         { fieldType =
-            maybe (fieldType f) Con
-                  (configApplyRules cfg name (fieldName f))
+            case configApplyRules cfg name (fieldOriginal f) of
+                Nothing -> fieldType f
+                Just x  -> Type.Free x
         }
 
-conflictsWith :: [Field Text] -> [Field Conflict]
-conflictsWith xs = map go xs
+-- Conflicts
+
+applyConflicts :: [Field LabelName] -> [Field Conflict]
+applyConflicts xs = map go xs
   where
     go x = x
         { fieldConflicts =
-            fromMaybe mempty (Map.lookup (fieldLabel x) conflicts)
+            fromMaybe mempty (Map.lookup (fieldName x) conflicts)
         }
 
     !conflicts =
-        conflictIndex fieldConflicts (fieldMethod &&& fieldDefault) $
-            Map.fromList [(fieldLabel x, x) | x <- xs]
+        conflictIndex fieldConflicts mk $
+            Map.fromList [(fieldName x, x) | x <- xs]
+
+    mk k v =
+        Conflict
+            { conflictName    = k
+            , conflictMethod  = fieldMethod v
+            , conflictDefault = fieldDefault v
+            }
 
 conflictIndex
-    :: (v -> HashSet Text)
-    -> (v -> (Text, Default))
-    -> HashMap Text v
-    -> HashMap Text (HashSet Conflict)
-conflictIndex conflicts get xs =
+    :: (v -> HashSet LabelName)
+    -> (LabelName -> v -> Conflict)
+    -> HashMap LabelName v
+    -> HashMap LabelName (HashSet Conflict)
+conflictIndex conflicts mk xs =
     Fold.foldr' (Map.unionWith (<>)) mempty $ map (uncurry item) (Map.toList xs)
   where
     -- create a reverse index keyed by the fields this field conflicts with.
     item key value =
         let cs     = Fold.toList (conflicts value)
-            mk k v = uncurry (Conflict k) (get v)
             deps   = mapMaybe (\k -> mk k <$> Map.lookup k xs) cs
             self   = Set.singleton (mk key value)
             result = Map.singleton key (Set.fromList deps)
 
          in Fold.foldr' (\k -> Map.insert k self) result cs
 
-settings_ :: Text -> [Go.Schema] -> Elab Type
-settings_ orig = fmap settingsType . settings orig
+-- Types + State Threading
 
-settings :: Text -> [Go.Schema] -> Elab Settings
-settings orig xs = do
-    thread <- isThreaded
-    args   <- arguments  orig xs
-    attrs  <- attributes orig xs
-    con    <- newCon orig
+elabType :: DataName -> Elab Type
+elabType = addThread . Type.Data
 
-    let s = Settings'
-          { settingsName       = Text.dataTypeName orig
-          , settingsOriginal   = orig
-          , settingsType       = con
-          , settingsHashable   = not thread
-          , settingsParameters = parameters args
-          , settingsArguments  = args
-          , settingsAttributes = attrs
-          }
-
-    State.modify' (Map.insert orig s)
-
-    pure s
-
-field_ :: Go.Schema -> Elab Type
-field_ = fmap fieldType . field
-
-field :: Go.Schema -> Elab (Field Text)
-field s = do
-    thread <- isThreaded
-    def    <- traverse (defaulted (Go.schemaType s)) (Go.schemaDefault s)
-
-    let name     = Go.schemaName s
-
-        label    =
-            if Go.schemaComputed s
-                then Text.safeAttrName name
-                else Text.safeArgName  name
-
-        default_ =
-            case def of
-                Just x  | thread              -> DefaultAttr x
-                        | otherwise           -> x
-                Nothing | Go.schemaRequired s -> DefaultParam label
-                        | thread              -> DefaultNil "TF.Nil"
-                        | otherwise           -> DefaultNil "P.Nothing"
-
-        optional =
-            case default_ of
-                DefaultNil{}
-                    | not thread -> typeMaybe
-                _                -> id
-
-        encoder =
-            case default_ of
-                DefaultNil{}
-                   | not thread -> "TF.assign " <> Text.quotes name <> " <$>"
-                _  | thread     -> "TF.assign " <> Text.quotes name <> " <$> TF.attribute"
-                   | otherwise  -> "P.Just $ TF.assign " <> Text.quotes name
-
-    typ    <-
-        case Go.schemaType s of
-            Go.TypeString -> threadType TText
-            Go.TypeInt    -> threadType TInteger
-            Go.TypeFloat  -> threadType TDouble
-            Go.TypeBool   -> threadType TBool
-            Go.TypeSet    ->
-                let list | Go.schemaMaxItems s == 1 = id
-                         | Go.schemaMinItems s > 0  = typeList1
-                         | otherwise                = typeList
-
-                 in threadType . list =<< threadType =<< nested s
-
-            Go.TypeList ->
-                threadType =<<
-                    (if Go.schemaMinItems s > 0
-                         then typeList1
-                         else typeList) <$> nested s
-
-            Go.TypeMap    ->
-                threadType =<<
-                    typeMap <$> (nested s <|> threadType TText)
-
-    pure $! Field'
-        { fieldName      = name
-        , fieldHelp      = newHelp (Go.schemaDescription s)
-        , fieldClass     = Text.fieldClassName  label
-        , fieldMethod    = Text.fieldMethodName label
-        , fieldLabel     = label
-        , fieldType      = optional typ
-        , fieldConflicts = Set.map Text.conflictName (Go.schemaConflictsWith s)
-        , fieldOptional  = Go.schemaOptional s
-        , fieldRequired  = Go.schemaRequired s
-        , fieldComputed  = Go.schemaComputed s
-        , fieldForceNew  = Go.schemaForceNew s
-        , fieldEncoder   = encoder
-        , fieldDefault   = default_
-        }
-
-defaulted :: Go.Type -> Text -> Elab Default
-defaulted typ def =
-    case typ of
-        Go.TypeString -> pure $! DefaultText def
-        Go.TypeBool   -> DefaultBool    <$> parseBool
-        Go.TypeInt    -> DefaultInteger <$> parseInt
-        Go.TypeFloat  -> DefaultDouble  <$> parseFloat
-        _             -> failure
-  where
-    parseBool =
-        case def of
-            "true"  -> pure True
-            "false" -> pure False
-            _       -> failure
-
-    parseInt   =
-        case Text.signed Text.decimal def of
-            Right (x, "") -> pure x
-            _             -> failure
-
-    parseFloat =
-        case def of
-            "NaN" -> pure (0 / 0)
-            _     ->
-                case Text.signed Text.double def of
-                    Right (x, "") -> pure x
-                    _             -> failure
-
-    failure :: Elab a
-    failure =
-        Except.throwError $
-            unwords [ "Unable to default"
-                    , show typ
-                    , "with value"
-                    , show def
-                    ]
-
-nested :: Go.Schema -> Elab Type
-nested s
-    | Just x <- Go.schemaSchema   s = field_ x
-    | Just x <- Go.schemaResource s = settings_ (Go.resourceName x) (Go.resourceSchemas x)
-    | otherwise                     =
-        Except.throwError $
-            unlines [ "Expected Schema or Resource for " ++ show (Go.schemaType s)
-                    , ppShow s
-                    ]
-
-newCon :: Text -> Elab Type
-newCon = threadType . Con . Text.dataTypeName
-
-threadType :: Type -> Elab Type
-threadType x =
+addThread :: Type -> Elab Type
+addThread x =
     isThreaded >>= pure . \case
-        True  -> Thread x
+        True  -> Type.Thread x
         False -> x
-
-threaded :: Elab a -> Elab a
-threaded = Reader.local (second (const True))
 
 isThreaded :: Elab Bool
 isThreaded = Reader.asks snd
+
+withThreaded :: Elab a -> Elab a
+withThreaded = Reader.local (second (const True))

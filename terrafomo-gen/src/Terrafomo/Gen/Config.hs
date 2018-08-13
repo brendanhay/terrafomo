@@ -13,6 +13,7 @@ import Data.Text           (Text)
 import GHC.Generics (Generic)
 
 import Terrafomo.Gen.JSON ((.!=), (.:), (.:?))
+import Terrafomo.Gen.Name (ProviderName)
 
 import qualified Data.HashMap.Strict as Map
 import qualified Data.HashSet        as Set
@@ -90,7 +91,7 @@ applyRule rs k
 data Config = Config'
     { configPackage       :: !Text
     , configPackageYAML   :: !Bool
-    , configProviderName  :: !Text
+    , configProviderName  :: !ProviderName
     , configPartitionSize :: !Int
     , configDependencies  :: !(HashSet Text)
     , configApplyRules    :: !(Text {- datatype -} -> Text {- field -} -> Maybe Text)

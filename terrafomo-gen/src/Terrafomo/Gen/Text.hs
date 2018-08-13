@@ -1,57 +1,10 @@
 module Terrafomo.Gen.Text where
 
-import Data.Maybe  (fromMaybe)
-import Data.Monoid ((<>))
-import Data.Text   (Text)
+import Data.Text (Text)
 
 import qualified Data.Char    as Char
 import qualified Data.HashSet as Set
 import qualified Data.Text    as Text
-
-conflictName :: Text -> Text
-conflictName x =
-    safeArgName $
-        case Text.split (== '.') x of
-            []  -> x
-            [_] -> x
-            xs  -> last xs
-
-safeArgName :: Text -> Text
-safeArgName = Text.cons '_' . fieldMethodName
-
-safeAttrName :: Text -> Text
-safeAttrName = mappend "_computed" . upperHead . fieldMethodName
-
-smartCtorName :: Text -> Text
-smartCtorName = unreserved . lowerHead
-
-resourceName :: Text -> Text
-resourceName = (<> "Resource") . schemaTypeName
-
-dataSourceName :: Text -> Text
-dataSourceName = (<> "Data") . schemaTypeName
-
-schemaTypeName :: Text -> Text
-schemaTypeName x =
-    case Text.split (== '_') x of
-        []   -> x
-        _:xs -> foldMap upperHead xs
-
-dataTypeName :: Text -> Text
-dataTypeName x =
-    case Text.split (== '_') x of
-        [] -> x
-        xs -> foldMap upperHead xs
-
-fieldClassName :: Text -> Text
-fieldClassName = mappend "Has" . upperHead . fieldMethodName
-
-fieldMethodName :: Text -> Text
-fieldMethodName (unreserved -> x) =
-    let y = fromMaybe x (Text.stripPrefix "_" x)
-     in case filter (not . Text.null) $ Text.split (== '_') y of
-           []   -> y
-           z:zs -> mconcat (z : map upperHead zs)
 
 upperHead :: Text -> Text
 upperHead x =

@@ -1,6 +1,6 @@
 _include: !include '../../share/package.yaml'
 
-name: {{ provider.package }}
+name: {{ package }}
 
 <<: *common
 <<: *version
@@ -8,7 +8,7 @@ name: {{ provider.package }}
 <<: *extensions
 
 dependencies:
-{% for dep in provider.dependencies %}
+{% for dep in dependencies %}
   - {{ dep.value }}
 {% endfor %}
 

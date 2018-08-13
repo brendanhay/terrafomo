@@ -14,13 +14,15 @@ module {{ namespace }}
     {% for setting in settings %}
     -- ** {{ setting.value.original }}
     {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
-    , new{{ setting.value.name }}
+    , {{ setting.value.con.smart }}
 
   {% endfor %}
     ) where
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
+
+import GHC.Base (($))
 
 {% for import in qualified %}
 import qualified {{ import.value }} as P
@@ -31,31 +33,31 @@ import qualified Terrafomo.Name as TF
 {% for setting in settings %}
 
 -- | @{{ setting.value.original }}@ nested settings.
-data {{ setting.value.type }} = {{ setting.value.name }}'
+data {{ setting.value.type }} = {{ setting.value.con.name }}
 {% include "_include/record.ede" with arguments = setting.value.arguments %}
 
 instance P.Hashable  ({{ setting.value.type }})
 instance TF.IsValue  ({{ setting.value.type }})
 instance TF.IsObject ({{ setting.value.type }}) where
   {% for field in setting.value.arguments %}
-    {% if field.first %}toObject {{ setting.value.name }}'{..} = catMaybes
-        [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.label }}{% if field.last %}
+    {% if field.first %}toObject {{ setting.value.con.name }}{..} = catMaybes
+        [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
         ]{% endif %}
   {% else %}
     toObject {{ setting.value.name }}' = []
   {% endfor %}
 
-new{{ setting.value.name }}
+{{ setting.value.con.smart }}
   {% for param in setting.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@ - 'P.{{ param.value.method }}'{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
     -> {{ setting.value.type }}{% endif %}
   {% else %}
     :: {{ setting.value.type }}
   {% endfor %}
-new{{ setting.value.name }}{% for param in setting.value.parameters %} {{ param.value.label }}{% endfor %} =
-    {{ setting.value.name }}'
+{{ setting.value.con.smart }}{% for param in setting.value.parameters %} {{ param.value.name }}{% endfor %} =
+    {{ setting.value.con.name }}
       {% for field in setting.value.arguments %}
-        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}{% if field.last %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}
       {% endfor %}
 {% include "_include/lenses.ede" with schema = setting.value %}

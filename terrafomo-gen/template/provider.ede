@@ -12,7 +12,7 @@ module {{ namespace }}
     (
     -- * {{ provider.name }} Provider Datatype
       Provider (..)
-    , newProvider
+    , {{ provider.schema.con.smart }}
     ) where
 
 import Data.Functor  ((<$>))
@@ -37,38 +37,38 @@ import qualified Terrafomo.Provider as TF
 --
 -- See the <https://www.terraform.io/docs/providers/{{ provider.name }}/index.html terraform documenation>
 -- for more information.
-data Provider = Provider'
-{% include "_include/record.ede" with arguments = provider.arguments %}
+data Provider = {{ provider.schema.con.name }}
+{% include "_include/record.ede" with arguments = provider.schema.arguments %}
 
 instance P.Hashable Provider
 
 instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
+    toSection x@{{ provider.schema.con.name }}{..} =
         let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
               (catMaybes
                   [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                {% for field in provider.arguments %}
-                  , {{ field.value.encoder }} {{ field.value.label }}
+                {% for field in provider.schema.arguments %}
+                  , {{ field.value.encoder }} {{ field.value.name }}
                 {% endfor %}
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "{{ provider.original }}"
+    type ProviderType {{ provider.schema.name }} = "{{ provider.schema.original }}"
 
-newProvider
-  {% for param in provider.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{param.value.name}}@ - 'P.{{ param.value.method }}'{% if param.last %}
+{{ provider.schema.con.smart }}
+  {% for param in provider.schema.parameters %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
     -> Provider{% endif %}
   {% else %}
     :: Provider
   {% endfor %}
-newProvider{% for param in provider.parameters %} {{ param.value.label }}{% endfor %} =
-    Provider'
-      {% for field in provider.arguments %}
-        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.label }} = {{ field.value.default }}{% if field.last %}
+{{ provider.schema.con.smart }}{% for param in provider.schema.parameters %} {{ param.value.name }}{% endfor %} =
+    {{ provider.schema.con.name }}
+      {% for field in provider.schema.arguments %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}
       {% endfor %}
-{% include "_include/lenses.ede" with schema = provider %}
+{% include "_include/lenses.ede" with schema = provider.schema %}

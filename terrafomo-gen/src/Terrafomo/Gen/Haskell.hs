@@ -1,7 +1,5 @@
 {-# LANGUAGE RecordWildCards #-}
 
-{-# OPTIONS_GHC -fno-warn-missing-pattern-synonym-signatures #-}
-
 module Terrafomo.Gen.Haskell where
 
 import Data.Hashable  (Hashable)
@@ -10,6 +8,9 @@ import Data.Semigroup ((<>))
 import Data.Text      (Text)
 
 import GHC.Generics (Generic)
+
+import Terrafomo.Gen.Name
+import Terrafomo.Gen.Type (Type)
 
 import qualified Data.Text                        as Text
 import qualified Data.Text.Lazy                   as LText
@@ -20,113 +21,51 @@ import qualified Terrafomo.Gen.JSON               as JSON
 import qualified Terrafomo.Gen.Text               as Text
 import qualified Text.Wrap                        as Wrap
 
-data Type
-    = Var    !Text
-    | Con    !Text
-    | Thread !Type
-    | App    !Type !Type
-      deriving (Show, Eq, Generic)
-
-instance Hashable Type
-
-instance JSON.ToJSON Type where
-    toJSON = JSON.String . typeName . reduce
-
-pattern TText    = Var "P.Text"
-pattern TInteger = Var "P.Integer"
-pattern TDouble  = Var "P.Double"
-pattern TBool    = Var "P.Bool"
-pattern TList    = Var "P.[]"
-pattern TList1   = Var "P.NonEmpty"
-pattern TMap     = Var "P.HashMap"
-pattern TMaybe   = Var "P.Maybe"
-
-typeName :: Type -> Text
-typeName = go False
-  where
-    go p = \case
-        Var    v       -> v
-        Con    v       -> v
-        Thread (Con n) -> parens p (n <> " s")
-        Thread a       -> parens p ("TF.Attr s " <> go True a)
-        App    TList b -> Text.brackets (go False b)
-        App    a     b -> parens p (go False a <> " " <> go True b)
-
-    parens = \case
-        True  -> Text.parens
-        False -> id
-
-typeMap, typeList, typeList1, typeMaybe :: Type -> Type
-typeMap   = App (App TMap TText)
-typeList  = App TList
-typeList1 = App TList1
-typeMaybe =
-    App TMaybe . \case
-        App TMaybe b -> b
-        a            -> a
-
-reduce :: Type -> Type
-reduce = \case
-    App TMaybe b              -> App TMaybe (reduce b)
-    App a      (App TMaybe b) -> App a b
-    a                         -> a
-
-data SchemaType
-    = Resource
-    | DataSource
-      deriving (Show, Eq)
-
-instance JSON.ToJSON SchemaType where
-    toJSON = JSON.toJSON . show
-
 data Provider = Provider'
-    { providerName         :: !Text
+    { providerName         :: !ProviderName
     , providerPackage      :: !Text
-    , providerOriginal     :: !Text
-    , providerType         :: !Type
     , providerDependencies :: !(HashSet Text)
-    , providerParameters   :: ![Field Conflict]
-    , providerArguments    :: ![Field Conflict]
     , providerResources    :: ![Resource]
-    , providerDataSources  :: ![Resource]
+    , providerDataSources  :: ![DataSource]
     , providerSettings     :: ![Settings]
+    , providerSchema       :: !Settings
     } deriving (Show, Eq, Generic)
 
 instance JSON.ToJSON Provider where
     toJSON = JSON.genericToJSON (JSON.options "provider")
 
-data Resource = Resource'
-    { resourceName       :: !Text
-    , resourceOriginal   :: !Text
-    , resourceType       :: !Type
-    , resourceSchema     :: !SchemaType
-    , resourceParameters :: ![Field Conflict]
-    , resourceArguments  :: ![Field Conflict]
-    , resourceAttributes :: ![Field Text]
+providerOriginal :: Provider -> Text
+providerOriginal = schemaOriginal . fromSettings . providerSchema
+
+newtype Resource = Resource' { fromResource :: Schema Conflict }
+    deriving (Show, Eq, JSON.ToJSON)
+
+newtype DataSource = DataSource' { fromDataSource :: Schema Conflict }
+    deriving (Show, Eq, JSON.ToJSON)
+
+newtype Settings = Settings' { fromSettings :: Schema Conflict }
+    deriving (Show, Eq, JSON.ToJSON)
+
+data Schema a = Schema'
+    { schemaName       :: !DataName
+    , schemaOriginal   :: !Text
+    , schemaType       :: !Type
+    , schemaCon        :: !Con
+    , schemaThreaded   :: !Bool
+    , schemaParameters :: ![Field a]
+    , schemaArguments  :: ![Field a]
+    , schemaAttributes :: ![Field LabelName]
     } deriving (Show, Eq, Generic)
 
-instance JSON.ToJSON Resource where
-    toJSON = JSON.genericToJSON (JSON.options "resource")
-
-data Settings = Settings'
-    { settingsName       :: !Text
-    , settingsOriginal   :: !Text
-    , settingsType       :: !Type
-    , settingsHashable   :: !Bool
-    , settingsParameters :: ![Field Conflict]
-    , settingsArguments  :: ![Field Conflict]
-    , settingsAttributes :: ![Field Text]
-    } deriving (Show, Eq, Generic)
-
-instance JSON.ToJSON Settings where
-    toJSON = JSON.genericToJSON (JSON.options "settings")
+instance JSON.ToJSON a => JSON.ToJSON (Schema a) where
+    toJSON = JSON.genericToJSON (JSON.options "schema")
 
 data Field a = Field'
-    { fieldName      :: !Text
+    { fieldName      :: !LabelName
+    , fieldOriginal  :: !Text
     , fieldHelp      :: !Help
-    , fieldClass     :: !Text
-    , fieldMethod    :: !Text
-    , fieldLabel     :: !Text
+    , fieldClass     :: !DataName
+    , fieldMethod    :: !VarName
     , fieldType      :: !Type
     , fieldConflicts :: !(HashSet a)
     , fieldOptional  :: !Bool
@@ -140,9 +79,17 @@ data Field a = Field'
 instance JSON.ToJSON a => JSON.ToJSON (Field a) where
     toJSON = JSON.genericToJSON (JSON.options "field")
 
+data Con = Con
+    { conName  :: !ConName
+    , conSmart :: !VarName
+    } deriving (Show, Eq, Generic)
+
+instance JSON.ToJSON Con where
+    toJSON = JSON.genericToJSON (JSON.options "con")
+
 data Conflict = Conflict
-    { conflictLabel   :: !Text
-    , conflictMethod  :: !Text
+    { conflictName    :: !LabelName
+    , conflictMethod  :: !VarName
     , conflictDefault :: !Default
     } deriving (Show, Eq, Generic)
 
@@ -153,7 +100,7 @@ instance JSON.ToJSON Conflict where
 
 data Default
     = DefaultNil     !Text
-    | DefaultParam   !Text
+    | DefaultParam   !LabelName
     | DefaultAttr    !Default
     | DefaultText    !Text
     | DefaultBool    !Bool
@@ -168,7 +115,7 @@ instance JSON.ToJSON Default where
       where
         go = \case
             DefaultNil     x -> x
-            DefaultParam   x -> x
+            DefaultParam   x -> fromName x
             DefaultAttr    x -> "TF.value " <> go x
             DefaultText    x -> Text.quotes x
             DefaultBool    x -> if x then "P.True" else "P.False"
@@ -186,8 +133,8 @@ instance JSON.ToJSON Default where
         build = LText.toStrict . Build.toLazyText
 
 data Class = Class'
-    { className   :: !Text
-    , classMethod :: !Text
+    { className   :: !DataName
+    , classMethod :: !VarName
     } deriving (Show, Eq, Generic)
 
 instance Hashable Class

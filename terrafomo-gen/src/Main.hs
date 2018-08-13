@@ -105,9 +105,9 @@ main = do
         config    <-
             parseYAML "Config" (configYAML opts)
 
-        provider  <-
+        provider@Provider'{providerName}  <-
             parseJSON "Provider" (providerJSON opts)
-                >>= hoistEither . Elab.elab config
+                >>= hoistEither . Elab.run config
 
         let providerDir = "provider"  </> Text.unpack (providerPackage provider)
             genDir      = providerDir </> "gen"
@@ -115,27 +115,27 @@ main = do
 
         let irFile      = irDir opts  </> Text.unpack (providerOriginal provider) <.> "json"
             packageFile = providerDir </> "package" <.> "yaml"
-            typesFile   = srcDir      </> NS.toPath (NS.types provider) <.> "hs"
+            typesFile   = srcDir      </> NS.toPath (NS.types providerName) <.> "hs"
+
+            classes     =
+                Elab.classes provider
 
             settings    =
-                [ ( NS.provider provider <> "Settings"
+                [ ( NS.provider providerName <> "Settings"
                   , providerSettings provider
                   )
                 ]
 
             resources   =
-                NS.partition 80 provider "Resource"
+                NS.partition 80 providerName "Resource"
                     (providerResources provider)
+
             datasources =
-                NS.partition 80 provider "DataSource"
+                NS.partition 80 providerName "DataSource"
                     (providerDataSources provider)
 
             namespaces  =
                 map fst settings
-
-            render      =
-                Render.resources templates provider namespaces
-
 
         createDirectory (irDir opts)
         createDirectory providerDir
@@ -143,19 +143,19 @@ main = do
         echo "IR" irFile
         scriptIO (JSON.encodeFile irFile provider)
 
-        hoistEither (Render.lenses templates provider)
+        hoistEither (Render.lenses templates providerName classes)
             >>= writeNS genDir
 
         Fold.for_ settings $ \(ns, xs) ->
-            hoistEither (Render.settings templates provider ns xs)
+            hoistEither (Render.settings templates providerName ns xs)
                 >>= writeNS genDir . (ns,)
 
         Fold.for_ resources $ \(ns, xs) ->
-            hoistEither (render ns Resource xs)
+            hoistEither (Render.resources templates providerName classes namespaces ns xs)
                 >>= writeNS genDir . (ns,)
 
         Fold.for_ datasources $ \(ns, xs) ->
-            hoistEither (render ns DataSource xs)
+            hoistEither (Render.datasources templates providerName classes namespaces ns xs)
                 >>= writeNS genDir . (ns,)
 
         hoistEither (Render.provider templates provider namespaces)
@@ -165,14 +165,16 @@ main = do
             hoistEither (Render.package templates provider)
                 >>= scriptIO . LText.writeFile packageFile
 
-        hoistEither (Render.main templates provider
-            (namespaces ++ map fst (resources ++ datasources)))
-                >>= writeNS genDir
+        hoistEither (Render.main templates providerName
+             ( namespaces
+           ++ map fst resources
+           ++ map fst datasources
+             )) >>= writeNS genDir
 
         typesExists <- scriptIO (Dir.doesFileExist typesFile)
         echo "Types" (typesFile ++ " == " ++ show typesExists)
         unless typesExists $
-            hoistEither (Render.types templates provider)
+            hoistEither (Render.types templates providerName)
                 >>= writeNS srcDir
 
         echo "Program" "Done."

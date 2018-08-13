@@ -2,10 +2,10 @@
 
 instance P.{{ field.value.class }} ({{ schema.type }}) ({{ field.value.type }}) where
     {{ field.value.method }} =
-        P.lens ({{ field.value.label }} :: {{ schema.type }} -> {{ field.value.type }})
-               (\s a -> s { {{ field.value.label }} = a
+        P.lens ({{ field.value.name }} :: {{ schema.type }} -> {{ field.value.type }})
+               (\s a -> s { {{ field.value.name }} = a
                      {% for conflict in field.value.conflicts %}
-                          , {{ conflict.value.label }} = {{ conflict.value.default }}
+                          , {{ conflict.value.name }} = {{ conflict.value.default }}
                      {% endfor %}
                           } :: {{ schema.type }})
 {% endfor %}
@@ -17,7 +17,7 @@ instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' ({{ schema.type }})) ({{
     {{ field.value.method }} x = TF.compute (TF.refKey x) "{{ field.value.name }}"
     {% else %}
     {{ field.value.method }} =
-        ({{ field.value.label }} :: {{ schema.name }} s -> {{ field.value.type }})
+        ({{ field.value.name }} :: {{ schema.name }} s -> {{ field.value.type }})
             . TF.refValue
     {% endif %}
   {% endfor %}
