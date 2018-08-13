@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -32,7 +33,6 @@ module Terrafomo.Rancher.DataSource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -40,7 +40,10 @@ import Terrafomo.Rancher.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -52,6 +55,7 @@ import qualified Terrafomo.Rancher.Lens     as P
 import qualified Terrafomo.Rancher.Provider as P
 import qualified Terrafomo.Rancher.Types    as P
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @rancher_certificate@ DataSource.
 --
@@ -66,34 +70,35 @@ data CertificateData s = CertificateData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CertificateData s) where
-    toObject CertificateData'{..} = catMaybes
-        [ TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 certificateData
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (CertificateData s)
 certificateData _environmentId _name =
-    TF.newDataSource "rancher_certificate" $
+    TF.newDataSource "rancher_certificate" TF.validator $
         CertificateData'
             { _environmentId = _environmentId
             , _name = _name
             }
 
+instance TF.IsObject (CertificateData s) where
+    toObject CertificateData'{..} = P.catMaybes
+        [ TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CertificateData s) where
+    validator = P.mempty
+
 instance P.HasEnvironmentId (CertificateData s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: CertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: CertificateData s)
+               (\s a -> s { _environmentId = a } :: CertificateData s)
 
 instance P.HasName (CertificateData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CertificateData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CertificateData s)
+               (\s a -> s { _name = a } :: CertificateData s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
     computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
@@ -122,7 +127,7 @@ instance s ~ s' => P.HasComputedKeySize (TF.Ref s' (CertificateData s)) (TF.Attr
 instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
     computedSerialNumber x = TF.compute (TF.refKey x) "_computedSerialNumber"
 
-instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateData s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "_computedSubjectAlternativeNames"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
@@ -138,25 +143,27 @@ data EnvironmentData s = EnvironmentData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EnvironmentData s) where
-    toObject EnvironmentData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 environmentData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (EnvironmentData s)
 environmentData _name =
-    TF.newDataSource "rancher_environment" $
+    TF.newDataSource "rancher_environment" TF.validator $
         EnvironmentData'
             { _name = _name
             }
 
+instance TF.IsObject (EnvironmentData s) where
+    toObject EnvironmentData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (EnvironmentData s) where
+    validator = P.mempty
+
 instance P.HasName (EnvironmentData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EnvironmentData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: EnvironmentData s)
+               (\s a -> s { _name = a } :: EnvironmentData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
@@ -180,25 +187,27 @@ data SettingData s = SettingData'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SettingData s) where
-    toObject SettingData'{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
 settingData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.DataSource P.Provider (SettingData s)
 settingData _name =
-    TF.newDataSource "rancher_setting" $
+    TF.newDataSource "rancher_setting" TF.validator $
         SettingData'
             { _name = _name
             }
 
+instance TF.IsObject (SettingData s) where
+    toObject SettingData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SettingData s) where
+    validator = P.mempty
+
 instance P.HasName (SettingData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SettingData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SettingData s)
+               (\s a -> s { _name = a } :: SettingData s)
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (SettingData s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "_computedValue"

@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -56,7 +57,6 @@ module Terrafomo.Rancher.Resource
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
 import GHC.Base (($))
 
@@ -64,7 +64,10 @@ import Terrafomo.Rancher.Settings
 
 import qualified Data.Hashable              as P
 import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
@@ -76,6 +79,7 @@ import qualified Terrafomo.Rancher.Lens     as P
 import qualified Terrafomo.Rancher.Provider as P
 import qualified Terrafomo.Rancher.Types    as P
 import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 
 -- | @rancher_certificate@ Resource.
 --
@@ -102,16 +106,6 @@ data CertificateResource s = CertificateResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (CertificateResource s) where
-    toObject CertificateResource'{..} = catMaybes
-        [ TF.assign "cert" <$> TF.attribute _cert
-        , TF.assign "cert_chain" <$> TF.attribute _certChain
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "key" <$> TF.attribute _key
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 certificateResource
     :: TF.Attr s P.Text -- ^ @cert@ - 'P.cert'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
@@ -119,7 +113,7 @@ certificateResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (CertificateResource s)
 certificateResource _cert _environmentId _key _name =
-    TF.newResource "rancher_certificate" $
+    TF.newResource "rancher_certificate" TF.validator $
         CertificateResource'
             { _cert = _cert
             , _certChain = TF.Nil
@@ -129,41 +123,48 @@ certificateResource _cert _environmentId _key _name =
             , _name = _name
             }
 
+instance TF.IsObject (CertificateResource s) where
+    toObject CertificateResource'{..} = P.catMaybes
+        [ TF.assign "cert" <$> TF.attribute _cert
+        , TF.assign "cert_chain" <$> TF.attribute _certChain
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "key" <$> TF.attribute _key
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (CertificateResource s) where
+    validator = P.mempty
+
 instance P.HasCert (CertificateResource s) (TF.Attr s P.Text) where
     cert =
         P.lens (_cert :: CertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cert = a
-                          } :: CertificateResource s)
+               (\s a -> s { _cert = a } :: CertificateResource s)
 
 instance P.HasCertChain (CertificateResource s) (TF.Attr s P.Text) where
     certChain =
         P.lens (_certChain :: CertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _certChain = a
-                          } :: CertificateResource s)
+               (\s a -> s { _certChain = a } :: CertificateResource s)
 
 instance P.HasDescription (CertificateResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: CertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: CertificateResource s)
+               (\s a -> s { _description = a } :: CertificateResource s)
 
 instance P.HasEnvironmentId (CertificateResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: CertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: CertificateResource s)
+               (\s a -> s { _environmentId = a } :: CertificateResource s)
 
 instance P.HasKey (CertificateResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: CertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a
-                          } :: CertificateResource s)
+               (\s a -> s { _key = a } :: CertificateResource s)
 
 instance P.HasName (CertificateResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: CertificateResource s)
+               (\s a -> s { _name = a } :: CertificateResource s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
@@ -192,7 +193,7 @@ instance s ~ s' => P.HasComputedKeySize (TF.Ref s' (CertificateResource s)) (TF.
 instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
     computedSerialNumber x = TF.compute (TF.refKey x) "_computedSerialNumber"
 
-instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateResource s)) (TF.Attr s [TF.Attr s (TF.Attr s P.Text)]) where
+instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "_computedSubjectAlternativeNames"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
@@ -211,33 +212,34 @@ data EnvironmentResource s = EnvironmentResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (EnvironmentResource s) where
-    toObject EnvironmentResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (EnvironmentResource s)
 environmentResource _name =
-    TF.newResource "rancher_environment" $
+    TF.newResource "rancher_environment" TF.validator $
         EnvironmentResource'
             { _description = TF.Nil
             , _name = _name
             }
 
+instance TF.IsObject (EnvironmentResource s) where
+    toObject EnvironmentResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (EnvironmentResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (EnvironmentResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: EnvironmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: EnvironmentResource s)
+               (\s a -> s { _description = a } :: EnvironmentResource s)
 
 instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EnvironmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: EnvironmentResource s)
+               (\s a -> s { _name = a } :: EnvironmentResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -273,22 +275,13 @@ data HostResource s = HostResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (HostResource s) where
-    toObject HostResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "hostname" <$> TF.attribute _hostname
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 hostResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (HostResource s)
 hostResource _environmentId _hostname _name =
-    TF.newResource "rancher_host" $
+    TF.newResource "rancher_host" TF.validator $
         HostResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -297,35 +290,42 @@ hostResource _environmentId _hostname _name =
             , _name = _name
             }
 
+instance TF.IsObject (HostResource s) where
+    toObject HostResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (HostResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (HostResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: HostResource s)
+               (\s a -> s { _description = a } :: HostResource s)
 
 instance P.HasEnvironmentId (HostResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: HostResource s)
+               (\s a -> s { _environmentId = a } :: HostResource s)
 
 instance P.HasHostname (HostResource s) (TF.Attr s P.Text) where
     hostname =
         P.lens (_hostname :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a
-                          } :: HostResource s)
+               (\s a -> s { _hostname = a } :: HostResource s)
 
 instance P.HasLabels (HostResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     labels =
         P.lens (_labels :: HostResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a
-                          } :: HostResource s)
+               (\s a -> s { _labels = a } :: HostResource s)
 
 instance P.HasName (HostResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: HostResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: HostResource s)
+               (\s a -> s { _name = a } :: HostResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -352,21 +352,12 @@ data RegistrationTokenResource s = RegistrationTokenResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RegistrationTokenResource s) where
-    toObject RegistrationTokenResource'{..} = catMaybes
-        [ TF.assign "agent_ip" <$> TF.attribute _agentIp
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "host_labels" <$> TF.attribute _hostLabels
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 registrationTokenResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (RegistrationTokenResource s)
 registrationTokenResource _environmentId _name =
-    TF.newResource "rancher_registration_token" $
+    TF.newResource "rancher_registration_token" TF.validator $
         RegistrationTokenResource'
             { _agentIp = TF.Nil
             , _description = TF.Nil
@@ -375,35 +366,42 @@ registrationTokenResource _environmentId _name =
             , _name = _name
             }
 
+instance TF.IsObject (RegistrationTokenResource s) where
+    toObject RegistrationTokenResource'{..} = P.catMaybes
+        [ TF.assign "agent_ip" <$> TF.attribute _agentIp
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "host_labels" <$> TF.attribute _hostLabels
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (RegistrationTokenResource s) where
+    validator = P.mempty
+
 instance P.HasAgentIp (RegistrationTokenResource s) (TF.Attr s P.Text) where
     agentIp =
         P.lens (_agentIp :: RegistrationTokenResource s -> TF.Attr s P.Text)
-               (\s a -> s { _agentIp = a
-                          } :: RegistrationTokenResource s)
+               (\s a -> s { _agentIp = a } :: RegistrationTokenResource s)
 
 instance P.HasDescription (RegistrationTokenResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RegistrationTokenResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: RegistrationTokenResource s)
+               (\s a -> s { _description = a } :: RegistrationTokenResource s)
 
 instance P.HasEnvironmentId (RegistrationTokenResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: RegistrationTokenResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: RegistrationTokenResource s)
+               (\s a -> s { _environmentId = a } :: RegistrationTokenResource s)
 
 instance P.HasHostLabels (RegistrationTokenResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     hostLabels =
         P.lens (_hostLabels :: RegistrationTokenResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _hostLabels = a
-                          } :: RegistrationTokenResource s)
+               (\s a -> s { _hostLabels = a } :: RegistrationTokenResource s)
 
 instance P.HasName (RegistrationTokenResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RegistrationTokenResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RegistrationTokenResource s)
+               (\s a -> s { _name = a } :: RegistrationTokenResource s)
 
 instance s ~ s' => P.HasComputedCommand (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
     computedCommand x = TF.compute (TF.refKey x) "_computedCommand"
@@ -439,21 +437,13 @@ data RegistryResource s = RegistryResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RegistryResource s) where
-    toObject RegistryResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "server_address" <$> TF.attribute _serverAddress
-        ]
-
 registryResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
     -> TF.Resource P.Provider (RegistryResource s)
 registryResource _environmentId _name _serverAddress =
-    TF.newResource "rancher_registry" $
+    TF.newResource "rancher_registry" TF.validator $
         RegistryResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -461,29 +451,36 @@ registryResource _environmentId _name _serverAddress =
             , _serverAddress = _serverAddress
             }
 
+instance TF.IsObject (RegistryResource s) where
+    toObject RegistryResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "server_address" <$> TF.attribute _serverAddress
+        ]
+
+instance TF.IsValid (RegistryResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (RegistryResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: RegistryResource s)
+               (\s a -> s { _description = a } :: RegistryResource s)
 
 instance P.HasEnvironmentId (RegistryResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: RegistryResource s)
+               (\s a -> s { _environmentId = a } :: RegistryResource s)
 
 instance P.HasName (RegistryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RegistryResource s)
+               (\s a -> s { _name = a } :: RegistryResource s)
 
 instance P.HasServerAddress (RegistryResource s) (TF.Attr s P.Text) where
     serverAddress =
         P.lens (_serverAddress :: RegistryResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverAddress = a
-                          } :: RegistryResource s)
+               (\s a -> s { _serverAddress = a } :: RegistryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -513,16 +510,6 @@ data RegistryCredentialResource s = RegistryCredentialResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (RegistryCredentialResource s) where
-    toObject RegistryCredentialResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "email" <$> TF.attribute _email
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "public_value" <$> TF.attribute _publicValue
-        , TF.assign "registry_id" <$> TF.attribute _registryId
-        , TF.assign "secret_value" <$> TF.attribute _secretValue
-        ]
-
 registryCredentialResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_value@ - 'P.publicValue'
@@ -530,7 +517,7 @@ registryCredentialResource
     -> TF.Attr s P.Text -- ^ @secret_value@ - 'P.secretValue'
     -> TF.Resource P.Provider (RegistryCredentialResource s)
 registryCredentialResource _name _publicValue _registryId _secretValue =
-    TF.newResource "rancher_registry_credential" $
+    TF.newResource "rancher_registry_credential" TF.validator $
         RegistryCredentialResource'
             { _description = TF.Nil
             , _email = TF.Nil
@@ -540,41 +527,48 @@ registryCredentialResource _name _publicValue _registryId _secretValue =
             , _secretValue = _secretValue
             }
 
+instance TF.IsObject (RegistryCredentialResource s) where
+    toObject RegistryCredentialResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_value" <$> TF.attribute _publicValue
+        , TF.assign "registry_id" <$> TF.attribute _registryId
+        , TF.assign "secret_value" <$> TF.attribute _secretValue
+        ]
+
+instance TF.IsValid (RegistryCredentialResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (RegistryCredentialResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: RegistryCredentialResource s)
+               (\s a -> s { _description = a } :: RegistryCredentialResource s)
 
 instance P.HasEmail (RegistryCredentialResource s) (TF.Attr s P.Text) where
     email =
         P.lens (_email :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a
-                          } :: RegistryCredentialResource s)
+               (\s a -> s { _email = a } :: RegistryCredentialResource s)
 
 instance P.HasName (RegistryCredentialResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: RegistryCredentialResource s)
+               (\s a -> s { _name = a } :: RegistryCredentialResource s)
 
 instance P.HasPublicValue (RegistryCredentialResource s) (TF.Attr s P.Text) where
     publicValue =
         P.lens (_publicValue :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _publicValue = a
-                          } :: RegistryCredentialResource s)
+               (\s a -> s { _publicValue = a } :: RegistryCredentialResource s)
 
 instance P.HasRegistryId (RegistryCredentialResource s) (TF.Attr s P.Text) where
     registryId =
         P.lens (_registryId :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _registryId = a
-                          } :: RegistryCredentialResource s)
+               (\s a -> s { _registryId = a } :: RegistryCredentialResource s)
 
 instance P.HasSecretValue (RegistryCredentialResource s) (TF.Attr s P.Text) where
     secretValue =
         P.lens (_secretValue :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _secretValue = a
-                          } :: RegistryCredentialResource s)
+               (\s a -> s { _secretValue = a } :: RegistryCredentialResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -598,21 +592,13 @@ data SecretResource s = SecretResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (SecretResource s) where
-    toObject SecretResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
 secretResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Resource P.Provider (SecretResource s)
 secretResource _environmentId _name _value =
-    TF.newResource "rancher_secret" $
+    TF.newResource "rancher_secret" TF.validator $
         SecretResource'
             { _description = TF.Nil
             , _environmentId = _environmentId
@@ -620,29 +606,36 @@ secretResource _environmentId _name _value =
             , _value = _value
             }
 
+instance TF.IsObject (SecretResource s) where
+    toObject SecretResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (SecretResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (SecretResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: SecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: SecretResource s)
+               (\s a -> s { _description = a } :: SecretResource s)
 
 instance P.HasEnvironmentId (SecretResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: SecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: SecretResource s)
+               (\s a -> s { _environmentId = a } :: SecretResource s)
 
 instance P.HasName (SecretResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: SecretResource s)
+               (\s a -> s { _name = a } :: SecretResource s)
 
 instance P.HasValue (SecretResource s) (TF.Attr s P.Text) where
     value =
         P.lens (_value :: SecretResource s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a
-                          } :: SecretResource s)
+               (\s a -> s { _value = a } :: SecretResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -681,25 +674,12 @@ data StackResource s = StackResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (StackResource s) where
-    toObject StackResource'{..} = catMaybes
-        [ TF.assign "catalog_id" <$> TF.attribute _catalogId
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "docker_compose" <$> TF.attribute _dockerCompose
-        , TF.assign "environment" <$> TF.attribute _environment
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "finish_upgrade" <$> TF.attribute _finishUpgrade
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "rancher_compose" <$> TF.attribute _rancherCompose
-        , TF.assign "scope" <$> TF.attribute _scope
-        ]
-
 stackResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (StackResource s)
 stackResource _environmentId _name =
-    TF.newResource "rancher_stack" $
+    TF.newResource "rancher_stack" TF.validator $
         StackResource'
             { _catalogId = TF.Nil
             , _description = TF.Nil
@@ -712,59 +692,66 @@ stackResource _environmentId _name =
             , _scope = TF.value "user"
             }
 
+instance TF.IsObject (StackResource s) where
+    toObject StackResource'{..} = P.catMaybes
+        [ TF.assign "catalog_id" <$> TF.attribute _catalogId
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "docker_compose" <$> TF.attribute _dockerCompose
+        , TF.assign "environment" <$> TF.attribute _environment
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "finish_upgrade" <$> TF.attribute _finishUpgrade
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "rancher_compose" <$> TF.attribute _rancherCompose
+        , TF.assign "scope" <$> TF.attribute _scope
+        ]
+
+instance TF.IsValid (StackResource s) where
+    validator = P.mempty
+
 instance P.HasCatalogId (StackResource s) (TF.Attr s P.Text) where
     catalogId =
         P.lens (_catalogId :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _catalogId = a
-                          } :: StackResource s)
+               (\s a -> s { _catalogId = a } :: StackResource s)
 
 instance P.HasDescription (StackResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: StackResource s)
+               (\s a -> s { _description = a } :: StackResource s)
 
 instance P.HasDockerCompose (StackResource s) (TF.Attr s P.Text) where
     dockerCompose =
         P.lens (_dockerCompose :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dockerCompose = a
-                          } :: StackResource s)
+               (\s a -> s { _dockerCompose = a } :: StackResource s)
 
 instance P.HasEnvironment (StackResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     environment =
         P.lens (_environment :: StackResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _environment = a
-                          } :: StackResource s)
+               (\s a -> s { _environment = a } :: StackResource s)
 
 instance P.HasEnvironmentId (StackResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: StackResource s)
+               (\s a -> s { _environmentId = a } :: StackResource s)
 
 instance P.HasFinishUpgrade (StackResource s) (TF.Attr s P.Bool) where
     finishUpgrade =
         P.lens (_finishUpgrade :: StackResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _finishUpgrade = a
-                          } :: StackResource s)
+               (\s a -> s { _finishUpgrade = a } :: StackResource s)
 
 instance P.HasName (StackResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: StackResource s)
+               (\s a -> s { _name = a } :: StackResource s)
 
 instance P.HasRancherCompose (StackResource s) (TF.Attr s P.Text) where
     rancherCompose =
         P.lens (_rancherCompose :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _rancherCompose = a
-                          } :: StackResource s)
+               (\s a -> s { _rancherCompose = a } :: StackResource s)
 
 instance P.HasScope (StackResource s) (TF.Attr s P.Text) where
     scope =
         P.lens (_scope :: StackResource s -> TF.Attr s P.Text)
-               (\s a -> s { _scope = a
-                          } :: StackResource s)
+               (\s a -> s { _scope = a } :: StackResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
@@ -797,21 +784,13 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance TF.IsObject (VolumeResource s) where
-    toObject VolumeResource'{..} = catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "driver" <$> TF.attribute _driver
-        , TF.assign "environment_id" <$> TF.attribute _environmentId
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
 volumeResource
     :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (VolumeResource s)
 volumeResource _driver _environmentId _name =
-    TF.newResource "rancher_volume" $
+    TF.newResource "rancher_volume" TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _driver = _driver
@@ -819,29 +798,36 @@ volumeResource _driver _environmentId _name =
             , _name = _name
             }
 
+instance TF.IsObject (VolumeResource s) where
+    toObject VolumeResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "driver" <$> TF.attribute _driver
+        , TF.assign "environment_id" <$> TF.attribute _environmentId
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (VolumeResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (VolumeResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a
-                          } :: VolumeResource s)
+               (\s a -> s { _description = a } :: VolumeResource s)
 
 instance P.HasDriver (VolumeResource s) (TF.Attr s P.Text) where
     driver =
         P.lens (_driver :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _driver = a
-                          } :: VolumeResource s)
+               (\s a -> s { _driver = a } :: VolumeResource s)
 
 instance P.HasEnvironmentId (VolumeResource s) (TF.Attr s P.Text) where
     environmentId =
         P.lens (_environmentId :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _environmentId = a
-                          } :: VolumeResource s)
+               (\s a -> s { _environmentId = a } :: VolumeResource s)
 
 instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a
-                          } :: VolumeResource s)
+               (\s a -> s { _name = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "_computedId"
