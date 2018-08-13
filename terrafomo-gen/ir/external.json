@@ -1,8 +1,11 @@
 {
     "settings": [],
-    "arguments": [],
     "dataSources": [
         {
+            "con": {
+                "smart": "data'",
+                "name": "Data'"
+            },
             "arguments": [
                 {
                     "default": "_program",
@@ -11,13 +14,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"program\" <$> TF.attribute",
-                    "name": "program",
+                    "name": "_program",
                     "method": "program",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasProgram",
+                    "validate": false,
                     "optional": false,
-                    "label": "_program"
+                    "original": "program"
                 },
                 {
                     "default": "TF.Nil",
@@ -26,13 +30,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "query",
+                    "name": "_query",
                     "method": "query",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasQuery",
+                    "validate": false,
                     "optional": true,
-                    "label": "_query"
+                    "original": "query"
                 },
                 {
                     "default": "TF.Nil",
@@ -41,17 +46,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"working_dir\" <$> TF.attribute",
-                    "name": "working_dir",
+                    "name": "_workingDir",
                     "method": "workingDir",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasWorkingDir",
+                    "validate": false,
                     "optional": true,
-                    "label": "_workingDir"
+                    "original": "working_dir"
                 }
             ],
-            "schema": "DataSource",
             "name": "Data",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -60,13 +66,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"result\" <$> TF.attribute",
-                    "name": "result",
+                    "name": "_computedResult",
                     "method": "computedResult",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedResult",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedResult"
+                    "original": "result"
                 }
             ],
             "parameters": [
@@ -77,20 +84,36 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"program\" <$> TF.attribute",
-                    "name": "program",
+                    "name": "_program",
                     "method": "program",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasProgram",
+                    "validate": false,
                     "optional": false,
-                    "label": "_program"
+                    "original": "program"
                 }
             ],
+            "conflicts": [],
             "type": "Data s",
             "original": "external"
         }
     ],
     "resources": [],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -100,8 +123,6 @@
         "microlens"
     ],
     "name": "External",
-    "parameters": [],
     "package": "terrafomo-builtins",
-    "type": "Provider",
     "original": "external"
 }
