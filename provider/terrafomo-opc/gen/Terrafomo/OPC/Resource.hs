@@ -241,7 +241,7 @@ instance P.HasTags (ComputeAclResource s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: ComputeAclResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeAclResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_image_list@ Resource.
 --
@@ -362,7 +362,7 @@ instance P.HasVersion (ComputeImageListEntryResource s) (TF.Attr s P.Integer) wh
                           } :: ComputeImageListEntryResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_instance@ Resource.
 --
@@ -495,73 +495,73 @@ instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) wh
                           } :: ComputeInstanceResource s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedAttributes x = TF.compute (TF.refKey x) "attributes"
+    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
 
 instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedAvailabilityDomain x = TF.compute (TF.refKey x) "availability_domain"
+    computedAvailabilityDomain x = TF.compute (TF.refKey x) "_computedAvailabilityDomain"
 
 instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedDomain x = TF.compute (TF.refKey x) "domain"
+    computedDomain x = TF.compute (TF.refKey x) "_computedDomain"
 
 instance s ~ s' => P.HasComputedEntry (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Integer) where
-    computedEntry x = TF.compute (TF.refKey x) "entry"
+    computedEntry x = TF.compute (TF.refKey x) "_computedEntry"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
 instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedImageFormat x = TF.compute (TF.refKey x) "image_format"
+    computedImageFormat x = TF.compute (TF.refKey x) "_computedImageFormat"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedLabel x = TF.compute (TF.refKey x) "label"
+    computedLabel x = TF.compute (TF.refKey x) "_computedLabel"
 
 instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (NetworkingInfo s)]) where
-    computedNetworkingInfo x = TF.compute (TF.refKey x) "networking_info"
+    computedNetworkingInfo x = TF.compute (TF.refKey x) "_computedNetworkingInfo"
 
 instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedPlacementRequirements x = TF.compute (TF.refKey x) "placement_requirements"
+    computedPlacementRequirements x = TF.compute (TF.refKey x) "_computedPlacementRequirements"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
 
 instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedQuotaReservation x = TF.compute (TF.refKey x) "quota_reservation"
+    computedQuotaReservation x = TF.compute (TF.refKey x) "_computedQuotaReservation"
 
 instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRelationships x = TF.compute (TF.refKey x) "relationships"
+    computedRelationships x = TF.compute (TF.refKey x) "_computedRelationships"
 
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+    computedResolvers x = TF.compute (TF.refKey x) "_computedResolvers"
 
 instance s ~ s' => P.HasComputedSite (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedSite x = TF.compute (TF.refKey x) "site"
+    computedSite x = TF.compute (TF.refKey x) "_computedSite"
 
 instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+    computedStartTime x = TF.compute (TF.refKey x) "_computedStartTime"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedVcable (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedVcable x = TF.compute (TF.refKey x) "vcable"
+    computedVcable x = TF.compute (TF.refKey x) "_computedVcable"
 
 instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Bool) where
-    computedVirtio x = TF.compute (TF.refKey x) "virtio"
+    computedVirtio x = TF.compute (TF.refKey x) "_computedVirtio"
 
 instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedVncAddress x = TF.compute (TF.refKey x) "vnc_address"
+    computedVncAddress x = TF.compute (TF.refKey x) "_computedVncAddress"
 
 -- | @opc_compute_ip_address_association@ Resource.
 --
@@ -638,7 +638,7 @@ instance P.HasVnic (ComputeIpAddressAssociationResource s) (TF.Attr s P.Text) wh
                           } :: ComputeIpAddressAssociationResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressAssociationResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_address_prefix_set@ Resource.
 --
@@ -704,7 +704,7 @@ instance P.HasTags (ComputeIpAddressPrefixSetResource s) (TF.Attr s [TF.Attr s P
                           } :: ComputeIpAddressPrefixSetResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressPrefixSetResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_address_reservation@ Resource.
 --
@@ -771,10 +771,10 @@ instance P.HasTags (ComputeIpAddressReservationResource s) (TF.Attr s [TF.Attr s
                           } :: ComputeIpAddressReservationResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeIpAddressReservationResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressReservationResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_association@ Resource.
 --
@@ -819,7 +819,7 @@ instance P.HasVcable (ComputeIpAssociationResource s) (TF.Attr s P.Text) where
                           } :: ComputeIpAssociationResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpAssociationResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @opc_compute_ip_network@ Resource.
 --
@@ -908,7 +908,7 @@ instance P.HasTags (ComputeIpNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) w
                           } :: ComputeIpNetworkResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_network_exchange@ Resource.
 --
@@ -963,7 +963,7 @@ instance P.HasTags (ComputeIpNetworkExchangeResource s) (TF.Attr s [TF.Attr s P.
                           } :: ComputeIpNetworkExchangeResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpNetworkExchangeResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_reservation@ Resource.
 --
@@ -1018,13 +1018,13 @@ instance P.HasTags (ComputeIpReservationResource s) (TF.Attr s [TF.Attr s P.Text
                           } :: ComputeIpReservationResource s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedUsed (TF.Ref s' (ComputeIpReservationResource s)) (TF.Attr s P.Bool) where
-    computedUsed x = TF.compute (TF.refKey x) "used"
+    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
 
 -- | @opc_compute_machine_image@ Resource.
 --
@@ -1103,25 +1103,25 @@ instance P.HasName (ComputeMachineImageResource s) (TF.Attr s P.Text) where
                           } :: ComputeMachineImageResource s)
 
 instance s ~ s' => P.HasComputedErrorReason (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
-    computedErrorReason x = TF.compute (TF.refKey x) "error_reason"
+    computedErrorReason x = TF.compute (TF.refKey x) "_computedErrorReason"
 
 instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
+    computedHypervisor x = TF.compute (TF.refKey x) "_computedHypervisor"
 
 instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
-    computedImageFormat x = TF.compute (TF.refKey x) "image_format"
+    computedImageFormat x = TF.compute (TF.refKey x) "_computedImageFormat"
 
 instance s ~ s' => P.HasComputedNoUpload (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Bool) where
-    computedNoUpload x = TF.compute (TF.refKey x) "no_upload"
+    computedNoUpload x = TF.compute (TF.refKey x) "_computedNoUpload"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeMachineImageResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_orchestrated_instance@ Resource.
 --
@@ -1134,7 +1134,7 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
     , _desiredState :: TF.Attr s P.Text
     -- ^ @desired_state@ - (Required)
     --
-    , _instance'    :: TF.Attr s [Instance s]
+    , _instance'    :: TF.Attr s [Instance' s]
     -- ^ @instance@ - (Required)
     --
     , _name         :: TF.Attr s P.Text
@@ -1156,7 +1156,7 @@ instance TF.IsObject (ComputeOrchestratedInstanceResource s) where
 
 computeOrchestratedInstanceResource
     :: TF.Attr s P.Text -- ^ @desired_state@ - 'P.desiredState'
-    -> TF.Attr s [Instance s] -- ^ @instance@ - 'P.instance''
+    -> TF.Attr s [Instance' s] -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource _desiredState _instance' _name =
@@ -1181,9 +1181,9 @@ instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s P.
                (\s a -> s { _desiredState = a
                           } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [Instance s]) where
+instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [Instance' s]) where
     instance' =
-        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [Instance s])
+        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [Instance' s])
                (\s a -> s { _instance' = a
                           } :: ComputeOrchestratedInstanceResource s)
 
@@ -1200,7 +1200,7 @@ instance P.HasTags (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s
                           } :: ComputeOrchestratedInstanceResource s)
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeOrchestratedInstanceResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
 -- | @opc_compute_route@ Resource.
 --
@@ -1518,7 +1518,7 @@ instance P.HasVcable (ComputeSecurityAssociationResource s) (TF.Attr s P.Text) w
                           } :: ComputeSecurityAssociationResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSecurityAssociationResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @opc_compute_security_ip_list@ Resource.
 --
@@ -1722,7 +1722,7 @@ instance P.HasTags (ComputeSecurityProtocolResource s) (TF.Attr s [TF.Attr s P.T
                           } :: ComputeSecurityProtocolResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeSecurityProtocolResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_security_rule@ Resource.
 --
@@ -1866,7 +1866,7 @@ instance P.HasTags (ComputeSecurityRuleResource s) (TF.Attr s [TF.Attr s P.Text]
                           } :: ComputeSecurityRuleResource s)
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeSecurityRuleResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_snapshot@ Resource.
 --
@@ -1910,16 +1910,16 @@ instance P.HasInstance' (ComputeSnapshotResource s) (TF.Attr s P.Text) where
                           } :: ComputeSnapshotResource s)
 
 instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
 
 instance s ~ s' => P.HasComputedMachineImage (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedMachineImage x = TF.compute (TF.refKey x) "machine_image"
+    computedMachineImage x = TF.compute (TF.refKey x) "_computedMachineImage"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ssh_key@ Resource.
 --
@@ -2137,37 +2137,37 @@ instance P.HasTags (ComputeStorageVolumeResource s) (TF.Attr s [TF.Attr s P.Text
                           } :: ComputeStorageVolumeResource s)
 
 instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
+    computedHypervisor x = TF.compute (TF.refKey x) "_computedHypervisor"
 
 instance s ~ s' => P.HasComputedMachineImage (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedMachineImage x = TF.compute (TF.refKey x) "machine_image"
+    computedMachineImage x = TF.compute (TF.refKey x) "_computedMachineImage"
 
 instance s ~ s' => P.HasComputedManaged (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Bool) where
-    computedManaged x = TF.compute (TF.refKey x) "managed"
+    computedManaged x = TF.compute (TF.refKey x) "_computedManaged"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
 instance s ~ s' => P.HasComputedReadonly (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Bool) where
-    computedReadonly x = TF.compute (TF.refKey x) "readonly"
+    computedReadonly x = TF.compute (TF.refKey x) "_computedReadonly"
 
 instance s ~ s' => P.HasComputedSnapshot (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedSnapshot x = TF.compute (TF.refKey x) "snapshot"
+    computedSnapshot x = TF.compute (TF.refKey x) "_computedSnapshot"
 
 instance s ~ s' => P.HasComputedSnapshotAccount (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedSnapshotAccount x = TF.compute (TF.refKey x) "snapshot_account"
+    computedSnapshotAccount x = TF.compute (TF.refKey x) "_computedSnapshotAccount"
 
 instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+    computedSnapshotId x = TF.compute (TF.refKey x) "_computedSnapshotId"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedStoragePool (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedStoragePool x = TF.compute (TF.refKey x) "storage_pool"
+    computedStoragePool x = TF.compute (TF.refKey x) "_computedStoragePool"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeStorageVolumeResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_storage_volume_snapshot@ Resource.
 --
@@ -2244,43 +2244,43 @@ instance P.HasVolumeName (ComputeStorageVolumeSnapshotResource s) (TF.Attr s P.T
                           } :: ComputeStorageVolumeSnapshotResource s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedAccount x = TF.compute (TF.refKey x) "account"
+    computedAccount x = TF.compute (TF.refKey x) "_computedAccount"
 
 instance s ~ s' => P.HasComputedMachineImageName (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
+    computedMachineImageName x = TF.compute (TF.refKey x) "_computedMachineImageName"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
 instance s ~ s' => P.HasComputedProperty (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedProperty x = TF.compute (TF.refKey x) "property"
+    computedProperty x = TF.compute (TF.refKey x) "_computedProperty"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
 instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+    computedSnapshotId x = TF.compute (TF.refKey x) "_computedSnapshotId"
 
 instance s ~ s' => P.HasComputedSnapshotTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
+    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "_computedSnapshotTimestamp"
 
 instance s ~ s' => P.HasComputedStartTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
+    computedStartTimestamp x = TF.compute (TF.refKey x) "_computedStartTimestamp"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedStatusDetail (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedStatusDetail x = TF.compute (TF.refKey x) "status_detail"
+    computedStatusDetail x = TF.compute (TF.refKey x) "_computedStatusDetail"
 
 instance s ~ s' => P.HasComputedStatusTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
+    computedStatusTimestamp x = TF.compute (TF.refKey x) "_computedStatusTimestamp"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeStorageVolumeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_vnic_set@ Resource.
 --
@@ -2346,7 +2346,7 @@ instance P.HasTags (ComputeVnicSetResource s) (TF.Attr s [TF.Attr s P.Text]) whe
                           } :: ComputeVnicSetResource s)
 
 instance s ~ s' => P.HasComputedVirtualNics (TF.Ref s' (ComputeVnicSetResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVirtualNics x = TF.compute (TF.refKey x) "virtual_nics"
+    computedVirtualNics x = TF.compute (TF.refKey x) "_computedVirtualNics"
 
 -- | @opc_lbaas_certificate@ Resource.
 --
@@ -2425,10 +2425,10 @@ instance P.HasType' (LbaasCertificateResource s) (TF.Attr s P.Text) where
                           } :: LbaasCertificateResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasCertificateResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_lbaas_listener@ Resource.
 --
@@ -2586,16 +2586,16 @@ instance P.HasVirtualHosts (LbaasListenerResource s) (TF.Attr s [TF.Attr s (TF.A
                           } :: LbaasListenerResource s)
 
 instance s ~ s' => P.HasComputedOperationDetails (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
-    computedOperationDetails x = TF.compute (TF.refKey x) "operation_details"
+    computedOperationDetails x = TF.compute (TF.refKey x) "_computedOperationDetails"
 
 instance s ~ s' => P.HasComputedParentListener (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
-    computedParentListener x = TF.compute (TF.refKey x) "parent_listener"
+    computedParentListener x = TF.compute (TF.refKey x) "_computedParentListener"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Bool) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasListenerResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_lbaas_load_balancer@ Resource.
 --
@@ -2740,26 +2740,26 @@ instance P.HasTags (LbaasLoadBalancerResource s) (TF.Attr s [TF.Attr s (TF.Attr 
                           } :: LbaasLoadBalancerResource s)
 
 instance s ~ s' => P.HasComputedBalancerVips (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedBalancerVips x = TF.compute (TF.refKey x) "balancer_vips"
+    computedBalancerVips x = TF.compute (TF.refKey x) "_computedBalancerVips"
 
 instance s ~ s' => P.HasComputedCanonicalHostName (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedCanonicalHostName x = TF.compute (TF.refKey x) "canonical_host_name"
+    computedCanonicalHostName x = TF.compute (TF.refKey x) "_computedCanonicalHostName"
 
 instance s ~ s' => P.HasComputedCloudgateCapable (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Bool) where
-    computedCloudgateCapable x = TF.compute (TF.refKey x) "cloudgate_capable"
+    computedCloudgateCapable x = TF.compute (TF.refKey x) "_computedCloudgateCapable"
 
 instance s ~ s' => P.HasComputedIpNetwork (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedIpNetwork x = TF.compute (TF.refKey x) "ip_network"
+    computedIpNetwork x = TF.compute (TF.refKey x) "_computedIpNetwork"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasLoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_lbaas_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/OPC/opc_lbaas_policy terraform documentation>
 -- for more information.
 data LbaasPolicyResource s = LbaasPolicyResource'
-    { _applicationCookieStickinessPolicy :: TF.Attr s [ApplicationCookieStickinessPolicy s]
+    { _applicationCookieStickinessPolicy :: TF.Attr s (ApplicationCookieStickinessPolicy s)
     -- ^ @application_cookie_stickiness_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2773,7 +2773,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _cloudgatePolicy :: TF.Attr s [CloudgatePolicy s]
+    , _cloudgatePolicy :: TF.Attr s (CloudgatePolicy s)
     -- ^ @cloudgate_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2790,7 +2790,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     , _loadBalancer :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
-    , _loadBalancerCookieStickinessPolicy :: TF.Attr s [LoadBalancerCookieStickinessPolicy s]
+    , _loadBalancerCookieStickinessPolicy :: TF.Attr s (LoadBalancerCookieStickinessPolicy s)
     -- ^ @load_balancer_cookie_stickiness_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2804,7 +2804,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _loadBalancingMechanismPolicy :: TF.Attr s [LoadBalancingMechanismPolicy s]
+    , _loadBalancingMechanismPolicy :: TF.Attr s (LoadBalancingMechanismPolicy s)
     -- ^ @load_balancing_mechanism_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2821,7 +2821,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _rateLimitingRequestPolicy :: TF.Attr s [RateLimitingRequestPolicy s]
+    , _rateLimitingRequestPolicy :: TF.Attr s (RateLimitingRequestPolicy s)
     -- ^ @rate_limiting_request_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2835,7 +2835,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _redirectPolicy :: TF.Attr s [RedirectPolicy s]
+    , _redirectPolicy :: TF.Attr s (RedirectPolicy s)
     -- ^ @redirect_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2849,7 +2849,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'applicationCookieStickinessPolicy'
     -- * 'loadBalancingMechanismPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _resourceAccessControlPolicy :: TF.Attr s [ResourceAccessControlPolicy s]
+    , _resourceAccessControlPolicy :: TF.Attr s (ResourceAccessControlPolicy s)
     -- ^ @resource_access_control_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2863,7 +2863,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'applicationCookieStickinessPolicy'
     -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
-    , _setRequestHeaderPolicy :: TF.Attr s [SetRequestHeaderPolicy s]
+    , _setRequestHeaderPolicy :: TF.Attr s (SetRequestHeaderPolicy s)
     -- ^ @set_request_header_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2877,7 +2877,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _sslNegotiationPolicy :: TF.Attr s [SslNegotiationPolicy s]
+    , _sslNegotiationPolicy :: TF.Attr s (SslNegotiationPolicy s)
     -- ^ @ssl_negotiation_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2891,7 +2891,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'redirectPolicy'
     -- * 'loadBalancingMechanismPolicy'
     -- * 'resourceAccessControlPolicy'
-    , _trustedCertificatePolicy :: TF.Attr s [TrustedCertificatePolicy s]
+    , _trustedCertificatePolicy :: TF.Attr s (TrustedCertificatePolicy s)
     -- ^ @trusted_certificate_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -2944,9 +2944,9 @@ lbaasPolicyResource _loadBalancer _name =
             , _trustedCertificatePolicy = TF.Nil
             }
 
-instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s [ApplicationCookieStickinessPolicy s]) where
+instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (ApplicationCookieStickinessPolicy s)) where
     applicationCookieStickinessPolicy =
-        P.lens (_applicationCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s [ApplicationCookieStickinessPolicy s])
+        P.lens (_applicationCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (ApplicationCookieStickinessPolicy s))
                (\s a -> s { _applicationCookieStickinessPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -2959,9 +2959,9 @@ instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr
                           , _resourceAccessControlPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasCloudgatePolicy (LbaasPolicyResource s) (TF.Attr s [CloudgatePolicy s]) where
+instance P.HasCloudgatePolicy (LbaasPolicyResource s) (TF.Attr s (CloudgatePolicy s)) where
     cloudgatePolicy =
-        P.lens (_cloudgatePolicy :: LbaasPolicyResource s -> TF.Attr s [CloudgatePolicy s])
+        P.lens (_cloudgatePolicy :: LbaasPolicyResource s -> TF.Attr s (CloudgatePolicy s))
                (\s a -> s { _cloudgatePolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -2980,9 +2980,9 @@ instance P.HasLoadBalancer (LbaasPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _loadBalancer = a
                           } :: LbaasPolicyResource s)
 
-instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s [LoadBalancerCookieStickinessPolicy s]) where
+instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LoadBalancerCookieStickinessPolicy s)) where
     loadBalancerCookieStickinessPolicy =
-        P.lens (_loadBalancerCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s [LoadBalancerCookieStickinessPolicy s])
+        P.lens (_loadBalancerCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LoadBalancerCookieStickinessPolicy s))
                (\s a -> s { _loadBalancerCookieStickinessPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -2995,9 +2995,9 @@ instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Att
                           , _resourceAccessControlPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasLoadBalancingMechanismPolicy (LbaasPolicyResource s) (TF.Attr s [LoadBalancingMechanismPolicy s]) where
+instance P.HasLoadBalancingMechanismPolicy (LbaasPolicyResource s) (TF.Attr s (LoadBalancingMechanismPolicy s)) where
     loadBalancingMechanismPolicy =
-        P.lens (_loadBalancingMechanismPolicy :: LbaasPolicyResource s -> TF.Attr s [LoadBalancingMechanismPolicy s])
+        P.lens (_loadBalancingMechanismPolicy :: LbaasPolicyResource s -> TF.Attr s (LoadBalancingMechanismPolicy s))
                (\s a -> s { _loadBalancingMechanismPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -3016,9 +3016,9 @@ instance P.HasName (LbaasPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: LbaasPolicyResource s)
 
-instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s [RateLimitingRequestPolicy s]) where
+instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s (RateLimitingRequestPolicy s)) where
     rateLimitingRequestPolicy =
-        P.lens (_rateLimitingRequestPolicy :: LbaasPolicyResource s -> TF.Attr s [RateLimitingRequestPolicy s])
+        P.lens (_rateLimitingRequestPolicy :: LbaasPolicyResource s -> TF.Attr s (RateLimitingRequestPolicy s))
                (\s a -> s { _rateLimitingRequestPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -3031,9 +3031,9 @@ instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s [Rate
                           , _resourceAccessControlPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s [RedirectPolicy s]) where
+instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s (RedirectPolicy s)) where
     redirectPolicy =
-        P.lens (_redirectPolicy :: LbaasPolicyResource s -> TF.Attr s [RedirectPolicy s])
+        P.lens (_redirectPolicy :: LbaasPolicyResource s -> TF.Attr s (RedirectPolicy s))
                (\s a -> s { _redirectPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -3046,9 +3046,9 @@ instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s [RedirectPolicy 
                           , _resourceAccessControlPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s [ResourceAccessControlPolicy s]) where
+instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s (ResourceAccessControlPolicy s)) where
     resourceAccessControlPolicy =
-        P.lens (_resourceAccessControlPolicy :: LbaasPolicyResource s -> TF.Attr s [ResourceAccessControlPolicy s])
+        P.lens (_resourceAccessControlPolicy :: LbaasPolicyResource s -> TF.Attr s (ResourceAccessControlPolicy s))
                (\s a -> s { _resourceAccessControlPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -3061,9 +3061,9 @@ instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s [Re
                           , _loadBalancingMechanismPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s [SetRequestHeaderPolicy s]) where
+instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s (SetRequestHeaderPolicy s)) where
     setRequestHeaderPolicy =
-        P.lens (_setRequestHeaderPolicy :: LbaasPolicyResource s -> TF.Attr s [SetRequestHeaderPolicy s])
+        P.lens (_setRequestHeaderPolicy :: LbaasPolicyResource s -> TF.Attr s (SetRequestHeaderPolicy s))
                (\s a -> s { _setRequestHeaderPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _sslNegotiationPolicy = TF.Nil
@@ -3076,9 +3076,9 @@ instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s [SetRequ
                           , _resourceAccessControlPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s [SslNegotiationPolicy s]) where
+instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s (SslNegotiationPolicy s)) where
     sslNegotiationPolicy =
-        P.lens (_sslNegotiationPolicy :: LbaasPolicyResource s -> TF.Attr s [SslNegotiationPolicy s])
+        P.lens (_sslNegotiationPolicy :: LbaasPolicyResource s -> TF.Attr s (SslNegotiationPolicy s))
                (\s a -> s { _sslNegotiationPolicy = a
                           , _trustedCertificatePolicy = TF.Nil
                           , _setRequestHeaderPolicy = TF.Nil
@@ -3091,9 +3091,9 @@ instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s [SslNegoti
                           , _resourceAccessControlPolicy = TF.Nil
                           } :: LbaasPolicyResource s)
 
-instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s [TrustedCertificatePolicy s]) where
+instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s (TrustedCertificatePolicy s)) where
     trustedCertificatePolicy =
-        P.lens (_trustedCertificatePolicy :: LbaasPolicyResource s -> TF.Attr s [TrustedCertificatePolicy s])
+        P.lens (_trustedCertificatePolicy :: LbaasPolicyResource s -> TF.Attr s (TrustedCertificatePolicy s))
                (\s a -> s { _trustedCertificatePolicy = a
                           , _sslNegotiationPolicy = TF.Nil
                           , _setRequestHeaderPolicy = TF.Nil
@@ -3107,13 +3107,13 @@ instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s [Trust
                           } :: LbaasPolicyResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Bool) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_lbaas_server_pool@ Resource.
 --
@@ -3123,7 +3123,7 @@ data LbaasServerPoolResource s = LbaasServerPoolResource'
     { _enabled      :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _healthCheck  :: TF.Attr s [HealthCheck s]
+    , _healthCheck  :: TF.Attr s (HealthCheck s)
     -- ^ @health_check@ - (Optional)
     --
     , _loadBalancer :: TF.Attr s P.Text
@@ -3177,9 +3177,9 @@ instance P.HasEnabled (LbaasServerPoolResource s) (TF.Attr s P.Bool) where
                (\s a -> s { _enabled = a
                           } :: LbaasServerPoolResource s)
 
-instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s [HealthCheck s]) where
+instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s (HealthCheck s)) where
     healthCheck =
-        P.lens (_healthCheck :: LbaasServerPoolResource s -> TF.Attr s [HealthCheck s])
+        P.lens (_healthCheck :: LbaasServerPoolResource s -> TF.Attr s (HealthCheck s))
                (\s a -> s { _healthCheck = a
                           } :: LbaasServerPoolResource s)
 
@@ -3214,19 +3214,19 @@ instance P.HasVnicSet (LbaasServerPoolResource s) (TF.Attr s P.Text) where
                           } :: LbaasServerPoolResource s)
 
 instance s ~ s' => P.HasComputedConsumers (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
-    computedConsumers x = TF.compute (TF.refKey x) "consumers"
+    computedConsumers x = TF.compute (TF.refKey x) "_computedConsumers"
 
 instance s ~ s' => P.HasComputedOperationDetails (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Bool) where
-    computedOperationDetails x = TF.compute (TF.refKey x) "operation_details"
+    computedOperationDetails x = TF.compute (TF.refKey x) "_computedOperationDetails"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Bool) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasServerPoolResource s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_storage_container@ Resource.
 --
@@ -3325,16 +3325,16 @@ instance P.HasSecondaryKey (StorageContainerResource s) (TF.Attr s P.Text) where
                           } :: StorageContainerResource s)
 
 instance s ~ s' => P.HasComputedAllowedOrigins (TF.Ref s' (StorageContainerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAllowedOrigins x = TF.compute (TF.refKey x) "allowed_origins"
+    computedAllowedOrigins x = TF.compute (TF.refKey x) "_computedAllowedOrigins"
 
 instance s ~ s' => P.HasComputedExposedHeaders (TF.Ref s' (StorageContainerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedExposedHeaders x = TF.compute (TF.refKey x) "exposed_headers"
+    computedExposedHeaders x = TF.compute (TF.refKey x) "_computedExposedHeaders"
 
 instance s ~ s' => P.HasComputedReadAcls (TF.Ref s' (StorageContainerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedReadAcls x = TF.compute (TF.refKey x) "read_acls"
+    computedReadAcls x = TF.compute (TF.refKey x) "_computedReadAcls"
 
 instance s ~ s' => P.HasComputedWriteAcls (TF.Ref s' (StorageContainerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedWriteAcls x = TF.compute (TF.refKey x) "write_acls"
+    computedWriteAcls x = TF.compute (TF.refKey x) "_computedWriteAcls"
 
 -- | @opc_storage_object@ Resource.
 --
@@ -3471,31 +3471,31 @@ instance P.HasTransferEncoding (StorageObjectResource s) (TF.Attr s P.Text) wher
                           } :: StorageObjectResource s)
 
 instance s ~ s' => P.HasComputedAcceptRanges (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedAcceptRanges x = TF.compute (TF.refKey x) "accept_ranges"
+    computedAcceptRanges x = TF.compute (TF.refKey x) "_computedAcceptRanges"
 
 instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Integer) where
-    computedContentLength x = TF.compute (TF.refKey x) "content_length"
+    computedContentLength x = TF.compute (TF.refKey x) "_computedContentLength"
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedContentType x = TF.compute (TF.refKey x) "content_type"
+    computedContentType x = TF.compute (TF.refKey x) "_computedContentType"
 
 instance s ~ s' => P.HasComputedDeleteAt (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Integer) where
-    computedDeleteAt x = TF.compute (TF.refKey x) "delete_at"
+    computedDeleteAt x = TF.compute (TF.refKey x) "_computedDeleteAt"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "etag"
+    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (StorageObjectResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "metadata"
+    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
 
 instance s ~ s' => P.HasComputedObjectManifest (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedObjectManifest x = TF.compute (TF.refKey x) "object_manifest"
+    computedObjectManifest x = TF.compute (TF.refKey x) "_computedObjectManifest"
 
 instance s ~ s' => P.HasComputedTimestamp (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedTimestamp x = TF.compute (TF.refKey x) "timestamp"
+    computedTimestamp x = TF.compute (TF.refKey x) "_computedTimestamp"
 
 instance s ~ s' => P.HasComputedTransactionId (TF.Ref s' (StorageObjectResource s)) (TF.Attr s P.Text) where
-    computedTransactionId x = TF.compute (TF.refKey x) "transaction_id"
+    computedTransactionId x = TF.compute (TF.refKey x) "_computedTransactionId"

@@ -40,6 +40,7 @@ import qualified Prelude             as P
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.OPC.Lens  as P
+import qualified Terrafomo.OPC.Types as P
 import qualified Terrafomo.Provider  as TF
 
 -- | The @OPC@ Terraform provider configuration.
@@ -109,7 +110,7 @@ instance TF.IsSection Provider where
                   ])
 
 instance TF.IsProvider Provider where
-    type ProviderType Provider = "opc"
+    type ProviderType Provider = "provider"
 
 newProvider
     :: P.Text -- ^ @identity_domain@ - 'P.identityDomain'

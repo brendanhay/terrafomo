@@ -251,6 +251,7 @@ module Terrafomo.OPC.Lens
     , HasComputedModel (..)
     , HasComputedMachineImages (..)
     , HasComputedReadonly (..)
+    , HasComputedType (..)
     , HasComputedDeleteAt (..)
     , HasComputedManaged (..)
     , HasComputedPlatform (..)
@@ -272,7 +273,6 @@ module Terrafomo.OPC.Lens
     , HasComputedSecLists (..)
     , HasComputedEtag (..)
     , HasComputedStatusDetail (..)
-    , HasComputedType' (..)
     , HasComputedSize (..)
     , HasComputedAcceptedReturnCodes (..)
     , HasComputedHostname (..)
@@ -1481,6 +1481,9 @@ class HasComputedMachineImages a b | a -> b where
 class HasComputedReadonly a b | a -> b where
     computedReadonly :: a -> b
 
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
 class HasComputedDeleteAt a b | a -> b where
     computedDeleteAt :: a -> b
 
@@ -1543,9 +1546,6 @@ class HasComputedEtag a b | a -> b where
 
 class HasComputedStatusDetail a b | a -> b where
     computedStatusDetail :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
 
 class HasComputedSize a b | a -> b where
     computedSize :: a -> b

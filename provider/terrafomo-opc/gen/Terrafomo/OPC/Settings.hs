@@ -70,13 +70,15 @@ module Terrafomo.OPC.Settings
     , newRateLimitingRequestPolicy
 
     -- ** instance
-    , Instance (..)
-    , newInstance
+    , Instance' (..)
+    , newInstance'
 
     ) where
 
 import Data.Functor ((<$>))
 import Data.Maybe   (catMaybes)
+
+import GHC.Base (($))
 
 import qualified Data.Hashable       as P
 import qualified Data.HashMap.Strict as P
@@ -219,13 +221,13 @@ instance P.HasVnicSets (NetworkingInfo s) (TF.Attr s [TF.Attr s P.Text]) where
                           } :: NetworkingInfo s)
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (NetworkingInfo s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDns x = TF.compute (TF.refKey x) "dns"
+    computedDns x = TF.compute (TF.refKey x) "_computedDns"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkingInfo s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+    computedMacAddress x = TF.compute (TF.refKey x) "_computedMacAddress"
 
 instance s ~ s' => P.HasComputedSecLists (TF.Ref s' (NetworkingInfo s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecLists x = TF.compute (TF.refKey x) "sec_lists"
+    computedSecLists x = TF.compute (TF.refKey x) "_computedSecLists"
 
 -- | @ssl_negotiation_policy@ nested settings.
 data SslNegotiationPolicy s = SslNegotiationPolicy'
@@ -411,7 +413,7 @@ instance P.HasUnhealthyThreshold (HealthCheck s) (TF.Attr s P.Integer) where
                           } :: HealthCheck s)
 
 instance s ~ s' => P.HasComputedAcceptedReturnCodes (TF.Ref s' (HealthCheck s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAcceptedReturnCodes x = TF.compute (TF.refKey x) "accepted_return_codes"
+    computedAcceptedReturnCodes x = TF.compute (TF.refKey x) "_computedAcceptedReturnCodes"
 
 -- | @resource_access_control_policy@ nested settings.
 data ResourceAccessControlPolicy s = ResourceAccessControlPolicy'
@@ -504,7 +506,7 @@ instance P.HasVolume (Storage s) (TF.Attr s P.Text) where
                           } :: Storage s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Storage s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 -- | @cloudgate_policy@ nested settings.
 data CloudgatePolicy s = CloudgatePolicy'
@@ -872,7 +874,7 @@ instance P.HasZoneMemorySize (RateLimitingRequestPolicy s) (TF.Attr s P.Integer)
                           } :: RateLimitingRequestPolicy s)
 
 -- | @instance@ nested settings.
-data Instance s = Instance'
+data Instance' s = Instance''
     { _bootOrder  :: TF.Attr s [TF.Attr s P.Integer]
     -- ^ @boot_order@ - (Optional)
     --
@@ -902,10 +904,10 @@ data Instance s = Instance'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.Hashable  (Instance s)
-instance TF.IsValue  (Instance s)
-instance TF.IsObject (Instance s) where
-    toObject Instance'{..} = catMaybes
+instance P.Hashable  (Instance' s)
+instance TF.IsValue  (Instance' s)
+instance TF.IsObject (Instance' s) where
+    toObject Instance''{..} = catMaybes
         [ TF.assign "boot_order" <$> TF.attribute _bootOrder
         , TF.assign "image_list" <$> TF.attribute _imageList
         , TF.assign "name" <$> TF.attribute _name
@@ -917,12 +919,12 @@ instance TF.IsObject (Instance s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-newInstance
+newInstance'
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
-    -> Instance s
-newInstance _name _shape =
-    Instance'
+    -> Instance' s
+newInstance' _name _shape =
+    Instance''
         { _bootOrder = TF.Nil
         , _imageList = TF.Nil
         , _name = _name
@@ -934,131 +936,131 @@ newInstance _name _shape =
         , _tags = TF.Nil
         }
 
-instance P.HasBootOrder (Instance s) (TF.Attr s [TF.Attr s P.Integer]) where
+instance P.HasBootOrder (Instance' s) (TF.Attr s [TF.Attr s P.Integer]) where
     bootOrder =
-        P.lens (_bootOrder :: Instance s -> TF.Attr s [TF.Attr s P.Integer])
+        P.lens (_bootOrder :: Instance' s -> TF.Attr s [TF.Attr s P.Integer])
                (\s a -> s { _bootOrder = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasImageList (Instance s) (TF.Attr s P.Text) where
+instance P.HasImageList (Instance' s) (TF.Attr s P.Text) where
     imageList =
-        P.lens (_imageList :: Instance s -> TF.Attr s P.Text)
+        P.lens (_imageList :: Instance' s -> TF.Attr s P.Text)
                (\s a -> s { _imageList = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasName (Instance s) (TF.Attr s P.Text) where
+instance P.HasName (Instance' s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Instance s -> TF.Attr s P.Text)
+        P.lens (_name :: Instance' s -> TF.Attr s P.Text)
                (\s a -> s { _name = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasPersistent (Instance s) (TF.Attr s P.Bool) where
+instance P.HasPersistent (Instance' s) (TF.Attr s P.Bool) where
     persistent =
-        P.lens (_persistent :: Instance s -> TF.Attr s P.Bool)
+        P.lens (_persistent :: Instance' s -> TF.Attr s P.Bool)
                (\s a -> s { _persistent = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasReverseDns (Instance s) (TF.Attr s P.Bool) where
+instance P.HasReverseDns (Instance' s) (TF.Attr s P.Bool) where
     reverseDns =
-        P.lens (_reverseDns :: Instance s -> TF.Attr s P.Bool)
+        P.lens (_reverseDns :: Instance' s -> TF.Attr s P.Bool)
                (\s a -> s { _reverseDns = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasShape (Instance s) (TF.Attr s P.Text) where
+instance P.HasShape (Instance' s) (TF.Attr s P.Text) where
     shape =
-        P.lens (_shape :: Instance s -> TF.Attr s P.Text)
+        P.lens (_shape :: Instance' s -> TF.Attr s P.Text)
                (\s a -> s { _shape = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasSshKeys (Instance s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSshKeys (Instance' s) (TF.Attr s [TF.Attr s P.Text]) where
     sshKeys =
-        P.lens (_sshKeys :: Instance s -> TF.Attr s [TF.Attr s P.Text])
+        P.lens (_sshKeys :: Instance' s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _sshKeys = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasStorage (Instance s) (TF.Attr s [Storage s]) where
+instance P.HasStorage (Instance' s) (TF.Attr s [Storage s]) where
     storage =
-        P.lens (_storage :: Instance s -> TF.Attr s [Storage s])
+        P.lens (_storage :: Instance' s -> TF.Attr s [Storage s])
                (\s a -> s { _storage = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance P.HasTags (Instance s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (Instance' s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        P.lens (_tags :: Instance s -> TF.Attr s [TF.Attr s P.Text])
+        P.lens (_tags :: Instance' s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a
-                          } :: Instance s)
+                          } :: Instance' s)
 
-instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedAttributes x = TF.compute (TF.refKey x) "attributes"
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
 
-instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedAvailabilityDomain x = TF.compute (TF.refKey x) "availability_domain"
+instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedAvailabilityDomain x = TF.compute (TF.refKey x) "_computedAvailabilityDomain"
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedDomain x = TF.compute (TF.refKey x) "domain"
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedDomain x = TF.compute (TF.refKey x) "_computedDomain"
 
-instance s ~ s' => P.HasComputedEntry (TF.Ref s' (Instance s)) (TF.Attr s P.Integer) where
-    computedEntry x = TF.compute (TF.refKey x) "entry"
+instance s ~ s' => P.HasComputedEntry (TF.Ref s' (Instance' s)) (TF.Attr s P.Integer) where
+    computedEntry x = TF.compute (TF.refKey x) "_computedEntry"
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
-instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedImageFormat x = TF.compute (TF.refKey x) "image_format"
+instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedImageFormat x = TF.compute (TF.refKey x) "_computedImageFormat"
 
-instance s ~ s' => P.HasComputedInstanceAttributes (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedInstanceAttributes x = TF.compute (TF.refKey x) "instance_attributes"
+instance s ~ s' => P.HasComputedInstanceAttributes (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedInstanceAttributes x = TF.compute (TF.refKey x) "_computedInstanceAttributes"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
-instance s ~ s' => P.HasComputedLabel (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedLabel x = TF.compute (TF.refKey x) "label"
+instance s ~ s' => P.HasComputedLabel (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedLabel x = TF.compute (TF.refKey x) "_computedLabel"
 
-instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (Instance s)) (TF.Attr s [NetworkingInfo s]) where
-    computedNetworkingInfo x = TF.compute (TF.refKey x) "networking_info"
+instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (Instance' s)) (TF.Attr s [NetworkingInfo s]) where
+    computedNetworkingInfo x = TF.compute (TF.refKey x) "_computedNetworkingInfo"
 
-instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (Instance s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedPlacementRequirements x = TF.compute (TF.refKey x) "placement_requirements"
+instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (Instance' s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedPlacementRequirements x = TF.compute (TF.refKey x) "_computedPlacementRequirements"
 
-instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
 
-instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedQuotaReservation x = TF.compute (TF.refKey x) "quota_reservation"
+instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedQuotaReservation x = TF.compute (TF.refKey x) "_computedQuotaReservation"
 
-instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (Instance s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRelationships x = TF.compute (TF.refKey x) "relationships"
+instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (Instance' s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedRelationships x = TF.compute (TF.refKey x) "_computedRelationships"
 
-instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (Instance s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
+instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (Instance' s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedResolvers x = TF.compute (TF.refKey x) "_computedResolvers"
 
-instance s ~ s' => P.HasComputedSite (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedSite x = TF.compute (TF.refKey x) "site"
+instance s ~ s' => P.HasComputedSite (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedSite x = TF.compute (TF.refKey x) "_computedSite"
 
-instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedStartTime x = TF.compute (TF.refKey x) "_computedStartTime"
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputedState (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
-instance s ~ s' => P.HasComputedVcable (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedVcable x = TF.compute (TF.refKey x) "vcable"
+instance s ~ s' => P.HasComputedVcable (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedVcable x = TF.compute (TF.refKey x) "_computedVcable"
 
-instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (Instance s)) (TF.Attr s P.Bool) where
-    computedVirtio x = TF.compute (TF.refKey x) "virtio"
+instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (Instance' s)) (TF.Attr s P.Bool) where
+    computedVirtio x = TF.compute (TF.refKey x) "_computedVirtio"
 
-instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (Instance s)) (TF.Attr s P.Text) where
-    computedVncAddress x = TF.compute (TF.refKey x) "vnc_address"
+instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (Instance' s)) (TF.Attr s P.Text) where
+    computedVncAddress x = TF.compute (TF.refKey x) "_computedVncAddress"

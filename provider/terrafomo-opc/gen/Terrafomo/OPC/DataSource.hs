@@ -127,13 +127,13 @@ instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
                           } :: ComputeImageListEntryData s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
-    computedAttributes x = TF.compute (TF.refKey x) "attributes"
+    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
 
 instance s ~ s' => P.HasComputedMachineImages (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMachineImages x = TF.compute (TF.refKey x) "machine_images"
+    computedMachineImages x = TF.compute (TF.refKey x) "_computedMachineImages"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_address_reservation@ DataSource.
 --
@@ -166,19 +166,19 @@ instance P.HasName (ComputeIpAddressReservationData s) (TF.Attr s P.Text) where
                           } :: ComputeIpAddressReservationData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedIpAddressPool (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedIpAddressPool x = TF.compute (TF.refKey x) "ip_address_pool"
+    computedIpAddressPool x = TF.compute (TF.refKey x) "_computedIpAddressPool"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_ip_reservation@ DataSource.
 --
@@ -211,19 +211,19 @@ instance P.HasName (ComputeIpReservationData s) (TF.Attr s P.Text) where
                           } :: ComputeIpReservationData s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
 instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
-    computedParentPool x = TF.compute (TF.refKey x) "parent_pool"
+    computedParentPool x = TF.compute (TF.refKey x) "_computedParentPool"
 
 instance s ~ s' => P.HasComputedPermanent (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Bool) where
-    computedPermanent x = TF.compute (TF.refKey x) "permanent"
+    computedPermanent x = TF.compute (TF.refKey x) "_computedPermanent"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 instance s ~ s' => P.HasComputedUsed (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Bool) where
-    computedUsed x = TF.compute (TF.refKey x) "used"
+    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
 
 -- | @opc_compute_machine_image@ DataSource.
 --
@@ -268,37 +268,37 @@ instance P.HasName (ComputeMachineImageData s) (TF.Attr s P.Text) where
                           } :: ComputeMachineImageData s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedAttributes x = TF.compute (TF.refKey x) "attributes"
+    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedErrorReason (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedErrorReason x = TF.compute (TF.refKey x) "error_reason"
+    computedErrorReason x = TF.compute (TF.refKey x) "_computedErrorReason"
 
 instance s ~ s' => P.HasComputedFile (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedFile x = TF.compute (TF.refKey x) "file"
+    computedFile x = TF.compute (TF.refKey x) "_computedFile"
 
 instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
+    computedHypervisor x = TF.compute (TF.refKey x) "_computedHypervisor"
 
 instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedImageFormat x = TF.compute (TF.refKey x) "image_format"
+    computedImageFormat x = TF.compute (TF.refKey x) "_computedImageFormat"
 
 instance s ~ s' => P.HasComputedNoUpload (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Bool) where
-    computedNoUpload x = TF.compute (TF.refKey x) "no_upload"
+    computedNoUpload x = TF.compute (TF.refKey x) "_computedNoUpload"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
 instance s ~ s' => P.HasComputedSizes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedSizes x = TF.compute (TF.refKey x) "sizes"
+    computedSizes x = TF.compute (TF.refKey x) "_computedSizes"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+    computedState x = TF.compute (TF.refKey x) "_computedState"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 -- | @opc_compute_network_interface@ DataSource.
 --
@@ -355,43 +355,43 @@ instance P.HasInterface (ComputeNetworkInterfaceData s) (TF.Attr s P.Text) where
                           } :: ComputeNetworkInterfaceData s)
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDns x = TF.compute (TF.refKey x) "dns"
+    computedDns x = TF.compute (TF.refKey x) "_computedDns"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedIpNetwork (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedIpNetwork x = TF.compute (TF.refKey x) "ip_network"
+    computedIpNetwork x = TF.compute (TF.refKey x) "_computedIpNetwork"
 
 instance s ~ s' => P.HasComputedIsDefaultGateway (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Bool) where
-    computedIsDefaultGateway x = TF.compute (TF.refKey x) "is_default_gateway"
+    computedIsDefaultGateway x = TF.compute (TF.refKey x) "_computedIsDefaultGateway"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+    computedMacAddress x = TF.compute (TF.refKey x) "_computedMacAddress"
 
 instance s ~ s' => P.HasComputedModel (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedModel x = TF.compute (TF.refKey x) "model"
+    computedModel x = TF.compute (TF.refKey x) "_computedModel"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
+    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
 
 instance s ~ s' => P.HasComputedNat (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNat x = TF.compute (TF.refKey x) "nat"
+    computedNat x = TF.compute (TF.refKey x) "_computedNat"
 
 instance s ~ s' => P.HasComputedSearchDomains (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSearchDomains x = TF.compute (TF.refKey x) "search_domains"
+    computedSearchDomains x = TF.compute (TF.refKey x) "_computedSearchDomains"
 
 instance s ~ s' => P.HasComputedSecLists (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecLists x = TF.compute (TF.refKey x) "sec_lists"
+    computedSecLists x = TF.compute (TF.refKey x) "_computedSecLists"
 
 instance s ~ s' => P.HasComputedSharedNetwork (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Bool) where
-    computedSharedNetwork x = TF.compute (TF.refKey x) "shared_network"
+    computedSharedNetwork x = TF.compute (TF.refKey x) "_computedSharedNetwork"
 
 instance s ~ s' => P.HasComputedVnic (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedVnic x = TF.compute (TF.refKey x) "vnic"
+    computedVnic x = TF.compute (TF.refKey x) "_computedVnic"
 
 instance s ~ s' => P.HasComputedVnicSets (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVnicSets x = TF.compute (TF.refKey x) "vnic_sets"
+    computedVnicSets x = TF.compute (TF.refKey x) "_computedVnicSets"
 
 -- | @opc_compute_ssh_key@ DataSource.
 --
@@ -424,10 +424,10 @@ instance P.HasName (ComputeSshKeyData s) (TF.Attr s P.Text) where
                           } :: ComputeSshKeyData s)
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
 -- | @opc_compute_storage_volume_snapshot@ DataSource.
 --
@@ -460,55 +460,55 @@ instance P.HasName (ComputeStorageVolumeSnapshotData s) (TF.Attr s P.Text) where
                           } :: ComputeStorageVolumeSnapshotData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedAccount x = TF.compute (TF.refKey x) "account"
+    computedAccount x = TF.compute (TF.refKey x) "_computedAccount"
 
 instance s ~ s' => P.HasComputedCollocated (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Bool) where
-    computedCollocated x = TF.compute (TF.refKey x) "collocated"
+    computedCollocated x = TF.compute (TF.refKey x) "_computedCollocated"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedMachineImageName (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
+    computedMachineImageName x = TF.compute (TF.refKey x) "_computedMachineImageName"
 
 instance s ~ s' => P.HasComputedParentVolumeBootable (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Bool) where
-    computedParentVolumeBootable x = TF.compute (TF.refKey x) "parent_volume_bootable"
+    computedParentVolumeBootable x = TF.compute (TF.refKey x) "_computedParentVolumeBootable"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "platform"
+    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
 
 instance s ~ s' => P.HasComputedProperty (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedProperty x = TF.compute (TF.refKey x) "property"
+    computedProperty x = TF.compute (TF.refKey x) "_computedProperty"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
 instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+    computedSnapshotId x = TF.compute (TF.refKey x) "_computedSnapshotId"
 
 instance s ~ s' => P.HasComputedSnapshotTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
+    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "_computedSnapshotTimestamp"
 
 instance s ~ s' => P.HasComputedStartTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
+    computedStartTimestamp x = TF.compute (TF.refKey x) "_computedStartTimestamp"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedStatusDetail (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStatusDetail x = TF.compute (TF.refKey x) "status_detail"
+    computedStatusDetail x = TF.compute (TF.refKey x) "_computedStatusDetail"
 
 instance s ~ s' => P.HasComputedStatusTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
+    computedStatusTimestamp x = TF.compute (TF.refKey x) "_computedStatusTimestamp"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
 
 instance s ~ s' => P.HasComputedVolumeName (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedVolumeName x = TF.compute (TF.refKey x) "volume_name"
+    computedVolumeName x = TF.compute (TF.refKey x) "_computedVolumeName"
 
 -- | @opc_compute_vnic@ DataSource.
 --
@@ -541,16 +541,16 @@ instance P.HasName (ComputeVnicData s) (TF.Attr s P.Text) where
                           } :: ComputeVnicData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+    computedMacAddress x = TF.compute (TF.refKey x) "_computedMacAddress"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeVnicData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+    computedTags x = TF.compute (TF.refKey x) "_computedTags"
 
 instance s ~ s' => P.HasComputedTransitFlag (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Bool) where
-    computedTransitFlag x = TF.compute (TF.refKey x) "transit_flag"
+    computedTransitFlag x = TF.compute (TF.refKey x) "_computedTransitFlag"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "uri"
+    computedUri x = TF.compute (TF.refKey x) "_computedUri"
