@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "con": {
+                "smart": "newSecureJsonData",
+                "name": "SecureJsonData'"
+            },
             "arguments": [
                 {
                     "default": "_accessKey",
@@ -9,13 +13,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_key\" <$> TF.attribute",
-                    "name": "access_key",
+                    "name": "_accessKey",
                     "method": "accessKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAccessKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_accessKey"
+                    "original": "access_key"
                 },
                 {
                     "default": "_secretKey",
@@ -24,16 +29,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"secret_key\" <$> TF.attribute",
-                    "name": "secret_key",
+                    "name": "_secretKey",
                     "method": "secretKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSecretKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_secretKey"
+                    "original": "secret_key"
                 }
             ],
             "name": "SecureJsonData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -43,13 +50,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_key\" <$> TF.attribute",
-                    "name": "access_key",
+                    "name": "_accessKey",
                     "method": "accessKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAccessKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_accessKey"
+                    "original": "access_key"
                 },
                 {
                     "default": "_secretKey",
@@ -58,20 +66,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"secret_key\" <$> TF.attribute",
-                    "name": "secret_key",
+                    "name": "_secretKey",
                     "method": "secretKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasSecretKey",
+                    "validate": false,
                     "optional": false,
-                    "label": "_secretKey"
+                    "original": "secret_key"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "SecureJsonData s",
             "original": "secure_json_data"
         },
         {
+            "con": {
+                "smart": "newJsonData",
+                "name": "JsonData'"
+            },
             "arguments": [
                 {
                     "default": "TF.Nil",
@@ -80,13 +93,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"assume_role_arn\" <$> TF.attribute",
-                    "name": "assume_role_arn",
+                    "name": "_assumeRoleArn",
                     "method": "assumeRoleArn",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAssumeRoleArn",
+                    "validate": false,
                     "optional": true,
-                    "label": "_assumeRoleArn"
+                    "original": "assume_role_arn"
                 },
                 {
                     "default": "_authType",
@@ -95,13 +109,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"auth_type\" <$> TF.attribute",
-                    "name": "auth_type",
+                    "name": "_authType",
                     "method": "authType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAuthType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_authType"
+                    "original": "auth_type"
                 },
                 {
                     "default": "TF.Nil",
@@ -110,13 +125,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"custom_metrics_namespaces\" <$> TF.attribute",
-                    "name": "custom_metrics_namespaces",
+                    "name": "_customMetricsNamespaces",
                     "method": "customMetricsNamespaces",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasCustomMetricsNamespaces",
+                    "validate": false,
                     "optional": true,
-                    "label": "_customMetricsNamespaces"
+                    "original": "custom_metrics_namespaces"
                 },
                 {
                     "default": "_defaultRegion",
@@ -125,16 +141,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"default_region\" <$> TF.attribute",
-                    "name": "default_region",
+                    "name": "_defaultRegion",
                     "method": "defaultRegion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDefaultRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_defaultRegion"
+                    "original": "default_region"
                 }
             ],
             "name": "JsonData",
+            "threaded": true,
             "attributes": [],
             "parameters": [
                 {
@@ -144,13 +162,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"auth_type\" <$> TF.attribute",
-                    "name": "auth_type",
+                    "name": "_authType",
                     "method": "authType",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAuthType",
+                    "validate": false,
                     "optional": false,
-                    "label": "_authType"
+                    "original": "auth_type"
                 },
                 {
                     "default": "_defaultRegion",
@@ -159,59 +178,28 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"default_region\" <$> TF.attribute",
-                    "name": "default_region",
+                    "name": "_defaultRegion",
                     "method": "defaultRegion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDefaultRegion",
+                    "validate": false,
                     "optional": false,
-                    "label": "_defaultRegion"
+                    "original": "default_region"
                 }
             ],
-            "hashable": false,
+            "conflicts": [],
             "type": "JsonData s",
             "original": "json_data"
-        }
-    ],
-    "arguments": [
-        {
-            "default": "_auth",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Credentials for accessing the Grafana API."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"auth\"",
-            "name": "auth",
-            "method": "auth",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAuth",
-            "optional": false,
-            "label": "_auth"
-        },
-        {
-            "default": "_url",
-            "computed": false,
-            "required": true,
-            "help": [
-                "URL of the root of the target Grafana server."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"url\"",
-            "name": "url",
-            "method": "url",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUrl",
-            "optional": false,
-            "label": "_url"
         }
     ],
     "dataSources": [],
     "resources": [
         {
+            "con": {
+                "smart": "alertNotificationResource",
+                "name": "AlertNotificationResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value P.False",
@@ -220,13 +208,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"is_default\" <$> TF.attribute",
-                    "name": "is_default",
+                    "name": "_isDefault",
                     "method": "isDefault",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIsDefault",
+                    "validate": false,
                     "optional": true,
-                    "label": "_isDefault"
+                    "original": "is_default"
                 },
                 {
                     "default": "_name",
@@ -235,13 +224,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -250,13 +240,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"settings\" <$> TF.attribute",
-                    "name": "settings",
+                    "name": "_settings",
                     "method": "settings",
                     "conflicts": [],
                     "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
                     "class": "HasSettings",
+                    "validate": false,
                     "optional": true,
-                    "label": "_settings"
+                    "original": "settings"
                 },
                 {
                     "default": "_type'",
@@ -265,17 +256,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
-            "schema": "Resource",
             "name": "AlertNotificationResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -284,13 +276,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -301,13 +294,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
@@ -316,19 +310,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "AlertNotificationResource s",
             "original": "grafana_alert_notification"
         },
         {
+            "con": {
+                "smart": "dashboardResource",
+                "name": "DashboardResource'"
+            },
             "arguments": [
                 {
                     "default": "_configJson",
@@ -337,17 +337,18 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"config_json\" <$> TF.attribute",
-                    "name": "config_json",
+                    "name": "_configJson",
                     "method": "configJson",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasConfigJson",
+                    "validate": false,
                     "optional": false,
-                    "label": "_configJson"
+                    "original": "config_json"
                 }
             ],
-            "schema": "Resource",
             "name": "DashboardResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -356,13 +357,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"slug\" <$> TF.attribute",
-                    "name": "slug",
+                    "name": "_computedSlug",
                     "method": "computedSlug",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSlug",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedSlug"
+                    "original": "slug"
                 }
             ],
             "parameters": [
@@ -373,19 +375,25 @@
                     "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"config_json\" <$> TF.attribute",
-                    "name": "config_json",
+                    "name": "_configJson",
                     "method": "configJson",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasConfigJson",
+                    "validate": false,
                     "optional": false,
-                    "label": "_configJson"
+                    "original": "config_json"
                 }
             ],
+            "conflicts": [],
             "type": "DashboardResource s",
             "original": "grafana_dashboard"
         },
         {
+            "con": {
+                "smart": "dataSourceResource",
+                "name": "DataSourceResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"proxy\"",
@@ -394,13 +402,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"access_mode\" <$> TF.attribute",
-                    "name": "access_mode",
+                    "name": "_accessMode",
                     "method": "accessMode",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAccessMode",
+                    "validate": false,
                     "optional": true,
-                    "label": "_accessMode"
+                    "original": "access_mode"
                 },
                 {
                     "default": "TF.value P.False",
@@ -409,13 +418,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"basic_auth_enabled\" <$> TF.attribute",
-                    "name": "basic_auth_enabled",
+                    "name": "_basicAuthEnabled",
                     "method": "basicAuthEnabled",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasBasicAuthEnabled",
+                    "validate": false,
                     "optional": true,
-                    "label": "_basicAuthEnabled"
+                    "original": "basic_auth_enabled"
                 },
                 {
                     "default": "TF.Nil",
@@ -424,13 +434,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"basic_auth_password\" <$> TF.attribute",
-                    "name": "basic_auth_password",
+                    "name": "_basicAuthPassword",
                     "method": "basicAuthPassword",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBasicAuthPassword",
+                    "validate": false,
                     "optional": true,
-                    "label": "_basicAuthPassword"
+                    "original": "basic_auth_password"
                 },
                 {
                     "default": "TF.Nil",
@@ -439,13 +450,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"basic_auth_username\" <$> TF.attribute",
-                    "name": "basic_auth_username",
+                    "name": "_basicAuthUsername",
                     "method": "basicAuthUsername",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasBasicAuthUsername",
+                    "validate": false,
                     "optional": true,
-                    "label": "_basicAuthUsername"
+                    "original": "basic_auth_username"
                 },
                 {
                     "default": "TF.Nil",
@@ -454,13 +466,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"database_name\" <$> TF.attribute",
-                    "name": "database_name",
+                    "name": "_databaseName",
                     "method": "databaseName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDatabaseName",
+                    "validate": false,
                     "optional": true,
-                    "label": "_databaseName"
+                    "original": "database_name"
                 },
                 {
                     "default": "TF.value P.False",
@@ -469,13 +482,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"is_default\" <$> TF.attribute",
-                    "name": "is_default",
+                    "name": "_isDefault",
                     "method": "isDefault",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasIsDefault",
+                    "validate": false,
                     "optional": true,
-                    "label": "_isDefault"
+                    "original": "is_default"
                 },
                 {
                     "default": "TF.Nil",
@@ -484,13 +498,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"json_data\" <$> TF.attribute",
-                    "name": "json_data",
+                    "name": "_jsonData",
                     "method": "jsonData",
                     "conflicts": [],
-                    "type": "TF.Attr s [JsonData s]",
+                    "type": "TF.Attr s [TF.Attr s (JsonData s)]",
                     "class": "HasJsonData",
+                    "validate": true,
                     "optional": true,
-                    "label": "_jsonData"
+                    "original": "json_data"
                 },
                 {
                     "default": "_name",
@@ -499,13 +514,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -514,13 +530,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "password",
+                    "name": "_password",
                     "method": "password",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasPassword",
+                    "validate": false,
                     "optional": true,
-                    "label": "_password"
+                    "original": "password"
                 },
                 {
                     "default": "TF.Nil",
@@ -529,13 +546,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"secure_json_data\" <$> TF.attribute",
-                    "name": "secure_json_data",
+                    "name": "_secureJsonData",
                     "method": "secureJsonData",
                     "conflicts": [],
-                    "type": "TF.Attr s [SecureJsonData s]",
+                    "type": "TF.Attr s [TF.Attr s (SecureJsonData s)]",
                     "class": "HasSecureJsonData",
+                    "validate": true,
                     "optional": true,
-                    "label": "_secureJsonData"
+                    "original": "secure_json_data"
                 },
                 {
                     "default": "_type'",
@@ -544,13 +562,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 },
                 {
                     "default": "TF.Nil",
@@ -559,13 +578,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "url",
+                    "name": "_url",
                     "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
+                    "validate": false,
                     "optional": true,
-                    "label": "_url"
+                    "original": "url"
                 },
                 {
                     "default": "TF.Nil",
@@ -574,17 +594,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
-                    "name": "username",
+                    "name": "_username",
                     "method": "username",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
+                    "validate": false,
                     "optional": true,
-                    "label": "_username"
+                    "original": "username"
                 }
             ],
-            "schema": "Resource",
             "name": "DataSourceResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -593,13 +614,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "id",
+                    "name": "_computedId",
                     "method": "computedId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedId"
+                    "original": "id"
                 }
             ],
             "parameters": [
@@ -610,13 +632,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "_type'",
@@ -625,19 +648,25 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "type",
+                    "name": "_type'",
                     "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasType'",
+                    "validate": false,
                     "optional": false,
-                    "label": "_type'"
+                    "original": "type"
                 }
             ],
+            "conflicts": [],
             "type": "DataSourceResource s",
             "original": "grafana_data_source"
         },
         {
+            "con": {
+                "smart": "organizationResource",
+                "name": "OrganizationResource'"
+            },
             "arguments": [
                 {
                     "default": "TF.value \"admin\"",
@@ -646,13 +675,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"admin_user\" <$> TF.attribute",
-                    "name": "admin_user",
+                    "name": "_adminUser",
                     "method": "adminUser",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasAdminUser",
+                    "validate": false,
                     "optional": true,
-                    "label": "_adminUser"
+                    "original": "admin_user"
                 },
                 {
                     "default": "TF.Nil",
@@ -661,13 +691,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"admins\" <$> TF.attribute",
-                    "name": "admins",
+                    "name": "_admins",
                     "method": "admins",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasAdmins",
+                    "validate": false,
                     "optional": true,
-                    "label": "_admins"
+                    "original": "admins"
                 },
                 {
                     "default": "TF.value P.True",
@@ -676,13 +707,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"create_users\" <$> TF.attribute",
-                    "name": "create_users",
+                    "name": "_createUsers",
                     "method": "createUsers",
                     "conflicts": [],
                     "type": "TF.Attr s P.Bool",
                     "class": "HasCreateUsers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_createUsers"
+                    "original": "create_users"
                 },
                 {
                     "default": "TF.Nil",
@@ -691,13 +723,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"editors\" <$> TF.attribute",
-                    "name": "editors",
+                    "name": "_editors",
                     "method": "editors",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasEditors",
+                    "validate": false,
                     "optional": true,
-                    "label": "_editors"
+                    "original": "editors"
                 },
                 {
                     "default": "_name",
@@ -706,13 +739,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
@@ -721,17 +755,18 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"viewers\" <$> TF.attribute",
-                    "name": "viewers",
+                    "name": "_viewers",
                     "method": "viewers",
                     "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasViewers",
+                    "validate": false,
                     "optional": true,
-                    "label": "_viewers"
+                    "original": "viewers"
                 }
             ],
-            "schema": "Resource",
             "name": "OrganizationResource",
+            "threaded": true,
             "attributes": [
                 {
                     "default": "TF.Nil",
@@ -740,13 +775,14 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"org_id\" <$> TF.attribute",
-                    "name": "org_id",
+                    "name": "_computedOrgId",
                     "method": "computedOrgId",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
                     "class": "HasComputedOrgId",
+                    "validate": false,
                     "optional": false,
-                    "label": "_computedOrgId"
+                    "original": "org_id"
                 }
             ],
             "parameters": [
@@ -757,19 +793,109 @@
                     "help": [],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "name",
+                    "name": "_name",
                     "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
+                    "validate": false,
                     "optional": false,
-                    "label": "_name"
+                    "original": "name"
                 }
             ],
+            "conflicts": [],
             "type": "OrganizationResource s",
             "original": "grafana_organization"
         }
     ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "_auth",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Credentials for accessing the Grafana API."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"auth\"",
+                "name": "_auth",
+                "method": "auth",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAuth",
+                "validate": false,
+                "optional": false,
+                "original": "auth"
+            },
+            {
+                "default": "_url",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "URL of the root of the target Grafana server."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"url\"",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": false,
+                "original": "url"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_auth",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "Credentials for accessing the Grafana API."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"auth\"",
+                "name": "_auth",
+                "method": "auth",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasAuth",
+                "validate": false,
+                "optional": false,
+                "original": "auth"
+            },
+            {
+                "default": "_url",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "URL of the root of the target Grafana server."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"url\"",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": false,
+                "original": "url"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
     "dependencies": [
         "base",
         "unordered-containers",
@@ -779,43 +905,6 @@
         "microlens"
     ],
     "name": "Grafana",
-    "parameters": [
-        {
-            "default": "_auth",
-            "computed": false,
-            "required": true,
-            "help": [
-                "Credentials for accessing the Grafana API."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"auth\"",
-            "name": "auth",
-            "method": "auth",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasAuth",
-            "optional": false,
-            "label": "_auth"
-        },
-        {
-            "default": "_url",
-            "computed": false,
-            "required": true,
-            "help": [
-                "URL of the root of the target Grafana server."
-            ],
-            "forceNew": false,
-            "encoder": "P.Just $ TF.assign \"url\"",
-            "name": "url",
-            "method": "url",
-            "conflicts": [],
-            "type": "P.Text",
-            "class": "HasUrl",
-            "optional": false,
-            "label": "_url"
-        }
-    ],
     "package": "terrafomo-grafana",
-    "type": "Provider",
     "original": "grafana"
 }
