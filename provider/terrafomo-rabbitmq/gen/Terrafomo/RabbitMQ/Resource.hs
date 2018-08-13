@@ -158,7 +158,7 @@ instance P.HasVhost (BindingResource s) (TF.Attr s P.Text) where
                           } :: BindingResource s)
 
 instance s ~ s' => P.HasComputedPropertiesKey (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
-    computedPropertiesKey x = TF.compute (TF.refKey x) "properties_key"
+    computedPropertiesKey x = TF.compute (TF.refKey x) "_computedPropertiesKey"
 
 -- | @rabbitmq_exchange@ Resource.
 --
@@ -168,7 +168,7 @@ data ExchangeResource s = ExchangeResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _settings :: TF.Attr s [Settings s]
+    , _settings :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required)
     --
     , _vhost    :: TF.Attr s P.Text
@@ -185,7 +185,7 @@ instance TF.IsObject (ExchangeResource s) where
 
 exchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [Settings s] -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
     -> TF.Resource P.Provider (ExchangeResource s)
 exchangeResource _name _settings =
     TF.newResource "rabbitmq_exchange" $
@@ -201,9 +201,9 @@ instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: ExchangeResource s)
 
-instance P.HasSettings (ExchangeResource s) (TF.Attr s [Settings s]) where
+instance P.HasSettings (ExchangeResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: ExchangeResource s -> TF.Attr s [Settings s])
+        P.lens (_settings :: ExchangeResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a
                           } :: ExchangeResource s)
 
@@ -218,7 +218,7 @@ instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_permissions terraform documentation>
 -- for more information.
 data PermissionsResource s = PermissionsResource'
-    { _permissions :: TF.Attr s [Permissions s]
+    { _permissions :: TF.Attr s (Permissions s)
     -- ^ @permissions@ - (Required)
     --
     , _user        :: TF.Attr s P.Text
@@ -237,7 +237,7 @@ instance TF.IsObject (PermissionsResource s) where
         ]
 
 permissionsResource
-    :: TF.Attr s [Permissions s] -- ^ @permissions@ - 'P.permissions'
+    :: TF.Attr s (Permissions s) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> TF.Resource P.Provider (PermissionsResource s)
 permissionsResource _permissions _user =
@@ -248,9 +248,9 @@ permissionsResource _permissions _user =
             , _vhost = TF.value "/"
             }
 
-instance P.HasPermissions (PermissionsResource s) (TF.Attr s [Permissions s]) where
+instance P.HasPermissions (PermissionsResource s) (TF.Attr s (Permissions s)) where
     permissions =
-        P.lens (_permissions :: PermissionsResource s -> TF.Attr s [Permissions s])
+        P.lens (_permissions :: PermissionsResource s -> TF.Attr s (Permissions s))
                (\s a -> s { _permissions = a
                           } :: PermissionsResource s)
 
@@ -274,7 +274,7 @@ data PolicyResource s = PolicyResource'
     { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _policy :: TF.Attr s [Policy s]
+    , _policy :: TF.Attr s (Policy s)
     -- ^ @policy@ - (Required)
     --
     , _vhost  :: TF.Attr s P.Text
@@ -291,7 +291,7 @@ instance TF.IsObject (PolicyResource s) where
 
 policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [Policy s] -- ^ @policy@ - 'P.policy'
+    -> TF.Attr s (Policy s) -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
     -> TF.Resource P.Provider (PolicyResource s)
 policyResource _name _policy _vhost =
@@ -308,9 +308,9 @@ instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: PolicyResource s)
 
-instance P.HasPolicy (PolicyResource s) (TF.Attr s [Policy s]) where
+instance P.HasPolicy (PolicyResource s) (TF.Attr s (Policy s)) where
     policy =
-        P.lens (_policy :: PolicyResource s -> TF.Attr s [Policy s])
+        P.lens (_policy :: PolicyResource s -> TF.Attr s (Policy s))
                (\s a -> s { _policy = a
                           } :: PolicyResource s)
 
@@ -328,7 +328,7 @@ data QueueResource s = QueueResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _settings :: TF.Attr s [Settings s]
+    , _settings :: TF.Attr s (Settings s)
     -- ^ @settings@ - (Required)
     --
     , _vhost    :: TF.Attr s P.Text
@@ -345,7 +345,7 @@ instance TF.IsObject (QueueResource s) where
 
 queueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [Settings s] -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
     -> TF.Resource P.Provider (QueueResource s)
 queueResource _name _settings =
     TF.newResource "rabbitmq_queue" $
@@ -361,9 +361,9 @@ instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a
                           } :: QueueResource s)
 
-instance P.HasSettings (QueueResource s) (TF.Attr s [Settings s]) where
+instance P.HasSettings (QueueResource s) (TF.Attr s (Settings s)) where
     settings =
-        P.lens (_settings :: QueueResource s -> TF.Attr s [Settings s])
+        P.lens (_settings :: QueueResource s -> TF.Attr s (Settings s))
                (\s a -> s { _settings = a
                           } :: QueueResource s)
 
