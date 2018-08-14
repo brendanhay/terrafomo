@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @Scaleway@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _organization :: P.Text

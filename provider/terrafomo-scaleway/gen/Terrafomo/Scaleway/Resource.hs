@@ -83,7 +83,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @scaleway_ip@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_ip terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/ip.html terraform documentation>
 -- for more information.
 data IpResource s = IpResource'
     { _reverse :: TF.Attr s P.Text
@@ -114,14 +114,14 @@ instance P.HasReverse (IpResource s) (TF.Attr s P.Text) where
                (\s a -> s { _reverse = a } :: IpResource s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "_computedServer"
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 -- | @scaleway_security_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_security_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/security_group.html terraform documentation>
 -- for more information.
 data SecurityGroupResource s = SecurityGroupResource'
     { _description           :: TF.Attr s P.Text
@@ -129,7 +129,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     -- The description of the security group
     --
     , _enableDefaultSecurity :: TF.Attr s P.Bool
-    -- ^ @enable_default_security@ - (Optional)
+    -- ^ @enable_default_security@ - (Optional, Forces New)
     -- Add default security group rules
     --
     , _name                  :: TF.Attr s P.Text
@@ -177,7 +177,7 @@ instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
 
 -- | @scaleway_security_group_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_security_group_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/security_group_rule.html terraform documentation>
 -- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     { _action        :: TF.Attr s P.Text
@@ -270,7 +270,7 @@ instance P.HasSecurityGroup (SecurityGroupRuleResource s) (TF.Attr s P.Text) whe
 
 -- | @scaleway_server@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_server terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
     { _bootscript        :: TF.Attr s P.Text
@@ -286,7 +286,7 @@ data ServerResource s = ServerResource'
     -- Determines if IPv6 is enabled for the server
     --
     , _image             :: TF.Attr s P.Text
-    -- ^ @image@ - (Required)
+    -- ^ @image@ - (Required, Forces New)
     -- The base image of the server
     --
     , _name              :: TF.Attr s P.Text
@@ -302,11 +302,11 @@ data ServerResource s = ServerResource'
     -- The tags associated with the server
     --
     , _type'             :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     -- The instance type of the server
     --
-    , _volume            :: TF.Attr s [TF.Attr s (Volume s)]
-    -- ^ @volume@ - (Optional)
+    , _volume            :: TF.Attr s [TF.Attr s (ServerVolume s)]
+    -- ^ @volume@ - (Optional, Forces New)
     -- Volumes attached to the server on creation
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -347,7 +347,7 @@ instance TF.IsValid (ServerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_volume"
                   (_volume
-                      :: ServerResource s -> TF.Attr s [TF.Attr s (Volume s)])
+                      :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
                   TF.validator
 
 instance P.HasBootscript (ServerResource s) (TF.Attr s P.Text) where
@@ -390,36 +390,36 @@ instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (Volume s)]) where
+instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (ServerVolume s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (Volume s)])
+        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
                (\s a -> s { _volume = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedBootType (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootType x = TF.compute (TF.refKey x) "_computedBootType"
+    computedBootType x = TF.compute (TF.refKey x) "boot_type"
 
 instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "_computedPublicIp"
+    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
 instance s ~ s' => P.HasComputedPublicIpv6 (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIpv6 x = TF.compute (TF.refKey x) "_computedPublicIpv6"
+    computedPublicIpv6 x = TF.compute (TF.refKey x) "public_ipv6"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedStateDetail (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedStateDetail x = TF.compute (TF.refKey x) "_computedStateDetail"
+    computedStateDetail x = TF.compute (TF.refKey x) "state_detail"
 
 -- | @scaleway_ssh_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/ssh_key.html terraform documentation>
 -- for more information.
 data SshKeyResource s = SshKeyResource'
     { _key :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     -- The ssh key
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -448,7 +448,7 @@ instance P.HasKey (SshKeyResource s) (TF.Attr s P.Text) where
 
 -- | @scaleway_token@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_token terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/token.html terraform documentation>
 -- for more information.
 data TokenResource s = TokenResource'
     { _description :: TF.Attr s P.Text
@@ -501,34 +501,34 @@ instance P.HasPassword (TokenResource s) (TF.Attr s P.Text) where
                (\s a -> s { _password = a } :: TokenResource s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
+    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
 
 instance s ~ s' => P.HasComputedCreationIp (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedCreationIp x = TF.compute (TF.refKey x) "_computedCreationIp"
+    computedCreationIp x = TF.compute (TF.refKey x) "creation_ip"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
+    computedEmail x = TF.compute (TF.refKey x) "email"
 
 instance s ~ s' => P.HasComputedExpirationDate (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedExpirationDate x = TF.compute (TF.refKey x) "_computedExpirationDate"
+    computedExpirationDate x = TF.compute (TF.refKey x) "expiration_date"
 
 instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedSecretKey x = TF.compute (TF.refKey x) "_computedSecretKey"
+    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
 
 instance s ~ s' => P.HasComputedUserId (TF.Ref s' (TokenResource s)) (TF.Attr s P.Text) where
-    computedUserId x = TF.compute (TF.refKey x) "_computedUserId"
+    computedUserId x = TF.compute (TF.refKey x) "user_id"
 
 -- | @scaleway_user_data@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_user_data terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/user_data.html terraform documentation>
 -- for more information.
 data UserDataResource s = UserDataResource'
     { _key    :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     -- The key of the user data to manage
     --
     , _server :: TF.Attr s P.Text
-    -- ^ @server@ - (Required)
+    -- ^ @server@ - (Required, Forces New)
     -- The server the meta data is associated with
     --
     , _value  :: TF.Attr s P.Text
@@ -577,7 +577,7 @@ instance P.HasValue (UserDataResource s) (TF.Attr s P.Text) where
 
 -- | @scaleway_volume@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
     { _name     :: TF.Attr s P.Text
@@ -633,19 +633,19 @@ instance P.HasType' (VolumeResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "_computedServer"
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 -- | @scaleway_volume_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_volume_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/r/volume_attachment.html terraform documentation>
 -- for more information.
 data VolumeAttachmentResource s = VolumeAttachmentResource'
     { _server :: TF.Attr s P.Text
-    -- ^ @server@ - (Required)
+    -- ^ @server@ - (Required, Forces New)
     -- The server a volume should be attached to
     --
     , _volume :: TF.Attr s P.Text
-    -- ^ @volume@ - (Required)
+    -- ^ @volume@ - (Required, Forces New)
     -- The volume to attach
     --
     } deriving (P.Show, P.Eq, P.Generic)

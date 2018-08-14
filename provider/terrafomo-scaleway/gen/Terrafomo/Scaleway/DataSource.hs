@@ -63,15 +63,15 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @scaleway_bootscript@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_bootscript terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/d/bootscript.html terraform documentation>
 -- for more information.
 data BootscriptData s = BootscriptData'
     { _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     -- Exact name of the desired bootscript
     --
     , _nameFilter :: TF.Attr s P.Text
-    -- ^ @name_filter@ - (Optional)
+    -- ^ @name_filter@ - (Optional, Forces New)
     -- Partial name of the desired bootscript to filter with
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -105,33 +105,33 @@ instance P.HasNameFilter (BootscriptData s) (TF.Attr s P.Text) where
                (\s a -> s { _nameFilter = a } :: BootscriptData s)
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedArchitecture x = TF.compute (TF.refKey x) "_computedArchitecture"
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
 instance s ~ s' => P.HasComputedBootCmdArgs (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedBootCmdArgs x = TF.compute (TF.refKey x) "_computedBootCmdArgs"
+    computedBootCmdArgs x = TF.compute (TF.refKey x) "boot_cmd_args"
 
 instance s ~ s' => P.HasComputedDtb (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedDtb x = TF.compute (TF.refKey x) "_computedDtb"
+    computedDtb x = TF.compute (TF.refKey x) "dtb"
 
 instance s ~ s' => P.HasComputedInitrd (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedInitrd x = TF.compute (TF.refKey x) "_computedInitrd"
+    computedInitrd x = TF.compute (TF.refKey x) "initrd"
 
 instance s ~ s' => P.HasComputedKernel (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedKernel x = TF.compute (TF.refKey x) "_computedKernel"
+    computedKernel x = TF.compute (TF.refKey x) "kernel"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 -- | @scaleway_image@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/d/image.html terraform documentation>
 -- for more information.
 data ImageData s = ImageData'
     { _architecture :: TF.Attr s P.Text
-    -- ^ @architecture@ - (Required)
+    -- ^ @architecture@ - (Required, Forces New)
     -- Architecture of the desired image
     --
     , _mostRecent   :: TF.Attr s P.Bool
@@ -142,7 +142,7 @@ data ImageData s = ImageData'
     --
     -- * 'nameFilter'
     , _nameFilter   :: TF.Attr s P.Text
-    -- ^ @name_filter@ - (Optional)
+    -- ^ @name_filter@ - (Optional, Forces New)
     -- Partial name of the desired image to filter with
     --
     -- Conflicts with:
@@ -198,20 +198,20 @@ instance P.HasNameFilter (ImageData s) (TF.Attr s P.Text) where
                (\s a -> s { _nameFilter = a } :: ImageData s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ImageData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 -- | @scaleway_security_group@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_security_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/d/security_group.html terraform documentation>
 -- for more information.
 data SecurityGroupData s = SecurityGroupData'
     { _name :: TF.Attr s P.Text
@@ -243,14 +243,14 @@ instance P.HasName (SecurityGroupData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SecurityGroupData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedEnableDefaultSecurity (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Bool) where
-    computedEnableDefaultSecurity x = TF.compute (TF.refKey x) "_computedEnableDefaultSecurity"
+    computedEnableDefaultSecurity x = TF.compute (TF.refKey x) "enable_default_security"
 
 -- | @scaleway_volume@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Scaleway/scaleway_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/scaleway/d/volume.html terraform documentation>
 -- for more information.
 data VolumeData s = VolumeData'
     { _name :: TF.Attr s P.Text
@@ -282,10 +282,10 @@ instance P.HasName (VolumeData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: VolumeData s)
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "_computedServer"
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 instance s ~ s' => P.HasComputedSizeInGb (TF.Ref s' (VolumeData s)) (TF.Attr s P.Integer) where
-    computedSizeInGb x = TF.compute (TF.refKey x) "_computedSizeInGb"
+    computedSizeInGb x = TF.compute (TF.refKey x) "size_in_gb"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
