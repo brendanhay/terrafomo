@@ -107,7 +107,7 @@
           "minItems": 1,
           "maxItems": 0,
           "schema": {
-            "name": "entities",
+            "name": "alert_condition_entities",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
@@ -191,7 +191,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "term",
+            "name": "alert_condition_term",
             "schemas": [
               {
                 "name": "duration",
@@ -469,7 +469,7 @@
           "minItems": 0,
           "maxItems": 60,
           "resource": {
-            "name": "widget",
+            "name": "dashboard_widget",
             "schemas": [
               {
                 "name": "column",
@@ -613,7 +613,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "critical",
+            "name": "infra_alert_condition_critical",
             "schemas": [
               {
                 "name": "duration",
@@ -763,7 +763,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "warning",
+            "name": "infra_alert_condition_warning",
             "schemas": [
               {
                 "name": "duration",
@@ -858,7 +858,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "nrql",
+            "name": "nrql_alert_condition_nrql",
             "schemas": [
               {
                 "name": "query",
@@ -923,7 +923,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "term",
+            "name": "nrql_alert_condition_term",
             "schemas": [
               {
                 "name": "duration",
@@ -1022,7 +1022,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "host_ids",
+            "name": "application_host_ids",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
@@ -1046,7 +1046,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "instance_ids",
+            "name": "application_instance_ids",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
