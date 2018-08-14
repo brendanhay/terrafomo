@@ -615,22 +615,6 @@
                     "original": "create_role"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"encrypted\" <$> TF.attribute",
-                    "name": "_encrypted",
-                    "method": "encrypted",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEncrypted",
-                    "validate": false,
-                    "optional": true,
-                    "original": "encrypted"
-                },
-                {
                     "default": "TF.value P.True",
                     "computed": false,
                     "required": false,
@@ -1084,22 +1068,6 @@
                 "validate": false,
                 "optional": true,
                 "original": "port"
-            },
-            {
-                "default": "P.Nothing",
-                "computed": false,
-                "required": false,
-                "help": [],
-                "forceNew": false,
-                "encoder": "TF.assign \"ssl_mode\" <$>",
-                "name": "_sslMode",
-                "method": "sslMode",
-                "conflicts": [],
-                "type": "P.Maybe P.Text",
-                "class": "HasSslMode",
-                "validate": false,
-                "optional": true,
-                "original": "ssl_mode"
             },
             {
                 "default": "P.Nothing",
