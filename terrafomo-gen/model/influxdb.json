@@ -107,7 +107,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "retention_policies",
+            "name": "database_retention_policies",
             "schemas": [
               {
                 "name": "default",
@@ -191,7 +191,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "grant",
+            "name": "user_grant",
             "schemas": [
               {
                 "name": "database",
