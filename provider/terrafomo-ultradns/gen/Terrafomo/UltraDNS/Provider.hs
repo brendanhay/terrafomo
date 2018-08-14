@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @UltraDNS@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _baseurl  :: P.Text

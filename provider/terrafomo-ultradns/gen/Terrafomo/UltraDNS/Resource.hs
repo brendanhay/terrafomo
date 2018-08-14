@@ -71,7 +71,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @ultradns_dirpool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/ultradns_dirpool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/r/dirpool.html terraform documentation>
 -- for more information.
 data DirpoolResource s = DirpoolResource'
     { _conflictResolve :: TF.Attr s P.Text
@@ -81,29 +81,29 @@ data DirpoolResource s = DirpoolResource'
     -- ^ @description@ - (Required)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _noResponse      :: TF.Attr s [TF.Attr s (NoResponse s)]
+    , _noResponse      :: TF.Attr s [TF.Attr s (DirpoolNoResponse s)]
     -- ^ @no_response@ - (Optional)
     --
-    , _rdata           :: TF.Attr s [TF.Attr s (Rdata s)]
+    , _rdata           :: TF.Attr s [TF.Attr s (DirpoolRdata s)]
     -- ^ @rdata@ - (Required)
     --
     , _ttl             :: TF.Attr s P.Integer
     -- ^ @ttl@ - (Optional)
     --
     , _type'           :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     , _zone            :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 dirpoolResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Rdata s)] -- ^ @rdata@ - 'P.rdata'
+    -> TF.Attr s [TF.Attr s (DirpoolRdata s)] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> TF.Resource P.Provider (DirpoolResource s)
@@ -136,11 +136,11 @@ instance TF.IsValid (DirpoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_noResponse"
                   (_noResponse
-                      :: DirpoolResource s -> TF.Attr s [TF.Attr s (NoResponse s)])
+                      :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolNoResponse s)])
                   TF.validator
            P.<> TF.settingsValidator "_rdata"
                   (_rdata
-                      :: DirpoolResource s -> TF.Attr s [TF.Attr s (Rdata s)])
+                      :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolRdata s)])
                   TF.validator
 
 instance P.HasConflictResolve (DirpoolResource s) (TF.Attr s P.Text) where
@@ -158,14 +158,14 @@ instance P.HasName (DirpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DirpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DirpoolResource s)
 
-instance P.HasNoResponse (DirpoolResource s) (TF.Attr s [TF.Attr s (NoResponse s)]) where
+instance P.HasNoResponse (DirpoolResource s) (TF.Attr s [TF.Attr s (DirpoolNoResponse s)]) where
     noResponse =
-        P.lens (_noResponse :: DirpoolResource s -> TF.Attr s [TF.Attr s (NoResponse s)])
+        P.lens (_noResponse :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolNoResponse s)])
                (\s a -> s { _noResponse = a } :: DirpoolResource s)
 
-instance P.HasRdata (DirpoolResource s) (TF.Attr s [TF.Attr s (Rdata s)]) where
+instance P.HasRdata (DirpoolResource s) (TF.Attr s [TF.Attr s (DirpoolRdata s)]) where
     rdata =
-        P.lens (_rdata :: DirpoolResource s -> TF.Attr s [TF.Attr s (Rdata s)])
+        P.lens (_rdata :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolRdata s)])
                (\s a -> s { _rdata = a } :: DirpoolResource s)
 
 instance P.HasTtl (DirpoolResource s) (TF.Attr s P.Integer) where
@@ -184,33 +184,33 @@ instance P.HasZone (DirpoolResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: DirpoolResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (DirpoolResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
 -- | @ultradns_probe_http@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/ultradns_probe_http terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/r/probe_http.html terraform documentation>
 -- for more information.
 data ProbeHttpResource s = ProbeHttpResource'
     { _agents     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @agents@ - (Required)
     --
-    , _httpProbe  :: TF.Attr s [TF.Attr s (HttpProbe s)]
+    , _httpProbe  :: TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]
     -- ^ @http_probe@ - (Optional)
     --
     , _interval   :: TF.Attr s P.Text
     -- ^ @interval@ - (Optional)
     --
     , _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _poolRecord :: TF.Attr s P.Text
-    -- ^ @pool_record@ - (Optional)
+    -- ^ @pool_record@ - (Optional, Forces New)
     --
     , _threshold  :: TF.Attr s P.Integer
     -- ^ @threshold@ - (Required)
     --
     , _zone       :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -247,7 +247,7 @@ instance TF.IsValid (ProbeHttpResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_httpProbe"
                   (_httpProbe
-                      :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (HttpProbe s)])
+                      :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)])
                   TF.validator
 
 instance P.HasAgents (ProbeHttpResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -255,9 +255,9 @@ instance P.HasAgents (ProbeHttpResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_agents :: ProbeHttpResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _agents = a } :: ProbeHttpResource s)
 
-instance P.HasHttpProbe (ProbeHttpResource s) (TF.Attr s [TF.Attr s (HttpProbe s)]) where
+instance P.HasHttpProbe (ProbeHttpResource s) (TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]) where
     httpProbe =
-        P.lens (_httpProbe :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (HttpProbe s)])
+        P.lens (_httpProbe :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)])
                (\s a -> s { _httpProbe = a } :: ProbeHttpResource s)
 
 instance P.HasInterval (ProbeHttpResource s) (TF.Attr s P.Text) where
@@ -286,11 +286,11 @@ instance P.HasZone (ProbeHttpResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: ProbeHttpResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProbeHttpResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ultradns_probe_ping@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/ultradns_probe_ping terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/r/probe_ping.html terraform documentation>
 -- for more information.
 data ProbePingResource s = ProbePingResource'
     { _agents     :: TF.Attr s [TF.Attr s P.Text]
@@ -300,19 +300,19 @@ data ProbePingResource s = ProbePingResource'
     -- ^ @interval@ - (Optional)
     --
     , _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _pingProbe  :: TF.Attr s [TF.Attr s (PingProbe s)]
+    , _pingProbe  :: TF.Attr s [TF.Attr s (ProbePingPingProbe s)]
     -- ^ @ping_probe@ - (Optional)
     --
     , _poolRecord :: TF.Attr s P.Text
-    -- ^ @pool_record@ - (Optional)
+    -- ^ @pool_record@ - (Optional, Forces New)
     --
     , _threshold  :: TF.Attr s P.Integer
     -- ^ @threshold@ - (Required)
     --
     , _zone       :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -349,7 +349,7 @@ instance TF.IsValid (ProbePingResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_pingProbe"
                   (_pingProbe
-                      :: ProbePingResource s -> TF.Attr s [TF.Attr s (PingProbe s)])
+                      :: ProbePingResource s -> TF.Attr s [TF.Attr s (ProbePingPingProbe s)])
                   TF.validator
 
 instance P.HasAgents (ProbePingResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -367,9 +367,9 @@ instance P.HasName (ProbePingResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProbePingResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProbePingResource s)
 
-instance P.HasPingProbe (ProbePingResource s) (TF.Attr s [TF.Attr s (PingProbe s)]) where
+instance P.HasPingProbe (ProbePingResource s) (TF.Attr s [TF.Attr s (ProbePingPingProbe s)]) where
     pingProbe =
-        P.lens (_pingProbe :: ProbePingResource s -> TF.Attr s [TF.Attr s (PingProbe s)])
+        P.lens (_pingProbe :: ProbePingResource s -> TF.Attr s [TF.Attr s (ProbePingPingProbe s)])
                (\s a -> s { _pingProbe = a } :: ProbePingResource s)
 
 instance P.HasPoolRecord (ProbePingResource s) (TF.Attr s P.Text) where
@@ -388,18 +388,18 @@ instance P.HasZone (ProbePingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: ProbePingResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProbePingResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ultradns_rdpool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/ultradns_rdpool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/r/rdpool.html terraform documentation>
 -- for more information.
 data RdpoolResource s = RdpoolResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _order       :: TF.Attr s P.Text
     -- ^ @order@ - (Optional)
@@ -411,7 +411,7 @@ data RdpoolResource s = RdpoolResource'
     -- ^ @ttl@ - (Optional)
     --
     , _zone        :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -475,15 +475,15 @@ instance P.HasZone (RdpoolResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: RdpoolResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RdpoolResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
 -- | @ultradns_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/ultradns_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
     { _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _rdata :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @rdata@ - (Required)
@@ -492,10 +492,10 @@ data RecordResource s = RecordResource'
     -- ^ @ttl@ - (Optional)
     --
     , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     , _zone  :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -553,11 +553,11 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
 -- | @ultradns_tcpool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/UltraDNS/ultradns_tcpool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ultradns/r/tcpool.html terraform documentation>
 -- for more information.
 data TcpoolResource s = TcpoolResource'
     { _actOnProbes               :: TF.Attr s P.Bool
@@ -576,9 +576,9 @@ data TcpoolResource s = TcpoolResource'
     -- ^ @max_to_lb@ - (Optional)
     --
     , _name                      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _rdata                     :: TF.Attr s [TF.Attr s (Rdata s)]
+    , _rdata                     :: TF.Attr s [TF.Attr s (TcpoolRdata s)]
     -- ^ @rdata@ - (Required)
     --
     , _runProbes                 :: TF.Attr s P.Bool
@@ -588,14 +588,14 @@ data TcpoolResource s = TcpoolResource'
     -- ^ @ttl@ - (Optional)
     --
     , _zone                      :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 tcpoolResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Rdata s)] -- ^ @rdata@ - 'P.rdata'
+    -> TF.Attr s [TF.Attr s (TcpoolRdata s)] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> TF.Resource P.Provider (TcpoolResource s)
 tcpoolResource _description _name _rdata _zone =
@@ -631,7 +631,7 @@ instance TF.IsValid (TcpoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rdata"
                   (_rdata
-                      :: TcpoolResource s -> TF.Attr s [TF.Attr s (Rdata s)])
+                      :: TcpoolResource s -> TF.Attr s [TF.Attr s (TcpoolRdata s)])
                   TF.validator
 
 instance P.HasActOnProbes (TcpoolResource s) (TF.Attr s P.Bool) where
@@ -664,9 +664,9 @@ instance P.HasName (TcpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TcpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TcpoolResource s)
 
-instance P.HasRdata (TcpoolResource s) (TF.Attr s [TF.Attr s (Rdata s)]) where
+instance P.HasRdata (TcpoolResource s) (TF.Attr s [TF.Attr s (TcpoolRdata s)]) where
     rdata =
-        P.lens (_rdata :: TcpoolResource s -> TF.Attr s [TF.Attr s (Rdata s)])
+        P.lens (_rdata :: TcpoolResource s -> TF.Attr s [TF.Attr s (TcpoolRdata s)])
                (\s a -> s { _rdata = a } :: TcpoolResource s)
 
 instance P.HasRunProbes (TcpoolResource s) (TF.Attr s P.Bool) where
@@ -685,4 +685,4 @@ instance P.HasZone (TcpoolResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: TcpoolResource s)
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (TcpoolResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
