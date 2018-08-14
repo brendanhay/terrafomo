@@ -1816,24 +1816,6 @@
                     "computed": false,
                     "required": false,
                     "help": [
-                        "SSL certificate hostname"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ssl_hostname\" <$> TF.attribute",
-                    "name": "_sslHostname",
-                    "method": "sslHostname",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSslHostname",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ssl_hostname"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
                         "SSL certificate hostname for SNI verification"
                     ],
                     "forceNew": false,
