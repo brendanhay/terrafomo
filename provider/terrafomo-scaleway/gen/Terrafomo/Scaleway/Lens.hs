@@ -19,7 +19,6 @@ module Terrafomo.Scaleway.Lens
     , HasToken (..)
     , HasImage (..)
     , HasDirection (..)
-    , HasAccessKey (..)
     , HasKey (..)
     , HasValue (..)
     , HasType' (..)
@@ -105,12 +104,6 @@ class HasDirection a b | a -> b where
 
 instance HasDirection a b => HasDirection (TF.Schema l p a) b where
     direction = TF.configuration . direction
-
-class HasAccessKey a b | a -> b where
-    accessKey :: P.Lens' a b
-
-instance HasAccessKey a b => HasAccessKey (TF.Schema l p a) b where
-    accessKey = TF.configuration . accessKey
 
 class HasKey a b | a -> b where
     key :: P.Lens' a b

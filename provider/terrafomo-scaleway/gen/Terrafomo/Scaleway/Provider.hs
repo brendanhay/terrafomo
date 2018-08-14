@@ -52,11 +52,7 @@ import qualified Terrafomo.Validator      as TF
 -- See the <https://www.terraform.io/docs/providers/Scaleway/index.html terraform documenation>
 -- for more information.
 data Provider = Provider'
-    { _accessKey    :: P.Maybe P.Text
-    -- ^ @access_key@ - (Optional)
-    -- The API key for Scaleway API operations.
-    --
-    , _organization :: P.Text
+    { _organization :: P.Text
     -- ^ @organization@ - (Required)
     -- The Organization ID (a.k.a. 'access key') for Scaleway API operations.
     --
@@ -76,8 +72,7 @@ newProvider
     -> Provider
 newProvider _organization _token =
     Provider'
-        { _accessKey = P.Nothing
-        , _organization = _organization
+        { _organization = _organization
         , _region = P.Nothing
         , _token = _token
         }
@@ -92,7 +87,6 @@ instance TF.IsSection Provider where
           & TF.pairs
               (P.catMaybes
                   [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "access_key" <$> _accessKey
                   , P.Just $ TF.assign "organization" _organization
                   , TF.assign "region" <$> _region
                   , P.Just $ TF.assign "token" _token
@@ -103,11 +97,6 @@ instance TF.IsProvider Provider where
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
-
-instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
-    accessKey =
-        P.lens (_accessKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _accessKey = a } :: Provider)
 
 instance P.HasOrganization (Provider) (P.Text) where
     organization =
