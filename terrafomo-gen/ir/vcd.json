@@ -2212,22 +2212,6 @@
                 "default": "P.Nothing",
                 "computed": false,
                 "required": false,
-                "help": [],
-                "forceNew": false,
-                "encoder": "TF.assign \"maxRetryTimeout\" <$>",
-                "name": "_maxRetryTimeout",
-                "method": "maxRetryTimeout",
-                "conflicts": [],
-                "type": "P.Maybe P.Integer",
-                "class": "HasMaxRetryTimeout",
-                "validate": false,
-                "optional": true,
-                "original": "maxRetryTimeout"
-            },
-            {
-                "default": "P.Nothing",
-                "computed": false,
-                "required": false,
                 "help": [
                     "Max num seconds to wait for successful response when operating on resources",
                     "within vCloud (defaults to 60)"
