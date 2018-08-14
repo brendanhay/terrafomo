@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newMember",
-                "name": "Member'"
+                "smart": "newTeamMember",
+                "name": "TeamMember'"
             },
             "arguments": [
                 {
@@ -39,7 +39,7 @@
                     "original": "username"
                 }
             ],
-            "name": "Member",
+            "name": "TeamMember",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -61,10 +61,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Member s",
-            "original": "member"
+            "type": "TeamMember s",
+            "original": "team_member"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/opsgenie/index.html",
     "dataSources": [
         {
             "con": {
@@ -89,6 +90,7 @@
                     "original": "username"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/opsgenie/d/user.html",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -181,7 +183,7 @@
                     "name": "_member",
                     "method": "member",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Member s)]",
+                    "type": "TF.Attr s [TF.Attr s (TeamMember s)]",
                     "class": "HasMember",
                     "validate": true,
                     "optional": true,
@@ -204,6 +206,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/opsgenie/r/team.html",
             "name": "TeamResource",
             "threaded": true,
             "attributes": [],
@@ -316,6 +319,7 @@
                     "original": "username"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/opsgenie/r/user.html",
             "name": "UserResource",
             "threaded": true,
             "attributes": [],
