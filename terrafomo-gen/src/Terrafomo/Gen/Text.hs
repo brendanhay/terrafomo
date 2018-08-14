@@ -26,6 +26,13 @@ brackets = surround '[' ']'
 surround :: Char -> Char -> Text -> Text
 surround start end x = start `Text.cons` x `Text.snoc` end
 
+escape :: Text -> Text
+escape =
+    Text.concatMap $ \c ->
+        if c == '"'
+            then "\\\""
+            else Text.singleton c
+
 unreserved :: Text -> Text
 unreserved x
      | x `Set.member` reserved = x `Text.snoc` '\''

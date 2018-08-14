@@ -117,7 +117,7 @@ instance JSON.ToJSON Default where
             DefaultNil     x -> x
             DefaultParam   x -> fromName x
             DefaultAttr    x -> "TF.value " <> go x
-            DefaultText    x -> Text.quotes x
+            DefaultText    x -> Text.quotes (Text.escape x)
             DefaultBool    x -> if x then "P.True" else "P.False"
             DefaultInteger x ->
                 (if x < 0
