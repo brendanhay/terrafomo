@@ -59,17 +59,17 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @influxdb_continuous_query@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/InfluxDB/influxdb_continuous_query terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/influxdb/r/continuous_query.html terraform documentation>
 -- for more information.
 data ContinuousQueryResource s = ContinuousQueryResource'
     { _database :: TF.Attr s P.Text
-    -- ^ @database@ - (Required)
+    -- ^ @database@ - (Required, Forces New)
     --
     , _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _query    :: TF.Attr s P.Text
-    -- ^ @query@ - (Required)
+    -- ^ @query@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -113,13 +113,13 @@ instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
 
 -- | @influxdb_database@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/InfluxDB/influxdb_database terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/influxdb/r/database.html terraform documentation>
 -- for more information.
 data DatabaseResource s = DatabaseResource'
     { _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _retentionPolicies :: TF.Attr s [TF.Attr s (RetentionPolicies s)]
+    , _retentionPolicies :: TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]
     -- ^ @retention_policies@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -144,7 +144,7 @@ instance TF.IsValid (DatabaseResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_retentionPolicies"
                   (_retentionPolicies
-                      :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPolicies s)])
+                      :: DatabaseResource s -> TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)])
                   TF.validator
 
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
@@ -152,24 +152,24 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (RetentionPolicies s)]) where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]) where
     retentionPolicies =
-        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPolicies s)])
+        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)])
                (\s a -> s { _retentionPolicies = a } :: DatabaseResource s)
 
 -- | @influxdb_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/InfluxDB/influxdb_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/influxdb/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
-    { _grant    :: TF.Attr s [TF.Attr s (Grant s)]
+    { _grant    :: TF.Attr s [TF.Attr s (UserGrant s)]
     -- ^ @grant@ - (Optional)
     --
     , _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _password :: TF.Attr s P.Text
-    -- ^ @password@ - (Required)
+    -- ^ @password@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -196,12 +196,12 @@ instance TF.IsValid (UserResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_grant"
                   (_grant
-                      :: UserResource s -> TF.Attr s [TF.Attr s (Grant s)])
+                      :: UserResource s -> TF.Attr s [TF.Attr s (UserGrant s)])
                   TF.validator
 
-instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (Grant s)]) where
+instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (UserGrant s)]) where
     grant =
-        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (Grant s)])
+        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (UserGrant s)])
                (\s a -> s { _grant = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
@@ -215,4 +215,4 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
                (\s a -> s { _password = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
-    computedAdmin x = TF.compute (TF.refKey x) "_computedAdmin"
+    computedAdmin x = TF.compute (TF.refKey x) "admin"

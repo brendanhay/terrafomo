@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @InfluxDB@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/InfluxDB/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/influxdb/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _password :: P.Maybe P.Text
