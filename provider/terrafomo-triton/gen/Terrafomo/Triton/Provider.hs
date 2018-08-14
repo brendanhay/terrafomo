@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,110 +17,127 @@
 --
 module Terrafomo.Triton.Provider
     (
-    -- * Provider Datatype
-      Triton (..)
-    , emptyTriton
-
-    -- * Lenses
-    , providerAccount
-    , providerInsecureSkipTlsVerify
-    , providerKeyId
-    , providerKeyMaterial
-    , providerUrl
-    , providerUser
+    -- * Triton Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Triton.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Triton.Lens  as P
 import qualified Terrafomo.Triton.Types as P
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Triton@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Triton/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _account               :: P.Text
+    -- ^ @account@ - (Required)
+    --
+    , _insecureSkipTlsVerify :: P.Maybe P.Bool
+    -- ^ @insecure_skip_tls_verify@ - (Optional)
+    --
+    , _keyId                 :: P.Text
+    -- ^ @key_id@ - (Required)
+    --
+    , _keyMaterial           :: P.Maybe P.Text
+    -- ^ @key_material@ - (Optional)
+    --
+    , _url                   :: P.Text
+    -- ^ @url@ - (Required)
+    --
+    , _user                  :: P.Text
+    -- ^ @user@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Triton Terraform provider.
+newProvider
+    :: P.Text -- ^ @account@ - 'P.account'
+    -> P.Text -- ^ @key_id@ - 'P.keyId'
+    -> P.Text -- ^ @url@ - 'P.url'
+    -> P.Text -- ^ @user@ - 'P.user'
+    -> Provider
+newProvider _account _keyId _url _user =
+    Provider'
+        { _account = _account
+        , _insecureSkipTlsVerify = P.Nothing
+        , _keyId = _keyId
+        , _keyMaterial = P.Nothing
+        , _url = _url
+        , _user = _user
+        }
 
-The Triton provider is used to interact with resources in Joyent's Triton
-cloud. It is compatible with both public- and on-premise installations of
-Triton. The provider needs to be configured with the proper credentials
-before it can be used. Use the navigation to the left to read about the
-available resources.
--}
-data Triton = Triton {
-      _account                  :: !(Maybe P.Text)
-    {- ^ (Required) This is the name of the Triton account. It can also be provided via the @SDC_ACCOUNT@ or @TRITON_ACCOUNT@ environment variables. -}
-    , _insecure_skip_tls_verify :: !(Maybe P.Text)
-    {- ^ (Optional - defaults to false) This allows skipping TLS verification of the Triton endpoint. It is useful when connecting to a temporary Triton installation such as Cloud-On-A-Laptop which does not generally use a certificate signed by a trusted root CA. -}
-    , _key_id                   :: !(Maybe P.Text)
-    {- ^ (Required) This is the fingerprint of the public key matching the key specified in @key_path@ . It can be obtained via the command @ssh-keygen -l -E md5 -f /path/to/key@ . It can be provided via the @SDC_KEY_ID@ or @TRITON_KEY_ID@ environment variables. -}
-    , _key_material             :: !(Maybe P.Text)
-    {- ^ (Optional) This is the private key of an SSH key associated with the Triton account to be used. If this is not set, the private key corresponding to the fingerprint in @key_id@ must be available via an SSH Agent. It can be provided via the @SDC_KEY_MATERIAL@ or @TRITON_KEY_MATERIAL@ environment variables. -}
-    , _url                      :: !(Maybe P.Text)
-    {- ^ (Optional) This is the URL to the Triton API endpoint. It is required if using a private installation of Triton. The default is to use the Joyent public cloud us-west-1 endpoint. Valid public cloud endpoints include: @us-east-1@ , @us-east-2@ , @us-east-3@ , @us-sw-1@ , @us-west-1@ , @eu-ams-1@ . It can be provided via the @SDC_URL@ or @TRITON_URL@ environment variables. -}
-    , _user                     :: !(Maybe P.Text)
-    {- ^ (Optional) This is the username to interact with the triton API. It can be provided via the @SDC_USER@ or @TRITON_USER@ environment variables. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Triton
-
-instance TF.IsSection Triton where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Triton))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "account" <$> _account x
-                  , TF.assign "insecure_skip_tls_verify" <$> _insecure_skip_tls_verify x
-                  , TF.assign "key_id" <$> _key_id x
-                  , TF.assign "key_material" <$> _key_material x
-                  , TF.assign "url" <$> _url x
-                  , TF.assign "user" <$> _user x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "account" _account
+                  , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
+                  , P.Just $ TF.assign "key_id" _keyId
+                  , TF.assign "key_material" <$> _keyMaterial
+                  , P.Just $ TF.assign "url" _url
+                  , P.Just $ TF.assign "user" _user
                   ])
 
-instance TF.IsProvider Triton where
-    type ProviderType Triton = "triton"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyTriton :: Triton
-emptyTriton = Triton {
-        _account = Nothing
-      , _insecure_skip_tls_verify = Nothing
-      , _key_id = Nothing
-      , _key_material = Nothing
-      , _url = Nothing
-      , _user = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAccount :: Lens' Triton (Maybe P.Text)
-providerAccount =
-    lens _account (\s a -> s { _account = a })
+instance P.HasAccount (Provider) (P.Text) where
+    account =
+        P.lens (_account :: Provider -> P.Text)
+               (\s a -> s { _account = a } :: Provider)
 
-providerInsecureSkipTlsVerify :: Lens' Triton (Maybe P.Text)
-providerInsecureSkipTlsVerify =
-    lens _insecure_skip_tls_verify (\s a -> s { _insecure_skip_tls_verify = a })
+instance P.HasInsecureSkipTlsVerify (Provider) (P.Maybe P.Bool) where
+    insecureSkipTlsVerify =
+        P.lens (_insecureSkipTlsVerify :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _insecureSkipTlsVerify = a } :: Provider)
 
-providerKeyId :: Lens' Triton (Maybe P.Text)
-providerKeyId =
-    lens _key_id (\s a -> s { _key_id = a })
+instance P.HasKeyId (Provider) (P.Text) where
+    keyId =
+        P.lens (_keyId :: Provider -> P.Text)
+               (\s a -> s { _keyId = a } :: Provider)
 
-providerKeyMaterial :: Lens' Triton (Maybe P.Text)
-providerKeyMaterial =
-    lens _key_material (\s a -> s { _key_material = a })
+instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
+    keyMaterial =
+        P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _keyMaterial = a } :: Provider)
 
-providerUrl :: Lens' Triton (Maybe P.Text)
-providerUrl =
-    lens _url (\s a -> s { _url = a })
+instance P.HasUrl (Provider) (P.Text) where
+    url =
+        P.lens (_url :: Provider -> P.Text)
+               (\s a -> s { _url = a } :: Provider)
 
-providerUser :: Lens' Triton (Maybe P.Text)
-providerUser =
-    lens _user (\s a -> s { _user = a })
+instance P.HasUser (Provider) (P.Text) where
+    user =
+        P.lens (_user :: Provider -> P.Text)
+               (\s a -> s { _user = a } :: Provider)

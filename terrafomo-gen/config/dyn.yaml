@@ -1,4 +1,2 @@
-name: Dyn
-package: terrafomo-dyn
-datatype: true
-original: dyn
+package-name: terrafomo-dyn
+provider-name: Dyn

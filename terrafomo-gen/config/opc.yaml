@@ -1,4 +1,2 @@
-name: OPC
-package: terrafomo-opc
-datatype: true
-original: opc
+package-name: terrafomo-opc
+provider-name: OPC

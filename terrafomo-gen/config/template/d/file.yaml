@@ -1,3 +1,0 @@
-arguments:
-  _vars:
-    type: '(P.Variables s)'

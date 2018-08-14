@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Packet
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Packet
-    ( module Terrafomo.Packet.Types
-    , module Terrafomo.Packet.Provider
+    ( module Terrafomo.Packet.Settings
     , module Terrafomo.Packet.Lens
-    , module Terrafomo.Packet.DataSource
+    , module Terrafomo.Packet.Provider
     , module Terrafomo.Packet.Resource
+    , module Terrafomo.Packet.DataSource
+    , module Terrafomo.Packet.Types
     ) where
 
 import Terrafomo.Packet.DataSource
 import Terrafomo.Packet.Lens
 import Terrafomo.Packet.Provider
 import Terrafomo.Packet.Resource
+import Terrafomo.Packet.Settings
 import Terrafomo.Packet.Types

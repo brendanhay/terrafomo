@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,64 +17,75 @@
 --
 module Terrafomo.Packet.Provider
     (
-    -- * Provider Datatype
-      Packet (..)
-    , emptyPacket
-
-    -- * Lenses
-    , providerAuthToken
+    -- * Packet Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Packet.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Packet.Lens  as P
 import qualified Terrafomo.Packet.Types as P
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Packet@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Packet/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _authToken :: P.Text
+    -- ^ @auth_token@ - (Required)
+    -- The API auth key for API operations.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Packet Terraform provider.
+newProvider
+    :: P.Text -- ^ @auth_token@ - 'P.authToken'
+    -> Provider
+newProvider _authToken =
+    Provider'
+        { _authToken = _authToken
+        }
 
-The Packet provider is used to interact with the resources supported by
-Packet. The provider needs to be configured with the proper credentials
-before it can be used. Use the navigation to the left to read about the
-available resources.
--}
-data Packet = Packet {
-      _auth_token :: !(Maybe P.Text)
-    {- ^ (Required) This is your Packet API Auth token. This can also be specified with the @PACKET_AUTH_TOKEN@ shell environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Packet
-
-instance TF.IsSection Packet where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Packet))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "auth_token" <$> _auth_token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "auth_token" _authToken
                   ])
 
-instance TF.IsProvider Packet where
-    type ProviderType Packet = "packet"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyPacket :: Packet
-emptyPacket = Packet {
-        _auth_token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAuthToken :: Lens' Packet (Maybe P.Text)
-providerAuthToken =
-    lens _auth_token (\s a -> s { _auth_token = a })
+instance P.HasAuthToken (Provider) (P.Text) where
+    authToken =
+        P.lens (_authToken :: Provider -> P.Text)
+               (\s a -> s { _authToken = a } :: Provider)

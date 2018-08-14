@@ -1,4 +1,2 @@
-name: Heroku
-package: terrafomo-heroku
-datatype: true
-original: heroku
+package-name: terrafomo-heroku
+provider-name: Heroku

@@ -1,9 +1,0 @@
-arguments:
-  _cidr_blocks:
-    type: '[TF.Attr s P.IPRange]'
-  _type':
-    type: 'P.Ec2Traffic'
-  _protocol:
-    type: 'P.Ec2Protocol'
-  _self:
-    type: 'P.Bool'

@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,120 +17,155 @@
 --
 module Terrafomo.VCloudDirector.Provider
     (
-    -- * Provider Datatype
-      VCloudDirector (..)
-    , emptyVCloudDirector
-
-    -- * Lenses
-    , providerAllowUnverifiedSsl
-    , providerMaxRetryTimeout
-    , providerOrg
-    , providerPassword
-    , providerUrl
-    , providerUser
-    , providerVdc
+    -- * VCloudDirector Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.VCloudDirector.Settings
 
+import qualified Data.Hashable                  as P
+import qualified Data.HashMap.Strict            as P
+import qualified Data.HashMap.Strict            as Map
+import qualified Data.List.NonEmpty             as P
+import qualified Data.Maybe                     as P
+import qualified Data.Monoid                    as P
 import qualified Data.Text                      as P
+import qualified GHC.Generics                   as P
+import qualified Lens.Micro                     as P
+import qualified Prelude                        as P
+import qualified Terrafomo.HCL                  as TF
+import qualified Terrafomo.Name                 as TF
+import qualified Terrafomo.Provider             as TF
+import qualified Terrafomo.Validator            as TF
+import qualified Terrafomo.VCloudDirector.Lens  as P
 import qualified Terrafomo.VCloudDirector.Types as P
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @VCloudDirector@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _allowUnverifiedSsl :: P.Maybe P.Bool
+    -- ^ @allow_unverified_ssl@ - (Optional)
+    -- If set, VCDClient will permit unverifiable SSL certificates.
+    --
+    , _maxRetryTimeout    :: P.Maybe P.Integer
+    -- ^ @maxRetryTimeout@ - (Optional)
+    --
+    , _maxRetryTimeout    :: P.Maybe P.Integer
+    -- ^ @max_retry_timeout@ - (Optional)
+    -- Max num seconds to wait for successful response when operating on resources
+    -- within vCloud (defaults to 60)
+    --
+    , _org                :: P.Text
+    -- ^ @org@ - (Required)
+    -- The vcd org for API operations
+    --
+    , _password           :: P.Text
+    -- ^ @password@ - (Required)
+    -- The user password for vcd API operations.
+    --
+    , _url                :: P.Text
+    -- ^ @url@ - (Required)
+    -- The vcd url for vcd API operations.
+    --
+    , _user               :: P.Text
+    -- ^ @user@ - (Required)
+    -- The user name for vcd API operations.
+    --
+    , _vdc                :: P.Maybe P.Text
+    -- ^ @vdc@ - (Optional)
+    -- The name of the VDC to run operations on
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | VCloudDirector Terraform provider.
+newProvider
+    :: P.Text -- ^ @org@ - 'P.org'
+    -> P.Text -- ^ @password@ - 'P.password'
+    -> P.Text -- ^ @url@ - 'P.url'
+    -> P.Text -- ^ @user@ - 'P.user'
+    -> Provider
+newProvider _org _password _url _user =
+    Provider'
+        { _allowUnverifiedSsl = P.Nothing
+        , _maxRetryTimeout = P.Nothing
+        , _maxRetryTimeout = P.Nothing
+        , _org = _org
+        , _password = _password
+        , _url = _url
+        , _user = _user
+        , _vdc = P.Nothing
+        }
 
-The VMware vCloud Director provider is used to interact with the resources
-supported by VMware vCloud Director. The provider needs to be configured
-with the proper credentials before it can be used. Use the navigation to the
-left to read about the available resources. ~> NOTE: The VMware vCloud
-Director Provider currently represents initial support and therefore may
-undergo significant changes as the community improves it.
--}
-data VCloudDirector = VCloudDirector {
-      _allow_unverified_ssl :: !(Maybe P.Text)
-    {- ^ (Optional) Boolean that can be set to true to disable SSL certificate verification. This should be used with care as it could allow an attacker to intercept your auth token. If omitted, default value is false. Can also be specified with the @VCD_ALLOW_UNVERIFIED_SSL@ environment variable. -}
-    , _max_retry_timeout    :: !(Maybe P.Text)
-    {- ^ (Optional) This provides you with the ability to specify the maximum amount of time (in seconds) you are prepared to wait for interactions on resources managed by vCloud Director to be successful. If a resource action fails, the action will be retried (as long as it is still within the @max_retry_timeout@ value) to try and ensure success. Defaults to 60 seconds if not set. Can also be specified with the @VCD_MAX_RETRY_TIMEOUT@ environment variable. -}
-    , _org                  :: !(Maybe P.Text)
-    {- ^ (Required) This is the vCloud Director Org on which to run API operations. Can also be specified with the @VCD_ORG@ environment variable. -}
-    , _password             :: !(Maybe P.Text)
-    {- ^ (Required) This is the password for vCloud Director API operations. Can also be specified with the @VCD_PASSWORD@ environment variable. -}
-    , _url                  :: !(Maybe P.Text)
-    {- ^ (Required) This is the URL for the vCloud Director API endpoint. e.g. https://server.domain.com/api. Can also be specified with the @VCD_URL@ environment variable. -}
-    , _user                 :: !(Maybe P.Text)
-    {- ^ (Required) This is the username for vCloud Director API operations. Can also be specified with the @VCD_USER@ environment variable. -}
-    , _vdc                  :: !(Maybe P.Text)
-    {- ^ (Optional) This is the virtual datacenter within vCloud Director to run API operations against. If not set the plugin will select the first virtual datacenter available to your Org. Can also be specified with the @VCD_VDC@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable VCloudDirector
-
-instance TF.IsSection VCloudDirector where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (VCloudDirector))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
-                  , TF.assign "max_retry_timeout" <$> _max_retry_timeout x
-                  , TF.assign "org" <$> _org x
-                  , TF.assign "password" <$> _password x
-                  , TF.assign "url" <$> _url x
-                  , TF.assign "user" <$> _user x
-                  , TF.assign "vdc" <$> _vdc x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+                  , TF.assign "maxRetryTimeout" <$> _maxRetryTimeout
+                  , TF.assign "max_retry_timeout" <$> _maxRetryTimeout
+                  , P.Just $ TF.assign "org" _org
+                  , P.Just $ TF.assign "password" _password
+                  , P.Just $ TF.assign "url" _url
+                  , P.Just $ TF.assign "user" _user
+                  , TF.assign "vdc" <$> _vdc
                   ])
 
-instance TF.IsProvider VCloudDirector where
-    type ProviderType VCloudDirector = "vcd"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyVCloudDirector :: VCloudDirector
-emptyVCloudDirector = VCloudDirector {
-        _allow_unverified_ssl = Nothing
-      , _max_retry_timeout = Nothing
-      , _org = Nothing
-      , _password = Nothing
-      , _url = Nothing
-      , _user = Nothing
-      , _vdc = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAllowUnverifiedSsl :: Lens' VCloudDirector (Maybe P.Text)
-providerAllowUnverifiedSsl =
-    lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
+instance P.HasAllowUnverifiedSsl (Provider) (P.Maybe P.Bool) where
+    allowUnverifiedSsl =
+        P.lens (_allowUnverifiedSsl :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _allowUnverifiedSsl = a } :: Provider)
 
-providerMaxRetryTimeout :: Lens' VCloudDirector (Maybe P.Text)
-providerMaxRetryTimeout =
-    lens _max_retry_timeout (\s a -> s { _max_retry_timeout = a })
+instance P.HasMaxRetryTimeout (Provider) (P.Maybe P.Integer) where
+    maxRetryTimeout =
+        P.lens (_maxRetryTimeout :: Provider -> P.Maybe P.Integer)
+               (\s a -> s { _maxRetryTimeout = a } :: Provider)
 
-providerOrg :: Lens' VCloudDirector (Maybe P.Text)
-providerOrg =
-    lens _org (\s a -> s { _org = a })
+instance P.HasMaxRetryTimeout (Provider) (P.Maybe P.Integer) where
+    maxRetryTimeout =
+        P.lens (_maxRetryTimeout :: Provider -> P.Maybe P.Integer)
+               (\s a -> s { _maxRetryTimeout = a } :: Provider)
 
-providerPassword :: Lens' VCloudDirector (Maybe P.Text)
-providerPassword =
-    lens _password (\s a -> s { _password = a })
+instance P.HasOrg (Provider) (P.Text) where
+    org =
+        P.lens (_org :: Provider -> P.Text)
+               (\s a -> s { _org = a } :: Provider)
 
-providerUrl :: Lens' VCloudDirector (Maybe P.Text)
-providerUrl =
-    lens _url (\s a -> s { _url = a })
+instance P.HasPassword (Provider) (P.Text) where
+    password =
+        P.lens (_password :: Provider -> P.Text)
+               (\s a -> s { _password = a } :: Provider)
 
-providerUser :: Lens' VCloudDirector (Maybe P.Text)
-providerUser =
-    lens _user (\s a -> s { _user = a })
+instance P.HasUrl (Provider) (P.Text) where
+    url =
+        P.lens (_url :: Provider -> P.Text)
+               (\s a -> s { _url = a } :: Provider)
 
-providerVdc :: Lens' VCloudDirector (Maybe P.Text)
-providerVdc =
-    lens _vdc (\s a -> s { _vdc = a })
+instance P.HasUser (Provider) (P.Text) where
+    user =
+        P.lens (_user :: Provider -> P.Text)
+               (\s a -> s { _user = a } :: Provider)
+
+instance P.HasVdc (Provider) (P.Maybe P.Text) where
+    vdc =
+        P.lens (_vdc :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _vdc = a } :: Provider)

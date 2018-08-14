@@ -1,0 +1,112 @@
+{
+    "settings": [],
+    "dataSources": [
+        {
+            "con": {
+                "smart": "data'",
+                "name": "Data'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"request_headers\" <$> TF.attribute",
+                    "name": "_requestHeaders",
+                    "method": "requestHeaders",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasRequestHeaders",
+                    "validate": false,
+                    "optional": true,
+                    "original": "request_headers"
+                },
+                {
+                    "default": "_url",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "_url",
+                    "method": "url",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "url"
+                }
+            ],
+            "name": "Data",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"body\" <$> TF.attribute",
+                    "name": "_computedBody",
+                    "method": "computedBody",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedBody",
+                    "validate": false,
+                    "optional": false,
+                    "original": "body"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_url",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "_url",
+                    "method": "url",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "url"
+                }
+            ],
+            "conflicts": [],
+            "type": "Data s",
+            "original": "http"
+        }
+    ],
+    "resources": [],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "HTTP",
+    "package": "terrafomo-builtins",
+    "original": "http"
+}

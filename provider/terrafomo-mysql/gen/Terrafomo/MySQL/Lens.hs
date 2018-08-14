@@ -15,133 +15,102 @@ module Terrafomo.MySQL.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasAuthPlugin (..)
-    , HasDatabase (..)
+      HasDatabase (..)
     , HasDefaultCharacterSet (..)
-    , HasDefaultCollation (..)
-    , HasGrant (..)
-    , HasHost (..)
-    , HasName (..)
-    , HasPassword (..)
     , HasPlaintextPassword (..)
-    , HasPrivileges (..)
+    , HasDefaultCollation (..)
+    , HasHost (..)
+    , HasUsername (..)
     , HasUser (..)
+    , HasGrant (..)
+    , HasPassword (..)
+    , HasEndpoint (..)
+    , HasName (..)
+    , HasPrivileges (..)
+    , HasAuthPlugin (..)
 
     -- ** Computed Attributes
-    , HasComputedAuthPlugin (..)
-    , HasComputedDatabase (..)
-    , HasComputedDefaultCharacterSet (..)
-    , HasComputedDefaultCollation (..)
-    , HasComputedGrant (..)
-    , HasComputedHost (..)
-    , HasComputedName (..)
-    , HasComputedPassword (..)
-    , HasComputedPlaintextPassword (..)
-    , HasComputedPrivileges (..)
-    , HasComputedUser (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasAuthPlugin a b | a -> b where
-    authPlugin :: Lens' a b
-
-instance HasAuthPlugin a b => HasAuthPlugin (TF.Schema l p a) b where
-    authPlugin = TF.configuration . authPlugin
-
 class HasDatabase a b | a -> b where
-    database :: Lens' a b
+    database :: P.Lens' a b
 
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
 
 class HasDefaultCharacterSet a b | a -> b where
-    defaultCharacterSet :: Lens' a b
+    defaultCharacterSet :: P.Lens' a b
 
 instance HasDefaultCharacterSet a b => HasDefaultCharacterSet (TF.Schema l p a) b where
     defaultCharacterSet = TF.configuration . defaultCharacterSet
 
-class HasDefaultCollation a b | a -> b where
-    defaultCollation :: Lens' a b
-
-instance HasDefaultCollation a b => HasDefaultCollation (TF.Schema l p a) b where
-    defaultCollation = TF.configuration . defaultCollation
-
-class HasGrant a b | a -> b where
-    grant :: Lens' a b
-
-instance HasGrant a b => HasGrant (TF.Schema l p a) b where
-    grant = TF.configuration . grant
-
-class HasHost a b | a -> b where
-    host :: Lens' a b
-
-instance HasHost a b => HasHost (TF.Schema l p a) b where
-    host = TF.configuration . host
-
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasPassword a b | a -> b where
-    password :: Lens' a b
-
-instance HasPassword a b => HasPassword (TF.Schema l p a) b where
-    password = TF.configuration . password
-
 class HasPlaintextPassword a b | a -> b where
-    plaintextPassword :: Lens' a b
+    plaintextPassword :: P.Lens' a b
 
 instance HasPlaintextPassword a b => HasPlaintextPassword (TF.Schema l p a) b where
     plaintextPassword = TF.configuration . plaintextPassword
 
-class HasPrivileges a b | a -> b where
-    privileges :: Lens' a b
+class HasDefaultCollation a b | a -> b where
+    defaultCollation :: P.Lens' a b
 
-instance HasPrivileges a b => HasPrivileges (TF.Schema l p a) b where
-    privileges = TF.configuration . privileges
+instance HasDefaultCollation a b => HasDefaultCollation (TF.Schema l p a) b where
+    defaultCollation = TF.configuration . defaultCollation
+
+class HasHost a b | a -> b where
+    host :: P.Lens' a b
+
+instance HasHost a b => HasHost (TF.Schema l p a) b where
+    host = TF.configuration . host
+
+class HasUsername a b | a -> b where
+    username :: P.Lens' a b
+
+instance HasUsername a b => HasUsername (TF.Schema l p a) b where
+    username = TF.configuration . username
 
 class HasUser a b | a -> b where
-    user :: Lens' a b
+    user :: P.Lens' a b
 
 instance HasUser a b => HasUser (TF.Schema l p a) b where
     user = TF.configuration . user
 
-class HasComputedAuthPlugin a b | a -> b where
-    computedAuthPlugin :: a -> b
+class HasGrant a b | a -> b where
+    grant :: P.Lens' a b
 
-class HasComputedDatabase a b | a -> b where
-    computedDatabase :: a -> b
+instance HasGrant a b => HasGrant (TF.Schema l p a) b where
+    grant = TF.configuration . grant
 
-class HasComputedDefaultCharacterSet a b | a -> b where
-    computedDefaultCharacterSet :: a -> b
+class HasPassword a b | a -> b where
+    password :: P.Lens' a b
 
-class HasComputedDefaultCollation a b | a -> b where
-    computedDefaultCollation :: a -> b
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
+    password = TF.configuration . password
 
-class HasComputedGrant a b | a -> b where
-    computedGrant :: a -> b
+class HasEndpoint a b | a -> b where
+    endpoint :: P.Lens' a b
 
-class HasComputedHost a b | a -> b where
-    computedHost :: a -> b
+instance HasEndpoint a b => HasEndpoint (TF.Schema l p a) b where
+    endpoint = TF.configuration . endpoint
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasName a b | a -> b where
+    name :: P.Lens' a b
 
-class HasComputedPassword a b | a -> b where
-    computedPassword :: a -> b
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
 
-class HasComputedPlaintextPassword a b | a -> b where
-    computedPlaintextPassword :: a -> b
+class HasPrivileges a b | a -> b where
+    privileges :: P.Lens' a b
 
-class HasComputedPrivileges a b | a -> b where
-    computedPrivileges :: a -> b
+instance HasPrivileges a b => HasPrivileges (TF.Schema l p a) b where
+    privileges = TF.configuration . privileges
 
-class HasComputedUser a b | a -> b where
-    computedUser :: a -> b
+class HasAuthPlugin a b | a -> b where
+    authPlugin :: P.Lens' a b
+
+instance HasAuthPlugin a b => HasAuthPlugin (TF.Schema l p a) b where
+    authPlugin = TF.configuration . authPlugin

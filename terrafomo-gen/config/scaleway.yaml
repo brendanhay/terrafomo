@@ -1,4 +1,2 @@
-name: Scaleway
-package: terrafomo-scaleway
-datatype: true
-original: scaleway
+package-name: terrafomo-scaleway
+provider-name: Scaleway

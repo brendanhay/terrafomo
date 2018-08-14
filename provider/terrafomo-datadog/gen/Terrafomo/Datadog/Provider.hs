@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,73 +17,85 @@
 --
 module Terrafomo.Datadog.Provider
     (
-    -- * Provider Datatype
-      Datadog (..)
-    , emptyDatadog
-
-    -- * Lenses
-    , providerApiKey
-    , providerAppKey
+    -- * Datadog Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Datadog.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.Datadog.Lens  as P
 import qualified Terrafomo.Datadog.Types as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Datadog@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Datadog/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _apiKey :: P.Text
+    -- ^ @api_key@ - (Required)
+    --
+    , _appKey :: P.Text
+    -- ^ @app_key@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Datadog Terraform provider.
+newProvider
+    :: P.Text -- ^ @api_key@ - 'P.apiKey'
+    -> P.Text -- ^ @app_key@ - 'P.appKey'
+    -> Provider
+newProvider _apiKey _appKey =
+    Provider'
+        { _apiKey = _apiKey
+        , _appKey = _appKey
+        }
 
-The <https://www.datadoghq.com> provider is used to interact with the
-resources supported by Datadog. The provider needs to be configured with the
-proper credentials before it can be used. Use the navigation to the left to
-read about the available resources.
--}
-data Datadog = Datadog {
-      _api_key :: !(Maybe P.Text)
-    {- ^ (Required) Datadog API key. This can also be set via the @DATADOG_API_KEY@ environment variable. -}
-    , _app_key :: !(Maybe P.Text)
-    {- ^ (Required) Datadog APP key. This can also be set via the @DATADOG_APP_KEY@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Datadog
-
-instance TF.IsSection Datadog where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Datadog))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_key" <$> _api_key x
-                  , TF.assign "app_key" <$> _app_key x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "api_key" _apiKey
+                  , P.Just $ TF.assign "app_key" _appKey
                   ])
 
-instance TF.IsProvider Datadog where
-    type ProviderType Datadog = "datadog"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyDatadog :: Datadog
-emptyDatadog = Datadog {
-        _api_key = Nothing
-      , _app_key = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerApiKey :: Lens' Datadog (Maybe P.Text)
-providerApiKey =
-    lens _api_key (\s a -> s { _api_key = a })
+instance P.HasApiKey (Provider) (P.Text) where
+    apiKey =
+        P.lens (_apiKey :: Provider -> P.Text)
+               (\s a -> s { _apiKey = a } :: Provider)
 
-providerAppKey :: Lens' Datadog (Maybe P.Text)
-providerAppKey =
-    lens _app_key (\s a -> s { _app_key = a })
+instance P.HasAppKey (Provider) (P.Text) where
+    appKey =
+        P.lens (_appKey :: Provider -> P.Text)
+               (\s a -> s { _appKey = a } :: Provider)

@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Scaleway
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Scaleway
-    ( module Terrafomo.Scaleway.Types
+    ( module Terrafomo.Scaleway.Resource
+    , module Terrafomo.Scaleway.Types
     , module Terrafomo.Scaleway.Provider
     , module Terrafomo.Scaleway.Lens
+    , module Terrafomo.Scaleway.Settings
     , module Terrafomo.Scaleway.DataSource
-    , module Terrafomo.Scaleway.Resource
     ) where
 
 import Terrafomo.Scaleway.DataSource
 import Terrafomo.Scaleway.Lens
 import Terrafomo.Scaleway.Provider
 import Terrafomo.Scaleway.Resource
+import Terrafomo.Scaleway.Settings
 import Terrafomo.Scaleway.Types

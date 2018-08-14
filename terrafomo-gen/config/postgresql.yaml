@@ -1,4 +1,2 @@
-name: PostgreSQL
-package: terrafomo-postgresql
-datatype: true
-original: postgresql
+package-name: terrafomo-postgresql
+provider-name: PostgreSQL

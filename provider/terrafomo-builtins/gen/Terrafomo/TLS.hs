@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.TLS
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.TLS
-    ( module Terrafomo.TLS.Types
-    , module Terrafomo.TLS.Lens
-    , module Terrafomo.TLS.DataSource
+    ( module Terrafomo.TLS.Lens
+    , module Terrafomo.TLS.Settings
     , module Terrafomo.TLS.Resource
+    , module Terrafomo.TLS.Types
+    , module Terrafomo.TLS.Provider
+    , module Terrafomo.TLS.DataSource
     ) where
 
 import Terrafomo.TLS.DataSource
 import Terrafomo.TLS.Lens
+import Terrafomo.TLS.Provider
 import Terrafomo.TLS.Resource
+import Terrafomo.TLS.Settings
 import Terrafomo.TLS.Types

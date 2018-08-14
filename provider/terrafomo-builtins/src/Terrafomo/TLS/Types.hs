@@ -8,28 +8,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.TLS.Types
-    ( Subject (..)
-    ) where
+module Terrafomo.TLS.Types where
 
-import Data.HashMap.Strict (HashMap)
-import Data.Text           (Text)
+-- import Data.Text (Text)
 
-import GHC.Exts (IsList (..))
+-- import Terrafomo
 
-import Terrafomo
+-- import Formatting (Format, (%))
 
-import qualified Terrafomo.HCL as HCL
-
-newtype Subject s = Subject { fromSubject :: HashMap Text (Attr s Text) }
-    deriving (Show, Eq)
-
-instance IsValue  (Subject s)
-instance IsObject (Subject s) where
-    toObject = HCL.object . fromSubject
-
-instance IsList (Subject s) where
-    type Item (Subject s) = (Text, Attr s Text)
-
-    toList   = toList  . fromSubject
-    fromList = Subject . fromList
+-- import Terrafomo.TLS.Lens
+-- import qualified Terrafomo.Attribute as TF
+-- import qualified Terrafomo.HCL as TF
+-- import qualified Terrafomo.Name as TF
+-- import qualified Terrafomo.Provider as TF
+-- import qualified Terrafomo.Schema as TF

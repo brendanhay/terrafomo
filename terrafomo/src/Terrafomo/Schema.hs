@@ -1,13 +1,12 @@
 {-# LANGUAGE RecordWildCards #-}
 
 -- | Shared type representing datasources and resources.
---
--- FIXME: come up with a better name - maybe 'Schema'?
 module Terrafomo.Schema
-    ( Dependency (..)
+    ( Dependency      (..)
+
     , DataSource
     , Resource
-    , Schema     (..)
+    , Schema          (..)
 
     , newDataSource
     , newResource
@@ -18,26 +17,28 @@ module Terrafomo.Schema
     , dependOn
     ) where
 
-import Data.Function ((&))
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Set           (Set)
-import Data.Text          (Text)
+import Data.Function       ((&))
+import Data.HashSet        (HashSet)
+import Data.Hashable       (Hashable)
+import Data.List.NonEmpty  (NonEmpty ((:|)))
+import Data.Maybe          (catMaybes)
+import Data.Text           (Text)
 
 import Lens.Micro (Lens', lens)
 
-import Terrafomo.Provider (IsProvider, providerKey)
 import Terrafomo.Lifecycle
 import Terrafomo.Name
+import Terrafomo.Provider (IsProvider, providerKey)
+import Terrafomo.Validator (Validator)
 
-import qualified Data.Set      as Set
+import qualified Data.HashSet  as Set
 import qualified Lens.Micro    as Lens
 import qualified Terrafomo.HCL as HCL
 
 -- Dependencies
 
 newtype Dependency = Dependency Key
-   deriving (Show, Eq, Ord)
+   deriving (Show, Eq, Ord, Hashable)
 
 instance HCL.IsValue Dependency where
     toValue (Dependency k) = HCL.toValue k
@@ -52,15 +53,13 @@ data Schema l p a where
         :: (Eq l, Monoid l, HCL.IsObject l, IsProvider p, HCL.IsObject a)
         => { _schemaProvider  :: !(Maybe p)
            , _schemaLifecycle :: !l
-           , _schemaDependsOn :: !(Set Dependency)
+           , _schemaDependsOn :: !(HashSet Dependency)
            , _schemaKeywords  :: !(NonEmpty HCL.Id)
            , _schemaType      :: !Type
            , _schemaConfig    :: !a
+           , _schemaValidator :: !(Validator a)
            }
         -> Schema l p a
-
-deriving instance (Show l, Show p, Show a) => Show (Schema l p a)
-deriving instance (Eq   l, Eq   p, Eq   a) => Eq   (Schema l p a)
 
 instance HasLifecycle (Resource p a) a where
     lifecycle = lens _schemaLifecycle (\s a -> s { _schemaLifecycle = a })
@@ -88,15 +87,17 @@ newDataSource
        , HCL.IsObject a
        )
     => Text
+    -> Validator a
     -> a
     -> DataSource p a
-newDataSource name cfg =
+newDataSource name validator cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = ()
            , _schemaDependsOn = mempty
            , _schemaKeywords  = pure (HCL.Unquoted "data")
            , _schemaType      = Type (Just "data") name
            , _schemaConfig    = cfg
+           , _schemaValidator = validator
            }
 
 newResource
@@ -104,15 +105,17 @@ newResource
        , HCL.IsObject a
        )
     => Text
+    -> Validator a
     -> a
     -> Resource p a
-newResource name cfg =
+newResource name validator cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = mempty
            , _schemaDependsOn = mempty
            , _schemaKeywords  = pure (HCL.Unquoted "resource")
            , _schemaType      = Type Nothing name
            , _schemaConfig    = cfg
+           , _schemaValidator = validator
            }
 
 -- Lenses
@@ -129,7 +132,7 @@ configuration = lens _schemaConfig (\s a -> s { _schemaConfig = a })
 
 -- | Explicit dependencies that this resource or datasource has. These
 -- dependencies will be created _before_.
-dependencies :: Lens' (Schema l p a) (Set Dependency)
+dependencies :: Lens' (Schema l p a) (HashSet Dependency)
 dependencies = lens _schemaDependsOn (\s a -> s { _schemaDependsOn = a })
 
 -- | Helper for explicitly depending upon a ref.

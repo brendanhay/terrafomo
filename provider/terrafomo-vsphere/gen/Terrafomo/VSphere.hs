@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.VSphere
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VSphere
-    ( module Terrafomo.VSphere.Types
+    ( module Terrafomo.VSphere.DataSource
+    , module Terrafomo.VSphere.Resource
+    , module Terrafomo.VSphere.Types
     , module Terrafomo.VSphere.Provider
     , module Terrafomo.VSphere.Lens
-    , module Terrafomo.VSphere.DataSource
-    , module Terrafomo.VSphere.Resource
+    , module Terrafomo.VSphere.Settings
     ) where
 
 import Terrafomo.VSphere.DataSource
 import Terrafomo.VSphere.Lens
 import Terrafomo.VSphere.Provider
 import Terrafomo.VSphere.Resource
+import Terrafomo.VSphere.Settings
 import Terrafomo.VSphere.Types

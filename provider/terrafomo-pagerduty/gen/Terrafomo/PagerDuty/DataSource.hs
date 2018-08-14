@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,261 +17,269 @@
 --
 module Terrafomo.PagerDuty.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** pagerduty_escalation_policy
       EscalationPolicyData (..)
     , escalationPolicyData
 
+    -- ** pagerduty_extension_schema
     , ExtensionSchemaData (..)
     , extensionSchemaData
 
+    -- ** pagerduty_schedule
     , ScheduleData (..)
     , scheduleData
 
+    -- ** pagerduty_team
     , TeamData (..)
     , teamData
 
+    -- ** pagerduty_user
     , UserData (..)
     , userData
 
+    -- ** pagerduty_vendor
     , VendorData (..)
     , vendorData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasEmail (..)
-    , P.HasName (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedDescription (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedName (..)
-    , P.HasComputedType' (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.PagerDuty.Settings
 
-import Terrafomo.PagerDuty.Types as P
-
+import qualified Data.Hashable                as P
+import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as Map
+import qualified Data.List.NonEmpty           as P
+import qualified Data.Maybe                   as P
+import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
-import qualified Data.Word                    as P
-import qualified GHC.Base                     as P
-import qualified Numeric.Natural              as P
+import qualified GHC.Generics                 as P
+import qualified Lens.Micro                   as P
+import qualified Prelude                      as P
+import qualified Terrafomo.Attribute          as TF
+import qualified Terrafomo.HCL                as TF
+import qualified Terrafomo.Name               as TF
 import qualified Terrafomo.PagerDuty.Lens     as P
 import qualified Terrafomo.PagerDuty.Provider as P
+import qualified Terrafomo.PagerDuty.Types    as P
+import qualified Terrafomo.Schema             as TF
+import qualified Terrafomo.Validator          as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @pagerduty_escalation_policy@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_escalation_policy terraform documentation>
+-- for more information.
+data EscalationPolicyData s = EscalationPolicyData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @pagerduty_escalation_policy@ PagerDuty datasource.
-
-Use this data source to get information about a specific
-<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Escalation_Policies/get_escalation_policies>
-that you can use for other PagerDuty resources.
--}
-data EscalationPolicyData s = EscalationPolicyData {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name to use to find an escalation policy in the PagerDuty API. -}
-    } deriving (Show, Eq)
+escalationPolicyData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (EscalationPolicyData s)
+escalationPolicyData _name =
+    TF.newDataSource "pagerduty_escalation_policy" TF.validator $
+        EscalationPolicyData'
+            { _name = _name
+            }
 
 instance TF.IsObject (EscalationPolicyData s) where
-    toObject EscalationPolicyData{..} = catMaybes
+    toObject EscalationPolicyData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
+
+instance TF.IsValid (EscalationPolicyData s) where
+    validator = P.mempty
 
 instance P.HasName (EscalationPolicyData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: EscalationPolicyData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: EscalationPolicyData s)
+        P.lens (_name :: EscalationPolicyData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: EscalationPolicyData s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EscalationPolicyData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+-- | @pagerduty_extension_schema@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_extension_schema terraform documentation>
+-- for more information.
+data ExtensionSchemaData s = ExtensionSchemaData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-escalationPolicyData :: TF.DataSource P.PagerDuty (EscalationPolicyData s)
-escalationPolicyData =
-    TF.newDataSource "pagerduty_escalation_policy" $
-        EscalationPolicyData {
-              _name = TF.Nil
+extensionSchemaData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ExtensionSchemaData s)
+extensionSchemaData _name =
+    TF.newDataSource "pagerduty_extension_schema" TF.validator $
+        ExtensionSchemaData'
+            { _name = _name
             }
 
-{- | The @pagerduty_extension_schema@ PagerDuty datasource.
-
-Use this data source to get information about a specific
-<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Extension_Schemas/get_extension_schemas>
-vendor that you can use for a service (e.g: Slack, Generic Webhook,
-ServiceNow).
--}
-data ExtensionSchemaData s = ExtensionSchemaData {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The extension name to use to find an extension vendor in the PagerDuty API. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ExtensionSchemaData s) where
-    toObject ExtensionSchemaData{..} = catMaybes
+    toObject ExtensionSchemaData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
+
+instance TF.IsValid (ExtensionSchemaData s) where
+    validator = P.mempty
 
 instance P.HasName (ExtensionSchemaData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ExtensionSchemaData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ExtensionSchemaData s)
+        P.lens (_name :: ExtensionSchemaData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ExtensionSchemaData s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+-- | @pagerduty_schedule@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_schedule terraform documentation>
+-- for more information.
+data ScheduleData s = ScheduleData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-extensionSchemaData :: TF.DataSource P.PagerDuty (ExtensionSchemaData s)
-extensionSchemaData =
-    TF.newDataSource "pagerduty_extension_schema" $
-        ExtensionSchemaData {
-              _name = TF.Nil
+scheduleData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ScheduleData s)
+scheduleData _name =
+    TF.newDataSource "pagerduty_schedule" TF.validator $
+        ScheduleData'
+            { _name = _name
             }
 
-{- | The @pagerduty_schedule@ PagerDuty datasource.
-
-Use this data source to get information about a specific
-<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Schedules/get_schedules>
-that you can use for other PagerDuty resources.
--}
-data ScheduleData s = ScheduleData {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name to use to find a schedule in the PagerDuty API. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ScheduleData s) where
-    toObject ScheduleData{..} = catMaybes
+    toObject ScheduleData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
+
+instance TF.IsValid (ScheduleData s) where
+    validator = P.mempty
 
 instance P.HasName (ScheduleData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ScheduleData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ScheduleData s)
+        P.lens (_name :: ScheduleData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ScheduleData s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ScheduleData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+-- | @pagerduty_team@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_team terraform documentation>
+-- for more information.
+data TeamData s = TeamData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the team to find in the PagerDuty API
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-scheduleData :: TF.DataSource P.PagerDuty (ScheduleData s)
-scheduleData =
-    TF.newDataSource "pagerduty_schedule" $
-        ScheduleData {
-              _name = TF.Nil
+teamData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (TeamData s)
+teamData _name =
+    TF.newDataSource "pagerduty_team" TF.validator $
+        TeamData'
+            { _name = _name
             }
 
-{- | The @pagerduty_team@ PagerDuty datasource.
-
-Use this data source to get information about a specific
-<https://v1.developer.pagerduty.com/documentation/rest/teams/list> that you
-can use for other PagerDuty resources.
--}
-data TeamData s = TeamData {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the team to find in the PagerDuty API. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (TeamData s) where
-    toObject TeamData{..} = catMaybes
+    toObject TeamData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         ]
+
+instance TF.IsValid (TeamData s) where
+    validator = P.mempty
 
 instance P.HasName (TeamData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: TeamData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TeamData s)
+        P.lens (_name :: TeamData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TeamData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+-- | @pagerduty_user@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_user terraform documentation>
+-- for more information.
+data UserData s = UserData'
+    { _email :: TF.Attr s P.Text
+    -- ^ @email@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-teamData :: TF.DataSource P.PagerDuty (TeamData s)
-teamData =
-    TF.newDataSource "pagerduty_team" $
-        TeamData {
-              _name = TF.Nil
+userData
+    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    -> TF.DataSource P.Provider (UserData s)
+userData _email =
+    TF.newDataSource "pagerduty_user" TF.validator $
+        UserData'
+            { _email = _email
             }
 
-{- | The @pagerduty_user@ PagerDuty datasource.
-
-Use this data source to get information about a specific
-<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Users/get_users>
-that you can use for other PagerDuty resources.
--}
-data UserData s = UserData {
-      _email :: !(TF.Attr s P.Text)
-    {- ^ (Required) The email to use to find a user in the PagerDuty API. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (UserData s) where
-    toObject UserData{..} = catMaybes
+    toObject UserData'{..} = P.catMaybes
         [ TF.assign "email" <$> TF.attribute _email
         ]
 
+instance TF.IsValid (UserData s) where
+    validator = P.mempty
+
 instance P.HasEmail (UserData s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: UserData s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: UserData s)
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedEmail =
-        (_email :: UserData s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_email :: UserData s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-userData :: TF.DataSource P.PagerDuty (UserData s)
-userData =
-    TF.newDataSource "pagerduty_user" $
-        UserData {
-              _email = TF.Nil
+-- | @pagerduty_vendor@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_vendor terraform documentation>
+-- for more information.
+data VendorData s = VendorData'
+    { _name      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _nameRegex :: TF.Attr s P.Text
+    -- ^ @name_regex@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+vendorData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (VendorData s)
+vendorData _name =
+    TF.newDataSource "pagerduty_vendor" TF.validator $
+        VendorData'
+            { _name = _name
+            , _nameRegex = TF.Nil
             }
 
-{- | The @pagerduty_vendor@ PagerDuty datasource.
-
-Use this data source to get information about a specific
-<https://v2.developer.pagerduty.com/v2/page/api-reference#!/Vendors/get_vendors>
-that you can use for a service integration (e.g Amazon Cloudwatch, Splunk,
-Datadog).
--}
-data VendorData s = VendorData {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The vendor name to use to find a vendor in the PagerDuty API. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VendorData s) where
-    toObject VendorData{..} = catMaybes
+    toObject VendorData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_regex" <$> TF.attribute _nameRegex
         ]
+
+instance TF.IsValid (VendorData s) where
+    validator = P.mempty
 
 instance P.HasName (VendorData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VendorData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VendorData s)
+        P.lens (_name :: VendorData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VendorData s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance P.HasNameRegex (VendorData s) (TF.Attr s P.Text) where
+    nameRegex =
+        P.lens (_nameRegex :: VendorData s -> TF.Attr s P.Text)
+               (\s a -> s { _nameRegex = a } :: VendorData s)
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
-
-vendorData :: TF.DataSource P.PagerDuty (VendorData s)
-vendorData =
-    TF.newDataSource "pagerduty_vendor" $
-        VendorData {
-              _name = TF.Nil
-            }
+instance s ~ s' => P.HasComputedType (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"

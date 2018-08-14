@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.OpenStack
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OpenStack
-    ( module Terrafomo.OpenStack.Types
-    , module Terrafomo.OpenStack.Provider
+    ( module Terrafomo.OpenStack.Settings
     , module Terrafomo.OpenStack.Lens
-    , module Terrafomo.OpenStack.DataSource
     , module Terrafomo.OpenStack.Resource
+    , module Terrafomo.OpenStack.Provider
+    , module Terrafomo.OpenStack.DataSource
+    , module Terrafomo.OpenStack.Types
     ) where
 
 import Terrafomo.OpenStack.DataSource
 import Terrafomo.OpenStack.Lens
 import Terrafomo.OpenStack.Provider
 import Terrafomo.OpenStack.Resource
+import Terrafomo.OpenStack.Settings
 import Terrafomo.OpenStack.Types

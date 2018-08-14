@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,60 +17,56 @@
 --
 module Terrafomo.Fastly.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** fastly_ip_ranges
       IpRangesData (..)
     , ipRangesData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-
-    -- ** Computed Attributes
-    , P.HasComputedCidrBlocks (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Fastly.Settings
 
-import Terrafomo.Fastly.Types as P
-
+import qualified Data.Hashable             as P
+import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
+import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
-import qualified Data.Word                 as P
-import qualified GHC.Base                  as P
-import qualified Numeric.Natural           as P
+import qualified GHC.Generics              as P
+import qualified Lens.Micro                as P
+import qualified Prelude                   as P
+import qualified Terrafomo.Attribute       as TF
 import qualified Terrafomo.Fastly.Lens     as P
 import qualified Terrafomo.Fastly.Provider as P
+import qualified Terrafomo.Fastly.Types    as P
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @fastly_ip_ranges@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Fastly/fastly_ip_ranges terraform documentation>
+-- for more information.
+data IpRangesData s = IpRangesData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @fastly_ip_ranges@ Fastly datasource.
-
-Use this data source to get the
-<https://docs.fastly.com/guides/securing-communications/accessing-fastlys-ip-ranges>
-of Fastly edge nodes.
--}
-data IpRangesData s = IpRangesData {
-    } deriving (Show, Eq)
+ipRangesData
+    :: TF.DataSource P.Provider (IpRangesData s)
+ipRangesData =
+    TF.newDataSource "fastly_ip_ranges" TF.validator $
+        IpRangesData'
 
 instance TF.IsObject (IpRangesData s) where
     toObject _ = []
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance TF.IsValid (IpRangesData s) where
+    validator = P.mempty
 
-ipRangesData :: TF.DataSource P.Fastly (IpRangesData s)
-ipRangesData =
-    TF.newDataSource "fastly_ip_ranges" $
-        IpRangesData {
-            }
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"

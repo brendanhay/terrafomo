@@ -1,4 +1,2 @@
-name: Consul
-package: terrafomo-consul
-datatype: true
-original: consul
+package-name: terrafomo-consul
+provider-name: Consul

@@ -15,170 +15,198 @@ module Terrafomo.Nomad.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasDeregisterOnDestroy (..)
-    , HasDeregisterOnIdChange (..)
-    , HasDescription (..)
-    , HasEnforcementLevel (..)
-    , HasGlobal (..)
-    , HasJobspec (..)
-    , HasLimits (..)
-    , HasName (..)
-    , HasPolicies (..)
-    , HasPolicy (..)
-    , HasPolicyOverride (..)
-    , HasRulesHcl (..)
-    , HasScope (..)
+      HasKeyFile (..)
+    , HasDeregisterOnDestroy (..)
+    , HasRegionLimit (..)
     , HasType' (..)
+    , HasScope (..)
+    , HasGlobal (..)
+    , HasDescription (..)
+    , HasVaultToken (..)
+    , HasPolicies (..)
+    , HasCertFile (..)
+    , HasAddress (..)
+    , HasSecretId (..)
+    , HasPolicy (..)
+    , HasDeregisterOnIdChange (..)
+    , HasRulesHcl (..)
+    , HasLimits (..)
+    , HasEnforcementLevel (..)
+    , HasJobspec (..)
+    , HasCaFile (..)
+    , HasQuota (..)
+    , HasRegion (..)
+    , HasPolicyOverride (..)
+    , HasCpu (..)
+    , HasMemoryMb (..)
+    , HasName (..)
 
     -- ** Computed Attributes
-    , HasComputedDeregisterOnDestroy (..)
-    , HasComputedDeregisterOnIdChange (..)
-    , HasComputedDescription (..)
-    , HasComputedEnforcementLevel (..)
-    , HasComputedGlobal (..)
-    , HasComputedJobspec (..)
-    , HasComputedLimits (..)
-    , HasComputedName (..)
-    , HasComputedPolicies (..)
-    , HasComputedPolicy (..)
-    , HasComputedPolicyOverride (..)
     , HasComputedRegions (..)
-    , HasComputedRulesHcl (..)
-    , HasComputedScope (..)
-    , HasComputedType' (..)
+    , HasComputedSecretId (..)
+    , HasComputedAccessorId (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
+class HasKeyFile a b | a -> b where
+    keyFile :: P.Lens' a b
+
+instance HasKeyFile a b => HasKeyFile (TF.Schema l p a) b where
+    keyFile = TF.configuration . keyFile
+
 class HasDeregisterOnDestroy a b | a -> b where
-    deregisterOnDestroy :: Lens' a b
+    deregisterOnDestroy :: P.Lens' a b
 
 instance HasDeregisterOnDestroy a b => HasDeregisterOnDestroy (TF.Schema l p a) b where
     deregisterOnDestroy = TF.configuration . deregisterOnDestroy
 
-class HasDeregisterOnIdChange a b | a -> b where
-    deregisterOnIdChange :: Lens' a b
+class HasRegionLimit a b | a -> b where
+    regionLimit :: P.Lens' a b
 
-instance HasDeregisterOnIdChange a b => HasDeregisterOnIdChange (TF.Schema l p a) b where
-    deregisterOnIdChange = TF.configuration . deregisterOnIdChange
-
-class HasDescription a b | a -> b where
-    description :: Lens' a b
-
-instance HasDescription a b => HasDescription (TF.Schema l p a) b where
-    description = TF.configuration . description
-
-class HasEnforcementLevel a b | a -> b where
-    enforcementLevel :: Lens' a b
-
-instance HasEnforcementLevel a b => HasEnforcementLevel (TF.Schema l p a) b where
-    enforcementLevel = TF.configuration . enforcementLevel
-
-class HasGlobal a b | a -> b where
-    global :: Lens' a b
-
-instance HasGlobal a b => HasGlobal (TF.Schema l p a) b where
-    global = TF.configuration . global
-
-class HasJobspec a b | a -> b where
-    jobspec :: Lens' a b
-
-instance HasJobspec a b => HasJobspec (TF.Schema l p a) b where
-    jobspec = TF.configuration . jobspec
-
-class HasLimits a b | a -> b where
-    limits :: Lens' a b
-
-instance HasLimits a b => HasLimits (TF.Schema l p a) b where
-    limits = TF.configuration . limits
-
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasPolicies a b | a -> b where
-    policies :: Lens' a b
-
-instance HasPolicies a b => HasPolicies (TF.Schema l p a) b where
-    policies = TF.configuration . policies
-
-class HasPolicy a b | a -> b where
-    policy :: Lens' a b
-
-instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
-    policy = TF.configuration . policy
-
-class HasPolicyOverride a b | a -> b where
-    policyOverride :: Lens' a b
-
-instance HasPolicyOverride a b => HasPolicyOverride (TF.Schema l p a) b where
-    policyOverride = TF.configuration . policyOverride
-
-class HasRulesHcl a b | a -> b where
-    rulesHcl :: Lens' a b
-
-instance HasRulesHcl a b => HasRulesHcl (TF.Schema l p a) b where
-    rulesHcl = TF.configuration . rulesHcl
-
-class HasScope a b | a -> b where
-    scope :: Lens' a b
-
-instance HasScope a b => HasScope (TF.Schema l p a) b where
-    scope = TF.configuration . scope
+instance HasRegionLimit a b => HasRegionLimit (TF.Schema l p a) b where
+    regionLimit = TF.configuration . regionLimit
 
 class HasType' a b | a -> b where
-    type' :: Lens' a b
+    type' :: P.Lens' a b
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasComputedDeregisterOnDestroy a b | a -> b where
-    computedDeregisterOnDestroy :: a -> b
+class HasScope a b | a -> b where
+    scope :: P.Lens' a b
 
-class HasComputedDeregisterOnIdChange a b | a -> b where
-    computedDeregisterOnIdChange :: a -> b
+instance HasScope a b => HasScope (TF.Schema l p a) b where
+    scope = TF.configuration . scope
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasGlobal a b | a -> b where
+    global :: P.Lens' a b
 
-class HasComputedEnforcementLevel a b | a -> b where
-    computedEnforcementLevel :: a -> b
+instance HasGlobal a b => HasGlobal (TF.Schema l p a) b where
+    global = TF.configuration . global
 
-class HasComputedGlobal a b | a -> b where
-    computedGlobal :: a -> b
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
 
-class HasComputedJobspec a b | a -> b where
-    computedJobspec :: a -> b
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
 
-class HasComputedLimits a b | a -> b where
-    computedLimits :: a -> b
+class HasVaultToken a b | a -> b where
+    vaultToken :: P.Lens' a b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+instance HasVaultToken a b => HasVaultToken (TF.Schema l p a) b where
+    vaultToken = TF.configuration . vaultToken
 
-class HasComputedPolicies a b | a -> b where
-    computedPolicies :: a -> b
+class HasPolicies a b | a -> b where
+    policies :: P.Lens' a b
 
-class HasComputedPolicy a b | a -> b where
-    computedPolicy :: a -> b
+instance HasPolicies a b => HasPolicies (TF.Schema l p a) b where
+    policies = TF.configuration . policies
 
-class HasComputedPolicyOverride a b | a -> b where
-    computedPolicyOverride :: a -> b
+class HasCertFile a b | a -> b where
+    certFile :: P.Lens' a b
+
+instance HasCertFile a b => HasCertFile (TF.Schema l p a) b where
+    certFile = TF.configuration . certFile
+
+class HasAddress a b | a -> b where
+    address :: P.Lens' a b
+
+instance HasAddress a b => HasAddress (TF.Schema l p a) b where
+    address = TF.configuration . address
+
+class HasSecretId a b | a -> b where
+    secretId :: P.Lens' a b
+
+instance HasSecretId a b => HasSecretId (TF.Schema l p a) b where
+    secretId = TF.configuration . secretId
+
+class HasPolicy a b | a -> b where
+    policy :: P.Lens' a b
+
+instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
+    policy = TF.configuration . policy
+
+class HasDeregisterOnIdChange a b | a -> b where
+    deregisterOnIdChange :: P.Lens' a b
+
+instance HasDeregisterOnIdChange a b => HasDeregisterOnIdChange (TF.Schema l p a) b where
+    deregisterOnIdChange = TF.configuration . deregisterOnIdChange
+
+class HasRulesHcl a b | a -> b where
+    rulesHcl :: P.Lens' a b
+
+instance HasRulesHcl a b => HasRulesHcl (TF.Schema l p a) b where
+    rulesHcl = TF.configuration . rulesHcl
+
+class HasLimits a b | a -> b where
+    limits :: P.Lens' a b
+
+instance HasLimits a b => HasLimits (TF.Schema l p a) b where
+    limits = TF.configuration . limits
+
+class HasEnforcementLevel a b | a -> b where
+    enforcementLevel :: P.Lens' a b
+
+instance HasEnforcementLevel a b => HasEnforcementLevel (TF.Schema l p a) b where
+    enforcementLevel = TF.configuration . enforcementLevel
+
+class HasJobspec a b | a -> b where
+    jobspec :: P.Lens' a b
+
+instance HasJobspec a b => HasJobspec (TF.Schema l p a) b where
+    jobspec = TF.configuration . jobspec
+
+class HasCaFile a b | a -> b where
+    caFile :: P.Lens' a b
+
+instance HasCaFile a b => HasCaFile (TF.Schema l p a) b where
+    caFile = TF.configuration . caFile
+
+class HasQuota a b | a -> b where
+    quota :: P.Lens' a b
+
+instance HasQuota a b => HasQuota (TF.Schema l p a) b where
+    quota = TF.configuration . quota
+
+class HasRegion a b | a -> b where
+    region :: P.Lens' a b
+
+instance HasRegion a b => HasRegion (TF.Schema l p a) b where
+    region = TF.configuration . region
+
+class HasPolicyOverride a b | a -> b where
+    policyOverride :: P.Lens' a b
+
+instance HasPolicyOverride a b => HasPolicyOverride (TF.Schema l p a) b where
+    policyOverride = TF.configuration . policyOverride
+
+class HasCpu a b | a -> b where
+    cpu :: P.Lens' a b
+
+instance HasCpu a b => HasCpu (TF.Schema l p a) b where
+    cpu = TF.configuration . cpu
+
+class HasMemoryMb a b | a -> b where
+    memoryMb :: P.Lens' a b
+
+instance HasMemoryMb a b => HasMemoryMb (TF.Schema l p a) b where
+    memoryMb = TF.configuration . memoryMb
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
 
 class HasComputedRegions a b | a -> b where
     computedRegions :: a -> b
 
-class HasComputedRulesHcl a b | a -> b where
-    computedRulesHcl :: a -> b
+class HasComputedSecretId a b | a -> b where
+    computedSecretId :: a -> b
 
-class HasComputedScope a b | a -> b where
-    computedScope :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+class HasComputedAccessorId a b | a -> b where
+    computedAccessorId :: a -> b

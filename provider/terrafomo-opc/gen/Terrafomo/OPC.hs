@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.OPC
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,14 +12,16 @@
 --
 module Terrafomo.OPC
     ( module Terrafomo.OPC.Types
-    , module Terrafomo.OPC.Provider
-    , module Terrafomo.OPC.Lens
     , module Terrafomo.OPC.DataSource
+    , module Terrafomo.OPC.Provider
     , module Terrafomo.OPC.Resource
+    , module Terrafomo.OPC.Settings
+    , module Terrafomo.OPC.Lens
     ) where
 
 import Terrafomo.OPC.DataSource
 import Terrafomo.OPC.Lens
 import Terrafomo.OPC.Provider
 import Terrafomo.OPC.Resource
+import Terrafomo.OPC.Settings
 import Terrafomo.OPC.Types

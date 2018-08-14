@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Docker
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,14 +12,16 @@
 --
 module Terrafomo.Docker
     ( module Terrafomo.Docker.Types
-    , module Terrafomo.Docker.Provider
-    , module Terrafomo.Docker.Lens
     , module Terrafomo.Docker.DataSource
+    , module Terrafomo.Docker.Provider
     , module Terrafomo.Docker.Resource
+    , module Terrafomo.Docker.Settings
+    , module Terrafomo.Docker.Lens
     ) where
 
 import Terrafomo.Docker.DataSource
 import Terrafomo.Docker.Lens
 import Terrafomo.Docker.Provider
 import Terrafomo.Docker.Resource
+import Terrafomo.Docker.Settings
 import Terrafomo.Docker.Types

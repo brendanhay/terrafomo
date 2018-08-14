@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,1013 +17,1358 @@
 --
 module Terrafomo.NS1.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** ns1_apikey
       ApikeyResource (..)
     , apikeyResource
 
+    -- ** ns1_datafeed
     , DatafeedResource (..)
     , datafeedResource
 
+    -- ** ns1_datasource
     , DatasourceResource (..)
     , datasourceResource
 
+    -- ** ns1_monitoringjob
     , MonitoringjobResource (..)
     , monitoringjobResource
 
+    -- ** ns1_notifylist
     , NotifylistResource (..)
     , notifylistResource
 
+    -- ** ns1_record
     , RecordResource (..)
     , recordResource
 
+    -- ** ns1_team
     , TeamResource (..)
     , teamResource
 
+    -- ** ns1_user
     , UserResource (..)
     , userResource
 
+    -- ** ns1_zone
     , ZoneResource (..)
     , zoneResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasActive (..)
-    , P.HasAnswers (..)
-    , P.HasConfig (..)
-    , P.HasDomain (..)
-    , P.HasEmail (..)
-    , P.HasExpiry (..)
-    , P.HasFilters (..)
-    , P.HasFrequency (..)
-    , P.HasJobType (..)
-    , P.HasKey (..)
-    , P.HasLink (..)
-    , P.HasName (..)
-    , P.HasNotes (..)
-    , P.HasNotifications (..)
-    , P.HasNotify (..)
-    , P.HasNotifyDelay (..)
-    , P.HasNotifyFailback (..)
-    , P.HasNotifyList (..)
-    , P.HasNotifyRegional (..)
-    , P.HasNotifyRepeat (..)
-    , P.HasNxTtl (..)
-    , P.HasPermissions (..)
-    , P.HasPolicy (..)
-    , P.HasPrimary (..)
-    , P.HasRapidRecheck (..)
-    , P.HasRefresh (..)
-    , P.HasRegions (..)
-    , P.HasRetry (..)
-    , P.HasRules (..)
-    , P.HasSourceId (..)
-    , P.HasSourcetype (..)
-    , P.HasTeams (..)
-    , P.HasTtl (..)
-    , P.HasType' (..)
-    , P.HasUseClientSubnet (..)
-    , P.HasUsername (..)
-    , P.HasZone (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedActive (..)
-    , P.HasComputedAnswers (..)
-    , P.HasComputedConfig (..)
-    , P.HasComputedDomain (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedExpiry (..)
-    , P.HasComputedFilters (..)
-    , P.HasComputedFrequency (..)
-    , P.HasComputedJobType (..)
-    , P.HasComputedKey (..)
-    , P.HasComputedLink (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNotes (..)
-    , P.HasComputedNotifications (..)
-    , P.HasComputedNotify (..)
-    , P.HasComputedNotifyDelay (..)
-    , P.HasComputedNotifyFailback (..)
-    , P.HasComputedNotifyList (..)
-    , P.HasComputedNotifyRegional (..)
-    , P.HasComputedNotifyRepeat (..)
-    , P.HasComputedNxTtl (..)
-    , P.HasComputedPermissions (..)
-    , P.HasComputedPolicy (..)
-    , P.HasComputedPrimary (..)
-    , P.HasComputedRapidRecheck (..)
-    , P.HasComputedRefresh (..)
-    , P.HasComputedRegions (..)
-    , P.HasComputedRetry (..)
-    , P.HasComputedRules (..)
-    , P.HasComputedSourceId (..)
-    , P.HasComputedSourcetype (..)
-    , P.HasComputedTeams (..)
-    , P.HasComputedTtl (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUseClientSubnet (..)
-    , P.HasComputedUsername (..)
-    , P.HasComputedZone (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.NS1.Settings
 
-import Terrafomo.NS1.Types as P
-
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
-import qualified Data.Word              as P
-import qualified GHC.Base               as P
-import qualified Numeric.Natural        as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.NS1.Lens     as P
 import qualified Terrafomo.NS1.Provider as P
+import qualified Terrafomo.NS1.Types    as P
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @ns1_apikey@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_apikey terraform documentation>
+-- for more information.
+data ApikeyResource s = ApikeyResource'
+    { _accountManageAccountSettings :: TF.Attr s P.Bool
+    -- ^ @account_manage_account_settings@ - (Optional)
+    --
+    , _accountManageApikeys         :: TF.Attr s P.Bool
+    -- ^ @account_manage_apikeys@ - (Optional)
+    --
+    , _accountManagePaymentMethods  :: TF.Attr s P.Bool
+    -- ^ @account_manage_payment_methods@ - (Optional)
+    --
+    , _accountManagePlan            :: TF.Attr s P.Bool
+    -- ^ @account_manage_plan@ - (Optional)
+    --
+    , _accountManageTeams           :: TF.Attr s P.Bool
+    -- ^ @account_manage_teams@ - (Optional)
+    --
+    , _accountManageUsers           :: TF.Attr s P.Bool
+    -- ^ @account_manage_users@ - (Optional)
+    --
+    , _accountViewActivityLog       :: TF.Attr s P.Bool
+    -- ^ @account_view_activity_log@ - (Optional)
+    --
+    , _accountViewInvoices          :: TF.Attr s P.Bool
+    -- ^ @account_view_invoices@ - (Optional)
+    --
+    , _dataManageDatafeeds          :: TF.Attr s P.Bool
+    -- ^ @data_manage_datafeeds@ - (Optional)
+    --
+    , _dataManageDatasources        :: TF.Attr s P.Bool
+    -- ^ @data_manage_datasources@ - (Optional)
+    --
+    , _dataPushToDatafeeds          :: TF.Attr s P.Bool
+    -- ^ @data_push_to_datafeeds@ - (Optional)
+    --
+    , _dnsManageZones               :: TF.Attr s P.Bool
+    -- ^ @dns_manage_zones@ - (Optional)
+    --
+    , _dnsViewZones                 :: TF.Attr s P.Bool
+    -- ^ @dns_view_zones@ - (Optional)
+    --
+    , _dnsZonesAllow                :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_zones_allow@ - (Optional)
+    --
+    , _dnsZonesAllowByDefault       :: TF.Attr s P.Bool
+    -- ^ @dns_zones_allow_by_default@ - (Optional)
+    --
+    , _dnsZonesDeny                 :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_zones_deny@ - (Optional)
+    --
+    , _monitoringManageJobs         :: TF.Attr s P.Bool
+    -- ^ @monitoring_manage_jobs@ - (Optional)
+    --
+    , _monitoringManageLists        :: TF.Attr s P.Bool
+    -- ^ @monitoring_manage_lists@ - (Optional)
+    --
+    , _monitoringViewJobs           :: TF.Attr s P.Bool
+    -- ^ @monitoring_view_jobs@ - (Optional)
+    --
+    , _name                         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _teams                        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @teams@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @ns1_apikey@ NS1 resource.
-
-Provides a NS1 Api Key resource. This can be used to create, modify, and
-delete api keys.
--}
-data ApikeyResource s = ApikeyResource {
-      _key         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The apikeys authentication token. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free form name of the apikey. -}
-    , _permissions :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The allowed permissions of the apikey. Permissions documented below. -}
-    , _teams       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The teams that the apikey belongs to. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ApikeyResource s) where
-    toObject ApikeyResource{..} = catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "permissions" <$> TF.attribute _permissions
-        , TF.assign "teams" <$> TF.attribute _teams
-        ]
-
-instance P.HasKey (ApikeyResource s) (TF.Attr s P.Text) where
-    key =
-        lens (_key :: ApikeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key = a } :: ApikeyResource s)
-
-instance P.HasName (ApikeyResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ApikeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ApikeyResource s)
-
-instance P.HasPermissions (ApikeyResource s) (TF.Attr s P.Text) where
-    permissions =
-        lens (_permissions :: ApikeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: ApikeyResource s)
-
-instance P.HasTeams (ApikeyResource s) (TF.Attr s P.Text) where
-    teams =
-        lens (_teams :: ApikeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _teams = a } :: ApikeyResource s)
-
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedKey =
-        (_key :: ApikeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ApikeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: ApikeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTeams (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedTeams =
-        (_teams :: ApikeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-apikeyResource :: TF.Resource P.NS1 (ApikeyResource s)
-apikeyResource =
-    TF.newResource "ns1_apikey" $
-        ApikeyResource {
-              _key = TF.Nil
-            , _name = TF.Nil
-            , _permissions = TF.Nil
+apikeyResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (ApikeyResource s)
+apikeyResource _name =
+    TF.newResource "ns1_apikey" TF.validator $
+        ApikeyResource'
+            { _accountManageAccountSettings = TF.Nil
+            , _accountManageApikeys = TF.Nil
+            , _accountManagePaymentMethods = TF.Nil
+            , _accountManagePlan = TF.Nil
+            , _accountManageTeams = TF.Nil
+            , _accountManageUsers = TF.Nil
+            , _accountViewActivityLog = TF.Nil
+            , _accountViewInvoices = TF.Nil
+            , _dataManageDatafeeds = TF.Nil
+            , _dataManageDatasources = TF.Nil
+            , _dataPushToDatafeeds = TF.Nil
+            , _dnsManageZones = TF.Nil
+            , _dnsViewZones = TF.Nil
+            , _dnsZonesAllow = TF.Nil
+            , _dnsZonesAllowByDefault = TF.Nil
+            , _dnsZonesDeny = TF.Nil
+            , _monitoringManageJobs = TF.Nil
+            , _monitoringManageLists = TF.Nil
+            , _monitoringViewJobs = TF.Nil
+            , _name = _name
             , _teams = TF.Nil
             }
 
-{- | The @ns1_datafeed@ NS1 resource.
-
-Provides a NS1 Data Feed resource. This can be used to create, modify, and
-delete data feeds.
--}
-data DatafeedResource s = DatafeedResource {
-      _config    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The feeds configuration matching the specification in 'feed_config' from /data/sourcetypes. -}
-    , _name      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free form name of the data feed. -}
-    , _source_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The data source id that this feed is connected to. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (DatafeedResource s) where
-    toObject DatafeedResource{..} = catMaybes
-        [ TF.assign "config" <$> TF.attribute _config
+instance TF.IsObject (ApikeyResource s) where
+    toObject ApikeyResource'{..} = P.catMaybes
+        [ TF.assign "account_manage_account_settings" <$> TF.attribute _accountManageAccountSettings
+        , TF.assign "account_manage_apikeys" <$> TF.attribute _accountManageApikeys
+        , TF.assign "account_manage_payment_methods" <$> TF.attribute _accountManagePaymentMethods
+        , TF.assign "account_manage_plan" <$> TF.attribute _accountManagePlan
+        , TF.assign "account_manage_teams" <$> TF.attribute _accountManageTeams
+        , TF.assign "account_manage_users" <$> TF.attribute _accountManageUsers
+        , TF.assign "account_view_activity_log" <$> TF.attribute _accountViewActivityLog
+        , TF.assign "account_view_invoices" <$> TF.attribute _accountViewInvoices
+        , TF.assign "data_manage_datafeeds" <$> TF.attribute _dataManageDatafeeds
+        , TF.assign "data_manage_datasources" <$> TF.attribute _dataManageDatasources
+        , TF.assign "data_push_to_datafeeds" <$> TF.attribute _dataPushToDatafeeds
+        , TF.assign "dns_manage_zones" <$> TF.attribute _dnsManageZones
+        , TF.assign "dns_view_zones" <$> TF.attribute _dnsViewZones
+        , TF.assign "dns_zones_allow" <$> TF.attribute _dnsZonesAllow
+        , TF.assign "dns_zones_allow_by_default" <$> TF.attribute _dnsZonesAllowByDefault
+        , TF.assign "dns_zones_deny" <$> TF.attribute _dnsZonesDeny
+        , TF.assign "monitoring_manage_jobs" <$> TF.attribute _monitoringManageJobs
+        , TF.assign "monitoring_manage_lists" <$> TF.attribute _monitoringManageLists
+        , TF.assign "monitoring_view_jobs" <$> TF.attribute _monitoringViewJobs
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "source_id" <$> TF.attribute _source_id
+        , TF.assign "teams" <$> TF.attribute _teams
         ]
 
-instance P.HasConfig (DatafeedResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (ApikeyResource s) where
+    validator = P.mempty
+
+instance P.HasAccountManageAccountSettings (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountManageAccountSettings =
+        P.lens (_accountManageAccountSettings :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageAccountSettings = a } :: ApikeyResource s)
+
+instance P.HasAccountManageApikeys (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountManageApikeys =
+        P.lens (_accountManageApikeys :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageApikeys = a } :: ApikeyResource s)
+
+instance P.HasAccountManagePaymentMethods (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountManagePaymentMethods =
+        P.lens (_accountManagePaymentMethods :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManagePaymentMethods = a } :: ApikeyResource s)
+
+instance P.HasAccountManagePlan (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountManagePlan =
+        P.lens (_accountManagePlan :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManagePlan = a } :: ApikeyResource s)
+
+instance P.HasAccountManageTeams (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountManageTeams =
+        P.lens (_accountManageTeams :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageTeams = a } :: ApikeyResource s)
+
+instance P.HasAccountManageUsers (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountManageUsers =
+        P.lens (_accountManageUsers :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageUsers = a } :: ApikeyResource s)
+
+instance P.HasAccountViewActivityLog (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountViewActivityLog =
+        P.lens (_accountViewActivityLog :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountViewActivityLog = a } :: ApikeyResource s)
+
+instance P.HasAccountViewInvoices (ApikeyResource s) (TF.Attr s P.Bool) where
+    accountViewInvoices =
+        P.lens (_accountViewInvoices :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountViewInvoices = a } :: ApikeyResource s)
+
+instance P.HasDataManageDatafeeds (ApikeyResource s) (TF.Attr s P.Bool) where
+    dataManageDatafeeds =
+        P.lens (_dataManageDatafeeds :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataManageDatafeeds = a } :: ApikeyResource s)
+
+instance P.HasDataManageDatasources (ApikeyResource s) (TF.Attr s P.Bool) where
+    dataManageDatasources =
+        P.lens (_dataManageDatasources :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataManageDatasources = a } :: ApikeyResource s)
+
+instance P.HasDataPushToDatafeeds (ApikeyResource s) (TF.Attr s P.Bool) where
+    dataPushToDatafeeds =
+        P.lens (_dataPushToDatafeeds :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataPushToDatafeeds = a } :: ApikeyResource s)
+
+instance P.HasDnsManageZones (ApikeyResource s) (TF.Attr s P.Bool) where
+    dnsManageZones =
+        P.lens (_dnsManageZones :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsManageZones = a } :: ApikeyResource s)
+
+instance P.HasDnsViewZones (ApikeyResource s) (TF.Attr s P.Bool) where
+    dnsViewZones =
+        P.lens (_dnsViewZones :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsViewZones = a } :: ApikeyResource s)
+
+instance P.HasDnsZonesAllow (ApikeyResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsZonesAllow =
+        P.lens (_dnsZonesAllow :: ApikeyResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsZonesAllow = a } :: ApikeyResource s)
+
+instance P.HasDnsZonesAllowByDefault (ApikeyResource s) (TF.Attr s P.Bool) where
+    dnsZonesAllowByDefault =
+        P.lens (_dnsZonesAllowByDefault :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsZonesAllowByDefault = a } :: ApikeyResource s)
+
+instance P.HasDnsZonesDeny (ApikeyResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsZonesDeny =
+        P.lens (_dnsZonesDeny :: ApikeyResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsZonesDeny = a } :: ApikeyResource s)
+
+instance P.HasMonitoringManageJobs (ApikeyResource s) (TF.Attr s P.Bool) where
+    monitoringManageJobs =
+        P.lens (_monitoringManageJobs :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringManageJobs = a } :: ApikeyResource s)
+
+instance P.HasMonitoringManageLists (ApikeyResource s) (TF.Attr s P.Bool) where
+    monitoringManageLists =
+        P.lens (_monitoringManageLists :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringManageLists = a } :: ApikeyResource s)
+
+instance P.HasMonitoringViewJobs (ApikeyResource s) (TF.Attr s P.Bool) where
+    monitoringViewJobs =
+        P.lens (_monitoringViewJobs :: ApikeyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringViewJobs = a } :: ApikeyResource s)
+
+instance P.HasName (ApikeyResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ApikeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ApikeyResource s)
+
+instance P.HasTeams (ApikeyResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    teams =
+        P.lens (_teams :: ApikeyResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _teams = a } :: ApikeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
+
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
+
+-- | @ns1_datafeed@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_datafeed terraform documentation>
+-- for more information.
+data DatafeedResource s = DatafeedResource'
+    { _config   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @config@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _sourceId :: TF.Attr s P.Text
+    -- ^ @source_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+datafeedResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
+    -> TF.Resource P.Provider (DatafeedResource s)
+datafeedResource _name _sourceId =
+    TF.newResource "ns1_datafeed" TF.validator $
+        DatafeedResource'
+            { _config = TF.Nil
+            , _name = _name
+            , _sourceId = _sourceId
+            }
+
+instance TF.IsObject (DatafeedResource s) where
+    toObject DatafeedResource'{..} = P.catMaybes
+        [ TF.assign "config" <$> TF.attribute _config
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "source_id" <$> TF.attribute _sourceId
+        ]
+
+instance TF.IsValid (DatafeedResource s) where
+    validator = P.mempty
+
+instance P.HasConfig (DatafeedResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     config =
-        lens (_config :: DatafeedResource s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: DatafeedResource s)
+        P.lens (_config :: DatafeedResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: DatafeedResource s)
 
 instance P.HasName (DatafeedResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatafeedResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatafeedResource s)
+        P.lens (_name :: DatafeedResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatafeedResource s)
 
 instance P.HasSourceId (DatafeedResource s) (TF.Attr s P.Text) where
     sourceId =
-        lens (_source_id :: DatafeedResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_id = a } :: DatafeedResource s)
+        P.lens (_sourceId :: DatafeedResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceId = a } :: DatafeedResource s)
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
-    computedConfig =
-        (_config :: DatafeedResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatafeedResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_datasource@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_datasource terraform documentation>
+-- for more information.
+data DatasourceResource s = DatasourceResource'
+    { _config     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @config@ - (Optional)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _sourcetype :: TF.Attr s P.Text
+    -- ^ @sourcetype@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedSourceId (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
-    computedSourceId =
-        (_source_id :: DatafeedResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-datafeedResource :: TF.Resource P.NS1 (DatafeedResource s)
-datafeedResource =
-    TF.newResource "ns1_datafeed" $
-        DatafeedResource {
-              _config = TF.Nil
-            , _name = TF.Nil
-            , _source_id = TF.Nil
+datasourceResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @sourcetype@ - 'P.sourcetype'
+    -> TF.Resource P.Provider (DatasourceResource s)
+datasourceResource _name _sourcetype =
+    TF.newResource "ns1_datasource" TF.validator $
+        DatasourceResource'
+            { _config = TF.Nil
+            , _name = _name
+            , _sourcetype = _sourcetype
             }
 
-{- | The @ns1_datasource@ NS1 resource.
-
-Provides a NS1 Data Source resource. This can be used to create, modify, and
-delete data sources.
--}
-data DatasourceResource s = DatasourceResource {
-      _config     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The data source configuration, determined by its type. -}
-    , _name       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free form name of the data source. -}
-    , _sourcetype :: !(TF.Attr s P.Text)
-    {- ^ (Required) The data sources type, listed in API endpoint https://api.nsone.net/v1/data/sourcetypes. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DatasourceResource s) where
-    toObject DatasourceResource{..} = catMaybes
+    toObject DatasourceResource'{..} = P.catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "sourcetype" <$> TF.attribute _sourcetype
         ]
 
-instance P.HasConfig (DatasourceResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (DatasourceResource s) where
+    validator = P.mempty
+
+instance P.HasConfig (DatasourceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     config =
-        lens (_config :: DatasourceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: DatasourceResource s)
+        P.lens (_config :: DatasourceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: DatasourceResource s)
 
 instance P.HasName (DatasourceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatasourceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatasourceResource s)
+        P.lens (_name :: DatasourceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatasourceResource s)
 
 instance P.HasSourcetype (DatasourceResource s) (TF.Attr s P.Text) where
     sourcetype =
-        lens (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sourcetype = a } :: DatasourceResource s)
+        P.lens (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourcetype = a } :: DatasourceResource s)
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
-    computedConfig =
-        (_config :: DatasourceResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatasourceResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_monitoringjob@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_monitoringjob terraform documentation>
+-- for more information.
+data MonitoringjobResource s = MonitoringjobResource'
+    { _active         :: TF.Attr s P.Bool
+    -- ^ @active@ - (Optional)
+    --
+    , _config         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @config@ - (Required)
+    --
+    , _frequency      :: TF.Attr s P.Integer
+    -- ^ @frequency@ - (Required)
+    --
+    , _jobType        :: TF.Attr s P.Text
+    -- ^ @job_type@ - (Required)
+    --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _notes          :: TF.Attr s P.Text
+    -- ^ @notes@ - (Optional)
+    --
+    , _notifyDelay    :: TF.Attr s P.Integer
+    -- ^ @notify_delay@ - (Optional)
+    --
+    , _notifyFailback :: TF.Attr s P.Bool
+    -- ^ @notify_failback@ - (Optional)
+    --
+    , _notifyList     :: TF.Attr s P.Text
+    -- ^ @notify_list@ - (Optional)
+    --
+    , _notifyRegional :: TF.Attr s P.Bool
+    -- ^ @notify_regional@ - (Optional)
+    --
+    , _notifyRepeat   :: TF.Attr s P.Integer
+    -- ^ @notify_repeat@ - (Optional)
+    --
+    , _policy         :: TF.Attr s P.Text
+    -- ^ @policy@ - (Optional)
+    --
+    , _rapidRecheck   :: TF.Attr s P.Bool
+    -- ^ @rapid_recheck@ - (Optional)
+    --
+    , _regions        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @regions@ - (Required)
+    --
+    , _rules          :: TF.Attr s [TF.Attr s (Rules s)]
+    -- ^ @rules@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedSourcetype (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
-    computedSourcetype =
-        (_sourcetype :: DatasourceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-datasourceResource :: TF.Resource P.NS1 (DatasourceResource s)
-datasourceResource =
-    TF.newResource "ns1_datasource" $
-        DatasourceResource {
-              _config = TF.Nil
-            , _name = TF.Nil
-            , _sourcetype = TF.Nil
+monitoringjobResource
+    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
+    -> TF.Attr s P.Integer -- ^ @frequency@ - 'P.frequency'
+    -> TF.Attr s P.Text -- ^ @job_type@ - 'P.jobType'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @regions@ - 'P.regions'
+    -> TF.Resource P.Provider (MonitoringjobResource s)
+monitoringjobResource _config _frequency _jobType _name _regions =
+    TF.newResource "ns1_monitoringjob" TF.validator $
+        MonitoringjobResource'
+            { _active = TF.value P.True
+            , _config = _config
+            , _frequency = _frequency
+            , _jobType = _jobType
+            , _name = _name
+            , _notes = TF.Nil
+            , _notifyDelay = TF.Nil
+            , _notifyFailback = TF.Nil
+            , _notifyList = TF.Nil
+            , _notifyRegional = TF.Nil
+            , _notifyRepeat = TF.Nil
+            , _policy = TF.value "quorum"
+            , _rapidRecheck = TF.value P.False
+            , _regions = _regions
+            , _rules = TF.Nil
             }
 
-{- | The @ns1_monitoringjob@ NS1 resource.
-
-Provides a NS1 Monitoring Job resource. This can be used to create, modify,
-and delete monitoring jobs.
--}
-data MonitoringjobResource s = MonitoringjobResource {
-      _active          :: !(TF.Attr s P.Text)
-    {- ^ (Required) Indicates if the job is active or temporaril.y disabled. -}
-    , _config          :: !(TF.Attr s P.Text)
-    {- ^ (Required) A configuration dictionary with keys and values depending on the jobs' type. -}
-    , _frequency       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The frequency, in seconds, at which to run the monitoring job in each region. -}
-    , _job_type        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of monitoring job to be run. -}
-    , _name            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free-form display name for the monitoring job. -}
-    , _notes           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Freeform notes to be included in any notifications about this job. -}
-    , _notify_delay    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The time in seconds after a failure to wait before sending a notification. -}
-    , _notify_failback :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, a notification is sent when a job returns to an "up" state. -}
-    , _notify_list     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The id of the notification list to send notifications to. -}
-    , _notify_regional :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, notifications are sent for any regional failure (and failback if desired), in addition to global state notifications. -}
-    , _notify_repeat   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The time in seconds between repeat notifications of a failed job. -}
-    , _policy          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The policy for determining the monitor's global status based on the status of the job in all regions. -}
-    , _rapid_recheck   :: !(TF.Attr s P.Text)
-    {- ^ (Required) If true, on any apparent state change, the job is quickly re-run after one second to confirm the state change before notification. -}
-    , _regions         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The list of region codes in which to run the monitoring job. -}
-    , _rules           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of rules for determining failure conditions. Job Rules are documented below. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (MonitoringjobResource s) where
-    toObject MonitoringjobResource{..} = catMaybes
+    toObject MonitoringjobResource'{..} = P.catMaybes
         [ TF.assign "active" <$> TF.attribute _active
         , TF.assign "config" <$> TF.attribute _config
         , TF.assign "frequency" <$> TF.attribute _frequency
-        , TF.assign "job_type" <$> TF.attribute _job_type
+        , TF.assign "job_type" <$> TF.attribute _jobType
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "notes" <$> TF.attribute _notes
-        , TF.assign "notify_delay" <$> TF.attribute _notify_delay
-        , TF.assign "notify_failback" <$> TF.attribute _notify_failback
-        , TF.assign "notify_list" <$> TF.attribute _notify_list
-        , TF.assign "notify_regional" <$> TF.attribute _notify_regional
-        , TF.assign "notify_repeat" <$> TF.attribute _notify_repeat
+        , TF.assign "notify_delay" <$> TF.attribute _notifyDelay
+        , TF.assign "notify_failback" <$> TF.attribute _notifyFailback
+        , TF.assign "notify_list" <$> TF.attribute _notifyList
+        , TF.assign "notify_regional" <$> TF.attribute _notifyRegional
+        , TF.assign "notify_repeat" <$> TF.attribute _notifyRepeat
         , TF.assign "policy" <$> TF.attribute _policy
-        , TF.assign "rapid_recheck" <$> TF.attribute _rapid_recheck
+        , TF.assign "rapid_recheck" <$> TF.attribute _rapidRecheck
         , TF.assign "regions" <$> TF.attribute _regions
         , TF.assign "rules" <$> TF.attribute _rules
         ]
 
-instance P.HasActive (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (MonitoringjobResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rules"
+                  (_rules
+                      :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (Rules s)])
+                  TF.validator
+
+instance P.HasActive (MonitoringjobResource s) (TF.Attr s P.Bool) where
     active =
-        lens (_active :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _active = a } :: MonitoringjobResource s)
+        P.lens (_active :: MonitoringjobResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _active = a } :: MonitoringjobResource s)
 
-instance P.HasConfig (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasConfig (MonitoringjobResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     config =
-        lens (_config :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: MonitoringjobResource s)
+        P.lens (_config :: MonitoringjobResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: MonitoringjobResource s)
 
-instance P.HasFrequency (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasFrequency (MonitoringjobResource s) (TF.Attr s P.Integer) where
     frequency =
-        lens (_frequency :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _frequency = a } :: MonitoringjobResource s)
+        P.lens (_frequency :: MonitoringjobResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _frequency = a } :: MonitoringjobResource s)
 
 instance P.HasJobType (MonitoringjobResource s) (TF.Attr s P.Text) where
     jobType =
-        lens (_job_type :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _job_type = a } :: MonitoringjobResource s)
+        P.lens (_jobType :: MonitoringjobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _jobType = a } :: MonitoringjobResource s)
 
 instance P.HasName (MonitoringjobResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: MonitoringjobResource s)
+        P.lens (_name :: MonitoringjobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MonitoringjobResource s)
 
 instance P.HasNotes (MonitoringjobResource s) (TF.Attr s P.Text) where
     notes =
-        lens (_notes :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notes = a } :: MonitoringjobResource s)
+        P.lens (_notes :: MonitoringjobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _notes = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyDelay (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasNotifyDelay (MonitoringjobResource s) (TF.Attr s P.Integer) where
     notifyDelay =
-        lens (_notify_delay :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_delay = a } :: MonitoringjobResource s)
+        P.lens (_notifyDelay :: MonitoringjobResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _notifyDelay = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyFailback (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasNotifyFailback (MonitoringjobResource s) (TF.Attr s P.Bool) where
     notifyFailback =
-        lens (_notify_failback :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_failback = a } :: MonitoringjobResource s)
+        P.lens (_notifyFailback :: MonitoringjobResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _notifyFailback = a } :: MonitoringjobResource s)
 
 instance P.HasNotifyList (MonitoringjobResource s) (TF.Attr s P.Text) where
     notifyList =
-        lens (_notify_list :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_list = a } :: MonitoringjobResource s)
+        P.lens (_notifyList :: MonitoringjobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _notifyList = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyRegional (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasNotifyRegional (MonitoringjobResource s) (TF.Attr s P.Bool) where
     notifyRegional =
-        lens (_notify_regional :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_regional = a } :: MonitoringjobResource s)
+        P.lens (_notifyRegional :: MonitoringjobResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _notifyRegional = a } :: MonitoringjobResource s)
 
-instance P.HasNotifyRepeat (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasNotifyRepeat (MonitoringjobResource s) (TF.Attr s P.Integer) where
     notifyRepeat =
-        lens (_notify_repeat :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notify_repeat = a } :: MonitoringjobResource s)
+        P.lens (_notifyRepeat :: MonitoringjobResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _notifyRepeat = a } :: MonitoringjobResource s)
 
 instance P.HasPolicy (MonitoringjobResource s) (TF.Attr s P.Text) where
     policy =
-        lens (_policy :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _policy = a } :: MonitoringjobResource s)
+        P.lens (_policy :: MonitoringjobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policy = a } :: MonitoringjobResource s)
 
-instance P.HasRapidRecheck (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasRapidRecheck (MonitoringjobResource s) (TF.Attr s P.Bool) where
     rapidRecheck =
-        lens (_rapid_recheck :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rapid_recheck = a } :: MonitoringjobResource s)
+        P.lens (_rapidRecheck :: MonitoringjobResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _rapidRecheck = a } :: MonitoringjobResource s)
 
-instance P.HasRegions (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasRegions (MonitoringjobResource s) (TF.Attr s [TF.Attr s P.Text]) where
     regions =
-        lens (_regions :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _regions = a } :: MonitoringjobResource s)
+        P.lens (_regions :: MonitoringjobResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _regions = a } :: MonitoringjobResource s)
 
-instance P.HasRules (MonitoringjobResource s) (TF.Attr s P.Text) where
+instance P.HasRules (MonitoringjobResource s) (TF.Attr s [TF.Attr s (Rules s)]) where
     rules =
-        lens (_rules :: MonitoringjobResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rules = a } :: MonitoringjobResource s)
+        P.lens (_rules :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (Rules s)])
+               (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
-instance s ~ s' => P.HasComputedActive (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedActive =
-        (_active :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedConfig =
-        (_config :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_notifylist@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_notifylist terraform documentation>
+-- for more information.
+data NotifylistResource s = NotifylistResource'
+    { _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _notifications :: TF.Attr s [TF.Attr s (Notifications s)]
+    -- ^ @notifications@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedFrequency (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedFrequency =
-        (_frequency :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedJobType (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedJobType =
-        (_job_type :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNotes (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedNotes =
-        (_notes :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNotifyDelay (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedNotifyDelay =
-        (_notify_delay :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNotifyFailback (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedNotifyFailback =
-        (_notify_failback :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNotifyList (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedNotifyList =
-        (_notify_list :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNotifyRegional (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedNotifyRegional =
-        (_notify_regional :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNotifyRepeat (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedNotifyRepeat =
-        (_notify_repeat :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedPolicy =
-        (_policy :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRapidRecheck (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedRapidRecheck =
-        (_rapid_recheck :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedRegions =
-        (_regions :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRules (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedRules =
-        (_rules :: MonitoringjobResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-monitoringjobResource :: TF.Resource P.NS1 (MonitoringjobResource s)
-monitoringjobResource =
-    TF.newResource "ns1_monitoringjob" $
-        MonitoringjobResource {
-              _active = TF.Nil
-            , _config = TF.Nil
-            , _frequency = TF.Nil
-            , _job_type = TF.Nil
-            , _name = TF.Nil
-            , _notes = TF.Nil
-            , _notify_delay = TF.Nil
-            , _notify_failback = TF.Nil
-            , _notify_list = TF.Nil
-            , _notify_regional = TF.Nil
-            , _notify_repeat = TF.Nil
-            , _policy = TF.Nil
-            , _rapid_recheck = TF.Nil
-            , _regions = TF.Nil
-            , _rules = TF.Nil
+notifylistResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (NotifylistResource s)
+notifylistResource _name =
+    TF.newResource "ns1_notifylist" TF.validator $
+        NotifylistResource'
+            { _name = _name
+            , _notifications = TF.Nil
             }
 
-{- | The @ns1_notifylist@ NS1 resource.
-
-Provides a NS1 Notify List resource. This can be used to create, modify, and
-delete notify lists.
--}
-data NotifylistResource s = NotifylistResource {
-      _name          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free-form display name for the notify list. -}
-    , _notifications :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of notifiers. All notifiers in a notification list will receive notifications whenever an event is send to the list (e.g., when a monitoring job fails). Notifiers are documented below. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (NotifylistResource s) where
-    toObject NotifylistResource{..} = catMaybes
+    toObject NotifylistResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "notifications" <$> TF.attribute _notifications
         ]
 
+instance TF.IsValid (NotifylistResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_notifications"
+                  (_notifications
+                      :: NotifylistResource s -> TF.Attr s [TF.Attr s (Notifications s)])
+                  TF.validator
+
 instance P.HasName (NotifylistResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: NotifylistResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: NotifylistResource s)
+        P.lens (_name :: NotifylistResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NotifylistResource s)
 
-instance P.HasNotifications (NotifylistResource s) (TF.Attr s P.Text) where
+instance P.HasNotifications (NotifylistResource s) (TF.Attr s [TF.Attr s (Notifications s)]) where
     notifications =
-        lens (_notifications :: NotifylistResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notifications = a } :: NotifylistResource s)
+        P.lens (_notifications :: NotifylistResource s -> TF.Attr s [TF.Attr s (Notifications s)])
+               (\s a -> s { _notifications = a } :: NotifylistResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: NotifylistResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedNotifications (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
-    computedNotifications =
-        (_notifications :: NotifylistResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_record@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_record terraform documentation>
+-- for more information.
+data RecordResource s = RecordResource'
+    { _answers         :: TF.Attr s [TF.Attr s (Answers s)]
+    -- ^ @answers@ - (Optional)
+    --
+    , _domain          :: TF.Attr s P.Text
+    -- ^ @domain@ - (Required)
+    --
+    , _filters         :: TF.Attr s [TF.Attr s (Filters s)]
+    -- ^ @filters@ - (Optional)
+    --
+    , _link            :: TF.Attr s P.Text
+    -- ^ @link@ - (Optional)
+    --
+    , _meta            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @meta@ - (Optional)
+    --
+    , _regions         :: TF.Attr s [TF.Attr s (Regions s)]
+    -- ^ @regions@ - (Optional)
+    --
+    , _type'           :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _useClientSubnet :: TF.Attr s P.Bool
+    -- ^ @use_client_subnet@ - (Optional)
+    --
+    , _zone            :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-notifylistResource :: TF.Resource P.NS1 (NotifylistResource s)
-notifylistResource =
-    TF.newResource "ns1_notifylist" $
-        NotifylistResource {
-              _name = TF.Nil
-            , _notifications = TF.Nil
+recordResource
+    :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (RecordResource s)
+recordResource _domain _type' _zone =
+    TF.newResource "ns1_record" TF.validator $
+        RecordResource'
+            { _answers = TF.Nil
+            , _domain = _domain
+            , _filters = TF.Nil
+            , _link = TF.Nil
+            , _meta = TF.Nil
+            , _regions = TF.Nil
+            , _type' = _type'
+            , _useClientSubnet = TF.value P.True
+            , _zone = _zone
             }
 
-{- | The @ns1_record@ NS1 resource.
-
-Provides a NS1 Record resource. This can be used to create, modify, and
-delete records.
--}
-data RecordResource s = RecordResource {
-      _answers           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) One or more NS1 answers for the records' specified type. Answers are documented below. -}
-    , _domain            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The records' domain. -}
-    , _filters           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) One or more NS1 filters for the record(order matters). Filters are documented below. -}
-    , _link              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The target record to link to. This means this record is a 'linked' record, and it inherits all properties from its target. -}
-    , _ttl               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The records' time to live. -}
-    , _type'             :: !(TF.Attr s P.Text)
-    {- ^ (Required) The records' RR type. -}
-    , _use_client_subnet :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to use EDNS client subnet data when available(in filter chain). -}
-    , _zone              :: !(TF.Attr s P.Text)
-    {- ^ (Required) The zone the record belongs to. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (RecordResource s) where
-    toObject RecordResource{..} = catMaybes
+    toObject RecordResource'{..} = P.catMaybes
         [ TF.assign "answers" <$> TF.attribute _answers
         , TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "link" <$> TF.attribute _link
-        , TF.assign "ttl" <$> TF.attribute _ttl
+        , TF.assign "meta" <$> TF.attribute _meta
+        , TF.assign "regions" <$> TF.attribute _regions
         , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "use_client_subnet" <$> TF.attribute _use_client_subnet
+        , TF.assign "use_client_subnet" <$> TF.attribute _useClientSubnet
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasAnswers (RecordResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (RecordResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_answers"
+                  (_answers
+                      :: RecordResource s -> TF.Attr s [TF.Attr s (Answers s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_filters"
+                  (_filters
+                      :: RecordResource s -> TF.Attr s [TF.Attr s (Filters s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_regions"
+                  (_regions
+                      :: RecordResource s -> TF.Attr s [TF.Attr s (Regions s)])
+                  TF.validator
+
+instance P.HasAnswers (RecordResource s) (TF.Attr s [TF.Attr s (Answers s)]) where
     answers =
-        lens (_answers :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _answers = a } :: RecordResource s)
+        P.lens (_answers :: RecordResource s -> TF.Attr s [TF.Attr s (Answers s)])
+               (\s a -> s { _answers = a } :: RecordResource s)
 
 instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
     domain =
-        lens (_domain :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _domain = a } :: RecordResource s)
+        P.lens (_domain :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasFilters (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasFilters (RecordResource s) (TF.Attr s [TF.Attr s (Filters s)]) where
     filters =
-        lens (_filters :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _filters = a } :: RecordResource s)
+        P.lens (_filters :: RecordResource s -> TF.Attr s [TF.Attr s (Filters s)])
+               (\s a -> s { _filters = a } :: RecordResource s)
 
 instance P.HasLink (RecordResource s) (TF.Attr s P.Text) where
     link =
-        lens (_link :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _link = a } :: RecordResource s)
+        P.lens (_link :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _link = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
-    ttl =
-        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: RecordResource s)
+instance P.HasMeta (RecordResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    meta =
+        P.lens (_meta :: RecordResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _meta = a } :: RecordResource s)
+
+instance P.HasRegions (RecordResource s) (TF.Attr s [TF.Attr s (Regions s)]) where
+    regions =
+        P.lens (_regions :: RecordResource s -> TF.Attr s [TF.Attr s (Regions s)])
+               (\s a -> s { _regions = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: RecordResource s)
+        P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: RecordResource s)
 
-instance P.HasUseClientSubnet (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasUseClientSubnet (RecordResource s) (TF.Attr s P.Bool) where
     useClientSubnet =
-        lens (_use_client_subnet :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _use_client_subnet = a } :: RecordResource s)
+        P.lens (_useClientSubnet :: RecordResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _useClientSubnet = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: RecordResource s)
+        P.lens (_zone :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: RecordResource s)
 
-instance s ~ s' => P.HasComputedAnswers (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedAnswers =
-        (_answers :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedDomain =
-        (_domain :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Integer) where
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
 
-instance s ~ s' => P.HasComputedFilters (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFilters =
-        (_filters :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_team@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_team terraform documentation>
+-- for more information.
+data TeamResource s = TeamResource'
+    { _accountManageAccountSettings :: TF.Attr s P.Bool
+    -- ^ @account_manage_account_settings@ - (Optional)
+    --
+    , _accountManageApikeys         :: TF.Attr s P.Bool
+    -- ^ @account_manage_apikeys@ - (Optional)
+    --
+    , _accountManagePaymentMethods  :: TF.Attr s P.Bool
+    -- ^ @account_manage_payment_methods@ - (Optional)
+    --
+    , _accountManagePlan            :: TF.Attr s P.Bool
+    -- ^ @account_manage_plan@ - (Optional)
+    --
+    , _accountManageTeams           :: TF.Attr s P.Bool
+    -- ^ @account_manage_teams@ - (Optional)
+    --
+    , _accountManageUsers           :: TF.Attr s P.Bool
+    -- ^ @account_manage_users@ - (Optional)
+    --
+    , _accountViewActivityLog       :: TF.Attr s P.Bool
+    -- ^ @account_view_activity_log@ - (Optional)
+    --
+    , _accountViewInvoices          :: TF.Attr s P.Bool
+    -- ^ @account_view_invoices@ - (Optional)
+    --
+    , _dataManageDatafeeds          :: TF.Attr s P.Bool
+    -- ^ @data_manage_datafeeds@ - (Optional)
+    --
+    , _dataManageDatasources        :: TF.Attr s P.Bool
+    -- ^ @data_manage_datasources@ - (Optional)
+    --
+    , _dataPushToDatafeeds          :: TF.Attr s P.Bool
+    -- ^ @data_push_to_datafeeds@ - (Optional)
+    --
+    , _dnsManageZones               :: TF.Attr s P.Bool
+    -- ^ @dns_manage_zones@ - (Optional)
+    --
+    , _dnsViewZones                 :: TF.Attr s P.Bool
+    -- ^ @dns_view_zones@ - (Optional)
+    --
+    , _dnsZonesAllow                :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_zones_allow@ - (Optional)
+    --
+    , _dnsZonesAllowByDefault       :: TF.Attr s P.Bool
+    -- ^ @dns_zones_allow_by_default@ - (Optional)
+    --
+    , _dnsZonesDeny                 :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_zones_deny@ - (Optional)
+    --
+    , _monitoringManageJobs         :: TF.Attr s P.Bool
+    -- ^ @monitoring_manage_jobs@ - (Optional)
+    --
+    , _monitoringManageLists        :: TF.Attr s P.Bool
+    -- ^ @monitoring_manage_lists@ - (Optional)
+    --
+    , _monitoringViewJobs           :: TF.Attr s P.Bool
+    -- ^ @monitoring_view_jobs@ - (Optional)
+    --
+    , _name                         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedLink (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedLink =
-        (_link :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl =
-        (_ttl :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUseClientSubnet (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedUseClientSubnet =
-        (_use_client_subnet :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-recordResource :: TF.Resource P.NS1 (RecordResource s)
-recordResource =
-    TF.newResource "ns1_record" $
-        RecordResource {
-              _answers = TF.Nil
-            , _domain = TF.Nil
-            , _filters = TF.Nil
-            , _link = TF.Nil
-            , _ttl = TF.Nil
-            , _type' = TF.Nil
-            , _use_client_subnet = TF.Nil
-            , _zone = TF.Nil
+teamResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (TeamResource s)
+teamResource _name =
+    TF.newResource "ns1_team" TF.validator $
+        TeamResource'
+            { _accountManageAccountSettings = TF.Nil
+            , _accountManageApikeys = TF.Nil
+            , _accountManagePaymentMethods = TF.Nil
+            , _accountManagePlan = TF.Nil
+            , _accountManageTeams = TF.Nil
+            , _accountManageUsers = TF.Nil
+            , _accountViewActivityLog = TF.Nil
+            , _accountViewInvoices = TF.Nil
+            , _dataManageDatafeeds = TF.Nil
+            , _dataManageDatasources = TF.Nil
+            , _dataPushToDatafeeds = TF.Nil
+            , _dnsManageZones = TF.Nil
+            , _dnsViewZones = TF.Nil
+            , _dnsZonesAllow = TF.Nil
+            , _dnsZonesAllowByDefault = TF.Nil
+            , _dnsZonesDeny = TF.Nil
+            , _monitoringManageJobs = TF.Nil
+            , _monitoringManageLists = TF.Nil
+            , _monitoringViewJobs = TF.Nil
+            , _name = _name
             }
 
-{- | The @ns1_team@ NS1 resource.
-
-Provides a NS1 Team resource. This can be used to create, modify, and delete
-teams.
--}
-data TeamResource s = TeamResource {
-      _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free form name of the team. -}
-    , _permissions :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The allowed permissions of the team. Permissions documented below. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (TeamResource s) where
-    toObject TeamResource{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "permissions" <$> TF.attribute _permissions
+    toObject TeamResource'{..} = P.catMaybes
+        [ TF.assign "account_manage_account_settings" <$> TF.attribute _accountManageAccountSettings
+        , TF.assign "account_manage_apikeys" <$> TF.attribute _accountManageApikeys
+        , TF.assign "account_manage_payment_methods" <$> TF.attribute _accountManagePaymentMethods
+        , TF.assign "account_manage_plan" <$> TF.attribute _accountManagePlan
+        , TF.assign "account_manage_teams" <$> TF.attribute _accountManageTeams
+        , TF.assign "account_manage_users" <$> TF.attribute _accountManageUsers
+        , TF.assign "account_view_activity_log" <$> TF.attribute _accountViewActivityLog
+        , TF.assign "account_view_invoices" <$> TF.attribute _accountViewInvoices
+        , TF.assign "data_manage_datafeeds" <$> TF.attribute _dataManageDatafeeds
+        , TF.assign "data_manage_datasources" <$> TF.attribute _dataManageDatasources
+        , TF.assign "data_push_to_datafeeds" <$> TF.attribute _dataPushToDatafeeds
+        , TF.assign "dns_manage_zones" <$> TF.attribute _dnsManageZones
+        , TF.assign "dns_view_zones" <$> TF.attribute _dnsViewZones
+        , TF.assign "dns_zones_allow" <$> TF.attribute _dnsZonesAllow
+        , TF.assign "dns_zones_allow_by_default" <$> TF.attribute _dnsZonesAllowByDefault
+        , TF.assign "dns_zones_deny" <$> TF.attribute _dnsZonesDeny
+        , TF.assign "monitoring_manage_jobs" <$> TF.attribute _monitoringManageJobs
+        , TF.assign "monitoring_manage_lists" <$> TF.attribute _monitoringManageLists
+        , TF.assign "monitoring_view_jobs" <$> TF.attribute _monitoringViewJobs
+        , TF.assign "name" <$> TF.attribute _name
         ]
+
+instance TF.IsValid (TeamResource s) where
+    validator = P.mempty
+
+instance P.HasAccountManageAccountSettings (TeamResource s) (TF.Attr s P.Bool) where
+    accountManageAccountSettings =
+        P.lens (_accountManageAccountSettings :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageAccountSettings = a } :: TeamResource s)
+
+instance P.HasAccountManageApikeys (TeamResource s) (TF.Attr s P.Bool) where
+    accountManageApikeys =
+        P.lens (_accountManageApikeys :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageApikeys = a } :: TeamResource s)
+
+instance P.HasAccountManagePaymentMethods (TeamResource s) (TF.Attr s P.Bool) where
+    accountManagePaymentMethods =
+        P.lens (_accountManagePaymentMethods :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManagePaymentMethods = a } :: TeamResource s)
+
+instance P.HasAccountManagePlan (TeamResource s) (TF.Attr s P.Bool) where
+    accountManagePlan =
+        P.lens (_accountManagePlan :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManagePlan = a } :: TeamResource s)
+
+instance P.HasAccountManageTeams (TeamResource s) (TF.Attr s P.Bool) where
+    accountManageTeams =
+        P.lens (_accountManageTeams :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageTeams = a } :: TeamResource s)
+
+instance P.HasAccountManageUsers (TeamResource s) (TF.Attr s P.Bool) where
+    accountManageUsers =
+        P.lens (_accountManageUsers :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageUsers = a } :: TeamResource s)
+
+instance P.HasAccountViewActivityLog (TeamResource s) (TF.Attr s P.Bool) where
+    accountViewActivityLog =
+        P.lens (_accountViewActivityLog :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountViewActivityLog = a } :: TeamResource s)
+
+instance P.HasAccountViewInvoices (TeamResource s) (TF.Attr s P.Bool) where
+    accountViewInvoices =
+        P.lens (_accountViewInvoices :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountViewInvoices = a } :: TeamResource s)
+
+instance P.HasDataManageDatafeeds (TeamResource s) (TF.Attr s P.Bool) where
+    dataManageDatafeeds =
+        P.lens (_dataManageDatafeeds :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataManageDatafeeds = a } :: TeamResource s)
+
+instance P.HasDataManageDatasources (TeamResource s) (TF.Attr s P.Bool) where
+    dataManageDatasources =
+        P.lens (_dataManageDatasources :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataManageDatasources = a } :: TeamResource s)
+
+instance P.HasDataPushToDatafeeds (TeamResource s) (TF.Attr s P.Bool) where
+    dataPushToDatafeeds =
+        P.lens (_dataPushToDatafeeds :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataPushToDatafeeds = a } :: TeamResource s)
+
+instance P.HasDnsManageZones (TeamResource s) (TF.Attr s P.Bool) where
+    dnsManageZones =
+        P.lens (_dnsManageZones :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsManageZones = a } :: TeamResource s)
+
+instance P.HasDnsViewZones (TeamResource s) (TF.Attr s P.Bool) where
+    dnsViewZones =
+        P.lens (_dnsViewZones :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsViewZones = a } :: TeamResource s)
+
+instance P.HasDnsZonesAllow (TeamResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsZonesAllow =
+        P.lens (_dnsZonesAllow :: TeamResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsZonesAllow = a } :: TeamResource s)
+
+instance P.HasDnsZonesAllowByDefault (TeamResource s) (TF.Attr s P.Bool) where
+    dnsZonesAllowByDefault =
+        P.lens (_dnsZonesAllowByDefault :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsZonesAllowByDefault = a } :: TeamResource s)
+
+instance P.HasDnsZonesDeny (TeamResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsZonesDeny =
+        P.lens (_dnsZonesDeny :: TeamResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsZonesDeny = a } :: TeamResource s)
+
+instance P.HasMonitoringManageJobs (TeamResource s) (TF.Attr s P.Bool) where
+    monitoringManageJobs =
+        P.lens (_monitoringManageJobs :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringManageJobs = a } :: TeamResource s)
+
+instance P.HasMonitoringManageLists (TeamResource s) (TF.Attr s P.Bool) where
+    monitoringManageLists =
+        P.lens (_monitoringManageLists :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringManageLists = a } :: TeamResource s)
+
+instance P.HasMonitoringViewJobs (TeamResource s) (TF.Attr s P.Bool) where
+    monitoringViewJobs =
+        P.lens (_monitoringViewJobs :: TeamResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringViewJobs = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: TeamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TeamResource s)
+        P.lens (_name :: TeamResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TeamResource s)
 
-instance P.HasPermissions (TeamResource s) (TF.Attr s P.Text) where
-    permissions =
-        lens (_permissions :: TeamResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: TeamResource s)
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: TeamResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_user@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_user terraform documentation>
+-- for more information.
+data UserResource s = UserResource'
+    { _accountManageAccountSettings :: TF.Attr s P.Bool
+    -- ^ @account_manage_account_settings@ - (Optional)
+    --
+    , _accountManageApikeys :: TF.Attr s P.Bool
+    -- ^ @account_manage_apikeys@ - (Optional)
+    --
+    , _accountManagePaymentMethods :: TF.Attr s P.Bool
+    -- ^ @account_manage_payment_methods@ - (Optional)
+    --
+    , _accountManagePlan :: TF.Attr s P.Bool
+    -- ^ @account_manage_plan@ - (Optional)
+    --
+    , _accountManageTeams :: TF.Attr s P.Bool
+    -- ^ @account_manage_teams@ - (Optional)
+    --
+    , _accountManageUsers :: TF.Attr s P.Bool
+    -- ^ @account_manage_users@ - (Optional)
+    --
+    , _accountViewActivityLog :: TF.Attr s P.Bool
+    -- ^ @account_view_activity_log@ - (Optional)
+    --
+    , _accountViewInvoices :: TF.Attr s P.Bool
+    -- ^ @account_view_invoices@ - (Optional)
+    --
+    , _dataManageDatafeeds :: TF.Attr s P.Bool
+    -- ^ @data_manage_datafeeds@ - (Optional)
+    --
+    , _dataManageDatasources :: TF.Attr s P.Bool
+    -- ^ @data_manage_datasources@ - (Optional)
+    --
+    , _dataPushToDatafeeds :: TF.Attr s P.Bool
+    -- ^ @data_push_to_datafeeds@ - (Optional)
+    --
+    , _dnsManageZones :: TF.Attr s P.Bool
+    -- ^ @dns_manage_zones@ - (Optional)
+    --
+    , _dnsViewZones :: TF.Attr s P.Bool
+    -- ^ @dns_view_zones@ - (Optional)
+    --
+    , _dnsZonesAllow :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_zones_allow@ - (Optional)
+    --
+    , _dnsZonesAllowByDefault :: TF.Attr s P.Bool
+    -- ^ @dns_zones_allow_by_default@ - (Optional)
+    --
+    , _dnsZonesDeny :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_zones_deny@ - (Optional)
+    --
+    , _email :: TF.Attr s P.Text
+    -- ^ @email@ - (Required)
+    --
+    , _monitoringManageJobs :: TF.Attr s P.Bool
+    -- ^ @monitoring_manage_jobs@ - (Optional)
+    --
+    , _monitoringManageLists :: TF.Attr s P.Bool
+    -- ^ @monitoring_manage_lists@ - (Optional)
+    --
+    , _monitoringViewJobs :: TF.Attr s P.Bool
+    -- ^ @monitoring_view_jobs@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _notify :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @notify@ - (Optional)
+    --
+    , _teams :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @teams@ - (Optional)
+    --
+    , _username :: TF.Attr s P.Text
+    -- ^ @username@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: TeamResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-teamResource :: TF.Resource P.NS1 (TeamResource s)
-teamResource =
-    TF.newResource "ns1_team" $
-        TeamResource {
-              _name = TF.Nil
-            , _permissions = TF.Nil
+userResource
+    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    -> TF.Resource P.Provider (UserResource s)
+userResource _email _name _username =
+    TF.newResource "ns1_user" TF.validator $
+        UserResource'
+            { _accountManageAccountSettings = TF.Nil
+            , _accountManageApikeys = TF.Nil
+            , _accountManagePaymentMethods = TF.Nil
+            , _accountManagePlan = TF.Nil
+            , _accountManageTeams = TF.Nil
+            , _accountManageUsers = TF.Nil
+            , _accountViewActivityLog = TF.Nil
+            , _accountViewInvoices = TF.Nil
+            , _dataManageDatafeeds = TF.Nil
+            , _dataManageDatasources = TF.Nil
+            , _dataPushToDatafeeds = TF.Nil
+            , _dnsManageZones = TF.Nil
+            , _dnsViewZones = TF.Nil
+            , _dnsZonesAllow = TF.Nil
+            , _dnsZonesAllowByDefault = TF.Nil
+            , _dnsZonesDeny = TF.Nil
+            , _email = _email
+            , _monitoringManageJobs = TF.Nil
+            , _monitoringManageLists = TF.Nil
+            , _monitoringViewJobs = TF.Nil
+            , _name = _name
+            , _notify = TF.Nil
+            , _teams = TF.Nil
+            , _username = _username
             }
 
-{- | The @ns1_user@ NS1 resource.
-
-Provides a NS1 User resource. Creating a user sends an invitation email to
-the user's email address. This can be used to create, modify, and delete
-users.
--}
-data UserResource s = UserResource {
-      _email       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The email address of the user. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The free form name of the user. -}
-    , _notify      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Whether or not to notify the user of specified events. Only @billing@ is available currently. -}
-    , _permissions :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The allowed permissions of the user. Permissions documented below. -}
-    , _teams       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The teams that the user belongs to. -}
-    , _username    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The users login name. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (UserResource s) where
-    toObject UserResource{..} = catMaybes
-        [ TF.assign "email" <$> TF.attribute _email
+    toObject UserResource'{..} = P.catMaybes
+        [ TF.assign "account_manage_account_settings" <$> TF.attribute _accountManageAccountSettings
+        , TF.assign "account_manage_apikeys" <$> TF.attribute _accountManageApikeys
+        , TF.assign "account_manage_payment_methods" <$> TF.attribute _accountManagePaymentMethods
+        , TF.assign "account_manage_plan" <$> TF.attribute _accountManagePlan
+        , TF.assign "account_manage_teams" <$> TF.attribute _accountManageTeams
+        , TF.assign "account_manage_users" <$> TF.attribute _accountManageUsers
+        , TF.assign "account_view_activity_log" <$> TF.attribute _accountViewActivityLog
+        , TF.assign "account_view_invoices" <$> TF.attribute _accountViewInvoices
+        , TF.assign "data_manage_datafeeds" <$> TF.attribute _dataManageDatafeeds
+        , TF.assign "data_manage_datasources" <$> TF.attribute _dataManageDatasources
+        , TF.assign "data_push_to_datafeeds" <$> TF.attribute _dataPushToDatafeeds
+        , TF.assign "dns_manage_zones" <$> TF.attribute _dnsManageZones
+        , TF.assign "dns_view_zones" <$> TF.attribute _dnsViewZones
+        , TF.assign "dns_zones_allow" <$> TF.attribute _dnsZonesAllow
+        , TF.assign "dns_zones_allow_by_default" <$> TF.attribute _dnsZonesAllowByDefault
+        , TF.assign "dns_zones_deny" <$> TF.attribute _dnsZonesDeny
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "monitoring_manage_jobs" <$> TF.attribute _monitoringManageJobs
+        , TF.assign "monitoring_manage_lists" <$> TF.attribute _monitoringManageLists
+        , TF.assign "monitoring_view_jobs" <$> TF.attribute _monitoringViewJobs
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "notify" <$> TF.attribute _notify
-        , TF.assign "permissions" <$> TF.attribute _permissions
         , TF.assign "teams" <$> TF.attribute _teams
         , TF.assign "username" <$> TF.attribute _username
         ]
 
+instance TF.IsValid (UserResource s) where
+    validator = P.mempty
+
+instance P.HasAccountManageAccountSettings (UserResource s) (TF.Attr s P.Bool) where
+    accountManageAccountSettings =
+        P.lens (_accountManageAccountSettings :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageAccountSettings = a } :: UserResource s)
+
+instance P.HasAccountManageApikeys (UserResource s) (TF.Attr s P.Bool) where
+    accountManageApikeys =
+        P.lens (_accountManageApikeys :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageApikeys = a } :: UserResource s)
+
+instance P.HasAccountManagePaymentMethods (UserResource s) (TF.Attr s P.Bool) where
+    accountManagePaymentMethods =
+        P.lens (_accountManagePaymentMethods :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManagePaymentMethods = a } :: UserResource s)
+
+instance P.HasAccountManagePlan (UserResource s) (TF.Attr s P.Bool) where
+    accountManagePlan =
+        P.lens (_accountManagePlan :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManagePlan = a } :: UserResource s)
+
+instance P.HasAccountManageTeams (UserResource s) (TF.Attr s P.Bool) where
+    accountManageTeams =
+        P.lens (_accountManageTeams :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageTeams = a } :: UserResource s)
+
+instance P.HasAccountManageUsers (UserResource s) (TF.Attr s P.Bool) where
+    accountManageUsers =
+        P.lens (_accountManageUsers :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountManageUsers = a } :: UserResource s)
+
+instance P.HasAccountViewActivityLog (UserResource s) (TF.Attr s P.Bool) where
+    accountViewActivityLog =
+        P.lens (_accountViewActivityLog :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountViewActivityLog = a } :: UserResource s)
+
+instance P.HasAccountViewInvoices (UserResource s) (TF.Attr s P.Bool) where
+    accountViewInvoices =
+        P.lens (_accountViewInvoices :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _accountViewInvoices = a } :: UserResource s)
+
+instance P.HasDataManageDatafeeds (UserResource s) (TF.Attr s P.Bool) where
+    dataManageDatafeeds =
+        P.lens (_dataManageDatafeeds :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataManageDatafeeds = a } :: UserResource s)
+
+instance P.HasDataManageDatasources (UserResource s) (TF.Attr s P.Bool) where
+    dataManageDatasources =
+        P.lens (_dataManageDatasources :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataManageDatasources = a } :: UserResource s)
+
+instance P.HasDataPushToDatafeeds (UserResource s) (TF.Attr s P.Bool) where
+    dataPushToDatafeeds =
+        P.lens (_dataPushToDatafeeds :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataPushToDatafeeds = a } :: UserResource s)
+
+instance P.HasDnsManageZones (UserResource s) (TF.Attr s P.Bool) where
+    dnsManageZones =
+        P.lens (_dnsManageZones :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsManageZones = a } :: UserResource s)
+
+instance P.HasDnsViewZones (UserResource s) (TF.Attr s P.Bool) where
+    dnsViewZones =
+        P.lens (_dnsViewZones :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsViewZones = a } :: UserResource s)
+
+instance P.HasDnsZonesAllow (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsZonesAllow =
+        P.lens (_dnsZonesAllow :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsZonesAllow = a } :: UserResource s)
+
+instance P.HasDnsZonesAllowByDefault (UserResource s) (TF.Attr s P.Bool) where
+    dnsZonesAllowByDefault =
+        P.lens (_dnsZonesAllowByDefault :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dnsZonesAllowByDefault = a } :: UserResource s)
+
+instance P.HasDnsZonesDeny (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsZonesDeny =
+        P.lens (_dnsZonesDeny :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsZonesDeny = a } :: UserResource s)
+
 instance P.HasEmail (UserResource s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: UserResource s)
+        P.lens (_email :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: UserResource s)
+
+instance P.HasMonitoringManageJobs (UserResource s) (TF.Attr s P.Bool) where
+    monitoringManageJobs =
+        P.lens (_monitoringManageJobs :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringManageJobs = a } :: UserResource s)
+
+instance P.HasMonitoringManageLists (UserResource s) (TF.Attr s P.Bool) where
+    monitoringManageLists =
+        P.lens (_monitoringManageLists :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringManageLists = a } :: UserResource s)
+
+instance P.HasMonitoringViewJobs (UserResource s) (TF.Attr s P.Bool) where
+    monitoringViewJobs =
+        P.lens (_monitoringViewJobs :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _monitoringViewJobs = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: UserResource s)
+        P.lens (_name :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: UserResource s)
 
-instance P.HasNotify (UserResource s) (TF.Attr s P.Text) where
+instance P.HasNotify (UserResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     notify =
-        lens (_notify :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _notify = a } :: UserResource s)
+        P.lens (_notify :: UserResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _notify = a } :: UserResource s)
 
-instance P.HasPermissions (UserResource s) (TF.Attr s P.Text) where
-    permissions =
-        lens (_permissions :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: UserResource s)
-
-instance P.HasTeams (UserResource s) (TF.Attr s P.Text) where
+instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
     teams =
-        lens (_teams :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _teams = a } :: UserResource s)
+        P.lens (_teams :: UserResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _teams = a } :: UserResource s)
 
 instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: UserResource s)
+        P.lens (_username :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: UserResource s)
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedEmail =
-        (_email :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @ns1_zone@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/ns1_zone terraform documentation>
+-- for more information.
+data ZoneResource s = ZoneResource'
+    { _link     :: TF.Attr s P.Text
+    -- ^ @link@ - (Optional)
+    --
+    , _networks :: TF.Attr s [TF.Attr s P.Integer]
+    -- ^ @networks@ - (Optional)
+    --
+    , _primary  :: TF.Attr s P.Text
+    -- ^ @primary@ - (Optional)
+    --
+    , _zone     :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedNotify (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedNotify =
-        (_notify :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTeams (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedTeams =
-        (_teams :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedUsername =
-        (_username :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-userResource :: TF.Resource P.NS1 (UserResource s)
-userResource =
-    TF.newResource "ns1_user" $
-        UserResource {
-              _email = TF.Nil
-            , _name = TF.Nil
-            , _notify = TF.Nil
-            , _permissions = TF.Nil
-            , _teams = TF.Nil
-            , _username = TF.Nil
+zoneResource
+    :: TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (ZoneResource s)
+zoneResource _zone =
+    TF.newResource "ns1_zone" TF.validator $
+        ZoneResource'
+            { _link = TF.Nil
+            , _networks = TF.Nil
+            , _primary = TF.Nil
+            , _zone = _zone
             }
 
-{- | The @ns1_zone@ NS1 resource.
-
-Provides a NS1 DNS Zone resource. This can be used to create, modify, and
-delete zones.
--}
-data ZoneResource s = ZoneResource {
-      _expiry  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The SOA Expiry. -}
-    , _link    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The target zone(domain name) to link to. -}
-    , _nx_ttl  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The SOA NX TTL. -}
-    , _primary :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The primary zones' ip. This makes the zone a secondary. -}
-    , _refresh :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The SOA Refresh. -}
-    , _retry   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The SOA Retry. -}
-    , _ttl     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The SOA TTL. -}
-    , _zone    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The domain name of the zone. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ZoneResource s) where
-    toObject ZoneResource{..} = catMaybes
-        [ TF.assign "expiry" <$> TF.attribute _expiry
-        , TF.assign "link" <$> TF.attribute _link
-        , TF.assign "nx_ttl" <$> TF.attribute _nx_ttl
+    toObject ZoneResource'{..} = P.catMaybes
+        [ TF.assign "link" <$> TF.attribute _link
+        , TF.assign "networks" <$> TF.attribute _networks
         , TF.assign "primary" <$> TF.attribute _primary
-        , TF.assign "refresh" <$> TF.attribute _refresh
-        , TF.assign "retry" <$> TF.attribute _retry
-        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
-instance P.HasExpiry (ZoneResource s) (TF.Attr s P.Text) where
-    expiry =
-        lens (_expiry :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _expiry = a } :: ZoneResource s)
+instance TF.IsValid (ZoneResource s) where
+    validator = P.mempty
 
 instance P.HasLink (ZoneResource s) (TF.Attr s P.Text) where
     link =
-        lens (_link :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _link = a } :: ZoneResource s)
+        P.lens (_link :: ZoneResource s -> TF.Attr s P.Text)
+               (\s a -> s { _link = a } :: ZoneResource s)
 
-instance P.HasNxTtl (ZoneResource s) (TF.Attr s P.Text) where
-    nxTtl =
-        lens (_nx_ttl :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _nx_ttl = a } :: ZoneResource s)
+instance P.HasNetworks (ZoneResource s) (TF.Attr s [TF.Attr s P.Integer]) where
+    networks =
+        P.lens (_networks :: ZoneResource s -> TF.Attr s [TF.Attr s P.Integer])
+               (\s a -> s { _networks = a } :: ZoneResource s)
 
 instance P.HasPrimary (ZoneResource s) (TF.Attr s P.Text) where
     primary =
-        lens (_primary :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _primary = a } :: ZoneResource s)
-
-instance P.HasRefresh (ZoneResource s) (TF.Attr s P.Text) where
-    refresh =
-        lens (_refresh :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _refresh = a } :: ZoneResource s)
-
-instance P.HasRetry (ZoneResource s) (TF.Attr s P.Text) where
-    retry =
-        lens (_retry :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _retry = a } :: ZoneResource s)
-
-instance P.HasTtl (ZoneResource s) (TF.Attr s P.Text) where
-    ttl =
-        lens (_ttl :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: ZoneResource s)
+        P.lens (_primary :: ZoneResource s -> TF.Attr s P.Text)
+               (\s a -> s { _primary = a } :: ZoneResource s)
 
 instance P.HasZone (ZoneResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ZoneResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ZoneResource s)
+        P.lens (_zone :: ZoneResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ZoneResource s)
 
-instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedExpiry =
-        (_expiry :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
+    computedDnsServers x = TF.compute (TF.refKey x) "_computedDnsServers"
 
-instance s ~ s' => P.HasComputedLink (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedLink =
-        (_link :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
+    computedExpiry x = TF.compute (TF.refKey x) "_computedExpiry"
 
-instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedNxTtl =
-        (_nx_ttl :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedHostmaster (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
+    computedHostmaster x = TF.compute (TF.refKey x) "_computedHostmaster"
 
-instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedPrimary =
-        (_primary :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "_computedId"
 
-instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedRefresh =
-        (_refresh :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
+    computedNxTtl x = TF.compute (TF.refKey x) "_computedNxTtl"
 
-instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedRetry =
-        (_retry :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
+    computedRefresh x = TF.compute (TF.refKey x) "_computedRefresh"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedTtl =
-        (_ttl :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
+    computedRetry x = TF.compute (TF.refKey x) "_computedRetry"
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ZoneResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-zoneResource :: TF.Resource P.NS1 (ZoneResource s)
-zoneResource =
-    TF.newResource "ns1_zone" $
-        ZoneResource {
-              _expiry = TF.Nil
-            , _link = TF.Nil
-            , _nx_ttl = TF.Nil
-            , _primary = TF.Nil
-            , _refresh = TF.Nil
-            , _retry = TF.Nil
-            , _ttl = TF.Nil
-            , _zone = TF.Nil
-            }
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"

@@ -1,0 +1,562 @@
+{
+    "settings": [
+        {
+            "con": {
+                "smart": "newGrant",
+                "name": "Grant'"
+            },
+            "arguments": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "name": "Grant",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "conflicts": [],
+            "type": "Grant s",
+            "original": "grant"
+        },
+        {
+            "con": {
+                "smart": "newRetentionPolicies",
+                "name": "RetentionPolicies'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"default\" <$> TF.attribute",
+                    "name": "_default'",
+                    "method": "default'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDefault'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "default"
+                },
+                {
+                    "default": "_duration",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
+                    "name": "_duration",
+                    "method": "duration",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDuration",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.value 1",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"replication\" <$> TF.attribute",
+                    "name": "_replication",
+                    "method": "replication",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasReplication",
+                    "validate": false,
+                    "optional": true,
+                    "original": "replication"
+                }
+            ],
+            "name": "RetentionPolicies",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_duration",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
+                    "name": "_duration",
+                    "method": "duration",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDuration",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "RetentionPolicies s",
+            "original": "retention_policies"
+        }
+    ],
+    "dataSources": [],
+    "resources": [
+        {
+            "con": {
+                "smart": "continuousQueryResource",
+                "name": "ContinuousQueryResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                }
+            ],
+            "name": "ContinuousQueryResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                }
+            ],
+            "conflicts": [],
+            "type": "ContinuousQueryResource s",
+            "original": "influxdb_continuous_query"
+        },
+        {
+            "con": {
+                "smart": "databaseResource",
+                "name": "DatabaseResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"retention_policies\" <$> TF.attribute",
+                    "name": "_retentionPolicies",
+                    "method": "retentionPolicies",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RetentionPolicies s)]",
+                    "class": "HasRetentionPolicies",
+                    "validate": true,
+                    "optional": true,
+                    "original": "retention_policies"
+                }
+            ],
+            "name": "DatabaseResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "DatabaseResource s",
+            "original": "influxdb_database"
+        },
+        {
+            "con": {
+                "smart": "userResource",
+                "name": "UserResource'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"grant\" <$> TF.attribute",
+                    "name": "_grant",
+                    "method": "grant",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Grant s)]",
+                    "class": "HasGrant",
+                    "validate": true,
+                    "optional": true,
+                    "original": "grant"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_password",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_password",
+                    "method": "password",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "validate": false,
+                    "optional": false,
+                    "original": "password"
+                }
+            ],
+            "name": "UserResource",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"admin\" <$> TF.attribute",
+                    "name": "_computedAdmin",
+                    "method": "computedAdmin",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedAdmin",
+                    "validate": false,
+                    "optional": true,
+                    "original": "admin"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_password",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_password",
+                    "method": "password",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "validate": false,
+                    "optional": false,
+                    "original": "password"
+                }
+            ],
+            "conflicts": [],
+            "type": "UserResource s",
+            "original": "influxdb_user"
+        }
+    ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"password\" <$>",
+                "name": "_password",
+                "method": "password",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasPassword",
+                "validate": false,
+                "optional": true,
+                "original": "password"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"url\" <$>",
+                "name": "_url",
+                "method": "url",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasUrl",
+                "validate": false,
+                "optional": true,
+                "original": "url"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [],
+                "forceNew": false,
+                "encoder": "TF.assign \"username\" <$>",
+                "name": "_username",
+                "method": "username",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasUsername",
+                "validate": false,
+                "optional": true,
+                "original": "username"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "InfluxDB",
+    "package": "terrafomo-influxdb",
+    "original": "influxdb"
+}

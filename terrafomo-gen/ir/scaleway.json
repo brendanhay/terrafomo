@@ -1,0 +1,2148 @@
+{
+    "settings": [
+        {
+            "con": {
+                "smart": "newVolume",
+                "name": "Volume'"
+            },
+            "arguments": [
+                {
+                    "default": "_sizeInGb",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"size_in_gb\" <$> TF.attribute",
+                    "name": "_sizeInGb",
+                    "method": "sizeInGb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasSizeInGb",
+                    "validate": false,
+                    "optional": false,
+                    "original": "size_in_gb"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "name": "Volume",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"volume_id\" <$> TF.attribute",
+                    "name": "_computedVolumeId",
+                    "method": "computedVolumeId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedVolumeId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume_id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_sizeInGb",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"size_in_gb\" <$> TF.attribute",
+                    "name": "_sizeInGb",
+                    "method": "sizeInGb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasSizeInGb",
+                    "validate": false,
+                    "optional": false,
+                    "original": "size_in_gb"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "Volume s",
+            "original": "volume"
+        }
+    ],
+    "dataSources": [
+        {
+            "con": {
+                "smart": "bootscriptData",
+                "name": "BootscriptData'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Exact name of the desired bootscript"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Partial name of the desired bootscript to filter with"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_filter\" <$> TF.attribute",
+                    "name": "_nameFilter",
+                    "method": "nameFilter",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNameFilter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_filter"
+                }
+            ],
+            "name": "BootscriptData",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Architecture of the desired bootscript"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"architecture\" <$> TF.attribute",
+                    "name": "_computedArchitecture",
+                    "method": "computedArchitecture",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedArchitecture",
+                    "validate": false,
+                    "optional": true,
+                    "original": "architecture"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Commandline boot options used"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"boot_cmd_args\" <$> TF.attribute",
+                    "name": "_computedBootCmdArgs",
+                    "method": "computedBootCmdArgs",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedBootCmdArgs",
+                    "validate": false,
+                    "optional": false,
+                    "original": "boot_cmd_args"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Path to Device Tree Blob detailing hardware information"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dtb\" <$> TF.attribute",
+                    "name": "_computedDtb",
+                    "method": "computedDtb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDtb",
+                    "validate": false,
+                    "optional": false,
+                    "original": "dtb"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "URL to initial ramdisk content"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"initrd\" <$> TF.attribute",
+                    "name": "_computedInitrd",
+                    "method": "computedInitrd",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedInitrd",
+                    "validate": false,
+                    "optional": false,
+                    "original": "initrd"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "URL to used kernel"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"kernel\" <$> TF.attribute",
+                    "name": "_computedKernel",
+                    "method": "computedKernel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedKernel",
+                    "validate": false,
+                    "optional": false,
+                    "original": "kernel"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Organization owning the bootscript"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"organization\" <$> TF.attribute",
+                    "name": "_computedOrganization",
+                    "method": "computedOrganization",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedOrganization",
+                    "validate": false,
+                    "optional": false,
+                    "original": "organization"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Indication if the bootscript is public"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public\" <$> TF.attribute",
+                    "name": "_computedPublic",
+                    "method": "computedPublic",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPublic",
+                    "validate": false,
+                    "optional": false,
+                    "original": "public"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "BootscriptData s",
+            "original": "scaleway_bootscript"
+        },
+        {
+            "con": {
+                "smart": "imageData",
+                "name": "ImageData'"
+            },
+            "arguments": [
+                {
+                    "default": "_architecture",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Architecture of the desired image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"architecture\" <$> TF.attribute",
+                    "name": "_architecture",
+                    "method": "architecture",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArchitecture",
+                    "validate": false,
+                    "optional": false,
+                    "original": "architecture"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Select most recent image if multiple match"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"most_recent\" <$> TF.attribute",
+                    "name": "_mostRecent",
+                    "method": "mostRecent",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_nameFilter",
+                            "method": "nameFilter"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasMostRecent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "most_recent"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Partial name of the desired image to filter with"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_filter\" <$> TF.attribute",
+                    "name": "_nameFilter",
+                    "method": "nameFilter",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_mostRecent",
+                            "method": "mostRecent"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNameFilter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_filter"
+                }
+            ],
+            "name": "ImageData",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Date when the image was created"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"creation_date\" <$> TF.attribute",
+                    "name": "_computedCreationDate",
+                    "method": "computedCreationDate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCreationDate",
+                    "validate": false,
+                    "optional": false,
+                    "original": "creation_date"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Exact name of the desired image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_computedName",
+                    "method": "computedName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Organization owning the bootscript"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"organization\" <$> TF.attribute",
+                    "name": "_computedOrganization",
+                    "method": "computedOrganization",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedOrganization",
+                    "validate": false,
+                    "optional": false,
+                    "original": "organization"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Indication if the bootscript is public"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public\" <$> TF.attribute",
+                    "name": "_computedPublic",
+                    "method": "computedPublic",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedPublic",
+                    "validate": false,
+                    "optional": false,
+                    "original": "public"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_architecture",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Architecture of the desired image"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"architecture\" <$> TF.attribute",
+                    "name": "_architecture",
+                    "method": "architecture",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasArchitecture",
+                    "validate": false,
+                    "optional": false,
+                    "original": "architecture"
+                }
+            ],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Select most recent image if multiple match"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"most_recent\" <$> TF.attribute",
+                    "name": "_mostRecent",
+                    "method": "mostRecent",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_nameFilter",
+                            "method": "nameFilter"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasMostRecent",
+                    "validate": false,
+                    "optional": true,
+                    "original": "most_recent"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Partial name of the desired image to filter with"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name_filter\" <$> TF.attribute",
+                    "name": "_nameFilter",
+                    "method": "nameFilter",
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_mostRecent",
+                            "method": "mostRecent"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasNameFilter",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name_filter"
+                }
+            ],
+            "type": "ImageData s",
+            "original": "scaleway_image"
+        },
+        {
+            "con": {
+                "smart": "securityGroupData",
+                "name": "SecurityGroupData'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the security group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "name": "SecurityGroupData",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_computedDescription",
+                    "method": "computedDescription",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedDescription",
+                    "validate": false,
+                    "optional": false,
+                    "original": "description"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enable_default_security\" <$> TF.attribute",
+                    "name": "_computedEnableDefaultSecurity",
+                    "method": "computedEnableDefaultSecurity",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasComputedEnableDefaultSecurity",
+                    "validate": false,
+                    "optional": false,
+                    "original": "enable_default_security"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the security group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "SecurityGroupData s",
+            "original": "scaleway_security_group"
+        },
+        {
+            "con": {
+                "smart": "volumeData",
+                "name": "VolumeData'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the volume"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "name": "VolumeData",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_computedServer",
+                    "method": "computedServer",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedServer",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The size of the volume in GB"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"size_in_gb\" <$> TF.attribute",
+                    "name": "_computedSizeInGb",
+                    "method": "computedSizeInGb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedSizeInGb",
+                    "validate": false,
+                    "optional": false,
+                    "original": "size_in_gb"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The type of backing storage"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_computedType",
+                    "method": "computedType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the volume"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "VolumeData s",
+            "original": "scaleway_volume"
+        }
+    ],
+    "resources": [
+        {
+            "con": {
+                "smart": "ipResource",
+                "name": "IpResource'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ipv4 reverse dns"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"reverse\" <$> TF.attribute",
+                    "name": "_reverse",
+                    "method": "reverse",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasReverse",
+                    "validate": false,
+                    "optional": true,
+                    "original": "reverse"
+                }
+            ],
+            "name": "IpResource",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The ipv4 address of the ip"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_computedIp",
+                    "method": "computedIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The server associated with the ip"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_computedServer",
+                    "method": "computedServer",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedServer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "server"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "IpResource s",
+            "original": "scaleway_ip"
+        },
+        {
+            "con": {
+                "smart": "securityGroupResource",
+                "name": "SecurityGroupResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_description",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The description of the security group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": false,
+                    "original": "description"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Add default security group rules"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"enable_default_security\" <$> TF.attribute",
+                    "name": "_enableDefaultSecurity",
+                    "method": "enableDefaultSecurity",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnableDefaultSecurity",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enable_default_security"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the security group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "name": "SecurityGroupResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_description",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The description of the security group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": false,
+                    "original": "description"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the security group"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "SecurityGroupResource s",
+            "original": "scaleway_security_group"
+        },
+        {
+            "con": {
+                "smart": "securityGroupRuleResource",
+                "name": "SecurityGroupRuleResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_action",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The action to take when the security group rule is triggered (accept or",
+                        "drop)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_action",
+                    "method": "action",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "action"
+                },
+                {
+                    "default": "_direction",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The direction the traffic is affected (inbound or outbound)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"direction\" <$> TF.attribute",
+                    "name": "_direction",
+                    "method": "direction",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDirection",
+                    "validate": false,
+                    "optional": false,
+                    "original": "direction"
+                },
+                {
+                    "default": "_ipRange",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The ip range affected by the security group rule"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_range\" <$> TF.attribute",
+                    "name": "_ipRange",
+                    "method": "ipRange",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpRange",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip_range"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The port affected by the security group rule"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The protocol of the security group rule (ICMP, TCP or UDP)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                },
+                {
+                    "default": "_securityGroup",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The security group this rule is attached to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_group\" <$> TF.attribute",
+                    "name": "_securityGroup",
+                    "method": "securityGroup",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSecurityGroup",
+                    "validate": false,
+                    "optional": false,
+                    "original": "security_group"
+                }
+            ],
+            "name": "SecurityGroupRuleResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_action",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The action to take when the security group rule is triggered (accept or",
+                        "drop)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_action",
+                    "method": "action",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "action"
+                },
+                {
+                    "default": "_direction",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The direction the traffic is affected (inbound or outbound)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"direction\" <$> TF.attribute",
+                    "name": "_direction",
+                    "method": "direction",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDirection",
+                    "validate": false,
+                    "optional": false,
+                    "original": "direction"
+                },
+                {
+                    "default": "_ipRange",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The ip range affected by the security group rule"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_range\" <$> TF.attribute",
+                    "name": "_ipRange",
+                    "method": "ipRange",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpRange",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ip_range"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The protocol of the security group rule (ICMP, TCP or UDP)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                },
+                {
+                    "default": "_securityGroup",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The security group this rule is attached to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_group\" <$> TF.attribute",
+                    "name": "_securityGroup",
+                    "method": "securityGroup",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSecurityGroup",
+                    "validate": false,
+                    "optional": false,
+                    "original": "security_group"
+                }
+            ],
+            "conflicts": [],
+            "type": "SecurityGroupRuleResource s",
+            "original": "scaleway_security_group_rule"
+        },
+        {
+            "con": {
+                "smart": "serverResource",
+                "name": "ServerResource'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The boot configuration of the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"bootscript\" <$> TF.attribute",
+                    "name": "_bootscript",
+                    "method": "bootscript",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBootscript",
+                    "validate": false,
+                    "optional": true,
+                    "original": "bootscript"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determines if a public IP address should be allocated for the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dynamic_ip_required\" <$> TF.attribute",
+                    "name": "_dynamicIpRequired",
+                    "method": "dynamicIpRequired",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDynamicIpRequired",
+                    "validate": false,
+                    "optional": true,
+                    "original": "dynamic_ip_required"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Determines if IPv6 is enabled for the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"enable_ipv6\" <$> TF.attribute",
+                    "name": "_enableIpv6",
+                    "method": "enableIpv6",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEnableIpv6",
+                    "validate": false,
+                    "optional": true,
+                    "original": "enable_ipv6"
+                },
+                {
+                    "default": "_image",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The base image of the server"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "_image",
+                    "method": "image",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "validate": false,
+                    "optional": false,
+                    "original": "image"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The security group the server is attached to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"security_group\" <$> TF.attribute",
+                    "name": "_securityGroup",
+                    "method": "securityGroup",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSecurityGroup",
+                    "validate": false,
+                    "optional": true,
+                    "original": "security_group"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The tags associated with the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tags\" <$> TF.attribute",
+                    "name": "_tags",
+                    "method": "tags",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasTags",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tags"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The instance type of the server"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Volumes attached to the server on creation"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (Volume s)]",
+                    "class": "HasVolume",
+                    "validate": true,
+                    "optional": true,
+                    "original": "volume"
+                }
+            ],
+            "name": "ServerResource",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The boot_type of the server"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"boot_type\" <$> TF.attribute",
+                    "name": "_computedBootType",
+                    "method": "computedBootType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedBootType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "boot_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The Scaleway internal IP address of the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"private_ip\" <$> TF.attribute",
+                    "name": "_computedPrivateIp",
+                    "method": "computedPrivateIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPrivateIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "private_ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The public IPv4 address of the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_ip\" <$> TF.attribute",
+                    "name": "_computedPublicIp",
+                    "method": "computedPublicIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPublicIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "public_ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The public IPv6 address of the server, if enabled"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"public_ipv6\" <$> TF.attribute",
+                    "name": "_computedPublicIpv6",
+                    "method": "computedPublicIpv6",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPublicIpv6",
+                    "validate": false,
+                    "optional": false,
+                    "original": "public_ipv6"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The server state (running, stopped)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "_computedState",
+                    "method": "computedState",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedState",
+                    "validate": false,
+                    "optional": true,
+                    "original": "state"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Scaleway description of the server state"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state_detail\" <$> TF.attribute",
+                    "name": "_computedStateDetail",
+                    "method": "computedStateDetail",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedStateDetail",
+                    "validate": false,
+                    "optional": false,
+                    "original": "state_detail"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_image",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The base image of the server"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"image\" <$> TF.attribute",
+                    "name": "_image",
+                    "method": "image",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasImage",
+                    "validate": false,
+                    "optional": false,
+                    "original": "image"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the server"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The instance type of the server"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServerResource s",
+            "original": "scaleway_server"
+        },
+        {
+            "con": {
+                "smart": "sshKeyResource",
+                "name": "SshKeyResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The ssh key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                }
+            ],
+            "name": "SshKeyResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The ssh key"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                }
+            ],
+            "conflicts": [],
+            "type": "SshKeyResource s",
+            "original": "scaleway_ssh_key"
+        },
+        {
+            "con": {
+                "smart": "tokenResource",
+                "name": "TokenResource'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The token description."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": true,
+                    "original": "description"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Defines if the token is set to expire"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"expires\" <$> TF.attribute",
+                    "name": "_expires",
+                    "method": "expires",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasExpires",
+                    "validate": false,
+                    "optional": true,
+                    "original": "expires"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "User password, in case a login is require"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_password",
+                    "method": "password",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "password"
+                }
+            ],
+            "name": "TokenResource",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The access_key."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"access_key\" <$> TF.attribute",
+                    "name": "_computedAccessKey",
+                    "method": "computedAccessKey",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedAccessKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "access_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The ip used to create the key."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"creation_ip\" <$> TF.attribute",
+                    "name": "_computedCreationIp",
+                    "method": "computedCreationIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedCreationIp",
+                    "validate": false,
+                    "optional": false,
+                    "original": "creation_ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The account email. Defaults to registered user."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email\" <$> TF.attribute",
+                    "name": "_computedEmail",
+                    "method": "computedEmail",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedEmail",
+                    "validate": false,
+                    "optional": true,
+                    "original": "email"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The tokens expiration date"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"expiration_date\" <$> TF.attribute",
+                    "name": "_computedExpirationDate",
+                    "method": "computedExpirationDate",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedExpirationDate",
+                    "validate": false,
+                    "optional": false,
+                    "original": "expiration_date"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The secret_key."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"secret_key\" <$> TF.attribute",
+                    "name": "_computedSecretKey",
+                    "method": "computedSecretKey",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSecretKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "secret_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The userid of the associated user."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user_id\" <$> TF.attribute",
+                    "name": "_computedUserId",
+                    "method": "computedUserId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedUserId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "user_id"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "TokenResource s",
+            "original": "scaleway_token"
+        },
+        {
+            "con": {
+                "smart": "userDataResource",
+                "name": "UserDataResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The key of the user data to manage"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_server",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The server the meta data is associated with"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_server",
+                    "method": "server",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServer",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The value of the user"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "UserDataResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_key",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The key of the user data to manage"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"key\" <$> TF.attribute",
+                    "name": "_key",
+                    "method": "key",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasKey",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key"
+                },
+                {
+                    "default": "_server",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The server the meta data is associated with"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_server",
+                    "method": "server",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServer",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The value of the user"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "UserDataResource s",
+            "original": "scaleway_user_data"
+        },
+        {
+            "con": {
+                "smart": "volumeResource",
+                "name": "VolumeResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the volume"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_sizeInGb",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The size of the volume in GB"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"size_in_gb\" <$> TF.attribute",
+                    "name": "_sizeInGb",
+                    "method": "sizeInGb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasSizeInGb",
+                    "validate": false,
+                    "optional": false,
+                    "original": "size_in_gb"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The type of backing storage"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "name": "VolumeResource",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "The server the volume is attached to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_computedServer",
+                    "method": "computedServer",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedServer",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The name of the volume"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_sizeInGb",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The size of the volume in GB"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"size_in_gb\" <$> TF.attribute",
+                    "name": "_sizeInGb",
+                    "method": "sizeInGb",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasSizeInGb",
+                    "validate": false,
+                    "optional": false,
+                    "original": "size_in_gb"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The type of backing storage"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "VolumeResource s",
+            "original": "scaleway_volume"
+        },
+        {
+            "con": {
+                "smart": "volumeAttachmentResource",
+                "name": "VolumeAttachmentResource'"
+            },
+            "arguments": [
+                {
+                    "default": "_server",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The server a volume should be attached to"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_server",
+                    "method": "server",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServer",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server"
+                },
+                {
+                    "default": "_volume",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The volume to attach"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolume",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume"
+                }
+            ],
+            "name": "VolumeAttachmentResource",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_server",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The server a volume should be attached to"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"server\" <$> TF.attribute",
+                    "name": "_server",
+                    "method": "server",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServer",
+                    "validate": false,
+                    "optional": false,
+                    "original": "server"
+                },
+                {
+                    "default": "_volume",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The volume to attach"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"volume\" <$> TF.attribute",
+                    "name": "_volume",
+                    "method": "volume",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVolume",
+                    "validate": false,
+                    "optional": false,
+                    "original": "volume"
+                }
+            ],
+            "conflicts": [],
+            "type": "VolumeAttachmentResource s",
+            "original": "scaleway_volume_attachment"
+        }
+    ],
+    "schema": {
+        "con": {
+            "smart": "newProvider",
+            "name": "Provider'"
+        },
+        "arguments": [
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The API key for Scaleway API operations."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"access_key\" <$>",
+                "name": "_accessKey",
+                "method": "accessKey",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasAccessKey",
+                "validate": false,
+                "optional": true,
+                "original": "access_key"
+            },
+            {
+                "default": "_organization",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The Organization ID (a.k.a. 'access key') for Scaleway API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"organization\"",
+                "name": "_organization",
+                "method": "organization",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasOrganization",
+                "validate": false,
+                "optional": false,
+                "original": "organization"
+            },
+            {
+                "default": "P.Nothing",
+                "computed": false,
+                "required": false,
+                "help": [
+                    "The Scaleway API region to use."
+                ],
+                "forceNew": false,
+                "encoder": "TF.assign \"region\" <$>",
+                "name": "_region",
+                "method": "region",
+                "conflicts": [],
+                "type": "P.Maybe P.Text",
+                "class": "HasRegion",
+                "validate": false,
+                "optional": true,
+                "original": "region"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API key for Scaleway API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "name": "Provider",
+        "threaded": false,
+        "attributes": [],
+        "parameters": [
+            {
+                "default": "_organization",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The Organization ID (a.k.a. 'access key') for Scaleway API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"organization\"",
+                "name": "_organization",
+                "method": "organization",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasOrganization",
+                "validate": false,
+                "optional": false,
+                "original": "organization"
+            },
+            {
+                "default": "_token",
+                "computed": false,
+                "required": true,
+                "help": [
+                    "The API key for Scaleway API operations."
+                ],
+                "forceNew": false,
+                "encoder": "P.Just $ TF.assign \"token\"",
+                "name": "_token",
+                "method": "token",
+                "conflicts": [],
+                "type": "P.Text",
+                "class": "HasToken",
+                "validate": false,
+                "optional": false,
+                "original": "token"
+            }
+        ],
+        "conflicts": [],
+        "type": "Provider",
+        "original": "provider"
+    },
+    "dependencies": [
+        "base",
+        "unordered-containers",
+        "text",
+        "terrafomo",
+        "hashable",
+        "microlens"
+    ],
+    "name": "Scaleway",
+    "package": "terrafomo-scaleway",
+    "original": "scaleway"
+}

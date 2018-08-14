@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,365 +17,287 @@
 --
 module Terrafomo.ProfitBricks.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** profitbricks_datacenter
       DatacenterData (..)
     , datacenterData
 
+    -- ** profitbricks_image
     , ImageData (..)
     , imageData
 
+    -- ** profitbricks_location
     , LocationData (..)
     , locationData
 
+    -- ** profitbricks_resource
     , ResourceData (..)
     , resourceData
 
+    -- ** profitbricks_snapshot
     , SnapshotData (..)
     , snapshotData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasFeature (..)
-    , P.HasLocation (..)
-    , P.HasName (..)
-    , P.HasResourceId (..)
-    , P.HasResourceType (..)
-    , P.HasSize (..)
-    , P.HasType' (..)
-    , P.HasVersion (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedFeature (..)
-    , P.HasComputedId (..)
-    , P.HasComputedLocation (..)
-    , P.HasComputedName (..)
-    , P.HasComputedResourceId (..)
-    , P.HasComputedResourceType (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedVersion (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.ProfitBricks.Settings
 
-import Terrafomo.ProfitBricks.Types as P
-
+import qualified Data.Hashable                   as P
+import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as Map
+import qualified Data.List.NonEmpty              as P
+import qualified Data.Maybe                      as P
+import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
-import qualified Data.Word                       as P
-import qualified GHC.Base                        as P
-import qualified Numeric.Natural                 as P
+import qualified GHC.Generics                    as P
+import qualified Lens.Micro                      as P
+import qualified Prelude                         as P
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.HCL                   as TF
+import qualified Terrafomo.Name                  as TF
 import qualified Terrafomo.ProfitBricks.Lens     as P
 import qualified Terrafomo.ProfitBricks.Provider as P
+import qualified Terrafomo.ProfitBricks.Types    as P
+import qualified Terrafomo.Schema                as TF
+import qualified Terrafomo.Validator             as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @profitbricks_datacenter@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_datacenter terraform documentation>
+-- for more information.
+data DatacenterData s = DatacenterData'
+    { _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @profitbricks_datacenter@ ProfitBricks datasource.
-
-The data centers data source can be used to search for and return an
-existing Virtual Data Center. You can provide a string for the name and
-location parameters which will be compared with provisioned Virtual Data
-Centers. If a single match is found, it will be returned. If your search
-results in multiple matches, an error will be generated. When this happens,
-please refine your search string so that it is specific enough to return
-only one result.
--}
-data DatacenterData s = DatacenterData {
-      _location :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Id of the existing Virtual Data Center's location. -}
-    , _name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name or part of the name of an existing Virtual Data Center that you want to search for. -}
-    } deriving (Show, Eq)
+datacenterData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (DatacenterData s)
+datacenterData _name =
+    TF.newDataSource "profitbricks_datacenter" TF.validator $
+        DatacenterData'
+            { _location = TF.Nil
+            , _name = _name
+            }
 
 instance TF.IsObject (DatacenterData s) where
-    toObject DatacenterData{..} = catMaybes
+    toObject DatacenterData'{..} = P.catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]
 
+instance TF.IsValid (DatacenterData s) where
+    validator = P.mempty
+
 instance P.HasLocation (DatacenterData s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: DatacenterData s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: DatacenterData s)
+        P.lens (_location :: DatacenterData s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: DatacenterData s)
 
 instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatacenterData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatacenterData s)
+        P.lens (_name :: DatacenterData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatacenterData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @profitbricks_image@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_image terraform documentation>
+-- for more information.
+data ImageData s = ImageData'
+    { _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _type'    :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    , _version  :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: DatacenterData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatacenterData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-datacenterData :: TF.DataSource P.ProfitBricks (DatacenterData s)
-datacenterData =
-    TF.newDataSource "profitbricks_datacenter" $
-        DatacenterData {
-              _location = TF.Nil
+imageData
+    :: TF.DataSource P.Provider (ImageData s)
+imageData =
+    TF.newDataSource "profitbricks_image" TF.validator $
+        ImageData'
+            { _location = TF.Nil
             , _name = TF.Nil
+            , _type' = TF.Nil
+            , _version = TF.Nil
             }
 
-{- | The @profitbricks_image@ ProfitBricks datasource.
-
-The images data source can be used to search for and return an existing
-image which can then be used to provision a server.
--}
-data ImageData s = ImageData {
-      _location :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Id of the existing image's location. -}
-    , _name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name or part of the name of an existing image that you want to search for. -}
-    , _type'    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The image type, HDD or CD-ROM. -}
-    , _version  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Version of the image (see details below). -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ImageData s) where
-    toObject ImageData{..} = catMaybes
+    toObject ImageData'{..} = P.catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "version" <$> TF.attribute _version
         ]
 
+instance TF.IsValid (ImageData s) where
+    validator = P.mempty
+
 instance P.HasLocation (ImageData s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: ImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: ImageData s)
+        P.lens (_location :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: ImageData s)
 
 instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ImageData s)
+        P.lens (_name :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ImageData s)
 
 instance P.HasType' (ImageData s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: ImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ImageData s)
+        P.lens (_type' :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ImageData s)
 
 instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
     version =
-        lens (_version :: ImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: ImageData s)
+        P.lens (_version :: ImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: ImageData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @profitbricks_location@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_location terraform documentation>
+-- for more information.
+data LocationData s = LocationData'
+    { _feature :: TF.Attr s P.Text
+    -- ^ @feature@ - (Optional)
+    --
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: ImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: ImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedVersion =
-        (_version :: ImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-imageData :: TF.DataSource P.ProfitBricks (ImageData s)
-imageData =
-    TF.newDataSource "profitbricks_image" $
-        ImageData {
-              _location = TF.Nil
+locationData
+    :: TF.DataSource P.Provider (LocationData s)
+locationData =
+    TF.newDataSource "profitbricks_location" TF.validator $
+        LocationData'
+            { _feature = TF.Nil
             , _name = TF.Nil
-            , _type' = TF.Nil
-            , _version = TF.Nil
             }
 
-{- | The @profitbricks_location@ ProfitBricks datasource.
-
-The locations data source can be used to search for and return an existing
-location which can then be used elsewhere in the configuration.
--}
-data LocationData s = LocationData {
-      _feature :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A desired feature that the location must be able to provide. -}
-    , _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name or part of the location name to search for. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (LocationData s) where
-    toObject LocationData{..} = catMaybes
+    toObject LocationData'{..} = P.catMaybes
         [ TF.assign "feature" <$> TF.attribute _feature
         , TF.assign "name" <$> TF.attribute _name
         ]
 
+instance TF.IsValid (LocationData s) where
+    validator = P.mempty
+
 instance P.HasFeature (LocationData s) (TF.Attr s P.Text) where
     feature =
-        lens (_feature :: LocationData s -> TF.Attr s P.Text)
-             (\s a -> s { _feature = a } :: LocationData s)
+        P.lens (_feature :: LocationData s -> TF.Attr s P.Text)
+               (\s a -> s { _feature = a } :: LocationData s)
 
 instance P.HasName (LocationData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: LocationData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: LocationData s)
+        P.lens (_name :: LocationData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LocationData s)
 
-instance s ~ s' => P.HasComputedFeature (TF.Ref s' (LocationData s)) (TF.Attr s P.Text) where
-    computedFeature =
-        (_feature :: LocationData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @profitbricks_resource@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_resource terraform documentation>
+-- for more information.
+data ResourceData s = ResourceData'
+    { _resourceId   :: TF.Attr s P.Text
+    -- ^ @resource_id@ - (Optional)
+    --
+    , _resourceType :: TF.Attr s P.Text
+    -- ^ @resource_type@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LocationData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LocationData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: LocationData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-locationData :: TF.DataSource P.ProfitBricks (LocationData s)
-locationData =
-    TF.newDataSource "profitbricks_location" $
-        LocationData {
-              _feature = TF.Nil
-            , _name = TF.Nil
+resourceData
+    :: TF.DataSource P.Provider (ResourceData s)
+resourceData =
+    TF.newDataSource "profitbricks_resource" TF.validator $
+        ResourceData'
+            { _resourceId = TF.Nil
+            , _resourceType = TF.Nil
             }
 
-{- | The @profitbricks_resource@ ProfitBricks datasource.
-
-The resource data source can be used to search for and return any existing
-ProfitBricks resource and optionally their group associations. You can
-provide a string for the resource type (datacenter,image,snapshot,ipblock)
-and/or resource id parameters which will be queries against available
-resources. If a single match is found, it will be returned. If your search
-results in multiple matches, an error will be generated. When this happens,
-please refine your search string so that it is specific enough to return
-only one result.
--}
-data ResourceData s = ResourceData {
-      _resource_id   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the specific resource to retrieve information about. -}
-    , _resource_type :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The specific type of resources to retrieve information about. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ResourceData s) where
-    toObject ResourceData{..} = catMaybes
-        [ TF.assign "resource_id" <$> TF.attribute _resource_id
-        , TF.assign "resource_type" <$> TF.attribute _resource_type
+    toObject ResourceData'{..} = P.catMaybes
+        [ TF.assign "resource_id" <$> TF.attribute _resourceId
+        , TF.assign "resource_type" <$> TF.attribute _resourceType
         ]
+
+instance TF.IsValid (ResourceData s) where
+    validator = P.mempty
 
 instance P.HasResourceId (ResourceData s) (TF.Attr s P.Text) where
     resourceId =
-        lens (_resource_id :: ResourceData s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_id = a } :: ResourceData s)
+        P.lens (_resourceId :: ResourceData s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceId = a } :: ResourceData s)
 
 instance P.HasResourceType (ResourceData s) (TF.Attr s P.Text) where
     resourceType =
-        lens (_resource_type :: ResourceData s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_type = a } :: ResourceData s)
+        P.lens (_resourceType :: ResourceData s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceType = a } :: ResourceData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @profitbricks_snapshot@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_snapshot terraform documentation>
+-- for more information.
+data SnapshotData s = SnapshotData'
+    { _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _size     :: TF.Attr s P.Integer
+    -- ^ @size@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (ResourceData s)) (TF.Attr s P.Text) where
-    computedResourceId =
-        (_resource_id :: ResourceData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResourceType (TF.Ref s' (ResourceData s)) (TF.Attr s P.Text) where
-    computedResourceType =
-        (_resource_type :: ResourceData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourceData :: TF.DataSource P.ProfitBricks (ResourceData s)
-resourceData =
-    TF.newDataSource "profitbricks_resource" $
-        ResourceData {
-              _resource_id = TF.Nil
-            , _resource_type = TF.Nil
+snapshotData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (SnapshotData s)
+snapshotData _name =
+    TF.newDataSource "profitbricks_snapshot" TF.validator $
+        SnapshotData'
+            { _location = TF.Nil
+            , _name = _name
+            , _size = TF.Nil
             }
 
-{- | The @profitbricks_snapshot@ ProfitBricks datasource.
-
-The snapshots data source can be used to search for and return an existing
-snapshot which can then be used to provision a server.
--}
-data SnapshotData s = SnapshotData {
-      _location :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Id of the existing snapshot's location. -}
-    , _name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name or part of the name of an existing snapshot that you want to search for. -}
-    , _size     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The size of the snapshot to look for. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (SnapshotData s) where
-    toObject SnapshotData{..} = catMaybes
+    toObject SnapshotData'{..} = P.catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "size" <$> TF.attribute _size
         ]
 
+instance TF.IsValid (SnapshotData s) where
+    validator = P.mempty
+
 instance P.HasLocation (SnapshotData s) (TF.Attr s P.Text) where
     location =
-        lens (_location :: SnapshotData s -> TF.Attr s P.Text)
-             (\s a -> s { _location = a } :: SnapshotData s)
+        P.lens (_location :: SnapshotData s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: SnapshotData s)
 
 instance P.HasName (SnapshotData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SnapshotData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SnapshotData s)
+        P.lens (_name :: SnapshotData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SnapshotData s)
 
-instance P.HasSize (SnapshotData s) (TF.Attr s P.Text) where
+instance P.HasSize (SnapshotData s) (TF.Attr s P.Integer) where
     size =
-        lens (_size :: SnapshotData s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: SnapshotData s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedLocation (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
-    computedLocation =
-        (_location :: SnapshotData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SnapshotData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: SnapshotData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-snapshotData :: TF.DataSource P.ProfitBricks (SnapshotData s)
-snapshotData =
-    TF.newDataSource "profitbricks_snapshot" $
-        SnapshotData {
-              _location = TF.Nil
-            , _name = TF.Nil
-            , _size = TF.Nil
-            }
+        P.lens (_size :: SnapshotData s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: SnapshotData s)

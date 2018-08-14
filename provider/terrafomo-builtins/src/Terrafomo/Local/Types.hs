@@ -8,4 +8,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Local.Types () where
+module Terrafomo.Local.Types where
+
+-- import Data.Text (Text)
+
+-- import Terrafomo
+
+-- import Formatting (Format, (%))
+
+-- import Terrafomo.Local.Lens
+-- import qualified Terrafomo.Attribute as TF
+-- import qualified Terrafomo.HCL as TF
+-- import qualified Terrafomo.Name as TF
+-- import qualified Terrafomo.Provider as TF
+-- import qualified Terrafomo.Schema as TF

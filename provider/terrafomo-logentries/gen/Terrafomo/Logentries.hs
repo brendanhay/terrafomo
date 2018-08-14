@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Logentries
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,14 +12,16 @@
 --
 module Terrafomo.Logentries
     ( module Terrafomo.Logentries.Types
-    , module Terrafomo.Logentries.Provider
-    , module Terrafomo.Logentries.Lens
     , module Terrafomo.Logentries.DataSource
     , module Terrafomo.Logentries.Resource
+    , module Terrafomo.Logentries.Provider
+    , module Terrafomo.Logentries.Settings
+    , module Terrafomo.Logentries.Lens
     ) where
 
 import Terrafomo.Logentries.DataSource
 import Terrafomo.Logentries.Lens
 import Terrafomo.Logentries.Provider
 import Terrafomo.Logentries.Resource
+import Terrafomo.Logentries.Settings
 import Terrafomo.Logentries.Types

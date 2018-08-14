@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Datadog
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Datadog
-    ( module Terrafomo.Datadog.Types
-    , module Terrafomo.Datadog.Provider
-    , module Terrafomo.Datadog.Lens
+    ( module Terrafomo.Datadog.Provider
     , module Terrafomo.Datadog.Resource
+    , module Terrafomo.Datadog.Settings
+    , module Terrafomo.Datadog.Lens
+    , module Terrafomo.Datadog.Types
     ) where
 
 import Terrafomo.Datadog.Lens
 import Terrafomo.Datadog.Provider
 import Terrafomo.Datadog.Resource
+import Terrafomo.Datadog.Settings
 import Terrafomo.Datadog.Types

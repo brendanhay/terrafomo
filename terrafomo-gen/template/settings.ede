@@ -1,0 +1,68 @@
+-- This module is auto-generated.
+
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+{% include "_include/license.ede" %}
+--
+module {{ namespace }}
+    (
+    -- * Settings Datatypes
+    {% for setting in settings %}
+    -- ** {{ setting.value.original }}
+    {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
+    , {{ setting.value.con.smart }}
+
+  {% endfor %}
+    ) where
+
+import Data.Functor ((<$>))
+
+import GHC.Base (($))
+
+{% for import in qualified %}
+import qualified {{ import.value }} as P
+{% endfor %}
+import qualified Data.HashMap.Strict as Map
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Validator as TF
+{% for setting in settings %}
+
+-- | @{{ setting.value.original }}@ nested settings.
+data {{ setting.value.type }} = {{ setting.value.con.name }}
+{% include "_include/record.ede" with arguments = setting.value.arguments %}
+
+{{ setting.value.con.smart }}
+  {% for param in setting.value.parameters %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
+    -> {{ setting.value.type }}{% endif %}
+  {% else %}
+    :: {{ setting.value.type }}
+  {% endfor %}
+{{ setting.value.con.smart }}{% for param in setting.value.parameters %} {{ param.value.name }}{% endfor %} =
+    {{ setting.value.con.name }}
+      {% for field in setting.value.arguments %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
+        }{% endif %}
+      {% endfor %}
+
+instance P.Hashable  ({{ setting.value.type }})
+instance TF.IsValue  ({{ setting.value.type }})
+instance TF.IsObject ({{ setting.value.type }}) where
+  {% for field in setting.value.arguments %}
+    {% if field.first %}toObject {{ setting.value.con.name }}{..} = P.catMaybes
+        [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
+        ]{% endif %}
+  {% else %}
+    toObject {{ setting.value.name }}' = []
+  {% endfor %}
+
+{% include "_include/validator.ede" with schema = setting.value %}
+{% include "_include/lenses.ede" with schema = setting.value %}
+{% endfor %}

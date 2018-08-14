@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,90 +17,109 @@
 --
 module Terrafomo.Gitlab.Provider
     (
-    -- * Provider Datatype
-      Gitlab (..)
-    , emptyGitlab
-
-    -- * Lenses
-    , providerBaseUrl
-    , providerCacertFile
-    , providerInsecure
-    , providerToken
+    -- * Gitlab Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Gitlab.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Gitlab.Lens  as P
 import qualified Terrafomo.Gitlab.Types as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Gitlab@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Gitlab/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _baseUrl    :: P.Maybe P.Text
+    -- ^ @base_url@ - (Optional)
+    -- The GitLab Base API URL
+    --
+    , _cacertFile :: P.Maybe P.Text
+    -- ^ @cacert_file@ - (Optional)
+    -- A file containing the ca certificate to use in case ssl certificate is not
+    -- from a standard chain
+    --
+    , _insecure   :: P.Bool
+    -- ^ @insecure@ - (Optional)
+    -- Disable SSL verification of API calls
+    --
+    , _token      :: P.Text
+    -- ^ @token@ - (Required)
+    -- The OAuth token used to connect to GitLab.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Gitlab Terraform provider.
+newProvider
+    :: P.Text -- ^ @token@ - 'P.token'
+    -> Provider
+newProvider _token =
+    Provider'
+        { _baseUrl = P.Nothing
+        , _cacertFile = P.Nothing
+        , _insecure = P.False
+        , _token = _token
+        }
 
-The GitLab provider is used to interact with GitLab group or user resources.
-It needs to be configured with the proper credentials before it can be used.
-Use the navigation to the left to read about the available resources.
--}
-data Gitlab = Gitlab {
-      _base_url    :: !(Maybe P.Text)
-    {- ^ (Optional) This is the target GitLab base API endpoint. Providing a value is a requirement when working with GitLab CE or GitLab Enterprise e.g. https://my.gitlab.server/api/v3/. It is optional to provide this value and it can also be sourced from the @GITLAB_BASE_URL@ environment variable. The value must end with a slash. -}
-    , _cacert_file :: !(Maybe P.Text)
-    {- ^ (Optional) This is a file containing the ca cert to verify the gitlab instance.  This is available for use when working with GitLab CE or Gitlab Enterprise with a locally-issued or self-signed certificate chain. -}
-    , _insecure    :: !(Maybe P.Text)
-    {- ^ (Optional; boolean, defaults to false) When set to true this disables SSL verification of the connection to the GitLab instance. -}
-    , _token       :: !(Maybe P.Text)
-    {- ^ (Optional) This is the GitLab personal access token. It must be provided, but it can also be sourced from the @GITLAB_TOKEN@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Gitlab
-
-instance TF.IsSection Gitlab where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Gitlab))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "base_url" <$> _base_url x
-                  , TF.assign "cacert_file" <$> _cacert_file x
-                  , TF.assign "insecure" <$> _insecure x
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "base_url" <$> _baseUrl
+                  , TF.assign "cacert_file" <$> _cacertFile
+                  , P.Just $ TF.assign "insecure" _insecure
+                  , P.Just $ TF.assign "token" _token
                   ])
 
-instance TF.IsProvider Gitlab where
-    type ProviderType Gitlab = "gitlab"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyGitlab :: Gitlab
-emptyGitlab = Gitlab {
-        _base_url = Nothing
-      , _cacert_file = Nothing
-      , _insecure = Nothing
-      , _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerBaseUrl :: Lens' Gitlab (Maybe P.Text)
-providerBaseUrl =
-    lens _base_url (\s a -> s { _base_url = a })
+instance P.HasBaseUrl (Provider) (P.Maybe P.Text) where
+    baseUrl =
+        P.lens (_baseUrl :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _baseUrl = a } :: Provider)
 
-providerCacertFile :: Lens' Gitlab (Maybe P.Text)
-providerCacertFile =
-    lens _cacert_file (\s a -> s { _cacert_file = a })
+instance P.HasCacertFile (Provider) (P.Maybe P.Text) where
+    cacertFile =
+        P.lens (_cacertFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _cacertFile = a } :: Provider)
 
-providerInsecure :: Lens' Gitlab (Maybe P.Text)
-providerInsecure =
-    lens _insecure (\s a -> s { _insecure = a })
+instance P.HasInsecure (Provider) (P.Bool) where
+    insecure =
+        P.lens (_insecure :: Provider -> P.Bool)
+               (\s a -> s { _insecure = a } :: Provider)
 
-providerToken :: Lens' Gitlab (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasToken (Provider) (P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Text)
+               (\s a -> s { _token = a } :: Provider)

@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,825 +17,1155 @@
 --
 module Terrafomo.OneAndOne.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** oneandone_block_storage
       BlockStorageResource (..)
     , blockStorageResource
 
+    -- ** oneandone_firewall_policy
+    , FirewallPolicyResource (..)
+    , firewallPolicyResource
+
+    -- ** oneandone_image
     , ImageResource (..)
     , imageResource
 
-    , InstanceSizeResource (..)
-    , instanceSizeResource
+    -- ** oneandone_loadbalancer
+    , LoadbalancerResource (..)
+    , loadbalancerResource
 
-    , IpResource (..)
-    , ipResource
+    -- ** oneandone_monitoring_policy
+    , MonitoringPolicyResource (..)
+    , monitoringPolicyResource
 
+    -- ** oneandone_private_network
+    , PrivateNetworkResource (..)
+    , privateNetworkResource
+
+    -- ** oneandone_public_ip
+    , PublicIpResource (..)
+    , publicIpResource
+
+    -- ** oneandone_server
     , ServerResource (..)
     , serverResource
 
+    -- ** oneandone_shared_storage
+    , SharedStorageResource (..)
+    , sharedStorageResource
+
+    -- ** oneandone_ssh_key
     , SshKeyResource (..)
     , sshKeyResource
 
+    -- ** oneandone_vpn
     , VpnResource (..)
     , vpnResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.Has*diskSize (..)
-    , P.Has*isMain (..)
-    , P.HasAgent (..)
-    , P.HasCoresPerProcessor (..)
-    , P.HasDatacenter (..)
-    , P.HasDescription (..)
-    , P.HasDownloadPath (..)
-    , P.HasEmail (..)
-    , P.HasFileName (..)
-    , P.HasFirewallPolicyId (..)
-    , P.HasFixedInstanceSize (..)
-    , P.HasFrequency (..)
-    , P.HasHdds (..)
-    , P.HasHealthCheckInterval (..)
-    , P.HasHealthCheckPath (..)
-    , P.HasHealthCheckPathParser (..)
-    , P.HasHealthCheckTest (..)
-    , P.HasImage (..)
-    , P.HasIp (..)
-    , P.HasIpAddress (..)
-    , P.HasIpType (..)
-    , P.HasLoadbalancerId (..)
-    , P.HasMethod (..)
-    , P.HasMonitoringPolicyId (..)
-    , P.HasName (..)
-    , P.HasNetworkAddress (..)
-    , P.HasNumImages (..)
-    , P.HasOsId (..)
-    , P.HasPassword (..)
-    , P.HasPersistence (..)
-    , P.HasPersistenceTime (..)
-    , P.HasPublicKey (..)
-    , P.HasRam (..)
-    , P.HasReverseDns (..)
-    , P.HasServerId (..)
-    , P.HasServerIds (..)
-    , P.HasSize (..)
-    , P.HasSource (..)
-    , P.HasSshKeyPath (..)
-    , P.HasSshKeyPublic (..)
-    , P.HasStorageServers (..)
-    , P.HasSubnetMask (..)
-    , P.HasType' (..)
-    , P.HasUrl (..)
-    , P.HasVcores (..)
-
-    -- ** Computed Attributes
-    , P.HasComputed*diskSize (..)
-    , P.HasComputed*isMain (..)
-    , P.HasComputedAgent (..)
-    , P.HasComputedCoresPerProcessor (..)
-    , P.HasComputedDatacenter (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDownloadPath (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedFileName (..)
-    , P.HasComputedFirewallPolicyId (..)
-    , P.HasComputedFixedInstanceSize (..)
-    , P.HasComputedFrequency (..)
-    , P.HasComputedHdds (..)
-    , P.HasComputedHealthCheckInterval (..)
-    , P.HasComputedHealthCheckPath (..)
-    , P.HasComputedHealthCheckPathParser (..)
-    , P.HasComputedHealthCheckTest (..)
-    , P.HasComputedImage (..)
-    , P.HasComputedIp (..)
-    , P.HasComputedIpAddress (..)
-    , P.HasComputedIpType (..)
-    , P.HasComputedLoadbalancerId (..)
-    , P.HasComputedMethod (..)
-    , P.HasComputedMonitoringPolicyId (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNetworkAddress (..)
-    , P.HasComputedNumImages (..)
-    , P.HasComputedOsId (..)
-    , P.HasComputedPassword (..)
-    , P.HasComputedPersistence (..)
-    , P.HasComputedPersistenceTime (..)
-    , P.HasComputedPublicKey (..)
-    , P.HasComputedRam (..)
-    , P.HasComputedReverseDns (..)
-    , P.HasComputedServerId (..)
-    , P.HasComputedServerIds (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSource (..)
-    , P.HasComputedSshKeyPath (..)
-    , P.HasComputedSshKeyPublic (..)
-    , P.HasComputedStorageServers (..)
-    , P.HasComputedSubnetMask (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUrl (..)
-    , P.HasComputedVcores (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.OneAndOne.Settings
 
-import Terrafomo.OneAndOne.Types as P
-
+import qualified Data.Hashable                as P
+import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as Map
+import qualified Data.List.NonEmpty           as P
+import qualified Data.Maybe                   as P
+import qualified Data.Monoid                  as P
+import qualified Data.Text                    as P
+import qualified GHC.Generics                 as P
+import qualified Lens.Micro                   as P
+import qualified Prelude                      as P
+import qualified Terrafomo.Attribute          as TF
+import qualified Terrafomo.HCL                as TF
+import qualified Terrafomo.Name               as TF
+import qualified Terrafomo.OneAndOne.Lens     as P
 import qualified Terrafomo.OneAndOne.Provider as P
-import qualified Terrafomo.OneAndOne.Lens as P
-import qualified Data.Text       as P
-import qualified Data.Word       as P
-import qualified GHC.Base        as P
-import qualified Numeric.Natural as P
+import qualified Terrafomo.OneAndOne.Types    as P
+import qualified Terrafomo.Schema             as TF
+import qualified Terrafomo.Validator          as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @oneandone_block_storage@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_block_storage terraform documentation>
+-- for more information.
+data BlockStorageResource s = BlockStorageResource'
+    { _datacenter  :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Required)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _serverId    :: TF.Attr s P.Text
+    -- ^ @server_id@ - (Optional)
+    --
+    , _size        :: TF.Attr s P.Integer
+    -- ^ @size@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @oneandone_block_storage@ OneAndOne resource.
-
-Manages a Block Storage on 1&1
--}
-data BlockStorageResource s = BlockStorageResource {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Location of desired 1and1 datacenter, where the block storage will be created. Can be @DE@ , @GB@ , @US@ or @ES@ -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description for the block storage -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the storage -}
-    , _server_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) ID of the server that the block storage will be attached to -}
-    , _size :: !(TF.Attr s P.Text)
-    {- ^ (Required) Size of the block storage ( @min: 20, max: 500, multipleOf: 10@ ) -}
-    } deriving (Show, Eq)
+blockStorageResource
+    :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Resource P.Provider (BlockStorageResource s)
+blockStorageResource _datacenter _name _size =
+    TF.newResource "oneandone_block_storage" TF.validator $
+        BlockStorageResource'
+            { _datacenter = _datacenter
+            , _description = TF.Nil
+            , _name = _name
+            , _serverId = TF.Nil
+            , _size = _size
+            }
 
 instance TF.IsObject (BlockStorageResource s) where
-    toObject BlockStorageResource{..} = catMaybes
+    toObject BlockStorageResource'{..} = P.catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "server_id" <$> TF.attribute _server_id
+        , TF.assign "server_id" <$> TF.attribute _serverId
         , TF.assign "size" <$> TF.attribute _size
         ]
 
+instance TF.IsValid (BlockStorageResource s) where
+    validator = P.mempty
+
 instance P.HasDatacenter (BlockStorageResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: BlockStorageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: BlockStorageResource s)
+        P.lens (_datacenter :: BlockStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: BlockStorageResource s)
 
 instance P.HasDescription (BlockStorageResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: BlockStorageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: BlockStorageResource s)
+        P.lens (_description :: BlockStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: BlockStorageResource s)
 
 instance P.HasName (BlockStorageResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: BlockStorageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: BlockStorageResource s)
+        P.lens (_name :: BlockStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: BlockStorageResource s)
 
 instance P.HasServerId (BlockStorageResource s) (TF.Attr s P.Text) where
     serverId =
-        lens (_server_id :: BlockStorageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _server_id = a } :: BlockStorageResource s)
+        P.lens (_serverId :: BlockStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverId = a } :: BlockStorageResource s)
 
-instance P.HasSize (BlockStorageResource s) (TF.Attr s P.Text) where
+instance P.HasSize (BlockStorageResource s) (TF.Attr s P.Integer) where
     size =
-        lens (_size :: BlockStorageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: BlockStorageResource s)
+        P.lens (_size :: BlockStorageResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: BlockStorageResource s)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: BlockStorageResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @oneandone_firewall_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_firewall_policy terraform documentation>
+-- for more information.
+data FirewallPolicyResource s = FirewallPolicyResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _rules       :: TF.Attr s [TF.Attr s (Rules s)]
+    -- ^ @rules@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: BlockStorageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: BlockStorageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedServerId (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
-    computedServerId =
-        (_server_id :: BlockStorageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: BlockStorageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-blockStorageResource :: TF.Resource P.OneAndOne (BlockStorageResource s)
-blockStorageResource =
-    TF.newResource "oneandone_block_storage" $
-        BlockStorageResource {
-              _datacenter = TF.Nil
-            , _description = TF.Nil
-            , _name = TF.Nil
-            , _server_id = TF.Nil
-            , _size = TF.Nil
+firewallPolicyResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s (Rules s)] -- ^ @rules@ - 'P.rules'
+    -> TF.Resource P.Provider (FirewallPolicyResource s)
+firewallPolicyResource _name _rules =
+    TF.newResource "oneandone_firewall_policy" TF.validator $
+        FirewallPolicyResource'
+            { _description = TF.Nil
+            , _name = _name
+            , _rules = _rules
             }
 
-{- | The @oneandone_image@ OneAndOne resource.
-
-Manages Images on 1&1
--}
-data ImageResource s = ImageResource {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Country code of the datacenter where the image will be created ( @US@ , @DE@ , @GB@ , and @ES@ ). -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Image description. -}
-    , _frequency :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Creation policy frequency. Frecuency policy is only allowed in default datacenter. ( @ONCE@ , @DAILY@ , @WEEKLY@ ) -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the image. -}
-    , _num_images :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Maximum number of images. Required when image is created with frequency policy. -}
-    , _os_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) ID of the Operating System to import. -}
-    , _server_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Server ID - Required when image @source@ is @server@ . -}
-    , _source :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Source of the new image: @server@ (from an existing server), @image@ (from an imported image) or @iso@ (from an imported iso). -}
-    , _type' :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Type of the ISO to import: @os@ (Operating System) or @app@ (Application). It is required when the source is iso. -}
-    , _url :: !(TF.Attr s P.Text)
-    {- ^ (Optional) URL where the image can be downloaded. It is required when the source is image or iso. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ImageResource s) where
-    toObject ImageResource{..} = catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "frequency" <$> TF.attribute _frequency
+instance TF.IsObject (FirewallPolicyResource s) where
+    toObject FirewallPolicyResource'{..} = P.catMaybes
+        [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "num_images" <$> TF.attribute _num_images
-        , TF.assign "os_id" <$> TF.attribute _os_id
-        , TF.assign "server_id" <$> TF.attribute _server_id
-        , TF.assign "source" <$> TF.attribute _source
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "url" <$> TF.attribute _url
+        , TF.assign "rules" <$> TF.attribute _rules
         ]
 
-instance P.HasDatacenter (ImageResource s) (TF.Attr s P.Text) where
-    datacenter =
-        lens (_datacenter :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: ImageResource s)
+instance TF.IsValid (FirewallPolicyResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rules"
+                  (_rules
+                      :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (Rules s)])
+                  TF.validator
 
-instance P.HasDescription (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (FirewallPolicyResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ImageResource s)
+        P.lens (_description :: FirewallPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: FirewallPolicyResource s)
 
-instance P.HasFrequency (ImageResource s) (TF.Attr s P.Text) where
-    frequency =
-        lens (_frequency :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _frequency = a } :: ImageResource s)
-
-instance P.HasName (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasName (FirewallPolicyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ImageResource s)
+        P.lens (_name :: FirewallPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: FirewallPolicyResource s)
 
-instance P.HasNumImages (ImageResource s) (TF.Attr s P.Text) where
-    numImages =
-        lens (_num_images :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _num_images = a } :: ImageResource s)
+instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (Rules s)]) where
+    rules =
+        P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (Rules s)])
+               (\s a -> s { _rules = a } :: FirewallPolicyResource s)
 
-instance P.HasOsId (ImageResource s) (TF.Attr s P.Text) where
-    osId =
-        lens (_os_id :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _os_id = a } :: ImageResource s)
+-- | @oneandone_image@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_image terraform documentation>
+-- for more information.
+data ImageResource s = ImageResource'
+    { _datacenter  :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'frequency'
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _frequency   :: TF.Attr s P.Text
+    -- ^ @frequency@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'datacenter'
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _numImages   :: TF.Attr s P.Integer
+    -- ^ @num_images@ - (Optional)
+    --
+    , _osId        :: TF.Attr s P.Text
+    -- ^ @os_id@ - (Optional)
+    --
+    , _serverId    :: TF.Attr s P.Text
+    -- ^ @server_id@ - (Optional)
+    --
+    , _source      :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional)
+    --
+    , _type'       :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    , _url         :: TF.Attr s P.Text
+    -- ^ @url@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance P.HasServerId (ImageResource s) (TF.Attr s P.Text) where
-    serverId =
-        lens (_server_id :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _server_id = a } :: ImageResource s)
-
-instance P.HasSource (ImageResource s) (TF.Attr s P.Text) where
-    source =
-        lens (_source :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source = a } :: ImageResource s)
-
-instance P.HasType' (ImageResource s) (TF.Attr s P.Text) where
-    type' =
-        lens (_type' :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: ImageResource s)
-
-instance P.HasUrl (ImageResource s) (TF.Attr s P.Text) where
-    url =
-        lens (_url :: ImageResource s -> TF.Attr s P.Text)
-             (\s a -> s { _url = a } :: ImageResource s)
-
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFrequency (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedFrequency =
-        (_frequency :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNumImages (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedNumImages =
-        (_num_images :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOsId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedOsId =
-        (_os_id :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedServerId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedServerId =
-        (_server_id :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedSource =
-        (_source :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedUrl =
-        (_url :: ImageResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-imageResource :: TF.Resource P.OneAndOne (ImageResource s)
-imageResource =
-    TF.newResource "oneandone_image" $
-        ImageResource {
-              _datacenter = TF.Nil
+imageResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (ImageResource s)
+imageResource _name =
+    TF.newResource "oneandone_image" TF.validator $
+        ImageResource'
+            { _datacenter = TF.Nil
             , _description = TF.Nil
             , _frequency = TF.Nil
-            , _name = TF.Nil
-            , _num_images = TF.Nil
-            , _os_id = TF.Nil
-            , _server_id = TF.Nil
+            , _name = _name
+            , _numImages = TF.Nil
+            , _osId = TF.Nil
+            , _serverId = TF.Nil
             , _source = TF.Nil
             , _type' = TF.Nil
             , _url = TF.Nil
             }
 
-{- | The @oneandone_instance_size@ OneAndOne resource.
-
-Fetches a predefined instance type for 1&1 servers
--}
-data InstanceSizeResource s = InstanceSizeResource {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ -(Optional) Number of cores per processor -}
-    , _ram :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Size of ram in GB -}
-    , _vcores :: !(TF.Attr s P.Text)
-    {- ^ (Optional)  Number of vcores -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (InstanceSizeResource s) where
-    toObject InstanceSizeResource{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "ram" <$> TF.attribute _ram
-        , TF.assign "vcores" <$> TF.attribute _vcores
-        ]
-
-instance P.HasName (InstanceSizeResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: InstanceSizeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: InstanceSizeResource s)
-
-instance P.HasRam (InstanceSizeResource s) (TF.Attr s P.Text) where
-    ram =
-        lens (_ram :: InstanceSizeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ram = a } :: InstanceSizeResource s)
-
-instance P.HasVcores (InstanceSizeResource s) (TF.Attr s P.Text) where
-    vcores =
-        lens (_vcores :: InstanceSizeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vcores = a } :: InstanceSizeResource s)
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (InstanceSizeResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: InstanceSizeResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRam (TF.Ref s' (InstanceSizeResource s)) (TF.Attr s P.Text) where
-    computedRam =
-        (_ram :: InstanceSizeResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVcores (TF.Ref s' (InstanceSizeResource s)) (TF.Attr s P.Text) where
-    computedVcores =
-        (_vcores :: InstanceSizeResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instanceSizeResource :: TF.Resource P.OneAndOne (InstanceSizeResource s)
-instanceSizeResource =
-    TF.newResource "oneandone_instance_size" $
-        InstanceSizeResource {
-              _name = TF.Nil
-            , _ram = TF.Nil
-            , _vcores = TF.Nil
-            }
-
-{- | The @oneandone_ip@ OneAndOne resource.
-
-Manages a Public IP on 1&1
--}
-data IpResource s = IpResource {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _ip_address :: !(TF.Attr s P.Text)
-    {- ^ - (Computed) The IP address. -}
-    , _ip_type :: !(TF.Attr s P.Text)
-    {- ^ (Required) IP type. Can be @IPV4@ or @IPV6@ -}
-    , _reverse_dns :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (IpResource s) where
-    toObject IpResource{..} = catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "ip_address" <$> TF.attribute _ip_address
-        , TF.assign "ip_type" <$> TF.attribute _ip_type
-        , TF.assign "reverse_dns" <$> TF.attribute _reverse_dns
-        ]
-
-instance P.HasDatacenter (IpResource s) (TF.Attr s P.Text) where
-    datacenter =
-        lens (_datacenter :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: IpResource s)
-
-instance P.HasIpAddress (IpResource s) (TF.Attr s P.Text) where
-    ipAddress =
-        lens (_ip_address :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_address = a } :: IpResource s)
-
-instance P.HasIpType (IpResource s) (TF.Attr s P.Text) where
-    ipType =
-        lens (_ip_type :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_type = a } :: IpResource s)
-
-instance P.HasReverseDns (IpResource s) (TF.Attr s P.Text) where
-    reverseDns =
-        lens (_reverse_dns :: IpResource s -> TF.Attr s P.Text)
-             (\s a -> s { _reverse_dns = a } :: IpResource s)
-
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: IpResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress =
-        (_ip_address :: IpResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpType (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedIpType =
-        (_ip_type :: IpResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedReverseDns (TF.Ref s' (IpResource s)) (TF.Attr s P.Text) where
-    computedReverseDns =
-        (_reverse_dns :: IpResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-ipResource :: TF.Resource P.OneAndOne (IpResource s)
-ipResource =
-    TF.newResource "oneandone_ip" $
-        IpResource {
-              _datacenter = TF.Nil
-            , _ip_address = TF.Nil
-            , _ip_type = TF.Nil
-            , _reverse_dns = TF.Nil
-            }
-
-{- | The @oneandone_server@ OneAndOne resource.
-
-Manages a Load Balancer on 1&1
--}
-data ServerResource s = ServerResource {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description for the load balancer -}
-    , _health_check_interval :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    , _health_check_path :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    , _health_check_path_parser :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    , _health_check_test :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Can be @TCP@ or @ICMP@ . -}
-    , _method :: !(TF.Attr s P.Text)
-    {- ^ (Required)  Balancing procedure Can be @ROUND_ROBIN@ or @LEAST_CONNECTIONS@ -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the load balancer. -}
-    , _persistence :: !(TF.Attr s P.Text)
-    {- ^ (Optional) True/false defines whether persistence should be turned on/off -}
-    , _persistence_time :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Persistence duration in seconds -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ServerResource s) where
-    toObject ServerResource{..} = catMaybes
+instance TF.IsObject (ImageResource s) where
+    toObject ImageResource'{..} = P.catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "health_check_interval" <$> TF.attribute _health_check_interval
-        , TF.assign "health_check_path" <$> TF.attribute _health_check_path
-        , TF.assign "health_check_path_parser" <$> TF.attribute _health_check_path_parser
-        , TF.assign "health_check_test" <$> TF.attribute _health_check_test
+        , TF.assign "frequency" <$> TF.attribute _frequency
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "num_images" <$> TF.attribute _numImages
+        , TF.assign "os_id" <$> TF.attribute _osId
+        , TF.assign "server_id" <$> TF.attribute _serverId
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "url" <$> TF.attribute _url
+        ]
+
+instance TF.IsValid (ImageResource s) where
+    validator = TF.fieldsValidator (\ImageResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_datacenter P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_datacenter",
+                            [ "_frequency"
+                            ])
+        , if (_frequency P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_frequency",
+                            [ "_datacenter"
+                            ])
+        ])
+
+instance P.HasDatacenter (ImageResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: ImageResource s)
+
+instance P.HasDescription (ImageResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ImageResource s)
+
+instance P.HasFrequency (ImageResource s) (TF.Attr s P.Text) where
+    frequency =
+        P.lens (_frequency :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _frequency = a } :: ImageResource s)
+
+instance P.HasName (ImageResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ImageResource s)
+
+instance P.HasNumImages (ImageResource s) (TF.Attr s P.Integer) where
+    numImages =
+        P.lens (_numImages :: ImageResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _numImages = a } :: ImageResource s)
+
+instance P.HasOsId (ImageResource s) (TF.Attr s P.Text) where
+    osId =
+        P.lens (_osId :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _osId = a } :: ImageResource s)
+
+instance P.HasServerId (ImageResource s) (TF.Attr s P.Text) where
+    serverId =
+        P.lens (_serverId :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serverId = a } :: ImageResource s)
+
+instance P.HasSource (ImageResource s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: ImageResource s)
+
+instance P.HasType' (ImageResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ImageResource s)
+
+instance P.HasUrl (ImageResource s) (TF.Attr s P.Text) where
+    url =
+        P.lens (_url :: ImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: ImageResource s)
+
+-- | @oneandone_loadbalancer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_loadbalancer terraform documentation>
+-- for more information.
+data LoadbalancerResource s = LoadbalancerResource'
+    { _datacenter            :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _description           :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _healthCheckInterval   :: TF.Attr s P.Integer
+    -- ^ @health_check_interval@ - (Optional)
+    --
+    , _healthCheckPath       :: TF.Attr s P.Text
+    -- ^ @health_check_path@ - (Optional)
+    --
+    , _healthCheckPathParser :: TF.Attr s P.Text
+    -- ^ @health_check_path_parser@ - (Optional)
+    --
+    , _healthCheckTest       :: TF.Attr s P.Text
+    -- ^ @health_check_test@ - (Optional)
+    --
+    , _method                :: TF.Attr s P.Text
+    -- ^ @method@ - (Required)
+    --
+    , _name                  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _persistence           :: TF.Attr s P.Bool
+    -- ^ @persistence@ - (Optional)
+    --
+    , _persistenceTime       :: TF.Attr s P.Integer
+    -- ^ @persistence_time@ - (Optional)
+    --
+    , _rules                 :: TF.Attr s [TF.Attr s (Rules s)]
+    -- ^ @rules@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+loadbalancerResource
+    :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s (Rules s)] -- ^ @rules@ - 'P.rules'
+    -> TF.Resource P.Provider (LoadbalancerResource s)
+loadbalancerResource _method _name _rules =
+    TF.newResource "oneandone_loadbalancer" TF.validator $
+        LoadbalancerResource'
+            { _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _healthCheckInterval = TF.Nil
+            , _healthCheckPath = TF.Nil
+            , _healthCheckPathParser = TF.Nil
+            , _healthCheckTest = TF.Nil
+            , _method = _method
+            , _name = _name
+            , _persistence = TF.Nil
+            , _persistenceTime = TF.Nil
+            , _rules = _rules
+            }
+
+instance TF.IsObject (LoadbalancerResource s) where
+    toObject LoadbalancerResource'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "health_check_interval" <$> TF.attribute _healthCheckInterval
+        , TF.assign "health_check_path" <$> TF.attribute _healthCheckPath
+        , TF.assign "health_check_path_parser" <$> TF.attribute _healthCheckPathParser
+        , TF.assign "health_check_test" <$> TF.attribute _healthCheckTest
         , TF.assign "method" <$> TF.attribute _method
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "persistence" <$> TF.attribute _persistence
-        , TF.assign "persistence_time" <$> TF.attribute _persistence_time
+        , TF.assign "persistence_time" <$> TF.attribute _persistenceTime
+        , TF.assign "rules" <$> TF.attribute _rules
         ]
+
+instance TF.IsValid (LoadbalancerResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rules"
+                  (_rules
+                      :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (Rules s)])
+                  TF.validator
+
+instance P.HasDatacenter (LoadbalancerResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: LoadbalancerResource s)
+
+instance P.HasDescription (LoadbalancerResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: LoadbalancerResource s)
+
+instance P.HasHealthCheckInterval (LoadbalancerResource s) (TF.Attr s P.Integer) where
+    healthCheckInterval =
+        P.lens (_healthCheckInterval :: LoadbalancerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _healthCheckInterval = a } :: LoadbalancerResource s)
+
+instance P.HasHealthCheckPath (LoadbalancerResource s) (TF.Attr s P.Text) where
+    healthCheckPath =
+        P.lens (_healthCheckPath :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _healthCheckPath = a } :: LoadbalancerResource s)
+
+instance P.HasHealthCheckPathParser (LoadbalancerResource s) (TF.Attr s P.Text) where
+    healthCheckPathParser =
+        P.lens (_healthCheckPathParser :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _healthCheckPathParser = a } :: LoadbalancerResource s)
+
+instance P.HasHealthCheckTest (LoadbalancerResource s) (TF.Attr s P.Text) where
+    healthCheckTest =
+        P.lens (_healthCheckTest :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _healthCheckTest = a } :: LoadbalancerResource s)
+
+instance P.HasMethod (LoadbalancerResource s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: LoadbalancerResource s)
+
+instance P.HasName (LoadbalancerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LoadbalancerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoadbalancerResource s)
+
+instance P.HasPersistence (LoadbalancerResource s) (TF.Attr s P.Bool) where
+    persistence =
+        P.lens (_persistence :: LoadbalancerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _persistence = a } :: LoadbalancerResource s)
+
+instance P.HasPersistenceTime (LoadbalancerResource s) (TF.Attr s P.Integer) where
+    persistenceTime =
+        P.lens (_persistenceTime :: LoadbalancerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _persistenceTime = a } :: LoadbalancerResource s)
+
+instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (Rules s)]) where
+    rules =
+        P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (Rules s)])
+               (\s a -> s { _rules = a } :: LoadbalancerResource s)
+
+-- | @oneandone_monitoring_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_monitoring_policy terraform documentation>
+-- for more information.
+data MonitoringPolicyResource s = MonitoringPolicyResource'
+    { _agent       :: TF.Attr s P.Bool
+    -- ^ @agent@ - (Required)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _email       :: TF.Attr s P.Text
+    -- ^ @email@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _ports       :: TF.Attr s [TF.Attr s (Ports s)]
+    -- ^ @ports@ - (Optional)
+    --
+    , _processes   :: TF.Attr s [TF.Attr s (Processes s)]
+    -- ^ @processes@ - (Optional)
+    --
+    , _thresholds  :: TF.Attr s [TF.Attr s (Thresholds s)]
+    -- ^ @thresholds@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+monitoringPolicyResource
+    :: TF.Attr s P.Bool -- ^ @agent@ - 'P.agent'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s (Thresholds s)] -- ^ @thresholds@ - 'P.thresholds'
+    -> TF.Resource P.Provider (MonitoringPolicyResource s)
+monitoringPolicyResource _agent _name _thresholds =
+    TF.newResource "oneandone_monitoring_policy" TF.validator $
+        MonitoringPolicyResource'
+            { _agent = _agent
+            , _description = TF.Nil
+            , _email = TF.Nil
+            , _name = _name
+            , _ports = TF.Nil
+            , _processes = TF.Nil
+            , _thresholds = _thresholds
+            }
+
+instance TF.IsObject (MonitoringPolicyResource s) where
+    toObject MonitoringPolicyResource'{..} = P.catMaybes
+        [ TF.assign "agent" <$> TF.attribute _agent
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "email" <$> TF.attribute _email
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "processes" <$> TF.attribute _processes
+        , TF.assign "thresholds" <$> TF.attribute _thresholds
+        ]
+
+instance TF.IsValid (MonitoringPolicyResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_ports"
+                  (_ports
+                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Ports s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_processes"
+                  (_processes
+                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Processes s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_thresholds"
+                  (_thresholds
+                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Thresholds s)])
+                  TF.validator
+
+instance P.HasAgent (MonitoringPolicyResource s) (TF.Attr s P.Bool) where
+    agent =
+        P.lens (_agent :: MonitoringPolicyResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _agent = a } :: MonitoringPolicyResource s)
+
+instance P.HasDescription (MonitoringPolicyResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: MonitoringPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: MonitoringPolicyResource s)
+
+instance P.HasEmail (MonitoringPolicyResource s) (TF.Attr s P.Text) where
+    email =
+        P.lens (_email :: MonitoringPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: MonitoringPolicyResource s)
+
+instance P.HasName (MonitoringPolicyResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: MonitoringPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: MonitoringPolicyResource s)
+
+instance P.HasPorts (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Ports s)]) where
+    ports =
+        P.lens (_ports :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Ports s)])
+               (\s a -> s { _ports = a } :: MonitoringPolicyResource s)
+
+instance P.HasProcesses (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Processes s)]) where
+    processes =
+        P.lens (_processes :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Processes s)])
+               (\s a -> s { _processes = a } :: MonitoringPolicyResource s)
+
+instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Thresholds s)]) where
+    thresholds =
+        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Thresholds s)])
+               (\s a -> s { _thresholds = a } :: MonitoringPolicyResource s)
+
+-- | @oneandone_private_network@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_private_network terraform documentation>
+-- for more information.
+data PrivateNetworkResource s = PrivateNetworkResource'
+    { _datacenter     :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _description    :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _networkAddress :: TF.Attr s P.Text
+    -- ^ @network_address@ - (Optional)
+    --
+    , _serverIds      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @server_ids@ - (Optional)
+    --
+    , _subnetMask     :: TF.Attr s P.Text
+    -- ^ @subnet_mask@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+privateNetworkResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (PrivateNetworkResource s)
+privateNetworkResource _name =
+    TF.newResource "oneandone_private_network" TF.validator $
+        PrivateNetworkResource'
+            { _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _name = _name
+            , _networkAddress = TF.Nil
+            , _serverIds = TF.Nil
+            , _subnetMask = TF.Nil
+            }
+
+instance TF.IsObject (PrivateNetworkResource s) where
+    toObject PrivateNetworkResource'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_address" <$> TF.attribute _networkAddress
+        , TF.assign "server_ids" <$> TF.attribute _serverIds
+        , TF.assign "subnet_mask" <$> TF.attribute _subnetMask
+        ]
+
+instance TF.IsValid (PrivateNetworkResource s) where
+    validator = P.mempty
+
+instance P.HasDatacenter (PrivateNetworkResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: PrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: PrivateNetworkResource s)
+
+instance P.HasDescription (PrivateNetworkResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: PrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: PrivateNetworkResource s)
+
+instance P.HasName (PrivateNetworkResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PrivateNetworkResource s)
+
+instance P.HasNetworkAddress (PrivateNetworkResource s) (TF.Attr s P.Text) where
+    networkAddress =
+        P.lens (_networkAddress :: PrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkAddress = a } :: PrivateNetworkResource s)
+
+instance P.HasServerIds (PrivateNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    serverIds =
+        P.lens (_serverIds :: PrivateNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _serverIds = a } :: PrivateNetworkResource s)
+
+instance P.HasSubnetMask (PrivateNetworkResource s) (TF.Attr s P.Text) where
+    subnetMask =
+        P.lens (_subnetMask :: PrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetMask = a } :: PrivateNetworkResource s)
+
+-- | @oneandone_public_ip@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_public_ip terraform documentation>
+-- for more information.
+data PublicIpResource s = PublicIpResource'
+    { _datacenter :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _ipType     :: TF.Attr s P.Text
+    -- ^ @ip_type@ - (Required)
+    --
+    , _reverseDns :: TF.Attr s P.Text
+    -- ^ @reverse_dns@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+publicIpResource
+    :: TF.Attr s P.Text -- ^ @ip_type@ - 'P.ipType'
+    -> TF.Resource P.Provider (PublicIpResource s)
+publicIpResource _ipType =
+    TF.newResource "oneandone_public_ip" TF.validator $
+        PublicIpResource'
+            { _datacenter = TF.Nil
+            , _ipType = _ipType
+            , _reverseDns = TF.Nil
+            }
+
+instance TF.IsObject (PublicIpResource s) where
+    toObject PublicIpResource'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "ip_type" <$> TF.attribute _ipType
+        , TF.assign "reverse_dns" <$> TF.attribute _reverseDns
+        ]
+
+instance TF.IsValid (PublicIpResource s) where
+    validator = P.mempty
+
+instance P.HasDatacenter (PublicIpResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: PublicIpResource s)
+
+instance P.HasIpType (PublicIpResource s) (TF.Attr s P.Text) where
+    ipType =
+        P.lens (_ipType :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipType = a } :: PublicIpResource s)
+
+instance P.HasReverseDns (PublicIpResource s) (TF.Attr s P.Text) where
+    reverseDns =
+        P.lens (_reverseDns :: PublicIpResource s -> TF.Attr s P.Text)
+               (\s a -> s { _reverseDns = a } :: PublicIpResource s)
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+
+-- | @oneandone_server@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_server terraform documentation>
+-- for more information.
+data ServerResource s = ServerResource'
+    { _coresPerProcessor  :: TF.Attr s P.Integer
+    -- ^ @cores_per_processor@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'fixedInstanceSize'
+    , _datacenter         :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _description        :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _firewallPolicyId   :: TF.Attr s P.Text
+    -- ^ @firewall_policy_id@ - (Optional)
+    --
+    , _fixedInstanceSize  :: TF.Attr s P.Text
+    -- ^ @fixed_instance_size@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'vcores'
+    -- * 'hdds'
+    -- * 'ram'
+    -- * 'coresPerProcessor'
+    , _hdds               :: TF.Attr s [TF.Attr s (Hdds s)]
+    -- ^ @hdds@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'fixedInstanceSize'
+    , _image              :: TF.Attr s P.Text
+    -- ^ @image@ - (Required)
+    --
+    , _ip                 :: TF.Attr s P.Text
+    -- ^ @ip@ - (Optional)
+    --
+    , _loadbalancerId     :: TF.Attr s P.Text
+    -- ^ @loadbalancer_id@ - (Optional)
+    --
+    , _monitoringPolicyId :: TF.Attr s P.Text
+    -- ^ @monitoring_policy_id@ - (Optional)
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _ram                :: TF.Attr s P.Double
+    -- ^ @ram@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'fixedInstanceSize'
+    , _sshKeyPath         :: TF.Attr s P.Text
+    -- ^ @ssh_key_path@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sshKeyPublic'
+    , _sshKeyPublic       :: TF.Attr s P.Text
+    -- ^ @ssh_key_public@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sshKeyPath'
+    , _vcores             :: TF.Attr s P.Integer
+    -- ^ @vcores@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'fixedInstanceSize'
+    } deriving (P.Show, P.Eq, P.Generic)
+
+serverResource
+    :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (ServerResource s)
+serverResource _image _name =
+    TF.newResource "oneandone_server" TF.validator $
+        ServerResource'
+            { _coresPerProcessor = TF.Nil
+            , _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _firewallPolicyId = TF.Nil
+            , _fixedInstanceSize = TF.Nil
+            , _hdds = TF.Nil
+            , _image = _image
+            , _ip = TF.Nil
+            , _loadbalancerId = TF.Nil
+            , _monitoringPolicyId = TF.Nil
+            , _name = _name
+            , _ram = TF.Nil
+            , _sshKeyPath = TF.Nil
+            , _sshKeyPublic = TF.Nil
+            , _vcores = TF.Nil
+            }
+
+instance TF.IsObject (ServerResource s) where
+    toObject ServerResource'{..} = P.catMaybes
+        [ TF.assign "cores_per_processor" <$> TF.attribute _coresPerProcessor
+        , TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "firewall_policy_id" <$> TF.attribute _firewallPolicyId
+        , TF.assign "fixed_instance_size" <$> TF.attribute _fixedInstanceSize
+        , TF.assign "hdds" <$> TF.attribute _hdds
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "ip" <$> TF.attribute _ip
+        , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
+        , TF.assign "monitoring_policy_id" <$> TF.attribute _monitoringPolicyId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "ssh_key_path" <$> TF.attribute _sshKeyPath
+        , TF.assign "ssh_key_public" <$> TF.attribute _sshKeyPublic
+        , TF.assign "vcores" <$> TF.attribute _vcores
+        ]
+
+instance TF.IsValid (ServerResource s) where
+    validator = TF.fieldsValidator (\ServerResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_coresPerProcessor P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_coresPerProcessor",
+                            [ "_fixedInstanceSize"
+                            ])
+        , if (_fixedInstanceSize P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_fixedInstanceSize",
+                            [ "_vcores"                            , "_hdds"                            , "_ram"                            , "_coresPerProcessor"
+                            ])
+        , if (_hdds P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_hdds",
+                            [ "_fixedInstanceSize"
+                            ])
+        , if (_ram P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ram",
+                            [ "_fixedInstanceSize"
+                            ])
+        , if (_sshKeyPath P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sshKeyPath",
+                            [ "_sshKeyPublic"
+                            ])
+        , if (_sshKeyPublic P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sshKeyPublic",
+                            [ "_sshKeyPath"
+                            ])
+        , if (_vcores P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_vcores",
+                            [ "_fixedInstanceSize"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_hdds"
+                  (_hdds
+                      :: ServerResource s -> TF.Attr s [TF.Attr s (Hdds s)])
+                  TF.validator
+
+instance P.HasCoresPerProcessor (ServerResource s) (TF.Attr s P.Integer) where
+    coresPerProcessor =
+        P.lens (_coresPerProcessor :: ServerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _coresPerProcessor = a } :: ServerResource s)
 
 instance P.HasDatacenter (ServerResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: ServerResource s)
+        P.lens (_datacenter :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: ServerResource s)
 
 instance P.HasDescription (ServerResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ServerResource s)
+        P.lens (_description :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ServerResource s)
 
-instance P.HasHealthCheckInterval (ServerResource s) (TF.Attr s P.Text) where
-    healthCheckInterval =
-        lens (_health_check_interval :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_interval = a } :: ServerResource s)
+instance P.HasFirewallPolicyId (ServerResource s) (TF.Attr s P.Text) where
+    firewallPolicyId =
+        P.lens (_firewallPolicyId :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _firewallPolicyId = a } :: ServerResource s)
 
-instance P.HasHealthCheckPath (ServerResource s) (TF.Attr s P.Text) where
-    healthCheckPath =
-        lens (_health_check_path :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_path = a } :: ServerResource s)
+instance P.HasFixedInstanceSize (ServerResource s) (TF.Attr s P.Text) where
+    fixedInstanceSize =
+        P.lens (_fixedInstanceSize :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _fixedInstanceSize = a } :: ServerResource s)
 
-instance P.HasHealthCheckPathParser (ServerResource s) (TF.Attr s P.Text) where
-    healthCheckPathParser =
-        lens (_health_check_path_parser :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_path_parser = a } :: ServerResource s)
+instance P.HasHdds (ServerResource s) (TF.Attr s [TF.Attr s (Hdds s)]) where
+    hdds =
+        P.lens (_hdds :: ServerResource s -> TF.Attr s [TF.Attr s (Hdds s)])
+               (\s a -> s { _hdds = a } :: ServerResource s)
 
-instance P.HasHealthCheckTest (ServerResource s) (TF.Attr s P.Text) where
-    healthCheckTest =
-        lens (_health_check_test :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_test = a } :: ServerResource s)
+instance P.HasImage (ServerResource s) (TF.Attr s P.Text) where
+    image =
+        P.lens (_image :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _image = a } :: ServerResource s)
 
-instance P.HasMethod (ServerResource s) (TF.Attr s P.Text) where
-    method =
-        lens (_method :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _method = a } :: ServerResource s)
+instance P.HasIp (ServerResource s) (TF.Attr s P.Text) where
+    ip =
+        P.lens (_ip :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: ServerResource s)
+
+instance P.HasLoadbalancerId (ServerResource s) (TF.Attr s P.Text) where
+    loadbalancerId =
+        P.lens (_loadbalancerId :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _loadbalancerId = a } :: ServerResource s)
+
+instance P.HasMonitoringPolicyId (ServerResource s) (TF.Attr s P.Text) where
+    monitoringPolicyId =
+        P.lens (_monitoringPolicyId :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _monitoringPolicyId = a } :: ServerResource s)
 
 instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ServerResource s)
+        P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasPersistence (ServerResource s) (TF.Attr s P.Text) where
-    persistence =
-        lens (_persistence :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _persistence = a } :: ServerResource s)
+instance P.HasRam (ServerResource s) (TF.Attr s P.Double) where
+    ram =
+        P.lens (_ram :: ServerResource s -> TF.Attr s P.Double)
+               (\s a -> s { _ram = a } :: ServerResource s)
 
-instance P.HasPersistenceTime (ServerResource s) (TF.Attr s P.Text) where
-    persistenceTime =
-        lens (_persistence_time :: ServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _persistence_time = a } :: ServerResource s)
+instance P.HasSshKeyPath (ServerResource s) (TF.Attr s P.Text) where
+    sshKeyPath =
+        P.lens (_sshKeyPath :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sshKeyPath = a } :: ServerResource s)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasSshKeyPublic (ServerResource s) (TF.Attr s P.Text) where
+    sshKeyPublic =
+        P.lens (_sshKeyPublic :: ServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sshKeyPublic = a } :: ServerResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasVcores (ServerResource s) (TF.Attr s P.Integer) where
+    vcores =
+        P.lens (_vcores :: ServerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _vcores = a } :: ServerResource s)
 
-instance s ~ s' => P.HasComputedHealthCheckInterval (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckInterval =
-        (_health_check_interval :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (Ips s)]) where
+    computedIps x = TF.compute (TF.refKey x) "_computedIps"
 
-instance s ~ s' => P.HasComputedHealthCheckPath (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckPath =
-        (_health_check_path :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
-instance s ~ s' => P.HasComputedHealthCheckPathParser (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckPathParser =
-        (_health_check_path_parser :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @oneandone_shared_storage@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_shared_storage terraform documentation>
+-- for more information.
+data SharedStorageResource s = SharedStorageResource'
+    { _datacenter     :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Required)
+    --
+    , _description    :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _size           :: TF.Attr s P.Integer
+    -- ^ @size@ - (Required)
+    --
+    , _storageServers :: TF.Attr s [TF.Attr s (StorageServers s)]
+    -- ^ @storage_servers@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedHealthCheckTest (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckTest =
-        (_health_check_test :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMethod (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedMethod =
-        (_method :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPersistence (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPersistence =
-        (_persistence :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPersistenceTime (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPersistenceTime =
-        (_persistence_time :: ServerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-serverResource :: TF.Resource P.OneAndOne (ServerResource s)
-serverResource =
-    TF.newResource "oneandone_server" $
-        ServerResource {
-              _datacenter = TF.Nil
+sharedStorageResource
+    :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Resource P.Provider (SharedStorageResource s)
+sharedStorageResource _datacenter _name _size =
+    TF.newResource "oneandone_shared_storage" TF.validator $
+        SharedStorageResource'
+            { _datacenter = _datacenter
             , _description = TF.Nil
-            , _health_check_interval = TF.Nil
-            , _health_check_path = TF.Nil
-            , _health_check_path_parser = TF.Nil
-            , _health_check_test = TF.Nil
-            , _method = TF.Nil
-            , _name = TF.Nil
-            , _persistence = TF.Nil
-            , _persistence_time = TF.Nil
+            , _name = _name
+            , _size = _size
+            , _storageServers = TF.Nil
             }
 
-{- | The @oneandone_ssh_key@ OneAndOne resource.
+instance TF.IsObject (SharedStorageResource s) where
+    toObject SharedStorageResource'{..} = P.catMaybes
+        [ TF.assign "datacenter" <$> TF.attribute _datacenter
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "storage_servers" <$> TF.attribute _storageServers
+        ]
 
-Manages SSH Keys on 1&1
--}
-data SshKeyResource s = SshKeyResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description for the ssh key -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the storage -}
-    , _public_key :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Public key to import. If not given, new SSH key pair will be created and the private key is returned in the response -}
-    } deriving (Show, Eq)
+instance TF.IsValid (SharedStorageResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_storageServers"
+                  (_storageServers
+                      :: SharedStorageResource s -> TF.Attr s [TF.Attr s (StorageServers s)])
+                  TF.validator
+
+instance P.HasDatacenter (SharedStorageResource s) (TF.Attr s P.Text) where
+    datacenter =
+        P.lens (_datacenter :: SharedStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: SharedStorageResource s)
+
+instance P.HasDescription (SharedStorageResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: SharedStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: SharedStorageResource s)
+
+instance P.HasName (SharedStorageResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SharedStorageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SharedStorageResource s)
+
+instance P.HasSize (SharedStorageResource s) (TF.Attr s P.Integer) where
+    size =
+        P.lens (_size :: SharedStorageResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: SharedStorageResource s)
+
+instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (StorageServers s)]) where
+    storageServers =
+        P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (StorageServers s)])
+               (\s a -> s { _storageServers = a } :: SharedStorageResource s)
+
+-- | @oneandone_ssh_key@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_ssh_key terraform documentation>
+-- for more information.
+data SshKeyResource s = SshKeyResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+sshKeyResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (SshKeyResource s)
+sshKeyResource _name =
+    TF.newResource "oneandone_ssh_key" TF.validator $
+        SshKeyResource'
+            { _description = TF.Nil
+            , _name = _name
+            }
 
 instance TF.IsObject (SshKeyResource s) where
-    toObject SshKeyResource{..} = catMaybes
+    toObject SshKeyResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "public_key" <$> TF.attribute _public_key
         ]
+
+instance TF.IsValid (SshKeyResource s) where
+    validator = P.mempty
 
 instance P.HasDescription (SshKeyResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: SshKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: SshKeyResource s)
+        P.lens (_description :: SshKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: SshKeyResource s)
 
 instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SshKeyResource s)
+        P.lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SshKeyResource s)
 
-instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
-    publicKey =
-        lens (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
-             (\s a -> s { _public_key = a } :: SshKeyResource s)
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: SshKeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SshKeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
+    computedMd5 x = TF.compute (TF.refKey x) "_computedMd5"
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey =
-        (_public_key :: SshKeyResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
 
-sshKeyResource :: TF.Resource P.OneAndOne (SshKeyResource s)
-sshKeyResource =
-    TF.newResource "oneandone_ssh_key" $
-        SshKeyResource {
-              _description = TF.Nil
-            , _name = TF.Nil
-            , _public_key = TF.Nil
+instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [TF.Attr s (Servers s)]) where
+    computedServers x = TF.compute (TF.refKey x) "_computedServers"
+
+-- | @oneandone_vpn@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_vpn terraform documentation>
+-- for more information.
+data VpnResource s = VpnResource'
+    { _datacenter  :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+vpnResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (VpnResource s)
+vpnResource _name =
+    TF.newResource "oneandone_vpn" TF.validator $
+        VpnResource'
+            { _datacenter = TF.Nil
+            , _description = TF.Nil
+            , _name = _name
             }
 
-{- | The @oneandone_vpn@ OneAndOne resource.
-
-Manages a VPN on 1&1
--}
-data VpnResource s = VpnResource {
-      _datacenter :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Location of desired 1and1 datacenter. Can be @DE@ , @GB@ , @US@ or @ES@ . -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    , _download_path :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    , _file_name :: !(TF.Attr s P.Text)
-    {- ^ (Optional) -}
-    , _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VPN -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VpnResource s) where
-    toObject VpnResource{..} = catMaybes
+    toObject VpnResource'{..} = P.catMaybes
         [ TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "download_path" <$> TF.attribute _download_path
-        , TF.assign "file_name" <$> TF.attribute _file_name
         , TF.assign "name" <$> TF.attribute _name
         ]
 
+instance TF.IsValid (VpnResource s) where
+    validator = P.mempty
+
 instance P.HasDatacenter (VpnResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: VpnResource s)
+        P.lens (_datacenter :: VpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: VpnResource s)
 
 instance P.HasDescription (VpnResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: VpnResource s)
-
-instance P.HasDownloadPath (VpnResource s) (TF.Attr s P.Text) where
-    downloadPath =
-        lens (_download_path :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _download_path = a } :: VpnResource s)
-
-instance P.HasFileName (VpnResource s) (TF.Attr s P.Text) where
-    fileName =
-        lens (_file_name :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _file_name = a } :: VpnResource s)
+        P.lens (_description :: VpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: VpnResource s)
 
 instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VpnResource s)
-
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: VpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: VpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_name :: VpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VpnResource s)
 
 instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDownloadPath =
-        (_download_path :: VpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedDownloadPath x = TF.compute (TF.refKey x) "_computedDownloadPath"
 
 instance s ~ s' => P.HasComputedFileName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedFileName =
-        (_file_name :: VpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-vpnResource :: TF.Resource P.OneAndOne (VpnResource s)
-vpnResource =
-    TF.newResource "oneandone_vpn" $
-        VpnResource {
-              _datacenter = TF.Nil
-            , _description = TF.Nil
-            , _download_path = TF.Nil
-            , _file_name = TF.Nil
-            , _name = TF.Nil
-            }
+    computedFileName x = TF.compute (TF.refKey x) "_computedFileName"

@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,71 +17,79 @@
 --
 module Terrafomo.PowerDNS.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** powerdns_record
       RecordResource (..)
     , recordResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasName (..)
-    , P.HasRecords (..)
-    , P.HasTtl (..)
-    , P.HasType' (..)
-    , P.HasZone (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedName (..)
-    , P.HasComputedRecords (..)
-    , P.HasComputedTtl (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedZone (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.PowerDNS.Settings
 
-import Terrafomo.PowerDNS.Types as P
-
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
+import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
-import qualified Data.Word                   as P
-import qualified GHC.Base                    as P
-import qualified Numeric.Natural             as P
+import qualified GHC.Generics                as P
+import qualified Lens.Micro                  as P
+import qualified Prelude                     as P
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.PowerDNS.Lens     as P
 import qualified Terrafomo.PowerDNS.Provider as P
+import qualified Terrafomo.PowerDNS.Types    as P
+import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @powerdns_record@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/PowerDNS/powerdns_record terraform documentation>
+-- for more information.
+data RecordResource s = RecordResource'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _records :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @records@ - (Required)
+    --
+    , _ttl     :: TF.Attr s P.Integer
+    -- ^ @ttl@ - (Required)
+    --
+    , _type'   :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _zone    :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @powerdns_record@ PowerDNS resource.
-
-Provides a PowerDNS record resource.
--}
-data RecordResource s = RecordResource {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the record. -}
-    , _records :: !(TF.Attr s P.Text)
-    {- ^ (Required) A string list of records. -}
-    , _ttl     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The TTL of the record. -}
-    , _type'   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The record type. -}
-    , _zone    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of zone to contain this record. -}
-    } deriving (Show, Eq)
+recordResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @records@ - 'P.records'
+    -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (RecordResource s)
+recordResource _name _records _ttl _type' _zone =
+    TF.newResource "powerdns_record" TF.validator $
+        RecordResource'
+            { _name = _name
+            , _records = _records
+            , _ttl = _ttl
+            , _type' = _type'
+            , _zone = _zone
+            }
 
 instance TF.IsObject (RecordResource s) where
-    toObject RecordResource{..} = catMaybes
+    toObject RecordResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "records" <$> TF.attribute _records
         , TF.assign "ttl" <$> TF.attribute _ttl
@@ -88,63 +97,30 @@ instance TF.IsObject (RecordResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
+instance TF.IsValid (RecordResource s) where
+    validator = P.mempty
+
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RecordResource s)
+        P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RecordResource s)
 
-instance P.HasRecords (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasRecords (RecordResource s) (TF.Attr s [TF.Attr s P.Text]) where
     records =
-        lens (_records :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _records = a } :: RecordResource s)
+        P.lens (_records :: RecordResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _records = a } :: RecordResource s)
 
-instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
+instance P.HasTtl (RecordResource s) (TF.Attr s P.Integer) where
     ttl =
-        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: RecordResource s)
+        P.lens (_ttl :: RecordResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _ttl = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: RecordResource s)
+        P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: RecordResource s)
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedRecords =
-        (_records :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl =
-        (_ttl :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-recordResource :: TF.Resource P.PowerDNS (RecordResource s)
-recordResource =
-    TF.newResource "powerdns_record" $
-        RecordResource {
-              _name = TF.Nil
-            , _records = TF.Nil
-            , _ttl = TF.Nil
-            , _type' = TF.Nil
-            , _zone = TF.Nil
-            }
+        P.lens (_zone :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: RecordResource s)

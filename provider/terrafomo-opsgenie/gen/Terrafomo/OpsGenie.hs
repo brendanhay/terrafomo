@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.OpsGenie
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OpsGenie
-    ( module Terrafomo.OpsGenie.Types
-    , module Terrafomo.OpsGenie.Provider
-    , module Terrafomo.OpsGenie.Lens
-    , module Terrafomo.OpsGenie.DataSource
+    ( module Terrafomo.OpsGenie.Provider
     , module Terrafomo.OpsGenie.Resource
+    , module Terrafomo.OpsGenie.Settings
+    , module Terrafomo.OpsGenie.Lens
+    , module Terrafomo.OpsGenie.Types
+    , module Terrafomo.OpsGenie.DataSource
     ) where
 
 import Terrafomo.OpsGenie.DataSource
 import Terrafomo.OpsGenie.Lens
 import Terrafomo.OpsGenie.Provider
 import Terrafomo.OpsGenie.Resource
+import Terrafomo.OpsGenie.Settings
 import Terrafomo.OpsGenie.Types

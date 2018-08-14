@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,55 +17,103 @@
 --
 module Terrafomo.Google.Provider
     (
-    -- * Provider Datatype
-      Google (..)
-    , emptyGoogle
-
-    -- * Lenses
+    -- * Google Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Google.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Google.Lens  as P
 import qualified Terrafomo.Google.Types as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Google@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _credentials :: P.Maybe P.Text
+    -- ^ @credentials@ - (Optional)
+    --
+    , _project     :: P.Maybe P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region      :: P.Maybe P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _zone        :: P.Maybe P.Text
+    -- ^ @zone@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Google Terraform provider.
+newProvider
+    :: Provider
+newProvider =
+    Provider'
+        { _credentials = P.Nothing
+        , _project = P.Nothing
+        , _region = P.Nothing
+        , _zone = P.Nothing
+        }
 
-The Google Cloud provider is used to interact with
-<https://cloud.google.com/> . The provider needs to be configured with the
-proper credentials before it can be used. Use the navigation to the left to
-read about the available resources.
--}
-data Google = Google {
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Google
-
-instance TF.IsSection Google where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Google))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "credentials" <$> _credentials
+                  , TF.assign "project" <$> _project
+                  , TF.assign "region" <$> _region
+                  , TF.assign "zone" <$> _zone
                   ])
 
-instance TF.IsProvider Google where
-    type ProviderType Google = "google"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyGoogle :: Google
-emptyGoogle = Google {
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+
+instance P.HasCredentials (Provider) (P.Maybe P.Text) where
+    credentials =
+        P.lens (_credentials :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _credentials = a } :: Provider)
+
+instance P.HasProject (Provider) (P.Maybe P.Text) where
+    project =
+        P.lens (_project :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _project = a } :: Provider)
+
+instance P.HasRegion (Provider) (P.Maybe P.Text) where
+    region =
+        P.lens (_region :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _region = a } :: Provider)
+
+instance P.HasZone (Provider) (P.Maybe P.Text) where
+    zone =
+        P.lens (_zone :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _zone = a } :: Provider)

@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,628 +17,482 @@
 --
 module Terrafomo.Random.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** random_id
       IdResource (..)
     , idResource
 
+    -- ** random_integer
     , IntegerResource (..)
     , integerResource
 
+    -- ** random_pet
     , PetResource (..)
     , petResource
 
+    -- ** random_shuffle
     , ShuffleResource (..)
     , shuffleResource
 
+    -- ** random_string
     , StringResource (..)
     , stringResource
 
+    -- ** random_uuid
     , UuidResource (..)
     , uuidResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasByteLength (..)
-    , P.HasInput (..)
-    , P.HasKeepers (..)
-    , P.HasLength (..)
-    , P.HasLower (..)
-    , P.HasMax (..)
-    , P.HasMin (..)
-    , P.HasMinLower (..)
-    , P.HasMinNumeric (..)
-    , P.HasMinSpecial (..)
-    , P.HasMinUpper (..)
-    , P.HasNumber (..)
-    , P.HasOverrideSpecial (..)
-    , P.HasPrefix (..)
-    , P.HasResultCount (..)
-    , P.HasSeed (..)
-    , P.HasSeparator (..)
-    , P.HasSpecial (..)
-    , P.HasUpper (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedB64Std (..)
-    , P.HasComputedB64Url (..)
-    , P.HasComputedByteLength (..)
-    , P.HasComputedDec (..)
-    , P.HasComputedHex (..)
-    , P.HasComputedId (..)
-    , P.HasComputedInput (..)
-    , P.HasComputedKeepers (..)
-    , P.HasComputedLength (..)
-    , P.HasComputedLower (..)
-    , P.HasComputedMax (..)
-    , P.HasComputedMin (..)
-    , P.HasComputedMinLower (..)
-    , P.HasComputedMinNumeric (..)
-    , P.HasComputedMinSpecial (..)
-    , P.HasComputedMinUpper (..)
-    , P.HasComputedNumber (..)
-    , P.HasComputedOverrideSpecial (..)
-    , P.HasComputedPrefix (..)
-    , P.HasComputedResult (..)
-    , P.HasComputedResultCount (..)
-    , P.HasComputedSeed (..)
-    , P.HasComputedSeparator (..)
-    , P.HasComputedSpecial (..)
-    , P.HasComputedUpper (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Random.Settings
 
-import Terrafomo.Random.Types as P
+import qualified Data.Hashable             as P
+import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
+import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
+import qualified Data.Text                 as P
+import qualified GHC.Generics              as P
+import qualified Lens.Micro                as P
+import qualified Prelude                   as P
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Random.Lens     as P
+import qualified Terrafomo.Random.Provider as P
+import qualified Terrafomo.Random.Types    as P
+import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
-import qualified Data.Text             as P
-import qualified Data.Word             as P
-import qualified GHC.Base              as P
-import qualified Numeric.Natural       as P
-import qualified Terrafomo.Random.Lens as P
+-- | @random_id@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Random/random_id terraform documentation>
+-- for more information.
+data IdResource s = IdResource'
+    { _byteLength :: TF.Attr s P.Integer
+    -- ^ @byte_length@ - (Required)
+    --
+    , _keepers    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @keepers@ - (Optional)
+    --
+    , _prefix     :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
-
-{- | The @random_id@ Random resource.
-
-The resource @random_id@ generates random numbers that are intended to be
-used as unique identifiers for other resources. This resource does use a
-cryptographic random number generator in order to minimize the chance of
-collisions, making the results of this resource when a 32-byte identifier is
-requested of equivalent uniqueness to a type-4 UUID. This resource can be
-used in conjunction with resources that have the @create_before_destroy@
-lifecycle flag set to avoid conflicts with unique names during the brief
-period where both the old and new resources exist concurrently.
--}
-data IdResource s = IdResource {
-      _byte_length :: !(TF.Attr s P.Int)
-    {- ^ (Required) The number of random bytes to produce. The minimum value is 1, which produces eight bits of randomness. -}
-    , _keepers     :: !(TF.Attr s (P.Keepers s))
-    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
-    , _prefix      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Arbitrary string to prefix the output value with. This string is supplied as-is, meaning it is not guaranteed to be URL-safe or base64 encoded. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (IdResource s) where
-    toObject IdResource{..} = catMaybes
-        [ TF.assign "byte_length" <$> TF.attribute _byte_length
-        , TF.assign "keepers" <$> TF.attribute _keepers
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        ]
-
-instance P.HasByteLength (IdResource s) (TF.Attr s P.Int) where
-    byteLength =
-        lens (_byte_length :: IdResource s -> TF.Attr s P.Int)
-             (\s a -> s { _byte_length = a } :: IdResource s)
-
-instance P.HasKeepers (IdResource s) (TF.Attr s (P.Keepers s)) where
-    keepers =
-        lens (_keepers :: IdResource s -> TF.Attr s (P.Keepers s))
-             (\s a -> s { _keepers = a } :: IdResource s)
-
-instance P.HasPrefix (IdResource s) (TF.Attr s P.Text) where
-    prefix =
-        lens (_prefix :: IdResource s -> TF.Attr s P.Text)
-             (\s a -> s { _prefix = a } :: IdResource s)
-
-instance s ~ s' => P.HasComputedB64Std (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64Std x = TF.compute (TF.refKey x) "b64_std"
-
-instance s ~ s' => P.HasComputedB64Url (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64Url x = TF.compute (TF.refKey x) "b64_url"
-
-instance s ~ s' => P.HasComputedByteLength (TF.Ref s' (IdResource s)) (TF.Attr s P.Int) where
-    computedByteLength =
-        (_byte_length :: IdResource s -> TF.Attr s P.Int)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDec (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedDec x = TF.compute (TF.refKey x) "dec"
-
-instance s ~ s' => P.HasComputedHex (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedHex x = TF.compute (TF.refKey x) "hex"
-
-instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (IdResource s)) (TF.Attr s (P.Keepers s)) where
-    computedKeepers =
-        (_keepers :: IdResource s -> TF.Attr s (P.Keepers s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedPrefix =
-        (_prefix :: IdResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-idResource :: TF.Resource TF.NoProvider (IdResource s)
-idResource =
-    TF.newResource "random_id" $
-        IdResource {
-              _byte_length = TF.Nil
+idResource
+    :: TF.Attr s P.Integer -- ^ @byte_length@ - 'P.byteLength'
+    -> TF.Resource P.Provider (IdResource s)
+idResource _byteLength =
+    TF.newResource "random_id" TF.validator $
+        IdResource'
+            { _byteLength = _byteLength
             , _keepers = TF.Nil
             , _prefix = TF.Nil
             }
 
-{- | The @random_integer@ Random resource.
+instance TF.IsObject (IdResource s) where
+    toObject IdResource'{..} = P.catMaybes
+        [ TF.assign "byte_length" <$> TF.attribute _byteLength
+        , TF.assign "keepers" <$> TF.attribute _keepers
+        , TF.assign "prefix" <$> TF.attribute _prefix
+        ]
 
-The resource @random_integer@ generates random values from a given range,
-described by the @min@ and @max@ attributes of a given resource. This
-resource can be used in conjunction with resources that have the
-@create_before_destroy@ lifecycle flag set, to avoid conflicts with unique
-names during the brief period where both the old and new resources exist
-concurrently.
--}
-data IntegerResource s = IntegerResource {
-      _keepers :: !(TF.Attr s (P.Keepers s))
-    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
-    , _max     :: !(TF.Attr s P.Int)
-    {- ^ - (int) The maximum inclusive value of the range. -}
-    , _min     :: !(TF.Attr s P.Int)
-    {- ^ - (int) The minimum inclusive value of the range. -}
-    , _seed    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A custom seed to always produce the same value. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (IdResource s) where
+    validator = P.mempty
+
+instance P.HasByteLength (IdResource s) (TF.Attr s P.Integer) where
+    byteLength =
+        P.lens (_byteLength :: IdResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _byteLength = a } :: IdResource s)
+
+instance P.HasKeepers (IdResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    keepers =
+        P.lens (_keepers :: IdResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _keepers = a } :: IdResource s)
+
+instance P.HasPrefix (IdResource s) (TF.Attr s P.Text) where
+    prefix =
+        P.lens (_prefix :: IdResource s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: IdResource s)
+
+instance s ~ s' => P.HasComputedB64 (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
+    computedB64 x = TF.compute (TF.refKey x) "_computedB64"
+
+instance s ~ s' => P.HasComputedB64Std (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
+    computedB64Std x = TF.compute (TF.refKey x) "_computedB64Std"
+
+instance s ~ s' => P.HasComputedB64Url (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
+    computedB64Url x = TF.compute (TF.refKey x) "_computedB64Url"
+
+instance s ~ s' => P.HasComputedDec (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
+    computedDec x = TF.compute (TF.refKey x) "_computedDec"
+
+instance s ~ s' => P.HasComputedHex (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
+    computedHex x = TF.compute (TF.refKey x) "_computedHex"
+
+-- | @random_integer@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Random/random_integer terraform documentation>
+-- for more information.
+data IntegerResource s = IntegerResource'
+    { _keepers :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @keepers@ - (Optional)
+    --
+    , _max     :: TF.Attr s P.Integer
+    -- ^ @max@ - (Required)
+    --
+    , _min     :: TF.Attr s P.Integer
+    -- ^ @min@ - (Required)
+    --
+    , _seed    :: TF.Attr s P.Text
+    -- ^ @seed@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+integerResource
+    :: TF.Attr s P.Integer -- ^ @max@ - 'P.max'
+    -> TF.Attr s P.Integer -- ^ @min@ - 'P.min'
+    -> TF.Resource P.Provider (IntegerResource s)
+integerResource _max _min =
+    TF.newResource "random_integer" TF.validator $
+        IntegerResource'
+            { _keepers = TF.Nil
+            , _max = _max
+            , _min = _min
+            , _seed = TF.Nil
+            }
 
 instance TF.IsObject (IntegerResource s) where
-    toObject IntegerResource{..} = catMaybes
+    toObject IntegerResource'{..} = P.catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "max" <$> TF.attribute _max
         , TF.assign "min" <$> TF.attribute _min
         , TF.assign "seed" <$> TF.attribute _seed
         ]
 
-instance P.HasKeepers (IntegerResource s) (TF.Attr s (P.Keepers s)) where
+instance TF.IsValid (IntegerResource s) where
+    validator = P.mempty
+
+instance P.HasKeepers (IntegerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     keepers =
-        lens (_keepers :: IntegerResource s -> TF.Attr s (P.Keepers s))
-             (\s a -> s { _keepers = a } :: IntegerResource s)
+        P.lens (_keepers :: IntegerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _keepers = a } :: IntegerResource s)
 
-instance P.HasMax (IntegerResource s) (TF.Attr s P.Int) where
+instance P.HasMax (IntegerResource s) (TF.Attr s P.Integer) where
     max =
-        lens (_max :: IntegerResource s -> TF.Attr s P.Int)
-             (\s a -> s { _max = a } :: IntegerResource s)
+        P.lens (_max :: IntegerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _max = a } :: IntegerResource s)
 
-instance P.HasMin (IntegerResource s) (TF.Attr s P.Int) where
+instance P.HasMin (IntegerResource s) (TF.Attr s P.Integer) where
     min =
-        lens (_min :: IntegerResource s -> TF.Attr s P.Int)
-             (\s a -> s { _min = a } :: IntegerResource s)
+        P.lens (_min :: IntegerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _min = a } :: IntegerResource s)
 
 instance P.HasSeed (IntegerResource s) (TF.Attr s P.Text) where
     seed =
-        lens (_seed :: IntegerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _seed = a } :: IntegerResource s)
+        P.lens (_seed :: IntegerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _seed = a } :: IntegerResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Integer) where
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"
 
-instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (IntegerResource s)) (TF.Attr s (P.Keepers s)) where
-    computedKeepers =
-        (_keepers :: IntegerResource s -> TF.Attr s (P.Keepers s))
-            . TF.refValue
+-- | @random_pet@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Random/random_pet terraform documentation>
+-- for more information.
+data PetResource s = PetResource'
+    { _keepers   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @keepers@ - (Optional)
+    --
+    , _length    :: TF.Attr s P.Integer
+    -- ^ @length@ - (Optional)
+    --
+    , _prefix    :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Optional)
+    --
+    , _separator :: TF.Attr s P.Text
+    -- ^ @separator@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedMax (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Int) where
-    computedMax =
-        (_max :: IntegerResource s -> TF.Attr s P.Int)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMin (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Int) where
-    computedMin =
-        (_min :: IntegerResource s -> TF.Attr s P.Int)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResult (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Int) where
-    computedResult x = TF.compute (TF.refKey x) "result"
-
-instance s ~ s' => P.HasComputedSeed (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Text) where
-    computedSeed =
-        (_seed :: IntegerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-integerResource :: TF.Resource TF.NoProvider (IntegerResource s)
-integerResource =
-    TF.newResource "random_integer" $
-        IntegerResource {
-              _keepers = TF.Nil
-            , _max = TF.Nil
-            , _min = TF.Nil
-            , _seed = TF.Nil
+petResource
+    :: TF.Resource P.Provider (PetResource s)
+petResource =
+    TF.newResource "random_pet" TF.validator $
+        PetResource'
+            { _keepers = TF.Nil
+            , _length = TF.value 2
+            , _prefix = TF.Nil
+            , _separator = TF.value "-"
             }
 
-{- | The @random_pet@ Random resource.
-
-The resource @random_pet@ generates random pet names that are intended to be
-used as unique identifiers for other resources. This resource can be used in
-conjunction with resources that have the @create_before_destroy@ lifecycle
-flag set, to avoid conflicts with unique names during the brief period where
-both the old and new resources exist concurrently.
--}
-data PetResource s = PetResource {
-      _keepers   :: !(TF.Attr s (P.Keepers s))
-    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
-    , _length    :: !(TF.Attr s P.Int)
-    {- ^ (Optional) The length (in words) of the pet name. -}
-    , _prefix    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A string to prefix the name with. -}
-    , _separator :: !(TF.Attr s P.Char)
-    {- ^ (Optional) The character to separate words in the pet name. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (PetResource s) where
-    toObject PetResource{..} = catMaybes
+    toObject PetResource'{..} = P.catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "length" <$> TF.attribute _length
         , TF.assign "prefix" <$> TF.attribute _prefix
         , TF.assign "separator" <$> TF.attribute _separator
         ]
 
-instance P.HasKeepers (PetResource s) (TF.Attr s (P.Keepers s)) where
-    keepers =
-        lens (_keepers :: PetResource s -> TF.Attr s (P.Keepers s))
-             (\s a -> s { _keepers = a } :: PetResource s)
+instance TF.IsValid (PetResource s) where
+    validator = P.mempty
 
-instance P.HasLength (PetResource s) (TF.Attr s P.Int) where
+instance P.HasKeepers (PetResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    keepers =
+        P.lens (_keepers :: PetResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _keepers = a } :: PetResource s)
+
+instance P.HasLength (PetResource s) (TF.Attr s P.Integer) where
     length =
-        lens (_length :: PetResource s -> TF.Attr s P.Int)
-             (\s a -> s { _length = a } :: PetResource s)
+        P.lens (_length :: PetResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _length = a } :: PetResource s)
 
 instance P.HasPrefix (PetResource s) (TF.Attr s P.Text) where
     prefix =
-        lens (_prefix :: PetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _prefix = a } :: PetResource s)
+        P.lens (_prefix :: PetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: PetResource s)
 
-instance P.HasSeparator (PetResource s) (TF.Attr s P.Char) where
+instance P.HasSeparator (PetResource s) (TF.Attr s P.Text) where
     separator =
-        lens (_separator :: PetResource s -> TF.Attr s P.Char)
-             (\s a -> s { _separator = a } :: PetResource s)
+        P.lens (_separator :: PetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _separator = a } :: PetResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @random_shuffle@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Random/random_shuffle terraform documentation>
+-- for more information.
+data ShuffleResource s = ShuffleResource'
+    { _input       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @input@ - (Required)
+    --
+    , _keepers     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @keepers@ - (Optional)
+    --
+    , _resultCount :: TF.Attr s P.Integer
+    -- ^ @result_count@ - (Optional)
+    --
+    , _seed        :: TF.Attr s P.Text
+    -- ^ @seed@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (PetResource s)) (TF.Attr s (P.Keepers s)) where
-    computedKeepers =
-        (_keepers :: PetResource s -> TF.Attr s (P.Keepers s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLength (TF.Ref s' (PetResource s)) (TF.Attr s P.Int) where
-    computedLength =
-        (_length :: PetResource s -> TF.Attr s P.Int)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (PetResource s)) (TF.Attr s P.Text) where
-    computedPrefix =
-        (_prefix :: PetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSeparator (TF.Ref s' (PetResource s)) (TF.Attr s P.Char) where
-    computedSeparator =
-        (_separator :: PetResource s -> TF.Attr s P.Char)
-            . TF.refValue
-
-petResource :: TF.Resource TF.NoProvider (PetResource s)
-petResource =
-    TF.newResource "random_pet" $
-        PetResource {
-              _keepers = TF.Nil
-            , _length = TF.Nil
-            , _prefix = TF.Nil
-            , _separator = TF.Nil
-            }
-
-{- | The @random_shuffle@ Random resource.
-
-The resource @random_shuffle@ generates a random permutation of a list of
-strings given as an argument.
--}
-data ShuffleResource s = ShuffleResource {
-      _input        :: !(TF.Attr s [TF.Attr s P.Text])
-    {- ^ (Required) The list of strings to shuffle. -}
-    , _keepers      :: !(TF.Attr s (P.Keepers s))
-    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
-    , _result_count :: !(TF.Attr s P.Int)
-    {- ^ (Optional) The number of results to return. Defaults to the number of items in the @input@ list. If fewer items are requested, some elements will be excluded from the result. If more items are requested, items will be repeated in the result but not more frequently than the number of items in the input list. -}
-    , _seed         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Arbitrary string with which to seed the random number generator, in order to produce less-volatile permutations of the list. Important: Even with an identical seed, it is not guaranteed that the same permutation will be produced across different versions of Terraform. This argument causes the result to be less volatile , but not fixed for all time. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ShuffleResource s) where
-    toObject ShuffleResource{..} = catMaybes
-        [ TF.assign "input" <$> TF.attribute _input
-        , TF.assign "keepers" <$> TF.attribute _keepers
-        , TF.assign "result_count" <$> TF.attribute _result_count
-        , TF.assign "seed" <$> TF.attribute _seed
-        ]
-
-instance P.HasInput (ShuffleResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    input =
-        lens (_input :: ShuffleResource s -> TF.Attr s [TF.Attr s P.Text])
-             (\s a -> s { _input = a } :: ShuffleResource s)
-
-instance P.HasKeepers (ShuffleResource s) (TF.Attr s (P.Keepers s)) where
-    keepers =
-        lens (_keepers :: ShuffleResource s -> TF.Attr s (P.Keepers s))
-             (\s a -> s { _keepers = a } :: ShuffleResource s)
-
-instance P.HasResultCount (ShuffleResource s) (TF.Attr s P.Int) where
-    resultCount =
-        lens (_result_count :: ShuffleResource s -> TF.Attr s P.Int)
-             (\s a -> s { _result_count = a } :: ShuffleResource s)
-
-instance P.HasSeed (ShuffleResource s) (TF.Attr s P.Text) where
-    seed =
-        lens (_seed :: ShuffleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _seed = a } :: ShuffleResource s)
-
-instance s ~ s' => P.HasComputedInput (TF.Ref s' (ShuffleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInput =
-        (_input :: ShuffleResource s -> TF.Attr s [TF.Attr s P.Text])
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (ShuffleResource s)) (TF.Attr s (P.Keepers s)) where
-    computedKeepers =
-        (_keepers :: ShuffleResource s -> TF.Attr s (P.Keepers s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResult (TF.Ref s' (ShuffleResource s)) (TF.Attr s [P.Text]) where
-    computedResult x = TF.compute (TF.refKey x) "result"
-
-instance s ~ s' => P.HasComputedResultCount (TF.Ref s' (ShuffleResource s)) (TF.Attr s P.Int) where
-    computedResultCount =
-        (_result_count :: ShuffleResource s -> TF.Attr s P.Int)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSeed (TF.Ref s' (ShuffleResource s)) (TF.Attr s P.Text) where
-    computedSeed =
-        (_seed :: ShuffleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-shuffleResource :: TF.Resource TF.NoProvider (ShuffleResource s)
-shuffleResource =
-    TF.newResource "random_shuffle" $
-        ShuffleResource {
-              _input = TF.Nil
+shuffleResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @input@ - 'P.input'
+    -> TF.Resource P.Provider (ShuffleResource s)
+shuffleResource _input =
+    TF.newResource "random_shuffle" TF.validator $
+        ShuffleResource'
+            { _input = _input
             , _keepers = TF.Nil
-            , _result_count = TF.Nil
+            , _resultCount = TF.Nil
             , _seed = TF.Nil
             }
 
-{- | The @random_string@ Random resource.
+instance TF.IsObject (ShuffleResource s) where
+    toObject ShuffleResource'{..} = P.catMaybes
+        [ TF.assign "input" <$> TF.attribute _input
+        , TF.assign "keepers" <$> TF.attribute _keepers
+        , TF.assign "result_count" <$> TF.attribute _resultCount
+        , TF.assign "seed" <$> TF.attribute _seed
+        ]
 
-The resource @random_string@ generates a random permutation of alphanumeric
-characters and optionally special characters. This resource does use a
-cryptographic random number generator.
--}
-data StringResource s = StringResource {
-      _keepers          :: !(TF.Attr s (P.Keepers s))
-    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new id to be generated. See <../index.html> for more information. -}
-    , _length           :: !(TF.Attr s P.Int)
-    {- ^ (Required) The length of the string desired -}
-    , _lower            :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) (default true) Include lowercase alphabet characters in random string. -}
-    , _min_lower        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) (default 0) Minimum number of lowercase alphabet characters in random string. -}
-    , _min_numeric      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) (default 0) Minimum number of numeric characters in random string. -}
-    , _min_special      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) (default 0) Minimum number of special characters in random string. -}
-    , _min_upper        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) (default 0) Minimum number of uppercase alphabet characters in random string. -}
-    , _number           :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) (default true) Include numeric characters in random string. -}
-    , _override_special :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Supply your own list of special characters to use for string generation.  This overrides characters list in the special argument.  The special argument must still be set to true for any overwritten characters to be used in generation. -}
-    , _special          :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) (default true) Include special characters in random string. These are '!@#$%&*()-_=+[]{}<>:?' -}
-    , _upper            :: !(TF.Attr s P.Bool)
-    {- ^ (Optional) (default true) Include uppercase alphabet characters in random string. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (ShuffleResource s) where
+    validator = P.mempty
+
+instance P.HasInput (ShuffleResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    input =
+        P.lens (_input :: ShuffleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _input = a } :: ShuffleResource s)
+
+instance P.HasKeepers (ShuffleResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    keepers =
+        P.lens (_keepers :: ShuffleResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _keepers = a } :: ShuffleResource s)
+
+instance P.HasResultCount (ShuffleResource s) (TF.Attr s P.Integer) where
+    resultCount =
+        P.lens (_resultCount :: ShuffleResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _resultCount = a } :: ShuffleResource s)
+
+instance P.HasSeed (ShuffleResource s) (TF.Attr s P.Text) where
+    seed =
+        P.lens (_seed :: ShuffleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _seed = a } :: ShuffleResource s)
+
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (ShuffleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+
+-- | @random_string@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Random/random_string terraform documentation>
+-- for more information.
+data StringResource s = StringResource'
+    { _keepers         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @keepers@ - (Optional)
+    --
+    , _length          :: TF.Attr s P.Integer
+    -- ^ @length@ - (Required)
+    --
+    , _lower           :: TF.Attr s P.Bool
+    -- ^ @lower@ - (Optional)
+    --
+    , _minLower        :: TF.Attr s P.Integer
+    -- ^ @min_lower@ - (Optional)
+    --
+    , _minNumeric      :: TF.Attr s P.Integer
+    -- ^ @min_numeric@ - (Optional)
+    --
+    , _minSpecial      :: TF.Attr s P.Integer
+    -- ^ @min_special@ - (Optional)
+    --
+    , _minUpper        :: TF.Attr s P.Integer
+    -- ^ @min_upper@ - (Optional)
+    --
+    , _number          :: TF.Attr s P.Bool
+    -- ^ @number@ - (Optional)
+    --
+    , _overrideSpecial :: TF.Attr s P.Text
+    -- ^ @override_special@ - (Optional)
+    --
+    , _special         :: TF.Attr s P.Bool
+    -- ^ @special@ - (Optional)
+    --
+    , _upper           :: TF.Attr s P.Bool
+    -- ^ @upper@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+stringResource
+    :: TF.Attr s P.Integer -- ^ @length@ - 'P.length'
+    -> TF.Resource P.Provider (StringResource s)
+stringResource _length =
+    TF.newResource "random_string" TF.validator $
+        StringResource'
+            { _keepers = TF.Nil
+            , _length = _length
+            , _lower = TF.value P.True
+            , _minLower = TF.value 0
+            , _minNumeric = TF.value 0
+            , _minSpecial = TF.value 0
+            , _minUpper = TF.value 0
+            , _number = TF.value P.True
+            , _overrideSpecial = TF.Nil
+            , _special = TF.value P.True
+            , _upper = TF.value P.True
+            }
 
 instance TF.IsObject (StringResource s) where
-    toObject StringResource{..} = catMaybes
+    toObject StringResource'{..} = P.catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         , TF.assign "length" <$> TF.attribute _length
         , TF.assign "lower" <$> TF.attribute _lower
-        , TF.assign "min_lower" <$> TF.attribute _min_lower
-        , TF.assign "min_numeric" <$> TF.attribute _min_numeric
-        , TF.assign "min_special" <$> TF.attribute _min_special
-        , TF.assign "min_upper" <$> TF.attribute _min_upper
+        , TF.assign "min_lower" <$> TF.attribute _minLower
+        , TF.assign "min_numeric" <$> TF.attribute _minNumeric
+        , TF.assign "min_special" <$> TF.attribute _minSpecial
+        , TF.assign "min_upper" <$> TF.attribute _minUpper
         , TF.assign "number" <$> TF.attribute _number
-        , TF.assign "override_special" <$> TF.attribute _override_special
+        , TF.assign "override_special" <$> TF.attribute _overrideSpecial
         , TF.assign "special" <$> TF.attribute _special
         , TF.assign "upper" <$> TF.attribute _upper
         ]
 
-instance P.HasKeepers (StringResource s) (TF.Attr s (P.Keepers s)) where
-    keepers =
-        lens (_keepers :: StringResource s -> TF.Attr s (P.Keepers s))
-             (\s a -> s { _keepers = a } :: StringResource s)
+instance TF.IsValid (StringResource s) where
+    validator = P.mempty
 
-instance P.HasLength (StringResource s) (TF.Attr s P.Int) where
+instance P.HasKeepers (StringResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    keepers =
+        P.lens (_keepers :: StringResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _keepers = a } :: StringResource s)
+
+instance P.HasLength (StringResource s) (TF.Attr s P.Integer) where
     length =
-        lens (_length :: StringResource s -> TF.Attr s P.Int)
-             (\s a -> s { _length = a } :: StringResource s)
+        P.lens (_length :: StringResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _length = a } :: StringResource s)
 
 instance P.HasLower (StringResource s) (TF.Attr s P.Bool) where
     lower =
-        lens (_lower :: StringResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _lower = a } :: StringResource s)
+        P.lens (_lower :: StringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _lower = a } :: StringResource s)
 
-instance P.HasMinLower (StringResource s) (TF.Attr s P.Text) where
+instance P.HasMinLower (StringResource s) (TF.Attr s P.Integer) where
     minLower =
-        lens (_min_lower :: StringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_lower = a } :: StringResource s)
+        P.lens (_minLower :: StringResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _minLower = a } :: StringResource s)
 
-instance P.HasMinNumeric (StringResource s) (TF.Attr s P.Text) where
+instance P.HasMinNumeric (StringResource s) (TF.Attr s P.Integer) where
     minNumeric =
-        lens (_min_numeric :: StringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_numeric = a } :: StringResource s)
+        P.lens (_minNumeric :: StringResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _minNumeric = a } :: StringResource s)
 
-instance P.HasMinSpecial (StringResource s) (TF.Attr s P.Text) where
+instance P.HasMinSpecial (StringResource s) (TF.Attr s P.Integer) where
     minSpecial =
-        lens (_min_special :: StringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_special = a } :: StringResource s)
+        P.lens (_minSpecial :: StringResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _minSpecial = a } :: StringResource s)
 
-instance P.HasMinUpper (StringResource s) (TF.Attr s P.Text) where
+instance P.HasMinUpper (StringResource s) (TF.Attr s P.Integer) where
     minUpper =
-        lens (_min_upper :: StringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_upper = a } :: StringResource s)
+        P.lens (_minUpper :: StringResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _minUpper = a } :: StringResource s)
 
 instance P.HasNumber (StringResource s) (TF.Attr s P.Bool) where
     number =
-        lens (_number :: StringResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _number = a } :: StringResource s)
+        P.lens (_number :: StringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _number = a } :: StringResource s)
 
 instance P.HasOverrideSpecial (StringResource s) (TF.Attr s P.Text) where
     overrideSpecial =
-        lens (_override_special :: StringResource s -> TF.Attr s P.Text)
-             (\s a -> s { _override_special = a } :: StringResource s)
+        P.lens (_overrideSpecial :: StringResource s -> TF.Attr s P.Text)
+               (\s a -> s { _overrideSpecial = a } :: StringResource s)
 
 instance P.HasSpecial (StringResource s) (TF.Attr s P.Bool) where
     special =
-        lens (_special :: StringResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _special = a } :: StringResource s)
+        P.lens (_special :: StringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _special = a } :: StringResource s)
 
 instance P.HasUpper (StringResource s) (TF.Attr s P.Bool) where
     upper =
-        lens (_upper :: StringResource s -> TF.Attr s P.Bool)
-             (\s a -> s { _upper = a } :: StringResource s)
-
-instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (StringResource s)) (TF.Attr s (P.Keepers s)) where
-    computedKeepers =
-        (_keepers :: StringResource s -> TF.Attr s (P.Keepers s))
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLength (TF.Ref s' (StringResource s)) (TF.Attr s P.Int) where
-    computedLength =
-        (_length :: StringResource s -> TF.Attr s P.Int)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLower (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
-    computedLower =
-        (_lower :: StringResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMinLower (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedMinLower =
-        (_min_lower :: StringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMinNumeric (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedMinNumeric =
-        (_min_numeric :: StringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMinSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedMinSpecial =
-        (_min_special :: StringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMinUpper (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedMinUpper =
-        (_min_upper :: StringResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNumber (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
-    computedNumber =
-        (_number :: StringResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOverrideSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedOverrideSpecial =
-        (_override_special :: StringResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_upper :: StringResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _upper = a } :: StringResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"
 
-instance s ~ s' => P.HasComputedSpecial (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
-    computedSpecial =
-        (_special :: StringResource s -> TF.Attr s P.Bool)
-            . TF.refValue
+-- | @random_uuid@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Random/random_uuid terraform documentation>
+-- for more information.
+data UuidResource s = UuidResource'
+    { _keepers :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @keepers@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedUpper (TF.Ref s' (StringResource s)) (TF.Attr s P.Bool) where
-    computedUpper =
-        (_upper :: StringResource s -> TF.Attr s P.Bool)
-            . TF.refValue
-
-stringResource :: TF.Resource TF.NoProvider (StringResource s)
-stringResource =
-    TF.newResource "random_string" $
-        StringResource {
-              _keepers = TF.Nil
-            , _length = TF.Nil
-            , _lower = TF.Nil
-            , _min_lower = TF.Nil
-            , _min_numeric = TF.Nil
-            , _min_special = TF.Nil
-            , _min_upper = TF.Nil
-            , _number = TF.Nil
-            , _override_special = TF.Nil
-            , _special = TF.Nil
-            , _upper = TF.Nil
+uuidResource
+    :: TF.Resource P.Provider (UuidResource s)
+uuidResource =
+    TF.newResource "random_uuid" TF.validator $
+        UuidResource'
+            { _keepers = TF.Nil
             }
 
-{- | The @random_uuid@ Random resource.
-
-The resource @random_uuid@ generates random uuid string that is intended to
-be used as unique identifiers for other resources. This resource uses the
-@hashicorp/go-uuid@ to generate a UUID-formatted string for use with
-services needed a unique string identifier.
--}
-data UuidResource s = UuidResource {
-      _keepers :: !(TF.Attr s (P.Keepers s))
-    {- ^ (Optional) Arbitrary map of values that, when changed, will trigger a new uuid to be generated. See <../index.html> for more information. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (UuidResource s) where
-    toObject UuidResource{..} = catMaybes
+    toObject UuidResource'{..} = P.catMaybes
         [ TF.assign "keepers" <$> TF.attribute _keepers
         ]
 
-instance P.HasKeepers (UuidResource s) (TF.Attr s (P.Keepers s)) where
-    keepers =
-        lens (_keepers :: UuidResource s -> TF.Attr s (P.Keepers s))
-             (\s a -> s { _keepers = a } :: UuidResource s)
+instance TF.IsValid (UuidResource s) where
+    validator = P.mempty
 
-instance s ~ s' => P.HasComputedKeepers (TF.Ref s' (UuidResource s)) (TF.Attr s (P.Keepers s)) where
-    computedKeepers =
-        (_keepers :: UuidResource s -> TF.Attr s (P.Keepers s))
-            . TF.refValue
+instance P.HasKeepers (UuidResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    keepers =
+        P.lens (_keepers :: UuidResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _keepers = a } :: UuidResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (UuidResource s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "result"
-
-uuidResource :: TF.Resource TF.NoProvider (UuidResource s)
-uuidResource =
-    TF.newResource "random_uuid" $
-        UuidResource {
-              _keepers = TF.Nil
-            }
+    computedResult x = TF.compute (TF.refKey x) "_computedResult"

@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Librato
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Librato
-    ( module Terrafomo.Librato.Types
+    ( module Terrafomo.Librato.Resource
+    , module Terrafomo.Librato.Types
     , module Terrafomo.Librato.Provider
     , module Terrafomo.Librato.Lens
-    , module Terrafomo.Librato.Resource
+    , module Terrafomo.Librato.Settings
     ) where
 
 import Terrafomo.Librato.Lens
 import Terrafomo.Librato.Provider
 import Terrafomo.Librato.Resource
+import Terrafomo.Librato.Settings
 import Terrafomo.Librato.Types

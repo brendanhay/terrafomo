@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.InfluxDB
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,12 +12,14 @@
 --
 module Terrafomo.InfluxDB
     ( module Terrafomo.InfluxDB.Types
-    , module Terrafomo.InfluxDB.Provider
-    , module Terrafomo.InfluxDB.Lens
     , module Terrafomo.InfluxDB.Resource
+    , module Terrafomo.InfluxDB.Provider
+    , module Terrafomo.InfluxDB.Settings
+    , module Terrafomo.InfluxDB.Lens
     ) where
 
 import Terrafomo.InfluxDB.Lens
 import Terrafomo.InfluxDB.Provider
 import Terrafomo.InfluxDB.Resource
+import Terrafomo.InfluxDB.Settings
 import Terrafomo.InfluxDB.Types

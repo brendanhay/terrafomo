@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,181 +17,158 @@
 --
 module Terrafomo.LogicMonitor.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** logicmonitor_collectors
       CollectorsData (..)
     , collectorsData
 
+    -- ** logicmonitor_device_group
     , DeviceGroupData (..)
     , deviceGroupData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasFilters (..)
-    , P.HasMostRecent (..)
-    , P.HasOffset (..)
-    , P.HasSize (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedFilters (..)
-    , P.HasComputedMostRecent (..)
-    , P.HasComputedOffset (..)
-    , P.HasComputedSize (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.LogicMonitor.Settings
 
-import Terrafomo.LogicMonitor.Types as P
-
+import qualified Data.Hashable                   as P
+import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as Map
+import qualified Data.List.NonEmpty              as P
+import qualified Data.Maybe                      as P
+import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
-import qualified Data.Word                       as P
-import qualified GHC.Base                        as P
-import qualified Numeric.Natural                 as P
+import qualified GHC.Generics                    as P
+import qualified Lens.Micro                      as P
+import qualified Prelude                         as P
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.LogicMonitor.Lens     as P
 import qualified Terrafomo.LogicMonitor.Provider as P
+import qualified Terrafomo.LogicMonitor.Types    as P
+import qualified Terrafomo.Name                  as TF
+import qualified Terrafomo.Schema                as TF
+import qualified Terrafomo.Validator             as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @logicmonitor_collectors@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_collectors terraform documentation>
+-- for more information.
+data CollectorsData s = CollectorsData'
+    { _filters    :: TF.Attr s [TF.Attr s (Filters s)]
+    -- ^ @filters@ - (Optional)
+    --
+    , _mostRecent :: TF.Attr s P.Bool
+    -- ^ @most_recent@ - (Optional)
+    --
+    , _offset     :: TF.Attr s P.Integer
+    -- ^ @offset@ - (Optional)
+    --
+    , _size       :: TF.Attr s P.Integer
+    -- ^ @size@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @logicmonitor_collectors@ LogicMonitor datasource.
-
-Use this datasource to get the ID of an available collector.
--}
-data CollectorsData s = CollectorsData {
-      _filters     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _most_recent :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The most recent collector installed that is online -}
-    , _offset      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
-    } deriving (Show, Eq)
+collectorsData
+    :: TF.DataSource P.Provider (CollectorsData s)
+collectorsData =
+    TF.newDataSource "logicmonitor_collectors" TF.validator $
+        CollectorsData'
+            { _filters = TF.Nil
+            , _mostRecent = TF.value P.False
+            , _offset = TF.value 0
+            , _size = TF.value 50
+            }
 
 instance TF.IsObject (CollectorsData s) where
-    toObject CollectorsData{..} = catMaybes
+    toObject CollectorsData'{..} = P.catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
-        , TF.assign "most_recent" <$> TF.attribute _most_recent
+        , TF.assign "most_recent" <$> TF.attribute _mostRecent
         , TF.assign "offset" <$> TF.attribute _offset
         , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasFilters (CollectorsData s) (TF.Attr s P.Text) where
+instance TF.IsValid (CollectorsData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filters"
+                  (_filters
+                      :: CollectorsData s -> TF.Attr s [TF.Attr s (Filters s)])
+                  TF.validator
+
+instance P.HasFilters (CollectorsData s) (TF.Attr s [TF.Attr s (Filters s)]) where
     filters =
-        lens (_filters :: CollectorsData s -> TF.Attr s P.Text)
-             (\s a -> s { _filters = a } :: CollectorsData s)
+        P.lens (_filters :: CollectorsData s -> TF.Attr s [TF.Attr s (Filters s)])
+               (\s a -> s { _filters = a } :: CollectorsData s)
 
-instance P.HasMostRecent (CollectorsData s) (TF.Attr s P.Text) where
+instance P.HasMostRecent (CollectorsData s) (TF.Attr s P.Bool) where
     mostRecent =
-        lens (_most_recent :: CollectorsData s -> TF.Attr s P.Text)
-             (\s a -> s { _most_recent = a } :: CollectorsData s)
+        P.lens (_mostRecent :: CollectorsData s -> TF.Attr s P.Bool)
+               (\s a -> s { _mostRecent = a } :: CollectorsData s)
 
-instance P.HasOffset (CollectorsData s) (TF.Attr s P.Text) where
+instance P.HasOffset (CollectorsData s) (TF.Attr s P.Integer) where
     offset =
-        lens (_offset :: CollectorsData s -> TF.Attr s P.Text)
-             (\s a -> s { _offset = a } :: CollectorsData s)
+        P.lens (_offset :: CollectorsData s -> TF.Attr s P.Integer)
+               (\s a -> s { _offset = a } :: CollectorsData s)
 
-instance P.HasSize (CollectorsData s) (TF.Attr s P.Text) where
+instance P.HasSize (CollectorsData s) (TF.Attr s P.Integer) where
     size =
-        lens (_size :: CollectorsData s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: CollectorsData s)
+        P.lens (_size :: CollectorsData s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: CollectorsData s)
 
-instance s ~ s' => P.HasComputedFilters (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
-    computedFilters =
-        (_filters :: CollectorsData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @logicmonitor_device_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_device_group terraform documentation>
+-- for more information.
+data DeviceGroupData s = DeviceGroupData'
+    { _filters :: TF.Attr s [TF.Attr s (Filters s)]
+    -- ^ @filters@ - (Optional)
+    --
+    , _offset  :: TF.Attr s P.Integer
+    -- ^ @offset@ - (Optional)
+    --
+    , _size    :: TF.Attr s P.Integer
+    -- ^ @size@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedMostRecent (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
-    computedMostRecent =
-        (_most_recent :: CollectorsData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOffset (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
-    computedOffset =
-        (_offset :: CollectorsData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: CollectorsData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-collectorsData :: TF.DataSource P.LogicMonitor (CollectorsData s)
-collectorsData =
-    TF.newDataSource "logicmonitor_collectors" $
-        CollectorsData {
-              _filters = TF.Nil
-            , _most_recent = TF.Nil
-            , _offset = TF.Nil
-            , _size = TF.Nil
+deviceGroupData
+    :: TF.DataSource P.Provider (DeviceGroupData s)
+deviceGroupData =
+    TF.newDataSource "logicmonitor_device_group" TF.validator $
+        DeviceGroupData'
+            { _filters = TF.Nil
+            , _offset = TF.value 0
+            , _size = TF.value 50
             }
-
-{- | The @logicmonitor_device_group@ LogicMonitor datasource.
-
-Use this datasource to get the ID of an available device group.
--}
-data DeviceGroupData s = DeviceGroupData {
-      _filters :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Filters the response according to the operator and value specified. Note that you can use * to match on more than one character. More Info: https://www.logicmonitor.com/support/rest-api-developers-guide/device-groups/get-device-groups/ -}
-    , _offset  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of results to offset the displayed results by. Default is 0 -}
-    , _size    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of results to display. Max is 1000. Default is 50 -}
-    } deriving (Show, Eq)
 
 instance TF.IsObject (DeviceGroupData s) where
-    toObject DeviceGroupData{..} = catMaybes
+    toObject DeviceGroupData'{..} = P.catMaybes
         [ TF.assign "filters" <$> TF.attribute _filters
         , TF.assign "offset" <$> TF.attribute _offset
         , TF.assign "size" <$> TF.attribute _size
         ]
 
-instance P.HasFilters (DeviceGroupData s) (TF.Attr s P.Text) where
+instance TF.IsValid (DeviceGroupData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_filters"
+                  (_filters
+                      :: DeviceGroupData s -> TF.Attr s [TF.Attr s (Filters s)])
+                  TF.validator
+
+instance P.HasFilters (DeviceGroupData s) (TF.Attr s [TF.Attr s (Filters s)]) where
     filters =
-        lens (_filters :: DeviceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _filters = a } :: DeviceGroupData s)
+        P.lens (_filters :: DeviceGroupData s -> TF.Attr s [TF.Attr s (Filters s)])
+               (\s a -> s { _filters = a } :: DeviceGroupData s)
 
-instance P.HasOffset (DeviceGroupData s) (TF.Attr s P.Text) where
+instance P.HasOffset (DeviceGroupData s) (TF.Attr s P.Integer) where
     offset =
-        lens (_offset :: DeviceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _offset = a } :: DeviceGroupData s)
+        P.lens (_offset :: DeviceGroupData s -> TF.Attr s P.Integer)
+               (\s a -> s { _offset = a } :: DeviceGroupData s)
 
-instance P.HasSize (DeviceGroupData s) (TF.Attr s P.Text) where
+instance P.HasSize (DeviceGroupData s) (TF.Attr s P.Integer) where
     size =
-        lens (_size :: DeviceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: DeviceGroupData s)
-
-instance s ~ s' => P.HasComputedFilters (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
-    computedFilters =
-        (_filters :: DeviceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOffset (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
-    computedOffset =
-        (_offset :: DeviceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: DeviceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-deviceGroupData :: TF.DataSource P.LogicMonitor (DeviceGroupData s)
-deviceGroupData =
-    TF.newDataSource "logicmonitor_device_group" $
-        DeviceGroupData {
-              _filters = TF.Nil
-            , _offset = TF.Nil
-            , _size = TF.Nil
-            }
+        P.lens (_size :: DeviceGroupData s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: DeviceGroupData s)

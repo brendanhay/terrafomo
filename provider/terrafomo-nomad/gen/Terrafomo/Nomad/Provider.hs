@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,117 +17,143 @@
 --
 module Terrafomo.Nomad.Provider
     (
-    -- * Provider Datatype
-      Nomad (..)
-    , emptyNomad
-
-    -- * Lenses
-    , providerAddress
-    , providerCaFile
-    , providerCertFile
-    , providerKeyFile
-    , providerRegion
-    , providerSecretId
-    , providerVaultToken
+    -- * Nomad Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Nomad.Settings
 
+import qualified Data.Hashable         as P
+import qualified Data.HashMap.Strict   as P
+import qualified Data.HashMap.Strict   as Map
+import qualified Data.List.NonEmpty    as P
+import qualified Data.Maybe            as P
+import qualified Data.Monoid           as P
 import qualified Data.Text             as P
+import qualified GHC.Generics          as P
+import qualified Lens.Micro            as P
+import qualified Prelude               as P
+import qualified Terrafomo.HCL         as TF
+import qualified Terrafomo.Name        as TF
+import qualified Terrafomo.Nomad.Lens  as P
 import qualified Terrafomo.Nomad.Types as P
+import qualified Terrafomo.Provider    as TF
+import qualified Terrafomo.Validator   as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Nomad@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Nomad/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _address    :: P.Text
+    -- ^ @address@ - (Required)
+    -- URL of the root of the target Nomad agent.
+    --
+    , _caFile     :: P.Maybe P.Text
+    -- ^ @ca_file@ - (Optional)
+    -- A path to a PEM-encoded certificate authority used to verify the remote
+    -- agent's certificate.
+    --
+    , _certFile   :: P.Maybe P.Text
+    -- ^ @cert_file@ - (Optional)
+    -- A path to a PEM-encoded certificate provided to the remote agent; requires
+    -- use of key_file.
+    --
+    , _keyFile    :: P.Maybe P.Text
+    -- ^ @key_file@ - (Optional)
+    -- A path to a PEM-encoded private key, required if cert_file is specified.
+    --
+    , _region     :: P.Maybe P.Text
+    -- ^ @region@ - (Optional)
+    -- Region of the target Nomad agent.
+    --
+    , _secretId   :: P.Maybe P.Text
+    -- ^ @secret_id@ - (Optional)
+    -- ACL token secret for API requests.
+    --
+    , _vaultToken :: P.Maybe P.Text
+    -- ^ @vault_token@ - (Optional)
+    -- Vault token if policies are specified in the job file.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Nomad Terraform provider.
+newProvider
+    :: P.Text -- ^ @address@ - 'P.address'
+    -> Provider
+newProvider _address =
+    Provider'
+        { _address = _address
+        , _caFile = P.Nothing
+        , _certFile = P.Nothing
+        , _keyFile = P.Nothing
+        , _region = P.Nothing
+        , _secretId = P.Nothing
+        , _vaultToken = P.Nothing
+        }
 
-<https://www.nomadproject.io> is an application scheduler. The Nomad
-provider exposes resources to interact with a Nomad cluster. Use the
-navigation to the left to read about the available resources.
--}
-data Nomad = Nomad {
-      _address     :: !(Maybe P.Text)
-    {- ^  @(string: "http://127.0.0.1:4646")@ - The HTTP(S) API address of the Nomad agent. This must include the leading protocol (e.g. @https://@ ). This can also be specified as the @NOMAD_ADDR@ environment variable. -}
-    , _ca_file     :: !(Maybe P.Text)
-    {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate authority used to verify the remote agent's certificate. This can also be specified as the @NOMAD_CACERT@ environment variable. -}
-    , _cert_file   :: !(Maybe P.Text)
-    {- ^  @(string: "")@ - A local file path to a PEM-encoded certificate provided to the remote agent. If this is specified, @key_file@ is also required. This can also be specified as the @NOMAD_CLIENT_CERT@ environment variable. -}
-    , _key_file    :: !(Maybe P.Text)
-    {- ^  @(string: "")@ - A local file path to a PEM-encoded private key. This is required if @cert_file@ is specified. This can also be specified via the @NOMAD_CLIENT_KEY@ environment variable. -}
-    , _region      :: !(Maybe P.Text)
-    {- ^  @(string: "")@ - The Nomad region to target. This can also be specified as the @NOMAD_REGION@ environment variable. -}
-    , _secret_id   :: !(Maybe P.Text)
-    {- ^  @(string: "")@ - The Secret ID of an ACL token to make requests with, for ACL-enabled clusters. This can also be specified via the @NOMAD_TOKEN@ environment variable. -}
-    , _vault_token :: !(Maybe P.Text)
-    {- ^  @(string: "")@ - A vault token to be inserted in the job file. This can also be specified as the @VAULT_TOKEN@ environment variable or using a vault token helper (see <https://www.vaultproject.io/docs/commands/token-helper.html> for more details). -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Nomad
-
-instance TF.IsSection Nomad where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Nomad))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "address" <$> _address x
-                  , TF.assign "ca_file" <$> _ca_file x
-                  , TF.assign "cert_file" <$> _cert_file x
-                  , TF.assign "key_file" <$> _key_file x
-                  , TF.assign "region" <$> _region x
-                  , TF.assign "secret_id" <$> _secret_id x
-                  , TF.assign "vault_token" <$> _vault_token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "address" _address
+                  , TF.assign "ca_file" <$> _caFile
+                  , TF.assign "cert_file" <$> _certFile
+                  , TF.assign "key_file" <$> _keyFile
+                  , TF.assign "region" <$> _region
+                  , TF.assign "secret_id" <$> _secretId
+                  , TF.assign "vault_token" <$> _vaultToken
                   ])
 
-instance TF.IsProvider Nomad where
-    type ProviderType Nomad = "nomad"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyNomad :: Nomad
-emptyNomad = Nomad {
-        _address = Nothing
-      , _ca_file = Nothing
-      , _cert_file = Nothing
-      , _key_file = Nothing
-      , _region = Nothing
-      , _secret_id = Nothing
-      , _vault_token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAddress :: Lens' Nomad (Maybe P.Text)
-providerAddress =
-    lens _address (\s a -> s { _address = a })
+instance P.HasAddress (Provider) (P.Text) where
+    address =
+        P.lens (_address :: Provider -> P.Text)
+               (\s a -> s { _address = a } :: Provider)
 
-providerCaFile :: Lens' Nomad (Maybe P.Text)
-providerCaFile =
-    lens _ca_file (\s a -> s { _ca_file = a })
+instance P.HasCaFile (Provider) (P.Maybe P.Text) where
+    caFile =
+        P.lens (_caFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _caFile = a } :: Provider)
 
-providerCertFile :: Lens' Nomad (Maybe P.Text)
-providerCertFile =
-    lens _cert_file (\s a -> s { _cert_file = a })
+instance P.HasCertFile (Provider) (P.Maybe P.Text) where
+    certFile =
+        P.lens (_certFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _certFile = a } :: Provider)
 
-providerKeyFile :: Lens' Nomad (Maybe P.Text)
-providerKeyFile =
-    lens _key_file (\s a -> s { _key_file = a })
+instance P.HasKeyFile (Provider) (P.Maybe P.Text) where
+    keyFile =
+        P.lens (_keyFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _keyFile = a } :: Provider)
 
-providerRegion :: Lens' Nomad (Maybe P.Text)
-providerRegion =
-    lens _region (\s a -> s { _region = a })
+instance P.HasRegion (Provider) (P.Maybe P.Text) where
+    region =
+        P.lens (_region :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _region = a } :: Provider)
 
-providerSecretId :: Lens' Nomad (Maybe P.Text)
-providerSecretId =
-    lens _secret_id (\s a -> s { _secret_id = a })
+instance P.HasSecretId (Provider) (P.Maybe P.Text) where
+    secretId =
+        P.lens (_secretId :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _secretId = a } :: Provider)
 
-providerVaultToken :: Lens' Nomad (Maybe P.Text)
-providerVaultToken =
-    lens _vault_token (\s a -> s { _vault_token = a })
+instance P.HasVaultToken (Provider) (P.Maybe P.Text) where
+    vaultToken =
+        P.lens (_vaultToken :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _vaultToken = a } :: Provider)

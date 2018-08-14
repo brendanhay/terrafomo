@@ -15,67 +15,60 @@ module Terrafomo.PowerDNS.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasName (..)
+      HasType' (..)
+    , HasZone (..)
+    , HasServerUrl (..)
+    , HasApiKey (..)
     , HasRecords (..)
     , HasTtl (..)
-    , HasType' (..)
-    , HasZone (..)
+    , HasName (..)
 
     -- ** Computed Attributes
-    , HasComputedName (..)
-    , HasComputedRecords (..)
-    , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedZone (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasRecords a b | a -> b where
-    records :: Lens' a b
-
-instance HasRecords a b => HasRecords (TF.Schema l p a) b where
-    records = TF.configuration . records
-
-class HasTtl a b | a -> b where
-    ttl :: Lens' a b
-
-instance HasTtl a b => HasTtl (TF.Schema l p a) b where
-    ttl = TF.configuration . ttl
-
 class HasType' a b | a -> b where
-    type' :: Lens' a b
+    type' :: P.Lens' a b
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
 class HasZone a b | a -> b where
-    zone :: Lens' a b
+    zone :: P.Lens' a b
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasServerUrl a b | a -> b where
+    serverUrl :: P.Lens' a b
 
-class HasComputedRecords a b | a -> b where
-    computedRecords :: a -> b
+instance HasServerUrl a b => HasServerUrl (TF.Schema l p a) b where
+    serverUrl = TF.configuration . serverUrl
 
-class HasComputedTtl a b | a -> b where
-    computedTtl :: a -> b
+class HasApiKey a b | a -> b where
+    apiKey :: P.Lens' a b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
+instance HasApiKey a b => HasApiKey (TF.Schema l p a) b where
+    apiKey = TF.configuration . apiKey
 
-class HasComputedZone a b | a -> b where
-    computedZone :: a -> b
+class HasRecords a b | a -> b where
+    records :: P.Lens' a b
+
+instance HasRecords a b => HasRecords (TF.Schema l p a) b where
+    records = TF.configuration . records
+
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name

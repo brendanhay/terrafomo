@@ -8,28 +8,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Random.Types
-    ( Keepers (..)
-    ) where
+module Terrafomo.Random.Types where
 
-import Data.HashMap.Strict (HashMap)
-import Data.Text           (Text)
+-- import Data.Text (Text)
 
-import GHC.Exts (IsList (..))
+-- import Terrafomo
 
-import Terrafomo
+-- import Formatting (Format, (%))
 
-import qualified Terrafomo.HCL as HCL
-
-newtype Keepers s = Keepers { fromKeepers :: HashMap Text (Attr s Text) }
-    deriving (Show, Eq)
-
-instance IsValue  (Keepers s)
-instance IsObject (Keepers s) where
-    toObject = HCL.object . fromKeepers
-
-instance IsList (Keepers s) where
-    type Item (Keepers s) = (Text, Attr s Text)
-
-    toList   = toList  . fromKeepers
-    fromList = Keepers . fromList
+-- import Terrafomo.Random.Lens
+-- import qualified Terrafomo.Attribute as TF
+-- import qualified Terrafomo.HCL as TF
+-- import qualified Terrafomo.Name as TF
+-- import qualified Terrafomo.Provider as TF
+-- import qualified Terrafomo.Schema as TF

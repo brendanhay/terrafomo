@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,2439 +17,2032 @@
 --
 module Terrafomo.Google.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** google_active_folder
       ActiveFolderData (..)
     , activeFolderData
 
+    -- ** google_billing_account
     , BillingAccountData (..)
     , billingAccountData
 
+    -- ** google_client_config
     , ClientConfigData (..)
     , clientConfigData
 
+    -- ** google_cloudfunctions_function
     , CloudfunctionsFunctionData (..)
     , cloudfunctionsFunctionData
 
+    -- ** google_compute_address
     , ComputeAddressData (..)
     , computeAddressData
 
+    -- ** google_compute_backend_service
     , ComputeBackendServiceData (..)
     , computeBackendServiceData
 
+    -- ** google_compute_default_service_account
     , ComputeDefaultServiceAccountData (..)
     , computeDefaultServiceAccountData
 
+    -- ** google_compute_forwarding_rule
     , ComputeForwardingRuleData (..)
     , computeForwardingRuleData
 
+    -- ** google_compute_global_address
     , ComputeGlobalAddressData (..)
     , computeGlobalAddressData
 
+    -- ** google_compute_image
     , ComputeImageData (..)
     , computeImageData
 
+    -- ** google_compute_instance_group
     , ComputeInstanceGroupData (..)
     , computeInstanceGroupData
 
+    -- ** google_compute_lb_ip_ranges
     , ComputeLbIpRangesData (..)
     , computeLbIpRangesData
 
+    -- ** google_compute_network
     , ComputeNetworkData (..)
     , computeNetworkData
 
+    -- ** google_compute_region_instance_group
     , ComputeRegionInstanceGroupData (..)
     , computeRegionInstanceGroupData
 
+    -- ** google_compute_regions
     , ComputeRegionsData (..)
     , computeRegionsData
 
+    -- ** google_compute_ssl_policy
     , ComputeSslPolicyData (..)
     , computeSslPolicyData
 
+    -- ** google_compute_subnetwork
     , ComputeSubnetworkData (..)
     , computeSubnetworkData
 
+    -- ** google_compute_vpn_gateway
     , ComputeVpnGatewayData (..)
     , computeVpnGatewayData
 
+    -- ** google_compute_zones
     , ComputeZonesData (..)
     , computeZonesData
 
+    -- ** google_container_cluster
     , ContainerClusterData (..)
     , containerClusterData
 
+    -- ** google_container_engine_versions
     , ContainerEngineVersionsData (..)
     , containerEngineVersionsData
 
+    -- ** google_container_registry_image
     , ContainerRegistryImageData (..)
     , containerRegistryImageData
 
+    -- ** google_container_registry_repository
     , ContainerRegistryRepositoryData (..)
     , containerRegistryRepositoryData
 
+    -- ** google_dns_managed_zone
     , DnsManagedZoneData (..)
     , dnsManagedZoneData
 
+    -- ** google_folder
     , FolderData (..)
     , folderData
 
+    -- ** google_iam_policy
     , IamPolicyData (..)
     , iamPolicyData
 
+    -- ** google_kms_secret
     , KmsSecretData (..)
     , kmsSecretData
 
+    -- ** google_netblock_ip_ranges
     , NetblockIpRangesData (..)
     , netblockIpRangesData
 
+    -- ** google_organization
     , OrganizationData (..)
     , organizationData
 
+    -- ** google_project
     , ProjectData (..)
     , projectData
 
+    -- ** google_service_account
     , ServiceAccountData (..)
     , serviceAccountData
 
+    -- ** google_service_account_key
     , ServiceAccountKeyData (..)
     , serviceAccountKeyData
 
+    -- ** google_storage_object_signed_url
     , StorageObjectSignedUrlData (..)
     , storageObjectSignedUrlData
 
+    -- ** google_storage_project_service_account
     , StorageProjectServiceAccountData (..)
     , storageProjectServiceAccountData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAccessToken (..)
-    , P.HasAccountId (..)
-    , P.HasBillingAccount (..)
-    , P.HasBinding (..)
-    , P.HasBucket (..)
-    , P.HasCiphertext (..)
-    , P.HasCredentials (..)
-    , P.HasCryptoKey (..)
-    , P.HasDigest (..)
-    , P.HasDisplayName (..)
-    , P.HasDomain (..)
-    , P.HasDuration (..)
-    , P.HasFolder (..)
-    , P.HasHttpMethod (..)
-    , P.HasHttpSslTcpInternal (..)
-    , P.HasLookupOrganization (..)
-    , P.HasName (..)
-    , P.HasNetwork (..)
-    , P.HasOpen (..)
-    , P.HasOrganization (..)
-    , P.HasParent (..)
-    , P.HasPath (..)
-    , P.HasProject (..)
-    , P.HasProjectId (..)
-    , P.HasPublicKeyType (..)
-    , P.HasRegion (..)
-    , P.HasSelfLink (..)
-    , P.HasServiceAccountId (..)
-    , P.HasStatus (..)
-    , P.HasTag (..)
-    , P.HasZone (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAccessToken (..)
-    , P.HasComputedAccountId (..)
-    , P.HasComputedAddress (..)
-    , P.HasComputedArchiveSizeBytes (..)
-    , P.HasComputedAvailableMemoryMb (..)
-    , P.HasComputedBackend (..)
-    , P.HasComputedBackendService (..)
-    , P.HasComputedBillingAccount (..)
-    , P.HasComputedBinding (..)
-    , P.HasComputedBucket (..)
-    , P.HasComputedCidrBlocks (..)
-    , P.HasComputedCidrBlocksIpv4 (..)
-    , P.HasComputedCidrBlocksIpv6 (..)
-    , P.HasComputedCiphertext (..)
-    , P.HasComputedConnectionDrainingTimeoutSec (..)
-    , P.HasComputedCreateTime (..)
-    , P.HasComputedCreationTimestamp (..)
-    , P.HasComputedCredentials (..)
-    , P.HasComputedCryptoKey (..)
-    , P.HasComputedCustomFeatures (..)
-    , P.HasComputedDefaultClusterVersion (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDigest (..)
-    , P.HasComputedDirectoryCustomerId (..)
-    , P.HasComputedDiskSizeGb (..)
-    , P.HasComputedDisplayName (..)
-    , P.HasComputedDnsName (..)
-    , P.HasComputedDomain (..)
-    , P.HasComputedDuration (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedEnableCdn (..)
-    , P.HasComputedEnabledFeatures (..)
-    , P.HasComputedEntryPoint (..)
-    , P.HasComputedFamily' (..)
-    , P.HasComputedFingerprint (..)
-    , P.HasComputedFolder (..)
-    , P.HasComputedGatewayAddress (..)
-    , P.HasComputedGatewayIpv4 (..)
-    , P.HasComputedHealthChecks (..)
-    , P.HasComputedHttpMethod (..)
-    , P.HasComputedHttpSslTcpInternal (..)
-    , P.HasComputedHttpsTriggerUrl (..)
-    , P.HasComputedId (..)
-    , P.HasComputedImageEncryptionKeySha256 (..)
-    , P.HasComputedImageId (..)
-    , P.HasComputedImageUrl (..)
-    , P.HasComputedInstances (..)
-    , P.HasComputedIpAddress (..)
-    , P.HasComputedIpCidrRange (..)
-    , P.HasComputedIpProtocol (..)
-    , P.HasComputedLabelFingerprint (..)
-    , P.HasComputedLabels (..)
-    , P.HasComputedLatestMasterVersion (..)
-    , P.HasComputedLatestNodeVersion (..)
-    , P.HasComputedLicenses (..)
-    , P.HasComputedLifecycleState (..)
-    , P.HasComputedLoadBalancingScheme (..)
-    , P.HasComputedLookupOrganization (..)
-    , P.HasComputedMinTlsVersion (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNameServers (..)
-    , P.HasComputedNamedPort (..)
-    , P.HasComputedNames (..)
-    , P.HasComputedNetwork (..)
-    , P.HasComputedOpen (..)
-    , P.HasComputedOrganization (..)
-    , P.HasComputedParent (..)
-    , P.HasComputedPath (..)
-    , P.HasComputedPlaintext (..)
-    , P.HasComputedPolicyData (..)
-    , P.HasComputedPortName (..)
-    , P.HasComputedPortRange (..)
-    , P.HasComputedPorts (..)
-    , P.HasComputedPrivateIpGoogleAccess (..)
-    , P.HasComputedProfile (..)
-    , P.HasComputedProject (..)
-    , P.HasComputedProjectId (..)
-    , P.HasComputedProjectIds (..)
-    , P.HasComputedProtocol (..)
-    , P.HasComputedPublicKey (..)
-    , P.HasComputedPublicKeyType (..)
-    , P.HasComputedRegion (..)
-    , P.HasComputedRepositoryUrl (..)
-    , P.HasComputedSecondaryIpRange (..)
-    , P.HasComputedSelfLink (..)
-    , P.HasComputedServiceAccountId (..)
-    , P.HasComputedSessionAffinity (..)
-    , P.HasComputedSignedUrl (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSourceArchiveBucket (..)
-    , P.HasComputedSourceArchiveObject (..)
-    , P.HasComputedSourceDisk (..)
-    , P.HasComputedSourceDiskEncryptionKeySha256 (..)
-    , P.HasComputedSourceDiskId (..)
-    , P.HasComputedSourceImageId (..)
-    , P.HasComputedStatus (..)
-    , P.HasComputedSubnetwork (..)
-    , P.HasComputedSubnetworksSelfLinks (..)
-    , P.HasComputedTag (..)
-    , P.HasComputedTarget (..)
-    , P.HasComputedTimeout (..)
-    , P.HasComputedTimeoutSec (..)
-    , P.HasComputedTriggerBucket (..)
-    , P.HasComputedTriggerHttp (..)
-    , P.HasComputedTriggerTopic (..)
-    , P.HasComputedUniqueId (..)
-    , P.HasComputedValidMasterVersions (..)
-    , P.HasComputedValidNodeVersions (..)
-    , P.HasComputedZone (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Google.Settings
 
-import Terrafomo.Google.Types as P
-
+import qualified Data.Hashable             as P
+import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
+import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
-import qualified Data.Word                 as P
-import qualified GHC.Base                  as P
-import qualified Numeric.Natural           as P
+import qualified GHC.Generics              as P
+import qualified Lens.Micro                as P
+import qualified Prelude                   as P
+import qualified Terrafomo.Attribute       as TF
 import qualified Terrafomo.Google.Lens     as P
 import qualified Terrafomo.Google.Provider as P
+import qualified Terrafomo.Google.Types    as P
+import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @google_active_folder@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_active_folder terraform documentation>
+-- for more information.
+data ActiveFolderData s = ActiveFolderData'
+    { _displayName :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Required)
+    --
+    , _parent      :: TF.Attr s P.Text
+    -- ^ @parent@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_active_folder@ Google datasource.
-
-Get an active folder within GCP by @display_name@ and @parent@ .
--}
-data ActiveFolderData s = ActiveFolderData {
-      _display_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The folder's display name. -}
-    , _parent       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The resource name of the parent Folder or Organization. -}
-    } deriving (Show, Eq)
+activeFolderData
+    :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
+    -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
+    -> TF.DataSource P.Provider (ActiveFolderData s)
+activeFolderData _displayName _parent =
+    TF.newDataSource "google_active_folder" TF.validator $
+        ActiveFolderData'
+            { _displayName = _displayName
+            , _parent = _parent
+            }
 
 instance TF.IsObject (ActiveFolderData s) where
-    toObject ActiveFolderData{..} = catMaybes
-        [ TF.assign "display_name" <$> TF.attribute _display_name
+    toObject ActiveFolderData'{..} = P.catMaybes
+        [ TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "parent" <$> TF.attribute _parent
         ]
 
+instance TF.IsValid (ActiveFolderData s) where
+    validator = P.mempty
+
 instance P.HasDisplayName (ActiveFolderData s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: ActiveFolderData s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: ActiveFolderData s)
+        P.lens (_displayName :: ActiveFolderData s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: ActiveFolderData s)
 
 instance P.HasParent (ActiveFolderData s) (TF.Attr s P.Text) where
     parent =
-        lens (_parent :: ActiveFolderData s -> TF.Attr s P.Text)
-             (\s a -> s { _parent = a } :: ActiveFolderData s)
-
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ActiveFolderData s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: ActiveFolderData s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_parent :: ActiveFolderData s -> TF.Attr s P.Text)
+               (\s a -> s { _parent = a } :: ActiveFolderData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ActiveFolderData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedParent (TF.Ref s' (ActiveFolderData s)) (TF.Attr s P.Text) where
-    computedParent =
-        (_parent :: ActiveFolderData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_billing_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_billing_account terraform documentation>
+-- for more information.
+data BillingAccountData s = BillingAccountData'
+    { _billingAccount :: TF.Attr s P.Text
+    -- ^ @billing_account@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-activeFolderData :: TF.DataSource P.Google (ActiveFolderData s)
-activeFolderData =
-    TF.newDataSource "google_active_folder" $
-        ActiveFolderData {
-              _display_name = TF.Nil
-            , _parent = TF.Nil
+billingAccountData
+    :: TF.DataSource P.Provider (BillingAccountData s)
+billingAccountData =
+    TF.newDataSource "google_billing_account" TF.validator $
+        BillingAccountData'
+            { _billingAccount = TF.Nil
             }
 
-{- | The @google_billing_account@ Google datasource.
-
-Use this data source to get information about a Google Billing Account.
--}
-data BillingAccountData s = BillingAccountData {
-      _billing_account :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - The name of the billing account in the form @{billing_account_id}@ or @billingAccounts/{billing_account_id}@ . -}
-    , _display_name    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - The display name of the billing account. -}
-    , _open            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - @true@ if the billing account is open, @false@ if the billing account is closed. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (BillingAccountData s) where
-    toObject BillingAccountData{..} = catMaybes
-        [ TF.assign "billing_account" <$> TF.attribute _billing_account
-        , TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "open" <$> TF.attribute _open
+    toObject BillingAccountData'{..} = P.catMaybes
+        [ TF.assign "billing_account" <$> TF.attribute _billingAccount
         ]
+
+instance TF.IsValid (BillingAccountData s) where
+    validator = P.mempty
 
 instance P.HasBillingAccount (BillingAccountData s) (TF.Attr s P.Text) where
     billingAccount =
-        lens (_billing_account :: BillingAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _billing_account = a } :: BillingAccountData s)
-
-instance P.HasDisplayName (BillingAccountData s) (TF.Attr s P.Text) where
-    displayName =
-        lens (_display_name :: BillingAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: BillingAccountData s)
-
-instance P.HasOpen (BillingAccountData s) (TF.Attr s P.Text) where
-    open =
-        lens (_open :: BillingAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _open = a } :: BillingAccountData s)
-
-instance s ~ s' => P.HasComputedBillingAccount (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
-    computedBillingAccount =
-        (_billing_account :: BillingAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_billingAccount :: BillingAccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _billingAccount = a } :: BillingAccountData s)
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: BillingAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedOpen (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
-    computedOpen =
-        (_open :: BillingAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedOpen (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Bool) where
+    computedOpen x = TF.compute (TF.refKey x) "_computedOpen"
 
-instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
-    computedProjectIds x = TF.compute (TF.refKey x) "project_ids"
+instance s ~ s' => P.HasComputedProjectIds (TF.Ref s' (BillingAccountData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedProjectIds x = TF.compute (TF.refKey x) "_computedProjectIds"
 
-billingAccountData :: TF.DataSource P.Google (BillingAccountData s)
-billingAccountData =
-    TF.newDataSource "google_billing_account" $
-        BillingAccountData {
-              _billing_account = TF.Nil
-            , _display_name = TF.Nil
-            , _open = TF.Nil
-            }
+-- | @google_client_config@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_client_config terraform documentation>
+-- for more information.
+data ClientConfigData s = ClientConfigData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_client_config@ Google datasource.
-
-Use this data source to access the configuration of the Google Cloud
-provider.
--}
-data ClientConfigData s = ClientConfigData {
-      _access_token :: !(TF.Attr s P.Text)
-    {- ^ - The OAuth2 access token used by the client to authenticate against the Google Cloud API. -}
-    , _project      :: !(TF.Attr s P.Text)
-    {- ^ - The ID of the project to apply any resources to. -}
-    , _region       :: !(TF.Attr s P.Text)
-    {- ^ - The region to operate under. -}
-    } deriving (Show, Eq)
+clientConfigData
+    :: TF.DataSource P.Provider (ClientConfigData s)
+clientConfigData =
+    TF.newDataSource "google_client_config" TF.validator $
+        ClientConfigData'
 
 instance TF.IsObject (ClientConfigData s) where
-    toObject ClientConfigData{..} = catMaybes
-        [ TF.assign "access_token" <$> TF.attribute _access_token
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        ]
+    toObject _ = []
 
-instance P.HasAccessToken (ClientConfigData s) (TF.Attr s P.Text) where
-    accessToken =
-        lens (_access_token :: ClientConfigData s -> TF.Attr s P.Text)
-             (\s a -> s { _access_token = a } :: ClientConfigData s)
-
-instance P.HasProject (ClientConfigData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ClientConfigData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ClientConfigData s)
-
-instance P.HasRegion (ClientConfigData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ClientConfigData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ClientConfigData s)
+instance TF.IsValid (ClientConfigData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedAccessToken (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
-    computedAccessToken =
-        (_access_token :: ClientConfigData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedAccessToken x = TF.compute (TF.refKey x) "_computedAccessToken"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ClientConfigData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ClientConfigData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
-clientConfigData :: TF.DataSource P.Google (ClientConfigData s)
-clientConfigData =
-    TF.newDataSource "google_client_config" $
-        ClientConfigData {
-              _access_token = TF.Nil
+-- | @google_cloudfunctions_function@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_cloudfunctions_function terraform documentation>
+-- for more information.
+data CloudfunctionsFunctionData s = CloudfunctionsFunctionData'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+cloudfunctionsFunctionData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (CloudfunctionsFunctionData s)
+cloudfunctionsFunctionData _name =
+    TF.newDataSource "google_cloudfunctions_function" TF.validator $
+        CloudfunctionsFunctionData'
+            { _name = _name
             , _project = TF.Nil
             , _region = TF.Nil
             }
 
-{- | The @google_cloudfunctions_function@ Google datasource.
-
-Get information about a Google Cloud Function. For more information see the
-<https://cloud.google.com/functions/docs/> and
-<https://cloud.google.com/functions/docs/apis> .
--}
-data CloudfunctionsFunctionData s = CloudfunctionsFunctionData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of a Cloud Function. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region in which the resource belongs. If it is not provided, the provider region is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (CloudfunctionsFunctionData s) where
-    toObject CloudfunctionsFunctionData{..} = catMaybes
+    toObject CloudfunctionsFunctionData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         ]
+
+instance TF.IsValid (CloudfunctionsFunctionData s) where
+    validator = P.mempty
 
 instance P.HasName (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CloudfunctionsFunctionData s)
+        P.lens (_name :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasProject (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: CloudfunctionsFunctionData s)
+        P.lens (_project :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: CloudfunctionsFunctionData s)
 
 instance P.HasRegion (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
+        P.lens (_region :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
 
-instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedAvailableMemoryMb x = TF.compute (TF.refKey x) "available_memory_mb"
+instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Integer) where
+    computedAvailableMemoryMb x = TF.compute (TF.refKey x) "_computedAvailableMemoryMb"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedEntryPoint (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedEntryPoint x = TF.compute (TF.refKey x) "entry_point"
+    computedEntryPoint x = TF.compute (TF.refKey x) "_computedEntryPoint"
 
 instance s ~ s' => P.HasComputedHttpsTriggerUrl (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
+    computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "_computedHttpsTriggerUrl"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedLabels x = TF.compute (TF.refKey x) "labels"
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedRetryOnFailure (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Bool) where
+    computedRetryOnFailure x = TF.compute (TF.refKey x) "_computedRetryOnFailure"
 
 instance s ~ s' => P.HasComputedSourceArchiveBucket (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedSourceArchiveBucket x = TF.compute (TF.refKey x) "source_archive_bucket"
+    computedSourceArchiveBucket x = TF.compute (TF.refKey x) "_computedSourceArchiveBucket"
 
 instance s ~ s' => P.HasComputedSourceArchiveObject (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedSourceArchiveObject x = TF.compute (TF.refKey x) "source_archive_object"
+    computedSourceArchiveObject x = TF.compute (TF.refKey x) "_computedSourceArchiveObject"
 
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Integer) where
+    computedTimeout x = TF.compute (TF.refKey x) "_computedTimeout"
 
 instance s ~ s' => P.HasComputedTriggerBucket (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedTriggerBucket x = TF.compute (TF.refKey x) "trigger_bucket"
+    computedTriggerBucket x = TF.compute (TF.refKey x) "_computedTriggerBucket"
 
-instance s ~ s' => P.HasComputedTriggerHttp (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedTriggerHttp x = TF.compute (TF.refKey x) "trigger_http"
+instance s ~ s' => P.HasComputedTriggerHttp (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Bool) where
+    computedTriggerHttp x = TF.compute (TF.refKey x) "_computedTriggerHttp"
 
 instance s ~ s' => P.HasComputedTriggerTopic (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
-    computedTriggerTopic x = TF.compute (TF.refKey x) "trigger_topic"
+    computedTriggerTopic x = TF.compute (TF.refKey x) "_computedTriggerTopic"
 
-cloudfunctionsFunctionData :: TF.DataSource P.Google (CloudfunctionsFunctionData s)
-cloudfunctionsFunctionData =
-    TF.newDataSource "google_cloudfunctions_function" $
-        CloudfunctionsFunctionData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            , _region = TF.Nil
+-- | @google_compute_address@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_address terraform documentation>
+-- for more information.
+data ComputeAddressData s = ComputeAddressData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeAddressData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeAddressData s)
+computeAddressData _name =
+    TF.newDataSource "google_compute_address" TF.validator $
+        ComputeAddressData'
+            { _name = _name
             }
 
-{- | The @google_compute_address@ Google datasource.
-
-Get the IP address from a static address. For more information see the
-official
-<https://cloud.google.com/compute/docs/reference/latest/addresses/get>
-documentation.
--}
-data ComputeAddressData s = ComputeAddressData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the resource, required by GCE. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Region in which the created address reside. If it is not provided, the provider region is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeAddressData s) where
-    toObject ComputeAddressData{..} = catMaybes
+    toObject ComputeAddressData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
         ]
+
+instance TF.IsValid (ComputeAddressData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeAddressData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeAddressData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeAddressData s)
-
-instance P.HasProject (ComputeAddressData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeAddressData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeAddressData s)
-
-instance P.HasRegion (ComputeAddressData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeAddressData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeAddressData s)
+        P.lens (_name :: ComputeAddressData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeAddressData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeAddressData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeAddressData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeAddressData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-computeAddressData :: TF.DataSource P.Google (ComputeAddressData s)
-computeAddressData =
-    TF.newDataSource "google_compute_address" $
-        ComputeAddressData {
-              _name = TF.Nil
+-- | @google_compute_backend_service@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_backend_service terraform documentation>
+-- for more information.
+data ComputeBackendServiceData s = ComputeBackendServiceData'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeBackendServiceData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeBackendServiceData s)
+computeBackendServiceData _name =
+    TF.newDataSource "google_compute_backend_service" TF.validator $
+        ComputeBackendServiceData'
+            { _name = _name
             , _project = TF.Nil
-            , _region = TF.Nil
             }
 
-{- | The @google_compute_backend_service@ Google datasource.
-
-Provide acces to a Backend Service's attribute. For more information see
-<https://cloud.google.com/compute/docs/load-balancing/http/backend-service>
-and the
-<https://cloud.google.com/compute/docs/reference/latest/backendServices> .
--}
-data ComputeBackendServiceData s = ComputeBackendServiceData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the Backend Service. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeBackendServiceData s) where
-    toObject ComputeBackendServiceData{..} = catMaybes
+    toObject ComputeBackendServiceData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
+
+instance TF.IsValid (ComputeBackendServiceData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeBackendServiceData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeBackendServiceData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeBackendServiceData s)
+        P.lens (_name :: ComputeBackendServiceData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeBackendServiceData s)
 
 instance P.HasProject (ComputeBackendServiceData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeBackendServiceData s)
+        P.lens (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeBackendServiceData s)
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedBackend x = TF.compute (TF.refKey x) "backend"
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (Backend s)]) where
+    computedBackend x = TF.compute (TF.refKey x) "_computedBackend"
 
-instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedConnectionDrainingTimeoutSec x = TF.compute (TF.refKey x) "connection_draining_timeout_sec"
+instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (CdnPolicy s)]) where
+    computedCdnPolicy x = TF.compute (TF.refKey x) "_computedCdnPolicy"
+
+instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Integer) where
+    computedConnectionDrainingTimeoutSec x = TF.compute (TF.refKey x) "_computedConnectionDrainingTimeoutSec"
+
+instance s ~ s' => P.HasComputedCustomRequestHeaders (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCustomRequestHeaders x = TF.compute (TF.refKey x) "_computedCustomRequestHeaders"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedEnableCdn (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedEnableCdn x = TF.compute (TF.refKey x) "enable_cdn"
+instance s ~ s' => P.HasComputedEnableCdn (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Bool) where
+    computedEnableCdn x = TF.compute (TF.refKey x) "_computedEnableCdn"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
-instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedHealthChecks x = TF.compute (TF.refKey x) "health_checks"
+instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedHealthChecks x = TF.compute (TF.refKey x) "_computedHealthChecks"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeBackendServiceData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (Iap s)]) where
+    computedIap x = TF.compute (TF.refKey x) "_computedIap"
 
 instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedPortName x = TF.compute (TF.refKey x) "port_name"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedPortName x = TF.compute (TF.refKey x) "_computedPortName"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedProtocol x = TF.compute (TF.refKey x) "protocol"
+    computedProtocol x = TF.compute (TF.refKey x) "_computedProtocol"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+
+instance s ~ s' => P.HasComputedSecurityPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedSecurityPolicy x = TF.compute (TF.refKey x) "_computedSecurityPolicy"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
+    computedSessionAffinity x = TF.compute (TF.refKey x) "_computedSessionAffinity"
 
-instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
-    computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
+instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Integer) where
+    computedTimeoutSec x = TF.compute (TF.refKey x) "_computedTimeoutSec"
 
-computeBackendServiceData :: TF.DataSource P.Google (ComputeBackendServiceData s)
-computeBackendServiceData =
-    TF.newDataSource "google_compute_backend_service" $
-        ComputeBackendServiceData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            }
+-- | @google_compute_default_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_default_service_account terraform documentation>
+-- for more information.
+data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_compute_default_service_account@ Google datasource.
-
-Use this data source to retrieve default service account for this project
--}
-data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData {
-      _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project ID. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
+computeDefaultServiceAccountData
+    :: TF.DataSource P.Provider (ComputeDefaultServiceAccountData s)
+computeDefaultServiceAccountData =
+    TF.newDataSource "google_compute_default_service_account" TF.validator $
+        ComputeDefaultServiceAccountData'
 
 instance TF.IsObject (ComputeDefaultServiceAccountData s) where
-    toObject ComputeDefaultServiceAccountData{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
-        ]
+    toObject _ = []
 
-instance P.HasProject (ComputeDefaultServiceAccountData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeDefaultServiceAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeDefaultServiceAccountData s)
+instance TF.IsValid (ComputeDefaultServiceAccountData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeDefaultServiceAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
-computeDefaultServiceAccountData :: TF.DataSource P.Google (ComputeDefaultServiceAccountData s)
-computeDefaultServiceAccountData =
-    TF.newDataSource "google_compute_default_service_account" $
-        ComputeDefaultServiceAccountData {
-              _project = TF.Nil
+-- | @google_compute_forwarding_rule@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_forwarding_rule terraform documentation>
+-- for more information.
+data ComputeForwardingRuleData s = ComputeForwardingRuleData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeForwardingRuleData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeForwardingRuleData s)
+computeForwardingRuleData _name =
+    TF.newDataSource "google_compute_forwarding_rule" TF.validator $
+        ComputeForwardingRuleData'
+            { _name = _name
             }
 
-{- | The @google_compute_forwarding_rule@ Google datasource.
-
-Get a forwarding rule within GCE from its name.
--}
-data ComputeForwardingRuleData s = ComputeForwardingRuleData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the forwarding rule. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region in which the resource belongs. If it is not provided, the project region is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeForwardingRuleData s) where
-    toObject ComputeForwardingRuleData{..} = catMaybes
+    toObject ComputeForwardingRuleData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
         ]
+
+instance TF.IsValid (ComputeForwardingRuleData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeForwardingRuleData s)
-
-instance P.HasProject (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeForwardingRuleData s)
-
-instance P.HasRegion (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeForwardingRuleData s)
+        P.lens (_name :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeForwardingRuleData s)
 
 instance s ~ s' => P.HasComputedBackendService (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedBackendService x = TF.compute (TF.refKey x) "backend_service"
+    computedBackendService x = TF.compute (TF.refKey x) "_computedBackendService"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
 
 instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedIpProtocol x = TF.compute (TF.refKey x) "ip_protocol"
+    computedIpProtocol x = TF.compute (TF.refKey x) "_computedIpProtocol"
 
 instance s ~ s' => P.HasComputedLoadBalancingScheme (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedLoadBalancingScheme x = TF.compute (TF.refKey x) "load_balancing_scheme"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedLoadBalancingScheme x = TF.compute (TF.refKey x) "_computedLoadBalancingScheme"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedPortRange x = TF.compute (TF.refKey x) "port_range"
+    computedPortRange x = TF.compute (TF.refKey x) "_computedPortRange"
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedPorts x = TF.compute (TF.refKey x) "ports"
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedPorts x = TF.compute (TF.refKey x) "_computedPorts"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedSubnetwork x = TF.compute (TF.refKey x) "subnetwork"
+    computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
 
 instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
-    computedTarget x = TF.compute (TF.refKey x) "target"
+    computedTarget x = TF.compute (TF.refKey x) "_computedTarget"
 
-computeForwardingRuleData :: TF.DataSource P.Google (ComputeForwardingRuleData s)
-computeForwardingRuleData =
-    TF.newDataSource "google_compute_forwarding_rule" $
-        ComputeForwardingRuleData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            , _region = TF.Nil
+-- | @google_compute_global_address@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_global_address terraform documentation>
+-- for more information.
+data ComputeGlobalAddressData s = ComputeGlobalAddressData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeGlobalAddressData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeGlobalAddressData s)
+computeGlobalAddressData _name =
+    TF.newDataSource "google_compute_global_address" TF.validator $
+        ComputeGlobalAddressData'
+            { _name = _name
             }
 
-{- | The @google_compute_global_address@ Google datasource.
-
-Get the IP address from a static address reserved for a Global Forwarding
-Rule which are only used for HTTP load balancing. For more information see
-the official
-<https://cloud.google.com/compute/docs/reference/latest/globalAddresses>
-documentation.
--}
-data ComputeGlobalAddressData s = ComputeGlobalAddressData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the resource, required by GCE. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeGlobalAddressData s) where
-    toObject ComputeGlobalAddressData{..} = catMaybes
+    toObject ComputeGlobalAddressData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
         ]
+
+instance TF.IsValid (ComputeGlobalAddressData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeGlobalAddressData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
-
-instance P.HasProject (ComputeGlobalAddressData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeGlobalAddressData s)
+        P.lens (_name :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-computeGlobalAddressData :: TF.DataSource P.Google (ComputeGlobalAddressData s)
-computeGlobalAddressData =
-    TF.newDataSource "google_compute_global_address" $
-        ComputeGlobalAddressData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            }
+-- | @google_compute_image@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_image terraform documentation>
+-- for more information.
+data ComputeImageData s = ComputeImageData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_compute_image@ Google datasource.
-
-Get information about a Google Compute Image. Check that your service
-account has the @compute.imageUser@ role if you want to share
-<https://cloud.google.com/compute/docs/images/sharing-images-across-projects>
-from another project. If you want to use
-<https://cloud.google.com/compute/docs/images#os-compute-support> , do not
-forget to specify the dedicated project. For more information see
-<https://cloud.google.com/compute/docs/images> and its
-<https://cloud.google.com/compute/docs/reference/latest/images> .
--}
-data ComputeImageData s = ComputeImageData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ or @family@ - (Required) The name of a specific image or a family. Exactly one of @name@ of @family@ must be specified. If @name@ is specified, it will fetch the corresponding image. If @family@ is specified, it will returns the latest image that is part of an image family and is not deprecated. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. If you are using a <https://cloud.google.com/compute/docs/images#os-compute-support> , be sure to specify the correct Image Project. -}
-    } deriving (Show, Eq)
+computeImageData
+    :: TF.DataSource P.Provider (ComputeImageData s)
+computeImageData =
+    TF.newDataSource "google_compute_image" TF.validator $
+        ComputeImageData'
 
 instance TF.IsObject (ComputeImageData s) where
-    toObject ComputeImageData{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        ]
+    toObject _ = []
 
-instance P.HasName (ComputeImageData s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeImageData s)
+instance TF.IsValid (ComputeImageData s) where
+    validator = P.mempty
 
-instance P.HasProject (ComputeImageData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeImageData s)
-
-instance s ~ s' => P.HasComputedArchiveSizeBytes (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedArchiveSizeBytes x = TF.compute (TF.refKey x) "archive_size_bytes"
+instance s ~ s' => P.HasComputedArchiveSizeBytes (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Integer) where
+    computedArchiveSizeBytes x = TF.compute (TF.refKey x) "_computedArchiveSizeBytes"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
+instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Integer) where
+    computedDiskSizeGb x = TF.compute (TF.refKey x) "_computedDiskSizeGb"
 
-instance s ~ s' => P.HasComputedFamily' (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedFamily' x = TF.compute (TF.refKey x) "family"
+instance s ~ s' => P.HasComputedFamily (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
+    computedFamily x = TF.compute (TF.refKey x) "_computedFamily"
 
 instance s ~ s' => P.HasComputedImageEncryptionKeySha256 (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedImageEncryptionKeySha256 x = TF.compute (TF.refKey x) "image_encryption_key_sha256"
+    computedImageEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedImageEncryptionKeySha256"
 
 instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedImageId x = TF.compute (TF.refKey x) "image_id"
+    computedImageId x = TF.compute (TF.refKey x) "_computedImageId"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
 
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedLabels x = TF.compute (TF.refKey x) "labels"
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
 
-instance s ~ s' => P.HasComputedLicenses (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedLicenses x = TF.compute (TF.refKey x) "licenses"
+instance s ~ s' => P.HasComputedLicenses (TF.Ref s' (ComputeImageData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedLicenses x = TF.compute (TF.refKey x) "_computedLicenses"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeImageData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
 instance s ~ s' => P.HasComputedSourceDisk (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedSourceDisk x = TF.compute (TF.refKey x) "source_disk"
+    computedSourceDisk x = TF.compute (TF.refKey x) "_computedSourceDisk"
 
 instance s ~ s' => P.HasComputedSourceDiskEncryptionKeySha256 (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "source_disk_encryption_key_sha256"
+    computedSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedSourceDiskEncryptionKeySha256"
 
 instance s ~ s' => P.HasComputedSourceDiskId (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedSourceDiskId x = TF.compute (TF.refKey x) "source_disk_id"
+    computedSourceDiskId x = TF.compute (TF.refKey x) "_computedSourceDiskId"
 
 instance s ~ s' => P.HasComputedSourceImageId (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedSourceImageId x = TF.compute (TF.refKey x) "source_image_id"
+    computedSourceImageId x = TF.compute (TF.refKey x) "_computedSourceImageId"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-computeImageData :: TF.DataSource P.Google (ComputeImageData s)
-computeImageData =
-    TF.newDataSource "google_compute_image" $
-        ComputeImageData {
-              _name = TF.Nil
-            , _project = TF.Nil
+-- | @google_compute_instance_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_instance_group terraform documentation>
+-- for more information.
+data ComputeInstanceGroupData s = ComputeInstanceGroupData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeInstanceGroupData
+    :: TF.DataSource P.Provider (ComputeInstanceGroupData s)
+computeInstanceGroupData =
+    TF.newDataSource "google_compute_instance_group" TF.validator $
+        ComputeInstanceGroupData'
+            { _name = TF.Nil
             }
 
-{- | The @google_compute_instance_group@ Google datasource.
-
-Get a Compute Instance Group within GCE. For more information, see
-<https://cloud.google.com/compute/docs/instance-groups/#unmanaged_instance_groups>
-and <https://cloud.google.com/compute/docs/reference/latest/instanceGroups>
--}
-data ComputeInstanceGroupData s = ComputeInstanceGroupData {
-      _name      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the instance group. Either @name@ or @self_link@ must be provided. -}
-    , _project   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _self_link :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The self link of the instance group. Either @name@ or @self_link@ must be provided. -}
-    , _zone      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The zone of the instance group. If referencing the instance group by name and @zone@ is not provided, the provider zone is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeInstanceGroupData s) where
-    toObject ComputeInstanceGroupData{..} = catMaybes
+    toObject ComputeInstanceGroupData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "self_link" <$> TF.attribute _self_link
-        , TF.assign "zone" <$> TF.attribute _zone
         ]
+
+instance TF.IsValid (ComputeInstanceGroupData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
-
-instance P.HasProject (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeInstanceGroupData s)
-
-instance P.HasSelfLink (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
-    selfLink =
-        lens (_self_link :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _self_link = a } :: ComputeInstanceGroupData s)
-
-instance P.HasZone (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
-    zone =
-        lens (_zone :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ComputeInstanceGroupData s)
+        P.lens (_name :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedInstances x = TF.compute (TF.refKey x) "instances"
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedNamedPort x = TF.compute (TF.refKey x) "named_port"
+instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (NamedPort s)]) where
+    computedNamedPort x = TF.compute (TF.refKey x) "_computedNamedPort"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Integer) where
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedZone x = TF.compute (TF.refKey x) "_computedZone"
 
-computeInstanceGroupData :: TF.DataSource P.Google (ComputeInstanceGroupData s)
-computeInstanceGroupData =
-    TF.newDataSource "google_compute_instance_group" $
-        ComputeInstanceGroupData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            , _self_link = TF.Nil
-            , _zone = TF.Nil
-            }
+-- | @google_compute_lb_ip_ranges@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_lb_ip_ranges terraform documentation>
+-- for more information.
+data ComputeLbIpRangesData s = ComputeLbIpRangesData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_compute_lb_ip_ranges@ Google datasource.
-
-Use this data source to access IP ranges in your firewall rules.
-https://cloud.google.com/compute/docs/load-balancing/health-checks#health_check_source_ips_and_firewall_rules
--}
-data ComputeLbIpRangesData s = ComputeLbIpRangesData {
-      _http_ssl_tcp_internal :: !(TF.Attr s P.Text)
-    {- ^ - The IP ranges used for health checks when HTTP(S), SSL proxy, TCP proxy, and Internal load balancing is used -}
-    , _network               :: !(TF.Attr s P.Text)
-    {- ^ - The IP ranges used for health checks when Network load balancing is used -}
-    } deriving (Show, Eq)
+computeLbIpRangesData
+    :: TF.DataSource P.Provider (ComputeLbIpRangesData s)
+computeLbIpRangesData =
+    TF.newDataSource "google_compute_lb_ip_ranges" TF.validator $
+        ComputeLbIpRangesData'
 
 instance TF.IsObject (ComputeLbIpRangesData s) where
-    toObject ComputeLbIpRangesData{..} = catMaybes
-        [ TF.assign "http_ssl_tcp_internal" <$> TF.attribute _http_ssl_tcp_internal
-        , TF.assign "network" <$> TF.attribute _network
-        ]
+    toObject _ = []
 
-instance P.HasHttpSslTcpInternal (ComputeLbIpRangesData s) (TF.Attr s P.Text) where
-    httpSslTcpInternal =
-        lens (_http_ssl_tcp_internal :: ComputeLbIpRangesData s -> TF.Attr s P.Text)
-             (\s a -> s { _http_ssl_tcp_internal = a } :: ComputeLbIpRangesData s)
+instance TF.IsValid (ComputeLbIpRangesData s) where
+    validator = P.mempty
 
-instance P.HasNetwork (ComputeLbIpRangesData s) (TF.Attr s P.Text) where
-    network =
-        lens (_network :: ComputeLbIpRangesData s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: ComputeLbIpRangesData s)
+instance s ~ s' => P.HasComputedHttpSslTcpInternal (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedHttpSslTcpInternal x = TF.compute (TF.refKey x) "_computedHttpSslTcpInternal"
 
-instance s ~ s' => P.HasComputedHttpSslTcpInternal (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s P.Text) where
-    computedHttpSslTcpInternal =
-        (_http_ssl_tcp_internal :: ComputeLbIpRangesData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s P.Text) where
-    computedNetwork =
-        (_network :: ComputeLbIpRangesData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_compute_network@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_network terraform documentation>
+-- for more information.
+data ComputeNetworkData s = ComputeNetworkData'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-computeLbIpRangesData :: TF.DataSource P.Google (ComputeLbIpRangesData s)
-computeLbIpRangesData =
-    TF.newDataSource "google_compute_lb_ip_ranges" $
-        ComputeLbIpRangesData {
-              _http_ssl_tcp_internal = TF.Nil
-            , _network = TF.Nil
+computeNetworkData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeNetworkData s)
+computeNetworkData _name =
+    TF.newDataSource "google_compute_network" TF.validator $
+        ComputeNetworkData'
+            { _name = _name
+            , _project = TF.Nil
             }
 
-{- | The @google_compute_network@ Google datasource.
-
-Get a network within GCE from its name.
--}
-data ComputeNetworkData s = ComputeNetworkData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the network. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeNetworkData s) where
-    toObject ComputeNetworkData{..} = catMaybes
+    toObject ComputeNetworkData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
+
+instance TF.IsValid (ComputeNetworkData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeNetworkData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeNetworkData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeNetworkData s)
+        P.lens (_name :: ComputeNetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeNetworkData s)
 
 instance P.HasProject (ComputeNetworkData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeNetworkData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeNetworkData s)
+        P.lens (_project :: ComputeNetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeNetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedGatewayIpv4 (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedGatewayIpv4 x = TF.compute (TF.refKey x) "gateway_ipv4"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeNetworkData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeNetworkData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedGatewayIpv4 x = TF.compute (TF.refKey x) "_computedGatewayIpv4"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-instance s ~ s' => P.HasComputedSubnetworksSelfLinks (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
-    computedSubnetworksSelfLinks x = TF.compute (TF.refKey x) "subnetworks_self_links"
+instance s ~ s' => P.HasComputedSubnetworksSelfLinks (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSubnetworksSelfLinks x = TF.compute (TF.refKey x) "_computedSubnetworksSelfLinks"
 
-computeNetworkData :: TF.DataSource P.Google (ComputeNetworkData s)
-computeNetworkData =
-    TF.newDataSource "google_compute_network" $
-        ComputeNetworkData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            }
+-- | @google_compute_region_instance_group@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_region_instance_group terraform documentation>
+-- for more information.
+data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_compute_region_instance_group@ Google datasource.
-
-Get a Compute Region Instance Group within GCE. For more information, see
-<https://cloud.google.com/compute/docs/instance-groups/distributing-instances-with-regional-instance-groups>
-and
-<https://cloud.google.com/compute/docs/reference/latest/regionInstanceGroups>
-.
--}
-data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData {
-      _name      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the instance group.  One of @name@ or @self_link@ must be provided. -}
-    , _project   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region in which the resource belongs.  If @self_link@ is provided, this value is ignored.  If neither @self_link@ nor @region@ are provided, the provider region is used. -}
-    , _self_link :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The link to the instance group.  One of @name@ or @self_link@ must be provided. -}
-    } deriving (Show, Eq)
+computeRegionInstanceGroupData
+    :: TF.DataSource P.Provider (ComputeRegionInstanceGroupData s)
+computeRegionInstanceGroupData =
+    TF.newDataSource "google_compute_region_instance_group" TF.validator $
+        ComputeRegionInstanceGroupData'
 
 instance TF.IsObject (ComputeRegionInstanceGroupData s) where
-    toObject ComputeRegionInstanceGroupData{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "self_link" <$> TF.attribute _self_link
-        ]
+    toObject _ = []
 
-instance P.HasName (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeRegionInstanceGroupData s)
+instance TF.IsValid (ComputeRegionInstanceGroupData s) where
+    validator = P.mempty
 
-instance P.HasProject (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRegionInstanceGroupData s)
-
-instance P.HasRegion (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeRegionInstanceGroupData s)
-
-instance P.HasSelfLink (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
-    selfLink =
-        lens (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-             (\s a -> s { _self_link = a } :: ComputeRegionInstanceGroupData s)
-
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedInstances x = TF.compute (TF.refKey x) "instances"
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
+    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedSelfLink =
-        (_self_link :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Integer) where
+    computedSize x = TF.compute (TF.refKey x) "_computedSize"
 
-computeRegionInstanceGroupData :: TF.DataSource P.Google (ComputeRegionInstanceGroupData s)
-computeRegionInstanceGroupData =
-    TF.newDataSource "google_compute_region_instance_group" $
-        ComputeRegionInstanceGroupData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            , _region = TF.Nil
-            , _self_link = TF.Nil
+-- | @google_compute_regions@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_regions terraform documentation>
+-- for more information.
+data ComputeRegionsData s = ComputeRegionsData'
+    { _status :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeRegionsData
+    :: TF.DataSource P.Provider (ComputeRegionsData s)
+computeRegionsData =
+    TF.newDataSource "google_compute_regions" TF.validator $
+        ComputeRegionsData'
+            { _status = TF.Nil
             }
 
-{- | The @google_compute_regions@ Google datasource.
-
-Provides access to available Google Compute regions for a given project. See
-more about <https://cloud.google.com/compute/docs/regions-zones/> in the
-upstream docs.
--}
-data ComputeRegionsData s = ComputeRegionsData {
-      _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - Project from which to list available regions. Defaults to project declared in the provider. -}
-    , _status  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - Allows to filter list of regions based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available regions - both @UP@ and @DOWN@ ). -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeRegionsData s) where
-    toObject ComputeRegionsData{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
-        , TF.assign "status" <$> TF.attribute _status
+    toObject ComputeRegionsData'{..} = P.catMaybes
+        [ TF.assign "status" <$> TF.attribute _status
         ]
 
-instance P.HasProject (ComputeRegionsData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeRegionsData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeRegionsData s)
+instance TF.IsValid (ComputeRegionsData s) where
+    validator = P.mempty
 
 instance P.HasStatus (ComputeRegionsData s) (TF.Attr s P.Text) where
     status =
-        lens (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
-             (\s a -> s { _status = a } :: ComputeRegionsData s)
+        P.lens (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: ComputeRegionsData s)
 
-instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
-    computedNames x = TF.compute (TF.refKey x) "names"
+instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedNames x = TF.compute (TF.refKey x) "_computedNames"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeRegionsData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
-    computedStatus =
-        (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_compute_ssl_policy@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_ssl_policy terraform documentation>
+-- for more information.
+data ComputeSslPolicyData s = ComputeSslPolicyData'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-computeRegionsData :: TF.DataSource P.Google (ComputeRegionsData s)
-computeRegionsData =
-    TF.newDataSource "google_compute_regions" $
-        ComputeRegionsData {
-              _project = TF.Nil
-            , _status = TF.Nil
+computeSslPolicyData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeSslPolicyData s)
+computeSslPolicyData _name =
+    TF.newDataSource "google_compute_ssl_policy" TF.validator $
+        ComputeSslPolicyData'
+            { _name = _name
+            , _project = TF.Nil
             }
 
-{- | The @google_compute_ssl_policy@ Google datasource.
-
-Gets an SSL Policy within GCE from its name, for use with Target HTTPS and
-Target SSL Proxies. For more information see
-<https://cloud.google.com/compute/docs/load-balancing/ssl-policies> .
--}
-data ComputeSslPolicyData s = ComputeSslPolicyData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the SSL Policy. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeSslPolicyData s) where
-    toObject ComputeSslPolicyData{..} = catMaybes
+    toObject ComputeSslPolicyData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
+
+instance TF.IsValid (ComputeSslPolicyData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeSslPolicyData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeSslPolicyData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeSslPolicyData s)
+        P.lens (_name :: ComputeSslPolicyData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeSslPolicyData s)
 
 instance P.HasProject (ComputeSslPolicyData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeSslPolicyData s)
+        P.lens (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSslPolicyData s)
 
-instance s ~ s' => P.HasComputedCustomFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedCustomFeatures x = TF.compute (TF.refKey x) "custom_features"
+instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+
+instance s ~ s' => P.HasComputedCustomFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCustomFeatures x = TF.compute (TF.refKey x) "_computedCustomFeatures"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedEnabledFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedEnabledFeatures x = TF.compute (TF.refKey x) "enabled_features"
+instance s ~ s' => P.HasComputedEnabledFeatures (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedEnabledFeatures x = TF.compute (TF.refKey x) "_computedEnabledFeatures"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
 
 instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedMinTlsVersion x = TF.compute (TF.refKey x) "min_tls_version"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeSslPolicyData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedMinTlsVersion x = TF.compute (TF.refKey x) "_computedMinTlsVersion"
 
 instance s ~ s' => P.HasComputedProfile (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedProfile x = TF.compute (TF.refKey x) "profile"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProfile x = TF.compute (TF.refKey x) "_computedProfile"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-computeSslPolicyData :: TF.DataSource P.Google (ComputeSslPolicyData s)
-computeSslPolicyData =
-    TF.newDataSource "google_compute_ssl_policy" $
-        ComputeSslPolicyData {
-              _name = TF.Nil
-            , _project = TF.Nil
+-- | @google_compute_subnetwork@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_subnetwork terraform documentation>
+-- for more information.
+data ComputeSubnetworkData s = ComputeSubnetworkData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeSubnetworkData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeSubnetworkData s)
+computeSubnetworkData _name =
+    TF.newDataSource "google_compute_subnetwork" TF.validator $
+        ComputeSubnetworkData'
+            { _name = _name
             }
 
-{- | The @google_compute_subnetwork@ Google datasource.
-
-Get a subnetwork within GCE from its name and region.
--}
-data ComputeSubnetworkData s = ComputeSubnetworkData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ - The name of the subnetwork. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region this subnetwork has been created in. If unspecified, this defaults to the region configured in the provider. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeSubnetworkData s) where
-    toObject ComputeSubnetworkData{..} = catMaybes
+    toObject ComputeSubnetworkData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
         ]
+
+instance TF.IsValid (ComputeSubnetworkData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeSubnetworkData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeSubnetworkData s)
-
-instance P.HasProject (ComputeSubnetworkData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeSubnetworkData s)
-
-instance P.HasRegion (ComputeSubnetworkData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeSubnetworkData s)
+        P.lens (_name :: ComputeSubnetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeSubnetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedGatewayAddress (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedGatewayAddress x = TF.compute (TF.refKey x) "gateway_address"
+    computedGatewayAddress x = TF.compute (TF.refKey x) "_computedGatewayAddress"
 
 instance s ~ s' => P.HasComputedIpCidrRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedIpCidrRange x = TF.compute (TF.refKey x) "ip_cidr_range"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedIpCidrRange x = TF.compute (TF.refKey x) "_computedIpCidrRange"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
-instance s ~ s' => P.HasComputedPrivateIpGoogleAccess (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedPrivateIpGoogleAccess x = TF.compute (TF.refKey x) "private_ip_google_access"
+instance s ~ s' => P.HasComputedPrivateIpGoogleAccess (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Bool) where
+    computedPrivateIpGoogleAccess x = TF.compute (TF.refKey x) "_computedPrivateIpGoogleAccess"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeSubnetworkData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedSecondaryIpRange x = TF.compute (TF.refKey x) "secondary_ip_range"
+instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [TF.Attr s (SecondaryIpRange s)]) where
+    computedSecondaryIpRange x = TF.compute (TF.refKey x) "_computedSecondaryIpRange"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-computeSubnetworkData :: TF.DataSource P.Google (ComputeSubnetworkData s)
-computeSubnetworkData =
-    TF.newDataSource "google_compute_subnetwork" $
-        ComputeSubnetworkData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            , _region = TF.Nil
+-- | @google_compute_vpn_gateway@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_vpn_gateway terraform documentation>
+-- for more information.
+data ComputeVpnGatewayData s = ComputeVpnGatewayData'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeVpnGatewayData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ComputeVpnGatewayData s)
+computeVpnGatewayData _name =
+    TF.newDataSource "google_compute_vpn_gateway" TF.validator $
+        ComputeVpnGatewayData'
+            { _name = _name
             }
 
-{- | The @google_compute_vpn_gateway@ Google datasource.
-
-Get a VPN gateway within GCE from its name.
--}
-data ComputeVpnGatewayData s = ComputeVpnGatewayData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VPN gateway. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region in which the resource belongs. If it is not provided, the project region is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeVpnGatewayData s) where
-    toObject ComputeVpnGatewayData{..} = catMaybes
+    toObject ComputeVpnGatewayData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
         ]
+
+instance TF.IsValid (ComputeVpnGatewayData s) where
+    validator = P.mempty
 
 instance P.HasName (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeVpnGatewayData s)
-
-instance P.HasProject (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeVpnGatewayData s)
-
-instance P.HasRegion (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeVpnGatewayData s)
+        P.lens (_name :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeVpnGatewayData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
+    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
+    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
 
-computeVpnGatewayData :: TF.DataSource P.Google (ComputeVpnGatewayData s)
-computeVpnGatewayData =
-    TF.newDataSource "google_compute_vpn_gateway" $
-        ComputeVpnGatewayData {
-              _name = TF.Nil
-            , _project = TF.Nil
-            , _region = TF.Nil
-            }
+-- | @google_compute_zones@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_compute_zones terraform documentation>
+-- for more information.
+data ComputeZonesData s = ComputeZonesData'
+    { _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _status :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_compute_zones@ Google datasource.
-
-Provides access to available Google Compute zones in a region for a given
-project. See more about
-<https://cloud.google.com/compute/docs/regions-zones/regions-zones> in the
-upstream docs.
--}
-data ComputeZonesData s = ComputeZonesData {
-      _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - Project from which to list available zones. Defaults to project declared in the provider. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - Region from which to list available zones. Defaults to region declared in the provider. -}
-    , _status  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - Allows to filter list of zones based on their current status. Status can be either @UP@ or @DOWN@ . Defaults to no filtering (all available zones - both @UP@ and @DOWN@ ). -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ComputeZonesData s) where
-    toObject ComputeZonesData{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "status" <$> TF.attribute _status
-        ]
-
-instance P.HasProject (ComputeZonesData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ComputeZonesData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ComputeZonesData s)
-
-instance P.HasRegion (ComputeZonesData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ComputeZonesData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ComputeZonesData s)
-
-instance P.HasStatus (ComputeZonesData s) (TF.Attr s P.Text) where
-    status =
-        lens (_status :: ComputeZonesData s -> TF.Attr s P.Text)
-             (\s a -> s { _status = a } :: ComputeZonesData s)
-
-instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
-    computedNames x = TF.compute (TF.refKey x) "names"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ComputeZonesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ComputeZonesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
-    computedStatus =
-        (_status :: ComputeZonesData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeZonesData :: TF.DataSource P.Google (ComputeZonesData s)
+computeZonesData
+    :: TF.DataSource P.Provider (ComputeZonesData s)
 computeZonesData =
-    TF.newDataSource "google_compute_zones" $
-        ComputeZonesData {
-              _project = TF.Nil
-            , _region = TF.Nil
+    TF.newDataSource "google_compute_zones" TF.validator $
+        ComputeZonesData'
+            { _region = TF.Nil
             , _status = TF.Nil
             }
 
-{- | The @google_container_cluster@ Google datasource.
-
-Get info about a cluster within GKE from its name and zone.
--}
-data ContainerClusterData s = ContainerClusterData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ - The name of the cluster. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    , _zone    :: !(TF.Attr s P.Text)
-    {- ^ or @region@ - The zone or region this cluster has been created in. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ContainerClusterData s) where
-    toObject ContainerClusterData{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "zone" <$> TF.attribute _zone
+instance TF.IsObject (ComputeZonesData s) where
+    toObject ComputeZonesData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        , TF.assign "status" <$> TF.attribute _status
         ]
 
-instance P.HasName (ContainerClusterData s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ContainerClusterData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ContainerClusterData s)
+instance TF.IsValid (ComputeZonesData s) where
+    validator = P.mempty
 
-instance P.HasProject (ContainerClusterData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ContainerClusterData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ContainerClusterData s)
+instance P.HasRegion (ComputeZonesData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeZonesData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeZonesData s)
 
-instance P.HasZone (ContainerClusterData s) (TF.Attr s P.Text) where
-    zone =
-        lens (_zone :: ContainerClusterData s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ContainerClusterData s)
+instance P.HasStatus (ComputeZonesData s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: ComputeZonesData s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: ComputeZonesData s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ContainerClusterData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeZonesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedNames x = TF.compute (TF.refKey x) "_computedNames"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ContainerClusterData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ContainerClusterData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_container_cluster@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_container_cluster terraform documentation>
+-- for more information.
+data ContainerClusterData s = ContainerClusterData'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _zone    :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-containerClusterData :: TF.DataSource P.Google (ContainerClusterData s)
-containerClusterData =
-    TF.newDataSource "google_container_cluster" $
-        ContainerClusterData {
-              _name = TF.Nil
+containerClusterData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ContainerClusterData s)
+containerClusterData _name =
+    TF.newDataSource "google_container_cluster" TF.validator $
+        ContainerClusterData'
+            { _name = _name
             , _project = TF.Nil
+            , _region = TF.Nil
             , _zone = TF.Nil
             }
 
-{- | The @google_container_engine_versions@ Google datasource.
+instance TF.IsObject (ContainerClusterData s) where
+    toObject ContainerClusterData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "zone" <$> TF.attribute _zone
+        ]
 
-Provides access to available Google Container Engine versions in a zone for
-a given project.
--}
-data ContainerEngineVersionsData s = ContainerEngineVersionsData {
-      _project :: !(TF.Attr s P.Text)
-    {- ^ (optional) - ID of the project to list available cluster versions for. Should match the project the cluster will be deployed to. Defaults to the project that the provider is authenticated with. -}
-    , _zone    :: !(TF.Attr s P.Text)
-    {- ^ (required) - Zone to list available cluster versions for. Should match the zone the cluster will be deployed in. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (ContainerClusterData s) where
+    validator = P.mempty
+
+instance P.HasName (ContainerClusterData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ContainerClusterData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ContainerClusterData s)
+
+instance P.HasProject (ContainerClusterData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ContainerClusterData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ContainerClusterData s)
+
+instance P.HasRegion (ContainerClusterData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ContainerClusterData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ContainerClusterData s)
+
+instance P.HasZone (ContainerClusterData s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ContainerClusterData s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ContainerClusterData s)
+
+instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAdditionalZones x = TF.compute (TF.refKey x) "_computedAdditionalZones"
+
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (AddonsConfig s)]) where
+    computedAddonsConfig x = TF.compute (TF.refKey x) "_computedAddonsConfig"
+
+instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedClusterIpv4Cidr x = TF.compute (TF.refKey x) "_computedClusterIpv4Cidr"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+
+instance s ~ s' => P.HasComputedEnableKubernetesAlpha (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
+    computedEnableKubernetesAlpha x = TF.compute (TF.refKey x) "_computedEnableKubernetesAlpha"
+
+instance s ~ s' => P.HasComputedEnableLegacyAbac (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
+    computedEnableLegacyAbac x = TF.compute (TF.refKey x) "_computedEnableLegacyAbac"
+
+instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
+
+instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Integer) where
+    computedInitialNodeCount x = TF.compute (TF.refKey x) "_computedInitialNodeCount"
+
+instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "_computedInstanceGroupUrls"
+
+instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (IpAllocationPolicy s)]) where
+    computedIpAllocationPolicy x = TF.compute (TF.refKey x) "_computedIpAllocationPolicy"
+
+instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedLoggingService x = TF.compute (TF.refKey x) "_computedLoggingService"
+
+instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MaintenancePolicy s)]) where
+    computedMaintenancePolicy x = TF.compute (TF.refKey x) "_computedMaintenancePolicy"
+
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuth s)]) where
+    computedMasterAuth x = TF.compute (TF.refKey x) "_computedMasterAuth"
+
+instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuthorizedNetworksConfig s)]) where
+    computedMasterAuthorizedNetworksConfig x = TF.compute (TF.refKey x) "_computedMasterAuthorizedNetworksConfig"
+
+instance s ~ s' => P.HasComputedMasterIpv4CidrBlock (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedMasterIpv4CidrBlock x = TF.compute (TF.refKey x) "_computedMasterIpv4CidrBlock"
+
+instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedMasterVersion x = TF.compute (TF.refKey x) "_computedMasterVersion"
+
+instance s ~ s' => P.HasComputedMinMasterVersion (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedMinMasterVersion x = TF.compute (TF.refKey x) "_computedMinMasterVersion"
+
+instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedMonitoringService x = TF.compute (TF.refKey x) "_computedMonitoringService"
+
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
+
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NetworkPolicy s)]) where
+    computedNetworkPolicy x = TF.compute (TF.refKey x) "_computedNetworkPolicy"
+
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodeConfig s)]) where
+    computedNodeConfig x = TF.compute (TF.refKey x) "_computedNodeConfig"
+
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodePool s)]) where
+    computedNodePool x = TF.compute (TF.refKey x) "_computedNodePool"
+
+instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedNodeVersion x = TF.compute (TF.refKey x) "_computedNodeVersion"
+
+instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (PodSecurityPolicyConfig s)]) where
+    computedPodSecurityPolicyConfig x = TF.compute (TF.refKey x) "_computedPodSecurityPolicyConfig"
+
+instance s ~ s' => P.HasComputedPrivateCluster (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
+    computedPrivateCluster x = TF.compute (TF.refKey x) "_computedPrivateCluster"
+
+instance s ~ s' => P.HasComputedRemoveDefaultNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
+    computedRemoveDefaultNodePool x = TF.compute (TF.refKey x) "_computedRemoveDefaultNodePool"
+
+instance s ~ s' => P.HasComputedResourceLabels (TF.Ref s' (ContainerClusterData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedResourceLabels x = TF.compute (TF.refKey x) "_computedResourceLabels"
+
+instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
+
+-- | @google_container_engine_versions@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_container_engine_versions terraform documentation>
+-- for more information.
+data ContainerEngineVersionsData s = ContainerEngineVersionsData'
+    { _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _zone    :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+containerEngineVersionsData
+    :: TF.DataSource P.Provider (ContainerEngineVersionsData s)
+containerEngineVersionsData =
+    TF.newDataSource "google_container_engine_versions" TF.validator $
+        ContainerEngineVersionsData'
+            { _project = TF.Nil
+            , _zone = TF.Nil
+            }
 
 instance TF.IsObject (ContainerEngineVersionsData s) where
-    toObject ContainerEngineVersionsData{..} = catMaybes
+    toObject ContainerEngineVersionsData'{..} = P.catMaybes
         [ TF.assign "project" <$> TF.attribute _project
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
+instance TF.IsValid (ContainerEngineVersionsData s) where
+    validator = P.mempty
+
 instance P.HasProject (ContainerEngineVersionsData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ContainerEngineVersionsData s)
+        P.lens (_project :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ContainerEngineVersionsData s)
 
 instance P.HasZone (ContainerEngineVersionsData s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
+        P.lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
 
 instance s ~ s' => P.HasComputedDefaultClusterVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedDefaultClusterVersion x = TF.compute (TF.refKey x) "default_cluster_version"
+    computedDefaultClusterVersion x = TF.compute (TF.refKey x) "_computedDefaultClusterVersion"
 
 instance s ~ s' => P.HasComputedLatestMasterVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedLatestMasterVersion x = TF.compute (TF.refKey x) "latest_master_version"
+    computedLatestMasterVersion x = TF.compute (TF.refKey x) "_computedLatestMasterVersion"
 
 instance s ~ s' => P.HasComputedLatestNodeVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedLatestNodeVersion x = TF.compute (TF.refKey x) "latest_node_version"
+    computedLatestNodeVersion x = TF.compute (TF.refKey x) "_computedLatestNodeVersion"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedValidMasterVersions (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedValidMasterVersions x = TF.compute (TF.refKey x) "_computedValidMasterVersions"
 
-instance s ~ s' => P.HasComputedValidMasterVersions (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedValidMasterVersions x = TF.compute (TF.refKey x) "valid_master_versions"
+instance s ~ s' => P.HasComputedValidNodeVersions (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedValidNodeVersions x = TF.compute (TF.refKey x) "_computedValidNodeVersions"
 
-instance s ~ s' => P.HasComputedValidNodeVersions (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedValidNodeVersions x = TF.compute (TF.refKey x) "valid_node_versions"
+-- | @google_container_registry_image@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_container_registry_image terraform documentation>
+-- for more information.
+data ContainerRegistryImageData s = ContainerRegistryImageData'
+    { _digest :: TF.Attr s P.Text
+    -- ^ @digest@ - (Optional)
+    --
+    , _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _tag    :: TF.Attr s P.Text
+    -- ^ @tag@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-containerEngineVersionsData :: TF.DataSource P.Google (ContainerEngineVersionsData s)
-containerEngineVersionsData =
-    TF.newDataSource "google_container_engine_versions" $
-        ContainerEngineVersionsData {
-              _project = TF.Nil
-            , _zone = TF.Nil
-            }
-
-{- | The @google_container_registry_image@ Google datasource.
-
-This data source fetches the project name, and provides the appropriate URLs
-to use for container registry for this project. The URLs are computed
-entirely offline - as long as the project exists, they will be valid, but
-this data source does not contact Google Container Registry (GCR) at any
-point.
--}
-data ContainerRegistryImageData s = ContainerRegistryImageData {
-      _digest  :: !(TF.Attr s P.Text)
-    {- ^ : (Optional) The image digest to fetch, if any. -}
-    , _name    :: !(TF.Attr s P.Text)
-    {- ^ : (Required) The image name. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ : (Optional) The project ID that this image is attached to.  If not provider, provider project will be used instead. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ : (Optional) The GCR region to use.  As of this writing, one of @asia@ , @eu@ , and @us@ .  See <https://cloud.google.com/container-registry/docs/pushing-and-pulling> for additional information. -}
-    , _tag     :: !(TF.Attr s P.Text)
-    {- ^ : (Optional) The tag to fetch, if any. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ContainerRegistryImageData s) where
-    toObject ContainerRegistryImageData{..} = catMaybes
-        [ TF.assign "digest" <$> TF.attribute _digest
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project" <$> TF.attribute _project
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "tag" <$> TF.attribute _tag
-        ]
-
-instance P.HasDigest (ContainerRegistryImageData s) (TF.Attr s P.Text) where
-    digest =
-        lens (_digest :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _digest = a } :: ContainerRegistryImageData s)
-
-instance P.HasName (ContainerRegistryImageData s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ContainerRegistryImageData s)
-
-instance P.HasProject (ContainerRegistryImageData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ContainerRegistryImageData s)
-
-instance P.HasRegion (ContainerRegistryImageData s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ContainerRegistryImageData s)
-
-instance P.HasTag (ContainerRegistryImageData s) (TF.Attr s P.Text) where
-    tag =
-        lens (_tag :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-             (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
-
-instance s ~ s' => P.HasComputedDigest (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
-    computedDigest =
-        (_digest :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedImageUrl (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
-    computedImageUrl x = TF.compute (TF.refKey x) "image_url"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTag (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
-    computedTag =
-        (_tag :: ContainerRegistryImageData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-containerRegistryImageData :: TF.DataSource P.Google (ContainerRegistryImageData s)
-containerRegistryImageData =
-    TF.newDataSource "google_container_registry_image" $
-        ContainerRegistryImageData {
-              _digest = TF.Nil
-            , _name = TF.Nil
-            , _project = TF.Nil
+containerRegistryImageData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (ContainerRegistryImageData s)
+containerRegistryImageData _name =
+    TF.newDataSource "google_container_registry_image" TF.validator $
+        ContainerRegistryImageData'
+            { _digest = TF.Nil
+            , _name = _name
             , _region = TF.Nil
             , _tag = TF.Nil
             }
 
-{- | The @google_container_registry_repository@ Google datasource.
-
-This data source fetches the project name, and provides the appropriate URLs
-to use for container registry for this project. The URLs are computed
-entirely offline - as long as the project exists, they will be valid, but
-this data source does not contact Google Container Registry (GCR) at any
-point.
--}
-data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData {
-      _project :: !(TF.Attr s P.Text)
-    {- ^ : (Optional) The project ID that this repository is attached to.  If not provider, provider project will be used instead. -}
-    , _region  :: !(TF.Attr s P.Text)
-    {- ^ : (Optional) The GCR region to use.  As of this writing, one of @asia@ , @eu@ , and @us@ .  See <https://cloud.google.com/container-registry/docs/pushing-and-pulling> for additional information. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ContainerRegistryRepositoryData s) where
-    toObject ContainerRegistryRepositoryData{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
+instance TF.IsObject (ContainerRegistryImageData s) where
+    toObject ContainerRegistryImageData'{..} = P.catMaybes
+        [ TF.assign "digest" <$> TF.attribute _digest
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "tag" <$> TF.attribute _tag
         ]
 
-instance P.HasProject (ContainerRegistryRepositoryData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ContainerRegistryRepositoryData s)
+instance TF.IsValid (ContainerRegistryImageData s) where
+    validator = P.mempty
+
+instance P.HasDigest (ContainerRegistryImageData s) (TF.Attr s P.Text) where
+    digest =
+        P.lens (_digest :: ContainerRegistryImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _digest = a } :: ContainerRegistryImageData s)
+
+instance P.HasName (ContainerRegistryImageData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ContainerRegistryImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ContainerRegistryImageData s)
+
+instance P.HasRegion (ContainerRegistryImageData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ContainerRegistryImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ContainerRegistryImageData s)
+
+instance P.HasTag (ContainerRegistryImageData s) (TF.Attr s P.Text) where
+    tag =
+        P.lens (_tag :: ContainerRegistryImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
+
+instance s ~ s' => P.HasComputedImageUrl (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
+    computedImageUrl x = TF.compute (TF.refKey x) "_computedImageUrl"
+
+instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+
+-- | @google_container_registry_repository@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_container_registry_repository terraform documentation>
+-- for more information.
+data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
+    { _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+containerRegistryRepositoryData
+    :: TF.DataSource P.Provider (ContainerRegistryRepositoryData s)
+containerRegistryRepositoryData =
+    TF.newDataSource "google_container_registry_repository" TF.validator $
+        ContainerRegistryRepositoryData'
+            { _region = TF.Nil
+            }
+
+instance TF.IsObject (ContainerRegistryRepositoryData s) where
+    toObject ContainerRegistryRepositoryData'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (ContainerRegistryRepositoryData s) where
+    validator = P.mempty
 
 instance P.HasRegion (ContainerRegistryRepositoryData s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
+        P.lens (_region :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerRegistryRepositoryData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ContainerRegistryRepositoryData s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"
 
 instance s ~ s' => P.HasComputedRepositoryUrl (TF.Ref s' (ContainerRegistryRepositoryData s)) (TF.Attr s P.Text) where
-    computedRepositoryUrl x = TF.compute (TF.refKey x) "repository_url"
+    computedRepositoryUrl x = TF.compute (TF.refKey x) "_computedRepositoryUrl"
 
-containerRegistryRepositoryData :: TF.DataSource P.Google (ContainerRegistryRepositoryData s)
-containerRegistryRepositoryData =
-    TF.newDataSource "google_container_registry_repository" $
-        ContainerRegistryRepositoryData {
-              _project = TF.Nil
-            , _region = TF.Nil
+-- | @google_dns_managed_zone@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_dns_managed_zone terraform documentation>
+-- for more information.
+data DnsManagedZoneData s = DnsManagedZoneData'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+dnsManagedZoneData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (DnsManagedZoneData s)
+dnsManagedZoneData _name =
+    TF.newDataSource "google_dns_managed_zone" TF.validator $
+        DnsManagedZoneData'
+            { _name = _name
+            , _project = TF.Nil
             }
 
-{- | The @google_dns_managed_zone@ Google datasource.
-
-Provides access to a zone's attributes within Google Cloud DNS. For more
-information see <https://cloud.google.com/dns/zones/> and
-<https://cloud.google.com/dns/api/v1/managedZones> .
--}
-data DnsManagedZoneData s = DnsManagedZoneData {
-      _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the resource. -}
-    , _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project for the Google Cloud DNS zone. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DnsManagedZoneData s) where
-    toObject DnsManagedZoneData{..} = catMaybes
+    toObject DnsManagedZoneData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "project" <$> TF.attribute _project
         ]
 
+instance TF.IsValid (DnsManagedZoneData s) where
+    validator = P.mempty
+
 instance P.HasName (DnsManagedZoneData s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DnsManagedZoneData s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DnsManagedZoneData s)
+        P.lens (_name :: DnsManagedZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DnsManagedZoneData s)
 
 instance P.HasProject (DnsManagedZoneData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: DnsManagedZoneData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: DnsManagedZoneData s)
+        P.lens (_project :: DnsManagedZoneData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: DnsManagedZoneData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
-    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
+    computedDnsName x = TF.compute (TF.refKey x) "_computedDnsName"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DnsManagedZoneData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
 
-instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
-    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
+-- | @google_folder@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_folder terraform documentation>
+-- for more information.
+data FolderData s = FolderData'
+    { _folder             :: TF.Attr s P.Text
+    -- ^ @folder@ - (Required)
+    --
+    , _lookupOrganization :: TF.Attr s P.Bool
+    -- ^ @lookup_organization@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: DnsManagedZoneData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-dnsManagedZoneData :: TF.DataSource P.Google (DnsManagedZoneData s)
-dnsManagedZoneData =
-    TF.newDataSource "google_dns_managed_zone" $
-        DnsManagedZoneData {
-              _name = TF.Nil
-            , _project = TF.Nil
+folderData
+    :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
+    -> TF.DataSource P.Provider (FolderData s)
+folderData _folder =
+    TF.newDataSource "google_folder" TF.validator $
+        FolderData'
+            { _folder = _folder
+            , _lookupOrganization = TF.value P.False
             }
 
-{- | The @google_folder@ Google datasource.
-
-Use this data source to get information about a Google Cloud Folder.
--}
-data FolderData s = FolderData {
-      _folder              :: !(TF.Attr s P.Text)
-    {- ^ (Required) - The name of the Folder in the form @{folder_id}@ or @folders/{folder_id}@ . -}
-    , _lookup_organization :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - @true@ to find the organization that the folder belongs, @false@ to avoid the lookup. It searches up the tree. (defaults to @false@ ) -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (FolderData s) where
-    toObject FolderData{..} = catMaybes
+    toObject FolderData'{..} = P.catMaybes
         [ TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "lookup_organization" <$> TF.attribute _lookup_organization
+        , TF.assign "lookup_organization" <$> TF.attribute _lookupOrganization
         ]
+
+instance TF.IsValid (FolderData s) where
+    validator = P.mempty
 
 instance P.HasFolder (FolderData s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: FolderData s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: FolderData s)
+        P.lens (_folder :: FolderData s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: FolderData s)
 
-instance P.HasLookupOrganization (FolderData s) (TF.Attr s P.Text) where
+instance P.HasLookupOrganization (FolderData s) (TF.Attr s P.Bool) where
     lookupOrganization =
-        lens (_lookup_organization :: FolderData s -> TF.Attr s P.Text)
-             (\s a -> s { _lookup_organization = a } :: FolderData s)
+        P.lens (_lookupOrganization :: FolderData s -> TF.Attr s P.Bool)
+               (\s a -> s { _lookupOrganization = a } :: FolderData s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: FolderData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
 
 instance s ~ s' => P.HasComputedLifecycleState (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
-
-instance s ~ s' => P.HasComputedLookupOrganization (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedLookupOrganization =
-        (_lookup_organization :: FolderData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedLifecycleState x = TF.compute (TF.refKey x) "_computedLifecycleState"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "organization"
+    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
 
 instance s ~ s' => P.HasComputedParent (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
-    computedParent x = TF.compute (TF.refKey x) "parent"
+    computedParent x = TF.compute (TF.refKey x) "_computedParent"
 
-folderData :: TF.DataSource P.Google (FolderData s)
-folderData =
-    TF.newDataSource "google_folder" $
-        FolderData {
-              _folder = TF.Nil
-            , _lookup_organization = TF.Nil
+-- | @google_iam_policy@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_iam_policy terraform documentation>
+-- for more information.
+data IamPolicyData s = IamPolicyData'
+    { _binding :: TF.Attr s [TF.Attr s (Binding s)]
+    -- ^ @binding@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+iamPolicyData
+    :: TF.Attr s [TF.Attr s (Binding s)] -- ^ @binding@ - 'P.binding'
+    -> TF.DataSource P.Provider (IamPolicyData s)
+iamPolicyData _binding =
+    TF.newDataSource "google_iam_policy" TF.validator $
+        IamPolicyData'
+            { _binding = _binding
             }
 
-{- | The @google_iam_policy@ Google datasource.
-
-Generates an IAM policy document that may be referenced by and applied to
-other Google Cloud Platform resources, such as the @google_project@
-resource.
--}
-data IamPolicyData s = IamPolicyData {
-      _binding :: !(TF.Attr s P.Text)
-    {- ^ (Required) - A nested configuration block (described below) defining a binding to be included in the policy document. Multiple @binding@ arguments are supported. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (IamPolicyData s) where
-    toObject IamPolicyData{..} = catMaybes
+    toObject IamPolicyData'{..} = P.catMaybes
         [ TF.assign "binding" <$> TF.attribute _binding
         ]
 
-instance P.HasBinding (IamPolicyData s) (TF.Attr s P.Text) where
-    binding =
-        lens (_binding :: IamPolicyData s -> TF.Attr s P.Text)
-             (\s a -> s { _binding = a } :: IamPolicyData s)
+instance TF.IsValid (IamPolicyData s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_binding"
+                  (_binding
+                      :: IamPolicyData s -> TF.Attr s [TF.Attr s (Binding s)])
+                  TF.validator
 
-instance s ~ s' => P.HasComputedBinding (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
-    computedBinding =
-        (_binding :: IamPolicyData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (Binding s)]) where
+    binding =
+        P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (Binding s)])
+               (\s a -> s { _binding = a } :: IamPolicyData s)
 
 instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
-    computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
+    computedPolicyData x = TF.compute (TF.refKey x) "_computedPolicyData"
 
-iamPolicyData :: TF.DataSource P.Google (IamPolicyData s)
-iamPolicyData =
-    TF.newDataSource "google_iam_policy" $
-        IamPolicyData {
-              _binding = TF.Nil
+-- | @google_kms_secret@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_kms_secret terraform documentation>
+-- for more information.
+data KmsSecretData s = KmsSecretData'
+    { _ciphertext :: TF.Attr s P.Text
+    -- ^ @ciphertext@ - (Required)
+    --
+    , _cryptoKey  :: TF.Attr s P.Text
+    -- ^ @crypto_key@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+kmsSecretData
+    :: TF.Attr s P.Text -- ^ @ciphertext@ - 'P.ciphertext'
+    -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
+    -> TF.DataSource P.Provider (KmsSecretData s)
+kmsSecretData _ciphertext _cryptoKey =
+    TF.newDataSource "google_kms_secret" TF.validator $
+        KmsSecretData'
+            { _ciphertext = _ciphertext
+            , _cryptoKey = _cryptoKey
             }
 
-{- | The @google_kms_secret@ Google datasource.
-
-This data source allows you to use data encrypted with Google Cloud KMS
-within your resource definitions. For more information see
-<https://cloud.google.com/kms/docs/encrypt-decrypt> . ~> NOTE : Using this
-data provider will allow you to conceal secret data within your resource
-definitions, but it does not take care of protecting that data in the
-logging output, plan output, or state output.  Please take care to secure
-your secret data outside of resource definitions.
--}
-data KmsSecretData s = KmsSecretData {
-      _ciphertext :: !(TF.Attr s P.Text)
-    {- ^ (Required) - The ciphertext to be decrypted, encoded in base64 -}
-    , _crypto_key :: !(TF.Attr s P.Text)
-    {- ^ (Required) - The id of the CryptoKey that will be used to decrypt the provided ciphertext. This is represented by the format @{projectId}/{location}/{keyRingName}/{cryptoKeyName}@ . -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (KmsSecretData s) where
-    toObject KmsSecretData{..} = catMaybes
+    toObject KmsSecretData'{..} = P.catMaybes
         [ TF.assign "ciphertext" <$> TF.attribute _ciphertext
-        , TF.assign "crypto_key" <$> TF.attribute _crypto_key
+        , TF.assign "crypto_key" <$> TF.attribute _cryptoKey
         ]
+
+instance TF.IsValid (KmsSecretData s) where
+    validator = P.mempty
 
 instance P.HasCiphertext (KmsSecretData s) (TF.Attr s P.Text) where
     ciphertext =
-        lens (_ciphertext :: KmsSecretData s -> TF.Attr s P.Text)
-             (\s a -> s { _ciphertext = a } :: KmsSecretData s)
+        P.lens (_ciphertext :: KmsSecretData s -> TF.Attr s P.Text)
+               (\s a -> s { _ciphertext = a } :: KmsSecretData s)
 
 instance P.HasCryptoKey (KmsSecretData s) (TF.Attr s P.Text) where
     cryptoKey =
-        lens (_crypto_key :: KmsSecretData s -> TF.Attr s P.Text)
-             (\s a -> s { _crypto_key = a } :: KmsSecretData s)
-
-instance s ~ s' => P.HasComputedCiphertext (TF.Ref s' (KmsSecretData s)) (TF.Attr s P.Text) where
-    computedCiphertext =
-        (_ciphertext :: KmsSecretData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCryptoKey (TF.Ref s' (KmsSecretData s)) (TF.Attr s P.Text) where
-    computedCryptoKey =
-        (_crypto_key :: KmsSecretData s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_cryptoKey :: KmsSecretData s -> TF.Attr s P.Text)
+               (\s a -> s { _cryptoKey = a } :: KmsSecretData s)
 
 instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretData s)) (TF.Attr s P.Text) where
-    computedPlaintext x = TF.compute (TF.refKey x) "plaintext"
+    computedPlaintext x = TF.compute (TF.refKey x) "_computedPlaintext"
 
-kmsSecretData :: TF.DataSource P.Google (KmsSecretData s)
-kmsSecretData =
-    TF.newDataSource "google_kms_secret" $
-        KmsSecretData {
-              _ciphertext = TF.Nil
-            , _crypto_key = TF.Nil
-            }
+-- | @google_netblock_ip_ranges@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_netblock_ip_ranges terraform documentation>
+-- for more information.
+data NetblockIpRangesData s = NetblockIpRangesData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_netblock_ip_ranges@ Google datasource.
-
-Use this data source to get the IP ranges from the sender policy framework
-(SPF) record of _cloud-netblocks.googleusercontent
-https://cloud.google.com/compute/docs/faq#where_can_i_find_product_name_short_ip_ranges
--}
-data NetblockIpRangesData s = NetblockIpRangesData {
-    } deriving (Show, Eq)
+netblockIpRangesData
+    :: TF.DataSource P.Provider (NetblockIpRangesData s)
+netblockIpRangesData =
+    TF.newDataSource "google_netblock_ip_ranges" TF.validator $
+        NetblockIpRangesData'
 
 instance TF.IsObject (NetblockIpRangesData s) where
     toObject _ = []
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance TF.IsValid (NetblockIpRangesData s) where
+    validator = P.mempty
 
-instance s ~ s' => P.HasComputedCidrBlocksIpv4 (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
-    computedCidrBlocksIpv4 x = TF.compute (TF.refKey x) "cidr_blocks_ipv4"
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
 
-instance s ~ s' => P.HasComputedCidrBlocksIpv6 (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
-    computedCidrBlocksIpv6 x = TF.compute (TF.refKey x) "cidr_blocks_ipv6"
+instance s ~ s' => P.HasComputedCidrBlocksIpv4 (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCidrBlocksIpv4 x = TF.compute (TF.refKey x) "_computedCidrBlocksIpv4"
 
-netblockIpRangesData :: TF.DataSource P.Google (NetblockIpRangesData s)
-netblockIpRangesData =
-    TF.newDataSource "google_netblock_ip_ranges" $
-        NetblockIpRangesData {
+instance s ~ s' => P.HasComputedCidrBlocksIpv6 (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCidrBlocksIpv6 x = TF.compute (TF.refKey x) "_computedCidrBlocksIpv6"
+
+-- | @google_organization@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_organization terraform documentation>
+-- for more information.
+data OrganizationData s = OrganizationData'
+    { _organization :: TF.Attr s P.Text
+    -- ^ @organization@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+organizationData
+    :: TF.DataSource P.Provider (OrganizationData s)
+organizationData =
+    TF.newDataSource "google_organization" TF.validator $
+        OrganizationData'
+            { _organization = TF.Nil
             }
 
-{- | The @google_organization@ Google datasource.
-
-Use this data source to get information about a Google Cloud Organization.
--}
-data OrganizationData s = OrganizationData {
-      _domain       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - The domain name of the Organization. -}
-    , _organization :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - The name of the Organization in the form @{organization_id}@ or @organizations/{organization_id}@ . -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (OrganizationData s) where
-    toObject OrganizationData{..} = catMaybes
-        [ TF.assign "domain" <$> TF.attribute _domain
-        , TF.assign "organization" <$> TF.attribute _organization
+    toObject OrganizationData'{..} = P.catMaybes
+        [ TF.assign "organization" <$> TF.attribute _organization
         ]
 
-instance P.HasDomain (OrganizationData s) (TF.Attr s P.Text) where
-    domain =
-        lens (_domain :: OrganizationData s -> TF.Attr s P.Text)
-             (\s a -> s { _domain = a } :: OrganizationData s)
+instance TF.IsValid (OrganizationData s) where
+    validator = P.mempty
 
 instance P.HasOrganization (OrganizationData s) (TF.Attr s P.Text) where
     organization =
-        lens (_organization :: OrganizationData s -> TF.Attr s P.Text)
-             (\s a -> s { _organization = a } :: OrganizationData s)
+        P.lens (_organization :: OrganizationData s -> TF.Attr s P.Text)
+               (\s a -> s { _organization = a } :: OrganizationData s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
 
 instance s ~ s' => P.HasComputedDirectoryCustomerId (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedDirectoryCustomerId x = TF.compute (TF.refKey x) "directory_customer_id"
+    computedDirectoryCustomerId x = TF.compute (TF.refKey x) "_computedDirectoryCustomerId"
 
 instance s ~ s' => P.HasComputedDomain (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedDomain =
-        (_domain :: OrganizationData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedDomain x = TF.compute (TF.refKey x) "_computedDomain"
 
 instance s ~ s' => P.HasComputedLifecycleState (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
+    computedLifecycleState x = TF.compute (TF.refKey x) "_computedLifecycleState"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
-    computedOrganization =
-        (_organization :: OrganizationData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_project@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_project terraform documentation>
+-- for more information.
+data ProjectData s = ProjectData'
+    { _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-organizationData :: TF.DataSource P.Google (OrganizationData s)
-organizationData =
-    TF.newDataSource "google_organization" $
-        OrganizationData {
-              _domain = TF.Nil
-            , _organization = TF.Nil
+projectData
+    :: TF.DataSource P.Provider (ProjectData s)
+projectData =
+    TF.newDataSource "google_project" TF.validator $
+        ProjectData'
+            { _projectId = TF.Nil
             }
 
-{- | The @google_project@ Google datasource.
-
-Use this data source to get project details. For more information see
-<https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project>
--}
-data ProjectData s = ProjectData {
-      _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project ID. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ProjectData s) where
-    toObject ProjectData{..} = catMaybes
-        [ TF.assign "project_id" <$> TF.attribute _project_id
+    toObject ProjectData'{..} = P.catMaybes
+        [ TF.assign "project_id" <$> TF.attribute _projectId
         ]
+
+instance TF.IsValid (ProjectData s) where
+    validator = P.mempty
 
 instance P.HasProjectId (ProjectData s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: ProjectData s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: ProjectData s)
+        P.lens (_projectId :: ProjectData s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: ProjectData s)
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
-    computedProjectId =
-        (_project_id :: ProjectData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (AppEngine s)]) where
+    computedAppEngine x = TF.compute (TF.refKey x) "_computedAppEngine"
 
-projectData :: TF.DataSource P.Google (ProjectData s)
-projectData =
-    TF.newDataSource "google_project" $
-        ProjectData {
-              _project_id = TF.Nil
-            }
+instance s ~ s' => P.HasComputedAutoCreateNetwork (TF.Ref s' (ProjectData s)) (TF.Attr s P.Bool) where
+    computedAutoCreateNetwork x = TF.compute (TF.refKey x) "_computedAutoCreateNetwork"
 
-{- | The @google_service_account@ Google datasource.
+instance s ~ s' => P.HasComputedBillingAccount (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedBillingAccount x = TF.compute (TF.refKey x) "_computedBillingAccount"
 
-Get the service account from a project. For more information see the
-official <https://cloud.google.com/compute/docs/access/service-accounts>
-documentation.
--}
-data ServiceAccountData s = ServiceAccountData {
-      _account_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Service account id. -}
-    , _project    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project that the service account will be created in. Defaults to the provider project configuration. -}
-    } deriving (Show, Eq)
+instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedFolderId x = TF.compute (TF.refKey x) "_computedFolderId"
 
-instance TF.IsObject (ServiceAccountData s) where
-    toObject ServiceAccountData{..} = catMaybes
-        [ TF.assign "account_id" <$> TF.attribute _account_id
-        , TF.assign "project" <$> TF.attribute _project
-        ]
+instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ProjectData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
 
-instance P.HasAccountId (ServiceAccountData s) (TF.Attr s P.Text) where
-    accountId =
-        lens (_account_id :: ServiceAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _account_id = a } :: ServiceAccountData s)
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance P.HasProject (ServiceAccountData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: ServiceAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ServiceAccountData s)
+instance s ~ s' => P.HasComputedNumber (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedNumber x = TF.compute (TF.refKey x) "_computedNumber"
 
-instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
-    computedAccountId =
-        (_account_id :: ServiceAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedOrgId x = TF.compute (TF.refKey x) "_computedOrgId"
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedPolicyData x = TF.compute (TF.refKey x) "_computedPolicyData"
 
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
+instance s ~ s' => P.HasComputedPolicyEtag (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedPolicyEtag x = TF.compute (TF.refKey x) "_computedPolicyEtag"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedSkipDelete (TF.Ref s' (ProjectData s)) (TF.Attr s P.Bool) where
+    computedSkipDelete x = TF.compute (TF.refKey x) "_computedSkipDelete"
 
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ServiceAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_service_account terraform documentation>
+-- for more information.
+data ServiceAccountData s = ServiceAccountData'
+    { _accountId :: TF.Attr s P.Text
+    -- ^ @account_id@ - (Required)
+    --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
-    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
-
-serviceAccountData :: TF.DataSource P.Google (ServiceAccountData s)
-serviceAccountData =
-    TF.newDataSource "google_service_account" $
-        ServiceAccountData {
-              _account_id = TF.Nil
+serviceAccountData
+    :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
+    -> TF.DataSource P.Provider (ServiceAccountData s)
+serviceAccountData _accountId =
+    TF.newDataSource "google_service_account" TF.validator $
+        ServiceAccountData'
+            { _accountId = _accountId
             , _project = TF.Nil
             }
 
-{- | The @google_service_account_key@ Google datasource.
+instance TF.IsObject (ServiceAccountData s) where
+    toObject ServiceAccountData'{..} = P.catMaybes
+        [ TF.assign "account_id" <$> TF.attribute _accountId
+        , TF.assign "project" <$> TF.attribute _project
+        ]
 
-Get service account public key. For more information, see
-<https://cloud.google.com/iam/docs/creating-managing-service-account-keys>
-and
-<https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys/get>
-.
--}
-data ServiceAccountKeyData s = ServiceAccountKeyData {
-      _project            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the project that the service account will be created in. Defaults to the provider project configuration. -}
-    , _public_key_type    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The output format of the public key requested. X509_PEM is the default output format. -}
-    , _service_account_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Service account id of the Key Pair. This can be a string in the format @{ACCOUNT}@ or @projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}@ , where @{ACCOUNT}@ is the email address or unique id of the service account. If the @{ACCOUNT}@ syntax is used, the project will be inferred from the account. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (ServiceAccountData s) where
+    validator = P.mempty
+
+instance P.HasAccountId (ServiceAccountData s) (TF.Attr s P.Text) where
+    accountId =
+        P.lens (_accountId :: ServiceAccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _accountId = a } :: ServiceAccountData s)
+
+instance P.HasProject (ServiceAccountData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ServiceAccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ServiceAccountData s)
+
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "_computedName"
+
+instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedUniqueId x = TF.compute (TF.refKey x) "_computedUniqueId"
+
+-- | @google_service_account_key@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_service_account_key terraform documentation>
+-- for more information.
+data ServiceAccountKeyData s = ServiceAccountKeyData'
+    { _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _publicKeyType    :: TF.Attr s P.Text
+    -- ^ @public_key_type@ - (Optional)
+    --
+    , _serviceAccountId :: TF.Attr s P.Text
+    -- ^ @service_account_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+serviceAccountKeyData
+    :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
+    -> TF.DataSource P.Provider (ServiceAccountKeyData s)
+serviceAccountKeyData _serviceAccountId =
+    TF.newDataSource "google_service_account_key" TF.validator $
+        ServiceAccountKeyData'
+            { _project = TF.Nil
+            , _publicKeyType = TF.value "TYPE_X509_PEM_FILE"
+            , _serviceAccountId = _serviceAccountId
+            }
 
 instance TF.IsObject (ServiceAccountKeyData s) where
-    toObject ServiceAccountKeyData{..} = catMaybes
+    toObject ServiceAccountKeyData'{..} = P.catMaybes
         [ TF.assign "project" <$> TF.attribute _project
-        , TF.assign "public_key_type" <$> TF.attribute _public_key_type
-        , TF.assign "service_account_id" <$> TF.attribute _service_account_id
+        , TF.assign "public_key_type" <$> TF.attribute _publicKeyType
+        , TF.assign "service_account_id" <$> TF.attribute _serviceAccountId
         ]
+
+instance TF.IsValid (ServiceAccountKeyData s) where
+    validator = P.mempty
 
 instance P.HasProject (ServiceAccountKeyData s) (TF.Attr s P.Text) where
     project =
-        lens (_project :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: ServiceAccountKeyData s)
+        P.lens (_project :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ServiceAccountKeyData s)
 
 instance P.HasPublicKeyType (ServiceAccountKeyData s) (TF.Attr s P.Text) where
     publicKeyType =
-        lens (_public_key_type :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-             (\s a -> s { _public_key_type = a } :: ServiceAccountKeyData s)
+        P.lens (_publicKeyType :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+               (\s a -> s { _publicKeyType = a } :: ServiceAccountKeyData s)
 
 instance P.HasServiceAccountId (ServiceAccountKeyData s) (TF.Attr s P.Text) where
     serviceAccountId =
-        lens (_service_account_id :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-             (\s a -> s { _service_account_id = a } :: ServiceAccountKeyData s)
+        P.lens (_serviceAccountId :: ServiceAccountKeyData s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceAccountId = a } :: ServiceAccountKeyData s)
+
+instance s ~ s' => P.HasComputedKeyAlgorithm (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedKeyAlgorithm x = TF.compute (TF.refKey x) "_computedKeyAlgorithm"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
 
-instance s ~ s' => P.HasComputedPublicKeyType (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyType =
-        (_public_key_type :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @google_storage_object_signed_url@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_storage_object_signed_url terraform documentation>
+-- for more information.
+data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
+    { _bucket           :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Required)
+    --
+    , _contentMd5       :: TF.Attr s P.Text
+    -- ^ @content_md5@ - (Optional)
+    --
+    , _contentType      :: TF.Attr s P.Text
+    -- ^ @content_type@ - (Optional)
+    --
+    , _credentials      :: TF.Attr s P.Text
+    -- ^ @credentials@ - (Optional)
+    --
+    , _duration         :: TF.Attr s P.Text
+    -- ^ @duration@ - (Optional)
+    --
+    , _extensionHeaders :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @extension_headers@ - (Optional)
+    --
+    , _httpMethod       :: TF.Attr s P.Text
+    -- ^ @http_method@ - (Optional)
+    --
+    , _path             :: TF.Attr s P.Text
+    -- ^ @path@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedServiceAccountId (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
-    computedServiceAccountId =
-        (_service_account_id :: ServiceAccountKeyData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-serviceAccountKeyData :: TF.DataSource P.Google (ServiceAccountKeyData s)
-serviceAccountKeyData =
-    TF.newDataSource "google_service_account_key" $
-        ServiceAccountKeyData {
-              _project = TF.Nil
-            , _public_key_type = TF.Nil
-            , _service_account_id = TF.Nil
+storageObjectSignedUrlData
+    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
+    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    -> TF.DataSource P.Provider (StorageObjectSignedUrlData s)
+storageObjectSignedUrlData _bucket _path =
+    TF.newDataSource "google_storage_object_signed_url" TF.validator $
+        StorageObjectSignedUrlData'
+            { _bucket = _bucket
+            , _contentMd5 = TF.Nil
+            , _contentType = TF.Nil
+            , _credentials = TF.Nil
+            , _duration = TF.value "1h"
+            , _extensionHeaders = TF.Nil
+            , _httpMethod = TF.value "GET"
+            , _path = _path
             }
 
-{- | The @google_storage_object_signed_url@ Google datasource.
-
-The Google Cloud storage signed URL data source generates a signed URL for a
-given storage object. Signed URLs provide a way to give time-limited read or
-write access to anyone in possession of the URL, regardless of whether they
-have a Google account. For more info about signed URL's is available
-<https://cloud.google.com/storage/docs/access-control/signed-urls> .
--}
-data StorageObjectSignedUrlData s = StorageObjectSignedUrlData {
-      _bucket      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the bucket to read the object from -}
-    , _credentials :: !(TF.Attr s P.Text)
-    {- ^ (Optional) What Google service account credentials json should be used to sign the URL. This data source checks the following locations for credentials, in order of preference: data source @credentials@ attribute, provider @credentials@ attribute and finally the GOOGLE_APPLICATION_CREDENTIALS environment variable. -}
-    , _duration    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) For how long shall the signed URL be valid (defaults to 1 hour - i.e. @1h@ ). See <https://golang.org/pkg/time/#ParseDuration> for info on valid duration formats. -}
-    , _http_method :: !(TF.Attr s P.Text)
-    {- ^ (Optional) What HTTP Method will the signed URL allow (defaults to @GET@ ) -}
-    , _path        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The full path to the object inside the bucket -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (StorageObjectSignedUrlData s) where
-    toObject StorageObjectSignedUrlData{..} = catMaybes
+    toObject StorageObjectSignedUrlData'{..} = P.catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "content_md5" <$> TF.attribute _contentMd5
+        , TF.assign "content_type" <$> TF.attribute _contentType
         , TF.assign "credentials" <$> TF.attribute _credentials
         , TF.assign "duration" <$> TF.attribute _duration
-        , TF.assign "http_method" <$> TF.attribute _http_method
+        , TF.assign "extension_headers" <$> TF.attribute _extensionHeaders
+        , TF.assign "http_method" <$> TF.attribute _httpMethod
         , TF.assign "path" <$> TF.attribute _path
         ]
 
+instance TF.IsValid (StorageObjectSignedUrlData s) where
+    validator = P.mempty
+
 instance P.HasBucket (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     bucket =
-        lens (_bucket :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-             (\s a -> s { _bucket = a } :: StorageObjectSignedUrlData s)
+        P.lens (_bucket :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: StorageObjectSignedUrlData s)
+
+instance P.HasContentMd5 (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
+    contentMd5 =
+        P.lens (_contentMd5 :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _contentMd5 = a } :: StorageObjectSignedUrlData s)
+
+instance P.HasContentType (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
+    contentType =
+        P.lens (_contentType :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasCredentials (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     credentials =
-        lens (_credentials :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-             (\s a -> s { _credentials = a } :: StorageObjectSignedUrlData s)
+        P.lens (_credentials :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _credentials = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasDuration (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     duration =
-        lens (_duration :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-             (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
+        P.lens (_duration :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _duration = a } :: StorageObjectSignedUrlData s)
+
+instance P.HasExtensionHeaders (StorageObjectSignedUrlData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    extensionHeaders =
+        P.lens (_extensionHeaders :: StorageObjectSignedUrlData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _extensionHeaders = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasHttpMethod (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     httpMethod =
-        lens (_http_method :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-             (\s a -> s { _http_method = a } :: StorageObjectSignedUrlData s)
+        P.lens (_httpMethod :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _httpMethod = a } :: StorageObjectSignedUrlData s)
 
 instance P.HasPath (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
-
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
-    computedBucket =
-        (_bucket :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCredentials (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
-    computedCredentials =
-        (_credentials :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDuration (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
-    computedDuration =
-        (_duration :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHttpMethod (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
-    computedHttpMethod =
-        (_http_method :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_path :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
 
 instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
-    computedSignedUrl x = TF.compute (TF.refKey x) "signed_url"
+    computedSignedUrl x = TF.compute (TF.refKey x) "_computedSignedUrl"
 
-storageObjectSignedUrlData :: TF.DataSource P.Google (StorageObjectSignedUrlData s)
-storageObjectSignedUrlData =
-    TF.newDataSource "google_storage_object_signed_url" $
-        StorageObjectSignedUrlData {
-              _bucket = TF.Nil
-            , _credentials = TF.Nil
-            , _duration = TF.Nil
-            , _http_method = TF.Nil
-            , _path = TF.Nil
-            }
+-- | @google_storage_project_service_account@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Google/google_storage_project_service_account terraform documentation>
+-- for more information.
+data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @google_storage_project_service_account@ Google datasource.
-
-Use this data source to get the email address of the project's Google Cloud
-Storage service account. For more information see
-<https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount>
-.
--}
-data StorageProjectServiceAccountData s = StorageProjectServiceAccountData {
-      _project :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The project in which the resource belongs. If it is not provided, the provider project is used. -}
-    } deriving (Show, Eq)
+storageProjectServiceAccountData
+    :: TF.DataSource P.Provider (StorageProjectServiceAccountData s)
+storageProjectServiceAccountData =
+    TF.newDataSource "google_storage_project_service_account" TF.validator $
+        StorageProjectServiceAccountData'
 
 instance TF.IsObject (StorageProjectServiceAccountData s) where
-    toObject StorageProjectServiceAccountData{..} = catMaybes
-        [ TF.assign "project" <$> TF.attribute _project
-        ]
+    toObject _ = []
 
-instance P.HasProject (StorageProjectServiceAccountData s) (TF.Attr s P.Text) where
-    project =
-        lens (_project :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
-             (\s a -> s { _project = a } :: StorageProjectServiceAccountData s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance TF.IsValid (StorageProjectServiceAccountData s) where
+    validator = P.mempty
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
-    computedProject =
-        (_project :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-storageProjectServiceAccountData :: TF.DataSource P.Google (StorageProjectServiceAccountData s)
-storageProjectServiceAccountData =
-    TF.newDataSource "google_storage_project_service_account" $
-        StorageProjectServiceAccountData {
-              _project = TF.Nil
-            }
+    computedProject x = TF.compute (TF.refKey x) "_computedProject"

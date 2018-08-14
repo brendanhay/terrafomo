@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Template
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Template
-    ( module Terrafomo.Template.Types
+    ( module Terrafomo.Template.Settings
     , module Terrafomo.Template.Lens
-    , module Terrafomo.Template.DataSource
+    , module Terrafomo.Template.Provider
     , module Terrafomo.Template.Resource
+    , module Terrafomo.Template.DataSource
+    , module Terrafomo.Template.Types
     ) where
 
 import Terrafomo.Template.DataSource
 import Terrafomo.Template.Lens
+import Terrafomo.Template.Provider
 import Terrafomo.Template.Resource
+import Terrafomo.Template.Settings
 import Terrafomo.Template.Types

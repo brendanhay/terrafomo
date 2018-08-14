@@ -1,0 +1,84 @@
+{
+  "name": "local",
+  "schemas": [],
+  "resources": [
+    {
+      "name": "local_file",
+      "schemas": [
+        {
+          "name": "content",
+          "type": "TypeString",
+          "conflictsWith": [
+            "sensitive_content"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "filename",
+          "type": "TypeString",
+          "description": "Path to the output file",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "sensitive_content",
+          "type": "TypeString",
+          "conflictsWith": [
+            "content"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": true,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": [
+    {
+      "name": "local_file",
+      "schemas": [
+        {
+          "name": "content",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "filename",
+          "type": "TypeString",
+          "description": "Path to the output file",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ]
+}

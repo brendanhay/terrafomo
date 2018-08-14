@@ -1,4 +1,2 @@
-name: UltraDNS
-package: terrafomo-ultradns
-datatype: true
-original: ultradns
+package-name: terrafomo-ultradns
+provider-name: UltraDNS

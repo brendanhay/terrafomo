@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,63 +17,94 @@
 --
 module Terrafomo.NS1.Provider
     (
-    -- * Provider Datatype
-      NS1 (..)
-    , emptyNS1
-
-    -- * Lenses
-    , providerApikey
+    -- * NS1 Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.NS1.Settings
 
+import qualified Data.Hashable       as P
+import qualified Data.HashMap.Strict as P
+import qualified Data.HashMap.Strict as Map
+import qualified Data.List.NonEmpty  as P
+import qualified Data.Maybe          as P
+import qualified Data.Monoid         as P
 import qualified Data.Text           as P
+import qualified GHC.Generics        as P
+import qualified Lens.Micro          as P
+import qualified Prelude             as P
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.NS1.Lens  as P
 import qualified Terrafomo.NS1.Types as P
+import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.Validator as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @NS1@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/NS1/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _apikey    :: P.Maybe P.Text
+    -- ^ @apikey@ - (Optional)
+    -- The ns1 API key, this is required
+    --
+    , _endpoint  :: P.Maybe P.Text
+    -- ^ @endpoint@ - (Optional)
+    --
+    , _ignoreSsl :: P.Maybe P.Bool
+    -- ^ @ignore_ssl@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | NS1 Terraform provider.
+newProvider
+    :: Provider
+newProvider =
+    Provider'
+        { _apikey = P.Nothing
+        , _endpoint = P.Nothing
+        , _ignoreSsl = P.Nothing
+        }
 
-The NS1 provider exposes resources to interact with the NS1 REST API. The
-provider needs to be configured with the proper credentials before it can be
-used. Use the navigation to the left to read about the available resources.
--}
-data NS1 = NS1 {
-      _apikey :: !(Maybe P.Text)
-    {- ^ (Required) NS1 API token. It must be provided, but it can also be sourced from the @NS1_APIKEY@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable NS1
-
-instance TF.IsSection NS1 where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (NS1))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "apikey" <$> _apikey x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "apikey" <$> _apikey
+                  , TF.assign "endpoint" <$> _endpoint
+                  , TF.assign "ignore_ssl" <$> _ignoreSsl
                   ])
 
-instance TF.IsProvider NS1 where
-    type ProviderType NS1 = "ns1"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyNS1 :: NS1
-emptyNS1 = NS1 {
-        _apikey = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerApikey :: Lens' NS1 (Maybe P.Text)
-providerApikey =
-    lens _apikey (\s a -> s { _apikey = a })
+instance P.HasApikey (Provider) (P.Maybe P.Text) where
+    apikey =
+        P.lens (_apikey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _apikey = a } :: Provider)
+
+instance P.HasEndpoint (Provider) (P.Maybe P.Text) where
+    endpoint =
+        P.lens (_endpoint :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _endpoint = a } :: Provider)
+
+instance P.HasIgnoreSsl (Provider) (P.Maybe P.Bool) where
+    ignoreSsl =
+        P.lens (_ignoreSsl :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _ignoreSsl = a } :: Provider)

@@ -1,60 +1,23 @@
-name: AWS
-package: terrafomo-aws
-datatype: true
-original: aws
+package-name: terrafomo-aws
+provider-name: AWS
+partition-size: 80
 
-dependencies:
-  - aeson
+extra-deps:
   - amazonka-core
   - formatting
   - iproute
-  - unordered-containers
+  - amazonka-iam-policy >= 0.0.3
 
-rules:
-  - mode: suffix
-    match: cidr_block
-    type: 'P.IPRange'
+field-overrides:
+  - exact: assume_role_policy
+    type: TF.Attr s P.Document
 
-  - mode: exact
-    match: tags
-    type: '(P.Tags s)'
+  - exact: policy
+    type: TF.Attr s P.Document
 
-  - mode: suffix
-    match: _port
-    type: 'P.Word16'
+datatype-overrides:
+  provider:
+    region: P.Region
 
-  - mode: prefix
-    match: enable
-    type: 'P.Bool'
-
-  - mode: suffix
-    match: enable
-    type: 'P.Bool'
-
-  - mode: suffix
-    match: enabled
-    type: 'P.Bool'
-
-  - mode: suffix
-    match: region
-    type: 'P.Region'
-
-  - mode: suffix
-    match: availability_zone
-    type: 'P.Zone'
-
-  - mode: exact
-    match: availability_zones
-    type: '[TF.Attr s P.Text]'
-
-  - mode: exact
-    match: security_group_ids
-    type: '[TF.Attr s P.Text]'
-
-  - mode: exact
-    match: security_groups
-    type: '[TF.Attr s P.Text]'
-
-  - mode: exact
-    match: subnets
-    type: '[TF.Attr s P.Text]'
+  assume_role:
+    policy: P.Maybe P.Document

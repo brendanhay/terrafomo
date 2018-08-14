@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Kubernetes
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Kubernetes
-    ( module Terrafomo.Kubernetes.Types
-    , module Terrafomo.Kubernetes.Provider
+    ( module Terrafomo.Kubernetes.Settings
     , module Terrafomo.Kubernetes.Lens
-    , module Terrafomo.Kubernetes.DataSource
     , module Terrafomo.Kubernetes.Resource
+    , module Terrafomo.Kubernetes.Provider
+    , module Terrafomo.Kubernetes.DataSource
+    , module Terrafomo.Kubernetes.Types
     ) where
 
 import Terrafomo.Kubernetes.DataSource
 import Terrafomo.Kubernetes.Lens
 import Terrafomo.Kubernetes.Provider
 import Terrafomo.Kubernetes.Resource
+import Terrafomo.Kubernetes.Settings
 import Terrafomo.Kubernetes.Types

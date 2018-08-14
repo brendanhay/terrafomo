@@ -1,4 +1,2 @@
-name: Kubernetes
-package: terrafomo-kubernetes
-datatype: true
-original: kubernetes
+package-name: terrafomo-kubernetes
+provider-name: Kubernetes

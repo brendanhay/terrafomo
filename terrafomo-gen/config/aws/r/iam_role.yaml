@@ -1,3 +1,0 @@
-arguments:
-  _assume_role_policy:
-    type: 'P.IamPolicy'

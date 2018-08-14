@@ -1,4 +1,2 @@
-name: PowerDNS
-package: terrafomo-powerdns
-datatype: true
-original: powerdns
+package-name: terrafomo-powerdns
+provider-name: PowerDNS

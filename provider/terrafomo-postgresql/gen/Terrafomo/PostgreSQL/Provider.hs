@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,135 +17,177 @@
 --
 module Terrafomo.PostgreSQL.Provider
     (
-    -- * Provider Datatype
-      PostgreSQL (..)
-    , emptyPostgreSQL
-
-    -- * Lenses
-    , providerConnectTimeout
-    , providerDatabase
-    , providerExpectedVersion
-    , providerHost
-    , providerMaxConnections
-    , providerPassword
-    , providerPort
-    , providerSslmode
-    , providerUsername
+    -- * PostgreSQL Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.PostgreSQL.Settings
 
+import qualified Data.Hashable              as P
+import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
+import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
+import qualified GHC.Generics               as P
+import qualified Lens.Micro                 as P
+import qualified Prelude                    as P
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.PostgreSQL.Lens  as P
 import qualified Terrafomo.PostgreSQL.Types as P
+import qualified Terrafomo.Provider         as TF
+import qualified Terrafomo.Validator        as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @PostgreSQL@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/PostgreSQL/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _connectTimeout  :: P.Maybe P.Integer
+    -- ^ @connect_timeout@ - (Optional)
+    -- Maximum wait for connection, in seconds. Zero or not specified means wait
+    -- indefinitely.
+    --
+    , _database        :: P.Maybe P.Text
+    -- ^ @database@ - (Optional)
+    -- The name of the database to connect to in order to conenct to (defaults to
+    -- `postgres`).
+    --
+    , _expectedVersion :: P.Text
+    -- ^ @expected_version@ - (Optional)
+    -- Specify the expected version of PostgreSQL.
+    --
+    , _host            :: P.Maybe P.Text
+    -- ^ @host@ - (Optional)
+    -- Name of PostgreSQL server address to connect to
+    --
+    , _maxConnections  :: P.Maybe P.Integer
+    -- ^ @max_connections@ - (Optional)
+    -- Maximum number of connections to establish to the database. Zero means
+    -- unlimited.
+    --
+    , _password        :: P.Maybe P.Text
+    -- ^ @password@ - (Optional)
+    -- Password to be used if the PostgreSQL server demands password authentication
+    --
+    , _port            :: P.Maybe P.Integer
+    -- ^ @port@ - (Optional)
+    -- The PostgreSQL port number to connect to at the server host, or socket file
+    -- name extension for Unix-domain connections
+    --
+    , _sslMode         :: P.Maybe P.Text
+    -- ^ @ssl_mode@ - (Optional)
+    --
+    , _sslmode         :: P.Maybe P.Text
+    -- ^ @sslmode@ - (Optional)
+    -- This option determines whether or with what priority a secure SSL TCP/IP
+    -- connection will be negotiated with the PostgreSQL server
+    --
+    , _username        :: P.Maybe P.Text
+    -- ^ @username@ - (Optional)
+    -- PostgreSQL user name to connect as
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | PostgreSQL Terraform provider.
+newProvider
+    :: Provider
+newProvider =
+    Provider'
+        { _connectTimeout = P.Nothing
+        , _database = P.Nothing
+        , _expectedVersion = "9.0.0"
+        , _host = P.Nothing
+        , _maxConnections = P.Nothing
+        , _password = P.Nothing
+        , _port = P.Nothing
+        , _sslMode = P.Nothing
+        , _sslmode = P.Nothing
+        , _username = P.Nothing
+        }
 
-The PostgreSQL provider gives the ability to deploy and configure resources
-in a PostgreSQL server. Use the navigation to the left to read about the
-available resources.
--}
-data PostgreSQL = PostgreSQL {
-      _connect_timeout  :: !(Maybe P.Text)
-    {- ^ (Optional) Maximum wait for connection, in seconds. The default is @180s@ .  Zero or not specified means wait indefinitely. -}
-    , _database         :: !(Maybe P.Text)
-    {- ^ (Optional) Database to connect to. The default is @postgres@ . -}
-    , _expected_version :: !(Maybe P.Text)
-    {- ^ (Optional) Specify a hint to Terraform regarding the expected version that the provider will be talking with.  This is a required hint in order for Terraform to talk with an ancient version of PostgreSQL. This parameter is expected to be a <https://www.postgresql.org/support/versioning/> or @current@ .  Once a connection has been established, Terraform will fingerprint the actual version.  Default: @9.0.0@ . -}
-    , _host             :: !(Maybe P.Text)
-    {- ^ (Required) The address for the postgresql server connection. -}
-    , _max_connections  :: !(Maybe P.Text)
-    {- ^ (Optional) Set the maximum number of open connections to the database. The default is @4@ .  Zero means unlimited open connections. -}
-    , _password         :: !(Maybe P.Text)
-    {- ^ (Optional) Password for the server connection. -}
-    , _port             :: !(Maybe P.Text)
-    {- ^ (Optional) The port for the postgresql server connection. The default is @5432@ . -}
-    , _sslmode          :: !(Maybe P.Text)
-    {- ^ (Optional) Set the priority for an SSL connection to the server. Valid values for @sslmode@ are (note: @prefer@ is not supported by Go's <https://godoc.org/github.com/lib/pq> ): -}
-    , _username         :: !(Maybe P.Text)
-    {- ^ (Required) Username for the server connection. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable PostgreSQL
-
-instance TF.IsSection PostgreSQL where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (PostgreSQL))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "connect_timeout" <$> _connect_timeout x
-                  , TF.assign "database" <$> _database x
-                  , TF.assign "expected_version" <$> _expected_version x
-                  , TF.assign "host" <$> _host x
-                  , TF.assign "max_connections" <$> _max_connections x
-                  , TF.assign "password" <$> _password x
-                  , TF.assign "port" <$> _port x
-                  , TF.assign "sslmode" <$> _sslmode x
-                  , TF.assign "username" <$> _username x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "connect_timeout" <$> _connectTimeout
+                  , TF.assign "database" <$> _database
+                  , P.Just $ TF.assign "expected_version" _expectedVersion
+                  , TF.assign "host" <$> _host
+                  , TF.assign "max_connections" <$> _maxConnections
+                  , TF.assign "password" <$> _password
+                  , TF.assign "port" <$> _port
+                  , TF.assign "ssl_mode" <$> _sslMode
+                  , TF.assign "sslmode" <$> _sslmode
+                  , TF.assign "username" <$> _username
                   ])
 
-instance TF.IsProvider PostgreSQL where
-    type ProviderType PostgreSQL = "postgresql"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyPostgreSQL :: PostgreSQL
-emptyPostgreSQL = PostgreSQL {
-        _connect_timeout = Nothing
-      , _database = Nothing
-      , _expected_version = Nothing
-      , _host = Nothing
-      , _max_connections = Nothing
-      , _password = Nothing
-      , _port = Nothing
-      , _sslmode = Nothing
-      , _username = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerConnectTimeout :: Lens' PostgreSQL (Maybe P.Text)
-providerConnectTimeout =
-    lens _connect_timeout (\s a -> s { _connect_timeout = a })
+instance P.HasConnectTimeout (Provider) (P.Maybe P.Integer) where
+    connectTimeout =
+        P.lens (_connectTimeout :: Provider -> P.Maybe P.Integer)
+               (\s a -> s { _connectTimeout = a } :: Provider)
 
-providerDatabase :: Lens' PostgreSQL (Maybe P.Text)
-providerDatabase =
-    lens _database (\s a -> s { _database = a })
+instance P.HasDatabase (Provider) (P.Maybe P.Text) where
+    database =
+        P.lens (_database :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _database = a } :: Provider)
 
-providerExpectedVersion :: Lens' PostgreSQL (Maybe P.Text)
-providerExpectedVersion =
-    lens _expected_version (\s a -> s { _expected_version = a })
+instance P.HasExpectedVersion (Provider) (P.Text) where
+    expectedVersion =
+        P.lens (_expectedVersion :: Provider -> P.Text)
+               (\s a -> s { _expectedVersion = a } :: Provider)
 
-providerHost :: Lens' PostgreSQL (Maybe P.Text)
-providerHost =
-    lens _host (\s a -> s { _host = a })
+instance P.HasHost (Provider) (P.Maybe P.Text) where
+    host =
+        P.lens (_host :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _host = a } :: Provider)
 
-providerMaxConnections :: Lens' PostgreSQL (Maybe P.Text)
-providerMaxConnections =
-    lens _max_connections (\s a -> s { _max_connections = a })
+instance P.HasMaxConnections (Provider) (P.Maybe P.Integer) where
+    maxConnections =
+        P.lens (_maxConnections :: Provider -> P.Maybe P.Integer)
+               (\s a -> s { _maxConnections = a } :: Provider)
 
-providerPassword :: Lens' PostgreSQL (Maybe P.Text)
-providerPassword =
-    lens _password (\s a -> s { _password = a })
+instance P.HasPassword (Provider) (P.Maybe P.Text) where
+    password =
+        P.lens (_password :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _password = a } :: Provider)
 
-providerPort :: Lens' PostgreSQL (Maybe P.Text)
-providerPort =
-    lens _port (\s a -> s { _port = a })
+instance P.HasPort (Provider) (P.Maybe P.Integer) where
+    port =
+        P.lens (_port :: Provider -> P.Maybe P.Integer)
+               (\s a -> s { _port = a } :: Provider)
 
-providerSslmode :: Lens' PostgreSQL (Maybe P.Text)
-providerSslmode =
-    lens _sslmode (\s a -> s { _sslmode = a })
+instance P.HasSslMode (Provider) (P.Maybe P.Text) where
+    sslMode =
+        P.lens (_sslMode :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _sslMode = a } :: Provider)
 
-providerUsername :: Lens' PostgreSQL (Maybe P.Text)
-providerUsername =
-    lens _username (\s a -> s { _username = a })
+instance P.HasSslmode (Provider) (P.Maybe P.Text) where
+    sslmode =
+        P.lens (_sslmode :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _sslmode = a } :: Provider)
+
+instance P.HasUsername (Provider) (P.Maybe P.Text) where
+    username =
+        P.lens (_username :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _username = a } :: Provider)

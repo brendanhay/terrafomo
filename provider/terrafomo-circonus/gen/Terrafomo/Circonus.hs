@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Circonus
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,14 +12,16 @@
 --
 module Terrafomo.Circonus
     ( module Terrafomo.Circonus.Types
-    , module Terrafomo.Circonus.Provider
-    , module Terrafomo.Circonus.Lens
     , module Terrafomo.Circonus.DataSource
+    , module Terrafomo.Circonus.Provider
     , module Terrafomo.Circonus.Resource
+    , module Terrafomo.Circonus.Settings
+    , module Terrafomo.Circonus.Lens
     ) where
 
 import Terrafomo.Circonus.DataSource
 import Terrafomo.Circonus.Lens
 import Terrafomo.Circonus.Provider
 import Terrafomo.Circonus.Resource
+import Terrafomo.Circonus.Settings
 import Terrafomo.Circonus.Types

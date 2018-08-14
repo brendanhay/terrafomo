@@ -1,4 +1,2 @@
-name: RabbitMQ
-package: terrafomo-rabbitmq
-datatype: true
-original: rabbitmq
+package-name: terrafomo-rabbitmq
+provider-name: RabbitMQ

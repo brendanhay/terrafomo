@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.NewRelic
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.NewRelic
-    ( module Terrafomo.NewRelic.Types
-    , module Terrafomo.NewRelic.Provider
-    , module Terrafomo.NewRelic.Lens
-    , module Terrafomo.NewRelic.DataSource
+    ( module Terrafomo.NewRelic.Provider
     , module Terrafomo.NewRelic.Resource
+    , module Terrafomo.NewRelic.Types
+    , module Terrafomo.NewRelic.Lens
+    , module Terrafomo.NewRelic.Settings
+    , module Terrafomo.NewRelic.DataSource
     ) where
 
 import Terrafomo.NewRelic.DataSource
 import Terrafomo.NewRelic.Lens
 import Terrafomo.NewRelic.Provider
 import Terrafomo.NewRelic.Resource
+import Terrafomo.NewRelic.Settings
 import Terrafomo.NewRelic.Types

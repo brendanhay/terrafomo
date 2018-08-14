@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.StatusCake
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,12 +12,14 @@
 --
 module Terrafomo.StatusCake
     ( module Terrafomo.StatusCake.Types
-    , module Terrafomo.StatusCake.Provider
+    , module Terrafomo.StatusCake.Settings
     , module Terrafomo.StatusCake.Lens
+    , module Terrafomo.StatusCake.Provider
     , module Terrafomo.StatusCake.Resource
     ) where
 
 import Terrafomo.StatusCake.Lens
 import Terrafomo.StatusCake.Provider
 import Terrafomo.StatusCake.Resource
+import Terrafomo.StatusCake.Settings
 import Terrafomo.StatusCake.Types

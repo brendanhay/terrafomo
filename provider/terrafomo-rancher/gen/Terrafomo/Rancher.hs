@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Rancher
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Rancher
-    ( module Terrafomo.Rancher.Types
+    ( module Terrafomo.Rancher.Lens
+    , module Terrafomo.Rancher.Settings
     , module Terrafomo.Rancher.Provider
-    , module Terrafomo.Rancher.Lens
-    , module Terrafomo.Rancher.DataSource
     , module Terrafomo.Rancher.Resource
+    , module Terrafomo.Rancher.Types
+    , module Terrafomo.Rancher.DataSource
     ) where
 
 import Terrafomo.Rancher.DataSource
 import Terrafomo.Rancher.Lens
 import Terrafomo.Rancher.Provider
 import Terrafomo.Rancher.Resource
+import Terrafomo.Rancher.Settings
 import Terrafomo.Rancher.Types

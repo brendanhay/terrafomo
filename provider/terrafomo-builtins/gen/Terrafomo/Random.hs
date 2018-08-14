@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Random
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,11 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Random
-    ( module Terrafomo.Random.Types
-    , module Terrafomo.Random.Lens
+    ( module Terrafomo.Random.Lens
+    , module Terrafomo.Random.Settings
     , module Terrafomo.Random.Resource
+    , module Terrafomo.Random.Types
+    , module Terrafomo.Random.Provider
     ) where
 
 import Terrafomo.Random.Lens
+import Terrafomo.Random.Provider
 import Terrafomo.Random.Resource
+import Terrafomo.Random.Settings
 import Terrafomo.Random.Types

@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,82 +17,107 @@
 --
 module Terrafomo.Rancher.Provider
     (
-    -- * Provider Datatype
-      Rancher (..)
-    , emptyRancher
-
-    -- * Lenses
-    , providerAccessKey
-    , providerApiUrl
-    , providerSecretKey
+    -- * Rancher Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Rancher.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Rancher.Lens  as P
 import qualified Terrafomo.Rancher.Types as P
+import qualified Terrafomo.Validator     as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Rancher@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Rancher/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _accessKey :: P.Maybe P.Text
+    -- ^ @access_key@ - (Optional)
+    -- API Key used to authenticate with the rancher server
+    --
+    , _apiUrl    :: P.Maybe P.Text
+    -- ^ @api_url@ - (Optional)
+    -- The URL to the rancher API, must include version uri (ie. v1 or v2-beta)
+    --
+    , _config    :: P.Maybe P.Text
+    -- ^ @config@ - (Optional)
+    -- Path to the Rancher client cli.json config file
+    --
+    , _secretKey :: P.Maybe P.Text
+    -- ^ @secret_key@ - (Optional)
+    -- API secret used to authenticate with the rancher server
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Rancher Terraform provider.
+newProvider
+    :: Provider
+newProvider =
+    Provider'
+        { _accessKey = P.Nothing
+        , _apiUrl = P.Nothing
+        , _config = P.Nothing
+        , _secretKey = P.Nothing
+        }
 
-The Rancher provider is used to interact with the resources supported by
-Rancher. The provider needs to be configured with the URL of the Rancher
-server at minimum and API credentials if access control is enabled on the
-server.
--}
-data Rancher = Rancher {
-      _access_key :: !(Maybe P.Text)
-    {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_ACCESS_KEY@ environment variable. -}
-    , _api_url    :: !(Maybe P.Text)
-    {- ^ (Required) Rancher API url. It must be provided, but it can also be sourced from the @RANCHER_URL@ environment variable. -}
-    , _secret_key :: !(Maybe P.Text)
-    {- ^ (Optional) Rancher API access key. It can also be sourced from the @RANCHER_SECRET_KEY@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Rancher
-
-instance TF.IsSection Rancher where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Rancher))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "access_key" <$> _access_key x
-                  , TF.assign "api_url" <$> _api_url x
-                  , TF.assign "secret_key" <$> _secret_key x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _accessKey
+                  , TF.assign "api_url" <$> _apiUrl
+                  , TF.assign "config" <$> _config
+                  , TF.assign "secret_key" <$> _secretKey
                   ])
 
-instance TF.IsProvider Rancher where
-    type ProviderType Rancher = "rancher"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyRancher :: Rancher
-emptyRancher = Rancher {
-        _access_key = Nothing
-      , _api_url = Nothing
-      , _secret_key = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAccessKey :: Lens' Rancher (Maybe P.Text)
-providerAccessKey =
-    lens _access_key (\s a -> s { _access_key = a })
+instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
+    accessKey =
+        P.lens (_accessKey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _accessKey = a } :: Provider)
 
-providerApiUrl :: Lens' Rancher (Maybe P.Text)
-providerApiUrl =
-    lens _api_url (\s a -> s { _api_url = a })
+instance P.HasApiUrl (Provider) (P.Maybe P.Text) where
+    apiUrl =
+        P.lens (_apiUrl :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _apiUrl = a } :: Provider)
 
-providerSecretKey :: Lens' Rancher (Maybe P.Text)
-providerSecretKey =
-    lens _secret_key (\s a -> s { _secret_key = a })
+instance P.HasConfig (Provider) (P.Maybe P.Text) where
+    config =
+        P.lens (_config :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _config = a } :: Provider)
+
+instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
+    secretKey =
+        P.lens (_secretKey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _secretKey = a } :: Provider)

@@ -1,3 +1,0 @@
-arguments:
-  _source:
-    type: '[P.ArchiveSource s]'

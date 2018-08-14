@@ -1,10 +1,8 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-
-
 -- |
 -- Module      : Terrafomo.Google.Types
--- Copyright   : (c) 2017 Brendan Hay
+-- Copyright   : (c) 2017-2018 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
 -- Stability   : auto-generated
@@ -12,16 +10,15 @@
 --
 module Terrafomo.Google.Types where
 
-import qualified Terrafomo.Syntax.HCL as TF
+-- import Data.Text (Text)
 
-data PlacementType = PlacementType
-    deriving (Show, Eq)
+-- import Terrafomo
 
-instance TF.ToHCL PlacementType where
-    toHCL _ = TF.block []
+-- import Formatting (Format, (%))
 
-data SchedulingType = SchedulingType
-    deriving (Show, Eq)
-
-instance TF.ToHCL SchedulingType where
-    toHCL _ = TF.block []
+-- import Terrafomo.Google.Lens
+-- import qualified Terrafomo.Attribute as TF
+-- import qualified Terrafomo.HCL as TF
+-- import qualified Terrafomo.Name as TF
+-- import qualified Terrafomo.Provider as TF
+-- import qualified Terrafomo.Schema as TF

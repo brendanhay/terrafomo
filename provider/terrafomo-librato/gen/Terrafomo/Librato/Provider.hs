@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,73 +17,87 @@
 --
 module Terrafomo.Librato.Provider
     (
-    -- * Provider Datatype
-      Librato (..)
-    , emptyLibrato
-
-    -- * Lenses
-    , providerEmail
-    , providerToken
+    -- * Librato Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Librato.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Librato.Lens  as P
 import qualified Terrafomo.Librato.Types as P
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Librato@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Librato/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _email :: P.Text
+    -- ^ @email@ - (Required)
+    -- The email address for the Librato account.
+    --
+    , _token :: P.Text
+    -- ^ @token@ - (Required)
+    -- The auth token for the Librato account.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Librato Terraform provider.
+newProvider
+    :: P.Text -- ^ @email@ - 'P.email'
+    -> P.Text -- ^ @token@ - 'P.token'
+    -> Provider
+newProvider _email _token =
+    Provider'
+        { _email = _email
+        , _token = _token
+        }
 
-The Librato provider is used to interact with the resources supported by
-Librato. The provider needs to be configured with the proper credentials
-before it can be used. Use the navigation to the left to read about the
-available resources.
--}
-data Librato = Librato {
-      _email :: !(Maybe P.Text)
-    {- ^ (Required) Librato email address. It must be provided, but it can also be sourced from the @LIBRATO_EMAIL@ environment variable. -}
-    , _token :: !(Maybe P.Text)
-    {- ^ (Required) Librato API token. It must be provided, but it can also be sourced from the @LIBRATO_TOKEN@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Librato
-
-instance TF.IsSection Librato where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Librato))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "email" <$> _email x
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "email" _email
+                  , P.Just $ TF.assign "token" _token
                   ])
 
-instance TF.IsProvider Librato where
-    type ProviderType Librato = "librato"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyLibrato :: Librato
-emptyLibrato = Librato {
-        _email = Nothing
-      , _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerEmail :: Lens' Librato (Maybe P.Text)
-providerEmail =
-    lens _email (\s a -> s { _email = a })
+instance P.HasEmail (Provider) (P.Text) where
+    email =
+        P.lens (_email :: Provider -> P.Text)
+               (\s a -> s { _email = a } :: Provider)
 
-providerToken :: Lens' Librato (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasToken (Provider) (P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Text)
+               (\s a -> s { _token = a } :: Provider)

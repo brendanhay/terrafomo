@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Dyn
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Dyn
-    ( module Terrafomo.Dyn.Types
-    , module Terrafomo.Dyn.Provider
-    , module Terrafomo.Dyn.Lens
+    ( module Terrafomo.Dyn.Lens
+    , module Terrafomo.Dyn.Settings
     , module Terrafomo.Dyn.Resource
+    , module Terrafomo.Dyn.Types
+    , module Terrafomo.Dyn.Provider
     ) where
 
 import Terrafomo.Dyn.Lens
 import Terrafomo.Dyn.Provider
 import Terrafomo.Dyn.Resource
+import Terrafomo.Dyn.Settings
 import Terrafomo.Dyn.Types

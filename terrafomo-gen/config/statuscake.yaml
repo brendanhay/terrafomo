@@ -1,4 +1,2 @@
-name: StatusCake
-package: terrafomo-statuscake
-datatype: true
-original: statuscake
+package-name: terrafomo-statuscake
+provider-name: StatusCake

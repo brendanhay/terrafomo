@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,91 +17,119 @@
 --
 module Terrafomo.Chef.Provider
     (
-    -- * Provider Datatype
-      Chef (..)
-    , emptyChef
-
-    -- * Lenses
-    , providerAllowUnverifiedSsl
-    , providerClientName
-    , providerKeyMaterial
-    , providerServerUrl
+    -- * Chef Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Chef.Settings
 
+import qualified Data.Hashable        as P
+import qualified Data.HashMap.Strict  as P
+import qualified Data.HashMap.Strict  as Map
+import qualified Data.List.NonEmpty   as P
+import qualified Data.Maybe           as P
+import qualified Data.Monoid          as P
 import qualified Data.Text            as P
+import qualified GHC.Generics         as P
+import qualified Lens.Micro           as P
+import qualified Prelude              as P
+import qualified Terrafomo.Chef.Lens  as P
 import qualified Terrafomo.Chef.Types as P
+import qualified Terrafomo.HCL        as TF
+import qualified Terrafomo.Name       as TF
+import qualified Terrafomo.Provider   as TF
+import qualified Terrafomo.Validator  as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Chef@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Chef/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _allowUnverifiedSsl :: P.Maybe P.Bool
+    -- ^ @allow_unverified_ssl@ - (Optional)
+    -- If set, the Chef client will permit unverifiable SSL certificates.
+    --
+    , _clientName         :: P.Text
+    -- ^ @client_name@ - (Required)
+    -- Name of a registered client within the Chef server.
+    --
+    , _keyMaterial        :: P.Maybe P.Text
+    -- ^ @key_material@ - (Optional)
+    --
+    , _privateKeyPem      :: P.Maybe P.Text
+    -- ^ @private_key_pem@ - (Optional)
+    -- PEM-formatted private key for client authentication.
+    --
+    , _serverUrl          :: P.Text
+    -- ^ @server_url@ - (Required)
+    -- URL of the root of the target Chef server or organization.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Chef Terraform provider.
+newProvider
+    :: P.Text -- ^ @client_name@ - 'P.clientName'
+    -> P.Text -- ^ @server_url@ - 'P.serverUrl'
+    -> Provider
+newProvider _clientName _serverUrl =
+    Provider'
+        { _allowUnverifiedSsl = P.Nothing
+        , _clientName = _clientName
+        , _keyMaterial = P.Nothing
+        , _privateKeyPem = P.Nothing
+        , _serverUrl = _serverUrl
+        }
 
-<https://www.chef.io/> is a systems and cloud infrastructure automation
-framework. The Chef provider allows Terraform to manage various resources
-that exist within <http://docs.chef.io/chef_server.html> . Use the
-navigation to the left to read about the available resources.
--}
-data Chef = Chef {
-      _allow_unverified_ssl :: !(Maybe P.Text)
-    {- ^ (Optional) Boolean indicating whether to make requests to a Chef server whose SSL certicate cannot be verified. Defaults to @false@ . -}
-    , _client_name          :: !(Maybe P.Text)
-    {- ^ (Required) The name of the client account to use when making requests. This must have been already configured on the Chef server. May be provided instead via the @CHEF_CLIENT_NAME@ environment variable. -}
-    , _key_material         :: !(Maybe P.Text)
-    {- ^ (Required) The PEM-formatted private key contents belonging to the configured client. This is issued by the server when a new client object is created. May be provided via the @CHEF_KEY_MATERIAL@ environment variable. -}
-    , _server_url           :: !(Maybe P.Text)
-    {- ^ (Required) The HTTP(S) API URL of the Chef server to use. If the target Chef server supports organizations, use the full URL of the organization you wish to configure. May be provided instead via the @CHEF_SERVER_URL@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Chef
-
-instance TF.IsSection Chef where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Chef))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allow_unverified_ssl x
-                  , TF.assign "client_name" <$> _client_name x
-                  , TF.assign "key_material" <$> _key_material x
-                  , TF.assign "server_url" <$> _server_url x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+                  , P.Just $ TF.assign "client_name" _clientName
+                  , TF.assign "key_material" <$> _keyMaterial
+                  , TF.assign "private_key_pem" <$> _privateKeyPem
+                  , P.Just $ TF.assign "server_url" _serverUrl
                   ])
 
-instance TF.IsProvider Chef where
-    type ProviderType Chef = "chef"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyChef :: Chef
-emptyChef = Chef {
-        _allow_unverified_ssl = Nothing
-      , _client_name = Nothing
-      , _key_material = Nothing
-      , _server_url = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAllowUnverifiedSsl :: Lens' Chef (Maybe P.Text)
-providerAllowUnverifiedSsl =
-    lens _allow_unverified_ssl (\s a -> s { _allow_unverified_ssl = a })
+instance P.HasAllowUnverifiedSsl (Provider) (P.Maybe P.Bool) where
+    allowUnverifiedSsl =
+        P.lens (_allowUnverifiedSsl :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _allowUnverifiedSsl = a } :: Provider)
 
-providerClientName :: Lens' Chef (Maybe P.Text)
-providerClientName =
-    lens _client_name (\s a -> s { _client_name = a })
+instance P.HasClientName (Provider) (P.Text) where
+    clientName =
+        P.lens (_clientName :: Provider -> P.Text)
+               (\s a -> s { _clientName = a } :: Provider)
 
-providerKeyMaterial :: Lens' Chef (Maybe P.Text)
-providerKeyMaterial =
-    lens _key_material (\s a -> s { _key_material = a })
+instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
+    keyMaterial =
+        P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _keyMaterial = a } :: Provider)
 
-providerServerUrl :: Lens' Chef (Maybe P.Text)
-providerServerUrl =
-    lens _server_url (\s a -> s { _server_url = a })
+instance P.HasPrivateKeyPem (Provider) (P.Maybe P.Text) where
+    privateKeyPem =
+        P.lens (_privateKeyPem :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _privateKeyPem = a } :: Provider)
+
+instance P.HasServerUrl (Provider) (P.Text) where
+    serverUrl =
+        P.lens (_serverUrl :: Provider -> P.Text)
+               (\s a -> s { _serverUrl = a } :: Provider)

@@ -1,4 +1,2 @@
-name: PagerDuty
-package: terrafomo-pagerduty
-datatype: true
-original: pagerduty
+package-name: terrafomo-pagerduty
+provider-name: PagerDuty

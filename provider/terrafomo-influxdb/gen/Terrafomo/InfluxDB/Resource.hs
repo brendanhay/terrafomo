@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,234 +17,202 @@
 --
 module Terrafomo.InfluxDB.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** influxdb_continuous_query
       ContinuousQueryResource (..)
     , continuousQueryResource
 
+    -- ** influxdb_database
     , DatabaseResource (..)
     , databaseResource
 
+    -- ** influxdb_user
     , UserResource (..)
     , userResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAdmin (..)
-    , P.HasDatabase (..)
-    , P.HasGrant (..)
-    , P.HasName (..)
-    , P.HasPassword (..)
-    , P.HasQuery (..)
-    , P.HasRetentionPolicies (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAdmin (..)
-    , P.HasComputedDatabase (..)
-    , P.HasComputedGrant (..)
-    , P.HasComputedName (..)
-    , P.HasComputedPassword (..)
-    , P.HasComputedQuery (..)
-    , P.HasComputedRetentionPolicies (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.InfluxDB.Settings
 
-import Terrafomo.InfluxDB.Types as P
-
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
+import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
-import qualified Data.Word                   as P
-import qualified GHC.Base                    as P
-import qualified Numeric.Natural             as P
+import qualified GHC.Generics                as P
+import qualified Lens.Micro                  as P
+import qualified Prelude                     as P
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
 import qualified Terrafomo.InfluxDB.Lens     as P
 import qualified Terrafomo.InfluxDB.Provider as P
+import qualified Terrafomo.InfluxDB.Types    as P
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @influxdb_continuous_query@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/InfluxDB/influxdb_continuous_query terraform documentation>
+-- for more information.
+data ContinuousQueryResource s = ContinuousQueryResource'
+    { _database :: TF.Attr s P.Text
+    -- ^ @database@ - (Required)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _query    :: TF.Attr s P.Text
+    -- ^ @query@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @influxdb_continuous_query@ InfluxDB resource.
-
-The continuous_query resource allows a continuous query to be created on an
-InfluxDB server.
--}
-data ContinuousQueryResource s = ContinuousQueryResource {
-      _database :: !(TF.Attr s P.Text)
-    {- ^ (Required) The database for the continuous_query. This must be an existing influxdb database. -}
-    , _name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name for the continuous_query. This must be unique on the InfluxDB server. -}
-    , _query    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The query for the continuous_query. -}
-    } deriving (Show, Eq)
+continuousQueryResource
+    :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
+    -> TF.Resource P.Provider (ContinuousQueryResource s)
+continuousQueryResource _database _name _query =
+    TF.newResource "influxdb_continuous_query" TF.validator $
+        ContinuousQueryResource'
+            { _database = _database
+            , _name = _name
+            , _query = _query
+            }
 
 instance TF.IsObject (ContinuousQueryResource s) where
-    toObject ContinuousQueryResource{..} = catMaybes
+    toObject ContinuousQueryResource'{..} = P.catMaybes
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "query" <$> TF.attribute _query
         ]
 
+instance TF.IsValid (ContinuousQueryResource s) where
+    validator = P.mempty
+
 instance P.HasDatabase (ContinuousQueryResource s) (TF.Attr s P.Text) where
     database =
-        lens (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _database = a } :: ContinuousQueryResource s)
+        P.lens (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _database = a } :: ContinuousQueryResource s)
 
 instance P.HasName (ContinuousQueryResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ContinuousQueryResource s)
+        P.lens (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ContinuousQueryResource s)
 
 instance P.HasQuery (ContinuousQueryResource s) (TF.Attr s P.Text) where
     query =
-        lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _query = a } :: ContinuousQueryResource s)
+        P.lens (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _query = a } :: ContinuousQueryResource s)
 
-instance s ~ s' => P.HasComputedDatabase (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
-    computedDatabase =
-        (_database :: ContinuousQueryResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @influxdb_database@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/InfluxDB/influxdb_database terraform documentation>
+-- for more information.
+data DatabaseResource s = DatabaseResource'
+    { _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _retentionPolicies :: TF.Attr s [TF.Attr s (RetentionPolicies s)]
+    -- ^ @retention_policies@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ContinuousQueryResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedQuery (TF.Ref s' (ContinuousQueryResource s)) (TF.Attr s P.Text) where
-    computedQuery =
-        (_query :: ContinuousQueryResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-continuousQueryResource :: TF.Resource P.InfluxDB (ContinuousQueryResource s)
-continuousQueryResource =
-    TF.newResource "influxdb_continuous_query" $
-        ContinuousQueryResource {
-              _database = TF.Nil
-            , _name = TF.Nil
-            , _query = TF.Nil
+databaseResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (DatabaseResource s)
+databaseResource _name =
+    TF.newResource "influxdb_database" TF.validator $
+        DatabaseResource'
+            { _name = _name
+            , _retentionPolicies = TF.Nil
             }
 
-{- | The @influxdb_database@ InfluxDB resource.
-
-The database resource allows a database to be created on an InfluxDB server.
--}
-data DatabaseResource s = DatabaseResource {
-      _name               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name for the database. This must be unique on the InfluxDB server. -}
-    , _retention_policies :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of retention policies for specified database -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DatabaseResource s) where
-    toObject DatabaseResource{..} = catMaybes
+    toObject DatabaseResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "retention_policies" <$> TF.attribute _retention_policies
+        , TF.assign "retention_policies" <$> TF.attribute _retentionPolicies
         ]
+
+instance TF.IsValid (DatabaseResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_retentionPolicies"
+                  (_retentionPolicies
+                      :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPolicies s)])
+                  TF.validator
 
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatabaseResource s)
+        P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s P.Text) where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (RetentionPolicies s)]) where
     retentionPolicies =
-        lens (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _retention_policies = a } :: DatabaseResource s)
+        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPolicies s)])
+               (\s a -> s { _retentionPolicies = a } :: DatabaseResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @influxdb_user@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/InfluxDB/influxdb_user terraform documentation>
+-- for more information.
+data UserResource s = UserResource'
+    { _grant    :: TF.Attr s [TF.Attr s (Grant s)]
+    -- ^ @grant@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _password :: TF.Attr s P.Text
+    -- ^ @password@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedRetentionPolicies (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedRetentionPolicies =
-        (_retention_policies :: DatabaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-databaseResource :: TF.Resource P.InfluxDB (DatabaseResource s)
-databaseResource =
-    TF.newResource "influxdb_database" $
-        DatabaseResource {
-              _name = TF.Nil
-            , _retention_policies = TF.Nil
+userResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    -> TF.Resource P.Provider (UserResource s)
+userResource _name _password =
+    TF.newResource "influxdb_user" TF.validator $
+        UserResource'
+            { _grant = TF.Nil
+            , _name = _name
+            , _password = _password
             }
 
-{- | The @influxdb_user@ InfluxDB resource.
-
-The user resource allows a user to be created on an InfluxDB server.
--}
-data UserResource s = UserResource {
-      _admin    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Mark the user as admin. -}
-    , _grant    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of grants for non-admin users -}
-    , _name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name for the user. -}
-    , _password :: !(TF.Attr s P.Text)
-    {- ^ (Required) The password for the user. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (UserResource s) where
-    toObject UserResource{..} = catMaybes
-        [ TF.assign "admin" <$> TF.attribute _admin
-        , TF.assign "grant" <$> TF.attribute _grant
+    toObject UserResource'{..} = P.catMaybes
+        [ TF.assign "grant" <$> TF.attribute _grant
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password" <$> TF.attribute _password
         ]
 
-instance P.HasAdmin (UserResource s) (TF.Attr s P.Text) where
-    admin =
-        lens (_admin :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _admin = a } :: UserResource s)
+instance TF.IsValid (UserResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_grant"
+                  (_grant
+                      :: UserResource s -> TF.Attr s [TF.Attr s (Grant s)])
+                  TF.validator
 
-instance P.HasGrant (UserResource s) (TF.Attr s P.Text) where
+instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (Grant s)]) where
     grant =
-        lens (_grant :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _grant = a } :: UserResource s)
+        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (Grant s)])
+               (\s a -> s { _grant = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: UserResource s)
+        P.lens (_name :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: UserResource s)
 
 instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
     password =
-        lens (_password :: UserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _password = a } :: UserResource s)
+        P.lens (_password :: UserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: UserResource s)
 
-instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedAdmin x = TF.compute (TF.refKey x) "admin"
-
-instance s ~ s' => P.HasComputedGrant (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedGrant =
-        (_grant :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedPassword =
-        (_password :: UserResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-userResource :: TF.Resource P.InfluxDB (UserResource s)
-userResource =
-    TF.newResource "influxdb_user" $
-        UserResource {
-              _admin = TF.Nil
-            , _grant = TF.Nil
-            , _name = TF.Nil
-            , _password = TF.Nil
-            }
+instance s ~ s' => P.HasComputedAdmin (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
+    computedAdmin x = TF.compute (TF.refKey x) "_computedAdmin"

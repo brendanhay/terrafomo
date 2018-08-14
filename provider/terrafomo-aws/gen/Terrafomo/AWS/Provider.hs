@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,208 +17,321 @@
 --
 module Terrafomo.AWS.Provider
     (
-    -- * Provider Datatype
-      AWS (..)
-    , emptyAWS
-
-    -- * Lenses
-    , providerAccessKey
-    , providerAllowedAccountIds
-    , providerAssumeRole
-    , providerForbiddenAccountIds
-    , providerInsecure
-    , providerMaxRetries
-    , providerProfile
-    , providerRegion
-    , providerS3ForcePathStyle
-    , providerSecretKey
-    , providerSharedCredentialsFile
-    , providerSkipCredentialsValidation
-    , providerSkipGetEc2Platforms
-    , providerSkipMetadataApiCheck
-    , providerSkipRegionValidation
-    , providerSkipRequestingAccountId
-    , providerToken
+    -- * AWS Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable       as P
+import qualified Data.HashMap.Strict as P
+import qualified Data.HashMap.Strict as Map
+import qualified Data.List.NonEmpty  as P
+import qualified Data.Maybe          as P
+import qualified Data.Monoid         as P
 import qualified Data.Text           as P
+import qualified GHC.Generics        as P
+import qualified Lens.Micro          as P
+import qualified Prelude             as P
+import qualified Terrafomo.AWS.Lens  as P
 import qualified Terrafomo.AWS.Types as P
+import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Name      as TF
+import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.Validator as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @AWS@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/AWS/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _accessKey                 :: P.Maybe P.Text
+    -- ^ @access_key@ - (Optional)
+    -- The access key for API operations. You can retrieve this from the 'Security
+    -- & Credentials' section of the AWS console.
+    --
+    , _allowedAccountIds         :: P.Maybe [P.Text]
+    -- ^ @allowed_account_ids@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'forbiddenAccountIds'
+    , _assumeRole                :: P.Maybe AssumeRole
+    -- ^ @assume_role@ - (Optional)
+    --
+    , _dynamodbEndpoint          :: P.Maybe P.Text
+    -- ^ @dynamodb_endpoint@ - (Optional)
+    -- Use this to override the default endpoint URL constructed from the `region`.
+    -- It's typically used to connect to dynamodb-local.
+    --
+    , _endpoints                 :: P.Maybe [Endpoints]
+    -- ^ @endpoints@ - (Optional)
+    --
+    , _forbiddenAccountIds       :: P.Maybe [P.Text]
+    -- ^ @forbidden_account_ids@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'allowedAccountIds'
+    , _insecure                  :: P.Bool
+    -- ^ @insecure@ - (Optional)
+    -- Explicitly allow the provider to perform "insecure" SSL requests. If
+    -- omitted,default value is `false`
+    --
+    , _kinesisEndpoint           :: P.Maybe P.Text
+    -- ^ @kinesis_endpoint@ - (Optional)
+    -- Use this to override the default endpoint URL constructed from the `region`.
+    -- It's typically used to connect to kinesalite.
+    --
+    , _maxRetries                :: P.Integer
+    -- ^ @max_retries@ - (Optional)
+    -- The maximum number of times an AWS API request is being executed. If the API
+    -- request still fails, an error is thrown.
+    --
+    , _profile                   :: P.Maybe P.Text
+    -- ^ @profile@ - (Optional)
+    -- The profile for API operations. If not set, the default profile created with
+    -- `aws configure` will be used.
+    --
+    , _region                    :: P.Region
+    -- ^ @region@ - (Required)
+    -- The region where AWS operations will take place. Examples are us-east-1,
+    -- us-west-2, etc.
+    --
+    , _s3ForcePathStyle          :: P.Bool
+    -- ^ @s3_force_path_style@ - (Optional)
+    -- Set this to true to force the request to use path-style addressing, i.e.,
+    -- http://s3.amazonaws.com/BUCKET/KEY. By default, the S3 client will use
+    -- virtual hosted bucket addressing when possible
+    -- (http://BUCKET.s3.amazonaws.com/KEY). Specific to the Amazon S3 service.
+    --
+    , _secretKey                 :: P.Maybe P.Text
+    -- ^ @secret_key@ - (Optional)
+    -- The secret key for API operations. You can retrieve this from the 'Security
+    -- & Credentials' section of the AWS console.
+    --
+    , _sharedCredentialsFile     :: P.Maybe P.Text
+    -- ^ @shared_credentials_file@ - (Optional)
+    -- The path to the shared credentials file. If not set this defaults to
+    -- ~/.aws/credentials.
+    --
+    , _skipCredentialsValidation :: P.Bool
+    -- ^ @skip_credentials_validation@ - (Optional)
+    -- Skip the credentials validation via STS API. Used for AWS API
+    -- implementations that do not have STS available/implemented.
+    --
+    , _skipGetEc2Platforms       :: P.Bool
+    -- ^ @skip_get_ec2_platforms@ - (Optional)
+    -- Skip getting the supported EC2 platforms. Used by users that don't have
+    -- ec2:DescribeAccountAttributes permissions.
+    --
+    , _skipMetadataApiCheck      :: P.Bool
+    -- ^ @skip_metadata_api_check@ - (Optional)
+    --
+    , _skipRegionValidation      :: P.Bool
+    -- ^ @skip_region_validation@ - (Optional)
+    -- Skip static validation of region name. Used by users of alternative AWS-like
+    -- APIs or users w/ access to regions that are not public (yet).
+    --
+    , _skipRequestingAccountId   :: P.Bool
+    -- ^ @skip_requesting_account_id@ - (Optional)
+    -- Skip requesting the account ID. Used for AWS API implementations that do not
+    -- have IAM/STS API and/or metadata API.
+    --
+    , _token                     :: P.Maybe P.Text
+    -- ^ @token@ - (Optional)
+    -- Session token. A session token is only required if you are using temporary
+    -- security credentials.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | AWS Terraform provider.
+newProvider
+    :: P.Region -- ^ @region@ - 'P.region'
+    -> Provider
+newProvider _region =
+    Provider'
+        { _accessKey = P.Nothing
+        , _allowedAccountIds = P.Nothing
+        , _assumeRole = P.Nothing
+        , _dynamodbEndpoint = P.Nothing
+        , _endpoints = P.Nothing
+        , _forbiddenAccountIds = P.Nothing
+        , _insecure = P.False
+        , _kinesisEndpoint = P.Nothing
+        , _maxRetries = 25
+        , _profile = P.Nothing
+        , _region = _region
+        , _s3ForcePathStyle = P.False
+        , _secretKey = P.Nothing
+        , _sharedCredentialsFile = P.Nothing
+        , _skipCredentialsValidation = P.False
+        , _skipGetEc2Platforms = P.False
+        , _skipMetadataApiCheck = P.False
+        , _skipRegionValidation = P.False
+        , _skipRequestingAccountId = P.False
+        , _token = P.Nothing
+        }
 
-The Amazon Web Services (AWS) provider is used to interact with the many
-resources supported by AWS. The provider needs to be configured with the
-proper credentials before it can be used. Use the navigation to the left to
-read about the available resources.
--}
-data AWS = AWS {
-      _access_key                  :: !(Maybe P.Text)
-    {- ^ (Optional) This is the AWS access key. It must be provided, but it can also be sourced from the @AWS_ACCESS_KEY_ID@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _allowed_account_ids         :: !(Maybe P.Text)
-    {- ^ (Optional) List of allowed, white listed, AWS account IDs to prevent you from mistakenly using an incorrect one (and potentially end up destroying a live environment). Conflicts with @forbidden_account_ids@ . -}
-    , _assume_role                 :: !(Maybe P.Text)
-    {- ^ (Optional) An @assume_role@ block (documented below). Only one @assume_role@ block may be in the configuration. -}
-    , _forbidden_account_ids       :: !(Maybe P.Text)
-    {- ^ (Optional) List of forbidden, blacklisted, AWS account IDs to prevent you mistakenly using a wrong one (and potentially end up destroying a live environment). Conflicts with @allowed_account_ids@ . -}
-    , _insecure                    :: !(Maybe P.Text)
-    {- ^ (Optional) Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is @false@ . -}
-    , _max_retries                 :: !(Maybe P.Text)
-    {- ^ (Optional) This is the maximum number of times an API call is retried, in the case where requests are being throttled or experiencing transient failures. The delay between the subsequent API calls increases exponentially. -}
-    , _profile                     :: !(Maybe P.Text)
-    {- ^ (Optional) This is the AWS profile name as set in the shared credentials file. -}
-    , _region                      :: !(Maybe P.Region)
-    {- ^ (Required) This is the AWS region. It must be provided, but it can also be sourced from the @AWS_DEFAULT_REGION@ environment variables, or via a shared credentials file if @profile@ is specified. -}
-    , _s3_force_path_style         :: !(Maybe P.Text)
-    {- ^ (Optional) Set this to @true@ to force the request to use path-style addressing, i.e., @http://s3.amazonaws.com/BUCKET/KEY@ . By default, the S3 client will use virtual hosted bucket addressing, @http://BUCKET.s3.amazonaws.com/KEY@ , when possible. Specific to the Amazon S3 service. -}
-    , _secret_key                  :: !(Maybe P.Text)
-    {- ^ (Optional) This is the AWS secret key. It must be provided, but it can also be sourced from the @AWS_SECRET_ACCESS_KEY@ environment variable, or via a shared credentials file if @profile@ is specified. -}
-    , _shared_credentials_file     :: !(Maybe P.Text)
-    {- ^ = (Optional) This is the path to the shared credentials file. If this is not set and a profile is specified, @~/.aws/credentials@ will be used. -}
-    , _skip_credentials_validation :: !(Maybe P.Text)
-    {- ^ (Optional) Skip the credentials validation via the STS API. Useful for AWS API implementations that do not have STS available or implemented. -}
-    , _skip_get_ec2_platforms      :: !(Maybe P.Text)
-    {- ^ (Optional) Skip getting the supported EC2 platforms. Used by users that don't have ec2:DescribeAccountAttributes permissions. -}
-    , _skip_metadata_api_check     :: !(Maybe P.Text)
-    {- ^ (Optional) Skip the AWS Metadata API check.  Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to @true@ prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables. -}
-    , _skip_region_validation      :: !(Maybe P.Text)
-    {- ^ (Optional) Skip validation of provided region name. Useful for AWS-like implementations that use their own region names or to bypass the validation for regions that aren't publicly available yet. -}
-    , _skip_requesting_account_id  :: !(Maybe P.Text)
-    {- ^ (Optional) Skip requesting the account ID.  Useful for AWS API implementations that do not have the IAM, STS API, or metadata API.  When set to @true@ , prevents you from managing any resource that requires Account ID to construct an ARN, e.g. -}
-    , _token                       :: !(Maybe P.Text)
-    {- ^ (Optional) Use this to set an MFA token. It can also be sourced from the @AWS_SESSION_TOKEN@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable AWS
-
-instance TF.IsSection AWS where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (AWS))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "access_key" <$> _access_key x
-                  , TF.assign "allowed_account_ids" <$> _allowed_account_ids x
-                  , TF.assign "assume_role" <$> _assume_role x
-                  , TF.assign "forbidden_account_ids" <$> _forbidden_account_ids x
-                  , TF.assign "insecure" <$> _insecure x
-                  , TF.assign "max_retries" <$> _max_retries x
-                  , TF.assign "profile" <$> _profile x
-                  , TF.assign "region" <$> _region x
-                  , TF.assign "s3_force_path_style" <$> _s3_force_path_style x
-                  , TF.assign "secret_key" <$> _secret_key x
-                  , TF.assign "shared_credentials_file" <$> _shared_credentials_file x
-                  , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
-                  , TF.assign "skip_get_ec2_platforms" <$> _skip_get_ec2_platforms x
-                  , TF.assign "skip_metadata_api_check" <$> _skip_metadata_api_check x
-                  , TF.assign "skip_region_validation" <$> _skip_region_validation x
-                  , TF.assign "skip_requesting_account_id" <$> _skip_requesting_account_id x
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "access_key" <$> _accessKey
+                  , TF.assign "allowed_account_ids" <$> _allowedAccountIds
+                  , TF.assign "assume_role" <$> _assumeRole
+                  , TF.assign "dynamodb_endpoint" <$> _dynamodbEndpoint
+                  , TF.assign "endpoints" <$> _endpoints
+                  , TF.assign "forbidden_account_ids" <$> _forbiddenAccountIds
+                  , P.Just $ TF.assign "insecure" _insecure
+                  , TF.assign "kinesis_endpoint" <$> _kinesisEndpoint
+                  , P.Just $ TF.assign "max_retries" _maxRetries
+                  , TF.assign "profile" <$> _profile
+                  , P.Just $ TF.assign "region" _region
+                  , P.Just $ TF.assign "s3_force_path_style" _s3ForcePathStyle
+                  , TF.assign "secret_key" <$> _secretKey
+                  , TF.assign "shared_credentials_file" <$> _sharedCredentialsFile
+                  , P.Just $ TF.assign "skip_credentials_validation" _skipCredentialsValidation
+                  , P.Just $ TF.assign "skip_get_ec2_platforms" _skipGetEc2Platforms
+                  , P.Just $ TF.assign "skip_metadata_api_check" _skipMetadataApiCheck
+                  , P.Just $ TF.assign "skip_region_validation" _skipRegionValidation
+                  , P.Just $ TF.assign "skip_requesting_account_id" _skipRequestingAccountId
+                  , TF.assign "token" <$> _token
                   ])
 
-instance TF.IsProvider AWS where
-    type ProviderType AWS = "aws"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyAWS :: AWS
-emptyAWS = AWS {
-        _access_key = Nothing
-      , _allowed_account_ids = Nothing
-      , _assume_role = Nothing
-      , _forbidden_account_ids = Nothing
-      , _insecure = Nothing
-      , _max_retries = Nothing
-      , _profile = Nothing
-      , _region = Nothing
-      , _s3_force_path_style = Nothing
-      , _secret_key = Nothing
-      , _shared_credentials_file = Nothing
-      , _skip_credentials_validation = Nothing
-      , _skip_get_ec2_platforms = Nothing
-      , _skip_metadata_api_check = Nothing
-      , _skip_region_validation = Nothing
-      , _skip_requesting_account_id = Nothing
-      , _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes
+        [ if (_allowedAccountIds P.== P.Nothing)
+              then P.Nothing
+              else P.Just ("_allowedAccountIds",
+                            [ "_forbiddenAccountIds"
+                            ])
+        , if (_forbiddenAccountIds P.== P.Nothing)
+              then P.Nothing
+              else P.Just ("_forbiddenAccountIds",
+                            [ "_allowedAccountIds"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_assumeRole"
+                  (_assumeRole
+                      :: Provider -> P.Maybe AssumeRole)
+                  TF.validator
+           P.<> TF.settingsValidator "_endpoints"
+                  (_endpoints
+                      :: Provider -> P.Maybe [Endpoints])
+                  TF.validator
 
-providerAccessKey :: Lens' AWS (Maybe P.Text)
-providerAccessKey =
-    lens _access_key (\s a -> s { _access_key = a })
+instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
+    accessKey =
+        P.lens (_accessKey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _accessKey = a } :: Provider)
 
-providerAllowedAccountIds :: Lens' AWS (Maybe P.Text)
-providerAllowedAccountIds =
-    lens _allowed_account_ids (\s a -> s { _allowed_account_ids = a })
+instance P.HasAllowedAccountIds (Provider) (P.Maybe [P.Text]) where
+    allowedAccountIds =
+        P.lens (_allowedAccountIds :: Provider -> P.Maybe [P.Text])
+               (\s a -> s { _allowedAccountIds = a } :: Provider)
 
-providerAssumeRole :: Lens' AWS (Maybe P.Text)
-providerAssumeRole =
-    lens _assume_role (\s a -> s { _assume_role = a })
+instance P.HasAssumeRole (Provider) (P.Maybe AssumeRole) where
+    assumeRole =
+        P.lens (_assumeRole :: Provider -> P.Maybe AssumeRole)
+               (\s a -> s { _assumeRole = a } :: Provider)
 
-providerForbiddenAccountIds :: Lens' AWS (Maybe P.Text)
-providerForbiddenAccountIds =
-    lens _forbidden_account_ids (\s a -> s { _forbidden_account_ids = a })
+instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
+    dynamodbEndpoint =
+        P.lens (_dynamodbEndpoint :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _dynamodbEndpoint = a } :: Provider)
 
-providerInsecure :: Lens' AWS (Maybe P.Text)
-providerInsecure =
-    lens _insecure (\s a -> s { _insecure = a })
+instance P.HasEndpoints (Provider) (P.Maybe [Endpoints]) where
+    endpoints =
+        P.lens (_endpoints :: Provider -> P.Maybe [Endpoints])
+               (\s a -> s { _endpoints = a } :: Provider)
 
-providerMaxRetries :: Lens' AWS (Maybe P.Text)
-providerMaxRetries =
-    lens _max_retries (\s a -> s { _max_retries = a })
+instance P.HasForbiddenAccountIds (Provider) (P.Maybe [P.Text]) where
+    forbiddenAccountIds =
+        P.lens (_forbiddenAccountIds :: Provider -> P.Maybe [P.Text])
+               (\s a -> s { _forbiddenAccountIds = a } :: Provider)
 
-providerProfile :: Lens' AWS (Maybe P.Text)
-providerProfile =
-    lens _profile (\s a -> s { _profile = a })
+instance P.HasInsecure (Provider) (P.Bool) where
+    insecure =
+        P.lens (_insecure :: Provider -> P.Bool)
+               (\s a -> s { _insecure = a } :: Provider)
 
-providerRegion :: Lens' AWS (Maybe P.Region)
-providerRegion =
-    lens _region (\s a -> s { _region = a })
+instance P.HasKinesisEndpoint (Provider) (P.Maybe P.Text) where
+    kinesisEndpoint =
+        P.lens (_kinesisEndpoint :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _kinesisEndpoint = a } :: Provider)
 
-providerS3ForcePathStyle :: Lens' AWS (Maybe P.Text)
-providerS3ForcePathStyle =
-    lens _s3_force_path_style (\s a -> s { _s3_force_path_style = a })
+instance P.HasMaxRetries (Provider) (P.Integer) where
+    maxRetries =
+        P.lens (_maxRetries :: Provider -> P.Integer)
+               (\s a -> s { _maxRetries = a } :: Provider)
 
-providerSecretKey :: Lens' AWS (Maybe P.Text)
-providerSecretKey =
-    lens _secret_key (\s a -> s { _secret_key = a })
+instance P.HasProfile (Provider) (P.Maybe P.Text) where
+    profile =
+        P.lens (_profile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _profile = a } :: Provider)
 
-providerSharedCredentialsFile :: Lens' AWS (Maybe P.Text)
-providerSharedCredentialsFile =
-    lens _shared_credentials_file (\s a -> s { _shared_credentials_file = a })
+instance P.HasRegion (Provider) (P.Region) where
+    region =
+        P.lens (_region :: Provider -> P.Region)
+               (\s a -> s { _region = a } :: Provider)
 
-providerSkipCredentialsValidation :: Lens' AWS (Maybe P.Text)
-providerSkipCredentialsValidation =
-    lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
+instance P.HasS3ForcePathStyle (Provider) (P.Bool) where
+    s3ForcePathStyle =
+        P.lens (_s3ForcePathStyle :: Provider -> P.Bool)
+               (\s a -> s { _s3ForcePathStyle = a } :: Provider)
 
-providerSkipGetEc2Platforms :: Lens' AWS (Maybe P.Text)
-providerSkipGetEc2Platforms =
-    lens _skip_get_ec2_platforms (\s a -> s { _skip_get_ec2_platforms = a })
+instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
+    secretKey =
+        P.lens (_secretKey :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _secretKey = a } :: Provider)
 
-providerSkipMetadataApiCheck :: Lens' AWS (Maybe P.Text)
-providerSkipMetadataApiCheck =
-    lens _skip_metadata_api_check (\s a -> s { _skip_metadata_api_check = a })
+instance P.HasSharedCredentialsFile (Provider) (P.Maybe P.Text) where
+    sharedCredentialsFile =
+        P.lens (_sharedCredentialsFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _sharedCredentialsFile = a } :: Provider)
 
-providerSkipRegionValidation :: Lens' AWS (Maybe P.Text)
-providerSkipRegionValidation =
-    lens _skip_region_validation (\s a -> s { _skip_region_validation = a })
+instance P.HasSkipCredentialsValidation (Provider) (P.Bool) where
+    skipCredentialsValidation =
+        P.lens (_skipCredentialsValidation :: Provider -> P.Bool)
+               (\s a -> s { _skipCredentialsValidation = a } :: Provider)
 
-providerSkipRequestingAccountId :: Lens' AWS (Maybe P.Text)
-providerSkipRequestingAccountId =
-    lens _skip_requesting_account_id (\s a -> s { _skip_requesting_account_id = a })
+instance P.HasSkipGetEc2Platforms (Provider) (P.Bool) where
+    skipGetEc2Platforms =
+        P.lens (_skipGetEc2Platforms :: Provider -> P.Bool)
+               (\s a -> s { _skipGetEc2Platforms = a } :: Provider)
 
-providerToken :: Lens' AWS (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasSkipMetadataApiCheck (Provider) (P.Bool) where
+    skipMetadataApiCheck =
+        P.lens (_skipMetadataApiCheck :: Provider -> P.Bool)
+               (\s a -> s { _skipMetadataApiCheck = a } :: Provider)
+
+instance P.HasSkipRegionValidation (Provider) (P.Bool) where
+    skipRegionValidation =
+        P.lens (_skipRegionValidation :: Provider -> P.Bool)
+               (\s a -> s { _skipRegionValidation = a } :: Provider)
+
+instance P.HasSkipRequestingAccountId (Provider) (P.Bool) where
+    skipRequestingAccountId =
+        P.lens (_skipRequestingAccountId :: Provider -> P.Bool)
+               (\s a -> s { _skipRequestingAccountId = a } :: Provider)
+
+instance P.HasToken (Provider) (P.Maybe P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _token = a } :: Provider)

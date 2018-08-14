@@ -1,4 +1,2 @@
-name: Bitbucket
-package: terrafomo-bitbucket
-datatype: true
-original: bitbucket
+package-name: terrafomo-bitbucket
+provider-name: Bitbucket

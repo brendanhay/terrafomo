@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,93 +17,133 @@
 --
 module Terrafomo.Docker.Provider
     (
-    -- * Provider Datatype
-      Docker (..)
-    , emptyDocker
-
-    -- * Lenses
-    , providerCaMaterial
-    , providerCertPath
-    , providerHost
-    , providerRegistryAuth
+    -- * Docker Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Docker.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Docker.Lens  as P
 import qualified Terrafomo.Docker.Types as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Docker@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Docker/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _caMaterial   :: P.Maybe P.Text
+    -- ^ @ca_material@ - (Optional)
+    -- PEM-encoded content of Docker host CA certificate
+    --
+    , _certMaterial :: P.Maybe P.Text
+    -- ^ @cert_material@ - (Optional)
+    -- PEM-encoded content of Docker client certificate
+    --
+    , _certPath     :: P.Maybe P.Text
+    -- ^ @cert_path@ - (Optional)
+    -- Path to directory with Docker TLS config
+    --
+    , _host         :: P.Text
+    -- ^ @host@ - (Required)
+    -- The Docker daemon address
+    --
+    , _keyMaterial  :: P.Maybe P.Text
+    -- ^ @key_material@ - (Optional)
+    -- PEM-encoded content of Docker client private key
+    --
+    , _registryAuth :: P.Maybe [RegistryAuth]
+    -- ^ @registry_auth@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Docker Terraform provider.
+newProvider
+    :: P.Text -- ^ @host@ - 'P.host'
+    -> Provider
+newProvider _host =
+    Provider'
+        { _caMaterial = P.Nothing
+        , _certMaterial = P.Nothing
+        , _certPath = P.Nothing
+        , _host = _host
+        , _keyMaterial = P.Nothing
+        , _registryAuth = P.Nothing
+        }
 
-The Docker provider is used to interact with Docker containers and images.
-It uses the Docker API to manage the lifecycle of Docker containers. Because
-the Docker provider uses the Docker API, it is immediately compatible not
-only with single server Docker but Swarm and any additional
-Docker-compatible API hosts. Use the navigation to the left to read about
-the available resources.
--}
-data Docker = Docker {
-      _ca_material   :: !(Maybe P.Text)
-    {- ^ , @cert_material@ , @key_material@ , - (Optional) Content of @ca.pem@ , @cert.pem@ , and @key.pem@ files for TLS authentication. Cannot be used together with @cert_path@ . -}
-    , _cert_path     :: !(Maybe P.Text)
-    {- ^ (Optional) Path to a directory with certificate information for connecting to the Docker host via TLS. If this is blank, the @DOCKER_CERT_PATH@ will also be checked. -}
-    , _host          :: !(Maybe P.Text)
-    {- ^ (Required) This is the address to the Docker host. If this is blank, the @DOCKER_HOST@ environment variable will also be read. -}
-    , _registry_auth :: !(Maybe P.Text)
-    {- ^ (Optional) A block specifying the credentials for a target v2 Docker registry. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Docker
-
-instance TF.IsSection Docker where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Docker))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "ca_material" <$> _ca_material x
-                  , TF.assign "cert_path" <$> _cert_path x
-                  , TF.assign "host" <$> _host x
-                  , TF.assign "registry_auth" <$> _registry_auth x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "ca_material" <$> _caMaterial
+                  , TF.assign "cert_material" <$> _certMaterial
+                  , TF.assign "cert_path" <$> _certPath
+                  , P.Just $ TF.assign "host" _host
+                  , TF.assign "key_material" <$> _keyMaterial
+                  , TF.assign "registry_auth" <$> _registryAuth
                   ])
 
-instance TF.IsProvider Docker where
-    type ProviderType Docker = "docker"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyDocker :: Docker
-emptyDocker = Docker {
-        _ca_material = Nothing
-      , _cert_path = Nothing
-      , _host = Nothing
-      , _registry_auth = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_registryAuth"
+                  (_registryAuth
+                      :: Provider -> P.Maybe [RegistryAuth])
+                  TF.validator
 
-providerCaMaterial :: Lens' Docker (Maybe P.Text)
-providerCaMaterial =
-    lens _ca_material (\s a -> s { _ca_material = a })
+instance P.HasCaMaterial (Provider) (P.Maybe P.Text) where
+    caMaterial =
+        P.lens (_caMaterial :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _caMaterial = a } :: Provider)
 
-providerCertPath :: Lens' Docker (Maybe P.Text)
-providerCertPath =
-    lens _cert_path (\s a -> s { _cert_path = a })
+instance P.HasCertMaterial (Provider) (P.Maybe P.Text) where
+    certMaterial =
+        P.lens (_certMaterial :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _certMaterial = a } :: Provider)
 
-providerHost :: Lens' Docker (Maybe P.Text)
-providerHost =
-    lens _host (\s a -> s { _host = a })
+instance P.HasCertPath (Provider) (P.Maybe P.Text) where
+    certPath =
+        P.lens (_certPath :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _certPath = a } :: Provider)
 
-providerRegistryAuth :: Lens' Docker (Maybe P.Text)
-providerRegistryAuth =
-    lens _registry_auth (\s a -> s { _registry_auth = a })
+instance P.HasHost (Provider) (P.Text) where
+    host =
+        P.lens (_host :: Provider -> P.Text)
+               (\s a -> s { _host = a } :: Provider)
+
+instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
+    keyMaterial =
+        P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _keyMaterial = a } :: Provider)
+
+instance P.HasRegistryAuth (Provider) (P.Maybe [RegistryAuth]) where
+    registryAuth =
+        P.lens (_registryAuth :: Provider -> P.Maybe [RegistryAuth])
+               (\s a -> s { _registryAuth = a } :: Provider)

@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,706 +17,845 @@
 --
 module Terrafomo.Spotinst.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** spotinst_elastigroup_aws
       ElastigroupAwsResource (..)
     , elastigroupAwsResource
 
+    -- ** spotinst_subscription
     , SubscriptionResource (..)
     , subscriptionResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAvailabilityZones (..)
-    , P.HasCapacityUnit (..)
-    , P.HasDescription (..)
-    , P.HasDesiredCapacity (..)
-    , P.HasDrainingTimeout (..)
-    , P.HasEbsOptimized (..)
-    , P.HasElasticIps (..)
-    , P.HasEnableMonitoring (..)
-    , P.HasEndpoint (..)
-    , P.HasEventType (..)
-    , P.HasFallbackToOndemand (..)
-    , P.HasFormat (..)
-    , P.HasHealthCheckGracePeriod (..)
-    , P.HasHealthCheckType (..)
-    , P.HasHealthCheckUnhealthyDurationBeforeReplacement (..)
-    , P.HasIamInstanceProfile (..)
-    , P.HasImageId (..)
-    , P.HasInstanceTypesOndemand (..)
-    , P.HasInstanceTypesSpot (..)
-    , P.HasInstanceTypesWeights (..)
-    , P.HasKeyName (..)
-    , P.HasMaxSize (..)
-    , P.HasMinSize (..)
-    , P.HasName (..)
-    , P.HasOndemandCount (..)
-    , P.HasOrientation (..)
-    , P.HasPlacementTenancy (..)
-    , P.HasPreferredAvailabilityZones (..)
-    , P.HasProduct (..)
-    , P.HasProtocol (..)
-    , P.HasRegion (..)
-    , P.HasResourceId (..)
-    , P.HasRevertToSpot (..)
-    , P.HasSecurityGroups (..)
-    , P.HasSpotPercentage (..)
-    , P.HasSubnetIds (..)
-    , P.HasTags (..)
-    , P.HasUserData (..)
-    , P.HasUtilizeReservedInstances (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAvailabilityZones (..)
-    , P.HasComputedCapacityUnit (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDesiredCapacity (..)
-    , P.HasComputedDrainingTimeout (..)
-    , P.HasComputedEbsOptimized (..)
-    , P.HasComputedElasticIps (..)
-    , P.HasComputedEnableMonitoring (..)
-    , P.HasComputedEndpoint (..)
-    , P.HasComputedEventType (..)
-    , P.HasComputedFallbackToOndemand (..)
-    , P.HasComputedFormat (..)
-    , P.HasComputedHealthCheckGracePeriod (..)
-    , P.HasComputedHealthCheckType (..)
-    , P.HasComputedHealthCheckUnhealthyDurationBeforeReplacement (..)
-    , P.HasComputedIamInstanceProfile (..)
-    , P.HasComputedId (..)
-    , P.HasComputedImageId (..)
-    , P.HasComputedInstanceTypesOndemand (..)
-    , P.HasComputedInstanceTypesSpot (..)
-    , P.HasComputedInstanceTypesWeights (..)
-    , P.HasComputedKeyName (..)
-    , P.HasComputedMaxSize (..)
-    , P.HasComputedMinSize (..)
-    , P.HasComputedName (..)
-    , P.HasComputedOndemandCount (..)
-    , P.HasComputedOrientation (..)
-    , P.HasComputedPlacementTenancy (..)
-    , P.HasComputedPreferredAvailabilityZones (..)
-    , P.HasComputedProduct (..)
-    , P.HasComputedProtocol (..)
-    , P.HasComputedRegion (..)
-    , P.HasComputedResourceId (..)
-    , P.HasComputedRevertToSpot (..)
-    , P.HasComputedSecurityGroups (..)
-    , P.HasComputedSpotPercentage (..)
-    , P.HasComputedSubnetIds (..)
-    , P.HasComputedTags (..)
-    , P.HasComputedUserData (..)
-    , P.HasComputedUtilizeReservedInstances (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Spotinst.Settings
 
-import Terrafomo.Spotinst.Types as P
-
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
+import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
-import qualified Data.Word                   as P
-import qualified GHC.Base                    as P
-import qualified Numeric.Natural             as P
+import qualified GHC.Generics                as P
+import qualified Lens.Micro                  as P
+import qualified Prelude                     as P
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Schema            as TF
 import qualified Terrafomo.Spotinst.Lens     as P
 import qualified Terrafomo.Spotinst.Provider as P
+import qualified Terrafomo.Spotinst.Types    as P
+import qualified Terrafomo.Validator         as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @spotinst_elastigroup_aws@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Spotinst/spotinst_elastigroup_aws terraform documentation>
+-- for more information.
+data ElastigroupAwsResource s = ElastigroupAwsResource'
+    { _availabilityZones :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @availability_zones@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'subnetIds'
+    , _blockDevicesMode :: TF.Attr s P.Text
+    -- ^ @block_devices_mode@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Required)
+    --
+    , _desiredCapacity :: TF.Attr s P.Integer
+    -- ^ @desired_capacity@ - (Optional)
+    --
+    , _drainingTimeout :: TF.Attr s P.Integer
+    -- ^ @draining_timeout@ - (Optional)
+    --
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDevice s)]
+    -- ^ @ebs_block_device@ - (Optional)
+    --
+    , _elasticIps :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @elastic_ips@ - (Optional)
+    --
+    , _elasticLoadBalancers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @elastic_load_balancers@ - (Optional)
+    --
+    , _enableMonitoring :: TF.Attr s P.Bool
+    -- ^ @enable_monitoring@ - (Optional)
+    --
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]
+    -- ^ @ephemeral_block_device@ - (Optional)
+    --
+    , _fallbackToOndemand :: TF.Attr s P.Bool
+    -- ^ @fallback_to_ondemand@ - (Required)
+    --
+    , _healthCheckGracePeriod :: TF.Attr s P.Integer
+    -- ^ @health_check_grace_period@ - (Optional)
+    --
+    , _healthCheckType :: TF.Attr s P.Text
+    -- ^ @health_check_type@ - (Optional)
+    --
+    , _healthCheckUnhealthyDurationBeforeReplacement :: TF.Attr s P.Integer
+    -- ^ @health_check_unhealthy_duration_before_replacement@ - (Optional)
+    --
+    , _iamInstanceProfile :: TF.Attr s P.Text
+    -- ^ @iam_instance_profile@ - (Optional)
+    --
+    , _imageId :: TF.Attr s P.Text
+    -- ^ @image_id@ - (Optional)
+    --
+    , _instanceTypesOndemand :: TF.Attr s P.Text
+    -- ^ @instance_types_ondemand@ - (Required)
+    --
+    , _instanceTypesSpot :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @instance_types_spot@ - (Required)
+    --
+    , _instanceTypesWeights :: TF.Attr s [TF.Attr s (InstanceTypesWeights s)]
+    -- ^ @instance_types_weights@ - (Optional)
+    --
+    , _integrationCodedeploy :: TF.Attr s (IntegrationCodedeploy s)
+    -- ^ @integration_codedeploy@ - (Optional)
+    --
+    , _integrationEcs :: TF.Attr s (IntegrationEcs s)
+    -- ^ @integration_ecs@ - (Optional)
+    --
+    , _integrationGitlab :: TF.Attr s (IntegrationGitlab s)
+    -- ^ @integration_gitlab@ - (Optional)
+    --
+    , _integrationKubernetes :: TF.Attr s (IntegrationKubernetes s)
+    -- ^ @integration_kubernetes@ - (Optional)
+    --
+    , _integrationMesosphere :: TF.Attr s (IntegrationMesosphere s)
+    -- ^ @integration_mesosphere@ - (Optional)
+    --
+    , _integrationMultaiRuntime :: TF.Attr s (IntegrationMultaiRuntime s)
+    -- ^ @integration_multai_runtime@ - (Optional)
+    --
+    , _integrationNomad :: TF.Attr s (IntegrationNomad s)
+    -- ^ @integration_nomad@ - (Optional)
+    --
+    , _integrationRancher :: TF.Attr s (IntegrationRancher s)
+    -- ^ @integration_rancher@ - (Optional)
+    --
+    , _keyName :: TF.Attr s P.Text
+    -- ^ @key_name@ - (Optional)
+    --
+    , _lifetimePeriod :: TF.Attr s P.Text
+    -- ^ @lifetime_period@ - (Optional)
+    --
+    , _multaiTargetSets :: TF.Attr s [TF.Attr s (MultaiTargetSets s)]
+    -- ^ @multai_target_sets@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterface s)]
+    -- ^ @network_interface@ - (Optional)
+    --
+    , _ondemandCount :: TF.Attr s P.Integer
+    -- ^ @ondemand_count@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'spotPercentage'
+    , _orientation :: TF.Attr s P.Text
+    -- ^ @orientation@ - (Required)
+    --
+    , _persistBlockDevices :: TF.Attr s P.Bool
+    -- ^ @persist_block_devices@ - (Optional)
+    --
+    , _persistPrivateIp :: TF.Attr s P.Bool
+    -- ^ @persist_private_ip@ - (Optional)
+    --
+    , _persistRootDevice :: TF.Attr s P.Bool
+    -- ^ @persist_root_device@ - (Optional)
+    --
+    , _placementTenancy :: TF.Attr s P.Text
+    -- ^ @placement_tenancy@ - (Optional)
+    --
+    , _preferredAvailabilityZones :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @preferred_availability_zones@ - (Optional)
+    --
+    , _privateIps :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @private_ips@ - (Optional)
+    --
+    , _product :: TF.Attr s P.Text
+    -- ^ @product@ - (Required)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _revertToSpot :: TF.Attr s (RevertToSpot s)
+    -- ^ @revert_to_spot@ - (Optional)
+    --
+    , _scalingDownPolicy :: TF.Attr s [TF.Attr s (ScalingDownPolicy s)]
+    -- ^ @scaling_down_policy@ - (Optional)
+    --
+    , _scalingTargetPolicy :: TF.Attr s [TF.Attr s (ScalingTargetPolicy s)]
+    -- ^ @scaling_target_policy@ - (Optional)
+    --
+    , _scalingUpPolicy :: TF.Attr s [TF.Attr s (ScalingUpPolicy s)]
+    -- ^ @scaling_up_policy@ - (Optional)
+    --
+    , _scheduledTask :: TF.Attr s [TF.Attr s (ScheduledTask s)]
+    -- ^ @scheduled_task@ - (Optional)
+    --
+    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_groups@ - (Required)
+    --
+    , _signal :: TF.Attr s [TF.Attr s (Signal s)]
+    -- ^ @signal@ - (Optional)
+    --
+    , _spotPercentage :: TF.Attr s P.Double
+    -- ^ @spot_percentage@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'ondemandCount'
+    , _statefulDeallocation :: TF.Attr s (StatefulDeallocation s)
+    -- ^ @stateful_deallocation@ - (Optional)
+    --
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @subnet_ids@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'availabilityZones'
+    , _tags :: TF.Attr s [TF.Attr s (Tags s)]
+    -- ^ @tags@ - (Optional)
+    --
+    , _targetGroupArns :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @target_group_arns@ - (Optional)
+    --
+    , _updatePolicy :: TF.Attr s (UpdatePolicy s)
+    -- ^ @update_policy@ - (Optional)
+    --
+    , _userData :: TF.Attr s P.Text
+    -- ^ @user_data@ - (Optional)
+    --
+    , _utilizeReservedInstances :: TF.Attr s P.Bool
+    -- ^ @utilize_reserved_instances@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @spotinst_elastigroup_aws@ Spotinst resource.
-
-Provides a Spotinst AWS group resource.
--}
-data ElastigroupAwsResource s = ElastigroupAwsResource {
-      _availability_zones                                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of Strings of availability zones. Note: When this parameter is set, @subnet_ids@ should be left unused. -}
-    , _capacity_unit                                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional, Default: @"instance"@ ) The capacity unit to launch instances by. If not specified, when choosing the weight unit, each instance will weight as the number of its vCPUs. -}
-    , _description                                        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The group description. -}
-    , _desired_capacity                                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The desired number of instances the group should have at any time. -}
-    , _draining_timeout                                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The time in seconds, the instance is allowed to run while detached from the ELB. This is to allow the instance time to be drained from incoming TCP connections before terminating it, during a scale down operation. -}
-    , _ebs_optimized                                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable high bandwidth connectivity between instances and AWS’s Elastic Block Store (EBS). For instance types that are EBS-optimized by default this parameter will be ignored. -}
-    , _elastic_ips                                        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A list of <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html> allocation IDs to associate to the group instances. -}
-    , _enable_monitoring                                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Indicates whether monitoring is enabled for the instance. -}
-    , _fallback_to_ondemand                               :: !(TF.Attr s P.Text)
-    {- ^ (Required) In a case of no Spot instances available, Elastigroup will launch on-demand instances instead. -}
-    , _health_check_grace_period                          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of time, in seconds, after the instance has launched to starts and check its health. -}
-    , _health_check_type                                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The service that will perform health checks for the instance. Valid values: @"ELB"@ , @"HCS"@ , @"TARGET_GROUP"@ , @"MLB"@ , @"EC2"@ , @"MULTAI_TARGET_SET"@ , @"MLB_RUNTIME"@ , @"K8S_NODE"@ , @"NOMAD_NODE"@ , @"ECS_CLUSTER_INSTANCE"@ . -}
-    , _health_check_unhealthy_duration_before_replacement :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of time, in seconds, that we will wait before replacing an instance that is running and became unhealthy (this is only applicable for instances that were once healthy). -}
-    , _iam_instance_profile                               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ARN or name of an IAM instance profile to associate with launched instances. -}
-    , _image_id                                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The ID of the AMI used to launch the instance. -}
-    , _instance_types_ondemand                            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of instance determines your instance's CPU capacity, memory and storage (e.g., m1.small, c1.xlarge). -}
-    , _instance_types_spot                                :: !(TF.Attr s P.Text)
-    {- ^ (Required) One or more instance types. -}
-    , _instance_types_weights                             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of weights per instance type for weighted groups. Each object in the list should have the following attributes: -}
-    , _key_name                                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The key name that should be used for the instance. -}
-    , _max_size                                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional; Required if using scaling policies) The maximum number of instances the group should have at any time. -}
-    , _min_size                                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional; Required if using scaling policies) The minimum number of instances the group should have at any time. -}
-    , _name                                               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The group name. -}
-    , _ondemand_count                                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional; Required if not using @spot_percentage@ ) Number of on demand instances to launch in the group. All other instances will be spot instances. When this parameter is set the @spot_percentage@ parameter is being ignored. -}
-    , _orientation                                        :: !(TF.Attr s P.Text)
-    {- ^ (Required, Default: @balanced@ ) Select a prediction strategy. Valid values: @"balanced"@ , @"costOriented"@ , @"equalAzDistribution"@ , @"availabilityOriented"@ . -}
-    , _placement_tenancy                                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable dedicated tenancy. Note: There is a flat hourly fee for each region in which dedicated tenancy is used. -}
-    , _preferred_availability_zones                       :: !(TF.Attr s P.Text)
-    {- ^ - The AZs to prioritize when launching Spot instances. If no markets are available in the Preferred AZs, Spot instances are launched in the non-preferred AZs. Note: Must be a sublist of @availability_zones@ and @orientation@ value must not be @"equalAzDistribution"@ . -}
-    , _product                                            :: !(TF.Attr s P.Text)
-    {- ^ (Required) Operation system type. Valid values: @"Linux/UNIX"@ , @"SUSE Linux"@ , @"Windows"@ . For EC2 Classic instances: @"Linux/UNIX (Amazon VPC)"@ , @"SUSE Linux (Amazon VPC)"@ , @"Windows (Amazon VPC)"@ . -}
-    , _region                                             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The AWS region your group will be created in. Note: This parameter is required if you specify subnets (through subnet_ids). This parameter is optional if you specify Availability Zones (through availability_zones). -}
-    , _revert_to_spot                                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Hold settings for strategy correction – replacing On-Demand for Spot instances. Supported Values: @"never"@ , @"always"@ , @"timeWindow"@ -}
-    , _security_groups                                    :: !(TF.Attr s P.Text)
-    {- ^ (Required) A list of associated security group IDS. -}
-    , _spot_percentage                                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional; Required if not using @ondemand_count@ ) The percentage of Spot instances that would spin up from the @desired_capacity@ number. -}
-    , _subnet_ids                                         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) List of Strings of subnet identifiers. Note: When this parameter is set, @availability_zones@ should be left unused. -}
-    , _tags                                               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A key/value mapping of tags to assign to the resource. -}
-    , _user_data                                          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The user data to provide when launching the instance. -}
-    , _utilize_reserved_instances                         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) In a case of any available reserved instances, Elastigroup will utilize them first before purchasing Spot instances. -}
-    } deriving (Show, Eq)
+elastigroupAwsResource
+    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
+    -> TF.Attr s P.Bool -- ^ @fallback_to_ondemand@ - 'P.fallbackToOndemand'
+    -> TF.Attr s P.Text -- ^ @instance_types_ondemand@ - 'P.instanceTypesOndemand'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @instance_types_spot@ - 'P.instanceTypesSpot'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @orientation@ - 'P.orientation'
+    -> TF.Attr s P.Text -- ^ @product@ - 'P.product'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
+    -> TF.Resource P.Provider (ElastigroupAwsResource s)
+elastigroupAwsResource _description _fallbackToOndemand _instanceTypesOndemand _instanceTypesSpot _name _orientation _product _securityGroups =
+    TF.newResource "spotinst_elastigroup_aws" TF.validator $
+        ElastigroupAwsResource'
+            { _availabilityZones = TF.Nil
+            , _blockDevicesMode = TF.Nil
+            , _description = _description
+            , _desiredCapacity = TF.Nil
+            , _drainingTimeout = TF.Nil
+            , _ebsBlockDevice = TF.Nil
+            , _elasticIps = TF.Nil
+            , _elasticLoadBalancers = TF.Nil
+            , _enableMonitoring = TF.value P.False
+            , _ephemeralBlockDevice = TF.Nil
+            , _fallbackToOndemand = _fallbackToOndemand
+            , _healthCheckGracePeriod = TF.Nil
+            , _healthCheckType = TF.Nil
+            , _healthCheckUnhealthyDurationBeforeReplacement = TF.Nil
+            , _iamInstanceProfile = TF.Nil
+            , _imageId = TF.Nil
+            , _instanceTypesOndemand = _instanceTypesOndemand
+            , _instanceTypesSpot = _instanceTypesSpot
+            , _instanceTypesWeights = TF.Nil
+            , _integrationCodedeploy = TF.Nil
+            , _integrationEcs = TF.Nil
+            , _integrationGitlab = TF.Nil
+            , _integrationKubernetes = TF.Nil
+            , _integrationMesosphere = TF.Nil
+            , _integrationMultaiRuntime = TF.Nil
+            , _integrationNomad = TF.Nil
+            , _integrationRancher = TF.Nil
+            , _keyName = TF.Nil
+            , _lifetimePeriod = TF.Nil
+            , _multaiTargetSets = TF.Nil
+            , _name = _name
+            , _networkInterface = TF.Nil
+            , _ondemandCount = TF.Nil
+            , _orientation = _orientation
+            , _persistBlockDevices = TF.Nil
+            , _persistPrivateIp = TF.Nil
+            , _persistRootDevice = TF.Nil
+            , _placementTenancy = TF.Nil
+            , _preferredAvailabilityZones = TF.Nil
+            , _privateIps = TF.Nil
+            , _product = _product
+            , _region = TF.Nil
+            , _revertToSpot = TF.Nil
+            , _scalingDownPolicy = TF.Nil
+            , _scalingTargetPolicy = TF.Nil
+            , _scalingUpPolicy = TF.Nil
+            , _scheduledTask = TF.Nil
+            , _securityGroups = _securityGroups
+            , _signal = TF.Nil
+            , _spotPercentage = TF.Nil
+            , _statefulDeallocation = TF.Nil
+            , _subnetIds = TF.Nil
+            , _tags = TF.Nil
+            , _targetGroupArns = TF.Nil
+            , _updatePolicy = TF.Nil
+            , _userData = TF.Nil
+            , _utilizeReservedInstances = TF.Nil
+            }
 
 instance TF.IsObject (ElastigroupAwsResource s) where
-    toObject ElastigroupAwsResource{..} = catMaybes
-        [ TF.assign "availability_zones" <$> TF.attribute _availability_zones
-        , TF.assign "capacity_unit" <$> TF.attribute _capacity_unit
+    toObject ElastigroupAwsResource'{..} = P.catMaybes
+        [ TF.assign "availability_zones" <$> TF.attribute _availabilityZones
+        , TF.assign "block_devices_mode" <$> TF.attribute _blockDevicesMode
         , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "desired_capacity" <$> TF.attribute _desired_capacity
-        , TF.assign "draining_timeout" <$> TF.attribute _draining_timeout
-        , TF.assign "ebs_optimized" <$> TF.attribute _ebs_optimized
-        , TF.assign "elastic_ips" <$> TF.attribute _elastic_ips
-        , TF.assign "enable_monitoring" <$> TF.attribute _enable_monitoring
-        , TF.assign "fallback_to_ondemand" <$> TF.attribute _fallback_to_ondemand
-        , TF.assign "health_check_grace_period" <$> TF.attribute _health_check_grace_period
-        , TF.assign "health_check_type" <$> TF.attribute _health_check_type
-        , TF.assign "health_check_unhealthy_duration_before_replacement" <$> TF.attribute _health_check_unhealthy_duration_before_replacement
-        , TF.assign "iam_instance_profile" <$> TF.attribute _iam_instance_profile
-        , TF.assign "image_id" <$> TF.attribute _image_id
-        , TF.assign "instance_types_ondemand" <$> TF.attribute _instance_types_ondemand
-        , TF.assign "instance_types_spot" <$> TF.attribute _instance_types_spot
-        , TF.assign "instance_types_weights" <$> TF.attribute _instance_types_weights
-        , TF.assign "key_name" <$> TF.attribute _key_name
-        , TF.assign "max_size" <$> TF.attribute _max_size
-        , TF.assign "min_size" <$> TF.attribute _min_size
+        , TF.assign "desired_capacity" <$> TF.attribute _desiredCapacity
+        , TF.assign "draining_timeout" <$> TF.attribute _drainingTimeout
+        , TF.assign "ebs_block_device" <$> TF.attribute _ebsBlockDevice
+        , TF.assign "elastic_ips" <$> TF.attribute _elasticIps
+        , TF.assign "elastic_load_balancers" <$> TF.attribute _elasticLoadBalancers
+        , TF.assign "enable_monitoring" <$> TF.attribute _enableMonitoring
+        , TF.assign "ephemeral_block_device" <$> TF.attribute _ephemeralBlockDevice
+        , TF.assign "fallback_to_ondemand" <$> TF.attribute _fallbackToOndemand
+        , TF.assign "health_check_grace_period" <$> TF.attribute _healthCheckGracePeriod
+        , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
+        , TF.assign "health_check_unhealthy_duration_before_replacement" <$> TF.attribute _healthCheckUnhealthyDurationBeforeReplacement
+        , TF.assign "iam_instance_profile" <$> TF.attribute _iamInstanceProfile
+        , TF.assign "image_id" <$> TF.attribute _imageId
+        , TF.assign "instance_types_ondemand" <$> TF.attribute _instanceTypesOndemand
+        , TF.assign "instance_types_spot" <$> TF.attribute _instanceTypesSpot
+        , TF.assign "instance_types_weights" <$> TF.attribute _instanceTypesWeights
+        , TF.assign "integration_codedeploy" <$> TF.attribute _integrationCodedeploy
+        , TF.assign "integration_ecs" <$> TF.attribute _integrationEcs
+        , TF.assign "integration_gitlab" <$> TF.attribute _integrationGitlab
+        , TF.assign "integration_kubernetes" <$> TF.attribute _integrationKubernetes
+        , TF.assign "integration_mesosphere" <$> TF.attribute _integrationMesosphere
+        , TF.assign "integration_multai_runtime" <$> TF.attribute _integrationMultaiRuntime
+        , TF.assign "integration_nomad" <$> TF.attribute _integrationNomad
+        , TF.assign "integration_rancher" <$> TF.attribute _integrationRancher
+        , TF.assign "key_name" <$> TF.attribute _keyName
+        , TF.assign "lifetime_period" <$> TF.attribute _lifetimePeriod
+        , TF.assign "multai_target_sets" <$> TF.attribute _multaiTargetSets
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "ondemand_count" <$> TF.attribute _ondemand_count
+        , TF.assign "network_interface" <$> TF.attribute _networkInterface
+        , TF.assign "ondemand_count" <$> TF.attribute _ondemandCount
         , TF.assign "orientation" <$> TF.attribute _orientation
-        , TF.assign "placement_tenancy" <$> TF.attribute _placement_tenancy
-        , TF.assign "preferred_availability_zones" <$> TF.attribute _preferred_availability_zones
+        , TF.assign "persist_block_devices" <$> TF.attribute _persistBlockDevices
+        , TF.assign "persist_private_ip" <$> TF.attribute _persistPrivateIp
+        , TF.assign "persist_root_device" <$> TF.attribute _persistRootDevice
+        , TF.assign "placement_tenancy" <$> TF.attribute _placementTenancy
+        , TF.assign "preferred_availability_zones" <$> TF.attribute _preferredAvailabilityZones
+        , TF.assign "private_ips" <$> TF.attribute _privateIps
         , TF.assign "product" <$> TF.attribute _product
         , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "revert_to_spot" <$> TF.attribute _revert_to_spot
-        , TF.assign "security_groups" <$> TF.attribute _security_groups
-        , TF.assign "spot_percentage" <$> TF.attribute _spot_percentage
-        , TF.assign "subnet_ids" <$> TF.attribute _subnet_ids
+        , TF.assign "revert_to_spot" <$> TF.attribute _revertToSpot
+        , TF.assign "scaling_down_policy" <$> TF.attribute _scalingDownPolicy
+        , TF.assign "scaling_target_policy" <$> TF.attribute _scalingTargetPolicy
+        , TF.assign "scaling_up_policy" <$> TF.attribute _scalingUpPolicy
+        , TF.assign "scheduled_task" <$> TF.attribute _scheduledTask
+        , TF.assign "security_groups" <$> TF.attribute _securityGroups
+        , TF.assign "signal" <$> TF.attribute _signal
+        , TF.assign "spot_percentage" <$> TF.attribute _spotPercentage
+        , TF.assign "stateful_deallocation" <$> TF.attribute _statefulDeallocation
+        , TF.assign "subnet_ids" <$> TF.attribute _subnetIds
         , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "user_data" <$> TF.attribute _user_data
-        , TF.assign "utilize_reserved_instances" <$> TF.attribute _utilize_reserved_instances
+        , TF.assign "target_group_arns" <$> TF.attribute _targetGroupArns
+        , TF.assign "update_policy" <$> TF.attribute _updatePolicy
+        , TF.assign "user_data" <$> TF.attribute _userData
+        , TF.assign "utilize_reserved_instances" <$> TF.attribute _utilizeReservedInstances
         ]
 
-instance P.HasAvailabilityZones (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    availabilityZones =
-        lens (_availability_zones :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _availability_zones = a } :: ElastigroupAwsResource s)
+instance TF.IsValid (ElastigroupAwsResource s) where
+    validator = TF.fieldsValidator (\ElastigroupAwsResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_availabilityZones P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_availabilityZones",
+                            [ "_subnetIds"
+                            ])
+        , if (_ondemandCount P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_ondemandCount",
+                            [ "_spotPercentage"
+                            ])
+        , if (_spotPercentage P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_spotPercentage",
+                            [ "_ondemandCount"
+                            ])
+        , if (_subnetIds P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_subnetIds",
+                            [ "_availabilityZones"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_ebsBlockDevice"
+                  (_ebsBlockDevice
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EbsBlockDevice s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_ephemeralBlockDevice"
+                  (_ephemeralBlockDevice
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDevice s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_instanceTypesWeights"
+                  (_instanceTypesWeights
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (InstanceTypesWeights s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationCodedeploy"
+                  (_integrationCodedeploy
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationCodedeploy s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationEcs"
+                  (_integrationEcs
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationEcs s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationGitlab"
+                  (_integrationGitlab
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationGitlab s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationKubernetes"
+                  (_integrationKubernetes
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationKubernetes s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationMesosphere"
+                  (_integrationMesosphere
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMesosphere s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationMultaiRuntime"
+                  (_integrationMultaiRuntime
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMultaiRuntime s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationNomad"
+                  (_integrationNomad
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationNomad s))
+                  TF.validator
+           P.<> TF.settingsValidator "_integrationRancher"
+                  (_integrationRancher
+                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationRancher s))
+                  TF.validator
+           P.<> TF.settingsValidator "_multaiTargetSets"
+                  (_multaiTargetSets
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (MultaiTargetSets s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_networkInterface"
+                  (_networkInterface
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_revertToSpot"
+                  (_revertToSpot
+                      :: ElastigroupAwsResource s -> TF.Attr s (RevertToSpot s))
+                  TF.validator
+           P.<> TF.settingsValidator "_scalingDownPolicy"
+                  (_scalingDownPolicy
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingDownPolicy s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_scalingTargetPolicy"
+                  (_scalingTargetPolicy
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingTargetPolicy s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_scalingUpPolicy"
+                  (_scalingUpPolicy
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingUpPolicy s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_scheduledTask"
+                  (_scheduledTask
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScheduledTask s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_signal"
+                  (_signal
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Signal s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_statefulDeallocation"
+                  (_statefulDeallocation
+                      :: ElastigroupAwsResource s -> TF.Attr s (StatefulDeallocation s))
+                  TF.validator
+           P.<> TF.settingsValidator "_tags"
+                  (_tags
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Tags s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_updatePolicy"
+                  (_updatePolicy
+                      :: ElastigroupAwsResource s -> TF.Attr s (UpdatePolicy s))
+                  TF.validator
 
-instance P.HasCapacityUnit (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    capacityUnit =
-        lens (_capacity_unit :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _capacity_unit = a } :: ElastigroupAwsResource s)
+instance P.HasAvailabilityZones (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    availabilityZones =
+        P.lens (_availabilityZones :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _availabilityZones = a } :: ElastigroupAwsResource s)
+
+instance P.HasBlockDevicesMode (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+    blockDevicesMode =
+        P.lens (_blockDevicesMode :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _blockDevicesMode = a } :: ElastigroupAwsResource s)
 
 instance P.HasDescription (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: ElastigroupAwsResource s)
+        P.lens (_description :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ElastigroupAwsResource s)
 
-instance P.HasDesiredCapacity (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasDesiredCapacity (ElastigroupAwsResource s) (TF.Attr s P.Integer) where
     desiredCapacity =
-        lens (_desired_capacity :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _desired_capacity = a } :: ElastigroupAwsResource s)
+        P.lens (_desiredCapacity :: ElastigroupAwsResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _desiredCapacity = a } :: ElastigroupAwsResource s)
 
-instance P.HasDrainingTimeout (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasDrainingTimeout (ElastigroupAwsResource s) (TF.Attr s P.Integer) where
     drainingTimeout =
-        lens (_draining_timeout :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _draining_timeout = a } :: ElastigroupAwsResource s)
+        P.lens (_drainingTimeout :: ElastigroupAwsResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _drainingTimeout = a } :: ElastigroupAwsResource s)
 
-instance P.HasEbsOptimized (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    ebsOptimized =
-        lens (_ebs_optimized :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ebs_optimized = a } :: ElastigroupAwsResource s)
+instance P.HasEbsBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (EbsBlockDevice s)]) where
+    ebsBlockDevice =
+        P.lens (_ebsBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EbsBlockDevice s)])
+               (\s a -> s { _ebsBlockDevice = a } :: ElastigroupAwsResource s)
 
-instance P.HasElasticIps (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasElasticIps (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
     elasticIps =
-        lens (_elastic_ips :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _elastic_ips = a } :: ElastigroupAwsResource s)
+        P.lens (_elasticIps :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _elasticIps = a } :: ElastigroupAwsResource s)
 
-instance P.HasEnableMonitoring (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasElasticLoadBalancers (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    elasticLoadBalancers =
+        P.lens (_elasticLoadBalancers :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _elasticLoadBalancers = a } :: ElastigroupAwsResource s)
+
+instance P.HasEnableMonitoring (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
     enableMonitoring =
-        lens (_enable_monitoring :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_monitoring = a } :: ElastigroupAwsResource s)
+        P.lens (_enableMonitoring :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableMonitoring = a } :: ElastigroupAwsResource s)
 
-instance P.HasFallbackToOndemand (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasEphemeralBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]) where
+    ephemeralBlockDevice =
+        P.lens (_ephemeralBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDevice s)])
+               (\s a -> s { _ephemeralBlockDevice = a } :: ElastigroupAwsResource s)
+
+instance P.HasFallbackToOndemand (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
     fallbackToOndemand =
-        lens (_fallback_to_ondemand :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _fallback_to_ondemand = a } :: ElastigroupAwsResource s)
+        P.lens (_fallbackToOndemand :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _fallbackToOndemand = a } :: ElastigroupAwsResource s)
 
-instance P.HasHealthCheckGracePeriod (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasHealthCheckGracePeriod (ElastigroupAwsResource s) (TF.Attr s P.Integer) where
     healthCheckGracePeriod =
-        lens (_health_check_grace_period :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_grace_period = a } :: ElastigroupAwsResource s)
+        P.lens (_healthCheckGracePeriod :: ElastigroupAwsResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _healthCheckGracePeriod = a } :: ElastigroupAwsResource s)
 
 instance P.HasHealthCheckType (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     healthCheckType =
-        lens (_health_check_type :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_type = a } :: ElastigroupAwsResource s)
+        P.lens (_healthCheckType :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _healthCheckType = a } :: ElastigroupAwsResource s)
 
-instance P.HasHealthCheckUnhealthyDurationBeforeReplacement (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasHealthCheckUnhealthyDurationBeforeReplacement (ElastigroupAwsResource s) (TF.Attr s P.Integer) where
     healthCheckUnhealthyDurationBeforeReplacement =
-        lens (_health_check_unhealthy_duration_before_replacement :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _health_check_unhealthy_duration_before_replacement = a } :: ElastigroupAwsResource s)
+        P.lens (_healthCheckUnhealthyDurationBeforeReplacement :: ElastigroupAwsResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _healthCheckUnhealthyDurationBeforeReplacement = a } :: ElastigroupAwsResource s)
 
 instance P.HasIamInstanceProfile (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     iamInstanceProfile =
-        lens (_iam_instance_profile :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _iam_instance_profile = a } :: ElastigroupAwsResource s)
+        P.lens (_iamInstanceProfile :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _iamInstanceProfile = a } :: ElastigroupAwsResource s)
 
 instance P.HasImageId (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     imageId =
-        lens (_image_id :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _image_id = a } :: ElastigroupAwsResource s)
+        P.lens (_imageId :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _imageId = a } :: ElastigroupAwsResource s)
 
 instance P.HasInstanceTypesOndemand (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     instanceTypesOndemand =
-        lens (_instance_types_ondemand :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_types_ondemand = a } :: ElastigroupAwsResource s)
+        P.lens (_instanceTypesOndemand :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceTypesOndemand = a } :: ElastigroupAwsResource s)
 
-instance P.HasInstanceTypesSpot (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceTypesSpot (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
     instanceTypesSpot =
-        lens (_instance_types_spot :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_types_spot = a } :: ElastigroupAwsResource s)
+        P.lens (_instanceTypesSpot :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instanceTypesSpot = a } :: ElastigroupAwsResource s)
 
-instance P.HasInstanceTypesWeights (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasInstanceTypesWeights (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (InstanceTypesWeights s)]) where
     instanceTypesWeights =
-        lens (_instance_types_weights :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _instance_types_weights = a } :: ElastigroupAwsResource s)
+        P.lens (_instanceTypesWeights :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (InstanceTypesWeights s)])
+               (\s a -> s { _instanceTypesWeights = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationCodedeploy (ElastigroupAwsResource s) (TF.Attr s (IntegrationCodedeploy s)) where
+    integrationCodedeploy =
+        P.lens (_integrationCodedeploy :: ElastigroupAwsResource s -> TF.Attr s (IntegrationCodedeploy s))
+               (\s a -> s { _integrationCodedeploy = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationEcs (ElastigroupAwsResource s) (TF.Attr s (IntegrationEcs s)) where
+    integrationEcs =
+        P.lens (_integrationEcs :: ElastigroupAwsResource s -> TF.Attr s (IntegrationEcs s))
+               (\s a -> s { _integrationEcs = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationGitlab (ElastigroupAwsResource s) (TF.Attr s (IntegrationGitlab s)) where
+    integrationGitlab =
+        P.lens (_integrationGitlab :: ElastigroupAwsResource s -> TF.Attr s (IntegrationGitlab s))
+               (\s a -> s { _integrationGitlab = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationKubernetes (ElastigroupAwsResource s) (TF.Attr s (IntegrationKubernetes s)) where
+    integrationKubernetes =
+        P.lens (_integrationKubernetes :: ElastigroupAwsResource s -> TF.Attr s (IntegrationKubernetes s))
+               (\s a -> s { _integrationKubernetes = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationMesosphere (ElastigroupAwsResource s) (TF.Attr s (IntegrationMesosphere s)) where
+    integrationMesosphere =
+        P.lens (_integrationMesosphere :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMesosphere s))
+               (\s a -> s { _integrationMesosphere = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationMultaiRuntime (ElastigroupAwsResource s) (TF.Attr s (IntegrationMultaiRuntime s)) where
+    integrationMultaiRuntime =
+        P.lens (_integrationMultaiRuntime :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMultaiRuntime s))
+               (\s a -> s { _integrationMultaiRuntime = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationNomad (ElastigroupAwsResource s) (TF.Attr s (IntegrationNomad s)) where
+    integrationNomad =
+        P.lens (_integrationNomad :: ElastigroupAwsResource s -> TF.Attr s (IntegrationNomad s))
+               (\s a -> s { _integrationNomad = a } :: ElastigroupAwsResource s)
+
+instance P.HasIntegrationRancher (ElastigroupAwsResource s) (TF.Attr s (IntegrationRancher s)) where
+    integrationRancher =
+        P.lens (_integrationRancher :: ElastigroupAwsResource s -> TF.Attr s (IntegrationRancher s))
+               (\s a -> s { _integrationRancher = a } :: ElastigroupAwsResource s)
 
 instance P.HasKeyName (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     keyName =
-        lens (_key_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _key_name = a } :: ElastigroupAwsResource s)
+        P.lens (_keyName :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keyName = a } :: ElastigroupAwsResource s)
 
-instance P.HasMaxSize (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    maxSize =
-        lens (_max_size :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _max_size = a } :: ElastigroupAwsResource s)
+instance P.HasLifetimePeriod (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+    lifetimePeriod =
+        P.lens (_lifetimePeriod :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lifetimePeriod = a } :: ElastigroupAwsResource s)
 
-instance P.HasMinSize (ElastigroupAwsResource s) (TF.Attr s P.Text) where
-    minSize =
-        lens (_min_size :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _min_size = a } :: ElastigroupAwsResource s)
+instance P.HasMultaiTargetSets (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (MultaiTargetSets s)]) where
+    multaiTargetSets =
+        P.lens (_multaiTargetSets :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (MultaiTargetSets s)])
+               (\s a -> s { _multaiTargetSets = a } :: ElastigroupAwsResource s)
 
 instance P.HasName (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ElastigroupAwsResource s)
+        P.lens (_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ElastigroupAwsResource s)
 
-instance P.HasOndemandCount (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkInterface (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
+    networkInterface =
+        P.lens (_networkInterface :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+               (\s a -> s { _networkInterface = a } :: ElastigroupAwsResource s)
+
+instance P.HasOndemandCount (ElastigroupAwsResource s) (TF.Attr s P.Integer) where
     ondemandCount =
-        lens (_ondemand_count :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ondemand_count = a } :: ElastigroupAwsResource s)
+        P.lens (_ondemandCount :: ElastigroupAwsResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _ondemandCount = a } :: ElastigroupAwsResource s)
 
 instance P.HasOrientation (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     orientation =
-        lens (_orientation :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _orientation = a } :: ElastigroupAwsResource s)
+        P.lens (_orientation :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orientation = a } :: ElastigroupAwsResource s)
+
+instance P.HasPersistBlockDevices (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
+    persistBlockDevices =
+        P.lens (_persistBlockDevices :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _persistBlockDevices = a } :: ElastigroupAwsResource s)
+
+instance P.HasPersistPrivateIp (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
+    persistPrivateIp =
+        P.lens (_persistPrivateIp :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _persistPrivateIp = a } :: ElastigroupAwsResource s)
+
+instance P.HasPersistRootDevice (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
+    persistRootDevice =
+        P.lens (_persistRootDevice :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _persistRootDevice = a } :: ElastigroupAwsResource s)
 
 instance P.HasPlacementTenancy (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     placementTenancy =
-        lens (_placement_tenancy :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _placement_tenancy = a } :: ElastigroupAwsResource s)
+        P.lens (_placementTenancy :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _placementTenancy = a } :: ElastigroupAwsResource s)
 
-instance P.HasPreferredAvailabilityZones (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasPreferredAvailabilityZones (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
     preferredAvailabilityZones =
-        lens (_preferred_availability_zones :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _preferred_availability_zones = a } :: ElastigroupAwsResource s)
+        P.lens (_preferredAvailabilityZones :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _preferredAvailabilityZones = a } :: ElastigroupAwsResource s)
+
+instance P.HasPrivateIps (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    privateIps =
+        P.lens (_privateIps :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _privateIps = a } :: ElastigroupAwsResource s)
 
 instance P.HasProduct (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     product =
-        lens (_product :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _product = a } :: ElastigroupAwsResource s)
+        P.lens (_product :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _product = a } :: ElastigroupAwsResource s)
 
 instance P.HasRegion (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: ElastigroupAwsResource s)
+        P.lens (_region :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ElastigroupAwsResource s)
 
-instance P.HasRevertToSpot (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasRevertToSpot (ElastigroupAwsResource s) (TF.Attr s (RevertToSpot s)) where
     revertToSpot =
-        lens (_revert_to_spot :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _revert_to_spot = a } :: ElastigroupAwsResource s)
+        P.lens (_revertToSpot :: ElastigroupAwsResource s -> TF.Attr s (RevertToSpot s))
+               (\s a -> s { _revertToSpot = a } :: ElastigroupAwsResource s)
 
-instance P.HasSecurityGroups (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasScalingDownPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScalingDownPolicy s)]) where
+    scalingDownPolicy =
+        P.lens (_scalingDownPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingDownPolicy s)])
+               (\s a -> s { _scalingDownPolicy = a } :: ElastigroupAwsResource s)
+
+instance P.HasScalingTargetPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScalingTargetPolicy s)]) where
+    scalingTargetPolicy =
+        P.lens (_scalingTargetPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingTargetPolicy s)])
+               (\s a -> s { _scalingTargetPolicy = a } :: ElastigroupAwsResource s)
+
+instance P.HasScalingUpPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScalingUpPolicy s)]) where
+    scalingUpPolicy =
+        P.lens (_scalingUpPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingUpPolicy s)])
+               (\s a -> s { _scalingUpPolicy = a } :: ElastigroupAwsResource s)
+
+instance P.HasScheduledTask (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScheduledTask s)]) where
+    scheduledTask =
+        P.lens (_scheduledTask :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScheduledTask s)])
+               (\s a -> s { _scheduledTask = a } :: ElastigroupAwsResource s)
+
+instance P.HasSecurityGroups (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
     securityGroups =
-        lens (_security_groups :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _security_groups = a } :: ElastigroupAwsResource s)
+        P.lens (_securityGroups :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityGroups = a } :: ElastigroupAwsResource s)
 
-instance P.HasSpotPercentage (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasSignal (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (Signal s)]) where
+    signal =
+        P.lens (_signal :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Signal s)])
+               (\s a -> s { _signal = a } :: ElastigroupAwsResource s)
+
+instance P.HasSpotPercentage (ElastigroupAwsResource s) (TF.Attr s P.Double) where
     spotPercentage =
-        lens (_spot_percentage :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _spot_percentage = a } :: ElastigroupAwsResource s)
+        P.lens (_spotPercentage :: ElastigroupAwsResource s -> TF.Attr s P.Double)
+               (\s a -> s { _spotPercentage = a } :: ElastigroupAwsResource s)
 
-instance P.HasSubnetIds (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasStatefulDeallocation (ElastigroupAwsResource s) (TF.Attr s (StatefulDeallocation s)) where
+    statefulDeallocation =
+        P.lens (_statefulDeallocation :: ElastigroupAwsResource s -> TF.Attr s (StatefulDeallocation s))
+               (\s a -> s { _statefulDeallocation = a } :: ElastigroupAwsResource s)
+
+instance P.HasSubnetIds (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
     subnetIds =
-        lens (_subnet_ids :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subnet_ids = a } :: ElastigroupAwsResource s)
+        P.lens (_subnetIds :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _subnetIds = a } :: ElastigroupAwsResource s)
 
-instance P.HasTags (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasTags (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (Tags s)]) where
     tags =
-        lens (_tags :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ElastigroupAwsResource s)
+        P.lens (_tags :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Tags s)])
+               (\s a -> s { _tags = a } :: ElastigroupAwsResource s)
+
+instance P.HasTargetGroupArns (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    targetGroupArns =
+        P.lens (_targetGroupArns :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _targetGroupArns = a } :: ElastigroupAwsResource s)
+
+instance P.HasUpdatePolicy (ElastigroupAwsResource s) (TF.Attr s (UpdatePolicy s)) where
+    updatePolicy =
+        P.lens (_updatePolicy :: ElastigroupAwsResource s -> TF.Attr s (UpdatePolicy s))
+               (\s a -> s { _updatePolicy = a } :: ElastigroupAwsResource s)
 
 instance P.HasUserData (ElastigroupAwsResource s) (TF.Attr s P.Text) where
     userData =
-        lens (_user_data :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _user_data = a } :: ElastigroupAwsResource s)
+        P.lens (_userData :: ElastigroupAwsResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userData = a } :: ElastigroupAwsResource s)
 
-instance P.HasUtilizeReservedInstances (ElastigroupAwsResource s) (TF.Attr s P.Text) where
+instance P.HasUtilizeReservedInstances (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
     utilizeReservedInstances =
-        lens (_utilize_reserved_instances :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-             (\s a -> s { _utilize_reserved_instances = a } :: ElastigroupAwsResource s)
-
-instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedAvailabilityZones =
-        (_availability_zones :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_utilizeReservedInstances :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _utilizeReservedInstances = a } :: ElastigroupAwsResource s)
 
 instance s ~ s' => P.HasComputedCapacityUnit (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedCapacityUnit =
-        (_capacity_unit :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedCapacityUnit x = TF.compute (TF.refKey x) "_computedCapacityUnit"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Bool) where
+    computedEbsOptimized x = TF.compute (TF.refKey x) "_computedEbsOptimized"
 
-instance s ~ s' => P.HasComputedDesiredCapacity (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedDesiredCapacity =
-        (_desired_capacity :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Integer) where
+    computedMaxSize x = TF.compute (TF.refKey x) "_computedMaxSize"
 
-instance s ~ s' => P.HasComputedDrainingTimeout (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedDrainingTimeout =
-        (_draining_timeout :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Integer) where
+    computedMinSize x = TF.compute (TF.refKey x) "_computedMinSize"
 
-instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedEbsOptimized =
-        (_ebs_optimized :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @spotinst_subscription@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Spotinst/spotinst_subscription terraform documentation>
+-- for more information.
+data SubscriptionResource s = SubscriptionResource'
+    { _endpoint   :: TF.Attr s P.Text
+    -- ^ @endpoint@ - (Required)
+    --
+    , _eventType  :: TF.Attr s P.Text
+    -- ^ @event_type@ - (Required)
+    --
+    , _format     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @format@ - (Optional)
+    --
+    , _protocol   :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    , _resourceId :: TF.Attr s P.Text
+    -- ^ @resource_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedElasticIps (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedElasticIps =
-        (_elastic_ips :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnableMonitoring (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedEnableMonitoring =
-        (_enable_monitoring :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFallbackToOndemand (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedFallbackToOndemand =
-        (_fallback_to_ondemand :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHealthCheckGracePeriod (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckGracePeriod =
-        (_health_check_grace_period :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHealthCheckType (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckType =
-        (_health_check_type :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHealthCheckUnhealthyDurationBeforeReplacement (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedHealthCheckUnhealthyDurationBeforeReplacement =
-        (_health_check_unhealthy_duration_before_replacement :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIamInstanceProfile (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedIamInstanceProfile =
-        (_iam_instance_profile :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedImageId =
-        (_image_id :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstanceTypesOndemand (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedInstanceTypesOndemand =
-        (_instance_types_ondemand :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstanceTypesSpot (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedInstanceTypesSpot =
-        (_instance_types_spot :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInstanceTypesWeights (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedInstanceTypesWeights =
-        (_instance_types_weights :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedKeyName =
-        (_key_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedMaxSize =
-        (_max_size :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedMinSize =
-        (_min_size :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOndemandCount (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedOndemandCount =
-        (_ondemand_count :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOrientation (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedOrientation =
-        (_orientation :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPlacementTenancy (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedPlacementTenancy =
-        (_placement_tenancy :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPreferredAvailabilityZones (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedPreferredAvailabilityZones =
-        (_preferred_availability_zones :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProduct (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedProduct =
-        (_product :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedRegion =
-        (_region :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRevertToSpot (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedRevertToSpot =
-        (_revert_to_spot :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedSecurityGroups =
-        (_security_groups :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSpotPercentage (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedSpotPercentage =
-        (_spot_percentage :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedSubnetIds =
-        (_subnet_ids :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUserData (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedUserData =
-        (_user_data :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUtilizeReservedInstances (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedUtilizeReservedInstances =
-        (_utilize_reserved_instances :: ElastigroupAwsResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-elastigroupAwsResource :: TF.Resource P.Spotinst (ElastigroupAwsResource s)
-elastigroupAwsResource =
-    TF.newResource "spotinst_elastigroup_aws" $
-        ElastigroupAwsResource {
-              _availability_zones = TF.Nil
-            , _capacity_unit = TF.Nil
-            , _description = TF.Nil
-            , _desired_capacity = TF.Nil
-            , _draining_timeout = TF.Nil
-            , _ebs_optimized = TF.Nil
-            , _elastic_ips = TF.Nil
-            , _enable_monitoring = TF.Nil
-            , _fallback_to_ondemand = TF.Nil
-            , _health_check_grace_period = TF.Nil
-            , _health_check_type = TF.Nil
-            , _health_check_unhealthy_duration_before_replacement = TF.Nil
-            , _iam_instance_profile = TF.Nil
-            , _image_id = TF.Nil
-            , _instance_types_ondemand = TF.Nil
-            , _instance_types_spot = TF.Nil
-            , _instance_types_weights = TF.Nil
-            , _key_name = TF.Nil
-            , _max_size = TF.Nil
-            , _min_size = TF.Nil
-            , _name = TF.Nil
-            , _ondemand_count = TF.Nil
-            , _orientation = TF.Nil
-            , _placement_tenancy = TF.Nil
-            , _preferred_availability_zones = TF.Nil
-            , _product = TF.Nil
-            , _region = TF.Nil
-            , _revert_to_spot = TF.Nil
-            , _security_groups = TF.Nil
-            , _spot_percentage = TF.Nil
-            , _subnet_ids = TF.Nil
-            , _tags = TF.Nil
-            , _user_data = TF.Nil
-            , _utilize_reserved_instances = TF.Nil
+subscriptionResource
+    :: TF.Attr s P.Text -- ^ @endpoint@ - 'P.endpoint'
+    -> TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
+    -> TF.Resource P.Provider (SubscriptionResource s)
+subscriptionResource _endpoint _eventType _protocol _resourceId =
+    TF.newResource "spotinst_subscription" TF.validator $
+        SubscriptionResource'
+            { _endpoint = _endpoint
+            , _eventType = _eventType
+            , _format = TF.Nil
+            , _protocol = _protocol
+            , _resourceId = _resourceId
             }
 
-{- | The @spotinst_subscription@ Spotinst resource.
-
-Provides a Spotinst subscription resource.
--}
-data SubscriptionResource s = SubscriptionResource {
-      _endpoint    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The endpoint the notification will be sent to: url in case of @"http"@ / @"https"@ , email address in case of @"email"@ / @"email-json"@ , sns-topic-arn in case of @"aws-sns"@ . -}
-    , _event_type  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The event to send the notification when triggered. Valid values: @"AWS_EC2_INSTANCE_TERMINATE"@ , @"AWS_EC2_INSTANCE_TERMINATED"@ , @"AWS_EC2_INSTANCE_LAUNCH"@ , @"AWS_EC2_INSTANCE_UNHEALTHY_IN_ELB"@ , @"GROUP_ROLL_FAILED"@ , @"GROUP_ROLL_FINISHED"@ , @"CANT_SCALE_UP_GROUP_MAX_CAPACITY"@ , @"GROUP_UPDATED"@ , @"AWS_EC2_CANT_SPIN_OD"@ , @"AWS_EMR_PROVISION_TIMEOUT"@ , @"AWS_EC2_INSTANCE_READY_SIGNAL_TIMEOUT"@ . -}
-    , _format      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The format of the notification content (JSON Format - Key+Value). Valid values: @"%instance-id%"@ , @"%event%"@ , @"%resource-id%"@ , @"%resource-name%"@ . -}
-    , _protocol    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The protocol to send the notification. Valid values: @"http"@ , @"https"@ , @"email"@ , @"email-json"@ , @"aws-sns"@ . -}
-    , _resource_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) Spotinst Resource ID (Elastigroup ID). -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (SubscriptionResource s) where
-    toObject SubscriptionResource{..} = catMaybes
+    toObject SubscriptionResource'{..} = P.catMaybes
         [ TF.assign "endpoint" <$> TF.attribute _endpoint
-        , TF.assign "event_type" <$> TF.attribute _event_type
+        , TF.assign "event_type" <$> TF.attribute _eventType
         , TF.assign "format" <$> TF.attribute _format
         , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "resource_id" <$> TF.attribute _resource_id
+        , TF.assign "resource_id" <$> TF.attribute _resourceId
         ]
+
+instance TF.IsValid (SubscriptionResource s) where
+    validator = P.mempty
 
 instance P.HasEndpoint (SubscriptionResource s) (TF.Attr s P.Text) where
     endpoint =
-        lens (_endpoint :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _endpoint = a } :: SubscriptionResource s)
+        P.lens (_endpoint :: SubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _endpoint = a } :: SubscriptionResource s)
 
 instance P.HasEventType (SubscriptionResource s) (TF.Attr s P.Text) where
     eventType =
-        lens (_event_type :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _event_type = a } :: SubscriptionResource s)
+        P.lens (_eventType :: SubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _eventType = a } :: SubscriptionResource s)
 
-instance P.HasFormat (SubscriptionResource s) (TF.Attr s P.Text) where
+instance P.HasFormat (SubscriptionResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     format =
-        lens (_format :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _format = a } :: SubscriptionResource s)
+        P.lens (_format :: SubscriptionResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _format = a } :: SubscriptionResource s)
 
 instance P.HasProtocol (SubscriptionResource s) (TF.Attr s P.Text) where
     protocol =
-        lens (_protocol :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _protocol = a } :: SubscriptionResource s)
+        P.lens (_protocol :: SubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: SubscriptionResource s)
 
 instance P.HasResourceId (SubscriptionResource s) (TF.Attr s P.Text) where
     resourceId =
-        lens (_resource_id :: SubscriptionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_id = a } :: SubscriptionResource s)
-
-instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedEndpoint =
-        (_endpoint :: SubscriptionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEventType (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedEventType =
-        (_event_type :: SubscriptionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFormat (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedFormat =
-        (_format :: SubscriptionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedProtocol =
-        (_protocol :: SubscriptionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResourceId (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
-    computedResourceId =
-        (_resource_id :: SubscriptionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-subscriptionResource :: TF.Resource P.Spotinst (SubscriptionResource s)
-subscriptionResource =
-    TF.newResource "spotinst_subscription" $
-        SubscriptionResource {
-              _endpoint = TF.Nil
-            , _event_type = TF.Nil
-            , _format = TF.Nil
-            , _protocol = TF.Nil
-            , _resource_id = TF.Nil
-            }
+        P.lens (_resourceId :: SubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceId = a } :: SubscriptionResource s)

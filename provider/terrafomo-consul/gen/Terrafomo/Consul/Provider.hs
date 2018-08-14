@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,141 +17,153 @@
 --
 module Terrafomo.Consul.Provider
     (
-    -- * Provider Datatype
-      Consul (..)
-    , emptyConsul
-
-    -- * Lenses
-    , providerAddress
-    , providerCaFile
-    , providerCertFile
-    , providerDatacenter
-    , providerHttpAuth
-    , providerInsecureHttps
-    , providerKeyFile
-    , providerScheme
-    , providerToken
+    -- * Consul Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Consul.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Consul.Lens  as P
 import qualified Terrafomo.Consul.Types as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Consul@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Consul/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _address       :: P.Maybe P.Text
+    -- ^ @address@ - (Optional)
+    --
+    , _caFile        :: P.Maybe P.Text
+    -- ^ @ca_file@ - (Optional)
+    --
+    , _certFile      :: P.Maybe P.Text
+    -- ^ @cert_file@ - (Optional)
+    --
+    , _datacenter    :: P.Maybe P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _httpAuth      :: P.Maybe P.Text
+    -- ^ @http_auth@ - (Optional)
+    --
+    , _insecureHttps :: P.Bool
+    -- ^ @insecure_https@ - (Optional)
+    --
+    , _keyFile       :: P.Maybe P.Text
+    -- ^ @key_file@ - (Optional)
+    --
+    , _scheme        :: P.Maybe P.Text
+    -- ^ @scheme@ - (Optional)
+    --
+    , _token         :: P.Maybe P.Text
+    -- ^ @token@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Consul Terraform provider.
+newProvider
+    :: Provider
+newProvider =
+    Provider'
+        { _address = P.Nothing
+        , _caFile = P.Nothing
+        , _certFile = P.Nothing
+        , _datacenter = P.Nothing
+        , _httpAuth = P.Nothing
+        , _insecureHttps = P.False
+        , _keyFile = P.Nothing
+        , _scheme = P.Nothing
+        , _token = P.Nothing
+        }
 
-<https://www.consul.io> is a tool for service discovery, configuration and
-orchestration. The Consul provider exposes resources used to interact with a
-Consul cluster. Configuration of the provider is optional, as it provides
-defaults for all arguments. Use the navigation to the left to read about the
-available resources. ~> NOTE: The Consul provider should not be confused
-with the </docs/backends/types/consul.html> , which is one of many backends
-that can be used to store Terraform state. The Consul provider is instead
-used to manage resources within Consul itself, such as adding external
-services or working with the key/value store.
--}
-data Consul = Consul {
-      _address        :: !(Maybe P.Text)
-    {- ^ (Optional) The HTTP(S) API address of the agent to use. Defaults to "127.0.0.1:8500". -}
-    , _ca_file        :: !(Maybe P.Text)
-    {- ^ (Optional) A path to a PEM-encoded certificate authority used to verify the remote agent's certificate. -}
-    , _cert_file      :: !(Maybe P.Text)
-    {- ^ (Optional) A path to a PEM-encoded certificate provided to the remote agent; requires use of @key_file@ . -}
-    , _datacenter     :: !(Maybe P.Text)
-    {- ^ (Optional) The datacenter to use. Defaults to that of the agent. -}
-    , _http_auth      :: !(Maybe P.Text)
-    {- ^ (Optional) HTTP Basic Authentication credentials to be used when communicating with Consul, in the format of either @user@ or @user:pass@ . This may also be specified using the @CONSUL_HTTP_AUTH@ environment variable. -}
-    , _insecure_https :: !(Maybe P.Text)
-    {- ^ (Optional) Boolean value to disable SSL certificate verification; setting this value to true is not recommended for production use. Only use this with scheme set to "https". -}
-    , _key_file       :: !(Maybe P.Text)
-    {- ^ (Optional) A path to a PEM-encoded private key, required if @cert_file@ is specified. -}
-    , _scheme         :: !(Maybe P.Text)
-    {- ^ (Optional) The URL scheme of the agent to use ("http" or "https"). Defaults to "http". -}
-    , _token          :: !(Maybe P.Text)
-    {- ^ (Optional) The ACL token to use by default when making requests to the agent. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Consul
-
-instance TF.IsSection Consul where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Consul))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "address" <$> _address x
-                  , TF.assign "ca_file" <$> _ca_file x
-                  , TF.assign "cert_file" <$> _cert_file x
-                  , TF.assign "datacenter" <$> _datacenter x
-                  , TF.assign "http_auth" <$> _http_auth x
-                  , TF.assign "insecure_https" <$> _insecure_https x
-                  , TF.assign "key_file" <$> _key_file x
-                  , TF.assign "scheme" <$> _scheme x
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "address" <$> _address
+                  , TF.assign "ca_file" <$> _caFile
+                  , TF.assign "cert_file" <$> _certFile
+                  , TF.assign "datacenter" <$> _datacenter
+                  , TF.assign "http_auth" <$> _httpAuth
+                  , P.Just $ TF.assign "insecure_https" _insecureHttps
+                  , TF.assign "key_file" <$> _keyFile
+                  , TF.assign "scheme" <$> _scheme
+                  , TF.assign "token" <$> _token
                   ])
 
-instance TF.IsProvider Consul where
-    type ProviderType Consul = "consul"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyConsul :: Consul
-emptyConsul = Consul {
-        _address = Nothing
-      , _ca_file = Nothing
-      , _cert_file = Nothing
-      , _datacenter = Nothing
-      , _http_auth = Nothing
-      , _insecure_https = Nothing
-      , _key_file = Nothing
-      , _scheme = Nothing
-      , _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAddress :: Lens' Consul (Maybe P.Text)
-providerAddress =
-    lens _address (\s a -> s { _address = a })
+instance P.HasAddress (Provider) (P.Maybe P.Text) where
+    address =
+        P.lens (_address :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _address = a } :: Provider)
 
-providerCaFile :: Lens' Consul (Maybe P.Text)
-providerCaFile =
-    lens _ca_file (\s a -> s { _ca_file = a })
+instance P.HasCaFile (Provider) (P.Maybe P.Text) where
+    caFile =
+        P.lens (_caFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _caFile = a } :: Provider)
 
-providerCertFile :: Lens' Consul (Maybe P.Text)
-providerCertFile =
-    lens _cert_file (\s a -> s { _cert_file = a })
+instance P.HasCertFile (Provider) (P.Maybe P.Text) where
+    certFile =
+        P.lens (_certFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _certFile = a } :: Provider)
 
-providerDatacenter :: Lens' Consul (Maybe P.Text)
-providerDatacenter =
-    lens _datacenter (\s a -> s { _datacenter = a })
+instance P.HasDatacenter (Provider) (P.Maybe P.Text) where
+    datacenter =
+        P.lens (_datacenter :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _datacenter = a } :: Provider)
 
-providerHttpAuth :: Lens' Consul (Maybe P.Text)
-providerHttpAuth =
-    lens _http_auth (\s a -> s { _http_auth = a })
+instance P.HasHttpAuth (Provider) (P.Maybe P.Text) where
+    httpAuth =
+        P.lens (_httpAuth :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _httpAuth = a } :: Provider)
 
-providerInsecureHttps :: Lens' Consul (Maybe P.Text)
-providerInsecureHttps =
-    lens _insecure_https (\s a -> s { _insecure_https = a })
+instance P.HasInsecureHttps (Provider) (P.Bool) where
+    insecureHttps =
+        P.lens (_insecureHttps :: Provider -> P.Bool)
+               (\s a -> s { _insecureHttps = a } :: Provider)
 
-providerKeyFile :: Lens' Consul (Maybe P.Text)
-providerKeyFile =
-    lens _key_file (\s a -> s { _key_file = a })
+instance P.HasKeyFile (Provider) (P.Maybe P.Text) where
+    keyFile =
+        P.lens (_keyFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _keyFile = a } :: Provider)
 
-providerScheme :: Lens' Consul (Maybe P.Text)
-providerScheme =
-    lens _scheme (\s a -> s { _scheme = a })
+instance P.HasScheme (Provider) (P.Maybe P.Text) where
+    scheme =
+        P.lens (_scheme :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _scheme = a } :: Provider)
 
-providerToken :: Lens' Consul (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasToken (Provider) (P.Maybe P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _token = a } :: Provider)

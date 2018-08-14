@@ -1,4 +1,2 @@
-name: Gitlab
-package: terrafomo-gitlab
-datatype: true
-original: gitlab
+package-name: terrafomo-gitlab
+provider-name: Gitlab

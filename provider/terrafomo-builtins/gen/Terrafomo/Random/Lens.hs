@@ -15,245 +15,168 @@ module Terrafomo.Random.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasByteLength (..)
-    , HasInput (..)
-    , HasKeepers (..)
-    , HasLength (..)
-    , HasLower (..)
-    , HasMax (..)
-    , HasMin (..)
-    , HasMinLower (..)
-    , HasMinNumeric (..)
-    , HasMinSpecial (..)
-    , HasMinUpper (..)
-    , HasNumber (..)
+      HasSeparator (..)
     , HasOverrideSpecial (..)
-    , HasPrefix (..)
-    , HasResultCount (..)
-    , HasSeed (..)
-    , HasSeparator (..)
     , HasSpecial (..)
+    , HasKeepers (..)
+    , HasLower (..)
+    , HasMinLower (..)
+    , HasByteLength (..)
+    , HasResultCount (..)
+    , HasMinNumeric (..)
+    , HasNumber (..)
+    , HasMin (..)
+    , HasSeed (..)
+    , HasMinUpper (..)
+    , HasLength (..)
     , HasUpper (..)
+    , HasMax (..)
+    , HasInput (..)
+    , HasMinSpecial (..)
+    , HasPrefix (..)
 
     -- ** Computed Attributes
-    , HasComputedB64Std (..)
-    , HasComputedB64Url (..)
-    , HasComputedByteLength (..)
     , HasComputedDec (..)
-    , HasComputedHex (..)
-    , HasComputedId (..)
-    , HasComputedInput (..)
-    , HasComputedKeepers (..)
-    , HasComputedLength (..)
-    , HasComputedLower (..)
-    , HasComputedMax (..)
-    , HasComputedMin (..)
-    , HasComputedMinLower (..)
-    , HasComputedMinNumeric (..)
-    , HasComputedMinSpecial (..)
-    , HasComputedMinUpper (..)
-    , HasComputedNumber (..)
-    , HasComputedOverrideSpecial (..)
-    , HasComputedPrefix (..)
+    , HasComputedB64 (..)
     , HasComputedResult (..)
-    , HasComputedResultCount (..)
-    , HasComputedSeed (..)
-    , HasComputedSeparator (..)
-    , HasComputedSpecial (..)
-    , HasComputedUpper (..)
+    , HasComputedB64Std (..)
+    , HasComputedHex (..)
+    , HasComputedB64Url (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasByteLength a b | a -> b where
-    byteLength :: Lens' a b
-
-instance HasByteLength a b => HasByteLength (TF.Schema l p a) b where
-    byteLength = TF.configuration . byteLength
-
-class HasInput a b | a -> b where
-    input :: Lens' a b
-
-instance HasInput a b => HasInput (TF.Schema l p a) b where
-    input = TF.configuration . input
-
-class HasKeepers a b | a -> b where
-    keepers :: Lens' a b
-
-instance HasKeepers a b => HasKeepers (TF.Schema l p a) b where
-    keepers = TF.configuration . keepers
-
-class HasLength a b | a -> b where
-    length :: Lens' a b
-
-instance HasLength a b => HasLength (TF.Schema l p a) b where
-    length = TF.configuration . length
-
-class HasLower a b | a -> b where
-    lower :: Lens' a b
-
-instance HasLower a b => HasLower (TF.Schema l p a) b where
-    lower = TF.configuration . lower
-
-class HasMax a b | a -> b where
-    max :: Lens' a b
-
-instance HasMax a b => HasMax (TF.Schema l p a) b where
-    max = TF.configuration . max
-
-class HasMin a b | a -> b where
-    min :: Lens' a b
-
-instance HasMin a b => HasMin (TF.Schema l p a) b where
-    min = TF.configuration . min
-
-class HasMinLower a b | a -> b where
-    minLower :: Lens' a b
-
-instance HasMinLower a b => HasMinLower (TF.Schema l p a) b where
-    minLower = TF.configuration . minLower
-
-class HasMinNumeric a b | a -> b where
-    minNumeric :: Lens' a b
-
-instance HasMinNumeric a b => HasMinNumeric (TF.Schema l p a) b where
-    minNumeric = TF.configuration . minNumeric
-
-class HasMinSpecial a b | a -> b where
-    minSpecial :: Lens' a b
-
-instance HasMinSpecial a b => HasMinSpecial (TF.Schema l p a) b where
-    minSpecial = TF.configuration . minSpecial
-
-class HasMinUpper a b | a -> b where
-    minUpper :: Lens' a b
-
-instance HasMinUpper a b => HasMinUpper (TF.Schema l p a) b where
-    minUpper = TF.configuration . minUpper
-
-class HasNumber a b | a -> b where
-    number :: Lens' a b
-
-instance HasNumber a b => HasNumber (TF.Schema l p a) b where
-    number = TF.configuration . number
-
-class HasOverrideSpecial a b | a -> b where
-    overrideSpecial :: Lens' a b
-
-instance HasOverrideSpecial a b => HasOverrideSpecial (TF.Schema l p a) b where
-    overrideSpecial = TF.configuration . overrideSpecial
-
-class HasPrefix a b | a -> b where
-    prefix :: Lens' a b
-
-instance HasPrefix a b => HasPrefix (TF.Schema l p a) b where
-    prefix = TF.configuration . prefix
-
-class HasResultCount a b | a -> b where
-    resultCount :: Lens' a b
-
-instance HasResultCount a b => HasResultCount (TF.Schema l p a) b where
-    resultCount = TF.configuration . resultCount
-
-class HasSeed a b | a -> b where
-    seed :: Lens' a b
-
-instance HasSeed a b => HasSeed (TF.Schema l p a) b where
-    seed = TF.configuration . seed
-
 class HasSeparator a b | a -> b where
-    separator :: Lens' a b
+    separator :: P.Lens' a b
 
 instance HasSeparator a b => HasSeparator (TF.Schema l p a) b where
     separator = TF.configuration . separator
 
+class HasOverrideSpecial a b | a -> b where
+    overrideSpecial :: P.Lens' a b
+
+instance HasOverrideSpecial a b => HasOverrideSpecial (TF.Schema l p a) b where
+    overrideSpecial = TF.configuration . overrideSpecial
+
 class HasSpecial a b | a -> b where
-    special :: Lens' a b
+    special :: P.Lens' a b
 
 instance HasSpecial a b => HasSpecial (TF.Schema l p a) b where
     special = TF.configuration . special
 
+class HasKeepers a b | a -> b where
+    keepers :: P.Lens' a b
+
+instance HasKeepers a b => HasKeepers (TF.Schema l p a) b where
+    keepers = TF.configuration . keepers
+
+class HasLower a b | a -> b where
+    lower :: P.Lens' a b
+
+instance HasLower a b => HasLower (TF.Schema l p a) b where
+    lower = TF.configuration . lower
+
+class HasMinLower a b | a -> b where
+    minLower :: P.Lens' a b
+
+instance HasMinLower a b => HasMinLower (TF.Schema l p a) b where
+    minLower = TF.configuration . minLower
+
+class HasByteLength a b | a -> b where
+    byteLength :: P.Lens' a b
+
+instance HasByteLength a b => HasByteLength (TF.Schema l p a) b where
+    byteLength = TF.configuration . byteLength
+
+class HasResultCount a b | a -> b where
+    resultCount :: P.Lens' a b
+
+instance HasResultCount a b => HasResultCount (TF.Schema l p a) b where
+    resultCount = TF.configuration . resultCount
+
+class HasMinNumeric a b | a -> b where
+    minNumeric :: P.Lens' a b
+
+instance HasMinNumeric a b => HasMinNumeric (TF.Schema l p a) b where
+    minNumeric = TF.configuration . minNumeric
+
+class HasNumber a b | a -> b where
+    number :: P.Lens' a b
+
+instance HasNumber a b => HasNumber (TF.Schema l p a) b where
+    number = TF.configuration . number
+
+class HasMin a b | a -> b where
+    min :: P.Lens' a b
+
+instance HasMin a b => HasMin (TF.Schema l p a) b where
+    min = TF.configuration . min
+
+class HasSeed a b | a -> b where
+    seed :: P.Lens' a b
+
+instance HasSeed a b => HasSeed (TF.Schema l p a) b where
+    seed = TF.configuration . seed
+
+class HasMinUpper a b | a -> b where
+    minUpper :: P.Lens' a b
+
+instance HasMinUpper a b => HasMinUpper (TF.Schema l p a) b where
+    minUpper = TF.configuration . minUpper
+
+class HasLength a b | a -> b where
+    length :: P.Lens' a b
+
+instance HasLength a b => HasLength (TF.Schema l p a) b where
+    length = TF.configuration . length
+
 class HasUpper a b | a -> b where
-    upper :: Lens' a b
+    upper :: P.Lens' a b
 
 instance HasUpper a b => HasUpper (TF.Schema l p a) b where
     upper = TF.configuration . upper
 
-class HasComputedB64Std a b | a -> b where
-    computedB64Std :: a -> b
+class HasMax a b | a -> b where
+    max :: P.Lens' a b
 
-class HasComputedB64Url a b | a -> b where
-    computedB64Url :: a -> b
+instance HasMax a b => HasMax (TF.Schema l p a) b where
+    max = TF.configuration . max
 
-class HasComputedByteLength a b | a -> b where
-    computedByteLength :: a -> b
+class HasInput a b | a -> b where
+    input :: P.Lens' a b
+
+instance HasInput a b => HasInput (TF.Schema l p a) b where
+    input = TF.configuration . input
+
+class HasMinSpecial a b | a -> b where
+    minSpecial :: P.Lens' a b
+
+instance HasMinSpecial a b => HasMinSpecial (TF.Schema l p a) b where
+    minSpecial = TF.configuration . minSpecial
+
+class HasPrefix a b | a -> b where
+    prefix :: P.Lens' a b
+
+instance HasPrefix a b => HasPrefix (TF.Schema l p a) b where
+    prefix = TF.configuration . prefix
 
 class HasComputedDec a b | a -> b where
     computedDec :: a -> b
 
-class HasComputedHex a b | a -> b where
-    computedHex :: a -> b
-
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
-
-class HasComputedInput a b | a -> b where
-    computedInput :: a -> b
-
-class HasComputedKeepers a b | a -> b where
-    computedKeepers :: a -> b
-
-class HasComputedLength a b | a -> b where
-    computedLength :: a -> b
-
-class HasComputedLower a b | a -> b where
-    computedLower :: a -> b
-
-class HasComputedMax a b | a -> b where
-    computedMax :: a -> b
-
-class HasComputedMin a b | a -> b where
-    computedMin :: a -> b
-
-class HasComputedMinLower a b | a -> b where
-    computedMinLower :: a -> b
-
-class HasComputedMinNumeric a b | a -> b where
-    computedMinNumeric :: a -> b
-
-class HasComputedMinSpecial a b | a -> b where
-    computedMinSpecial :: a -> b
-
-class HasComputedMinUpper a b | a -> b where
-    computedMinUpper :: a -> b
-
-class HasComputedNumber a b | a -> b where
-    computedNumber :: a -> b
-
-class HasComputedOverrideSpecial a b | a -> b where
-    computedOverrideSpecial :: a -> b
-
-class HasComputedPrefix a b | a -> b where
-    computedPrefix :: a -> b
+class HasComputedB64 a b | a -> b where
+    computedB64 :: a -> b
 
 class HasComputedResult a b | a -> b where
     computedResult :: a -> b
 
-class HasComputedResultCount a b | a -> b where
-    computedResultCount :: a -> b
+class HasComputedB64Std a b | a -> b where
+    computedB64Std :: a -> b
 
-class HasComputedSeed a b | a -> b where
-    computedSeed :: a -> b
+class HasComputedHex a b | a -> b where
+    computedHex :: a -> b
 
-class HasComputedSeparator a b | a -> b where
-    computedSeparator :: a -> b
-
-class HasComputedSpecial a b | a -> b where
-    computedSpecial :: a -> b
-
-class HasComputedUpper a b | a -> b where
-    computedUpper :: a -> b
+class HasComputedB64Url a b | a -> b where
+    computedB64Url :: a -> b

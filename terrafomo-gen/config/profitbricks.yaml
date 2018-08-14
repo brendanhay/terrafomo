@@ -1,4 +1,2 @@
-name: ProfitBricks
-package: terrafomo-profitbricks
-datatype: true
-original: profitbricks
+package-name: terrafomo-profitbricks
+provider-name: ProfitBricks

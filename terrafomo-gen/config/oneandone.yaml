@@ -1,4 +1,2 @@
-name: OneAndOne
-package: terrafomo-oneandone
-datatype: true
-original: oneandone
+package-name: terrafomo-oneandone
+provider-name: OneAndOne

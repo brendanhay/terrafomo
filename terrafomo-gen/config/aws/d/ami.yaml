@@ -1,3 +1,0 @@
-arguments:
-  _filter:
-    type: '[P.Ec2Filter s]'

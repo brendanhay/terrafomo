@@ -1,7 +1,5 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# LANGUAGE TemplateHaskell #-}
-
 -- |
 -- Module      : Terrafomo.Archive.Types
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,27 +8,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Terrafomo.Archive.Types
-    ( ArchiveSource (..)
-    , archiveSource
+module Terrafomo.Archive.Types where
 
-    , HasFilename   (..)
-    , HasContent    (..)
-    ) where
+-- import Data.Text (Text)
 
-import Data.Text (Text)
+-- import Terrafomo
 
-import GHC.Generics (Generic)
+-- import Formatting (Format, (%))
 
-import Terrafomo
-
-import qualified Terrafomo.TH as TH
-
-data ArchiveSource s = ArchiveSource
-    { _filename :: !(Attr s Text)
-    -- ^ Set this as the filename when declaring a source.
-    , _content  :: !(Attr s Text)
-    -- ^ Add this content to the archive with '_filename' as the filename.
-    } deriving (Show, Eq, Generic)
-
-$(TH.makeObject ''ArchiveSource)
+-- import Terrafomo.Archive.Lens
+-- import qualified Terrafomo.Attribute as TF
+-- import qualified Terrafomo.HCL as TF
+-- import qualified Terrafomo.Name as TF
+-- import qualified Terrafomo.Provider as TF
+-- import qualified Terrafomo.Schema as TF

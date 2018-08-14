@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+libraries=( $(${dir}/list-packages) )
+
+if [ "$#" -eq 0 ]; then
+  providers=( )
+else
+  providers=( "$@" )
+fi
+
+
+git_commit() {
+    local message="$1"
+    local target="$2"
+
+    if [ -n "$(git status --porcelain $target)" ]; then
+        echo "Committing $target"
+        git add $target && git commit -m "$message"
+    fi
+}
+
+git_reset() {
+    git reset >/dev/null
+}
+
+trap git_reset ERR
+
+echo "Resetting changes"
+git_reset
+
+for provider in ${providers[@]}; do
+    git_commit "Updating $provider configuration" "terrafomo-gen/config/${provider}.yaml"
+    git_commit "Updating $provider model" "terrafomo-gen/model/${provider}.json"
+    git_commit "Updating $provider intermediate representation" "terrafomo-gen/ir/${provider}.json"
+done
+
+for library in ${libraries[@]}; do
+    git_commit "Regenerating ${library##*/}" "$library"
+done
+
+echo "Done."

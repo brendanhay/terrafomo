@@ -1,4 +1,2 @@
-name: CenturyLinkCloud
-package: terrafomo-centurylinkcloud
-datatype: true
-original: clc
+package-name: terrafomo-centurylinkcloud
+provider-name: CenturyLinkCloud

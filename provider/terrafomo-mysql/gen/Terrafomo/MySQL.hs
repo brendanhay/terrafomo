@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.MySQL
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,12 +12,14 @@
 --
 module Terrafomo.MySQL
     ( module Terrafomo.MySQL.Types
-    , module Terrafomo.MySQL.Provider
+    , module Terrafomo.MySQL.Settings
     , module Terrafomo.MySQL.Lens
     , module Terrafomo.MySQL.Resource
+    , module Terrafomo.MySQL.Provider
     ) where
 
 import Terrafomo.MySQL.Lens
 import Terrafomo.MySQL.Provider
 import Terrafomo.MySQL.Resource
+import Terrafomo.MySQL.Settings
 import Terrafomo.MySQL.Types

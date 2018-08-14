@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Gitlab
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Gitlab
-    ( module Terrafomo.Gitlab.Types
-    , module Terrafomo.Gitlab.Provider
-    , module Terrafomo.Gitlab.Lens
-    , module Terrafomo.Gitlab.DataSource
+    ( module Terrafomo.Gitlab.Provider
     , module Terrafomo.Gitlab.Resource
+    , module Terrafomo.Gitlab.Types
+    , module Terrafomo.Gitlab.Lens
+    , module Terrafomo.Gitlab.Settings
+    , module Terrafomo.Gitlab.DataSource
     ) where
 
 import Terrafomo.Gitlab.DataSource
 import Terrafomo.Gitlab.Lens
 import Terrafomo.Gitlab.Provider
 import Terrafomo.Gitlab.Resource
+import Terrafomo.Gitlab.Settings
 import Terrafomo.Gitlab.Types

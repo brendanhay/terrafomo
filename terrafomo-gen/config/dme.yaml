@@ -1,4 +1,2 @@
-name: DNSMadeEasy
-package: terrafomo-dnsmadeeasy
-datatype: true
-original: dme
+package-name: terrafomo-dnsmadeeasy
+provider-name: DNSMadeEasy

@@ -1,4 +1,2 @@
-name: Cloudflare
-package: terrafomo-cloudflare
-datatype: true
-original: cloudflare
+package-name: terrafomo-cloudflare
+provider-name: Cloudflare

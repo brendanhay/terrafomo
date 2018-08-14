@@ -1,4 +1,2 @@
-name: AliCloud
-package: terrafomo-alicloud
-datatype: true
-original: alicloud
+package-name: terrafomo-alicloud
+provider-name: AliCloud

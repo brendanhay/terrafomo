@@ -1,4 +1,2 @@
-name: Datadog
-package: terrafomo-datadog
-datatype: true
-original: datadog
+package-name: terrafomo-datadog
+provider-name: Datadog

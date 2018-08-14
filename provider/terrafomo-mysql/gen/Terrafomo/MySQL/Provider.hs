@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,82 +17,95 @@
 --
 module Terrafomo.MySQL.Provider
     (
-    -- * Provider Datatype
-      MySQL (..)
-    , emptyMySQL
-
-    -- * Lenses
-    , providerEndpoint
-    , providerPassword
-    , providerUsername
+    -- * MySQL Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.MySQL.Settings
 
+import qualified Data.Hashable         as P
+import qualified Data.HashMap.Strict   as P
+import qualified Data.HashMap.Strict   as Map
+import qualified Data.List.NonEmpty    as P
+import qualified Data.Maybe            as P
+import qualified Data.Monoid           as P
 import qualified Data.Text             as P
+import qualified GHC.Generics          as P
+import qualified Lens.Micro            as P
+import qualified Prelude               as P
+import qualified Terrafomo.HCL         as TF
+import qualified Terrafomo.MySQL.Lens  as P
 import qualified Terrafomo.MySQL.Types as P
+import qualified Terrafomo.Name        as TF
+import qualified Terrafomo.Provider    as TF
+import qualified Terrafomo.Validator   as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @MySQL@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/MySQL/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _endpoint :: P.Text
+    -- ^ @endpoint@ - (Required)
+    --
+    , _password :: P.Maybe P.Text
+    -- ^ @password@ - (Optional)
+    --
+    , _username :: P.Text
+    -- ^ @username@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | MySQL Terraform provider.
+newProvider
+    :: P.Text -- ^ @endpoint@ - 'P.endpoint'
+    -> P.Text -- ^ @username@ - 'P.username'
+    -> Provider
+newProvider _endpoint _username =
+    Provider'
+        { _endpoint = _endpoint
+        , _password = P.Nothing
+        , _username = _username
+        }
 
-<http://www.mysql.com> is a relational database server. The MySQL provider
-exposes resources used to manage the configuration of resources in a MySQL
-server. Use the navigation to the left to read about the available
-resources.
--}
-data MySQL = MySQL {
-      _endpoint :: !(Maybe P.Text)
-    {- ^ (Required) The address of the MySQL server to use. Most often a "hostname:port" pair, but may also be an absolute path to a Unix socket when the host OS is Unix-compatible. -}
-    , _password :: !(Maybe P.Text)
-    {- ^ (Optional) Password for the given user, if that user has a password. -}
-    , _username :: !(Maybe P.Text)
-    {- ^ (Required) Username to use to authenticate with the server. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable MySQL
-
-instance TF.IsSection MySQL where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (MySQL))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "endpoint" <$> _endpoint x
-                  , TF.assign "password" <$> _password x
-                  , TF.assign "username" <$> _username x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "endpoint" _endpoint
+                  , TF.assign "password" <$> _password
+                  , P.Just $ TF.assign "username" _username
                   ])
 
-instance TF.IsProvider MySQL where
-    type ProviderType MySQL = "mysql"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyMySQL :: MySQL
-emptyMySQL = MySQL {
-        _endpoint = Nothing
-      , _password = Nothing
-      , _username = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerEndpoint :: Lens' MySQL (Maybe P.Text)
-providerEndpoint =
-    lens _endpoint (\s a -> s { _endpoint = a })
+instance P.HasEndpoint (Provider) (P.Text) where
+    endpoint =
+        P.lens (_endpoint :: Provider -> P.Text)
+               (\s a -> s { _endpoint = a } :: Provider)
 
-providerPassword :: Lens' MySQL (Maybe P.Text)
-providerPassword =
-    lens _password (\s a -> s { _password = a })
+instance P.HasPassword (Provider) (P.Maybe P.Text) where
+    password =
+        P.lens (_password :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _password = a } :: Provider)
 
-providerUsername :: Lens' MySQL (Maybe P.Text)
-providerUsername =
-    lens _username (\s a -> s { _username = a })
+instance P.HasUsername (Provider) (P.Text) where
+    username =
+        P.lens (_username :: Provider -> P.Text)
+               (\s a -> s { _username = a } :: Provider)

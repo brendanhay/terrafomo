@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Nomad
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,15 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Nomad
-    ( module Terrafomo.Nomad.Types
+    ( module Terrafomo.Nomad.Lens
+    , module Terrafomo.Nomad.Settings
     , module Terrafomo.Nomad.Provider
-    , module Terrafomo.Nomad.Lens
-    , module Terrafomo.Nomad.DataSource
     , module Terrafomo.Nomad.Resource
+    , module Terrafomo.Nomad.Types
+    , module Terrafomo.Nomad.DataSource
     ) where
 
 import Terrafomo.Nomad.DataSource
 import Terrafomo.Nomad.Lens
 import Terrafomo.Nomad.Provider
 import Terrafomo.Nomad.Resource
+import Terrafomo.Nomad.Settings
 import Terrafomo.Nomad.Types

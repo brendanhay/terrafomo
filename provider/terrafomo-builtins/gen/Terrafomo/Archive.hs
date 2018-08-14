@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Archive
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,11 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Archive
-    ( module Terrafomo.Archive.Types
+    ( module Terrafomo.Archive.Settings
     , module Terrafomo.Archive.Lens
+    , module Terrafomo.Archive.Resource
+    , module Terrafomo.Archive.Provider
     , module Terrafomo.Archive.DataSource
+    , module Terrafomo.Archive.Types
     ) where
 
 import Terrafomo.Archive.DataSource
 import Terrafomo.Archive.Lens
+import Terrafomo.Archive.Provider
+import Terrafomo.Archive.Resource
+import Terrafomo.Archive.Settings
 import Terrafomo.Archive.Types

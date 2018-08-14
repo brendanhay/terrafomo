@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,73 +17,98 @@
 --
 module Terrafomo.DNSimple.Provider
     (
-    -- * Provider Datatype
-      DNSimple (..)
-    , emptyDNSimple
-
-    -- * Lenses
-    , providerAccount
-    , providerToken
+    -- * DNSimple Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.DNSimple.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
+import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
+import qualified GHC.Generics             as P
+import qualified Lens.Micro               as P
+import qualified Prelude                  as P
+import qualified Terrafomo.DNSimple.Lens  as P
 import qualified Terrafomo.DNSimple.Types as P
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.Validator      as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @DNSimple@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/DNSimple/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _account :: P.Text
+    -- ^ @account@ - (Required)
+    -- The account for API operations.
+    --
+    , _email   :: P.Maybe P.Text
+    -- ^ @email@ - (Optional)
+    -- The DNSimple account email address.
+    --
+    , _token   :: P.Text
+    -- ^ @token@ - (Required)
+    -- The API v2 token for API operations.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | DNSimple Terraform provider.
+newProvider
+    :: P.Text -- ^ @account@ - 'P.account'
+    -> P.Text -- ^ @token@ - 'P.token'
+    -> Provider
+newProvider _account _token =
+    Provider'
+        { _account = _account
+        , _email = P.Nothing
+        , _token = _token
+        }
 
-The DNSimple provider is used to interact with the resources supported by
-DNSimple. The provider needs to be configured with the proper credentials
-before it can be used. Use the navigation to the left to read about the
-available resources.
--}
-data DNSimple = DNSimple {
-      _account :: !(Maybe P.Text)
-    {- ^ (Required) The ID of the account associated with the token. It must be provided, but it can also be sourced from the @DNSIMPLE_ACCOUNT@ environment variable. -}
-    , _token   :: !(Maybe P.Text)
-    {- ^ (Required) The DNSimple API v2 token. It must be provided, but it can also be sourced from the @DNSIMPLE_TOKEN@ environment variable. Please note that this must be an <https://support.dnsimple.com/articles/api-access-token/> . You can use either an User or Account token, but an Account token is recommended. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable DNSimple
-
-instance TF.IsSection DNSimple where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (DNSimple))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "account" <$> _account x
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "account" _account
+                  , TF.assign "email" <$> _email
+                  , P.Just $ TF.assign "token" _token
                   ])
 
-instance TF.IsProvider DNSimple where
-    type ProviderType DNSimple = "dnsimple"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyDNSimple :: DNSimple
-emptyDNSimple = DNSimple {
-        _account = Nothing
-      , _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAccount :: Lens' DNSimple (Maybe P.Text)
-providerAccount =
-    lens _account (\s a -> s { _account = a })
+instance P.HasAccount (Provider) (P.Text) where
+    account =
+        P.lens (_account :: Provider -> P.Text)
+               (\s a -> s { _account = a } :: Provider)
 
-providerToken :: Lens' DNSimple (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasEmail (Provider) (P.Maybe P.Text) where
+    email =
+        P.lens (_email :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _email = a } :: Provider)
+
+instance P.HasToken (Provider) (P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Text)
+               (\s a -> s { _token = a } :: Provider)

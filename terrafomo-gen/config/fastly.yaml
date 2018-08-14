@@ -1,4 +1,2 @@
-name: Fastly
-package: terrafomo-fastly
-datatype: true
-original: fastly
+package-name: terrafomo-fastly
+provider-name: Fastly

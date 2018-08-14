@@ -10,7 +10,11 @@ module {{ namespace }} where
 
 -- import Formatting (Format, (%))
 
-{% for import in imports %}
--- import qualified {{ import.value }} as TF
+{% for import in unqualified %}
+-- import {{ import.value }}
 {% endfor %}
--- import qualified Terrafomo.HCL as HCL
+-- import qualified Terrafomo.Attribute as TF
+-- import qualified Terrafomo.HCL as TF
+-- import qualified Terrafomo.Name as TF
+-- import qualified Terrafomo.Provider as TF
+-- import qualified Terrafomo.Schema as TF

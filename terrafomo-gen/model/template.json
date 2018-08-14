@@ -1,0 +1,394 @@
+{
+  "name": "template",
+  "schemas": [],
+  "resources": [
+    {
+      "name": "template_cloudinit_config",
+      "schemas": [
+        {
+          "name": "base64_encode",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "true"
+        },
+        {
+          "name": "gzip",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "true"
+        },
+        {
+          "name": "part",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "part",
+            "schemas": [
+              {
+                "name": "content",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "content_type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "filename",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "merge_type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "rendered",
+          "type": "TypeString",
+          "description": "rendered cloudinit configuration",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "template_dir",
+      "schemas": [
+        {
+          "name": "destination_dir",
+          "type": "TypeString",
+          "description": "Path to the directory where the templated files will be written",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "source_dir",
+          "type": "TypeString",
+          "description": "Path to the directory where the files to template reside",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vars",
+          "type": "TypeMap",
+          "description": "Variables to substitute",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "template_file",
+      "schemas": [
+        {
+          "name": "filename",
+          "type": "TypeString",
+          "description": "file to read template from",
+          "deprecated": "Use the 'template' attribute instead.",
+          "conflictsWith": [
+            "template"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "rendered",
+          "type": "TypeString",
+          "description": "rendered template",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "template",
+          "type": "TypeString",
+          "description": "Contents of the template",
+          "conflictsWith": [
+            "filename"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vars",
+          "type": "TypeMap",
+          "description": "variables to substitute",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": [
+    {
+      "name": "template_cloudinit_config",
+      "schemas": [
+        {
+          "name": "base64_encode",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "true"
+        },
+        {
+          "name": "gzip",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "true"
+        },
+        {
+          "name": "part",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "part",
+            "schemas": [
+              {
+                "name": "content",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "content_type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "filename",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "merge_type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "rendered",
+          "type": "TypeString",
+          "description": "rendered cloudinit configuration",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "template_file",
+      "schemas": [
+        {
+          "name": "filename",
+          "type": "TypeString",
+          "description": "file to read template from",
+          "deprecated": "Use the 'template' attribute instead.",
+          "conflictsWith": [
+            "template"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "rendered",
+          "type": "TypeString",
+          "description": "rendered template",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "template",
+          "type": "TypeString",
+          "description": "Contents of the template",
+          "conflictsWith": [
+            "filename"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vars",
+          "type": "TypeMap",
+          "description": "variables to substitute",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ]
+}

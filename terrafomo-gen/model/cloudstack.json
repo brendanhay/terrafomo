@@ -1,0 +1,2882 @@
+{
+  "name": "cloudstack",
+  "schemas": [
+    {
+      "name": "api_key",
+      "type": "TypeString",
+      "conflictsWith": [
+        "config",
+        "profile"
+      ],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "api_url",
+      "type": "TypeString",
+      "conflictsWith": [
+        "config",
+        "profile"
+      ],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "config",
+      "type": "TypeString",
+      "conflictsWith": [
+        "api_url",
+        "api_key",
+        "secret_key"
+      ],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "http_get_only",
+      "type": "TypeBool",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "profile",
+      "type": "TypeString",
+      "conflictsWith": [
+        "api_url",
+        "api_key",
+        "secret_key"
+      ],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "secret_key",
+      "type": "TypeString",
+      "conflictsWith": [
+        "config",
+        "profile"
+      ],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "timeout",
+      "type": "TypeInt",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    }
+  ],
+  "resources": [
+    {
+      "name": "cloudstack_affinity_group",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_disk",
+      "schemas": [
+        {
+          "name": "attach",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "device_id",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "disk_offering",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "shrink_ok",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "size",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "virtual_machine_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_egress_firewall",
+      "schemas": [
+        {
+          "name": "managed",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "network_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "parallelism",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "2"
+        },
+        {
+          "name": "rule",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "rule",
+            "schemas": [
+              {
+                "name": "cidr_list",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "cidr_list",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "icmp_code",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "icmp_type",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ports",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "ports",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "protocol",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "uuids",
+                "type": "TypeMap",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_firewall",
+      "schemas": [
+        {
+          "name": "ip_address_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "managed",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "parallelism",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "2"
+        },
+        {
+          "name": "rule",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "rule",
+            "schemas": [
+              {
+                "name": "cidr_list",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "cidr_list",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "icmp_code",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "icmp_type",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ports",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "ports",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "protocol",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "uuids",
+                "type": "TypeMap",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_instance",
+      "schemas": [
+        {
+          "name": "affinity_group_ids",
+          "type": "TypeSet",
+          "conflictsWith": [
+            "affinity_group_names"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "affinity_group_ids",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "affinity_group_names",
+          "type": "TypeSet",
+          "conflictsWith": [
+            "affinity_group_ids"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "affinity_group_names",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "display_name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "expunge",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "group",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ip_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "keypair",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "root_disk_size",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "security_group_ids",
+          "type": "TypeSet",
+          "conflictsWith": [
+            "security_group_names"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "security_group_ids",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "security_group_names",
+          "type": "TypeSet",
+          "conflictsWith": [
+            "security_group_ids"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "security_group_names",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "service_offering",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "template",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "user_data",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_ipaddress",
+      "schemas": [
+        {
+          "name": "ip_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_portable",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "network_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_loadbalancer_rule",
+      "schemas": [
+        {
+          "name": "algorithm",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ip_address_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "member_ids",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "member_ids",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "private_port",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "protocol",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "public_port",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_network",
+      "schemas": [
+        {
+          "name": "acl_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "none"
+        },
+        {
+          "name": "cidr",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "display_text",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "endip",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "gateway",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_domain",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_offering",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "startip",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vlan",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_network_acl",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_network_acl_rule",
+      "schemas": [
+        {
+          "name": "acl_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "managed",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "parallelism",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "2"
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "rule",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "rule",
+            "schemas": [
+              {
+                "name": "action",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "allow"
+              },
+              {
+                "name": "cidr_list",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "cidr_list",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "icmp_code",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "icmp_type",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ports",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "ports",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "protocol",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "traffic_type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "ingress"
+              },
+              {
+                "name": "uuids",
+                "type": "TypeMap",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_nic",
+      "schemas": [
+        {
+          "name": "ip_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "virtual_machine_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_port_forward",
+      "schemas": [
+        {
+          "name": "forward",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "forward",
+            "schemas": [
+              {
+                "name": "private_port",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "protocol",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "public_port",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "uuid",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "virtual_machine_id",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "vm_guest_ip",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "ip_address_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "managed",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_private_gateway",
+      "schemas": [
+        {
+          "name": "acl_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "gateway",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ip_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "netmask",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_offering",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "physical_network_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vlan",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_secondary_ipaddress",
+      "schemas": [
+        {
+          "name": "ip_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "nic_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "virtual_machine_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_security_group",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_security_group_rule",
+      "schemas": [
+        {
+          "name": "parallelism",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "2"
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "rule",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "rule",
+            "schemas": [
+              {
+                "name": "cidr_list",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "cidr_list",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "icmp_code",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "icmp_type",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ports",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "ports",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "protocol",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "traffic_type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "ingress"
+              },
+              {
+                "name": "user_security_group_list",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "user_security_group_list",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "uuids",
+                "type": "TypeMap",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "security_group_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_ssh_keypair",
+      "schemas": [
+        {
+          "name": "fingerprint",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "private_key",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "public_key",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_static_nat",
+      "schemas": [
+        {
+          "name": "ip_address_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "virtual_machine_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vm_guest_ip",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_static_route",
+      "schemas": [
+        {
+          "name": "cidr",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "gateway_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_template",
+      "schemas": [
+        {
+          "name": "display_text",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "format",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "hypervisor",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_dynamically_scalable",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_extractable",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_featured",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_public",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_ready",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "is_ready_timeout",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "300"
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "os_type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "password_enabled",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "url",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_vpc",
+      "schemas": [
+        {
+          "name": "cidr",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "display_text",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_domain",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "source_nat_ip",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_offering",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_vpn_connection",
+      "schemas": [
+        {
+          "name": "customer_gateway_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpn_gateway_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_vpn_customer_gateway",
+      "schemas": [
+        {
+          "name": "cidr",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "dpd",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "esp_lifetime",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "esp_policy",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "gateway",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ike_lifetime",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ike_policy",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ipsec_psk",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "project",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "cloudstack_vpn_gateway",
+      "schemas": [
+        {
+          "name": "public_ip",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": [
+    {
+      "name": "cloudstack_template",
+      "schemas": [
+        {
+          "name": "account",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "created",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "display_text",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "filter",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "filter",
+            "schemas": [
+              {
+                "name": "name",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "value",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "format",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "hypervisor",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "size",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "tags",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "template_filter",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "template_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ]
+}

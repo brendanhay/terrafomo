@@ -1,4 +1,2 @@
-name: NewRelic
-package: terrafomo-newrelic
-datatype: true
-original: newrelic
+package-name: terrafomo-newrelic
+provider-name: NewRelic

@@ -1,11 +1,26 @@
-module Terrafomo.Gen.JSON where
+module Terrafomo.Gen.JSON
+   ( module Data.Aeson
+   , encodeFile
+   , options
+   ) where
 
-import qualified Data.Aeson as JSON
-import qualified Data.Char  as Char
+import Data.Aeson
+import Data.Aeson.Encode.Pretty (encodePretty)
+import Data.Maybe               (fromMaybe)
 
-options :: String -> JSON.Options
+import qualified Data.ByteString.Lazy as LBS
+import qualified Data.Char            as Char
+import qualified Data.List            as List
+
+encodeFile :: ToJSON a => FilePath -> a -> IO ()
+encodeFile path = LBS.writeFile path . encodePretty
+
+options :: String -> Options
 options prefix =
-    JSON.defaultOptions
-        { JSON.fieldLabelModifier     = map Char.toLower . drop (length prefix)
-        , JSON.constructorTagModifier = JSON.camelTo2 '_'
+    defaultOptions
+        { constructorTagModifier = camelTo2 '_'
+        , fieldLabelModifier     = \s ->
+              case fromMaybe s (List.stripPrefix prefix s) of
+                  x:xs -> Char.toLower x : xs
+                  _    -> s
         }

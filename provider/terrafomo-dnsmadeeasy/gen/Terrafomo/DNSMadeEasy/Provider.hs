@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,82 +17,99 @@
 --
 module Terrafomo.DNSMadeEasy.Provider
     (
-    -- * Provider Datatype
-      DNSMadeEasy (..)
-    , emptyDNSMadeEasy
-
-    -- * Lenses
-    , providerAkey
-    , providerSkey
-    , providerUsesandbox
+    -- * DNSMadeEasy Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.DNSMadeEasy.Settings
 
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
+import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
+import qualified GHC.Generics                as P
+import qualified Lens.Micro                  as P
+import qualified Prelude                     as P
+import qualified Terrafomo.DNSMadeEasy.Lens  as P
 import qualified Terrafomo.DNSMadeEasy.Types as P
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.Provider          as TF
+import qualified Terrafomo.Validator         as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @DNSMadeEasy@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/DNSMadeEasy/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _akey       :: P.Text
+    -- ^ @akey@ - (Required)
+    -- A DNSMadeEasy API Key.
+    --
+    , _skey       :: P.Text
+    -- ^ @skey@ - (Required)
+    -- The Secret Key for API operations.
+    --
+    , _usesandbox :: P.Bool
+    -- ^ @usesandbox@ - (Required)
+    -- If true, use the DME Sandbox.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | DNSMadeEasy Terraform provider.
+newProvider
+    :: P.Text -- ^ @akey@ - 'P.akey'
+    -> P.Text -- ^ @skey@ - 'P.skey'
+    -> P.Bool -- ^ @usesandbox@ - 'P.usesandbox'
+    -> Provider
+newProvider _akey _skey _usesandbox =
+    Provider'
+        { _akey = _akey
+        , _skey = _skey
+        , _usesandbox = _usesandbox
+        }
 
-The DNSMadeEasy provider is used to interact with the resources supported by
-DNSMadeEasy. The provider needs to be configured with the proper credentials
-before it can be used. Use the navigation to the left to read about the
-available resources.
--}
-data DNSMadeEasy = DNSMadeEasy {
-      _akey       :: !(Maybe P.Text)
-    {- ^ (Required) The DNSMadeEasy API key. This can also be specified with the @DME_AKEY@ shell environment variable. -}
-    , _skey       :: !(Maybe P.Text)
-    {- ^ (Required) The DNSMadeEasy Secret key. This can also be specified with the @DME_SKEY@ shell environment variable. -}
-    , _usesandbox :: !(Maybe P.Text)
-    {- ^ (Optional) If true, the DNSMadeEasy sandbox will be used. This can also be specified with the @DME_USESANDBOX@ shell environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable DNSMadeEasy
-
-instance TF.IsSection DNSMadeEasy where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (DNSMadeEasy))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "akey" <$> _akey x
-                  , TF.assign "skey" <$> _skey x
-                  , TF.assign "usesandbox" <$> _usesandbox x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "akey" _akey
+                  , P.Just $ TF.assign "skey" _skey
+                  , P.Just $ TF.assign "usesandbox" _usesandbox
                   ])
 
-instance TF.IsProvider DNSMadeEasy where
-    type ProviderType DNSMadeEasy = "dme"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyDNSMadeEasy :: DNSMadeEasy
-emptyDNSMadeEasy = DNSMadeEasy {
-        _akey = Nothing
-      , _skey = Nothing
-      , _usesandbox = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerAkey :: Lens' DNSMadeEasy (Maybe P.Text)
-providerAkey =
-    lens _akey (\s a -> s { _akey = a })
+instance P.HasAkey (Provider) (P.Text) where
+    akey =
+        P.lens (_akey :: Provider -> P.Text)
+               (\s a -> s { _akey = a } :: Provider)
 
-providerSkey :: Lens' DNSMadeEasy (Maybe P.Text)
-providerSkey =
-    lens _skey (\s a -> s { _skey = a })
+instance P.HasSkey (Provider) (P.Text) where
+    skey =
+        P.lens (_skey :: Provider -> P.Text)
+               (\s a -> s { _skey = a } :: Provider)
 
-providerUsesandbox :: Lens' DNSMadeEasy (Maybe P.Text)
-providerUsesandbox =
-    lens _usesandbox (\s a -> s { _usesandbox = a })
+instance P.HasUsesandbox (Provider) (P.Bool) where
+    usesandbox =
+        P.lens (_usesandbox :: Provider -> P.Bool)
+               (\s a -> s { _usesandbox = a } :: Provider)

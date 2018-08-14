@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,100 +17,121 @@
 --
 module Terrafomo.Cobbler.Provider
     (
-    -- * Provider Datatype
-      Cobbler (..)
-    , emptyCobbler
-
-    -- * Lenses
-    , providerCacertFile
-    , providerInsecure
-    , providerPassword
-    , providerUrl
-    , providerUsername
+    -- * Cobbler Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Cobbler.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.Cobbler.Lens  as P
 import qualified Terrafomo.Cobbler.Types as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Cobbler@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Cobbler/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _cacertFile :: P.Maybe P.Text
+    -- ^ @cacert_file@ - (Optional)
+    -- The path or contents of an SSL CA certificate
+    --
+    , _insecure   :: P.Maybe P.Bool
+    -- ^ @insecure@ - (Optional)
+    -- Ignore SSL certificate warnings and errors.
+    --
+    , _password   :: P.Text
+    -- ^ @password@ - (Required)
+    -- The password for accessing Cobbler.
+    --
+    , _url        :: P.Text
+    -- ^ @url@ - (Required)
+    -- Cobbler URL
+    --
+    , _username   :: P.Text
+    -- ^ @username@ - (Required)
+    -- The username for accessing Cobbler.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Cobbler Terraform provider.
+newProvider
+    :: P.Text -- ^ @password@ - 'P.password'
+    -> P.Text -- ^ @url@ - 'P.url'
+    -> P.Text -- ^ @username@ - 'P.username'
+    -> Provider
+newProvider _password _url _username =
+    Provider'
+        { _cacertFile = P.Nothing
+        , _insecure = P.Nothing
+        , _password = _password
+        , _url = _url
+        , _username = _username
+        }
 
-The Cobbler provider is used to interact with a locally installed
-<http://cobbler.github.io> service. The provider needs to be configured with
-the proper credentials before it can be used. Use the navigation to the left
-to read about the available resources.
--}
-data Cobbler = Cobbler {
-      _cacert_file :: !(Maybe P.Text)
-    {- ^ (Optional) The path or contents of an SSL CA certificate. This can also be specified with the @COBBLER_CACERT_FILE@ shell environment variable. -}
-    , _insecure    :: !(Maybe P.Text)
-    {- ^ (Optional) Ignore SSL certificate warnings and errors. This can also be specified with the @COBBLER_INSECURE@ shell environment variable. -}
-    , _password    :: !(Maybe P.Text)
-    {- ^ (Required) The password to the Cobbler service. This can also be specified with the @COBBLER_PASSWORD@ shell environment variable. -}
-    , _url         :: !(Maybe P.Text)
-    {- ^ (Required) The url to the Cobbler service. This can also be specified with the @COBBLER_URL@ shell environment variable. -}
-    , _username    :: !(Maybe P.Text)
-    {- ^ (Required) The username to the Cobbler service. This can also be specified with the @COBBLER_USERNAME@ shell environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Cobbler
-
-instance TF.IsSection Cobbler where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Cobbler))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "cacert_file" <$> _cacert_file x
-                  , TF.assign "insecure" <$> _insecure x
-                  , TF.assign "password" <$> _password x
-                  , TF.assign "url" <$> _url x
-                  , TF.assign "username" <$> _username x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "cacert_file" <$> _cacertFile
+                  , TF.assign "insecure" <$> _insecure
+                  , P.Just $ TF.assign "password" _password
+                  , P.Just $ TF.assign "url" _url
+                  , P.Just $ TF.assign "username" _username
                   ])
 
-instance TF.IsProvider Cobbler where
-    type ProviderType Cobbler = "cobbler"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyCobbler :: Cobbler
-emptyCobbler = Cobbler {
-        _cacert_file = Nothing
-      , _insecure = Nothing
-      , _password = Nothing
-      , _url = Nothing
-      , _username = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerCacertFile :: Lens' Cobbler (Maybe P.Text)
-providerCacertFile =
-    lens _cacert_file (\s a -> s { _cacert_file = a })
+instance P.HasCacertFile (Provider) (P.Maybe P.Text) where
+    cacertFile =
+        P.lens (_cacertFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _cacertFile = a } :: Provider)
 
-providerInsecure :: Lens' Cobbler (Maybe P.Text)
-providerInsecure =
-    lens _insecure (\s a -> s { _insecure = a })
+instance P.HasInsecure (Provider) (P.Maybe P.Bool) where
+    insecure =
+        P.lens (_insecure :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _insecure = a } :: Provider)
 
-providerPassword :: Lens' Cobbler (Maybe P.Text)
-providerPassword =
-    lens _password (\s a -> s { _password = a })
+instance P.HasPassword (Provider) (P.Text) where
+    password =
+        P.lens (_password :: Provider -> P.Text)
+               (\s a -> s { _password = a } :: Provider)
 
-providerUrl :: Lens' Cobbler (Maybe P.Text)
-providerUrl =
-    lens _url (\s a -> s { _url = a })
+instance P.HasUrl (Provider) (P.Text) where
+    url =
+        P.lens (_url :: Provider -> P.Text)
+               (\s a -> s { _url = a } :: Provider)
 
-providerUsername :: Lens' Cobbler (Maybe P.Text)
-providerUsername =
-    lens _username (\s a -> s { _username = a })
+instance P.HasUsername (Provider) (P.Text) where
+    username =
+        P.lens (_username :: Provider -> P.Text)
+               (\s a -> s { _username = a } :: Provider)

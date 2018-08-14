@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Chef
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Chef
-    ( module Terrafomo.Chef.Types
-    , module Terrafomo.Chef.Provider
+    ( module Terrafomo.Chef.Settings
     , module Terrafomo.Chef.Lens
+    , module Terrafomo.Chef.Provider
     , module Terrafomo.Chef.Resource
+    , module Terrafomo.Chef.Types
     ) where
 
 import Terrafomo.Chef.Lens
 import Terrafomo.Chef.Provider
 import Terrafomo.Chef.Resource
+import Terrafomo.Chef.Settings
 import Terrafomo.Chef.Types

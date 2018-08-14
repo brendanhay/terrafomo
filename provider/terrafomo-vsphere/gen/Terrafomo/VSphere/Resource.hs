@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,3530 +17,5472 @@
 --
 module Terrafomo.VSphere.Resource
     (
-    -- * Types
-      ComputeClusterHostGroupResource (..)
-    , computeClusterHostGroupResource
-
-    , ComputeClusterResource (..)
+    -- * Resource Datatypes
+    -- ** vsphere_compute_cluster
+      ComputeClusterResource (..)
     , computeClusterResource
 
+    -- ** vsphere_compute_cluster_host_group
+    , ComputeClusterHostGroupResource (..)
+    , computeClusterHostGroupResource
+
+    -- ** vsphere_compute_cluster_vm_affinity_rule
     , ComputeClusterVmAffinityRuleResource (..)
     , computeClusterVmAffinityRuleResource
 
+    -- ** vsphere_compute_cluster_vm_anti_affinity_rule
     , ComputeClusterVmAntiAffinityRuleResource (..)
     , computeClusterVmAntiAffinityRuleResource
 
+    -- ** vsphere_compute_cluster_vm_dependency_rule
     , ComputeClusterVmDependencyRuleResource (..)
     , computeClusterVmDependencyRuleResource
 
+    -- ** vsphere_compute_cluster_vm_group
     , ComputeClusterVmGroupResource (..)
     , computeClusterVmGroupResource
 
+    -- ** vsphere_compute_cluster_vm_host_rule
     , ComputeClusterVmHostRuleResource (..)
     , computeClusterVmHostRuleResource
 
+    -- ** vsphere_custom_attribute
     , CustomAttributeResource (..)
     , customAttributeResource
 
+    -- ** vsphere_datacenter
     , DatacenterResource (..)
     , datacenterResource
 
+    -- ** vsphere_datastore_cluster
     , DatastoreClusterResource (..)
     , datastoreClusterResource
 
+    -- ** vsphere_datastore_cluster_vm_anti_affinity_rule
     , DatastoreClusterVmAntiAffinityRuleResource (..)
     , datastoreClusterVmAntiAffinityRuleResource
 
+    -- ** vsphere_distributed_port_group
     , DistributedPortGroupResource (..)
     , distributedPortGroupResource
 
+    -- ** vsphere_distributed_virtual_switch
     , DistributedVirtualSwitchResource (..)
     , distributedVirtualSwitchResource
 
+    -- ** vsphere_dpm_host_override
     , DpmHostOverrideResource (..)
     , dpmHostOverrideResource
 
+    -- ** vsphere_drs_vm_override
     , DrsVmOverrideResource (..)
     , drsVmOverrideResource
 
+    -- ** vsphere_file
     , FileResource (..)
     , fileResource
 
+    -- ** vsphere_folder
     , FolderResource (..)
     , folderResource
 
+    -- ** vsphere_ha_vm_override
     , HaVmOverrideResource (..)
     , haVmOverrideResource
 
+    -- ** vsphere_host_port_group
     , HostPortGroupResource (..)
     , hostPortGroupResource
 
+    -- ** vsphere_host_virtual_switch
     , HostVirtualSwitchResource (..)
     , hostVirtualSwitchResource
 
+    -- ** vsphere_license
     , LicenseResource (..)
     , licenseResource
 
+    -- ** vsphere_nas_datastore
     , NasDatastoreResource (..)
     , nasDatastoreResource
 
+    -- ** vsphere_resource_pool
     , ResourcePoolResource (..)
     , resourcePoolResource
 
+    -- ** vsphere_storage_drs_vm_override
     , StorageDrsVmOverrideResource (..)
     , storageDrsVmOverrideResource
 
-    , TagCategoryResource (..)
-    , tagCategoryResource
-
+    -- ** vsphere_tag
     , TagResource (..)
     , tagResource
 
+    -- ** vsphere_tag_category
+    , TagCategoryResource (..)
+    , tagCategoryResource
+
+    -- ** vsphere_vapp_container
     , VappContainerResource (..)
     , vappContainerResource
 
+    -- ** vsphere_virtual_disk
     , VirtualDiskResource (..)
     , virtualDiskResource
 
+    -- ** vsphere_virtual_machine
     , VirtualMachineResource (..)
     , virtualMachineResource
 
+    -- ** vsphere_virtual_machine_snapshot
     , VirtualMachineSnapshotResource (..)
     , virtualMachineSnapshotResource
 
+    -- ** vsphere_vmfs_datastore
     , VmfsDatastoreResource (..)
     , vmfsDatastoreResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAccessMode (..)
-    , P.HasAdapterType (..)
-    , P.HasAffinityHostGroupName (..)
-    , P.HasAntiAffinityHostGroupName (..)
-    , P.HasAssociableTypes (..)
-    , P.HasAutoExpand (..)
-    , P.HasCardinality (..)
-    , P.HasCategoryId (..)
-    , P.HasComputeClusterId (..)
-    , P.HasConsolidate (..)
-    , P.HasContactDetail (..)
-    , P.HasContactName (..)
-    , P.HasCpuExpandable (..)
-    , P.HasCpuLimit (..)
-    , P.HasCpuReservation (..)
-    , P.HasCpuShareLevel (..)
-    , P.HasCpuShares (..)
-    , P.HasCreateDirectories (..)
-    , P.HasDatacenter (..)
-    , P.HasDatacenterId (..)
-    , P.HasDatastore (..)
-    , P.HasDatastoreClusterId (..)
-    , P.HasDependencyVmGroupName (..)
-    , P.HasDescription (..)
-    , P.HasDestinationFile (..)
-    , P.HasDisks (..)
-    , P.HasDistributedVirtualSwitchUuid (..)
-    , P.HasDpmAutomationLevel (..)
-    , P.HasDpmEnabled (..)
-    , P.HasDrsAutomationLevel (..)
-    , P.HasDrsEnabled (..)
-    , P.HasEnabled (..)
-    , P.HasFolder (..)
-    , P.HasHostSystemId (..)
-    , P.HasHostSystemIds (..)
-    , P.HasIpv4Address (..)
-    , P.HasLabels (..)
-    , P.HasLacpApiVersion (..)
-    , P.HasLicenseKey (..)
-    , P.HasLinkDiscoveryOperation (..)
-    , P.HasLinkDiscoveryProtocol (..)
-    , P.HasManagedObjectType (..)
-    , P.HasMandatory (..)
-    , P.HasMaxMtu (..)
-    , P.HasMemory (..)
-    , P.HasMemoryExpandable (..)
-    , P.HasMemoryLimit (..)
-    , P.HasMemoryReservation (..)
-    , P.HasMemoryShareLevel (..)
-    , P.HasMemoryShares (..)
-    , P.HasMtu (..)
-    , P.HasMulticastFilteringMode (..)
-    , P.HasName (..)
-    , P.HasNumberOfPorts (..)
-    , P.HasParentFolderId (..)
-    , P.HasParentResourcePoolId (..)
-    , P.HasPath (..)
-    , P.HasQuiesce (..)
-    , P.HasRemoteHosts (..)
-    , P.HasRemotePath (..)
-    , P.HasRemoveChildren (..)
-    , P.HasResourcePoolId (..)
-    , P.HasSdrsAutomationLevel (..)
-    , P.HasSdrsEnabled (..)
-    , P.HasSdrsIntraVmAffinity (..)
-    , P.HasSecurityType (..)
-    , P.HasSize (..)
-    , P.HasSnapshotName (..)
-    , P.HasSourceDatacenter (..)
-    , P.HasSourceDatastore (..)
-    , P.HasSourceFile (..)
-    , P.HasTags (..)
-    , P.HasType' (..)
-    , P.HasVersion (..)
-    , P.HasVirtualMachineId (..)
-    , P.HasVirtualMachineIds (..)
-    , P.HasVirtualMachineUuid (..)
-    , P.HasVirtualSwitchName (..)
-    , P.HasVlanId (..)
-    , P.HasVmGroupName (..)
-    , P.HasVmdkPath (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAccessMode (..)
-    , P.HasComputedAccessible (..)
-    , P.HasComputedAdapterType (..)
-    , P.HasComputedAffinityHostGroupName (..)
-    , P.HasComputedAntiAffinityHostGroupName (..)
-    , P.HasComputedAssociableTypes (..)
-    , P.HasComputedAutoExpand (..)
-    , P.HasComputedCapacity (..)
-    , P.HasComputedCardinality (..)
-    , P.HasComputedCategoryId (..)
-    , P.HasComputedChangeVersion (..)
-    , P.HasComputedComputeClusterId (..)
-    , P.HasComputedComputedPolicy (..)
-    , P.HasComputedConfigVersion (..)
-    , P.HasComputedConsolidate (..)
-    , P.HasComputedContactDetail (..)
-    , P.HasComputedContactName (..)
-    , P.HasComputedCpuExpandable (..)
-    , P.HasComputedCpuLimit (..)
-    , P.HasComputedCpuReservation (..)
-    , P.HasComputedCpuShareLevel (..)
-    , P.HasComputedCpuShares (..)
-    , P.HasComputedCreateDirectories (..)
-    , P.HasComputedDatacenter (..)
-    , P.HasComputedDatacenterId (..)
-    , P.HasComputedDatastore (..)
-    , P.HasComputedDatastoreClusterId (..)
-    , P.HasComputedDefaultIpAddress (..)
-    , P.HasComputedDependencyVmGroupName (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDestinationFile (..)
-    , P.HasComputedDisks (..)
-    , P.HasComputedDistributedVirtualSwitchUuid (..)
-    , P.HasComputedDpmAutomationLevel (..)
-    , P.HasComputedDpmEnabled (..)
-    , P.HasComputedDrsAutomationLevel (..)
-    , P.HasComputedDrsEnabled (..)
-    , P.HasComputedEditionKey (..)
-    , P.HasComputedEnabled (..)
-    , P.HasComputedFolder (..)
-    , P.HasComputedFreeSpace (..)
-    , P.HasComputedGuestIpAddresses (..)
-    , P.HasComputedHostSystemId (..)
-    , P.HasComputedHostSystemIds (..)
-    , P.HasComputedId (..)
-    , P.HasComputedImported (..)
-    , P.HasComputedIpv4Address (..)
-    , P.HasComputedKey (..)
-    , P.HasComputedLabels (..)
-    , P.HasComputedLacpApiVersion (..)
-    , P.HasComputedLicenseKey (..)
-    , P.HasComputedLinkDiscoveryOperation (..)
-    , P.HasComputedLinkDiscoveryProtocol (..)
-    , P.HasComputedMaintenanceMode (..)
-    , P.HasComputedManagedObjectType (..)
-    , P.HasComputedMandatory (..)
-    , P.HasComputedMaxMtu (..)
-    , P.HasComputedMemory (..)
-    , P.HasComputedMemoryExpandable (..)
-    , P.HasComputedMemoryLimit (..)
-    , P.HasComputedMemoryReservation (..)
-    , P.HasComputedMemoryShareLevel (..)
-    , P.HasComputedMemoryShares (..)
-    , P.HasComputedMoid (..)
-    , P.HasComputedMtu (..)
-    , P.HasComputedMulticastFilteringMode (..)
-    , P.HasComputedMultipleHostAccess (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNumberOfPorts (..)
-    , P.HasComputedParentFolderId (..)
-    , P.HasComputedParentResourcePoolId (..)
-    , P.HasComputedPath (..)
-    , P.HasComputedPorts (..)
-    , P.HasComputedProtocolEndpoint (..)
-    , P.HasComputedQuiesce (..)
-    , P.HasComputedRebootRequired (..)
-    , P.HasComputedRemoteHosts (..)
-    , P.HasComputedRemotePath (..)
-    , P.HasComputedRemoveChildren (..)
-    , P.HasComputedResourcePoolId (..)
-    , P.HasComputedSdrsAutomationLevel (..)
-    , P.HasComputedSdrsEnabled (..)
-    , P.HasComputedSdrsIntraVmAffinity (..)
-    , P.HasComputedSecurityType (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSnapshotName (..)
-    , P.HasComputedSourceDatacenter (..)
-    , P.HasComputedSourceDatastore (..)
-    , P.HasComputedSourceFile (..)
-    , P.HasComputedTags (..)
-    , P.HasComputedTotal (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUncommittedSpace (..)
-    , P.HasComputedUrl (..)
-    , P.HasComputedUsed (..)
-    , P.HasComputedUuid (..)
-    , P.HasComputedVappTransport (..)
-    , P.HasComputedVersion (..)
-    , P.HasComputedVirtualMachineId (..)
-    , P.HasComputedVirtualMachineIds (..)
-    , P.HasComputedVirtualMachineUuid (..)
-    , P.HasComputedVirtualSwitchName (..)
-    , P.HasComputedVlanId (..)
-    , P.HasComputedVmGroupName (..)
-    , P.HasComputedVmdkPath (..)
-    , P.HasComputedVmwareToolsStatus (..)
-    , P.HasComputedVmxPath (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.VSphere.Settings
 
-import Terrafomo.VSphere.Types as P
-
+import qualified Data.Hashable              as P
+import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as Map
+import qualified Data.List.NonEmpty         as P
+import qualified Data.Maybe                 as P
+import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
-import qualified Data.Word                  as P
-import qualified GHC.Base                   as P
-import qualified Numeric.Natural            as P
+import qualified GHC.Generics               as P
+import qualified Lens.Micro                 as P
+import qualified Prelude                    as P
+import qualified Terrafomo.Attribute        as TF
+import qualified Terrafomo.HCL              as TF
+import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.Schema           as TF
+import qualified Terrafomo.Validator        as TF
 import qualified Terrafomo.VSphere.Lens     as P
 import qualified Terrafomo.VSphere.Provider as P
+import qualified Terrafomo.VSphere.Types    as P
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @vsphere_compute_cluster@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster terraform documentation>
+-- for more information.
+data ComputeClusterResource s = ComputeClusterResource'
+    { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datacenterId :: TF.Attr s P.Text
+    -- ^ @datacenter_id@ - (Required)
+    -- The managed object ID of the datacenter to put the cluster in.
+    --
+    , _dpmAutomationLevel :: TF.Attr s P.Text
+    -- ^ @dpm_automation_level@ - (Optional)
+    -- The automation level for host power operations in this cluster. Can be one
+    -- of manual or automated.
+    --
+    , _dpmEnabled :: TF.Attr s P.Bool
+    -- ^ @dpm_enabled@ - (Optional)
+    -- Enable DPM support for DRS. This allows you to dynamically control the power
+    -- of hosts depending on the needs of virtual machines in the cluster. Requires
+    -- that DRS be enabled.
+    --
+    , _dpmThreshold :: TF.Attr s P.Integer
+    -- ^ @dpm_threshold@ - (Optional)
+    -- A value between 1 and 5 indicating the threshold of load within the cluster
+    -- that influences host power operations. This affects both power on and power
+    -- off operations - a lower setting will tolerate more of a surplus/deficit
+    -- than a higher setting.
+    --
+    , _drsAdvancedOptions :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @drs_advanced_options@ - (Optional)
+    -- Advanced configuration options for DRS and DPM.
+    --
+    , _drsAutomationLevel :: TF.Attr s P.Text
+    -- ^ @drs_automation_level@ - (Optional)
+    -- The default automation level for all virtual machines in this cluster. Can
+    -- be one of manual, partiallyAutomated, or fullyAutomated.
+    --
+    , _drsEnablePredictiveDrs :: TF.Attr s P.Bool
+    -- ^ @drs_enable_predictive_drs@ - (Optional)
+    -- When true, enables DRS to use data from vRealize Operations Manager to make
+    -- proactive DRS recommendations.
+    --
+    , _drsEnableVmOverrides :: TF.Attr s P.Bool
+    -- ^ @drs_enable_vm_overrides@ - (Optional)
+    -- When true, allows individual VM overrides within this cluster to be set.
+    --
+    , _drsEnabled :: TF.Attr s P.Bool
+    -- ^ @drs_enabled@ - (Optional)
+    -- Enable DRS for this cluster.
+    --
+    , _drsMigrationThreshold :: TF.Attr s P.Integer
+    -- ^ @drs_migration_threshold@ - (Optional)
+    -- A value between 1 and 5 indicating the threshold of imbalance tolerated
+    -- between hosts. A lower setting will tolerate more imbalance while a higher
+    -- setting will tolerate less.
+    --
+    , _folder :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    -- The name of the folder to locate the cluster in.
+    --
+    , _forceEvacuateOnDestroy :: TF.Attr s P.Bool
+    -- ^ @force_evacuate_on_destroy@ - (Optional)
+    -- Force removal of all hosts in the cluster during destroy and make them
+    -- standalone hosts. Use of this flag mainly exists for testing and is not
+    -- recommended in normal use.
+    --
+    , _haAdmissionControlFailoverHostSystemIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ha_admission_control_failover_host_system_ids@ - (Optional)
+    -- When ha_admission_control_policy is failoverHosts, this defines the managed
+    -- object IDs of hosts to use as dedicated failover hosts. These hosts are kept
+    -- as available as possible - admission control will block access to the host,
+    -- and DRS will ignore the host when making recommendations.
+    --
+    , _haAdmissionControlHostFailureTolerance :: TF.Attr s P.Integer
+    -- ^ @ha_admission_control_host_failure_tolerance@ - (Optional)
+    -- The maximum number of failed hosts that admission control tolerates when
+    -- making decisions on whether to permit virtual machine operations. The
+    -- maximum is one less than the number of hosts in the cluster.
+    --
+    , _haAdmissionControlPerformanceTolerance :: TF.Attr s P.Integer
+    -- ^ @ha_admission_control_performance_tolerance@ - (Optional)
+    -- The percentage of resource reduction that a cluster of VMs can tolerate in
+    -- case of a failover. A value of 0 produces warnings only, whereas a value of
+    -- 100 disables the setting.
+    --
+    , _haAdmissionControlPolicy :: TF.Attr s P.Text
+    -- ^ @ha_admission_control_policy@ - (Optional)
+    -- The type of admission control policy to use with vSphere HA, which controls
+    -- whether or not specific VM operations are permitted in the cluster in order
+    -- to protect the reliability of the cluster. Can be one of resourcePercentage,
+    -- slotPolicy, failoverHosts, or disabled. Note that disabling admission
+    -- control is not recommended and can lead to service issues.
+    --
+    , _haAdmissionControlResourcePercentageAutoCompute :: TF.Attr s P.Bool
+    -- ^ @ha_admission_control_resource_percentage_auto_compute@ - (Optional)
+    -- When ha_admission_control_policy is resourcePercentage, automatically
+    -- determine available resource percentages by subtracting the average number
+    -- of host resources represented by the
+    -- ha_admission_control_host_failure_tolerance setting from the total amount of
+    -- resources in the cluster. Disable to supply user-defined values.
+    --
+    , _haAdmissionControlResourcePercentageCpu :: TF.Attr s P.Integer
+    -- ^ @ha_admission_control_resource_percentage_cpu@ - (Optional)
+    -- When ha_admission_control_policy is resourcePercentage, this controls the
+    -- user-defined percentage of CPU resources in the cluster to reserve for
+    -- failover.
+    --
+    , _haAdmissionControlResourcePercentageMemory :: TF.Attr s P.Integer
+    -- ^ @ha_admission_control_resource_percentage_memory@ - (Optional)
+    -- When ha_admission_control_policy is resourcePercentage, this controls the
+    -- user-defined percentage of memory resources in the cluster to reserve for
+    -- failover.
+    --
+    , _haAdmissionControlSlotPolicyExplicitCpu :: TF.Attr s P.Integer
+    -- ^ @ha_admission_control_slot_policy_explicit_cpu@ - (Optional)
+    -- When ha_admission_control_policy is slotPolicy, this controls the
+    -- user-defined CPU slot size, in MHz.
+    --
+    , _haAdmissionControlSlotPolicyExplicitMemory :: TF.Attr s P.Integer
+    -- ^ @ha_admission_control_slot_policy_explicit_memory@ - (Optional)
+    -- When ha_admission_control_policy is slotPolicy, this controls the
+    -- user-defined memory slot size, in MB.
+    --
+    , _haAdmissionControlSlotPolicyUseExplicitSize :: TF.Attr s P.Bool
+    -- ^ @ha_admission_control_slot_policy_use_explicit_size@ - (Optional)
+    -- When ha_admission_control_policy is slotPolicy, this setting controls
+    -- whether or not you wish to supply explicit values to CPU and memory slot
+    -- sizes. The default is to gather a automatic average based on all powered-on
+    -- virtual machines currently in the cluster.
+    --
+    , _haAdvancedOptions :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @ha_advanced_options@ - (Optional)
+    -- Advanced configuration options for vSphere HA.
+    --
+    , _haDatastoreApdRecoveryAction :: TF.Attr s P.Text
+    -- ^ @ha_datastore_apd_recovery_action@ - (Optional)
+    -- When ha_vm_component_protection is enabled, controls the action to take on
+    -- virtual machines if an APD status on an affected datastore clears in the
+    -- middle of an APD event. Can be one of none or reset.
+    --
+    , _haDatastoreApdResponse :: TF.Attr s P.Text
+    -- ^ @ha_datastore_apd_response@ - (Optional)
+    -- When ha_vm_component_protection is enabled, controls the action to take on
+    -- virtual machines when the cluster has detected loss to all paths to a
+    -- relevant datastore. Can be one of disabled, warning, restartConservative, or
+    -- restartAggressive.
+    --
+    , _haDatastoreApdResponseDelay :: TF.Attr s P.Integer
+    -- ^ @ha_datastore_apd_response_delay@ - (Optional)
+    -- When ha_vm_component_protection is enabled, controls the delay in minutes to
+    -- wait after an APD timeout event to execute the response action defined in
+    -- ha_datastore_apd_response.
+    --
+    , _haDatastorePdlResponse :: TF.Attr s P.Text
+    -- ^ @ha_datastore_pdl_response@ - (Optional)
+    -- When ha_vm_component_protection is enabled, controls the action to take on
+    -- virtual machines when the cluster has detected a permanent device loss to a
+    -- relevant datastore. Can be one of disabled, warning, or restartAggressive.
+    --
+    , _haEnabled :: TF.Attr s P.Bool
+    -- ^ @ha_enabled@ - (Optional)
+    -- Enable vSphere HA for this cluster.
+    --
+    , _haHeartbeatDatastoreIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ha_heartbeat_datastore_ids@ - (Optional)
+    -- The list of managed object IDs for preferred datastores to use for HA
+    -- heartbeating. This setting is only useful when ha_heartbeat_datastore_policy
+    -- is set to either userSelectedDs or allFeasibleDsWithUserPreference.
+    --
+    , _haHeartbeatDatastorePolicy :: TF.Attr s P.Text
+    -- ^ @ha_heartbeat_datastore_policy@ - (Optional)
+    -- The selection policy for HA heartbeat datastores. Can be one of
+    -- allFeasibleDs, userSelectedDs, or allFeasibleDsWithUserPreference.
+    --
+    , _haHostIsolationResponse :: TF.Attr s P.Text
+    -- ^ @ha_host_isolation_response@ - (Optional)
+    -- The action to take on virtual machines when a host has detected that it has
+    -- been isolated from the rest of the cluster. Can be one of none, powerOff, or
+    -- shutdown.
+    --
+    , _haHostMonitoring :: TF.Attr s P.Text
+    -- ^ @ha_host_monitoring@ - (Optional)
+    -- Global setting that controls whether vSphere HA remediates VMs on host
+    -- failure. Can be one of enabled or disabled.
+    --
+    , _haVmComponentProtection :: TF.Attr s P.Text
+    -- ^ @ha_vm_component_protection@ - (Optional)
+    -- Controls vSphere VM component protection for virtual machines in this
+    -- cluster. This allows vSphere HA to react to failures between hosts and
+    -- specific virtual machine components, such as datastores. Can be one of
+    -- enabled or disabled.
+    --
+    , _haVmDependencyRestartCondition :: TF.Attr s P.Text
+    -- ^ @ha_vm_dependency_restart_condition@ - (Optional)
+    -- The condition used to determine whether or not VMs in a certain restart
+    -- priority class are online, allowing HA to move on to restarting VMs on the
+    -- next priority. Can be one of none, poweredOn, guestHbStatusGreen, or
+    -- appHbStatusGreen.
+    --
+    , _haVmFailureInterval :: TF.Attr s P.Integer
+    -- ^ @ha_vm_failure_interval@ - (Optional)
+    -- If a heartbeat from a virtual machine is not received within this configured
+    -- interval, the virtual machine is marked as failed. The value is in seconds.
+    --
+    , _haVmMaximumFailureWindow :: TF.Attr s P.Integer
+    -- ^ @ha_vm_maximum_failure_window@ - (Optional)
+    -- The length of the reset window in which ha_vm_maximum_resets can operate.
+    -- When this window expires, no more resets are attempted regardless of the
+    -- setting configured in ha_vm_maximum_resets. -1 means no window, meaning an
+    -- unlimited reset time is allotted.
+    --
+    , _haVmMaximumResets :: TF.Attr s P.Integer
+    -- ^ @ha_vm_maximum_resets@ - (Optional)
+    -- The maximum number of resets that HA will perform to a virtual machine when
+    -- responding to a failure event.
+    --
+    , _haVmMinimumUptime :: TF.Attr s P.Integer
+    -- ^ @ha_vm_minimum_uptime@ - (Optional)
+    -- The time, in seconds, that HA waits after powering on a virtual machine
+    -- before monitoring for heartbeats.
+    --
+    , _haVmMonitoring :: TF.Attr s P.Text
+    -- ^ @ha_vm_monitoring@ - (Optional)
+    -- The type of virtual machine monitoring to use when HA is enabled in the
+    -- cluster. Can be one of vmMonitoringDisabled, vmMonitoringOnly, or
+    -- vmAndAppMonitoring.
+    --
+    , _haVmRestartAdditionalDelay :: TF.Attr s P.Integer
+    -- ^ @ha_vm_restart_additional_delay@ - (Optional)
+    -- Additional delay in seconds after ready condition is met. A VM is considered
+    -- ready at this point.
+    --
+    , _haVmRestartPriority :: TF.Attr s P.Text
+    -- ^ @ha_vm_restart_priority@ - (Optional)
+    -- The default restart priority for affected VMs when vSphere detects a host
+    -- failure. Can be one of lowest, low, medium, high, or highest.
+    --
+    , _haVmRestartTimeout :: TF.Attr s P.Integer
+    -- ^ @ha_vm_restart_timeout@ - (Optional)
+    -- The maximum time, in seconds, that vSphere HA will wait for virtual machines
+    -- in one priority to be ready before proceeding with the next priority.
+    --
+    , _hostClusterExitTimeout :: TF.Attr s P.Integer
+    -- ^ @host_cluster_exit_timeout@ - (Optional)
+    -- The timeout for each host maintenance mode operation when removing hosts
+    -- from a cluster.
+    --
+    , _hostSystemIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @host_system_ids@ - (Optional)
+    -- The managed object IDs of the hosts to put in the cluster.
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- Name for the new cluster.
+    --
+    , _proactiveHaAutomationLevel :: TF.Attr s P.Text
+    -- ^ @proactive_ha_automation_level@ - (Optional)
+    -- The DRS behavior for proactive HA recommendations. Can be one of Automated
+    -- or Manual.
+    --
+    , _proactiveHaEnabled :: TF.Attr s P.Bool
+    -- ^ @proactive_ha_enabled@ - (Optional)
+    -- Enables proactive HA, allowing for vSphere to get HA data from external
+    -- providers and use DRS to perform remediation.
+    --
+    , _proactiveHaModerateRemediation :: TF.Attr s P.Text
+    -- ^ @proactive_ha_moderate_remediation@ - (Optional)
+    -- The configured remediation for moderately degraded hosts. Can be one of
+    -- MaintenanceMode or QuarantineMode. Note that this cannot be set to
+    -- MaintenanceMode when proactive_ha_severe_remediation is set to
+    -- QuarantineMode.
+    --
+    , _proactiveHaProviderIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @proactive_ha_provider_ids@ - (Optional)
+    -- The list of IDs for health update providers configured for this cluster.
+    --
+    , _proactiveHaSevereRemediation :: TF.Attr s P.Text
+    -- ^ @proactive_ha_severe_remediation@ - (Optional)
+    -- The configured remediation for severely degraded hosts. Can be one of
+    -- MaintenanceMode or QuarantineMode. Note that this cannot be set to
+    -- QuarantineMode when proactive_ha_moderate_remediation is set to
+    -- MaintenanceMode.
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @vsphere_compute_cluster_host_group@ VSphere resource.
-
-The @vsphere_compute_cluster_host_group@ resource can be used to manage
-groups of hosts in a cluster, either created by the
-</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
-the </docs/providers/vsphere/d/compute_cluster.html> data source. This
-resource mainly serves as an input to the
-</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resource - see
-the documentation for that resource for further details on how to use host
-groups. ~> NOTE: This resource requires vCenter and is not available on
-direct ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise
-Plus license.
--}
-data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource {
-      _compute_cluster_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
-    , _host_system_ids    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the hosts to put in the cluster. -}
-    , _name               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the host group. This must be unique in the cluster. Forces a new resource if changed. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ComputeClusterHostGroupResource s) where
-    toObject ComputeClusterHostGroupResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
-        , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasComputeClusterId (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
-    computeClusterId =
-        lens (_compute_cluster_id :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterHostGroupResource s)
-
-instance P.HasHostSystemIds (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
-    hostSystemIds =
-        lens (_host_system_ids :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_ids = a } :: ComputeClusterHostGroupResource s)
-
-instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterHostGroupResource s)
-
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHostSystemIds (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
-    computedHostSystemIds =
-        (_host_system_ids :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterHostGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeClusterHostGroupResource :: TF.Resource P.VSphere (ComputeClusterHostGroupResource s)
-computeClusterHostGroupResource =
-    TF.newResource "vsphere_compute_cluster_host_group" $
-        ComputeClusterHostGroupResource {
-              _compute_cluster_id = TF.Nil
-            , _host_system_ids = TF.Nil
-            , _name = TF.Nil
+computeClusterResource
+    :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (ComputeClusterResource s)
+computeClusterResource _datacenterId _name =
+    TF.newResource "vsphere_compute_cluster" TF.validator $
+        ComputeClusterResource'
+            { _customAttributes = TF.Nil
+            , _datacenterId = _datacenterId
+            , _dpmAutomationLevel = TF.value "manual"
+            , _dpmEnabled = TF.value P.False
+            , _dpmThreshold = TF.value 3
+            , _drsAdvancedOptions = TF.Nil
+            , _drsAutomationLevel = TF.value "manual"
+            , _drsEnablePredictiveDrs = TF.Nil
+            , _drsEnableVmOverrides = TF.value P.True
+            , _drsEnabled = TF.value P.False
+            , _drsMigrationThreshold = TF.value 3
+            , _folder = TF.Nil
+            , _forceEvacuateOnDestroy = TF.Nil
+            , _haAdmissionControlFailoverHostSystemIds = TF.Nil
+            , _haAdmissionControlHostFailureTolerance = TF.value 1
+            , _haAdmissionControlPerformanceTolerance = TF.value 100
+            , _haAdmissionControlPolicy = TF.value "resourcePercentage"
+            , _haAdmissionControlResourcePercentageAutoCompute = TF.value P.True
+            , _haAdmissionControlResourcePercentageCpu = TF.value 100
+            , _haAdmissionControlResourcePercentageMemory = TF.value 100
+            , _haAdmissionControlSlotPolicyExplicitCpu = TF.value 32
+            , _haAdmissionControlSlotPolicyExplicitMemory = TF.value 100
+            , _haAdmissionControlSlotPolicyUseExplicitSize = TF.Nil
+            , _haAdvancedOptions = TF.Nil
+            , _haDatastoreApdRecoveryAction = TF.value "none"
+            , _haDatastoreApdResponse = TF.value "disabled"
+            , _haDatastoreApdResponseDelay = TF.value 3
+            , _haDatastorePdlResponse = TF.value "disabled"
+            , _haEnabled = TF.value P.False
+            , _haHeartbeatDatastoreIds = TF.Nil
+            , _haHeartbeatDatastorePolicy = TF.value "allFeasibleDsWithUserPreference"
+            , _haHostIsolationResponse = TF.value "none"
+            , _haHostMonitoring = TF.value "enabled"
+            , _haVmComponentProtection = TF.value "enabled"
+            , _haVmDependencyRestartCondition = TF.value "none"
+            , _haVmFailureInterval = TF.value 30
+            , _haVmMaximumFailureWindow = TF.value (-1)
+            , _haVmMaximumResets = TF.value 3
+            , _haVmMinimumUptime = TF.value 120
+            , _haVmMonitoring = TF.value "vmMonitoringDisabled"
+            , _haVmRestartAdditionalDelay = TF.Nil
+            , _haVmRestartPriority = TF.value "medium"
+            , _haVmRestartTimeout = TF.value 600
+            , _hostClusterExitTimeout = TF.value 3600
+            , _hostSystemIds = TF.Nil
+            , _name = _name
+            , _proactiveHaAutomationLevel = TF.value "Manual"
+            , _proactiveHaEnabled = TF.Nil
+            , _proactiveHaModerateRemediation = TF.value "QuarantineMode"
+            , _proactiveHaProviderIds = TF.Nil
+            , _proactiveHaSevereRemediation = TF.value "QuarantineMode"
+            , _tags = TF.Nil
             }
 
-{- | The @vsphere_compute_cluster@ VSphere resource.
-
--> A note on the naming of this resource: VMware refers to clusters of hosts
-in the UI and documentation as clusters , HA clusters , or DRS clusters .
-All of these refer to the same kind of resource (with the latter two
-referring to specific features of clustering). In Terraform, we use
-@vsphere_compute_cluster@ to differentiate host clusters from datastore
-clusters , which are clusters of datastores that can be used to distribute
-load and ensure fault tolerance via distribution of virtual machines.
-Datastore clusters can also be managed through Terraform, via the
-</docs/providers/vsphere/r/datastore_cluster.html> . The
-@vsphere_compute_cluster@ resource can be used to create and manage clusters
-of hosts allowing for resource control of compute resources, load balancing
-through DRS, and high availability through vSphere HA. For more information
-on vSphere clusters and DRS, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-8ACF3502-5314-469F-8CC9-4A9BD5925BC2.html>
-. For more information on vSphere HA, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.avail.doc/GUID-5432CA24-14F1-44E3-87FB-61D937831CF6.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data ComputeClusterResource s = ComputeClusterResource {
-      _datacenter_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter to create the cluster in. Forces a new resource if changed. -}
-    , _folder        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The relative path to a folder to put this cluster in. This is a path relative to the datacenter you are deploying the cluster to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a cluster named @terraform-compute-cluster-test@ in a host folder located at @/dc1/host/foo/bar@ , with the final inventory path being @/dc1/host/foo/bar/terraform-datastore-cluster-test@ . -}
-    , _name          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the cluster. -}
-    , _tags          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeClusterResource s) where
-    toObject ComputeClusterResource{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+    toObject ComputeClusterResource'{..} = P.catMaybes
+        [ TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "dpm_automation_level" <$> TF.attribute _dpmAutomationLevel
+        , TF.assign "dpm_enabled" <$> TF.attribute _dpmEnabled
+        , TF.assign "dpm_threshold" <$> TF.attribute _dpmThreshold
+        , TF.assign "drs_advanced_options" <$> TF.attribute _drsAdvancedOptions
+        , TF.assign "drs_automation_level" <$> TF.attribute _drsAutomationLevel
+        , TF.assign "drs_enable_predictive_drs" <$> TF.attribute _drsEnablePredictiveDrs
+        , TF.assign "drs_enable_vm_overrides" <$> TF.attribute _drsEnableVmOverrides
+        , TF.assign "drs_enabled" <$> TF.attribute _drsEnabled
+        , TF.assign "drs_migration_threshold" <$> TF.attribute _drsMigrationThreshold
         , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "force_evacuate_on_destroy" <$> TF.attribute _forceEvacuateOnDestroy
+        , TF.assign "ha_admission_control_failover_host_system_ids" <$> TF.attribute _haAdmissionControlFailoverHostSystemIds
+        , TF.assign "ha_admission_control_host_failure_tolerance" <$> TF.attribute _haAdmissionControlHostFailureTolerance
+        , TF.assign "ha_admission_control_performance_tolerance" <$> TF.attribute _haAdmissionControlPerformanceTolerance
+        , TF.assign "ha_admission_control_policy" <$> TF.attribute _haAdmissionControlPolicy
+        , TF.assign "ha_admission_control_resource_percentage_auto_compute" <$> TF.attribute _haAdmissionControlResourcePercentageAutoCompute
+        , TF.assign "ha_admission_control_resource_percentage_cpu" <$> TF.attribute _haAdmissionControlResourcePercentageCpu
+        , TF.assign "ha_admission_control_resource_percentage_memory" <$> TF.attribute _haAdmissionControlResourcePercentageMemory
+        , TF.assign "ha_admission_control_slot_policy_explicit_cpu" <$> TF.attribute _haAdmissionControlSlotPolicyExplicitCpu
+        , TF.assign "ha_admission_control_slot_policy_explicit_memory" <$> TF.attribute _haAdmissionControlSlotPolicyExplicitMemory
+        , TF.assign "ha_admission_control_slot_policy_use_explicit_size" <$> TF.attribute _haAdmissionControlSlotPolicyUseExplicitSize
+        , TF.assign "ha_advanced_options" <$> TF.attribute _haAdvancedOptions
+        , TF.assign "ha_datastore_apd_recovery_action" <$> TF.attribute _haDatastoreApdRecoveryAction
+        , TF.assign "ha_datastore_apd_response" <$> TF.attribute _haDatastoreApdResponse
+        , TF.assign "ha_datastore_apd_response_delay" <$> TF.attribute _haDatastoreApdResponseDelay
+        , TF.assign "ha_datastore_pdl_response" <$> TF.attribute _haDatastorePdlResponse
+        , TF.assign "ha_enabled" <$> TF.attribute _haEnabled
+        , TF.assign "ha_heartbeat_datastore_ids" <$> TF.attribute _haHeartbeatDatastoreIds
+        , TF.assign "ha_heartbeat_datastore_policy" <$> TF.attribute _haHeartbeatDatastorePolicy
+        , TF.assign "ha_host_isolation_response" <$> TF.attribute _haHostIsolationResponse
+        , TF.assign "ha_host_monitoring" <$> TF.attribute _haHostMonitoring
+        , TF.assign "ha_vm_component_protection" <$> TF.attribute _haVmComponentProtection
+        , TF.assign "ha_vm_dependency_restart_condition" <$> TF.attribute _haVmDependencyRestartCondition
+        , TF.assign "ha_vm_failure_interval" <$> TF.attribute _haVmFailureInterval
+        , TF.assign "ha_vm_maximum_failure_window" <$> TF.attribute _haVmMaximumFailureWindow
+        , TF.assign "ha_vm_maximum_resets" <$> TF.attribute _haVmMaximumResets
+        , TF.assign "ha_vm_minimum_uptime" <$> TF.attribute _haVmMinimumUptime
+        , TF.assign "ha_vm_monitoring" <$> TF.attribute _haVmMonitoring
+        , TF.assign "ha_vm_restart_additional_delay" <$> TF.attribute _haVmRestartAdditionalDelay
+        , TF.assign "ha_vm_restart_priority" <$> TF.attribute _haVmRestartPriority
+        , TF.assign "ha_vm_restart_timeout" <$> TF.attribute _haVmRestartTimeout
+        , TF.assign "host_cluster_exit_timeout" <$> TF.attribute _hostClusterExitTimeout
+        , TF.assign "host_system_ids" <$> TF.attribute _hostSystemIds
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "proactive_ha_automation_level" <$> TF.attribute _proactiveHaAutomationLevel
+        , TF.assign "proactive_ha_enabled" <$> TF.attribute _proactiveHaEnabled
+        , TF.assign "proactive_ha_moderate_remediation" <$> TF.attribute _proactiveHaModerateRemediation
+        , TF.assign "proactive_ha_provider_ids" <$> TF.attribute _proactiveHaProviderIds
+        , TF.assign "proactive_ha_severe_remediation" <$> TF.attribute _proactiveHaSevereRemediation
         , TF.assign "tags" <$> TF.attribute _tags
         ]
+
+instance TF.IsValid (ComputeClusterResource s) where
+    validator = P.mempty
+
+instance P.HasCustomAttributes (ComputeClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: ComputeClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: ComputeClusterResource s)
 
 instance P.HasDatacenterId (ComputeClusterResource s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: ComputeClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: ComputeClusterResource s)
+        P.lens (_datacenterId :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenterId = a } :: ComputeClusterResource s)
+
+instance P.HasDpmAutomationLevel (ComputeClusterResource s) (TF.Attr s P.Text) where
+    dpmAutomationLevel =
+        P.lens (_dpmAutomationLevel :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dpmAutomationLevel = a } :: ComputeClusterResource s)
+
+instance P.HasDpmEnabled (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    dpmEnabled =
+        P.lens (_dpmEnabled :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dpmEnabled = a } :: ComputeClusterResource s)
+
+instance P.HasDpmThreshold (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    dpmThreshold =
+        P.lens (_dpmThreshold :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _dpmThreshold = a } :: ComputeClusterResource s)
+
+instance P.HasDrsAdvancedOptions (ComputeClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    drsAdvancedOptions =
+        P.lens (_drsAdvancedOptions :: ComputeClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _drsAdvancedOptions = a } :: ComputeClusterResource s)
+
+instance P.HasDrsAutomationLevel (ComputeClusterResource s) (TF.Attr s P.Text) where
+    drsAutomationLevel =
+        P.lens (_drsAutomationLevel :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _drsAutomationLevel = a } :: ComputeClusterResource s)
+
+instance P.HasDrsEnablePredictiveDrs (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    drsEnablePredictiveDrs =
+        P.lens (_drsEnablePredictiveDrs :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _drsEnablePredictiveDrs = a } :: ComputeClusterResource s)
+
+instance P.HasDrsEnableVmOverrides (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    drsEnableVmOverrides =
+        P.lens (_drsEnableVmOverrides :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _drsEnableVmOverrides = a } :: ComputeClusterResource s)
+
+instance P.HasDrsEnabled (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    drsEnabled =
+        P.lens (_drsEnabled :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _drsEnabled = a } :: ComputeClusterResource s)
+
+instance P.HasDrsMigrationThreshold (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    drsMigrationThreshold =
+        P.lens (_drsMigrationThreshold :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _drsMigrationThreshold = a } :: ComputeClusterResource s)
 
 instance P.HasFolder (ComputeClusterResource s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: ComputeClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: ComputeClusterResource s)
+        P.lens (_folder :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: ComputeClusterResource s)
+
+instance P.HasForceEvacuateOnDestroy (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    forceEvacuateOnDestroy =
+        P.lens (_forceEvacuateOnDestroy :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _forceEvacuateOnDestroy = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlFailoverHostSystemIds (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    haAdmissionControlFailoverHostSystemIds =
+        P.lens (_haAdmissionControlFailoverHostSystemIds :: ComputeClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _haAdmissionControlFailoverHostSystemIds = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlHostFailureTolerance (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haAdmissionControlHostFailureTolerance =
+        P.lens (_haAdmissionControlHostFailureTolerance :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haAdmissionControlHostFailureTolerance = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlPerformanceTolerance (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haAdmissionControlPerformanceTolerance =
+        P.lens (_haAdmissionControlPerformanceTolerance :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haAdmissionControlPerformanceTolerance = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlPolicy (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haAdmissionControlPolicy =
+        P.lens (_haAdmissionControlPolicy :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haAdmissionControlPolicy = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlResourcePercentageAutoCompute (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    haAdmissionControlResourcePercentageAutoCompute =
+        P.lens (_haAdmissionControlResourcePercentageAutoCompute :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _haAdmissionControlResourcePercentageAutoCompute = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlResourcePercentageCpu (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haAdmissionControlResourcePercentageCpu =
+        P.lens (_haAdmissionControlResourcePercentageCpu :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haAdmissionControlResourcePercentageCpu = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlResourcePercentageMemory (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haAdmissionControlResourcePercentageMemory =
+        P.lens (_haAdmissionControlResourcePercentageMemory :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haAdmissionControlResourcePercentageMemory = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlSlotPolicyExplicitCpu (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haAdmissionControlSlotPolicyExplicitCpu =
+        P.lens (_haAdmissionControlSlotPolicyExplicitCpu :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haAdmissionControlSlotPolicyExplicitCpu = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlSlotPolicyExplicitMemory (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haAdmissionControlSlotPolicyExplicitMemory =
+        P.lens (_haAdmissionControlSlotPolicyExplicitMemory :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haAdmissionControlSlotPolicyExplicitMemory = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdmissionControlSlotPolicyUseExplicitSize (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    haAdmissionControlSlotPolicyUseExplicitSize =
+        P.lens (_haAdmissionControlSlotPolicyUseExplicitSize :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _haAdmissionControlSlotPolicyUseExplicitSize = a } :: ComputeClusterResource s)
+
+instance P.HasHaAdvancedOptions (ComputeClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    haAdvancedOptions =
+        P.lens (_haAdvancedOptions :: ComputeClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _haAdvancedOptions = a } :: ComputeClusterResource s)
+
+instance P.HasHaDatastoreApdRecoveryAction (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haDatastoreApdRecoveryAction =
+        P.lens (_haDatastoreApdRecoveryAction :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haDatastoreApdRecoveryAction = a } :: ComputeClusterResource s)
+
+instance P.HasHaDatastoreApdResponse (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haDatastoreApdResponse =
+        P.lens (_haDatastoreApdResponse :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haDatastoreApdResponse = a } :: ComputeClusterResource s)
+
+instance P.HasHaDatastoreApdResponseDelay (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haDatastoreApdResponseDelay =
+        P.lens (_haDatastoreApdResponseDelay :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haDatastoreApdResponseDelay = a } :: ComputeClusterResource s)
+
+instance P.HasHaDatastorePdlResponse (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haDatastorePdlResponse =
+        P.lens (_haDatastorePdlResponse :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haDatastorePdlResponse = a } :: ComputeClusterResource s)
+
+instance P.HasHaEnabled (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    haEnabled =
+        P.lens (_haEnabled :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _haEnabled = a } :: ComputeClusterResource s)
+
+instance P.HasHaHeartbeatDatastoreIds (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    haHeartbeatDatastoreIds =
+        P.lens (_haHeartbeatDatastoreIds :: ComputeClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _haHeartbeatDatastoreIds = a } :: ComputeClusterResource s)
+
+instance P.HasHaHeartbeatDatastorePolicy (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haHeartbeatDatastorePolicy =
+        P.lens (_haHeartbeatDatastorePolicy :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haHeartbeatDatastorePolicy = a } :: ComputeClusterResource s)
+
+instance P.HasHaHostIsolationResponse (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haHostIsolationResponse =
+        P.lens (_haHostIsolationResponse :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haHostIsolationResponse = a } :: ComputeClusterResource s)
+
+instance P.HasHaHostMonitoring (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haHostMonitoring =
+        P.lens (_haHostMonitoring :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haHostMonitoring = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmComponentProtection (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haVmComponentProtection =
+        P.lens (_haVmComponentProtection :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haVmComponentProtection = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmDependencyRestartCondition (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haVmDependencyRestartCondition =
+        P.lens (_haVmDependencyRestartCondition :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haVmDependencyRestartCondition = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmFailureInterval (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haVmFailureInterval =
+        P.lens (_haVmFailureInterval :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmFailureInterval = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmMaximumFailureWindow (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haVmMaximumFailureWindow =
+        P.lens (_haVmMaximumFailureWindow :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmMaximumFailureWindow = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmMaximumResets (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haVmMaximumResets =
+        P.lens (_haVmMaximumResets :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmMaximumResets = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmMinimumUptime (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haVmMinimumUptime =
+        P.lens (_haVmMinimumUptime :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmMinimumUptime = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmMonitoring (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haVmMonitoring =
+        P.lens (_haVmMonitoring :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haVmMonitoring = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmRestartAdditionalDelay (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haVmRestartAdditionalDelay =
+        P.lens (_haVmRestartAdditionalDelay :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmRestartAdditionalDelay = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmRestartPriority (ComputeClusterResource s) (TF.Attr s P.Text) where
+    haVmRestartPriority =
+        P.lens (_haVmRestartPriority :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haVmRestartPriority = a } :: ComputeClusterResource s)
+
+instance P.HasHaVmRestartTimeout (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    haVmRestartTimeout =
+        P.lens (_haVmRestartTimeout :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmRestartTimeout = a } :: ComputeClusterResource s)
+
+instance P.HasHostClusterExitTimeout (ComputeClusterResource s) (TF.Attr s P.Integer) where
+    hostClusterExitTimeout =
+        P.lens (_hostClusterExitTimeout :: ComputeClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _hostClusterExitTimeout = a } :: ComputeClusterResource s)
+
+instance P.HasHostSystemIds (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    hostSystemIds =
+        P.lens (_hostSystemIds :: ComputeClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _hostSystemIds = a } :: ComputeClusterResource s)
 
 instance P.HasName (ComputeClusterResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterResource s)
+        P.lens (_name :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterResource s)
 
-instance P.HasTags (ComputeClusterResource s) (TF.Attr s P.Text) where
+instance P.HasProactiveHaAutomationLevel (ComputeClusterResource s) (TF.Attr s P.Text) where
+    proactiveHaAutomationLevel =
+        P.lens (_proactiveHaAutomationLevel :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _proactiveHaAutomationLevel = a } :: ComputeClusterResource s)
+
+instance P.HasProactiveHaEnabled (ComputeClusterResource s) (TF.Attr s P.Bool) where
+    proactiveHaEnabled =
+        P.lens (_proactiveHaEnabled :: ComputeClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _proactiveHaEnabled = a } :: ComputeClusterResource s)
+
+instance P.HasProactiveHaModerateRemediation (ComputeClusterResource s) (TF.Attr s P.Text) where
+    proactiveHaModerateRemediation =
+        P.lens (_proactiveHaModerateRemediation :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _proactiveHaModerateRemediation = a } :: ComputeClusterResource s)
+
+instance P.HasProactiveHaProviderIds (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    proactiveHaProviderIds =
+        P.lens (_proactiveHaProviderIds :: ComputeClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _proactiveHaProviderIds = a } :: ComputeClusterResource s)
+
+instance P.HasProactiveHaSevereRemediation (ComputeClusterResource s) (TF.Attr s P.Text) where
+    proactiveHaSevereRemediation =
+        P.lens (_proactiveHaSevereRemediation :: ComputeClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _proactiveHaSevereRemediation = a } :: ComputeClusterResource s)
+
+instance P.HasTags (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: ComputeClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ComputeClusterResource s)
-
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: ComputeClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: ComputeClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_tags :: ComputeClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: ComputeClusterResource s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ComputeClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_compute_cluster_host_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_host_group terraform documentation>
+-- for more information.
+data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource'
+    { _computeClusterId :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _hostSystemIds    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @host_system_ids@ - (Optional)
+    -- The managed object IDs of the hosts.
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-computeClusterResource :: TF.Resource P.VSphere (ComputeClusterResource s)
-computeClusterResource =
-    TF.newResource "vsphere_compute_cluster" $
-        ComputeClusterResource {
-              _datacenter_id = TF.Nil
-            , _folder = TF.Nil
-            , _name = TF.Nil
-            , _tags = TF.Nil
+computeClusterHostGroupResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (ComputeClusterHostGroupResource s)
+computeClusterHostGroupResource _computeClusterId _name =
+    TF.newResource "vsphere_compute_cluster_host_group" TF.validator $
+        ComputeClusterHostGroupResource'
+            { _computeClusterId = _computeClusterId
+            , _hostSystemIds = TF.Nil
+            , _name = _name
             }
 
-{- | The @vsphere_compute_cluster_vm_affinity_rule@ VSphere resource.
+instance TF.IsObject (ComputeClusterHostGroupResource s) where
+    toObject ComputeClusterHostGroupResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
+        , TF.assign "host_system_ids" <$> TF.attribute _hostSystemIds
+        , TF.assign "name" <$> TF.attribute _name
+        ]
 
-The @vsphere_compute_cluster_vm_affinity_rule@ resource can be used to
-manage VM affinity rules in a cluster, either created by the
-</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
-the </docs/providers/vsphere/d/compute_cluster.html> data source. This rule
-can be used to tell a set to virtual machines to run together on a single
-host within a cluster. When configured, DRS will make a best effort to
-ensure that the virtual machines run on the same host, or prevent any
-operation that would keep that from happening, depending on the value of the
-<#mandatory> flag. -> Keep in mind that this rule can only be used to tell
-VMs to run together on a non-specific host - it can't be used to pin VMs to
-a host. For that, see the
-</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resource. ~>
-NOTE: This resource requires vCenter and is not available on direct ESXi
-connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data ComputeClusterVmAffinityRuleResource s = ComputeClusterVmAffinityRuleResource {
-      _compute_cluster_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
-    , _enabled             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
-    , _mandatory           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
-    , _name                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
-    , _virtual_machine_ids :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUIDs of the virtual machines to run on the same host together. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (ComputeClusterHostGroupResource s) where
+    validator = P.mempty
+
+instance P.HasComputeClusterId (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        P.lens (_computeClusterId :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterHostGroupResource s)
+
+instance P.HasHostSystemIds (ComputeClusterHostGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    hostSystemIds =
+        P.lens (_hostSystemIds :: ComputeClusterHostGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _hostSystemIds = a } :: ComputeClusterHostGroupResource s)
+
+instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeClusterHostGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterHostGroupResource s)
+
+-- | @vsphere_compute_cluster_vm_affinity_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_affinity_rule terraform documentation>
+-- for more information.
+data ComputeClusterVmAffinityRuleResource s = ComputeClusterVmAffinityRuleResource'
+    { _computeClusterId  :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _enabled           :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    -- Enable this rule in the cluster.
+    --
+    , _mandatory         :: TF.Attr s P.Bool
+    -- ^ @mandatory@ - (Optional)
+    -- When true, prevents any virtual machine operations that may violate this
+    -- rule.
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    , _virtualMachineIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @virtual_machine_ids@ - (Required)
+    -- The UUIDs of the virtual machines to run on the same host together.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+computeClusterVmAffinityRuleResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
+    -> TF.Resource P.Provider (ComputeClusterVmAffinityRuleResource s)
+computeClusterVmAffinityRuleResource _computeClusterId _name _virtualMachineIds =
+    TF.newResource "vsphere_compute_cluster_vm_affinity_rule" TF.validator $
+        ComputeClusterVmAffinityRuleResource'
+            { _computeClusterId = _computeClusterId
+            , _enabled = TF.value P.True
+            , _mandatory = TF.Nil
+            , _name = _name
+            , _virtualMachineIds = _virtualMachineIds
+            }
 
 instance TF.IsObject (ComputeClusterVmAffinityRuleResource s) where
-    toObject ComputeClusterVmAffinityRuleResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+    toObject ComputeClusterVmAffinityRuleResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "mandatory" <$> TF.attribute _mandatory
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtualMachineIds
         ]
+
+instance TF.IsValid (ComputeClusterVmAffinityRuleResource s) where
+    validator = P.mempty
 
 instance P.HasComputeClusterId (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmAffinityRuleResource s)
+        P.lens (_computeClusterId :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterVmAffinityRuleResource s)
 
-instance P.HasEnabled (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasEnabled (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Bool) where
     enabled =
-        lens (_enabled :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ComputeClusterVmAffinityRuleResource s)
+        P.lens (_enabled :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: ComputeClusterVmAffinityRuleResource s)
 
-instance P.HasMandatory (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasMandatory (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Bool) where
     mandatory =
-        lens (_mandatory :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mandatory = a } :: ComputeClusterVmAffinityRuleResource s)
+        P.lens (_mandatory :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _mandatory = a } :: ComputeClusterVmAffinityRuleResource s)
 
 instance P.HasName (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterVmAffinityRuleResource s)
+        P.lens (_name :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterVmAffinityRuleResource s)
 
-instance P.HasVirtualMachineIds (ComputeClusterVmAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasVirtualMachineIds (ComputeClusterVmAffinityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     virtualMachineIds =
-        lens (_virtual_machine_ids :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_ids = a } :: ComputeClusterVmAffinityRuleResource s)
+        P.lens (_virtualMachineIds :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _virtualMachineIds = a } :: ComputeClusterVmAffinityRuleResource s)
 
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_compute_cluster_vm_anti_affinity_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_anti_affinity_rule terraform documentation>
+-- for more information.
+data ComputeClusterVmAntiAffinityRuleResource s = ComputeClusterVmAntiAffinityRuleResource'
+    { _computeClusterId  :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _enabled           :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    -- Enable this rule in the cluster.
+    --
+    , _mandatory         :: TF.Attr s P.Bool
+    -- ^ @mandatory@ - (Optional)
+    -- When true, prevents any virtual machine operations that may violate this
+    -- rule.
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    , _virtualMachineIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @virtual_machine_ids@ - (Required)
+    -- The UUIDs of the virtual machines to run on hosts different from each other.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedEnabled =
-        (_enabled :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedMandatory =
-        (_mandatory :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (ComputeClusterVmAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineIds =
-        (_virtual_machine_ids :: ComputeClusterVmAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeClusterVmAffinityRuleResource :: TF.Resource P.VSphere (ComputeClusterVmAffinityRuleResource s)
-computeClusterVmAffinityRuleResource =
-    TF.newResource "vsphere_compute_cluster_vm_affinity_rule" $
-        ComputeClusterVmAffinityRuleResource {
-              _compute_cluster_id = TF.Nil
-            , _enabled = TF.Nil
+computeClusterVmAntiAffinityRuleResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
+    -> TF.Resource P.Provider (ComputeClusterVmAntiAffinityRuleResource s)
+computeClusterVmAntiAffinityRuleResource _computeClusterId _name _virtualMachineIds =
+    TF.newResource "vsphere_compute_cluster_vm_anti_affinity_rule" TF.validator $
+        ComputeClusterVmAntiAffinityRuleResource'
+            { _computeClusterId = _computeClusterId
+            , _enabled = TF.value P.True
             , _mandatory = TF.Nil
-            , _name = TF.Nil
-            , _virtual_machine_ids = TF.Nil
+            , _name = _name
+            , _virtualMachineIds = _virtualMachineIds
             }
 
-{- | The @vsphere_compute_cluster_vm_anti_affinity_rule@ VSphere resource.
-
-The @vsphere_compute_cluster_vm_anti_affinity_rule@ resource can be used to
-manage VM anti-affinity rules in a cluster, either created by the
-</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
-the </docs/providers/vsphere/d/compute_cluster.html> data source. This rule
-can be used to tell a set to virtual machines to run on different hosts
-within a cluster, useful for preventing single points of failure in
-application cluster scenarios. When configured, DRS will make a best effort
-to ensure that the virtual machines run on different hosts, or prevent any
-operation that would keep that from happening, depending on the value of the
-<#mandatory> flag. -> Keep in mind that this rule can only be used to tell
-VMs to run separately on non-specific hosts - specific hosts cannot be
-specified with this rule. For that, see the
-</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resource. ~>
-NOTE: This resource requires vCenter and is not available on direct ESXi
-connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data ComputeClusterVmAntiAffinityRuleResource s = ComputeClusterVmAntiAffinityRuleResource {
-      _compute_cluster_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
-    , _enabled             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
-    , _mandatory           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
-    , _name                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
-    , _virtual_machine_ids :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUIDs of the virtual machines to run on hosts different from each other. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeClusterVmAntiAffinityRuleResource s) where
-    toObject ComputeClusterVmAntiAffinityRuleResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+    toObject ComputeClusterVmAntiAffinityRuleResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "mandatory" <$> TF.attribute _mandatory
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtualMachineIds
         ]
+
+instance TF.IsValid (ComputeClusterVmAntiAffinityRuleResource s) where
+    validator = P.mempty
 
 instance P.HasComputeClusterId (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+        P.lens (_computeClusterId :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterVmAntiAffinityRuleResource s)
 
-instance P.HasEnabled (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasEnabled (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Bool) where
     enabled =
-        lens (_enabled :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+        P.lens (_enabled :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: ComputeClusterVmAntiAffinityRuleResource s)
 
-instance P.HasMandatory (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasMandatory (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Bool) where
     mandatory =
-        lens (_mandatory :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mandatory = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+        P.lens (_mandatory :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _mandatory = a } :: ComputeClusterVmAntiAffinityRuleResource s)
 
 instance P.HasName (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+        P.lens (_name :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterVmAntiAffinityRuleResource s)
 
-instance P.HasVirtualMachineIds (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasVirtualMachineIds (ComputeClusterVmAntiAffinityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     virtualMachineIds =
-        lens (_virtual_machine_ids :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_ids = a } :: ComputeClusterVmAntiAffinityRuleResource s)
+        P.lens (_virtualMachineIds :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _virtualMachineIds = a } :: ComputeClusterVmAntiAffinityRuleResource s)
 
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_compute_cluster_vm_dependency_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_dependency_rule terraform documentation>
+-- for more information.
+data ComputeClusterVmDependencyRuleResource s = ComputeClusterVmDependencyRuleResource'
+    { _computeClusterId      :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _dependencyVmGroupName :: TF.Attr s P.Text
+    -- ^ @dependency_vm_group_name@ - (Required)
+    -- The name of the VM group that this rule depends on. The VMs defined in the
+    -- group specified by vm_group_name will not be started until the VMs in this
+    -- group are started.
+    --
+    , _enabled               :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    -- Enable this rule in the cluster.
+    --
+    , _mandatory             :: TF.Attr s P.Bool
+    -- ^ @mandatory@ - (Optional)
+    -- When true, prevents any virtual machine operations that may violate this
+    -- rule.
+    --
+    , _name                  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    , _vmGroupName           :: TF.Attr s P.Text
+    -- ^ @vm_group_name@ - (Required)
+    -- The name of the VM group that is the subject of this rule. The VMs defined
+    -- in this group will not be started until the VMs in the group specified by
+    -- dependency_vm_group_name are started.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedEnabled =
-        (_enabled :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedMandatory =
-        (_mandatory :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (ComputeClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineIds =
-        (_virtual_machine_ids :: ComputeClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeClusterVmAntiAffinityRuleResource :: TF.Resource P.VSphere (ComputeClusterVmAntiAffinityRuleResource s)
-computeClusterVmAntiAffinityRuleResource =
-    TF.newResource "vsphere_compute_cluster_vm_anti_affinity_rule" $
-        ComputeClusterVmAntiAffinityRuleResource {
-              _compute_cluster_id = TF.Nil
-            , _enabled = TF.Nil
+computeClusterVmDependencyRuleResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @dependency_vm_group_name@ - 'P.dependencyVmGroupName'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @vm_group_name@ - 'P.vmGroupName'
+    -> TF.Resource P.Provider (ComputeClusterVmDependencyRuleResource s)
+computeClusterVmDependencyRuleResource _computeClusterId _dependencyVmGroupName _name _vmGroupName =
+    TF.newResource "vsphere_compute_cluster_vm_dependency_rule" TF.validator $
+        ComputeClusterVmDependencyRuleResource'
+            { _computeClusterId = _computeClusterId
+            , _dependencyVmGroupName = _dependencyVmGroupName
+            , _enabled = TF.value P.True
             , _mandatory = TF.Nil
-            , _name = TF.Nil
-            , _virtual_machine_ids = TF.Nil
+            , _name = _name
+            , _vmGroupName = _vmGroupName
             }
 
-{- | The @vsphere_compute_cluster_vm_dependency_rule@ VSphere resource.
-
-The @vsphere_compute_cluster_vm_dependency_rule@ resource can be used to
-manage VM dependency rules in a cluster, either created by the
-</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
-the </docs/providers/vsphere/d/compute_cluster.html> data source. A virtual
-machine dependency rule applies to vSphere HA, and allows user-defined
-startup orders for virtual machines in the case of host failure. Virtual
-machines are supplied via groups, which can be managed via the
-</docs/providers/vsphere/r/compute_cluster_vm_group.html> resource. ~> NOTE:
-This resource requires vCenter and is not available on direct ESXi
-connections.
--}
-data ComputeClusterVmDependencyRuleResource s = ComputeClusterVmDependencyRuleResource {
-      _compute_cluster_id       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
-    , _dependency_vm_group_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VM group that this rule depends on. The VMs defined in the group specified by <#vm_group_name> will not be started until the VMs in this group are started. -}
-    , _enabled                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
-    , _mandatory                :: !(TF.Attr s P.Text)
-    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
-    , _name                     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
-    , _vm_group_name            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VM group that is the subject of this rule. The VMs defined in this group will not be started until the VMs in the group specified by <#dependency_vm_group_name> are started. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeClusterVmDependencyRuleResource s) where
-    toObject ComputeClusterVmDependencyRuleResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
-        , TF.assign "dependency_vm_group_name" <$> TF.attribute _dependency_vm_group_name
+    toObject ComputeClusterVmDependencyRuleResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
+        , TF.assign "dependency_vm_group_name" <$> TF.attribute _dependencyVmGroupName
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "mandatory" <$> TF.attribute _mandatory
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "vm_group_name" <$> TF.attribute _vm_group_name
+        , TF.assign "vm_group_name" <$> TF.attribute _vmGroupName
         ]
+
+instance TF.IsValid (ComputeClusterVmDependencyRuleResource s) where
+    validator = P.mempty
 
 instance P.HasComputeClusterId (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmDependencyRuleResource s)
+        P.lens (_computeClusterId :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterVmDependencyRuleResource s)
 
 instance P.HasDependencyVmGroupName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
     dependencyVmGroupName =
-        lens (_dependency_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dependency_vm_group_name = a } :: ComputeClusterVmDependencyRuleResource s)
+        P.lens (_dependencyVmGroupName :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dependencyVmGroupName = a } :: ComputeClusterVmDependencyRuleResource s)
 
-instance P.HasEnabled (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+instance P.HasEnabled (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Bool) where
     enabled =
-        lens (_enabled :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ComputeClusterVmDependencyRuleResource s)
+        P.lens (_enabled :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: ComputeClusterVmDependencyRuleResource s)
 
-instance P.HasMandatory (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
+instance P.HasMandatory (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Bool) where
     mandatory =
-        lens (_mandatory :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mandatory = a } :: ComputeClusterVmDependencyRuleResource s)
+        P.lens (_mandatory :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _mandatory = a } :: ComputeClusterVmDependencyRuleResource s)
 
 instance P.HasName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterVmDependencyRuleResource s)
+        P.lens (_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterVmDependencyRuleResource s)
 
 instance P.HasVmGroupName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s P.Text) where
     vmGroupName =
-        lens (_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vm_group_name = a } :: ComputeClusterVmDependencyRuleResource s)
+        P.lens (_vmGroupName :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vmGroupName = a } :: ComputeClusterVmDependencyRuleResource s)
 
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_compute_cluster_vm_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_group terraform documentation>
+-- for more information.
+data ComputeClusterVmGroupResource s = ComputeClusterVmGroupResource'
+    { _computeClusterId  :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    , _virtualMachineIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @virtual_machine_ids@ - (Optional)
+    -- The UUIDs of the virtual machines in this group.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDependencyVmGroupName (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
-    computedDependencyVmGroupName =
-        (_dependency_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
-    computedEnabled =
-        (_enabled :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
-    computedMandatory =
-        (_mandatory :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVmGroupName (TF.Ref s' (ComputeClusterVmDependencyRuleResource s)) (TF.Attr s P.Text) where
-    computedVmGroupName =
-        (_vm_group_name :: ComputeClusterVmDependencyRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeClusterVmDependencyRuleResource :: TF.Resource P.VSphere (ComputeClusterVmDependencyRuleResource s)
-computeClusterVmDependencyRuleResource =
-    TF.newResource "vsphere_compute_cluster_vm_dependency_rule" $
-        ComputeClusterVmDependencyRuleResource {
-              _compute_cluster_id = TF.Nil
-            , _dependency_vm_group_name = TF.Nil
-            , _enabled = TF.Nil
-            , _mandatory = TF.Nil
-            , _name = TF.Nil
-            , _vm_group_name = TF.Nil
+computeClusterVmGroupResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (ComputeClusterVmGroupResource s)
+computeClusterVmGroupResource _computeClusterId _name =
+    TF.newResource "vsphere_compute_cluster_vm_group" TF.validator $
+        ComputeClusterVmGroupResource'
+            { _computeClusterId = _computeClusterId
+            , _name = _name
+            , _virtualMachineIds = TF.Nil
             }
 
-{- | The @vsphere_compute_cluster_vm_group@ VSphere resource.
-
-The @vsphere_compute_cluster_vm_group@ resource can be used to manage groups
-of virtual machines in a cluster, either created by the
-</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
-the </docs/providers/vsphere/d/compute_cluster.html> data source. This
-resource mainly serves as an input to the
-</docs/providers/vsphere/r/compute_cluster_vm_dependency_rule.html> and
-</docs/providers/vsphere/r/compute_cluster_vm_host_rule.html> resources. See
-the individual resource documentation pages for more information. ~> NOTE:
-This resource requires vCenter and is not available on direct ESXi
-connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data ComputeClusterVmGroupResource s = ComputeClusterVmGroupResource {
-      _compute_cluster_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
-    , _name                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VM group. This must be unique in the cluster. Forces a new resource if changed. -}
-    , _virtual_machine_ids :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUIDs of the virtual machines in this group. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeClusterVmGroupResource s) where
-    toObject ComputeClusterVmGroupResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+    toObject ComputeClusterVmGroupResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtualMachineIds
         ]
+
+instance TF.IsValid (ComputeClusterVmGroupResource s) where
+    validator = P.mempty
 
 instance P.HasComputeClusterId (ComputeClusterVmGroupResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmGroupResource s)
+        P.lens (_computeClusterId :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterVmGroupResource s)
 
 instance P.HasName (ComputeClusterVmGroupResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterVmGroupResource s)
+        P.lens (_name :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterVmGroupResource s)
 
-instance P.HasVirtualMachineIds (ComputeClusterVmGroupResource s) (TF.Attr s P.Text) where
+instance P.HasVirtualMachineIds (ComputeClusterVmGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
     virtualMachineIds =
-        lens (_virtual_machine_ids :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_ids = a } :: ComputeClusterVmGroupResource s)
+        P.lens (_virtualMachineIds :: ComputeClusterVmGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _virtualMachineIds = a } :: ComputeClusterVmGroupResource s)
 
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_compute_cluster_vm_host_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_host_rule terraform documentation>
+-- for more information.
+data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource'
+    { _affinityHostGroupName     :: TF.Attr s P.Text
+    -- ^ @affinity_host_group_name@ - (Optional)
+    -- When this field is used, virtual machines defined in vm_group_name will be
+    -- run on the hosts defined in this host group.
+    --
+    -- Conflicts with:
+    --
+    -- * 'antiAffinityHostGroupName'
+    , _antiAffinityHostGroupName :: TF.Attr s P.Text
+    -- ^ @anti_affinity_host_group_name@ - (Optional)
+    -- When this field is used, virtual machines defined in vm_group_name will not
+    -- be run on the hosts defined in this host group.
+    --
+    -- Conflicts with:
+    --
+    -- * 'affinityHostGroupName'
+    , _computeClusterId          :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _enabled                   :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    -- Enable this rule in the cluster.
+    --
+    , _mandatory                 :: TF.Attr s P.Bool
+    -- ^ @mandatory@ - (Optional)
+    -- When true, prevents any virtual machine operations that may violate this
+    -- rule.
+    --
+    , _name                      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    , _vmGroupName               :: TF.Attr s P.Text
+    -- ^ @vm_group_name@ - (Required)
+    -- The name of the virtual machine group to use with this rule.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (ComputeClusterVmGroupResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineIds =
-        (_virtual_machine_ids :: ComputeClusterVmGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeClusterVmGroupResource :: TF.Resource P.VSphere (ComputeClusterVmGroupResource s)
-computeClusterVmGroupResource =
-    TF.newResource "vsphere_compute_cluster_vm_group" $
-        ComputeClusterVmGroupResource {
-              _compute_cluster_id = TF.Nil
-            , _name = TF.Nil
-            , _virtual_machine_ids = TF.Nil
+computeClusterVmHostRuleResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @vm_group_name@ - 'P.vmGroupName'
+    -> TF.Resource P.Provider (ComputeClusterVmHostRuleResource s)
+computeClusterVmHostRuleResource _computeClusterId _name _vmGroupName =
+    TF.newResource "vsphere_compute_cluster_vm_host_rule" TF.validator $
+        ComputeClusterVmHostRuleResource'
+            { _affinityHostGroupName = TF.Nil
+            , _antiAffinityHostGroupName = TF.Nil
+            , _computeClusterId = _computeClusterId
+            , _enabled = TF.value P.True
+            , _mandatory = TF.Nil
+            , _name = _name
+            , _vmGroupName = _vmGroupName
             }
 
-{- | The @vsphere_compute_cluster_vm_host_rule@ VSphere resource.
-
-The @vsphere_compute_cluster_vm_host_rule@ resource can be used to manage
-VM-to-host rules in a cluster, either created by the
-</docs/providers/vsphere/r/compute_cluster.html> resource or looked up by
-the </docs/providers/vsphere/d/compute_cluster.html> data source. This
-resource can create both affinity rules , where virtual machines run on
-specified hosts, or anti-affinity rules, where virtual machines run on hosts
-outside of the ones specified in the rule. Virtual machines and hosts are
-supplied via groups, which can be managed via the
-</docs/providers/vsphere/r/compute_cluster_vm_group.html> and
-</docs/providers/vsphere/r/compute_cluster_host_group.html> resources. ~>
-NOTE: This resource requires vCenter and is not available on direct ESXi
-connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource {
-      _affinity_host_group_name      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) When this field is used, the virtual machines defined in <#vm_group_name> will be run on the hosts defined in this host group. -}
-    , _anti_affinity_host_group_name :: !(TF.Attr s P.Text)
-    {- ^ (Optional) When this field is used, the virtual machines defined in <#vm_group_name> will not be run on the hosts defined in this host group. -}
-    , _compute_cluster_id            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the group in.  Forces a new resource if changed. -}
-    , _enabled                       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable this rule in the cluster. Default: @true@ . -}
-    , _mandatory                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) When this value is @true@ , prevents any virtual machine operations that may violate this rule. Default: @false@ . -}
-    , _name                          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
-    , _vm_group_name                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the virtual machine group to use with this rule. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ComputeClusterVmHostRuleResource s) where
-    toObject ComputeClusterVmHostRuleResource{..} = catMaybes
-        [ TF.assign "affinity_host_group_name" <$> TF.attribute _affinity_host_group_name
-        , TF.assign "anti_affinity_host_group_name" <$> TF.attribute _anti_affinity_host_group_name
-        , TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
+    toObject ComputeClusterVmHostRuleResource'{..} = P.catMaybes
+        [ TF.assign "affinity_host_group_name" <$> TF.attribute _affinityHostGroupName
+        , TF.assign "anti_affinity_host_group_name" <$> TF.attribute _antiAffinityHostGroupName
+        , TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "mandatory" <$> TF.attribute _mandatory
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "vm_group_name" <$> TF.attribute _vm_group_name
+        , TF.assign "vm_group_name" <$> TF.attribute _vmGroupName
         ]
+
+instance TF.IsValid (ComputeClusterVmHostRuleResource s) where
+    validator = TF.fieldsValidator (\ComputeClusterVmHostRuleResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_affinityHostGroupName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_affinityHostGroupName",
+                            [ "_antiAffinityHostGroupName"
+                            ])
+        , if (_antiAffinityHostGroupName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_antiAffinityHostGroupName",
+                            [ "_affinityHostGroupName"
+                            ])
+        ])
 
 instance P.HasAffinityHostGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
     affinityHostGroupName =
-        lens (_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _affinity_host_group_name = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_affinityHostGroupName :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _affinityHostGroupName = a } :: ComputeClusterVmHostRuleResource s)
 
 instance P.HasAntiAffinityHostGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
     antiAffinityHostGroupName =
-        lens (_anti_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _anti_affinity_host_group_name = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_antiAffinityHostGroupName :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _antiAffinityHostGroupName = a } :: ComputeClusterVmHostRuleResource s)
 
 instance P.HasComputeClusterId (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_computeClusterId :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: ComputeClusterVmHostRuleResource s)
 
-instance P.HasEnabled (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+instance P.HasEnabled (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Bool) where
     enabled =
-        lens (_enabled :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_enabled :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: ComputeClusterVmHostRuleResource s)
 
-instance P.HasMandatory (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
+instance P.HasMandatory (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Bool) where
     mandatory =
-        lens (_mandatory :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mandatory = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_mandatory :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _mandatory = a } :: ComputeClusterVmHostRuleResource s)
 
 instance P.HasName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeClusterVmHostRuleResource s)
 
 instance P.HasVmGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text) where
     vmGroupName =
-        lens (_vm_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vm_group_name = a } :: ComputeClusterVmHostRuleResource s)
+        P.lens (_vmGroupName :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vmGroupName = a } :: ComputeClusterVmHostRuleResource s)
 
-instance s ~ s' => P.HasComputedAffinityHostGroupName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedAffinityHostGroupName =
-        (_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_custom_attribute@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_custom_attribute terraform documentation>
+-- for more information.
+data CustomAttributeResource s = CustomAttributeResource'
+    { _managedObjectType :: TF.Attr s P.Text
+    -- ^ @managed_object_type@ - (Optional)
+    -- Object type for which the custom attribute is valid. If not specified, the
+    -- attribute is valid for all managed object types.
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The display name of the custom attribute.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedAntiAffinityHostGroupName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedAntiAffinityHostGroupName =
-        (_anti_affinity_host_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedEnabled =
-        (_enabled :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMandatory (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedMandatory =
-        (_mandatory :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVmGroupName (TF.Ref s' (ComputeClusterVmHostRuleResource s)) (TF.Attr s P.Text) where
-    computedVmGroupName =
-        (_vm_group_name :: ComputeClusterVmHostRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-computeClusterVmHostRuleResource :: TF.Resource P.VSphere (ComputeClusterVmHostRuleResource s)
-computeClusterVmHostRuleResource =
-    TF.newResource "vsphere_compute_cluster_vm_host_rule" $
-        ComputeClusterVmHostRuleResource {
-              _affinity_host_group_name = TF.Nil
-            , _anti_affinity_host_group_name = TF.Nil
-            , _compute_cluster_id = TF.Nil
-            , _enabled = TF.Nil
-            , _mandatory = TF.Nil
-            , _name = TF.Nil
-            , _vm_group_name = TF.Nil
+customAttributeResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (CustomAttributeResource s)
+customAttributeResource _name =
+    TF.newResource "vsphere_custom_attribute" TF.validator $
+        CustomAttributeResource'
+            { _managedObjectType = TF.Nil
+            , _name = _name
             }
 
-{- | The @vsphere_custom_attribute@ VSphere resource.
-
-The @vsphere_custom_attribute@ resource can be used to create and manage
-custom attributes, which allow users to associate user-specific
-meta-information with vSphere managed objects. Custom attribute values must
-be strings and are stored on the vCenter Server and not the managed object.
-For more information about custom attributes, click
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vcenterhost.doc/GUID-73606C4C-763C-4E27-A1DA-032E4C46219D.html>
-. ~> NOTE: Custom attributes are unsupported on direct ESXi connections and
-require vCenter.
--}
-data CustomAttributeResource s = CustomAttributeResource {
-      _managed_object_type :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The object type that this attribute may be applied to. If not set, the custom attribute may be applied to any object type. For a full list, click <#managed-object-types> . Forces a new resource if changed. -}
-    , _name                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the custom attribute. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (CustomAttributeResource s) where
-    toObject CustomAttributeResource{..} = catMaybes
-        [ TF.assign "managed_object_type" <$> TF.attribute _managed_object_type
+    toObject CustomAttributeResource'{..} = P.catMaybes
+        [ TF.assign "managed_object_type" <$> TF.attribute _managedObjectType
         , TF.assign "name" <$> TF.attribute _name
         ]
+
+instance TF.IsValid (CustomAttributeResource s) where
+    validator = P.mempty
 
 instance P.HasManagedObjectType (CustomAttributeResource s) (TF.Attr s P.Text) where
     managedObjectType =
-        lens (_managed_object_type :: CustomAttributeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _managed_object_type = a } :: CustomAttributeResource s)
+        P.lens (_managedObjectType :: CustomAttributeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _managedObjectType = a } :: CustomAttributeResource s)
 
 instance P.HasName (CustomAttributeResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CustomAttributeResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CustomAttributeResource s)
+        P.lens (_name :: CustomAttributeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CustomAttributeResource s)
 
-instance s ~ s' => P.HasComputedManagedObjectType (TF.Ref s' (CustomAttributeResource s)) (TF.Attr s P.Text) where
-    computedManagedObjectType =
-        (_managed_object_type :: CustomAttributeResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_datacenter@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datacenter terraform documentation>
+-- for more information.
+data DatacenterResource s = DatacenterResource'
+    { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _folder           :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _tags             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CustomAttributeResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CustomAttributeResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-customAttributeResource :: TF.Resource P.VSphere (CustomAttributeResource s)
-customAttributeResource =
-    TF.newResource "vsphere_custom_attribute" $
-        CustomAttributeResource {
-              _managed_object_type = TF.Nil
-            , _name = TF.Nil
+datacenterResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (DatacenterResource s)
+datacenterResource _name =
+    TF.newResource "vsphere_datacenter" TF.validator $
+        DatacenterResource'
+            { _customAttributes = TF.Nil
+            , _folder = TF.Nil
+            , _name = _name
+            , _tags = TF.Nil
             }
 
-{- | The @vsphere_datacenter@ VSphere resource.
-
-Provides a VMware vSphere datacenter resource. This can be used as the
-primary container of inventory objects such as hosts and virtual machines.
--}
-data DatacenterResource s = DatacenterResource {
-      _folder :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The folder where the datacenter should be created. Forces a new resource if changed. -}
-    , _name   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the datacenter. This name needs to be unique within the folder. Forces a new resource if changed. -}
-    , _tags   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DatacenterResource s) where
-    toObject DatacenterResource{..} = catMaybes
-        [ TF.assign "folder" <$> TF.attribute _folder
+    toObject DatacenterResource'{..} = P.catMaybes
+        [ TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
         ]
+
+instance TF.IsValid (DatacenterResource s) where
+    validator = P.mempty
+
+instance P.HasCustomAttributes (DatacenterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: DatacenterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: DatacenterResource s)
 
 instance P.HasFolder (DatacenterResource s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: DatacenterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: DatacenterResource s)
+        P.lens (_folder :: DatacenterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: DatacenterResource s)
 
 instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatacenterResource s)
+        P.lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatacenterResource s)
 
-instance P.HasTags (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasTags (DatacenterResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: DatacenterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: DatacenterResource s)
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: DatacenterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+        P.lens (_tags :: DatacenterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: DatacenterResource s)
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedMoid x = TF.compute (TF.refKey x) "moid"
+    computedMoid x = TF.compute (TF.refKey x) "_computedMoid"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatacenterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_datastore_cluster@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datastore_cluster terraform documentation>
+-- for more information.
+data DatastoreClusterResource s = DatastoreClusterResource'
+    { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datacenterId :: TF.Attr s P.Text
+    -- ^ @datacenter_id@ - (Required)
+    -- The managed object ID of the datacenter to put the datastore cluster in.
+    --
+    , _folder :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    -- The name of the folder to locate the datastore cluster in.
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- Name for the new storage pod.
+    --
+    , _sdrsAdvancedOptions :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @sdrs_advanced_options@ - (Optional)
+    -- Advanced configuration options for storage DRS.
+    --
+    , _sdrsAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_automation_level@ - (Optional)
+    -- The default automation level for all virtual machines in this storage
+    -- cluster.
+    --
+    , _sdrsDefaultIntraVmAffinity :: TF.Attr s P.Bool
+    -- ^ @sdrs_default_intra_vm_affinity@ - (Optional)
+    -- When true, storage DRS keeps VMDKs for individual VMs on the same datastore
+    -- by default.
+    --
+    , _sdrsEnabled :: TF.Attr s P.Bool
+    -- ^ @sdrs_enabled@ - (Optional)
+    -- Enable storage DRS for this datastore cluster.
+    --
+    , _sdrsFreeSpaceThreshold :: TF.Attr s P.Integer
+    -- ^ @sdrs_free_space_threshold@ - (Optional)
+    -- The threshold, in GB, that storage DRS uses to make decisions to migrate VMs
+    -- out of a datastore.
+    --
+    , _sdrsFreeSpaceThresholdMode :: TF.Attr s P.Text
+    -- ^ @sdrs_free_space_threshold_mode@ - (Optional)
+    -- The free space threshold to use. When set to utilization,
+    -- drs_space_utilization_threshold is used, and when set to freeSpace,
+    -- drs_free_space_threshold is used.
+    --
+    , _sdrsFreeSpaceUtilizationDifference :: TF.Attr s P.Integer
+    -- ^ @sdrs_free_space_utilization_difference@ - (Optional)
+    -- The threshold, in percent, of difference between space utilization in
+    -- datastores before storage DRS makes decisions to balance the space.
+    --
+    , _sdrsIoBalanceAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_io_balance_automation_level@ - (Optional)
+    -- Overrides the default automation settings when correcting I/O load
+    -- imbalances.
+    --
+    , _sdrsIoLatencyThreshold :: TF.Attr s P.Integer
+    -- ^ @sdrs_io_latency_threshold@ - (Optional)
+    -- The I/O latency threshold, in milliseconds, that storage DRS uses to make
+    -- recommendations to move disks from this datastore.
+    --
+    , _sdrsIoLoadBalanceEnabled :: TF.Attr s P.Bool
+    -- ^ @sdrs_io_load_balance_enabled@ - (Optional)
+    -- Enable I/O load balancing for this datastore cluster.
+    --
+    , _sdrsIoLoadImbalanceThreshold :: TF.Attr s P.Integer
+    -- ^ @sdrs_io_load_imbalance_threshold@ - (Optional)
+    -- The difference between load in datastores in the cluster before storage DRS
+    -- makes recommendations to balance the load.
+    --
+    , _sdrsIoReservableIopsThreshold :: TF.Attr s P.Integer
+    -- ^ @sdrs_io_reservable_iops_threshold@ - (Optional)
+    -- The threshold of reservable IOPS of all virtual machines on the datastore
+    -- before storage DRS makes recommendations to move VMs off of a datastore.
+    --
+    , _sdrsIoReservablePercentThreshold :: TF.Attr s P.Integer
+    -- ^ @sdrs_io_reservable_percent_threshold@ - (Optional)
+    -- The threshold, in percent, of actual estimated performance of the datastore
+    -- (in IOPS) that storage DRS uses to make recommendations to move VMs off of a
+    -- datastore when the total reservable IOPS exceeds the threshold.
+    --
+    , _sdrsIoReservableThresholdMode :: TF.Attr s P.Text
+    -- ^ @sdrs_io_reservable_threshold_mode@ - (Optional)
+    -- The reservable IOPS threshold to use, percent in the event of automatic, or
+    -- manual threshold in the event of manual.
+    --
+    , _sdrsLoadBalanceInterval :: TF.Attr s P.Integer
+    -- ^ @sdrs_load_balance_interval@ - (Optional)
+    -- The storage DRS poll interval, in minutes.
+    --
+    , _sdrsPolicyEnforcementAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_policy_enforcement_automation_level@ - (Optional)
+    -- Overrides the default automation settings when correcting storage and VM
+    -- policy violations.
+    --
+    , _sdrsRuleEnforcementAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_rule_enforcement_automation_level@ - (Optional)
+    -- Overrides the default automation settings when correcting affinity rule
+    -- violations.
+    --
+    , _sdrsSpaceBalanceAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_space_balance_automation_level@ - (Optional)
+    -- Overrides the default automation settings when correcting disk space
+    -- imbalances.
+    --
+    , _sdrsSpaceUtilizationThreshold :: TF.Attr s P.Integer
+    -- ^ @sdrs_space_utilization_threshold@ - (Optional)
+    -- The threshold, in percent of used space, that storage DRS uses to make
+    -- decisions to migrate VMs out of a datastore.
+    --
+    , _sdrsVmEvacuationAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_vm_evacuation_automation_level@ - (Optional)
+    -- Overrides the default automation settings when generating recommendations
+    -- for datastore evacuation.
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: DatacenterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-datacenterResource :: TF.Resource P.VSphere (DatacenterResource s)
-datacenterResource =
-    TF.newResource "vsphere_datacenter" $
-        DatacenterResource {
-              _folder = TF.Nil
-            , _name = TF.Nil
+datastoreClusterResource
+    :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (DatastoreClusterResource s)
+datastoreClusterResource _datacenterId _name =
+    TF.newResource "vsphere_datastore_cluster" TF.validator $
+        DatastoreClusterResource'
+            { _customAttributes = TF.Nil
+            , _datacenterId = _datacenterId
+            , _folder = TF.Nil
+            , _name = _name
+            , _sdrsAdvancedOptions = TF.Nil
+            , _sdrsAutomationLevel = TF.value "manual"
+            , _sdrsDefaultIntraVmAffinity = TF.value P.True
+            , _sdrsEnabled = TF.value P.False
+            , _sdrsFreeSpaceThreshold = TF.value 50
+            , _sdrsFreeSpaceThresholdMode = TF.value "utilization"
+            , _sdrsFreeSpaceUtilizationDifference = TF.value 5
+            , _sdrsIoBalanceAutomationLevel = TF.Nil
+            , _sdrsIoLatencyThreshold = TF.value 15
+            , _sdrsIoLoadBalanceEnabled = TF.value P.True
+            , _sdrsIoLoadImbalanceThreshold = TF.value 5
+            , _sdrsIoReservableIopsThreshold = TF.Nil
+            , _sdrsIoReservablePercentThreshold = TF.value 60
+            , _sdrsIoReservableThresholdMode = TF.value "automated"
+            , _sdrsLoadBalanceInterval = TF.value 480
+            , _sdrsPolicyEnforcementAutomationLevel = TF.Nil
+            , _sdrsRuleEnforcementAutomationLevel = TF.Nil
+            , _sdrsSpaceBalanceAutomationLevel = TF.Nil
+            , _sdrsSpaceUtilizationThreshold = TF.value 80
+            , _sdrsVmEvacuationAutomationLevel = TF.Nil
             , _tags = TF.Nil
             }
 
-{- | The @vsphere_datastore_cluster@ VSphere resource.
-
-The @vsphere_datastore_cluster@ resource can be used to create and manage
-datastore clusters. This can be used to create groups of datastores with a
-shared management interface, allowing for resource control and load
-balancing through Storage DRS. For more information on vSphere datastore
-clusters and Storage DRS, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-598DF695-107E-406B-9C95-0AF961FC227A.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections. ~> NOTE: Storage DRS requires a vSphere Enterprise Plus
-license.
--}
-data DatastoreClusterResource s = DatastoreClusterResource {
-      _datacenter_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datacenter to create the datastore cluster in. Forces a new resource if changed. -}
-    , _folder        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The relative path to a folder to put this datastore cluster in.  This is a path relative to the datacenter you are deploying the datastore to.  Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore cluster named @terraform-datastore-cluster-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-datastore-cluster-test@ . -}
-    , _name          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the datastore cluster. -}
-    , _sdrs_enabled  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable Storage DRS for this datastore cluster. Default: @false@ . -}
-    , _tags          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DatastoreClusterResource s) where
-    toObject DatastoreClusterResource{..} = catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+    toObject DatastoreClusterResource'{..} = P.catMaybes
+        [ TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "sdrs_enabled" <$> TF.attribute _sdrs_enabled
+        , TF.assign "sdrs_advanced_options" <$> TF.attribute _sdrsAdvancedOptions
+        , TF.assign "sdrs_automation_level" <$> TF.attribute _sdrsAutomationLevel
+        , TF.assign "sdrs_default_intra_vm_affinity" <$> TF.attribute _sdrsDefaultIntraVmAffinity
+        , TF.assign "sdrs_enabled" <$> TF.attribute _sdrsEnabled
+        , TF.assign "sdrs_free_space_threshold" <$> TF.attribute _sdrsFreeSpaceThreshold
+        , TF.assign "sdrs_free_space_threshold_mode" <$> TF.attribute _sdrsFreeSpaceThresholdMode
+        , TF.assign "sdrs_free_space_utilization_difference" <$> TF.attribute _sdrsFreeSpaceUtilizationDifference
+        , TF.assign "sdrs_io_balance_automation_level" <$> TF.attribute _sdrsIoBalanceAutomationLevel
+        , TF.assign "sdrs_io_latency_threshold" <$> TF.attribute _sdrsIoLatencyThreshold
+        , TF.assign "sdrs_io_load_balance_enabled" <$> TF.attribute _sdrsIoLoadBalanceEnabled
+        , TF.assign "sdrs_io_load_imbalance_threshold" <$> TF.attribute _sdrsIoLoadImbalanceThreshold
+        , TF.assign "sdrs_io_reservable_iops_threshold" <$> TF.attribute _sdrsIoReservableIopsThreshold
+        , TF.assign "sdrs_io_reservable_percent_threshold" <$> TF.attribute _sdrsIoReservablePercentThreshold
+        , TF.assign "sdrs_io_reservable_threshold_mode" <$> TF.attribute _sdrsIoReservableThresholdMode
+        , TF.assign "sdrs_load_balance_interval" <$> TF.attribute _sdrsLoadBalanceInterval
+        , TF.assign "sdrs_policy_enforcement_automation_level" <$> TF.attribute _sdrsPolicyEnforcementAutomationLevel
+        , TF.assign "sdrs_rule_enforcement_automation_level" <$> TF.attribute _sdrsRuleEnforcementAutomationLevel
+        , TF.assign "sdrs_space_balance_automation_level" <$> TF.attribute _sdrsSpaceBalanceAutomationLevel
+        , TF.assign "sdrs_space_utilization_threshold" <$> TF.attribute _sdrsSpaceUtilizationThreshold
+        , TF.assign "sdrs_vm_evacuation_automation_level" <$> TF.attribute _sdrsVmEvacuationAutomationLevel
         , TF.assign "tags" <$> TF.attribute _tags
         ]
+
+instance TF.IsValid (DatastoreClusterResource s) where
+    validator = P.mempty
+
+instance P.HasCustomAttributes (DatastoreClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: DatastoreClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: DatastoreClusterResource s)
 
 instance P.HasDatacenterId (DatastoreClusterResource s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: DatastoreClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: DatastoreClusterResource s)
+        P.lens (_datacenterId :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenterId = a } :: DatastoreClusterResource s)
 
 instance P.HasFolder (DatastoreClusterResource s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: DatastoreClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: DatastoreClusterResource s)
+        P.lens (_folder :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: DatastoreClusterResource s)
 
 instance P.HasName (DatastoreClusterResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatastoreClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatastoreClusterResource s)
+        P.lens (_name :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatastoreClusterResource s)
 
-instance P.HasSdrsEnabled (DatastoreClusterResource s) (TF.Attr s P.Text) where
+instance P.HasSdrsAdvancedOptions (DatastoreClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    sdrsAdvancedOptions =
+        P.lens (_sdrsAdvancedOptions :: DatastoreClusterResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _sdrsAdvancedOptions = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsAutomationLevel (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsAutomationLevel =
+        P.lens (_sdrsAutomationLevel :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsAutomationLevel = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsDefaultIntraVmAffinity (DatastoreClusterResource s) (TF.Attr s P.Bool) where
+    sdrsDefaultIntraVmAffinity =
+        P.lens (_sdrsDefaultIntraVmAffinity :: DatastoreClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _sdrsDefaultIntraVmAffinity = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsEnabled (DatastoreClusterResource s) (TF.Attr s P.Bool) where
     sdrsEnabled =
-        lens (_sdrs_enabled :: DatastoreClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sdrs_enabled = a } :: DatastoreClusterResource s)
+        P.lens (_sdrsEnabled :: DatastoreClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _sdrsEnabled = a } :: DatastoreClusterResource s)
 
-instance P.HasTags (DatastoreClusterResource s) (TF.Attr s P.Text) where
+instance P.HasSdrsFreeSpaceThreshold (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsFreeSpaceThreshold =
+        P.lens (_sdrsFreeSpaceThreshold :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsFreeSpaceThreshold = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsFreeSpaceThresholdMode (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsFreeSpaceThresholdMode =
+        P.lens (_sdrsFreeSpaceThresholdMode :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsFreeSpaceThresholdMode = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsFreeSpaceUtilizationDifference (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsFreeSpaceUtilizationDifference =
+        P.lens (_sdrsFreeSpaceUtilizationDifference :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsFreeSpaceUtilizationDifference = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoBalanceAutomationLevel (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsIoBalanceAutomationLevel =
+        P.lens (_sdrsIoBalanceAutomationLevel :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsIoBalanceAutomationLevel = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoLatencyThreshold (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsIoLatencyThreshold =
+        P.lens (_sdrsIoLatencyThreshold :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsIoLatencyThreshold = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoLoadBalanceEnabled (DatastoreClusterResource s) (TF.Attr s P.Bool) where
+    sdrsIoLoadBalanceEnabled =
+        P.lens (_sdrsIoLoadBalanceEnabled :: DatastoreClusterResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _sdrsIoLoadBalanceEnabled = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoLoadImbalanceThreshold (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsIoLoadImbalanceThreshold =
+        P.lens (_sdrsIoLoadImbalanceThreshold :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsIoLoadImbalanceThreshold = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoReservableIopsThreshold (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsIoReservableIopsThreshold =
+        P.lens (_sdrsIoReservableIopsThreshold :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsIoReservableIopsThreshold = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoReservablePercentThreshold (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsIoReservablePercentThreshold =
+        P.lens (_sdrsIoReservablePercentThreshold :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsIoReservablePercentThreshold = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsIoReservableThresholdMode (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsIoReservableThresholdMode =
+        P.lens (_sdrsIoReservableThresholdMode :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsIoReservableThresholdMode = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsLoadBalanceInterval (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsLoadBalanceInterval =
+        P.lens (_sdrsLoadBalanceInterval :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsLoadBalanceInterval = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsPolicyEnforcementAutomationLevel (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsPolicyEnforcementAutomationLevel =
+        P.lens (_sdrsPolicyEnforcementAutomationLevel :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsPolicyEnforcementAutomationLevel = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsRuleEnforcementAutomationLevel (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsRuleEnforcementAutomationLevel =
+        P.lens (_sdrsRuleEnforcementAutomationLevel :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsRuleEnforcementAutomationLevel = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsSpaceBalanceAutomationLevel (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsSpaceBalanceAutomationLevel =
+        P.lens (_sdrsSpaceBalanceAutomationLevel :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsSpaceBalanceAutomationLevel = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsSpaceUtilizationThreshold (DatastoreClusterResource s) (TF.Attr s P.Integer) where
+    sdrsSpaceUtilizationThreshold =
+        P.lens (_sdrsSpaceUtilizationThreshold :: DatastoreClusterResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _sdrsSpaceUtilizationThreshold = a } :: DatastoreClusterResource s)
+
+instance P.HasSdrsVmEvacuationAutomationLevel (DatastoreClusterResource s) (TF.Attr s P.Text) where
+    sdrsVmEvacuationAutomationLevel =
+        P.lens (_sdrsVmEvacuationAutomationLevel :: DatastoreClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsVmEvacuationAutomationLevel = a } :: DatastoreClusterResource s)
+
+instance P.HasTags (DatastoreClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: DatastoreClusterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: DatastoreClusterResource s)
+        P.lens (_tags :: DatastoreClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: DatastoreClusterResource s)
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: DatastoreClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_datastore_cluster_vm_anti_affinity_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datastore_cluster_vm_anti_affinity_rule terraform documentation>
+-- for more information.
+data DatastoreClusterVmAntiAffinityRuleResource s = DatastoreClusterVmAntiAffinityRuleResource'
+    { _datastoreClusterId :: TF.Attr s P.Text
+    -- ^ @datastore_cluster_id@ - (Required)
+    -- The managed object ID of the datastore cluster.
+    --
+    , _enabled            :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    -- Enable this rule in the cluster.
+    --
+    , _mandatory          :: TF.Attr s P.Bool
+    -- ^ @mandatory@ - (Optional)
+    -- When true, prevents any virtual machine operations that may violate this
+    -- rule.
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The unique name of the virtual machine group in the cluster.
+    --
+    , _virtualMachineIds  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @virtual_machine_ids@ - (Required)
+    -- The UUIDs of the virtual machines to run on different datastores from each
+    -- other.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: DatastoreClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatastoreClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSdrsEnabled (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
-    computedSdrsEnabled =
-        (_sdrs_enabled :: DatastoreClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DatastoreClusterResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: DatastoreClusterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-datastoreClusterResource :: TF.Resource P.VSphere (DatastoreClusterResource s)
-datastoreClusterResource =
-    TF.newResource "vsphere_datastore_cluster" $
-        DatastoreClusterResource {
-              _datacenter_id = TF.Nil
-            , _folder = TF.Nil
-            , _name = TF.Nil
-            , _sdrs_enabled = TF.Nil
-            , _tags = TF.Nil
+datastoreClusterVmAntiAffinityRuleResource
+    :: TF.Attr s P.Text -- ^ @datastore_cluster_id@ - 'P.datastoreClusterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
+    -> TF.Resource P.Provider (DatastoreClusterVmAntiAffinityRuleResource s)
+datastoreClusterVmAntiAffinityRuleResource _datastoreClusterId _name _virtualMachineIds =
+    TF.newResource "vsphere_datastore_cluster_vm_anti_affinity_rule" TF.validator $
+        DatastoreClusterVmAntiAffinityRuleResource'
+            { _datastoreClusterId = _datastoreClusterId
+            , _enabled = TF.value P.True
+            , _mandatory = TF.Nil
+            , _name = _name
+            , _virtualMachineIds = _virtualMachineIds
             }
 
-{- | The @vsphere_datastore_cluster_vm_anti_affinity_rule@ VSphere resource.
-
-The @vsphere_datastore_cluster_vm_anti_affinity_rule@ resource can be used
-to manage VM anti-affinity rules in a datastore cluster, either created by
-the </docs/providers/vsphere/r/datastore_cluster.html> resource or looked up
-by the </docs/providers/vsphere/d/datastore_cluster.html> data source. This
-rule can be used to tell a set to virtual machines to run on different
-datastores within a cluster, useful for preventing single points of failure
-in application cluster scenarios. When configured, Storage DRS will make a
-best effort to ensure that the virtual machines run on different datastores,
-or prevent any operation that would keep that from happening, depending on
-the value of the <#mandatory> flag. ~> NOTE: This resource requires vCenter
-and is not available on direct ESXi connections. ~> NOTE: Storage DRS
-requires a vSphere Enterprise Plus license.
--}
-data DatastoreClusterVmAntiAffinityRuleResource s = DatastoreClusterVmAntiAffinityRuleResource {
-      _datastore_cluster_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datastore cluster to put the group in.  Forces a new resource if changed. -}
-    , _name                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the rule. This must be unique in the cluster. -}
-    , _virtual_machine_ids  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUIDs of the virtual machines to run on different datastores from each other. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DatastoreClusterVmAntiAffinityRuleResource s) where
-    toObject DatastoreClusterVmAntiAffinityRuleResource{..} = catMaybes
-        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
+    toObject DatastoreClusterVmAntiAffinityRuleResource'{..} = P.catMaybes
+        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastoreClusterId
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "mandatory" <$> TF.attribute _mandatory
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtual_machine_ids
+        , TF.assign "virtual_machine_ids" <$> TF.attribute _virtualMachineIds
         ]
+
+instance TF.IsValid (DatastoreClusterVmAntiAffinityRuleResource s) where
+    validator = P.mempty
 
 instance P.HasDatastoreClusterId (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
     datastoreClusterId =
-        lens (_datastore_cluster_id :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datastore_cluster_id = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+        P.lens (_datastoreClusterId :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreClusterId = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+
+instance P.HasEnabled (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+
+instance P.HasMandatory (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Bool) where
+    mandatory =
+        P.lens (_mandatory :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _mandatory = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
 
 instance P.HasName (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+        P.lens (_name :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
 
-instance P.HasVirtualMachineIds (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s P.Text) where
+instance P.HasVirtualMachineIds (DatastoreClusterVmAntiAffinityRuleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     virtualMachineIds =
-        lens (_virtual_machine_ids :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_ids = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
+        P.lens (_virtualMachineIds :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _virtualMachineIds = a } :: DatastoreClusterVmAntiAffinityRuleResource s)
 
-instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedDatastoreClusterId =
-        (_datastore_cluster_id :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_distributed_port_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_distributed_port_group terraform documentation>
+-- for more information.
+data DistributedPortGroupResource s = DistributedPortGroupResource'
+    { _autoExpand :: TF.Attr s P.Bool
+    -- ^ @auto_expand@ - (Optional)
+    -- Auto-expands the port group beyond the port count configured in
+    -- number_of_ports when necessary.
+    --
+    , _blockOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @block_override_allowed@ - (Optional)
+    -- Allow the blocked setting of an individual port to override the setting in
+    -- the portgroup.
+    --
+    , _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    -- The description of the portgroup.
+    --
+    , _distributedVirtualSwitchUuid :: TF.Attr s P.Text
+    -- ^ @distributed_virtual_switch_uuid@ - (Required)
+    -- The UUID of the DVS to attach this port group to.
+    --
+    , _livePortMovingAllowed :: TF.Attr s P.Bool
+    -- ^ @live_port_moving_allowed@ - (Optional)
+    -- Allow a live port to be moved in and out of the portgroup.
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the portgroup.
+    --
+    , _netflowOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @netflow_override_allowed@ - (Optional)
+    -- Allow the enabling or disabling of Netflow on a port, contrary to the policy
+    -- in the portgroup.
+    --
+    , _networkResourcePoolKey :: TF.Attr s P.Text
+    -- ^ @network_resource_pool_key@ - (Optional)
+    -- The key of a network resource pool to associate with this portgroup.
+    --
+    , _networkResourcePoolOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @network_resource_pool_override_allowed@ - (Optional)
+    -- Allow the network resource pool of an individual port to override the
+    -- setting in the portgroup.
+    --
+    , _portConfigResetAtDisconnect :: TF.Attr s P.Bool
+    -- ^ @port_config_reset_at_disconnect@ - (Optional)
+    -- Reset the setting of any ports in this portgroup back to the default setting
+    -- when the port disconnects.
+    --
+    , _portNameFormat :: TF.Attr s P.Text
+    -- ^ @port_name_format@ - (Optional)
+    -- A template string to use when creating ports in the portgroup.
+    --
+    , _securityPolicyOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @security_policy_override_allowed@ - (Optional)
+    -- Allow security policy settings on a port to override those on the portgroup.
+    --
+    , _shapingOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @shaping_override_allowed@ - (Optional)
+    -- Allow the traffic shaping policies of an individual port to override the
+    -- settings in the portgroup.
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    , _trafficFilterOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @traffic_filter_override_allowed@ - (Optional)
+    -- Allow any filter policies set on the individual port to override those in
+    -- the portgroup.
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    -- The type of portgroup. Can be one of earlyBinding (static) or ephemeral.
+    --
+    , _uplinkTeamingOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @uplink_teaming_override_allowed@ - (Optional)
+    -- Allow the uplink teaming policies on a port to override those on the
+    -- portgroup.
+    --
+    , _vlanOverrideAllowed :: TF.Attr s P.Bool
+    -- ^ @vlan_override_allowed@ - (Optional)
+    -- Allow the VLAN configuration on a port to override those on the portgroup.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineIds (TF.Ref s' (DatastoreClusterVmAntiAffinityRuleResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineIds =
-        (_virtual_machine_ids :: DatastoreClusterVmAntiAffinityRuleResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-datastoreClusterVmAntiAffinityRuleResource :: TF.Resource P.VSphere (DatastoreClusterVmAntiAffinityRuleResource s)
-datastoreClusterVmAntiAffinityRuleResource =
-    TF.newResource "vsphere_datastore_cluster_vm_anti_affinity_rule" $
-        DatastoreClusterVmAntiAffinityRuleResource {
-              _datastore_cluster_id = TF.Nil
-            , _name = TF.Nil
-            , _virtual_machine_ids = TF.Nil
+distributedPortGroupResource
+    :: TF.Attr s P.Text -- ^ @distributed_virtual_switch_uuid@ - 'P.distributedVirtualSwitchUuid'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (DistributedPortGroupResource s)
+distributedPortGroupResource _distributedVirtualSwitchUuid _name =
+    TF.newResource "vsphere_distributed_port_group" TF.validator $
+        DistributedPortGroupResource'
+            { _autoExpand = TF.value P.True
+            , _blockOverrideAllowed = TF.Nil
+            , _customAttributes = TF.Nil
+            , _description = TF.Nil
+            , _distributedVirtualSwitchUuid = _distributedVirtualSwitchUuid
+            , _livePortMovingAllowed = TF.Nil
+            , _name = _name
+            , _netflowOverrideAllowed = TF.Nil
+            , _networkResourcePoolKey = TF.value "-1"
+            , _networkResourcePoolOverrideAllowed = TF.Nil
+            , _portConfigResetAtDisconnect = TF.Nil
+            , _portNameFormat = TF.Nil
+            , _securityPolicyOverrideAllowed = TF.Nil
+            , _shapingOverrideAllowed = TF.Nil
+            , _tags = TF.Nil
+            , _trafficFilterOverrideAllowed = TF.Nil
+            , _type' = TF.value "earlyBinding"
+            , _uplinkTeamingOverrideAllowed = TF.Nil
+            , _vlanOverrideAllowed = TF.Nil
             }
 
-{- | The @vsphere_distributed_port_group@ VSphere resource.
-
-The @vsphere_distributed_port_group@ resource can be used to manage vSphere
-distributed virtual port groups. These port groups are connected to
-distributed virtual switches, which can be managed by the
-</docs/providers/vsphere/r/distributed_virtual_switch.html> resource.
-Distributed port groups can be used as networks for virtual machines,
-allowing VMs to use the networking supplied by a distributed virtual switch
-(DVS), with a set of policies that apply to that individual newtork, if
-desired. For an overview on vSphere networking concepts, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-2B11DBB8-CB3C-4AFF-8885-EFEA0FC562F4.html>
-. For more information on vSphere DVS portgroups, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-69933F6E-2442-46CF-AA17-1196CB9A0A09.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections.
--}
-data DistributedPortGroupResource s = DistributedPortGroupResource {
-      _auto_expand                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Allows the port group to create additional ports past the limit specified in @number_of_ports@ if necessary. Default: @true@ . -}
-    , _description                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An optional description for the port group. -}
-    , _distributed_virtual_switch_uuid :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the DVS to add the port group to. Forces a new resource if changed. -}
-    , _name                            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the port group. -}
-    , _number_of_ports                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of ports available on this port group. Cannot be decreased below the amount of used ports on the port group. -}
-    , _type'                           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The port group type. Can be one of @earlyBinding@ (static binding) or @ephemeral@ . Default: @earlyBinding@ . -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DistributedPortGroupResource s) where
-    toObject DistributedPortGroupResource{..} = catMaybes
-        [ TF.assign "auto_expand" <$> TF.attribute _auto_expand
+    toObject DistributedPortGroupResource'{..} = P.catMaybes
+        [ TF.assign "auto_expand" <$> TF.attribute _autoExpand
+        , TF.assign "block_override_allowed" <$> TF.attribute _blockOverrideAllowed
+        , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
         , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "distributed_virtual_switch_uuid" <$> TF.attribute _distributed_virtual_switch_uuid
+        , TF.assign "distributed_virtual_switch_uuid" <$> TF.attribute _distributedVirtualSwitchUuid
+        , TF.assign "live_port_moving_allowed" <$> TF.attribute _livePortMovingAllowed
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "number_of_ports" <$> TF.attribute _number_of_ports
+        , TF.assign "netflow_override_allowed" <$> TF.attribute _netflowOverrideAllowed
+        , TF.assign "network_resource_pool_key" <$> TF.attribute _networkResourcePoolKey
+        , TF.assign "network_resource_pool_override_allowed" <$> TF.attribute _networkResourcePoolOverrideAllowed
+        , TF.assign "port_config_reset_at_disconnect" <$> TF.attribute _portConfigResetAtDisconnect
+        , TF.assign "port_name_format" <$> TF.attribute _portNameFormat
+        , TF.assign "security_policy_override_allowed" <$> TF.attribute _securityPolicyOverrideAllowed
+        , TF.assign "shaping_override_allowed" <$> TF.attribute _shapingOverrideAllowed
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "traffic_filter_override_allowed" <$> TF.attribute _trafficFilterOverrideAllowed
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "uplink_teaming_override_allowed" <$> TF.attribute _uplinkTeamingOverrideAllowed
+        , TF.assign "vlan_override_allowed" <$> TF.attribute _vlanOverrideAllowed
         ]
 
-instance P.HasAutoExpand (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (DistributedPortGroupResource s) where
+    validator = P.mempty
+
+instance P.HasAutoExpand (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
     autoExpand =
-        lens (_auto_expand :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _auto_expand = a } :: DistributedPortGroupResource s)
+        P.lens (_autoExpand :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoExpand = a } :: DistributedPortGroupResource s)
+
+instance P.HasBlockOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    blockOverrideAllowed =
+        P.lens (_blockOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _blockOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasCustomAttributes (DistributedPortGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: DistributedPortGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: DistributedPortGroupResource s)
 
 instance P.HasDescription (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DistributedPortGroupResource s)
+        P.lens (_description :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DistributedPortGroupResource s)
 
 instance P.HasDistributedVirtualSwitchUuid (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     distributedVirtualSwitchUuid =
-        lens (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _distributed_virtual_switch_uuid = a } :: DistributedPortGroupResource s)
+        P.lens (_distributedVirtualSwitchUuid :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _distributedVirtualSwitchUuid = a } :: DistributedPortGroupResource s)
+
+instance P.HasLivePortMovingAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    livePortMovingAllowed =
+        P.lens (_livePortMovingAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _livePortMovingAllowed = a } :: DistributedPortGroupResource s)
 
 instance P.HasName (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DistributedPortGroupResource s)
+        P.lens (_name :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DistributedPortGroupResource s)
 
-instance P.HasNumberOfPorts (DistributedPortGroupResource s) (TF.Attr s P.Text) where
-    numberOfPorts =
-        lens (_number_of_ports :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _number_of_ports = a } :: DistributedPortGroupResource s)
+instance P.HasNetflowOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    netflowOverrideAllowed =
+        P.lens (_netflowOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _netflowOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasNetworkResourcePoolKey (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+    networkResourcePoolKey =
+        P.lens (_networkResourcePoolKey :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkResourcePoolKey = a } :: DistributedPortGroupResource s)
+
+instance P.HasNetworkResourcePoolOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    networkResourcePoolOverrideAllowed =
+        P.lens (_networkResourcePoolOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _networkResourcePoolOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasPortConfigResetAtDisconnect (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    portConfigResetAtDisconnect =
+        P.lens (_portConfigResetAtDisconnect :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _portConfigResetAtDisconnect = a } :: DistributedPortGroupResource s)
+
+instance P.HasPortNameFormat (DistributedPortGroupResource s) (TF.Attr s P.Text) where
+    portNameFormat =
+        P.lens (_portNameFormat :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _portNameFormat = a } :: DistributedPortGroupResource s)
+
+instance P.HasSecurityPolicyOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    securityPolicyOverrideAllowed =
+        P.lens (_securityPolicyOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _securityPolicyOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasShapingOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    shapingOverrideAllowed =
+        P.lens (_shapingOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _shapingOverrideAllowed = a } :: DistributedPortGroupResource s)
+
+instance P.HasTags (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: DistributedPortGroupResource s)
+
+instance P.HasTrafficFilterOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    trafficFilterOverrideAllowed =
+        P.lens (_trafficFilterOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _trafficFilterOverrideAllowed = a } :: DistributedPortGroupResource s)
 
 instance P.HasType' (DistributedPortGroupResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
+        P.lens (_type' :: DistributedPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: DistributedPortGroupResource s)
 
-instance s ~ s' => P.HasComputedAutoExpand (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedAutoExpand =
-        (_auto_expand :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasUplinkTeamingOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    uplinkTeamingOverrideAllowed =
+        P.lens (_uplinkTeamingOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _uplinkTeamingOverrideAllowed = a } :: DistributedPortGroupResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasVlanOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.Bool) where
+    vlanOverrideAllowed =
+        P.lens (_vlanOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _vlanOverrideAllowed = a } :: DistributedPortGroupResource s)
 
-instance s ~ s' => P.HasComputedDistributedVirtualSwitchUuid (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedDistributedVirtualSwitchUuid =
-        (_distributed_virtual_switch_uuid :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedActiveUplinks x = TF.compute (TF.refKey x) "_computedActiveUplinks"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedAllowForgedTransmits (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "_computedAllowForgedTransmits"
+
+instance s ~ s' => P.HasComputedAllowMacChanges (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedAllowMacChanges x = TF.compute (TF.refKey x) "_computedAllowMacChanges"
+
+instance s ~ s' => P.HasComputedAllowPromiscuous (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedAllowPromiscuous x = TF.compute (TF.refKey x) "_computedAllowPromiscuous"
+
+instance s ~ s' => P.HasComputedBlockAllPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedBlockAllPorts x = TF.compute (TF.refKey x) "_computedBlockAllPorts"
+
+instance s ~ s' => P.HasComputedCheckBeacon (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedCheckBeacon x = TF.compute (TF.refKey x) "_computedCheckBeacon"
+
+instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
+    computedConfigVersion x = TF.compute (TF.refKey x) "_computedConfigVersion"
+
+instance s ~ s' => P.HasComputedDirectpathGen2Allowed (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "_computedDirectpathGen2Allowed"
+
+instance s ~ s' => P.HasComputedEgressShapingAverageBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingAverageBandwidth"
+
+instance s ~ s' => P.HasComputedEgressShapingBurstSize (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "_computedEgressShapingBurstSize"
+
+instance s ~ s' => P.HasComputedEgressShapingEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "_computedEgressShapingEnabled"
+
+instance s ~ s' => P.HasComputedEgressShapingPeakBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingPeakBandwidth"
+
+instance s ~ s' => P.HasComputedFailback (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedFailback x = TF.compute (TF.refKey x) "_computedFailback"
+
+instance s ~ s' => P.HasComputedIngressShapingAverageBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingAverageBandwidth"
+
+instance s ~ s' => P.HasComputedIngressShapingBurstSize (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "_computedIngressShapingBurstSize"
+
+instance s ~ s' => P.HasComputedIngressShapingEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "_computedIngressShapingEnabled"
+
+instance s ~ s' => P.HasComputedIngressShapingPeakBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingPeakBandwidth"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedLacpEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedLacpEnabled x = TF.compute (TF.refKey x) "_computedLacpEnabled"
 
-instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedNumberOfPorts =
-        (_number_of_ports :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedLacpMode (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
+    computedLacpMode x = TF.compute (TF.refKey x) "_computedLacpMode"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: DistributedPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNetflowEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedNetflowEnabled x = TF.compute (TF.refKey x) "_computedNetflowEnabled"
 
-distributedPortGroupResource :: TF.Resource P.VSphere (DistributedPortGroupResource s)
-distributedPortGroupResource =
-    TF.newResource "vsphere_distributed_port_group" $
-        DistributedPortGroupResource {
-              _auto_expand = TF.Nil
+instance s ~ s' => P.HasComputedNotifySwitches (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedNotifySwitches x = TF.compute (TF.refKey x) "_computedNotifySwitches"
+
+instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedNumberOfPorts x = TF.compute (TF.refKey x) "_computedNumberOfPorts"
+
+instance s ~ s' => P.HasComputedPortPrivateSecondaryVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "_computedPortPrivateSecondaryVlanId"
+
+instance s ~ s' => P.HasComputedStandbyUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedStandbyUplinks x = TF.compute (TF.refKey x) "_computedStandbyUplinks"
+
+instance s ~ s' => P.HasComputedTeamingPolicy (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
+    computedTeamingPolicy x = TF.compute (TF.refKey x) "_computedTeamingPolicy"
+
+instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
+    computedTxUplink x = TF.compute (TF.refKey x) "_computedTxUplink"
+
+instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
+    computedVlanId x = TF.compute (TF.refKey x) "_computedVlanId"
+
+instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s (VlanRange s)]) where
+    computedVlanRange x = TF.compute (TF.refKey x) "_computedVlanRange"
+
+-- | @vsphere_distributed_virtual_switch@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_distributed_virtual_switch terraform documentation>
+-- for more information.
+data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
+    { _contactDetail :: TF.Attr s P.Text
+    -- ^ @contact_detail@ - (Optional)
+    -- The contact detail for this DVS.
+    --
+    , _contactName :: TF.Attr s P.Text
+    -- ^ @contact_name@ - (Optional)
+    -- The contact name for this DVS.
+    --
+    , _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datacenterId :: TF.Attr s P.Text
+    -- ^ @datacenter_id@ - (Required)
+    -- The ID of the datacenter to create this virtual switch in.
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    -- The description of the DVS.
+    --
+    , _folder :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    -- The folder to create this virtual switch in, relative to the datacenter.
+    --
+    , _host :: TF.Attr s [TF.Attr s (Host s)]
+    -- ^ @host@ - (Optional)
+    -- A host member specification.
+    --
+    , _ipv4Address :: TF.Attr s P.Text
+    -- ^ @ipv4_address@ - (Optional)
+    -- The IPv4 address of the switch. This can be used to see the DVS as a unique
+    -- device with NetFlow.
+    --
+    , _linkDiscoveryOperation :: TF.Attr s P.Text
+    -- ^ @link_discovery_operation@ - (Optional)
+    -- Whether to advertise or listen for link discovery. Valid values are
+    -- advertise, both, listen, and none.
+    --
+    , _linkDiscoveryProtocol :: TF.Attr s P.Text
+    -- ^ @link_discovery_protocol@ - (Optional)
+    -- The discovery protocol type. Valid values are cdp and lldp.
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name for the DVS. Must be unique in the folder that it is being created
+    -- in.
+    --
+    , _netflowActiveFlowTimeout :: TF.Attr s P.Integer
+    -- ^ @netflow_active_flow_timeout@ - (Optional)
+    -- The number of seconds after which active flows are forced to be exported to
+    -- the collector.
+    --
+    , _netflowCollectorIpAddress :: TF.Attr s P.Text
+    -- ^ @netflow_collector_ip_address@ - (Optional)
+    -- IP address for the netflow collector, using IPv4 or IPv6. IPv6 is supported
+    -- in vSphere Distributed Switch Version 6.0 or later.
+    --
+    , _netflowCollectorPort :: TF.Attr s P.Integer
+    -- ^ @netflow_collector_port@ - (Optional)
+    -- The port for the netflow collector.
+    --
+    , _netflowIdleFlowTimeout :: TF.Attr s P.Integer
+    -- ^ @netflow_idle_flow_timeout@ - (Optional)
+    -- The number of seconds after which idle flows are forced to be exported to
+    -- the collector.
+    --
+    , _netflowInternalFlowsOnly :: TF.Attr s P.Bool
+    -- ^ @netflow_internal_flows_only@ - (Optional)
+    -- Whether to limit analysis to traffic that has both source and destination
+    -- served by the same host.
+    --
+    , _netflowObservationDomainId :: TF.Attr s P.Integer
+    -- ^ @netflow_observation_domain_id@ - (Optional)
+    -- The observation Domain ID for the netflow collector.
+    --
+    , _netflowSamplingRate :: TF.Attr s P.Integer
+    -- ^ @netflow_sampling_rate@ - (Optional)
+    -- The ratio of total number of packets to the number of packets analyzed. Set
+    -- to 0 to disable sampling, meaning that all packets are analyzed.
+    --
+    , _networkResourceControlEnabled :: TF.Attr s P.Bool
+    -- ^ @network_resource_control_enabled@ - (Optional)
+    -- Whether or not to enable network resource control, enabling advanced traffic
+    -- shaping and resource control features.
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+distributedVirtualSwitchResource
+    :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (DistributedVirtualSwitchResource s)
+distributedVirtualSwitchResource _datacenterId _name =
+    TF.newResource "vsphere_distributed_virtual_switch" TF.validator $
+        DistributedVirtualSwitchResource'
+            { _contactDetail = TF.Nil
+            , _contactName = TF.Nil
+            , _customAttributes = TF.Nil
+            , _datacenterId = _datacenterId
             , _description = TF.Nil
-            , _distributed_virtual_switch_uuid = TF.Nil
-            , _name = TF.Nil
-            , _number_of_ports = TF.Nil
-            , _type' = TF.Nil
+            , _folder = TF.Nil
+            , _host = TF.Nil
+            , _ipv4Address = TF.Nil
+            , _linkDiscoveryOperation = TF.value "listen"
+            , _linkDiscoveryProtocol = TF.value "cdp"
+            , _name = _name
+            , _netflowActiveFlowTimeout = TF.value 60
+            , _netflowCollectorIpAddress = TF.Nil
+            , _netflowCollectorPort = TF.Nil
+            , _netflowIdleFlowTimeout = TF.value 15
+            , _netflowInternalFlowsOnly = TF.Nil
+            , _netflowObservationDomainId = TF.Nil
+            , _netflowSamplingRate = TF.Nil
+            , _networkResourceControlEnabled = TF.Nil
+            , _tags = TF.Nil
             }
 
-{- | The @vsphere_distributed_virtual_switch@ VSphere resource.
-
-The @vsphere_distributed_virtual_switch@ resource can be used to manage
-VMware Distributed Virtual Switches. An essential component of a
-distributed, scalable VMware datacenter, the vSphere Distributed Virtual
-Switch (DVS) provides centralized management and monitoring of the
-networking configuration of all the hosts that are associated with the
-switch. In addition to adding port groups (see the
-</docs/providers/vsphere/r/distributed_port_group.html> resource) that can
-be used as networks for virtual machines, a DVS can be configured to perform
-advanced high availability, traffic shaping, network monitoring, and more.
-For an overview on vSphere networking concepts, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-2B11DBB8-CB3C-4AFF-8885-EFEA0FC562F4.html>
-. For more information on vSphere DVS, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-375B45C7-684C-4C51-BA3C-70E48DFABF04.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections.
--}
-data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource {
-      _contact_detail           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The detailed contact information for the person who is responsible for the DVS. -}
-    , _contact_name             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the person who is responsible for the DVS. -}
-    , _datacenter_id            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the datacenter where the distributed virtual switch will be created. Forces a new resource if changed. -}
-    , _description              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A detailed description for the DVS. -}
-    , _folder                   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The folder to create the DVS in. Forces a new resource if changed. -}
-    , _ipv4_address             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) An IPv4 address to identify the switch. This is mostly useful when used with the <#netflow-arguments> found below. -}
-    , _lacp_api_version         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Link Aggregation Control Protocol group version to use with the switch. Possible values are @singleLag@ and @multipleLag@ . -}
-    , _link_discovery_operation :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to @advertise@ or @listen@ for link discovery traffic. -}
-    , _link_discovery_protocol  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The discovery protocol type. Valid types are @cdp@ and @lldp@ . -}
-    , _max_mtu                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. -}
-    , _multicast_filtering_mode :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The multicast filtering mode to use with the switch. Can be one of @legacyFiltering@ or @snooping@ . -}
-    , _name                     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the distributed virtual switch. -}
-    , _tags                     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _version                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) - The version of the DVS to create. The default is to create the DVS at the latest version supported by the version of vSphere being used. A DVS can be upgraded to another version, but cannot be downgraded. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DistributedVirtualSwitchResource s) where
-    toObject DistributedVirtualSwitchResource{..} = catMaybes
-        [ TF.assign "contact_detail" <$> TF.attribute _contact_detail
-        , TF.assign "contact_name" <$> TF.attribute _contact_name
-        , TF.assign "datacenter_id" <$> TF.attribute _datacenter_id
+    toObject DistributedVirtualSwitchResource'{..} = P.catMaybes
+        [ TF.assign "contact_detail" <$> TF.attribute _contactDetail
+        , TF.assign "contact_name" <$> TF.attribute _contactName
+        , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "ipv4_address" <$> TF.attribute _ipv4_address
-        , TF.assign "lacp_api_version" <$> TF.attribute _lacp_api_version
-        , TF.assign "link_discovery_operation" <$> TF.attribute _link_discovery_operation
-        , TF.assign "link_discovery_protocol" <$> TF.attribute _link_discovery_protocol
-        , TF.assign "max_mtu" <$> TF.attribute _max_mtu
-        , TF.assign "multicast_filtering_mode" <$> TF.attribute _multicast_filtering_mode
+        , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "ipv4_address" <$> TF.attribute _ipv4Address
+        , TF.assign "link_discovery_operation" <$> TF.attribute _linkDiscoveryOperation
+        , TF.assign "link_discovery_protocol" <$> TF.attribute _linkDiscoveryProtocol
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "netflow_active_flow_timeout" <$> TF.attribute _netflowActiveFlowTimeout
+        , TF.assign "netflow_collector_ip_address" <$> TF.attribute _netflowCollectorIpAddress
+        , TF.assign "netflow_collector_port" <$> TF.attribute _netflowCollectorPort
+        , TF.assign "netflow_idle_flow_timeout" <$> TF.attribute _netflowIdleFlowTimeout
+        , TF.assign "netflow_internal_flows_only" <$> TF.attribute _netflowInternalFlowsOnly
+        , TF.assign "netflow_observation_domain_id" <$> TF.attribute _netflowObservationDomainId
+        , TF.assign "netflow_sampling_rate" <$> TF.attribute _netflowSamplingRate
+        , TF.assign "network_resource_control_enabled" <$> TF.attribute _networkResourceControlEnabled
         , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "version" <$> TF.attribute _version
         ]
+
+instance TF.IsValid (DistributedVirtualSwitchResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_host"
+                  (_host
+                      :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (Host s)])
+                  TF.validator
 
 instance P.HasContactDetail (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     contactDetail =
-        lens (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _contact_detail = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_contactDetail :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _contactDetail = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasContactName (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     contactName =
-        lens (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _contact_name = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_contactName :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _contactName = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasCustomAttributes (DistributedVirtualSwitchResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: DistributedVirtualSwitchResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasDatacenterId (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     datacenterId =
-        lens (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter_id = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_datacenterId :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenterId = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasDescription (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_description :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasFolder (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasHost (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (Host s)]) where
+    host =
+        P.lens (_host :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (Host s)])
+               (\s a -> s { _host = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasIpv4Address (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     ipv4Address =
-        lens (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ipv4_address = a } :: DistributedVirtualSwitchResource s)
-
-instance P.HasLacpApiVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
-    lacpApiVersion =
-        lens (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _lacp_api_version = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_ipv4Address :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv4Address = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryOperation (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     linkDiscoveryOperation =
-        lens (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _link_discovery_operation = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_linkDiscoveryOperation :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _linkDiscoveryOperation = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasLinkDiscoveryProtocol (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     linkDiscoveryProtocol =
-        lens (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _link_discovery_protocol = a } :: DistributedVirtualSwitchResource s)
-
-instance P.HasMaxMtu (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
-    maxMtu =
-        lens (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _max_mtu = a } :: DistributedVirtualSwitchResource s)
-
-instance P.HasMulticastFilteringMode (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
-    multicastFilteringMode =
-        lens (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _multicast_filtering_mode = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_linkDiscoveryProtocol :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _linkDiscoveryProtocol = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasName (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DistributedVirtualSwitchResource s)
 
-instance P.HasTags (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+instance P.HasNetflowActiveFlowTimeout (DistributedVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    netflowActiveFlowTimeout =
+        P.lens (_netflowActiveFlowTimeout :: DistributedVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _netflowActiveFlowTimeout = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowCollectorIpAddress (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
+    netflowCollectorIpAddress =
+        P.lens (_netflowCollectorIpAddress :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _netflowCollectorIpAddress = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowCollectorPort (DistributedVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    netflowCollectorPort =
+        P.lens (_netflowCollectorPort :: DistributedVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _netflowCollectorPort = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowIdleFlowTimeout (DistributedVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    netflowIdleFlowTimeout =
+        P.lens (_netflowIdleFlowTimeout :: DistributedVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _netflowIdleFlowTimeout = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowInternalFlowsOnly (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    netflowInternalFlowsOnly =
+        P.lens (_netflowInternalFlowsOnly :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _netflowInternalFlowsOnly = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowObservationDomainId (DistributedVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    netflowObservationDomainId =
+        P.lens (_netflowObservationDomainId :: DistributedVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _netflowObservationDomainId = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetflowSamplingRate (DistributedVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    netflowSamplingRate =
+        P.lens (_netflowSamplingRate :: DistributedVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _netflowSamplingRate = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasNetworkResourceControlEnabled (DistributedVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    networkResourceControlEnabled =
+        P.lens (_networkResourceControlEnabled :: DistributedVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _networkResourceControlEnabled = a } :: DistributedVirtualSwitchResource s)
+
+instance P.HasTags (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
+        P.lens (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
 
-instance P.HasVersion (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
-    version =
-        lens (_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _version = a } :: DistributedVirtualSwitchResource s)
+instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedActiveUplinks x = TF.compute (TF.refKey x) "_computedActiveUplinks"
+
+instance s ~ s' => P.HasComputedAllowForgedTransmits (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "_computedAllowForgedTransmits"
+
+instance s ~ s' => P.HasComputedAllowMacChanges (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedAllowMacChanges x = TF.compute (TF.refKey x) "_computedAllowMacChanges"
+
+instance s ~ s' => P.HasComputedAllowPromiscuous (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedAllowPromiscuous x = TF.compute (TF.refKey x) "_computedAllowPromiscuous"
+
+instance s ~ s' => P.HasComputedBlockAllPorts (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedBlockAllPorts x = TF.compute (TF.refKey x) "_computedBlockAllPorts"
+
+instance s ~ s' => P.HasComputedCheckBeacon (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedCheckBeacon x = TF.compute (TF.refKey x) "_computedCheckBeacon"
 
 instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedConfigVersion x = TF.compute (TF.refKey x) "config_version"
+    computedConfigVersion x = TF.compute (TF.refKey x) "_computedConfigVersion"
 
-instance s ~ s' => P.HasComputedContactDetail (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedContactDetail =
-        (_contact_detail :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedDirectpathGen2Allowed (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "_computedDirectpathGen2Allowed"
 
-instance s ~ s' => P.HasComputedContactName (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedContactName =
-        (_contact_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedEgressShapingAverageBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingAverageBandwidth"
 
-instance s ~ s' => P.HasComputedDatacenterId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedDatacenterId =
-        (_datacenter_id :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedEgressShapingBurstSize (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "_computedEgressShapingBurstSize"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedEgressShapingEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "_computedEgressShapingEnabled"
 
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedEgressShapingPeakBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingPeakBandwidth"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedFailback (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedFailback x = TF.compute (TF.refKey x) "_computedFailback"
 
-instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedIpv4Address =
-        (_ipv4_address :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedFaulttoleranceMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedFaulttoleranceMaximumMbit x = TF.compute (TF.refKey x) "_computedFaulttoleranceMaximumMbit"
+
+instance s ~ s' => P.HasComputedFaulttoleranceReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedFaulttoleranceReservationMbit x = TF.compute (TF.refKey x) "_computedFaulttoleranceReservationMbit"
+
+instance s ~ s' => P.HasComputedFaulttoleranceShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedFaulttoleranceShareCount x = TF.compute (TF.refKey x) "_computedFaulttoleranceShareCount"
+
+instance s ~ s' => P.HasComputedFaulttoleranceShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedFaulttoleranceShareLevel x = TF.compute (TF.refKey x) "_computedFaulttoleranceShareLevel"
+
+instance s ~ s' => P.HasComputedHbrMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedHbrMaximumMbit x = TF.compute (TF.refKey x) "_computedHbrMaximumMbit"
+
+instance s ~ s' => P.HasComputedHbrReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedHbrReservationMbit x = TF.compute (TF.refKey x) "_computedHbrReservationMbit"
+
+instance s ~ s' => P.HasComputedHbrShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedHbrShareCount x = TF.compute (TF.refKey x) "_computedHbrShareCount"
+
+instance s ~ s' => P.HasComputedHbrShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedHbrShareLevel x = TF.compute (TF.refKey x) "_computedHbrShareLevel"
+
+instance s ~ s' => P.HasComputedIngressShapingAverageBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingAverageBandwidth"
+
+instance s ~ s' => P.HasComputedIngressShapingBurstSize (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "_computedIngressShapingBurstSize"
+
+instance s ~ s' => P.HasComputedIngressShapingEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "_computedIngressShapingEnabled"
+
+instance s ~ s' => P.HasComputedIngressShapingPeakBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingPeakBandwidth"
+
+instance s ~ s' => P.HasComputedIscsiMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedIscsiMaximumMbit x = TF.compute (TF.refKey x) "_computedIscsiMaximumMbit"
+
+instance s ~ s' => P.HasComputedIscsiReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedIscsiReservationMbit x = TF.compute (TF.refKey x) "_computedIscsiReservationMbit"
+
+instance s ~ s' => P.HasComputedIscsiShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedIscsiShareCount x = TF.compute (TF.refKey x) "_computedIscsiShareCount"
+
+instance s ~ s' => P.HasComputedIscsiShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedIscsiShareLevel x = TF.compute (TF.refKey x) "_computedIscsiShareLevel"
 
 instance s ~ s' => P.HasComputedLacpApiVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLacpApiVersion =
-        (_lacp_api_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedLacpApiVersion x = TF.compute (TF.refKey x) "_computedLacpApiVersion"
 
-instance s ~ s' => P.HasComputedLinkDiscoveryOperation (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLinkDiscoveryOperation =
-        (_link_discovery_operation :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedLacpEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedLacpEnabled x = TF.compute (TF.refKey x) "_computedLacpEnabled"
 
-instance s ~ s' => P.HasComputedLinkDiscoveryProtocol (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLinkDiscoveryProtocol =
-        (_link_discovery_protocol :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedLacpMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedLacpMode x = TF.compute (TF.refKey x) "_computedLacpMode"
 
-instance s ~ s' => P.HasComputedMaxMtu (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedMaxMtu =
-        (_max_mtu :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedManagementMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedManagementMaximumMbit x = TF.compute (TF.refKey x) "_computedManagementMaximumMbit"
+
+instance s ~ s' => P.HasComputedManagementReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedManagementReservationMbit x = TF.compute (TF.refKey x) "_computedManagementReservationMbit"
+
+instance s ~ s' => P.HasComputedManagementShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedManagementShareCount x = TF.compute (TF.refKey x) "_computedManagementShareCount"
+
+instance s ~ s' => P.HasComputedManagementShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedManagementShareLevel x = TF.compute (TF.refKey x) "_computedManagementShareLevel"
+
+instance s ~ s' => P.HasComputedMaxMtu (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedMaxMtu x = TF.compute (TF.refKey x) "_computedMaxMtu"
 
 instance s ~ s' => P.HasComputedMulticastFilteringMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedMulticastFilteringMode =
-        (_multicast_filtering_mode :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedMulticastFilteringMode x = TF.compute (TF.refKey x) "_computedMulticastFilteringMode"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNetflowEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedNetflowEnabled x = TF.compute (TF.refKey x) "_computedNetflowEnabled"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedNetworkResourceControlVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedNetworkResourceControlVersion x = TF.compute (TF.refKey x) "_computedNetworkResourceControlVersion"
+
+instance s ~ s' => P.HasComputedNfsMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedNfsMaximumMbit x = TF.compute (TF.refKey x) "_computedNfsMaximumMbit"
+
+instance s ~ s' => P.HasComputedNfsReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedNfsReservationMbit x = TF.compute (TF.refKey x) "_computedNfsReservationMbit"
+
+instance s ~ s' => P.HasComputedNfsShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedNfsShareCount x = TF.compute (TF.refKey x) "_computedNfsShareCount"
+
+instance s ~ s' => P.HasComputedNfsShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedNfsShareLevel x = TF.compute (TF.refKey x) "_computedNfsShareLevel"
+
+instance s ~ s' => P.HasComputedNotifySwitches (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedNotifySwitches x = TF.compute (TF.refKey x) "_computedNotifySwitches"
+
+instance s ~ s' => P.HasComputedPortPrivateSecondaryVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "_computedPortPrivateSecondaryVlanId"
+
+instance s ~ s' => P.HasComputedStandbyUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedStandbyUplinks x = TF.compute (TF.refKey x) "_computedStandbyUplinks"
+
+instance s ~ s' => P.HasComputedTeamingPolicy (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedTeamingPolicy x = TF.compute (TF.refKey x) "_computedTeamingPolicy"
+
+instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
+    computedTxUplink x = TF.compute (TF.refKey x) "_computedTxUplink"
+
+instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedUplinks x = TF.compute (TF.refKey x) "_computedUplinks"
+
+instance s ~ s' => P.HasComputedVdpMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVdpMaximumMbit x = TF.compute (TF.refKey x) "_computedVdpMaximumMbit"
+
+instance s ~ s' => P.HasComputedVdpReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVdpReservationMbit x = TF.compute (TF.refKey x) "_computedVdpReservationMbit"
+
+instance s ~ s' => P.HasComputedVdpShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVdpShareCount x = TF.compute (TF.refKey x) "_computedVdpShareCount"
+
+instance s ~ s' => P.HasComputedVdpShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedVdpShareLevel x = TF.compute (TF.refKey x) "_computedVdpShareLevel"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVersion =
-        (_version :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
 
-distributedVirtualSwitchResource :: TF.Resource P.VSphere (DistributedVirtualSwitchResource s)
-distributedVirtualSwitchResource =
-    TF.newResource "vsphere_distributed_virtual_switch" $
-        DistributedVirtualSwitchResource {
-              _contact_detail = TF.Nil
-            , _contact_name = TF.Nil
-            , _datacenter_id = TF.Nil
-            , _description = TF.Nil
-            , _folder = TF.Nil
-            , _ipv4_address = TF.Nil
-            , _lacp_api_version = TF.Nil
-            , _link_discovery_operation = TF.Nil
-            , _link_discovery_protocol = TF.Nil
-            , _max_mtu = TF.Nil
-            , _multicast_filtering_mode = TF.Nil
-            , _name = TF.Nil
-            , _tags = TF.Nil
-            , _version = TF.Nil
+instance s ~ s' => P.HasComputedVirtualmachineMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVirtualmachineMaximumMbit x = TF.compute (TF.refKey x) "_computedVirtualmachineMaximumMbit"
+
+instance s ~ s' => P.HasComputedVirtualmachineReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVirtualmachineReservationMbit x = TF.compute (TF.refKey x) "_computedVirtualmachineReservationMbit"
+
+instance s ~ s' => P.HasComputedVirtualmachineShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVirtualmachineShareCount x = TF.compute (TF.refKey x) "_computedVirtualmachineShareCount"
+
+instance s ~ s' => P.HasComputedVirtualmachineShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedVirtualmachineShareLevel x = TF.compute (TF.refKey x) "_computedVirtualmachineShareLevel"
+
+instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVlanId x = TF.compute (TF.refKey x) "_computedVlanId"
+
+instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s (VlanRange s)]) where
+    computedVlanRange x = TF.compute (TF.refKey x) "_computedVlanRange"
+
+instance s ~ s' => P.HasComputedVmotionMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVmotionMaximumMbit x = TF.compute (TF.refKey x) "_computedVmotionMaximumMbit"
+
+instance s ~ s' => P.HasComputedVmotionReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVmotionReservationMbit x = TF.compute (TF.refKey x) "_computedVmotionReservationMbit"
+
+instance s ~ s' => P.HasComputedVmotionShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVmotionShareCount x = TF.compute (TF.refKey x) "_computedVmotionShareCount"
+
+instance s ~ s' => P.HasComputedVmotionShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedVmotionShareLevel x = TF.compute (TF.refKey x) "_computedVmotionShareLevel"
+
+instance s ~ s' => P.HasComputedVsanMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVsanMaximumMbit x = TF.compute (TF.refKey x) "_computedVsanMaximumMbit"
+
+instance s ~ s' => P.HasComputedVsanReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVsanReservationMbit x = TF.compute (TF.refKey x) "_computedVsanReservationMbit"
+
+instance s ~ s' => P.HasComputedVsanShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
+    computedVsanShareCount x = TF.compute (TF.refKey x) "_computedVsanShareCount"
+
+instance s ~ s' => P.HasComputedVsanShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
+    computedVsanShareLevel x = TF.compute (TF.refKey x) "_computedVsanShareLevel"
+
+-- | @vsphere_dpm_host_override@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_dpm_host_override terraform documentation>
+-- for more information.
+data DpmHostOverrideResource s = DpmHostOverrideResource'
+    { _computeClusterId   :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _dpmAutomationLevel :: TF.Attr s P.Text
+    -- ^ @dpm_automation_level@ - (Optional)
+    -- The automation level for power operations on this host. Can be one of manual
+    -- or automated.
+    --
+    , _dpmEnabled         :: TF.Attr s P.Bool
+    -- ^ @dpm_enabled@ - (Optional)
+    -- Enable DPM for this host.
+    --
+    , _hostSystemId       :: TF.Attr s P.Text
+    -- ^ @host_system_id@ - (Required)
+    -- The managed object ID of the host.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+dpmHostOverrideResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
+    -> TF.Resource P.Provider (DpmHostOverrideResource s)
+dpmHostOverrideResource _computeClusterId _hostSystemId =
+    TF.newResource "vsphere_dpm_host_override" TF.validator $
+        DpmHostOverrideResource'
+            { _computeClusterId = _computeClusterId
+            , _dpmAutomationLevel = TF.value "manual"
+            , _dpmEnabled = TF.value P.False
+            , _hostSystemId = _hostSystemId
             }
 
-{- | The @vsphere_dpm_host_override@ VSphere resource.
-
-The @vsphere_dpm_host_override@ resource can be used to add a DPM override
-to a cluster for a particular host. This allows you to control the power
-management settings for individual hosts in the cluster while leaving any
-unspecified ones at the default power management settings. For more
-information on DPM within vSphere clusters, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-5E5E349A-4644-4C9C-B434-1C0243EBDC80.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data DpmHostOverrideResource s = DpmHostOverrideResource {
-      _compute_cluster_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the override in.  Forces a new resource if changed. -}
-    , _dpm_automation_level :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The automation level for host power operations on this host. Can be one of @manual@ or @automated@ . Default: @manual@ . -}
-    , _dpm_enabled          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable DPM support for this host. Default: @false@ . -}
-    , _host_system_ids      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to create the override for. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DpmHostOverrideResource s) where
-    toObject DpmHostOverrideResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
-        , TF.assign "dpm_automation_level" <$> TF.attribute _dpm_automation_level
-        , TF.assign "dpm_enabled" <$> TF.attribute _dpm_enabled
-        , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
+    toObject DpmHostOverrideResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
+        , TF.assign "dpm_automation_level" <$> TF.attribute _dpmAutomationLevel
+        , TF.assign "dpm_enabled" <$> TF.attribute _dpmEnabled
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
         ]
+
+instance TF.IsValid (DpmHostOverrideResource s) where
+    validator = P.mempty
 
 instance P.HasComputeClusterId (DpmHostOverrideResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: DpmHostOverrideResource s)
+        P.lens (_computeClusterId :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: DpmHostOverrideResource s)
 
 instance P.HasDpmAutomationLevel (DpmHostOverrideResource s) (TF.Attr s P.Text) where
     dpmAutomationLevel =
-        lens (_dpm_automation_level :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dpm_automation_level = a } :: DpmHostOverrideResource s)
+        P.lens (_dpmAutomationLevel :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dpmAutomationLevel = a } :: DpmHostOverrideResource s)
 
-instance P.HasDpmEnabled (DpmHostOverrideResource s) (TF.Attr s P.Text) where
+instance P.HasDpmEnabled (DpmHostOverrideResource s) (TF.Attr s P.Bool) where
     dpmEnabled =
-        lens (_dpm_enabled :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dpm_enabled = a } :: DpmHostOverrideResource s)
+        P.lens (_dpmEnabled :: DpmHostOverrideResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dpmEnabled = a } :: DpmHostOverrideResource s)
 
-instance P.HasHostSystemIds (DpmHostOverrideResource s) (TF.Attr s P.Text) where
-    hostSystemIds =
-        lens (_host_system_ids :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_ids = a } :: DpmHostOverrideResource s)
+instance P.HasHostSystemId (DpmHostOverrideResource s) (TF.Attr s P.Text) where
+    hostSystemId =
+        P.lens (_hostSystemId :: DpmHostOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostSystemId = a } :: DpmHostOverrideResource s)
 
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_drs_vm_override@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_drs_vm_override terraform documentation>
+-- for more information.
+data DrsVmOverrideResource s = DrsVmOverrideResource'
+    { _computeClusterId   :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _drsAutomationLevel :: TF.Attr s P.Text
+    -- ^ @drs_automation_level@ - (Optional)
+    -- The automation level for this virtual machine in the cluster. Can be one of
+    -- manual, partiallyAutomated, or fullyAutomated.
+    --
+    , _drsEnabled         :: TF.Attr s P.Bool
+    -- ^ @drs_enabled@ - (Optional)
+    -- Enable DRS for this virtual machine.
+    --
+    , _virtualMachineId   :: TF.Attr s P.Text
+    -- ^ @virtual_machine_id@ - (Required)
+    -- The managed object ID of the virtual machine.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDpmAutomationLevel (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
-    computedDpmAutomationLevel =
-        (_dpm_automation_level :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDpmEnabled (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
-    computedDpmEnabled =
-        (_dpm_enabled :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHostSystemIds (TF.Ref s' (DpmHostOverrideResource s)) (TF.Attr s P.Text) where
-    computedHostSystemIds =
-        (_host_system_ids :: DpmHostOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-dpmHostOverrideResource :: TF.Resource P.VSphere (DpmHostOverrideResource s)
-dpmHostOverrideResource =
-    TF.newResource "vsphere_dpm_host_override" $
-        DpmHostOverrideResource {
-              _compute_cluster_id = TF.Nil
-            , _dpm_automation_level = TF.Nil
-            , _dpm_enabled = TF.Nil
-            , _host_system_ids = TF.Nil
+drsVmOverrideResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> TF.Resource P.Provider (DrsVmOverrideResource s)
+drsVmOverrideResource _computeClusterId _virtualMachineId =
+    TF.newResource "vsphere_drs_vm_override" TF.validator $
+        DrsVmOverrideResource'
+            { _computeClusterId = _computeClusterId
+            , _drsAutomationLevel = TF.value "manual"
+            , _drsEnabled = TF.value P.False
+            , _virtualMachineId = _virtualMachineId
             }
 
-{- | The @vsphere_drs_vm_override@ VSphere resource.
-
-The @vsphere_drs_vm_override@ resource can be used to add a DRS override to
-a cluster for a specific virtual machine. With this resource, one can enable
-or disable DRS and control the automation level for a single virtual machine
-without affecting the rest of the cluster. For more information on vSphere
-clusters and DRS, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-8ACF3502-5314-469F-8CC9-4A9BD5925BC2.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections. ~> NOTE: vSphere DRS requires a vSphere Enterprise Plus
-license.
--}
-data DrsVmOverrideResource s = DrsVmOverrideResource {
-      _compute_cluster_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the override in.  Forces a new resource if changed. -}
-    , _drs_automation_level :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Overrides the automation level for this virtual machine in the cluster. Can be one of @manual@ , @partiallyAutomated@ , or @fullyAutomated@ . Default: @manual@ . -}
-    , _drs_enabled          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Overrides the default DRS setting for this virtual machine. Can be either @true@ or @false@ . Default: @false@ . -}
-    , _virtual_machine_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DrsVmOverrideResource s) where
-    toObject DrsVmOverrideResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
-        , TF.assign "drs_automation_level" <$> TF.attribute _drs_automation_level
-        , TF.assign "drs_enabled" <$> TF.attribute _drs_enabled
-        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+    toObject DrsVmOverrideResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
+        , TF.assign "drs_automation_level" <$> TF.attribute _drsAutomationLevel
+        , TF.assign "drs_enabled" <$> TF.attribute _drsEnabled
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
         ]
+
+instance TF.IsValid (DrsVmOverrideResource s) where
+    validator = P.mempty
 
 instance P.HasComputeClusterId (DrsVmOverrideResource s) (TF.Attr s P.Text) where
     computeClusterId =
-        lens (_compute_cluster_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: DrsVmOverrideResource s)
+        P.lens (_computeClusterId :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: DrsVmOverrideResource s)
 
 instance P.HasDrsAutomationLevel (DrsVmOverrideResource s) (TF.Attr s P.Text) where
     drsAutomationLevel =
-        lens (_drs_automation_level :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _drs_automation_level = a } :: DrsVmOverrideResource s)
+        P.lens (_drsAutomationLevel :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _drsAutomationLevel = a } :: DrsVmOverrideResource s)
 
-instance P.HasDrsEnabled (DrsVmOverrideResource s) (TF.Attr s P.Text) where
+instance P.HasDrsEnabled (DrsVmOverrideResource s) (TF.Attr s P.Bool) where
     drsEnabled =
-        lens (_drs_enabled :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _drs_enabled = a } :: DrsVmOverrideResource s)
+        P.lens (_drsEnabled :: DrsVmOverrideResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _drsEnabled = a } :: DrsVmOverrideResource s)
 
 instance P.HasVirtualMachineId (DrsVmOverrideResource s) (TF.Attr s P.Text) where
     virtualMachineId =
-        lens (_virtual_machine_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_id = a } :: DrsVmOverrideResource s)
+        P.lens (_virtualMachineId :: DrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineId = a } :: DrsVmOverrideResource s)
 
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_file@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_file terraform documentation>
+-- for more information.
+data FileResource s = FileResource'
+    { _createDirectories :: TF.Attr s P.Bool
+    -- ^ @create_directories@ - (Optional)
+    --
+    , _datacenter        :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _datastore         :: TF.Attr s P.Text
+    -- ^ @datastore@ - (Required)
+    --
+    , _destinationFile   :: TF.Attr s P.Text
+    -- ^ @destination_file@ - (Required)
+    --
+    , _sourceDatacenter  :: TF.Attr s P.Text
+    -- ^ @source_datacenter@ - (Optional)
+    --
+    , _sourceDatastore   :: TF.Attr s P.Text
+    -- ^ @source_datastore@ - (Optional)
+    --
+    , _sourceFile        :: TF.Attr s P.Text
+    -- ^ @source_file@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDrsAutomationLevel (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedDrsAutomationLevel =
-        (_drs_automation_level :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDrsEnabled (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedDrsEnabled =
-        (_drs_enabled :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (DrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineId =
-        (_virtual_machine_id :: DrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-drsVmOverrideResource :: TF.Resource P.VSphere (DrsVmOverrideResource s)
-drsVmOverrideResource =
-    TF.newResource "vsphere_drs_vm_override" $
-        DrsVmOverrideResource {
-              _compute_cluster_id = TF.Nil
-            , _drs_automation_level = TF.Nil
-            , _drs_enabled = TF.Nil
-            , _virtual_machine_id = TF.Nil
+fileResource
+    :: TF.Attr s P.Text -- ^ @datastore@ - 'P.datastore'
+    -> TF.Attr s P.Text -- ^ @destination_file@ - 'P.destinationFile'
+    -> TF.Attr s P.Text -- ^ @source_file@ - 'P.sourceFile'
+    -> TF.Resource P.Provider (FileResource s)
+fileResource _datastore _destinationFile _sourceFile =
+    TF.newResource "vsphere_file" TF.validator $
+        FileResource'
+            { _createDirectories = TF.Nil
+            , _datacenter = TF.Nil
+            , _datastore = _datastore
+            , _destinationFile = _destinationFile
+            , _sourceDatacenter = TF.Nil
+            , _sourceDatastore = TF.Nil
+            , _sourceFile = _sourceFile
             }
 
-{- | The @vsphere_file@ VSphere resource.
-
-The @vsphere_file@ resource can be used to upload files (such as virtual
-disk files) from the host machine that Terraform is running on to a target
-datastore.  The resource can also be used to copy files between datastores,
-or from one location to another on the same datastore. Updates to
-destination parameters such as @datacenter@ , @datastore@ , or
-@destination_file@ will move the managed file a new destination based on the
-values of the new settings.  If any source parameter is changed, such as
-@source_datastore@ , @source_datacenter@ or @source_file@ ), the resource
-will be re-created. Depending on if destination parameters are being changed
-as well, this may result in the destination file either being overwritten or
-deleted at the old location.
--}
-data FileResource s = FileResource {
-      _create_directories :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Create directories in @destination_file@ path parameter if any missing for copy operation. -}
-    , _datacenter         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of a datacenter in which the file will be uploaded to. -}
-    , _datastore          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the datastore in which to upload the file to. -}
-    , _destination_file   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The path to where the file should be uploaded or copied to on vSphere. -}
-    , _source_datacenter  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of a datacenter in which the file will be copied from. Forces a new resource if changed. -}
-    , _source_datastore   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the datastore in which file will be copied from. Forces a new resource if changed. -}
-    , _source_file        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The path to the file being uploaded from the Terraform host to vSphere or copied within vSphere. Forces a new resource if changed. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (FileResource s) where
-    toObject FileResource{..} = catMaybes
-        [ TF.assign "create_directories" <$> TF.attribute _create_directories
+    toObject FileResource'{..} = P.catMaybes
+        [ TF.assign "create_directories" <$> TF.attribute _createDirectories
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "datastore" <$> TF.attribute _datastore
-        , TF.assign "destination_file" <$> TF.attribute _destination_file
-        , TF.assign "source_datacenter" <$> TF.attribute _source_datacenter
-        , TF.assign "source_datastore" <$> TF.attribute _source_datastore
-        , TF.assign "source_file" <$> TF.attribute _source_file
+        , TF.assign "destination_file" <$> TF.attribute _destinationFile
+        , TF.assign "source_datacenter" <$> TF.attribute _sourceDatacenter
+        , TF.assign "source_datastore" <$> TF.attribute _sourceDatastore
+        , TF.assign "source_file" <$> TF.attribute _sourceFile
         ]
 
-instance P.HasCreateDirectories (FileResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (FileResource s) where
+    validator = P.mempty
+
+instance P.HasCreateDirectories (FileResource s) (TF.Attr s P.Bool) where
     createDirectories =
-        lens (_create_directories :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _create_directories = a } :: FileResource s)
+        P.lens (_createDirectories :: FileResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _createDirectories = a } :: FileResource s)
 
 instance P.HasDatacenter (FileResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: FileResource s)
+        P.lens (_datacenter :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: FileResource s)
 
 instance P.HasDatastore (FileResource s) (TF.Attr s P.Text) where
     datastore =
-        lens (_datastore :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datastore = a } :: FileResource s)
+        P.lens (_datastore :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastore = a } :: FileResource s)
 
 instance P.HasDestinationFile (FileResource s) (TF.Attr s P.Text) where
     destinationFile =
-        lens (_destination_file :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _destination_file = a } :: FileResource s)
+        P.lens (_destinationFile :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationFile = a } :: FileResource s)
 
 instance P.HasSourceDatacenter (FileResource s) (TF.Attr s P.Text) where
     sourceDatacenter =
-        lens (_source_datacenter :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_datacenter = a } :: FileResource s)
+        P.lens (_sourceDatacenter :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceDatacenter = a } :: FileResource s)
 
 instance P.HasSourceDatastore (FileResource s) (TF.Attr s P.Text) where
     sourceDatastore =
-        lens (_source_datastore :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_datastore = a } :: FileResource s)
+        P.lens (_sourceDatastore :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceDatastore = a } :: FileResource s)
 
 instance P.HasSourceFile (FileResource s) (TF.Attr s P.Text) where
     sourceFile =
-        lens (_source_file :: FileResource s -> TF.Attr s P.Text)
-             (\s a -> s { _source_file = a } :: FileResource s)
+        P.lens (_sourceFile :: FileResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceFile = a } :: FileResource s)
 
-instance s ~ s' => P.HasComputedCreateDirectories (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedCreateDirectories =
-        (_create_directories :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_folder@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_folder terraform documentation>
+-- for more information.
+data FolderResource s = FolderResource'
+    { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datacenterId     :: TF.Attr s P.Text
+    -- ^ @datacenter_id@ - (Optional)
+    -- The ID of the datacenter. Can be ignored if creating a datacenter folder,
+    -- otherwise required.
+    --
+    , _path             :: TF.Attr s P.Text
+    -- ^ @path@ - (Required)
+    -- The path of the folder and any parents, relative to the datacenter and
+    -- folder type being defined.
+    --
+    , _tags             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    , _type'            :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    -- The type of the folder.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDatastore (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedDatastore =
-        (_datastore :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDestinationFile (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedDestinationFile =
-        (_destination_file :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSourceDatacenter (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedSourceDatacenter =
-        (_source_datacenter :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSourceDatastore (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedSourceDatastore =
-        (_source_datastore :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSourceFile (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedSourceFile =
-        (_source_file :: FileResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-fileResource :: TF.Resource P.VSphere (FileResource s)
-fileResource =
-    TF.newResource "vsphere_file" $
-        FileResource {
-              _create_directories = TF.Nil
-            , _datacenter = TF.Nil
-            , _datastore = TF.Nil
-            , _destination_file = TF.Nil
-            , _source_datacenter = TF.Nil
-            , _source_datastore = TF.Nil
-            , _source_file = TF.Nil
+folderResource
+    :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Resource P.Provider (FolderResource s)
+folderResource _path _type' =
+    TF.newResource "vsphere_folder" TF.validator $
+        FolderResource'
+            { _customAttributes = TF.Nil
+            , _datacenterId = TF.Nil
+            , _path = _path
+            , _tags = TF.Nil
+            , _type' = _type'
             }
-
-{- | The @vsphere_folder@ VSphere resource.
-
-The @vsphere_folder@ resource can be used to manage vSphere inventory
-folders. The resource supports creating folders of the 5 major types -
-datacenter folders, host and cluster folders, virtual machine folders,
-datastore folders, and network folders. Paths are always relative to the
-specific type of folder you are creating. Subfolders are discovered by
-parsing the relative path specified in @path@ , so @foo/bar@ will create a
-folder named @bar@ in the parent folder @foo@ , as long as that folder
-exists.
--}
-data FolderResource s = FolderResource {
-      _path :: !(TF.Attr s P.Text)
-    {- ^ (Required) The path of the folder to be created. This is relative to the root of the type of folder you are creating, and the supplied datacenter. For example, given a default datacenter of @default-dc@ , a folder of type @vm@ (denoting a virtual machine folder), and a supplied folder of @terraform-test-folder@ , the resulting path would be @/default-dc/vm/terraform-test-folder@ . -}
-    } deriving (Show, Eq)
 
 instance TF.IsObject (FolderResource s) where
-    toObject FolderResource{..} = catMaybes
-        [ TF.assign "path" <$> TF.attribute _path
-        ]
-
-instance P.HasPath (FolderResource s) (TF.Attr s P.Text) where
-    path =
-        lens (_path :: FolderResource s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: FolderResource s)
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: FolderResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-folderResource :: TF.Resource P.VSphere (FolderResource s)
-folderResource =
-    TF.newResource "vsphere_folder" $
-        FolderResource {
-              _path = TF.Nil
-            }
-
-{- | The @vsphere_ha_vm_override@ VSphere resource.
-
-The @vsphere_ha_vm_override@ resource can be used to add an override for
-vSphere HA settings on a cluster for a specific virtual machine. With this
-resource, one can control specific HA settings so that they are different
-than the cluster default, accommodating the needs of that specific virtual
-machine, while not affecting the rest of the cluster. For more information
-on vSphere HA, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.avail.doc/GUID-5432CA24-14F1-44E3-87FB-61D937831CF6.html>
-. ~> NOTE: This resource requires vCenter and is not available on direct
-ESXi connections.
--}
-data HaVmOverrideResource s = HaVmOverrideResource {
-      _compute_cluster_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the cluster to put the override in.  Forces a new resource if changed. -}
-    , _virtual_machine_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (HaVmOverrideResource s) where
-    toObject HaVmOverrideResource{..} = catMaybes
-        [ TF.assign "compute_cluster_id" <$> TF.attribute _compute_cluster_id
-        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
-        ]
-
-instance P.HasComputeClusterId (HaVmOverrideResource s) (TF.Attr s P.Text) where
-    computeClusterId =
-        lens (_compute_cluster_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _compute_cluster_id = a } :: HaVmOverrideResource s)
-
-instance P.HasVirtualMachineId (HaVmOverrideResource s) (TF.Attr s P.Text) where
-    virtualMachineId =
-        lens (_virtual_machine_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_id = a } :: HaVmOverrideResource s)
-
-instance s ~ s' => P.HasComputedComputeClusterId (TF.Ref s' (HaVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedComputeClusterId =
-        (_compute_cluster_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (HaVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineId =
-        (_virtual_machine_id :: HaVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-haVmOverrideResource :: TF.Resource P.VSphere (HaVmOverrideResource s)
-haVmOverrideResource =
-    TF.newResource "vsphere_ha_vm_override" $
-        HaVmOverrideResource {
-              _compute_cluster_id = TF.Nil
-            , _virtual_machine_id = TF.Nil
-            }
-
-{- | The @vsphere_host_port_group@ VSphere resource.
-
-The @vsphere_host_port_group@ resource can be used to manage vSphere
-standard port groups on an ESXi host. These port groups are connected to
-standard virtual switches, which can be managed by the
-</docs/providers/vsphere/r/host_virtual_switch.html> resource. For an
-overview on vSphere networking concepts, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-2B11DBB8-CB3C-4AFF-8885-EFEA0FC562F4.html>
-.
--}
-data HostPortGroupResource s = HostPortGroupResource {
-      _host_system_id      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the port group up on. Forces a new resource if changed. -}
-    , _name                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the port group.  Forces a new resource if changed. -}
-    , _virtual_switch_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the virtual switch to bind this port group to. Forces a new resource if changed. -}
-    , _vlan_id             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The VLAN ID/trunk mode for this port group.  An ID of @0@ denotes no tagging, an ID of @1@ - @4094@ tags with the specific ID, and an ID of @4095@ enables trunk mode, allowing the guest to manage its own tagging. Default: @0@ . -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (HostPortGroupResource s) where
-    toObject HostPortGroupResource{..} = catMaybes
-        [ TF.assign "host_system_id" <$> TF.attribute _host_system_id
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "virtual_switch_name" <$> TF.attribute _virtual_switch_name
-        , TF.assign "vlan_id" <$> TF.attribute _vlan_id
-        ]
-
-instance P.HasHostSystemId (HostPortGroupResource s) (TF.Attr s P.Text) where
-    hostSystemId =
-        lens (_host_system_id :: HostPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_id = a } :: HostPortGroupResource s)
-
-instance P.HasName (HostPortGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: HostPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: HostPortGroupResource s)
-
-instance P.HasVirtualSwitchName (HostPortGroupResource s) (TF.Attr s P.Text) where
-    virtualSwitchName =
-        lens (_virtual_switch_name :: HostPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_switch_name = a } :: HostPortGroupResource s)
-
-instance P.HasVlanId (HostPortGroupResource s) (TF.Attr s P.Text) where
-    vlanId =
-        lens (_vlan_id :: HostPortGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vlan_id = a } :: HostPortGroupResource s)
-
-instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedComputedPolicy x = TF.compute (TF.refKey x) "computed_policy"
-
-instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedHostSystemId =
-        (_host_system_id :: HostPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: HostPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedPorts x = TF.compute (TF.refKey x) "ports"
-
-instance s ~ s' => P.HasComputedVirtualSwitchName (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedVirtualSwitchName =
-        (_virtual_switch_name :: HostPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedVlanId =
-        (_vlan_id :: HostPortGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-hostPortGroupResource :: TF.Resource P.VSphere (HostPortGroupResource s)
-hostPortGroupResource =
-    TF.newResource "vsphere_host_port_group" $
-        HostPortGroupResource {
-              _host_system_id = TF.Nil
-            , _name = TF.Nil
-            , _virtual_switch_name = TF.Nil
-            , _vlan_id = TF.Nil
-            }
-
-{- | The @vsphere_host_virtual_switch@ VSphere resource.
-
-The @vsphere_host_virtual_switch@ resource can be used to manage vSphere
-standard switches on an ESXi host. These switches can be used as a backing
-for standard port groups, which can be managed by the
-</docs/providers/vsphere/r/host_port_group.html> resource. For an overview
-on vSphere networking concepts, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.networking.doc/GUID-2B11DBB8-CB3C-4AFF-8885-EFEA0FC562F4.html>
-.
--}
-data HostVirtualSwitchResource s = HostVirtualSwitchResource {
-      _host_system_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the virtual switch up on. Forces a new resource if changed. -}
-    , _mtu             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The maximum transmission unit (MTU) for the virtual switch. Default: @1500@ . -}
-    , _name            :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the virtual switch. Forces a new resource if changed. -}
-    , _number_of_ports :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of ports to create with this virtual switch. Default: @128@ . -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (HostVirtualSwitchResource s) where
-    toObject HostVirtualSwitchResource{..} = catMaybes
-        [ TF.assign "host_system_id" <$> TF.attribute _host_system_id
-        , TF.assign "mtu" <$> TF.attribute _mtu
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "number_of_ports" <$> TF.attribute _number_of_ports
-        ]
-
-instance P.HasHostSystemId (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
-    hostSystemId =
-        lens (_host_system_id :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_id = a } :: HostVirtualSwitchResource s)
-
-instance P.HasMtu (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
-    mtu =
-        lens (_mtu :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mtu = a } :: HostVirtualSwitchResource s)
-
-instance P.HasName (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: HostVirtualSwitchResource s)
-
-instance P.HasNumberOfPorts (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
-    numberOfPorts =
-        lens (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-             (\s a -> s { _number_of_ports = a } :: HostVirtualSwitchResource s)
-
-instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedHostSystemId =
-        (_host_system_id :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMtu (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedMtu =
-        (_mtu :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (HostVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedNumberOfPorts =
-        (_number_of_ports :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-hostVirtualSwitchResource :: TF.Resource P.VSphere (HostVirtualSwitchResource s)
-hostVirtualSwitchResource =
-    TF.newResource "vsphere_host_virtual_switch" $
-        HostVirtualSwitchResource {
-              _host_system_id = TF.Nil
-            , _mtu = TF.Nil
-            , _name = TF.Nil
-            , _number_of_ports = TF.Nil
-            }
-
-{- | The @vsphere_license@ VSphere resource.
-
-Provides a VMware vSphere license resource. This can be used to add and
-remove license keys.
--}
-data LicenseResource s = LicenseResource {
-      _labels      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A map of key/value pairs to be attached as labels (tags) to the license key. -}
-    , _license_key :: !(TF.Attr s P.Text)
-    {- ^ (Required) The license key to add. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (LicenseResource s) where
-    toObject LicenseResource{..} = catMaybes
-        [ TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "license_key" <$> TF.attribute _license_key
-        ]
-
-instance P.HasLabels (LicenseResource s) (TF.Attr s P.Text) where
-    labels =
-        lens (_labels :: LicenseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _labels = a } :: LicenseResource s)
-
-instance P.HasLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
-    licenseKey =
-        lens (_license_key :: LicenseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _license_key = a } :: LicenseResource s)
-
-instance s ~ s' => P.HasComputedEditionKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedEditionKey x = TF.compute (TF.refKey x) "edition_key"
-
-instance s ~ s' => P.HasComputedLabels (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedLabels =
-        (_labels :: LicenseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLicenseKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedLicenseKey =
-        (_license_key :: LicenseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedTotal (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedTotal x = TF.compute (TF.refKey x) "total"
-
-instance s ~ s' => P.HasComputedUsed (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedUsed x = TF.compute (TF.refKey x) "used"
-
-licenseResource :: TF.Resource P.VSphere (LicenseResource s)
-licenseResource =
-    TF.newResource "vsphere_license" $
-        LicenseResource {
-              _labels = TF.Nil
-            , _license_key = TF.Nil
-            }
-
-{- | The @vsphere_nas_datastore@ VSphere resource.
-
-The @vsphere_nas_datastore@ resource can be used to create and manage NAS
-datastores on an ESXi host or a set of hosts. The resource supports mounting
-NFS v3 and v4.1 shares to be used as datastores. ~> NOTE: Unlike
-</docs/providers/vsphere/r/vmfs_datastore.html> , a NAS datastore is only
-mounted on the hosts you choose to mount it on. To mount on multiple hosts,
-you must specify each host that you want to add in the @host_system_ids@
-argument.
--}
-data NasDatastoreResource s = NasDatastoreResource {
-      _access_mode          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Access mode for the mount point. Can be one of @readOnly@ or @readWrite@ . Note that @readWrite@ does not necessarily mean that the datastore will be read-write depending on the permissions of the actual share. Default: @readWrite@ . Forces a new resource if changed. -}
-    , _datastore_cluster_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of a datastore cluster to put this datastore in. Conflicts with @folder@ . -}
-    , _folder               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . Conflicts with @datastore_cluster_id@ . -}
-    , _host_system_ids      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the hosts to mount the datastore on. -}
-    , _name                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _remote_hosts         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The hostnames or IP addresses of the remote server or servers. Only one element should be present for NFS v3 but multiple can be present for NFS v4.1. Forces a new resource if changed. -}
-    , _remote_path          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The remote path of the mount point. Forces a new resource if changed. -}
-    , _security_type        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The security type to use when using NFS v4.1. Can be one of @AUTH_SYS@ , @SEC_KRB5@ , or @SEC_KRB5I@ . Forces a new resource if changed. -}
-    , _tags                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    , _type'                :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The type of NAS volume. Can be one of @NFS@ (to denote v3) or @NFS41@ (to denote NFS v4.1). Default: @NFS@ . Forces a new resource if changed. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (NasDatastoreResource s) where
-    toObject NasDatastoreResource{..} = catMaybes
-        [ TF.assign "access_mode" <$> TF.attribute _access_mode
-        , TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
-        , TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "host_system_ids" <$> TF.attribute _host_system_ids
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "remote_hosts" <$> TF.attribute _remote_hosts
-        , TF.assign "remote_path" <$> TF.attribute _remote_path
-        , TF.assign "security_type" <$> TF.attribute _security_type
+    toObject FolderResource'{..} = P.catMaybes
+        [ TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
+        , TF.assign "path" <$> TF.attribute _path
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
+instance TF.IsValid (FolderResource s) where
+    validator = P.mempty
+
+instance P.HasCustomAttributes (FolderResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: FolderResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: FolderResource s)
+
+instance P.HasDatacenterId (FolderResource s) (TF.Attr s P.Text) where
+    datacenterId =
+        P.lens (_datacenterId :: FolderResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenterId = a } :: FolderResource s)
+
+instance P.HasPath (FolderResource s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: FolderResource s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: FolderResource s)
+
+instance P.HasTags (FolderResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: FolderResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: FolderResource s)
+
+instance P.HasType' (FolderResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: FolderResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: FolderResource s)
+
+-- | @vsphere_ha_vm_override@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_ha_vm_override terraform documentation>
+-- for more information.
+data HaVmOverrideResource s = HaVmOverrideResource'
+    { _computeClusterId                 :: TF.Attr s P.Text
+    -- ^ @compute_cluster_id@ - (Required)
+    -- The managed object ID of the cluster.
+    --
+    , _haDatastoreApdRecoveryAction     :: TF.Attr s P.Text
+    -- ^ @ha_datastore_apd_recovery_action@ - (Optional)
+    -- Controls the action to take on this virtual machine if an APD status on an
+    -- affected datastore clears in the middle of an APD event. Can be one of
+    -- useClusterDefault, none or reset.
+    --
+    , _haDatastoreApdResponse           :: TF.Attr s P.Text
+    -- ^ @ha_datastore_apd_response@ - (Optional)
+    -- Controls the action to take on this virtual machine when the cluster has
+    -- detected loss to all paths to a relevant datastore. Can be one of
+    -- clusterDefault, disabled, warning, restartConservative, or
+    -- restartAggressive.
+    --
+    , _haDatastoreApdResponseDelay      :: TF.Attr s P.Integer
+    -- ^ @ha_datastore_apd_response_delay@ - (Optional)
+    -- Controls the delay in minutes to wait after an APD timeout event to execute
+    -- the response action defined in ha_datastore_apd_response. Specify -1 to use
+    -- the cluster setting.
+    --
+    , _haDatastorePdlResponse           :: TF.Attr s P.Text
+    -- ^ @ha_datastore_pdl_response@ - (Optional)
+    -- Controls the action to take on this virtual machine when the cluster has
+    -- detected a permanent device loss to a relevant datastore. Can be one of
+    -- clusterDefault, disabled, warning, or restartAggressive.
+    --
+    , _haHostIsolationResponse          :: TF.Attr s P.Text
+    -- ^ @ha_host_isolation_response@ - (Optional)
+    -- The action to take on this virtual machine when a host is isolated from the
+    -- rest of the cluster. Can be one of clusterIsolationResponse, none, powerOff,
+    -- or shutdown.
+    --
+    , _haVmFailureInterval              :: TF.Attr s P.Integer
+    -- ^ @ha_vm_failure_interval@ - (Optional)
+    -- If a heartbeat from this virtual machine is not received within this
+    -- configured interval, the virtual machine is marked as failed. The value is
+    -- in seconds.
+    --
+    , _haVmMaximumFailureWindow         :: TF.Attr s P.Integer
+    -- ^ @ha_vm_maximum_failure_window@ - (Optional)
+    -- The length of the reset window in which ha_vm_maximum_resets can operate.
+    -- When this window expires, no more resets are attempted regardless of the
+    -- setting configured in ha_vm_maximum_resets. -1 means no window, meaning an
+    -- unlimited reset time is allotted.
+    --
+    , _haVmMaximumResets                :: TF.Attr s P.Integer
+    -- ^ @ha_vm_maximum_resets@ - (Optional)
+    -- The maximum number of resets that HA will perform to this virtual machine
+    -- when responding to a failure event.
+    --
+    , _haVmMinimumUptime                :: TF.Attr s P.Integer
+    -- ^ @ha_vm_minimum_uptime@ - (Optional)
+    -- The time, in seconds, that HA waits after powering on this virtual machine
+    -- before monitoring for heartbeats.
+    --
+    , _haVmMonitoring                   :: TF.Attr s P.Text
+    -- ^ @ha_vm_monitoring@ - (Optional)
+    -- The type of virtual machine monitoring to use for this virtual machine. Can
+    -- be one of vmMonitoringDisabled, vmMonitoringOnly, or vmAndAppMonitoring.
+    --
+    , _haVmMonitoringUseClusterDefaults :: TF.Attr s P.Bool
+    -- ^ @ha_vm_monitoring_use_cluster_defaults@ - (Optional)
+    -- Determines whether or not the cluster's default settings or the VM override
+    -- settings specified in this resource are used for virtual machine monitoring.
+    -- The default is true (use cluster defaults) - set to false to have overrides
+    -- take effect.
+    --
+    , _haVmRestartPriority              :: TF.Attr s P.Text
+    -- ^ @ha_vm_restart_priority@ - (Optional)
+    -- The restart priority for this virtual machine when vSphere detects a host
+    -- failure. Can be one of clusterRestartPriority, lowest, low, medium, high, or
+    -- highest.
+    --
+    , _haVmRestartTimeout               :: TF.Attr s P.Integer
+    -- ^ @ha_vm_restart_timeout@ - (Optional)
+    -- The maximum time, in seconds, that vSphere HA will wait for the virtual
+    -- machine to be ready. Use -1 to use the cluster default.
+    --
+    , _virtualMachineId                 :: TF.Attr s P.Text
+    -- ^ @virtual_machine_id@ - (Required)
+    -- The managed object ID of the virtual machine.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+haVmOverrideResource
+    :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
+    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> TF.Resource P.Provider (HaVmOverrideResource s)
+haVmOverrideResource _computeClusterId _virtualMachineId =
+    TF.newResource "vsphere_ha_vm_override" TF.validator $
+        HaVmOverrideResource'
+            { _computeClusterId = _computeClusterId
+            , _haDatastoreApdRecoveryAction = TF.value "useClusterDefault"
+            , _haDatastoreApdResponse = TF.value "clusterDefault"
+            , _haDatastoreApdResponseDelay = TF.value (-1)
+            , _haDatastorePdlResponse = TF.value "clusterDefault"
+            , _haHostIsolationResponse = TF.value "clusterIsolationResponse"
+            , _haVmFailureInterval = TF.value 30
+            , _haVmMaximumFailureWindow = TF.value (-1)
+            , _haVmMaximumResets = TF.value 3
+            , _haVmMinimumUptime = TF.value 120
+            , _haVmMonitoring = TF.value "vmMonitoringDisabled"
+            , _haVmMonitoringUseClusterDefaults = TF.value P.True
+            , _haVmRestartPriority = TF.value "clusterRestartPriority"
+            , _haVmRestartTimeout = TF.value (-1)
+            , _virtualMachineId = _virtualMachineId
+            }
+
+instance TF.IsObject (HaVmOverrideResource s) where
+    toObject HaVmOverrideResource'{..} = P.catMaybes
+        [ TF.assign "compute_cluster_id" <$> TF.attribute _computeClusterId
+        , TF.assign "ha_datastore_apd_recovery_action" <$> TF.attribute _haDatastoreApdRecoveryAction
+        , TF.assign "ha_datastore_apd_response" <$> TF.attribute _haDatastoreApdResponse
+        , TF.assign "ha_datastore_apd_response_delay" <$> TF.attribute _haDatastoreApdResponseDelay
+        , TF.assign "ha_datastore_pdl_response" <$> TF.attribute _haDatastorePdlResponse
+        , TF.assign "ha_host_isolation_response" <$> TF.attribute _haHostIsolationResponse
+        , TF.assign "ha_vm_failure_interval" <$> TF.attribute _haVmFailureInterval
+        , TF.assign "ha_vm_maximum_failure_window" <$> TF.attribute _haVmMaximumFailureWindow
+        , TF.assign "ha_vm_maximum_resets" <$> TF.attribute _haVmMaximumResets
+        , TF.assign "ha_vm_minimum_uptime" <$> TF.attribute _haVmMinimumUptime
+        , TF.assign "ha_vm_monitoring" <$> TF.attribute _haVmMonitoring
+        , TF.assign "ha_vm_monitoring_use_cluster_defaults" <$> TF.attribute _haVmMonitoringUseClusterDefaults
+        , TF.assign "ha_vm_restart_priority" <$> TF.attribute _haVmRestartPriority
+        , TF.assign "ha_vm_restart_timeout" <$> TF.attribute _haVmRestartTimeout
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        ]
+
+instance TF.IsValid (HaVmOverrideResource s) where
+    validator = P.mempty
+
+instance P.HasComputeClusterId (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    computeClusterId =
+        P.lens (_computeClusterId :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _computeClusterId = a } :: HaVmOverrideResource s)
+
+instance P.HasHaDatastoreApdRecoveryAction (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    haDatastoreApdRecoveryAction =
+        P.lens (_haDatastoreApdRecoveryAction :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haDatastoreApdRecoveryAction = a } :: HaVmOverrideResource s)
+
+instance P.HasHaDatastoreApdResponse (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    haDatastoreApdResponse =
+        P.lens (_haDatastoreApdResponse :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haDatastoreApdResponse = a } :: HaVmOverrideResource s)
+
+instance P.HasHaDatastoreApdResponseDelay (HaVmOverrideResource s) (TF.Attr s P.Integer) where
+    haDatastoreApdResponseDelay =
+        P.lens (_haDatastoreApdResponseDelay :: HaVmOverrideResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haDatastoreApdResponseDelay = a } :: HaVmOverrideResource s)
+
+instance P.HasHaDatastorePdlResponse (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    haDatastorePdlResponse =
+        P.lens (_haDatastorePdlResponse :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haDatastorePdlResponse = a } :: HaVmOverrideResource s)
+
+instance P.HasHaHostIsolationResponse (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    haHostIsolationResponse =
+        P.lens (_haHostIsolationResponse :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haHostIsolationResponse = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmFailureInterval (HaVmOverrideResource s) (TF.Attr s P.Integer) where
+    haVmFailureInterval =
+        P.lens (_haVmFailureInterval :: HaVmOverrideResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmFailureInterval = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmMaximumFailureWindow (HaVmOverrideResource s) (TF.Attr s P.Integer) where
+    haVmMaximumFailureWindow =
+        P.lens (_haVmMaximumFailureWindow :: HaVmOverrideResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmMaximumFailureWindow = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmMaximumResets (HaVmOverrideResource s) (TF.Attr s P.Integer) where
+    haVmMaximumResets =
+        P.lens (_haVmMaximumResets :: HaVmOverrideResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmMaximumResets = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmMinimumUptime (HaVmOverrideResource s) (TF.Attr s P.Integer) where
+    haVmMinimumUptime =
+        P.lens (_haVmMinimumUptime :: HaVmOverrideResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmMinimumUptime = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmMonitoring (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    haVmMonitoring =
+        P.lens (_haVmMonitoring :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haVmMonitoring = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmMonitoringUseClusterDefaults (HaVmOverrideResource s) (TF.Attr s P.Bool) where
+    haVmMonitoringUseClusterDefaults =
+        P.lens (_haVmMonitoringUseClusterDefaults :: HaVmOverrideResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _haVmMonitoringUseClusterDefaults = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmRestartPriority (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    haVmRestartPriority =
+        P.lens (_haVmRestartPriority :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _haVmRestartPriority = a } :: HaVmOverrideResource s)
+
+instance P.HasHaVmRestartTimeout (HaVmOverrideResource s) (TF.Attr s P.Integer) where
+    haVmRestartTimeout =
+        P.lens (_haVmRestartTimeout :: HaVmOverrideResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _haVmRestartTimeout = a } :: HaVmOverrideResource s)
+
+instance P.HasVirtualMachineId (HaVmOverrideResource s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        P.lens (_virtualMachineId :: HaVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineId = a } :: HaVmOverrideResource s)
+
+-- | @vsphere_host_port_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_host_port_group terraform documentation>
+-- for more information.
+data HostPortGroupResource s = HostPortGroupResource'
+    { _activeNics              :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @active_nics@ - (Optional)
+    -- List of active network adapters used for load balancing.
+    --
+    , _allowForgedTransmits    :: TF.Attr s P.Bool
+    -- ^ @allow_forged_transmits@ - (Optional)
+    -- Controls whether or not the virtual network adapter is allowed to send
+    -- network traffic with a different MAC address than that of its own.
+    --
+    , _allowMacChanges         :: TF.Attr s P.Bool
+    -- ^ @allow_mac_changes@ - (Optional)
+    -- Controls whether or not the Media Access Control (MAC) address can be
+    -- changed.
+    --
+    , _allowPromiscuous        :: TF.Attr s P.Bool
+    -- ^ @allow_promiscuous@ - (Optional)
+    -- Enable promiscuous mode on the network. This flag indicates whether or not
+    -- all traffic is seen on a given port.
+    --
+    , _checkBeacon             :: TF.Attr s P.Bool
+    -- ^ @check_beacon@ - (Optional)
+    -- Enable beacon probing. Requires that the vSwitch has been configured to use
+    -- a beacon. If disabled, link status is used only.
+    --
+    , _failback                :: TF.Attr s P.Bool
+    -- ^ @failback@ - (Optional)
+    -- If true, the teaming policy will re-activate failed interfaces higher in
+    -- precedence when they come back up.
+    --
+    , _hostSystemId            :: TF.Attr s P.Text
+    -- ^ @host_system_id@ - (Required)
+    -- The managed object ID of the host to set the virtual switch up on.
+    --
+    , _name                    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the port group.
+    --
+    , _notifySwitches          :: TF.Attr s P.Bool
+    -- ^ @notify_switches@ - (Optional)
+    -- If true, the teaming policy will notify the broadcast network of a NIC
+    -- failover, triggering cache updates.
+    --
+    , _shapingAverageBandwidth :: TF.Attr s P.Integer
+    -- ^ @shaping_average_bandwidth@ - (Optional)
+    -- The average bandwidth in bits per second if traffic shaping is enabled.
+    --
+    , _shapingBurstSize        :: TF.Attr s P.Integer
+    -- ^ @shaping_burst_size@ - (Optional)
+    -- The maximum burst size allowed in bytes if traffic shaping is enabled.
+    --
+    , _shapingEnabled          :: TF.Attr s P.Bool
+    -- ^ @shaping_enabled@ - (Optional)
+    -- Enable traffic shaping on this virtual switch or port group.
+    --
+    , _shapingPeakBandwidth    :: TF.Attr s P.Integer
+    -- ^ @shaping_peak_bandwidth@ - (Optional)
+    -- The peak bandwidth during bursts in bits per second if traffic shaping is
+    -- enabled.
+    --
+    , _standbyNics             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @standby_nics@ - (Optional)
+    -- List of standby network adapters used for failover.
+    --
+    , _teamingPolicy           :: TF.Attr s P.Text
+    -- ^ @teaming_policy@ - (Optional)
+    -- The network adapter teaming policy. Can be one of loadbalance_ip,
+    -- loadbalance_srcmac, loadbalance_srcid, or failover_explicit.
+    --
+    , _virtualSwitchName       :: TF.Attr s P.Text
+    -- ^ @virtual_switch_name@ - (Required)
+    -- The name of the virtual switch to bind this port group to.
+    --
+    , _vlanId                  :: TF.Attr s P.Integer
+    -- ^ @vlan_id@ - (Optional)
+    -- The VLAN ID/trunk mode for this port group. An ID of 0 denotes no tagging,
+    -- an ID of 1-4094 tags with the specific ID, and an ID of 4095 enables trunk
+    -- mode, allowing the guest to manage its own tagging.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+hostPortGroupResource
+    :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @virtual_switch_name@ - 'P.virtualSwitchName'
+    -> TF.Resource P.Provider (HostPortGroupResource s)
+hostPortGroupResource _hostSystemId _name _virtualSwitchName =
+    TF.newResource "vsphere_host_port_group" TF.validator $
+        HostPortGroupResource'
+            { _activeNics = TF.Nil
+            , _allowForgedTransmits = TF.Nil
+            , _allowMacChanges = TF.Nil
+            , _allowPromiscuous = TF.Nil
+            , _checkBeacon = TF.Nil
+            , _failback = TF.Nil
+            , _hostSystemId = _hostSystemId
+            , _name = _name
+            , _notifySwitches = TF.Nil
+            , _shapingAverageBandwidth = TF.Nil
+            , _shapingBurstSize = TF.Nil
+            , _shapingEnabled = TF.Nil
+            , _shapingPeakBandwidth = TF.Nil
+            , _standbyNics = TF.Nil
+            , _teamingPolicy = TF.Nil
+            , _virtualSwitchName = _virtualSwitchName
+            , _vlanId = TF.value 0
+            }
+
+instance TF.IsObject (HostPortGroupResource s) where
+    toObject HostPortGroupResource'{..} = P.catMaybes
+        [ TF.assign "active_nics" <$> TF.attribute _activeNics
+        , TF.assign "allow_forged_transmits" <$> TF.attribute _allowForgedTransmits
+        , TF.assign "allow_mac_changes" <$> TF.attribute _allowMacChanges
+        , TF.assign "allow_promiscuous" <$> TF.attribute _allowPromiscuous
+        , TF.assign "check_beacon" <$> TF.attribute _checkBeacon
+        , TF.assign "failback" <$> TF.attribute _failback
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "notify_switches" <$> TF.attribute _notifySwitches
+        , TF.assign "shaping_average_bandwidth" <$> TF.attribute _shapingAverageBandwidth
+        , TF.assign "shaping_burst_size" <$> TF.attribute _shapingBurstSize
+        , TF.assign "shaping_enabled" <$> TF.attribute _shapingEnabled
+        , TF.assign "shaping_peak_bandwidth" <$> TF.attribute _shapingPeakBandwidth
+        , TF.assign "standby_nics" <$> TF.attribute _standbyNics
+        , TF.assign "teaming_policy" <$> TF.attribute _teamingPolicy
+        , TF.assign "virtual_switch_name" <$> TF.attribute _virtualSwitchName
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
+        ]
+
+instance TF.IsValid (HostPortGroupResource s) where
+    validator = P.mempty
+
+instance P.HasActiveNics (HostPortGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    activeNics =
+        P.lens (_activeNics :: HostPortGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _activeNics = a } :: HostPortGroupResource s)
+
+instance P.HasAllowForgedTransmits (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    allowForgedTransmits =
+        P.lens (_allowForgedTransmits :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowForgedTransmits = a } :: HostPortGroupResource s)
+
+instance P.HasAllowMacChanges (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    allowMacChanges =
+        P.lens (_allowMacChanges :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowMacChanges = a } :: HostPortGroupResource s)
+
+instance P.HasAllowPromiscuous (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    allowPromiscuous =
+        P.lens (_allowPromiscuous :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowPromiscuous = a } :: HostPortGroupResource s)
+
+instance P.HasCheckBeacon (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    checkBeacon =
+        P.lens (_checkBeacon :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _checkBeacon = a } :: HostPortGroupResource s)
+
+instance P.HasFailback (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    failback =
+        P.lens (_failback :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _failback = a } :: HostPortGroupResource s)
+
+instance P.HasHostSystemId (HostPortGroupResource s) (TF.Attr s P.Text) where
+    hostSystemId =
+        P.lens (_hostSystemId :: HostPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostSystemId = a } :: HostPortGroupResource s)
+
+instance P.HasName (HostPortGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: HostPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: HostPortGroupResource s)
+
+instance P.HasNotifySwitches (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    notifySwitches =
+        P.lens (_notifySwitches :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _notifySwitches = a } :: HostPortGroupResource s)
+
+instance P.HasShapingAverageBandwidth (HostPortGroupResource s) (TF.Attr s P.Integer) where
+    shapingAverageBandwidth =
+        P.lens (_shapingAverageBandwidth :: HostPortGroupResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shapingAverageBandwidth = a } :: HostPortGroupResource s)
+
+instance P.HasShapingBurstSize (HostPortGroupResource s) (TF.Attr s P.Integer) where
+    shapingBurstSize =
+        P.lens (_shapingBurstSize :: HostPortGroupResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shapingBurstSize = a } :: HostPortGroupResource s)
+
+instance P.HasShapingEnabled (HostPortGroupResource s) (TF.Attr s P.Bool) where
+    shapingEnabled =
+        P.lens (_shapingEnabled :: HostPortGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _shapingEnabled = a } :: HostPortGroupResource s)
+
+instance P.HasShapingPeakBandwidth (HostPortGroupResource s) (TF.Attr s P.Integer) where
+    shapingPeakBandwidth =
+        P.lens (_shapingPeakBandwidth :: HostPortGroupResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shapingPeakBandwidth = a } :: HostPortGroupResource s)
+
+instance P.HasStandbyNics (HostPortGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    standbyNics =
+        P.lens (_standbyNics :: HostPortGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _standbyNics = a } :: HostPortGroupResource s)
+
+instance P.HasTeamingPolicy (HostPortGroupResource s) (TF.Attr s P.Text) where
+    teamingPolicy =
+        P.lens (_teamingPolicy :: HostPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _teamingPolicy = a } :: HostPortGroupResource s)
+
+instance P.HasVirtualSwitchName (HostPortGroupResource s) (TF.Attr s P.Text) where
+    virtualSwitchName =
+        P.lens (_virtualSwitchName :: HostPortGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualSwitchName = a } :: HostPortGroupResource s)
+
+instance P.HasVlanId (HostPortGroupResource s) (TF.Attr s P.Integer) where
+    vlanId =
+        P.lens (_vlanId :: HostPortGroupResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _vlanId = a } :: HostPortGroupResource s)
+
+instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedComputedPolicy x = TF.compute (TF.refKey x) "_computedComputedPolicy"
+
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
+    computedKey x = TF.compute (TF.refKey x) "_computedKey"
+
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (Ports s)) where
+    computedPorts x = TF.compute (TF.refKey x) "_computedPorts"
+
+-- | @vsphere_host_virtual_switch@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_host_virtual_switch terraform documentation>
+-- for more information.
+data HostVirtualSwitchResource s = HostVirtualSwitchResource'
+    { _activeNics              :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @active_nics@ - (Required)
+    -- List of active network adapters used for load balancing.
+    --
+    , _allowForgedTransmits    :: TF.Attr s P.Bool
+    -- ^ @allow_forged_transmits@ - (Optional)
+    -- Controls whether or not the virtual network adapter is allowed to send
+    -- network traffic with a different MAC address than that of its own.
+    --
+    , _allowMacChanges         :: TF.Attr s P.Bool
+    -- ^ @allow_mac_changes@ - (Optional)
+    -- Controls whether or not the Media Access Control (MAC) address can be
+    -- changed.
+    --
+    , _allowPromiscuous        :: TF.Attr s P.Bool
+    -- ^ @allow_promiscuous@ - (Optional)
+    -- Enable promiscuous mode on the network. This flag indicates whether or not
+    -- all traffic is seen on a given port.
+    --
+    , _beaconInterval          :: TF.Attr s P.Integer
+    -- ^ @beacon_interval@ - (Optional)
+    -- Determines how often, in seconds, a beacon should be sent to probe for the
+    -- validity of a link.
+    --
+    , _checkBeacon             :: TF.Attr s P.Bool
+    -- ^ @check_beacon@ - (Optional)
+    -- Enable beacon probing. Requires that the vSwitch has been configured to use
+    -- a beacon. If disabled, link status is used only.
+    --
+    , _failback                :: TF.Attr s P.Bool
+    -- ^ @failback@ - (Optional)
+    -- If true, the teaming policy will re-activate failed interfaces higher in
+    -- precedence when they come back up.
+    --
+    , _hostSystemId            :: TF.Attr s P.Text
+    -- ^ @host_system_id@ - (Required)
+    -- The managed object ID of the host to set the virtual switch up on.
+    --
+    , _linkDiscoveryOperation  :: TF.Attr s P.Text
+    -- ^ @link_discovery_operation@ - (Optional)
+    -- Whether to advertise or listen for link discovery. Valid values are
+    -- advertise, both, listen, and none.
+    --
+    , _linkDiscoveryProtocol   :: TF.Attr s P.Text
+    -- ^ @link_discovery_protocol@ - (Optional)
+    -- The discovery protocol type. Valid values are cdp and lldp.
+    --
+    , _mtu                     :: TF.Attr s P.Integer
+    -- ^ @mtu@ - (Optional)
+    -- The maximum transmission unit (MTU) of the virtual switch in bytes.
+    --
+    , _name                    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the virtual switch.
+    --
+    , _networkAdapters         :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @network_adapters@ - (Required)
+    -- The list of network adapters to bind to this virtual switch.
+    --
+    , _notifySwitches          :: TF.Attr s P.Bool
+    -- ^ @notify_switches@ - (Optional)
+    -- If true, the teaming policy will notify the broadcast network of a NIC
+    -- failover, triggering cache updates.
+    --
+    , _numberOfPorts           :: TF.Attr s P.Integer
+    -- ^ @number_of_ports@ - (Optional)
+    -- The number of ports that this virtual switch is configured to use.
+    --
+    , _shapingAverageBandwidth :: TF.Attr s P.Integer
+    -- ^ @shaping_average_bandwidth@ - (Optional)
+    -- The average bandwidth in bits per second if traffic shaping is enabled.
+    --
+    , _shapingBurstSize        :: TF.Attr s P.Integer
+    -- ^ @shaping_burst_size@ - (Optional)
+    -- The maximum burst size allowed in bytes if traffic shaping is enabled.
+    --
+    , _shapingEnabled          :: TF.Attr s P.Bool
+    -- ^ @shaping_enabled@ - (Optional)
+    -- Enable traffic shaping on this virtual switch or port group.
+    --
+    , _shapingPeakBandwidth    :: TF.Attr s P.Integer
+    -- ^ @shaping_peak_bandwidth@ - (Optional)
+    -- The peak bandwidth during bursts in bits per second if traffic shaping is
+    -- enabled.
+    --
+    , _standbyNics             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @standby_nics@ - (Required)
+    -- List of standby network adapters used for failover.
+    --
+    , _teamingPolicy           :: TF.Attr s P.Text
+    -- ^ @teaming_policy@ - (Optional)
+    -- The network adapter teaming policy. Can be one of loadbalance_ip,
+    -- loadbalance_srcmac, loadbalance_srcid, or failover_explicit.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+hostVirtualSwitchResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @active_nics@ - 'P.activeNics'
+    -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @network_adapters@ - 'P.networkAdapters'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @standby_nics@ - 'P.standbyNics'
+    -> TF.Resource P.Provider (HostVirtualSwitchResource s)
+hostVirtualSwitchResource _activeNics _hostSystemId _name _networkAdapters _standbyNics =
+    TF.newResource "vsphere_host_virtual_switch" TF.validator $
+        HostVirtualSwitchResource'
+            { _activeNics = _activeNics
+            , _allowForgedTransmits = TF.value P.True
+            , _allowMacChanges = TF.value P.True
+            , _allowPromiscuous = TF.value P.False
+            , _beaconInterval = TF.value 1
+            , _checkBeacon = TF.value P.False
+            , _failback = TF.value P.True
+            , _hostSystemId = _hostSystemId
+            , _linkDiscoveryOperation = TF.value "listen"
+            , _linkDiscoveryProtocol = TF.value "cdp"
+            , _mtu = TF.value 1500
+            , _name = _name
+            , _networkAdapters = _networkAdapters
+            , _notifySwitches = TF.value P.True
+            , _numberOfPorts = TF.value 128
+            , _shapingAverageBandwidth = TF.Nil
+            , _shapingBurstSize = TF.Nil
+            , _shapingEnabled = TF.value P.False
+            , _shapingPeakBandwidth = TF.Nil
+            , _standbyNics = _standbyNics
+            , _teamingPolicy = TF.value "loadbalance_srcid"
+            }
+
+instance TF.IsObject (HostVirtualSwitchResource s) where
+    toObject HostVirtualSwitchResource'{..} = P.catMaybes
+        [ TF.assign "active_nics" <$> TF.attribute _activeNics
+        , TF.assign "allow_forged_transmits" <$> TF.attribute _allowForgedTransmits
+        , TF.assign "allow_mac_changes" <$> TF.attribute _allowMacChanges
+        , TF.assign "allow_promiscuous" <$> TF.attribute _allowPromiscuous
+        , TF.assign "beacon_interval" <$> TF.attribute _beaconInterval
+        , TF.assign "check_beacon" <$> TF.attribute _checkBeacon
+        , TF.assign "failback" <$> TF.attribute _failback
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
+        , TF.assign "link_discovery_operation" <$> TF.attribute _linkDiscoveryOperation
+        , TF.assign "link_discovery_protocol" <$> TF.attribute _linkDiscoveryProtocol
+        , TF.assign "mtu" <$> TF.attribute _mtu
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_adapters" <$> TF.attribute _networkAdapters
+        , TF.assign "notify_switches" <$> TF.attribute _notifySwitches
+        , TF.assign "number_of_ports" <$> TF.attribute _numberOfPorts
+        , TF.assign "shaping_average_bandwidth" <$> TF.attribute _shapingAverageBandwidth
+        , TF.assign "shaping_burst_size" <$> TF.attribute _shapingBurstSize
+        , TF.assign "shaping_enabled" <$> TF.attribute _shapingEnabled
+        , TF.assign "shaping_peak_bandwidth" <$> TF.attribute _shapingPeakBandwidth
+        , TF.assign "standby_nics" <$> TF.attribute _standbyNics
+        , TF.assign "teaming_policy" <$> TF.attribute _teamingPolicy
+        ]
+
+instance TF.IsValid (HostVirtualSwitchResource s) where
+    validator = P.mempty
+
+instance P.HasActiveNics (HostVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    activeNics =
+        P.lens (_activeNics :: HostVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _activeNics = a } :: HostVirtualSwitchResource s)
+
+instance P.HasAllowForgedTransmits (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    allowForgedTransmits =
+        P.lens (_allowForgedTransmits :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowForgedTransmits = a } :: HostVirtualSwitchResource s)
+
+instance P.HasAllowMacChanges (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    allowMacChanges =
+        P.lens (_allowMacChanges :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowMacChanges = a } :: HostVirtualSwitchResource s)
+
+instance P.HasAllowPromiscuous (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    allowPromiscuous =
+        P.lens (_allowPromiscuous :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowPromiscuous = a } :: HostVirtualSwitchResource s)
+
+instance P.HasBeaconInterval (HostVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    beaconInterval =
+        P.lens (_beaconInterval :: HostVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _beaconInterval = a } :: HostVirtualSwitchResource s)
+
+instance P.HasCheckBeacon (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    checkBeacon =
+        P.lens (_checkBeacon :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _checkBeacon = a } :: HostVirtualSwitchResource s)
+
+instance P.HasFailback (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    failback =
+        P.lens (_failback :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _failback = a } :: HostVirtualSwitchResource s)
+
+instance P.HasHostSystemId (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+    hostSystemId =
+        P.lens (_hostSystemId :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostSystemId = a } :: HostVirtualSwitchResource s)
+
+instance P.HasLinkDiscoveryOperation (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+    linkDiscoveryOperation =
+        P.lens (_linkDiscoveryOperation :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _linkDiscoveryOperation = a } :: HostVirtualSwitchResource s)
+
+instance P.HasLinkDiscoveryProtocol (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+    linkDiscoveryProtocol =
+        P.lens (_linkDiscoveryProtocol :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _linkDiscoveryProtocol = a } :: HostVirtualSwitchResource s)
+
+instance P.HasMtu (HostVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    mtu =
+        P.lens (_mtu :: HostVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _mtu = a } :: HostVirtualSwitchResource s)
+
+instance P.HasName (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: HostVirtualSwitchResource s)
+
+instance P.HasNetworkAdapters (HostVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    networkAdapters =
+        P.lens (_networkAdapters :: HostVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _networkAdapters = a } :: HostVirtualSwitchResource s)
+
+instance P.HasNotifySwitches (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    notifySwitches =
+        P.lens (_notifySwitches :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _notifySwitches = a } :: HostVirtualSwitchResource s)
+
+instance P.HasNumberOfPorts (HostVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    numberOfPorts =
+        P.lens (_numberOfPorts :: HostVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _numberOfPorts = a } :: HostVirtualSwitchResource s)
+
+instance P.HasShapingAverageBandwidth (HostVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    shapingAverageBandwidth =
+        P.lens (_shapingAverageBandwidth :: HostVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shapingAverageBandwidth = a } :: HostVirtualSwitchResource s)
+
+instance P.HasShapingBurstSize (HostVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    shapingBurstSize =
+        P.lens (_shapingBurstSize :: HostVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shapingBurstSize = a } :: HostVirtualSwitchResource s)
+
+instance P.HasShapingEnabled (HostVirtualSwitchResource s) (TF.Attr s P.Bool) where
+    shapingEnabled =
+        P.lens (_shapingEnabled :: HostVirtualSwitchResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _shapingEnabled = a } :: HostVirtualSwitchResource s)
+
+instance P.HasShapingPeakBandwidth (HostVirtualSwitchResource s) (TF.Attr s P.Integer) where
+    shapingPeakBandwidth =
+        P.lens (_shapingPeakBandwidth :: HostVirtualSwitchResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shapingPeakBandwidth = a } :: HostVirtualSwitchResource s)
+
+instance P.HasStandbyNics (HostVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    standbyNics =
+        P.lens (_standbyNics :: HostVirtualSwitchResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _standbyNics = a } :: HostVirtualSwitchResource s)
+
+instance P.HasTeamingPolicy (HostVirtualSwitchResource s) (TF.Attr s P.Text) where
+    teamingPolicy =
+        P.lens (_teamingPolicy :: HostVirtualSwitchResource s -> TF.Attr s P.Text)
+               (\s a -> s { _teamingPolicy = a } :: HostVirtualSwitchResource s)
+
+-- | @vsphere_license@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_license terraform documentation>
+-- for more information.
+data LicenseResource s = LicenseResource'
+    { _labels     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    --
+    , _licenseKey :: TF.Attr s P.Text
+    -- ^ @license_key@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+licenseResource
+    :: TF.Attr s P.Text -- ^ @license_key@ - 'P.licenseKey'
+    -> TF.Resource P.Provider (LicenseResource s)
+licenseResource _licenseKey =
+    TF.newResource "vsphere_license" TF.validator $
+        LicenseResource'
+            { _labels = TF.Nil
+            , _licenseKey = _licenseKey
+            }
+
+instance TF.IsObject (LicenseResource s) where
+    toObject LicenseResource'{..} = P.catMaybes
+        [ TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "license_key" <$> TF.attribute _licenseKey
+        ]
+
+instance TF.IsValid (LicenseResource s) where
+    validator = P.mempty
+
+instance P.HasLabels (LicenseResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: LicenseResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: LicenseResource s)
+
+instance P.HasLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
+    licenseKey =
+        P.lens (_licenseKey :: LicenseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _licenseKey = a } :: LicenseResource s)
+
+instance s ~ s' => P.HasComputedEditionKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
+    computedEditionKey x = TF.compute (TF.refKey x) "_computedEditionKey"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "_computedName"
+
+instance s ~ s' => P.HasComputedTotal (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Integer) where
+    computedTotal x = TF.compute (TF.refKey x) "_computedTotal"
+
+instance s ~ s' => P.HasComputedUsed (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Integer) where
+    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
+
+-- | @vsphere_nas_datastore@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_nas_datastore terraform documentation>
+-- for more information.
+data NasDatastoreResource s = NasDatastoreResource'
+    { _accessMode         :: TF.Attr s P.Text
+    -- ^ @access_mode@ - (Optional)
+    -- Access mode for the mount point. Can be one of readOnly or readWrite.
+    --
+    , _customAttributes   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datastoreClusterId :: TF.Attr s P.Text
+    -- ^ @datastore_cluster_id@ - (Optional)
+    -- The managed object ID of the datastore cluster to place the datastore in.
+    --
+    -- Conflicts with:
+    --
+    -- * 'folder'
+    , _folder             :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    -- The path to the datastore folder to put the datastore in.
+    --
+    -- Conflicts with:
+    --
+    -- * 'datastoreClusterId'
+    , _hostSystemIds      :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @host_system_ids@ - (Required)
+    -- The managed object IDs of the hosts to mount the datastore on.
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the datastore.
+    --
+    , _remoteHosts        :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @remote_hosts@ - (Required)
+    -- The hostnames or IP addresses of the remote server or servers. Only one
+    -- element should be present for NFS v3 but multiple can be present for NFS
+    -- v4.1.
+    --
+    , _remotePath         :: TF.Attr s P.Text
+    -- ^ @remote_path@ - (Required)
+    -- The remote path of the mount point.
+    --
+    , _securityType       :: TF.Attr s P.Text
+    -- ^ @security_type@ - (Optional)
+    -- The security type to use.
+    --
+    , _tags               :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    , _type'              :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    -- The type of NAS volume. Can be one of NFS (to denote v3) or NFS41 (to denote
+    -- NFS v4.1).
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+nasDatastoreResource
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @host_system_ids@ - 'P.hostSystemIds'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @remote_hosts@ - 'P.remoteHosts'
+    -> TF.Attr s P.Text -- ^ @remote_path@ - 'P.remotePath'
+    -> TF.Resource P.Provider (NasDatastoreResource s)
+nasDatastoreResource _hostSystemIds _name _remoteHosts _remotePath =
+    TF.newResource "vsphere_nas_datastore" TF.validator $
+        NasDatastoreResource'
+            { _accessMode = TF.value "readWrite"
+            , _customAttributes = TF.Nil
+            , _datastoreClusterId = TF.Nil
+            , _folder = TF.Nil
+            , _hostSystemIds = _hostSystemIds
+            , _name = _name
+            , _remoteHosts = _remoteHosts
+            , _remotePath = _remotePath
+            , _securityType = TF.Nil
+            , _tags = TF.Nil
+            , _type' = TF.value "NFS"
+            }
+
+instance TF.IsObject (NasDatastoreResource s) where
+    toObject NasDatastoreResource'{..} = P.catMaybes
+        [ TF.assign "access_mode" <$> TF.attribute _accessMode
+        , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datastore_cluster_id" <$> TF.attribute _datastoreClusterId
+        , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "host_system_ids" <$> TF.attribute _hostSystemIds
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "remote_hosts" <$> TF.attribute _remoteHosts
+        , TF.assign "remote_path" <$> TF.attribute _remotePath
+        , TF.assign "security_type" <$> TF.attribute _securityType
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (NasDatastoreResource s) where
+    validator = TF.fieldsValidator (\NasDatastoreResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_datastoreClusterId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_datastoreClusterId",
+                            [ "_folder"
+                            ])
+        , if (_folder P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_folder",
+                            [ "_datastoreClusterId"
+                            ])
+        ])
+
 instance P.HasAccessMode (NasDatastoreResource s) (TF.Attr s P.Text) where
     accessMode =
-        lens (_access_mode :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _access_mode = a } :: NasDatastoreResource s)
+        P.lens (_accessMode :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _accessMode = a } :: NasDatastoreResource s)
+
+instance P.HasCustomAttributes (NasDatastoreResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: NasDatastoreResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: NasDatastoreResource s)
 
 instance P.HasDatastoreClusterId (NasDatastoreResource s) (TF.Attr s P.Text) where
     datastoreClusterId =
-        lens (_datastore_cluster_id :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datastore_cluster_id = a } :: NasDatastoreResource s)
+        P.lens (_datastoreClusterId :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreClusterId = a } :: NasDatastoreResource s)
 
 instance P.HasFolder (NasDatastoreResource s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: NasDatastoreResource s)
+        P.lens (_folder :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: NasDatastoreResource s)
 
-instance P.HasHostSystemIds (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance P.HasHostSystemIds (NasDatastoreResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     hostSystemIds =
-        lens (_host_system_ids :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_ids = a } :: NasDatastoreResource s)
+        P.lens (_hostSystemIds :: NasDatastoreResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _hostSystemIds = a } :: NasDatastoreResource s)
 
 instance P.HasName (NasDatastoreResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: NasDatastoreResource s)
+        P.lens (_name :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NasDatastoreResource s)
 
-instance P.HasRemoteHosts (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance P.HasRemoteHosts (NasDatastoreResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     remoteHosts =
-        lens (_remote_hosts :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _remote_hosts = a } :: NasDatastoreResource s)
+        P.lens (_remoteHosts :: NasDatastoreResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _remoteHosts = a } :: NasDatastoreResource s)
 
 instance P.HasRemotePath (NasDatastoreResource s) (TF.Attr s P.Text) where
     remotePath =
-        lens (_remote_path :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _remote_path = a } :: NasDatastoreResource s)
+        P.lens (_remotePath :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _remotePath = a } :: NasDatastoreResource s)
 
 instance P.HasSecurityType (NasDatastoreResource s) (TF.Attr s P.Text) where
     securityType =
-        lens (_security_type :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _security_type = a } :: NasDatastoreResource s)
+        P.lens (_securityType :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _securityType = a } :: NasDatastoreResource s)
 
-instance P.HasTags (NasDatastoreResource s) (TF.Attr s P.Text) where
+instance P.HasTags (NasDatastoreResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: NasDatastoreResource s)
+        P.lens (_tags :: NasDatastoreResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: NasDatastoreResource s)
 
 instance P.HasType' (NasDatastoreResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: NasDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: NasDatastoreResource s)
+        P.lens (_type' :: NasDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: NasDatastoreResource s)
 
-instance s ~ s' => P.HasComputedAccessMode (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedAccessMode =
-        (_access_mode :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
+    computedAccessible x = TF.compute (TF.refKey x) "_computedAccessible"
 
-instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedAccessible x = TF.compute (TF.refKey x) "accessible"
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
+    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
 
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedCapacity x = TF.compute (TF.refKey x) "capacity"
-
-instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedDatastoreClusterId =
-        (_datastore_cluster_id :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
-
-instance s ~ s' => P.HasComputedHostSystemIds (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedHostSystemIds =
-        (_host_system_ids :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
+    computedFreeSpace x = TF.compute (TF.refKey x) "_computedFreeSpace"
 
 instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
+    computedMaintenanceMode x = TF.compute (TF.refKey x) "_computedMaintenanceMode"
 
-instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
+    computedMultipleHostAccess x = TF.compute (TF.refKey x) "_computedMultipleHostAccess"
 
 instance s ~ s' => P.HasComputedProtocolEndpoint (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedProtocolEndpoint x = TF.compute (TF.refKey x) "protocol_endpoint"
+    computedProtocolEndpoint x = TF.compute (TF.refKey x) "_computedProtocolEndpoint"
 
-instance s ~ s' => P.HasComputedRemoteHosts (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedRemoteHosts =
-        (_remote_hosts :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRemotePath (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedRemotePath =
-        (_remote_path :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSecurityType (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedSecurityType =
-        (_security_type :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: NasDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
+instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
+    computedUncommittedSpace x = TF.compute (TF.refKey x) "_computedUncommittedSpace"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
 
-nasDatastoreResource :: TF.Resource P.VSphere (NasDatastoreResource s)
-nasDatastoreResource =
-    TF.newResource "vsphere_nas_datastore" $
-        NasDatastoreResource {
-              _access_mode = TF.Nil
-            , _datastore_cluster_id = TF.Nil
-            , _folder = TF.Nil
-            , _host_system_ids = TF.Nil
-            , _name = TF.Nil
-            , _remote_hosts = TF.Nil
-            , _remote_path = TF.Nil
-            , _security_type = TF.Nil
+-- | @vsphere_resource_pool@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_resource_pool terraform documentation>
+-- for more information.
+data ResourcePoolResource s = ResourcePoolResource'
+    { _cpuExpandable        :: TF.Attr s P.Bool
+    -- ^ @cpu_expandable@ - (Optional)
+    -- Determines if the reservation on a resource pool can grow beyond the
+    -- specified value, if the parent resource pool has unreserved resources.
+    --
+    , _cpuLimit             :: TF.Attr s P.Integer
+    -- ^ @cpu_limit@ - (Optional)
+    -- The utilization of a resource pool will not exceed this limit, even if there
+    -- are available resources. Set to -1 for unlimited.
+    --
+    , _cpuReservation       :: TF.Attr s P.Integer
+    -- ^ @cpu_reservation@ - (Optional)
+    -- Amount of CPU (MHz) that is guaranteed available to the resource pool.
+    --
+    , _cpuShareLevel        :: TF.Attr s P.Text
+    -- ^ @cpu_share_level@ - (Optional)
+    -- The allocation level. The level is a simplified view of shares. Levels map
+    -- to a pre-determined set of numeric values for shares. Can be one of low,
+    -- normal, high, or custom.
+    --
+    , _customAttributes     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _memoryExpandable     :: TF.Attr s P.Bool
+    -- ^ @memory_expandable@ - (Optional)
+    -- Determines if the reservation on a resource pool can grow beyond the
+    -- specified value, if the parent resource pool has unreserved resources.
+    --
+    , _memoryLimit          :: TF.Attr s P.Integer
+    -- ^ @memory_limit@ - (Optional)
+    -- The utilization of a resource pool will not exceed this limit, even if there
+    -- are available resources. Set to -1 for unlimited.
+    --
+    , _memoryReservation    :: TF.Attr s P.Integer
+    -- ^ @memory_reservation@ - (Optional)
+    -- Amount of memory (MB) that is guaranteed available to the resource pool.
+    --
+    , _memoryShareLevel     :: TF.Attr s P.Text
+    -- ^ @memory_share_level@ - (Optional)
+    -- The allocation level. The level is a simplified view of shares. Levels map
+    -- to a pre-determined set of numeric values for shares. Can be one of low,
+    -- normal, high, or custom.
+    --
+    , _name                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- Name of resource pool.
+    --
+    , _parentResourcePoolId :: TF.Attr s P.Text
+    -- ^ @parent_resource_pool_id@ - (Required)
+    -- The ID of the root resource pool of the compute resource the resource pool
+    -- is in.
+    --
+    , _tags                 :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+resourcePoolResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @parent_resource_pool_id@ - 'P.parentResourcePoolId'
+    -> TF.Resource P.Provider (ResourcePoolResource s)
+resourcePoolResource _name _parentResourcePoolId =
+    TF.newResource "vsphere_resource_pool" TF.validator $
+        ResourcePoolResource'
+            { _cpuExpandable = TF.value P.True
+            , _cpuLimit = TF.value (-1)
+            , _cpuReservation = TF.value 0
+            , _cpuShareLevel = TF.value "normal"
+            , _customAttributes = TF.Nil
+            , _memoryExpandable = TF.value P.True
+            , _memoryLimit = TF.value (-1)
+            , _memoryReservation = TF.value 0
+            , _memoryShareLevel = TF.value "normal"
+            , _name = _name
+            , _parentResourcePoolId = _parentResourcePoolId
             , _tags = TF.Nil
-            , _type' = TF.Nil
             }
 
-{- | The @vsphere_resource_pool@ VSphere resource.
-
-The @vsphere_resource_pool@ resource can be used to create and manage
-resource pools in standalone hosts or on compute clusters. For more
-information on vSphere resource pools, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-60077B40-66FF-4625-934A-641703ED7601.html>
-.
--}
-data ResourcePoolResource s = ResourcePoolResource {
-      _cpu_expandable          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Determines if the reservation on a resource pool can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
-    , _cpu_limit               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU utilization of a resource pool will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
-    , _cpu_reservation         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the resource pool. Default: @0@ -}
-    , _cpu_share_level         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @cpu_shares@ will be ignored.  Default: @normal@ -}
-    , _cpu_shares              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @cpu_share_level@ must be @custom@ . -}
-    , _memory_expandable       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Determines if the reservation on a resource pool can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
-    , _memory_limit            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU utilization of a resource pool will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
-    , _memory_reservation      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the resource pool. Default: @0@ -}
-    , _memory_share_level      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @memory_shares@ will be ignored.  Default: @normal@ -}
-    , _memory_shares           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @memory_share_level@ must be @custom@ . -}
-    , _name                    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the resource pool. -}
-    , _parent_resource_pool_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the parent resource pool. This can be the root resource pool for a cluster or standalone host, or a resource pool itself. When moving a resource pool from one parent resource pool to another, both must share a common root resource pool or the move will fail. -}
-    , _tags                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (ResourcePoolResource s) where
-    toObject ResourcePoolResource{..} = catMaybes
-        [ TF.assign "cpu_expandable" <$> TF.attribute _cpu_expandable
-        , TF.assign "cpu_limit" <$> TF.attribute _cpu_limit
-        , TF.assign "cpu_reservation" <$> TF.attribute _cpu_reservation
-        , TF.assign "cpu_share_level" <$> TF.attribute _cpu_share_level
-        , TF.assign "cpu_shares" <$> TF.attribute _cpu_shares
-        , TF.assign "memory_expandable" <$> TF.attribute _memory_expandable
-        , TF.assign "memory_limit" <$> TF.attribute _memory_limit
-        , TF.assign "memory_reservation" <$> TF.attribute _memory_reservation
-        , TF.assign "memory_share_level" <$> TF.attribute _memory_share_level
-        , TF.assign "memory_shares" <$> TF.attribute _memory_shares
+    toObject ResourcePoolResource'{..} = P.catMaybes
+        [ TF.assign "cpu_expandable" <$> TF.attribute _cpuExpandable
+        , TF.assign "cpu_limit" <$> TF.attribute _cpuLimit
+        , TF.assign "cpu_reservation" <$> TF.attribute _cpuReservation
+        , TF.assign "cpu_share_level" <$> TF.attribute _cpuShareLevel
+        , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "memory_expandable" <$> TF.attribute _memoryExpandable
+        , TF.assign "memory_limit" <$> TF.attribute _memoryLimit
+        , TF.assign "memory_reservation" <$> TF.attribute _memoryReservation
+        , TF.assign "memory_share_level" <$> TF.attribute _memoryShareLevel
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parent_resource_pool_id" <$> TF.attribute _parent_resource_pool_id
+        , TF.assign "parent_resource_pool_id" <$> TF.attribute _parentResourcePoolId
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance P.HasCpuExpandable (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (ResourcePoolResource s) where
+    validator = P.mempty
+
+instance P.HasCpuExpandable (ResourcePoolResource s) (TF.Attr s P.Bool) where
     cpuExpandable =
-        lens (_cpu_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_expandable = a } :: ResourcePoolResource s)
+        P.lens (_cpuExpandable :: ResourcePoolResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _cpuExpandable = a } :: ResourcePoolResource s)
 
-instance P.HasCpuLimit (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance P.HasCpuLimit (ResourcePoolResource s) (TF.Attr s P.Integer) where
     cpuLimit =
-        lens (_cpu_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_limit = a } :: ResourcePoolResource s)
+        P.lens (_cpuLimit :: ResourcePoolResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpuLimit = a } :: ResourcePoolResource s)
 
-instance P.HasCpuReservation (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance P.HasCpuReservation (ResourcePoolResource s) (TF.Attr s P.Integer) where
     cpuReservation =
-        lens (_cpu_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_reservation = a } :: ResourcePoolResource s)
+        P.lens (_cpuReservation :: ResourcePoolResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpuReservation = a } :: ResourcePoolResource s)
 
 instance P.HasCpuShareLevel (ResourcePoolResource s) (TF.Attr s P.Text) where
     cpuShareLevel =
-        lens (_cpu_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_share_level = a } :: ResourcePoolResource s)
+        P.lens (_cpuShareLevel :: ResourcePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _cpuShareLevel = a } :: ResourcePoolResource s)
 
-instance P.HasCpuShares (ResourcePoolResource s) (TF.Attr s P.Text) where
-    cpuShares =
-        lens (_cpu_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_shares = a } :: ResourcePoolResource s)
+instance P.HasCustomAttributes (ResourcePoolResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: ResourcePoolResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: ResourcePoolResource s)
 
-instance P.HasMemoryExpandable (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance P.HasMemoryExpandable (ResourcePoolResource s) (TF.Attr s P.Bool) where
     memoryExpandable =
-        lens (_memory_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_expandable = a } :: ResourcePoolResource s)
+        P.lens (_memoryExpandable :: ResourcePoolResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _memoryExpandable = a } :: ResourcePoolResource s)
 
-instance P.HasMemoryLimit (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance P.HasMemoryLimit (ResourcePoolResource s) (TF.Attr s P.Integer) where
     memoryLimit =
-        lens (_memory_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_limit = a } :: ResourcePoolResource s)
+        P.lens (_memoryLimit :: ResourcePoolResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryLimit = a } :: ResourcePoolResource s)
 
-instance P.HasMemoryReservation (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance P.HasMemoryReservation (ResourcePoolResource s) (TF.Attr s P.Integer) where
     memoryReservation =
-        lens (_memory_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_reservation = a } :: ResourcePoolResource s)
+        P.lens (_memoryReservation :: ResourcePoolResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryReservation = a } :: ResourcePoolResource s)
 
 instance P.HasMemoryShareLevel (ResourcePoolResource s) (TF.Attr s P.Text) where
     memoryShareLevel =
-        lens (_memory_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_share_level = a } :: ResourcePoolResource s)
-
-instance P.HasMemoryShares (ResourcePoolResource s) (TF.Attr s P.Text) where
-    memoryShares =
-        lens (_memory_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_shares = a } :: ResourcePoolResource s)
+        P.lens (_memoryShareLevel :: ResourcePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _memoryShareLevel = a } :: ResourcePoolResource s)
 
 instance P.HasName (ResourcePoolResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: ResourcePoolResource s)
+        P.lens (_name :: ResourcePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ResourcePoolResource s)
 
 instance P.HasParentResourcePoolId (ResourcePoolResource s) (TF.Attr s P.Text) where
     parentResourcePoolId =
-        lens (_parent_resource_pool_id :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_resource_pool_id = a } :: ResourcePoolResource s)
+        P.lens (_parentResourcePoolId :: ResourcePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _parentResourcePoolId = a } :: ResourcePoolResource s)
 
-instance P.HasTags (ResourcePoolResource s) (TF.Attr s P.Text) where
+instance P.HasTags (ResourcePoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: ResourcePoolResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: ResourcePoolResource s)
+        P.lens (_tags :: ResourcePoolResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: ResourcePoolResource s)
 
-instance s ~ s' => P.HasComputedCpuExpandable (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedCpuExpandable =
-        (_cpu_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Integer) where
+    computedCpuShares x = TF.compute (TF.refKey x) "_computedCpuShares"
 
-instance s ~ s' => P.HasComputedCpuLimit (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedCpuLimit =
-        (_cpu_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Integer) where
+    computedMemoryShares x = TF.compute (TF.refKey x) "_computedMemoryShares"
 
-instance s ~ s' => P.HasComputedCpuReservation (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedCpuReservation =
-        (_cpu_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_storage_drs_vm_override@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_storage_drs_vm_override terraform documentation>
+-- for more information.
+data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource'
+    { _datastoreClusterId  :: TF.Attr s P.Text
+    -- ^ @datastore_cluster_id@ - (Required)
+    -- The managed object ID of the datastore cluster.
+    --
+    , _sdrsAutomationLevel :: TF.Attr s P.Text
+    -- ^ @sdrs_automation_level@ - (Optional)
+    -- Overrides any Storage DRS automation levels for this virtual machine.
+    --
+    , _sdrsEnabled         :: TF.Attr s P.Text
+    -- ^ @sdrs_enabled@ - (Optional)
+    -- Overrides the default Storage DRS setting for this virtual machine.
+    --
+    , _sdrsIntraVmAffinity :: TF.Attr s P.Text
+    -- ^ @sdrs_intra_vm_affinity@ - (Optional)
+    -- Overrides the intra-VM affinity setting for this virtual machine.
+    --
+    , _virtualMachineId    :: TF.Attr s P.Text
+    -- ^ @virtual_machine_id@ - (Required)
+    -- The managed object ID of the virtual machine.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedCpuShareLevel (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedCpuShareLevel =
-        (_cpu_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedCpuShares =
-        (_cpu_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryExpandable (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedMemoryExpandable =
-        (_memory_expandable :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryLimit (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedMemoryLimit =
-        (_memory_limit :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedMemoryReservation =
-        (_memory_reservation :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryShareLevel (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedMemoryShareLevel =
-        (_memory_share_level :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedMemoryShares =
-        (_memory_shares :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedParentResourcePoolId (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedParentResourcePoolId =
-        (_parent_resource_pool_id :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: ResourcePoolResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-resourcePoolResource :: TF.Resource P.VSphere (ResourcePoolResource s)
-resourcePoolResource =
-    TF.newResource "vsphere_resource_pool" $
-        ResourcePoolResource {
-              _cpu_expandable = TF.Nil
-            , _cpu_limit = TF.Nil
-            , _cpu_reservation = TF.Nil
-            , _cpu_share_level = TF.Nil
-            , _cpu_shares = TF.Nil
-            , _memory_expandable = TF.Nil
-            , _memory_limit = TF.Nil
-            , _memory_reservation = TF.Nil
-            , _memory_share_level = TF.Nil
-            , _memory_shares = TF.Nil
-            , _name = TF.Nil
-            , _parent_resource_pool_id = TF.Nil
-            , _tags = TF.Nil
+storageDrsVmOverrideResource
+    :: TF.Attr s P.Text -- ^ @datastore_cluster_id@ - 'P.datastoreClusterId'
+    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> TF.Resource P.Provider (StorageDrsVmOverrideResource s)
+storageDrsVmOverrideResource _datastoreClusterId _virtualMachineId =
+    TF.newResource "vsphere_storage_drs_vm_override" TF.validator $
+        StorageDrsVmOverrideResource'
+            { _datastoreClusterId = _datastoreClusterId
+            , _sdrsAutomationLevel = TF.Nil
+            , _sdrsEnabled = TF.Nil
+            , _sdrsIntraVmAffinity = TF.Nil
+            , _virtualMachineId = _virtualMachineId
             }
 
-{- | The @vsphere_storage_drs_vm_override@ VSphere resource.
-
-The @vsphere_storage_drs_vm_override@ resource can be used to add a Storage
-DRS override to a datastore cluster for a specific virtual machine. With
-this resource, one can enable or disable Storage DRS, and control the
-automation level and disk affinity for a single virtual machine without
-affecting the rest of the datastore cluster. For more information on vSphere
-datastore clusters and Storage DRS, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.resmgmt.doc/GUID-598DF695-107E-406B-9C95-0AF961FC227A.html>
-.
--}
-data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource {
-      _datastore_cluster_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the datastore cluster to put the override in. Forces a new resource if changed. -}
-    , _sdrs_automation_level  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Overrides any Storage DRS automation levels for this virtual machine. Can be one of @automated@ or @manual@ . When not specified, the datastore cluster's settings are used according to the </docs/providers/vsphere/r/datastore_cluster.html#storage-drs-automation-options> . -}
-    , _sdrs_enabled           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Overrides the default Storage DRS setting for this virtual machine. When not specified, the datastore cluster setting is used. -}
-    , _sdrs_intra_vm_affinity :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Overrides the intra-VM affinity setting for this virtual machine. When @true@ , all disks for this virtual machine will be kept on the same datastore. When @false@ , Storage DRS may locate individual disks on different datastores if it helps satisfy cluster requirements. When not specified, the datastore cluster's settings are used. -}
-    , _virtual_machine_id     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The UUID of the virtual machine to create the override for.  Forces a new resource if changed. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (StorageDrsVmOverrideResource s) where
-    toObject StorageDrsVmOverrideResource{..} = catMaybes
-        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
-        , TF.assign "sdrs_automation_level" <$> TF.attribute _sdrs_automation_level
-        , TF.assign "sdrs_enabled" <$> TF.attribute _sdrs_enabled
-        , TF.assign "sdrs_intra_vm_affinity" <$> TF.attribute _sdrs_intra_vm_affinity
-        , TF.assign "virtual_machine_id" <$> TF.attribute _virtual_machine_id
+    toObject StorageDrsVmOverrideResource'{..} = P.catMaybes
+        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastoreClusterId
+        , TF.assign "sdrs_automation_level" <$> TF.attribute _sdrsAutomationLevel
+        , TF.assign "sdrs_enabled" <$> TF.attribute _sdrsEnabled
+        , TF.assign "sdrs_intra_vm_affinity" <$> TF.attribute _sdrsIntraVmAffinity
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
         ]
+
+instance TF.IsValid (StorageDrsVmOverrideResource s) where
+    validator = P.mempty
 
 instance P.HasDatastoreClusterId (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
     datastoreClusterId =
-        lens (_datastore_cluster_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datastore_cluster_id = a } :: StorageDrsVmOverrideResource s)
+        P.lens (_datastoreClusterId :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreClusterId = a } :: StorageDrsVmOverrideResource s)
 
 instance P.HasSdrsAutomationLevel (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
     sdrsAutomationLevel =
-        lens (_sdrs_automation_level :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sdrs_automation_level = a } :: StorageDrsVmOverrideResource s)
+        P.lens (_sdrsAutomationLevel :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsAutomationLevel = a } :: StorageDrsVmOverrideResource s)
 
 instance P.HasSdrsEnabled (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
     sdrsEnabled =
-        lens (_sdrs_enabled :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sdrs_enabled = a } :: StorageDrsVmOverrideResource s)
+        P.lens (_sdrsEnabled :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsEnabled = a } :: StorageDrsVmOverrideResource s)
 
 instance P.HasSdrsIntraVmAffinity (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
     sdrsIntraVmAffinity =
-        lens (_sdrs_intra_vm_affinity :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sdrs_intra_vm_affinity = a } :: StorageDrsVmOverrideResource s)
+        P.lens (_sdrsIntraVmAffinity :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sdrsIntraVmAffinity = a } :: StorageDrsVmOverrideResource s)
 
 instance P.HasVirtualMachineId (StorageDrsVmOverrideResource s) (TF.Attr s P.Text) where
     virtualMachineId =
-        lens (_virtual_machine_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_id = a } :: StorageDrsVmOverrideResource s)
+        P.lens (_virtualMachineId :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineId = a } :: StorageDrsVmOverrideResource s)
 
-instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedDatastoreClusterId =
-        (_datastore_cluster_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_tag@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_tag terraform documentation>
+-- for more information.
+data TagResource s = TagResource'
+    { _categoryId  :: TF.Attr s P.Text
+    -- ^ @category_id@ - (Required)
+    -- The unique identifier of the parent category in which this tag will be
+    -- created.
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    -- The description of the tag.
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The display name of the tag. The name must be unique within its category.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedSdrsAutomationLevel (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedSdrsAutomationLevel =
-        (_sdrs_automation_level :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSdrsEnabled (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedSdrsEnabled =
-        (_sdrs_enabled :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSdrsIntraVmAffinity (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedSdrsIntraVmAffinity =
-        (_sdrs_intra_vm_affinity :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (StorageDrsVmOverrideResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineId =
-        (_virtual_machine_id :: StorageDrsVmOverrideResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-storageDrsVmOverrideResource :: TF.Resource P.VSphere (StorageDrsVmOverrideResource s)
-storageDrsVmOverrideResource =
-    TF.newResource "vsphere_storage_drs_vm_override" $
-        StorageDrsVmOverrideResource {
-              _datastore_cluster_id = TF.Nil
-            , _sdrs_automation_level = TF.Nil
-            , _sdrs_enabled = TF.Nil
-            , _sdrs_intra_vm_affinity = TF.Nil
-            , _virtual_machine_id = TF.Nil
+tagResource
+    :: TF.Attr s P.Text -- ^ @category_id@ - 'P.categoryId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (TagResource s)
+tagResource _categoryId _name =
+    TF.newResource "vsphere_tag" TF.validator $
+        TagResource'
+            { _categoryId = _categoryId
+            , _description = TF.Nil
+            , _name = _name
             }
 
-{- | The @vsphere_tag_category@ VSphere resource.
+instance TF.IsObject (TagResource s) where
+    toObject TagResource'{..} = P.catMaybes
+        [ TF.assign "category_id" <$> TF.attribute _categoryId
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        ]
 
-The @vsphere_tag_category@ resource can be used to create and manage tag
-categories, which determine how tags are grouped together and applied to
-specific objects. For more information about tags, click
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vcenterhost.doc/GUID-E8E854DD-AA97-4E0C-8419-CE84F93C4058.html>
-. For more information about tag categories specifically, click
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vcenterhost.doc/GUID-BA3D1794-28F2-43F3-BCE9-3964CB207FB6.html>
-. ~> NOTE: Tagging support is unsupported on direct ESXi connections and
-requires vCenter 6.0 or higher.
--}
-data TagCategoryResource s = TagCategoryResource {
-      _associable_types :: !(TF.Attr s P.Text)
-    {- ^ (Required) A list object types that this category is valid to be assigned to. For a full list, click <#associable-object-types> . -}
-    , _cardinality      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The number of tags that can be assigned from this category to a single object at once. Can be one of @SINGLE@ (object can only be assigned one tag in this category), to @MULTIPLE@ (object can be assigned multiple tags in this category). Forces a new resource if changed. -}
-    , _description      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A description for the category. -}
-    , _name             :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the category. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (TagResource s) where
+    validator = P.mempty
+
+instance P.HasCategoryId (TagResource s) (TF.Attr s P.Text) where
+    categoryId =
+        P.lens (_categoryId :: TagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _categoryId = a } :: TagResource s)
+
+instance P.HasDescription (TagResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: TagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: TagResource s)
+
+instance P.HasName (TagResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: TagResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TagResource s)
+
+-- | @vsphere_tag_category@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_tag_category terraform documentation>
+-- for more information.
+data TagCategoryResource s = TagCategoryResource'
+    { _associableTypes :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @associable_types@ - (Required)
+    -- Object types to which this category's tags can be attached.
+    --
+    , _cardinality     :: TF.Attr s P.Text
+    -- ^ @cardinality@ - (Required)
+    -- The associated cardinality of the category. Can be one of SINGLE (object can
+    -- only be assigned one tag in this category) or MULTIPLE (object can be
+    -- assigned multiple tags in this category).
+    --
+    , _description     :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    -- The description of the category.
+    --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The display name of the category.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+tagCategoryResource
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @associable_types@ - 'P.associableTypes'
+    -> TF.Attr s P.Text -- ^ @cardinality@ - 'P.cardinality'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (TagCategoryResource s)
+tagCategoryResource _associableTypes _cardinality _name =
+    TF.newResource "vsphere_tag_category" TF.validator $
+        TagCategoryResource'
+            { _associableTypes = _associableTypes
+            , _cardinality = _cardinality
+            , _description = TF.Nil
+            , _name = _name
+            }
 
 instance TF.IsObject (TagCategoryResource s) where
-    toObject TagCategoryResource{..} = catMaybes
-        [ TF.assign "associable_types" <$> TF.attribute _associable_types
+    toObject TagCategoryResource'{..} = P.catMaybes
+        [ TF.assign "associable_types" <$> TF.attribute _associableTypes
         , TF.assign "cardinality" <$> TF.attribute _cardinality
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance P.HasAssociableTypes (TagCategoryResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (TagCategoryResource s) where
+    validator = P.mempty
+
+instance P.HasAssociableTypes (TagCategoryResource s) (TF.Attr s [TF.Attr s P.Text]) where
     associableTypes =
-        lens (_associable_types :: TagCategoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _associable_types = a } :: TagCategoryResource s)
+        P.lens (_associableTypes :: TagCategoryResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _associableTypes = a } :: TagCategoryResource s)
 
 instance P.HasCardinality (TagCategoryResource s) (TF.Attr s P.Text) where
     cardinality =
-        lens (_cardinality :: TagCategoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cardinality = a } :: TagCategoryResource s)
+        P.lens (_cardinality :: TagCategoryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _cardinality = a } :: TagCategoryResource s)
 
 instance P.HasDescription (TagCategoryResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: TagCategoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: TagCategoryResource s)
+        P.lens (_description :: TagCategoryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: TagCategoryResource s)
 
 instance P.HasName (TagCategoryResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: TagCategoryResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TagCategoryResource s)
+        P.lens (_name :: TagCategoryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TagCategoryResource s)
 
-instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
-    computedAssociableTypes =
-        (_associable_types :: TagCategoryResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_vapp_container@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_vapp_container terraform documentation>
+-- for more information.
+data VappContainerResource s = VappContainerResource'
+    { _cpuExpandable        :: TF.Attr s P.Bool
+    -- ^ @cpu_expandable@ - (Optional)
+    -- Determines if the reservation on a vApp container can grow beyond the
+    -- specified value, if the parent resource pool has unreserved resources.
+    --
+    , _cpuLimit             :: TF.Attr s P.Integer
+    -- ^ @cpu_limit@ - (Optional)
+    -- The utilization of a vApp container will not exceed this limit, even if
+    -- there are available resources. Set to -1 for unlimited.
+    --
+    , _cpuReservation       :: TF.Attr s P.Integer
+    -- ^ @cpu_reservation@ - (Optional)
+    -- Amount of CPU (MHz) that is guaranteed available to the vApp container.
+    --
+    , _cpuShareLevel        :: TF.Attr s P.Text
+    -- ^ @cpu_share_level@ - (Optional)
+    -- The allocation level. The level is a simplified view of shares. Levels map
+    -- to a pre-determined set of numeric values for shares. Can be one of low,
+    -- normal, high, or custom.
+    --
+    , _customAttributes     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _memoryExpandable     :: TF.Attr s P.Bool
+    -- ^ @memory_expandable@ - (Optional)
+    -- Determines if the reservation on a vApp container can grow beyond the
+    -- specified value, if the parent resource pool has unreserved resources.
+    --
+    , _memoryLimit          :: TF.Attr s P.Integer
+    -- ^ @memory_limit@ - (Optional)
+    -- The utilization of a vApp container will not exceed this limit, even if
+    -- there are available resources. Set to -1 for unlimited.
+    --
+    , _memoryReservation    :: TF.Attr s P.Integer
+    -- ^ @memory_reservation@ - (Optional)
+    -- Amount of memory (MB) that is guaranteed available to the vApp container.
+    --
+    , _memoryShareLevel     :: TF.Attr s P.Text
+    -- ^ @memory_share_level@ - (Optional)
+    -- The allocation level. The level is a simplified view of shares. Levels map
+    -- to a pre-determined set of numeric values for shares. Can be one of low,
+    -- normal, high, or custom.
+    --
+    , _name                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the vApp container.
+    --
+    , _parentFolderId       :: TF.Attr s P.Text
+    -- ^ @parent_folder_id@ - (Optional)
+    -- The ID of the parent VM folder.
+    --
+    , _parentResourcePoolId :: TF.Attr s P.Text
+    -- ^ @parent_resource_pool_id@ - (Required)
+    -- The managed object ID of the parent resource pool or the compute resource
+    -- the vApp container is in.
+    --
+    , _tags                 :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
-    computedCardinality =
-        (_cardinality :: TagCategoryResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: TagCategoryResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TagCategoryResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: TagCategoryResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-tagCategoryResource :: TF.Resource P.VSphere (TagCategoryResource s)
-tagCategoryResource =
-    TF.newResource "vsphere_tag_category" $
-        TagCategoryResource {
-              _associable_types = TF.Nil
-            , _cardinality = TF.Nil
-            , _description = TF.Nil
-            , _name = TF.Nil
-            }
-
-{- | The @vsphere_tag@ VSphere resource.
-
-The @vsphere_tag@ resource can be used to create and manage tags, which
-allow you to attach metadata to objects in the vSphere inventory to make
-these objects more sortable and searchable. For more information about tags,
-click
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vcenterhost.doc/GUID-E8E854DD-AA97-4E0C-8419-CE84F93C4058.html>
-. ~> NOTE: Tagging support is unsupported on direct ESXi connections and
-requires vCenter 6.0 or higher.
--}
-data TagResource s = TagResource {
-      _category_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The unique identifier of the parent category in which this tag will be created. Forces a new resource if changed. -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A description for the tag. -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The display name of the tag. The name must be unique within its category. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (TagResource s) where
-    toObject TagResource{..} = catMaybes
-        [ TF.assign "category_id" <$> TF.attribute _category_id
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasCategoryId (TagResource s) (TF.Attr s P.Text) where
-    categoryId =
-        lens (_category_id :: TagResource s -> TF.Attr s P.Text)
-             (\s a -> s { _category_id = a } :: TagResource s)
-
-instance P.HasDescription (TagResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: TagResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: TagResource s)
-
-instance P.HasName (TagResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: TagResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: TagResource s)
-
-instance s ~ s' => P.HasComputedCategoryId (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
-    computedCategoryId =
-        (_category_id :: TagResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: TagResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TagResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: TagResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-tagResource :: TF.Resource P.VSphere (TagResource s)
-tagResource =
-    TF.newResource "vsphere_tag" $
-        TagResource {
-              _category_id = TF.Nil
-            , _description = TF.Nil
-            , _name = TF.Nil
-            }
-
-{- | The @vsphere_vapp_container@ VSphere resource.
-
-The @vsphere_vapp_container@ resource can be used to create and manage
-vApps. For more information on vSphere vApps, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-2A95EBB8-1779-40FA-B4FB-4D0845750879.html>
-.
--}
-data VappContainerResource s = VappContainerResource {
-      _cpu_expandable          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Determines if the reservation on a vApp container can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
-    , _cpu_limit               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU utilization of a vApp container will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
-    , _cpu_reservation         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the vApp container. Default: @0@ -}
-    , _cpu_share_level         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @cpu_shares@ will be ignored.  Default: @normal@ -}
-    , _cpu_shares              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @cpu_share_level@ must be @custom@ . -}
-    , _memory_expandable       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Determines if the reservation on a vApp container can grow beyond the specified value if the parent resource pool has unreserved resources. Default: @true@ -}
-    , _memory_limit            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU utilization of a vApp container will not exceed this limit, even if there are available resources. Set to @-1@ for unlimited. Default: @-1@ -}
-    , _memory_reservation      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Amount of CPU (MHz) that is guaranteed available to the vApp container. Default: @0@ -}
-    , _memory_share_level      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The CPU allocation level. The level is a simplified view of shares. Levels map to a pre-determined set of numeric values for shares. Can be one of @low@ , @normal@ , @high@ , or @custom@ . When @low@ , @normal@ , or @high@ are specified values in @memory_shares@ will be ignored.  Default: @normal@ -}
-    , _memory_shares           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of shares allocated for CPU. Used to determine resource allocation in case of resource contention. If this is set, @memory_share_level@ must be @custom@ . -}
-    , _name                    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the vApp container. -}
-    , _parent_folder_id        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the vApp container's parent folder. -}
-    , _parent_resource_pool_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the parent resource pool. This can be the root resource pool for a cluster or standalone host, or a resource pool itself. When moving a vApp container from one parent resource pool to another, both must share a common root resource pool or the move will fail. -}
-    , _tags                    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (VappContainerResource s) where
-    toObject VappContainerResource{..} = catMaybes
-        [ TF.assign "cpu_expandable" <$> TF.attribute _cpu_expandable
-        , TF.assign "cpu_limit" <$> TF.attribute _cpu_limit
-        , TF.assign "cpu_reservation" <$> TF.attribute _cpu_reservation
-        , TF.assign "cpu_share_level" <$> TF.attribute _cpu_share_level
-        , TF.assign "cpu_shares" <$> TF.attribute _cpu_shares
-        , TF.assign "memory_expandable" <$> TF.attribute _memory_expandable
-        , TF.assign "memory_limit" <$> TF.attribute _memory_limit
-        , TF.assign "memory_reservation" <$> TF.attribute _memory_reservation
-        , TF.assign "memory_share_level" <$> TF.attribute _memory_share_level
-        , TF.assign "memory_shares" <$> TF.attribute _memory_shares
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parent_folder_id" <$> TF.attribute _parent_folder_id
-        , TF.assign "parent_resource_pool_id" <$> TF.attribute _parent_resource_pool_id
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance P.HasCpuExpandable (VappContainerResource s) (TF.Attr s P.Text) where
-    cpuExpandable =
-        lens (_cpu_expandable :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_expandable = a } :: VappContainerResource s)
-
-instance P.HasCpuLimit (VappContainerResource s) (TF.Attr s P.Text) where
-    cpuLimit =
-        lens (_cpu_limit :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_limit = a } :: VappContainerResource s)
-
-instance P.HasCpuReservation (VappContainerResource s) (TF.Attr s P.Text) where
-    cpuReservation =
-        lens (_cpu_reservation :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_reservation = a } :: VappContainerResource s)
-
-instance P.HasCpuShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
-    cpuShareLevel =
-        lens (_cpu_share_level :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_share_level = a } :: VappContainerResource s)
-
-instance P.HasCpuShares (VappContainerResource s) (TF.Attr s P.Text) where
-    cpuShares =
-        lens (_cpu_shares :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpu_shares = a } :: VappContainerResource s)
-
-instance P.HasMemoryExpandable (VappContainerResource s) (TF.Attr s P.Text) where
-    memoryExpandable =
-        lens (_memory_expandable :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_expandable = a } :: VappContainerResource s)
-
-instance P.HasMemoryLimit (VappContainerResource s) (TF.Attr s P.Text) where
-    memoryLimit =
-        lens (_memory_limit :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_limit = a } :: VappContainerResource s)
-
-instance P.HasMemoryReservation (VappContainerResource s) (TF.Attr s P.Text) where
-    memoryReservation =
-        lens (_memory_reservation :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_reservation = a } :: VappContainerResource s)
-
-instance P.HasMemoryShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
-    memoryShareLevel =
-        lens (_memory_share_level :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_share_level = a } :: VappContainerResource s)
-
-instance P.HasMemoryShares (VappContainerResource s) (TF.Attr s P.Text) where
-    memoryShares =
-        lens (_memory_shares :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory_shares = a } :: VappContainerResource s)
-
-instance P.HasName (VappContainerResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VappContainerResource s)
-
-instance P.HasParentFolderId (VappContainerResource s) (TF.Attr s P.Text) where
-    parentFolderId =
-        lens (_parent_folder_id :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_folder_id = a } :: VappContainerResource s)
-
-instance P.HasParentResourcePoolId (VappContainerResource s) (TF.Attr s P.Text) where
-    parentResourcePoolId =
-        lens (_parent_resource_pool_id :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_resource_pool_id = a } :: VappContainerResource s)
-
-instance P.HasTags (VappContainerResource s) (TF.Attr s P.Text) where
-    tags =
-        lens (_tags :: VappContainerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: VappContainerResource s)
-
-instance s ~ s' => P.HasComputedCpuExpandable (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedCpuExpandable =
-        (_cpu_expandable :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpuLimit (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedCpuLimit =
-        (_cpu_limit :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpuReservation (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedCpuReservation =
-        (_cpu_reservation :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpuShareLevel (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedCpuShareLevel =
-        (_cpu_share_level :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedCpuShares =
-        (_cpu_shares :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryExpandable (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedMemoryExpandable =
-        (_memory_expandable :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryLimit (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedMemoryLimit =
-        (_memory_limit :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedMemoryReservation =
-        (_memory_reservation :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryShareLevel (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedMemoryShareLevel =
-        (_memory_share_level :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedMemoryShares =
-        (_memory_shares :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedParentFolderId (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedParentFolderId =
-        (_parent_folder_id :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedParentResourcePoolId (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedParentResourcePoolId =
-        (_parent_resource_pool_id :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: VappContainerResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-vappContainerResource :: TF.Resource P.VSphere (VappContainerResource s)
-vappContainerResource =
-    TF.newResource "vsphere_vapp_container" $
-        VappContainerResource {
-              _cpu_expandable = TF.Nil
-            , _cpu_limit = TF.Nil
-            , _cpu_reservation = TF.Nil
-            , _cpu_share_level = TF.Nil
-            , _cpu_shares = TF.Nil
-            , _memory_expandable = TF.Nil
-            , _memory_limit = TF.Nil
-            , _memory_reservation = TF.Nil
-            , _memory_share_level = TF.Nil
-            , _memory_shares = TF.Nil
-            , _name = TF.Nil
-            , _parent_folder_id = TF.Nil
-            , _parent_resource_pool_id = TF.Nil
+vappContainerResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @parent_resource_pool_id@ - 'P.parentResourcePoolId'
+    -> TF.Resource P.Provider (VappContainerResource s)
+vappContainerResource _name _parentResourcePoolId =
+    TF.newResource "vsphere_vapp_container" TF.validator $
+        VappContainerResource'
+            { _cpuExpandable = TF.value P.True
+            , _cpuLimit = TF.value (-1)
+            , _cpuReservation = TF.value 0
+            , _cpuShareLevel = TF.value "normal"
+            , _customAttributes = TF.Nil
+            , _memoryExpandable = TF.value P.True
+            , _memoryLimit = TF.value (-1)
+            , _memoryReservation = TF.value 0
+            , _memoryShareLevel = TF.value "normal"
+            , _name = _name
+            , _parentFolderId = TF.Nil
+            , _parentResourcePoolId = _parentResourcePoolId
             , _tags = TF.Nil
             }
 
-{- | The @vsphere_virtual_disk@ VSphere resource.
+instance TF.IsObject (VappContainerResource s) where
+    toObject VappContainerResource'{..} = P.catMaybes
+        [ TF.assign "cpu_expandable" <$> TF.attribute _cpuExpandable
+        , TF.assign "cpu_limit" <$> TF.attribute _cpuLimit
+        , TF.assign "cpu_reservation" <$> TF.attribute _cpuReservation
+        , TF.assign "cpu_share_level" <$> TF.attribute _cpuShareLevel
+        , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "memory_expandable" <$> TF.attribute _memoryExpandable
+        , TF.assign "memory_limit" <$> TF.attribute _memoryLimit
+        , TF.assign "memory_reservation" <$> TF.attribute _memoryReservation
+        , TF.assign "memory_share_level" <$> TF.attribute _memoryShareLevel
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_folder_id" <$> TF.attribute _parentFolderId
+        , TF.assign "parent_resource_pool_id" <$> TF.attribute _parentResourcePoolId
+        , TF.assign "tags" <$> TF.attribute _tags
+        ]
 
-The @vsphere_virtual_disk@ resource can be used to create virtual disks
-outside of any given </docs/providers/vsphere/r/virtual_machine.html>
-resource. These disks can be attached to a virtual machine by creating a
-disk sub-resource with the
-</docs/providers/vsphere/r/virtual_machine.html#attach> parameter.
--}
-data VirtualDiskResource s = VirtualDiskResource {
-      _adapter_type :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The adapter type for this virtual disk. Can be one of @ide@ , @lsiLogic@ , or @busLogic@ .  Default: @lsiLogic@ . -}
-    , _datacenter   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the datacenter in which to create the disk. Can be omitted when when ESXi or if there is only one datacenter in your infrastructure. -}
-    , _datastore    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the datastore in which to create the disk. -}
-    , _size         :: !(TF.Attr s P.Text)
-    {- ^ (Required) Size of the disk (in GB). -}
-    , _type'        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The type of disk to create. Can be one of @eagerZeroedThick@ , @lazy@ , or @thin@ . Default: @eagerZeroedThick@ . For information on what each kind of disk provisioning policy means, click <https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-4C0F4D73-82F2-4B81-8AA7-1DD752A8A5AC.html> . -}
-    , _vmdk_path    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The path, including filename, of the virtual disk to be created.  This needs to end in @.vmdk@ . -}
-    } deriving (Show, Eq)
+instance TF.IsValid (VappContainerResource s) where
+    validator = P.mempty
+
+instance P.HasCpuExpandable (VappContainerResource s) (TF.Attr s P.Bool) where
+    cpuExpandable =
+        P.lens (_cpuExpandable :: VappContainerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _cpuExpandable = a } :: VappContainerResource s)
+
+instance P.HasCpuLimit (VappContainerResource s) (TF.Attr s P.Integer) where
+    cpuLimit =
+        P.lens (_cpuLimit :: VappContainerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpuLimit = a } :: VappContainerResource s)
+
+instance P.HasCpuReservation (VappContainerResource s) (TF.Attr s P.Integer) where
+    cpuReservation =
+        P.lens (_cpuReservation :: VappContainerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpuReservation = a } :: VappContainerResource s)
+
+instance P.HasCpuShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
+    cpuShareLevel =
+        P.lens (_cpuShareLevel :: VappContainerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _cpuShareLevel = a } :: VappContainerResource s)
+
+instance P.HasCustomAttributes (VappContainerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: VappContainerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: VappContainerResource s)
+
+instance P.HasMemoryExpandable (VappContainerResource s) (TF.Attr s P.Bool) where
+    memoryExpandable =
+        P.lens (_memoryExpandable :: VappContainerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _memoryExpandable = a } :: VappContainerResource s)
+
+instance P.HasMemoryLimit (VappContainerResource s) (TF.Attr s P.Integer) where
+    memoryLimit =
+        P.lens (_memoryLimit :: VappContainerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryLimit = a } :: VappContainerResource s)
+
+instance P.HasMemoryReservation (VappContainerResource s) (TF.Attr s P.Integer) where
+    memoryReservation =
+        P.lens (_memoryReservation :: VappContainerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryReservation = a } :: VappContainerResource s)
+
+instance P.HasMemoryShareLevel (VappContainerResource s) (TF.Attr s P.Text) where
+    memoryShareLevel =
+        P.lens (_memoryShareLevel :: VappContainerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _memoryShareLevel = a } :: VappContainerResource s)
+
+instance P.HasName (VappContainerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: VappContainerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VappContainerResource s)
+
+instance P.HasParentFolderId (VappContainerResource s) (TF.Attr s P.Text) where
+    parentFolderId =
+        P.lens (_parentFolderId :: VappContainerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _parentFolderId = a } :: VappContainerResource s)
+
+instance P.HasParentResourcePoolId (VappContainerResource s) (TF.Attr s P.Text) where
+    parentResourcePoolId =
+        P.lens (_parentResourcePoolId :: VappContainerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _parentResourcePoolId = a } :: VappContainerResource s)
+
+instance P.HasTags (VappContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: VappContainerResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: VappContainerResource s)
+
+instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Integer) where
+    computedCpuShares x = TF.compute (TF.refKey x) "_computedCpuShares"
+
+instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Integer) where
+    computedMemoryShares x = TF.compute (TF.refKey x) "_computedMemoryShares"
+
+-- | @vsphere_virtual_disk@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_disk terraform documentation>
+-- for more information.
+data VirtualDiskResource s = VirtualDiskResource'
+    { _adapterType       :: TF.Attr s P.Text
+    -- ^ @adapter_type@ - (Optional)
+    --
+    , _createDirectories :: TF.Attr s P.Bool
+    -- ^ @create_directories@ - (Optional)
+    --
+    , _datacenter        :: TF.Attr s P.Text
+    -- ^ @datacenter@ - (Optional)
+    --
+    , _datastore         :: TF.Attr s P.Text
+    -- ^ @datastore@ - (Required)
+    --
+    , _size              :: TF.Attr s P.Integer
+    -- ^ @size@ - (Required)
+    --
+    , _type'             :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    , _vmdkPath          :: TF.Attr s P.Text
+    -- ^ @vmdk_path@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+virtualDiskResource
+    :: TF.Attr s P.Text -- ^ @datastore@ - 'P.datastore'
+    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Text -- ^ @vmdk_path@ - 'P.vmdkPath'
+    -> TF.Resource P.Provider (VirtualDiskResource s)
+virtualDiskResource _datastore _size _vmdkPath =
+    TF.newResource "vsphere_virtual_disk" TF.validator $
+        VirtualDiskResource'
+            { _adapterType = TF.value "lsiLogic"
+            , _createDirectories = TF.Nil
+            , _datacenter = TF.Nil
+            , _datastore = _datastore
+            , _size = _size
+            , _type' = TF.value "eagerZeroedThick"
+            , _vmdkPath = _vmdkPath
+            }
 
 instance TF.IsObject (VirtualDiskResource s) where
-    toObject VirtualDiskResource{..} = catMaybes
-        [ TF.assign "adapter_type" <$> TF.attribute _adapter_type
+    toObject VirtualDiskResource'{..} = P.catMaybes
+        [ TF.assign "adapter_type" <$> TF.attribute _adapterType
+        , TF.assign "create_directories" <$> TF.attribute _createDirectories
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "datastore" <$> TF.attribute _datastore
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "vmdk_path" <$> TF.attribute _vmdk_path
+        , TF.assign "vmdk_path" <$> TF.attribute _vmdkPath
         ]
+
+instance TF.IsValid (VirtualDiskResource s) where
+    validator = P.mempty
 
 instance P.HasAdapterType (VirtualDiskResource s) (TF.Attr s P.Text) where
     adapterType =
-        lens (_adapter_type :: VirtualDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _adapter_type = a } :: VirtualDiskResource s)
+        P.lens (_adapterType :: VirtualDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _adapterType = a } :: VirtualDiskResource s)
+
+instance P.HasCreateDirectories (VirtualDiskResource s) (TF.Attr s P.Bool) where
+    createDirectories =
+        P.lens (_createDirectories :: VirtualDiskResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _createDirectories = a } :: VirtualDiskResource s)
 
 instance P.HasDatacenter (VirtualDiskResource s) (TF.Attr s P.Text) where
     datacenter =
-        lens (_datacenter :: VirtualDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datacenter = a } :: VirtualDiskResource s)
+        P.lens (_datacenter :: VirtualDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datacenter = a } :: VirtualDiskResource s)
 
 instance P.HasDatastore (VirtualDiskResource s) (TF.Attr s P.Text) where
     datastore =
-        lens (_datastore :: VirtualDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datastore = a } :: VirtualDiskResource s)
+        P.lens (_datastore :: VirtualDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastore = a } :: VirtualDiskResource s)
 
-instance P.HasSize (VirtualDiskResource s) (TF.Attr s P.Text) where
+instance P.HasSize (VirtualDiskResource s) (TF.Attr s P.Integer) where
     size =
-        lens (_size :: VirtualDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: VirtualDiskResource s)
+        P.lens (_size :: VirtualDiskResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: VirtualDiskResource s)
 
 instance P.HasType' (VirtualDiskResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: VirtualDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: VirtualDiskResource s)
+        P.lens (_type' :: VirtualDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: VirtualDiskResource s)
 
 instance P.HasVmdkPath (VirtualDiskResource s) (TF.Attr s P.Text) where
     vmdkPath =
-        lens (_vmdk_path :: VirtualDiskResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vmdk_path = a } :: VirtualDiskResource s)
+        P.lens (_vmdkPath :: VirtualDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vmdkPath = a } :: VirtualDiskResource s)
 
-instance s ~ s' => P.HasComputedAdapterType (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
-    computedAdapterType =
-        (_adapter_type :: VirtualDiskResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_virtual_machine@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_machine terraform documentation>
+-- for more information.
+data VirtualMachineResource s = VirtualMachineResource'
+    { _alternateGuestName :: TF.Attr s P.Text
+    -- ^ @alternate_guest_name@ - (Optional)
+    -- The guest name for the operating system when guest_id is other or other-64.
+    --
+    , _annotation :: TF.Attr s P.Text
+    -- ^ @annotation@ - (Optional)
+    -- User-provided description of the virtual machine.
+    --
+    , _bootDelay :: TF.Attr s P.Integer
+    -- ^ @boot_delay@ - (Optional)
+    -- The number of milliseconds to wait before starting the boot sequence.
+    --
+    , _bootRetryDelay :: TF.Attr s P.Integer
+    -- ^ @boot_retry_delay@ - (Optional)
+    -- The number of milliseconds to wait before retrying the boot sequence. This
+    -- only valid if boot_retry_enabled is true.
+    --
+    , _bootRetryEnabled :: TF.Attr s P.Bool
+    -- ^ @boot_retry_enabled@ - (Optional)
+    -- If set to true, a virtual machine that fails to boot will try again after
+    -- the delay defined in boot_retry_delay.
+    --
+    , _cdrom :: TF.Attr s (Cdrom s)
+    -- ^ @cdrom@ - (Optional)
+    -- A specification for a CDROM device on this virtual machine.
+    --
+    , _clone :: TF.Attr s (Clone s)
+    -- ^ @clone@ - (Optional)
+    -- A specification for cloning a virtual machine from template.
+    --
+    , _cpuHotAddEnabled :: TF.Attr s P.Bool
+    -- ^ @cpu_hot_add_enabled@ - (Optional)
+    -- Allow CPUs to be added to this virtual machine while it is running.
+    --
+    , _cpuHotRemoveEnabled :: TF.Attr s P.Bool
+    -- ^ @cpu_hot_remove_enabled@ - (Optional)
+    -- Allow CPUs to be added to this virtual machine while it is running.
+    --
+    , _cpuLimit :: TF.Attr s P.Integer
+    -- ^ @cpu_limit@ - (Optional)
+    -- The maximum amount of memory (in MB) or CPU (in MHz) that this virtual
+    -- machine can consume, regardless of available resources.%!(EXTRA string=cpu)
+    --
+    , _cpuPerformanceCountersEnabled :: TF.Attr s P.Bool
+    -- ^ @cpu_performance_counters_enabled@ - (Optional)
+    -- Enable CPU performance counters on this virtual machine.
+    --
+    , _cpuReservation :: TF.Attr s P.Integer
+    -- ^ @cpu_reservation@ - (Optional)
+    -- The amount of memory (in MB) or CPU (in MHz) that this virtual machine is
+    -- guaranteed.%!(EXTRA string=cpu)
+    --
+    , _cpuShareLevel :: TF.Attr s P.Text
+    -- ^ @cpu_share_level@ - (Optional)
+    -- The allocation level for cpu resources. Can be one of high, low, normal, or
+    -- custom.
+    --
+    , _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datastoreClusterId :: TF.Attr s P.Text
+    -- ^ @datastore_cluster_id@ - (Optional)
+    -- The ID of a datastore cluster to put the virtual machine in.
+    --
+    , _efiSecureBootEnabled :: TF.Attr s P.Bool
+    -- ^ @efi_secure_boot_enabled@ - (Optional)
+    -- When the boot type set in firmware is efi, this enables EFI secure boot.
+    --
+    , _enableDiskUuid :: TF.Attr s P.Bool
+    -- ^ @enable_disk_uuid@ - (Optional)
+    -- Expose the UUIDs of attached virtual disks to the virtual machine, allowing
+    -- access to them in the guest.
+    --
+    , _enableLogging :: TF.Attr s P.Bool
+    -- ^ @enable_logging@ - (Optional)
+    -- Enable logging on this virtual machine.
+    --
+    , _eptRviMode :: TF.Attr s P.Text
+    -- ^ @ept_rvi_mode@ - (Optional)
+    -- The EPT/RVI (hardware memory virtualization) setting for this virtual
+    -- machine. Can be one of automatic, on, or off.
+    --
+    , _extraConfig :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @extra_config@ - (Optional)
+    -- Extra configuration data for this virtual machine. Can be used to supply
+    -- advanced parameters not normally in configuration, such as data for
+    -- cloud-config (under the guestinfo namespace), or configuration data for OVF
+    -- images.
+    --
+    , _firmware :: TF.Attr s P.Text
+    -- ^ @firmware@ - (Optional)
+    -- The firmware interface to use on the virtual machine. Can be one of bios or
+    -- EFI.
+    --
+    , _folder :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    -- The name of the folder to locate the virtual machine in.
+    --
+    , _forcePowerOff :: TF.Attr s P.Bool
+    -- ^ @force_power_off@ - (Optional)
+    -- Set to true to force power-off a virtual machine if a graceful guest
+    -- shutdown failed for a necessary operation.
+    --
+    , _guestId :: TF.Attr s P.Text
+    -- ^ @guest_id@ - (Optional)
+    -- The guest ID for the operating system.
+    --
+    , _hvMode :: TF.Attr s P.Text
+    -- ^ @hv_mode@ - (Optional)
+    -- The (non-nested) hardware virtualization setting for this virtual machine.
+    -- Can be one of hvAuto, hvOn, or hvOff.
+    --
+    , _latencySensitivity :: TF.Attr s P.Text
+    -- ^ @latency_sensitivity@ - (Optional)
+    -- Controls the scheduling delay of the virtual machine. Use a higher
+    -- sensitivity for applications that require lower latency, such as VOIP, media
+    -- player applications, or applications that require frequent access to mouse
+    -- or keyboard devices. Can be one of low, normal, medium, or high.
+    --
+    , _memory :: TF.Attr s P.Integer
+    -- ^ @memory@ - (Optional)
+    -- The size of the virtual machine's memory, in MB.
+    --
+    , _memoryHotAddEnabled :: TF.Attr s P.Bool
+    -- ^ @memory_hot_add_enabled@ - (Optional)
+    -- Allow memory to be added to this virtual machine while it is running.
+    --
+    , _memoryLimit :: TF.Attr s P.Integer
+    -- ^ @memory_limit@ - (Optional)
+    -- The maximum amount of memory (in MB) or CPU (in MHz) that this virtual
+    -- machine can consume, regardless of available resources.%!(EXTRA
+    -- string=memory)
+    --
+    , _memoryReservation :: TF.Attr s P.Integer
+    -- ^ @memory_reservation@ - (Optional)
+    -- The amount of memory (in MB) or CPU (in MHz) that this virtual machine is
+    -- guaranteed.%!(EXTRA string=memory)
+    --
+    , _memoryShareLevel :: TF.Attr s P.Text
+    -- ^ @memory_share_level@ - (Optional)
+    -- The allocation level for memory resources. Can be one of high, low, normal,
+    -- or custom.
+    --
+    , _migrateWaitTimeout :: TF.Attr s P.Integer
+    -- ^ @migrate_wait_timeout@ - (Optional)
+    -- The amount of time, in minutes, to wait for a vMotion operation to complete
+    -- before failing.
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of this virtual machine.
+    --
+    , _nestedHvEnabled :: TF.Attr s P.Bool
+    -- ^ @nested_hv_enabled@ - (Optional)
+    -- Enable nested hardware virtualization on this virtual machine, facilitating
+    -- nested virtualization in the guest.
+    --
+    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterface s)]
+    -- ^ @network_interface@ - (Required)
+    -- A specification for a virtual NIC on this virtual machine.
+    --
+    , _numCoresPerSocket :: TF.Attr s P.Integer
+    -- ^ @num_cores_per_socket@ - (Optional)
+    -- The number of cores to distribute amongst the CPUs in this virtual machine.
+    -- If specified, the value supplied to num_cpus must be evenly divisible by
+    -- this value.
+    --
+    , _numCpus :: TF.Attr s P.Integer
+    -- ^ @num_cpus@ - (Optional)
+    -- The number of virtual processors to assign to this virtual machine.
+    --
+    , _resourcePoolId :: TF.Attr s P.Text
+    -- ^ @resource_pool_id@ - (Required)
+    -- The ID of a resource pool to put the virtual machine in.
+    --
+    , _runToolsScriptsAfterPowerOn :: TF.Attr s P.Bool
+    -- ^ @run_tools_scripts_after_power_on@ - (Optional)
+    -- Enable the execution of post-power-on scripts when VMware tools is
+    -- installed.
+    --
+    , _runToolsScriptsAfterResume :: TF.Attr s P.Bool
+    -- ^ @run_tools_scripts_after_resume@ - (Optional)
+    -- Enable the execution of post-resume scripts when VMware tools is installed.
+    --
+    , _runToolsScriptsBeforeGuestReboot :: TF.Attr s P.Bool
+    -- ^ @run_tools_scripts_before_guest_reboot@ - (Optional)
+    -- Enable the execution of pre-reboot scripts when VMware tools is installed.
+    --
+    , _runToolsScriptsBeforeGuestShutdown :: TF.Attr s P.Bool
+    -- ^ @run_tools_scripts_before_guest_shutdown@ - (Optional)
+    -- Enable the execution of pre-shutdown scripts when VMware tools is installed.
+    --
+    , _runToolsScriptsBeforeGuestStandby :: TF.Attr s P.Bool
+    -- ^ @run_tools_scripts_before_guest_standby@ - (Optional)
+    -- Enable the execution of pre-standby scripts when VMware tools is installed.
+    --
+    , _scsiBusSharing :: TF.Attr s P.Text
+    -- ^ @scsi_bus_sharing@ - (Optional)
+    -- Mode for sharing the SCSI bus. The modes are physicalSharing,
+    -- virtualSharing, and noSharing.
+    --
+    , _scsiControllerCount :: TF.Attr s P.Integer
+    -- ^ @scsi_controller_count@ - (Optional)
+    -- The number of SCSI controllers that Terraform manages on this virtual
+    -- machine. This directly affects the amount of disks you can add to the
+    -- virtual machine and the maximum disk unit number. Note that lowering this
+    -- value does not remove controllers.
+    --
+    , _scsiType :: TF.Attr s P.Text
+    -- ^ @scsi_type@ - (Optional)
+    -- The type of SCSI bus this virtual machine will have. Can be one of lsilogic,
+    -- lsilogic-sas or pvscsi.
+    --
+    , _shutdownWaitTimeout :: TF.Attr s P.Integer
+    -- ^ @shutdown_wait_timeout@ - (Optional)
+    -- The amount of time, in minutes, to wait for shutdown when making necessary
+    -- updates to the virtual machine.
+    --
+    , _swapPlacementPolicy :: TF.Attr s P.Text
+    -- ^ @swap_placement_policy@ - (Optional)
+    -- The swap file placement policy for this virtual machine. Can be one of
+    -- inherit, hostLocal, or vmDirectory.
+    --
+    , _syncTimeWithHost :: TF.Attr s P.Bool
+    -- ^ @sync_time_with_host@ - (Optional)
+    -- Enable guest clock synchronization with the host. Requires VMware tools to
+    -- be installed.
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    , _vapp :: TF.Attr s (Vapp s)
+    -- ^ @vapp@ - (Optional)
+    -- VApp configuration data for this virtual machine. Can be used to provide
+    -- configuration data for OVF images.
+    --
+    , _waitForGuestNetRoutable :: TF.Attr s P.Bool
+    -- ^ @wait_for_guest_net_routable@ - (Optional)
+    -- Controls whether or not the guest network waiter waits for a routable
+    -- address. When false, the waiter does not wait for a default gateway, nor are
+    -- IP addresses checked against any discovered default gateways as part of its
+    -- success criteria.
+    --
+    , _waitForGuestNetTimeout :: TF.Attr s P.Integer
+    -- ^ @wait_for_guest_net_timeout@ - (Optional)
+    -- The amount of time, in minutes, to wait for an available IP address on this
+    -- virtual machine. A value less than 1 disables the waiter.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
-    computedDatacenter =
-        (_datacenter :: VirtualDiskResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDatastore (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
-    computedDatastore =
-        (_datastore :: VirtualDiskResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: VirtualDiskResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: VirtualDiskResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVmdkPath (TF.Ref s' (VirtualDiskResource s)) (TF.Attr s P.Text) where
-    computedVmdkPath =
-        (_vmdk_path :: VirtualDiskResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-virtualDiskResource :: TF.Resource P.VSphere (VirtualDiskResource s)
-virtualDiskResource =
-    TF.newResource "vsphere_virtual_disk" $
-        VirtualDiskResource {
-              _adapter_type = TF.Nil
-            , _datacenter = TF.Nil
-            , _datastore = TF.Nil
-            , _size = TF.Nil
-            , _type' = TF.Nil
-            , _vmdk_path = TF.Nil
+virtualMachineResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s [TF.Attr s (NetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
+    -> TF.Attr s P.Text -- ^ @resource_pool_id@ - 'P.resourcePoolId'
+    -> TF.Resource P.Provider (VirtualMachineResource s)
+virtualMachineResource _name _networkInterface _resourcePoolId =
+    TF.newResource "vsphere_virtual_machine" TF.validator $
+        VirtualMachineResource'
+            { _alternateGuestName = TF.Nil
+            , _annotation = TF.Nil
+            , _bootDelay = TF.Nil
+            , _bootRetryDelay = TF.value 10000
+            , _bootRetryEnabled = TF.Nil
+            , _cdrom = TF.Nil
+            , _clone = TF.Nil
+            , _cpuHotAddEnabled = TF.Nil
+            , _cpuHotRemoveEnabled = TF.Nil
+            , _cpuLimit = TF.value (-1)
+            , _cpuPerformanceCountersEnabled = TF.Nil
+            , _cpuReservation = TF.Nil
+            , _cpuShareLevel = TF.value "normal"
+            , _customAttributes = TF.Nil
+            , _datastoreClusterId = TF.Nil
+            , _efiSecureBootEnabled = TF.Nil
+            , _enableDiskUuid = TF.Nil
+            , _enableLogging = TF.Nil
+            , _eptRviMode = TF.value "automatic"
+            , _extraConfig = TF.Nil
+            , _firmware = TF.value "bios"
+            , _folder = TF.Nil
+            , _forcePowerOff = TF.value P.True
+            , _guestId = TF.value "other-64"
+            , _hvMode = TF.value "hvAuto"
+            , _latencySensitivity = TF.Nil
+            , _memory = TF.value 1024
+            , _memoryHotAddEnabled = TF.Nil
+            , _memoryLimit = TF.value (-1)
+            , _memoryReservation = TF.Nil
+            , _memoryShareLevel = TF.value "normal"
+            , _migrateWaitTimeout = TF.value 30
+            , _name = _name
+            , _nestedHvEnabled = TF.Nil
+            , _networkInterface = _networkInterface
+            , _numCoresPerSocket = TF.value 1
+            , _numCpus = TF.value 1
+            , _resourcePoolId = _resourcePoolId
+            , _runToolsScriptsAfterPowerOn = TF.value P.True
+            , _runToolsScriptsAfterResume = TF.value P.True
+            , _runToolsScriptsBeforeGuestReboot = TF.Nil
+            , _runToolsScriptsBeforeGuestShutdown = TF.value P.True
+            , _runToolsScriptsBeforeGuestStandby = TF.value P.True
+            , _scsiBusSharing = TF.value "noSharing"
+            , _scsiControllerCount = TF.value 1
+            , _scsiType = TF.value "pvscsi"
+            , _shutdownWaitTimeout = TF.value 3
+            , _swapPlacementPolicy = TF.value "inherit"
+            , _syncTimeWithHost = TF.Nil
+            , _tags = TF.Nil
+            , _vapp = TF.Nil
+            , _waitForGuestNetRoutable = TF.value P.True
+            , _waitForGuestNetTimeout = TF.value 5
             }
 
-{- | The @vsphere_virtual_machine@ VSphere resource.
-
-The @vsphere_virtual_machine@ resource can be used to manage the complex
-lifecycle of a virtual machine. It supports management of disk, network
-interface, and CDROM devices, creation from scratch or cloning from
-template, and migration through both host and storage vMotion. For more
-details on working with virtual machines in vSphere, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-55238059-912E-411F-A0E9-A7A536972A91.html>
-.
--}
-data VirtualMachineResource s = VirtualMachineResource {
-      _name             :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the virtual machine. -}
-    , _resource_pool_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the resource pool to put this virtual machine in. See the section on <#virtual-machine-migration> for details on changing this value. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VirtualMachineResource s) where
-    toObject VirtualMachineResource{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "resource_pool_id" <$> TF.attribute _resource_pool_id
+    toObject VirtualMachineResource'{..} = P.catMaybes
+        [ TF.assign "alternate_guest_name" <$> TF.attribute _alternateGuestName
+        , TF.assign "annotation" <$> TF.attribute _annotation
+        , TF.assign "boot_delay" <$> TF.attribute _bootDelay
+        , TF.assign "boot_retry_delay" <$> TF.attribute _bootRetryDelay
+        , TF.assign "boot_retry_enabled" <$> TF.attribute _bootRetryEnabled
+        , TF.assign "cdrom" <$> TF.attribute _cdrom
+        , TF.assign "clone" <$> TF.attribute _clone
+        , TF.assign "cpu_hot_add_enabled" <$> TF.attribute _cpuHotAddEnabled
+        , TF.assign "cpu_hot_remove_enabled" <$> TF.attribute _cpuHotRemoveEnabled
+        , TF.assign "cpu_limit" <$> TF.attribute _cpuLimit
+        , TF.assign "cpu_performance_counters_enabled" <$> TF.attribute _cpuPerformanceCountersEnabled
+        , TF.assign "cpu_reservation" <$> TF.attribute _cpuReservation
+        , TF.assign "cpu_share_level" <$> TF.attribute _cpuShareLevel
+        , TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datastore_cluster_id" <$> TF.attribute _datastoreClusterId
+        , TF.assign "efi_secure_boot_enabled" <$> TF.attribute _efiSecureBootEnabled
+        , TF.assign "enable_disk_uuid" <$> TF.attribute _enableDiskUuid
+        , TF.assign "enable_logging" <$> TF.attribute _enableLogging
+        , TF.assign "ept_rvi_mode" <$> TF.attribute _eptRviMode
+        , TF.assign "extra_config" <$> TF.attribute _extraConfig
+        , TF.assign "firmware" <$> TF.attribute _firmware
+        , TF.assign "folder" <$> TF.attribute _folder
+        , TF.assign "force_power_off" <$> TF.attribute _forcePowerOff
+        , TF.assign "guest_id" <$> TF.attribute _guestId
+        , TF.assign "hv_mode" <$> TF.attribute _hvMode
+        , TF.assign "latency_sensitivity" <$> TF.attribute _latencySensitivity
+        , TF.assign "memory" <$> TF.attribute _memory
+        , TF.assign "memory_hot_add_enabled" <$> TF.attribute _memoryHotAddEnabled
+        , TF.assign "memory_limit" <$> TF.attribute _memoryLimit
+        , TF.assign "memory_reservation" <$> TF.attribute _memoryReservation
+        , TF.assign "memory_share_level" <$> TF.attribute _memoryShareLevel
+        , TF.assign "migrate_wait_timeout" <$> TF.attribute _migrateWaitTimeout
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "nested_hv_enabled" <$> TF.attribute _nestedHvEnabled
+        , TF.assign "network_interface" <$> TF.attribute _networkInterface
+        , TF.assign "num_cores_per_socket" <$> TF.attribute _numCoresPerSocket
+        , TF.assign "num_cpus" <$> TF.attribute _numCpus
+        , TF.assign "resource_pool_id" <$> TF.attribute _resourcePoolId
+        , TF.assign "run_tools_scripts_after_power_on" <$> TF.attribute _runToolsScriptsAfterPowerOn
+        , TF.assign "run_tools_scripts_after_resume" <$> TF.attribute _runToolsScriptsAfterResume
+        , TF.assign "run_tools_scripts_before_guest_reboot" <$> TF.attribute _runToolsScriptsBeforeGuestReboot
+        , TF.assign "run_tools_scripts_before_guest_shutdown" <$> TF.attribute _runToolsScriptsBeforeGuestShutdown
+        , TF.assign "run_tools_scripts_before_guest_standby" <$> TF.attribute _runToolsScriptsBeforeGuestStandby
+        , TF.assign "scsi_bus_sharing" <$> TF.attribute _scsiBusSharing
+        , TF.assign "scsi_controller_count" <$> TF.attribute _scsiControllerCount
+        , TF.assign "scsi_type" <$> TF.attribute _scsiType
+        , TF.assign "shutdown_wait_timeout" <$> TF.attribute _shutdownWaitTimeout
+        , TF.assign "swap_placement_policy" <$> TF.attribute _swapPlacementPolicy
+        , TF.assign "sync_time_with_host" <$> TF.attribute _syncTimeWithHost
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "vapp" <$> TF.attribute _vapp
+        , TF.assign "wait_for_guest_net_routable" <$> TF.attribute _waitForGuestNetRoutable
+        , TF.assign "wait_for_guest_net_timeout" <$> TF.attribute _waitForGuestNetTimeout
         ]
+
+instance TF.IsValid (VirtualMachineResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_cdrom"
+                  (_cdrom
+                      :: VirtualMachineResource s -> TF.Attr s (Cdrom s))
+                  TF.validator
+           P.<> TF.settingsValidator "_clone"
+                  (_clone
+                      :: VirtualMachineResource s -> TF.Attr s (Clone s))
+                  TF.validator
+           P.<> TF.settingsValidator "_networkInterface"
+                  (_networkInterface
+                      :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_vapp"
+                  (_vapp
+                      :: VirtualMachineResource s -> TF.Attr s (Vapp s))
+                  TF.validator
+
+instance P.HasAlternateGuestName (VirtualMachineResource s) (TF.Attr s P.Text) where
+    alternateGuestName =
+        P.lens (_alternateGuestName :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _alternateGuestName = a } :: VirtualMachineResource s)
+
+instance P.HasAnnotation (VirtualMachineResource s) (TF.Attr s P.Text) where
+    annotation =
+        P.lens (_annotation :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _annotation = a } :: VirtualMachineResource s)
+
+instance P.HasBootDelay (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    bootDelay =
+        P.lens (_bootDelay :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _bootDelay = a } :: VirtualMachineResource s)
+
+instance P.HasBootRetryDelay (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    bootRetryDelay =
+        P.lens (_bootRetryDelay :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _bootRetryDelay = a } :: VirtualMachineResource s)
+
+instance P.HasBootRetryEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    bootRetryEnabled =
+        P.lens (_bootRetryEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _bootRetryEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s (Cdrom s)) where
+    cdrom =
+        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s (Cdrom s))
+               (\s a -> s { _cdrom = a } :: VirtualMachineResource s)
+
+instance P.HasClone (VirtualMachineResource s) (TF.Attr s (Clone s)) where
+    clone =
+        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s (Clone s))
+               (\s a -> s { _clone = a } :: VirtualMachineResource s)
+
+instance P.HasCpuHotAddEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    cpuHotAddEnabled =
+        P.lens (_cpuHotAddEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _cpuHotAddEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasCpuHotRemoveEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    cpuHotRemoveEnabled =
+        P.lens (_cpuHotRemoveEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _cpuHotRemoveEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasCpuLimit (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    cpuLimit =
+        P.lens (_cpuLimit :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpuLimit = a } :: VirtualMachineResource s)
+
+instance P.HasCpuPerformanceCountersEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    cpuPerformanceCountersEnabled =
+        P.lens (_cpuPerformanceCountersEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _cpuPerformanceCountersEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasCpuReservation (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    cpuReservation =
+        P.lens (_cpuReservation :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpuReservation = a } :: VirtualMachineResource s)
+
+instance P.HasCpuShareLevel (VirtualMachineResource s) (TF.Attr s P.Text) where
+    cpuShareLevel =
+        P.lens (_cpuShareLevel :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _cpuShareLevel = a } :: VirtualMachineResource s)
+
+instance P.HasCustomAttributes (VirtualMachineResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: VirtualMachineResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: VirtualMachineResource s)
+
+instance P.HasDatastoreClusterId (VirtualMachineResource s) (TF.Attr s P.Text) where
+    datastoreClusterId =
+        P.lens (_datastoreClusterId :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreClusterId = a } :: VirtualMachineResource s)
+
+instance P.HasEfiSecureBootEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    efiSecureBootEnabled =
+        P.lens (_efiSecureBootEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _efiSecureBootEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasEnableDiskUuid (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    enableDiskUuid =
+        P.lens (_enableDiskUuid :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableDiskUuid = a } :: VirtualMachineResource s)
+
+instance P.HasEnableLogging (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    enableLogging =
+        P.lens (_enableLogging :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableLogging = a } :: VirtualMachineResource s)
+
+instance P.HasEptRviMode (VirtualMachineResource s) (TF.Attr s P.Text) where
+    eptRviMode =
+        P.lens (_eptRviMode :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _eptRviMode = a } :: VirtualMachineResource s)
+
+instance P.HasExtraConfig (VirtualMachineResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    extraConfig =
+        P.lens (_extraConfig :: VirtualMachineResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _extraConfig = a } :: VirtualMachineResource s)
+
+instance P.HasFirmware (VirtualMachineResource s) (TF.Attr s P.Text) where
+    firmware =
+        P.lens (_firmware :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _firmware = a } :: VirtualMachineResource s)
+
+instance P.HasFolder (VirtualMachineResource s) (TF.Attr s P.Text) where
+    folder =
+        P.lens (_folder :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: VirtualMachineResource s)
+
+instance P.HasForcePowerOff (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    forcePowerOff =
+        P.lens (_forcePowerOff :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _forcePowerOff = a } :: VirtualMachineResource s)
+
+instance P.HasGuestId (VirtualMachineResource s) (TF.Attr s P.Text) where
+    guestId =
+        P.lens (_guestId :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _guestId = a } :: VirtualMachineResource s)
+
+instance P.HasHvMode (VirtualMachineResource s) (TF.Attr s P.Text) where
+    hvMode =
+        P.lens (_hvMode :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hvMode = a } :: VirtualMachineResource s)
+
+instance P.HasLatencySensitivity (VirtualMachineResource s) (TF.Attr s P.Text) where
+    latencySensitivity =
+        P.lens (_latencySensitivity :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _latencySensitivity = a } :: VirtualMachineResource s)
+
+instance P.HasMemory (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    memory =
+        P.lens (_memory :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memory = a } :: VirtualMachineResource s)
+
+instance P.HasMemoryHotAddEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    memoryHotAddEnabled =
+        P.lens (_memoryHotAddEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _memoryHotAddEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasMemoryLimit (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    memoryLimit =
+        P.lens (_memoryLimit :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryLimit = a } :: VirtualMachineResource s)
+
+instance P.HasMemoryReservation (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    memoryReservation =
+        P.lens (_memoryReservation :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryReservation = a } :: VirtualMachineResource s)
+
+instance P.HasMemoryShareLevel (VirtualMachineResource s) (TF.Attr s P.Text) where
+    memoryShareLevel =
+        P.lens (_memoryShareLevel :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _memoryShareLevel = a } :: VirtualMachineResource s)
+
+instance P.HasMigrateWaitTimeout (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    migrateWaitTimeout =
+        P.lens (_migrateWaitTimeout :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _migrateWaitTimeout = a } :: VirtualMachineResource s)
 
 instance P.HasName (VirtualMachineResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VirtualMachineResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VirtualMachineResource s)
+        P.lens (_name :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VirtualMachineResource s)
+
+instance P.HasNestedHvEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    nestedHvEnabled =
+        P.lens (_nestedHvEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _nestedHvEnabled = a } :: VirtualMachineResource s)
+
+instance P.HasNetworkInterface (VirtualMachineResource s) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
+    networkInterface =
+        P.lens (_networkInterface :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+               (\s a -> s { _networkInterface = a } :: VirtualMachineResource s)
+
+instance P.HasNumCoresPerSocket (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    numCoresPerSocket =
+        P.lens (_numCoresPerSocket :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _numCoresPerSocket = a } :: VirtualMachineResource s)
+
+instance P.HasNumCpus (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    numCpus =
+        P.lens (_numCpus :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _numCpus = a } :: VirtualMachineResource s)
 
 instance P.HasResourcePoolId (VirtualMachineResource s) (TF.Attr s P.Text) where
     resourcePoolId =
-        lens (_resource_pool_id :: VirtualMachineResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resource_pool_id = a } :: VirtualMachineResource s)
+        P.lens (_resourcePoolId :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _resourcePoolId = a } :: VirtualMachineResource s)
+
+instance P.HasRunToolsScriptsAfterPowerOn (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    runToolsScriptsAfterPowerOn =
+        P.lens (_runToolsScriptsAfterPowerOn :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _runToolsScriptsAfterPowerOn = a } :: VirtualMachineResource s)
+
+instance P.HasRunToolsScriptsAfterResume (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    runToolsScriptsAfterResume =
+        P.lens (_runToolsScriptsAfterResume :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _runToolsScriptsAfterResume = a } :: VirtualMachineResource s)
+
+instance P.HasRunToolsScriptsBeforeGuestReboot (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    runToolsScriptsBeforeGuestReboot =
+        P.lens (_runToolsScriptsBeforeGuestReboot :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _runToolsScriptsBeforeGuestReboot = a } :: VirtualMachineResource s)
+
+instance P.HasRunToolsScriptsBeforeGuestShutdown (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    runToolsScriptsBeforeGuestShutdown =
+        P.lens (_runToolsScriptsBeforeGuestShutdown :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _runToolsScriptsBeforeGuestShutdown = a } :: VirtualMachineResource s)
+
+instance P.HasRunToolsScriptsBeforeGuestStandby (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    runToolsScriptsBeforeGuestStandby =
+        P.lens (_runToolsScriptsBeforeGuestStandby :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _runToolsScriptsBeforeGuestStandby = a } :: VirtualMachineResource s)
+
+instance P.HasScsiBusSharing (VirtualMachineResource s) (TF.Attr s P.Text) where
+    scsiBusSharing =
+        P.lens (_scsiBusSharing :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scsiBusSharing = a } :: VirtualMachineResource s)
+
+instance P.HasScsiControllerCount (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    scsiControllerCount =
+        P.lens (_scsiControllerCount :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _scsiControllerCount = a } :: VirtualMachineResource s)
+
+instance P.HasScsiType (VirtualMachineResource s) (TF.Attr s P.Text) where
+    scsiType =
+        P.lens (_scsiType :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _scsiType = a } :: VirtualMachineResource s)
+
+instance P.HasShutdownWaitTimeout (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    shutdownWaitTimeout =
+        P.lens (_shutdownWaitTimeout :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _shutdownWaitTimeout = a } :: VirtualMachineResource s)
+
+instance P.HasSwapPlacementPolicy (VirtualMachineResource s) (TF.Attr s P.Text) where
+    swapPlacementPolicy =
+        P.lens (_swapPlacementPolicy :: VirtualMachineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _swapPlacementPolicy = a } :: VirtualMachineResource s)
+
+instance P.HasSyncTimeWithHost (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    syncTimeWithHost =
+        P.lens (_syncTimeWithHost :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _syncTimeWithHost = a } :: VirtualMachineResource s)
+
+instance P.HasTags (VirtualMachineResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: VirtualMachineResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: VirtualMachineResource s)
+
+instance P.HasVapp (VirtualMachineResource s) (TF.Attr s (Vapp s)) where
+    vapp =
+        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s (Vapp s))
+               (\s a -> s { _vapp = a } :: VirtualMachineResource s)
+
+instance P.HasWaitForGuestNetRoutable (VirtualMachineResource s) (TF.Attr s P.Bool) where
+    waitForGuestNetRoutable =
+        P.lens (_waitForGuestNetRoutable :: VirtualMachineResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _waitForGuestNetRoutable = a } :: VirtualMachineResource s)
+
+instance P.HasWaitForGuestNetTimeout (VirtualMachineResource s) (TF.Attr s P.Integer) where
+    waitForGuestNetTimeout =
+        P.lens (_waitForGuestNetTimeout :: VirtualMachineResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _waitForGuestNetTimeout = a } :: VirtualMachineResource s)
 
 instance s ~ s' => P.HasComputedChangeVersion (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedChangeVersion x = TF.compute (TF.refKey x) "change_version"
+    computedChangeVersion x = TF.compute (TF.refKey x) "_computedChangeVersion"
+
+instance s ~ s' => P.HasComputedCpuShareCount (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Integer) where
+    computedCpuShareCount x = TF.compute (TF.refKey x) "_computedCpuShareCount"
+
+instance s ~ s' => P.HasComputedDatastoreId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
+    computedDatastoreId x = TF.compute (TF.refKey x) "_computedDatastoreId"
 
 instance s ~ s' => P.HasComputedDefaultIpAddress (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedDefaultIpAddress x = TF.compute (TF.refKey x) "default_ip_address"
+    computedDefaultIpAddress x = TF.compute (TF.refKey x) "_computedDefaultIpAddress"
 
-instance s ~ s' => P.HasComputedGuestIpAddresses (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedGuestIpAddresses x = TF.compute (TF.refKey x) "guest_ip_addresses"
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (Disk s)]) where
+    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedGuestIpAddresses (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedGuestIpAddresses x = TF.compute (TF.refKey x) "_computedGuestIpAddresses"
 
-instance s ~ s' => P.HasComputedImported (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedImported x = TF.compute (TF.refKey x) "imported"
+instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
+    computedHostSystemId x = TF.compute (TF.refKey x) "_computedHostSystemId"
+
+instance s ~ s' => P.HasComputedImported (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Bool) where
+    computedImported x = TF.compute (TF.refKey x) "_computedImported"
+
+instance s ~ s' => P.HasComputedMemoryShareCount (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Integer) where
+    computedMemoryShareCount x = TF.compute (TF.refKey x) "_computedMemoryShareCount"
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedMoid x = TF.compute (TF.refKey x) "moid"
+    computedMoid x = TF.compute (TF.refKey x) "_computedMoid"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VirtualMachineResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRebootRequired (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedRebootRequired x = TF.compute (TF.refKey x) "reboot_required"
-
-instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedResourcePoolId =
-        (_resource_pool_id :: VirtualMachineResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedRebootRequired (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Bool) where
+    computedRebootRequired x = TF.compute (TF.refKey x) "_computedRebootRequired"
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "uuid"
+    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
 
-instance s ~ s' => P.HasComputedVappTransport (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVappTransport x = TF.compute (TF.refKey x) "vapp_transport"
+instance s ~ s' => P.HasComputedVappTransport (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedVappTransport x = TF.compute (TF.refKey x) "_computedVappTransport"
 
 instance s ~ s' => P.HasComputedVmwareToolsStatus (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVmwareToolsStatus x = TF.compute (TF.refKey x) "vmware_tools_status"
+    computedVmwareToolsStatus x = TF.compute (TF.refKey x) "_computedVmwareToolsStatus"
 
 instance s ~ s' => P.HasComputedVmxPath (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVmxPath x = TF.compute (TF.refKey x) "vmx_path"
+    computedVmxPath x = TF.compute (TF.refKey x) "_computedVmxPath"
 
-virtualMachineResource :: TF.Resource P.VSphere (VirtualMachineResource s)
-virtualMachineResource =
-    TF.newResource "vsphere_virtual_machine" $
-        VirtualMachineResource {
-              _name = TF.Nil
-            , _resource_pool_id = TF.Nil
+-- | @vsphere_virtual_machine_snapshot@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_machine_snapshot terraform documentation>
+-- for more information.
+data VirtualMachineSnapshotResource s = VirtualMachineSnapshotResource'
+    { _consolidate        :: TF.Attr s P.Bool
+    -- ^ @consolidate@ - (Optional)
+    --
+    , _description        :: TF.Attr s P.Text
+    -- ^ @description@ - (Required)
+    --
+    , _memory             :: TF.Attr s P.Bool
+    -- ^ @memory@ - (Required)
+    --
+    , _quiesce            :: TF.Attr s P.Bool
+    -- ^ @quiesce@ - (Required)
+    --
+    , _removeChildren     :: TF.Attr s P.Bool
+    -- ^ @remove_children@ - (Optional)
+    --
+    , _snapshotName       :: TF.Attr s P.Text
+    -- ^ @snapshot_name@ - (Required)
+    --
+    , _virtualMachineUuid :: TF.Attr s P.Text
+    -- ^ @virtual_machine_uuid@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+virtualMachineSnapshotResource
+    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
+    -> TF.Attr s P.Bool -- ^ @memory@ - 'P.memory'
+    -> TF.Attr s P.Bool -- ^ @quiesce@ - 'P.quiesce'
+    -> TF.Attr s P.Text -- ^ @snapshot_name@ - 'P.snapshotName'
+    -> TF.Attr s P.Text -- ^ @virtual_machine_uuid@ - 'P.virtualMachineUuid'
+    -> TF.Resource P.Provider (VirtualMachineSnapshotResource s)
+virtualMachineSnapshotResource _description _memory _quiesce _snapshotName _virtualMachineUuid =
+    TF.newResource "vsphere_virtual_machine_snapshot" TF.validator $
+        VirtualMachineSnapshotResource'
+            { _consolidate = TF.Nil
+            , _description = _description
+            , _memory = _memory
+            , _quiesce = _quiesce
+            , _removeChildren = TF.Nil
+            , _snapshotName = _snapshotName
+            , _virtualMachineUuid = _virtualMachineUuid
             }
 
-{- | The @vsphere_virtual_machine_snapshot@ VSphere resource.
-
-The @vsphere_virtual_machine_snapshot@ resource can be used to manage
-snapshots for a virtual machine. For more information on managing snapshots
-and how they work in VMware, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-CA948C69-7F58-4519-AEB1-739545EA94E5.html>
-. ~> NOTE: A snapshot in VMware differs from traditional disk snapshots, and
-can contain the actual running state of the virtual machine, data for all
-disks that have not been set to be independent from the snapshot (including
-ones that have been attached via the
-</docs/providers/vsphere/r/virtual_machine.html#attach> parameter to the
-@vsphere_virtual_machine@  @disk@ sub-resource), and even the configuration
-of the virtual machine at the time of the snapshot. Virtual machine, disk
-activity, and configuration changes post-snapshot are not included in the
-original state. Use this resource with care! Neither VMware nor HashiCorp
-recommends retaining snapshots for a extended period of time and does NOT
-recommend using them as as backup feature. For more information on the
-limitation of virtual machine snapshots, see
-<https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-53F65726-A23B-4CF0-A7D5-48E584B88613.html>
-.
--}
-data VirtualMachineSnapshotResource s = VirtualMachineSnapshotResource {
-      _consolidate          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If set to @true@ , the delta disks involved in this snapshot will be consolidated into the parent when this resource is destroyed. -}
-    , _description          :: !(TF.Attr s P.Text)
-    {- ^ (Required) A description for the snapshot. -}
-    , _memory               :: !(TF.Attr s P.Text)
-    {- ^ (Required) If set to @true@ , a dump of the internal state of the virtual machine is included in the snapshot. -}
-    , _quiesce              :: !(TF.Attr s P.Text)
-    {- ^ (Required) If set to @true@ , and the virtual machine is powered on when the snapshot is taken, VMware Tools is used to quiesce the file system in the virtual machine. -}
-    , _remove_children      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If set to @true@ , the entire snapshot subtree is removed when this resource is destroyed. -}
-    , _snapshot_name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the snapshot. -}
-    , _virtual_machine_uuid :: !(TF.Attr s P.Text)
-    {- ^ (Required) The virtual machine UUID. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VirtualMachineSnapshotResource s) where
-    toObject VirtualMachineSnapshotResource{..} = catMaybes
+    toObject VirtualMachineSnapshotResource'{..} = P.catMaybes
         [ TF.assign "consolidate" <$> TF.attribute _consolidate
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "memory" <$> TF.attribute _memory
         , TF.assign "quiesce" <$> TF.attribute _quiesce
-        , TF.assign "remove_children" <$> TF.attribute _remove_children
-        , TF.assign "snapshot_name" <$> TF.attribute _snapshot_name
-        , TF.assign "virtual_machine_uuid" <$> TF.attribute _virtual_machine_uuid
+        , TF.assign "remove_children" <$> TF.attribute _removeChildren
+        , TF.assign "snapshot_name" <$> TF.attribute _snapshotName
+        , TF.assign "virtual_machine_uuid" <$> TF.attribute _virtualMachineUuid
         ]
 
-instance P.HasConsolidate (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (VirtualMachineSnapshotResource s) where
+    validator = P.mempty
+
+instance P.HasConsolidate (VirtualMachineSnapshotResource s) (TF.Attr s P.Bool) where
     consolidate =
-        lens (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _consolidate = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasDescription (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_description :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: VirtualMachineSnapshotResource s)
 
-instance P.HasMemory (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasMemory (VirtualMachineSnapshotResource s) (TF.Attr s P.Bool) where
     memory =
-        lens (_memory :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_memory :: VirtualMachineSnapshotResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _memory = a } :: VirtualMachineSnapshotResource s)
 
-instance P.HasQuiesce (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasQuiesce (VirtualMachineSnapshotResource s) (TF.Attr s P.Bool) where
     quiesce =
-        lens (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _quiesce = a } :: VirtualMachineSnapshotResource s)
 
-instance P.HasRemoveChildren (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasRemoveChildren (VirtualMachineSnapshotResource s) (TF.Attr s P.Bool) where
     removeChildren =
-        lens (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _remove_children = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_removeChildren :: VirtualMachineSnapshotResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _removeChildren = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasSnapshotName (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
     snapshotName =
-        lens (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _snapshot_name = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_snapshotName :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotName = a } :: VirtualMachineSnapshotResource s)
 
 instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) (TF.Attr s P.Text) where
     virtualMachineUuid =
-        lens (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-             (\s a -> s { _virtual_machine_uuid = a } :: VirtualMachineSnapshotResource s)
+        P.lens (_virtualMachineUuid :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineUuid = a } :: VirtualMachineSnapshotResource s)
 
-instance s ~ s' => P.HasComputedConsolidate (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedConsolidate =
-        (_consolidate :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vsphere_vmfs_datastore@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_vmfs_datastore terraform documentation>
+-- for more information.
+data VmfsDatastoreResource s = VmfsDatastoreResource'
+    { _customAttributes   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @custom_attributes@ - (Optional)
+    -- A list of custom attributes to set on this resource.
+    --
+    , _datastoreClusterId :: TF.Attr s P.Text
+    -- ^ @datastore_cluster_id@ - (Optional)
+    -- The managed object ID of the datastore cluster to place the datastore in.
+    --
+    -- Conflicts with:
+    --
+    -- * 'folder'
+    , _disks              :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @disks@ - (Required)
+    -- The disks to add to the datastore.
+    --
+    , _folder             :: TF.Attr s P.Text
+    -- ^ @folder@ - (Optional)
+    -- The path to the datastore folder to put the datastore in.
+    --
+    -- Conflicts with:
+    --
+    -- * 'datastoreClusterId'
+    , _hostSystemId       :: TF.Attr s P.Text
+    -- ^ @host_system_id@ - (Required)
+    -- The managed object ID of the host to set up the datastore on.
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the datastore.
+    --
+    , _tags               :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- A list of tag IDs to apply to this object.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemory (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedMemory =
-        (_memory :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedQuiesce (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedQuiesce =
-        (_quiesce :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRemoveChildren (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedRemoveChildren =
-        (_remove_children :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSnapshotName (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSnapshotName =
-        (_snapshot_name :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVirtualMachineUuid (TF.Ref s' (VirtualMachineSnapshotResource s)) (TF.Attr s P.Text) where
-    computedVirtualMachineUuid =
-        (_virtual_machine_uuid :: VirtualMachineSnapshotResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-virtualMachineSnapshotResource :: TF.Resource P.VSphere (VirtualMachineSnapshotResource s)
-virtualMachineSnapshotResource =
-    TF.newResource "vsphere_virtual_machine_snapshot" $
-        VirtualMachineSnapshotResource {
-              _consolidate = TF.Nil
-            , _description = TF.Nil
-            , _memory = TF.Nil
-            , _quiesce = TF.Nil
-            , _remove_children = TF.Nil
-            , _snapshot_name = TF.Nil
-            , _virtual_machine_uuid = TF.Nil
+vmfsDatastoreResource
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @disks@ - 'P.disks'
+    -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (VmfsDatastoreResource s)
+vmfsDatastoreResource _disks _hostSystemId _name =
+    TF.newResource "vsphere_vmfs_datastore" TF.validator $
+        VmfsDatastoreResource'
+            { _customAttributes = TF.Nil
+            , _datastoreClusterId = TF.Nil
+            , _disks = _disks
+            , _folder = TF.Nil
+            , _hostSystemId = _hostSystemId
+            , _name = _name
+            , _tags = TF.Nil
             }
 
-{- | The @vsphere_vmfs_datastore@ VSphere resource.
-
-The @vsphere_vmfs_datastore@ resource can be used to create and manage VMFS
-datastores on an ESXi host or a set of hosts. The resource supports using
-any SCSI device that can generally be used in a datastore, such as local
-disks, or disks presented to a host or multiple hosts over Fibre Channel or
-iSCSI. Devices can be specified manually, or discovered using the
-</docs/providers/vsphere/d/vmfs_disks.html> data source.
--}
-data VmfsDatastoreResource s = VmfsDatastoreResource {
-      _datastore_cluster_id :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of a datastore cluster to put this datastore in. Conflicts with @folder@ . -}
-    , _disks                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The disks to use with the datastore. -}
-    , _folder               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The relative path to a folder to put this datastore in. This is a path relative to the datacenter you are deploying the datastore to. Example: for the @dc1@ datacenter, and a provided @folder@ of @foo/bar@ , Terraform will place a datastore named @terraform-test@ in a datastore folder located at @/dc1/datastore/foo/bar@ , with the final inventory path being @/dc1/datastore/foo/bar/terraform-test@ . Conflicts with @datastore_cluster_id@ . -}
-    , _host_system_id       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The </docs/providers/vsphere/index.html#use-of-managed-object-references-by-the-vsphere-provider> of the host to set the datastore up on. Note that this is not necessarily the only host that the datastore will be set up on - see <#auto-mounting-of-datastores-within-vcenter> for more info. Forces a new resource if changed. -}
-    , _name                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the datastore. Forces a new resource if changed. -}
-    , _tags                 :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IDs of any tags to attach to this resource. See </docs/providers/vsphere/r/tag.html#using-tags-in-a-supported-resource> for a reference on how to apply tags. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VmfsDatastoreResource s) where
-    toObject VmfsDatastoreResource{..} = catMaybes
-        [ TF.assign "datastore_cluster_id" <$> TF.attribute _datastore_cluster_id
+    toObject VmfsDatastoreResource'{..} = P.catMaybes
+        [ TF.assign "custom_attributes" <$> TF.attribute _customAttributes
+        , TF.assign "datastore_cluster_id" <$> TF.attribute _datastoreClusterId
         , TF.assign "disks" <$> TF.attribute _disks
         , TF.assign "folder" <$> TF.attribute _folder
-        , TF.assign "host_system_id" <$> TF.attribute _host_system_id
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
+instance TF.IsValid (VmfsDatastoreResource s) where
+    validator = TF.fieldsValidator (\VmfsDatastoreResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_datastoreClusterId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_datastoreClusterId",
+                            [ "_folder"
+                            ])
+        , if (_folder P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_folder",
+                            [ "_datastoreClusterId"
+                            ])
+        ])
+
+instance P.HasCustomAttributes (VmfsDatastoreResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    customAttributes =
+        P.lens (_customAttributes :: VmfsDatastoreResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _customAttributes = a } :: VmfsDatastoreResource s)
+
 instance P.HasDatastoreClusterId (VmfsDatastoreResource s) (TF.Attr s P.Text) where
     datastoreClusterId =
-        lens (_datastore_cluster_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _datastore_cluster_id = a } :: VmfsDatastoreResource s)
+        P.lens (_datastoreClusterId :: VmfsDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreClusterId = a } :: VmfsDatastoreResource s)
 
-instance P.HasDisks (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance P.HasDisks (VmfsDatastoreResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     disks =
-        lens (_disks :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disks = a } :: VmfsDatastoreResource s)
+        P.lens (_disks :: VmfsDatastoreResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _disks = a } :: VmfsDatastoreResource s)
 
 instance P.HasFolder (VmfsDatastoreResource s) (TF.Attr s P.Text) where
     folder =
-        lens (_folder :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _folder = a } :: VmfsDatastoreResource s)
+        P.lens (_folder :: VmfsDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folder = a } :: VmfsDatastoreResource s)
 
 instance P.HasHostSystemId (VmfsDatastoreResource s) (TF.Attr s P.Text) where
     hostSystemId =
-        lens (_host_system_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _host_system_id = a } :: VmfsDatastoreResource s)
+        P.lens (_hostSystemId :: VmfsDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostSystemId = a } :: VmfsDatastoreResource s)
 
 instance P.HasName (VmfsDatastoreResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VmfsDatastoreResource s)
+        P.lens (_name :: VmfsDatastoreResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VmfsDatastoreResource s)
 
-instance P.HasTags (VmfsDatastoreResource s) (TF.Attr s P.Text) where
+instance P.HasTags (VmfsDatastoreResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        lens (_tags :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-             (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
+        P.lens (_tags :: VmfsDatastoreResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
 
-instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedAccessible x = TF.compute (TF.refKey x) "accessible"
+instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
+    computedAccessible x = TF.compute (TF.refKey x) "_computedAccessible"
 
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedCapacity x = TF.compute (TF.refKey x) "capacity"
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
+    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
 
-instance s ~ s' => P.HasComputedDatastoreClusterId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedDatastoreClusterId =
-        (_datastore_cluster_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedDisks =
-        (_disks :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFolder (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedFolder =
-        (_folder :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
-
-instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedHostSystemId =
-        (_host_system_id :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
+    computedFreeSpace x = TF.compute (TF.refKey x) "_computedFreeSpace"
 
 instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
+    computedMaintenanceMode x = TF.compute (TF.refKey x) "_computedMaintenanceMode"
 
-instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
+instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
+    computedMultipleHostAccess x = TF.compute (TF.refKey x) "_computedMultipleHostAccess"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedTags =
-        (_tags :: VmfsDatastoreResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
+instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
+    computedUncommittedSpace x = TF.compute (TF.refKey x) "_computedUncommittedSpace"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "url"
-
-vmfsDatastoreResource :: TF.Resource P.VSphere (VmfsDatastoreResource s)
-vmfsDatastoreResource =
-    TF.newResource "vsphere_vmfs_datastore" $
-        VmfsDatastoreResource {
-              _datastore_cluster_id = TF.Nil
-            , _disks = TF.Nil
-            , _folder = TF.Nil
-            , _host_system_id = TF.Nil
-            , _name = TF.Nil
-            , _tags = TF.Nil
-            }
+    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"

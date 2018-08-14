@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,80 +17,72 @@
 --
 module Terrafomo.OpsGenie.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** opsgenie_user
       UserData (..)
     , userData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasUsername (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedFullName (..)
-    , P.HasComputedRole (..)
-    , P.HasComputedUsername (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.OpsGenie.Settings
 
-import Terrafomo.OpsGenie.Types as P
-
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as Map
+import qualified Data.List.NonEmpty          as P
+import qualified Data.Maybe                  as P
+import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
-import qualified Data.Word                   as P
-import qualified GHC.Base                    as P
-import qualified Numeric.Natural             as P
+import qualified GHC.Generics                as P
+import qualified Lens.Micro                  as P
+import qualified Prelude                     as P
+import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.HCL               as TF
+import qualified Terrafomo.Name              as TF
 import qualified Terrafomo.OpsGenie.Lens     as P
 import qualified Terrafomo.OpsGenie.Provider as P
+import qualified Terrafomo.OpsGenie.Types    as P
+import qualified Terrafomo.Schema            as TF
+import qualified Terrafomo.Validator         as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @opsgenie_user@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/OpsGenie/opsgenie_user terraform documentation>
+-- for more information.
+data UserData s = UserData'
+    { _username :: TF.Attr s P.Text
+    -- ^ @username@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @opsgenie_user@ OpsGenie datasource.
-
-Use this data source to get information about a specific user within
-OpsGenie.
--}
-data UserData s = UserData {
-      _username :: !(TF.Attr s P.Text)
-    {- ^ (Required) The username (email) to use to find a user in OpsGenie. -}
-    } deriving (Show, Eq)
+userData
+    :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
+    -> TF.DataSource P.Provider (UserData s)
+userData _username =
+    TF.newDataSource "opsgenie_user" TF.validator $
+        UserData'
+            { _username = _username
+            }
 
 instance TF.IsObject (UserData s) where
-    toObject UserData{..} = catMaybes
+    toObject UserData'{..} = P.catMaybes
         [ TF.assign "username" <$> TF.attribute _username
         ]
 
+instance TF.IsValid (UserData s) where
+    validator = P.mempty
+
 instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
     username =
-        lens (_username :: UserData s -> TF.Attr s P.Text)
-             (\s a -> s { _username = a } :: UserData s)
+        P.lens (_username :: UserData s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedFullName x = TF.compute (TF.refKey x) "full_name"
+    computedFullName x = TF.compute (TF.refKey x) "_computedFullName"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
-
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedUsername =
-        (_username :: UserData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-userData :: TF.DataSource P.OpsGenie (UserData s)
-userData =
-    TF.newDataSource "opsgenie_user" $
-        UserData {
-              _username = TF.Nil
-            }
+    computedRole x = TF.compute (TF.refKey x) "_computedRole"

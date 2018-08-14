@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,59 +17,76 @@
 --
 module Terrafomo.Logentries.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** logentries_logset
       LogsetData (..)
     , logsetData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-
-    -- ** Computed Attributes
-    , P.HasComputedName (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Logentries.Settings
 
-import Terrafomo.Logentries.Types as P
-
+import qualified Data.Hashable                 as P
+import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as Map
+import qualified Data.List.NonEmpty            as P
+import qualified Data.Maybe                    as P
+import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
-import qualified Data.Word                     as P
-import qualified GHC.Base                      as P
-import qualified Numeric.Natural               as P
+import qualified GHC.Generics                  as P
+import qualified Lens.Micro                    as P
+import qualified Prelude                       as P
+import qualified Terrafomo.Attribute           as TF
+import qualified Terrafomo.HCL                 as TF
 import qualified Terrafomo.Logentries.Lens     as P
 import qualified Terrafomo.Logentries.Provider as P
+import qualified Terrafomo.Logentries.Types    as P
+import qualified Terrafomo.Name                as TF
+import qualified Terrafomo.Schema              as TF
+import qualified Terrafomo.Validator           as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @logentries_logset@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Logentries/logentries_logset terraform documentation>
+-- for more information.
+data LogsetData s = LogsetData'
+    { _location :: TF.Attr s P.Text
+    -- ^ @location@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @logentries_logset@ Logentries datasource.
-
-Use this data source to get information (like ID) of already existing
-Logentries LogSets.
--}
-data LogsetData s = LogsetData {
-    } deriving (Show, Eq)
+logsetData
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.DataSource P.Provider (LogsetData s)
+logsetData _name =
+    TF.newDataSource "logentries_logset" TF.validator $
+        LogsetData'
+            { _location = TF.value "nonlocation"
+            , _name = _name
+            }
 
 instance TF.IsObject (LogsetData s) where
-    toObject _ = []
+    toObject LogsetData'{..} = P.catMaybes
+        [ TF.assign "location" <$> TF.attribute _location
+        , TF.assign "name" <$> TF.attribute _name
+        ]
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (LogsetData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance TF.IsValid (LogsetData s) where
+    validator = P.mempty
 
-logsetData :: TF.DataSource P.Logentries (LogsetData s)
-logsetData =
-    TF.newDataSource "logentries_logset" $
-        LogsetData {
-            }
+instance P.HasLocation (LogsetData s) (TF.Attr s P.Text) where
+    location =
+        P.lens (_location :: LogsetData s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: LogsetData s)
+
+instance P.HasName (LogsetData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: LogsetData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogsetData s)

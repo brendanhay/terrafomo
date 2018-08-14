@@ -1,4 +1,2 @@
-name: GitHub
-package: terrafomo-github
-datatype: true
-original: github
+package-name: terrafomo-github
+provider-name: GitHub

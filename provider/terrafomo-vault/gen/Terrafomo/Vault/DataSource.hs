@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,254 +17,218 @@
 --
 module Terrafomo.Vault.DataSource
     (
-    -- * Types
-      ApproleAuthBackendRoleData (..)
-    , approleAuthBackendRoleData
+    -- * DataSource Datatypes
+    -- ** vault_approle_auth_backend_role_id
+      ApproleAuthBackendRoleIdData (..)
+    , approleAuthBackendRoleIdData
 
+    -- ** vault_aws_access_credentials
     , AwsAccessCredentialsData (..)
     , awsAccessCredentialsData
 
+    -- ** vault_generic_secret
     , GenericSecretData (..)
     , genericSecretData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasBackend (..)
-    , P.HasPath (..)
-    , P.HasRole (..)
-    , P.HasRoleName (..)
-    , P.HasType' (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAccessKey (..)
-    , P.HasComputedBackend (..)
-    , P.HasComputedData' (..)
-    , P.HasComputedDataJson (..)
-    , P.HasComputedLeaseDuration (..)
-    , P.HasComputedLeaseId (..)
-    , P.HasComputedLeaseRenewable (..)
-    , P.HasComputedLeaseStartTime (..)
-    , P.HasComputedPath (..)
-    , P.HasComputedRole (..)
-    , P.HasComputedRoleId (..)
-    , P.HasComputedRoleName (..)
-    , P.HasComputedSecretKey (..)
-    , P.HasComputedSecurityToken (..)
-    , P.HasComputedType' (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Vault.Settings
 
-import Terrafomo.Vault.Types as P
-
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
+import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
-import qualified Data.Word                as P
-import qualified GHC.Base                 as P
-import qualified Numeric.Natural          as P
+import qualified GHC.Generics             as P
+import qualified Lens.Micro               as P
+import qualified Prelude                  as P
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Schema         as TF
+import qualified Terrafomo.Validator      as TF
 import qualified Terrafomo.Vault.Lens     as P
 import qualified Terrafomo.Vault.Provider as P
+import qualified Terrafomo.Vault.Types    as P
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @vault_approle_auth_backend_role_id@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Vault/vault_approle_auth_backend_role_id terraform documentation>
+-- for more information.
+data ApproleAuthBackendRoleIdData s = ApproleAuthBackendRoleIdData'
+    { _backend  :: TF.Attr s P.Text
+    -- ^ @backend@ - (Optional)
+    -- Unique name of the auth backend to configure.
+    --
+    , _roleName :: TF.Attr s P.Text
+    -- ^ @role_name@ - (Required)
+    -- Name of the role.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @vault_approle_auth_backend_role@ Vault datasource.
-
-Reads the Role ID of an AppRole from a Vault server.
--}
-data ApproleAuthBackendRoleData s = ApproleAuthBackendRoleData {
-      _backend   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The unique name for the AppRole backend the role to retrieve a RoleID for resides in. Defaults to "approle". -}
-    , _role_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the role to retrieve the Role ID for. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (ApproleAuthBackendRoleData s) where
-    toObject ApproleAuthBackendRoleData{..} = catMaybes
-        [ TF.assign "backend" <$> TF.attribute _backend
-        , TF.assign "role_name" <$> TF.attribute _role_name
-        ]
-
-instance P.HasBackend (ApproleAuthBackendRoleData s) (TF.Attr s P.Text) where
-    backend =
-        lens (_backend :: ApproleAuthBackendRoleData s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: ApproleAuthBackendRoleData s)
-
-instance P.HasRoleName (ApproleAuthBackendRoleData s) (TF.Attr s P.Text) where
-    roleName =
-        lens (_role_name :: ApproleAuthBackendRoleData s -> TF.Attr s P.Text)
-             (\s a -> s { _role_name = a } :: ApproleAuthBackendRoleData s)
-
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ApproleAuthBackendRoleData s)) (TF.Attr s P.Text) where
-    computedBackend =
-        (_backend :: ApproleAuthBackendRoleData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleData s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "role_id"
-
-instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (ApproleAuthBackendRoleData s)) (TF.Attr s P.Text) where
-    computedRoleName =
-        (_role_name :: ApproleAuthBackendRoleData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-approleAuthBackendRoleData :: TF.DataSource P.Vault (ApproleAuthBackendRoleData s)
-approleAuthBackendRoleData =
-    TF.newDataSource "vault_approle_auth_backend_role" $
-        ApproleAuthBackendRoleData {
-              _backend = TF.Nil
-            , _role_name = TF.Nil
+approleAuthBackendRoleIdData
+    :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
+    -> TF.DataSource P.Provider (ApproleAuthBackendRoleIdData s)
+approleAuthBackendRoleIdData _roleName =
+    TF.newDataSource "vault_approle_auth_backend_role_id" TF.validator $
+        ApproleAuthBackendRoleIdData'
+            { _backend = TF.value "approle"
+            , _roleName = _roleName
             }
 
-{- | The @vault_aws_access_credentials@ Vault datasource.
+instance TF.IsObject (ApproleAuthBackendRoleIdData s) where
+    toObject ApproleAuthBackendRoleIdData'{..} = P.catMaybes
+        [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "role_name" <$> TF.attribute _roleName
+        ]
 
-Reads AWS credentials from an AWS secret backend in Vault. ~> Important All
-data retrieved from Vault will be written in cleartext to state file
-generated by Terraform, will appear in the console output when Terraform
-runs, and may be included in plan files if secrets are interpolated into any
-resource attributes. Protect these artifacts accordingly. See
-<../index.html> for more details.
--}
-data AwsAccessCredentialsData s = AwsAccessCredentialsData {
-      _backend :: !(TF.Attr s P.Text)
-    {- ^ (Required) The path to the AWS secret backend to read credentials from, with no leading or trailing @/@ s. -}
-    , _role    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the AWS secret backend role to read credentials from, with no leading or trailing @/@ s. -}
-    , _type'   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The type of credentials to read. Defaults to @"creds"@ , which just returns an AWS Access Key ID and Secret Key. Can also be set to @"sts"@ , which will return a security token in addition to the keys. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (ApproleAuthBackendRoleIdData s) where
+    validator = P.mempty
+
+instance P.HasBackend (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
+    backend =
+        P.lens (_backend :: ApproleAuthBackendRoleIdData s -> TF.Attr s P.Text)
+               (\s a -> s { _backend = a } :: ApproleAuthBackendRoleIdData s)
+
+instance P.HasRoleName (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
+    roleName =
+        P.lens (_roleName :: ApproleAuthBackendRoleIdData s -> TF.Attr s P.Text)
+               (\s a -> s { _roleName = a } :: ApproleAuthBackendRoleIdData s)
+
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleIdData s)) (TF.Attr s P.Text) where
+    computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
+
+-- | @vault_aws_access_credentials@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Vault/vault_aws_access_credentials terraform documentation>
+-- for more information.
+data AwsAccessCredentialsData s = AwsAccessCredentialsData'
+    { _backend :: TF.Attr s P.Text
+    -- ^ @backend@ - (Required)
+    -- AWS Secret Backend to read credentials from.
+    --
+    , _role    :: TF.Attr s P.Text
+    -- ^ @role@ - (Required)
+    -- AWS Secret Role to read credentials from.
+    --
+    , _type'   :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    -- Type of credentials to read. Must be either 'creds' for Access Key and
+    -- Secret Key, or 'sts' for STS.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+awsAccessCredentialsData
+    :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
+    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
+    -> TF.DataSource P.Provider (AwsAccessCredentialsData s)
+awsAccessCredentialsData _backend _role =
+    TF.newDataSource "vault_aws_access_credentials" TF.validator $
+        AwsAccessCredentialsData'
+            { _backend = _backend
+            , _role = _role
+            , _type' = TF.value "creds"
+            }
 
 instance TF.IsObject (AwsAccessCredentialsData s) where
-    toObject AwsAccessCredentialsData{..} = catMaybes
+    toObject AwsAccessCredentialsData'{..} = P.catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
+instance TF.IsValid (AwsAccessCredentialsData s) where
+    validator = P.mempty
+
 instance P.HasBackend (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     backend =
-        lens (_backend :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-             (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
+        P.lens (_backend :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
+               (\s a -> s { _backend = a } :: AwsAccessCredentialsData s)
 
 instance P.HasRole (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     role =
-        lens (_role :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-             (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
+        P.lens (_role :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: AwsAccessCredentialsData s)
 
 instance P.HasType' (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
+        P.lens (_type' :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
+    computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedBackend =
-        (_backend :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Integer) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
+    computedLeaseId x = TF.compute (TF.refKey x) "_computedLeaseId"
 
-instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
+instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Bool) where
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "_computedLeaseRenewable"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
-
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedRole =
-        (_role :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"
 
 instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
+    computedSecretKey x = TF.compute (TF.refKey x) "_computedSecretKey"
 
 instance s ~ s' => P.HasComputedSecurityToken (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedSecurityToken x = TF.compute (TF.refKey x) "security_token"
+    computedSecurityToken x = TF.compute (TF.refKey x) "_computedSecurityToken"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vault_generic_secret@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Vault/vault_generic_secret terraform documentation>
+-- for more information.
+data GenericSecretData s = GenericSecretData'
+    { _path :: TF.Attr s P.Text
+    -- ^ @path@ - (Required)
+    -- Full path from which a secret will be read.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-awsAccessCredentialsData :: TF.DataSource P.Vault (AwsAccessCredentialsData s)
-awsAccessCredentialsData =
-    TF.newDataSource "vault_aws_access_credentials" $
-        AwsAccessCredentialsData {
-              _backend = TF.Nil
-            , _role = TF.Nil
-            , _type' = TF.Nil
+genericSecretData
+    :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    -> TF.DataSource P.Provider (GenericSecretData s)
+genericSecretData _path =
+    TF.newDataSource "vault_generic_secret" TF.validator $
+        GenericSecretData'
+            { _path = _path
             }
 
-{- | The @vault_generic_secret@ Vault datasource.
-
-Reads arbitrary data from a given path in Vault. This resource is primarily
-intended to be used with
-<https://www.vaultproject.io/docs/secrets/generic/index.html> , but it is
-also compatible with any other Vault endpoint that supports the @vault read@
-command. ~> Important All data retrieved from Vault will be written in
-cleartext to state file generated by Terraform, will appear in the console
-output when Terraform runs, and may be included in plan files if secrets are
-interpolated into any resource attributes. Protect these artifacts
-accordingly. See <../index.html> for more details.
--}
-data GenericSecretData s = GenericSecretData {
-      _path :: !(TF.Attr s P.Text)
-    {- ^ (Required) The full logical path from which to request data. To read data from the "generic" secret backend mounted in Vault by default, this should be prefixed with @secret/@ . Reading from other backends with this data source is possible; consult each backend's documentation to see which endpoints support the @GET@ method. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (GenericSecretData s) where
-    toObject GenericSecretData{..} = catMaybes
+    toObject GenericSecretData'{..} = P.catMaybes
         [ TF.assign "path" <$> TF.attribute _path
         ]
 
+instance TF.IsValid (GenericSecretData s) where
+    validator = P.mempty
+
 instance P.HasPath (GenericSecretData s) (TF.Attr s P.Text) where
     path =
-        lens (_path :: GenericSecretData s -> TF.Attr s P.Text)
-             (\s a -> s { _path = a } :: GenericSecretData s)
+        P.lens (_path :: GenericSecretData s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: GenericSecretData s)
 
-instance s ~ s' => P.HasComputedData' (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedData' x = TF.compute (TF.refKey x) "data"
+instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedData x = TF.compute (TF.refKey x) "_computedData"
 
 instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedDataJson x = TF.compute (TF.refKey x) "data_json"
+    computedDataJson x = TF.compute (TF.refKey x) "_computedDataJson"
 
-instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Integer) where
+    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
+    computedLeaseId x = TF.compute (TF.refKey x) "_computedLeaseId"
 
-instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
+instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Bool) where
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "_computedLeaseRenewable"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedPath =
-        (_path :: GenericSecretData s -> TF.Attr s P.Text)
-            . TF.refValue
-
-genericSecretData :: TF.DataSource P.Vault (GenericSecretData s)
-genericSecretData =
-    TF.newDataSource "vault_generic_secret" $
-        GenericSecretData {
-              _path = TF.Nil
-            }
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"

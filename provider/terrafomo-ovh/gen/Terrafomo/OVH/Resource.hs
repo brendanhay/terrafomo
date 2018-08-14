@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,460 +17,367 @@
 --
 module Terrafomo.OVH.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** ovh_cloud_network_private
       CloudNetworkPrivateResource (..)
     , cloudNetworkPrivateResource
 
+    -- ** ovh_cloud_network_private_subnet
     , CloudNetworkPrivateSubnetResource (..)
     , cloudNetworkPrivateSubnetResource
 
+    -- ** ovh_cloud_user
     , CloudUserResource (..)
     , cloudUserResource
 
+    -- ** ovh_domain_zone_record
     , DomainZoneRecordResource (..)
     , domainZoneRecordResource
 
+    -- ** ovh_domain_zone_redirection
     , DomainZoneRedirectionResource (..)
     , domainZoneRedirectionResource
 
+    -- ** ovh_iploadbalancing_http_route
     , IploadbalancingHttpRouteResource (..)
     , iploadbalancingHttpRouteResource
 
+    -- ** ovh_iploadbalancing_http_route_rule
     , IploadbalancingHttpRouteRuleResource (..)
     , iploadbalancingHttpRouteRuleResource
 
+    -- ** ovh_iploadbalancing_tcp_farm
     , IploadbalancingTcpFarmResource (..)
     , iploadbalancingTcpFarmResource
 
+    -- ** ovh_iploadbalancing_tcp_farm_server
     , IploadbalancingTcpFarmServerResource (..)
     , iploadbalancingTcpFarmServerResource
 
+    -- ** ovh_publiccloud_private_network
     , PubliccloudPrivateNetworkResource (..)
     , publiccloudPrivateNetworkResource
 
+    -- ** ovh_publiccloud_private_network_subnet
     , PubliccloudPrivateNetworkSubnetResource (..)
     , publiccloudPrivateNetworkSubnetResource
 
+    -- ** ovh_publiccloud_user
     , PubliccloudUserResource (..)
     , publiccloudUserResource
 
+    -- ** ovh_vrack_cloudproject
     , VrackCloudprojectResource (..)
     , vrackCloudprojectResource
 
+    -- ** ovh_vrack_publiccloud_attachment
     , VrackPubliccloudAttachmentResource (..)
     , vrackPubliccloudAttachmentResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAction (..)
-    , P.HasAddress (..)
-    , P.HasBackup (..)
-    , P.HasBalance (..)
-    , P.HasDescription (..)
-    , P.HasDhcp (..)
-    , P.HasDisplayName (..)
-    , P.HasEnd (..)
-    , P.HasFarmId (..)
-    , P.HasField (..)
-    , P.HasFieldtype (..)
-    , P.HasFrontendId (..)
-    , P.HasKeywords (..)
-    , P.HasMatch (..)
-    , P.HasName (..)
-    , P.HasNegate (..)
-    , P.HasNetwork (..)
-    , P.HasNetworkId (..)
-    , P.HasNoGateway (..)
-    , P.HasPattern' (..)
-    , P.HasPort (..)
-    , P.HasProbe (..)
-    , P.HasProjectId (..)
-    , P.HasProxyProtocolVersion (..)
-    , P.HasRegion (..)
-    , P.HasRegions (..)
-    , P.HasRouteId (..)
-    , P.HasServiceName (..)
-    , P.HasSsl (..)
-    , P.HasStart (..)
-    , P.HasStatus (..)
-    , P.HasStickiness (..)
-    , P.HasSubField (..)
-    , P.HasSubdomain (..)
-    , P.HasTarget (..)
-    , P.HasTitle (..)
-    , P.HasTtl (..)
-    , P.HasType' (..)
-    , P.HasVlanId (..)
-    , P.HasVrackId (..)
-    , P.HasVrackNetworkId (..)
-    , P.HasWeight (..)
-    , P.HasZone (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAction (..)
-    , P.HasComputedActionStatus (..)
-    , P.HasComputedActionTarget (..)
-    , P.HasComputedActionType (..)
-    , P.HasComputedAddress (..)
-    , P.HasComputedBackup (..)
-    , P.HasComputedBalance (..)
-    , P.HasComputedCidr (..)
-    , P.HasComputedCookie (..)
-    , P.HasComputedCreationDate (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDhcp (..)
-    , P.HasComputedDhcpId (..)
-    , P.HasComputedDisplayName (..)
-    , P.HasComputedEnd (..)
-    , P.HasComputedFarmId (..)
-    , P.HasComputedField (..)
-    , P.HasComputedFieldType (..)
-    , P.HasComputedFieldtype (..)
-    , P.HasComputedFrontendId (..)
-    , P.HasComputedGatewayIp (..)
-    , P.HasComputedId (..)
-    , P.HasComputedIpPools (..)
-    , P.HasComputedKeywords (..)
-    , P.HasComputedMatch (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNegate (..)
-    , P.HasComputedNetwork (..)
-    , P.HasComputedNetworkId (..)
-    , P.HasComputedNoGateway (..)
-    , P.HasComputedOpenstackRc (..)
-    , P.HasComputedPassword (..)
-    , P.HasComputedPattern' (..)
-    , P.HasComputedPort (..)
-    , P.HasComputedProbe (..)
-    , P.HasComputedProjectId (..)
-    , P.HasComputedProxyProtocolVersion (..)
-    , P.HasComputedRegion (..)
-    , P.HasComputedRegions (..)
-    , P.HasComputedRegionsStatus (..)
-    , P.HasComputedRouteId (..)
-    , P.HasComputedServiceName (..)
-    , P.HasComputedSsl (..)
-    , P.HasComputedStart (..)
-    , P.HasComputedStatus (..)
-    , P.HasComputedStickiness (..)
-    , P.HasComputedSubDomain (..)
-    , P.HasComputedSubField (..)
-    , P.HasComputedSubdomain (..)
-    , P.HasComputedTarget (..)
-    , P.HasComputedTitle (..)
-    , P.HasComputedTtl (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUsername (..)
-    , P.HasComputedVlanId (..)
-    , P.HasComputedVrackId (..)
-    , P.HasComputedVrackNetworkId (..)
-    , P.HasComputedWeight (..)
-    , P.HasComputedZone (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.OVH.Settings
 
-import Terrafomo.OVH.Types as P
-
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
-import qualified Data.Word              as P
-import qualified GHC.Base               as P
-import qualified Numeric.Natural        as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.OVH.Lens     as P
 import qualified Terrafomo.OVH.Provider as P
+import qualified Terrafomo.OVH.Types    as P
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @ovh_cloud_network_private@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_cloud_network_private terraform documentation>
+-- for more information.
+data CloudNetworkPrivateResource s = CloudNetworkPrivateResource'
+    { _name      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    , _vlanId    :: TF.Attr s P.Integer
+    -- ^ @vlan_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @ovh_cloud_network_private@ OVH resource.
-
-Creates a private network in a public cloud project.
--}
-data CloudNetworkPrivateResource s = CloudNetworkPrivateResource {
-      _name       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the network. -}
-    , _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _regions    :: !(TF.Attr s P.Text)
-    {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
-    , _vlan_id    :: !(TF.Attr s P.Text)
-    {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
-    } deriving (Show, Eq)
+cloudNetworkPrivateResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Resource P.Provider (CloudNetworkPrivateResource s)
+cloudNetworkPrivateResource _name _projectId =
+    TF.newResource "ovh_cloud_network_private" TF.validator $
+        CloudNetworkPrivateResource'
+            { _name = _name
+            , _projectId = _projectId
+            , _vlanId = TF.value 0
+            }
 
 instance TF.IsObject (CloudNetworkPrivateResource s) where
-    toObject CloudNetworkPrivateResource{..} = catMaybes
+    toObject CloudNetworkPrivateResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project_id" <$> TF.attribute _project_id
-        , TF.assign "regions" <$> TF.attribute _regions
-        , TF.assign "vlan_id" <$> TF.attribute _vlan_id
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
         ]
+
+instance TF.IsValid (CloudNetworkPrivateResource s) where
+    validator = P.mempty
 
 instance P.HasName (CloudNetworkPrivateResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CloudNetworkPrivateResource s)
+        P.lens (_name :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CloudNetworkPrivateResource s)
 
 instance P.HasProjectId (CloudNetworkPrivateResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: CloudNetworkPrivateResource s)
+        P.lens (_projectId :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: CloudNetworkPrivateResource s)
 
-instance P.HasRegions (CloudNetworkPrivateResource s) (TF.Attr s P.Text) where
-    regions =
-        lens (_regions :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _regions = a } :: CloudNetworkPrivateResource s)
-
-instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Text) where
+instance P.HasVlanId (CloudNetworkPrivateResource s) (TF.Attr s P.Integer) where
     vlanId =
-        lens (_vlan_id :: CloudNetworkPrivateResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vlan_id = a } :: CloudNetworkPrivateResource s)
+        P.lens (_vlanId :: CloudNetworkPrivateResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _vlanId = a } :: CloudNetworkPrivateResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "regions_status/region"
-
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
-
-instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (RegionsStatus s)]) where
+    computedRegionsStatus x = TF.compute (TF.refKey x) "_computedRegionsStatus"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
-instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
-    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
+-- | @ovh_cloud_network_private_subnet@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_cloud_network_private_subnet terraform documentation>
+-- for more information.
+data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource'
+    { _dhcp      :: TF.Attr s P.Bool
+    -- ^ @dhcp@ - (Optional)
+    --
+    , _end       :: TF.Attr s P.Text
+    -- ^ @end@ - (Required)
+    --
+    , _network   :: TF.Attr s P.Text
+    -- ^ @network@ - (Required)
+    --
+    , _networkId :: TF.Attr s P.Text
+    -- ^ @network_id@ - (Required)
+    --
+    , _noGateway :: TF.Attr s P.Bool
+    -- ^ @no_gateway@ - (Optional)
+    --
+    , _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    , _region    :: TF.Attr s P.Text
+    -- ^ @region@ - (Required)
+    --
+    , _start     :: TF.Attr s P.Text
+    -- ^ @start@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-cloudNetworkPrivateResource :: TF.Resource P.OVH (CloudNetworkPrivateResource s)
-cloudNetworkPrivateResource =
-    TF.newResource "ovh_cloud_network_private" $
-        CloudNetworkPrivateResource {
-              _name = TF.Nil
-            , _project_id = TF.Nil
-            , _regions = TF.Nil
-            , _vlan_id = TF.Nil
+cloudNetworkPrivateSubnetResource
+    :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
+    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
+    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
+    -> TF.Resource P.Provider (CloudNetworkPrivateSubnetResource s)
+cloudNetworkPrivateSubnetResource _end _network _networkId _projectId _region _start =
+    TF.newResource "ovh_cloud_network_private_subnet" TF.validator $
+        CloudNetworkPrivateSubnetResource'
+            { _dhcp = TF.value P.False
+            , _end = _end
+            , _network = _network
+            , _networkId = _networkId
+            , _noGateway = TF.value P.False
+            , _projectId = _projectId
+            , _region = _region
+            , _start = _start
             }
 
-{- | The @ovh_cloud_network_private_subnet@ OVH resource.
-
-Creates a subnet in a private network of a public cloud project.
--}
-data CloudNetworkPrivateSubnetResource s = CloudNetworkPrivateSubnetResource {
-      _dhcp       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable DHCP. Changing this forces a new resource to be created. Defaults to false. _ -}
-    , _end        :: !(TF.Attr s P.Text)
-    {- ^ (Required) Last ip for this region. Changing this value recreates the subnet. -}
-    , _network    :: !(TF.Attr s P.Text)
-    {- ^ (Required) Global network in CIDR format. Changing this value recreates the subnet -}
-    , _network_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the network. Changing this forces a new resource to be created. -}
-    , _no_gateway :: !(TF.Attr s P.Text)
-    {- ^ - Set to true if you don't want to set a default gateway IP. Changing this value recreates the resource. Defaults to false. -}
-    , _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. Changing this forces a new resource to be created. -}
-    , _region     :: !(TF.Attr s P.Text)
-    {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
-    , _start      :: !(TF.Attr s P.Text)
-    {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (CloudNetworkPrivateSubnetResource s) where
-    toObject CloudNetworkPrivateSubnetResource{..} = catMaybes
+    toObject CloudNetworkPrivateSubnetResource'{..} = P.catMaybes
         [ TF.assign "dhcp" <$> TF.attribute _dhcp
         , TF.assign "end" <$> TF.attribute _end
         , TF.assign "network" <$> TF.attribute _network
-        , TF.assign "network_id" <$> TF.attribute _network_id
-        , TF.assign "no_gateway" <$> TF.attribute _no_gateway
-        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "network_id" <$> TF.attribute _networkId
+        , TF.assign "no_gateway" <$> TF.attribute _noGateway
+        , TF.assign "project_id" <$> TF.attribute _projectId
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "start" <$> TF.attribute _start
         ]
 
-instance P.HasDhcp (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (CloudNetworkPrivateSubnetResource s) where
+    validator = P.mempty
+
+instance P.HasDhcp (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Bool) where
     dhcp =
-        lens (_dhcp :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dhcp = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_dhcp :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dhcp = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance P.HasEnd (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
     end =
-        lens (_end :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _end = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_end :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _end = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance P.HasNetwork (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_network :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance P.HasNetworkId (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
     networkId =
-        lens (_network_id :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_id = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_networkId :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkId = a } :: CloudNetworkPrivateSubnetResource s)
 
-instance P.HasNoGateway (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
+instance P.HasNoGateway (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Bool) where
     noGateway =
-        lens (_no_gateway :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _no_gateway = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_noGateway :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _noGateway = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance P.HasProjectId (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_projectId :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance P.HasRegion (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_region :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance P.HasStart (CloudNetworkPrivateSubnetResource s) (TF.Attr s P.Text) where
     start =
-        lens (_start :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _start = a } :: CloudNetworkPrivateSubnetResource s)
+        P.lens (_start :: CloudNetworkPrivateSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _start = a } :: CloudNetworkPrivateSubnetResource s)
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
-
-instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedDhcp x = TF.compute (TF.refKey x) "ip_pools/dhcp"
-
-instance s ~ s' => P.HasComputedDhcpId (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedDhcpId x = TF.compute (TF.refKey x) "dhcp_id"
-
-instance s ~ s' => P.HasComputedEnd (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedEnd x = TF.compute (TF.refKey x) "ip_pools/end"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
+    computedGatewayIp x = TF.compute (TF.refKey x) "_computedGatewayIp"
 
-instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s [TF.Attr s (IpPools s)]) where
+    computedIpPools x = TF.compute (TF.refKey x) "_computedIpPools"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "ip_pools/network"
+-- | @ovh_cloud_user@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_cloud_user terraform documentation>
+-- for more information.
+data CloudUserResource s = CloudUserResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _projectId   :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedNetworkId x = TF.compute (TF.refKey x) "network_id"
-
-instance s ~ s' => P.HasComputedNoGateway (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedNoGateway x = TF.compute (TF.refKey x) "no_gateway"
-
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "ip_pools/region"
-
-instance s ~ s' => P.HasComputedStart (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
-    computedStart x = TF.compute (TF.refKey x) "ip_pools/start"
-
-cloudNetworkPrivateSubnetResource :: TF.Resource P.OVH (CloudNetworkPrivateSubnetResource s)
-cloudNetworkPrivateSubnetResource =
-    TF.newResource "ovh_cloud_network_private_subnet" $
-        CloudNetworkPrivateSubnetResource {
-              _dhcp = TF.Nil
-            , _end = TF.Nil
-            , _network = TF.Nil
-            , _network_id = TF.Nil
-            , _no_gateway = TF.Nil
-            , _project_id = TF.Nil
-            , _region = TF.Nil
-            , _start = TF.Nil
+cloudUserResource
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Resource P.Provider (CloudUserResource s)
+cloudUserResource _projectId =
+    TF.newResource "ovh_cloud_user" TF.validator $
+        CloudUserResource'
+            { _description = TF.Nil
+            , _projectId = _projectId
             }
 
-{- | The @ovh_cloud_user@ OVH resource.
-
-Creates a user in a public cloud project.
--}
-data CloudUserResource s = CloudUserResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ - A description associated with the user. -}
-    , _project_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (CloudUserResource s) where
-    toObject CloudUserResource{..} = catMaybes
+    toObject CloudUserResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "project_id" <$> TF.attribute _projectId
         ]
+
+instance TF.IsValid (CloudUserResource s) where
+    validator = P.mempty
 
 instance P.HasDescription (CloudUserResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: CloudUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: CloudUserResource s)
+        P.lens (_description :: CloudUserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: CloudUserResource s)
 
 instance P.HasProjectId (CloudUserResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: CloudUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: CloudUserResource s)
+        P.lens (_projectId :: CloudUserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: CloudUserResource s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
+instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (CloudUserResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedOpenstackRc x = TF.compute (TF.refKey x) "_computedOpenstackRc"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
-
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedUsername (TF.Ref s' (CloudUserResource s)) (TF.Attr s P.Text) where
-    computedUsername x = TF.compute (TF.refKey x) "username"
+    computedUsername x = TF.compute (TF.refKey x) "_computedUsername"
 
-cloudUserResource :: TF.Resource P.OVH (CloudUserResource s)
-cloudUserResource =
-    TF.newResource "ovh_cloud_user" $
-        CloudUserResource {
-              _description = TF.Nil
-            , _project_id = TF.Nil
+-- | @ovh_domain_zone_record@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_domain_zone_record terraform documentation>
+-- for more information.
+data DomainZoneRecordResource s = DomainZoneRecordResource'
+    { _fieldtype :: TF.Attr s P.Text
+    -- ^ @fieldtype@ - (Required)
+    --
+    , _subdomain :: TF.Attr s P.Text
+    -- ^ @subdomain@ - (Optional)
+    --
+    , _target    :: TF.Attr s P.Text
+    -- ^ @target@ - (Required)
+    --
+    , _ttl       :: TF.Attr s P.Integer
+    -- ^ @ttl@ - (Optional)
+    --
+    , _zone      :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+domainZoneRecordResource
+    :: TF.Attr s P.Text -- ^ @fieldtype@ - 'P.fieldtype'
+    -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (DomainZoneRecordResource s)
+domainZoneRecordResource _fieldtype _target _zone =
+    TF.newResource "ovh_domain_zone_record" TF.validator $
+        DomainZoneRecordResource'
+            { _fieldtype = _fieldtype
+            , _subdomain = TF.Nil
+            , _target = _target
+            , _ttl = TF.value 3600
+            , _zone = _zone
             }
 
-{- | The @ovh_domain_zone_record@ OVH resource.
-
-Provides a OVH domain zone record.
--}
-data DomainZoneRecordResource s = DomainZoneRecordResource {
-      _fieldtype :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of the record -}
-    , _subdomain :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the record -}
-    , _target    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The value of the record -}
-    , _ttl       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The TTL of the record -}
-    , _zone      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The domain to add the record to -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DomainZoneRecordResource s) where
-    toObject DomainZoneRecordResource{..} = catMaybes
+    toObject DomainZoneRecordResource'{..} = P.catMaybes
         [ TF.assign "fieldtype" <$> TF.attribute _fieldtype
         , TF.assign "subdomain" <$> TF.attribute _subdomain
         , TF.assign "target" <$> TF.attribute _target
@@ -477,93 +385,81 @@ instance TF.IsObject (DomainZoneRecordResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
+instance TF.IsValid (DomainZoneRecordResource s) where
+    validator = P.mempty
+
 instance P.HasFieldtype (DomainZoneRecordResource s) (TF.Attr s P.Text) where
     fieldtype =
-        lens (_fieldtype :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _fieldtype = a } :: DomainZoneRecordResource s)
+        P.lens (_fieldtype :: DomainZoneRecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _fieldtype = a } :: DomainZoneRecordResource s)
 
 instance P.HasSubdomain (DomainZoneRecordResource s) (TF.Attr s P.Text) where
     subdomain =
-        lens (_subdomain :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subdomain = a } :: DomainZoneRecordResource s)
+        P.lens (_subdomain :: DomainZoneRecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subdomain = a } :: DomainZoneRecordResource s)
 
 instance P.HasTarget (DomainZoneRecordResource s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: DomainZoneRecordResource s)
+        P.lens (_target :: DomainZoneRecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: DomainZoneRecordResource s)
 
-instance P.HasTtl (DomainZoneRecordResource s) (TF.Attr s P.Text) where
+instance P.HasTtl (DomainZoneRecordResource s) (TF.Attr s P.Integer) where
     ttl =
-        lens (_ttl :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: DomainZoneRecordResource s)
+        P.lens (_ttl :: DomainZoneRecordResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _ttl = a } :: DomainZoneRecordResource s)
 
 instance P.HasZone (DomainZoneRecordResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
+        P.lens (_zone :: DomainZoneRecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: DomainZoneRecordResource s)
 
-instance s ~ s' => P.HasComputedFieldType (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedFieldType x = TF.compute (TF.refKey x) "fieldType"
+-- | @ovh_domain_zone_redirection@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_domain_zone_redirection terraform documentation>
+-- for more information.
+data DomainZoneRedirectionResource s = DomainZoneRedirectionResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _keywords    :: TF.Attr s P.Text
+    -- ^ @keywords@ - (Optional)
+    --
+    , _subdomain   :: TF.Attr s P.Text
+    -- ^ @subdomain@ - (Optional)
+    --
+    , _target      :: TF.Attr s P.Text
+    -- ^ @target@ - (Required)
+    --
+    , _title       :: TF.Attr s P.Text
+    -- ^ @title@ - (Optional)
+    --
+    , _type'       :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _zone        :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedFieldtype (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedFieldtype =
-        (_fieldtype :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedSubDomain (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedSubDomain x = TF.compute (TF.refKey x) "subDomain"
-
-instance s ~ s' => P.HasComputedSubdomain (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedSubdomain =
-        (_subdomain :: DomainZoneRecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedTarget x = TF.compute (TF.refKey x) "target"
-
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "ttl"
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (DomainZoneRecordResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "zone"
-
-domainZoneRecordResource :: TF.Resource P.OVH (DomainZoneRecordResource s)
-domainZoneRecordResource =
-    TF.newResource "ovh_domain_zone_record" $
-        DomainZoneRecordResource {
-              _fieldtype = TF.Nil
+domainZoneRedirectionResource
+    :: TF.Attr s P.Text -- ^ @target@ - 'P.target'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (DomainZoneRedirectionResource s)
+domainZoneRedirectionResource _target _type' _zone =
+    TF.newResource "ovh_domain_zone_redirection" TF.validator $
+        DomainZoneRedirectionResource'
+            { _description = TF.Nil
+            , _keywords = TF.Nil
             , _subdomain = TF.Nil
-            , _target = TF.Nil
-            , _ttl = TF.Nil
-            , _zone = TF.Nil
+            , _target = _target
+            , _title = TF.Nil
+            , _type' = _type'
+            , _zone = _zone
             }
 
-{- | The @ovh_domain_zone_redirection@ OVH resource.
-
-Provides a OVH domain zone redirection.
--}
-data DomainZoneRedirectionResource s = DomainZoneRedirectionResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A description of this redirection -}
-    , _keywords    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Keywords to describe this redirection -}
-    , _subdomain   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the redirection -}
-    , _target      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The value of the redirection -}
-    , _title       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Title of this redirection -}
-    , _type'       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of the redirection, with values: -}
-    , _zone        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The domain to add the redirection to -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DomainZoneRedirectionResource s) where
-    toObject DomainZoneRedirectionResource{..} = catMaybes
+    toObject DomainZoneRedirectionResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "keywords" <$> TF.attribute _keywords
         , TF.assign "subdomain" <$> TF.attribute _subdomain
@@ -573,890 +469,794 @@ instance TF.IsObject (DomainZoneRedirectionResource s) where
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
+instance TF.IsValid (DomainZoneRedirectionResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DomainZoneRedirectionResource s)
+        P.lens (_description :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DomainZoneRedirectionResource s)
 
 instance P.HasKeywords (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     keywords =
-        lens (_keywords :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _keywords = a } :: DomainZoneRedirectionResource s)
+        P.lens (_keywords :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _keywords = a } :: DomainZoneRedirectionResource s)
 
 instance P.HasSubdomain (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     subdomain =
-        lens (_subdomain :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _subdomain = a } :: DomainZoneRedirectionResource s)
+        P.lens (_subdomain :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subdomain = a } :: DomainZoneRedirectionResource s)
 
 instance P.HasTarget (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     target =
-        lens (_target :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _target = a } :: DomainZoneRedirectionResource s)
+        P.lens (_target :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: DomainZoneRedirectionResource s)
 
 instance P.HasTitle (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     title =
-        lens (_title :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _title = a } :: DomainZoneRedirectionResource s)
+        P.lens (_title :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _title = a } :: DomainZoneRedirectionResource s)
 
 instance P.HasType' (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: DomainZoneRedirectionResource s)
+        P.lens (_type' :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: DomainZoneRedirectionResource s)
 
 instance P.HasZone (DomainZoneRedirectionResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: DomainZoneRedirectionResource s)
+        P.lens (_zone :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: DomainZoneRedirectionResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+-- | @ovh_iploadbalancing_http_route@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_iploadbalancing_http_route terraform documentation>
+-- for more information.
+data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
+    { _action      :: TF.Attr s [TF.Attr s (Action s)]
+    -- ^ @action@ - (Required)
+    --
+    , _displayName :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    , _serviceName :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Required)
+    --
+    , _weight      :: TF.Attr s P.Integer
+    -- ^ @weight@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedKeywords (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedKeywords x = TF.compute (TF.refKey x) "keywords"
-
-instance s ~ s' => P.HasComputedSubDomain (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedSubDomain x = TF.compute (TF.refKey x) "subDomain"
-
-instance s ~ s' => P.HasComputedSubdomain (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedSubdomain =
-        (_subdomain :: DomainZoneRedirectionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedTarget x = TF.compute (TF.refKey x) "target"
-
-instance s ~ s' => P.HasComputedTitle (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedTitle x = TF.compute (TF.refKey x) "title"
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (DomainZoneRedirectionResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "zone"
-
-domainZoneRedirectionResource :: TF.Resource P.OVH (DomainZoneRedirectionResource s)
-domainZoneRedirectionResource =
-    TF.newResource "ovh_domain_zone_redirection" $
-        DomainZoneRedirectionResource {
-              _description = TF.Nil
-            , _keywords = TF.Nil
-            , _subdomain = TF.Nil
-            , _target = TF.Nil
-            , _title = TF.Nil
-            , _type' = TF.Nil
-            , _zone = TF.Nil
-            }
-
-{- | The @ovh_iploadbalancing_http_route@ OVH resource.
-
-Manage http route for a loadbalancer service
--}
-data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource {
-      _action       :: !(TF.Attr s P.ActionType)
-    {- ^ (Optional) See datatype documentation. -}
-    , _display_name :: !(TF.Attr s P.Text)
-    {- ^ - Human readable name for your route, this field is for you -}
-    , _frontend_id  :: !(TF.Attr s P.Text)
-    {- ^ - Route traffic for this frontend -}
-    , _service_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The internal name of your IP load balancing -}
-    , _weight       :: !(TF.Attr s P.Text)
-    {- ^ - Route priority ([0..255]). 0 if null. Highest priority routes are evaluated first. Only the first matching route will trigger an action -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (IploadbalancingHttpRouteResource s) where
-    toObject IploadbalancingHttpRouteResource{..} = catMaybes
-        [ TF.assign "action.type" <$> TF.attribute _action
-        , TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "frontend_id" <$> TF.attribute _frontend_id
-        , TF.assign "service_name" <$> TF.attribute _service_name
-        , TF.assign "weight" <$> TF.attribute _weight
-        ]
-
-instance P.HasAction (IploadbalancingHttpRouteResource s) (TF.Attr s P.ActionType) where
-    action =
-        lens (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s P.ActionType)
-             (\s a -> s { _action = a } :: IploadbalancingHttpRouteResource s)
-
-instance P.HasDisplayName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
-    displayName =
-        lens (_display_name :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: IploadbalancingHttpRouteResource s)
-
-instance P.HasFrontendId (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
-    frontendId =
-        lens (_frontend_id :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _frontend_id = a } :: IploadbalancingHttpRouteResource s)
-
-instance P.HasServiceName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
-    serviceName =
-        lens (_service_name :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_name = a } :: IploadbalancingHttpRouteResource s)
-
-instance P.HasWeight (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
-    weight =
-        lens (_weight :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
-             (\s a -> s { _weight = a } :: IploadbalancingHttpRouteResource s)
-
-instance s ~ s' => P.HasComputedAction (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.ActionType) where
-    computedAction =
-        (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s P.ActionType)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedActionStatus (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedActionStatus x = TF.compute (TF.refKey x) "action.status"
-
-instance s ~ s' => P.HasComputedActionTarget (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedActionTarget x = TF.compute (TF.refKey x) "action.target"
-
-instance s ~ s' => P.HasComputedActionType (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedActionType x = TF.compute (TF.refKey x) "action.type"
-
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
-
-instance s ~ s' => P.HasComputedFrontendId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedFrontendId x = TF.compute (TF.refKey x) "frontend_id"
-
-instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "service_name"
-
-instance s ~ s' => P.HasComputedWeight (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Text) where
-    computedWeight x = TF.compute (TF.refKey x) "weight"
-
-iploadbalancingHttpRouteResource :: TF.Resource P.OVH (IploadbalancingHttpRouteResource s)
-iploadbalancingHttpRouteResource =
-    TF.newResource "ovh_iploadbalancing_http_route" $
-        IploadbalancingHttpRouteResource {
-              _action = TF.Nil
-            , _display_name = TF.Nil
-            , _frontend_id = TF.Nil
-            , _service_name = TF.Nil
+iploadbalancingHttpRouteResource
+    :: TF.Attr s [TF.Attr s (Action s)] -- ^ @action@ - 'P.action'
+    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    -> TF.Resource P.Provider (IploadbalancingHttpRouteResource s)
+iploadbalancingHttpRouteResource _action _serviceName =
+    TF.newResource "ovh_iploadbalancing_http_route" TF.validator $
+        IploadbalancingHttpRouteResource'
+            { _action = _action
+            , _displayName = TF.Nil
+            , _serviceName = _serviceName
             , _weight = TF.Nil
             }
 
-{- | The @ovh_iploadbalancing_http_route_rule@ OVH resource.
+instance TF.IsObject (IploadbalancingHttpRouteResource s) where
+    toObject IploadbalancingHttpRouteResource'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "service_name" <$> TF.attribute _serviceName
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
 
-Manage rules for HTTP route.
--}
-data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResource {
-      _display_name :: !(TF.Attr s P.Text)
-    {- ^ - Human readable name for your rule, this field is for you -}
-    , _field        :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of the field to match like "protocol" or "host". See "/ipLoadbalancing/{serviceName}/availableRouteRules" for a list of available rules -}
-    , _match        :: !(TF.Attr s P.Text)
-    {- ^ (Required) Matching operator. Not all operators are available for all fields. See "/ipLoadbalancing/{serviceName}/availableRouteRules" -}
-    , _negate       :: !(TF.Attr s P.Text)
-    {- ^ - Invert the matching operator effect -}
-    , _pattern'     :: !(TF.Attr s P.Text)
-    {- ^ - Value to match against this match. Interpretation if this field depends on the match and field -}
-    , _route_id     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The route to apply this rule -}
-    , _service_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The internal name of your IP load balancing -}
-    , _sub_field    :: !(TF.Attr s P.Text)
-    {- ^ - Name of sub-field, if applicable. This may be a Cookie or Header name for instance -}
-    } deriving (Show, Eq)
+instance TF.IsValid (IploadbalancingHttpRouteResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_action"
+                  (_action
+                      :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (Action s)])
+                  TF.validator
+
+instance P.HasAction (IploadbalancingHttpRouteResource s) (TF.Attr s [TF.Attr s (Action s)]) where
+    action =
+        P.lens (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (Action s)])
+               (\s a -> s { _action = a } :: IploadbalancingHttpRouteResource s)
+
+instance P.HasDisplayName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: IploadbalancingHttpRouteResource s)
+
+instance P.HasServiceName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
+    serviceName =
+        P.lens (_serviceName :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: IploadbalancingHttpRouteResource s)
+
+instance P.HasWeight (IploadbalancingHttpRouteResource s) (TF.Attr s P.Integer) where
+    weight =
+        P.lens (_weight :: IploadbalancingHttpRouteResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _weight = a } :: IploadbalancingHttpRouteResource s)
+
+instance s ~ s' => P.HasComputedFrontendId (TF.Ref s' (IploadbalancingHttpRouteResource s)) (TF.Attr s P.Integer) where
+    computedFrontendId x = TF.compute (TF.refKey x) "_computedFrontendId"
+
+-- | @ovh_iploadbalancing_http_route_rule@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_iploadbalancing_http_route_rule terraform documentation>
+-- for more information.
+data IploadbalancingHttpRouteRuleResource s = IploadbalancingHttpRouteRuleResource'
+    { _displayName :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    , _field       :: TF.Attr s P.Text
+    -- ^ @field@ - (Required)
+    --
+    , _match       :: TF.Attr s P.Text
+    -- ^ @match@ - (Required)
+    --
+    , _negate      :: TF.Attr s P.Bool
+    -- ^ @negate@ - (Optional)
+    --
+    , _pattern'    :: TF.Attr s P.Text
+    -- ^ @pattern@ - (Optional)
+    --
+    , _routeId     :: TF.Attr s P.Text
+    -- ^ @route_id@ - (Required)
+    --
+    , _serviceName :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Required)
+    --
+    , _subField    :: TF.Attr s P.Text
+    -- ^ @sub_field@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+iploadbalancingHttpRouteRuleResource
+    :: TF.Attr s P.Text -- ^ @field@ - 'P.field'
+    -> TF.Attr s P.Text -- ^ @match@ - 'P.match'
+    -> TF.Attr s P.Text -- ^ @route_id@ - 'P.routeId'
+    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    -> TF.Resource P.Provider (IploadbalancingHttpRouteRuleResource s)
+iploadbalancingHttpRouteRuleResource _field _match _routeId _serviceName =
+    TF.newResource "ovh_iploadbalancing_http_route_rule" TF.validator $
+        IploadbalancingHttpRouteRuleResource'
+            { _displayName = TF.Nil
+            , _field = _field
+            , _match = _match
+            , _negate = TF.Nil
+            , _pattern' = TF.Nil
+            , _routeId = _routeId
+            , _serviceName = _serviceName
+            , _subField = TF.Nil
+            }
 
 instance TF.IsObject (IploadbalancingHttpRouteRuleResource s) where
-    toObject IploadbalancingHttpRouteRuleResource{..} = catMaybes
-        [ TF.assign "display_name" <$> TF.attribute _display_name
+    toObject IploadbalancingHttpRouteRuleResource'{..} = P.catMaybes
+        [ TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "field" <$> TF.attribute _field
         , TF.assign "match" <$> TF.attribute _match
         , TF.assign "negate" <$> TF.attribute _negate
         , TF.assign "pattern" <$> TF.attribute _pattern'
-        , TF.assign "route_id" <$> TF.attribute _route_id
-        , TF.assign "service_name" <$> TF.attribute _service_name
-        , TF.assign "sub_field" <$> TF.attribute _sub_field
+        , TF.assign "route_id" <$> TF.attribute _routeId
+        , TF.assign "service_name" <$> TF.attribute _serviceName
+        , TF.assign "sub_field" <$> TF.attribute _subField
         ]
+
+instance TF.IsValid (IploadbalancingHttpRouteRuleResource s) where
+    validator = P.mempty
 
 instance P.HasDisplayName (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_displayName :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasField (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     field =
-        lens (_field :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _field = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_field :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _field = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasMatch (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     match =
-        lens (_match :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _match = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_match :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _match = a } :: IploadbalancingHttpRouteRuleResource s)
 
-instance P.HasNegate (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
+instance P.HasNegate (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Bool) where
     negate =
-        lens (_negate :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _negate = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_negate :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _negate = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasPattern' (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     pattern' =
-        lens (_pattern' :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _pattern' = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_pattern' :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _pattern' = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasRouteId (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     routeId =
-        lens (_route_id :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _route_id = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_routeId :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _routeId = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasServiceName (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     serviceName =
-        lens (_service_name :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_name = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_serviceName :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: IploadbalancingHttpRouteRuleResource s)
 
 instance P.HasSubField (IploadbalancingHttpRouteRuleResource s) (TF.Attr s P.Text) where
     subField =
-        lens (_sub_field :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
-             (\s a -> s { _sub_field = a } :: IploadbalancingHttpRouteRuleResource s)
+        P.lens (_subField :: IploadbalancingHttpRouteRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subField = a } :: IploadbalancingHttpRouteRuleResource s)
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+-- | @ovh_iploadbalancing_tcp_farm@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_iploadbalancing_tcp_farm terraform documentation>
+-- for more information.
+data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource'
+    { _balance        :: TF.Attr s P.Text
+    -- ^ @balance@ - (Optional)
+    --
+    , _displayName    :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    , _port           :: TF.Attr s P.Integer
+    -- ^ @port@ - (Optional)
+    --
+    , _probe          :: TF.Attr s [TF.Attr s (Probe s)]
+    -- ^ @probe@ - (Optional)
+    --
+    , _serviceName    :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Required)
+    --
+    , _stickiness     :: TF.Attr s P.Text
+    -- ^ @stickiness@ - (Optional)
+    --
+    , _vrackNetworkId :: TF.Attr s P.Integer
+    -- ^ @vrack_network_id@ - (Optional)
+    --
+    , _zone           :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedField (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedField x = TF.compute (TF.refKey x) "field"
-
-instance s ~ s' => P.HasComputedMatch (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedMatch x = TF.compute (TF.refKey x) "match"
-
-instance s ~ s' => P.HasComputedNegate (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedNegate x = TF.compute (TF.refKey x) "negate"
-
-instance s ~ s' => P.HasComputedPattern' (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedPattern' x = TF.compute (TF.refKey x) "pattern"
-
-instance s ~ s' => P.HasComputedRouteId (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedRouteId x = TF.compute (TF.refKey x) "route_id"
-
-instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "service_name"
-
-instance s ~ s' => P.HasComputedSubField (TF.Ref s' (IploadbalancingHttpRouteRuleResource s)) (TF.Attr s P.Text) where
-    computedSubField x = TF.compute (TF.refKey x) "sub_field"
-
-iploadbalancingHttpRouteRuleResource :: TF.Resource P.OVH (IploadbalancingHttpRouteRuleResource s)
-iploadbalancingHttpRouteRuleResource =
-    TF.newResource "ovh_iploadbalancing_http_route_rule" $
-        IploadbalancingHttpRouteRuleResource {
-              _display_name = TF.Nil
-            , _field = TF.Nil
-            , _match = TF.Nil
-            , _negate = TF.Nil
-            , _pattern' = TF.Nil
-            , _route_id = TF.Nil
-            , _service_name = TF.Nil
-            , _sub_field = TF.Nil
+iploadbalancingTcpFarmResource
+    :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (IploadbalancingTcpFarmResource s)
+iploadbalancingTcpFarmResource _serviceName _zone =
+    TF.newResource "ovh_iploadbalancing_tcp_farm" TF.validator $
+        IploadbalancingTcpFarmResource'
+            { _balance = TF.Nil
+            , _displayName = TF.Nil
+            , _port = TF.Nil
+            , _probe = TF.Nil
+            , _serviceName = _serviceName
+            , _stickiness = TF.Nil
+            , _vrackNetworkId = TF.Nil
+            , _zone = _zone
             }
 
-{- | The @ovh_iploadbalancing_tcp_farm@ OVH resource.
-
-Creates a backend server group (farm) to be used by loadbalancing
-frontend(s)
--}
-data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource {
-      _balance          :: !(TF.Attr s P.Text)
-    {- ^ - Load balancing algorithm. @roundrobin@ if null ( @first@ , @leastconn@ , @roundrobin@ , @source@ ) -}
-    , _display_name     :: !(TF.Attr s P.Text)
-    {- ^ - Readable label for loadbalancer farm -}
-    , _port             :: !(TF.Attr s P.Text)
-    {- ^ - Port attached to your farm ([1..49151]). Inherited from frontend if null -}
-    , _probe            :: !(TF.Attr s P.Text)
-    {- ^ - define a backend healthcheck probe -}
-    , _service_name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The internal name of your IP load balancing -}
-    , _stickiness       :: !(TF.Attr s P.Text)
-    {- ^ - 	Stickiness type. No stickiness if null ( @sourceIp@ ) -}
-    , _vrack_network_id :: !(TF.Attr s P.Text)
-    {- ^ - Internal Load Balancer identifier of the vRack private network to attach to your farm, mandatory when your Load Balancer is attached to a vRack -}
-    , _zone             :: !(TF.Attr s P.Text)
-    {- ^ (Required) Zone where the farm will be defined (ie. @GRA@ , @BHS@ also supports @ALL@ ) -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (IploadbalancingTcpFarmResource s) where
-    toObject IploadbalancingTcpFarmResource{..} = catMaybes
+    toObject IploadbalancingTcpFarmResource'{..} = P.catMaybes
         [ TF.assign "balance" <$> TF.attribute _balance
-        , TF.assign "display_name" <$> TF.attribute _display_name
+        , TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "probe" <$> TF.attribute _probe
-        , TF.assign "service_name" <$> TF.attribute _service_name
+        , TF.assign "service_name" <$> TF.attribute _serviceName
         , TF.assign "stickiness" <$> TF.attribute _stickiness
-        , TF.assign "vrack_network_id" <$> TF.attribute _vrack_network_id
+        , TF.assign "vrack_network_id" <$> TF.attribute _vrackNetworkId
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
+instance TF.IsValid (IploadbalancingTcpFarmResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_probe"
+                  (_probe
+                      :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (Probe s)])
+                  TF.validator
+
 instance P.HasBalance (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     balance =
-        lens (_balance :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _balance = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_balance :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _balance = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasDisplayName (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_displayName :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasPort (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
+instance P.HasPort (IploadbalancingTcpFarmResource s) (TF.Attr s P.Integer) where
     port =
-        lens (_port :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_port :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasProbe (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
+instance P.HasProbe (IploadbalancingTcpFarmResource s) (TF.Attr s [TF.Attr s (Probe s)]) where
     probe =
-        lens (_probe :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _probe = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_probe :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (Probe s)])
+               (\s a -> s { _probe = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasServiceName (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     serviceName =
-        lens (_service_name :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_name = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_serviceName :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasStickiness (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     stickiness =
-        lens (_stickiness :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stickiness = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_stickiness :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _stickiness = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasVrackNetworkId (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
+instance P.HasVrackNetworkId (IploadbalancingTcpFarmResource s) (TF.Attr s P.Integer) where
     vrackNetworkId =
-        lens (_vrack_network_id :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vrack_network_id = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_vrackNetworkId :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _vrackNetworkId = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasZone (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: IploadbalancingTcpFarmResource s)
+        P.lens (_zone :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: IploadbalancingTcpFarmResource s)
 
-instance s ~ s' => P.HasComputedBalance (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedBalance x = TF.compute (TF.refKey x) "balance"
+-- | @ovh_iploadbalancing_tcp_farm_server@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_iploadbalancing_tcp_farm_server terraform documentation>
+-- for more information.
+data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResource'
+    { _address              :: TF.Attr s P.Text
+    -- ^ @address@ - (Required)
+    --
+    , _backup               :: TF.Attr s P.Bool
+    -- ^ @backup@ - (Optional)
+    --
+    , _chain                :: TF.Attr s P.Text
+    -- ^ @chain@ - (Optional)
+    --
+    , _displayName          :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    , _farmId               :: TF.Attr s P.Integer
+    -- ^ @farm_id@ - (Required)
+    --
+    , _port                 :: TF.Attr s P.Integer
+    -- ^ @port@ - (Optional)
+    --
+    , _probe                :: TF.Attr s P.Bool
+    -- ^ @probe@ - (Optional)
+    --
+    , _proxyProtocolVersion :: TF.Attr s P.Text
+    -- ^ @proxy_protocol_version@ - (Optional)
+    --
+    , _serviceName          :: TF.Attr s P.Text
+    -- ^ @service_name@ - (Required)
+    --
+    , _ssl                  :: TF.Attr s P.Bool
+    -- ^ @ssl@ - (Optional)
+    --
+    , _status               :: TF.Attr s P.Text
+    -- ^ @status@ - (Required)
+    --
+    , _weight               :: TF.Attr s P.Integer
+    -- ^ @weight@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedPort x = TF.compute (TF.refKey x) "port"
-
-instance s ~ s' => P.HasComputedProbe (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedProbe x = TF.compute (TF.refKey x) "probe"
-
-instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "service_name"
-
-instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedStickiness x = TF.compute (TF.refKey x) "stickiness"
-
-instance s ~ s' => P.HasComputedVrackNetworkId (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedVrackNetworkId x = TF.compute (TF.refKey x) "vrack_network_id"
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (IploadbalancingTcpFarmResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "zone"
-
-iploadbalancingTcpFarmResource :: TF.Resource P.OVH (IploadbalancingTcpFarmResource s)
-iploadbalancingTcpFarmResource =
-    TF.newResource "ovh_iploadbalancing_tcp_farm" $
-        IploadbalancingTcpFarmResource {
-              _balance = TF.Nil
-            , _display_name = TF.Nil
+iploadbalancingTcpFarmServerResource
+    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
+    -> TF.Attr s P.Integer -- ^ @farm_id@ - 'P.farmId'
+    -> TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
+    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    -> TF.Resource P.Provider (IploadbalancingTcpFarmServerResource s)
+iploadbalancingTcpFarmServerResource _address _farmId _serviceName _status =
+    TF.newResource "ovh_iploadbalancing_tcp_farm_server" TF.validator $
+        IploadbalancingTcpFarmServerResource'
+            { _address = _address
+            , _backup = TF.value P.False
+            , _chain = TF.Nil
+            , _displayName = TF.Nil
+            , _farmId = _farmId
             , _port = TF.Nil
-            , _probe = TF.Nil
-            , _service_name = TF.Nil
-            , _stickiness = TF.Nil
-            , _vrack_network_id = TF.Nil
-            , _zone = TF.Nil
+            , _probe = TF.value P.False
+            , _proxyProtocolVersion = TF.Nil
+            , _serviceName = _serviceName
+            , _ssl = TF.value P.False
+            , _status = _status
+            , _weight = TF.value 1
             }
 
-{- | The @ovh_iploadbalancing_tcp_farm_server@ OVH resource.
-
-Creates a backend server entry linked to loadbalancing group (farm)
--}
-data IploadbalancingTcpFarmServerResource s = IploadbalancingTcpFarmServerResource {
-      _address                :: !(TF.Attr s P.Text)
-    {- ^ - Address of the backend server (IP from either internal or OVH network) -}
-    , _backup                 :: !(TF.Attr s P.Text)
-    {- ^ - is it a backup server used in case of failure of all the non-backup backends -}
-    , _display_name           :: !(TF.Attr s P.Text)
-    {- ^ - Label for the server -}
-    , _farm_id                :: !(TF.Attr s P.Text)
-    {- ^ - ID of the farm this server is attached to -}
-    , _port                   :: !(TF.Attr s P.Text)
-    {- ^ - Port that backend will respond on -}
-    , _probe                  :: !(TF.Attr s P.Text)
-    {- ^ - defines if backend will be probed to determine health and keep as active in farm if healthy -}
-    , _proxy_protocol_version :: !(TF.Attr s P.Text)
-    {- ^ - version of the PROXY protocol used to pass origin connection information from loadbalancer to recieving service ( @v1@ , @v2@ , @v2-ssl@ , @v2-ssl-cn@ ) -}
-    , _service_name           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The internal name of your IP load balancing -}
-    , _ssl                    :: !(TF.Attr s P.Text)
-    {- ^ - is the connection ciphered with SSL (TLS) -}
-    , _status                 :: !(TF.Attr s P.Text)
-    {- ^ - backend status - @active@ or @inactive@ -}
-    , _weight                 :: !(TF.Attr s P.Text)
-    {- ^ - used in loadbalancing algorithm -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (IploadbalancingTcpFarmServerResource s) where
-    toObject IploadbalancingTcpFarmServerResource{..} = catMaybes
+    toObject IploadbalancingTcpFarmServerResource'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "backup" <$> TF.attribute _backup
-        , TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "farm_id" <$> TF.attribute _farm_id
+        , TF.assign "chain" <$> TF.attribute _chain
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "farm_id" <$> TF.attribute _farmId
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "probe" <$> TF.attribute _probe
-        , TF.assign "proxy_protocol_version" <$> TF.attribute _proxy_protocol_version
-        , TF.assign "service_name" <$> TF.attribute _service_name
+        , TF.assign "proxy_protocol_version" <$> TF.attribute _proxyProtocolVersion
+        , TF.assign "service_name" <$> TF.attribute _serviceName
         , TF.assign "ssl" <$> TF.attribute _ssl
         , TF.assign "status" <$> TF.attribute _status
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
+instance TF.IsValid (IploadbalancingTcpFarmServerResource s) where
+    validator = P.mempty
+
 instance P.HasAddress (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
     address =
-        lens (_address :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _address = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_address :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasBackup (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+instance P.HasBackup (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Bool) where
     backup =
-        lens (_backup :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backup = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_backup :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _backup = a } :: IploadbalancingTcpFarmServerResource s)
+
+instance P.HasChain (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+    chain =
+        P.lens (_chain :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _chain = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance P.HasDisplayName (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_displayName :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasFarmId (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+instance P.HasFarmId (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integer) where
     farmId =
-        lens (_farm_id :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _farm_id = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_farmId :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _farmId = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasPort (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+instance P.HasPort (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integer) where
     port =
-        lens (_port :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_port :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasProbe (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+instance P.HasProbe (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Bool) where
     probe =
-        lens (_probe :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _probe = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_probe :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _probe = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance P.HasProxyProtocolVersion (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
     proxyProtocolVersion =
-        lens (_proxy_protocol_version :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _proxy_protocol_version = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_proxyProtocolVersion :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _proxyProtocolVersion = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance P.HasServiceName (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
     serviceName =
-        lens (_service_name :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _service_name = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_serviceName :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceName = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasSsl (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+instance P.HasSsl (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Bool) where
     ssl =
-        lens (_ssl :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ssl = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_ssl :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _ssl = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance P.HasStatus (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
     status =
-        lens (_status :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _status = a } :: IploadbalancingTcpFarmServerResource s)
+        P.lens (_status :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: IploadbalancingTcpFarmServerResource s)
 
-instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Text) where
+instance P.HasWeight (IploadbalancingTcpFarmServerResource s) (TF.Attr s P.Integer) where
     weight =
-        lens (_weight :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Text)
-             (\s a -> s { _weight = a } :: IploadbalancingTcpFarmServerResource s)
-
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
-
-instance s ~ s' => P.HasComputedBackup (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedBackup x = TF.compute (TF.refKey x) "backup"
+        P.lens (_weight :: IploadbalancingTcpFarmServerResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _weight = a } :: IploadbalancingTcpFarmServerResource s)
 
 instance s ~ s' => P.HasComputedCookie (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedCookie x = TF.compute (TF.refKey x) "cookie"
+    computedCookie x = TF.compute (TF.refKey x) "_computedCookie"
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+-- | @ovh_publiccloud_private_network@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_publiccloud_private_network terraform documentation>
+-- for more information.
+data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource'
+    { _name      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    , _vlanId    :: TF.Attr s P.Integer
+    -- ^ @vlan_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedFarmId (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedFarmId x = TF.compute (TF.refKey x) "farm_id"
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedPort x = TF.compute (TF.refKey x) "port"
-
-instance s ~ s' => P.HasComputedProbe (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedProbe x = TF.compute (TF.refKey x) "probe"
-
-instance s ~ s' => P.HasComputedProxyProtocolVersion (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedProxyProtocolVersion x = TF.compute (TF.refKey x) "proxy_protocol_version"
-
-instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "service_name"
-
-instance s ~ s' => P.HasComputedSsl (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedSsl x = TF.compute (TF.refKey x) "ssl"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-instance s ~ s' => P.HasComputedWeight (TF.Ref s' (IploadbalancingTcpFarmServerResource s)) (TF.Attr s P.Text) where
-    computedWeight x = TF.compute (TF.refKey x) "weight"
-
-iploadbalancingTcpFarmServerResource :: TF.Resource P.OVH (IploadbalancingTcpFarmServerResource s)
-iploadbalancingTcpFarmServerResource =
-    TF.newResource "ovh_iploadbalancing_tcp_farm_server" $
-        IploadbalancingTcpFarmServerResource {
-              _address = TF.Nil
-            , _backup = TF.Nil
-            , _display_name = TF.Nil
-            , _farm_id = TF.Nil
-            , _port = TF.Nil
-            , _probe = TF.Nil
-            , _proxy_protocol_version = TF.Nil
-            , _service_name = TF.Nil
-            , _ssl = TF.Nil
-            , _status = TF.Nil
-            , _weight = TF.Nil
+publiccloudPrivateNetworkResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Resource P.Provider (PubliccloudPrivateNetworkResource s)
+publiccloudPrivateNetworkResource _name _projectId =
+    TF.newResource "ovh_publiccloud_private_network" TF.validator $
+        PubliccloudPrivateNetworkResource'
+            { _name = _name
+            , _projectId = _projectId
+            , _vlanId = TF.value 0
             }
 
-{- | The @ovh_publiccloud_private_network@ OVH resource.
-
-DEPRECATED use @ovh_cloud_network_private@ instead. Creates a private
-network in a public cloud project.
--}
-data PubliccloudPrivateNetworkResource s = PubliccloudPrivateNetworkResource {
-      _name       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the network. -}
-    , _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _regions    :: !(TF.Attr s P.Text)
-    {- ^ - an array of valid OVH public cloud region ID in which the network will be available. Ex.: "GRA1". Defaults to all public cloud regions. -}
-    , _vlan_id    :: !(TF.Attr s P.Text)
-    {- ^ - a vlan id to associate with the network. Changing this value recreates the resource. Defaults to 0. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (PubliccloudPrivateNetworkResource s) where
-    toObject PubliccloudPrivateNetworkResource{..} = catMaybes
+    toObject PubliccloudPrivateNetworkResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "project_id" <$> TF.attribute _project_id
-        , TF.assign "regions" <$> TF.attribute _regions
-        , TF.assign "vlan_id" <$> TF.attribute _vlan_id
+        , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "vlan_id" <$> TF.attribute _vlanId
         ]
+
+instance TF.IsValid (PubliccloudPrivateNetworkResource s) where
+    validator = P.mempty
 
 instance P.HasName (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: PubliccloudPrivateNetworkResource s)
+        P.lens (_name :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PubliccloudPrivateNetworkResource s)
 
 instance P.HasProjectId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkResource s)
+        P.lens (_projectId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: PubliccloudPrivateNetworkResource s)
 
-instance P.HasRegions (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
-    regions =
-        lens (_regions :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _regions = a } :: PubliccloudPrivateNetworkResource s)
-
-instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasVlanId (PubliccloudPrivateNetworkResource s) (TF.Attr s P.Integer) where
     vlanId =
-        lens (_vlan_id :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vlan_id = a } :: PubliccloudPrivateNetworkResource s)
+        P.lens (_vlanId :: PubliccloudPrivateNetworkResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _vlanId = a } :: PubliccloudPrivateNetworkResource s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "regions_status/region"
-
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
-
-instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (RegionsStatus s)]) where
+    computedRegionsStatus x = TF.compute (TF.refKey x) "_computedRegionsStatus"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
 
-instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
+-- | @ovh_publiccloud_private_network_subnet@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_publiccloud_private_network_subnet terraform documentation>
+-- for more information.
+data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnetResource'
+    { _dhcp      :: TF.Attr s P.Bool
+    -- ^ @dhcp@ - (Optional)
+    --
+    , _end       :: TF.Attr s P.Text
+    -- ^ @end@ - (Required)
+    --
+    , _network   :: TF.Attr s P.Text
+    -- ^ @network@ - (Required)
+    --
+    , _networkId :: TF.Attr s P.Text
+    -- ^ @network_id@ - (Required)
+    --
+    , _noGateway :: TF.Attr s P.Bool
+    -- ^ @no_gateway@ - (Optional)
+    --
+    , _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    , _region    :: TF.Attr s P.Text
+    -- ^ @region@ - (Required)
+    --
+    , _start     :: TF.Attr s P.Text
+    -- ^ @start@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-publiccloudPrivateNetworkResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkResource s)
-publiccloudPrivateNetworkResource =
-    TF.newResource "ovh_publiccloud_private_network" $
-        PubliccloudPrivateNetworkResource {
-              _name = TF.Nil
-            , _project_id = TF.Nil
-            , _regions = TF.Nil
-            , _vlan_id = TF.Nil
+publiccloudPrivateNetworkSubnetResource
+    :: TF.Attr s P.Text -- ^ @end@ - 'P.end'
+    -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    -> TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
+    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
+    -> TF.Resource P.Provider (PubliccloudPrivateNetworkSubnetResource s)
+publiccloudPrivateNetworkSubnetResource _end _network _networkId _projectId _region _start =
+    TF.newResource "ovh_publiccloud_private_network_subnet" TF.validator $
+        PubliccloudPrivateNetworkSubnetResource'
+            { _dhcp = TF.value P.False
+            , _end = _end
+            , _network = _network
+            , _networkId = _networkId
+            , _noGateway = TF.value P.False
+            , _projectId = _projectId
+            , _region = _region
+            , _start = _start
             }
 
-{- | The @ovh_publiccloud_private_network_subnet@ OVH resource.
-
-DEPRECATED use @ovh_cloud_network_private_subnet@ instead. Creates a subnet
-in a private network of a public cloud project.
--}
-data PubliccloudPrivateNetworkSubnetResource s = PubliccloudPrivateNetworkSubnetResource {
-      _dhcp       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Enable DHCP. Changing this forces a new resource to be created. Defaults to false. _ -}
-    , _end        :: !(TF.Attr s P.Text)
-    {- ^ (Required) Last ip for this region. Changing this value recreates the subnet. -}
-    , _network    :: !(TF.Attr s P.Text)
-    {- ^ (Required) Global network in CIDR format. Changing this value recreates the subnet -}
-    , _network_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the network. Changing this forces a new resource to be created. -}
-    , _no_gateway :: !(TF.Attr s P.Text)
-    {- ^ - Set to true if you don't want to set a default gateway IP. Changing this value recreates the resource. Defaults to false. -}
-    , _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. Changing this forces a new resource to be created. -}
-    , _region     :: !(TF.Attr s P.Text)
-    {- ^ - The region in which the network subnet will be created. Ex.: "GRA1". Changing this value recreates the resource. -}
-    , _start      :: !(TF.Attr s P.Text)
-    {- ^ (Required) First ip for this region. Changing this value recreates the subnet. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (PubliccloudPrivateNetworkSubnetResource s) where
-    toObject PubliccloudPrivateNetworkSubnetResource{..} = catMaybes
+    toObject PubliccloudPrivateNetworkSubnetResource'{..} = P.catMaybes
         [ TF.assign "dhcp" <$> TF.attribute _dhcp
         , TF.assign "end" <$> TF.attribute _end
         , TF.assign "network" <$> TF.attribute _network
-        , TF.assign "network_id" <$> TF.attribute _network_id
-        , TF.assign "no_gateway" <$> TF.attribute _no_gateway
-        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "network_id" <$> TF.attribute _networkId
+        , TF.assign "no_gateway" <$> TF.attribute _noGateway
+        , TF.assign "project_id" <$> TF.attribute _projectId
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "start" <$> TF.attribute _start
         ]
 
-instance P.HasDhcp (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (PubliccloudPrivateNetworkSubnetResource s) where
+    validator = P.mempty
+
+instance P.HasDhcp (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Bool) where
     dhcp =
-        lens (_dhcp :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dhcp = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_dhcp :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _dhcp = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasEnd (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
     end =
-        lens (_end :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _end = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_end :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _end = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNetwork (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
     network =
-        lens (_network :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_network :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasNetworkId (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
     networkId =
-        lens (_network_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_networkId :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkId = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
-instance P.HasNoGateway (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
+instance P.HasNoGateway (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Bool) where
     noGateway =
-        lens (_no_gateway :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _no_gateway = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_noGateway :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _noGateway = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasProjectId (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_projectId :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasRegion (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_region :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance P.HasStart (PubliccloudPrivateNetworkSubnetResource s) (TF.Attr s P.Text) where
     start =
-        lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
+        P.lens (_start :: PubliccloudPrivateNetworkSubnetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _start = a } :: PubliccloudPrivateNetworkSubnetResource s)
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "cidr"
-
-instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedDhcp x = TF.compute (TF.refKey x) "ip_pools/dhcp"
-
-instance s ~ s' => P.HasComputedDhcpId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedDhcpId x = TF.compute (TF.refKey x) "dhcp_id"
-
-instance s ~ s' => P.HasComputedEnd (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedEnd x = TF.compute (TF.refKey x) "ip_pools/end"
+    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
 
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
+    computedGatewayIp x = TF.compute (TF.refKey x) "_computedGatewayIp"
 
-instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s [TF.Attr s (IpPools s)]) where
+    computedIpPools x = TF.compute (TF.refKey x) "_computedIpPools"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "ip_pools/network"
+-- | @ovh_publiccloud_user@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_publiccloud_user terraform documentation>
+-- for more information.
+data PubliccloudUserResource s = PubliccloudUserResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _projectId   :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedNetworkId x = TF.compute (TF.refKey x) "network_id"
-
-instance s ~ s' => P.HasComputedNoGateway (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedNoGateway x = TF.compute (TF.refKey x) "no_gateway"
-
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "ip_pools/region"
-
-instance s ~ s' => P.HasComputedStart (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
-    computedStart x = TF.compute (TF.refKey x) "ip_pools/start"
-
-publiccloudPrivateNetworkSubnetResource :: TF.Resource P.OVH (PubliccloudPrivateNetworkSubnetResource s)
-publiccloudPrivateNetworkSubnetResource =
-    TF.newResource "ovh_publiccloud_private_network_subnet" $
-        PubliccloudPrivateNetworkSubnetResource {
-              _dhcp = TF.Nil
-            , _end = TF.Nil
-            , _network = TF.Nil
-            , _network_id = TF.Nil
-            , _no_gateway = TF.Nil
-            , _project_id = TF.Nil
-            , _region = TF.Nil
-            , _start = TF.Nil
+publiccloudUserResource
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Resource P.Provider (PubliccloudUserResource s)
+publiccloudUserResource _projectId =
+    TF.newResource "ovh_publiccloud_user" TF.validator $
+        PubliccloudUserResource'
+            { _description = TF.Nil
+            , _projectId = _projectId
             }
 
-{- | The @ovh_publiccloud_user@ OVH resource.
-
-DEPRECATED use @ovh_cloud_user@ instead. Creates a user in a public cloud
-project.
--}
-data PubliccloudUserResource s = PubliccloudUserResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ - A description associated with the user. -}
-    , _project_id  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (PubliccloudUserResource s) where
-    toObject PubliccloudUserResource{..} = catMaybes
+    toObject PubliccloudUserResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "project_id" <$> TF.attribute _project_id
+        , TF.assign "project_id" <$> TF.attribute _projectId
         ]
+
+instance TF.IsValid (PubliccloudUserResource s) where
+    validator = P.mempty
 
 instance P.HasDescription (PubliccloudUserResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: PubliccloudUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: PubliccloudUserResource s)
+        P.lens (_description :: PubliccloudUserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: PubliccloudUserResource s)
 
 instance P.HasProjectId (PubliccloudUserResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: PubliccloudUserResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: PubliccloudUserResource s)
+        P.lens (_projectId :: PubliccloudUserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: PubliccloudUserResource s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
+    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
-
-instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedOpenstackRc x = TF.compute (TF.refKey x) "openstack_rc"
+instance s ~ s' => P.HasComputedOpenstackRc (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedOpenstackRc x = TF.compute (TF.refKey x) "_computedOpenstackRc"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
-
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
 
 instance s ~ s' => P.HasComputedUsername (TF.Ref s' (PubliccloudUserResource s)) (TF.Attr s P.Text) where
-    computedUsername x = TF.compute (TF.refKey x) "username"
+    computedUsername x = TF.compute (TF.refKey x) "_computedUsername"
 
-publiccloudUserResource :: TF.Resource P.OVH (PubliccloudUserResource s)
-publiccloudUserResource =
-    TF.newResource "ovh_publiccloud_user" $
-        PubliccloudUserResource {
-              _description = TF.Nil
-            , _project_id = TF.Nil
+-- | @ovh_vrack_cloudproject@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_vrack_cloudproject terraform documentation>
+-- for more information.
+data VrackCloudprojectResource s = VrackCloudprojectResource'
+    { _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    , _vrackId   :: TF.Attr s P.Text
+    -- ^ @vrack_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+vrackCloudprojectResource
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
+    -> TF.Resource P.Provider (VrackCloudprojectResource s)
+vrackCloudprojectResource _projectId _vrackId =
+    TF.newResource "ovh_vrack_cloudproject" TF.validator $
+        VrackCloudprojectResource'
+            { _projectId = _projectId
+            , _vrackId = _vrackId
             }
 
-{- | The @ovh_vrack_cloudproject@ OVH resource.
-
-Attach an existing public cloud project to an existing VRack.
--}
-data VrackCloudprojectResource s = VrackCloudprojectResource {
-      _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _vrack_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VrackCloudprojectResource s) where
-    toObject VrackCloudprojectResource{..} = catMaybes
-        [ TF.assign "project_id" <$> TF.attribute _project_id
-        , TF.assign "vrack_id" <$> TF.attribute _vrack_id
+    toObject VrackCloudprojectResource'{..} = P.catMaybes
+        [ TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "vrack_id" <$> TF.attribute _vrackId
         ]
+
+instance TF.IsValid (VrackCloudprojectResource s) where
+    validator = P.mempty
 
 instance P.HasProjectId (VrackCloudprojectResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: VrackCloudprojectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: VrackCloudprojectResource s)
+        P.lens (_projectId :: VrackCloudprojectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: VrackCloudprojectResource s)
 
 instance P.HasVrackId (VrackCloudprojectResource s) (TF.Attr s P.Text) where
     vrackId =
-        lens (_vrack_id :: VrackCloudprojectResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vrack_id = a } :: VrackCloudprojectResource s)
+        P.lens (_vrackId :: VrackCloudprojectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vrackId = a } :: VrackCloudprojectResource s)
 
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (VrackCloudprojectResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
+-- | @ovh_vrack_publiccloud_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/OVH/ovh_vrack_publiccloud_attachment terraform documentation>
+-- for more information.
+data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource'
+    { _projectId :: TF.Attr s P.Text
+    -- ^ @project_id@ - (Required)
+    --
+    , _vrackId   :: TF.Attr s P.Text
+    -- ^ @vrack_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedVrackId (TF.Ref s' (VrackCloudprojectResource s)) (TF.Attr s P.Text) where
-    computedVrackId x = TF.compute (TF.refKey x) "vrack_id"
-
-vrackCloudprojectResource :: TF.Resource P.OVH (VrackCloudprojectResource s)
-vrackCloudprojectResource =
-    TF.newResource "ovh_vrack_cloudproject" $
-        VrackCloudprojectResource {
-              _project_id = TF.Nil
-            , _vrack_id = TF.Nil
+vrackPubliccloudAttachmentResource
+    :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
+    -> TF.Attr s P.Text -- ^ @vrack_id@ - 'P.vrackId'
+    -> TF.Resource P.Provider (VrackPubliccloudAttachmentResource s)
+vrackPubliccloudAttachmentResource _projectId _vrackId =
+    TF.newResource "ovh_vrack_publiccloud_attachment" TF.validator $
+        VrackPubliccloudAttachmentResource'
+            { _projectId = _projectId
+            , _vrackId = _vrackId
             }
 
-{- | The @ovh_vrack_publiccloud_attachment@ OVH resource.
-
-DEPRECATED use @ovh_vrack_cloudproject@ instead. Attach an existing
-PublicCloud project to an existing VRack.
--}
-data VrackPubliccloudAttachmentResource s = VrackPubliccloudAttachmentResource {
-      _project_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the public cloud project. If omitted, the @OVH_PROJECT_ID@ environment variable is used. -}
-    , _vrack_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The id of the vrack. If omitted, the @OVH_VRACK_ID@ environment variable is used. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VrackPubliccloudAttachmentResource s) where
-    toObject VrackPubliccloudAttachmentResource{..} = catMaybes
-        [ TF.assign "project_id" <$> TF.attribute _project_id
-        , TF.assign "vrack_id" <$> TF.attribute _vrack_id
+    toObject VrackPubliccloudAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "vrack_id" <$> TF.attribute _vrackId
         ]
+
+instance TF.IsValid (VrackPubliccloudAttachmentResource s) where
+    validator = P.mempty
 
 instance P.HasProjectId (VrackPubliccloudAttachmentResource s) (TF.Attr s P.Text) where
     projectId =
-        lens (_project_id :: VrackPubliccloudAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _project_id = a } :: VrackPubliccloudAttachmentResource s)
+        P.lens (_projectId :: VrackPubliccloudAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: VrackPubliccloudAttachmentResource s)
 
 instance P.HasVrackId (VrackPubliccloudAttachmentResource s) (TF.Attr s P.Text) where
     vrackId =
-        lens (_vrack_id :: VrackPubliccloudAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vrack_id = a } :: VrackPubliccloudAttachmentResource s)
-
-instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (VrackPubliccloudAttachmentResource s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "project_id"
-
-instance s ~ s' => P.HasComputedVrackId (TF.Ref s' (VrackPubliccloudAttachmentResource s)) (TF.Attr s P.Text) where
-    computedVrackId x = TF.compute (TF.refKey x) "vrack_id"
-
-vrackPubliccloudAttachmentResource :: TF.Resource P.OVH (VrackPubliccloudAttachmentResource s)
-vrackPubliccloudAttachmentResource =
-    TF.newResource "ovh_vrack_publiccloud_attachment" $
-        VrackPubliccloudAttachmentResource {
-              _project_id = TF.Nil
-            , _vrack_id = TF.Nil
-            }
+        P.lens (_vrackId :: VrackPubliccloudAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vrackId = a } :: VrackPubliccloudAttachmentResource s)

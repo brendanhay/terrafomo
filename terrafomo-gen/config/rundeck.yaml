@@ -1,4 +1,2 @@
-name: Rundeck
-package: terrafomo-rundeck
-datatype: true
-original: rundeck
+package-name: terrafomo-rundeck
+provider-name: Rundeck

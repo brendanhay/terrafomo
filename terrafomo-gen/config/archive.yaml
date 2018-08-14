@@ -1,5 +1,3 @@
-name: Archive
-datatype: false
-original: archive
-package: terrafomo-builtins
+package-name: terrafomo-builtins
 package-yaml: false
+provider-name: Archive

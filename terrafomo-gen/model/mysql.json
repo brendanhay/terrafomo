@@ -1,0 +1,238 @@
+{
+  "name": "mysql",
+  "schemas": [
+    {
+      "name": "endpoint",
+      "type": "TypeString",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "password",
+      "type": "TypeString",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "username",
+      "type": "TypeString",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    }
+  ],
+  "resources": [
+    {
+      "name": "mysql_database",
+      "schemas": [
+        {
+          "name": "default_character_set",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "utf8"
+        },
+        {
+          "name": "default_collation",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "utf8_general_ci"
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "mysql_grant",
+      "schemas": [
+        {
+          "name": "database",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "grant",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "host",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "localhost"
+        },
+        {
+          "name": "privileges",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "privileges",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "user",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "mysql_user",
+      "schemas": [
+        {
+          "name": "auth_plugin",
+          "type": "TypeString",
+          "conflictsWith": [
+            "plaintext_password",
+            "password"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "host",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "localhost"
+        },
+        {
+          "name": "password",
+          "type": "TypeString",
+          "deprecated": "Please use plaintext_password instead",
+          "conflictsWith": [
+            "plaintext_password"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": true,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "plaintext_password",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": true,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "user",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": []
+}

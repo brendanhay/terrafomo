@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,986 +17,826 @@
 --
 module Terrafomo.VCloudDirector.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** vcd_dnat
       DnatResource (..)
     , dnatResource
 
+    -- ** vcd_edgegateway_vpn
     , EdgegatewayVpnResource (..)
     , edgegatewayVpnResource
 
+    -- ** vcd_firewall_rules
     , FirewallRulesResource (..)
     , firewallRulesResource
 
+    -- ** vcd_network
     , NetworkResource (..)
     , networkResource
 
+    -- ** vcd_snat
     , SnatResource (..)
     , snatResource
 
+    -- ** vcd_vapp
     , VappResource (..)
     , vappResource
 
+    -- ** vcd_vapp_vm
     , VappVmResource (..)
     , vappVmResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasCatalogName (..)
-    , P.HasCpus (..)
-    , P.HasDefaultAction (..)
-    , P.HasDescription (..)
-    , P.HasDhcpPool (..)
-    , P.HasDns1 (..)
-    , P.HasDns2 (..)
-    , P.HasDnsSuffix (..)
-    , P.HasEdgeGateway (..)
-    , P.HasEncryptionProtocol (..)
-    , P.HasExternalIp (..)
-    , P.HasGateway (..)
-    , P.HasInitscript (..)
-    , P.HasInternalIp (..)
-    , P.HasIp (..)
-    , P.HasLocalId (..)
-    , P.HasLocalIpAddress (..)
-    , P.HasLocalSubnets (..)
-    , P.HasMemory (..)
-    , P.HasMetadata (..)
-    , P.HasMtu (..)
-    , P.HasName (..)
-    , P.HasNetmask (..)
-    , P.HasNetworkName (..)
-    , P.HasOvf (..)
-    , P.HasPeerId (..)
-    , P.HasPeerIpAddress (..)
-    , P.HasPeerSubnets (..)
-    , P.HasPort (..)
-    , P.HasPowerOn (..)
-    , P.HasRule (..)
-    , P.HasShared (..)
-    , P.HasSharedSecret (..)
-    , P.HasStaticIpPool (..)
-    , P.HasTemplateName (..)
-    , P.HasVappName (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedCatalogName (..)
-    , P.HasComputedCpus (..)
-    , P.HasComputedDefaultAction (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDhcpPool (..)
-    , P.HasComputedDns1 (..)
-    , P.HasComputedDns2 (..)
-    , P.HasComputedDnsSuffix (..)
-    , P.HasComputedEdgeGateway (..)
-    , P.HasComputedEncryptionProtocol (..)
-    , P.HasComputedExternalIp (..)
-    , P.HasComputedGateway (..)
-    , P.HasComputedInitscript (..)
-    , P.HasComputedInternalIp (..)
-    , P.HasComputedIp (..)
-    , P.HasComputedLocalId (..)
-    , P.HasComputedLocalIpAddress (..)
-    , P.HasComputedLocalSubnets (..)
-    , P.HasComputedMemory (..)
-    , P.HasComputedMetadata (..)
-    , P.HasComputedMtu (..)
-    , P.HasComputedName (..)
-    , P.HasComputedNetmask (..)
-    , P.HasComputedNetworkName (..)
-    , P.HasComputedOvf (..)
-    , P.HasComputedPeerId (..)
-    , P.HasComputedPeerIpAddress (..)
-    , P.HasComputedPeerSubnets (..)
-    , P.HasComputedPort (..)
-    , P.HasComputedPowerOn (..)
-    , P.HasComputedRule (..)
-    , P.HasComputedShared (..)
-    , P.HasComputedSharedSecret (..)
-    , P.HasComputedStaticIpPool (..)
-    , P.HasComputedTemplateName (..)
-    , P.HasComputedVappName (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.VCloudDirector.Settings
 
-import Terrafomo.VCloudDirector.Types as P
-
+import qualified Data.Hashable                     as P
+import qualified Data.HashMap.Strict               as P
+import qualified Data.HashMap.Strict               as Map
+import qualified Data.List.NonEmpty                as P
+import qualified Data.Maybe                        as P
+import qualified Data.Monoid                       as P
 import qualified Data.Text                         as P
-import qualified Data.Word                         as P
-import qualified GHC.Base                          as P
-import qualified Numeric.Natural                   as P
+import qualified GHC.Generics                      as P
+import qualified Lens.Micro                        as P
+import qualified Prelude                           as P
+import qualified Terrafomo.Attribute               as TF
+import qualified Terrafomo.HCL                     as TF
+import qualified Terrafomo.Name                    as TF
+import qualified Terrafomo.Schema                  as TF
+import qualified Terrafomo.Validator               as TF
 import qualified Terrafomo.VCloudDirector.Lens     as P
 import qualified Terrafomo.VCloudDirector.Provider as P
+import qualified Terrafomo.VCloudDirector.Types    as P
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @vcd_dnat@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_dnat terraform documentation>
+-- for more information.
+data DnatResource s = DnatResource'
+    { _edgeGateway    :: TF.Attr s P.Text
+    -- ^ @edge_gateway@ - (Required)
+    --
+    , _externalIp     :: TF.Attr s P.Text
+    -- ^ @external_ip@ - (Required)
+    --
+    , _internalIp     :: TF.Attr s P.Text
+    -- ^ @internal_ip@ - (Required)
+    --
+    , _port           :: TF.Attr s P.Integer
+    -- ^ @port@ - (Required)
+    --
+    , _translatedPort :: TF.Attr s P.Integer
+    -- ^ @translated_port@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @vcd_dnat@ VCloudDirector resource.
-
-Provides a vCloud Director DNAT resource. This can be used to create,
-modify, and delete destination NATs to map an external IP/port to an
-internal IP/port.
--}
-data DnatResource s = DnatResource {
-      _edge_gateway :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the edge gateway on which to apply the DNAT -}
-    , _external_ip  :: !(TF.Attr s P.Text)
-    {- ^ (Required) One of the external IPs available on your Edge Gateway -}
-    , _internal_ip  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The IP of the VM to map to -}
-    , _port         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The port number to map -}
-    } deriving (Show, Eq)
+dnatResource
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
+    -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
+    -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
+    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> TF.Resource P.Provider (DnatResource s)
+dnatResource _edgeGateway _externalIp _internalIp _port =
+    TF.newResource "vcd_dnat" TF.validator $
+        DnatResource'
+            { _edgeGateway = _edgeGateway
+            , _externalIp = _externalIp
+            , _internalIp = _internalIp
+            , _port = _port
+            , _translatedPort = TF.Nil
+            }
 
 instance TF.IsObject (DnatResource s) where
-    toObject DnatResource{..} = catMaybes
-        [ TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
-        , TF.assign "external_ip" <$> TF.attribute _external_ip
-        , TF.assign "internal_ip" <$> TF.attribute _internal_ip
+    toObject DnatResource'{..} = P.catMaybes
+        [ TF.assign "edge_gateway" <$> TF.attribute _edgeGateway
+        , TF.assign "external_ip" <$> TF.attribute _externalIp
+        , TF.assign "internal_ip" <$> TF.attribute _internalIp
         , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "translated_port" <$> TF.attribute _translatedPort
         ]
+
+instance TF.IsValid (DnatResource s) where
+    validator = P.mempty
 
 instance P.HasEdgeGateway (DnatResource s) (TF.Attr s P.Text) where
     edgeGateway =
-        lens (_edge_gateway :: DnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _edge_gateway = a } :: DnatResource s)
+        P.lens (_edgeGateway :: DnatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _edgeGateway = a } :: DnatResource s)
 
 instance P.HasExternalIp (DnatResource s) (TF.Attr s P.Text) where
     externalIp =
-        lens (_external_ip :: DnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _external_ip = a } :: DnatResource s)
+        P.lens (_externalIp :: DnatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _externalIp = a } :: DnatResource s)
 
 instance P.HasInternalIp (DnatResource s) (TF.Attr s P.Text) where
     internalIp =
-        lens (_internal_ip :: DnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _internal_ip = a } :: DnatResource s)
+        P.lens (_internalIp :: DnatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _internalIp = a } :: DnatResource s)
 
-instance P.HasPort (DnatResource s) (TF.Attr s P.Text) where
+instance P.HasPort (DnatResource s) (TF.Attr s P.Integer) where
     port =
-        lens (_port :: DnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _port = a } :: DnatResource s)
+        P.lens (_port :: DnatResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: DnatResource s)
 
-instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (DnatResource s)) (TF.Attr s P.Text) where
-    computedEdgeGateway =
-        (_edge_gateway :: DnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance P.HasTranslatedPort (DnatResource s) (TF.Attr s P.Integer) where
+    translatedPort =
+        P.lens (_translatedPort :: DnatResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _translatedPort = a } :: DnatResource s)
 
-instance s ~ s' => P.HasComputedExternalIp (TF.Ref s' (DnatResource s)) (TF.Attr s P.Text) where
-    computedExternalIp =
-        (_external_ip :: DnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vcd_edgegateway_vpn@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_edgegateway_vpn terraform documentation>
+-- for more information.
+data EdgegatewayVpnResource s = EdgegatewayVpnResource'
+    { _description        :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _edgeGateway        :: TF.Attr s P.Text
+    -- ^ @edge_gateway@ - (Required)
+    --
+    , _encryptionProtocol :: TF.Attr s P.Text
+    -- ^ @encryption_protocol@ - (Required)
+    --
+    , _localId            :: TF.Attr s P.Text
+    -- ^ @local_id@ - (Required)
+    --
+    , _localIpAddress     :: TF.Attr s P.Text
+    -- ^ @local_ip_address@ - (Required)
+    --
+    , _localSubnets       :: TF.Attr s [TF.Attr s (LocalSubnets s)]
+    -- ^ @local_subnets@ - (Optional)
+    --
+    , _mtu                :: TF.Attr s P.Integer
+    -- ^ @mtu@ - (Required)
+    --
+    , _name               :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _peerId             :: TF.Attr s P.Text
+    -- ^ @peer_id@ - (Required)
+    --
+    , _peerIpAddress      :: TF.Attr s P.Text
+    -- ^ @peer_ip_address@ - (Required)
+    --
+    , _peerSubnets        :: TF.Attr s [TF.Attr s (PeerSubnets s)]
+    -- ^ @peer_subnets@ - (Optional)
+    --
+    , _sharedSecret       :: TF.Attr s P.Text
+    -- ^ @shared_secret@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedInternalIp (TF.Ref s' (DnatResource s)) (TF.Attr s P.Text) where
-    computedInternalIp =
-        (_internal_ip :: DnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (DnatResource s)) (TF.Attr s P.Text) where
-    computedPort =
-        (_port :: DnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-dnatResource :: TF.Resource P.VCloudDirector (DnatResource s)
-dnatResource =
-    TF.newResource "vcd_dnat" $
-        DnatResource {
-              _edge_gateway = TF.Nil
-            , _external_ip = TF.Nil
-            , _internal_ip = TF.Nil
-            , _port = TF.Nil
+edgegatewayVpnResource
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
+    -> TF.Attr s P.Text -- ^ @encryption_protocol@ - 'P.encryptionProtocol'
+    -> TF.Attr s P.Text -- ^ @local_id@ - 'P.localId'
+    -> TF.Attr s P.Text -- ^ @local_ip_address@ - 'P.localIpAddress'
+    -> TF.Attr s P.Integer -- ^ @mtu@ - 'P.mtu'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
+    -> TF.Attr s P.Text -- ^ @peer_ip_address@ - 'P.peerIpAddress'
+    -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
+    -> TF.Resource P.Provider (EdgegatewayVpnResource s)
+edgegatewayVpnResource _edgeGateway _encryptionProtocol _localId _localIpAddress _mtu _name _peerId _peerIpAddress _sharedSecret =
+    TF.newResource "vcd_edgegateway_vpn" TF.validator $
+        EdgegatewayVpnResource'
+            { _description = TF.Nil
+            , _edgeGateway = _edgeGateway
+            , _encryptionProtocol = _encryptionProtocol
+            , _localId = _localId
+            , _localIpAddress = _localIpAddress
+            , _localSubnets = TF.Nil
+            , _mtu = _mtu
+            , _name = _name
+            , _peerId = _peerId
+            , _peerIpAddress = _peerIpAddress
+            , _peerSubnets = TF.Nil
+            , _sharedSecret = _sharedSecret
             }
 
-{- | The @vcd_edgegateway_vpn@ VCloudDirector resource.
-
-Provides a vCloud Director IPsec VPN. This can be used to create, modify,
-and delete VPN settings and rules.
--}
-data EdgegatewayVpnResource s = EdgegatewayVpnResource {
-      _description         :: !(TF.Attr s P.Text)
-    {- ^ (Required) A description for the VPN -}
-    , _edge_gateway        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the edge gateway on which to apply the Firewall Rules -}
-    , _encryption_protocol :: !(TF.Attr s P.Text)
-    {- ^ (Required) - E.g. @AES256@ -}
-    , _local_id            :: !(TF.Attr s P.Text)
-    {- ^ (Required) - Local ID -}
-    , _local_ip_address    :: !(TF.Attr s P.Text)
-    {- ^ (Required) - Local IP Address -}
-    , _local_subnets       :: !(TF.Attr s P.Text)
-    {- ^ (Required) - List of Local Subnets see <#localsubnets> below for details. -}
-    , _mtu                 :: !(TF.Attr s P.Text)
-    {- ^ (Required) - The MTU setting -}
-    , _name                :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VPN -}
-    , _peer_id             :: !(TF.Attr s P.Text)
-    {- ^ (Required) - Peer ID -}
-    , _peer_ip_address     :: !(TF.Attr s P.Text)
-    {- ^ (Required) - Peer IP Address -}
-    , _peer_subnets        :: !(TF.Attr s P.Text)
-    {- ^ (Required) - List of Peer Subnets see <#peersubnets> below for details. -}
-    , _shared_secret       :: !(TF.Attr s P.Text)
-    {- ^ (Required) - Shared Secret -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (EdgegatewayVpnResource s) where
-    toObject EdgegatewayVpnResource{..} = catMaybes
+    toObject EdgegatewayVpnResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
-        , TF.assign "encryption_protocol" <$> TF.attribute _encryption_protocol
-        , TF.assign "local_id" <$> TF.attribute _local_id
-        , TF.assign "local_ip_address" <$> TF.attribute _local_ip_address
-        , TF.assign "local_subnets" <$> TF.attribute _local_subnets
+        , TF.assign "edge_gateway" <$> TF.attribute _edgeGateway
+        , TF.assign "encryption_protocol" <$> TF.attribute _encryptionProtocol
+        , TF.assign "local_id" <$> TF.attribute _localId
+        , TF.assign "local_ip_address" <$> TF.attribute _localIpAddress
+        , TF.assign "local_subnets" <$> TF.attribute _localSubnets
         , TF.assign "mtu" <$> TF.attribute _mtu
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "peer_id" <$> TF.attribute _peer_id
-        , TF.assign "peer_ip_address" <$> TF.attribute _peer_ip_address
-        , TF.assign "peer_subnets" <$> TF.attribute _peer_subnets
-        , TF.assign "shared_secret" <$> TF.attribute _shared_secret
+        , TF.assign "peer_id" <$> TF.attribute _peerId
+        , TF.assign "peer_ip_address" <$> TF.attribute _peerIpAddress
+        , TF.assign "peer_subnets" <$> TF.attribute _peerSubnets
+        , TF.assign "shared_secret" <$> TF.attribute _sharedSecret
         ]
+
+instance TF.IsValid (EdgegatewayVpnResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_localSubnets"
+                  (_localSubnets
+                      :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (LocalSubnets s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_peerSubnets"
+                  (_peerSubnets
+                      :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (PeerSubnets s)])
+                  TF.validator
 
 instance P.HasDescription (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: EdgegatewayVpnResource s)
+        P.lens (_description :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: EdgegatewayVpnResource s)
 
 instance P.HasEdgeGateway (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     edgeGateway =
-        lens (_edge_gateway :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _edge_gateway = a } :: EdgegatewayVpnResource s)
+        P.lens (_edgeGateway :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _edgeGateway = a } :: EdgegatewayVpnResource s)
 
 instance P.HasEncryptionProtocol (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     encryptionProtocol =
-        lens (_encryption_protocol :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _encryption_protocol = a } :: EdgegatewayVpnResource s)
+        P.lens (_encryptionProtocol :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _encryptionProtocol = a } :: EdgegatewayVpnResource s)
 
 instance P.HasLocalId (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     localId =
-        lens (_local_id :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _local_id = a } :: EdgegatewayVpnResource s)
+        P.lens (_localId :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _localId = a } :: EdgegatewayVpnResource s)
 
 instance P.HasLocalIpAddress (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     localIpAddress =
-        lens (_local_ip_address :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _local_ip_address = a } :: EdgegatewayVpnResource s)
+        P.lens (_localIpAddress :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _localIpAddress = a } :: EdgegatewayVpnResource s)
 
-instance P.HasLocalSubnets (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
+instance P.HasLocalSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (LocalSubnets s)]) where
     localSubnets =
-        lens (_local_subnets :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _local_subnets = a } :: EdgegatewayVpnResource s)
+        P.lens (_localSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (LocalSubnets s)])
+               (\s a -> s { _localSubnets = a } :: EdgegatewayVpnResource s)
 
-instance P.HasMtu (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
+instance P.HasMtu (EdgegatewayVpnResource s) (TF.Attr s P.Integer) where
     mtu =
-        lens (_mtu :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _mtu = a } :: EdgegatewayVpnResource s)
+        P.lens (_mtu :: EdgegatewayVpnResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _mtu = a } :: EdgegatewayVpnResource s)
 
 instance P.HasName (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: EdgegatewayVpnResource s)
+        P.lens (_name :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: EdgegatewayVpnResource s)
 
 instance P.HasPeerId (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     peerId =
-        lens (_peer_id :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _peer_id = a } :: EdgegatewayVpnResource s)
+        P.lens (_peerId :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _peerId = a } :: EdgegatewayVpnResource s)
 
 instance P.HasPeerIpAddress (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     peerIpAddress =
-        lens (_peer_ip_address :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _peer_ip_address = a } :: EdgegatewayVpnResource s)
+        P.lens (_peerIpAddress :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _peerIpAddress = a } :: EdgegatewayVpnResource s)
 
-instance P.HasPeerSubnets (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
+instance P.HasPeerSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (PeerSubnets s)]) where
     peerSubnets =
-        lens (_peer_subnets :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _peer_subnets = a } :: EdgegatewayVpnResource s)
+        P.lens (_peerSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (PeerSubnets s)])
+               (\s a -> s { _peerSubnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasSharedSecret (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
     sharedSecret =
-        lens (_shared_secret :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-             (\s a -> s { _shared_secret = a } :: EdgegatewayVpnResource s)
+        P.lens (_sharedSecret :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sharedSecret = a } :: EdgegatewayVpnResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vcd_firewall_rules@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_firewall_rules terraform documentation>
+-- for more information.
+data FirewallRulesResource s = FirewallRulesResource'
+    { _defaultAction :: TF.Attr s P.Text
+    -- ^ @default_action@ - (Required)
+    --
+    , _edgeGateway   :: TF.Attr s P.Text
+    -- ^ @edge_gateway@ - (Required)
+    --
+    , _rule          :: TF.Attr s [TF.Attr s (Rule s)]
+    -- ^ @rule@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedEdgeGateway =
-        (_edge_gateway :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEncryptionProtocol (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedEncryptionProtocol =
-        (_encryption_protocol :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLocalId (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedLocalId =
-        (_local_id :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLocalIpAddress (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedLocalIpAddress =
-        (_local_ip_address :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedLocalSubnets (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedLocalSubnets =
-        (_local_subnets :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMtu (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedMtu =
-        (_mtu :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPeerId (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedPeerId =
-        (_peer_id :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPeerIpAddress (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedPeerIpAddress =
-        (_peer_ip_address :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPeerSubnets (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedPeerSubnets =
-        (_peer_subnets :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSharedSecret (TF.Ref s' (EdgegatewayVpnResource s)) (TF.Attr s P.Text) where
-    computedSharedSecret =
-        (_shared_secret :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-edgegatewayVpnResource :: TF.Resource P.VCloudDirector (EdgegatewayVpnResource s)
-edgegatewayVpnResource =
-    TF.newResource "vcd_edgegateway_vpn" $
-        EdgegatewayVpnResource {
-              _description = TF.Nil
-            , _edge_gateway = TF.Nil
-            , _encryption_protocol = TF.Nil
-            , _local_id = TF.Nil
-            , _local_ip_address = TF.Nil
-            , _local_subnets = TF.Nil
-            , _mtu = TF.Nil
-            , _name = TF.Nil
-            , _peer_id = TF.Nil
-            , _peer_ip_address = TF.Nil
-            , _peer_subnets = TF.Nil
-            , _shared_secret = TF.Nil
-            }
-
-{- | The @vcd_firewall_rules@ VCloudDirector resource.
-
-Provides a vCloud Director Firewall resource. This can be used to create,
-modify, and delete firewall settings and rules.
--}
-data FirewallRulesResource s = FirewallRulesResource {
-      _default_action :: !(TF.Attr s P.Text)
-    {- ^ (Required) Either "allow" or "deny". Specifies what to do should none of the rules match -}
-    , _edge_gateway   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the edge gateway on which to apply the Firewall Rules -}
-    , _rule           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Configures a firewall rule; see <#rules> below for details. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (FirewallRulesResource s) where
-    toObject FirewallRulesResource{..} = catMaybes
-        [ TF.assign "default_action" <$> TF.attribute _default_action
-        , TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
-        , TF.assign "rule" <$> TF.attribute _rule
-        ]
-
-instance P.HasDefaultAction (FirewallRulesResource s) (TF.Attr s P.Text) where
-    defaultAction =
-        lens (_default_action :: FirewallRulesResource s -> TF.Attr s P.Text)
-             (\s a -> s { _default_action = a } :: FirewallRulesResource s)
-
-instance P.HasEdgeGateway (FirewallRulesResource s) (TF.Attr s P.Text) where
-    edgeGateway =
-        lens (_edge_gateway :: FirewallRulesResource s -> TF.Attr s P.Text)
-             (\s a -> s { _edge_gateway = a } :: FirewallRulesResource s)
-
-instance P.HasRule (FirewallRulesResource s) (TF.Attr s P.Text) where
-    rule =
-        lens (_rule :: FirewallRulesResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rule = a } :: FirewallRulesResource s)
-
-instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (FirewallRulesResource s)) (TF.Attr s P.Text) where
-    computedDefaultAction =
-        (_default_action :: FirewallRulesResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (FirewallRulesResource s)) (TF.Attr s P.Text) where
-    computedEdgeGateway =
-        (_edge_gateway :: FirewallRulesResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRule (TF.Ref s' (FirewallRulesResource s)) (TF.Attr s P.Text) where
-    computedRule =
-        (_rule :: FirewallRulesResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-firewallRulesResource :: TF.Resource P.VCloudDirector (FirewallRulesResource s)
-firewallRulesResource =
-    TF.newResource "vcd_firewall_rules" $
-        FirewallRulesResource {
-              _default_action = TF.Nil
-            , _edge_gateway = TF.Nil
+firewallRulesResource
+    :: TF.Attr s P.Text -- ^ @default_action@ - 'P.defaultAction'
+    -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
+    -> TF.Resource P.Provider (FirewallRulesResource s)
+firewallRulesResource _defaultAction _edgeGateway =
+    TF.newResource "vcd_firewall_rules" TF.validator $
+        FirewallRulesResource'
+            { _defaultAction = _defaultAction
+            , _edgeGateway = _edgeGateway
             , _rule = TF.Nil
             }
 
-{- | The @vcd_network@ VCloudDirector resource.
+instance TF.IsObject (FirewallRulesResource s) where
+    toObject FirewallRulesResource'{..} = P.catMaybes
+        [ TF.assign "default_action" <$> TF.attribute _defaultAction
+        , TF.assign "edge_gateway" <$> TF.attribute _edgeGateway
+        , TF.assign "rule" <$> TF.attribute _rule
+        ]
 
-Provides a vCloud Director VDC Network. This can be used to create, modify,
-and delete internal networks for vApps to connect.
--}
-data NetworkResource s = NetworkResource {
-      _dhcp_pool      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A range of IPs to issue to virtual machines that don't have a static IP; see <#ip-pools> below for details. -}
-    , _dns1           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) First DNS server to use. Defaults to @8.8.8.8@ -}
-    , _dns2           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Second DNS server to use. Defaults to @8.8.4.4@ -}
-    , _dns_suffix     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A FQDN for the virtual machines on this network -}
-    , _edge_gateway   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the edge gateway -}
-    , _gateway        :: !(TF.Attr s P.Text)
-    {- ^ (Required) The gateway for this network -}
-    , _name           :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the network -}
-    , _netmask        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The netmask for the new network. Defaults to @255.255.255.0@ -}
-    , _shared         :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Defines if this network is shared between multiple vDCs in the vOrg.  Defaults to @false@ . -}
-    , _static_ip_pool :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A range of IPs permitted to be used as static IPs for virtual machines; see <#ip-pools> below for details. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (FirewallRulesResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rule"
+                  (_rule
+                      :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (Rule s)])
+                  TF.validator
+
+instance P.HasDefaultAction (FirewallRulesResource s) (TF.Attr s P.Text) where
+    defaultAction =
+        P.lens (_defaultAction :: FirewallRulesResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultAction = a } :: FirewallRulesResource s)
+
+instance P.HasEdgeGateway (FirewallRulesResource s) (TF.Attr s P.Text) where
+    edgeGateway =
+        P.lens (_edgeGateway :: FirewallRulesResource s -> TF.Attr s P.Text)
+               (\s a -> s { _edgeGateway = a } :: FirewallRulesResource s)
+
+instance P.HasRule (FirewallRulesResource s) (TF.Attr s [TF.Attr s (Rule s)]) where
+    rule =
+        P.lens (_rule :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (Rule s)])
+               (\s a -> s { _rule = a } :: FirewallRulesResource s)
+
+-- | @vcd_network@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_network terraform documentation>
+-- for more information.
+data NetworkResource s = NetworkResource'
+    { _dhcpPool     :: TF.Attr s [TF.Attr s (DhcpPool s)]
+    -- ^ @dhcp_pool@ - (Optional)
+    --
+    , _dns1         :: TF.Attr s P.Text
+    -- ^ @dns1@ - (Optional)
+    --
+    , _dns2         :: TF.Attr s P.Text
+    -- ^ @dns2@ - (Optional)
+    --
+    , _dnsSuffix    :: TF.Attr s P.Text
+    -- ^ @dns_suffix@ - (Optional)
+    --
+    , _edgeGateway  :: TF.Attr s P.Text
+    -- ^ @edge_gateway@ - (Required)
+    --
+    , _fenceMode    :: TF.Attr s P.Text
+    -- ^ @fence_mode@ - (Optional)
+    --
+    , _gateway      :: TF.Attr s P.Text
+    -- ^ @gateway@ - (Required)
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _netmask      :: TF.Attr s P.Text
+    -- ^ @netmask@ - (Optional)
+    --
+    , _shared       :: TF.Attr s P.Bool
+    -- ^ @shared@ - (Optional)
+    --
+    , _staticIpPool :: TF.Attr s [TF.Attr s (StaticIpPool s)]
+    -- ^ @static_ip_pool@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+networkResource
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
+    -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (NetworkResource s)
+networkResource _edgeGateway _gateway _name =
+    TF.newResource "vcd_network" TF.validator $
+        NetworkResource'
+            { _dhcpPool = TF.Nil
+            , _dns1 = TF.value "8.8.8.8"
+            , _dns2 = TF.value "8.8.4.4"
+            , _dnsSuffix = TF.Nil
+            , _edgeGateway = _edgeGateway
+            , _fenceMode = TF.value "natRouted"
+            , _gateway = _gateway
+            , _name = _name
+            , _netmask = TF.value "255.255.255.0"
+            , _shared = TF.value P.False
+            , _staticIpPool = TF.Nil
+            }
 
 instance TF.IsObject (NetworkResource s) where
-    toObject NetworkResource{..} = catMaybes
-        [ TF.assign "dhcp_pool" <$> TF.attribute _dhcp_pool
+    toObject NetworkResource'{..} = P.catMaybes
+        [ TF.assign "dhcp_pool" <$> TF.attribute _dhcpPool
         , TF.assign "dns1" <$> TF.attribute _dns1
         , TF.assign "dns2" <$> TF.attribute _dns2
-        , TF.assign "dns_suffix" <$> TF.attribute _dns_suffix
-        , TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
+        , TF.assign "dns_suffix" <$> TF.attribute _dnsSuffix
+        , TF.assign "edge_gateway" <$> TF.attribute _edgeGateway
+        , TF.assign "fence_mode" <$> TF.attribute _fenceMode
         , TF.assign "gateway" <$> TF.attribute _gateway
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "netmask" <$> TF.attribute _netmask
         , TF.assign "shared" <$> TF.attribute _shared
-        , TF.assign "static_ip_pool" <$> TF.attribute _static_ip_pool
+        , TF.assign "static_ip_pool" <$> TF.attribute _staticIpPool
         ]
 
-instance P.HasDhcpPool (NetworkResource s) (TF.Attr s P.Text) where
+instance TF.IsValid (NetworkResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_dhcpPool"
+                  (_dhcpPool
+                      :: NetworkResource s -> TF.Attr s [TF.Attr s (DhcpPool s)])
+                  TF.validator
+           P.<> TF.settingsValidator "_staticIpPool"
+                  (_staticIpPool
+                      :: NetworkResource s -> TF.Attr s [TF.Attr s (StaticIpPool s)])
+                  TF.validator
+
+instance P.HasDhcpPool (NetworkResource s) (TF.Attr s [TF.Attr s (DhcpPool s)]) where
     dhcpPool =
-        lens (_dhcp_pool :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dhcp_pool = a } :: NetworkResource s)
+        P.lens (_dhcpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (DhcpPool s)])
+               (\s a -> s { _dhcpPool = a } :: NetworkResource s)
 
 instance P.HasDns1 (NetworkResource s) (TF.Attr s P.Text) where
     dns1 =
-        lens (_dns1 :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dns1 = a } :: NetworkResource s)
+        P.lens (_dns1 :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dns1 = a } :: NetworkResource s)
 
 instance P.HasDns2 (NetworkResource s) (TF.Attr s P.Text) where
     dns2 =
-        lens (_dns2 :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dns2 = a } :: NetworkResource s)
+        P.lens (_dns2 :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dns2 = a } :: NetworkResource s)
 
 instance P.HasDnsSuffix (NetworkResource s) (TF.Attr s P.Text) where
     dnsSuffix =
-        lens (_dns_suffix :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _dns_suffix = a } :: NetworkResource s)
+        P.lens (_dnsSuffix :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dnsSuffix = a } :: NetworkResource s)
 
 instance P.HasEdgeGateway (NetworkResource s) (TF.Attr s P.Text) where
     edgeGateway =
-        lens (_edge_gateway :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _edge_gateway = a } :: NetworkResource s)
+        P.lens (_edgeGateway :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _edgeGateway = a } :: NetworkResource s)
+
+instance P.HasFenceMode (NetworkResource s) (TF.Attr s P.Text) where
+    fenceMode =
+        P.lens (_fenceMode :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _fenceMode = a } :: NetworkResource s)
 
 instance P.HasGateway (NetworkResource s) (TF.Attr s P.Text) where
     gateway =
-        lens (_gateway :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _gateway = a } :: NetworkResource s)
+        P.lens (_gateway :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _gateway = a } :: NetworkResource s)
 
 instance P.HasName (NetworkResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: NetworkResource s)
+        P.lens (_name :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NetworkResource s)
 
 instance P.HasNetmask (NetworkResource s) (TF.Attr s P.Text) where
     netmask =
-        lens (_netmask :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _netmask = a } :: NetworkResource s)
+        P.lens (_netmask :: NetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _netmask = a } :: NetworkResource s)
 
-instance P.HasShared (NetworkResource s) (TF.Attr s P.Text) where
+instance P.HasShared (NetworkResource s) (TF.Attr s P.Bool) where
     shared =
-        lens (_shared :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _shared = a } :: NetworkResource s)
+        P.lens (_shared :: NetworkResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _shared = a } :: NetworkResource s)
 
-instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s P.Text) where
+instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (StaticIpPool s)]) where
     staticIpPool =
-        lens (_static_ip_pool :: NetworkResource s -> TF.Attr s P.Text)
-             (\s a -> s { _static_ip_pool = a } :: NetworkResource s)
+        P.lens (_staticIpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (StaticIpPool s)])
+               (\s a -> s { _staticIpPool = a } :: NetworkResource s)
 
-instance s ~ s' => P.HasComputedDhcpPool (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedDhcpPool =
-        (_dhcp_pool :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedHref (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
-instance s ~ s' => P.HasComputedDns1 (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedDns1 =
-        (_dns1 :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vcd_snat@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_snat terraform documentation>
+-- for more information.
+data SnatResource s = SnatResource'
+    { _edgeGateway :: TF.Attr s P.Text
+    -- ^ @edge_gateway@ - (Required)
+    --
+    , _externalIp  :: TF.Attr s P.Text
+    -- ^ @external_ip@ - (Required)
+    --
+    , _internalIp  :: TF.Attr s P.Text
+    -- ^ @internal_ip@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDns2 (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedDns2 =
-        (_dns2 :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDnsSuffix (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedDnsSuffix =
-        (_dns_suffix :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedEdgeGateway =
-        (_edge_gateway :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedGateway =
-        (_gateway :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedNetmask =
-        (_netmask :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedShared (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedShared =
-        (_shared :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStaticIpPool (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedStaticIpPool =
-        (_static_ip_pool :: NetworkResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-networkResource :: TF.Resource P.VCloudDirector (NetworkResource s)
-networkResource =
-    TF.newResource "vcd_network" $
-        NetworkResource {
-              _dhcp_pool = TF.Nil
-            , _dns1 = TF.Nil
-            , _dns2 = TF.Nil
-            , _dns_suffix = TF.Nil
-            , _edge_gateway = TF.Nil
-            , _gateway = TF.Nil
-            , _name = TF.Nil
-            , _netmask = TF.Nil
-            , _shared = TF.Nil
-            , _static_ip_pool = TF.Nil
+snatResource
+    :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
+    -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
+    -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
+    -> TF.Resource P.Provider (SnatResource s)
+snatResource _edgeGateway _externalIp _internalIp =
+    TF.newResource "vcd_snat" TF.validator $
+        SnatResource'
+            { _edgeGateway = _edgeGateway
+            , _externalIp = _externalIp
+            , _internalIp = _internalIp
             }
 
-{- | The @vcd_snat@ VCloudDirector resource.
-
-Provides a vCloud Director SNAT resource. This can be used to create,
-modify, and delete source NATs to allow vApps to send external traffic.
--}
-data SnatResource s = SnatResource {
-      _edge_gateway :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the edge gateway on which to apply the SNAT -}
-    , _external_ip  :: !(TF.Attr s P.Text)
-    {- ^ (Required) One of the external IPs available on your Edge Gateway -}
-    , _internal_ip  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The IP or IP Range of the VM(s) to map from -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (SnatResource s) where
-    toObject SnatResource{..} = catMaybes
-        [ TF.assign "edge_gateway" <$> TF.attribute _edge_gateway
-        , TF.assign "external_ip" <$> TF.attribute _external_ip
-        , TF.assign "internal_ip" <$> TF.attribute _internal_ip
+    toObject SnatResource'{..} = P.catMaybes
+        [ TF.assign "edge_gateway" <$> TF.attribute _edgeGateway
+        , TF.assign "external_ip" <$> TF.attribute _externalIp
+        , TF.assign "internal_ip" <$> TF.attribute _internalIp
         ]
+
+instance TF.IsValid (SnatResource s) where
+    validator = P.mempty
 
 instance P.HasEdgeGateway (SnatResource s) (TF.Attr s P.Text) where
     edgeGateway =
-        lens (_edge_gateway :: SnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _edge_gateway = a } :: SnatResource s)
+        P.lens (_edgeGateway :: SnatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _edgeGateway = a } :: SnatResource s)
 
 instance P.HasExternalIp (SnatResource s) (TF.Attr s P.Text) where
     externalIp =
-        lens (_external_ip :: SnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _external_ip = a } :: SnatResource s)
+        P.lens (_externalIp :: SnatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _externalIp = a } :: SnatResource s)
 
 instance P.HasInternalIp (SnatResource s) (TF.Attr s P.Text) where
     internalIp =
-        lens (_internal_ip :: SnatResource s -> TF.Attr s P.Text)
-             (\s a -> s { _internal_ip = a } :: SnatResource s)
+        P.lens (_internalIp :: SnatResource s -> TF.Attr s P.Text)
+               (\s a -> s { _internalIp = a } :: SnatResource s)
 
-instance s ~ s' => P.HasComputedEdgeGateway (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
-    computedEdgeGateway =
-        (_edge_gateway :: SnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vcd_vapp@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_vapp terraform documentation>
+-- for more information.
+data VappResource s = VappResource'
+    { _catalogName    :: TF.Attr s P.Text
+    -- ^ @catalog_name@ - (Optional)
+    --
+    , _cpus           :: TF.Attr s P.Integer
+    -- ^ @cpus@ - (Optional)
+    --
+    , _description    :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _initscript     :: TF.Attr s P.Text
+    -- ^ @initscript@ - (Optional)
+    --
+    , _memory         :: TF.Attr s P.Integer
+    -- ^ @memory@ - (Optional)
+    --
+    , _metadata       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @metadata@ - (Optional)
+    --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _networkName    :: TF.Attr s P.Text
+    -- ^ @network_name@ - (Optional)
+    --
+    , _ovf            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @ovf@ - (Optional)
+    --
+    , _powerOn        :: TF.Attr s P.Bool
+    -- ^ @power_on@ - (Optional)
+    --
+    , _storageProfile :: TF.Attr s P.Text
+    -- ^ @storage_profile@ - (Optional)
+    --
+    , _templateName   :: TF.Attr s P.Text
+    -- ^ @template_name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedExternalIp (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
-    computedExternalIp =
-        (_external_ip :: SnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInternalIp (TF.Ref s' (SnatResource s)) (TF.Attr s P.Text) where
-    computedInternalIp =
-        (_internal_ip :: SnatResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-snatResource :: TF.Resource P.VCloudDirector (SnatResource s)
-snatResource =
-    TF.newResource "vcd_snat" $
-        SnatResource {
-              _edge_gateway = TF.Nil
-            , _external_ip = TF.Nil
-            , _internal_ip = TF.Nil
+vappResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (VappResource s)
+vappResource _name =
+    TF.newResource "vcd_vapp" TF.validator $
+        VappResource'
+            { _catalogName = TF.Nil
+            , _cpus = TF.Nil
+            , _description = TF.Nil
+            , _initscript = TF.Nil
+            , _memory = TF.Nil
+            , _metadata = TF.Nil
+            , _name = _name
+            , _networkName = TF.Nil
+            , _ovf = TF.Nil
+            , _powerOn = TF.value P.True
+            , _storageProfile = TF.Nil
+            , _templateName = TF.Nil
             }
 
-{- | The @vcd_vapp@ VCloudDirector resource.
-
-Provides a vCloud Director vApp resource. This can be used to create,
-modify, and delete vApps.
--}
-data VappResource s = VappResource {
-      _catalog_name  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The catalog name in which to find the given vApp Template -}
-    , _cpus          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of virtual CPUs to allocate to the vApp -}
-    , _initscript    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A script to be run only on initial boot -}
-    , _ip            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IP to assign to this vApp. Must be an IP address or one of dhcp, allocated or none. If given the address must be within the @static_ip_pool@ set for the network. If left blank, and the network has @dhcp_pool@ set with at least one available IP then this will be set with DHCP. -}
-    , _memory        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of RAM (in MB) to allocate to the vApp -}
-    , _metadata      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Key value map of metadata to assign to this vApp -}
-    , _name          :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the vApp -}
-    , _network_name  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Name of the network this vApp should join -}
-    , _ovf           :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Key value map of ovf parameters to assign to VM product section -}
-    , _power_on      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A boolean value stating if this vApp should be powered on. Default to @true@ -}
-    , _template_name :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of the vApp Template to use -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VappResource s) where
-    toObject VappResource{..} = catMaybes
-        [ TF.assign "catalog_name" <$> TF.attribute _catalog_name
+    toObject VappResource'{..} = P.catMaybes
+        [ TF.assign "catalog_name" <$> TF.attribute _catalogName
         , TF.assign "cpus" <$> TF.attribute _cpus
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "initscript" <$> TF.attribute _initscript
-        , TF.assign "ip" <$> TF.attribute _ip
         , TF.assign "memory" <$> TF.attribute _memory
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "network_name" <$> TF.attribute _network_name
+        , TF.assign "network_name" <$> TF.attribute _networkName
         , TF.assign "ovf" <$> TF.attribute _ovf
-        , TF.assign "power_on" <$> TF.attribute _power_on
-        , TF.assign "template_name" <$> TF.attribute _template_name
+        , TF.assign "power_on" <$> TF.attribute _powerOn
+        , TF.assign "storage_profile" <$> TF.attribute _storageProfile
+        , TF.assign "template_name" <$> TF.attribute _templateName
         ]
+
+instance TF.IsValid (VappResource s) where
+    validator = P.mempty
 
 instance P.HasCatalogName (VappResource s) (TF.Attr s P.Text) where
     catalogName =
-        lens (_catalog_name :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _catalog_name = a } :: VappResource s)
+        P.lens (_catalogName :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _catalogName = a } :: VappResource s)
 
-instance P.HasCpus (VappResource s) (TF.Attr s P.Text) where
+instance P.HasCpus (VappResource s) (TF.Attr s P.Integer) where
     cpus =
-        lens (_cpus :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpus = a } :: VappResource s)
+        P.lens (_cpus :: VappResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpus = a } :: VappResource s)
+
+instance P.HasDescription (VappResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: VappResource s)
 
 instance P.HasInitscript (VappResource s) (TF.Attr s P.Text) where
     initscript =
-        lens (_initscript :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _initscript = a } :: VappResource s)
+        P.lens (_initscript :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _initscript = a } :: VappResource s)
 
-instance P.HasIp (VappResource s) (TF.Attr s P.Text) where
-    ip =
-        lens (_ip :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip = a } :: VappResource s)
-
-instance P.HasMemory (VappResource s) (TF.Attr s P.Text) where
+instance P.HasMemory (VappResource s) (TF.Attr s P.Integer) where
     memory =
-        lens (_memory :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory = a } :: VappResource s)
+        P.lens (_memory :: VappResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memory = a } :: VappResource s)
 
-instance P.HasMetadata (VappResource s) (TF.Attr s P.Text) where
+instance P.HasMetadata (VappResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     metadata =
-        lens (_metadata :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _metadata = a } :: VappResource s)
+        P.lens (_metadata :: VappResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _metadata = a } :: VappResource s)
 
 instance P.HasName (VappResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VappResource s)
+        P.lens (_name :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VappResource s)
 
 instance P.HasNetworkName (VappResource s) (TF.Attr s P.Text) where
     networkName =
-        lens (_network_name :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _network_name = a } :: VappResource s)
+        P.lens (_networkName :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkName = a } :: VappResource s)
 
-instance P.HasOvf (VappResource s) (TF.Attr s P.Text) where
+instance P.HasOvf (VappResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     ovf =
-        lens (_ovf :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ovf = a } :: VappResource s)
+        P.lens (_ovf :: VappResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _ovf = a } :: VappResource s)
 
-instance P.HasPowerOn (VappResource s) (TF.Attr s P.Text) where
+instance P.HasPowerOn (VappResource s) (TF.Attr s P.Bool) where
     powerOn =
-        lens (_power_on :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _power_on = a } :: VappResource s)
+        P.lens (_powerOn :: VappResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _powerOn = a } :: VappResource s)
+
+instance P.HasStorageProfile (VappResource s) (TF.Attr s P.Text) where
+    storageProfile =
+        P.lens (_storageProfile :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _storageProfile = a } :: VappResource s)
 
 instance P.HasTemplateName (VappResource s) (TF.Attr s P.Text) where
     templateName =
-        lens (_template_name :: VappResource s -> TF.Attr s P.Text)
-             (\s a -> s { _template_name = a } :: VappResource s)
+        P.lens (_templateName :: VappResource s -> TF.Attr s P.Text)
+               (\s a -> s { _templateName = a } :: VappResource s)
 
-instance s ~ s' => P.HasComputedCatalogName (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedCatalogName =
-        (_catalog_name :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpus (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedCpus =
-        (_cpus :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInitscript (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedInitscript =
-        (_initscript :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedIp =
-        (_ip :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"
 
-instance s ~ s' => P.HasComputedMemory (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedMemory =
-        (_memory :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @vcd_vapp_vm@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_vapp_vm terraform documentation>
+-- for more information.
+data VappVmResource s = VappVmResource'
+    { _catalogName  :: TF.Attr s P.Text
+    -- ^ @catalog_name@ - (Required)
+    --
+    , _cpus         :: TF.Attr s P.Integer
+    -- ^ @cpus@ - (Optional)
+    --
+    , _initscript   :: TF.Attr s P.Text
+    -- ^ @initscript@ - (Optional)
+    --
+    , _memory       :: TF.Attr s P.Integer
+    -- ^ @memory@ - (Optional)
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _networkHref  :: TF.Attr s P.Text
+    -- ^ @network_href@ - (Optional)
+    --
+    , _networkName  :: TF.Attr s P.Text
+    -- ^ @network_name@ - (Optional)
+    --
+    , _powerOn      :: TF.Attr s P.Bool
+    -- ^ @power_on@ - (Optional)
+    --
+    , _templateName :: TF.Attr s P.Text
+    -- ^ @template_name@ - (Required)
+    --
+    , _vappName     :: TF.Attr s P.Text
+    -- ^ @vapp_name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedMetadata =
-        (_metadata :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedNetworkName (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedNetworkName =
-        (_network_name :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedOvf (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedOvf =
-        (_ovf :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPowerOn (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedPowerOn =
-        (_power_on :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedTemplateName =
-        (_template_name :: VappResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-vappResource :: TF.Resource P.VCloudDirector (VappResource s)
-vappResource =
-    TF.newResource "vcd_vapp" $
-        VappResource {
-              _catalog_name = TF.Nil
+vappVmResource
+    :: TF.Attr s P.Text -- ^ @catalog_name@ - 'P.catalogName'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
+    -> TF.Attr s P.Text -- ^ @vapp_name@ - 'P.vappName'
+    -> TF.Resource P.Provider (VappVmResource s)
+vappVmResource _catalogName _name _templateName _vappName =
+    TF.newResource "vcd_vapp_vm" TF.validator $
+        VappVmResource'
+            { _catalogName = _catalogName
             , _cpus = TF.Nil
             , _initscript = TF.Nil
-            , _ip = TF.Nil
             , _memory = TF.Nil
-            , _metadata = TF.Nil
-            , _name = TF.Nil
-            , _network_name = TF.Nil
-            , _ovf = TF.Nil
-            , _power_on = TF.Nil
-            , _template_name = TF.Nil
+            , _name = _name
+            , _networkHref = TF.Nil
+            , _networkName = TF.Nil
+            , _powerOn = TF.value P.True
+            , _templateName = _templateName
+            , _vappName = _vappName
             }
 
-{- | The @vcd_vapp_vm@ VCloudDirector resource.
-
-Provides a vCloud Director VM resource. This can be used to create, modify,
-and delete VMs within a vApp. ~> Note: There is known bug with this
-implementation, that to use the vcd_vapp_vm resource, you must set the
-paralellism parameter to 1.
-<https://github.com/terraform-providers/terraform-provider-vcd/issues/27>
--}
-data VappVmResource s = VappVmResource {
-      _catalog_name  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The catalog name in which to find the given vApp Template -}
-    , _cpus          :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The number of virtual CPUs to allocate to the vApp -}
-    , _initscript    :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A script to be run only on initial boot -}
-    , _ip            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The IP to assign to this vApp. Must be an IP address or one of dhcp, allocated or none. If given the address must be within the @static_ip_pool@ set for the network. If left blank, and the network has @dhcp_pool@ set with at least one available IP then this will be set with DHCP. -}
-    , _memory        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The amount of RAM (in MB) to allocate to the vApp -}
-    , _name          :: !(TF.Attr s P.Text)
-    {- ^ (Required) A unique name for the vApp -}
-    , _power_on      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A boolean value stating if this vApp should be powered on. Default to @true@ -}
-    , _template_name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the vApp Template to use -}
-    , _vapp_name     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The vApp this VM should belong to. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (VappVmResource s) where
-    toObject VappVmResource{..} = catMaybes
-        [ TF.assign "catalog_name" <$> TF.attribute _catalog_name
+    toObject VappVmResource'{..} = P.catMaybes
+        [ TF.assign "catalog_name" <$> TF.attribute _catalogName
         , TF.assign "cpus" <$> TF.attribute _cpus
         , TF.assign "initscript" <$> TF.attribute _initscript
-        , TF.assign "ip" <$> TF.attribute _ip
         , TF.assign "memory" <$> TF.attribute _memory
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "power_on" <$> TF.attribute _power_on
-        , TF.assign "template_name" <$> TF.attribute _template_name
-        , TF.assign "vapp_name" <$> TF.attribute _vapp_name
+        , TF.assign "network_href" <$> TF.attribute _networkHref
+        , TF.assign "network_name" <$> TF.attribute _networkName
+        , TF.assign "power_on" <$> TF.attribute _powerOn
+        , TF.assign "template_name" <$> TF.attribute _templateName
+        , TF.assign "vapp_name" <$> TF.attribute _vappName
         ]
+
+instance TF.IsValid (VappVmResource s) where
+    validator = P.mempty
 
 instance P.HasCatalogName (VappVmResource s) (TF.Attr s P.Text) where
     catalogName =
-        lens (_catalog_name :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _catalog_name = a } :: VappVmResource s)
+        P.lens (_catalogName :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _catalogName = a } :: VappVmResource s)
 
-instance P.HasCpus (VappVmResource s) (TF.Attr s P.Text) where
+instance P.HasCpus (VappVmResource s) (TF.Attr s P.Integer) where
     cpus =
-        lens (_cpus :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _cpus = a } :: VappVmResource s)
+        P.lens (_cpus :: VappVmResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpus = a } :: VappVmResource s)
 
 instance P.HasInitscript (VappVmResource s) (TF.Attr s P.Text) where
     initscript =
-        lens (_initscript :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _initscript = a } :: VappVmResource s)
+        P.lens (_initscript :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _initscript = a } :: VappVmResource s)
 
-instance P.HasIp (VappVmResource s) (TF.Attr s P.Text) where
-    ip =
-        lens (_ip :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip = a } :: VappVmResource s)
-
-instance P.HasMemory (VappVmResource s) (TF.Attr s P.Text) where
+instance P.HasMemory (VappVmResource s) (TF.Attr s P.Integer) where
     memory =
-        lens (_memory :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _memory = a } :: VappVmResource s)
+        P.lens (_memory :: VappVmResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _memory = a } :: VappVmResource s)
 
 instance P.HasName (VappVmResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: VappVmResource s)
+        P.lens (_name :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: VappVmResource s)
 
-instance P.HasPowerOn (VappVmResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkHref (VappVmResource s) (TF.Attr s P.Text) where
+    networkHref =
+        P.lens (_networkHref :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkHref = a } :: VappVmResource s)
+
+instance P.HasNetworkName (VappVmResource s) (TF.Attr s P.Text) where
+    networkName =
+        P.lens (_networkName :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkName = a } :: VappVmResource s)
+
+instance P.HasPowerOn (VappVmResource s) (TF.Attr s P.Bool) where
     powerOn =
-        lens (_power_on :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _power_on = a } :: VappVmResource s)
+        P.lens (_powerOn :: VappVmResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _powerOn = a } :: VappVmResource s)
 
 instance P.HasTemplateName (VappVmResource s) (TF.Attr s P.Text) where
     templateName =
-        lens (_template_name :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _template_name = a } :: VappVmResource s)
+        P.lens (_templateName :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _templateName = a } :: VappVmResource s)
 
 instance P.HasVappName (VappVmResource s) (TF.Attr s P.Text) where
     vappName =
-        lens (_vapp_name :: VappVmResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vapp_name = a } :: VappVmResource s)
+        P.lens (_vappName :: VappVmResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vappName = a } :: VappVmResource s)
 
-instance s ~ s' => P.HasComputedCatalogName (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedCatalogName =
-        (_catalog_name :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCpus (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedCpus =
-        (_cpus :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedInitscript (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedInitscript =
-        (_initscript :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
+    computedHref x = TF.compute (TF.refKey x) "_computedHref"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedIp =
-        (_ip :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedMemory (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedMemory =
-        (_memory :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPowerOn (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedPowerOn =
-        (_power_on :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedTemplateName (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedTemplateName =
-        (_template_name :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedVappName (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedVappName =
-        (_vapp_name :: VappVmResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-vappVmResource :: TF.Resource P.VCloudDirector (VappVmResource s)
-vappVmResource =
-    TF.newResource "vcd_vapp_vm" $
-        VappVmResource {
-              _catalog_name = TF.Nil
-            , _cpus = TF.Nil
-            , _initscript = TF.Nil
-            , _ip = TF.Nil
-            , _memory = TF.Nil
-            , _name = TF.Nil
-            , _power_on = TF.Nil
-            , _template_name = TF.Nil
-            , _vapp_name = TF.Nil
-            }
+    computedIp x = TF.compute (TF.refKey x) "_computedIp"

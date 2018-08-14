@@ -9,6 +9,7 @@ name: terrafomo-builtins
 
 dependencies:
   - base
+  - hashable
   - microlens
   - terrafomo
   - text
@@ -21,10 +22,12 @@ library:
 
   exposed-modules:
     - Terrafomo.Archive
+    - Terrafomo.External
+    - Terrafomo.HTTP
     - Terrafomo.Local
     - Terrafomo.Random
-    - Terrafomo.Template
     - Terrafomo.TLS
+    - Terrafomo.Template
 
   reexported-modules: >
     terrafomo:Terrafomo,

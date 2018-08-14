@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.UltraDNS
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.UltraDNS
-    ( module Terrafomo.UltraDNS.Types
+    ( module Terrafomo.UltraDNS.Resource
+    , module Terrafomo.UltraDNS.Types
     , module Terrafomo.UltraDNS.Provider
     , module Terrafomo.UltraDNS.Lens
-    , module Terrafomo.UltraDNS.Resource
+    , module Terrafomo.UltraDNS.Settings
     ) where
 
 import Terrafomo.UltraDNS.Lens
 import Terrafomo.UltraDNS.Provider
 import Terrafomo.UltraDNS.Resource
+import Terrafomo.UltraDNS.Settings
 import Terrafomo.UltraDNS.Types

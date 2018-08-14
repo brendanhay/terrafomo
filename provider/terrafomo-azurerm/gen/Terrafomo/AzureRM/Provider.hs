@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,137 +17,154 @@
 --
 module Terrafomo.AzureRM.Provider
     (
-    -- * Provider Datatype
-      AzureRM (..)
-    , emptyAzureRM
-
-    -- * Lenses
-    , providerClientId
-    , providerClientSecret
-    , providerEnvironment
-    , providerMsiEndpoint
-    , providerSkipCredentialsValidation
-    , providerSkipProviderRegistration
-    , providerSubscriptionId
-    , providerTenantId
-    , providerUseMsi
+    -- * AzureRM Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.AzureRM.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.AzureRM.Lens  as P
 import qualified Terrafomo.AzureRM.Types as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @AzureRM@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/AzureRM/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _clientId                  :: P.Maybe P.Text
+    -- ^ @client_id@ - (Optional)
+    --
+    , _clientSecret              :: P.Maybe P.Text
+    -- ^ @client_secret@ - (Optional)
+    --
+    , _environment               :: P.Text
+    -- ^ @environment@ - (Required)
+    --
+    , _msiEndpoint               :: P.Maybe P.Text
+    -- ^ @msi_endpoint@ - (Optional)
+    --
+    , _skipCredentialsValidation :: P.Maybe P.Bool
+    -- ^ @skip_credentials_validation@ - (Optional)
+    --
+    , _skipProviderRegistration  :: P.Maybe P.Bool
+    -- ^ @skip_provider_registration@ - (Optional)
+    --
+    , _subscriptionId            :: P.Maybe P.Text
+    -- ^ @subscription_id@ - (Optional)
+    --
+    , _tenantId                  :: P.Maybe P.Text
+    -- ^ @tenant_id@ - (Optional)
+    --
+    , _useMsi                    :: P.Maybe P.Bool
+    -- ^ @use_msi@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | AzureRM Terraform provider.
+newProvider
+    :: P.Text -- ^ @environment@ - 'P.environment'
+    -> Provider
+newProvider _environment =
+    Provider'
+        { _clientId = P.Nothing
+        , _clientSecret = P.Nothing
+        , _environment = _environment
+        , _msiEndpoint = P.Nothing
+        , _skipCredentialsValidation = P.Nothing
+        , _skipProviderRegistration = P.Nothing
+        , _subscriptionId = P.Nothing
+        , _tenantId = P.Nothing
+        , _useMsi = P.Nothing
+        }
 
-The Azure Provider is used to interact with the many resources supported by
-Azure Resource Manager (AzureRM) through its APIs. ~> Note: This supercedes
-the </docs/providers/azure/index.html> , which interacts with Azure using
-the Service Management API. Use the navigation to the left to read about the
-available resources.
--}
-data AzureRM = AzureRM {
-      _client_id                   :: !(Maybe P.Text)
-    {- ^ (Optional) The client ID to use. It can also be sourced from the @ARM_CLIENT_ID@ environment variable. -}
-    , _client_secret               :: !(Maybe P.Text)
-    {- ^ (Optional) The client secret to use. It can also be sourced from the @ARM_CLIENT_SECRET@ environment variable. -}
-    , _environment                 :: !(Maybe P.Text)
-    {- ^ (Optional) The cloud environment to use. It can also be sourced from the @ARM_ENVIRONMENT@ environment variable. Supported values are: -}
-    , _msi_endpoint                :: !(Maybe P.Text)
-    {- ^ (Optional) The REST endpoint to retrieve an MSI token from. Terraform will attempt to discover this automatically but it can be specified manually here. It can also be sourced from the @ARM_MSI_ENDPOINT@ environment variable. -}
-    , _skip_credentials_validation :: !(Maybe P.Text)
-    {- ^ (Optional) Prevents the provider from validating the given credentials. When set to @true@ , @skip_provider_registration@ is assumed. It can also be sourced from the @ARM_SKIP_CREDENTIALS_VALIDATION@ environment variable; defaults to @false@ . -}
-    , _skip_provider_registration  :: !(Maybe P.Text)
-    {- ^ (Optional) Prevents the provider from registering the ARM provider namespaces, this can be used if you don't wish to give the Active Directory Application permission to register resource providers. It can also be sourced from the @ARM_SKIP_PROVIDER_REGISTRATION@ environment variable; defaults to @false@ . -}
-    , _subscription_id             :: !(Maybe P.Text)
-    {- ^ (Optional) The subscription ID to use. It can also be sourced from the @ARM_SUBSCRIPTION_ID@ environment variable. -}
-    , _tenant_id                   :: !(Maybe P.Text)
-    {- ^ (Optional) The tenant ID to use. It can also be sourced from the @ARM_TENANT_ID@ environment variable. -}
-    , _use_msi                     :: !(Maybe P.Text)
-    {- ^ (Optional) Set to true to authenticate using managed service identity. It can also be sourced from the @ARM_USE_MSI@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable AzureRM
-
-instance TF.IsSection AzureRM where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (AzureRM))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "client_id" <$> _client_id x
-                  , TF.assign "client_secret" <$> _client_secret x
-                  , TF.assign "environment" <$> _environment x
-                  , TF.assign "msi_endpoint" <$> _msi_endpoint x
-                  , TF.assign "skip_credentials_validation" <$> _skip_credentials_validation x
-                  , TF.assign "skip_provider_registration" <$> _skip_provider_registration x
-                  , TF.assign "subscription_id" <$> _subscription_id x
-                  , TF.assign "tenant_id" <$> _tenant_id x
-                  , TF.assign "use_msi" <$> _use_msi x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "client_id" <$> _clientId
+                  , TF.assign "client_secret" <$> _clientSecret
+                  , P.Just $ TF.assign "environment" _environment
+                  , TF.assign "msi_endpoint" <$> _msiEndpoint
+                  , TF.assign "skip_credentials_validation" <$> _skipCredentialsValidation
+                  , TF.assign "skip_provider_registration" <$> _skipProviderRegistration
+                  , TF.assign "subscription_id" <$> _subscriptionId
+                  , TF.assign "tenant_id" <$> _tenantId
+                  , TF.assign "use_msi" <$> _useMsi
                   ])
 
-instance TF.IsProvider AzureRM where
-    type ProviderType AzureRM = "azurerm"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyAzureRM :: AzureRM
-emptyAzureRM = AzureRM {
-        _client_id = Nothing
-      , _client_secret = Nothing
-      , _environment = Nothing
-      , _msi_endpoint = Nothing
-      , _skip_credentials_validation = Nothing
-      , _skip_provider_registration = Nothing
-      , _subscription_id = Nothing
-      , _tenant_id = Nothing
-      , _use_msi = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerClientId :: Lens' AzureRM (Maybe P.Text)
-providerClientId =
-    lens _client_id (\s a -> s { _client_id = a })
+instance P.HasClientId (Provider) (P.Maybe P.Text) where
+    clientId =
+        P.lens (_clientId :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _clientId = a } :: Provider)
 
-providerClientSecret :: Lens' AzureRM (Maybe P.Text)
-providerClientSecret =
-    lens _client_secret (\s a -> s { _client_secret = a })
+instance P.HasClientSecret (Provider) (P.Maybe P.Text) where
+    clientSecret =
+        P.lens (_clientSecret :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _clientSecret = a } :: Provider)
 
-providerEnvironment :: Lens' AzureRM (Maybe P.Text)
-providerEnvironment =
-    lens _environment (\s a -> s { _environment = a })
+instance P.HasEnvironment (Provider) (P.Text) where
+    environment =
+        P.lens (_environment :: Provider -> P.Text)
+               (\s a -> s { _environment = a } :: Provider)
 
-providerMsiEndpoint :: Lens' AzureRM (Maybe P.Text)
-providerMsiEndpoint =
-    lens _msi_endpoint (\s a -> s { _msi_endpoint = a })
+instance P.HasMsiEndpoint (Provider) (P.Maybe P.Text) where
+    msiEndpoint =
+        P.lens (_msiEndpoint :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _msiEndpoint = a } :: Provider)
 
-providerSkipCredentialsValidation :: Lens' AzureRM (Maybe P.Text)
-providerSkipCredentialsValidation =
-    lens _skip_credentials_validation (\s a -> s { _skip_credentials_validation = a })
+instance P.HasSkipCredentialsValidation (Provider) (P.Maybe P.Bool) where
+    skipCredentialsValidation =
+        P.lens (_skipCredentialsValidation :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _skipCredentialsValidation = a } :: Provider)
 
-providerSkipProviderRegistration :: Lens' AzureRM (Maybe P.Text)
-providerSkipProviderRegistration =
-    lens _skip_provider_registration (\s a -> s { _skip_provider_registration = a })
+instance P.HasSkipProviderRegistration (Provider) (P.Maybe P.Bool) where
+    skipProviderRegistration =
+        P.lens (_skipProviderRegistration :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _skipProviderRegistration = a } :: Provider)
 
-providerSubscriptionId :: Lens' AzureRM (Maybe P.Text)
-providerSubscriptionId =
-    lens _subscription_id (\s a -> s { _subscription_id = a })
+instance P.HasSubscriptionId (Provider) (P.Maybe P.Text) where
+    subscriptionId =
+        P.lens (_subscriptionId :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _subscriptionId = a } :: Provider)
 
-providerTenantId :: Lens' AzureRM (Maybe P.Text)
-providerTenantId =
-    lens _tenant_id (\s a -> s { _tenant_id = a })
+instance P.HasTenantId (Provider) (P.Maybe P.Text) where
+    tenantId =
+        P.lens (_tenantId :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _tenantId = a } :: Provider)
 
-providerUseMsi :: Lens' AzureRM (Maybe P.Text)
-providerUseMsi =
-    lens _use_msi (\s a -> s { _use_msi = a })
+instance P.HasUseMsi (Provider) (P.Maybe P.Bool) where
+    useMsi =
+        P.lens (_useMsi :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _useMsi = a } :: Provider)

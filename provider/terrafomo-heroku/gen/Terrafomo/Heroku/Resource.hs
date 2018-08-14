@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,1310 +17,1066 @@
 --
 module Terrafomo.Heroku.Resource
     (
-    -- * Types
-      AddonAttachmentResource (..)
-    , addonAttachmentResource
-
-    , AddonResource (..)
+    -- * Resource Datatypes
+    -- ** heroku_addon
+      AddonResource (..)
     , addonResource
 
-    , AppFeatureResource (..)
-    , appFeatureResource
+    -- ** heroku_addon_attachment
+    , AddonAttachmentResource (..)
+    , addonAttachmentResource
 
-    , AppReleaseResource (..)
-    , appReleaseResource
-
+    -- ** heroku_app
     , AppResource (..)
     , appResource
 
+    -- ** heroku_app_feature
+    , AppFeatureResource (..)
+    , appFeatureResource
+
+    -- ** heroku_app_release
+    , AppReleaseResource (..)
+    , appReleaseResource
+
+    -- ** heroku_cert
     , CertResource (..)
     , certResource
 
+    -- ** heroku_domain
     , DomainResource (..)
     , domainResource
 
+    -- ** heroku_drain
     , DrainResource (..)
     , drainResource
 
+    -- ** heroku_formation
     , FormationResource (..)
     , formationResource
 
-    , PipelineCouplingResource (..)
-    , pipelineCouplingResource
-
+    -- ** heroku_pipeline
     , PipelineResource (..)
     , pipelineResource
 
-    , SpaceInboundRulesetResource (..)
-    , spaceInboundRulesetResource
+    -- ** heroku_pipeline_coupling
+    , PipelineCouplingResource (..)
+    , pipelineCouplingResource
 
-    , SpaceMemberResource (..)
-    , spaceMemberResource
-
-    , SpacePeeringConnectionAccepterResource (..)
-    , spacePeeringConnectionAccepterResource
-
+    -- ** heroku_space
     , SpaceResource (..)
     , spaceResource
 
+    -- ** heroku_space_app_access
+    , SpaceAppAccessResource (..)
+    , spaceAppAccessResource
+
+    -- ** heroku_space_inbound_ruleset
+    , SpaceInboundRulesetResource (..)
+    , spaceInboundRulesetResource
+
+    -- ** heroku_space_peering_connection_accepter
+    , SpacePeeringConnectionAccepterResource (..)
+    , spacePeeringConnectionAccepterResource
+
+    -- ** heroku_space_vpn_connection
     , SpaceVpnConnectionResource (..)
     , spaceVpnConnectionResource
 
+    -- ** heroku_team_collaborator
     , TeamCollaboratorResource (..)
     , teamCollaboratorResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAcm (..)
-    , P.HasAddonId (..)
-    , P.HasApp (..)
-    , P.HasAppId (..)
-    , P.HasBuildpacks (..)
-    , P.HasCertificateChain (..)
-    , P.HasConfig (..)
-    , P.HasConfigVars (..)
-    , P.HasDescription (..)
-    , P.HasEmail (..)
-    , P.HasEnabled (..)
-    , P.HasHostname (..)
-    , P.HasInternalRouting (..)
-    , P.HasName (..)
-    , P.HasOrganization (..)
-    , P.HasPermissions (..)
-    , P.HasPipeline (..)
-    , P.HasPlan (..)
-    , P.HasPrivateKey (..)
-    , P.HasPublicIp (..)
-    , P.HasQuantity (..)
-    , P.HasRegion (..)
-    , P.HasRoutableCidrs (..)
-    , P.HasRule (..)
-    , P.HasShield (..)
-    , P.HasSize (..)
-    , P.HasSlugId (..)
-    , P.HasSpace (..)
-    , P.HasStack (..)
-    , P.HasStage (..)
-    , P.HasType' (..)
-    , P.HasUrl (..)
-    , P.HasVpcPeeringConnectionId (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedAcm (..)
-    , P.HasComputedAddonId (..)
-    , P.HasComputedAllConfigVars (..)
-    , P.HasComputedApp (..)
-    , P.HasComputedAppId (..)
-    , P.HasComputedBuildpacks (..)
-    , P.HasComputedCertificateChain (..)
-    , P.HasComputedCname (..)
-    , P.HasComputedConfig (..)
-    , P.HasComputedConfigVars (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedEmail (..)
-    , P.HasComputedEnabled (..)
-    , P.HasComputedGitUrl (..)
-    , P.HasComputedHerokuHostname (..)
-    , P.HasComputedHostname (..)
-    , P.HasComputedId (..)
-    , P.HasComputedIkeVersion (..)
-    , P.HasComputedInternalRouting (..)
-    , P.HasComputedName (..)
-    , P.HasComputedOrganization (..)
-    , P.HasComputedOutboundIps (..)
-    , P.HasComputedPermissions (..)
-    , P.HasComputedPipeline (..)
-    , P.HasComputedPlan (..)
-    , P.HasComputedPrivateKey (..)
-    , P.HasComputedProviderId (..)
-    , P.HasComputedPublicIp (..)
-    , P.HasComputedQuantity (..)
-    , P.HasComputedRegion (..)
-    , P.HasComputedRoutableCidrs (..)
-    , P.HasComputedRule (..)
-    , P.HasComputedShield (..)
-    , P.HasComputedSize (..)
-    , P.HasComputedSlugId (..)
-    , P.HasComputedSpace (..)
-    , P.HasComputedSpaceCidrBlock (..)
-    , P.HasComputedStack (..)
-    , P.HasComputedStage (..)
-    , P.HasComputedStatus (..)
-    , P.HasComputedToken (..)
-    , P.HasComputedTunnels (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedUrl (..)
-    , P.HasComputedVpcPeeringConnectionId (..)
-    , P.HasComputedWebUrl (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Heroku.Settings
 
-import Terrafomo.Heroku.Types as P
-
+import qualified Data.Hashable             as P
+import qualified Data.HashMap.Strict       as P
+import qualified Data.HashMap.Strict       as Map
+import qualified Data.List.NonEmpty        as P
+import qualified Data.Maybe                as P
+import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
-import qualified Data.Word                 as P
-import qualified GHC.Base                  as P
-import qualified Numeric.Natural           as P
+import qualified GHC.Generics              as P
+import qualified Lens.Micro                as P
+import qualified Prelude                   as P
+import qualified Terrafomo.Attribute       as TF
+import qualified Terrafomo.HCL             as TF
 import qualified Terrafomo.Heroku.Lens     as P
 import qualified Terrafomo.Heroku.Provider as P
+import qualified Terrafomo.Heroku.Types    as P
+import qualified Terrafomo.Name            as TF
+import qualified Terrafomo.Schema          as TF
+import qualified Terrafomo.Validator       as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @heroku_addon@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_addon terraform documentation>
+-- for more information.
+data AddonResource s = AddonResource'
+    { _app    :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _config :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
+    -- ^ @config@ - (Optional)
+    --
+    , _plan   :: TF.Attr s P.Text
+    -- ^ @plan@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @heroku_addon_attachment@ Heroku resource.
-
-Attaches a Heroku Addon Resource to an additional Heroku App.
--}
-data AddonAttachmentResource s = AddonAttachmentResource {
-      _addon_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the existing Heroku Addon to attach. -}
-    , _app_id   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the Heroku App to attach to. -}
-    , _name     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A friendly name for the Heroku Addon Attachment. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (AddonAttachmentResource s) where
-    toObject AddonAttachmentResource{..} = catMaybes
-        [ TF.assign "addon_id" <$> TF.attribute _addon_id
-        , TF.assign "app_id" <$> TF.attribute _app_id
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasAddonId (AddonAttachmentResource s) (TF.Attr s P.Text) where
-    addonId =
-        lens (_addon_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _addon_id = a } :: AddonAttachmentResource s)
-
-instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s P.Text) where
-    appId =
-        lens (_app_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app_id = a } :: AddonAttachmentResource s)
-
-instance P.HasName (AddonAttachmentResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: AddonAttachmentResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AddonAttachmentResource s)
-
-instance s ~ s' => P.HasComputedAddonId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAddonId =
-        (_addon_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAppId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAppId =
-        (_app_id :: AddonAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: AddonAttachmentResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-addonAttachmentResource :: TF.Resource P.Heroku (AddonAttachmentResource s)
-addonAttachmentResource =
-    TF.newResource "heroku_addon_attachment" $
-        AddonAttachmentResource {
-              _addon_id = TF.Nil
-            , _app_id = TF.Nil
-            , _name = TF.Nil
+addonResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
+    -> TF.Resource P.Provider (AddonResource s)
+addonResource _app _plan =
+    TF.newResource "heroku_addon" TF.validator $
+        AddonResource'
+            { _app = _app
+            , _config = TF.Nil
+            , _plan = _plan
             }
 
-{- | The @heroku_addon@ Heroku resource.
-
-Provides a Heroku Add-On resource. These can be attach services to a Heroku
-app.
--}
-data AddonResource s = AddonResource {
-      _app    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to add to. -}
-    , _config :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Optional plan configuration. -}
-    , _plan   :: !(TF.Attr s P.Text)
-    {- ^ (Required) The addon to add. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (AddonResource s) where
-    toObject AddonResource{..} = catMaybes
+    toObject AddonResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "config" <$> TF.attribute _config
         , TF.assign "plan" <$> TF.attribute _plan
         ]
 
+instance TF.IsValid (AddonResource s) where
+    validator = P.mempty
+
 instance P.HasApp (AddonResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: AddonResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: AddonResource s)
+        P.lens (_app :: AddonResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: AddonResource s)
 
-instance P.HasConfig (AddonResource s) (TF.Attr s P.Text) where
+instance P.HasConfig (AddonResource s) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
     config =
-        lens (_config :: AddonResource s -> TF.Attr s P.Text)
-             (\s a -> s { _config = a } :: AddonResource s)
+        P.lens (_config :: AddonResource s -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))])
+               (\s a -> s { _config = a } :: AddonResource s)
 
 instance P.HasPlan (AddonResource s) (TF.Attr s P.Text) where
     plan =
-        lens (_plan :: AddonResource s -> TF.Attr s P.Text)
-             (\s a -> s { _plan = a } :: AddonResource s)
+        P.lens (_plan :: AddonResource s -> TF.Attr s P.Text)
+               (\s a -> s { _plan = a } :: AddonResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: AddonResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConfig (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedConfig =
-        (_config :: AddonResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AddonResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedConfigVars x = TF.compute (TF.refKey x) "_computedConfigVars"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedPlan (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedPlan x = TF.compute (TF.refKey x) "plan"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
 instance s ~ s' => P.HasComputedProviderId (TF.Ref s' (AddonResource s)) (TF.Attr s P.Text) where
-    computedProviderId x = TF.compute (TF.refKey x) "provider_id"
+    computedProviderId x = TF.compute (TF.refKey x) "_computedProviderId"
 
-addonResource :: TF.Resource P.Heroku (AddonResource s)
-addonResource =
-    TF.newResource "heroku_addon" $
-        AddonResource {
-              _app = TF.Nil
-            , _config = TF.Nil
-            , _plan = TF.Nil
+-- | @heroku_addon_attachment@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_addon_attachment terraform documentation>
+-- for more information.
+data AddonAttachmentResource s = AddonAttachmentResource'
+    { _addonId :: TF.Attr s P.Text
+    -- ^ @addon_id@ - (Required)
+    --
+    , _appId   :: TF.Attr s P.Text
+    -- ^ @app_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+addonAttachmentResource
+    :: TF.Attr s P.Text -- ^ @addon_id@ - 'P.addonId'
+    -> TF.Attr s P.Text -- ^ @app_id@ - 'P.appId'
+    -> TF.Resource P.Provider (AddonAttachmentResource s)
+addonAttachmentResource _addonId _appId =
+    TF.newResource "heroku_addon_attachment" TF.validator $
+        AddonAttachmentResource'
+            { _addonId = _addonId
+            , _appId = _appId
             }
 
-{- | The @heroku_app_feature@ Heroku resource.
+instance TF.IsObject (AddonAttachmentResource s) where
+    toObject AddonAttachmentResource'{..} = P.catMaybes
+        [ TF.assign "addon_id" <$> TF.attribute _addonId
+        , TF.assign "app_id" <$> TF.attribute _appId
+        ]
 
-Provides a Heroku App Feature resource. This can be used to create and
-manage App Features on Heroku.
--}
-data AppFeatureResource s = AppFeatureResource {
-      _app     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to link to. -}
-    , _enabled :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether to enable or disable the App Feature. The default value is true. -}
-    , _name    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the App Feature to manage. -}
-    } deriving (Show, Eq)
+instance TF.IsValid (AddonAttachmentResource s) where
+    validator = P.mempty
+
+instance P.HasAddonId (AddonAttachmentResource s) (TF.Attr s P.Text) where
+    addonId =
+        P.lens (_addonId :: AddonAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _addonId = a } :: AddonAttachmentResource s)
+
+instance P.HasAppId (AddonAttachmentResource s) (TF.Attr s P.Text) where
+    appId =
+        P.lens (_appId :: AddonAttachmentResource s -> TF.Attr s P.Text)
+               (\s a -> s { _appId = a } :: AddonAttachmentResource s)
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AddonAttachmentResource s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "_computedName"
+
+-- | @heroku_app@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_app terraform documentation>
+-- for more information.
+data AppResource s = AppResource'
+    { _acm          :: TF.Attr s P.Bool
+    -- ^ @acm@ - (Optional)
+    --
+    , _buildpacks   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @buildpacks@ - (Optional)
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _organization :: TF.Attr s [TF.Attr s (Organization s)]
+    -- ^ @organization@ - (Optional)
+    --
+    , _region       :: TF.Attr s P.Text
+    -- ^ @region@ - (Required)
+    --
+    , _space        :: TF.Attr s P.Text
+    -- ^ @space@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+appResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    -> TF.Resource P.Provider (AppResource s)
+appResource _name _region =
+    TF.newResource "heroku_app" TF.validator $
+        AppResource'
+            { _acm = TF.Nil
+            , _buildpacks = TF.Nil
+            , _name = _name
+            , _organization = TF.Nil
+            , _region = _region
+            , _space = TF.Nil
+            }
+
+instance TF.IsObject (AppResource s) where
+    toObject AppResource'{..} = P.catMaybes
+        [ TF.assign "acm" <$> TF.attribute _acm
+        , TF.assign "buildpacks" <$> TF.attribute _buildpacks
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "organization" <$> TF.attribute _organization
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "space" <$> TF.attribute _space
+        ]
+
+instance TF.IsValid (AppResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_organization"
+                  (_organization
+                      :: AppResource s -> TF.Attr s [TF.Attr s (Organization s)])
+                  TF.validator
+
+instance P.HasAcm (AppResource s) (TF.Attr s P.Bool) where
+    acm =
+        P.lens (_acm :: AppResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _acm = a } :: AppResource s)
+
+instance P.HasBuildpacks (AppResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    buildpacks =
+        P.lens (_buildpacks :: AppResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _buildpacks = a } :: AppResource s)
+
+instance P.HasName (AppResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AppResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AppResource s)
+
+instance P.HasOrganization (AppResource s) (TF.Attr s [TF.Attr s (Organization s)]) where
+    organization =
+        P.lens (_organization :: AppResource s -> TF.Attr s [TF.Attr s (Organization s)])
+               (\s a -> s { _organization = a } :: AppResource s)
+
+instance P.HasRegion (AppResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: AppResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: AppResource s)
+
+instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
+    space =
+        P.lens (_space :: AppResource s -> TF.Attr s P.Text)
+               (\s a -> s { _space = a } :: AppResource s)
+
+instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedAllConfigVars x = TF.compute (TF.refKey x) "_computedAllConfigVars"
+
+instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]) where
+    computedConfigVars x = TF.compute (TF.refKey x) "_computedConfigVars"
+
+instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
+    computedGitUrl x = TF.compute (TF.refKey x) "_computedGitUrl"
+
+instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
+    computedHerokuHostname x = TF.compute (TF.refKey x) "_computedHerokuHostname"
+
+instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppResource s)) (TF.Attr s P.Bool) where
+    computedInternalRouting x = TF.compute (TF.refKey x) "_computedInternalRouting"
+
+instance s ~ s' => P.HasComputedStack (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
+    computedStack x = TF.compute (TF.refKey x) "_computedStack"
+
+instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
+    computedWebUrl x = TF.compute (TF.refKey x) "_computedWebUrl"
+
+-- | @heroku_app_feature@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_app_feature terraform documentation>
+-- for more information.
+data AppFeatureResource s = AppFeatureResource'
+    { _app     :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _enabled :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+appFeatureResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (AppFeatureResource s)
+appFeatureResource _app _name =
+    TF.newResource "heroku_app_feature" TF.validator $
+        AppFeatureResource'
+            { _app = _app
+            , _enabled = TF.value P.True
+            , _name = _name
+            }
 
 instance TF.IsObject (AppFeatureResource s) where
-    toObject AppFeatureResource{..} = catMaybes
+    toObject AppFeatureResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
         ]
 
+instance TF.IsValid (AppFeatureResource s) where
+    validator = P.mempty
+
 instance P.HasApp (AppFeatureResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: AppFeatureResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: AppFeatureResource s)
+        P.lens (_app :: AppFeatureResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: AppFeatureResource s)
 
-instance P.HasEnabled (AppFeatureResource s) (TF.Attr s P.Text) where
+instance P.HasEnabled (AppFeatureResource s) (TF.Attr s P.Bool) where
     enabled =
-        lens (_enabled :: AppFeatureResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enabled = a } :: AppFeatureResource s)
+        P.lens (_enabled :: AppFeatureResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: AppFeatureResource s)
 
 instance P.HasName (AppFeatureResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: AppFeatureResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AppFeatureResource s)
+        P.lens (_name :: AppFeatureResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AppFeatureResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: AppFeatureResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @heroku_app_release@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_app_release terraform documentation>
+-- for more information.
+data AppReleaseResource s = AppReleaseResource'
+    { _app    :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _slugId :: TF.Attr s P.Text
+    -- ^ @slug_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
-    computedEnabled =
-        (_enabled :: AppFeatureResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AppFeatureResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: AppFeatureResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-appFeatureResource :: TF.Resource P.Heroku (AppFeatureResource s)
-appFeatureResource =
-    TF.newResource "heroku_app_feature" $
-        AppFeatureResource {
-              _app = TF.Nil
-            , _enabled = TF.Nil
-            , _name = TF.Nil
+appReleaseResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @slug_id@ - 'P.slugId'
+    -> TF.Resource P.Provider (AppReleaseResource s)
+appReleaseResource _app _slugId =
+    TF.newResource "heroku_app_release" TF.validator $
+        AppReleaseResource'
+            { _app = _app
+            , _slugId = _slugId
             }
 
-{- | The @heroku_app_release@ Heroku resource.
-
-Provides a
-<https://devcenter.heroku.com/articles/platform-api-reference#release>
-resource. An app release represents a combination of code, config vars and
-add-ons for an app on Heroku. ~> NOTE: This resource requires the slug be
-uploaded to Heroku prior to running terraform.
--}
-data AppReleaseResource s = AppReleaseResource {
-      _app         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the application -}
-    , _description :: !(TF.Attr s P.Text)
-    {- ^ - description of changes in this release -}
-    , _slug_id     :: !(TF.Attr s P.Text)
-    {- ^ - unique identifier of slug -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (AppReleaseResource s) where
-    toObject AppReleaseResource{..} = catMaybes
+    toObject AppReleaseResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "slug_id" <$> TF.attribute _slug_id
+        , TF.assign "slug_id" <$> TF.attribute _slugId
         ]
+
+instance TF.IsValid (AppReleaseResource s) where
+    validator = P.mempty
 
 instance P.HasApp (AppReleaseResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: AppReleaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: AppReleaseResource s)
-
-instance P.HasDescription (AppReleaseResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: AppReleaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: AppReleaseResource s)
+        P.lens (_app :: AppReleaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: AppReleaseResource s)
 
 instance P.HasSlugId (AppReleaseResource s) (TF.Attr s P.Text) where
     slugId =
-        lens (_slug_id :: AppReleaseResource s -> TF.Attr s P.Text)
-             (\s a -> s { _slug_id = a } :: AppReleaseResource s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: AppReleaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_slugId :: AppReleaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _slugId = a } :: AppReleaseResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: AppReleaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @heroku_cert@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_cert terraform documentation>
+-- for more information.
+data CertResource s = CertResource'
+    { _app              :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _certificateChain :: TF.Attr s P.Text
+    -- ^ @certificate_chain@ - (Required)
+    --
+    , _privateKey       :: TF.Attr s P.Text
+    -- ^ @private_key@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedSlugId (TF.Ref s' (AppReleaseResource s)) (TF.Attr s P.Text) where
-    computedSlugId =
-        (_slug_id :: AppReleaseResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-appReleaseResource :: TF.Resource P.Heroku (AppReleaseResource s)
-appReleaseResource =
-    TF.newResource "heroku_app_release" $
-        AppReleaseResource {
-              _app = TF.Nil
-            , _description = TF.Nil
-            , _slug_id = TF.Nil
+certResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @certificate_chain@ - 'P.certificateChain'
+    -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
+    -> TF.Resource P.Provider (CertResource s)
+certResource _app _certificateChain _privateKey =
+    TF.newResource "heroku_cert" TF.validator $
+        CertResource'
+            { _app = _app
+            , _certificateChain = _certificateChain
+            , _privateKey = _privateKey
             }
-
-{- | The @heroku_app@ Heroku resource.
-
-Provides a Heroku App resource. This can be used to create and manage
-applications on Heroku.
--}
-data AppResource s = AppResource {
-      _acm              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The flag representing Automated Certificate Management for the app. -}
-    , _buildpacks       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Buildpack names or URLs for the application. Buildpacks configured externally won't be altered if this is not present. -}
-    , _config_vars      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Configuration variables for the application. The config variables in this map are not the final set of configuration variables, but rather variables you want present. That is, other configuration variables set externally won't be removed by Terraform if they aren't present in this list. -}
-    , _internal_routing :: !(TF.Attr s P.Text)
-    {- ^ (Optional) If true, the application will be routable only internally in a private space. This option is only available for apps that also specify @space@ . This feature is currently only available in private beta. Contact Heroku Support for more details. -}
-    , _name             :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the application. In Heroku, this is also the unique ID, so it must be unique and have a minimum of 3 characters. -}
-    , _organization     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) A block that can be specified once to define organization settings for this app. The fields for this block are documented below. -}
-    , _region           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The region that the app should be deployed in. -}
-    , _space            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The name of a private space to create the app in. -}
-    , _stack            :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The application stack is what platform to run the application in. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (AppResource s) where
-    toObject AppResource{..} = catMaybes
-        [ TF.assign "acm" <$> TF.attribute _acm
-        , TF.assign "buildpacks" <$> TF.attribute _buildpacks
-        , TF.assign "config_vars" <$> TF.attribute _config_vars
-        , TF.assign "internal_routing" <$> TF.attribute _internal_routing
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "organization" <$> TF.attribute _organization
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "space" <$> TF.attribute _space
-        , TF.assign "stack" <$> TF.attribute _stack
-        ]
-
-instance P.HasAcm (AppResource s) (TF.Attr s P.Text) where
-    acm =
-        lens (_acm :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _acm = a } :: AppResource s)
-
-instance P.HasBuildpacks (AppResource s) (TF.Attr s P.Text) where
-    buildpacks =
-        lens (_buildpacks :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _buildpacks = a } :: AppResource s)
-
-instance P.HasConfigVars (AppResource s) (TF.Attr s P.Text) where
-    configVars =
-        lens (_config_vars :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _config_vars = a } :: AppResource s)
-
-instance P.HasInternalRouting (AppResource s) (TF.Attr s P.Text) where
-    internalRouting =
-        lens (_internal_routing :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _internal_routing = a } :: AppResource s)
-
-instance P.HasName (AppResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: AppResource s)
-
-instance P.HasOrganization (AppResource s) (TF.Attr s P.Text) where
-    organization =
-        lens (_organization :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _organization = a } :: AppResource s)
-
-instance P.HasRegion (AppResource s) (TF.Attr s P.Text) where
-    region =
-        lens (_region :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: AppResource s)
-
-instance P.HasSpace (AppResource s) (TF.Attr s P.Text) where
-    space =
-        lens (_space :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _space = a } :: AppResource s)
-
-instance P.HasStack (AppResource s) (TF.Attr s P.Text) where
-    stack =
-        lens (_stack :: AppResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stack = a } :: AppResource s)
-
-instance s ~ s' => P.HasComputedAcm (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedAcm =
-        (_acm :: AppResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedAllConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedAllConfigVars x = TF.compute (TF.refKey x) "all_config_vars"
-
-instance s ~ s' => P.HasComputedBuildpacks (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedBuildpacks =
-        (_buildpacks :: AppResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedConfigVars =
-        (_config_vars :: AppResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedGitUrl x = TF.compute (TF.refKey x) "git_url"
-
-instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedHerokuHostname x = TF.compute (TF.refKey x) "heroku_hostname"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedInternalRouting x = TF.compute (TF.refKey x) "internal_routing"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedOrganization =
-        (_organization :: AppResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
-
-instance s ~ s' => P.HasComputedSpace (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedSpace x = TF.compute (TF.refKey x) "space"
-
-instance s ~ s' => P.HasComputedStack (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedStack x = TF.compute (TF.refKey x) "stack"
-
-instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (AppResource s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
-
-appResource :: TF.Resource P.Heroku (AppResource s)
-appResource =
-    TF.newResource "heroku_app" $
-        AppResource {
-              _acm = TF.Nil
-            , _buildpacks = TF.Nil
-            , _config_vars = TF.Nil
-            , _internal_routing = TF.Nil
-            , _name = TF.Nil
-            , _organization = TF.Nil
-            , _region = TF.Nil
-            , _space = TF.Nil
-            , _stack = TF.Nil
-            }
-
-{- | The @heroku_cert@ Heroku resource.
-
-Provides a Heroku SSL certificate resource. It allows to set a given
-certificate for a Heroku app.
--}
-data CertResource s = CertResource {
-      _app               :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to add to. -}
-    , _certificate_chain :: !(TF.Attr s P.Text)
-    {- ^ (Required) The certificate chain to add -}
-    , _private_key       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The private key for a given certificate chain -}
-    } deriving (Show, Eq)
 
 instance TF.IsObject (CertResource s) where
-    toObject CertResource{..} = catMaybes
+    toObject CertResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
-        , TF.assign "certificate_chain" <$> TF.attribute _certificate_chain
-        , TF.assign "private_key" <$> TF.attribute _private_key
+        , TF.assign "certificate_chain" <$> TF.attribute _certificateChain
+        , TF.assign "private_key" <$> TF.attribute _privateKey
         ]
+
+instance TF.IsValid (CertResource s) where
+    validator = P.mempty
 
 instance P.HasApp (CertResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: CertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: CertResource s)
+        P.lens (_app :: CertResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: CertResource s)
 
 instance P.HasCertificateChain (CertResource s) (TF.Attr s P.Text) where
     certificateChain =
-        lens (_certificate_chain :: CertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _certificate_chain = a } :: CertResource s)
+        P.lens (_certificateChain :: CertResource s -> TF.Attr s P.Text)
+               (\s a -> s { _certificateChain = a } :: CertResource s)
 
 instance P.HasPrivateKey (CertResource s) (TF.Attr s P.Text) where
     privateKey =
-        lens (_private_key :: CertResource s -> TF.Attr s P.Text)
-             (\s a -> s { _private_key = a } :: CertResource s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: CertResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedCertificateChain =
-        (_certificate_chain :: CertResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_privateKey :: CertResource s -> TF.Attr s P.Text)
+               (\s a -> s { _privateKey = a } :: CertResource s)
 
 instance s ~ s' => P.HasComputedCname (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedCname x = TF.compute (TF.refKey x) "cname"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+    computedCname x = TF.compute (TF.refKey x) "_computedCname"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+    computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (CertResource s)) (TF.Attr s P.Text) where
-    computedPrivateKey =
-        (_private_key :: CertResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @heroku_domain@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_domain terraform documentation>
+-- for more information.
+data DomainResource s = DomainResource'
+    { _app      :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _hostname :: TF.Attr s P.Text
+    -- ^ @hostname@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-certResource :: TF.Resource P.Heroku (CertResource s)
-certResource =
-    TF.newResource "heroku_cert" $
-        CertResource {
-              _app = TF.Nil
-            , _certificate_chain = TF.Nil
-            , _private_key = TF.Nil
+domainResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
+    -> TF.Resource P.Provider (DomainResource s)
+domainResource _app _hostname =
+    TF.newResource "heroku_domain" TF.validator $
+        DomainResource'
+            { _app = _app
+            , _hostname = _hostname
             }
 
-{- | The @heroku_domain@ Heroku resource.
-
-Provides a Heroku App resource. This can be used to create and manage
-applications on Heroku.
--}
-data DomainResource s = DomainResource {
-      _app      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to link to. -}
-    , _hostname :: !(TF.Attr s P.Text)
-    {- ^ (Required) The hostname to serve requests from. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DomainResource s) where
-    toObject DomainResource{..} = catMaybes
+    toObject DomainResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "hostname" <$> TF.attribute _hostname
         ]
 
+instance TF.IsValid (DomainResource s) where
+    validator = P.mempty
+
 instance P.HasApp (DomainResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: DomainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: DomainResource s)
+        P.lens (_app :: DomainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: DomainResource s)
 
 instance P.HasHostname (DomainResource s) (TF.Attr s P.Text) where
     hostname =
-        lens (_hostname :: DomainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hostname = a } :: DomainResource s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: DomainResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_hostname :: DomainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: DomainResource s)
 
 instance s ~ s' => P.HasComputedCname (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedCname x = TF.compute (TF.refKey x) "cname"
+    computedCname x = TF.compute (TF.refKey x) "_computedCname"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "hostname"
+-- | @heroku_drain@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_drain terraform documentation>
+-- for more information.
+data DrainResource s = DrainResource'
+    { _app :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _url :: TF.Attr s P.Text
+    -- ^ @url@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-domainResource :: TF.Resource P.Heroku (DomainResource s)
-domainResource =
-    TF.newResource "heroku_domain" $
-        DomainResource {
-              _app = TF.Nil
-            , _hostname = TF.Nil
+drainResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    -> TF.Resource P.Provider (DrainResource s)
+drainResource _app _url =
+    TF.newResource "heroku_drain" TF.validator $
+        DrainResource'
+            { _app = _app
+            , _url = _url
             }
 
-{- | The @heroku_drain@ Heroku resource.
-
-Provides a Heroku Drain resource. This can be used to create and manage Log
-Drains on Heroku.
--}
-data DrainResource s = DrainResource {
-      _app :: !(TF.Attr s P.Text)
-    {- ^ (Required) The Heroku app to link to. -}
-    , _url :: !(TF.Attr s P.Text)
-    {- ^ (Required) The URL for Heroku to drain your logs to. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DrainResource s) where
-    toObject DrainResource{..} = catMaybes
+    toObject DrainResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "url" <$> TF.attribute _url
         ]
 
+instance TF.IsValid (DrainResource s) where
+    validator = P.mempty
+
 instance P.HasApp (DrainResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: DrainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: DrainResource s)
+        P.lens (_app :: DrainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: DrainResource s)
 
 instance P.HasUrl (DrainResource s) (TF.Attr s P.Text) where
     url =
-        lens (_url :: DrainResource s -> TF.Attr s P.Text)
-             (\s a -> s { _url = a } :: DrainResource s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: DrainResource s -> TF.Attr s P.Text)
-            . TF.refValue
+        P.lens (_url :: DrainResource s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: DrainResource s)
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "token"
+    computedToken x = TF.compute (TF.refKey x) "_computedToken"
 
-instance s ~ s' => P.HasComputedUrl (TF.Ref s' (DrainResource s)) (TF.Attr s P.Text) where
-    computedUrl =
-        (_url :: DrainResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @heroku_formation@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_formation terraform documentation>
+-- for more information.
+data FormationResource s = FormationResource'
+    { _app      :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _quantity :: TF.Attr s P.Integer
+    -- ^ @quantity@ - (Required)
+    --
+    , _size     :: TF.Attr s P.Text
+    -- ^ @size@ - (Required)
+    --
+    , _type'    :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-drainResource :: TF.Resource P.Heroku (DrainResource s)
-drainResource =
-    TF.newResource "heroku_drain" $
-        DrainResource {
-              _app = TF.Nil
-            , _url = TF.Nil
+formationResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Integer -- ^ @quantity@ - 'P.quantity'
+    -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Resource P.Provider (FormationResource s)
+formationResource _app _quantity _size _type' =
+    TF.newResource "heroku_formation" TF.validator $
+        FormationResource'
+            { _app = _app
+            , _quantity = _quantity
+            , _size = _size
+            , _type' = _type'
             }
 
-{- | The @heroku_formation@ Heroku resource.
-
-Provides a
-<https://devcenter.heroku.com/articles/platform-api-reference#formation>
-resource. A formation represents the formation of processes that should be
-set for an application. ~> NOTE:
--}
-data FormationResource s = FormationResource {
-      _app      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the application -}
-    , _quantity :: !(TF.Attr s P.Text)
-    {- ^ - number of processes to maintain -}
-    , _size     :: !(TF.Attr s P.Text)
-    {- ^ - dyno size (Example: “standard-1X”). Capitalization does not matter. -}
-    , _type'    :: !(TF.Attr s P.Text)
-    {- ^ - type of process such as "web" -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (FormationResource s) where
-    toObject FormationResource{..} = catMaybes
+    toObject FormationResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "quantity" <$> TF.attribute _quantity
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
+instance TF.IsValid (FormationResource s) where
+    validator = P.mempty
+
 instance P.HasApp (FormationResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: FormationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: FormationResource s)
+        P.lens (_app :: FormationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: FormationResource s)
 
-instance P.HasQuantity (FormationResource s) (TF.Attr s P.Text) where
+instance P.HasQuantity (FormationResource s) (TF.Attr s P.Integer) where
     quantity =
-        lens (_quantity :: FormationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _quantity = a } :: FormationResource s)
+        P.lens (_quantity :: FormationResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _quantity = a } :: FormationResource s)
 
 instance P.HasSize (FormationResource s) (TF.Attr s P.Text) where
     size =
-        lens (_size :: FormationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _size = a } :: FormationResource s)
+        P.lens (_size :: FormationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _size = a } :: FormationResource s)
 
 instance P.HasType' (FormationResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: FormationResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: FormationResource s)
+        P.lens (_type' :: FormationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: FormationResource s)
 
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: FormationResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @heroku_pipeline@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_pipeline terraform documentation>
+-- for more information.
+data PipelineResource s = PipelineResource'
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedQuantity (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
-    computedQuantity =
-        (_quantity :: FormationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
-    computedSize =
-        (_size :: FormationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (FormationResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: FormationResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-formationResource :: TF.Resource P.Heroku (FormationResource s)
-formationResource =
-    TF.newResource "heroku_formation" $
-        FormationResource {
-              _app = TF.Nil
-            , _quantity = TF.Nil
-            , _size = TF.Nil
-            , _type' = TF.Nil
+pipelineResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (PipelineResource s)
+pipelineResource _name =
+    TF.newResource "heroku_pipeline" TF.validator $
+        PipelineResource'
+            { _name = _name
             }
 
-{- | The @heroku_pipeline_coupling@ Heroku resource.
+instance TF.IsObject (PipelineResource s) where
+    toObject PipelineResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        ]
 
-Provides a <https://devcenter.heroku.com/articles/pipelines> resource. A
-pipeline is a group of Heroku apps that share the same codebase. Once a
-pipeline is created using <./pipeline.html> , and apps are added to
-different stages using @heroku_pipeline_coupling@ , you can promote app
-slugs to the downstream stages.
--}
-data PipelineCouplingResource s = PipelineCouplingResource {
-      _app      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the app for this coupling. -}
-    , _pipeline :: !(TF.Attr s P.Text)
-    {- ^ (Required) The ID of the pipeline to add this app to. -}
-    , _stage    :: !(TF.Attr s P.Text)
-    {- ^ (Required) The stage to couple this app to. Must be one of @review@ , @development@ , @staging@ , or @production@ . -}
-    } deriving (Show, Eq)
+instance TF.IsValid (PipelineResource s) where
+    validator = P.mempty
+
+instance P.HasName (PipelineResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: PipelineResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PipelineResource s)
+
+-- | @heroku_pipeline_coupling@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_pipeline_coupling terraform documentation>
+-- for more information.
+data PipelineCouplingResource s = PipelineCouplingResource'
+    { _app      :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _pipeline :: TF.Attr s P.Text
+    -- ^ @pipeline@ - (Required)
+    --
+    , _stage    :: TF.Attr s P.Text
+    -- ^ @stage@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+pipelineCouplingResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @pipeline@ - 'P.pipeline'
+    -> TF.Attr s P.Text -- ^ @stage@ - 'P.stage'
+    -> TF.Resource P.Provider (PipelineCouplingResource s)
+pipelineCouplingResource _app _pipeline _stage =
+    TF.newResource "heroku_pipeline_coupling" TF.validator $
+        PipelineCouplingResource'
+            { _app = _app
+            , _pipeline = _pipeline
+            , _stage = _stage
+            }
 
 instance TF.IsObject (PipelineCouplingResource s) where
-    toObject PipelineCouplingResource{..} = catMaybes
+    toObject PipelineCouplingResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "pipeline" <$> TF.attribute _pipeline
         , TF.assign "stage" <$> TF.attribute _stage
         ]
 
+instance TF.IsValid (PipelineCouplingResource s) where
+    validator = P.mempty
+
 instance P.HasApp (PipelineCouplingResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: PipelineCouplingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: PipelineCouplingResource s)
+        P.lens (_app :: PipelineCouplingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: PipelineCouplingResource s)
 
 instance P.HasPipeline (PipelineCouplingResource s) (TF.Attr s P.Text) where
     pipeline =
-        lens (_pipeline :: PipelineCouplingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
+        P.lens (_pipeline :: PipelineCouplingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _pipeline = a } :: PipelineCouplingResource s)
 
 instance P.HasStage (PipelineCouplingResource s) (TF.Attr s P.Text) where
     stage =
-        lens (_stage :: PipelineCouplingResource s -> TF.Attr s P.Text)
-             (\s a -> s { _stage = a } :: PipelineCouplingResource s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
-    computedApp x = TF.compute (TF.refKey x) "app"
+        P.lens (_stage :: PipelineCouplingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _stage = a } :: PipelineCouplingResource s)
 
 instance s ~ s' => P.HasComputedAppId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
-    computedAppId x = TF.compute (TF.refKey x) "app_id"
+    computedAppId x = TF.compute (TF.refKey x) "_computedAppId"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @heroku_space@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space terraform documentation>
+-- for more information.
+data SpaceResource s = SpaceResource'
+    { _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _organization :: TF.Attr s P.Text
+    -- ^ @organization@ - (Required)
+    --
+    , _region       :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
+    --
+    , _shield       :: TF.Attr s P.Bool
+    -- ^ @shield@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedPipeline (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
-    computedPipeline x = TF.compute (TF.refKey x) "pipeline"
-
-instance s ~ s' => P.HasComputedStage (TF.Ref s' (PipelineCouplingResource s)) (TF.Attr s P.Text) where
-    computedStage x = TF.compute (TF.refKey x) "stage"
-
-pipelineCouplingResource :: TF.Resource P.Heroku (PipelineCouplingResource s)
-pipelineCouplingResource =
-    TF.newResource "heroku_pipeline_coupling" $
-        PipelineCouplingResource {
-              _app = TF.Nil
-            , _pipeline = TF.Nil
-            , _stage = TF.Nil
+spaceResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
+    -> TF.Resource P.Provider (SpaceResource s)
+spaceResource _name _organization =
+    TF.newResource "heroku_space" TF.validator $
+        SpaceResource'
+            { _name = _name
+            , _organization = _organization
+            , _region = TF.Nil
+            , _shield = TF.value P.False
             }
-
-{- | The @heroku_pipeline@ Heroku resource.
-
-Provides a <https://devcenter.heroku.com/articles/pipelines> resource. A
-pipeline is a group of Heroku apps that share the same codebase. Once a
-pipeline is created, and apps are added to different stages using
-<./pipeline_coupling.html> , you can promote app slugs to the next stage.
--}
-data PipelineResource s = PipelineResource {
-      _name :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the pipeline. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (PipelineResource s) where
-    toObject PipelineResource{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance P.HasName (PipelineResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: PipelineResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: PipelineResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PipelineResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (PipelineResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-pipelineResource :: TF.Resource P.Heroku (PipelineResource s)
-pipelineResource =
-    TF.newResource "heroku_pipeline" $
-        PipelineResource {
-              _name = TF.Nil
-            }
-
-{- | The @heroku_space_inbound_ruleset@ Heroku resource.
-
-Provides a resource for managing
-<https://devcenter.heroku.com/articles/platform-api-reference#inbound-ruleset>
-for Heroku Private Spaces.
--}
-data SpaceInboundRulesetResource s = SpaceInboundRulesetResource {
-      _rule  :: !(TF.Attr s P.Text)
-    {- ^ (Required) At least one @rule@ block. Rules are documented below. -}
-    , _space :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the space. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (SpaceInboundRulesetResource s) where
-    toObject SpaceInboundRulesetResource{..} = catMaybes
-        [ TF.assign "rule" <$> TF.attribute _rule
-        , TF.assign "space" <$> TF.attribute _space
-        ]
-
-instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
-    rule =
-        lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _rule = a } :: SpaceInboundRulesetResource s)
-
-instance P.HasSpace (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
-    space =
-        lens (_space :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
-             (\s a -> s { _space = a } :: SpaceInboundRulesetResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedRule (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
-    computedRule =
-        (_rule :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpaceInboundRulesetResource s)) (TF.Attr s P.Text) where
-    computedSpace =
-        (_space :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-spaceInboundRulesetResource :: TF.Resource P.Heroku (SpaceInboundRulesetResource s)
-spaceInboundRulesetResource =
-    TF.newResource "heroku_space_inbound_ruleset" $
-        SpaceInboundRulesetResource {
-              _rule = TF.Nil
-            , _space = TF.Nil
-            }
-
-{- | The @heroku_space_member@ Heroku resource.
-
-Provides a Heroku Space resource for managing app permissions for the entire
-space. Members with the admin role will always have full permissions to a
-Heroku Space, so using this resource on an admin will have no affect. The
-provided member must already exist in your Heroku organization. Currently
-the only supported permission is @create_apps@ .
--}
-data SpaceMemberResource s = SpaceMemberResource {
-      _email       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The email of the team member to set permissions for. -}
-    , _permissions :: !(TF.Attr s P.Text)
-    {- ^ (Required) The permissions to grant the team member for the space. Currently @create_apps@ is the only supported permission. If not provided the member will have no permissions to the space. Members with admin role will always have @create_apps@ permissions, which cannot be removed. -}
-    , _space       :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the space. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (SpaceMemberResource s) where
-    toObject SpaceMemberResource{..} = catMaybes
-        [ TF.assign "email" <$> TF.attribute _email
-        , TF.assign "permissions" <$> TF.attribute _permissions
-        , TF.assign "space" <$> TF.attribute _space
-        ]
-
-instance P.HasEmail (SpaceMemberResource s) (TF.Attr s P.Text) where
-    email =
-        lens (_email :: SpaceMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: SpaceMemberResource s)
-
-instance P.HasPermissions (SpaceMemberResource s) (TF.Attr s P.Text) where
-    permissions =
-        lens (_permissions :: SpaceMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: SpaceMemberResource s)
-
-instance P.HasSpace (SpaceMemberResource s) (TF.Attr s P.Text) where
-    space =
-        lens (_space :: SpaceMemberResource s -> TF.Attr s P.Text)
-             (\s a -> s { _space = a } :: SpaceMemberResource s)
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (SpaceMemberResource s)) (TF.Attr s P.Text) where
-    computedEmail =
-        (_email :: SpaceMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (SpaceMemberResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: SpaceMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpaceMemberResource s)) (TF.Attr s P.Text) where
-    computedSpace =
-        (_space :: SpaceMemberResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-spaceMemberResource :: TF.Resource P.Heroku (SpaceMemberResource s)
-spaceMemberResource =
-    TF.newResource "heroku_space_member" $
-        SpaceMemberResource {
-              _email = TF.Nil
-            , _permissions = TF.Nil
-            , _space = TF.Nil
-            }
-
-{- | The @heroku_space_peering_connection_accepter@ Heroku resource.
-
-Provides a resource for accepting VPC peering requests to Heroku Private
-Spaces.
--}
-data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterResource {
-      _space                     :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the space. -}
-    , _vpc_peering_connection_id :: !(TF.Attr s P.Text)
-    {- ^ (Required) The peering connection request ID. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (SpacePeeringConnectionAccepterResource s) where
-    toObject SpacePeeringConnectionAccepterResource{..} = catMaybes
-        [ TF.assign "space" <$> TF.attribute _space
-        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpc_peering_connection_id
-        ]
-
-instance P.HasSpace (SpacePeeringConnectionAccepterResource s) (TF.Attr s P.Text) where
-    space =
-        lens (_space :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _space = a } :: SpacePeeringConnectionAccepterResource s)
-
-instance P.HasVpcPeeringConnectionId (SpacePeeringConnectionAccepterResource s) (TF.Attr s P.Text) where
-    vpcPeeringConnectionId =
-        lens (_vpc_peering_connection_id :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
-             (\s a -> s { _vpc_peering_connection_id = a } :: SpacePeeringConnectionAccepterResource s)
-
-instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
-    computedSpace =
-        (_space :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
-    computedType' x = TF.compute (TF.refKey x) "type"
-
-instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
-    computedVpcPeeringConnectionId =
-        (_vpc_peering_connection_id :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-spacePeeringConnectionAccepterResource :: TF.Resource P.Heroku (SpacePeeringConnectionAccepterResource s)
-spacePeeringConnectionAccepterResource =
-    TF.newResource "heroku_space_peering_connection_accepter" $
-        SpacePeeringConnectionAccepterResource {
-              _space = TF.Nil
-            , _vpc_peering_connection_id = TF.Nil
-            }
-
-{- | The @heroku_space@ Heroku resource.
-
-Provides a Heroku Space resource for running apps in isolated, highly
-available, secure app execution environments.
--}
-data SpaceResource s = SpaceResource {
-      _name         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the space. -}
-    , _organization :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the organization which will own the space. -}
-    , _region       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The region that the space should be created in. -}
-    , _shield       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether or not the private space should be <https://devcenter.heroku.com/articles/private-spaces#shield-private-spaces> . -}
-    } deriving (Show, Eq)
 
 instance TF.IsObject (SpaceResource s) where
-    toObject SpaceResource{..} = catMaybes
+    toObject SpaceResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "organization" <$> TF.attribute _organization
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "shield" <$> TF.attribute _shield
         ]
 
+instance TF.IsValid (SpaceResource s) where
+    validator = P.mempty
+
 instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SpaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SpaceResource s)
+        P.lens (_name :: SpaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SpaceResource s)
 
 instance P.HasOrganization (SpaceResource s) (TF.Attr s P.Text) where
     organization =
-        lens (_organization :: SpaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _organization = a } :: SpaceResource s)
+        P.lens (_organization :: SpaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _organization = a } :: SpaceResource s)
 
 instance P.HasRegion (SpaceResource s) (TF.Attr s P.Text) where
     region =
-        lens (_region :: SpaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _region = a } :: SpaceResource s)
+        P.lens (_region :: SpaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: SpaceResource s)
 
-instance P.HasShield (SpaceResource s) (TF.Attr s P.Text) where
+instance P.HasShield (SpaceResource s) (TF.Attr s P.Bool) where
     shield =
-        lens (_shield :: SpaceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _shield = a } :: SpaceResource s)
+        P.lens (_shield :: SpaceResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _shield = a } :: SpaceResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedOutboundIps x = TF.compute (TF.refKey x) "_computedOutboundIps"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedTrustedIpRanges (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedTrustedIpRanges x = TF.compute (TF.refKey x) "_computedTrustedIpRanges"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "organization"
+-- | @heroku_space_app_access@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space_app_access terraform documentation>
+-- for more information.
+data SpaceAppAccessResource s = SpaceAppAccessResource'
+    { _email       :: TF.Attr s P.Text
+    -- ^ @email@ - (Required)
+    --
+    , _permissions :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @permissions@ - (Required)
+    --
+    , _space       :: TF.Attr s P.Text
+    -- ^ @space@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
-    computedOutboundIps x = TF.compute (TF.refKey x) "outbound_ips"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
-
-instance s ~ s' => P.HasComputedShield (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Text) where
-    computedShield =
-        (_shield :: SpaceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-spaceResource :: TF.Resource P.Heroku (SpaceResource s)
-spaceResource =
-    TF.newResource "heroku_space" $
-        SpaceResource {
-              _name = TF.Nil
-            , _organization = TF.Nil
-            , _region = TF.Nil
-            , _shield = TF.Nil
+spaceAppAccessResource
+    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @permissions@ - 'P.permissions'
+    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    -> TF.Resource P.Provider (SpaceAppAccessResource s)
+spaceAppAccessResource _email _permissions _space =
+    TF.newResource "heroku_space_app_access" TF.validator $
+        SpaceAppAccessResource'
+            { _email = _email
+            , _permissions = _permissions
+            , _space = _space
             }
 
-{- | The @heroku_space_vpn_connection@ Heroku resource.
-
-Provides a resource for creating a VPN connection between a network and a
-Heroku Private Space. For more information, see
-<https://devcenter.heroku.com/articles/private-space-vpn-connection?preview=1>
-in the Heroku DevCenter. ~> NOTE: VPN connections are currently a beta
-feature that requires you email Heroku Support to have it enabled.
-Attempting to create a VPN connection without the feature enabled by Heroku
-Support will fail.
--}
-data SpaceVpnConnectionResource s = SpaceVpnConnectionResource {
-      _name           :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the VPN connection. -}
-    , _public_ip      :: !(TF.Attr s P.Text)
-    {- ^ (Required) The public IP address of the VPN endpoint on the network where the VPN connection will be established. -}
-    , _routable_cidrs :: !(TF.Attr s P.Text)
-    {- ^ (Required) A list of IPv4 CIDR blocks used by the network where the VPN connection will be established. -}
-    , _space          :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the Heroku Private Space where the VPN connection will be established. -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (SpaceVpnConnectionResource s) where
-    toObject SpaceVpnConnectionResource{..} = catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "public_ip" <$> TF.attribute _public_ip
-        , TF.assign "routable_cidrs" <$> TF.attribute _routable_cidrs
+instance TF.IsObject (SpaceAppAccessResource s) where
+    toObject SpaceAppAccessResource'{..} = P.catMaybes
+        [ TF.assign "email" <$> TF.attribute _email
+        , TF.assign "permissions" <$> TF.attribute _permissions
         , TF.assign "space" <$> TF.attribute _space
         ]
 
+instance TF.IsValid (SpaceAppAccessResource s) where
+    validator = P.mempty
+
+instance P.HasEmail (SpaceAppAccessResource s) (TF.Attr s P.Text) where
+    email =
+        P.lens (_email :: SpaceAppAccessResource s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: SpaceAppAccessResource s)
+
+instance P.HasPermissions (SpaceAppAccessResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    permissions =
+        P.lens (_permissions :: SpaceAppAccessResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _permissions = a } :: SpaceAppAccessResource s)
+
+instance P.HasSpace (SpaceAppAccessResource s) (TF.Attr s P.Text) where
+    space =
+        P.lens (_space :: SpaceAppAccessResource s -> TF.Attr s P.Text)
+               (\s a -> s { _space = a } :: SpaceAppAccessResource s)
+
+-- | @heroku_space_inbound_ruleset@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space_inbound_ruleset terraform documentation>
+-- for more information.
+data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
+    { _rule  :: TF.Attr s (P.NonEmpty (TF.Attr s (Rule s)))
+    -- ^ @rule@ - (Required)
+    --
+    , _space :: TF.Attr s P.Text
+    -- ^ @space@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+spaceInboundRulesetResource
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (Rule s))) -- ^ @rule@ - 'P.rule'
+    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    -> TF.Resource P.Provider (SpaceInboundRulesetResource s)
+spaceInboundRulesetResource _rule _space =
+    TF.newResource "heroku_space_inbound_ruleset" TF.validator $
+        SpaceInboundRulesetResource'
+            { _rule = _rule
+            , _space = _space
+            }
+
+instance TF.IsObject (SpaceInboundRulesetResource s) where
+    toObject SpaceInboundRulesetResource'{..} = P.catMaybes
+        [ TF.assign "rule" <$> TF.attribute _rule
+        , TF.assign "space" <$> TF.attribute _space
+        ]
+
+instance TF.IsValid (SpaceInboundRulesetResource s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_rule"
+                  (_rule
+                      :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Rule s))))
+                  TF.validator
+
+instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (Rule s)))) where
+    rule =
+        P.lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Rule s))))
+               (\s a -> s { _rule = a } :: SpaceInboundRulesetResource s)
+
+instance P.HasSpace (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
+    space =
+        P.lens (_space :: SpaceInboundRulesetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _space = a } :: SpaceInboundRulesetResource s)
+
+-- | @heroku_space_peering_connection_accepter@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space_peering_connection_accepter terraform documentation>
+-- for more information.
+data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterResource'
+    { _space                  :: TF.Attr s P.Text
+    -- ^ @space@ - (Required)
+    --
+    , _vpcPeeringConnectionId :: TF.Attr s P.Text
+    -- ^ @vpc_peering_connection_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+spacePeeringConnectionAccepterResource
+    :: TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    -> TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
+    -> TF.Resource P.Provider (SpacePeeringConnectionAccepterResource s)
+spacePeeringConnectionAccepterResource _space _vpcPeeringConnectionId =
+    TF.newResource "heroku_space_peering_connection_accepter" TF.validator $
+        SpacePeeringConnectionAccepterResource'
+            { _space = _space
+            , _vpcPeeringConnectionId = _vpcPeeringConnectionId
+            }
+
+instance TF.IsObject (SpacePeeringConnectionAccepterResource s) where
+    toObject SpacePeeringConnectionAccepterResource'{..} = P.catMaybes
+        [ TF.assign "space" <$> TF.attribute _space
+        , TF.assign "vpc_peering_connection_id" <$> TF.attribute _vpcPeeringConnectionId
+        ]
+
+instance TF.IsValid (SpacePeeringConnectionAccepterResource s) where
+    validator = P.mempty
+
+instance P.HasSpace (SpacePeeringConnectionAccepterResource s) (TF.Attr s P.Text) where
+    space =
+        P.lens (_space :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _space = a } :: SpacePeeringConnectionAccepterResource s)
+
+instance P.HasVpcPeeringConnectionId (SpacePeeringConnectionAccepterResource s) (TF.Attr s P.Text) where
+    vpcPeeringConnectionId =
+        P.lens (_vpcPeeringConnectionId :: SpacePeeringConnectionAccepterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _vpcPeeringConnectionId = a } :: SpacePeeringConnectionAccepterResource s)
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (SpacePeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "_computedType"
+
+-- | @heroku_space_vpn_connection@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space_vpn_connection terraform documentation>
+-- for more information.
+data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
+    { _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _publicIp      :: TF.Attr s P.Text
+    -- ^ @public_ip@ - (Required)
+    --
+    , _routableCidrs :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @routable_cidrs@ - (Required)
+    --
+    , _space         :: TF.Attr s P.Text
+    -- ^ @space@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+spaceVpnConnectionResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @public_ip@ - 'P.publicIp'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ - 'P.routableCidrs'
+    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    -> TF.Resource P.Provider (SpaceVpnConnectionResource s)
+spaceVpnConnectionResource _name _publicIp _routableCidrs _space =
+    TF.newResource "heroku_space_vpn_connection" TF.validator $
+        SpaceVpnConnectionResource'
+            { _name = _name
+            , _publicIp = _publicIp
+            , _routableCidrs = _routableCidrs
+            , _space = _space
+            }
+
+instance TF.IsObject (SpaceVpnConnectionResource s) where
+    toObject SpaceVpnConnectionResource'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "public_ip" <$> TF.attribute _publicIp
+        , TF.assign "routable_cidrs" <$> TF.attribute _routableCidrs
+        , TF.assign "space" <$> TF.attribute _space
+        ]
+
+instance TF.IsValid (SpaceVpnConnectionResource s) where
+    validator = P.mempty
+
 instance P.HasName (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: SpaceVpnConnectionResource s)
+        P.lens (_name :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SpaceVpnConnectionResource s)
 
 instance P.HasPublicIp (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
     publicIp =
-        lens (_public_ip :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _public_ip = a } :: SpaceVpnConnectionResource s)
+        P.lens (_publicIp :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _publicIp = a } :: SpaceVpnConnectionResource s)
 
-instance P.HasRoutableCidrs (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
+instance P.HasRoutableCidrs (SpaceVpnConnectionResource s) (TF.Attr s [TF.Attr s P.Text]) where
     routableCidrs =
-        lens (_routable_cidrs :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _routable_cidrs = a } :: SpaceVpnConnectionResource s)
+        P.lens (_routableCidrs :: SpaceVpnConnectionResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _routableCidrs = a } :: SpaceVpnConnectionResource s)
 
 instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
     space =
-        lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-             (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
+        P.lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
 
-instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedIkeVersion x = TF.compute (TF.refKey x) "ike_version"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedPublicIp =
-        (_public_ip :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedRoutableCidrs (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedRoutableCidrs =
-        (_routable_cidrs :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSpace (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedSpace =
-        (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
-            . TF.refValue
+instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Integer) where
+    computedIkeVersion x = TF.compute (TF.refKey x) "_computedIkeVersion"
 
 instance s ~ s' => P.HasComputedSpaceCidrBlock (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedSpaceCidrBlock x = TF.compute (TF.refKey x) "space_cidr_block"
+    computedSpaceCidrBlock x = TF.compute (TF.refKey x) "_computedSpaceCidrBlock"
 
-instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
-    computedTunnels x = TF.compute (TF.refKey x) "tunnels"
+instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s [TF.Attr s (Tunnels s)]) where
+    computedTunnels x = TF.compute (TF.refKey x) "_computedTunnels"
 
-spaceVpnConnectionResource :: TF.Resource P.Heroku (SpaceVpnConnectionResource s)
-spaceVpnConnectionResource =
-    TF.newResource "heroku_space_vpn_connection" $
-        SpaceVpnConnectionResource {
-              _name = TF.Nil
-            , _public_ip = TF.Nil
-            , _routable_cidrs = TF.Nil
-            , _space = TF.Nil
+-- | @heroku_team_collaborator@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Heroku/heroku_team_collaborator terraform documentation>
+-- for more information.
+data TeamCollaboratorResource s = TeamCollaboratorResource'
+    { _app         :: TF.Attr s P.Text
+    -- ^ @app@ - (Required)
+    --
+    , _email       :: TF.Attr s P.Text
+    -- ^ @email@ - (Required)
+    --
+    , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @permissions@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+teamCollaboratorResource
+    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
+    -> TF.Attr s P.Text -- ^ @email@ - 'P.email'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
+    -> TF.Resource P.Provider (TeamCollaboratorResource s)
+teamCollaboratorResource _app _email _permissions =
+    TF.newResource "heroku_team_collaborator" TF.validator $
+        TeamCollaboratorResource'
+            { _app = _app
+            , _email = _email
+            , _permissions = _permissions
             }
 
-{- | The @heroku_team_collaborator@ Heroku resource.
-
-Provides a
-<https://devcenter.heroku.com/articles/platform-api-reference#team-app-collaborator>
-resource. A team collaborator represents an account that has been given
-access to a team app on Heroku. ~> NOTE: Please only use this resource if
-you have team/organization apps
--}
-data TeamCollaboratorResource s = TeamCollaboratorResource {
-      _app         :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the team app that the team collaborator will be added to. -}
-    , _email       :: !(TF.Attr s P.Text)
-    {- ^ (Required) Email address of the team collaborator -}
-    , _permissions :: !(TF.Attr s P.Text)
-    {- ^ (Required) List of permissions that will be granted to the team collaborator. The order in which individual permissions are set here does not matter. Please <https://devcenter.heroku.com/articles/app-permissions> for more information on available permissions. -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (TeamCollaboratorResource s) where
-    toObject TeamCollaboratorResource{..} = catMaybes
+    toObject TeamCollaboratorResource'{..} = P.catMaybes
         [ TF.assign "app" <$> TF.attribute _app
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "permissions" <$> TF.attribute _permissions
         ]
 
+instance TF.IsValid (TeamCollaboratorResource s) where
+    validator = P.mempty
+
 instance P.HasApp (TeamCollaboratorResource s) (TF.Attr s P.Text) where
     app =
-        lens (_app :: TeamCollaboratorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _app = a } :: TeamCollaboratorResource s)
+        P.lens (_app :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+               (\s a -> s { _app = a } :: TeamCollaboratorResource s)
 
 instance P.HasEmail (TeamCollaboratorResource s) (TF.Attr s P.Text) where
     email =
-        lens (_email :: TeamCollaboratorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _email = a } :: TeamCollaboratorResource s)
+        P.lens (_email :: TeamCollaboratorResource s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: TeamCollaboratorResource s)
 
-instance P.HasPermissions (TeamCollaboratorResource s) (TF.Attr s P.Text) where
+instance P.HasPermissions (TeamCollaboratorResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     permissions =
-        lens (_permissions :: TeamCollaboratorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _permissions = a } :: TeamCollaboratorResource s)
-
-instance s ~ s' => P.HasComputedApp (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
-    computedApp =
-        (_app :: TeamCollaboratorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
-    computedEmail =
-        (_email :: TeamCollaboratorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (TeamCollaboratorResource s)) (TF.Attr s P.Text) where
-    computedPermissions =
-        (_permissions :: TeamCollaboratorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-teamCollaboratorResource :: TF.Resource P.Heroku (TeamCollaboratorResource s)
-teamCollaboratorResource =
-    TF.newResource "heroku_team_collaborator" $
-        TeamCollaboratorResource {
-              _app = TF.Nil
-            , _email = TF.Nil
-            , _permissions = TF.Nil
-            }
+        P.lens (_permissions :: TeamCollaboratorResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _permissions = a } :: TeamCollaboratorResource s)

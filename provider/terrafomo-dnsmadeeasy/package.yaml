@@ -9,10 +9,11 @@ name: terrafomo-dnsmadeeasy
 
 dependencies:
   - base
+  - unordered-containers
+  - text
+  - terrafomo
   - hashable
   - microlens
-  - terrafomo
-  - text
 
 library:
   source-dirs:

@@ -1,0 +1,111 @@
+{
+  "name": "powerdns",
+  "schemas": [
+    {
+      "name": "api_key",
+      "type": "TypeString",
+      "description": "REST API authentication key",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "server_url",
+      "type": "TypeString",
+      "description": "Location of PowerDNS server",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    }
+  ],
+  "resources": [
+    {
+      "name": "powerdns_record",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "records",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "records",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "ttl",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": []
+}

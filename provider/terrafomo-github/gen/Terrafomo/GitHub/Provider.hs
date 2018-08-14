@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,92 +17,109 @@
 --
 module Terrafomo.GitHub.Provider
     (
-    -- * Provider Datatype
-      GitHub (..)
-    , emptyGitHub
-
-    -- * Lenses
-    , providerBaseUrl
-    , providerInsecure
-    , providerOrganization
-    , providerToken
+    -- * GitHub Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.GitHub.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.GitHub.Lens  as P
 import qualified Terrafomo.GitHub.Types as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Provider     as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @GitHub@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/GitHub/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _baseUrl      :: P.Maybe P.Text
+    -- ^ @base_url@ - (Optional)
+    -- The GitHub Base API URL
+    --
+    , _insecure     :: P.Bool
+    -- ^ @insecure@ - (Optional)
+    -- Whether server should be accessed without verifying the TLS certificate.
+    --
+    , _organization :: P.Text
+    -- ^ @organization@ - (Required)
+    -- The GitHub organization name to manage.
+    --
+    , _token        :: P.Text
+    -- ^ @token@ - (Required)
+    -- The OAuth token used to connect to GitHub.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | GitHub Terraform provider.
+newProvider
+    :: P.Text -- ^ @organization@ - 'P.organization'
+    -> P.Text -- ^ @token@ - 'P.token'
+    -> Provider
+newProvider _organization _token =
+    Provider'
+        { _baseUrl = P.Nothing
+        , _insecure = P.False
+        , _organization = _organization
+        , _token = _token
+        }
 
-The GitHub provider is used to interact with GitHub organization resources.
-The provider allows you to manage your GitHub organization's members and
-teams easily. It needs to be configured with the proper credentials before
-it can be used. Use the navigation to the left to read about the available
-resources.
--}
-data GitHub = GitHub {
-      _base_url     :: !(Maybe P.Text)
-    {- ^ (Optional) This is the target GitHub base API endpoint. Providing a value is a requirement when working with GitHub Enterprise.  It is optional to provide this value and it can also be sourced from the @GITHUB_BASE_URL@ environment variable.  The value must end with a slash. -}
-    , _insecure     :: !(Maybe P.Text)
-    {- ^ (Optional) Whether server should be accessed without verifying the TLS certificate. As the name suggests this is insecure and should not be used beyond experiments, accessing local (non-production) GHE instance etc. There is a number of ways to obtain trusted certificate for free, e.g. from <https://letsencrypt.org/> . Such trusted certificate does not require this option to be enabled. Defaults to @false@ . -}
-    , _organization :: !(Maybe P.Text)
-    {- ^ (Optional) This is the target GitHub organization to manage. The account corresponding to the token will need "owner" privileges for this organization. It must be provided, but it can also be sourced from the @GITHUB_ORGANIZATION@ environment variable. -}
-    , _token        :: !(Maybe P.Text)
-    {- ^ (Optional) This is the GitHub personal access token. It must be provided, but it can also be sourced from the @GITHUB_TOKEN@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable GitHub
-
-instance TF.IsSection GitHub where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (GitHub))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "base_url" <$> _base_url x
-                  , TF.assign "insecure" <$> _insecure x
-                  , TF.assign "organization" <$> _organization x
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "base_url" <$> _baseUrl
+                  , P.Just $ TF.assign "insecure" _insecure
+                  , P.Just $ TF.assign "organization" _organization
+                  , P.Just $ TF.assign "token" _token
                   ])
 
-instance TF.IsProvider GitHub where
-    type ProviderType GitHub = "github"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyGitHub :: GitHub
-emptyGitHub = GitHub {
-        _base_url = Nothing
-      , _insecure = Nothing
-      , _organization = Nothing
-      , _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerBaseUrl :: Lens' GitHub (Maybe P.Text)
-providerBaseUrl =
-    lens _base_url (\s a -> s { _base_url = a })
+instance P.HasBaseUrl (Provider) (P.Maybe P.Text) where
+    baseUrl =
+        P.lens (_baseUrl :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _baseUrl = a } :: Provider)
 
-providerInsecure :: Lens' GitHub (Maybe P.Text)
-providerInsecure =
-    lens _insecure (\s a -> s { _insecure = a })
+instance P.HasInsecure (Provider) (P.Bool) where
+    insecure =
+        P.lens (_insecure :: Provider -> P.Bool)
+               (\s a -> s { _insecure = a } :: Provider)
 
-providerOrganization :: Lens' GitHub (Maybe P.Text)
-providerOrganization =
-    lens _organization (\s a -> s { _organization = a })
+instance P.HasOrganization (Provider) (P.Text) where
+    organization =
+        P.lens (_organization :: Provider -> P.Text)
+               (\s a -> s { _organization = a } :: Provider)
 
-providerToken :: Lens' GitHub (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasToken (Provider) (P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Text)
+               (\s a -> s { _token = a } :: Provider)

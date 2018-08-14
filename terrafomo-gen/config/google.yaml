@@ -1,4 +1,2 @@
-name: Google
-package: terrafomo-google
-datatype: true
-original: google
+package-name: terrafomo-google
+provider-name: Google

@@ -15,443 +15,498 @@ module Terrafomo.Triton.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      Has(Deprecated) locality (..)
-    , HasAdministratorPw (..)
-    , HasAffinity (..)
-    , HasCapacity (..)
+      HasGroup (..)
+    , HasUrl (..)
     , HasCloudConfig (..)
-    , HasCns (..)
-    , HasCnsEnabled (..)
-    , HasDeletionProtectionEnabled (..)
-    , HasDescription (..)
-    , HasEmail (..)
-    , HasEnabled (..)
-    , HasEndpoint (..)
-    , HasFirewallEnabled (..)
-    , HasGateway (..)
-    , HasGroupName (..)
-    , HasId (..)
     , HasImage (..)
-    , HasInternetNat (..)
-    , HasKey (..)
-    , HasLogin (..)
-    , HasMachineId (..)
-    , HasMetadata (..)
-    , HasMostRecent (..)
-    , HasName (..)
-    , HasNetworks (..)
-    , HasOs (..)
-    , HasOwner (..)
-    , HasPackage (..)
-    , HasProvisionEndIp (..)
-    , HasProvisionStartIp (..)
-    , HasPublic (..)
-    , HasResolvers (..)
-    , HasRootAuthorizedKeys (..)
-    , HasRoutes (..)
-    , HasRule (..)
+    , HasFirewallEnabled (..)
+    , HasVcpus (..)
     , HasState (..)
-    , HasSubnet (..)
-    , HasTags (..)
-    , HasTemplate (..)
-    , HasTemplateName (..)
+    , HasKey (..)
+    , HasFarFrom (..)
+    , HasOwner (..)
+    , HasCloseTo (..)
     , HasType' (..)
-    , HasUserData (..)
+    , HasAccount (..)
+    , HasEnabled (..)
+    , HasInsecureSkipTlsVerify (..)
+    , HasKeyId (..)
+    , HasDeletionProtectionEnabled (..)
+    , HasNetwork (..)
+    , HasOs (..)
+    , HasRule (..)
+    , HasFilter (..)
+    , HasNetworks (..)
+    , HasDescription (..)
+    , HasMostRecent (..)
+    , HasLwps (..)
+    , HasCns (..)
+    , HasDisk (..)
+    , HasTags (..)
+    , HasAdministratorPw (..)
+    , HasProvisionStartIp (..)
+    , HasSubnet (..)
     , HasUserScript (..)
-    , HasUserdata (..)
-    , HasVersion (..)
     , HasVlanId (..)
+    , HasUser (..)
+    , HasGateway (..)
+    , HasMachineId (..)
+    , HasInternetNat (..)
+    , HasGroupName (..)
+    , HasPublic (..)
+    , HasUserData (..)
+    , HasAffinity (..)
+    , HasTemplate (..)
+    , HasLocality (..)
+    , HasVersion (..)
+    , HasTemplateName (..)
+    , HasMetadata (..)
+    , HasServices (..)
+    , HasName (..)
+    , HasMemory (..)
+    , HasProvisionEndIp (..)
+    , HasPackage (..)
+    , HasDisable (..)
+    , HasSwap (..)
+    , HasKeyMaterial (..)
 
     -- ** Computed Attributes
-    , HasComputed(Deprecated) locality (..)
-    , HasComputedAdministratorPw (..)
-    , HasComputedAffinity (..)
-    , HasComputedCapacity (..)
-    , HasComputedCloudConfig (..)
-    , HasComputedCns (..)
-    , HasComputedCnsEnabled (..)
-    , HasComputedComputeNode (..)
-    , HasComputedCreated (..)
-    , HasComputedDataset (..)
-    , HasComputedDeletionProtectionEnabled (..)
-    , HasComputedDescription (..)
-    , HasComputedDisk (..)
+    , HasComputedIps (..)
+    , HasComputedGateway (..)
+    , HasComputedInternetNat (..)
+    , HasComputedDomainNames (..)
     , HasComputedEmail (..)
-    , HasComputedEnabled (..)
+    , HasComputedDataset (..)
+    , HasComputedVersion (..)
+    , HasComputedPrimary (..)
+    , HasComputedNic (..)
+    , HasComputedDescription (..)
+    , HasComputedCreated (..)
+    , HasComputedMac (..)
+    , HasComputedLwps (..)
+    , HasComputedRootAuthorizedKeys (..)
+    , HasComputedDisk (..)
+    , HasComputedCapacity (..)
+    , HasComputedPrimaryip (..)
+    , HasComputedGlobal (..)
+    , HasComputedState (..)
+    , HasComputedLogin (..)
+    , HasComputedPublic (..)
     , HasComputedEndpoint (..)
     , HasComputedFabric (..)
-    , HasComputedFirewallEnabled (..)
-    , HasComputedGateway (..)
-    , HasComputedGroupName (..)
-    , HasComputedId (..)
-    , HasComputedImage (..)
-    , HasComputedInternetNat (..)
-    , HasComputedIp (..)
-    , HasComputedIps (..)
-    , HasComputedKey (..)
-    , HasComputedLogin (..)
-    , HasComputedMac (..)
-    , HasComputedMachineId (..)
-    , HasComputedMemory (..)
     , HasComputedMetadata (..)
-    , HasComputedMostRecent (..)
-    , HasComputedName (..)
-    , HasComputedNetmask (..)
-    , HasComputedNetwork (..)
-    , HasComputedNetworks (..)
-    , HasComputedNic (..)
-    , HasComputedOs (..)
-    , HasComputedOwner (..)
-    , HasComputedPackage (..)
-    , HasComputedPrimary (..)
-    , HasComputedPrimaryip (..)
-    , HasComputedProvisionEndIp (..)
-    , HasComputedProvisionStartIp (..)
-    , HasComputedPublic (..)
     , HasComputedResolvers (..)
-    , HasComputedRootAuthorizedKeys (..)
-    , HasComputedRoutes (..)
-    , HasComputedRule (..)
-    , HasComputedState (..)
+    , HasComputedName (..)
+    , HasComputedProvisionEndIp (..)
     , HasComputedSubnet (..)
-    , HasComputedTags (..)
-    , HasComputedTemplate (..)
-    , HasComputedTemplateName (..)
-    , HasComputedType' (..)
-    , HasComputedUpdated (..)
-    , HasComputedUserData (..)
-    , HasComputedUserScript (..)
+    , HasComputedRoutes (..)
+    , HasComputedCnsEnabled (..)
     , HasComputedUserdata (..)
-    , HasComputedVersion (..)
-    , HasComputedVlanId (..)
+    , HasComputedProvisionStartIp (..)
+    , HasComputedIp (..)
+    , HasComputedMemory (..)
+    , HasComputedTags (..)
+    , HasComputedType (..)
+    , HasComputedSwap (..)
+    , HasComputedVcpus (..)
+    , HasComputedUpdated (..)
+    , HasComputedNetmask (..)
+    , HasComputedNetworks (..)
+    , HasComputedGroup (..)
+    , HasComputedComputeNode (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class Has(Deprecated) locality a b | a -> b where
-    (Deprecated) locality :: Lens' a b
+class HasGroup a b | a -> b where
+    group :: P.Lens' a b
 
-instance Has(Deprecated) locality a b => Has(Deprecated) locality (TF.Schema l p a) b where
-    (Deprecated) locality = TF.configuration . (Deprecated) locality
+instance HasGroup a b => HasGroup (TF.Schema l p a) b where
+    group = TF.configuration . group
 
-class HasAdministratorPw a b | a -> b where
-    administratorPw :: Lens' a b
+class HasUrl a b | a -> b where
+    url :: P.Lens' a b
 
-instance HasAdministratorPw a b => HasAdministratorPw (TF.Schema l p a) b where
-    administratorPw = TF.configuration . administratorPw
-
-class HasAffinity a b | a -> b where
-    affinity :: Lens' a b
-
-instance HasAffinity a b => HasAffinity (TF.Schema l p a) b where
-    affinity = TF.configuration . affinity
-
-class HasCapacity a b | a -> b where
-    capacity :: Lens' a b
-
-instance HasCapacity a b => HasCapacity (TF.Schema l p a) b where
-    capacity = TF.configuration . capacity
+instance HasUrl a b => HasUrl (TF.Schema l p a) b where
+    url = TF.configuration . url
 
 class HasCloudConfig a b | a -> b where
-    cloudConfig :: Lens' a b
+    cloudConfig :: P.Lens' a b
 
 instance HasCloudConfig a b => HasCloudConfig (TF.Schema l p a) b where
     cloudConfig = TF.configuration . cloudConfig
 
-class HasCns a b | a -> b where
-    cns :: Lens' a b
-
-instance HasCns a b => HasCns (TF.Schema l p a) b where
-    cns = TF.configuration . cns
-
-class HasCnsEnabled a b | a -> b where
-    cnsEnabled :: Lens' a b
-
-instance HasCnsEnabled a b => HasCnsEnabled (TF.Schema l p a) b where
-    cnsEnabled = TF.configuration . cnsEnabled
-
-class HasDeletionProtectionEnabled a b | a -> b where
-    deletionProtectionEnabled :: Lens' a b
-
-instance HasDeletionProtectionEnabled a b => HasDeletionProtectionEnabled (TF.Schema l p a) b where
-    deletionProtectionEnabled = TF.configuration . deletionProtectionEnabled
-
-class HasDescription a b | a -> b where
-    description :: Lens' a b
-
-instance HasDescription a b => HasDescription (TF.Schema l p a) b where
-    description = TF.configuration . description
-
-class HasEmail a b | a -> b where
-    email :: Lens' a b
-
-instance HasEmail a b => HasEmail (TF.Schema l p a) b where
-    email = TF.configuration . email
-
-class HasEnabled a b | a -> b where
-    enabled :: Lens' a b
-
-instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
-    enabled = TF.configuration . enabled
-
-class HasEndpoint a b | a -> b where
-    endpoint :: Lens' a b
-
-instance HasEndpoint a b => HasEndpoint (TF.Schema l p a) b where
-    endpoint = TF.configuration . endpoint
-
-class HasFirewallEnabled a b | a -> b where
-    firewallEnabled :: Lens' a b
-
-instance HasFirewallEnabled a b => HasFirewallEnabled (TF.Schema l p a) b where
-    firewallEnabled = TF.configuration . firewallEnabled
-
-class HasGateway a b | a -> b where
-    gateway :: Lens' a b
-
-instance HasGateway a b => HasGateway (TF.Schema l p a) b where
-    gateway = TF.configuration . gateway
-
-class HasGroupName a b | a -> b where
-    groupName :: Lens' a b
-
-instance HasGroupName a b => HasGroupName (TF.Schema l p a) b where
-    groupName = TF.configuration . groupName
-
-class HasId a b | a -> b where
-    id :: Lens' a b
-
-instance HasId a b => HasId (TF.Schema l p a) b where
-    id = TF.configuration . id
-
 class HasImage a b | a -> b where
-    image :: Lens' a b
+    image :: P.Lens' a b
 
 instance HasImage a b => HasImage (TF.Schema l p a) b where
     image = TF.configuration . image
 
-class HasInternetNat a b | a -> b where
-    internetNat :: Lens' a b
+class HasFirewallEnabled a b | a -> b where
+    firewallEnabled :: P.Lens' a b
 
-instance HasInternetNat a b => HasInternetNat (TF.Schema l p a) b where
-    internetNat = TF.configuration . internetNat
+instance HasFirewallEnabled a b => HasFirewallEnabled (TF.Schema l p a) b where
+    firewallEnabled = TF.configuration . firewallEnabled
 
-class HasKey a b | a -> b where
-    key :: Lens' a b
+class HasVcpus a b | a -> b where
+    vcpus :: P.Lens' a b
 
-instance HasKey a b => HasKey (TF.Schema l p a) b where
-    key = TF.configuration . key
-
-class HasLogin a b | a -> b where
-    login :: Lens' a b
-
-instance HasLogin a b => HasLogin (TF.Schema l p a) b where
-    login = TF.configuration . login
-
-class HasMachineId a b | a -> b where
-    machineId :: Lens' a b
-
-instance HasMachineId a b => HasMachineId (TF.Schema l p a) b where
-    machineId = TF.configuration . machineId
-
-class HasMetadata a b | a -> b where
-    metadata :: Lens' a b
-
-instance HasMetadata a b => HasMetadata (TF.Schema l p a) b where
-    metadata = TF.configuration . metadata
-
-class HasMostRecent a b | a -> b where
-    mostRecent :: Lens' a b
-
-instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
-    mostRecent = TF.configuration . mostRecent
-
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasNetworks a b | a -> b where
-    networks :: Lens' a b
-
-instance HasNetworks a b => HasNetworks (TF.Schema l p a) b where
-    networks = TF.configuration . networks
-
-class HasOs a b | a -> b where
-    os :: Lens' a b
-
-instance HasOs a b => HasOs (TF.Schema l p a) b where
-    os = TF.configuration . os
-
-class HasOwner a b | a -> b where
-    owner :: Lens' a b
-
-instance HasOwner a b => HasOwner (TF.Schema l p a) b where
-    owner = TF.configuration . owner
-
-class HasPackage a b | a -> b where
-    package :: Lens' a b
-
-instance HasPackage a b => HasPackage (TF.Schema l p a) b where
-    package = TF.configuration . package
-
-class HasProvisionEndIp a b | a -> b where
-    provisionEndIp :: Lens' a b
-
-instance HasProvisionEndIp a b => HasProvisionEndIp (TF.Schema l p a) b where
-    provisionEndIp = TF.configuration . provisionEndIp
-
-class HasProvisionStartIp a b | a -> b where
-    provisionStartIp :: Lens' a b
-
-instance HasProvisionStartIp a b => HasProvisionStartIp (TF.Schema l p a) b where
-    provisionStartIp = TF.configuration . provisionStartIp
-
-class HasPublic a b | a -> b where
-    public :: Lens' a b
-
-instance HasPublic a b => HasPublic (TF.Schema l p a) b where
-    public = TF.configuration . public
-
-class HasResolvers a b | a -> b where
-    resolvers :: Lens' a b
-
-instance HasResolvers a b => HasResolvers (TF.Schema l p a) b where
-    resolvers = TF.configuration . resolvers
-
-class HasRootAuthorizedKeys a b | a -> b where
-    rootAuthorizedKeys :: Lens' a b
-
-instance HasRootAuthorizedKeys a b => HasRootAuthorizedKeys (TF.Schema l p a) b where
-    rootAuthorizedKeys = TF.configuration . rootAuthorizedKeys
-
-class HasRoutes a b | a -> b where
-    routes :: Lens' a b
-
-instance HasRoutes a b => HasRoutes (TF.Schema l p a) b where
-    routes = TF.configuration . routes
-
-class HasRule a b | a -> b where
-    rule :: Lens' a b
-
-instance HasRule a b => HasRule (TF.Schema l p a) b where
-    rule = TF.configuration . rule
+instance HasVcpus a b => HasVcpus (TF.Schema l p a) b where
+    vcpus = TF.configuration . vcpus
 
 class HasState a b | a -> b where
-    state :: Lens' a b
+    state :: P.Lens' a b
 
 instance HasState a b => HasState (TF.Schema l p a) b where
     state = TF.configuration . state
 
-class HasSubnet a b | a -> b where
-    subnet :: Lens' a b
+class HasKey a b | a -> b where
+    key :: P.Lens' a b
 
-instance HasSubnet a b => HasSubnet (TF.Schema l p a) b where
-    subnet = TF.configuration . subnet
+instance HasKey a b => HasKey (TF.Schema l p a) b where
+    key = TF.configuration . key
 
-class HasTags a b | a -> b where
-    tags :: Lens' a b
+class HasFarFrom a b | a -> b where
+    farFrom :: P.Lens' a b
 
-instance HasTags a b => HasTags (TF.Schema l p a) b where
-    tags = TF.configuration . tags
+instance HasFarFrom a b => HasFarFrom (TF.Schema l p a) b where
+    farFrom = TF.configuration . farFrom
 
-class HasTemplate a b | a -> b where
-    template :: Lens' a b
+class HasOwner a b | a -> b where
+    owner :: P.Lens' a b
 
-instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
-    template = TF.configuration . template
+instance HasOwner a b => HasOwner (TF.Schema l p a) b where
+    owner = TF.configuration . owner
 
-class HasTemplateName a b | a -> b where
-    templateName :: Lens' a b
+class HasCloseTo a b | a -> b where
+    closeTo :: P.Lens' a b
 
-instance HasTemplateName a b => HasTemplateName (TF.Schema l p a) b where
-    templateName = TF.configuration . templateName
+instance HasCloseTo a b => HasCloseTo (TF.Schema l p a) b where
+    closeTo = TF.configuration . closeTo
 
 class HasType' a b | a -> b where
-    type' :: Lens' a b
+    type' :: P.Lens' a b
 
 instance HasType' a b => HasType' (TF.Schema l p a) b where
     type' = TF.configuration . type'
 
-class HasUserData a b | a -> b where
-    userData :: Lens' a b
+class HasAccount a b | a -> b where
+    account :: P.Lens' a b
 
-instance HasUserData a b => HasUserData (TF.Schema l p a) b where
-    userData = TF.configuration . userData
+instance HasAccount a b => HasAccount (TF.Schema l p a) b where
+    account = TF.configuration . account
+
+class HasEnabled a b | a -> b where
+    enabled :: P.Lens' a b
+
+instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
+    enabled = TF.configuration . enabled
+
+class HasInsecureSkipTlsVerify a b | a -> b where
+    insecureSkipTlsVerify :: P.Lens' a b
+
+instance HasInsecureSkipTlsVerify a b => HasInsecureSkipTlsVerify (TF.Schema l p a) b where
+    insecureSkipTlsVerify = TF.configuration . insecureSkipTlsVerify
+
+class HasKeyId a b | a -> b where
+    keyId :: P.Lens' a b
+
+instance HasKeyId a b => HasKeyId (TF.Schema l p a) b where
+    keyId = TF.configuration . keyId
+
+class HasDeletionProtectionEnabled a b | a -> b where
+    deletionProtectionEnabled :: P.Lens' a b
+
+instance HasDeletionProtectionEnabled a b => HasDeletionProtectionEnabled (TF.Schema l p a) b where
+    deletionProtectionEnabled = TF.configuration . deletionProtectionEnabled
+
+class HasNetwork a b | a -> b where
+    network :: P.Lens' a b
+
+instance HasNetwork a b => HasNetwork (TF.Schema l p a) b where
+    network = TF.configuration . network
+
+class HasOs a b | a -> b where
+    os :: P.Lens' a b
+
+instance HasOs a b => HasOs (TF.Schema l p a) b where
+    os = TF.configuration . os
+
+class HasRule a b | a -> b where
+    rule :: P.Lens' a b
+
+instance HasRule a b => HasRule (TF.Schema l p a) b where
+    rule = TF.configuration . rule
+
+class HasFilter a b | a -> b where
+    filter :: P.Lens' a b
+
+instance HasFilter a b => HasFilter (TF.Schema l p a) b where
+    filter = TF.configuration . filter
+
+class HasNetworks a b | a -> b where
+    networks :: P.Lens' a b
+
+instance HasNetworks a b => HasNetworks (TF.Schema l p a) b where
+    networks = TF.configuration . networks
+
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasMostRecent a b | a -> b where
+    mostRecent :: P.Lens' a b
+
+instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
+    mostRecent = TF.configuration . mostRecent
+
+class HasLwps a b | a -> b where
+    lwps :: P.Lens' a b
+
+instance HasLwps a b => HasLwps (TF.Schema l p a) b where
+    lwps = TF.configuration . lwps
+
+class HasCns a b | a -> b where
+    cns :: P.Lens' a b
+
+instance HasCns a b => HasCns (TF.Schema l p a) b where
+    cns = TF.configuration . cns
+
+class HasDisk a b | a -> b where
+    disk :: P.Lens' a b
+
+instance HasDisk a b => HasDisk (TF.Schema l p a) b where
+    disk = TF.configuration . disk
+
+class HasTags a b | a -> b where
+    tags :: P.Lens' a b
+
+instance HasTags a b => HasTags (TF.Schema l p a) b where
+    tags = TF.configuration . tags
+
+class HasAdministratorPw a b | a -> b where
+    administratorPw :: P.Lens' a b
+
+instance HasAdministratorPw a b => HasAdministratorPw (TF.Schema l p a) b where
+    administratorPw = TF.configuration . administratorPw
+
+class HasProvisionStartIp a b | a -> b where
+    provisionStartIp :: P.Lens' a b
+
+instance HasProvisionStartIp a b => HasProvisionStartIp (TF.Schema l p a) b where
+    provisionStartIp = TF.configuration . provisionStartIp
+
+class HasSubnet a b | a -> b where
+    subnet :: P.Lens' a b
+
+instance HasSubnet a b => HasSubnet (TF.Schema l p a) b where
+    subnet = TF.configuration . subnet
 
 class HasUserScript a b | a -> b where
-    userScript :: Lens' a b
+    userScript :: P.Lens' a b
 
 instance HasUserScript a b => HasUserScript (TF.Schema l p a) b where
     userScript = TF.configuration . userScript
 
-class HasUserdata a b | a -> b where
-    userdata :: Lens' a b
-
-instance HasUserdata a b => HasUserdata (TF.Schema l p a) b where
-    userdata = TF.configuration . userdata
-
-class HasVersion a b | a -> b where
-    version :: Lens' a b
-
-instance HasVersion a b => HasVersion (TF.Schema l p a) b where
-    version = TF.configuration . version
-
 class HasVlanId a b | a -> b where
-    vlanId :: Lens' a b
+    vlanId :: P.Lens' a b
 
 instance HasVlanId a b => HasVlanId (TF.Schema l p a) b where
     vlanId = TF.configuration . vlanId
 
-class HasComputed(Deprecated) locality a b | a -> b where
-    computed(Deprecated) locality :: a -> b
+class HasUser a b | a -> b where
+    user :: P.Lens' a b
 
-class HasComputedAdministratorPw a b | a -> b where
-    computedAdministratorPw :: a -> b
+instance HasUser a b => HasUser (TF.Schema l p a) b where
+    user = TF.configuration . user
 
-class HasComputedAffinity a b | a -> b where
-    computedAffinity :: a -> b
+class HasGateway a b | a -> b where
+    gateway :: P.Lens' a b
 
-class HasComputedCapacity a b | a -> b where
-    computedCapacity :: a -> b
+instance HasGateway a b => HasGateway (TF.Schema l p a) b where
+    gateway = TF.configuration . gateway
 
-class HasComputedCloudConfig a b | a -> b where
-    computedCloudConfig :: a -> b
+class HasMachineId a b | a -> b where
+    machineId :: P.Lens' a b
 
-class HasComputedCns a b | a -> b where
-    computedCns :: a -> b
+instance HasMachineId a b => HasMachineId (TF.Schema l p a) b where
+    machineId = TF.configuration . machineId
 
-class HasComputedCnsEnabled a b | a -> b where
-    computedCnsEnabled :: a -> b
+class HasInternetNat a b | a -> b where
+    internetNat :: P.Lens' a b
 
-class HasComputedComputeNode a b | a -> b where
-    computedComputeNode :: a -> b
+instance HasInternetNat a b => HasInternetNat (TF.Schema l p a) b where
+    internetNat = TF.configuration . internetNat
 
-class HasComputedCreated a b | a -> b where
-    computedCreated :: a -> b
+class HasGroupName a b | a -> b where
+    groupName :: P.Lens' a b
 
-class HasComputedDataset a b | a -> b where
-    computedDataset :: a -> b
+instance HasGroupName a b => HasGroupName (TF.Schema l p a) b where
+    groupName = TF.configuration . groupName
 
-class HasComputedDeletionProtectionEnabled a b | a -> b where
-    computedDeletionProtectionEnabled :: a -> b
+class HasPublic a b | a -> b where
+    public :: P.Lens' a b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+instance HasPublic a b => HasPublic (TF.Schema l p a) b where
+    public = TF.configuration . public
 
-class HasComputedDisk a b | a -> b where
-    computedDisk :: a -> b
+class HasUserData a b | a -> b where
+    userData :: P.Lens' a b
+
+instance HasUserData a b => HasUserData (TF.Schema l p a) b where
+    userData = TF.configuration . userData
+
+class HasAffinity a b | a -> b where
+    affinity :: P.Lens' a b
+
+instance HasAffinity a b => HasAffinity (TF.Schema l p a) b where
+    affinity = TF.configuration . affinity
+
+class HasTemplate a b | a -> b where
+    template :: P.Lens' a b
+
+instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
+    template = TF.configuration . template
+
+class HasLocality a b | a -> b where
+    locality :: P.Lens' a b
+
+instance HasLocality a b => HasLocality (TF.Schema l p a) b where
+    locality = TF.configuration . locality
+
+class HasVersion a b | a -> b where
+    version :: P.Lens' a b
+
+instance HasVersion a b => HasVersion (TF.Schema l p a) b where
+    version = TF.configuration . version
+
+class HasTemplateName a b | a -> b where
+    templateName :: P.Lens' a b
+
+instance HasTemplateName a b => HasTemplateName (TF.Schema l p a) b where
+    templateName = TF.configuration . templateName
+
+class HasMetadata a b | a -> b where
+    metadata :: P.Lens' a b
+
+instance HasMetadata a b => HasMetadata (TF.Schema l p a) b where
+    metadata = TF.configuration . metadata
+
+class HasServices a b | a -> b where
+    services :: P.Lens' a b
+
+instance HasServices a b => HasServices (TF.Schema l p a) b where
+    services = TF.configuration . services
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
+
+class HasMemory a b | a -> b where
+    memory :: P.Lens' a b
+
+instance HasMemory a b => HasMemory (TF.Schema l p a) b where
+    memory = TF.configuration . memory
+
+class HasProvisionEndIp a b | a -> b where
+    provisionEndIp :: P.Lens' a b
+
+instance HasProvisionEndIp a b => HasProvisionEndIp (TF.Schema l p a) b where
+    provisionEndIp = TF.configuration . provisionEndIp
+
+class HasPackage a b | a -> b where
+    package :: P.Lens' a b
+
+instance HasPackage a b => HasPackage (TF.Schema l p a) b where
+    package = TF.configuration . package
+
+class HasDisable a b | a -> b where
+    disable :: P.Lens' a b
+
+instance HasDisable a b => HasDisable (TF.Schema l p a) b where
+    disable = TF.configuration . disable
+
+class HasSwap a b | a -> b where
+    swap :: P.Lens' a b
+
+instance HasSwap a b => HasSwap (TF.Schema l p a) b where
+    swap = TF.configuration . swap
+
+class HasKeyMaterial a b | a -> b where
+    keyMaterial :: P.Lens' a b
+
+instance HasKeyMaterial a b => HasKeyMaterial (TF.Schema l p a) b where
+    keyMaterial = TF.configuration . keyMaterial
+
+class HasComputedIps a b | a -> b where
+    computedIps :: a -> b
+
+class HasComputedGateway a b | a -> b where
+    computedGateway :: a -> b
+
+class HasComputedInternetNat a b | a -> b where
+    computedInternetNat :: a -> b
+
+class HasComputedDomainNames a b | a -> b where
+    computedDomainNames :: a -> b
 
 class HasComputedEmail a b | a -> b where
     computedEmail :: a -> b
 
-class HasComputedEnabled a b | a -> b where
-    computedEnabled :: a -> b
+class HasComputedDataset a b | a -> b where
+    computedDataset :: a -> b
+
+class HasComputedVersion a b | a -> b where
+    computedVersion :: a -> b
+
+class HasComputedPrimary a b | a -> b where
+    computedPrimary :: a -> b
+
+class HasComputedNic a b | a -> b where
+    computedNic :: a -> b
+
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
+
+class HasComputedCreated a b | a -> b where
+    computedCreated :: a -> b
+
+class HasComputedMac a b | a -> b where
+    computedMac :: a -> b
+
+class HasComputedLwps a b | a -> b where
+    computedLwps :: a -> b
+
+class HasComputedRootAuthorizedKeys a b | a -> b where
+    computedRootAuthorizedKeys :: a -> b
+
+class HasComputedDisk a b | a -> b where
+    computedDisk :: a -> b
+
+class HasComputedCapacity a b | a -> b where
+    computedCapacity :: a -> b
+
+class HasComputedPrimaryip a b | a -> b where
+    computedPrimaryip :: a -> b
+
+class HasComputedGlobal a b | a -> b where
+    computedGlobal :: a -> b
+
+class HasComputedState a b | a -> b where
+    computedState :: a -> b
+
+class HasComputedLogin a b | a -> b where
+    computedLogin :: a -> b
+
+class HasComputedPublic a b | a -> b where
+    computedPublic :: a -> b
 
 class HasComputedEndpoint a b | a -> b where
     computedEndpoint :: a -> b
@@ -459,134 +514,62 @@ class HasComputedEndpoint a b | a -> b where
 class HasComputedFabric a b | a -> b where
     computedFabric :: a -> b
 
-class HasComputedFirewallEnabled a b | a -> b where
-    computedFirewallEnabled :: a -> b
-
-class HasComputedGateway a b | a -> b where
-    computedGateway :: a -> b
-
-class HasComputedGroupName a b | a -> b where
-    computedGroupName :: a -> b
-
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
-
-class HasComputedImage a b | a -> b where
-    computedImage :: a -> b
-
-class HasComputedInternetNat a b | a -> b where
-    computedInternetNat :: a -> b
-
-class HasComputedIp a b | a -> b where
-    computedIp :: a -> b
-
-class HasComputedIps a b | a -> b where
-    computedIps :: a -> b
-
-class HasComputedKey a b | a -> b where
-    computedKey :: a -> b
-
-class HasComputedLogin a b | a -> b where
-    computedLogin :: a -> b
-
-class HasComputedMac a b | a -> b where
-    computedMac :: a -> b
-
-class HasComputedMachineId a b | a -> b where
-    computedMachineId :: a -> b
-
-class HasComputedMemory a b | a -> b where
-    computedMemory :: a -> b
-
 class HasComputedMetadata a b | a -> b where
     computedMetadata :: a -> b
-
-class HasComputedMostRecent a b | a -> b where
-    computedMostRecent :: a -> b
-
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
-
-class HasComputedNetmask a b | a -> b where
-    computedNetmask :: a -> b
-
-class HasComputedNetwork a b | a -> b where
-    computedNetwork :: a -> b
-
-class HasComputedNetworks a b | a -> b where
-    computedNetworks :: a -> b
-
-class HasComputedNic a b | a -> b where
-    computedNic :: a -> b
-
-class HasComputedOs a b | a -> b where
-    computedOs :: a -> b
-
-class HasComputedOwner a b | a -> b where
-    computedOwner :: a -> b
-
-class HasComputedPackage a b | a -> b where
-    computedPackage :: a -> b
-
-class HasComputedPrimary a b | a -> b where
-    computedPrimary :: a -> b
-
-class HasComputedPrimaryip a b | a -> b where
-    computedPrimaryip :: a -> b
-
-class HasComputedProvisionEndIp a b | a -> b where
-    computedProvisionEndIp :: a -> b
-
-class HasComputedProvisionStartIp a b | a -> b where
-    computedProvisionStartIp :: a -> b
-
-class HasComputedPublic a b | a -> b where
-    computedPublic :: a -> b
 
 class HasComputedResolvers a b | a -> b where
     computedResolvers :: a -> b
 
-class HasComputedRootAuthorizedKeys a b | a -> b where
-    computedRootAuthorizedKeys :: a -> b
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
 
-class HasComputedRoutes a b | a -> b where
-    computedRoutes :: a -> b
-
-class HasComputedRule a b | a -> b where
-    computedRule :: a -> b
-
-class HasComputedState a b | a -> b where
-    computedState :: a -> b
+class HasComputedProvisionEndIp a b | a -> b where
+    computedProvisionEndIp :: a -> b
 
 class HasComputedSubnet a b | a -> b where
     computedSubnet :: a -> b
 
-class HasComputedTags a b | a -> b where
-    computedTags :: a -> b
+class HasComputedRoutes a b | a -> b where
+    computedRoutes :: a -> b
 
-class HasComputedTemplate a b | a -> b where
-    computedTemplate :: a -> b
-
-class HasComputedTemplateName a b | a -> b where
-    computedTemplateName :: a -> b
-
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
-
-class HasComputedUpdated a b | a -> b where
-    computedUpdated :: a -> b
-
-class HasComputedUserData a b | a -> b where
-    computedUserData :: a -> b
-
-class HasComputedUserScript a b | a -> b where
-    computedUserScript :: a -> b
+class HasComputedCnsEnabled a b | a -> b where
+    computedCnsEnabled :: a -> b
 
 class HasComputedUserdata a b | a -> b where
     computedUserdata :: a -> b
 
-class HasComputedVersion a b | a -> b where
-    computedVersion :: a -> b
+class HasComputedProvisionStartIp a b | a -> b where
+    computedProvisionStartIp :: a -> b
 
-class HasComputedVlanId a b | a -> b where
-    computedVlanId :: a -> b
+class HasComputedIp a b | a -> b where
+    computedIp :: a -> b
+
+class HasComputedMemory a b | a -> b where
+    computedMemory :: a -> b
+
+class HasComputedTags a b | a -> b where
+    computedTags :: a -> b
+
+class HasComputedType a b | a -> b where
+    computedType :: a -> b
+
+class HasComputedSwap a b | a -> b where
+    computedSwap :: a -> b
+
+class HasComputedVcpus a b | a -> b where
+    computedVcpus :: a -> b
+
+class HasComputedUpdated a b | a -> b where
+    computedUpdated :: a -> b
+
+class HasComputedNetmask a b | a -> b where
+    computedNetmask :: a -> b
+
+class HasComputedNetworks a b | a -> b where
+    computedNetworks :: a -> b
+
+class HasComputedGroup a b | a -> b where
+    computedGroup :: a -> b
+
+class HasComputedComputeNode a b | a -> b where
+    computedComputeNode :: a -> b

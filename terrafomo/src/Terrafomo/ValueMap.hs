@@ -6,21 +6,22 @@ module Terrafomo.ValueMap
     , values
     ) where
 
-import Data.Set (Set)
+import Data.Hashable (Hashable)
+import Data.HashSet  (HashSet)
 
-import qualified Data.Set as Set
+import qualified Data.HashSet as Set
 
-data ValueMap k v = ValueMap !(Set k) ![v]
+data ValueMap k v = ValueMap !(HashSet k) ![v]
 
-empty :: Ord k => ValueMap k v
+empty :: (Eq k, Hashable k) => ValueMap k v
 empty = ValueMap mempty mempty
 {-# INLINE empty #-}
 
-member :: Ord k => k -> ValueMap k v -> Bool
+member :: (Eq k, Hashable k) => k -> ValueMap k v -> Bool
 member k (ValueMap ks _) = Set.member k ks
 {-# INLINE member #-}
 
-insert :: Ord k => k -> v -> ValueMap k v -> Maybe (ValueMap k v)
+insert :: (Eq k, Hashable k) => k -> v -> ValueMap k v -> Maybe (ValueMap k v)
 insert k v m@(ValueMap ks vs)
     | member k m = Nothing
     | otherwise  = Just (ValueMap (Set.insert k ks) (v : vs))

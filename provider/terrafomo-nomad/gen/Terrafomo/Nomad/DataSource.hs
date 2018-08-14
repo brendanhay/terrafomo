@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,58 +17,56 @@
 --
 module Terrafomo.Nomad.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** nomad_regions
       RegionsData (..)
     , regionsData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-
-    -- ** Computed Attributes
-    , P.HasComputedRegions (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Nomad.Settings
 
-import Terrafomo.Nomad.Types as P
-
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
+import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
-import qualified Data.Word                as P
-import qualified GHC.Base                 as P
-import qualified Numeric.Natural          as P
+import qualified GHC.Generics             as P
+import qualified Lens.Micro               as P
+import qualified Prelude                  as P
+import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Nomad.Lens     as P
 import qualified Terrafomo.Nomad.Provider as P
+import qualified Terrafomo.Nomad.Types    as P
+import qualified Terrafomo.Schema         as TF
+import qualified Terrafomo.Validator      as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @nomad_regions@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Nomad/nomad_regions terraform documentation>
+-- for more information.
+data RegionsData s = RegionsData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @nomad_regions@ Nomad datasource.
-
-Retrieve a list of regions available in Nomad.
--}
-data RegionsData s = RegionsData {
-    } deriving (Show, Eq)
+regionsData
+    :: TF.DataSource P.Provider (RegionsData s)
+regionsData =
+    TF.newDataSource "nomad_regions" TF.validator $
+        RegionsData'
 
 instance TF.IsObject (RegionsData s) where
     toObject _ = []
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+instance TF.IsValid (RegionsData s) where
+    validator = P.mempty
 
-regionsData :: TF.DataSource P.Nomad (RegionsData s)
-regionsData =
-    TF.newDataSource "nomad_regions" $
-        RegionsData {
-            }
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"

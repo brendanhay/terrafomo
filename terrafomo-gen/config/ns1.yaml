@@ -1,4 +1,2 @@
-name: NS1
-package: terrafomo-ns1
-datatype: true
-original: ns1
+package-name: terrafomo-ns1
+provider-name: NS1

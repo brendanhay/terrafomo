@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Local
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Local
-    ( module Terrafomo.Local.Types
-    , module Terrafomo.Local.Lens
-    , module Terrafomo.Local.DataSource
+    ( module Terrafomo.Local.Provider
     , module Terrafomo.Local.Resource
+    , module Terrafomo.Local.Types
+    , module Terrafomo.Local.Lens
+    , module Terrafomo.Local.Settings
+    , module Terrafomo.Local.DataSource
     ) where
 
 import Terrafomo.Local.DataSource
 import Terrafomo.Local.Lens
+import Terrafomo.Local.Provider
 import Terrafomo.Local.Resource
+import Terrafomo.Local.Settings
 import Terrafomo.Local.Types

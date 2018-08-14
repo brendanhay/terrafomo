@@ -8,12 +8,7 @@ name: {{ package }}
 <<: *extensions
 
 dependencies:
-  - base
-  - hashable
-  - microlens
-  - terrafomo
-  - text
-{% for dep in provider.dependencies %}
+{% for dep in dependencies %}
   - {{ dep.value }}
 {% endfor %}
 

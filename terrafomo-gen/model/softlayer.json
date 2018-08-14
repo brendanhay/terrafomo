@@ -1,0 +1,370 @@
+{
+  "name": "softlayer",
+  "schemas": [
+    {
+      "name": "api_key",
+      "type": "TypeString",
+      "description": "The API key for SoftLayer API operations.",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "username",
+      "type": "TypeString",
+      "description": "The user name for SoftLayer API operations.",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    }
+  ],
+  "resources": [
+    {
+      "name": "softlayer_ssh_key",
+      "schemas": [
+        {
+          "name": "fingerprint",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "id",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "notes",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "public_key",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "softlayer_virtual_guest",
+      "schemas": [
+        {
+          "name": "backend_vlan_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "block_device_template_group_gid",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "cpu",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "dedicated_acct_host_only",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "disks",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "disks",
+            "type": "TypeInt",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "domain",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "frontend_vlan_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "hourly_billing",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "image",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ipv4_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ipv4_address_private",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "local_disk",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "post_install_script_uri",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "private_network_only",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "public_network_speed",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "1000"
+        },
+        {
+          "name": "ram",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "region",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ssh_keys",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "ssh_keys",
+            "type": "TypeInt",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "user_data",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": []
+}

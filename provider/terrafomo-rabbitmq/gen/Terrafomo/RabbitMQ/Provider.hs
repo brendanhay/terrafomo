@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,100 +17,116 @@
 --
 module Terrafomo.RabbitMQ.Provider
     (
-    -- * Provider Datatype
-      RabbitMQ (..)
-    , emptyRabbitMQ
-
-    -- * Lenses
-    , providerCacertFile
-    , providerEndpoint
-    , providerInsecure
-    , providerPassword
-    , providerUsername
+    -- * RabbitMQ Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.RabbitMQ.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as Map
+import qualified Data.List.NonEmpty       as P
+import qualified Data.Maybe               as P
+import qualified Data.Monoid              as P
 import qualified Data.Text                as P
+import qualified GHC.Generics             as P
+import qualified Lens.Micro               as P
+import qualified Prelude                  as P
+import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.RabbitMQ.Lens  as P
 import qualified Terrafomo.RabbitMQ.Types as P
+import qualified Terrafomo.Validator      as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @RabbitMQ@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/RabbitMQ/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _cacertFile :: P.Maybe P.Text
+    -- ^ @cacert_file@ - (Optional)
+    --
+    , _endpoint   :: P.Text
+    -- ^ @endpoint@ - (Required)
+    --
+    , _insecure   :: P.Maybe P.Bool
+    -- ^ @insecure@ - (Optional)
+    --
+    , _password   :: P.Text
+    -- ^ @password@ - (Required)
+    --
+    , _username   :: P.Text
+    -- ^ @username@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | RabbitMQ Terraform provider.
+newProvider
+    :: P.Text -- ^ @endpoint@ - 'P.endpoint'
+    -> P.Text -- ^ @password@ - 'P.password'
+    -> P.Text -- ^ @username@ - 'P.username'
+    -> Provider
+newProvider _endpoint _password _username =
+    Provider'
+        { _cacertFile = P.Nothing
+        , _endpoint = _endpoint
+        , _insecure = P.Nothing
+        , _password = _password
+        , _username = _username
+        }
 
-<http://www.rabbitmq.com> is an AMQP message broker server. The RabbitMQ
-provider exposes resources used to manage the configuration of resources in
-a RabbitMQ server. Use the navigation to the left to read about the
-available resources.
--}
-data RabbitMQ = RabbitMQ {
-      _cacert_file :: !(Maybe P.Text)
-    {- ^ (Optional) The path to a custom CA / intermediate certificate. -}
-    , _endpoint    :: !(Maybe P.Text)
-    {- ^ (Required) The HTTP URL of the management plugin on the RabbitMQ server. The RabbitMQ management plugin must be enabled in order to use this provder. Note : This is not the IP address or hostname of the RabbitMQ server that you would use to access RabbitMQ directly. -}
-    , _insecure    :: !(Maybe P.Text)
-    {- ^ (Optional) Trust self-signed certificates. -}
-    , _password    :: !(Maybe P.Text)
-    {- ^ (Optional) Password for the given user. -}
-    , _username    :: !(Maybe P.Text)
-    {- ^ (Required) Username to use to authenticate with the server. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable RabbitMQ
-
-instance TF.IsSection RabbitMQ where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (RabbitMQ))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "cacert_file" <$> _cacert_file x
-                  , TF.assign "endpoint" <$> _endpoint x
-                  , TF.assign "insecure" <$> _insecure x
-                  , TF.assign "password" <$> _password x
-                  , TF.assign "username" <$> _username x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , TF.assign "cacert_file" <$> _cacertFile
+                  , P.Just $ TF.assign "endpoint" _endpoint
+                  , TF.assign "insecure" <$> _insecure
+                  , P.Just $ TF.assign "password" _password
+                  , P.Just $ TF.assign "username" _username
                   ])
 
-instance TF.IsProvider RabbitMQ where
-    type ProviderType RabbitMQ = "rabbitmq"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyRabbitMQ :: RabbitMQ
-emptyRabbitMQ = RabbitMQ {
-        _cacert_file = Nothing
-      , _endpoint = Nothing
-      , _insecure = Nothing
-      , _password = Nothing
-      , _username = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerCacertFile :: Lens' RabbitMQ (Maybe P.Text)
-providerCacertFile =
-    lens _cacert_file (\s a -> s { _cacert_file = a })
+instance P.HasCacertFile (Provider) (P.Maybe P.Text) where
+    cacertFile =
+        P.lens (_cacertFile :: Provider -> P.Maybe P.Text)
+               (\s a -> s { _cacertFile = a } :: Provider)
 
-providerEndpoint :: Lens' RabbitMQ (Maybe P.Text)
-providerEndpoint =
-    lens _endpoint (\s a -> s { _endpoint = a })
+instance P.HasEndpoint (Provider) (P.Text) where
+    endpoint =
+        P.lens (_endpoint :: Provider -> P.Text)
+               (\s a -> s { _endpoint = a } :: Provider)
 
-providerInsecure :: Lens' RabbitMQ (Maybe P.Text)
-providerInsecure =
-    lens _insecure (\s a -> s { _insecure = a })
+instance P.HasInsecure (Provider) (P.Maybe P.Bool) where
+    insecure =
+        P.lens (_insecure :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _insecure = a } :: Provider)
 
-providerPassword :: Lens' RabbitMQ (Maybe P.Text)
-providerPassword =
-    lens _password (\s a -> s { _password = a })
+instance P.HasPassword (Provider) (P.Text) where
+    password =
+        P.lens (_password :: Provider -> P.Text)
+               (\s a -> s { _password = a } :: Provider)
 
-providerUsername :: Lens' RabbitMQ (Maybe P.Text)
-providerUsername =
-    lens _username (\s a -> s { _username = a })
+instance P.HasUsername (Provider) (P.Text) where
+    username =
+        P.lens (_username :: Provider -> P.Text)
+               (\s a -> s { _username = a } :: Provider)

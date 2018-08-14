@@ -1,0 +1,1567 @@
+{
+  "name": "pagerduty",
+  "schemas": [
+    {
+      "name": "skip_credentials_validation",
+      "type": "TypeBool",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0,
+      "default": "false"
+    },
+    {
+      "name": "token",
+      "type": "TypeString",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    }
+  ],
+  "resources": [
+    {
+      "name": "pagerduty_addon",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "src",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_escalation_policy",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "Managed by Terraform"
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "num_loops",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "rule",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "rule",
+            "schemas": [
+              {
+                "name": "escalation_delay_in_minutes",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "id",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "target",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "resource": {
+                  "name": "target",
+                  "schemas": [
+                    {
+                      "name": "id",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "type",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "default": "user_reference"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "teams",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "teams",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_extension",
+      "schemas": [
+        {
+          "name": "endpoint_url",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "extension_objects",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "extension_objects",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "extension_schema",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_maintenance_window",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "Managed by Terraform"
+        },
+        {
+          "name": "end_time",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "services",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "services",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "start_time",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_schedule",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "Managed by Terraform"
+        },
+        {
+          "name": "layer",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "layer",
+            "schemas": [
+              {
+                "name": "end",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "id",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "name",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "restriction",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "resource": {
+                  "name": "restriction",
+                  "schemas": [
+                    {
+                      "name": "duration_seconds",
+                      "type": "TypeInt",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "start_day_of_week",
+                      "type": "TypeInt",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "start_time_of_day",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "type",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "rotation_turn_length_seconds",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "rotation_virtual_start",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "start",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "users",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "users",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "overflow",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "time_zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_service",
+      "schemas": [
+        {
+          "name": "acknowledgement_timeout",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "1800"
+        },
+        {
+          "name": "alert_creation",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "create_incidents"
+        },
+        {
+          "name": "auto_resolve_timeout",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "14400"
+        },
+        {
+          "name": "created_at",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "Managed by Terraform"
+        },
+        {
+          "name": "escalation_policy",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "incident_urgency_rule",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "incident_urgency_rule",
+            "schemas": [
+              {
+                "name": "during_support_hours",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 1,
+                "maxItems": 1,
+                "resource": {
+                  "name": "during_support_hours",
+                  "schemas": [
+                    {
+                      "name": "type",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "urgency",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "outside_support_hours",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 1,
+                "maxItems": 1,
+                "resource": {
+                  "name": "outside_support_hours",
+                  "schemas": [
+                    {
+                      "name": "type",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "urgency",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "urgency",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "last_incident_timestamp",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "scheduled_actions",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "scheduled_actions",
+            "schemas": [
+              {
+                "name": "at",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "resource": {
+                  "name": "at",
+                  "schemas": [
+                    {
+                      "name": "name",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "type",
+                      "type": "TypeString",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "to_urgency",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "status",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "support_hours",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 1,
+          "maxItems": 1,
+          "resource": {
+            "name": "support_hours",
+            "schemas": [
+              {
+                "name": "days_of_week",
+                "type": "TypeList",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 7,
+                "schema": {
+                  "name": "days_of_week",
+                  "type": "TypeInt",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "end_time",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "start_time",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "time_zone",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "type",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_service_integration",
+      "schemas": [
+        {
+          "name": "html_url",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "integration_email",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "integration_key",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "service",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [
+            "vendor"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vendor",
+          "type": "TypeString",
+          "conflictsWith": [
+            "type"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_team",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "Managed by Terraform"
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_team_membership",
+      "schemas": [
+        {
+          "name": "team_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "user_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_user",
+      "schemas": [
+        {
+          "name": "avatar_url",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "color",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "Managed by Terraform"
+        },
+        {
+          "name": "email",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "html_url",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "invitation_sent",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "job_title",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "role",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "user"
+        },
+        {
+          "name": "teams",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "teams",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "time_zone",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_user_contact_method",
+      "schemas": [
+        {
+          "name": "address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "blacklisted",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "country_code",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "enabled",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "label",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "send_short_email",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "false"
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "user_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": [
+    {
+      "name": "pagerduty_escalation_policy",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_extension_schema",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_schedule",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_team",
+      "schemas": [
+        {
+          "name": "description",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "description": "The name of the team to find in the PagerDuty API",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_user",
+      "schemas": [
+        {
+          "name": "email",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "pagerduty_vendor",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name_regex",
+          "type": "TypeString",
+          "removed": "Use `name` instead. This attribute will be removed in a future version",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ]
+}

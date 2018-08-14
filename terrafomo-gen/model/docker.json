@@ -1,0 +1,3500 @@
+{
+  "name": "docker",
+  "schemas": [
+    {
+      "name": "ca_material",
+      "type": "TypeString",
+      "description": "PEM-encoded content of Docker host CA certificate",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "cert_material",
+      "type": "TypeString",
+      "description": "PEM-encoded content of Docker client certificate",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "cert_path",
+      "type": "TypeString",
+      "description": "Path to directory with Docker TLS config",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "host",
+      "type": "TypeString",
+      "description": "The Docker daemon address",
+      "conflictsWith": [],
+      "optional": false,
+      "required": true,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "key_material",
+      "type": "TypeString",
+      "description": "PEM-encoded content of Docker client private key",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0
+    },
+    {
+      "name": "registry_auth",
+      "type": "TypeSet",
+      "conflictsWith": [],
+      "optional": true,
+      "required": false,
+      "computed": false,
+      "forceNew": false,
+      "sensitive": false,
+      "minItems": 0,
+      "maxItems": 0,
+      "resource": {
+        "name": "registry_auth",
+        "schemas": [
+          {
+            "name": "address",
+            "type": "TypeString",
+            "description": "Address of the registry",
+            "conflictsWith": [],
+            "optional": false,
+            "required": true,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          },
+          {
+            "name": "config_file",
+            "type": "TypeString",
+            "description": "Path to docker json file for registry auth",
+            "conflictsWith": [
+              "registry_auth.username",
+              "registry_auth.password"
+            ],
+            "optional": true,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          },
+          {
+            "name": "password",
+            "type": "TypeString",
+            "description": "Password for the registry",
+            "conflictsWith": [
+              "registry_auth.config_file"
+            ],
+            "optional": true,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": true,
+            "minItems": 0,
+            "maxItems": 0
+          },
+          {
+            "name": "username",
+            "type": "TypeString",
+            "description": "Username for the registry",
+            "conflictsWith": [
+              "registry_auth.config_file"
+            ],
+            "optional": true,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        ]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "name": "docker_config",
+      "schemas": [
+        {
+          "name": "data",
+          "type": "TypeString",
+          "description": "Base64-url-safe-encoded config data",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": true,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "description": "User-defined name of the config",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "docker_container",
+      "schemas": [
+        {
+          "name": "bridge",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "capabilities",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "capabilities",
+            "schemas": [
+              {
+                "name": "add",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "add",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "drop",
+                "type": "TypeSet",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "drop",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "command",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "command",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "cpu_shares",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "destroy_grace_seconds",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "devices",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "devices",
+            "schemas": [
+              {
+                "name": "container_path",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "host_path",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "permissions",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "dns",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "dns",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "dns_opts",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "dns_opts",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "dns_search",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "dns_search",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "domainname",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "entrypoint",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "entrypoint",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "env",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "env",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "gateway",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "host",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "host",
+            "schemas": [
+              {
+                "name": "host",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ip",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "hostname",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "image",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ip_address",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ip_prefix_length",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "labels",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "links",
+          "type": "TypeSet",
+          "deprecated": "The --link flag is a legacy feature of Docker. It may eventually be removed.",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "links",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "log_driver",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "json-file"
+        },
+        {
+          "name": "log_opts",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "max_retry_count",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "memory",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "memory_swap",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "must_run",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "true"
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_alias",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "network_alias",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "network_mode",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "networks",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "networks",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "ports",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "ports",
+            "schemas": [
+              {
+                "name": "external",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "internal",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ip",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "protocol",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "tcp"
+              }
+            ]
+          }
+        },
+        {
+          "name": "privileged",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "publish_all_ports",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "restart",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "no"
+        },
+        {
+          "name": "ulimit",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "ulimit",
+            "schemas": [
+              {
+                "name": "hard",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "name",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "soft",
+                "type": "TypeInt",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "upload",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "upload",
+            "schemas": [
+              {
+                "name": "content",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "executable",
+                "type": "TypeBool",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "false"
+              },
+              {
+                "name": "file",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "user",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "volumes",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "volumes",
+            "schemas": [
+              {
+                "name": "container_path",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "from_container",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "host_path",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "read_only",
+                "type": "TypeBool",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "volume_name",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "docker_image",
+      "schemas": [
+        {
+          "name": "keep_locally",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "latest",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "pull_trigger",
+          "type": "TypeString",
+          "deprecated": "Use field pull_triggers instead",
+          "conflictsWith": [
+            "pull_triggers"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "pull_triggers",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "pull_triggers",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "docker_network",
+      "schemas": [
+        {
+          "name": "check_duplicate",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "driver",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "internal",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "ipam_config",
+          "type": "TypeSet",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "ipam_config",
+            "schemas": [
+              {
+                "name": "aux_address",
+                "type": "TypeMap",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "gateway",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ip_range",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "subnet",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "ipam_driver",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "options",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "scope",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "docker_secret",
+      "schemas": [
+        {
+          "name": "data",
+          "type": "TypeString",
+          "description": "User-defined name of the secret",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": true,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "description": "User-defined name of the secret",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
+      "name": "docker_service",
+      "schemas": [
+        {
+          "name": "auth",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "resource": {
+            "name": "auth",
+            "schemas": [
+              {
+                "name": "password",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": true,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "server_address",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "username",
+                "type": "TypeString",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": true,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "converge_config",
+          "type": "TypeList",
+          "description": "A configuration to ensure that a service converges aka reaches the desired that of all task up and running",
+          "conflictsWith": [
+            "mode.0.global"
+          ],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "converge_config",
+            "schemas": [
+              {
+                "name": "delay",
+                "type": "TypeString",
+                "description": "The interval to check if the desired state is reached (ms|s). Default: 7s",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "7s"
+              },
+              {
+                "name": "timeout",
+                "type": "TypeString",
+                "description": "The timeout of the service to reach the desired state (s|m). Default: 3m",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "3m"
+              }
+            ]
+          }
+        },
+        {
+          "name": "endpoint_spec",
+          "type": "TypeList",
+          "description": "Properties that can be configured to access and load balance a service",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "endpoint_spec",
+            "schemas": [
+              {
+                "name": "mode",
+                "type": "TypeString",
+                "description": "The mode of resolution to use for internal load balancing between tasks",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "ports",
+                "type": "TypeSet",
+                "description": "List of exposed ports that this service is accessible on from the outside. Ports can only be provided if 'vip' resolution mode is used.",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "resource": {
+                  "name": "ports",
+                  "schemas": [
+                    {
+                      "name": "name",
+                      "type": "TypeString",
+                      "description": "A random name for the port",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "protocol",
+                      "type": "TypeString",
+                      "description": "Rrepresents the protocol of a port: 'tcp', 'udp' or 'sctp'",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "default": "tcp"
+                    },
+                    {
+                      "name": "publish_mode",
+                      "type": "TypeString",
+                      "description": "Represents the mode in which the port is to be published: 'ingress' or 'host'",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "default": "ingress"
+                    },
+                    {
+                      "name": "published_port",
+                      "type": "TypeInt",
+                      "description": "The port on the swarm hosts.",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "target_port",
+                      "type": "TypeInt",
+                      "description": "The port inside the container",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "labels",
+          "type": "TypeMap",
+          "description": "User-defined key/value metadata",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "labels",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "mode",
+          "type": "TypeList",
+          "description": "Scheduling mode for the service",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "mode",
+            "schemas": [
+              {
+                "name": "global",
+                "type": "TypeBool",
+                "description": "The global service mode",
+                "conflictsWith": [
+                  "mode.0.replicated",
+                  "converge_config"
+                ],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "false"
+              },
+              {
+                "name": "replicated",
+                "type": "TypeList",
+                "description": "The replicated service mode",
+                "conflictsWith": [
+                  "mode.0.global"
+                ],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 1,
+                "resource": {
+                  "name": "replicated",
+                  "schemas": [
+                    {
+                      "name": "replicas",
+                      "type": "TypeInt",
+                      "description": "The amount of replicas of the service",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "default": "1"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "description": "Name of the service",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "rollback_config",
+          "type": "TypeList",
+          "description": "Specification for the rollback strategy of the service",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "rollback_config",
+            "schemas": [
+              {
+                "name": "delay",
+                "type": "TypeString",
+                "description": "Delay between task rollbacks (ns|us|ms|s|m|h)",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "0s"
+              },
+              {
+                "name": "failure_action",
+                "type": "TypeString",
+                "description": "Action on rollback failure: pause | continue",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "pause"
+              },
+              {
+                "name": "max_failure_ratio",
+                "type": "TypeString",
+                "description": "Failure rate to tolerate during a rollback",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "0.0"
+              },
+              {
+                "name": "monitor",
+                "type": "TypeString",
+                "description": "Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h)",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "5s"
+              },
+              {
+                "name": "order",
+                "type": "TypeString",
+                "description": "Rollback order: either 'stop-first' or 'start-first'",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "stop-first"
+              },
+              {
+                "name": "parallelism",
+                "type": "TypeInt",
+                "description": "Maximum number of tasks to be rollbacked in one iteration",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "1"
+              }
+            ]
+          }
+        },
+        {
+          "name": "task_spec",
+          "type": "TypeList",
+          "description": "User modifiable task configuration",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "task_spec",
+            "schemas": [
+              {
+                "name": "container_spec",
+                "type": "TypeList",
+                "description": "The spec for each container",
+                "conflictsWith": [],
+                "optional": false,
+                "required": true,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 1,
+                "resource": {
+                  "name": "container_spec",
+                  "schemas": [
+                    {
+                      "name": "args",
+                      "type": "TypeList",
+                      "description": "Arguments to the command",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "args",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    },
+                    {
+                      "name": "command",
+                      "type": "TypeList",
+                      "description": "The command to be run in the image",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "command",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    },
+                    {
+                      "name": "configs",
+                      "type": "TypeSet",
+                      "description": "References to zero or more configs that will be exposed to the service",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "resource": {
+                        "name": "configs",
+                        "schemas": [
+                          {
+                            "name": "config_id",
+                            "type": "TypeString",
+                            "description": "ID of the specific config that we're referencing",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "config_name",
+                            "type": "TypeString",
+                            "description": "Name of the config that this references, but this is just provided for lookup/display purposes. The config in the reference will be identified by its ID",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "file_name",
+                            "type": "TypeString",
+                            "description": "Represents the final filename in the filesystem",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "dir",
+                      "type": "TypeString",
+                      "description": "The working directory for commands to run in",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "dns_config",
+                      "type": "TypeList",
+                      "description": "Specification for DNS related configurations in resolver configuration file (resolv.conf)",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": true,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "resource": {
+                        "name": "dns_config",
+                        "schemas": [
+                          {
+                            "name": "nameservers",
+                            "type": "TypeList",
+                            "description": "The IP addresses of the name servers",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "schema": {
+                              "name": "nameservers",
+                              "type": "TypeString",
+                              "conflictsWith": [],
+                              "optional": false,
+                              "required": false,
+                              "computed": false,
+                              "forceNew": false,
+                              "sensitive": false,
+                              "minItems": 0,
+                              "maxItems": 0
+                            }
+                          },
+                          {
+                            "name": "options",
+                            "type": "TypeList",
+                            "description": "A list of internal resolver variables to be modified (e.g., debug, ndots:3, etc.)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "schema": {
+                              "name": "options",
+                              "type": "TypeString",
+                              "conflictsWith": [],
+                              "optional": false,
+                              "required": false,
+                              "computed": false,
+                              "forceNew": false,
+                              "sensitive": false,
+                              "minItems": 0,
+                              "maxItems": 0
+                            }
+                          },
+                          {
+                            "name": "search",
+                            "type": "TypeList",
+                            "description": "A search list for host-name lookup",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "schema": {
+                              "name": "search",
+                              "type": "TypeString",
+                              "conflictsWith": [],
+                              "optional": false,
+                              "required": false,
+                              "computed": false,
+                              "forceNew": false,
+                              "sensitive": false,
+                              "minItems": 0,
+                              "maxItems": 0
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "env",
+                      "type": "TypeMap",
+                      "description": "A list of environment variables in the form VAR=\"value\"",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "env",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    },
+                    {
+                      "name": "groups",
+                      "type": "TypeList",
+                      "description": "A list of additional groups that the container process will run as",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "groups",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    },
+                    {
+                      "name": "healthcheck",
+                      "type": "TypeList",
+                      "description": "A test to perform to check that the container is healthy",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": true,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "resource": {
+                        "name": "healthcheck",
+                        "schemas": [
+                          {
+                            "name": "interval",
+                            "type": "TypeString",
+                            "description": "Time between running the check (ms|s|m|h)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "default": "0s"
+                          },
+                          {
+                            "name": "retries",
+                            "type": "TypeInt",
+                            "description": "Consecutive failures needed to report unhealthy",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "default": "0"
+                          },
+                          {
+                            "name": "start_period",
+                            "type": "TypeString",
+                            "description": "Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "default": "0s"
+                          },
+                          {
+                            "name": "test",
+                            "type": "TypeList",
+                            "description": "The test to perform as list",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "schema": {
+                              "name": "test",
+                              "type": "TypeString",
+                              "conflictsWith": [],
+                              "optional": false,
+                              "required": false,
+                              "computed": false,
+                              "forceNew": false,
+                              "sensitive": false,
+                              "minItems": 0,
+                              "maxItems": 0
+                            }
+                          },
+                          {
+                            "name": "timeout",
+                            "type": "TypeString",
+                            "description": "Maximum time to allow one check to run (ms|s|m|h)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "default": "0s"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "hostname",
+                      "type": "TypeString",
+                      "description": "The hostname to use for the container, as a valid RFC 1123 hostname",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "hosts",
+                      "type": "TypeSet",
+                      "description": "A list of hostname/IP mappings to add to the container's hosts file.",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": true,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "resource": {
+                        "name": "hosts",
+                        "schemas": [
+                          {
+                            "name": "host",
+                            "type": "TypeString",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": true,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "ip",
+                            "type": "TypeString",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": true,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "image",
+                      "type": "TypeString",
+                      "description": "The image name to use for the containers of the service",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "isolation",
+                      "type": "TypeString",
+                      "description": "Isolation technology of the containers running the service. (Windows only)",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "default": "default"
+                    },
+                    {
+                      "name": "labels",
+                      "type": "TypeMap",
+                      "description": "User-defined key/value metadata",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "labels",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    },
+                    {
+                      "name": "mounts",
+                      "type": "TypeSet",
+                      "description": "Specification for mounts to be added to containers created as part of the service",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "resource": {
+                        "name": "mounts",
+                        "schemas": [
+                          {
+                            "name": "bind_options",
+                            "type": "TypeList",
+                            "description": "Optional configuration for the bind type",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "bind_options",
+                              "schemas": [
+                                {
+                                  "name": "propagation",
+                                  "type": "TypeString",
+                                  "description": "A propagation mode with the value",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "name": "read_only",
+                            "type": "TypeBool",
+                            "description": "Whether the mount should be read-only",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "source",
+                            "type": "TypeString",
+                            "description": "Mount source (e.g. a volume name, a host path)",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "target",
+                            "type": "TypeString",
+                            "description": "Container path",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "tmpfs_options",
+                            "type": "TypeList",
+                            "description": "Optional configuration for the tmpfs type",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "tmpfs_options",
+                              "schemas": [
+                                {
+                                  "name": "mode",
+                                  "type": "TypeInt",
+                                  "description": "The permission mode for the tmpfs mount in an integer",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "size_bytes",
+                                  "type": "TypeInt",
+                                  "description": "The size for the tmpfs mount in bytes",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "name": "type",
+                            "type": "TypeString",
+                            "description": "The mount type",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "volume_options",
+                            "type": "TypeList",
+                            "description": "Optional configuration for the volume type",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "volume_options",
+                              "schemas": [
+                                {
+                                  "name": "driver_name",
+                                  "type": "TypeString",
+                                  "description": "Name of the driver to use to create the volume.",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "driver_options",
+                                  "type": "TypeMap",
+                                  "description": "key/value map of driver specific options",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0,
+                                  "schema": {
+                                    "name": "driver_options",
+                                    "type": "TypeString",
+                                    "conflictsWith": [],
+                                    "optional": false,
+                                    "required": false,
+                                    "computed": false,
+                                    "forceNew": false,
+                                    "sensitive": false,
+                                    "minItems": 0,
+                                    "maxItems": 0
+                                  }
+                                },
+                                {
+                                  "name": "labels",
+                                  "type": "TypeMap",
+                                  "description": "User-defined key/value metadata",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0,
+                                  "schema": {
+                                    "name": "labels",
+                                    "type": "TypeString",
+                                    "conflictsWith": [],
+                                    "optional": false,
+                                    "required": false,
+                                    "computed": false,
+                                    "forceNew": false,
+                                    "sensitive": false,
+                                    "minItems": 0,
+                                    "maxItems": 0
+                                  }
+                                },
+                                {
+                                  "name": "no_copy",
+                                  "type": "TypeBool",
+                                  "description": "Populate volume with data from the target",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "privileges",
+                      "type": "TypeList",
+                      "description": "Security options for the container",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "resource": {
+                        "name": "privileges",
+                        "schemas": [
+                          {
+                            "name": "credential_spec",
+                            "type": "TypeList",
+                            "description": "CredentialSpec for managed service account (Windows only)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "credential_spec",
+                              "schemas": [
+                                {
+                                  "name": "file",
+                                  "type": "TypeString",
+                                  "description": "Load credential spec from this file",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "registry",
+                                  "type": "TypeString",
+                                  "description": "Load credential spec from this value in the Windows registry",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "name": "se_linux_context",
+                            "type": "TypeList",
+                            "description": "SELinux labels of the container",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "se_linux_context",
+                              "schemas": [
+                                {
+                                  "name": "disable",
+                                  "type": "TypeBool",
+                                  "description": "Disable SELinux",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "level",
+                                  "type": "TypeString",
+                                  "description": "SELinux level label",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "role",
+                                  "type": "TypeString",
+                                  "description": "SELinux role label",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "type",
+                                  "type": "TypeString",
+                                  "description": "SELinux type label",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                },
+                                {
+                                  "name": "user",
+                                  "type": "TypeString",
+                                  "description": "SELinux user label",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "read_only",
+                      "type": "TypeBool",
+                      "description": "Mount the container's root filesystem as read only",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "secrets",
+                      "type": "TypeSet",
+                      "description": "References to zero or more secrets that will be exposed to the service",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "resource": {
+                        "name": "secrets",
+                        "schemas": [
+                          {
+                            "name": "file_name",
+                            "type": "TypeString",
+                            "description": "Represents the final filename in the filesystem",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "secret_id",
+                            "type": "TypeString",
+                            "description": "ID of the specific secret that we're referencing",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "secret_name",
+                            "type": "TypeString",
+                            "description": "Name of the secret that this references, but this is just provided for lookup/display purposes. The config in the reference will be identified by its ID",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "stop_grace_period",
+                      "type": "TypeString",
+                      "description": "Amount of time to wait for the container to terminate before forcefully removing it (ms|s|m|h)",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": true,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "stop_signal",
+                      "type": "TypeString",
+                      "description": "Signal to stop the container",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "user",
+                      "type": "TypeString",
+                      "description": "The user inside the container",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "force_update",
+                "type": "TypeInt",
+                "description": "A counter that triggers an update even if no relevant parameters have been changed. See https://github.com/docker/swarmkit/blob/master/api/specs.proto#L126",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              },
+              {
+                "name": "log_driver",
+                "type": "TypeList",
+                "description": "Specifies the log driver to use for tasks created from this spec. If not present, the default one for the swarm will be used, finally falling back to the engine default if not specified",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 1,
+                "resource": {
+                  "name": "log_driver",
+                  "schemas": [
+                    {
+                      "name": "name",
+                      "type": "TypeString",
+                      "description": "The logging driver to use: one of none|json-file|syslog|journald|gelf|fluentd|awslogs|splunk|etwlogs|gcplogs",
+                      "conflictsWith": [],
+                      "optional": false,
+                      "required": true,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "options",
+                      "type": "TypeMap",
+                      "description": "The options for the logging driver",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "options",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "networks",
+                "type": "TypeSet",
+                "description": "Ids of the networks in which the  container will be put in.",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "schema": {
+                  "name": "networks",
+                  "type": "TypeString",
+                  "conflictsWith": [],
+                  "optional": false,
+                  "required": false,
+                  "computed": false,
+                  "forceNew": false,
+                  "sensitive": false,
+                  "minItems": 0,
+                  "maxItems": 0
+                }
+              },
+              {
+                "name": "placement",
+                "type": "TypeList",
+                "description": "The placement preferences",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 1,
+                "resource": {
+                  "name": "placement",
+                  "schemas": [
+                    {
+                      "name": "constraints",
+                      "type": "TypeSet",
+                      "description": "An array of constraints. e.g.: node.role==manager",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "constraints",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    },
+                    {
+                      "name": "platforms",
+                      "type": "TypeSet",
+                      "description": "Platforms stores all the platforms that the service's image can run on",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "resource": {
+                        "name": "platforms",
+                        "schemas": [
+                          {
+                            "name": "architecture",
+                            "type": "TypeString",
+                            "description": "The architecture, e.g. amd64",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "os",
+                            "type": "TypeString",
+                            "description": "The operation system, e.g. linux",
+                            "conflictsWith": [],
+                            "optional": false,
+                            "required": true,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "prefs",
+                      "type": "TypeSet",
+                      "description": "Preferences provide a way to make the scheduler aware of factors such as topology. They are provided in order from highest to lowest precedence, e.g.: spread=node.role.manager",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0,
+                      "schema": {
+                        "name": "prefs",
+                        "type": "TypeString",
+                        "conflictsWith": [],
+                        "optional": false,
+                        "required": false,
+                        "computed": false,
+                        "forceNew": false,
+                        "sensitive": false,
+                        "minItems": 0,
+                        "maxItems": 0
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "resources",
+                "type": "TypeList",
+                "description": "Resource requirements which apply to each individual container created as part of the service",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 1,
+                "resource": {
+                  "name": "resources",
+                  "schemas": [
+                    {
+                      "name": "limits",
+                      "type": "TypeList",
+                      "description": "Describes the resources which can be advertised by a node and requested by a task",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "resource": {
+                        "name": "limits",
+                        "schemas": [
+                          {
+                            "name": "generic_resources",
+                            "type": "TypeList",
+                            "description": "User-defined resources can be either Integer resources (e.g, SSD=3) or String resources (e.g, GPU=UUID1)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "generic_resources",
+                              "schemas": [
+                                {
+                                  "name": "discrete_resources_spec",
+                                  "type": "TypeSet",
+                                  "description": "The Integer resources",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0,
+                                  "schema": {
+                                    "name": "discrete_resources_spec",
+                                    "type": "TypeString",
+                                    "conflictsWith": [],
+                                    "optional": false,
+                                    "required": false,
+                                    "computed": false,
+                                    "forceNew": false,
+                                    "sensitive": false,
+                                    "minItems": 0,
+                                    "maxItems": 0
+                                  }
+                                },
+                                {
+                                  "name": "named_resources_spec",
+                                  "type": "TypeSet",
+                                  "description": "The String resources",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0,
+                                  "schema": {
+                                    "name": "named_resources_spec",
+                                    "type": "TypeString",
+                                    "conflictsWith": [],
+                                    "optional": false,
+                                    "required": false,
+                                    "computed": false,
+                                    "forceNew": false,
+                                    "sensitive": false,
+                                    "minItems": 0,
+                                    "maxItems": 0
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "name": "memory_bytes",
+                            "type": "TypeInt",
+                            "description": "The amounf of memory in bytes the container allocates",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "nano_cpus",
+                            "type": "TypeInt",
+                            "description": "CPU shares in units of 1/1e9 (or 10^-9) of the CPU. Should be at least 1000000",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "reservation",
+                      "type": "TypeList",
+                      "description": "An object describing the resources which can be advertised by a node and requested by a task",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 1,
+                      "resource": {
+                        "name": "reservation",
+                        "schemas": [
+                          {
+                            "name": "generic_resources",
+                            "type": "TypeList",
+                            "description": "User-defined resources can be either Integer resources (e.g, SSD=3) or String resources (e.g, GPU=UUID1)",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 1,
+                            "resource": {
+                              "name": "generic_resources",
+                              "schemas": [
+                                {
+                                  "name": "discrete_resources_spec",
+                                  "type": "TypeSet",
+                                  "description": "The Integer resources",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0,
+                                  "schema": {
+                                    "name": "discrete_resources_spec",
+                                    "type": "TypeString",
+                                    "conflictsWith": [],
+                                    "optional": false,
+                                    "required": false,
+                                    "computed": false,
+                                    "forceNew": false,
+                                    "sensitive": false,
+                                    "minItems": 0,
+                                    "maxItems": 0
+                                  }
+                                },
+                                {
+                                  "name": "named_resources_spec",
+                                  "type": "TypeSet",
+                                  "description": "The String resources",
+                                  "conflictsWith": [],
+                                  "optional": true,
+                                  "required": false,
+                                  "computed": false,
+                                  "forceNew": false,
+                                  "sensitive": false,
+                                  "minItems": 0,
+                                  "maxItems": 0,
+                                  "schema": {
+                                    "name": "named_resources_spec",
+                                    "type": "TypeString",
+                                    "conflictsWith": [],
+                                    "optional": false,
+                                    "required": false,
+                                    "computed": false,
+                                    "forceNew": false,
+                                    "sensitive": false,
+                                    "minItems": 0,
+                                    "maxItems": 0
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "name": "memory_bytes",
+                            "type": "TypeInt",
+                            "description": "The amounf of memory in bytes the container allocates",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          },
+                          {
+                            "name": "nano_cpus",
+                            "type": "TypeInt",
+                            "description": "CPU shares in units of 1/1e9 (or 10^-9) of the CPU. Should be at least 1000000",
+                            "conflictsWith": [],
+                            "optional": true,
+                            "required": false,
+                            "computed": false,
+                            "forceNew": false,
+                            "sensitive": false,
+                            "minItems": 0,
+                            "maxItems": 0
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "restart_policy",
+                "type": "TypeMap",
+                "description": "Specification for the restart policy which applies to containers created as part of this service.",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "resource": {
+                  "name": "restart_policy",
+                  "schemas": [
+                    {
+                      "name": "condition",
+                      "type": "TypeString",
+                      "description": "Condition for restart",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "delay",
+                      "type": "TypeString",
+                      "description": "Delay between restart attempts (ms|s|m|h)",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "max_attempts",
+                      "type": "TypeInt",
+                      "description": "Maximum attempts to restart a given container before giving up (default value is 0, which is ignored)",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    },
+                    {
+                      "name": "window",
+                      "type": "TypeString",
+                      "description": "The time window used to evaluate the restart policy (default value is 0, which is unbounded) (ms|s|m|h)",
+                      "conflictsWith": [],
+                      "optional": true,
+                      "required": false,
+                      "computed": false,
+                      "forceNew": false,
+                      "sensitive": false,
+                      "minItems": 0,
+                      "maxItems": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "runtime",
+                "type": "TypeString",
+                "description": "Runtime is the type of runtime specified for the task executor. See https://github.com/moby/moby/blob/master/api/types/swarm/runtime.go",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": true,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "update_config",
+          "type": "TypeList",
+          "description": "Specification for the update strategy of the service",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 1,
+          "resource": {
+            "name": "update_config",
+            "schemas": [
+              {
+                "name": "delay",
+                "type": "TypeString",
+                "description": "Delay between task updates (ns|us|ms|s|m|h)",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "0s"
+              },
+              {
+                "name": "failure_action",
+                "type": "TypeString",
+                "description": "Action on update failure: pause | continue | rollback",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "pause"
+              },
+              {
+                "name": "max_failure_ratio",
+                "type": "TypeString",
+                "description": "Failure rate to tolerate during an update",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "0.0"
+              },
+              {
+                "name": "monitor",
+                "type": "TypeString",
+                "description": "Duration after each task update to monitor for failure (ns|us|ms|s|m|h)",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "5s"
+              },
+              {
+                "name": "order",
+                "type": "TypeString",
+                "description": "Update order: either 'stop-first' or 'start-first'",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "stop-first"
+              },
+              {
+                "name": "parallelism",
+                "type": "TypeInt",
+                "description": "Maximum number of tasks to be updated in one iteration",
+                "conflictsWith": [],
+                "optional": true,
+                "required": false,
+                "computed": false,
+                "forceNew": false,
+                "sensitive": false,
+                "minItems": 0,
+                "maxItems": 0,
+                "default": "1"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "docker_volume",
+      "schemas": [
+        {
+          "name": "driver",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "driver_opts",
+          "type": "TypeMap",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "mountpoint",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": true,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ],
+  "dataSources": [
+    {
+      "name": "docker_registry_image",
+      "schemas": [
+        {
+          "name": "name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "sha256_digest",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    }
+  ]
+}

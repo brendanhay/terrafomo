@@ -1,4 +1,2 @@
-name: InfluxDB
-package: terrafomo-influxdb
-datatype: true
-original: influxdb
+package-name: terrafomo-influxdb
+provider-name: InfluxDB

@@ -15,420 +15,539 @@ module Terrafomo.GitHub.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasActive (..)
-    , HasAllowMergeCommit (..)
-    , HasAllowRebaseMerge (..)
-    , HasAllowSquashMerge (..)
-    , HasArchived (..)
-    , HasAutoInit (..)
-    , HasBranch (..)
-    , HasColor (..)
-    , HasConfiguration (..)
-    , HasDefaultBranch (..)
-    , HasDescription (..)
-    , HasEnforceAdmins (..)
-    , HasEvents (..)
-    , HasFullName (..)
-    , HasGitignoreTemplate (..)
-    , HasHasDownloads (..)
-    , HasHasIssues (..)
-    , HasHasProjects (..)
-    , HasHasWiki (..)
-    , HasHomepageUrl (..)
-    , HasKey (..)
-    , HasLdapDn (..)
+      HasHomepageUrl (..)
     , HasLicenseTemplate (..)
-    , HasName (..)
-    , HasParentTeamId (..)
-    , HasPermission (..)
-    , HasPrivacy (..)
+    , HasToken (..)
+    , HasColor (..)
     , HasPrivate (..)
-    , HasReadOnly (..)
-    , HasRepository (..)
-    , HasRequiredPullRequestReviews (..)
-    , HasRequiredStatusChecks (..)
-    , HasRestrictions (..)
-    , HasRole (..)
-    , HasSlug (..)
-    , HasTeamId (..)
-    , HasTitle (..)
+    , HasKey (..)
+    , HasTeams (..)
+    , HasBranch (..)
+    , HasGitignoreTemplate (..)
+    , HasLdapDn (..)
+    , HasBaseUrl (..)
     , HasTopics (..)
-    , HasUrl (..)
+    , HasDescription (..)
+    , HasAllowSquashMerge (..)
+    , HasAllowMergeCommit (..)
+    , HasArmoredPublicKey (..)
+    , HasOrganization (..)
+    , HasArchived (..)
+    , HasContexts (..)
+    , HasDismissalTeams (..)
+    , HasRepository (..)
     , HasUsername (..)
+    , HasInsecure (..)
+    , HasConfiguration (..)
+    , HasHasWiki (..)
+    , HasIncludeAdmins (..)
+    , HasParentTeamId (..)
+    , HasReadOnly (..)
+    , HasPermission (..)
+    , HasRestrictions (..)
+    , HasHasProjects (..)
+    , HasPrivacy (..)
+    , HasRequiredPullRequestReviews (..)
+    , HasRole (..)
+    , HasHasIssues (..)
+    , HasSlug (..)
+    , HasHasDownloads (..)
+    , HasEvents (..)
+    , HasEnforceAdmins (..)
+    , HasDismissStaleReviews (..)
+    , HasRequiredStatusChecks (..)
+    , HasAutoInit (..)
+    , HasAllowRebaseMerge (..)
+    , HasUsers (..)
+    , HasTeamId (..)
+    , HasBody (..)
+    , HasName (..)
+    , HasTitle (..)
+    , HasFullName (..)
+    , HasStrict (..)
+    , HasDismissalUsers (..)
+    , HasRequireCodeOwnerReviews (..)
+    , HasActive (..)
 
     -- ** Computed Attributes
-    , HasComputedActive (..)
-    , HasComputedAllowMergeCommit (..)
-    , HasComputedAllowRebaseMerge (..)
-    , HasComputedAllowSquashMerge (..)
-    , HasComputedArchived (..)
-    , HasComputedAutoInit (..)
-    , HasComputedAvatarUrl (..)
-    , HasComputedBio (..)
-    , HasComputedBlog (..)
-    , HasComputedBranch (..)
-    , HasComputedColor (..)
-    , HasComputedCompany (..)
-    , HasComputedConfiguration (..)
-    , HasComputedCreatedAt (..)
-    , HasComputedDefaultBranch (..)
-    , HasComputedDescription (..)
+    , HasComputedHasWiki (..)
+    , HasComputedGit (..)
+    , HasComputedUpdatedAt (..)
+    , HasComputedGpgKeys (..)
+    , HasComputedSshKeys (..)
+    , HasComputedHtmlUrl (..)
+    , HasComputedHasProjects (..)
+    , HasComputedPages (..)
+    , HasComputedKeyId (..)
     , HasComputedEmail (..)
-    , HasComputedEnforceAdmins (..)
-    , HasComputedEvents (..)
+    , HasComputedHasIssues (..)
+    , HasComputedAvatarUrl (..)
+    , HasComputedPublicRepos (..)
+    , HasComputedSiteAdmin (..)
+    , HasComputedGitCloneUrl (..)
+    , HasComputedSshCloneUrl (..)
+    , HasComputedBio (..)
+    , HasComputedHooks (..)
+    , HasComputedDescription (..)
+    , HasComputedPrivacy (..)
+    , HasComputedHttpCloneUrl (..)
+    , HasComputedGravatarId (..)
+    , HasComputedAllowSquashMerge (..)
+    , HasComputedDefaultBranch (..)
+    , HasComputedLogin (..)
+    , HasComputedFullName (..)
+    , HasComputedCreatedAt (..)
+    , HasComputedName (..)
+    , HasComputedTopics (..)
+    , HasComputedArchived (..)
+    , HasComputedUrl (..)
+    , HasComputedCompany (..)
+    , HasComputedAllowRebaseMerge (..)
+    , HasComputedHasDownloads (..)
+    , HasComputedPermission (..)
+    , HasComputedPublicGists (..)
     , HasComputedFollowers (..)
     , HasComputedFollowing (..)
-    , HasComputedFullName (..)
-    , HasComputedGit (..)
-    , HasComputedGitCloneUrl (..)
-    , HasComputedGitignoreTemplate (..)
-    , HasComputedGpgKeys (..)
-    , HasComputedGravatarId (..)
-    , HasComputedHasDownloads (..)
-    , HasComputedHasIssues (..)
-    , HasComputedHasProjects (..)
-    , HasComputedHasWiki (..)
-    , HasComputedHomepageUrl (..)
-    , HasComputedHooks (..)
-    , HasComputedHtmlUrl (..)
-    , HasComputedHttpCloneUrl (..)
-    , HasComputedId (..)
-    , HasComputedImporter (..)
-    , HasComputedKey (..)
-    , HasComputedLdapDn (..)
-    , HasComputedLicenseTemplate (..)
     , HasComputedLocation (..)
-    , HasComputedLogin (..)
+    , HasComputedBlog (..)
     , HasComputedMembers (..)
-    , HasComputedName (..)
-    , HasComputedPages (..)
-    , HasComputedParentTeamId (..)
-    , HasComputedPermission (..)
-    , HasComputedPrivacy (..)
-    , HasComputedPrivate (..)
-    , HasComputedPublicGists (..)
-    , HasComputedPublicRepos (..)
-    , HasComputedReadOnly (..)
-    , HasComputedRepository (..)
-    , HasComputedRequiredPullRequestReviews (..)
-    , HasComputedRequiredStatusChecks (..)
-    , HasComputedRestrictions (..)
-    , HasComputedRole (..)
-    , HasComputedSiteAdmin (..)
-    , HasComputedSlug (..)
-    , HasComputedSshCloneUrl (..)
-    , HasComputedSshKeys (..)
     , HasComputedSvnUrl (..)
-    , HasComputedTeamId (..)
-    , HasComputedTitle (..)
-    , HasComputedTopics (..)
-    , HasComputedUpdatedAt (..)
-    , HasComputedUrl (..)
-    , HasComputedUsername (..)
+    , HasComputedAllowMergeCommit (..)
+    , HasComputedPrivate (..)
+    , HasComputedHomepageUrl (..)
+    , HasComputedImporter (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasActive a b | a -> b where
-    active :: Lens' a b
-
-instance HasActive a b => HasActive (TF.Schema l p a) b where
-    active = TF.configuration . active
-
-class HasAllowMergeCommit a b | a -> b where
-    allowMergeCommit :: Lens' a b
-
-instance HasAllowMergeCommit a b => HasAllowMergeCommit (TF.Schema l p a) b where
-    allowMergeCommit = TF.configuration . allowMergeCommit
-
-class HasAllowRebaseMerge a b | a -> b where
-    allowRebaseMerge :: Lens' a b
-
-instance HasAllowRebaseMerge a b => HasAllowRebaseMerge (TF.Schema l p a) b where
-    allowRebaseMerge = TF.configuration . allowRebaseMerge
-
-class HasAllowSquashMerge a b | a -> b where
-    allowSquashMerge :: Lens' a b
-
-instance HasAllowSquashMerge a b => HasAllowSquashMerge (TF.Schema l p a) b where
-    allowSquashMerge = TF.configuration . allowSquashMerge
-
-class HasArchived a b | a -> b where
-    archived :: Lens' a b
-
-instance HasArchived a b => HasArchived (TF.Schema l p a) b where
-    archived = TF.configuration . archived
-
-class HasAutoInit a b | a -> b where
-    autoInit :: Lens' a b
-
-instance HasAutoInit a b => HasAutoInit (TF.Schema l p a) b where
-    autoInit = TF.configuration . autoInit
-
-class HasBranch a b | a -> b where
-    branch :: Lens' a b
-
-instance HasBranch a b => HasBranch (TF.Schema l p a) b where
-    branch = TF.configuration . branch
-
-class HasColor a b | a -> b where
-    color :: Lens' a b
-
-instance HasColor a b => HasColor (TF.Schema l p a) b where
-    color = TF.configuration . color
-
-class HasConfiguration a b | a -> b where
-    configuration :: Lens' a b
-
-instance HasConfiguration a b => HasConfiguration (TF.Schema l p a) b where
-    configuration = TF.configuration . configuration
-
-class HasDefaultBranch a b | a -> b where
-    defaultBranch :: Lens' a b
-
-instance HasDefaultBranch a b => HasDefaultBranch (TF.Schema l p a) b where
-    defaultBranch = TF.configuration . defaultBranch
-
-class HasDescription a b | a -> b where
-    description :: Lens' a b
-
-instance HasDescription a b => HasDescription (TF.Schema l p a) b where
-    description = TF.configuration . description
-
-class HasEnforceAdmins a b | a -> b where
-    enforceAdmins :: Lens' a b
-
-instance HasEnforceAdmins a b => HasEnforceAdmins (TF.Schema l p a) b where
-    enforceAdmins = TF.configuration . enforceAdmins
-
-class HasEvents a b | a -> b where
-    events :: Lens' a b
-
-instance HasEvents a b => HasEvents (TF.Schema l p a) b where
-    events = TF.configuration . events
-
-class HasFullName a b | a -> b where
-    fullName :: Lens' a b
-
-instance HasFullName a b => HasFullName (TF.Schema l p a) b where
-    fullName = TF.configuration . fullName
-
-class HasGitignoreTemplate a b | a -> b where
-    gitignoreTemplate :: Lens' a b
-
-instance HasGitignoreTemplate a b => HasGitignoreTemplate (TF.Schema l p a) b where
-    gitignoreTemplate = TF.configuration . gitignoreTemplate
-
-class HasHasDownloads a b | a -> b where
-    hasDownloads :: Lens' a b
-
-instance HasHasDownloads a b => HasHasDownloads (TF.Schema l p a) b where
-    hasDownloads = TF.configuration . hasDownloads
-
-class HasHasIssues a b | a -> b where
-    hasIssues :: Lens' a b
-
-instance HasHasIssues a b => HasHasIssues (TF.Schema l p a) b where
-    hasIssues = TF.configuration . hasIssues
-
-class HasHasProjects a b | a -> b where
-    hasProjects :: Lens' a b
-
-instance HasHasProjects a b => HasHasProjects (TF.Schema l p a) b where
-    hasProjects = TF.configuration . hasProjects
-
-class HasHasWiki a b | a -> b where
-    hasWiki :: Lens' a b
-
-instance HasHasWiki a b => HasHasWiki (TF.Schema l p a) b where
-    hasWiki = TF.configuration . hasWiki
-
 class HasHomepageUrl a b | a -> b where
-    homepageUrl :: Lens' a b
+    homepageUrl :: P.Lens' a b
 
 instance HasHomepageUrl a b => HasHomepageUrl (TF.Schema l p a) b where
     homepageUrl = TF.configuration . homepageUrl
 
-class HasKey a b | a -> b where
-    key :: Lens' a b
-
-instance HasKey a b => HasKey (TF.Schema l p a) b where
-    key = TF.configuration . key
-
-class HasLdapDn a b | a -> b where
-    ldapDn :: Lens' a b
-
-instance HasLdapDn a b => HasLdapDn (TF.Schema l p a) b where
-    ldapDn = TF.configuration . ldapDn
-
 class HasLicenseTemplate a b | a -> b where
-    licenseTemplate :: Lens' a b
+    licenseTemplate :: P.Lens' a b
 
 instance HasLicenseTemplate a b => HasLicenseTemplate (TF.Schema l p a) b where
     licenseTemplate = TF.configuration . licenseTemplate
 
-class HasName a b | a -> b where
-    name :: Lens' a b
+class HasToken a b | a -> b where
+    token :: P.Lens' a b
 
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
+instance HasToken a b => HasToken (TF.Schema l p a) b where
+    token = TF.configuration . token
 
-class HasParentTeamId a b | a -> b where
-    parentTeamId :: Lens' a b
+class HasColor a b | a -> b where
+    color :: P.Lens' a b
 
-instance HasParentTeamId a b => HasParentTeamId (TF.Schema l p a) b where
-    parentTeamId = TF.configuration . parentTeamId
-
-class HasPermission a b | a -> b where
-    permission :: Lens' a b
-
-instance HasPermission a b => HasPermission (TF.Schema l p a) b where
-    permission = TF.configuration . permission
-
-class HasPrivacy a b | a -> b where
-    privacy :: Lens' a b
-
-instance HasPrivacy a b => HasPrivacy (TF.Schema l p a) b where
-    privacy = TF.configuration . privacy
+instance HasColor a b => HasColor (TF.Schema l p a) b where
+    color = TF.configuration . color
 
 class HasPrivate a b | a -> b where
-    private :: Lens' a b
+    private :: P.Lens' a b
 
 instance HasPrivate a b => HasPrivate (TF.Schema l p a) b where
     private = TF.configuration . private
 
-class HasReadOnly a b | a -> b where
-    readOnly :: Lens' a b
+class HasKey a b | a -> b where
+    key :: P.Lens' a b
 
-instance HasReadOnly a b => HasReadOnly (TF.Schema l p a) b where
-    readOnly = TF.configuration . readOnly
+instance HasKey a b => HasKey (TF.Schema l p a) b where
+    key = TF.configuration . key
 
-class HasRepository a b | a -> b where
-    repository :: Lens' a b
+class HasTeams a b | a -> b where
+    teams :: P.Lens' a b
 
-instance HasRepository a b => HasRepository (TF.Schema l p a) b where
-    repository = TF.configuration . repository
+instance HasTeams a b => HasTeams (TF.Schema l p a) b where
+    teams = TF.configuration . teams
 
-class HasRequiredPullRequestReviews a b | a -> b where
-    requiredPullRequestReviews :: Lens' a b
+class HasBranch a b | a -> b where
+    branch :: P.Lens' a b
 
-instance HasRequiredPullRequestReviews a b => HasRequiredPullRequestReviews (TF.Schema l p a) b where
-    requiredPullRequestReviews = TF.configuration . requiredPullRequestReviews
+instance HasBranch a b => HasBranch (TF.Schema l p a) b where
+    branch = TF.configuration . branch
 
-class HasRequiredStatusChecks a b | a -> b where
-    requiredStatusChecks :: Lens' a b
+class HasGitignoreTemplate a b | a -> b where
+    gitignoreTemplate :: P.Lens' a b
 
-instance HasRequiredStatusChecks a b => HasRequiredStatusChecks (TF.Schema l p a) b where
-    requiredStatusChecks = TF.configuration . requiredStatusChecks
+instance HasGitignoreTemplate a b => HasGitignoreTemplate (TF.Schema l p a) b where
+    gitignoreTemplate = TF.configuration . gitignoreTemplate
 
-class HasRestrictions a b | a -> b where
-    restrictions :: Lens' a b
+class HasLdapDn a b | a -> b where
+    ldapDn :: P.Lens' a b
 
-instance HasRestrictions a b => HasRestrictions (TF.Schema l p a) b where
-    restrictions = TF.configuration . restrictions
+instance HasLdapDn a b => HasLdapDn (TF.Schema l p a) b where
+    ldapDn = TF.configuration . ldapDn
 
-class HasRole a b | a -> b where
-    role :: Lens' a b
+class HasBaseUrl a b | a -> b where
+    baseUrl :: P.Lens' a b
 
-instance HasRole a b => HasRole (TF.Schema l p a) b where
-    role = TF.configuration . role
-
-class HasSlug a b | a -> b where
-    slug :: Lens' a b
-
-instance HasSlug a b => HasSlug (TF.Schema l p a) b where
-    slug = TF.configuration . slug
-
-class HasTeamId a b | a -> b where
-    teamId :: Lens' a b
-
-instance HasTeamId a b => HasTeamId (TF.Schema l p a) b where
-    teamId = TF.configuration . teamId
-
-class HasTitle a b | a -> b where
-    title :: Lens' a b
-
-instance HasTitle a b => HasTitle (TF.Schema l p a) b where
-    title = TF.configuration . title
+instance HasBaseUrl a b => HasBaseUrl (TF.Schema l p a) b where
+    baseUrl = TF.configuration . baseUrl
 
 class HasTopics a b | a -> b where
-    topics :: Lens' a b
+    topics :: P.Lens' a b
 
 instance HasTopics a b => HasTopics (TF.Schema l p a) b where
     topics = TF.configuration . topics
 
-class HasUrl a b | a -> b where
-    url :: Lens' a b
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
 
-instance HasUrl a b => HasUrl (TF.Schema l p a) b where
-    url = TF.configuration . url
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasAllowSquashMerge a b | a -> b where
+    allowSquashMerge :: P.Lens' a b
+
+instance HasAllowSquashMerge a b => HasAllowSquashMerge (TF.Schema l p a) b where
+    allowSquashMerge = TF.configuration . allowSquashMerge
+
+class HasAllowMergeCommit a b | a -> b where
+    allowMergeCommit :: P.Lens' a b
+
+instance HasAllowMergeCommit a b => HasAllowMergeCommit (TF.Schema l p a) b where
+    allowMergeCommit = TF.configuration . allowMergeCommit
+
+class HasArmoredPublicKey a b | a -> b where
+    armoredPublicKey :: P.Lens' a b
+
+instance HasArmoredPublicKey a b => HasArmoredPublicKey (TF.Schema l p a) b where
+    armoredPublicKey = TF.configuration . armoredPublicKey
+
+class HasOrganization a b | a -> b where
+    organization :: P.Lens' a b
+
+instance HasOrganization a b => HasOrganization (TF.Schema l p a) b where
+    organization = TF.configuration . organization
+
+class HasArchived a b | a -> b where
+    archived :: P.Lens' a b
+
+instance HasArchived a b => HasArchived (TF.Schema l p a) b where
+    archived = TF.configuration . archived
+
+class HasContexts a b | a -> b where
+    contexts :: P.Lens' a b
+
+instance HasContexts a b => HasContexts (TF.Schema l p a) b where
+    contexts = TF.configuration . contexts
+
+class HasDismissalTeams a b | a -> b where
+    dismissalTeams :: P.Lens' a b
+
+instance HasDismissalTeams a b => HasDismissalTeams (TF.Schema l p a) b where
+    dismissalTeams = TF.configuration . dismissalTeams
+
+class HasRepository a b | a -> b where
+    repository :: P.Lens' a b
+
+instance HasRepository a b => HasRepository (TF.Schema l p a) b where
+    repository = TF.configuration . repository
 
 class HasUsername a b | a -> b where
-    username :: Lens' a b
+    username :: P.Lens' a b
 
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedActive a b | a -> b where
-    computedActive :: a -> b
+class HasInsecure a b | a -> b where
+    insecure :: P.Lens' a b
 
-class HasComputedAllowMergeCommit a b | a -> b where
-    computedAllowMergeCommit :: a -> b
+instance HasInsecure a b => HasInsecure (TF.Schema l p a) b where
+    insecure = TF.configuration . insecure
 
-class HasComputedAllowRebaseMerge a b | a -> b where
-    computedAllowRebaseMerge :: a -> b
+class HasConfiguration a b | a -> b where
+    configuration :: P.Lens' a b
 
-class HasComputedAllowSquashMerge a b | a -> b where
-    computedAllowSquashMerge :: a -> b
+instance HasConfiguration a b => HasConfiguration (TF.Schema l p a) b where
+    configuration = TF.configuration . configuration
 
-class HasComputedArchived a b | a -> b where
-    computedArchived :: a -> b
+class HasHasWiki a b | a -> b where
+    hasWiki :: P.Lens' a b
 
-class HasComputedAutoInit a b | a -> b where
-    computedAutoInit :: a -> b
+instance HasHasWiki a b => HasHasWiki (TF.Schema l p a) b where
+    hasWiki = TF.configuration . hasWiki
 
-class HasComputedAvatarUrl a b | a -> b where
-    computedAvatarUrl :: a -> b
+class HasIncludeAdmins a b | a -> b where
+    includeAdmins :: P.Lens' a b
 
-class HasComputedBio a b | a -> b where
-    computedBio :: a -> b
+instance HasIncludeAdmins a b => HasIncludeAdmins (TF.Schema l p a) b where
+    includeAdmins = TF.configuration . includeAdmins
 
-class HasComputedBlog a b | a -> b where
-    computedBlog :: a -> b
+class HasParentTeamId a b | a -> b where
+    parentTeamId :: P.Lens' a b
 
-class HasComputedBranch a b | a -> b where
-    computedBranch :: a -> b
+instance HasParentTeamId a b => HasParentTeamId (TF.Schema l p a) b where
+    parentTeamId = TF.configuration . parentTeamId
 
-class HasComputedColor a b | a -> b where
-    computedColor :: a -> b
+class HasReadOnly a b | a -> b where
+    readOnly :: P.Lens' a b
 
-class HasComputedCompany a b | a -> b where
-    computedCompany :: a -> b
+instance HasReadOnly a b => HasReadOnly (TF.Schema l p a) b where
+    readOnly = TF.configuration . readOnly
 
-class HasComputedConfiguration a b | a -> b where
-    computedConfiguration :: a -> b
+class HasPermission a b | a -> b where
+    permission :: P.Lens' a b
 
-class HasComputedCreatedAt a b | a -> b where
-    computedCreatedAt :: a -> b
+instance HasPermission a b => HasPermission (TF.Schema l p a) b where
+    permission = TF.configuration . permission
 
-class HasComputedDefaultBranch a b | a -> b where
-    computedDefaultBranch :: a -> b
+class HasRestrictions a b | a -> b where
+    restrictions :: P.Lens' a b
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+instance HasRestrictions a b => HasRestrictions (TF.Schema l p a) b where
+    restrictions = TF.configuration . restrictions
+
+class HasHasProjects a b | a -> b where
+    hasProjects :: P.Lens' a b
+
+instance HasHasProjects a b => HasHasProjects (TF.Schema l p a) b where
+    hasProjects = TF.configuration . hasProjects
+
+class HasPrivacy a b | a -> b where
+    privacy :: P.Lens' a b
+
+instance HasPrivacy a b => HasPrivacy (TF.Schema l p a) b where
+    privacy = TF.configuration . privacy
+
+class HasRequiredPullRequestReviews a b | a -> b where
+    requiredPullRequestReviews :: P.Lens' a b
+
+instance HasRequiredPullRequestReviews a b => HasRequiredPullRequestReviews (TF.Schema l p a) b where
+    requiredPullRequestReviews = TF.configuration . requiredPullRequestReviews
+
+class HasRole a b | a -> b where
+    role :: P.Lens' a b
+
+instance HasRole a b => HasRole (TF.Schema l p a) b where
+    role = TF.configuration . role
+
+class HasHasIssues a b | a -> b where
+    hasIssues :: P.Lens' a b
+
+instance HasHasIssues a b => HasHasIssues (TF.Schema l p a) b where
+    hasIssues = TF.configuration . hasIssues
+
+class HasSlug a b | a -> b where
+    slug :: P.Lens' a b
+
+instance HasSlug a b => HasSlug (TF.Schema l p a) b where
+    slug = TF.configuration . slug
+
+class HasHasDownloads a b | a -> b where
+    hasDownloads :: P.Lens' a b
+
+instance HasHasDownloads a b => HasHasDownloads (TF.Schema l p a) b where
+    hasDownloads = TF.configuration . hasDownloads
+
+class HasEvents a b | a -> b where
+    events :: P.Lens' a b
+
+instance HasEvents a b => HasEvents (TF.Schema l p a) b where
+    events = TF.configuration . events
+
+class HasEnforceAdmins a b | a -> b where
+    enforceAdmins :: P.Lens' a b
+
+instance HasEnforceAdmins a b => HasEnforceAdmins (TF.Schema l p a) b where
+    enforceAdmins = TF.configuration . enforceAdmins
+
+class HasDismissStaleReviews a b | a -> b where
+    dismissStaleReviews :: P.Lens' a b
+
+instance HasDismissStaleReviews a b => HasDismissStaleReviews (TF.Schema l p a) b where
+    dismissStaleReviews = TF.configuration . dismissStaleReviews
+
+class HasRequiredStatusChecks a b | a -> b where
+    requiredStatusChecks :: P.Lens' a b
+
+instance HasRequiredStatusChecks a b => HasRequiredStatusChecks (TF.Schema l p a) b where
+    requiredStatusChecks = TF.configuration . requiredStatusChecks
+
+class HasAutoInit a b | a -> b where
+    autoInit :: P.Lens' a b
+
+instance HasAutoInit a b => HasAutoInit (TF.Schema l p a) b where
+    autoInit = TF.configuration . autoInit
+
+class HasAllowRebaseMerge a b | a -> b where
+    allowRebaseMerge :: P.Lens' a b
+
+instance HasAllowRebaseMerge a b => HasAllowRebaseMerge (TF.Schema l p a) b where
+    allowRebaseMerge = TF.configuration . allowRebaseMerge
+
+class HasUsers a b | a -> b where
+    users :: P.Lens' a b
+
+instance HasUsers a b => HasUsers (TF.Schema l p a) b where
+    users = TF.configuration . users
+
+class HasTeamId a b | a -> b where
+    teamId :: P.Lens' a b
+
+instance HasTeamId a b => HasTeamId (TF.Schema l p a) b where
+    teamId = TF.configuration . teamId
+
+class HasBody a b | a -> b where
+    body :: P.Lens' a b
+
+instance HasBody a b => HasBody (TF.Schema l p a) b where
+    body = TF.configuration . body
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
+
+class HasTitle a b | a -> b where
+    title :: P.Lens' a b
+
+instance HasTitle a b => HasTitle (TF.Schema l p a) b where
+    title = TF.configuration . title
+
+class HasFullName a b | a -> b where
+    fullName :: P.Lens' a b
+
+instance HasFullName a b => HasFullName (TF.Schema l p a) b where
+    fullName = TF.configuration . fullName
+
+class HasStrict a b | a -> b where
+    strict :: P.Lens' a b
+
+instance HasStrict a b => HasStrict (TF.Schema l p a) b where
+    strict = TF.configuration . strict
+
+class HasDismissalUsers a b | a -> b where
+    dismissalUsers :: P.Lens' a b
+
+instance HasDismissalUsers a b => HasDismissalUsers (TF.Schema l p a) b where
+    dismissalUsers = TF.configuration . dismissalUsers
+
+class HasRequireCodeOwnerReviews a b | a -> b where
+    requireCodeOwnerReviews :: P.Lens' a b
+
+instance HasRequireCodeOwnerReviews a b => HasRequireCodeOwnerReviews (TF.Schema l p a) b where
+    requireCodeOwnerReviews = TF.configuration . requireCodeOwnerReviews
+
+class HasActive a b | a -> b where
+    active :: P.Lens' a b
+
+instance HasActive a b => HasActive (TF.Schema l p a) b where
+    active = TF.configuration . active
+
+class HasComputedHasWiki a b | a -> b where
+    computedHasWiki :: a -> b
+
+class HasComputedGit a b | a -> b where
+    computedGit :: a -> b
+
+class HasComputedUpdatedAt a b | a -> b where
+    computedUpdatedAt :: a -> b
+
+class HasComputedGpgKeys a b | a -> b where
+    computedGpgKeys :: a -> b
+
+class HasComputedSshKeys a b | a -> b where
+    computedSshKeys :: a -> b
+
+class HasComputedHtmlUrl a b | a -> b where
+    computedHtmlUrl :: a -> b
+
+class HasComputedHasProjects a b | a -> b where
+    computedHasProjects :: a -> b
+
+class HasComputedPages a b | a -> b where
+    computedPages :: a -> b
+
+class HasComputedKeyId a b | a -> b where
+    computedKeyId :: a -> b
 
 class HasComputedEmail a b | a -> b where
     computedEmail :: a -> b
 
-class HasComputedEnforceAdmins a b | a -> b where
-    computedEnforceAdmins :: a -> b
+class HasComputedHasIssues a b | a -> b where
+    computedHasIssues :: a -> b
 
-class HasComputedEvents a b | a -> b where
-    computedEvents :: a -> b
+class HasComputedAvatarUrl a b | a -> b where
+    computedAvatarUrl :: a -> b
+
+class HasComputedPublicRepos a b | a -> b where
+    computedPublicRepos :: a -> b
+
+class HasComputedSiteAdmin a b | a -> b where
+    computedSiteAdmin :: a -> b
+
+class HasComputedGitCloneUrl a b | a -> b where
+    computedGitCloneUrl :: a -> b
+
+class HasComputedSshCloneUrl a b | a -> b where
+    computedSshCloneUrl :: a -> b
+
+class HasComputedBio a b | a -> b where
+    computedBio :: a -> b
+
+class HasComputedHooks a b | a -> b where
+    computedHooks :: a -> b
+
+class HasComputedDescription a b | a -> b where
+    computedDescription :: a -> b
+
+class HasComputedPrivacy a b | a -> b where
+    computedPrivacy :: a -> b
+
+class HasComputedHttpCloneUrl a b | a -> b where
+    computedHttpCloneUrl :: a -> b
+
+class HasComputedGravatarId a b | a -> b where
+    computedGravatarId :: a -> b
+
+class HasComputedAllowSquashMerge a b | a -> b where
+    computedAllowSquashMerge :: a -> b
+
+class HasComputedDefaultBranch a b | a -> b where
+    computedDefaultBranch :: a -> b
+
+class HasComputedLogin a b | a -> b where
+    computedLogin :: a -> b
+
+class HasComputedFullName a b | a -> b where
+    computedFullName :: a -> b
+
+class HasComputedCreatedAt a b | a -> b where
+    computedCreatedAt :: a -> b
+
+class HasComputedName a b | a -> b where
+    computedName :: a -> b
+
+class HasComputedTopics a b | a -> b where
+    computedTopics :: a -> b
+
+class HasComputedArchived a b | a -> b where
+    computedArchived :: a -> b
+
+class HasComputedUrl a b | a -> b where
+    computedUrl :: a -> b
+
+class HasComputedCompany a b | a -> b where
+    computedCompany :: a -> b
+
+class HasComputedAllowRebaseMerge a b | a -> b where
+    computedAllowRebaseMerge :: a -> b
+
+class HasComputedHasDownloads a b | a -> b where
+    computedHasDownloads :: a -> b
+
+class HasComputedPermission a b | a -> b where
+    computedPermission :: a -> b
+
+class HasComputedPublicGists a b | a -> b where
+    computedPublicGists :: a -> b
 
 class HasComputedFollowers a b | a -> b where
     computedFollowers :: a -> b
@@ -436,143 +555,26 @@ class HasComputedFollowers a b | a -> b where
 class HasComputedFollowing a b | a -> b where
     computedFollowing :: a -> b
 
-class HasComputedFullName a b | a -> b where
-    computedFullName :: a -> b
-
-class HasComputedGit a b | a -> b where
-    computedGit :: a -> b
-
-class HasComputedGitCloneUrl a b | a -> b where
-    computedGitCloneUrl :: a -> b
-
-class HasComputedGitignoreTemplate a b | a -> b where
-    computedGitignoreTemplate :: a -> b
-
-class HasComputedGpgKeys a b | a -> b where
-    computedGpgKeys :: a -> b
-
-class HasComputedGravatarId a b | a -> b where
-    computedGravatarId :: a -> b
-
-class HasComputedHasDownloads a b | a -> b where
-    computedHasDownloads :: a -> b
-
-class HasComputedHasIssues a b | a -> b where
-    computedHasIssues :: a -> b
-
-class HasComputedHasProjects a b | a -> b where
-    computedHasProjects :: a -> b
-
-class HasComputedHasWiki a b | a -> b where
-    computedHasWiki :: a -> b
-
-class HasComputedHomepageUrl a b | a -> b where
-    computedHomepageUrl :: a -> b
-
-class HasComputedHooks a b | a -> b where
-    computedHooks :: a -> b
-
-class HasComputedHtmlUrl a b | a -> b where
-    computedHtmlUrl :: a -> b
-
-class HasComputedHttpCloneUrl a b | a -> b where
-    computedHttpCloneUrl :: a -> b
-
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
-
-class HasComputedImporter a b | a -> b where
-    computedImporter :: a -> b
-
-class HasComputedKey a b | a -> b where
-    computedKey :: a -> b
-
-class HasComputedLdapDn a b | a -> b where
-    computedLdapDn :: a -> b
-
-class HasComputedLicenseTemplate a b | a -> b where
-    computedLicenseTemplate :: a -> b
-
 class HasComputedLocation a b | a -> b where
     computedLocation :: a -> b
 
-class HasComputedLogin a b | a -> b where
-    computedLogin :: a -> b
+class HasComputedBlog a b | a -> b where
+    computedBlog :: a -> b
 
 class HasComputedMembers a b | a -> b where
     computedMembers :: a -> b
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputedSvnUrl a b | a -> b where
+    computedSvnUrl :: a -> b
 
-class HasComputedPages a b | a -> b where
-    computedPages :: a -> b
-
-class HasComputedParentTeamId a b | a -> b where
-    computedParentTeamId :: a -> b
-
-class HasComputedPermission a b | a -> b where
-    computedPermission :: a -> b
-
-class HasComputedPrivacy a b | a -> b where
-    computedPrivacy :: a -> b
+class HasComputedAllowMergeCommit a b | a -> b where
+    computedAllowMergeCommit :: a -> b
 
 class HasComputedPrivate a b | a -> b where
     computedPrivate :: a -> b
 
-class HasComputedPublicGists a b | a -> b where
-    computedPublicGists :: a -> b
+class HasComputedHomepageUrl a b | a -> b where
+    computedHomepageUrl :: a -> b
 
-class HasComputedPublicRepos a b | a -> b where
-    computedPublicRepos :: a -> b
-
-class HasComputedReadOnly a b | a -> b where
-    computedReadOnly :: a -> b
-
-class HasComputedRepository a b | a -> b where
-    computedRepository :: a -> b
-
-class HasComputedRequiredPullRequestReviews a b | a -> b where
-    computedRequiredPullRequestReviews :: a -> b
-
-class HasComputedRequiredStatusChecks a b | a -> b where
-    computedRequiredStatusChecks :: a -> b
-
-class HasComputedRestrictions a b | a -> b where
-    computedRestrictions :: a -> b
-
-class HasComputedRole a b | a -> b where
-    computedRole :: a -> b
-
-class HasComputedSiteAdmin a b | a -> b where
-    computedSiteAdmin :: a -> b
-
-class HasComputedSlug a b | a -> b where
-    computedSlug :: a -> b
-
-class HasComputedSshCloneUrl a b | a -> b where
-    computedSshCloneUrl :: a -> b
-
-class HasComputedSshKeys a b | a -> b where
-    computedSshKeys :: a -> b
-
-class HasComputedSvnUrl a b | a -> b where
-    computedSvnUrl :: a -> b
-
-class HasComputedTeamId a b | a -> b where
-    computedTeamId :: a -> b
-
-class HasComputedTitle a b | a -> b where
-    computedTitle :: a -> b
-
-class HasComputedTopics a b | a -> b where
-    computedTopics :: a -> b
-
-class HasComputedUpdatedAt a b | a -> b where
-    computedUpdatedAt :: a -> b
-
-class HasComputedUrl a b | a -> b where
-    computedUrl :: a -> b
-
-class HasComputedUsername a b | a -> b where
-    computedUsername :: a -> b
+class HasComputedImporter a b | a -> b where
+    computedImporter :: a -> b

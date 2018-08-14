@@ -1,4 +1,2 @@
-name: AzureRM
-package: terrafomo-azurerm
-datatype: true
-original: azurerm
+package-name: terrafomo-azurerm
+provider-name: AzureRM

@@ -1,80 +1,78 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
     (
-    -- * Provider Datatype
-      {{ provider.name }} (..)
-    , empty{{ provider.name }}
-
-    -- * Lenses
-  {% for field in schema.argumentFields %}
-    , provider{{ field.value.method | upperHead }}
-  {% endfor %}
+    -- * {{ provider.name }} Provider Datatype
+      Provider (..)
+    , {{ provider.schema.con.smart }}
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Functor  ((<$>))
+import Data.Function ((&))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+{% for import in unqualified %}
+import {{ import.value }}
+{% endfor %}
 
-{% for import in imports %}
+{% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Text as P
-
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
+import qualified Data.HashMap.Strict as Map
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Provider as TF
+import qualified Terrafomo.Validator as TF
 
-{- | {{ provider.name }} Terraform provider.
-{% if schema.about %}
+-- | The @{{ provider.name }}@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/{{ provider.name }}/index.html terraform documenation>
+-- for more information.
+data Provider = {{ provider.schema.con.name }}
+{% include "_include/record.ede" with arguments = provider.schema.arguments %}
 
-{{ schema.about | wrap }}
-{% endif %}
--}
-data {{ provider.name }} = {{ provider.name }} {
-  {% for arg in schema.arguments %}
-    {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} :: !(Maybe {{ arg.value.type.name }})
-    {- ^ {{ arg.value.help }} -}
+{{ provider.schema.con.smart }}
+  {% for param in provider.schema.parameters %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
+    -> Provider{% endif %}
+  {% else %}
+    :: Provider
   {% endfor %}
-    } deriving (Show, Eq, Generic)
+{{ provider.schema.con.smart }}{% for param in provider.schema.parameters %} {{ param.value.name }}{% endfor %} =
+    {{ provider.schema.con.name }}
+      {% for field in provider.schema.arguments %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
+        }{% endif %}
+      {% endfor %}
 
-instance Hashable {{ provider.name }}
+instance P.Hashable Provider
 
-instance TF.IsSection {{ provider.name }} where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy ({{ provider.name }}))
+instance TF.IsSection Provider where
+    toSection x@{{ provider.schema.con.name }}{% if !(provider.schema.arguments | empty) %}{..}{% endif %} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                {% for arg in schema.arguments %}
-                  , TF.assign "{{ arg.value.name }}" <$> {{ arg.key }} x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                {% for field in provider.schema.arguments %}
+                  , {{ field.value.encoder }} {{ field.value.name }}
                 {% endfor %}
                   ])
 
-instance TF.IsProvider {{ provider.name }} where
-    type ProviderType {{ provider.name }} = "{{ provider.original }}"
+instance TF.IsProvider Provider where
+    type ProviderType {{ provider.schema.name }} = "{{ provider.schema.original }}"
 
-empty{{ provider.name }} :: {{ provider.name }}
-empty{{ provider.name }} = {{ provider.name }} {
-    {% for arg in schema.arguments %}
-      {% if arg.first %}  {% else %}, {% endif %}{{ arg.key }} = Nothing
-    {% endfor %}
-    }
-{% for field in schema.argumentFields %}
-
-provider{{ field.value.method | upperHead }} :: Lens' {{ provider.name }} (Maybe {{ field.value.type.name }})
-provider{{ field.value.method | upperHead }} =
-    lens {{ field.value.label }} (\s a -> s { {{ field.value.label }} = a })
-{% endfor %}
+{% include "_include/validator.ede" with schema = provider.schema %}
+{% include "_include/lenses.ede" with schema = provider.schema %}

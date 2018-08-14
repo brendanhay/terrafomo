@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,143 +17,104 @@
 --
 module Terrafomo.Dyn.Resource
     (
-    -- * Types
+    -- * Resource Datatypes
+    -- ** dyn_record
       RecordResource (..)
     , recordResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasName (..)
-    , P.HasTtl (..)
-    , P.HasType' (..)
-    , P.HasValue (..)
-    , P.HasZone (..)
-
-    -- ** Computed Attributes
-    , P.HasComputedFqdn (..)
-    , P.HasComputedId (..)
-    , P.HasComputedName (..)
-    , P.HasComputedTtl (..)
-    , P.HasComputedType' (..)
-    , P.HasComputedValue (..)
-    , P.HasComputedZone (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Dyn.Settings
 
-import Terrafomo.Dyn.Types as P
-
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
 import qualified Data.Text              as P
-import qualified Data.Word              as P
-import qualified GHC.Base               as P
-import qualified Numeric.Natural        as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
 import qualified Terrafomo.Dyn.Lens     as P
 import qualified Terrafomo.Dyn.Provider as P
+import qualified Terrafomo.Dyn.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @dyn_record@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/Dyn/dyn_record terraform documentation>
+-- for more information.
+data RecordResource s = RecordResource'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    , _zone  :: TF.Attr s P.Text
+    -- ^ @zone@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @dyn_record@ Dyn resource.
-
-Provides a Dyn DNS record resource.
--}
-data RecordResource s = RecordResource {
-      _name  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The name of the record. -}
-    , _ttl   :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The TTL of the record. Default uses the zone default. -}
-    , _type' :: !(TF.Attr s P.Text)
-    {- ^ (Required) The type of the record. -}
-    , _value :: !(TF.Attr s P.Text)
-    {- ^ (Required) The value of the record. -}
-    , _zone  :: !(TF.Attr s P.Text)
-    {- ^ (Required) The DNS zone to add the record to. -}
-    } deriving (Show, Eq)
+recordResource
+    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    -> TF.Resource P.Provider (RecordResource s)
+recordResource _type' _value _zone =
+    TF.newResource "dyn_record" TF.validator $
+        RecordResource'
+            { _name = TF.Nil
+            , _type' = _type'
+            , _value = _value
+            , _zone = _zone
+            }
 
 instance TF.IsObject (RecordResource s) where
-    toObject RecordResource{..} = catMaybes
+    toObject RecordResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "value" <$> TF.attribute _value
         , TF.assign "zone" <$> TF.attribute _zone
         ]
 
+instance TF.IsValid (RecordResource s) where
+    validator = P.mempty
+
 instance P.HasName (RecordResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: RecordResource s)
-
-instance P.HasTtl (RecordResource s) (TF.Attr s P.Text) where
-    ttl =
-        lens (_ttl :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ttl = a } :: RecordResource s)
+        P.lens (_name :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
     type' =
-        lens (_type' :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _type' = a } :: RecordResource s)
+        P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: RecordResource s)
 
 instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
     value =
-        lens (_value :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _value = a } :: RecordResource s)
+        P.lens (_value :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: RecordResource s)
 
 instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
     zone =
-        lens (_zone :: RecordResource s -> TF.Attr s P.Text)
-             (\s a -> s { _zone = a } :: RecordResource s)
+        P.lens (_zone :: RecordResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
+    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl =
-        (_ttl :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedType' (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedType' =
-        (_type' :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedValue =
-        (_value :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedZone =
-        (_zone :: RecordResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-recordResource :: TF.Resource P.Dyn (RecordResource s)
-recordResource =
-    TF.newResource "dyn_record" $
-        RecordResource {
-              _name = TF.Nil
-            , _ttl = TF.Nil
-            , _type' = TF.Nil
-            , _value = TF.Nil
-            , _zone = TF.Nil
-            }
+    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"

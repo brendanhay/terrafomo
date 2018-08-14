@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.RabbitMQ
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -10,12 +12,14 @@
 --
 module Terrafomo.RabbitMQ
     ( module Terrafomo.RabbitMQ.Types
-    , module Terrafomo.RabbitMQ.Provider
+    , module Terrafomo.RabbitMQ.Settings
     , module Terrafomo.RabbitMQ.Lens
     , module Terrafomo.RabbitMQ.Resource
+    , module Terrafomo.RabbitMQ.Provider
     ) where
 
 import Terrafomo.RabbitMQ.Lens
 import Terrafomo.RabbitMQ.Provider
 import Terrafomo.RabbitMQ.Resource
+import Terrafomo.RabbitMQ.Settings
 import Terrafomo.RabbitMQ.Types

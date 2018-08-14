@@ -1,4 +1,2 @@
-name: Logentries
-package: terrafomo-logentries
-datatype: true
-original: logentries
+package-name: terrafomo-logentries
+provider-name: Logentries

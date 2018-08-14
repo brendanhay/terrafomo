@@ -16,44 +16,35 @@ module Terrafomo.Local.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasContent (..)
-    , HasFilename (..)
     , HasSensitiveContent (..)
+    , HasFilename (..)
 
     -- ** Computed Attributes
     , HasComputedContent (..)
-    , HasComputedFilename (..)
-    , HasComputedSensitiveContent (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
 class HasContent a b | a -> b where
-    content :: Lens' a b
+    content :: P.Lens' a b
 
 instance HasContent a b => HasContent (TF.Schema l p a) b where
     content = TF.configuration . content
 
-class HasFilename a b | a -> b where
-    filename :: Lens' a b
-
-instance HasFilename a b => HasFilename (TF.Schema l p a) b where
-    filename = TF.configuration . filename
-
 class HasSensitiveContent a b | a -> b where
-    sensitiveContent :: Lens' a b
+    sensitiveContent :: P.Lens' a b
 
 instance HasSensitiveContent a b => HasSensitiveContent (TF.Schema l p a) b where
     sensitiveContent = TF.configuration . sensitiveContent
 
+class HasFilename a b | a -> b where
+    filename :: P.Lens' a b
+
+instance HasFilename a b => HasFilename (TF.Schema l p a) b where
+    filename = TF.configuration . filename
+
 class HasComputedContent a b | a -> b where
     computedContent :: a -> b
-
-class HasComputedFilename a b | a -> b where
-    computedFilename :: a -> b
-
-class HasComputedSensitiveContent a b | a -> b where
-    computedSensitiveContent :: a -> b

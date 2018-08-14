@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Grafana
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -11,11 +13,13 @@
 module Terrafomo.Grafana
     ( module Terrafomo.Grafana.Types
     , module Terrafomo.Grafana.Provider
-    , module Terrafomo.Grafana.Lens
     , module Terrafomo.Grafana.Resource
+    , module Terrafomo.Grafana.Settings
+    , module Terrafomo.Grafana.Lens
     ) where
 
 import Terrafomo.Grafana.Lens
 import Terrafomo.Grafana.Provider
 import Terrafomo.Grafana.Resource
+import Terrafomo.Grafana.Settings
 import Terrafomo.Grafana.Types

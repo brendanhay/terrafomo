@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,91 +17,110 @@
 --
 module Terrafomo.Icinga2.Provider
     (
-    -- * Provider Datatype
-      Icinga2 (..)
-    , emptyIcinga2
-
-    -- * Lenses
-    , providerApiPassword
-    , providerApiUrl
-    , providerApiUser
-    , providerInsecureSkipTlsVerify
+    -- * Icinga2 Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.Icinga2.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as Map
+import qualified Data.List.NonEmpty      as P
+import qualified Data.Maybe              as P
+import qualified Data.Monoid             as P
 import qualified Data.Text               as P
+import qualified GHC.Generics            as P
+import qualified Lens.Micro              as P
+import qualified Prelude                 as P
+import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Icinga2.Lens  as P
 import qualified Terrafomo.Icinga2.Types as P
+import qualified Terrafomo.Name          as TF
+import qualified Terrafomo.Provider      as TF
+import qualified Terrafomo.Validator     as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @Icinga2@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/Icinga2/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _apiPassword           :: P.Text
+    -- ^ @api_password@ - (Required)
+    -- The password for authenticating to the Icinga2 server.
+    --
+    , _apiUrl                :: P.Text
+    -- ^ @api_url@ - (Required)
+    -- The address of the Icinga2 server.
+    --
+    , _apiUser               :: P.Text
+    -- ^ @api_user@ - (Required)
+    -- The user to authenticate to the Icinga2 Server as.
+    --
+    , _insecureSkipTlsVerify :: P.Maybe P.Bool
+    -- ^ @insecure_skip_tls_verify@ - (Optional)
+    -- Disable TLS verify when connecting to Icinga2 Server
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | Icinga2 Terraform provider.
+newProvider
+    :: P.Text -- ^ @api_password@ - 'P.apiPassword'
+    -> P.Text -- ^ @api_url@ - 'P.apiUrl'
+    -> P.Text -- ^ @api_user@ - 'P.apiUser'
+    -> Provider
+newProvider _apiPassword _apiUrl _apiUser =
+    Provider'
+        { _apiPassword = _apiPassword
+        , _apiUrl = _apiUrl
+        , _apiUser = _apiUser
+        , _insecureSkipTlsVerify = P.Nothing
+        }
 
-The Icinga2 provider is used to configure hosts to be monitored by
-<https://www.icinga.com/products/icinga-2/> servers. The provider needs to
-be configured with the API URL of the Icinga2 server and credentials for an
-API user with the appropriate permissions.
--}
-data Icinga2 = Icinga2 {
-      _api_password             :: !(Maybe P.Text)
-    {- ^ (Required) The password to use to authenticate to the Icinga2 server. May alternatively be set via the @ICINGA2_API_PASSWORD@ environment variable. -}
-    , _api_url                  :: !(Maybe P.Text)
-    {- ^ (Required) The root API URL of an Icinga2 server. May alternatively be set via the @ICINGA2_API_URL@ environment variable. -}
-    , _api_user                 :: !(Maybe P.Text)
-    {- ^ (Required) The API username to use to authenticate to the Icinga2 server. May alternatively be set via the @ICINGA2_API_USER@ environment variable. -}
-    , _insecure_skip_tls_verify :: !(Maybe P.Text)
-    {- ^ - (optional) Defaults to false. If set to true, verification of the Icinga2 server's SSL certificate is disabled. This is a security risk and should be avoided. May alternatively be set via the @ICINGA2_INSECURE_SKIP_TLS_VERIFY@ environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable Icinga2
-
-instance TF.IsSection Icinga2 where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (Icinga2))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_password" <$> _api_password x
-                  , TF.assign "api_url" <$> _api_url x
-                  , TF.assign "api_user" <$> _api_user x
-                  , TF.assign "insecure_skip_tls_verify" <$> _insecure_skip_tls_verify x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "api_password" _apiPassword
+                  , P.Just $ TF.assign "api_url" _apiUrl
+                  , P.Just $ TF.assign "api_user" _apiUser
+                  , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
                   ])
 
-instance TF.IsProvider Icinga2 where
-    type ProviderType Icinga2 = "icinga2"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyIcinga2 :: Icinga2
-emptyIcinga2 = Icinga2 {
-        _api_password = Nothing
-      , _api_url = Nothing
-      , _api_user = Nothing
-      , _insecure_skip_tls_verify = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerApiPassword :: Lens' Icinga2 (Maybe P.Text)
-providerApiPassword =
-    lens _api_password (\s a -> s { _api_password = a })
+instance P.HasApiPassword (Provider) (P.Text) where
+    apiPassword =
+        P.lens (_apiPassword :: Provider -> P.Text)
+               (\s a -> s { _apiPassword = a } :: Provider)
 
-providerApiUrl :: Lens' Icinga2 (Maybe P.Text)
-providerApiUrl =
-    lens _api_url (\s a -> s { _api_url = a })
+instance P.HasApiUrl (Provider) (P.Text) where
+    apiUrl =
+        P.lens (_apiUrl :: Provider -> P.Text)
+               (\s a -> s { _apiUrl = a } :: Provider)
 
-providerApiUser :: Lens' Icinga2 (Maybe P.Text)
-providerApiUser =
-    lens _api_user (\s a -> s { _api_user = a })
+instance P.HasApiUser (Provider) (P.Text) where
+    apiUser =
+        P.lens (_apiUser :: Provider -> P.Text)
+               (\s a -> s { _apiUser = a } :: Provider)
 
-providerInsecureSkipTlsVerify :: Lens' Icinga2 (Maybe P.Text)
-providerInsecureSkipTlsVerify =
-    lens _insecure_skip_tls_verify (\s a -> s { _insecure_skip_tls_verify = a })
+instance P.HasInsecureSkipTlsVerify (Provider) (P.Maybe P.Bool) where
+    insecureSkipTlsVerify =
+        P.lens (_insecureSkipTlsVerify :: Provider -> P.Maybe P.Bool)
+               (\s a -> s { _insecureSkipTlsVerify = a } :: Provider)

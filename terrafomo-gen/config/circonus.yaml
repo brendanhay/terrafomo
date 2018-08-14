@@ -1,4 +1,2 @@
-name: Circonus
-package: terrafomo-circonus
-datatype: true
-original: circonus
+package-name: terrafomo-circonus
+provider-name: Circonus

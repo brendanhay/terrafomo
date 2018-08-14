@@ -15,104 +15,82 @@ module Terrafomo.OpsGenie.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasDescription (..)
-    , HasFullName (..)
-    , HasLocale (..)
+      HasLocale (..)
+    , HasDescription (..)
     , HasMember (..)
-    , HasName (..)
-    , HasRole (..)
-    , HasTimezone (..)
     , HasUsername (..)
+    , HasTimezone (..)
+    , HasRole (..)
+    , HasApiKey (..)
+    , HasName (..)
+    , HasFullName (..)
 
     -- ** Computed Attributes
-    , HasComputedDescription (..)
     , HasComputedFullName (..)
-    , HasComputedId (..)
-    , HasComputedLocale (..)
-    , HasComputedMember (..)
-    , HasComputedName (..)
     , HasComputedRole (..)
-    , HasComputedTimezone (..)
-    , HasComputedUsername (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasDescription a b | a -> b where
-    description :: Lens' a b
-
-instance HasDescription a b => HasDescription (TF.Schema l p a) b where
-    description = TF.configuration . description
-
-class HasFullName a b | a -> b where
-    fullName :: Lens' a b
-
-instance HasFullName a b => HasFullName (TF.Schema l p a) b where
-    fullName = TF.configuration . fullName
-
 class HasLocale a b | a -> b where
-    locale :: Lens' a b
+    locale :: P.Lens' a b
 
 instance HasLocale a b => HasLocale (TF.Schema l p a) b where
     locale = TF.configuration . locale
 
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
 class HasMember a b | a -> b where
-    member :: Lens' a b
+    member :: P.Lens' a b
 
 instance HasMember a b => HasMember (TF.Schema l p a) b where
     member = TF.configuration . member
 
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasRole a b | a -> b where
-    role :: Lens' a b
-
-instance HasRole a b => HasRole (TF.Schema l p a) b where
-    role = TF.configuration . role
-
-class HasTimezone a b | a -> b where
-    timezone :: Lens' a b
-
-instance HasTimezone a b => HasTimezone (TF.Schema l p a) b where
-    timezone = TF.configuration . timezone
-
 class HasUsername a b | a -> b where
-    username :: Lens' a b
+    username :: P.Lens' a b
 
 instance HasUsername a b => HasUsername (TF.Schema l p a) b where
     username = TF.configuration . username
 
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
+class HasTimezone a b | a -> b where
+    timezone :: P.Lens' a b
+
+instance HasTimezone a b => HasTimezone (TF.Schema l p a) b where
+    timezone = TF.configuration . timezone
+
+class HasRole a b | a -> b where
+    role :: P.Lens' a b
+
+instance HasRole a b => HasRole (TF.Schema l p a) b where
+    role = TF.configuration . role
+
+class HasApiKey a b | a -> b where
+    apiKey :: P.Lens' a b
+
+instance HasApiKey a b => HasApiKey (TF.Schema l p a) b where
+    apiKey = TF.configuration . apiKey
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
+
+class HasFullName a b | a -> b where
+    fullName :: P.Lens' a b
+
+instance HasFullName a b => HasFullName (TF.Schema l p a) b where
+    fullName = TF.configuration . fullName
 
 class HasComputedFullName a b | a -> b where
     computedFullName :: a -> b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
-
-class HasComputedLocale a b | a -> b where
-    computedLocale :: a -> b
-
-class HasComputedMember a b | a -> b where
-    computedMember :: a -> b
-
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
-
 class HasComputedRole a b | a -> b where
     computedRole :: a -> b
-
-class HasComputedTimezone a b | a -> b where
-    computedTimezone :: a -> b
-
-class HasComputedUsername a b | a -> b where
-    computedUsername :: a -> b

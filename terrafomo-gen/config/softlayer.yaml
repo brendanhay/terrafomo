@@ -1,4 +1,2 @@
-name: SoftLayer
-package: terrafomo-softlayer
-datatype: true
-original: softlayer
+package-name: terrafomo-softlayer
+provider-name: SoftLayer

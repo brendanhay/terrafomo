@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,464 +17,363 @@
 --
 module Terrafomo.LogicMonitor.Resource
     (
-    -- * Types
-      CollectorGroupResource (..)
-    , collectorGroupResource
-
-    , CollectorResource (..)
+    -- * Resource Datatypes
+    -- ** logicmonitor_collector
+      CollectorResource (..)
     , collectorResource
 
-    , DeviceGroupResource (..)
-    , deviceGroupResource
+    -- ** logicmonitor_collector_group
+    , CollectorGroupResource (..)
+    , collectorGroupResource
 
+    -- ** logicmonitor_device
     , DeviceResource (..)
     , deviceResource
 
-    -- * Overloaded Fields
-    -- ** Arguments
-    , P.HasAppliesTo (..)
-    , P.HasBackupCollectorId (..)
-    , P.HasCollector (..)
-    , P.HasCollectorGroupId (..)
-    , P.HasDescription (..)
-    , P.HasDisableAlerting (..)
-    , P.HasDisplayName (..)
-    , P.HasEnableCollectorDeviceFailover (..)
-    , P.HasEnableFailback (..)
-    , P.HasEscalationChainId (..)
-    , P.HasHostgroupId (..)
-    , P.HasIpAddr (..)
-    , P.HasName (..)
-    , P.HasParentId (..)
-    , P.HasProperties (..)
-    , P.HasResendInterval (..)
-    , P.HasSuppressAlertClear (..)
+    -- ** logicmonitor_device_group
+    , DeviceGroupResource (..)
+    , deviceGroupResource
 
-    -- ** Computed Attributes
-    , P.HasComputedAppliesTo (..)
-    , P.HasComputedBackupCollectorId (..)
-    , P.HasComputedCollector (..)
-    , P.HasComputedCollectorGroupId (..)
-    , P.HasComputedDescription (..)
-    , P.HasComputedDisableAlerting (..)
-    , P.HasComputedDisplayName (..)
-    , P.HasComputedEnableCollectorDeviceFailover (..)
-    , P.HasComputedEnableFailback (..)
-    , P.HasComputedEscalationChainId (..)
-    , P.HasComputedHostgroupId (..)
-    , P.HasComputedIpAddr (..)
-    , P.HasComputedName (..)
-    , P.HasComputedParentId (..)
-    , P.HasComputedProperties (..)
-    , P.HasComputedResendInterval (..)
-    , P.HasComputedSuppressAlertClear (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.LogicMonitor.Settings
 
-import Terrafomo.LogicMonitor.Types as P
-
+import qualified Data.Hashable                   as P
+import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as Map
+import qualified Data.List.NonEmpty              as P
+import qualified Data.Maybe                      as P
+import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
-import qualified Data.Word                       as P
-import qualified GHC.Base                        as P
-import qualified Numeric.Natural                 as P
+import qualified GHC.Generics                    as P
+import qualified Lens.Micro                      as P
+import qualified Prelude                         as P
+import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.HCL                   as TF
 import qualified Terrafomo.LogicMonitor.Lens     as P
 import qualified Terrafomo.LogicMonitor.Provider as P
+import qualified Terrafomo.LogicMonitor.Types    as P
+import qualified Terrafomo.Name                  as TF
+import qualified Terrafomo.Schema                as TF
+import qualified Terrafomo.Validator             as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @logicmonitor_collector@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_collector terraform documentation>
+-- for more information.
+data CollectorResource s = CollectorResource'
+    { _backupCollectorId             :: TF.Attr s P.Integer
+    -- ^ @backup_collector_id@ - (Optional)
+    --
+    , _collectorGroupId              :: TF.Attr s P.Integer
+    -- ^ @collector_group_id@ - (Optional)
+    --
+    , _description                   :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _enableCollectorDeviceFailover :: TF.Attr s P.Bool
+    -- ^ @enable_collector_device_failover@ - (Optional)
+    --
+    , _enableFailback                :: TF.Attr s P.Bool
+    -- ^ @enable_failback@ - (Optional)
+    --
+    , _escalationChainId             :: TF.Attr s P.Integer
+    -- ^ @escalation_chain_id@ - (Optional)
+    --
+    , _resendInterval                :: TF.Attr s P.Integer
+    -- ^ @resend_interval@ - (Optional)
+    --
+    , _suppressAlertClear            :: TF.Attr s P.Bool
+    -- ^ @suppress_alert_clear@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @logicmonitor_collector_group@ LogicMonitor resource.
+collectorResource
+    :: TF.Resource P.Provider (CollectorResource s)
+collectorResource =
+    TF.newResource "logicmonitor_collector" TF.validator $
+        CollectorResource'
+            { _backupCollectorId = TF.Nil
+            , _collectorGroupId = TF.value 1
+            , _description = TF.Nil
+            , _enableCollectorDeviceFailover = TF.Nil
+            , _enableFailback = TF.Nil
+            , _escalationChainId = TF.Nil
+            , _resendInterval = TF.Nil
+            , _suppressAlertClear = TF.Nil
+            }
 
-Provides a LogicMonitor collector group resource. This can be used to create
-and manage LogicMonitor collector groups
--}
-data CollectorGroupResource s = CollectorGroupResource {
-      _description :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Set description of collector group -}
-    , _name        :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of collector group -}
-    } deriving (Show, Eq)
+instance TF.IsObject (CollectorResource s) where
+    toObject CollectorResource'{..} = P.catMaybes
+        [ TF.assign "backup_collector_id" <$> TF.attribute _backupCollectorId
+        , TF.assign "collector_group_id" <$> TF.attribute _collectorGroupId
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "enable_collector_device_failover" <$> TF.attribute _enableCollectorDeviceFailover
+        , TF.assign "enable_failback" <$> TF.attribute _enableFailback
+        , TF.assign "escalation_chain_id" <$> TF.attribute _escalationChainId
+        , TF.assign "resend_interval" <$> TF.attribute _resendInterval
+        , TF.assign "suppress_alert_clear" <$> TF.attribute _suppressAlertClear
+        ]
+
+instance TF.IsValid (CollectorResource s) where
+    validator = P.mempty
+
+instance P.HasBackupCollectorId (CollectorResource s) (TF.Attr s P.Integer) where
+    backupCollectorId =
+        P.lens (_backupCollectorId :: CollectorResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _backupCollectorId = a } :: CollectorResource s)
+
+instance P.HasCollectorGroupId (CollectorResource s) (TF.Attr s P.Integer) where
+    collectorGroupId =
+        P.lens (_collectorGroupId :: CollectorResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _collectorGroupId = a } :: CollectorResource s)
+
+instance P.HasDescription (CollectorResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: CollectorResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: CollectorResource s)
+
+instance P.HasEnableCollectorDeviceFailover (CollectorResource s) (TF.Attr s P.Bool) where
+    enableCollectorDeviceFailover =
+        P.lens (_enableCollectorDeviceFailover :: CollectorResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableCollectorDeviceFailover = a } :: CollectorResource s)
+
+instance P.HasEnableFailback (CollectorResource s) (TF.Attr s P.Bool) where
+    enableFailback =
+        P.lens (_enableFailback :: CollectorResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableFailback = a } :: CollectorResource s)
+
+instance P.HasEscalationChainId (CollectorResource s) (TF.Attr s P.Integer) where
+    escalationChainId =
+        P.lens (_escalationChainId :: CollectorResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _escalationChainId = a } :: CollectorResource s)
+
+instance P.HasResendInterval (CollectorResource s) (TF.Attr s P.Integer) where
+    resendInterval =
+        P.lens (_resendInterval :: CollectorResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _resendInterval = a } :: CollectorResource s)
+
+instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Bool) where
+    suppressAlertClear =
+        P.lens (_suppressAlertClear :: CollectorResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _suppressAlertClear = a } :: CollectorResource s)
+
+-- | @logicmonitor_collector_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_collector_group terraform documentation>
+-- for more information.
+data CollectorGroupResource s = CollectorGroupResource'
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+collectorGroupResource
+    :: TF.Resource P.Provider (CollectorGroupResource s)
+collectorGroupResource =
+    TF.newResource "logicmonitor_collector_group" TF.validator $
+        CollectorGroupResource'
+            { _description = TF.Nil
+            , _name = TF.Nil
+            }
 
 instance TF.IsObject (CollectorGroupResource s) where
-    toObject CollectorGroupResource{..} = catMaybes
+    toObject CollectorGroupResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         ]
 
+instance TF.IsValid (CollectorGroupResource s) where
+    validator = P.mempty
+
 instance P.HasDescription (CollectorGroupResource s) (TF.Attr s P.Text) where
     description =
-        lens (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: CollectorGroupResource s)
+        P.lens (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: CollectorGroupResource s)
 
 instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
     name =
-        lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: CollectorGroupResource s)
+        P.lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CollectorGroupResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: CollectorGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @logicmonitor_device@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_device terraform documentation>
+-- for more information.
+data DeviceResource s = DeviceResource'
+    { _collector       :: TF.Attr s P.Integer
+    -- ^ @collector@ - (Required)
+    --
+    , _description     :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _disableAlerting :: TF.Attr s P.Bool
+    -- ^ @disable_alerting@ - (Optional)
+    --
+    , _displayName     :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    , _hostgroupId     :: TF.Attr s P.Text
+    -- ^ @hostgroup_id@ - (Optional)
+    --
+    , _ipAddr          :: TF.Attr s P.Text
+    -- ^ @ip_addr@ - (Required)
+    --
+    , _properties      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @properties@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-collectorGroupResource :: TF.Resource P.LogicMonitor (CollectorGroupResource s)
-collectorGroupResource =
-    TF.newResource "logicmonitor_collector_group" $
-        CollectorGroupResource {
-              _description = TF.Nil
-            , _name = TF.Nil
-            }
-
-{- | The @logicmonitor_collector@ LogicMonitor resource.
-
-Provides a LogicMonitor collector resource. This can be used to create and
-manage LogicMonitor collectors. Note: This resource will only create the
-collector device in your account. See
-<https://www.logicmonitor.com/support/rest-api-developers-guide/collectors/downloading-a-collector-installer/>
-for information on how to download and install an existing collector.
--}
-data CollectorResource s = CollectorResource {
-      _backup_collector_id              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Id of the failover Collector configured for this Collector -}
-    , _collector_group_id               :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Id of the group the Collector is in -}
-    , _description                      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Collector's description -}
-    , _enable_collector_device_failover :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether or not the device the Collector is installed on is enabled for fail over -}
-    , _enable_failback                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether or not automatic failback is enabled for the Collector -}
-    , _escalation_chain_id              :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Id of the escalation chain associated with this Collector -}
-    , _resend_interval                  :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The interval, in minutes, after which alert notifications for the Collector will be resent -}
-    , _suppress_alert_clear             :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Whether alert clear notifications are suppressed for the Collector -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (CollectorResource s) where
-    toObject CollectorResource{..} = catMaybes
-        [ TF.assign "backup_collector_id" <$> TF.attribute _backup_collector_id
-        , TF.assign "collector_group_id" <$> TF.attribute _collector_group_id
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "enable_collector_device_failover" <$> TF.attribute _enable_collector_device_failover
-        , TF.assign "enable_failback" <$> TF.attribute _enable_failback
-        , TF.assign "escalation_chain_id" <$> TF.attribute _escalation_chain_id
-        , TF.assign "resend_interval" <$> TF.attribute _resend_interval
-        , TF.assign "suppress_alert_clear" <$> TF.attribute _suppress_alert_clear
-        ]
-
-instance P.HasBackupCollectorId (CollectorResource s) (TF.Attr s P.Text) where
-    backupCollectorId =
-        lens (_backup_collector_id :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _backup_collector_id = a } :: CollectorResource s)
-
-instance P.HasCollectorGroupId (CollectorResource s) (TF.Attr s P.Text) where
-    collectorGroupId =
-        lens (_collector_group_id :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _collector_group_id = a } :: CollectorResource s)
-
-instance P.HasDescription (CollectorResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: CollectorResource s)
-
-instance P.HasEnableCollectorDeviceFailover (CollectorResource s) (TF.Attr s P.Text) where
-    enableCollectorDeviceFailover =
-        lens (_enable_collector_device_failover :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_collector_device_failover = a } :: CollectorResource s)
-
-instance P.HasEnableFailback (CollectorResource s) (TF.Attr s P.Text) where
-    enableFailback =
-        lens (_enable_failback :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _enable_failback = a } :: CollectorResource s)
-
-instance P.HasEscalationChainId (CollectorResource s) (TF.Attr s P.Text) where
-    escalationChainId =
-        lens (_escalation_chain_id :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _escalation_chain_id = a } :: CollectorResource s)
-
-instance P.HasResendInterval (CollectorResource s) (TF.Attr s P.Text) where
-    resendInterval =
-        lens (_resend_interval :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _resend_interval = a } :: CollectorResource s)
-
-instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Text) where
-    suppressAlertClear =
-        lens (_suppress_alert_clear :: CollectorResource s -> TF.Attr s P.Text)
-             (\s a -> s { _suppress_alert_clear = a } :: CollectorResource s)
-
-instance s ~ s' => P.HasComputedBackupCollectorId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedBackupCollectorId =
-        (_backup_collector_id :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedCollectorGroupId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedCollectorGroupId =
-        (_collector_group_id :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnableCollectorDeviceFailover (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedEnableCollectorDeviceFailover =
-        (_enable_collector_device_failover :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEnableFailback (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedEnableFailback =
-        (_enable_failback :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedEscalationChainId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedEscalationChainId =
-        (_escalation_chain_id :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedResendInterval (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedResendInterval =
-        (_resend_interval :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedSuppressAlertClear (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
-    computedSuppressAlertClear =
-        (_suppress_alert_clear :: CollectorResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-collectorResource :: TF.Resource P.LogicMonitor (CollectorResource s)
-collectorResource =
-    TF.newResource "logicmonitor_collector" $
-        CollectorResource {
-              _backup_collector_id = TF.Nil
-            , _collector_group_id = TF.Nil
+deviceResource
+    :: TF.Attr s P.Integer -- ^ @collector@ - 'P.collector'
+    -> TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
+    -> TF.Resource P.Provider (DeviceResource s)
+deviceResource _collector _ipAddr =
+    TF.newResource "logicmonitor_device" TF.validator $
+        DeviceResource'
+            { _collector = _collector
             , _description = TF.Nil
-            , _enable_collector_device_failover = TF.Nil
-            , _enable_failback = TF.Nil
-            , _escalation_chain_id = TF.Nil
-            , _resend_interval = TF.Nil
-            , _suppress_alert_clear = TF.Nil
-            }
-
-{- | The @logicmonitor_device_group@ LogicMonitor resource.
-
-Provides a LogicMonitor device group resource. This can be used to create
-and manage LogicMonitor device groups
--}
-data DeviceGroupResource s = DeviceGroupResource {
-      _applies_to       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The Applies to custom query for this group. Setting this field will make this a dynamic group. -}
-    , _description      :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Description of device group -}
-    , _disable_alerting :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Indicates whether alerting is disabled (true) or enabled (false) for this device group -}
-    , _name             :: !(TF.Attr s P.Text)
-    {- ^ (Required) Name of device group -}
-    , _parent_id        :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The id of the parent group for this device group (the root device group has an Id of 1) -}
-    , _properties       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
-    } deriving (Show, Eq)
-
-instance TF.IsObject (DeviceGroupResource s) where
-    toObject DeviceGroupResource{..} = catMaybes
-        [ TF.assign "applies_to" <$> TF.attribute _applies_to
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parent_id" <$> TF.attribute _parent_id
-        , TF.assign "properties" <$> TF.attribute _properties
-        ]
-
-instance P.HasAppliesTo (DeviceGroupResource s) (TF.Attr s P.Text) where
-    appliesTo =
-        lens (_applies_to :: DeviceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _applies_to = a } :: DeviceGroupResource s)
-
-instance P.HasDescription (DeviceGroupResource s) (TF.Attr s P.Text) where
-    description =
-        lens (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _description = a } :: DeviceGroupResource s)
-
-instance P.HasDisableAlerting (DeviceGroupResource s) (TF.Attr s P.Text) where
-    disableAlerting =
-        lens (_disable_alerting :: DeviceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_alerting = a } :: DeviceGroupResource s)
-
-instance P.HasName (DeviceGroupResource s) (TF.Attr s P.Text) where
-    name =
-        lens (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _name = a } :: DeviceGroupResource s)
-
-instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Text) where
-    parentId =
-        lens (_parent_id :: DeviceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _parent_id = a } :: DeviceGroupResource s)
-
-instance P.HasProperties (DeviceGroupResource s) (TF.Attr s P.Text) where
-    properties =
-        lens (_properties :: DeviceGroupResource s -> TF.Attr s P.Text)
-             (\s a -> s { _properties = a } :: DeviceGroupResource s)
-
-instance s ~ s' => P.HasComputedAppliesTo (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
-    computedAppliesTo =
-        (_applies_to :: DeviceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
-    computedDescription =
-        (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
-    computedDisableAlerting =
-        (_disable_alerting :: DeviceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
-    computedName =
-        (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedParentId (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
-    computedParentId =
-        (_parent_id :: DeviceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
-    computedProperties =
-        (_properties :: DeviceGroupResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-deviceGroupResource :: TF.Resource P.LogicMonitor (DeviceGroupResource s)
-deviceGroupResource =
-    TF.newResource "logicmonitor_device_group" $
-        DeviceGroupResource {
-              _applies_to = TF.Nil
-            , _description = TF.Nil
-            , _disable_alerting = TF.Nil
-            , _name = TF.Nil
-            , _parent_id = TF.Nil
+            , _disableAlerting = TF.value P.True
+            , _displayName = TF.Nil
+            , _hostgroupId = TF.Nil
+            , _ipAddr = _ipAddr
             , _properties = TF.Nil
             }
 
-{- | The @logicmonitor_device@ LogicMonitor resource.
-
-Provides a LogicMonitor device resource. This can be used to create and
-manage LogicMonitor devices
--}
-data DeviceResource s = DeviceResource {
-      _collector        :: !(TF.Attr s P.Text)
-    {- ^ - (required) The id of the collector that will monitoring the device -}
-    , _disable_alerting :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The host is created with alerting disabled (default is true) -}
-    , _display_name     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) Display name of device, (default is ip_addr) -}
-    , _hostgroup_id     :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The host group id that specifies which group the device belongs to (multiple host group ids can be added, represented by a comma separated string) -}
-    , _ip_addr          :: !(TF.Attr s P.Text)
-    {- ^ (Required) Ip Address/Hostname of device -}
-    , _properties       :: !(TF.Attr s P.Text)
-    {- ^ (Optional) The properties associated with this device group. Any string value pair will work (see example). -}
-    } deriving (Show, Eq)
-
 instance TF.IsObject (DeviceResource s) where
-    toObject DeviceResource{..} = catMaybes
+    toObject DeviceResource'{..} = P.catMaybes
         [ TF.assign "collector" <$> TF.attribute _collector
-        , TF.assign "disable_alerting" <$> TF.attribute _disable_alerting
-        , TF.assign "display_name" <$> TF.attribute _display_name
-        , TF.assign "hostgroup_id" <$> TF.attribute _hostgroup_id
-        , TF.assign "ip_addr" <$> TF.attribute _ip_addr
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "disable_alerting" <$> TF.attribute _disableAlerting
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "hostgroup_id" <$> TF.attribute _hostgroupId
+        , TF.assign "ip_addr" <$> TF.attribute _ipAddr
         , TF.assign "properties" <$> TF.attribute _properties
         ]
 
-instance P.HasCollector (DeviceResource s) (TF.Attr s P.Text) where
-    collector =
-        lens (_collector :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _collector = a } :: DeviceResource s)
+instance TF.IsValid (DeviceResource s) where
+    validator = P.mempty
 
-instance P.HasDisableAlerting (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasCollector (DeviceResource s) (TF.Attr s P.Integer) where
+    collector =
+        P.lens (_collector :: DeviceResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _collector = a } :: DeviceResource s)
+
+instance P.HasDescription (DeviceResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: DeviceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DeviceResource s)
+
+instance P.HasDisableAlerting (DeviceResource s) (TF.Attr s P.Bool) where
     disableAlerting =
-        lens (_disable_alerting :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _disable_alerting = a } :: DeviceResource s)
+        P.lens (_disableAlerting :: DeviceResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableAlerting = a } :: DeviceResource s)
 
 instance P.HasDisplayName (DeviceResource s) (TF.Attr s P.Text) where
     displayName =
-        lens (_display_name :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _display_name = a } :: DeviceResource s)
+        P.lens (_displayName :: DeviceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: DeviceResource s)
 
 instance P.HasHostgroupId (DeviceResource s) (TF.Attr s P.Text) where
     hostgroupId =
-        lens (_hostgroup_id :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _hostgroup_id = a } :: DeviceResource s)
+        P.lens (_hostgroupId :: DeviceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _hostgroupId = a } :: DeviceResource s)
 
 instance P.HasIpAddr (DeviceResource s) (TF.Attr s P.Text) where
     ipAddr =
-        lens (_ip_addr :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _ip_addr = a } :: DeviceResource s)
+        P.lens (_ipAddr :: DeviceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddr = a } :: DeviceResource s)
 
-instance P.HasProperties (DeviceResource s) (TF.Attr s P.Text) where
+instance P.HasProperties (DeviceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     properties =
-        lens (_properties :: DeviceResource s -> TF.Attr s P.Text)
-             (\s a -> s { _properties = a } :: DeviceResource s)
+        P.lens (_properties :: DeviceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _properties = a } :: DeviceResource s)
 
-instance s ~ s' => P.HasComputedCollector (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedCollector =
-        (_collector :: DeviceResource s -> TF.Attr s P.Text)
-            . TF.refValue
+-- | @logicmonitor_device_group@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_device_group terraform documentation>
+-- for more information.
+data DeviceGroupResource s = DeviceGroupResource'
+    { _appliesTo       :: TF.Attr s P.Text
+    -- ^ @applies_to@ - (Optional)
+    --
+    , _description     :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _disableAlerting :: TF.Attr s P.Bool
+    -- ^ @disable_alerting@ - (Optional)
+    --
+    , _name            :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _parentId        :: TF.Attr s P.Integer
+    -- ^ @parent_id@ - (Optional)
+    --
+    , _properties      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @properties@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-instance s ~ s' => P.HasComputedDisableAlerting (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedDisableAlerting =
-        (_disable_alerting :: DeviceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedDisplayName =
-        (_display_name :: DeviceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedHostgroupId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedHostgroupId =
-        (_hostgroup_id :: DeviceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedIpAddr (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedIpAddr =
-        (_ip_addr :: DeviceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedProperties =
-        (_properties :: DeviceResource s -> TF.Attr s P.Text)
-            . TF.refValue
-
-deviceResource :: TF.Resource P.LogicMonitor (DeviceResource s)
-deviceResource =
-    TF.newResource "logicmonitor_device" $
-        DeviceResource {
-              _collector = TF.Nil
-            , _disable_alerting = TF.Nil
-            , _display_name = TF.Nil
-            , _hostgroup_id = TF.Nil
-            , _ip_addr = TF.Nil
+deviceGroupResource
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Resource P.Provider (DeviceGroupResource s)
+deviceGroupResource _name =
+    TF.newResource "logicmonitor_device_group" TF.validator $
+        DeviceGroupResource'
+            { _appliesTo = TF.Nil
+            , _description = TF.Nil
+            , _disableAlerting = TF.value P.True
+            , _name = _name
+            , _parentId = TF.Nil
             , _properties = TF.Nil
             }
+
+instance TF.IsObject (DeviceGroupResource s) where
+    toObject DeviceGroupResource'{..} = P.catMaybes
+        [ TF.assign "applies_to" <$> TF.attribute _appliesTo
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "disable_alerting" <$> TF.attribute _disableAlerting
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "parent_id" <$> TF.attribute _parentId
+        , TF.assign "properties" <$> TF.attribute _properties
+        ]
+
+instance TF.IsValid (DeviceGroupResource s) where
+    validator = P.mempty
+
+instance P.HasAppliesTo (DeviceGroupResource s) (TF.Attr s P.Text) where
+    appliesTo =
+        P.lens (_appliesTo :: DeviceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _appliesTo = a } :: DeviceGroupResource s)
+
+instance P.HasDescription (DeviceGroupResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: DeviceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DeviceGroupResource s)
+
+instance P.HasDisableAlerting (DeviceGroupResource s) (TF.Attr s P.Bool) where
+    disableAlerting =
+        P.lens (_disableAlerting :: DeviceGroupResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableAlerting = a } :: DeviceGroupResource s)
+
+instance P.HasName (DeviceGroupResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DeviceGroupResource s)
+
+instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Integer) where
+    parentId =
+        P.lens (_parentId :: DeviceGroupResource s -> TF.Attr s P.Integer)
+               (\s a -> s { _parentId = a } :: DeviceGroupResource s)
+
+instance P.HasProperties (DeviceGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    properties =
+        P.lens (_properties :: DeviceGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _properties = a } :: DeviceGroupResource s)

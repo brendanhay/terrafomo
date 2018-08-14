@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude    #-}
-{-# LANGUAGE RecordWildCards      #-}
-{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -16,67 +17,62 @@
 --
 module Terrafomo.Cloudflare.DataSource
     (
-    -- * Types
+    -- * DataSource Datatypes
+    -- ** cloudflare_ip_ranges
       IpRangesData (..)
     , ipRangesData
 
-    -- * Overloaded Fields
-    -- ** Arguments
-
-    -- ** Computed Attributes
-    , P.HasComputedCidrBlocks (..)
-    , P.HasComputedIpv4CidrBlocks (..)
-    , P.HasComputedIpv6CidrBlocks (..)
-
-    -- * Re-exported Types
-    , module P
     ) where
 
 import Data.Functor ((<$>))
-import Data.Maybe   (catMaybes)
 
-import GHC.Base (Eq, ($), (.))
-import GHC.Show (Show)
+import GHC.Base (($))
 
-import Lens.Micro (lens)
+import Terrafomo.Cloudflare.Settings
 
-import Terrafomo.Cloudflare.Types as P
-
+import qualified Data.Hashable                 as P
+import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as Map
+import qualified Data.List.NonEmpty            as P
+import qualified Data.Maybe                    as P
+import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
-import qualified Data.Word                     as P
-import qualified GHC.Base                      as P
-import qualified Numeric.Natural               as P
+import qualified GHC.Generics                  as P
+import qualified Lens.Micro                    as P
+import qualified Prelude                       as P
+import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.Cloudflare.Lens     as P
 import qualified Terrafomo.Cloudflare.Provider as P
+import qualified Terrafomo.Cloudflare.Types    as P
+import qualified Terrafomo.HCL                 as TF
+import qualified Terrafomo.Name                as TF
+import qualified Terrafomo.Schema              as TF
+import qualified Terrafomo.Validator           as TF
 
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
-import qualified Terrafomo.Provider  as TF
-import qualified Terrafomo.Schema    as TF
+-- | @cloudflare_ip_ranges@ DataSource.
+--
+-- See the <https://www.terraform.io/docs/providers/Cloudflare/cloudflare_ip_ranges terraform documentation>
+-- for more information.
+data IpRangesData s = IpRangesData'
+    deriving (P.Show, P.Eq, P.Generic)
 
-{- | The @cloudflare_ip_ranges@ Cloudflare datasource.
-
-Use this data source to get the <https://www.cloudflare.com/ips/> of
-Cloudflare edge nodes.
--}
-data IpRangesData s = IpRangesData {
-    } deriving (Show, Eq)
+ipRangesData
+    :: TF.DataSource P.Provider (IpRangesData s)
+ipRangesData =
+    TF.newDataSource "cloudflare_ip_ranges" TF.validator $
+        IpRangesData'
 
 instance TF.IsObject (IpRangesData s) where
     toObject _ = []
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance TF.IsValid (IpRangesData s) where
+    validator = P.mempty
 
-instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "ipv4_cidr_blocks"
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
 
-instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
-    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "ipv6_cidr_blocks"
+instance s ~ s' => P.HasComputedIpv4CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedIpv4CidrBlocks x = TF.compute (TF.refKey x) "_computedIpv4CidrBlocks"
 
-ipRangesData :: TF.DataSource P.Cloudflare (IpRangesData s)
-ipRangesData =
-    TF.newDataSource "cloudflare_ip_ranges" $
-        IpRangesData {
-            }
+instance s ~ s' => P.HasComputedIpv6CidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedIpv6CidrBlocks x = TF.compute (TF.refKey x) "_computedIpv6CidrBlocks"

@@ -15,298 +15,272 @@ module Terrafomo.PostgreSQL.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasAllowConnections (..)
-    , HasBypassRowLevelSecurity (..)
+      HasLogin (..)
+    , HasSslMode (..)
+    , HasSslmode (..)
+    , HasUsage (..)
     , HasConnectionLimit (..)
-    , HasCreateDatabase (..)
-    , HasCreateRole (..)
-    , HasEncoding (..)
     , HasEncryptedPassword (..)
-    , HasIfNotExists (..)
     , HasInherit (..)
-    , HasIsTemplate (..)
-    , HasLcCollate (..)
-    , HasLcCtype (..)
-    , HasLogin (..)
-    , HasName (..)
-    , HasOwner (..)
+    , HasMaxConnections (..)
+    , HasIfNotExists (..)
+    , HasCreateRole (..)
+    , HasDatabase (..)
+    , HasEncrypted (..)
+    , HasUsageWithGrant (..)
+    , HasHost (..)
+    , HasUsername (..)
+    , HasCreate (..)
+    , HasPort (..)
+    , HasCreateWithGrant (..)
     , HasPassword (..)
-    , HasPolicy (..)
-    , HasReplication (..)
-    , HasSchema (..)
+    , HasExpectedVersion (..)
+    , HasRole (..)
+    , HasSuperuser (..)
     , HasSkipDropRole (..)
     , HasSkipReassignOwned (..)
-    , HasSuperuser (..)
-    , HasTablespaceName (..)
-    , HasTemplate (..)
+    , HasReplication (..)
+    , HasCreateDatabase (..)
+    , HasConnectTimeout (..)
     , HasValidUntil (..)
-    , HasVersion (..)
+    , HasAllowConnections (..)
+    , HasName (..)
+    , HasBypassRowLevelSecurity (..)
 
     -- ** Computed Attributes
-    , HasComputedAllowConnections (..)
-    , HasComputedBypassRowLevelSecurity (..)
-    , HasComputedConnectionLimit (..)
-    , HasComputedCreateDatabase (..)
-    , HasComputedCreateRole (..)
-    , HasComputedEncoding (..)
-    , HasComputedEncryptedPassword (..)
-    , HasComputedIfNotExists (..)
-    , HasComputedInherit (..)
-    , HasComputedIsTemplate (..)
-    , HasComputedLcCollate (..)
-    , HasComputedLcCtype (..)
-    , HasComputedLogin (..)
-    , HasComputedName (..)
-    , HasComputedOwner (..)
-    , HasComputedPassword (..)
-    , HasComputedPolicy (..)
-    , HasComputedReplication (..)
-    , HasComputedSchema (..)
-    , HasComputedSkipDropRole (..)
-    , HasComputedSkipReassignOwned (..)
-    , HasComputedSuperuser (..)
-    , HasComputedTablespaceName (..)
-    , HasComputedTemplate (..)
-    , HasComputedValidUntil (..)
     , HasComputedVersion (..)
+    , HasComputedLcCtype (..)
+    , HasComputedPolicy (..)
+    , HasComputedOwner (..)
+    , HasComputedEncoding (..)
+    , HasComputedPassword (..)
+    , HasComputedLcCollate (..)
+    , HasComputedIsTemplate (..)
+    , HasComputedTemplate (..)
+    , HasComputedTablespaceName (..)
+    , HasComputedSchema (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasAllowConnections a b | a -> b where
-    allowConnections :: Lens' a b
-
-instance HasAllowConnections a b => HasAllowConnections (TF.Schema l p a) b where
-    allowConnections = TF.configuration . allowConnections
-
-class HasBypassRowLevelSecurity a b | a -> b where
-    bypassRowLevelSecurity :: Lens' a b
-
-instance HasBypassRowLevelSecurity a b => HasBypassRowLevelSecurity (TF.Schema l p a) b where
-    bypassRowLevelSecurity = TF.configuration . bypassRowLevelSecurity
-
-class HasConnectionLimit a b | a -> b where
-    connectionLimit :: Lens' a b
-
-instance HasConnectionLimit a b => HasConnectionLimit (TF.Schema l p a) b where
-    connectionLimit = TF.configuration . connectionLimit
-
-class HasCreateDatabase a b | a -> b where
-    createDatabase :: Lens' a b
-
-instance HasCreateDatabase a b => HasCreateDatabase (TF.Schema l p a) b where
-    createDatabase = TF.configuration . createDatabase
-
-class HasCreateRole a b | a -> b where
-    createRole :: Lens' a b
-
-instance HasCreateRole a b => HasCreateRole (TF.Schema l p a) b where
-    createRole = TF.configuration . createRole
-
-class HasEncoding a b | a -> b where
-    encoding :: Lens' a b
-
-instance HasEncoding a b => HasEncoding (TF.Schema l p a) b where
-    encoding = TF.configuration . encoding
-
-class HasEncryptedPassword a b | a -> b where
-    encryptedPassword :: Lens' a b
-
-instance HasEncryptedPassword a b => HasEncryptedPassword (TF.Schema l p a) b where
-    encryptedPassword = TF.configuration . encryptedPassword
-
-class HasIfNotExists a b | a -> b where
-    ifNotExists :: Lens' a b
-
-instance HasIfNotExists a b => HasIfNotExists (TF.Schema l p a) b where
-    ifNotExists = TF.configuration . ifNotExists
-
-class HasInherit a b | a -> b where
-    inherit :: Lens' a b
-
-instance HasInherit a b => HasInherit (TF.Schema l p a) b where
-    inherit = TF.configuration . inherit
-
-class HasIsTemplate a b | a -> b where
-    isTemplate :: Lens' a b
-
-instance HasIsTemplate a b => HasIsTemplate (TF.Schema l p a) b where
-    isTemplate = TF.configuration . isTemplate
-
-class HasLcCollate a b | a -> b where
-    lcCollate :: Lens' a b
-
-instance HasLcCollate a b => HasLcCollate (TF.Schema l p a) b where
-    lcCollate = TF.configuration . lcCollate
-
-class HasLcCtype a b | a -> b where
-    lcCtype :: Lens' a b
-
-instance HasLcCtype a b => HasLcCtype (TF.Schema l p a) b where
-    lcCtype = TF.configuration . lcCtype
-
 class HasLogin a b | a -> b where
-    login :: Lens' a b
+    login :: P.Lens' a b
 
 instance HasLogin a b => HasLogin (TF.Schema l p a) b where
     login = TF.configuration . login
 
-class HasName a b | a -> b where
-    name :: Lens' a b
+class HasSslMode a b | a -> b where
+    sslMode :: P.Lens' a b
 
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
+instance HasSslMode a b => HasSslMode (TF.Schema l p a) b where
+    sslMode = TF.configuration . sslMode
 
-class HasOwner a b | a -> b where
-    owner :: Lens' a b
+class HasSslmode a b | a -> b where
+    sslmode :: P.Lens' a b
 
-instance HasOwner a b => HasOwner (TF.Schema l p a) b where
-    owner = TF.configuration . owner
+instance HasSslmode a b => HasSslmode (TF.Schema l p a) b where
+    sslmode = TF.configuration . sslmode
+
+class HasUsage a b | a -> b where
+    usage :: P.Lens' a b
+
+instance HasUsage a b => HasUsage (TF.Schema l p a) b where
+    usage = TF.configuration . usage
+
+class HasConnectionLimit a b | a -> b where
+    connectionLimit :: P.Lens' a b
+
+instance HasConnectionLimit a b => HasConnectionLimit (TF.Schema l p a) b where
+    connectionLimit = TF.configuration . connectionLimit
+
+class HasEncryptedPassword a b | a -> b where
+    encryptedPassword :: P.Lens' a b
+
+instance HasEncryptedPassword a b => HasEncryptedPassword (TF.Schema l p a) b where
+    encryptedPassword = TF.configuration . encryptedPassword
+
+class HasInherit a b | a -> b where
+    inherit :: P.Lens' a b
+
+instance HasInherit a b => HasInherit (TF.Schema l p a) b where
+    inherit = TF.configuration . inherit
+
+class HasMaxConnections a b | a -> b where
+    maxConnections :: P.Lens' a b
+
+instance HasMaxConnections a b => HasMaxConnections (TF.Schema l p a) b where
+    maxConnections = TF.configuration . maxConnections
+
+class HasIfNotExists a b | a -> b where
+    ifNotExists :: P.Lens' a b
+
+instance HasIfNotExists a b => HasIfNotExists (TF.Schema l p a) b where
+    ifNotExists = TF.configuration . ifNotExists
+
+class HasCreateRole a b | a -> b where
+    createRole :: P.Lens' a b
+
+instance HasCreateRole a b => HasCreateRole (TF.Schema l p a) b where
+    createRole = TF.configuration . createRole
+
+class HasDatabase a b | a -> b where
+    database :: P.Lens' a b
+
+instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
+    database = TF.configuration . database
+
+class HasEncrypted a b | a -> b where
+    encrypted :: P.Lens' a b
+
+instance HasEncrypted a b => HasEncrypted (TF.Schema l p a) b where
+    encrypted = TF.configuration . encrypted
+
+class HasUsageWithGrant a b | a -> b where
+    usageWithGrant :: P.Lens' a b
+
+instance HasUsageWithGrant a b => HasUsageWithGrant (TF.Schema l p a) b where
+    usageWithGrant = TF.configuration . usageWithGrant
+
+class HasHost a b | a -> b where
+    host :: P.Lens' a b
+
+instance HasHost a b => HasHost (TF.Schema l p a) b where
+    host = TF.configuration . host
+
+class HasUsername a b | a -> b where
+    username :: P.Lens' a b
+
+instance HasUsername a b => HasUsername (TF.Schema l p a) b where
+    username = TF.configuration . username
+
+class HasCreate a b | a -> b where
+    create :: P.Lens' a b
+
+instance HasCreate a b => HasCreate (TF.Schema l p a) b where
+    create = TF.configuration . create
+
+class HasPort a b | a -> b where
+    port :: P.Lens' a b
+
+instance HasPort a b => HasPort (TF.Schema l p a) b where
+    port = TF.configuration . port
+
+class HasCreateWithGrant a b | a -> b where
+    createWithGrant :: P.Lens' a b
+
+instance HasCreateWithGrant a b => HasCreateWithGrant (TF.Schema l p a) b where
+    createWithGrant = TF.configuration . createWithGrant
 
 class HasPassword a b | a -> b where
-    password :: Lens' a b
+    password :: P.Lens' a b
 
 instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
 
-class HasPolicy a b | a -> b where
-    policy :: Lens' a b
+class HasExpectedVersion a b | a -> b where
+    expectedVersion :: P.Lens' a b
 
-instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
-    policy = TF.configuration . policy
+instance HasExpectedVersion a b => HasExpectedVersion (TF.Schema l p a) b where
+    expectedVersion = TF.configuration . expectedVersion
 
-class HasReplication a b | a -> b where
-    replication :: Lens' a b
+class HasRole a b | a -> b where
+    role :: P.Lens' a b
 
-instance HasReplication a b => HasReplication (TF.Schema l p a) b where
-    replication = TF.configuration . replication
+instance HasRole a b => HasRole (TF.Schema l p a) b where
+    role = TF.configuration . role
 
-class HasSchema a b | a -> b where
-    schema :: Lens' a b
+class HasSuperuser a b | a -> b where
+    superuser :: P.Lens' a b
 
-instance HasSchema a b => HasSchema (TF.Schema l p a) b where
-    schema = TF.configuration . schema
+instance HasSuperuser a b => HasSuperuser (TF.Schema l p a) b where
+    superuser = TF.configuration . superuser
 
 class HasSkipDropRole a b | a -> b where
-    skipDropRole :: Lens' a b
+    skipDropRole :: P.Lens' a b
 
 instance HasSkipDropRole a b => HasSkipDropRole (TF.Schema l p a) b where
     skipDropRole = TF.configuration . skipDropRole
 
 class HasSkipReassignOwned a b | a -> b where
-    skipReassignOwned :: Lens' a b
+    skipReassignOwned :: P.Lens' a b
 
 instance HasSkipReassignOwned a b => HasSkipReassignOwned (TF.Schema l p a) b where
     skipReassignOwned = TF.configuration . skipReassignOwned
 
-class HasSuperuser a b | a -> b where
-    superuser :: Lens' a b
+class HasReplication a b | a -> b where
+    replication :: P.Lens' a b
 
-instance HasSuperuser a b => HasSuperuser (TF.Schema l p a) b where
-    superuser = TF.configuration . superuser
+instance HasReplication a b => HasReplication (TF.Schema l p a) b where
+    replication = TF.configuration . replication
 
-class HasTablespaceName a b | a -> b where
-    tablespaceName :: Lens' a b
+class HasCreateDatabase a b | a -> b where
+    createDatabase :: P.Lens' a b
 
-instance HasTablespaceName a b => HasTablespaceName (TF.Schema l p a) b where
-    tablespaceName = TF.configuration . tablespaceName
+instance HasCreateDatabase a b => HasCreateDatabase (TF.Schema l p a) b where
+    createDatabase = TF.configuration . createDatabase
 
-class HasTemplate a b | a -> b where
-    template :: Lens' a b
+class HasConnectTimeout a b | a -> b where
+    connectTimeout :: P.Lens' a b
 
-instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
-    template = TF.configuration . template
+instance HasConnectTimeout a b => HasConnectTimeout (TF.Schema l p a) b where
+    connectTimeout = TF.configuration . connectTimeout
 
 class HasValidUntil a b | a -> b where
-    validUntil :: Lens' a b
+    validUntil :: P.Lens' a b
 
 instance HasValidUntil a b => HasValidUntil (TF.Schema l p a) b where
     validUntil = TF.configuration . validUntil
 
-class HasVersion a b | a -> b where
-    version :: Lens' a b
+class HasAllowConnections a b | a -> b where
+    allowConnections :: P.Lens' a b
 
-instance HasVersion a b => HasVersion (TF.Schema l p a) b where
-    version = TF.configuration . version
+instance HasAllowConnections a b => HasAllowConnections (TF.Schema l p a) b where
+    allowConnections = TF.configuration . allowConnections
 
-class HasComputedAllowConnections a b | a -> b where
-    computedAllowConnections :: a -> b
+class HasName a b | a -> b where
+    name :: P.Lens' a b
 
-class HasComputedBypassRowLevelSecurity a b | a -> b where
-    computedBypassRowLevelSecurity :: a -> b
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
 
-class HasComputedConnectionLimit a b | a -> b where
-    computedConnectionLimit :: a -> b
+class HasBypassRowLevelSecurity a b | a -> b where
+    bypassRowLevelSecurity :: P.Lens' a b
 
-class HasComputedCreateDatabase a b | a -> b where
-    computedCreateDatabase :: a -> b
+instance HasBypassRowLevelSecurity a b => HasBypassRowLevelSecurity (TF.Schema l p a) b where
+    bypassRowLevelSecurity = TF.configuration . bypassRowLevelSecurity
 
-class HasComputedCreateRole a b | a -> b where
-    computedCreateRole :: a -> b
-
-class HasComputedEncoding a b | a -> b where
-    computedEncoding :: a -> b
-
-class HasComputedEncryptedPassword a b | a -> b where
-    computedEncryptedPassword :: a -> b
-
-class HasComputedIfNotExists a b | a -> b where
-    computedIfNotExists :: a -> b
-
-class HasComputedInherit a b | a -> b where
-    computedInherit :: a -> b
-
-class HasComputedIsTemplate a b | a -> b where
-    computedIsTemplate :: a -> b
-
-class HasComputedLcCollate a b | a -> b where
-    computedLcCollate :: a -> b
+class HasComputedVersion a b | a -> b where
+    computedVersion :: a -> b
 
 class HasComputedLcCtype a b | a -> b where
     computedLcCtype :: a -> b
 
-class HasComputedLogin a b | a -> b where
-    computedLogin :: a -> b
-
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasComputedPolicy a b | a -> b where
+    computedPolicy :: a -> b
 
 class HasComputedOwner a b | a -> b where
     computedOwner :: a -> b
 
+class HasComputedEncoding a b | a -> b where
+    computedEncoding :: a -> b
+
 class HasComputedPassword a b | a -> b where
     computedPassword :: a -> b
 
-class HasComputedPolicy a b | a -> b where
-    computedPolicy :: a -> b
+class HasComputedLcCollate a b | a -> b where
+    computedLcCollate :: a -> b
 
-class HasComputedReplication a b | a -> b where
-    computedReplication :: a -> b
-
-class HasComputedSchema a b | a -> b where
-    computedSchema :: a -> b
-
-class HasComputedSkipDropRole a b | a -> b where
-    computedSkipDropRole :: a -> b
-
-class HasComputedSkipReassignOwned a b | a -> b where
-    computedSkipReassignOwned :: a -> b
-
-class HasComputedSuperuser a b | a -> b where
-    computedSuperuser :: a -> b
-
-class HasComputedTablespaceName a b | a -> b where
-    computedTablespaceName :: a -> b
+class HasComputedIsTemplate a b | a -> b where
+    computedIsTemplate :: a -> b
 
 class HasComputedTemplate a b | a -> b where
     computedTemplate :: a -> b
 
-class HasComputedValidUntil a b | a -> b where
-    computedValidUntil :: a -> b
+class HasComputedTablespaceName a b | a -> b where
+    computedTablespaceName :: a -> b
 
-class HasComputedVersion a b | a -> b where
-    computedVersion :: a -> b
+class HasComputedSchema a b | a -> b where
+    computedSchema :: a -> b

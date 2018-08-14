@@ -9,15 +9,15 @@ name: terrafomo-aws
 
 dependencies:
   - base
-  - hashable
-  - microlens
-  - terrafomo
-  - text
-  - aeson
-  - amazonka-core
-  - formatting
-  - iproute
   - unordered-containers
+  - text
+  - terrafomo
+  - formatting
+  - amazonka-core
+  - hashable
+  - iproute
+  - microlens
+  - amazonka-iam-policy >= 0.0.3
 
 library:
   source-dirs:

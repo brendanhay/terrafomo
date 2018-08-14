@@ -15,75 +15,68 @@ module Terrafomo.Dyn.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasName (..)
-    , HasTtl (..)
+      HasValue (..)
     , HasType' (..)
-    , HasValue (..)
     , HasZone (..)
+    , HasUsername (..)
+    , HasPassword (..)
+    , HasName (..)
+    , HasCustomerName (..)
 
     -- ** Computed Attributes
-    , HasComputedFqdn (..)
-    , HasComputedId (..)
-    , HasComputedName (..)
     , HasComputedTtl (..)
-    , HasComputedType' (..)
-    , HasComputedValue (..)
-    , HasComputedZone (..)
+    , HasComputedFqdn (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasTtl a b | a -> b where
-    ttl :: Lens' a b
-
-instance HasTtl a b => HasTtl (TF.Schema l p a) b where
-    ttl = TF.configuration . ttl
-
-class HasType' a b | a -> b where
-    type' :: Lens' a b
-
-instance HasType' a b => HasType' (TF.Schema l p a) b where
-    type' = TF.configuration . type'
-
 class HasValue a b | a -> b where
-    value :: Lens' a b
+    value :: P.Lens' a b
 
 instance HasValue a b => HasValue (TF.Schema l p a) b where
     value = TF.configuration . value
 
+class HasType' a b | a -> b where
+    type' :: P.Lens' a b
+
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
+
 class HasZone a b | a -> b where
-    zone :: Lens' a b
+    zone :: P.Lens' a b
 
 instance HasZone a b => HasZone (TF.Schema l p a) b where
     zone = TF.configuration . zone
 
-class HasComputedFqdn a b | a -> b where
-    computedFqdn :: a -> b
+class HasUsername a b | a -> b where
+    username :: P.Lens' a b
 
-class HasComputedId a b | a -> b where
-    computedId :: a -> b
+instance HasUsername a b => HasUsername (TF.Schema l p a) b where
+    username = TF.configuration . username
 
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
+class HasPassword a b | a -> b where
+    password :: P.Lens' a b
+
+instance HasPassword a b => HasPassword (TF.Schema l p a) b where
+    password = TF.configuration . password
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
+
+class HasCustomerName a b | a -> b where
+    customerName :: P.Lens' a b
+
+instance HasCustomerName a b => HasCustomerName (TF.Schema l p a) b where
+    customerName = TF.configuration . customerName
 
 class HasComputedTtl a b | a -> b where
     computedTtl :: a -> b
 
-class HasComputedType' a b | a -> b where
-    computedType' :: a -> b
-
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
-
-class HasComputedZone a b | a -> b where
-    computedZone :: a -> b
+class HasComputedFqdn a b | a -> b where
+    computedFqdn :: a -> b

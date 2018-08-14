@@ -15,243 +15,214 @@ module Terrafomo.LogicMonitor.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasAppliesTo (..)
-    , HasBackupCollectorId (..)
+      HasFilters (..)
+    , HasCustomPropertyValue (..)
+    , HasEscalationChainId (..)
+    , HasAppliesTo (..)
+    , HasValue (..)
+    , HasCompany (..)
     , HasCollector (..)
-    , HasCollectorGroupId (..)
-    , HasDescription (..)
-    , HasDisableAlerting (..)
+    , HasApiId (..)
     , HasDisplayName (..)
+    , HasBackupCollectorId (..)
+    , HasProperties (..)
+    , HasDescription (..)
+    , HasMostRecent (..)
+    , HasCustomPropertyName (..)
+    , HasProperty (..)
+    , HasResendInterval (..)
+    , HasOffset (..)
+    , HasSuppressAlertClear (..)
+    , HasSize (..)
+    , HasHostgroupId (..)
+    , HasApiKey (..)
+    , HasParentId (..)
+    , HasOperator (..)
+    , HasName (..)
+    , HasDisableAlerting (..)
     , HasEnableCollectorDeviceFailover (..)
     , HasEnableFailback (..)
-    , HasEscalationChainId (..)
-    , HasFilters (..)
-    , HasHostgroupId (..)
     , HasIpAddr (..)
-    , HasMostRecent (..)
-    , HasName (..)
-    , HasOffset (..)
-    , HasParentId (..)
-    , HasProperties (..)
-    , HasResendInterval (..)
-    , HasSize (..)
-    , HasSuppressAlertClear (..)
+    , HasCollectorGroupId (..)
 
     -- ** Computed Attributes
-    , HasComputedAppliesTo (..)
-    , HasComputedBackupCollectorId (..)
-    , HasComputedCollector (..)
-    , HasComputedCollectorGroupId (..)
-    , HasComputedDescription (..)
-    , HasComputedDisableAlerting (..)
-    , HasComputedDisplayName (..)
-    , HasComputedEnableCollectorDeviceFailover (..)
-    , HasComputedEnableFailback (..)
-    , HasComputedEscalationChainId (..)
-    , HasComputedFilters (..)
-    , HasComputedHostgroupId (..)
-    , HasComputedIpAddr (..)
-    , HasComputedMostRecent (..)
-    , HasComputedName (..)
-    , HasComputedOffset (..)
-    , HasComputedParentId (..)
-    , HasComputedProperties (..)
-    , HasComputedResendInterval (..)
-    , HasComputedSize (..)
-    , HasComputedSuppressAlertClear (..)
     ) where
 
 import GHC.Base ((.))
 
-import Lens.Micro (Lens')
-
+import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
 
+class HasFilters a b | a -> b where
+    filters :: P.Lens' a b
+
+instance HasFilters a b => HasFilters (TF.Schema l p a) b where
+    filters = TF.configuration . filters
+
+class HasCustomPropertyValue a b | a -> b where
+    customPropertyValue :: P.Lens' a b
+
+instance HasCustomPropertyValue a b => HasCustomPropertyValue (TF.Schema l p a) b where
+    customPropertyValue = TF.configuration . customPropertyValue
+
+class HasEscalationChainId a b | a -> b where
+    escalationChainId :: P.Lens' a b
+
+instance HasEscalationChainId a b => HasEscalationChainId (TF.Schema l p a) b where
+    escalationChainId = TF.configuration . escalationChainId
+
 class HasAppliesTo a b | a -> b where
-    appliesTo :: Lens' a b
+    appliesTo :: P.Lens' a b
 
 instance HasAppliesTo a b => HasAppliesTo (TF.Schema l p a) b where
     appliesTo = TF.configuration . appliesTo
 
-class HasBackupCollectorId a b | a -> b where
-    backupCollectorId :: Lens' a b
+class HasValue a b | a -> b where
+    value :: P.Lens' a b
 
-instance HasBackupCollectorId a b => HasBackupCollectorId (TF.Schema l p a) b where
-    backupCollectorId = TF.configuration . backupCollectorId
+instance HasValue a b => HasValue (TF.Schema l p a) b where
+    value = TF.configuration . value
+
+class HasCompany a b | a -> b where
+    company :: P.Lens' a b
+
+instance HasCompany a b => HasCompany (TF.Schema l p a) b where
+    company = TF.configuration . company
 
 class HasCollector a b | a -> b where
-    collector :: Lens' a b
+    collector :: P.Lens' a b
 
 instance HasCollector a b => HasCollector (TF.Schema l p a) b where
     collector = TF.configuration . collector
 
-class HasCollectorGroupId a b | a -> b where
-    collectorGroupId :: Lens' a b
+class HasApiId a b | a -> b where
+    apiId :: P.Lens' a b
 
-instance HasCollectorGroupId a b => HasCollectorGroupId (TF.Schema l p a) b where
-    collectorGroupId = TF.configuration . collectorGroupId
-
-class HasDescription a b | a -> b where
-    description :: Lens' a b
-
-instance HasDescription a b => HasDescription (TF.Schema l p a) b where
-    description = TF.configuration . description
-
-class HasDisableAlerting a b | a -> b where
-    disableAlerting :: Lens' a b
-
-instance HasDisableAlerting a b => HasDisableAlerting (TF.Schema l p a) b where
-    disableAlerting = TF.configuration . disableAlerting
+instance HasApiId a b => HasApiId (TF.Schema l p a) b where
+    apiId = TF.configuration . apiId
 
 class HasDisplayName a b | a -> b where
-    displayName :: Lens' a b
+    displayName :: P.Lens' a b
 
 instance HasDisplayName a b => HasDisplayName (TF.Schema l p a) b where
     displayName = TF.configuration . displayName
 
+class HasBackupCollectorId a b | a -> b where
+    backupCollectorId :: P.Lens' a b
+
+instance HasBackupCollectorId a b => HasBackupCollectorId (TF.Schema l p a) b where
+    backupCollectorId = TF.configuration . backupCollectorId
+
+class HasProperties a b | a -> b where
+    properties :: P.Lens' a b
+
+instance HasProperties a b => HasProperties (TF.Schema l p a) b where
+    properties = TF.configuration . properties
+
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
+
+class HasMostRecent a b | a -> b where
+    mostRecent :: P.Lens' a b
+
+instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
+    mostRecent = TF.configuration . mostRecent
+
+class HasCustomPropertyName a b | a -> b where
+    customPropertyName :: P.Lens' a b
+
+instance HasCustomPropertyName a b => HasCustomPropertyName (TF.Schema l p a) b where
+    customPropertyName = TF.configuration . customPropertyName
+
+class HasProperty a b | a -> b where
+    property :: P.Lens' a b
+
+instance HasProperty a b => HasProperty (TF.Schema l p a) b where
+    property = TF.configuration . property
+
+class HasResendInterval a b | a -> b where
+    resendInterval :: P.Lens' a b
+
+instance HasResendInterval a b => HasResendInterval (TF.Schema l p a) b where
+    resendInterval = TF.configuration . resendInterval
+
+class HasOffset a b | a -> b where
+    offset :: P.Lens' a b
+
+instance HasOffset a b => HasOffset (TF.Schema l p a) b where
+    offset = TF.configuration . offset
+
+class HasSuppressAlertClear a b | a -> b where
+    suppressAlertClear :: P.Lens' a b
+
+instance HasSuppressAlertClear a b => HasSuppressAlertClear (TF.Schema l p a) b where
+    suppressAlertClear = TF.configuration . suppressAlertClear
+
+class HasSize a b | a -> b where
+    size :: P.Lens' a b
+
+instance HasSize a b => HasSize (TF.Schema l p a) b where
+    size = TF.configuration . size
+
+class HasHostgroupId a b | a -> b where
+    hostgroupId :: P.Lens' a b
+
+instance HasHostgroupId a b => HasHostgroupId (TF.Schema l p a) b where
+    hostgroupId = TF.configuration . hostgroupId
+
+class HasApiKey a b | a -> b where
+    apiKey :: P.Lens' a b
+
+instance HasApiKey a b => HasApiKey (TF.Schema l p a) b where
+    apiKey = TF.configuration . apiKey
+
+class HasParentId a b | a -> b where
+    parentId :: P.Lens' a b
+
+instance HasParentId a b => HasParentId (TF.Schema l p a) b where
+    parentId = TF.configuration . parentId
+
+class HasOperator a b | a -> b where
+    operator :: P.Lens' a b
+
+instance HasOperator a b => HasOperator (TF.Schema l p a) b where
+    operator = TF.configuration . operator
+
+class HasName a b | a -> b where
+    name :: P.Lens' a b
+
+instance HasName a b => HasName (TF.Schema l p a) b where
+    name = TF.configuration . name
+
+class HasDisableAlerting a b | a -> b where
+    disableAlerting :: P.Lens' a b
+
+instance HasDisableAlerting a b => HasDisableAlerting (TF.Schema l p a) b where
+    disableAlerting = TF.configuration . disableAlerting
+
 class HasEnableCollectorDeviceFailover a b | a -> b where
-    enableCollectorDeviceFailover :: Lens' a b
+    enableCollectorDeviceFailover :: P.Lens' a b
 
 instance HasEnableCollectorDeviceFailover a b => HasEnableCollectorDeviceFailover (TF.Schema l p a) b where
     enableCollectorDeviceFailover = TF.configuration . enableCollectorDeviceFailover
 
 class HasEnableFailback a b | a -> b where
-    enableFailback :: Lens' a b
+    enableFailback :: P.Lens' a b
 
 instance HasEnableFailback a b => HasEnableFailback (TF.Schema l p a) b where
     enableFailback = TF.configuration . enableFailback
 
-class HasEscalationChainId a b | a -> b where
-    escalationChainId :: Lens' a b
-
-instance HasEscalationChainId a b => HasEscalationChainId (TF.Schema l p a) b where
-    escalationChainId = TF.configuration . escalationChainId
-
-class HasFilters a b | a -> b where
-    filters :: Lens' a b
-
-instance HasFilters a b => HasFilters (TF.Schema l p a) b where
-    filters = TF.configuration . filters
-
-class HasHostgroupId a b | a -> b where
-    hostgroupId :: Lens' a b
-
-instance HasHostgroupId a b => HasHostgroupId (TF.Schema l p a) b where
-    hostgroupId = TF.configuration . hostgroupId
-
 class HasIpAddr a b | a -> b where
-    ipAddr :: Lens' a b
+    ipAddr :: P.Lens' a b
 
 instance HasIpAddr a b => HasIpAddr (TF.Schema l p a) b where
     ipAddr = TF.configuration . ipAddr
 
-class HasMostRecent a b | a -> b where
-    mostRecent :: Lens' a b
+class HasCollectorGroupId a b | a -> b where
+    collectorGroupId :: P.Lens' a b
 
-instance HasMostRecent a b => HasMostRecent (TF.Schema l p a) b where
-    mostRecent = TF.configuration . mostRecent
-
-class HasName a b | a -> b where
-    name :: Lens' a b
-
-instance HasName a b => HasName (TF.Schema l p a) b where
-    name = TF.configuration . name
-
-class HasOffset a b | a -> b where
-    offset :: Lens' a b
-
-instance HasOffset a b => HasOffset (TF.Schema l p a) b where
-    offset = TF.configuration . offset
-
-class HasParentId a b | a -> b where
-    parentId :: Lens' a b
-
-instance HasParentId a b => HasParentId (TF.Schema l p a) b where
-    parentId = TF.configuration . parentId
-
-class HasProperties a b | a -> b where
-    properties :: Lens' a b
-
-instance HasProperties a b => HasProperties (TF.Schema l p a) b where
-    properties = TF.configuration . properties
-
-class HasResendInterval a b | a -> b where
-    resendInterval :: Lens' a b
-
-instance HasResendInterval a b => HasResendInterval (TF.Schema l p a) b where
-    resendInterval = TF.configuration . resendInterval
-
-class HasSize a b | a -> b where
-    size :: Lens' a b
-
-instance HasSize a b => HasSize (TF.Schema l p a) b where
-    size = TF.configuration . size
-
-class HasSuppressAlertClear a b | a -> b where
-    suppressAlertClear :: Lens' a b
-
-instance HasSuppressAlertClear a b => HasSuppressAlertClear (TF.Schema l p a) b where
-    suppressAlertClear = TF.configuration . suppressAlertClear
-
-class HasComputedAppliesTo a b | a -> b where
-    computedAppliesTo :: a -> b
-
-class HasComputedBackupCollectorId a b | a -> b where
-    computedBackupCollectorId :: a -> b
-
-class HasComputedCollector a b | a -> b where
-    computedCollector :: a -> b
-
-class HasComputedCollectorGroupId a b | a -> b where
-    computedCollectorGroupId :: a -> b
-
-class HasComputedDescription a b | a -> b where
-    computedDescription :: a -> b
-
-class HasComputedDisableAlerting a b | a -> b where
-    computedDisableAlerting :: a -> b
-
-class HasComputedDisplayName a b | a -> b where
-    computedDisplayName :: a -> b
-
-class HasComputedEnableCollectorDeviceFailover a b | a -> b where
-    computedEnableCollectorDeviceFailover :: a -> b
-
-class HasComputedEnableFailback a b | a -> b where
-    computedEnableFailback :: a -> b
-
-class HasComputedEscalationChainId a b | a -> b where
-    computedEscalationChainId :: a -> b
-
-class HasComputedFilters a b | a -> b where
-    computedFilters :: a -> b
-
-class HasComputedHostgroupId a b | a -> b where
-    computedHostgroupId :: a -> b
-
-class HasComputedIpAddr a b | a -> b where
-    computedIpAddr :: a -> b
-
-class HasComputedMostRecent a b | a -> b where
-    computedMostRecent :: a -> b
-
-class HasComputedName a b | a -> b where
-    computedName :: a -> b
-
-class HasComputedOffset a b | a -> b where
-    computedOffset :: a -> b
-
-class HasComputedParentId a b | a -> b where
-    computedParentId :: a -> b
-
-class HasComputedProperties a b | a -> b where
-    computedProperties :: a -> b
-
-class HasComputedResendInterval a b | a -> b where
-    computedResendInterval :: a -> b
-
-class HasComputedSize a b | a -> b where
-    computedSize :: a -> b
-
-class HasComputedSuppressAlertClear a b | a -> b where
-    computedSuppressAlertClear :: a -> b
+instance HasCollectorGroupId a b => HasCollectorGroupId (TF.Schema l p a) b where
+    collectorGroupId = TF.configuration . collectorGroupId

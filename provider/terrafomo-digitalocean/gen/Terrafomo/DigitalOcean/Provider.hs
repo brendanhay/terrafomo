@@ -1,5 +1,10 @@
 -- This module is auto-generated.
 
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedLists   #-}
+{-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE StrictData        #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- |
@@ -12,64 +17,75 @@
 --
 module Terrafomo.DigitalOcean.Provider
     (
-    -- * Provider Datatype
-      DigitalOcean (..)
-    , emptyDigitalOcean
-
-    -- * Lenses
-    , providerToken
+    -- * DigitalOcean Provider Datatype
+      Provider (..)
+    , newProvider
     ) where
 
-import Data.Function      ((&))
-import Data.Hashable      (Hashable)
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.Maybe         (catMaybes)
-import Data.Proxy         (Proxy (Proxy))
+import Data.Function ((&))
+import Data.Functor  ((<$>))
+import Data.Proxy    (Proxy (Proxy))
 
-import GHC.Generics (Generic)
+import GHC.Base (($))
 
-import Lens.Micro (Lens', lens)
+import Terrafomo.DigitalOcean.Settings
 
+import qualified Data.Hashable                as P
+import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as Map
+import qualified Data.List.NonEmpty           as P
+import qualified Data.Maybe                   as P
+import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
+import qualified GHC.Generics                 as P
+import qualified Lens.Micro                   as P
+import qualified Prelude                      as P
+import qualified Terrafomo.DigitalOcean.Lens  as P
 import qualified Terrafomo.DigitalOcean.Types as P
+import qualified Terrafomo.HCL                as TF
+import qualified Terrafomo.Name               as TF
+import qualified Terrafomo.Provider           as TF
+import qualified Terrafomo.Validator          as TF
 
-import qualified Terrafomo.HCL      as TF
-import qualified Terrafomo.Name     as TF
-import qualified Terrafomo.Provider as TF
+-- | The @DigitalOcean@ Terraform provider configuration.
+--
+-- See the <https://www.terraform.io/docs/providers/DigitalOcean/index.html terraform documenation>
+-- for more information.
+data Provider = Provider'
+    { _token :: P.Text
+    -- ^ @token@ - (Required)
+    -- The token key for API operations.
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
-{- | DigitalOcean Terraform provider.
+newProvider
+    :: P.Text -- ^ @token@ - 'P.token'
+    -> Provider
+newProvider _token =
+    Provider'
+        { _token = _token
+        }
 
-The DigitalOcean (DO) provider is used to interact with the resources
-supported by DigitalOcean. The provider needs to be configured with the
-proper credentials before it can be used. Use the navigation to the left to
-read about the available resources.
--}
-data DigitalOcean = DigitalOcean {
-      _token :: !(Maybe P.Text)
-    {- ^ (Required) This is the DO API token. This can also be specified with the @DIGITALOCEAN_TOKEN@ shell environment variable. -}
-    } deriving (Show, Eq, Generic)
+instance P.Hashable Provider
 
-instance Hashable DigitalOcean
-
-instance TF.IsSection DigitalOcean where
-    toSection x =
-        let typ = TF.providerType (Proxy :: Proxy (DigitalOcean))
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy (Provider))
             key = TF.providerKey x
          in TF.section "provider" [TF.type_ typ]
           & TF.pairs
-              (catMaybes
-                  [ Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "token" <$> _token x
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "token" _token
                   ])
 
-instance TF.IsProvider DigitalOcean where
-    type ProviderType DigitalOcean = "digitalocean"
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "provider"
 
-emptyDigitalOcean :: DigitalOcean
-emptyDigitalOcean = DigitalOcean {
-        _token = Nothing
-    }
+instance TF.IsValid (Provider) where
+    validator = P.mempty
 
-providerToken :: Lens' DigitalOcean (Maybe P.Text)
-providerToken =
-    lens _token (\s a -> s { _token = a })
+instance P.HasToken (Provider) (P.Text) where
+    token =
+        P.lens (_token :: Provider -> P.Text)
+               (\s a -> s { _token = a } :: Provider)

@@ -1,5 +1,7 @@
 -- This module is auto-generated.
 
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
 -- |
 -- Module      : Terrafomo.Cobbler
 -- Copyright   : (c) 2017-2018 Brendan Hay
@@ -9,13 +11,15 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cobbler
-    ( module Terrafomo.Cobbler.Types
+    ( module Terrafomo.Cobbler.Resource
+    , module Terrafomo.Cobbler.Types
     , module Terrafomo.Cobbler.Provider
     , module Terrafomo.Cobbler.Lens
-    , module Terrafomo.Cobbler.Resource
+    , module Terrafomo.Cobbler.Settings
     ) where
 
 import Terrafomo.Cobbler.Lens
 import Terrafomo.Cobbler.Provider
 import Terrafomo.Cobbler.Resource
+import Terrafomo.Cobbler.Settings
 import Terrafomo.Cobbler.Types

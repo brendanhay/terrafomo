@@ -1,4 +1,2 @@
-name: VSphere
-package: terrafomo-vsphere
-datatype: true
-original: vsphere
+package-name: terrafomo-vsphere
+provider-name: VSphere
