@@ -63,7 +63,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @grafana_alert_notification@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Grafana/grafana_alert_notification terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/grafana/r/alert_notification.html terraform documentation>
 -- for more information.
 data AlertNotificationResource s = AlertNotificationResource'
     { _isDefault :: TF.Attr s P.Bool
@@ -125,15 +125,15 @@ instance P.HasType' (AlertNotificationResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: AlertNotificationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @grafana_dashboard@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Grafana/grafana_dashboard terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/grafana/r/dashboard.html terraform documentation>
 -- for more information.
 data DashboardResource s = DashboardResource'
     { _configJson :: TF.Attr s P.Text
-    -- ^ @config_json@ - (Required)
+    -- ^ @config_json@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -160,11 +160,11 @@ instance P.HasConfigJson (DashboardResource s) (TF.Attr s P.Text) where
                (\s a -> s { _configJson = a } :: DashboardResource s)
 
 instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedSlug x = TF.compute (TF.refKey x) "_computedSlug"
+    computedSlug x = TF.compute (TF.refKey x) "slug"
 
 -- | @grafana_data_source@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Grafana/grafana_data_source terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/grafana/r/data_source.html terraform documentation>
 -- for more information.
 data DataSourceResource s = DataSourceResource'
     { _accessMode        :: TF.Attr s P.Text
@@ -185,7 +185,7 @@ data DataSourceResource s = DataSourceResource'
     , _isDefault         :: TF.Attr s P.Bool
     -- ^ @is_default@ - (Optional)
     --
-    , _jsonData          :: TF.Attr s [TF.Attr s (JsonData s)]
+    , _jsonData          :: TF.Attr s [TF.Attr s (DataSourceJsonData s)]
     -- ^ @json_data@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
@@ -194,7 +194,7 @@ data DataSourceResource s = DataSourceResource'
     , _password          :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _secureJsonData    :: TF.Attr s [TF.Attr s (SecureJsonData s)]
+    , _secureJsonData    :: TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]
     -- ^ @secure_json_data@ - (Optional)
     --
     , _type'             :: TF.Attr s P.Text
@@ -251,11 +251,11 @@ instance TF.IsValid (DataSourceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_jsonData"
                   (_jsonData
-                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonData s)])
+                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonData s)])
                   TF.validator
            P.<> TF.settingsValidator "_secureJsonData"
                   (_secureJsonData
-                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonData s)])
+                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)])
                   TF.validator
 
 instance P.HasAccessMode (DataSourceResource s) (TF.Attr s P.Text) where
@@ -288,9 +288,9 @@ instance P.HasIsDefault (DataSourceResource s) (TF.Attr s P.Bool) where
         P.lens (_isDefault :: DataSourceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isDefault = a } :: DataSourceResource s)
 
-instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (JsonData s)]) where
+instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceJsonData s)]) where
     jsonData =
-        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonData s)])
+        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonData s)])
                (\s a -> s { _jsonData = a } :: DataSourceResource s)
 
 instance P.HasName (DataSourceResource s) (TF.Attr s P.Text) where
@@ -303,9 +303,9 @@ instance P.HasPassword (DataSourceResource s) (TF.Attr s P.Text) where
         P.lens (_password :: DataSourceResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (SecureJsonData s)]) where
+instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]) where
     secureJsonData =
-        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonData s)])
+        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)])
                (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
 
 instance P.HasType' (DataSourceResource s) (TF.Attr s P.Text) where
@@ -324,11 +324,11 @@ instance P.HasUsername (DataSourceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _username = a } :: DataSourceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @grafana_organization@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Grafana/grafana_organization terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/grafana/r/organization.html terraform documentation>
 -- for more information.
 data OrganizationResource s = OrganizationResource'
     { _adminUser   :: TF.Attr s P.Text
@@ -409,4 +409,4 @@ instance P.HasViewers (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) wh
                (\s a -> s { _viewers = a } :: OrganizationResource s)
 
 instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Integer) where
-    computedOrgId x = TF.compute (TF.refKey x) "_computedOrgId"
+    computedOrgId x = TF.compute (TF.refKey x) "org_id"

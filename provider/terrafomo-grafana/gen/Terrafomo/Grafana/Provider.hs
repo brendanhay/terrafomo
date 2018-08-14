@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Grafana@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Grafana/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/grafana/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _auth :: P.Text
