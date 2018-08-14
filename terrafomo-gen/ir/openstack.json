@@ -13161,24 +13161,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"external_gateway\" <$> TF.attribute",
-                    "name": "_computedExternalGateway",
-                    "method": "computedExternalGateway",
-                    "conflicts": [
-                        "_externalNetworkId"
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedExternalGateway",
-                    "validate": false,
-                    "optional": true,
-                    "original": "external_gateway"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"external_network_id\" <$> TF.attribute",
                     "name": "_computedExternalNetworkId",
                     "method": "computedExternalNetworkId",
