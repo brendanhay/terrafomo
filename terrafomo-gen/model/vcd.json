@@ -247,7 +247,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "local_subnets",
+            "name": "edgegateway_vpn_local_subnets",
             "schemas": [
               {
                 "name": "local_subnet_gateway",
@@ -348,7 +348,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "peer_subnets",
+            "name": "edgegateway_vpn_peer_subnets",
             "schemas": [
               {
                 "name": "peer_subnet_gateway",
@@ -442,7 +442,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "rule",
+            "name": "firewall_rules_rule",
             "schemas": [
               {
                 "name": "description",
@@ -560,7 +560,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "dhcp_pool",
+            "name": "network_dhcp_pool",
             "schemas": [
               {
                 "name": "default_lease_time",
@@ -752,7 +752,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "static_ip_pool",
+            "name": "network_static_ip_pool",
             "schemas": [
               {
                 "name": "end_address",
