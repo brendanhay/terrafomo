@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/gitlab/index.html",
     "dataSources": [
         {
             "con": {
@@ -24,6 +25,7 @@
                     "original": "id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/d/project.html",
             "name": "ProjectData",
             "threaded": true,
             "attributes": [],
@@ -72,6 +74,7 @@
                     "original": "email"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/d/user.html",
             "name": "UserData",
             "threaded": true,
             "attributes": [],
@@ -170,6 +173,7 @@
                     "original": "title"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/deploy_key.html",
             "name": "DeployKeyResource",
             "threaded": true,
             "attributes": [],
@@ -330,6 +334,7 @@
                     "original": "request_access_enabled"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/group.html",
             "name": "GroupResource",
             "threaded": true,
             "attributes": [
@@ -459,6 +464,7 @@
                     "original": "project"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/label.html",
             "name": "LabelResource",
             "threaded": true,
             "attributes": [],
@@ -667,6 +673,7 @@
                     "original": "wiki_enabled"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/project.html",
             "name": "ProjectResource",
             "threaded": true,
             "attributes": [
@@ -956,6 +963,7 @@
                     "original": "wiki_page_events"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/project_hook.html",
             "name": "ProjectHookResource",
             "threaded": true,
             "attributes": [],
@@ -1052,6 +1060,7 @@
                     "original": "user_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/project_membership.html",
             "name": "ProjectMembershipResource",
             "threaded": true,
             "attributes": [],
@@ -1260,6 +1269,7 @@
                     "original": "username"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/gitlab/r/user.html",
             "name": "UserResource",
             "threaded": true,
             "attributes": [],
