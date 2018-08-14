@@ -214,57 +214,6 @@
         },
         {
             "con": {
-                "smart": "newLocality",
-                "name": "Locality'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "UUIDs of other instances to attempt to provision alongside"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"close_to\" <$> TF.attribute",
-                    "name": "_closeTo",
-                    "method": "closeTo",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasCloseTo",
-                    "validate": false,
-                    "optional": true,
-                    "original": "close_to"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "UUIDs of other instances to attempt not to provision alongside"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"far_from\" <$> TF.attribute",
-                    "name": "_farFrom",
-                    "method": "farFrom",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasFarFrom",
-                    "validate": false,
-                    "optional": true,
-                    "original": "far_from"
-                }
-            ],
-            "name": "Locality",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Locality s",
-            "original": "locality"
-        },
-        {
-            "con": {
                 "smart": "newFilter",
                 "name": "Filter'"
             },
@@ -2072,24 +2021,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "image"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "UUID based locality hints for assisting placement behavior"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"locality\" <$> TF.attribute",
-                    "name": "_locality",
-                    "method": "locality",
-                    "conflicts": [],
-                    "type": "TF.Attr s (Locality s)",
-                    "class": "HasLocality",
-                    "validate": true,
-                    "optional": true,
-                    "original": "locality"
                 },
                 {
                     "default": "TF.Nil",
