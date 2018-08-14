@@ -42,7 +42,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "member",
+            "name": "team_member",
             "schemas": [
               {
                 "name": "role",
