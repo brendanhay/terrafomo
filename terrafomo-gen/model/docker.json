@@ -202,7 +202,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "capabilities",
+            "name": "container_capabilities",
             "schemas": [
               {
                 "name": "add",
@@ -216,7 +216,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "add",
+                  "name": "capabilities_add",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -240,7 +240,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "drop",
+                  "name": "capabilities_drop",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -267,7 +267,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "command",
+            "name": "container_command",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -315,7 +315,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "devices",
+            "name": "container_devices",
             "schemas": [
               {
                 "name": "container_path",
@@ -368,7 +368,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns",
+            "name": "container_dns",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -392,7 +392,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_opts",
+            "name": "container_dns_opts",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -416,7 +416,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_search",
+            "name": "container_dns_search",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -452,7 +452,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "entrypoint",
+            "name": "container_entrypoint",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -476,7 +476,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "env",
+            "name": "container_env",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -512,7 +512,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "host",
+            "name": "container_host",
             "schemas": [
               {
                 "name": "host",
@@ -614,7 +614,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "links",
+            "name": "container_links",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -724,7 +724,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "network_alias",
+            "name": "container_network_alias",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -760,7 +760,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networks",
+            "name": "container_networks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -784,7 +784,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "ports",
+            "name": "container_ports",
             "schemas": [
               {
                 "name": "external",
@@ -887,7 +887,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "ulimit",
+            "name": "container_ulimit",
             "schemas": [
               {
                 "name": "hard",
@@ -940,7 +940,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "upload",
+            "name": "container_upload",
             "schemas": [
               {
                 "name": "content",
@@ -994,7 +994,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "user",
+            "name": "container_user",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1018,7 +1018,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "volumes",
+            "name": "container_volumes",
             "schemas": [
               {
                 "name": "container_path",
@@ -1151,7 +1151,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "pull_triggers",
+            "name": "image_pull_triggers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1216,7 +1216,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "ipam_config",
+            "name": "network_ipam_config",
             "schemas": [
               {
                 "name": "aux_address",
@@ -1365,7 +1365,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "auth",
+            "name": "service_auth",
             "schemas": [
               {
                 "name": "password",
@@ -1421,7 +1421,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "converge_config",
+            "name": "service_converge_config",
             "schemas": [
               {
                 "name": "delay",
@@ -1467,7 +1467,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "endpoint_spec",
+            "name": "service_endpoint_spec",
             "schemas": [
               {
                 "name": "mode",
@@ -1495,7 +1495,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "ports",
+                  "name": "endpoint_spec_ports",
                   "schemas": [
                     {
                       "name": "name",
@@ -1583,7 +1583,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "labels",
+            "name": "service_labels",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1608,7 +1608,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "mode",
+            "name": "service_mode",
             "schemas": [
               {
                 "name": "global",
@@ -1642,7 +1642,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "replicated",
+                  "name": "mode_replicated",
                   "schemas": [
                     {
                       "name": "replicas",
@@ -1690,7 +1690,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "rollback_config",
+            "name": "service_rollback_config",
             "schemas": [
               {
                 "name": "delay",
@@ -1792,7 +1792,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "task_spec",
+            "name": "service_task_spec",
             "schemas": [
               {
                 "name": "container_spec",
@@ -1807,7 +1807,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "container_spec",
+                  "name": "task_spec_container_spec",
                   "schemas": [
                     {
                       "name": "args",
@@ -1822,7 +1822,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "args",
+                        "name": "container_spec_args",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -1847,7 +1847,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "command",
+                        "name": "container_spec_command",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -1872,7 +1872,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "configs",
+                        "name": "container_spec_configs",
                         "schemas": [
                           {
                             "name": "config_id",
@@ -1942,7 +1942,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "dns_config",
+                        "name": "container_spec_dns_config",
                         "schemas": [
                           {
                             "name": "nameservers",
@@ -1957,7 +1957,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "nameservers",
+                              "name": "dns_config_nameservers",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -1982,7 +1982,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "options",
+                              "name": "dns_config_options",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -2007,7 +2007,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "search",
+                              "name": "dns_config_search",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -2035,7 +2035,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "env",
+                        "name": "container_spec_env",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2060,7 +2060,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "groups",
+                        "name": "container_spec_groups",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2085,7 +2085,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "healthcheck",
+                        "name": "container_spec_healthcheck",
                         "schemas": [
                           {
                             "name": "interval",
@@ -2142,7 +2142,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "test",
+                              "name": "healthcheck_test",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -2197,7 +2197,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "hosts",
+                        "name": "container_spec_hosts",
                         "schemas": [
                           {
                             "name": "host",
@@ -2266,7 +2266,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "labels",
+                        "name": "container_spec_labels",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2291,7 +2291,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "mounts",
+                        "name": "container_spec_mounts",
                         "schemas": [
                           {
                             "name": "bind_options",
@@ -2306,7 +2306,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "bind_options",
+                              "name": "mounts_bind_options",
                               "schemas": [
                                 {
                                   "name": "propagation",
@@ -2376,7 +2376,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "tmpfs_options",
+                              "name": "mounts_tmpfs_options",
                               "schemas": [
                                 {
                                   "name": "mode",
@@ -2433,7 +2433,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "volume_options",
+                              "name": "mounts_volume_options",
                               "schemas": [
                                 {
                                   "name": "driver_name",
@@ -2461,7 +2461,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "driver_options",
+                                    "name": "volume_options_driver_options",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -2486,7 +2486,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "labels",
+                                    "name": "volume_options_labels",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -2530,7 +2530,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "privileges",
+                        "name": "container_spec_privileges",
                         "schemas": [
                           {
                             "name": "credential_spec",
@@ -2545,7 +2545,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "credential_spec",
+                              "name": "privileges_credential_spec",
                               "schemas": [
                                 {
                                   "name": "file",
@@ -2589,7 +2589,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "se_linux_context",
+                              "name": "privileges_se_linux_context",
                               "schemas": [
                                 {
                                   "name": "disable",
@@ -2688,7 +2688,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "secrets",
+                        "name": "container_spec_secrets",
                         "schemas": [
                           {
                             "name": "file_name",
@@ -2800,7 +2800,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "log_driver",
+                  "name": "task_spec_log_driver",
                   "schemas": [
                     {
                       "name": "name",
@@ -2828,7 +2828,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "options",
+                        "name": "log_driver_options",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2856,7 +2856,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "networks",
+                  "name": "task_spec_networks",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2881,7 +2881,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "placement",
+                  "name": "task_spec_placement",
                   "schemas": [
                     {
                       "name": "constraints",
@@ -2896,7 +2896,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "constraints",
+                        "name": "placement_constraints",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2921,7 +2921,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "platforms",
+                        "name": "placement_platforms",
                         "schemas": [
                           {
                             "name": "architecture",
@@ -2965,7 +2965,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "prefs",
+                        "name": "placement_prefs",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2993,7 +2993,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "resources",
+                  "name": "task_spec_resources",
                   "schemas": [
                     {
                       "name": "limits",
@@ -3008,7 +3008,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "limits",
+                        "name": "resources_limits",
                         "schemas": [
                           {
                             "name": "generic_resources",
@@ -3023,7 +3023,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "generic_resources",
+                              "name": "limits_generic_resources",
                               "schemas": [
                                 {
                                   "name": "discrete_resources_spec",
@@ -3038,7 +3038,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "discrete_resources_spec",
+                                    "name": "generic_resources_discrete_resources_spec",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -3063,7 +3063,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "named_resources_spec",
+                                    "name": "generic_resources_named_resources_spec",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -3120,7 +3120,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "reservation",
+                        "name": "resources_reservation",
                         "schemas": [
                           {
                             "name": "generic_resources",
@@ -3135,7 +3135,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "generic_resources",
+                              "name": "reservation_generic_resources",
                               "schemas": [
                                 {
                                   "name": "discrete_resources_spec",
@@ -3150,7 +3150,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "discrete_resources_spec",
+                                    "name": "generic_resources_discrete_resources_spec",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -3175,7 +3175,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "named_resources_spec",
+                                    "name": "generic_resources_named_resources_spec",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -3235,7 +3235,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "restart_policy",
+                  "name": "task_spec_restart_policy",
                   "schemas": [
                     {
                       "name": "condition",
@@ -3321,7 +3321,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "update_config",
+            "name": "service_update_config",
             "schemas": [
               {
                 "name": "delay",
