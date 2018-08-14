@@ -226,7 +226,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "json_data",
+            "name": "data_source_json_data",
             "schemas": [
               {
                 "name": "assume_role_arn",
@@ -315,7 +315,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "secure_json_data",
+            "name": "data_source_secure_json_data",
             "schemas": [
               {
                 "name": "access_key",
@@ -410,7 +410,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "admins",
+            "name": "organization_admins",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -447,7 +447,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "editors",
+            "name": "organization_editors",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -495,7 +495,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "viewers",
+            "name": "organization_viewers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
