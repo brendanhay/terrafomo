@@ -18,7 +18,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "append",
+            "name": "config_append",
             "schemas": [
               {
                 "name": "source",
@@ -59,7 +59,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "arrays",
+            "name": "config_arrays",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -83,7 +83,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "directories",
+            "name": "config_directories",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -107,7 +107,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "disks",
+            "name": "config_disks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -131,7 +131,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "files",
+            "name": "config_files",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -155,7 +155,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "filesystems",
+            "name": "config_filesystems",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -179,7 +179,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "groups",
+            "name": "config_groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -203,7 +203,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "links",
+            "name": "config_links",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -227,7 +227,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "networkd",
+            "name": "config_networkd",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -263,7 +263,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "replace",
+            "name": "config_replace",
             "schemas": [
               {
                 "name": "source",
@@ -304,7 +304,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "systemd",
+            "name": "config_systemd",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -328,7 +328,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "users",
+            "name": "config_users",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -434,7 +434,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "partition",
+            "name": "disk_partition",
             "schemas": [
               {
                 "name": "label",
@@ -528,7 +528,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "content",
+            "name": "file_content",
             "schemas": [
               {
                 "name": "content",
@@ -618,7 +618,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "source",
+            "name": "file_source",
             "schemas": [
               {
                 "name": "compression",
@@ -688,7 +688,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "mount",
+            "name": "filesystem_mount",
             "schemas": [
               {
                 "name": "device",
@@ -738,7 +738,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "options",
+                  "name": "mount_options",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -965,7 +965,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "devices",
+            "name": "raid_devices",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1042,7 +1042,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "dropin",
+            "name": "systemd_unit_dropin",
             "schemas": [
               {
                 "name": "content",
@@ -1137,7 +1137,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "groups",
+            "name": "user_groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1257,7 +1257,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ssh_authorized_keys",
+            "name": "user_ssh_authorized_keys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
