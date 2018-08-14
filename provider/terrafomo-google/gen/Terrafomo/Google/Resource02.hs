@@ -267,7 +267,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @google_logging_organization_sink@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_organization_sink terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_organization_sink.html terraform documentation>
 -- for more information.
 data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
     { _destination     :: TF.Attr s P.Text
@@ -277,10 +277,10 @@ data LoggingOrganizationSinkResource s = LoggingOrganizationSinkResource'
     -- ^ @filter@ - (Optional)
     --
     , _includeChildren :: TF.Attr s P.Bool
-    -- ^ @include_children@ - (Optional)
+    -- ^ @include_children@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _orgId           :: TF.Attr s P.Text
     -- ^ @org_id@ - (Required)
@@ -340,11 +340,11 @@ instance P.HasOrgId (LoggingOrganizationSinkResource s) (TF.Attr s P.Text) where
                (\s a -> s { _orgId = a } :: LoggingOrganizationSinkResource s)
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingOrganizationSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "_computedWriterIdentity"
+    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
 -- | @google_logging_project_exclusion@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_project_exclusion terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_project_exclusion.html terraform documentation>
 -- for more information.
 data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
     { _description :: TF.Attr s P.Text
@@ -357,7 +357,7 @@ data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
     -- ^ @filter@ - (Required)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -406,11 +406,11 @@ instance P.HasName (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: LoggingProjectExclusionResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_logging_project_sink@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_project_sink terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_project_sink.html terraform documentation>
 -- for more information.
 data LoggingProjectSinkResource s = LoggingProjectSinkResource'
     { _destination          :: TF.Attr s P.Text
@@ -420,10 +420,10 @@ data LoggingProjectSinkResource s = LoggingProjectSinkResource'
     -- ^ @filter@ - (Optional)
     --
     , _name                 :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _uniqueWriterIdentity :: TF.Attr s P.Bool
-    -- ^ @unique_writer_identity@ - (Optional)
+    -- ^ @unique_writer_identity@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -472,24 +472,24 @@ instance P.HasUniqueWriterIdentity (LoggingProjectSinkResource s) (TF.Attr s P.B
                (\s a -> s { _uniqueWriterIdentity = a } :: LoggingProjectSinkResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingProjectSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "_computedWriterIdentity"
+    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
 -- | @google_organization_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_organization_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_binding.html terraform documentation>
 -- for more information.
 data OrganizationIamBindingResource s = OrganizationIamBindingResource'
     { _members :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _orgId   :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
+    -- ^ @org_id@ - (Required, Forces New)
     --
     , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -532,11 +532,11 @@ instance P.HasRole (OrganizationIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: OrganizationIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_organization_iam_custom_role@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_organization_iam_custom_role terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_custom_role.html terraform documentation>
 -- for more information.
 data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
     { _deleted     :: TF.Attr s P.Bool
@@ -546,13 +546,13 @@ data OrganizationIamCustomRoleResource s = OrganizationIamCustomRoleResource'
     -- ^ @description@ - (Optional)
     --
     , _orgId       :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
+    -- ^ @org_id@ - (Required, Forces New)
     --
     , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @permissions@ - (Required)
     --
     , _roleId      :: TF.Attr s P.Text
-    -- ^ @role_id@ - (Required)
+    -- ^ @role_id@ - (Required, Forces New)
     --
     , _stage       :: TF.Attr s P.Text
     -- ^ @stage@ - (Optional)
@@ -631,17 +631,17 @@ instance P.HasTitle (OrganizationIamCustomRoleResource s) (TF.Attr s P.Text) whe
 
 -- | @google_organization_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_organization_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_member.html terraform documentation>
 -- for more information.
 data OrganizationIamMemberResource s = OrganizationIamMemberResource'
     { _member :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _orgId  :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
+    -- ^ @org_id@ - (Required, Forces New)
     --
     , _role   :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -684,15 +684,15 @@ instance P.HasRole (OrganizationIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: OrganizationIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_organization_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_organization_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_iam_policy.html terraform documentation>
 -- for more information.
 data OrganizationIamPolicyResource s = OrganizationIamPolicyResource'
     { _orgId      :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
+    -- ^ @org_id@ - (Required, Forces New)
     --
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
@@ -730,14 +730,14 @@ instance P.HasPolicyData (OrganizationIamPolicyResource s) (TF.Attr s P.Text) wh
                (\s a -> s { _policyData = a } :: OrganizationIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_organization_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_organization_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/organization_policy.html terraform documentation>
 -- for more information.
 data OrganizationPolicyResource s = OrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (BooleanPolicy s)
+    { _booleanPolicy :: TF.Attr s (OrganizationPolicyBooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -745,9 +745,9 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     -- * 'listPolicy'
     -- * 'restorePolicy'
     , _constraint    :: TF.Attr s P.Text
-    -- ^ @constraint@ - (Required)
+    -- ^ @constraint@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (ListPolicy s)
+    , _listPolicy    :: TF.Attr s (OrganizationPolicyListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -755,9 +755,9 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     -- * 'restorePolicy'
     -- * 'booleanPolicy'
     , _orgId         :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
+    -- ^ @org_id@ - (Required, Forces New)
     --
-    , _restorePolicy :: TF.Attr s (RestorePolicy s)
+    , _restorePolicy :: TF.Attr s (OrganizationPolicyRestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -809,20 +809,20 @@ instance TF.IsValid (OrganizationPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
+                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyBooleanPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
+                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyListPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
+                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyRestorePolicy s))
                   TF.validator
 
-instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (BooleanPolicy s)) where
+instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyBooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
+        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyBooleanPolicy s))
                (\s a -> s { _booleanPolicy = a } :: OrganizationPolicyResource s)
 
 instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -830,9 +830,9 @@ instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_constraint :: OrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
 
-instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (ListPolicy s)) where
+instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
+        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyListPolicy s))
                (\s a -> s { _listPolicy = a } :: OrganizationPolicyResource s)
 
 instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -840,26 +840,26 @@ instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_orgId :: OrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _orgId = a } :: OrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (RestorePolicy s)) where
+instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyRestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
+        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyRestorePolicy s))
                (\s a -> s { _restorePolicy = a } :: OrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
+    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @google_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project.html terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
-    { _appEngine         :: TF.Attr s (AppEngine s)
+    { _appEngine         :: TF.Attr s (ProjectAppEngine s)
     -- ^ @app_engine@ - (Optional)
     --
     , _autoCreateNetwork :: TF.Attr s P.Bool
@@ -875,7 +875,7 @@ data ProjectResource s = ProjectResource'
     -- ^ @name@ - (Required)
     --
     , _projectId         :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -908,12 +908,12 @@ instance TF.IsValid (ProjectResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_appEngine"
                   (_appEngine
-                      :: ProjectResource s -> TF.Attr s (AppEngine s))
+                      :: ProjectResource s -> TF.Attr s (ProjectAppEngine s))
                   TF.validator
 
-instance P.HasAppEngine (ProjectResource s) (TF.Attr s (AppEngine s)) where
+instance P.HasAppEngine (ProjectResource s) (TF.Attr s (ProjectAppEngine s)) where
     appEngine =
-        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (AppEngine s))
+        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (ProjectAppEngine s))
                (\s a -> s { _appEngine = a } :: ProjectResource s)
 
 instance P.HasAutoCreateNetwork (ProjectResource s) (TF.Attr s P.Bool) where
@@ -942,36 +942,36 @@ instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _projectId = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedFolderId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedFolderId x = TF.compute (TF.refKey x) "_computedFolderId"
+    computedFolderId x = TF.compute (TF.refKey x) "folder_id"
 
 instance s ~ s' => P.HasComputedNumber (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedNumber x = TF.compute (TF.refKey x) "_computedNumber"
+    computedNumber x = TF.compute (TF.refKey x) "number"
 
 instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedOrgId x = TF.compute (TF.refKey x) "_computedOrgId"
+    computedOrgId x = TF.compute (TF.refKey x) "org_id"
 
 instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyData x = TF.compute (TF.refKey x) "_computedPolicyData"
+    computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
 
 instance s ~ s' => P.HasComputedPolicyEtag (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPolicyEtag x = TF.compute (TF.refKey x) "_computedPolicyEtag"
+    computedPolicyEtag x = TF.compute (TF.refKey x) "policy_etag"
 
 instance s ~ s' => P.HasComputedSkipDelete (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Bool) where
-    computedSkipDelete x = TF.compute (TF.refKey x) "_computedSkipDelete"
+    computedSkipDelete x = TF.compute (TF.refKey x) "skip_delete"
 
 -- | @google_project_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_binding.html terraform documentation>
 -- for more information.
 data ProjectIamBindingResource s = ProjectIamBindingResource'
     { _members :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _project :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional)
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1013,11 +1013,11 @@ instance P.HasRole (ProjectIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: ProjectIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_project_iam_custom_role@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_iam_custom_role terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_custom_role.html terraform documentation>
 -- for more information.
 data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
     { _deleted     :: TF.Attr s P.Bool
@@ -1030,7 +1030,7 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
     -- ^ @permissions@ - (Required)
     --
     , _roleId      :: TF.Attr s P.Text
-    -- ^ @role_id@ - (Required)
+    -- ^ @role_id@ - (Required, Forces New)
     --
     , _stage       :: TF.Attr s P.Text
     -- ^ @stage@ - (Optional)
@@ -1100,21 +1100,21 @@ instance P.HasTitle (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _title = a } :: ProjectIamCustomRoleResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamCustomRoleResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_project_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_member.html terraform documentation>
 -- for more information.
 data ProjectIamMemberResource s = ProjectIamMemberResource'
     { _member  :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _project :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional)
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1156,11 +1156,11 @@ instance P.HasRole (ProjectIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: ProjectIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_project_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_iam_policy.html terraform documentation>
 -- for more information.
 data ProjectIamPolicyResource s = ProjectIamPolicyResource'
     { _policyData :: TF.Attr s P.Text
@@ -1191,20 +1191,20 @@ instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _policyData = a } :: ProjectIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRestorePolicy (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedRestorePolicy x = TF.compute (TF.refKey x) "_computedRestorePolicy"
+    computedRestorePolicy x = TF.compute (TF.refKey x) "restore_policy"
 
 -- | @google_project_organization_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_organization_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_organization_policy.html terraform documentation>
 -- for more information.
 data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (BooleanPolicy s)
+    { _booleanPolicy :: TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1212,9 +1212,9 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     -- * 'listPolicy'
     -- * 'restorePolicy'
     , _constraint    :: TF.Attr s P.Text
-    -- ^ @constraint@ - (Required)
+    -- ^ @constraint@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (ListPolicy s)
+    , _listPolicy    :: TF.Attr s (ProjectOrganizationPolicyListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1222,9 +1222,9 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     -- * 'restorePolicy'
     -- * 'booleanPolicy'
     , _project       :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    -- ^ @project@ - (Required, Forces New)
     --
-    , _restorePolicy :: TF.Attr s (RestorePolicy s)
+    , _restorePolicy :: TF.Attr s (ProjectOrganizationPolicyRestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1276,20 +1276,20 @@ instance TF.IsValid (ProjectOrganizationPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyListPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyRestorePolicy s))
                   TF.validator
 
-instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (BooleanPolicy s)) where
+instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
+        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s))
                (\s a -> s { _booleanPolicy = a } :: ProjectOrganizationPolicyResource s)
 
 instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -1297,9 +1297,9 @@ instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text
         P.lens (_constraint :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _constraint = a } :: ProjectOrganizationPolicyResource s)
 
-instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ListPolicy s)) where
+instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
+        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyListPolicy s))
                (\s a -> s { _listPolicy = a } :: ProjectOrganizationPolicyResource s)
 
 instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -1307,30 +1307,30 @@ instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) w
         P.lens (_project :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ProjectOrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (RestorePolicy s)) where
+instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyRestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
+        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyRestorePolicy s))
                (\s a -> s { _restorePolicy = a } :: ProjectOrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
+    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @google_project_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_service.html terraform documentation>
 -- for more information.
 data ProjectServiceResource s = ProjectServiceResource'
     { _disableOnDestroy :: TF.Attr s P.Bool
     -- ^ @disable_on_destroy@ - (Optional)
     --
     , _service          :: TF.Attr s P.Text
-    -- ^ @service@ - (Required)
+    -- ^ @service@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1364,11 +1364,11 @@ instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _service = a } :: ProjectServiceResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServiceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_project_services@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_services terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_services.html terraform documentation>
 -- for more information.
 data ProjectServicesResource s = ProjectServicesResource'
     { _disableOnDestroy :: TF.Attr s P.Bool
@@ -1409,18 +1409,18 @@ instance P.HasServices (ProjectServicesResource s) (TF.Attr s [TF.Attr s P.Text]
                (\s a -> s { _services = a } :: ProjectServicesResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectServicesResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_project_usage_export_bucket@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_project_usage_export_bucket terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/project_usage_export_bucket.html terraform documentation>
 -- for more information.
 data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource'
     { _bucketName :: TF.Attr s P.Text
-    -- ^ @bucket_name@ - (Required)
+    -- ^ @bucket_name@ - (Required, Forces New)
     --
     , _prefix     :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
+    -- ^ @prefix@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1454,21 +1454,21 @@ instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) whe
                (\s a -> s { _prefix = a } :: ProjectUsageExportBucketResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_subscription@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_subscription terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription.html terraform documentation>
 -- for more information.
 data PubsubSubscriptionResource s = PubsubSubscriptionResource'
     { _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _pushConfig :: TF.Attr s (PushConfig s)
+    , _pushConfig :: TF.Attr s (PubsubSubscriptionPushConfig s)
     -- ^ @push_config@ - (Optional)
     --
     , _topic      :: TF.Attr s P.Text
-    -- ^ @topic@ - (Required)
+    -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1495,7 +1495,7 @@ instance TF.IsValid (PubsubSubscriptionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_pushConfig"
                   (_pushConfig
-                      :: PubsubSubscriptionResource s -> TF.Attr s (PushConfig s))
+                      :: PubsubSubscriptionResource s -> TF.Attr s (PubsubSubscriptionPushConfig s))
                   TF.validator
 
 instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
@@ -1503,9 +1503,9 @@ instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
 
-instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PushConfig s)) where
+instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PubsubSubscriptionPushConfig s)) where
     pushConfig =
-        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PushConfig s))
+        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PubsubSubscriptionPushConfig s))
                (\s a -> s { _pushConfig = a } :: PubsubSubscriptionResource s)
 
 instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
@@ -1514,27 +1514,27 @@ instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _topic = a } :: PubsubSubscriptionResource s)
 
 instance s ~ s' => P.HasComputedAckDeadlineSeconds (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Integer) where
-    computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "_computedAckDeadlineSeconds"
+    computedAckDeadlineSeconds x = TF.compute (TF.refKey x) "ack_deadline_seconds"
 
 instance s ~ s' => P.HasComputedPath (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "_computedPath"
+    computedPath x = TF.compute (TF.refKey x) "path"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_subscription_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_subscription_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_binding.html terraform documentation>
 -- for more information.
 data PubsubSubscriptionIamBindingResource s = PubsubSubscriptionIamBindingResource'
     { _members      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role         :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _subscription :: TF.Attr s P.Text
-    -- ^ @subscription@ - (Required)
+    -- ^ @subscription@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1577,24 +1577,24 @@ instance P.HasSubscription (PubsubSubscriptionIamBindingResource s) (TF.Attr s P
                (\s a -> s { _subscription = a } :: PubsubSubscriptionIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_subscription_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_subscription_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_member.html terraform documentation>
 -- for more information.
 data PubsubSubscriptionIamMemberResource s = PubsubSubscriptionIamMemberResource'
     { _member       :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role         :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _subscription :: TF.Attr s P.Text
-    -- ^ @subscription@ - (Required)
+    -- ^ @subscription@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1637,21 +1637,21 @@ instance P.HasSubscription (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.
                (\s a -> s { _subscription = a } :: PubsubSubscriptionIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_subscription_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_subscription_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription_iam_policy.html terraform documentation>
 -- for more information.
 data PubsubSubscriptionIamPolicyResource s = PubsubSubscriptionIamPolicyResource'
     { _policyData   :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
     , _subscription :: TF.Attr s P.Text
-    -- ^ @subscription@ - (Required)
+    -- ^ @subscription@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1686,18 +1686,18 @@ instance P.HasSubscription (PubsubSubscriptionIamPolicyResource s) (TF.Attr s P.
                (\s a -> s { _subscription = a } :: PubsubSubscriptionIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubSubscriptionIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_topic@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_topic terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_topic.html terraform documentation>
 -- for more information.
 data PubsubTopicResource s = PubsubTopicResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1724,21 +1724,21 @@ instance P.HasName (PubsubTopicResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: PubsubTopicResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_topic_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_topic_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_binding.html terraform documentation>
 -- for more information.
 data PubsubTopicIamBindingResource s = PubsubTopicIamBindingResource'
     { _members :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _topic   :: TF.Attr s P.Text
-    -- ^ @topic@ - (Required)
+    -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1781,24 +1781,24 @@ instance P.HasTopic (PubsubTopicIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _topic = a } :: PubsubTopicIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_topic_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_topic_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_member.html terraform documentation>
 -- for more information.
 data PubsubTopicIamMemberResource s = PubsubTopicIamMemberResource'
     { _member :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role   :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _topic  :: TF.Attr s P.Text
-    -- ^ @topic@ - (Required)
+    -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1841,21 +1841,21 @@ instance P.HasTopic (PubsubTopicIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _topic = a } :: PubsubTopicIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_pubsub_topic_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_pubsub_topic_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_policy.html terraform documentation>
 -- for more information.
 data PubsubTopicIamPolicyResource s = PubsubTopicIamPolicyResource'
     { _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
     , _topic      :: TF.Attr s P.Text
-    -- ^ @topic@ - (Required)
+    -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1890,14 +1890,14 @@ instance P.HasTopic (PubsubTopicIamPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _topic = a } :: PubsubTopicIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (PubsubTopicIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_redis_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_redis_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/redis_instance.html terraform documentation>
 -- for more information.
 data RedisInstanceResource s = RedisInstanceResource'
     { _displayName  :: TF.Attr s P.Text
@@ -1910,13 +1910,13 @@ data RedisInstanceResource s = RedisInstanceResource'
     -- ^ @memory_size_gb@ - (Required)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _redisConfigs :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @redis_configs@ - (Optional)
     --
     , _tier         :: TF.Attr s P.Text
-    -- ^ @tier@ - (Optional)
+    -- ^ @tier@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1979,54 +1979,54 @@ instance P.HasTier (RedisInstanceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _tier = a } :: RedisInstanceResource s)
 
 instance s ~ s' => P.HasComputedAlternativeLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedAlternativeLocationId x = TF.compute (TF.refKey x) "_computedAlternativeLocationId"
+    computedAlternativeLocationId x = TF.compute (TF.refKey x) "alternative_location_id"
 
 instance s ~ s' => P.HasComputedAuthorizedNetwork (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedAuthorizedNetwork x = TF.compute (TF.refKey x) "_computedAuthorizedNetwork"
+    computedAuthorizedNetwork x = TF.compute (TF.refKey x) "authorized_network"
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
+    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
 
 instance s ~ s' => P.HasComputedCurrentLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedCurrentLocationId x = TF.compute (TF.refKey x) "_computedCurrentLocationId"
+    computedCurrentLocationId x = TF.compute (TF.refKey x) "current_location_id"
 
 instance s ~ s' => P.HasComputedHost (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedHost x = TF.compute (TF.refKey x) "_computedHost"
+    computedHost x = TF.compute (TF.refKey x) "host"
 
 instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedLocationId x = TF.compute (TF.refKey x) "_computedLocationId"
+    computedLocationId x = TF.compute (TF.refKey x) "location_id"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "_computedPort"
+    computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRedisVersion (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedRedisVersion x = TF.compute (TF.refKey x) "_computedRedisVersion"
+    computedRedisVersion x = TF.compute (TF.refKey x) "redis_version"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedReservedIpRange (TF.Ref s' (RedisInstanceResource s)) (TF.Attr s P.Text) where
-    computedReservedIpRange x = TF.compute (TF.refKey x) "_computedReservedIpRange"
+    computedReservedIpRange x = TF.compute (TF.refKey x) "reserved_ip_range"
 
 -- | @google_resource_manager_lien@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_resource_manager_lien terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/resource_manager_lien.html terraform documentation>
 -- for more information.
 data ResourceManagerLienResource s = ResourceManagerLienResource'
     { _origin       :: TF.Attr s P.Text
-    -- ^ @origin@ - (Required)
+    -- ^ @origin@ - (Required, Forces New)
     --
     , _parent       :: TF.Attr s P.Text
-    -- ^ @parent@ - (Required)
+    -- ^ @parent@ - (Required, Forces New)
     --
     , _reason       :: TF.Attr s P.Text
-    -- ^ @reason@ - (Required)
+    -- ^ @reason@ - (Required, Forces New)
     --
     , _restrictions :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @restrictions@ - (Required)
+    -- ^ @restrictions@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2077,21 +2077,21 @@ instance P.HasRestrictions (ResourceManagerLienResource s) (TF.Attr s [TF.Attr s
                (\s a -> s { _restrictions = a } :: ResourceManagerLienResource s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (ResourceManagerLienResource s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
+    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ResourceManagerLienResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @google_runtimeconfig_config@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_runtimeconfig_config terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/runtimeconfig_config.html terraform documentation>
 -- for more information.
 data RuntimeconfigConfigResource s = RuntimeconfigConfigResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2125,18 +2125,18 @@ instance P.HasName (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: RuntimeconfigConfigResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_runtimeconfig_variable@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_runtimeconfig_variable terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/runtimeconfig_variable.html terraform documentation>
 -- for more information.
 data RuntimeconfigVariableResource s = RuntimeconfigVariableResource'
     { _name   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _parent :: TF.Attr s P.Text
-    -- ^ @parent@ - (Required)
+    -- ^ @parent@ - (Required, Forces New)
     --
     , _text   :: TF.Attr s P.Text
     -- ^ @text@ - (Optional)
@@ -2208,18 +2208,18 @@ instance P.HasValue (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
                (\s a -> s { _value = a } :: RuntimeconfigVariableResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (RuntimeconfigVariableResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
+    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
 -- | @google_service_account@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_service_account terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/service_account.html terraform documentation>
 -- for more information.
 data ServiceAccountResource s = ServiceAccountResource'
     { _accountId   :: TF.Attr s P.Text
-    -- ^ @account_id@ - (Required)
+    -- ^ @account_id@ - (Required, Forces New)
     --
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
@@ -2256,30 +2256,30 @@ instance P.HasDisplayName (ServiceAccountResource s) (TF.Attr s P.Text) where
                (\s a -> s { _displayName = a } :: ServiceAccountResource s)
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
+    computedEmail x = TF.compute (TF.refKey x) "email"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedUniqueId x = TF.compute (TF.refKey x) "_computedUniqueId"
+    computedUniqueId x = TF.compute (TF.refKey x) "unique_id"
 
 -- | @google_service_account_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_service_account_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/service_account_iam_binding.html terraform documentation>
 -- for more information.
 data ServiceAccountIamBindingResource s = ServiceAccountIamBindingResource'
     { _members          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role             :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _serviceAccountId :: TF.Attr s P.Text
-    -- ^ @service_account_id@ - (Required)
+    -- ^ @service_account_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2322,21 +2322,21 @@ instance P.HasServiceAccountId (ServiceAccountIamBindingResource s) (TF.Attr s P
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_service_account_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_service_account_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/service_account_iam_member.html terraform documentation>
 -- for more information.
 data ServiceAccountIamMemberResource s = ServiceAccountIamMemberResource'
     { _member           :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role             :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _serviceAccountId :: TF.Attr s P.Text
-    -- ^ @service_account_id@ - (Required)
+    -- ^ @service_account_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2379,18 +2379,18 @@ instance P.HasServiceAccountId (ServiceAccountIamMemberResource s) (TF.Attr s P.
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_service_account_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_service_account_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/service_account_iam_policy.html terraform documentation>
 -- for more information.
 data ServiceAccountIamPolicyResource s = ServiceAccountIamPolicyResource'
     { _policyData       :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
     , _serviceAccountId :: TF.Attr s P.Text
-    -- ^ @service_account_id@ - (Required)
+    -- ^ @service_account_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2425,27 +2425,27 @@ instance P.HasServiceAccountId (ServiceAccountIamPolicyResource s) (TF.Attr s P.
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ServiceAccountIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_service_account_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_service_account_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/service_account_key.html terraform documentation>
 -- for more information.
 data ServiceAccountKeyResource s = ServiceAccountKeyResource'
     { _keyAlgorithm     :: TF.Attr s P.Text
-    -- ^ @key_algorithm@ - (Optional)
+    -- ^ @key_algorithm@ - (Optional, Forces New)
     --
     , _pgpKey           :: TF.Attr s P.Text
-    -- ^ @pgp_key@ - (Optional)
+    -- ^ @pgp_key@ - (Optional, Forces New)
     --
     , _privateKeyType   :: TF.Attr s P.Text
-    -- ^ @private_key_type@ - (Optional)
+    -- ^ @private_key_type@ - (Optional, Forces New)
     --
     , _publicKeyType    :: TF.Attr s P.Text
-    -- ^ @public_key_type@ - (Optional)
+    -- ^ @public_key_type@ - (Optional, Forces New)
     --
     , _serviceAccountId :: TF.Attr s P.Text
-    -- ^ @service_account_id@ - (Required)
+    -- ^ @service_account_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2500,33 +2500,33 @@ instance P.HasServiceAccountId (ServiceAccountKeyResource s) (TF.Attr s P.Text) 
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountKeyResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedPrivateKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKey x = TF.compute (TF.refKey x) "_computedPrivateKey"
+    computedPrivateKey x = TF.compute (TF.refKey x) "private_key"
 
 instance s ~ s' => P.HasComputedPrivateKeyEncrypted (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyEncrypted x = TF.compute (TF.refKey x) "_computedPrivateKeyEncrypted"
+    computedPrivateKeyEncrypted x = TF.compute (TF.refKey x) "private_key_encrypted"
 
 instance s ~ s' => P.HasComputedPrivateKeyFingerprint (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPrivateKeyFingerprint x = TF.compute (TF.refKey x) "_computedPrivateKeyFingerprint"
+    computedPrivateKeyFingerprint x = TF.compute (TF.refKey x) "private_key_fingerprint"
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
+    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
 
 instance s ~ s' => P.HasComputedValidAfter (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedValidAfter x = TF.compute (TF.refKey x) "_computedValidAfter"
+    computedValidAfter x = TF.compute (TF.refKey x) "valid_after"
 
 instance s ~ s' => P.HasComputedValidBefore (TF.Ref s' (ServiceAccountKeyResource s)) (TF.Attr s P.Text) where
-    computedValidBefore x = TF.compute (TF.refKey x) "_computedValidBefore"
+    computedValidBefore x = TF.compute (TF.refKey x) "valid_before"
 
 -- | @google_sourcerepo_repository@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_sourcerepo_repository terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/sourcerepo_repository.html terraform documentation>
 -- for more information.
 data SourcerepoRepositoryResource s = SourcerepoRepositoryResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2553,27 +2553,27 @@ instance P.HasName (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SourcerepoRepositoryResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @google_spanner_database@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_database terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_database.html terraform documentation>
 -- for more information.
 data SpannerDatabaseResource s = SpannerDatabaseResource'
     { _ddl       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @ddl@ - (Optional)
+    -- ^ @ddl@ - (Optional, Forces New)
     --
     , _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2615,27 +2615,27 @@ instance P.HasName (SpannerDatabaseResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SpannerDatabaseResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @google_spanner_database_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_database_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_database_iam_binding.html terraform documentation>
 -- for more information.
 data SpannerDatabaseIamBindingResource s = SpannerDatabaseIamBindingResource'
     { _database  :: TF.Attr s P.Text
-    -- ^ @database@ - (Required)
+    -- ^ @database@ - (Required, Forces New)
     --
     , _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _members   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role      :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2686,27 +2686,27 @@ instance P.HasRole (SpannerDatabaseIamBindingResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _role = a } :: SpannerDatabaseIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_spanner_database_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_database_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_database_iam_member.html terraform documentation>
 -- for more information.
 data SpannerDatabaseIamMemberResource s = SpannerDatabaseIamMemberResource'
     { _database  :: TF.Attr s P.Text
-    -- ^ @database@ - (Required)
+    -- ^ @database@ - (Required, Forces New)
     --
     , _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _member    :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role      :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2757,21 +2757,21 @@ instance P.HasRole (SpannerDatabaseIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: SpannerDatabaseIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_spanner_database_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_database_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_database_iam_policy.html terraform documentation>
 -- for more information.
 data SpannerDatabaseIamPolicyResource s = SpannerDatabaseIamPolicyResource'
     { _database   :: TF.Attr s P.Text
-    -- ^ @database@ - (Required)
+    -- ^ @database@ - (Required, Forces New)
     --
     , _instance'  :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
@@ -2817,18 +2817,18 @@ instance P.HasPolicyData (SpannerDatabaseIamPolicyResource s) (TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: SpannerDatabaseIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_spanner_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_instance.html terraform documentation>
 -- for more information.
 data SpannerInstanceResource s = SpannerInstanceResource'
     { _config      :: TF.Attr s P.Text
-    -- ^ @config@ - (Required)
+    -- ^ @config@ - (Required, Forces New)
     --
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Required)
@@ -2886,27 +2886,27 @@ instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _numNodes = a } :: SpannerInstanceResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @google_spanner_instance_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_instance_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_instance_iam_binding.html terraform documentation>
 -- for more information.
 data SpannerInstanceIamBindingResource s = SpannerInstanceIamBindingResource'
     { _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _members   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role      :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2949,24 +2949,24 @@ instance P.HasRole (SpannerInstanceIamBindingResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _role = a } :: SpannerInstanceIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_spanner_instance_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_instance_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_instance_iam_member.html terraform documentation>
 -- for more information.
 data SpannerInstanceIamMemberResource s = SpannerInstanceIamMemberResource'
     { _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _member    :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role      :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3009,18 +3009,18 @@ instance P.HasRole (SpannerInstanceIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: SpannerInstanceIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_spanner_instance_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_spanner_instance_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/spanner_instance_iam_policy.html terraform documentation>
 -- for more information.
 data SpannerInstanceIamPolicyResource s = SpannerInstanceIamPolicyResource'
     { _instance'  :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
@@ -3058,21 +3058,21 @@ instance P.HasPolicyData (SpannerInstanceIamPolicyResource s) (TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: SpannerInstanceIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_sql_database@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_sql_database terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/sql_database.html terraform documentation>
 -- for more information.
 data SqlDatabaseResource s = SqlDatabaseResource'
     { _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3107,35 +3107,35 @@ instance P.HasName (SqlDatabaseResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SqlDatabaseResource s)
 
 instance s ~ s' => P.HasComputedCharset (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCharset x = TF.compute (TF.refKey x) "_computedCharset"
+    computedCharset x = TF.compute (TF.refKey x) "charset"
 
 instance s ~ s' => P.HasComputedCollation (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedCollation x = TF.compute (TF.refKey x) "_computedCollation"
+    computedCollation x = TF.compute (TF.refKey x) "collation"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_sql_database_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_sql_database_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/sql_database_instance.html terraform documentation>
 -- for more information.
 data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
     { _databaseVersion :: TF.Attr s P.Text
-    -- ^ @database_version@ - (Optional)
+    -- ^ @database_version@ - (Optional, Forces New)
     --
     , _region          :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
+    -- ^ @region@ - (Optional, Forces New)
     --
-    , _settings        :: TF.Attr s (Settings s)
+    , _settings        :: TF.Attr s (SqlDatabaseInstanceSettings s)
     -- ^ @settings@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 sqlDatabaseInstanceResource
-    :: TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
+    :: TF.Attr s (SqlDatabaseInstanceSettings s) -- ^ @settings@ - 'P.settings'
     -> TF.Resource P.Provider (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
     TF.newResource "google_sql_database_instance" TF.validator $
@@ -3156,7 +3156,7 @@ instance TF.IsValid (SqlDatabaseInstanceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
+                      :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceSettings s))
                   TF.validator
 
 instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
@@ -3169,51 +3169,51 @@ instance P.HasRegion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_region :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
 
-instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (Settings s)) where
+instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SqlDatabaseInstanceSettings s)) where
     settings =
-        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
+        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceSettings s))
                (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
 
 instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedConnectionName x = TF.compute (TF.refKey x) "_computedConnectionName"
+    computedConnectionName x = TF.compute (TF.refKey x) "connection_name"
 
 instance s ~ s' => P.HasComputedFirstIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedFirstIpAddress x = TF.compute (TF.refKey x) "_computedFirstIpAddress"
+    computedFirstIpAddress x = TF.compute (TF.refKey x) "first_ip_address"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [TF.Attr s (IpAddress s)]) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [TF.Attr s (SqlDatabaseInstanceIpAddress s)]) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedMasterInstanceName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedMasterInstanceName x = TF.compute (TF.refKey x) "_computedMasterInstanceName"
+    computedMasterInstanceName x = TF.compute (TF.refKey x) "master_instance_name"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ReplicaConfiguration s)) where
-    computedReplicaConfiguration x = TF.compute (TF.refKey x) "_computedReplicaConfiguration"
+instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s)) where
+    computedReplicaConfiguration x = TF.compute (TF.refKey x) "replica_configuration"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ServerCaCert s)) where
-    computedServerCaCert x = TF.compute (TF.refKey x) "_computedServerCaCert"
+instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (SqlDatabaseInstanceServerCaCert s)) where
+    computedServerCaCert x = TF.compute (TF.refKey x) "server_ca_cert"
 
 -- | @google_sql_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_sql_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/sql_user.html terraform documentation>
 -- for more information.
 data SqlUserResource s = SqlUserResource'
     { _host      :: TF.Attr s P.Text
-    -- ^ @host@ - (Optional)
+    -- ^ @host@ - (Optional, Forces New)
     --
     , _instance' :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
+    -- ^ @instance@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _password  :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
@@ -3265,14 +3265,14 @@ instance P.HasPassword (SqlUserResource s) (TF.Attr s P.Text) where
                (\s a -> s { _password = a } :: SqlUserResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_storage_bucket@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_bucket terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket.html terraform documentation>
 -- for more information.
 data StorageBucketResource s = StorageBucketResource'
-    { _cors          :: TF.Attr s [TF.Attr s (Cors s)]
+    { _cors          :: TF.Attr s [TF.Attr s (StorageBucketCors s)]
     -- ^ @cors@ - (Optional)
     --
     , _forceDestroy  :: TF.Attr s P.Bool
@@ -3281,28 +3281,28 @@ data StorageBucketResource s = StorageBucketResource'
     , _labels        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _lifecycleRule :: TF.Attr s [TF.Attr s (LifecycleRule s)]
+    , _lifecycleRule :: TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)]
     -- ^ @lifecycle_rule@ - (Optional)
     --
     , _location      :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
+    -- ^ @location@ - (Optional, Forces New)
     --
-    , _logging       :: TF.Attr s (Logging s)
+    , _logging       :: TF.Attr s (StorageBucketLogging s)
     -- ^ @logging@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _predefinedAcl :: TF.Attr s P.Text
-    -- ^ @predefined_acl@ - (Optional)
+    -- ^ @predefined_acl@ - (Optional, Forces New)
     --
     , _storageClass  :: TF.Attr s P.Text
-    -- ^ @storage_class@ - (Optional)
+    -- ^ @storage_class@ - (Optional, Forces New)
     --
-    , _versioning    :: TF.Attr s (Versioning s)
+    , _versioning    :: TF.Attr s (StorageBucketVersioning s)
     -- ^ @versioning@ - (Optional)
     --
-    , _website       :: TF.Attr s [TF.Attr s (Website s)]
+    , _website       :: TF.Attr s [TF.Attr s (StorageBucketWebsite s)]
     -- ^ @website@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3345,28 +3345,28 @@ instance TF.IsValid (StorageBucketResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_cors"
                   (_cors
-                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (Cors s)])
+                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketCors s)])
                   TF.validator
            P.<> TF.settingsValidator "_lifecycleRule"
                   (_lifecycleRule
-                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRule s)])
+                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)])
                   TF.validator
            P.<> TF.settingsValidator "_logging"
                   (_logging
-                      :: StorageBucketResource s -> TF.Attr s (Logging s))
+                      :: StorageBucketResource s -> TF.Attr s (StorageBucketLogging s))
                   TF.validator
            P.<> TF.settingsValidator "_versioning"
                   (_versioning
-                      :: StorageBucketResource s -> TF.Attr s (Versioning s))
+                      :: StorageBucketResource s -> TF.Attr s (StorageBucketVersioning s))
                   TF.validator
            P.<> TF.settingsValidator "_website"
                   (_website
-                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (Website s)])
+                      :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketWebsite s)])
                   TF.validator
 
-instance P.HasCors (StorageBucketResource s) (TF.Attr s [TF.Attr s (Cors s)]) where
+instance P.HasCors (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketCors s)]) where
     cors =
-        P.lens (_cors :: StorageBucketResource s -> TF.Attr s [TF.Attr s (Cors s)])
+        P.lens (_cors :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketCors s)])
                (\s a -> s { _cors = a } :: StorageBucketResource s)
 
 instance P.HasForceDestroy (StorageBucketResource s) (TF.Attr s P.Bool) where
@@ -3379,9 +3379,9 @@ instance P.HasLabels (StorageBucketResource s) (TF.Attr s (P.HashMap P.Text (TF.
         P.lens (_labels :: StorageBucketResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: StorageBucketResource s)
 
-instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRule s)]) where
+instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)]) where
     lifecycleRule =
-        P.lens (_lifecycleRule :: StorageBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRule s)])
+        P.lens (_lifecycleRule :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)])
                (\s a -> s { _lifecycleRule = a } :: StorageBucketResource s)
 
 instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
@@ -3389,9 +3389,9 @@ instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_location :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: StorageBucketResource s)
 
-instance P.HasLogging (StorageBucketResource s) (TF.Attr s (Logging s)) where
+instance P.HasLogging (StorageBucketResource s) (TF.Attr s (StorageBucketLogging s)) where
     logging =
-        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (Logging s))
+        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (StorageBucketLogging s))
                (\s a -> s { _logging = a } :: StorageBucketResource s)
 
 instance P.HasName (StorageBucketResource s) (TF.Attr s P.Text) where
@@ -3409,38 +3409,38 @@ instance P.HasStorageClass (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_storageClass :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageClass = a } :: StorageBucketResource s)
 
-instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (Versioning s)) where
+instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (StorageBucketVersioning s)) where
     versioning =
-        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (Versioning s))
+        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (StorageBucketVersioning s))
                (\s a -> s { _versioning = a } :: StorageBucketResource s)
 
-instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (Website s)]) where
+instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketWebsite s)]) where
     website =
-        P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (Website s)])
+        P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketWebsite s)])
                (\s a -> s { _website = a } :: StorageBucketResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @google_storage_bucket_acl@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_bucket_acl terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket_acl.html terraform documentation>
 -- for more information.
 data StorageBucketAclResource s = StorageBucketAclResource'
     { _bucket        :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _defaultAcl    :: TF.Attr s P.Text
     -- ^ @default_acl@ - (Optional)
     --
     , _predefinedAcl :: TF.Attr s P.Text
-    -- ^ @predefined_acl@ - (Optional)
+    -- ^ @predefined_acl@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3481,21 +3481,21 @@ instance P.HasPredefinedAcl (StorageBucketAclResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _predefinedAcl = a } :: StorageBucketAclResource s)
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRoleEntity x = TF.compute (TF.refKey x) "_computedRoleEntity"
+    computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
 
 -- | @google_storage_bucket_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_bucket_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket_iam_binding.html terraform documentation>
 -- for more information.
 data StorageBucketIamBindingResource s = StorageBucketIamBindingResource'
     { _bucket  :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _members :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3538,21 +3538,21 @@ instance P.HasRole (StorageBucketIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: StorageBucketIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_storage_bucket_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_bucket_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket_iam_member.html terraform documentation>
 -- for more information.
 data StorageBucketIamMemberResource s = StorageBucketIamMemberResource'
     { _bucket :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _member :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role   :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3595,15 +3595,15 @@ instance P.HasRole (StorageBucketIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: StorageBucketIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_storage_bucket_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_bucket_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket_iam_policy.html terraform documentation>
 -- for more information.
 data StorageBucketIamPolicyResource s = StorageBucketIamPolicyResource'
     { _bucket     :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
@@ -3641,45 +3641,45 @@ instance P.HasPolicyData (StorageBucketIamPolicyResource s) (TF.Attr s P.Text) w
                (\s a -> s { _policyData = a } :: StorageBucketIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (StorageBucketIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_storage_bucket_object@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_bucket_object terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket_object.html terraform documentation>
 -- for more information.
 data StorageBucketObjectResource s = StorageBucketObjectResource'
     { _bucket             :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _cacheControl       :: TF.Attr s P.Text
-    -- ^ @cache_control@ - (Optional)
+    -- ^ @cache_control@ - (Optional, Forces New)
     --
     , _content            :: TF.Attr s P.Text
-    -- ^ @content@ - (Optional)
+    -- ^ @content@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'source'
     , _contentDisposition :: TF.Attr s P.Text
-    -- ^ @content_disposition@ - (Optional)
+    -- ^ @content_disposition@ - (Optional, Forces New)
     --
     , _contentEncoding    :: TF.Attr s P.Text
-    -- ^ @content_encoding@ - (Optional)
+    -- ^ @content_encoding@ - (Optional, Forces New)
     --
     , _contentLanguage    :: TF.Attr s P.Text
-    -- ^ @content_language@ - (Optional)
+    -- ^ @content_language@ - (Optional, Forces New)
     --
     , _detectMd5hash      :: TF.Attr s P.Text
-    -- ^ @detect_md5hash@ - (Optional)
+    -- ^ @detect_md5hash@ - (Optional, Forces New)
     --
     , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _predefinedAcl      :: TF.Attr s P.Text
-    -- ^ @predefined_acl@ - (Optional)
+    -- ^ @predefined_acl@ - (Optional, Forces New)
     --
     , _source             :: TF.Attr s P.Text
-    -- ^ @source@ - (Optional)
+    -- ^ @source@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -3784,24 +3784,24 @@ instance P.HasSource (StorageBucketObjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _source = a } :: StorageBucketObjectResource s)
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedContentType x = TF.compute (TF.refKey x) "_computedContentType"
+    computedContentType x = TF.compute (TF.refKey x) "content_type"
 
 instance s ~ s' => P.HasComputedCrc32c (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedCrc32c x = TF.compute (TF.refKey x) "_computedCrc32c"
+    computedCrc32c x = TF.compute (TF.refKey x) "crc32c"
 
 instance s ~ s' => P.HasComputedMd5hash (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedMd5hash x = TF.compute (TF.refKey x) "_computedMd5hash"
+    computedMd5hash x = TF.compute (TF.refKey x) "md5hash"
 
 instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedStorageClass x = TF.compute (TF.refKey x) "_computedStorageClass"
+    computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
 
 -- | @google_storage_default_object_acl@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_default_object_acl terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_default_object_acl.html terraform documentation>
 -- for more information.
 data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource'
     { _bucket :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3828,30 +3828,30 @@ instance P.HasBucket (StorageDefaultObjectAclResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _bucket = a } :: StorageDefaultObjectAclResource s)
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    computedRoleEntity x = TF.compute (TF.refKey x) "_computedRoleEntity"
+    computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"
 
 -- | @google_storage_notification@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_notification terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_notification.html terraform documentation>
 -- for more information.
 data StorageNotificationResource s = StorageNotificationResource'
     { _bucket           :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @custom_attributes@ - (Optional)
+    -- ^ @custom_attributes@ - (Optional, Forces New)
     --
     , _eventTypes       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @event_types@ - (Optional)
+    -- ^ @event_types@ - (Optional, Forces New)
     --
     , _objectNamePrefix :: TF.Attr s P.Text
-    -- ^ @object_name_prefix@ - (Optional)
+    -- ^ @object_name_prefix@ - (Optional, Forces New)
     --
     , _payloadFormat    :: TF.Attr s P.Text
-    -- ^ @payload_format@ - (Required)
+    -- ^ @payload_format@ - (Required, Forces New)
     --
     , _topic            :: TF.Attr s P.Text
-    -- ^ @topic@ - (Required)
+    -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3915,21 +3915,21 @@ instance P.HasTopic (StorageNotificationResource s) (TF.Attr s P.Text) where
                (\s a -> s { _topic = a } :: StorageNotificationResource s)
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageNotificationResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_storage_object_acl@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_storage_object_acl terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/storage_object_acl.html terraform documentation>
 -- for more information.
 data StorageObjectAclResource s = StorageObjectAclResource'
     { _bucket        :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _object        :: TF.Attr s P.Text
-    -- ^ @object@ - (Required)
+    -- ^ @object@ - (Required, Forces New)
     --
     , _predefinedAcl :: TF.Attr s P.Text
-    -- ^ @predefined_acl@ - (Optional)
+    -- ^ @predefined_acl@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3971,4 +3971,4 @@ instance P.HasPredefinedAcl (StorageObjectAclResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _predefinedAcl = a } :: StorageObjectAclResource s)
 
 instance s ~ s' => P.HasComputedRoleEntity (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRoleEntity x = TF.compute (TF.refKey x) "_computedRoleEntity"
+    computedRoleEntity x = TF.compute (TF.refKey x) "role_entity"

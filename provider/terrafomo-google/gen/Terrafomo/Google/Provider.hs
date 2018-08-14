@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | The @Google@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Google/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/google/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _credentials :: P.Maybe P.Text

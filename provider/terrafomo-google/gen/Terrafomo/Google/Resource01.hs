@@ -367,11 +367,11 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @google_bigquery_dataset@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_bigquery_dataset terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/bigquery_dataset.html terraform documentation>
 -- for more information.
 data BigqueryDatasetResource s = BigqueryDatasetResource'
     { _datasetId :: TF.Attr s P.Text
-    -- ^ @dataset_id@ - (Required)
+    -- ^ @dataset_id@ - (Required, Forces New)
     --
     , _defaultTableExpirationMs :: TF.Attr s P.Integer
     -- ^ @default_table_expiration_ms@ - (Optional)
@@ -386,7 +386,7 @@ data BigqueryDatasetResource s = BigqueryDatasetResource'
     -- ^ @labels@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
+    -- ^ @location@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -448,27 +448,27 @@ instance P.HasLocation (BigqueryDatasetResource s) (TF.Attr s P.Text) where
                (\s a -> s { _location = a } :: BigqueryDatasetResource s)
 
 instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Integer) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Integer) where
-    computedLastModifiedTime x = TF.compute (TF.refKey x) "_computedLastModifiedTime"
+    computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_bigquery_table@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_bigquery_table terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/bigquery_table.html terraform documentation>
 -- for more information.
 data BigqueryTableResource s = BigqueryTableResource'
     { _datasetId        :: TF.Attr s P.Text
-    -- ^ @dataset_id@ - (Required)
+    -- ^ @dataset_id@ - (Required, Forces New)
     --
     , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
@@ -480,12 +480,12 @@ data BigqueryTableResource s = BigqueryTableResource'
     -- ^ @labels@ - (Optional)
     --
     , _tableId          :: TF.Attr s P.Text
-    -- ^ @table_id@ - (Required)
+    -- ^ @table_id@ - (Required, Forces New)
     --
-    , _timePartitioning :: TF.Attr s (TimePartitioning s)
+    , _timePartitioning :: TF.Attr s (BigqueryTableTimePartitioning s)
     -- ^ @time_partitioning@ - (Optional)
     --
-    , _view             :: TF.Attr s (View s)
+    , _view             :: TF.Attr s (BigqueryTableView s)
     -- ^ @view@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -521,11 +521,11 @@ instance TF.IsValid (BigqueryTableResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_timePartitioning"
                   (_timePartitioning
-                      :: BigqueryTableResource s -> TF.Attr s (TimePartitioning s))
+                      :: BigqueryTableResource s -> TF.Attr s (BigqueryTableTimePartitioning s))
                   TF.validator
            P.<> TF.settingsValidator "_view"
                   (_view
-                      :: BigqueryTableResource s -> TF.Attr s (View s))
+                      :: BigqueryTableResource s -> TF.Attr s (BigqueryTableView s))
                   TF.validator
 
 instance P.HasDatasetId (BigqueryTableResource s) (TF.Attr s P.Text) where
@@ -553,71 +553,71 @@ instance P.HasTableId (BigqueryTableResource s) (TF.Attr s P.Text) where
         P.lens (_tableId :: BigqueryTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _tableId = a } :: BigqueryTableResource s)
 
-instance P.HasTimePartitioning (BigqueryTableResource s) (TF.Attr s (TimePartitioning s)) where
+instance P.HasTimePartitioning (BigqueryTableResource s) (TF.Attr s (BigqueryTableTimePartitioning s)) where
     timePartitioning =
-        P.lens (_timePartitioning :: BigqueryTableResource s -> TF.Attr s (TimePartitioning s))
+        P.lens (_timePartitioning :: BigqueryTableResource s -> TF.Attr s (BigqueryTableTimePartitioning s))
                (\s a -> s { _timePartitioning = a } :: BigqueryTableResource s)
 
-instance P.HasView (BigqueryTableResource s) (TF.Attr s (View s)) where
+instance P.HasView (BigqueryTableResource s) (TF.Attr s (BigqueryTableView s)) where
     view =
-        P.lens (_view :: BigqueryTableResource s -> TF.Attr s (View s))
+        P.lens (_view :: BigqueryTableResource s -> TF.Attr s (BigqueryTableView s))
                (\s a -> s { _view = a } :: BigqueryTableResource s)
 
 instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
-    computedExpirationTime x = TF.compute (TF.refKey x) "_computedExpirationTime"
+    computedExpirationTime x = TF.compute (TF.refKey x) "expiration_time"
 
 instance s ~ s' => P.HasComputedLastModifiedTime (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
-    computedLastModifiedTime x = TF.compute (TF.refKey x) "_computedLastModifiedTime"
+    computedLastModifiedTime x = TF.compute (TF.refKey x) "last_modified_time"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedLocation x = TF.compute (TF.refKey x) "_computedLocation"
+    computedLocation x = TF.compute (TF.refKey x) "location"
 
 instance s ~ s' => P.HasComputedNumBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
-    computedNumBytes x = TF.compute (TF.refKey x) "_computedNumBytes"
+    computedNumBytes x = TF.compute (TF.refKey x) "num_bytes"
 
 instance s ~ s' => P.HasComputedNumLongTermBytes (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
-    computedNumLongTermBytes x = TF.compute (TF.refKey x) "_computedNumLongTermBytes"
+    computedNumLongTermBytes x = TF.compute (TF.refKey x) "num_long_term_bytes"
 
 instance s ~ s' => P.HasComputedNumRows (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Integer) where
-    computedNumRows x = TF.compute (TF.refKey x) "_computedNumRows"
+    computedNumRows x = TF.compute (TF.refKey x) "num_rows"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedSchema x = TF.compute (TF.refKey x) "_computedSchema"
+    computedSchema x = TF.compute (TF.refKey x) "schema"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (BigqueryTableResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @google_bigtable_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_bigtable_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/bigtable_instance.html terraform documentation>
 -- for more information.
 data BigtableInstanceResource s = BigtableInstanceResource'
     { _clusterId    :: TF.Attr s P.Text
-    -- ^ @cluster_id@ - (Required)
+    -- ^ @cluster_id@ - (Required, Forces New)
     --
     , _instanceType :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Optional)
+    -- ^ @instance_type@ - (Optional, Forces New)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _numNodes     :: TF.Attr s P.Integer
-    -- ^ @num_nodes@ - (Optional)
+    -- ^ @num_nodes@ - (Optional, Forces New)
     --
     , _storageType  :: TF.Attr s P.Text
-    -- ^ @storage_type@ - (Optional)
+    -- ^ @storage_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -673,27 +673,27 @@ instance P.HasStorageType (BigtableInstanceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _storageType = a } :: BigtableInstanceResource s)
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
+    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_bigtable_table@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_bigtable_table terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/bigtable_table.html terraform documentation>
 -- for more information.
 data BigtableTableResource s = BigtableTableResource'
     { _instanceName :: TF.Attr s P.Text
-    -- ^ @instance_name@ - (Required)
+    -- ^ @instance_name@ - (Required, Forces New)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _splitKeys    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @split_keys@ - (Optional)
+    -- ^ @split_keys@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -735,34 +735,34 @@ instance P.HasSplitKeys (BigtableTableResource s) (TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _splitKeys = a } :: BigtableTableResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (BigtableTableResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_cloudbuild_trigger@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_cloudbuild_trigger terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/cloudbuild_trigger.html terraform documentation>
 -- for more information.
 data CloudbuildTriggerResource s = CloudbuildTriggerResource'
-    { _build           :: TF.Attr s (Build s)
-    -- ^ @build@ - (Optional)
+    { _build           :: TF.Attr s (CloudbuildTriggerBuild s)
+    -- ^ @build@ - (Optional, Forces New)
     -- Contents of the build template.
     --
     -- Conflicts with:
     --
     -- * 'filename'
     , _description     :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _filename        :: TF.Attr s P.Text
-    -- ^ @filename@ - (Optional)
+    -- ^ @filename@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'build'
     , _substitutions   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @substitutions@ - (Optional)
+    -- ^ @substitutions@ - (Optional, Forces New)
     --
-    , _triggerTemplate :: TF.Attr s (TriggerTemplate s)
-    -- ^ @trigger_template@ - (Optional)
+    , _triggerTemplate :: TF.Attr s (CloudbuildTriggerTriggerTemplate s)
+    -- ^ @trigger_template@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -802,16 +802,16 @@ instance TF.IsValid (CloudbuildTriggerResource s) where
         ])
            P.<> TF.settingsValidator "_build"
                   (_build
-                      :: CloudbuildTriggerResource s -> TF.Attr s (Build s))
+                      :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerBuild s))
                   TF.validator
            P.<> TF.settingsValidator "_triggerTemplate"
                   (_triggerTemplate
-                      :: CloudbuildTriggerResource s -> TF.Attr s (TriggerTemplate s))
+                      :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerTriggerTemplate s))
                   TF.validator
 
-instance P.HasBuild (CloudbuildTriggerResource s) (TF.Attr s (Build s)) where
+instance P.HasBuild (CloudbuildTriggerResource s) (TF.Attr s (CloudbuildTriggerBuild s)) where
     build =
-        P.lens (_build :: CloudbuildTriggerResource s -> TF.Attr s (Build s))
+        P.lens (_build :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerBuild s))
                (\s a -> s { _build = a } :: CloudbuildTriggerResource s)
 
 instance P.HasDescription (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
@@ -829,17 +829,17 @@ instance P.HasSubstitutions (CloudbuildTriggerResource s) (TF.Attr s (P.HashMap 
         P.lens (_substitutions :: CloudbuildTriggerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _substitutions = a } :: CloudbuildTriggerResource s)
 
-instance P.HasTriggerTemplate (CloudbuildTriggerResource s) (TF.Attr s (TriggerTemplate s)) where
+instance P.HasTriggerTemplate (CloudbuildTriggerResource s) (TF.Attr s (CloudbuildTriggerTriggerTemplate s)) where
     triggerTemplate =
-        P.lens (_triggerTemplate :: CloudbuildTriggerResource s -> TF.Attr s (TriggerTemplate s))
+        P.lens (_triggerTemplate :: CloudbuildTriggerResource s -> TF.Attr s (CloudbuildTriggerTriggerTemplate s))
                (\s a -> s { _triggerTemplate = a } :: CloudbuildTriggerResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudbuildTriggerResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_cloudfunctions_function@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_cloudfunctions_function terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/cloudfunctions_function.html terraform documentation>
 -- for more information.
 data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     { _availableMemoryMb   :: TF.Attr s P.Integer
@@ -849,13 +849,13 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     -- ^ @description@ - (Optional)
     --
     , _entryPoint          :: TF.Attr s P.Text
-    -- ^ @entry_point@ - (Optional)
+    -- ^ @entry_point@ - (Optional, Forces New)
     --
     , _labels              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name                :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _retryOnFailure      :: TF.Attr s P.Bool
     -- ^ @retry_on_failure@ - (Optional)
@@ -873,14 +873,14 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     -- ^ @timeout@ - (Optional)
     --
     , _triggerBucket       :: TF.Attr s P.Text
-    -- ^ @trigger_bucket@ - (Optional)
+    -- ^ @trigger_bucket@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'triggerTopic'
     -- * 'triggerHttp'
     , _triggerHttp         :: TF.Attr s P.Bool
-    -- ^ @trigger_http@ - (Optional)
+    -- ^ @trigger_http@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -888,7 +888,7 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     -- * 'triggerTopic'
     -- * 'retryOnFailure'
     , _triggerTopic        :: TF.Attr s P.Text
-    -- ^ @trigger_topic@ - (Optional)
+    -- ^ @trigger_topic@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -1019,35 +1019,35 @@ instance P.HasTriggerTopic (CloudfunctionsFunctionResource s) (TF.Attr s P.Text)
                (\s a -> s { _triggerTopic = a } :: CloudfunctionsFunctionResource s)
 
 instance s ~ s' => P.HasComputedHttpsTriggerUrl (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "_computedHttpsTriggerUrl"
+    computedHttpsTriggerUrl x = TF.compute (TF.refKey x) "https_trigger_url"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudfunctionsFunctionResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_cloudiot_registry@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_cloudiot_registry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/cloudiot_registry.html terraform documentation>
 -- for more information.
 data CloudiotRegistryResource s = CloudiotRegistryResource'
-    { _credentials :: TF.Attr s [TF.Attr s (Credentials s)]
+    { _credentials :: TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)]
     -- ^ @credentials@ - (Optional)
     --
-    , _eventNotificationConfig :: TF.Attr s (P.HashMap P.Text (EventNotificationConfig s))
+    , _eventNotificationConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s))
     -- ^ @event_notification_config@ - (Optional)
     --
-    , _httpConfig :: TF.Attr s (P.HashMap P.Text (HttpConfig s))
+    , _httpConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s))
     -- ^ @http_config@ - (Optional)
     --
-    , _mqttConfig :: TF.Attr s (P.HashMap P.Text (MqttConfig s))
+    , _mqttConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s))
     -- ^ @mqtt_config@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _stateNotificationConfig :: TF.Attr s (P.HashMap P.Text (StateNotificationConfig s))
+    , _stateNotificationConfig :: TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s))
     -- ^ @state_notification_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1080,43 +1080,43 @@ instance TF.IsValid (CloudiotRegistryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_credentials"
                   (_credentials
-                      :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (Credentials s)])
+                      :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)])
                   TF.validator
            P.<> TF.settingsValidator "_eventNotificationConfig"
                   (_eventNotificationConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (EventNotificationConfig s)))
+                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s)))
                   TF.validator
            P.<> TF.settingsValidator "_httpConfig"
                   (_httpConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (HttpConfig s)))
+                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s)))
                   TF.validator
            P.<> TF.settingsValidator "_mqttConfig"
                   (_mqttConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (MqttConfig s)))
+                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s)))
                   TF.validator
            P.<> TF.settingsValidator "_stateNotificationConfig"
                   (_stateNotificationConfig
-                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (StateNotificationConfig s)))
+                      :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s)))
                   TF.validator
 
-instance P.HasCredentials (CloudiotRegistryResource s) (TF.Attr s [TF.Attr s (Credentials s)]) where
+instance P.HasCredentials (CloudiotRegistryResource s) (TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)]) where
     credentials =
-        P.lens (_credentials :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (Credentials s)])
+        P.lens (_credentials :: CloudiotRegistryResource s -> TF.Attr s [TF.Attr s (CloudiotRegistryCredentials s)])
                (\s a -> s { _credentials = a } :: CloudiotRegistryResource s)
 
-instance P.HasEventNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (EventNotificationConfig s))) where
+instance P.HasEventNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s))) where
     eventNotificationConfig =
-        P.lens (_eventNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (EventNotificationConfig s)))
+        P.lens (_eventNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryEventNotificationConfig s)))
                (\s a -> s { _eventNotificationConfig = a } :: CloudiotRegistryResource s)
 
-instance P.HasHttpConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (HttpConfig s))) where
+instance P.HasHttpConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s))) where
     httpConfig =
-        P.lens (_httpConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (HttpConfig s)))
+        P.lens (_httpConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryHttpConfig s)))
                (\s a -> s { _httpConfig = a } :: CloudiotRegistryResource s)
 
-instance P.HasMqttConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (MqttConfig s))) where
+instance P.HasMqttConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s))) where
     mqttConfig =
-        P.lens (_mqttConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (MqttConfig s)))
+        P.lens (_mqttConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryMqttConfig s)))
                (\s a -> s { _mqttConfig = a } :: CloudiotRegistryResource s)
 
 instance P.HasName (CloudiotRegistryResource s) (TF.Attr s P.Text) where
@@ -1124,33 +1124,33 @@ instance P.HasName (CloudiotRegistryResource s) (TF.Attr s P.Text) where
         P.lens (_name :: CloudiotRegistryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CloudiotRegistryResource s)
 
-instance P.HasStateNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (StateNotificationConfig s))) where
+instance P.HasStateNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s))) where
     stateNotificationConfig =
-        P.lens (_stateNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (StateNotificationConfig s)))
+        P.lens (_stateNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.HashMap P.Text (CloudiotRegistryStateNotificationConfig s)))
                (\s a -> s { _stateNotificationConfig = a } :: CloudiotRegistryResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (CloudiotRegistryResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudiotRegistryResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_compute_address@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_address terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_address.html terraform documentation>
 -- for more information.
 data ComputeAddressResource s = ComputeAddressResource'
     { _addressType :: TF.Attr s P.Text
-    -- ^ @address_type@ - (Optional)
+    -- ^ @address_type@ - (Optional, Forces New)
     --
     , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1198,45 +1198,45 @@ instance P.HasName (ComputeAddressResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeAddressResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedNetworkTier (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedNetworkTier x = TF.compute (TF.refKey x) "_computedNetworkTier"
+    computedNetworkTier x = TF.compute (TF.refKey x) "network_tier"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
-    computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
+    computedSubnetwork x = TF.compute (TF.refKey x) "subnetwork"
 
 instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
+    computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @google_compute_autoscaler@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_autoscaler terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_autoscaler.html terraform documentation>
 -- for more information.
 data ComputeAutoscalerResource s = ComputeAutoscalerResource'
-    { _autoscalingPolicy :: TF.Attr s (AutoscalingPolicy s)
+    { _autoscalingPolicy :: TF.Attr s (ComputeAutoscalerAutoscalingPolicy s)
     -- ^ @autoscaling_policy@ - (Required)
     --
     , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
@@ -1244,7 +1244,7 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeAutoscalerResource
-    :: TF.Attr s (AutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
+    :: TF.Attr s (ComputeAutoscalerAutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> TF.Resource P.Provider (ComputeAutoscalerResource s)
@@ -1269,12 +1269,12 @@ instance TF.IsValid (ComputeAutoscalerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscalingPolicy"
                   (_autoscalingPolicy
-                      :: ComputeAutoscalerResource s -> TF.Attr s (AutoscalingPolicy s))
+                      :: ComputeAutoscalerResource s -> TF.Attr s (ComputeAutoscalerAutoscalingPolicy s))
                   TF.validator
 
-instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) (TF.Attr s (AutoscalingPolicy s)) where
+instance P.HasAutoscalingPolicy (ComputeAutoscalerResource s) (TF.Attr s (ComputeAutoscalerAutoscalingPolicy s)) where
     autoscalingPolicy =
-        P.lens (_autoscalingPolicy :: ComputeAutoscalerResource s -> TF.Attr s (AutoscalingPolicy s))
+        P.lens (_autoscalingPolicy :: ComputeAutoscalerResource s -> TF.Attr s (ComputeAutoscalerAutoscalingPolicy s))
                (\s a -> s { _autoscalingPolicy = a } :: ComputeAutoscalerResource s)
 
 instance P.HasDescription (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
@@ -1293,20 +1293,20 @@ instance P.HasTarget (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _target = a } :: ComputeAutoscalerResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_backend_bucket@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_backend_bucket terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_backend_bucket.html terraform documentation>
 -- for more information.
 data ComputeBackendBucketResource s = ComputeBackendBucketResource'
     { _bucketName  :: TF.Attr s P.Text
@@ -1319,7 +1319,7 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource'
     -- ^ @enable_cdn@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1368,47 +1368,47 @@ instance P.HasName (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeBackendBucketResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_backend_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_backend_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_backend_service.html terraform documentation>
 -- for more information.
 data ComputeBackendServiceResource s = ComputeBackendServiceResource'
-    { _backend                      :: TF.Attr s [TF.Attr s (Backend s)]
+    { _backend :: TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)]
     -- ^ @backend@ - (Optional)
     --
     , _connectionDrainingTimeoutSec :: TF.Attr s P.Integer
     -- ^ @connection_draining_timeout_sec@ - (Optional)
     --
-    , _customRequestHeaders         :: TF.Attr s [TF.Attr s P.Text]
+    , _customRequestHeaders :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_request_headers@ - (Optional)
     --
-    , _description                  :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _enableCdn                    :: TF.Attr s P.Bool
+    , _enableCdn :: TF.Attr s P.Bool
     -- ^ @enable_cdn@ - (Optional)
     --
-    , _healthChecks                 :: TF.Attr s P.Text
+    , _healthChecks :: TF.Attr s P.Text
     -- ^ @health_checks@ - (Required)
     --
-    , _iap                          :: TF.Attr s (Iap s)
+    , _iap :: TF.Attr s (ComputeBackendServiceIap s)
     -- ^ @iap@ - (Optional)
     --
-    , _name                         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _region                       :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
     --
-    , _securityPolicy               :: TF.Attr s P.Text
+    , _securityPolicy :: TF.Attr s P.Text
     -- ^ @security_policy@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1450,16 +1450,16 @@ instance TF.IsValid (ComputeBackendServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_backend"
                   (_backend
-                      :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (Backend s)])
+                      :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)])
                   TF.validator
            P.<> TF.settingsValidator "_iap"
                   (_iap
-                      :: ComputeBackendServiceResource s -> TF.Attr s (Iap s))
+                      :: ComputeBackendServiceResource s -> TF.Attr s (ComputeBackendServiceIap s))
                   TF.validator
 
-instance P.HasBackend (ComputeBackendServiceResource s) (TF.Attr s [TF.Attr s (Backend s)]) where
+instance P.HasBackend (ComputeBackendServiceResource s) (TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)]) where
     backend =
-        P.lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (Backend s)])
+        P.lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)])
                (\s a -> s { _backend = a } :: ComputeBackendServiceResource s)
 
 instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Integer) where
@@ -1487,9 +1487,9 @@ instance P.HasHealthChecks (ComputeBackendServiceResource s) (TF.Attr s P.Text) 
         P.lens (_healthChecks :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _healthChecks = a } :: ComputeBackendServiceResource s)
 
-instance P.HasIap (ComputeBackendServiceResource s) (TF.Attr s (Iap s)) where
+instance P.HasIap (ComputeBackendServiceResource s) (TF.Attr s (ComputeBackendServiceIap s)) where
     iap =
-        P.lens (_iap :: ComputeBackendServiceResource s -> TF.Attr s (Iap s))
+        P.lens (_iap :: ComputeBackendServiceResource s -> TF.Attr s (ComputeBackendServiceIap s))
                (\s a -> s { _iap = a } :: ComputeBackendServiceResource s)
 
 instance P.HasName (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
@@ -1507,61 +1507,61 @@ instance P.HasSecurityPolicy (ComputeBackendServiceResource s) (TF.Attr s P.Text
         P.lens (_securityPolicy :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityPolicy = a } :: ComputeBackendServiceResource s)
 
-instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s (CdnPolicy s)) where
-    computedCdnPolicy x = TF.compute (TF.refKey x) "_computedCdnPolicy"
+instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s (ComputeBackendServiceCdnPolicy s)) where
+    computedCdnPolicy x = TF.compute (TF.refKey x) "cdn_policy"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedPortName x = TF.compute (TF.refKey x) "_computedPortName"
+    computedPortName x = TF.compute (TF.refKey x) "port_name"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProtocol x = TF.compute (TF.refKey x) "_computedProtocol"
+    computedProtocol x = TF.compute (TF.refKey x) "protocol"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSessionAffinity x = TF.compute (TF.refKey x) "_computedSessionAffinity"
+    computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
 
 instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Integer) where
-    computedTimeoutSec x = TF.compute (TF.refKey x) "_computedTimeoutSec"
+    computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
 
 -- | @google_compute_disk@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_disk terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_disk.html terraform documentation>
 -- for more information.
 data ComputeDiskResource s = ComputeDiskResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _diskEncryptionKey :: TF.Attr s (DiskEncryptionKey s)
-    -- ^ @disk_encryption_key@ - (Optional)
+    , _diskEncryptionKey :: TF.Attr s (ComputeDiskDiskEncryptionKey s)
+    -- ^ @disk_encryption_key@ - (Optional, Forces New)
     --
     , _image :: TF.Attr s P.Text
-    -- ^ @image@ - (Optional)
+    -- ^ @image@ - (Optional, Forces New)
     --
     , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _snapshot :: TF.Attr s P.Text
-    -- ^ @snapshot@ - (Optional)
+    -- ^ @snapshot@ - (Optional, Forces New)
     --
-    , _sourceImageEncryptionKey :: TF.Attr s (SourceImageEncryptionKey s)
-    -- ^ @source_image_encryption_key@ - (Optional)
+    , _sourceImageEncryptionKey :: TF.Attr s (ComputeDiskSourceImageEncryptionKey s)
+    -- ^ @source_image_encryption_key@ - (Optional, Forces New)
     --
-    , _sourceSnapshotEncryptionKey :: TF.Attr s (SourceSnapshotEncryptionKey s)
-    -- ^ @source_snapshot_encryption_key@ - (Optional)
+    , _sourceSnapshotEncryptionKey :: TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s)
+    -- ^ @source_snapshot_encryption_key@ - (Optional, Forces New)
     --
     , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1599,15 +1599,15 @@ instance TF.IsValid (ComputeDiskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_diskEncryptionKey"
                   (_diskEncryptionKey
-                      :: ComputeDiskResource s -> TF.Attr s (DiskEncryptionKey s))
+                      :: ComputeDiskResource s -> TF.Attr s (ComputeDiskDiskEncryptionKey s))
                   TF.validator
            P.<> TF.settingsValidator "_sourceImageEncryptionKey"
                   (_sourceImageEncryptionKey
-                      :: ComputeDiskResource s -> TF.Attr s (SourceImageEncryptionKey s))
+                      :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceImageEncryptionKey s))
                   TF.validator
            P.<> TF.settingsValidator "_sourceSnapshotEncryptionKey"
                   (_sourceSnapshotEncryptionKey
-                      :: ComputeDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKey s))
+                      :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s))
                   TF.validator
 
 instance P.HasDescription (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1615,9 +1615,9 @@ instance P.HasDescription (ComputeDiskResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeDiskResource s)
 
-instance P.HasDiskEncryptionKey (ComputeDiskResource s) (TF.Attr s (DiskEncryptionKey s)) where
+instance P.HasDiskEncryptionKey (ComputeDiskResource s) (TF.Attr s (ComputeDiskDiskEncryptionKey s)) where
     diskEncryptionKey =
-        P.lens (_diskEncryptionKey :: ComputeDiskResource s -> TF.Attr s (DiskEncryptionKey s))
+        P.lens (_diskEncryptionKey :: ComputeDiskResource s -> TF.Attr s (ComputeDiskDiskEncryptionKey s))
                (\s a -> s { _diskEncryptionKey = a } :: ComputeDiskResource s)
 
 instance P.HasImage (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1640,14 +1640,14 @@ instance P.HasSnapshot (ComputeDiskResource s) (TF.Attr s P.Text) where
         P.lens (_snapshot :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _snapshot = a } :: ComputeDiskResource s)
 
-instance P.HasSourceImageEncryptionKey (ComputeDiskResource s) (TF.Attr s (SourceImageEncryptionKey s)) where
+instance P.HasSourceImageEncryptionKey (ComputeDiskResource s) (TF.Attr s (ComputeDiskSourceImageEncryptionKey s)) where
     sourceImageEncryptionKey =
-        P.lens (_sourceImageEncryptionKey :: ComputeDiskResource s -> TF.Attr s (SourceImageEncryptionKey s))
+        P.lens (_sourceImageEncryptionKey :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceImageEncryptionKey s))
                (\s a -> s { _sourceImageEncryptionKey = a } :: ComputeDiskResource s)
 
-instance P.HasSourceSnapshotEncryptionKey (ComputeDiskResource s) (TF.Attr s (SourceSnapshotEncryptionKey s)) where
+instance P.HasSourceSnapshotEncryptionKey (ComputeDiskResource s) (TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s)) where
     sourceSnapshotEncryptionKey =
-        P.lens (_sourceSnapshotEncryptionKey :: ComputeDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKey s))
+        P.lens (_sourceSnapshotEncryptionKey :: ComputeDiskResource s -> TF.Attr s (ComputeDiskSourceSnapshotEncryptionKey s))
                (\s a -> s { _sourceSnapshotEncryptionKey = a } :: ComputeDiskResource s)
 
 instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
@@ -1656,51 +1656,51 @@ instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: ComputeDiskResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedLastAttachTimestamp (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedLastAttachTimestamp x = TF.compute (TF.refKey x) "_computedLastAttachTimestamp"
+    computedLastAttachTimestamp x = TF.compute (TF.refKey x) "last_attach_timestamp"
 
 instance s ~ s' => P.HasComputedLastDetachTimestamp (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedLastDetachTimestamp x = TF.compute (TF.refKey x) "_computedLastDetachTimestamp"
+    computedLastDetachTimestamp x = TF.compute (TF.refKey x) "last_detach_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedSourceImageId (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedSourceImageId x = TF.compute (TF.refKey x) "_computedSourceImageId"
+    computedSourceImageId x = TF.compute (TF.refKey x) "source_image_id"
 
 instance s ~ s' => P.HasComputedSourceSnapshotId (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedSourceSnapshotId x = TF.compute (TF.refKey x) "_computedSourceSnapshotId"
+    computedSourceSnapshotId x = TF.compute (TF.refKey x) "source_snapshot_id"
 
 instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
+    computedUsers x = TF.compute (TF.refKey x) "users"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_firewall@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_firewall terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_firewall.html terraform documentation>
 -- for more information.
 data ComputeFirewallResource s = ComputeFirewallResource'
-    { _allow                 :: TF.Attr s [TF.Attr s (Allow s)]
+    { _allow                 :: TF.Attr s [TF.Attr s (ComputeFirewallAllow s)]
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny                  :: TF.Attr s [TF.Attr s (Deny s)]
-    -- ^ @deny@ - (Optional)
+    , _deny                  :: TF.Attr s [TF.Attr s (ComputeFirewallDeny s)]
+    -- ^ @deny@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -1712,16 +1712,16 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     -- ^ @disabled@ - (Optional)
     --
     , _name                  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network               :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
+    -- ^ @network@ - (Required, Forces New)
     --
     , _priority              :: TF.Attr s P.Integer
-    -- ^ @priority@ - (Optional)
+    -- ^ @priority@ - (Optional, Forces New)
     --
     , _sourceServiceAccounts :: TF.Attr s P.Text
-    -- ^ @source_service_accounts@ - (Optional)
+    -- ^ @source_service_accounts@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -1735,7 +1735,7 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     -- * 'sourceServiceAccounts'
     -- * 'targetServiceAccounts'
     , _targetServiceAccounts :: TF.Attr s P.Text
-    -- ^ @target_service_accounts@ - (Optional)
+    -- ^ @target_service_accounts@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -1820,21 +1820,21 @@ instance TF.IsValid (ComputeFirewallResource s) where
         ])
            P.<> TF.settingsValidator "_allow"
                   (_allow
-                      :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (Allow s)])
+                      :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallAllow s)])
                   TF.validator
            P.<> TF.settingsValidator "_deny"
                   (_deny
-                      :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (Deny s)])
+                      :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallDeny s)])
                   TF.validator
 
-instance P.HasAllow (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (Allow s)]) where
+instance P.HasAllow (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (ComputeFirewallAllow s)]) where
     allow =
-        P.lens (_allow :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (Allow s)])
+        P.lens (_allow :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallAllow s)])
                (\s a -> s { _allow = a } :: ComputeFirewallResource s)
 
-instance P.HasDeny (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (Deny s)]) where
+instance P.HasDeny (ComputeFirewallResource s) (TF.Attr s [TF.Attr s (ComputeFirewallDeny s)]) where
     deny =
-        P.lens (_deny :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (Deny s)])
+        P.lens (_deny :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s (ComputeFirewallDeny s)])
                (\s a -> s { _deny = a } :: ComputeFirewallResource s)
 
 instance P.HasDescription (ComputeFirewallResource s) (TF.Attr s P.Text) where
@@ -1883,51 +1883,51 @@ instance P.HasTargetTags (ComputeFirewallResource s) (TF.Attr s [TF.Attr s P.Tex
                (\s a -> s { _targetTags = a } :: ComputeFirewallResource s)
 
 instance s ~ s' => P.HasComputedDestinationRanges (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDestinationRanges x = TF.compute (TF.refKey x) "_computedDestinationRanges"
+    computedDestinationRanges x = TF.compute (TF.refKey x) "destination_ranges"
 
 instance s ~ s' => P.HasComputedDirection (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedDirection x = TF.compute (TF.refKey x) "_computedDirection"
+    computedDirection x = TF.compute (TF.refKey x) "direction"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSourceRanges (TF.Ref s' (ComputeFirewallResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSourceRanges x = TF.compute (TF.refKey x) "_computedSourceRanges"
+    computedSourceRanges x = TF.compute (TF.refKey x) "source_ranges"
 
 -- | @google_compute_forwarding_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_forwarding_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_forwarding_rule.html terraform documentation>
 -- for more information.
 data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
     { _backendService      :: TF.Attr s P.Text
-    -- ^ @backend_service@ - (Optional)
+    -- ^ @backend_service@ - (Optional, Forces New)
     --
     , _description         :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _ipVersion           :: TF.Attr s P.Text
-    -- ^ @ip_version@ - (Optional)
+    -- ^ @ip_version@ - (Optional, Forces New)
     --
     , _labels              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _loadBalancingScheme :: TF.Attr s P.Text
-    -- ^ @load_balancing_scheme@ - (Optional)
+    -- ^ @load_balancing_scheme@ - (Optional, Forces New)
     --
     , _name                :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _portRange           :: TF.Attr s P.Text
-    -- ^ @port_range@ - (Optional)
+    -- ^ @port_range@ - (Optional, Forces New)
     --
     , _ports               :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @ports@ - (Optional)
+    -- ^ @ports@ - (Optional, Forces New)
     --
     , _serviceLabel        :: TF.Attr s P.Text
-    -- ^ @service_label@ - (Optional)
+    -- ^ @service_label@ - (Optional, Forces New)
     --
     , _target              :: TF.Attr s P.Text
     -- ^ @target@ - (Optional)
@@ -2020,54 +2020,54 @@ instance P.HasTarget (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _target = a } :: ComputeForwardingRuleResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpProtocol x = TF.compute (TF.refKey x) "_computedIpProtocol"
+    computedIpProtocol x = TF.compute (TF.refKey x) "ip_protocol"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
+    computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedNetworkTier (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedNetworkTier x = TF.compute (TF.refKey x) "_computedNetworkTier"
+    computedNetworkTier x = TF.compute (TF.refKey x) "network_tier"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "_computedServiceName"
+    computedServiceName x = TF.compute (TF.refKey x) "service_name"
 
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ComputeForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
+    computedSubnetwork x = TF.compute (TF.refKey x) "subnetwork"
 
 -- | @google_compute_global_address@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_global_address terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_global_address.html terraform documentation>
 -- for more information.
 data ComputeGlobalAddressResource s = ComputeGlobalAddressResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _ipVersion   :: TF.Attr s P.Text
-    -- ^ @ip_version@ - (Optional)
+    -- ^ @ip_version@ - (Optional, Forces New)
     --
     , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2115,42 +2115,42 @@ instance P.HasName (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeGlobalAddressResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_global_forwarding_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_global_forwarding_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_global_forwarding_rule.html terraform documentation>
 -- for more information.
 data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _ipVersion   :: TF.Attr s P.Text
-    -- ^ @ip_version@ - (Optional)
+    -- ^ @ip_version@ - (Optional, Forces New)
     --
     , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _portRange   :: TF.Attr s P.Text
-    -- ^ @port_range@ - (Optional)
+    -- ^ @port_range@ - (Optional, Forces New)
     --
     , _region      :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
+    -- ^ @region@ - (Optional, Forces New)
     --
     , _target      :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
@@ -2223,23 +2223,23 @@ instance P.HasTarget (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) 
                (\s a -> s { _target = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedIpProtocol x = TF.compute (TF.refKey x) "_computedIpProtocol"
+    computedIpProtocol x = TF.compute (TF.refKey x) "ip_protocol"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeGlobalForwardingRuleResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_health_check@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_health_check terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_health_check.html terraform documentation>
 -- for more information.
 data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     { _checkIntervalSec   :: TF.Attr s P.Integer
@@ -2251,7 +2251,7 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     , _healthyThreshold   :: TF.Attr s P.Integer
     -- ^ @healthy_threshold@ - (Optional)
     --
-    , _httpHealthCheck    :: TF.Attr s (HttpHealthCheck s)
+    , _httpHealthCheck    :: TF.Attr s (ComputeHealthCheckHttpHealthCheck s)
     -- ^ @http_health_check@ - (Optional)
     --
     -- Conflicts with:
@@ -2259,7 +2259,7 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     -- * 'tcpHealthCheck'
     -- * 'sslHealthCheck'
     -- * 'httpsHealthCheck'
-    , _httpsHealthCheck   :: TF.Attr s (HttpsHealthCheck s)
+    , _httpsHealthCheck   :: TF.Attr s (ComputeHealthCheckHttpsHealthCheck s)
     -- ^ @https_health_check@ - (Optional)
     --
     -- Conflicts with:
@@ -2268,9 +2268,9 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     -- * 'httpHealthCheck'
     -- * 'sslHealthCheck'
     , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _sslHealthCheck     :: TF.Attr s (SslHealthCheck s)
+    , _sslHealthCheck     :: TF.Attr s (ComputeHealthCheckSslHealthCheck s)
     -- ^ @ssl_health_check@ - (Optional)
     --
     -- Conflicts with:
@@ -2278,7 +2278,7 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     -- * 'tcpHealthCheck'
     -- * 'httpHealthCheck'
     -- * 'httpsHealthCheck'
-    , _tcpHealthCheck     :: TF.Attr s (TcpHealthCheck s)
+    , _tcpHealthCheck     :: TF.Attr s (ComputeHealthCheckTcpHealthCheck s)
     -- ^ @tcp_health_check@ - (Optional)
     --
     -- Conflicts with:
@@ -2351,19 +2351,19 @@ instance TF.IsValid (ComputeHealthCheckResource s) where
         ])
            P.<> TF.settingsValidator "_httpHealthCheck"
                   (_httpHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (HttpHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpHealthCheck s))
                   TF.validator
            P.<> TF.settingsValidator "_httpsHealthCheck"
                   (_httpsHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (HttpsHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpsHealthCheck s))
                   TF.validator
            P.<> TF.settingsValidator "_sslHealthCheck"
                   (_sslHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (SslHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckSslHealthCheck s))
                   TF.validator
            P.<> TF.settingsValidator "_tcpHealthCheck"
                   (_tcpHealthCheck
-                      :: ComputeHealthCheckResource s -> TF.Attr s (TcpHealthCheck s))
+                      :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckTcpHealthCheck s))
                   TF.validator
 
 instance P.HasCheckIntervalSec (ComputeHealthCheckResource s) (TF.Attr s P.Integer) where
@@ -2381,14 +2381,14 @@ instance P.HasHealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Integ
         P.lens (_healthyThreshold :: ComputeHealthCheckResource s -> TF.Attr s P.Integer)
                (\s a -> s { _healthyThreshold = a } :: ComputeHealthCheckResource s)
 
-instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (HttpHealthCheck s)) where
+instance P.HasHttpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckHttpHealthCheck s)) where
     httpHealthCheck =
-        P.lens (_httpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (HttpHealthCheck s))
+        P.lens (_httpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpHealthCheck s))
                (\s a -> s { _httpHealthCheck = a } :: ComputeHealthCheckResource s)
 
-instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (HttpsHealthCheck s)) where
+instance P.HasHttpsHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckHttpsHealthCheck s)) where
     httpsHealthCheck =
-        P.lens (_httpsHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (HttpsHealthCheck s))
+        P.lens (_httpsHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckHttpsHealthCheck s))
                (\s a -> s { _httpsHealthCheck = a } :: ComputeHealthCheckResource s)
 
 instance P.HasName (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
@@ -2396,14 +2396,14 @@ instance P.HasName (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeHealthCheckResource s)
 
-instance P.HasSslHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (SslHealthCheck s)) where
+instance P.HasSslHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckSslHealthCheck s)) where
     sslHealthCheck =
-        P.lens (_sslHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (SslHealthCheck s))
+        P.lens (_sslHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckSslHealthCheck s))
                (\s a -> s { _sslHealthCheck = a } :: ComputeHealthCheckResource s)
 
-instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (TcpHealthCheck s)) where
+instance P.HasTcpHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (ComputeHealthCheckTcpHealthCheck s)) where
     tcpHealthCheck =
-        P.lens (_tcpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (TcpHealthCheck s))
+        P.lens (_tcpHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (ComputeHealthCheckTcpHealthCheck s))
                (\s a -> s { _tcpHealthCheck = a } :: ComputeHealthCheckResource s)
 
 instance P.HasTimeoutSec (ComputeHealthCheckResource s) (TF.Attr s P.Integer) where
@@ -2417,14 +2417,14 @@ instance P.HasUnhealthyThreshold (ComputeHealthCheckResource s) (TF.Attr s P.Int
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHealthCheckResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_http_health_check@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_http_health_check terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_http_health_check.html terraform documentation>
 -- for more information.
 data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
     { _checkIntervalSec   :: TF.Attr s P.Integer
@@ -2440,7 +2440,7 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
     -- ^ @host@ - (Optional)
     --
     , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _port               :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
@@ -2535,17 +2535,17 @@ instance P.HasUnhealthyThreshold (ComputeHttpHealthCheckResource s) (TF.Attr s P
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHttpHealthCheckResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHttpHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_https_health_check@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_https_health_check terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_https_health_check.html terraform documentation>
 -- for more information.
 data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
     { _checkIntervalSec   :: TF.Attr s P.Integer
@@ -2561,7 +2561,7 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
     -- ^ @host@ - (Optional)
     --
     , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _port               :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
@@ -2656,36 +2656,36 @@ instance P.HasUnhealthyThreshold (ComputeHttpsHealthCheckResource s) (TF.Attr s 
                (\s a -> s { _unhealthyThreshold = a } :: ComputeHttpsHealthCheckResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHttpsHealthCheckResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_image@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_image.html terraform documentation>
 -- for more information.
 data ComputeImageResource s = ComputeImageResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _family'     :: TF.Attr s P.Text
-    -- ^ @family@ - (Optional)
+    -- ^ @family@ - (Optional, Forces New)
     --
     , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _rawDisk     :: TF.Attr s (RawDisk s)
-    -- ^ @raw_disk@ - (Optional)
+    , _rawDisk     :: TF.Attr s (ComputeImageRawDisk s)
+    -- ^ @raw_disk@ - (Optional, Forces New)
     --
     , _sourceDisk  :: TF.Attr s P.Text
-    -- ^ @source_disk@ - (Optional)
+    -- ^ @source_disk@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2717,7 +2717,7 @@ instance TF.IsValid (ComputeImageResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rawDisk"
                   (_rawDisk
-                      :: ComputeImageResource s -> TF.Attr s (RawDisk s))
+                      :: ComputeImageResource s -> TF.Attr s (ComputeImageRawDisk s))
                   TF.validator
 
 instance P.HasDescription (ComputeImageResource s) (TF.Attr s P.Text) where
@@ -2740,9 +2740,9 @@ instance P.HasName (ComputeImageResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeImageResource s)
 
-instance P.HasRawDisk (ComputeImageResource s) (TF.Attr s (RawDisk s)) where
+instance P.HasRawDisk (ComputeImageResource s) (TF.Attr s (ComputeImageRawDisk s)) where
     rawDisk =
-        P.lens (_rawDisk :: ComputeImageResource s -> TF.Attr s (RawDisk s))
+        P.lens (_rawDisk :: ComputeImageResource s -> TF.Attr s (ComputeImageRawDisk s))
                (\s a -> s { _rawDisk = a } :: ComputeImageResource s)
 
 instance P.HasSourceDisk (ComputeImageResource s) (TF.Attr s P.Text) where
@@ -2751,83 +2751,83 @@ instance P.HasSourceDisk (ComputeImageResource s) (TF.Attr s P.Text) where
                (\s a -> s { _sourceDisk = a } :: ComputeImageResource s)
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedLicenses (TF.Ref s' (ComputeImageResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedLicenses x = TF.compute (TF.refKey x) "_computedLicenses"
+    computedLicenses x = TF.compute (TF.refKey x) "licenses"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeImageResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_instance.html terraform documentation>
 -- for more information.
 data ComputeInstanceResource s = ComputeInstanceResource'
     { _allowStoppingForUpdate :: TF.Attr s P.Bool
     -- ^ @allow_stopping_for_update@ - (Optional)
     --
-    , _attachedDisk           :: TF.Attr s [TF.Attr s (AttachedDisk s)]
+    , _attachedDisk :: TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)]
     -- ^ @attached_disk@ - (Optional)
     --
-    , _bootDisk               :: TF.Attr s (BootDisk s)
-    -- ^ @boot_disk@ - (Required)
+    , _bootDisk :: TF.Attr s (ComputeInstanceBootDisk s)
+    -- ^ @boot_disk@ - (Required, Forces New)
     --
-    , _canIpForward           :: TF.Attr s P.Bool
-    -- ^ @can_ip_forward@ - (Optional)
+    , _canIpForward :: TF.Attr s P.Bool
+    -- ^ @can_ip_forward@ - (Optional, Forces New)
     --
-    , _deletionProtection     :: TF.Attr s P.Bool
+    , _deletionProtection :: TF.Attr s P.Bool
     -- ^ @deletion_protection@ - (Optional)
     --
-    , _description            :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _disk                   :: TF.Attr s [TF.Attr s (Disk s)]
-    -- ^ @disk@ - (Optional)
+    , _disk :: TF.Attr s [TF.Attr s (ComputeInstanceDisk s)]
+    -- ^ @disk@ - (Optional, Forces New)
     --
-    , _labels                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _machineType            :: TF.Attr s P.Text
+    , _machineType :: TF.Attr s P.Text
     -- ^ @machine_type@ - (Required)
     --
-    , _metadata               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
-    , _metadataStartupScript  :: TF.Attr s P.Text
-    -- ^ @metadata_startup_script@ - (Optional)
+    , _metadataStartupScript :: TF.Attr s P.Text
+    -- ^ @metadata_startup_script@ - (Optional, Forces New)
     --
-    , _minCpuPlatform         :: TF.Attr s P.Text
+    , _minCpuPlatform :: TF.Attr s P.Text
     -- ^ @min_cpu_platform@ - (Optional)
     --
-    , _name                   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _network                :: TF.Attr s [TF.Attr s (Network s)]
-    -- ^ @network@ - (Optional)
+    , _network :: TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)]
+    -- ^ @network@ - (Optional, Forces New)
     --
-    , _networkInterface       :: TF.Attr s [TF.Attr s (NetworkInterface s)]
-    -- ^ @network_interface@ - (Required)
+    , _networkInterface :: TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)]
+    -- ^ @network_interface@ - (Required, Forces New)
     --
-    , _scratchDisk            :: TF.Attr s [TF.Attr s (ScratchDisk s)]
-    -- ^ @scratch_disk@ - (Optional)
+    , _scratchDisk :: TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)]
+    -- ^ @scratch_disk@ - (Optional, Forces New)
     --
-    , _serviceAccount         :: TF.Attr s (ServiceAccount s)
+    , _serviceAccount :: TF.Attr s (ComputeInstanceServiceAccount s)
     -- ^ @service_account@ - (Optional)
     --
-    , _tags                   :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeInstanceResource
-    :: TF.Attr s (BootDisk s) -- ^ @boot_disk@ - 'P.bootDisk'
+    :: TF.Attr s (ComputeInstanceBootDisk s) -- ^ @boot_disk@ - 'P.bootDisk'
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (NetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
+    -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
     -> TF.Resource P.Provider (ComputeInstanceResource s)
 computeInstanceResource _bootDisk _machineType _name _networkInterface =
     TF.newResource "google_compute_instance" TF.validator $
@@ -2878,31 +2878,31 @@ instance TF.IsValid (ComputeInstanceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_attachedDisk"
                   (_attachedDisk
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (AttachedDisk s)])
+                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)])
                   TF.validator
            P.<> TF.settingsValidator "_bootDisk"
                   (_bootDisk
-                      :: ComputeInstanceResource s -> TF.Attr s (BootDisk s))
+                      :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceBootDisk s))
                   TF.validator
            P.<> TF.settingsValidator "_disk"
                   (_disk
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (Disk s)])
+                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceDisk s)])
                   TF.validator
            P.<> TF.settingsValidator "_network"
                   (_network
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (Network s)])
+                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)])
                   TF.validator
            P.<> TF.settingsValidator "_networkInterface"
                   (_networkInterface
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)])
                   TF.validator
            P.<> TF.settingsValidator "_scratchDisk"
                   (_scratchDisk
-                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ScratchDisk s)])
+                      :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)])
                   TF.validator
            P.<> TF.settingsValidator "_serviceAccount"
                   (_serviceAccount
-                      :: ComputeInstanceResource s -> TF.Attr s (ServiceAccount s))
+                      :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceServiceAccount s))
                   TF.validator
 
 instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) (TF.Attr s P.Bool) where
@@ -2910,14 +2910,14 @@ instance P.HasAllowStoppingForUpdate (ComputeInstanceResource s) (TF.Attr s P.Bo
         P.lens (_allowStoppingForUpdate :: ComputeInstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowStoppingForUpdate = a } :: ComputeInstanceResource s)
 
-instance P.HasAttachedDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (AttachedDisk s)]) where
+instance P.HasAttachedDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)]) where
     attachedDisk =
-        P.lens (_attachedDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (AttachedDisk s)])
+        P.lens (_attachedDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceAttachedDisk s)])
                (\s a -> s { _attachedDisk = a } :: ComputeInstanceResource s)
 
-instance P.HasBootDisk (ComputeInstanceResource s) (TF.Attr s (BootDisk s)) where
+instance P.HasBootDisk (ComputeInstanceResource s) (TF.Attr s (ComputeInstanceBootDisk s)) where
     bootDisk =
-        P.lens (_bootDisk :: ComputeInstanceResource s -> TF.Attr s (BootDisk s))
+        P.lens (_bootDisk :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceBootDisk s))
                (\s a -> s { _bootDisk = a } :: ComputeInstanceResource s)
 
 instance P.HasCanIpForward (ComputeInstanceResource s) (TF.Attr s P.Bool) where
@@ -2935,9 +2935,9 @@ instance P.HasDescription (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeInstanceResource s)
 
-instance P.HasDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (Disk s)]) where
+instance P.HasDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceDisk s)]) where
     disk =
-        P.lens (_disk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (Disk s)])
+        P.lens (_disk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceDisk s)])
                (\s a -> s { _disk = a } :: ComputeInstanceResource s)
 
 instance P.HasLabels (ComputeInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -2970,24 +2970,24 @@ instance P.HasName (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
-instance P.HasNetwork (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (Network s)]) where
+instance P.HasNetwork (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)]) where
     network =
-        P.lens (_network :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (Network s)])
+        P.lens (_network :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetwork s)])
                (\s a -> s { _network = a } :: ComputeInstanceResource s)
 
-instance P.HasNetworkInterface (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
+instance P.HasNetworkInterface (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+        P.lens (_networkInterface :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)])
                (\s a -> s { _networkInterface = a } :: ComputeInstanceResource s)
 
-instance P.HasScratchDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ScratchDisk s)]) where
+instance P.HasScratchDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)]) where
     scratchDisk =
-        P.lens (_scratchDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ScratchDisk s)])
+        P.lens (_scratchDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceScratchDisk s)])
                (\s a -> s { _scratchDisk = a } :: ComputeInstanceResource s)
 
-instance P.HasServiceAccount (ComputeInstanceResource s) (TF.Attr s (ServiceAccount s)) where
+instance P.HasServiceAccount (ComputeInstanceResource s) (TF.Attr s (ComputeInstanceServiceAccount s)) where
     serviceAccount =
-        P.lens (_serviceAccount :: ComputeInstanceResource s -> TF.Attr s (ServiceAccount s))
+        P.lens (_serviceAccount :: ComputeInstanceResource s -> TF.Attr s (ComputeInstanceServiceAccount s))
                (\s a -> s { _serviceAccount = a } :: ComputeInstanceResource s)
 
 instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2996,45 +2996,45 @@ instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) wh
                (\s a -> s { _tags = a } :: ComputeInstanceResource s)
 
 instance s ~ s' => P.HasComputedCpuPlatform (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedCpuPlatform x = TF.compute (TF.refKey x) "_computedCpuPlatform"
+    computedCpuPlatform x = TF.compute (TF.refKey x) "cpu_platform"
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (GuestAccelerator s)]) where
-    computedGuestAccelerator x = TF.compute (TF.refKey x) "_computedGuestAccelerator"
+instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceGuestAccelerator s)]) where
+    computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedMetadataFingerprint x = TF.compute (TF.refKey x) "_computedMetadataFingerprint"
+    computedMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s (Scheduling s)) where
-    computedScheduling x = TF.compute (TF.refKey x) "_computedScheduling"
+instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s (ComputeInstanceScheduling s)) where
+    computedScheduling x = TF.compute (TF.refKey x) "scheduling"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedTagsFingerprint (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedTagsFingerprint x = TF.compute (TF.refKey x) "_computedTagsFingerprint"
+    computedTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_instance_from_template@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_instance_from_template terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_instance_from_template.html terraform documentation>
 -- for more information.
 data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource'
     { _name                   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _sourceInstanceTemplate :: TF.Attr s P.Text
-    -- ^ @source_instance_template@ - (Required)
+    -- ^ @source_instance_template@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3069,92 +3069,92 @@ instance P.HasSourceInstanceTemplate (ComputeInstanceFromTemplateResource s) (TF
                (\s a -> s { _sourceInstanceTemplate = a } :: ComputeInstanceFromTemplateResource s)
 
 instance s ~ s' => P.HasComputedAllowStoppingForUpdate (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Bool) where
-    computedAllowStoppingForUpdate x = TF.compute (TF.refKey x) "_computedAllowStoppingForUpdate"
+    computedAllowStoppingForUpdate x = TF.compute (TF.refKey x) "allow_stopping_for_update"
 
-instance s ~ s' => P.HasComputedAttachedDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (AttachedDisk s)]) where
-    computedAttachedDisk x = TF.compute (TF.refKey x) "_computedAttachedDisk"
+instance s ~ s' => P.HasComputedAttachedDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateAttachedDisk s)]) where
+    computedAttachedDisk x = TF.compute (TF.refKey x) "attached_disk"
 
-instance s ~ s' => P.HasComputedBootDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (BootDisk s)) where
-    computedBootDisk x = TF.compute (TF.refKey x) "_computedBootDisk"
+instance s ~ s' => P.HasComputedBootDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ComputeInstanceFromTemplateBootDisk s)) where
+    computedBootDisk x = TF.compute (TF.refKey x) "boot_disk"
 
 instance s ~ s' => P.HasComputedCanIpForward (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Bool) where
-    computedCanIpForward x = TF.compute (TF.refKey x) "_computedCanIpForward"
+    computedCanIpForward x = TF.compute (TF.refKey x) "can_ip_forward"
 
 instance s ~ s' => P.HasComputedCpuPlatform (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedCpuPlatform x = TF.compute (TF.refKey x) "_computedCpuPlatform"
+    computedCpuPlatform x = TF.compute (TF.refKey x) "cpu_platform"
 
 instance s ~ s' => P.HasComputedDeletionProtection (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Bool) where
-    computedDeletionProtection x = TF.compute (TF.refKey x) "_computedDeletionProtection"
+    computedDeletionProtection x = TF.compute (TF.refKey x) "deletion_protection"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (GuestAccelerator s)]) where
-    computedGuestAccelerator x = TF.compute (TF.refKey x) "_computedGuestAccelerator"
+instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateGuestAccelerator s)]) where
+    computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
+    computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "_computedMachineType"
+    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedMetadataFingerprint x = TF.compute (TF.refKey x) "_computedMetadataFingerprint"
+    computedMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
 
 instance s ~ s' => P.HasComputedMetadataStartupScript (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedMetadataStartupScript x = TF.compute (TF.refKey x) "_computedMetadataStartupScript"
+    computedMetadataStartupScript x = TF.compute (TF.refKey x) "metadata_startup_script"
 
 instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedMinCpuPlatform x = TF.compute (TF.refKey x) "_computedMinCpuPlatform"
+    computedMinCpuPlatform x = TF.compute (TF.refKey x) "min_cpu_platform"
 
-instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
-    computedNetworkInterface x = TF.compute (TF.refKey x) "_computedNetworkInterface"
+instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateNetworkInterface s)]) where
+    computedNetworkInterface x = TF.compute (TF.refKey x) "network_interface"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (Scheduling s)) where
-    computedScheduling x = TF.compute (TF.refKey x) "_computedScheduling"
+instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ComputeInstanceFromTemplateScheduling s)) where
+    computedScheduling x = TF.compute (TF.refKey x) "scheduling"
 
-instance s ~ s' => P.HasComputedScratchDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ScratchDisk s)]) where
-    computedScratchDisk x = TF.compute (TF.refKey x) "_computedScratchDisk"
+instance s ~ s' => P.HasComputedScratchDisk (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceFromTemplateScratchDisk s)]) where
+    computedScratchDisk x = TF.compute (TF.refKey x) "scratch_disk"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ServiceAccount s)) where
-    computedServiceAccount x = TF.compute (TF.refKey x) "_computedServiceAccount"
+instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s (ComputeInstanceFromTemplateServiceAccount s)) where
+    computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTagsFingerprint (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedTagsFingerprint x = TF.compute (TF.refKey x) "_computedTagsFingerprint"
+    computedTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_instance_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_instance_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_instance_group.html terraform documentation>
 -- for more information.
 data ComputeInstanceGroupResource s = ComputeInstanceGroupResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort   :: TF.Attr s [TF.Attr s (NamedPort s)]
+    , _namedPort   :: TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)]
     -- ^ @named_port@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3181,7 +3181,7 @@ instance TF.IsValid (ComputeInstanceGroupResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_namedPort"
                   (_namedPort
-                      :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (NamedPort s)])
+                      :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)])
                   TF.validator
 
 instance P.HasDescription (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
@@ -3194,62 +3194,62 @@ instance P.HasName (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceGroupResource s)
 
-instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s (NamedPort s)]) where
+instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)]) where
     namedPort =
-        P.lens (_namedPort :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (NamedPort s)])
+        P.lens (_namedPort :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPort s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupResource s)
 
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
+    computedInstances x = TF.compute (TF.refKey x) "instances"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
+    computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_instance_group_manager@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_instance_group_manager terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_instance_group_manager.html terraform documentation>
 -- for more information.
 data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource'
-    { _autoHealingPolicies :: TF.Attr s (AutoHealingPolicies s)
+    { _autoHealingPolicies :: TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s)
     -- ^ @auto_healing_policies@ - (Optional)
     --
-    , _baseInstanceName    :: TF.Attr s P.Text
-    -- ^ @base_instance_name@ - (Required)
+    , _baseInstanceName :: TF.Attr s P.Text
+    -- ^ @base_instance_name@ - (Required, Forces New)
     --
-    , _description         :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _instanceTemplate    :: TF.Attr s P.Text
+    , _instanceTemplate :: TF.Attr s P.Text
     -- ^ @instance_template@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort           :: TF.Attr s [TF.Attr s (NamedPort s)]
+    , _namedPort :: TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)]
     -- ^ @named_port@ - (Optional)
     --
-    , _rollingUpdatePolicy :: TF.Attr s (RollingUpdatePolicy s)
+    , _rollingUpdatePolicy :: TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s)
     -- ^ @rolling_update_policy@ - (Optional)
     --
-    , _targetPools         :: TF.Attr s [TF.Attr s P.Text]
+    , _targetPools :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_pools@ - (Optional)
     --
-    , _updateStrategy      :: TF.Attr s P.Text
+    , _updateStrategy :: TF.Attr s P.Text
     -- ^ @update_strategy@ - (Optional)
     --
-    , _waitForInstances    :: TF.Attr s P.Bool
+    , _waitForInstances :: TF.Attr s P.Bool
     -- ^ @wait_for_instances@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3291,20 +3291,20 @@ instance TF.IsValid (ComputeInstanceGroupManagerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoHealingPolicies"
                   (_autoHealingPolicies
-                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPolicies s))
+                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s))
                   TF.validator
            P.<> TF.settingsValidator "_namedPort"
                   (_namedPort
-                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPort s)])
+                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)])
                   TF.validator
            P.<> TF.settingsValidator "_rollingUpdatePolicy"
                   (_rollingUpdatePolicy
-                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicy s))
+                      :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s))
                   TF.validator
 
-instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) (TF.Attr s (AutoHealingPolicies s)) where
+instance P.HasAutoHealingPolicies (ComputeInstanceGroupManagerResource s) (TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s)) where
     autoHealingPolicies =
-        P.lens (_autoHealingPolicies :: ComputeInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPolicies s))
+        P.lens (_autoHealingPolicies :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerAutoHealingPolicies s))
                (\s a -> s { _autoHealingPolicies = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasBaseInstanceName (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
@@ -3327,14 +3327,14 @@ instance P.HasName (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) wh
         P.lens (_name :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceGroupManagerResource s)
 
-instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (NamedPort s)]) where
+instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)]) where
     namedPort =
-        P.lens (_namedPort :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPort s)])
+        P.lens (_namedPort :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerNamedPort s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupManagerResource s)
 
-instance P.HasRollingUpdatePolicy (ComputeInstanceGroupManagerResource s) (TF.Attr s (RollingUpdatePolicy s)) where
+instance P.HasRollingUpdatePolicy (ComputeInstanceGroupManagerResource s) (TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s)) where
     rollingUpdatePolicy =
-        P.lens (_rollingUpdatePolicy :: ComputeInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicy s))
+        P.lens (_rollingUpdatePolicy :: ComputeInstanceGroupManagerResource s -> TF.Attr s (ComputeInstanceGroupManagerRollingUpdatePolicy s))
                (\s a -> s { _rollingUpdatePolicy = a } :: ComputeInstanceGroupManagerResource s)
 
 instance P.HasTargetPools (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3353,80 +3353,80 @@ instance P.HasWaitForInstances (ComputeInstanceGroupManagerResource s) (TF.Attr 
                (\s a -> s { _waitForInstances = a } :: ComputeInstanceGroupManagerResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedInstanceGroup (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedInstanceGroup x = TF.compute (TF.refKey x) "_computedInstanceGroup"
+    computedInstanceGroup x = TF.compute (TF.refKey x) "instance_group"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Integer) where
-    computedTargetSize x = TF.compute (TF.refKey x) "_computedTargetSize"
+    computedTargetSize x = TF.compute (TF.refKey x) "target_size"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (Version s)]) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceGroupManagerVersion s)]) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_instance_template@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_instance_template terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_instance_template.html terraform documentation>
 -- for more information.
 data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
-    { _automaticRestart      :: TF.Attr s P.Bool
-    -- ^ @automatic_restart@ - (Optional)
+    { _automaticRestart :: TF.Attr s P.Bool
+    -- ^ @automatic_restart@ - (Optional, Forces New)
     --
-    , _canIpForward          :: TF.Attr s P.Bool
-    -- ^ @can_ip_forward@ - (Optional)
+    , _canIpForward :: TF.Attr s P.Bool
+    -- ^ @can_ip_forward@ - (Optional, Forces New)
     --
-    , _description           :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _disk                  :: TF.Attr s [TF.Attr s (Disk s)]
-    -- ^ @disk@ - (Required)
+    , _disk :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)]
+    -- ^ @disk@ - (Required, Forces New)
     --
-    , _guestAccelerator      :: TF.Attr s [TF.Attr s (GuestAccelerator s)]
-    -- ^ @guest_accelerator@ - (Optional)
+    , _guestAccelerator :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)]
+    -- ^ @guest_accelerator@ - (Optional, Forces New)
     --
-    , _instanceDescription   :: TF.Attr s P.Text
-    -- ^ @instance_description@ - (Optional)
+    , _instanceDescription :: TF.Attr s P.Text
+    -- ^ @instance_description@ - (Optional, Forces New)
     --
-    , _labels                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
+    , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional, Forces New)
     --
-    , _machineType           :: TF.Attr s P.Text
-    -- ^ @machine_type@ - (Required)
+    , _machineType :: TF.Attr s P.Text
+    -- ^ @machine_type@ - (Required, Forces New)
     --
-    , _metadata              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @metadata@ - (Optional)
+    , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @metadata@ - (Optional, Forces New)
     --
     , _metadataStartupScript :: TF.Attr s P.Text
-    -- ^ @metadata_startup_script@ - (Optional)
+    -- ^ @metadata_startup_script@ - (Optional, Forces New)
     --
-    , _minCpuPlatform        :: TF.Attr s P.Text
-    -- ^ @min_cpu_platform@ - (Optional)
+    , _minCpuPlatform :: TF.Attr s P.Text
+    -- ^ @min_cpu_platform@ - (Optional, Forces New)
     --
-    , _networkInterface      :: TF.Attr s [TF.Attr s (NetworkInterface s)]
-    -- ^ @network_interface@ - (Optional)
+    , _networkInterface :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)]
+    -- ^ @network_interface@ - (Optional, Forces New)
     --
-    , _onHostMaintenance     :: TF.Attr s P.Text
-    -- ^ @on_host_maintenance@ - (Optional)
+    , _onHostMaintenance :: TF.Attr s P.Text
+    -- ^ @on_host_maintenance@ - (Optional, Forces New)
     --
-    , _serviceAccount        :: TF.Attr s (ServiceAccount s)
-    -- ^ @service_account@ - (Optional)
+    , _serviceAccount :: TF.Attr s (ComputeInstanceTemplateServiceAccount s)
+    -- ^ @service_account@ - (Optional, Forces New)
     --
-    , _tags                  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @tags@ - (Optional)
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeInstanceTemplateResource
-    :: TF.Attr s [TF.Attr s (Disk s)] -- ^ @disk@ - 'P.disk'
+    :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)] -- ^ @disk@ - 'P.disk'
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> TF.Resource P.Provider (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource _disk _machineType =
@@ -3472,19 +3472,19 @@ instance TF.IsValid (ComputeInstanceTemplateResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_disk"
                   (_disk
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (Disk s)])
+                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)])
                   TF.validator
            P.<> TF.settingsValidator "_guestAccelerator"
                   (_guestAccelerator
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (GuestAccelerator s)])
+                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)])
                   TF.validator
            P.<> TF.settingsValidator "_networkInterface"
                   (_networkInterface
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+                      :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)])
                   TF.validator
            P.<> TF.settingsValidator "_serviceAccount"
                   (_serviceAccount
-                      :: ComputeInstanceTemplateResource s -> TF.Attr s (ServiceAccount s))
+                      :: ComputeInstanceTemplateResource s -> TF.Attr s (ComputeInstanceTemplateServiceAccount s))
                   TF.validator
 
 instance P.HasAutomaticRestart (ComputeInstanceTemplateResource s) (TF.Attr s P.Bool) where
@@ -3502,14 +3502,14 @@ instance P.HasDescription (ComputeInstanceTemplateResource s) (TF.Attr s P.Text)
         P.lens (_description :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasDisk (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (Disk s)]) where
+instance P.HasDisk (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)]) where
     disk =
-        P.lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (Disk s)])
+        P.lens (_disk :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)])
                (\s a -> s { _disk = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (GuestAccelerator s)]) where
+instance P.HasGuestAccelerator (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)]) where
     guestAccelerator =
-        P.lens (_guestAccelerator :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (GuestAccelerator s)])
+        P.lens (_guestAccelerator :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateGuestAccelerator s)])
                (\s a -> s { _guestAccelerator = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasInstanceDescription (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
@@ -3542,9 +3542,9 @@ instance P.HasMinCpuPlatform (ComputeInstanceTemplateResource s) (TF.Attr s P.Te
         P.lens (_minCpuPlatform :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _minCpuPlatform = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
+instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+        P.lens (_networkInterface :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (ComputeInstanceTemplateNetworkInterface s)])
                (\s a -> s { _networkInterface = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasOnHostMaintenance (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
@@ -3552,9 +3552,9 @@ instance P.HasOnHostMaintenance (ComputeInstanceTemplateResource s) (TF.Attr s P
         P.lens (_onHostMaintenance :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _onHostMaintenance = a } :: ComputeInstanceTemplateResource s)
 
-instance P.HasServiceAccount (ComputeInstanceTemplateResource s) (TF.Attr s (ServiceAccount s)) where
+instance P.HasServiceAccount (ComputeInstanceTemplateResource s) (TF.Attr s (ComputeInstanceTemplateServiceAccount s)) where
     serviceAccount =
-        P.lens (_serviceAccount :: ComputeInstanceTemplateResource s -> TF.Attr s (ServiceAccount s))
+        P.lens (_serviceAccount :: ComputeInstanceTemplateResource s -> TF.Attr s (ComputeInstanceTemplateServiceAccount s))
                (\s a -> s { _serviceAccount = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasTags (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3563,42 +3563,42 @@ instance P.HasTags (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s P.T
                (\s a -> s { _tags = a } :: ComputeInstanceTemplateResource s)
 
 instance s ~ s' => P.HasComputedMetadataFingerprint (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedMetadataFingerprint x = TF.compute (TF.refKey x) "_computedMetadataFingerprint"
+    computedMetadataFingerprint x = TF.compute (TF.refKey x) "metadata_fingerprint"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix x = TF.compute (TF.refKey x) "_computedNamePrefix"
+    computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s [TF.Attr s (Scheduling s)]) where
-    computedScheduling x = TF.compute (TF.refKey x) "_computedScheduling"
+instance s ~ s' => P.HasComputedScheduling (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceTemplateScheduling s)]) where
+    computedScheduling x = TF.compute (TF.refKey x) "scheduling"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedTagsFingerprint (TF.Ref s' (ComputeInstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedTagsFingerprint x = TF.compute (TF.refKey x) "_computedTagsFingerprint"
+    computedTagsFingerprint x = TF.compute (TF.refKey x) "tags_fingerprint"
 
 -- | @google_compute_network@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_network terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_network.html terraform documentation>
 -- for more information.
 data ComputeNetworkResource s = ComputeNetworkResource'
     { _autoCreateSubnetworks :: TF.Attr s P.Bool
-    -- ^ @auto_create_subnetworks@ - (Optional)
+    -- ^ @auto_create_subnetworks@ - (Optional, Forces New)
     --
     , _description           :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name                  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3639,33 +3639,33 @@ instance P.HasName (ComputeNetworkResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeNetworkResource s)
 
 instance s ~ s' => P.HasComputedGatewayIpv4 (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedGatewayIpv4 x = TF.compute (TF.refKey x) "_computedGatewayIpv4"
+    computedGatewayIpv4 x = TF.compute (TF.refKey x) "gateway_ipv4"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRoutingMode (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedRoutingMode x = TF.compute (TF.refKey x) "_computedRoutingMode"
+    computedRoutingMode x = TF.compute (TF.refKey x) "routing_mode"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_network_peering@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_network_peering terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_network_peering.html terraform documentation>
 -- for more information.
 data ComputeNetworkPeeringResource s = ComputeNetworkPeeringResource'
     { _autoCreateRoutes :: TF.Attr s P.Bool
-    -- ^ @auto_create_routes@ - (Optional)
+    -- ^ @auto_create_routes@ - (Optional, Forces New)
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network          :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
+    -- ^ @network@ - (Required, Forces New)
     --
     , _peerNetwork      :: TF.Attr s P.Text
-    -- ^ @peer_network@ - (Required)
+    -- ^ @peer_network@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3715,14 +3715,14 @@ instance P.HasPeerNetwork (ComputeNetworkPeeringResource s) (TF.Attr s P.Text) w
                (\s a -> s { _peerNetwork = a } :: ComputeNetworkPeeringResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedStateDetails (TF.Ref s' (ComputeNetworkPeeringResource s)) (TF.Attr s P.Text) where
-    computedStateDetails x = TF.compute (TF.refKey x) "_computedStateDetails"
+    computedStateDetails x = TF.compute (TF.refKey x) "state_details"
 
 -- | @google_compute_project_metadata@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_project_metadata terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_project_metadata.html terraform documentation>
 -- for more information.
 data ComputeProjectMetadataResource s = ComputeProjectMetadataResource'
     { _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -3753,15 +3753,15 @@ instance P.HasMetadata (ComputeProjectMetadataResource s) (TF.Attr s (P.HashMap 
                (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_compute_project_metadata_item@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_project_metadata_item terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_project_metadata_item.html terraform documentation>
 -- for more information.
 data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource'
     { _key   :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     --
     , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
@@ -3799,29 +3799,29 @@ instance P.HasValue (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) wh
                (\s a -> s { _value = a } :: ComputeProjectMetadataItemResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataItemResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_compute_region_autoscaler@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_region_autoscaler terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_region_autoscaler.html terraform documentation>
 -- for more information.
 data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource'
-    { _autoscalingPolicy :: TF.Attr s (AutoscalingPolicy s)
+    { _autoscalingPolicy :: TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s)
     -- ^ @autoscaling_policy@ - (Required)
     --
-    , _description       :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _target            :: TF.Attr s P.Text
+    , _target :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeRegionAutoscalerResource
-    :: TF.Attr s (AutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
+    :: TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> TF.Resource P.Provider (ComputeRegionAutoscalerResource s)
@@ -3846,12 +3846,12 @@ instance TF.IsValid (ComputeRegionAutoscalerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscalingPolicy"
                   (_autoscalingPolicy
-                      :: ComputeRegionAutoscalerResource s -> TF.Attr s (AutoscalingPolicy s))
+                      :: ComputeRegionAutoscalerResource s -> TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s))
                   TF.validator
 
-instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) (TF.Attr s (AutoscalingPolicy s)) where
+instance P.HasAutoscalingPolicy (ComputeRegionAutoscalerResource s) (TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s)) where
     autoscalingPolicy =
-        P.lens (_autoscalingPolicy :: ComputeRegionAutoscalerResource s -> TF.Attr s (AutoscalingPolicy s))
+        P.lens (_autoscalingPolicy :: ComputeRegionAutoscalerResource s -> TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s))
                (\s a -> s { _autoscalingPolicy = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasDescription (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
@@ -3870,36 +3870,36 @@ instance P.HasTarget (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _target = a } :: ComputeRegionAutoscalerResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionAutoscalerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_region_backend_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_region_backend_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_region_backend_service.html terraform documentation>
 -- for more information.
 data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource'
-    { _backend                      :: TF.Attr s [TF.Attr s (Backend s)]
+    { _backend :: TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)]
     -- ^ @backend@ - (Optional)
     --
     , _connectionDrainingTimeoutSec :: TF.Attr s P.Integer
     -- ^ @connection_draining_timeout_sec@ - (Optional)
     --
-    , _description                  :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _healthChecks                 :: TF.Attr s P.Text
+    , _healthChecks :: TF.Attr s P.Text
     -- ^ @health_checks@ - (Required)
     --
-    , _name                         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3930,12 +3930,12 @@ instance TF.IsValid (ComputeRegionBackendServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_backend"
                   (_backend
-                      :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (Backend s)])
+                      :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)])
                   TF.validator
 
-instance P.HasBackend (ComputeRegionBackendServiceResource s) (TF.Attr s [TF.Attr s (Backend s)]) where
+instance P.HasBackend (ComputeRegionBackendServiceResource s) (TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)]) where
     backend =
-        P.lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (Backend s)])
+        P.lens (_backend :: ComputeRegionBackendServiceResource s -> TF.Attr s [TF.Attr s (ComputeRegionBackendServiceBackend s)])
                (\s a -> s { _backend = a } :: ComputeRegionBackendServiceResource s)
 
 instance P.HasConnectionDrainingTimeoutSec (ComputeRegionBackendServiceResource s) (TF.Attr s P.Integer) where
@@ -3959,54 +3959,54 @@ instance P.HasName (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) wh
                (\s a -> s { _name = a } :: ComputeRegionBackendServiceResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedProtocol x = TF.compute (TF.refKey x) "_computedProtocol"
+    computedProtocol x = TF.compute (TF.refKey x) "protocol"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSessionAffinity (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
-    computedSessionAffinity x = TF.compute (TF.refKey x) "_computedSessionAffinity"
+    computedSessionAffinity x = TF.compute (TF.refKey x) "session_affinity"
 
 instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Integer) where
-    computedTimeoutSec x = TF.compute (TF.refKey x) "_computedTimeoutSec"
+    computedTimeoutSec x = TF.compute (TF.refKey x) "timeout_sec"
 
 -- | @google_compute_region_disk@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_region_disk terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_region_disk.html terraform documentation>
 -- for more information.
 data ComputeRegionDiskResource s = ComputeRegionDiskResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _diskEncryptionKey :: TF.Attr s (DiskEncryptionKey s)
-    -- ^ @disk_encryption_key@ - (Optional)
+    , _diskEncryptionKey :: TF.Attr s (ComputeRegionDiskDiskEncryptionKey s)
+    -- ^ @disk_encryption_key@ - (Optional, Forces New)
     --
     , _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _replicaZones :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @replica_zones@ - (Required)
+    -- ^ @replica_zones@ - (Required, Forces New)
     --
     , _snapshot :: TF.Attr s P.Text
-    -- ^ @snapshot@ - (Optional)
+    -- ^ @snapshot@ - (Optional, Forces New)
     --
-    , _sourceSnapshotEncryptionKey :: TF.Attr s (SourceSnapshotEncryptionKey s)
-    -- ^ @source_snapshot_encryption_key@ - (Optional)
+    , _sourceSnapshotEncryptionKey :: TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s)
+    -- ^ @source_snapshot_encryption_key@ - (Optional, Forces New)
     --
     , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4043,11 +4043,11 @@ instance TF.IsValid (ComputeRegionDiskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_diskEncryptionKey"
                   (_diskEncryptionKey
-                      :: ComputeRegionDiskResource s -> TF.Attr s (DiskEncryptionKey s))
+                      :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskDiskEncryptionKey s))
                   TF.validator
            P.<> TF.settingsValidator "_sourceSnapshotEncryptionKey"
                   (_sourceSnapshotEncryptionKey
-                      :: ComputeRegionDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKey s))
+                      :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s))
                   TF.validator
 
 instance P.HasDescription (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
@@ -4055,9 +4055,9 @@ instance P.HasDescription (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeRegionDiskResource s)
 
-instance P.HasDiskEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (DiskEncryptionKey s)) where
+instance P.HasDiskEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (ComputeRegionDiskDiskEncryptionKey s)) where
     diskEncryptionKey =
-        P.lens (_diskEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (DiskEncryptionKey s))
+        P.lens (_diskEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskDiskEncryptionKey s))
                (\s a -> s { _diskEncryptionKey = a } :: ComputeRegionDiskResource s)
 
 instance P.HasLabels (ComputeRegionDiskResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -4080,9 +4080,9 @@ instance P.HasSnapshot (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
         P.lens (_snapshot :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _snapshot = a } :: ComputeRegionDiskResource s)
 
-instance P.HasSourceSnapshotEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (SourceSnapshotEncryptionKey s)) where
+instance P.HasSourceSnapshotEncryptionKey (ComputeRegionDiskResource s) (TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s)) where
     sourceSnapshotEncryptionKey =
-        P.lens (_sourceSnapshotEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (SourceSnapshotEncryptionKey s))
+        P.lens (_sourceSnapshotEncryptionKey :: ComputeRegionDiskResource s -> TF.Attr s (ComputeRegionDiskSourceSnapshotEncryptionKey s))
                (\s a -> s { _sourceSnapshotEncryptionKey = a } :: ComputeRegionDiskResource s)
 
 instance P.HasType' (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
@@ -4091,71 +4091,71 @@ instance P.HasType' (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: ComputeRegionDiskResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedLastAttachTimestamp (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedLastAttachTimestamp x = TF.compute (TF.refKey x) "_computedLastAttachTimestamp"
+    computedLastAttachTimestamp x = TF.compute (TF.refKey x) "last_attach_timestamp"
 
 instance s ~ s' => P.HasComputedLastDetachTimestamp (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedLastDetachTimestamp x = TF.compute (TF.refKey x) "_computedLastDetachTimestamp"
+    computedLastDetachTimestamp x = TF.compute (TF.refKey x) "last_detach_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedSourceSnapshotId (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s P.Text) where
-    computedSourceSnapshotId x = TF.compute (TF.refKey x) "_computedSourceSnapshotId"
+    computedSourceSnapshotId x = TF.compute (TF.refKey x) "source_snapshot_id"
 
 instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeRegionDiskResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
+    computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @google_compute_region_instance_group_manager@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_region_instance_group_manager terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_region_instance_group_manager.html terraform documentation>
 -- for more information.
 data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupManagerResource'
-    { _autoHealingPolicies :: TF.Attr s (AutoHealingPolicies s)
+    { _autoHealingPolicies :: TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s)
     -- ^ @auto_healing_policies@ - (Optional)
     --
-    , _baseInstanceName    :: TF.Attr s P.Text
-    -- ^ @base_instance_name@ - (Required)
+    , _baseInstanceName :: TF.Attr s P.Text
+    -- ^ @base_instance_name@ - (Required, Forces New)
     --
-    , _description         :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _instanceTemplate    :: TF.Attr s P.Text
+    , _instanceTemplate :: TF.Attr s P.Text
     -- ^ @instance_template@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort           :: TF.Attr s [TF.Attr s (NamedPort s)]
+    , _namedPort :: TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)]
     -- ^ @named_port@ - (Optional)
     --
-    , _region              :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Required, Forces New)
     --
-    , _rollingUpdatePolicy :: TF.Attr s (RollingUpdatePolicy s)
+    , _rollingUpdatePolicy :: TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s)
     -- ^ @rolling_update_policy@ - (Optional)
     --
-    , _targetPools         :: TF.Attr s [TF.Attr s P.Text]
+    , _targetPools :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_pools@ - (Optional)
     --
-    , _updateStrategy      :: TF.Attr s P.Text
+    , _updateStrategy :: TF.Attr s P.Text
     -- ^ @update_strategy@ - (Optional)
     --
-    , _waitForInstances    :: TF.Attr s P.Bool
+    , _waitForInstances :: TF.Attr s P.Bool
     -- ^ @wait_for_instances@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4200,20 +4200,20 @@ instance TF.IsValid (ComputeRegionInstanceGroupManagerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoHealingPolicies"
                   (_autoHealingPolicies
-                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPolicies s))
+                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s))
                   TF.validator
            P.<> TF.settingsValidator "_namedPort"
                   (_namedPort
-                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPort s)])
+                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)])
                   TF.validator
            P.<> TF.settingsValidator "_rollingUpdatePolicy"
                   (_rollingUpdatePolicy
-                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicy s))
+                      :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s))
                   TF.validator
 
-instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (AutoHealingPolicies s)) where
+instance P.HasAutoHealingPolicies (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s)) where
     autoHealingPolicies =
-        P.lens (_autoHealingPolicies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (AutoHealingPolicies s))
+        P.lens (_autoHealingPolicies :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerAutoHealingPolicies s))
                (\s a -> s { _autoHealingPolicies = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasBaseInstanceName (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
@@ -4236,9 +4236,9 @@ instance P.HasName (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Te
         P.lens (_name :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (NamedPort s)]) where
+instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)]) where
     namedPort =
-        P.lens (_namedPort :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPort s)])
+        P.lens (_namedPort :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerNamedPort s)])
                (\s a -> s { _namedPort = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
@@ -4246,9 +4246,9 @@ instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.
         P.lens (_region :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ComputeRegionInstanceGroupManagerResource s)
 
-instance P.HasRollingUpdatePolicy (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (RollingUpdatePolicy s)) where
+instance P.HasRollingUpdatePolicy (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s)) where
     rollingUpdatePolicy =
-        P.lens (_rollingUpdatePolicy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicy s))
+        P.lens (_rollingUpdatePolicy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s (ComputeRegionInstanceGroupManagerRollingUpdatePolicy s))
                (\s a -> s { _rollingUpdatePolicy = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasTargetPools (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -4267,63 +4267,63 @@ instance P.HasWaitForInstances (ComputeRegionInstanceGroupManagerResource s) (TF
                (\s a -> s { _waitForInstances = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance s ~ s' => P.HasComputedDistributionPolicyZones (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDistributionPolicyZones x = TF.compute (TF.refKey x) "_computedDistributionPolicyZones"
+    computedDistributionPolicyZones x = TF.compute (TF.refKey x) "distribution_policy_zones"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedInstanceGroup (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedInstanceGroup x = TF.compute (TF.refKey x) "_computedInstanceGroup"
+    computedInstanceGroup x = TF.compute (TF.refKey x) "instance_group"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedTargetSize (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s P.Integer) where
-    computedTargetSize x = TF.compute (TF.refKey x) "_computedTargetSize"
+    computedTargetSize x = TF.compute (TF.refKey x) "target_size"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (Version s)]) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ComputeRegionInstanceGroupManagerResource s)) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupManagerVersion s)]) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @google_compute_route@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_route terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_route.html terraform documentation>
 -- for more information.
 data ComputeRouteResource s = ComputeRouteResource'
     { _description         :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _destRange           :: TF.Attr s P.Text
-    -- ^ @dest_range@ - (Required)
+    -- ^ @dest_range@ - (Required, Forces New)
     --
     , _name                :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network             :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
+    -- ^ @network@ - (Required, Forces New)
     --
     , _nextHopGateway      :: TF.Attr s P.Text
-    -- ^ @next_hop_gateway@ - (Optional)
+    -- ^ @next_hop_gateway@ - (Optional, Forces New)
     --
     , _nextHopInstance     :: TF.Attr s P.Text
-    -- ^ @next_hop_instance@ - (Optional)
+    -- ^ @next_hop_instance@ - (Optional, Forces New)
     --
     , _nextHopInstanceZone :: TF.Attr s P.Text
-    -- ^ @next_hop_instance_zone@ - (Optional)
+    -- ^ @next_hop_instance_zone@ - (Optional, Forces New)
     --
     , _nextHopIp           :: TF.Attr s P.Text
-    -- ^ @next_hop_ip@ - (Optional)
+    -- ^ @next_hop_ip@ - (Optional, Forces New)
     --
     , _nextHopVpnTunnel    :: TF.Attr s P.Text
-    -- ^ @next_hop_vpn_tunnel@ - (Optional)
+    -- ^ @next_hop_vpn_tunnel@ - (Optional, Forces New)
     --
     , _priority            :: TF.Attr s P.Integer
-    -- ^ @priority@ - (Optional)
+    -- ^ @priority@ - (Optional, Forces New)
     --
     , _tags                :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @tags@ - (Optional)
+    -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4422,30 +4422,30 @@ instance P.HasTags (ComputeRouteResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _tags = a } :: ComputeRouteResource s)
 
 instance s ~ s' => P.HasComputedNextHopNetwork (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedNextHopNetwork x = TF.compute (TF.refKey x) "_computedNextHopNetwork"
+    computedNextHopNetwork x = TF.compute (TF.refKey x) "next_hop_network"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRouteResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_router@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_router terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_router.html terraform documentation>
 -- for more information.
 data ComputeRouterResource s = ComputeRouterResource'
-    { _bgp         :: TF.Attr s (Bgp s)
+    { _bgp         :: TF.Attr s (ComputeRouterBgp s)
     -- ^ @bgp@ - (Optional)
     --
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network     :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
+    -- ^ @network@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4474,12 +4474,12 @@ instance TF.IsValid (ComputeRouterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bgp"
                   (_bgp
-                      :: ComputeRouterResource s -> TF.Attr s (Bgp s))
+                      :: ComputeRouterResource s -> TF.Attr s (ComputeRouterBgp s))
                   TF.validator
 
-instance P.HasBgp (ComputeRouterResource s) (TF.Attr s (Bgp s)) where
+instance P.HasBgp (ComputeRouterResource s) (TF.Attr s (ComputeRouterBgp s)) where
     bgp =
-        P.lens (_bgp :: ComputeRouterResource s -> TF.Attr s (Bgp s))
+        P.lens (_bgp :: ComputeRouterResource s -> TF.Attr s (ComputeRouterBgp s))
                (\s a -> s { _bgp = a } :: ComputeRouterResource s)
 
 instance P.HasDescription (ComputeRouterResource s) (TF.Attr s P.Text) where
@@ -4498,33 +4498,33 @@ instance P.HasNetwork (ComputeRouterResource s) (TF.Attr s P.Text) where
                (\s a -> s { _network = a } :: ComputeRouterResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_router_interface@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_router_interface terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_router_interface.html terraform documentation>
 -- for more information.
 data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource'
     { _ipRange   :: TF.Attr s P.Text
-    -- ^ @ip_range@ - (Optional)
+    -- ^ @ip_range@ - (Optional, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _router    :: TF.Attr s P.Text
-    -- ^ @router@ - (Required)
+    -- ^ @router@ - (Required, Forces New)
     --
     , _vpnTunnel :: TF.Attr s P.Text
-    -- ^ @vpn_tunnel@ - (Required)
+    -- ^ @vpn_tunnel@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4574,33 +4574,33 @@ instance P.HasVpnTunnel (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) wh
                (\s a -> s { _vpnTunnel = a } :: ComputeRouterInterfaceResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_compute_router_peer@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_router_peer terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_router_peer.html terraform documentation>
 -- for more information.
 data ComputeRouterPeerResource s = ComputeRouterPeerResource'
     { _advertisedRoutePriority :: TF.Attr s P.Integer
-    -- ^ @advertised_route_priority@ - (Optional)
+    -- ^ @advertised_route_priority@ - (Optional, Forces New)
     --
     , _interface               :: TF.Attr s P.Text
-    -- ^ @interface@ - (Required)
+    -- ^ @interface@ - (Required, Forces New)
     --
     , _name                    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _peerAsn                 :: TF.Attr s P.Integer
-    -- ^ @peer_asn@ - (Required)
+    -- ^ @peer_asn@ - (Required, Forces New)
     --
     , _peerIpAddress           :: TF.Attr s P.Text
-    -- ^ @peer_ip_address@ - (Optional)
+    -- ^ @peer_ip_address@ - (Optional, Forces New)
     --
     , _router                  :: TF.Attr s P.Text
-    -- ^ @router@ - (Required)
+    -- ^ @router@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4665,24 +4665,24 @@ instance P.HasRouter (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _router = a } :: ComputeRouterPeerResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeRouterPeerResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeRouterPeerResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeRouterPeerResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_compute_security_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_security_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_security_policy.html terraform documentation>
 -- for more information.
 data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4716,24 +4716,24 @@ instance P.HasName (ComputeSecurityPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeSecurityPolicyResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s [TF.Attr s (Rule s)]) where
-    computedRule x = TF.compute (TF.refKey x) "_computedRule"
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s [TF.Attr s (ComputeSecurityPolicyRule s)]) where
+    computedRule x = TF.compute (TF.refKey x) "rule"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_shared_vpc_host_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_shared_vpc_host_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_shared_vpc_host_project.html terraform documentation>
 -- for more information.
 data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource'
     { _project :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    -- ^ @project@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4761,14 +4761,14 @@ instance P.HasProject (ComputeSharedVpcHostProjectResource s) (TF.Attr s P.Text)
 
 -- | @google_compute_shared_vpc_service_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_shared_vpc_service_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_shared_vpc_service_project.html terraform documentation>
 -- for more information.
 data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectResource'
     { _hostProject    :: TF.Attr s P.Text
-    -- ^ @host_project@ - (Required)
+    -- ^ @host_project@ - (Required, Forces New)
     --
     , _serviceProject :: TF.Attr s P.Text
-    -- ^ @service_project@ - (Required)
+    -- ^ @service_project@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4804,23 +4804,23 @@ instance P.HasServiceProject (ComputeSharedVpcServiceProjectResource s) (TF.Attr
 
 -- | @google_compute_snapshot@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_snapshot terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_snapshot.html terraform documentation>
 -- for more information.
 data ComputeSnapshotResource s = ComputeSnapshotResource'
     { _labels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _snapshotEncryptionKeyRaw :: TF.Attr s P.Text
-    -- ^ @snapshot_encryption_key_raw@ - (Optional)
+    -- ^ @snapshot_encryption_key_raw@ - (Optional, Forces New)
     --
     , _sourceDisk :: TF.Attr s P.Text
-    -- ^ @source_disk@ - (Required)
+    -- ^ @source_disk@ - (Required, Forces New)
     --
     , _sourceDiskEncryptionKeyRaw :: TF.Attr s P.Text
-    -- ^ @source_disk_encryption_key_raw@ - (Optional)
+    -- ^ @source_disk_encryption_key_raw@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4876,39 +4876,39 @@ instance P.HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) (TF.Attr s 
                (\s a -> s { _sourceDiskEncryptionKeyRaw = a } :: ComputeSnapshotResource s)
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSnapshotEncryptionKeySha256 (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSnapshotEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedSnapshotEncryptionKeySha256"
+    computedSnapshotEncryptionKeySha256 x = TF.compute (TF.refKey x) "snapshot_encryption_key_sha256"
 
 instance s ~ s' => P.HasComputedSourceDiskEncryptionKeySha256 (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedSourceDiskEncryptionKeySha256"
+    computedSourceDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "source_disk_encryption_key_sha256"
 
 instance s ~ s' => P.HasComputedSourceDiskLink (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedSourceDiskLink x = TF.compute (TF.refKey x) "_computedSourceDiskLink"
+    computedSourceDiskLink x = TF.compute (TF.refKey x) "source_disk_link"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_compute_ssl_certificate@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_ssl_certificate terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_ssl_certificate.html terraform documentation>
 -- for more information.
 data ComputeSslCertificateResource s = ComputeSslCertificateResource'
     { _certificate :: TF.Attr s P.Text
-    -- ^ @certificate@ - (Required)
+    -- ^ @certificate@ - (Required, Forces New)
     --
     , _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _privateKey  :: TF.Attr s P.Text
-    -- ^ @private_key@ - (Required)
+    -- ^ @private_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4950,36 +4950,36 @@ instance P.HasPrivateKey (ComputeSslCertificateResource s) (TF.Attr s P.Text) wh
                (\s a -> s { _privateKey = a } :: ComputeSslCertificateResource s)
 
 instance s ~ s' => P.HasComputedCertificateId (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedCertificateId x = TF.compute (TF.refKey x) "_computedCertificateId"
+    computedCertificateId x = TF.compute (TF.refKey x) "certificate_id"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix x = TF.compute (TF.refKey x) "_computedNamePrefix"
+    computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_ssl_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_ssl_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_ssl_policy.html terraform documentation>
 -- for more information.
 data ComputeSslPolicyResource s = ComputeSslPolicyResource'
     { _customFeatures :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_features@ - (Optional)
     --
     , _description    :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _minTlsVersion  :: TF.Attr s P.Text
     -- ^ @min_tls_version@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _profile        :: TF.Attr s P.Text
     -- ^ @profile@ - (Optional)
@@ -5037,27 +5037,27 @@ instance P.HasProfile (ComputeSslPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _profile = a } :: ComputeSslPolicyResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedEnabledFeatures (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedEnabledFeatures x = TF.compute (TF.refKey x) "_computedEnabledFeatures"
+    computedEnabledFeatures x = TF.compute (TF.refKey x) "enabled_features"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_subnetwork@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_subnetwork terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html terraform documentation>
 -- for more information.
 data ComputeSubnetworkResource s = ComputeSubnetworkResource'
     { _description           :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _enableFlowLogs        :: TF.Attr s P.Bool
     -- ^ @enable_flow_logs@ - (Optional)
@@ -5066,10 +5066,10 @@ data ComputeSubnetworkResource s = ComputeSubnetworkResource'
     -- ^ @ip_cidr_range@ - (Required)
     --
     , _name                  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network               :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
+    -- ^ @network@ - (Required, Forces New)
     --
     , _privateIpGoogleAccess :: TF.Attr s P.Bool
     -- ^ @private_ip_google_access@ - (Optional)
@@ -5136,39 +5136,39 @@ instance P.HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) (TF.Attr s P.B
                (\s a -> s { _privateIpGoogleAccess = a } :: ComputeSubnetworkResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedGatewayAddress (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedGatewayAddress x = TF.compute (TF.refKey x) "_computedGatewayAddress"
+    computedGatewayAddress x = TF.compute (TF.refKey x) "gateway_address"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s [TF.Attr s (SecondaryIpRange s)]) where
-    computedSecondaryIpRange x = TF.compute (TF.refKey x) "_computedSecondaryIpRange"
+instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s [TF.Attr s (ComputeSubnetworkSecondaryIpRange s)]) where
+    computedSecondaryIpRange x = TF.compute (TF.refKey x) "secondary_ip_range"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_subnetwork_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_subnetwork_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_subnetwork_iam_binding.html terraform documentation>
 -- for more information.
 data ComputeSubnetworkIamBindingResource s = ComputeSubnetworkIamBindingResource'
     { _members    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role       :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _subnetwork :: TF.Attr s P.Text
-    -- ^ @subnetwork@ - (Required)
+    -- ^ @subnetwork@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5211,27 +5211,27 @@ instance P.HasSubnetwork (ComputeSubnetworkIamBindingResource s) (TF.Attr s P.Te
                (\s a -> s { _subnetwork = a } :: ComputeSubnetworkIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ComputeSubnetworkIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkIamBindingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkIamBindingResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_compute_subnetwork_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_subnetwork_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_subnetwork_iam_member.html terraform documentation>
 -- for more information.
 data ComputeSubnetworkIamMemberResource s = ComputeSubnetworkIamMemberResource'
     { _member     :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role       :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _subnetwork :: TF.Attr s P.Text
-    -- ^ @subnetwork@ - (Required)
+    -- ^ @subnetwork@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5274,24 +5274,24 @@ instance P.HasSubnetwork (ComputeSubnetworkIamMemberResource s) (TF.Attr s P.Tex
                (\s a -> s { _subnetwork = a } :: ComputeSubnetworkIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ComputeSubnetworkIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkIamMemberResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkIamMemberResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_compute_subnetwork_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_subnetwork_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_subnetwork_iam_policy.html terraform documentation>
 -- for more information.
 data ComputeSubnetworkIamPolicyResource s = ComputeSubnetworkIamPolicyResource'
     { _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
     , _subnetwork :: TF.Attr s P.Text
-    -- ^ @subnetwork@ - (Required)
+    -- ^ @subnetwork@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5326,24 +5326,24 @@ instance P.HasSubnetwork (ComputeSubnetworkIamPolicyResource s) (TF.Attr s P.Tex
                (\s a -> s { _subnetwork = a } :: ComputeSubnetworkIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ComputeSubnetworkIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @google_compute_target_http_proxy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_target_http_proxy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_target_http_proxy.html terraform documentation>
 -- for more information.
 data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _urlMap      :: TF.Attr s P.Text
     -- ^ @url_map@ - (Required)
@@ -5388,27 +5388,27 @@ instance P.HasUrlMap (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _urlMap = a } :: ComputeTargetHttpProxyResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Integer) where
-    computedProxyId x = TF.compute (TF.refKey x) "_computedProxyId"
+    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetHttpProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_target_https_proxy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_target_https_proxy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_target_https_proxy.html terraform documentation>
 -- for more information.
 data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource'
     { _description     :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _quicOverride    :: TF.Attr s P.Text
     -- ^ @quic_override@ - (Optional)
@@ -5484,39 +5484,39 @@ instance P.HasUrlMap (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _urlMap = a } :: ComputeTargetHttpsProxyResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Integer) where
-    computedProxyId x = TF.compute (TF.refKey x) "_computedProxyId"
+    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetHttpsProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_target_pool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_target_pool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_target_pool.html terraform documentation>
 -- for more information.
 data ComputeTargetPoolResource s = ComputeTargetPoolResource'
     { _backupPool      :: TF.Attr s P.Text
     -- ^ @backup_pool@ - (Optional)
     --
     , _description     :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _failoverRatio   :: TF.Attr s P.Double
-    -- ^ @failover_ratio@ - (Optional)
+    -- ^ @failover_ratio@ - (Optional, Forces New)
     --
     , _healthChecks    :: TF.Attr s P.Text
     -- ^ @health_checks@ - (Optional)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _sessionAffinity :: TF.Attr s P.Text
-    -- ^ @session_affinity@ - (Optional)
+    -- ^ @session_affinity@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5578,30 +5578,30 @@ instance P.HasSessionAffinity (ComputeTargetPoolResource s) (TF.Attr s P.Text) w
                (\s a -> s { _sessionAffinity = a } :: ComputeTargetPoolResource s)
 
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
+    computedInstances x = TF.compute (TF.refKey x) "instances"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetPoolResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_target_ssl_proxy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_target_ssl_proxy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_target_ssl_proxy.html terraform documentation>
 -- for more information.
 data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource'
     { _backendService  :: TF.Attr s P.Text
     -- ^ @backend_service@ - (Required)
     --
     , _description     :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _proxyHeader     :: TF.Attr s P.Text
     -- ^ @proxy_header@ - (Optional)
@@ -5674,30 +5674,30 @@ instance P.HasSslPolicy (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) whe
                (\s a -> s { _sslPolicy = a } :: ComputeTargetSslProxyResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Integer) where
-    computedProxyId x = TF.compute (TF.refKey x) "_computedProxyId"
+    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetSslProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_target_tcp_proxy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_target_tcp_proxy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_target_tcp_proxy.html terraform documentation>
 -- for more information.
 data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
     { _backendService :: TF.Attr s P.Text
     -- ^ @backend_service@ - (Required)
     --
     , _description    :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _proxyHeader    :: TF.Attr s P.Text
     -- ^ @proxy_header@ - (Optional)
@@ -5749,20 +5749,20 @@ instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) w
                (\s a -> s { _proxyHeader = a } :: ComputeTargetTcpProxyResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedProxyId (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Integer) where
-    computedProxyId x = TF.compute (TF.refKey x) "_computedProxyId"
+    computedProxyId x = TF.compute (TF.refKey x) "proxy_id"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeTargetTcpProxyResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_url_map@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_url_map terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_url_map.html terraform documentation>
 -- for more information.
 data ComputeUrlMapResource s = ComputeUrlMapResource'
     { _defaultService :: TF.Attr s P.Text
@@ -5771,16 +5771,16 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
     , _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _hostRule       :: TF.Attr s [TF.Attr s (HostRule s)]
+    , _hostRule       :: TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)]
     -- ^ @host_rule@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _pathMatcher    :: TF.Attr s [TF.Attr s (PathMatcher s)]
+    , _pathMatcher    :: TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)]
     -- ^ @path_matcher@ - (Optional)
     --
-    , _test           :: TF.Attr s [TF.Attr s (Test s)]
+    , _test           :: TF.Attr s [TF.Attr s (ComputeUrlMapTest s)]
     -- ^ @test@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5814,15 +5814,15 @@ instance TF.IsValid (ComputeUrlMapResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_hostRule"
                   (_hostRule
-                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (HostRule s)])
+                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)])
                   TF.validator
            P.<> TF.settingsValidator "_pathMatcher"
                   (_pathMatcher
-                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (PathMatcher s)])
+                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)])
                   TF.validator
            P.<> TF.settingsValidator "_test"
                   (_test
-                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (Test s)])
+                      :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapTest s)])
                   TF.validator
 
 instance P.HasDefaultService (ComputeUrlMapResource s) (TF.Attr s P.Text) where
@@ -5835,9 +5835,9 @@ instance P.HasDescription (ComputeUrlMapResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeUrlMapResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeUrlMapResource s)
 
-instance P.HasHostRule (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (HostRule s)]) where
+instance P.HasHostRule (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)]) where
     hostRule =
-        P.lens (_hostRule :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (HostRule s)])
+        P.lens (_hostRule :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapHostRule s)])
                (\s a -> s { _hostRule = a } :: ComputeUrlMapResource s)
 
 instance P.HasName (ComputeUrlMapResource s) (TF.Attr s P.Text) where
@@ -5845,41 +5845,41 @@ instance P.HasName (ComputeUrlMapResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeUrlMapResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeUrlMapResource s)
 
-instance P.HasPathMatcher (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (PathMatcher s)]) where
+instance P.HasPathMatcher (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)]) where
     pathMatcher =
-        P.lens (_pathMatcher :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (PathMatcher s)])
+        P.lens (_pathMatcher :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapPathMatcher s)])
                (\s a -> s { _pathMatcher = a } :: ComputeUrlMapResource s)
 
-instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (Test s)]) where
+instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (ComputeUrlMapTest s)]) where
     test =
-        P.lens (_test :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (Test s)])
+        P.lens (_test :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (ComputeUrlMapTest s)])
                (\s a -> s { _test = a } :: ComputeUrlMapResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedMapId (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedMapId x = TF.compute (TF.refKey x) "_computedMapId"
+    computedMapId x = TF.compute (TF.refKey x) "map_id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeUrlMapResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_vpn_gateway@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_vpn_gateway terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_vpn_gateway.html terraform documentation>
 -- for more information.
 data ComputeVpnGatewayResource s = ComputeVpnGatewayResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network     :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
+    -- ^ @network@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5921,45 +5921,45 @@ instance P.HasNetwork (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
                (\s a -> s { _network = a } :: ComputeVpnGatewayResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 -- | @google_compute_vpn_tunnel@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_compute_vpn_tunnel terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/compute_vpn_tunnel.html terraform documentation>
 -- for more information.
 data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
     { _description      :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _ikeVersion       :: TF.Attr s P.Integer
-    -- ^ @ike_version@ - (Optional)
+    -- ^ @ike_version@ - (Optional, Forces New)
     --
     , _labels           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _peerIp           :: TF.Attr s P.Text
-    -- ^ @peer_ip@ - (Required)
+    -- ^ @peer_ip@ - (Required, Forces New)
     --
     , _router           :: TF.Attr s P.Text
-    -- ^ @router@ - (Optional)
+    -- ^ @router@ - (Optional, Forces New)
     --
     , _sharedSecret     :: TF.Attr s P.Text
-    -- ^ @shared_secret@ - (Required)
+    -- ^ @shared_secret@ - (Required, Forces New)
     --
     , _targetVpnGateway :: TF.Attr s P.Text
-    -- ^ @target_vpn_gateway@ - (Required)
+    -- ^ @target_vpn_gateway@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6038,75 +6038,75 @@ instance P.HasTargetVpnGateway (ComputeVpnTunnelResource s) (TF.Attr s P.Text) w
                (\s a -> s { _targetVpnGateway = a } :: ComputeVpnTunnelResource s)
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
+    computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
 
 instance s ~ s' => P.HasComputedDetailedStatus (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedDetailedStatus x = TF.compute (TF.refKey x) "_computedDetailedStatus"
+    computedDetailedStatus x = TF.compute (TF.refKey x) "detailed_status"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
+    computedLabelFingerprint x = TF.compute (TF.refKey x) "label_fingerprint"
 
 instance s ~ s' => P.HasComputedLocalTrafficSelector (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedLocalTrafficSelector x = TF.compute (TF.refKey x) "_computedLocalTrafficSelector"
+    computedLocalTrafficSelector x = TF.compute (TF.refKey x) "local_traffic_selector"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedRemoteTrafficSelector (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRemoteTrafficSelector x = TF.compute (TF.refKey x) "_computedRemoteTrafficSelector"
+    computedRemoteTrafficSelector x = TF.compute (TF.refKey x) "remote_traffic_selector"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "_computedSelfLink"
+    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
 instance s ~ s' => P.HasComputedSharedSecretHash (TF.Ref s' (ComputeVpnTunnelResource s)) (TF.Attr s P.Text) where
-    computedSharedSecretHash x = TF.compute (TF.refKey x) "_computedSharedSecretHash"
+    computedSharedSecretHash x = TF.compute (TF.refKey x) "shared_secret_hash"
 
 -- | @google_container_cluster@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_container_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/container_cluster.html terraform documentation>
 -- for more information.
 data ContainerClusterResource s = ContainerClusterResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _enableKubernetesAlpha :: TF.Attr s P.Bool
-    -- ^ @enable_kubernetes_alpha@ - (Optional)
+    -- ^ @enable_kubernetes_alpha@ - (Optional, Forces New)
     --
     , _enableLegacyAbac :: TF.Attr s P.Bool
     -- ^ @enable_legacy_abac@ - (Optional)
     --
     , _initialNodeCount :: TF.Attr s P.Integer
-    -- ^ @initial_node_count@ - (Optional)
+    -- ^ @initial_node_count@ - (Optional, Forces New)
     --
-    , _ipAllocationPolicy :: TF.Attr s (IpAllocationPolicy s)
-    -- ^ @ip_allocation_policy@ - (Optional)
+    , _ipAllocationPolicy :: TF.Attr s (ContainerClusterIpAllocationPolicy s)
+    -- ^ @ip_allocation_policy@ - (Optional, Forces New)
     --
-    , _maintenancePolicy :: TF.Attr s (MaintenancePolicy s)
+    , _maintenancePolicy :: TF.Attr s (ContainerClusterMaintenancePolicy s)
     -- ^ @maintenance_policy@ - (Optional)
     --
-    , _masterAuthorizedNetworksConfig :: TF.Attr s (MasterAuthorizedNetworksConfig s)
+    , _masterAuthorizedNetworksConfig :: TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)
     -- ^ @master_authorized_networks_config@ - (Optional)
     --
     , _masterIpv4CidrBlock :: TF.Attr s P.Text
-    -- ^ @master_ipv4_cidr_block@ - (Optional)
+    -- ^ @master_ipv4_cidr_block@ - (Optional, Forces New)
     --
     , _minMasterVersion :: TF.Attr s P.Text
     -- ^ @min_master_version@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _network :: TF.Attr s P.Text
-    -- ^ @network@ - (Optional)
+    -- ^ @network@ - (Optional, Forces New)
     --
-    , _podSecurityPolicyConfig :: TF.Attr s (PodSecurityPolicyConfig s)
+    , _podSecurityPolicyConfig :: TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)
     -- ^ @pod_security_policy_config@ - (Optional)
     --
     , _privateCluster :: TF.Attr s P.Bool
-    -- ^ @private_cluster@ - (Optional)
+    -- ^ @private_cluster@ - (Optional, Forces New)
     --
     , _removeDefaultNodePool :: TF.Attr s P.Bool
     -- ^ @remove_default_node_pool@ - (Optional)
@@ -6162,19 +6162,19 @@ instance TF.IsValid (ContainerClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_ipAllocationPolicy"
                   (_ipAllocationPolicy
-                      :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicy s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterIpAllocationPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_maintenancePolicy"
                   (_maintenancePolicy
-                      :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicy s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMaintenancePolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_masterAuthorizedNetworksConfig"
                   (_masterAuthorizedNetworksConfig
-                      :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfig s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_podSecurityPolicyConfig"
                   (_podSecurityPolicyConfig
-                      :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfig s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterPodSecurityPolicyConfig s))
                   TF.validator
 
 instance P.HasDescription (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -6197,19 +6197,19 @@ instance P.HasInitialNodeCount (ContainerClusterResource s) (TF.Attr s P.Integer
         P.lens (_initialNodeCount :: ContainerClusterResource s -> TF.Attr s P.Integer)
                (\s a -> s { _initialNodeCount = a } :: ContainerClusterResource s)
 
-instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (IpAllocationPolicy s)) where
+instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterIpAllocationPolicy s)) where
     ipAllocationPolicy =
-        P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicy s))
+        P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterIpAllocationPolicy s))
                (\s a -> s { _ipAllocationPolicy = a } :: ContainerClusterResource s)
 
-instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (MaintenancePolicy s)) where
+instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterMaintenancePolicy s)) where
     maintenancePolicy =
-        P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicy s))
+        P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMaintenancePolicy s))
                (\s a -> s { _maintenancePolicy = a } :: ContainerClusterResource s)
 
-instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (MasterAuthorizedNetworksConfig s)) where
+instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)) where
     masterAuthorizedNetworksConfig =
-        P.lens (_masterAuthorizedNetworksConfig :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfig s))
+        P.lens (_masterAuthorizedNetworksConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s))
                (\s a -> s { _masterAuthorizedNetworksConfig = a } :: ContainerClusterResource s)
 
 instance P.HasMasterIpv4CidrBlock (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -6232,9 +6232,9 @@ instance P.HasNetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
         P.lens (_network :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ContainerClusterResource s)
 
-instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (PodSecurityPolicyConfig s)) where
+instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)) where
     podSecurityPolicyConfig =
-        P.lens (_podSecurityPolicyConfig :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfig s))
+        P.lens (_podSecurityPolicyConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterPodSecurityPolicyConfig s))
                (\s a -> s { _podSecurityPolicyConfig = a } :: ContainerClusterResource s)
 
 instance P.HasPrivateCluster (ContainerClusterResource s) (TF.Attr s P.Bool) where
@@ -6253,69 +6253,69 @@ instance P.HasResourceLabels (ContainerClusterResource s) (TF.Attr s (P.HashMap 
                (\s a -> s { _resourceLabels = a } :: ContainerClusterResource s)
 
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAdditionalZones x = TF.compute (TF.refKey x) "_computedAdditionalZones"
+    computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (AddonsConfig s)) where
-    computedAddonsConfig x = TF.compute (TF.refKey x) "_computedAddonsConfig"
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterAddonsConfig s)) where
+    computedAddonsConfig x = TF.compute (TF.refKey x) "addons_config"
 
 instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterIpv4Cidr x = TF.compute (TF.refKey x) "_computedClusterIpv4Cidr"
+    computedClusterIpv4Cidr x = TF.compute (TF.refKey x) "cluster_ipv4_cidr"
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "_computedInstanceGroupUrls"
+    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
 instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedLoggingService x = TF.compute (TF.refKey x) "_computedLoggingService"
+    computedLoggingService x = TF.compute (TF.refKey x) "logging_service"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (MasterAuth s)) where
-    computedMasterAuth x = TF.compute (TF.refKey x) "_computedMasterAuth"
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterMasterAuth s)) where
+    computedMasterAuth x = TF.compute (TF.refKey x) "master_auth"
 
 instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterVersion x = TF.compute (TF.refKey x) "_computedMasterVersion"
+    computedMasterVersion x = TF.compute (TF.refKey x) "master_version"
 
 instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedMonitoringService x = TF.compute (TF.refKey x) "_computedMonitoringService"
+    computedMonitoringService x = TF.compute (TF.refKey x) "monitoring_service"
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (NetworkPolicy s)) where
-    computedNetworkPolicy x = TF.compute (TF.refKey x) "_computedNetworkPolicy"
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterNetworkPolicy s)) where
+    computedNetworkPolicy x = TF.compute (TF.refKey x) "network_policy"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (NodeConfig s)) where
-    computedNodeConfig x = TF.compute (TF.refKey x) "_computedNodeConfig"
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterNodeConfig s)) where
+    computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (NodePool s)]) where
-    computedNodePool x = TF.compute (TF.refKey x) "_computedNodePool"
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (ContainerClusterNodePool s)]) where
+    computedNodePool x = TF.compute (TF.refKey x) "node_pool"
 
 instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedNodeVersion x = TF.compute (TF.refKey x) "_computedNodeVersion"
+    computedNodeVersion x = TF.compute (TF.refKey x) "node_version"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
+    computedSubnetwork x = TF.compute (TF.refKey x) "subnetwork"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_container_node_pool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_container_node_pool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/container_node_pool.html terraform documentation>
 -- for more information.
 data ContainerNodePoolResource s = ContainerNodePoolResource'
-    { _autoscaling :: TF.Attr s (Autoscaling s)
+    { _autoscaling :: TF.Attr s (ContainerNodePoolAutoscaling s)
     -- ^ @autoscaling@ - (Optional)
     --
     , _cluster     :: TF.Attr s P.Text
-    -- ^ @cluster@ - (Required)
+    -- ^ @cluster@ - (Required, Forces New)
     --
     , _region      :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
+    -- ^ @region@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6341,12 +6341,12 @@ instance TF.IsValid (ContainerNodePoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscaling"
                   (_autoscaling
-                      :: ContainerNodePoolResource s -> TF.Attr s (Autoscaling s))
+                      :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolAutoscaling s))
                   TF.validator
 
-instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (Autoscaling s)) where
+instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (ContainerNodePoolAutoscaling s)) where
     autoscaling =
-        P.lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s (Autoscaling s))
+        P.lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolAutoscaling s))
                (\s a -> s { _autoscaling = a } :: ContainerNodePoolResource s)
 
 instance P.HasCluster (ContainerNodePoolResource s) (TF.Attr s P.Text) where
@@ -6360,60 +6360,60 @@ instance P.HasRegion (ContainerNodePoolResource s) (TF.Attr s P.Text) where
                (\s a -> s { _region = a } :: ContainerNodePoolResource s)
 
 instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Integer) where
-    computedInitialNodeCount x = TF.compute (TF.refKey x) "_computedInitialNodeCount"
+    computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
 
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "_computedInstanceGroupUrls"
+    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
-instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (Management s)) where
-    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ContainerNodePoolManagement s)) where
+    computedManagement x = TF.compute (TF.refKey x) "management"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (NodeConfig s)) where
-    computedNodeConfig x = TF.compute (TF.refKey x) "_computedNodeConfig"
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ContainerNodePoolNodeConfig s)) where
+    computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
 instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Integer) where
-    computedNodeCount x = TF.compute (TF.refKey x) "_computedNodeCount"
+    computedNodeCount x = TF.compute (TF.refKey x) "node_count"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @google_dataflow_job@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_dataflow_job terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/dataflow_job.html terraform documentation>
 -- for more information.
 data DataflowJobResource s = DataflowJobResource'
     { _maxWorkers      :: TF.Attr s P.Integer
-    -- ^ @max_workers@ - (Optional)
+    -- ^ @max_workers@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _onDelete        :: TF.Attr s P.Text
-    -- ^ @on_delete@ - (Optional)
+    -- ^ @on_delete@ - (Optional, Forces New)
     --
     , _parameters      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @parameters@ - (Optional)
+    -- ^ @parameters@ - (Optional, Forces New)
     --
     , _project         :: TF.Attr s P.Text
-    -- ^ @project@ - (Optional)
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _tempGcsLocation :: TF.Attr s P.Text
-    -- ^ @temp_gcs_location@ - (Required)
+    -- ^ @temp_gcs_location@ - (Required, Forces New)
     --
     , _templateGcsPath :: TF.Attr s P.Text
-    -- ^ @template_gcs_path@ - (Required)
+    -- ^ @template_gcs_path@ - (Required, Forces New)
     --
     , _zone            :: TF.Attr s P.Text
-    -- ^ @zone@ - (Optional)
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6491,18 +6491,18 @@ instance P.HasZone (DataflowJobResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: DataflowJobResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (DataflowJobResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @google_dataproc_cluster@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_dataproc_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/dataproc_cluster.html terraform documentation>
 -- for more information.
 data DataprocClusterResource s = DataprocClusterResource'
     { _name   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _region :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
+    -- ^ @region@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6535,25 +6535,25 @@ instance P.HasRegion (DataprocClusterResource s) (TF.Attr s P.Text) where
         P.lens (_region :: DataprocClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DataprocClusterResource s)
 
-instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (ClusterConfig s)) where
-    computedClusterConfig x = TF.compute (TF.refKey x) "_computedClusterConfig"
+instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (DataprocClusterClusterConfig s)) where
+    computedClusterConfig x = TF.compute (TF.refKey x) "cluster_config"
 
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedLabels x = TF.compute (TF.refKey x) "_computedLabels"
+    computedLabels x = TF.compute (TF.refKey x) "labels"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_dataproc_job@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_dataproc_job terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/dataproc_job.html terraform documentation>
 -- for more information.
 data DataprocJobResource s = DataprocJobResource'
     { _forceDelete    :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _hadoopConfig   :: TF.Attr s (HadoopConfig s)
-    -- ^ @hadoop_config@ - (Optional)
+    , _hadoopConfig   :: TF.Attr s (DataprocJobHadoopConfig s)
+    -- ^ @hadoop_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -6562,8 +6562,8 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pysparkConfig'
     -- * 'pigConfig'
     -- * 'sparkConfig'
-    , _hiveConfig     :: TF.Attr s (HiveConfig s)
-    -- ^ @hive_config@ - (Optional)
+    , _hiveConfig     :: TF.Attr s (DataprocJobHiveConfig s)
+    -- ^ @hive_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -6573,11 +6573,11 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pigConfig'
     -- * 'sparkConfig'
     , _labels         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
+    -- ^ @labels@ - (Optional, Forces New)
     -- Optional. The labels to associate with this job.
     --
-    , _pigConfig      :: TF.Attr s (PigConfig s)
-    -- ^ @pig_config@ - (Optional)
+    , _pigConfig      :: TF.Attr s (DataprocJobPigConfig s)
+    -- ^ @pig_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -6586,11 +6586,11 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'hiveConfig'
     -- * 'pysparkConfig'
     -- * 'sparkConfig'
-    , _placement      :: TF.Attr s (Placement s)
+    , _placement      :: TF.Attr s (DataprocJobPlacement s)
     -- ^ @placement@ - (Required)
     --
-    , _pysparkConfig  :: TF.Attr s (PysparkConfig s)
-    -- ^ @pyspark_config@ - (Optional)
+    , _pysparkConfig  :: TF.Attr s (DataprocJobPysparkConfig s)
+    -- ^ @pyspark_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -6600,14 +6600,14 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pigConfig'
     -- * 'sparkConfig'
     , _region         :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
+    -- ^ @region@ - (Optional, Forces New)
     --
-    , _scheduling     :: TF.Attr s (Scheduling s)
-    -- ^ @scheduling@ - (Optional)
+    , _scheduling     :: TF.Attr s (DataprocJobScheduling s)
+    -- ^ @scheduling@ - (Optional, Forces New)
     -- Optional. Job scheduling configuration.
     --
-    , _sparkConfig    :: TF.Attr s (SparkConfig s)
-    -- ^ @spark_config@ - (Optional)
+    , _sparkConfig    :: TF.Attr s (DataprocJobSparkConfig s)
+    -- ^ @spark_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -6616,8 +6616,8 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'hiveConfig'
     -- * 'pysparkConfig'
     -- * 'pigConfig'
-    , _sparksqlConfig :: TF.Attr s (SparksqlConfig s)
-    -- ^ @sparksql_config@ - (Optional)
+    , _sparksqlConfig :: TF.Attr s (DataprocJobSparksqlConfig s)
+    -- ^ @sparksql_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -6629,7 +6629,7 @@ data DataprocJobResource s = DataprocJobResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 dataprocJobResource
-    :: TF.Attr s (Placement s) -- ^ @placement@ - 'P.placement'
+    :: TF.Attr s (DataprocJobPlacement s) -- ^ @placement@ - 'P.placement'
     -> TF.Resource P.Provider (DataprocJobResource s)
 dataprocJobResource _placement =
     TF.newResource "google_dataproc_job" TF.validator $
@@ -6697,35 +6697,35 @@ instance TF.IsValid (DataprocJobResource s) where
         ])
            P.<> TF.settingsValidator "_hadoopConfig"
                   (_hadoopConfig
-                      :: DataprocJobResource s -> TF.Attr s (HadoopConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobHadoopConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_hiveConfig"
                   (_hiveConfig
-                      :: DataprocJobResource s -> TF.Attr s (HiveConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobHiveConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_pigConfig"
                   (_pigConfig
-                      :: DataprocJobResource s -> TF.Attr s (PigConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPigConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_placement"
                   (_placement
-                      :: DataprocJobResource s -> TF.Attr s (Placement s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPlacement s))
                   TF.validator
            P.<> TF.settingsValidator "_pysparkConfig"
                   (_pysparkConfig
-                      :: DataprocJobResource s -> TF.Attr s (PysparkConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPysparkConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_scheduling"
                   (_scheduling
-                      :: DataprocJobResource s -> TF.Attr s (Scheduling s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobScheduling s))
                   TF.validator
            P.<> TF.settingsValidator "_sparkConfig"
                   (_sparkConfig
-                      :: DataprocJobResource s -> TF.Attr s (SparkConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobSparkConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_sparksqlConfig"
                   (_sparksqlConfig
-                      :: DataprocJobResource s -> TF.Attr s (SparksqlConfig s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobSparksqlConfig s))
                   TF.validator
 
 instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Bool) where
@@ -6733,14 +6733,14 @@ instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Bool) where
         P.lens (_forceDelete :: DataprocJobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDelete = a } :: DataprocJobResource s)
 
-instance P.HasHadoopConfig (DataprocJobResource s) (TF.Attr s (HadoopConfig s)) where
+instance P.HasHadoopConfig (DataprocJobResource s) (TF.Attr s (DataprocJobHadoopConfig s)) where
     hadoopConfig =
-        P.lens (_hadoopConfig :: DataprocJobResource s -> TF.Attr s (HadoopConfig s))
+        P.lens (_hadoopConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobHadoopConfig s))
                (\s a -> s { _hadoopConfig = a } :: DataprocJobResource s)
 
-instance P.HasHiveConfig (DataprocJobResource s) (TF.Attr s (HiveConfig s)) where
+instance P.HasHiveConfig (DataprocJobResource s) (TF.Attr s (DataprocJobHiveConfig s)) where
     hiveConfig =
-        P.lens (_hiveConfig :: DataprocJobResource s -> TF.Attr s (HiveConfig s))
+        P.lens (_hiveConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobHiveConfig s))
                (\s a -> s { _hiveConfig = a } :: DataprocJobResource s)
 
 instance P.HasLabels (DataprocJobResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -6748,19 +6748,19 @@ instance P.HasLabels (DataprocJobResource s) (TF.Attr s (P.HashMap P.Text (TF.At
         P.lens (_labels :: DataprocJobResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: DataprocJobResource s)
 
-instance P.HasPigConfig (DataprocJobResource s) (TF.Attr s (PigConfig s)) where
+instance P.HasPigConfig (DataprocJobResource s) (TF.Attr s (DataprocJobPigConfig s)) where
     pigConfig =
-        P.lens (_pigConfig :: DataprocJobResource s -> TF.Attr s (PigConfig s))
+        P.lens (_pigConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobPigConfig s))
                (\s a -> s { _pigConfig = a } :: DataprocJobResource s)
 
-instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (Placement s)) where
+instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (DataprocJobPlacement s)) where
     placement =
-        P.lens (_placement :: DataprocJobResource s -> TF.Attr s (Placement s))
+        P.lens (_placement :: DataprocJobResource s -> TF.Attr s (DataprocJobPlacement s))
                (\s a -> s { _placement = a } :: DataprocJobResource s)
 
-instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (PysparkConfig s)) where
+instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (DataprocJobPysparkConfig s)) where
     pysparkConfig =
-        P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (PysparkConfig s))
+        P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobPysparkConfig s))
                (\s a -> s { _pysparkConfig = a } :: DataprocJobResource s)
 
 instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
@@ -6768,49 +6768,49 @@ instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
         P.lens (_region :: DataprocJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DataprocJobResource s)
 
-instance P.HasScheduling (DataprocJobResource s) (TF.Attr s (Scheduling s)) where
+instance P.HasScheduling (DataprocJobResource s) (TF.Attr s (DataprocJobScheduling s)) where
     scheduling =
-        P.lens (_scheduling :: DataprocJobResource s -> TF.Attr s (Scheduling s))
+        P.lens (_scheduling :: DataprocJobResource s -> TF.Attr s (DataprocJobScheduling s))
                (\s a -> s { _scheduling = a } :: DataprocJobResource s)
 
-instance P.HasSparkConfig (DataprocJobResource s) (TF.Attr s (SparkConfig s)) where
+instance P.HasSparkConfig (DataprocJobResource s) (TF.Attr s (DataprocJobSparkConfig s)) where
     sparkConfig =
-        P.lens (_sparkConfig :: DataprocJobResource s -> TF.Attr s (SparkConfig s))
+        P.lens (_sparkConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobSparkConfig s))
                (\s a -> s { _sparkConfig = a } :: DataprocJobResource s)
 
-instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (SparksqlConfig s)) where
+instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (DataprocJobSparksqlConfig s)) where
     sparksqlConfig =
-        P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (SparksqlConfig s))
+        P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobSparksqlConfig s))
                (\s a -> s { _sparksqlConfig = a } :: DataprocJobResource s)
 
 instance s ~ s' => P.HasComputedDriverControlsFilesUri (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedDriverControlsFilesUri x = TF.compute (TF.refKey x) "_computedDriverControlsFilesUri"
+    computedDriverControlsFilesUri x = TF.compute (TF.refKey x) "driver_controls_files_uri"
 
 instance s ~ s' => P.HasComputedDriverOutputResourceUri (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedDriverOutputResourceUri x = TF.compute (TF.refKey x) "_computedDriverOutputResourceUri"
+    computedDriverOutputResourceUri x = TF.compute (TF.refKey x) "driver_output_resource_uri"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedReference (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (Reference s)) where
-    computedReference x = TF.compute (TF.refKey x) "_computedReference"
+instance s ~ s' => P.HasComputedReference (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (DataprocJobReference s)) where
+    computedReference x = TF.compute (TF.refKey x) "reference"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (Status s)) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (DataprocJobStatus s)) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @google_dns_managed_zone@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_dns_managed_zone terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/dns_managed_zone.html terraform documentation>
 -- for more information.
 data DnsManagedZoneResource s = DnsManagedZoneResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _dnsName     :: TF.Attr s P.Text
-    -- ^ @dns_name@ - (Required)
+    -- ^ @dns_name@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6852,21 +6852,21 @@ instance P.HasName (DnsManagedZoneResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DnsManagedZoneResource s)
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_dns_record_set@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_dns_record_set terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/dns_record_set.html terraform documentation>
 -- for more information.
 data DnsRecordSetResource s = DnsRecordSetResource'
     { _managedZone :: TF.Attr s P.Text
-    -- ^ @managed_zone@ - (Required)
+    -- ^ @managed_zone@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _rrdatas     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @rrdatas@ - (Required)
@@ -6934,11 +6934,11 @@ instance P.HasType' (DnsRecordSetResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: DnsRecordSetResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DnsRecordSetResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_endpoints_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_endpoints_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/endpoints_service.html terraform documentation>
 -- for more information.
 data EndpointsServiceResource s = EndpointsServiceResource'
     { _grpcConfig         :: TF.Attr s P.Text
@@ -6961,7 +6961,7 @@ data EndpointsServiceResource s = EndpointsServiceResource'
     --
     -- * 'openapiConfig'
     , _serviceName        :: TF.Attr s P.Text
-    -- ^ @service_name@ - (Required)
+    -- ^ @service_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7024,24 +7024,24 @@ instance P.HasServiceName (EndpointsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_serviceName :: EndpointsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceName = a } :: EndpointsServiceResource s)
 
-instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (Apis s)]) where
-    computedApis x = TF.compute (TF.refKey x) "_computedApis"
+instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsServiceApis s)]) where
+    computedApis x = TF.compute (TF.refKey x) "apis"
 
 instance s ~ s' => P.HasComputedConfigId (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedConfigId x = TF.compute (TF.refKey x) "_computedConfigId"
+    computedConfigId x = TF.compute (TF.refKey x) "config_id"
 
 instance s ~ s' => P.HasComputedDnsAddress (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedDnsAddress x = TF.compute (TF.refKey x) "_computedDnsAddress"
+    computedDnsAddress x = TF.compute (TF.refKey x) "dns_address"
 
-instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (Endpoints s)]) where
-    computedEndpoints x = TF.compute (TF.refKey x) "_computedEndpoints"
+instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsServiceEndpoints s)]) where
+    computedEndpoints x = TF.compute (TF.refKey x) "endpoints"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_folder@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_folder terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/folder.html terraform documentation>
 -- for more information.
 data FolderResource s = FolderResource'
     { _displayName :: TF.Attr s P.Text
@@ -7083,27 +7083,27 @@ instance P.HasParent (FolderResource s) (TF.Attr s P.Text) where
                (\s a -> s { _parent = a } :: FolderResource s)
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "_computedCreateTime"
+    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
 
 instance s ~ s' => P.HasComputedLifecycleState (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedLifecycleState x = TF.compute (TF.refKey x) "_computedLifecycleState"
+    computedLifecycleState x = TF.compute (TF.refKey x) "lifecycle_state"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (FolderResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @google_folder_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_folder_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/folder_iam_binding.html terraform documentation>
 -- for more information.
 data FolderIamBindingResource s = FolderIamBindingResource'
     { _folder  :: TF.Attr s P.Text
-    -- ^ @folder@ - (Required)
+    -- ^ @folder@ - (Required, Forces New)
     --
     , _members :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7146,21 +7146,21 @@ instance P.HasRole (FolderIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: FolderIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_folder_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_folder_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/folder_iam_member.html terraform documentation>
 -- for more information.
 data FolderIamMemberResource s = FolderIamMemberResource'
     { _folder :: TF.Attr s P.Text
-    -- ^ @folder@ - (Required)
+    -- ^ @folder@ - (Required, Forces New)
     --
     , _member :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role   :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7203,15 +7203,15 @@ instance P.HasRole (FolderIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: FolderIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_folder_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_folder_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/folder_iam_policy.html terraform documentation>
 -- for more information.
 data FolderIamPolicyResource s = FolderIamPolicyResource'
     { _folder     :: TF.Attr s P.Text
-    -- ^ @folder@ - (Required)
+    -- ^ @folder@ - (Required, Forces New)
     --
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
@@ -7249,14 +7249,14 @@ instance P.HasPolicyData (FolderIamPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _policyData = a } :: FolderIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_folder_organization_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_folder_organization_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/folder_organization_policy.html terraform documentation>
 -- for more information.
 data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (BooleanPolicy s)
+    { _booleanPolicy :: TF.Attr s (FolderOrganizationPolicyBooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -7264,19 +7264,19 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
     -- * 'listPolicy'
     -- * 'restorePolicy'
     , _constraint    :: TF.Attr s P.Text
-    -- ^ @constraint@ - (Required)
+    -- ^ @constraint@ - (Required, Forces New)
     --
     , _folder        :: TF.Attr s P.Text
-    -- ^ @folder@ - (Required)
+    -- ^ @folder@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (ListPolicy s)
+    , _listPolicy    :: TF.Attr s (FolderOrganizationPolicyListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'restorePolicy'
     -- * 'booleanPolicy'
-    , _restorePolicy :: TF.Attr s (RestorePolicy s)
+    , _restorePolicy :: TF.Attr s (FolderOrganizationPolicyRestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -7328,20 +7328,20 @@ instance TF.IsValid (FolderOrganizationPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyBooleanPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyListPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyRestorePolicy s))
                   TF.validator
 
-instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (BooleanPolicy s)) where
+instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyBooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (BooleanPolicy s))
+        P.lens (_booleanPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyBooleanPolicy s))
                (\s a -> s { _booleanPolicy = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasConstraint (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -7354,35 +7354,35 @@ instance P.HasFolder (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) whe
         P.lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _folder = a } :: FolderOrganizationPolicyResource s)
 
-instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (ListPolicy s)) where
+instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (ListPolicy s))
+        P.lens (_listPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyListPolicy s))
                (\s a -> s { _listPolicy = a } :: FolderOrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (RestorePolicy s)) where
+instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyRestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicy s))
+        P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyRestorePolicy s))
                (\s a -> s { _restorePolicy = a } :: FolderOrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedUpdateTime (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
-    computedUpdateTime x = TF.compute (TF.refKey x) "_computedUpdateTime"
+    computedUpdateTime x = TF.compute (TF.refKey x) "update_time"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @google_kms_crypto_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_crypto_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_crypto_key.html terraform documentation>
 -- for more information.
 data KmsCryptoKeyResource s = KmsCryptoKeyResource'
     { _keyRing        :: TF.Attr s P.Text
-    -- ^ @key_ring@ - (Required)
+    -- ^ @key_ring@ - (Required, Forces New)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _rotationPeriod :: TF.Attr s P.Text
     -- ^ @rotation_period@ - (Optional)
@@ -7428,17 +7428,17 @@ instance P.HasRotationPeriod (KmsCryptoKeyResource s) (TF.Attr s P.Text) where
 
 -- | @google_kms_crypto_key_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_crypto_key_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_crypto_key_iam_binding.html terraform documentation>
 -- for more information.
 data KmsCryptoKeyIamBindingResource s = KmsCryptoKeyIamBindingResource'
     { _cryptoKeyId :: TF.Attr s P.Text
-    -- ^ @crypto_key_id@ - (Required)
+    -- ^ @crypto_key_id@ - (Required, Forces New)
     --
     , _members     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role        :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7481,21 +7481,21 @@ instance P.HasRole (KmsCryptoKeyIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: KmsCryptoKeyIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsCryptoKeyIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_kms_crypto_key_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_crypto_key_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_crypto_key_iam_member.html terraform documentation>
 -- for more information.
 data KmsCryptoKeyIamMemberResource s = KmsCryptoKeyIamMemberResource'
     { _cryptoKeyId :: TF.Attr s P.Text
-    -- ^ @crypto_key_id@ - (Required)
+    -- ^ @crypto_key_id@ - (Required, Forces New)
     --
     , _member      :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role        :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7538,18 +7538,18 @@ instance P.HasRole (KmsCryptoKeyIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: KmsCryptoKeyIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsCryptoKeyIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_kms_key_ring@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_key_ring terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_key_ring.html terraform documentation>
 -- for more information.
 data KmsKeyRingResource s = KmsKeyRingResource'
     { _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Required)
+    -- ^ @location@ - (Required, Forces New)
     --
     , _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7584,21 +7584,21 @@ instance P.HasName (KmsKeyRingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: KmsKeyRingResource s)
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
-    computedProject x = TF.compute (TF.refKey x) "_computedProject"
+    computedProject x = TF.compute (TF.refKey x) "project"
 
 -- | @google_kms_key_ring_iam_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_key_ring_iam_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_key_ring_iam_binding.html terraform documentation>
 -- for more information.
 data KmsKeyRingIamBindingResource s = KmsKeyRingIamBindingResource'
     { _keyRingId :: TF.Attr s P.Text
-    -- ^ @key_ring_id@ - (Required)
+    -- ^ @key_ring_id@ - (Required, Forces New)
     --
     , _members   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
     , _role      :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7641,21 +7641,21 @@ instance P.HasRole (KmsKeyRingIamBindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: KmsKeyRingIamBindingResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsKeyRingIamBindingResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_kms_key_ring_iam_member@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_key_ring_iam_member terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_key_ring_iam_member.html terraform documentation>
 -- for more information.
 data KmsKeyRingIamMemberResource s = KmsKeyRingIamMemberResource'
     { _keyRingId :: TF.Attr s P.Text
-    -- ^ @key_ring_id@ - (Required)
+    -- ^ @key_ring_id@ - (Required, Forces New)
     --
     , _member    :: TF.Attr s P.Text
-    -- ^ @member@ - (Required)
+    -- ^ @member@ - (Required, Forces New)
     --
     , _role      :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7698,15 +7698,15 @@ instance P.HasRole (KmsKeyRingIamMemberResource s) (TF.Attr s P.Text) where
                (\s a -> s { _role = a } :: KmsKeyRingIamMemberResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsKeyRingIamMemberResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_kms_key_ring_iam_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_kms_key_ring_iam_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/kms_key_ring_iam_policy.html terraform documentation>
 -- for more information.
 data KmsKeyRingIamPolicyResource s = KmsKeyRingIamPolicyResource'
     { _keyRingId  :: TF.Attr s P.Text
-    -- ^ @key_ring_id@ - (Required)
+    -- ^ @key_ring_id@ - (Required, Forces New)
     --
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
@@ -7744,15 +7744,15 @@ instance P.HasPolicyData (KmsKeyRingIamPolicyResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _policyData = a } :: KmsKeyRingIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (KmsKeyRingIamPolicyResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 -- | @google_logging_billing_account_exclusion@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_billing_account_exclusion terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_billing_account_exclusion.html terraform documentation>
 -- for more information.
 data LoggingBillingAccountExclusionResource s = LoggingBillingAccountExclusionResource'
     { _billingAccount :: TF.Attr s P.Text
-    -- ^ @billing_account@ - (Required)
+    -- ^ @billing_account@ - (Required, Forces New)
     --
     , _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
@@ -7764,7 +7764,7 @@ data LoggingBillingAccountExclusionResource s = LoggingBillingAccountExclusionRe
     -- ^ @filter@ - (Required)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7822,11 +7822,11 @@ instance P.HasName (LoggingBillingAccountExclusionResource s) (TF.Attr s P.Text)
 
 -- | @google_logging_billing_account_sink@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_billing_account_sink terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_billing_account_sink.html terraform documentation>
 -- for more information.
 data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource'
     { _billingAccount :: TF.Attr s P.Text
-    -- ^ @billing_account@ - (Required)
+    -- ^ @billing_account@ - (Required, Forces New)
     --
     , _destination    :: TF.Attr s P.Text
     -- ^ @destination@ - (Required)
@@ -7835,7 +7835,7 @@ data LoggingBillingAccountSinkResource s = LoggingBillingAccountSinkResource'
     -- ^ @filter@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7885,11 +7885,11 @@ instance P.HasName (LoggingBillingAccountSinkResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _name = a } :: LoggingBillingAccountSinkResource s)
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingBillingAccountSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "_computedWriterIdentity"
+    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
 -- | @google_logging_folder_exclusion@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_folder_exclusion terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_folder_exclusion.html terraform documentation>
 -- for more information.
 data LoggingFolderExclusionResource s = LoggingFolderExclusionResource'
     { _description :: TF.Attr s P.Text
@@ -7902,10 +7902,10 @@ data LoggingFolderExclusionResource s = LoggingFolderExclusionResource'
     -- ^ @filter@ - (Required)
     --
     , _folder      :: TF.Attr s P.Text
-    -- ^ @folder@ - (Required)
+    -- ^ @folder@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -7963,7 +7963,7 @@ instance P.HasName (LoggingFolderExclusionResource s) (TF.Attr s P.Text) where
 
 -- | @google_logging_folder_sink@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_folder_sink terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_folder_sink.html terraform documentation>
 -- for more information.
 data LoggingFolderSinkResource s = LoggingFolderSinkResource'
     { _destination     :: TF.Attr s P.Text
@@ -7973,13 +7973,13 @@ data LoggingFolderSinkResource s = LoggingFolderSinkResource'
     -- ^ @filter@ - (Optional)
     --
     , _folder          :: TF.Attr s P.Text
-    -- ^ @folder@ - (Required)
+    -- ^ @folder@ - (Required, Forces New)
     --
     , _includeChildren :: TF.Attr s P.Bool
-    -- ^ @include_children@ - (Optional)
+    -- ^ @include_children@ - (Optional, Forces New)
     --
     , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -8036,11 +8036,11 @@ instance P.HasName (LoggingFolderSinkResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: LoggingFolderSinkResource s)
 
 instance s ~ s' => P.HasComputedWriterIdentity (TF.Ref s' (LoggingFolderSinkResource s)) (TF.Attr s P.Text) where
-    computedWriterIdentity x = TF.compute (TF.refKey x) "_computedWriterIdentity"
+    computedWriterIdentity x = TF.compute (TF.refKey x) "writer_identity"
 
 -- | @google_logging_organization_exclusion@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Google/google_logging_organization_exclusion terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/google/r/logging_organization_exclusion.html terraform documentation>
 -- for more information.
 data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResource'
     { _description :: TF.Attr s P.Text
@@ -8053,10 +8053,10 @@ data LoggingOrganizationExclusionResource s = LoggingOrganizationExclusionResour
     -- ^ @filter@ - (Required)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _orgId       :: TF.Attr s P.Text
-    -- ^ @org_id@ - (Required)
+    -- ^ @org_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 

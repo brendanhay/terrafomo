@@ -16,8 +16,10 @@ module Terrafomo.Google.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasClusterId (..)
+    , HasGroup (..)
     , HasCaCertificate (..)
     , HasManagedZone (..)
+    , HasCidrBlock (..)
     , HasIpVersion (..)
     , HasMaxSurgePercent (..)
     , HasMainPythonFileUri (..)
@@ -43,6 +45,7 @@ module Terrafomo.Google.Lens
     , HasMaxUnavailablePercent (..)
     , HasSourceSnapshotEncryptionKey (..)
     , HasNextHopIp (..)
+    , HasSplitHealthChecks (..)
     , HasProxyHeader (..)
     , HasSslCipher (..)
     , HasMainClass (..)
@@ -55,6 +58,7 @@ module Terrafomo.Google.Lens
     , HasEnableKubernetesAlpha (..)
     , HasDatabaseVersion (..)
     , HasCertificate (..)
+    , HasMaxConnectionsPerInstance (..)
     , HasStorageType (..)
     , HasDestRange (..)
     , HasPrivateIpGoogleAccess (..)
@@ -101,9 +105,11 @@ module Terrafomo.Google.Lens
     , HasRawDisk (..)
     , HasTimeout (..)
     , HasDetectMd5hash (..)
+    , HasPreemptible (..)
     , HasMembers (..)
     , HasStagingBucket (..)
     , HasHosts (..)
+    , HasAutoUpgrade (..)
     , HasEnabled (..)
     , HasDiskEncryptionKey (..)
     , HasDisplayName (..)
@@ -111,6 +117,8 @@ module Terrafomo.Google.Lens
     , HasInterface (..)
     , HasContentType (..)
     , HasIncludeChildren (..)
+    , HasCount (..)
+    , HasStartTime (..)
     , HasHostProject (..)
     , HasMinTlsVersion (..)
     , HasAppEngine (..)
@@ -121,6 +129,7 @@ module Terrafomo.Google.Lens
     , HasSslHealthCheck (..)
     , HasTriggerTopic (..)
     , HasSecurityPolicy (..)
+    , HasMaxConnections (..)
     , HasAutoDelete (..)
     , HasText (..)
     , HasObjectNamePrefix (..)
@@ -133,6 +142,7 @@ module Terrafomo.Google.Lens
     , HasUpdateTrack (..)
     , HasNetwork (..)
     , HasMaxSurgeFixed (..)
+    , HasProtocol (..)
     , HasConnectionDrainingTimeoutSec (..)
     , HasCustomRequestHeaders (..)
     , HasEntryPoint (..)
@@ -145,6 +155,7 @@ module Terrafomo.Google.Lens
     , HasPrivateKey (..)
     , HasEnableFlowLogs (..)
     , HasTimeoutSec (..)
+    , HasOauth2ClientSecret (..)
     , HasProperties (..)
     , HasOnDelete (..)
     , HasDuration (..)
@@ -152,6 +163,7 @@ module Terrafomo.Google.Lens
     , HasNotFoundPage (..)
     , HasAttachedDisk (..)
     , HasDatabase (..)
+    , HasDiskEncryptionKeyRaw (..)
     , HasTargetTags (..)
     , HasContinueOnFailure (..)
     , HasSourceImage (..)
@@ -169,9 +181,11 @@ module Terrafomo.Google.Lens
     , HasDiskAutoresize (..)
     , HasAccountId (..)
     , HasJarFileUris (..)
+    , HasQueryStringBlacklist (..)
     , HasPeerNetwork (..)
     , HasPortRange (..)
     , HasEnforced (..)
+    , HasIncludeHost (..)
     , HasTriggerTemplate (..)
     , HasEnableLegacyAbac (..)
     , HasCanIpForward (..)
@@ -184,14 +198,19 @@ module Terrafomo.Google.Lens
     , HasAllowStoppingForUpdate (..)
     , HasServiceProject (..)
     , HasDiskSizeGb (..)
+    , HasQueryStringWhitelist (..)
     , HasUnhealthyThreshold (..)
     , HasParameters (..)
     , HasPorts (..)
     , HasMaxFailuresPerHour (..)
+    , HasMaxNodeCount (..)
+    , HasIncludeQueryString (..)
     , HasVersionedExpr (..)
     , HasNextHopVpnTunnel (..)
     , HasScriptVariables (..)
     , HasBackendService (..)
+    , HasIncludeProtocol (..)
+    , HasCacheKeyPolicy (..)
     , HasDeletionProtection (..)
     , HasSubnetworkRangeName (..)
     , HasPrivateCluster (..)
@@ -199,6 +218,8 @@ module Terrafomo.Google.Lens
     , HasFilename (..)
     , HasBranchName (..)
     , HasOrganization (..)
+    , HasMinNodeCount (..)
+    , HasMode (..)
     , HasTempGcsLocation (..)
     , HasExtensionHeaders (..)
     , HasPriority (..)
@@ -214,6 +235,7 @@ module Terrafomo.Google.Lens
     , HasBackend (..)
     , HasBucket (..)
     , HasSparksqlConfig (..)
+    , HasMaxRate (..)
     , HasBucketName (..)
     , HasTags (..)
     , HasAdvertisedIpRanges (..)
@@ -225,6 +247,7 @@ module Terrafomo.Google.Lens
     , HasHost (..)
     , HasFormat (..)
     , HasOverrideProperties (..)
+    , HasPublicPtrDomainName (..)
     , HasCors (..)
     , HasVpnTunnel (..)
     , HasPythonFileUris (..)
@@ -242,6 +265,8 @@ module Terrafomo.Google.Lens
     , HasCryptoKey (..)
     , HasRequestPath (..)
     , HasIkeVersion (..)
+    , HasOauth2ClientId (..)
+    , HasScratch (..)
     , HasAdvertiseMode (..)
     , HasFileUris (..)
     , HasAsn (..)
@@ -278,6 +303,7 @@ module Terrafomo.Google.Lens
     , HasTest (..)
     , HasIpRange (..)
     , HasScopes (..)
+    , HasNodeMetadata (..)
     , HasGuestAccelerator (..)
     , HasIap (..)
     , HasPeerIp (..)
@@ -287,6 +313,7 @@ module Terrafomo.Google.Lens
     , HasHiveConfig (..)
     , HasLoadBalancingScheme (..)
     , HasHealthChecks (..)
+    , HasClusterSecondaryRangeName (..)
     , HasMainJarFileUri (..)
     , HasPermissions (..)
     , HasTriggerHttp (..)
@@ -315,6 +342,8 @@ module Terrafomo.Google.Lens
     , HasHealthCheck (..)
     , HasIpCidrRange (..)
     , HasSourceDiskEncryptionKeyRaw (..)
+    , HasSize (..)
+    , HasEffect (..)
     , HasTargetPools (..)
     , HasDefaultService (..)
     , HasMaxUnavailableFixed (..)
@@ -325,6 +354,7 @@ module Terrafomo.Google.Lens
     , HasPaths (..)
     , HasImages (..)
     , HasRawKey (..)
+    , HasDeviceName (..)
     , HasSessionAffinity (..)
     , HasListPolicy (..)
     , HasLookupOrganization (..)
@@ -333,23 +363,29 @@ module Terrafomo.Google.Lens
     , HasReason (..)
     , HasCooldownPeriod (..)
     , HasTcpHealthCheck (..)
+    , HasMaxUtilization (..)
     , HasDay (..)
     , HasGrpcConfig (..)
+    , HasDailyMaintenanceWindow (..)
     , HasContentDisposition (..)
     , HasQueryList (..)
     , HasForceDestroy (..)
     , HasPath (..)
     , HasPredefinedAcl (..)
+    , HasAutoRepair (..)
     , HasParent (..)
     , HasFollowGaeApplication (..)
     , HasBinaryLogEnabled (..)
     , HasStorageClass (..)
+    , HasTaint (..)
     , HasOnHostMaintenance (..)
+    , HasBalancingMode (..)
     , HasAuthorizedNetworks (..)
     , HasRegion (..)
     , HasExpirationTime (..)
     , HasTriggerBucket (..)
     , HasQuery (..)
+    , HasWorkloadMetadataConfig (..)
     , HasPolicyData (..)
     , HasPushEndpoint (..)
     , HasObject (..)
@@ -379,6 +415,7 @@ module Terrafomo.Google.Lens
     , HasSourceDisk (..)
     , HasMinMasterVersion (..)
     , HasSha1 (..)
+    , HasRangeName (..)
     , HasCiphertext (..)
     , HasAdvertisedGroups (..)
     , HasServiceAccount (..)
@@ -390,10 +427,12 @@ module Terrafomo.Google.Lens
     , HasServices (..)
     , HasBillingAccount (..)
     , HasSourceTags (..)
+    , HasMaxRatePerInstance (..)
     , HasName (..)
     , HasCustomFeatures (..)
     , HasExpirationMs (..)
     , HasTemplateGcsPath (..)
+    , HasIssueClientCertificate (..)
     , HasFolder (..)
     , HasInitialDelaySec (..)
     , HasTitle (..)
@@ -411,15 +450,19 @@ module Terrafomo.Google.Lens
     , HasMinReadySec (..)
     , HasHttpEnabledState (..)
     , HasAction (..)
+    , HasProvider (..)
     , HasNetworkInterface (..)
+    , HasCapacityScaler (..)
     , HasAttributes (..)
     , HasTier (..)
+    , HasServicesSecondaryRangeName (..)
     , HasNextHopGateway (..)
     , HasDeny (..)
     , HasSharedSecret (..)
     , HasAccessConfig (..)
     , HasQuicOverride (..)
     , HasInternalIpOnly (..)
+    , HasClientCertificateConfig (..)
     , HasRetryOnFailure (..)
     , HasTag (..)
     , HasHostRule (..)
@@ -443,6 +486,7 @@ module Terrafomo.Google.Lens
     , HasComputedTriggerBucket (..)
     , HasComputedNamedPort (..)
     , HasComputedFingerprint (..)
+    , HasComputedOnHostMaintenance (..)
     , HasComputedClientCertificate (..)
     , HasComputedIncludeProtocol (..)
     , HasComputedIap (..)
@@ -453,6 +497,7 @@ module Terrafomo.Google.Lens
     , HasComputedCertificateId (..)
     , HasComputedGcrDomain (..)
     , HasComputedMethods (..)
+    , HasComputedSubnetworkRangeName (..)
     , HasComputedNames (..)
     , HasComputedAddress (..)
     , HasComputedClientKey (..)
@@ -486,6 +531,7 @@ module Terrafomo.Google.Lens
     , HasComputedDirectoryCustomerId (..)
     , HasComputedMasterVersion (..)
     , HasComputedEndpoints (..)
+    , HasComputedPublicPtrDomainName (..)
     , HasComputedPortRange (..)
     , HasComputedLocalSsdCount (..)
     , HasComputedTaint (..)
@@ -602,6 +648,7 @@ module Terrafomo.Google.Lens
     , HasComputedCrc32c (..)
     , HasComputedLogObjectPrefix (..)
     , HasComputedMinCpuPlatform (..)
+    , HasComputedAutomaticRestart (..)
     , HasComputedMasterInstanceName (..)
     , HasComputedOpen (..)
     , HasComputedMetadata (..)
@@ -731,6 +778,7 @@ module Terrafomo.Google.Lens
     , HasComputedCommonName (..)
     , HasComputedFamily (..)
     , HasComputedImageVersion (..)
+    , HasComputedAccessConfig (..)
     , HasComputedClusterUuid (..)
     , HasComputedBucket (..)
     , HasComputedValidMasterVersions (..)
@@ -768,6 +816,7 @@ module Terrafomo.Google.Lens
     , HasComputedMetadataFingerprint (..)
     , HasComputedEnabled (..)
     , HasComputedRepositoryUrl (..)
+    , HasComputedAliasIpRange (..)
     , HasComputedAuthorizedNetwork (..)
     , HasComputedCidrBlocks (..)
     , HasComputedRoleEntity (..)
@@ -789,6 +838,12 @@ class HasClusterId a b | a -> b where
 instance HasClusterId a b => HasClusterId (TF.Schema l p a) b where
     clusterId = TF.configuration . clusterId
 
+class HasGroup a b | a -> b where
+    group :: P.Lens' a b
+
+instance HasGroup a b => HasGroup (TF.Schema l p a) b where
+    group = TF.configuration . group
+
 class HasCaCertificate a b | a -> b where
     caCertificate :: P.Lens' a b
 
@@ -800,6 +855,12 @@ class HasManagedZone a b | a -> b where
 
 instance HasManagedZone a b => HasManagedZone (TF.Schema l p a) b where
     managedZone = TF.configuration . managedZone
+
+class HasCidrBlock a b | a -> b where
+    cidrBlock :: P.Lens' a b
+
+instance HasCidrBlock a b => HasCidrBlock (TF.Schema l p a) b where
+    cidrBlock = TF.configuration . cidrBlock
 
 class HasIpVersion a b | a -> b where
     ipVersion :: P.Lens' a b
@@ -951,6 +1012,12 @@ class HasNextHopIp a b | a -> b where
 instance HasNextHopIp a b => HasNextHopIp (TF.Schema l p a) b where
     nextHopIp = TF.configuration . nextHopIp
 
+class HasSplitHealthChecks a b | a -> b where
+    splitHealthChecks :: P.Lens' a b
+
+instance HasSplitHealthChecks a b => HasSplitHealthChecks (TF.Schema l p a) b where
+    splitHealthChecks = TF.configuration . splitHealthChecks
+
 class HasProxyHeader a b | a -> b where
     proxyHeader :: P.Lens' a b
 
@@ -1022,6 +1089,12 @@ class HasCertificate a b | a -> b where
 
 instance HasCertificate a b => HasCertificate (TF.Schema l p a) b where
     certificate = TF.configuration . certificate
+
+class HasMaxConnectionsPerInstance a b | a -> b where
+    maxConnectionsPerInstance :: P.Lens' a b
+
+instance HasMaxConnectionsPerInstance a b => HasMaxConnectionsPerInstance (TF.Schema l p a) b where
+    maxConnectionsPerInstance = TF.configuration . maxConnectionsPerInstance
 
 class HasStorageType a b | a -> b where
     storageType :: P.Lens' a b
@@ -1299,6 +1372,12 @@ class HasDetectMd5hash a b | a -> b where
 instance HasDetectMd5hash a b => HasDetectMd5hash (TF.Schema l p a) b where
     detectMd5hash = TF.configuration . detectMd5hash
 
+class HasPreemptible a b | a -> b where
+    preemptible :: P.Lens' a b
+
+instance HasPreemptible a b => HasPreemptible (TF.Schema l p a) b where
+    preemptible = TF.configuration . preemptible
+
 class HasMembers a b | a -> b where
     members :: P.Lens' a b
 
@@ -1316,6 +1395,12 @@ class HasHosts a b | a -> b where
 
 instance HasHosts a b => HasHosts (TF.Schema l p a) b where
     hosts = TF.configuration . hosts
+
+class HasAutoUpgrade a b | a -> b where
+    autoUpgrade :: P.Lens' a b
+
+instance HasAutoUpgrade a b => HasAutoUpgrade (TF.Schema l p a) b where
+    autoUpgrade = TF.configuration . autoUpgrade
 
 class HasEnabled a b | a -> b where
     enabled :: P.Lens' a b
@@ -1358,6 +1443,18 @@ class HasIncludeChildren a b | a -> b where
 
 instance HasIncludeChildren a b => HasIncludeChildren (TF.Schema l p a) b where
     includeChildren = TF.configuration . includeChildren
+
+class HasCount a b | a -> b where
+    count :: P.Lens' a b
+
+instance HasCount a b => HasCount (TF.Schema l p a) b where
+    count = TF.configuration . count
+
+class HasStartTime a b | a -> b where
+    startTime :: P.Lens' a b
+
+instance HasStartTime a b => HasStartTime (TF.Schema l p a) b where
+    startTime = TF.configuration . startTime
 
 class HasHostProject a b | a -> b where
     hostProject :: P.Lens' a b
@@ -1418,6 +1515,12 @@ class HasSecurityPolicy a b | a -> b where
 
 instance HasSecurityPolicy a b => HasSecurityPolicy (TF.Schema l p a) b where
     securityPolicy = TF.configuration . securityPolicy
+
+class HasMaxConnections a b | a -> b where
+    maxConnections :: P.Lens' a b
+
+instance HasMaxConnections a b => HasMaxConnections (TF.Schema l p a) b where
+    maxConnections = TF.configuration . maxConnections
 
 class HasAutoDelete a b | a -> b where
     autoDelete :: P.Lens' a b
@@ -1491,6 +1594,12 @@ class HasMaxSurgeFixed a b | a -> b where
 instance HasMaxSurgeFixed a b => HasMaxSurgeFixed (TF.Schema l p a) b where
     maxSurgeFixed = TF.configuration . maxSurgeFixed
 
+class HasProtocol a b | a -> b where
+    protocol :: P.Lens' a b
+
+instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
+    protocol = TF.configuration . protocol
+
 class HasConnectionDrainingTimeoutSec a b | a -> b where
     connectionDrainingTimeoutSec :: P.Lens' a b
 
@@ -1563,6 +1672,12 @@ class HasTimeoutSec a b | a -> b where
 instance HasTimeoutSec a b => HasTimeoutSec (TF.Schema l p a) b where
     timeoutSec = TF.configuration . timeoutSec
 
+class HasOauth2ClientSecret a b | a -> b where
+    oauth2ClientSecret :: P.Lens' a b
+
+instance HasOauth2ClientSecret a b => HasOauth2ClientSecret (TF.Schema l p a) b where
+    oauth2ClientSecret = TF.configuration . oauth2ClientSecret
+
 class HasProperties a b | a -> b where
     properties :: P.Lens' a b
 
@@ -1604,6 +1719,12 @@ class HasDatabase a b | a -> b where
 
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
+
+class HasDiskEncryptionKeyRaw a b | a -> b where
+    diskEncryptionKeyRaw :: P.Lens' a b
+
+instance HasDiskEncryptionKeyRaw a b => HasDiskEncryptionKeyRaw (TF.Schema l p a) b where
+    diskEncryptionKeyRaw = TF.configuration . diskEncryptionKeyRaw
 
 class HasTargetTags a b | a -> b where
     targetTags :: P.Lens' a b
@@ -1707,6 +1828,12 @@ class HasJarFileUris a b | a -> b where
 instance HasJarFileUris a b => HasJarFileUris (TF.Schema l p a) b where
     jarFileUris = TF.configuration . jarFileUris
 
+class HasQueryStringBlacklist a b | a -> b where
+    queryStringBlacklist :: P.Lens' a b
+
+instance HasQueryStringBlacklist a b => HasQueryStringBlacklist (TF.Schema l p a) b where
+    queryStringBlacklist = TF.configuration . queryStringBlacklist
+
 class HasPeerNetwork a b | a -> b where
     peerNetwork :: P.Lens' a b
 
@@ -1724,6 +1851,12 @@ class HasEnforced a b | a -> b where
 
 instance HasEnforced a b => HasEnforced (TF.Schema l p a) b where
     enforced = TF.configuration . enforced
+
+class HasIncludeHost a b | a -> b where
+    includeHost :: P.Lens' a b
+
+instance HasIncludeHost a b => HasIncludeHost (TF.Schema l p a) b where
+    includeHost = TF.configuration . includeHost
 
 class HasTriggerTemplate a b | a -> b where
     triggerTemplate :: P.Lens' a b
@@ -1797,6 +1930,12 @@ class HasDiskSizeGb a b | a -> b where
 instance HasDiskSizeGb a b => HasDiskSizeGb (TF.Schema l p a) b where
     diskSizeGb = TF.configuration . diskSizeGb
 
+class HasQueryStringWhitelist a b | a -> b where
+    queryStringWhitelist :: P.Lens' a b
+
+instance HasQueryStringWhitelist a b => HasQueryStringWhitelist (TF.Schema l p a) b where
+    queryStringWhitelist = TF.configuration . queryStringWhitelist
+
 class HasUnhealthyThreshold a b | a -> b where
     unhealthyThreshold :: P.Lens' a b
 
@@ -1821,6 +1960,18 @@ class HasMaxFailuresPerHour a b | a -> b where
 instance HasMaxFailuresPerHour a b => HasMaxFailuresPerHour (TF.Schema l p a) b where
     maxFailuresPerHour = TF.configuration . maxFailuresPerHour
 
+class HasMaxNodeCount a b | a -> b where
+    maxNodeCount :: P.Lens' a b
+
+instance HasMaxNodeCount a b => HasMaxNodeCount (TF.Schema l p a) b where
+    maxNodeCount = TF.configuration . maxNodeCount
+
+class HasIncludeQueryString a b | a -> b where
+    includeQueryString :: P.Lens' a b
+
+instance HasIncludeQueryString a b => HasIncludeQueryString (TF.Schema l p a) b where
+    includeQueryString = TF.configuration . includeQueryString
+
 class HasVersionedExpr a b | a -> b where
     versionedExpr :: P.Lens' a b
 
@@ -1844,6 +1995,18 @@ class HasBackendService a b | a -> b where
 
 instance HasBackendService a b => HasBackendService (TF.Schema l p a) b where
     backendService = TF.configuration . backendService
+
+class HasIncludeProtocol a b | a -> b where
+    includeProtocol :: P.Lens' a b
+
+instance HasIncludeProtocol a b => HasIncludeProtocol (TF.Schema l p a) b where
+    includeProtocol = TF.configuration . includeProtocol
+
+class HasCacheKeyPolicy a b | a -> b where
+    cacheKeyPolicy :: P.Lens' a b
+
+instance HasCacheKeyPolicy a b => HasCacheKeyPolicy (TF.Schema l p a) b where
+    cacheKeyPolicy = TF.configuration . cacheKeyPolicy
 
 class HasDeletionProtection a b | a -> b where
     deletionProtection :: P.Lens' a b
@@ -1886,6 +2049,18 @@ class HasOrganization a b | a -> b where
 
 instance HasOrganization a b => HasOrganization (TF.Schema l p a) b where
     organization = TF.configuration . organization
+
+class HasMinNodeCount a b | a -> b where
+    minNodeCount :: P.Lens' a b
+
+instance HasMinNodeCount a b => HasMinNodeCount (TF.Schema l p a) b where
+    minNodeCount = TF.configuration . minNodeCount
+
+class HasMode a b | a -> b where
+    mode :: P.Lens' a b
+
+instance HasMode a b => HasMode (TF.Schema l p a) b where
+    mode = TF.configuration . mode
 
 class HasTempGcsLocation a b | a -> b where
     tempGcsLocation :: P.Lens' a b
@@ -1977,6 +2152,12 @@ class HasSparksqlConfig a b | a -> b where
 instance HasSparksqlConfig a b => HasSparksqlConfig (TF.Schema l p a) b where
     sparksqlConfig = TF.configuration . sparksqlConfig
 
+class HasMaxRate a b | a -> b where
+    maxRate :: P.Lens' a b
+
+instance HasMaxRate a b => HasMaxRate (TF.Schema l p a) b where
+    maxRate = TF.configuration . maxRate
+
 class HasBucketName a b | a -> b where
     bucketName :: P.Lens' a b
 
@@ -2042,6 +2223,12 @@ class HasOverrideProperties a b | a -> b where
 
 instance HasOverrideProperties a b => HasOverrideProperties (TF.Schema l p a) b where
     overrideProperties = TF.configuration . overrideProperties
+
+class HasPublicPtrDomainName a b | a -> b where
+    publicPtrDomainName :: P.Lens' a b
+
+instance HasPublicPtrDomainName a b => HasPublicPtrDomainName (TF.Schema l p a) b where
+    publicPtrDomainName = TF.configuration . publicPtrDomainName
 
 class HasCors a b | a -> b where
     cors :: P.Lens' a b
@@ -2144,6 +2331,18 @@ class HasIkeVersion a b | a -> b where
 
 instance HasIkeVersion a b => HasIkeVersion (TF.Schema l p a) b where
     ikeVersion = TF.configuration . ikeVersion
+
+class HasOauth2ClientId a b | a -> b where
+    oauth2ClientId :: P.Lens' a b
+
+instance HasOauth2ClientId a b => HasOauth2ClientId (TF.Schema l p a) b where
+    oauth2ClientId = TF.configuration . oauth2ClientId
+
+class HasScratch a b | a -> b where
+    scratch :: P.Lens' a b
+
+instance HasScratch a b => HasScratch (TF.Schema l p a) b where
+    scratch = TF.configuration . scratch
 
 class HasAdvertiseMode a b | a -> b where
     advertiseMode :: P.Lens' a b
@@ -2361,6 +2560,12 @@ class HasScopes a b | a -> b where
 instance HasScopes a b => HasScopes (TF.Schema l p a) b where
     scopes = TF.configuration . scopes
 
+class HasNodeMetadata a b | a -> b where
+    nodeMetadata :: P.Lens' a b
+
+instance HasNodeMetadata a b => HasNodeMetadata (TF.Schema l p a) b where
+    nodeMetadata = TF.configuration . nodeMetadata
+
 class HasGuestAccelerator a b | a -> b where
     guestAccelerator :: P.Lens' a b
 
@@ -2414,6 +2619,12 @@ class HasHealthChecks a b | a -> b where
 
 instance HasHealthChecks a b => HasHealthChecks (TF.Schema l p a) b where
     healthChecks = TF.configuration . healthChecks
+
+class HasClusterSecondaryRangeName a b | a -> b where
+    clusterSecondaryRangeName :: P.Lens' a b
+
+instance HasClusterSecondaryRangeName a b => HasClusterSecondaryRangeName (TF.Schema l p a) b where
+    clusterSecondaryRangeName = TF.configuration . clusterSecondaryRangeName
 
 class HasMainJarFileUri a b | a -> b where
     mainJarFileUri :: P.Lens' a b
@@ -2583,6 +2794,18 @@ class HasSourceDiskEncryptionKeyRaw a b | a -> b where
 instance HasSourceDiskEncryptionKeyRaw a b => HasSourceDiskEncryptionKeyRaw (TF.Schema l p a) b where
     sourceDiskEncryptionKeyRaw = TF.configuration . sourceDiskEncryptionKeyRaw
 
+class HasSize a b | a -> b where
+    size :: P.Lens' a b
+
+instance HasSize a b => HasSize (TF.Schema l p a) b where
+    size = TF.configuration . size
+
+class HasEffect a b | a -> b where
+    effect :: P.Lens' a b
+
+instance HasEffect a b => HasEffect (TF.Schema l p a) b where
+    effect = TF.configuration . effect
+
 class HasTargetPools a b | a -> b where
     targetPools :: P.Lens' a b
 
@@ -2643,6 +2866,12 @@ class HasRawKey a b | a -> b where
 instance HasRawKey a b => HasRawKey (TF.Schema l p a) b where
     rawKey = TF.configuration . rawKey
 
+class HasDeviceName a b | a -> b where
+    deviceName :: P.Lens' a b
+
+instance HasDeviceName a b => HasDeviceName (TF.Schema l p a) b where
+    deviceName = TF.configuration . deviceName
+
 class HasSessionAffinity a b | a -> b where
     sessionAffinity :: P.Lens' a b
 
@@ -2691,6 +2920,12 @@ class HasTcpHealthCheck a b | a -> b where
 instance HasTcpHealthCheck a b => HasTcpHealthCheck (TF.Schema l p a) b where
     tcpHealthCheck = TF.configuration . tcpHealthCheck
 
+class HasMaxUtilization a b | a -> b where
+    maxUtilization :: P.Lens' a b
+
+instance HasMaxUtilization a b => HasMaxUtilization (TF.Schema l p a) b where
+    maxUtilization = TF.configuration . maxUtilization
+
 class HasDay a b | a -> b where
     day :: P.Lens' a b
 
@@ -2702,6 +2937,12 @@ class HasGrpcConfig a b | a -> b where
 
 instance HasGrpcConfig a b => HasGrpcConfig (TF.Schema l p a) b where
     grpcConfig = TF.configuration . grpcConfig
+
+class HasDailyMaintenanceWindow a b | a -> b where
+    dailyMaintenanceWindow :: P.Lens' a b
+
+instance HasDailyMaintenanceWindow a b => HasDailyMaintenanceWindow (TF.Schema l p a) b where
+    dailyMaintenanceWindow = TF.configuration . dailyMaintenanceWindow
 
 class HasContentDisposition a b | a -> b where
     contentDisposition :: P.Lens' a b
@@ -2733,6 +2974,12 @@ class HasPredefinedAcl a b | a -> b where
 instance HasPredefinedAcl a b => HasPredefinedAcl (TF.Schema l p a) b where
     predefinedAcl = TF.configuration . predefinedAcl
 
+class HasAutoRepair a b | a -> b where
+    autoRepair :: P.Lens' a b
+
+instance HasAutoRepair a b => HasAutoRepair (TF.Schema l p a) b where
+    autoRepair = TF.configuration . autoRepair
+
 class HasParent a b | a -> b where
     parent :: P.Lens' a b
 
@@ -2757,11 +3004,23 @@ class HasStorageClass a b | a -> b where
 instance HasStorageClass a b => HasStorageClass (TF.Schema l p a) b where
     storageClass = TF.configuration . storageClass
 
+class HasTaint a b | a -> b where
+    taint :: P.Lens' a b
+
+instance HasTaint a b => HasTaint (TF.Schema l p a) b where
+    taint = TF.configuration . taint
+
 class HasOnHostMaintenance a b | a -> b where
     onHostMaintenance :: P.Lens' a b
 
 instance HasOnHostMaintenance a b => HasOnHostMaintenance (TF.Schema l p a) b where
     onHostMaintenance = TF.configuration . onHostMaintenance
+
+class HasBalancingMode a b | a -> b where
+    balancingMode :: P.Lens' a b
+
+instance HasBalancingMode a b => HasBalancingMode (TF.Schema l p a) b where
+    balancingMode = TF.configuration . balancingMode
 
 class HasAuthorizedNetworks a b | a -> b where
     authorizedNetworks :: P.Lens' a b
@@ -2792,6 +3051,12 @@ class HasQuery a b | a -> b where
 
 instance HasQuery a b => HasQuery (TF.Schema l p a) b where
     query = TF.configuration . query
+
+class HasWorkloadMetadataConfig a b | a -> b where
+    workloadMetadataConfig :: P.Lens' a b
+
+instance HasWorkloadMetadataConfig a b => HasWorkloadMetadataConfig (TF.Schema l p a) b where
+    workloadMetadataConfig = TF.configuration . workloadMetadataConfig
 
 class HasPolicyData a b | a -> b where
     policyData :: P.Lens' a b
@@ -2967,6 +3232,12 @@ class HasSha1 a b | a -> b where
 instance HasSha1 a b => HasSha1 (TF.Schema l p a) b where
     sha1 = TF.configuration . sha1
 
+class HasRangeName a b | a -> b where
+    rangeName :: P.Lens' a b
+
+instance HasRangeName a b => HasRangeName (TF.Schema l p a) b where
+    rangeName = TF.configuration . rangeName
+
 class HasCiphertext a b | a -> b where
     ciphertext :: P.Lens' a b
 
@@ -3033,6 +3304,12 @@ class HasSourceTags a b | a -> b where
 instance HasSourceTags a b => HasSourceTags (TF.Schema l p a) b where
     sourceTags = TF.configuration . sourceTags
 
+class HasMaxRatePerInstance a b | a -> b where
+    maxRatePerInstance :: P.Lens' a b
+
+instance HasMaxRatePerInstance a b => HasMaxRatePerInstance (TF.Schema l p a) b where
+    maxRatePerInstance = TF.configuration . maxRatePerInstance
+
 class HasName a b | a -> b where
     name :: P.Lens' a b
 
@@ -3056,6 +3333,12 @@ class HasTemplateGcsPath a b | a -> b where
 
 instance HasTemplateGcsPath a b => HasTemplateGcsPath (TF.Schema l p a) b where
     templateGcsPath = TF.configuration . templateGcsPath
+
+class HasIssueClientCertificate a b | a -> b where
+    issueClientCertificate :: P.Lens' a b
+
+instance HasIssueClientCertificate a b => HasIssueClientCertificate (TF.Schema l p a) b where
+    issueClientCertificate = TF.configuration . issueClientCertificate
 
 class HasFolder a b | a -> b where
     folder :: P.Lens' a b
@@ -3159,11 +3442,23 @@ class HasAction a b | a -> b where
 instance HasAction a b => HasAction (TF.Schema l p a) b where
     action = TF.configuration . action
 
+class HasProvider a b | a -> b where
+    provider :: P.Lens' a b
+
+instance HasProvider a b => HasProvider (TF.Schema l p a) b where
+    provider = TF.configuration . provider
+
 class HasNetworkInterface a b | a -> b where
     networkInterface :: P.Lens' a b
 
 instance HasNetworkInterface a b => HasNetworkInterface (TF.Schema l p a) b where
     networkInterface = TF.configuration . networkInterface
+
+class HasCapacityScaler a b | a -> b where
+    capacityScaler :: P.Lens' a b
+
+instance HasCapacityScaler a b => HasCapacityScaler (TF.Schema l p a) b where
+    capacityScaler = TF.configuration . capacityScaler
 
 class HasAttributes a b | a -> b where
     attributes :: P.Lens' a b
@@ -3176,6 +3471,12 @@ class HasTier a b | a -> b where
 
 instance HasTier a b => HasTier (TF.Schema l p a) b where
     tier = TF.configuration . tier
+
+class HasServicesSecondaryRangeName a b | a -> b where
+    servicesSecondaryRangeName :: P.Lens' a b
+
+instance HasServicesSecondaryRangeName a b => HasServicesSecondaryRangeName (TF.Schema l p a) b where
+    servicesSecondaryRangeName = TF.configuration . servicesSecondaryRangeName
 
 class HasNextHopGateway a b | a -> b where
     nextHopGateway :: P.Lens' a b
@@ -3212,6 +3513,12 @@ class HasInternalIpOnly a b | a -> b where
 
 instance HasInternalIpOnly a b => HasInternalIpOnly (TF.Schema l p a) b where
     internalIpOnly = TF.configuration . internalIpOnly
+
+class HasClientCertificateConfig a b | a -> b where
+    clientCertificateConfig :: P.Lens' a b
+
+instance HasClientCertificateConfig a b => HasClientCertificateConfig (TF.Schema l p a) b where
+    clientCertificateConfig = TF.configuration . clientCertificateConfig
 
 class HasRetryOnFailure a b | a -> b where
     retryOnFailure :: P.Lens' a b
@@ -3294,6 +3601,9 @@ class HasComputedNamedPort a b | a -> b where
 class HasComputedFingerprint a b | a -> b where
     computedFingerprint :: a -> b
 
+class HasComputedOnHostMaintenance a b | a -> b where
+    computedOnHostMaintenance :: a -> b
+
 class HasComputedClientCertificate a b | a -> b where
     computedClientCertificate :: a -> b
 
@@ -3323,6 +3633,9 @@ class HasComputedGcrDomain a b | a -> b where
 
 class HasComputedMethods a b | a -> b where
     computedMethods :: a -> b
+
+class HasComputedSubnetworkRangeName a b | a -> b where
+    computedSubnetworkRangeName :: a -> b
 
 class HasComputedNames a b | a -> b where
     computedNames :: a -> b
@@ -3422,6 +3735,9 @@ class HasComputedMasterVersion a b | a -> b where
 
 class HasComputedEndpoints a b | a -> b where
     computedEndpoints :: a -> b
+
+class HasComputedPublicPtrDomainName a b | a -> b where
+    computedPublicPtrDomainName :: a -> b
 
 class HasComputedPortRange a b | a -> b where
     computedPortRange :: a -> b
@@ -3770,6 +4086,9 @@ class HasComputedLogObjectPrefix a b | a -> b where
 
 class HasComputedMinCpuPlatform a b | a -> b where
     computedMinCpuPlatform :: a -> b
+
+class HasComputedAutomaticRestart a b | a -> b where
+    computedAutomaticRestart :: a -> b
 
 class HasComputedMasterInstanceName a b | a -> b where
     computedMasterInstanceName :: a -> b
@@ -4158,6 +4477,9 @@ class HasComputedFamily a b | a -> b where
 class HasComputedImageVersion a b | a -> b where
     computedImageVersion :: a -> b
 
+class HasComputedAccessConfig a b | a -> b where
+    computedAccessConfig :: a -> b
+
 class HasComputedClusterUuid a b | a -> b where
     computedClusterUuid :: a -> b
 
@@ -4268,6 +4590,9 @@ class HasComputedEnabled a b | a -> b where
 
 class HasComputedRepositoryUrl a b | a -> b where
     computedRepositoryUrl :: a -> b
+
+class HasComputedAliasIpRange a b | a -> b where
+    computedAliasIpRange :: a -> b
 
 class HasComputedAuthorizedNetwork a b | a -> b where
     computedAuthorizedNetwork :: a -> b
