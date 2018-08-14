@@ -18,17 +18,17 @@
 module Terrafomo.Heroku.Settings
     (
     -- * Settings Datatypes
-    -- ** rule
-      Rule (..)
-    , newRule
+    -- ** space_inbound_ruleset_rule
+      SpaceInboundRulesetRule (..)
+    , newSpaceInboundRulesetRule
 
-    -- ** organization
-    , Organization (..)
-    , newOrganization
+    -- ** space_vpn_connection_tunnels
+    , SpaceVpnConnectionTunnels (..)
+    , newSpaceVpnConnectionTunnels
 
-    -- ** tunnels
-    , Tunnels (..)
-    , newTunnels
+    -- ** app_organization
+    , AppOrganization (..)
+    , newAppOrganization
 
     ) where
 
@@ -53,8 +53,8 @@ import qualified Terrafomo.Heroku.Types as P
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Validator    as TF
 
--- | @rule@ nested settings.
-data Rule s = Rule'
+-- | @space_inbound_ruleset_rule@ nested settings.
+data SpaceInboundRulesetRule s = SpaceInboundRulesetRule'
     { _action :: TF.Attr s P.Text
     -- ^ @action@ - (Required)
     --
@@ -63,82 +63,115 @@ data Rule s = Rule'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRule
+newSpaceInboundRulesetRule
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
-    -> Rule s
-newRule _action _source =
-    Rule'
+    -> SpaceInboundRulesetRule s
+newSpaceInboundRulesetRule _action _source =
+    SpaceInboundRulesetRule'
         { _action = _action
         , _source = _source
         }
 
-instance P.Hashable  (Rule s)
-instance TF.IsValue  (Rule s)
-instance TF.IsObject (Rule s) where
-    toObject Rule'{..} = P.catMaybes
+instance P.Hashable  (SpaceInboundRulesetRule s)
+instance TF.IsValue  (SpaceInboundRulesetRule s)
+instance TF.IsObject (SpaceInboundRulesetRule s) where
+    toObject SpaceInboundRulesetRule'{..} = P.catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "source" <$> TF.attribute _source
         ]
 
-instance TF.IsValid (Rule s) where
+instance TF.IsValid (SpaceInboundRulesetRule s) where
     validator = P.mempty
 
-instance P.HasAction (Rule s) (TF.Attr s P.Text) where
+instance P.HasAction (SpaceInboundRulesetRule s) (TF.Attr s P.Text) where
     action =
-        P.lens (_action :: Rule s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: Rule s)
+        P.lens (_action :: SpaceInboundRulesetRule s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: SpaceInboundRulesetRule s)
 
-instance P.HasSource (Rule s) (TF.Attr s P.Text) where
+instance P.HasSource (SpaceInboundRulesetRule s) (TF.Attr s P.Text) where
     source =
-        P.lens (_source :: Rule s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: Rule s)
+        P.lens (_source :: SpaceInboundRulesetRule s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: SpaceInboundRulesetRule s)
 
--- | @organization@ nested settings.
-data Organization s = Organization'
+-- | @space_vpn_connection_tunnels@ nested settings.
+data SpaceVpnConnectionTunnels s = SpaceVpnConnectionTunnels'
     deriving (P.Show, P.Eq, P.Generic)
 
-newOrganization
-    :: Organization s
-newOrganization =
-    Organization'
+newSpaceVpnConnectionTunnels
+    :: SpaceVpnConnectionTunnels s
+newSpaceVpnConnectionTunnels =
+    SpaceVpnConnectionTunnels'
 
-instance P.Hashable  (Organization s)
-instance TF.IsValue  (Organization s)
-instance TF.IsObject (Organization s) where
-    toObject Organization' = []
+instance P.Hashable  (SpaceVpnConnectionTunnels s)
+instance TF.IsValue  (SpaceVpnConnectionTunnels s)
+instance TF.IsObject (SpaceVpnConnectionTunnels s) where
+    toObject SpaceVpnConnectionTunnels' = []
 
-instance TF.IsValid (Organization s) where
+instance TF.IsValid (SpaceVpnConnectionTunnels s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedLocked (TF.Ref s' (Organization s)) (TF.Attr s P.Bool) where
-    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (SpaceVpnConnectionTunnels s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Organization s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+instance s ~ s' => P.HasComputedPreSharedKey (TF.Ref s' (SpaceVpnConnectionTunnels s)) (TF.Attr s P.Text) where
+    computedPreSharedKey x = TF.compute (TF.refKey x) "pre_shared_key"
 
-instance s ~ s' => P.HasComputedPersonal (TF.Ref s' (Organization s)) (TF.Attr s P.Bool) where
-    computedPersonal x = TF.compute (TF.refKey x) "_computedPersonal"
+-- | @app_organization@ nested settings.
+data AppOrganization s = AppOrganization'
+    { _locked   :: TF.Attr s P.Bool
+    -- ^ @locked@ - (Optional)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _personal :: TF.Attr s P.Bool
+    -- ^ @personal@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
--- | @tunnels@ nested settings.
-data Tunnels s = Tunnels'
-    deriving (P.Show, P.Eq, P.Generic)
+newAppOrganization
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> AppOrganization s
+newAppOrganization _name =
+    AppOrganization'
+        { _locked = TF.Nil
+        , _name = _name
+        , _personal = TF.Nil
+        }
 
-newTunnels
-    :: Tunnels s
-newTunnels =
-    Tunnels'
+instance P.Hashable  (AppOrganization s)
+instance TF.IsValue  (AppOrganization s)
+instance TF.IsObject (AppOrganization s) where
+    toObject AppOrganization'{..} = P.catMaybes
+        [ TF.assign "locked" <$> TF.attribute _locked
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "personal" <$> TF.attribute _personal
+        ]
 
-instance P.Hashable  (Tunnels s)
-instance TF.IsValue  (Tunnels s)
-instance TF.IsObject (Tunnels s) where
-    toObject Tunnels' = []
-
-instance TF.IsValid (Tunnels s) where
+instance TF.IsValid (AppOrganization s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedIp (TF.Ref s' (Tunnels s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
+instance P.HasLocked (AppOrganization s) (TF.Attr s P.Bool) where
+    locked =
+        P.lens (_locked :: AppOrganization s -> TF.Attr s P.Bool)
+               (\s a -> s { _locked = a } :: AppOrganization s)
 
-instance s ~ s' => P.HasComputedPreSharedKey (TF.Ref s' (Tunnels s)) (TF.Attr s P.Text) where
-    computedPreSharedKey x = TF.compute (TF.refKey x) "_computedPreSharedKey"
+instance P.HasName (AppOrganization s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AppOrganization s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AppOrganization s)
+
+instance P.HasPersonal (AppOrganization s) (TF.Attr s P.Bool) where
+    personal =
+        P.lens (_personal :: AppOrganization s -> TF.Attr s P.Bool)
+               (\s a -> s { _personal = a } :: AppOrganization s)
+
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (AppOrganization s)) (TF.Attr s P.Bool) where
+    computedLocked x = TF.compute (TF.refKey x) "locked"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AppOrganization s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPersonal (TF.Ref s' (AppOrganization s)) (TF.Attr s P.Bool) where
+    computedPersonal x = TF.compute (TF.refKey x) "personal"

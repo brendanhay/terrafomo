@@ -36,6 +36,8 @@ module Terrafomo.Heroku.Lens
     , HasQuantity (..)
     , HasPublicIp (..)
     , HasPermissions (..)
+    , HasLocked (..)
+    , HasPersonal (..)
     , HasStage (..)
     , HasShield (..)
     , HasSize (..)
@@ -219,6 +221,18 @@ class HasPermissions a b | a -> b where
 
 instance HasPermissions a b => HasPermissions (TF.Schema l p a) b where
     permissions = TF.configuration . permissions
+
+class HasLocked a b | a -> b where
+    locked :: P.Lens' a b
+
+instance HasLocked a b => HasLocked (TF.Schema l p a) b where
+    locked = TF.configuration . locked
+
+class HasPersonal a b | a -> b where
+    personal :: P.Lens' a b
+
+instance HasPersonal a b => HasPersonal (TF.Schema l p a) b where
+    personal = TF.configuration . personal
 
 class HasStage a b | a -> b where
     stage :: P.Lens' a b

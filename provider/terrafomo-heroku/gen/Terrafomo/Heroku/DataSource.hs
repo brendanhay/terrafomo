@@ -59,7 +59,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @heroku_app@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Heroku/heroku_app terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/heroku/d/app.html terraform documentation>
 -- for more information.
 data AppData s = AppData'
     { _name :: TF.Attr s P.Text
@@ -90,41 +90,41 @@ instance P.HasName (AppData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: AppData s)
 
 instance s ~ s' => P.HasComputedAcm (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
-    computedAcm x = TF.compute (TF.refKey x) "_computedAcm"
+    computedAcm x = TF.compute (TF.refKey x) "acm"
 
 instance s ~ s' => P.HasComputedBuildpacks (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedBuildpacks x = TF.compute (TF.refKey x) "_computedBuildpacks"
+    computedBuildpacks x = TF.compute (TF.refKey x) "buildpacks"
 
 instance s ~ s' => P.HasComputedConfigVars (TF.Ref s' (AppData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedConfigVars x = TF.compute (TF.refKey x) "_computedConfigVars"
+    computedConfigVars x = TF.compute (TF.refKey x) "config_vars"
 
 instance s ~ s' => P.HasComputedGitUrl (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedGitUrl x = TF.compute (TF.refKey x) "_computedGitUrl"
+    computedGitUrl x = TF.compute (TF.refKey x) "git_url"
 
 instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedHerokuHostname x = TF.compute (TF.refKey x) "_computedHerokuHostname"
+    computedHerokuHostname x = TF.compute (TF.refKey x) "heroku_hostname"
 
 instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
-    computedInternalRouting x = TF.compute (TF.refKey x) "_computedInternalRouting"
+    computedInternalRouting x = TF.compute (TF.refKey x) "internal_routing"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s (Organization s)]) where
-    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s (AppOrganization s)]) where
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSpace (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedSpace x = TF.compute (TF.refKey x) "_computedSpace"
+    computedSpace x = TF.compute (TF.refKey x) "space"
 
 instance s ~ s' => P.HasComputedStack (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedStack x = TF.compute (TF.refKey x) "_computedStack"
+    computedStack x = TF.compute (TF.refKey x) "stack"
 
 instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "_computedWebUrl"
+    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
 
 -- | @heroku_space@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/heroku/d/space.html terraform documentation>
 -- for more information.
 data SpaceData s = SpaceData'
     { _name :: TF.Attr s P.Text
@@ -155,26 +155,26 @@ instance P.HasName (SpaceData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SpaceData s)
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
-    computedOrganization x = TF.compute (TF.refKey x) "_computedOrganization"
+    computedOrganization x = TF.compute (TF.refKey x) "organization"
 
 instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOutboundIps x = TF.compute (TF.refKey x) "_computedOutboundIps"
+    computedOutboundIps x = TF.compute (TF.refKey x) "outbound_ips"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedShield (TF.Ref s' (SpaceData s)) (TF.Attr s P.Bool) where
-    computedShield x = TF.compute (TF.refKey x) "_computedShield"
+    computedShield x = TF.compute (TF.refKey x) "shield"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedTrustedIpRanges (TF.Ref s' (SpaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTrustedIpRanges x = TF.compute (TF.refKey x) "_computedTrustedIpRanges"
+    computedTrustedIpRanges x = TF.compute (TF.refKey x) "trusted_ip_ranges"
 
 -- | @heroku_space_peering_info@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space_peering_info terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/heroku/d/space_peering_info.html terraform documentation>
 -- for more information.
 data SpacePeeringInfoData s = SpacePeeringInfoData'
     { _name :: TF.Attr s P.Text
@@ -205,19 +205,19 @@ instance P.HasName (SpacePeeringInfoData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SpacePeeringInfoData s)
 
 instance s ~ s' => P.HasComputedAwsAccountId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
-    computedAwsAccountId x = TF.compute (TF.refKey x) "_computedAwsAccountId"
+    computedAwsAccountId x = TF.compute (TF.refKey x) "aws_account_id"
 
 instance s ~ s' => P.HasComputedAwsRegion (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
-    computedAwsRegion x = TF.compute (TF.refKey x) "_computedAwsRegion"
+    computedAwsRegion x = TF.compute (TF.refKey x) "aws_region"
 
 instance s ~ s' => P.HasComputedDynoCidrBlocks (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDynoCidrBlocks x = TF.compute (TF.refKey x) "_computedDynoCidrBlocks"
+    computedDynoCidrBlocks x = TF.compute (TF.refKey x) "dyno_cidr_blocks"
 
 instance s ~ s' => P.HasComputedUnavailableCidrBlocks (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUnavailableCidrBlocks x = TF.compute (TF.refKey x) "_computedUnavailableCidrBlocks"
+    computedUnavailableCidrBlocks x = TF.compute (TF.refKey x) "unavailable_cidr_blocks"
 
 instance s ~ s' => P.HasComputedVpcCidr (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Bool) where
-    computedVpcCidr x = TF.compute (TF.refKey x) "_computedVpcCidr"
+    computedVpcCidr x = TF.compute (TF.refKey x) "vpc_cidr"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"

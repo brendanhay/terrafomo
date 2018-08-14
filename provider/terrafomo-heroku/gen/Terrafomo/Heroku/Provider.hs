@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | The @Heroku@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Heroku/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/heroku/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apiKey  :: P.Maybe P.Text
