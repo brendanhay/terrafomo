@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/local/index.html",
     "dataSources": [
         {
             "con": {
@@ -26,6 +27,7 @@
                     "original": "filename"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/local/d/file.html",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -141,6 +143,7 @@
                     "original": "sensitive_content"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/local/r/file.html",
             "name": "FileResource",
             "threaded": true,
             "attributes": [],
