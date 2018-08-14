@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/mysql/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -57,6 +58,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/mysql/r/database.html",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [],
@@ -169,6 +171,7 @@
                     "original": "user"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/mysql/r/grant.html",
             "name": "GrantResource",
             "threaded": true,
             "attributes": [],
@@ -309,6 +312,7 @@
                     "original": "user"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/mysql/r/user.html",
             "name": "UserResource",
             "threaded": true,
             "attributes": [],
