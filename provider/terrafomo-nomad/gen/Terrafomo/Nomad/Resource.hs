@@ -71,7 +71,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | @nomad_acl_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_acl_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/r/acl_policy.html terraform documentation>
 -- for more information.
 data AclPolicyResource s = AclPolicyResource'
     { _description :: TF.Attr s P.Text
@@ -79,7 +79,7 @@ data AclPolicyResource s = AclPolicyResource'
     -- Description for this policy.
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Unique name for this policy.
     --
     , _rulesHcl    :: TF.Attr s P.Text
@@ -128,11 +128,11 @@ instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
 
 -- | @nomad_acl_token@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_acl_token terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/r/acl_token.html terraform documentation>
 -- for more information.
 data AclTokenResource s = AclTokenResource'
     { _global   :: TF.Attr s P.Bool
-    -- ^ @global@ - (Optional)
+    -- ^ @global@ - (Optional, Forces New)
     -- Whether the token should be replicated to all regions or not.
     --
     , _name     :: TF.Attr s P.Text
@@ -193,14 +193,14 @@ instance P.HasType' (AclTokenResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: AclTokenResource s)
 
 instance s ~ s' => P.HasComputedAccessorId (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedAccessorId x = TF.compute (TF.refKey x) "_computedAccessorId"
+    computedAccessorId x = TF.compute (TF.refKey x) "accessor_id"
 
 instance s ~ s' => P.HasComputedSecretId (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
-    computedSecretId x = TF.compute (TF.refKey x) "_computedSecretId"
+    computedSecretId x = TF.compute (TF.refKey x) "secret_id"
 
 -- | @nomad_job@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_job terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/r/job.html terraform documentation>
 -- for more information.
 data JobResource s = JobResource'
     { _deregisterOnDestroy  :: TF.Attr s P.Bool
@@ -266,7 +266,7 @@ instance P.HasPolicyOverride (JobResource s) (TF.Attr s P.Bool) where
 
 -- | @nomad_namespace@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_namespace terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/r/namespace.html terraform documentation>
 -- for more information.
 data NamespaceResource s = NamespaceResource'
     { _description :: TF.Attr s P.Text
@@ -274,7 +274,7 @@ data NamespaceResource s = NamespaceResource'
     -- Description for this namespace.
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Unique name for this namespace.
     --
     , _quota       :: TF.Attr s P.Text
@@ -321,25 +321,25 @@ instance P.HasQuota (NamespaceResource s) (TF.Attr s P.Text) where
 
 -- | @nomad_quota_specification@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_quota_specification terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/r/quota_specification.html terraform documentation>
 -- for more information.
 data QuotaSpecificationResource s = QuotaSpecificationResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     -- Description for this quota specification.
     --
-    , _limits      :: TF.Attr s [TF.Attr s (Limits s)]
+    , _limits      :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]
     -- ^ @limits@ - (Required)
     -- Limits encapsulated by this quota specification.
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Unique name for this quota specification.
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 quotaSpecificationResource
-    :: TF.Attr s [TF.Attr s (Limits s)] -- ^ @limits@ - 'P.limits'
+    :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)] -- ^ @limits@ - 'P.limits'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Resource P.Provider (QuotaSpecificationResource s)
 quotaSpecificationResource _limits _name =
@@ -361,7 +361,7 @@ instance TF.IsValid (QuotaSpecificationResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_limits"
                   (_limits
-                      :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (Limits s)])
+                      :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)])
                   TF.validator
 
 instance P.HasDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) where
@@ -369,9 +369,9 @@ instance P.HasDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) wher
         P.lens (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: QuotaSpecificationResource s)
 
-instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s [TF.Attr s (Limits s)]) where
+instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]) where
     limits =
-        P.lens (_limits :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (Limits s)])
+        P.lens (_limits :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)])
                (\s a -> s { _limits = a } :: QuotaSpecificationResource s)
 
 instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
@@ -381,7 +381,7 @@ instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
 
 -- | @nomad_sentinel_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_sentinel_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/r/sentinel_policy.html terraform documentation>
 -- for more information.
 data SentinelPolicyResource s = SentinelPolicyResource'
     { _description      :: TF.Attr s P.Text
@@ -393,7 +393,7 @@ data SentinelPolicyResource s = SentinelPolicyResource'
     -- Specifies the enforcement level of the policy.
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Unique name for this policy.
     --
     , _policy           :: TF.Attr s P.Text

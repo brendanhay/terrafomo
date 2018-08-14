@@ -18,13 +18,13 @@
 module Terrafomo.Nomad.Settings
     (
     -- * Settings Datatypes
-    -- ** region_limit
-      RegionLimit (..)
-    , newRegionLimit
+    -- ** limits_region_limit
+      LimitsRegionLimit (..)
+    , newLimitsRegionLimit
 
-    -- ** limits
-    , Limits (..)
-    , newLimits
+    -- ** quota_specification_limits
+    , QuotaSpecificationLimits (..)
+    , newQuotaSpecificationLimits
 
     ) where
 
@@ -49,8 +49,8 @@ import qualified Terrafomo.Nomad.Lens  as P
 import qualified Terrafomo.Nomad.Types as P
 import qualified Terrafomo.Validator   as TF
 
--- | @region_limit@ nested settings.
-data RegionLimit s = RegionLimit'
+-- | @limits_region_limit@ nested settings.
+data LimitsRegionLimit s = LimitsRegionLimit'
     { _cpu      :: TF.Attr s P.Integer
     -- ^ @cpu@ - (Optional)
     --
@@ -59,78 +59,78 @@ data RegionLimit s = RegionLimit'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRegionLimit
-    :: RegionLimit s
-newRegionLimit =
-    RegionLimit'
+newLimitsRegionLimit
+    :: LimitsRegionLimit s
+newLimitsRegionLimit =
+    LimitsRegionLimit'
         { _cpu = TF.Nil
         , _memoryMb = TF.Nil
         }
 
-instance P.Hashable  (RegionLimit s)
-instance TF.IsValue  (RegionLimit s)
-instance TF.IsObject (RegionLimit s) where
-    toObject RegionLimit'{..} = P.catMaybes
+instance P.Hashable  (LimitsRegionLimit s)
+instance TF.IsValue  (LimitsRegionLimit s)
+instance TF.IsObject (LimitsRegionLimit s) where
+    toObject LimitsRegionLimit'{..} = P.catMaybes
         [ TF.assign "cpu" <$> TF.attribute _cpu
         , TF.assign "memory_mb" <$> TF.attribute _memoryMb
         ]
 
-instance TF.IsValid (RegionLimit s) where
+instance TF.IsValid (LimitsRegionLimit s) where
     validator = P.mempty
 
-instance P.HasCpu (RegionLimit s) (TF.Attr s P.Integer) where
+instance P.HasCpu (LimitsRegionLimit s) (TF.Attr s P.Integer) where
     cpu =
-        P.lens (_cpu :: RegionLimit s -> TF.Attr s P.Integer)
-               (\s a -> s { _cpu = a } :: RegionLimit s)
+        P.lens (_cpu :: LimitsRegionLimit s -> TF.Attr s P.Integer)
+               (\s a -> s { _cpu = a } :: LimitsRegionLimit s)
 
-instance P.HasMemoryMb (RegionLimit s) (TF.Attr s P.Integer) where
+instance P.HasMemoryMb (LimitsRegionLimit s) (TF.Attr s P.Integer) where
     memoryMb =
-        P.lens (_memoryMb :: RegionLimit s -> TF.Attr s P.Integer)
-               (\s a -> s { _memoryMb = a } :: RegionLimit s)
+        P.lens (_memoryMb :: LimitsRegionLimit s -> TF.Attr s P.Integer)
+               (\s a -> s { _memoryMb = a } :: LimitsRegionLimit s)
 
--- | @limits@ nested settings.
-data Limits s = Limits'
+-- | @quota_specification_limits@ nested settings.
+data QuotaSpecificationLimits s = QuotaSpecificationLimits'
     { _region      :: TF.Attr s P.Text
     -- ^ @region@ - (Required)
     -- Region in which this limit has affect.
     --
-    , _regionLimit :: TF.Attr s (RegionLimit s)
+    , _regionLimit :: TF.Attr s (LimitsRegionLimit s)
     -- ^ @region_limit@ - (Required)
     -- The limit applied to this region.
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newLimits
+newQuotaSpecificationLimits
     :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Attr s (RegionLimit s) -- ^ @region_limit@ - 'P.regionLimit'
-    -> Limits s
-newLimits _region _regionLimit =
-    Limits'
+    -> TF.Attr s (LimitsRegionLimit s) -- ^ @region_limit@ - 'P.regionLimit'
+    -> QuotaSpecificationLimits s
+newQuotaSpecificationLimits _region _regionLimit =
+    QuotaSpecificationLimits'
         { _region = _region
         , _regionLimit = _regionLimit
         }
 
-instance P.Hashable  (Limits s)
-instance TF.IsValue  (Limits s)
-instance TF.IsObject (Limits s) where
-    toObject Limits'{..} = P.catMaybes
+instance P.Hashable  (QuotaSpecificationLimits s)
+instance TF.IsValue  (QuotaSpecificationLimits s)
+instance TF.IsObject (QuotaSpecificationLimits s) where
+    toObject QuotaSpecificationLimits'{..} = P.catMaybes
         [ TF.assign "region" <$> TF.attribute _region
         , TF.assign "region_limit" <$> TF.attribute _regionLimit
         ]
 
-instance TF.IsValid (Limits s) where
+instance TF.IsValid (QuotaSpecificationLimits s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_regionLimit"
                   (_regionLimit
-                      :: Limits s -> TF.Attr s (RegionLimit s))
+                      :: QuotaSpecificationLimits s -> TF.Attr s (LimitsRegionLimit s))
                   TF.validator
 
-instance P.HasRegion (Limits s) (TF.Attr s P.Text) where
+instance P.HasRegion (QuotaSpecificationLimits s) (TF.Attr s P.Text) where
     region =
-        P.lens (_region :: Limits s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: Limits s)
+        P.lens (_region :: QuotaSpecificationLimits s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: QuotaSpecificationLimits s)
 
-instance P.HasRegionLimit (Limits s) (TF.Attr s (RegionLimit s)) where
+instance P.HasRegionLimit (QuotaSpecificationLimits s) (TF.Attr s (LimitsRegionLimit s)) where
     regionLimit =
-        P.lens (_regionLimit :: Limits s -> TF.Attr s (RegionLimit s))
-               (\s a -> s { _regionLimit = a } :: Limits s)
+        P.lens (_regionLimit :: QuotaSpecificationLimits s -> TF.Attr s (LimitsRegionLimit s))
+               (\s a -> s { _regionLimit = a } :: QuotaSpecificationLimits s)

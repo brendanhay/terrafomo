@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | @nomad_regions@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Nomad/nomad_regions terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/nomad/d/regions.html terraform documentation>
 -- for more information.
 data RegionsData s = RegionsData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -69,4 +69,4 @@ instance TF.IsValid (RegionsData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
+    computedRegions x = TF.compute (TF.refKey x) "regions"
