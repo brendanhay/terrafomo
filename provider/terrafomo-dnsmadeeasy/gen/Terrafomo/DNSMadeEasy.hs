@@ -1,6 +1,7 @@
 -- This module is auto-generated.
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
 
 -- |
 -- Module      : Terrafomo.DNSMadeEasy
