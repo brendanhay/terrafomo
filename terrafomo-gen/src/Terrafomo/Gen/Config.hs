@@ -108,8 +108,8 @@ instance JSON.FromJSON Config where
             mappend dependencies
                 <$> o .:? "extra-deps" .!= mempty
 
-        m <- fmap exactRules <$> o .:? "datatype-overrides" .!= mempty
-        a <- compileRules    <$> o .:? "field-overrides"    .!= []
+        m <- fmap exactRules <$> o .:? "datatype-field-overrides" .!= mempty
+        a <- compileRules    <$> o .:? "global-field-overrides"   .!= []
 
         let configApplyRules datatype field =
                 -- datatype-overrides take precedence over the more general

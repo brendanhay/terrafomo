@@ -12,6 +12,7 @@ import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
 
 import Data.Bifunctor      (second)
+import Data.Function       (on)
 import Data.HashMap.Strict (HashMap)
 import Data.HashSet        (HashSet)
 import Data.Maybe          (fromMaybe, isNothing, mapMaybe)
@@ -31,6 +32,7 @@ import qualified Control.Monad.State.Strict as State
 import qualified Data.Foldable              as Fold
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
+import qualified Data.List                  as List
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
 import qualified Data.Traversable           as Traverse
@@ -159,8 +161,17 @@ mergeSchema original a =
     merge old new = do
         refresh <-
             pure $! old
-                { schemaArguments  = schemaArguments  old ++ schemaArguments  new
-                , schemaAttributes = schemaAttributes old ++ schemaAttributes new
+                { schemaArguments  =
+                    List.nubBy (on (==) fieldOriginal)
+                        ( schemaArguments old
+                       ++ schemaArguments new
+                        )
+
+                , schemaAttributes =
+                    List.nubBy (on (==) fieldOriginal)
+                        ( schemaAttributes old
+                       ++ schemaAttributes new
+                        )
                 }
 
             -- FIXME: revisit safe/saner merging strategies
