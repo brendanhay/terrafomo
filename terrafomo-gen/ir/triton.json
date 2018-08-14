@@ -2,8 +2,202 @@
     "settings": [
         {
             "con": {
-                "smart": "newNic",
-                "name": "Nic'"
+                "smart": "newMachineCns",
+                "name": "MachineCns'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Disable CNS for this instance (after create)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disable\" <$> TF.attribute",
+                    "name": "_disable",
+                    "method": "disable",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDisable",
+                    "validate": false,
+                    "optional": true,
+                    "original": "disable"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Assign CNS service names to this instance"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"services\" <$> TF.attribute",
+                    "name": "_services",
+                    "method": "services",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasServices",
+                    "validate": false,
+                    "optional": true,
+                    "original": "services"
+                }
+            ],
+            "name": "MachineCns",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "MachineCns s",
+            "original": "machine_cns"
+        },
+        {
+            "con": {
+                "smart": "newPackageFilter",
+                "name": "PackageFilter'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "_disk",
+                    "method": "disk",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDisk",
+                    "validate": false,
+                    "optional": true,
+                    "original": "disk"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"group\" <$> TF.attribute",
+                    "name": "_group",
+                    "method": "group",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasGroup",
+                    "validate": false,
+                    "optional": true,
+                    "original": "group"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lwps\" <$> TF.attribute",
+                    "name": "_lwps",
+                    "method": "lwps",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasLwps",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lwps"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
+                    "name": "_memory",
+                    "method": "memory",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMemory",
+                    "validate": false,
+                    "optional": true,
+                    "original": "memory"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"swap\" <$> TF.attribute",
+                    "name": "_swap",
+                    "method": "swap",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasSwap",
+                    "validate": false,
+                    "optional": true,
+                    "original": "swap"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vcpus\" <$> TF.attribute",
+                    "name": "_vcpus",
+                    "method": "vcpus",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasVcpus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vcpus"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "version"
+                }
+            ],
+            "name": "PackageFilter",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "PackageFilter s",
+            "original": "package_filter"
+        },
+        {
+            "con": {
+                "smart": "newMachineNic",
+                "name": "MachineNic'"
             },
             "arguments": [
                 {
@@ -25,7 +219,7 @@
                     "original": "network"
                 }
             ],
-            "name": "Nic",
+            "name": "MachineNic",
             "threaded": true,
             "attributes": [
                 {
@@ -158,204 +352,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Nic s",
-            "original": "nic"
-        },
-        {
-            "con": {
-                "smart": "newCns",
-                "name": "Cns'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Disable CNS for this instance (after create)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"disable\" <$> TF.attribute",
-                    "name": "_disable",
-                    "method": "disable",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasDisable",
-                    "validate": false,
-                    "optional": true,
-                    "original": "disable"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Assign CNS service names to this instance"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"services\" <$> TF.attribute",
-                    "name": "_services",
-                    "method": "services",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasServices",
-                    "validate": false,
-                    "optional": true,
-                    "original": "services"
-                }
-            ],
-            "name": "Cns",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Cns s",
-            "original": "cns"
-        },
-        {
-            "con": {
-                "smart": "newFilter",
-                "name": "Filter'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
-                    "name": "_disk",
-                    "method": "disk",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasDisk",
-                    "validate": false,
-                    "optional": true,
-                    "original": "disk"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"group\" <$> TF.attribute",
-                    "name": "_group",
-                    "method": "group",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasGroup",
-                    "validate": false,
-                    "optional": true,
-                    "original": "group"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"lwps\" <$> TF.attribute",
-                    "name": "_lwps",
-                    "method": "lwps",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasLwps",
-                    "validate": false,
-                    "optional": true,
-                    "original": "lwps"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"memory\" <$> TF.attribute",
-                    "name": "_memory",
-                    "method": "memory",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMemory",
-                    "validate": false,
-                    "optional": true,
-                    "original": "memory"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"swap\" <$> TF.attribute",
-                    "name": "_swap",
-                    "method": "swap",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasSwap",
-                    "validate": false,
-                    "optional": true,
-                    "original": "swap"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"vcpus\" <$> TF.attribute",
-                    "name": "_vcpus",
-                    "method": "vcpus",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasVcpus",
-                    "validate": false,
-                    "optional": true,
-                    "original": "vcpus"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"version\" <$> TF.attribute",
-                    "name": "_version",
-                    "method": "version",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasVersion",
-                    "validate": false,
-                    "optional": true,
-                    "original": "version"
-                }
-            ],
-            "name": "Filter",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Filter s",
-            "original": "filter"
+            "type": "MachineNic s",
+            "original": "machine_nic"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/triton/index.html",
     "dataSources": [
         {
             "con": {
@@ -363,6 +364,7 @@
                 "name": "AccountData'"
             },
             "arguments": [],
+            "url": "https://www.terraform.io/docs/providers/triton/d/account.html",
             "name": "AccountData",
             "threaded": true,
             "attributes": [
@@ -426,6 +428,7 @@
                 "name": "DatacenterData'"
             },
             "arguments": [],
+            "url": "https://www.terraform.io/docs/providers/triton/d/datacenter.html",
             "name": "DatacenterData",
             "threaded": true,
             "attributes": [
@@ -506,6 +509,7 @@
                     "original": "vlan_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/d/fabric_network.html",
             "name": "FabricNetworkData",
             "threaded": true,
             "attributes": [
@@ -763,6 +767,7 @@
                     "original": "vlan_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/d/fabric_vlan.html",
             "name": "FabricVlanData",
             "threaded": true,
             "attributes": [],
@@ -906,6 +911,7 @@
                     "original": "version"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/d/image.html",
             "name": "ImageData",
             "threaded": true,
             "attributes": [],
@@ -937,6 +943,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/d/network.html",
             "name": "NetworkData",
             "threaded": true,
             "attributes": [
@@ -1011,13 +1018,14 @@
                     "name": "_filter",
                     "method": "filter",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Filter s)]",
+                    "type": "TF.Attr s [TF.Attr s (PackageFilter s)]",
                     "class": "HasFilter",
                     "validate": true,
                     "optional": false,
                     "original": "filter"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/d/package.html",
             "name": "PackageData",
             "threaded": true,
             "attributes": [
@@ -1161,7 +1169,7 @@
                     "name": "_filter",
                     "method": "filter",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Filter s)]",
+                    "type": "TF.Attr s [TF.Attr s (PackageFilter s)]",
                     "class": "HasFilter",
                     "validate": true,
                     "optional": false,
@@ -1325,6 +1333,7 @@
                     "original": "vlan_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/fabric.html",
             "name": "FabricResource",
             "threaded": true,
             "attributes": [
@@ -1558,6 +1567,7 @@
                     "original": "rule"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/firewall_rule.html",
             "name": "FirewallRuleResource",
             "threaded": true,
             "attributes": [
@@ -1683,6 +1693,7 @@
                     "original": "template_name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/instance_template.html",
             "name": "InstanceTemplateResource",
             "threaded": true,
             "attributes": [
@@ -1844,6 +1855,7 @@
                     "original": "key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/key.html",
             "name": "KeyResource",
             "threaded": true,
             "attributes": [
@@ -1962,7 +1974,7 @@
                     "name": "_cns",
                     "method": "cns",
                     "conflicts": [],
-                    "type": "TF.Attr s (Cns s)",
+                    "type": "TF.Attr s (MachineCns s)",
                     "class": "HasCns",
                     "validate": true,
                     "optional": true,
@@ -2131,6 +2143,7 @@
                     "original": "user_script"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/machine.html",
             "name": "MachineResource",
             "threaded": true,
             "attributes": [
@@ -2290,7 +2303,7 @@
                     "name": "_computedNic",
                     "method": "computedNic",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Nic s)]",
+                    "type": "TF.Attr s [TF.Attr s (MachineNic s)]",
                     "class": "HasComputedNic",
                     "validate": true,
                     "optional": true,
@@ -2454,6 +2467,7 @@
                     "original": "template"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/service_group.html",
             "name": "ServiceGroupResource",
             "threaded": true,
             "attributes": [
@@ -2557,6 +2571,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/snapshot.html",
             "name": "SnapshotResource",
             "threaded": true,
             "attributes": [
@@ -2676,6 +2691,7 @@
                     "original": "vlan_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/triton/r/vlan.html",
             "name": "VlanResource",
             "threaded": true,
             "attributes": [],
