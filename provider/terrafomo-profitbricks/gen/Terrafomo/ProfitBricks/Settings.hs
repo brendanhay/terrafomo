@@ -18,21 +18,21 @@
 module Terrafomo.ProfitBricks.Settings
     (
     -- * Settings Datatypes
-    -- ** nic
-      Nic (..)
-    , newNic
+    -- ** group_users
+      GroupUsers (..)
+    , newGroupUsers
 
-    -- ** users
-    , Users (..)
-    , newUsers
+    -- ** server_nic
+    , ServerNic (..)
+    , newServerNic
 
-    -- ** volume
-    , Volume (..)
-    , newVolume
+    -- ** server_volume
+    , ServerVolume (..)
+    , newServerVolume
 
-    -- ** firewall
-    , Firewall (..)
-    , newFirewall
+    -- ** nic_firewall
+    , NicFirewall (..)
+    , newNicFirewall
 
     ) where
 
@@ -57,12 +57,47 @@ import qualified Terrafomo.ProfitBricks.Lens  as P
 import qualified Terrafomo.ProfitBricks.Types as P
 import qualified Terrafomo.Validator          as TF
 
--- | @nic@ nested settings.
-data Nic s = Nic'
+-- | @group_users@ nested settings.
+data GroupUsers s = GroupUsers'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newGroupUsers
+    :: GroupUsers s
+newGroupUsers =
+    GroupUsers'
+
+instance P.Hashable  (GroupUsers s)
+instance TF.IsValue  (GroupUsers s)
+instance TF.IsObject (GroupUsers s) where
+    toObject GroupUsers' = []
+
+instance TF.IsValid (GroupUsers s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAdministrator (TF.Ref s' (GroupUsers s)) (TF.Attr s P.Bool) where
+    computedAdministrator x = TF.compute (TF.refKey x) "administrator"
+
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (GroupUsers s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
+
+instance s ~ s' => P.HasComputedFirstName (TF.Ref s' (GroupUsers s)) (TF.Attr s P.Text) where
+    computedFirstName x = TF.compute (TF.refKey x) "first_name"
+
+instance s ~ s' => P.HasComputedForceSecAuth (TF.Ref s' (GroupUsers s)) (TF.Attr s P.Bool) where
+    computedForceSecAuth x = TF.compute (TF.refKey x) "force_sec_auth"
+
+instance s ~ s' => P.HasComputedLastName (TF.Ref s' (GroupUsers s)) (TF.Attr s P.Text) where
+    computedLastName x = TF.compute (TF.refKey x) "last_name"
+
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (GroupUsers s)) (TF.Attr s P.Text) where
+    computedPassword x = TF.compute (TF.refKey x) "password"
+
+-- | @server_nic@ nested settings.
+data ServerNic s = ServerNic'
     { _dhcp           :: TF.Attr s P.Bool
     -- ^ @dhcp@ - (Optional)
     --
-    , _firewall       :: TF.Attr s [TF.Attr s (Firewall s)]
+    , _firewall       :: TF.Attr s [TF.Attr s (NicFirewall s)]
     -- ^ @firewall@ - (Optional)
     --
     , _firewallActive :: TF.Attr s P.Bool
@@ -82,11 +117,11 @@ data Nic s = Nic'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newNic
+newServerNic
     :: TF.Attr s P.Integer -- ^ @lan@ - 'P.lan'
-    -> Nic s
-newNic _lan =
-    Nic'
+    -> ServerNic s
+newServerNic _lan =
+    ServerNic'
         { _dhcp = TF.Nil
         , _firewall = TF.Nil
         , _firewallActive = TF.Nil
@@ -96,10 +131,10 @@ newNic _lan =
         , _nat = TF.Nil
         }
 
-instance P.Hashable  (Nic s)
-instance TF.IsValue  (Nic s)
-instance TF.IsObject (Nic s) where
-    toObject Nic'{..} = P.catMaybes
+instance P.Hashable  (ServerNic s)
+instance TF.IsValue  (ServerNic s)
+instance TF.IsObject (ServerNic s) where
+    toObject ServerNic'{..} = P.catMaybes
         [ TF.assign "dhcp" <$> TF.attribute _dhcp
         , TF.assign "firewall" <$> TF.attribute _firewall
         , TF.assign "firewall_active" <$> TF.attribute _firewallActive
@@ -109,88 +144,53 @@ instance TF.IsObject (Nic s) where
         , TF.assign "nat" <$> TF.attribute _nat
         ]
 
-instance TF.IsValid (Nic s) where
+instance TF.IsValid (ServerNic s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_firewall"
                   (_firewall
-                      :: Nic s -> TF.Attr s [TF.Attr s (Firewall s)])
+                      :: ServerNic s -> TF.Attr s [TF.Attr s (NicFirewall s)])
                   TF.validator
 
-instance P.HasDhcp (Nic s) (TF.Attr s P.Bool) where
+instance P.HasDhcp (ServerNic s) (TF.Attr s P.Bool) where
     dhcp =
-        P.lens (_dhcp :: Nic s -> TF.Attr s P.Bool)
-               (\s a -> s { _dhcp = a } :: Nic s)
+        P.lens (_dhcp :: ServerNic s -> TF.Attr s P.Bool)
+               (\s a -> s { _dhcp = a } :: ServerNic s)
 
-instance P.HasFirewall (Nic s) (TF.Attr s [TF.Attr s (Firewall s)]) where
+instance P.HasFirewall (ServerNic s) (TF.Attr s [TF.Attr s (NicFirewall s)]) where
     firewall =
-        P.lens (_firewall :: Nic s -> TF.Attr s [TF.Attr s (Firewall s)])
-               (\s a -> s { _firewall = a } :: Nic s)
+        P.lens (_firewall :: ServerNic s -> TF.Attr s [TF.Attr s (NicFirewall s)])
+               (\s a -> s { _firewall = a } :: ServerNic s)
 
-instance P.HasFirewallActive (Nic s) (TF.Attr s P.Bool) where
+instance P.HasFirewallActive (ServerNic s) (TF.Attr s P.Bool) where
     firewallActive =
-        P.lens (_firewallActive :: Nic s -> TF.Attr s P.Bool)
-               (\s a -> s { _firewallActive = a } :: Nic s)
+        P.lens (_firewallActive :: ServerNic s -> TF.Attr s P.Bool)
+               (\s a -> s { _firewallActive = a } :: ServerNic s)
 
-instance P.HasIp (Nic s) (TF.Attr s P.Text) where
+instance P.HasIp (ServerNic s) (TF.Attr s P.Text) where
     ip =
-        P.lens (_ip :: Nic s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: Nic s)
+        P.lens (_ip :: ServerNic s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: ServerNic s)
 
-instance P.HasLan (Nic s) (TF.Attr s P.Integer) where
+instance P.HasLan (ServerNic s) (TF.Attr s P.Integer) where
     lan =
-        P.lens (_lan :: Nic s -> TF.Attr s P.Integer)
-               (\s a -> s { _lan = a } :: Nic s)
+        P.lens (_lan :: ServerNic s -> TF.Attr s P.Integer)
+               (\s a -> s { _lan = a } :: ServerNic s)
 
-instance P.HasName (Nic s) (TF.Attr s P.Text) where
+instance P.HasName (ServerNic s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Nic s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Nic s)
+        P.lens (_name :: ServerNic s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServerNic s)
 
-instance P.HasNat (Nic s) (TF.Attr s P.Bool) where
+instance P.HasNat (ServerNic s) (TF.Attr s P.Bool) where
     nat =
-        P.lens (_nat :: Nic s -> TF.Attr s P.Bool)
-               (\s a -> s { _nat = a } :: Nic s)
+        P.lens (_nat :: ServerNic s -> TF.Attr s P.Bool)
+               (\s a -> s { _nat = a } :: ServerNic s)
 
-instance s ~ s' => P.HasComputedIps (TF.Ref s' (Nic s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "_computedIps"
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerNic s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedIps x = TF.compute (TF.refKey x) "ips"
 
--- | @users@ nested settings.
-data Users s = Users'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newUsers
-    :: Users s
-newUsers =
-    Users'
-
-instance P.Hashable  (Users s)
-instance TF.IsValue  (Users s)
-instance TF.IsObject (Users s) where
-    toObject Users' = []
-
-instance TF.IsValid (Users s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAdministrator (TF.Ref s' (Users s)) (TF.Attr s P.Bool) where
-    computedAdministrator x = TF.compute (TF.refKey x) "_computedAdministrator"
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
-
-instance s ~ s' => P.HasComputedFirstName (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedFirstName x = TF.compute (TF.refKey x) "_computedFirstName"
-
-instance s ~ s' => P.HasComputedForceSecAuth (TF.Ref s' (Users s)) (TF.Attr s P.Bool) where
-    computedForceSecAuth x = TF.compute (TF.refKey x) "_computedForceSecAuth"
-
-instance s ~ s' => P.HasComputedLastName (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedLastName x = TF.compute (TF.refKey x) "_computedLastName"
-
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
-
--- | @volume@ nested settings.
-data Volume s = Volume'
+-- | @server_volume@ nested settings.
+data ServerVolume s = ServerVolume'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional)
     --
@@ -220,13 +220,13 @@ data Volume s = Volume'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newVolume
+newServerVolume
     :: TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
     -> TF.Attr s P.Text -- ^ @image_name@ - 'P.imageName'
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
-    -> Volume s
-newVolume _diskType _imageName _size =
-    Volume'
+    -> ServerVolume s
+newServerVolume _diskType _imageName _size =
+    ServerVolume'
         { _availabilityZone = TF.Nil
         , _bus = TF.Nil
         , _diskType = _diskType
@@ -238,10 +238,10 @@ newVolume _diskType _imageName _size =
         , _sshKeyPath = TF.Nil
         }
 
-instance P.Hashable  (Volume s)
-instance TF.IsValue  (Volume s)
-instance TF.IsObject (Volume s) where
-    toObject Volume'{..} = P.catMaybes
+instance P.Hashable  (ServerVolume s)
+instance TF.IsValue  (ServerVolume s)
+instance TF.IsObject (ServerVolume s) where
+    toObject ServerVolume'{..} = P.catMaybes
         [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
         , TF.assign "bus" <$> TF.attribute _bus
         , TF.assign "disk_type" <$> TF.attribute _diskType
@@ -253,56 +253,56 @@ instance TF.IsObject (Volume s) where
         , TF.assign "ssh_key_path" <$> TF.attribute _sshKeyPath
         ]
 
-instance TF.IsValid (Volume s) where
+instance TF.IsValid (ServerVolume s) where
     validator = P.mempty
 
-instance P.HasAvailabilityZone (Volume s) (TF.Attr s P.Text) where
+instance P.HasAvailabilityZone (ServerVolume s) (TF.Attr s P.Text) where
     availabilityZone =
-        P.lens (_availabilityZone :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _availabilityZone = a } :: Volume s)
+        P.lens (_availabilityZone :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityZone = a } :: ServerVolume s)
 
-instance P.HasBus (Volume s) (TF.Attr s P.Text) where
+instance P.HasBus (ServerVolume s) (TF.Attr s P.Text) where
     bus =
-        P.lens (_bus :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _bus = a } :: Volume s)
+        P.lens (_bus :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _bus = a } :: ServerVolume s)
 
-instance P.HasDiskType (Volume s) (TF.Attr s P.Text) where
+instance P.HasDiskType (ServerVolume s) (TF.Attr s P.Text) where
     diskType =
-        P.lens (_diskType :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _diskType = a } :: Volume s)
+        P.lens (_diskType :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _diskType = a } :: ServerVolume s)
 
-instance P.HasImageName (Volume s) (TF.Attr s P.Text) where
+instance P.HasImageName (ServerVolume s) (TF.Attr s P.Text) where
     imageName =
-        P.lens (_imageName :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _imageName = a } :: Volume s)
+        P.lens (_imageName :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _imageName = a } :: ServerVolume s)
 
-instance P.HasImagePassword (Volume s) (TF.Attr s P.Text) where
+instance P.HasImagePassword (ServerVolume s) (TF.Attr s P.Text) where
     imagePassword =
-        P.lens (_imagePassword :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _imagePassword = a } :: Volume s)
+        P.lens (_imagePassword :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _imagePassword = a } :: ServerVolume s)
 
-instance P.HasLicenceType (Volume s) (TF.Attr s P.Text) where
+instance P.HasLicenceType (ServerVolume s) (TF.Attr s P.Text) where
     licenceType =
-        P.lens (_licenceType :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _licenceType = a } :: Volume s)
+        P.lens (_licenceType :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _licenceType = a } :: ServerVolume s)
 
-instance P.HasName (Volume s) (TF.Attr s P.Text) where
+instance P.HasName (ServerVolume s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Volume s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Volume s)
+        P.lens (_name :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServerVolume s)
 
-instance P.HasSize (Volume s) (TF.Attr s P.Integer) where
+instance P.HasSize (ServerVolume s) (TF.Attr s P.Integer) where
     size =
-        P.lens (_size :: Volume s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a } :: Volume s)
+        P.lens (_size :: ServerVolume s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: ServerVolume s)
 
-instance P.HasSshKeyPath (Volume s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSshKeyPath (ServerVolume s) (TF.Attr s [TF.Attr s P.Text]) where
     sshKeyPath =
-        P.lens (_sshKeyPath :: Volume s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sshKeyPath = a } :: Volume s)
+        P.lens (_sshKeyPath :: ServerVolume s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sshKeyPath = a } :: ServerVolume s)
 
--- | @firewall@ nested settings.
-data Firewall s = Firewall'
+-- | @nic_firewall@ nested settings.
+data NicFirewall s = NicFirewall'
     { _icmpCode       :: TF.Attr s P.Text
     -- ^ @icmp_code@ - (Optional)
     --
@@ -338,11 +338,11 @@ data Firewall s = Firewall'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newFirewall
+newNicFirewall
     :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> Firewall s
-newFirewall _protocol =
-    Firewall'
+    -> NicFirewall s
+newNicFirewall _protocol =
+    NicFirewall'
         { _icmpCode = TF.Nil
         , _icmpType = TF.Nil
         , _ip = TF.Nil
@@ -356,10 +356,10 @@ newFirewall _protocol =
         , _targetIp = TF.Nil
         }
 
-instance P.Hashable  (Firewall s)
-instance TF.IsValue  (Firewall s)
-instance TF.IsObject (Firewall s) where
-    toObject Firewall'{..} = P.catMaybes
+instance P.Hashable  (NicFirewall s)
+instance TF.IsValue  (NicFirewall s)
+instance TF.IsObject (NicFirewall s) where
+    toObject NicFirewall'{..} = P.catMaybes
         [ TF.assign "icmp_code" <$> TF.attribute _icmpCode
         , TF.assign "icmp_type" <$> TF.attribute _icmpType
         , TF.assign "ip" <$> TF.attribute _ip
@@ -373,60 +373,60 @@ instance TF.IsObject (Firewall s) where
         , TF.assign "target_ip" <$> TF.attribute _targetIp
         ]
 
-instance TF.IsValid (Firewall s) where
+instance TF.IsValid (NicFirewall s) where
     validator = P.mempty
 
-instance P.HasIcmpCode (Firewall s) (TF.Attr s P.Text) where
+instance P.HasIcmpCode (NicFirewall s) (TF.Attr s P.Text) where
     icmpCode =
-        P.lens (_icmpCode :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _icmpCode = a } :: Firewall s)
+        P.lens (_icmpCode :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _icmpCode = a } :: NicFirewall s)
 
-instance P.HasIcmpType (Firewall s) (TF.Attr s P.Text) where
+instance P.HasIcmpType (NicFirewall s) (TF.Attr s P.Text) where
     icmpType =
-        P.lens (_icmpType :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _icmpType = a } :: Firewall s)
+        P.lens (_icmpType :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _icmpType = a } :: NicFirewall s)
 
-instance P.HasIp (Firewall s) (TF.Attr s P.Text) where
+instance P.HasIp (NicFirewall s) (TF.Attr s P.Text) where
     ip =
-        P.lens (_ip :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: Firewall s)
+        P.lens (_ip :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: NicFirewall s)
 
-instance P.HasIps (Firewall s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasIps (NicFirewall s) (TF.Attr s [TF.Attr s P.Text]) where
     ips =
-        P.lens (_ips :: Firewall s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ips = a } :: Firewall s)
+        P.lens (_ips :: NicFirewall s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ips = a } :: NicFirewall s)
 
-instance P.HasName (Firewall s) (TF.Attr s P.Text) where
+instance P.HasName (NicFirewall s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Firewall s)
+        P.lens (_name :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NicFirewall s)
 
-instance P.HasPortRangeEnd (Firewall s) (TF.Attr s P.Integer) where
+instance P.HasPortRangeEnd (NicFirewall s) (TF.Attr s P.Integer) where
     portRangeEnd =
-        P.lens (_portRangeEnd :: Firewall s -> TF.Attr s P.Integer)
-               (\s a -> s { _portRangeEnd = a } :: Firewall s)
+        P.lens (_portRangeEnd :: NicFirewall s -> TF.Attr s P.Integer)
+               (\s a -> s { _portRangeEnd = a } :: NicFirewall s)
 
-instance P.HasPortRangeStart (Firewall s) (TF.Attr s P.Integer) where
+instance P.HasPortRangeStart (NicFirewall s) (TF.Attr s P.Integer) where
     portRangeStart =
-        P.lens (_portRangeStart :: Firewall s -> TF.Attr s P.Integer)
-               (\s a -> s { _portRangeStart = a } :: Firewall s)
+        P.lens (_portRangeStart :: NicFirewall s -> TF.Attr s P.Integer)
+               (\s a -> s { _portRangeStart = a } :: NicFirewall s)
 
-instance P.HasProtocol (Firewall s) (TF.Attr s P.Text) where
+instance P.HasProtocol (NicFirewall s) (TF.Attr s P.Text) where
     protocol =
-        P.lens (_protocol :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: Firewall s)
+        P.lens (_protocol :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: NicFirewall s)
 
-instance P.HasSourceIp (Firewall s) (TF.Attr s P.Text) where
+instance P.HasSourceIp (NicFirewall s) (TF.Attr s P.Text) where
     sourceIp =
-        P.lens (_sourceIp :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIp = a } :: Firewall s)
+        P.lens (_sourceIp :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceIp = a } :: NicFirewall s)
 
-instance P.HasSourceMac (Firewall s) (TF.Attr s P.Text) where
+instance P.HasSourceMac (NicFirewall s) (TF.Attr s P.Text) where
     sourceMac =
-        P.lens (_sourceMac :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceMac = a } :: Firewall s)
+        P.lens (_sourceMac :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceMac = a } :: NicFirewall s)
 
-instance P.HasTargetIp (Firewall s) (TF.Attr s P.Text) where
+instance P.HasTargetIp (NicFirewall s) (TF.Attr s P.Text) where
     targetIp =
-        P.lens (_targetIp :: Firewall s -> TF.Attr s P.Text)
-               (\s a -> s { _targetIp = a } :: Firewall s)
+        P.lens (_targetIp :: NicFirewall s -> TF.Attr s P.Text)
+               (\s a -> s { _targetIp = a } :: NicFirewall s)

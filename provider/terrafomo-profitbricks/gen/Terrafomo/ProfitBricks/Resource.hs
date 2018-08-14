@@ -99,7 +99,7 @@ import qualified Terrafomo.Validator             as TF
 
 -- | @profitbricks_datacenter@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_datacenter terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterResource s = DatacenterResource'
     { _location :: TF.Attr s P.Text
@@ -141,11 +141,11 @@ instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DatacenterResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 -- | @profitbricks_firewall@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_firewall terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/firewall.html terraform documentation>
 -- for more information.
 data FirewallResource s = FirewallResource'
     { _datacenterId   :: TF.Attr s P.Text
@@ -290,7 +290,7 @@ instance P.HasTargetIp (FirewallResource s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/group.html terraform documentation>
 -- for more information.
 data GroupResource s = GroupResource'
     { _accessActivityLog :: TF.Attr s P.Bool
@@ -370,22 +370,22 @@ instance P.HasUserId (GroupResource s) (TF.Attr s P.Text) where
         P.lens (_userId :: GroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _userId = a } :: GroupResource s)
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (Users s)]) where
-    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (GroupUsers s)]) where
+    computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @profitbricks_ipblock@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_ipblock terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/ipblock.html terraform documentation>
 -- for more information.
 data IpblockResource s = IpblockResource'
     { _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Required)
+    -- ^ @location@ - (Required, Forces New)
     --
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _size     :: TF.Attr s P.Integer
-    -- ^ @size@ - (Required)
+    -- ^ @size@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -427,11 +427,11 @@ instance P.HasSize (IpblockResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _size = a } :: IpblockResource s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (IpblockResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "_computedIps"
+    computedIps x = TF.compute (TF.refKey x) "ips"
 
 -- | @profitbricks_ipfailover@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_ipfailover terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/ipfailover.html terraform documentation>
 -- for more information.
 data IpfailoverResource s = IpfailoverResource'
     { _datacenterId :: TF.Attr s P.Text
@@ -496,7 +496,7 @@ instance P.HasNicuuid (IpfailoverResource s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_lan@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_lan terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/lan.html terraform documentation>
 -- for more information.
 data LanResource s = LanResource'
     { _datacenterId :: TF.Attr s P.Text
@@ -549,7 +549,7 @@ instance P.HasPublic (LanResource s) (TF.Attr s P.Bool) where
 
 -- | @profitbricks_loadbalancer@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_loadbalancer terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/loadbalancer.html terraform documentation>
 -- for more information.
 data LoadbalancerResource s = LoadbalancerResource'
     { _datacenterId :: TF.Attr s P.Text
@@ -623,7 +623,7 @@ instance P.HasNicIds (LoadbalancerResource s) (TF.Attr s [TF.Attr s P.Text]) whe
 
 -- | @profitbricks_nic@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_nic terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/nic.html terraform documentation>
 -- for more information.
 data NicResource s = NicResource'
     { _datacenterId   :: TF.Attr s P.Text
@@ -726,11 +726,11 @@ instance P.HasServerId (NicResource s) (TF.Attr s P.Text) where
                (\s a -> s { _serverId = a } :: NicResource s)
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (NicResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "_computedIps"
+    computedIps x = TF.compute (TF.refKey x) "ips"
 
 -- | @profitbricks_server@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_server terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
     { _availabilityZone :: TF.Attr s P.Text
@@ -751,13 +751,13 @@ data ServerResource s = ServerResource'
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nic              :: TF.Attr s [TF.Attr s (Nic s)]
+    , _nic              :: TF.Attr s [TF.Attr s (ServerNic s)]
     -- ^ @nic@ - (Required)
     --
     , _ram              :: TF.Attr s P.Integer
     -- ^ @ram@ - (Required)
     --
-    , _volume           :: TF.Attr s [TF.Attr s (Volume s)]
+    , _volume           :: TF.Attr s [TF.Attr s (ServerVolume s)]
     -- ^ @volume@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -766,9 +766,9 @@ serverResource
     :: TF.Attr s P.Integer -- ^ @cores@ - 'P.cores'
     -> TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Nic s)] -- ^ @nic@ - 'P.nic'
+    -> TF.Attr s [TF.Attr s (ServerNic s)] -- ^ @nic@ - 'P.nic'
     -> TF.Attr s P.Integer -- ^ @ram@ - 'P.ram'
-    -> TF.Attr s [TF.Attr s (Volume s)] -- ^ @volume@ - 'P.volume'
+    -> TF.Attr s [TF.Attr s (ServerVolume s)] -- ^ @volume@ - 'P.volume'
     -> TF.Resource P.Provider (ServerResource s)
 serverResource _cores _datacenterId _name _nic _ram _volume =
     TF.newResource "profitbricks_server" TF.validator $
@@ -801,11 +801,11 @@ instance TF.IsValid (ServerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_nic"
                   (_nic
-                      :: ServerResource s -> TF.Attr s [TF.Attr s (Nic s)])
+                      :: ServerResource s -> TF.Attr s [TF.Attr s (ServerNic s)])
                   TF.validator
            P.<> TF.settingsValidator "_volume"
                   (_volume
-                      :: ServerResource s -> TF.Attr s [TF.Attr s (Volume s)])
+                      :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
                   TF.validator
 
 instance P.HasAvailabilityZone (ServerResource s) (TF.Attr s P.Text) where
@@ -838,9 +838,9 @@ instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (Nic s)]) where
+instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (ServerNic s)]) where
     nic =
-        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (Nic s)])
+        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (ServerNic s)])
                (\s a -> s { _nic = a } :: ServerResource s)
 
 instance P.HasRam (ServerResource s) (TF.Attr s P.Integer) where
@@ -848,29 +848,29 @@ instance P.HasRam (ServerResource s) (TF.Attr s P.Integer) where
         P.lens (_ram :: ServerResource s -> TF.Attr s P.Integer)
                (\s a -> s { _ram = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (Volume s)]) where
+instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (ServerVolume s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (Volume s)])
+        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
                (\s a -> s { _volume = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedBootCdrom (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootCdrom x = TF.compute (TF.refKey x) "_computedBootCdrom"
+    computedBootCdrom x = TF.compute (TF.refKey x) "boot_cdrom"
 
 instance s ~ s' => P.HasComputedBootImage (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootImage x = TF.compute (TF.refKey x) "_computedBootImage"
+    computedBootImage x = TF.compute (TF.refKey x) "boot_image"
 
 instance s ~ s' => P.HasComputedBootVolume (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootVolume x = TF.compute (TF.refKey x) "_computedBootVolume"
+    computedBootVolume x = TF.compute (TF.refKey x) "boot_volume"
 
 instance s ~ s' => P.HasComputedPrimaryIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrimaryIp x = TF.compute (TF.refKey x) "_computedPrimaryIp"
+    computedPrimaryIp x = TF.compute (TF.refKey x) "primary_ip"
 
 instance s ~ s' => P.HasComputedPrimaryNic (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrimaryNic x = TF.compute (TF.refKey x) "_computedPrimaryNic"
+    computedPrimaryNic x = TF.compute (TF.refKey x) "primary_nic"
 
 -- | @profitbricks_share@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_share terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/share.html terraform documentation>
 -- for more information.
 data ShareResource s = ShareResource'
     { _editPrivilege  :: TF.Attr s P.Bool
@@ -935,7 +935,7 @@ instance P.HasSharePrivilege (ShareResource s) (TF.Attr s P.Bool) where
 
 -- | @profitbricks_snapshot@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_snapshot terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/snapshot.html terraform documentation>
 -- for more information.
 data SnapshotResource s = SnapshotResource'
     { _datacenterId :: TF.Attr s P.Text
@@ -989,7 +989,7 @@ instance P.HasVolumeId (SnapshotResource s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _administrator :: TF.Attr s P.Bool
@@ -1076,7 +1076,7 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_volume@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
     { _availabilityZone :: TF.Attr s P.Text
@@ -1210,4 +1210,4 @@ instance P.HasSshKeyPath (VolumeResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _sshKeyPath = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedSshkey (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedSshkey x = TF.compute (TF.refKey x) "_computedSshkey"
+    computedSshkey x = TF.compute (TF.refKey x) "sshkey"

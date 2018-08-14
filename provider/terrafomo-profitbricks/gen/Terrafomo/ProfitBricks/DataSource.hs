@@ -67,7 +67,7 @@ import qualified Terrafomo.Validator             as TF
 
 -- | @profitbricks_datacenter@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_datacenter terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/d/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterData s = DatacenterData'
     { _location :: TF.Attr s P.Text
@@ -109,7 +109,7 @@ instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_image@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/d/image.html terraform documentation>
 -- for more information.
 data ImageData s = ImageData'
     { _location :: TF.Attr s P.Text
@@ -170,7 +170,7 @@ instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_location@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_location terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/d/location.html terraform documentation>
 -- for more information.
 data LocationData s = LocationData'
     { _feature :: TF.Attr s P.Text
@@ -211,7 +211,7 @@ instance P.HasName (LocationData s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_resource@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_resource terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/d/resource.html terraform documentation>
 -- for more information.
 data ResourceData s = ResourceData'
     { _resourceId   :: TF.Attr s P.Text
@@ -252,7 +252,7 @@ instance P.HasResourceType (ResourceData s) (TF.Attr s P.Text) where
 
 -- | @profitbricks_snapshot@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/ProfitBricks/profitbricks_snapshot terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/profitbricks/d/snapshot.html terraform documentation>
 -- for more information.
 data SnapshotData s = SnapshotData'
     { _location :: TF.Attr s P.Text
