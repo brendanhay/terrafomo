@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/chef/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -25,6 +26,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/chef/r/data_bag.html",
             "name": "DataBagResource",
             "threaded": true,
             "attributes": [
@@ -106,6 +108,7 @@
                     "original": "data_bag_name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/chef/r/data_bag_item.html",
             "name": "DataBagItemResource",
             "threaded": true,
             "attributes": [
@@ -251,6 +254,7 @@
                     "original": "override_attributes_json"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/chef/r/environment.html",
             "name": "EnvironmentResource",
             "threaded": true,
             "attributes": [],
@@ -395,6 +399,7 @@
                     "original": "run_list"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/chef/r/node.html",
             "name": "NodeResource",
             "threaded": true,
             "attributes": [],
@@ -507,6 +512,7 @@
                     "original": "run_list"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/chef/r/role.html",
             "name": "RoleResource",
             "threaded": true,
             "attributes": [],
