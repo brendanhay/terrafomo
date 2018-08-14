@@ -25,6 +25,24 @@ func main() {
 	fmt.Printf("%s\n", js)
 }
 
+var ignoredSchemaDefaults = map[string]map[string]bool{
+	"alicloud_oss_bucket": map[string]bool{
+		"bucket": true,
+	},
+}
+
+func ignoreDefault(s string, f string) bool {
+	cfg, sok := ignoredSchemaDefaults[s]
+	if sok {
+		ignore, fok := cfg[f]
+		if fok {
+			return ignore
+		}
+	}
+
+	return false
+}
+
 type Provider struct {
 	Name        string      `json:"name"`
 	Schemas     []*Schema   `json:"schemas"`
@@ -68,7 +86,7 @@ type Timeouts struct {
 func newProvider(p *schema.Provider) *Provider {
 	return &Provider{
 		Name:        "replace_provider",
-		Schemas:     newSchemaSlice(p.Schema),
+		Schemas:     newSchemaSlice("replace_provider", p.Schema),
 		Resources:   newResourceSlice(p.ResourcesMap),
 		DataSources: newResourceSlice(p.DataSourcesMap),
 	}
@@ -91,7 +109,7 @@ func newResourceSlice(r map[string]*schema.Resource) []*Resource {
 func newResource(k string, v *schema.Resource) *Resource {
 	r := Resource{
 		Name:    k,
-		Schemas: newSchemaSlice(v.Schema),
+		Schemas: newSchemaSlice(k, v.Schema),
 	}
 
 	t := v.Timeouts
@@ -108,11 +126,11 @@ func newResource(k string, v *schema.Resource) *Resource {
 	return &r
 }
 
-func newSchemaSlice(s map[string]*schema.Schema) []*Schema {
+func newSchemaSlice(parent string, s map[string]*schema.Schema) []*Schema {
 	ss := make([]*Schema, 0, len(s))
 
 	for k, v := range s {
-		ss = append(ss, newSchema(k, v))
+		ss = append(ss, newSchema(parent, k, v))
 	}
 
 	sort.Slice(ss, func(i, j int) bool {
@@ -122,7 +140,7 @@ func newSchemaSlice(s map[string]*schema.Schema) []*Schema {
 	return ss
 }
 
-func newSchema(k string, v *schema.Schema) *Schema {
+func newSchema(parent string, k string, v *schema.Schema) *Schema {
 	s := Schema{
 		Name:          k,
 		Type:          v.Type.String(),
@@ -152,30 +170,32 @@ func newSchema(k string, v *schema.Schema) *Schema {
 		s.Removed = &v.Removed
 	}
 
-	switch d := v.Default.(type) {
-	case string:
-		if d != "" {
-			s.Default = &d
+	if !ignoreDefault(parent, k) {
+		switch d := v.Default.(type) {
+		case string:
+			if d != "" {
+				s.Default = &d
+			}
+		case bool:
+			r := strconv.FormatBool(d)
+			s.Default = &r
+		case int:
+			r := strconv.FormatInt(int64(d), 10)
+			s.Default = &r
+		case float64:
+			r := strconv.FormatFloat(d, 'E', -1, 32)
+			s.Default = &r
 		}
-	case bool:
-		r := strconv.FormatBool(d)
-		s.Default = &r
-	case int:
-		r := strconv.FormatInt(int64(d), 10)
-		s.Default = &r
-	case float64:
-		r := strconv.FormatFloat(d, 'E', -1, 32)
-		s.Default = &r
 	}
 
 	switch e := v.Elem.(type) {
 	case *schema.Resource:
 		s.Resource = &Resource{
 			Name:    k,
-			Schemas: newSchemaSlice(e.Schema),
+			Schemas: newSchemaSlice(k, e.Schema),
 		}
 	case *schema.Schema:
-		s.Schema = newSchema(k, e)
+		s.Schema = newSchema(k, k, e)
 	}
 
 	return &s
