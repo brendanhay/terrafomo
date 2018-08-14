@@ -4406,12 +4406,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (MqBrokerConfiguration s)) (TF.Att
 instance s ~ s' => P.HasComputedRevision (TF.Ref s' (MqBrokerConfiguration s)) (TF.Attr s P.Integer) where
     computedRevision x = TF.compute (TF.refKey x) "revision"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MqBrokerConfiguration s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedRevision (TF.Ref s' (MqBrokerConfiguration s)) (TF.Attr s P.Integer) where
-    computedRevision x = TF.compute (TF.refKey x) "revision"
-
 -- | @blue_green_deployment_config_terminate_blue_instances_on_deployment_success@ nested settings.
 data BlueGreenDeploymentConfigTerminateBlueInstancesOnDeploymentSuccess s = BlueGreenDeploymentConfigTerminateBlueInstancesOnDeploymentSuccess'
     { _action                       :: TF.Attr s P.Text
@@ -5779,20 +5773,11 @@ instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (LbTargetGroupHealth
 instance s ~ s' => P.HasComputedInterval (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Integer) where
     computedInterval x = TF.compute (TF.refKey x) "interval"
 
-instance s ~ s' => P.HasComputedMatcher (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
-    computedMatcher x = TF.compute (TF.refKey x) "matcher"
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
-
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
     computedProtocol x = TF.compute (TF.refKey x) "protocol"
-
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Integer) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
 
 instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Attr s P.Integer) where
     computedUnhealthyThreshold x = TF.compute (TF.refKey x) "unhealthy_threshold"
@@ -9148,21 +9133,6 @@ instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (LaunchConfigurat
 instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Attr s P.Text) where
     computedDeviceName x = TF.compute (TF.refKey x) "device_name"
 
-instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Attr s P.Bool) where
-    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Attr s P.Integer) where
-    computedIops x = TF.compute (TF.refKey x) "iops"
-
-instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Attr s P.Integer) where
-    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
-
 -- | @appautoscaling_policy_target_tracking_scaling_policy_configuration@ nested settings.
 data AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s = AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration'
     { _customizedMetricSpecification :: TF.Attr s (TargetTrackingScalingPolicyConfigurationCustomizedMetricSpecification s)
@@ -9478,23 +9448,14 @@ data AlbSubnetMapping s = AlbSubnetMapping'
     , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required, Forces New)
     --
-    , _allocationId :: TF.Attr s P.Text
-    -- ^ @allocation_id@ - (Optional)
-    --
-    , _subnetId     :: TF.Attr s P.Text
-    -- ^ @subnet_id@ - (Required)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newAlbSubnetMapping
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> AlbSubnetMapping s
-newAlbSubnetMapping _subnetId _subnetId =
+newAlbSubnetMapping _subnetId =
     AlbSubnetMapping'
         { _allocationId = TF.Nil
-        , _subnetId = _subnetId
-        , _allocationId = TF.Nil
         , _subnetId = _subnetId
         }
 
@@ -9504,22 +9465,10 @@ instance TF.IsObject (AlbSubnetMapping s) where
     toObject AlbSubnetMapping'{..} = P.catMaybes
         [ TF.assign "allocation_id" <$> TF.attribute _allocationId
         , TF.assign "subnet_id" <$> TF.attribute _subnetId
-        , TF.assign "allocation_id" <$> TF.attribute _allocationId
-        , TF.assign "subnet_id" <$> TF.attribute _subnetId
         ]
 
 instance TF.IsValid (AlbSubnetMapping s) where
     validator = P.mempty
-
-instance P.HasAllocationId (AlbSubnetMapping s) (TF.Attr s P.Text) where
-    allocationId =
-        P.lens (_allocationId :: AlbSubnetMapping s -> TF.Attr s P.Text)
-               (\s a -> s { _allocationId = a } :: AlbSubnetMapping s)
-
-instance P.HasSubnetId (AlbSubnetMapping s) (TF.Attr s P.Text) where
-    subnetId =
-        P.lens (_subnetId :: AlbSubnetMapping s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: AlbSubnetMapping s)
 
 instance P.HasAllocationId (AlbSubnetMapping s) (TF.Attr s P.Text) where
     allocationId =
@@ -11462,20 +11411,11 @@ instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (AlbTargetGroupHealt
 instance s ~ s' => P.HasComputedInterval (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Integer) where
     computedInterval x = TF.compute (TF.refKey x) "interval"
 
-instance s ~ s' => P.HasComputedMatcher (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
-    computedMatcher x = TF.compute (TF.refKey x) "matcher"
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
-
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
     computedProtocol x = TF.compute (TF.refKey x) "protocol"
-
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Integer) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
 
 instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Integer) where
     computedUnhealthyThreshold x = TF.compute (TF.refKey x) "unhealthy_threshold"
@@ -16420,14 +16360,14 @@ data DynamodbTableAttribute s = DynamodbTableAttribute'
     { _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _type' :: TF.Attr s P.DynamoTableAttributeType
+    , _type' :: TF.Attr s P.DynamodbTableAttributeType
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newDynamodbTableAttribute
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.DynamoTableAttributeType -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.DynamodbTableAttributeType -- ^ @type@ - 'P.type''
     -> DynamodbTableAttribute s
 newDynamodbTableAttribute _name _type' =
     DynamodbTableAttribute'
@@ -16451,15 +16391,15 @@ instance P.HasName (DynamodbTableAttribute s) (TF.Attr s P.Text) where
         P.lens (_name :: DynamodbTableAttribute s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DynamodbTableAttribute s)
 
-instance P.HasType' (DynamodbTableAttribute s) (TF.Attr s P.DynamoTableAttributeType) where
+instance P.HasType' (DynamodbTableAttribute s) (TF.Attr s P.DynamodbTableAttributeType) where
     type' =
-        P.lens (_type' :: DynamodbTableAttribute s -> TF.Attr s P.DynamoTableAttributeType)
+        P.lens (_type' :: DynamodbTableAttribute s -> TF.Attr s P.DynamodbTableAttributeType)
                (\s a -> s { _type' = a } :: DynamodbTableAttribute s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (DynamodbTableAttribute s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedType (TF.Ref s' (DynamodbTableAttribute s)) (TF.Attr s P.DynamoTableAttributeType) where
+instance s ~ s' => P.HasComputedType (TF.Ref s' (DynamodbTableAttribute s)) (TF.Attr s P.DynamodbTableAttributeType) where
     computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @gamelift_build_storage_location@ nested settings.
@@ -18133,9 +18073,6 @@ instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (EksClusterVpcConfig
 instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (EksClusterVpcConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubnetIds x = TF.compute (TF.refKey x) "subnet_ids"
 
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (EksClusterVpcConfig s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
-
 -- | @wafregional_xss_match_set_xss_match_tuple@ nested settings.
 data WafregionalXssMatchSetXssMatchTuple s = WafregionalXssMatchSetXssMatchTuple'
     { _fieldToMatch       :: TF.Attr s (XssMatchTupleFieldToMatch s)
@@ -19490,9 +19427,6 @@ instance P.HasInstance' (NetworkInterfaceAttachment s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedAttachmentId (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Attr s P.Text) where
     computedAttachmentId x = TF.compute (TF.refKey x) "attachment_id"
 
-instance s ~ s' => P.HasComputedAttachmentId (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Attr s P.Text) where
-    computedAttachmentId x = TF.compute (TF.refKey x) "attachment_id"
-
 instance s ~ s' => P.HasComputedDeviceIndex (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Attr s P.Integer) where
     computedDeviceIndex x = TF.compute (TF.refKey x) "device_index"
 
@@ -19848,15 +19782,6 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (LaunchConfigurationRootBl
 
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Attr s P.Bool) where
     computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Attr s P.Integer) where
-    computedIops x = TF.compute (TF.refKey x) "iops"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Attr s P.Integer) where
-    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
 
 -- | @batch_job_definition_timeout@ nested settings.
 data BatchJobDefinitionTimeout s = BatchJobDefinitionTimeout'
@@ -21637,9 +21562,6 @@ instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (LambdaFunctionVpcCo
 
 instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (LambdaFunctionVpcConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSubnetIds x = TF.compute (TF.refKey x) "subnet_ids"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LambdaFunctionVpcConfig s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @activated_rule_action@ nested settings.
 data ActivatedRuleAction s = ActivatedRuleAction'
@@ -24306,24 +24228,6 @@ instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (InstanceEbsBlock
 instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
     computedDeviceName x = TF.compute (TF.refKey x) "device_name"
 
-instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Bool) where
-    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Integer) where
-    computedIops x = TF.compute (TF.refKey x) "iops"
-
-instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
-
-instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeId x = TF.compute (TF.refKey x) "volume_id"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Integer) where
-    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (InstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
-
 -- | @cognito_identity_pool_roles_attachment_roles@ nested settings.
 data CognitoIdentityPoolRolesAttachmentRoles s = CognitoIdentityPoolRolesAttachmentRoles'
     { _authenticated   :: TF.Attr s P.Text
@@ -26424,22 +26328,17 @@ data MqBrokerUser s = MqBrokerUser'
     , _username      :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
-    , _username      :: TF.Attr s P.Text
-    -- ^ @username@ - (Required)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newMqBrokerUser
     :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> MqBrokerUser s
-newMqBrokerUser _password _username _username =
+newMqBrokerUser _password _username =
     MqBrokerUser'
         { _consoleAccess = TF.value P.False
         , _groups = TF.Nil
         , _password = _password
-        , _username = _username
         , _username = _username
         }
 
@@ -26450,7 +26349,6 @@ instance TF.IsObject (MqBrokerUser s) where
         [ TF.assign "console_access" <$> TF.attribute _consoleAccess
         , TF.assign "groups" <$> TF.attribute _groups
         , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "username" <$> TF.attribute _username
         , TF.assign "username" <$> TF.attribute _username
         ]
 
@@ -26471,11 +26369,6 @@ instance P.HasPassword (MqBrokerUser s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: MqBrokerUser s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: MqBrokerUser s)
-
-instance P.HasUsername (MqBrokerUser s) (TF.Attr s P.Text) where
-    username =
-        P.lens (_username :: MqBrokerUser s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: MqBrokerUser s)
 
 instance P.HasUsername (MqBrokerUser s) (TF.Attr s P.Text) where
     username =
@@ -27601,18 +27494,6 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (InstanceRootBlockDevice s
 instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (InstanceRootBlockDevice s)) (TF.Attr s P.Bool) where
     computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
 
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (InstanceRootBlockDevice s)) (TF.Attr s P.Integer) where
-    computedIops x = TF.compute (TF.refKey x) "iops"
-
-instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (InstanceRootBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeId x = TF.compute (TF.refKey x) "volume_id"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (InstanceRootBlockDevice s)) (TF.Attr s P.Integer) where
-    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (InstanceRootBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
-
 -- | @kinesis_firehose_delivery_stream_splunk_configuration@ nested settings.
 data KinesisFirehoseDeliveryStreamSplunkConfiguration s = KinesisFirehoseDeliveryStreamSplunkConfiguration'
     { _hecAcknowledgmentTimeout :: TF.Attr s P.Integer
@@ -27937,23 +27818,14 @@ data LbSubnetMapping s = LbSubnetMapping'
     , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required, Forces New)
     --
-    , _allocationId :: TF.Attr s P.Text
-    -- ^ @allocation_id@ - (Optional)
-    --
-    , _subnetId     :: TF.Attr s P.Text
-    -- ^ @subnet_id@ - (Required)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newLbSubnetMapping
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> LbSubnetMapping s
-newLbSubnetMapping _subnetId _subnetId =
+newLbSubnetMapping _subnetId =
     LbSubnetMapping'
         { _allocationId = TF.Nil
-        , _subnetId = _subnetId
-        , _allocationId = TF.Nil
         , _subnetId = _subnetId
         }
 
@@ -27963,22 +27835,10 @@ instance TF.IsObject (LbSubnetMapping s) where
     toObject LbSubnetMapping'{..} = P.catMaybes
         [ TF.assign "allocation_id" <$> TF.attribute _allocationId
         , TF.assign "subnet_id" <$> TF.attribute _subnetId
-        , TF.assign "allocation_id" <$> TF.attribute _allocationId
-        , TF.assign "subnet_id" <$> TF.attribute _subnetId
         ]
 
 instance TF.IsValid (LbSubnetMapping s) where
     validator = P.mempty
-
-instance P.HasAllocationId (LbSubnetMapping s) (TF.Attr s P.Text) where
-    allocationId =
-        P.lens (_allocationId :: LbSubnetMapping s -> TF.Attr s P.Text)
-               (\s a -> s { _allocationId = a } :: LbSubnetMapping s)
-
-instance P.HasSubnetId (LbSubnetMapping s) (TF.Attr s P.Text) where
-    subnetId =
-        P.lens (_subnetId :: LbSubnetMapping s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: LbSubnetMapping s)
 
 instance P.HasAllocationId (LbSubnetMapping s) (TF.Attr s P.Text) where
     allocationId =

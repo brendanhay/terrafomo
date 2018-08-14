@@ -8506,7 +8506,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     , _prefixListIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @prefix_list_ids@ - (Optional, Forces New)
     --
-    , _protocol        :: TF.Attr s P.Ec2Protocol
+    , _protocol        :: TF.Attr s P.NetworkProtocol
     -- ^ @protocol@ - (Required, Forces New)
     --
     , _securityGroupId :: TF.Attr s P.Text
@@ -8518,7 +8518,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     , _toPort          :: TF.Attr s P.Integer
     -- ^ @to_port@ - (Required, Forces New)
     --
-    , _type'           :: TF.Attr s P.Ec2Traffic
+    , _type'           :: TF.Attr s P.NetworkTraffic
     -- ^ @type@ - (Required, Forces New)
     -- Type of rule, ingress (inbound) or egress (outbound).
     --
@@ -8526,10 +8526,10 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
 
 securityGroupRuleResource
     :: TF.Attr s P.Integer -- ^ @from_port@ - 'P.fromPort'
-    -> TF.Attr s P.Ec2Protocol -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.NetworkProtocol -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s P.Integer -- ^ @to_port@ - 'P.toPort'
-    -> TF.Attr s P.Ec2Traffic -- ^ @type@ - 'P.type''
+    -> TF.Attr s P.NetworkTraffic -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (SecurityGroupRuleResource s)
 securityGroupRuleResource _fromPort _protocol _securityGroupId _toPort _type' =
     TF.newResource "aws_security_group_rule" TF.validator $
@@ -8588,9 +8588,9 @@ instance P.HasPrefixListIds (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s 
         P.lens (_prefixListIds :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _prefixListIds = a } :: SecurityGroupRuleResource s)
 
-instance P.HasProtocol (SecurityGroupRuleResource s) (TF.Attr s P.Ec2Protocol) where
+instance P.HasProtocol (SecurityGroupRuleResource s) (TF.Attr s P.NetworkProtocol) where
     protocol =
-        P.lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.Ec2Protocol)
+        P.lens (_protocol :: SecurityGroupRuleResource s -> TF.Attr s P.NetworkProtocol)
                (\s a -> s { _protocol = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
@@ -8608,9 +8608,9 @@ instance P.HasToPort (SecurityGroupRuleResource s) (TF.Attr s P.Integer) where
         P.lens (_toPort :: SecurityGroupRuleResource s -> TF.Attr s P.Integer)
                (\s a -> s { _toPort = a } :: SecurityGroupRuleResource s)
 
-instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Ec2Traffic) where
+instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.NetworkTraffic) where
     type' =
-        P.lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.Ec2Traffic)
+        P.lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.NetworkTraffic)
                (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
 instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where

@@ -11,33 +11,31 @@
 module Terrafomo.AWS.Types
     (
     -- * General
-      Region                   (..)
+      Region                     (..)
     , fregion
 
-    , Zone                     (..)
+    , Zone                       (..)
     , fzone
     , fzonesuf
 
     , IPRange
+    , NetworkTraffic             (..)
+    , NetworkProtocol            (..)
 
     -- * IAM
     , IAM.Document
     , IAM.Policy
 
     -- * DynamoDB
-    , DynamoTableAttributeType (..)
-
-    -- * EC2
-    , Ec2Traffic               (..)
-    , Ec2Protocol              (..)
+    , DynamodbTableAttributeType (..)
     ) where
 
 import Data.Hashable (Hashable (hashWithSalt))
 import Data.IP       (IPRange)
-import Data.Text     (Text)
-import Data.Word     (Word16)
 
 import Formatting (Format, (%))
+
+import GHC.Generics (Generic)
 
 import Network.AWS.Types (Region (..))
 
@@ -52,7 +50,9 @@ import qualified Terrafomo.HCL          as HCL
 
 -- | A specific AWS availability zone.
 data Zone = Zone !Region !Char
-    deriving (Show, Eq)
+    deriving (Show, Eq, Generic)
+
+instance Hashable Zone
 
 instance IsValue Zone where
     toValue = HCL.toValue . Format.bprint fzone
@@ -98,43 +98,47 @@ instance Hashable IPRange where
 instance IsValue IAM.Document where
     toValue = HCL.json
 
--- DynamoDB
+data NetworkTraffic
+    = TrafficIngress
+    | TrafficEgress
+      deriving (Show, Eq, Generic)
 
--- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
-data DynamoTableAttributeType
-    = DynamoString
-    | DynamoNumber
-    | DynamoBinary
-      deriving (Show, Eq)
+instance Hashable NetworkTraffic
 
-instance IsValue DynamoTableAttributeType where
-    toValue = HCL.string . \case
-        DynamoString -> "S"
-        DynamoNumber -> "N"
-        DynamoBinary -> "B"
-
--- EC2
-
-data Ec2Traffic
-    = Ingress
-    | Egress
-      deriving (Show, Eq)
-
-instance IsValue Ec2Traffic where
+instance IsValue NetworkTraffic where
     toValue = HCL.string . \case
         Ingress -> "ingress"
         Egress  -> "egress"
 
-data Ec2Protocol
-    = AllowICMP
-    | AllowTCP
-    | AllowUDP
-    | AllowAll
-      deriving (Show, Eq)
+data NetworkProtocol
+    = ProtocolICMP
+    | ProtocolTCP
+    | ProtocolUDP
+    | ProtocolAll
+      deriving (Show, Eq, Generic)
 
-instance IsValue Ec2Protocol where
+instance Hashable NetworkProtocol
+
+instance IsValue NetworkProtocol where
     toValue = HCL.string . \case
-        AllowICMP -> "icmp"
-        AllowTCP  -> "tcp"
-        AllowUDP  -> "udp"
-        AllowAll  -> "-1"
+        ProtocolICMP -> "icmp"
+        ProtocolTCP  -> "tcp"
+        ProtocolUDP  -> "udp"
+        ProtocolAll  -> "-1"
+
+-- DynamoDB Specific
+
+-- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
+data DynamodbTableAttributeType
+    = DynamoString
+    | DynamoNumber
+    | DynamoBinary
+      deriving (Show, Eq, Generic)
+
+instance Hashable DynamodbTableAttributeType
+
+instance IsValue DynamodbTableAttributeType where
+    toValue = HCL.string . \case
+        DynamoString -> "S"
+        DynamoNumber -> "N"
+        DynamoBinary -> "B"
