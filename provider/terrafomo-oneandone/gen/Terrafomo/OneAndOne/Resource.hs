@@ -91,7 +91,7 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @oneandone_block_storage@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_block_storage terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/block_storage.html terraform documentation>
 -- for more information.
 data BlockStorageResource s = BlockStorageResource'
     { _datacenter  :: TF.Attr s P.Text
@@ -165,7 +165,7 @@ instance P.HasSize (BlockStorageResource s) (TF.Attr s P.Integer) where
 
 -- | @oneandone_firewall_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_firewall_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/firewall_policy.html terraform documentation>
 -- for more information.
 data FirewallPolicyResource s = FirewallPolicyResource'
     { _description :: TF.Attr s P.Text
@@ -174,14 +174,14 @@ data FirewallPolicyResource s = FirewallPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _rules       :: TF.Attr s [TF.Attr s (Rules s)]
+    , _rules       :: TF.Attr s [TF.Attr s (FirewallPolicyRules s)]
     -- ^ @rules@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 firewallPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Rules s)] -- ^ @rules@ - 'P.rules'
+    -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)] -- ^ @rules@ - 'P.rules'
     -> TF.Resource P.Provider (FirewallPolicyResource s)
 firewallPolicyResource _name _rules =
     TF.newResource "oneandone_firewall_policy" TF.validator $
@@ -202,7 +202,7 @@ instance TF.IsValid (FirewallPolicyResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rules"
                   (_rules
-                      :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (Rules s)])
+                      :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)])
                   TF.validator
 
 instance P.HasDescription (FirewallPolicyResource s) (TF.Attr s P.Text) where
@@ -215,14 +215,14 @@ instance P.HasName (FirewallPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: FirewallPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FirewallPolicyResource s)
 
-instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (Rules s)]) where
+instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (FirewallPolicyRules s)]) where
     rules =
-        P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (Rules s)])
+        P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)])
                (\s a -> s { _rules = a } :: FirewallPolicyResource s)
 
 -- | @oneandone_image@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/image.html terraform documentation>
 -- for more information.
 data ImageResource s = ImageResource'
     { _datacenter  :: TF.Attr s P.Text
@@ -361,7 +361,7 @@ instance P.HasUrl (ImageResource s) (TF.Attr s P.Text) where
 
 -- | @oneandone_loadbalancer@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_loadbalancer terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/loadbalancer.html terraform documentation>
 -- for more information.
 data LoadbalancerResource s = LoadbalancerResource'
     { _datacenter            :: TF.Attr s P.Text
@@ -394,7 +394,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _persistenceTime       :: TF.Attr s P.Integer
     -- ^ @persistence_time@ - (Optional)
     --
-    , _rules                 :: TF.Attr s [TF.Attr s (Rules s)]
+    , _rules                 :: TF.Attr s [TF.Attr s (LoadbalancerRules s)]
     -- ^ @rules@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -402,7 +402,7 @@ data LoadbalancerResource s = LoadbalancerResource'
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Rules s)] -- ^ @rules@ - 'P.rules'
+    -> TF.Attr s [TF.Attr s (LoadbalancerRules s)] -- ^ @rules@ - 'P.rules'
     -> TF.Resource P.Provider (LoadbalancerResource s)
 loadbalancerResource _method _name _rules =
     TF.newResource "oneandone_loadbalancer" TF.validator $
@@ -439,7 +439,7 @@ instance TF.IsValid (LoadbalancerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rules"
                   (_rules
-                      :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (Rules s)])
+                      :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (LoadbalancerRules s)])
                   TF.validator
 
 instance P.HasDatacenter (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -492,14 +492,14 @@ instance P.HasPersistenceTime (LoadbalancerResource s) (TF.Attr s P.Integer) whe
         P.lens (_persistenceTime :: LoadbalancerResource s -> TF.Attr s P.Integer)
                (\s a -> s { _persistenceTime = a } :: LoadbalancerResource s)
 
-instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (Rules s)]) where
+instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (LoadbalancerRules s)]) where
     rules =
-        P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (Rules s)])
+        P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (LoadbalancerRules s)])
                (\s a -> s { _rules = a } :: LoadbalancerResource s)
 
 -- | @oneandone_monitoring_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_monitoring_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/monitoring_policy.html terraform documentation>
 -- for more information.
 data MonitoringPolicyResource s = MonitoringPolicyResource'
     { _agent       :: TF.Attr s P.Bool
@@ -514,13 +514,13 @@ data MonitoringPolicyResource s = MonitoringPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _ports       :: TF.Attr s [TF.Attr s (Ports s)]
+    , _ports       :: TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]
     -- ^ @ports@ - (Optional)
     --
-    , _processes   :: TF.Attr s [TF.Attr s (Processes s)]
+    , _processes   :: TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]
     -- ^ @processes@ - (Optional)
     --
-    , _thresholds  :: TF.Attr s [TF.Attr s (Thresholds s)]
+    , _thresholds  :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]
     -- ^ @thresholds@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -528,7 +528,7 @@ data MonitoringPolicyResource s = MonitoringPolicyResource'
 monitoringPolicyResource
     :: TF.Attr s P.Bool -- ^ @agent@ - 'P.agent'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Thresholds s)] -- ^ @thresholds@ - 'P.thresholds'
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)] -- ^ @thresholds@ - 'P.thresholds'
     -> TF.Resource P.Provider (MonitoringPolicyResource s)
 monitoringPolicyResource _agent _name _thresholds =
     TF.newResource "oneandone_monitoring_policy" TF.validator $
@@ -557,15 +557,15 @@ instance TF.IsValid (MonitoringPolicyResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_ports"
                   (_ports
-                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Ports s)])
+                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)])
                   TF.validator
            P.<> TF.settingsValidator "_processes"
                   (_processes
-                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Processes s)])
+                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)])
                   TF.validator
            P.<> TF.settingsValidator "_thresholds"
                   (_thresholds
-                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Thresholds s)])
+                      :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)])
                   TF.validator
 
 instance P.HasAgent (MonitoringPolicyResource s) (TF.Attr s P.Bool) where
@@ -588,24 +588,24 @@ instance P.HasName (MonitoringPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: MonitoringPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: MonitoringPolicyResource s)
 
-instance P.HasPorts (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Ports s)]) where
+instance P.HasPorts (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]) where
     ports =
-        P.lens (_ports :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Ports s)])
+        P.lens (_ports :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)])
                (\s a -> s { _ports = a } :: MonitoringPolicyResource s)
 
-instance P.HasProcesses (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Processes s)]) where
+instance P.HasProcesses (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]) where
     processes =
-        P.lens (_processes :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Processes s)])
+        P.lens (_processes :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)])
                (\s a -> s { _processes = a } :: MonitoringPolicyResource s)
 
-instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (Thresholds s)]) where
+instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]) where
     thresholds =
-        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (Thresholds s)])
+        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)])
                (\s a -> s { _thresholds = a } :: MonitoringPolicyResource s)
 
 -- | @oneandone_private_network@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_private_network terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/private_network.html terraform documentation>
 -- for more information.
 data PrivateNetworkResource s = PrivateNetworkResource'
     { _datacenter     :: TF.Attr s P.Text
@@ -687,7 +687,7 @@ instance P.HasSubnetMask (PrivateNetworkResource s) (TF.Attr s P.Text) where
 
 -- | @oneandone_public_ip@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_public_ip terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/public_ip.html terraform documentation>
 -- for more information.
 data PublicIpResource s = PublicIpResource'
     { _datacenter :: TF.Attr s P.Text
@@ -738,11 +738,11 @@ instance P.HasReverseDns (PublicIpResource s) (TF.Attr s P.Text) where
                (\s a -> s { _reverseDns = a } :: PublicIpResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 -- | @oneandone_server@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_server terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
     { _coresPerProcessor  :: TF.Attr s P.Integer
@@ -761,7 +761,7 @@ data ServerResource s = ServerResource'
     -- ^ @firewall_policy_id@ - (Optional)
     --
     , _fixedInstanceSize  :: TF.Attr s P.Text
-    -- ^ @fixed_instance_size@ - (Optional)
+    -- ^ @fixed_instance_size@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -769,14 +769,14 @@ data ServerResource s = ServerResource'
     -- * 'hdds'
     -- * 'ram'
     -- * 'coresPerProcessor'
-    , _hdds               :: TF.Attr s [TF.Attr s (Hdds s)]
+    , _hdds               :: TF.Attr s [TF.Attr s (ServerHdds s)]
     -- ^ @hdds@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'fixedInstanceSize'
     , _image              :: TF.Attr s P.Text
-    -- ^ @image@ - (Required)
+    -- ^ @image@ - (Required, Forces New)
     --
     , _ip                 :: TF.Attr s P.Text
     -- ^ @ip@ - (Optional)
@@ -797,13 +797,13 @@ data ServerResource s = ServerResource'
     --
     -- * 'fixedInstanceSize'
     , _sshKeyPath         :: TF.Attr s P.Text
-    -- ^ @ssh_key_path@ - (Optional)
+    -- ^ @ssh_key_path@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'sshKeyPublic'
     , _sshKeyPublic       :: TF.Attr s P.Text
-    -- ^ @ssh_key_public@ - (Optional)
+    -- ^ @ssh_key_public@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -899,7 +899,7 @@ instance TF.IsValid (ServerResource s) where
         ])
            P.<> TF.settingsValidator "_hdds"
                   (_hdds
-                      :: ServerResource s -> TF.Attr s [TF.Attr s (Hdds s)])
+                      :: ServerResource s -> TF.Attr s [TF.Attr s (ServerHdds s)])
                   TF.validator
 
 instance P.HasCoresPerProcessor (ServerResource s) (TF.Attr s P.Integer) where
@@ -927,9 +927,9 @@ instance P.HasFixedInstanceSize (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_fixedInstanceSize :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _fixedInstanceSize = a } :: ServerResource s)
 
-instance P.HasHdds (ServerResource s) (TF.Attr s [TF.Attr s (Hdds s)]) where
+instance P.HasHdds (ServerResource s) (TF.Attr s [TF.Attr s (ServerHdds s)]) where
     hdds =
-        P.lens (_hdds :: ServerResource s -> TF.Attr s [TF.Attr s (Hdds s)])
+        P.lens (_hdds :: ServerResource s -> TF.Attr s [TF.Attr s (ServerHdds s)])
                (\s a -> s { _hdds = a } :: ServerResource s)
 
 instance P.HasImage (ServerResource s) (TF.Attr s P.Text) where
@@ -977,15 +977,15 @@ instance P.HasVcores (ServerResource s) (TF.Attr s P.Integer) where
         P.lens (_vcores :: ServerResource s -> TF.Attr s P.Integer)
                (\s a -> s { _vcores = a } :: ServerResource s)
 
-instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (Ips s)]) where
-    computedIps x = TF.compute (TF.refKey x) "_computedIps"
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (ServerIps s)]) where
+    computedIps x = TF.compute (TF.refKey x) "ips"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
+    computedPassword x = TF.compute (TF.refKey x) "password"
 
 -- | @oneandone_shared_storage@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_shared_storage terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/shared_storage.html terraform documentation>
 -- for more information.
 data SharedStorageResource s = SharedStorageResource'
     { _datacenter     :: TF.Attr s P.Text
@@ -1000,7 +1000,7 @@ data SharedStorageResource s = SharedStorageResource'
     , _size           :: TF.Attr s P.Integer
     -- ^ @size@ - (Required)
     --
-    , _storageServers :: TF.Attr s [TF.Attr s (StorageServers s)]
+    , _storageServers :: TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]
     -- ^ @storage_servers@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1033,7 +1033,7 @@ instance TF.IsValid (SharedStorageResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_storageServers"
                   (_storageServers
-                      :: SharedStorageResource s -> TF.Attr s [TF.Attr s (StorageServers s)])
+                      :: SharedStorageResource s -> TF.Attr s [TF.Attr s (SharedStorageStorageServers s)])
                   TF.validator
 
 instance P.HasDatacenter (SharedStorageResource s) (TF.Attr s P.Text) where
@@ -1056,14 +1056,14 @@ instance P.HasSize (SharedStorageResource s) (TF.Attr s P.Integer) where
         P.lens (_size :: SharedStorageResource s -> TF.Attr s P.Integer)
                (\s a -> s { _size = a } :: SharedStorageResource s)
 
-instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (StorageServers s)]) where
+instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]) where
     storageServers =
-        P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (StorageServers s)])
+        P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (SharedStorageStorageServers s)])
                (\s a -> s { _storageServers = a } :: SharedStorageResource s)
 
 -- | @oneandone_ssh_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/ssh_key.html terraform documentation>
 -- for more information.
 data SshKeyResource s = SshKeyResource'
     { _description :: TF.Attr s P.Text
@@ -1104,17 +1104,17 @@ instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedMd5 x = TF.compute (TF.refKey x) "_computedMd5"
+    computedMd5 x = TF.compute (TF.refKey x) "md5"
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
+    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
 
-instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [TF.Attr s (Servers s)]) where
-    computedServers x = TF.compute (TF.refKey x) "_computedServers"
+instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [TF.Attr s (SshKeyServers s)]) where
+    computedServers x = TF.compute (TF.refKey x) "servers"
 
 -- | @oneandone_vpn@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_vpn terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/r/vpn.html terraform documentation>
 -- for more information.
 data VpnResource s = VpnResource'
     { _datacenter  :: TF.Attr s P.Text
@@ -1165,7 +1165,7 @@ instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: VpnResource s)
 
 instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDownloadPath x = TF.compute (TF.refKey x) "_computedDownloadPath"
+    computedDownloadPath x = TF.compute (TF.refKey x) "download_path"
 
 instance s ~ s' => P.HasComputedFileName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedFileName x = TF.compute (TF.refKey x) "_computedFileName"
+    computedFileName x = TF.compute (TF.refKey x) "file_name"

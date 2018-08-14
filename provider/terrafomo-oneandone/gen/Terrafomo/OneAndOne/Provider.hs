@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | The @OneAndOne@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _endpoint :: P.Text

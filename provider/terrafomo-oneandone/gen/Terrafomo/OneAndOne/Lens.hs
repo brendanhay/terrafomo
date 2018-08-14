@@ -35,6 +35,7 @@ module Terrafomo.OneAndOne.Lens
     , HasRights (..)
     , HasId (..)
     , HasProtocol (..)
+    , HasPortTo (..)
     , HasSshKeyPublic (..)
     , HasInternalPing (..)
     , HasSubnetMask (..)
@@ -45,6 +46,7 @@ module Terrafomo.OneAndOne.Lens
     , HasDescription (..)
     , HasLoadbalancerId (..)
     , HasMonitoringPolicyId (..)
+    , HasPortFrom (..)
     , HasEmail (..)
     , HasPorts (..)
     , HasRam (..)
@@ -219,6 +221,12 @@ class HasProtocol a b | a -> b where
 instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
     protocol = TF.configuration . protocol
 
+class HasPortTo a b | a -> b where
+    portTo :: P.Lens' a b
+
+instance HasPortTo a b => HasPortTo (TF.Schema l p a) b where
+    portTo = TF.configuration . portTo
+
 class HasSshKeyPublic a b | a -> b where
     sshKeyPublic :: P.Lens' a b
 
@@ -278,6 +286,12 @@ class HasMonitoringPolicyId a b | a -> b where
 
 instance HasMonitoringPolicyId a b => HasMonitoringPolicyId (TF.Schema l p a) b where
     monitoringPolicyId = TF.configuration . monitoringPolicyId
+
+class HasPortFrom a b | a -> b where
+    portFrom :: P.Lens' a b
+
+instance HasPortFrom a b => HasPortFrom (TF.Schema l p a) b where
+    portFrom = TF.configuration . portFrom
 
 class HasEmail a b | a -> b where
     email :: P.Lens' a b

@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @oneandone_instance_size@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OneAndOne/oneandone_instance_size terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/oneandone/d/instance_size.html terraform documentation>
 -- for more information.
 data InstanceSizeData s = InstanceSizeData'
     { _name   :: TF.Attr s P.Text
