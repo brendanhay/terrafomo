@@ -22,7 +22,6 @@ module Terrafomo.Vault.Lens
     , HasIamRequestUrl (..)
     , HasDisablePeriodicTidy (..)
     , HasStsEndpoint (..)
-    , HasAllowRead (..)
     , HasAccessKey (..)
     , HasSkipTlsVerify (..)
     , HasTokenMaxTtl (..)
@@ -198,12 +197,6 @@ class HasStsEndpoint a b | a -> b where
 
 instance HasStsEndpoint a b => HasStsEndpoint (TF.Schema l p a) b where
     stsEndpoint = TF.configuration . stsEndpoint
-
-class HasAllowRead a b | a -> b where
-    allowRead :: P.Lens' a b
-
-instance HasAllowRead a b => HasAllowRead (TF.Schema l p a) b where
-    allowRead = TF.configuration . allowRead
 
 class HasAccessKey a b | a -> b where
     accessKey :: P.Lens' a b

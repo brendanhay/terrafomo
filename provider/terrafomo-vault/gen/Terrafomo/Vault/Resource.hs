@@ -1801,12 +1801,7 @@ instance P.HasRollbackStatements (DatabaseSecretBackendRoleResource s) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/Vault/vault_generic_secret terraform documentation>
 -- for more information.
 data GenericSecretResource s = GenericSecretResource'
-    { _allowRead   :: TF.Attr s P.Bool
-    -- ^ @allow_read@ - (Optional)
-    -- Attempt to read the token from Vault if true; if false, drift won't be
-    -- detected.
-    --
-    , _dataJson    :: TF.Attr s P.Text
+    { _dataJson    :: TF.Attr s P.Text
     -- ^ @data_json@ - (Required)
     -- JSON-encoded secret data to write.
     --
@@ -1827,27 +1822,20 @@ genericSecretResource
 genericSecretResource _dataJson _path =
     TF.newResource "vault_generic_secret" TF.validator $
         GenericSecretResource'
-            { _allowRead = TF.Nil
-            , _dataJson = _dataJson
+            { _dataJson = _dataJson
             , _disableRead = TF.value P.False
             , _path = _path
             }
 
 instance TF.IsObject (GenericSecretResource s) where
     toObject GenericSecretResource'{..} = P.catMaybes
-        [ TF.assign "allow_read" <$> TF.attribute _allowRead
-        , TF.assign "data_json" <$> TF.attribute _dataJson
+        [ TF.assign "data_json" <$> TF.attribute _dataJson
         , TF.assign "disable_read" <$> TF.attribute _disableRead
         , TF.assign "path" <$> TF.attribute _path
         ]
 
 instance TF.IsValid (GenericSecretResource s) where
     validator = P.mempty
-
-instance P.HasAllowRead (GenericSecretResource s) (TF.Attr s P.Bool) where
-    allowRead =
-        P.lens (_allowRead :: GenericSecretResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowRead = a } :: GenericSecretResource s)
 
 instance P.HasDataJson (GenericSecretResource s) (TF.Attr s P.Text) where
     dataJson =
