@@ -2,172 +2,11 @@
     "settings": [
         {
             "con": {
-                "smart": "newNic",
-                "name": "Nic'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"dhcp\" <$> TF.attribute",
-                    "name": "_dhcp",
-                    "method": "dhcp",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasDhcp",
-                    "validate": false,
-                    "optional": true,
-                    "original": "dhcp"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"firewall\" <$> TF.attribute",
-                    "name": "_firewall",
-                    "method": "firewall",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Firewall s)]",
-                    "class": "HasFirewall",
-                    "validate": true,
-                    "optional": true,
-                    "original": "firewall"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"firewall_active\" <$> TF.attribute",
-                    "name": "_firewallActive",
-                    "method": "firewallActive",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasFirewallActive",
-                    "validate": false,
-                    "optional": true,
-                    "original": "firewall_active"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
-                    "name": "_ip",
-                    "method": "ip",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasIp",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ip"
-                },
-                {
-                    "default": "_lan",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"lan\" <$> TF.attribute",
-                    "name": "_lan",
-                    "method": "lan",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasLan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "lan"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"nat\" <$> TF.attribute",
-                    "name": "_nat",
-                    "method": "nat",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasNat",
-                    "validate": false,
-                    "optional": true,
-                    "original": "nat"
-                }
-            ],
-            "name": "Nic",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ips\" <$> TF.attribute",
-                    "name": "_computedIps",
-                    "method": "computedIps",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedIps",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ips"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_lan",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"lan\" <$> TF.attribute",
-                    "name": "_lan",
-                    "method": "lan",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasLan",
-                    "validate": false,
-                    "optional": false,
-                    "original": "lan"
-                }
-            ],
-            "conflicts": [],
-            "type": "Nic s",
-            "original": "nic"
-        },
-        {
-            "con": {
-                "smart": "newUsers",
-                "name": "Users'"
+                "smart": "newGroupUsers",
+                "name": "GroupUsers'"
             },
             "arguments": [],
-            "name": "Users",
+            "name": "GroupUsers",
             "threaded": true,
             "attributes": [
                 {
@@ -269,13 +108,174 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "Users s",
-            "original": "users"
+            "type": "GroupUsers s",
+            "original": "group_users"
         },
         {
             "con": {
-                "smart": "newVolume",
-                "name": "Volume'"
+                "smart": "newServerNic",
+                "name": "ServerNic'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"dhcp\" <$> TF.attribute",
+                    "name": "_dhcp",
+                    "method": "dhcp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDhcp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "dhcp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"firewall\" <$> TF.attribute",
+                    "name": "_firewall",
+                    "method": "firewall",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (NicFirewall s)]",
+                    "class": "HasFirewall",
+                    "validate": true,
+                    "optional": true,
+                    "original": "firewall"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"firewall_active\" <$> TF.attribute",
+                    "name": "_firewallActive",
+                    "method": "firewallActive",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFirewallActive",
+                    "validate": false,
+                    "optional": true,
+                    "original": "firewall_active"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_ip",
+                    "method": "ip",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip"
+                },
+                {
+                    "default": "_lan",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lan\" <$> TF.attribute",
+                    "name": "_lan",
+                    "method": "lan",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasLan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "lan"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nat\" <$> TF.attribute",
+                    "name": "_nat",
+                    "method": "nat",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasNat",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nat"
+                }
+            ],
+            "name": "ServerNic",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ips\" <$> TF.attribute",
+                    "name": "_computedIps",
+                    "method": "computedIps",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasComputedIps",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ips"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_lan",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"lan\" <$> TF.attribute",
+                    "name": "_lan",
+                    "method": "lan",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasLan",
+                    "validate": false,
+                    "optional": false,
+                    "original": "lan"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServerNic s",
+            "original": "server_nic"
+        },
+        {
+            "con": {
+                "smart": "newServerVolume",
+                "name": "ServerVolume'"
             },
             "arguments": [
                 {
@@ -423,7 +423,7 @@
                     "original": "ssh_key_path"
                 }
             ],
-            "name": "Volume",
+            "name": "ServerVolume",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -477,13 +477,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Volume s",
-            "original": "volume"
+            "type": "ServerVolume s",
+            "original": "server_volume"
         },
         {
             "con": {
-                "smart": "newFirewall",
-                "name": "Firewall'"
+                "smart": "newNicFirewall",
+                "name": "NicFirewall'"
             },
             "arguments": [
                 {
@@ -663,7 +663,7 @@
                     "original": "target_ip"
                 }
             ],
-            "name": "Firewall",
+            "name": "NicFirewall",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -685,10 +685,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Firewall s",
-            "original": "firewall"
+            "type": "NicFirewall s",
+            "original": "nic_firewall"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/profitbricks/index.html",
     "dataSources": [
         {
             "con": {
@@ -729,6 +730,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/d/datacenter.html",
             "name": "DatacenterData",
             "threaded": true,
             "attributes": [],
@@ -825,6 +827,7 @@
                     "original": "version"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/d/image.html",
             "name": "ImageData",
             "threaded": true,
             "attributes": [],
@@ -872,6 +875,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/d/location.html",
             "name": "LocationData",
             "threaded": true,
             "attributes": [],
@@ -919,6 +923,7 @@
                     "original": "resource_type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/d/resource.html",
             "name": "ResourceData",
             "threaded": true,
             "attributes": [],
@@ -982,6 +987,7 @@
                     "original": "size"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/d/snapshot.html",
             "name": "SnapshotData",
             "threaded": true,
             "attributes": [],
@@ -1048,6 +1054,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/datacenter.html",
             "name": "DatacenterResource",
             "threaded": true,
             "attributes": [
@@ -1305,6 +1312,7 @@
                     "original": "target_ip"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/firewall.html",
             "name": "FirewallResource",
             "threaded": true,
             "attributes": [],
@@ -1481,6 +1489,7 @@
                     "original": "user_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/group.html",
             "name": "GroupResource",
             "threaded": true,
             "attributes": [
@@ -1494,7 +1503,7 @@
                     "name": "_computedUsers",
                     "method": "computedUsers",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Users s)]",
+                    "type": "TF.Attr s [TF.Attr s (GroupUsers s)]",
                     "class": "HasComputedUsers",
                     "validate": true,
                     "optional": false,
@@ -1578,6 +1587,7 @@
                     "original": "size"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/ipblock.html",
             "name": "IpblockResource",
             "threaded": true,
             "attributes": [
@@ -1707,6 +1717,7 @@
                     "original": "nicuuid"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/ipfailover.html",
             "name": "IpfailoverResource",
             "threaded": true,
             "attributes": [],
@@ -1835,6 +1846,7 @@
                     "original": "public"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/lan.html",
             "name": "LanResource",
             "threaded": true,
             "attributes": [],
@@ -1963,6 +1975,7 @@
                     "original": "nic_ids"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/loadbalancer.html",
             "name": "LoadbalancerResource",
             "threaded": true,
             "attributes": [],
@@ -2155,6 +2168,7 @@
                     "original": "server_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/nic.html",
             "name": "NicResource",
             "threaded": true,
             "attributes": [
@@ -2341,7 +2355,7 @@
                     "name": "_nic",
                     "method": "nic",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Nic s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerNic s)]",
                     "class": "HasNic",
                     "validate": true,
                     "optional": false,
@@ -2373,13 +2387,14 @@
                     "name": "_volume",
                     "method": "volume",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Volume s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerVolume s)]",
                     "class": "HasVolume",
                     "validate": true,
                     "optional": false,
                     "original": "volume"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/server.html",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
@@ -2523,7 +2538,7 @@
                     "name": "_nic",
                     "method": "nic",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Nic s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerNic s)]",
                     "class": "HasNic",
                     "validate": true,
                     "optional": false,
@@ -2555,7 +2570,7 @@
                     "name": "_volume",
                     "method": "volume",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Volume s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerVolume s)]",
                     "class": "HasVolume",
                     "validate": true,
                     "optional": false,
@@ -2637,6 +2652,7 @@
                     "original": "share_privilege"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/share.html",
             "name": "ShareResource",
             "threaded": true,
             "attributes": [],
@@ -2765,6 +2781,7 @@
                     "original": "volume_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/snapshot.html",
             "name": "SnapshotResource",
             "threaded": true,
             "attributes": [],
@@ -2925,6 +2942,7 @@
                     "original": "password"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/user.html",
             "name": "UserResource",
             "threaded": true,
             "attributes": [],
@@ -3213,6 +3231,7 @@
                     "original": "ssh_key_path"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/profitbricks/r/volume.html",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
