@@ -135,7 +135,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "privileges",
+            "name": "grant_privileges",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
