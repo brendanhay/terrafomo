@@ -26,10 +26,6 @@ module Terrafomo.Triton.Settings
     , Cns (..)
     , newCns
 
-    -- ** locality
-    , Locality (..)
-    , newLocality
-
     -- ** filter
     , Filter (..)
     , newFilter
@@ -146,47 +142,6 @@ instance P.HasServices (Cns s) (TF.Attr s [TF.Attr s P.Text]) where
     services =
         P.lens (_services :: Cns s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _services = a } :: Cns s)
-
--- | @locality@ nested settings.
-data Locality s = Locality'
-    { _closeTo :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @close_to@ - (Optional)
-    -- UUIDs of other instances to attempt to provision alongside
-    --
-    , _farFrom :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @far_from@ - (Optional)
-    -- UUIDs of other instances to attempt not to provision alongside
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newLocality
-    :: Locality s
-newLocality =
-    Locality'
-        { _closeTo = TF.Nil
-        , _farFrom = TF.Nil
-        }
-
-instance P.Hashable  (Locality s)
-instance TF.IsValue  (Locality s)
-instance TF.IsObject (Locality s) where
-    toObject Locality'{..} = P.catMaybes
-        [ TF.assign "close_to" <$> TF.attribute _closeTo
-        , TF.assign "far_from" <$> TF.attribute _farFrom
-        ]
-
-instance TF.IsValid (Locality s) where
-    validator = P.mempty
-
-instance P.HasCloseTo (Locality s) (TF.Attr s [TF.Attr s P.Text]) where
-    closeTo =
-        P.lens (_closeTo :: Locality s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _closeTo = a } :: Locality s)
-
-instance P.HasFarFrom (Locality s) (TF.Attr s [TF.Attr s P.Text]) where
-    farFrom =
-        P.lens (_farFrom :: Locality s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _farFrom = a } :: Locality s)
 
 -- | @filter@ nested settings.
 data Filter s = Filter'

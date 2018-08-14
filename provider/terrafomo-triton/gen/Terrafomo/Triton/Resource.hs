@@ -410,10 +410,6 @@ data MachineResource s = MachineResource'
     -- ^ @image@ - (Required)
     -- UUID of the image
     --
-    , _locality :: TF.Attr s (Locality s)
-    -- ^ @locality@ - (Optional)
-    -- UUID based locality hints for assisting placement behavior
-    --
     , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     -- Machine metadata
@@ -454,7 +450,6 @@ machineResource _image _package =
             , _deletionProtectionEnabled = TF.value P.False
             , _firewallEnabled = TF.value P.False
             , _image = _image
-            , _locality = TF.Nil
             , _metadata = TF.Nil
             , _networks = TF.Nil
             , _package = _package
@@ -472,7 +467,6 @@ instance TF.IsObject (MachineResource s) where
         , TF.assign "deletion_protection_enabled" <$> TF.attribute _deletionProtectionEnabled
         , TF.assign "firewall_enabled" <$> TF.attribute _firewallEnabled
         , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "locality" <$> TF.attribute _locality
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "networks" <$> TF.attribute _networks
         , TF.assign "package" <$> TF.attribute _package
@@ -486,10 +480,6 @@ instance TF.IsValid (MachineResource s) where
            P.<> TF.settingsValidator "_cns"
                   (_cns
                       :: MachineResource s -> TF.Attr s (Cns s))
-                  TF.validator
-           P.<> TF.settingsValidator "_locality"
-                  (_locality
-                      :: MachineResource s -> TF.Attr s (Locality s))
                   TF.validator
 
 instance P.HasAdministratorPw (MachineResource s) (TF.Attr s P.Text) where
@@ -526,11 +516,6 @@ instance P.HasImage (MachineResource s) (TF.Attr s P.Text) where
     image =
         P.lens (_image :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: MachineResource s)
-
-instance P.HasLocality (MachineResource s) (TF.Attr s (Locality s)) where
-    locality =
-        P.lens (_locality :: MachineResource s -> TF.Attr s (Locality s))
-               (\s a -> s { _locality = a } :: MachineResource s)
 
 instance P.HasMetadata (MachineResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     metadata =

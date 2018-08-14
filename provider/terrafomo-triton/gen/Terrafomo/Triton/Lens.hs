@@ -23,9 +23,7 @@ module Terrafomo.Triton.Lens
     , HasVcpus (..)
     , HasState (..)
     , HasKey (..)
-    , HasFarFrom (..)
     , HasOwner (..)
-    , HasCloseTo (..)
     , HasType' (..)
     , HasAccount (..)
     , HasEnabled (..)
@@ -57,7 +55,6 @@ module Terrafomo.Triton.Lens
     , HasUserData (..)
     , HasAffinity (..)
     , HasTemplate (..)
-    , HasLocality (..)
     , HasVersion (..)
     , HasTemplateName (..)
     , HasMetadata (..)
@@ -169,23 +166,11 @@ class HasKey a b | a -> b where
 instance HasKey a b => HasKey (TF.Schema l p a) b where
     key = TF.configuration . key
 
-class HasFarFrom a b | a -> b where
-    farFrom :: P.Lens' a b
-
-instance HasFarFrom a b => HasFarFrom (TF.Schema l p a) b where
-    farFrom = TF.configuration . farFrom
-
 class HasOwner a b | a -> b where
     owner :: P.Lens' a b
 
 instance HasOwner a b => HasOwner (TF.Schema l p a) b where
     owner = TF.configuration . owner
-
-class HasCloseTo a b | a -> b where
-    closeTo :: P.Lens' a b
-
-instance HasCloseTo a b => HasCloseTo (TF.Schema l p a) b where
-    closeTo = TF.configuration . closeTo
 
 class HasType' a b | a -> b where
     type' :: P.Lens' a b
@@ -372,12 +357,6 @@ class HasTemplate a b | a -> b where
 
 instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
     template = TF.configuration . template
-
-class HasLocality a b | a -> b where
-    locality :: P.Lens' a b
-
-instance HasLocality a b => HasLocality (TF.Schema l p a) b where
-    locality = TF.configuration . locality
 
 class HasVersion a b | a -> b where
     version :: P.Lens' a b
