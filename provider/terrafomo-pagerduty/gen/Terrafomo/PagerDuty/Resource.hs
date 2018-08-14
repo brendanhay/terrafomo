@@ -91,7 +91,7 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @pagerduty_addon@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_addon terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/addon.html terraform documentation>
 -- for more information.
 data AddonResource s = AddonResource'
     { _name :: TF.Attr s P.Text
@@ -134,7 +134,7 @@ instance P.HasSrc (AddonResource s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_escalation_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_escalation_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/escalation_policy.html terraform documentation>
 -- for more information.
 data EscalationPolicyResource s = EscalationPolicyResource'
     { _description :: TF.Attr s P.Text
@@ -146,7 +146,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
     , _numLoops    :: TF.Attr s P.Integer
     -- ^ @num_loops@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (Rule s)]
+    , _rule        :: TF.Attr s [TF.Attr s (EscalationPolicyRule s)]
     -- ^ @rule@ - (Required)
     --
     , _teams       :: TF.Attr s [TF.Attr s P.Text]
@@ -156,7 +156,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
 
 escalationPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (Rule s)] -- ^ @rule@ - 'P.rule'
+    -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)] -- ^ @rule@ - 'P.rule'
     -> TF.Resource P.Provider (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
     TF.newResource "pagerduty_escalation_policy" TF.validator $
@@ -181,7 +181,7 @@ instance TF.IsValid (EscalationPolicyResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rule"
                   (_rule
-                      :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (Rule s)])
+                      :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)])
                   TF.validator
 
 instance P.HasDescription (EscalationPolicyResource s) (TF.Attr s P.Text) where
@@ -199,9 +199,9 @@ instance P.HasNumLoops (EscalationPolicyResource s) (TF.Attr s P.Integer) where
         P.lens (_numLoops :: EscalationPolicyResource s -> TF.Attr s P.Integer)
                (\s a -> s { _numLoops = a } :: EscalationPolicyResource s)
 
-instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (Rule s)]) where
+instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (EscalationPolicyRule s)]) where
     rule =
-        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (Rule s)])
+        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)])
                (\s a -> s { _rule = a } :: EscalationPolicyResource s)
 
 instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -211,17 +211,17 @@ instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) 
 
 -- | @pagerduty_extension@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_extension terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/extension.html terraform documentation>
 -- for more information.
 data ExtensionResource s = ExtensionResource'
     { _endpointUrl      :: TF.Attr s P.Text
     -- ^ @endpoint_url@ - (Optional)
     --
     , _extensionObjects :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @extension_objects@ - (Required)
+    -- ^ @extension_objects@ - (Required, Forces New)
     --
     , _extensionSchema  :: TF.Attr s P.Text
-    -- ^ @extension_schema@ - (Required)
+    -- ^ @extension_schema@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -263,14 +263,14 @@ instance P.HasExtensionSchema (ExtensionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _extensionSchema = a } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @pagerduty_maintenance_window@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_maintenance_window terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/maintenance_window.html terraform documentation>
 -- for more information.
 data MaintenanceWindowResource s = MaintenanceWindowResource'
     { _description :: TF.Attr s P.Text
@@ -334,14 +334,14 @@ instance P.HasStartTime (MaintenanceWindowResource s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_schedule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_schedule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/schedule.html terraform documentation>
 -- for more information.
 data ScheduleResource s = ScheduleResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _layer       :: TF.Attr s [TF.Attr s (Layer s)]
-    -- ^ @layer@ - (Required)
+    , _layer       :: TF.Attr s [TF.Attr s (ScheduleLayer s)]
+    -- ^ @layer@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
@@ -355,7 +355,7 @@ data ScheduleResource s = ScheduleResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 scheduleResource
-    :: TF.Attr s [TF.Attr s (Layer s)] -- ^ @layer@ - 'P.layer'
+    :: TF.Attr s [TF.Attr s (ScheduleLayer s)] -- ^ @layer@ - 'P.layer'
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
     -> TF.Resource P.Provider (ScheduleResource s)
 scheduleResource _layer _timeZone =
@@ -381,7 +381,7 @@ instance TF.IsValid (ScheduleResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_layer"
                   (_layer
-                      :: ScheduleResource s -> TF.Attr s [TF.Attr s (Layer s)])
+                      :: ScheduleResource s -> TF.Attr s [TF.Attr s (ScheduleLayer s)])
                   TF.validator
 
 instance P.HasDescription (ScheduleResource s) (TF.Attr s P.Text) where
@@ -389,9 +389,9 @@ instance P.HasDescription (ScheduleResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ScheduleResource s)
 
-instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (Layer s)]) where
+instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (ScheduleLayer s)]) where
     layer =
-        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (Layer s)])
+        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (ScheduleLayer s)])
                (\s a -> s { _layer = a } :: ScheduleResource s)
 
 instance P.HasName (ScheduleResource s) (TF.Attr s P.Text) where
@@ -411,31 +411,31 @@ instance P.HasTimeZone (ScheduleResource s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
     { _acknowledgementTimeout :: TF.Attr s P.Text
     -- ^ @acknowledgement_timeout@ - (Optional)
     --
-    , _alertCreation          :: TF.Attr s P.Text
+    , _alertCreation :: TF.Attr s P.Text
     -- ^ @alert_creation@ - (Optional)
     --
-    , _autoResolveTimeout     :: TF.Attr s P.Text
+    , _autoResolveTimeout :: TF.Attr s P.Text
     -- ^ @auto_resolve_timeout@ - (Optional)
     --
-    , _description            :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _escalationPolicy       :: TF.Attr s P.Text
+    , _escalationPolicy :: TF.Attr s P.Text
     -- ^ @escalation_policy@ - (Required)
     --
-    , _name                   :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _scheduledActions       :: TF.Attr s [TF.Attr s (ScheduledActions s)]
+    , _scheduledActions :: TF.Attr s [TF.Attr s (ServiceScheduledActions s)]
     -- ^ @scheduled_actions@ - (Optional)
     --
-    , _supportHours           :: TF.Attr s (SupportHours s)
+    , _supportHours :: TF.Attr s (ServiceSupportHours s)
     -- ^ @support_hours@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -472,11 +472,11 @@ instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_scheduledActions"
                   (_scheduledActions
-                      :: ServiceResource s -> TF.Attr s [TF.Attr s (ScheduledActions s)])
+                      :: ServiceResource s -> TF.Attr s [TF.Attr s (ServiceScheduledActions s)])
                   TF.validator
            P.<> TF.settingsValidator "_supportHours"
                   (_supportHours
-                      :: ServiceResource s -> TF.Attr s (SupportHours s))
+                      :: ServiceResource s -> TF.Attr s (ServiceSupportHours s))
                   TF.validator
 
 instance P.HasAcknowledgementTimeout (ServiceResource s) (TF.Attr s P.Text) where
@@ -509,31 +509,31 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ScheduledActions s)]) where
+instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ServiceScheduledActions s)]) where
     scheduledActions =
-        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ScheduledActions s)])
+        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ServiceScheduledActions s)])
                (\s a -> s { _scheduledActions = a } :: ServiceResource s)
 
-instance P.HasSupportHours (ServiceResource s) (TF.Attr s (SupportHours s)) where
+instance P.HasSupportHours (ServiceResource s) (TF.Attr s (ServiceSupportHours s)) where
     supportHours =
-        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (SupportHours s))
+        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (ServiceSupportHours s))
                (\s a -> s { _supportHours = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (IncidentUrgencyRule s)) where
-    computedIncidentUrgencyRule x = TF.compute (TF.refKey x) "_computedIncidentUrgencyRule"
+instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceIncidentUrgencyRule s)) where
+    computedIncidentUrgencyRule x = TF.compute (TF.refKey x) "incident_urgency_rule"
 
 instance s ~ s' => P.HasComputedLastIncidentTimestamp (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedLastIncidentTimestamp x = TF.compute (TF.refKey x) "_computedLastIncidentTimestamp"
+    computedLastIncidentTimestamp x = TF.compute (TF.refKey x) "last_incident_timestamp"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @pagerduty_service_integration@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_service_integration terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html terraform documentation>
 -- for more information.
 data ServiceIntegrationResource s = ServiceIntegrationResource'
     { _name    :: TF.Attr s P.Text
@@ -574,23 +574,23 @@ instance P.HasService (ServiceIntegrationResource s) (TF.Attr s P.Text) where
                (\s a -> s { _service = a } :: ServiceIntegrationResource s)
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
 instance s ~ s' => P.HasComputedIntegrationEmail (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedIntegrationEmail x = TF.compute (TF.refKey x) "_computedIntegrationEmail"
+    computedIntegrationEmail x = TF.compute (TF.refKey x) "integration_email"
 
 instance s ~ s' => P.HasComputedIntegrationKey (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedIntegrationKey x = TF.compute (TF.refKey x) "_computedIntegrationKey"
+    computedIntegrationKey x = TF.compute (TF.refKey x) "integration_key"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 instance s ~ s' => P.HasComputedVendor (TF.Ref s' (ServiceIntegrationResource s)) (TF.Attr s P.Text) where
-    computedVendor x = TF.compute (TF.refKey x) "_computedVendor"
+    computedVendor x = TF.compute (TF.refKey x) "vendor"
 
 -- | @pagerduty_team@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_team terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/team.html terraform documentation>
 -- for more information.
 data TeamResource s = TeamResource'
     { _description :: TF.Attr s P.Text
@@ -632,14 +632,14 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_team_membership@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_team_membership terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/team_membership.html terraform documentation>
 -- for more information.
 data TeamMembershipResource s = TeamMembershipResource'
     { _teamId :: TF.Attr s P.Text
-    -- ^ @team_id@ - (Required)
+    -- ^ @team_id@ - (Required, Forces New)
     --
     , _userId :: TF.Attr s P.Text
-    -- ^ @user_id@ - (Required)
+    -- ^ @user_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -675,7 +675,7 @@ instance P.HasUserId (TeamMembershipResource s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _description :: TF.Attr s P.Text
@@ -757,23 +757,23 @@ instance P.HasTeams (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _teams = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedAvatarUrl x = TF.compute (TF.refKey x) "_computedAvatarUrl"
+    computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
 
 instance s ~ s' => P.HasComputedColor (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedColor x = TF.compute (TF.refKey x) "_computedColor"
+    computedColor x = TF.compute (TF.refKey x) "color"
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
 instance s ~ s' => P.HasComputedInvitationSent (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
-    computedInvitationSent x = TF.compute (TF.refKey x) "_computedInvitationSent"
+    computedInvitationSent x = TF.compute (TF.refKey x) "invitation_sent"
 
 instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedTimeZone x = TF.compute (TF.refKey x) "_computedTimeZone"
+    computedTimeZone x = TF.compute (TF.refKey x) "time_zone"
 
 -- | @pagerduty_user_contact_method@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_user_contact_method terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/r/user_contact_method.html terraform documentation>
 -- for more information.
 data UserContactMethodResource s = UserContactMethodResource'
     { _address        :: TF.Attr s P.Text
@@ -857,7 +857,7 @@ instance P.HasUserId (UserContactMethodResource s) (TF.Attr s P.Text) where
                (\s a -> s { _userId = a } :: UserContactMethodResource s)
 
 instance s ~ s' => P.HasComputedBlacklisted (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
-    computedBlacklisted x = TF.compute (TF.refKey x) "_computedBlacklisted"
+    computedBlacklisted x = TF.compute (TF.refKey x) "blacklisted"
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (UserContactMethodResource s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"

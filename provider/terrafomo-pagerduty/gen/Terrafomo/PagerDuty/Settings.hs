@@ -18,45 +18,45 @@
 module Terrafomo.PagerDuty.Settings
     (
     -- * Settings Datatypes
-    -- ** restriction
-      Restriction (..)
-    , newRestriction
+    -- ** service_incident_urgency_rule
+      ServiceIncidentUrgencyRule (..)
+    , newServiceIncidentUrgencyRule
 
-    -- ** at
-    , At (..)
-    , newAt
+    -- ** service_scheduled_actions
+    , ServiceScheduledActions (..)
+    , newServiceScheduledActions
 
-    -- ** scheduled_actions
-    , ScheduledActions (..)
-    , newScheduledActions
+    -- ** service_support_hours
+    , ServiceSupportHours (..)
+    , newServiceSupportHours
 
-    -- ** support_hours
-    , SupportHours (..)
-    , newSupportHours
+    -- ** scheduled_actions_at
+    , ScheduledActionsAt (..)
+    , newScheduledActionsAt
 
-    -- ** rule
-    , Rule (..)
-    , newRule
+    -- ** incident_urgency_rule_outside_support_hours
+    , IncidentUrgencyRuleOutsideSupportHours (..)
+    , newIncidentUrgencyRuleOutsideSupportHours
 
-    -- ** incident_urgency_rule
-    , IncidentUrgencyRule (..)
-    , newIncidentUrgencyRule
+    -- ** layer_restriction
+    , LayerRestriction (..)
+    , newLayerRestriction
 
-    -- ** during_support_hours
-    , DuringSupportHours (..)
-    , newDuringSupportHours
+    -- ** rule_target
+    , RuleTarget (..)
+    , newRuleTarget
 
-    -- ** layer
-    , Layer (..)
-    , newLayer
+    -- ** escalation_policy_rule
+    , EscalationPolicyRule (..)
+    , newEscalationPolicyRule
 
-    -- ** target
-    , Target (..)
-    , newTarget
+    -- ** incident_urgency_rule_during_support_hours
+    , IncidentUrgencyRuleDuringSupportHours (..)
+    , newIncidentUrgencyRuleDuringSupportHours
 
-    -- ** outside_support_hours
-    , OutsideSupportHours (..)
-    , newOutsideSupportHours
+    -- ** schedule_layer
+    , ScheduleLayer (..)
+    , newScheduleLayer
 
     ) where
 
@@ -81,110 +81,77 @@ import qualified Terrafomo.PagerDuty.Lens  as P
 import qualified Terrafomo.PagerDuty.Types as P
 import qualified Terrafomo.Validator       as TF
 
--- | @restriction@ nested settings.
-data Restriction s = Restriction'
-    { _durationSeconds :: TF.Attr s P.Integer
-    -- ^ @duration_seconds@ - (Required)
+-- | @service_incident_urgency_rule@ nested settings.
+data ServiceIncidentUrgencyRule s = ServiceIncidentUrgencyRule'
+    { _duringSupportHours :: TF.Attr s (IncidentUrgencyRuleDuringSupportHours s)
+    -- ^ @during_support_hours@ - (Optional)
     --
-    , _startDayOfWeek  :: TF.Attr s P.Integer
-    -- ^ @start_day_of_week@ - (Optional)
-    --
-    , _startTimeOfDay  :: TF.Attr s P.Text
-    -- ^ @start_time_of_day@ - (Required)
-    --
-    , _type'           :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newRestriction
-    :: TF.Attr s P.Integer -- ^ @duration_seconds@ - 'P.durationSeconds'
-    -> TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> Restriction s
-newRestriction _durationSeconds _startTimeOfDay _type' =
-    Restriction'
-        { _durationSeconds = _durationSeconds
-        , _startDayOfWeek = TF.Nil
-        , _startTimeOfDay = _startTimeOfDay
-        , _type' = _type'
-        }
-
-instance P.Hashable  (Restriction s)
-instance TF.IsValue  (Restriction s)
-instance TF.IsObject (Restriction s) where
-    toObject Restriction'{..} = P.catMaybes
-        [ TF.assign "duration_seconds" <$> TF.attribute _durationSeconds
-        , TF.assign "start_day_of_week" <$> TF.attribute _startDayOfWeek
-        , TF.assign "start_time_of_day" <$> TF.attribute _startTimeOfDay
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (Restriction s) where
-    validator = P.mempty
-
-instance P.HasDurationSeconds (Restriction s) (TF.Attr s P.Integer) where
-    durationSeconds =
-        P.lens (_durationSeconds :: Restriction s -> TF.Attr s P.Integer)
-               (\s a -> s { _durationSeconds = a } :: Restriction s)
-
-instance P.HasStartDayOfWeek (Restriction s) (TF.Attr s P.Integer) where
-    startDayOfWeek =
-        P.lens (_startDayOfWeek :: Restriction s -> TF.Attr s P.Integer)
-               (\s a -> s { _startDayOfWeek = a } :: Restriction s)
-
-instance P.HasStartTimeOfDay (Restriction s) (TF.Attr s P.Text) where
-    startTimeOfDay =
-        P.lens (_startTimeOfDay :: Restriction s -> TF.Attr s P.Text)
-               (\s a -> s { _startTimeOfDay = a } :: Restriction s)
-
-instance P.HasType' (Restriction s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: Restriction s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Restriction s)
-
--- | @at@ nested settings.
-data At s = At'
-    { _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    , _outsideSupportHours :: TF.Attr s (IncidentUrgencyRuleOutsideSupportHours s)
+    -- ^ @outside_support_hours@ - (Optional)
     --
     , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Required)
+    --
+    , _urgency :: TF.Attr s P.Text
+    -- ^ @urgency@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newAt
-    :: At s
-newAt =
-    At'
-        { _name = TF.Nil
-        , _type' = TF.Nil
+newServiceIncidentUrgencyRule
+    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> ServiceIncidentUrgencyRule s
+newServiceIncidentUrgencyRule _type' =
+    ServiceIncidentUrgencyRule'
+        { _duringSupportHours = TF.Nil
+        , _outsideSupportHours = TF.Nil
+        , _type' = _type'
+        , _urgency = TF.Nil
         }
 
-instance P.Hashable  (At s)
-instance TF.IsValue  (At s)
-instance TF.IsObject (At s) where
-    toObject At'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+instance P.Hashable  (ServiceIncidentUrgencyRule s)
+instance TF.IsValue  (ServiceIncidentUrgencyRule s)
+instance TF.IsObject (ServiceIncidentUrgencyRule s) where
+    toObject ServiceIncidentUrgencyRule'{..} = P.catMaybes
+        [ TF.assign "during_support_hours" <$> TF.attribute _duringSupportHours
+        , TF.assign "outside_support_hours" <$> TF.attribute _outsideSupportHours
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "urgency" <$> TF.attribute _urgency
         ]
 
-instance TF.IsValid (At s) where
+instance TF.IsValid (ServiceIncidentUrgencyRule s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_duringSupportHours"
+                  (_duringSupportHours
+                      :: ServiceIncidentUrgencyRule s -> TF.Attr s (IncidentUrgencyRuleDuringSupportHours s))
+                  TF.validator
+           P.<> TF.settingsValidator "_outsideSupportHours"
+                  (_outsideSupportHours
+                      :: ServiceIncidentUrgencyRule s -> TF.Attr s (IncidentUrgencyRuleOutsideSupportHours s))
+                  TF.validator
 
-instance P.HasName (At s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: At s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: At s)
+instance P.HasDuringSupportHours (ServiceIncidentUrgencyRule s) (TF.Attr s (IncidentUrgencyRuleDuringSupportHours s)) where
+    duringSupportHours =
+        P.lens (_duringSupportHours :: ServiceIncidentUrgencyRule s -> TF.Attr s (IncidentUrgencyRuleDuringSupportHours s))
+               (\s a -> s { _duringSupportHours = a } :: ServiceIncidentUrgencyRule s)
 
-instance P.HasType' (At s) (TF.Attr s P.Text) where
+instance P.HasOutsideSupportHours (ServiceIncidentUrgencyRule s) (TF.Attr s (IncidentUrgencyRuleOutsideSupportHours s)) where
+    outsideSupportHours =
+        P.lens (_outsideSupportHours :: ServiceIncidentUrgencyRule s -> TF.Attr s (IncidentUrgencyRuleOutsideSupportHours s))
+               (\s a -> s { _outsideSupportHours = a } :: ServiceIncidentUrgencyRule s)
+
+instance P.HasType' (ServiceIncidentUrgencyRule s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: At s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: At s)
+        P.lens (_type' :: ServiceIncidentUrgencyRule s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceIncidentUrgencyRule s)
 
--- | @scheduled_actions@ nested settings.
-data ScheduledActions s = ScheduledActions'
-    { _at        :: TF.Attr s [TF.Attr s (At s)]
+instance P.HasUrgency (ServiceIncidentUrgencyRule s) (TF.Attr s P.Text) where
+    urgency =
+        P.lens (_urgency :: ServiceIncidentUrgencyRule s -> TF.Attr s P.Text)
+               (\s a -> s { _urgency = a } :: ServiceIncidentUrgencyRule s)
+
+-- | @service_scheduled_actions@ nested settings.
+data ServiceScheduledActions s = ServiceScheduledActions'
+    { _at        :: TF.Attr s [TF.Attr s (ScheduledActionsAt s)]
     -- ^ @at@ - (Optional)
     --
     , _toUrgency :: TF.Attr s P.Text
@@ -195,48 +162,48 @@ data ScheduledActions s = ScheduledActions'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newScheduledActions
-    :: ScheduledActions s
-newScheduledActions =
-    ScheduledActions'
+newServiceScheduledActions
+    :: ServiceScheduledActions s
+newServiceScheduledActions =
+    ServiceScheduledActions'
         { _at = TF.Nil
         , _toUrgency = TF.Nil
         , _type' = TF.Nil
         }
 
-instance P.Hashable  (ScheduledActions s)
-instance TF.IsValue  (ScheduledActions s)
-instance TF.IsObject (ScheduledActions s) where
-    toObject ScheduledActions'{..} = P.catMaybes
+instance P.Hashable  (ServiceScheduledActions s)
+instance TF.IsValue  (ServiceScheduledActions s)
+instance TF.IsObject (ServiceScheduledActions s) where
+    toObject ServiceScheduledActions'{..} = P.catMaybes
         [ TF.assign "at" <$> TF.attribute _at
         , TF.assign "to_urgency" <$> TF.attribute _toUrgency
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (ScheduledActions s) where
+instance TF.IsValid (ServiceScheduledActions s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_at"
                   (_at
-                      :: ScheduledActions s -> TF.Attr s [TF.Attr s (At s)])
+                      :: ServiceScheduledActions s -> TF.Attr s [TF.Attr s (ScheduledActionsAt s)])
                   TF.validator
 
-instance P.HasAt (ScheduledActions s) (TF.Attr s [TF.Attr s (At s)]) where
+instance P.HasAt (ServiceScheduledActions s) (TF.Attr s [TF.Attr s (ScheduledActionsAt s)]) where
     at =
-        P.lens (_at :: ScheduledActions s -> TF.Attr s [TF.Attr s (At s)])
-               (\s a -> s { _at = a } :: ScheduledActions s)
+        P.lens (_at :: ServiceScheduledActions s -> TF.Attr s [TF.Attr s (ScheduledActionsAt s)])
+               (\s a -> s { _at = a } :: ServiceScheduledActions s)
 
-instance P.HasToUrgency (ScheduledActions s) (TF.Attr s P.Text) where
+instance P.HasToUrgency (ServiceScheduledActions s) (TF.Attr s P.Text) where
     toUrgency =
-        P.lens (_toUrgency :: ScheduledActions s -> TF.Attr s P.Text)
-               (\s a -> s { _toUrgency = a } :: ScheduledActions s)
+        P.lens (_toUrgency :: ServiceScheduledActions s -> TF.Attr s P.Text)
+               (\s a -> s { _toUrgency = a } :: ServiceScheduledActions s)
 
-instance P.HasType' (ScheduledActions s) (TF.Attr s P.Text) where
+instance P.HasType' (ServiceScheduledActions s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: ScheduledActions s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ScheduledActions s)
+        P.lens (_type' :: ServiceScheduledActions s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceScheduledActions s)
 
--- | @support_hours@ nested settings.
-data SupportHours s = SupportHours'
+-- | @service_support_hours@ nested settings.
+data ServiceSupportHours s = ServiceSupportHours'
     { _daysOfWeek :: TF.Attr s [TF.Attr s P.Integer]
     -- ^ @days_of_week@ - (Optional)
     --
@@ -254,10 +221,10 @@ data SupportHours s = SupportHours'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newSupportHours
-    :: SupportHours s
-newSupportHours =
-    SupportHours'
+newServiceSupportHours
+    :: ServiceSupportHours s
+newServiceSupportHours =
+    ServiceSupportHours'
         { _daysOfWeek = TF.Nil
         , _endTime = TF.Nil
         , _startTime = TF.Nil
@@ -265,10 +232,10 @@ newSupportHours =
         , _type' = TF.Nil
         }
 
-instance P.Hashable  (SupportHours s)
-instance TF.IsValue  (SupportHours s)
-instance TF.IsObject (SupportHours s) where
-    toObject SupportHours'{..} = P.catMaybes
+instance P.Hashable  (ServiceSupportHours s)
+instance TF.IsValue  (ServiceSupportHours s)
+instance TF.IsObject (ServiceSupportHours s) where
+    toObject ServiceSupportHours'{..} = P.catMaybes
         [ TF.assign "days_of_week" <$> TF.attribute _daysOfWeek
         , TF.assign "end_time" <$> TF.attribute _endTime
         , TF.assign "start_time" <$> TF.attribute _startTime
@@ -276,152 +243,75 @@ instance TF.IsObject (SupportHours s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (SupportHours s) where
+instance TF.IsValid (ServiceSupportHours s) where
     validator = P.mempty
 
-instance P.HasDaysOfWeek (SupportHours s) (TF.Attr s [TF.Attr s P.Integer]) where
+instance P.HasDaysOfWeek (ServiceSupportHours s) (TF.Attr s [TF.Attr s P.Integer]) where
     daysOfWeek =
-        P.lens (_daysOfWeek :: SupportHours s -> TF.Attr s [TF.Attr s P.Integer])
-               (\s a -> s { _daysOfWeek = a } :: SupportHours s)
+        P.lens (_daysOfWeek :: ServiceSupportHours s -> TF.Attr s [TF.Attr s P.Integer])
+               (\s a -> s { _daysOfWeek = a } :: ServiceSupportHours s)
 
-instance P.HasEndTime (SupportHours s) (TF.Attr s P.Text) where
+instance P.HasEndTime (ServiceSupportHours s) (TF.Attr s P.Text) where
     endTime =
-        P.lens (_endTime :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _endTime = a } :: SupportHours s)
+        P.lens (_endTime :: ServiceSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _endTime = a } :: ServiceSupportHours s)
 
-instance P.HasStartTime (SupportHours s) (TF.Attr s P.Text) where
+instance P.HasStartTime (ServiceSupportHours s) (TF.Attr s P.Text) where
     startTime =
-        P.lens (_startTime :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a } :: SupportHours s)
+        P.lens (_startTime :: ServiceSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _startTime = a } :: ServiceSupportHours s)
 
-instance P.HasTimeZone (SupportHours s) (TF.Attr s P.Text) where
+instance P.HasTimeZone (ServiceSupportHours s) (TF.Attr s P.Text) where
     timeZone =
-        P.lens (_timeZone :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _timeZone = a } :: SupportHours s)
+        P.lens (_timeZone :: ServiceSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _timeZone = a } :: ServiceSupportHours s)
 
-instance P.HasType' (SupportHours s) (TF.Attr s P.Text) where
+instance P.HasType' (ServiceSupportHours s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: SupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: SupportHours s)
+        P.lens (_type' :: ServiceSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceSupportHours s)
 
--- | @rule@ nested settings.
-data Rule s = Rule'
-    { _escalationDelayInMinutes :: TF.Attr s P.Integer
-    -- ^ @escalation_delay_in_minutes@ - (Required)
+-- | @scheduled_actions_at@ nested settings.
+data ScheduledActionsAt s = ScheduledActionsAt'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
     --
-    , _target                   :: TF.Attr s [TF.Attr s (Target s)]
-    -- ^ @target@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newRule
-    :: TF.Attr s P.Integer -- ^ @escalation_delay_in_minutes@ - 'P.escalationDelayInMinutes'
-    -> TF.Attr s [TF.Attr s (Target s)] -- ^ @target@ - 'P.target'
-    -> Rule s
-newRule _escalationDelayInMinutes _target =
-    Rule'
-        { _escalationDelayInMinutes = _escalationDelayInMinutes
-        , _target = _target
-        }
-
-instance P.Hashable  (Rule s)
-instance TF.IsValue  (Rule s)
-instance TF.IsObject (Rule s) where
-    toObject Rule'{..} = P.catMaybes
-        [ TF.assign "escalation_delay_in_minutes" <$> TF.attribute _escalationDelayInMinutes
-        , TF.assign "target" <$> TF.attribute _target
-        ]
-
-instance TF.IsValid (Rule s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_target"
-                  (_target
-                      :: Rule s -> TF.Attr s [TF.Attr s (Target s)])
-                  TF.validator
-
-instance P.HasEscalationDelayInMinutes (Rule s) (TF.Attr s P.Integer) where
-    escalationDelayInMinutes =
-        P.lens (_escalationDelayInMinutes :: Rule s -> TF.Attr s P.Integer)
-               (\s a -> s { _escalationDelayInMinutes = a } :: Rule s)
-
-instance P.HasTarget (Rule s) (TF.Attr s [TF.Attr s (Target s)]) where
-    target =
-        P.lens (_target :: Rule s -> TF.Attr s [TF.Attr s (Target s)])
-               (\s a -> s { _target = a } :: Rule s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Rule s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
--- | @incident_urgency_rule@ nested settings.
-data IncidentUrgencyRule s = IncidentUrgencyRule'
-    { _duringSupportHours  :: TF.Attr s (DuringSupportHours s)
-    -- ^ @during_support_hours@ - (Optional)
-    --
-    , _outsideSupportHours :: TF.Attr s (OutsideSupportHours s)
-    -- ^ @outside_support_hours@ - (Optional)
-    --
-    , _type'               :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    , _urgency             :: TF.Attr s P.Text
-    -- ^ @urgency@ - (Optional)
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newIncidentUrgencyRule
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> IncidentUrgencyRule s
-newIncidentUrgencyRule _type' =
-    IncidentUrgencyRule'
-        { _duringSupportHours = TF.Nil
-        , _outsideSupportHours = TF.Nil
-        , _type' = _type'
-        , _urgency = TF.Nil
+newScheduledActionsAt
+    :: ScheduledActionsAt s
+newScheduledActionsAt =
+    ScheduledActionsAt'
+        { _name = TF.Nil
+        , _type' = TF.Nil
         }
 
-instance P.Hashable  (IncidentUrgencyRule s)
-instance TF.IsValue  (IncidentUrgencyRule s)
-instance TF.IsObject (IncidentUrgencyRule s) where
-    toObject IncidentUrgencyRule'{..} = P.catMaybes
-        [ TF.assign "during_support_hours" <$> TF.attribute _duringSupportHours
-        , TF.assign "outside_support_hours" <$> TF.attribute _outsideSupportHours
+instance P.Hashable  (ScheduledActionsAt s)
+instance TF.IsValue  (ScheduledActionsAt s)
+instance TF.IsObject (ScheduledActionsAt s) where
+    toObject ScheduledActionsAt'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "urgency" <$> TF.attribute _urgency
         ]
 
-instance TF.IsValid (IncidentUrgencyRule s) where
+instance TF.IsValid (ScheduledActionsAt s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_duringSupportHours"
-                  (_duringSupportHours
-                      :: IncidentUrgencyRule s -> TF.Attr s (DuringSupportHours s))
-                  TF.validator
-           P.<> TF.settingsValidator "_outsideSupportHours"
-                  (_outsideSupportHours
-                      :: IncidentUrgencyRule s -> TF.Attr s (OutsideSupportHours s))
-                  TF.validator
 
-instance P.HasDuringSupportHours (IncidentUrgencyRule s) (TF.Attr s (DuringSupportHours s)) where
-    duringSupportHours =
-        P.lens (_duringSupportHours :: IncidentUrgencyRule s -> TF.Attr s (DuringSupportHours s))
-               (\s a -> s { _duringSupportHours = a } :: IncidentUrgencyRule s)
+instance P.HasName (ScheduledActionsAt s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ScheduledActionsAt s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ScheduledActionsAt s)
 
-instance P.HasOutsideSupportHours (IncidentUrgencyRule s) (TF.Attr s (OutsideSupportHours s)) where
-    outsideSupportHours =
-        P.lens (_outsideSupportHours :: IncidentUrgencyRule s -> TF.Attr s (OutsideSupportHours s))
-               (\s a -> s { _outsideSupportHours = a } :: IncidentUrgencyRule s)
-
-instance P.HasType' (IncidentUrgencyRule s) (TF.Attr s P.Text) where
+instance P.HasType' (ScheduledActionsAt s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: IncidentUrgencyRule s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: IncidentUrgencyRule s)
+        P.lens (_type' :: ScheduledActionsAt s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ScheduledActionsAt s)
 
-instance P.HasUrgency (IncidentUrgencyRule s) (TF.Attr s P.Text) where
-    urgency =
-        P.lens (_urgency :: IncidentUrgencyRule s -> TF.Attr s P.Text)
-               (\s a -> s { _urgency = a } :: IncidentUrgencyRule s)
-
--- | @during_support_hours@ nested settings.
-data DuringSupportHours s = DuringSupportHours'
+-- | @incident_urgency_rule_outside_support_hours@ nested settings.
+data IncidentUrgencyRuleOutsideSupportHours s = IncidentUrgencyRuleOutsideSupportHours'
     { _type'   :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
@@ -430,41 +320,230 @@ data DuringSupportHours s = DuringSupportHours'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newDuringSupportHours
-    :: DuringSupportHours s
-newDuringSupportHours =
-    DuringSupportHours'
+newIncidentUrgencyRuleOutsideSupportHours
+    :: IncidentUrgencyRuleOutsideSupportHours s
+newIncidentUrgencyRuleOutsideSupportHours =
+    IncidentUrgencyRuleOutsideSupportHours'
         { _type' = TF.Nil
         , _urgency = TF.Nil
         }
 
-instance P.Hashable  (DuringSupportHours s)
-instance TF.IsValue  (DuringSupportHours s)
-instance TF.IsObject (DuringSupportHours s) where
-    toObject DuringSupportHours'{..} = P.catMaybes
+instance P.Hashable  (IncidentUrgencyRuleOutsideSupportHours s)
+instance TF.IsValue  (IncidentUrgencyRuleOutsideSupportHours s)
+instance TF.IsObject (IncidentUrgencyRuleOutsideSupportHours s) where
+    toObject IncidentUrgencyRuleOutsideSupportHours'{..} = P.catMaybes
         [ TF.assign "type" <$> TF.attribute _type'
         , TF.assign "urgency" <$> TF.attribute _urgency
         ]
 
-instance TF.IsValid (DuringSupportHours s) where
+instance TF.IsValid (IncidentUrgencyRuleOutsideSupportHours s) where
     validator = P.mempty
 
-instance P.HasType' (DuringSupportHours s) (TF.Attr s P.Text) where
+instance P.HasType' (IncidentUrgencyRuleOutsideSupportHours s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: DuringSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: DuringSupportHours s)
+        P.lens (_type' :: IncidentUrgencyRuleOutsideSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: IncidentUrgencyRuleOutsideSupportHours s)
 
-instance P.HasUrgency (DuringSupportHours s) (TF.Attr s P.Text) where
+instance P.HasUrgency (IncidentUrgencyRuleOutsideSupportHours s) (TF.Attr s P.Text) where
     urgency =
-        P.lens (_urgency :: DuringSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _urgency = a } :: DuringSupportHours s)
+        P.lens (_urgency :: IncidentUrgencyRuleOutsideSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _urgency = a } :: IncidentUrgencyRuleOutsideSupportHours s)
 
--- | @layer@ nested settings.
-data Layer s = Layer'
+-- | @layer_restriction@ nested settings.
+data LayerRestriction s = LayerRestriction'
+    { _durationSeconds :: TF.Attr s P.Integer
+    -- ^ @duration_seconds@ - (Required)
+    --
+    , _startDayOfWeek  :: TF.Attr s P.Integer
+    -- ^ @start_day_of_week@ - (Optional)
+    --
+    , _startTimeOfDay  :: TF.Attr s P.Text
+    -- ^ @start_time_of_day@ - (Required)
+    --
+    , _type'           :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newLayerRestriction
+    :: TF.Attr s P.Integer -- ^ @duration_seconds@ - 'P.durationSeconds'
+    -> TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> LayerRestriction s
+newLayerRestriction _durationSeconds _startTimeOfDay _type' =
+    LayerRestriction'
+        { _durationSeconds = _durationSeconds
+        , _startDayOfWeek = TF.Nil
+        , _startTimeOfDay = _startTimeOfDay
+        , _type' = _type'
+        }
+
+instance P.Hashable  (LayerRestriction s)
+instance TF.IsValue  (LayerRestriction s)
+instance TF.IsObject (LayerRestriction s) where
+    toObject LayerRestriction'{..} = P.catMaybes
+        [ TF.assign "duration_seconds" <$> TF.attribute _durationSeconds
+        , TF.assign "start_day_of_week" <$> TF.attribute _startDayOfWeek
+        , TF.assign "start_time_of_day" <$> TF.attribute _startTimeOfDay
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (LayerRestriction s) where
+    validator = P.mempty
+
+instance P.HasDurationSeconds (LayerRestriction s) (TF.Attr s P.Integer) where
+    durationSeconds =
+        P.lens (_durationSeconds :: LayerRestriction s -> TF.Attr s P.Integer)
+               (\s a -> s { _durationSeconds = a } :: LayerRestriction s)
+
+instance P.HasStartDayOfWeek (LayerRestriction s) (TF.Attr s P.Integer) where
+    startDayOfWeek =
+        P.lens (_startDayOfWeek :: LayerRestriction s -> TF.Attr s P.Integer)
+               (\s a -> s { _startDayOfWeek = a } :: LayerRestriction s)
+
+instance P.HasStartTimeOfDay (LayerRestriction s) (TF.Attr s P.Text) where
+    startTimeOfDay =
+        P.lens (_startTimeOfDay :: LayerRestriction s -> TF.Attr s P.Text)
+               (\s a -> s { _startTimeOfDay = a } :: LayerRestriction s)
+
+instance P.HasType' (LayerRestriction s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: LayerRestriction s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: LayerRestriction s)
+
+-- | @rule_target@ nested settings.
+data RuleTarget s = RuleTarget'
+    { _id    :: TF.Attr s P.Text
+    -- ^ @id@ - (Required)
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newRuleTarget
+    :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
+    -> RuleTarget s
+newRuleTarget _id =
+    RuleTarget'
+        { _id = _id
+        , _type' = TF.value "user_reference"
+        }
+
+instance P.Hashable  (RuleTarget s)
+instance TF.IsValue  (RuleTarget s)
+instance TF.IsObject (RuleTarget s) where
+    toObject RuleTarget'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (RuleTarget s) where
+    validator = P.mempty
+
+instance P.HasId (RuleTarget s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: RuleTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: RuleTarget s)
+
+instance P.HasType' (RuleTarget s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: RuleTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: RuleTarget s)
+
+-- | @escalation_policy_rule@ nested settings.
+data EscalationPolicyRule s = EscalationPolicyRule'
+    { _escalationDelayInMinutes :: TF.Attr s P.Integer
+    -- ^ @escalation_delay_in_minutes@ - (Required)
+    --
+    , _target                   :: TF.Attr s [TF.Attr s (RuleTarget s)]
+    -- ^ @target@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newEscalationPolicyRule
+    :: TF.Attr s P.Integer -- ^ @escalation_delay_in_minutes@ - 'P.escalationDelayInMinutes'
+    -> TF.Attr s [TF.Attr s (RuleTarget s)] -- ^ @target@ - 'P.target'
+    -> EscalationPolicyRule s
+newEscalationPolicyRule _escalationDelayInMinutes _target =
+    EscalationPolicyRule'
+        { _escalationDelayInMinutes = _escalationDelayInMinutes
+        , _target = _target
+        }
+
+instance P.Hashable  (EscalationPolicyRule s)
+instance TF.IsValue  (EscalationPolicyRule s)
+instance TF.IsObject (EscalationPolicyRule s) where
+    toObject EscalationPolicyRule'{..} = P.catMaybes
+        [ TF.assign "escalation_delay_in_minutes" <$> TF.attribute _escalationDelayInMinutes
+        , TF.assign "target" <$> TF.attribute _target
+        ]
+
+instance TF.IsValid (EscalationPolicyRule s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_target"
+                  (_target
+                      :: EscalationPolicyRule s -> TF.Attr s [TF.Attr s (RuleTarget s)])
+                  TF.validator
+
+instance P.HasEscalationDelayInMinutes (EscalationPolicyRule s) (TF.Attr s P.Integer) where
+    escalationDelayInMinutes =
+        P.lens (_escalationDelayInMinutes :: EscalationPolicyRule s -> TF.Attr s P.Integer)
+               (\s a -> s { _escalationDelayInMinutes = a } :: EscalationPolicyRule s)
+
+instance P.HasTarget (EscalationPolicyRule s) (TF.Attr s [TF.Attr s (RuleTarget s)]) where
+    target =
+        P.lens (_target :: EscalationPolicyRule s -> TF.Attr s [TF.Attr s (RuleTarget s)])
+               (\s a -> s { _target = a } :: EscalationPolicyRule s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EscalationPolicyRule s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @incident_urgency_rule_during_support_hours@ nested settings.
+data IncidentUrgencyRuleDuringSupportHours s = IncidentUrgencyRuleDuringSupportHours'
+    { _type'   :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    , _urgency :: TF.Attr s P.Text
+    -- ^ @urgency@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newIncidentUrgencyRuleDuringSupportHours
+    :: IncidentUrgencyRuleDuringSupportHours s
+newIncidentUrgencyRuleDuringSupportHours =
+    IncidentUrgencyRuleDuringSupportHours'
+        { _type' = TF.Nil
+        , _urgency = TF.Nil
+        }
+
+instance P.Hashable  (IncidentUrgencyRuleDuringSupportHours s)
+instance TF.IsValue  (IncidentUrgencyRuleDuringSupportHours s)
+instance TF.IsObject (IncidentUrgencyRuleDuringSupportHours s) where
+    toObject IncidentUrgencyRuleDuringSupportHours'{..} = P.catMaybes
+        [ TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "urgency" <$> TF.attribute _urgency
+        ]
+
+instance TF.IsValid (IncidentUrgencyRuleDuringSupportHours s) where
+    validator = P.mempty
+
+instance P.HasType' (IncidentUrgencyRuleDuringSupportHours s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: IncidentUrgencyRuleDuringSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: IncidentUrgencyRuleDuringSupportHours s)
+
+instance P.HasUrgency (IncidentUrgencyRuleDuringSupportHours s) (TF.Attr s P.Text) where
+    urgency =
+        P.lens (_urgency :: IncidentUrgencyRuleDuringSupportHours s -> TF.Attr s P.Text)
+               (\s a -> s { _urgency = a } :: IncidentUrgencyRuleDuringSupportHours s)
+
+-- | @schedule_layer@ nested settings.
+data ScheduleLayer s = ScheduleLayer'
     { _end                       :: TF.Attr s P.Text
     -- ^ @end@ - (Optional)
     --
-    , _restriction               :: TF.Attr s [TF.Attr s (Restriction s)]
+    , _restriction               :: TF.Attr s [TF.Attr s (LayerRestriction s)]
     -- ^ @restriction@ - (Optional)
     --
     , _rotationTurnLengthSeconds :: TF.Attr s P.Integer
@@ -481,14 +560,14 @@ data Layer s = Layer'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newLayer
+newScheduleLayer
     :: TF.Attr s P.Integer -- ^ @rotation_turn_length_seconds@ - 'P.rotationTurnLengthSeconds'
     -> TF.Attr s P.Text -- ^ @rotation_virtual_start@ - 'P.rotationVirtualStart'
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @users@ - 'P.users'
-    -> Layer s
-newLayer _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
-    Layer'
+    -> ScheduleLayer s
+newScheduleLayer _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
+    ScheduleLayer'
         { _end = TF.Nil
         , _restriction = TF.Nil
         , _rotationTurnLengthSeconds = _rotationTurnLengthSeconds
@@ -497,10 +576,10 @@ newLayer _rotationTurnLengthSeconds _rotationVirtualStart _start _users =
         , _users = _users
         }
 
-instance P.Hashable  (Layer s)
-instance TF.IsValue  (Layer s)
-instance TF.IsObject (Layer s) where
-    toObject Layer'{..} = P.catMaybes
+instance P.Hashable  (ScheduleLayer s)
+instance TF.IsValue  (ScheduleLayer s)
+instance TF.IsObject (ScheduleLayer s) where
+    toObject ScheduleLayer'{..} = P.catMaybes
         [ TF.assign "end" <$> TF.attribute _end
         , TF.assign "restriction" <$> TF.attribute _restriction
         , TF.assign "rotation_turn_length_seconds" <$> TF.attribute _rotationTurnLengthSeconds
@@ -509,124 +588,45 @@ instance TF.IsObject (Layer s) where
         , TF.assign "users" <$> TF.attribute _users
         ]
 
-instance TF.IsValid (Layer s) where
+instance TF.IsValid (ScheduleLayer s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_restriction"
                   (_restriction
-                      :: Layer s -> TF.Attr s [TF.Attr s (Restriction s)])
+                      :: ScheduleLayer s -> TF.Attr s [TF.Attr s (LayerRestriction s)])
                   TF.validator
 
-instance P.HasEnd (Layer s) (TF.Attr s P.Text) where
+instance P.HasEnd (ScheduleLayer s) (TF.Attr s P.Text) where
     end =
-        P.lens (_end :: Layer s -> TF.Attr s P.Text)
-               (\s a -> s { _end = a } :: Layer s)
+        P.lens (_end :: ScheduleLayer s -> TF.Attr s P.Text)
+               (\s a -> s { _end = a } :: ScheduleLayer s)
 
-instance P.HasRestriction (Layer s) (TF.Attr s [TF.Attr s (Restriction s)]) where
+instance P.HasRestriction (ScheduleLayer s) (TF.Attr s [TF.Attr s (LayerRestriction s)]) where
     restriction =
-        P.lens (_restriction :: Layer s -> TF.Attr s [TF.Attr s (Restriction s)])
-               (\s a -> s { _restriction = a } :: Layer s)
+        P.lens (_restriction :: ScheduleLayer s -> TF.Attr s [TF.Attr s (LayerRestriction s)])
+               (\s a -> s { _restriction = a } :: ScheduleLayer s)
 
-instance P.HasRotationTurnLengthSeconds (Layer s) (TF.Attr s P.Integer) where
+instance P.HasRotationTurnLengthSeconds (ScheduleLayer s) (TF.Attr s P.Integer) where
     rotationTurnLengthSeconds =
-        P.lens (_rotationTurnLengthSeconds :: Layer s -> TF.Attr s P.Integer)
-               (\s a -> s { _rotationTurnLengthSeconds = a } :: Layer s)
+        P.lens (_rotationTurnLengthSeconds :: ScheduleLayer s -> TF.Attr s P.Integer)
+               (\s a -> s { _rotationTurnLengthSeconds = a } :: ScheduleLayer s)
 
-instance P.HasRotationVirtualStart (Layer s) (TF.Attr s P.Text) where
+instance P.HasRotationVirtualStart (ScheduleLayer s) (TF.Attr s P.Text) where
     rotationVirtualStart =
-        P.lens (_rotationVirtualStart :: Layer s -> TF.Attr s P.Text)
-               (\s a -> s { _rotationVirtualStart = a } :: Layer s)
+        P.lens (_rotationVirtualStart :: ScheduleLayer s -> TF.Attr s P.Text)
+               (\s a -> s { _rotationVirtualStart = a } :: ScheduleLayer s)
 
-instance P.HasStart (Layer s) (TF.Attr s P.Text) where
+instance P.HasStart (ScheduleLayer s) (TF.Attr s P.Text) where
     start =
-        P.lens (_start :: Layer s -> TF.Attr s P.Text)
-               (\s a -> s { _start = a } :: Layer s)
+        P.lens (_start :: ScheduleLayer s -> TF.Attr s P.Text)
+               (\s a -> s { _start = a } :: ScheduleLayer s)
 
-instance P.HasUsers (Layer s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasUsers (ScheduleLayer s) (TF.Attr s [TF.Attr s P.Text]) where
     users =
-        P.lens (_users :: Layer s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _users = a } :: Layer s)
+        P.lens (_users :: ScheduleLayer s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _users = a } :: ScheduleLayer s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Layer s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ScheduleLayer s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Layer s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
--- | @target@ nested settings.
-data Target s = Target'
-    { _id    :: TF.Attr s P.Text
-    -- ^ @id@ - (Required)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newTarget
-    :: TF.Attr s P.Text -- ^ @id@ - 'P.id'
-    -> Target s
-newTarget _id =
-    Target'
-        { _id = _id
-        , _type' = TF.value "user_reference"
-        }
-
-instance P.Hashable  (Target s)
-instance TF.IsValue  (Target s)
-instance TF.IsObject (Target s) where
-    toObject Target'{..} = P.catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (Target s) where
-    validator = P.mempty
-
-instance P.HasId (Target s) (TF.Attr s P.Text) where
-    id =
-        P.lens (_id :: Target s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: Target s)
-
-instance P.HasType' (Target s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: Target s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Target s)
-
--- | @outside_support_hours@ nested settings.
-data OutsideSupportHours s = OutsideSupportHours'
-    { _type'   :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    --
-    , _urgency :: TF.Attr s P.Text
-    -- ^ @urgency@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newOutsideSupportHours
-    :: OutsideSupportHours s
-newOutsideSupportHours =
-    OutsideSupportHours'
-        { _type' = TF.Nil
-        , _urgency = TF.Nil
-        }
-
-instance P.Hashable  (OutsideSupportHours s)
-instance TF.IsValue  (OutsideSupportHours s)
-instance TF.IsObject (OutsideSupportHours s) where
-    toObject OutsideSupportHours'{..} = P.catMaybes
-        [ TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "urgency" <$> TF.attribute _urgency
-        ]
-
-instance TF.IsValid (OutsideSupportHours s) where
-    validator = P.mempty
-
-instance P.HasType' (OutsideSupportHours s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: OutsideSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: OutsideSupportHours s)
-
-instance P.HasUrgency (OutsideSupportHours s) (TF.Attr s P.Text) where
-    urgency =
-        P.lens (_urgency :: OutsideSupportHours s -> TF.Attr s P.Text)
-               (\s a -> s { _urgency = a } :: OutsideSupportHours s)
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ScheduleLayer s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"

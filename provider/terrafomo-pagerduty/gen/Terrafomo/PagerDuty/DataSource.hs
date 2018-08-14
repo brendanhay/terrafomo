@@ -71,7 +71,7 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @pagerduty_escalation_policy@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_escalation_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/d/escalation_policy.html terraform documentation>
 -- for more information.
 data EscalationPolicyData s = EscalationPolicyData'
     { _name :: TF.Attr s P.Text
@@ -103,7 +103,7 @@ instance P.HasName (EscalationPolicyData s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_extension_schema@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_extension_schema terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/d/extension_schema.html terraform documentation>
 -- for more information.
 data ExtensionSchemaData s = ExtensionSchemaData'
     { _name :: TF.Attr s P.Text
@@ -134,11 +134,11 @@ instance P.HasName (ExtensionSchemaData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ExtensionSchemaData s)
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @pagerduty_schedule@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_schedule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/d/schedule.html terraform documentation>
 -- for more information.
 data ScheduleData s = ScheduleData'
     { _name :: TF.Attr s P.Text
@@ -170,7 +170,7 @@ instance P.HasName (ScheduleData s) (TF.Attr s P.Text) where
 
 -- | @pagerduty_team@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_team terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/d/team.html terraform documentation>
 -- for more information.
 data TeamData s = TeamData'
     { _name :: TF.Attr s P.Text
@@ -202,11 +202,11 @@ instance P.HasName (TeamData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: TeamData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 -- | @pagerduty_user@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/d/user.html terraform documentation>
 -- for more information.
 data UserData s = UserData'
     { _email :: TF.Attr s P.Text
@@ -237,11 +237,11 @@ instance P.HasEmail (UserData s) (TF.Attr s P.Text) where
                (\s a -> s { _email = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @pagerduty_vendor@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/pagerduty_vendor terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/d/vendor.html terraform documentation>
 -- for more information.
 data VendorData s = VendorData'
     { _name      :: TF.Attr s P.Text
@@ -282,4 +282,4 @@ instance P.HasNameRegex (VendorData s) (TF.Attr s P.Text) where
                (\s a -> s { _nameRegex = a } :: VendorData s)
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"

@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | The @PagerDuty@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/PagerDuty/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/pagerduty/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _skipCredentialsValidation :: P.Bool
