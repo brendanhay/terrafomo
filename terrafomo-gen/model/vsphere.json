@@ -338,7 +338,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ha_admission_control_failover_host_system_ids",
+            "name": "compute_cluster_ha_admission_control_failover_host_system_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -571,7 +571,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ha_heartbeat_datastore_ids",
+            "name": "compute_cluster_ha_heartbeat_datastore_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -791,7 +791,7 @@
           "minItems": 0,
           "maxItems": 64,
           "schema": {
-            "name": "host_system_ids",
+            "name": "compute_cluster_host_system_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -870,7 +870,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "proactive_ha_provider_ids",
+            "name": "compute_cluster_proactive_ha_provider_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -922,7 +922,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_cluster_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -965,7 +965,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "host_system_ids",
+            "name": "compute_cluster_host_group_host_system_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1061,7 +1061,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "virtual_machine_ids",
+            "name": "compute_cluster_vm_affinity_rule_virtual_machine_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1144,7 +1144,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "virtual_machine_ids",
+            "name": "compute_cluster_vm_anti_affinity_rule_virtual_machine_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1284,7 +1284,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "virtual_machine_ids",
+            "name": "compute_cluster_vm_group_virtual_machine_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1496,7 +1496,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "datacenter_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1851,7 +1851,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "datastore_cluster_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1934,7 +1934,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "virtual_machine_ids",
+            "name": "datastore_cluster_vm_anti_affinity_rule_virtual_machine_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1964,7 +1964,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "active_uplinks",
+            "name": "distributed_port_group_active_uplinks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2475,7 +2475,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "standby_uplinks",
+            "name": "distributed_port_group_standby_uplinks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2500,7 +2500,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "distributed_port_group_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2623,7 +2623,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "vlan_range",
+            "name": "distributed_port_group_vlan_range",
             "schemas": [
               {
                 "name": "max_vlan",
@@ -2672,7 +2672,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "active_uplinks",
+            "name": "distributed_virtual_switch_active_uplinks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3035,7 +3035,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "host",
+            "name": "distributed_virtual_switch_host",
             "schemas": [
               {
                 "name": "devices",
@@ -3050,7 +3050,7 @@
                 "minItems": 1,
                 "maxItems": 0,
                 "schema": {
-                  "name": "devices",
+                  "name": "host_devices",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3579,7 +3579,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "standby_uplinks",
+            "name": "distributed_virtual_switch_standby_uplinks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3604,7 +3604,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "distributed_virtual_switch_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3655,7 +3655,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "uplinks",
+            "name": "distributed_virtual_switch_uplinks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3816,7 +3816,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "vlan_range",
+            "name": "distributed_virtual_switch_vlan_range",
             "schemas": [
               {
                 "name": "max_vlan",
@@ -4215,7 +4215,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "folder_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4471,7 +4471,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "active_nics",
+            "name": "host_port_group_active_nics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4626,7 +4626,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "ports",
+            "name": "host_port_group_ports",
             "schemas": [
               {
                 "name": "key",
@@ -4654,7 +4654,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "mac_addresses",
+                  "name": "ports_mac_addresses",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -4747,7 +4747,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "standby_nics",
+            "name": "host_port_group_standby_nics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4817,7 +4817,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "active_nics",
+            "name": "host_virtual_switch_active_nics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4994,7 +4994,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "network_adapters",
+            "name": "host_virtual_switch_network_adapters",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5100,7 +5100,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "standby_nics",
+            "name": "host_virtual_switch_standby_nics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5317,7 +5317,7 @@
           "minItems": 1,
           "maxItems": 0,
           "schema": {
-            "name": "host_system_ids",
+            "name": "nas_datastore_host_system_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5394,7 +5394,7 @@
           "minItems": 1,
           "maxItems": 0,
           "schema": {
-            "name": "remote_hosts",
+            "name": "nas_datastore_remote_hosts",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5445,7 +5445,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "nas_datastore_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5692,7 +5692,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "resource_pool_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5836,7 +5836,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "associable_types",
+            "name": "tag_category_associable_types",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6095,7 +6095,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "vapp_container_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6283,7 +6283,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "cdrom",
+            "name": "virtual_machine_cdrom",
             "schemas": [
               {
                 "name": "client_device",
@@ -6379,7 +6379,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "clone",
+            "name": "virtual_machine_clone",
             "schemas": [
               {
                 "name": "customize",
@@ -6394,7 +6394,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "customize",
+                  "name": "clone_customize",
                   "schemas": [
                     {
                       "name": "dns_server_list",
@@ -6409,7 +6409,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "dns_server_list",
+                        "name": "customize_dns_server_list",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -6434,7 +6434,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "dns_suffix_list",
+                        "name": "customize_dns_suffix_list",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -6488,7 +6488,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "linux_options",
+                        "name": "customize_linux_options",
                         "schemas": [
                           {
                             "name": "domain",
@@ -6559,7 +6559,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "network_interface",
+                        "name": "customize_network_interface",
                         "schemas": [
                           {
                             "name": "dns_domain",
@@ -6587,7 +6587,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "dns_server_list",
+                              "name": "network_interface_dns_server_list",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -6684,7 +6684,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "windows_options",
+                        "name": "customize_windows_options",
                         "schemas": [
                           {
                             "name": "admin_password",
@@ -6838,7 +6838,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "run_once_command_list",
+                              "name": "windows_options_run_once_command_list",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -7106,7 +7106,7 @@
           "minItems": 0,
           "maxItems": 60,
           "resource": {
-            "name": "disk",
+            "name": "virtual_machine_disk",
             "schemas": [
               {
                 "name": "attach",
@@ -7524,7 +7524,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "guest_ip_addresses",
+            "name": "virtual_machine_guest_ip_addresses",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -7736,7 +7736,7 @@
           "minItems": 0,
           "maxItems": 10,
           "resource": {
-            "name": "network_interface",
+            "name": "virtual_machine_network_interface",
             "schemas": [
               {
                 "name": "adapter_type",
@@ -8094,7 +8094,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "virtual_machine_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -8132,7 +8132,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "vapp",
+            "name": "virtual_machine_vapp",
             "schemas": [
               {
                 "name": "properties",
@@ -8163,7 +8163,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "vapp_transport",
+            "name": "virtual_machine_vapp_transport",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -8390,7 +8390,7 @@
           "minItems": 1,
           "maxItems": 0,
           "schema": {
-            "name": "disks",
+            "name": "vmfs_datastore_disks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -8495,7 +8495,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "vmfs_datastore_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -8734,7 +8734,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "uplinks",
+            "name": "distributed_virtual_switch_uplinks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -8927,7 +8927,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "associable_types",
+            "name": "tag_category_associable_types",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -9022,7 +9022,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "disks",
+            "name": "virtual_machine_disks",
             "schemas": [
               {
                 "name": "eagerly_scrub",
@@ -9115,7 +9115,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "network_interface_types",
+            "name": "virtual_machine_network_interface_types",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -9185,7 +9185,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "disks",
+            "name": "vmfs_disks_disks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
