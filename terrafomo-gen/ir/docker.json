@@ -4059,22 +4059,6 @@
                     "original": "labels"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"links\" <$> TF.attribute",
-                    "name": "_links",
-                    "method": "links",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasLinks",
-                    "validate": false,
-                    "optional": true,
-                    "original": "links"
-                },
-                {
                     "default": "TF.value \"json-file\"",
                     "computed": false,
                     "required": false,
@@ -4513,38 +4497,10 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"pull_trigger\" <$> TF.attribute",
-                    "name": "_pullTrigger",
-                    "method": "pullTrigger",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_pullTriggers",
-                            "method": "pullTriggers"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPullTrigger",
-                    "validate": false,
-                    "optional": true,
-                    "original": "pull_trigger"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
                     "encoder": "TF.assign \"pull_triggers\" <$> TF.attribute",
                     "name": "_pullTriggers",
                     "method": "pullTriggers",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_pullTrigger",
-                            "method": "pullTrigger"
-                        }
-                    ],
+                    "conflicts": [],
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasPullTriggers",
                     "validate": false,
@@ -4590,52 +4546,7 @@
                     "original": "name"
                 }
             ],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"pull_trigger\" <$> TF.attribute",
-                    "name": "_pullTrigger",
-                    "method": "pullTrigger",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_pullTriggers",
-                            "method": "pullTriggers"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPullTrigger",
-                    "validate": false,
-                    "optional": true,
-                    "original": "pull_trigger"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"pull_triggers\" <$> TF.attribute",
-                    "name": "_pullTriggers",
-                    "method": "pullTriggers",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_pullTrigger",
-                            "method": "pullTrigger"
-                        }
-                    ],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasPullTriggers",
-                    "validate": false,
-                    "optional": true,
-                    "original": "pull_triggers"
-                }
-            ],
+            "conflicts": [],
             "type": "ImageResource s",
             "original": "docker_image"
         },
