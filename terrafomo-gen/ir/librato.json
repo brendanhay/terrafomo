@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newStream",
-                "name": "Stream'"
+                "smart": "newSpaceChartStream",
+                "name": "SpaceChartStream'"
             },
             "arguments": [
                 {
@@ -249,7 +249,7 @@
                     "original": "units_short"
                 }
             ],
-            "name": "Stream",
+            "name": "SpaceChartStream",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -353,13 +353,204 @@
                     "original": "source"
                 }
             ],
-            "type": "Stream s",
-            "original": "stream"
+            "type": "SpaceChartStream s",
+            "original": "space_chart_stream"
         },
         {
             "con": {
-                "smart": "newAttributes",
-                "name": "Attributes'"
+                "smart": "newAlertCondition",
+                "name": "AlertCondition'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"detect_reset\" <$> TF.attribute",
+                    "name": "_detectReset",
+                    "method": "detectReset",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasDetectReset",
+                    "validate": false,
+                    "optional": true,
+                    "original": "detect_reset"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
+                    "name": "_duration",
+                    "method": "duration",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDuration",
+                    "validate": false,
+                    "optional": true,
+                    "original": "duration"
+                },
+                {
+                    "default": "_metricName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
+                    "name": "_metricName",
+                    "method": "metricName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMetricName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "metric_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_source",
+                    "method": "source",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"summary_function\" <$> TF.attribute",
+                    "name": "_summaryFunction",
+                    "method": "summaryFunction",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSummaryFunction",
+                    "validate": false,
+                    "optional": true,
+                    "original": "summary_function"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
+                    "name": "_threshold",
+                    "method": "threshold",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasThreshold",
+                    "validate": false,
+                    "optional": true,
+                    "original": "threshold"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "name": "AlertCondition",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_metricName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
+                    "name": "_metricName",
+                    "method": "metricName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMetricName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "metric_name"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "AlertCondition s",
+            "original": "alert_condition"
+        },
+        {
+            "con": {
+                "smart": "newAlertAttributes",
+                "name": "AlertAttributes'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"runbook_url\" <$> TF.attribute",
+                    "name": "_runbookUrl",
+                    "method": "runbookUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRunbookUrl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "runbook_url"
+                }
+            ],
+            "name": "AlertAttributes",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "AlertAttributes s",
+            "original": "alert_attributes"
+        },
+        {
+            "con": {
+                "smart": "newMetricAttributes",
+                "name": "MetricAttributes'"
             },
             "arguments": [
                 {
@@ -491,7 +682,7 @@
                     "original": "gap_detection"
                 }
             ],
-            "name": "Attributes",
+            "name": "MetricAttributes",
             "threaded": true,
             "attributes": [
                 {
@@ -513,170 +704,11 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "Attributes s",
-            "original": "attributes"
-        },
-        {
-            "con": {
-                "smart": "newCondition",
-                "name": "Condition'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"detect_reset\" <$> TF.attribute",
-                    "name": "_detectReset",
-                    "method": "detectReset",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasDetectReset",
-                    "validate": false,
-                    "optional": true,
-                    "original": "detect_reset"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
-                    "name": "_duration",
-                    "method": "duration",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasDuration",
-                    "validate": false,
-                    "optional": true,
-                    "original": "duration"
-                },
-                {
-                    "default": "_metricName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
-                    "name": "_metricName",
-                    "method": "metricName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMetricName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "metric_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "_source",
-                    "method": "source",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSource",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"summary_function\" <$> TF.attribute",
-                    "name": "_summaryFunction",
-                    "method": "summaryFunction",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSummaryFunction",
-                    "validate": false,
-                    "optional": true,
-                    "original": "summary_function"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
-                    "name": "_threshold",
-                    "method": "threshold",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Double",
-                    "class": "HasThreshold",
-                    "validate": false,
-                    "optional": true,
-                    "original": "threshold"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "name": "Condition",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_metricName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"metric_name\" <$> TF.attribute",
-                    "name": "_metricName",
-                    "method": "metricName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMetricName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "metric_name"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "conflicts": [],
-            "type": "Condition s",
-            "original": "condition"
+            "type": "MetricAttributes s",
+            "original": "metric_attributes"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/librato/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -711,7 +743,7 @@
                     "name": "_attributes",
                     "method": "attributes",
                     "conflicts": [],
-                    "type": "TF.Attr s (Attributes s)",
+                    "type": "TF.Attr s (AlertAttributes s)",
                     "class": "HasAttributes",
                     "validate": true,
                     "optional": true,
@@ -727,7 +759,7 @@
                     "name": "_condition",
                     "method": "condition",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Condition s)]",
+                    "type": "TF.Attr s [TF.Attr s (AlertCondition s)]",
                     "class": "HasCondition",
                     "validate": true,
                     "optional": true,
@@ -798,6 +830,7 @@
                     "original": "services"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/librato/r/alert.html",
             "name": "AlertResource",
             "threaded": true,
             "attributes": [],
@@ -839,7 +872,7 @@
                     "name": "_attributes",
                     "method": "attributes",
                     "conflicts": [],
-                    "type": "TF.Attr s (Attributes s)",
+                    "type": "TF.Attr s (MetricAttributes s)",
                     "class": "HasAttributes",
                     "validate": true,
                     "optional": true,
@@ -942,6 +975,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/librato/r/metric.html",
             "name": "MetricResource",
             "threaded": true,
             "attributes": [],
@@ -1038,6 +1072,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/librato/r/service.html",
             "name": "ServiceResource",
             "threaded": true,
             "attributes": [
@@ -1135,6 +1170,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/librato/r/space.html",
             "name": "SpaceResource",
             "threaded": true,
             "attributes": [
@@ -1289,7 +1325,7 @@
                     "name": "_stream",
                     "method": "stream",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Stream s)]",
+                    "type": "TF.Attr s [TF.Attr s (SpaceChartStream s)]",
                     "class": "HasStream",
                     "validate": true,
                     "optional": true,
@@ -1312,6 +1348,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/librato/r/space_chart.html",
             "name": "SpaceChartResource",
             "threaded": true,
             "attributes": [],
