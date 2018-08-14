@@ -275,12 +275,6 @@ data Disk s = Disk'
     -- ^ @label@ - (Optional)
     -- A unique label for this disk.
     --
-    , _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
-    -- The file name of the disk. This can be either a name or path relative to the
-    -- root of the datastore. If simply a name, the disk is located with the
-    -- virtual machine.
-    --
     , _size            :: TF.Attr s P.Integer
     -- ^ @size@ - (Optional)
     -- The size of the disk, in GB.
@@ -317,7 +311,6 @@ newDisk =
         , _ioShareLevel = TF.value "normal"
         , _keepOnRemove = TF.value P.False
         , _label = TF.Nil
-        , _name = TF.Nil
         , _size = TF.Nil
         , _thinProvisioned = TF.value P.True
         , _unitNumber = TF.value 0
@@ -339,7 +332,6 @@ instance TF.IsObject (Disk s) where
         , TF.assign "io_share_level" <$> TF.attribute _ioShareLevel
         , TF.assign "keep_on_remove" <$> TF.attribute _keepOnRemove
         , TF.assign "label" <$> TF.attribute _label
-        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "thin_provisioned" <$> TF.attribute _thinProvisioned
         , TF.assign "unit_number" <$> TF.attribute _unitNumber
@@ -403,11 +395,6 @@ instance P.HasLabel (Disk s) (TF.Attr s P.Text) where
     label =
         P.lens (_label :: Disk s -> TF.Attr s P.Text)
                (\s a -> s { _label = a } :: Disk s)
-
-instance P.HasName (Disk s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Disk s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Disk s)
 
 instance P.HasSize (Disk s) (TF.Attr s P.Integer) where
     size =

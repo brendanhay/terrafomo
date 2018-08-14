@@ -4457,10 +4457,7 @@ instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (VappContainerResource s
 -- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_disk terraform documentation>
 -- for more information.
 data VirtualDiskResource s = VirtualDiskResource'
-    { _adapterType       :: TF.Attr s P.Text
-    -- ^ @adapter_type@ - (Optional)
-    --
-    , _createDirectories :: TF.Attr s P.Bool
+    { _createDirectories :: TF.Attr s P.Bool
     -- ^ @create_directories@ - (Optional)
     --
     , _datacenter        :: TF.Attr s P.Text
@@ -4488,8 +4485,7 @@ virtualDiskResource
 virtualDiskResource _datastore _size _vmdkPath =
     TF.newResource "vsphere_virtual_disk" TF.validator $
         VirtualDiskResource'
-            { _adapterType = TF.value "lsiLogic"
-            , _createDirectories = TF.Nil
+            { _createDirectories = TF.Nil
             , _datacenter = TF.Nil
             , _datastore = _datastore
             , _size = _size
@@ -4499,8 +4495,7 @@ virtualDiskResource _datastore _size _vmdkPath =
 
 instance TF.IsObject (VirtualDiskResource s) where
     toObject VirtualDiskResource'{..} = P.catMaybes
-        [ TF.assign "adapter_type" <$> TF.attribute _adapterType
-        , TF.assign "create_directories" <$> TF.attribute _createDirectories
+        [ TF.assign "create_directories" <$> TF.attribute _createDirectories
         , TF.assign "datacenter" <$> TF.attribute _datacenter
         , TF.assign "datastore" <$> TF.attribute _datastore
         , TF.assign "size" <$> TF.attribute _size
@@ -4510,11 +4505,6 @@ instance TF.IsObject (VirtualDiskResource s) where
 
 instance TF.IsValid (VirtualDiskResource s) where
     validator = P.mempty
-
-instance P.HasAdapterType (VirtualDiskResource s) (TF.Attr s P.Text) where
-    adapterType =
-        P.lens (_adapterType :: VirtualDiskResource s -> TF.Attr s P.Text)
-               (\s a -> s { _adapterType = a } :: VirtualDiskResource s)
 
 instance P.HasCreateDirectories (VirtualDiskResource s) (TF.Attr s P.Bool) where
     createDirectories =

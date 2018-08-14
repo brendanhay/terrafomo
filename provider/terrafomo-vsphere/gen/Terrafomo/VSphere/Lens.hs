@@ -91,7 +91,6 @@ module Terrafomo.VSphere.Lens
     , HasEnableLogging (..)
     , HasClientDevice (..)
     , HasSecurityType (..)
-    , HasVcenterServer (..)
     , HasNetworkResourceControlEnabled (..)
     , HasNetflowIdleFlowTimeout (..)
     , HasScsiType (..)
@@ -880,12 +879,6 @@ class HasSecurityType a b | a -> b where
 
 instance HasSecurityType a b => HasSecurityType (TF.Schema l p a) b where
     securityType = TF.configuration . securityType
-
-class HasVcenterServer a b | a -> b where
-    vcenterServer :: P.Lens' a b
-
-instance HasVcenterServer a b => HasVcenterServer (TF.Schema l p a) b where
-    vcenterServer = TF.configuration . vcenterServer
 
 class HasNetworkResourceControlEnabled a b | a -> b where
     networkResourceControlEnabled :: P.Lens' a b

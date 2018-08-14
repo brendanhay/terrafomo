@@ -84,9 +84,6 @@ data Provider = Provider'
     -- ^ @user@ - (Required)
     -- The user name for vSphere API operations.
     --
-    , _vcenterServer      :: P.Maybe P.Text
-    -- ^ @vcenter_server@ - (Optional)
-    --
     , _vimSessionPath     :: P.Maybe P.Text
     -- ^ @vim_session_path@ - (Optional)
     -- The directory to save vSphere SOAP API sessions to
@@ -111,7 +108,6 @@ newProvider _password _user =
         , _persistSession = P.Nothing
         , _restSessionPath = P.Nothing
         , _user = _user
-        , _vcenterServer = P.Nothing
         , _vimSessionPath = P.Nothing
         , _vsphereServer = P.Nothing
         }
@@ -134,7 +130,6 @@ instance TF.IsSection Provider where
                   , TF.assign "persist_session" <$> _persistSession
                   , TF.assign "rest_session_path" <$> _restSessionPath
                   , P.Just $ TF.assign "user" _user
-                  , TF.assign "vcenter_server" <$> _vcenterServer
                   , TF.assign "vim_session_path" <$> _vimSessionPath
                   , TF.assign "vsphere_server" <$> _vsphereServer
                   ])
@@ -184,11 +179,6 @@ instance P.HasUser (Provider) (P.Text) where
     user =
         P.lens (_user :: Provider -> P.Text)
                (\s a -> s { _user = a } :: Provider)
-
-instance P.HasVcenterServer (Provider) (P.Maybe P.Text) where
-    vcenterServer =
-        P.lens (_vcenterServer :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _vcenterServer = a } :: Provider)
 
 instance P.HasVimSessionPath (Provider) (P.Maybe P.Text) where
     vimSessionPath =
