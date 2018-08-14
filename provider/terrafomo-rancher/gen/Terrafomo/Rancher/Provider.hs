@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Rancher@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/rancher/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _accessKey :: P.Maybe P.Text

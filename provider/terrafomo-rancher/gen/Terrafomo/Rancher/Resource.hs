@@ -83,7 +83,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @rancher_certificate@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_certificate terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/certificate.html terraform documentation>
 -- for more information.
 data CertificateResource s = CertificateResource'
     { _cert          :: TF.Attr s P.Text
@@ -167,41 +167,41 @@ instance P.HasName (CertificateResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: CertificateResource s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
+    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
 
 instance s ~ s' => P.HasComputedCertFingerprint (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedCertFingerprint x = TF.compute (TF.refKey x) "_computedCertFingerprint"
+    computedCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
 
 instance s ~ s' => P.HasComputedCn (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedCn x = TF.compute (TF.refKey x) "_computedCn"
+    computedCn x = TF.compute (TF.refKey x) "cn"
 
 instance s ~ s' => P.HasComputedExpiresAt (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedExpiresAt x = TF.compute (TF.refKey x) "_computedExpiresAt"
+    computedExpiresAt x = TF.compute (TF.refKey x) "expires_at"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIssuedAt (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedIssuedAt x = TF.compute (TF.refKey x) "_computedIssuedAt"
+    computedIssuedAt x = TF.compute (TF.refKey x) "issued_at"
 
 instance s ~ s' => P.HasComputedIssuer (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedIssuer x = TF.compute (TF.refKey x) "_computedIssuer"
+    computedIssuer x = TF.compute (TF.refKey x) "issuer"
 
 instance s ~ s' => P.HasComputedKeySize (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedKeySize x = TF.compute (TF.refKey x) "_computedKeySize"
+    computedKeySize x = TF.compute (TF.refKey x) "key_size"
 
 instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedSerialNumber x = TF.compute (TF.refKey x) "_computedSerialNumber"
+    computedSerialNumber x = TF.compute (TF.refKey x) "serial_number"
 
 instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "_computedSubjectAlternativeNames"
+    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @rancher_environment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_environment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/environment.html terraform documentation>
 -- for more information.
 data EnvironmentResource s = EnvironmentResource'
     { _description :: TF.Attr s P.Text
@@ -242,20 +242,20 @@ instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: EnvironmentResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (Member s)]) where
-    computedMember x = TF.compute (TF.refKey x) "_computedMember"
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (EnvironmentMember s)]) where
+    computedMember x = TF.compute (TF.refKey x) "member"
 
 instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
-    computedOrchestration x = TF.compute (TF.refKey x) "_computedOrchestration"
+    computedOrchestration x = TF.compute (TF.refKey x) "orchestration"
 
 instance s ~ s' => P.HasComputedProjectTemplateId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
-    computedProjectTemplateId x = TF.compute (TF.refKey x) "_computedProjectTemplateId"
+    computedProjectTemplateId x = TF.compute (TF.refKey x) "project_template_id"
 
 -- | @rancher_host@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_host terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/host.html terraform documentation>
 -- for more information.
 data HostResource s = HostResource'
     { _description   :: TF.Attr s P.Text
@@ -328,27 +328,27 @@ instance P.HasName (HostResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: HostResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @rancher_registration_token@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_registration_token terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/registration_token.html terraform documentation>
 -- for more information.
 data RegistrationTokenResource s = RegistrationTokenResource'
     { _agentIp       :: TF.Attr s P.Text
     -- ^ @agent_ip@ - (Optional)
     --
     , _description   :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _environmentId :: TF.Attr s P.Text
-    -- ^ @environment_id@ - (Required)
+    -- ^ @environment_id@ - (Required, Forces New)
     --
     , _hostLabels    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @host_labels@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -404,36 +404,36 @@ instance P.HasName (RegistrationTokenResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: RegistrationTokenResource s)
 
 instance s ~ s' => P.HasComputedCommand (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedCommand x = TF.compute (TF.refKey x) "_computedCommand"
+    computedCommand x = TF.compute (TF.refKey x) "command"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedImage x = TF.compute (TF.refKey x) "_computedImage"
+    computedImage x = TF.compute (TF.refKey x) "image"
 
 instance s ~ s' => P.HasComputedRegistrationUrl (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedRegistrationUrl x = TF.compute (TF.refKey x) "_computedRegistrationUrl"
+    computedRegistrationUrl x = TF.compute (TF.refKey x) "registration_url"
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (RegistrationTokenResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "_computedToken"
+    computedToken x = TF.compute (TF.refKey x) "token"
 
 -- | @rancher_registry@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_registry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/registry.html terraform documentation>
 -- for more information.
 data RegistryResource s = RegistryResource'
     { _description   :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _environmentId :: TF.Attr s P.Text
-    -- ^ @environment_id@ - (Required)
+    -- ^ @environment_id@ - (Required, Forces New)
     --
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _serverAddress :: TF.Attr s P.Text
-    -- ^ @server_address@ - (Required)
+    -- ^ @server_address@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -483,11 +483,11 @@ instance P.HasServerAddress (RegistryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _serverAddress = a } :: RegistryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @rancher_registry_credential@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_registry_credential terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/registry_credential.html terraform documentation>
 -- for more information.
 data RegistryCredentialResource s = RegistryCredentialResource'
     { _description :: TF.Attr s P.Text
@@ -500,10 +500,10 @@ data RegistryCredentialResource s = RegistryCredentialResource'
     -- ^ @public_value@ - (Required)
     --
     , _registryId  :: TF.Attr s P.Text
-    -- ^ @registry_id@ - (Required)
+    -- ^ @registry_id@ - (Required, Forces New)
     --
     , _secretValue :: TF.Attr s P.Text
-    -- ^ @secret_value@ - (Required)
+    -- ^ @secret_value@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -561,11 +561,11 @@ instance P.HasSecretValue (RegistryCredentialResource s) (TF.Attr s P.Text) wher
                (\s a -> s { _secretValue = a } :: RegistryCredentialResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryCredentialResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @rancher_secret@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_secret terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/secret.html terraform documentation>
 -- for more information.
 data SecretResource s = SecretResource'
     { _description   :: TF.Attr s P.Text
@@ -575,10 +575,10 @@ data SecretResource s = SecretResource'
     -- ^ @environment_id@ - (Required)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _value         :: TF.Attr s P.Text
-    -- ^ @value@ - (Required)
+    -- ^ @value@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -628,11 +628,11 @@ instance P.HasValue (SecretResource s) (TF.Attr s P.Text) where
                (\s a -> s { _value = a } :: SecretResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @rancher_stack@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_stack terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/stack.html terraform documentation>
 -- for more information.
 data StackResource s = StackResource'
     { _catalogId      :: TF.Attr s P.Text
@@ -648,7 +648,7 @@ data StackResource s = StackResource'
     -- ^ @environment@ - (Optional)
     --
     , _environmentId  :: TF.Attr s P.Text
-    -- ^ @environment_id@ - (Required)
+    -- ^ @environment_id@ - (Required, Forces New)
     --
     , _finishUpgrade  :: TF.Attr s P.Bool
     -- ^ @finish_upgrade@ - (Optional)
@@ -744,33 +744,33 @@ instance P.HasScope (StackResource s) (TF.Attr s P.Text) where
                (\s a -> s { _scope = a } :: StackResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRenderedDockerCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
-    computedRenderedDockerCompose x = TF.compute (TF.refKey x) "_computedRenderedDockerCompose"
+    computedRenderedDockerCompose x = TF.compute (TF.refKey x) "rendered_docker_compose"
 
 instance s ~ s' => P.HasComputedRenderedRancherCompose (TF.Ref s' (StackResource s)) (TF.Attr s P.Text) where
-    computedRenderedRancherCompose x = TF.compute (TF.refKey x) "_computedRenderedRancherCompose"
+    computedRenderedRancherCompose x = TF.compute (TF.refKey x) "rendered_rancher_compose"
 
 instance s ~ s' => P.HasComputedStartOnCreate (TF.Ref s' (StackResource s)) (TF.Attr s P.Bool) where
-    computedStartOnCreate x = TF.compute (TF.refKey x) "_computedStartOnCreate"
+    computedStartOnCreate x = TF.compute (TF.refKey x) "start_on_create"
 
 -- | @rancher_volume@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
     { _description   :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _driver        :: TF.Attr s P.Text
-    -- ^ @driver@ - (Required)
+    -- ^ @driver@ - (Required, Forces New)
     --
     , _environmentId :: TF.Attr s P.Text
-    -- ^ @environment_id@ - (Required)
+    -- ^ @environment_id@ - (Required, Forces New)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -820,4 +820,4 @@ instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"

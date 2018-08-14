@@ -59,7 +59,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @rancher_certificate@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_certificate terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/d/certificate.html terraform documentation>
 -- for more information.
 data CertificateData s = CertificateData'
     { _environmentId :: TF.Attr s P.Text
@@ -101,41 +101,41 @@ instance P.HasName (CertificateData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: CertificateData s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
+    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
 
 instance s ~ s' => P.HasComputedCertFingerprint (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedCertFingerprint x = TF.compute (TF.refKey x) "_computedCertFingerprint"
+    computedCertFingerprint x = TF.compute (TF.refKey x) "cert_fingerprint"
 
 instance s ~ s' => P.HasComputedCn (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedCn x = TF.compute (TF.refKey x) "_computedCn"
+    computedCn x = TF.compute (TF.refKey x) "cn"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedExpiresAt (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedExpiresAt x = TF.compute (TF.refKey x) "_computedExpiresAt"
+    computedExpiresAt x = TF.compute (TF.refKey x) "expires_at"
 
 instance s ~ s' => P.HasComputedIssuedAt (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedIssuedAt x = TF.compute (TF.refKey x) "_computedIssuedAt"
+    computedIssuedAt x = TF.compute (TF.refKey x) "issued_at"
 
 instance s ~ s' => P.HasComputedIssuer (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedIssuer x = TF.compute (TF.refKey x) "_computedIssuer"
+    computedIssuer x = TF.compute (TF.refKey x) "issuer"
 
 instance s ~ s' => P.HasComputedKeySize (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedKeySize x = TF.compute (TF.refKey x) "_computedKeySize"
+    computedKeySize x = TF.compute (TF.refKey x) "key_size"
 
 instance s ~ s' => P.HasComputedSerialNumber (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedSerialNumber x = TF.compute (TF.refKey x) "_computedSerialNumber"
+    computedSerialNumber x = TF.compute (TF.refKey x) "serial_number"
 
 instance s ~ s' => P.HasComputedSubjectAlternativeNames (TF.Ref s' (CertificateData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "_computedSubjectAlternativeNames"
+    computedSubjectAlternativeNames x = TF.compute (TF.refKey x) "subject_alternative_names"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @rancher_environment@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_environment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/d/environment.html terraform documentation>
 -- for more information.
 data EnvironmentData s = EnvironmentData'
     { _name :: TF.Attr s P.Text
@@ -166,20 +166,20 @@ instance P.HasName (EnvironmentData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: EnvironmentData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentData s)) (TF.Attr s [TF.Attr s (Member s)]) where
-    computedMember x = TF.compute (TF.refKey x) "_computedMember"
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentData s)) (TF.Attr s [TF.Attr s (EnvironmentMember s)]) where
+    computedMember x = TF.compute (TF.refKey x) "member"
 
 instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
-    computedOrchestration x = TF.compute (TF.refKey x) "_computedOrchestration"
+    computedOrchestration x = TF.compute (TF.refKey x) "orchestration"
 
 instance s ~ s' => P.HasComputedProjectTemplateId (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
-    computedProjectTemplateId x = TF.compute (TF.refKey x) "_computedProjectTemplateId"
+    computedProjectTemplateId x = TF.compute (TF.refKey x) "project_template_id"
 
 -- | @rancher_setting@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Rancher/rancher_setting terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rancher/d/setting.html terraform documentation>
 -- for more information.
 data SettingData s = SettingData'
     { _name :: TF.Attr s P.Text
@@ -210,4 +210,4 @@ instance P.HasName (SettingData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SettingData s)
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (SettingData s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "_computedValue"
+    computedValue x = TF.compute (TF.refKey x) "value"

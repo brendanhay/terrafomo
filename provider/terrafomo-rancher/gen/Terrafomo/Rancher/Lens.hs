@@ -29,11 +29,14 @@ module Terrafomo.Rancher.Lens
     , HasScope (..)
     , HasDescription (..)
     , HasApiUrl (..)
+    , HasExternalIdType (..)
     , HasDockerCompose (..)
     , HasHostLabels (..)
     , HasLabels (..)
+    , HasExternalId (..)
     , HasCert (..)
     , HasDriver (..)
+    , HasRole (..)
     , HasRegistryId (..)
     , HasAgentIp (..)
     , HasHostname (..)
@@ -160,6 +163,12 @@ class HasApiUrl a b | a -> b where
 instance HasApiUrl a b => HasApiUrl (TF.Schema l p a) b where
     apiUrl = TF.configuration . apiUrl
 
+class HasExternalIdType a b | a -> b where
+    externalIdType :: P.Lens' a b
+
+instance HasExternalIdType a b => HasExternalIdType (TF.Schema l p a) b where
+    externalIdType = TF.configuration . externalIdType
+
 class HasDockerCompose a b | a -> b where
     dockerCompose :: P.Lens' a b
 
@@ -178,6 +187,12 @@ class HasLabels a b | a -> b where
 instance HasLabels a b => HasLabels (TF.Schema l p a) b where
     labels = TF.configuration . labels
 
+class HasExternalId a b | a -> b where
+    externalId :: P.Lens' a b
+
+instance HasExternalId a b => HasExternalId (TF.Schema l p a) b where
+    externalId = TF.configuration . externalId
+
 class HasCert a b | a -> b where
     cert :: P.Lens' a b
 
@@ -189,6 +204,12 @@ class HasDriver a b | a -> b where
 
 instance HasDriver a b => HasDriver (TF.Schema l p a) b where
     driver = TF.configuration . driver
+
+class HasRole a b | a -> b where
+    role :: P.Lens' a b
+
+instance HasRole a b => HasRole (TF.Schema l p a) b where
+    role = TF.configuration . role
 
 class HasRegistryId a b | a -> b where
     registryId :: P.Lens' a b
