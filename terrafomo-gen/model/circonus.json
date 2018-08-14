@@ -74,7 +74,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "caql",
+            "name": "check_caql",
             "schemas": [
               {
                 "name": "query",
@@ -104,7 +104,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "check_by_collector",
+            "name": "check_check_by_collector",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -140,7 +140,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "checks",
+            "name": "check_checks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -165,7 +165,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "cloudwatch",
+            "name": "check_cloudwatch",
             "schemas": [
               {
                 "name": "api_key",
@@ -219,7 +219,7 @@
                 "minItems": 1,
                 "maxItems": 0,
                 "schema": {
-                  "name": "metric",
+                  "name": "cloudwatch_metric",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -287,7 +287,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "collector",
+            "name": "check_collector",
             "schemas": [
               {
                 "name": "id",
@@ -318,7 +318,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "consul",
+            "name": "check_consul",
             "schemas": [
               {
                 "name": "acl_token",
@@ -386,7 +386,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "check_blacklist",
+                  "name": "consul_check_blacklist",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -493,7 +493,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "node_blacklist",
+                  "name": "consul_node_blacklist",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -534,7 +534,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "service_blacklist",
+                  "name": "consul_service_blacklist",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -590,7 +590,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "http",
+            "name": "check_http",
             "schemas": [
               {
                 "name": "auth_method",
@@ -819,7 +819,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "httptrap",
+            "name": "check_httptrap",
             "schemas": [
               {
                 "name": "async_metrics",
@@ -863,7 +863,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "icmp_ping",
+            "name": "check_icmp_ping",
             "schemas": [
               {
                 "name": "availability",
@@ -923,7 +923,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "json",
+            "name": "check_json",
             "schemas": [
               {
                 "name": "auth_method",
@@ -1150,7 +1150,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "metric",
+            "name": "check_metric",
             "schemas": [
               {
                 "name": "active",
@@ -1192,7 +1192,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "metric_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1259,7 +1259,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "mysql",
+            "name": "check_mysql",
             "schemas": [
               {
                 "name": "dsn",
@@ -1342,7 +1342,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "postgresql",
+            "name": "check_postgresql",
             "schemas": [
               {
                 "name": "dsn",
@@ -1385,7 +1385,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "reverse_connect_urls",
+            "name": "check_reverse_connect_urls",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1410,7 +1410,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "statsd",
+            "name": "check_statsd",
             "schemas": [
               {
                 "name": "source_ip",
@@ -1441,7 +1441,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "check_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1479,7 +1479,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "tcp",
+            "name": "check_tcp",
             "schemas": [
               {
                 "name": "banner_regexp",
@@ -1627,7 +1627,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "uuids",
+            "name": "check_uuids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1669,7 +1669,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "alert_option",
+            "name": "contact_group_alert_option",
             "schemas": [
               {
                 "name": "escalate_after",
@@ -1734,7 +1734,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "email",
+            "name": "contact_group_email",
             "schemas": [
               {
                 "name": "address",
@@ -1779,7 +1779,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "http",
+            "name": "contact_group_http",
             "schemas": [
               {
                 "name": "address",
@@ -1834,7 +1834,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "irc",
+            "name": "contact_group_irc",
             "schemas": [
               {
                 "name": "user",
@@ -1935,7 +1935,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "pager_duty",
+            "name": "contact_group_pager_duty",
             "schemas": [
               {
                 "name": "contact_group_fallback",
@@ -2012,7 +2012,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "slack",
+            "name": "contact_group_slack",
             "schemas": [
               {
                 "name": "buttons",
@@ -2092,7 +2092,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "sms",
+            "name": "contact_group_sms",
             "schemas": [
               {
                 "name": "address",
@@ -2137,7 +2137,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "contact_group_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2161,7 +2161,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "victorops",
+            "name": "contact_group_victorops",
             "schemas": [
               {
                 "name": "api_key",
@@ -2250,7 +2250,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "xmpp",
+            "name": "contact_group_xmpp",
             "schemas": [
               {
                 "name": "address",
@@ -2351,7 +2351,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "metric",
+            "name": "graph_metric",
             "schemas": [
               {
                 "name": "active",
@@ -2531,7 +2531,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "metric_cluster",
+            "name": "graph_metric_cluster",
             "schemas": [
               {
                 "name": "active",
@@ -2659,7 +2659,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "graph_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2716,7 +2716,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "metric_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2811,7 +2811,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "query",
+            "name": "metric_cluster_query",
             "schemas": [
               {
                 "name": "definition",
@@ -2855,7 +2855,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "metric_cluster_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2898,7 +2898,7 @@
           "minItems": 1,
           "maxItems": 0,
           "resource": {
-            "name": "if",
+            "name": "rule_set_if",
             "schemas": [
               {
                 "name": "then",
@@ -2913,7 +2913,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "then",
+                  "name": "if_then",
                   "schemas": [
                     {
                       "name": "after",
@@ -2941,7 +2941,7 @@
                       "minItems": 1,
                       "maxItems": 0,
                       "schema": {
-                        "name": "notify",
+                        "name": "then_notify",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2983,7 +2983,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "value",
+                  "name": "if_value",
                   "schemas": [
                     {
                       "name": "absent",
@@ -3179,7 +3179,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "over",
+                        "name": "value_over",
                         "schemas": [
                           {
                             "name": "last",
@@ -3297,7 +3297,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "rule_set_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3377,7 +3377,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "contact_groups",
+            "name": "account_contact_groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3454,7 +3454,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "invites",
+            "name": "account_invites",
             "schemas": [
               {
                 "name": "email",
@@ -3556,7 +3556,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "usage",
+            "name": "account_usage",
             "schemas": [
               {
                 "name": "limit",
@@ -3610,7 +3610,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "users",
+            "name": "account_users",
             "schemas": [
               {
                 "name": "id",
@@ -3657,7 +3657,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "details",
+            "name": "collector_details",
             "schemas": [
               {
                 "name": "cn",
@@ -3731,7 +3731,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "modules",
+                  "name": "details_modules",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3854,7 +3854,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "collector_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
