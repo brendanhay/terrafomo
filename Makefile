@@ -34,7 +34,8 @@ format: $(STYLISH)
  -print0 | \
  xargs -0 -I % sh -c 'echo " -> %"; $(STYLISH) -i "%"'
 
-commit: $(add-suffix, -commit, $(PROVIDERS))
+commit:
+	@script/commit-packages $(PROVIDERS)
 
 $(STYLISH):
 	stack install --nix stylish-haskell
