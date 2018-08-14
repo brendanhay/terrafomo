@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | The @StatusCake@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/StatusCake/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/statuscake/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apikey   :: P.Text

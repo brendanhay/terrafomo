@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @statuscake_test@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/StatusCake/statuscake_test terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/statuscake/r/test.html terraform documentation>
 -- for more information.
 data TestResource s = TestResource'
     { _basicPass      :: TF.Attr s P.Text
@@ -374,10 +374,10 @@ instance P.HasWebsiteUrl (TestResource s) (TF.Attr s P.Text) where
                (\s a -> s { _websiteUrl = a } :: TestResource s)
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 instance s ~ s' => P.HasComputedTestId (TF.Ref s' (TestResource s)) (TF.Attr s P.Text) where
-    computedTestId x = TF.compute (TF.refKey x) "_computedTestId"
+    computedTestId x = TF.compute (TF.refKey x) "test_id"
 
 instance s ~ s' => P.HasComputedUptime (TF.Ref s' (TestResource s)) (TF.Attr s P.Double) where
-    computedUptime x = TF.compute (TF.refKey x) "_computedUptime"
+    computedUptime x = TF.compute (TF.refKey x) "uptime"
