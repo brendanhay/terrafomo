@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/icinga2/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -75,6 +76,7 @@
                     "original": "templates"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/icinga2/r/checkcommand.html",
             "name": "CheckcommandResource",
             "threaded": true,
             "attributes": [],
@@ -239,6 +241,7 @@
                     "original": "vars"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/icinga2/r/host.html",
             "name": "HostResource",
             "threaded": true,
             "attributes": [],
@@ -341,6 +344,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/icinga2/r/hostgroup.html",
             "name": "HostgroupResource",
             "threaded": true,
             "attributes": [],
@@ -505,6 +509,7 @@
                     "original": "vars"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/icinga2/r/notification.html",
             "name": "NotificationResource",
             "threaded": true,
             "attributes": [],
@@ -607,6 +612,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/icinga2/r/service.html",
             "name": "ServiceResource",
             "threaded": true,
             "attributes": [],
@@ -711,6 +717,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/icinga2/r/user.html",
             "name": "UserResource",
             "threaded": true,
             "attributes": [],
