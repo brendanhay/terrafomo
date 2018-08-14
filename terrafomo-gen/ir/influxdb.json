@@ -2,88 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newGrant",
-                "name": "Grant'"
-            },
-            "arguments": [
-                {
-                    "default": "_database",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"database\" <$> TF.attribute",
-                    "name": "_database",
-                    "method": "database",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDatabase",
-                    "validate": false,
-                    "optional": false,
-                    "original": "database"
-                },
-                {
-                    "default": "_privilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
-                    "name": "_privilege",
-                    "method": "privilege",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "privilege"
-                }
-            ],
-            "name": "Grant",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_database",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"database\" <$> TF.attribute",
-                    "name": "_database",
-                    "method": "database",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDatabase",
-                    "validate": false,
-                    "optional": false,
-                    "original": "database"
-                },
-                {
-                    "default": "_privilege",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
-                    "name": "_privilege",
-                    "method": "privilege",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPrivilege",
-                    "validate": false,
-                    "optional": false,
-                    "original": "privilege"
-                }
-            ],
-            "conflicts": [],
-            "type": "Grant s",
-            "original": "grant"
-        },
-        {
-            "con": {
-                "smart": "newRetentionPolicies",
-                "name": "RetentionPolicies'"
+                "smart": "newDatabaseRetentionPolicies",
+                "name": "DatabaseRetentionPolicies'"
             },
             "arguments": [
                 {
@@ -151,7 +71,7 @@
                     "original": "replication"
                 }
             ],
-            "name": "RetentionPolicies",
+            "name": "DatabaseRetentionPolicies",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -189,10 +109,91 @@
                 }
             ],
             "conflicts": [],
-            "type": "RetentionPolicies s",
-            "original": "retention_policies"
+            "type": "DatabaseRetentionPolicies s",
+            "original": "database_retention_policies"
+        },
+        {
+            "con": {
+                "smart": "newUserGrant",
+                "name": "UserGrant'"
+            },
+            "arguments": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "name": "UserGrant",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_database",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"database\" <$> TF.attribute",
+                    "name": "_database",
+                    "method": "database",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDatabase",
+                    "validate": false,
+                    "optional": false,
+                    "original": "database"
+                },
+                {
+                    "default": "_privilege",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"privilege\" <$> TF.attribute",
+                    "name": "_privilege",
+                    "method": "privilege",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivilege",
+                    "validate": false,
+                    "optional": false,
+                    "original": "privilege"
+                }
+            ],
+            "conflicts": [],
+            "type": "UserGrant s",
+            "original": "user_grant"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/influxdb/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -250,6 +251,7 @@
                     "original": "query"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/influxdb/r/continuous_query.html",
             "name": "ContinuousQueryResource",
             "threaded": true,
             "attributes": [],
@@ -339,13 +341,14 @@
                     "name": "_retentionPolicies",
                     "method": "retentionPolicies",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RetentionPolicies s)]",
+                    "type": "TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]",
                     "class": "HasRetentionPolicies",
                     "validate": true,
                     "optional": true,
                     "original": "retention_policies"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/influxdb/r/database.html",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [],
@@ -387,7 +390,7 @@
                     "name": "_grant",
                     "method": "grant",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Grant s)]",
+                    "type": "TF.Attr s [TF.Attr s (UserGrant s)]",
                     "class": "HasGrant",
                     "validate": true,
                     "optional": true,
@@ -426,6 +429,7 @@
                     "original": "password"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/influxdb/r/user.html",
             "name": "UserResource",
             "threaded": true,
             "attributes": [
