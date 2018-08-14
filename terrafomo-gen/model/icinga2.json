@@ -107,7 +107,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "templates",
+            "name": "checkcommand_templates",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -160,7 +160,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "groups",
+            "name": "host_groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -197,7 +197,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "templates",
+            "name": "host_templates",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -318,7 +318,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "templates",
+            "name": "notification_templates",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -342,7 +342,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "users",
+            "name": "notification_users",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
