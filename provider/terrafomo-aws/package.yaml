@@ -17,6 +17,7 @@ dependencies:
   - hashable
   - iproute
   - microlens
+  - amazonka-iam-policy >= 0.0.3
 
 library:
   source-dirs:

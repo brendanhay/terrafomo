@@ -346,24 +346,24 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
-import qualified Data.List.NonEmpty     as P
-import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
-import qualified GHC.Generics           as P
-import qualified Lens.Micro             as P
-import qualified Prelude                as P
-import qualified Terrafomo.Attribute    as TF
-import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Terrafomo.AWS.Types    as P
-import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Schema       as TF
-import qualified Terrafomo.Validator    as TF
+import qualified Data.Monoid as P
+import qualified Data.HashMap.Strict as P
+import qualified Terrafomo.AWS.Types as P
+import qualified GHC.Generics as P
+import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable as P
+import qualified Data.List.NonEmpty as P
+import qualified Data.Maybe as P
+import qualified Data.Text as P
+import qualified Prelude as P
+import qualified Lens.Micro as P
+import qualified Data.HashMap.Strict as Map
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
+import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.Validator as TF
 
 -- | @aws_cognito_identity_pool@ Resource.
 --
@@ -472,10 +472,10 @@ data CognitoIdentityPoolRolesAttachmentResource s = CognitoIdentityPoolRolesAtta
     { _identityPoolId :: TF.Attr s P.Text
     -- ^ @identity_pool_id@ - (Required)
     --
-    , _roleMapping    :: TF.Attr s [TF.Attr s (RoleMapping s)]
+    , _roleMapping :: TF.Attr s [TF.Attr s (RoleMapping s)]
     -- ^ @role_mapping@ - (Optional)
     --
-    , _roles          :: TF.Attr s (P.HashMap P.Text (Roles s))
+    , _roles :: TF.Attr s (P.HashMap P.Text (Roles s))
     -- ^ @roles@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -533,19 +533,19 @@ data CognitoIdentityProviderResource s = CognitoIdentityProviderResource'
     { _attributeMapping :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @attribute_mapping@ - (Optional)
     --
-    , _idpIdentifiers   :: TF.Attr s [TF.Attr s P.Text]
+    , _idpIdentifiers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @idp_identifiers@ - (Optional)
     --
-    , _providerDetails  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _providerDetails :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @provider_details@ - (Required)
     --
-    , _providerName     :: TF.Attr s P.Text
+    , _providerName :: TF.Attr s P.Text
     -- ^ @provider_name@ - (Required)
     --
-    , _providerType     :: TF.Attr s P.Text
+    , _providerType :: TF.Attr s P.Text
     -- ^ @provider_type@ - (Required)
     --
-    , _userPoolId       :: TF.Attr s P.Text
+    , _userPoolId :: TF.Attr s P.Text
     -- ^ @user_pool_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -618,10 +618,10 @@ data CognitoResourceServerResource s = CognitoResourceServerResource'
     { _identifier :: TF.Attr s P.Text
     -- ^ @identifier@ - (Required)
     --
-    , _name       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _scope      :: TF.Attr s [TF.Attr s (Scope s)]
+    , _scope :: TF.Attr s [TF.Attr s (Scope s)]
     -- ^ @scope@ - (Optional)
     --
     , _userPoolId :: TF.Attr s P.Text
@@ -689,16 +689,16 @@ data CognitoUserGroupResource s = CognitoUserGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _precedence  :: TF.Attr s P.Integer
+    , _precedence :: TF.Attr s P.Integer
     -- ^ @precedence@ - (Optional)
     --
-    , _roleArn     :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Optional)
     --
-    , _userPoolId  :: TF.Attr s P.Text
+    , _userPoolId :: TF.Attr s P.Text
     -- ^ @user_pool_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -964,46 +964,46 @@ instance s ~ s' => P.HasComputedVerificationMessageTemplate (TF.Ref s' (CognitoU
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_cognito_user_pool_client terraform documentation>
 -- for more information.
 data CognitoUserPoolClientResource s = CognitoUserPoolClientResource'
-    { _allowedOauthFlows               :: TF.Attr s [TF.Attr s P.Text]
+    { _allowedOauthFlows :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @allowed_oauth_flows@ - (Optional)
     --
     , _allowedOauthFlowsUserPoolClient :: TF.Attr s P.Bool
     -- ^ @allowed_oauth_flows_user_pool_client@ - (Optional)
     --
-    , _allowedOauthScopes              :: TF.Attr s [TF.Attr s P.Text]
+    , _allowedOauthScopes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @allowed_oauth_scopes@ - (Optional)
     --
-    , _callbackUrls                    :: TF.Attr s [TF.Attr s P.Text]
+    , _callbackUrls :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @callback_urls@ - (Optional)
     --
-    , _defaultRedirectUri              :: TF.Attr s P.Text
+    , _defaultRedirectUri :: TF.Attr s P.Text
     -- ^ @default_redirect_uri@ - (Optional)
     --
-    , _explicitAuthFlows               :: TF.Attr s [TF.Attr s P.Text]
+    , _explicitAuthFlows :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @explicit_auth_flows@ - (Optional)
     --
-    , _generateSecret                  :: TF.Attr s P.Bool
+    , _generateSecret :: TF.Attr s P.Bool
     -- ^ @generate_secret@ - (Optional)
     --
-    , _logoutUrls                      :: TF.Attr s [TF.Attr s P.Text]
+    , _logoutUrls :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @logout_urls@ - (Optional)
     --
-    , _name                            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _readAttributes                  :: TF.Attr s [TF.Attr s P.Text]
+    , _readAttributes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @read_attributes@ - (Optional)
     --
-    , _refreshTokenValidity            :: TF.Attr s P.Integer
+    , _refreshTokenValidity :: TF.Attr s P.Integer
     -- ^ @refresh_token_validity@ - (Optional)
     --
-    , _supportedIdentityProviders      :: TF.Attr s [TF.Attr s P.Text]
+    , _supportedIdentityProviders :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @supported_identity_providers@ - (Optional)
     --
-    , _userPoolId                      :: TF.Attr s P.Text
+    , _userPoolId :: TF.Attr s P.Text
     -- ^ @user_pool_id@ - (Required)
     --
-    , _writeAttributes                 :: TF.Attr s [TF.Attr s P.Text]
+    , _writeAttributes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @write_attributes@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1130,7 +1130,7 @@ instance s ~ s' => P.HasComputedClientSecret (TF.Ref s' (CognitoUserPoolClientRe
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_cognito_user_pool_domain terraform documentation>
 -- for more information.
 data CognitoUserPoolDomainResource s = CognitoUserPoolDomainResource'
-    { _domain     :: TF.Attr s P.Text
+    { _domain :: TF.Attr s P.Text
     -- ^ @domain@ - (Required)
     --
     , _userPoolId :: TF.Attr s P.Text
@@ -1188,7 +1188,7 @@ data ConfigAggregateAuthorizationResource s = ConfigAggregateAuthorizationResour
     { _accountId :: TF.Attr s P.Text
     -- ^ @account_id@ - (Required)
     --
-    , _region    :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1231,22 +1231,22 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ConfigAggregateAuthorizationReso
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_config_config_rule terraform documentation>
 -- for more information.
 data ConfigConfigRuleResource s = ConfigConfigRuleResource'
-    { _description               :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _inputParameters           :: TF.Attr s P.Text
+    , _inputParameters :: TF.Attr s P.Text
     -- ^ @input_parameters@ - (Optional)
     --
     , _maximumExecutionFrequency :: TF.Attr s P.Text
     -- ^ @maximum_execution_frequency@ - (Optional)
     --
-    , _name                      :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _scope                     :: TF.Attr s (Scope s)
+    , _scope :: TF.Attr s (Scope s)
     -- ^ @scope@ - (Optional)
     --
-    , _source                    :: TF.Attr s (Source s)
+    , _source :: TF.Attr s (Source s)
     -- ^ @source@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1408,7 +1408,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ConfigConfigurationAggregatorRes
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_config_configuration_recorder terraform documentation>
 -- for more information.
 data ConfigConfigurationRecorderResource s = ConfigConfigurationRecorderResource'
-    { _name    :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _roleArn :: TF.Attr s P.Text
@@ -1456,7 +1456,7 @@ data ConfigConfigurationRecorderStatusResource s = ConfigConfigurationRecorderSt
     { _isEnabled :: TF.Attr s P.Bool
     -- ^ @is_enabled@ - (Required)
     --
-    , _name      :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1496,19 +1496,19 @@ instance P.HasName (ConfigConfigurationRecorderStatusResource s) (TF.Attr s P.Te
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_config_delivery_channel terraform documentation>
 -- for more information.
 data ConfigDeliveryChannelResource s = ConfigDeliveryChannelResource'
-    { _name                       :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _s3BucketName               :: TF.Attr s P.Text
+    , _s3BucketName :: TF.Attr s P.Text
     -- ^ @s3_bucket_name@ - (Required)
     --
-    , _s3KeyPrefix                :: TF.Attr s P.Text
+    , _s3KeyPrefix :: TF.Attr s P.Text
     -- ^ @s3_key_prefix@ - (Optional)
     --
     , _snapshotDeliveryProperties :: TF.Attr s (SnapshotDeliveryProperties s)
     -- ^ @snapshot_delivery_properties@ - (Optional)
     --
-    , _snsTopicArn                :: TF.Attr s P.Text
+    , _snsTopicArn :: TF.Attr s P.Text
     -- ^ @sns_topic_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1572,16 +1572,16 @@ instance P.HasSnsTopicArn (ConfigDeliveryChannelResource s) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_customer_gateway terraform documentation>
 -- for more information.
 data CustomerGatewayResource s = CustomerGatewayResource'
-    { _bgpAsn    :: TF.Attr s P.Integer
+    { _bgpAsn :: TF.Attr s P.Integer
     -- ^ @bgp_asn@ - (Required)
     --
     , _ipAddress :: TF.Attr s P.Text
     -- ^ @ip_address@ - (Required)
     --
-    , _tags      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _type'     :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1636,28 +1636,28 @@ instance P.HasType' (CustomerGatewayResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dax_cluster terraform documentation>
 -- for more information.
 data DaxClusterResource s = DaxClusterResource'
-    { _availabilityZones    :: TF.Attr s [TF.Attr s P.Text]
+    { _availabilityZones :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @availability_zones@ - (Optional)
     --
-    , _clusterName          :: TF.Attr s P.Text
+    , _clusterName :: TF.Attr s P.Text
     -- ^ @cluster_name@ - (Required)
     --
-    , _description          :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _iamRoleArn           :: TF.Attr s P.Text
+    , _iamRoleArn :: TF.Attr s P.Text
     -- ^ @iam_role_arn@ - (Required)
     --
-    , _nodeType             :: TF.Attr s P.Text
+    , _nodeType :: TF.Attr s P.Text
     -- ^ @node_type@ - (Required)
     --
     , _notificationTopicArn :: TF.Attr s P.Text
     -- ^ @notification_topic_arn@ - (Optional)
     --
-    , _replicationFactor    :: TF.Attr s P.Integer
+    , _replicationFactor :: TF.Attr s P.Integer
     -- ^ @replication_factor@ - (Required)
     --
-    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1771,7 +1771,7 @@ data DaxParameterGroupResource s = DaxParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1816,10 +1816,10 @@ data DaxSubnetGroupResource s = DaxSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _subnetIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1869,7 +1869,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DaxSubnetGroupResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_db_cluster_snapshot terraform documentation>
 -- for more information.
 data DbClusterSnapshotResource s = DbClusterSnapshotResource'
-    { _dbClusterIdentifier         :: TF.Attr s P.Text
+    { _dbClusterIdentifier :: TF.Attr s P.Text
     -- ^ @db_cluster_identifier@ - (Required)
     --
     , _dbClusterSnapshotIdentifier :: TF.Attr s P.Text
@@ -1951,25 +1951,25 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbClusterSnapshotResource s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_db_event_subscription terraform documentation>
 -- for more information.
 data DbEventSubscriptionResource s = DbEventSubscriptionResource'
-    { _enabled         :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _eventCategories :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @event_categories@ - (Optional)
     --
-    , _namePrefix      :: TF.Attr s P.Text
+    , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _snsTopic        :: TF.Attr s P.Text
+    , _snsTopic :: TF.Attr s P.Text
     -- ^ @sns_topic@ - (Required)
     --
-    , _sourceIds       :: TF.Attr s [TF.Attr s P.Text]
+    , _sourceIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @source_ids@ - (Optional)
     --
-    , _sourceType      :: TF.Attr s P.Text
+    , _sourceType :: TF.Attr s P.Text
     -- ^ @source_type@ - (Optional)
     --
-    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2380,19 +2380,19 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (DbInstanceResour
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_db_option_group terraform documentation>
 -- for more information.
 data DbOptionGroupResource s = DbOptionGroupResource'
-    { _engineName             :: TF.Attr s P.Text
+    { _engineName :: TF.Attr s P.Text
     -- ^ @engine_name@ - (Required)
     --
-    , _majorEngineVersion     :: TF.Attr s P.Text
+    , _majorEngineVersion :: TF.Attr s P.Text
     -- ^ @major_engine_version@ - (Required)
     --
-    , _option                 :: TF.Attr s [TF.Attr s (Option s)]
+    , _option :: TF.Attr s [TF.Attr s (Option s)]
     -- ^ @option@ - (Optional)
     --
     , _optionGroupDescription :: TF.Attr s P.Text
     -- ^ @option_group_description@ - (Optional)
     --
-    , _tags                   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2469,13 +2469,13 @@ data DbParameterGroupResource s = DbParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family'     :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ @parameter@ - (Optional)
     --
-    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2544,13 +2544,13 @@ data DbSecurityGroupResource s = DbSecurityGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _ingress     :: TF.Attr s [TF.Attr s (Ingress s)]
+    , _ingress :: TF.Attr s [TF.Attr s (Ingress s)]
     -- ^ @ingress@ - (Required)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2708,10 +2708,10 @@ data DbSubnetGroupResource s = DbSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _subnetIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required)
     --
-    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2769,16 +2769,16 @@ data DefaultNetworkAclResource s = DefaultNetworkAclResource'
     { _defaultNetworkAclId :: TF.Attr s P.Text
     -- ^ @default_network_acl_id@ - (Required)
     --
-    , _egress              :: TF.Attr s [TF.Attr s (Egress s)]
+    , _egress :: TF.Attr s [TF.Attr s (Egress s)]
     -- ^ @egress@ - (Optional)
     --
-    , _ingress             :: TF.Attr s [TF.Attr s (Ingress s)]
+    , _ingress :: TF.Attr s [TF.Attr s (Ingress s)]
     -- ^ @ingress@ - (Optional)
     --
-    , _subnetIds           :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2852,10 +2852,10 @@ data DefaultRouteTableResource s = DefaultRouteTableResource'
     { _defaultRouteTableId :: TF.Attr s P.Text
     -- ^ @default_route_table_id@ - (Required)
     --
-    , _propagatingVgws     :: TF.Attr s [TF.Attr s P.Text]
+    , _propagatingVgws :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @propagating_vgws@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2907,16 +2907,16 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DefaultRouteTableResource s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_default_security_group terraform documentation>
 -- for more information.
 data DefaultSecurityGroupResource s = DefaultSecurityGroupResource'
-    { _egress              :: TF.Attr s [TF.Attr s (Egress s)]
+    { _egress :: TF.Attr s [TF.Attr s (Egress s)]
     -- ^ @egress@ - (Optional)
     --
-    , _ingress             :: TF.Attr s [TF.Attr s (Ingress s)]
+    , _ingress :: TF.Attr s [TF.Attr s (Ingress s)]
     -- ^ @ingress@ - (Optional)
     --
     , _revokeRulesOnDelete :: TF.Attr s P.Bool
     -- ^ @revoke_rules_on_delete@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2991,7 +2991,7 @@ data DefaultSubnetResource s = DefaultSubnetResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Required)
     --
-    , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3051,7 +3051,7 @@ data DefaultVpcResource s = DefaultVpcResource'
     { _enableDnsSupport :: TF.Attr s P.Bool
     -- ^ @enable_dns_support@ - (Optional)
     --
-    , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3134,10 +3134,10 @@ data DefaultVpcDhcpOptionsResource s = DefaultVpcDhcpOptionsResource'
     { _netbiosNameServers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @netbios_name_servers@ - (Optional)
     --
-    , _netbiosNodeType    :: TF.Attr s P.Text
+    , _netbiosNodeType :: TF.Attr s P.Text
     -- ^ @netbios_node_type@ - (Optional)
     --
-    , _tags               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3226,10 +3226,10 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (DevicefarmProjectResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_directory_service_conditional_forwarder terraform documentation>
 -- for more information.
 data DirectoryServiceConditionalForwarderResource s = DirectoryServiceConditionalForwarderResource'
-    { _directoryId      :: TF.Attr s P.Text
+    { _directoryId :: TF.Attr s P.Text
     -- ^ @directory_id@ - (Required)
     --
-    , _dnsIps           :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _dnsIps :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @dns_ips@ - (Required)
     --
     , _remoteDomainName :: TF.Attr s P.Text
@@ -3283,25 +3283,25 @@ data DirectoryServiceDirectoryResource s = DirectoryServiceDirectoryResource'
     { _connectSettings :: TF.Attr s (ConnectSettings s)
     -- ^ @connect_settings@ - (Optional)
     --
-    , _description     :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _enableSso       :: TF.Attr s P.Bool
+    , _enableSso :: TF.Attr s P.Bool
     -- ^ @enable_sso@ - (Optional)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _password        :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _type'           :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
-    , _vpcSettings     :: TF.Attr s (VpcSettings s)
+    , _vpcSettings :: TF.Attr s (VpcSettings s)
     -- ^ @vpc_settings@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3412,10 +3412,10 @@ instance s ~ s' => P.HasComputedSize (TF.Ref s' (DirectoryServiceDirectoryResour
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dms_certificate terraform documentation>
 -- for more information.
 data DmsCertificateResource s = DmsCertificateResource'
-    { _certificateId     :: TF.Attr s P.Text
+    { _certificateId :: TF.Attr s P.Text
     -- ^ @certificate_id@ - (Required)
     --
-    , _certificatePem    :: TF.Attr s P.Text
+    , _certificatePem :: TF.Attr s P.Text
     -- ^ @certificate_pem@ - (Optional)
     --
     , _certificateWallet :: TF.Attr s P.Text
@@ -3467,40 +3467,40 @@ instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (DmsCertificateResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dms_endpoint terraform documentation>
 -- for more information.
 data DmsEndpointResource s = DmsEndpointResource'
-    { _databaseName      :: TF.Attr s P.Text
+    { _databaseName :: TF.Attr s P.Text
     -- ^ @database_name@ - (Optional)
     --
-    , _endpointId        :: TF.Attr s P.Text
+    , _endpointId :: TF.Attr s P.Text
     -- ^ @endpoint_id@ - (Required)
     --
-    , _endpointType      :: TF.Attr s P.Text
+    , _endpointType :: TF.Attr s P.Text
     -- ^ @endpoint_type@ - (Required)
     --
-    , _engineName        :: TF.Attr s P.Text
+    , _engineName :: TF.Attr s P.Text
     -- ^ @engine_name@ - (Required)
     --
-    , _mongodbSettings   :: TF.Attr s (MongodbSettings s)
+    , _mongodbSettings :: TF.Attr s (MongodbSettings s)
     -- ^ @mongodb_settings@ - (Optional)
     --
-    , _password          :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _port              :: TF.Attr s P.Integer
+    , _port :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
     --
-    , _s3Settings        :: TF.Attr s (S3Settings s)
+    , _s3Settings :: TF.Attr s (S3Settings s)
     -- ^ @s3_settings@ - (Optional)
     --
-    , _serverName        :: TF.Attr s P.Text
+    , _serverName :: TF.Attr s P.Text
     -- ^ @server_name@ - (Optional)
     --
     , _serviceAccessRole :: TF.Attr s P.Text
     -- ^ @service_access_role@ - (Optional)
     --
-    , _tags              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _username          :: TF.Attr s P.Text
+    , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3929,13 +3929,13 @@ data DxConnectionResource s = DxConnectionResource'
     { _bandwidth :: TF.Attr s P.Text
     -- ^ @bandwidth@ - (Required)
     --
-    , _location  :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _name      :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _tags      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3996,7 +3996,7 @@ data DxConnectionAssociationResource s = DxConnectionAssociationResource'
     { _connectionId :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Required)
     --
-    , _lagId        :: TF.Attr s P.Text
+    , _lagId :: TF.Attr s P.Text
     -- ^ @lag_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4039,7 +4039,7 @@ data DxGatewayResource s = DxGatewayResource'
     { _amazonSideAsn :: TF.Attr s P.Text
     -- ^ @amazon_side_asn@ - (Required)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4079,7 +4079,7 @@ instance P.HasName (DxGatewayResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_gateway_association terraform documentation>
 -- for more information.
 data DxGatewayAssociationResource s = DxGatewayAssociationResource'
-    { _dxGatewayId  :: TF.Attr s P.Text
+    { _dxGatewayId :: TF.Attr s P.Text
     -- ^ @dx_gateway_id@ - (Required)
     --
     , _vpnGatewayId :: TF.Attr s P.Text
@@ -4122,22 +4122,22 @@ instance P.HasVpnGatewayId (DxGatewayAssociationResource s) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_hosted_private_virtual_interface terraform documentation>
 -- for more information.
 data DxHostedPrivateVirtualInterfaceResource s = DxHostedPrivateVirtualInterfaceResource'
-    { _addressFamily  :: TF.Attr s P.Text
+    { _addressFamily :: TF.Attr s P.Text
     -- ^ @address_family@ - (Required)
     --
-    , _bgpAsn         :: TF.Attr s P.Integer
+    , _bgpAsn :: TF.Attr s P.Integer
     -- ^ @bgp_asn@ - (Required)
     --
-    , _connectionId   :: TF.Attr s P.Text
+    , _connectionId :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Required)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _ownerAccountId :: TF.Attr s P.Text
     -- ^ @owner_account_id@ - (Required)
     --
-    , _vlan           :: TF.Attr s P.Integer
+    , _vlan :: TF.Attr s P.Integer
     -- ^ @vlan@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4221,19 +4221,19 @@ instance s ~ s' => P.HasComputedCustomerAddress (TF.Ref s' (DxHostedPrivateVirtu
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_hosted_private_virtual_interface_accepter terraform documentation>
 -- for more information.
 data DxHostedPrivateVirtualInterfaceAccepterResource s = DxHostedPrivateVirtualInterfaceAccepterResource'
-    { _dxGatewayId        :: TF.Attr s P.Text
+    { _dxGatewayId :: TF.Attr s P.Text
     -- ^ @dx_gateway_id@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'vpnGatewayId'
-    , _tags               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _virtualInterfaceId :: TF.Attr s P.Text
     -- ^ @virtual_interface_id@ - (Required)
     --
-    , _vpnGatewayId       :: TF.Attr s P.Text
+    , _vpnGatewayId :: TF.Attr s P.Text
     -- ^ @vpn_gateway_id@ - (Optional)
     --
     -- Conflicts with:
@@ -4303,25 +4303,25 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxHostedPrivateVirtualInterfaceA
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_hosted_public_virtual_interface terraform documentation>
 -- for more information.
 data DxHostedPublicVirtualInterfaceResource s = DxHostedPublicVirtualInterfaceResource'
-    { _addressFamily       :: TF.Attr s P.Text
+    { _addressFamily :: TF.Attr s P.Text
     -- ^ @address_family@ - (Required)
     --
-    , _bgpAsn              :: TF.Attr s P.Integer
+    , _bgpAsn :: TF.Attr s P.Integer
     -- ^ @bgp_asn@ - (Required)
     --
-    , _connectionId        :: TF.Attr s P.Text
+    , _connectionId :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Required)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _ownerAccountId      :: TF.Attr s P.Text
+    , _ownerAccountId :: TF.Attr s P.Text
     -- ^ @owner_account_id@ - (Required)
     --
     , _routeFilterPrefixes :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @route_filter_prefixes@ - (Required)
     --
-    , _vlan                :: TF.Attr s P.Integer
+    , _vlan :: TF.Attr s P.Integer
     -- ^ @vlan@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4413,7 +4413,7 @@ instance s ~ s' => P.HasComputedCustomerAddress (TF.Ref s' (DxHostedPublicVirtua
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_hosted_public_virtual_interface_accepter terraform documentation>
 -- for more information.
 data DxHostedPublicVirtualInterfaceAccepterResource s = DxHostedPublicVirtualInterfaceAccepterResource'
-    { _tags               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _virtualInterfaceId :: TF.Attr s P.Text
@@ -4461,16 +4461,16 @@ data DxLagResource s = DxLagResource'
     { _connectionsBandwidth :: TF.Attr s P.Text
     -- ^ @connections_bandwidth@ - (Required)
     --
-    , _forceDestroy         :: TF.Attr s P.Bool
+    , _forceDestroy :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
     --
-    , _location             :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _name                 :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4541,28 +4541,28 @@ data DxPrivateVirtualInterfaceResource s = DxPrivateVirtualInterfaceResource'
     { _addressFamily :: TF.Attr s P.Text
     -- ^ @address_family@ - (Required)
     --
-    , _bgpAsn        :: TF.Attr s P.Integer
+    , _bgpAsn :: TF.Attr s P.Integer
     -- ^ @bgp_asn@ - (Required)
     --
-    , _connectionId  :: TF.Attr s P.Text
+    , _connectionId :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Required)
     --
-    , _dxGatewayId   :: TF.Attr s P.Text
+    , _dxGatewayId :: TF.Attr s P.Text
     -- ^ @dx_gateway_id@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'vpnGatewayId'
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _tags          :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vlan          :: TF.Attr s P.Integer
+    , _vlan :: TF.Attr s P.Integer
     -- ^ @vlan@ - (Required)
     --
-    , _vpnGatewayId  :: TF.Attr s P.Text
+    , _vpnGatewayId :: TF.Attr s P.Text
     -- ^ @vpn_gateway_id@ - (Optional)
     --
     -- Conflicts with:
@@ -4673,25 +4673,25 @@ instance s ~ s' => P.HasComputedCustomerAddress (TF.Ref s' (DxPrivateVirtualInte
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_public_virtual_interface terraform documentation>
 -- for more information.
 data DxPublicVirtualInterfaceResource s = DxPublicVirtualInterfaceResource'
-    { _addressFamily       :: TF.Attr s P.Text
+    { _addressFamily :: TF.Attr s P.Text
     -- ^ @address_family@ - (Required)
     --
-    , _bgpAsn              :: TF.Attr s P.Integer
+    , _bgpAsn :: TF.Attr s P.Integer
     -- ^ @bgp_asn@ - (Required)
     --
-    , _connectionId        :: TF.Attr s P.Text
+    , _connectionId :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Required)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _routeFilterPrefixes :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @route_filter_prefixes@ - (Required)
     --
-    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vlan                :: TF.Attr s P.Integer
+    , _vlan :: TF.Attr s P.Integer
     -- ^ @vlan@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4782,7 +4782,7 @@ instance s ~ s' => P.HasComputedCustomerAddress (TF.Ref s' (DxPublicVirtualInter
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dynamodb_global_table terraform documentation>
 -- for more information.
 data DynamodbGlobalTableResource s = DynamodbGlobalTableResource'
-    { _name    :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _replica :: TF.Attr s [TF.Attr s (Replica s)]
@@ -4832,37 +4832,37 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbGlobalTableResource s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dynamodb_table terraform documentation>
 -- for more information.
 data DynamodbTableResource s = DynamodbTableResource'
-    { _attribute            :: TF.Attr s [TF.Attr s (Attribute s)]
+    { _attribute :: TF.Attr s [TF.Attr s (Attribute s)]
     -- ^ @attribute@ - (Required)
     --
     , _globalSecondaryIndex :: TF.Attr s [TF.Attr s (GlobalSecondaryIndex s)]
     -- ^ @global_secondary_index@ - (Optional)
     --
-    , _hashKey              :: TF.Attr s P.Text
+    , _hashKey :: TF.Attr s P.Text
     -- ^ @hash_key@ - (Required)
     --
-    , _localSecondaryIndex  :: TF.Attr s [TF.Attr s (LocalSecondaryIndex s)]
+    , _localSecondaryIndex :: TF.Attr s [TF.Attr s (LocalSecondaryIndex s)]
     -- ^ @local_secondary_index@ - (Optional)
     --
-    , _name                 :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _rangeKey             :: TF.Attr s P.Text
+    , _rangeKey :: TF.Attr s P.Text
     -- ^ @range_key@ - (Optional)
     --
-    , _readCapacity         :: TF.Attr s P.Integer
+    , _readCapacity :: TF.Attr s P.Integer
     -- ^ @read_capacity@ - (Required)
     --
-    , _streamEnabled        :: TF.Attr s P.Bool
+    , _streamEnabled :: TF.Attr s P.Bool
     -- ^ @stream_enabled@ - (Optional)
     --
-    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _ttl                  :: TF.Attr s (Ttl s)
+    , _ttl :: TF.Attr s (Ttl s)
     -- ^ @ttl@ - (Optional)
     --
-    , _writeCapacity        :: TF.Attr s P.Integer
+    , _writeCapacity :: TF.Attr s P.Integer
     -- ^ @write_capacity@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5002,13 +5002,13 @@ instance s ~ s' => P.HasComputedStreamViewType (TF.Ref s' (DynamodbTableResource
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dynamodb_table_item terraform documentation>
 -- for more information.
 data DynamodbTableItemResource s = DynamodbTableItemResource'
-    { _hashKey   :: TF.Attr s P.Text
+    { _hashKey :: TF.Attr s P.Text
     -- ^ @hash_key@ - (Required)
     --
-    , _item      :: TF.Attr s P.Text
+    , _item :: TF.Attr s P.Text
     -- ^ @item@ - (Required)
     --
-    , _rangeKey  :: TF.Attr s P.Text
+    , _rangeKey :: TF.Attr s P.Text
     -- ^ @range_key@ - (Optional)
     --
     , _tableName :: TF.Attr s P.Text
@@ -5069,10 +5069,10 @@ data EbsSnapshotResource s = EbsSnapshotResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _volumeId    :: TF.Attr s P.Text
+    , _volumeId :: TF.Attr s P.Text
     -- ^ @volume_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5139,7 +5139,7 @@ data EbsVolumeResource s = EbsVolumeResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Required)
     --
-    , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5199,7 +5199,7 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (EbsVolumeResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ecr_lifecycle_policy terraform documentation>
 -- for more information.
 data EcrLifecyclePolicyResource s = EcrLifecyclePolicyResource'
-    { _policy     :: TF.Attr s P.Text
+    { _policy :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     , _repository :: TF.Attr s P.Text
@@ -5208,7 +5208,7 @@ data EcrLifecyclePolicyResource s = EcrLifecyclePolicyResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 ecrLifecyclePolicyResource
-    :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Resource P.Provider (EcrLifecyclePolicyResource s)
 ecrLifecyclePolicyResource _policy _repository =
@@ -5227,9 +5227,9 @@ instance TF.IsObject (EcrLifecyclePolicyResource s) where
 instance TF.IsValid (EcrLifecyclePolicyResource s) where
     validator = P.mempty
 
-instance P.HasPolicy (EcrLifecyclePolicyResource s) (TF.Attr s P.Text) where
+instance P.HasPolicy (EcrLifecyclePolicyResource s) (TF.Attr s P.Document) where
     policy =
-        P.lens (_policy :: EcrLifecyclePolicyResource s -> TF.Attr s P.Text)
+        P.lens (_policy :: EcrLifecyclePolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: EcrLifecyclePolicyResource s)
 
 instance P.HasRepository (EcrLifecyclePolicyResource s) (TF.Attr s P.Text) where
@@ -5286,7 +5286,7 @@ instance s ~ s' => P.HasComputedRepositoryUrl (TF.Ref s' (EcrRepositoryResource 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ecr_repository_policy terraform documentation>
 -- for more information.
 data EcrRepositoryPolicyResource s = EcrRepositoryPolicyResource'
-    { _policy     :: TF.Attr s P.Text
+    { _policy :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     , _repository :: TF.Attr s P.Text
@@ -5295,7 +5295,7 @@ data EcrRepositoryPolicyResource s = EcrRepositoryPolicyResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 ecrRepositoryPolicyResource
-    :: TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
+    :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Resource P.Provider (EcrRepositoryPolicyResource s)
 ecrRepositoryPolicyResource _policy _repository =
@@ -5314,9 +5314,9 @@ instance TF.IsObject (EcrRepositoryPolicyResource s) where
 instance TF.IsValid (EcrRepositoryPolicyResource s) where
     validator = P.mempty
 
-instance P.HasPolicy (EcrRepositoryPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasPolicy (EcrRepositoryPolicyResource s) (TF.Attr s P.Document) where
     policy =
-        P.lens (_policy :: EcrRepositoryPolicyResource s -> TF.Attr s P.Text)
+        P.lens (_policy :: EcrRepositoryPolicyResource s -> TF.Attr s P.Document)
                (\s a -> s { _policy = a } :: EcrRepositoryPolicyResource s)
 
 instance P.HasRepository (EcrRepositoryPolicyResource s) (TF.Attr s P.Text) where
@@ -5577,31 +5577,31 @@ instance s ~ s' => P.HasComputedIamRole (TF.Ref s' (EcsServiceResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_task_definition terraform documentation>
 -- for more information.
 data EcsTaskDefinitionResource s = EcsTaskDefinitionResource'
-    { _containerDefinitions    :: TF.Attr s P.Text
+    { _containerDefinitions :: TF.Attr s P.Text
     -- ^ @container_definitions@ - (Required)
     --
-    , _cpu                     :: TF.Attr s P.Text
+    , _cpu :: TF.Attr s P.Text
     -- ^ @cpu@ - (Optional)
     --
-    , _executionRoleArn        :: TF.Attr s P.Text
+    , _executionRoleArn :: TF.Attr s P.Text
     -- ^ @execution_role_arn@ - (Optional)
     --
-    , _family'                 :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _memory                  :: TF.Attr s P.Text
+    , _memory :: TF.Attr s P.Text
     -- ^ @memory@ - (Optional)
     --
-    , _placementConstraints    :: TF.Attr s [TF.Attr s (PlacementConstraints s)]
+    , _placementConstraints :: TF.Attr s [TF.Attr s (PlacementConstraints s)]
     -- ^ @placement_constraints@ - (Optional)
     --
     , _requiresCompatibilities :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @requires_compatibilities@ - (Optional)
     --
-    , _taskRoleArn             :: TF.Attr s P.Text
+    , _taskRoleArn :: TF.Attr s P.Text
     -- ^ @task_role_arn@ - (Optional)
     --
-    , _volume                  :: TF.Attr s [TF.Attr s (Volume s)]
+    , _volume :: TF.Attr s [TF.Attr s (Volume s)]
     -- ^ @volume@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5779,7 +5779,7 @@ data EfsMountTargetResource s = EfsMountTargetResource'
     { _fileSystemId :: TF.Attr s P.Text
     -- ^ @file_system_id@ - (Required)
     --
-    , _subnetId     :: TF.Attr s P.Text
+    , _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5866,7 +5866,7 @@ data EipResource s = EipResource'
     { _associateWithPrivateIp :: TF.Attr s P.Text
     -- ^ @associate_with_private_ip@ - (Optional)
     --
-    , _tags                   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5974,10 +5974,10 @@ instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (EipAssociationResource s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_eks_cluster terraform documentation>
 -- for more information.
 data EksClusterResource s = EksClusterResource'
-    { _name      :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _roleArn   :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     , _vpcConfig :: TF.Attr s (VpcConfig s)
@@ -6050,10 +6050,10 @@ data ElasticBeanstalkApplicationResource s = ElasticBeanstalkApplicationResource
     { _appversionLifecycle :: TF.Attr s (AppversionLifecycle s)
     -- ^ @appversion_lifecycle@ - (Optional)
     --
-    , _description         :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6106,7 +6106,7 @@ data ElasticBeanstalkApplicationVersionResource s = ElasticBeanstalkApplicationV
     { _application :: TF.Attr s P.Text
     -- ^ @application@ - (Required)
     --
-    , _bucket      :: TF.Attr s P.Text
+    , _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
     , _description :: TF.Attr s P.Text
@@ -6115,10 +6115,10 @@ data ElasticBeanstalkApplicationVersionResource s = ElasticBeanstalkApplicationV
     , _forceDelete :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _key         :: TF.Attr s P.Text
+    , _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6188,16 +6188,16 @@ instance P.HasName (ElasticBeanstalkApplicationVersionResource s) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elastic_beanstalk_configuration_template terraform documentation>
 -- for more information.
 data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigurationTemplateResource'
-    { _application       :: TF.Attr s P.Text
+    { _application :: TF.Attr s P.Text
     -- ^ @application@ - (Required)
     --
-    , _description       :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _environmentId     :: TF.Attr s P.Text
+    , _environmentId :: TF.Attr s P.Text
     -- ^ @environment_id@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _solutionStackName :: TF.Attr s P.Text
@@ -6264,28 +6264,28 @@ instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfiguratio
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elastic_beanstalk_environment terraform documentation>
 -- for more information.
 data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource'
-    { _application         :: TF.Attr s P.Text
+    { _application :: TF.Attr s P.Text
     -- ^ @application@ - (Required)
     --
-    , _description         :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _pollInterval        :: TF.Attr s P.Text
+    , _pollInterval :: TF.Attr s P.Text
     -- ^ @poll_interval@ - (Optional)
     --
-    , _setting             :: TF.Attr s [TF.Attr s (Setting s)]
+    , _setting :: TF.Attr s [TF.Attr s (Setting s)]
     -- ^ @setting@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _templateName        :: TF.Attr s P.Text
+    , _templateName :: TF.Attr s P.Text
     -- ^ @template_name@ - (Optional)
     --
-    , _tier                :: TF.Attr s P.Text
+    , _tier :: TF.Attr s P.Text
     -- ^ @tier@ - (Optional)
     --
     , _waitForReadyTimeout :: TF.Attr s P.Text
@@ -6600,13 +6600,13 @@ data ElasticacheParameterGroupResource s = ElasticacheParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family'     :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ @parameter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6879,10 +6879,10 @@ instance s ~ s' => P.HasComputedSubnetGroupName (TF.Ref s' (ElasticacheReplicati
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elasticache_security_group terraform documentation>
 -- for more information.
 data ElasticacheSecurityGroupResource s = ElasticacheSecurityGroupResource'
-    { _description        :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _securityGroupNames :: TF.Attr s [TF.Attr s P.Text]
@@ -6935,10 +6935,10 @@ data ElasticacheSubnetGroupResource s = ElasticacheSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _subnetIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6985,10 +6985,10 @@ instance P.HasSubnetIds (ElasticacheSubnetGroupResource s) (TF.Attr s [TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elasticsearch_domain terraform documentation>
 -- for more information.
 data ElasticsearchDomainResource s = ElasticsearchDomainResource'
-    { _cognitoOptions       :: TF.Attr s (CognitoOptions s)
+    { _cognitoOptions :: TF.Attr s (CognitoOptions s)
     -- ^ @cognito_options@ - (Optional)
     --
-    , _domainName           :: TF.Attr s P.Text
+    , _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
     , _elasticsearchVersion :: TF.Attr s P.Text
@@ -6997,13 +6997,13 @@ data ElasticsearchDomainResource s = ElasticsearchDomainResource'
     , _logPublishingOptions :: TF.Attr s [TF.Attr s (LogPublishingOptions s)]
     -- ^ @log_publishing_options@ - (Optional)
     --
-    , _snapshotOptions      :: TF.Attr s [TF.Attr s (SnapshotOptions s)]
+    , _snapshotOptions :: TF.Attr s [TF.Attr s (SnapshotOptions s)]
     -- ^ @snapshot_options@ - (Optional)
     --
-    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcOptions           :: TF.Attr s (VpcOptions s)
+    , _vpcOptions :: TF.Attr s (VpcOptions s)
     -- ^ @vpc_options@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7123,7 +7123,7 @@ data ElasticsearchDomainPolicyResource s = ElasticsearchDomainPolicyResource'
     { _accessPolicies :: TF.Attr s P.Text
     -- ^ @access_policies@ - (Required)
     --
-    , _domainName     :: TF.Attr s P.Text
+    , _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)

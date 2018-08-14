@@ -1428,21 +1428,21 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable       as P
+import qualified Data.Monoid as P
 import qualified Data.HashMap.Strict as P
-import qualified Data.HashMap.Strict as Map
-import qualified Data.List.NonEmpty  as P
-import qualified Data.Maybe          as P
-import qualified Data.Monoid         as P
-import qualified Data.Text           as P
-import qualified GHC.Generics        as P
-import qualified Lens.Micro          as P
-import qualified Prelude             as P
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.AWS.Lens  as P
 import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Name      as TF
+import qualified GHC.Generics as P
+import qualified Terrafomo.AWS.Lens as P
+import qualified Data.Hashable as P
+import qualified Data.List.NonEmpty as P
+import qualified Data.Maybe as P
+import qualified Data.Text as P
+import qualified Prelude as P
+import qualified Lens.Micro as P
+import qualified Data.HashMap.Strict as Map
+import qualified Terrafomo.Attribute as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Name as TF
 import qualified Terrafomo.Validator as TF
 
 -- | @endpoint_configuration@ nested settings.
@@ -1477,16 +1477,16 @@ instance P.HasTypes (EndpointConfiguration s) (TF.Attr s P.Text) where
 
 -- | @cloudwatch_alarm@ nested settings.
 data CloudwatchAlarm s = CloudwatchAlarm'
-    { _alarmName   :: TF.Attr s P.Text
+    { _alarmName :: TF.Attr s P.Text
     -- ^ @alarm_name@ - (Required)
     --
-    , _roleArn     :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     , _stateReason :: TF.Attr s P.Text
     -- ^ @state_reason@ - (Required)
     --
-    , _stateValue  :: TF.Attr s P.Text
+    , _stateValue :: TF.Attr s P.Text
     -- ^ @state_value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1592,25 +1592,25 @@ data Ec2Attributes s = Ec2Attributes'
     { _additionalMasterSecurityGroups :: TF.Attr s P.Text
     -- ^ @additional_master_security_groups@ - (Optional)
     --
-    , _additionalSlaveSecurityGroups  :: TF.Attr s P.Text
+    , _additionalSlaveSecurityGroups :: TF.Attr s P.Text
     -- ^ @additional_slave_security_groups@ - (Optional)
     --
-    , _emrManagedMasterSecurityGroup  :: TF.Attr s P.Text
+    , _emrManagedMasterSecurityGroup :: TF.Attr s P.Text
     -- ^ @emr_managed_master_security_group@ - (Optional)
     --
-    , _emrManagedSlaveSecurityGroup   :: TF.Attr s P.Text
+    , _emrManagedSlaveSecurityGroup :: TF.Attr s P.Text
     -- ^ @emr_managed_slave_security_group@ - (Optional)
     --
-    , _instanceProfile                :: TF.Attr s P.Text
+    , _instanceProfile :: TF.Attr s P.Text
     -- ^ @instance_profile@ - (Required)
     --
-    , _keyName                        :: TF.Attr s P.Text
+    , _keyName :: TF.Attr s P.Text
     -- ^ @key_name@ - (Optional)
     --
-    , _serviceAccessSecurityGroup     :: TF.Attr s P.Text
+    , _serviceAccessSecurityGroup :: TF.Attr s P.Text
     -- ^ @service_access_security_group@ - (Optional)
     --
-    , _subnetId                       :: TF.Attr s P.Text
+    , _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1689,16 +1689,16 @@ instance P.HasSubnetId (Ec2Attributes s) (TF.Attr s P.Text) where
 
 -- | @data_format_conversion_configuration@ nested settings.
 data DataFormatConversionConfiguration s = DataFormatConversionConfiguration'
-    { _enabled                   :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _inputFormatConfiguration  :: TF.Attr s (InputFormatConfiguration s)
+    , _inputFormatConfiguration :: TF.Attr s (InputFormatConfiguration s)
     -- ^ @input_format_configuration@ - (Required)
     --
     , _outputFormatConfiguration :: TF.Attr s (OutputFormatConfiguration s)
     -- ^ @output_format_configuration@ - (Required)
     --
-    , _schemaConfiguration       :: TF.Attr s (SchemaConfiguration s)
+    , _schemaConfiguration :: TF.Attr s (SchemaConfiguration s)
     -- ^ @schema_configuration@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1834,16 +1834,16 @@ instance P.HasRegion (LatencyRoutingPolicy s) (TF.Attr s P.Text) where
 
 -- | @connect_settings@ nested settings.
 data ConnectSettings s = ConnectSettings'
-    { _customerDnsIps   :: TF.Attr s [TF.Attr s P.Text]
+    { _customerDnsIps :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @customer_dns_ips@ - (Required)
     --
     , _customerUsername :: TF.Attr s P.Text
     -- ^ @customer_username@ - (Required)
     --
-    , _subnetIds        :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required)
     --
-    , _vpcId            :: TF.Attr s P.Text
+    , _vpcId :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1987,34 +1987,34 @@ instance P.HasBucket (Destination s) (TF.Attr s (Bucket s)) where
 
 -- | @elasticsearch_configuration@ nested settings.
 data ElasticsearchConfiguration s = ElasticsearchConfiguration'
-    { _bufferingInterval       :: TF.Attr s P.Integer
+    { _bufferingInterval :: TF.Attr s P.Integer
     -- ^ @buffering_interval@ - (Optional)
     --
-    , _bufferingSize           :: TF.Attr s P.Integer
+    , _bufferingSize :: TF.Attr s P.Integer
     -- ^ @buffering_size@ - (Optional)
     --
-    , _domainArn               :: TF.Attr s P.Text
+    , _domainArn :: TF.Attr s P.Text
     -- ^ @domain_arn@ - (Required)
     --
-    , _indexName               :: TF.Attr s P.Text
+    , _indexName :: TF.Attr s P.Text
     -- ^ @index_name@ - (Required)
     --
-    , _indexRotationPeriod     :: TF.Attr s P.Text
+    , _indexRotationPeriod :: TF.Attr s P.Text
     -- ^ @index_rotation_period@ - (Optional)
     --
     , _processingConfiguration :: TF.Attr s (ProcessingConfiguration s)
     -- ^ @processing_configuration@ - (Optional)
     --
-    , _retryDuration           :: TF.Attr s P.Integer
+    , _retryDuration :: TF.Attr s P.Integer
     -- ^ @retry_duration@ - (Optional)
     --
-    , _roleArn                 :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _s3BackupMode            :: TF.Attr s P.Text
+    , _s3BackupMode :: TF.Attr s P.Text
     -- ^ @s3_backup_mode@ - (Optional)
     --
-    , _typeName                :: TF.Attr s P.Text
+    , _typeName :: TF.Attr s P.Text
     -- ^ @type_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2119,7 +2119,7 @@ data Stage s = Stage'
     { _action :: TF.Attr s [TF.Attr s (Action s)]
     -- ^ @action@ - (Required)
     --
-    , _name   :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2161,7 +2161,7 @@ instance P.HasName (Stage s) (TF.Attr s P.Text) where
 
 -- | @processing_configuration@ nested settings.
 data ProcessingConfiguration s = ProcessingConfiguration'
-    { _enabled    :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _processors :: TF.Attr s [TF.Attr s (Processors s)]
@@ -2236,10 +2236,10 @@ data NetworkInterface s = NetworkInterface'
     { _deleteOnTermination :: TF.Attr s P.Bool
     -- ^ @delete_on_termination@ - (Optional)
     --
-    , _deviceIndex         :: TF.Attr s P.Integer
+    , _deviceIndex :: TF.Attr s P.Integer
     -- ^ @device_index@ - (Required)
     --
-    , _networkInterfaceId  :: TF.Attr s P.Text
+    , _networkInterfaceId :: TF.Attr s P.Text
     -- ^ @network_interface_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2284,43 +2284,43 @@ instance P.HasNetworkInterfaceId (NetworkInterface s) (TF.Attr s P.Text) where
 
 -- | @subject@ nested settings.
 data Subject s = Subject'
-    { _commonName                 :: TF.Attr s P.Text
+    { _commonName :: TF.Attr s P.Text
     -- ^ @common_name@ - (Optional)
     --
-    , _country                    :: TF.Attr s P.Text
+    , _country :: TF.Attr s P.Text
     -- ^ @country@ - (Optional)
     --
     , _distinguishedNameQualifier :: TF.Attr s P.Text
     -- ^ @distinguished_name_qualifier@ - (Optional)
     --
-    , _generationQualifier        :: TF.Attr s P.Text
+    , _generationQualifier :: TF.Attr s P.Text
     -- ^ @generation_qualifier@ - (Optional)
     --
-    , _givenName                  :: TF.Attr s P.Text
+    , _givenName :: TF.Attr s P.Text
     -- ^ @given_name@ - (Optional)
     --
-    , _initials                   :: TF.Attr s P.Text
+    , _initials :: TF.Attr s P.Text
     -- ^ @initials@ - (Optional)
     --
-    , _locality                   :: TF.Attr s P.Text
+    , _locality :: TF.Attr s P.Text
     -- ^ @locality@ - (Optional)
     --
-    , _organization               :: TF.Attr s P.Text
+    , _organization :: TF.Attr s P.Text
     -- ^ @organization@ - (Optional)
     --
-    , _organizationalUnit         :: TF.Attr s P.Text
+    , _organizationalUnit :: TF.Attr s P.Text
     -- ^ @organizational_unit@ - (Optional)
     --
-    , _pseudonym                  :: TF.Attr s P.Text
+    , _pseudonym :: TF.Attr s P.Text
     -- ^ @pseudonym@ - (Optional)
     --
-    , _state                      :: TF.Attr s P.Text
+    , _state :: TF.Attr s P.Text
     -- ^ @state@ - (Optional)
     --
-    , _surname                    :: TF.Attr s P.Text
+    , _surname :: TF.Attr s P.Text
     -- ^ @surname@ - (Optional)
     --
-    , _title                      :: TF.Attr s P.Text
+    , _title :: TF.Attr s P.Text
     -- ^ @title@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2433,7 +2433,7 @@ instance P.HasTitle (Subject s) (TF.Attr s P.Text) where
 
 -- | @origin@ nested settings.
 data Origin s = Origin'
-    { _customHeader       :: TF.Attr s [TF.Attr s (CustomHeader s)]
+    { _customHeader :: TF.Attr s [TF.Attr s (CustomHeader s)]
     -- ^ @custom_header@ - (Optional)
     --
     , _customOriginConfig :: TF.Attr s (CustomOriginConfig s)
@@ -2442,16 +2442,16 @@ data Origin s = Origin'
     -- Conflicts with:
     --
     -- * 's3OriginConfig'
-    , _domainName         :: TF.Attr s P.Text
+    , _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
-    , _originId           :: TF.Attr s P.Text
+    , _originId :: TF.Attr s P.Text
     -- ^ @origin_id@ - (Required)
     --
-    , _originPath         :: TF.Attr s P.Text
+    , _originPath :: TF.Attr s P.Text
     -- ^ @origin_path@ - (Optional)
     --
-    , _s3OriginConfig     :: TF.Attr s (S3OriginConfig s)
+    , _s3OriginConfig :: TF.Attr s (S3OriginConfig s)
     -- ^ @s3_origin_config@ - (Optional)
     --
     -- Conflicts with:
@@ -2552,10 +2552,10 @@ data CorsRule s = CorsRule'
     , _allowedOrigins :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @allowed_origins@ - (Required)
     --
-    , _exposeHeaders  :: TF.Attr s [TF.Attr s P.Text]
+    , _exposeHeaders :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @expose_headers@ - (Optional)
     --
-    , _maxAgeSeconds  :: TF.Attr s P.Integer
+    , _maxAgeSeconds :: TF.Attr s P.Integer
     -- ^ @max_age_seconds@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2614,7 +2614,7 @@ instance P.HasMaxAgeSeconds (CorsRule s) (TF.Attr s P.Integer) where
 
 -- | @load_balancer_info@ nested settings.
 data LoadBalancerInfo s = LoadBalancerInfo'
-    { _elbInfo         :: TF.Attr s [TF.Attr s (ElbInfo s)]
+    { _elbInfo :: TF.Attr s [TF.Attr s (ElbInfo s)]
     -- ^ @elb_info@ - (Optional)
     --
     , _targetGroupInfo :: TF.Attr s [TF.Attr s (TargetGroupInfo s)]
@@ -2661,37 +2661,37 @@ instance P.HasTargetGroupInfo (LoadBalancerInfo s) (TF.Attr s [TF.Attr s (Target
 
 -- | @redshift_configuration@ nested settings.
 data RedshiftConfiguration s = RedshiftConfiguration'
-    { _clusterJdbcurl          :: TF.Attr s P.Text
+    { _clusterJdbcurl :: TF.Attr s P.Text
     -- ^ @cluster_jdbcurl@ - (Required)
     --
-    , _copyOptions             :: TF.Attr s P.Text
+    , _copyOptions :: TF.Attr s P.Text
     -- ^ @copy_options@ - (Optional)
     --
-    , _dataTableColumns        :: TF.Attr s P.Text
+    , _dataTableColumns :: TF.Attr s P.Text
     -- ^ @data_table_columns@ - (Optional)
     --
-    , _dataTableName           :: TF.Attr s P.Text
+    , _dataTableName :: TF.Attr s P.Text
     -- ^ @data_table_name@ - (Required)
     --
-    , _password                :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
     , _processingConfiguration :: TF.Attr s (ProcessingConfiguration s)
     -- ^ @processing_configuration@ - (Optional)
     --
-    , _retryDuration           :: TF.Attr s P.Integer
+    , _retryDuration :: TF.Attr s P.Integer
     -- ^ @retry_duration@ - (Optional)
     --
-    , _roleArn                 :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _s3BackupConfiguration   :: TF.Attr s (S3BackupConfiguration s)
+    , _s3BackupConfiguration :: TF.Attr s (S3BackupConfiguration s)
     -- ^ @s3_backup_configuration@ - (Optional)
     --
-    , _s3BackupMode            :: TF.Attr s P.Text
+    , _s3BackupMode :: TF.Attr s P.Text
     -- ^ @s3_backup_mode@ - (Optional)
     --
-    , _username                :: TF.Attr s P.Text
+    , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2838,10 +2838,10 @@ instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ContentConfig s)) (TF.Attr s 
 
 -- | @alarm_configuration@ nested settings.
 data AlarmConfiguration s = AlarmConfiguration'
-    { _alarms                 :: TF.Attr s [TF.Attr s P.Text]
+    { _alarms :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @alarms@ - (Optional)
     --
-    , _enabled                :: TF.Attr s P.Bool
+    , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _ignorePollAlarmFailure :: TF.Attr s P.Bool
@@ -2887,7 +2887,7 @@ instance P.HasIgnorePollAlarmFailure (AlarmConfiguration s) (TF.Attr s P.Bool) w
 
 -- | @global_filter@ nested settings.
 data GlobalFilter s = GlobalFilter'
-    { _key    :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -3137,10 +3137,10 @@ instance P.HasMessageGroupId (SqsTarget s) (TF.Attr s P.Text) where
 
 -- | @trigger_configuration@ nested settings.
 data TriggerConfiguration s = TriggerConfiguration'
-    { _triggerEvents    :: TF.Attr s [TF.Attr s P.Text]
+    { _triggerEvents :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @trigger_events@ - (Required)
     --
-    , _triggerName      :: TF.Attr s P.Text
+    , _triggerName :: TF.Attr s P.Text
     -- ^ @trigger_name@ - (Required)
     --
     , _triggerTargetArn :: TF.Attr s P.Text
@@ -3189,7 +3189,7 @@ instance P.HasTriggerTargetArn (TriggerConfiguration s) (TF.Attr s P.Text) where
 
 -- | @roles@ nested settings.
 data Roles s = Roles'
-    { _authenticated   :: TF.Attr s P.Text
+    { _authenticated :: TF.Attr s P.Text
     -- ^ @authenticated@ - (Optional)
     --
     , _unauthenticated :: TF.Attr s P.Text
@@ -3231,13 +3231,13 @@ data RoleMapping s = RoleMapping'
     { _ambiguousRoleResolution :: TF.Attr s P.Text
     -- ^ @ambiguous_role_resolution@ - (Optional)
     --
-    , _identityProvider        :: TF.Attr s P.Text
+    , _identityProvider :: TF.Attr s P.Text
     -- ^ @identity_provider@ - (Required)
     --
-    , _mappingRule             :: TF.Attr s [TF.Attr s (MappingRule s)]
+    , _mappingRule :: TF.Attr s [TF.Attr s (MappingRule s)]
     -- ^ @mapping_rule@ - (Optional)
     --
-    , _type'                   :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3293,7 +3293,7 @@ instance P.HasType' (RoleMapping s) (TF.Attr s P.Text) where
 
 -- | @encryption_key@ nested settings.
 data EncryptionKey s = EncryptionKey'
-    { _id    :: TF.Attr s P.Text
+    { _id :: TF.Attr s P.Text
     -- ^ @id@ - (Required)
     --
     , _type' :: TF.Attr s P.Text
@@ -3364,25 +3364,25 @@ instance P.HasKeyId (SseKms s) (TF.Attr s P.Text) where
 
 -- | @s3_configuration@ nested settings.
 data S3Configuration s = S3Configuration'
-    { _bucketArn         :: TF.Attr s P.Text
+    { _bucketArn :: TF.Attr s P.Text
     -- ^ @bucket_arn@ - (Required)
     --
-    , _bufferInterval    :: TF.Attr s P.Integer
+    , _bufferInterval :: TF.Attr s P.Integer
     -- ^ @buffer_interval@ - (Optional)
     --
-    , _bufferSize        :: TF.Attr s P.Integer
+    , _bufferSize :: TF.Attr s P.Integer
     -- ^ @buffer_size@ - (Optional)
     --
     , _compressionFormat :: TF.Attr s P.Text
     -- ^ @compression_format@ - (Optional)
     --
-    , _kmsKeyArn         :: TF.Attr s P.Text
+    , _kmsKeyArn :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
-    , _prefix            :: TF.Attr s P.Text
+    , _prefix :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
-    , _roleArn           :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3663,13 +3663,13 @@ data UserPoolConfig s = UserPoolConfig'
     { _appIdClientRegex :: TF.Attr s P.Text
     -- ^ @app_id_client_regex@ - (Optional)
     --
-    , _awsRegion        :: TF.Attr s P.Text
+    , _awsRegion :: TF.Attr s P.Text
     -- ^ @aws_region@ - (Required)
     --
-    , _defaultAction    :: TF.Attr s P.Text
+    , _defaultAction :: TF.Attr s P.Text
     -- ^ @default_action@ - (Required)
     --
-    , _userPoolId       :: TF.Attr s P.Text
+    , _userPoolId :: TF.Attr s P.Text
     -- ^ @user_pool_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3722,16 +3722,16 @@ instance P.HasUserPoolId (UserPoolConfig s) (TF.Attr s P.Text) where
 
 -- | @spot_options@ nested settings.
 data SpotOptions s = SpotOptions'
-    { _blockDurationMinutes         :: TF.Attr s P.Integer
+    { _blockDurationMinutes :: TF.Attr s P.Integer
     -- ^ @block_duration_minutes@ - (Optional)
     --
     , _instanceInterruptionBehavior :: TF.Attr s P.Text
     -- ^ @instance_interruption_behavior@ - (Optional)
     --
-    , _maxPrice                     :: TF.Attr s P.Text
+    , _maxPrice :: TF.Attr s P.Text
     -- ^ @max_price@ - (Optional)
     --
-    , _spotInstanceType             :: TF.Attr s P.Text
+    , _spotInstanceType :: TF.Attr s P.Text
     -- ^ @spot_instance_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3843,37 +3843,37 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (RootBlockDevice s)) (TF.A
 
 -- | @cost_types@ nested settings.
 data CostTypes s = CostTypes'
-    { _includeCredit            :: TF.Attr s P.Bool
+    { _includeCredit :: TF.Attr s P.Bool
     -- ^ @include_credit@ - (Optional)
     --
-    , _includeDiscount          :: TF.Attr s P.Bool
+    , _includeDiscount :: TF.Attr s P.Bool
     -- ^ @include_discount@ - (Optional)
     --
     , _includeOtherSubscription :: TF.Attr s P.Bool
     -- ^ @include_other_subscription@ - (Optional)
     --
-    , _includeRecurring         :: TF.Attr s P.Bool
+    , _includeRecurring :: TF.Attr s P.Bool
     -- ^ @include_recurring@ - (Optional)
     --
-    , _includeRefund            :: TF.Attr s P.Bool
+    , _includeRefund :: TF.Attr s P.Bool
     -- ^ @include_refund@ - (Optional)
     --
-    , _includeSubscription      :: TF.Attr s P.Bool
+    , _includeSubscription :: TF.Attr s P.Bool
     -- ^ @include_subscription@ - (Optional)
     --
-    , _includeSupport           :: TF.Attr s P.Bool
+    , _includeSupport :: TF.Attr s P.Bool
     -- ^ @include_support@ - (Optional)
     --
-    , _includeTax               :: TF.Attr s P.Bool
+    , _includeTax :: TF.Attr s P.Bool
     -- ^ @include_tax@ - (Optional)
     --
-    , _includeUpfront           :: TF.Attr s P.Bool
+    , _includeUpfront :: TF.Attr s P.Bool
     -- ^ @include_upfront@ - (Optional)
     --
-    , _useAmortized             :: TF.Attr s P.Bool
+    , _useAmortized :: TF.Attr s P.Bool
     -- ^ @use_amortized@ - (Optional)
     --
-    , _useBlended               :: TF.Attr s P.Bool
+    , _useBlended :: TF.Attr s P.Bool
     -- ^ @use_blended@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3972,7 +3972,7 @@ instance P.HasUseBlended (CostTypes s) (TF.Attr s P.Bool) where
 
 -- | @command@ nested settings.
 data Command s = Command'
-    { _name           :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _scriptLocation :: TF.Attr s P.Text
@@ -4012,10 +4012,10 @@ instance P.HasScriptLocation (Command s) (TF.Attr s P.Text) where
 
 -- | @transition@ nested settings.
 data Transition s = Transition'
-    { _date         :: TF.Attr s P.Text
+    { _date :: TF.Attr s P.Text
     -- ^ @date@ - (Optional)
     --
-    , _days         :: TF.Attr s P.Integer
+    , _days :: TF.Attr s P.Integer
     -- ^ @days@ - (Optional)
     --
     , _storageClass :: TF.Attr s P.Text
@@ -4062,13 +4062,13 @@ instance P.HasStorageClass (Transition s) (TF.Attr s P.Text) where
 
 -- | @physical_connection_requirements@ nested settings.
 data PhysicalConnectionRequirements s = PhysicalConnectionRequirements'
-    { _availabilityZone    :: TF.Attr s P.Text
+    { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional)
     --
     , _securityGroupIdList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_group_id_list@ - (Optional)
     --
-    , _subnetId            :: TF.Attr s P.Text
+    , _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4131,7 +4131,7 @@ instance s ~ s' => P.HasComputedCpuCredits (TF.Ref s' (CreditSpecification s)) (
 
 -- | @args@ nested settings.
 data Args s = Args'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _param :: TF.Attr s P.Bool
@@ -4226,13 +4226,13 @@ data Ec2InboundPermission s = Ec2InboundPermission'
     { _fromPort :: TF.Attr s P.Integer
     -- ^ @from_port@ - (Required)
     --
-    , _ipRange  :: TF.Attr s P.Text
+    , _ipRange :: TF.Attr s P.Text
     -- ^ @ip_range@ - (Required)
     --
     , _protocol :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
-    , _toPort   :: TF.Attr s P.Integer
+    , _toPort :: TF.Attr s P.Integer
     -- ^ @to_port@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4286,16 +4286,16 @@ instance P.HasToPort (Ec2InboundPermission s) (TF.Attr s P.Integer) where
 
 -- | @batch_target@ nested settings.
 data BatchTarget s = BatchTarget'
-    { _arraySize     :: TF.Attr s P.Integer
+    { _arraySize :: TF.Attr s P.Integer
     -- ^ @array_size@ - (Optional)
     --
-    , _jobAttempts   :: TF.Attr s P.Integer
+    , _jobAttempts :: TF.Attr s P.Integer
     -- ^ @job_attempts@ - (Optional)
     --
     , _jobDefinition :: TF.Attr s P.Text
     -- ^ @job_definition@ - (Required)
     --
-    , _jobName       :: TF.Attr s P.Text
+    , _jobName :: TF.Attr s P.Text
     -- ^ @job_name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4353,7 +4353,7 @@ data InviteMessageTemplate s = InviteMessageTemplate'
     , _emailSubject :: TF.Attr s P.Text
     -- ^ @email_subject@ - (Optional)
     --
-    , _smsMessage   :: TF.Attr s P.Text
+    , _smsMessage :: TF.Attr s P.Text
     -- ^ @sms_message@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4396,25 +4396,25 @@ instance P.HasSmsMessage (InviteMessageTemplate s) (TF.Attr s P.Text) where
 
 -- | @s3_settings@ nested settings.
 data S3Settings s = S3Settings'
-    { _bucketFolder            :: TF.Attr s P.Text
+    { _bucketFolder :: TF.Attr s P.Text
     -- ^ @bucket_folder@ - (Optional)
     --
-    , _bucketName              :: TF.Attr s P.Text
+    , _bucketName :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Optional)
     --
-    , _compressionType         :: TF.Attr s P.Text
+    , _compressionType :: TF.Attr s P.Text
     -- ^ @compression_type@ - (Optional)
     --
-    , _csvDelimiter            :: TF.Attr s P.Text
+    , _csvDelimiter :: TF.Attr s P.Text
     -- ^ @csv_delimiter@ - (Optional)
     --
-    , _csvRowDelimiter         :: TF.Attr s P.Text
+    , _csvRowDelimiter :: TF.Attr s P.Text
     -- ^ @csv_row_delimiter@ - (Optional)
     --
     , _externalTableDefinition :: TF.Attr s P.Text
     -- ^ @external_table_definition@ - (Optional)
     --
-    , _serviceAccessRoleArn    :: TF.Attr s P.Text
+    , _serviceAccessRoleArn :: TF.Attr s P.Text
     -- ^ @service_access_role_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4514,7 +4514,7 @@ data StepAdjustment s = StepAdjustment'
     , _metricIntervalUpperBound :: TF.Attr s P.Text
     -- ^ @metric_interval_upper_bound@ - (Optional)
     --
-    , _scalingAdjustment        :: TF.Attr s P.Integer
+    , _scalingAdjustment :: TF.Attr s P.Integer
     -- ^ @scaling_adjustment@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4581,7 +4581,7 @@ instance s ~ s' => P.HasComputedHostedZoneId (TF.Ref s' (DnsEntry s)) (TF.Attr s
 
 -- | @input_transformer@ nested settings.
 data InputTransformer s = InputTransformer'
-    { _inputPaths    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _inputPaths :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @input_paths@ - (Optional)
     --
     , _inputTemplate :: TF.Attr s P.Text
@@ -4624,7 +4624,7 @@ data VpcOptions s = VpcOptions'
     { _securityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_group_ids@ - (Optional)
     --
-    , _subnetIds        :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4669,7 +4669,7 @@ data ThrottleSettings s = ThrottleSettings'
     { _burstLimit :: TF.Attr s P.Integer
     -- ^ @burst_limit@ - (Optional)
     --
-    , _rateLimit  :: TF.Attr s P.Double
+    , _rateLimit :: TF.Attr s P.Double
     -- ^ @rate_limit@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4757,7 +4757,7 @@ instance P.HasName (ElbInfo s) (TF.Attr s P.Text) where
 
 -- | @sms_configuration@ nested settings.
 data SmsConfiguration s = SmsConfiguration'
-    { _externalId   :: TF.Attr s P.Text
+    { _externalId :: TF.Attr s P.Text
     -- ^ @external_id@ - (Required)
     --
     , _snsCallerArn :: TF.Attr s P.Text
@@ -4867,13 +4867,13 @@ instance P.HasType' (FieldToMatch s) (TF.Attr s P.Text) where
 
 -- | @tag@ nested settings.
 data Tag s = Tag'
-    { _key               :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _propagateAtLaunch :: TF.Attr s P.Bool
     -- ^ @propagate_at_launch@ - (Required)
     --
-    , _value             :: TF.Attr s P.Text
+    , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4922,10 +4922,10 @@ data OrganizationAggregationSource s = OrganizationAggregationSource'
     { _allRegions :: TF.Attr s P.Bool
     -- ^ @all_regions@ - (Optional)
     --
-    , _regions    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _regions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @regions@ - (Optional)
     --
-    , _roleArn    :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4972,7 +4972,7 @@ data ApplyServerSideEncryptionByDefault s = ApplyServerSideEncryptionByDefault'
     { _kmsMasterKeyId :: TF.Attr s P.Text
     -- ^ @kms_master_key_id@ - (Optional)
     --
-    , _sseAlgorithm   :: TF.Attr s P.Text
+    , _sseAlgorithm :: TF.Attr s P.Text
     -- ^ @sse_algorithm@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5009,13 +5009,13 @@ instance P.HasSseAlgorithm (ApplyServerSideEncryptionByDefault s) (TF.Attr s P.T
 
 -- | @predicates@ nested settings.
 data Predicates s = Predicates'
-    { _dataId  :: TF.Attr s P.Text
+    { _dataId :: TF.Attr s P.Text
     -- ^ @data_id@ - (Required)
     --
     , _negated :: TF.Attr s P.Bool
     -- ^ @negated@ - (Required)
     --
-    , _type'   :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5061,19 +5061,19 @@ instance P.HasType' (Predicates s) (TF.Attr s P.Text) where
 
 -- | @rules@ nested settings.
 data Rules s = Rules'
-    { _action         :: TF.Attr s (Action s)
+    { _action :: TF.Attr s (Action s)
     -- ^ @action@ - (Optional)
     --
     , _overrideAction :: TF.Attr s (OverrideAction s)
     -- ^ @override_action@ - (Optional)
     --
-    , _priority       :: TF.Attr s P.Integer
+    , _priority :: TF.Attr s P.Integer
     -- ^ @priority@ - (Required)
     --
-    , _ruleId         :: TF.Attr s P.Text
+    , _ruleId :: TF.Attr s P.Text
     -- ^ @rule_id@ - (Required)
     --
-    , _type'          :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5143,10 +5143,10 @@ data Actions s = Actions'
     { _arguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @arguments@ - (Optional)
     --
-    , _jobName   :: TF.Attr s P.Text
+    , _jobName :: TF.Attr s P.Text
     -- ^ @job_name@ - (Required)
     --
-    , _timeout   :: TF.Attr s P.Integer
+    , _timeout :: TF.Attr s P.Integer
     -- ^ @timeout@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5250,31 +5250,31 @@ instance P.HasFrequency (Schedule s) (TF.Attr s P.Text) where
 
 -- | @statement@ nested settings.
 data Statement s = Statement'
-    { _actions       :: TF.Attr s [TF.Attr s P.Text]
+    { _actions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @actions@ - (Optional)
     --
-    , _condition     :: TF.Attr s [TF.Attr s (Condition s)]
+    , _condition :: TF.Attr s [TF.Attr s (Condition s)]
     -- ^ @condition@ - (Optional)
     --
-    , _effect        :: TF.Attr s P.Text
+    , _effect :: TF.Attr s P.Text
     -- ^ @effect@ - (Optional)
     --
-    , _notActions    :: TF.Attr s [TF.Attr s P.Text]
+    , _notActions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @not_actions@ - (Optional)
     --
     , _notPrincipals :: TF.Attr s [TF.Attr s (NotPrincipals s)]
     -- ^ @not_principals@ - (Optional)
     --
-    , _notResources  :: TF.Attr s [TF.Attr s P.Text]
+    , _notResources :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @not_resources@ - (Optional)
     --
-    , _principals    :: TF.Attr s [TF.Attr s (Principals s)]
+    , _principals :: TF.Attr s [TF.Attr s (Principals s)]
     -- ^ @principals@ - (Optional)
     --
-    , _resources     :: TF.Attr s [TF.Attr s P.Text]
+    , _resources :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @resources@ - (Optional)
     --
-    , _sid           :: TF.Attr s P.Text
+    , _sid :: TF.Attr s P.Text
     -- ^ @sid@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5371,13 +5371,13 @@ instance P.HasSid (Statement s) (TF.Attr s P.Text) where
 
 -- | @forwarded_values@ nested settings.
 data ForwardedValues s = ForwardedValues'
-    { _cookies              :: TF.Attr s (Cookies s)
+    { _cookies :: TF.Attr s (Cookies s)
     -- ^ @cookies@ - (Required)
     --
-    , _headers              :: TF.Attr s [TF.Attr s P.Text]
+    , _headers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @headers@ - (Optional)
     --
-    , _queryString          :: TF.Attr s P.Bool
+    , _queryString :: TF.Attr s P.Bool
     -- ^ @query_string@ - (Required)
     --
     , _queryStringCacheKeys :: TF.Attr s [TF.Attr s P.Text]
@@ -5436,7 +5436,7 @@ instance P.HasQueryStringCacheKeys (ForwardedValues s) (TF.Attr s [TF.Attr s P.T
 
 -- | @data_resource@ nested settings.
 data DataResource s = DataResource'
-    { _type'  :: TF.Attr s P.Text
+    { _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -5515,19 +5515,19 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsBlockDevice s)) (TF.At
 
 -- | @location@ nested settings.
 data Location s = Location'
-    { _method     :: TF.Attr s P.Text
+    { _method :: TF.Attr s P.Text
     -- ^ @method@ - (Optional)
     --
-    , _name       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _path       :: TF.Attr s P.Text
+    , _path :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
     , _statusCode :: TF.Attr s P.Text
     -- ^ @status_code@ - (Optional)
     --
-    , _type'      :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5585,34 +5585,34 @@ instance P.HasType' (Location s) (TF.Attr s P.Text) where
 
 -- | @video_watermarks@ nested settings.
 data VideoWatermarks s = VideoWatermarks'
-    { _horizontalAlign  :: TF.Attr s P.Text
+    { _horizontalAlign :: TF.Attr s P.Text
     -- ^ @horizontal_align@ - (Optional)
     --
     , _horizontalOffset :: TF.Attr s P.Text
     -- ^ @horizontal_offset@ - (Optional)
     --
-    , _id               :: TF.Attr s P.Text
+    , _id :: TF.Attr s P.Text
     -- ^ @id@ - (Optional)
     --
-    , _maxHeight        :: TF.Attr s P.Text
+    , _maxHeight :: TF.Attr s P.Text
     -- ^ @max_height@ - (Optional)
     --
-    , _maxWidth         :: TF.Attr s P.Text
+    , _maxWidth :: TF.Attr s P.Text
     -- ^ @max_width@ - (Optional)
     --
-    , _opacity          :: TF.Attr s P.Text
+    , _opacity :: TF.Attr s P.Text
     -- ^ @opacity@ - (Optional)
     --
-    , _sizingPolicy     :: TF.Attr s P.Text
+    , _sizingPolicy :: TF.Attr s P.Text
     -- ^ @sizing_policy@ - (Optional)
     --
-    , _target           :: TF.Attr s P.Text
+    , _target :: TF.Attr s P.Text
     -- ^ @target@ - (Optional)
     --
-    , _verticalAlign    :: TF.Attr s P.Text
+    , _verticalAlign :: TF.Attr s P.Text
     -- ^ @vertical_align@ - (Optional)
     --
-    , _verticalOffset   :: TF.Attr s P.Text
+    , _verticalOffset :: TF.Attr s P.Text
     -- ^ @vertical_offset@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5707,10 +5707,10 @@ data LogPublishingOptions s = LogPublishingOptions'
     { _cloudwatchLogGroupArn :: TF.Attr s P.Text
     -- ^ @cloudwatch_log_group_arn@ - (Required)
     --
-    , _enabled               :: TF.Attr s P.Bool
+    , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _logType               :: TF.Attr s P.Text
+    , _logType :: TF.Attr s P.Text
     -- ^ @log_type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5755,13 +5755,13 @@ instance P.HasLogType (LogPublishingOptions s) (TF.Attr s P.Text) where
 
 -- | @load_balancer@ nested settings.
 data LoadBalancer s = LoadBalancer'
-    { _containerName  :: TF.Attr s P.Text
+    { _containerName :: TF.Attr s P.Text
     -- ^ @container_name@ - (Required)
     --
-    , _containerPort  :: TF.Attr s P.Integer
+    , _containerPort :: TF.Attr s P.Integer
     -- ^ @container_port@ - (Required)
     --
-    , _elbName        :: TF.Attr s P.Text
+    , _elbName :: TF.Attr s P.Text
     -- ^ @elb_name@ - (Optional)
     --
     , _targetGroupArn :: TF.Attr s P.Text
@@ -5819,7 +5819,7 @@ data AccessLogSettings s = AccessLogSettings'
     { _destinationArn :: TF.Attr s P.Text
     -- ^ @destination_arn@ - (Required)
     --
-    , _format         :: TF.Attr s P.Text
+    , _format :: TF.Attr s P.Text
     -- ^ @format@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5857,31 +5857,31 @@ instance P.HasFormat (AccessLogSettings s) (TF.Attr s P.Text) where
 
 -- | @settings@ nested settings.
 data Settings s = Settings'
-    { _cacheDataEncrypted                     :: TF.Attr s P.Bool
+    { _cacheDataEncrypted :: TF.Attr s P.Bool
     -- ^ @cache_data_encrypted@ - (Optional)
     --
-    , _cacheTtlInSeconds                      :: TF.Attr s P.Integer
+    , _cacheTtlInSeconds :: TF.Attr s P.Integer
     -- ^ @cache_ttl_in_seconds@ - (Optional)
     --
-    , _cachingEnabled                         :: TF.Attr s P.Bool
+    , _cachingEnabled :: TF.Attr s P.Bool
     -- ^ @caching_enabled@ - (Optional)
     --
-    , _dataTraceEnabled                       :: TF.Attr s P.Bool
+    , _dataTraceEnabled :: TF.Attr s P.Bool
     -- ^ @data_trace_enabled@ - (Optional)
     --
-    , _loggingLevel                           :: TF.Attr s P.Text
+    , _loggingLevel :: TF.Attr s P.Text
     -- ^ @logging_level@ - (Optional)
     --
-    , _metricsEnabled                         :: TF.Attr s P.Bool
+    , _metricsEnabled :: TF.Attr s P.Bool
     -- ^ @metrics_enabled@ - (Optional)
     --
-    , _requireAuthorizationForCacheControl    :: TF.Attr s P.Bool
+    , _requireAuthorizationForCacheControl :: TF.Attr s P.Bool
     -- ^ @require_authorization_for_cache_control@ - (Optional)
     --
-    , _throttlingBurstLimit                   :: TF.Attr s P.Integer
+    , _throttlingBurstLimit :: TF.Attr s P.Integer
     -- ^ @throttling_burst_limit@ - (Optional)
     --
-    , _throttlingRateLimit                    :: TF.Attr s P.Double
+    , _throttlingRateLimit :: TF.Attr s P.Double
     -- ^ @throttling_rate_limit@ - (Optional)
     --
     , _unauthorizedCacheControlHeaderStrategy :: TF.Attr s P.Text
@@ -5976,7 +5976,7 @@ instance P.HasUnauthorizedCacheControlHeaderStrategy (Settings s) (TF.Attr s P.T
 
 -- | @notification@ nested settings.
 data Notification s = Notification'
-    { _events   :: TF.Attr s [TF.Attr s P.Text]
+    { _events :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @events@ - (Required)
     --
     , _snsTopic :: TF.Attr s P.Text
@@ -6058,22 +6058,22 @@ instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (HealthCheck s)) (
 
 -- | @artifacts@ nested settings.
 data Artifacts s = Artifacts'
-    { _location      :: TF.Attr s P.Text
+    { _location :: TF.Attr s P.Text
     -- ^ @location@ - (Optional)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _namespaceType :: TF.Attr s P.Text
     -- ^ @namespace_type@ - (Optional)
     --
-    , _packaging     :: TF.Attr s P.Text
+    , _packaging :: TF.Attr s P.Text
     -- ^ @packaging@ - (Optional)
     --
-    , _path          :: TF.Attr s P.Text
+    , _path :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
-    , _type'         :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6161,7 +6161,7 @@ data KinesisSourceConfiguration s = KinesisSourceConfiguration'
     { _kinesisStreamArn :: TF.Attr s P.Text
     -- ^ @kinesis_stream_arn@ - (Required)
     --
-    , _roleArn          :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6199,13 +6199,13 @@ instance P.HasRoleArn (KinesisSourceConfiguration s) (TF.Attr s P.Text) where
 
 -- | @recording_group@ nested settings.
 data RecordingGroup s = RecordingGroup'
-    { _allSupported               :: TF.Attr s P.Bool
+    { _allSupported :: TF.Attr s P.Bool
     -- ^ @all_supported@ - (Optional)
     --
     , _includeGlobalResourceTypes :: TF.Attr s P.Bool
     -- ^ @include_global_resource_types@ - (Optional)
     --
-    , _resourceTypes              :: TF.Attr s [TF.Attr s P.Text]
+    , _resourceTypes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @resource_types@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6251,7 +6251,7 @@ data Processors s = Processors'
     { _parameters :: TF.Attr s [TF.Attr s (Parameters s)]
     -- ^ @parameters@ - (Optional)
     --
-    , _type'      :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6332,16 +6332,16 @@ instance P.HasType' (OrderedPlacementStrategy s) (TF.Attr s P.Text) where
 
 -- | @password_policy@ nested settings.
 data PasswordPolicy s = PasswordPolicy'
-    { _minimumLength    :: TF.Attr s P.Integer
+    { _minimumLength :: TF.Attr s P.Integer
     -- ^ @minimum_length@ - (Optional)
     --
     , _requireLowercase :: TF.Attr s P.Bool
     -- ^ @require_lowercase@ - (Optional)
     --
-    , _requireNumbers   :: TF.Attr s P.Bool
+    , _requireNumbers :: TF.Attr s P.Bool
     -- ^ @require_numbers@ - (Optional)
     --
-    , _requireSymbols   :: TF.Attr s P.Bool
+    , _requireSymbols :: TF.Attr s P.Bool
     -- ^ @require_symbols@ - (Optional)
     --
     , _requireUppercase :: TF.Attr s P.Bool
@@ -6401,7 +6401,7 @@ instance P.HasRequireUppercase (PasswordPolicy s) (TF.Attr s P.Bool) where
 
 -- | @task_parameters@ nested settings.
 data TaskParameters s = TaskParameters'
-    { _name   :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -6445,10 +6445,10 @@ data HealthCheckConfig s = HealthCheckConfig'
     { _failureThreshold :: TF.Attr s P.Integer
     -- ^ @failure_threshold@ - (Optional)
     --
-    , _resourcePath     :: TF.Attr s P.Text
+    , _resourcePath :: TF.Attr s P.Text
     -- ^ @resource_path@ - (Optional)
     --
-    , _type'            :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6497,10 +6497,10 @@ data AudioCodecOptions s = AudioCodecOptions'
     , _bitOrder :: TF.Attr s P.Text
     -- ^ @bit_order@ - (Optional)
     --
-    , _profile  :: TF.Attr s P.Text
+    , _profile :: TF.Attr s P.Text
     -- ^ @profile@ - (Optional)
     --
-    , _signed   :: TF.Attr s P.Text
+    , _signed :: TF.Attr s P.Text
     -- ^ @signed@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6579,13 +6579,13 @@ instance s ~ s' => P.HasComputedPort (TF.Ref s' (CacheNodes s)) (TF.Attr s P.Int
 
 -- | @add_header_action@ nested settings.
 data AddHeaderAction s = AddHeaderAction'
-    { _headerName  :: TF.Attr s P.Text
+    { _headerName :: TF.Attr s P.Text
     -- ^ @header_name@ - (Required)
     --
     , _headerValue :: TF.Attr s P.Text
     -- ^ @header_value@ - (Required)
     --
-    , _position    :: TF.Attr s P.Integer
+    , _position :: TF.Attr s P.Integer
     -- ^ @position@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6637,7 +6637,7 @@ data RoutingStrategy s = RoutingStrategy'
     , _message :: TF.Attr s P.Text
     -- ^ @message@ - (Optional)
     --
-    , _type'   :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6684,7 +6684,7 @@ data Auth s = Auth'
     { _resource :: TF.Attr s P.Text
     -- ^ @resource@ - (Optional)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6721,7 +6721,7 @@ instance P.HasType' (Auth s) (TF.Attr s P.Text) where
 
 -- | @sort_columns@ nested settings.
 data SortColumns s = SortColumns'
-    { _column    :: TF.Attr s P.Text
+    { _column :: TF.Attr s P.Text
     -- ^ @column@ - (Required)
     --
     , _sortOrder :: TF.Attr s P.Integer
@@ -6762,7 +6762,7 @@ instance P.HasSortOrder (SortColumns s) (TF.Attr s P.Integer) where
 
 -- | @dns_records@ nested settings.
 data DnsRecords s = DnsRecords'
-    { _ttl   :: TF.Attr s P.Integer
+    { _ttl :: TF.Attr s P.Integer
     -- ^ @ttl@ - (Required)
     --
     , _type' :: TF.Attr s P.Text
@@ -6877,7 +6877,7 @@ data PlacementConstraints s = PlacementConstraints'
     { _expression :: TF.Attr s P.Text
     -- ^ @expression@ - (Optional)
     --
-    , _type'      :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6943,16 +6943,16 @@ instance P.HasAction (GreenFleetProvisioningOption s) (TF.Attr s P.Text) where
 
 -- | @cognito_options@ nested settings.
 data CognitoOptions s = CognitoOptions'
-    { _enabled        :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _identityPoolId :: TF.Attr s P.Text
     -- ^ @identity_pool_id@ - (Required)
     --
-    , _roleArn        :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _userPoolId     :: TF.Attr s P.Text
+    , _userPoolId :: TF.Attr s P.Text
     -- ^ @user_pool_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7005,22 +7005,22 @@ instance P.HasUserPoolId (CognitoOptions s) (TF.Attr s P.Text) where
 
 -- | @mongodb_settings@ nested settings.
 data MongodbSettings s = MongodbSettings'
-    { _authMechanism     :: TF.Attr s P.Text
+    { _authMechanism :: TF.Attr s P.Text
     -- ^ @auth_mechanism@ - (Optional)
     --
-    , _authSource        :: TF.Attr s P.Text
+    , _authSource :: TF.Attr s P.Text
     -- ^ @auth_source@ - (Optional)
     --
-    , _authType          :: TF.Attr s P.Text
+    , _authType :: TF.Attr s P.Text
     -- ^ @auth_type@ - (Optional)
     --
     , _docsToInvestigate :: TF.Attr s P.Text
     -- ^ @docs_to_investigate@ - (Optional)
     --
-    , _extractDocId      :: TF.Attr s P.Text
+    , _extractDocId :: TF.Attr s P.Text
     -- ^ @extract_doc_id@ - (Optional)
     --
-    , _nestingLevel      :: TF.Attr s P.Text
+    , _nestingLevel :: TF.Attr s P.Text
     -- ^ @nesting_level@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7117,7 +7117,7 @@ data Volume s = Volume'
     { _hostPath :: TF.Attr s P.Text
     -- ^ @host_path@ - (Optional)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7154,10 +7154,10 @@ instance P.HasName (Volume s) (TF.Attr s P.Text) where
 
 -- | @storage_location@ nested settings.
 data StorageLocation s = StorageLocation'
-    { _bucket  :: TF.Attr s P.Text
+    { _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
-    , _key     :: TF.Attr s P.Text
+    , _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _roleArn :: TF.Attr s P.Text
@@ -7209,7 +7209,7 @@ data TagSpecifications s = TagSpecifications'
     { _resourceType :: TF.Attr s P.Text
     -- ^ @resource_type@ - (Optional)
     --
-    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7245,7 +7245,7 @@ instance P.HasTags (TagSpecifications s) (TF.Attr s (P.HashMap P.Text (TF.Attr s
 
 -- | @replication_configuration@ nested settings.
 data ReplicationConfiguration s = ReplicationConfiguration'
-    { _role  :: TF.Attr s P.Text
+    { _role :: TF.Attr s P.Text
     -- ^ @role@ - (Required)
     --
     , _rules :: TF.Attr s [TF.Attr s (Rules s)]
@@ -7290,16 +7290,16 @@ instance P.HasRules (ReplicationConfiguration s) (TF.Attr s [TF.Attr s (Rules s)
 
 -- | @all_settings@ nested settings.
 data AllSettings s = AllSettings'
-    { _name      :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _namespace :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
-    , _resource  :: TF.Attr s P.Text
+    , _resource :: TF.Attr s P.Text
     -- ^ @resource@ - (Optional)
     --
-    , _value     :: TF.Attr s P.Text
+    , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7352,7 +7352,7 @@ instance P.HasValue (AllSettings s) (TF.Attr s P.Text) where
 
 -- | @noncurrent_version_transition@ nested settings.
 data NoncurrentVersionTransition s = NoncurrentVersionTransition'
-    { _days         :: TF.Attr s P.Integer
+    { _days :: TF.Attr s P.Integer
     -- ^ @days@ - (Optional)
     --
     , _storageClass :: TF.Attr s P.Text
@@ -7395,7 +7395,7 @@ data NotPrincipals s = NotPrincipals'
     { _identifiers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @identifiers@ - (Required)
     --
-    , _type'       :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7433,10 +7433,10 @@ instance P.HasType' (NotPrincipals s) (TF.Attr s P.Text) where
 
 -- | @ser_de_info@ nested settings.
 data SerDeInfo s = SerDeInfo'
-    { _name                 :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _parameters           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @parameters@ - (Optional)
     --
     , _serializationLibrary :: TF.Attr s P.Text
@@ -7482,28 +7482,28 @@ instance P.HasSerializationLibrary (SerDeInfo s) (TF.Attr s P.Text) where
 
 -- | @compute_resources@ nested settings.
 data ComputeResources s = ComputeResources'
-    { _bidPercentage    :: TF.Attr s P.Integer
+    { _bidPercentage :: TF.Attr s P.Integer
     -- ^ @bid_percentage@ - (Optional)
     --
-    , _desiredVcpus     :: TF.Attr s P.Integer
+    , _desiredVcpus :: TF.Attr s P.Integer
     -- ^ @desired_vcpus@ - (Optional)
     --
-    , _ec2KeyPair       :: TF.Attr s P.Text
+    , _ec2KeyPair :: TF.Attr s P.Text
     -- ^ @ec2_key_pair@ - (Optional)
     --
-    , _imageId          :: TF.Attr s P.Text
+    , _imageId :: TF.Attr s P.Text
     -- ^ @image_id@ - (Optional)
     --
-    , _instanceRole     :: TF.Attr s P.Text
+    , _instanceRole :: TF.Attr s P.Text
     -- ^ @instance_role@ - (Required)
     --
-    , _instanceType     :: TF.Attr s [TF.Attr s P.Text]
+    , _instanceType :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @instance_type@ - (Required)
     --
-    , _maxVcpus         :: TF.Attr s P.Integer
+    , _maxVcpus :: TF.Attr s P.Integer
     -- ^ @max_vcpus@ - (Required)
     --
-    , _minVcpus         :: TF.Attr s P.Integer
+    , _minVcpus :: TF.Attr s P.Integer
     -- ^ @min_vcpus@ - (Required)
     --
     , _securityGroupIds :: TF.Attr s [TF.Attr s P.Text]
@@ -7512,13 +7512,13 @@ data ComputeResources s = ComputeResources'
     , _spotIamFleetRole :: TF.Attr s P.Text
     -- ^ @spot_iam_fleet_role@ - (Optional)
     --
-    , _subnets          :: TF.Attr s [TF.Attr s P.Text]
+    , _subnets :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnets@ - (Required)
     --
-    , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _type'            :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7638,13 +7638,13 @@ instance P.HasType' (ComputeResources s) (TF.Attr s P.Text) where
 
 -- | @source_detail@ nested settings.
 data SourceDetail s = SourceDetail'
-    { _eventSource               :: TF.Attr s P.Text
+    { _eventSource :: TF.Attr s P.Text
     -- ^ @event_source@ - (Optional)
     --
     , _maximumExecutionFrequency :: TF.Attr s P.Text
     -- ^ @maximum_execution_frequency@ - (Optional)
     --
-    , _messageType               :: TF.Attr s P.Text
+    , _messageType :: TF.Attr s P.Text
     -- ^ @message_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7687,10 +7687,10 @@ instance P.HasMessageType (SourceDetail s) (TF.Attr s P.Text) where
 
 -- | @expiration@ nested settings.
 data Expiration s = Expiration'
-    { _date                      :: TF.Attr s P.Text
+    { _date :: TF.Attr s P.Text
     -- ^ @date@ - (Optional)
     --
-    , _days                      :: TF.Attr s P.Integer
+    , _days :: TF.Attr s P.Integer
     -- ^ @days@ - (Optional)
     --
     , _expiredObjectDeleteMarker :: TF.Attr s P.Bool
@@ -7736,13 +7736,13 @@ instance P.HasExpiredObjectDeleteMarker (Expiration s) (TF.Attr s P.Bool) where
 
 -- | @website@ nested settings.
 data Website s = Website'
-    { _errorDocument         :: TF.Attr s P.Text
+    { _errorDocument :: TF.Attr s P.Text
     -- ^ @error_document@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'redirectAllRequestsTo'
-    , _indexDocument         :: TF.Attr s P.Text
+    , _indexDocument :: TF.Attr s P.Text
     -- ^ @index_document@ - (Optional)
     --
     -- Conflicts with:
@@ -7756,7 +7756,7 @@ data Website s = Website'
     -- * 'routingRules'
     -- * 'errorDocument'
     -- * 'indexDocument'
-    , _routingRules          :: TF.Attr s P.Text
+    , _routingRules :: TF.Attr s P.Text
     -- ^ @routing_rules@ - (Optional)
     --
     -- Conflicts with:
@@ -7850,10 +7850,10 @@ instance s ~ s' => P.HasComputedData (TF.Ref s' (CertificateAuthority s)) (TF.At
 
 -- | @cognito_identity_providers@ nested settings.
 data CognitoIdentityProviders s = CognitoIdentityProviders'
-    { _clientId             :: TF.Attr s P.Text
+    { _clientId :: TF.Attr s P.Text
     -- ^ @client_id@ - (Optional)
     --
-    , _providerName         :: TF.Attr s P.Text
+    , _providerName :: TF.Attr s P.Text
     -- ^ @provider_name@ - (Optional)
     --
     , _serverSideTokenCheck :: TF.Attr s P.Bool
@@ -7940,10 +7940,10 @@ instance P.HasValue (Filters s) (TF.Attr s P.Text) where
 
 -- | @dynamodb_config@ nested settings.
 data DynamodbConfig s = DynamodbConfig'
-    { _region               :: TF.Attr s P.Text
+    { _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required)
     --
-    , _tableName            :: TF.Attr s P.Text
+    , _tableName :: TF.Attr s P.Text
     -- ^ @table_name@ - (Required)
     --
     , _useCallerCredentials :: TF.Attr s P.Bool
@@ -7994,10 +7994,10 @@ data SmbActiveDirectorySettings s = SmbActiveDirectorySettings'
     { _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
-    , _password   :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    , _username   :: TF.Attr s P.Text
+    , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8043,22 +8043,22 @@ instance P.HasUsername (SmbActiveDirectorySettings s) (TF.Attr s P.Text) where
 
 -- | @ebs_volume@ nested settings.
 data EbsVolume s = EbsVolume'
-    { _iops          :: TF.Attr s P.Integer
+    { _iops :: TF.Attr s P.Integer
     -- ^ @iops@ - (Optional)
     --
-    , _mountPoint    :: TF.Attr s P.Text
+    , _mountPoint :: TF.Attr s P.Text
     -- ^ @mount_point@ - (Required)
     --
     , _numberOfDisks :: TF.Attr s P.Integer
     -- ^ @number_of_disks@ - (Required)
     --
-    , _raidLevel     :: TF.Attr s P.Text
+    , _raidLevel :: TF.Attr s P.Text
     -- ^ @raid_level@ - (Optional)
     --
-    , _size          :: TF.Attr s P.Integer
+    , _size :: TF.Attr s P.Integer
     -- ^ @size@ - (Required)
     --
-    , _type'         :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8128,7 +8128,7 @@ data EbsOptions s = EbsOptions'
     { _ebsEnabled :: TF.Attr s P.Bool
     -- ^ @ebs_enabled@ - (Required)
     --
-    , _iops       :: TF.Attr s P.Integer
+    , _iops :: TF.Attr s P.Integer
     -- ^ @iops@ - (Optional)
     --
     , _volumeSize :: TF.Attr s P.Integer
@@ -8181,10 +8181,10 @@ data SslConfiguration s = SslConfiguration'
     { _certificate :: TF.Attr s P.Text
     -- ^ @certificate@ - (Required)
     --
-    , _chain       :: TF.Attr s P.Text
+    , _chain :: TF.Attr s P.Text
     -- ^ @chain@ - (Optional)
     --
-    , _privateKey  :: TF.Attr s P.Text
+    , _privateKey :: TF.Attr s P.Text
     -- ^ @private_key@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8287,7 +8287,7 @@ data S3Target s = S3Target'
     { _exclusions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @exclusions@ - (Optional)
     --
-    , _path       :: TF.Attr s P.Text
+    , _path :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8324,7 +8324,7 @@ instance P.HasPath (S3Target s) (TF.Attr s P.Text) where
 
 -- | @geo_restriction@ nested settings.
 data GeoRestriction s = GeoRestriction'
-    { _locations       :: TF.Attr s [TF.Attr s P.Text]
+    { _locations :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @locations@ - (Optional)
     --
     , _restrictionType :: TF.Attr s P.Text
@@ -8393,7 +8393,7 @@ instance P.HasPartitionKeyPath (KinesisTarget s) (TF.Attr s P.Text) where
 
 -- | @sql_injection_match_tuples@ nested settings.
 data SqlInjectionMatchTuples s = SqlInjectionMatchTuples'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
     , _textTransformation :: TF.Attr s P.Text
@@ -8438,19 +8438,19 @@ instance P.HasTextTransformation (SqlInjectionMatchTuples s) (TF.Attr s P.Text) 
 
 -- | @rule@ nested settings.
 data Rule s = Rule'
-    { _action         :: TF.Attr s (Action s)
+    { _action :: TF.Attr s (Action s)
     -- ^ @action@ - (Optional)
     --
     , _overrideAction :: TF.Attr s (OverrideAction s)
     -- ^ @override_action@ - (Optional)
     --
-    , _priority       :: TF.Attr s P.Integer
+    , _priority :: TF.Attr s P.Integer
     -- ^ @priority@ - (Required)
     --
-    , _ruleId         :: TF.Attr s P.Text
+    , _ruleId :: TF.Attr s P.Text
     -- ^ @rule_id@ - (Required)
     --
-    , _type'          :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8520,10 +8520,10 @@ data Sns s = Sns'
     { _messageFormat :: TF.Attr s P.Text
     -- ^ @message_format@ - (Optional)
     --
-    , _roleArn       :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _targetArn     :: TF.Attr s P.Text
+    , _targetArn :: TF.Attr s P.Text
     -- ^ @target_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8571,13 +8571,13 @@ data SchemaConfiguration s = SchemaConfiguration'
     { _databaseName :: TF.Attr s P.Text
     -- ^ @database_name@ - (Required)
     --
-    , _roleArn      :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _tableName    :: TF.Attr s P.Text
+    , _tableName :: TF.Attr s P.Text
     -- ^ @table_name@ - (Required)
     --
-    , _versionId    :: TF.Attr s P.Text
+    , _versionId :: TF.Attr s P.Text
     -- ^ @version_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8636,10 +8636,10 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SchemaConfiguration s)) (TF.A
 
 -- | @regex_match_tuple@ nested settings.
 data RegexMatchTuple s = RegexMatchTuple'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
-    , _regexPatternSetId  :: TF.Attr s P.Text
+    , _regexPatternSetId :: TF.Attr s P.Text
     -- ^ @regex_pattern_set_id@ - (Required)
     --
     , _textTransformation :: TF.Attr s P.Text
@@ -8763,16 +8763,16 @@ instance P.HasEncryptionContextSubset (Constraints s) (TF.Attr s (P.HashMap P.Te
 
 -- | @setting@ nested settings.
 data Setting s = Setting'
-    { _name      :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _namespace :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
-    , _resource  :: TF.Attr s P.Text
+    , _resource :: TF.Attr s P.Text
     -- ^ @resource@ - (Optional)
     --
-    , _value     :: TF.Attr s P.Text
+    , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8825,19 +8825,19 @@ instance P.HasValue (Setting s) (TF.Attr s P.Text) where
 
 -- | @bucket@ nested settings.
 data Bucket s = Bucket'
-    { _accountId  :: TF.Attr s P.Text
+    { _accountId :: TF.Attr s P.Text
     -- ^ @account_id@ - (Optional)
     --
-    , _bucketArn  :: TF.Attr s P.Text
+    , _bucketArn :: TF.Attr s P.Text
     -- ^ @bucket_arn@ - (Required)
     --
     , _encryption :: TF.Attr s (Encryption s)
     -- ^ @encryption@ - (Optional)
     --
-    , _format     :: TF.Attr s P.Text
+    , _format :: TF.Attr s P.Text
     -- ^ @format@ - (Required)
     --
-    , _prefix     :: TF.Attr s P.Text
+    , _prefix :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9018,10 +9018,10 @@ data SnapshotCopy s = SnapshotCopy'
     { _destinationRegion :: TF.Attr s P.Text
     -- ^ @destination_region@ - (Required)
     --
-    , _grantName         :: TF.Attr s P.Text
+    , _grantName :: TF.Attr s P.Text
     -- ^ @grant_name@ - (Optional)
     --
-    , _retentionPeriod   :: TF.Attr s P.Integer
+    , _retentionPeriod :: TF.Attr s P.Integer
     -- ^ @retention_period@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9065,13 +9065,13 @@ instance P.HasRetentionPeriod (SnapshotCopy s) (TF.Attr s P.Integer) where
 
 -- | @logging_config@ nested settings.
 data LoggingConfig s = LoggingConfig'
-    { _bucket         :: TF.Attr s P.Text
+    { _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
     , _includeCookies :: TF.Attr s P.Bool
     -- ^ @include_cookies@ - (Optional)
     --
-    , _prefix         :: TF.Attr s P.Text
+    , _prefix :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9115,7 +9115,7 @@ instance P.HasPrefix (LoggingConfig s) (TF.Attr s P.Text) where
 
 -- | @cluster_mode@ nested settings.
 data ClusterMode s = ClusterMode'
-    { _numNodeGroups        :: TF.Attr s P.Integer
+    { _numNodeGroups :: TF.Attr s P.Integer
     -- ^ @num_node_groups@ - (Required)
     --
     , _replicasPerNodeGroup :: TF.Attr s P.Integer
@@ -9156,31 +9156,31 @@ instance P.HasReplicasPerNodeGroup (ClusterMode s) (TF.Attr s P.Integer) where
 
 -- | @dynamodb@ nested settings.
 data Dynamodb s = Dynamodb'
-    { _hashKeyField  :: TF.Attr s P.Text
+    { _hashKeyField :: TF.Attr s P.Text
     -- ^ @hash_key_field@ - (Required)
     --
-    , _hashKeyType   :: TF.Attr s P.Text
+    , _hashKeyType :: TF.Attr s P.Text
     -- ^ @hash_key_type@ - (Optional)
     --
-    , _hashKeyValue  :: TF.Attr s P.Text
+    , _hashKeyValue :: TF.Attr s P.Text
     -- ^ @hash_key_value@ - (Required)
     --
-    , _payloadField  :: TF.Attr s P.Text
+    , _payloadField :: TF.Attr s P.Text
     -- ^ @payload_field@ - (Optional)
     --
     , _rangeKeyField :: TF.Attr s P.Text
     -- ^ @range_key_field@ - (Required)
     --
-    , _rangeKeyType  :: TF.Attr s P.Text
+    , _rangeKeyType :: TF.Attr s P.Text
     -- ^ @range_key_type@ - (Optional)
     --
     , _rangeKeyValue :: TF.Attr s P.Text
     -- ^ @range_key_value@ - (Required)
     --
-    , _roleArn       :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _tableName     :: TF.Attr s P.Text
+    , _tableName :: TF.Attr s P.Text
     -- ^ @table_name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9274,10 +9274,10 @@ data Alias s = Alias'
     { _evaluateTargetHealth :: TF.Attr s P.Bool
     -- ^ @evaluate_target_health@ - (Required)
     --
-    , _name                 :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _zoneId               :: TF.Attr s P.Text
+    , _zoneId :: TF.Attr s P.Text
     -- ^ @zone_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9323,16 +9323,16 @@ instance P.HasZoneId (Alias s) (TF.Attr s P.Text) where
 
 -- | @secret@ nested settings.
 data Secret s = Secret'
-    { _context     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _context :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @context@ - (Optional)
     --
     , _grantTokens :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @grant_tokens@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _payload     :: TF.Attr s P.Text
+    , _payload :: TF.Attr s P.Text
     -- ^ @payload@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9387,7 +9387,7 @@ data ElasticsearchConfig s = ElasticsearchConfig'
     { _endpoint :: TF.Attr s P.Text
     -- ^ @endpoint@ - (Required)
     --
-    , _region   :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9425,13 +9425,13 @@ instance P.HasRegion (ElasticsearchConfig s) (TF.Attr s P.Text) where
 
 -- | @event_selector@ nested settings.
 data EventSelector s = EventSelector'
-    { _dataResource            :: TF.Attr s [TF.Attr s (DataResource s)]
+    { _dataResource :: TF.Attr s [TF.Attr s (DataResource s)]
     -- ^ @data_resource@ - (Optional)
     --
     , _includeManagementEvents :: TF.Attr s P.Bool
     -- ^ @include_management_events@ - (Optional)
     --
-    , _readWriteType           :: TF.Attr s P.Text
+    , _readWriteType :: TF.Attr s P.Text
     -- ^ @read_write_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9478,7 +9478,7 @@ instance P.HasReadWriteType (EventSelector s) (TF.Attr s P.Text) where
 
 -- | @ec2_tag_filter@ nested settings.
 data Ec2TagFilter s = Ec2TagFilter'
-    { _key   :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Optional)
     --
     , _type' :: TF.Attr s P.Text
@@ -9530,7 +9530,7 @@ data Principals s = Principals'
     { _identifiers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @identifiers@ - (Required)
     --
-    , _type'       :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9624,7 +9624,7 @@ data NetworkConfiguration s = NetworkConfiguration'
     , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Optional)
     --
-    , _subnets        :: TF.Attr s [TF.Attr s P.Text]
+    , _subnets :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnets@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9668,7 +9668,7 @@ instance P.HasSubnets (NetworkConfiguration s) (TF.Attr s [TF.Attr s P.Text]) wh
 
 -- | @queue@ nested settings.
 data Queue s = Queue'
-    { _events       :: TF.Attr s [TF.Attr s P.Text]
+    { _events :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @events@ - (Required)
     --
     , _filterPrefix :: TF.Attr s P.Text
@@ -9677,7 +9677,7 @@ data Queue s = Queue'
     , _filterSuffix :: TF.Attr s P.Text
     -- ^ @filter_suffix@ - (Optional)
     --
-    , _queueArn     :: TF.Attr s P.Text
+    , _queueArn :: TF.Attr s P.Text
     -- ^ @queue_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9761,25 +9761,25 @@ instance P.HasAdditionalVersionWeights (RoutingConfig s) (TF.Attr s (P.HashMap P
 
 -- | @route@ nested settings.
 data Route s = Route'
-    { _cidrBlock              :: TF.Attr s P.Text
+    { _cidrBlock :: TF.Attr s P.Text
     -- ^ @cidr_block@ - (Optional)
     --
-    , _egressOnlyGatewayId    :: TF.Attr s P.Text
+    , _egressOnlyGatewayId :: TF.Attr s P.Text
     -- ^ @egress_only_gateway_id@ - (Optional)
     --
-    , _gatewayId              :: TF.Attr s P.Text
+    , _gatewayId :: TF.Attr s P.Text
     -- ^ @gateway_id@ - (Optional)
     --
-    , _instanceId             :: TF.Attr s P.Text
+    , _instanceId :: TF.Attr s P.Text
     -- ^ @instance_id@ - (Optional)
     --
-    , _ipv6CidrBlock          :: TF.Attr s P.Text
+    , _ipv6CidrBlock :: TF.Attr s P.Text
     -- ^ @ipv6_cidr_block@ - (Optional)
     --
-    , _natGatewayId           :: TF.Attr s P.Text
+    , _natGatewayId :: TF.Attr s P.Text
     -- ^ @nat_gateway_id@ - (Optional)
     --
-    , _networkInterfaceId     :: TF.Attr s P.Text
+    , _networkInterfaceId :: TF.Attr s P.Text
     -- ^ @network_interface_id@ - (Optional)
     --
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
@@ -9863,7 +9863,7 @@ data Firehose s = Firehose'
     { _deliveryStreamName :: TF.Attr s P.Text
     -- ^ @delivery_stream_name@ - (Required)
     --
-    , _roleArn            :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9904,7 +9904,7 @@ data AutoRollbackConfiguration s = AutoRollbackConfiguration'
     { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _events  :: TF.Attr s [TF.Attr s P.Text]
+    , _events :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @events@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9969,22 +9969,22 @@ instance s ~ s' => P.HasComputedInstanceOwnerId (TF.Ref s' (Attachment s)) (TF.A
 
 -- | @schema@ nested settings.
 data Schema s = Schema'
-    { _attributeDataType          :: TF.Attr s P.Text
+    { _attributeDataType :: TF.Attr s P.Text
     -- ^ @attribute_data_type@ - (Required)
     --
-    , _developerOnlyAttribute     :: TF.Attr s P.Bool
+    , _developerOnlyAttribute :: TF.Attr s P.Bool
     -- ^ @developer_only_attribute@ - (Optional)
     --
-    , _mutable                    :: TF.Attr s P.Bool
+    , _mutable :: TF.Attr s P.Bool
     -- ^ @mutable@ - (Optional)
     --
-    , _name                       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _numberAttributeConstraints :: TF.Attr s (NumberAttributeConstraints s)
     -- ^ @number_attribute_constraints@ - (Optional)
     --
-    , _required                   :: TF.Attr s P.Bool
+    , _required :: TF.Attr s P.Bool
     -- ^ @required@ - (Optional)
     --
     , _stringAttributeConstraints :: TF.Attr s (StringAttributeConstraints s)
@@ -10068,13 +10068,13 @@ instance P.HasStringAttributeConstraints (Schema s) (TF.Attr s (StringAttributeC
 
 -- | @predicate@ nested settings.
 data Predicate s = Predicate'
-    { _dataId  :: TF.Attr s P.Text
+    { _dataId :: TF.Attr s P.Text
     -- ^ @data_id@ - (Required)
     --
     , _negated :: TF.Attr s P.Bool
     -- ^ @negated@ - (Required)
     --
-    , _type'   :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10120,13 +10120,13 @@ instance P.HasType' (Predicate s) (TF.Attr s P.Text) where
 
 -- | @ebs_config@ nested settings.
 data EbsConfig s = EbsConfig'
-    { _iops               :: TF.Attr s P.Integer
+    { _iops :: TF.Attr s P.Integer
     -- ^ @iops@ - (Optional)
     --
-    , _size               :: TF.Attr s P.Integer
+    , _size :: TF.Attr s P.Integer
     -- ^ @size@ - (Required)
     --
-    , _type'              :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     , _volumesPerInstance :: TF.Attr s P.Integer
@@ -10187,10 +10187,10 @@ data ServiceRegistries s = ServiceRegistries'
     , _containerPort :: TF.Attr s P.Integer
     -- ^ @container_port@ - (Optional)
     --
-    , _port          :: TF.Attr s P.Integer
+    , _port :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
     --
-    , _registryArn   :: TF.Attr s P.Text
+    , _registryArn :: TF.Attr s P.Text
     -- ^ @registry_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10241,7 +10241,7 @@ instance P.HasRegistryArn (ServiceRegistries s) (TF.Attr s P.Text) where
 
 -- | @terminate_blue_instances_on_deployment_success@ nested settings.
 data TerminateBlueInstancesOnDeploymentSuccess s = TerminateBlueInstancesOnDeploymentSuccess'
-    { _action                       :: TF.Attr s P.Text
+    { _action :: TF.Attr s P.Text
     -- ^ @action@ - (Optional)
     --
     , _terminationWaitTimeInMinutes :: TF.Attr s P.Integer
@@ -10319,7 +10319,7 @@ instance P.HasMinValue (NumberAttributeConstraints s) (TF.Attr s P.Text) where
 
 -- | @topic@ nested settings.
 data Topic s = Topic'
-    { _events       :: TF.Attr s [TF.Attr s P.Text]
+    { _events :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @events@ - (Required)
     --
     , _filterPrefix :: TF.Attr s P.Text
@@ -10328,7 +10328,7 @@ data Topic s = Topic'
     , _filterSuffix :: TF.Attr s P.Text
     -- ^ @filter_suffix@ - (Optional)
     --
-    , _topicArn     :: TF.Attr s P.Text
+    , _topicArn :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10383,43 +10383,43 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (Topic s)) (TF.Attr s P.Text) wher
 
 -- | @video@ nested settings.
 data Video s = Video'
-    { _aspectRatio        :: TF.Attr s P.Text
+    { _aspectRatio :: TF.Attr s P.Text
     -- ^ @aspect_ratio@ - (Optional)
     --
-    , _bitRate            :: TF.Attr s P.Text
+    , _bitRate :: TF.Attr s P.Text
     -- ^ @bit_rate@ - (Optional)
     --
-    , _codec              :: TF.Attr s P.Text
+    , _codec :: TF.Attr s P.Text
     -- ^ @codec@ - (Optional)
     --
     , _displayAspectRatio :: TF.Attr s P.Text
     -- ^ @display_aspect_ratio@ - (Optional)
     --
-    , _fixedGop           :: TF.Attr s P.Text
+    , _fixedGop :: TF.Attr s P.Text
     -- ^ @fixed_gop@ - (Optional)
     --
-    , _frameRate          :: TF.Attr s P.Text
+    , _frameRate :: TF.Attr s P.Text
     -- ^ @frame_rate@ - (Optional)
     --
-    , _keyframesMaxDist   :: TF.Attr s P.Text
+    , _keyframesMaxDist :: TF.Attr s P.Text
     -- ^ @keyframes_max_dist@ - (Optional)
     --
-    , _maxFrameRate       :: TF.Attr s P.Text
+    , _maxFrameRate :: TF.Attr s P.Text
     -- ^ @max_frame_rate@ - (Optional)
     --
-    , _maxHeight          :: TF.Attr s P.Text
+    , _maxHeight :: TF.Attr s P.Text
     -- ^ @max_height@ - (Optional)
     --
-    , _maxWidth           :: TF.Attr s P.Text
+    , _maxWidth :: TF.Attr s P.Text
     -- ^ @max_width@ - (Optional)
     --
-    , _paddingPolicy      :: TF.Attr s P.Text
+    , _paddingPolicy :: TF.Attr s P.Text
     -- ^ @padding_policy@ - (Optional)
     --
-    , _resolution         :: TF.Attr s P.Text
+    , _resolution :: TF.Attr s P.Text
     -- ^ @resolution@ - (Optional)
     --
-    , _sizingPolicy       :: TF.Attr s P.Text
+    , _sizingPolicy :: TF.Attr s P.Text
     -- ^ @sizing_policy@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10639,22 +10639,22 @@ instance P.HasConvertDotsInJsonKeysToUnderscores (OpenXJsonSerDe s) (TF.Attr s P
 
 -- | @bounce_action@ nested settings.
 data BounceAction s = BounceAction'
-    { _message       :: TF.Attr s P.Text
+    { _message :: TF.Attr s P.Text
     -- ^ @message@ - (Required)
     --
-    , _position      :: TF.Attr s P.Integer
+    , _position :: TF.Attr s P.Integer
     -- ^ @position@ - (Required)
     --
-    , _sender        :: TF.Attr s P.Text
+    , _sender :: TF.Attr s P.Text
     -- ^ @sender@ - (Required)
     --
     , _smtpReplyCode :: TF.Attr s P.Text
     -- ^ @smtp_reply_code@ - (Required)
     --
-    , _statusCode    :: TF.Attr s P.Text
+    , _statusCode :: TF.Attr s P.Text
     -- ^ @status_code@ - (Optional)
     --
-    , _topicArn      :: TF.Attr s P.Text
+    , _topicArn :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10725,10 +10725,10 @@ data WorkmailAction s = WorkmailAction'
     { _organizationArn :: TF.Attr s P.Text
     -- ^ @organization_arn@ - (Required)
     --
-    , _position        :: TF.Attr s P.Integer
+    , _position :: TF.Attr s P.Integer
     -- ^ @position@ - (Required)
     --
-    , _topicArn        :: TF.Attr s P.Text
+    , _topicArn :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10776,10 +10776,10 @@ data JdbcTarget s = JdbcTarget'
     { _connectionName :: TF.Attr s P.Text
     -- ^ @connection_name@ - (Required)
     --
-    , _exclusions     :: TF.Attr s [TF.Attr s P.Text]
+    , _exclusions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @exclusions@ - (Optional)
     --
-    , _path           :: TF.Attr s P.Text
+    , _path :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -10893,10 +10893,10 @@ data SizeConstraints s = SizeConstraints'
     { _comparisonOperator :: TF.Attr s P.Text
     -- ^ @comparison_operator@ - (Required)
     --
-    , _fieldToMatch       :: TF.Attr s (FieldToMatch s)
+    , _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
-    , _size               :: TF.Attr s P.Integer
+    , _size :: TF.Attr s P.Integer
     -- ^ @size@ - (Required)
     --
     , _textTransformation :: TF.Attr s P.Text
@@ -10960,13 +10960,13 @@ data Ebs s = Ebs'
     { _deleteOnTermination :: TF.Attr s P.Bool
     -- ^ @delete_on_termination@ - (Optional)
     --
-    , _encrypted           :: TF.Attr s P.Bool
+    , _encrypted :: TF.Attr s P.Bool
     -- ^ @encrypted@ - (Optional)
     --
-    , _kmsKeyId            :: TF.Attr s P.Text
+    , _kmsKeyId :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
-    , _snapshotId          :: TF.Attr s P.Text
+    , _snapshotId :: TF.Attr s P.Text
     -- ^ @snapshot_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -11025,7 +11025,7 @@ instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (Ebs s)) (TF.Attr s P.Text
 
 -- | @serializer@ nested settings.
 data Serializer s = Serializer'
-    { _orcSerDe     :: TF.Attr s (OrcSerDe s)
+    { _orcSerDe :: TF.Attr s (OrcSerDe s)
     -- ^ @orc_ser_de@ - (Optional)
     --
     -- Conflicts with:
@@ -11089,10 +11089,10 @@ instance P.HasParquetSerDe (Serializer s) (TF.Attr s (ParquetSerDe s)) where
 
 -- | @dns_config@ nested settings.
 data DnsConfig s = DnsConfig'
-    { _dnsRecords    :: TF.Attr s [TF.Attr s (DnsRecords s)]
+    { _dnsRecords :: TF.Attr s [TF.Attr s (DnsRecords s)]
     -- ^ @dns_records@ - (Required)
     --
-    , _namespaceId   :: TF.Attr s P.Text
+    , _namespaceId :: TF.Attr s P.Text
     -- ^ @namespace_id@ - (Required)
     --
     , _routingPolicy :: TF.Attr s P.Text
@@ -11144,7 +11144,7 @@ instance P.HasRoutingPolicy (DnsConfig s) (TF.Attr s P.Text) where
 
 -- | @run_command_targets@ nested settings.
 data RunCommandTargets s = RunCommandTargets'
-    { _key    :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -11185,7 +11185,7 @@ instance P.HasValues (RunCommandTargets s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @quota_settings@ nested settings.
 data QuotaSettings s = QuotaSettings'
-    { _limit  :: TF.Attr s P.Integer
+    { _limit :: TF.Attr s P.Integer
     -- ^ @limit@ - (Required)
     --
     , _offset :: TF.Attr s P.Integer
@@ -11236,7 +11236,7 @@ instance P.HasPeriod (QuotaSettings s) (TF.Attr s P.Text) where
 
 -- | @on_premises_instance_tag_filter@ nested settings.
 data OnPremisesInstanceTagFilter s = OnPremisesInstanceTagFilter'
-    { _key   :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Optional)
     --
     , _type' :: TF.Attr s P.Text
@@ -11332,13 +11332,13 @@ data CustomCookbooksSource s = CustomCookbooksSource'
     , _revision :: TF.Attr s P.Text
     -- ^ @revision@ - (Optional)
     --
-    , _sshKey   :: TF.Attr s P.Text
+    , _sshKey :: TF.Attr s P.Text
     -- ^ @ssh_key@ - (Optional)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _url      :: TF.Attr s P.Text
+    , _url :: TF.Attr s P.Text
     -- ^ @url@ - (Required)
     --
     , _username :: TF.Attr s P.Text
@@ -11433,16 +11433,16 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (Stickiness s)) (TF.Attr s P.Tex
 
 -- | @activated_rule@ nested settings.
 data ActivatedRule s = ActivatedRule'
-    { _action   :: TF.Attr s (Action s)
+    { _action :: TF.Attr s (Action s)
     -- ^ @action@ - (Required)
     --
     , _priority :: TF.Attr s P.Integer
     -- ^ @priority@ - (Required)
     --
-    , _ruleId   :: TF.Attr s P.Text
+    , _ruleId :: TF.Attr s P.Text
     -- ^ @rule_id@ - (Required)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -11499,10 +11499,10 @@ instance P.HasType' (ActivatedRule s) (TF.Attr s P.Text) where
 
 -- | @geolocation_routing_policy@ nested settings.
 data GeolocationRoutingPolicy s = GeolocationRoutingPolicy'
-    { _continent   :: TF.Attr s P.Text
+    { _continent :: TF.Attr s P.Text
     -- ^ @continent@ - (Optional)
     --
-    , _country     :: TF.Attr s P.Text
+    , _country :: TF.Attr s P.Text
     -- ^ @country@ - (Optional)
     --
     , _subdivision :: TF.Attr s P.Text
@@ -11548,7 +11548,7 @@ instance P.HasSubdivision (GeolocationRoutingPolicy s) (TF.Attr s P.Text) where
 
 -- | @environment_variable@ nested settings.
 data EnvironmentVariable s = EnvironmentVariable'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _type' :: TF.Attr s P.Text
@@ -11660,7 +11660,7 @@ data Cache s = Cache'
     { _location :: TF.Attr s P.Text
     -- ^ @location@ - (Optional)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -11696,13 +11696,13 @@ instance P.HasType' (Cache s) (TF.Attr s P.Text) where
 
 -- | @certificate_authority_configuration@ nested settings.
 data CertificateAuthorityConfiguration s = CertificateAuthorityConfiguration'
-    { _keyAlgorithm     :: TF.Attr s P.Text
+    { _keyAlgorithm :: TF.Attr s P.Text
     -- ^ @key_algorithm@ - (Required)
     --
     , _signingAlgorithm :: TF.Attr s P.Text
     -- ^ @signing_algorithm@ - (Required)
     --
-    , _subject          :: TF.Attr s (Subject s)
+    , _subject :: TF.Attr s (Subject s)
     -- ^ @subject@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -11781,7 +11781,7 @@ data PredefinedMetricSpecification s = PredefinedMetricSpecification'
     { _predefinedMetricType :: TF.Attr s P.Text
     -- ^ @predefined_metric_type@ - (Required)
     --
-    , _resourceLabel        :: TF.Attr s P.Text
+    , _resourceLabel :: TF.Attr s P.Text
     -- ^ @resource_label@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -11818,18 +11818,18 @@ instance P.HasResourceLabel (PredefinedMetricSpecification s) (TF.Attr s P.Text)
 
 -- | @assume_role@ nested settings.
 data AssumeRole = AssumeRole'
-    { _externalId  :: P.Maybe P.Text
+    { _externalId :: P.Maybe P.Text
     -- ^ @external_id@ - (Optional)
     -- The external ID to use when assuming the role. If omitted, no external ID is
     -- passed to the AssumeRole call.
     --
-    , _policy      :: P.Maybe P.Text
+    , _policy :: P.Maybe P.Document
     -- ^ @policy@ - (Optional)
     -- The permissions applied when assuming a role. You cannot use, this policy to
     -- grant further permissions that are in excess to those of the,  role that is
     -- being assumed.
     --
-    , _roleArn     :: P.Maybe P.Text
+    , _roleArn :: P.Maybe P.Text
     -- ^ @role_arn@ - (Optional)
     -- The ARN of an IAM role to assume prior to making API calls.
     --
@@ -11868,9 +11868,9 @@ instance P.HasExternalId (AssumeRole) (P.Maybe P.Text) where
         P.lens (_externalId :: AssumeRole -> P.Maybe P.Text)
                (\s a -> s { _externalId = a } :: AssumeRole)
 
-instance P.HasPolicy (AssumeRole) (P.Maybe P.Text) where
+instance P.HasPolicy (AssumeRole) (P.Maybe P.Document) where
     policy =
-        P.lens (_policy :: AssumeRole -> P.Maybe P.Text)
+        P.lens (_policy :: AssumeRole -> P.Maybe P.Document)
                (\s a -> s { _policy = a } :: AssumeRole)
 
 instance P.HasRoleArn (AssumeRole) (P.Maybe P.Text) where
@@ -12004,7 +12004,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LifecycleRule s)) (TF.Attr s P.Te
 
 -- | @device_configuration@ nested settings.
 data DeviceConfiguration s = DeviceConfiguration'
-    { _challengeRequiredOnNewDevice     :: TF.Attr s P.Bool
+    { _challengeRequiredOnNewDevice :: TF.Attr s P.Bool
     -- ^ @challenge_required_on_new_device@ - (Optional)
     --
     , _deviceOnlyRememberedOnUserPrompt :: TF.Attr s P.Bool
@@ -12046,13 +12046,13 @@ data NfsFileShareDefaults s = NfsFileShareDefaults'
     { _directoryMode :: TF.Attr s P.Text
     -- ^ @directory_mode@ - (Optional)
     --
-    , _fileMode      :: TF.Attr s P.Text
+    , _fileMode :: TF.Attr s P.Text
     -- ^ @file_mode@ - (Optional)
     --
-    , _groupId       :: TF.Attr s P.Integer
+    , _groupId :: TF.Attr s P.Integer
     -- ^ @group_id@ - (Optional)
     --
-    , _ownerId       :: TF.Attr s P.Integer
+    , _ownerId :: TF.Attr s P.Integer
     -- ^ @owner_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -12171,28 +12171,28 @@ instance P.HasFunctionArn (Lambda s) (TF.Attr s P.Text) where
 
 -- | @thumbnails@ nested settings.
 data Thumbnails s = Thumbnails'
-    { _aspectRatio   :: TF.Attr s P.Text
+    { _aspectRatio :: TF.Attr s P.Text
     -- ^ @aspect_ratio@ - (Optional)
     --
-    , _format        :: TF.Attr s P.Text
+    , _format :: TF.Attr s P.Text
     -- ^ @format@ - (Optional)
     --
-    , _interval      :: TF.Attr s P.Text
+    , _interval :: TF.Attr s P.Text
     -- ^ @interval@ - (Optional)
     --
-    , _maxHeight     :: TF.Attr s P.Text
+    , _maxHeight :: TF.Attr s P.Text
     -- ^ @max_height@ - (Optional)
     --
-    , _maxWidth      :: TF.Attr s P.Text
+    , _maxWidth :: TF.Attr s P.Text
     -- ^ @max_width@ - (Optional)
     --
     , _paddingPolicy :: TF.Attr s P.Text
     -- ^ @padding_policy@ - (Optional)
     --
-    , _resolution    :: TF.Attr s P.Text
+    , _resolution :: TF.Attr s P.Text
     -- ^ @resolution@ - (Optional)
     --
-    , _sizingPolicy  :: TF.Attr s P.Text
+    , _sizingPolicy :: TF.Attr s P.Text
     -- ^ @sizing_policy@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -12276,7 +12276,7 @@ data Encryption s = Encryption'
     -- Conflicts with:
     --
     -- * 'sseS3'
-    , _sseS3  :: TF.Attr s (SseS3 s)
+    , _sseS3 :: TF.Attr s (SseS3 s)
     -- ^ @sse_s3@ - (Optional)
     --
     -- Conflicts with:
@@ -12354,28 +12354,28 @@ instance s ~ s' => P.HasComputedCrlConfiguration (TF.Ref s' (RevocationConfigura
 
 -- | @ingress@ nested settings.
 data Ingress s = Ingress'
-    { _cidrBlocks     :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_blocks@ - (Optional)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _fromPort       :: TF.Attr s P.Integer
+    , _fromPort :: TF.Attr s P.Integer
     -- ^ @from_port@ - (Required)
     --
     , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv6_cidr_blocks@ - (Optional)
     --
-    , _protocol       :: TF.Attr s P.Text
+    , _protocol :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
     , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Optional)
     --
-    , _self           :: TF.Attr s P.Bool
+    , _self :: TF.Attr s P.Bool
     -- ^ @self@ - (Optional)
     --
-    , _toPort         :: TF.Attr s P.Integer
+    , _toPort :: TF.Attr s P.Integer
     -- ^ @to_port@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -12456,22 +12456,22 @@ instance P.HasToPort (Ingress s) (TF.Attr s P.Integer) where
 
 -- | @cluster_config@ nested settings.
 data ClusterConfig s = ClusterConfig'
-    { _dedicatedMasterCount   :: TF.Attr s P.Integer
+    { _dedicatedMasterCount :: TF.Attr s P.Integer
     -- ^ @dedicated_master_count@ - (Optional)
     --
     , _dedicatedMasterEnabled :: TF.Attr s P.Bool
     -- ^ @dedicated_master_enabled@ - (Optional)
     --
-    , _dedicatedMasterType    :: TF.Attr s P.Text
+    , _dedicatedMasterType :: TF.Attr s P.Text
     -- ^ @dedicated_master_type@ - (Optional)
     --
-    , _instanceCount          :: TF.Attr s P.Integer
+    , _instanceCount :: TF.Attr s P.Integer
     -- ^ @instance_count@ - (Optional)
     --
-    , _instanceType           :: TF.Attr s P.Text
+    , _instanceType :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Optional)
     --
-    , _zoneAwarenessEnabled   :: TF.Attr s P.Bool
+    , _zoneAwarenessEnabled :: TF.Attr s P.Bool
     -- ^ @zone_awareness_enabled@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -12535,10 +12535,10 @@ instance P.HasZoneAwarenessEnabled (ClusterConfig s) (TF.Attr s P.Bool) where
 
 -- | @admin_create_user_config@ nested settings.
 data AdminCreateUserConfig s = AdminCreateUserConfig'
-    { _allowAdminCreateUserOnly  :: TF.Attr s P.Bool
+    { _allowAdminCreateUserOnly :: TF.Attr s P.Bool
     -- ^ @allow_admin_create_user_only@ - (Optional)
     --
-    , _inviteMessageTemplate     :: TF.Attr s (InviteMessageTemplate s)
+    , _inviteMessageTemplate :: TF.Attr s (InviteMessageTemplate s)
     -- ^ @invite_message_template@ - (Optional)
     --
     , _unusedAccountValidityDays :: TF.Attr s P.Integer
@@ -12640,7 +12640,7 @@ data VpcSettings s = VpcSettings'
     { _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required)
     --
-    , _vpcId     :: TF.Attr s P.Text
+    , _vpcId :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -12719,7 +12719,7 @@ instance P.HasTopicArn (SnsAction s) (TF.Attr s P.Text) where
 
 -- | @iam_instance_profile@ nested settings.
 data IamInstanceProfile s = IamInstanceProfile'
-    { _arn  :: TF.Attr s P.Text
+    { _arn :: TF.Attr s P.Text
     -- ^ @arn@ - (Optional)
     --
     -- Conflicts with:
@@ -12775,7 +12775,7 @@ instance P.HasName (IamInstanceProfile s) (TF.Attr s P.Text) where
 
 -- | @cookies@ nested settings.
 data Cookies s = Cookies'
-    { _forward          :: TF.Attr s P.Text
+    { _forward :: TF.Attr s P.Text
     -- ^ @forward@ - (Required)
     --
     , _whitelistedNames :: TF.Attr s [TF.Attr s P.Text]
@@ -12991,31 +12991,31 @@ data NetworkInterfaces s = NetworkInterfaces'
     { _associatePublicIpAddress :: TF.Attr s P.Bool
     -- ^ @associate_public_ip_address@ - (Optional)
     --
-    , _deleteOnTermination      :: TF.Attr s P.Bool
+    , _deleteOnTermination :: TF.Attr s P.Bool
     -- ^ @delete_on_termination@ - (Optional)
     --
-    , _description              :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _deviceIndex              :: TF.Attr s P.Integer
+    , _deviceIndex :: TF.Attr s P.Integer
     -- ^ @device_index@ - (Optional)
     --
-    , _ipv4Addresses            :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv4Addresses :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv4_addresses@ - (Optional)
     --
-    , _ipv6Addresses            :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6Addresses :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv6_addresses@ - (Optional)
     --
-    , _networkInterfaceId       :: TF.Attr s P.Text
+    , _networkInterfaceId :: TF.Attr s P.Text
     -- ^ @network_interface_id@ - (Optional)
     --
-    , _privateIpAddress         :: TF.Attr s P.Text
+    , _privateIpAddress :: TF.Attr s P.Text
     -- ^ @private_ip_address@ - (Optional)
     --
-    , _securityGroups           :: TF.Attr s [TF.Attr s P.Text]
+    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Optional)
     --
-    , _subnetId                 :: TF.Attr s P.Text
+    , _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -13422,13 +13422,13 @@ data AppversionLifecycle s = AppversionLifecycle'
     { _deleteSourceFromS3 :: TF.Attr s P.Bool
     -- ^ @delete_source_from_s3@ - (Optional)
     --
-    , _maxAgeInDays       :: TF.Attr s P.Integer
+    , _maxAgeInDays :: TF.Attr s P.Integer
     -- ^ @max_age_in_days@ - (Optional)
     --
-    , _maxCount           :: TF.Attr s P.Integer
+    , _maxCount :: TF.Attr s P.Integer
     -- ^ @max_count@ - (Optional)
     --
-    , _serviceRole        :: TF.Attr s P.Text
+    , _serviceRole :: TF.Attr s P.Text
     -- ^ @service_role@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -13479,13 +13479,13 @@ instance P.HasServiceRole (AppversionLifecycle s) (TF.Attr s P.Text) where
 
 -- | @lambda_function@ nested settings.
 data LambdaFunction s = LambdaFunction'
-    { _events            :: TF.Attr s [TF.Attr s P.Text]
+    { _events :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @events@ - (Required)
     --
-    , _filterPrefix      :: TF.Attr s P.Text
+    , _filterPrefix :: TF.Attr s P.Text
     -- ^ @filter_prefix@ - (Optional)
     --
-    , _filterSuffix      :: TF.Attr s P.Text
+    , _filterSuffix :: TF.Attr s P.Text
     -- ^ @filter_suffix@ - (Optional)
     --
     , _lambdaFunctionArn :: TF.Attr s P.Text
@@ -13542,13 +13542,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LambdaFunction s)) (TF.Attr s P.T
 
 -- | @logging_info@ nested settings.
 data LoggingInfo s = LoggingInfo'
-    { _s3BucketName   :: TF.Attr s P.Text
+    { _s3BucketName :: TF.Attr s P.Text
     -- ^ @s3_bucket_name@ - (Required)
     --
     , _s3BucketPrefix :: TF.Attr s P.Text
     -- ^ @s3_bucket_prefix@ - (Optional)
     --
-    , _s3Region       :: TF.Attr s P.Text
+    , _s3Region :: TF.Attr s P.Text
     -- ^ @s3_region@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -13593,16 +13593,16 @@ instance P.HasS3Region (LoggingInfo s) (TF.Attr s P.Text) where
 
 -- | @scope@ nested settings.
 data Scope s = Scope'
-    { _complianceResourceId    :: TF.Attr s P.Text
+    { _complianceResourceId :: TF.Attr s P.Text
     -- ^ @compliance_resource_id@ - (Optional)
     --
     , _complianceResourceTypes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @compliance_resource_types@ - (Optional)
     --
-    , _tagKey                  :: TF.Attr s P.Text
+    , _tagKey :: TF.Attr s P.Text
     -- ^ @tag_key@ - (Optional)
     --
-    , _tagValue                :: TF.Attr s P.Text
+    , _tagValue :: TF.Attr s P.Text
     -- ^ @tag_value@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -13652,16 +13652,16 @@ instance P.HasTagValue (Scope s) (TF.Attr s P.Text) where
 
 -- | @byte_match_tuples@ nested settings.
 data ByteMatchTuples s = ByteMatchTuples'
-    { _fieldToMatch         :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
     , _positionalConstraint :: TF.Attr s P.Text
     -- ^ @positional_constraint@ - (Required)
     --
-    , _targetString         :: TF.Attr s P.Text
+    , _targetString :: TF.Attr s P.Text
     -- ^ @target_string@ - (Optional)
     --
-    , _textTransformation   :: TF.Attr s P.Text
+    , _textTransformation :: TF.Attr s P.Text
     -- ^ @text_transformation@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -13753,7 +13753,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (LaunchTemplate s)) (TF.Attr s P
 
 -- | @versioning@ nested settings.
 data Versioning s = Versioning'
-    { _enabled   :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _mfaDelete :: TF.Attr s P.Bool
@@ -13867,13 +13867,13 @@ data MetricTransformation s = MetricTransformation'
     { _defaultValue :: TF.Attr s P.Double
     -- ^ @default_value@ - (Optional)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _namespace    :: TF.Attr s P.Text
+    , _namespace :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
-    , _value        :: TF.Attr s P.Text
+    , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -13955,7 +13955,7 @@ instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (Associations s)) (TF.Attr s
 
 -- | @parameters@ nested settings.
 data Parameters s = Parameters'
-    { _parameterName  :: TF.Attr s P.Text
+    { _parameterName :: TF.Attr s P.Text
     -- ^ @parameter_name@ - (Required)
     --
     , _parameterValue :: TF.Attr s P.Text
@@ -13999,10 +13999,10 @@ data Step s = Step'
     { _actionOnFailure :: TF.Attr s P.Text
     -- ^ @action_on_failure@ - (Required)
     --
-    , _hadoopJarStep   :: TF.Attr s (HadoopJarStep s)
+    , _hadoopJarStep :: TF.Attr s (HadoopJarStep s)
     -- ^ @hadoop_jar_step@ - (Required)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -14069,16 +14069,16 @@ instance TF.IsValid (SseS3 s) where
 
 -- | @s3_import@ nested settings.
 data S3Import s = S3Import'
-    { _bucketName          :: TF.Attr s P.Text
+    { _bucketName :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required)
     --
-    , _bucketPrefix        :: TF.Attr s P.Text
+    , _bucketPrefix :: TF.Attr s P.Text
     -- ^ @bucket_prefix@ - (Optional)
     --
-    , _ingestionRole       :: TF.Attr s P.Text
+    , _ingestionRole :: TF.Attr s P.Text
     -- ^ @ingestion_role@ - (Required)
     --
-    , _sourceEngine        :: TF.Attr s P.Text
+    , _sourceEngine :: TF.Attr s P.Text
     -- ^ @source_engine@ - (Required)
     --
     , _sourceEngineVersion :: TF.Attr s P.Text
@@ -14242,31 +14242,31 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (DefaultAction s)) (TF.Attr s P.
 
 -- | @lambda_config@ nested settings.
 data LambdaConfig s = LambdaConfig'
-    { _createAuthChallenge         :: TF.Attr s P.Text
+    { _createAuthChallenge :: TF.Attr s P.Text
     -- ^ @create_auth_challenge@ - (Optional)
     --
-    , _customMessage               :: TF.Attr s P.Text
+    , _customMessage :: TF.Attr s P.Text
     -- ^ @custom_message@ - (Optional)
     --
-    , _defineAuthChallenge         :: TF.Attr s P.Text
+    , _defineAuthChallenge :: TF.Attr s P.Text
     -- ^ @define_auth_challenge@ - (Optional)
     --
-    , _postAuthentication          :: TF.Attr s P.Text
+    , _postAuthentication :: TF.Attr s P.Text
     -- ^ @post_authentication@ - (Optional)
     --
-    , _postConfirmation            :: TF.Attr s P.Text
+    , _postConfirmation :: TF.Attr s P.Text
     -- ^ @post_confirmation@ - (Optional)
     --
-    , _preAuthentication           :: TF.Attr s P.Text
+    , _preAuthentication :: TF.Attr s P.Text
     -- ^ @pre_authentication@ - (Optional)
     --
-    , _preSignUp                   :: TF.Attr s P.Text
+    , _preSignUp :: TF.Attr s P.Text
     -- ^ @pre_sign_up@ - (Optional)
     --
-    , _preTokenGeneration          :: TF.Attr s P.Text
+    , _preTokenGeneration :: TF.Attr s P.Text
     -- ^ @pre_token_generation@ - (Optional)
     --
-    , _userMigration               :: TF.Attr s P.Text
+    , _userMigration :: TF.Attr s P.Text
     -- ^ @user_migration@ - (Optional)
     --
     , _verifyAuthChallengeResponse :: TF.Attr s P.Text
@@ -14390,7 +14390,7 @@ instance s ~ s' => P.HasComputedS3BucketName (TF.Ref s' (CrlConfiguration s)) (T
 
 -- | @targets@ nested settings.
 data Targets s = Targets'
-    { _key    :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -14434,7 +14434,7 @@ data OutputLocation s = OutputLocation'
     { _s3BucketName :: TF.Attr s P.Text
     -- ^ @s3_bucket_name@ - (Required)
     --
-    , _s3KeyPrefix  :: TF.Attr s P.Text
+    , _s3KeyPrefix :: TF.Attr s P.Text
     -- ^ @s3_key_prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -14471,16 +14471,16 @@ instance P.HasS3KeyPrefix (OutputLocation s) (TF.Attr s P.Text) where
 
 -- | @mapping_rule@ nested settings.
 data MappingRule s = MappingRule'
-    { _claim     :: TF.Attr s P.Text
+    { _claim :: TF.Attr s P.Text
     -- ^ @claim@ - (Required)
     --
     , _matchType :: TF.Attr s P.Text
     -- ^ @match_type@ - (Required)
     --
-    , _roleArn   :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _value     :: TF.Attr s P.Text
+    , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -14598,19 +14598,19 @@ instance P.HasDeserializer (InputFormatConfiguration s) (TF.Attr s (Deserializer
 
 -- | @kerberos_attributes@ nested settings.
 data KerberosAttributes s = KerberosAttributes'
-    { _adDomainJoinPassword             :: TF.Attr s P.Text
+    { _adDomainJoinPassword :: TF.Attr s P.Text
     -- ^ @ad_domain_join_password@ - (Optional)
     --
-    , _adDomainJoinUser                 :: TF.Attr s P.Text
+    , _adDomainJoinUser :: TF.Attr s P.Text
     -- ^ @ad_domain_join_user@ - (Optional)
     --
     , _crossRealmTrustPrincipalPassword :: TF.Attr s P.Text
     -- ^ @cross_realm_trust_principal_password@ - (Optional)
     --
-    , _kdcAdminPassword                 :: TF.Attr s P.Text
+    , _kdcAdminPassword :: TF.Attr s P.Text
     -- ^ @kdc_admin_password@ - (Required)
     --
-    , _realm                            :: TF.Attr s P.Text
+    , _realm :: TF.Attr s P.Text
     -- ^ @realm@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -14709,7 +14709,7 @@ instance P.HasType' (PlacementStrategy s) (TF.Attr s P.Text) where
 
 -- | @deserializer@ nested settings.
 data Deserializer s = Deserializer'
-    { _hiveJsonSerDe  :: TF.Attr s (HiveJsonSerDe s)
+    { _hiveJsonSerDe :: TF.Attr s (HiveJsonSerDe s)
     -- ^ @hive_json_ser_de@ - (Optional)
     --
     -- Conflicts with:
@@ -14773,10 +14773,10 @@ instance P.HasOpenXJsonSerDe (Deserializer s) (TF.Attr s (OpenXJsonSerDe s)) whe
 
 -- | @source@ nested settings.
 data Source s = Source'
-    { _owner            :: TF.Attr s P.Text
+    { _owner :: TF.Attr s P.Text
     -- ^ @owner@ - (Required)
     --
-    , _sourceDetail     :: TF.Attr s [TF.Attr s (SourceDetail s)]
+    , _sourceDetail :: TF.Attr s [TF.Attr s (SourceDetail s)]
     -- ^ @source_detail@ - (Optional)
     --
     , _sourceIdentifier :: TF.Attr s P.Text
@@ -14831,10 +14831,10 @@ data Columns s = Columns'
     { _comment :: TF.Attr s P.Text
     -- ^ @comment@ - (Optional)
     --
-    , _name    :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _type'   :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -14878,16 +14878,16 @@ instance P.HasType' (Columns s) (TF.Attr s P.Text) where
 
 -- | @dag_node@ nested settings.
 data DagNode s = DagNode'
-    { _args       :: TF.Attr s (P.NonEmpty (TF.Attr s (Args s)))
+    { _args :: TF.Attr s (P.NonEmpty (TF.Attr s (Args s)))
     -- ^ @args@ - (Required)
     --
-    , _id         :: TF.Attr s P.Text
+    , _id :: TF.Attr s P.Text
     -- ^ @id@ - (Required)
     --
     , _lineNumber :: TF.Attr s P.Integer
     -- ^ @line_number@ - (Optional)
     --
-    , _nodeType   :: TF.Attr s P.Text
+    , _nodeType :: TF.Attr s P.Text
     -- ^ @node_type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -14944,37 +14944,37 @@ instance P.HasNodeType (DagNode s) (TF.Attr s P.Text) where
 
 -- | @storage_descriptor@ nested settings.
 data StorageDescriptor s = StorageDescriptor'
-    { _bucketColumns          :: TF.Attr s [TF.Attr s P.Text]
+    { _bucketColumns :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @bucket_columns@ - (Optional)
     --
-    , _columns                :: TF.Attr s [TF.Attr s (Columns s)]
+    , _columns :: TF.Attr s [TF.Attr s (Columns s)]
     -- ^ @columns@ - (Optional)
     --
-    , _compressed             :: TF.Attr s P.Bool
+    , _compressed :: TF.Attr s P.Bool
     -- ^ @compressed@ - (Optional)
     --
-    , _inputFormat            :: TF.Attr s P.Text
+    , _inputFormat :: TF.Attr s P.Text
     -- ^ @input_format@ - (Optional)
     --
-    , _location               :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Optional)
     --
-    , _numberOfBuckets        :: TF.Attr s P.Integer
+    , _numberOfBuckets :: TF.Attr s P.Integer
     -- ^ @number_of_buckets@ - (Optional)
     --
-    , _outputFormat           :: TF.Attr s P.Text
+    , _outputFormat :: TF.Attr s P.Text
     -- ^ @output_format@ - (Optional)
     --
-    , _parameters             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @parameters@ - (Optional)
     --
-    , _serDeInfo              :: TF.Attr s (SerDeInfo s)
+    , _serDeInfo :: TF.Attr s (SerDeInfo s)
     -- ^ @ser_de_info@ - (Optional)
     --
-    , _skewedInfo             :: TF.Attr s (SkewedInfo s)
+    , _skewedInfo :: TF.Attr s (SkewedInfo s)
     -- ^ @skewed_info@ - (Optional)
     --
-    , _sortColumns            :: TF.Attr s [TF.Attr s (SortColumns s)]
+    , _sortColumns :: TF.Attr s [TF.Attr s (SortColumns s)]
     -- ^ @sort_columns@ - (Optional)
     --
     , _storedAsSubDirectories :: TF.Attr s P.Bool
@@ -15129,7 +15129,7 @@ instance P.HasTopicArn (SnsDestination s) (TF.Attr s P.Text) where
 
 -- | @instance_market_options@ nested settings.
 data InstanceMarketOptions s = InstanceMarketOptions'
-    { _marketType  :: TF.Attr s P.Text
+    { _marketType :: TF.Attr s P.Text
     -- ^ @market_type@ - (Optional)
     --
     , _spotOptions :: TF.Attr s (SpotOptions s)
@@ -15172,31 +15172,31 @@ instance P.HasSpotOptions (InstanceMarketOptions s) (TF.Attr s (SpotOptions s)) 
 
 -- | @egress@ nested settings.
 data Egress s = Egress'
-    { _cidrBlocks     :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_blocks@ - (Optional)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _fromPort       :: TF.Attr s P.Integer
+    , _fromPort :: TF.Attr s P.Integer
     -- ^ @from_port@ - (Required)
     --
     , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv6_cidr_blocks@ - (Optional)
     --
-    , _prefixListIds  :: TF.Attr s [TF.Attr s P.Text]
+    , _prefixListIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @prefix_list_ids@ - (Optional)
     --
-    , _protocol       :: TF.Attr s P.Text
+    , _protocol :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
     , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Optional)
     --
-    , _self           :: TF.Attr s P.Bool
+    , _self :: TF.Attr s P.Bool
     -- ^ @self@ - (Optional)
     --
-    , _toPort         :: TF.Attr s P.Integer
+    , _toPort :: TF.Attr s P.Integer
     -- ^ @to_port@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15284,22 +15284,22 @@ instance P.HasToPort (Egress s) (TF.Attr s P.Integer) where
 
 -- | @custom_origin_config@ nested settings.
 data CustomOriginConfig s = CustomOriginConfig'
-    { _httpPort               :: TF.Attr s P.Integer
+    { _httpPort :: TF.Attr s P.Integer
     -- ^ @http_port@ - (Required)
     --
-    , _httpsPort              :: TF.Attr s P.Integer
+    , _httpsPort :: TF.Attr s P.Integer
     -- ^ @https_port@ - (Required)
     --
     , _originKeepaliveTimeout :: TF.Attr s P.Integer
     -- ^ @origin_keepalive_timeout@ - (Optional)
     --
-    , _originProtocolPolicy   :: TF.Attr s P.Text
+    , _originProtocolPolicy :: TF.Attr s P.Text
     -- ^ @origin_protocol_policy@ - (Required)
     --
-    , _originReadTimeout      :: TF.Attr s P.Integer
+    , _originReadTimeout :: TF.Attr s P.Integer
     -- ^ @origin_read_timeout@ - (Optional)
     --
-    , _originSslProtocols     :: TF.Attr s [TF.Attr s P.Text]
+    , _originSslProtocols :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @origin_ssl_protocols@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15367,7 +15367,7 @@ instance P.HasOriginSslProtocols (CustomOriginConfig s) (TF.Attr s [TF.Attr s P.
 
 -- | @sql_injection_match_tuple@ nested settings.
 data SqlInjectionMatchTuple s = SqlInjectionMatchTuple'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
     , _textTransformation :: TF.Attr s P.Text
@@ -15412,7 +15412,7 @@ instance P.HasTextTransformation (SqlInjectionMatchTuple s) (TF.Attr s P.Text) w
 
 -- | @filter@ nested settings.
 data Filter s = Filter'
-    { _name   :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -15453,13 +15453,13 @@ instance P.HasValues (Filter s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @conditions@ nested settings.
 data Conditions s = Conditions'
-    { _jobName         :: TF.Attr s P.Text
+    { _jobName :: TF.Attr s P.Text
     -- ^ @job_name@ - (Required)
     --
     , _logicalOperator :: TF.Attr s P.Text
     -- ^ @logical_operator@ - (Optional)
     --
-    , _state           :: TF.Attr s P.Text
+    , _state :: TF.Attr s P.Text
     -- ^ @state@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15510,7 +15510,7 @@ data AccountAggregationSource s = AccountAggregationSource'
     , _allRegions :: TF.Attr s P.Bool
     -- ^ @all_regions@ - (Optional)
     --
-    , _regions    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _regions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @regions@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15557,7 +15557,7 @@ data Permissions s = Permissions'
     { _accountIds :: TF.Attr s P.Text
     -- ^ @account_ids@ - (Required)
     --
-    , _type'      :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15638,7 +15638,7 @@ data SubnetMapping s = SubnetMapping'
     { _allocationId :: TF.Attr s P.Text
     -- ^ @allocation_id@ - (Optional)
     --
-    , _subnetId     :: TF.Attr s P.Text
+    , _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15675,7 +15675,7 @@ instance P.HasSubnetId (SubnetMapping s) (TF.Attr s P.Text) where
 
 -- | @viewer_certificate@ nested settings.
 data ViewerCertificate s = ViewerCertificate'
-    { _acmCertificateArn            :: TF.Attr s P.Text
+    { _acmCertificateArn :: TF.Attr s P.Text
     -- ^ @acm_certificate_arn@ - (Optional)
     --
     -- Conflicts with:
@@ -15689,17 +15689,17 @@ data ViewerCertificate s = ViewerCertificate'
     --
     -- * 'iamCertificateId'
     -- * 'acmCertificateArn'
-    , _iamCertificateId             :: TF.Attr s P.Text
+    , _iamCertificateId :: TF.Attr s P.Text
     -- ^ @iam_certificate_id@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'cloudfrontDefaultCertificate'
     -- * 'acmCertificateArn'
-    , _minimumProtocolVersion       :: TF.Attr s P.Text
+    , _minimumProtocolVersion :: TF.Attr s P.Text
     -- ^ @minimum_protocol_version@ - (Optional)
     --
-    , _sslSupportMethod             :: TF.Attr s P.Text
+    , _sslSupportMethod :: TF.Attr s P.Text
     -- ^ @ssl_support_method@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15772,7 +15772,7 @@ instance P.HasSslSupportMethod (ViewerCertificate s) (TF.Attr s P.Text) where
 
 -- | @xss_match_tuples@ nested settings.
 data XssMatchTuples s = XssMatchTuples'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
     , _textTransformation :: TF.Attr s P.Text
@@ -15817,19 +15817,19 @@ instance P.HasTextTransformation (XssMatchTuples s) (TF.Attr s P.Text) where
 
 -- | @trigger@ nested settings.
 data Trigger s = Trigger'
-    { _branches       :: TF.Attr s [TF.Attr s P.Text]
+    { _branches :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @branches@ - (Optional)
     --
-    , _customData     :: TF.Attr s P.Text
+    , _customData :: TF.Attr s P.Text
     -- ^ @custom_data@ - (Optional)
     --
     , _destinationArn :: TF.Attr s P.Text
     -- ^ @destination_arn@ - (Required)
     --
-    , _events         :: TF.Attr s [TF.Attr s P.Text]
+    , _events :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @events@ - (Required)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -15889,22 +15889,22 @@ instance P.HasName (Trigger s) (TF.Attr s P.Text) where
 
 -- | @endpoints@ nested settings.
 data Endpoints = Endpoints'
-    { _acm              :: P.Maybe P.Text
+    { _acm :: P.Maybe P.Text
     -- ^ @acm@ - (Optional)
     --
-    , _apigateway       :: P.Maybe P.Text
+    , _apigateway :: P.Maybe P.Text
     -- ^ @apigateway@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _autoscaling      :: P.Maybe P.Text
+    , _autoscaling :: P.Maybe P.Text
     -- ^ @autoscaling@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _cloudformation   :: P.Maybe P.Text
+    , _cloudformation :: P.Maybe P.Text
     -- ^ @cloudformation@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _cloudwatch       :: P.Maybe P.Text
+    , _cloudwatch :: P.Maybe P.Text
     -- ^ @cloudwatch@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
@@ -15912,82 +15912,82 @@ data Endpoints = Endpoints'
     -- ^ @cloudwatchevents@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _cloudwatchlogs   :: P.Maybe P.Text
+    , _cloudwatchlogs :: P.Maybe P.Text
     -- ^ @cloudwatchlogs@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _devicefarm       :: P.Maybe P.Text
+    , _devicefarm :: P.Maybe P.Text
     -- ^ @devicefarm@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _dynamodb         :: P.Maybe P.Text
+    , _dynamodb :: P.Maybe P.Text
     -- ^ @dynamodb@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     -- It's typically used to connect to dynamodb-local.
     --
-    , _ec2              :: P.Maybe P.Text
+    , _ec2 :: P.Maybe P.Text
     -- ^ @ec2@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _ecr              :: P.Maybe P.Text
+    , _ecr :: P.Maybe P.Text
     -- ^ @ecr@ - (Optional)
     --
-    , _ecs              :: P.Maybe P.Text
+    , _ecs :: P.Maybe P.Text
     -- ^ @ecs@ - (Optional)
     --
-    , _efs              :: P.Maybe P.Text
+    , _efs :: P.Maybe P.Text
     -- ^ @efs@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _elb              :: P.Maybe P.Text
+    , _elb :: P.Maybe P.Text
     -- ^ @elb@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _es               :: P.Maybe P.Text
+    , _es :: P.Maybe P.Text
     -- ^ @es@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _iam              :: P.Maybe P.Text
+    , _iam :: P.Maybe P.Text
     -- ^ @iam@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _kinesis          :: P.Maybe P.Text
+    , _kinesis :: P.Maybe P.Text
     -- ^ @kinesis@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     -- It's typically used to connect to kinesalite.
     --
-    , _kms              :: P.Maybe P.Text
+    , _kms :: P.Maybe P.Text
     -- ^ @kms@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _lambda           :: P.Maybe P.Text
+    , _lambda :: P.Maybe P.Text
     -- ^ @lambda@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`
     --
-    , _r53              :: P.Maybe P.Text
+    , _r53 :: P.Maybe P.Text
     -- ^ @r53@ - (Optional)
     --
-    , _rds              :: P.Maybe P.Text
+    , _rds :: P.Maybe P.Text
     -- ^ @rds@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _s3               :: P.Maybe P.Text
+    , _s3 :: P.Maybe P.Text
     -- ^ @s3@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _sns              :: P.Maybe P.Text
+    , _sns :: P.Maybe P.Text
     -- ^ @sns@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _sqs              :: P.Maybe P.Text
+    , _sqs :: P.Maybe P.Text
     -- ^ @sqs@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _ssm              :: P.Maybe P.Text
+    , _ssm :: P.Maybe P.Text
     -- ^ @ssm@ - (Optional)
     -- Use this to override the default endpoint URL constructed from the `region`.
     --
-    , _sts              :: P.Maybe P.Text
+    , _sts :: P.Maybe P.Text
     -- ^ @sts@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16194,13 +16194,13 @@ data CustomErrorResponse s = CustomErrorResponse'
     { _errorCachingMinTtl :: TF.Attr s P.Integer
     -- ^ @error_caching_min_ttl@ - (Optional)
     --
-    , _errorCode          :: TF.Attr s P.Integer
+    , _errorCode :: TF.Attr s P.Integer
     -- ^ @error_code@ - (Required)
     --
-    , _responseCode       :: TF.Attr s P.Integer
+    , _responseCode :: TF.Attr s P.Integer
     -- ^ @response_code@ - (Optional)
     --
-    , _responsePagePath   :: TF.Attr s P.Text
+    , _responsePagePath :: TF.Attr s P.Text
     -- ^ @response_page_path@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16254,10 +16254,10 @@ data Kinesis s = Kinesis'
     { _partitionKey :: TF.Attr s P.Text
     -- ^ @partition_key@ - (Optional)
     --
-    , _roleArn      :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _streamName   :: TF.Attr s P.Text
+    , _streamName :: TF.Attr s P.Text
     -- ^ @stream_name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16305,10 +16305,10 @@ data S3 s = S3'
     { _bucketName :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required)
     --
-    , _key        :: TF.Attr s P.Text
+    , _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
-    , _roleArn    :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16528,19 +16528,19 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcConfig s)) (TF.Attr s P.Tex
 
 -- | @step_scaling_policy_configuration@ nested settings.
 data StepScalingPolicyConfiguration s = StepScalingPolicyConfiguration'
-    { _adjustmentType         :: TF.Attr s P.Text
+    { _adjustmentType :: TF.Attr s P.Text
     -- ^ @adjustment_type@ - (Optional)
     --
-    , _cooldown               :: TF.Attr s P.Integer
+    , _cooldown :: TF.Attr s P.Integer
     -- ^ @cooldown@ - (Optional)
     --
-    , _metricAggregationType  :: TF.Attr s P.Text
+    , _metricAggregationType :: TF.Attr s P.Text
     -- ^ @metric_aggregation_type@ - (Optional)
     --
     , _minAdjustmentMagnitude :: TF.Attr s P.Integer
     -- ^ @min_adjustment_magnitude@ - (Optional)
     --
-    , _stepAdjustment         :: TF.Attr s [TF.Attr s (StepAdjustment s)]
+    , _stepAdjustment :: TF.Attr s [TF.Attr s (StepAdjustment s)]
     -- ^ @step_adjustment@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16604,22 +16604,22 @@ data SplunkConfiguration s = SplunkConfiguration'
     { _hecAcknowledgmentTimeout :: TF.Attr s P.Integer
     -- ^ @hec_acknowledgment_timeout@ - (Optional)
     --
-    , _hecEndpoint              :: TF.Attr s P.Text
+    , _hecEndpoint :: TF.Attr s P.Text
     -- ^ @hec_endpoint@ - (Required)
     --
-    , _hecEndpointType          :: TF.Attr s P.Text
+    , _hecEndpointType :: TF.Attr s P.Text
     -- ^ @hec_endpoint_type@ - (Optional)
     --
-    , _hecToken                 :: TF.Attr s P.Text
+    , _hecToken :: TF.Attr s P.Text
     -- ^ @hec_token@ - (Required)
     --
-    , _processingConfiguration  :: TF.Attr s (ProcessingConfiguration s)
+    , _processingConfiguration :: TF.Attr s (ProcessingConfiguration s)
     -- ^ @processing_configuration@ - (Optional)
     --
-    , _retryDuration            :: TF.Attr s P.Integer
+    , _retryDuration :: TF.Attr s P.Integer
     -- ^ @retry_duration@ - (Optional)
     --
-    , _s3BackupMode             :: TF.Attr s P.Text
+    , _s3BackupMode :: TF.Attr s P.Text
     -- ^ @s3_backup_mode@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16702,16 +16702,16 @@ data CustomizedMetricSpecification s = CustomizedMetricSpecification'
     { _metricDimension :: TF.Attr s [TF.Attr s (MetricDimension s)]
     -- ^ @metric_dimension@ - (Optional)
     --
-    , _metricName      :: TF.Attr s P.Text
+    , _metricName :: TF.Attr s P.Text
     -- ^ @metric_name@ - (Required)
     --
-    , _namespace       :: TF.Attr s P.Text
+    , _namespace :: TF.Attr s P.Text
     -- ^ @namespace@ - (Required)
     --
-    , _statistic       :: TF.Attr s P.Text
+    , _statistic :: TF.Attr s P.Text
     -- ^ @statistic@ - (Required)
     --
-    , _unit            :: TF.Attr s P.Text
+    , _unit :: TF.Attr s P.Text
     -- ^ @unit@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -16973,7 +16973,7 @@ instance P.HasTargetValue (TargetTrackingScalingPolicyConfiguration s) (TF.Attr 
 
 -- | @xss_match_tuple@ nested settings.
 data XssMatchTuple s = XssMatchTuple'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
     , _textTransformation :: TF.Attr s P.Text
@@ -17048,7 +17048,7 @@ instance P.HasAutomatedSnapshotStartHour (SnapshotOptions s) (TF.Attr s P.Intege
 
 -- | @custom_header@ nested settings.
 data CustomHeader s = CustomHeader'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _value :: TF.Attr s P.Text
@@ -17089,7 +17089,7 @@ instance P.HasValue (CustomHeader s) (TF.Attr s P.Text) where
 
 -- | @dimensions@ nested settings.
 data Dimensions s = Dimensions'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _value :: TF.Attr s P.Text
@@ -17130,34 +17130,34 @@ instance P.HasValue (Dimensions s) (TF.Attr s P.Text) where
 
 -- | @orc_ser_de@ nested settings.
 data OrcSerDe s = OrcSerDe'
-    { _blockSizeBytes                      :: TF.Attr s P.Integer
+    { _blockSizeBytes :: TF.Attr s P.Integer
     -- ^ @block_size_bytes@ - (Optional)
     --
-    , _bloomFilterColumns                  :: TF.Attr s [TF.Attr s P.Text]
+    , _bloomFilterColumns :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @bloom_filter_columns@ - (Optional)
     --
     , _bloomFilterFalsePositiveProbability :: TF.Attr s P.Double
     -- ^ @bloom_filter_false_positive_probability@ - (Optional)
     --
-    , _compression                         :: TF.Attr s P.Text
+    , _compression :: TF.Attr s P.Text
     -- ^ @compression@ - (Optional)
     --
-    , _dictionaryKeyThreshold              :: TF.Attr s P.Double
+    , _dictionaryKeyThreshold :: TF.Attr s P.Double
     -- ^ @dictionary_key_threshold@ - (Optional)
     --
-    , _enablePadding                       :: TF.Attr s P.Bool
+    , _enablePadding :: TF.Attr s P.Bool
     -- ^ @enable_padding@ - (Optional)
     --
-    , _formatVersion                       :: TF.Attr s P.Text
+    , _formatVersion :: TF.Attr s P.Text
     -- ^ @format_version@ - (Optional)
     --
-    , _paddingTolerance                    :: TF.Attr s P.Double
+    , _paddingTolerance :: TF.Attr s P.Double
     -- ^ @padding_tolerance@ - (Optional)
     --
-    , _rowIndexStride                      :: TF.Attr s P.Integer
+    , _rowIndexStride :: TF.Attr s P.Integer
     -- ^ @row_index_stride@ - (Optional)
     --
-    , _stripeSizeBytes                     :: TF.Attr s P.Integer
+    , _stripeSizeBytes :: TF.Attr s P.Integer
     -- ^ @stripe_size_bytes@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -17249,7 +17249,7 @@ instance P.HasStripeSizeBytes (OrcSerDe s) (TF.Attr s P.Integer) where
 
 -- | @policy_attribute@ nested settings.
 data PolicyAttribute s = PolicyAttribute'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _value :: TF.Attr s P.Text
@@ -17294,13 +17294,13 @@ data AppSource s = AppSource'
     , _revision :: TF.Attr s P.Text
     -- ^ @revision@ - (Optional)
     --
-    , _sshKey   :: TF.Attr s P.Text
+    , _sshKey :: TF.Attr s P.Text
     -- ^ @ssh_key@ - (Optional)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _url      :: TF.Attr s P.Text
+    , _url :: TF.Attr s P.Text
     -- ^ @url@ - (Optional)
     --
     , _username :: TF.Attr s P.Text
@@ -17368,7 +17368,7 @@ instance P.HasUsername (AppSource s) (TF.Attr s P.Text) where
 
 -- | @metric_dimension@ nested settings.
 data MetricDimension s = MetricDimension'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _value :: TF.Attr s P.Text
@@ -17409,7 +17409,7 @@ instance P.HasValue (MetricDimension s) (TF.Attr s P.Text) where
 
 -- | @kinesis_destination@ nested settings.
 data KinesisDestination s = KinesisDestination'
-    { _roleArn   :: TF.Attr s P.Text
+    { _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     , _streamArn :: TF.Attr s P.Text
@@ -17453,13 +17453,13 @@ data S3Destination s = S3Destination'
     { _bucketName :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required)
     --
-    , _kmsKeyArn  :: TF.Attr s P.Text
+    , _kmsKeyArn :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
-    , _prefix     :: TF.Attr s P.Text
+    , _prefix :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
-    , _region     :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required)
     --
     , _syncFormat :: TF.Attr s P.Text
@@ -17521,7 +17521,7 @@ instance P.HasSyncFormat (S3Destination s) (TF.Attr s P.Text) where
 
 -- | @cloudwatch_metric@ nested settings.
 data CloudwatchMetric s = CloudwatchMetric'
-    { _metricName      :: TF.Attr s P.Text
+    { _metricName :: TF.Attr s P.Text
     -- ^ @metric_name@ - (Required)
     --
     , _metricNamespace :: TF.Attr s P.Text
@@ -17530,13 +17530,13 @@ data CloudwatchMetric s = CloudwatchMetric'
     , _metricTimestamp :: TF.Attr s P.Text
     -- ^ @metric_timestamp@ - (Optional)
     --
-    , _metricUnit      :: TF.Attr s P.Text
+    , _metricUnit :: TF.Attr s P.Text
     -- ^ @metric_unit@ - (Required)
     --
-    , _metricValue     :: TF.Attr s P.Text
+    , _metricValue :: TF.Attr s P.Text
     -- ^ @metric_value@ - (Required)
     --
-    , _roleArn         :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -17605,22 +17605,22 @@ instance P.HasRoleArn (CloudwatchMetric s) (TF.Attr s P.Text) where
 
 -- | @parquet_ser_de@ nested settings.
 data ParquetSerDe s = ParquetSerDe'
-    { _blockSizeBytes              :: TF.Attr s P.Integer
+    { _blockSizeBytes :: TF.Attr s P.Integer
     -- ^ @block_size_bytes@ - (Optional)
     --
-    , _compression                 :: TF.Attr s P.Text
+    , _compression :: TF.Attr s P.Text
     -- ^ @compression@ - (Optional)
     --
     , _enableDictionaryCompression :: TF.Attr s P.Bool
     -- ^ @enable_dictionary_compression@ - (Optional)
     --
-    , _maxPaddingBytes             :: TF.Attr s P.Integer
+    , _maxPaddingBytes :: TF.Attr s P.Integer
     -- ^ @max_padding_bytes@ - (Optional)
     --
-    , _pageSizeBytes               :: TF.Attr s P.Integer
+    , _pageSizeBytes :: TF.Attr s P.Integer
     -- ^ @page_size_bytes@ - (Optional)
     --
-    , _writerVersion               :: TF.Attr s P.Text
+    , _writerVersion :: TF.Attr s P.Text
     -- ^ @writer_version@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -17725,19 +17725,19 @@ instance P.HasValue (GeoMatchConstraint s) (TF.Attr s P.Text) where
 
 -- | @option@ nested settings.
 data Option s = Option'
-    { _dbSecurityGroupMemberships  :: TF.Attr s [TF.Attr s P.Text]
+    { _dbSecurityGroupMemberships :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @db_security_group_memberships@ - (Optional)
     --
-    , _optionName                  :: TF.Attr s P.Text
+    , _optionName :: TF.Attr s P.Text
     -- ^ @option_name@ - (Required)
     --
-    , _optionSettings              :: TF.Attr s [TF.Attr s (OptionSettings s)]
+    , _optionSettings :: TF.Attr s [TF.Attr s (OptionSettings s)]
     -- ^ @option_settings@ - (Optional)
     --
-    , _port                        :: TF.Attr s P.Integer
+    , _port :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
     --
-    , _version                     :: TF.Attr s P.Text
+    , _version :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
     , _vpcSecurityGroupMemberships :: TF.Attr s [TF.Attr s P.Text]
@@ -17809,7 +17809,7 @@ instance P.HasVpcSecurityGroupMemberships (Option s) (TF.Attr s [TF.Attr s P.Tex
 
 -- | @ecs_target@ nested settings.
 data EcsTarget s = EcsTarget'
-    { _taskCount         :: TF.Attr s P.Integer
+    { _taskCount :: TF.Attr s P.Integer
     -- ^ @task_count@ - (Optional)
     --
     , _taskDefinitionArn :: TF.Attr s P.Text
@@ -17878,10 +17878,10 @@ instance s ~ s' => P.HasComputedResourceRecordValue (TF.Ref s' (DomainValidation
 
 -- | @cloudwatch_logging_options@ nested settings.
 data CloudwatchLoggingOptions s = CloudwatchLoggingOptions'
-    { _enabled       :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _logGroupName  :: TF.Attr s P.Text
+    , _logGroupName :: TF.Attr s P.Text
     -- ^ @log_group_name@ - (Optional)
     --
     , _logStreamName :: TF.Attr s P.Text
@@ -17927,13 +17927,13 @@ instance P.HasLogStreamName (CloudwatchLoggingOptions s) (TF.Attr s P.Text) wher
 
 -- | @cloudwatch_destination@ nested settings.
 data CloudwatchDestination s = CloudwatchDestination'
-    { _defaultValue  :: TF.Attr s P.Text
+    { _defaultValue :: TF.Attr s P.Text
     -- ^ @default_value@ - (Required)
     --
     , _dimensionName :: TF.Attr s P.Text
     -- ^ @dimension_name@ - (Required)
     --
-    , _valueSource   :: TF.Attr s P.Text
+    , _valueSource :: TF.Attr s P.Text
     -- ^ @value_source@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -17982,16 +17982,16 @@ data Elasticsearch s = Elasticsearch'
     { _endpoint :: TF.Attr s P.Text
     -- ^ @endpoint@ - (Required)
     --
-    , _id       :: TF.Attr s P.Text
+    , _id :: TF.Attr s P.Text
     -- ^ @id@ - (Required)
     --
-    , _index    :: TF.Attr s P.Text
+    , _index :: TF.Attr s P.Text
     -- ^ @index@ - (Required)
     --
-    , _roleArn  :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -18056,7 +18056,7 @@ data EmailConfiguration s = EmailConfiguration'
     { _replyToEmailAddress :: TF.Attr s P.Text
     -- ^ @reply_to_email_address@ - (Optional)
     --
-    , _sourceArn           :: TF.Attr s P.Text
+    , _sourceArn :: TF.Attr s P.Text
     -- ^ @source_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -18191,10 +18191,10 @@ instance s ~ s' => P.HasComputedPort (TF.Ref s' (Nodes s)) (TF.Attr s P.Integer)
 
 -- | @condition@ nested settings.
 data Condition s = Condition'
-    { _test     :: TF.Attr s P.Text
+    { _test :: TF.Attr s P.Text
     -- ^ @test@ - (Required)
     --
-    , _values   :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @values@ - (Required)
     --
     , _variable :: TF.Attr s P.Text
@@ -18294,22 +18294,22 @@ instance P.HasPath (BootstrapAction s) (TF.Attr s P.Text) where
 
 -- | @initial_lifecycle_hook@ nested settings.
 data InitialLifecycleHook s = InitialLifecycleHook'
-    { _heartbeatTimeout      :: TF.Attr s P.Integer
+    { _heartbeatTimeout :: TF.Attr s P.Integer
     -- ^ @heartbeat_timeout@ - (Optional)
     --
-    , _lifecycleTransition   :: TF.Attr s P.Text
+    , _lifecycleTransition :: TF.Attr s P.Text
     -- ^ @lifecycle_transition@ - (Required)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _notificationMetadata  :: TF.Attr s P.Text
+    , _notificationMetadata :: TF.Attr s P.Text
     -- ^ @notification_metadata@ - (Optional)
     --
     , _notificationTargetArn :: TF.Attr s P.Text
     -- ^ @notification_target_arn@ - (Optional)
     --
-    , _roleArn               :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -18593,10 +18593,10 @@ instance P.HasViewerProtocolPolicy (DefaultCacheBehavior s) (TF.Attr s P.Text) w
 
 -- | @content_config_permissions@ nested settings.
 data ContentConfigPermissions s = ContentConfigPermissions'
-    { _access      :: TF.Attr s [TF.Attr s P.Text]
+    { _access :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @access@ - (Optional)
     --
-    , _grantee     :: TF.Attr s P.Text
+    , _grantee :: TF.Attr s P.Text
     -- ^ @grantee@ - (Optional)
     --
     , _granteeType :: TF.Attr s P.Text
@@ -18744,13 +18744,13 @@ instance P.HasOriginAccessIdentity (S3OriginConfig s) (TF.Attr s P.Text) where
 
 -- | @hadoop_jar_step@ nested settings.
 data HadoopJarStep s = HadoopJarStep'
-    { _args       :: TF.Attr s [TF.Attr s P.Text]
+    { _args :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @args@ - (Optional)
     --
-    , _jar        :: TF.Attr s P.Text
+    , _jar :: TF.Attr s P.Text
     -- ^ @jar@ - (Required)
     --
-    , _mainClass  :: TF.Attr s P.Text
+    , _mainClass :: TF.Attr s P.Text
     -- ^ @main_class@ - (Optional)
     --
     , _properties :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -18853,16 +18853,16 @@ instance P.HasAllowVpcToRemoteClassicLink (Requester s) (TF.Attr s P.Bool) where
 
 -- | @notifications@ nested settings.
 data Notifications s = Notifications'
-    { _completed   :: TF.Attr s P.Text
+    { _completed :: TF.Attr s P.Text
     -- ^ @completed@ - (Optional)
     --
-    , _error       :: TF.Attr s P.Text
+    , _error :: TF.Attr s P.Text
     -- ^ @error@ - (Optional)
     --
     , _progressing :: TF.Attr s P.Text
     -- ^ @progressing@ - (Optional)
     --
-    , _warning     :: TF.Attr s P.Text
+    , _warning :: TF.Attr s P.Text
     -- ^ @warning@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -18912,10 +18912,10 @@ instance P.HasWarning (Notifications s) (TF.Attr s P.Text) where
 
 -- | @dag_edge@ nested settings.
 data DagEdge s = DagEdge'
-    { _source          :: TF.Attr s P.Text
+    { _source :: TF.Attr s P.Text
     -- ^ @source@ - (Required)
     --
-    , _target          :: TF.Attr s P.Text
+    , _target :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
     , _targetParameter :: TF.Attr s P.Text
@@ -18983,25 +18983,25 @@ instance s ~ s' => P.HasComputedAutomaticallyAfterDays (TF.Ref s' (RotationRules
 
 -- | @s3_backup_configuration@ nested settings.
 data S3BackupConfiguration s = S3BackupConfiguration'
-    { _bucketArn         :: TF.Attr s P.Text
+    { _bucketArn :: TF.Attr s P.Text
     -- ^ @bucket_arn@ - (Required)
     --
-    , _bufferInterval    :: TF.Attr s P.Integer
+    , _bufferInterval :: TF.Attr s P.Integer
     -- ^ @buffer_interval@ - (Optional)
     --
-    , _bufferSize        :: TF.Attr s P.Integer
+    , _bufferSize :: TF.Attr s P.Integer
     -- ^ @buffer_size@ - (Optional)
     --
     , _compressionFormat :: TF.Attr s P.Text
     -- ^ @compression_format@ - (Optional)
     --
-    , _kmsKeyArn         :: TF.Attr s P.Text
+    , _kmsKeyArn :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
-    , _prefix            :: TF.Attr s P.Text
+    , _prefix :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
-    , _roleArn           :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19080,16 +19080,16 @@ data Audio s = Audio'
     { _audioPackingMode :: TF.Attr s P.Text
     -- ^ @audio_packing_mode@ - (Optional)
     --
-    , _bitRate          :: TF.Attr s P.Text
+    , _bitRate :: TF.Attr s P.Text
     -- ^ @bit_rate@ - (Optional)
     --
-    , _channels         :: TF.Attr s P.Text
+    , _channels :: TF.Attr s P.Text
     -- ^ @channels@ - (Optional)
     --
-    , _codec            :: TF.Attr s P.Text
+    , _codec :: TF.Attr s P.Text
     -- ^ @codec@ - (Optional)
     --
-    , _sampleRate       :: TF.Attr s P.Text
+    , _sampleRate :: TF.Attr s P.Text
     -- ^ @sample_rate@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19149,10 +19149,10 @@ data LambdaAction s = LambdaAction'
     { _functionArn :: TF.Attr s P.Text
     -- ^ @function_arn@ - (Required)
     --
-    , _position    :: TF.Attr s P.Integer
+    , _position :: TF.Attr s P.Integer
     -- ^ @position@ - (Required)
     --
-    , _topicArn    :: TF.Attr s P.Text
+    , _topicArn :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19200,16 +19200,16 @@ instance s ~ s' => P.HasComputedInvocationType (TF.Ref s' (LambdaAction s)) (TF.
 
 -- | @approval_rule@ nested settings.
 data ApprovalRule s = ApprovalRule'
-    { _approveAfterDays  :: TF.Attr s P.Integer
+    { _approveAfterDays :: TF.Attr s P.Integer
     -- ^ @approve_after_days@ - (Required)
     --
-    , _complianceLevel   :: TF.Attr s P.Text
+    , _complianceLevel :: TF.Attr s P.Text
     -- ^ @compliance_level@ - (Optional)
     --
     , _enableNonSecurity :: TF.Attr s P.Bool
     -- ^ @enable_non_security@ - (Optional)
     --
-    , _patchFilter       :: TF.Attr s [TF.Attr s (PatchFilter s)]
+    , _patchFilter :: TF.Attr s [TF.Attr s (PatchFilter s)]
     -- ^ @patch_filter@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19268,7 +19268,7 @@ data Republish s = Republish'
     { _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _topic   :: TF.Attr s P.Text
+    , _topic :: TF.Attr s P.Text
     -- ^ @topic@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19332,10 +19332,10 @@ data ArtifactStore s = ArtifactStore'
     { _encryptionKey :: TF.Attr s (EncryptionKey s)
     -- ^ @encryption_key@ - (Optional)
     --
-    , _location      :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _type'         :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19384,10 +19384,10 @@ instance P.HasType' (ArtifactStore s) (TF.Attr s P.Text) where
 
 -- | @thumbnail_config_permissions@ nested settings.
 data ThumbnailConfigPermissions s = ThumbnailConfigPermissions'
-    { _access      :: TF.Attr s [TF.Attr s P.Text]
+    { _access :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @access@ - (Optional)
     --
-    , _grantee     :: TF.Attr s P.Text
+    , _grantee :: TF.Attr s P.Text
     -- ^ @grantee@ - (Optional)
     --
     , _granteeType :: TF.Attr s P.Text
@@ -19523,7 +19523,7 @@ instance P.HasSseKmsEncryptedObjects (SourceSelectionCriteria s) (TF.Attr s (Sse
 
 -- | @patch_filter@ nested settings.
 data PatchFilter s = PatchFilter'
-    { _key    :: TF.Attr s P.Text
+    { _key :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _values :: TF.Attr s [TF.Attr s P.Text]
@@ -19564,19 +19564,19 @@ instance P.HasValues (PatchFilter s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @s3_action@ nested settings.
 data S3Action s = S3Action'
-    { _bucketName      :: TF.Attr s P.Text
+    { _bucketName :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required)
     --
-    , _kmsKeyArn       :: TF.Attr s P.Text
+    , _kmsKeyArn :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
     , _objectKeyPrefix :: TF.Attr s P.Text
     -- ^ @object_key_prefix@ - (Optional)
     --
-    , _position        :: TF.Attr s P.Integer
+    , _position :: TF.Attr s P.Integer
     -- ^ @position@ - (Required)
     --
-    , _topicArn        :: TF.Attr s P.Text
+    , _topicArn :: TF.Attr s P.Text
     -- ^ @topic_arn@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19638,7 +19638,7 @@ data XmlClassifier s = XmlClassifier'
     { _classification :: TF.Attr s P.Text
     -- ^ @classification@ - (Required)
     --
-    , _rowTag         :: TF.Attr s P.Text
+    , _rowTag :: TF.Attr s P.Text
     -- ^ @row_tag@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19679,7 +19679,7 @@ data ResourceCreationLimitPolicy s = ResourceCreationLimitPolicy'
     { _newGameSessionsPerCreator :: TF.Attr s P.Integer
     -- ^ @new_game_sessions_per_creator@ - (Optional)
     --
-    , _policyPeriodInMinutes     :: TF.Attr s P.Integer
+    , _policyPeriodInMinutes :: TF.Attr s P.Integer
     -- ^ @policy_period_in_minutes@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19721,7 +19721,7 @@ data GrokClassifier s = GrokClassifier'
     , _customPatterns :: TF.Attr s P.Text
     -- ^ @custom_patterns@ - (Optional)
     --
-    , _grokPattern    :: TF.Attr s P.Text
+    , _grokPattern :: TF.Attr s P.Text
     -- ^ @grok_pattern@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19769,10 +19769,10 @@ data PartitionKeys s = PartitionKeys'
     { _comment :: TF.Attr s P.Text
     -- ^ @comment@ - (Optional)
     --
-    , _name    :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _type'   :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -19816,10 +19816,10 @@ instance P.HasType' (PartitionKeys s) (TF.Attr s P.Text) where
 
 -- | @sqs@ nested settings.
 data Sqs s = Sqs'
-    { _queueUrl  :: TF.Attr s P.Text
+    { _queueUrl :: TF.Attr s P.Text
     -- ^ @queue_url@ - (Required)
     --
-    , _roleArn   :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     , _useBase64 :: TF.Attr s P.Bool
@@ -19868,7 +19868,7 @@ instance P.HasUseBase64 (Sqs s) (TF.Attr s P.Bool) where
 
 -- | @deployment_ready_option@ nested settings.
 data DeploymentReadyOption s = DeploymentReadyOption'
-    { _actionOnTimeout   :: TF.Attr s P.Text
+    { _actionOnTimeout :: TF.Attr s P.Text
     -- ^ @action_on_timeout@ - (Optional)
     --
     , _waitTimeInMinutes :: TF.Attr s P.Integer
@@ -19947,22 +19947,22 @@ instance s ~ s' => P.HasComputedMode (TF.Ref s' (TracingConfig s)) (TF.Attr s P.
 
 -- | @placement@ nested settings.
 data Placement s = Placement'
-    { _affinity         :: TF.Attr s P.Text
+    { _affinity :: TF.Attr s P.Text
     -- ^ @affinity@ - (Optional)
     --
     , _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional)
     --
-    , _groupName        :: TF.Attr s P.Text
+    , _groupName :: TF.Attr s P.Text
     -- ^ @group_name@ - (Optional)
     --
-    , _hostId           :: TF.Attr s P.Text
+    , _hostId :: TF.Attr s P.Text
     -- ^ @host_id@ - (Optional)
     --
-    , _spreadDomain     :: TF.Attr s P.Text
+    , _spreadDomain :: TF.Attr s P.Text
     -- ^ @spread_domain@ - (Optional)
     --
-    , _tenancy          :: TF.Attr s P.Text
+    , _tenancy :: TF.Attr s P.Text
     -- ^ @tenancy@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -20029,7 +20029,7 @@ data ClassificationType s = ClassificationType'
     { _continuous :: TF.Attr s P.Text
     -- ^ @continuous@ - (Optional)
     --
-    , _oneTime    :: TF.Attr s P.Text
+    , _oneTime :: TF.Attr s P.Text
     -- ^ @one_time@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -20068,22 +20068,22 @@ data InstanceGroup s = InstanceGroup'
     { _autoscalingPolicy :: TF.Attr s P.Text
     -- ^ @autoscaling_policy@ - (Optional)
     --
-    , _bidPrice          :: TF.Attr s P.Text
+    , _bidPrice :: TF.Attr s P.Text
     -- ^ @bid_price@ - (Optional)
     --
-    , _ebsConfig         :: TF.Attr s [TF.Attr s (EbsConfig s)]
+    , _ebsConfig :: TF.Attr s [TF.Attr s (EbsConfig s)]
     -- ^ @ebs_config@ - (Optional)
     --
-    , _instanceCount     :: TF.Attr s P.Integer
+    , _instanceCount :: TF.Attr s P.Integer
     -- ^ @instance_count@ - (Optional)
     --
-    , _instanceRole      :: TF.Attr s P.Text
+    , _instanceRole :: TF.Attr s P.Text
     -- ^ @instance_role@ - (Required)
     --
-    , _instanceType      :: TF.Attr s P.Text
+    , _instanceType :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -20160,7 +20160,7 @@ instance P.HasName (InstanceGroup s) (TF.Attr s P.Text) where
 
 -- | @option_settings@ nested settings.
 data OptionSettings s = OptionSettings'
-    { _name  :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _value :: TF.Attr s P.Text
@@ -20204,7 +20204,7 @@ data StopAction s = StopAction'
     { _position :: TF.Attr s P.Integer
     -- ^ @position@ - (Required)
     --
-    , _scope    :: TF.Attr s P.Text
+    , _scope :: TF.Attr s P.Text
     -- ^ @scope@ - (Required)
     --
     , _topicArn :: TF.Attr s P.Text
@@ -20255,13 +20255,13 @@ data Parameter s = Parameter'
     { _defaultValue :: TF.Attr s P.Text
     -- ^ @default_value@ - (Optional)
     --
-    , _description  :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _type'        :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -20410,7 +20410,7 @@ data DeploymentStyle s = DeploymentStyle'
     { _deploymentOption :: TF.Attr s P.Text
     -- ^ @deployment_option@ - (Optional)
     --
-    , _deploymentType   :: TF.Attr s P.Text
+    , _deploymentType :: TF.Attr s P.Text
     -- ^ @deployment_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -20449,10 +20449,10 @@ data ServerProcess s = ServerProcess'
     { _concurrentExecutions :: TF.Attr s P.Integer
     -- ^ @concurrent_executions@ - (Required)
     --
-    , _launchPath           :: TF.Attr s P.Text
+    , _launchPath :: TF.Attr s P.Text
     -- ^ @launch_path@ - (Required)
     --
-    , _parameters           :: TF.Attr s P.Text
+    , _parameters :: TF.Attr s P.Text
     -- ^ @parameters@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -20497,16 +20497,16 @@ instance P.HasParameters (ServerProcess s) (TF.Attr s P.Text) where
 
 -- | @byte_match_tuple@ nested settings.
 data ByteMatchTuple s = ByteMatchTuple'
-    { _fieldToMatch         :: TF.Attr s (FieldToMatch s)
+    { _fieldToMatch :: TF.Attr s (FieldToMatch s)
     -- ^ @field_to_match@ - (Required)
     --
     , _positionalConstraint :: TF.Attr s P.Text
     -- ^ @positional_constraint@ - (Required)
     --
-    , _targetString         :: TF.Attr s P.Text
+    , _targetString :: TF.Attr s P.Text
     -- ^ @target_string@ - (Optional)
     --
-    , _textTransformation   :: TF.Attr s P.Text
+    , _textTransformation :: TF.Attr s P.Text
     -- ^ @text_transformation@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)

@@ -20,7 +20,6 @@ module Terrafomo.AWS.Types
 
     , IAM.Document
     , IAM.Policy
-    , IAM.Statement
     ) where
 
 import Data.Hashable (Hashable (hashWithSalt))
@@ -39,6 +38,33 @@ import qualified Formatting             as Format
 import qualified Network.AWS.Data.Text  as AWS
 import qualified Terrafomo.HCL          as HCL
 
+-- | A specific AWS availability zone.
+data Zone = Zone !Region !Char
+    deriving (Show, Eq)
+
+instance IsValue Zone where
+    toValue = HCL.toValue . Format.bprint fzone
+
+-- | Format an AWS region name.
+fregion :: Format r (Region -> r)
+fregion = Format.later (Build.fromText . AWS.toText)
+
+-- Orphan instance for amazonka type.
+instance IsValue Region where
+    toValue = HCL.toValue . Format.bprint fregion
+
+-- | Format an AWS availability zone name.
+fzone :: Format r (Zone -> r)
+fzone =
+    Format.later $ \(Zone reg suf) ->
+        Format.bprint (fregion % Format.char) reg suf
+
+-- | Format an AWS availability zone suffix.
+fzonesuf :: Format r (Zone -> r)
+fzonesuf =
+    Format.later $ \(Zone _ suf) ->
+        Format.bprint Format.char suf
+
 -- WARNING: This orphan exists because of the need to Data.Hashable.hash
 -- the AWS provider, which potentially contains an IPRoute under the current
 -- generation scheme.
@@ -56,29 +82,6 @@ instance Hashable IPRange where
                      `hashWithSalt` IP.fromIPv6 ip6
                      `hashWithSalt` mask
 
--- | A specific AWS availability zone.
-data Zone = Zone !Region !Char
-    deriving (Show, Eq)
-
-instance IsValue Zone where
-    toValue = HCL.toValue . Format.bprint fzone
-
--- | Format an AWS region name.
-fregion :: Format r (Region -> r)
-fregion = Format.later (Build.fromText . AWS.toText)
-
--- Orphan instance for amazonka types.
-instance IsValue Region where
-    toValue = HCL.toValue . Format.bprint fregion
-
--- | Format an AWS availability zone name.
-fzone :: Format r (Zone -> r)
-fzone =
-    Format.later $ \(Zone reg suf) ->
-        Format.bprint (fregion % Format.char) reg suf
-
--- | Format an AWS availability zone suffix.
-fzonesuf :: Format r (Zone -> r)
-fzonesuf =
-    Format.later $ \(Zone _ suf) ->
-        Format.bprint Format.char suf
+-- Orphan instance for amazonka-iam-policy type.
+instance IsValue IAM.Document where
+    toValue = HCL.json
