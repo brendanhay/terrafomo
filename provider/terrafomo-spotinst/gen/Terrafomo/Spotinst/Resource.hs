@@ -55,7 +55,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @spotinst_elastigroup_aws@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Spotinst/spotinst_elastigroup_aws terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/spotinst/r/elastigroup_aws.html terraform documentation>
 -- for more information.
 data ElastigroupAwsResource s = ElastigroupAwsResource'
     { _availabilityZones :: TF.Attr s [TF.Attr s P.Text]
@@ -76,7 +76,7 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     , _drainingTimeout :: TF.Attr s P.Integer
     -- ^ @draining_timeout@ - (Optional)
     --
-    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDevice s)]
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (ElastigroupAwsEbsBlockDevice s)]
     -- ^ @ebs_block_device@ - (Optional)
     --
     , _elasticIps :: TF.Attr s [TF.Attr s P.Text]
@@ -88,7 +88,7 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     , _enableMonitoring :: TF.Attr s P.Bool
     -- ^ @enable_monitoring@ - (Optional)
     --
-    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (ElastigroupAwsEphemeralBlockDevice s)]
     -- ^ @ephemeral_block_device@ - (Optional)
     --
     , _fallbackToOndemand :: TF.Attr s P.Bool
@@ -115,31 +115,31 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     , _instanceTypesSpot :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @instance_types_spot@ - (Required)
     --
-    , _instanceTypesWeights :: TF.Attr s [TF.Attr s (InstanceTypesWeights s)]
+    , _instanceTypesWeights :: TF.Attr s [TF.Attr s (ElastigroupAwsInstanceTypesWeights s)]
     -- ^ @instance_types_weights@ - (Optional)
     --
-    , _integrationCodedeploy :: TF.Attr s (IntegrationCodedeploy s)
+    , _integrationCodedeploy :: TF.Attr s (ElastigroupAwsIntegrationCodedeploy s)
     -- ^ @integration_codedeploy@ - (Optional)
     --
-    , _integrationEcs :: TF.Attr s (IntegrationEcs s)
+    , _integrationEcs :: TF.Attr s (ElastigroupAwsIntegrationEcs s)
     -- ^ @integration_ecs@ - (Optional)
     --
-    , _integrationGitlab :: TF.Attr s (IntegrationGitlab s)
+    , _integrationGitlab :: TF.Attr s (ElastigroupAwsIntegrationGitlab s)
     -- ^ @integration_gitlab@ - (Optional)
     --
-    , _integrationKubernetes :: TF.Attr s (IntegrationKubernetes s)
+    , _integrationKubernetes :: TF.Attr s (ElastigroupAwsIntegrationKubernetes s)
     -- ^ @integration_kubernetes@ - (Optional)
     --
-    , _integrationMesosphere :: TF.Attr s (IntegrationMesosphere s)
+    , _integrationMesosphere :: TF.Attr s (ElastigroupAwsIntegrationMesosphere s)
     -- ^ @integration_mesosphere@ - (Optional)
     --
-    , _integrationMultaiRuntime :: TF.Attr s (IntegrationMultaiRuntime s)
+    , _integrationMultaiRuntime :: TF.Attr s (ElastigroupAwsIntegrationMultaiRuntime s)
     -- ^ @integration_multai_runtime@ - (Optional)
     --
-    , _integrationNomad :: TF.Attr s (IntegrationNomad s)
+    , _integrationNomad :: TF.Attr s (ElastigroupAwsIntegrationNomad s)
     -- ^ @integration_nomad@ - (Optional)
     --
-    , _integrationRancher :: TF.Attr s (IntegrationRancher s)
+    , _integrationRancher :: TF.Attr s (ElastigroupAwsIntegrationRancher s)
     -- ^ @integration_rancher@ - (Optional)
     --
     , _keyName :: TF.Attr s P.Text
@@ -148,13 +148,13 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     , _lifetimePeriod :: TF.Attr s P.Text
     -- ^ @lifetime_period@ - (Optional)
     --
-    , _multaiTargetSets :: TF.Attr s [TF.Attr s (MultaiTargetSets s)]
+    , _multaiTargetSets :: TF.Attr s [TF.Attr s (ElastigroupAwsMultaiTargetSets s)]
     -- ^ @multai_target_sets@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterface s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (ElastigroupAwsNetworkInterface s)]
     -- ^ @network_interface@ - (Optional)
     --
     , _ondemandCount :: TF.Attr s P.Integer
@@ -190,25 +190,25 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
-    , _revertToSpot :: TF.Attr s (RevertToSpot s)
+    , _revertToSpot :: TF.Attr s (ElastigroupAwsRevertToSpot s)
     -- ^ @revert_to_spot@ - (Optional)
     --
-    , _scalingDownPolicy :: TF.Attr s [TF.Attr s (ScalingDownPolicy s)]
+    , _scalingDownPolicy :: TF.Attr s [TF.Attr s (ElastigroupAwsScalingDownPolicy s)]
     -- ^ @scaling_down_policy@ - (Optional)
     --
-    , _scalingTargetPolicy :: TF.Attr s [TF.Attr s (ScalingTargetPolicy s)]
+    , _scalingTargetPolicy :: TF.Attr s [TF.Attr s (ElastigroupAwsScalingTargetPolicy s)]
     -- ^ @scaling_target_policy@ - (Optional)
     --
-    , _scalingUpPolicy :: TF.Attr s [TF.Attr s (ScalingUpPolicy s)]
+    , _scalingUpPolicy :: TF.Attr s [TF.Attr s (ElastigroupAwsScalingUpPolicy s)]
     -- ^ @scaling_up_policy@ - (Optional)
     --
-    , _scheduledTask :: TF.Attr s [TF.Attr s (ScheduledTask s)]
+    , _scheduledTask :: TF.Attr s [TF.Attr s (ElastigroupAwsScheduledTask s)]
     -- ^ @scheduled_task@ - (Optional)
     --
     , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Required)
     --
-    , _signal :: TF.Attr s [TF.Attr s (Signal s)]
+    , _signal :: TF.Attr s [TF.Attr s (ElastigroupAwsSignal s)]
     -- ^ @signal@ - (Optional)
     --
     , _spotPercentage :: TF.Attr s P.Double
@@ -217,7 +217,7 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     -- Conflicts with:
     --
     -- * 'ondemandCount'
-    , _statefulDeallocation :: TF.Attr s (StatefulDeallocation s)
+    , _statefulDeallocation :: TF.Attr s (ElastigroupAwsStatefulDeallocation s)
     -- ^ @stateful_deallocation@ - (Optional)
     --
     , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
@@ -226,13 +226,13 @@ data ElastigroupAwsResource s = ElastigroupAwsResource'
     -- Conflicts with:
     --
     -- * 'availabilityZones'
-    , _tags :: TF.Attr s [TF.Attr s (Tags s)]
+    , _tags :: TF.Attr s [TF.Attr s (ElastigroupAwsTags s)]
     -- ^ @tags@ - (Optional)
     --
     , _targetGroupArns :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_group_arns@ - (Optional)
     --
-    , _updatePolicy :: TF.Attr s (UpdatePolicy s)
+    , _updatePolicy :: TF.Attr s (ElastigroupAwsUpdatePolicy s)
     -- ^ @update_policy@ - (Optional)
     --
     , _userData :: TF.Attr s P.Text
@@ -401,91 +401,91 @@ instance TF.IsValid (ElastigroupAwsResource s) where
         ])
            P.<> TF.settingsValidator "_ebsBlockDevice"
                   (_ebsBlockDevice
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EbsBlockDevice s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsEbsBlockDevice s)])
                   TF.validator
            P.<> TF.settingsValidator "_ephemeralBlockDevice"
                   (_ephemeralBlockDevice
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDevice s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsEphemeralBlockDevice s)])
                   TF.validator
            P.<> TF.settingsValidator "_instanceTypesWeights"
                   (_instanceTypesWeights
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (InstanceTypesWeights s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsInstanceTypesWeights s)])
                   TF.validator
            P.<> TF.settingsValidator "_integrationCodedeploy"
                   (_integrationCodedeploy
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationCodedeploy s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationCodedeploy s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationEcs"
                   (_integrationEcs
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationEcs s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationEcs s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationGitlab"
                   (_integrationGitlab
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationGitlab s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationGitlab s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationKubernetes"
                   (_integrationKubernetes
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationKubernetes s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationKubernetes s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationMesosphere"
                   (_integrationMesosphere
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMesosphere s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationMesosphere s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationMultaiRuntime"
                   (_integrationMultaiRuntime
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMultaiRuntime s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationMultaiRuntime s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationNomad"
                   (_integrationNomad
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationNomad s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationNomad s))
                   TF.validator
            P.<> TF.settingsValidator "_integrationRancher"
                   (_integrationRancher
-                      :: ElastigroupAwsResource s -> TF.Attr s (IntegrationRancher s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationRancher s))
                   TF.validator
            P.<> TF.settingsValidator "_multaiTargetSets"
                   (_multaiTargetSets
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (MultaiTargetSets s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsMultaiTargetSets s)])
                   TF.validator
            P.<> TF.settingsValidator "_networkInterface"
                   (_networkInterface
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsNetworkInterface s)])
                   TF.validator
            P.<> TF.settingsValidator "_revertToSpot"
                   (_revertToSpot
-                      :: ElastigroupAwsResource s -> TF.Attr s (RevertToSpot s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsRevertToSpot s))
                   TF.validator
            P.<> TF.settingsValidator "_scalingDownPolicy"
                   (_scalingDownPolicy
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingDownPolicy s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScalingDownPolicy s)])
                   TF.validator
            P.<> TF.settingsValidator "_scalingTargetPolicy"
                   (_scalingTargetPolicy
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingTargetPolicy s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScalingTargetPolicy s)])
                   TF.validator
            P.<> TF.settingsValidator "_scalingUpPolicy"
                   (_scalingUpPolicy
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingUpPolicy s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScalingUpPolicy s)])
                   TF.validator
            P.<> TF.settingsValidator "_scheduledTask"
                   (_scheduledTask
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScheduledTask s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScheduledTask s)])
                   TF.validator
            P.<> TF.settingsValidator "_signal"
                   (_signal
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Signal s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsSignal s)])
                   TF.validator
            P.<> TF.settingsValidator "_statefulDeallocation"
                   (_statefulDeallocation
-                      :: ElastigroupAwsResource s -> TF.Attr s (StatefulDeallocation s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsStatefulDeallocation s))
                   TF.validator
            P.<> TF.settingsValidator "_tags"
                   (_tags
-                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Tags s)])
+                      :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsTags s)])
                   TF.validator
            P.<> TF.settingsValidator "_updatePolicy"
                   (_updatePolicy
-                      :: ElastigroupAwsResource s -> TF.Attr s (UpdatePolicy s))
+                      :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsUpdatePolicy s))
                   TF.validator
 
 instance P.HasAvailabilityZones (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -513,9 +513,9 @@ instance P.HasDrainingTimeout (ElastigroupAwsResource s) (TF.Attr s P.Integer) w
         P.lens (_drainingTimeout :: ElastigroupAwsResource s -> TF.Attr s P.Integer)
                (\s a -> s { _drainingTimeout = a } :: ElastigroupAwsResource s)
 
-instance P.HasEbsBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (EbsBlockDevice s)]) where
+instance P.HasEbsBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsEbsBlockDevice s)]) where
     ebsBlockDevice =
-        P.lens (_ebsBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EbsBlockDevice s)])
+        P.lens (_ebsBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsEbsBlockDevice s)])
                (\s a -> s { _ebsBlockDevice = a } :: ElastigroupAwsResource s)
 
 instance P.HasElasticIps (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -533,9 +533,9 @@ instance P.HasEnableMonitoring (ElastigroupAwsResource s) (TF.Attr s P.Bool) whe
         P.lens (_enableMonitoring :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableMonitoring = a } :: ElastigroupAwsResource s)
 
-instance P.HasEphemeralBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDevice s)]) where
+instance P.HasEphemeralBlockDevice (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsEphemeralBlockDevice s)]) where
     ephemeralBlockDevice =
-        P.lens (_ephemeralBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDevice s)])
+        P.lens (_ephemeralBlockDevice :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsEphemeralBlockDevice s)])
                (\s a -> s { _ephemeralBlockDevice = a } :: ElastigroupAwsResource s)
 
 instance P.HasFallbackToOndemand (ElastigroupAwsResource s) (TF.Attr s P.Bool) where
@@ -578,49 +578,49 @@ instance P.HasInstanceTypesSpot (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s
         P.lens (_instanceTypesSpot :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _instanceTypesSpot = a } :: ElastigroupAwsResource s)
 
-instance P.HasInstanceTypesWeights (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (InstanceTypesWeights s)]) where
+instance P.HasInstanceTypesWeights (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsInstanceTypesWeights s)]) where
     instanceTypesWeights =
-        P.lens (_instanceTypesWeights :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (InstanceTypesWeights s)])
+        P.lens (_instanceTypesWeights :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsInstanceTypesWeights s)])
                (\s a -> s { _instanceTypesWeights = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationCodedeploy (ElastigroupAwsResource s) (TF.Attr s (IntegrationCodedeploy s)) where
+instance P.HasIntegrationCodedeploy (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationCodedeploy s)) where
     integrationCodedeploy =
-        P.lens (_integrationCodedeploy :: ElastigroupAwsResource s -> TF.Attr s (IntegrationCodedeploy s))
+        P.lens (_integrationCodedeploy :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationCodedeploy s))
                (\s a -> s { _integrationCodedeploy = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationEcs (ElastigroupAwsResource s) (TF.Attr s (IntegrationEcs s)) where
+instance P.HasIntegrationEcs (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationEcs s)) where
     integrationEcs =
-        P.lens (_integrationEcs :: ElastigroupAwsResource s -> TF.Attr s (IntegrationEcs s))
+        P.lens (_integrationEcs :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationEcs s))
                (\s a -> s { _integrationEcs = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationGitlab (ElastigroupAwsResource s) (TF.Attr s (IntegrationGitlab s)) where
+instance P.HasIntegrationGitlab (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationGitlab s)) where
     integrationGitlab =
-        P.lens (_integrationGitlab :: ElastigroupAwsResource s -> TF.Attr s (IntegrationGitlab s))
+        P.lens (_integrationGitlab :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationGitlab s))
                (\s a -> s { _integrationGitlab = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationKubernetes (ElastigroupAwsResource s) (TF.Attr s (IntegrationKubernetes s)) where
+instance P.HasIntegrationKubernetes (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationKubernetes s)) where
     integrationKubernetes =
-        P.lens (_integrationKubernetes :: ElastigroupAwsResource s -> TF.Attr s (IntegrationKubernetes s))
+        P.lens (_integrationKubernetes :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationKubernetes s))
                (\s a -> s { _integrationKubernetes = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationMesosphere (ElastigroupAwsResource s) (TF.Attr s (IntegrationMesosphere s)) where
+instance P.HasIntegrationMesosphere (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationMesosphere s)) where
     integrationMesosphere =
-        P.lens (_integrationMesosphere :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMesosphere s))
+        P.lens (_integrationMesosphere :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationMesosphere s))
                (\s a -> s { _integrationMesosphere = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationMultaiRuntime (ElastigroupAwsResource s) (TF.Attr s (IntegrationMultaiRuntime s)) where
+instance P.HasIntegrationMultaiRuntime (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationMultaiRuntime s)) where
     integrationMultaiRuntime =
-        P.lens (_integrationMultaiRuntime :: ElastigroupAwsResource s -> TF.Attr s (IntegrationMultaiRuntime s))
+        P.lens (_integrationMultaiRuntime :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationMultaiRuntime s))
                (\s a -> s { _integrationMultaiRuntime = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationNomad (ElastigroupAwsResource s) (TF.Attr s (IntegrationNomad s)) where
+instance P.HasIntegrationNomad (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationNomad s)) where
     integrationNomad =
-        P.lens (_integrationNomad :: ElastigroupAwsResource s -> TF.Attr s (IntegrationNomad s))
+        P.lens (_integrationNomad :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationNomad s))
                (\s a -> s { _integrationNomad = a } :: ElastigroupAwsResource s)
 
-instance P.HasIntegrationRancher (ElastigroupAwsResource s) (TF.Attr s (IntegrationRancher s)) where
+instance P.HasIntegrationRancher (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsIntegrationRancher s)) where
     integrationRancher =
-        P.lens (_integrationRancher :: ElastigroupAwsResource s -> TF.Attr s (IntegrationRancher s))
+        P.lens (_integrationRancher :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsIntegrationRancher s))
                (\s a -> s { _integrationRancher = a } :: ElastigroupAwsResource s)
 
 instance P.HasKeyName (ElastigroupAwsResource s) (TF.Attr s P.Text) where
@@ -633,9 +633,9 @@ instance P.HasLifetimePeriod (ElastigroupAwsResource s) (TF.Attr s P.Text) where
         P.lens (_lifetimePeriod :: ElastigroupAwsResource s -> TF.Attr s P.Text)
                (\s a -> s { _lifetimePeriod = a } :: ElastigroupAwsResource s)
 
-instance P.HasMultaiTargetSets (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (MultaiTargetSets s)]) where
+instance P.HasMultaiTargetSets (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsMultaiTargetSets s)]) where
     multaiTargetSets =
-        P.lens (_multaiTargetSets :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (MultaiTargetSets s)])
+        P.lens (_multaiTargetSets :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsMultaiTargetSets s)])
                (\s a -> s { _multaiTargetSets = a } :: ElastigroupAwsResource s)
 
 instance P.HasName (ElastigroupAwsResource s) (TF.Attr s P.Text) where
@@ -643,9 +643,9 @@ instance P.HasName (ElastigroupAwsResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ElastigroupAwsResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElastigroupAwsResource s)
 
-instance P.HasNetworkInterface (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
+instance P.HasNetworkInterface (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+        P.lens (_networkInterface :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsNetworkInterface s)])
                (\s a -> s { _networkInterface = a } :: ElastigroupAwsResource s)
 
 instance P.HasOndemandCount (ElastigroupAwsResource s) (TF.Attr s P.Integer) where
@@ -698,29 +698,29 @@ instance P.HasRegion (ElastigroupAwsResource s) (TF.Attr s P.Text) where
         P.lens (_region :: ElastigroupAwsResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ElastigroupAwsResource s)
 
-instance P.HasRevertToSpot (ElastigroupAwsResource s) (TF.Attr s (RevertToSpot s)) where
+instance P.HasRevertToSpot (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsRevertToSpot s)) where
     revertToSpot =
-        P.lens (_revertToSpot :: ElastigroupAwsResource s -> TF.Attr s (RevertToSpot s))
+        P.lens (_revertToSpot :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsRevertToSpot s))
                (\s a -> s { _revertToSpot = a } :: ElastigroupAwsResource s)
 
-instance P.HasScalingDownPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScalingDownPolicy s)]) where
+instance P.HasScalingDownPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsScalingDownPolicy s)]) where
     scalingDownPolicy =
-        P.lens (_scalingDownPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingDownPolicy s)])
+        P.lens (_scalingDownPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScalingDownPolicy s)])
                (\s a -> s { _scalingDownPolicy = a } :: ElastigroupAwsResource s)
 
-instance P.HasScalingTargetPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScalingTargetPolicy s)]) where
+instance P.HasScalingTargetPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsScalingTargetPolicy s)]) where
     scalingTargetPolicy =
-        P.lens (_scalingTargetPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingTargetPolicy s)])
+        P.lens (_scalingTargetPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScalingTargetPolicy s)])
                (\s a -> s { _scalingTargetPolicy = a } :: ElastigroupAwsResource s)
 
-instance P.HasScalingUpPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScalingUpPolicy s)]) where
+instance P.HasScalingUpPolicy (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsScalingUpPolicy s)]) where
     scalingUpPolicy =
-        P.lens (_scalingUpPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScalingUpPolicy s)])
+        P.lens (_scalingUpPolicy :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScalingUpPolicy s)])
                (\s a -> s { _scalingUpPolicy = a } :: ElastigroupAwsResource s)
 
-instance P.HasScheduledTask (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ScheduledTask s)]) where
+instance P.HasScheduledTask (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsScheduledTask s)]) where
     scheduledTask =
-        P.lens (_scheduledTask :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ScheduledTask s)])
+        P.lens (_scheduledTask :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsScheduledTask s)])
                (\s a -> s { _scheduledTask = a } :: ElastigroupAwsResource s)
 
 instance P.HasSecurityGroups (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -728,9 +728,9 @@ instance P.HasSecurityGroups (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.
         P.lens (_securityGroups :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _securityGroups = a } :: ElastigroupAwsResource s)
 
-instance P.HasSignal (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (Signal s)]) where
+instance P.HasSignal (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsSignal s)]) where
     signal =
-        P.lens (_signal :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Signal s)])
+        P.lens (_signal :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsSignal s)])
                (\s a -> s { _signal = a } :: ElastigroupAwsResource s)
 
 instance P.HasSpotPercentage (ElastigroupAwsResource s) (TF.Attr s P.Double) where
@@ -738,9 +738,9 @@ instance P.HasSpotPercentage (ElastigroupAwsResource s) (TF.Attr s P.Double) whe
         P.lens (_spotPercentage :: ElastigroupAwsResource s -> TF.Attr s P.Double)
                (\s a -> s { _spotPercentage = a } :: ElastigroupAwsResource s)
 
-instance P.HasStatefulDeallocation (ElastigroupAwsResource s) (TF.Attr s (StatefulDeallocation s)) where
+instance P.HasStatefulDeallocation (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsStatefulDeallocation s)) where
     statefulDeallocation =
-        P.lens (_statefulDeallocation :: ElastigroupAwsResource s -> TF.Attr s (StatefulDeallocation s))
+        P.lens (_statefulDeallocation :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsStatefulDeallocation s))
                (\s a -> s { _statefulDeallocation = a } :: ElastigroupAwsResource s)
 
 instance P.HasSubnetIds (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -748,9 +748,9 @@ instance P.HasSubnetIds (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]
         P.lens (_subnetIds :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _subnetIds = a } :: ElastigroupAwsResource s)
 
-instance P.HasTags (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (Tags s)]) where
+instance P.HasTags (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s (ElastigroupAwsTags s)]) where
     tags =
-        P.lens (_tags :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (Tags s)])
+        P.lens (_tags :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s (ElastigroupAwsTags s)])
                (\s a -> s { _tags = a } :: ElastigroupAwsResource s)
 
 instance P.HasTargetGroupArns (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -758,9 +758,9 @@ instance P.HasTargetGroupArns (ElastigroupAwsResource s) (TF.Attr s [TF.Attr s P
         P.lens (_targetGroupArns :: ElastigroupAwsResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _targetGroupArns = a } :: ElastigroupAwsResource s)
 
-instance P.HasUpdatePolicy (ElastigroupAwsResource s) (TF.Attr s (UpdatePolicy s)) where
+instance P.HasUpdatePolicy (ElastigroupAwsResource s) (TF.Attr s (ElastigroupAwsUpdatePolicy s)) where
     updatePolicy =
-        P.lens (_updatePolicy :: ElastigroupAwsResource s -> TF.Attr s (UpdatePolicy s))
+        P.lens (_updatePolicy :: ElastigroupAwsResource s -> TF.Attr s (ElastigroupAwsUpdatePolicy s))
                (\s a -> s { _updatePolicy = a } :: ElastigroupAwsResource s)
 
 instance P.HasUserData (ElastigroupAwsResource s) (TF.Attr s P.Text) where
@@ -774,20 +774,20 @@ instance P.HasUtilizeReservedInstances (ElastigroupAwsResource s) (TF.Attr s P.B
                (\s a -> s { _utilizeReservedInstances = a } :: ElastigroupAwsResource s)
 
 instance s ~ s' => P.HasComputedCapacityUnit (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
-    computedCapacityUnit x = TF.compute (TF.refKey x) "_computedCapacityUnit"
+    computedCapacityUnit x = TF.compute (TF.refKey x) "capacity_unit"
 
 instance s ~ s' => P.HasComputedEbsOptimized (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Bool) where
-    computedEbsOptimized x = TF.compute (TF.refKey x) "_computedEbsOptimized"
+    computedEbsOptimized x = TF.compute (TF.refKey x) "ebs_optimized"
 
 instance s ~ s' => P.HasComputedMaxSize (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Integer) where
-    computedMaxSize x = TF.compute (TF.refKey x) "_computedMaxSize"
+    computedMaxSize x = TF.compute (TF.refKey x) "max_size"
 
 instance s ~ s' => P.HasComputedMinSize (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Integer) where
-    computedMinSize x = TF.compute (TF.refKey x) "_computedMinSize"
+    computedMinSize x = TF.compute (TF.refKey x) "min_size"
 
 -- | @spotinst_subscription@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Spotinst/spotinst_subscription terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/spotinst/r/subscription.html terraform documentation>
 -- for more information.
 data SubscriptionResource s = SubscriptionResource'
     { _endpoint   :: TF.Attr s P.Text
