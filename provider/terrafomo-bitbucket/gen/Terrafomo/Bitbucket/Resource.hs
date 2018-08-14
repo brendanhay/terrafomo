@@ -59,17 +59,17 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @bitbucket_default_reviewers@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Bitbucket/bitbucket_default_reviewers terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/bitbucket/r/default_reviewers.html terraform documentation>
 -- for more information.
 data DefaultReviewersResource s = DefaultReviewersResource'
     { _owner      :: TF.Attr s P.Text
-    -- ^ @owner@ - (Required)
+    -- ^ @owner@ - (Required, Forces New)
     --
     , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     , _reviewers  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @reviewers@ - (Required)
+    -- ^ @reviewers@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -113,7 +113,7 @@ instance P.HasReviewers (DefaultReviewersResource s) (TF.Attr s [TF.Attr s P.Tex
 
 -- | @bitbucket_hook@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Bitbucket/bitbucket_hook terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/bitbucket/r/hook.html terraform documentation>
 -- for more information.
 data HookResource s = HookResource'
     { _active               :: TF.Attr s P.Bool
@@ -126,10 +126,10 @@ data HookResource s = HookResource'
     -- ^ @events@ - (Required)
     --
     , _owner                :: TF.Attr s P.Text
-    -- ^ @owner@ - (Required)
+    -- ^ @owner@ - (Required, Forces New)
     --
     , _repository           :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     , _skipCertVerification :: TF.Attr s P.Bool
     -- ^ @skip_cert_verification@ - (Optional)
@@ -208,11 +208,11 @@ instance P.HasUrl (HookResource s) (TF.Attr s P.Text) where
                (\s a -> s { _url = a } :: HookResource s)
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (HookResource s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
+    computedUuid x = TF.compute (TF.refKey x) "uuid"
 
 -- | @bitbucket_repository@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Bitbucket/bitbucket_repository terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/bitbucket/r/repository.html terraform documentation>
 -- for more information.
 data RepositoryResource s = RepositoryResource'
     { _description :: TF.Attr s P.Text
@@ -344,10 +344,10 @@ instance P.HasWebsite (RepositoryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _website = a } :: RepositoryResource s)
 
 instance s ~ s' => P.HasComputedCloneHttps (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedCloneHttps x = TF.compute (TF.refKey x) "_computedCloneHttps"
+    computedCloneHttps x = TF.compute (TF.refKey x) "clone_https"
 
 instance s ~ s' => P.HasComputedCloneSsh (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedCloneSsh x = TF.compute (TF.refKey x) "_computedCloneSsh"
+    computedCloneSsh x = TF.compute (TF.refKey x) "clone_ssh"
 
 instance s ~ s' => P.HasComputedSlug (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSlug x = TF.compute (TF.refKey x) "_computedSlug"
+    computedSlug x = TF.compute (TF.refKey x) "slug"
