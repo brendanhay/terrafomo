@@ -2,232 +2,120 @@
     "settings": [
         {
             "con": {
-                "smart": "newLocalSubnets",
-                "name": "LocalSubnets'"
+                "smart": "newNetworkDhcpPool",
+                "name": "NetworkDhcpPool'"
             },
             "arguments": [
                 {
-                    "default": "_localSubnetGateway",
+                    "default": "TF.value 3600",
                     "computed": false,
-                    "required": true,
+                    "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"local_subnet_gateway\" <$> TF.attribute",
-                    "name": "_localSubnetGateway",
-                    "method": "localSubnetGateway",
+                    "encoder": "TF.assign \"default_lease_time\" <$> TF.attribute",
+                    "name": "_defaultLeaseTime",
+                    "method": "defaultLeaseTime",
                     "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocalSubnetGateway",
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDefaultLeaseTime",
                     "validate": false,
-                    "optional": false,
-                    "original": "local_subnet_gateway"
+                    "optional": true,
+                    "original": "default_lease_time"
                 },
                 {
-                    "default": "_localSubnetMask",
+                    "default": "_endAddress",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"local_subnet_mask\" <$> TF.attribute",
-                    "name": "_localSubnetMask",
-                    "method": "localSubnetMask",
+                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
+                    "name": "_endAddress",
+                    "method": "endAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasLocalSubnetMask",
+                    "class": "HasEndAddress",
                     "validate": false,
                     "optional": false,
-                    "original": "local_subnet_mask"
+                    "original": "end_address"
                 },
                 {
-                    "default": "_localSubnetName",
+                    "default": "TF.value 7200",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_lease_time\" <$> TF.attribute",
+                    "name": "_maxLeaseTime",
+                    "method": "maxLeaseTime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxLeaseTime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_lease_time"
+                },
+                {
+                    "default": "_startAddress",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"local_subnet_name\" <$> TF.attribute",
-                    "name": "_localSubnetName",
-                    "method": "localSubnetName",
+                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
+                    "name": "_startAddress",
+                    "method": "startAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasLocalSubnetName",
+                    "class": "HasStartAddress",
                     "validate": false,
                     "optional": false,
-                    "original": "local_subnet_name"
+                    "original": "start_address"
                 }
             ],
-            "name": "LocalSubnets",
+            "name": "NetworkDhcpPool",
             "threaded": true,
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_localSubnetGateway",
+                    "default": "_endAddress",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"local_subnet_gateway\" <$> TF.attribute",
-                    "name": "_localSubnetGateway",
-                    "method": "localSubnetGateway",
+                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
+                    "name": "_endAddress",
+                    "method": "endAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasLocalSubnetGateway",
+                    "class": "HasEndAddress",
                     "validate": false,
                     "optional": false,
-                    "original": "local_subnet_gateway"
+                    "original": "end_address"
                 },
                 {
-                    "default": "_localSubnetMask",
+                    "default": "_startAddress",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"local_subnet_mask\" <$> TF.attribute",
-                    "name": "_localSubnetMask",
-                    "method": "localSubnetMask",
+                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
+                    "name": "_startAddress",
+                    "method": "startAddress",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasLocalSubnetMask",
+                    "class": "HasStartAddress",
                     "validate": false,
                     "optional": false,
-                    "original": "local_subnet_mask"
-                },
-                {
-                    "default": "_localSubnetName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"local_subnet_name\" <$> TF.attribute",
-                    "name": "_localSubnetName",
-                    "method": "localSubnetName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocalSubnetName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "local_subnet_name"
+                    "original": "start_address"
                 }
             ],
             "conflicts": [],
-            "type": "LocalSubnets s",
-            "original": "local_subnets"
+            "type": "NetworkDhcpPool s",
+            "original": "network_dhcp_pool"
         },
         {
             "con": {
-                "smart": "newPeerSubnets",
-                "name": "PeerSubnets'"
-            },
-            "arguments": [
-                {
-                    "default": "_peerSubnetGateway",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"peer_subnet_gateway\" <$> TF.attribute",
-                    "name": "_peerSubnetGateway",
-                    "method": "peerSubnetGateway",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPeerSubnetGateway",
-                    "validate": false,
-                    "optional": false,
-                    "original": "peer_subnet_gateway"
-                },
-                {
-                    "default": "_peerSubnetMask",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"peer_subnet_mask\" <$> TF.attribute",
-                    "name": "_peerSubnetMask",
-                    "method": "peerSubnetMask",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPeerSubnetMask",
-                    "validate": false,
-                    "optional": false,
-                    "original": "peer_subnet_mask"
-                },
-                {
-                    "default": "_peerSubnetName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"peer_subnet_name\" <$> TF.attribute",
-                    "name": "_peerSubnetName",
-                    "method": "peerSubnetName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPeerSubnetName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "peer_subnet_name"
-                }
-            ],
-            "name": "PeerSubnets",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_peerSubnetGateway",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"peer_subnet_gateway\" <$> TF.attribute",
-                    "name": "_peerSubnetGateway",
-                    "method": "peerSubnetGateway",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPeerSubnetGateway",
-                    "validate": false,
-                    "optional": false,
-                    "original": "peer_subnet_gateway"
-                },
-                {
-                    "default": "_peerSubnetMask",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"peer_subnet_mask\" <$> TF.attribute",
-                    "name": "_peerSubnetMask",
-                    "method": "peerSubnetMask",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPeerSubnetMask",
-                    "validate": false,
-                    "optional": false,
-                    "original": "peer_subnet_mask"
-                },
-                {
-                    "default": "_peerSubnetName",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"peer_subnet_name\" <$> TF.attribute",
-                    "name": "_peerSubnetName",
-                    "method": "peerSubnetName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPeerSubnetName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "peer_subnet_name"
-                }
-            ],
-            "conflicts": [],
-            "type": "PeerSubnets s",
-            "original": "peer_subnets"
-        },
-        {
-            "con": {
-                "smart": "newRule",
-                "name": "Rule'"
+                "smart": "newFirewallRulesRule",
+                "name": "FirewallRulesRule'"
             },
             "arguments": [
                 {
@@ -343,7 +231,7 @@
                     "original": "source_port"
                 }
             ],
-            "name": "Rule",
+            "name": "FirewallRulesRule",
             "threaded": true,
             "attributes": [
                 {
@@ -478,31 +366,15 @@
                 }
             ],
             "conflicts": [],
-            "type": "Rule s",
-            "original": "rule"
+            "type": "FirewallRulesRule s",
+            "original": "firewall_rules_rule"
         },
         {
             "con": {
-                "smart": "newDhcpPool",
-                "name": "DhcpPool'"
+                "smart": "newNetworkStaticIpPool",
+                "name": "NetworkStaticIpPool'"
             },
             "arguments": [
-                {
-                    "default": "TF.value 3600",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"default_lease_time\" <$> TF.attribute",
-                    "name": "_defaultLeaseTime",
-                    "method": "defaultLeaseTime",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasDefaultLeaseTime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "default_lease_time"
-                },
                 {
                     "default": "_endAddress",
                     "computed": false,
@@ -518,22 +390,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "end_address"
-                },
-                {
-                    "default": "TF.value 7200",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_lease_time\" <$> TF.attribute",
-                    "name": "_maxLeaseTime",
-                    "method": "maxLeaseTime",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxLeaseTime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_lease_time"
                 },
                 {
                     "default": "_startAddress",
@@ -552,7 +408,7 @@
                     "original": "start_address"
                 }
             ],
-            "name": "DhcpPool",
+            "name": "NetworkStaticIpPool",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -590,90 +446,235 @@
                 }
             ],
             "conflicts": [],
-            "type": "DhcpPool s",
-            "original": "dhcp_pool"
+            "type": "NetworkStaticIpPool s",
+            "original": "network_static_ip_pool"
         },
         {
             "con": {
-                "smart": "newStaticIpPool",
-                "name": "StaticIpPool'"
+                "smart": "newEdgegatewayVpnPeerSubnets",
+                "name": "EdgegatewayVpnPeerSubnets'"
             },
             "arguments": [
                 {
-                    "default": "_endAddress",
+                    "default": "_peerSubnetGateway",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
-                    "name": "_endAddress",
-                    "method": "endAddress",
+                    "encoder": "TF.assign \"peer_subnet_gateway\" <$> TF.attribute",
+                    "name": "_peerSubnetGateway",
+                    "method": "peerSubnetGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasEndAddress",
+                    "class": "HasPeerSubnetGateway",
                     "validate": false,
                     "optional": false,
-                    "original": "end_address"
+                    "original": "peer_subnet_gateway"
                 },
                 {
-                    "default": "_startAddress",
+                    "default": "_peerSubnetMask",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
-                    "name": "_startAddress",
-                    "method": "startAddress",
+                    "encoder": "TF.assign \"peer_subnet_mask\" <$> TF.attribute",
+                    "name": "_peerSubnetMask",
+                    "method": "peerSubnetMask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasStartAddress",
+                    "class": "HasPeerSubnetMask",
                     "validate": false,
                     "optional": false,
-                    "original": "start_address"
+                    "original": "peer_subnet_mask"
+                },
+                {
+                    "default": "_peerSubnetName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"peer_subnet_name\" <$> TF.attribute",
+                    "name": "_peerSubnetName",
+                    "method": "peerSubnetName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPeerSubnetName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "peer_subnet_name"
                 }
             ],
-            "name": "StaticIpPool",
+            "name": "EdgegatewayVpnPeerSubnets",
             "threaded": true,
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_endAddress",
+                    "default": "_peerSubnetGateway",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"end_address\" <$> TF.attribute",
-                    "name": "_endAddress",
-                    "method": "endAddress",
+                    "encoder": "TF.assign \"peer_subnet_gateway\" <$> TF.attribute",
+                    "name": "_peerSubnetGateway",
+                    "method": "peerSubnetGateway",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasEndAddress",
+                    "class": "HasPeerSubnetGateway",
                     "validate": false,
                     "optional": false,
-                    "original": "end_address"
+                    "original": "peer_subnet_gateway"
                 },
                 {
-                    "default": "_startAddress",
+                    "default": "_peerSubnetMask",
                     "computed": false,
                     "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"start_address\" <$> TF.attribute",
-                    "name": "_startAddress",
-                    "method": "startAddress",
+                    "encoder": "TF.assign \"peer_subnet_mask\" <$> TF.attribute",
+                    "name": "_peerSubnetMask",
+                    "method": "peerSubnetMask",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasStartAddress",
+                    "class": "HasPeerSubnetMask",
                     "validate": false,
                     "optional": false,
-                    "original": "start_address"
+                    "original": "peer_subnet_mask"
+                },
+                {
+                    "default": "_peerSubnetName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"peer_subnet_name\" <$> TF.attribute",
+                    "name": "_peerSubnetName",
+                    "method": "peerSubnetName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPeerSubnetName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "peer_subnet_name"
                 }
             ],
             "conflicts": [],
-            "type": "StaticIpPool s",
-            "original": "static_ip_pool"
+            "type": "EdgegatewayVpnPeerSubnets s",
+            "original": "edgegateway_vpn_peer_subnets"
+        },
+        {
+            "con": {
+                "smart": "newEdgegatewayVpnLocalSubnets",
+                "name": "EdgegatewayVpnLocalSubnets'"
+            },
+            "arguments": [
+                {
+                    "default": "_localSubnetGateway",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"local_subnet_gateway\" <$> TF.attribute",
+                    "name": "_localSubnetGateway",
+                    "method": "localSubnetGateway",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocalSubnetGateway",
+                    "validate": false,
+                    "optional": false,
+                    "original": "local_subnet_gateway"
+                },
+                {
+                    "default": "_localSubnetMask",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"local_subnet_mask\" <$> TF.attribute",
+                    "name": "_localSubnetMask",
+                    "method": "localSubnetMask",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocalSubnetMask",
+                    "validate": false,
+                    "optional": false,
+                    "original": "local_subnet_mask"
+                },
+                {
+                    "default": "_localSubnetName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"local_subnet_name\" <$> TF.attribute",
+                    "name": "_localSubnetName",
+                    "method": "localSubnetName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocalSubnetName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "local_subnet_name"
+                }
+            ],
+            "name": "EdgegatewayVpnLocalSubnets",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_localSubnetGateway",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"local_subnet_gateway\" <$> TF.attribute",
+                    "name": "_localSubnetGateway",
+                    "method": "localSubnetGateway",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocalSubnetGateway",
+                    "validate": false,
+                    "optional": false,
+                    "original": "local_subnet_gateway"
+                },
+                {
+                    "default": "_localSubnetMask",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"local_subnet_mask\" <$> TF.attribute",
+                    "name": "_localSubnetMask",
+                    "method": "localSubnetMask",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocalSubnetMask",
+                    "validate": false,
+                    "optional": false,
+                    "original": "local_subnet_mask"
+                },
+                {
+                    "default": "_localSubnetName",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"local_subnet_name\" <$> TF.attribute",
+                    "name": "_localSubnetName",
+                    "method": "localSubnetName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocalSubnetName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "local_subnet_name"
+                }
+            ],
+            "conflicts": [],
+            "type": "EdgegatewayVpnLocalSubnets s",
+            "original": "edgegateway_vpn_local_subnets"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/vcd/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -763,6 +764,7 @@
                     "original": "translated_port"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/dnat.html",
             "name": "DnatResource",
             "threaded": true,
             "attributes": [],
@@ -932,7 +934,7 @@
                     "name": "_localSubnets",
                     "method": "localSubnets",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (LocalSubnets s)]",
+                    "type": "TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)]",
                     "class": "HasLocalSubnets",
                     "validate": true,
                     "optional": true,
@@ -1012,7 +1014,7 @@
                     "name": "_peerSubnets",
                     "method": "peerSubnets",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PeerSubnets s)]",
+                    "type": "TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)]",
                     "class": "HasPeerSubnets",
                     "validate": true,
                     "optional": true,
@@ -1035,6 +1037,7 @@
                     "original": "shared_secret"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/edgegateway_vpn.html",
             "name": "EdgegatewayVpnResource",
             "threaded": true,
             "attributes": [],
@@ -1236,13 +1239,14 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallRulesRule s)]",
                     "class": "HasRule",
                     "validate": true,
                     "optional": true,
                     "original": "rule"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/firewall_rules.html",
             "name": "FirewallRulesResource",
             "threaded": true,
             "attributes": [],
@@ -1300,7 +1304,7 @@
                     "name": "_dhcpPool",
                     "method": "dhcpPool",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (DhcpPool s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkDhcpPool s)]",
                     "class": "HasDhcpPool",
                     "validate": true,
                     "optional": true,
@@ -1460,13 +1464,14 @@
                     "name": "_staticIpPool",
                     "method": "staticIpPool",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (StaticIpPool s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkStaticIpPool s)]",
                     "class": "HasStaticIpPool",
                     "validate": true,
                     "optional": true,
                     "original": "static_ip_pool"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/network.html",
             "name": "NetworkResource",
             "threaded": true,
             "attributes": [
@@ -1596,6 +1601,7 @@
                     "original": "internal_ip"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/snat.html",
             "name": "SnatResource",
             "threaded": true,
             "attributes": [],
@@ -1852,6 +1858,7 @@
                     "original": "template_name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/vapp.html",
             "name": "VappResource",
             "threaded": true,
             "attributes": [
@@ -2077,6 +2084,7 @@
                     "original": "vapp_name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vcd/r/vapp_vm.html",
             "name": "VappVmResource",
             "threaded": true,
             "attributes": [
