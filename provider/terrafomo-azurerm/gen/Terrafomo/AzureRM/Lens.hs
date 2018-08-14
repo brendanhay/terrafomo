@@ -50,7 +50,6 @@ module Terrafomo.AzureRM.Lens
     , HasHours (..)
     , HasMonthDays (..)
     , HasProfile (..)
-    , HasEnableFilteringMessagesBeforePublishing (..)
     , HasWinrm (..)
     , HasEnd (..)
     , HasNotificationHubName (..)
@@ -90,7 +89,6 @@ module Terrafomo.AzureRM.Lens
     , HasState (..)
     , HasIpAddress (..)
     , HasIntervalInSeconds (..)
-    , HasAccessKey (..)
     , HasServiceProviderName (..)
     , HasContainer (..)
     , HasDnsPrefix (..)
@@ -136,7 +134,6 @@ module Terrafomo.AzureRM.Lens
     , HasCountryCode (..)
     , HasDurabilityLevel (..)
     , HasTimeout (..)
-    , HasDeadLetteringOnFilterEvaluationExceptions (..)
     , HasSendToSubscriptionCoAdministrator (..)
     , HasBackupRetentionDays (..)
     , HasSku (..)
@@ -311,7 +308,6 @@ module Terrafomo.AzureRM.Lens
     , HasAccountName (..)
     , HasListen (..)
     , HasOsDisk (..)
-    , HasStorageAccount (..)
     , HasMaxDeliveryCount (..)
     , HasStorageAccountType (..)
     , HasSource (..)
@@ -421,7 +417,6 @@ module Terrafomo.AzureRM.Lens
     , HasFabricSettings (..)
     , HasRegistrationVirtualNetworkIds (..)
     , HasFrontendPortName (..)
-    , HasFailoverPolicy (..)
     , HasMinimumServers (..)
     , HasRecord (..)
     , HasDefault' (..)
@@ -642,7 +637,6 @@ module Terrafomo.AzureRM.Lens
     , HasComputedLoginServer (..)
     , HasComputedSourceVaultId (..)
     , HasComputedMaxJobCount (..)
-    , HasComputedAccountName (..)
     , HasComputedConnectionStrings (..)
     , HasComputedLocalMysqlEnabled (..)
     , HasComputedSendToServiceOwners (..)
@@ -795,7 +789,6 @@ module Terrafomo.AzureRM.Lens
     , HasComputedNetworkProfile (..)
     , HasComputedDbDtuMax (..)
     , HasComputedIpConfigurations (..)
-    , HasComputedRecord (..)
     , HasComputedNetworkPlugin (..)
     , HasComputedPrivateIpAddress (..)
     , HasComputedStorageUri (..)
@@ -830,7 +823,6 @@ module Terrafomo.AzureRM.Lens
     , HasComputedCommands (..)
     , HasComputedWebhookAction (..)
     , HasComputedRoute (..)
-    , HasComputedCommand (..)
     , HasComputedSpendingLimit (..)
     , HasComputedIpConfiguration (..)
     , HasComputedPrimaryQueueEndpoint (..)
@@ -940,7 +932,6 @@ module Terrafomo.AzureRM.Lens
     , HasComputedInstrumentationKey (..)
     , HasComputedPrimarySharedKey (..)
     , HasComputedSecondaryQueueEndpoint (..)
-    , HasComputedMaxRetryInterval (..)
     , HasComputedLocation (..)
     , HasComputedInternalFqdn (..)
     , HasComputedTenantId (..)
@@ -997,7 +988,6 @@ module Terrafomo.AzureRM.Lens
     , HasComputedNetworkSecurityGroupId (..)
     , HasComputedClusterCaCertificate (..)
     , HasComputedAutomationAccountName (..)
-    , HasComputedAccountType (..)
     ) where
 
 import GHC.Base ((.))
@@ -1214,12 +1204,6 @@ class HasProfile a b | a -> b where
 
 instance HasProfile a b => HasProfile (TF.Schema l p a) b where
     profile = TF.configuration . profile
-
-class HasEnableFilteringMessagesBeforePublishing a b | a -> b where
-    enableFilteringMessagesBeforePublishing :: P.Lens' a b
-
-instance HasEnableFilteringMessagesBeforePublishing a b => HasEnableFilteringMessagesBeforePublishing (TF.Schema l p a) b where
-    enableFilteringMessagesBeforePublishing = TF.configuration . enableFilteringMessagesBeforePublishing
 
 class HasWinrm a b | a -> b where
     winrm :: P.Lens' a b
@@ -1454,12 +1438,6 @@ class HasIntervalInSeconds a b | a -> b where
 
 instance HasIntervalInSeconds a b => HasIntervalInSeconds (TF.Schema l p a) b where
     intervalInSeconds = TF.configuration . intervalInSeconds
-
-class HasAccessKey a b | a -> b where
-    accessKey :: P.Lens' a b
-
-instance HasAccessKey a b => HasAccessKey (TF.Schema l p a) b where
-    accessKey = TF.configuration . accessKey
 
 class HasServiceProviderName a b | a -> b where
     serviceProviderName :: P.Lens' a b
@@ -1730,12 +1708,6 @@ class HasTimeout a b | a -> b where
 
 instance HasTimeout a b => HasTimeout (TF.Schema l p a) b where
     timeout = TF.configuration . timeout
-
-class HasDeadLetteringOnFilterEvaluationExceptions a b | a -> b where
-    deadLetteringOnFilterEvaluationExceptions :: P.Lens' a b
-
-instance HasDeadLetteringOnFilterEvaluationExceptions a b => HasDeadLetteringOnFilterEvaluationExceptions (TF.Schema l p a) b where
-    deadLetteringOnFilterEvaluationExceptions = TF.configuration . deadLetteringOnFilterEvaluationExceptions
 
 class HasSendToSubscriptionCoAdministrator a b | a -> b where
     sendToSubscriptionCoAdministrator :: P.Lens' a b
@@ -2781,12 +2753,6 @@ class HasOsDisk a b | a -> b where
 instance HasOsDisk a b => HasOsDisk (TF.Schema l p a) b where
     osDisk = TF.configuration . osDisk
 
-class HasStorageAccount a b | a -> b where
-    storageAccount :: P.Lens' a b
-
-instance HasStorageAccount a b => HasStorageAccount (TF.Schema l p a) b where
-    storageAccount = TF.configuration . storageAccount
-
 class HasMaxDeliveryCount a b | a -> b where
     maxDeliveryCount :: P.Lens' a b
 
@@ -3440,12 +3406,6 @@ class HasFrontendPortName a b | a -> b where
 
 instance HasFrontendPortName a b => HasFrontendPortName (TF.Schema l p a) b where
     frontendPortName = TF.configuration . frontendPortName
-
-class HasFailoverPolicy a b | a -> b where
-    failoverPolicy :: P.Lens' a b
-
-instance HasFailoverPolicy a b => HasFailoverPolicy (TF.Schema l p a) b where
-    failoverPolicy = TF.configuration . failoverPolicy
 
 class HasMinimumServers a b | a -> b where
     minimumServers :: P.Lens' a b
@@ -4650,9 +4610,6 @@ class HasComputedSourceVaultId a b | a -> b where
 class HasComputedMaxJobCount a b | a -> b where
     computedMaxJobCount :: a -> b
 
-class HasComputedAccountName a b | a -> b where
-    computedAccountName :: a -> b
-
 class HasComputedConnectionStrings a b | a -> b where
     computedConnectionStrings :: a -> b
 
@@ -5109,9 +5066,6 @@ class HasComputedDbDtuMax a b | a -> b where
 class HasComputedIpConfigurations a b | a -> b where
     computedIpConfigurations :: a -> b
 
-class HasComputedRecord a b | a -> b where
-    computedRecord :: a -> b
-
 class HasComputedNetworkPlugin a b | a -> b where
     computedNetworkPlugin :: a -> b
 
@@ -5213,9 +5167,6 @@ class HasComputedWebhookAction a b | a -> b where
 
 class HasComputedRoute a b | a -> b where
     computedRoute :: a -> b
-
-class HasComputedCommand a b | a -> b where
-    computedCommand :: a -> b
 
 class HasComputedSpendingLimit a b | a -> b where
     computedSpendingLimit :: a -> b
@@ -5544,9 +5495,6 @@ class HasComputedPrimarySharedKey a b | a -> b where
 class HasComputedSecondaryQueueEndpoint a b | a -> b where
     computedSecondaryQueueEndpoint :: a -> b
 
-class HasComputedMaxRetryInterval a b | a -> b where
-    computedMaxRetryInterval :: a -> b
-
 class HasComputedLocation a b | a -> b where
     computedLocation :: a -> b
 
@@ -5714,6 +5662,3 @@ class HasComputedClusterCaCertificate a b | a -> b where
 
 class HasComputedAutomationAccountName a b | a -> b where
     computedAutomationAccountName :: a -> b
-
-class HasComputedAccountType a b | a -> b where
-    computedAccountType :: a -> b

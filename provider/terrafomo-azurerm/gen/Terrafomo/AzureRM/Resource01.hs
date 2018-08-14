@@ -1550,9 +1550,6 @@ instance P.HasTimezone (AutomationScheduleResource s) (TF.Attr s P.Text) where
         P.lens (_timezone :: AutomationScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _timezone = a } :: AutomationScheduleResource s)
 
-instance s ~ s' => P.HasComputedAccountName (TF.Ref s' (AutomationScheduleResource s)) (TF.Attr s P.Text) where
-    computedAccountName x = TF.compute (TF.refKey x) "_computedAccountName"
-
 instance s ~ s' => P.HasComputedAutomationAccountName (TF.Ref s' (AutomationScheduleResource s)) (TF.Attr s P.Text) where
     computedAutomationAccountName x = TF.compute (TF.refKey x) "_computedAutomationAccountName"
 
@@ -2301,9 +2298,6 @@ data ContainerRegistryResource s = ContainerRegistryResource'
     , _sku               :: TF.Attr s P.Text
     -- ^ @sku@ - (Optional)
     --
-    , _storageAccount    :: TF.Attr s (StorageAccount s)
-    -- ^ @storage_account@ - (Optional)
-    --
     , _storageAccountId  :: TF.Attr s P.Text
     -- ^ @storage_account_id@ - (Optional)
     --
@@ -2322,7 +2316,6 @@ containerRegistryResource _location _name _resourceGroupName =
             , _name = _name
             , _resourceGroupName = _resourceGroupName
             , _sku = TF.value "Classic"
-            , _storageAccount = TF.Nil
             , _storageAccountId = TF.Nil
             }
 
@@ -2333,16 +2326,11 @@ instance TF.IsObject (ContainerRegistryResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         , TF.assign "sku" <$> TF.attribute _sku
-        , TF.assign "storage_account" <$> TF.attribute _storageAccount
         , TF.assign "storage_account_id" <$> TF.attribute _storageAccountId
         ]
 
 instance TF.IsValid (ContainerRegistryResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_storageAccount"
-                  (_storageAccount
-                      :: ContainerRegistryResource s -> TF.Attr s (StorageAccount s))
-                  TF.validator
 
 instance P.HasAdminEnabled (ContainerRegistryResource s) (TF.Attr s P.Bool) where
     adminEnabled =
@@ -2368,11 +2356,6 @@ instance P.HasSku (ContainerRegistryResource s) (TF.Attr s P.Text) where
     sku =
         P.lens (_sku :: ContainerRegistryResource s -> TF.Attr s P.Text)
                (\s a -> s { _sku = a } :: ContainerRegistryResource s)
-
-instance P.HasStorageAccount (ContainerRegistryResource s) (TF.Attr s (StorageAccount s)) where
-    storageAccount =
-        P.lens (_storageAccount :: ContainerRegistryResource s -> TF.Attr s (StorageAccount s))
-               (\s a -> s { _storageAccount = a } :: ContainerRegistryResource s)
 
 instance P.HasStorageAccountId (ContainerRegistryResource s) (TF.Attr s P.Text) where
     storageAccountId =
@@ -2547,9 +2530,6 @@ data CosmosdbAccountResource s = CosmosdbAccountResource'
     , _enableAutomaticFailover :: TF.Attr s P.Bool
     -- ^ @enable_automatic_failover@ - (Optional)
     --
-    , _failoverPolicy          :: TF.Attr s [TF.Attr s (FailoverPolicy s)]
-    -- ^ @failover_policy@ - (Optional)
-    --
     , _ipRangeFilter           :: TF.Attr s P.Text
     -- ^ @ip_range_filter@ - (Optional)
     --
@@ -2583,7 +2563,6 @@ cosmosdbAccountResource _consistencyPolicy _location _name _offerType _resourceG
             { _capabilities = TF.Nil
             , _consistencyPolicy = _consistencyPolicy
             , _enableAutomaticFailover = TF.value P.False
-            , _failoverPolicy = TF.Nil
             , _ipRangeFilter = TF.Nil
             , _kind = TF.value "GlobalDocumentDB"
             , _location = _location
@@ -2597,7 +2576,6 @@ instance TF.IsObject (CosmosdbAccountResource s) where
         [ TF.assign "capabilities" <$> TF.attribute _capabilities
         , TF.assign "consistency_policy" <$> TF.attribute _consistencyPolicy
         , TF.assign "enable_automatic_failover" <$> TF.attribute _enableAutomaticFailover
-        , TF.assign "failover_policy" <$> TF.attribute _failoverPolicy
         , TF.assign "ip_range_filter" <$> TF.attribute _ipRangeFilter
         , TF.assign "kind" <$> TF.attribute _kind
         , TF.assign "location" <$> TF.attribute _location
@@ -2616,10 +2594,6 @@ instance TF.IsValid (CosmosdbAccountResource s) where
                   (_consistencyPolicy
                       :: CosmosdbAccountResource s -> TF.Attr s (ConsistencyPolicy s))
                   TF.validator
-           P.<> TF.settingsValidator "_failoverPolicy"
-                  (_failoverPolicy
-                      :: CosmosdbAccountResource s -> TF.Attr s [TF.Attr s (FailoverPolicy s)])
-                  TF.validator
 
 instance P.HasCapabilities (CosmosdbAccountResource s) (TF.Attr s [TF.Attr s (Capabilities s)]) where
     capabilities =
@@ -2635,11 +2609,6 @@ instance P.HasEnableAutomaticFailover (CosmosdbAccountResource s) (TF.Attr s P.B
     enableAutomaticFailover =
         P.lens (_enableAutomaticFailover :: CosmosdbAccountResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableAutomaticFailover = a } :: CosmosdbAccountResource s)
-
-instance P.HasFailoverPolicy (CosmosdbAccountResource s) (TF.Attr s [TF.Attr s (FailoverPolicy s)]) where
-    failoverPolicy =
-        P.lens (_failoverPolicy :: CosmosdbAccountResource s -> TF.Attr s [TF.Attr s (FailoverPolicy s)])
-               (\s a -> s { _failoverPolicy = a } :: CosmosdbAccountResource s)
 
 instance P.HasIpRangeFilter (CosmosdbAccountResource s) (TF.Attr s P.Text) where
     ipRangeFilter =
@@ -3563,9 +3532,6 @@ instance P.HasZoneName (DnsNsRecordResource s) (TF.Attr s P.Text) where
         P.lens (_zoneName :: DnsNsRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _zoneName = a } :: DnsNsRecordResource s)
 
-instance s ~ s' => P.HasComputedRecord (TF.Ref s' (DnsNsRecordResource s)) (TF.Attr s [TF.Attr s (Record s)]) where
-    computedRecord x = TF.compute (TF.refKey x) "_computedRecord"
-
 instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsNsRecordResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRecords x = TF.compute (TF.refKey x) "_computedRecords"
 
@@ -3976,9 +3942,6 @@ data EventhubResource s = EventhubResource'
     { _captureDescription :: TF.Attr s (CaptureDescription s)
     -- ^ @capture_description@ - (Optional)
     --
-    , _location           :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _messageRetention   :: TF.Attr s P.Integer
     -- ^ @message_retention@ - (Required)
     --
@@ -4007,7 +3970,6 @@ eventhubResource _messageRetention _name _namespaceName _partitionCount _resourc
     TF.newResource "azurerm_eventhub" TF.validator $
         EventhubResource'
             { _captureDescription = TF.Nil
-            , _location = TF.Nil
             , _messageRetention = _messageRetention
             , _name = _name
             , _namespaceName = _namespaceName
@@ -4018,7 +3980,6 @@ eventhubResource _messageRetention _name _namespaceName _partitionCount _resourc
 instance TF.IsObject (EventhubResource s) where
     toObject EventhubResource'{..} = P.catMaybes
         [ TF.assign "capture_description" <$> TF.attribute _captureDescription
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "message_retention" <$> TF.attribute _messageRetention
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
@@ -4037,11 +3998,6 @@ instance P.HasCaptureDescription (EventhubResource s) (TF.Attr s (CaptureDescrip
     captureDescription =
         P.lens (_captureDescription :: EventhubResource s -> TF.Attr s (CaptureDescription s))
                (\s a -> s { _captureDescription = a } :: EventhubResource s)
-
-instance P.HasLocation (EventhubResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: EventhubResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: EventhubResource s)
 
 instance P.HasMessageRetention (EventhubResource s) (TF.Attr s P.Integer) where
     messageRetention =
@@ -4082,9 +4038,6 @@ data EventhubAuthorizationRuleResource s = EventhubAuthorizationRuleResource'
     , _listen            :: TF.Attr s P.Bool
     -- ^ @listen@ - (Optional)
     --
-    , _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _manage            :: TF.Attr s P.Bool
     -- ^ @manage@ - (Optional)
     --
@@ -4113,7 +4066,6 @@ eventhubAuthorizationRuleResource _eventhubName _name _namespaceName _resourceGr
         EventhubAuthorizationRuleResource'
             { _eventhubName = _eventhubName
             , _listen = TF.value P.False
-            , _location = TF.Nil
             , _manage = TF.value P.False
             , _name = _name
             , _namespaceName = _namespaceName
@@ -4125,7 +4077,6 @@ instance TF.IsObject (EventhubAuthorizationRuleResource s) where
     toObject EventhubAuthorizationRuleResource'{..} = P.catMaybes
         [ TF.assign "eventhub_name" <$> TF.attribute _eventhubName
         , TF.assign "listen" <$> TF.attribute _listen
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "manage" <$> TF.attribute _manage
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
@@ -4145,11 +4096,6 @@ instance P.HasListen (EventhubAuthorizationRuleResource s) (TF.Attr s P.Bool) wh
     listen =
         P.lens (_listen :: EventhubAuthorizationRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _listen = a } :: EventhubAuthorizationRuleResource s)
-
-instance P.HasLocation (EventhubAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: EventhubAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: EventhubAuthorizationRuleResource s)
 
 instance P.HasManage (EventhubAuthorizationRuleResource s) (TF.Attr s P.Bool) where
     manage =
@@ -4196,9 +4142,6 @@ data EventhubConsumerGroupResource s = EventhubConsumerGroupResource'
     { _eventhubName      :: TF.Attr s P.Text
     -- ^ @eventhub_name@ - (Required)
     --
-    , _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -4223,7 +4166,6 @@ eventhubConsumerGroupResource _eventhubName _name _namespaceName _resourceGroupN
     TF.newResource "azurerm_eventhub_consumer_group" TF.validator $
         EventhubConsumerGroupResource'
             { _eventhubName = _eventhubName
-            , _location = TF.Nil
             , _name = _name
             , _namespaceName = _namespaceName
             , _resourceGroupName = _resourceGroupName
@@ -4233,7 +4175,6 @@ eventhubConsumerGroupResource _eventhubName _name _namespaceName _resourceGroupN
 instance TF.IsObject (EventhubConsumerGroupResource s) where
     toObject EventhubConsumerGroupResource'{..} = P.catMaybes
         [ TF.assign "eventhub_name" <$> TF.attribute _eventhubName
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
@@ -4247,11 +4188,6 @@ instance P.HasEventhubName (EventhubConsumerGroupResource s) (TF.Attr s P.Text) 
     eventhubName =
         P.lens (_eventhubName :: EventhubConsumerGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _eventhubName = a } :: EventhubConsumerGroupResource s)
-
-instance P.HasLocation (EventhubConsumerGroupResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: EventhubConsumerGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: EventhubConsumerGroupResource s)
 
 instance P.HasName (EventhubConsumerGroupResource s) (TF.Attr s P.Text) where
     name =
@@ -4384,9 +4320,6 @@ data EventhubNamespaceAuthorizationRuleResource s = EventhubNamespaceAuthorizati
     { _listen            :: TF.Attr s P.Bool
     -- ^ @listen@ - (Optional)
     --
-    , _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _manage            :: TF.Attr s P.Bool
     -- ^ @manage@ - (Optional)
     --
@@ -4413,7 +4346,6 @@ eventhubNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupNa
     TF.newResource "azurerm_eventhub_namespace_authorization_rule" TF.validator $
         EventhubNamespaceAuthorizationRuleResource'
             { _listen = TF.value P.False
-            , _location = TF.Nil
             , _manage = TF.value P.False
             , _name = _name
             , _namespaceName = _namespaceName
@@ -4424,7 +4356,6 @@ eventhubNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupNa
 instance TF.IsObject (EventhubNamespaceAuthorizationRuleResource s) where
     toObject EventhubNamespaceAuthorizationRuleResource'{..} = P.catMaybes
         [ TF.assign "listen" <$> TF.attribute _listen
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "manage" <$> TF.attribute _manage
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
@@ -4439,11 +4370,6 @@ instance P.HasListen (EventhubNamespaceAuthorizationRuleResource s) (TF.Attr s P
     listen =
         P.lens (_listen :: EventhubNamespaceAuthorizationRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _listen = a } :: EventhubNamespaceAuthorizationRuleResource s)
-
-instance P.HasLocation (EventhubNamespaceAuthorizationRuleResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: EventhubNamespaceAuthorizationRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: EventhubNamespaceAuthorizationRuleResource s)
 
 instance P.HasManage (EventhubNamespaceAuthorizationRuleResource s) (TF.Attr s P.Bool) where
     manage =
@@ -5796,9 +5722,6 @@ data LbBackendAddressPoolResource s = LbBackendAddressPoolResource'
     { _loadbalancerId    :: TF.Attr s P.Text
     -- ^ @loadbalancer_id@ - (Required)
     --
-    , _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -5816,7 +5739,6 @@ lbBackendAddressPoolResource _loadbalancerId _name _resourceGroupName =
     TF.newResource "azurerm_lb_backend_address_pool" TF.validator $
         LbBackendAddressPoolResource'
             { _loadbalancerId = _loadbalancerId
-            , _location = TF.Nil
             , _name = _name
             , _resourceGroupName = _resourceGroupName
             }
@@ -5824,7 +5746,6 @@ lbBackendAddressPoolResource _loadbalancerId _name _resourceGroupName =
 instance TF.IsObject (LbBackendAddressPoolResource s) where
     toObject LbBackendAddressPoolResource'{..} = P.catMaybes
         [ TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
         ]
@@ -5836,11 +5757,6 @@ instance P.HasLoadbalancerId (LbBackendAddressPoolResource s) (TF.Attr s P.Text)
     loadbalancerId =
         P.lens (_loadbalancerId :: LbBackendAddressPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadbalancerId = a } :: LbBackendAddressPoolResource s)
-
-instance P.HasLocation (LbBackendAddressPoolResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: LbBackendAddressPoolResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: LbBackendAddressPoolResource s)
 
 instance P.HasName (LbBackendAddressPoolResource s) (TF.Attr s P.Text) where
     name =
@@ -5878,9 +5794,6 @@ data LbNatPoolResource s = LbNatPoolResource'
     , _loadbalancerId              :: TF.Attr s P.Text
     -- ^ @loadbalancer_id@ - (Required)
     --
-    , _location                    :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _name                        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -5910,7 +5823,6 @@ lbNatPoolResource _backendPort _frontendIpConfigurationName _frontendPortEnd _fr
             , _frontendPortEnd = _frontendPortEnd
             , _frontendPortStart = _frontendPortStart
             , _loadbalancerId = _loadbalancerId
-            , _location = TF.Nil
             , _name = _name
             , _protocol = _protocol
             , _resourceGroupName = _resourceGroupName
@@ -5923,7 +5835,6 @@ instance TF.IsObject (LbNatPoolResource s) where
         , TF.assign "frontend_port_end" <$> TF.attribute _frontendPortEnd
         , TF.assign "frontend_port_start" <$> TF.attribute _frontendPortStart
         , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
@@ -5956,11 +5867,6 @@ instance P.HasLoadbalancerId (LbNatPoolResource s) (TF.Attr s P.Text) where
     loadbalancerId =
         P.lens (_loadbalancerId :: LbNatPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadbalancerId = a } :: LbNatPoolResource s)
-
-instance P.HasLocation (LbNatPoolResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: LbNatPoolResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: LbNatPoolResource s)
 
 instance P.HasName (LbNatPoolResource s) (TF.Attr s P.Text) where
     name =
@@ -5997,9 +5903,6 @@ data LbNatRuleResource s = LbNatRuleResource'
     , _loadbalancerId              :: TF.Attr s P.Text
     -- ^ @loadbalancer_id@ - (Required)
     --
-    , _location                    :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _name                        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -6027,7 +5930,6 @@ lbNatRuleResource _backendPort _frontendIpConfigurationName _frontendPort _loadb
             , _frontendIpConfigurationName = _frontendIpConfigurationName
             , _frontendPort = _frontendPort
             , _loadbalancerId = _loadbalancerId
-            , _location = TF.Nil
             , _name = _name
             , _protocol = _protocol
             , _resourceGroupName = _resourceGroupName
@@ -6039,7 +5941,6 @@ instance TF.IsObject (LbNatRuleResource s) where
         , TF.assign "frontend_ip_configuration_name" <$> TF.attribute _frontendIpConfigurationName
         , TF.assign "frontend_port" <$> TF.attribute _frontendPort
         , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
@@ -6067,11 +5968,6 @@ instance P.HasLoadbalancerId (LbNatRuleResource s) (TF.Attr s P.Text) where
     loadbalancerId =
         P.lens (_loadbalancerId :: LbNatRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadbalancerId = a } :: LbNatRuleResource s)
-
-instance P.HasLocation (LbNatRuleResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: LbNatRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: LbNatRuleResource s)
 
 instance P.HasName (LbNatRuleResource s) (TF.Attr s P.Text) where
     name =
@@ -6108,9 +6004,6 @@ data LbProbeResource s = LbProbeResource'
     , _loadbalancerId    :: TF.Attr s P.Text
     -- ^ @loadbalancer_id@ - (Required)
     --
-    , _location          :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -6139,7 +6032,6 @@ lbProbeResource _loadbalancerId _name _port _resourceGroupName =
         LbProbeResource'
             { _intervalInSeconds = TF.value 15
             , _loadbalancerId = _loadbalancerId
-            , _location = TF.Nil
             , _name = _name
             , _numberOfProbes = TF.value 2
             , _port = _port
@@ -6151,7 +6043,6 @@ instance TF.IsObject (LbProbeResource s) where
     toObject LbProbeResource'{..} = P.catMaybes
         [ TF.assign "interval_in_seconds" <$> TF.attribute _intervalInSeconds
         , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "number_of_probes" <$> TF.attribute _numberOfProbes
         , TF.assign "port" <$> TF.attribute _port
@@ -6171,11 +6062,6 @@ instance P.HasLoadbalancerId (LbProbeResource s) (TF.Attr s P.Text) where
     loadbalancerId =
         P.lens (_loadbalancerId :: LbProbeResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadbalancerId = a } :: LbProbeResource s)
-
-instance P.HasLocation (LbProbeResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: LbProbeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: LbProbeResource s)
 
 instance P.HasName (LbProbeResource s) (TF.Attr s P.Text) where
     name =
@@ -6228,9 +6114,6 @@ data LbRuleResource s = LbRuleResource'
     , _loadbalancerId              :: TF.Attr s P.Text
     -- ^ @loadbalancer_id@ - (Required)
     --
-    , _location                    :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
     , _name                        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -6259,7 +6142,6 @@ lbRuleResource _backendPort _frontendIpConfigurationName _frontendPort _loadbala
             , _frontendIpConfigurationName = _frontendIpConfigurationName
             , _frontendPort = _frontendPort
             , _loadbalancerId = _loadbalancerId
-            , _location = TF.Nil
             , _name = _name
             , _protocol = _protocol
             , _resourceGroupName = _resourceGroupName
@@ -6272,7 +6154,6 @@ instance TF.IsObject (LbRuleResource s) where
         , TF.assign "frontend_ip_configuration_name" <$> TF.attribute _frontendIpConfigurationName
         , TF.assign "frontend_port" <$> TF.attribute _frontendPort
         , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
@@ -6305,11 +6186,6 @@ instance P.HasLoadbalancerId (LbRuleResource s) (TF.Attr s P.Text) where
     loadbalancerId =
         P.lens (_loadbalancerId :: LbRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadbalancerId = a } :: LbRuleResource s)
-
-instance P.HasLocation (LbRuleResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: LbRuleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: LbRuleResource s)
 
 instance P.HasName (LbRuleResource s) (TF.Attr s P.Text) where
     name =

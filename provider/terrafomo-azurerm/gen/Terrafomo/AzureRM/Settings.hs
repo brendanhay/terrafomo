@@ -58,10 +58,6 @@ module Terrafomo.AzureRM.Settings
     , Winrm (..)
     , newWinrm
 
-    -- ** storage_account
-    , StorageAccount (..)
-    , newStorageAccount
-
     -- ** node_type
     , NodeType (..)
     , newNodeType
@@ -501,10 +497,6 @@ module Terrafomo.AzureRM.Settings
     -- ** match
     , Match (..)
     , newMatch
-
-    -- ** failover_policy
-    , FailoverPolicy (..)
-    , newFailoverPolicy
 
     -- ** vault_certificates
     , VaultCertificates (..)
@@ -1025,47 +1017,6 @@ instance P.HasProtocol (Winrm s) (TF.Attr s P.Text) where
     protocol =
         P.lens (_protocol :: Winrm s -> TF.Attr s P.Text)
                (\s a -> s { _protocol = a } :: Winrm s)
-
--- | @storage_account@ nested settings.
-data StorageAccount s = StorageAccount'
-    { _accessKey :: TF.Attr s P.Text
-    -- ^ @access_key@ - (Required)
-    --
-    , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newStorageAccount
-    :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> StorageAccount s
-newStorageAccount _accessKey _name =
-    StorageAccount'
-        { _accessKey = _accessKey
-        , _name = _name
-        }
-
-instance P.Hashable  (StorageAccount s)
-instance TF.IsValue  (StorageAccount s)
-instance TF.IsObject (StorageAccount s) where
-    toObject StorageAccount'{..} = P.catMaybes
-        [ TF.assign "access_key" <$> TF.attribute _accessKey
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (StorageAccount s) where
-    validator = P.mempty
-
-instance P.HasAccessKey (StorageAccount s) (TF.Attr s P.Text) where
-    accessKey =
-        P.lens (_accessKey :: StorageAccount s -> TF.Attr s P.Text)
-               (\s a -> s { _accessKey = a } :: StorageAccount s)
-
-instance P.HasName (StorageAccount s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: StorageAccount s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: StorageAccount s)
 
 -- | @node_type@ nested settings.
 data NodeType s = NodeType'
@@ -5470,9 +5421,6 @@ instance P.HasVolume (Container s) (TF.Attr s [TF.Attr s (Volume s)]) where
         P.lens (_volume :: Container s -> TF.Attr s [TF.Attr s (Volume s)])
                (\s a -> s { _volume = a } :: Container s)
 
-instance s ~ s' => P.HasComputedCommand (TF.Ref s' (Container s)) (TF.Attr s P.Text) where
-    computedCommand x = TF.compute (TF.refKey x) "_computedCommand"
-
 instance s ~ s' => P.HasComputedCommands (TF.Ref s' (Container s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCommands x = TF.compute (TF.refKey x) "_computedCommands"
 
@@ -7081,50 +7029,6 @@ instance P.HasStatusCode (Match s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_statusCode :: Match s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _statusCode = a } :: Match s)
 
--- | @failover_policy@ nested settings.
-data FailoverPolicy s = FailoverPolicy'
-    { _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Required)
-    --
-    , _priority :: TF.Attr s P.Integer
-    -- ^ @priority@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newFailoverPolicy
-    :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
-    -> TF.Attr s P.Integer -- ^ @priority@ - 'P.priority'
-    -> FailoverPolicy s
-newFailoverPolicy _location _priority =
-    FailoverPolicy'
-        { _location = _location
-        , _priority = _priority
-        }
-
-instance P.Hashable  (FailoverPolicy s)
-instance TF.IsValue  (FailoverPolicy s)
-instance TF.IsObject (FailoverPolicy s) where
-    toObject FailoverPolicy'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "priority" <$> TF.attribute _priority
-        ]
-
-instance TF.IsValid (FailoverPolicy s) where
-    validator = P.mempty
-
-instance P.HasLocation (FailoverPolicy s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: FailoverPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: FailoverPolicy s)
-
-instance P.HasPriority (FailoverPolicy s) (TF.Attr s P.Integer) where
-    priority =
-        P.lens (_priority :: FailoverPolicy s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a } :: FailoverPolicy s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FailoverPolicy s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
 -- | @vault_certificates@ nested settings.
 data VaultCertificates s = VaultCertificates'
     { _certificateStore :: TF.Attr s P.Text
@@ -7359,9 +7263,6 @@ instance s ~ s' => P.HasComputedMaxRecurrenceFrequency (TF.Ref s' (Quota s)) (TF
 
 instance s ~ s' => P.HasComputedMaxRecurrenceInterval (TF.Ref s' (Quota s)) (TF.Attr s P.Integer) where
     computedMaxRecurrenceInterval x = TF.compute (TF.refKey x) "_computedMaxRecurrenceInterval"
-
-instance s ~ s' => P.HasComputedMaxRetryInterval (TF.Ref s' (Quota s)) (TF.Attr s P.Integer) where
-    computedMaxRetryInterval x = TF.compute (TF.refKey x) "_computedMaxRetryInterval"
 
 -- | @identity@ nested settings.
 data Identity s = Identity'

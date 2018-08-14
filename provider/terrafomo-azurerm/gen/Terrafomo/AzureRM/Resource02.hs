@@ -3213,17 +3213,11 @@ data ServicebusQueueResource s = ServicebusQueueResource'
     { _deadLetteringOnMessageExpiration :: TF.Attr s P.Bool
     -- ^ @dead_lettering_on_message_expiration@ - (Optional)
     --
-    , _enableBatchedOperations          :: TF.Attr s P.Bool
-    -- ^ @enable_batched_operations@ - (Optional)
-    --
     , _enableExpress                    :: TF.Attr s P.Bool
     -- ^ @enable_express@ - (Optional)
     --
     , _enablePartitioning               :: TF.Attr s P.Bool
     -- ^ @enable_partitioning@ - (Optional)
-    --
-    , _location                         :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
     --
     , _name                             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -3240,9 +3234,6 @@ data ServicebusQueueResource s = ServicebusQueueResource'
     , _resourceGroupName                :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required)
     --
-    , _supportOrdering                  :: TF.Attr s P.Bool
-    -- ^ @support_ordering@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 servicebusQueueResource
@@ -3254,31 +3245,25 @@ servicebusQueueResource _name _namespaceName _resourceGroupName =
     TF.newResource "azurerm_servicebus_queue" TF.validator $
         ServicebusQueueResource'
             { _deadLetteringOnMessageExpiration = TF.value P.False
-            , _enableBatchedOperations = TF.Nil
             , _enableExpress = TF.value P.False
             , _enablePartitioning = TF.value P.False
-            , _location = TF.Nil
             , _name = _name
             , _namespaceName = _namespaceName
             , _requiresDuplicateDetection = TF.value P.False
             , _requiresSession = TF.value P.False
             , _resourceGroupName = _resourceGroupName
-            , _supportOrdering = TF.Nil
             }
 
 instance TF.IsObject (ServicebusQueueResource s) where
     toObject ServicebusQueueResource'{..} = P.catMaybes
         [ TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
-        , TF.assign "enable_batched_operations" <$> TF.attribute _enableBatchedOperations
         , TF.assign "enable_express" <$> TF.attribute _enableExpress
         , TF.assign "enable_partitioning" <$> TF.attribute _enablePartitioning
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
         , TF.assign "requires_duplicate_detection" <$> TF.attribute _requiresDuplicateDetection
         , TF.assign "requires_session" <$> TF.attribute _requiresSession
         , TF.assign "resource_group_name" <$> TF.attribute _resourceGroupName
-        , TF.assign "support_ordering" <$> TF.attribute _supportOrdering
         ]
 
 instance TF.IsValid (ServicebusQueueResource s) where
@@ -3289,11 +3274,6 @@ instance P.HasDeadLetteringOnMessageExpiration (ServicebusQueueResource s) (TF.A
         P.lens (_deadLetteringOnMessageExpiration :: ServicebusQueueResource s -> TF.Attr s P.Bool)
                (\s a -> s { _deadLetteringOnMessageExpiration = a } :: ServicebusQueueResource s)
 
-instance P.HasEnableBatchedOperations (ServicebusQueueResource s) (TF.Attr s P.Bool) where
-    enableBatchedOperations =
-        P.lens (_enableBatchedOperations :: ServicebusQueueResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableBatchedOperations = a } :: ServicebusQueueResource s)
-
 instance P.HasEnableExpress (ServicebusQueueResource s) (TF.Attr s P.Bool) where
     enableExpress =
         P.lens (_enableExpress :: ServicebusQueueResource s -> TF.Attr s P.Bool)
@@ -3303,11 +3283,6 @@ instance P.HasEnablePartitioning (ServicebusQueueResource s) (TF.Attr s P.Bool) 
     enablePartitioning =
         P.lens (_enablePartitioning :: ServicebusQueueResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enablePartitioning = a } :: ServicebusQueueResource s)
-
-instance P.HasLocation (ServicebusQueueResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: ServicebusQueueResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: ServicebusQueueResource s)
 
 instance P.HasName (ServicebusQueueResource s) (TF.Attr s P.Text) where
     name =
@@ -3333,11 +3308,6 @@ instance P.HasResourceGroupName (ServicebusQueueResource s) (TF.Attr s P.Text) w
     resourceGroupName =
         P.lens (_resourceGroupName :: ServicebusQueueResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ServicebusQueueResource s)
-
-instance P.HasSupportOrdering (ServicebusQueueResource s) (TF.Attr s P.Bool) where
-    supportOrdering =
-        P.lens (_supportOrdering :: ServicebusQueueResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _supportOrdering = a } :: ServicebusQueueResource s)
 
 instance s ~ s' => P.HasComputedAutoDeleteOnIdle (TF.Ref s' (ServicebusQueueResource s)) (TF.Attr s P.Text) where
     computedAutoDeleteOnIdle x = TF.compute (TF.refKey x) "_computedAutoDeleteOnIdle"
@@ -3466,37 +3436,31 @@ instance s ~ s' => P.HasComputedSecondaryKey (TF.Ref s' (ServicebusQueueAuthoriz
 -- See the <https://www.terraform.io/docs/providers/AzureRM/azurerm_servicebus_subscription terraform documentation>
 -- for more information.
 data ServicebusSubscriptionResource s = ServicebusSubscriptionResource'
-    { _deadLetteringOnFilterEvaluationExceptions :: TF.Attr s P.Bool
-    -- ^ @dead_lettering_on_filter_evaluation_exceptions@ - (Optional)
-    --
-    , _deadLetteringOnMessageExpiration          :: TF.Attr s P.Bool
+    { _deadLetteringOnMessageExpiration :: TF.Attr s P.Bool
     -- ^ @dead_lettering_on_message_expiration@ - (Optional)
     --
-    , _enableBatchedOperations                   :: TF.Attr s P.Bool
+    , _enableBatchedOperations          :: TF.Attr s P.Bool
     -- ^ @enable_batched_operations@ - (Optional)
     --
-    , _forwardTo                                 :: TF.Attr s P.Text
+    , _forwardTo                        :: TF.Attr s P.Text
     -- ^ @forward_to@ - (Optional)
     --
-    , _location                                  :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
-    , _maxDeliveryCount                          :: TF.Attr s P.Integer
+    , _maxDeliveryCount                 :: TF.Attr s P.Integer
     -- ^ @max_delivery_count@ - (Required)
     --
-    , _name                                      :: TF.Attr s P.Text
+    , _name                             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _namespaceName                             :: TF.Attr s P.Text
+    , _namespaceName                    :: TF.Attr s P.Text
     -- ^ @namespace_name@ - (Required)
     --
-    , _requiresSession                           :: TF.Attr s P.Bool
+    , _requiresSession                  :: TF.Attr s P.Bool
     -- ^ @requires_session@ - (Optional)
     --
-    , _resourceGroupName                         :: TF.Attr s P.Text
+    , _resourceGroupName                :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required)
     --
-    , _topicName                                 :: TF.Attr s P.Text
+    , _topicName                        :: TF.Attr s P.Text
     -- ^ @topic_name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3511,11 +3475,9 @@ servicebusSubscriptionResource
 servicebusSubscriptionResource _maxDeliveryCount _name _namespaceName _resourceGroupName _topicName =
     TF.newResource "azurerm_servicebus_subscription" TF.validator $
         ServicebusSubscriptionResource'
-            { _deadLetteringOnFilterEvaluationExceptions = TF.Nil
-            , _deadLetteringOnMessageExpiration = TF.Nil
+            { _deadLetteringOnMessageExpiration = TF.Nil
             , _enableBatchedOperations = TF.Nil
             , _forwardTo = TF.Nil
-            , _location = TF.Nil
             , _maxDeliveryCount = _maxDeliveryCount
             , _name = _name
             , _namespaceName = _namespaceName
@@ -3526,11 +3488,9 @@ servicebusSubscriptionResource _maxDeliveryCount _name _namespaceName _resourceG
 
 instance TF.IsObject (ServicebusSubscriptionResource s) where
     toObject ServicebusSubscriptionResource'{..} = P.catMaybes
-        [ TF.assign "dead_lettering_on_filter_evaluation_exceptions" <$> TF.attribute _deadLetteringOnFilterEvaluationExceptions
-        , TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
+        [ TF.assign "dead_lettering_on_message_expiration" <$> TF.attribute _deadLetteringOnMessageExpiration
         , TF.assign "enable_batched_operations" <$> TF.attribute _enableBatchedOperations
         , TF.assign "forward_to" <$> TF.attribute _forwardTo
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "max_delivery_count" <$> TF.attribute _maxDeliveryCount
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
@@ -3541,11 +3501,6 @@ instance TF.IsObject (ServicebusSubscriptionResource s) where
 
 instance TF.IsValid (ServicebusSubscriptionResource s) where
     validator = P.mempty
-
-instance P.HasDeadLetteringOnFilterEvaluationExceptions (ServicebusSubscriptionResource s) (TF.Attr s P.Bool) where
-    deadLetteringOnFilterEvaluationExceptions =
-        P.lens (_deadLetteringOnFilterEvaluationExceptions :: ServicebusSubscriptionResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _deadLetteringOnFilterEvaluationExceptions = a } :: ServicebusSubscriptionResource s)
 
 instance P.HasDeadLetteringOnMessageExpiration (ServicebusSubscriptionResource s) (TF.Attr s P.Bool) where
     deadLetteringOnMessageExpiration =
@@ -3561,11 +3516,6 @@ instance P.HasForwardTo (ServicebusSubscriptionResource s) (TF.Attr s P.Text) wh
     forwardTo =
         P.lens (_forwardTo :: ServicebusSubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _forwardTo = a } :: ServicebusSubscriptionResource s)
-
-instance P.HasLocation (ServicebusSubscriptionResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: ServicebusSubscriptionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: ServicebusSubscriptionResource s)
 
 instance P.HasMaxDeliveryCount (ServicebusSubscriptionResource s) (TF.Attr s P.Integer) where
     maxDeliveryCount =
@@ -3749,37 +3699,31 @@ instance P.HasTopicName (ServicebusSubscriptionRuleResource s) (TF.Attr s P.Text
 -- See the <https://www.terraform.io/docs/providers/AzureRM/azurerm_servicebus_topic terraform documentation>
 -- for more information.
 data ServicebusTopicResource s = ServicebusTopicResource'
-    { _enableBatchedOperations                 :: TF.Attr s P.Bool
+    { _enableBatchedOperations    :: TF.Attr s P.Bool
     -- ^ @enable_batched_operations@ - (Optional)
     --
-    , _enableExpress                           :: TF.Attr s P.Bool
+    , _enableExpress              :: TF.Attr s P.Bool
     -- ^ @enable_express@ - (Optional)
     --
-    , _enableFilteringMessagesBeforePublishing :: TF.Attr s P.Bool
-    -- ^ @enable_filtering_messages_before_publishing@ - (Optional)
-    --
-    , _enablePartitioning                      :: TF.Attr s P.Bool
+    , _enablePartitioning         :: TF.Attr s P.Bool
     -- ^ @enable_partitioning@ - (Optional)
     --
-    , _location                                :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
-    , _name                                    :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _namespaceName                           :: TF.Attr s P.Text
+    , _namespaceName              :: TF.Attr s P.Text
     -- ^ @namespace_name@ - (Required)
     --
-    , _requiresDuplicateDetection              :: TF.Attr s P.Bool
+    , _requiresDuplicateDetection :: TF.Attr s P.Bool
     -- ^ @requires_duplicate_detection@ - (Optional)
     --
-    , _resourceGroupName                       :: TF.Attr s P.Text
+    , _resourceGroupName          :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required)
     --
-    , _status                                  :: TF.Attr s P.Text
+    , _status                     :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    , _supportOrdering                         :: TF.Attr s P.Bool
+    , _supportOrdering            :: TF.Attr s P.Bool
     -- ^ @support_ordering@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3794,9 +3738,7 @@ servicebusTopicResource _name _namespaceName _resourceGroupName =
         ServicebusTopicResource'
             { _enableBatchedOperations = TF.Nil
             , _enableExpress = TF.Nil
-            , _enableFilteringMessagesBeforePublishing = TF.Nil
             , _enablePartitioning = TF.Nil
-            , _location = TF.Nil
             , _name = _name
             , _namespaceName = _namespaceName
             , _requiresDuplicateDetection = TF.Nil
@@ -3809,9 +3751,7 @@ instance TF.IsObject (ServicebusTopicResource s) where
     toObject ServicebusTopicResource'{..} = P.catMaybes
         [ TF.assign "enable_batched_operations" <$> TF.attribute _enableBatchedOperations
         , TF.assign "enable_express" <$> TF.attribute _enableExpress
-        , TF.assign "enable_filtering_messages_before_publishing" <$> TF.attribute _enableFilteringMessagesBeforePublishing
         , TF.assign "enable_partitioning" <$> TF.attribute _enablePartitioning
-        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_name" <$> TF.attribute _namespaceName
         , TF.assign "requires_duplicate_detection" <$> TF.attribute _requiresDuplicateDetection
@@ -3833,20 +3773,10 @@ instance P.HasEnableExpress (ServicebusTopicResource s) (TF.Attr s P.Bool) where
         P.lens (_enableExpress :: ServicebusTopicResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableExpress = a } :: ServicebusTopicResource s)
 
-instance P.HasEnableFilteringMessagesBeforePublishing (ServicebusTopicResource s) (TF.Attr s P.Bool) where
-    enableFilteringMessagesBeforePublishing =
-        P.lens (_enableFilteringMessagesBeforePublishing :: ServicebusTopicResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableFilteringMessagesBeforePublishing = a } :: ServicebusTopicResource s)
-
 instance P.HasEnablePartitioning (ServicebusTopicResource s) (TF.Attr s P.Bool) where
     enablePartitioning =
         P.lens (_enablePartitioning :: ServicebusTopicResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enablePartitioning = a } :: ServicebusTopicResource s)
-
-instance P.HasLocation (ServicebusTopicResource s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: ServicebusTopicResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: ServicebusTopicResource s)
 
 instance P.HasName (ServicebusTopicResource s) (TF.Attr s P.Text) where
     name =
@@ -4818,9 +4748,6 @@ instance P.HasResourceGroupName (StorageAccountResource s) (TF.Attr s P.Text) wh
 
 instance s ~ s' => P.HasComputedAccessTier (TF.Ref s' (StorageAccountResource s)) (TF.Attr s P.Text) where
     computedAccessTier x = TF.compute (TF.refKey x) "_computedAccessTier"
-
-instance s ~ s' => P.HasComputedAccountType (TF.Ref s' (StorageAccountResource s)) (TF.Attr s P.Text) where
-    computedAccountType x = TF.compute (TF.refKey x) "_computedAccountType"
 
 instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (StorageAccountResource s)) (TF.Attr s (Identity s)) where
     computedIdentity x = TF.compute (TF.refKey x) "_computedIdentity"
