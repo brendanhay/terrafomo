@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator as TF
 
 -- | The @TLS@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/TLS/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/tls/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     deriving (P.Show, P.Eq, P.Generic)

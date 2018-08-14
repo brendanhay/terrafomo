@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @tls_public_key@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/TLS/tls_public_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/tls/d/public_key.html terraform documentation>
 -- for more information.
 data PublicKeyData s = PublicKeyData'
     { _privateKeyPem :: TF.Attr s P.Text
@@ -83,10 +83,10 @@ instance P.HasPrivateKeyPem (PublicKeyData s) (TF.Attr s P.Text) where
                (\s a -> s { _privateKeyPem = a } :: PublicKeyData s)
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "_computedAlgorithm"
+    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
 
 instance s ~ s' => P.HasComputedPublicKeyOpenssh (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "_computedPublicKeyOpenssh"
+    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "public_key_openssh"
 
 instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyPem x = TF.compute (TF.refKey x) "_computedPublicKeyPem"
+    computedPublicKeyPem x = TF.compute (TF.refKey x) "public_key_pem"

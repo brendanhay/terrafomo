@@ -59,22 +59,22 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @template_cloudinit_config@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Template/template_cloudinit_config terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/template/r/cloudinit_config.html terraform documentation>
 -- for more information.
 data CloudinitConfigResource s = CloudinitConfigResource'
     { _base64Encode :: TF.Attr s P.Bool
-    -- ^ @base64_encode@ - (Optional)
+    -- ^ @base64_encode@ - (Optional, Forces New)
     --
     , _gzip         :: TF.Attr s P.Bool
-    -- ^ @gzip@ - (Optional)
+    -- ^ @gzip@ - (Optional, Forces New)
     --
-    , _part         :: TF.Attr s [TF.Attr s (Part s)]
-    -- ^ @part@ - (Required)
+    , _part         :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)]
+    -- ^ @part@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 cloudinitConfigResource
-    :: TF.Attr s [TF.Attr s (Part s)] -- ^ @part@ - 'P.part'
+    :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ - 'P.part'
     -> TF.Resource P.Provider (CloudinitConfigResource s)
 cloudinitConfigResource _part =
     TF.newResource "template_cloudinit_config" TF.validator $
@@ -95,7 +95,7 @@ instance TF.IsValid (CloudinitConfigResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_part"
                   (_part
-                      :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (Part s)])
+                      :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
                   TF.validator
 
 instance P.HasBase64Encode (CloudinitConfigResource s) (TF.Attr s P.Bool) where
@@ -108,29 +108,29 @@ instance P.HasGzip (CloudinitConfigResource s) (TF.Attr s P.Bool) where
         P.lens (_gzip :: CloudinitConfigResource s -> TF.Attr s P.Bool)
                (\s a -> s { _gzip = a } :: CloudinitConfigResource s)
 
-instance P.HasPart (CloudinitConfigResource s) (TF.Attr s [TF.Attr s (Part s)]) where
+instance P.HasPart (CloudinitConfigResource s) (TF.Attr s [TF.Attr s (CloudinitConfigPart s)]) where
     part =
-        P.lens (_part :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (Part s)])
+        P.lens (_part :: CloudinitConfigResource s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
                (\s a -> s { _part = a } :: CloudinitConfigResource s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigResource s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
+    computedRendered x = TF.compute (TF.refKey x) "rendered"
 
 -- | @template_dir@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Template/template_dir terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/template/r/dir.html terraform documentation>
 -- for more information.
 data DirResource s = DirResource'
     { _destinationDir :: TF.Attr s P.Text
-    -- ^ @destination_dir@ - (Required)
+    -- ^ @destination_dir@ - (Required, Forces New)
     -- Path to the directory where the templated files will be written
     --
     , _sourceDir      :: TF.Attr s P.Text
-    -- ^ @source_dir@ - (Required)
+    -- ^ @source_dir@ - (Required, Forces New)
     -- Path to the directory where the files to template reside
     --
     , _vars           :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @vars@ - (Optional)
+    -- ^ @vars@ - (Optional, Forces New)
     -- Variables to substitute
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -174,15 +174,15 @@ instance P.HasVars (DirResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Tex
 
 -- | @template_file@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Template/template_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/template/r/file.html terraform documentation>
 -- for more information.
 data FileResource s = FileResource'
     { _template :: TF.Attr s P.Text
-    -- ^ @template@ - (Optional)
+    -- ^ @template@ - (Optional, Forces New)
     -- Contents of the template
     --
     , _vars     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @vars@ - (Optional)
+    -- ^ @vars@ - (Optional, Forces New)
     -- Variables to substitute
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -216,4 +216,4 @@ instance P.HasVars (FileResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Te
                (\s a -> s { _vars = a } :: FileResource s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
+    computedRendered x = TF.compute (TF.refKey x) "rendered"

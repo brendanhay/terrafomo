@@ -18,9 +18,9 @@
 module Terrafomo.Archive.Settings
     (
     -- * Settings Datatypes
-    -- ** source
-      Source (..)
-    , newSource
+    -- ** file_source
+      FileSource (..)
+    , newFileSource
 
     ) where
 
@@ -45,43 +45,43 @@ import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Validator     as TF
 
--- | @source@ nested settings.
-data Source s = Source'
+-- | @file_source@ nested settings.
+data FileSource s = FileSource'
     { _content  :: TF.Attr s P.Text
-    -- ^ @content@ - (Required)
+    -- ^ @content@ - (Required, Forces New)
     --
     , _filename :: TF.Attr s P.Text
-    -- ^ @filename@ - (Required)
+    -- ^ @filename@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newSource
+newFileSource
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
-    -> Source s
-newSource _content _filename =
-    Source'
+    -> FileSource s
+newFileSource _content _filename =
+    FileSource'
         { _content = _content
         , _filename = _filename
         }
 
-instance P.Hashable  (Source s)
-instance TF.IsValue  (Source s)
-instance TF.IsObject (Source s) where
-    toObject Source'{..} = P.catMaybes
+instance P.Hashable  (FileSource s)
+instance TF.IsValue  (FileSource s)
+instance TF.IsObject (FileSource s) where
+    toObject FileSource'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "filename" <$> TF.attribute _filename
         ]
 
-instance TF.IsValid (Source s) where
+instance TF.IsValid (FileSource s) where
     validator = P.mempty
 
-instance P.HasContent (Source s) (TF.Attr s P.Text) where
+instance P.HasContent (FileSource s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: Source s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: Source s)
+        P.lens (_content :: FileSource s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: FileSource s)
 
-instance P.HasFilename (Source s) (TF.Attr s P.Text) where
+instance P.HasFilename (FileSource s) (TF.Attr s P.Text) where
     filename =
-        P.lens (_filename :: Source s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: Source s)
+        P.lens (_filename :: FileSource s -> TF.Attr s P.Text)
+               (\s a -> s { _filename = a } :: FileSource s)

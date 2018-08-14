@@ -55,7 +55,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @template_cloudinit_config@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Template/template_cloudinit_config terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/template/d/cloudinit_config.html terraform documentation>
 -- for more information.
 data CloudinitConfigData s = CloudinitConfigData'
     { _base64Encode :: TF.Attr s P.Bool
@@ -64,13 +64,13 @@ data CloudinitConfigData s = CloudinitConfigData'
     , _gzip         :: TF.Attr s P.Bool
     -- ^ @gzip@ - (Optional)
     --
-    , _part         :: TF.Attr s [TF.Attr s (Part s)]
+    , _part         :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)]
     -- ^ @part@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 cloudinitConfigData
-    :: TF.Attr s [TF.Attr s (Part s)] -- ^ @part@ - 'P.part'
+    :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ - 'P.part'
     -> TF.DataSource P.Provider (CloudinitConfigData s)
 cloudinitConfigData _part =
     TF.newDataSource "template_cloudinit_config" TF.validator $
@@ -91,7 +91,7 @@ instance TF.IsValid (CloudinitConfigData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_part"
                   (_part
-                      :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (Part s)])
+                      :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
                   TF.validator
 
 instance P.HasBase64Encode (CloudinitConfigData s) (TF.Attr s P.Bool) where
@@ -104,17 +104,17 @@ instance P.HasGzip (CloudinitConfigData s) (TF.Attr s P.Bool) where
         P.lens (_gzip :: CloudinitConfigData s -> TF.Attr s P.Bool)
                (\s a -> s { _gzip = a } :: CloudinitConfigData s)
 
-instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (Part s)]) where
+instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (CloudinitConfigPart s)]) where
     part =
-        P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (Part s)])
+        P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
                (\s a -> s { _part = a } :: CloudinitConfigData s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
+    computedRendered x = TF.compute (TF.refKey x) "rendered"
 
 -- | @template_file@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Template/template_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/template/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
     { _template :: TF.Attr s P.Text
@@ -156,4 +156,4 @@ instance P.HasVars (FileData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
                (\s a -> s { _vars = a } :: FileData s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
+    computedRendered x = TF.compute (TF.refKey x) "rendered"

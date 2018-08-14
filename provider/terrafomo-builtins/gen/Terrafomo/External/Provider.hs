@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @External@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/External/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/external/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     deriving (P.Show, P.Eq, P.Generic)

@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @external@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/External/external terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/external/d/.html terraform documentation>
 -- for more information.
 data Data s = Data'
     { _program    :: TF.Attr s [TF.Attr s P.Text]
@@ -102,4 +102,4 @@ instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
                (\s a -> s { _workingDir = a } :: Data s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+    computedResult x = TF.compute (TF.refKey x) "result"

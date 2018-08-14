@@ -71,17 +71,17 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @random_id@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Random/random_id terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/random/r/id.html terraform documentation>
 -- for more information.
 data IdResource s = IdResource'
     { _byteLength :: TF.Attr s P.Integer
-    -- ^ @byte_length@ - (Required)
+    -- ^ @byte_length@ - (Required, Forces New)
     --
     , _keepers    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @keepers@ - (Optional)
+    -- ^ @keepers@ - (Optional, Forces New)
     --
     , _prefix     :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
+    -- ^ @prefix@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -122,33 +122,33 @@ instance P.HasPrefix (IdResource s) (TF.Attr s P.Text) where
                (\s a -> s { _prefix = a } :: IdResource s)
 
 instance s ~ s' => P.HasComputedB64Std (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64Std x = TF.compute (TF.refKey x) "_computedB64Std"
+    computedB64Std x = TF.compute (TF.refKey x) "b64_std"
 
 instance s ~ s' => P.HasComputedB64Url (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64Url x = TF.compute (TF.refKey x) "_computedB64Url"
+    computedB64Url x = TF.compute (TF.refKey x) "b64_url"
 
 instance s ~ s' => P.HasComputedDec (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedDec x = TF.compute (TF.refKey x) "_computedDec"
+    computedDec x = TF.compute (TF.refKey x) "dec"
 
 instance s ~ s' => P.HasComputedHex (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedHex x = TF.compute (TF.refKey x) "_computedHex"
+    computedHex x = TF.compute (TF.refKey x) "hex"
 
 -- | @random_integer@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Random/random_integer terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/random/r/integer.html terraform documentation>
 -- for more information.
 data IntegerResource s = IntegerResource'
     { _keepers :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @keepers@ - (Optional)
+    -- ^ @keepers@ - (Optional, Forces New)
     --
     , _max     :: TF.Attr s P.Integer
-    -- ^ @max@ - (Required)
+    -- ^ @max@ - (Required, Forces New)
     --
     , _min     :: TF.Attr s P.Integer
-    -- ^ @min@ - (Required)
+    -- ^ @min@ - (Required, Forces New)
     --
     , _seed    :: TF.Attr s P.Text
-    -- ^ @seed@ - (Optional)
+    -- ^ @seed@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -197,24 +197,24 @@ instance P.HasSeed (IntegerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _seed = a } :: IntegerResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (IntegerResource s)) (TF.Attr s P.Integer) where
-    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+    computedResult x = TF.compute (TF.refKey x) "result"
 
 -- | @random_pet@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Random/random_pet terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/random/r/pet.html terraform documentation>
 -- for more information.
 data PetResource s = PetResource'
     { _keepers   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @keepers@ - (Optional)
+    -- ^ @keepers@ - (Optional, Forces New)
     --
     , _length    :: TF.Attr s P.Integer
-    -- ^ @length@ - (Optional)
+    -- ^ @length@ - (Optional, Forces New)
     --
     , _prefix    :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
+    -- ^ @prefix@ - (Optional, Forces New)
     --
     , _separator :: TF.Attr s P.Text
-    -- ^ @separator@ - (Optional)
+    -- ^ @separator@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -262,20 +262,20 @@ instance P.HasSeparator (PetResource s) (TF.Attr s P.Text) where
 
 -- | @random_shuffle@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Random/random_shuffle terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/random/r/shuffle.html terraform documentation>
 -- for more information.
 data ShuffleResource s = ShuffleResource'
     { _input       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @input@ - (Required)
+    -- ^ @input@ - (Required, Forces New)
     --
     , _keepers     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @keepers@ - (Optional)
+    -- ^ @keepers@ - (Optional, Forces New)
     --
     , _resultCount :: TF.Attr s P.Integer
-    -- ^ @result_count@ - (Optional)
+    -- ^ @result_count@ - (Optional, Forces New)
     --
     , _seed        :: TF.Attr s P.Text
-    -- ^ @seed@ - (Optional)
+    -- ^ @seed@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -323,45 +323,45 @@ instance P.HasSeed (ShuffleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _seed = a } :: ShuffleResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (ShuffleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+    computedResult x = TF.compute (TF.refKey x) "result"
 
 -- | @random_string@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Random/random_string terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/random/r/string.html terraform documentation>
 -- for more information.
 data StringResource s = StringResource'
     { _keepers         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @keepers@ - (Optional)
+    -- ^ @keepers@ - (Optional, Forces New)
     --
     , _length          :: TF.Attr s P.Integer
-    -- ^ @length@ - (Required)
+    -- ^ @length@ - (Required, Forces New)
     --
     , _lower           :: TF.Attr s P.Bool
-    -- ^ @lower@ - (Optional)
+    -- ^ @lower@ - (Optional, Forces New)
     --
     , _minLower        :: TF.Attr s P.Integer
-    -- ^ @min_lower@ - (Optional)
+    -- ^ @min_lower@ - (Optional, Forces New)
     --
     , _minNumeric      :: TF.Attr s P.Integer
-    -- ^ @min_numeric@ - (Optional)
+    -- ^ @min_numeric@ - (Optional, Forces New)
     --
     , _minSpecial      :: TF.Attr s P.Integer
-    -- ^ @min_special@ - (Optional)
+    -- ^ @min_special@ - (Optional, Forces New)
     --
     , _minUpper        :: TF.Attr s P.Integer
-    -- ^ @min_upper@ - (Optional)
+    -- ^ @min_upper@ - (Optional, Forces New)
     --
     , _number          :: TF.Attr s P.Bool
-    -- ^ @number@ - (Optional)
+    -- ^ @number@ - (Optional, Forces New)
     --
     , _overrideSpecial :: TF.Attr s P.Text
-    -- ^ @override_special@ - (Optional)
+    -- ^ @override_special@ - (Optional, Forces New)
     --
     , _special         :: TF.Attr s P.Bool
-    -- ^ @special@ - (Optional)
+    -- ^ @special@ - (Optional, Forces New)
     --
     , _upper           :: TF.Attr s P.Bool
-    -- ^ @upper@ - (Optional)
+    -- ^ @upper@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -458,15 +458,15 @@ instance P.HasUpper (StringResource s) (TF.Attr s P.Bool) where
                (\s a -> s { _upper = a } :: StringResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (StringResource s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+    computedResult x = TF.compute (TF.refKey x) "result"
 
 -- | @random_uuid@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Random/random_uuid terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/random/r/uuid.html terraform documentation>
 -- for more information.
 data UuidResource s = UuidResource'
     { _keepers :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @keepers@ - (Optional)
+    -- ^ @keepers@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -492,4 +492,4 @@ instance P.HasKeepers (UuidResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P
                (\s a -> s { _keepers = a } :: UuidResource s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (UuidResource s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+    computedResult x = TF.compute (TF.refKey x) "result"

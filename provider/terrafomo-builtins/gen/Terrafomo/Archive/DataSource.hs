@@ -51,11 +51,11 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @archive_file@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Archive/archive_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/archive/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
     { _excludes              :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @excludes@ - (Optional)
+    -- ^ @excludes@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -66,7 +66,7 @@ data FileData s = FileData'
     -- ^ @output_path@ - (Required)
     --
     , _sourceContent         :: TF.Attr s P.Text
-    -- ^ @source_content@ - (Optional)
+    -- ^ @source_content@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -74,7 +74,7 @@ data FileData s = FileData'
     -- * 'excludes'
     -- * 'sourceDir'
     , _sourceContentFilename :: TF.Attr s P.Text
-    -- ^ @source_content_filename@ - (Optional)
+    -- ^ @source_content_filename@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -82,7 +82,7 @@ data FileData s = FileData'
     -- * 'excludes'
     -- * 'sourceDir'
     , _sourceDir             :: TF.Attr s P.Text
-    -- ^ @source_dir@ - (Optional)
+    -- ^ @source_dir@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -90,7 +90,7 @@ data FileData s = FileData'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
     , _sourceFile            :: TF.Attr s P.Text
-    -- ^ @source_file@ - (Optional)
+    -- ^ @source_file@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -99,7 +99,7 @@ data FileData s = FileData'
     -- * 'sourceDir'
     -- * 'sourceContentFilename'
     , _type'                 :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -195,16 +195,16 @@ instance P.HasType' (FileData s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: FileData s)
 
 instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedOutputBase64sha256 x = TF.compute (TF.refKey x) "_computedOutputBase64sha256"
+    computedOutputBase64sha256 x = TF.compute (TF.refKey x) "output_base64sha256"
 
 instance s ~ s' => P.HasComputedOutputMd5 (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedOutputMd5 x = TF.compute (TF.refKey x) "_computedOutputMd5"
+    computedOutputMd5 x = TF.compute (TF.refKey x) "output_md5"
 
 instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedOutputSha x = TF.compute (TF.refKey x) "_computedOutputSha"
+    computedOutputSha x = TF.compute (TF.refKey x) "output_sha"
 
 instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileData s)) (TF.Attr s P.Integer) where
-    computedOutputSize x = TF.compute (TF.refKey x) "_computedOutputSize"
+    computedOutputSize x = TF.compute (TF.refKey x) "output_size"
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileData s)) (TF.Attr s [TF.Attr s (Source s)]) where
-    computedSource x = TF.compute (TF.refKey x) "_computedSource"
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileData s)) (TF.Attr s [TF.Attr s (FileSource s)]) where
+    computedSource x = TF.compute (TF.refKey x) "source"

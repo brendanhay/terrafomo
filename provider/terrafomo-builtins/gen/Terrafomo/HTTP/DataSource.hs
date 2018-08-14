@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | @http@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/HTTP/http terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/http/d/.html terraform documentation>
 -- for more information.
 data Data s = Data'
     { _requestHeaders :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -92,4 +92,4 @@ instance P.HasUrl (Data s) (TF.Attr s P.Text) where
                (\s a -> s { _url = a } :: Data s)
 
 instance s ~ s' => P.HasComputedBody (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
-    computedBody x = TF.compute (TF.refKey x) "_computedBody"
+    computedBody x = TF.compute (TF.refKey x) "body"

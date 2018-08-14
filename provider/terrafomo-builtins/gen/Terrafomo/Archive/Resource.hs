@@ -51,11 +51,11 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @archive_file@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Archive/archive_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/archive/r/file.html terraform documentation>
 -- for more information.
 data FileResource s = FileResource'
     { _excludes              :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @excludes@ - (Optional)
+    -- ^ @excludes@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -63,10 +63,10 @@ data FileResource s = FileResource'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
     , _outputPath            :: TF.Attr s P.Text
-    -- ^ @output_path@ - (Required)
+    -- ^ @output_path@ - (Required, Forces New)
     --
     , _sourceContent         :: TF.Attr s P.Text
-    -- ^ @source_content@ - (Optional)
+    -- ^ @source_content@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -74,7 +74,7 @@ data FileResource s = FileResource'
     -- * 'excludes'
     -- * 'sourceDir'
     , _sourceContentFilename :: TF.Attr s P.Text
-    -- ^ @source_content_filename@ - (Optional)
+    -- ^ @source_content_filename@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -82,7 +82,7 @@ data FileResource s = FileResource'
     -- * 'excludes'
     -- * 'sourceDir'
     , _sourceDir             :: TF.Attr s P.Text
-    -- ^ @source_dir@ - (Optional)
+    -- ^ @source_dir@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -90,7 +90,7 @@ data FileResource s = FileResource'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
     , _sourceFile            :: TF.Attr s P.Text
-    -- ^ @source_file@ - (Optional)
+    -- ^ @source_file@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
@@ -99,7 +99,7 @@ data FileResource s = FileResource'
     -- * 'sourceDir'
     -- * 'sourceContentFilename'
     , _type'                 :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -195,16 +195,16 @@ instance P.HasType' (FileResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: FileResource s)
 
 instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedOutputBase64sha256 x = TF.compute (TF.refKey x) "_computedOutputBase64sha256"
+    computedOutputBase64sha256 x = TF.compute (TF.refKey x) "output_base64sha256"
 
 instance s ~ s' => P.HasComputedOutputMd5 (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedOutputMd5 x = TF.compute (TF.refKey x) "_computedOutputMd5"
+    computedOutputMd5 x = TF.compute (TF.refKey x) "output_md5"
 
 instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileResource s)) (TF.Attr s P.Text) where
-    computedOutputSha x = TF.compute (TF.refKey x) "_computedOutputSha"
+    computedOutputSha x = TF.compute (TF.refKey x) "output_sha"
 
 instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileResource s)) (TF.Attr s P.Integer) where
-    computedOutputSize x = TF.compute (TF.refKey x) "_computedOutputSize"
+    computedOutputSize x = TF.compute (TF.refKey x) "output_size"
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileResource s)) (TF.Attr s [TF.Attr s (Source s)]) where
-    computedSource x = TF.compute (TF.refKey x) "_computedSource"
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileResource s)) (TF.Attr s [TF.Attr s (FileSource s)]) where
+    computedSource x = TF.compute (TF.refKey x) "source"

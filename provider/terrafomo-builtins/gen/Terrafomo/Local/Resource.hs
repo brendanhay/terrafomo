@@ -51,21 +51,21 @@ import qualified Terrafomo.Validator      as TF
 
 -- | @local_file@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Local/local_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/local/r/file.html terraform documentation>
 -- for more information.
 data FileResource s = FileResource'
     { _content          :: TF.Attr s P.Text
-    -- ^ @content@ - (Optional)
+    -- ^ @content@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'sensitiveContent'
     , _filename         :: TF.Attr s P.Text
-    -- ^ @filename@ - (Required)
+    -- ^ @filename@ - (Required, Forces New)
     -- Path to the output file
     --
     , _sensitiveContent :: TF.Attr s P.Text
-    -- ^ @sensitive_content@ - (Optional)
+    -- ^ @sensitive_content@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --

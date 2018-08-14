@@ -51,11 +51,11 @@ import qualified Terrafomo.Validator      as TF
 
 -- | @local_file@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Local/local_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/local/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
     { _filename :: TF.Attr s P.Text
-    -- ^ @filename@ - (Required)
+    -- ^ @filename@ - (Required, Forces New)
     -- Path to the output file
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -83,4 +83,4 @@ instance P.HasFilename (FileData s) (TF.Attr s P.Text) where
                (\s a -> s { _filename = a } :: FileData s)
 
 instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedContent x = TF.compute (TF.refKey x) "_computedContent"
+    computedContent x = TF.compute (TF.refKey x) "content"
