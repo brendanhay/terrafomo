@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | The @PostgreSQL@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/PostgreSQL/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/postgresql/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _connectTimeout  :: P.Maybe P.Integer

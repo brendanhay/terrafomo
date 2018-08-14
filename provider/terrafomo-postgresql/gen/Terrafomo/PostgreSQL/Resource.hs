@@ -63,7 +63,7 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @postgresql_database@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PostgreSQL/postgresql_database terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/postgresql/r/database.html terraform documentation>
 -- for more information.
 data DatabaseResource s = DatabaseResource'
     { _allowConnections :: TF.Attr s P.Bool
@@ -117,33 +117,33 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DatabaseResource s)
 
 instance s ~ s' => P.HasComputedEncoding (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedEncoding x = TF.compute (TF.refKey x) "_computedEncoding"
+    computedEncoding x = TF.compute (TF.refKey x) "encoding"
 
 instance s ~ s' => P.HasComputedIsTemplate (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Bool) where
-    computedIsTemplate x = TF.compute (TF.refKey x) "_computedIsTemplate"
+    computedIsTemplate x = TF.compute (TF.refKey x) "is_template"
 
 instance s ~ s' => P.HasComputedLcCollate (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedLcCollate x = TF.compute (TF.refKey x) "_computedLcCollate"
+    computedLcCollate x = TF.compute (TF.refKey x) "lc_collate"
 
 instance s ~ s' => P.HasComputedLcCtype (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedLcCtype x = TF.compute (TF.refKey x) "_computedLcCtype"
+    computedLcCtype x = TF.compute (TF.refKey x) "lc_ctype"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
+    computedOwner x = TF.compute (TF.refKey x) "owner"
 
 instance s ~ s' => P.HasComputedTablespaceName (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedTablespaceName x = TF.compute (TF.refKey x) "_computedTablespaceName"
+    computedTablespaceName x = TF.compute (TF.refKey x) "tablespace_name"
 
 instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedTemplate x = TF.compute (TF.refKey x) "_computedTemplate"
+    computedTemplate x = TF.compute (TF.refKey x) "template"
 
 -- | @postgresql_extension@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PostgreSQL/postgresql_extension terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/postgresql/r/extension.html terraform documentation>
 -- for more information.
 data ExtensionResource s = ExtensionResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -170,14 +170,14 @@ instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedSchema x = TF.compute (TF.refKey x) "_computedSchema"
+    computedSchema x = TF.compute (TF.refKey x) "schema"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @postgresql_role@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PostgreSQL/postgresql_role terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/postgresql/r/role.html terraform documentation>
 -- for more information.
 data RoleResource s = RoleResource'
     { _bypassRowLevelSecurity :: TF.Attr s P.Bool
@@ -345,11 +345,11 @@ instance P.HasValidUntil (RoleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _validUntil = a } :: RoleResource s)
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
+    computedPassword x = TF.compute (TF.refKey x) "password"
 
 -- | @postgresql_schema@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PostgreSQL/postgresql_schema terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/postgresql/r/schema.html terraform documentation>
 -- for more information.
 data SchemaResource s = SchemaResource'
     { _ifNotExists :: TF.Attr s P.Bool
@@ -392,7 +392,7 @@ instance P.HasName (SchemaResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SchemaResource s)
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
+    computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (Policy s)]) where
-    computedPolicy x = TF.compute (TF.refKey x) "_computedPolicy"
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (SchemaPolicy s)]) where
+    computedPolicy x = TF.compute (TF.refKey x) "policy"
