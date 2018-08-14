@@ -208,43 +208,13 @@
                     "computed": false,
                     "required": false,
                     "help": [
-                        "File to read template from"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "_filename",
-                    "method": "filename",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_template",
-                            "method": "template"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFilename",
-                    "validate": false,
-                    "optional": true,
-                    "original": "filename"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
                         "Contents of the template"
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"template\" <$> TF.attribute",
                     "name": "_template",
                     "method": "template",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_filename",
-                            "method": "filename"
-                        }
-                    ],
+                    "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTemplate",
                     "validate": false,
@@ -293,56 +263,7 @@
                 }
             ],
             "parameters": [],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "File to read template from"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "_filename",
-                    "method": "filename",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_template",
-                            "method": "template"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFilename",
-                    "validate": false,
-                    "optional": true,
-                    "original": "filename"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Contents of the template"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"template\" <$> TF.attribute",
-                    "name": "_template",
-                    "method": "template",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_filename",
-                            "method": "filename"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTemplate",
-                    "validate": false,
-                    "optional": true,
-                    "original": "template"
-                }
-            ],
+            "conflicts": [],
             "type": "FileData s",
             "original": "template_file"
         }
@@ -564,43 +485,13 @@
                     "computed": false,
                     "required": false,
                     "help": [
-                        "File to read template from"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "_filename",
-                    "method": "filename",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_template",
-                            "method": "template"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFilename",
-                    "validate": false,
-                    "optional": true,
-                    "original": "filename"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
                         "Contents of the template"
                     ],
                     "forceNew": true,
                     "encoder": "TF.assign \"template\" <$> TF.attribute",
                     "name": "_template",
                     "method": "template",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_filename",
-                            "method": "filename"
-                        }
-                    ],
+                    "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTemplate",
                     "validate": false,
@@ -649,56 +540,7 @@
                 }
             ],
             "parameters": [],
-            "conflicts": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "File to read template from"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
-                    "name": "_filename",
-                    "method": "filename",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_template",
-                            "method": "template"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFilename",
-                    "validate": false,
-                    "optional": true,
-                    "original": "filename"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Contents of the template"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"template\" <$> TF.attribute",
-                    "name": "_template",
-                    "method": "template",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_filename",
-                            "method": "filename"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTemplate",
-                    "validate": false,
-                    "optional": true,
-                    "original": "template"
-                }
-            ],
+            "conflicts": [],
             "type": "FileResource s",
             "original": "template_file"
         }
