@@ -18,17 +18,17 @@
 module Terrafomo.Triton.Settings
     (
     -- * Settings Datatypes
-    -- ** nic
-      Nic (..)
-    , newNic
+    -- ** machine_cns
+      MachineCns (..)
+    , newMachineCns
 
-    -- ** cns
-    , Cns (..)
-    , newCns
+    -- ** package_filter
+    , PackageFilter (..)
+    , newPackageFilter
 
-    -- ** filter
-    , Filter (..)
-    , newFilter
+    -- ** machine_nic
+    , MachineNic (..)
+    , newMachineNic
 
     ) where
 
@@ -53,57 +53,8 @@ import qualified Terrafomo.Triton.Lens  as P
 import qualified Terrafomo.Triton.Types as P
 import qualified Terrafomo.Validator    as TF
 
--- | @nic@ nested settings.
-data Nic s = Nic'
-    { _network :: TF.Attr s P.Text
-    -- ^ @network@ - (Required)
-    -- ID of the network to which the NIC is attached
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newNic
-    :: TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> Nic s
-newNic _network =
-    Nic'
-        { _network = _network
-        }
-
-instance P.Hashable  (Nic s)
-instance TF.IsValue  (Nic s)
-instance TF.IsObject (Nic s) where
-    toObject Nic'{..} = P.catMaybes
-        [ TF.assign "network" <$> TF.attribute _network
-        ]
-
-instance TF.IsValid (Nic s) where
-    validator = P.mempty
-
-instance P.HasNetwork (Nic s) (TF.Attr s P.Text) where
-    network =
-        P.lens (_network :: Nic s -> TF.Attr s P.Text)
-               (\s a -> s { _network = a } :: Nic s)
-
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
-
-instance s ~ s' => P.HasComputedIp (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
-
-instance s ~ s' => P.HasComputedMac (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedMac x = TF.compute (TF.refKey x) "_computedMac"
-
-instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
-
-instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (Nic s)) (TF.Attr s P.Bool) where
-    computedPrimary x = TF.compute (TF.refKey x) "_computedPrimary"
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (Nic s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
-
--- | @cns@ nested settings.
-data Cns s = Cns'
+-- | @machine_cns@ nested settings.
+data MachineCns s = MachineCns'
     { _disable  :: TF.Attr s P.Bool
     -- ^ @disable@ - (Optional)
     -- Disable CNS for this instance (after create)
@@ -114,37 +65,37 @@ data Cns s = Cns'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newCns
-    :: Cns s
-newCns =
-    Cns'
+newMachineCns
+    :: MachineCns s
+newMachineCns =
+    MachineCns'
         { _disable = TF.Nil
         , _services = TF.Nil
         }
 
-instance P.Hashable  (Cns s)
-instance TF.IsValue  (Cns s)
-instance TF.IsObject (Cns s) where
-    toObject Cns'{..} = P.catMaybes
+instance P.Hashable  (MachineCns s)
+instance TF.IsValue  (MachineCns s)
+instance TF.IsObject (MachineCns s) where
+    toObject MachineCns'{..} = P.catMaybes
         [ TF.assign "disable" <$> TF.attribute _disable
         , TF.assign "services" <$> TF.attribute _services
         ]
 
-instance TF.IsValid (Cns s) where
+instance TF.IsValid (MachineCns s) where
     validator = P.mempty
 
-instance P.HasDisable (Cns s) (TF.Attr s P.Bool) where
+instance P.HasDisable (MachineCns s) (TF.Attr s P.Bool) where
     disable =
-        P.lens (_disable :: Cns s -> TF.Attr s P.Bool)
-               (\s a -> s { _disable = a } :: Cns s)
+        P.lens (_disable :: MachineCns s -> TF.Attr s P.Bool)
+               (\s a -> s { _disable = a } :: MachineCns s)
 
-instance P.HasServices (Cns s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasServices (MachineCns s) (TF.Attr s [TF.Attr s P.Text]) where
     services =
-        P.lens (_services :: Cns s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _services = a } :: Cns s)
+        P.lens (_services :: MachineCns s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _services = a } :: MachineCns s)
 
--- | @filter@ nested settings.
-data Filter s = Filter'
+-- | @package_filter@ nested settings.
+data PackageFilter s = PackageFilter'
     { _disk    :: TF.Attr s P.Integer
     -- ^ @disk@ - (Optional)
     --
@@ -171,10 +122,10 @@ data Filter s = Filter'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newFilter
-    :: Filter s
-newFilter =
-    Filter'
+newPackageFilter
+    :: PackageFilter s
+newPackageFilter =
+    PackageFilter'
         { _disk = TF.Nil
         , _group = TF.Nil
         , _lwps = TF.Nil
@@ -185,10 +136,10 @@ newFilter =
         , _version = TF.Nil
         }
 
-instance P.Hashable  (Filter s)
-instance TF.IsValue  (Filter s)
-instance TF.IsObject (Filter s) where
-    toObject Filter'{..} = P.catMaybes
+instance P.Hashable  (PackageFilter s)
+instance TF.IsValue  (PackageFilter s)
+instance TF.IsObject (PackageFilter s) where
+    toObject PackageFilter'{..} = P.catMaybes
         [ TF.assign "disk" <$> TF.attribute _disk
         , TF.assign "group" <$> TF.attribute _group
         , TF.assign "lwps" <$> TF.attribute _lwps
@@ -199,45 +150,94 @@ instance TF.IsObject (Filter s) where
         , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance TF.IsValid (Filter s) where
+instance TF.IsValid (PackageFilter s) where
     validator = P.mempty
 
-instance P.HasDisk (Filter s) (TF.Attr s P.Integer) where
+instance P.HasDisk (PackageFilter s) (TF.Attr s P.Integer) where
     disk =
-        P.lens (_disk :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _disk = a } :: Filter s)
+        P.lens (_disk :: PackageFilter s -> TF.Attr s P.Integer)
+               (\s a -> s { _disk = a } :: PackageFilter s)
 
-instance P.HasGroup (Filter s) (TF.Attr s P.Text) where
+instance P.HasGroup (PackageFilter s) (TF.Attr s P.Text) where
     group =
-        P.lens (_group :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _group = a } :: Filter s)
+        P.lens (_group :: PackageFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _group = a } :: PackageFilter s)
 
-instance P.HasLwps (Filter s) (TF.Attr s P.Integer) where
+instance P.HasLwps (PackageFilter s) (TF.Attr s P.Integer) where
     lwps =
-        P.lens (_lwps :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _lwps = a } :: Filter s)
+        P.lens (_lwps :: PackageFilter s -> TF.Attr s P.Integer)
+               (\s a -> s { _lwps = a } :: PackageFilter s)
 
-instance P.HasMemory (Filter s) (TF.Attr s P.Integer) where
+instance P.HasMemory (PackageFilter s) (TF.Attr s P.Integer) where
     memory =
-        P.lens (_memory :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _memory = a } :: Filter s)
+        P.lens (_memory :: PackageFilter s -> TF.Attr s P.Integer)
+               (\s a -> s { _memory = a } :: PackageFilter s)
 
-instance P.HasName (Filter s) (TF.Attr s P.Text) where
+instance P.HasName (PackageFilter s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Filter s)
+        P.lens (_name :: PackageFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: PackageFilter s)
 
-instance P.HasSwap (Filter s) (TF.Attr s P.Integer) where
+instance P.HasSwap (PackageFilter s) (TF.Attr s P.Integer) where
     swap =
-        P.lens (_swap :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _swap = a } :: Filter s)
+        P.lens (_swap :: PackageFilter s -> TF.Attr s P.Integer)
+               (\s a -> s { _swap = a } :: PackageFilter s)
 
-instance P.HasVcpus (Filter s) (TF.Attr s P.Integer) where
+instance P.HasVcpus (PackageFilter s) (TF.Attr s P.Integer) where
     vcpus =
-        P.lens (_vcpus :: Filter s -> TF.Attr s P.Integer)
-               (\s a -> s { _vcpus = a } :: Filter s)
+        P.lens (_vcpus :: PackageFilter s -> TF.Attr s P.Integer)
+               (\s a -> s { _vcpus = a } :: PackageFilter s)
 
-instance P.HasVersion (Filter s) (TF.Attr s P.Text) where
+instance P.HasVersion (PackageFilter s) (TF.Attr s P.Text) where
     version =
-        P.lens (_version :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a } :: Filter s)
+        P.lens (_version :: PackageFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: PackageFilter s)
+
+-- | @machine_nic@ nested settings.
+data MachineNic s = MachineNic'
+    { _network :: TF.Attr s P.Text
+    -- ^ @network@ - (Required)
+    -- ID of the network to which the NIC is attached
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newMachineNic
+    :: TF.Attr s P.Text -- ^ @network@ - 'P.network'
+    -> MachineNic s
+newMachineNic _network =
+    MachineNic'
+        { _network = _network
+        }
+
+instance P.Hashable  (MachineNic s)
+instance TF.IsValue  (MachineNic s)
+instance TF.IsObject (MachineNic s) where
+    toObject MachineNic'{..} = P.catMaybes
+        [ TF.assign "network" <$> TF.attribute _network
+        ]
+
+instance TF.IsValid (MachineNic s) where
+    validator = P.mempty
+
+instance P.HasNetwork (MachineNic s) (TF.Attr s P.Text) where
+    network =
+        P.lens (_network :: MachineNic s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: MachineNic s)
+
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (MachineNic s)) (TF.Attr s P.Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (MachineNic s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
+
+instance s ~ s' => P.HasComputedMac (TF.Ref s' (MachineNic s)) (TF.Attr s P.Text) where
+    computedMac x = TF.compute (TF.refKey x) "mac"
+
+instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (MachineNic s)) (TF.Attr s P.Text) where
+    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+
+instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (MachineNic s)) (TF.Attr s P.Bool) where
+    computedPrimary x = TF.compute (TF.refKey x) "primary"
+
+instance s ~ s' => P.HasComputedState (TF.Ref s' (MachineNic s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"

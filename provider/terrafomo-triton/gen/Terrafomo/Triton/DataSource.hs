@@ -75,7 +75,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @triton_account@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_account terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/account.html terraform documentation>
 -- for more information.
 data AccountData s = AccountData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -93,17 +93,17 @@ instance TF.IsValid (AccountData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedCnsEnabled (TF.Ref s' (AccountData s)) (TF.Attr s P.Bool) where
-    computedCnsEnabled x = TF.compute (TF.refKey x) "_computedCnsEnabled"
+    computedCnsEnabled x = TF.compute (TF.refKey x) "cns_enabled"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
+    computedEmail x = TF.compute (TF.refKey x) "email"
 
 instance s ~ s' => P.HasComputedLogin (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
-    computedLogin x = TF.compute (TF.refKey x) "_computedLogin"
+    computedLogin x = TF.compute (TF.refKey x) "login"
 
 -- | @triton_datacenter@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_datacenter terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterData s = DatacenterData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -121,21 +121,21 @@ instance TF.IsValid (DatacenterData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @triton_fabric_network@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_fabric_network terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/fabric_network.html terraform documentation>
 -- for more information.
 data FabricNetworkData s = FabricNetworkData'
     { _name   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _vlanId :: TF.Attr s P.Integer
-    -- ^ @vlan_id@ - (Required)
+    -- ^ @vlan_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -170,48 +170,48 @@ instance P.HasVlanId (FabricNetworkData s) (TF.Attr s P.Integer) where
                (\s a -> s { _vlanId = a } :: FabricNetworkData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
-    computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
 
 instance s ~ s' => P.HasComputedInternetNat (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
-    computedInternetNat x = TF.compute (TF.refKey x) "_computedInternetNat"
+    computedInternetNat x = TF.compute (TF.refKey x) "internet_nat"
 
 instance s ~ s' => P.HasComputedProvisionEndIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedProvisionEndIp x = TF.compute (TF.refKey x) "_computedProvisionEndIp"
+    computedProvisionEndIp x = TF.compute (TF.refKey x) "provision_end_ip"
 
 instance s ~ s' => P.HasComputedProvisionStartIp (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedProvisionStartIp x = TF.compute (TF.refKey x) "_computedProvisionStartIp"
+    computedProvisionStartIp x = TF.compute (TF.refKey x) "provision_start_ip"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricNetworkData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResolvers x = TF.compute (TF.refKey x) "_computedResolvers"
+    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
 instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricNetworkData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedRoutes x = TF.compute (TF.refKey x) "_computedRoutes"
+    computedRoutes x = TF.compute (TF.refKey x) "routes"
 
 instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (FabricNetworkData s)) (TF.Attr s P.Text) where
-    computedSubnet x = TF.compute (TF.refKey x) "_computedSubnet"
+    computedSubnet x = TF.compute (TF.refKey x) "subnet"
 
 -- | @triton_fabric_vlan@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_fabric_vlan terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/fabric_vlan.html terraform documentation>
 -- for more information.
 data FabricVlanData s = FabricVlanData'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _vlanId      :: TF.Attr s P.Integer
-    -- ^ @vlan_id@ - (Optional)
+    -- ^ @vlan_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -252,32 +252,32 @@ instance P.HasVlanId (FabricVlanData s) (TF.Attr s P.Integer) where
 
 -- | @triton_image@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/image.html terraform documentation>
 -- for more information.
 data ImageData s = ImageData'
     { _mostRecent :: TF.Attr s P.Bool
-    -- ^ @most_recent@ - (Optional)
+    -- ^ @most_recent@ - (Optional, Forces New)
     --
     , _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _os         :: TF.Attr s P.Text
-    -- ^ @os@ - (Optional)
+    -- ^ @os@ - (Optional, Forces New)
     --
     , _owner      :: TF.Attr s P.Text
-    -- ^ @owner@ - (Optional)
+    -- ^ @owner@ - (Optional, Forces New)
     --
     , _public     :: TF.Attr s P.Bool
-    -- ^ @public@ - (Optional)
+    -- ^ @public@ - (Optional, Forces New)
     --
     , _state      :: TF.Attr s P.Text
-    -- ^ @state@ - (Optional)
+    -- ^ @state@ - (Optional, Forces New)
     --
     , _type'      :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     , _version    :: TF.Attr s P.Text
-    -- ^ @version@ - (Optional)
+    -- ^ @version@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -353,11 +353,11 @@ instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
 
 -- | @triton_network@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_network terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/network.html terraform documentation>
 -- for more information.
 data NetworkData s = NetworkData'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -384,23 +384,23 @@ instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: NetworkData s)
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
-    computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkData s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 -- | @triton_package@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_package terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/d/package.html terraform documentation>
 -- for more information.
 data PackageData s = PackageData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ @filter@ - (Required)
+    { _filter :: TF.Attr s [TF.Attr s (PackageFilter s)]
+    -- ^ @filter@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 packageData
-    :: TF.Attr s [TF.Attr s (Filter s)] -- ^ @filter@ - 'P.filter'
+    :: TF.Attr s [TF.Attr s (PackageFilter s)] -- ^ @filter@ - 'P.filter'
     -> TF.DataSource P.Provider (PackageData s)
 packageData _filter =
     TF.newDataSource "triton_package" TF.validator $
@@ -417,34 +417,34 @@ instance TF.IsValid (PackageData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: PackageData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: PackageData s -> TF.Attr s [TF.Attr s (PackageFilter s)])
                   TF.validator
 
-instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (PackageFilter s)]) where
     filter =
-        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (PackageFilter s)])
                (\s a -> s { _filter = a } :: PackageData s)
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
+    computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedGroup (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
-    computedGroup x = TF.compute (TF.refKey x) "_computedGroup"
+    computedGroup x = TF.compute (TF.refKey x) "group"
 
 instance s ~ s' => P.HasComputedLwps (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedLwps x = TF.compute (TF.refKey x) "_computedLwps"
+    computedLwps x = TF.compute (TF.refKey x) "lwps"
 
 instance s ~ s' => P.HasComputedMemory (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedMemory x = TF.compute (TF.refKey x) "_computedMemory"
+    computedMemory x = TF.compute (TF.refKey x) "memory"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedSwap (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedSwap x = TF.compute (TF.refKey x) "_computedSwap"
+    computedSwap x = TF.compute (TF.refKey x) "swap"
 
 instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (PackageData s)) (TF.Attr s P.Integer) where
-    computedVcpus x = TF.compute (TF.refKey x) "_computedVcpus"
+    computedVcpus x = TF.compute (TF.refKey x) "vcpus"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"

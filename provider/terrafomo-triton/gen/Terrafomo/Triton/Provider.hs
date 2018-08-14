@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | The @Triton@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/triton/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _account               :: P.Text

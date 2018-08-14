@@ -79,39 +79,39 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @triton_fabric@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_fabric terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/fabric.html terraform documentation>
 -- for more information.
 data FabricResource s = FabricResource'
     { _description      :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     -- Description of network
     --
     , _gateway          :: TF.Attr s P.Text
-    -- ^ @gateway@ - (Optional)
+    -- ^ @gateway@ - (Optional, Forces New)
     -- Gateway IP
     --
     , _internetNat      :: TF.Attr s P.Bool
-    -- ^ @internet_nat@ - (Optional)
+    -- ^ @internet_nat@ - (Optional, Forces New)
     -- Whether or not a NAT zone is provisioned at the Gateway IP address
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Network name
     --
     , _provisionEndIp   :: TF.Attr s P.Text
-    -- ^ @provision_end_ip@ - (Required)
+    -- ^ @provision_end_ip@ - (Required, Forces New)
     -- Last assignable IP on the network
     --
     , _provisionStartIp :: TF.Attr s P.Text
-    -- ^ @provision_start_ip@ - (Required)
+    -- ^ @provision_start_ip@ - (Required, Forces New)
     -- First IP on the network that can be assigned
     --
     , _subnet           :: TF.Attr s P.Text
-    -- ^ @subnet@ - (Required)
+    -- ^ @subnet@ - (Required, Forces New)
     -- CIDR formatted string describing network address space
     --
     , _vlanId           :: TF.Attr s P.Integer
-    -- ^ @vlan_id@ - (Required)
+    -- ^ @vlan_id@ - (Required, Forces New)
     -- VLAN on which the network exists
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -192,20 +192,20 @@ instance P.HasVlanId (FabricResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _vlanId = a } :: FabricResource s)
 
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricResource s)) (TF.Attr s P.Bool) where
-    computedFabric x = TF.compute (TF.refKey x) "_computedFabric"
+    computedFabric x = TF.compute (TF.refKey x) "fabric"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (FabricResource s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (FabricResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedResolvers x = TF.compute (TF.refKey x) "_computedResolvers"
+    computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
 instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (FabricResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedRoutes x = TF.compute (TF.refKey x) "_computedRoutes"
+    computedRoutes x = TF.compute (TF.refKey x) "routes"
 
 -- | @triton_firewall_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_firewall_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/firewall_rule.html terraform documentation>
 -- for more information.
 data FirewallRuleResource s = FirewallRuleResource'
     { _description :: TF.Attr s P.Text
@@ -259,27 +259,27 @@ instance P.HasRule (FirewallRuleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _rule = a } :: FirewallRuleResource s)
 
 instance s ~ s' => P.HasComputedGlobal (TF.Ref s' (FirewallRuleResource s)) (TF.Attr s P.Bool) where
-    computedGlobal x = TF.compute (TF.refKey x) "_computedGlobal"
+    computedGlobal x = TF.compute (TF.refKey x) "global"
 
 -- | @triton_instance_template@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_instance_template terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/instance_template.html terraform documentation>
 -- for more information.
 data InstanceTemplateResource s = InstanceTemplateResource'
     { _firewallEnabled :: TF.Attr s P.Bool
-    -- ^ @firewall_enabled@ - (Optional)
+    -- ^ @firewall_enabled@ - (Optional, Forces New)
     -- Whether to enable the firewall for group instances
     --
     , _image           :: TF.Attr s P.Text
-    -- ^ @image@ - (Required)
+    -- ^ @image@ - (Required, Forces New)
     -- UUID of the image
     --
     , _package         :: TF.Attr s P.Text
-    -- ^ @package@ - (Required)
+    -- ^ @package@ - (Required, Forces New)
     -- Package name used for provisioning
     --
     , _templateName    :: TF.Attr s P.Text
-    -- ^ @template_name@ - (Required)
+    -- ^ @template_name@ - (Required, Forces New)
     -- Friendly name for the instance template
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -330,24 +330,24 @@ instance P.HasTemplateName (InstanceTemplateResource s) (TF.Attr s P.Text) where
                (\s a -> s { _templateName = a } :: InstanceTemplateResource s)
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedNetworks (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetworks x = TF.compute (TF.refKey x) "_computedNetworks"
+    computedNetworks x = TF.compute (TF.refKey x) "networks"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedUserdata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
-    computedUserdata x = TF.compute (TF.refKey x) "_computedUserdata"
+    computedUserdata x = TF.compute (TF.refKey x) "userdata"
 
 -- | @triton_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/key.html terraform documentation>
 -- for more information.
 data KeyResource s = KeyResource'
     { _key :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     -- Content of public key from disk in OpenSSH format
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -375,26 +375,26 @@ instance P.HasKey (KeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _key = a } :: KeyResource s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @triton_machine@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_machine terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/machine.html terraform documentation>
 -- for more information.
 data MachineResource s = MachineResource'
     { _administratorPw :: TF.Attr s P.Text
-    -- ^ @administrator_pw@ - (Optional)
+    -- ^ @administrator_pw@ - (Optional, Forces New)
     -- Administrator's initial password (Windows only)
     --
     , _affinity :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @affinity@ - (Optional)
+    -- ^ @affinity@ - (Optional, Forces New)
     -- Label based affinity rules for assisting instance placement
     --
     , _cloudConfig :: TF.Attr s P.Text
-    -- ^ @cloud_config@ - (Optional)
+    -- ^ @cloud_config@ - (Optional, Forces New)
     -- Copied to machine on boot
     --
-    , _cns :: TF.Attr s (Cns s)
+    , _cns :: TF.Attr s (MachineCns s)
     -- ^ @cns@ - (Optional)
     -- Container Name Service
     --
@@ -407,7 +407,7 @@ data MachineResource s = MachineResource'
     -- Whether to enable the firewall for this machine
     --
     , _image :: TF.Attr s P.Text
-    -- ^ @image@ - (Required)
+    -- ^ @image@ - (Required, Forces New)
     -- UUID of the image
     --
     , _metadata :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -427,11 +427,11 @@ data MachineResource s = MachineResource'
     -- Machine tags
     --
     , _userData :: TF.Attr s P.Text
-    -- ^ @user_data@ - (Optional)
+    -- ^ @user_data@ - (Optional, Forces New)
     -- Data copied to machine on boot
     --
     , _userScript :: TF.Attr s P.Text
-    -- ^ @user_script@ - (Optional)
+    -- ^ @user_script@ - (Optional, Forces New)
     -- User script to run on boot (every boot on SmartMachines)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -479,7 +479,7 @@ instance TF.IsValid (MachineResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_cns"
                   (_cns
-                      :: MachineResource s -> TF.Attr s (Cns s))
+                      :: MachineResource s -> TF.Attr s (MachineCns s))
                   TF.validator
 
 instance P.HasAdministratorPw (MachineResource s) (TF.Attr s P.Text) where
@@ -497,9 +497,9 @@ instance P.HasCloudConfig (MachineResource s) (TF.Attr s P.Text) where
         P.lens (_cloudConfig :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _cloudConfig = a } :: MachineResource s)
 
-instance P.HasCns (MachineResource s) (TF.Attr s (Cns s)) where
+instance P.HasCns (MachineResource s) (TF.Attr s (MachineCns s)) where
     cns =
-        P.lens (_cns :: MachineResource s -> TF.Attr s (Cns s))
+        P.lens (_cns :: MachineResource s -> TF.Attr s (MachineCns s))
                (\s a -> s { _cns = a } :: MachineResource s)
 
 instance P.HasDeletionProtectionEnabled (MachineResource s) (TF.Attr s P.Bool) where
@@ -548,51 +548,51 @@ instance P.HasUserScript (MachineResource s) (TF.Attr s P.Text) where
                (\s a -> s { _userScript = a } :: MachineResource s)
 
 instance s ~ s' => P.HasComputedComputeNode (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedComputeNode x = TF.compute (TF.refKey x) "_computedComputeNode"
+    computedComputeNode x = TF.compute (TF.refKey x) "compute_node"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedDataset (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedDataset x = TF.compute (TF.refKey x) "_computedDataset"
+    computedDataset x = TF.compute (TF.refKey x) "dataset"
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (MachineResource s)) (TF.Attr s P.Integer) where
-    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
+    computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedDomainNames (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDomainNames x = TF.compute (TF.refKey x) "_computedDomainNames"
+    computedDomainNames x = TF.compute (TF.refKey x) "domain_names"
 
 instance s ~ s' => P.HasComputedIps (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "_computedIps"
+    computedIps x = TF.compute (TF.refKey x) "ips"
 
 instance s ~ s' => P.HasComputedMemory (TF.Ref s' (MachineResource s)) (TF.Attr s P.Integer) where
-    computedMemory x = TF.compute (TF.refKey x) "_computedMemory"
+    computedMemory x = TF.compute (TF.refKey x) "memory"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (Nic s)]) where
-    computedNic x = TF.compute (TF.refKey x) "_computedNic"
+instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (MachineNic s)]) where
+    computedNic x = TF.compute (TF.refKey x) "nic"
 
 instance s ~ s' => P.HasComputedPrimaryip (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedPrimaryip x = TF.compute (TF.refKey x) "_computedPrimaryip"
+    computedPrimaryip x = TF.compute (TF.refKey x) "primaryip"
 
 instance s ~ s' => P.HasComputedRootAuthorizedKeys (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedRootAuthorizedKeys x = TF.compute (TF.refKey x) "_computedRootAuthorizedKeys"
+    computedRootAuthorizedKeys x = TF.compute (TF.refKey x) "root_authorized_keys"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 -- | @triton_service_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_service_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/service_group.html terraform documentation>
 -- for more information.
 data ServiceGroupResource s = ServiceGroupResource'
     { _groupName :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Required)
+    -- ^ @group_name@ - (Required, Forces New)
     -- Friendly name for the service group
     --
     , _template  :: TF.Attr s P.Text
@@ -632,18 +632,18 @@ instance P.HasTemplate (ServiceGroupResource s) (TF.Attr s P.Text) where
                (\s a -> s { _template = a } :: ServiceGroupResource s)
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
+    computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
 -- | @triton_snapshot@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_snapshot terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/snapshot.html terraform documentation>
 -- for more information.
 data SnapshotResource s = SnapshotResource'
     { _machineId :: TF.Attr s P.Text
-    -- ^ @machine_id@ - (Required)
+    -- ^ @machine_id@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -678,11 +678,11 @@ instance P.HasName (SnapshotResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SnapshotResource s)
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SnapshotResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @triton_vlan@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Triton/triton_vlan terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/triton/r/vlan.html terraform documentation>
 -- for more information.
 data VlanResource s = VlanResource'
     { _description :: TF.Attr s P.Text
@@ -694,7 +694,7 @@ data VlanResource s = VlanResource'
     -- Unique name to identify VLAN
     --
     , _vlanId      :: TF.Attr s P.Integer
-    -- ^ @vlan_id@ - (Required)
+    -- ^ @vlan_id@ - (Required, Forces New)
     -- Number between 0-4095 indicating VLAN ID
     --
     } deriving (P.Show, P.Eq, P.Generic)
