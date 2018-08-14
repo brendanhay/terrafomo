@@ -51,14 +51,14 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @mailgun_domain@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Lailgun/mailgun_domain terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/mailgun/r/domain.html terraform documentation>
 -- for more information.
 data DomainResource s = DomainResource'
     { _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _smtpPassword :: TF.Attr s P.Text
-    -- ^ @smtp_password@ - (Required)
+    -- ^ @smtp_password@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -92,17 +92,17 @@ instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
         P.lens (_smtpPassword :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _smtpPassword = a } :: DomainResource s)
 
-instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (ReceivingRecords s)]) where
-    computedReceivingRecords x = TF.compute (TF.refKey x) "_computedReceivingRecords"
+instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (DomainReceivingRecords s)]) where
+    computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
-instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (SendingRecords s)]) where
-    computedSendingRecords x = TF.compute (TF.refKey x) "_computedSendingRecords"
+instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (DomainSendingRecords s)]) where
+    computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
 
 instance s ~ s' => P.HasComputedSmtpLogin (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSmtpLogin x = TF.compute (TF.refKey x) "_computedSmtpLogin"
+    computedSmtpLogin x = TF.compute (TF.refKey x) "smtp_login"
 
 instance s ~ s' => P.HasComputedSpamAction (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where
-    computedSpamAction x = TF.compute (TF.refKey x) "_computedSpamAction"
+    computedSpamAction x = TF.compute (TF.refKey x) "spam_action"
 
 instance s ~ s' => P.HasComputedWildcard (TF.Ref s' (DomainResource s)) (TF.Attr s P.Bool) where
-    computedWildcard x = TF.compute (TF.refKey x) "_computedWildcard"
+    computedWildcard x = TF.compute (TF.refKey x) "wildcard"

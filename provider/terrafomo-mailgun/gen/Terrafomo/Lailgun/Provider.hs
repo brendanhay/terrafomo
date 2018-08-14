@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Lailgun@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Lailgun/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/mailgun/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apiKey :: P.Text
