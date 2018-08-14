@@ -4986,25 +4986,6 @@
             },
             "arguments": [
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Attempt to read the token from Vault if true; if false, drift won't be",
-                        "detected."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"allow_read\" <$> TF.attribute",
-                    "name": "_allowRead",
-                    "method": "allowRead",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAllowRead",
-                    "validate": false,
-                    "optional": true,
-                    "original": "allow_read"
-                },
-                {
                     "default": "_dataJson",
                     "computed": false,
                     "required": true,
