@@ -2,8 +2,269 @@
     "settings": [
         {
             "con": {
-                "smart": "newGroup",
-                "name": "Group'"
+                "smart": "newDatabaseSecretBackendConnectionOracle",
+                "name": "DatabaseSecretBackendConnectionOracle'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Connection string to use to connect to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
+                    "name": "_connectionUrl",
+                    "method": "connectionUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasConnectionUrl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "connection_url"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of seconds a connection may be reused."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
+                    "name": "_maxConnectionLifetime",
+                    "method": "maxConnectionLifetime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxConnectionLifetime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_connection_lifetime"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of idle connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
+                    "name": "_maxIdleConnections",
+                    "method": "maxIdleConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxIdleConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_idle_connections"
+                },
+                {
+                    "default": "TF.value 2",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of open connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
+                    "name": "_maxOpenConnections",
+                    "method": "maxOpenConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxOpenConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_open_connections"
+                }
+            ],
+            "name": "DatabaseSecretBackendConnectionOracle",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DatabaseSecretBackendConnectionOracle s",
+            "original": "database_secret_backend_connection_oracle"
+        },
+        {
+            "con": {
+                "smart": "newDatabaseSecretBackendConnectionHana",
+                "name": "DatabaseSecretBackendConnectionHana'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Connection string to use to connect to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
+                    "name": "_connectionUrl",
+                    "method": "connectionUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasConnectionUrl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "connection_url"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of seconds a connection may be reused."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
+                    "name": "_maxConnectionLifetime",
+                    "method": "maxConnectionLifetime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxConnectionLifetime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_connection_lifetime"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of idle connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
+                    "name": "_maxIdleConnections",
+                    "method": "maxIdleConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxIdleConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_idle_connections"
+                },
+                {
+                    "default": "TF.value 2",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of open connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
+                    "name": "_maxOpenConnections",
+                    "method": "maxOpenConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxOpenConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_open_connections"
+                }
+            ],
+            "name": "DatabaseSecretBackendConnectionHana",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DatabaseSecretBackendConnectionHana s",
+            "original": "database_secret_backend_connection_hana"
+        },
+        {
+            "con": {
+                "smart": "newDatabaseSecretBackendConnectionPostgresql",
+                "name": "DatabaseSecretBackendConnectionPostgresql'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Connection string to use to connect to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
+                    "name": "_connectionUrl",
+                    "method": "connectionUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasConnectionUrl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "connection_url"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of seconds a connection may be reused."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
+                    "name": "_maxConnectionLifetime",
+                    "method": "maxConnectionLifetime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxConnectionLifetime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_connection_lifetime"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of idle connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
+                    "name": "_maxIdleConnections",
+                    "method": "maxIdleConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxIdleConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_idle_connections"
+                },
+                {
+                    "default": "TF.value 2",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of open connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
+                    "name": "_maxOpenConnections",
+                    "method": "maxOpenConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxOpenConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_open_connections"
+                }
+            ],
+            "name": "DatabaseSecretBackendConnectionPostgresql",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DatabaseSecretBackendConnectionPostgresql s",
+            "original": "database_secret_backend_connection_postgresql"
+        },
+        {
+            "con": {
+                "smart": "newOktaAuthBackendGroup",
+                "name": "OktaAuthBackendGroup'"
             },
             "arguments": [
                 {
@@ -43,7 +304,7 @@
                     "original": "policies"
                 }
             ],
-            "name": "Group",
+            "name": "OktaAuthBackendGroup",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -85,13 +346,329 @@
                 }
             ],
             "conflicts": [],
-            "type": "Group s",
-            "original": "group"
+            "type": "OktaAuthBackendGroup s",
+            "original": "okta_auth_backend_group"
         },
         {
             "con": {
-                "smart": "newCassandra",
-                "name": "Cassandra'"
+                "smart": "newOktaAuthBackendUser",
+                "name": "OktaAuthBackendUser'"
+            },
+            "arguments": [
+                {
+                    "default": "_groups",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Groups within the Okta auth backend to associate with this user"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"groups\" <$> TF.attribute",
+                    "name": "_groups",
+                    "method": "groups",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasGroups",
+                    "validate": false,
+                    "optional": false,
+                    "original": "groups"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Policies to associate with this user"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
+                    "name": "_policies",
+                    "method": "policies",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPolicies",
+                    "validate": false,
+                    "optional": true,
+                    "original": "policies"
+                },
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the user within Okta"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "_username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "validate": false,
+                    "optional": false,
+                    "original": "username"
+                }
+            ],
+            "name": "OktaAuthBackendUser",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_groups",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Groups within the Okta auth backend to associate with this user"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"groups\" <$> TF.attribute",
+                    "name": "_groups",
+                    "method": "groups",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasGroups",
+                    "validate": false,
+                    "optional": false,
+                    "original": "groups"
+                },
+                {
+                    "default": "_username",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Name of the user within Okta"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"username\" <$> TF.attribute",
+                    "name": "_username",
+                    "method": "username",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUsername",
+                    "validate": false,
+                    "optional": false,
+                    "original": "username"
+                }
+            ],
+            "conflicts": [],
+            "type": "OktaAuthBackendUser s",
+            "original": "okta_auth_backend_user"
+        },
+        {
+            "con": {
+                "smart": "newDatabaseSecretBackendConnectionMongodb",
+                "name": "DatabaseSecretBackendConnectionMongodb'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Connection string to use to connect to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
+                    "name": "_connectionUrl",
+                    "method": "connectionUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasConnectionUrl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "connection_url"
+                }
+            ],
+            "name": "DatabaseSecretBackendConnectionMongodb",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DatabaseSecretBackendConnectionMongodb s",
+            "original": "database_secret_backend_connection_mongodb"
+        },
+        {
+            "con": {
+                "smart": "newClientAuth",
+                "name": "ClientAuth'"
+            },
+            "arguments": [
+                {
+                    "default": "_certFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the client certificate."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"cert_file\"",
+                    "name": "_certFile",
+                    "method": "certFile",
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasCertFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cert_file"
+                },
+                {
+                    "default": "_keyFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the private key that the certificate was issued",
+                        "for."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"key_file\"",
+                    "name": "_keyFile",
+                    "method": "keyFile",
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasKeyFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key_file"
+                }
+            ],
+            "name": "ClientAuth",
+            "threaded": false,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_certFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the client certificate."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"cert_file\"",
+                    "name": "_certFile",
+                    "method": "certFile",
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasCertFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cert_file"
+                },
+                {
+                    "default": "_keyFile",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Path to a file containing the private key that the certificate was issued",
+                        "for."
+                    ],
+                    "forceNew": false,
+                    "encoder": "P.Just $ TF.assign \"key_file\"",
+                    "name": "_keyFile",
+                    "method": "keyFile",
+                    "conflicts": [],
+                    "type": "P.Text",
+                    "class": "HasKeyFile",
+                    "validate": false,
+                    "optional": false,
+                    "original": "key_file"
+                }
+            ],
+            "conflicts": [],
+            "type": "ClientAuth",
+            "original": "client_auth"
+        },
+        {
+            "con": {
+                "smart": "newDatabaseSecretBackendConnectionMysql",
+                "name": "DatabaseSecretBackendConnectionMysql'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Connection string to use to connect to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
+                    "name": "_connectionUrl",
+                    "method": "connectionUrl",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasConnectionUrl",
+                    "validate": false,
+                    "optional": true,
+                    "original": "connection_url"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of seconds a connection may be reused."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
+                    "name": "_maxConnectionLifetime",
+                    "method": "maxConnectionLifetime",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxConnectionLifetime",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_connection_lifetime"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of idle connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
+                    "name": "_maxIdleConnections",
+                    "method": "maxIdleConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxIdleConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_idle_connections"
+                },
+                {
+                    "default": "TF.value 2",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Maximum number of open connections to the database."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
+                    "name": "_maxOpenConnections",
+                    "method": "maxOpenConnections",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasMaxOpenConnections",
+                    "validate": false,
+                    "optional": true,
+                    "original": "max_open_connections"
+                }
+            ],
+            "name": "DatabaseSecretBackendConnectionMysql",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DatabaseSecretBackendConnectionMysql s",
+            "original": "database_secret_backend_connection_mysql"
+        },
+        {
+            "con": {
+                "smart": "newDatabaseSecretBackendConnectionCassandra",
+                "name": "DatabaseSecretBackendConnectionCassandra'"
             },
             "arguments": [
                 {
@@ -278,18 +855,18 @@
                     "original": "username"
                 }
             ],
-            "name": "Cassandra",
+            "name": "DatabaseSecretBackendConnectionCassandra",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "Cassandra s",
-            "original": "cassandra"
+            "type": "DatabaseSecretBackendConnectionCassandra s",
+            "original": "database_secret_backend_connection_cassandra"
         },
         {
             "con": {
-                "smart": "newMysql",
-                "name": "Mysql'"
+                "smart": "newDatabaseSecretBackendConnectionMssql",
+                "name": "DatabaseSecretBackendConnectionMssql'"
             },
             "arguments": [
                 {
@@ -365,592 +942,16 @@
                     "original": "max_open_connections"
                 }
             ],
-            "name": "Mysql",
+            "name": "DatabaseSecretBackendConnectionMssql",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "Mysql s",
-            "original": "mysql"
-        },
-        {
-            "con": {
-                "smart": "newMssql",
-                "name": "Mssql'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Connection string to use to connect to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
-                    "name": "_connectionUrl",
-                    "method": "connectionUrl",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasConnectionUrl",
-                    "validate": false,
-                    "optional": true,
-                    "original": "connection_url"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of seconds a connection may be reused."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
-                    "name": "_maxConnectionLifetime",
-                    "method": "maxConnectionLifetime",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxConnectionLifetime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_connection_lifetime"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of idle connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
-                    "name": "_maxIdleConnections",
-                    "method": "maxIdleConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxIdleConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_idle_connections"
-                },
-                {
-                    "default": "TF.value 2",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of open connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
-                    "name": "_maxOpenConnections",
-                    "method": "maxOpenConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxOpenConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_open_connections"
-                }
-            ],
-            "name": "Mssql",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Mssql s",
-            "original": "mssql"
-        },
-        {
-            "con": {
-                "smart": "newClientAuth",
-                "name": "ClientAuth'"
-            },
-            "arguments": [
-                {
-                    "default": "_certFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the client certificate."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"cert_file\"",
-                    "name": "_certFile",
-                    "method": "certFile",
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasCertFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cert_file"
-                },
-                {
-                    "default": "_keyFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the private key that the certificate was issued",
-                        "for."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"key_file\"",
-                    "name": "_keyFile",
-                    "method": "keyFile",
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasKeyFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key_file"
-                }
-            ],
-            "name": "ClientAuth",
-            "threaded": false,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_certFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the client certificate."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"cert_file\"",
-                    "name": "_certFile",
-                    "method": "certFile",
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasCertFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cert_file"
-                },
-                {
-                    "default": "_keyFile",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Path to a file containing the private key that the certificate was issued",
-                        "for."
-                    ],
-                    "forceNew": false,
-                    "encoder": "P.Just $ TF.assign \"key_file\"",
-                    "name": "_keyFile",
-                    "method": "keyFile",
-                    "conflicts": [],
-                    "type": "P.Text",
-                    "class": "HasKeyFile",
-                    "validate": false,
-                    "optional": false,
-                    "original": "key_file"
-                }
-            ],
-            "conflicts": [],
-            "type": "ClientAuth",
-            "original": "client_auth"
-        },
-        {
-            "con": {
-                "smart": "newUser",
-                "name": "User'"
-            },
-            "arguments": [
-                {
-                    "default": "_groups",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Groups within the Okta auth backend to associate with this user"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"groups\" <$> TF.attribute",
-                    "name": "_groups",
-                    "method": "groups",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasGroups",
-                    "validate": false,
-                    "optional": false,
-                    "original": "groups"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Policies to associate with this user"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"policies\" <$> TF.attribute",
-                    "name": "_policies",
-                    "method": "policies",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasPolicies",
-                    "validate": false,
-                    "optional": true,
-                    "original": "policies"
-                },
-                {
-                    "default": "_username",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the user within Okta"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"username\" <$> TF.attribute",
-                    "name": "_username",
-                    "method": "username",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUsername",
-                    "validate": false,
-                    "optional": false,
-                    "original": "username"
-                }
-            ],
-            "name": "User",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_groups",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Groups within the Okta auth backend to associate with this user"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"groups\" <$> TF.attribute",
-                    "name": "_groups",
-                    "method": "groups",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasGroups",
-                    "validate": false,
-                    "optional": false,
-                    "original": "groups"
-                },
-                {
-                    "default": "_username",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Name of the user within Okta"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"username\" <$> TF.attribute",
-                    "name": "_username",
-                    "method": "username",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUsername",
-                    "validate": false,
-                    "optional": false,
-                    "original": "username"
-                }
-            ],
-            "conflicts": [],
-            "type": "User s",
-            "original": "user"
-        },
-        {
-            "con": {
-                "smart": "newMongodb",
-                "name": "Mongodb'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Connection string to use to connect to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
-                    "name": "_connectionUrl",
-                    "method": "connectionUrl",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasConnectionUrl",
-                    "validate": false,
-                    "optional": true,
-                    "original": "connection_url"
-                }
-            ],
-            "name": "Mongodb",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Mongodb s",
-            "original": "mongodb"
-        },
-        {
-            "con": {
-                "smart": "newHana",
-                "name": "Hana'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Connection string to use to connect to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
-                    "name": "_connectionUrl",
-                    "method": "connectionUrl",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasConnectionUrl",
-                    "validate": false,
-                    "optional": true,
-                    "original": "connection_url"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of seconds a connection may be reused."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
-                    "name": "_maxConnectionLifetime",
-                    "method": "maxConnectionLifetime",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxConnectionLifetime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_connection_lifetime"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of idle connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
-                    "name": "_maxIdleConnections",
-                    "method": "maxIdleConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxIdleConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_idle_connections"
-                },
-                {
-                    "default": "TF.value 2",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of open connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
-                    "name": "_maxOpenConnections",
-                    "method": "maxOpenConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxOpenConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_open_connections"
-                }
-            ],
-            "name": "Hana",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Hana s",
-            "original": "hana"
-        },
-        {
-            "con": {
-                "smart": "newOracle",
-                "name": "Oracle'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Connection string to use to connect to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
-                    "name": "_connectionUrl",
-                    "method": "connectionUrl",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasConnectionUrl",
-                    "validate": false,
-                    "optional": true,
-                    "original": "connection_url"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of seconds a connection may be reused."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
-                    "name": "_maxConnectionLifetime",
-                    "method": "maxConnectionLifetime",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxConnectionLifetime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_connection_lifetime"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of idle connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
-                    "name": "_maxIdleConnections",
-                    "method": "maxIdleConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxIdleConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_idle_connections"
-                },
-                {
-                    "default": "TF.value 2",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of open connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
-                    "name": "_maxOpenConnections",
-                    "method": "maxOpenConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxOpenConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_open_connections"
-                }
-            ],
-            "name": "Oracle",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Oracle s",
-            "original": "oracle"
-        },
-        {
-            "con": {
-                "smart": "newPostgresql",
-                "name": "Postgresql'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Connection string to use to connect to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"connection_url\" <$> TF.attribute",
-                    "name": "_connectionUrl",
-                    "method": "connectionUrl",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasConnectionUrl",
-                    "validate": false,
-                    "optional": true,
-                    "original": "connection_url"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of seconds a connection may be reused."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_connection_lifetime\" <$> TF.attribute",
-                    "name": "_maxConnectionLifetime",
-                    "method": "maxConnectionLifetime",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxConnectionLifetime",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_connection_lifetime"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of idle connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_idle_connections\" <$> TF.attribute",
-                    "name": "_maxIdleConnections",
-                    "method": "maxIdleConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxIdleConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_idle_connections"
-                },
-                {
-                    "default": "TF.value 2",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Maximum number of open connections to the database."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_open_connections\" <$> TF.attribute",
-                    "name": "_maxOpenConnections",
-                    "method": "maxOpenConnections",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasMaxOpenConnections",
-                    "validate": false,
-                    "optional": true,
-                    "original": "max_open_connections"
-                }
-            ],
-            "name": "Postgresql",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Postgresql s",
-            "original": "postgresql"
+            "type": "DatabaseSecretBackendConnectionMssql s",
+            "original": "database_secret_backend_connection_mssql"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/vault/index.html",
     "dataSources": [
         {
             "con": {
@@ -995,6 +996,7 @@
                     "original": "role_name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/d/approle_auth_backend_role_id.html",
             "name": "ApproleAuthBackendRoleIdData",
             "threaded": true,
             "attributes": [
@@ -1103,6 +1105,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/d/aws_access_credentials.html",
             "name": "AwsAccessCredentialsData",
             "threaded": true,
             "attributes": [
@@ -1301,6 +1304,7 @@
                     "original": "path"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/d/generic_secret.html",
             "name": "GenericSecretData",
             "threaded": true,
             "attributes": [
@@ -1501,6 +1505,7 @@
                     "original": "secret_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_login.html",
             "name": "ApproleAuthBackendLoginResource",
             "threaded": true,
             "attributes": [
@@ -1868,6 +1873,7 @@
                     "original": "token_ttl"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_role.html",
             "name": "ApproleAuthBackendRoleResource",
             "threaded": true,
             "attributes": [
@@ -1993,6 +1999,7 @@
                     "original": "role_name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/approle_auth_backend_role_secret_id.html",
             "name": "ApproleAuthBackendRoleSecretIdResource",
             "threaded": true,
             "attributes": [
@@ -2100,6 +2107,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/auth_backend.html",
             "name": "AuthBackendResource",
             "threaded": true,
             "attributes": [
@@ -2227,6 +2235,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_cert.html",
             "name": "AwsAuthBackendCertResource",
             "threaded": true,
             "attributes": [],
@@ -2407,6 +2416,7 @@
                     "original": "sts_endpoint"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_client.html",
             "name": "AwsAuthBackendClientResource",
             "threaded": true,
             "attributes": [],
@@ -2477,6 +2487,7 @@
                     "original": "safety_buffer"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_identity_whitelist.html",
             "name": "AwsAuthBackendIdentityWhitelistResource",
             "threaded": true,
             "attributes": [],
@@ -2639,6 +2650,7 @@
                     "original": "signature"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_login.html",
             "name": "AwsAuthBackendLoginResource",
             "threaded": true,
             "attributes": [
@@ -3183,6 +3195,7 @@
                     "original": "ttl"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_role.html",
             "name": "AwsAuthBackendRoleResource",
             "threaded": true,
             "attributes": [
@@ -3385,6 +3398,7 @@
                     "original": "role"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_role_tag.html",
             "name": "AwsAuthBackendRoleTagResource",
             "threaded": true,
             "attributes": [
@@ -3507,6 +3521,7 @@
                     "original": "sts_role"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_auth_backend_sts_role.html",
             "name": "AwsAuthBackendStsRoleResource",
             "threaded": true,
             "attributes": [],
@@ -3632,6 +3647,7 @@
                     "original": "secret_key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_secret_backend.html",
             "name": "AwsSecretBackendResource",
             "threaded": true,
             "attributes": [
@@ -3823,6 +3839,7 @@
                     "original": "policy_arn"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/aws_secret_backend_role.html",
             "name": "AwsSecretBackendRoleResource",
             "threaded": true,
             "attributes": [],
@@ -4002,7 +4019,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Cassandra s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionCassandra s)",
                     "class": "HasCassandra",
                     "validate": true,
                     "optional": true,
@@ -4051,7 +4068,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (Hana s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionHana s)",
                     "class": "HasHana",
                     "validate": true,
                     "optional": true,
@@ -4100,7 +4117,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Mongodb s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMongodb s)",
                     "class": "HasMongodb",
                     "validate": true,
                     "optional": true,
@@ -4149,7 +4166,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Mssql s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMssql s)",
                     "class": "HasMssql",
                     "validate": true,
                     "optional": true,
@@ -4198,7 +4215,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Mysql s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMysql s)",
                     "class": "HasMysql",
                     "validate": true,
                     "optional": true,
@@ -4265,7 +4282,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Oracle s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionOracle s)",
                     "class": "HasOracle",
                     "validate": true,
                     "optional": true,
@@ -4314,7 +4331,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Postgresql s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionPostgresql s)",
                     "class": "HasPostgresql",
                     "validate": true,
                     "optional": true,
@@ -4339,6 +4356,7 @@
                     "original": "verify_connection"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/database_secret_backend_connection.html",
             "name": "DatabaseSecretBackendConnectionResource",
             "threaded": true,
             "attributes": [],
@@ -4424,7 +4442,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Cassandra s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionCassandra s)",
                     "class": "HasCassandra",
                     "validate": true,
                     "optional": true,
@@ -4473,7 +4491,7 @@
                             "method": "postgresql"
                         }
                     ],
-                    "type": "TF.Attr s (Hana s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionHana s)",
                     "class": "HasHana",
                     "validate": true,
                     "optional": true,
@@ -4522,7 +4540,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Mongodb s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMongodb s)",
                     "class": "HasMongodb",
                     "validate": true,
                     "optional": true,
@@ -4571,7 +4589,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Mssql s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMssql s)",
                     "class": "HasMssql",
                     "validate": true,
                     "optional": true,
@@ -4620,7 +4638,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Mysql s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionMysql s)",
                     "class": "HasMysql",
                     "validate": true,
                     "optional": true,
@@ -4669,7 +4687,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Oracle s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionOracle s)",
                     "class": "HasOracle",
                     "validate": true,
                     "optional": true,
@@ -4718,7 +4736,7 @@
                             "method": "hana"
                         }
                     ],
-                    "type": "TF.Attr s (Postgresql s)",
+                    "type": "TF.Attr s (DatabaseSecretBackendConnectionPostgresql s)",
                     "class": "HasPostgresql",
                     "validate": true,
                     "optional": true,
@@ -4898,6 +4916,7 @@
                     "original": "rollback_statements"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/database_secret_backend_role.html",
             "name": "DatabaseSecretBackendRoleResource",
             "threaded": true,
             "attributes": [],
@@ -5040,6 +5059,7 @@
                     "original": "path"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/generic_secret.html",
             "name": "GenericSecretResource",
             "threaded": true,
             "attributes": [],
@@ -5146,6 +5166,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/mount.html",
             "name": "MountResource",
             "threaded": true,
             "attributes": [
@@ -5364,6 +5385,7 @@
                     "original": "ttl"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend.html",
             "name": "OktaAuthBackendResource",
             "threaded": true,
             "attributes": [
@@ -5377,7 +5399,7 @@
                     "name": "_computedGroup",
                     "method": "computedGroup",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Group s)]",
+                    "type": "TF.Attr s [TF.Attr s (OktaAuthBackendGroup s)]",
                     "class": "HasComputedGroup",
                     "validate": true,
                     "optional": true,
@@ -5393,7 +5415,7 @@
                     "name": "_computedUser",
                     "method": "computedUser",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (User s)]",
+                    "type": "TF.Attr s [TF.Attr s (OktaAuthBackendUser s)]",
                     "class": "HasComputedUser",
                     "validate": true,
                     "optional": true,
@@ -5486,6 +5508,7 @@
                     "original": "policies"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_group.html",
             "name": "OktaAuthBackendGroupResource",
             "threaded": true,
             "attributes": [],
@@ -5610,6 +5633,7 @@
                     "original": "username"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/okta_auth_backend_user.html",
             "name": "OktaAuthBackendUserResource",
             "threaded": true,
             "attributes": [],
@@ -5698,6 +5722,7 @@
                     "original": "policy"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/vault/r/policy.html",
             "name": "PolicyResource",
             "threaded": true,
             "attributes": [],
