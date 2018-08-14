@@ -67,11 +67,11 @@ import qualified Terrafomo.Validator     as TF
 
 -- | @chef_data_bag@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Chef/chef_data_bag terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/chef/r/data_bag.html terraform documentation>
 -- for more information.
 data DataBagResource s = DataBagResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -98,18 +98,18 @@ instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DataBagResource s)
 
 instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
-    computedApiUri x = TF.compute (TF.refKey x) "_computedApiUri"
+    computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
 -- | @chef_data_bag_item@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Chef/chef_data_bag_item terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/chef/r/data_bag_item.html terraform documentation>
 -- for more information.
 data DataBagItemResource s = DataBagItemResource'
     { _contentJson :: TF.Attr s P.Text
-    -- ^ @content_json@ - (Required)
+    -- ^ @content_json@ - (Required, Forces New)
     --
     , _dataBagName :: TF.Attr s P.Text
-    -- ^ @data_bag_name@ - (Required)
+    -- ^ @data_bag_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -144,11 +144,11 @@ instance P.HasDataBagName (DataBagItemResource s) (TF.Attr s P.Text) where
                (\s a -> s { _dataBagName = a } :: DataBagItemResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagItemResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @chef_environment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Chef/chef_environment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/chef/r/environment.html terraform documentation>
 -- for more information.
 data EnvironmentResource s = EnvironmentResource'
     { _cookbookConstraints    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -161,7 +161,7 @@ data EnvironmentResource s = EnvironmentResource'
     -- ^ @description@ - (Optional)
     --
     , _name                   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _overrideAttributesJson :: TF.Attr s P.Text
     -- ^ @override_attributes_json@ - (Optional)
@@ -220,7 +220,7 @@ instance P.HasOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) 
 
 -- | @chef_node@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Chef/chef_node terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/chef/r/node.html terraform documentation>
 -- for more information.
 data NodeResource s = NodeResource'
     { _automaticAttributesJson :: TF.Attr s P.Text
@@ -233,7 +233,7 @@ data NodeResource s = NodeResource'
     -- ^ @environment_name@ - (Optional)
     --
     , _name                    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _normalAttributesJson    :: TF.Attr s P.Text
     -- ^ @normal_attributes_json@ - (Optional)
@@ -312,7 +312,7 @@ instance P.HasRunList (NodeResource s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @chef_role@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Chef/chef_role terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/chef/r/role.html terraform documentation>
 -- for more information.
 data RoleResource s = RoleResource'
     { _defaultAttributesJson  :: TF.Attr s P.Text
@@ -322,7 +322,7 @@ data RoleResource s = RoleResource'
     -- ^ @description@ - (Optional)
     --
     , _name                   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _overrideAttributesJson :: TF.Attr s P.Text
     -- ^ @override_attributes_json@ - (Optional)
