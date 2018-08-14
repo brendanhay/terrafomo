@@ -746,9 +746,6 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _releaseEip   :: TF.Attr s P.Bool
     -- ^ @release_eip@ - (Optional)
     --
-    , _size         :: TF.Attr s P.Integer
-    -- ^ @size@ - (Optional)
-    --
     , _vswitchId    :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Required)
     --
@@ -773,7 +770,6 @@ containerClusterResource _cidrBlock _instanceType _password _vswitchId =
             , _nodeNumber = TF.value 1
             , _password = _password
             , _releaseEip = TF.value P.False
-            , _size = TF.Nil
             , _vswitchId = _vswitchId
             }
 
@@ -789,7 +785,6 @@ instance TF.IsObject (ContainerClusterResource s) where
         , TF.assign "node_number" <$> TF.attribute _nodeNumber
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "release_eip" <$> TF.attribute _releaseEip
-        , TF.assign "size" <$> TF.attribute _size
         , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
         ]
 
@@ -845,11 +840,6 @@ instance P.HasReleaseEip (ContainerClusterResource s) (TF.Attr s P.Bool) where
     releaseEip =
         P.lens (_releaseEip :: ContainerClusterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _releaseEip = a } :: ContainerClusterResource s)
-
-instance P.HasSize (ContainerClusterResource s) (TF.Attr s P.Integer) where
-    size =
-        P.lens (_size :: ContainerClusterResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a } :: ContainerClusterResource s)
 
 instance P.HasVswitchId (ContainerClusterResource s) (TF.Attr s P.Text) where
     vswitchId =
@@ -1035,9 +1025,6 @@ data CsKubernetesResource s = CsKubernetesResource'
     , _newNatGateway       :: TF.Attr s P.Bool
     -- ^ @new_nat_gateway@ - (Optional)
     --
-    , _nodes               :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @nodes@ - (Optional)
-    --
     , _password            :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
@@ -1084,7 +1071,6 @@ csKubernetesResource _masterInstanceType _password _workerInstanceType =
             , _masterInstanceType = _masterInstanceType
             , _namePrefix = TF.value "Terraform-Creation"
             , _newNatGateway = TF.value P.True
-            , _nodes = TF.Nil
             , _password = _password
             , _podCidr = TF.Nil
             , _serviceCidr = TF.Nil
@@ -1109,7 +1095,6 @@ instance TF.IsObject (CsKubernetesResource s) where
         , TF.assign "master_instance_type" <$> TF.attribute _masterInstanceType
         , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "new_nat_gateway" <$> TF.attribute _newNatGateway
-        , TF.assign "nodes" <$> TF.attribute _nodes
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "pod_cidr" <$> TF.attribute _podCidr
         , TF.assign "service_cidr" <$> TF.attribute _serviceCidr
@@ -1183,11 +1168,6 @@ instance P.HasNewNatGateway (CsKubernetesResource s) (TF.Attr s P.Bool) where
         P.lens (_newNatGateway :: CsKubernetesResource s -> TF.Attr s P.Bool)
                (\s a -> s { _newNatGateway = a } :: CsKubernetesResource s)
 
-instance P.HasNodes (CsKubernetesResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    nodes =
-        P.lens (_nodes :: CsKubernetesResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _nodes = a } :: CsKubernetesResource s)
-
 instance P.HasPassword (CsKubernetesResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: CsKubernetesResource s -> TF.Attr s P.Text)
@@ -1249,9 +1229,6 @@ instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (CsKubernetesResource s)
 instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
     computedSecurityGroupId x = TF.compute (TF.refKey x) "_computedSecurityGroupId"
 
-instance s ~ s' => P.HasComputedSlbId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedSlbId x = TF.compute (TF.refKey x) "_computedSlbId"
-
 instance s ~ s' => P.HasComputedSlbInternet (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
     computedSlbInternet x = TF.compute (TF.refKey x) "_computedSlbInternet"
 
@@ -1302,9 +1279,6 @@ data CsSwarmResource s = CsSwarmResource'
     , _releaseEip   :: TF.Attr s P.Bool
     -- ^ @release_eip@ - (Optional)
     --
-    , _size         :: TF.Attr s P.Integer
-    -- ^ @size@ - (Optional)
-    --
     , _vswitchId    :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Required)
     --
@@ -1329,7 +1303,6 @@ csSwarmResource _cidrBlock _instanceType _password _vswitchId =
             , _nodeNumber = TF.value 1
             , _password = _password
             , _releaseEip = TF.value P.False
-            , _size = TF.Nil
             , _vswitchId = _vswitchId
             }
 
@@ -1345,7 +1318,6 @@ instance TF.IsObject (CsSwarmResource s) where
         , TF.assign "node_number" <$> TF.attribute _nodeNumber
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "release_eip" <$> TF.attribute _releaseEip
-        , TF.assign "size" <$> TF.attribute _size
         , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
         ]
 
@@ -1401,11 +1373,6 @@ instance P.HasReleaseEip (CsSwarmResource s) (TF.Attr s P.Bool) where
     releaseEip =
         P.lens (_releaseEip :: CsSwarmResource s -> TF.Attr s P.Bool)
                (\s a -> s { _releaseEip = a } :: CsSwarmResource s)
-
-instance P.HasSize (CsSwarmResource s) (TF.Attr s P.Integer) where
-    size =
-        P.lens (_size :: CsSwarmResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a } :: CsSwarmResource s)
 
 instance P.HasVswitchId (CsSwarmResource s) (TF.Attr s P.Text) where
     vswitchId =
@@ -1762,61 +1729,28 @@ instance P.HasName (DbDatabaseResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_instance terraform documentation>
 -- for more information.
 data DbInstanceResource s = DbInstanceResource'
-    { _allocatePublicConnection :: TF.Attr s P.Bool
-    -- ^ @allocate_public_connection@ - (Optional)
-    --
-    , _backupRetentionPeriod    :: TF.Attr s P.Integer
-    -- ^ @backup_retention_period@ - (Optional)
-    --
-    , _dbInstanceClass          :: TF.Attr s P.Text
-    -- ^ @db_instance_class@ - (Optional)
-    --
-    , _dbInstanceNetType        :: TF.Attr s P.Text
-    -- ^ @db_instance_net_type@ - (Optional)
-    --
-    , _dbInstanceStorage        :: TF.Attr s P.Integer
-    -- ^ @db_instance_storage@ - (Optional)
-    --
-    , _engine                   :: TF.Attr s P.Text
+    { _engine             :: TF.Attr s P.Text
     -- ^ @engine@ - (Required)
     --
-    , _engineVersion            :: TF.Attr s P.Text
+    , _engineVersion      :: TF.Attr s P.Text
     -- ^ @engine_version@ - (Required)
     --
-    , _instanceChargeType       :: TF.Attr s P.Text
+    , _instanceChargeType :: TF.Attr s P.Text
     -- ^ @instance_charge_type@ - (Optional)
     --
-    , _instanceName             :: TF.Attr s P.Text
+    , _instanceName       :: TF.Attr s P.Text
     -- ^ @instance_name@ - (Optional)
     --
-    , _instanceNetworkType      :: TF.Attr s P.Text
-    -- ^ @instance_network_type@ - (Optional)
-    --
-    , _instanceStorage          :: TF.Attr s P.Integer
+    , _instanceStorage    :: TF.Attr s P.Integer
     -- ^ @instance_storage@ - (Required)
     --
-    , _instanceType             :: TF.Attr s P.Text
+    , _instanceType       :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required)
     --
-    , _masterUserName           :: TF.Attr s P.Text
-    -- ^ @master_user_name@ - (Optional)
-    --
-    , _masterUserPassword       :: TF.Attr s P.Text
-    -- ^ @master_user_password@ - (Optional)
-    --
-    , _multiAz                  :: TF.Attr s P.Bool
-    -- ^ @multi_az@ - (Optional)
-    --
-    , _period                   :: TF.Attr s P.Integer
+    , _period             :: TF.Attr s P.Integer
     -- ^ @period@ - (Optional)
     --
-    , _preferredBackupPeriod    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @preferred_backup_period@ - (Optional)
-    --
-    , _preferredBackupTime      :: TF.Attr s P.Text
-    -- ^ @preferred_backup_time@ - (Optional)
-    --
-    , _vswitchId                :: TF.Attr s P.Text
+    , _vswitchId          :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1830,77 +1764,30 @@ dbInstanceResource
 dbInstanceResource _engine _engineVersion _instanceStorage _instanceType =
     TF.newResource "alicloud_db_instance" TF.validator $
         DbInstanceResource'
-            { _allocatePublicConnection = TF.Nil
-            , _backupRetentionPeriod = TF.Nil
-            , _dbInstanceClass = TF.Nil
-            , _dbInstanceNetType = TF.Nil
-            , _dbInstanceStorage = TF.Nil
-            , _engine = _engine
+            { _engine = _engine
             , _engineVersion = _engineVersion
             , _instanceChargeType = TF.Nil
             , _instanceName = TF.Nil
-            , _instanceNetworkType = TF.Nil
             , _instanceStorage = _instanceStorage
             , _instanceType = _instanceType
-            , _masterUserName = TF.Nil
-            , _masterUserPassword = TF.Nil
-            , _multiAz = TF.Nil
             , _period = TF.value 1
-            , _preferredBackupPeriod = TF.Nil
-            , _preferredBackupTime = TF.Nil
             , _vswitchId = TF.Nil
             }
 
 instance TF.IsObject (DbInstanceResource s) where
     toObject DbInstanceResource'{..} = P.catMaybes
-        [ TF.assign "allocate_public_connection" <$> TF.attribute _allocatePublicConnection
-        , TF.assign "backup_retention_period" <$> TF.attribute _backupRetentionPeriod
-        , TF.assign "db_instance_class" <$> TF.attribute _dbInstanceClass
-        , TF.assign "db_instance_net_type" <$> TF.attribute _dbInstanceNetType
-        , TF.assign "db_instance_storage" <$> TF.attribute _dbInstanceStorage
-        , TF.assign "engine" <$> TF.attribute _engine
+        [ TF.assign "engine" <$> TF.attribute _engine
         , TF.assign "engine_version" <$> TF.attribute _engineVersion
         , TF.assign "instance_charge_type" <$> TF.attribute _instanceChargeType
         , TF.assign "instance_name" <$> TF.attribute _instanceName
-        , TF.assign "instance_network_type" <$> TF.attribute _instanceNetworkType
         , TF.assign "instance_storage" <$> TF.attribute _instanceStorage
         , TF.assign "instance_type" <$> TF.attribute _instanceType
-        , TF.assign "master_user_name" <$> TF.attribute _masterUserName
-        , TF.assign "master_user_password" <$> TF.attribute _masterUserPassword
-        , TF.assign "multi_az" <$> TF.attribute _multiAz
         , TF.assign "period" <$> TF.attribute _period
-        , TF.assign "preferred_backup_period" <$> TF.attribute _preferredBackupPeriod
-        , TF.assign "preferred_backup_time" <$> TF.attribute _preferredBackupTime
         , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
         ]
 
 instance TF.IsValid (DbInstanceResource s) where
     validator = P.mempty
-
-instance P.HasAllocatePublicConnection (DbInstanceResource s) (TF.Attr s P.Bool) where
-    allocatePublicConnection =
-        P.lens (_allocatePublicConnection :: DbInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allocatePublicConnection = a } :: DbInstanceResource s)
-
-instance P.HasBackupRetentionPeriod (DbInstanceResource s) (TF.Attr s P.Integer) where
-    backupRetentionPeriod =
-        P.lens (_backupRetentionPeriod :: DbInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _backupRetentionPeriod = a } :: DbInstanceResource s)
-
-instance P.HasDbInstanceClass (DbInstanceResource s) (TF.Attr s P.Text) where
-    dbInstanceClass =
-        P.lens (_dbInstanceClass :: DbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dbInstanceClass = a } :: DbInstanceResource s)
-
-instance P.HasDbInstanceNetType (DbInstanceResource s) (TF.Attr s P.Text) where
-    dbInstanceNetType =
-        P.lens (_dbInstanceNetType :: DbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _dbInstanceNetType = a } :: DbInstanceResource s)
-
-instance P.HasDbInstanceStorage (DbInstanceResource s) (TF.Attr s P.Integer) where
-    dbInstanceStorage =
-        P.lens (_dbInstanceStorage :: DbInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _dbInstanceStorage = a } :: DbInstanceResource s)
 
 instance P.HasEngine (DbInstanceResource s) (TF.Attr s P.Text) where
     engine =
@@ -1922,11 +1809,6 @@ instance P.HasInstanceName (DbInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_instanceName :: DbInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceName = a } :: DbInstanceResource s)
 
-instance P.HasInstanceNetworkType (DbInstanceResource s) (TF.Attr s P.Text) where
-    instanceNetworkType =
-        P.lens (_instanceNetworkType :: DbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceNetworkType = a } :: DbInstanceResource s)
-
 instance P.HasInstanceStorage (DbInstanceResource s) (TF.Attr s P.Integer) where
     instanceStorage =
         P.lens (_instanceStorage :: DbInstanceResource s -> TF.Attr s P.Integer)
@@ -1937,35 +1819,10 @@ instance P.HasInstanceType (DbInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_instanceType :: DbInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceType = a } :: DbInstanceResource s)
 
-instance P.HasMasterUserName (DbInstanceResource s) (TF.Attr s P.Text) where
-    masterUserName =
-        P.lens (_masterUserName :: DbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _masterUserName = a } :: DbInstanceResource s)
-
-instance P.HasMasterUserPassword (DbInstanceResource s) (TF.Attr s P.Text) where
-    masterUserPassword =
-        P.lens (_masterUserPassword :: DbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _masterUserPassword = a } :: DbInstanceResource s)
-
-instance P.HasMultiAz (DbInstanceResource s) (TF.Attr s P.Bool) where
-    multiAz =
-        P.lens (_multiAz :: DbInstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _multiAz = a } :: DbInstanceResource s)
-
 instance P.HasPeriod (DbInstanceResource s) (TF.Attr s P.Integer) where
     period =
         P.lens (_period :: DbInstanceResource s -> TF.Attr s P.Integer)
                (\s a -> s { _period = a } :: DbInstanceResource s)
-
-instance P.HasPreferredBackupPeriod (DbInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    preferredBackupPeriod =
-        P.lens (_preferredBackupPeriod :: DbInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _preferredBackupPeriod = a } :: DbInstanceResource s)
-
-instance P.HasPreferredBackupTime (DbInstanceResource s) (TF.Attr s P.Text) where
-    preferredBackupTime =
-        P.lens (_preferredBackupTime :: DbInstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _preferredBackupTime = a } :: DbInstanceResource s)
 
 instance P.HasVswitchId (DbInstanceResource s) (TF.Attr s P.Text) where
     vswitchId =
@@ -1974,12 +1831,6 @@ instance P.HasVswitchId (DbInstanceResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedConnectionString x = TF.compute (TF.refKey x) "_computedConnectionString"
-
-instance s ~ s' => P.HasComputedConnections (TF.Ref s' (DbInstanceResource s)) (TF.Attr s [TF.Attr s (Connections s)]) where
-    computedConnections x = TF.compute (TF.refKey x) "_computedConnections"
-
-instance s ~ s' => P.HasComputedDbMappings (TF.Ref s' (DbInstanceResource s)) (TF.Attr s [TF.Attr s (DbMappings s)]) where
-    computedDbMappings x = TF.compute (TF.refKey x) "_computedDbMappings"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "_computedPort"
@@ -2135,9 +1986,6 @@ instance P.HasInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
     instanceId =
         P.lens (_instanceId :: DiskAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceId = a } :: DiskAttachmentResource s)
-
-instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
-    computedDeviceName x = TF.compute (TF.refKey x) "_computedDeviceName"
 
 -- | @alicloud_dns@ Resource.
 --
@@ -2502,9 +2350,6 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource'
     , _imageId :: TF.Attr s P.Text
     -- ^ @image_id@ - (Required)
     --
-    , _instanceIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instance_ids@ - (Optional)
-    --
     , _instanceName :: TF.Attr s P.Text
     -- ^ @instance_name@ - (Optional)
     --
@@ -2516,9 +2361,6 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource'
     --
     , _internetMaxBandwidthOut :: TF.Attr s P.Integer
     -- ^ @internet_max_bandwidth_out@ - (Optional)
-    --
-    , _ioOptimized :: TF.Attr s P.Text
-    -- ^ @io_optimized@ - (Optional)
     --
     , _isOutdated :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
@@ -2559,12 +2401,10 @@ essScalingConfigurationResource _imageId _instanceType _scalingGroupId _security
             , _enable = TF.Nil
             , _forceDelete = TF.value P.False
             , _imageId = _imageId
-            , _instanceIds = TF.Nil
             , _instanceName = TF.value "ESS-Instance"
             , _instanceType = _instanceType
             , _internetChargeType = TF.Nil
             , _internetMaxBandwidthOut = TF.Nil
-            , _ioOptimized = TF.Nil
             , _isOutdated = TF.Nil
             , _keyName = TF.Nil
             , _roleName = TF.Nil
@@ -2581,12 +2421,10 @@ instance TF.IsObject (EssScalingConfigurationResource s) where
         , TF.assign "enable" <$> TF.attribute _enable
         , TF.assign "force_delete" <$> TF.attribute _forceDelete
         , TF.assign "image_id" <$> TF.attribute _imageId
-        , TF.assign "instance_ids" <$> TF.attribute _instanceIds
         , TF.assign "instance_name" <$> TF.attribute _instanceName
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
         , TF.assign "internet_max_bandwidth_out" <$> TF.attribute _internetMaxBandwidthOut
-        , TF.assign "io_optimized" <$> TF.attribute _ioOptimized
         , TF.assign "is_outdated" <$> TF.attribute _isOutdated
         , TF.assign "key_name" <$> TF.attribute _keyName
         , TF.assign "role_name" <$> TF.attribute _roleName
@@ -2624,11 +2462,6 @@ instance P.HasImageId (EssScalingConfigurationResource s) (TF.Attr s P.Text) whe
         P.lens (_imageId :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
                (\s a -> s { _imageId = a } :: EssScalingConfigurationResource s)
 
-instance P.HasInstanceIds (EssScalingConfigurationResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    instanceIds =
-        P.lens (_instanceIds :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _instanceIds = a } :: EssScalingConfigurationResource s)
-
 instance P.HasInstanceName (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
     instanceName =
         P.lens (_instanceName :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
@@ -2648,11 +2481,6 @@ instance P.HasInternetMaxBandwidthOut (EssScalingConfigurationResource s) (TF.At
     internetMaxBandwidthOut =
         P.lens (_internetMaxBandwidthOut :: EssScalingConfigurationResource s -> TF.Attr s P.Integer)
                (\s a -> s { _internetMaxBandwidthOut = a } :: EssScalingConfigurationResource s)
-
-instance P.HasIoOptimized (EssScalingConfigurationResource s) (TF.Attr s P.Text) where
-    ioOptimized =
-        P.lens (_ioOptimized :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ioOptimized = a } :: EssScalingConfigurationResource s)
 
 instance P.HasIsOutdated (EssScalingConfigurationResource s) (TF.Attr s P.Bool) where
     isOutdated =
@@ -2732,9 +2560,6 @@ data EssScalingGroupResource s = EssScalingGroupResource'
     , _scalingGroupName :: TF.Attr s P.Text
     -- ^ @scaling_group_name@ - (Optional)
     --
-    , _vswitchId        :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Optional)
-    --
     , _vswitchIds       :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @vswitch_ids@ - (Optional)
     --
@@ -2754,7 +2579,6 @@ essScalingGroupResource _maxSize _minSize =
             , _minSize = _minSize
             , _removalPolicies = TF.Nil
             , _scalingGroupName = TF.Nil
-            , _vswitchId = TF.Nil
             , _vswitchIds = TF.Nil
             }
 
@@ -2767,7 +2591,6 @@ instance TF.IsObject (EssScalingGroupResource s) where
         , TF.assign "min_size" <$> TF.attribute _minSize
         , TF.assign "removal_policies" <$> TF.attribute _removalPolicies
         , TF.assign "scaling_group_name" <$> TF.attribute _scalingGroupName
-        , TF.assign "vswitch_id" <$> TF.attribute _vswitchId
         , TF.assign "vswitch_ids" <$> TF.attribute _vswitchIds
         ]
 
@@ -2808,11 +2631,6 @@ instance P.HasScalingGroupName (EssScalingGroupResource s) (TF.Attr s P.Text) wh
     scalingGroupName =
         P.lens (_scalingGroupName :: EssScalingGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _scalingGroupName = a } :: EssScalingGroupResource s)
-
-instance P.HasVswitchId (EssScalingGroupResource s) (TF.Attr s P.Text) where
-    vswitchId =
-        P.lens (_vswitchId :: EssScalingGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _vswitchId = a } :: EssScalingGroupResource s)
 
 instance P.HasVswitchIds (EssScalingGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     vswitchIds =
@@ -3418,10 +3236,7 @@ instance P.HasIpProtocol (ForwardEntryResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_instance terraform documentation>
 -- for more information.
 data InstanceResource s = InstanceResource'
-    { _allocatePublicIp :: TF.Attr s P.Bool
-    -- ^ @allocate_public_ip@ - (Optional)
-    --
-    , _autoRenewPeriod :: TF.Attr s P.Integer
+    { _autoRenewPeriod :: TF.Attr s P.Integer
     -- ^ @auto_renew_period@ - (Optional)
     --
     , _description :: TF.Attr s P.Text
@@ -3450,9 +3265,6 @@ data InstanceResource s = InstanceResource'
     --
     , _internetMaxBandwidthOut :: TF.Attr s P.Integer
     -- ^ @internet_max_bandwidth_out@ - (Optional)
-    --
-    , _ioOptimized :: TF.Attr s P.Text
-    -- ^ @io_optimized@ - (Optional)
     --
     , _isOutdated :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
@@ -3503,8 +3315,7 @@ instanceResource
 instanceResource _imageId _instanceType _securityGroups =
     TF.newResource "alicloud_instance" TF.validator $
         InstanceResource'
-            { _allocatePublicIp = TF.Nil
-            , _autoRenewPeriod = TF.value 1
+            { _autoRenewPeriod = TF.value 1
             , _description = TF.Nil
             , _dryRun = TF.value P.False
             , _imageId = _imageId
@@ -3514,7 +3325,6 @@ instanceResource _imageId _instanceType _securityGroups =
             , _instanceType = _instanceType
             , _internetChargeType = TF.Nil
             , _internetMaxBandwidthOut = TF.value 0
-            , _ioOptimized = TF.Nil
             , _isOutdated = TF.Nil
             , _password = TF.Nil
             , _period = TF.value 1
@@ -3532,8 +3342,7 @@ instanceResource _imageId _instanceType _securityGroups =
 
 instance TF.IsObject (InstanceResource s) where
     toObject InstanceResource'{..} = P.catMaybes
-        [ TF.assign "allocate_public_ip" <$> TF.attribute _allocatePublicIp
-        , TF.assign "auto_renew_period" <$> TF.attribute _autoRenewPeriod
+        [ TF.assign "auto_renew_period" <$> TF.attribute _autoRenewPeriod
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "dry_run" <$> TF.attribute _dryRun
         , TF.assign "image_id" <$> TF.attribute _imageId
@@ -3543,7 +3352,6 @@ instance TF.IsObject (InstanceResource s) where
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
         , TF.assign "internet_max_bandwidth_out" <$> TF.attribute _internetMaxBandwidthOut
-        , TF.assign "io_optimized" <$> TF.attribute _ioOptimized
         , TF.assign "is_outdated" <$> TF.attribute _isOutdated
         , TF.assign "password" <$> TF.attribute _password
         , TF.assign "period" <$> TF.attribute _period
@@ -3561,11 +3369,6 @@ instance TF.IsObject (InstanceResource s) where
 
 instance TF.IsValid (InstanceResource s) where
     validator = P.mempty
-
-instance P.HasAllocatePublicIp (InstanceResource s) (TF.Attr s P.Bool) where
-    allocatePublicIp =
-        P.lens (_allocatePublicIp :: InstanceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _allocatePublicIp = a } :: InstanceResource s)
 
 instance P.HasAutoRenewPeriod (InstanceResource s) (TF.Attr s P.Integer) where
     autoRenewPeriod =
@@ -3616,11 +3419,6 @@ instance P.HasInternetMaxBandwidthOut (InstanceResource s) (TF.Attr s P.Integer)
     internetMaxBandwidthOut =
         P.lens (_internetMaxBandwidthOut :: InstanceResource s -> TF.Attr s P.Integer)
                (\s a -> s { _internetMaxBandwidthOut = a } :: InstanceResource s)
-
-instance P.HasIoOptimized (InstanceResource s) (TF.Attr s P.Text) where
-    ioOptimized =
-        P.lens (_ioOptimized :: InstanceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ioOptimized = a } :: InstanceResource s)
 
 instance P.HasIsOutdated (InstanceResource s) (TF.Attr s P.Bool) where
     isOutdated =
@@ -4136,19 +3934,13 @@ instance P.HasProject (LogStoreIndexResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_nat_gateway terraform documentation>
 -- for more information.
 data NatGatewayResource s = NatGatewayResource'
-    { _bandwidthPackages :: TF.Attr s [TF.Attr s (BandwidthPackages s)]
-    -- ^ @bandwidth_packages@ - (Optional)
-    --
-    , _description       :: TF.Attr s P.Text
+    { _description   :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _spec              :: TF.Attr s P.Text
-    -- ^ @spec@ - (Optional)
-    --
-    , _specification     :: TF.Attr s P.Text
+    , _specification :: TF.Attr s P.Text
     -- ^ @specification@ - (Optional)
     --
-    , _vpcId             :: TF.Attr s P.Text
+    , _vpcId         :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4159,43 +3951,25 @@ natGatewayResource
 natGatewayResource _vpcId =
     TF.newResource "alicloud_nat_gateway" TF.validator $
         NatGatewayResource'
-            { _bandwidthPackages = TF.Nil
-            , _description = TF.Nil
-            , _spec = TF.Nil
+            { _description = TF.Nil
             , _specification = TF.Nil
             , _vpcId = _vpcId
             }
 
 instance TF.IsObject (NatGatewayResource s) where
     toObject NatGatewayResource'{..} = P.catMaybes
-        [ TF.assign "bandwidth_packages" <$> TF.attribute _bandwidthPackages
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "spec" <$> TF.attribute _spec
+        [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "specification" <$> TF.attribute _specification
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (NatGatewayResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_bandwidthPackages"
-                  (_bandwidthPackages
-                      :: NatGatewayResource s -> TF.Attr s [TF.Attr s (BandwidthPackages s)])
-                  TF.validator
-
-instance P.HasBandwidthPackages (NatGatewayResource s) (TF.Attr s [TF.Attr s (BandwidthPackages s)]) where
-    bandwidthPackages =
-        P.lens (_bandwidthPackages :: NatGatewayResource s -> TF.Attr s [TF.Attr s (BandwidthPackages s)])
-               (\s a -> s { _bandwidthPackages = a } :: NatGatewayResource s)
 
 instance P.HasDescription (NatGatewayResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: NatGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: NatGatewayResource s)
-
-instance P.HasSpec (NatGatewayResource s) (TF.Attr s P.Text) where
-    spec =
-        P.lens (_spec :: NatGatewayResource s -> TF.Attr s P.Text)
-               (\s a -> s { _spec = a } :: NatGatewayResource s)
 
 instance P.HasSpecification (NatGatewayResource s) (TF.Attr s P.Text) where
     specification =
@@ -5479,42 +5253,36 @@ instance P.HasRouteTableId (RouteEntryResource s) (TF.Attr s P.Text) where
         P.lens (_routeTableId :: RouteEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _routeTableId = a } :: RouteEntryResource s)
 
-instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
-    computedRouterId x = TF.compute (TF.refKey x) "_computedRouterId"
-
 -- | @alicloud_router_interface@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_router_interface terraform documentation>
 -- for more information.
 data RouterInterfaceResource s = RouterInterfaceResource'
-    { _description           :: TF.Attr s P.Text
+    { _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _healthCheckSourceIp   :: TF.Attr s P.Text
+    , _healthCheckSourceIp :: TF.Attr s P.Text
     -- ^ @health_check_source_ip@ - (Optional)
     --
-    , _healthCheckTargetIp   :: TF.Attr s P.Text
+    , _healthCheckTargetIp :: TF.Attr s P.Text
     -- ^ @health_check_target_ip@ - (Optional)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _oppositeAccessPointId :: TF.Attr s P.Text
-    -- ^ @opposite_access_point_id@ - (Optional)
-    --
-    , _oppositeRegion        :: TF.Attr s P.Text
+    , _oppositeRegion      :: TF.Attr s P.Text
     -- ^ @opposite_region@ - (Required)
     --
-    , _role                  :: TF.Attr s P.Text
+    , _role                :: TF.Attr s P.Text
     -- ^ @role@ - (Required)
     --
-    , _routerId              :: TF.Attr s P.Text
+    , _routerId            :: TF.Attr s P.Text
     -- ^ @router_id@ - (Required)
     --
-    , _routerType            :: TF.Attr s P.Text
+    , _routerType          :: TF.Attr s P.Text
     -- ^ @router_type@ - (Required)
     --
-    , _specification         :: TF.Attr s P.Text
+    , _specification       :: TF.Attr s P.Text
     -- ^ @specification@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5532,7 +5300,6 @@ routerInterfaceResource _oppositeRegion _role _routerId _routerType =
             , _healthCheckSourceIp = TF.Nil
             , _healthCheckTargetIp = TF.Nil
             , _name = TF.Nil
-            , _oppositeAccessPointId = TF.Nil
             , _oppositeRegion = _oppositeRegion
             , _role = _role
             , _routerId = _routerId
@@ -5546,7 +5313,6 @@ instance TF.IsObject (RouterInterfaceResource s) where
         , TF.assign "health_check_source_ip" <$> TF.attribute _healthCheckSourceIp
         , TF.assign "health_check_target_ip" <$> TF.attribute _healthCheckTargetIp
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "opposite_access_point_id" <$> TF.attribute _oppositeAccessPointId
         , TF.assign "opposite_region" <$> TF.attribute _oppositeRegion
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "router_id" <$> TF.attribute _routerId
@@ -5577,11 +5343,6 @@ instance P.HasName (RouterInterfaceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RouterInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RouterInterfaceResource s)
 
-instance P.HasOppositeAccessPointId (RouterInterfaceResource s) (TF.Attr s P.Text) where
-    oppositeAccessPointId =
-        P.lens (_oppositeAccessPointId :: RouterInterfaceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _oppositeAccessPointId = a } :: RouterInterfaceResource s)
-
 instance P.HasOppositeRegion (RouterInterfaceResource s) (TF.Attr s P.Text) where
     oppositeRegion =
         P.lens (_oppositeRegion :: RouterInterfaceResource s -> TF.Attr s P.Text)
@@ -5606,21 +5367,6 @@ instance P.HasSpecification (RouterInterfaceResource s) (TF.Attr s P.Text) where
     specification =
         P.lens (_specification :: RouterInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _specification = a } :: RouterInterfaceResource s)
-
-instance s ~ s' => P.HasComputedAccessPointId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedAccessPointId x = TF.compute (TF.refKey x) "_computedAccessPointId"
-
-instance s ~ s' => P.HasComputedOppositeInterfaceId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedOppositeInterfaceId x = TF.compute (TF.refKey x) "_computedOppositeInterfaceId"
-
-instance s ~ s' => P.HasComputedOppositeInterfaceOwnerId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "_computedOppositeInterfaceOwnerId"
-
-instance s ~ s' => P.HasComputedOppositeRouterId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedOppositeRouterId x = TF.compute (TF.refKey x) "_computedOppositeRouterId"
-
-instance s ~ s' => P.HasComputedOppositeRouterType (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
-    computedOppositeRouterType x = TF.compute (TF.refKey x) "_computedOppositeRouterType"
 
 -- | @alicloud_router_interface_connection@ Resource.
 --
@@ -5885,9 +5631,6 @@ data SlbResource s = SlbResource'
     { _bandwidth          :: TF.Attr s P.Integer
     -- ^ @bandwidth@ - (Optional)
     --
-    , _instances          :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instances@ - (Optional)
-    --
     , _internet           :: TF.Attr s P.Bool
     -- ^ @internet@ - (Optional)
     --
@@ -5911,10 +5654,9 @@ slbResource =
     TF.newResource "alicloud_slb" TF.validator $
         SlbResource'
             { _bandwidth = TF.value 1
-            , _instances = TF.Nil
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180814094303055900000001"
+            , _name = TF.value "tf-lb-20180814100928966000000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
@@ -5922,7 +5664,6 @@ slbResource =
 instance TF.IsObject (SlbResource s) where
     toObject SlbResource'{..} = P.catMaybes
         [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
-        , TF.assign "instances" <$> TF.attribute _instances
         , TF.assign "internet" <$> TF.attribute _internet
         , TF.assign "internet_charge_type" <$> TF.attribute _internetChargeType
         , TF.assign "name" <$> TF.attribute _name
@@ -5937,11 +5678,6 @@ instance P.HasBandwidth (SlbResource s) (TF.Attr s P.Integer) where
     bandwidth =
         P.lens (_bandwidth :: SlbResource s -> TF.Attr s P.Integer)
                (\s a -> s { _bandwidth = a } :: SlbResource s)
-
-instance P.HasInstances (SlbResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    instances =
-        P.lens (_instances :: SlbResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _instances = a } :: SlbResource s)
 
 instance P.HasInternet (SlbResource s) (TF.Attr s P.Bool) where
     internet =
@@ -5971,9 +5707,6 @@ instance P.HasVswitchId (SlbResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
 
-instance s ~ s' => P.HasComputedListener (TF.Ref s' (SlbResource s)) (TF.Attr s [TF.Attr s (Listener s)]) where
-    computedListener x = TF.compute (TF.refKey x) "_computedListener"
-
 -- | @alicloud_slb_attachment@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_slb_attachment terraform documentation>
@@ -5982,14 +5715,8 @@ data SlbAttachmentResource s = SlbAttachmentResource'
     { _instanceIds    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @instance_ids@ - (Required)
     --
-    , _instances      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instances@ - (Optional)
-    --
     , _loadBalancerId :: TF.Attr s P.Text
     -- ^ @load_balancer_id@ - (Required)
-    --
-    , _slbId          :: TF.Attr s P.Text
-    -- ^ @slb_id@ - (Optional)
     --
     , _weight         :: TF.Attr s P.Integer
     -- ^ @weight@ - (Optional)
@@ -6004,18 +5731,14 @@ slbAttachmentResource _instanceIds _loadBalancerId =
     TF.newResource "alicloud_slb_attachment" TF.validator $
         SlbAttachmentResource'
             { _instanceIds = _instanceIds
-            , _instances = TF.Nil
             , _loadBalancerId = _loadBalancerId
-            , _slbId = TF.Nil
             , _weight = TF.value 100
             }
 
 instance TF.IsObject (SlbAttachmentResource s) where
     toObject SlbAttachmentResource'{..} = P.catMaybes
         [ TF.assign "instance_ids" <$> TF.attribute _instanceIds
-        , TF.assign "instances" <$> TF.attribute _instances
         , TF.assign "load_balancer_id" <$> TF.attribute _loadBalancerId
-        , TF.assign "slb_id" <$> TF.attribute _slbId
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
@@ -6027,20 +5750,10 @@ instance P.HasInstanceIds (SlbAttachmentResource s) (TF.Attr s (P.NonEmpty (TF.A
         P.lens (_instanceIds :: SlbAttachmentResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _instanceIds = a } :: SlbAttachmentResource s)
 
-instance P.HasInstances (SlbAttachmentResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    instances =
-        P.lens (_instances :: SlbAttachmentResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _instances = a } :: SlbAttachmentResource s)
-
 instance P.HasLoadBalancerId (SlbAttachmentResource s) (TF.Attr s P.Text) where
     loadBalancerId =
         P.lens (_loadBalancerId :: SlbAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadBalancerId = a } :: SlbAttachmentResource s)
-
-instance P.HasSlbId (SlbAttachmentResource s) (TF.Attr s P.Text) where
-    slbId =
-        P.lens (_slbId :: SlbAttachmentResource s -> TF.Attr s P.Text)
-               (\s a -> s { _slbId = a } :: SlbAttachmentResource s)
 
 instance P.HasWeight (SlbAttachmentResource s) (TF.Attr s P.Integer) where
     weight =
@@ -6094,15 +5807,6 @@ data SlbListenerResource s = SlbListenerResource'
     , _healthyThreshold    :: TF.Attr s P.Integer
     -- ^ @healthy_threshold@ - (Optional)
     --
-    , _instancePort        :: TF.Attr s P.Integer
-    -- ^ @instance_port@ - (Optional)
-    --
-    , _lbPort              :: TF.Attr s P.Integer
-    -- ^ @lb_port@ - (Optional)
-    --
-    , _lbProtocol          :: TF.Attr s P.Text
-    -- ^ @lb_protocol@ - (Optional)
-    --
     , _loadBalancerId      :: TF.Attr s P.Text
     -- ^ @load_balancer_id@ - (Required)
     --
@@ -6155,9 +5859,6 @@ slbListenerResource _backendPort _bandwidth _frontendPort _loadBalancerId _proto
             , _healthCheckType = TF.Nil
             , _healthCheckUri = TF.value "/"
             , _healthyThreshold = TF.value 3
-            , _instancePort = TF.Nil
-            , _lbPort = TF.Nil
-            , _lbProtocol = TF.Nil
             , _loadBalancerId = _loadBalancerId
             , _persistenceTimeout = TF.value 0
             , _protocol = _protocol
@@ -6184,9 +5885,6 @@ instance TF.IsObject (SlbListenerResource s) where
         , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
         , TF.assign "health_check_uri" <$> TF.attribute _healthCheckUri
         , TF.assign "healthy_threshold" <$> TF.attribute _healthyThreshold
-        , TF.assign "instance_port" <$> TF.attribute _instancePort
-        , TF.assign "lb_port" <$> TF.attribute _lbPort
-        , TF.assign "lb_protocol" <$> TF.attribute _lbProtocol
         , TF.assign "load_balancer_id" <$> TF.attribute _loadBalancerId
         , TF.assign "persistence_timeout" <$> TF.attribute _persistenceTimeout
         , TF.assign "protocol" <$> TF.attribute _protocol
@@ -6265,21 +5963,6 @@ instance P.HasHealthyThreshold (SlbListenerResource s) (TF.Attr s P.Integer) whe
     healthyThreshold =
         P.lens (_healthyThreshold :: SlbListenerResource s -> TF.Attr s P.Integer)
                (\s a -> s { _healthyThreshold = a } :: SlbListenerResource s)
-
-instance P.HasInstancePort (SlbListenerResource s) (TF.Attr s P.Integer) where
-    instancePort =
-        P.lens (_instancePort :: SlbListenerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _instancePort = a } :: SlbListenerResource s)
-
-instance P.HasLbPort (SlbListenerResource s) (TF.Attr s P.Integer) where
-    lbPort =
-        P.lens (_lbPort :: SlbListenerResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _lbPort = a } :: SlbListenerResource s)
-
-instance P.HasLbProtocol (SlbListenerResource s) (TF.Attr s P.Text) where
-    lbProtocol =
-        P.lens (_lbProtocol :: SlbListenerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _lbProtocol = a } :: SlbListenerResource s)
 
 instance P.HasLoadBalancerId (SlbListenerResource s) (TF.Attr s P.Text) where
     loadBalancerId =
@@ -6655,9 +6338,6 @@ instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (VpcResource s)) (TF.Att
 
 instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedRouterId x = TF.compute (TF.refKey x) "_computedRouterId"
-
-instance s ~ s' => P.HasComputedRouterTableId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedRouterTableId x = TF.compute (TF.refKey x) "_computedRouterTableId"
 
 -- | @alicloud_vswitch@ Resource.
 --

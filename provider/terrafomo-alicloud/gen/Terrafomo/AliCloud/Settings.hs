@@ -86,10 +86,6 @@ module Terrafomo.AliCloud.Settings
     , LocalStorage (..)
     , newLocalStorage
 
-    -- ** db_mappings
-    , DbMappings (..)
-    , newDbMappings
-
     -- ** vpcs
     , Vpcs (..)
     , newVpcs
@@ -186,10 +182,6 @@ module Terrafomo.AliCloud.Settings
     , BurstableInstance (..)
     , newBurstableInstance
 
-    -- ** listener
-    , Listener (..)
-    , newListener
-
     -- ** services
     , Services (..)
     , newServices
@@ -197,10 +189,6 @@ module Terrafomo.AliCloud.Settings
     -- ** policies
     , Policies (..)
     , newPolicies
-
-    -- ** bandwidth_packages
-    , BandwidthPackages (..)
-    , newBandwidthPackages
 
     -- ** log_config
     , LogConfig (..)
@@ -780,54 +768,32 @@ instance s ~ s' => P.HasComputedHeaderId (TF.Ref s' (HttpHeaderConfig s)) (TF.At
 
 -- | @connections@ nested settings.
 data Connections s = Connections'
-    { _connectionString :: TF.Attr s P.Text
-    -- ^ @connection_string@ - (Required)
-    --
-    , _ipAddress        :: TF.Attr s P.Text
-    -- ^ @ip_address@ - (Optional)
-    --
-    , _ipType           :: TF.Attr s P.Text
-    -- ^ @ip_type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Generic)
 
 newConnections
-    :: TF.Attr s P.Text -- ^ @connection_string@ - 'P.connectionString'
-    -> TF.Attr s P.Text -- ^ @ip_type@ - 'P.ipType'
-    -> Connections s
-newConnections _connectionString _ipType =
+    :: Connections s
+newConnections =
     Connections'
-        { _connectionString = _connectionString
-        , _ipAddress = TF.Nil
-        , _ipType = _ipType
-        }
 
 instance P.Hashable  (Connections s)
 instance TF.IsValue  (Connections s)
 instance TF.IsObject (Connections s) where
-    toObject Connections'{..} = P.catMaybes
-        [ TF.assign "connection_string" <$> TF.attribute _connectionString
-        , TF.assign "ip_address" <$> TF.attribute _ipAddress
-        , TF.assign "ip_type" <$> TF.attribute _ipType
-        ]
+    toObject Connections' = []
 
 instance TF.IsValid (Connections s) where
     validator = P.mempty
 
-instance P.HasConnectionString (Connections s) (TF.Attr s P.Text) where
-    connectionString =
-        P.lens (_connectionString :: Connections s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionString = a } :: Connections s)
+instance s ~ s' => P.HasComputedApiServerInternet (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
+    computedApiServerInternet x = TF.compute (TF.refKey x) "_computedApiServerInternet"
 
-instance P.HasIpAddress (Connections s) (TF.Attr s P.Text) where
-    ipAddress =
-        P.lens (_ipAddress :: Connections s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: Connections s)
+instance s ~ s' => P.HasComputedApiServerIntranet (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
+    computedApiServerIntranet x = TF.compute (TF.refKey x) "_computedApiServerIntranet"
 
-instance P.HasIpType (Connections s) (TF.Attr s P.Text) where
-    ipType =
-        P.lens (_ipType :: Connections s -> TF.Attr s P.Text)
-               (\s a -> s { _ipType = a } :: Connections s)
+instance s ~ s' => P.HasComputedMasterPublicIp (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
+    computedMasterPublicIp x = TF.compute (TF.refKey x) "_computedMasterPublicIp"
+
+instance s ~ s' => P.HasComputedServiceDomain (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
+    computedServiceDomain x = TF.compute (TF.refKey x) "_computedServiceDomain"
 
 -- | @master_nodes@ nested settings.
 data MasterNodes s = MasterNodes'
@@ -985,57 +951,6 @@ instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (LocalStorage s)) (TF.Attr s
 
 instance s ~ s' => P.HasComputedCategory (TF.Ref s' (LocalStorage s)) (TF.Attr s P.Text) where
     computedCategory x = TF.compute (TF.refKey x) "_computedCategory"
-
--- | @db_mappings@ nested settings.
-data DbMappings s = DbMappings'
-    { _characterSetName :: TF.Attr s P.Text
-    -- ^ @character_set_name@ - (Required)
-    --
-    , _dbDescription    :: TF.Attr s P.Text
-    -- ^ @db_description@ - (Optional)
-    --
-    , _dbName           :: TF.Attr s P.Text
-    -- ^ @db_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newDbMappings
-    :: TF.Attr s P.Text -- ^ @character_set_name@ - 'P.characterSetName'
-    -> TF.Attr s P.Text -- ^ @db_name@ - 'P.dbName'
-    -> DbMappings s
-newDbMappings _characterSetName _dbName =
-    DbMappings'
-        { _characterSetName = _characterSetName
-        , _dbDescription = TF.Nil
-        , _dbName = _dbName
-        }
-
-instance P.Hashable  (DbMappings s)
-instance TF.IsValue  (DbMappings s)
-instance TF.IsObject (DbMappings s) where
-    toObject DbMappings'{..} = P.catMaybes
-        [ TF.assign "character_set_name" <$> TF.attribute _characterSetName
-        , TF.assign "db_description" <$> TF.attribute _dbDescription
-        , TF.assign "db_name" <$> TF.attribute _dbName
-        ]
-
-instance TF.IsValid (DbMappings s) where
-    validator = P.mempty
-
-instance P.HasCharacterSetName (DbMappings s) (TF.Attr s P.Text) where
-    characterSetName =
-        P.lens (_characterSetName :: DbMappings s -> TF.Attr s P.Text)
-               (\s a -> s { _characterSetName = a } :: DbMappings s)
-
-instance P.HasDbDescription (DbMappings s) (TF.Attr s P.Text) where
-    dbDescription =
-        P.lens (_dbDescription :: DbMappings s -> TF.Attr s P.Text)
-               (\s a -> s { _dbDescription = a } :: DbMappings s)
-
-instance P.HasDbName (DbMappings s) (TF.Attr s P.Text) where
-    dbName =
-        P.lens (_dbName :: DbMappings s -> TF.Attr s P.Text)
-               (\s a -> s { _dbName = a } :: DbMappings s)
 
 -- | @vpcs@ nested settings.
 data Vpcs s = Vpcs'
@@ -1596,9 +1511,6 @@ data DataDisk s = DataDisk'
     { _category   :: TF.Attr s P.Text
     -- ^ @category@ - (Optional)
     --
-    , _device     :: TF.Attr s P.Text
-    -- ^ @device@ - (Optional)
-    --
     , _size       :: TF.Attr s P.Integer
     -- ^ @size@ - (Optional)
     --
@@ -1612,7 +1524,6 @@ newDataDisk
 newDataDisk =
     DataDisk'
         { _category = TF.Nil
-        , _device = TF.Nil
         , _size = TF.Nil
         , _snapshotId = TF.Nil
         }
@@ -1622,7 +1533,6 @@ instance TF.IsValue  (DataDisk s)
 instance TF.IsObject (DataDisk s) where
     toObject DataDisk'{..} = P.catMaybes
         [ TF.assign "category" <$> TF.attribute _category
-        , TF.assign "device" <$> TF.attribute _device
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
         ]
@@ -1634,11 +1544,6 @@ instance P.HasCategory (DataDisk s) (TF.Attr s P.Text) where
     category =
         P.lens (_category :: DataDisk s -> TF.Attr s P.Text)
                (\s a -> s { _category = a } :: DataDisk s)
-
-instance P.HasDevice (DataDisk s) (TF.Attr s P.Text) where
-    device =
-        P.lens (_device :: DataDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _device = a } :: DataDisk s)
 
 instance P.HasSize (DataDisk s) (TF.Attr s P.Integer) where
     size =
@@ -2094,86 +1999,6 @@ instance s ~ s' => P.HasComputedBaselineCredit (TF.Ref s' (BurstableInstance s))
 instance s ~ s' => P.HasComputedInitialCredit (TF.Ref s' (BurstableInstance s)) (TF.Attr s P.Text) where
     computedInitialCredit x = TF.compute (TF.refKey x) "_computedInitialCredit"
 
--- | @listener@ nested settings.
-data Listener s = Listener'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newListener
-    :: Listener s
-newListener =
-    Listener'
-
-instance P.Hashable  (Listener s)
-instance TF.IsValue  (Listener s)
-instance TF.IsObject (Listener s) where
-    toObject Listener' = []
-
-instance TF.IsValid (Listener s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedBandwidth x = TF.compute (TF.refKey x) "_computedBandwidth"
-
-instance s ~ s' => P.HasComputedCookie (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedCookie x = TF.compute (TF.refKey x) "_computedCookie"
-
-instance s ~ s' => P.HasComputedCookieTimeout (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedCookieTimeout x = TF.compute (TF.refKey x) "_computedCookieTimeout"
-
-instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedHealthCheck x = TF.compute (TF.refKey x) "_computedHealthCheck"
-
-instance s ~ s' => P.HasComputedHealthCheckConnectPort (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedHealthCheckConnectPort x = TF.compute (TF.refKey x) "_computedHealthCheckConnectPort"
-
-instance s ~ s' => P.HasComputedHealthCheckDomain (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedHealthCheckDomain x = TF.compute (TF.refKey x) "_computedHealthCheckDomain"
-
-instance s ~ s' => P.HasComputedHealthCheckHttpCode (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedHealthCheckHttpCode x = TF.compute (TF.refKey x) "_computedHealthCheckHttpCode"
-
-instance s ~ s' => P.HasComputedHealthCheckInterval (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedHealthCheckInterval x = TF.compute (TF.refKey x) "_computedHealthCheckInterval"
-
-instance s ~ s' => P.HasComputedHealthCheckTimeout (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedHealthCheckTimeout x = TF.compute (TF.refKey x) "_computedHealthCheckTimeout"
-
-instance s ~ s' => P.HasComputedHealthCheckType (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedHealthCheckType x = TF.compute (TF.refKey x) "_computedHealthCheckType"
-
-instance s ~ s' => P.HasComputedHealthCheckUri (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedHealthCheckUri x = TF.compute (TF.refKey x) "_computedHealthCheckUri"
-
-instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedHealthyThreshold x = TF.compute (TF.refKey x) "_computedHealthyThreshold"
-
-instance s ~ s' => P.HasComputedInstancePort (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedInstancePort x = TF.compute (TF.refKey x) "_computedInstancePort"
-
-instance s ~ s' => P.HasComputedLbPort (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedLbPort x = TF.compute (TF.refKey x) "_computedLbPort"
-
-instance s ~ s' => P.HasComputedLbProtocol (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedLbProtocol x = TF.compute (TF.refKey x) "_computedLbProtocol"
-
-instance s ~ s' => P.HasComputedPersistenceTimeout (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedPersistenceTimeout x = TF.compute (TF.refKey x) "_computedPersistenceTimeout"
-
-instance s ~ s' => P.HasComputedScheduler (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedScheduler x = TF.compute (TF.refKey x) "_computedScheduler"
-
-instance s ~ s' => P.HasComputedSslCertificateId (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedSslCertificateId x = TF.compute (TF.refKey x) "_computedSslCertificateId"
-
-instance s ~ s' => P.HasComputedStickySession (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedStickySession x = TF.compute (TF.refKey x) "_computedStickySession"
-
-instance s ~ s' => P.HasComputedStickySessionType (TF.Ref s' (Listener s)) (TF.Attr s P.Text) where
-    computedStickySessionType x = TF.compute (TF.refKey x) "_computedStickySessionType"
-
-instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (Listener s)) (TF.Attr s P.Integer) where
-    computedUnhealthyThreshold x = TF.compute (TF.refKey x) "_computedUnhealthyThreshold"
-
 -- | @services@ nested settings.
 data Services s = Services'
     deriving (P.Show, P.Eq, P.Generic)
@@ -2243,53 +2068,6 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (Policies s)) (TF.Attr s P.Text)
 
 instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
     computedUpdateDate x = TF.compute (TF.refKey x) "_computedUpdateDate"
-
--- | @bandwidth_packages@ nested settings.
-data BandwidthPackages s = BandwidthPackages'
-    { _bandwidth :: TF.Attr s P.Integer
-    -- ^ @bandwidth@ - (Required)
-    --
-    , _ipCount   :: TF.Attr s P.Integer
-    -- ^ @ip_count@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newBandwidthPackages
-    :: TF.Attr s P.Integer -- ^ @bandwidth@ - 'P.bandwidth'
-    -> TF.Attr s P.Integer -- ^ @ip_count@ - 'P.ipCount'
-    -> BandwidthPackages s
-newBandwidthPackages _bandwidth _ipCount =
-    BandwidthPackages'
-        { _bandwidth = _bandwidth
-        , _ipCount = _ipCount
-        }
-
-instance P.Hashable  (BandwidthPackages s)
-instance TF.IsValue  (BandwidthPackages s)
-instance TF.IsObject (BandwidthPackages s) where
-    toObject BandwidthPackages'{..} = P.catMaybes
-        [ TF.assign "bandwidth" <$> TF.attribute _bandwidth
-        , TF.assign "ip_count" <$> TF.attribute _ipCount
-        ]
-
-instance TF.IsValid (BandwidthPackages s) where
-    validator = P.mempty
-
-instance P.HasBandwidth (BandwidthPackages s) (TF.Attr s P.Integer) where
-    bandwidth =
-        P.lens (_bandwidth :: BandwidthPackages s -> TF.Attr s P.Integer)
-               (\s a -> s { _bandwidth = a } :: BandwidthPackages s)
-
-instance P.HasIpCount (BandwidthPackages s) (TF.Attr s P.Integer) where
-    ipCount =
-        P.lens (_ipCount :: BandwidthPackages s -> TF.Attr s P.Integer)
-               (\s a -> s { _ipCount = a } :: BandwidthPackages s)
-
-instance s ~ s' => P.HasComputedPublicIpAddresses (TF.Ref s' (BandwidthPackages s)) (TF.Attr s P.Text) where
-    computedPublicIpAddresses x = TF.compute (TF.refKey x) "_computedPublicIpAddresses"
-
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (BandwidthPackages s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
 
 -- | @log_config@ nested settings.
 data LogConfig s = LogConfig'

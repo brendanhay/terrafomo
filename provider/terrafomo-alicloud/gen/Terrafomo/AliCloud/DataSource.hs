@@ -645,9 +645,6 @@ data EipsData s = EipsData'
     { _ids         :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @ids@ - (Optional)
     --
-    , _inUse       :: TF.Attr s P.Bool
-    -- ^ @in_use@ - (Optional)
-    --
     , _ipAddresses :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @ip_addresses@ - (Optional)
     --
@@ -662,7 +659,6 @@ eipsData =
     TF.newDataSource "alicloud_eips" TF.validator $
         EipsData'
             { _ids = TF.Nil
-            , _inUse = TF.Nil
             , _ipAddresses = TF.Nil
             , _outputFile = TF.Nil
             }
@@ -670,7 +666,6 @@ eipsData =
 instance TF.IsObject (EipsData s) where
     toObject EipsData'{..} = P.catMaybes
         [ TF.assign "ids" <$> TF.attribute _ids
-        , TF.assign "in_use" <$> TF.attribute _inUse
         , TF.assign "ip_addresses" <$> TF.attribute _ipAddresses
         , TF.assign "output_file" <$> TF.attribute _outputFile
         ]
@@ -682,11 +677,6 @@ instance P.HasIds (EipsData s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     ids =
         P.lens (_ids :: EipsData s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _ids = a } :: EipsData s)
-
-instance P.HasInUse (EipsData s) (TF.Attr s P.Bool) where
-    inUse =
-        P.lens (_inUse :: EipsData s -> TF.Attr s P.Bool)
-               (\s a -> s { _inUse = a } :: EipsData s)
 
 instance P.HasIpAddresses (EipsData s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     ipAddresses =
