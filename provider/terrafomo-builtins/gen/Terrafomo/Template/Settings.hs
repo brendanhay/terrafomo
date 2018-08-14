@@ -59,31 +59,14 @@ data CloudinitConfigPart s = CloudinitConfigPart'
     , _mergeType   :: TF.Attr s P.Text
     -- ^ @merge_type@ - (Optional, Forces New)
     --
-    , _content     :: TF.Attr s P.Text
-    -- ^ @content@ - (Required)
-    --
-    , _contentType :: TF.Attr s P.Text
-    -- ^ @content_type@ - (Optional)
-    --
-    , _filename    :: TF.Attr s P.Text
-    -- ^ @filename@ - (Optional)
-    --
-    , _mergeType   :: TF.Attr s P.Text
-    -- ^ @merge_type@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newCloudinitConfigPart
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> CloudinitConfigPart s
-newCloudinitConfigPart _content _content =
+newCloudinitConfigPart _content =
     CloudinitConfigPart'
         { _content = _content
-        , _contentType = TF.Nil
-        , _filename = TF.Nil
-        , _mergeType = TF.Nil
-        , _content = _content
         , _contentType = TF.Nil
         , _filename = TF.Nil
         , _mergeType = TF.Nil
@@ -97,34 +80,10 @@ instance TF.IsObject (CloudinitConfigPart s) where
         , TF.assign "content_type" <$> TF.attribute _contentType
         , TF.assign "filename" <$> TF.attribute _filename
         , TF.assign "merge_type" <$> TF.attribute _mergeType
-        , TF.assign "content" <$> TF.attribute _content
-        , TF.assign "content_type" <$> TF.attribute _contentType
-        , TF.assign "filename" <$> TF.attribute _filename
-        , TF.assign "merge_type" <$> TF.attribute _mergeType
         ]
 
 instance TF.IsValid (CloudinitConfigPart s) where
     validator = P.mempty
-
-instance P.HasContent (CloudinitConfigPart s) (TF.Attr s P.Text) where
-    content =
-        P.lens (_content :: CloudinitConfigPart s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: CloudinitConfigPart s)
-
-instance P.HasContentType (CloudinitConfigPart s) (TF.Attr s P.Text) where
-    contentType =
-        P.lens (_contentType :: CloudinitConfigPart s -> TF.Attr s P.Text)
-               (\s a -> s { _contentType = a } :: CloudinitConfigPart s)
-
-instance P.HasFilename (CloudinitConfigPart s) (TF.Attr s P.Text) where
-    filename =
-        P.lens (_filename :: CloudinitConfigPart s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: CloudinitConfigPart s)
-
-instance P.HasMergeType (CloudinitConfigPart s) (TF.Attr s P.Text) where
-    mergeType =
-        P.lens (_mergeType :: CloudinitConfigPart s -> TF.Attr s P.Text)
-               (\s a -> s { _mergeType = a } :: CloudinitConfigPart s)
 
 instance P.HasContent (CloudinitConfigPart s) (TF.Attr s P.Text) where
     content =
