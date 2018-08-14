@@ -107,8 +107,8 @@ instance Hashable NetworkTraffic
 
 instance IsValue NetworkTraffic where
     toValue = HCL.string . \case
-        Ingress -> "ingress"
-        Egress  -> "egress"
+        TrafficIngress -> "ingress"
+        TrafficEgress  -> "egress"
 
 data NetworkProtocol
     = ProtocolICMP
