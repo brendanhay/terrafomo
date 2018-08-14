@@ -51,11 +51,11 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @dnsimple_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DNSimple/dnsimple_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/dnsimple/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
     { _domain :: TF.Attr s P.Text
-    -- ^ @domain@ - (Required)
+    -- ^ @domain@ - (Required, Forces New)
     --
     , _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -64,7 +64,7 @@ data RecordResource s = RecordResource'
     -- ^ @ttl@ - (Optional)
     --
     , _type'  :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     , _value  :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
@@ -125,10 +125,10 @@ instance P.HasValue (RecordResource s) (TF.Attr s P.Text) where
                (\s a -> s { _value = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
+    computedPriority x = TF.compute (TF.refKey x) "priority"

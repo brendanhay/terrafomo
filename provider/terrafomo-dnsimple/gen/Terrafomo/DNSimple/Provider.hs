@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @DNSimple@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/DNSimple/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/dnsimple/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _account :: P.Text
