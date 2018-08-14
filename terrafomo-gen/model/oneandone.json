@@ -146,7 +146,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "rules",
+            "name": "firewall_policy_rules",
             "schemas": [
               {
                 "name": "id",
@@ -477,7 +477,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "rules",
+            "name": "loadbalancer_rules",
             "schemas": [
               {
                 "name": "id",
@@ -607,7 +607,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "ports",
+            "name": "monitoring_policy_ports",
             "schemas": [
               {
                 "name": "alert_if",
@@ -684,7 +684,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "processes",
+            "name": "monitoring_policy_processes",
             "schemas": [
               {
                 "name": "alert_if",
@@ -749,7 +749,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "thresholds",
+            "name": "monitoring_policy_thresholds",
             "schemas": [
               {
                 "name": "cpu",
@@ -763,7 +763,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "cpu",
+                  "name": "thresholds_cpu",
                   "schemas": [
                     {
                       "name": "critical",
@@ -777,7 +777,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "critical",
+                        "name": "cpu_critical",
                         "schemas": [
                           {
                             "name": "alert",
@@ -818,7 +818,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "warning",
+                        "name": "cpu_warning",
                         "schemas": [
                           {
                             "name": "alert",
@@ -862,7 +862,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "disk",
+                  "name": "thresholds_disk",
                   "schemas": [
                     {
                       "name": "critical",
@@ -876,7 +876,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "critical",
+                        "name": "disk_critical",
                         "schemas": [
                           {
                             "name": "alert",
@@ -917,7 +917,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "warning",
+                        "name": "disk_warning",
                         "schemas": [
                           {
                             "name": "alert",
@@ -961,7 +961,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "internal_ping",
+                  "name": "thresholds_internal_ping",
                   "schemas": [
                     {
                       "name": "critical",
@@ -975,7 +975,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "critical",
+                        "name": "internal_ping_critical",
                         "schemas": [
                           {
                             "name": "alert",
@@ -1016,7 +1016,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "warning",
+                        "name": "internal_ping_warning",
                         "schemas": [
                           {
                             "name": "alert",
@@ -1060,7 +1060,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "ram",
+                  "name": "thresholds_ram",
                   "schemas": [
                     {
                       "name": "critical",
@@ -1074,7 +1074,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "critical",
+                        "name": "ram_critical",
                         "schemas": [
                           {
                             "name": "alert",
@@ -1115,7 +1115,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "warning",
+                        "name": "ram_warning",
                         "schemas": [
                           {
                             "name": "alert",
@@ -1159,7 +1159,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "transfer",
+                  "name": "thresholds_transfer",
                   "schemas": [
                     {
                       "name": "critical",
@@ -1173,7 +1173,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "critical",
+                        "name": "transfer_critical",
                         "schemas": [
                           {
                             "name": "alert",
@@ -1214,7 +1214,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "warning",
+                        "name": "transfer_warning",
                         "schemas": [
                           {
                             "name": "alert",
@@ -1314,7 +1314,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "server_ids",
+            "name": "private_network_server_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1473,7 +1473,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "hdds",
+            "name": "server_hdds",
             "schemas": [
               {
                 "name": "disk_size",
@@ -1550,7 +1550,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "ips",
+            "name": "server_ips",
             "schemas": [
               {
                 "name": "firewall_policy_id",
@@ -1754,7 +1754,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "storage_servers",
+            "name": "shared_storage_storage_servers",
             "schemas": [
               {
                 "name": "id",
@@ -1848,7 +1848,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "servers",
+            "name": "ssh_key_servers",
             "schemas": [
               {
                 "name": "id",
