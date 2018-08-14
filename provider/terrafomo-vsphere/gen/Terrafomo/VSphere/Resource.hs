@@ -171,7 +171,7 @@ import qualified Terrafomo.VSphere.Types    as P
 
 -- | @vsphere_compute_cluster@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster.html terraform documentation>
 -- for more information.
 data ComputeClusterResource s = ComputeClusterResource'
     { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -179,7 +179,7 @@ data ComputeClusterResource s = ComputeClusterResource'
     -- A list of custom attributes to set on this resource.
     --
     , _datacenterId :: TF.Attr s P.Text
-    -- ^ @datacenter_id@ - (Required)
+    -- ^ @datacenter_id@ - (Required, Forces New)
     -- The managed object ID of the datacenter to put the cluster in.
     --
     , _dpmAutomationLevel :: TF.Attr s P.Text
@@ -842,15 +842,15 @@ instance P.HasTags (ComputeClusterResource s) (TF.Attr s [TF.Attr s P.Text]) whe
                (\s a -> s { _tags = a } :: ComputeClusterResource s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterResource s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
 
 -- | @vsphere_compute_cluster_host_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_host_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_host_group.html terraform documentation>
 -- for more information.
 data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource'
     { _computeClusterId :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _hostSystemIds    :: TF.Attr s [TF.Attr s P.Text]
@@ -858,7 +858,7 @@ data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource'
     -- The managed object IDs of the hosts.
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- The unique name of the virtual machine group in the cluster.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -902,11 +902,11 @@ instance P.HasName (ComputeClusterHostGroupResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_compute_cluster_vm_affinity_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_affinity_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_affinity_rule.html terraform documentation>
 -- for more information.
 data ComputeClusterVmAffinityRuleResource s = ComputeClusterVmAffinityRuleResource'
     { _computeClusterId  :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _enabled           :: TF.Attr s P.Bool
@@ -982,11 +982,11 @@ instance P.HasVirtualMachineIds (ComputeClusterVmAffinityRuleResource s) (TF.Att
 
 -- | @vsphere_compute_cluster_vm_anti_affinity_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_anti_affinity_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_anti_affinity_rule.html terraform documentation>
 -- for more information.
 data ComputeClusterVmAntiAffinityRuleResource s = ComputeClusterVmAntiAffinityRuleResource'
     { _computeClusterId  :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _enabled           :: TF.Attr s P.Bool
@@ -1062,11 +1062,11 @@ instance P.HasVirtualMachineIds (ComputeClusterVmAntiAffinityRuleResource s) (TF
 
 -- | @vsphere_compute_cluster_vm_dependency_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_dependency_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_dependency_rule.html terraform documentation>
 -- for more information.
 data ComputeClusterVmDependencyRuleResource s = ComputeClusterVmDependencyRuleResource'
     { _computeClusterId      :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _dependencyVmGroupName :: TF.Attr s P.Text
@@ -1158,15 +1158,15 @@ instance P.HasVmGroupName (ComputeClusterVmDependencyRuleResource s) (TF.Attr s 
 
 -- | @vsphere_compute_cluster_vm_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_group.html terraform documentation>
 -- for more information.
 data ComputeClusterVmGroupResource s = ComputeClusterVmGroupResource'
     { _computeClusterId  :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- The unique name of the virtual machine group in the cluster.
     --
     , _virtualMachineIds :: TF.Attr s [TF.Attr s P.Text]
@@ -1214,7 +1214,7 @@ instance P.HasVirtualMachineIds (ComputeClusterVmGroupResource s) (TF.Attr s [TF
 
 -- | @vsphere_compute_cluster_vm_host_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster_vm_host_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/compute_cluster_vm_host_rule.html terraform documentation>
 -- for more information.
 data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource'
     { _affinityHostGroupName     :: TF.Attr s P.Text
@@ -1234,7 +1234,7 @@ data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource'
     --
     -- * 'affinityHostGroupName'
     , _computeClusterId          :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _enabled                   :: TF.Attr s P.Bool
@@ -1335,11 +1335,11 @@ instance P.HasVmGroupName (ComputeClusterVmHostRuleResource s) (TF.Attr s P.Text
 
 -- | @vsphere_custom_attribute@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_custom_attribute terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/custom_attribute.html terraform documentation>
 -- for more information.
 data CustomAttributeResource s = CustomAttributeResource'
     { _managedObjectType :: TF.Attr s P.Text
-    -- ^ @managed_object_type@ - (Optional)
+    -- ^ @managed_object_type@ - (Optional, Forces New)
     -- Object type for which the custom attribute is valid. If not specified, the
     -- attribute is valid for all managed object types.
     --
@@ -1380,7 +1380,7 @@ instance P.HasName (CustomAttributeResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_datacenter@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datacenter terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterResource s = DatacenterResource'
     { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -1388,10 +1388,10 @@ data DatacenterResource s = DatacenterResource'
     -- A list of custom attributes to set on this resource.
     --
     , _folder           :: TF.Attr s P.Text
-    -- ^ @folder@ - (Optional)
+    -- ^ @folder@ - (Optional, Forces New)
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _tags             :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
@@ -1443,11 +1443,11 @@ instance P.HasTags (DatacenterResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _tags = a } :: DatacenterResource s)
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedMoid x = TF.compute (TF.refKey x) "_computedMoid"
+    computedMoid x = TF.compute (TF.refKey x) "moid"
 
 -- | @vsphere_datastore_cluster@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datastore_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster.html terraform documentation>
 -- for more information.
 data DatastoreClusterResource s = DatastoreClusterResource'
     { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -1455,7 +1455,7 @@ data DatastoreClusterResource s = DatastoreClusterResource'
     -- A list of custom attributes to set on this resource.
     --
     , _datacenterId :: TF.Attr s P.Text
-    -- ^ @datacenter_id@ - (Required)
+    -- ^ @datacenter_id@ - (Required, Forces New)
     -- The managed object ID of the datacenter to put the datastore cluster in.
     --
     , _folder :: TF.Attr s P.Text
@@ -1763,11 +1763,11 @@ instance P.HasTags (DatastoreClusterResource s) (TF.Attr s [TF.Attr s P.Text]) w
 
 -- | @vsphere_datastore_cluster_vm_anti_affinity_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datastore_cluster_vm_anti_affinity_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/datastore_cluster_vm_anti_affinity_rule.html terraform documentation>
 -- for more information.
 data DatastoreClusterVmAntiAffinityRuleResource s = DatastoreClusterVmAntiAffinityRuleResource'
     { _datastoreClusterId :: TF.Attr s P.Text
-    -- ^ @datastore_cluster_id@ - (Required)
+    -- ^ @datastore_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the datastore cluster.
     --
     , _enabled            :: TF.Attr s P.Bool
@@ -1844,7 +1844,7 @@ instance P.HasVirtualMachineIds (DatastoreClusterVmAntiAffinityRuleResource s) (
 
 -- | @vsphere_distributed_port_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_distributed_port_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/distributed_port_group.html terraform documentation>
 -- for more information.
 data DistributedPortGroupResource s = DistributedPortGroupResource'
     { _autoExpand :: TF.Attr s P.Bool
@@ -1866,7 +1866,7 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- The description of the portgroup.
     --
     , _distributedVirtualSwitchUuid :: TF.Attr s P.Text
-    -- ^ @distributed_virtual_switch_uuid@ - (Required)
+    -- ^ @distributed_virtual_switch_uuid@ - (Required, Forces New)
     -- The UUID of the DVS to attach this port group to.
     --
     , _livePortMovingAllowed :: TF.Attr s P.Bool
@@ -2083,95 +2083,95 @@ instance P.HasVlanOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.
                (\s a -> s { _vlanOverrideAllowed = a } :: DistributedPortGroupResource s)
 
 instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedActiveUplinks x = TF.compute (TF.refKey x) "_computedActiveUplinks"
+    computedActiveUplinks x = TF.compute (TF.refKey x) "active_uplinks"
 
 instance s ~ s' => P.HasComputedAllowForgedTransmits (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "_computedAllowForgedTransmits"
+    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "allow_forged_transmits"
 
 instance s ~ s' => P.HasComputedAllowMacChanges (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedAllowMacChanges x = TF.compute (TF.refKey x) "_computedAllowMacChanges"
+    computedAllowMacChanges x = TF.compute (TF.refKey x) "allow_mac_changes"
 
 instance s ~ s' => P.HasComputedAllowPromiscuous (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedAllowPromiscuous x = TF.compute (TF.refKey x) "_computedAllowPromiscuous"
+    computedAllowPromiscuous x = TF.compute (TF.refKey x) "allow_promiscuous"
 
 instance s ~ s' => P.HasComputedBlockAllPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedBlockAllPorts x = TF.compute (TF.refKey x) "_computedBlockAllPorts"
+    computedBlockAllPorts x = TF.compute (TF.refKey x) "block_all_ports"
 
 instance s ~ s' => P.HasComputedCheckBeacon (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedCheckBeacon x = TF.compute (TF.refKey x) "_computedCheckBeacon"
+    computedCheckBeacon x = TF.compute (TF.refKey x) "check_beacon"
 
 instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedConfigVersion x = TF.compute (TF.refKey x) "_computedConfigVersion"
+    computedConfigVersion x = TF.compute (TF.refKey x) "config_version"
 
 instance s ~ s' => P.HasComputedDirectpathGen2Allowed (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "_computedDirectpathGen2Allowed"
+    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "directpath_gen2_allowed"
 
 instance s ~ s' => P.HasComputedEgressShapingAverageBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingAverageBandwidth"
+    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "egress_shaping_average_bandwidth"
 
 instance s ~ s' => P.HasComputedEgressShapingBurstSize (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "_computedEgressShapingBurstSize"
+    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "egress_shaping_burst_size"
 
 instance s ~ s' => P.HasComputedEgressShapingEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "_computedEgressShapingEnabled"
+    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "egress_shaping_enabled"
 
 instance s ~ s' => P.HasComputedEgressShapingPeakBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingPeakBandwidth"
+    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "egress_shaping_peak_bandwidth"
 
 instance s ~ s' => P.HasComputedFailback (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedFailback x = TF.compute (TF.refKey x) "_computedFailback"
+    computedFailback x = TF.compute (TF.refKey x) "failback"
 
 instance s ~ s' => P.HasComputedIngressShapingAverageBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingAverageBandwidth"
+    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_average_bandwidth"
 
 instance s ~ s' => P.HasComputedIngressShapingBurstSize (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "_computedIngressShapingBurstSize"
+    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "ingress_shaping_burst_size"
 
 instance s ~ s' => P.HasComputedIngressShapingEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "_computedIngressShapingEnabled"
+    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "ingress_shaping_enabled"
 
 instance s ~ s' => P.HasComputedIngressShapingPeakBandwidth (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingPeakBandwidth"
+    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_peak_bandwidth"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "_computedKey"
+    computedKey x = TF.compute (TF.refKey x) "key"
 
 instance s ~ s' => P.HasComputedLacpEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedLacpEnabled x = TF.compute (TF.refKey x) "_computedLacpEnabled"
+    computedLacpEnabled x = TF.compute (TF.refKey x) "lacp_enabled"
 
 instance s ~ s' => P.HasComputedLacpMode (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedLacpMode x = TF.compute (TF.refKey x) "_computedLacpMode"
+    computedLacpMode x = TF.compute (TF.refKey x) "lacp_mode"
 
 instance s ~ s' => P.HasComputedNetflowEnabled (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedNetflowEnabled x = TF.compute (TF.refKey x) "_computedNetflowEnabled"
+    computedNetflowEnabled x = TF.compute (TF.refKey x) "netflow_enabled"
 
 instance s ~ s' => P.HasComputedNotifySwitches (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedNotifySwitches x = TF.compute (TF.refKey x) "_computedNotifySwitches"
+    computedNotifySwitches x = TF.compute (TF.refKey x) "notify_switches"
 
 instance s ~ s' => P.HasComputedNumberOfPorts (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedNumberOfPorts x = TF.compute (TF.refKey x) "_computedNumberOfPorts"
+    computedNumberOfPorts x = TF.compute (TF.refKey x) "number_of_ports"
 
 instance s ~ s' => P.HasComputedPortPrivateSecondaryVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "_computedPortPrivateSecondaryVlanId"
+    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "port_private_secondary_vlan_id"
 
 instance s ~ s' => P.HasComputedStandbyUplinks (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStandbyUplinks x = TF.compute (TF.refKey x) "_computedStandbyUplinks"
+    computedStandbyUplinks x = TF.compute (TF.refKey x) "standby_uplinks"
 
 instance s ~ s' => P.HasComputedTeamingPolicy (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
-    computedTeamingPolicy x = TF.compute (TF.refKey x) "_computedTeamingPolicy"
+    computedTeamingPolicy x = TF.compute (TF.refKey x) "teaming_policy"
 
 instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Bool) where
-    computedTxUplink x = TF.compute (TF.refKey x) "_computedTxUplink"
+    computedTxUplink x = TF.compute (TF.refKey x) "tx_uplink"
 
 instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Integer) where
-    computedVlanId x = TF.compute (TF.refKey x) "_computedVlanId"
+    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
-instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s (VlanRange s)]) where
-    computedVlanRange x = TF.compute (TF.refKey x) "_computedVlanRange"
+instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s (DistributedPortGroupVlanRange s)]) where
+    computedVlanRange x = TF.compute (TF.refKey x) "vlan_range"
 
 -- | @vsphere_distributed_virtual_switch@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_distributed_virtual_switch terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/distributed_virtual_switch.html terraform documentation>
 -- for more information.
 data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     { _contactDetail :: TF.Attr s P.Text
@@ -2187,7 +2187,7 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     -- A list of custom attributes to set on this resource.
     --
     , _datacenterId :: TF.Attr s P.Text
-    -- ^ @datacenter_id@ - (Required)
+    -- ^ @datacenter_id@ - (Required, Forces New)
     -- The ID of the datacenter to create this virtual switch in.
     --
     , _description :: TF.Attr s P.Text
@@ -2195,10 +2195,10 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     -- The description of the DVS.
     --
     , _folder :: TF.Attr s P.Text
-    -- ^ @folder@ - (Optional)
+    -- ^ @folder@ - (Optional, Forces New)
     -- The folder to create this virtual switch in, relative to the datacenter.
     --
-    , _host :: TF.Attr s [TF.Attr s (Host s)]
+    , _host :: TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)]
     -- ^ @host@ - (Optional)
     -- A host member specification.
     --
@@ -2322,7 +2322,7 @@ instance TF.IsValid (DistributedVirtualSwitchResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_host"
                   (_host
-                      :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (Host s)])
+                      :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)])
                   TF.validator
 
 instance P.HasContactDetail (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
@@ -2355,9 +2355,9 @@ instance P.HasFolder (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) whe
         P.lens (_folder :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _folder = a } :: DistributedVirtualSwitchResource s)
 
-instance P.HasHost (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (Host s)]) where
+instance P.HasHost (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)]) where
     host =
-        P.lens (_host :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (Host s)])
+        P.lens (_host :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)])
                (\s a -> s { _host = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasIpv4Address (DistributedVirtualSwitchResource s) (TF.Attr s P.Text) where
@@ -2426,219 +2426,219 @@ instance P.HasTags (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s P.
                (\s a -> s { _tags = a } :: DistributedVirtualSwitchResource s)
 
 instance s ~ s' => P.HasComputedActiveUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedActiveUplinks x = TF.compute (TF.refKey x) "_computedActiveUplinks"
+    computedActiveUplinks x = TF.compute (TF.refKey x) "active_uplinks"
 
 instance s ~ s' => P.HasComputedAllowForgedTransmits (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "_computedAllowForgedTransmits"
+    computedAllowForgedTransmits x = TF.compute (TF.refKey x) "allow_forged_transmits"
 
 instance s ~ s' => P.HasComputedAllowMacChanges (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedAllowMacChanges x = TF.compute (TF.refKey x) "_computedAllowMacChanges"
+    computedAllowMacChanges x = TF.compute (TF.refKey x) "allow_mac_changes"
 
 instance s ~ s' => P.HasComputedAllowPromiscuous (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedAllowPromiscuous x = TF.compute (TF.refKey x) "_computedAllowPromiscuous"
+    computedAllowPromiscuous x = TF.compute (TF.refKey x) "allow_promiscuous"
 
 instance s ~ s' => P.HasComputedBlockAllPorts (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedBlockAllPorts x = TF.compute (TF.refKey x) "_computedBlockAllPorts"
+    computedBlockAllPorts x = TF.compute (TF.refKey x) "block_all_ports"
 
 instance s ~ s' => P.HasComputedCheckBeacon (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedCheckBeacon x = TF.compute (TF.refKey x) "_computedCheckBeacon"
+    computedCheckBeacon x = TF.compute (TF.refKey x) "check_beacon"
 
 instance s ~ s' => P.HasComputedConfigVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedConfigVersion x = TF.compute (TF.refKey x) "_computedConfigVersion"
+    computedConfigVersion x = TF.compute (TF.refKey x) "config_version"
 
 instance s ~ s' => P.HasComputedDirectpathGen2Allowed (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "_computedDirectpathGen2Allowed"
+    computedDirectpathGen2Allowed x = TF.compute (TF.refKey x) "directpath_gen2_allowed"
 
 instance s ~ s' => P.HasComputedEgressShapingAverageBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingAverageBandwidth"
+    computedEgressShapingAverageBandwidth x = TF.compute (TF.refKey x) "egress_shaping_average_bandwidth"
 
 instance s ~ s' => P.HasComputedEgressShapingBurstSize (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "_computedEgressShapingBurstSize"
+    computedEgressShapingBurstSize x = TF.compute (TF.refKey x) "egress_shaping_burst_size"
 
 instance s ~ s' => P.HasComputedEgressShapingEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "_computedEgressShapingEnabled"
+    computedEgressShapingEnabled x = TF.compute (TF.refKey x) "egress_shaping_enabled"
 
 instance s ~ s' => P.HasComputedEgressShapingPeakBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedEgressShapingPeakBandwidth"
+    computedEgressShapingPeakBandwidth x = TF.compute (TF.refKey x) "egress_shaping_peak_bandwidth"
 
 instance s ~ s' => P.HasComputedFailback (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedFailback x = TF.compute (TF.refKey x) "_computedFailback"
+    computedFailback x = TF.compute (TF.refKey x) "failback"
 
 instance s ~ s' => P.HasComputedFaulttoleranceMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedFaulttoleranceMaximumMbit x = TF.compute (TF.refKey x) "_computedFaulttoleranceMaximumMbit"
+    computedFaulttoleranceMaximumMbit x = TF.compute (TF.refKey x) "faulttolerance_maximum_mbit"
 
 instance s ~ s' => P.HasComputedFaulttoleranceReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedFaulttoleranceReservationMbit x = TF.compute (TF.refKey x) "_computedFaulttoleranceReservationMbit"
+    computedFaulttoleranceReservationMbit x = TF.compute (TF.refKey x) "faulttolerance_reservation_mbit"
 
 instance s ~ s' => P.HasComputedFaulttoleranceShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedFaulttoleranceShareCount x = TF.compute (TF.refKey x) "_computedFaulttoleranceShareCount"
+    computedFaulttoleranceShareCount x = TF.compute (TF.refKey x) "faulttolerance_share_count"
 
 instance s ~ s' => P.HasComputedFaulttoleranceShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedFaulttoleranceShareLevel x = TF.compute (TF.refKey x) "_computedFaulttoleranceShareLevel"
+    computedFaulttoleranceShareLevel x = TF.compute (TF.refKey x) "faulttolerance_share_level"
 
 instance s ~ s' => P.HasComputedHbrMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedHbrMaximumMbit x = TF.compute (TF.refKey x) "_computedHbrMaximumMbit"
+    computedHbrMaximumMbit x = TF.compute (TF.refKey x) "hbr_maximum_mbit"
 
 instance s ~ s' => P.HasComputedHbrReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedHbrReservationMbit x = TF.compute (TF.refKey x) "_computedHbrReservationMbit"
+    computedHbrReservationMbit x = TF.compute (TF.refKey x) "hbr_reservation_mbit"
 
 instance s ~ s' => P.HasComputedHbrShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedHbrShareCount x = TF.compute (TF.refKey x) "_computedHbrShareCount"
+    computedHbrShareCount x = TF.compute (TF.refKey x) "hbr_share_count"
 
 instance s ~ s' => P.HasComputedHbrShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedHbrShareLevel x = TF.compute (TF.refKey x) "_computedHbrShareLevel"
+    computedHbrShareLevel x = TF.compute (TF.refKey x) "hbr_share_level"
 
 instance s ~ s' => P.HasComputedIngressShapingAverageBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingAverageBandwidth"
+    computedIngressShapingAverageBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_average_bandwidth"
 
 instance s ~ s' => P.HasComputedIngressShapingBurstSize (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "_computedIngressShapingBurstSize"
+    computedIngressShapingBurstSize x = TF.compute (TF.refKey x) "ingress_shaping_burst_size"
 
 instance s ~ s' => P.HasComputedIngressShapingEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "_computedIngressShapingEnabled"
+    computedIngressShapingEnabled x = TF.compute (TF.refKey x) "ingress_shaping_enabled"
 
 instance s ~ s' => P.HasComputedIngressShapingPeakBandwidth (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "_computedIngressShapingPeakBandwidth"
+    computedIngressShapingPeakBandwidth x = TF.compute (TF.refKey x) "ingress_shaping_peak_bandwidth"
 
 instance s ~ s' => P.HasComputedIscsiMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIscsiMaximumMbit x = TF.compute (TF.refKey x) "_computedIscsiMaximumMbit"
+    computedIscsiMaximumMbit x = TF.compute (TF.refKey x) "iscsi_maximum_mbit"
 
 instance s ~ s' => P.HasComputedIscsiReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIscsiReservationMbit x = TF.compute (TF.refKey x) "_computedIscsiReservationMbit"
+    computedIscsiReservationMbit x = TF.compute (TF.refKey x) "iscsi_reservation_mbit"
 
 instance s ~ s' => P.HasComputedIscsiShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedIscsiShareCount x = TF.compute (TF.refKey x) "_computedIscsiShareCount"
+    computedIscsiShareCount x = TF.compute (TF.refKey x) "iscsi_share_count"
 
 instance s ~ s' => P.HasComputedIscsiShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedIscsiShareLevel x = TF.compute (TF.refKey x) "_computedIscsiShareLevel"
+    computedIscsiShareLevel x = TF.compute (TF.refKey x) "iscsi_share_level"
 
 instance s ~ s' => P.HasComputedLacpApiVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLacpApiVersion x = TF.compute (TF.refKey x) "_computedLacpApiVersion"
+    computedLacpApiVersion x = TF.compute (TF.refKey x) "lacp_api_version"
 
 instance s ~ s' => P.HasComputedLacpEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedLacpEnabled x = TF.compute (TF.refKey x) "_computedLacpEnabled"
+    computedLacpEnabled x = TF.compute (TF.refKey x) "lacp_enabled"
 
 instance s ~ s' => P.HasComputedLacpMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedLacpMode x = TF.compute (TF.refKey x) "_computedLacpMode"
+    computedLacpMode x = TF.compute (TF.refKey x) "lacp_mode"
 
 instance s ~ s' => P.HasComputedManagementMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedManagementMaximumMbit x = TF.compute (TF.refKey x) "_computedManagementMaximumMbit"
+    computedManagementMaximumMbit x = TF.compute (TF.refKey x) "management_maximum_mbit"
 
 instance s ~ s' => P.HasComputedManagementReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedManagementReservationMbit x = TF.compute (TF.refKey x) "_computedManagementReservationMbit"
+    computedManagementReservationMbit x = TF.compute (TF.refKey x) "management_reservation_mbit"
 
 instance s ~ s' => P.HasComputedManagementShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedManagementShareCount x = TF.compute (TF.refKey x) "_computedManagementShareCount"
+    computedManagementShareCount x = TF.compute (TF.refKey x) "management_share_count"
 
 instance s ~ s' => P.HasComputedManagementShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedManagementShareLevel x = TF.compute (TF.refKey x) "_computedManagementShareLevel"
+    computedManagementShareLevel x = TF.compute (TF.refKey x) "management_share_level"
 
 instance s ~ s' => P.HasComputedMaxMtu (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedMaxMtu x = TF.compute (TF.refKey x) "_computedMaxMtu"
+    computedMaxMtu x = TF.compute (TF.refKey x) "max_mtu"
 
 instance s ~ s' => P.HasComputedMulticastFilteringMode (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedMulticastFilteringMode x = TF.compute (TF.refKey x) "_computedMulticastFilteringMode"
+    computedMulticastFilteringMode x = TF.compute (TF.refKey x) "multicast_filtering_mode"
 
 instance s ~ s' => P.HasComputedNetflowEnabled (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedNetflowEnabled x = TF.compute (TF.refKey x) "_computedNetflowEnabled"
+    computedNetflowEnabled x = TF.compute (TF.refKey x) "netflow_enabled"
 
 instance s ~ s' => P.HasComputedNetworkResourceControlVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedNetworkResourceControlVersion x = TF.compute (TF.refKey x) "_computedNetworkResourceControlVersion"
+    computedNetworkResourceControlVersion x = TF.compute (TF.refKey x) "network_resource_control_version"
 
 instance s ~ s' => P.HasComputedNfsMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedNfsMaximumMbit x = TF.compute (TF.refKey x) "_computedNfsMaximumMbit"
+    computedNfsMaximumMbit x = TF.compute (TF.refKey x) "nfs_maximum_mbit"
 
 instance s ~ s' => P.HasComputedNfsReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedNfsReservationMbit x = TF.compute (TF.refKey x) "_computedNfsReservationMbit"
+    computedNfsReservationMbit x = TF.compute (TF.refKey x) "nfs_reservation_mbit"
 
 instance s ~ s' => P.HasComputedNfsShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedNfsShareCount x = TF.compute (TF.refKey x) "_computedNfsShareCount"
+    computedNfsShareCount x = TF.compute (TF.refKey x) "nfs_share_count"
 
 instance s ~ s' => P.HasComputedNfsShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedNfsShareLevel x = TF.compute (TF.refKey x) "_computedNfsShareLevel"
+    computedNfsShareLevel x = TF.compute (TF.refKey x) "nfs_share_level"
 
 instance s ~ s' => P.HasComputedNotifySwitches (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedNotifySwitches x = TF.compute (TF.refKey x) "_computedNotifySwitches"
+    computedNotifySwitches x = TF.compute (TF.refKey x) "notify_switches"
 
 instance s ~ s' => P.HasComputedPortPrivateSecondaryVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "_computedPortPrivateSecondaryVlanId"
+    computedPortPrivateSecondaryVlanId x = TF.compute (TF.refKey x) "port_private_secondary_vlan_id"
 
 instance s ~ s' => P.HasComputedStandbyUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStandbyUplinks x = TF.compute (TF.refKey x) "_computedStandbyUplinks"
+    computedStandbyUplinks x = TF.compute (TF.refKey x) "standby_uplinks"
 
 instance s ~ s' => P.HasComputedTeamingPolicy (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedTeamingPolicy x = TF.compute (TF.refKey x) "_computedTeamingPolicy"
+    computedTeamingPolicy x = TF.compute (TF.refKey x) "teaming_policy"
 
 instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Bool) where
-    computedTxUplink x = TF.compute (TF.refKey x) "_computedTxUplink"
+    computedTxUplink x = TF.compute (TF.refKey x) "tx_uplink"
 
 instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUplinks x = TF.compute (TF.refKey x) "_computedUplinks"
+    computedUplinks x = TF.compute (TF.refKey x) "uplinks"
 
 instance s ~ s' => P.HasComputedVdpMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVdpMaximumMbit x = TF.compute (TF.refKey x) "_computedVdpMaximumMbit"
+    computedVdpMaximumMbit x = TF.compute (TF.refKey x) "vdp_maximum_mbit"
 
 instance s ~ s' => P.HasComputedVdpReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVdpReservationMbit x = TF.compute (TF.refKey x) "_computedVdpReservationMbit"
+    computedVdpReservationMbit x = TF.compute (TF.refKey x) "vdp_reservation_mbit"
 
 instance s ~ s' => P.HasComputedVdpShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVdpShareCount x = TF.compute (TF.refKey x) "_computedVdpShareCount"
+    computedVdpShareCount x = TF.compute (TF.refKey x) "vdp_share_count"
 
 instance s ~ s' => P.HasComputedVdpShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVdpShareLevel x = TF.compute (TF.refKey x) "_computedVdpShareLevel"
+    computedVdpShareLevel x = TF.compute (TF.refKey x) "vdp_share_level"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 instance s ~ s' => P.HasComputedVirtualmachineMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVirtualmachineMaximumMbit x = TF.compute (TF.refKey x) "_computedVirtualmachineMaximumMbit"
+    computedVirtualmachineMaximumMbit x = TF.compute (TF.refKey x) "virtualmachine_maximum_mbit"
 
 instance s ~ s' => P.HasComputedVirtualmachineReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVirtualmachineReservationMbit x = TF.compute (TF.refKey x) "_computedVirtualmachineReservationMbit"
+    computedVirtualmachineReservationMbit x = TF.compute (TF.refKey x) "virtualmachine_reservation_mbit"
 
 instance s ~ s' => P.HasComputedVirtualmachineShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVirtualmachineShareCount x = TF.compute (TF.refKey x) "_computedVirtualmachineShareCount"
+    computedVirtualmachineShareCount x = TF.compute (TF.refKey x) "virtualmachine_share_count"
 
 instance s ~ s' => P.HasComputedVirtualmachineShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVirtualmachineShareLevel x = TF.compute (TF.refKey x) "_computedVirtualmachineShareLevel"
+    computedVirtualmachineShareLevel x = TF.compute (TF.refKey x) "virtualmachine_share_level"
 
 instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVlanId x = TF.compute (TF.refKey x) "_computedVlanId"
+    computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
-instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s (VlanRange s)]) where
-    computedVlanRange x = TF.compute (TF.refKey x) "_computedVlanRange"
+instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRange s)]) where
+    computedVlanRange x = TF.compute (TF.refKey x) "vlan_range"
 
 instance s ~ s' => P.HasComputedVmotionMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVmotionMaximumMbit x = TF.compute (TF.refKey x) "_computedVmotionMaximumMbit"
+    computedVmotionMaximumMbit x = TF.compute (TF.refKey x) "vmotion_maximum_mbit"
 
 instance s ~ s' => P.HasComputedVmotionReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVmotionReservationMbit x = TF.compute (TF.refKey x) "_computedVmotionReservationMbit"
+    computedVmotionReservationMbit x = TF.compute (TF.refKey x) "vmotion_reservation_mbit"
 
 instance s ~ s' => P.HasComputedVmotionShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVmotionShareCount x = TF.compute (TF.refKey x) "_computedVmotionShareCount"
+    computedVmotionShareCount x = TF.compute (TF.refKey x) "vmotion_share_count"
 
 instance s ~ s' => P.HasComputedVmotionShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVmotionShareLevel x = TF.compute (TF.refKey x) "_computedVmotionShareLevel"
+    computedVmotionShareLevel x = TF.compute (TF.refKey x) "vmotion_share_level"
 
 instance s ~ s' => P.HasComputedVsanMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVsanMaximumMbit x = TF.compute (TF.refKey x) "_computedVsanMaximumMbit"
+    computedVsanMaximumMbit x = TF.compute (TF.refKey x) "vsan_maximum_mbit"
 
 instance s ~ s' => P.HasComputedVsanReservationMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVsanReservationMbit x = TF.compute (TF.refKey x) "_computedVsanReservationMbit"
+    computedVsanReservationMbit x = TF.compute (TF.refKey x) "vsan_reservation_mbit"
 
 instance s ~ s' => P.HasComputedVsanShareCount (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Integer) where
-    computedVsanShareCount x = TF.compute (TF.refKey x) "_computedVsanShareCount"
+    computedVsanShareCount x = TF.compute (TF.refKey x) "vsan_share_count"
 
 instance s ~ s' => P.HasComputedVsanShareLevel (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Text) where
-    computedVsanShareLevel x = TF.compute (TF.refKey x) "_computedVsanShareLevel"
+    computedVsanShareLevel x = TF.compute (TF.refKey x) "vsan_share_level"
 
 -- | @vsphere_dpm_host_override@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_dpm_host_override terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/dpm_host_override.html terraform documentation>
 -- for more information.
 data DpmHostOverrideResource s = DpmHostOverrideResource'
     { _computeClusterId   :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _dpmAutomationLevel :: TF.Attr s P.Text
@@ -2651,7 +2651,7 @@ data DpmHostOverrideResource s = DpmHostOverrideResource'
     -- Enable DPM for this host.
     --
     , _hostSystemId       :: TF.Attr s P.Text
-    -- ^ @host_system_id@ - (Required)
+    -- ^ @host_system_id@ - (Required, Forces New)
     -- The managed object ID of the host.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2702,11 +2702,11 @@ instance P.HasHostSystemId (DpmHostOverrideResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_drs_vm_override@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_drs_vm_override terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/drs_vm_override.html terraform documentation>
 -- for more information.
 data DrsVmOverrideResource s = DrsVmOverrideResource'
     { _computeClusterId   :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _drsAutomationLevel :: TF.Attr s P.Text
@@ -2719,7 +2719,7 @@ data DrsVmOverrideResource s = DrsVmOverrideResource'
     -- Enable DRS for this virtual machine.
     --
     , _virtualMachineId   :: TF.Attr s P.Text
-    -- ^ @virtual_machine_id@ - (Required)
+    -- ^ @virtual_machine_id@ - (Required, Forces New)
     -- The managed object ID of the virtual machine.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2770,7 +2770,7 @@ instance P.HasVirtualMachineId (DrsVmOverrideResource s) (TF.Attr s P.Text) wher
 
 -- | @vsphere_file@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/file.html terraform documentation>
 -- for more information.
 data FileResource s = FileResource'
     { _createDirectories :: TF.Attr s P.Bool
@@ -2786,13 +2786,13 @@ data FileResource s = FileResource'
     -- ^ @destination_file@ - (Required)
     --
     , _sourceDatacenter  :: TF.Attr s P.Text
-    -- ^ @source_datacenter@ - (Optional)
+    -- ^ @source_datacenter@ - (Optional, Forces New)
     --
     , _sourceDatastore   :: TF.Attr s P.Text
-    -- ^ @source_datastore@ - (Optional)
+    -- ^ @source_datastore@ - (Optional, Forces New)
     --
     , _sourceFile        :: TF.Attr s P.Text
-    -- ^ @source_file@ - (Required)
+    -- ^ @source_file@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2864,7 +2864,7 @@ instance P.HasSourceFile (FileResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_folder@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_folder terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/folder.html terraform documentation>
 -- for more information.
 data FolderResource s = FolderResource'
     { _customAttributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -2872,7 +2872,7 @@ data FolderResource s = FolderResource'
     -- A list of custom attributes to set on this resource.
     --
     , _datacenterId     :: TF.Attr s P.Text
-    -- ^ @datacenter_id@ - (Optional)
+    -- ^ @datacenter_id@ - (Optional, Forces New)
     -- The ID of the datacenter. Can be ignored if creating a datacenter folder,
     -- otherwise required.
     --
@@ -2886,7 +2886,7 @@ data FolderResource s = FolderResource'
     -- A list of tag IDs to apply to this object.
     --
     , _type'            :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     -- The type of the folder.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2944,11 +2944,11 @@ instance P.HasType' (FolderResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_ha_vm_override@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_ha_vm_override terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/ha_vm_override.html terraform documentation>
 -- for more information.
 data HaVmOverrideResource s = HaVmOverrideResource'
     { _computeClusterId                 :: TF.Attr s P.Text
-    -- ^ @compute_cluster_id@ - (Required)
+    -- ^ @compute_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the cluster.
     --
     , _haDatastoreApdRecoveryAction     :: TF.Attr s P.Text
@@ -3029,7 +3029,7 @@ data HaVmOverrideResource s = HaVmOverrideResource'
     -- machine to be ready. Use -1 to use the cluster default.
     --
     , _virtualMachineId                 :: TF.Attr s P.Text
-    -- ^ @virtual_machine_id@ - (Required)
+    -- ^ @virtual_machine_id@ - (Required, Forces New)
     -- The managed object ID of the virtual machine.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3157,7 +3157,7 @@ instance P.HasVirtualMachineId (HaVmOverrideResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_host_port_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_host_port_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/host_port_group.html terraform documentation>
 -- for more information.
 data HostPortGroupResource s = HostPortGroupResource'
     { _activeNics              :: TF.Attr s [TF.Attr s P.Text]
@@ -3190,11 +3190,11 @@ data HostPortGroupResource s = HostPortGroupResource'
     -- precedence when they come back up.
     --
     , _hostSystemId            :: TF.Attr s P.Text
-    -- ^ @host_system_id@ - (Required)
+    -- ^ @host_system_id@ - (Required, Forces New)
     -- The managed object ID of the host to set the virtual switch up on.
     --
     , _name                    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- The name of the port group.
     --
     , _notifySwitches          :: TF.Attr s P.Bool
@@ -3229,7 +3229,7 @@ data HostPortGroupResource s = HostPortGroupResource'
     -- loadbalance_srcmac, loadbalance_srcid, or failover_explicit.
     --
     , _virtualSwitchName       :: TF.Attr s P.Text
-    -- ^ @virtual_switch_name@ - (Required)
+    -- ^ @virtual_switch_name@ - (Required, Forces New)
     -- The name of the virtual switch to bind this port group to.
     --
     , _vlanId                  :: TF.Attr s P.Integer
@@ -3377,17 +3377,17 @@ instance P.HasVlanId (HostPortGroupResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _vlanId = a } :: HostPortGroupResource s)
 
 instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedComputedPolicy x = TF.compute (TF.refKey x) "_computedComputedPolicy"
+    computedComputedPolicy x = TF.compute (TF.refKey x) "computed_policy"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "_computedKey"
+    computedKey x = TF.compute (TF.refKey x) "key"
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (Ports s)) where
-    computedPorts x = TF.compute (TF.refKey x) "_computedPorts"
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (HostPortGroupPorts s)) where
+    computedPorts x = TF.compute (TF.refKey x) "ports"
 
 -- | @vsphere_host_virtual_switch@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_host_virtual_switch terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/host_virtual_switch.html terraform documentation>
 -- for more information.
 data HostVirtualSwitchResource s = HostVirtualSwitchResource'
     { _activeNics              :: TF.Attr s [TF.Attr s P.Text]
@@ -3425,7 +3425,7 @@ data HostVirtualSwitchResource s = HostVirtualSwitchResource'
     -- precedence when they come back up.
     --
     , _hostSystemId            :: TF.Attr s P.Text
-    -- ^ @host_system_id@ - (Required)
+    -- ^ @host_system_id@ - (Required, Forces New)
     -- The managed object ID of the host to set the virtual switch up on.
     --
     , _linkDiscoveryOperation  :: TF.Attr s P.Text
@@ -3442,7 +3442,7 @@ data HostVirtualSwitchResource s = HostVirtualSwitchResource'
     -- The maximum transmission unit (MTU) of the virtual switch in bytes.
     --
     , _name                    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- The name of the virtual switch.
     --
     , _networkAdapters         :: TF.Attr s [TF.Attr s P.Text]
@@ -3654,14 +3654,14 @@ instance P.HasTeamingPolicy (HostVirtualSwitchResource s) (TF.Attr s P.Text) whe
 
 -- | @vsphere_license@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_license terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/license.html terraform documentation>
 -- for more information.
 data LicenseResource s = LicenseResource'
     { _labels     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _licenseKey :: TF.Attr s P.Text
-    -- ^ @license_key@ - (Required)
+    -- ^ @license_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3695,24 +3695,24 @@ instance P.HasLicenseKey (LicenseResource s) (TF.Attr s P.Text) where
                (\s a -> s { _licenseKey = a } :: LicenseResource s)
 
 instance s ~ s' => P.HasComputedEditionKey (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedEditionKey x = TF.compute (TF.refKey x) "_computedEditionKey"
+    computedEditionKey x = TF.compute (TF.refKey x) "edition_key"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedTotal (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Integer) where
-    computedTotal x = TF.compute (TF.refKey x) "_computedTotal"
+    computedTotal x = TF.compute (TF.refKey x) "total"
 
 instance s ~ s' => P.HasComputedUsed (TF.Ref s' (LicenseResource s)) (TF.Attr s P.Integer) where
-    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
+    computedUsed x = TF.compute (TF.refKey x) "used"
 
 -- | @vsphere_nas_datastore@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_nas_datastore terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/nas_datastore.html terraform documentation>
 -- for more information.
 data NasDatastoreResource s = NasDatastoreResource'
     { _accessMode         :: TF.Attr s P.Text
-    -- ^ @access_mode@ - (Optional)
+    -- ^ @access_mode@ - (Optional, Forces New)
     -- Access mode for the mount point. Can be one of readOnly or readWrite.
     --
     , _customAttributes   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -3742,17 +3742,17 @@ data NasDatastoreResource s = NasDatastoreResource'
     -- The name of the datastore.
     --
     , _remoteHosts        :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @remote_hosts@ - (Required)
+    -- ^ @remote_hosts@ - (Required, Forces New)
     -- The hostnames or IP addresses of the remote server or servers. Only one
     -- element should be present for NFS v3 but multiple can be present for NFS
     -- v4.1.
     --
     , _remotePath         :: TF.Attr s P.Text
-    -- ^ @remote_path@ - (Required)
+    -- ^ @remote_path@ - (Required, Forces New)
     -- The remote path of the mount point.
     --
     , _securityType       :: TF.Attr s P.Text
-    -- ^ @security_type@ - (Optional)
+    -- ^ @security_type@ - (Optional, Forces New)
     -- The security type to use.
     --
     , _tags               :: TF.Attr s [TF.Attr s P.Text]
@@ -3760,7 +3760,7 @@ data NasDatastoreResource s = NasDatastoreResource'
     -- A list of tag IDs to apply to this object.
     --
     , _type'              :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     -- The type of NAS volume. Can be one of NFS (to denote v3) or NFS41 (to denote
     -- NFS v4.1).
     --
@@ -3873,32 +3873,32 @@ instance P.HasType' (NasDatastoreResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: NasDatastoreResource s)
 
 instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedAccessible x = TF.compute (TF.refKey x) "_computedAccessible"
+    computedAccessible x = TF.compute (TF.refKey x) "accessible"
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
+    computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
 instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedFreeSpace x = TF.compute (TF.refKey x) "_computedFreeSpace"
+    computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
 
 instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceMode x = TF.compute (TF.refKey x) "_computedMaintenanceMode"
+    computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
 
 instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedMultipleHostAccess x = TF.compute (TF.refKey x) "_computedMultipleHostAccess"
+    computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
 
 instance s ~ s' => P.HasComputedProtocolEndpoint (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedProtocolEndpoint x = TF.compute (TF.refKey x) "_computedProtocolEndpoint"
+    computedProtocolEndpoint x = TF.compute (TF.refKey x) "protocol_endpoint"
 
 instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedUncommittedSpace x = TF.compute (TF.refKey x) "_computedUncommittedSpace"
+    computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (NasDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @vsphere_resource_pool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_resource_pool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/resource_pool.html terraform documentation>
 -- for more information.
 data ResourcePoolResource s = ResourcePoolResource'
     { _cpuExpandable        :: TF.Attr s P.Bool
@@ -4061,18 +4061,18 @@ instance P.HasTags (ResourcePoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _tags = a } :: ResourcePoolResource s)
 
 instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Integer) where
-    computedCpuShares x = TF.compute (TF.refKey x) "_computedCpuShares"
+    computedCpuShares x = TF.compute (TF.refKey x) "cpu_shares"
 
 instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (ResourcePoolResource s)) (TF.Attr s P.Integer) where
-    computedMemoryShares x = TF.compute (TF.refKey x) "_computedMemoryShares"
+    computedMemoryShares x = TF.compute (TF.refKey x) "memory_shares"
 
 -- | @vsphere_storage_drs_vm_override@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_storage_drs_vm_override terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/storage_drs_vm_override.html terraform documentation>
 -- for more information.
 data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource'
     { _datastoreClusterId  :: TF.Attr s P.Text
-    -- ^ @datastore_cluster_id@ - (Required)
+    -- ^ @datastore_cluster_id@ - (Required, Forces New)
     -- The managed object ID of the datastore cluster.
     --
     , _sdrsAutomationLevel :: TF.Attr s P.Text
@@ -4088,7 +4088,7 @@ data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource'
     -- Overrides the intra-VM affinity setting for this virtual machine.
     --
     , _virtualMachineId    :: TF.Attr s P.Text
-    -- ^ @virtual_machine_id@ - (Required)
+    -- ^ @virtual_machine_id@ - (Required, Forces New)
     -- The managed object ID of the virtual machine.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4146,11 +4146,11 @@ instance P.HasVirtualMachineId (StorageDrsVmOverrideResource s) (TF.Attr s P.Tex
 
 -- | @vsphere_tag@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_tag terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/tag.html terraform documentation>
 -- for more information.
 data TagResource s = TagResource'
     { _categoryId  :: TF.Attr s P.Text
-    -- ^ @category_id@ - (Required)
+    -- ^ @category_id@ - (Required, Forces New)
     -- The unique identifier of the parent category in which this tag will be
     -- created.
     --
@@ -4203,7 +4203,7 @@ instance P.HasName (TagResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_tag_category@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_tag_category terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/tag_category.html terraform documentation>
 -- for more information.
 data TagCategoryResource s = TagCategoryResource'
     { _associableTypes :: TF.Attr s [TF.Attr s P.Text]
@@ -4211,7 +4211,7 @@ data TagCategoryResource s = TagCategoryResource'
     -- Object types to which this category's tags can be attached.
     --
     , _cardinality     :: TF.Attr s P.Text
-    -- ^ @cardinality@ - (Required)
+    -- ^ @cardinality@ - (Required, Forces New)
     -- The associated cardinality of the category. Can be one of SINGLE (object can
     -- only be assigned one tag in this category) or MULTIPLE (object can be
     -- assigned multiple tags in this category).
@@ -4273,7 +4273,7 @@ instance P.HasName (TagCategoryResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_vapp_container@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_vapp_container terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/vapp_container.html terraform documentation>
 -- for more information.
 data VappContainerResource s = VappContainerResource'
     { _cpuExpandable        :: TF.Attr s P.Bool
@@ -4447,33 +4447,33 @@ instance P.HasTags (VappContainerResource s) (TF.Attr s [TF.Attr s P.Text]) wher
                (\s a -> s { _tags = a } :: VappContainerResource s)
 
 instance s ~ s' => P.HasComputedCpuShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Integer) where
-    computedCpuShares x = TF.compute (TF.refKey x) "_computedCpuShares"
+    computedCpuShares x = TF.compute (TF.refKey x) "cpu_shares"
 
 instance s ~ s' => P.HasComputedMemoryShares (TF.Ref s' (VappContainerResource s)) (TF.Attr s P.Integer) where
-    computedMemoryShares x = TF.compute (TF.refKey x) "_computedMemoryShares"
+    computedMemoryShares x = TF.compute (TF.refKey x) "memory_shares"
 
 -- | @vsphere_virtual_disk@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_disk terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/virtual_disk.html terraform documentation>
 -- for more information.
 data VirtualDiskResource s = VirtualDiskResource'
     { _createDirectories :: TF.Attr s P.Bool
-    -- ^ @create_directories@ - (Optional)
+    -- ^ @create_directories@ - (Optional, Forces New)
     --
     , _datacenter        :: TF.Attr s P.Text
-    -- ^ @datacenter@ - (Optional)
+    -- ^ @datacenter@ - (Optional, Forces New)
     --
     , _datastore         :: TF.Attr s P.Text
-    -- ^ @datastore@ - (Required)
+    -- ^ @datastore@ - (Required, Forces New)
     --
     , _size              :: TF.Attr s P.Integer
-    -- ^ @size@ - (Required)
+    -- ^ @size@ - (Required, Forces New)
     --
     , _type'             :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     , _vmdkPath          :: TF.Attr s P.Text
-    -- ^ @vmdk_path@ - (Required)
+    -- ^ @vmdk_path@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4538,7 +4538,7 @@ instance P.HasVmdkPath (VirtualDiskResource s) (TF.Attr s P.Text) where
 
 -- | @vsphere_virtual_machine@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_machine terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/virtual_machine.html terraform documentation>
 -- for more information.
 data VirtualMachineResource s = VirtualMachineResource'
     { _alternateGuestName :: TF.Attr s P.Text
@@ -4563,11 +4563,11 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- If set to true, a virtual machine that fails to boot will try again after
     -- the delay defined in boot_retry_delay.
     --
-    , _cdrom :: TF.Attr s (Cdrom s)
+    , _cdrom :: TF.Attr s (VirtualMachineCdrom s)
     -- ^ @cdrom@ - (Optional)
     -- A specification for a CDROM device on this virtual machine.
     --
-    , _clone :: TF.Attr s (Clone s)
+    , _clone :: TF.Attr s (VirtualMachineClone s)
     -- ^ @clone@ - (Optional)
     -- A specification for cloning a virtual machine from template.
     --
@@ -4699,7 +4699,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- Enable nested hardware virtualization on this virtual machine, facilitating
     -- nested virtualization in the guest.
     --
-    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterface s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)]
     -- ^ @network_interface@ - (Required)
     -- A specification for a virtual NIC on this virtual machine.
     --
@@ -4774,7 +4774,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- ^ @tags@ - (Optional)
     -- A list of tag IDs to apply to this object.
     --
-    , _vapp :: TF.Attr s (Vapp s)
+    , _vapp :: TF.Attr s (VirtualMachineVapp s)
     -- ^ @vapp@ - (Optional)
     -- VApp configuration data for this virtual machine. Can be used to provide
     -- configuration data for OVF images.
@@ -4795,7 +4795,7 @@ data VirtualMachineResource s = VirtualMachineResource'
 
 virtualMachineResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (NetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
+    -> TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
     -> TF.Attr s P.Text -- ^ @resource_pool_id@ - 'P.resourcePoolId'
     -> TF.Resource P.Provider (VirtualMachineResource s)
 virtualMachineResource _name _networkInterface _resourcePoolId =
@@ -4917,19 +4917,19 @@ instance TF.IsValid (VirtualMachineResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_cdrom"
                   (_cdrom
-                      :: VirtualMachineResource s -> TF.Attr s (Cdrom s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineCdrom s))
                   TF.validator
            P.<> TF.settingsValidator "_clone"
                   (_clone
-                      :: VirtualMachineResource s -> TF.Attr s (Clone s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineClone s))
                   TF.validator
            P.<> TF.settingsValidator "_networkInterface"
                   (_networkInterface
-                      :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+                      :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)])
                   TF.validator
            P.<> TF.settingsValidator "_vapp"
                   (_vapp
-                      :: VirtualMachineResource s -> TF.Attr s (Vapp s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineVapp s))
                   TF.validator
 
 instance P.HasAlternateGuestName (VirtualMachineResource s) (TF.Attr s P.Text) where
@@ -4957,14 +4957,14 @@ instance P.HasBootRetryEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) whe
         P.lens (_bootRetryEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
                (\s a -> s { _bootRetryEnabled = a } :: VirtualMachineResource s)
 
-instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s (Cdrom s)) where
+instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s (VirtualMachineCdrom s)) where
     cdrom =
-        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s (Cdrom s))
+        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s (VirtualMachineCdrom s))
                (\s a -> s { _cdrom = a } :: VirtualMachineResource s)
 
-instance P.HasClone (VirtualMachineResource s) (TF.Attr s (Clone s)) where
+instance P.HasClone (VirtualMachineResource s) (TF.Attr s (VirtualMachineClone s)) where
     clone =
-        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s (Clone s))
+        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s (VirtualMachineClone s))
                (\s a -> s { _clone = a } :: VirtualMachineResource s)
 
 instance P.HasCpuHotAddEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
@@ -5102,9 +5102,9 @@ instance P.HasNestedHvEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) wher
         P.lens (_nestedHvEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
                (\s a -> s { _nestedHvEnabled = a } :: VirtualMachineResource s)
 
-instance P.HasNetworkInterface (VirtualMachineResource s) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
+instance P.HasNetworkInterface (VirtualMachineResource s) (TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (NetworkInterface s)])
+        P.lens (_networkInterface :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)])
                (\s a -> s { _networkInterface = a } :: VirtualMachineResource s)
 
 instance P.HasNumCoresPerSocket (VirtualMachineResource s) (TF.Attr s P.Integer) where
@@ -5182,9 +5182,9 @@ instance P.HasTags (VirtualMachineResource s) (TF.Attr s [TF.Attr s P.Text]) whe
         P.lens (_tags :: VirtualMachineResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: VirtualMachineResource s)
 
-instance P.HasVapp (VirtualMachineResource s) (TF.Attr s (Vapp s)) where
+instance P.HasVapp (VirtualMachineResource s) (TF.Attr s (VirtualMachineVapp s)) where
     vapp =
-        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s (Vapp s))
+        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s (VirtualMachineVapp s))
                (\s a -> s { _vapp = a } :: VirtualMachineResource s)
 
 instance P.HasWaitForGuestNetRoutable (VirtualMachineResource s) (TF.Attr s P.Bool) where
@@ -5198,75 +5198,75 @@ instance P.HasWaitForGuestNetTimeout (VirtualMachineResource s) (TF.Attr s P.Int
                (\s a -> s { _waitForGuestNetTimeout = a } :: VirtualMachineResource s)
 
 instance s ~ s' => P.HasComputedChangeVersion (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedChangeVersion x = TF.compute (TF.refKey x) "_computedChangeVersion"
+    computedChangeVersion x = TF.compute (TF.refKey x) "change_version"
 
 instance s ~ s' => P.HasComputedCpuShareCount (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Integer) where
-    computedCpuShareCount x = TF.compute (TF.refKey x) "_computedCpuShareCount"
+    computedCpuShareCount x = TF.compute (TF.refKey x) "cpu_share_count"
 
 instance s ~ s' => P.HasComputedDatastoreId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedDatastoreId x = TF.compute (TF.refKey x) "_computedDatastoreId"
+    computedDatastoreId x = TF.compute (TF.refKey x) "datastore_id"
 
 instance s ~ s' => P.HasComputedDefaultIpAddress (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedDefaultIpAddress x = TF.compute (TF.refKey x) "_computedDefaultIpAddress"
+    computedDefaultIpAddress x = TF.compute (TF.refKey x) "default_ip_address"
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (Disk s)]) where
-    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (VirtualMachineDisk s)]) where
+    computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedGuestIpAddresses (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedGuestIpAddresses x = TF.compute (TF.refKey x) "_computedGuestIpAddresses"
+    computedGuestIpAddresses x = TF.compute (TF.refKey x) "guest_ip_addresses"
 
 instance s ~ s' => P.HasComputedHostSystemId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedHostSystemId x = TF.compute (TF.refKey x) "_computedHostSystemId"
+    computedHostSystemId x = TF.compute (TF.refKey x) "host_system_id"
 
 instance s ~ s' => P.HasComputedImported (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Bool) where
-    computedImported x = TF.compute (TF.refKey x) "_computedImported"
+    computedImported x = TF.compute (TF.refKey x) "imported"
 
 instance s ~ s' => P.HasComputedMemoryShareCount (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Integer) where
-    computedMemoryShareCount x = TF.compute (TF.refKey x) "_computedMemoryShareCount"
+    computedMemoryShareCount x = TF.compute (TF.refKey x) "memory_share_count"
 
 instance s ~ s' => P.HasComputedMoid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedMoid x = TF.compute (TF.refKey x) "_computedMoid"
+    computedMoid x = TF.compute (TF.refKey x) "moid"
 
 instance s ~ s' => P.HasComputedRebootRequired (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Bool) where
-    computedRebootRequired x = TF.compute (TF.refKey x) "_computedRebootRequired"
+    computedRebootRequired x = TF.compute (TF.refKey x) "reboot_required"
 
 instance s ~ s' => P.HasComputedUuid (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
+    computedUuid x = TF.compute (TF.refKey x) "uuid"
 
 instance s ~ s' => P.HasComputedVappTransport (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVappTransport x = TF.compute (TF.refKey x) "_computedVappTransport"
+    computedVappTransport x = TF.compute (TF.refKey x) "vapp_transport"
 
 instance s ~ s' => P.HasComputedVmwareToolsStatus (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVmwareToolsStatus x = TF.compute (TF.refKey x) "_computedVmwareToolsStatus"
+    computedVmwareToolsStatus x = TF.compute (TF.refKey x) "vmware_tools_status"
 
 instance s ~ s' => P.HasComputedVmxPath (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
-    computedVmxPath x = TF.compute (TF.refKey x) "_computedVmxPath"
+    computedVmxPath x = TF.compute (TF.refKey x) "vmx_path"
 
 -- | @vsphere_virtual_machine_snapshot@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_machine_snapshot terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/virtual_machine_snapshot.html terraform documentation>
 -- for more information.
 data VirtualMachineSnapshotResource s = VirtualMachineSnapshotResource'
     { _consolidate        :: TF.Attr s P.Bool
-    -- ^ @consolidate@ - (Optional)
+    -- ^ @consolidate@ - (Optional, Forces New)
     --
     , _description        :: TF.Attr s P.Text
-    -- ^ @description@ - (Required)
+    -- ^ @description@ - (Required, Forces New)
     --
     , _memory             :: TF.Attr s P.Bool
-    -- ^ @memory@ - (Required)
+    -- ^ @memory@ - (Required, Forces New)
     --
     , _quiesce            :: TF.Attr s P.Bool
-    -- ^ @quiesce@ - (Required)
+    -- ^ @quiesce@ - (Required, Forces New)
     --
     , _removeChildren     :: TF.Attr s P.Bool
-    -- ^ @remove_children@ - (Optional)
+    -- ^ @remove_children@ - (Optional, Forces New)
     --
     , _snapshotName       :: TF.Attr s P.Text
-    -- ^ @snapshot_name@ - (Required)
+    -- ^ @snapshot_name@ - (Required, Forces New)
     --
     , _virtualMachineUuid :: TF.Attr s P.Text
-    -- ^ @virtual_machine_uuid@ - (Required)
+    -- ^ @virtual_machine_uuid@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5340,7 +5340,7 @@ instance P.HasVirtualMachineUuid (VirtualMachineSnapshotResource s) (TF.Attr s P
 
 -- | @vsphere_vmfs_datastore@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_vmfs_datastore terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/r/vmfs_datastore.html terraform documentation>
 -- for more information.
 data VmfsDatastoreResource s = VmfsDatastoreResource'
     { _customAttributes   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -5366,7 +5366,7 @@ data VmfsDatastoreResource s = VmfsDatastoreResource'
     --
     -- * 'datastoreClusterId'
     , _hostSystemId       :: TF.Attr s P.Text
-    -- ^ @host_system_id@ - (Required)
+    -- ^ @host_system_id@ - (Required, Forces New)
     -- The managed object ID of the host to set up the datastore on.
     --
     , _name               :: TF.Attr s P.Text
@@ -5457,22 +5457,22 @@ instance P.HasTags (VmfsDatastoreResource s) (TF.Attr s [TF.Attr s P.Text]) wher
                (\s a -> s { _tags = a } :: VmfsDatastoreResource s)
 
 instance s ~ s' => P.HasComputedAccessible (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedAccessible x = TF.compute (TF.refKey x) "_computedAccessible"
+    computedAccessible x = TF.compute (TF.refKey x) "accessible"
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
+    computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
 instance s ~ s' => P.HasComputedFreeSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedFreeSpace x = TF.compute (TF.refKey x) "_computedFreeSpace"
+    computedFreeSpace x = TF.compute (TF.refKey x) "free_space"
 
 instance s ~ s' => P.HasComputedMaintenanceMode (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedMaintenanceMode x = TF.compute (TF.refKey x) "_computedMaintenanceMode"
+    computedMaintenanceMode x = TF.compute (TF.refKey x) "maintenance_mode"
 
 instance s ~ s' => P.HasComputedMultipleHostAccess (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Bool) where
-    computedMultipleHostAccess x = TF.compute (TF.refKey x) "_computedMultipleHostAccess"
+    computedMultipleHostAccess x = TF.compute (TF.refKey x) "multiple_host_access"
 
 instance s ~ s' => P.HasComputedUncommittedSpace (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Integer) where
-    computedUncommittedSpace x = TF.compute (TF.refKey x) "_computedUncommittedSpace"
+    computedUncommittedSpace x = TF.compute (TF.refKey x) "uncommitted_space"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (VmfsDatastoreResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"

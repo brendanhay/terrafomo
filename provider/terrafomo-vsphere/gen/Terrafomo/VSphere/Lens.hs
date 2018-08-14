@@ -21,6 +21,7 @@ module Terrafomo.VSphere.Lens
     , HasCpuShareLevel (..)
     , HasSdrsIoReservableThresholdMode (..)
     , HasHaAdmissionControlResourcePercentageCpu (..)
+    , HasIpv6Address (..)
     , HasAssociableTypes (..)
     , HasVlanOverrideAllowed (..)
     , HasHaAdvancedOptions (..)
@@ -40,6 +41,7 @@ module Terrafomo.VSphere.Lens
     , HasSdrsAutomationLevel (..)
     , HasSdrsLoadBalanceInterval (..)
     , HasClientDebugPath (..)
+    , HasDnsDomain (..)
     , HasWaitForGuestNetRoutable (..)
     , HasHostSystemIds (..)
     , HasCdrom (..)
@@ -108,6 +110,7 @@ module Terrafomo.VSphere.Lens
     , HasAnnotation (..)
     , HasDescription (..)
     , HasDisks (..)
+    , HasIpv6Netmask (..)
     , HasDatastoreClusterId (..)
     , HasNetworkResourcePoolOverrideAllowed (..)
     , HasAntiAffinityHostGroupName (..)
@@ -236,6 +239,7 @@ module Terrafomo.VSphere.Lens
     , HasHaHeartbeatDatastoreIds (..)
     , HasCpuReservation (..)
     , HasDatacenter (..)
+    , HasIpv4Netmask (..)
     , HasHaAdmissionControlPerformanceTolerance (..)
     , HasNotifySwitches (..)
     , HasVirtualMachineUuid (..)
@@ -460,6 +464,12 @@ class HasHaAdmissionControlResourcePercentageCpu a b | a -> b where
 instance HasHaAdmissionControlResourcePercentageCpu a b => HasHaAdmissionControlResourcePercentageCpu (TF.Schema l p a) b where
     haAdmissionControlResourcePercentageCpu = TF.configuration . haAdmissionControlResourcePercentageCpu
 
+class HasIpv6Address a b | a -> b where
+    ipv6Address :: P.Lens' a b
+
+instance HasIpv6Address a b => HasIpv6Address (TF.Schema l p a) b where
+    ipv6Address = TF.configuration . ipv6Address
+
 class HasAssociableTypes a b | a -> b where
     associableTypes :: P.Lens' a b
 
@@ -573,6 +583,12 @@ class HasClientDebugPath a b | a -> b where
 
 instance HasClientDebugPath a b => HasClientDebugPath (TF.Schema l p a) b where
     clientDebugPath = TF.configuration . clientDebugPath
+
+class HasDnsDomain a b | a -> b where
+    dnsDomain :: P.Lens' a b
+
+instance HasDnsDomain a b => HasDnsDomain (TF.Schema l p a) b where
+    dnsDomain = TF.configuration . dnsDomain
 
 class HasWaitForGuestNetRoutable a b | a -> b where
     waitForGuestNetRoutable :: P.Lens' a b
@@ -981,6 +997,12 @@ class HasDisks a b | a -> b where
 
 instance HasDisks a b => HasDisks (TF.Schema l p a) b where
     disks = TF.configuration . disks
+
+class HasIpv6Netmask a b | a -> b where
+    ipv6Netmask :: P.Lens' a b
+
+instance HasIpv6Netmask a b => HasIpv6Netmask (TF.Schema l p a) b where
+    ipv6Netmask = TF.configuration . ipv6Netmask
 
 class HasDatastoreClusterId a b | a -> b where
     datastoreClusterId :: P.Lens' a b
@@ -1749,6 +1771,12 @@ class HasDatacenter a b | a -> b where
 
 instance HasDatacenter a b => HasDatacenter (TF.Schema l p a) b where
     datacenter = TF.configuration . datacenter
+
+class HasIpv4Netmask a b | a -> b where
+    ipv4Netmask :: P.Lens' a b
+
+instance HasIpv4Netmask a b => HasIpv4Netmask (TF.Schema l p a) b where
+    ipv4Netmask = TF.configuration . ipv4Netmask
 
 class HasHaAdmissionControlPerformanceTolerance a b | a -> b where
     haAdmissionControlPerformanceTolerance :: P.Lens' a b

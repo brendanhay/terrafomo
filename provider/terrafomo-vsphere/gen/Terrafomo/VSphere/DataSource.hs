@@ -99,7 +99,7 @@ import qualified Terrafomo.VSphere.Types    as P
 
 -- | @vsphere_compute_cluster@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_compute_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/compute_cluster.html terraform documentation>
 -- for more information.
 data ComputeClusterData s = ComputeClusterData'
     { _datacenterId :: TF.Attr s P.Text
@@ -143,11 +143,11 @@ instance P.HasName (ComputeClusterData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeClusterData s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (ComputeClusterData s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
 
 -- | @vsphere_custom_attribute@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_custom_attribute terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/custom_attribute.html terraform documentation>
 -- for more information.
 data CustomAttributeData s = CustomAttributeData'
     { _name :: TF.Attr s P.Text
@@ -179,11 +179,11 @@ instance P.HasName (CustomAttributeData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: CustomAttributeData s)
 
 instance s ~ s' => P.HasComputedManagedObjectType (TF.Ref s' (CustomAttributeData s)) (TF.Attr s P.Text) where
-    computedManagedObjectType x = TF.compute (TF.refKey x) "_computedManagedObjectType"
+    computedManagedObjectType x = TF.compute (TF.refKey x) "managed_object_type"
 
 -- | @vsphere_datacenter@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datacenter terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterData s = DatacenterData'
     { _name :: TF.Attr s P.Text
@@ -216,7 +216,7 @@ instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
 
 -- | @vsphere_datastore@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datastore terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/datastore.html terraform documentation>
 -- for more information.
 data DatastoreData s = DatastoreData'
     { _datacenterId :: TF.Attr s P.Text
@@ -262,7 +262,7 @@ instance P.HasName (DatastoreData s) (TF.Attr s P.Text) where
 
 -- | @vsphere_datastore_cluster@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_datastore_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/datastore_cluster.html terraform documentation>
 -- for more information.
 data DatastoreClusterData s = DatastoreClusterData'
     { _datacenterId :: TF.Attr s P.Text
@@ -307,7 +307,7 @@ instance P.HasName (DatastoreClusterData s) (TF.Attr s P.Text) where
 
 -- | @vsphere_distributed_virtual_switch@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_distributed_virtual_switch terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/distributed_virtual_switch.html terraform documentation>
 -- for more information.
 data DistributedVirtualSwitchData s = DistributedVirtualSwitchData'
     { _datacenterId :: TF.Attr s P.Text
@@ -352,11 +352,11 @@ instance P.HasName (DistributedVirtualSwitchData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DistributedVirtualSwitchData s)
 
 instance s ~ s' => P.HasComputedUplinks (TF.Ref s' (DistributedVirtualSwitchData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUplinks x = TF.compute (TF.refKey x) "_computedUplinks"
+    computedUplinks x = TF.compute (TF.refKey x) "uplinks"
 
 -- | @vsphere_host@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_host terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/host.html terraform documentation>
 -- for more information.
 data HostData s = HostData'
     { _datacenterId :: TF.Attr s P.Text
@@ -400,11 +400,11 @@ instance P.HasName (HostData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: HostData s)
 
 instance s ~ s' => P.HasComputedResourcePoolId (TF.Ref s' (HostData s)) (TF.Attr s P.Text) where
-    computedResourcePoolId x = TF.compute (TF.refKey x) "_computedResourcePoolId"
+    computedResourcePoolId x = TF.compute (TF.refKey x) "resource_pool_id"
 
 -- | @vsphere_network@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_network terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/network.html terraform documentation>
 -- for more information.
 data NetworkData s = NetworkData'
     { _datacenterId :: TF.Attr s P.Text
@@ -449,11 +449,11 @@ instance P.HasName (NetworkData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: NetworkData s)
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (NetworkData s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @vsphere_resource_pool@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_resource_pool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/resource_pool.html terraform documentation>
 -- for more information.
 data ResourcePoolData s = ResourcePoolData'
     { _datacenterId :: TF.Attr s P.Text
@@ -498,7 +498,7 @@ instance P.HasName (ResourcePoolData s) (TF.Attr s P.Text) where
 
 -- | @vsphere_tag@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_tag terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/tag.html terraform documentation>
 -- for more information.
 data TagData s = TagData'
     { _categoryId :: TF.Attr s P.Text
@@ -542,11 +542,11 @@ instance P.HasName (TagData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: TagData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 -- | @vsphere_tag_category@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_tag_category terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/tag_category.html terraform documentation>
 -- for more information.
 data TagCategoryData s = TagCategoryData'
     { _name :: TF.Attr s P.Text
@@ -578,17 +578,17 @@ instance P.HasName (TagCategoryData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: TagCategoryData s)
 
 instance s ~ s' => P.HasComputedAssociableTypes (TF.Ref s' (TagCategoryData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAssociableTypes x = TF.compute (TF.refKey x) "_computedAssociableTypes"
+    computedAssociableTypes x = TF.compute (TF.refKey x) "associable_types"
 
 instance s ~ s' => P.HasComputedCardinality (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
-    computedCardinality x = TF.compute (TF.refKey x) "_computedCardinality"
+    computedCardinality x = TF.compute (TF.refKey x) "cardinality"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TagCategoryData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 -- | @vsphere_virtual_machine@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_virtual_machine terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/virtual_machine.html terraform documentation>
 -- for more information.
 data VirtualMachineData s = VirtualMachineData'
     { _datacenterId            :: TF.Attr s P.Text
@@ -645,29 +645,29 @@ instance P.HasScsiControllerScanCount (VirtualMachineData s) (TF.Attr s P.Intege
                (\s a -> s { _scsiControllerScanCount = a } :: VirtualMachineData s)
 
 instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedAlternateGuestName x = TF.compute (TF.refKey x) "_computedAlternateGuestName"
+    computedAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (Disks s)]) where
-    computedDisks x = TF.compute (TF.refKey x) "_computedDisks"
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (VirtualMachineDisks s)]) where
+    computedDisks x = TF.compute (TF.refKey x) "disks"
 
 instance s ~ s' => P.HasComputedFirmware (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedFirmware x = TF.compute (TF.refKey x) "_computedFirmware"
+    computedFirmware x = TF.compute (TF.refKey x) "firmware"
 
 instance s ~ s' => P.HasComputedGuestId (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedGuestId x = TF.compute (TF.refKey x) "_computedGuestId"
+    computedGuestId x = TF.compute (TF.refKey x) "guest_id"
 
 instance s ~ s' => P.HasComputedNetworkInterfaceTypes (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "_computedNetworkInterfaceTypes"
+    computedNetworkInterfaceTypes x = TF.compute (TF.refKey x) "network_interface_types"
 
 instance s ~ s' => P.HasComputedScsiBusSharing (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedScsiBusSharing x = TF.compute (TF.refKey x) "_computedScsiBusSharing"
+    computedScsiBusSharing x = TF.compute (TF.refKey x) "scsi_bus_sharing"
 
 instance s ~ s' => P.HasComputedScsiType (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
-    computedScsiType x = TF.compute (TF.refKey x) "_computedScsiType"
+    computedScsiType x = TF.compute (TF.refKey x) "scsi_type"
 
 -- | @vsphere_vmfs_disks@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/vsphere_vmfs_disks terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/d/vmfs_disks.html terraform documentation>
 -- for more information.
 data VmfsDisksData s = VmfsDisksData'
     { _filter       :: TF.Attr s P.Text
@@ -723,4 +723,4 @@ instance P.HasRescan (VmfsDisksData s) (TF.Attr s P.Bool) where
                (\s a -> s { _rescan = a } :: VmfsDisksData s)
 
 instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VmfsDisksData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDisks x = TF.compute (TF.refKey x) "_computedDisks"
+    computedDisks x = TF.compute (TF.refKey x) "disks"

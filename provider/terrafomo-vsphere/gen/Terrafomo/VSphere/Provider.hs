@@ -49,7 +49,7 @@ import qualified Terrafomo.VSphere.Types as P
 
 -- | The @VSphere@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/VSphere/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/vsphere/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _allowUnverifiedSsl :: P.Maybe P.Bool
