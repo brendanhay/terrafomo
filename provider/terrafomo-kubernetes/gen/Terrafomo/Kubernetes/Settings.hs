@@ -1761,19 +1761,6 @@ data StorageClassMetadata s = StorageClassMetadata'
     -- controllers and services. More info:
     -- http://kubernetes.io/docs/user-guide/labels
     --
-    , _annotations  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @annotations@ - (Optional)
-    -- An unstructured key value map stored with the storage class that may be used
-    -- to store arbitrary metadata. More info:
-    -- http://kubernetes.io/docs/user-guide/annotations
-    --
-    , _labels       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
-    -- Map of string keys and values that can be used to organize and categorize
-    -- (scope and select) the storage class. May match selectors of replication
-    -- controllers and services. More info:
-    -- http://kubernetes.io/docs/user-guide/labels
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newStorageClassMetadata
@@ -1783,8 +1770,6 @@ newStorageClassMetadata =
         { _annotations = TF.Nil
         , _generateName = TF.Nil
         , _labels = TF.Nil
-        , _annotations = TF.Nil
-        , _labels = TF.Nil
         }
 
 instance P.Hashable  (StorageClassMetadata s)
@@ -1793,8 +1778,6 @@ instance TF.IsObject (StorageClassMetadata s) where
     toObject StorageClassMetadata'{..} = P.catMaybes
         [ TF.assign "annotations" <$> TF.attribute _annotations
         , TF.assign "generate_name" <$> TF.attribute _generateName
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "annotations" <$> TF.attribute _annotations
         , TF.assign "labels" <$> TF.attribute _labels
         ]
 
@@ -1815,31 +1798,6 @@ instance P.HasLabels (StorageClassMetadata s) (TF.Attr s (P.HashMap P.Text (TF.A
     labels =
         P.lens (_labels :: StorageClassMetadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: StorageClassMetadata s)
-
-instance P.HasAnnotations (StorageClassMetadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    annotations =
-        P.lens (_annotations :: StorageClassMetadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _annotations = a } :: StorageClassMetadata s)
-
-instance P.HasLabels (StorageClassMetadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    labels =
-        P.lens (_labels :: StorageClassMetadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a } :: StorageClassMetadata s)
-
-instance s ~ s' => P.HasComputedGeneration (TF.Ref s' (StorageClassMetadata s)) (TF.Attr s P.Integer) where
-    computedGeneration x = TF.compute (TF.refKey x) "generation"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (StorageClassMetadata s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedResourceVersion (TF.Ref s' (StorageClassMetadata s)) (TF.Attr s P.Text) where
-    computedResourceVersion x = TF.compute (TF.refKey x) "resource_version"
-
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (StorageClassMetadata s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
-
-instance s ~ s' => P.HasComputedUid (TF.Ref s' (StorageClassMetadata s)) (TF.Attr s P.Text) where
-    computedUid x = TF.compute (TF.refKey x) "uid"
 
 instance s ~ s' => P.HasComputedGeneration (TF.Ref s' (StorageClassMetadata s)) (TF.Attr s P.Integer) where
     computedGeneration x = TF.compute (TF.refKey x) "generation"
@@ -4500,17 +4458,11 @@ instance s ~ s' => P.HasComputedTargetPort (TF.Ref s' (SpecPort s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SpecPort s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodePort (TF.Ref s' (SpecPort s)) (TF.Attr s P.Integer) where
-    computedNodePort x = TF.compute (TF.refKey x) "node_port"
-
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (SpecPort s)) (TF.Attr s P.Integer) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (SpecPort s)) (TF.Attr s P.Text) where
     computedProtocol x = TF.compute (TF.refKey x) "protocol"
-
-instance s ~ s' => P.HasComputedTargetPort (TF.Ref s' (SpecPort s)) (TF.Attr s P.Text) where
-    computedTargetPort x = TF.compute (TF.refKey x) "target_port"
 
 -- | @rbd_secret_ref@ nested settings.
 data RbdSecretRef s = RbdSecretRef'
@@ -6984,9 +6936,6 @@ instance P.HasType' (ServiceSpec s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedClusterIp (TF.Ref s' (ServiceSpec s)) (TF.Attr s P.Text) where
     computedClusterIp x = TF.compute (TF.refKey x) "cluster_ip"
 
-instance s ~ s' => P.HasComputedClusterIp (TF.Ref s' (ServiceSpec s)) (TF.Attr s P.Text) where
-    computedClusterIp x = TF.compute (TF.refKey x) "cluster_ip"
-
 instance s ~ s' => P.HasComputedExternalIps (TF.Ref s' (ServiceSpec s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedExternalIps x = TF.compute (TF.refKey x) "external_ips"
 
@@ -7380,23 +7329,6 @@ data ServiceMetadata s = ServiceMetadata'
     -- ^ @namespace@ - (Optional, Forces New)
     -- Namespace defines the space within which name of the service must be unique.
     --
-    , _annotations  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @annotations@ - (Optional)
-    -- An unstructured key value map stored with the service that may be used to
-    -- store arbitrary metadata. More info:
-    -- http://kubernetes.io/docs/user-guide/annotations
-    --
-    , _labels       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
-    -- Map of string keys and values that can be used to organize and categorize
-    -- (scope and select) the service. May match selectors of replication
-    -- controllers and services. More info:
-    -- http://kubernetes.io/docs/user-guide/labels
-    --
-    , _namespace    :: TF.Attr s P.Text
-    -- ^ @namespace@ - (Optional, Forces New)
-    -- Namespace defines the space within which name of the service must be unique.
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newServiceMetadata
@@ -7407,9 +7339,6 @@ newServiceMetadata =
         , _generateName = TF.Nil
         , _labels = TF.Nil
         , _namespace = TF.value "default"
-        , _annotations = TF.Nil
-        , _labels = TF.Nil
-        , _namespace = TF.value "default"
         }
 
 instance P.Hashable  (ServiceMetadata s)
@@ -7418,9 +7347,6 @@ instance TF.IsObject (ServiceMetadata s) where
     toObject ServiceMetadata'{..} = P.catMaybes
         [ TF.assign "annotations" <$> TF.attribute _annotations
         , TF.assign "generate_name" <$> TF.attribute _generateName
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "namespace" <$> TF.attribute _namespace
-        , TF.assign "annotations" <$> TF.attribute _annotations
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "namespace" <$> TF.attribute _namespace
         ]
@@ -7447,36 +7373,6 @@ instance P.HasNamespace (ServiceMetadata s) (TF.Attr s P.Text) where
     namespace =
         P.lens (_namespace :: ServiceMetadata s -> TF.Attr s P.Text)
                (\s a -> s { _namespace = a } :: ServiceMetadata s)
-
-instance P.HasAnnotations (ServiceMetadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    annotations =
-        P.lens (_annotations :: ServiceMetadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _annotations = a } :: ServiceMetadata s)
-
-instance P.HasLabels (ServiceMetadata s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    labels =
-        P.lens (_labels :: ServiceMetadata s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a } :: ServiceMetadata s)
-
-instance P.HasNamespace (ServiceMetadata s) (TF.Attr s P.Text) where
-    namespace =
-        P.lens (_namespace :: ServiceMetadata s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: ServiceMetadata s)
-
-instance s ~ s' => P.HasComputedGeneration (TF.Ref s' (ServiceMetadata s)) (TF.Attr s P.Integer) where
-    computedGeneration x = TF.compute (TF.refKey x) "generation"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServiceMetadata s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedResourceVersion (TF.Ref s' (ServiceMetadata s)) (TF.Attr s P.Text) where
-    computedResourceVersion x = TF.compute (TF.refKey x) "resource_version"
-
-instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ServiceMetadata s)) (TF.Attr s P.Text) where
-    computedSelfLink x = TF.compute (TF.refKey x) "self_link"
-
-instance s ~ s' => P.HasComputedUid (TF.Ref s' (ServiceMetadata s)) (TF.Attr s P.Text) where
-    computedUid x = TF.compute (TF.refKey x) "uid"
 
 instance s ~ s' => P.HasComputedGeneration (TF.Ref s' (ServiceMetadata s)) (TF.Attr s P.Integer) where
     computedGeneration x = TF.compute (TF.refKey x) "generation"
