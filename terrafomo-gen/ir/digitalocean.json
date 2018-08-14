@@ -2,8 +2,356 @@
     "settings": [
         {
             "con": {
-                "smart": "newForwardingRule",
-                "name": "ForwardingRule'"
+                "smart": "newFirewallOutboundRule",
+                "name": "FirewallOutboundRule'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_addresses\" <$> TF.attribute",
+                    "name": "_destinationAddresses",
+                    "method": "destinationAddresses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDestinationAddresses",
+                    "validate": false,
+                    "optional": true,
+                    "original": "destination_addresses"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_droplet_ids\" <$> TF.attribute",
+                    "name": "_destinationDropletIds",
+                    "method": "destinationDropletIds",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Integer]",
+                    "class": "HasDestinationDropletIds",
+                    "validate": false,
+                    "optional": true,
+                    "original": "destination_droplet_ids"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_load_balancer_uids\" <$> TF.attribute",
+                    "name": "_destinationLoadBalancerUids",
+                    "method": "destinationLoadBalancerUids",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDestinationLoadBalancerUids",
+                    "validate": false,
+                    "optional": true,
+                    "original": "destination_load_balancer_uids"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination_tags\" <$> TF.attribute",
+                    "name": "_destinationTags",
+                    "method": "destinationTags",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasDestinationTags",
+                    "validate": false,
+                    "optional": true,
+                    "original": "destination_tags"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_range\" <$> TF.attribute",
+                    "name": "_portRange",
+                    "method": "portRange",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPortRange",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_range"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": true,
+                    "original": "protocol"
+                }
+            ],
+            "name": "FirewallOutboundRule",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "FirewallOutboundRule s",
+            "original": "firewall_outbound_rule"
+        },
+        {
+            "con": {
+                "smart": "newFirewallPendingChanges",
+                "name": "FirewallPendingChanges'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"droplet_id\" <$> TF.attribute",
+                    "name": "_dropletId",
+                    "method": "dropletId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDropletId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "droplet_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"removing\" <$> TF.attribute",
+                    "name": "_removing",
+                    "method": "removing",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasRemoving",
+                    "validate": false,
+                    "optional": true,
+                    "original": "removing"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"status\" <$> TF.attribute",
+                    "name": "_status",
+                    "method": "status",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatus",
+                    "validate": false,
+                    "optional": true,
+                    "original": "status"
+                }
+            ],
+            "name": "FirewallPendingChanges",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "FirewallPendingChanges s",
+            "original": "firewall_pending_changes"
+        },
+        {
+            "con": {
+                "smart": "newFirewallInboundRule",
+                "name": "FirewallInboundRule'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_range\" <$> TF.attribute",
+                    "name": "_portRange",
+                    "method": "portRange",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPortRange",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_range"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": true,
+                    "original": "protocol"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_addresses\" <$> TF.attribute",
+                    "name": "_sourceAddresses",
+                    "method": "sourceAddresses",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSourceAddresses",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_addresses"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_droplet_ids\" <$> TF.attribute",
+                    "name": "_sourceDropletIds",
+                    "method": "sourceDropletIds",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Integer]",
+                    "class": "HasSourceDropletIds",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_droplet_ids"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_load_balancer_uids\" <$> TF.attribute",
+                    "name": "_sourceLoadBalancerUids",
+                    "method": "sourceLoadBalancerUids",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSourceLoadBalancerUids",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_load_balancer_uids"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_tags\" <$> TF.attribute",
+                    "name": "_sourceTags",
+                    "method": "sourceTags",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasSourceTags",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_tags"
+                }
+            ],
+            "name": "FirewallInboundRule",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "FirewallInboundRule s",
+            "original": "firewall_inbound_rule"
+        },
+        {
+            "con": {
+                "smart": "newLoadbalancerStickySessions",
+                "name": "LoadbalancerStickySessions'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
+                    "name": "_cookieName",
+                    "method": "cookieName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCookieName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cookie_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cookie_ttl_seconds\" <$> TF.attribute",
+                    "name": "_cookieTtlSeconds",
+                    "method": "cookieTtlSeconds",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasCookieTtlSeconds",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cookie_ttl_seconds"
+                },
+                {
+                    "default": "TF.value \"none\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
+                }
+            ],
+            "name": "LoadbalancerStickySessions",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "LoadbalancerStickySessions s",
+            "original": "loadbalancer_sticky_sessions"
+        },
+        {
+            "con": {
+                "smart": "newLoadbalancerForwardingRule",
+                "name": "LoadbalancerForwardingRule'"
             },
             "arguments": [
                 {
@@ -103,7 +451,7 @@
                     "original": "tls_passthrough"
                 }
             ],
-            "name": "ForwardingRule",
+            "name": "LoadbalancerForwardingRule",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -173,13 +521,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "ForwardingRule s",
-            "original": "forwarding_rule"
+            "type": "LoadbalancerForwardingRule s",
+            "original": "loadbalancer_forwarding_rule"
         },
         {
             "con": {
-                "smart": "newHealthcheck",
-                "name": "Healthcheck'"
+                "smart": "newLoadbalancerHealthcheck",
+                "name": "LoadbalancerHealthcheck'"
             },
             "arguments": [
                 {
@@ -295,7 +643,7 @@
                     "original": "unhealthy_threshold"
                 }
             ],
-            "name": "Healthcheck",
+            "name": "LoadbalancerHealthcheck",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -333,358 +681,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Healthcheck s",
-            "original": "healthcheck"
-        },
-        {
-            "con": {
-                "smart": "newOutboundRule",
-                "name": "OutboundRule'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_addresses\" <$> TF.attribute",
-                    "name": "_destinationAddresses",
-                    "method": "destinationAddresses",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasDestinationAddresses",
-                    "validate": false,
-                    "optional": true,
-                    "original": "destination_addresses"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_droplet_ids\" <$> TF.attribute",
-                    "name": "_destinationDropletIds",
-                    "method": "destinationDropletIds",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Integer]",
-                    "class": "HasDestinationDropletIds",
-                    "validate": false,
-                    "optional": true,
-                    "original": "destination_droplet_ids"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_load_balancer_uids\" <$> TF.attribute",
-                    "name": "_destinationLoadBalancerUids",
-                    "method": "destinationLoadBalancerUids",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasDestinationLoadBalancerUids",
-                    "validate": false,
-                    "optional": true,
-                    "original": "destination_load_balancer_uids"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination_tags\" <$> TF.attribute",
-                    "name": "_destinationTags",
-                    "method": "destinationTags",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasDestinationTags",
-                    "validate": false,
-                    "optional": true,
-                    "original": "destination_tags"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port_range\" <$> TF.attribute",
-                    "name": "_portRange",
-                    "method": "portRange",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPortRange",
-                    "validate": false,
-                    "optional": true,
-                    "original": "port_range"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": true,
-                    "original": "protocol"
-                }
-            ],
-            "name": "OutboundRule",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "OutboundRule s",
-            "original": "outbound_rule"
-        },
-        {
-            "con": {
-                "smart": "newPendingChanges",
-                "name": "PendingChanges'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"droplet_id\" <$> TF.attribute",
-                    "name": "_dropletId",
-                    "method": "dropletId",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasDropletId",
-                    "validate": false,
-                    "optional": true,
-                    "original": "droplet_id"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"removing\" <$> TF.attribute",
-                    "name": "_removing",
-                    "method": "removing",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasRemoving",
-                    "validate": false,
-                    "optional": true,
-                    "original": "removing"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"status\" <$> TF.attribute",
-                    "name": "_status",
-                    "method": "status",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStatus",
-                    "validate": false,
-                    "optional": true,
-                    "original": "status"
-                }
-            ],
-            "name": "PendingChanges",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "PendingChanges s",
-            "original": "pending_changes"
-        },
-        {
-            "con": {
-                "smart": "newInboundRule",
-                "name": "InboundRule'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port_range\" <$> TF.attribute",
-                    "name": "_portRange",
-                    "method": "portRange",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPortRange",
-                    "validate": false,
-                    "optional": true,
-                    "original": "port_range"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": true,
-                    "original": "protocol"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source_addresses\" <$> TF.attribute",
-                    "name": "_sourceAddresses",
-                    "method": "sourceAddresses",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasSourceAddresses",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source_addresses"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source_droplet_ids\" <$> TF.attribute",
-                    "name": "_sourceDropletIds",
-                    "method": "sourceDropletIds",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Integer]",
-                    "class": "HasSourceDropletIds",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source_droplet_ids"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source_load_balancer_uids\" <$> TF.attribute",
-                    "name": "_sourceLoadBalancerUids",
-                    "method": "sourceLoadBalancerUids",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasSourceLoadBalancerUids",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source_load_balancer_uids"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source_tags\" <$> TF.attribute",
-                    "name": "_sourceTags",
-                    "method": "sourceTags",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasSourceTags",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source_tags"
-                }
-            ],
-            "name": "InboundRule",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "InboundRule s",
-            "original": "inbound_rule"
-        },
-        {
-            "con": {
-                "smart": "newStickySessions",
-                "name": "StickySessions'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cookie_name\" <$> TF.attribute",
-                    "name": "_cookieName",
-                    "method": "cookieName",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCookieName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cookie_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cookie_ttl_seconds\" <$> TF.attribute",
-                    "name": "_cookieTtlSeconds",
-                    "method": "cookieTtlSeconds",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasCookieTtlSeconds",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cookie_ttl_seconds"
-                },
-                {
-                    "default": "TF.value \"none\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": true,
-                    "original": "type"
-                }
-            ],
-            "name": "StickySessions",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "StickySessions s",
-            "original": "sticky_sessions"
+            "type": "LoadbalancerHealthcheck s",
+            "original": "loadbalancer_healthcheck"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/digitalocean/index.html",
     "dataSources": [
         {
             "con": {
@@ -711,6 +712,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/d/domain.html",
             "name": "DomainData",
             "threaded": true,
             "attributes": [
@@ -800,6 +802,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/d/image.html",
             "name": "ImageData",
             "threaded": true,
             "attributes": [
@@ -961,6 +964,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/d/record.html",
             "name": "RecordData",
             "threaded": true,
             "attributes": [
@@ -1242,6 +1246,7 @@
                     "original": "private_key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/certificate.html",
             "name": "CertificateResource",
             "threaded": true,
             "attributes": [
@@ -1371,6 +1376,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/domain.html",
             "name": "DomainResource",
             "threaded": true,
             "attributes": [],
@@ -1627,6 +1633,7 @@
                     "original": "volume_ids"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/droplet.html",
             "name": "DropletResource",
             "threaded": true,
             "attributes": [
@@ -1893,7 +1900,7 @@
                     "name": "_inboundRule",
                     "method": "inboundRule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InboundRule s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallInboundRule s)]",
                     "class": "HasInboundRule",
                     "validate": true,
                     "optional": true,
@@ -1925,7 +1932,7 @@
                     "name": "_outboundRule",
                     "method": "outboundRule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (OutboundRule s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallOutboundRule s)]",
                     "class": "HasOutboundRule",
                     "validate": true,
                     "optional": true,
@@ -1948,6 +1955,7 @@
                     "original": "tags"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/firewall.html",
             "name": "FirewallResource",
             "threaded": true,
             "attributes": [
@@ -1977,7 +1985,7 @@
                     "name": "_computedPendingChanges",
                     "method": "computedPendingChanges",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PendingChanges s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallPendingChanges s)]",
                     "class": "HasComputedPendingChanges",
                     "validate": true,
                     "optional": false,
@@ -2061,6 +2069,7 @@
                     "original": "region"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/floating_ip.html",
             "name": "FloatingIpResource",
             "threaded": true,
             "attributes": [
@@ -2167,7 +2176,7 @@
                     "name": "_forwardingRule",
                     "method": "forwardingRule",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))",
                     "class": "HasForwardingRule",
                     "validate": true,
                     "optional": false,
@@ -2183,7 +2192,7 @@
                     "name": "_healthcheck",
                     "method": "healthcheck",
                     "conflicts": [],
-                    "type": "TF.Attr s (Healthcheck s)",
+                    "type": "TF.Attr s (LoadbalancerHealthcheck s)",
                     "class": "HasHealthcheck",
                     "validate": true,
                     "optional": true,
@@ -2238,6 +2247,7 @@
                     "original": "region"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/loadbalancer.html",
             "name": "LoadbalancerResource",
             "threaded": true,
             "attributes": [
@@ -2267,7 +2277,7 @@
                     "name": "_computedStickySessions",
                     "method": "computedStickySessions",
                     "conflicts": [],
-                    "type": "TF.Attr s (StickySessions s)",
+                    "type": "TF.Attr s (LoadbalancerStickySessions s)",
                     "class": "HasComputedStickySessions",
                     "validate": true,
                     "optional": true,
@@ -2285,7 +2295,7 @@
                     "name": "_forwardingRule",
                     "method": "forwardingRule",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))",
                     "class": "HasForwardingRule",
                     "validate": true,
                     "optional": false,
@@ -2399,6 +2409,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/record.html",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [
@@ -2592,6 +2603,7 @@
                     "original": "public_key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/ssh_key.html",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [
@@ -2689,6 +2701,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/tag.html",
             "name": "TagResource",
             "threaded": true,
             "attributes": [],
@@ -2801,6 +2814,7 @@
                     "original": "size"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/digitalocean/r/volume.html",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
