@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/softlayer/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -57,6 +58,7 @@
                     "original": "public_key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/softlayer/r/ssh_key.html",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [
@@ -426,6 +428,7 @@
                     "original": "user_data"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/softlayer/r/virtual_guest.html",
             "name": "VirtualGuestResource",
             "threaded": true,
             "attributes": [
