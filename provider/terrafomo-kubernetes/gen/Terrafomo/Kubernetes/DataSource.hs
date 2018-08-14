@@ -55,10 +55,10 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @kubernetes_service@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/d/service.html terraform documentation>
 -- for more information.
 data ServiceData s = ServiceData'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (ServiceMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard service's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
@@ -66,7 +66,7 @@ data ServiceData s = ServiceData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 serviceData
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (ServiceMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.DataSource P.Provider (ServiceData s)
 serviceData _metadata =
     TF.newDataSource "kubernetes_service" TF.validator $
@@ -83,26 +83,26 @@ instance TF.IsValid (ServiceData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ServiceData s -> TF.Attr s (Metadata s))
+                      :: ServiceData s -> TF.Attr s (ServiceMetadata s))
                   TF.validator
 
-instance P.HasMetadata (ServiceData s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (ServiceData s) (TF.Attr s (ServiceMetadata s)) where
     metadata =
-        P.lens (_metadata :: ServiceData s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: ServiceData s -> TF.Attr s (ServiceMetadata s))
                (\s a -> s { _metadata = a } :: ServiceData s)
 
-instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (LoadBalancerIngress s)]) where
-    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "_computedLoadBalancerIngress"
+instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (ServiceLoadBalancerIngress s)]) where
+    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
 
-instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (Spec s)) where
-    computedSpec x = TF.compute (TF.refKey x) "_computedSpec"
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (ServiceSpec s)) where
+    computedSpec x = TF.compute (TF.refKey x) "spec"
 
 -- | @kubernetes_storage_class@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_storage_class terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/d/storage_class.html terraform documentation>
 -- for more information.
 data StorageClassData s = StorageClassData'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (StorageClassMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard storage class's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
@@ -110,7 +110,7 @@ data StorageClassData s = StorageClassData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 storageClassData
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (StorageClassMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.DataSource P.Provider (StorageClassData s)
 storageClassData _metadata =
     TF.newDataSource "kubernetes_storage_class" TF.validator $
@@ -127,16 +127,16 @@ instance TF.IsValid (StorageClassData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: StorageClassData s -> TF.Attr s (Metadata s))
+                      :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
                   TF.validator
 
-instance P.HasMetadata (StorageClassData s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (StorageClassData s) (TF.Attr s (StorageClassMetadata s)) where
     metadata =
-        P.lens (_metadata :: StorageClassData s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
                (\s a -> s { _metadata = a } :: StorageClassData s)
 
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedParameters x = TF.compute (TF.refKey x) "_computedParameters"
+    computedParameters x = TF.compute (TF.refKey x) "parameters"
 
 instance s ~ s' => P.HasComputedStorageProvisioner (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
-    computedStorageProvisioner x = TF.compute (TF.refKey x) "_computedStorageProvisioner"
+    computedStorageProvisioner x = TF.compute (TF.refKey x) "storage_provisioner"

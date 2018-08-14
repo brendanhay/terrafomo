@@ -17,6 +17,7 @@ module Terrafomo.Kubernetes.Lens
     -- ** Arguments
       HasEndpointsName (..)
     , HasGroup (..)
+    , HasResources (..)
     , HasQuobyte (..)
     , HasTty (..)
     , HasDirectory (..)
@@ -30,10 +31,13 @@ module Terrafomo.Kubernetes.Lens
     , HasImage (..)
     , HasVolumeMount (..)
     , HasEnv (..)
+    , HasExternalIps (..)
     , HasIscsi (..)
     , HasAzureFile (..)
     , HasPersistentVolumeClaim (..)
+    , HasMinReplicas (..)
     , HasContainer (..)
+    , HasMaxReplicas (..)
     , HasFieldPath (..)
     , HasKey (..)
     , HasValue (..)
@@ -53,23 +57,31 @@ module Terrafomo.Kubernetes.Lens
     , HasConfigContextAuthInfo (..)
     , HasInitContainer (..)
     , HasGcePersistentDisk (..)
+    , HasLimit (..)
     , HasHostPid (..)
     , HasGlusterfs (..)
     , HasSubPath (..)
     , HasCommand (..)
     , HasValueFrom (..)
+    , HasNamespace (..)
     , HasVolumeId (..)
     , HasFsType (..)
     , HasCachingMode (..)
     , HasHttpGet (..)
     , HasTcpSocket (..)
     , HasRadosUser (..)
+    , HasPrivileged (..)
     , HasFsGroup (..)
     , HasStorageProvisioner (..)
     , HasSuccessThreshold (..)
+    , HasProtocol (..)
+    , HasGenerateName (..)
     , HasExec (..)
     , HasPdId (..)
+    , HasOptional (..)
+    , HasSelector (..)
     , HasItems (..)
+    , HasCapabilities (..)
     , HasConfigMap (..)
     , HasSupplementalGroups (..)
     , HasSecretKeyRef (..)
@@ -77,7 +89,9 @@ module Terrafomo.Kubernetes.Lens
     , HasClusterCaCertificate (..)
     , HasVolumePath (..)
     , HasRevision (..)
+    , HasReplicas (..)
     , HasFlexVolume (..)
+    , HasAccessModes (..)
     , HasSecretFile (..)
     , HasShareName (..)
     , HasTimeoutSeconds (..)
@@ -91,11 +105,13 @@ module Terrafomo.Kubernetes.Lens
     , HasMode (..)
     , HasMountPath (..)
     , HasNodeSelector (..)
+    , HasExternalName (..)
     , HasPostStart (..)
     , HasFailureThreshold (..)
     , HasPhotonPersistentDisk (..)
     , HasRegistry (..)
     , HasEmptyDir (..)
+    , HasPersistentVolumeReclaimPolicy (..)
     , HasSeLinuxOptions (..)
     , HasLifecycle (..)
     , HasConfigMapKeyRef (..)
@@ -105,6 +121,7 @@ module Terrafomo.Kubernetes.Lens
     , HasWaitUntilBound (..)
     , HasMin (..)
     , HasDownwardApi (..)
+    , HasHard (..)
     , HasLabels (..)
     , HasImagePullSecret (..)
     , HasRepository (..)
@@ -119,15 +136,19 @@ module Terrafomo.Kubernetes.Lens
     , HasUser (..)
     , HasPort (..)
     , HasDiskName (..)
+    , HasContainerPort (..)
     , HasHostNetwork (..)
     , HasIscsiInterface (..)
     , HasStdin (..)
     , HasMatchExpressions (..)
     , HasSecretName (..)
+    , HasLimits (..)
+    , HasScopes (..)
     , HasResourceFieldRef (..)
     , HasHttpHeader (..)
     , HasRunAsNonRoot (..)
     , HasPartition (..)
+    , HasScaleTargetRef (..)
     , HasPassword (..)
     , HasValues (..)
     , HasDriver (..)
@@ -135,12 +156,16 @@ module Terrafomo.Kubernetes.Lens
     , HasRole (..)
     , HasCephMonitors (..)
     , HasGitRepo (..)
+    , HasLoadBalancerIp (..)
     , HasTargetWwNs (..)
     , HasHostPath (..)
     , HasTerminationMessagePath (..)
+    , HasReadOnlyRootFilesystem (..)
     , HasRbdImage (..)
     , HasFlocker (..)
     , HasMatchLabels (..)
+    , HasRequests (..)
+    , HasSessionAffinity (..)
     , HasResource (..)
     , HasWorkingDir (..)
     , HasPath (..)
@@ -148,7 +173,10 @@ module Terrafomo.Kubernetes.Lens
     , HasRbd (..)
     , HasIqn (..)
     , HasAzureDisk (..)
+    , HasTemplate (..)
+    , HasHostIp (..)
     , HasRunAsUser (..)
+    , HasPersistentVolumeSource (..)
     , HasMaxLimitRequestRatio (..)
     , HasSecret (..)
     , HasApiVersion (..)
@@ -156,11 +184,16 @@ module Terrafomo.Kubernetes.Lens
     , HasHostIpc (..)
     , HasServer (..)
     , HasFieldRef (..)
+    , HasStorageClassName (..)
     , HasReadinessProbe (..)
+    , HasMinReadySeconds (..)
     , HasAwsElasticBlockStore (..)
     , HasOperator (..)
     , HasMetadata (..)
     , HasCinder (..)
+    , HasHostPort (..)
+    , HasCapacity (..)
+    , HasLoadBalancerSourceRanges (..)
     , HasKind (..)
     , HasName (..)
     , HasMedium (..)
@@ -200,6 +233,7 @@ module Terrafomo.Kubernetes.Lens
     , HasComputedLoadBalancerSourceRanges (..)
     , HasComputedImagePullSecrets (..)
     , HasComputedLimits (..)
+    , HasComputedTargetCpuUtilizationPercentage (..)
     , HasComputedServiceAccountName (..)
     , HasComputedIp (..)
     , HasComputedMemory (..)
@@ -207,8 +241,10 @@ module Terrafomo.Kubernetes.Lens
     , HasComputedTargetPort (..)
     , HasComputedRequests (..)
     , HasComputedType (..)
+    , HasComputedVolumeName (..)
     , HasComputedSelfLink (..)
     , HasComputedSelector (..)
+    , HasComputedStorageClassName (..)
     , HasComputedHostname (..)
     , HasComputedLoadBalancerIngress (..)
     , HasComputedResources (..)
@@ -230,6 +266,12 @@ class HasGroup a b | a -> b where
 
 instance HasGroup a b => HasGroup (TF.Schema l p a) b where
     group = TF.configuration . group
+
+class HasResources a b | a -> b where
+    resources :: P.Lens' a b
+
+instance HasResources a b => HasResources (TF.Schema l p a) b where
+    resources = TF.configuration . resources
 
 class HasQuobyte a b | a -> b where
     quobyte :: P.Lens' a b
@@ -309,6 +351,12 @@ class HasEnv a b | a -> b where
 instance HasEnv a b => HasEnv (TF.Schema l p a) b where
     env = TF.configuration . env
 
+class HasExternalIps a b | a -> b where
+    externalIps :: P.Lens' a b
+
+instance HasExternalIps a b => HasExternalIps (TF.Schema l p a) b where
+    externalIps = TF.configuration . externalIps
+
 class HasIscsi a b | a -> b where
     iscsi :: P.Lens' a b
 
@@ -327,11 +375,23 @@ class HasPersistentVolumeClaim a b | a -> b where
 instance HasPersistentVolumeClaim a b => HasPersistentVolumeClaim (TF.Schema l p a) b where
     persistentVolumeClaim = TF.configuration . persistentVolumeClaim
 
+class HasMinReplicas a b | a -> b where
+    minReplicas :: P.Lens' a b
+
+instance HasMinReplicas a b => HasMinReplicas (TF.Schema l p a) b where
+    minReplicas = TF.configuration . minReplicas
+
 class HasContainer a b | a -> b where
     container :: P.Lens' a b
 
 instance HasContainer a b => HasContainer (TF.Schema l p a) b where
     container = TF.configuration . container
+
+class HasMaxReplicas a b | a -> b where
+    maxReplicas :: P.Lens' a b
+
+instance HasMaxReplicas a b => HasMaxReplicas (TF.Schema l p a) b where
+    maxReplicas = TF.configuration . maxReplicas
 
 class HasFieldPath a b | a -> b where
     fieldPath :: P.Lens' a b
@@ -447,6 +507,12 @@ class HasGcePersistentDisk a b | a -> b where
 instance HasGcePersistentDisk a b => HasGcePersistentDisk (TF.Schema l p a) b where
     gcePersistentDisk = TF.configuration . gcePersistentDisk
 
+class HasLimit a b | a -> b where
+    limit :: P.Lens' a b
+
+instance HasLimit a b => HasLimit (TF.Schema l p a) b where
+    limit = TF.configuration . limit
+
 class HasHostPid a b | a -> b where
     hostPid :: P.Lens' a b
 
@@ -476,6 +542,12 @@ class HasValueFrom a b | a -> b where
 
 instance HasValueFrom a b => HasValueFrom (TF.Schema l p a) b where
     valueFrom = TF.configuration . valueFrom
+
+class HasNamespace a b | a -> b where
+    namespace :: P.Lens' a b
+
+instance HasNamespace a b => HasNamespace (TF.Schema l p a) b where
+    namespace = TF.configuration . namespace
 
 class HasVolumeId a b | a -> b where
     volumeId :: P.Lens' a b
@@ -513,6 +585,12 @@ class HasRadosUser a b | a -> b where
 instance HasRadosUser a b => HasRadosUser (TF.Schema l p a) b where
     radosUser = TF.configuration . radosUser
 
+class HasPrivileged a b | a -> b where
+    privileged :: P.Lens' a b
+
+instance HasPrivileged a b => HasPrivileged (TF.Schema l p a) b where
+    privileged = TF.configuration . privileged
+
 class HasFsGroup a b | a -> b where
     fsGroup :: P.Lens' a b
 
@@ -531,6 +609,18 @@ class HasSuccessThreshold a b | a -> b where
 instance HasSuccessThreshold a b => HasSuccessThreshold (TF.Schema l p a) b where
     successThreshold = TF.configuration . successThreshold
 
+class HasProtocol a b | a -> b where
+    protocol :: P.Lens' a b
+
+instance HasProtocol a b => HasProtocol (TF.Schema l p a) b where
+    protocol = TF.configuration . protocol
+
+class HasGenerateName a b | a -> b where
+    generateName :: P.Lens' a b
+
+instance HasGenerateName a b => HasGenerateName (TF.Schema l p a) b where
+    generateName = TF.configuration . generateName
+
 class HasExec a b | a -> b where
     exec :: P.Lens' a b
 
@@ -543,11 +633,29 @@ class HasPdId a b | a -> b where
 instance HasPdId a b => HasPdId (TF.Schema l p a) b where
     pdId = TF.configuration . pdId
 
+class HasOptional a b | a -> b where
+    optional :: P.Lens' a b
+
+instance HasOptional a b => HasOptional (TF.Schema l p a) b where
+    optional = TF.configuration . optional
+
+class HasSelector a b | a -> b where
+    selector :: P.Lens' a b
+
+instance HasSelector a b => HasSelector (TF.Schema l p a) b where
+    selector = TF.configuration . selector
+
 class HasItems a b | a -> b where
     items :: P.Lens' a b
 
 instance HasItems a b => HasItems (TF.Schema l p a) b where
     items = TF.configuration . items
+
+class HasCapabilities a b | a -> b where
+    capabilities :: P.Lens' a b
+
+instance HasCapabilities a b => HasCapabilities (TF.Schema l p a) b where
+    capabilities = TF.configuration . capabilities
 
 class HasConfigMap a b | a -> b where
     configMap :: P.Lens' a b
@@ -591,11 +699,23 @@ class HasRevision a b | a -> b where
 instance HasRevision a b => HasRevision (TF.Schema l p a) b where
     revision = TF.configuration . revision
 
+class HasReplicas a b | a -> b where
+    replicas :: P.Lens' a b
+
+instance HasReplicas a b => HasReplicas (TF.Schema l p a) b where
+    replicas = TF.configuration . replicas
+
 class HasFlexVolume a b | a -> b where
     flexVolume :: P.Lens' a b
 
 instance HasFlexVolume a b => HasFlexVolume (TF.Schema l p a) b where
     flexVolume = TF.configuration . flexVolume
+
+class HasAccessModes a b | a -> b where
+    accessModes :: P.Lens' a b
+
+instance HasAccessModes a b => HasAccessModes (TF.Schema l p a) b where
+    accessModes = TF.configuration . accessModes
 
 class HasSecretFile a b | a -> b where
     secretFile :: P.Lens' a b
@@ -675,6 +795,12 @@ class HasNodeSelector a b | a -> b where
 instance HasNodeSelector a b => HasNodeSelector (TF.Schema l p a) b where
     nodeSelector = TF.configuration . nodeSelector
 
+class HasExternalName a b | a -> b where
+    externalName :: P.Lens' a b
+
+instance HasExternalName a b => HasExternalName (TF.Schema l p a) b where
+    externalName = TF.configuration . externalName
+
 class HasPostStart a b | a -> b where
     postStart :: P.Lens' a b
 
@@ -704,6 +830,12 @@ class HasEmptyDir a b | a -> b where
 
 instance HasEmptyDir a b => HasEmptyDir (TF.Schema l p a) b where
     emptyDir = TF.configuration . emptyDir
+
+class HasPersistentVolumeReclaimPolicy a b | a -> b where
+    persistentVolumeReclaimPolicy :: P.Lens' a b
+
+instance HasPersistentVolumeReclaimPolicy a b => HasPersistentVolumeReclaimPolicy (TF.Schema l p a) b where
+    persistentVolumeReclaimPolicy = TF.configuration . persistentVolumeReclaimPolicy
 
 class HasSeLinuxOptions a b | a -> b where
     seLinuxOptions :: P.Lens' a b
@@ -758,6 +890,12 @@ class HasDownwardApi a b | a -> b where
 
 instance HasDownwardApi a b => HasDownwardApi (TF.Schema l p a) b where
     downwardApi = TF.configuration . downwardApi
+
+class HasHard a b | a -> b where
+    hard :: P.Lens' a b
+
+instance HasHard a b => HasHard (TF.Schema l p a) b where
+    hard = TF.configuration . hard
 
 class HasLabels a b | a -> b where
     labels :: P.Lens' a b
@@ -843,6 +981,12 @@ class HasDiskName a b | a -> b where
 instance HasDiskName a b => HasDiskName (TF.Schema l p a) b where
     diskName = TF.configuration . diskName
 
+class HasContainerPort a b | a -> b where
+    containerPort :: P.Lens' a b
+
+instance HasContainerPort a b => HasContainerPort (TF.Schema l p a) b where
+    containerPort = TF.configuration . containerPort
+
 class HasHostNetwork a b | a -> b where
     hostNetwork :: P.Lens' a b
 
@@ -873,6 +1017,18 @@ class HasSecretName a b | a -> b where
 instance HasSecretName a b => HasSecretName (TF.Schema l p a) b where
     secretName = TF.configuration . secretName
 
+class HasLimits a b | a -> b where
+    limits :: P.Lens' a b
+
+instance HasLimits a b => HasLimits (TF.Schema l p a) b where
+    limits = TF.configuration . limits
+
+class HasScopes a b | a -> b where
+    scopes :: P.Lens' a b
+
+instance HasScopes a b => HasScopes (TF.Schema l p a) b where
+    scopes = TF.configuration . scopes
+
 class HasResourceFieldRef a b | a -> b where
     resourceFieldRef :: P.Lens' a b
 
@@ -896,6 +1052,12 @@ class HasPartition a b | a -> b where
 
 instance HasPartition a b => HasPartition (TF.Schema l p a) b where
     partition = TF.configuration . partition
+
+class HasScaleTargetRef a b | a -> b where
+    scaleTargetRef :: P.Lens' a b
+
+instance HasScaleTargetRef a b => HasScaleTargetRef (TF.Schema l p a) b where
+    scaleTargetRef = TF.configuration . scaleTargetRef
 
 class HasPassword a b | a -> b where
     password :: P.Lens' a b
@@ -939,6 +1101,12 @@ class HasGitRepo a b | a -> b where
 instance HasGitRepo a b => HasGitRepo (TF.Schema l p a) b where
     gitRepo = TF.configuration . gitRepo
 
+class HasLoadBalancerIp a b | a -> b where
+    loadBalancerIp :: P.Lens' a b
+
+instance HasLoadBalancerIp a b => HasLoadBalancerIp (TF.Schema l p a) b where
+    loadBalancerIp = TF.configuration . loadBalancerIp
+
 class HasTargetWwNs a b | a -> b where
     targetWwNs :: P.Lens' a b
 
@@ -957,6 +1125,12 @@ class HasTerminationMessagePath a b | a -> b where
 instance HasTerminationMessagePath a b => HasTerminationMessagePath (TF.Schema l p a) b where
     terminationMessagePath = TF.configuration . terminationMessagePath
 
+class HasReadOnlyRootFilesystem a b | a -> b where
+    readOnlyRootFilesystem :: P.Lens' a b
+
+instance HasReadOnlyRootFilesystem a b => HasReadOnlyRootFilesystem (TF.Schema l p a) b where
+    readOnlyRootFilesystem = TF.configuration . readOnlyRootFilesystem
+
 class HasRbdImage a b | a -> b where
     rbdImage :: P.Lens' a b
 
@@ -974,6 +1148,18 @@ class HasMatchLabels a b | a -> b where
 
 instance HasMatchLabels a b => HasMatchLabels (TF.Schema l p a) b where
     matchLabels = TF.configuration . matchLabels
+
+class HasRequests a b | a -> b where
+    requests :: P.Lens' a b
+
+instance HasRequests a b => HasRequests (TF.Schema l p a) b where
+    requests = TF.configuration . requests
+
+class HasSessionAffinity a b | a -> b where
+    sessionAffinity :: P.Lens' a b
+
+instance HasSessionAffinity a b => HasSessionAffinity (TF.Schema l p a) b where
+    sessionAffinity = TF.configuration . sessionAffinity
 
 class HasResource a b | a -> b where
     resource :: P.Lens' a b
@@ -1017,11 +1203,29 @@ class HasAzureDisk a b | a -> b where
 instance HasAzureDisk a b => HasAzureDisk (TF.Schema l p a) b where
     azureDisk = TF.configuration . azureDisk
 
+class HasTemplate a b | a -> b where
+    template :: P.Lens' a b
+
+instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
+    template = TF.configuration . template
+
+class HasHostIp a b | a -> b where
+    hostIp :: P.Lens' a b
+
+instance HasHostIp a b => HasHostIp (TF.Schema l p a) b where
+    hostIp = TF.configuration . hostIp
+
 class HasRunAsUser a b | a -> b where
     runAsUser :: P.Lens' a b
 
 instance HasRunAsUser a b => HasRunAsUser (TF.Schema l p a) b where
     runAsUser = TF.configuration . runAsUser
+
+class HasPersistentVolumeSource a b | a -> b where
+    persistentVolumeSource :: P.Lens' a b
+
+instance HasPersistentVolumeSource a b => HasPersistentVolumeSource (TF.Schema l p a) b where
+    persistentVolumeSource = TF.configuration . persistentVolumeSource
 
 class HasMaxLimitRequestRatio a b | a -> b where
     maxLimitRequestRatio :: P.Lens' a b
@@ -1065,11 +1269,23 @@ class HasFieldRef a b | a -> b where
 instance HasFieldRef a b => HasFieldRef (TF.Schema l p a) b where
     fieldRef = TF.configuration . fieldRef
 
+class HasStorageClassName a b | a -> b where
+    storageClassName :: P.Lens' a b
+
+instance HasStorageClassName a b => HasStorageClassName (TF.Schema l p a) b where
+    storageClassName = TF.configuration . storageClassName
+
 class HasReadinessProbe a b | a -> b where
     readinessProbe :: P.Lens' a b
 
 instance HasReadinessProbe a b => HasReadinessProbe (TF.Schema l p a) b where
     readinessProbe = TF.configuration . readinessProbe
+
+class HasMinReadySeconds a b | a -> b where
+    minReadySeconds :: P.Lens' a b
+
+instance HasMinReadySeconds a b => HasMinReadySeconds (TF.Schema l p a) b where
+    minReadySeconds = TF.configuration . minReadySeconds
 
 class HasAwsElasticBlockStore a b | a -> b where
     awsElasticBlockStore :: P.Lens' a b
@@ -1094,6 +1310,24 @@ class HasCinder a b | a -> b where
 
 instance HasCinder a b => HasCinder (TF.Schema l p a) b where
     cinder = TF.configuration . cinder
+
+class HasHostPort a b | a -> b where
+    hostPort :: P.Lens' a b
+
+instance HasHostPort a b => HasHostPort (TF.Schema l p a) b where
+    hostPort = TF.configuration . hostPort
+
+class HasCapacity a b | a -> b where
+    capacity :: P.Lens' a b
+
+instance HasCapacity a b => HasCapacity (TF.Schema l p a) b where
+    capacity = TF.configuration . capacity
+
+class HasLoadBalancerSourceRanges a b | a -> b where
+    loadBalancerSourceRanges :: P.Lens' a b
+
+instance HasLoadBalancerSourceRanges a b => HasLoadBalancerSourceRanges (TF.Schema l p a) b where
+    loadBalancerSourceRanges = TF.configuration . loadBalancerSourceRanges
 
 class HasKind a b | a -> b where
     kind :: P.Lens' a b
@@ -1248,6 +1482,9 @@ class HasComputedImagePullSecrets a b | a -> b where
 class HasComputedLimits a b | a -> b where
     computedLimits :: a -> b
 
+class HasComputedTargetCpuUtilizationPercentage a b | a -> b where
+    computedTargetCpuUtilizationPercentage :: a -> b
+
 class HasComputedServiceAccountName a b | a -> b where
     computedServiceAccountName :: a -> b
 
@@ -1269,11 +1506,17 @@ class HasComputedRequests a b | a -> b where
 class HasComputedType a b | a -> b where
     computedType :: a -> b
 
+class HasComputedVolumeName a b | a -> b where
+    computedVolumeName :: a -> b
+
 class HasComputedSelfLink a b | a -> b where
     computedSelfLink :: a -> b
 
 class HasComputedSelector a b | a -> b where
     computedSelector :: a -> b
+
+class HasComputedStorageClassName a b | a -> b where
+    computedStorageClassName :: a -> b
 
 class HasComputedHostname a b | a -> b where
     computedHostname :: a -> b

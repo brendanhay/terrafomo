@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | The @Kubernetes@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _clientCertificate     :: P.Maybe P.Text

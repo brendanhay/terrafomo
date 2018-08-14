@@ -99,14 +99,14 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @kubernetes_config_map@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_config_map terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/config_map.html terraform documentation>
 -- for more information.
 data ConfigMapResource s = ConfigMapResource'
     { _data'    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @data@ - (Optional)
     -- A map of the configuration data.
     --
-    , _metadata :: TF.Attr s (Metadata s)
+    , _metadata :: TF.Attr s (ConfigMapMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard config map's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
@@ -114,7 +114,7 @@ data ConfigMapResource s = ConfigMapResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 configMapResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (ConfigMapMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Resource P.Provider (ConfigMapResource s)
 configMapResource _metadata =
     TF.newResource "kubernetes_config_map" TF.validator $
@@ -133,7 +133,7 @@ instance TF.IsValid (ConfigMapResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ConfigMapResource s -> TF.Attr s (Metadata s))
+                      :: ConfigMapResource s -> TF.Attr s (ConfigMapMetadata s))
                   TF.validator
 
 instance P.HasData' (ConfigMapResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -141,22 +141,22 @@ instance P.HasData' (ConfigMapResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr 
         P.lens (_data' :: ConfigMapResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _data' = a } :: ConfigMapResource s)
 
-instance P.HasMetadata (ConfigMapResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (ConfigMapResource s) (TF.Attr s (ConfigMapMetadata s)) where
     metadata =
-        P.lens (_metadata :: ConfigMapResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: ConfigMapResource s -> TF.Attr s (ConfigMapMetadata s))
                (\s a -> s { _metadata = a } :: ConfigMapResource s)
 
 -- | @kubernetes_horizontal_pod_autoscaler@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_horizontal_pod_autoscaler terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/horizontal_pod_autoscaler.html terraform documentation>
 -- for more information.
 data HorizontalPodAutoscalerResource s = HorizontalPodAutoscalerResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (HorizontalPodAutoscalerMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard horizontal pod autoscaler's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s (Spec s)
+    , _spec     :: TF.Attr s (HorizontalPodAutoscalerSpec s)
     -- ^ @spec@ - (Required)
     -- Behaviour of the autoscaler. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
@@ -164,8 +164,8 @@ data HorizontalPodAutoscalerResource s = HorizontalPodAutoscalerResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 horizontalPodAutoscalerResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Attr s (Spec s) -- ^ @spec@ - 'P.spec'
+    :: TF.Attr s (HorizontalPodAutoscalerMetadata s) -- ^ @metadata@ - 'P.metadata'
+    -> TF.Attr s (HorizontalPodAutoscalerSpec s) -- ^ @spec@ - 'P.spec'
     -> TF.Resource P.Provider (HorizontalPodAutoscalerResource s)
 horizontalPodAutoscalerResource _metadata _spec =
     TF.newResource "kubernetes_horizontal_pod_autoscaler" TF.validator $
@@ -184,34 +184,34 @@ instance TF.IsValid (HorizontalPodAutoscalerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: HorizontalPodAutoscalerResource s -> TF.Attr s (Metadata s))
+                      :: HorizontalPodAutoscalerResource s -> TF.Attr s (HorizontalPodAutoscalerMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: HorizontalPodAutoscalerResource s -> TF.Attr s (Spec s))
+                      :: HorizontalPodAutoscalerResource s -> TF.Attr s (HorizontalPodAutoscalerSpec s))
                   TF.validator
 
-instance P.HasMetadata (HorizontalPodAutoscalerResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (HorizontalPodAutoscalerResource s) (TF.Attr s (HorizontalPodAutoscalerMetadata s)) where
     metadata =
-        P.lens (_metadata :: HorizontalPodAutoscalerResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: HorizontalPodAutoscalerResource s -> TF.Attr s (HorizontalPodAutoscalerMetadata s))
                (\s a -> s { _metadata = a } :: HorizontalPodAutoscalerResource s)
 
-instance P.HasSpec (HorizontalPodAutoscalerResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (HorizontalPodAutoscalerResource s) (TF.Attr s (HorizontalPodAutoscalerSpec s)) where
     spec =
-        P.lens (_spec :: HorizontalPodAutoscalerResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: HorizontalPodAutoscalerResource s -> TF.Attr s (HorizontalPodAutoscalerSpec s))
                (\s a -> s { _spec = a } :: HorizontalPodAutoscalerResource s)
 
 -- | @kubernetes_limit_range@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_limit_range terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/limit_range.html terraform documentation>
 -- for more information.
 data LimitRangeResource s = LimitRangeResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (LimitRangeMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard limit range's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s (Spec s)
+    , _spec     :: TF.Attr s (LimitRangeSpec s)
     -- ^ @spec@ - (Optional)
     -- Spec defines the limits enforced. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
@@ -219,7 +219,7 @@ data LimitRangeResource s = LimitRangeResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 limitRangeResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (LimitRangeMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Resource P.Provider (LimitRangeResource s)
 limitRangeResource _metadata =
     TF.newResource "kubernetes_limit_range" TF.validator $
@@ -238,29 +238,29 @@ instance TF.IsValid (LimitRangeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: LimitRangeResource s -> TF.Attr s (Metadata s))
+                      :: LimitRangeResource s -> TF.Attr s (LimitRangeMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: LimitRangeResource s -> TF.Attr s (Spec s))
+                      :: LimitRangeResource s -> TF.Attr s (LimitRangeSpec s))
                   TF.validator
 
-instance P.HasMetadata (LimitRangeResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (LimitRangeResource s) (TF.Attr s (LimitRangeMetadata s)) where
     metadata =
-        P.lens (_metadata :: LimitRangeResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: LimitRangeResource s -> TF.Attr s (LimitRangeMetadata s))
                (\s a -> s { _metadata = a } :: LimitRangeResource s)
 
-instance P.HasSpec (LimitRangeResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (LimitRangeResource s) (TF.Attr s (LimitRangeSpec s)) where
     spec =
-        P.lens (_spec :: LimitRangeResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: LimitRangeResource s -> TF.Attr s (LimitRangeSpec s))
                (\s a -> s { _spec = a } :: LimitRangeResource s)
 
 -- | @kubernetes_namespace@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_namespace terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/namespace.html terraform documentation>
 -- for more information.
 data NamespaceResource s = NamespaceResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (NamespaceMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard namespace's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
@@ -268,7 +268,7 @@ data NamespaceResource s = NamespaceResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 namespaceResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (NamespaceMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Resource P.Provider (NamespaceResource s)
 namespaceResource _metadata =
     TF.newResource "kubernetes_namespace" TF.validator $
@@ -285,33 +285,33 @@ instance TF.IsValid (NamespaceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: NamespaceResource s -> TF.Attr s (Metadata s))
+                      :: NamespaceResource s -> TF.Attr s (NamespaceMetadata s))
                   TF.validator
 
-instance P.HasMetadata (NamespaceResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (NamespaceResource s) (TF.Attr s (NamespaceMetadata s)) where
     metadata =
-        P.lens (_metadata :: NamespaceResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: NamespaceResource s -> TF.Attr s (NamespaceMetadata s))
                (\s a -> s { _metadata = a } :: NamespaceResource s)
 
 -- | @kubernetes_persistent_volume@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_persistent_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/persistent_volume.html terraform documentation>
 -- for more information.
 data PersistentVolumeResource s = PersistentVolumeResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (PersistentVolumeMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard persistent volume's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s [TF.Attr s (Spec s)]
+    , _spec     :: TF.Attr s [TF.Attr s (PersistentVolumeSpec s)]
     -- ^ @spec@ - (Required)
     -- Spec of the persistent volume owned by the cluster
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 persistentVolumeResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Attr s [TF.Attr s (Spec s)] -- ^ @spec@ - 'P.spec'
+    :: TF.Attr s (PersistentVolumeMetadata s) -- ^ @metadata@ - 'P.metadata'
+    -> TF.Attr s [TF.Attr s (PersistentVolumeSpec s)] -- ^ @spec@ - 'P.spec'
     -> TF.Resource P.Provider (PersistentVolumeResource s)
 persistentVolumeResource _metadata _spec =
     TF.newResource "kubernetes_persistent_volume" TF.validator $
@@ -330,35 +330,35 @@ instance TF.IsValid (PersistentVolumeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: PersistentVolumeResource s -> TF.Attr s (Metadata s))
+                      :: PersistentVolumeResource s -> TF.Attr s (PersistentVolumeMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (Spec s)])
+                      :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (PersistentVolumeSpec s)])
                   TF.validator
 
-instance P.HasMetadata (PersistentVolumeResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (PersistentVolumeResource s) (TF.Attr s (PersistentVolumeMetadata s)) where
     metadata =
-        P.lens (_metadata :: PersistentVolumeResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: PersistentVolumeResource s -> TF.Attr s (PersistentVolumeMetadata s))
                (\s a -> s { _metadata = a } :: PersistentVolumeResource s)
 
-instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s [TF.Attr s (Spec s)]) where
+instance P.HasSpec (PersistentVolumeResource s) (TF.Attr s [TF.Attr s (PersistentVolumeSpec s)]) where
     spec =
-        P.lens (_spec :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (Spec s)])
+        P.lens (_spec :: PersistentVolumeResource s -> TF.Attr s [TF.Attr s (PersistentVolumeSpec s)])
                (\s a -> s { _spec = a } :: PersistentVolumeResource s)
 
 -- | @kubernetes_persistent_volume_claim@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_persistent_volume_claim terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/persistent_volume_claim.html terraform documentation>
 -- for more information.
 data PersistentVolumeClaimResource s = PersistentVolumeClaimResource'
-    { _metadata       :: TF.Attr s (Metadata s)
+    { _metadata       :: TF.Attr s (PersistentVolumeClaimMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard persistent volume claim's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec           :: TF.Attr s (Spec s)
-    -- ^ @spec@ - (Required)
+    , _spec           :: TF.Attr s (PersistentVolumeClaimSpec s)
+    -- ^ @spec@ - (Required, Forces New)
     -- Spec defines the desired characteristics of a volume requested by a pod
     -- author. More info:
     -- http://kubernetes.io/docs/user-guide/persistent-volumes#persistentvolumeclaims
@@ -371,8 +371,8 @@ data PersistentVolumeClaimResource s = PersistentVolumeClaimResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 persistentVolumeClaimResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Attr s (Spec s) -- ^ @spec@ - 'P.spec'
+    :: TF.Attr s (PersistentVolumeClaimMetadata s) -- ^ @metadata@ - 'P.metadata'
+    -> TF.Attr s (PersistentVolumeClaimSpec s) -- ^ @spec@ - 'P.spec'
     -> TF.Resource P.Provider (PersistentVolumeClaimResource s)
 persistentVolumeClaimResource _metadata _spec =
     TF.newResource "kubernetes_persistent_volume_claim" TF.validator $
@@ -393,21 +393,21 @@ instance TF.IsValid (PersistentVolumeClaimResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: PersistentVolumeClaimResource s -> TF.Attr s (Metadata s))
+                      :: PersistentVolumeClaimResource s -> TF.Attr s (PersistentVolumeClaimMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: PersistentVolumeClaimResource s -> TF.Attr s (Spec s))
+                      :: PersistentVolumeClaimResource s -> TF.Attr s (PersistentVolumeClaimSpec s))
                   TF.validator
 
-instance P.HasMetadata (PersistentVolumeClaimResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (PersistentVolumeClaimResource s) (TF.Attr s (PersistentVolumeClaimMetadata s)) where
     metadata =
-        P.lens (_metadata :: PersistentVolumeClaimResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: PersistentVolumeClaimResource s -> TF.Attr s (PersistentVolumeClaimMetadata s))
                (\s a -> s { _metadata = a } :: PersistentVolumeClaimResource s)
 
-instance P.HasSpec (PersistentVolumeClaimResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (PersistentVolumeClaimResource s) (TF.Attr s (PersistentVolumeClaimSpec s)) where
     spec =
-        P.lens (_spec :: PersistentVolumeClaimResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: PersistentVolumeClaimResource s -> TF.Attr s (PersistentVolumeClaimSpec s))
                (\s a -> s { _spec = a } :: PersistentVolumeClaimResource s)
 
 instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) (TF.Attr s P.Bool) where
@@ -417,23 +417,23 @@ instance P.HasWaitUntilBound (PersistentVolumeClaimResource s) (TF.Attr s P.Bool
 
 -- | @kubernetes_pod@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_pod terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/pod.html terraform documentation>
 -- for more information.
 data PodResource s = PodResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (PodMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard pod's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s (Spec s)
+    , _spec     :: TF.Attr s (PodSpec s)
     -- ^ @spec@ - (Required)
     -- Spec of the pod owned by the cluster
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 podResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Attr s (Spec s) -- ^ @spec@ - 'P.spec'
+    :: TF.Attr s (PodMetadata s) -- ^ @metadata@ - 'P.metadata'
+    -> TF.Attr s (PodSpec s) -- ^ @spec@ - 'P.spec'
     -> TF.Resource P.Provider (PodResource s)
 podResource _metadata _spec =
     TF.newResource "kubernetes_pod" TF.validator $
@@ -452,34 +452,34 @@ instance TF.IsValid (PodResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: PodResource s -> TF.Attr s (Metadata s))
+                      :: PodResource s -> TF.Attr s (PodMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: PodResource s -> TF.Attr s (Spec s))
+                      :: PodResource s -> TF.Attr s (PodSpec s))
                   TF.validator
 
-instance P.HasMetadata (PodResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (PodResource s) (TF.Attr s (PodMetadata s)) where
     metadata =
-        P.lens (_metadata :: PodResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: PodResource s -> TF.Attr s (PodMetadata s))
                (\s a -> s { _metadata = a } :: PodResource s)
 
-instance P.HasSpec (PodResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (PodResource s) (TF.Attr s (PodSpec s)) where
     spec =
-        P.lens (_spec :: PodResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: PodResource s -> TF.Attr s (PodSpec s))
                (\s a -> s { _spec = a } :: PodResource s)
 
 -- | @kubernetes_replication_controller@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_replication_controller terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/replication_controller.html terraform documentation>
 -- for more information.
 data ReplicationControllerResource s = ReplicationControllerResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (ReplicationControllerMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard replication controller's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s (Spec s)
+    , _spec     :: TF.Attr s (ReplicationControllerSpec s)
     -- ^ @spec@ - (Required)
     -- Spec defines the specification of the desired behavior of the replication
     -- controller. More info:
@@ -488,8 +488,8 @@ data ReplicationControllerResource s = ReplicationControllerResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 replicationControllerResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Attr s (Spec s) -- ^ @spec@ - 'P.spec'
+    :: TF.Attr s (ReplicationControllerMetadata s) -- ^ @metadata@ - 'P.metadata'
+    -> TF.Attr s (ReplicationControllerSpec s) -- ^ @spec@ - 'P.spec'
     -> TF.Resource P.Provider (ReplicationControllerResource s)
 replicationControllerResource _metadata _spec =
     TF.newResource "kubernetes_replication_controller" TF.validator $
@@ -508,34 +508,34 @@ instance TF.IsValid (ReplicationControllerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ReplicationControllerResource s -> TF.Attr s (Metadata s))
+                      :: ReplicationControllerResource s -> TF.Attr s (ReplicationControllerMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: ReplicationControllerResource s -> TF.Attr s (Spec s))
+                      :: ReplicationControllerResource s -> TF.Attr s (ReplicationControllerSpec s))
                   TF.validator
 
-instance P.HasMetadata (ReplicationControllerResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (ReplicationControllerResource s) (TF.Attr s (ReplicationControllerMetadata s)) where
     metadata =
-        P.lens (_metadata :: ReplicationControllerResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: ReplicationControllerResource s -> TF.Attr s (ReplicationControllerMetadata s))
                (\s a -> s { _metadata = a } :: ReplicationControllerResource s)
 
-instance P.HasSpec (ReplicationControllerResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (ReplicationControllerResource s) (TF.Attr s (ReplicationControllerSpec s)) where
     spec =
-        P.lens (_spec :: ReplicationControllerResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: ReplicationControllerResource s -> TF.Attr s (ReplicationControllerSpec s))
                (\s a -> s { _spec = a } :: ReplicationControllerResource s)
 
 -- | @kubernetes_resource_quota@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_resource_quota terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/resource_quota.html terraform documentation>
 -- for more information.
 data ResourceQuotaResource s = ResourceQuotaResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (ResourceQuotaMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard resource quota's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s (Spec s)
+    , _spec     :: TF.Attr s (ResourceQuotaSpec s)
     -- ^ @spec@ - (Optional)
     -- Spec defines the desired quota.
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
@@ -543,7 +543,7 @@ data ResourceQuotaResource s = ResourceQuotaResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 resourceQuotaResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (ResourceQuotaMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Resource P.Provider (ResourceQuotaResource s)
 resourceQuotaResource _metadata =
     TF.newResource "kubernetes_resource_quota" TF.validator $
@@ -562,45 +562,45 @@ instance TF.IsValid (ResourceQuotaResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ResourceQuotaResource s -> TF.Attr s (Metadata s))
+                      :: ResourceQuotaResource s -> TF.Attr s (ResourceQuotaMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: ResourceQuotaResource s -> TF.Attr s (Spec s))
+                      :: ResourceQuotaResource s -> TF.Attr s (ResourceQuotaSpec s))
                   TF.validator
 
-instance P.HasMetadata (ResourceQuotaResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (ResourceQuotaResource s) (TF.Attr s (ResourceQuotaMetadata s)) where
     metadata =
-        P.lens (_metadata :: ResourceQuotaResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: ResourceQuotaResource s -> TF.Attr s (ResourceQuotaMetadata s))
                (\s a -> s { _metadata = a } :: ResourceQuotaResource s)
 
-instance P.HasSpec (ResourceQuotaResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (ResourceQuotaResource s) (TF.Attr s (ResourceQuotaSpec s)) where
     spec =
-        P.lens (_spec :: ResourceQuotaResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: ResourceQuotaResource s -> TF.Attr s (ResourceQuotaSpec s))
                (\s a -> s { _spec = a } :: ResourceQuotaResource s)
 
 -- | @kubernetes_secret@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_secret terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/secret.html terraform documentation>
 -- for more information.
 data SecretResource s = SecretResource'
     { _data'    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @data@ - (Optional)
     -- A map of the secret data.
     --
-    , _metadata :: TF.Attr s (Metadata s)
+    , _metadata :: TF.Attr s (SecretMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard secret's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
     , _type'    :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     -- Type of secret
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 secretResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (SecretMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Resource P.Provider (SecretResource s)
 secretResource _metadata =
     TF.newResource "kubernetes_secret" TF.validator $
@@ -621,7 +621,7 @@ instance TF.IsValid (SecretResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: SecretResource s -> TF.Attr s (Metadata s))
+                      :: SecretResource s -> TF.Attr s (SecretMetadata s))
                   TF.validator
 
 instance P.HasData' (SecretResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
@@ -629,9 +629,9 @@ instance P.HasData' (SecretResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P
         P.lens (_data' :: SecretResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _data' = a } :: SecretResource s)
 
-instance P.HasMetadata (SecretResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (SecretResource s) (TF.Attr s (SecretMetadata s)) where
     metadata =
-        P.lens (_metadata :: SecretResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: SecretResource s -> TF.Attr s (SecretMetadata s))
                (\s a -> s { _metadata = a } :: SecretResource s)
 
 instance P.HasType' (SecretResource s) (TF.Attr s P.Text) where
@@ -641,15 +641,15 @@ instance P.HasType' (SecretResource s) (TF.Attr s P.Text) where
 
 -- | @kubernetes_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
-    { _metadata :: TF.Attr s (Metadata s)
+    { _metadata :: TF.Attr s (ServiceMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard service's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _spec     :: TF.Attr s (Spec s)
+    , _spec     :: TF.Attr s (ServiceSpec s)
     -- ^ @spec@ - (Required)
     -- Spec defines the behavior of a service.
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
@@ -657,8 +657,8 @@ data ServiceResource s = ServiceResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 serviceResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Attr s (Spec s) -- ^ @spec@ - 'P.spec'
+    :: TF.Attr s (ServiceMetadata s) -- ^ @metadata@ - 'P.metadata'
+    -> TF.Attr s (ServiceSpec s) -- ^ @spec@ - 'P.spec'
     -> TF.Resource P.Provider (ServiceResource s)
 serviceResource _metadata _spec =
     TF.newResource "kubernetes_service" TF.validator $
@@ -677,43 +677,43 @@ instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ServiceResource s -> TF.Attr s (Metadata s))
+                      :: ServiceResource s -> TF.Attr s (ServiceMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_spec"
                   (_spec
-                      :: ServiceResource s -> TF.Attr s (Spec s))
+                      :: ServiceResource s -> TF.Attr s (ServiceSpec s))
                   TF.validator
 
-instance P.HasMetadata (ServiceResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (ServiceResource s) (TF.Attr s (ServiceMetadata s)) where
     metadata =
-        P.lens (_metadata :: ServiceResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: ServiceResource s -> TF.Attr s (ServiceMetadata s))
                (\s a -> s { _metadata = a } :: ServiceResource s)
 
-instance P.HasSpec (ServiceResource s) (TF.Attr s (Spec s)) where
+instance P.HasSpec (ServiceResource s) (TF.Attr s (ServiceSpec s)) where
     spec =
-        P.lens (_spec :: ServiceResource s -> TF.Attr s (Spec s))
+        P.lens (_spec :: ServiceResource s -> TF.Attr s (ServiceSpec s))
                (\s a -> s { _spec = a } :: ServiceResource s)
 
-instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceResource s)) (TF.Attr s [TF.Attr s (LoadBalancerIngress s)]) where
-    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "_computedLoadBalancerIngress"
+instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceResource s)) (TF.Attr s [TF.Attr s (ServiceLoadBalancerIngress s)]) where
+    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
 
 -- | @kubernetes_service_account@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_service_account terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/service_account.html terraform documentation>
 -- for more information.
 data ServiceAccountResource s = ServiceAccountResource'
-    { _imagePullSecret :: TF.Attr s [TF.Attr s (ImagePullSecret s)]
+    { _imagePullSecret :: TF.Attr s [TF.Attr s (ServiceAccountImagePullSecret s)]
     -- ^ @image_pull_secret@ - (Optional)
     -- A list of references to secrets in the same namespace to use for pulling any
     -- images in pods that reference this Service Account. More info:
     -- http://kubernetes.io/docs/user-guide/secrets#manually-specifying-an-imagepullsecret
     --
-    , _metadata        :: TF.Attr s (Metadata s)
+    , _metadata :: TF.Attr s (ServiceAccountMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard service account's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    , _secret          :: TF.Attr s [TF.Attr s (Secret s)]
+    , _secret :: TF.Attr s [TF.Attr s (ServiceAccountSecret s)]
     -- ^ @secret@ - (Optional)
     -- A list of secrets allowed to be used by pods running using this Service
     -- Account. More info: http://kubernetes.io/docs/user-guide/secrets
@@ -721,7 +721,7 @@ data ServiceAccountResource s = ServiceAccountResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 serviceAccountResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (ServiceAccountMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Resource P.Provider (ServiceAccountResource s)
 serviceAccountResource _metadata =
     TF.newResource "kubernetes_service_account" TF.validator $
@@ -742,58 +742,58 @@ instance TF.IsValid (ServiceAccountResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_imagePullSecret"
                   (_imagePullSecret
-                      :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (ImagePullSecret s)])
+                      :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (ServiceAccountImagePullSecret s)])
                   TF.validator
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: ServiceAccountResource s -> TF.Attr s (Metadata s))
+                      :: ServiceAccountResource s -> TF.Attr s (ServiceAccountMetadata s))
                   TF.validator
            P.<> TF.settingsValidator "_secret"
                   (_secret
-                      :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (Secret s)])
+                      :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (ServiceAccountSecret s)])
                   TF.validator
 
-instance P.HasImagePullSecret (ServiceAccountResource s) (TF.Attr s [TF.Attr s (ImagePullSecret s)]) where
+instance P.HasImagePullSecret (ServiceAccountResource s) (TF.Attr s [TF.Attr s (ServiceAccountImagePullSecret s)]) where
     imagePullSecret =
-        P.lens (_imagePullSecret :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (ImagePullSecret s)])
+        P.lens (_imagePullSecret :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (ServiceAccountImagePullSecret s)])
                (\s a -> s { _imagePullSecret = a } :: ServiceAccountResource s)
 
-instance P.HasMetadata (ServiceAccountResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (ServiceAccountResource s) (TF.Attr s (ServiceAccountMetadata s)) where
     metadata =
-        P.lens (_metadata :: ServiceAccountResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: ServiceAccountResource s -> TF.Attr s (ServiceAccountMetadata s))
                (\s a -> s { _metadata = a } :: ServiceAccountResource s)
 
-instance P.HasSecret (ServiceAccountResource s) (TF.Attr s [TF.Attr s (Secret s)]) where
+instance P.HasSecret (ServiceAccountResource s) (TF.Attr s [TF.Attr s (ServiceAccountSecret s)]) where
     secret =
-        P.lens (_secret :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (Secret s)])
+        P.lens (_secret :: ServiceAccountResource s -> TF.Attr s [TF.Attr s (ServiceAccountSecret s)])
                (\s a -> s { _secret = a } :: ServiceAccountResource s)
 
 instance s ~ s' => P.HasComputedDefaultSecretName (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
-    computedDefaultSecretName x = TF.compute (TF.refKey x) "_computedDefaultSecretName"
+    computedDefaultSecretName x = TF.compute (TF.refKey x) "default_secret_name"
 
 -- | @kubernetes_storage_class@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Kubernetes/kubernetes_storage_class terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/kubernetes/r/storage_class.html terraform documentation>
 -- for more information.
 data StorageClassResource s = StorageClassResource'
-    { _metadata           :: TF.Attr s (Metadata s)
+    { _metadata           :: TF.Attr s (StorageClassMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard storage class's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
     , _parameters         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @parameters@ - (Optional)
+    -- ^ @parameters@ - (Optional, Forces New)
     -- The parameters for the provisioner that should create volumes of this
     -- storage class
     --
     , _storageProvisioner :: TF.Attr s P.Text
-    -- ^ @storage_provisioner@ - (Required)
+    -- ^ @storage_provisioner@ - (Required, Forces New)
     -- Indicates the type of the provisioner
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 storageClassResource
-    :: TF.Attr s (Metadata s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (StorageClassMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s P.Text -- ^ @storage_provisioner@ - 'P.storageProvisioner'
     -> TF.Resource P.Provider (StorageClassResource s)
 storageClassResource _metadata _storageProvisioner =
@@ -815,12 +815,12 @@ instance TF.IsValid (StorageClassResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_metadata"
                   (_metadata
-                      :: StorageClassResource s -> TF.Attr s (Metadata s))
+                      :: StorageClassResource s -> TF.Attr s (StorageClassMetadata s))
                   TF.validator
 
-instance P.HasMetadata (StorageClassResource s) (TF.Attr s (Metadata s)) where
+instance P.HasMetadata (StorageClassResource s) (TF.Attr s (StorageClassMetadata s)) where
     metadata =
-        P.lens (_metadata :: StorageClassResource s -> TF.Attr s (Metadata s))
+        P.lens (_metadata :: StorageClassResource s -> TF.Attr s (StorageClassMetadata s))
                (\s a -> s { _metadata = a } :: StorageClassResource s)
 
 instance P.HasParameters (StorageClassResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
