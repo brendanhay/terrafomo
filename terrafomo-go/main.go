@@ -140,26 +140,22 @@ func newSchema(k string, v *schema.Schema) *Schema {
 		s.ConflictsWith = v.ConflictsWith
 	}
 
-	des := v.Description
-	if des != "" {
-		s.Description = &des
+	if v.Description != "" {
+		s.Description = &v.Description
 	}
 
-	dep := v.Deprecated
-	if dep != "" {
-		s.Deprecated = &dep
+	if v.Deprecated != "" {
+		s.Deprecated = &v.Deprecated
 	}
 
-	rem := v.Removed
-	if rem != "" {
-		s.Removed = &rem
+	if v.Removed != "" {
+		s.Removed = &v.Removed
 	}
 
 	switch d := v.Default.(type) {
 	case string:
-		r := d
-		if r != "" {
-			s.Default = &r
+		if d != "" {
+			s.Default = &d
 		}
 	case bool:
 		r := strconv.FormatBool(d)
