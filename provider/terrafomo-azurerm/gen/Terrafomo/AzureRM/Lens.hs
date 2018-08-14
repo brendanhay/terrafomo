@@ -24,11 +24,13 @@ module Terrafomo.AzureRM.Lens
     , HasSecurityGroup (..)
     , HasProtectedSettings (..)
     , HasMaxmemoryPolicy (..)
+    , HasAcceleratedNetworking (..)
     , HasAlgorithm (..)
     , HasEnvironment (..)
     , HasKeyType (..)
     , HasProtectedAccountKeyName (..)
     , HasUpgradeMode (..)
+    , HasToken (..)
     , HasJavaContainer (..)
     , HasCaching (..)
     , HasLockLevel (..)
@@ -41,19 +43,26 @@ module Terrafomo.AzureRM.Lens
     , HasUrl (..)
     , HasLogProgress (..)
     , HasBackendHttpSettings (..)
+    , HasRadiusServerAddress (..)
     , HasData' (..)
     , HasEndDate (..)
     , HasRdbBackupMaxSnapshotCount (..)
     , HasAccountTier (..)
+    , HasMaxRecurrenceInterval (..)
     , HasDayOfWeek (..)
     , HasProduct (..)
     , HasHours (..)
+    , HasApplicationMode (..)
     , HasMonthDays (..)
     , HasProfile (..)
+    , HasWebsocketsEnabled (..)
     , HasWinrm (..)
     , HasEnd (..)
+    , HasSecretUrl (..)
     , HasNotificationHubName (..)
+    , HasRootCertificate (..)
     , HasSessionId (..)
+    , HasBgpPeeringAddress (..)
     , HasTableEndpoint (..)
     , HasWrite (..)
     , HasFrontendIpConfiguration (..)
@@ -67,6 +76,7 @@ module Terrafomo.AzureRM.Lens
     , HasWebhook (..)
     , HasImage (..)
     , HasKeyOpts (..)
+    , HasNetworkPlugin (..)
     , HasAccountKind (..)
     , HasCookieBasedAffinity (..)
     , HasOauth2AllowImplicitFlow (..)
@@ -74,6 +84,7 @@ module Terrafomo.AzureRM.Lens
     , HasCertificate (..)
     , HasIpConfiguration (..)
     , HasSupportOrdering (..)
+    , HasActions (..)
     , HasQueue (..)
     , HasResolutionVirtualNetworkIds (..)
     , HasMinutes (..)
@@ -118,11 +129,13 @@ module Terrafomo.AzureRM.Lens
     , HasNotes (..)
     , HasRemoteIpAddress (..)
     , HasComponent (..)
+    , HasFlags (..)
     , HasAddOnFeatures (..)
     , HasFirewallState (..)
     , HasLun (..)
     , HasIpsecEncryption (..)
     , HasService (..)
+    , HasPublicIpAddressId (..)
     , HasDestinationPortRanges (..)
     , HasContainerAccessType (..)
     , HasEnableAutomaticUpgrades (..)
@@ -139,6 +152,7 @@ module Terrafomo.AzureRM.Lens
     , HasSku (..)
     , HasSettingName (..)
     , HasEnabled (..)
+    , HasDiskEncryptionKey (..)
     , HasDisplayName (..)
     , HasIsAdmin (..)
     , HasVaultName (..)
@@ -152,6 +166,7 @@ module Terrafomo.AzureRM.Lens
     , HasDtu (..)
     , HasStartIp (..)
     , HasSourceAddressPrefix (..)
+    , HasOsState (..)
     , HasNetworkInterfaceIds (..)
     , HasAccountEncryptionSource (..)
     , HasResourceTypes (..)
@@ -170,10 +185,12 @@ module Terrafomo.AzureRM.Lens
     , HasVaultUri (..)
     , HasLabel (..)
     , HasZoneName (..)
+    , HasKeyId (..)
     , HasIsCompressionEnabled (..)
     , HasDestinationApplicationSecurityGroupIds (..)
     , HasHostName (..)
     , HasAppServiceName (..)
+    , HasPromotionCode (..)
     , HasFixedDate (..)
     , HasMaximumCaptureDuration (..)
     , HasAssignableScopes (..)
@@ -185,6 +202,7 @@ module Terrafomo.AzureRM.Lens
     , HasMessageRetention (..)
     , HasSecretPermissions (..)
     , HasRelativeName (..)
+    , HasLoadBalancerBackendAddressPoolIds (..)
     , HasAccess (..)
     , HasId (..)
     , HasRelativePath (..)
@@ -193,6 +211,7 @@ module Terrafomo.AzureRM.Lens
     , HasProtocol (..)
     , HasRedisCacheName (..)
     , HasDeleteDataDisksOnTermination (..)
+    , HasApplicationGatewayBackendAddressPoolIds (..)
     , HasPrimaryPeerAddressPrefix (..)
     , HasMicrosoftPeeringConfig (..)
     , HasDeploymentMode (..)
@@ -222,12 +241,15 @@ module Terrafomo.AzureRM.Lens
     , HasIdentityIds (..)
     , HasRemoteDebuggingEnabled (..)
     , HasDisableBgpRoutePropagation (..)
+    , HasKeyUrl (..)
     , HasIpsecPolicy (..)
     , HasSubnetMask (..)
     , HasScope (..)
+    , HasComputerName (..)
     , HasOsProfileSecrets (..)
     , HasUpdate (..)
     , HasKeySize (..)
+    , HasRadiusServerSecret (..)
     , HasSubnetId (..)
     , HasCaptureDescription (..)
     , HasFilter (..)
@@ -242,6 +264,7 @@ module Terrafomo.AzureRM.Lens
     , HasDescription (..)
     , HasPublicIpAddressAllocation (..)
     , HasLocalNetworkGatewayId (..)
+    , HasPeerWeight (..)
     , HasShareName (..)
     , HasRedisConfiguration (..)
     , HasImport' (..)
@@ -251,6 +274,7 @@ module Terrafomo.AzureRM.Lens
     , HasOsProfileLinuxConfig (..)
     , HasMonthlyOccurrences (..)
     , HasLifetimePercentage (..)
+    , HasDnsSettings (..)
     , HasAuthenticationType (..)
     , HasEndIp (..)
     , HasStorageProfile (..)
@@ -258,6 +282,7 @@ module Terrafomo.AzureRM.Lens
     , HasRemoteFilePath (..)
     , HasVmSize (..)
     , HasSolutionName (..)
+    , HasPublicIpAddressConfiguration (..)
     , HasFrontendPort (..)
     , HasPolicyRule (..)
     , HasVmImage (..)
@@ -280,6 +305,7 @@ module Terrafomo.AzureRM.Lens
     , HasStorageProfileOsDisk (..)
     , HasDnsServers (..)
     , HasSortDescending (..)
+    , HasTarget (..)
     , HasAdministratorLoginPassword (..)
     , HasNumberOfProbes (..)
     , HasDefaultBackendHttpSettingsName (..)
@@ -287,6 +313,7 @@ module Terrafomo.AzureRM.Lens
     , HasDefaultDocuments (..)
     , HasMode (..)
     , HasMountPath (..)
+    , HasAppServiceEnvironmentId (..)
     , HasAutoUpgradeMinorVersion (..)
     , HasHttp2Enabled (..)
     , HasEnableBlobEncryption (..)
@@ -300,6 +327,7 @@ module Terrafomo.AzureRM.Lens
     , HasBandwidthInMbps (..)
     , HasServicePrincipal (..)
     , HasLocation (..)
+    , HasUse32BitWorkerProcess (..)
     , HasCertificateUrl (..)
     , HasMetricTrigger (..)
     , HasRequireSni (..)
@@ -334,6 +362,7 @@ module Terrafomo.AzureRM.Lens
     , HasApplicationType (..)
     , HasStorageKeyType (..)
     , HasUri (..)
+    , HasPrivateIpAddressAllocation (..)
     , HasIsHttpsAllowed (..)
     , HasAppSettings (..)
     , HasUsername (..)
@@ -351,10 +380,12 @@ module Terrafomo.AzureRM.Lens
     , HasReliabilityLevel (..)
     , HasEnabledForDiskEncryption (..)
     , HasSubscriptionId (..)
+    , HasReserved (..)
     , HasMinimum (..)
     , HasRoleDefinitionName (..)
     , HasAddressPrefix (..)
     , HasGatewayIpConfiguration (..)
+    , HasAsn (..)
     , HasGatewayAddress (..)
     , HasVlanId (..)
     , HasDisabledSslProtocols (..)
@@ -365,6 +396,7 @@ module Terrafomo.AzureRM.Lens
     , HasDefaultLocalNetworkGatewayId (..)
     , HasEnableAcceleratedNetworking (..)
     , HasPartitionCount (..)
+    , HasMaxIntervalInSeconds (..)
     , HasSinglePlacementGroup (..)
     , HasFirewallMode (..)
     , HasCustomEmails (..)
@@ -384,6 +416,7 @@ module Terrafomo.AzureRM.Lens
     , HasStorageLocation (..)
     , HasRequiresDuplicateDetection (..)
     , HasPlatformFaultDomainCount (..)
+    , HasKeyEncryptionKey (..)
     , HasQueueEndpoint (..)
     , HasPublisher (..)
     , HasTo (..)
@@ -399,6 +432,8 @@ module Terrafomo.AzureRM.Lens
     , HasAuthenticationBasic (..)
     , HasReplyToSessionId (..)
     , HasBootDiagnostics (..)
+    , HasVpnClientProtocols (..)
+    , HasPerSiteScaling (..)
     , HasProfileName (..)
     , HasSasToken (..)
     , HasDefaultBackendAddressPoolName (..)
@@ -408,6 +443,7 @@ module Terrafomo.AzureRM.Lens
     , HasNotification (..)
     , HasEndIpAddress (..)
     , HasPeriod (..)
+    , HasConsistencyLevel (..)
     , HasVpnType (..)
     , HasTimezone (..)
     , HasIdleTimeoutInMinutes (..)
@@ -427,7 +463,10 @@ module Terrafomo.AzureRM.Lens
     , HasOffer (..)
     , HasEmailAddress (..)
     , HasFilterType (..)
+    , HasMaxRecurrenceFrequency (..)
+    , HasMaxJobCount (..)
     , HasOsProfileWindowsConfig (..)
+    , HasMaxStalenessPrefix (..)
     , HasPass (..)
     , HasAdministratorLogin (..)
     , HasQueueName (..)
@@ -454,6 +493,7 @@ module Terrafomo.AzureRM.Lens
     , HasOrchestrationPlatform (..)
     , HasManage (..)
     , HasIsHttpAllowed (..)
+    , HasVnetSubnetId (..)
     , HasComputerNamePrefix (..)
     , HasPaths (..)
     , HasRemotePort (..)
@@ -461,23 +501,31 @@ module Terrafomo.AzureRM.Lens
     , HasX509StoreName (..)
     , HasResourceId (..)
     , HasErrorActionWeb (..)
+    , HasPrivateIpAddress (..)
+    , HasExchange (..)
     , HasOccurrence (..)
+    , HasContents (..)
     , HasHttpEndpointPort (..)
     , HasActionType (..)
+    , HasNotActions (..)
     , HasAgentPoolProfile (..)
+    , HasUseSubdomain (..)
     , HasDay (..)
     , HasCertificateStore (..)
     , HasWafConfiguration (..)
     , HasVaultCertificates (..)
     , HasNetworkWatcherName (..)
     , HasSshKeys (..)
+    , HasOsDiskSizeGb (..)
     , HasRequestRoutingRule (..)
     , HasStorageQueueName (..)
     , HasAdvertisedPublicPrefixes (..)
     , HasPath (..)
     , HasNodeType (..)
+    , HasRevokedCertificate (..)
     , HasNotifyKeyspaceEvents (..)
     , HasLinuxProfile (..)
+    , HasPrimary (..)
     , HasStart (..)
     , HasAttached (..)
     , HasParallelism (..)
@@ -500,19 +548,23 @@ module Terrafomo.AzureRM.Lens
     , HasVirtualNetworkGatewayId (..)
     , HasConnectionString (..)
     , HasSecret (..)
+    , HasApiKey (..)
     , HasMaximumBytesPerPacket (..)
     , HasRecords (..)
     , HasVhdContainers (..)
     , HasVersion (..)
+    , HasPreference (..)
     , HasCpu (..)
     , HasHttpListener (..)
     , HasStorageContainerName (..)
     , HasServer (..)
+    , HasPublicCertData (..)
     , HasEncryptionState (..)
     , HasDelete (..)
     , HasMinChildEndpoints (..)
     , HasScaleAction (..)
     , HasHeaders (..)
+    , HasTeamId (..)
     , HasDestinationAddressPrefixes (..)
     , HasStorageAccountId (..)
     , HasResourceGroupName (..)
@@ -522,9 +574,11 @@ module Terrafomo.AzureRM.Lens
     , HasSend (..)
     , HasIpRangeFilter (..)
     , HasTrigger (..)
+    , HasFailoverPriority (..)
     , HasObjectId (..)
     , HasIgnoreMissingVnetServiceEndpoint (..)
     , HasOperator (..)
+    , HasDays (..)
     , HasRuleType (..)
     , HasNamePrefix (..)
     , HasGeoRedundantBackup (..)
@@ -535,6 +589,7 @@ module Terrafomo.AzureRM.Lens
     , HasTenantId (..)
     , HasBody (..)
     , HasCapacity (..)
+    , HasPrefix (..)
     , HasServices (..)
     , HasAppServiceSlotName (..)
     , HasKind (..)
@@ -545,6 +600,7 @@ module Terrafomo.AzureRM.Lens
     , HasServicePrincipalId (..)
     , HasEnableFileEncryption (..)
     , HasEventhubName (..)
+    , HasIpForwarding (..)
     , HasWeekDays (..)
     , HasGeoMappings (..)
     , HasMemory (..)
@@ -594,10 +650,14 @@ module Terrafomo.AzureRM.Lens
     , HasEnablePartitioning (..)
     , HasEnableFloatingIp (..)
     , HasLogVerbose (..)
+    , HasWeight (..)
     , HasSmsReceiver (..)
+    , HasTag (..)
     , HasVirtualNetworkName (..)
+    , HasSshKey (..)
     , HasSizeLimitInBytes (..)
     , HasJavaContainerVersion (..)
+    , HasBundleId (..)
     , HasWorkspaceResourceId (..)
     , HasNextHopType (..)
 
@@ -662,6 +722,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedVersion (..)
     , HasComputedAppSettings (..)
     , HasComputedRoutingWeight (..)
+    , HasComputedPrimary (..)
     , HasComputedEndTime (..)
     , HasComputedDefaultPrimaryKey (..)
     , HasComputedSourceControl (..)
@@ -724,6 +785,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedDbDtuMin (..)
     , HasComputedDisplayName (..)
     , HasComputedApplicationId (..)
+    , HasComputedLoadBalancerBackendAddressPoolsIds (..)
     , HasComputedAutoDeleteOnIdle (..)
     , HasComputedSourceDatabaseId (..)
     , HasComputedSslCertificateId (..)
@@ -768,6 +830,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedDockerBridgeCidr (..)
     , HasComputedAssignableScopes (..)
     , HasComputedAutoInflateEnabled (..)
+    , HasComputedNotActions (..)
     , HasComputedIpAddress (..)
     , HasComputedEnableHttpsTrafficOnly (..)
     , HasComputedReserved (..)
@@ -811,6 +874,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedAvailableToOtherTenants (..)
     , HasComputedZones (..)
     , HasComputedApiKey (..)
+    , HasComputedLoadBalancerInboundNatRulesIds (..)
     , HasComputedSourceUri (..)
     , HasComputedDiskEncryptionKey (..)
     , HasComputedSku (..)
@@ -823,6 +887,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedCommands (..)
     , HasComputedWebhookAction (..)
     , HasComputedRoute (..)
+    , HasComputedActions (..)
     , HasComputedSpendingLimit (..)
     , HasComputedIpConfiguration (..)
     , HasComputedPrimaryQueueEndpoint (..)
@@ -855,6 +920,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedPrimaryLocation (..)
     , HasComputedOriginPath (..)
     , HasComputedVnetSubnetId (..)
+    , HasComputedApplicationGatewayBackendAddressPoolsIds (..)
     , HasComputedHost (..)
     , HasComputedSecondaryLocation (..)
     , HasComputedWorkflowVersion (..)
@@ -876,6 +942,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedSizeGb (..)
     , HasComputedCount (..)
     , HasComputedApplicationPorts (..)
+    , HasComputedCustomData (..)
     , HasComputedEnableFileEncryption (..)
     , HasComputedRestorePointInTime (..)
     , HasComputedType (..)
@@ -957,6 +1024,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedOutboundIpAddresses (..)
     , HasComputedAccountTier (..)
     , HasComputedVaultUri (..)
+    , HasComputedSize (..)
     , HasComputedEndpointMonitorStatus (..)
     , HasComputedZoneType (..)
     , HasComputedServiceKey (..)
@@ -968,6 +1036,7 @@ module Terrafomo.AzureRM.Lens
     , HasComputedTarget (..)
     , HasComputedServicebusEndpoint (..)
     , HasComputedMaxmemoryReserved (..)
+    , HasComputedApplicationSecurityGroupIds (..)
     , HasComputedDefaultBackendHttpSettingsId (..)
     , HasComputedDestinationPortRange (..)
     , HasComputedEnabledForTemplateDeployment (..)
@@ -1049,6 +1118,12 @@ class HasMaxmemoryPolicy a b | a -> b where
 instance HasMaxmemoryPolicy a b => HasMaxmemoryPolicy (TF.Schema l p a) b where
     maxmemoryPolicy = TF.configuration . maxmemoryPolicy
 
+class HasAcceleratedNetworking a b | a -> b where
+    acceleratedNetworking :: P.Lens' a b
+
+instance HasAcceleratedNetworking a b => HasAcceleratedNetworking (TF.Schema l p a) b where
+    acceleratedNetworking = TF.configuration . acceleratedNetworking
+
 class HasAlgorithm a b | a -> b where
     algorithm :: P.Lens' a b
 
@@ -1078,6 +1153,12 @@ class HasUpgradeMode a b | a -> b where
 
 instance HasUpgradeMode a b => HasUpgradeMode (TF.Schema l p a) b where
     upgradeMode = TF.configuration . upgradeMode
+
+class HasToken a b | a -> b where
+    token :: P.Lens' a b
+
+instance HasToken a b => HasToken (TF.Schema l p a) b where
+    token = TF.configuration . token
 
 class HasJavaContainer a b | a -> b where
     javaContainer :: P.Lens' a b
@@ -1151,6 +1232,12 @@ class HasBackendHttpSettings a b | a -> b where
 instance HasBackendHttpSettings a b => HasBackendHttpSettings (TF.Schema l p a) b where
     backendHttpSettings = TF.configuration . backendHttpSettings
 
+class HasRadiusServerAddress a b | a -> b where
+    radiusServerAddress :: P.Lens' a b
+
+instance HasRadiusServerAddress a b => HasRadiusServerAddress (TF.Schema l p a) b where
+    radiusServerAddress = TF.configuration . radiusServerAddress
+
 class HasData' a b | a -> b where
     data' :: P.Lens' a b
 
@@ -1175,6 +1262,12 @@ class HasAccountTier a b | a -> b where
 instance HasAccountTier a b => HasAccountTier (TF.Schema l p a) b where
     accountTier = TF.configuration . accountTier
 
+class HasMaxRecurrenceInterval a b | a -> b where
+    maxRecurrenceInterval :: P.Lens' a b
+
+instance HasMaxRecurrenceInterval a b => HasMaxRecurrenceInterval (TF.Schema l p a) b where
+    maxRecurrenceInterval = TF.configuration . maxRecurrenceInterval
+
 class HasDayOfWeek a b | a -> b where
     dayOfWeek :: P.Lens' a b
 
@@ -1193,6 +1286,12 @@ class HasHours a b | a -> b where
 instance HasHours a b => HasHours (TF.Schema l p a) b where
     hours = TF.configuration . hours
 
+class HasApplicationMode a b | a -> b where
+    applicationMode :: P.Lens' a b
+
+instance HasApplicationMode a b => HasApplicationMode (TF.Schema l p a) b where
+    applicationMode = TF.configuration . applicationMode
+
 class HasMonthDays a b | a -> b where
     monthDays :: P.Lens' a b
 
@@ -1204,6 +1303,12 @@ class HasProfile a b | a -> b where
 
 instance HasProfile a b => HasProfile (TF.Schema l p a) b where
     profile = TF.configuration . profile
+
+class HasWebsocketsEnabled a b | a -> b where
+    websocketsEnabled :: P.Lens' a b
+
+instance HasWebsocketsEnabled a b => HasWebsocketsEnabled (TF.Schema l p a) b where
+    websocketsEnabled = TF.configuration . websocketsEnabled
 
 class HasWinrm a b | a -> b where
     winrm :: P.Lens' a b
@@ -1217,17 +1322,35 @@ class HasEnd a b | a -> b where
 instance HasEnd a b => HasEnd (TF.Schema l p a) b where
     end = TF.configuration . end
 
+class HasSecretUrl a b | a -> b where
+    secretUrl :: P.Lens' a b
+
+instance HasSecretUrl a b => HasSecretUrl (TF.Schema l p a) b where
+    secretUrl = TF.configuration . secretUrl
+
 class HasNotificationHubName a b | a -> b where
     notificationHubName :: P.Lens' a b
 
 instance HasNotificationHubName a b => HasNotificationHubName (TF.Schema l p a) b where
     notificationHubName = TF.configuration . notificationHubName
 
+class HasRootCertificate a b | a -> b where
+    rootCertificate :: P.Lens' a b
+
+instance HasRootCertificate a b => HasRootCertificate (TF.Schema l p a) b where
+    rootCertificate = TF.configuration . rootCertificate
+
 class HasSessionId a b | a -> b where
     sessionId :: P.Lens' a b
 
 instance HasSessionId a b => HasSessionId (TF.Schema l p a) b where
     sessionId = TF.configuration . sessionId
+
+class HasBgpPeeringAddress a b | a -> b where
+    bgpPeeringAddress :: P.Lens' a b
+
+instance HasBgpPeeringAddress a b => HasBgpPeeringAddress (TF.Schema l p a) b where
+    bgpPeeringAddress = TF.configuration . bgpPeeringAddress
 
 class HasTableEndpoint a b | a -> b where
     tableEndpoint :: P.Lens' a b
@@ -1307,6 +1430,12 @@ class HasKeyOpts a b | a -> b where
 instance HasKeyOpts a b => HasKeyOpts (TF.Schema l p a) b where
     keyOpts = TF.configuration . keyOpts
 
+class HasNetworkPlugin a b | a -> b where
+    networkPlugin :: P.Lens' a b
+
+instance HasNetworkPlugin a b => HasNetworkPlugin (TF.Schema l p a) b where
+    networkPlugin = TF.configuration . networkPlugin
+
 class HasAccountKind a b | a -> b where
     accountKind :: P.Lens' a b
 
@@ -1348,6 +1477,12 @@ class HasSupportOrdering a b | a -> b where
 
 instance HasSupportOrdering a b => HasSupportOrdering (TF.Schema l p a) b where
     supportOrdering = TF.configuration . supportOrdering
+
+class HasActions a b | a -> b where
+    actions :: P.Lens' a b
+
+instance HasActions a b => HasActions (TF.Schema l p a) b where
+    actions = TF.configuration . actions
 
 class HasQueue a b | a -> b where
     queue :: P.Lens' a b
@@ -1613,6 +1748,12 @@ class HasComponent a b | a -> b where
 instance HasComponent a b => HasComponent (TF.Schema l p a) b where
     component = TF.configuration . component
 
+class HasFlags a b | a -> b where
+    flags :: P.Lens' a b
+
+instance HasFlags a b => HasFlags (TF.Schema l p a) b where
+    flags = TF.configuration . flags
+
 class HasAddOnFeatures a b | a -> b where
     addOnFeatures :: P.Lens' a b
 
@@ -1642,6 +1783,12 @@ class HasService a b | a -> b where
 
 instance HasService a b => HasService (TF.Schema l p a) b where
     service = TF.configuration . service
+
+class HasPublicIpAddressId a b | a -> b where
+    publicIpAddressId :: P.Lens' a b
+
+instance HasPublicIpAddressId a b => HasPublicIpAddressId (TF.Schema l p a) b where
+    publicIpAddressId = TF.configuration . publicIpAddressId
 
 class HasDestinationPortRanges a b | a -> b where
     destinationPortRanges :: P.Lens' a b
@@ -1739,6 +1886,12 @@ class HasEnabled a b | a -> b where
 instance HasEnabled a b => HasEnabled (TF.Schema l p a) b where
     enabled = TF.configuration . enabled
 
+class HasDiskEncryptionKey a b | a -> b where
+    diskEncryptionKey :: P.Lens' a b
+
+instance HasDiskEncryptionKey a b => HasDiskEncryptionKey (TF.Schema l p a) b where
+    diskEncryptionKey = TF.configuration . diskEncryptionKey
+
 class HasDisplayName a b | a -> b where
     displayName :: P.Lens' a b
 
@@ -1816,6 +1969,12 @@ class HasSourceAddressPrefix a b | a -> b where
 
 instance HasSourceAddressPrefix a b => HasSourceAddressPrefix (TF.Schema l p a) b where
     sourceAddressPrefix = TF.configuration . sourceAddressPrefix
+
+class HasOsState a b | a -> b where
+    osState :: P.Lens' a b
+
+instance HasOsState a b => HasOsState (TF.Schema l p a) b where
+    osState = TF.configuration . osState
 
 class HasNetworkInterfaceIds a b | a -> b where
     networkInterfaceIds :: P.Lens' a b
@@ -1925,6 +2084,12 @@ class HasZoneName a b | a -> b where
 instance HasZoneName a b => HasZoneName (TF.Schema l p a) b where
     zoneName = TF.configuration . zoneName
 
+class HasKeyId a b | a -> b where
+    keyId :: P.Lens' a b
+
+instance HasKeyId a b => HasKeyId (TF.Schema l p a) b where
+    keyId = TF.configuration . keyId
+
 class HasIsCompressionEnabled a b | a -> b where
     isCompressionEnabled :: P.Lens' a b
 
@@ -1948,6 +2113,12 @@ class HasAppServiceName a b | a -> b where
 
 instance HasAppServiceName a b => HasAppServiceName (TF.Schema l p a) b where
     appServiceName = TF.configuration . appServiceName
+
+class HasPromotionCode a b | a -> b where
+    promotionCode :: P.Lens' a b
+
+instance HasPromotionCode a b => HasPromotionCode (TF.Schema l p a) b where
+    promotionCode = TF.configuration . promotionCode
 
 class HasFixedDate a b | a -> b where
     fixedDate :: P.Lens' a b
@@ -2015,6 +2186,12 @@ class HasRelativeName a b | a -> b where
 instance HasRelativeName a b => HasRelativeName (TF.Schema l p a) b where
     relativeName = TF.configuration . relativeName
 
+class HasLoadBalancerBackendAddressPoolIds a b | a -> b where
+    loadBalancerBackendAddressPoolIds :: P.Lens' a b
+
+instance HasLoadBalancerBackendAddressPoolIds a b => HasLoadBalancerBackendAddressPoolIds (TF.Schema l p a) b where
+    loadBalancerBackendAddressPoolIds = TF.configuration . loadBalancerBackendAddressPoolIds
+
 class HasAccess a b | a -> b where
     access :: P.Lens' a b
 
@@ -2062,6 +2239,12 @@ class HasDeleteDataDisksOnTermination a b | a -> b where
 
 instance HasDeleteDataDisksOnTermination a b => HasDeleteDataDisksOnTermination (TF.Schema l p a) b where
     deleteDataDisksOnTermination = TF.configuration . deleteDataDisksOnTermination
+
+class HasApplicationGatewayBackendAddressPoolIds a b | a -> b where
+    applicationGatewayBackendAddressPoolIds :: P.Lens' a b
+
+instance HasApplicationGatewayBackendAddressPoolIds a b => HasApplicationGatewayBackendAddressPoolIds (TF.Schema l p a) b where
+    applicationGatewayBackendAddressPoolIds = TF.configuration . applicationGatewayBackendAddressPoolIds
 
 class HasPrimaryPeerAddressPrefix a b | a -> b where
     primaryPeerAddressPrefix :: P.Lens' a b
@@ -2237,6 +2420,12 @@ class HasDisableBgpRoutePropagation a b | a -> b where
 instance HasDisableBgpRoutePropagation a b => HasDisableBgpRoutePropagation (TF.Schema l p a) b where
     disableBgpRoutePropagation = TF.configuration . disableBgpRoutePropagation
 
+class HasKeyUrl a b | a -> b where
+    keyUrl :: P.Lens' a b
+
+instance HasKeyUrl a b => HasKeyUrl (TF.Schema l p a) b where
+    keyUrl = TF.configuration . keyUrl
+
 class HasIpsecPolicy a b | a -> b where
     ipsecPolicy :: P.Lens' a b
 
@@ -2255,6 +2444,12 @@ class HasScope a b | a -> b where
 instance HasScope a b => HasScope (TF.Schema l p a) b where
     scope = TF.configuration . scope
 
+class HasComputerName a b | a -> b where
+    computerName :: P.Lens' a b
+
+instance HasComputerName a b => HasComputerName (TF.Schema l p a) b where
+    computerName = TF.configuration . computerName
+
 class HasOsProfileSecrets a b | a -> b where
     osProfileSecrets :: P.Lens' a b
 
@@ -2272,6 +2467,12 @@ class HasKeySize a b | a -> b where
 
 instance HasKeySize a b => HasKeySize (TF.Schema l p a) b where
     keySize = TF.configuration . keySize
+
+class HasRadiusServerSecret a b | a -> b where
+    radiusServerSecret :: P.Lens' a b
+
+instance HasRadiusServerSecret a b => HasRadiusServerSecret (TF.Schema l p a) b where
+    radiusServerSecret = TF.configuration . radiusServerSecret
 
 class HasSubnetId a b | a -> b where
     subnetId :: P.Lens' a b
@@ -2357,6 +2558,12 @@ class HasLocalNetworkGatewayId a b | a -> b where
 instance HasLocalNetworkGatewayId a b => HasLocalNetworkGatewayId (TF.Schema l p a) b where
     localNetworkGatewayId = TF.configuration . localNetworkGatewayId
 
+class HasPeerWeight a b | a -> b where
+    peerWeight :: P.Lens' a b
+
+instance HasPeerWeight a b => HasPeerWeight (TF.Schema l p a) b where
+    peerWeight = TF.configuration . peerWeight
+
 class HasShareName a b | a -> b where
     shareName :: P.Lens' a b
 
@@ -2411,6 +2618,12 @@ class HasLifetimePercentage a b | a -> b where
 instance HasLifetimePercentage a b => HasLifetimePercentage (TF.Schema l p a) b where
     lifetimePercentage = TF.configuration . lifetimePercentage
 
+class HasDnsSettings a b | a -> b where
+    dnsSettings :: P.Lens' a b
+
+instance HasDnsSettings a b => HasDnsSettings (TF.Schema l p a) b where
+    dnsSettings = TF.configuration . dnsSettings
+
 class HasAuthenticationType a b | a -> b where
     authenticationType :: P.Lens' a b
 
@@ -2452,6 +2665,12 @@ class HasSolutionName a b | a -> b where
 
 instance HasSolutionName a b => HasSolutionName (TF.Schema l p a) b where
     solutionName = TF.configuration . solutionName
+
+class HasPublicIpAddressConfiguration a b | a -> b where
+    publicIpAddressConfiguration :: P.Lens' a b
+
+instance HasPublicIpAddressConfiguration a b => HasPublicIpAddressConfiguration (TF.Schema l p a) b where
+    publicIpAddressConfiguration = TF.configuration . publicIpAddressConfiguration
 
 class HasFrontendPort a b | a -> b where
     frontendPort :: P.Lens' a b
@@ -2585,6 +2804,12 @@ class HasSortDescending a b | a -> b where
 instance HasSortDescending a b => HasSortDescending (TF.Schema l p a) b where
     sortDescending = TF.configuration . sortDescending
 
+class HasTarget a b | a -> b where
+    target :: P.Lens' a b
+
+instance HasTarget a b => HasTarget (TF.Schema l p a) b where
+    target = TF.configuration . target
+
 class HasAdministratorLoginPassword a b | a -> b where
     administratorLoginPassword :: P.Lens' a b
 
@@ -2626,6 +2851,12 @@ class HasMountPath a b | a -> b where
 
 instance HasMountPath a b => HasMountPath (TF.Schema l p a) b where
     mountPath = TF.configuration . mountPath
+
+class HasAppServiceEnvironmentId a b | a -> b where
+    appServiceEnvironmentId :: P.Lens' a b
+
+instance HasAppServiceEnvironmentId a b => HasAppServiceEnvironmentId (TF.Schema l p a) b where
+    appServiceEnvironmentId = TF.configuration . appServiceEnvironmentId
 
 class HasAutoUpgradeMinorVersion a b | a -> b where
     autoUpgradeMinorVersion :: P.Lens' a b
@@ -2704,6 +2935,12 @@ class HasLocation a b | a -> b where
 
 instance HasLocation a b => HasLocation (TF.Schema l p a) b where
     location = TF.configuration . location
+
+class HasUse32BitWorkerProcess a b | a -> b where
+    use32BitWorkerProcess :: P.Lens' a b
+
+instance HasUse32BitWorkerProcess a b => HasUse32BitWorkerProcess (TF.Schema l p a) b where
+    use32BitWorkerProcess = TF.configuration . use32BitWorkerProcess
 
 class HasCertificateUrl a b | a -> b where
     certificateUrl :: P.Lens' a b
@@ -2909,6 +3146,12 @@ class HasUri a b | a -> b where
 instance HasUri a b => HasUri (TF.Schema l p a) b where
     uri = TF.configuration . uri
 
+class HasPrivateIpAddressAllocation a b | a -> b where
+    privateIpAddressAllocation :: P.Lens' a b
+
+instance HasPrivateIpAddressAllocation a b => HasPrivateIpAddressAllocation (TF.Schema l p a) b where
+    privateIpAddressAllocation = TF.configuration . privateIpAddressAllocation
+
 class HasIsHttpsAllowed a b | a -> b where
     isHttpsAllowed :: P.Lens' a b
 
@@ -3011,6 +3254,12 @@ class HasSubscriptionId a b | a -> b where
 instance HasSubscriptionId a b => HasSubscriptionId (TF.Schema l p a) b where
     subscriptionId = TF.configuration . subscriptionId
 
+class HasReserved a b | a -> b where
+    reserved :: P.Lens' a b
+
+instance HasReserved a b => HasReserved (TF.Schema l p a) b where
+    reserved = TF.configuration . reserved
+
 class HasMinimum a b | a -> b where
     minimum :: P.Lens' a b
 
@@ -3034,6 +3283,12 @@ class HasGatewayIpConfiguration a b | a -> b where
 
 instance HasGatewayIpConfiguration a b => HasGatewayIpConfiguration (TF.Schema l p a) b where
     gatewayIpConfiguration = TF.configuration . gatewayIpConfiguration
+
+class HasAsn a b | a -> b where
+    asn :: P.Lens' a b
+
+instance HasAsn a b => HasAsn (TF.Schema l p a) b where
+    asn = TF.configuration . asn
 
 class HasGatewayAddress a b | a -> b where
     gatewayAddress :: P.Lens' a b
@@ -3094,6 +3349,12 @@ class HasPartitionCount a b | a -> b where
 
 instance HasPartitionCount a b => HasPartitionCount (TF.Schema l p a) b where
     partitionCount = TF.configuration . partitionCount
+
+class HasMaxIntervalInSeconds a b | a -> b where
+    maxIntervalInSeconds :: P.Lens' a b
+
+instance HasMaxIntervalInSeconds a b => HasMaxIntervalInSeconds (TF.Schema l p a) b where
+    maxIntervalInSeconds = TF.configuration . maxIntervalInSeconds
 
 class HasSinglePlacementGroup a b | a -> b where
     singlePlacementGroup :: P.Lens' a b
@@ -3209,6 +3470,12 @@ class HasPlatformFaultDomainCount a b | a -> b where
 instance HasPlatformFaultDomainCount a b => HasPlatformFaultDomainCount (TF.Schema l p a) b where
     platformFaultDomainCount = TF.configuration . platformFaultDomainCount
 
+class HasKeyEncryptionKey a b | a -> b where
+    keyEncryptionKey :: P.Lens' a b
+
+instance HasKeyEncryptionKey a b => HasKeyEncryptionKey (TF.Schema l p a) b where
+    keyEncryptionKey = TF.configuration . keyEncryptionKey
+
 class HasQueueEndpoint a b | a -> b where
     queueEndpoint :: P.Lens' a b
 
@@ -3299,6 +3566,18 @@ class HasBootDiagnostics a b | a -> b where
 instance HasBootDiagnostics a b => HasBootDiagnostics (TF.Schema l p a) b where
     bootDiagnostics = TF.configuration . bootDiagnostics
 
+class HasVpnClientProtocols a b | a -> b where
+    vpnClientProtocols :: P.Lens' a b
+
+instance HasVpnClientProtocols a b => HasVpnClientProtocols (TF.Schema l p a) b where
+    vpnClientProtocols = TF.configuration . vpnClientProtocols
+
+class HasPerSiteScaling a b | a -> b where
+    perSiteScaling :: P.Lens' a b
+
+instance HasPerSiteScaling a b => HasPerSiteScaling (TF.Schema l p a) b where
+    perSiteScaling = TF.configuration . perSiteScaling
+
 class HasProfileName a b | a -> b where
     profileName :: P.Lens' a b
 
@@ -3352,6 +3631,12 @@ class HasPeriod a b | a -> b where
 
 instance HasPeriod a b => HasPeriod (TF.Schema l p a) b where
     period = TF.configuration . period
+
+class HasConsistencyLevel a b | a -> b where
+    consistencyLevel :: P.Lens' a b
+
+instance HasConsistencyLevel a b => HasConsistencyLevel (TF.Schema l p a) b where
+    consistencyLevel = TF.configuration . consistencyLevel
 
 class HasVpnType a b | a -> b where
     vpnType :: P.Lens' a b
@@ -3467,11 +3752,29 @@ class HasFilterType a b | a -> b where
 instance HasFilterType a b => HasFilterType (TF.Schema l p a) b where
     filterType = TF.configuration . filterType
 
+class HasMaxRecurrenceFrequency a b | a -> b where
+    maxRecurrenceFrequency :: P.Lens' a b
+
+instance HasMaxRecurrenceFrequency a b => HasMaxRecurrenceFrequency (TF.Schema l p a) b where
+    maxRecurrenceFrequency = TF.configuration . maxRecurrenceFrequency
+
+class HasMaxJobCount a b | a -> b where
+    maxJobCount :: P.Lens' a b
+
+instance HasMaxJobCount a b => HasMaxJobCount (TF.Schema l p a) b where
+    maxJobCount = TF.configuration . maxJobCount
+
 class HasOsProfileWindowsConfig a b | a -> b where
     osProfileWindowsConfig :: P.Lens' a b
 
 instance HasOsProfileWindowsConfig a b => HasOsProfileWindowsConfig (TF.Schema l p a) b where
     osProfileWindowsConfig = TF.configuration . osProfileWindowsConfig
+
+class HasMaxStalenessPrefix a b | a -> b where
+    maxStalenessPrefix :: P.Lens' a b
+
+instance HasMaxStalenessPrefix a b => HasMaxStalenessPrefix (TF.Schema l p a) b where
+    maxStalenessPrefix = TF.configuration . maxStalenessPrefix
 
 class HasPass a b | a -> b where
     pass :: P.Lens' a b
@@ -3629,6 +3932,12 @@ class HasIsHttpAllowed a b | a -> b where
 instance HasIsHttpAllowed a b => HasIsHttpAllowed (TF.Schema l p a) b where
     isHttpAllowed = TF.configuration . isHttpAllowed
 
+class HasVnetSubnetId a b | a -> b where
+    vnetSubnetId :: P.Lens' a b
+
+instance HasVnetSubnetId a b => HasVnetSubnetId (TF.Schema l p a) b where
+    vnetSubnetId = TF.configuration . vnetSubnetId
+
 class HasComputerNamePrefix a b | a -> b where
     computerNamePrefix :: P.Lens' a b
 
@@ -3671,11 +3980,29 @@ class HasErrorActionWeb a b | a -> b where
 instance HasErrorActionWeb a b => HasErrorActionWeb (TF.Schema l p a) b where
     errorActionWeb = TF.configuration . errorActionWeb
 
+class HasPrivateIpAddress a b | a -> b where
+    privateIpAddress :: P.Lens' a b
+
+instance HasPrivateIpAddress a b => HasPrivateIpAddress (TF.Schema l p a) b where
+    privateIpAddress = TF.configuration . privateIpAddress
+
+class HasExchange a b | a -> b where
+    exchange :: P.Lens' a b
+
+instance HasExchange a b => HasExchange (TF.Schema l p a) b where
+    exchange = TF.configuration . exchange
+
 class HasOccurrence a b | a -> b where
     occurrence :: P.Lens' a b
 
 instance HasOccurrence a b => HasOccurrence (TF.Schema l p a) b where
     occurrence = TF.configuration . occurrence
+
+class HasContents a b | a -> b where
+    contents :: P.Lens' a b
+
+instance HasContents a b => HasContents (TF.Schema l p a) b where
+    contents = TF.configuration . contents
 
 class HasHttpEndpointPort a b | a -> b where
     httpEndpointPort :: P.Lens' a b
@@ -3689,11 +4016,23 @@ class HasActionType a b | a -> b where
 instance HasActionType a b => HasActionType (TF.Schema l p a) b where
     actionType = TF.configuration . actionType
 
+class HasNotActions a b | a -> b where
+    notActions :: P.Lens' a b
+
+instance HasNotActions a b => HasNotActions (TF.Schema l p a) b where
+    notActions = TF.configuration . notActions
+
 class HasAgentPoolProfile a b | a -> b where
     agentPoolProfile :: P.Lens' a b
 
 instance HasAgentPoolProfile a b => HasAgentPoolProfile (TF.Schema l p a) b where
     agentPoolProfile = TF.configuration . agentPoolProfile
+
+class HasUseSubdomain a b | a -> b where
+    useSubdomain :: P.Lens' a b
+
+instance HasUseSubdomain a b => HasUseSubdomain (TF.Schema l p a) b where
+    useSubdomain = TF.configuration . useSubdomain
 
 class HasDay a b | a -> b where
     day :: P.Lens' a b
@@ -3731,6 +4070,12 @@ class HasSshKeys a b | a -> b where
 instance HasSshKeys a b => HasSshKeys (TF.Schema l p a) b where
     sshKeys = TF.configuration . sshKeys
 
+class HasOsDiskSizeGb a b | a -> b where
+    osDiskSizeGb :: P.Lens' a b
+
+instance HasOsDiskSizeGb a b => HasOsDiskSizeGb (TF.Schema l p a) b where
+    osDiskSizeGb = TF.configuration . osDiskSizeGb
+
 class HasRequestRoutingRule a b | a -> b where
     requestRoutingRule :: P.Lens' a b
 
@@ -3761,6 +4106,12 @@ class HasNodeType a b | a -> b where
 instance HasNodeType a b => HasNodeType (TF.Schema l p a) b where
     nodeType = TF.configuration . nodeType
 
+class HasRevokedCertificate a b | a -> b where
+    revokedCertificate :: P.Lens' a b
+
+instance HasRevokedCertificate a b => HasRevokedCertificate (TF.Schema l p a) b where
+    revokedCertificate = TF.configuration . revokedCertificate
+
 class HasNotifyKeyspaceEvents a b | a -> b where
     notifyKeyspaceEvents :: P.Lens' a b
 
@@ -3772,6 +4123,12 @@ class HasLinuxProfile a b | a -> b where
 
 instance HasLinuxProfile a b => HasLinuxProfile (TF.Schema l p a) b where
     linuxProfile = TF.configuration . linuxProfile
+
+class HasPrimary a b | a -> b where
+    primary :: P.Lens' a b
+
+instance HasPrimary a b => HasPrimary (TF.Schema l p a) b where
+    primary = TF.configuration . primary
 
 class HasStart a b | a -> b where
     start :: P.Lens' a b
@@ -3905,6 +4262,12 @@ class HasSecret a b | a -> b where
 instance HasSecret a b => HasSecret (TF.Schema l p a) b where
     secret = TF.configuration . secret
 
+class HasApiKey a b | a -> b where
+    apiKey :: P.Lens' a b
+
+instance HasApiKey a b => HasApiKey (TF.Schema l p a) b where
+    apiKey = TF.configuration . apiKey
+
 class HasMaximumBytesPerPacket a b | a -> b where
     maximumBytesPerPacket :: P.Lens' a b
 
@@ -3929,6 +4292,12 @@ class HasVersion a b | a -> b where
 instance HasVersion a b => HasVersion (TF.Schema l p a) b where
     version = TF.configuration . version
 
+class HasPreference a b | a -> b where
+    preference :: P.Lens' a b
+
+instance HasPreference a b => HasPreference (TF.Schema l p a) b where
+    preference = TF.configuration . preference
+
 class HasCpu a b | a -> b where
     cpu :: P.Lens' a b
 
@@ -3952,6 +4321,12 @@ class HasServer a b | a -> b where
 
 instance HasServer a b => HasServer (TF.Schema l p a) b where
     server = TF.configuration . server
+
+class HasPublicCertData a b | a -> b where
+    publicCertData :: P.Lens' a b
+
+instance HasPublicCertData a b => HasPublicCertData (TF.Schema l p a) b where
+    publicCertData = TF.configuration . publicCertData
 
 class HasEncryptionState a b | a -> b where
     encryptionState :: P.Lens' a b
@@ -3982,6 +4357,12 @@ class HasHeaders a b | a -> b where
 
 instance HasHeaders a b => HasHeaders (TF.Schema l p a) b where
     headers = TF.configuration . headers
+
+class HasTeamId a b | a -> b where
+    teamId :: P.Lens' a b
+
+instance HasTeamId a b => HasTeamId (TF.Schema l p a) b where
+    teamId = TF.configuration . teamId
 
 class HasDestinationAddressPrefixes a b | a -> b where
     destinationAddressPrefixes :: P.Lens' a b
@@ -4037,6 +4418,12 @@ class HasTrigger a b | a -> b where
 instance HasTrigger a b => HasTrigger (TF.Schema l p a) b where
     trigger = TF.configuration . trigger
 
+class HasFailoverPriority a b | a -> b where
+    failoverPriority :: P.Lens' a b
+
+instance HasFailoverPriority a b => HasFailoverPriority (TF.Schema l p a) b where
+    failoverPriority = TF.configuration . failoverPriority
+
 class HasObjectId a b | a -> b where
     objectId :: P.Lens' a b
 
@@ -4054,6 +4441,12 @@ class HasOperator a b | a -> b where
 
 instance HasOperator a b => HasOperator (TF.Schema l p a) b where
     operator = TF.configuration . operator
+
+class HasDays a b | a -> b where
+    days :: P.Lens' a b
+
+instance HasDays a b => HasDays (TF.Schema l p a) b where
+    days = TF.configuration . days
 
 class HasRuleType a b | a -> b where
     ruleType :: P.Lens' a b
@@ -4115,6 +4508,12 @@ class HasCapacity a b | a -> b where
 instance HasCapacity a b => HasCapacity (TF.Schema l p a) b where
     capacity = TF.configuration . capacity
 
+class HasPrefix a b | a -> b where
+    prefix :: P.Lens' a b
+
+instance HasPrefix a b => HasPrefix (TF.Schema l p a) b where
+    prefix = TF.configuration . prefix
+
 class HasServices a b | a -> b where
     services :: P.Lens' a b
 
@@ -4174,6 +4573,12 @@ class HasEventhubName a b | a -> b where
 
 instance HasEventhubName a b => HasEventhubName (TF.Schema l p a) b where
     eventhubName = TF.configuration . eventhubName
+
+class HasIpForwarding a b | a -> b where
+    ipForwarding :: P.Lens' a b
+
+instance HasIpForwarding a b => HasIpForwarding (TF.Schema l p a) b where
+    ipForwarding = TF.configuration . ipForwarding
 
 class HasWeekDays a b | a -> b where
     weekDays :: P.Lens' a b
@@ -4469,17 +4874,35 @@ class HasLogVerbose a b | a -> b where
 instance HasLogVerbose a b => HasLogVerbose (TF.Schema l p a) b where
     logVerbose = TF.configuration . logVerbose
 
+class HasWeight a b | a -> b where
+    weight :: P.Lens' a b
+
+instance HasWeight a b => HasWeight (TF.Schema l p a) b where
+    weight = TF.configuration . weight
+
 class HasSmsReceiver a b | a -> b where
     smsReceiver :: P.Lens' a b
 
 instance HasSmsReceiver a b => HasSmsReceiver (TF.Schema l p a) b where
     smsReceiver = TF.configuration . smsReceiver
 
+class HasTag a b | a -> b where
+    tag :: P.Lens' a b
+
+instance HasTag a b => HasTag (TF.Schema l p a) b where
+    tag = TF.configuration . tag
+
 class HasVirtualNetworkName a b | a -> b where
     virtualNetworkName :: P.Lens' a b
 
 instance HasVirtualNetworkName a b => HasVirtualNetworkName (TF.Schema l p a) b where
     virtualNetworkName = TF.configuration . virtualNetworkName
+
+class HasSshKey a b | a -> b where
+    sshKey :: P.Lens' a b
+
+instance HasSshKey a b => HasSshKey (TF.Schema l p a) b where
+    sshKey = TF.configuration . sshKey
 
 class HasSizeLimitInBytes a b | a -> b where
     sizeLimitInBytes :: P.Lens' a b
@@ -4492,6 +4915,12 @@ class HasJavaContainerVersion a b | a -> b where
 
 instance HasJavaContainerVersion a b => HasJavaContainerVersion (TF.Schema l p a) b where
     javaContainerVersion = TF.configuration . javaContainerVersion
+
+class HasBundleId a b | a -> b where
+    bundleId :: P.Lens' a b
+
+instance HasBundleId a b => HasBundleId (TF.Schema l p a) b where
+    bundleId = TF.configuration . bundleId
 
 class HasWorkspaceResourceId a b | a -> b where
     workspaceResourceId :: P.Lens' a b
@@ -4685,6 +5114,9 @@ class HasComputedAppSettings a b | a -> b where
 class HasComputedRoutingWeight a b | a -> b where
     computedRoutingWeight :: a -> b
 
+class HasComputedPrimary a b | a -> b where
+    computedPrimary :: a -> b
+
 class HasComputedEndTime a b | a -> b where
     computedEndTime :: a -> b
 
@@ -4871,6 +5303,9 @@ class HasComputedDisplayName a b | a -> b where
 class HasComputedApplicationId a b | a -> b where
     computedApplicationId :: a -> b
 
+class HasComputedLoadBalancerBackendAddressPoolsIds a b | a -> b where
+    computedLoadBalancerBackendAddressPoolsIds :: a -> b
+
 class HasComputedAutoDeleteOnIdle a b | a -> b where
     computedAutoDeleteOnIdle :: a -> b
 
@@ -5003,6 +5438,9 @@ class HasComputedAssignableScopes a b | a -> b where
 class HasComputedAutoInflateEnabled a b | a -> b where
     computedAutoInflateEnabled :: a -> b
 
+class HasComputedNotActions a b | a -> b where
+    computedNotActions :: a -> b
+
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress :: a -> b
 
@@ -5132,6 +5570,9 @@ class HasComputedZones a b | a -> b where
 class HasComputedApiKey a b | a -> b where
     computedApiKey :: a -> b
 
+class HasComputedLoadBalancerInboundNatRulesIds a b | a -> b where
+    computedLoadBalancerInboundNatRulesIds :: a -> b
+
 class HasComputedSourceUri a b | a -> b where
     computedSourceUri :: a -> b
 
@@ -5167,6 +5608,9 @@ class HasComputedWebhookAction a b | a -> b where
 
 class HasComputedRoute a b | a -> b where
     computedRoute :: a -> b
+
+class HasComputedActions a b | a -> b where
+    computedActions :: a -> b
 
 class HasComputedSpendingLimit a b | a -> b where
     computedSpendingLimit :: a -> b
@@ -5264,6 +5708,9 @@ class HasComputedOriginPath a b | a -> b where
 class HasComputedVnetSubnetId a b | a -> b where
     computedVnetSubnetId :: a -> b
 
+class HasComputedApplicationGatewayBackendAddressPoolsIds a b | a -> b where
+    computedApplicationGatewayBackendAddressPoolsIds :: a -> b
+
 class HasComputedHost a b | a -> b where
     computedHost :: a -> b
 
@@ -5326,6 +5773,9 @@ class HasComputedCount a b | a -> b where
 
 class HasComputedApplicationPorts a b | a -> b where
     computedApplicationPorts :: a -> b
+
+class HasComputedCustomData a b | a -> b where
+    computedCustomData :: a -> b
 
 class HasComputedEnableFileEncryption a b | a -> b where
     computedEnableFileEncryption :: a -> b
@@ -5570,6 +6020,9 @@ class HasComputedAccountTier a b | a -> b where
 class HasComputedVaultUri a b | a -> b where
     computedVaultUri :: a -> b
 
+class HasComputedSize a b | a -> b where
+    computedSize :: a -> b
+
 class HasComputedEndpointMonitorStatus a b | a -> b where
     computedEndpointMonitorStatus :: a -> b
 
@@ -5602,6 +6055,9 @@ class HasComputedServicebusEndpoint a b | a -> b where
 
 class HasComputedMaxmemoryReserved a b | a -> b where
     computedMaxmemoryReserved :: a -> b
+
+class HasComputedApplicationSecurityGroupIds a b | a -> b where
+    computedApplicationSecurityGroupIds :: a -> b
 
 class HasComputedDefaultBackendHttpSettingsId a b | a -> b where
     computedDefaultBackendHttpSettingsId :: a -> b
