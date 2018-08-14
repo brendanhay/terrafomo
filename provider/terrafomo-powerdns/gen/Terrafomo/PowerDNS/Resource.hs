@@ -51,23 +51,23 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @powerdns_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/PowerDNS/powerdns_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/powerdns/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
     { _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _records :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @records@ - (Required)
+    -- ^ @records@ - (Required, Forces New)
     --
     , _ttl     :: TF.Attr s P.Integer
-    -- ^ @ttl@ - (Required)
+    -- ^ @ttl@ - (Required, Forces New)
     --
     , _type'   :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     , _zone    :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
