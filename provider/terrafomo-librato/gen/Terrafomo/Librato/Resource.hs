@@ -67,16 +67,16 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @librato_alert@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Librato/librato_alert terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/librato/r/alert.html terraform documentation>
 -- for more information.
 data AlertResource s = AlertResource'
     { _active       :: TF.Attr s P.Bool
     -- ^ @active@ - (Optional)
     --
-    , _attributes   :: TF.Attr s (Attributes s)
+    , _attributes   :: TF.Attr s (AlertAttributes s)
     -- ^ @attributes@ - (Optional)
     --
-    , _condition    :: TF.Attr s [TF.Attr s (Condition s)]
+    , _condition    :: TF.Attr s [TF.Attr s (AlertCondition s)]
     -- ^ @condition@ - (Optional)
     --
     , _description  :: TF.Attr s P.Text
@@ -123,11 +123,11 @@ instance TF.IsValid (AlertResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_attributes"
                   (_attributes
-                      :: AlertResource s -> TF.Attr s (Attributes s))
+                      :: AlertResource s -> TF.Attr s (AlertAttributes s))
                   TF.validator
            P.<> TF.settingsValidator "_condition"
                   (_condition
-                      :: AlertResource s -> TF.Attr s [TF.Attr s (Condition s)])
+                      :: AlertResource s -> TF.Attr s [TF.Attr s (AlertCondition s)])
                   TF.validator
 
 instance P.HasActive (AlertResource s) (TF.Attr s P.Bool) where
@@ -135,14 +135,14 @@ instance P.HasActive (AlertResource s) (TF.Attr s P.Bool) where
         P.lens (_active :: AlertResource s -> TF.Attr s P.Bool)
                (\s a -> s { _active = a } :: AlertResource s)
 
-instance P.HasAttributes (AlertResource s) (TF.Attr s (Attributes s)) where
+instance P.HasAttributes (AlertResource s) (TF.Attr s (AlertAttributes s)) where
     attributes =
-        P.lens (_attributes :: AlertResource s -> TF.Attr s (Attributes s))
+        P.lens (_attributes :: AlertResource s -> TF.Attr s (AlertAttributes s))
                (\s a -> s { _attributes = a } :: AlertResource s)
 
-instance P.HasCondition (AlertResource s) (TF.Attr s [TF.Attr s (Condition s)]) where
+instance P.HasCondition (AlertResource s) (TF.Attr s [TF.Attr s (AlertCondition s)]) where
     condition =
-        P.lens (_condition :: AlertResource s -> TF.Attr s [TF.Attr s (Condition s)])
+        P.lens (_condition :: AlertResource s -> TF.Attr s [TF.Attr s (AlertCondition s)])
                (\s a -> s { _condition = a } :: AlertResource s)
 
 instance P.HasDescription (AlertResource s) (TF.Attr s P.Text) where
@@ -167,10 +167,10 @@ instance P.HasServices (AlertResource s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @librato_metric@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Librato/librato_metric terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/librato/r/metric.html terraform documentation>
 -- for more information.
 data MetricResource s = MetricResource'
-    { _attributes  :: TF.Attr s (Attributes s)
+    { _attributes  :: TF.Attr s (MetricAttributes s)
     -- ^ @attributes@ - (Optional)
     --
     , _composite   :: TF.Attr s P.Text
@@ -224,12 +224,12 @@ instance TF.IsValid (MetricResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_attributes"
                   (_attributes
-                      :: MetricResource s -> TF.Attr s (Attributes s))
+                      :: MetricResource s -> TF.Attr s (MetricAttributes s))
                   TF.validator
 
-instance P.HasAttributes (MetricResource s) (TF.Attr s (Attributes s)) where
+instance P.HasAttributes (MetricResource s) (TF.Attr s (MetricAttributes s)) where
     attributes =
-        P.lens (_attributes :: MetricResource s -> TF.Attr s (Attributes s))
+        P.lens (_attributes :: MetricResource s -> TF.Attr s (MetricAttributes s))
                (\s a -> s { _attributes = a } :: MetricResource s)
 
 instance P.HasComposite (MetricResource s) (TF.Attr s P.Text) where
@@ -264,7 +264,7 @@ instance P.HasType' (MetricResource s) (TF.Attr s P.Text) where
 
 -- | @librato_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Librato/librato_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/librato/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
     { _settings :: TF.Attr s P.Text
@@ -274,7 +274,7 @@ data ServiceResource s = ServiceResource'
     -- ^ @title@ - (Required)
     --
     , _type'    :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -317,11 +317,11 @@ instance P.HasType' (ServiceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @librato_space@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Librato/librato_space terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/librato/r/space.html terraform documentation>
 -- for more information.
 data SpaceResource s = SpaceResource'
     { _name :: TF.Attr s P.Text
@@ -352,11 +352,11 @@ instance P.HasName (SpaceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SpaceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceResource s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @librato_space_chart@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Librato/librato_space_chart terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/librato/r/space_chart.html terraform documentation>
 -- for more information.
 data SpaceChartResource s = SpaceChartResource'
     { _label        :: TF.Attr s P.Text
@@ -375,13 +375,13 @@ data SpaceChartResource s = SpaceChartResource'
     -- ^ @related_space@ - (Optional)
     --
     , _spaceId      :: TF.Attr s P.Integer
-    -- ^ @space_id@ - (Required)
+    -- ^ @space_id@ - (Required, Forces New)
     --
-    , _stream       :: TF.Attr s [TF.Attr s (Stream s)]
+    , _stream       :: TF.Attr s [TF.Attr s (SpaceChartStream s)]
     -- ^ @stream@ - (Optional)
     --
     , _type'        :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -419,7 +419,7 @@ instance TF.IsValid (SpaceChartResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_stream"
                   (_stream
-                      :: SpaceChartResource s -> TF.Attr s [TF.Attr s (Stream s)])
+                      :: SpaceChartResource s -> TF.Attr s [TF.Attr s (SpaceChartStream s)])
                   TF.validator
 
 instance P.HasLabel (SpaceChartResource s) (TF.Attr s P.Text) where
@@ -452,9 +452,9 @@ instance P.HasSpaceId (SpaceChartResource s) (TF.Attr s P.Integer) where
         P.lens (_spaceId :: SpaceChartResource s -> TF.Attr s P.Integer)
                (\s a -> s { _spaceId = a } :: SpaceChartResource s)
 
-instance P.HasStream (SpaceChartResource s) (TF.Attr s [TF.Attr s (Stream s)]) where
+instance P.HasStream (SpaceChartResource s) (TF.Attr s [TF.Attr s (SpaceChartStream s)]) where
     stream =
-        P.lens (_stream :: SpaceChartResource s -> TF.Attr s [TF.Attr s (Stream s)])
+        P.lens (_stream :: SpaceChartResource s -> TF.Attr s [TF.Attr s (SpaceChartStream s)])
                (\s a -> s { _stream = a } :: SpaceChartResource s)
 
 instance P.HasType' (SpaceChartResource s) (TF.Attr s P.Text) where

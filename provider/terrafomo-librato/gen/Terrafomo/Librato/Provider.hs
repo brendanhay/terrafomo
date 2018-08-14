@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Librato@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Librato/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/librato/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _email :: P.Text

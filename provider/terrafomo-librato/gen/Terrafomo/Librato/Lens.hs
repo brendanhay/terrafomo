@@ -29,6 +29,7 @@ module Terrafomo.Librato.Lens
     , HasDisplayUnitsShort (..)
     , HasUnitsShort (..)
     , HasLabel (..)
+    , HasRunbookUrl (..)
     , HasDuration (..)
     , HasRelatedSpace (..)
     , HasDescription (..)
@@ -149,6 +150,12 @@ class HasLabel a b | a -> b where
 
 instance HasLabel a b => HasLabel (TF.Schema l p a) b where
     label = TF.configuration . label
+
+class HasRunbookUrl a b | a -> b where
+    runbookUrl :: P.Lens' a b
+
+instance HasRunbookUrl a b => HasRunbookUrl (TF.Schema l p a) b where
+    runbookUrl = TF.configuration . runbookUrl
 
 class HasDuration a b | a -> b where
     duration :: P.Lens' a b
