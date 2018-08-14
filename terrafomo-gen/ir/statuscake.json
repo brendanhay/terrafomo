@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/statuscake/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -489,6 +490,7 @@
                     "original": "website_url"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/statuscake/r/test.html",
             "name": "TestResource",
             "threaded": true,
             "attributes": [
