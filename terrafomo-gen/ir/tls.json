@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newSubject",
-                "name": "Subject'"
+                "smart": "newCertRequestSubject",
+                "name": "CertRequestSubject'"
             },
             "arguments": [
                 {
@@ -151,15 +151,175 @@
                     "original": "street_address"
                 }
             ],
-            "name": "Subject",
+            "name": "CertRequestSubject",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "Subject s",
-            "original": "subject"
+            "type": "CertRequestSubject s",
+            "original": "cert_request_subject"
+        },
+        {
+            "con": {
+                "smart": "newSelfSignedCertSubject",
+                "name": "SelfSignedCertSubject'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"common_name\" <$> TF.attribute",
+                    "name": "_commonName",
+                    "method": "commonName",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCommonName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "common_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"country\" <$> TF.attribute",
+                    "name": "_country",
+                    "method": "country",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCountry",
+                    "validate": false,
+                    "optional": true,
+                    "original": "country"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"locality\" <$> TF.attribute",
+                    "name": "_locality",
+                    "method": "locality",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLocality",
+                    "validate": false,
+                    "optional": true,
+                    "original": "locality"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"organization\" <$> TF.attribute",
+                    "name": "_organization",
+                    "method": "organization",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrganization",
+                    "validate": false,
+                    "optional": true,
+                    "original": "organization"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"organizational_unit\" <$> TF.attribute",
+                    "name": "_organizationalUnit",
+                    "method": "organizationalUnit",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrganizationalUnit",
+                    "validate": false,
+                    "optional": true,
+                    "original": "organizational_unit"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"postal_code\" <$> TF.attribute",
+                    "name": "_postalCode",
+                    "method": "postalCode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPostalCode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "postal_code"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"province\" <$> TF.attribute",
+                    "name": "_province",
+                    "method": "province",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProvince",
+                    "validate": false,
+                    "optional": true,
+                    "original": "province"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"serial_number\" <$> TF.attribute",
+                    "name": "_serialNumber",
+                    "method": "serialNumber",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSerialNumber",
+                    "validate": false,
+                    "optional": true,
+                    "original": "serial_number"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"street_address\" <$> TF.attribute",
+                    "name": "_streetAddress",
+                    "method": "streetAddress",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasStreetAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "street_address"
+                }
+            ],
+            "name": "SelfSignedCertSubject",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "SelfSignedCertSubject s",
+            "original": "self_signed_cert_subject"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/tls/index.html",
     "dataSources": [
         {
             "con": {
@@ -186,6 +346,7 @@
                     "original": "private_key_pem"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/tls/d/public_key.html",
             "name": "PublicKeyData",
             "threaded": true,
             "attributes": [
@@ -354,13 +515,14 @@
                     "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
+                    "type": "TF.Attr s [TF.Attr s (CertRequestSubject s)]",
                     "class": "HasSubject",
                     "validate": true,
                     "optional": false,
                     "original": "subject"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/tls/r/cert_request.html",
             "name": "CertRequestResource",
             "threaded": true,
             "attributes": [
@@ -428,7 +590,7 @@
                     "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
+                    "type": "TF.Attr s [TF.Attr s (CertRequestSubject s)]",
                     "class": "HasSubject",
                     "validate": true,
                     "optional": false,
@@ -591,6 +753,7 @@
                     "original": "validity_period_hours"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/tls/r/locally_signed_cert.html",
             "name": "LocallySignedCertResource",
             "threaded": true,
             "attributes": [
@@ -818,6 +981,7 @@
                     "original": "rsa_bits"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/tls/r/private_key.html",
             "name": "PrivateKeyResource",
             "threaded": true,
             "attributes": [
@@ -1037,7 +1201,7 @@
                     "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
+                    "type": "TF.Attr s [TF.Attr s (SelfSignedCertSubject s)]",
                     "class": "HasSubject",
                     "validate": true,
                     "optional": false,
@@ -1062,6 +1226,7 @@
                     "original": "validity_period_hours"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/tls/r/self_signed_cert.html",
             "name": "SelfSignedCertResource",
             "threaded": true,
             "attributes": [
@@ -1179,7 +1344,7 @@
                     "name": "_subject",
                     "method": "subject",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Subject s)]",
+                    "type": "TF.Attr s [TF.Attr s (SelfSignedCertSubject s)]",
                     "class": "HasSubject",
                     "validate": true,
                     "optional": false,
