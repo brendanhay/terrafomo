@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newWidget",
-                "name": "Widget'"
+                "smart": "newDashboardWidget",
+                "name": "DashboardWidget'"
             },
             "arguments": [
                 {
@@ -135,7 +135,7 @@
                     "original": "width"
                 }
             ],
-            "name": "Widget",
+            "name": "DashboardWidget",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -205,13 +205,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Widget s",
-            "original": "widget"
+            "type": "DashboardWidget s",
+            "original": "dashboard_widget"
         },
         {
             "con": {
-                "smart": "newCritical",
-                "name": "Critical'"
+                "smart": "newInfraAlertConditionWarning",
+                "name": "InfraAlertConditionWarning'"
             },
             "arguments": [
                 {
@@ -263,7 +263,7 @@
                     "original": "value"
                 }
             ],
-            "name": "Critical",
+            "name": "InfraAlertConditionWarning",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -285,13 +285,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Critical s",
-            "original": "critical"
+            "type": "InfraAlertConditionWarning s",
+            "original": "infra_alert_condition_warning"
         },
         {
             "con": {
-                "smart": "newTerm",
-                "name": "Term'"
+                "smart": "newAlertConditionTerm",
+                "name": "AlertConditionTerm'"
             },
             "arguments": [
                 {
@@ -375,7 +375,7 @@
                     "original": "time_function"
                 }
             ],
-            "name": "Term",
+            "name": "AlertConditionTerm",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -429,13 +429,237 @@
                 }
             ],
             "conflicts": [],
-            "type": "Term s",
-            "original": "term"
+            "type": "AlertConditionTerm s",
+            "original": "alert_condition_term"
         },
         {
             "con": {
-                "smart": "newWarning",
-                "name": "Warning'"
+                "smart": "newNrqlAlertConditionNrql",
+                "name": "NrqlAlertConditionNrql'"
+            },
+            "arguments": [
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                },
+                {
+                    "default": "_sinceValue",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"since_value\" <$> TF.attribute",
+                    "name": "_sinceValue",
+                    "method": "sinceValue",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSinceValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "since_value"
+                }
+            ],
+            "name": "NrqlAlertConditionNrql",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_query",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"query\" <$> TF.attribute",
+                    "name": "_query",
+                    "method": "query",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasQuery",
+                    "validate": false,
+                    "optional": false,
+                    "original": "query"
+                },
+                {
+                    "default": "_sinceValue",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"since_value\" <$> TF.attribute",
+                    "name": "_sinceValue",
+                    "method": "sinceValue",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSinceValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "since_value"
+                }
+            ],
+            "conflicts": [],
+            "type": "NrqlAlertConditionNrql s",
+            "original": "nrql_alert_condition_nrql"
+        },
+        {
+            "con": {
+                "smart": "newNrqlAlertConditionTerm",
+                "name": "NrqlAlertConditionTerm'"
+            },
+            "arguments": [
+                {
+                    "default": "_duration",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
+                    "name": "_duration",
+                    "method": "duration",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDuration",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration"
+                },
+                {
+                    "default": "TF.value \"equal\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"operator\" <$> TF.attribute",
+                    "name": "_operator",
+                    "method": "operator",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOperator",
+                    "validate": false,
+                    "optional": true,
+                    "original": "operator"
+                },
+                {
+                    "default": "TF.value \"critical\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
+                    "name": "_priority",
+                    "method": "priority",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPriority",
+                    "validate": false,
+                    "optional": true,
+                    "original": "priority"
+                },
+                {
+                    "default": "_threshold",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
+                    "name": "_threshold",
+                    "method": "threshold",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasThreshold",
+                    "validate": false,
+                    "optional": false,
+                    "original": "threshold"
+                },
+                {
+                    "default": "_timeFunction",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"time_function\" <$> TF.attribute",
+                    "name": "_timeFunction",
+                    "method": "timeFunction",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimeFunction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "time_function"
+                }
+            ],
+            "name": "NrqlAlertConditionTerm",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_duration",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"duration\" <$> TF.attribute",
+                    "name": "_duration",
+                    "method": "duration",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasDuration",
+                    "validate": false,
+                    "optional": false,
+                    "original": "duration"
+                },
+                {
+                    "default": "_threshold",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
+                    "name": "_threshold",
+                    "method": "threshold",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Double",
+                    "class": "HasThreshold",
+                    "validate": false,
+                    "optional": false,
+                    "original": "threshold"
+                },
+                {
+                    "default": "_timeFunction",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"time_function\" <$> TF.attribute",
+                    "name": "_timeFunction",
+                    "method": "timeFunction",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimeFunction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "time_function"
+                }
+            ],
+            "conflicts": [],
+            "type": "NrqlAlertConditionTerm s",
+            "original": "nrql_alert_condition_term"
+        },
+        {
+            "con": {
+                "smart": "newInfraAlertConditionCritical",
+                "name": "InfraAlertConditionCritical'"
             },
             "arguments": [
                 {
@@ -487,7 +711,7 @@
                     "original": "value"
                 }
             ],
-            "name": "Warning",
+            "name": "InfraAlertConditionCritical",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -509,90 +733,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Warning s",
-            "original": "warning"
-        },
-        {
-            "con": {
-                "smart": "newNrql",
-                "name": "Nrql'"
-            },
-            "arguments": [
-                {
-                    "default": "_query",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": false,
-                    "original": "query"
-                },
-                {
-                    "default": "_sinceValue",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"since_value\" <$> TF.attribute",
-                    "name": "_sinceValue",
-                    "method": "sinceValue",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSinceValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "since_value"
-                }
-            ],
-            "name": "Nrql",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_query",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"query\" <$> TF.attribute",
-                    "name": "_query",
-                    "method": "query",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasQuery",
-                    "validate": false,
-                    "optional": false,
-                    "original": "query"
-                },
-                {
-                    "default": "_sinceValue",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"since_value\" <$> TF.attribute",
-                    "name": "_sinceValue",
-                    "method": "sinceValue",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSinceValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "since_value"
-                }
-            ],
-            "conflicts": [],
-            "type": "Nrql s",
-            "original": "nrql"
+            "type": "InfraAlertConditionCritical s",
+            "original": "infra_alert_condition_critical"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/newrelic/index.html",
     "dataSources": [
         {
             "con": {
@@ -617,6 +762,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/d/application.html",
             "name": "ApplicationData",
             "threaded": true,
             "attributes": [
@@ -698,6 +844,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/d/key_transaction.html",
             "name": "KeyTransactionData",
             "threaded": true,
             "attributes": [],
@@ -780,6 +927,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_channel.html",
             "name": "AlertChannelResource",
             "threaded": true,
             "attributes": [],
@@ -965,7 +1113,7 @@
                     "name": "_term",
                     "method": "term",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s)))",
                     "class": "HasTerm",
                     "validate": true,
                     "optional": false,
@@ -1036,6 +1184,7 @@
                     "original": "violation_close_timer"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_condition.html",
             "name": "AlertConditionResource",
             "threaded": true,
             "attributes": [],
@@ -1114,7 +1263,7 @@
                     "name": "_term",
                     "method": "term",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s)))",
                     "class": "HasTerm",
                     "validate": true,
                     "optional": false,
@@ -1180,6 +1329,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_policy.html",
             "name": "AlertPolicyResource",
             "threaded": true,
             "attributes": [
@@ -1277,6 +1427,7 @@
                     "original": "policy_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/alert_policy_channel.html",
             "name": "AlertPolicyChannelResource",
             "threaded": true,
             "attributes": [],
@@ -1398,13 +1549,14 @@
                     "name": "_widget",
                     "method": "widget",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Widget s)]",
+                    "type": "TF.Attr s [TF.Attr s (DashboardWidget s)]",
                     "class": "HasWidget",
                     "validate": true,
                     "optional": true,
                     "original": "widget"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/dashboard.html",
             "name": "DashboardResource",
             "threaded": true,
             "attributes": [
@@ -1479,7 +1631,7 @@
                     "name": "_critical",
                     "method": "critical",
                     "conflicts": [],
-                    "type": "TF.Attr s (Critical s)",
+                    "type": "TF.Attr s (InfraAlertConditionCritical s)",
                     "class": "HasCritical",
                     "validate": true,
                     "optional": true,
@@ -1607,7 +1759,7 @@
                     "name": "_warning",
                     "method": "warning",
                     "conflicts": [],
-                    "type": "TF.Attr s (Warning s)",
+                    "type": "TF.Attr s (InfraAlertConditionWarning s)",
                     "class": "HasWarning",
                     "validate": true,
                     "optional": true,
@@ -1630,6 +1782,7 @@
                     "original": "where"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/infra_alert_condition.html",
             "name": "InfraAlertConditionResource",
             "threaded": true,
             "attributes": [
@@ -1768,7 +1921,7 @@
                     "name": "_nrql",
                     "method": "nrql",
                     "conflicts": [],
-                    "type": "TF.Attr s (Nrql s)",
+                    "type": "TF.Attr s (NrqlAlertConditionNrql s)",
                     "class": "HasNrql",
                     "validate": true,
                     "optional": false,
@@ -1816,7 +1969,7 @@
                     "name": "_term",
                     "method": "term",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s)))",
                     "class": "HasTerm",
                     "validate": true,
                     "optional": false,
@@ -1839,6 +1992,7 @@
                     "original": "value_function"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/newrelic/r/nrql_alert_condition.html",
             "name": "NrqlAlertConditionResource",
             "threaded": true,
             "attributes": [],
@@ -1869,7 +2023,7 @@
                     "name": "_nrql",
                     "method": "nrql",
                     "conflicts": [],
-                    "type": "TF.Attr s (Nrql s)",
+                    "type": "TF.Attr s (NrqlAlertConditionNrql s)",
                     "class": "HasNrql",
                     "validate": true,
                     "optional": false,
@@ -1901,7 +2055,7 @@
                     "name": "_term",
                     "method": "term",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s)))",
                     "class": "HasTerm",
                     "validate": true,
                     "optional": false,
