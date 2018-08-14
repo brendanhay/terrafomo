@@ -59,15 +59,15 @@ import qualified Terrafomo.Vault.Types    as P
 
 -- | @vault_approle_auth_backend_role_id@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Vault/vault_approle_auth_backend_role_id terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vault/d/approle_auth_backend_role_id.html terraform documentation>
 -- for more information.
 data ApproleAuthBackendRoleIdData s = ApproleAuthBackendRoleIdData'
     { _backend  :: TF.Attr s P.Text
-    -- ^ @backend@ - (Optional)
+    -- ^ @backend@ - (Optional, Forces New)
     -- Unique name of the auth backend to configure.
     --
     , _roleName :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Required)
+    -- ^ @role_name@ - (Required, Forces New)
     -- Name of the role.
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -102,11 +102,11 @@ instance P.HasRoleName (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
                (\s a -> s { _roleName = a } :: ApproleAuthBackendRoleIdData s)
 
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleIdData s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
+    computedRoleId x = TF.compute (TF.refKey x) "role_id"
 
 -- | @vault_aws_access_credentials@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Vault/vault_aws_access_credentials terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vault/d/aws_access_credentials.html terraform documentation>
 -- for more information.
 data AwsAccessCredentialsData s = AwsAccessCredentialsData'
     { _backend :: TF.Attr s P.Text
@@ -162,29 +162,29 @@ instance P.HasType' (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedAccessKey x = TF.compute (TF.refKey x) "_computedAccessKey"
+    computedAccessKey x = TF.compute (TF.refKey x) "access_key"
 
 instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Integer) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseId x = TF.compute (TF.refKey x) "_computedLeaseId"
+    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
 
 instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Bool) where
-    computedLeaseRenewable x = TF.compute (TF.refKey x) "_computedLeaseRenewable"
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"
 
 instance s ~ s' => P.HasComputedSecretKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedSecretKey x = TF.compute (TF.refKey x) "_computedSecretKey"
+    computedSecretKey x = TF.compute (TF.refKey x) "secret_key"
 
 instance s ~ s' => P.HasComputedSecurityToken (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
-    computedSecurityToken x = TF.compute (TF.refKey x) "_computedSecurityToken"
+    computedSecurityToken x = TF.compute (TF.refKey x) "security_token"
 
 -- | @vault_generic_secret@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Vault/vault_generic_secret terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vault/d/generic_secret.html terraform documentation>
 -- for more information.
 data GenericSecretData s = GenericSecretData'
     { _path :: TF.Attr s P.Text
@@ -216,19 +216,19 @@ instance P.HasPath (GenericSecretData s) (TF.Attr s P.Text) where
                (\s a -> s { _path = a } :: GenericSecretData s)
 
 instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedData x = TF.compute (TF.refKey x) "_computedData"
+    computedData x = TF.compute (TF.refKey x) "data"
 
 instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedDataJson x = TF.compute (TF.refKey x) "_computedDataJson"
+    computedDataJson x = TF.compute (TF.refKey x) "data_json"
 
 instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Integer) where
-    computedLeaseDuration x = TF.compute (TF.refKey x) "_computedLeaseDuration"
+    computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseId x = TF.compute (TF.refKey x) "_computedLeaseId"
+    computedLeaseId x = TF.compute (TF.refKey x) "lease_id"
 
 instance s ~ s' => P.HasComputedLeaseRenewable (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Bool) where
-    computedLeaseRenewable x = TF.compute (TF.refKey x) "_computedLeaseRenewable"
+    computedLeaseRenewable x = TF.compute (TF.refKey x) "lease_renewable"
 
 instance s ~ s' => P.HasComputedLeaseStartTime (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
-    computedLeaseStartTime x = TF.compute (TF.refKey x) "_computedLeaseStartTime"
+    computedLeaseStartTime x = TF.compute (TF.refKey x) "lease_start_time"

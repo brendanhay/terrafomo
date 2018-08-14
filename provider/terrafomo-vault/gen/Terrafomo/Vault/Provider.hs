@@ -49,7 +49,7 @@ import qualified Terrafomo.Vault.Types as P
 
 -- | The @Vault@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Vault/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/vault/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _address            :: P.Text
