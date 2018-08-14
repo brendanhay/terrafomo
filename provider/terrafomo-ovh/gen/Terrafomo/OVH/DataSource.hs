@@ -79,14 +79,14 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @ovh_cloud_region@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_cloud_region terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/cloud_region.html terraform documentation>
 -- for more information.
 data CloudRegionData s = CloudRegionData'
     { _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _projectId :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -121,21 +121,21 @@ instance P.HasProjectId (CloudRegionData s) (TF.Attr s P.Text) where
                (\s a -> s { _projectId = a } :: CloudRegionData s)
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
+    computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (Services s)]) where
-    computedServices x = TF.compute (TF.refKey x) "_computedServices"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (CloudRegionServices s)]) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @ovh_cloud_regions@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_cloud_regions terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/cloud_regions.html terraform documentation>
 -- for more information.
 data CloudRegionsData s = CloudRegionsData'
     { _projectId :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -162,11 +162,11 @@ instance P.HasProjectId (CloudRegionsData s) (TF.Attr s P.Text) where
                (\s a -> s { _projectId = a } :: CloudRegionsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (CloudRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNames x = TF.compute (TF.refKey x) "_computedNames"
+    computedNames x = TF.compute (TF.refKey x) "names"
 
 -- | @ovh_domain_zone@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_domain_zone terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/domain_zone.html terraform documentation>
 -- for more information.
 data DomainZoneData s = DomainZoneData'
     { _name :: TF.Attr s P.Text
@@ -197,20 +197,20 @@ instance P.HasName (DomainZoneData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DomainZoneData s)
 
 instance s ~ s' => P.HasComputedDnssecSupported (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Bool) where
-    computedDnssecSupported x = TF.compute (TF.refKey x) "_computedDnssecSupported"
+    computedDnssecSupported x = TF.compute (TF.refKey x) "dnssec_supported"
 
 instance s ~ s' => P.HasComputedHasDnsAnycast (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Bool) where
-    computedHasDnsAnycast x = TF.compute (TF.refKey x) "_computedHasDnsAnycast"
+    computedHasDnsAnycast x = TF.compute (TF.refKey x) "has_dns_anycast"
 
 instance s ~ s' => P.HasComputedLastUpdate (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Text) where
-    computedLastUpdate x = TF.compute (TF.refKey x) "_computedLastUpdate"
+    computedLastUpdate x = TF.compute (TF.refKey x) "last_update"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (DomainZoneData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 -- | @ovh_iploadbalancing@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_iploadbalancing terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/iploadbalancing.html terraform documentation>
 -- for more information.
 data IploadbalancingData s = IploadbalancingData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -228,57 +228,57 @@ instance TF.IsValid (IploadbalancingData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "_computedDisplayName"
+    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
 
 instance s ~ s' => P.HasComputedIpLoadbalancing (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedIpLoadbalancing x = TF.compute (TF.refKey x) "_computedIpLoadbalancing"
+    computedIpLoadbalancing x = TF.compute (TF.refKey x) "ip_loadbalancing"
 
 instance s ~ s' => P.HasComputedIpv4 (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedIpv4 x = TF.compute (TF.refKey x) "_computedIpv4"
+    computedIpv4 x = TF.compute (TF.refKey x) "ipv4"
 
 instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedIpv6 x = TF.compute (TF.refKey x) "_computedIpv6"
+    computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
 
 instance s ~ s' => P.HasComputedMetricsToken (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedMetricsToken x = TF.compute (TF.refKey x) "_computedMetricsToken"
+    computedMetricsToken x = TF.compute (TF.refKey x) "metrics_token"
 
 instance s ~ s' => P.HasComputedOffer (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedOffer x = TF.compute (TF.refKey x) "_computedOffer"
+    computedOffer x = TF.compute (TF.refKey x) "offer"
 
-instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (OrderableZone s)]) where
-    computedOrderableZone x = TF.compute (TF.refKey x) "_computedOrderableZone"
+instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (IploadbalancingOrderableZone s)]) where
+    computedOrderableZone x = TF.compute (TF.refKey x) "orderable_zone"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "_computedServiceName"
+    computedServiceName x = TF.compute (TF.refKey x) "service_name"
 
 instance s ~ s' => P.HasComputedSslConfiguration (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedSslConfiguration x = TF.compute (TF.refKey x) "_computedSslConfiguration"
+    computedSslConfiguration x = TF.compute (TF.refKey x) "ssl_configuration"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedVrackEligibility (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Bool) where
-    computedVrackEligibility x = TF.compute (TF.refKey x) "_computedVrackEligibility"
+    computedVrackEligibility x = TF.compute (TF.refKey x) "vrack_eligibility"
 
 instance s ~ s' => P.HasComputedVrackName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
-    computedVrackName x = TF.compute (TF.refKey x) "_computedVrackName"
+    computedVrackName x = TF.compute (TF.refKey x) "vrack_name"
 
 instance s ~ s' => P.HasComputedZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedZone x = TF.compute (TF.refKey x) "_computedZone"
+    computedZone x = TF.compute (TF.refKey x) "zone"
 
 -- | @ovh_me_paymentmean_bankaccount@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_me_paymentmean_bankaccount terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/me_paymentmean_bankaccount.html terraform documentation>
 -- for more information.
 data MePaymentmeanBankaccountData s = MePaymentmeanBankaccountData'
     { _descriptionRegexp :: TF.Attr s P.Text
-    -- ^ @description_regexp@ - (Optional)
+    -- ^ @description_regexp@ - (Optional, Forces New)
     --
     , _useDefault        :: TF.Attr s P.Bool
-    -- ^ @use_default@ - (Optional)
+    -- ^ @use_default@ - (Optional, Forces New)
     --
     , _useOldest         :: TF.Attr s P.Bool
-    -- ^ @use_oldest@ - (Optional)
+    -- ^ @use_oldest@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -318,30 +318,30 @@ instance P.HasUseOldest (MePaymentmeanBankaccountData s) (TF.Attr s P.Bool) wher
                (\s a -> s { _useOldest = a } :: MePaymentmeanBankaccountData s)
 
 instance s ~ s' => P.HasComputedDefault (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Bool) where
-    computedDefault x = TF.compute (TF.refKey x) "_computedDefault"
+    computedDefault x = TF.compute (TF.refKey x) "default"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @ovh_me_paymentmean_creditcard@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_me_paymentmean_creditcard terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/me_paymentmean_creditcard.html terraform documentation>
 -- for more information.
 data MePaymentmeanCreditcardData s = MePaymentmeanCreditcardData'
     { _descriptionRegexp :: TF.Attr s P.Text
-    -- ^ @description_regexp@ - (Optional)
+    -- ^ @description_regexp@ - (Optional, Forces New)
     --
     , _states            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @states@ - (Optional)
     --
     , _useDefault        :: TF.Attr s P.Bool
-    -- ^ @use_default@ - (Optional)
+    -- ^ @use_default@ - (Optional, Forces New)
     --
     , _useLastToExpire   :: TF.Attr s P.Bool
-    -- ^ @use_last_to_expire@ - (Optional)
+    -- ^ @use_last_to_expire@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -388,24 +388,24 @@ instance P.HasUseLastToExpire (MePaymentmeanCreditcardData s) (TF.Attr s P.Bool)
                (\s a -> s { _useLastToExpire = a } :: MePaymentmeanCreditcardData s)
 
 instance s ~ s' => P.HasComputedDefault (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Bool) where
-    computedDefault x = TF.compute (TF.refKey x) "_computedDefault"
+    computedDefault x = TF.compute (TF.refKey x) "default"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 -- | @ovh_publiccloud_region@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_publiccloud_region terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/publiccloud_region.html terraform documentation>
 -- for more information.
 data PubliccloudRegionData s = PubliccloudRegionData'
     { _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _projectId :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -440,21 +440,21 @@ instance P.HasProjectId (PubliccloudRegionData s) (TF.Attr s P.Text) where
                (\s a -> s { _projectId = a } :: PubliccloudRegionData s)
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
+    computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
+    computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (Services s)]) where
-    computedServices x = TF.compute (TF.refKey x) "_computedServices"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (PubliccloudRegionServices s)]) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @ovh_publiccloud_regions@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OVH/ovh_publiccloud_regions terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ovh/d/publiccloud_regions.html terraform documentation>
 -- for more information.
 data PubliccloudRegionsData s = PubliccloudRegionsData'
     { _projectId :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -481,4 +481,4 @@ instance P.HasProjectId (PubliccloudRegionsData s) (TF.Attr s P.Text) where
                (\s a -> s { _projectId = a } :: PubliccloudRegionsData s)
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (PubliccloudRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNames x = TF.compute (TF.refKey x) "_computedNames"
+    computedNames x = TF.compute (TF.refKey x) "names"
