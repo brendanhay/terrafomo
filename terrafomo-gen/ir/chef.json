@@ -592,24 +592,6 @@
                 "original": "key_material"
             },
             {
-                "default": "P.Nothing",
-                "computed": false,
-                "required": false,
-                "help": [
-                    "PEM-formatted private key for client authentication."
-                ],
-                "forceNew": false,
-                "encoder": "TF.assign \"private_key_pem\" <$>",
-                "name": "_privateKeyPem",
-                "method": "privateKeyPem",
-                "conflicts": [],
-                "type": "P.Maybe P.Text",
-                "class": "HasPrivateKeyPem",
-                "validate": false,
-                "optional": true,
-                "original": "private_key_pem"
-            },
-            {
                 "default": "_serverUrl",
                 "computed": false,
                 "required": true,
