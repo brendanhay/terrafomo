@@ -64,9 +64,6 @@ data RequiredPullRequestReviews s = RequiredPullRequestReviews'
     , _dismissalUsers          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @dismissal_users@ - (Optional)
     --
-    , _includeAdmins           :: TF.Attr s P.Bool
-    -- ^ @include_admins@ - (Optional)
-    --
     , _requireCodeOwnerReviews :: TF.Attr s P.Bool
     -- ^ @require_code_owner_reviews@ - (Optional)
     --
@@ -79,7 +76,6 @@ newRequiredPullRequestReviews =
         { _dismissStaleReviews = TF.value P.False
         , _dismissalTeams = TF.Nil
         , _dismissalUsers = TF.Nil
-        , _includeAdmins = TF.value P.False
         , _requireCodeOwnerReviews = TF.Nil
         }
 
@@ -90,7 +86,6 @@ instance TF.IsObject (RequiredPullRequestReviews s) where
         [ TF.assign "dismiss_stale_reviews" <$> TF.attribute _dismissStaleReviews
         , TF.assign "dismissal_teams" <$> TF.attribute _dismissalTeams
         , TF.assign "dismissal_users" <$> TF.attribute _dismissalUsers
-        , TF.assign "include_admins" <$> TF.attribute _includeAdmins
         , TF.assign "require_code_owner_reviews" <$> TF.attribute _requireCodeOwnerReviews
         ]
 
@@ -111,11 +106,6 @@ instance P.HasDismissalUsers (RequiredPullRequestReviews s) (TF.Attr s [TF.Attr 
     dismissalUsers =
         P.lens (_dismissalUsers :: RequiredPullRequestReviews s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _dismissalUsers = a } :: RequiredPullRequestReviews s)
-
-instance P.HasIncludeAdmins (RequiredPullRequestReviews s) (TF.Attr s P.Bool) where
-    includeAdmins =
-        P.lens (_includeAdmins :: RequiredPullRequestReviews s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeAdmins = a } :: RequiredPullRequestReviews s)
 
 instance P.HasRequireCodeOwnerReviews (RequiredPullRequestReviews s) (TF.Attr s P.Bool) where
     requireCodeOwnerReviews =
@@ -163,13 +153,10 @@ instance P.HasUsers (Restrictions s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @required_status_checks@ nested settings.
 data RequiredStatusChecks s = RequiredStatusChecks'
-    { _contexts      :: TF.Attr s [TF.Attr s P.Text]
+    { _contexts :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @contexts@ - (Optional)
     --
-    , _includeAdmins :: TF.Attr s P.Bool
-    -- ^ @include_admins@ - (Optional)
-    --
-    , _strict        :: TF.Attr s P.Bool
+    , _strict   :: TF.Attr s P.Bool
     -- ^ @strict@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -179,7 +166,6 @@ newRequiredStatusChecks
 newRequiredStatusChecks =
     RequiredStatusChecks'
         { _contexts = TF.Nil
-        , _includeAdmins = TF.value P.False
         , _strict = TF.value P.False
         }
 
@@ -188,7 +174,6 @@ instance TF.IsValue  (RequiredStatusChecks s)
 instance TF.IsObject (RequiredStatusChecks s) where
     toObject RequiredStatusChecks'{..} = P.catMaybes
         [ TF.assign "contexts" <$> TF.attribute _contexts
-        , TF.assign "include_admins" <$> TF.attribute _includeAdmins
         , TF.assign "strict" <$> TF.attribute _strict
         ]
 
@@ -199,11 +184,6 @@ instance P.HasContexts (RequiredStatusChecks s) (TF.Attr s [TF.Attr s P.Text]) w
     contexts =
         P.lens (_contexts :: RequiredStatusChecks s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _contexts = a } :: RequiredStatusChecks s)
-
-instance P.HasIncludeAdmins (RequiredStatusChecks s) (TF.Attr s P.Bool) where
-    includeAdmins =
-        P.lens (_includeAdmins :: RequiredStatusChecks s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeAdmins = a } :: RequiredStatusChecks s)
 
 instance P.HasStrict (RequiredStatusChecks s) (TF.Attr s P.Bool) where
     strict =

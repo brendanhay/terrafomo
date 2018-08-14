@@ -40,7 +40,6 @@ module Terrafomo.GitHub.Lens
     , HasInsecure (..)
     , HasConfiguration (..)
     , HasHasWiki (..)
-    , HasIncludeAdmins (..)
     , HasParentTeamId (..)
     , HasReadOnly (..)
     , HasPermission (..)
@@ -272,12 +271,6 @@ class HasHasWiki a b | a -> b where
 
 instance HasHasWiki a b => HasHasWiki (TF.Schema l p a) b where
     hasWiki = TF.configuration . hasWiki
-
-class HasIncludeAdmins a b | a -> b where
-    includeAdmins :: P.Lens' a b
-
-instance HasIncludeAdmins a b => HasIncludeAdmins (TF.Schema l p a) b where
-    includeAdmins = TF.configuration . includeAdmins
 
 class HasParentTeamId a b | a -> b where
     parentTeamId :: P.Lens' a b
