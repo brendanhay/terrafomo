@@ -16216,7 +16216,7 @@
                     "original": "acl"
                 },
                 {
-                    "default": "TF.value \"tf-oss-bucket-20180814074752093700000002\"",
+                    "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [],
@@ -19505,7 +19505,7 @@
                     "original": "internet_charge_type"
                 },
                 {
-                    "default": "TF.value \"tf-lb-20180814074752093700000001\"",
+                    "default": "TF.value \"tf-lb-20180814091648170700000001\"",
                     "computed": false,
                     "required": false,
                     "help": [],
