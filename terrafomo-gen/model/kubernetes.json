@@ -198,7 +198,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "config_map_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -213,7 +213,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -266,7 +266,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -367,7 +367,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "horizontal_pod_autoscaler_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -382,7 +382,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -435,7 +435,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -531,7 +531,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "horizontal_pod_autoscaler_spec",
             "schemas": [
               {
                 "name": "max_replicas",
@@ -573,7 +573,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "scale_target_ref",
+                  "name": "spec_scale_target_ref",
                   "schemas": [
                     {
                       "name": "api_version",
@@ -651,7 +651,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "limit_range_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -666,7 +666,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -719,7 +719,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -815,7 +815,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "limit_range_spec",
             "schemas": [
               {
                 "name": "limit",
@@ -830,7 +830,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "limit",
+                  "name": "spec_limit",
                   "schemas": [
                     {
                       "name": "default",
@@ -934,7 +934,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "namespace_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -949,7 +949,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1002,7 +1002,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1089,7 +1089,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "persistent_volume_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -1104,7 +1104,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1142,7 +1142,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1222,7 +1222,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "spec",
+            "name": "persistent_volume_spec",
             "schemas": [
               {
                 "name": "access_modes",
@@ -1237,7 +1237,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "access_modes",
+                  "name": "spec_access_modes",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1289,7 +1289,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "persistent_volume_source",
+                  "name": "spec_persistent_volume_source",
                   "schemas": [
                     {
                       "name": "aws_elastic_block_store",
@@ -1304,7 +1304,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "aws_elastic_block_store",
+                        "name": "persistent_volume_source_aws_elastic_block_store",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -1374,7 +1374,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "azure_disk",
+                        "name": "persistent_volume_source_azure_disk",
                         "schemas": [
                           {
                             "name": "caching_mode",
@@ -1458,7 +1458,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "azure_file",
+                        "name": "persistent_volume_source_azure_file",
                         "schemas": [
                           {
                             "name": "read_only",
@@ -1515,7 +1515,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "ceph_fs",
+                        "name": "persistent_volume_source_ceph_fs",
                         "schemas": [
                           {
                             "name": "monitors",
@@ -1530,7 +1530,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "monitors",
+                              "name": "ceph_fs_monitors",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -1594,7 +1594,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret_ref",
+                              "name": "ceph_fs_secret_ref",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -1641,7 +1641,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "cinder",
+                        "name": "persistent_volume_source_cinder",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -1698,7 +1698,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "fc",
+                        "name": "persistent_volume_source_fc",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -1752,7 +1752,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "target_ww_ns",
+                              "name": "fc_target_ww_ns",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -1780,7 +1780,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "flex_volume",
+                        "name": "persistent_volume_source_flex_volume",
                         "schemas": [
                           {
                             "name": "driver",
@@ -1847,7 +1847,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret_ref",
+                              "name": "flex_volume_secret_ref",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -1881,7 +1881,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "flocker",
+                        "name": "persistent_volume_source_flocker",
                         "schemas": [
                           {
                             "name": "dataset_name",
@@ -1925,7 +1925,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "gce_persistent_disk",
+                        "name": "persistent_volume_source_gce_persistent_disk",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -1995,7 +1995,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "glusterfs",
+                        "name": "persistent_volume_source_glusterfs",
                         "schemas": [
                           {
                             "name": "endpoints_name",
@@ -2052,7 +2052,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "host_path",
+                        "name": "persistent_volume_source_host_path",
                         "schemas": [
                           {
                             "name": "path",
@@ -2083,7 +2083,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "iscsi",
+                        "name": "persistent_volume_source_iscsi",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -2180,7 +2180,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "nfs",
+                        "name": "persistent_volume_source_nfs",
                         "schemas": [
                           {
                             "name": "path",
@@ -2237,7 +2237,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "photon_persistent_disk",
+                        "name": "persistent_volume_source_photon_persistent_disk",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -2281,7 +2281,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "quobyte",
+                        "name": "persistent_volume_source_quobyte",
                         "schemas": [
                           {
                             "name": "group",
@@ -2364,7 +2364,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "rbd",
+                        "name": "persistent_volume_source_rbd",
                         "schemas": [
                           {
                             "name": "ceph_monitors",
@@ -2379,7 +2379,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "ceph_monitors",
+                              "name": "rbd_ceph_monitors",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -2485,7 +2485,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret_ref",
+                              "name": "rbd_secret_ref",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -2519,7 +2519,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "vsphere_volume",
+                        "name": "persistent_volume_source_vsphere_volume",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -2587,7 +2587,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "persistent_volume_claim_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -2602,7 +2602,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2655,7 +2655,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2751,7 +2751,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "persistent_volume_claim_spec",
             "schemas": [
               {
                 "name": "access_modes",
@@ -2766,7 +2766,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "access_modes",
+                  "name": "spec_access_modes",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2791,7 +2791,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "resources",
+                  "name": "spec_resources",
                   "schemas": [
                     {
                       "name": "limits",
@@ -2835,7 +2835,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "selector",
+                  "name": "spec_selector",
                   "schemas": [
                     {
                       "name": "match_expressions",
@@ -2850,7 +2850,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "match_expressions",
+                        "name": "selector_match_expressions",
                         "schemas": [
                           {
                             "name": "key",
@@ -2891,7 +2891,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "values",
+                              "name": "match_expressions_values",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -2986,7 +2986,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "pod_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -3001,7 +3001,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3054,7 +3054,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3150,7 +3150,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "pod_spec",
             "schemas": [
               {
                 "name": "active_deadline_seconds",
@@ -3178,7 +3178,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "container",
+                  "name": "spec_container",
                   "schemas": [
                     {
                       "name": "args",
@@ -3193,7 +3193,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "args",
+                        "name": "container_args",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -3218,7 +3218,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "command",
+                        "name": "container_command",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -3243,7 +3243,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "env",
+                        "name": "container_env",
                         "schemas": [
                           {
                             "name": "name",
@@ -3284,7 +3284,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "value_from",
+                              "name": "env_value_from",
                               "schemas": [
                                 {
                                   "name": "config_map_key_ref",
@@ -3299,7 +3299,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "config_map_key_ref",
+                                    "name": "value_from_config_map_key_ref",
                                     "schemas": [
                                       {
                                         "name": "key",
@@ -3343,7 +3343,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "field_ref",
+                                    "name": "value_from_field_ref",
                                     "schemas": [
                                       {
                                         "name": "api_version",
@@ -3388,7 +3388,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "resource_field_ref",
+                                    "name": "value_from_resource_field_ref",
                                     "schemas": [
                                       {
                                         "name": "container_name",
@@ -3431,7 +3431,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "secret_key_ref",
+                                    "name": "value_from_secret_key_ref",
                                     "schemas": [
                                       {
                                         "name": "key",
@@ -3507,7 +3507,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "lifecycle",
+                        "name": "container_lifecycle",
                         "schemas": [
                           {
                             "name": "post_start",
@@ -3522,7 +3522,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "post_start",
+                              "name": "lifecycle_post_start",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -3537,7 +3537,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "post_start_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -3552,7 +3552,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -3580,7 +3580,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "post_start_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -3608,7 +3608,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -3695,7 +3695,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "post_start_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -3729,7 +3729,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "pre_stop",
+                              "name": "lifecycle_pre_stop",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -3744,7 +3744,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "pre_stop_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -3759,7 +3759,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -3787,7 +3787,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "pre_stop_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -3815,7 +3815,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -3902,7 +3902,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "pre_stop_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -3939,7 +3939,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "liveness_probe",
+                        "name": "container_liveness_probe",
                         "schemas": [
                           {
                             "name": "exec",
@@ -3954,7 +3954,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "exec",
+                              "name": "liveness_probe_exec",
                               "schemas": [
                                 {
                                   "name": "command",
@@ -3969,7 +3969,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "command",
+                                    "name": "exec_command",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -4011,7 +4011,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "http_get",
+                              "name": "liveness_probe_http_get",
                               "schemas": [
                                 {
                                   "name": "host",
@@ -4039,7 +4039,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "http_header",
+                                    "name": "http_get_http_header",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -4167,7 +4167,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "tcp_socket",
+                              "name": "liveness_probe_tcp_socket",
                               "schemas": [
                                 {
                                   "name": "port",
@@ -4228,7 +4228,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "port",
+                        "name": "container_port",
                         "schemas": [
                           {
                             "name": "container_port",
@@ -4312,7 +4312,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "readiness_probe",
+                        "name": "container_readiness_probe",
                         "schemas": [
                           {
                             "name": "exec",
@@ -4327,7 +4327,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "exec",
+                              "name": "readiness_probe_exec",
                               "schemas": [
                                 {
                                   "name": "command",
@@ -4342,7 +4342,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "command",
+                                    "name": "exec_command",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -4384,7 +4384,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "http_get",
+                              "name": "readiness_probe_http_get",
                               "schemas": [
                                 {
                                   "name": "host",
@@ -4412,7 +4412,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "http_header",
+                                    "name": "http_get_http_header",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -4540,7 +4540,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "tcp_socket",
+                              "name": "readiness_probe_tcp_socket",
                               "schemas": [
                                 {
                                   "name": "port",
@@ -4588,7 +4588,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "resources",
+                        "name": "container_resources",
                         "schemas": [
                           {
                             "name": "limits",
@@ -4603,7 +4603,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "limits",
+                              "name": "resources_limits",
                               "schemas": [
                                 {
                                   "name": "cpu",
@@ -4644,7 +4644,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "requests",
+                              "name": "resources_requests",
                               "schemas": [
                                 {
                                   "name": "cpu",
@@ -4689,7 +4689,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "security_context",
+                        "name": "container_security_context",
                         "schemas": [
                           {
                             "name": "capabilities",
@@ -4704,7 +4704,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "capabilities",
+                              "name": "security_context_capabilities",
                               "schemas": [
                                 {
                                   "name": "add",
@@ -4719,7 +4719,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "add",
+                                    "name": "capabilities_add",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -4744,7 +4744,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "drop",
+                                    "name": "capabilities_drop",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -4826,7 +4826,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "se_linux_options",
+                              "name": "security_context_se_linux_options",
                               "schemas": [
                                 {
                                   "name": "level",
@@ -4955,7 +4955,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "volume_mount",
+                        "name": "container_volume_mount",
                         "schemas": [
                           {
                             "name": "mount_path",
@@ -5111,7 +5111,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "image_pull_secrets",
+                  "name": "spec_image_pull_secrets",
                   "schemas": [
                     {
                       "name": "name",
@@ -5142,7 +5142,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "init_container",
+                  "name": "spec_init_container",
                   "schemas": [
                     {
                       "name": "args",
@@ -5157,7 +5157,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "args",
+                        "name": "init_container_args",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -5182,7 +5182,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "command",
+                        "name": "init_container_command",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -5207,7 +5207,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "env",
+                        "name": "init_container_env",
                         "schemas": [
                           {
                             "name": "name",
@@ -5248,7 +5248,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "value_from",
+                              "name": "env_value_from",
                               "schemas": [
                                 {
                                   "name": "config_map_key_ref",
@@ -5263,7 +5263,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "config_map_key_ref",
+                                    "name": "value_from_config_map_key_ref",
                                     "schemas": [
                                       {
                                         "name": "key",
@@ -5307,7 +5307,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "field_ref",
+                                    "name": "value_from_field_ref",
                                     "schemas": [
                                       {
                                         "name": "api_version",
@@ -5352,7 +5352,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "resource_field_ref",
+                                    "name": "value_from_resource_field_ref",
                                     "schemas": [
                                       {
                                         "name": "container_name",
@@ -5395,7 +5395,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "secret_key_ref",
+                                    "name": "value_from_secret_key_ref",
                                     "schemas": [
                                       {
                                         "name": "key",
@@ -5471,7 +5471,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "lifecycle",
+                        "name": "init_container_lifecycle",
                         "schemas": [
                           {
                             "name": "post_start",
@@ -5486,7 +5486,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "post_start",
+                              "name": "lifecycle_post_start",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -5501,7 +5501,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "post_start_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -5516,7 +5516,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -5544,7 +5544,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "post_start_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -5572,7 +5572,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -5659,7 +5659,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "post_start_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -5693,7 +5693,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "pre_stop",
+                              "name": "lifecycle_pre_stop",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -5708,7 +5708,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "pre_stop_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -5723,7 +5723,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -5751,7 +5751,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "pre_stop_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -5779,7 +5779,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -5866,7 +5866,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "pre_stop_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -5903,7 +5903,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "liveness_probe",
+                        "name": "init_container_liveness_probe",
                         "schemas": [
                           {
                             "name": "exec",
@@ -5918,7 +5918,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "exec",
+                              "name": "liveness_probe_exec",
                               "schemas": [
                                 {
                                   "name": "command",
@@ -5933,7 +5933,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "command",
+                                    "name": "exec_command",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -5975,7 +5975,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "http_get",
+                              "name": "liveness_probe_http_get",
                               "schemas": [
                                 {
                                   "name": "host",
@@ -6003,7 +6003,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "http_header",
+                                    "name": "http_get_http_header",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -6131,7 +6131,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "tcp_socket",
+                              "name": "liveness_probe_tcp_socket",
                               "schemas": [
                                 {
                                   "name": "port",
@@ -6192,7 +6192,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "port",
+                        "name": "init_container_port",
                         "schemas": [
                           {
                             "name": "container_port",
@@ -6276,7 +6276,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "readiness_probe",
+                        "name": "init_container_readiness_probe",
                         "schemas": [
                           {
                             "name": "exec",
@@ -6291,7 +6291,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "exec",
+                              "name": "readiness_probe_exec",
                               "schemas": [
                                 {
                                   "name": "command",
@@ -6306,7 +6306,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "command",
+                                    "name": "exec_command",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -6348,7 +6348,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "http_get",
+                              "name": "readiness_probe_http_get",
                               "schemas": [
                                 {
                                   "name": "host",
@@ -6376,7 +6376,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "http_header",
+                                    "name": "http_get_http_header",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -6504,7 +6504,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "tcp_socket",
+                              "name": "readiness_probe_tcp_socket",
                               "schemas": [
                                 {
                                   "name": "port",
@@ -6552,7 +6552,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "resources",
+                        "name": "init_container_resources",
                         "schemas": [
                           {
                             "name": "limits",
@@ -6567,7 +6567,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "limits",
+                              "name": "resources_limits",
                               "schemas": [
                                 {
                                   "name": "cpu",
@@ -6608,7 +6608,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "requests",
+                              "name": "resources_requests",
                               "schemas": [
                                 {
                                   "name": "cpu",
@@ -6653,7 +6653,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "security_context",
+                        "name": "init_container_security_context",
                         "schemas": [
                           {
                             "name": "capabilities",
@@ -6668,7 +6668,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "capabilities",
+                              "name": "security_context_capabilities",
                               "schemas": [
                                 {
                                   "name": "add",
@@ -6683,7 +6683,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "add",
+                                    "name": "capabilities_add",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -6708,7 +6708,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "drop",
+                                    "name": "capabilities_drop",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -6790,7 +6790,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "se_linux_options",
+                              "name": "security_context_se_linux_options",
                               "schemas": [
                                 {
                                   "name": "level",
@@ -6919,7 +6919,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "volume_mount",
+                        "name": "init_container_volume_mount",
                         "schemas": [
                           {
                             "name": "mount_path",
@@ -7046,7 +7046,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "security_context",
+                  "name": "spec_security_context",
                   "schemas": [
                     {
                       "name": "fs_group",
@@ -7100,7 +7100,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "se_linux_options",
+                        "name": "security_context_se_linux_options",
                         "schemas": [
                           {
                             "name": "level",
@@ -7170,7 +7170,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "supplemental_groups",
+                        "name": "security_context_supplemental_groups",
                         "type": "TypeInt",
                         "conflictsWith": [],
                         "optional": false,
@@ -7238,7 +7238,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "volume",
+                  "name": "spec_volume",
                   "schemas": [
                     {
                       "name": "aws_elastic_block_store",
@@ -7253,7 +7253,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "aws_elastic_block_store",
+                        "name": "volume_aws_elastic_block_store",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -7323,7 +7323,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "azure_disk",
+                        "name": "volume_azure_disk",
                         "schemas": [
                           {
                             "name": "caching_mode",
@@ -7407,7 +7407,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "azure_file",
+                        "name": "volume_azure_file",
                         "schemas": [
                           {
                             "name": "read_only",
@@ -7464,7 +7464,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "ceph_fs",
+                        "name": "volume_ceph_fs",
                         "schemas": [
                           {
                             "name": "monitors",
@@ -7479,7 +7479,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "monitors",
+                              "name": "ceph_fs_monitors",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -7543,7 +7543,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret_ref",
+                              "name": "ceph_fs_secret_ref",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -7590,7 +7590,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "cinder",
+                        "name": "volume_cinder",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -7647,7 +7647,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "config_map",
+                        "name": "volume_config_map",
                         "schemas": [
                           {
                             "name": "default_mode",
@@ -7675,7 +7675,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "items",
+                              "name": "config_map_items",
                               "schemas": [
                                 {
                                   "name": "key",
@@ -7748,7 +7748,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "downward_api",
+                        "name": "volume_downward_api",
                         "schemas": [
                           {
                             "name": "default_mode",
@@ -7776,7 +7776,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "items",
+                              "name": "downward_api_items",
                               "schemas": [
                                 {
                                   "name": "field_ref",
@@ -7791,7 +7791,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "field_ref",
+                                    "name": "items_field_ref",
                                     "schemas": [
                                       {
                                         "name": "api_version",
@@ -7862,7 +7862,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "resource_field_ref",
+                                    "name": "items_resource_field_ref",
                                     "schemas": [
                                       {
                                         "name": "container_name",
@@ -7923,7 +7923,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "empty_dir",
+                        "name": "volume_empty_dir",
                         "schemas": [
                           {
                             "name": "medium",
@@ -7954,7 +7954,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "fc",
+                        "name": "volume_fc",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -8008,7 +8008,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "target_ww_ns",
+                              "name": "fc_target_ww_ns",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -8036,7 +8036,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "flex_volume",
+                        "name": "volume_flex_volume",
                         "schemas": [
                           {
                             "name": "driver",
@@ -8103,7 +8103,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret_ref",
+                              "name": "flex_volume_secret_ref",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -8137,7 +8137,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "flocker",
+                        "name": "volume_flocker",
                         "schemas": [
                           {
                             "name": "dataset_name",
@@ -8181,7 +8181,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "gce_persistent_disk",
+                        "name": "volume_gce_persistent_disk",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -8251,7 +8251,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "git_repo",
+                        "name": "volume_git_repo",
                         "schemas": [
                           {
                             "name": "directory",
@@ -8308,7 +8308,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "glusterfs",
+                        "name": "volume_glusterfs",
                         "schemas": [
                           {
                             "name": "endpoints_name",
@@ -8365,7 +8365,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "host_path",
+                        "name": "volume_host_path",
                         "schemas": [
                           {
                             "name": "path",
@@ -8396,7 +8396,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "iscsi",
+                        "name": "volume_iscsi",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -8506,7 +8506,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "nfs",
+                        "name": "volume_nfs",
                         "schemas": [
                           {
                             "name": "path",
@@ -8563,7 +8563,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "persistent_volume_claim",
+                        "name": "volume_persistent_volume_claim",
                         "schemas": [
                           {
                             "name": "claim_name",
@@ -8608,7 +8608,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "photon_persistent_disk",
+                        "name": "volume_photon_persistent_disk",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -8652,7 +8652,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "quobyte",
+                        "name": "volume_quobyte",
                         "schemas": [
                           {
                             "name": "group",
@@ -8735,7 +8735,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "rbd",
+                        "name": "volume_rbd",
                         "schemas": [
                           {
                             "name": "ceph_monitors",
@@ -8750,7 +8750,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "ceph_monitors",
+                              "name": "rbd_ceph_monitors",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -8856,7 +8856,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret_ref",
+                              "name": "rbd_secret_ref",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -8890,7 +8890,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "secret",
+                        "name": "volume_secret",
                         "schemas": [
                           {
                             "name": "default_mode",
@@ -8919,7 +8919,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "items",
+                              "name": "secret_items",
                               "schemas": [
                                 {
                                   "name": "key",
@@ -9005,7 +9005,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "vsphere_volume",
+                        "name": "volume_vsphere_volume",
                         "schemas": [
                           {
                             "name": "fs_type",
@@ -9064,7 +9064,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "replication_controller_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -9079,7 +9079,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -9132,7 +9132,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -9228,7 +9228,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "replication_controller_spec",
             "schemas": [
               {
                 "name": "min_ready_seconds",
@@ -9284,7 +9284,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "template",
+                  "name": "spec_template",
                   "schemas": [
                     {
                       "name": "active_deadline_seconds",
@@ -9312,7 +9312,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "container",
+                        "name": "template_container",
                         "schemas": [
                           {
                             "name": "args",
@@ -9327,7 +9327,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "args",
+                              "name": "container_args",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -9352,7 +9352,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "command",
+                              "name": "container_command",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -9377,7 +9377,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "env",
+                              "name": "container_env",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -9418,7 +9418,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "value_from",
+                                    "name": "env_value_from",
                                     "schemas": [
                                       {
                                         "name": "config_map_key_ref",
@@ -9433,7 +9433,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "config_map_key_ref",
+                                          "name": "value_from_config_map_key_ref",
                                           "schemas": [
                                             {
                                               "name": "key",
@@ -9477,7 +9477,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "field_ref",
+                                          "name": "value_from_field_ref",
                                           "schemas": [
                                             {
                                               "name": "api_version",
@@ -9522,7 +9522,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "resource_field_ref",
+                                          "name": "value_from_resource_field_ref",
                                           "schemas": [
                                             {
                                               "name": "container_name",
@@ -9565,7 +9565,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "secret_key_ref",
+                                          "name": "value_from_secret_key_ref",
                                           "schemas": [
                                             {
                                               "name": "key",
@@ -9641,7 +9641,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "lifecycle",
+                              "name": "container_lifecycle",
                               "schemas": [
                                 {
                                   "name": "post_start",
@@ -9656,7 +9656,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "post_start",
+                                    "name": "lifecycle_post_start",
                                     "schemas": [
                                       {
                                         "name": "exec",
@@ -9671,7 +9671,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "exec",
+                                          "name": "post_start_exec",
                                           "schemas": [
                                             {
                                               "name": "command",
@@ -9686,7 +9686,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "schema": {
-                                                "name": "command",
+                                                "name": "exec_command",
                                                 "type": "TypeString",
                                                 "conflictsWith": [],
                                                 "optional": false,
@@ -9714,7 +9714,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "http_get",
+                                          "name": "post_start_http_get",
                                           "schemas": [
                                             {
                                               "name": "host",
@@ -9742,7 +9742,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "resource": {
-                                                "name": "http_header",
+                                                "name": "http_get_http_header",
                                                 "schemas": [
                                                   {
                                                     "name": "name",
@@ -9829,7 +9829,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "tcp_socket",
+                                          "name": "post_start_tcp_socket",
                                           "schemas": [
                                             {
                                               "name": "port",
@@ -9863,7 +9863,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "pre_stop",
+                                    "name": "lifecycle_pre_stop",
                                     "schemas": [
                                       {
                                         "name": "exec",
@@ -9878,7 +9878,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "exec",
+                                          "name": "pre_stop_exec",
                                           "schemas": [
                                             {
                                               "name": "command",
@@ -9893,7 +9893,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "schema": {
-                                                "name": "command",
+                                                "name": "exec_command",
                                                 "type": "TypeString",
                                                 "conflictsWith": [],
                                                 "optional": false,
@@ -9921,7 +9921,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "http_get",
+                                          "name": "pre_stop_http_get",
                                           "schemas": [
                                             {
                                               "name": "host",
@@ -9949,7 +9949,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "resource": {
-                                                "name": "http_header",
+                                                "name": "http_get_http_header",
                                                 "schemas": [
                                                   {
                                                     "name": "name",
@@ -10036,7 +10036,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "tcp_socket",
+                                          "name": "pre_stop_tcp_socket",
                                           "schemas": [
                                             {
                                               "name": "port",
@@ -10073,7 +10073,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "liveness_probe",
+                              "name": "container_liveness_probe",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -10088,7 +10088,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "liveness_probe_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -10103,7 +10103,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -10145,7 +10145,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "liveness_probe_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -10173,7 +10173,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -10301,7 +10301,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "liveness_probe_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -10362,7 +10362,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "port",
+                              "name": "container_port",
                               "schemas": [
                                 {
                                   "name": "container_port",
@@ -10446,7 +10446,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "readiness_probe",
+                              "name": "container_readiness_probe",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -10461,7 +10461,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "readiness_probe_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -10476,7 +10476,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -10518,7 +10518,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "readiness_probe_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -10546,7 +10546,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -10674,7 +10674,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "readiness_probe_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -10722,7 +10722,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "resources",
+                              "name": "container_resources",
                               "schemas": [
                                 {
                                   "name": "limits",
@@ -10737,7 +10737,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "limits",
+                                    "name": "resources_limits",
                                     "schemas": [
                                       {
                                         "name": "cpu",
@@ -10778,7 +10778,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "requests",
+                                    "name": "resources_requests",
                                     "schemas": [
                                       {
                                         "name": "cpu",
@@ -10823,7 +10823,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "security_context",
+                              "name": "container_security_context",
                               "schemas": [
                                 {
                                   "name": "capabilities",
@@ -10838,7 +10838,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "capabilities",
+                                    "name": "security_context_capabilities",
                                     "schemas": [
                                       {
                                         "name": "add",
@@ -10853,7 +10853,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "add",
+                                          "name": "capabilities_add",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -10878,7 +10878,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "drop",
+                                          "name": "capabilities_drop",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -10960,7 +10960,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "se_linux_options",
+                                    "name": "security_context_se_linux_options",
                                     "schemas": [
                                       {
                                         "name": "level",
@@ -11089,7 +11089,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "volume_mount",
+                              "name": "container_volume_mount",
                               "schemas": [
                                 {
                                   "name": "mount_path",
@@ -11245,7 +11245,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "image_pull_secrets",
+                        "name": "template_image_pull_secrets",
                         "schemas": [
                           {
                             "name": "name",
@@ -11276,7 +11276,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "init_container",
+                        "name": "template_init_container",
                         "schemas": [
                           {
                             "name": "args",
@@ -11291,7 +11291,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "args",
+                              "name": "init_container_args",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -11316,7 +11316,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "command",
+                              "name": "init_container_command",
                               "type": "TypeString",
                               "conflictsWith": [],
                               "optional": false,
@@ -11341,7 +11341,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "env",
+                              "name": "init_container_env",
                               "schemas": [
                                 {
                                   "name": "name",
@@ -11382,7 +11382,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "value_from",
+                                    "name": "env_value_from",
                                     "schemas": [
                                       {
                                         "name": "config_map_key_ref",
@@ -11397,7 +11397,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "config_map_key_ref",
+                                          "name": "value_from_config_map_key_ref",
                                           "schemas": [
                                             {
                                               "name": "key",
@@ -11441,7 +11441,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "field_ref",
+                                          "name": "value_from_field_ref",
                                           "schemas": [
                                             {
                                               "name": "api_version",
@@ -11486,7 +11486,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "resource_field_ref",
+                                          "name": "value_from_resource_field_ref",
                                           "schemas": [
                                             {
                                               "name": "container_name",
@@ -11529,7 +11529,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "secret_key_ref",
+                                          "name": "value_from_secret_key_ref",
                                           "schemas": [
                                             {
                                               "name": "key",
@@ -11605,7 +11605,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "lifecycle",
+                              "name": "init_container_lifecycle",
                               "schemas": [
                                 {
                                   "name": "post_start",
@@ -11620,7 +11620,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "post_start",
+                                    "name": "lifecycle_post_start",
                                     "schemas": [
                                       {
                                         "name": "exec",
@@ -11635,7 +11635,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "exec",
+                                          "name": "post_start_exec",
                                           "schemas": [
                                             {
                                               "name": "command",
@@ -11650,7 +11650,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "schema": {
-                                                "name": "command",
+                                                "name": "exec_command",
                                                 "type": "TypeString",
                                                 "conflictsWith": [],
                                                 "optional": false,
@@ -11678,7 +11678,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "http_get",
+                                          "name": "post_start_http_get",
                                           "schemas": [
                                             {
                                               "name": "host",
@@ -11706,7 +11706,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "resource": {
-                                                "name": "http_header",
+                                                "name": "http_get_http_header",
                                                 "schemas": [
                                                   {
                                                     "name": "name",
@@ -11793,7 +11793,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "tcp_socket",
+                                          "name": "post_start_tcp_socket",
                                           "schemas": [
                                             {
                                               "name": "port",
@@ -11827,7 +11827,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "pre_stop",
+                                    "name": "lifecycle_pre_stop",
                                     "schemas": [
                                       {
                                         "name": "exec",
@@ -11842,7 +11842,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "exec",
+                                          "name": "pre_stop_exec",
                                           "schemas": [
                                             {
                                               "name": "command",
@@ -11857,7 +11857,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "schema": {
-                                                "name": "command",
+                                                "name": "exec_command",
                                                 "type": "TypeString",
                                                 "conflictsWith": [],
                                                 "optional": false,
@@ -11885,7 +11885,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "http_get",
+                                          "name": "pre_stop_http_get",
                                           "schemas": [
                                             {
                                               "name": "host",
@@ -11913,7 +11913,7 @@
                                               "minItems": 0,
                                               "maxItems": 0,
                                               "resource": {
-                                                "name": "http_header",
+                                                "name": "http_get_http_header",
                                                 "schemas": [
                                                   {
                                                     "name": "name",
@@ -12000,7 +12000,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "tcp_socket",
+                                          "name": "pre_stop_tcp_socket",
                                           "schemas": [
                                             {
                                               "name": "port",
@@ -12037,7 +12037,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "liveness_probe",
+                              "name": "init_container_liveness_probe",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -12052,7 +12052,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "liveness_probe_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -12067,7 +12067,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -12109,7 +12109,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "liveness_probe_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -12137,7 +12137,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -12265,7 +12265,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "liveness_probe_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -12326,7 +12326,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "port",
+                              "name": "init_container_port",
                               "schemas": [
                                 {
                                   "name": "container_port",
@@ -12410,7 +12410,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "readiness_probe",
+                              "name": "init_container_readiness_probe",
                               "schemas": [
                                 {
                                   "name": "exec",
@@ -12425,7 +12425,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "exec",
+                                    "name": "readiness_probe_exec",
                                     "schemas": [
                                       {
                                         "name": "command",
@@ -12440,7 +12440,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "command",
+                                          "name": "exec_command",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -12482,7 +12482,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "http_get",
+                                    "name": "readiness_probe_http_get",
                                     "schemas": [
                                       {
                                         "name": "host",
@@ -12510,7 +12510,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "resource": {
-                                          "name": "http_header",
+                                          "name": "http_get_http_header",
                                           "schemas": [
                                             {
                                               "name": "name",
@@ -12638,7 +12638,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "tcp_socket",
+                                    "name": "readiness_probe_tcp_socket",
                                     "schemas": [
                                       {
                                         "name": "port",
@@ -12686,7 +12686,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "resources",
+                              "name": "init_container_resources",
                               "schemas": [
                                 {
                                   "name": "limits",
@@ -12701,7 +12701,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "limits",
+                                    "name": "resources_limits",
                                     "schemas": [
                                       {
                                         "name": "cpu",
@@ -12742,7 +12742,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "requests",
+                                    "name": "resources_requests",
                                     "schemas": [
                                       {
                                         "name": "cpu",
@@ -12787,7 +12787,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "security_context",
+                              "name": "init_container_security_context",
                               "schemas": [
                                 {
                                   "name": "capabilities",
@@ -12802,7 +12802,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "capabilities",
+                                    "name": "security_context_capabilities",
                                     "schemas": [
                                       {
                                         "name": "add",
@@ -12817,7 +12817,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "add",
+                                          "name": "capabilities_add",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -12842,7 +12842,7 @@
                                         "minItems": 0,
                                         "maxItems": 0,
                                         "schema": {
-                                          "name": "drop",
+                                          "name": "capabilities_drop",
                                           "type": "TypeString",
                                           "conflictsWith": [],
                                           "optional": false,
@@ -12924,7 +12924,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "se_linux_options",
+                                    "name": "security_context_se_linux_options",
                                     "schemas": [
                                       {
                                         "name": "level",
@@ -13053,7 +13053,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "resource": {
-                              "name": "volume_mount",
+                              "name": "init_container_volume_mount",
                               "schemas": [
                                 {
                                   "name": "mount_path",
@@ -13180,7 +13180,7 @@
                       "minItems": 0,
                       "maxItems": 1,
                       "resource": {
-                        "name": "security_context",
+                        "name": "template_security_context",
                         "schemas": [
                           {
                             "name": "fs_group",
@@ -13234,7 +13234,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "se_linux_options",
+                              "name": "security_context_se_linux_options",
                               "schemas": [
                                 {
                                   "name": "level",
@@ -13304,7 +13304,7 @@
                             "minItems": 0,
                             "maxItems": 0,
                             "schema": {
-                              "name": "supplemental_groups",
+                              "name": "security_context_supplemental_groups",
                               "type": "TypeInt",
                               "conflictsWith": [],
                               "optional": false,
@@ -13372,7 +13372,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "volume",
+                        "name": "template_volume",
                         "schemas": [
                           {
                             "name": "aws_elastic_block_store",
@@ -13387,7 +13387,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "aws_elastic_block_store",
+                              "name": "volume_aws_elastic_block_store",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -13457,7 +13457,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "azure_disk",
+                              "name": "volume_azure_disk",
                               "schemas": [
                                 {
                                   "name": "caching_mode",
@@ -13541,7 +13541,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "azure_file",
+                              "name": "volume_azure_file",
                               "schemas": [
                                 {
                                   "name": "read_only",
@@ -13598,7 +13598,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "ceph_fs",
+                              "name": "volume_ceph_fs",
                               "schemas": [
                                 {
                                   "name": "monitors",
@@ -13613,7 +13613,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "monitors",
+                                    "name": "ceph_fs_monitors",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -13677,7 +13677,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "secret_ref",
+                                    "name": "ceph_fs_secret_ref",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -13724,7 +13724,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "cinder",
+                              "name": "volume_cinder",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -13781,7 +13781,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "config_map",
+                              "name": "volume_config_map",
                               "schemas": [
                                 {
                                   "name": "default_mode",
@@ -13809,7 +13809,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "items",
+                                    "name": "config_map_items",
                                     "schemas": [
                                       {
                                         "name": "key",
@@ -13882,7 +13882,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "downward_api",
+                              "name": "volume_downward_api",
                               "schemas": [
                                 {
                                   "name": "default_mode",
@@ -13910,7 +13910,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "items",
+                                    "name": "downward_api_items",
                                     "schemas": [
                                       {
                                         "name": "field_ref",
@@ -13925,7 +13925,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "field_ref",
+                                          "name": "items_field_ref",
                                           "schemas": [
                                             {
                                               "name": "api_version",
@@ -13996,7 +13996,7 @@
                                         "minItems": 0,
                                         "maxItems": 1,
                                         "resource": {
-                                          "name": "resource_field_ref",
+                                          "name": "items_resource_field_ref",
                                           "schemas": [
                                             {
                                               "name": "container_name",
@@ -14057,7 +14057,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "empty_dir",
+                              "name": "volume_empty_dir",
                               "schemas": [
                                 {
                                   "name": "medium",
@@ -14088,7 +14088,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "fc",
+                              "name": "volume_fc",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -14142,7 +14142,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "target_ww_ns",
+                                    "name": "fc_target_ww_ns",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -14170,7 +14170,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "flex_volume",
+                              "name": "volume_flex_volume",
                               "schemas": [
                                 {
                                   "name": "driver",
@@ -14237,7 +14237,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "secret_ref",
+                                    "name": "flex_volume_secret_ref",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -14271,7 +14271,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "flocker",
+                              "name": "volume_flocker",
                               "schemas": [
                                 {
                                   "name": "dataset_name",
@@ -14315,7 +14315,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "gce_persistent_disk",
+                              "name": "volume_gce_persistent_disk",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -14385,7 +14385,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "git_repo",
+                              "name": "volume_git_repo",
                               "schemas": [
                                 {
                                   "name": "directory",
@@ -14442,7 +14442,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "glusterfs",
+                              "name": "volume_glusterfs",
                               "schemas": [
                                 {
                                   "name": "endpoints_name",
@@ -14499,7 +14499,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "host_path",
+                              "name": "volume_host_path",
                               "schemas": [
                                 {
                                   "name": "path",
@@ -14530,7 +14530,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "iscsi",
+                              "name": "volume_iscsi",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -14640,7 +14640,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "nfs",
+                              "name": "volume_nfs",
                               "schemas": [
                                 {
                                   "name": "path",
@@ -14697,7 +14697,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "persistent_volume_claim",
+                              "name": "volume_persistent_volume_claim",
                               "schemas": [
                                 {
                                   "name": "claim_name",
@@ -14742,7 +14742,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "photon_persistent_disk",
+                              "name": "volume_photon_persistent_disk",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -14786,7 +14786,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "quobyte",
+                              "name": "volume_quobyte",
                               "schemas": [
                                 {
                                   "name": "group",
@@ -14869,7 +14869,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "rbd",
+                              "name": "volume_rbd",
                               "schemas": [
                                 {
                                   "name": "ceph_monitors",
@@ -14884,7 +14884,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "schema": {
-                                    "name": "ceph_monitors",
+                                    "name": "rbd_ceph_monitors",
                                     "type": "TypeString",
                                     "conflictsWith": [],
                                     "optional": false,
@@ -14990,7 +14990,7 @@
                                   "minItems": 0,
                                   "maxItems": 1,
                                   "resource": {
-                                    "name": "secret_ref",
+                                    "name": "rbd_secret_ref",
                                     "schemas": [
                                       {
                                         "name": "name",
@@ -15024,7 +15024,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "secret",
+                              "name": "volume_secret",
                               "schemas": [
                                 {
                                   "name": "default_mode",
@@ -15053,7 +15053,7 @@
                                   "minItems": 0,
                                   "maxItems": 0,
                                   "resource": {
-                                    "name": "items",
+                                    "name": "secret_items",
                                     "schemas": [
                                       {
                                         "name": "key",
@@ -15139,7 +15139,7 @@
                             "minItems": 0,
                             "maxItems": 1,
                             "resource": {
-                              "name": "vsphere_volume",
+                              "name": "volume_vsphere_volume",
                               "schemas": [
                                 {
                                   "name": "fs_type",
@@ -15202,7 +15202,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "resource_quota_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -15217,7 +15217,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15270,7 +15270,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15366,7 +15366,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "resource_quota_spec",
             "schemas": [
               {
                 "name": "hard",
@@ -15394,7 +15394,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "scopes",
+                  "name": "spec_scopes",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15440,7 +15440,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "secret_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -15455,7 +15455,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15508,7 +15508,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15622,7 +15622,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "load_balancer_ingress",
+            "name": "service_load_balancer_ingress",
             "schemas": [
               {
                 "name": "hostname",
@@ -15664,7 +15664,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "service_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -15679,7 +15679,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15732,7 +15732,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15828,7 +15828,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "service_spec",
             "schemas": [
               {
                 "name": "cluster_ip",
@@ -15856,7 +15856,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "external_ips",
+                  "name": "spec_external_ips",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15907,7 +15907,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "load_balancer_source_ranges",
+                  "name": "spec_load_balancer_source_ranges",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -15932,7 +15932,7 @@
                 "minItems": 1,
                 "maxItems": 0,
                 "resource": {
-                  "name": "port",
+                  "name": "spec_port",
                   "schemas": [
                     {
                       "name": "name",
@@ -16077,7 +16077,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "image_pull_secret",
+            "name": "service_account_image_pull_secret",
             "schemas": [
               {
                 "name": "name",
@@ -16108,7 +16108,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "service_account_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -16123,7 +16123,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16176,7 +16176,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16272,7 +16272,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "secret",
+            "name": "service_account_secret",
             "schemas": [
               {
                 "name": "name",
@@ -16308,7 +16308,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "storage_class_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -16323,7 +16323,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16376,7 +16376,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16490,7 +16490,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "load_balancer_ingress",
+            "name": "service_load_balancer_ingress",
             "schemas": [
               {
                 "name": "hostname",
@@ -16532,7 +16532,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "service_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -16547,7 +16547,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16585,7 +16585,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16679,7 +16679,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "spec",
+            "name": "service_spec",
             "schemas": [
               {
                 "name": "cluster_ip",
@@ -16707,7 +16707,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "external_ips",
+                  "name": "spec_external_ips",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16758,7 +16758,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "load_balancer_source_ranges",
+                  "name": "spec_load_balancer_source_ranges",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16783,7 +16783,7 @@
                 "minItems": 1,
                 "maxItems": 0,
                 "resource": {
-                  "name": "port",
+                  "name": "spec_port",
                   "schemas": [
                     {
                       "name": "name",
@@ -16913,7 +16913,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "metadata",
+            "name": "storage_class_metadata",
             "schemas": [
               {
                 "name": "annotations",
@@ -16928,7 +16928,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "annotations",
+                  "name": "metadata_annotations",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -16966,7 +16966,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "labels",
+                  "name": "metadata_labels",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
