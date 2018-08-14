@@ -1526,22 +1526,6 @@
                     "original": "description"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email\" <$> TF.attribute",
-                    "name": "_email",
-                    "method": "email",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasEmail",
-                    "validate": false,
-                    "optional": true,
-                    "original": "email"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
