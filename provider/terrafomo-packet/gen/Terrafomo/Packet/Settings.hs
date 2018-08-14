@@ -18,17 +18,17 @@
 module Terrafomo.Packet.Settings
     (
     -- * Settings Datatypes
-    -- ** attachments
-      Attachments (..)
-    , newAttachments
+    -- ** volume_attachments
+      VolumeAttachments (..)
+    , newVolumeAttachments
 
-    -- ** network
-    , Network (..)
-    , newNetwork
+    -- ** volume_snapshot_policies
+    , VolumeSnapshotPolicies (..)
+    , newVolumeSnapshotPolicies
 
-    -- ** snapshot_policies
-    , SnapshotPolicies (..)
-    , newSnapshotPolicies
+    -- ** device_network
+    , DeviceNetwork (..)
+    , newDeviceNetwork
 
     ) where
 
@@ -53,95 +53,95 @@ import qualified Terrafomo.Packet.Lens  as P
 import qualified Terrafomo.Packet.Types as P
 import qualified Terrafomo.Validator    as TF
 
--- | @attachments@ nested settings.
-data Attachments s = Attachments'
+-- | @volume_attachments@ nested settings.
+data VolumeAttachments s = VolumeAttachments'
     deriving (P.Show, P.Eq, P.Generic)
 
-newAttachments
-    :: Attachments s
-newAttachments =
-    Attachments'
+newVolumeAttachments
+    :: VolumeAttachments s
+newVolumeAttachments =
+    VolumeAttachments'
 
-instance P.Hashable  (Attachments s)
-instance TF.IsValue  (Attachments s)
-instance TF.IsObject (Attachments s) where
-    toObject Attachments' = []
+instance P.Hashable  (VolumeAttachments s)
+instance TF.IsValue  (VolumeAttachments s)
+instance TF.IsObject (VolumeAttachments s) where
+    toObject VolumeAttachments' = []
 
-instance TF.IsValid (Attachments s) where
+instance TF.IsValid (VolumeAttachments s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedHref (TF.Ref s' (Attachments s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "_computedHref"
+instance s ~ s' => P.HasComputedHref (TF.Ref s' (VolumeAttachments s)) (TF.Attr s P.Text) where
+    computedHref x = TF.compute (TF.refKey x) "href"
 
--- | @network@ nested settings.
-data Network s = Network'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newNetwork
-    :: Network s
-newNetwork =
-    Network'
-
-instance P.Hashable  (Network s)
-instance TF.IsValue  (Network s)
-instance TF.IsObject (Network s) where
-    toObject Network' = []
-
-instance TF.IsValid (Network s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
-
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (Network s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
-
-instance s ~ s' => P.HasComputedFamily (TF.Ref s' (Network s)) (TF.Attr s P.Integer) where
-    computedFamily x = TF.compute (TF.refKey x) "_computedFamily"
-
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (Network s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
-
-instance s ~ s' => P.HasComputedPublic (TF.Ref s' (Network s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
-
--- | @snapshot_policies@ nested settings.
-data SnapshotPolicies s = SnapshotPolicies'
+-- | @volume_snapshot_policies@ nested settings.
+data VolumeSnapshotPolicies s = VolumeSnapshotPolicies'
     { _snapshotCount     :: TF.Attr s P.Integer
-    -- ^ @snapshot_count@ - (Required)
+    -- ^ @snapshot_count@ - (Required, Forces New)
     --
     , _snapshotFrequency :: TF.Attr s P.Text
-    -- ^ @snapshot_frequency@ - (Required)
+    -- ^ @snapshot_frequency@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newSnapshotPolicies
+newVolumeSnapshotPolicies
     :: TF.Attr s P.Integer -- ^ @snapshot_count@ - 'P.snapshotCount'
     -> TF.Attr s P.Text -- ^ @snapshot_frequency@ - 'P.snapshotFrequency'
-    -> SnapshotPolicies s
-newSnapshotPolicies _snapshotCount _snapshotFrequency =
-    SnapshotPolicies'
+    -> VolumeSnapshotPolicies s
+newVolumeSnapshotPolicies _snapshotCount _snapshotFrequency =
+    VolumeSnapshotPolicies'
         { _snapshotCount = _snapshotCount
         , _snapshotFrequency = _snapshotFrequency
         }
 
-instance P.Hashable  (SnapshotPolicies s)
-instance TF.IsValue  (SnapshotPolicies s)
-instance TF.IsObject (SnapshotPolicies s) where
-    toObject SnapshotPolicies'{..} = P.catMaybes
+instance P.Hashable  (VolumeSnapshotPolicies s)
+instance TF.IsValue  (VolumeSnapshotPolicies s)
+instance TF.IsObject (VolumeSnapshotPolicies s) where
+    toObject VolumeSnapshotPolicies'{..} = P.catMaybes
         [ TF.assign "snapshot_count" <$> TF.attribute _snapshotCount
         , TF.assign "snapshot_frequency" <$> TF.attribute _snapshotFrequency
         ]
 
-instance TF.IsValid (SnapshotPolicies s) where
+instance TF.IsValid (VolumeSnapshotPolicies s) where
     validator = P.mempty
 
-instance P.HasSnapshotCount (SnapshotPolicies s) (TF.Attr s P.Integer) where
+instance P.HasSnapshotCount (VolumeSnapshotPolicies s) (TF.Attr s P.Integer) where
     snapshotCount =
-        P.lens (_snapshotCount :: SnapshotPolicies s -> TF.Attr s P.Integer)
-               (\s a -> s { _snapshotCount = a } :: SnapshotPolicies s)
+        P.lens (_snapshotCount :: VolumeSnapshotPolicies s -> TF.Attr s P.Integer)
+               (\s a -> s { _snapshotCount = a } :: VolumeSnapshotPolicies s)
 
-instance P.HasSnapshotFrequency (SnapshotPolicies s) (TF.Attr s P.Text) where
+instance P.HasSnapshotFrequency (VolumeSnapshotPolicies s) (TF.Attr s P.Text) where
     snapshotFrequency =
-        P.lens (_snapshotFrequency :: SnapshotPolicies s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotFrequency = a } :: SnapshotPolicies s)
+        P.lens (_snapshotFrequency :: VolumeSnapshotPolicies s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotFrequency = a } :: VolumeSnapshotPolicies s)
+
+-- | @device_network@ nested settings.
+data DeviceNetwork s = DeviceNetwork'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDeviceNetwork
+    :: DeviceNetwork s
+newDeviceNetwork =
+    DeviceNetwork'
+
+instance P.Hashable  (DeviceNetwork s)
+instance TF.IsValue  (DeviceNetwork s)
+instance TF.IsObject (DeviceNetwork s) where
+    toObject DeviceNetwork' = []
+
+instance TF.IsValid (DeviceNetwork s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (DeviceNetwork s)) (TF.Attr s P.Text) where
+    computedAddress x = TF.compute (TF.refKey x) "address"
+
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (DeviceNetwork s)) (TF.Attr s P.Integer) where
+    computedCidr x = TF.compute (TF.refKey x) "cidr"
+
+instance s ~ s' => P.HasComputedFamily (TF.Ref s' (DeviceNetwork s)) (TF.Attr s P.Integer) where
+    computedFamily x = TF.compute (TF.refKey x) "family"
+
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (DeviceNetwork s)) (TF.Attr s P.Text) where
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
+
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DeviceNetwork s)) (TF.Attr s P.Bool) where
+    computedPublic x = TF.compute (TF.refKey x) "public"

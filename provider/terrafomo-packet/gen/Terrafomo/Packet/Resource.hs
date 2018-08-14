@@ -79,20 +79,20 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @packet_device@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_device terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/device.html terraform documentation>
 -- for more information.
 data DeviceResource s = DeviceResource'
     { _alwaysPxe       :: TF.Attr s P.Bool
     -- ^ @always_pxe@ - (Optional)
     --
     , _billingCycle    :: TF.Attr s P.Text
-    -- ^ @billing_cycle@ - (Required)
+    -- ^ @billing_cycle@ - (Required, Forces New)
     --
     , _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _facility        :: TF.Attr s P.Text
-    -- ^ @facility@ - (Required)
+    -- ^ @facility@ - (Required, Forces New)
     --
     , _hostname        :: TF.Attr s P.Text
     -- ^ @hostname@ - (Required)
@@ -101,22 +101,22 @@ data DeviceResource s = DeviceResource'
     -- ^ @ipxe_script_url@ - (Optional)
     --
     , _operatingSystem :: TF.Attr s P.Text
-    -- ^ @operating_system@ - (Required)
+    -- ^ @operating_system@ - (Required, Forces New)
     --
     , _plan            :: TF.Attr s P.Text
-    -- ^ @plan@ - (Required)
+    -- ^ @plan@ - (Required, Forces New)
     --
     , _projectId       :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     , _storage         :: TF.Attr s P.Text
-    -- ^ @storage@ - (Optional)
+    -- ^ @storage@ - (Optional, Forces New)
     --
     , _tags            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
     , _userData        :: TF.Attr s P.Text
-    -- ^ @user_data@ - (Optional)
+    -- ^ @user_data@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -225,48 +225,48 @@ instance P.HasUserData (DeviceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _userData = a } :: DeviceResource s)
 
 instance s ~ s' => P.HasComputedAccessPrivateIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "_computedAccessPrivateIpv4"
+    computedAccessPrivateIpv4 x = TF.compute (TF.refKey x) "access_private_ipv4"
 
 instance s ~ s' => P.HasComputedAccessPublicIpv4 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPublicIpv4 x = TF.compute (TF.refKey x) "_computedAccessPublicIpv4"
+    computedAccessPublicIpv4 x = TF.compute (TF.refKey x) "access_public_ipv4"
 
 instance s ~ s' => P.HasComputedAccessPublicIpv6 (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedAccessPublicIpv6 x = TF.compute (TF.refKey x) "_computedAccessPublicIpv6"
+    computedAccessPublicIpv6 x = TF.compute (TF.refKey x) "access_public_ipv6"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedHardwareReservationId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedHardwareReservationId x = TF.compute (TF.refKey x) "_computedHardwareReservationId"
+    computedHardwareReservationId x = TF.compute (TF.refKey x) "hardware_reservation_id"
 
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Bool) where
-    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
+    computedLocked x = TF.compute (TF.refKey x) "locked"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (Network s)]) where
-    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (DeviceNetwork s)]) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Integer) where
-    computedPublicIpv4SubnetSize x = TF.compute (TF.refKey x) "_computedPublicIpv4SubnetSize"
+    computedPublicIpv4SubnetSize x = TF.compute (TF.refKey x) "public_ipv4_subnet_size"
 
 instance s ~ s' => P.HasComputedRootPassword (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedRootPassword x = TF.compute (TF.refKey x) "_computedRootPassword"
+    computedRootPassword x = TF.compute (TF.refKey x) "root_password"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 -- | @packet_ip_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_ip_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/ip_attachment.html terraform documentation>
 -- for more information.
 data IpAttachmentResource s = IpAttachmentResource'
     { _cidrNotation :: TF.Attr s P.Text
-    -- ^ @cidr_notation@ - (Required)
+    -- ^ @cidr_notation@ - (Required, Forces New)
     --
     , _deviceId     :: TF.Attr s P.Text
-    -- ^ @device_id@ - (Required)
+    -- ^ @device_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -301,35 +301,35 @@ instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s P.Text) where
                (\s a -> s { _deviceId = a } :: IpAttachmentResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Integer) where
-    computedAddressFamily x = TF.compute (TF.refKey x) "_computedAddressFamily"
+    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
+    computedCidr x = TF.compute (TF.refKey x) "cidr"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
 
 instance s ~ s' => P.HasComputedManageable (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Bool) where
-    computedManageable x = TF.compute (TF.refKey x) "_computedManageable"
+    computedManageable x = TF.compute (TF.refKey x) "manageable"
 
 instance s ~ s' => P.HasComputedManagement (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Bool) where
-    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
+    computedManagement x = TF.compute (TF.refKey x) "management"
 
 instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
+    computedNetmask x = TF.compute (TF.refKey x) "netmask"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
+    computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 -- | @packet_organization@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_organization terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/organization.html terraform documentation>
 -- for more information.
 data OrganizationResource s = OrganizationResource'
     { _description :: TF.Attr s P.Text
@@ -400,14 +400,14 @@ instance P.HasWebsite (OrganizationResource s) (TF.Attr s P.Text) where
                (\s a -> s { _website = a } :: OrganizationResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 -- | @packet_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/project.html terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
     { _name :: TF.Attr s P.Text
@@ -438,30 +438,30 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedOrganizationId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedOrganizationId x = TF.compute (TF.refKey x) "_computedOrganizationId"
+    computedOrganizationId x = TF.compute (TF.refKey x) "organization_id"
 
 instance s ~ s' => P.HasComputedPaymentMethodId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedPaymentMethodId x = TF.compute (TF.refKey x) "_computedPaymentMethodId"
+    computedPaymentMethodId x = TF.compute (TF.refKey x) "payment_method_id"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 -- | @packet_reserved_ip_block@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_reserved_ip_block terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/reserved_ip_block.html terraform documentation>
 -- for more information.
 data ReservedIpBlockResource s = ReservedIpBlockResource'
     { _facility  :: TF.Attr s P.Text
-    -- ^ @facility@ - (Required)
+    -- ^ @facility@ - (Required, Forces New)
     --
     , _projectId :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     , _quantity  :: TF.Attr s P.Integer
-    -- ^ @quantity@ - (Required)
+    -- ^ @quantity@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -504,45 +504,45 @@ instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Integer) where
-    computedAddressFamily x = TF.compute (TF.refKey x) "_computedAddressFamily"
+    computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Integer) where
-    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
+    computedCidr x = TF.compute (TF.refKey x) "cidr"
 
 instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedCidrNotation x = TF.compute (TF.refKey x) "_computedCidrNotation"
+    computedCidrNotation x = TF.compute (TF.refKey x) "cidr_notation"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
 
 instance s ~ s' => P.HasComputedManageable (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Bool) where
-    computedManageable x = TF.compute (TF.refKey x) "_computedManageable"
+    computedManageable x = TF.compute (TF.refKey x) "manageable"
 
 instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Bool) where
-    computedManagement x = TF.compute (TF.refKey x) "_computedManagement"
+    computedManagement x = TF.compute (TF.refKey x) "management"
 
 instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "_computedNetmask"
+    computedNetmask x = TF.compute (TF.refKey x) "netmask"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
+    computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Bool) where
-    computedPublic x = TF.compute (TF.refKey x) "_computedPublic"
+    computedPublic x = TF.compute (TF.refKey x) "public"
 
 -- | @packet_ssh_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/ssh_key.html terraform documentation>
 -- for more information.
 data SshKeyResource s = SshKeyResource'
     { _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _publicKey :: TF.Attr s P.Text
-    -- ^ @public_key@ - (Required)
+    -- ^ @public_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -577,24 +577,24 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _publicKey = a } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 -- | @packet_volume@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
     { _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _facility         :: TF.Attr s P.Text
-    -- ^ @facility@ - (Required)
+    -- ^ @facility@ - (Required, Forces New)
     --
     , _locked           :: TF.Attr s P.Bool
     -- ^ @locked@ - (Optional)
@@ -603,12 +603,12 @@ data VolumeResource s = VolumeResource'
     -- ^ @plan@ - (Required)
     --
     , _projectId        :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     , _size             :: TF.Attr s P.Integer
     -- ^ @size@ - (Required)
     --
-    , _snapshotPolicies :: TF.Attr s [TF.Attr s (SnapshotPolicies s)]
+    , _snapshotPolicies :: TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)]
     -- ^ @snapshot_policies@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -646,7 +646,7 @@ instance TF.IsValid (VolumeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_snapshotPolicies"
                   (_snapshotPolicies
-                      :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPolicies s)])
+                      :: VolumeResource s -> TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)])
                   TF.validator
 
 instance P.HasDescription (VolumeResource s) (TF.Attr s P.Text) where
@@ -679,39 +679,39 @@ instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
         P.lens (_size :: VolumeResource s -> TF.Attr s P.Integer)
                (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (SnapshotPolicies s)]) where
+instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)]) where
     snapshotPolicies =
-        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPolicies s)])
+        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)])
                (\s a -> s { _snapshotPolicies = a } :: VolumeResource s)
 
-instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (Attachments s)]) where
-    computedAttachments x = TF.compute (TF.refKey x) "_computedAttachments"
+instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (VolumeAttachments s)]) where
+    computedAttachments x = TF.compute (TF.refKey x) "attachments"
 
 instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedBillingCycle x = TF.compute (TF.refKey x) "_computedBillingCycle"
+    computedBillingCycle x = TF.compute (TF.refKey x) "billing_cycle"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedUpdated (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedUpdated x = TF.compute (TF.refKey x) "_computedUpdated"
+    computedUpdated x = TF.compute (TF.refKey x) "updated"
 
 -- | @packet_volume_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Packet/packet_volume_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/packet/r/volume_attachment.html terraform documentation>
 -- for more information.
 data VolumeAttachmentResource s = VolumeAttachmentResource'
     { _deviceId :: TF.Attr s P.Text
-    -- ^ @device_id@ - (Required)
+    -- ^ @device_id@ - (Required, Forces New)
     --
     , _volumeId :: TF.Attr s P.Text
-    -- ^ @volume_id@ - (Required)
+    -- ^ @volume_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
