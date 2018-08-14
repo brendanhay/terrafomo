@@ -59,7 +59,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | @mysql_database@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/MySQL/mysql_database terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/mysql/r/database.html terraform documentation>
 -- for more information.
 data DatabaseResource s = DatabaseResource'
     { _defaultCharacterSet :: TF.Attr s P.Text
@@ -69,7 +69,7 @@ data DatabaseResource s = DatabaseResource'
     -- ^ @default_collation@ - (Optional)
     --
     , _name                :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -111,23 +111,23 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
 
 -- | @mysql_grant@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/MySQL/mysql_grant terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/mysql/r/grant.html terraform documentation>
 -- for more information.
 data GrantResource s = GrantResource'
     { _database   :: TF.Attr s P.Text
-    -- ^ @database@ - (Required)
+    -- ^ @database@ - (Required, Forces New)
     --
     , _grant      :: TF.Attr s P.Bool
-    -- ^ @grant@ - (Optional)
+    -- ^ @grant@ - (Optional, Forces New)
     --
     , _host       :: TF.Attr s P.Text
-    -- ^ @host@ - (Optional)
+    -- ^ @host@ - (Optional, Forces New)
     --
     , _privileges :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @privileges@ - (Required)
+    -- ^ @privileges@ - (Required, Forces New)
     --
     , _user       :: TF.Attr s P.Text
-    -- ^ @user@ - (Required)
+    -- ^ @user@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -185,17 +185,17 @@ instance P.HasUser (GrantResource s) (TF.Attr s P.Text) where
 
 -- | @mysql_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/MySQL/mysql_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/mysql/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _authPlugin        :: TF.Attr s P.Text
-    -- ^ @auth_plugin@ - (Optional)
+    -- ^ @auth_plugin@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'plaintextPassword'
     , _host              :: TF.Attr s P.Text
-    -- ^ @host@ - (Optional)
+    -- ^ @host@ - (Optional, Forces New)
     --
     , _plaintextPassword :: TF.Attr s P.Text
     -- ^ @plaintext_password@ - (Optional)
@@ -204,7 +204,7 @@ data UserResource s = UserResource'
     --
     -- * 'authPlugin'
     , _user              :: TF.Attr s P.Text
-    -- ^ @user@ - (Required)
+    -- ^ @user@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
