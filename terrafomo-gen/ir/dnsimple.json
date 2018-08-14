@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/dnsimple/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -89,6 +90,7 @@
                     "original": "value"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/dnsimple/r/record.html",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [
