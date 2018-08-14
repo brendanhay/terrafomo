@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newRule",
-                "name": "Rule'"
+                "smart": "newSpaceInboundRulesetRule",
+                "name": "SpaceInboundRulesetRule'"
             },
             "arguments": [
                 {
@@ -39,7 +39,7 @@
                     "original": "source"
                 }
             ],
-            "name": "Rule",
+            "name": "SpaceInboundRulesetRule",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -77,16 +77,112 @@
                 }
             ],
             "conflicts": [],
-            "type": "Rule s",
-            "original": "rule"
+            "type": "SpaceInboundRulesetRule s",
+            "original": "space_inbound_ruleset_rule"
         },
         {
             "con": {
-                "smart": "newOrganization",
-                "name": "Organization'"
+                "smart": "newSpaceVpnConnectionTunnels",
+                "name": "SpaceVpnConnectionTunnels'"
             },
             "arguments": [],
-            "name": "Organization",
+            "name": "SpaceVpnConnectionTunnels",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_computedIp",
+                    "method": "computedIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"pre_shared_key\" <$> TF.attribute",
+                    "name": "_computedPreSharedKey",
+                    "method": "computedPreSharedKey",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPreSharedKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "pre_shared_key"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "SpaceVpnConnectionTunnels s",
+            "original": "space_vpn_connection_tunnels"
+        },
+        {
+            "con": {
+                "smart": "newAppOrganization",
+                "name": "AppOrganization'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"locked\" <$> TF.attribute",
+                    "name": "_locked",
+                    "method": "locked",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasLocked",
+                    "validate": false,
+                    "optional": true,
+                    "original": "locked"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"personal\" <$> TF.attribute",
+                    "name": "_personal",
+                    "method": "personal",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasPersonal",
+                    "validate": false,
+                    "optional": true,
+                    "original": "personal"
+                }
+            ],
+            "name": "AppOrganization",
             "threaded": true,
             "attributes": [
                 {
@@ -138,59 +234,30 @@
                     "original": "personal"
                 }
             ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "Organization s",
-            "original": "organization"
-        },
-        {
-            "con": {
-                "smart": "newTunnels",
-                "name": "Tunnels'"
-            },
-            "arguments": [],
-            "name": "Tunnels",
-            "threaded": true,
-            "attributes": [
+            "parameters": [
                 {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
-                    "name": "_computedIp",
-                    "method": "computedIp",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasComputedIp",
+                    "class": "HasName",
                     "validate": false,
-                    "optional": true,
-                    "original": "ip"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"pre_shared_key\" <$> TF.attribute",
-                    "name": "_computedPreSharedKey",
-                    "method": "computedPreSharedKey",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedPreSharedKey",
-                    "validate": false,
-                    "optional": true,
-                    "original": "pre_shared_key"
+                    "optional": false,
+                    "original": "name"
                 }
             ],
-            "parameters": [],
             "conflicts": [],
-            "type": "Tunnels s",
-            "original": "tunnels"
+            "type": "AppOrganization s",
+            "original": "app_organization"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/heroku/index.html",
     "dataSources": [
         {
             "con": {
@@ -215,6 +282,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/d/app.html",
             "name": "AppData",
             "threaded": true,
             "attributes": [
@@ -324,7 +392,7 @@
                     "name": "_computedOrganization",
                     "method": "computedOrganization",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Organization s)]",
+                    "type": "TF.Attr s [TF.Attr s (AppOrganization s)]",
                     "class": "HasComputedOrganization",
                     "validate": true,
                     "optional": false,
@@ -440,6 +508,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/d/space.html",
             "name": "SpaceData",
             "threaded": true,
             "attributes": [
@@ -585,6 +654,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/d/space_peering_info.html",
             "name": "SpacePeeringInfoData",
             "threaded": true,
             "attributes": [
@@ -764,6 +834,7 @@
                     "original": "plan"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/addon.html",
             "name": "AddonResource",
             "threaded": true,
             "attributes": [
@@ -893,6 +964,7 @@
                     "original": "app_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/addon_attachment.html",
             "name": "AddonAttachmentResource",
             "threaded": true,
             "attributes": [
@@ -1015,7 +1087,7 @@
                     "name": "_organization",
                     "method": "organization",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Organization s)]",
+                    "type": "TF.Attr s [TF.Attr s (AppOrganization s)]",
                     "class": "HasOrganization",
                     "validate": true,
                     "optional": true,
@@ -1054,6 +1126,7 @@
                     "original": "space"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/app.html",
             "name": "AppResource",
             "threaded": true,
             "attributes": [
@@ -1263,6 +1336,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/app_feature.html",
             "name": "AppFeatureResource",
             "threaded": true,
             "attributes": [],
@@ -1343,6 +1417,7 @@
                     "original": "slug_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/app_release.html",
             "name": "AppReleaseResource",
             "threaded": true,
             "attributes": [
@@ -1456,6 +1531,7 @@
                     "original": "private_key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/cert.html",
             "name": "CertResource",
             "threaded": true,
             "attributes": [
@@ -1585,6 +1661,7 @@
                     "original": "hostname"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/domain.html",
             "name": "DomainResource",
             "threaded": true,
             "attributes": [
@@ -1682,6 +1759,7 @@
                     "original": "url"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/drain.html",
             "name": "DrainResource",
             "threaded": true,
             "attributes": [
@@ -1811,6 +1889,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/formation.html",
             "name": "FormationResource",
             "threaded": true,
             "attributes": [],
@@ -1907,6 +1986,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/pipeline.html",
             "name": "PipelineResource",
             "threaded": true,
             "attributes": [],
@@ -1987,6 +2067,7 @@
                     "original": "stage"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/pipeline_coupling.html",
             "name": "PipelineCouplingResource",
             "threaded": true,
             "attributes": [
@@ -2132,6 +2213,7 @@
                     "original": "shield"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/space.html",
             "name": "SpaceResource",
             "threaded": true,
             "attributes": [
@@ -2245,6 +2327,7 @@
                     "original": "space"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/space_app_access.html",
             "name": "SpaceAppAccessResource",
             "threaded": true,
             "attributes": [],
@@ -2318,7 +2401,7 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Rule s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s)))",
                     "class": "HasRule",
                     "validate": true,
                     "optional": false,
@@ -2341,6 +2424,7 @@
                     "original": "space"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/space_inbound_ruleset.html",
             "name": "SpaceInboundRulesetResource",
             "threaded": true,
             "attributes": [],
@@ -2355,7 +2439,7 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (Rule s)))",
+                    "type": "TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s)))",
                     "class": "HasRule",
                     "validate": true,
                     "optional": false,
@@ -2421,6 +2505,7 @@
                     "original": "vpc_peering_connection_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/space_peering_connection_accepter.html",
             "name": "SpacePeeringConnectionAccepterResource",
             "threaded": true,
             "attributes": [
@@ -2566,6 +2651,7 @@
                     "original": "space"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/space_vpn_connection.html",
             "name": "SpaceVpnConnectionResource",
             "threaded": true,
             "attributes": [
@@ -2611,7 +2697,7 @@
                     "name": "_computedTunnels",
                     "method": "computedTunnels",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Tunnels s)]",
+                    "type": "TF.Attr s [TF.Attr s (SpaceVpnConnectionTunnels s)]",
                     "class": "HasComputedTunnels",
                     "validate": true,
                     "optional": true,
@@ -2743,6 +2829,7 @@
                     "original": "permissions"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/heroku/r/team_collaborator.html",
             "name": "TeamCollaboratorResource",
             "threaded": true,
             "attributes": [],
