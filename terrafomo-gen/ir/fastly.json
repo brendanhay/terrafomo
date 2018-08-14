@@ -2,436 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newPapertrail",
-                "name": "Papertrail'"
-            },
-            "arguments": [
-                {
-                    "default": "_address",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The address of the papertrail service"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "address"
-                },
-                {
-                    "default": "TF.value \"%h %l %u %t %r %>s\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Apache-style string or VCL variables to use for log formatting"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"format\" <$> TF.attribute",
-                    "name": "_format",
-                    "method": "format",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasFormat",
-                    "validate": false,
-                    "optional": true,
-                    "original": "format"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Unique name to refer to this logging setup"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_port",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The port of the papertrail service"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Name of a condition to apply this logging"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"response_condition\" <$> TF.attribute",
-                    "name": "_responseCondition",
-                    "method": "responseCondition",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasResponseCondition",
-                    "validate": false,
-                    "optional": true,
-                    "original": "response_condition"
-                }
-            ],
-            "name": "Papertrail",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_address",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The address of the papertrail service"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"address\" <$> TF.attribute",
-                    "name": "_address",
-                    "method": "address",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAddress",
-                    "validate": false,
-                    "optional": false,
-                    "original": "address"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Unique name to refer to this logging setup"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_port",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The port of the papertrail service"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                }
-            ],
-            "conflicts": [],
-            "type": "Papertrail s",
-            "original": "papertrail"
-        },
-        {
-            "con": {
-                "smart": "newHealthcheck",
-                "name": "Healthcheck'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value 5000",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "How often to run the healthcheck in milliseconds"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"check_interval\" <$> TF.attribute",
-                    "name": "_checkInterval",
-                    "method": "checkInterval",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasCheckInterval",
-                    "validate": false,
-                    "optional": true,
-                    "original": "check_interval"
-                },
-                {
-                    "default": "TF.value 200",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The status code expected from the host"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"expected_response\" <$> TF.attribute",
-                    "name": "_expectedResponse",
-                    "method": "expectedResponse",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasExpectedResponse",
-                    "validate": false,
-                    "optional": true,
-                    "original": "expected_response"
-                },
-                {
-                    "default": "_host",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Which host to check"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host\" <$> TF.attribute",
-                    "name": "_host",
-                    "method": "host",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHost",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host"
-                },
-                {
-                    "default": "TF.value \"1.1\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Whether to use version 1.0 or 1.1 HTTP"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"http_version\" <$> TF.attribute",
-                    "name": "_httpVersion",
-                    "method": "httpVersion",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHttpVersion",
-                    "validate": false,
-                    "optional": true,
-                    "original": "http_version"
-                },
-                {
-                    "default": "TF.value 2",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "When loading a config, the initial number of probes to be seen as OK"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"initial\" <$> TF.attribute",
-                    "name": "_initial",
-                    "method": "initial",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasInitial",
-                    "validate": false,
-                    "optional": true,
-                    "original": "initial"
-                },
-                {
-                    "default": "TF.value \"HEAD\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Which HTTP method to use"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"method\" <$> TF.attribute",
-                    "name": "_method",
-                    "method": "method",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMethod",
-                    "validate": false,
-                    "optional": true,
-                    "original": "method"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "A name to refer to this healthcheck"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_path",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The path to check"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "_path",
-                    "method": "path",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPath",
-                    "validate": false,
-                    "optional": false,
-                    "original": "path"
-                },
-                {
-                    "default": "TF.value 3",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "How many healthchecks must succeed to be considered healthy"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
-                    "name": "_threshold",
-                    "method": "threshold",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasThreshold",
-                    "validate": false,
-                    "optional": true,
-                    "original": "threshold"
-                },
-                {
-                    "default": "TF.value 500",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Timeout in milliseconds"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
-                    "name": "_timeout",
-                    "method": "timeout",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasTimeout",
-                    "validate": false,
-                    "optional": true,
-                    "original": "timeout"
-                },
-                {
-                    "default": "TF.value 5",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The number of most recent healthcheck queries to keep for this healthcheck"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"window\" <$> TF.attribute",
-                    "name": "_window",
-                    "method": "window",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasWindow",
-                    "validate": false,
-                    "optional": true,
-                    "original": "window"
-                }
-            ],
-            "name": "Healthcheck",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_host",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Which host to check"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"host\" <$> TF.attribute",
-                    "name": "_host",
-                    "method": "host",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasHost",
-                    "validate": false,
-                    "optional": false,
-                    "original": "host"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "A name to refer to this healthcheck"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_path",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The path to check"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "_path",
-                    "method": "path",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPath",
-                    "validate": false,
-                    "optional": false,
-                    "original": "path"
-                }
-            ],
-            "conflicts": [],
-            "type": "Healthcheck s",
-            "original": "healthcheck"
-        },
-        {
-            "con": {
-                "smart": "newSumologic",
-                "name": "Sumologic'"
+                "smart": "newServiceV1Logentries",
+                "name": "ServiceV1Logentries'"
             },
             "arguments": [
                 {
@@ -472,24 +44,6 @@
                     "original": "format_version"
                 },
                 {
-                    "default": "TF.value \"classic\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "How the message should be formatted."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"message_type\" <$> TF.attribute",
-                    "name": "_messageType",
-                    "method": "messageType",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMessageType",
-                    "validate": false,
-                    "optional": true,
-                    "original": "message_type"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -506,6 +60,24 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.value 20000",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The port number configured in Logentries"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port"
                 },
                 {
                     "default": "TF.Nil",
@@ -526,25 +98,43 @@
                     "original": "response_condition"
                 },
                 {
-                    "default": "_url",
+                    "default": "_token",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The URL to POST to."
+                        "Use token based authentication (https://logentries.com/doc/input-token/)"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "_url",
-                    "method": "url",
+                    "encoder": "TF.assign \"token\" <$> TF.attribute",
+                    "name": "_token",
+                    "method": "token",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasUrl",
+                    "class": "HasToken",
                     "validate": false,
                     "optional": false,
-                    "original": "url"
+                    "original": "token"
+                },
+                {
+                    "default": "TF.value P.True",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether to use TLS for secure logging"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"use_tls\" <$> TF.attribute",
+                    "name": "_useTls",
+                    "method": "useTls",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasUseTls",
+                    "validate": false,
+                    "optional": true,
+                    "original": "use_tls"
                 }
             ],
-            "name": "Sumologic",
+            "name": "ServiceV1Logentries",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -567,32 +157,32 @@
                     "original": "name"
                 },
                 {
-                    "default": "_url",
+                    "default": "_token",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "The URL to POST to."
+                        "Use token based authentication (https://logentries.com/doc/input-token/)"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "_url",
-                    "method": "url",
+                    "encoder": "TF.assign \"token\" <$> TF.attribute",
+                    "name": "_token",
+                    "method": "token",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasUrl",
+                    "class": "HasToken",
                     "validate": false,
                     "optional": false,
-                    "original": "url"
+                    "original": "token"
                 }
             ],
             "conflicts": [],
-            "type": "Sumologic s",
-            "original": "sumologic"
+            "type": "ServiceV1Logentries s",
+            "original": "service_v1_logentries"
         },
         {
             "con": {
-                "smart": "newCacheSetting",
-                "name": "CacheSetting'"
+                "smart": "newServiceV1CacheSetting",
+                "name": "ServiceV1CacheSetting'"
             },
             "arguments": [
                 {
@@ -686,7 +276,7 @@
                     "original": "ttl"
                 }
             ],
-            "name": "CacheSetting",
+            "name": "ServiceV1CacheSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -710,81 +300,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "CacheSetting s",
-            "original": "cache_setting"
+            "type": "ServiceV1CacheSetting s",
+            "original": "service_v1_cache_setting"
         },
         {
             "con": {
-                "smart": "newDomain",
-                "name": "Domain'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"comment\" <$> TF.attribute",
-                    "name": "_comment",
-                    "method": "comment",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComment",
-                    "validate": false,
-                    "optional": true,
-                    "original": "comment"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The domain that this Service will respond to"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "name": "Domain",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The domain that this Service will respond to"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "conflicts": [],
-            "type": "Domain s",
-            "original": "domain"
-        },
-        {
-            "con": {
-                "smart": "newRequestSetting",
-                "name": "RequestSetting'"
+                "smart": "newServiceV1RequestSetting",
+                "name": "ServiceV1RequestSetting'"
             },
             "arguments": [
                 {
@@ -1006,7 +528,7 @@
                     "original": "xff"
                 }
             ],
-            "name": "RequestSetting",
+            "name": "ServiceV1RequestSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1030,51 +552,351 @@
                 }
             ],
             "conflicts": [],
-            "type": "RequestSetting s",
-            "original": "request_setting"
+            "type": "ServiceV1RequestSetting s",
+            "original": "service_v1_request_setting"
         },
         {
             "con": {
-                "smart": "newS3logging",
-                "name": "S3logging'"
+                "smart": "newServiceV1Domain",
+                "name": "ServiceV1Domain'"
             },
             "arguments": [
                 {
-                    "default": "_bucketName",
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"comment\" <$> TF.attribute",
+                    "name": "_comment",
+                    "method": "comment",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComment",
+                    "validate": false,
+                    "optional": true,
+                    "original": "comment"
+                },
+                {
+                    "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "S3 Bucket name to store logs in"
+                        "The domain that this Service will respond to"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"bucket_name\" <$> TF.attribute",
-                    "name": "_bucketName",
-                    "method": "bucketName",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasBucketName",
+                    "class": "HasName",
                     "validate": false,
                     "optional": false,
-                    "original": "bucket_name"
-                },
+                    "original": "name"
+                }
+            ],
+            "name": "ServiceV1Domain",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
                 {
-                    "default": "TF.value \"s3.amazonaws.com\"",
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The domain that this Service will respond to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServiceV1Domain s",
+            "original": "service_v1_domain"
+        },
+        {
+            "con": {
+                "smart": "newServiceV1Healthcheck",
+                "name": "ServiceV1Healthcheck'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value 5000",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Bucket endpoint"
+                        "How often to run the healthcheck in milliseconds"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
-                    "name": "_domain",
-                    "method": "domain",
+                    "encoder": "TF.assign \"check_interval\" <$> TF.attribute",
+                    "name": "_checkInterval",
+                    "method": "checkInterval",
                     "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDomain",
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasCheckInterval",
                     "validate": false,
                     "optional": true,
-                    "original": "domain"
+                    "original": "check_interval"
                 },
+                {
+                    "default": "TF.value 200",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The status code expected from the host"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"expected_response\" <$> TF.attribute",
+                    "name": "_expectedResponse",
+                    "method": "expectedResponse",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasExpectedResponse",
+                    "validate": false,
+                    "optional": true,
+                    "original": "expected_response"
+                },
+                {
+                    "default": "_host",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Which host to check"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "_host",
+                    "method": "host",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host"
+                },
+                {
+                    "default": "TF.value \"1.1\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Whether to use version 1.0 or 1.1 HTTP"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"http_version\" <$> TF.attribute",
+                    "name": "_httpVersion",
+                    "method": "httpVersion",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHttpVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "http_version"
+                },
+                {
+                    "default": "TF.value 2",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "When loading a config, the initial number of probes to be seen as OK"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"initial\" <$> TF.attribute",
+                    "name": "_initial",
+                    "method": "initial",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasInitial",
+                    "validate": false,
+                    "optional": true,
+                    "original": "initial"
+                },
+                {
+                    "default": "TF.value \"HEAD\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Which HTTP method to use"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"method\" <$> TF.attribute",
+                    "name": "_method",
+                    "method": "method",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMethod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "method"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "A name to refer to this healthcheck"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The path to check"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "_path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "validate": false,
+                    "optional": false,
+                    "original": "path"
+                },
+                {
+                    "default": "TF.value 3",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How many healthchecks must succeed to be considered healthy"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"threshold\" <$> TF.attribute",
+                    "name": "_threshold",
+                    "method": "threshold",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasThreshold",
+                    "validate": false,
+                    "optional": true,
+                    "original": "threshold"
+                },
+                {
+                    "default": "TF.value 500",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Timeout in milliseconds"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timeout\" <$> TF.attribute",
+                    "name": "_timeout",
+                    "method": "timeout",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasTimeout",
+                    "validate": false,
+                    "optional": true,
+                    "original": "timeout"
+                },
+                {
+                    "default": "TF.value 5",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The number of most recent healthcheck queries to keep for this healthcheck"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"window\" <$> TF.attribute",
+                    "name": "_window",
+                    "method": "window",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasWindow",
+                    "validate": false,
+                    "optional": true,
+                    "original": "window"
+                }
+            ],
+            "name": "ServiceV1Healthcheck",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_host",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Which host to check"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "_host",
+                    "method": "host",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "A name to refer to this healthcheck"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_path",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The path to check"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "_path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "validate": false,
+                    "optional": false,
+                    "original": "path"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServiceV1Healthcheck s",
+            "original": "service_v1_healthcheck"
+        },
+        {
+            "con": {
+                "smart": "newServiceV1Sumologic",
+                "name": "ServiceV1Sumologic'"
+            },
+            "arguments": [
                 {
                     "default": "TF.value \"%h %l %u %t %r %>s\"",
                     "computed": false,
@@ -1111,24 +933,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "format_version"
-                },
-                {
-                    "default": "TF.value 0",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Gzip Compression level"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"gzip_level\" <$> TF.attribute",
-                    "name": "_gzipLevel",
-                    "method": "gzipLevel",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasGzipLevel",
-                    "validate": false,
-                    "optional": true,
-                    "original": "gzip_level"
                 },
                 {
                     "default": "TF.value \"classic\"",
@@ -1171,60 +975,6 @@
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Path to store the files. Must end with a trailing slash"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"path\" <$> TF.attribute",
-                    "name": "_path",
-                    "method": "path",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPath",
-                    "validate": false,
-                    "optional": true,
-                    "original": "path"
-                },
-                {
-                    "default": "TF.value 3600",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "How frequently the logs should be transferred, in seconds (Default 3600)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"period\" <$> TF.attribute",
-                    "name": "_period",
-                    "method": "period",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPeriod",
-                    "validate": false,
-                    "optional": true,
-                    "original": "period"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The S3 redundancy level."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"redundancy\" <$> TF.attribute",
-                    "name": "_redundancy",
-                    "method": "redundancy",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRedundancy",
-                    "validate": false,
-                    "optional": true,
-                    "original": "redundancy"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
                         "Name of a condition to apply this logging."
                     ],
                     "forceNew": false,
@@ -1239,82 +989,28 @@
                     "original": "response_condition"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "AWS Access Key"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"s3_access_key\" <$> TF.attribute",
-                    "name": "_s3AccessKey",
-                    "method": "s3AccessKey",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasS3AccessKey",
-                    "validate": false,
-                    "optional": true,
-                    "original": "s3_access_key"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "AWS Secret Key"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"s3_secret_key\" <$> TF.attribute",
-                    "name": "_s3SecretKey",
-                    "method": "s3SecretKey",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasS3SecretKey",
-                    "validate": false,
-                    "optional": true,
-                    "original": "s3_secret_key"
-                },
-                {
-                    "default": "TF.value \"%Y-%m-%dT%H:%M:%S.000\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Specified timestamp formatting (default `%Y-%m-%dT%H:%M:%S.000`)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"timestamp_format\" <$> TF.attribute",
-                    "name": "_timestampFormat",
-                    "method": "timestampFormat",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTimestampFormat",
-                    "validate": false,
-                    "optional": true,
-                    "original": "timestamp_format"
-                }
-            ],
-            "name": "S3logging",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_bucketName",
+                    "default": "_url",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "S3 Bucket name to store logs in"
+                        "The URL to POST to."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"bucket_name\" <$> TF.attribute",
-                    "name": "_bucketName",
-                    "method": "bucketName",
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "_url",
+                    "method": "url",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasBucketName",
+                    "class": "HasUrl",
                     "validate": false,
                     "optional": false,
-                    "original": "bucket_name"
-                },
+                    "original": "url"
+                }
+            ],
+            "name": "ServiceV1Sumologic",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
                 {
                     "default": "_name",
                     "computed": false,
@@ -1332,16 +1028,34 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "_url",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The URL to POST to."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "_url",
+                    "method": "url",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "url"
                 }
             ],
             "conflicts": [],
-            "type": "S3logging s",
-            "original": "s3logging"
+            "type": "ServiceV1Sumologic s",
+            "original": "service_v1_sumologic"
         },
         {
             "con": {
-                "smart": "newVcl",
-                "name": "Vcl'"
+                "smart": "newServiceV1Vcl",
+                "name": "ServiceV1Vcl'"
             },
             "arguments": [
                 {
@@ -1399,7 +1113,7 @@
                     "original": "name"
                 }
             ],
-            "name": "Vcl",
+            "name": "ServiceV1Vcl",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1441,13 +1155,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Vcl s",
-            "original": "vcl"
+            "type": "ServiceV1Vcl s",
+            "original": "service_v1_vcl"
         },
         {
             "con": {
-                "smart": "newBackend",
-                "name": "Backend'"
+                "smart": "newServiceV1Backend",
+                "name": "ServiceV1Backend'"
             },
             "arguments": [
                 {
@@ -1867,7 +1581,7 @@
                     "original": "weight"
                 }
             ],
-            "name": "Backend",
+            "name": "ServiceV1Backend",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -1909,13 +1623,119 @@
                 }
             ],
             "conflicts": [],
-            "type": "Backend s",
-            "original": "backend"
+            "type": "ServiceV1Backend s",
+            "original": "service_v1_backend"
         },
         {
             "con": {
-                "smart": "newGcslogging",
-                "name": "Gcslogging'"
+                "smart": "newServiceV1Gzip",
+                "name": "ServiceV1Gzip'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Name of a condition controlling when this gzip configuration applies."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cache_condition\" <$> TF.attribute",
+                    "name": "_cacheCondition",
+                    "method": "cacheCondition",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCacheCondition",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cache_condition"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Content types to apply automatic gzip to"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"content_types\" <$> TF.attribute",
+                    "name": "_contentTypes",
+                    "method": "contentTypes",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasContentTypes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "content_types"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "File extensions to apply automatic gzip to. Do not include '.'"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"extensions\" <$> TF.attribute",
+                    "name": "_extensions",
+                    "method": "extensions",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasExtensions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "extensions"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "A name to refer to this gzip condition"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "name": "ServiceV1Gzip",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "A name to refer to this gzip condition"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServiceV1Gzip s",
+            "original": "service_v1_gzip"
+        },
+        {
+            "con": {
+                "smart": "newServiceV1Gcslogging",
+                "name": "ServiceV1Gcslogging'"
             },
             "arguments": [
                 {
@@ -2118,7 +1938,7 @@
                     "original": "timestamp_format"
                 }
             ],
-            "name": "Gcslogging",
+            "name": "ServiceV1Gcslogging",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2160,254 +1980,202 @@
                 }
             ],
             "conflicts": [],
-            "type": "Gcslogging s",
-            "original": "gcslogging"
+            "type": "ServiceV1Gcslogging s",
+            "original": "service_v1_gcslogging"
         },
         {
             "con": {
-                "smart": "newGzip",
-                "name": "Gzip'"
+                "smart": "newServiceV1S3logging",
+                "name": "ServiceV1S3logging'"
             },
             "arguments": [
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Name of a condition controlling when this gzip configuration applies."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cache_condition\" <$> TF.attribute",
-                    "name": "_cacheCondition",
-                    "method": "cacheCondition",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasCacheCondition",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cache_condition"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Content types to apply automatic gzip to"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"content_types\" <$> TF.attribute",
-                    "name": "_contentTypes",
-                    "method": "contentTypes",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasContentTypes",
-                    "validate": false,
-                    "optional": true,
-                    "original": "content_types"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "File extensions to apply automatic gzip to. Do not include '.'"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"extensions\" <$> TF.attribute",
-                    "name": "_extensions",
-                    "method": "extensions",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasExtensions",
-                    "validate": false,
-                    "optional": true,
-                    "original": "extensions"
-                },
-                {
-                    "default": "_name",
+                    "default": "_bucketName",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "A name to refer to this gzip condition"
+                        "S3 Bucket name to store logs in"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
+                    "encoder": "TF.assign \"bucket_name\" <$> TF.attribute",
+                    "name": "_bucketName",
+                    "method": "bucketName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasName",
+                    "class": "HasBucketName",
                     "validate": false,
                     "optional": false,
-                    "original": "name"
-                }
-            ],
-            "name": "Gzip",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "A name to refer to this gzip condition"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "conflicts": [],
-            "type": "Gzip s",
-            "original": "gzip"
-        },
-        {
-            "con": {
-                "smart": "newHeader",
-                "name": "Header'"
-            },
-            "arguments": [
-                {
-                    "default": "_action",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "One of set, append, delete, regex, or regex_repeat"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"action\" <$> TF.attribute",
-                    "name": "_action",
-                    "method": "action",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAction",
-                    "validate": false,
-                    "optional": false,
-                    "original": "action"
+                    "original": "bucket_name"
                 },
                 {
-                    "default": "TF.Nil",
+                    "default": "TF.value \"s3.amazonaws.com\"",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Optional name of a cache condition to apply."
+                        "Bucket endpoint"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"cache_condition\" <$> TF.attribute",
-                    "name": "_cacheCondition",
-                    "method": "cacheCondition",
+                    "encoder": "TF.assign \"domain\" <$> TF.attribute",
+                    "name": "_domain",
+                    "method": "domain",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasCacheCondition",
+                    "class": "HasDomain",
                     "validate": false,
                     "optional": true,
-                    "original": "cache_condition"
+                    "original": "domain"
                 },
                 {
-                    "default": "_destination",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Header this affects"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination\" <$> TF.attribute",
-                    "name": "_destination",
-                    "method": "destination",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDestination",
-                    "validate": false,
-                    "optional": false,
-                    "original": "destination"
-                },
-                {
-                    "default": "TF.value P.False",
+                    "default": "TF.value \"%h %l %u %t %r %>s\"",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Don't add the header if it is already. (Only applies to 'set' action.).",
-                        "Default `false`"
+                        "Apache-style string or VCL variables to use for log formatting"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"ignore_if_set\" <$> TF.attribute",
-                    "name": "_ignoreIfSet",
-                    "method": "ignoreIfSet",
+                    "encoder": "TF.assign \"format\" <$> TF.attribute",
+                    "name": "_format",
+                    "method": "format",
                     "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIgnoreIfSet",
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFormat",
                     "validate": false,
                     "optional": true,
-                    "original": "ignore_if_set"
+                    "original": "format"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "A name to refer to this Header object"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.value 100",
+                    "default": "TF.value 1",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Lower priorities execute first. (Default: 100.)"
+                        "The version of the custom logging format used for the configured endpoint.",
+                        "Can be either 1 or 2. (Default: 1)"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "_priority",
-                    "method": "priority",
+                    "encoder": "TF.assign \"format_version\" <$> TF.attribute",
+                    "name": "_formatVersion",
+                    "method": "formatVersion",
                     "conflicts": [],
                     "type": "TF.Attr s P.Integer",
-                    "class": "HasPriority",
+                    "class": "HasFormatVersion",
                     "validate": false,
                     "optional": true,
-                    "original": "priority"
+                    "original": "format_version"
                 },
                 {
-                    "default": "TF.Nil",
+                    "default": "TF.value 0",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Optional name of a request condition to apply."
+                        "Gzip Compression level"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"request_condition\" <$> TF.attribute",
-                    "name": "_requestCondition",
-                    "method": "requestCondition",
+                    "encoder": "TF.assign \"gzip_level\" <$> TF.attribute",
+                    "name": "_gzipLevel",
+                    "method": "gzipLevel",
                     "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRequestCondition",
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasGzipLevel",
                     "validate": false,
                     "optional": true,
-                    "original": "request_condition"
+                    "original": "gzip_level"
+                },
+                {
+                    "default": "TF.value \"classic\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How the message should be formatted."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"message_type\" <$> TF.attribute",
+                    "name": "_messageType",
+                    "method": "messageType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMessageType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "message_type"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to refer to this logging setup"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 },
                 {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Optional name of a response condition to apply."
+                        "Path to store the files. Must end with a trailing slash"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"path\" <$> TF.attribute",
+                    "name": "_path",
+                    "method": "path",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPath",
+                    "validate": false,
+                    "optional": true,
+                    "original": "path"
+                },
+                {
+                    "default": "TF.value 3600",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "How frequently the logs should be transferred, in seconds (Default 3600)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"period\" <$> TF.attribute",
+                    "name": "_period",
+                    "method": "period",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPeriod",
+                    "validate": false,
+                    "optional": true,
+                    "original": "period"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The S3 redundancy level."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"redundancy\" <$> TF.attribute",
+                    "name": "_redundancy",
+                    "method": "redundancy",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRedundancy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "redundancy"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Name of a condition to apply this logging."
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"response_condition\" <$> TF.attribute",
@@ -2421,128 +2189,88 @@
                     "original": "response_condition"
                 },
                 {
-                    "default": "_type'",
+                    "default": "TF.Nil",
                     "computed": false,
-                    "required": true,
+                    "required": false,
                     "help": [
-                        "Type to manipulate: request, fetch, cache, response"
+                        "AWS Access Key"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
+                    "encoder": "TF.assign \"s3_access_key\" <$> TF.attribute",
+                    "name": "_s3AccessKey",
+                    "method": "s3AccessKey",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
+                    "class": "HasS3AccessKey",
                     "validate": false,
-                    "optional": false,
-                    "original": "type"
+                    "optional": true,
+                    "original": "s3_access_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "AWS Secret Key"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"s3_secret_key\" <$> TF.attribute",
+                    "name": "_s3SecretKey",
+                    "method": "s3SecretKey",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasS3SecretKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "s3_secret_key"
+                },
+                {
+                    "default": "TF.value \"%Y-%m-%dT%H:%M:%S.000\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Specified timestamp formatting (default `%Y-%m-%dT%H:%M:%S.000`)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"timestamp_format\" <$> TF.attribute",
+                    "name": "_timestampFormat",
+                    "method": "timestampFormat",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimestampFormat",
+                    "validate": false,
+                    "optional": true,
+                    "original": "timestamp_format"
                 }
             ],
-            "name": "Header",
+            "name": "ServiceV1S3logging",
             "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Regular expression to use (Only applies to 'regex' and 'regex_repeat'",
-                        "actions.)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"regex\" <$> TF.attribute",
-                    "name": "_computedRegex",
-                    "method": "computedRegex",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedRegex",
-                    "validate": false,
-                    "optional": true,
-                    "original": "regex"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Variable to be used as a source for the header content (Does not apply to",
-                        "'delete' action.)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"source\" <$> TF.attribute",
-                    "name": "_computedSource",
-                    "method": "computedSource",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedSource",
-                    "validate": false,
-                    "optional": true,
-                    "original": "source"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Value to substitute in place of regular expression. (Only applies to 'regex'",
-                        "and 'regex_repeat'.)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"substitution\" <$> TF.attribute",
-                    "name": "_computedSubstitution",
-                    "method": "computedSubstitution",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedSubstitution",
-                    "validate": false,
-                    "optional": true,
-                    "original": "substitution"
-                }
-            ],
+            "attributes": [],
             "parameters": [
                 {
-                    "default": "_action",
+                    "default": "_bucketName",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "One of set, append, delete, regex, or regex_repeat"
+                        "S3 Bucket name to store logs in"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"action\" <$> TF.attribute",
-                    "name": "_action",
-                    "method": "action",
+                    "encoder": "TF.assign \"bucket_name\" <$> TF.attribute",
+                    "name": "_bucketName",
+                    "method": "bucketName",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasAction",
+                    "class": "HasBucketName",
                     "validate": false,
                     "optional": false,
-                    "original": "action"
-                },
-                {
-                    "default": "_destination",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Header this affects"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"destination\" <$> TF.attribute",
-                    "name": "_destination",
-                    "method": "destination",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDestination",
-                    "validate": false,
-                    "optional": false,
-                    "original": "destination"
+                    "original": "bucket_name"
                 },
                 {
                     "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "A name to refer to this Header object"
+                        "Unique name to refer to this logging setup"
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
@@ -2554,34 +2282,16 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Type to manipulate: request, fetch, cache, response"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
                 }
             ],
             "conflicts": [],
-            "type": "Header s",
-            "original": "header"
+            "type": "ServiceV1S3logging s",
+            "original": "service_v1_s3logging"
         },
         {
             "con": {
-                "smart": "newBigquerylogging",
-                "name": "Bigquerylogging'"
+                "smart": "newServiceV1Bigquerylogging",
+                "name": "ServiceV1Bigquerylogging'"
             },
             "arguments": [
                 {
@@ -2730,7 +2440,7 @@
                     "original": "table"
                 }
             ],
-            "name": "Bigquerylogging",
+            "name": "ServiceV1Bigquerylogging",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -2808,13 +2518,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Bigquerylogging s",
-            "original": "bigquerylogging"
+            "type": "ServiceV1Bigquerylogging s",
+            "original": "service_v1_bigquerylogging"
         },
         {
             "con": {
-                "smart": "newSyslog",
-                "name": "Syslog'"
+                "smart": "newServiceV1Syslog",
+                "name": "ServiceV1Syslog'"
             },
             "arguments": [
                 {
@@ -3016,7 +2726,7 @@
                     "original": "use_tls"
                 }
             ],
-            "name": "Syslog",
+            "name": "ServiceV1Syslog",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3058,20 +2768,95 @@
                 }
             ],
             "conflicts": [],
-            "type": "Syslog s",
-            "original": "syslog"
+            "type": "ServiceV1Syslog s",
+            "original": "service_v1_syslog"
         },
         {
             "con": {
-                "smart": "newCondition",
-                "name": "Condition'"
+                "smart": "newServiceV1Header",
+                "name": "ServiceV1Header'"
             },
             "arguments": [
+                {
+                    "default": "_action",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "One of set, append, delete, regex, or regex_repeat"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_action",
+                    "method": "action",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "action"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Optional name of a cache condition to apply."
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cache_condition\" <$> TF.attribute",
+                    "name": "_cacheCondition",
+                    "method": "cacheCondition",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasCacheCondition",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cache_condition"
+                },
+                {
+                    "default": "_destination",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Header this affects"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination\" <$> TF.attribute",
+                    "name": "_destination",
+                    "method": "destination",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestination",
+                    "validate": false,
+                    "optional": false,
+                    "original": "destination"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Don't add the header if it is already. (Only applies to 'set' action.).",
+                        "Default `false`"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ignore_if_set\" <$> TF.attribute",
+                    "name": "_ignoreIfSet",
+                    "method": "ignoreIfSet",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIgnoreIfSet",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ignore_if_set"
+                },
                 {
                     "default": "_name",
                     "computed": false,
                     "required": true,
-                    "help": [],
+                    "help": [
+                        "A name to refer to this Header object"
+                    ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
@@ -3084,12 +2869,11 @@
                     "original": "name"
                 },
                 {
-                    "default": "TF.value 10",
+                    "default": "TF.value 100",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "A number used to determine the order in which multiple conditions execute.",
-                        "Lower numbers execute first"
+                        "Lower priorities execute first. (Default: 100.)"
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"priority\" <$> TF.attribute",
@@ -3103,188 +2887,29 @@
                     "original": "priority"
                 },
                 {
-                    "default": "_statement",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The statement used to determine if the condition is met"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"statement\" <$> TF.attribute",
-                    "name": "_statement",
-                    "method": "statement",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStatement",
-                    "validate": false,
-                    "optional": false,
-                    "original": "statement"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Type of the condition, either `REQUEST`, `RESPONSE`, or `CACHE`"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "name": "Condition",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_statement",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "The statement used to determine if the condition is met"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"statement\" <$> TF.attribute",
-                    "name": "_statement",
-                    "method": "statement",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasStatement",
-                    "validate": false,
-                    "optional": false,
-                    "original": "statement"
-                },
-                {
-                    "default": "_type'",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Type of the condition, either `REQUEST`, `RESPONSE`, or `CACHE`"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"type\" <$> TF.attribute",
-                    "name": "_type'",
-                    "method": "type'",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasType'",
-                    "validate": false,
-                    "optional": false,
-                    "original": "type"
-                }
-            ],
-            "conflicts": [],
-            "type": "Condition s",
-            "original": "condition"
-        },
-        {
-            "con": {
-                "smart": "newLogentries",
-                "name": "Logentries'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value \"%h %l %u %t %r %>s\"",
+                    "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Apache-style string or VCL variables to use for log formatting"
+                        "Optional name of a request condition to apply."
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"format\" <$> TF.attribute",
-                    "name": "_format",
-                    "method": "format",
+                    "encoder": "TF.assign \"request_condition\" <$> TF.attribute",
+                    "name": "_requestCondition",
+                    "method": "requestCondition",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasFormat",
+                    "class": "HasRequestCondition",
                     "validate": false,
                     "optional": true,
-                    "original": "format"
-                },
-                {
-                    "default": "TF.value 1",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The version of the custom logging format used for the configured endpoint.",
-                        "Can be either 1 or 2. (Default: 1)"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"format_version\" <$> TF.attribute",
-                    "name": "_formatVersion",
-                    "method": "formatVersion",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasFormatVersion",
-                    "validate": false,
-                    "optional": true,
-                    "original": "format_version"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Unique name to refer to this logging setup"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.value 20000",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "The port number configured in Logentries"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": true,
-                    "original": "port"
+                    "original": "request_condition"
                 },
                 {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
                     "help": [
-                        "Name of a condition to apply this logging."
+                        "Optional name of a response condition to apply."
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"response_condition\" <$> TF.attribute",
@@ -3298,52 +2923,128 @@
                     "original": "response_condition"
                 },
                 {
-                    "default": "_token",
+                    "default": "_type'",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Use token based authentication (https://logentries.com/doc/input-token/)"
+                        "Type to manipulate: request, fetch, cache, response"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"token\" <$> TF.attribute",
-                    "name": "_token",
-                    "method": "token",
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasToken",
+                    "class": "HasType'",
                     "validate": false,
                     "optional": false,
-                    "original": "token"
-                },
-                {
-                    "default": "TF.value P.True",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Whether to use TLS for secure logging"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"use_tls\" <$> TF.attribute",
-                    "name": "_useTls",
-                    "method": "useTls",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasUseTls",
-                    "validate": false,
-                    "optional": true,
-                    "original": "use_tls"
+                    "original": "type"
                 }
             ],
-            "name": "Logentries",
+            "name": "ServiceV1Header",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Regular expression to use (Only applies to 'regex' and 'regex_repeat'",
+                        "actions.)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"regex\" <$> TF.attribute",
+                    "name": "_computedRegex",
+                    "method": "computedRegex",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRegex",
+                    "validate": false,
+                    "optional": true,
+                    "original": "regex"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Variable to be used as a source for the header content (Does not apply to",
+                        "'delete' action.)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source\" <$> TF.attribute",
+                    "name": "_computedSource",
+                    "method": "computedSource",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSource",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [
+                        "Value to substitute in place of regular expression. (Only applies to 'regex'",
+                        "and 'regex_repeat'.)"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"substitution\" <$> TF.attribute",
+                    "name": "_computedSubstitution",
+                    "method": "computedSubstitution",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedSubstitution",
+                    "validate": false,
+                    "optional": true,
+                    "original": "substitution"
+                }
+            ],
             "parameters": [
+                {
+                    "default": "_action",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "One of set, append, delete, regex, or regex_repeat"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_action",
+                    "method": "action",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAction",
+                    "validate": false,
+                    "optional": false,
+                    "original": "action"
+                },
+                {
+                    "default": "_destination",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Header this affects"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"destination\" <$> TF.attribute",
+                    "name": "_destination",
+                    "method": "destination",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestination",
+                    "validate": false,
+                    "optional": false,
+                    "original": "destination"
+                },
                 {
                     "default": "_name",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Unique name to refer to this logging setup"
+                        "A name to refer to this Header object"
                     ],
                     "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
@@ -3357,32 +3058,32 @@
                     "original": "name"
                 },
                 {
-                    "default": "_token",
+                    "default": "_type'",
                     "computed": false,
                     "required": true,
                     "help": [
-                        "Use token based authentication (https://logentries.com/doc/input-token/)"
+                        "Type to manipulate: request, fetch, cache, response"
                     ],
                     "forceNew": false,
-                    "encoder": "TF.assign \"token\" <$> TF.attribute",
-                    "name": "_token",
-                    "method": "token",
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
-                    "class": "HasToken",
+                    "class": "HasType'",
                     "validate": false,
                     "optional": false,
-                    "original": "token"
+                    "original": "type"
                 }
             ],
             "conflicts": [],
-            "type": "Logentries s",
-            "original": "logentries"
+            "type": "ServiceV1Header s",
+            "original": "service_v1_header"
         },
         {
             "con": {
-                "smart": "newResponseObject",
-                "name": "ResponseObject'"
+                "smart": "newServiceV1ResponseObject",
+                "name": "ServiceV1ResponseObject'"
             },
             "arguments": [
                 {
@@ -3514,7 +3215,7 @@
                     "original": "status"
                 }
             ],
-            "name": "ResponseObject",
+            "name": "ServiceV1ResponseObject",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -3538,10 +3239,310 @@
                 }
             ],
             "conflicts": [],
-            "type": "ResponseObject s",
-            "original": "response_object"
+            "type": "ServiceV1ResponseObject s",
+            "original": "service_v1_response_object"
+        },
+        {
+            "con": {
+                "smart": "newServiceV1Papertrail",
+                "name": "ServiceV1Papertrail'"
+            },
+            "arguments": [
+                {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The address of the papertrail service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "address"
+                },
+                {
+                    "default": "TF.value \"%h %l %u %t %r %>s\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Apache-style string or VCL variables to use for log formatting"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"format\" <$> TF.attribute",
+                    "name": "_format",
+                    "method": "format",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFormat",
+                    "validate": false,
+                    "optional": true,
+                    "original": "format"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to refer to this logging setup"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_port",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The port of the papertrail service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Name of a condition to apply this logging"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"response_condition\" <$> TF.attribute",
+                    "name": "_responseCondition",
+                    "method": "responseCondition",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasResponseCondition",
+                    "validate": false,
+                    "optional": true,
+                    "original": "response_condition"
+                }
+            ],
+            "name": "ServiceV1Papertrail",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_address",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The address of the papertrail service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"address\" <$> TF.attribute",
+                    "name": "_address",
+                    "method": "address",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAddress",
+                    "validate": false,
+                    "optional": false,
+                    "original": "address"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to refer to this logging setup"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_port",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The port of the papertrail service"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServiceV1Papertrail s",
+            "original": "service_v1_papertrail"
+        },
+        {
+            "con": {
+                "smart": "newServiceV1Condition",
+                "name": "ServiceV1Condition'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.value 10",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "A number used to determine the order in which multiple conditions execute.",
+                        "Lower numbers execute first"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
+                    "name": "_priority",
+                    "method": "priority",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPriority",
+                    "validate": false,
+                    "optional": true,
+                    "original": "priority"
+                },
+                {
+                    "default": "_statement",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The statement used to determine if the condition is met"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statement\" <$> TF.attribute",
+                    "name": "_statement",
+                    "method": "statement",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatement",
+                    "validate": false,
+                    "optional": false,
+                    "original": "statement"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Type of the condition, either `REQUEST`, `RESPONSE`, or `CACHE`"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "name": "ServiceV1Condition",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_statement",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "The statement used to determine if the condition is met"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"statement\" <$> TF.attribute",
+                    "name": "_statement",
+                    "method": "statement",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStatement",
+                    "validate": false,
+                    "optional": false,
+                    "original": "statement"
+                },
+                {
+                    "default": "_type'",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Type of the condition, either `REQUEST`, `RESPONSE`, or `CACHE`"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": false,
+                    "original": "type"
+                }
+            ],
+            "conflicts": [],
+            "type": "ServiceV1Condition s",
+            "original": "service_v1_condition"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/fastly/index.html",
     "dataSources": [
         {
             "con": {
@@ -3549,6 +3550,7 @@
                 "name": "IpRangesData'"
             },
             "arguments": [],
+            "url": "https://www.terraform.io/docs/providers/fastly/d/ip_ranges.html",
             "name": "IpRangesData",
             "threaded": true,
             "attributes": [
@@ -3592,7 +3594,7 @@
                     "name": "_backend",
                     "method": "backend",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Backend s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Backend s)]",
                     "class": "HasBackend",
                     "validate": true,
                     "optional": true,
@@ -3608,7 +3610,7 @@
                     "name": "_bigquerylogging",
                     "method": "bigquerylogging",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Bigquerylogging s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Bigquerylogging s)]",
                     "class": "HasBigquerylogging",
                     "validate": true,
                     "optional": true,
@@ -3624,7 +3626,7 @@
                     "name": "_cacheSetting",
                     "method": "cacheSetting",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (CacheSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1CacheSetting s)]",
                     "class": "HasCacheSetting",
                     "validate": true,
                     "optional": true,
@@ -3640,7 +3642,7 @@
                     "name": "_condition",
                     "method": "condition",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Condition s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Condition s)]",
                     "class": "HasCondition",
                     "validate": true,
                     "optional": true,
@@ -3674,7 +3676,7 @@
                     "name": "_domain",
                     "method": "domain",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Domain s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Domain s)]",
                     "class": "HasDomain",
                     "validate": true,
                     "optional": false,
@@ -3706,7 +3708,7 @@
                     "name": "_gcslogging",
                     "method": "gcslogging",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Gcslogging s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Gcslogging s)]",
                     "class": "HasGcslogging",
                     "validate": true,
                     "optional": true,
@@ -3722,7 +3724,7 @@
                     "name": "_gzip",
                     "method": "gzip",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Gzip s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Gzip s)]",
                     "class": "HasGzip",
                     "validate": true,
                     "optional": true,
@@ -3738,7 +3740,7 @@
                     "name": "_header",
                     "method": "header",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Header s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Header s)]",
                     "class": "HasHeader",
                     "validate": true,
                     "optional": true,
@@ -3754,7 +3756,7 @@
                     "name": "_healthcheck",
                     "method": "healthcheck",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Healthcheck s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Healthcheck s)]",
                     "class": "HasHealthcheck",
                     "validate": true,
                     "optional": true,
@@ -3770,7 +3772,7 @@
                     "name": "_logentries",
                     "method": "logentries",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Logentries s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Logentries s)]",
                     "class": "HasLogentries",
                     "validate": true,
                     "optional": true,
@@ -3804,7 +3806,7 @@
                     "name": "_papertrail",
                     "method": "papertrail",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Papertrail s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Papertrail s)]",
                     "class": "HasPapertrail",
                     "validate": true,
                     "optional": true,
@@ -3820,7 +3822,7 @@
                     "name": "_requestSetting",
                     "method": "requestSetting",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (RequestSetting s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1RequestSetting s)]",
                     "class": "HasRequestSetting",
                     "validate": true,
                     "optional": true,
@@ -3836,7 +3838,7 @@
                     "name": "_responseObject",
                     "method": "responseObject",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ResponseObject s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1ResponseObject s)]",
                     "class": "HasResponseObject",
                     "validate": true,
                     "optional": true,
@@ -3852,7 +3854,7 @@
                     "name": "_s3logging",
                     "method": "s3logging",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (S3logging s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1S3logging s)]",
                     "class": "HasS3logging",
                     "validate": true,
                     "optional": true,
@@ -3868,7 +3870,7 @@
                     "name": "_sumologic",
                     "method": "sumologic",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Sumologic s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Sumologic s)]",
                     "class": "HasSumologic",
                     "validate": true,
                     "optional": true,
@@ -3884,7 +3886,7 @@
                     "name": "_syslog",
                     "method": "syslog",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Syslog s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Syslog s)]",
                     "class": "HasSyslog",
                     "validate": true,
                     "optional": true,
@@ -3900,13 +3902,14 @@
                     "name": "_vcl",
                     "method": "vcl",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Vcl s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Vcl s)]",
                     "class": "HasVcl",
                     "validate": true,
                     "optional": true,
                     "original": "vcl"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/fastly/r/service_v1.html",
             "name": "ServiceV1Resource",
             "threaded": true,
             "attributes": [
@@ -3956,7 +3959,7 @@
                     "name": "_domain",
                     "method": "domain",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Domain s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServiceV1Domain s)]",
                     "class": "HasDomain",
                     "validate": true,
                     "optional": false,
