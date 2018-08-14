@@ -41,7 +41,7 @@ import qualified Terrafomo.Validator as TF
 
 -- | @{{ resource.value.original }}@ {{ type }}.
 --
--- See the <https://www.terraform.io/docs/providers/{{ provider }}/{{ resource.value.original }} terraform documentation>
+-- See the <{{ resource.value.url }} terraform documentation>
 -- for more information.
 data {{ resource.value.type }} = {{ resource.value.con.name }}
 {% include "_include/record.ede" with arguments = resource.value.arguments %}

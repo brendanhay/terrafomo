@@ -10,7 +10,7 @@ instance P.{{ field.value.class }} ({{ schema.type }}) ({{ field.value.type }}) 
 
 instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' ({{ schema.type }})) ({{ field.value.type }}) where
     {% if field.value.computed %}
-    {{ field.value.method }} x = TF.compute (TF.refKey x) "{{ field.value.name }}"
+    {{ field.value.method }} x = TF.compute (TF.refKey x) "{{ field.value.original }}"
     {% else %}
     {{ field.value.method }} =
         ({{ field.value.name }} :: {{ schema.name }} s -> {{ field.value.type }})

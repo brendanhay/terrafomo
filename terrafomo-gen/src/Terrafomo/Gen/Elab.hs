@@ -38,6 +38,7 @@ import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Text         as Text
 import qualified Terrafomo.Gen.Type         as Type
+import qualified Terrafomo.Gen.URL          as URL
 
 type Elab =
     ReaderT (Config, Bool)
@@ -49,16 +50,21 @@ run cfg provider =
     Except.runExcept $
         flip State.evalStateT mempty $
             flip Reader.runReaderT (cfg, False) $ do
+                let original = Go.providerName provider
+
                 resources   <-
                     Traverse.for (Go.providerResources provider) $ \x ->
-                        elabResource (Go.resourceName x) (Go.resourceSchemas x)
+                        elabResource original
+                            (Go.resourceName x) (Go.resourceSchemas x)
 
                 datasources <-
                     Traverse.for (Go.providerDataSources provider) $ \x ->
-                        elabDataSource (Go.resourceName x) (Go.resourceSchemas x)
+                        elabDataSource original
+                            (Go.resourceName x) (Go.resourceSchemas x)
 
                 schema      <-
-                     elabSettings "provider" (Go.providerSchemas provider)
+                     elabSettings "provider"
+                         (Go.providerSchemas provider)
 
                 settings    <-
                      State.gets (Map.elems . Map.delete "provider")
@@ -67,7 +73,8 @@ run cfg provider =
                     { providerName         = configProviderName cfg
                     , providerPackage      = configPackage      cfg
                     , providerDependencies = configDependencies cfg
-                    , providerOriginal     = Go.providerName provider
+                    , providerOriginal     = original
+                    , providerUrl          = URL.provider original
                     , providerResources    = resources
                     , providerDataSources  = datasources
                     , providerSettings     = settings
@@ -89,27 +96,26 @@ classes p = (lenses, getters)
     attrs = concatMap schemaAttributes schemas
 
     schemas =
-           map fromResource   (providerResources   p)
-        ++ map fromDataSource (providerDataSources p)
+           map resourceSchema (providerResources   p)
+        ++ map resourceSchema (providerDataSources p)
         ++ map fromSettings   (providerSchema p : providerSettings p)
 
-elabResource :: Text -> [Go.Schema] -> Elab Resource
-elabResource original =
+elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
+elabResource provider original =
     withThreaded
-        . fmap Resource'
+        . fmap (Resource' (URL.resource provider original))
             . elabSchema original (Name.resourceNames original)
 
-elabDataSource :: Text -> [Go.Schema] -> Elab DataSource
-elabDataSource original =
+elabDataSource :: Text -> Text -> [Go.Schema] -> Elab Resource
+elabDataSource provider original =
     withThreaded
-        . fmap DataSource'
+        . fmap (Resource' (URL.datasource provider original))
             . elabSchema original (Name.dataSourceNames original)
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
     settings <-
-        Settings' <$>
-            elabSchema original (Name.settingsNames original) schemas
+        Settings' <$> elabSchema original (Name.settingsNames original) schemas
 
     State.modify' (Map.insert original settings)
 
@@ -126,17 +132,56 @@ elabSchema original (data_, con, smart) schemas = do
     attrs  <- elabAttributes original schemas
     typ    <- elabData data_
 
-    pure $! Schema'
-        { schemaName       = data_
-        , schemaOriginal   = original
-        , schemaType       = typ
-        , schemaCon        = Con con smart
-        , schemaThreaded   = thread
-        , schemaConflicts  = filterConflicts  args
-        , schemaParameters = filterParameters args
-        , schemaArguments  = args
-        , schemaAttributes = attrs
+    schema <-
+        mergeSchema original $ Schema'
+            { schemaName       = data_
+            , schemaOriginal   = original
+            , schemaType       = typ
+            , schemaCon        = Con con smart
+            , schemaThreaded   = thread
+            , schemaConflicts  = filterConflicts  args
+            , schemaParameters = filterParameters args
+            , schemaArguments  = args
+            , schemaAttributes = attrs
+            }
+
+    pure $! schema
+        { schemaConflicts  = filterConflicts  (schemaArguments schema)
+        , schemaParameters = filterParameters (schemaArguments schema)
         }
+
+mergeSchema :: Text -> Schema Conflict -> Elab (Schema Conflict)
+mergeSchema original a =
+    State.gets (Map.lookup original) >>= \case
+        Just (Settings' b) | a /= b -> merge b a
+        _                           -> pure a
+  where
+    merge old new = do
+        refresh <-
+            pure $! old
+                { schemaArguments  = schemaArguments  old ++ schemaArguments  new
+                , schemaAttributes = schemaAttributes old ++ schemaAttributes new
+                }
+
+            -- FIXME: revisit safe/saner merging strategies
+            --
+            -- if | null (schemaArguments old) && null (schemaAttributes new) ->
+            --        pure $! old { schemaArguments = schemaArguments new }
+
+            --    | null (schemaArguments new) && null (schemaAttributes old) ->
+            --        pure $! old { schemaAttributes = schemaAttributes new }
+
+            --    | otherwise ->
+            --        Except.throwError $
+            --            "Error merging settings types for key "
+            --                 ++ unlines [ show original
+            --                            , "Old => " ++ ppShow old
+            --                            , "New => " ++ ppShow new
+            --                            ]
+
+        State.modify' (Map.insert original (Settings' refresh))
+
+        pure refresh
 
 elabNestedSchema :: Go.Schema -> Elab Type
 elabNestedSchema schema

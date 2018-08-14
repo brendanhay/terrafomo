@@ -10,8 +10,12 @@ import Terrafomo.Gen.Haskell
 import Terrafomo.Gen.Name      (ProviderName)
 import Terrafomo.Gen.Namespace (NS)
 
+import Text.EDE.Filters ((@:))
+
 import qualified Data.Aeson.Types        as JSON
+import qualified Data.HashMap.Strict     as Map
 import qualified Data.HashSet            as Set
+import qualified Data.Text               as Text
 import qualified Data.Text.Lazy          as LText
 import qualified Terrafomo.Gen.Namespace as NS
 import qualified Text.EDE                as EDE
@@ -123,34 +127,10 @@ resources
     -> (HashSet Class, HashSet Class)
     -> [NS]
     -> NS
+    -> Text
     -> [Resource]
     -> Either String LText.Text
-resources tmpls p classes namespaces ns =
-    schemas tmpls p classes namespaces ns "Resource"
-        . map fromResource
-
-datasources
-    :: Templates EDE.Template
-    -> ProviderName
-    -> (HashSet Class, HashSet Class)
-    -> [NS]
-    -> NS
-    -> [DataSource]
-    -> Either String LText.Text
-datasources tmpls p classes namespaces ns =
-    schemas tmpls p classes namespaces ns "DataSource"
-        . map fromDataSource
-
-schemas
-    :: Templates EDE.Template
-    -> ProviderName
-    -> (HashSet Class, HashSet Class)
-    -> [NS]
-    -> NS
-    -> Text
-    -> [Schema Conflict]
-    -> Either String LText.Text
-schemas tmpls p (args, attrs) namespaces ns typ xs =
+resources tmpls p (args, attrs) namespaces ns typ xs =
     render (resourceTemplate tmpls)
         [ "namespace"        .= ns
         , "provider"         .= p
@@ -168,4 +148,8 @@ schemas tmpls p (args, attrs) namespaces ns typ xs =
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
-render tmpl = EDE.eitherRenderWith mempty tmpl . EDE.fromPairs
+render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
+  where
+    filters = Map.fromList
+        [ "head" @: Text.take 1
+        ]

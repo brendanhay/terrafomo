@@ -105,7 +105,7 @@ main = do
         config    <-
             parseYAML "Config" (configYAML opts)
 
-        provider@Provider'{providerName}  <-
+        provider@Provider'{providerName, providerOriginal}  <-
             parseJSON "Provider" (providerJSON opts)
                 >>= hoistEither . Elab.run config
 
@@ -113,7 +113,7 @@ main = do
             genDir      = providerDir </> "gen"
             srcDir      = providerDir </> "src"
 
-        let irFile      = irDir opts  </> Text.unpack (providerOriginal provider) <.> "json"
+        let irFile      = irDir opts  </> Text.unpack providerOriginal <.> "json"
             packageFile = providerDir </> "package" <.> "yaml"
             typesFile   = srcDir      </> NS.toPath (NS.types providerName) <.> "hs"
 
@@ -137,6 +137,10 @@ main = do
             namespaces  =
                 map fst settings
 
+            render typ ns xs =
+                (Render.resources templates providerName
+                    classes namespaces ns typ xs)
+
         createDirectory (irDir opts)
         createDirectory providerDir
 
@@ -151,11 +155,11 @@ main = do
                 >>= writeNS genDir . (ns,)
 
         Fold.for_ resources $ \(ns, xs) ->
-            hoistEither (Render.resources templates providerName classes namespaces ns xs)
+            hoistEither (render "Resource" ns xs)
                 >>= writeNS genDir . (ns,)
 
         Fold.for_ datasources $ \(ns, xs) ->
-            hoistEither (Render.datasources templates providerName classes namespaces ns xs)
+            hoistEither (render "DataSource" ns xs)
                 >>= writeNS genDir . (ns,)
 
         hoistEither (Render.provider templates provider namespaces)

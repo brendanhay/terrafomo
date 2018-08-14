@@ -4,7 +4,7 @@ module Terrafomo.Gen.Haskell where
 
 import Data.Hashable  (Hashable)
 import Data.HashSet   (HashSet)
-import Data.Semigroup ((<>))
+import Data.Semigroup (Semigroup ((<>)))
 import Data.Text      (Text)
 
 import GHC.Generics (Generic)
@@ -12,6 +12,7 @@ import GHC.Generics (Generic)
 import Terrafomo.Gen.Name
 import Terrafomo.Gen.Type (Type)
 
+import qualified Data.HashMap.Strict              as Map
 import qualified Data.Text                        as Text
 import qualified Data.Text.Lazy                   as LText
 import qualified Data.Text.Lazy.Builder           as Build
@@ -26,8 +27,9 @@ data Provider = Provider'
     , providerPackage      :: !Text
     , providerDependencies :: !(HashSet Text)
     , providerOriginal     :: !Text
+    , providerUrl          :: !Text
     , providerResources    :: ![Resource]
-    , providerDataSources  :: ![DataSource]
+    , providerDataSources  :: ![Resource]
     , providerSettings     :: ![Settings]
     , providerSchema       :: !Settings
     } deriving (Show, Eq, Generic)
@@ -35,11 +37,17 @@ data Provider = Provider'
 instance JSON.ToJSON Provider where
     toJSON = JSON.genericToJSON (JSON.options "provider")
 
-newtype Resource = Resource' { fromResource :: Schema Conflict }
-    deriving (Show, Eq, JSON.ToJSON)
+data Resource = Resource'
+    { resourceUrl    :: !Text
+    , resourceSchema :: !(Schema Conflict)
+    } deriving (Show, Eq)
 
-newtype DataSource = DataSource' { fromDataSource :: Schema Conflict }
-    deriving (Show, Eq, JSON.ToJSON)
+instance JSON.ToJSON Resource where
+    toJSON x =
+        case JSON.toJSON (resourceSchema x) of
+            JSON.Object o ->
+                JSON.Object (Map.insert "url" (JSON.toJSON (resourceUrl x)) o)
+            other         -> other
 
 newtype Settings = Settings' { fromSettings :: Schema Conflict }
     deriving (Show, Eq, JSON.ToJSON)

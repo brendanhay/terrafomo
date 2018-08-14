@@ -37,7 +37,7 @@ import qualified Terrafomo.Validator as TF
 
 -- | The @{{ provider.name }}@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/{{ provider.name }}/index.html terraform documenation>
+-- See the <{{ provider.url }} terraform documentation>
 -- for more information.
 data Provider = {{ provider.schema.con.name }}
 {% include "_include/record.ede" with arguments = provider.schema.arguments %}

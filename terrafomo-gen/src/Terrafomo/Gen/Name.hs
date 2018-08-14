@@ -1,7 +1,6 @@
 module Terrafomo.Gen.Name where
 
 import Data.Hashable  (Hashable)
-import Data.Maybe     (fromMaybe)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text      (Text)
 
@@ -59,7 +58,7 @@ fieldNames computed x =
 
 resourceName :: Text -> Text
 resourceName x =
-    case Text.split (== '_') x of
+    case split x of
         []   -> x
         _:xs -> foldMap Text.upperHead xs
 
@@ -84,7 +83,9 @@ dataName = Name . Text.upperHead . originalName
 
 originalName :: Text -> Text
 originalName (Text.unreserved -> x) =
-    let y = fromMaybe x (Text.stripPrefix "_" x)
-     in case filter (not . Text.null) $ Text.split (== '_') y of
-           []   -> y
-           z:zs -> mconcat (z : map Text.upperHead zs)
+    case split x of
+        []   -> x
+        z:zs -> mconcat (z : map Text.upperHead zs)
+
+split :: Text -> [Text]
+split = filter (not . Text.null) . Text.split (== '_')
