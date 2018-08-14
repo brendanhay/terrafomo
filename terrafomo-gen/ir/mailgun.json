@@ -2,90 +2,11 @@
     "settings": [
         {
             "con": {
-                "smart": "newReceivingRecords",
-                "name": "ReceivingRecords'"
+                "smart": "newDomainSendingRecords",
+                "name": "DomainSendingRecords'"
             },
             "arguments": [],
-            "name": "ReceivingRecords",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "_computedPriority",
-                    "method": "computedPriority",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedPriority",
-                    "validate": false,
-                    "optional": false,
-                    "original": "priority"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"record_type\" <$> TF.attribute",
-                    "name": "_computedRecordType",
-                    "method": "computedRecordType",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedRecordType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "record_type"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"valid\" <$> TF.attribute",
-                    "name": "_computedValid",
-                    "method": "computedValid",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedValid",
-                    "validate": false,
-                    "optional": false,
-                    "original": "valid"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_computedValue",
-                    "method": "computedValue",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "parameters": [],
-            "conflicts": [],
-            "type": "ReceivingRecords s",
-            "original": "receiving_records"
-        },
-        {
-            "con": {
-                "smart": "newSendingRecords",
-                "name": "SendingRecords'"
-            },
-            "arguments": [],
-            "name": "SendingRecords",
+            "name": "DomainSendingRecords",
             "threaded": true,
             "attributes": [
                 {
@@ -155,10 +76,90 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "SendingRecords s",
-            "original": "sending_records"
+            "type": "DomainSendingRecords s",
+            "original": "domain_sending_records"
+        },
+        {
+            "con": {
+                "smart": "newDomainReceivingRecords",
+                "name": "DomainReceivingRecords'"
+            },
+            "arguments": [],
+            "name": "DomainReceivingRecords",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
+                    "name": "_computedPriority",
+                    "method": "computedPriority",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedPriority",
+                    "validate": false,
+                    "optional": false,
+                    "original": "priority"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"record_type\" <$> TF.attribute",
+                    "name": "_computedRecordType",
+                    "method": "computedRecordType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedRecordType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "record_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"valid\" <$> TF.attribute",
+                    "name": "_computedValid",
+                    "method": "computedValid",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValid",
+                    "validate": false,
+                    "optional": false,
+                    "original": "valid"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_computedValue",
+                    "method": "computedValue",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DomainReceivingRecords s",
+            "original": "domain_receiving_records"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/mailgun/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -200,6 +201,7 @@
                     "original": "smtp_password"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/mailgun/r/domain.html",
             "name": "DomainResource",
             "threaded": true,
             "attributes": [
@@ -213,7 +215,7 @@
                     "name": "_computedReceivingRecords",
                     "method": "computedReceivingRecords",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (ReceivingRecords s)]",
+                    "type": "TF.Attr s [TF.Attr s (DomainReceivingRecords s)]",
                     "class": "HasComputedReceivingRecords",
                     "validate": true,
                     "optional": false,
@@ -229,7 +231,7 @@
                     "name": "_computedSendingRecords",
                     "method": "computedSendingRecords",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (SendingRecords s)]",
+                    "type": "TF.Attr s [TF.Attr s (DomainSendingRecords s)]",
                     "class": "HasComputedSendingRecords",
                     "validate": true,
                     "optional": false,
