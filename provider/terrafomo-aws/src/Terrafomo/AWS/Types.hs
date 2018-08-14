@@ -17,6 +17,10 @@ module Terrafomo.AWS.Types
     , fzonesuf
 
     , IPRange
+
+    , IAM.Document
+    , IAM.Policy
+    , IAM.Statement
     ) where
 
 import Data.Hashable (Hashable (hashWithSalt))
@@ -28,6 +32,7 @@ import Network.AWS.Types (Region (..))
 
 import Terrafomo
 
+import qualified Amazonka.IAM.Policy    as IAM
 import qualified Data.IP                as IP
 import qualified Data.Text.Lazy.Builder as Build
 import qualified Formatting             as Format
@@ -42,11 +47,13 @@ instance Hashable IPRange where
         hashWithSalt s . \case
             IP.IPv4Range addr ->
                let (ip4, mask) = IP.addrRangePair addr
-                in 0 `hashWithSalt` IP.fromIPv4 ip4
+                in s `hashWithSalt` (0 :: Int)
+                     `hashWithSalt` IP.fromIPv4 ip4
                      `hashWithSalt` mask
             IP.IPv6Range addr ->
                let (ip6, mask) = IP.addrRangePair addr
-                in 1 `hashWithSalt` IP.fromIPv6 ip6
+                in s `hashWithSalt` (1 :: Int)
+                     `hashWithSalt` IP.fromIPv6 ip6
                      `hashWithSalt` mask
 
 -- | A specific AWS availability zone.
