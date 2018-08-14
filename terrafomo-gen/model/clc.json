@@ -57,7 +57,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "custom_fields",
+            "name": "group_custom_fields",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -249,7 +249,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "nodes",
+            "name": "load_balancer_pool_nodes",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -315,7 +315,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ports",
+            "name": "public_ip_ports",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -351,7 +351,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "source_restrictions",
+            "name": "public_ip_source_restrictions",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -392,7 +392,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "additional_disks",
+            "name": "server_additional_disks",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -452,7 +452,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "custom_fields",
+            "name": "server_custom_fields",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
@@ -584,7 +584,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "packages",
+            "name": "server_packages",
             "type": "TypeMap",
             "conflictsWith": [],
             "optional": false,
