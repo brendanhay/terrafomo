@@ -848,86 +848,6 @@
         },
         {
             "con": {
-                "smart": "newStorageAccount",
-                "name": "StorageAccount'"
-            },
-            "arguments": [
-                {
-                    "default": "_accessKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"access_key\" <$> TF.attribute",
-                    "name": "_accessKey",
-                    "method": "accessKey",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAccessKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "access_key"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "name": "StorageAccount",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_accessKey",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"access_key\" <$> TF.attribute",
-                    "name": "_accessKey",
-                    "method": "accessKey",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAccessKey",
-                    "validate": false,
-                    "optional": false,
-                    "original": "access_key"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "conflicts": [],
-            "type": "StorageAccount s",
-            "original": "storage_account"
-        },
-        {
-            "con": {
                 "smart": "newNodeType",
                 "name": "NodeType'"
             },
@@ -10258,22 +10178,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": true,
-                    "encoder": "TF.assign \"command\" <$> TF.attribute",
-                    "name": "_computedCommand",
-                    "method": "computedCommand",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedCommand",
-                    "validate": false,
-                    "optional": true,
-                    "original": "command"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
                     "encoder": "TF.assign \"commands\" <$> TF.attribute",
                     "name": "_computedCommands",
                     "method": "computedCommands",
@@ -13674,103 +13578,6 @@
         },
         {
             "con": {
-                "smart": "newFailoverPolicy",
-                "name": "FailoverPolicy'"
-            },
-            "arguments": [
-                {
-                    "default": "_location",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": false,
-                    "original": "location"
-                },
-                {
-                    "default": "_priority",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "_priority",
-                    "method": "priority",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPriority",
-                    "validate": false,
-                    "optional": false,
-                    "original": "priority"
-                }
-            ],
-            "name": "FailoverPolicy",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
-                    "validate": false,
-                    "optional": true,
-                    "original": "id"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_location",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": false,
-                    "original": "location"
-                },
-                {
-                    "default": "_priority",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"priority\" <$> TF.attribute",
-                    "name": "_priority",
-                    "method": "priority",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPriority",
-                    "validate": false,
-                    "optional": false,
-                    "original": "priority"
-                }
-            ],
-            "conflicts": [],
-            "type": "FailoverPolicy s",
-            "original": "failover_policy"
-        },
-        {
-            "con": {
                 "smart": "newVaultCertificates",
                 "name": "VaultCertificates'"
             },
@@ -14193,22 +14000,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "max_recurrence_interval"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"max_retry_interval\" <$> TF.attribute",
-                    "name": "_computedMaxRetryInterval",
-                    "method": "computedMaxRetryInterval",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedMaxRetryInterval",
-                    "validate": false,
-                    "optional": false,
-                    "original": "max_retry_interval"
                 }
             ],
             "parameters": [],
@@ -25208,24 +24999,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"account_name\" <$> TF.attribute",
-                    "name": "_computedAccountName",
-                    "method": "computedAccountName",
-                    "conflicts": [
-                        "_automationAccountName"
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedAccountName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "account_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"automation_account_name\" <$> TF.attribute",
                     "name": "_computedAutomationAccountName",
                     "method": "computedAutomationAccountName",
@@ -27009,22 +26782,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"storage_account\" <$> TF.attribute",
-                    "name": "_storageAccount",
-                    "method": "storageAccount",
-                    "conflicts": [],
-                    "type": "TF.Attr s (StorageAccount s)",
-                    "class": "HasStorageAccount",
-                    "validate": true,
-                    "optional": true,
-                    "original": "storage_account"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"storage_account_id\" <$> TF.attribute",
                     "name": "_storageAccountId",
                     "method": "storageAccountId",
@@ -27516,22 +27273,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "enable_automatic_failover"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"failover_policy\" <$> TF.attribute",
-                    "name": "_failoverPolicy",
-                    "method": "failoverPolicy",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (FailoverPolicy s)]",
-                    "class": "HasFailoverPolicy",
-                    "validate": true,
-                    "optional": true,
-                    "original": "failover_policy"
                 },
                 {
                     "default": "TF.Nil",
@@ -29793,24 +29534,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"record\" <$> TF.attribute",
-                    "name": "_computedRecord",
-                    "method": "computedRecord",
-                    "conflicts": [
-                        "_records"
-                    ],
-                    "type": "TF.Attr s [TF.Attr s (Record s)]",
-                    "class": "HasComputedRecord",
-                    "validate": true,
-                    "optional": true,
-                    "original": "record"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"records\" <$> TF.attribute",
                     "name": "_computedRecords",
                     "method": "computedRecords",
@@ -30882,22 +30605,6 @@
                     "original": "capture_description"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
-                },
-                {
                     "default": "_messageRetention",
                     "computed": false,
                     "required": true,
@@ -31121,22 +30828,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "listen"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "TF.value P.False",
@@ -31378,22 +31069,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "eventhub_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -31827,22 +31502,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "listen"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "TF.value P.False",
@@ -35234,22 +34893,6 @@
                     "original": "loadbalancer_id"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -35457,22 +35100,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "loadbalancer_id"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -35748,22 +35375,6 @@
                     "original": "loadbalancer_id"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -36019,22 +35630,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "loadbalancer_id"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -36308,22 +35903,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "loadbalancer_id"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -46919,22 +46498,6 @@
                     "original": "dead_lettering_on_message_expiration"
                 },
                 {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"enable_batched_operations\" <$> TF.attribute",
-                    "name": "_enableBatchedOperations",
-                    "method": "enableBatchedOperations",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEnableBatchedOperations",
-                    "validate": false,
-                    "optional": true,
-                    "original": "enable_batched_operations"
-                },
-                {
                     "default": "TF.value P.False",
                     "computed": false,
                     "required": false,
@@ -46965,22 +46528,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "enable_partitioning"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -47061,22 +46608,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "resource_group_name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"support_ordering\" <$> TF.attribute",
-                    "name": "_supportOrdering",
-                    "method": "supportOrdering",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasSupportOrdering",
-                    "validate": false,
-                    "optional": true,
-                    "original": "support_ordering"
                 }
             ],
             "name": "ServicebusQueueResource",
@@ -47486,22 +47017,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"dead_lettering_on_filter_evaluation_exceptions\" <$> TF.attribute",
-                    "name": "_deadLetteringOnFilterEvaluationExceptions",
-                    "method": "deadLetteringOnFilterEvaluationExceptions",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasDeadLetteringOnFilterEvaluationExceptions",
-                    "validate": false,
-                    "optional": true,
-                    "original": "dead_lettering_on_filter_evaluation_exceptions"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"dead_lettering_on_message_expiration\" <$> TF.attribute",
                     "name": "_deadLetteringOnMessageExpiration",
                     "method": "deadLetteringOnMessageExpiration",
@@ -47543,22 +47058,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "forward_to"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_maxDeliveryCount",
@@ -48151,22 +47650,6 @@
                     "computed": false,
                     "required": false,
                     "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"enable_filtering_messages_before_publishing\" <$> TF.attribute",
-                    "name": "_enableFilteringMessagesBeforePublishing",
-                    "method": "enableFilteringMessagesBeforePublishing",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEnableFilteringMessagesBeforePublishing",
-                    "validate": false,
-                    "optional": true,
-                    "original": "enable_filtering_messages_before_publishing"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
                     "forceNew": true,
                     "encoder": "TF.assign \"enable_partitioning\" <$> TF.attribute",
                     "name": "_enablePartitioning",
@@ -48177,22 +47660,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "enable_partitioning"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"location\" <$> TF.attribute",
-                    "name": "_location",
-                    "method": "location",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasLocation",
-                    "validate": false,
-                    "optional": true,
-                    "original": "location"
                 },
                 {
                     "default": "_name",
@@ -50555,22 +50022,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "access_tier"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"account_type\" <$> TF.attribute",
-                    "name": "_computedAccountType",
-                    "method": "computedAccountType",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedAccountType",
-                    "validate": false,
-                    "optional": true,
-                    "original": "account_type"
                 },
                 {
                     "default": "TF.Nil",
