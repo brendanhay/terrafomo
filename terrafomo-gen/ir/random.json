@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/random/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -57,6 +58,7 @@
                     "original": "prefix"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/random/r/id.html",
             "name": "IdResource",
             "threaded": true,
             "attributes": [
@@ -218,6 +220,7 @@
                     "original": "seed"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/random/r/integer.html",
             "name": "IntegerResource",
             "threaded": true,
             "attributes": [
@@ -347,6 +350,7 @@
                     "original": "separator"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/random/r/pet.html",
             "name": "PetResource",
             "threaded": true,
             "attributes": [],
@@ -426,6 +430,7 @@
                     "original": "seed"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/random/r/shuffle.html",
             "name": "ShuffleResource",
             "threaded": true,
             "attributes": [
@@ -651,6 +656,7 @@
                     "original": "upper"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/random/r/string.html",
             "name": "StringResource",
             "threaded": true,
             "attributes": [
@@ -716,6 +722,7 @@
                     "original": "keepers"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/random/r/uuid.html",
             "name": "UuidResource",
             "threaded": true,
             "attributes": [
