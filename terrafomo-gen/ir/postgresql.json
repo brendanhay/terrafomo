@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newPolicy",
-                "name": "Policy'"
+                "smart": "newSchemaPolicy",
+                "name": "SchemaPolicy'"
             },
             "arguments": [
                 {
@@ -124,7 +124,7 @@
                     "original": "usage_with_grant"
                 }
             ],
-            "name": "Policy",
+            "name": "SchemaPolicy",
             "threaded": true,
             "attributes": [],
             "parameters": [],
@@ -229,10 +229,11 @@
                     "original": "usage_with_grant"
                 }
             ],
-            "type": "Policy s",
-            "original": "policy"
+            "type": "SchemaPolicy s",
+            "original": "schema_policy"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/postgresql/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -296,6 +297,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/postgresql/r/database.html",
             "name": "DatabaseResource",
             "threaded": true,
             "attributes": [
@@ -474,6 +476,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/postgresql/r/extension.html",
             "name": "ExtensionResource",
             "threaded": true,
             "attributes": [
@@ -781,6 +784,7 @@
                     "original": "valid_until"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/postgresql/r/role.html",
             "name": "RoleResource",
             "threaded": true,
             "attributes": [
@@ -870,6 +874,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/postgresql/r/schema.html",
             "name": "SchemaResource",
             "threaded": true,
             "attributes": [
@@ -901,7 +906,7 @@
                     "name": "_computedPolicy",
                     "method": "computedPolicy",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Policy s)]",
+                    "type": "TF.Attr s [TF.Attr s (SchemaPolicy s)]",
                     "class": "HasComputedPolicy",
                     "validate": true,
                     "optional": true,
