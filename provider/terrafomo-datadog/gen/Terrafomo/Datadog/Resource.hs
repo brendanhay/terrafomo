@@ -564,9 +564,6 @@ data UserResource s = UserResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _role     :: TF.Attr s P.Text
-    -- ^ @role@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 userResource
@@ -582,7 +579,6 @@ userResource _email _handle _name =
             , _handle = _handle
             , _isAdmin = TF.value P.False
             , _name = _name
-            , _role = TF.Nil
             }
 
 instance TF.IsObject (UserResource s) where
@@ -592,7 +588,6 @@ instance TF.IsObject (UserResource s) where
         , TF.assign "handle" <$> TF.attribute _handle
         , TF.assign "is_admin" <$> TF.attribute _isAdmin
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "role" <$> TF.attribute _role
         ]
 
 instance TF.IsValid (UserResource s) where
@@ -622,11 +617,6 @@ instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: UserResource s)
-
-instance P.HasRole (UserResource s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedVerified (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
     computedVerified x = TF.compute (TF.refKey x) "_computedVerified"

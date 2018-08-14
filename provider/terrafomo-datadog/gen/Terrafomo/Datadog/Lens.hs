@@ -66,7 +66,6 @@ module Terrafomo.Datadog.Lens
     , HasComparator (..)
     , HasPeriod (..)
     , HasDefault' (..)
-    , HasRole (..)
     , HasLocked (..)
     , HasOk (..)
     , HasEvents (..)
@@ -412,12 +411,6 @@ class HasDefault' a b | a -> b where
 
 instance HasDefault' a b => HasDefault' (TF.Schema l p a) b where
     default' = TF.configuration . default'
-
-class HasRole a b | a -> b where
-    role :: P.Lens' a b
-
-instance HasRole a b => HasRole (TF.Schema l p a) b where
-    role = TF.configuration . role
 
 class HasLocked a b | a -> b where
     locked :: P.Lens' a b
