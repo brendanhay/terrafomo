@@ -55,22 +55,6 @@
                     "original": "dismissal_users"
                 },
                 {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"include_admins\" <$> TF.attribute",
-                    "name": "_includeAdmins",
-                    "method": "includeAdmins",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIncludeAdmins",
-                    "validate": false,
-                    "optional": true,
-                    "original": "include_admins"
-                },
-                {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
@@ -163,22 +147,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "contexts"
-                },
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"include_admins\" <$> TF.attribute",
-                    "name": "_includeAdmins",
-                    "method": "includeAdmins",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIncludeAdmins",
-                    "validate": false,
-                    "optional": true,
-                    "original": "include_admins"
                 },
                 {
                     "default": "TF.value P.False",
