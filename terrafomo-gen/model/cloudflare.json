@@ -147,7 +147,7 @@
           "minItems": 1,
           "maxItems": 0,
           "schema": {
-            "name": "default_pool_ids",
+            "name": "load_balancer_default_pool_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -219,7 +219,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "pop_pools",
+            "name": "load_balancer_pop_pools",
             "schemas": [
               {
                 "name": "pool_ids",
@@ -233,7 +233,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "pool_ids",
+                  "name": "pop_pools_pool_ids",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -287,7 +287,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "region_pools",
+            "name": "load_balancer_region_pools",
             "schemas": [
               {
                 "name": "pool_ids",
@@ -301,7 +301,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "pool_ids",
+                  "name": "region_pools_pool_ids",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -431,7 +431,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "header",
+            "name": "load_balancer_monitor_header",
             "schemas": [
               {
                 "name": "header",
@@ -457,7 +457,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "values",
+                  "name": "header_values",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -579,7 +579,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "check_regions",
+            "name": "load_balancer_pool_check_regions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -701,7 +701,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "origins",
+            "name": "load_balancer_pool_origins",
             "schemas": [
               {
                 "name": "address",
@@ -715,7 +715,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "address",
+                  "name": "origins_address",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -772,7 +772,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "actions",
+            "name": "page_rule_actions",
             "schemas": [
               {
                 "name": "always_online",
@@ -995,7 +995,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "forwarding_url",
+                  "name": "actions_forwarding_url",
                   "schemas": [
                     {
                       "name": "status_code",
@@ -1298,7 +1298,7 @@
           "minItems": 1,
           "maxItems": 1,
           "resource": {
-            "name": "action",
+            "name": "rate_limit_action",
             "schemas": [
               {
                 "name": "mode",
@@ -1324,7 +1324,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "response",
+                  "name": "action_response",
                   "schemas": [
                     {
                       "name": "body",
@@ -1380,7 +1380,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "bypass_url_patterns",
+            "name": "rate_limit_bypass_url_patterns",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1404,7 +1404,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "correlate",
+            "name": "rate_limit_correlate",
             "schemas": [
               {
                 "name": "by",
@@ -1458,7 +1458,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "match",
+            "name": "rate_limit_match",
             "schemas": [
               {
                 "name": "request",
@@ -1472,7 +1472,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "request",
+                  "name": "match_request",
                   "schemas": [
                     {
                       "name": "methods",
@@ -1486,7 +1486,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "methods",
+                        "name": "request_methods",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -1510,7 +1510,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "schemes",
+                        "name": "request_schemes",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -1549,7 +1549,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "response",
+                  "name": "match_response",
                   "schemas": [
                     {
                       "name": "origin_traffic",
@@ -1575,7 +1575,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "statuses",
+                        "name": "response_statuses",
                         "type": "TypeInt",
                         "conflictsWith": [],
                         "optional": false,
@@ -1672,7 +1672,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "data",
+            "name": "record_data",
             "schemas": [
               {
                 "name": "algorithm",
@@ -2350,7 +2350,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "initial_settings",
+            "name": "zone_settings_override_initial_settings",
             "schemas": [
               {
                 "name": "advanced_ddos",
@@ -2592,7 +2592,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "minify",
+                  "name": "initial_settings_minify",
                   "schemas": [
                     {
                       "name": "css",
@@ -2657,7 +2657,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "mobile_redirect",
+                  "name": "initial_settings_mobile_redirect",
                   "schemas": [
                     {
                       "name": "mobile_subdomain",
@@ -2806,7 +2806,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "security_header",
+                  "name": "initial_settings_security_header",
                   "schemas": [
                     {
                       "name": "enabled",
@@ -3054,7 +3054,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "readonly_settings",
+            "name": "zone_settings_override_readonly_settings",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3078,7 +3078,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "settings",
+            "name": "zone_settings_override_settings",
             "schemas": [
               {
                 "name": "advanced_ddos",
@@ -3320,7 +3320,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "minify",
+                  "name": "settings_minify",
                   "schemas": [
                     {
                       "name": "css",
@@ -3385,7 +3385,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "mobile_redirect",
+                  "name": "settings_mobile_redirect",
                   "schemas": [
                     {
                       "name": "mobile_subdomain",
@@ -3534,7 +3534,7 @@
                 "minItems": 1,
                 "maxItems": 1,
                 "resource": {
-                  "name": "security_header",
+                  "name": "settings_security_header",
                   "schemas": [
                     {
                       "name": "enabled",
@@ -3789,7 +3789,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "cidr_blocks",
+            "name": "ip_ranges_cidr_blocks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3813,7 +3813,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ipv4_cidr_blocks",
+            "name": "ip_ranges_ipv4_cidr_blocks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3837,7 +3837,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ipv6_cidr_blocks",
+            "name": "ip_ranges_ipv6_cidr_blocks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
