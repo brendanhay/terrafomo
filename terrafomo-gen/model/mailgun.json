@@ -42,7 +42,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "receiving_records",
+            "name": "domain_receiving_records",
             "schemas": [
               {
                 "name": "priority",
@@ -107,7 +107,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "sending_records",
+            "name": "domain_sending_records",
             "schemas": [
               {
                 "name": "name",
