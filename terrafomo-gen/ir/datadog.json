@@ -2088,22 +2088,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"role\" <$> TF.attribute",
-                    "name": "_role",
-                    "method": "role",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRole",
-                    "validate": false,
-                    "optional": true,
-                    "original": "role"
                 }
             ],
             "name": "UserResource",
