@@ -250,7 +250,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "subject_alternative_names",
+            "name": "certificate_subject_alternative_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -315,7 +315,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "member",
+            "name": "environment_member",
             "schemas": [
               {
                 "name": "external_id",
@@ -1196,7 +1196,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "subject_alternative_names",
+            "name": "certificate_subject_alternative_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1249,7 +1249,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "member",
+            "name": "environment_member",
             "schemas": [
               {
                 "name": "external_id",
