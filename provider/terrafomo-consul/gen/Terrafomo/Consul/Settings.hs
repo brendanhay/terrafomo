@@ -315,30 +315,21 @@ data KeysKey s = KeysKey'
     , _path     :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
-    , _default' :: TF.Attr s P.Text
-    -- ^ @default@ - (Optional)
-    --
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
-    --
-    , _path     :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newKeysKey
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> KeysKey s
-newKeysKey _path _name _path =
+newKeysKey _path _name =
     KeysKey'
         { _default' = TF.Nil
         , _delete = TF.value P.False
         , _path = _path
-        , _default' = TF.Nil
         , _name = _name
-        , _path = _path
         }
 
 instance P.Hashable  (KeysKey s)
@@ -348,9 +339,7 @@ instance TF.IsObject (KeysKey s) where
         [ TF.assign "default" <$> TF.attribute _default'
         , TF.assign "delete" <$> TF.attribute _delete
         , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "default" <$> TF.attribute _default'
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "path" <$> TF.attribute _path
         ]
 
 instance TF.IsValid (KeysKey s) where
@@ -371,20 +360,10 @@ instance P.HasPath (KeysKey s) (TF.Attr s P.Text) where
         P.lens (_path :: KeysKey s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: KeysKey s)
 
-instance P.HasDefault' (KeysKey s) (TF.Attr s P.Text) where
-    default' =
-        P.lens (_default' :: KeysKey s -> TF.Attr s P.Text)
-               (\s a -> s { _default' = a } :: KeysKey s)
-
 instance P.HasName (KeysKey s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KeysKey s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KeysKey s)
-
-instance P.HasPath (KeysKey s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: KeysKey s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: KeysKey s)
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (KeysKey s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
