@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @fastly_ip_ranges@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Fastly/fastly_ip_ranges terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/fastly/d/ip_ranges.html terraform documentation>
 -- for more information.
 data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -69,4 +69,4 @@ instance TF.IsValid (IpRangesData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"

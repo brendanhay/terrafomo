@@ -18,73 +18,73 @@
 module Terrafomo.Fastly.Settings
     (
     -- * Settings Datatypes
-    -- ** papertrail
-      Papertrail (..)
-    , newPapertrail
+    -- ** service_v1_logentries
+      ServiceV1Logentries (..)
+    , newServiceV1Logentries
 
-    -- ** healthcheck
-    , Healthcheck (..)
-    , newHealthcheck
+    -- ** service_v1_cache_setting
+    , ServiceV1CacheSetting (..)
+    , newServiceV1CacheSetting
 
-    -- ** sumologic
-    , Sumologic (..)
-    , newSumologic
+    -- ** service_v1_request_setting
+    , ServiceV1RequestSetting (..)
+    , newServiceV1RequestSetting
 
-    -- ** cache_setting
-    , CacheSetting (..)
-    , newCacheSetting
+    -- ** service_v1_domain
+    , ServiceV1Domain (..)
+    , newServiceV1Domain
 
-    -- ** domain
-    , Domain (..)
-    , newDomain
+    -- ** service_v1_healthcheck
+    , ServiceV1Healthcheck (..)
+    , newServiceV1Healthcheck
 
-    -- ** request_setting
-    , RequestSetting (..)
-    , newRequestSetting
+    -- ** service_v1_sumologic
+    , ServiceV1Sumologic (..)
+    , newServiceV1Sumologic
 
-    -- ** s3logging
-    , S3logging (..)
-    , newS3logging
+    -- ** service_v1_vcl
+    , ServiceV1Vcl (..)
+    , newServiceV1Vcl
 
-    -- ** vcl
-    , Vcl (..)
-    , newVcl
+    -- ** service_v1_backend
+    , ServiceV1Backend (..)
+    , newServiceV1Backend
 
-    -- ** backend
-    , Backend (..)
-    , newBackend
+    -- ** service_v1_gzip
+    , ServiceV1Gzip (..)
+    , newServiceV1Gzip
 
-    -- ** gcslogging
-    , Gcslogging (..)
-    , newGcslogging
+    -- ** service_v1_gcslogging
+    , ServiceV1Gcslogging (..)
+    , newServiceV1Gcslogging
 
-    -- ** gzip
-    , Gzip (..)
-    , newGzip
+    -- ** service_v1_s3logging
+    , ServiceV1S3logging (..)
+    , newServiceV1S3logging
 
-    -- ** header
-    , Header (..)
-    , newHeader
+    -- ** service_v1_bigquerylogging
+    , ServiceV1Bigquerylogging (..)
+    , newServiceV1Bigquerylogging
 
-    -- ** bigquerylogging
-    , Bigquerylogging (..)
-    , newBigquerylogging
+    -- ** service_v1_syslog
+    , ServiceV1Syslog (..)
+    , newServiceV1Syslog
 
-    -- ** syslog
-    , Syslog (..)
-    , newSyslog
+    -- ** service_v1_header
+    , ServiceV1Header (..)
+    , newServiceV1Header
 
-    -- ** condition
-    , Condition (..)
-    , newCondition
+    -- ** service_v1_response_object
+    , ServiceV1ResponseObject (..)
+    , newServiceV1ResponseObject
 
-    -- ** logentries
-    , Logentries (..)
-    , newLogentries
+    -- ** service_v1_papertrail
+    , ServiceV1Papertrail (..)
+    , newServiceV1Papertrail
 
-    -- ** response_object
-    , ResponseObject (..)
-    , newResponseObject
+    -- ** service_v1_condition
+    , ServiceV1Condition (..)
+    , newServiceV1Condition
 
     ) where
 
@@ -109,228 +109,8 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Validator    as TF
 
--- | @papertrail@ nested settings.
-data Papertrail s = Papertrail'
-    { _address           :: TF.Attr s P.Text
-    -- ^ @address@ - (Required)
-    -- The address of the papertrail service
-    --
-    , _format            :: TF.Attr s P.Text
-    -- ^ @format@ - (Optional)
-    -- Apache-style string or VCL variables to use for log formatting
-    --
-    , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- Unique name to refer to this logging setup
-    --
-    , _port              :: TF.Attr s P.Integer
-    -- ^ @port@ - (Required)
-    -- The port of the papertrail service
-    --
-    , _responseCondition :: TF.Attr s P.Text
-    -- ^ @response_condition@ - (Optional)
-    -- Name of a condition to apply this logging
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newPapertrail
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
-    -> Papertrail s
-newPapertrail _address _name _port =
-    Papertrail'
-        { _address = _address
-        , _format = TF.value "%h %l %u %t %r %>s"
-        , _name = _name
-        , _port = _port
-        , _responseCondition = TF.Nil
-        }
-
-instance P.Hashable  (Papertrail s)
-instance TF.IsValue  (Papertrail s)
-instance TF.IsObject (Papertrail s) where
-    toObject Papertrail'{..} = P.catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "format" <$> TF.attribute _format
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "response_condition" <$> TF.attribute _responseCondition
-        ]
-
-instance TF.IsValid (Papertrail s) where
-    validator = P.mempty
-
-instance P.HasAddress (Papertrail s) (TF.Attr s P.Text) where
-    address =
-        P.lens (_address :: Papertrail s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: Papertrail s)
-
-instance P.HasFormat (Papertrail s) (TF.Attr s P.Text) where
-    format =
-        P.lens (_format :: Papertrail s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: Papertrail s)
-
-instance P.HasName (Papertrail s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Papertrail s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Papertrail s)
-
-instance P.HasPort (Papertrail s) (TF.Attr s P.Integer) where
-    port =
-        P.lens (_port :: Papertrail s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Papertrail s)
-
-instance P.HasResponseCondition (Papertrail s) (TF.Attr s P.Text) where
-    responseCondition =
-        P.lens (_responseCondition :: Papertrail s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Papertrail s)
-
--- | @healthcheck@ nested settings.
-data Healthcheck s = Healthcheck'
-    { _checkInterval    :: TF.Attr s P.Integer
-    -- ^ @check_interval@ - (Optional)
-    -- How often to run the healthcheck in milliseconds
-    --
-    , _expectedResponse :: TF.Attr s P.Integer
-    -- ^ @expected_response@ - (Optional)
-    -- The status code expected from the host
-    --
-    , _host             :: TF.Attr s P.Text
-    -- ^ @host@ - (Required)
-    -- Which host to check
-    --
-    , _httpVersion      :: TF.Attr s P.Text
-    -- ^ @http_version@ - (Optional)
-    -- Whether to use version 1.0 or 1.1 HTTP
-    --
-    , _initial          :: TF.Attr s P.Integer
-    -- ^ @initial@ - (Optional)
-    -- When loading a config, the initial number of probes to be seen as OK
-    --
-    , _method           :: TF.Attr s P.Text
-    -- ^ @method@ - (Optional)
-    -- Which HTTP method to use
-    --
-    , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- A name to refer to this healthcheck
-    --
-    , _path             :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
-    -- The path to check
-    --
-    , _threshold        :: TF.Attr s P.Integer
-    -- ^ @threshold@ - (Optional)
-    -- How many healthchecks must succeed to be considered healthy
-    --
-    , _timeout          :: TF.Attr s P.Integer
-    -- ^ @timeout@ - (Optional)
-    -- Timeout in milliseconds
-    --
-    , _window           :: TF.Attr s P.Integer
-    -- ^ @window@ - (Optional)
-    -- The number of most recent healthcheck queries to keep for this healthcheck
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newHealthcheck
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> Healthcheck s
-newHealthcheck _host _name _path =
-    Healthcheck'
-        { _checkInterval = TF.value 5000
-        , _expectedResponse = TF.value 200
-        , _host = _host
-        , _httpVersion = TF.value "1.1"
-        , _initial = TF.value 2
-        , _method = TF.value "HEAD"
-        , _name = _name
-        , _path = _path
-        , _threshold = TF.value 3
-        , _timeout = TF.value 500
-        , _window = TF.value 5
-        }
-
-instance P.Hashable  (Healthcheck s)
-instance TF.IsValue  (Healthcheck s)
-instance TF.IsObject (Healthcheck s) where
-    toObject Healthcheck'{..} = P.catMaybes
-        [ TF.assign "check_interval" <$> TF.attribute _checkInterval
-        , TF.assign "expected_response" <$> TF.attribute _expectedResponse
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "http_version" <$> TF.attribute _httpVersion
-        , TF.assign "initial" <$> TF.attribute _initial
-        , TF.assign "method" <$> TF.attribute _method
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "threshold" <$> TF.attribute _threshold
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        , TF.assign "window" <$> TF.attribute _window
-        ]
-
-instance TF.IsValid (Healthcheck s) where
-    validator = P.mempty
-
-instance P.HasCheckInterval (Healthcheck s) (TF.Attr s P.Integer) where
-    checkInterval =
-        P.lens (_checkInterval :: Healthcheck s -> TF.Attr s P.Integer)
-               (\s a -> s { _checkInterval = a } :: Healthcheck s)
-
-instance P.HasExpectedResponse (Healthcheck s) (TF.Attr s P.Integer) where
-    expectedResponse =
-        P.lens (_expectedResponse :: Healthcheck s -> TF.Attr s P.Integer)
-               (\s a -> s { _expectedResponse = a } :: Healthcheck s)
-
-instance P.HasHost (Healthcheck s) (TF.Attr s P.Text) where
-    host =
-        P.lens (_host :: Healthcheck s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: Healthcheck s)
-
-instance P.HasHttpVersion (Healthcheck s) (TF.Attr s P.Text) where
-    httpVersion =
-        P.lens (_httpVersion :: Healthcheck s -> TF.Attr s P.Text)
-               (\s a -> s { _httpVersion = a } :: Healthcheck s)
-
-instance P.HasInitial (Healthcheck s) (TF.Attr s P.Integer) where
-    initial =
-        P.lens (_initial :: Healthcheck s -> TF.Attr s P.Integer)
-               (\s a -> s { _initial = a } :: Healthcheck s)
-
-instance P.HasMethod (Healthcheck s) (TF.Attr s P.Text) where
-    method =
-        P.lens (_method :: Healthcheck s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: Healthcheck s)
-
-instance P.HasName (Healthcheck s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Healthcheck s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Healthcheck s)
-
-instance P.HasPath (Healthcheck s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: Healthcheck s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: Healthcheck s)
-
-instance P.HasThreshold (Healthcheck s) (TF.Attr s P.Integer) where
-    threshold =
-        P.lens (_threshold :: Healthcheck s -> TF.Attr s P.Integer)
-               (\s a -> s { _threshold = a } :: Healthcheck s)
-
-instance P.HasTimeout (Healthcheck s) (TF.Attr s P.Integer) where
-    timeout =
-        P.lens (_timeout :: Healthcheck s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeout = a } :: Healthcheck s)
-
-instance P.HasWindow (Healthcheck s) (TF.Attr s P.Integer) where
-    window =
-        P.lens (_window :: Healthcheck s -> TF.Attr s P.Integer)
-               (\s a -> s { _window = a } :: Healthcheck s)
-
--- | @sumologic@ nested settings.
-data Sumologic s = Sumologic'
+-- | @service_v1_logentries@ nested settings.
+data ServiceV1Logentries s = ServiceV1Logentries'
     { _format            :: TF.Attr s P.Text
     -- ^ @format@ - (Optional)
     -- Apache-style string or VCL variables to use for log formatting
@@ -340,85 +120,96 @@ data Sumologic s = Sumologic'
     -- The version of the custom logging format used for the configured endpoint.
     -- Can be either 1 or 2. (Default: 1)
     --
-    , _messageType       :: TF.Attr s P.Text
-    -- ^ @message_type@ - (Optional)
-    -- How the message should be formatted.
-    --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     -- Unique name to refer to this logging setup
+    --
+    , _port              :: TF.Attr s P.Integer
+    -- ^ @port@ - (Optional)
+    -- The port number configured in Logentries
     --
     , _responseCondition :: TF.Attr s P.Text
     -- ^ @response_condition@ - (Optional)
     -- Name of a condition to apply this logging.
     --
-    , _url               :: TF.Attr s P.Text
-    -- ^ @url@ - (Required)
-    -- The URL to POST to.
+    , _token             :: TF.Attr s P.Text
+    -- ^ @token@ - (Required)
+    -- Use token based authentication (https://logentries.com/doc/input-token/)
+    --
+    , _useTls            :: TF.Attr s P.Bool
+    -- ^ @use_tls@ - (Optional)
+    -- Whether to use TLS for secure logging
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newSumologic
+newServiceV1Logentries
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> Sumologic s
-newSumologic _name _url =
-    Sumologic'
+    -> TF.Attr s P.Text -- ^ @token@ - 'P.token'
+    -> ServiceV1Logentries s
+newServiceV1Logentries _name _token =
+    ServiceV1Logentries'
         { _format = TF.value "%h %l %u %t %r %>s"
         , _formatVersion = TF.value 1
-        , _messageType = TF.value "classic"
         , _name = _name
+        , _port = TF.value 20000
         , _responseCondition = TF.Nil
-        , _url = _url
+        , _token = _token
+        , _useTls = TF.value P.True
         }
 
-instance P.Hashable  (Sumologic s)
-instance TF.IsValue  (Sumologic s)
-instance TF.IsObject (Sumologic s) where
-    toObject Sumologic'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1Logentries s)
+instance TF.IsValue  (ServiceV1Logentries s)
+instance TF.IsObject (ServiceV1Logentries s) where
+    toObject ServiceV1Logentries'{..} = P.catMaybes
         [ TF.assign "format" <$> TF.attribute _format
         , TF.assign "format_version" <$> TF.attribute _formatVersion
-        , TF.assign "message_type" <$> TF.attribute _messageType
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
         , TF.assign "response_condition" <$> TF.attribute _responseCondition
-        , TF.assign "url" <$> TF.attribute _url
+        , TF.assign "token" <$> TF.attribute _token
+        , TF.assign "use_tls" <$> TF.attribute _useTls
         ]
 
-instance TF.IsValid (Sumologic s) where
+instance TF.IsValid (ServiceV1Logentries s) where
     validator = P.mempty
 
-instance P.HasFormat (Sumologic s) (TF.Attr s P.Text) where
+instance P.HasFormat (ServiceV1Logentries s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: Sumologic s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: Sumologic s)
+        P.lens (_format :: ServiceV1Logentries s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1Logentries s)
 
-instance P.HasFormatVersion (Sumologic s) (TF.Attr s P.Integer) where
+instance P.HasFormatVersion (ServiceV1Logentries s) (TF.Attr s P.Integer) where
     formatVersion =
-        P.lens (_formatVersion :: Sumologic s -> TF.Attr s P.Integer)
-               (\s a -> s { _formatVersion = a } :: Sumologic s)
+        P.lens (_formatVersion :: ServiceV1Logentries s -> TF.Attr s P.Integer)
+               (\s a -> s { _formatVersion = a } :: ServiceV1Logentries s)
 
-instance P.HasMessageType (Sumologic s) (TF.Attr s P.Text) where
-    messageType =
-        P.lens (_messageType :: Sumologic s -> TF.Attr s P.Text)
-               (\s a -> s { _messageType = a } :: Sumologic s)
-
-instance P.HasName (Sumologic s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Logentries s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Sumologic s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Sumologic s)
+        P.lens (_name :: ServiceV1Logentries s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Logentries s)
 
-instance P.HasResponseCondition (Sumologic s) (TF.Attr s P.Text) where
+instance P.HasPort (ServiceV1Logentries s) (TF.Attr s P.Integer) where
+    port =
+        P.lens (_port :: ServiceV1Logentries s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: ServiceV1Logentries s)
+
+instance P.HasResponseCondition (ServiceV1Logentries s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: Sumologic s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Sumologic s)
+        P.lens (_responseCondition :: ServiceV1Logentries s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Logentries s)
 
-instance P.HasUrl (Sumologic s) (TF.Attr s P.Text) where
-    url =
-        P.lens (_url :: Sumologic s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: Sumologic s)
+instance P.HasToken (ServiceV1Logentries s) (TF.Attr s P.Text) where
+    token =
+        P.lens (_token :: ServiceV1Logentries s -> TF.Attr s P.Text)
+               (\s a -> s { _token = a } :: ServiceV1Logentries s)
 
--- | @cache_setting@ nested settings.
-data CacheSetting s = CacheSetting'
+instance P.HasUseTls (ServiceV1Logentries s) (TF.Attr s P.Bool) where
+    useTls =
+        P.lens (_useTls :: ServiceV1Logentries s -> TF.Attr s P.Bool)
+               (\s a -> s { _useTls = a } :: ServiceV1Logentries s)
+
+-- | @service_v1_cache_setting@ nested settings.
+data ServiceV1CacheSetting s = ServiceV1CacheSetting'
     { _action         :: TF.Attr s P.Text
     -- ^ @action@ - (Optional)
     -- Action to take
@@ -441,11 +232,11 @@ data CacheSetting s = CacheSetting'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newCacheSetting
+newServiceV1CacheSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> CacheSetting s
-newCacheSetting _name =
-    CacheSetting'
+    -> ServiceV1CacheSetting s
+newServiceV1CacheSetting _name =
+    ServiceV1CacheSetting'
         { _action = TF.Nil
         , _cacheCondition = TF.Nil
         , _name = _name
@@ -453,10 +244,10 @@ newCacheSetting _name =
         , _ttl = TF.Nil
         }
 
-instance P.Hashable  (CacheSetting s)
-instance TF.IsValue  (CacheSetting s)
-instance TF.IsObject (CacheSetting s) where
-    toObject CacheSetting'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1CacheSetting s)
+instance TF.IsValue  (ServiceV1CacheSetting s)
+instance TF.IsObject (ServiceV1CacheSetting s) where
+    toObject ServiceV1CacheSetting'{..} = P.catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "cache_condition" <$> TF.attribute _cacheCondition
         , TF.assign "name" <$> TF.attribute _name
@@ -464,77 +255,36 @@ instance TF.IsObject (CacheSetting s) where
         , TF.assign "ttl" <$> TF.attribute _ttl
         ]
 
-instance TF.IsValid (CacheSetting s) where
+instance TF.IsValid (ServiceV1CacheSetting s) where
     validator = P.mempty
 
-instance P.HasAction (CacheSetting s) (TF.Attr s P.Text) where
+instance P.HasAction (ServiceV1CacheSetting s) (TF.Attr s P.Text) where
     action =
-        P.lens (_action :: CacheSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: CacheSetting s)
+        P.lens (_action :: ServiceV1CacheSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: ServiceV1CacheSetting s)
 
-instance P.HasCacheCondition (CacheSetting s) (TF.Attr s P.Text) where
+instance P.HasCacheCondition (ServiceV1CacheSetting s) (TF.Attr s P.Text) where
     cacheCondition =
-        P.lens (_cacheCondition :: CacheSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheCondition = a } :: CacheSetting s)
+        P.lens (_cacheCondition :: ServiceV1CacheSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheCondition = a } :: ServiceV1CacheSetting s)
 
-instance P.HasName (CacheSetting s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1CacheSetting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: CacheSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CacheSetting s)
+        P.lens (_name :: ServiceV1CacheSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1CacheSetting s)
 
-instance P.HasStaleTtl (CacheSetting s) (TF.Attr s P.Integer) where
+instance P.HasStaleTtl (ServiceV1CacheSetting s) (TF.Attr s P.Integer) where
     staleTtl =
-        P.lens (_staleTtl :: CacheSetting s -> TF.Attr s P.Integer)
-               (\s a -> s { _staleTtl = a } :: CacheSetting s)
+        P.lens (_staleTtl :: ServiceV1CacheSetting s -> TF.Attr s P.Integer)
+               (\s a -> s { _staleTtl = a } :: ServiceV1CacheSetting s)
 
-instance P.HasTtl (CacheSetting s) (TF.Attr s P.Integer) where
+instance P.HasTtl (ServiceV1CacheSetting s) (TF.Attr s P.Integer) where
     ttl =
-        P.lens (_ttl :: CacheSetting s -> TF.Attr s P.Integer)
-               (\s a -> s { _ttl = a } :: CacheSetting s)
+        P.lens (_ttl :: ServiceV1CacheSetting s -> TF.Attr s P.Integer)
+               (\s a -> s { _ttl = a } :: ServiceV1CacheSetting s)
 
--- | @domain@ nested settings.
-data Domain s = Domain'
-    { _comment :: TF.Attr s P.Text
-    -- ^ @comment@ - (Optional)
-    --
-    , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The domain that this Service will respond to
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newDomain
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Domain s
-newDomain _name =
-    Domain'
-        { _comment = TF.Nil
-        , _name = _name
-        }
-
-instance P.Hashable  (Domain s)
-instance TF.IsValue  (Domain s)
-instance TF.IsObject (Domain s) where
-    toObject Domain'{..} = P.catMaybes
-        [ TF.assign "comment" <$> TF.attribute _comment
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (Domain s) where
-    validator = P.mempty
-
-instance P.HasComment (Domain s) (TF.Attr s P.Text) where
-    comment =
-        P.lens (_comment :: Domain s -> TF.Attr s P.Text)
-               (\s a -> s { _comment = a } :: Domain s)
-
-instance P.HasName (Domain s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Domain s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Domain s)
-
--- | @request_setting@ nested settings.
-data RequestSetting s = RequestSetting'
+-- | @service_v1_request_setting@ nested settings.
+data ServiceV1RequestSetting s = ServiceV1RequestSetting'
     { _action           :: TF.Attr s P.Text
     -- ^ @action@ - (Optional)
     -- Allows you to terminate request handling and immediately perform an action
@@ -587,11 +337,11 @@ data RequestSetting s = RequestSetting'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRequestSetting
+newServiceV1RequestSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> RequestSetting s
-newRequestSetting _name =
-    RequestSetting'
+    -> ServiceV1RequestSetting s
+newServiceV1RequestSetting _name =
+    ServiceV1RequestSetting'
         { _action = TF.Nil
         , _bypassBusyWait = TF.Nil
         , _defaultHost = TF.Nil
@@ -606,10 +356,10 @@ newRequestSetting _name =
         , _xff = TF.value "append"
         }
 
-instance P.Hashable  (RequestSetting s)
-instance TF.IsValue  (RequestSetting s)
-instance TF.IsObject (RequestSetting s) where
-    toObject RequestSetting'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1RequestSetting s)
+instance TF.IsValue  (ServiceV1RequestSetting s)
+instance TF.IsObject (ServiceV1RequestSetting s) where
+    toObject ServiceV1RequestSetting'{..} = P.catMaybes
         [ TF.assign "action" <$> TF.attribute _action
         , TF.assign "bypass_busy_wait" <$> TF.attribute _bypassBusyWait
         , TF.assign "default_host" <$> TF.attribute _defaultHost
@@ -624,80 +374,256 @@ instance TF.IsObject (RequestSetting s) where
         , TF.assign "xff" <$> TF.attribute _xff
         ]
 
-instance TF.IsValid (RequestSetting s) where
+instance TF.IsValid (ServiceV1RequestSetting s) where
     validator = P.mempty
 
-instance P.HasAction (RequestSetting s) (TF.Attr s P.Text) where
+instance P.HasAction (ServiceV1RequestSetting s) (TF.Attr s P.Text) where
     action =
-        P.lens (_action :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: RequestSetting s)
+        P.lens (_action :: ServiceV1RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: ServiceV1RequestSetting s)
 
-instance P.HasBypassBusyWait (RequestSetting s) (TF.Attr s P.Bool) where
+instance P.HasBypassBusyWait (ServiceV1RequestSetting s) (TF.Attr s P.Bool) where
     bypassBusyWait =
-        P.lens (_bypassBusyWait :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _bypassBusyWait = a } :: RequestSetting s)
+        P.lens (_bypassBusyWait :: ServiceV1RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _bypassBusyWait = a } :: ServiceV1RequestSetting s)
 
-instance P.HasDefaultHost (RequestSetting s) (TF.Attr s P.Text) where
+instance P.HasDefaultHost (ServiceV1RequestSetting s) (TF.Attr s P.Text) where
     defaultHost =
-        P.lens (_defaultHost :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultHost = a } :: RequestSetting s)
+        P.lens (_defaultHost :: ServiceV1RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultHost = a } :: ServiceV1RequestSetting s)
 
-instance P.HasForceMiss (RequestSetting s) (TF.Attr s P.Bool) where
+instance P.HasForceMiss (ServiceV1RequestSetting s) (TF.Attr s P.Bool) where
     forceMiss =
-        P.lens (_forceMiss :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceMiss = a } :: RequestSetting s)
+        P.lens (_forceMiss :: ServiceV1RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _forceMiss = a } :: ServiceV1RequestSetting s)
 
-instance P.HasForceSsl (RequestSetting s) (TF.Attr s P.Bool) where
+instance P.HasForceSsl (ServiceV1RequestSetting s) (TF.Attr s P.Bool) where
     forceSsl =
-        P.lens (_forceSsl :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceSsl = a } :: RequestSetting s)
+        P.lens (_forceSsl :: ServiceV1RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _forceSsl = a } :: ServiceV1RequestSetting s)
 
-instance P.HasGeoHeaders (RequestSetting s) (TF.Attr s P.Bool) where
+instance P.HasGeoHeaders (ServiceV1RequestSetting s) (TF.Attr s P.Bool) where
     geoHeaders =
-        P.lens (_geoHeaders :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _geoHeaders = a } :: RequestSetting s)
+        P.lens (_geoHeaders :: ServiceV1RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _geoHeaders = a } :: ServiceV1RequestSetting s)
 
-instance P.HasHashKeys (RequestSetting s) (TF.Attr s P.Text) where
+instance P.HasHashKeys (ServiceV1RequestSetting s) (TF.Attr s P.Text) where
     hashKeys =
-        P.lens (_hashKeys :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hashKeys = a } :: RequestSetting s)
+        P.lens (_hashKeys :: ServiceV1RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _hashKeys = a } :: ServiceV1RequestSetting s)
 
-instance P.HasMaxStaleAge (RequestSetting s) (TF.Attr s P.Integer) where
+instance P.HasMaxStaleAge (ServiceV1RequestSetting s) (TF.Attr s P.Integer) where
     maxStaleAge =
-        P.lens (_maxStaleAge :: RequestSetting s -> TF.Attr s P.Integer)
-               (\s a -> s { _maxStaleAge = a } :: RequestSetting s)
+        P.lens (_maxStaleAge :: ServiceV1RequestSetting s -> TF.Attr s P.Integer)
+               (\s a -> s { _maxStaleAge = a } :: ServiceV1RequestSetting s)
 
-instance P.HasName (RequestSetting s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1RequestSetting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RequestSetting s)
+        P.lens (_name :: ServiceV1RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1RequestSetting s)
 
-instance P.HasRequestCondition (RequestSetting s) (TF.Attr s P.Text) where
+instance P.HasRequestCondition (ServiceV1RequestSetting s) (TF.Attr s P.Text) where
     requestCondition =
-        P.lens (_requestCondition :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _requestCondition = a } :: RequestSetting s)
+        P.lens (_requestCondition :: ServiceV1RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _requestCondition = a } :: ServiceV1RequestSetting s)
 
-instance P.HasTimerSupport (RequestSetting s) (TF.Attr s P.Bool) where
+instance P.HasTimerSupport (ServiceV1RequestSetting s) (TF.Attr s P.Bool) where
     timerSupport =
-        P.lens (_timerSupport :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _timerSupport = a } :: RequestSetting s)
+        P.lens (_timerSupport :: ServiceV1RequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _timerSupport = a } :: ServiceV1RequestSetting s)
 
-instance P.HasXff (RequestSetting s) (TF.Attr s P.Text) where
+instance P.HasXff (ServiceV1RequestSetting s) (TF.Attr s P.Text) where
     xff =
-        P.lens (_xff :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _xff = a } :: RequestSetting s)
+        P.lens (_xff :: ServiceV1RequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _xff = a } :: ServiceV1RequestSetting s)
 
--- | @s3logging@ nested settings.
-data S3logging s = S3logging'
-    { _bucketName        :: TF.Attr s P.Text
-    -- ^ @bucket_name@ - (Required)
-    -- S3 Bucket name to store logs in
+-- | @service_v1_domain@ nested settings.
+data ServiceV1Domain s = ServiceV1Domain'
+    { _comment :: TF.Attr s P.Text
+    -- ^ @comment@ - (Optional)
     --
-    , _domain            :: TF.Attr s P.Text
-    -- ^ @domain@ - (Optional)
-    -- Bucket endpoint
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The domain that this Service will respond to
     --
-    , _format            :: TF.Attr s P.Text
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newServiceV1Domain
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> ServiceV1Domain s
+newServiceV1Domain _name =
+    ServiceV1Domain'
+        { _comment = TF.Nil
+        , _name = _name
+        }
+
+instance P.Hashable  (ServiceV1Domain s)
+instance TF.IsValue  (ServiceV1Domain s)
+instance TF.IsObject (ServiceV1Domain s) where
+    toObject ServiceV1Domain'{..} = P.catMaybes
+        [ TF.assign "comment" <$> TF.attribute _comment
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ServiceV1Domain s) where
+    validator = P.mempty
+
+instance P.HasComment (ServiceV1Domain s) (TF.Attr s P.Text) where
+    comment =
+        P.lens (_comment :: ServiceV1Domain s -> TF.Attr s P.Text)
+               (\s a -> s { _comment = a } :: ServiceV1Domain s)
+
+instance P.HasName (ServiceV1Domain s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceV1Domain s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Domain s)
+
+-- | @service_v1_healthcheck@ nested settings.
+data ServiceV1Healthcheck s = ServiceV1Healthcheck'
+    { _checkInterval    :: TF.Attr s P.Integer
+    -- ^ @check_interval@ - (Optional)
+    -- How often to run the healthcheck in milliseconds
+    --
+    , _expectedResponse :: TF.Attr s P.Integer
+    -- ^ @expected_response@ - (Optional)
+    -- The status code expected from the host
+    --
+    , _host             :: TF.Attr s P.Text
+    -- ^ @host@ - (Required)
+    -- Which host to check
+    --
+    , _httpVersion      :: TF.Attr s P.Text
+    -- ^ @http_version@ - (Optional)
+    -- Whether to use version 1.0 or 1.1 HTTP
+    --
+    , _initial          :: TF.Attr s P.Integer
+    -- ^ @initial@ - (Optional)
+    -- When loading a config, the initial number of probes to be seen as OK
+    --
+    , _method           :: TF.Attr s P.Text
+    -- ^ @method@ - (Optional)
+    -- Which HTTP method to use
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- A name to refer to this healthcheck
+    --
+    , _path             :: TF.Attr s P.Text
+    -- ^ @path@ - (Required)
+    -- The path to check
+    --
+    , _threshold        :: TF.Attr s P.Integer
+    -- ^ @threshold@ - (Optional)
+    -- How many healthchecks must succeed to be considered healthy
+    --
+    , _timeout          :: TF.Attr s P.Integer
+    -- ^ @timeout@ - (Optional)
+    -- Timeout in milliseconds
+    --
+    , _window           :: TF.Attr s P.Integer
+    -- ^ @window@ - (Optional)
+    -- The number of most recent healthcheck queries to keep for this healthcheck
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newServiceV1Healthcheck
+    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    -> ServiceV1Healthcheck s
+newServiceV1Healthcheck _host _name _path =
+    ServiceV1Healthcheck'
+        { _checkInterval = TF.value 5000
+        , _expectedResponse = TF.value 200
+        , _host = _host
+        , _httpVersion = TF.value "1.1"
+        , _initial = TF.value 2
+        , _method = TF.value "HEAD"
+        , _name = _name
+        , _path = _path
+        , _threshold = TF.value 3
+        , _timeout = TF.value 500
+        , _window = TF.value 5
+        }
+
+instance P.Hashable  (ServiceV1Healthcheck s)
+instance TF.IsValue  (ServiceV1Healthcheck s)
+instance TF.IsObject (ServiceV1Healthcheck s) where
+    toObject ServiceV1Healthcheck'{..} = P.catMaybes
+        [ TF.assign "check_interval" <$> TF.attribute _checkInterval
+        , TF.assign "expected_response" <$> TF.attribute _expectedResponse
+        , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "http_version" <$> TF.attribute _httpVersion
+        , TF.assign "initial" <$> TF.attribute _initial
+        , TF.assign "method" <$> TF.attribute _method
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        , TF.assign "window" <$> TF.attribute _window
+        ]
+
+instance TF.IsValid (ServiceV1Healthcheck s) where
+    validator = P.mempty
+
+instance P.HasCheckInterval (ServiceV1Healthcheck s) (TF.Attr s P.Integer) where
+    checkInterval =
+        P.lens (_checkInterval :: ServiceV1Healthcheck s -> TF.Attr s P.Integer)
+               (\s a -> s { _checkInterval = a } :: ServiceV1Healthcheck s)
+
+instance P.HasExpectedResponse (ServiceV1Healthcheck s) (TF.Attr s P.Integer) where
+    expectedResponse =
+        P.lens (_expectedResponse :: ServiceV1Healthcheck s -> TF.Attr s P.Integer)
+               (\s a -> s { _expectedResponse = a } :: ServiceV1Healthcheck s)
+
+instance P.HasHost (ServiceV1Healthcheck s) (TF.Attr s P.Text) where
+    host =
+        P.lens (_host :: ServiceV1Healthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: ServiceV1Healthcheck s)
+
+instance P.HasHttpVersion (ServiceV1Healthcheck s) (TF.Attr s P.Text) where
+    httpVersion =
+        P.lens (_httpVersion :: ServiceV1Healthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _httpVersion = a } :: ServiceV1Healthcheck s)
+
+instance P.HasInitial (ServiceV1Healthcheck s) (TF.Attr s P.Integer) where
+    initial =
+        P.lens (_initial :: ServiceV1Healthcheck s -> TF.Attr s P.Integer)
+               (\s a -> s { _initial = a } :: ServiceV1Healthcheck s)
+
+instance P.HasMethod (ServiceV1Healthcheck s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: ServiceV1Healthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: ServiceV1Healthcheck s)
+
+instance P.HasName (ServiceV1Healthcheck s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceV1Healthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Healthcheck s)
+
+instance P.HasPath (ServiceV1Healthcheck s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: ServiceV1Healthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: ServiceV1Healthcheck s)
+
+instance P.HasThreshold (ServiceV1Healthcheck s) (TF.Attr s P.Integer) where
+    threshold =
+        P.lens (_threshold :: ServiceV1Healthcheck s -> TF.Attr s P.Integer)
+               (\s a -> s { _threshold = a } :: ServiceV1Healthcheck s)
+
+instance P.HasTimeout (ServiceV1Healthcheck s) (TF.Attr s P.Integer) where
+    timeout =
+        P.lens (_timeout :: ServiceV1Healthcheck s -> TF.Attr s P.Integer)
+               (\s a -> s { _timeout = a } :: ServiceV1Healthcheck s)
+
+instance P.HasWindow (ServiceV1Healthcheck s) (TF.Attr s P.Integer) where
+    window =
+        P.lens (_window :: ServiceV1Healthcheck s -> TF.Attr s P.Integer)
+               (\s a -> s { _window = a } :: ServiceV1Healthcheck s)
+
+-- | @service_v1_sumologic@ nested settings.
+data ServiceV1Sumologic s = ServiceV1Sumologic'
+    { _format            :: TF.Attr s P.Text
     -- ^ @format@ - (Optional)
     -- Apache-style string or VCL variables to use for log formatting
     --
@@ -705,10 +631,6 @@ data S3logging s = S3logging'
     -- ^ @format_version@ - (Optional)
     -- The version of the custom logging format used for the configured endpoint.
     -- Can be either 1 or 2. (Default: 1)
-    --
-    , _gzipLevel         :: TF.Attr s P.Integer
-    -- ^ @gzip_level@ - (Optional)
-    -- Gzip Compression level
     --
     , _messageType       :: TF.Attr s P.Text
     -- ^ @message_type@ - (Optional)
@@ -718,153 +640,77 @@ data S3logging s = S3logging'
     -- ^ @name@ - (Required)
     -- Unique name to refer to this logging setup
     --
-    , _path              :: TF.Attr s P.Text
-    -- ^ @path@ - (Optional)
-    -- Path to store the files. Must end with a trailing slash
-    --
-    , _period            :: TF.Attr s P.Integer
-    -- ^ @period@ - (Optional)
-    -- How frequently the logs should be transferred, in seconds (Default 3600)
-    --
-    , _redundancy        :: TF.Attr s P.Text
-    -- ^ @redundancy@ - (Optional)
-    -- The S3 redundancy level.
-    --
     , _responseCondition :: TF.Attr s P.Text
     -- ^ @response_condition@ - (Optional)
     -- Name of a condition to apply this logging.
     --
-    , _s3AccessKey       :: TF.Attr s P.Text
-    -- ^ @s3_access_key@ - (Optional)
-    -- AWS Access Key
-    --
-    , _s3SecretKey       :: TF.Attr s P.Text
-    -- ^ @s3_secret_key@ - (Optional)
-    -- AWS Secret Key
-    --
-    , _timestampFormat   :: TF.Attr s P.Text
-    -- ^ @timestamp_format@ - (Optional)
-    -- Specified timestamp formatting (default `%Y-%m-%dT%H:%M:%S.000`)
+    , _url               :: TF.Attr s P.Text
+    -- ^ @url@ - (Required)
+    -- The URL to POST to.
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newS3logging
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> S3logging s
-newS3logging _bucketName _name =
-    S3logging'
-        { _bucketName = _bucketName
-        , _domain = TF.value "s3.amazonaws.com"
-        , _format = TF.value "%h %l %u %t %r %>s"
+newServiceV1Sumologic
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    -> ServiceV1Sumologic s
+newServiceV1Sumologic _name _url =
+    ServiceV1Sumologic'
+        { _format = TF.value "%h %l %u %t %r %>s"
         , _formatVersion = TF.value 1
-        , _gzipLevel = TF.value 0
         , _messageType = TF.value "classic"
         , _name = _name
-        , _path = TF.Nil
-        , _period = TF.value 3600
-        , _redundancy = TF.Nil
         , _responseCondition = TF.Nil
-        , _s3AccessKey = TF.Nil
-        , _s3SecretKey = TF.Nil
-        , _timestampFormat = TF.value "%Y-%m-%dT%H:%M:%S.000"
+        , _url = _url
         }
 
-instance P.Hashable  (S3logging s)
-instance TF.IsValue  (S3logging s)
-instance TF.IsObject (S3logging s) where
-    toObject S3logging'{..} = P.catMaybes
-        [ TF.assign "bucket_name" <$> TF.attribute _bucketName
-        , TF.assign "domain" <$> TF.attribute _domain
-        , TF.assign "format" <$> TF.attribute _format
+instance P.Hashable  (ServiceV1Sumologic s)
+instance TF.IsValue  (ServiceV1Sumologic s)
+instance TF.IsObject (ServiceV1Sumologic s) where
+    toObject ServiceV1Sumologic'{..} = P.catMaybes
+        [ TF.assign "format" <$> TF.attribute _format
         , TF.assign "format_version" <$> TF.attribute _formatVersion
-        , TF.assign "gzip_level" <$> TF.attribute _gzipLevel
         , TF.assign "message_type" <$> TF.attribute _messageType
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "period" <$> TF.attribute _period
-        , TF.assign "redundancy" <$> TF.attribute _redundancy
         , TF.assign "response_condition" <$> TF.attribute _responseCondition
-        , TF.assign "s3_access_key" <$> TF.attribute _s3AccessKey
-        , TF.assign "s3_secret_key" <$> TF.attribute _s3SecretKey
-        , TF.assign "timestamp_format" <$> TF.attribute _timestampFormat
+        , TF.assign "url" <$> TF.attribute _url
         ]
 
-instance TF.IsValid (S3logging s) where
+instance TF.IsValid (ServiceV1Sumologic s) where
     validator = P.mempty
 
-instance P.HasBucketName (S3logging s) (TF.Attr s P.Text) where
-    bucketName =
-        P.lens (_bucketName :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketName = a } :: S3logging s)
-
-instance P.HasDomain (S3logging s) (TF.Attr s P.Text) where
-    domain =
-        P.lens (_domain :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: S3logging s)
-
-instance P.HasFormat (S3logging s) (TF.Attr s P.Text) where
+instance P.HasFormat (ServiceV1Sumologic s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: S3logging s)
+        P.lens (_format :: ServiceV1Sumologic s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1Sumologic s)
 
-instance P.HasFormatVersion (S3logging s) (TF.Attr s P.Integer) where
+instance P.HasFormatVersion (ServiceV1Sumologic s) (TF.Attr s P.Integer) where
     formatVersion =
-        P.lens (_formatVersion :: S3logging s -> TF.Attr s P.Integer)
-               (\s a -> s { _formatVersion = a } :: S3logging s)
+        P.lens (_formatVersion :: ServiceV1Sumologic s -> TF.Attr s P.Integer)
+               (\s a -> s { _formatVersion = a } :: ServiceV1Sumologic s)
 
-instance P.HasGzipLevel (S3logging s) (TF.Attr s P.Integer) where
-    gzipLevel =
-        P.lens (_gzipLevel :: S3logging s -> TF.Attr s P.Integer)
-               (\s a -> s { _gzipLevel = a } :: S3logging s)
-
-instance P.HasMessageType (S3logging s) (TF.Attr s P.Text) where
+instance P.HasMessageType (ServiceV1Sumologic s) (TF.Attr s P.Text) where
     messageType =
-        P.lens (_messageType :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _messageType = a } :: S3logging s)
+        P.lens (_messageType :: ServiceV1Sumologic s -> TF.Attr s P.Text)
+               (\s a -> s { _messageType = a } :: ServiceV1Sumologic s)
 
-instance P.HasName (S3logging s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Sumologic s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: S3logging s)
+        P.lens (_name :: ServiceV1Sumologic s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Sumologic s)
 
-instance P.HasPath (S3logging s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: S3logging s)
-
-instance P.HasPeriod (S3logging s) (TF.Attr s P.Integer) where
-    period =
-        P.lens (_period :: S3logging s -> TF.Attr s P.Integer)
-               (\s a -> s { _period = a } :: S3logging s)
-
-instance P.HasRedundancy (S3logging s) (TF.Attr s P.Text) where
-    redundancy =
-        P.lens (_redundancy :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _redundancy = a } :: S3logging s)
-
-instance P.HasResponseCondition (S3logging s) (TF.Attr s P.Text) where
+instance P.HasResponseCondition (ServiceV1Sumologic s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: S3logging s)
+        P.lens (_responseCondition :: ServiceV1Sumologic s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Sumologic s)
 
-instance P.HasS3AccessKey (S3logging s) (TF.Attr s P.Text) where
-    s3AccessKey =
-        P.lens (_s3AccessKey :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _s3AccessKey = a } :: S3logging s)
+instance P.HasUrl (ServiceV1Sumologic s) (TF.Attr s P.Text) where
+    url =
+        P.lens (_url :: ServiceV1Sumologic s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: ServiceV1Sumologic s)
 
-instance P.HasS3SecretKey (S3logging s) (TF.Attr s P.Text) where
-    s3SecretKey =
-        P.lens (_s3SecretKey :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _s3SecretKey = a } :: S3logging s)
-
-instance P.HasTimestampFormat (S3logging s) (TF.Attr s P.Text) where
-    timestampFormat =
-        P.lens (_timestampFormat :: S3logging s -> TF.Attr s P.Text)
-               (\s a -> s { _timestampFormat = a } :: S3logging s)
-
--- | @vcl@ nested settings.
-data Vcl s = Vcl'
+-- | @service_v1_vcl@ nested settings.
+data ServiceV1Vcl s = ServiceV1Vcl'
     { _content :: TF.Attr s P.Text
     -- ^ @content@ - (Required)
     -- The contents of this VCL configuration
@@ -879,46 +725,46 @@ data Vcl s = Vcl'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newVcl
+newServiceV1Vcl
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Vcl s
-newVcl _content _name =
-    Vcl'
+    -> ServiceV1Vcl s
+newServiceV1Vcl _content _name =
+    ServiceV1Vcl'
         { _content = _content
         , _main = TF.value P.False
         , _name = _name
         }
 
-instance P.Hashable  (Vcl s)
-instance TF.IsValue  (Vcl s)
-instance TF.IsObject (Vcl s) where
-    toObject Vcl'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1Vcl s)
+instance TF.IsValue  (ServiceV1Vcl s)
+instance TF.IsObject (ServiceV1Vcl s) where
+    toObject ServiceV1Vcl'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "main" <$> TF.attribute _main
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance TF.IsValid (Vcl s) where
+instance TF.IsValid (ServiceV1Vcl s) where
     validator = P.mempty
 
-instance P.HasContent (Vcl s) (TF.Attr s P.Text) where
+instance P.HasContent (ServiceV1Vcl s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: Vcl s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: Vcl s)
+        P.lens (_content :: ServiceV1Vcl s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: ServiceV1Vcl s)
 
-instance P.HasMain (Vcl s) (TF.Attr s P.Bool) where
+instance P.HasMain (ServiceV1Vcl s) (TF.Attr s P.Bool) where
     main =
-        P.lens (_main :: Vcl s -> TF.Attr s P.Bool)
-               (\s a -> s { _main = a } :: Vcl s)
+        P.lens (_main :: ServiceV1Vcl s -> TF.Attr s P.Bool)
+               (\s a -> s { _main = a } :: ServiceV1Vcl s)
 
-instance P.HasName (Vcl s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Vcl s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Vcl s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Vcl s)
+        P.lens (_name :: ServiceV1Vcl s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Vcl s)
 
--- | @backend@ nested settings.
-data Backend s = Backend'
+-- | @service_v1_backend@ nested settings.
+data ServiceV1Backend s = ServiceV1Backend'
     { _address             :: TF.Attr s P.Text
     -- ^ @address@ - (Required)
     -- An IPv4, hostname, or IPv6 address for the Backend
@@ -1015,12 +861,12 @@ data Backend s = Backend'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newBackend
+newServiceV1Backend
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Backend s
-newBackend _address _name =
-    Backend'
+    -> ServiceV1Backend s
+newServiceV1Backend _address _name =
+    ServiceV1Backend'
         { _address = _address
         , _autoLoadbalance = TF.value P.True
         , _betweenBytesTimeout = TF.value 10000
@@ -1046,10 +892,10 @@ newBackend _address _name =
         , _weight = TF.value 100
         }
 
-instance P.Hashable  (Backend s)
-instance TF.IsValue  (Backend s)
-instance TF.IsObject (Backend s) where
-    toObject Backend'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1Backend s)
+instance TF.IsValue  (ServiceV1Backend s)
+instance TF.IsObject (ServiceV1Backend s) where
+    toObject ServiceV1Backend'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "auto_loadbalance" <$> TF.attribute _autoLoadbalance
         , TF.assign "between_bytes_timeout" <$> TF.attribute _betweenBytesTimeout
@@ -1075,126 +921,190 @@ instance TF.IsObject (Backend s) where
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-instance TF.IsValid (Backend s) where
+instance TF.IsValid (ServiceV1Backend s) where
     validator = P.mempty
 
-instance P.HasAddress (Backend s) (TF.Attr s P.Text) where
+instance P.HasAddress (ServiceV1Backend s) (TF.Attr s P.Text) where
     address =
-        P.lens (_address :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: Backend s)
+        P.lens (_address :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ServiceV1Backend s)
 
-instance P.HasAutoLoadbalance (Backend s) (TF.Attr s P.Bool) where
+instance P.HasAutoLoadbalance (ServiceV1Backend s) (TF.Attr s P.Bool) where
     autoLoadbalance =
-        P.lens (_autoLoadbalance :: Backend s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoLoadbalance = a } :: Backend s)
+        P.lens (_autoLoadbalance :: ServiceV1Backend s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoLoadbalance = a } :: ServiceV1Backend s)
 
-instance P.HasBetweenBytesTimeout (Backend s) (TF.Attr s P.Integer) where
+instance P.HasBetweenBytesTimeout (ServiceV1Backend s) (TF.Attr s P.Integer) where
     betweenBytesTimeout =
-        P.lens (_betweenBytesTimeout :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _betweenBytesTimeout = a } :: Backend s)
+        P.lens (_betweenBytesTimeout :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _betweenBytesTimeout = a } :: ServiceV1Backend s)
 
-instance P.HasConnectTimeout (Backend s) (TF.Attr s P.Integer) where
+instance P.HasConnectTimeout (ServiceV1Backend s) (TF.Attr s P.Integer) where
     connectTimeout =
-        P.lens (_connectTimeout :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _connectTimeout = a } :: Backend s)
+        P.lens (_connectTimeout :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _connectTimeout = a } :: ServiceV1Backend s)
 
-instance P.HasErrorThreshold (Backend s) (TF.Attr s P.Integer) where
+instance P.HasErrorThreshold (ServiceV1Backend s) (TF.Attr s P.Integer) where
     errorThreshold =
-        P.lens (_errorThreshold :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _errorThreshold = a } :: Backend s)
+        P.lens (_errorThreshold :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _errorThreshold = a } :: ServiceV1Backend s)
 
-instance P.HasFirstByteTimeout (Backend s) (TF.Attr s P.Integer) where
+instance P.HasFirstByteTimeout (ServiceV1Backend s) (TF.Attr s P.Integer) where
     firstByteTimeout =
-        P.lens (_firstByteTimeout :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _firstByteTimeout = a } :: Backend s)
+        P.lens (_firstByteTimeout :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _firstByteTimeout = a } :: ServiceV1Backend s)
 
-instance P.HasHealthcheck (Backend s) (TF.Attr s P.Text) where
+instance P.HasHealthcheck (ServiceV1Backend s) (TF.Attr s P.Text) where
     healthcheck =
-        P.lens (_healthcheck :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _healthcheck = a } :: Backend s)
+        P.lens (_healthcheck :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _healthcheck = a } :: ServiceV1Backend s)
 
-instance P.HasMaxConn (Backend s) (TF.Attr s P.Integer) where
+instance P.HasMaxConn (ServiceV1Backend s) (TF.Attr s P.Integer) where
     maxConn =
-        P.lens (_maxConn :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _maxConn = a } :: Backend s)
+        P.lens (_maxConn :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _maxConn = a } :: ServiceV1Backend s)
 
-instance P.HasMaxTlsVersion (Backend s) (TF.Attr s P.Text) where
+instance P.HasMaxTlsVersion (ServiceV1Backend s) (TF.Attr s P.Text) where
     maxTlsVersion =
-        P.lens (_maxTlsVersion :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _maxTlsVersion = a } :: Backend s)
+        P.lens (_maxTlsVersion :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _maxTlsVersion = a } :: ServiceV1Backend s)
 
-instance P.HasMinTlsVersion (Backend s) (TF.Attr s P.Text) where
+instance P.HasMinTlsVersion (ServiceV1Backend s) (TF.Attr s P.Text) where
     minTlsVersion =
-        P.lens (_minTlsVersion :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _minTlsVersion = a } :: Backend s)
+        P.lens (_minTlsVersion :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _minTlsVersion = a } :: ServiceV1Backend s)
 
-instance P.HasName (Backend s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Backend s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Backend s)
+        P.lens (_name :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Backend s)
 
-instance P.HasPort (Backend s) (TF.Attr s P.Integer) where
+instance P.HasPort (ServiceV1Backend s) (TF.Attr s P.Integer) where
     port =
-        P.lens (_port :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Backend s)
+        P.lens (_port :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: ServiceV1Backend s)
 
-instance P.HasRequestCondition (Backend s) (TF.Attr s P.Text) where
+instance P.HasRequestCondition (ServiceV1Backend s) (TF.Attr s P.Text) where
     requestCondition =
-        P.lens (_requestCondition :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _requestCondition = a } :: Backend s)
+        P.lens (_requestCondition :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _requestCondition = a } :: ServiceV1Backend s)
 
-instance P.HasShield (Backend s) (TF.Attr s P.Text) where
+instance P.HasShield (ServiceV1Backend s) (TF.Attr s P.Text) where
     shield =
-        P.lens (_shield :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _shield = a } :: Backend s)
+        P.lens (_shield :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _shield = a } :: ServiceV1Backend s)
 
-instance P.HasSslCaCert (Backend s) (TF.Attr s P.Text) where
+instance P.HasSslCaCert (ServiceV1Backend s) (TF.Attr s P.Text) where
     sslCaCert =
-        P.lens (_sslCaCert :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslCaCert = a } :: Backend s)
+        P.lens (_sslCaCert :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _sslCaCert = a } :: ServiceV1Backend s)
 
-instance P.HasSslCertHostname (Backend s) (TF.Attr s P.Text) where
+instance P.HasSslCertHostname (ServiceV1Backend s) (TF.Attr s P.Text) where
     sslCertHostname =
-        P.lens (_sslCertHostname :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslCertHostname = a } :: Backend s)
+        P.lens (_sslCertHostname :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _sslCertHostname = a } :: ServiceV1Backend s)
 
-instance P.HasSslCheckCert (Backend s) (TF.Attr s P.Bool) where
+instance P.HasSslCheckCert (ServiceV1Backend s) (TF.Attr s P.Bool) where
     sslCheckCert =
-        P.lens (_sslCheckCert :: Backend s -> TF.Attr s P.Bool)
-               (\s a -> s { _sslCheckCert = a } :: Backend s)
+        P.lens (_sslCheckCert :: ServiceV1Backend s -> TF.Attr s P.Bool)
+               (\s a -> s { _sslCheckCert = a } :: ServiceV1Backend s)
 
-instance P.HasSslCiphers (Backend s) (TF.Attr s P.Text) where
+instance P.HasSslCiphers (ServiceV1Backend s) (TF.Attr s P.Text) where
     sslCiphers =
-        P.lens (_sslCiphers :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslCiphers = a } :: Backend s)
+        P.lens (_sslCiphers :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _sslCiphers = a } :: ServiceV1Backend s)
 
-instance P.HasSslClientCert (Backend s) (TF.Attr s P.Text) where
+instance P.HasSslClientCert (ServiceV1Backend s) (TF.Attr s P.Text) where
     sslClientCert =
-        P.lens (_sslClientCert :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslClientCert = a } :: Backend s)
+        P.lens (_sslClientCert :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _sslClientCert = a } :: ServiceV1Backend s)
 
-instance P.HasSslClientKey (Backend s) (TF.Attr s P.Text) where
+instance P.HasSslClientKey (ServiceV1Backend s) (TF.Attr s P.Text) where
     sslClientKey =
-        P.lens (_sslClientKey :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslClientKey = a } :: Backend s)
+        P.lens (_sslClientKey :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _sslClientKey = a } :: ServiceV1Backend s)
 
-instance P.HasSslSniHostname (Backend s) (TF.Attr s P.Text) where
+instance P.HasSslSniHostname (ServiceV1Backend s) (TF.Attr s P.Text) where
     sslSniHostname =
-        P.lens (_sslSniHostname :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslSniHostname = a } :: Backend s)
+        P.lens (_sslSniHostname :: ServiceV1Backend s -> TF.Attr s P.Text)
+               (\s a -> s { _sslSniHostname = a } :: ServiceV1Backend s)
 
-instance P.HasUseSsl (Backend s) (TF.Attr s P.Bool) where
+instance P.HasUseSsl (ServiceV1Backend s) (TF.Attr s P.Bool) where
     useSsl =
-        P.lens (_useSsl :: Backend s -> TF.Attr s P.Bool)
-               (\s a -> s { _useSsl = a } :: Backend s)
+        P.lens (_useSsl :: ServiceV1Backend s -> TF.Attr s P.Bool)
+               (\s a -> s { _useSsl = a } :: ServiceV1Backend s)
 
-instance P.HasWeight (Backend s) (TF.Attr s P.Integer) where
+instance P.HasWeight (ServiceV1Backend s) (TF.Attr s P.Integer) where
     weight =
-        P.lens (_weight :: Backend s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a } :: Backend s)
+        P.lens (_weight :: ServiceV1Backend s -> TF.Attr s P.Integer)
+               (\s a -> s { _weight = a } :: ServiceV1Backend s)
 
--- | @gcslogging@ nested settings.
-data Gcslogging s = Gcslogging'
+-- | @service_v1_gzip@ nested settings.
+data ServiceV1Gzip s = ServiceV1Gzip'
+    { _cacheCondition :: TF.Attr s P.Text
+    -- ^ @cache_condition@ - (Optional)
+    -- Name of a condition controlling when this gzip configuration applies.
+    --
+    , _contentTypes   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @content_types@ - (Optional)
+    -- Content types to apply automatic gzip to
+    --
+    , _extensions     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @extensions@ - (Optional)
+    -- File extensions to apply automatic gzip to. Do not include '.'
+    --
+    , _name           :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- A name to refer to this gzip condition
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newServiceV1Gzip
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> ServiceV1Gzip s
+newServiceV1Gzip _name =
+    ServiceV1Gzip'
+        { _cacheCondition = TF.Nil
+        , _contentTypes = TF.Nil
+        , _extensions = TF.Nil
+        , _name = _name
+        }
+
+instance P.Hashable  (ServiceV1Gzip s)
+instance TF.IsValue  (ServiceV1Gzip s)
+instance TF.IsObject (ServiceV1Gzip s) where
+    toObject ServiceV1Gzip'{..} = P.catMaybes
+        [ TF.assign "cache_condition" <$> TF.attribute _cacheCondition
+        , TF.assign "content_types" <$> TF.attribute _contentTypes
+        , TF.assign "extensions" <$> TF.attribute _extensions
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (ServiceV1Gzip s) where
+    validator = P.mempty
+
+instance P.HasCacheCondition (ServiceV1Gzip s) (TF.Attr s P.Text) where
+    cacheCondition =
+        P.lens (_cacheCondition :: ServiceV1Gzip s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheCondition = a } :: ServiceV1Gzip s)
+
+instance P.HasContentTypes (ServiceV1Gzip s) (TF.Attr s [TF.Attr s P.Text]) where
+    contentTypes =
+        P.lens (_contentTypes :: ServiceV1Gzip s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _contentTypes = a } :: ServiceV1Gzip s)
+
+instance P.HasExtensions (ServiceV1Gzip s) (TF.Attr s [TF.Attr s P.Text]) where
+    extensions =
+        P.lens (_extensions :: ServiceV1Gzip s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _extensions = a } :: ServiceV1Gzip s)
+
+instance P.HasName (ServiceV1Gzip s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceV1Gzip s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Gzip s)
+
+-- | @service_v1_gcslogging@ nested settings.
+data ServiceV1Gcslogging s = ServiceV1Gcslogging'
     { _bucketName        :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required)
     -- The name of the bucket in which to store the logs.
@@ -1242,12 +1152,12 @@ data Gcslogging s = Gcslogging'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newGcslogging
+newServiceV1Gcslogging
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Gcslogging s
-newGcslogging _bucketName _name =
-    Gcslogging'
+    -> ServiceV1Gcslogging s
+newServiceV1Gcslogging _bucketName _name =
+    ServiceV1Gcslogging'
         { _bucketName = _bucketName
         , _email = TF.Nil
         , _format = TF.value "%h %l %u %t %r %>s"
@@ -1261,10 +1171,10 @@ newGcslogging _bucketName _name =
         , _timestampFormat = TF.value "%Y-%m-%dT%H:%M:%S.000"
         }
 
-instance P.Hashable  (Gcslogging s)
-instance TF.IsValue  (Gcslogging s)
-instance TF.IsObject (Gcslogging s) where
-    toObject Gcslogging'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1Gcslogging s)
+instance TF.IsValue  (ServiceV1Gcslogging s)
+instance TF.IsObject (ServiceV1Gcslogging s) where
+    toObject ServiceV1Gcslogging'{..} = P.catMaybes
         [ TF.assign "bucket_name" <$> TF.attribute _bucketName
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "format" <$> TF.attribute _format
@@ -1278,262 +1188,242 @@ instance TF.IsObject (Gcslogging s) where
         , TF.assign "timestamp_format" <$> TF.attribute _timestampFormat
         ]
 
-instance TF.IsValid (Gcslogging s) where
+instance TF.IsValid (ServiceV1Gcslogging s) where
     validator = P.mempty
 
-instance P.HasBucketName (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasBucketName (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     bucketName =
-        P.lens (_bucketName :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketName = a } :: Gcslogging s)
+        P.lens (_bucketName :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _bucketName = a } :: ServiceV1Gcslogging s)
 
-instance P.HasEmail (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasEmail (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     email =
-        P.lens (_email :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a } :: Gcslogging s)
+        P.lens (_email :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: ServiceV1Gcslogging s)
 
-instance P.HasFormat (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasFormat (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: Gcslogging s)
+        P.lens (_format :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1Gcslogging s)
 
-instance P.HasGzipLevel (Gcslogging s) (TF.Attr s P.Integer) where
+instance P.HasGzipLevel (ServiceV1Gcslogging s) (TF.Attr s P.Integer) where
     gzipLevel =
-        P.lens (_gzipLevel :: Gcslogging s -> TF.Attr s P.Integer)
-               (\s a -> s { _gzipLevel = a } :: Gcslogging s)
+        P.lens (_gzipLevel :: ServiceV1Gcslogging s -> TF.Attr s P.Integer)
+               (\s a -> s { _gzipLevel = a } :: ServiceV1Gcslogging s)
 
-instance P.HasMessageType (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasMessageType (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     messageType =
-        P.lens (_messageType :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _messageType = a } :: Gcslogging s)
+        P.lens (_messageType :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _messageType = a } :: ServiceV1Gcslogging s)
 
-instance P.HasName (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Gcslogging s)
+        P.lens (_name :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Gcslogging s)
 
-instance P.HasPath (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasPath (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     path =
-        P.lens (_path :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: Gcslogging s)
+        P.lens (_path :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: ServiceV1Gcslogging s)
 
-instance P.HasPeriod (Gcslogging s) (TF.Attr s P.Integer) where
+instance P.HasPeriod (ServiceV1Gcslogging s) (TF.Attr s P.Integer) where
     period =
-        P.lens (_period :: Gcslogging s -> TF.Attr s P.Integer)
-               (\s a -> s { _period = a } :: Gcslogging s)
+        P.lens (_period :: ServiceV1Gcslogging s -> TF.Attr s P.Integer)
+               (\s a -> s { _period = a } :: ServiceV1Gcslogging s)
 
-instance P.HasResponseCondition (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasResponseCondition (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Gcslogging s)
+        P.lens (_responseCondition :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Gcslogging s)
 
-instance P.HasSecretKey (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasSecretKey (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     secretKey =
-        P.lens (_secretKey :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _secretKey = a } :: Gcslogging s)
+        P.lens (_secretKey :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _secretKey = a } :: ServiceV1Gcslogging s)
 
-instance P.HasTimestampFormat (Gcslogging s) (TF.Attr s P.Text) where
+instance P.HasTimestampFormat (ServiceV1Gcslogging s) (TF.Attr s P.Text) where
     timestampFormat =
-        P.lens (_timestampFormat :: Gcslogging s -> TF.Attr s P.Text)
-               (\s a -> s { _timestampFormat = a } :: Gcslogging s)
+        P.lens (_timestampFormat :: ServiceV1Gcslogging s -> TF.Attr s P.Text)
+               (\s a -> s { _timestampFormat = a } :: ServiceV1Gcslogging s)
 
--- | @gzip@ nested settings.
-data Gzip s = Gzip'
-    { _cacheCondition :: TF.Attr s P.Text
-    -- ^ @cache_condition@ - (Optional)
-    -- Name of a condition controlling when this gzip configuration applies.
+-- | @service_v1_s3logging@ nested settings.
+data ServiceV1S3logging s = ServiceV1S3logging'
+    { _bucketName        :: TF.Attr s P.Text
+    -- ^ @bucket_name@ - (Required)
+    -- S3 Bucket name to store logs in
     --
-    , _contentTypes   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @content_types@ - (Optional)
-    -- Content types to apply automatic gzip to
+    , _domain            :: TF.Attr s P.Text
+    -- ^ @domain@ - (Optional)
+    -- Bucket endpoint
     --
-    , _extensions     :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @extensions@ - (Optional)
-    -- File extensions to apply automatic gzip to. Do not include '.'
+    , _format            :: TF.Attr s P.Text
+    -- ^ @format@ - (Optional)
+    -- Apache-style string or VCL variables to use for log formatting
     --
-    , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- A name to refer to this gzip condition
+    , _formatVersion     :: TF.Attr s P.Integer
+    -- ^ @format_version@ - (Optional)
+    -- The version of the custom logging format used for the configured endpoint.
+    -- Can be either 1 or 2. (Default: 1)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newGzip
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Gzip s
-newGzip _name =
-    Gzip'
-        { _cacheCondition = TF.Nil
-        , _contentTypes = TF.Nil
-        , _extensions = TF.Nil
-        , _name = _name
-        }
-
-instance P.Hashable  (Gzip s)
-instance TF.IsValue  (Gzip s)
-instance TF.IsObject (Gzip s) where
-    toObject Gzip'{..} = P.catMaybes
-        [ TF.assign "cache_condition" <$> TF.attribute _cacheCondition
-        , TF.assign "content_types" <$> TF.attribute _contentTypes
-        , TF.assign "extensions" <$> TF.attribute _extensions
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (Gzip s) where
-    validator = P.mempty
-
-instance P.HasCacheCondition (Gzip s) (TF.Attr s P.Text) where
-    cacheCondition =
-        P.lens (_cacheCondition :: Gzip s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheCondition = a } :: Gzip s)
-
-instance P.HasContentTypes (Gzip s) (TF.Attr s [TF.Attr s P.Text]) where
-    contentTypes =
-        P.lens (_contentTypes :: Gzip s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _contentTypes = a } :: Gzip s)
-
-instance P.HasExtensions (Gzip s) (TF.Attr s [TF.Attr s P.Text]) where
-    extensions =
-        P.lens (_extensions :: Gzip s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _extensions = a } :: Gzip s)
-
-instance P.HasName (Gzip s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Gzip s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Gzip s)
-
--- | @header@ nested settings.
-data Header s = Header'
-    { _action            :: TF.Attr s P.Text
-    -- ^ @action@ - (Required)
-    -- One of set, append, delete, regex, or regex_repeat
+    , _gzipLevel         :: TF.Attr s P.Integer
+    -- ^ @gzip_level@ - (Optional)
+    -- Gzip Compression level
     --
-    , _cacheCondition    :: TF.Attr s P.Text
-    -- ^ @cache_condition@ - (Optional)
-    -- Optional name of a cache condition to apply.
-    --
-    , _destination       :: TF.Attr s P.Text
-    -- ^ @destination@ - (Required)
-    -- Header this affects
-    --
-    , _ignoreIfSet       :: TF.Attr s P.Bool
-    -- ^ @ignore_if_set@ - (Optional)
-    -- Don't add the header if it is already. (Only applies to 'set' action.).
-    -- Default `false`
+    , _messageType       :: TF.Attr s P.Text
+    -- ^ @message_type@ - (Optional)
+    -- How the message should be formatted.
     --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
-    -- A name to refer to this Header object
+    -- Unique name to refer to this logging setup
     --
-    , _priority          :: TF.Attr s P.Integer
-    -- ^ @priority@ - (Optional)
-    -- Lower priorities execute first. (Default: 100.)
+    , _path              :: TF.Attr s P.Text
+    -- ^ @path@ - (Optional)
+    -- Path to store the files. Must end with a trailing slash
     --
-    , _requestCondition  :: TF.Attr s P.Text
-    -- ^ @request_condition@ - (Optional)
-    -- Optional name of a request condition to apply.
+    , _period            :: TF.Attr s P.Integer
+    -- ^ @period@ - (Optional)
+    -- How frequently the logs should be transferred, in seconds (Default 3600)
+    --
+    , _redundancy        :: TF.Attr s P.Text
+    -- ^ @redundancy@ - (Optional)
+    -- The S3 redundancy level.
     --
     , _responseCondition :: TF.Attr s P.Text
     -- ^ @response_condition@ - (Optional)
-    -- Optional name of a response condition to apply.
+    -- Name of a condition to apply this logging.
     --
-    , _type'             :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    -- Type to manipulate: request, fetch, cache, response
+    , _s3AccessKey       :: TF.Attr s P.Text
+    -- ^ @s3_access_key@ - (Optional)
+    -- AWS Access Key
+    --
+    , _s3SecretKey       :: TF.Attr s P.Text
+    -- ^ @s3_secret_key@ - (Optional)
+    -- AWS Secret Key
+    --
+    , _timestampFormat   :: TF.Attr s P.Text
+    -- ^ @timestamp_format@ - (Optional)
+    -- Specified timestamp formatting (default `%Y-%m-%dT%H:%M:%S.000`)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newHeader
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
+newServiceV1S3logging
+    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> Header s
-newHeader _action _destination _name _type' =
-    Header'
-        { _action = _action
-        , _cacheCondition = TF.Nil
-        , _destination = _destination
-        , _ignoreIfSet = TF.value P.False
+    -> ServiceV1S3logging s
+newServiceV1S3logging _bucketName _name =
+    ServiceV1S3logging'
+        { _bucketName = _bucketName
+        , _domain = TF.value "s3.amazonaws.com"
+        , _format = TF.value "%h %l %u %t %r %>s"
+        , _formatVersion = TF.value 1
+        , _gzipLevel = TF.value 0
+        , _messageType = TF.value "classic"
         , _name = _name
-        , _priority = TF.value 100
-        , _requestCondition = TF.Nil
+        , _path = TF.Nil
+        , _period = TF.value 3600
+        , _redundancy = TF.Nil
         , _responseCondition = TF.Nil
-        , _type' = _type'
+        , _s3AccessKey = TF.Nil
+        , _s3SecretKey = TF.Nil
+        , _timestampFormat = TF.value "%Y-%m-%dT%H:%M:%S.000"
         }
 
-instance P.Hashable  (Header s)
-instance TF.IsValue  (Header s)
-instance TF.IsObject (Header s) where
-    toObject Header'{..} = P.catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "cache_condition" <$> TF.attribute _cacheCondition
-        , TF.assign "destination" <$> TF.attribute _destination
-        , TF.assign "ignore_if_set" <$> TF.attribute _ignoreIfSet
+instance P.Hashable  (ServiceV1S3logging s)
+instance TF.IsValue  (ServiceV1S3logging s)
+instance TF.IsObject (ServiceV1S3logging s) where
+    toObject ServiceV1S3logging'{..} = P.catMaybes
+        [ TF.assign "bucket_name" <$> TF.attribute _bucketName
+        , TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "format" <$> TF.attribute _format
+        , TF.assign "format_version" <$> TF.attribute _formatVersion
+        , TF.assign "gzip_level" <$> TF.attribute _gzipLevel
+        , TF.assign "message_type" <$> TF.attribute _messageType
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "request_condition" <$> TF.attribute _requestCondition
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "period" <$> TF.attribute _period
+        , TF.assign "redundancy" <$> TF.attribute _redundancy
         , TF.assign "response_condition" <$> TF.attribute _responseCondition
-        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "s3_access_key" <$> TF.attribute _s3AccessKey
+        , TF.assign "s3_secret_key" <$> TF.attribute _s3SecretKey
+        , TF.assign "timestamp_format" <$> TF.attribute _timestampFormat
         ]
 
-instance TF.IsValid (Header s) where
+instance TF.IsValid (ServiceV1S3logging s) where
     validator = P.mempty
 
-instance P.HasAction (Header s) (TF.Attr s P.Text) where
-    action =
-        P.lens (_action :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: Header s)
+instance P.HasBucketName (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    bucketName =
+        P.lens (_bucketName :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _bucketName = a } :: ServiceV1S3logging s)
 
-instance P.HasCacheCondition (Header s) (TF.Attr s P.Text) where
-    cacheCondition =
-        P.lens (_cacheCondition :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheCondition = a } :: Header s)
+instance P.HasDomain (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    domain =
+        P.lens (_domain :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _domain = a } :: ServiceV1S3logging s)
 
-instance P.HasDestination (Header s) (TF.Attr s P.Text) where
-    destination =
-        P.lens (_destination :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _destination = a } :: Header s)
+instance P.HasFormat (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    format =
+        P.lens (_format :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1S3logging s)
 
-instance P.HasIgnoreIfSet (Header s) (TF.Attr s P.Bool) where
-    ignoreIfSet =
-        P.lens (_ignoreIfSet :: Header s -> TF.Attr s P.Bool)
-               (\s a -> s { _ignoreIfSet = a } :: Header s)
+instance P.HasFormatVersion (ServiceV1S3logging s) (TF.Attr s P.Integer) where
+    formatVersion =
+        P.lens (_formatVersion :: ServiceV1S3logging s -> TF.Attr s P.Integer)
+               (\s a -> s { _formatVersion = a } :: ServiceV1S3logging s)
 
-instance P.HasName (Header s) (TF.Attr s P.Text) where
+instance P.HasGzipLevel (ServiceV1S3logging s) (TF.Attr s P.Integer) where
+    gzipLevel =
+        P.lens (_gzipLevel :: ServiceV1S3logging s -> TF.Attr s P.Integer)
+               (\s a -> s { _gzipLevel = a } :: ServiceV1S3logging s)
+
+instance P.HasMessageType (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    messageType =
+        P.lens (_messageType :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _messageType = a } :: ServiceV1S3logging s)
+
+instance P.HasName (ServiceV1S3logging s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Header s)
+        P.lens (_name :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1S3logging s)
 
-instance P.HasPriority (Header s) (TF.Attr s P.Integer) where
-    priority =
-        P.lens (_priority :: Header s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a } :: Header s)
+instance P.HasPath (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: ServiceV1S3logging s)
 
-instance P.HasRequestCondition (Header s) (TF.Attr s P.Text) where
-    requestCondition =
-        P.lens (_requestCondition :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _requestCondition = a } :: Header s)
+instance P.HasPeriod (ServiceV1S3logging s) (TF.Attr s P.Integer) where
+    period =
+        P.lens (_period :: ServiceV1S3logging s -> TF.Attr s P.Integer)
+               (\s a -> s { _period = a } :: ServiceV1S3logging s)
 
-instance P.HasResponseCondition (Header s) (TF.Attr s P.Text) where
+instance P.HasRedundancy (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    redundancy =
+        P.lens (_redundancy :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _redundancy = a } :: ServiceV1S3logging s)
+
+instance P.HasResponseCondition (ServiceV1S3logging s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Header s)
+        P.lens (_responseCondition :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1S3logging s)
 
-instance P.HasType' (Header s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Header s)
+instance P.HasS3AccessKey (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    s3AccessKey =
+        P.lens (_s3AccessKey :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _s3AccessKey = a } :: ServiceV1S3logging s)
 
-instance s ~ s' => P.HasComputedRegex (TF.Ref s' (Header s)) (TF.Attr s P.Text) where
-    computedRegex x = TF.compute (TF.refKey x) "_computedRegex"
+instance P.HasS3SecretKey (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    s3SecretKey =
+        P.lens (_s3SecretKey :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _s3SecretKey = a } :: ServiceV1S3logging s)
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (Header s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "_computedSource"
+instance P.HasTimestampFormat (ServiceV1S3logging s) (TF.Attr s P.Text) where
+    timestampFormat =
+        P.lens (_timestampFormat :: ServiceV1S3logging s -> TF.Attr s P.Text)
+               (\s a -> s { _timestampFormat = a } :: ServiceV1S3logging s)
 
-instance s ~ s' => P.HasComputedSubstitution (TF.Ref s' (Header s)) (TF.Attr s P.Text) where
-    computedSubstitution x = TF.compute (TF.refKey x) "_computedSubstitution"
-
--- | @bigquerylogging@ nested settings.
-data Bigquerylogging s = Bigquerylogging'
+-- | @service_v1_bigquerylogging@ nested settings.
+data ServiceV1Bigquerylogging s = ServiceV1Bigquerylogging'
     { _dataset           :: TF.Attr s P.Text
     -- ^ @dataset@ - (Required)
     -- The ID of your BigQuery dataset
@@ -1569,14 +1459,14 @@ data Bigquerylogging s = Bigquerylogging'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newBigquerylogging
+newServiceV1Bigquerylogging
     :: TF.Attr s P.Text -- ^ @dataset@ - 'P.dataset'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Text -- ^ @table@ - 'P.table'
-    -> Bigquerylogging s
-newBigquerylogging _dataset _name _projectId _table =
-    Bigquerylogging'
+    -> ServiceV1Bigquerylogging s
+newServiceV1Bigquerylogging _dataset _name _projectId _table =
+    ServiceV1Bigquerylogging'
         { _dataset = _dataset
         , _email = TF.Nil
         , _format = TF.value "%h %l %u %t \"%r\" %>s %b"
@@ -1587,10 +1477,10 @@ newBigquerylogging _dataset _name _projectId _table =
         , _table = _table
         }
 
-instance P.Hashable  (Bigquerylogging s)
-instance TF.IsValue  (Bigquerylogging s)
-instance TF.IsObject (Bigquerylogging s) where
-    toObject Bigquerylogging'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1Bigquerylogging s)
+instance TF.IsValue  (ServiceV1Bigquerylogging s)
+instance TF.IsObject (ServiceV1Bigquerylogging s) where
+    toObject ServiceV1Bigquerylogging'{..} = P.catMaybes
         [ TF.assign "dataset" <$> TF.attribute _dataset
         , TF.assign "email" <$> TF.attribute _email
         , TF.assign "format" <$> TF.attribute _format
@@ -1601,51 +1491,51 @@ instance TF.IsObject (Bigquerylogging s) where
         , TF.assign "table" <$> TF.attribute _table
         ]
 
-instance TF.IsValid (Bigquerylogging s) where
+instance TF.IsValid (ServiceV1Bigquerylogging s) where
     validator = P.mempty
 
-instance P.HasDataset (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasDataset (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     dataset =
-        P.lens (_dataset :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _dataset = a } :: Bigquerylogging s)
+        P.lens (_dataset :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _dataset = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasEmail (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasEmail (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     email =
-        P.lens (_email :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a } :: Bigquerylogging s)
+        P.lens (_email :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasFormat (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasFormat (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: Bigquerylogging s)
+        P.lens (_format :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasName (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Bigquerylogging s)
+        P.lens (_name :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasProjectId (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasProjectId (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     projectId =
-        P.lens (_projectId :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _projectId = a } :: Bigquerylogging s)
+        P.lens (_projectId :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _projectId = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasResponseCondition (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasResponseCondition (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Bigquerylogging s)
+        P.lens (_responseCondition :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasSecretKey (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasSecretKey (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     secretKey =
-        P.lens (_secretKey :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _secretKey = a } :: Bigquerylogging s)
+        P.lens (_secretKey :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _secretKey = a } :: ServiceV1Bigquerylogging s)
 
-instance P.HasTable (Bigquerylogging s) (TF.Attr s P.Text) where
+instance P.HasTable (ServiceV1Bigquerylogging s) (TF.Attr s P.Text) where
     table =
-        P.lens (_table :: Bigquerylogging s -> TF.Attr s P.Text)
-               (\s a -> s { _table = a } :: Bigquerylogging s)
+        P.lens (_table :: ServiceV1Bigquerylogging s -> TF.Attr s P.Text)
+               (\s a -> s { _table = a } :: ServiceV1Bigquerylogging s)
 
--- | @syslog@ nested settings.
-data Syslog s = Syslog'
+-- | @service_v1_syslog@ nested settings.
+data ServiceV1Syslog s = ServiceV1Syslog'
     { _address           :: TF.Attr s P.Text
     -- ^ @address@ - (Required)
     -- The address of the syslog service
@@ -1692,12 +1582,12 @@ data Syslog s = Syslog'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newSyslog
+newServiceV1Syslog
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Syslog s
-newSyslog _address _name =
-    Syslog'
+    -> ServiceV1Syslog s
+newServiceV1Syslog _address _name =
+    ServiceV1Syslog'
         { _address = _address
         , _format = TF.value "%h %l %u %t \"%r\" %>s %b"
         , _formatVersion = TF.value 1
@@ -1711,10 +1601,10 @@ newSyslog _address _name =
         , _useTls = TF.value P.False
         }
 
-instance P.Hashable  (Syslog s)
-instance TF.IsValue  (Syslog s)
-instance TF.IsObject (Syslog s) where
-    toObject Syslog'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1Syslog s)
+instance TF.IsValue  (ServiceV1Syslog s)
+instance TF.IsObject (ServiceV1Syslog s) where
+    toObject ServiceV1Syslog'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "format" <$> TF.attribute _format
         , TF.assign "format_version" <$> TF.attribute _formatVersion
@@ -1728,231 +1618,198 @@ instance TF.IsObject (Syslog s) where
         , TF.assign "use_tls" <$> TF.attribute _useTls
         ]
 
-instance TF.IsValid (Syslog s) where
+instance TF.IsValid (ServiceV1Syslog s) where
     validator = P.mempty
 
-instance P.HasAddress (Syslog s) (TF.Attr s P.Text) where
+instance P.HasAddress (ServiceV1Syslog s) (TF.Attr s P.Text) where
     address =
-        P.lens (_address :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: Syslog s)
+        P.lens (_address :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ServiceV1Syslog s)
 
-instance P.HasFormat (Syslog s) (TF.Attr s P.Text) where
+instance P.HasFormat (ServiceV1Syslog s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: Syslog s)
+        P.lens (_format :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1Syslog s)
 
-instance P.HasFormatVersion (Syslog s) (TF.Attr s P.Integer) where
+instance P.HasFormatVersion (ServiceV1Syslog s) (TF.Attr s P.Integer) where
     formatVersion =
-        P.lens (_formatVersion :: Syslog s -> TF.Attr s P.Integer)
-               (\s a -> s { _formatVersion = a } :: Syslog s)
+        P.lens (_formatVersion :: ServiceV1Syslog s -> TF.Attr s P.Integer)
+               (\s a -> s { _formatVersion = a } :: ServiceV1Syslog s)
 
-instance P.HasMessageType (Syslog s) (TF.Attr s P.Text) where
+instance P.HasMessageType (ServiceV1Syslog s) (TF.Attr s P.Text) where
     messageType =
-        P.lens (_messageType :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _messageType = a } :: Syslog s)
+        P.lens (_messageType :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _messageType = a } :: ServiceV1Syslog s)
 
-instance P.HasName (Syslog s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1Syslog s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Syslog s)
+        P.lens (_name :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Syslog s)
 
-instance P.HasPort (Syslog s) (TF.Attr s P.Integer) where
+instance P.HasPort (ServiceV1Syslog s) (TF.Attr s P.Integer) where
     port =
-        P.lens (_port :: Syslog s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Syslog s)
+        P.lens (_port :: ServiceV1Syslog s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: ServiceV1Syslog s)
 
-instance P.HasResponseCondition (Syslog s) (TF.Attr s P.Text) where
+instance P.HasResponseCondition (ServiceV1Syslog s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Syslog s)
+        P.lens (_responseCondition :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Syslog s)
 
-instance P.HasTlsCaCert (Syslog s) (TF.Attr s P.Text) where
+instance P.HasTlsCaCert (ServiceV1Syslog s) (TF.Attr s P.Text) where
     tlsCaCert =
-        P.lens (_tlsCaCert :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _tlsCaCert = a } :: Syslog s)
+        P.lens (_tlsCaCert :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _tlsCaCert = a } :: ServiceV1Syslog s)
 
-instance P.HasTlsHostname (Syslog s) (TF.Attr s P.Text) where
+instance P.HasTlsHostname (ServiceV1Syslog s) (TF.Attr s P.Text) where
     tlsHostname =
-        P.lens (_tlsHostname :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _tlsHostname = a } :: Syslog s)
+        P.lens (_tlsHostname :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _tlsHostname = a } :: ServiceV1Syslog s)
 
-instance P.HasToken (Syslog s) (TF.Attr s P.Text) where
+instance P.HasToken (ServiceV1Syslog s) (TF.Attr s P.Text) where
     token =
-        P.lens (_token :: Syslog s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a } :: Syslog s)
+        P.lens (_token :: ServiceV1Syslog s -> TF.Attr s P.Text)
+               (\s a -> s { _token = a } :: ServiceV1Syslog s)
 
-instance P.HasUseTls (Syslog s) (TF.Attr s P.Bool) where
+instance P.HasUseTls (ServiceV1Syslog s) (TF.Attr s P.Bool) where
     useTls =
-        P.lens (_useTls :: Syslog s -> TF.Attr s P.Bool)
-               (\s a -> s { _useTls = a } :: Syslog s)
+        P.lens (_useTls :: ServiceV1Syslog s -> TF.Attr s P.Bool)
+               (\s a -> s { _useTls = a } :: ServiceV1Syslog s)
 
--- | @condition@ nested settings.
-data Condition s = Condition'
-    { _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+-- | @service_v1_header@ nested settings.
+data ServiceV1Header s = ServiceV1Header'
+    { _action            :: TF.Attr s P.Text
+    -- ^ @action@ - (Required)
+    -- One of set, append, delete, regex, or regex_repeat
     --
-    , _priority  :: TF.Attr s P.Integer
-    -- ^ @priority@ - (Optional)
-    -- A number used to determine the order in which multiple conditions execute.
-    -- Lower numbers execute first
+    , _cacheCondition    :: TF.Attr s P.Text
+    -- ^ @cache_condition@ - (Optional)
+    -- Optional name of a cache condition to apply.
     --
-    , _statement :: TF.Attr s P.Text
-    -- ^ @statement@ - (Required)
-    -- The statement used to determine if the condition is met
+    , _destination       :: TF.Attr s P.Text
+    -- ^ @destination@ - (Required)
+    -- Header this affects
     --
-    , _type'     :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    -- Type of the condition, either `REQUEST`, `RESPONSE`, or `CACHE`
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newCondition
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @statement@ - 'P.statement'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> Condition s
-newCondition _name _statement _type' =
-    Condition'
-        { _name = _name
-        , _priority = TF.value 10
-        , _statement = _statement
-        , _type' = _type'
-        }
-
-instance P.Hashable  (Condition s)
-instance TF.IsValue  (Condition s)
-instance TF.IsObject (Condition s) where
-    toObject Condition'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "statement" <$> TF.attribute _statement
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (Condition s) where
-    validator = P.mempty
-
-instance P.HasName (Condition s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Condition s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Condition s)
-
-instance P.HasPriority (Condition s) (TF.Attr s P.Integer) where
-    priority =
-        P.lens (_priority :: Condition s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a } :: Condition s)
-
-instance P.HasStatement (Condition s) (TF.Attr s P.Text) where
-    statement =
-        P.lens (_statement :: Condition s -> TF.Attr s P.Text)
-               (\s a -> s { _statement = a } :: Condition s)
-
-instance P.HasType' (Condition s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: Condition s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Condition s)
-
--- | @logentries@ nested settings.
-data Logentries s = Logentries'
-    { _format            :: TF.Attr s P.Text
-    -- ^ @format@ - (Optional)
-    -- Apache-style string or VCL variables to use for log formatting
-    --
-    , _formatVersion     :: TF.Attr s P.Integer
-    -- ^ @format_version@ - (Optional)
-    -- The version of the custom logging format used for the configured endpoint.
-    -- Can be either 1 or 2. (Default: 1)
+    , _ignoreIfSet       :: TF.Attr s P.Bool
+    -- ^ @ignore_if_set@ - (Optional)
+    -- Don't add the header if it is already. (Only applies to 'set' action.).
+    -- Default `false`
     --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
-    -- Unique name to refer to this logging setup
+    -- A name to refer to this Header object
     --
-    , _port              :: TF.Attr s P.Integer
-    -- ^ @port@ - (Optional)
-    -- The port number configured in Logentries
+    , _priority          :: TF.Attr s P.Integer
+    -- ^ @priority@ - (Optional)
+    -- Lower priorities execute first. (Default: 100.)
+    --
+    , _requestCondition  :: TF.Attr s P.Text
+    -- ^ @request_condition@ - (Optional)
+    -- Optional name of a request condition to apply.
     --
     , _responseCondition :: TF.Attr s P.Text
     -- ^ @response_condition@ - (Optional)
-    -- Name of a condition to apply this logging.
+    -- Optional name of a response condition to apply.
     --
-    , _token             :: TF.Attr s P.Text
-    -- ^ @token@ - (Required)
-    -- Use token based authentication (https://logentries.com/doc/input-token/)
-    --
-    , _useTls            :: TF.Attr s P.Bool
-    -- ^ @use_tls@ - (Optional)
-    -- Whether to use TLS for secure logging
+    , _type'             :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    -- Type to manipulate: request, fetch, cache, response
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newLogentries
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @token@ - 'P.token'
-    -> Logentries s
-newLogentries _name _token =
-    Logentries'
-        { _format = TF.value "%h %l %u %t %r %>s"
-        , _formatVersion = TF.value 1
+newServiceV1Header
+    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
+    -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> ServiceV1Header s
+newServiceV1Header _action _destination _name _type' =
+    ServiceV1Header'
+        { _action = _action
+        , _cacheCondition = TF.Nil
+        , _destination = _destination
+        , _ignoreIfSet = TF.value P.False
         , _name = _name
-        , _port = TF.value 20000
+        , _priority = TF.value 100
+        , _requestCondition = TF.Nil
         , _responseCondition = TF.Nil
-        , _token = _token
-        , _useTls = TF.value P.True
+        , _type' = _type'
         }
 
-instance P.Hashable  (Logentries s)
-instance TF.IsValue  (Logentries s)
-instance TF.IsObject (Logentries s) where
-    toObject Logentries'{..} = P.catMaybes
-        [ TF.assign "format" <$> TF.attribute _format
-        , TF.assign "format_version" <$> TF.attribute _formatVersion
+instance P.Hashable  (ServiceV1Header s)
+instance TF.IsValue  (ServiceV1Header s)
+instance TF.IsObject (ServiceV1Header s) where
+    toObject ServiceV1Header'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "cache_condition" <$> TF.attribute _cacheCondition
+        , TF.assign "destination" <$> TF.attribute _destination
+        , TF.assign "ignore_if_set" <$> TF.attribute _ignoreIfSet
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "request_condition" <$> TF.attribute _requestCondition
         , TF.assign "response_condition" <$> TF.attribute _responseCondition
-        , TF.assign "token" <$> TF.attribute _token
-        , TF.assign "use_tls" <$> TF.attribute _useTls
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (Logentries s) where
+instance TF.IsValid (ServiceV1Header s) where
     validator = P.mempty
 
-instance P.HasFormat (Logentries s) (TF.Attr s P.Text) where
-    format =
-        P.lens (_format :: Logentries s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: Logentries s)
+instance P.HasAction (ServiceV1Header s) (TF.Attr s P.Text) where
+    action =
+        P.lens (_action :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: ServiceV1Header s)
 
-instance P.HasFormatVersion (Logentries s) (TF.Attr s P.Integer) where
-    formatVersion =
-        P.lens (_formatVersion :: Logentries s -> TF.Attr s P.Integer)
-               (\s a -> s { _formatVersion = a } :: Logentries s)
+instance P.HasCacheCondition (ServiceV1Header s) (TF.Attr s P.Text) where
+    cacheCondition =
+        P.lens (_cacheCondition :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheCondition = a } :: ServiceV1Header s)
 
-instance P.HasName (Logentries s) (TF.Attr s P.Text) where
+instance P.HasDestination (ServiceV1Header s) (TF.Attr s P.Text) where
+    destination =
+        P.lens (_destination :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _destination = a } :: ServiceV1Header s)
+
+instance P.HasIgnoreIfSet (ServiceV1Header s) (TF.Attr s P.Bool) where
+    ignoreIfSet =
+        P.lens (_ignoreIfSet :: ServiceV1Header s -> TF.Attr s P.Bool)
+               (\s a -> s { _ignoreIfSet = a } :: ServiceV1Header s)
+
+instance P.HasName (ServiceV1Header s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Logentries s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Logentries s)
+        P.lens (_name :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Header s)
 
-instance P.HasPort (Logentries s) (TF.Attr s P.Integer) where
-    port =
-        P.lens (_port :: Logentries s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Logentries s)
+instance P.HasPriority (ServiceV1Header s) (TF.Attr s P.Integer) where
+    priority =
+        P.lens (_priority :: ServiceV1Header s -> TF.Attr s P.Integer)
+               (\s a -> s { _priority = a } :: ServiceV1Header s)
 
-instance P.HasResponseCondition (Logentries s) (TF.Attr s P.Text) where
+instance P.HasRequestCondition (ServiceV1Header s) (TF.Attr s P.Text) where
+    requestCondition =
+        P.lens (_requestCondition :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _requestCondition = a } :: ServiceV1Header s)
+
+instance P.HasResponseCondition (ServiceV1Header s) (TF.Attr s P.Text) where
     responseCondition =
-        P.lens (_responseCondition :: Logentries s -> TF.Attr s P.Text)
-               (\s a -> s { _responseCondition = a } :: Logentries s)
+        P.lens (_responseCondition :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Header s)
 
-instance P.HasToken (Logentries s) (TF.Attr s P.Text) where
-    token =
-        P.lens (_token :: Logentries s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a } :: Logentries s)
+instance P.HasType' (ServiceV1Header s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ServiceV1Header s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceV1Header s)
 
-instance P.HasUseTls (Logentries s) (TF.Attr s P.Bool) where
-    useTls =
-        P.lens (_useTls :: Logentries s -> TF.Attr s P.Bool)
-               (\s a -> s { _useTls = a } :: Logentries s)
+instance s ~ s' => P.HasComputedRegex (TF.Ref s' (ServiceV1Header s)) (TF.Attr s P.Text) where
+    computedRegex x = TF.compute (TF.refKey x) "regex"
 
--- | @response_object@ nested settings.
-data ResponseObject s = ResponseObject'
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ServiceV1Header s)) (TF.Attr s P.Text) where
+    computedSource x = TF.compute (TF.refKey x) "source"
+
+instance s ~ s' => P.HasComputedSubstitution (TF.Ref s' (ServiceV1Header s)) (TF.Attr s P.Text) where
+    computedSubstitution x = TF.compute (TF.refKey x) "substitution"
+
+-- | @service_v1_response_object@ nested settings.
+data ServiceV1ResponseObject s = ServiceV1ResponseObject'
     { _cacheCondition   :: TF.Attr s P.Text
     -- ^ @cache_condition@ - (Optional)
     -- Name of the condition checked after we have retrieved an object. If the
@@ -1985,11 +1842,11 @@ data ResponseObject s = ResponseObject'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newResponseObject
+newServiceV1ResponseObject
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> ResponseObject s
-newResponseObject _name =
-    ResponseObject'
+    -> ServiceV1ResponseObject s
+newServiceV1ResponseObject _name =
+    ServiceV1ResponseObject'
         { _cacheCondition = TF.Nil
         , _content = TF.Nil
         , _contentType = TF.Nil
@@ -1999,10 +1856,10 @@ newResponseObject _name =
         , _status = TF.value 200
         }
 
-instance P.Hashable  (ResponseObject s)
-instance TF.IsValue  (ResponseObject s)
-instance TF.IsObject (ResponseObject s) where
-    toObject ResponseObject'{..} = P.catMaybes
+instance P.Hashable  (ServiceV1ResponseObject s)
+instance TF.IsValue  (ServiceV1ResponseObject s)
+instance TF.IsObject (ServiceV1ResponseObject s) where
+    toObject ServiceV1ResponseObject'{..} = P.catMaybes
         [ TF.assign "cache_condition" <$> TF.attribute _cacheCondition
         , TF.assign "content" <$> TF.attribute _content
         , TF.assign "content_type" <$> TF.attribute _contentType
@@ -2012,40 +1869,183 @@ instance TF.IsObject (ResponseObject s) where
         , TF.assign "status" <$> TF.attribute _status
         ]
 
-instance TF.IsValid (ResponseObject s) where
+instance TF.IsValid (ServiceV1ResponseObject s) where
     validator = P.mempty
 
-instance P.HasCacheCondition (ResponseObject s) (TF.Attr s P.Text) where
+instance P.HasCacheCondition (ServiceV1ResponseObject s) (TF.Attr s P.Text) where
     cacheCondition =
-        P.lens (_cacheCondition :: ResponseObject s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheCondition = a } :: ResponseObject s)
+        P.lens (_cacheCondition :: ServiceV1ResponseObject s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheCondition = a } :: ServiceV1ResponseObject s)
 
-instance P.HasContent (ResponseObject s) (TF.Attr s P.Text) where
+instance P.HasContent (ServiceV1ResponseObject s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: ResponseObject s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: ResponseObject s)
+        P.lens (_content :: ServiceV1ResponseObject s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: ServiceV1ResponseObject s)
 
-instance P.HasContentType (ResponseObject s) (TF.Attr s P.Text) where
+instance P.HasContentType (ServiceV1ResponseObject s) (TF.Attr s P.Text) where
     contentType =
-        P.lens (_contentType :: ResponseObject s -> TF.Attr s P.Text)
-               (\s a -> s { _contentType = a } :: ResponseObject s)
+        P.lens (_contentType :: ServiceV1ResponseObject s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: ServiceV1ResponseObject s)
 
-instance P.HasName (ResponseObject s) (TF.Attr s P.Text) where
+instance P.HasName (ServiceV1ResponseObject s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: ResponseObject s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ResponseObject s)
+        P.lens (_name :: ServiceV1ResponseObject s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1ResponseObject s)
 
-instance P.HasRequestCondition (ResponseObject s) (TF.Attr s P.Text) where
+instance P.HasRequestCondition (ServiceV1ResponseObject s) (TF.Attr s P.Text) where
     requestCondition =
-        P.lens (_requestCondition :: ResponseObject s -> TF.Attr s P.Text)
-               (\s a -> s { _requestCondition = a } :: ResponseObject s)
+        P.lens (_requestCondition :: ServiceV1ResponseObject s -> TF.Attr s P.Text)
+               (\s a -> s { _requestCondition = a } :: ServiceV1ResponseObject s)
 
-instance P.HasResponse (ResponseObject s) (TF.Attr s P.Text) where
+instance P.HasResponse (ServiceV1ResponseObject s) (TF.Attr s P.Text) where
     response =
-        P.lens (_response :: ResponseObject s -> TF.Attr s P.Text)
-               (\s a -> s { _response = a } :: ResponseObject s)
+        P.lens (_response :: ServiceV1ResponseObject s -> TF.Attr s P.Text)
+               (\s a -> s { _response = a } :: ServiceV1ResponseObject s)
 
-instance P.HasStatus (ResponseObject s) (TF.Attr s P.Integer) where
+instance P.HasStatus (ServiceV1ResponseObject s) (TF.Attr s P.Integer) where
     status =
-        P.lens (_status :: ResponseObject s -> TF.Attr s P.Integer)
-               (\s a -> s { _status = a } :: ResponseObject s)
+        P.lens (_status :: ServiceV1ResponseObject s -> TF.Attr s P.Integer)
+               (\s a -> s { _status = a } :: ServiceV1ResponseObject s)
+
+-- | @service_v1_papertrail@ nested settings.
+data ServiceV1Papertrail s = ServiceV1Papertrail'
+    { _address           :: TF.Attr s P.Text
+    -- ^ @address@ - (Required)
+    -- The address of the papertrail service
+    --
+    , _format            :: TF.Attr s P.Text
+    -- ^ @format@ - (Optional)
+    -- Apache-style string or VCL variables to use for log formatting
+    --
+    , _name              :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- Unique name to refer to this logging setup
+    --
+    , _port              :: TF.Attr s P.Integer
+    -- ^ @port@ - (Required)
+    -- The port of the papertrail service
+    --
+    , _responseCondition :: TF.Attr s P.Text
+    -- ^ @response_condition@ - (Optional)
+    -- Name of a condition to apply this logging
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newServiceV1Papertrail
+    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> ServiceV1Papertrail s
+newServiceV1Papertrail _address _name _port =
+    ServiceV1Papertrail'
+        { _address = _address
+        , _format = TF.value "%h %l %u %t %r %>s"
+        , _name = _name
+        , _port = _port
+        , _responseCondition = TF.Nil
+        }
+
+instance P.Hashable  (ServiceV1Papertrail s)
+instance TF.IsValue  (ServiceV1Papertrail s)
+instance TF.IsObject (ServiceV1Papertrail s) where
+    toObject ServiceV1Papertrail'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "format" <$> TF.attribute _format
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "response_condition" <$> TF.attribute _responseCondition
+        ]
+
+instance TF.IsValid (ServiceV1Papertrail s) where
+    validator = P.mempty
+
+instance P.HasAddress (ServiceV1Papertrail s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ServiceV1Papertrail s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ServiceV1Papertrail s)
+
+instance P.HasFormat (ServiceV1Papertrail s) (TF.Attr s P.Text) where
+    format =
+        P.lens (_format :: ServiceV1Papertrail s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ServiceV1Papertrail s)
+
+instance P.HasName (ServiceV1Papertrail s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceV1Papertrail s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Papertrail s)
+
+instance P.HasPort (ServiceV1Papertrail s) (TF.Attr s P.Integer) where
+    port =
+        P.lens (_port :: ServiceV1Papertrail s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: ServiceV1Papertrail s)
+
+instance P.HasResponseCondition (ServiceV1Papertrail s) (TF.Attr s P.Text) where
+    responseCondition =
+        P.lens (_responseCondition :: ServiceV1Papertrail s -> TF.Attr s P.Text)
+               (\s a -> s { _responseCondition = a } :: ServiceV1Papertrail s)
+
+-- | @service_v1_condition@ nested settings.
+data ServiceV1Condition s = ServiceV1Condition'
+    { _name      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _priority  :: TF.Attr s P.Integer
+    -- ^ @priority@ - (Optional)
+    -- A number used to determine the order in which multiple conditions execute.
+    -- Lower numbers execute first
+    --
+    , _statement :: TF.Attr s P.Text
+    -- ^ @statement@ - (Required)
+    -- The statement used to determine if the condition is met
+    --
+    , _type'     :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    -- Type of the condition, either `REQUEST`, `RESPONSE`, or `CACHE`
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newServiceV1Condition
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @statement@ - 'P.statement'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> ServiceV1Condition s
+newServiceV1Condition _name _statement _type' =
+    ServiceV1Condition'
+        { _name = _name
+        , _priority = TF.value 10
+        , _statement = _statement
+        , _type' = _type'
+        }
+
+instance P.Hashable  (ServiceV1Condition s)
+instance TF.IsValue  (ServiceV1Condition s)
+instance TF.IsObject (ServiceV1Condition s) where
+    toObject ServiceV1Condition'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "statement" <$> TF.attribute _statement
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (ServiceV1Condition s) where
+    validator = P.mempty
+
+instance P.HasName (ServiceV1Condition s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceV1Condition s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceV1Condition s)
+
+instance P.HasPriority (ServiceV1Condition s) (TF.Attr s P.Integer) where
+    priority =
+        P.lens (_priority :: ServiceV1Condition s -> TF.Attr s P.Integer)
+               (\s a -> s { _priority = a } :: ServiceV1Condition s)
+
+instance P.HasStatement (ServiceV1Condition s) (TF.Attr s P.Text) where
+    statement =
+        P.lens (_statement :: ServiceV1Condition s -> TF.Attr s P.Text)
+               (\s a -> s { _statement = a } :: ServiceV1Condition s)
+
+instance P.HasType' (ServiceV1Condition s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ServiceV1Condition s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceV1Condition s)
