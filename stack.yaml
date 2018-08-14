@@ -9,6 +9,7 @@ nix:
 
 extra-deps:
   - ede-0.2.9
+  - amazonka-iam-policy-0.0.3
 
 packages:
   - terrafomo

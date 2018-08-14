@@ -6,11 +6,18 @@ extra-deps:
   - amazonka-core
   - formatting
   - iproute
+  - amazonka-iam-policy >= 0.0.3
 
-# field-overrides:
-#   - suffix: cidr_block
-#     type: TF.Attr s P.
+field-overrides:
+  - exact: assume_role_policy
+    type: TF.Attr s P.Document
+
+  - exact: policy
+    type: TF.Attr s P.Document
 
 datatype-overrides:
   provider:
     region: P.Region
+
+  assume_role:
+    policy: P.Maybe P.Document
