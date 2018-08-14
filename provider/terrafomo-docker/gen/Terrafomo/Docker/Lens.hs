@@ -33,7 +33,6 @@ module Terrafomo.Docker.Lens
     , HasDelay (..)
     , HasBindOptions (..)
     , HasNameservers (..)
-    , HasLinks (..)
     , HasDnsOpts (..)
     , HasCondition (..)
     , HasAdd (..)
@@ -44,7 +43,6 @@ module Terrafomo.Docker.Lens
     , HasHosts (..)
     , HasDnsSearch (..)
     , HasNetworkMode (..)
-    , HasPullTrigger (..)
     , HasDevices (..)
     , HasCommand (..)
     , HasDiscreteResourcesSpec (..)
@@ -300,12 +298,6 @@ class HasNameservers a b | a -> b where
 instance HasNameservers a b => HasNameservers (TF.Schema l p a) b where
     nameservers = TF.configuration . nameservers
 
-class HasLinks a b | a -> b where
-    links :: P.Lens' a b
-
-instance HasLinks a b => HasLinks (TF.Schema l p a) b where
-    links = TF.configuration . links
-
 class HasDnsOpts a b | a -> b where
     dnsOpts :: P.Lens' a b
 
@@ -365,12 +357,6 @@ class HasNetworkMode a b | a -> b where
 
 instance HasNetworkMode a b => HasNetworkMode (TF.Schema l p a) b where
     networkMode = TF.configuration . networkMode
-
-class HasPullTrigger a b | a -> b where
-    pullTrigger :: P.Lens' a b
-
-instance HasPullTrigger a b => HasPullTrigger (TF.Schema l p a) b where
-    pullTrigger = TF.configuration . pullTrigger
 
 class HasDevices a b | a -> b where
     devices :: P.Lens' a b

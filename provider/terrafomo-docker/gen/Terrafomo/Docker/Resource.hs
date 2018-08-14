@@ -168,9 +168,6 @@ data ContainerResource s = ContainerResource'
     , _labels              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _links               :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @links@ - (Optional)
-    --
     , _logDriver           :: TF.Attr s P.Text
     -- ^ @log_driver@ - (Optional)
     --
@@ -249,7 +246,6 @@ containerResource _image _name =
             , _hostname = TF.Nil
             , _image = _image
             , _labels = TF.Nil
-            , _links = TF.Nil
             , _logDriver = TF.value "json-file"
             , _logOpts = TF.Nil
             , _maxRetryCount = TF.Nil
@@ -287,7 +283,6 @@ instance TF.IsObject (ContainerResource s) where
         , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "links" <$> TF.attribute _links
         , TF.assign "log_driver" <$> TF.attribute _logDriver
         , TF.assign "log_opts" <$> TF.attribute _logOpts
         , TF.assign "max_retry_count" <$> TF.attribute _maxRetryCount
@@ -414,11 +409,6 @@ instance P.HasLabels (ContainerResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr
         P.lens (_labels :: ContainerResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ContainerResource s)
 
-instance P.HasLinks (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    links =
-        P.lens (_links :: ContainerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _links = a } :: ContainerResource s)
-
 instance P.HasLogDriver (ContainerResource s) (TF.Attr s P.Text) where
     logDriver =
         P.lens (_logDriver :: ContainerResource s -> TF.Attr s P.Text)
@@ -532,18 +522,9 @@ data ImageResource s = ImageResource'
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _pullTrigger  :: TF.Attr s P.Text
-    -- ^ @pull_trigger@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'pullTriggers'
     , _pullTriggers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @pull_triggers@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'pullTrigger'
     } deriving (P.Show, P.Eq, P.Generic)
 
 imageResource
@@ -554,7 +535,6 @@ imageResource _name =
         ImageResource'
             { _keepLocally = TF.Nil
             , _name = _name
-            , _pullTrigger = TF.Nil
             , _pullTriggers = TF.Nil
             }
 
@@ -562,23 +542,11 @@ instance TF.IsObject (ImageResource s) where
     toObject ImageResource'{..} = P.catMaybes
         [ TF.assign "keep_locally" <$> TF.attribute _keepLocally
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "pull_trigger" <$> TF.attribute _pullTrigger
         , TF.assign "pull_triggers" <$> TF.attribute _pullTriggers
         ]
 
 instance TF.IsValid (ImageResource s) where
-    validator = TF.fieldsValidator (\ImageResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_pullTrigger P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_pullTrigger",
-                            [ "_pullTriggers"
-                            ])
-        , if (_pullTriggers P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_pullTriggers",
-                            [ "_pullTrigger"
-                            ])
-        ])
+    validator = P.mempty
 
 instance P.HasKeepLocally (ImageResource s) (TF.Attr s P.Bool) where
     keepLocally =
@@ -589,11 +557,6 @@ instance P.HasName (ImageResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ImageResource s)
-
-instance P.HasPullTrigger (ImageResource s) (TF.Attr s P.Text) where
-    pullTrigger =
-        P.lens (_pullTrigger :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _pullTrigger = a } :: ImageResource s)
 
 instance P.HasPullTriggers (ImageResource s) (TF.Attr s [TF.Attr s P.Text]) where
     pullTriggers =
