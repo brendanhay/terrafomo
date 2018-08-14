@@ -2,8 +2,716 @@
     "settings": [
         {
             "con": {
-                "smart": "newForward",
-                "name": "Forward'"
+                "smart": "newNetworkAclRuleRule",
+                "name": "NetworkAclRuleRule'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value \"allow\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"action\" <$> TF.attribute",
+                    "name": "_action",
+                    "method": "action",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAction",
+                    "validate": false,
+                    "optional": true,
+                    "original": "action"
+                },
+                {
+                    "default": "_cidrList",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
+                    "name": "_ports",
+                    "method": "ports",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ports"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                },
+                {
+                    "default": "TF.value \"ingress\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"traffic_type\" <$> TF.attribute",
+                    "name": "_trafficType",
+                    "method": "trafficType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTrafficType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "traffic_type"
+                }
+            ],
+            "name": "NetworkAclRuleRule",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_code\" <$> TF.attribute",
+                    "name": "_computedIcmpCode",
+                    "method": "computedIcmpCode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpCode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_code"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_type\" <$> TF.attribute",
+                    "name": "_computedIcmpType",
+                    "method": "computedIcmpType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"uuids\" <$> TF.attribute",
+                    "name": "_computedUuids",
+                    "method": "computedUuids",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedUuids",
+                    "validate": false,
+                    "optional": false,
+                    "original": "uuids"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_cidrList",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "conflicts": [],
+            "type": "NetworkAclRuleRule s",
+            "original": "network_acl_rule_rule"
+        },
+        {
+            "con": {
+                "smart": "newFirewallRule",
+                "name": "FirewallRule'"
+            },
+            "arguments": [
+                {
+                    "default": "_cidrList",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
+                    "name": "_ports",
+                    "method": "ports",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ports"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "name": "FirewallRule",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_code\" <$> TF.attribute",
+                    "name": "_computedIcmpCode",
+                    "method": "computedIcmpCode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpCode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_code"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_type\" <$> TF.attribute",
+                    "name": "_computedIcmpType",
+                    "method": "computedIcmpType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"uuids\" <$> TF.attribute",
+                    "name": "_computedUuids",
+                    "method": "computedUuids",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedUuids",
+                    "validate": false,
+                    "optional": false,
+                    "original": "uuids"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_cidrList",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "conflicts": [],
+            "type": "FirewallRule s",
+            "original": "firewall_rule"
+        },
+        {
+            "con": {
+                "smart": "newSecurityGroupRuleRule",
+                "name": "SecurityGroupRuleRule'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": true,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
+                    "name": "_ports",
+                    "method": "ports",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ports"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                },
+                {
+                    "default": "TF.value \"ingress\"",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"traffic_type\" <$> TF.attribute",
+                    "name": "_trafficType",
+                    "method": "trafficType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTrafficType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "traffic_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"user_security_group_list\" <$> TF.attribute",
+                    "name": "_userSecurityGroupList",
+                    "method": "userSecurityGroupList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasUserSecurityGroupList",
+                    "validate": false,
+                    "optional": true,
+                    "original": "user_security_group_list"
+                }
+            ],
+            "name": "SecurityGroupRuleRule",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_code\" <$> TF.attribute",
+                    "name": "_computedIcmpCode",
+                    "method": "computedIcmpCode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpCode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_code"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_type\" <$> TF.attribute",
+                    "name": "_computedIcmpType",
+                    "method": "computedIcmpType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"uuids\" <$> TF.attribute",
+                    "name": "_computedUuids",
+                    "method": "computedUuids",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedUuids",
+                    "validate": false,
+                    "optional": false,
+                    "original": "uuids"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "conflicts": [],
+            "type": "SecurityGroupRuleRule s",
+            "original": "security_group_rule_rule"
+        },
+        {
+            "con": {
+                "smart": "newTemplateFilter",
+                "name": "TemplateFilter'"
+            },
+            "arguments": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "TemplateFilter",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "TemplateFilter s",
+            "original": "template_filter"
+        },
+        {
+            "con": {
+                "smart": "newEgressFirewallRule",
+                "name": "EgressFirewallRule'"
+            },
+            "arguments": [
+                {
+                    "default": "_cidrList",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
+                    "name": "_ports",
+                    "method": "ports",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasPorts",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ports"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "name": "EgressFirewallRule",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_code\" <$> TF.attribute",
+                    "name": "_computedIcmpCode",
+                    "method": "computedIcmpCode",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpCode",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_code"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"icmp_type\" <$> TF.attribute",
+                    "name": "_computedIcmpType",
+                    "method": "computedIcmpType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasComputedIcmpType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "icmp_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"uuids\" <$> TF.attribute",
+                    "name": "_computedUuids",
+                    "method": "computedUuids",
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "class": "HasComputedUuids",
+                    "validate": false,
+                    "optional": false,
+                    "original": "uuids"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_cidrList",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
+                    "name": "_cidrList",
+                    "method": "cidrList",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCidrList",
+                    "validate": false,
+                    "optional": false,
+                    "original": "cidr_list"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "conflicts": [],
+            "type": "EgressFirewallRule s",
+            "original": "egress_firewall_rule"
+        },
+        {
+            "con": {
+                "smart": "newPortForwardForward",
+                "name": "PortForwardForward'"
             },
             "arguments": [
                 {
@@ -87,7 +795,7 @@
                     "original": "vm_guest_ip"
                 }
             ],
-            "name": "Forward",
+            "name": "PortForwardForward",
             "threaded": true,
             "attributes": [
                 {
@@ -174,251 +882,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Forward s",
-            "original": "forward"
-        },
-        {
-            "con": {
-                "smart": "newRule",
-                "name": "Rule'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cidr_list\" <$> TF.attribute",
-                    "name": "_cidrList",
-                    "method": "cidrList",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasCidrList",
-                    "validate": false,
-                    "optional": true,
-                    "original": "cidr_list"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
-                    "name": "_ports",
-                    "method": "ports",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasPorts",
-                    "validate": false,
-                    "optional": true,
-                    "original": "ports"
-                },
-                {
-                    "default": "_protocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "protocol"
-                },
-                {
-                    "default": "TF.value \"ingress\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"traffic_type\" <$> TF.attribute",
-                    "name": "_trafficType",
-                    "method": "trafficType",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTrafficType",
-                    "validate": false,
-                    "optional": true,
-                    "original": "traffic_type"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"user_security_group_list\" <$> TF.attribute",
-                    "name": "_userSecurityGroupList",
-                    "method": "userSecurityGroupList",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasUserSecurityGroupList",
-                    "validate": false,
-                    "optional": true,
-                    "original": "user_security_group_list"
-                }
-            ],
-            "name": "Rule",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"icmp_code\" <$> TF.attribute",
-                    "name": "_computedIcmpCode",
-                    "method": "computedIcmpCode",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedIcmpCode",
-                    "validate": false,
-                    "optional": true,
-                    "original": "icmp_code"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"icmp_type\" <$> TF.attribute",
-                    "name": "_computedIcmpType",
-                    "method": "computedIcmpType",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedIcmpType",
-                    "validate": false,
-                    "optional": true,
-                    "original": "icmp_type"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"uuids\" <$> TF.attribute",
-                    "name": "_computedUuids",
-                    "method": "computedUuids",
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
-                    "class": "HasComputedUuids",
-                    "validate": false,
-                    "optional": false,
-                    "original": "uuids"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_protocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "protocol"
-                }
-            ],
-            "conflicts": [],
-            "type": "Rule s",
-            "original": "rule"
-        },
-        {
-            "con": {
-                "smart": "newFilter",
-                "name": "Filter'"
-            },
-            "arguments": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "name": "Filter",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "Filter s",
-            "original": "filter"
+            "type": "PortForwardForward s",
+            "original": "port_forward_forward"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/cloudstack/index.html",
     "dataSources": [
         {
             "con": {
@@ -436,7 +904,7 @@
                     "name": "_filter",
                     "method": "filter",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Filter s)]",
+                    "type": "TF.Attr s [TF.Attr s (TemplateFilter s)]",
                     "class": "HasFilter",
                     "validate": true,
                     "optional": false,
@@ -459,6 +927,7 @@
                     "original": "template_filter"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/d/template.html",
             "name": "TemplateData",
             "threaded": true,
             "attributes": [
@@ -618,7 +1087,7 @@
                     "name": "_filter",
                     "method": "filter",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Filter s)]",
+                    "type": "TF.Attr s [TF.Attr s (TemplateFilter s)]",
                     "class": "HasFilter",
                     "validate": true,
                     "optional": false,
@@ -702,6 +1171,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/affinity_group.html",
             "name": "AffinityGroupResource",
             "threaded": true,
             "attributes": [
@@ -863,6 +1333,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/disk.html",
             "name": "DiskResource",
             "threaded": true,
             "attributes": [
@@ -1033,13 +1504,14 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
+                    "type": "TF.Attr s [TF.Attr s (EgressFirewallRule s)]",
                     "class": "HasRule",
                     "validate": true,
                     "optional": true,
                     "original": "rule"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/egress_firewall.html",
             "name": "EgressFirewallResource",
             "threaded": true,
             "attributes": [],
@@ -1129,13 +1601,14 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallRule s)]",
                     "class": "HasRule",
                     "validate": true,
                     "optional": true,
                     "original": "rule"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/firewall.html",
             "name": "FirewallResource",
             "threaded": true,
             "attributes": [],
@@ -1352,6 +1825,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/instance.html",
             "name": "InstanceResource",
             "threaded": true,
             "attributes": [
@@ -1698,6 +2172,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/ipaddress.html",
             "name": "IpaddressResource",
             "threaded": true,
             "attributes": [
@@ -1874,6 +2349,7 @@
                     "original": "public_port"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/loadbalancer_rule.html",
             "name": "LoadbalancerRuleResource",
             "threaded": true,
             "attributes": [
@@ -2147,6 +2623,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/network.html",
             "name": "NetworkResource",
             "threaded": true,
             "attributes": [
@@ -2388,6 +2865,7 @@
                     "original": "vpc_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/network_acl.html",
             "name": "NetworkAclResource",
             "threaded": true,
             "attributes": [
@@ -2526,13 +3004,14 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
+                    "type": "TF.Attr s [TF.Attr s (NetworkAclRuleRule s)]",
                     "class": "HasRule",
                     "validate": true,
                     "optional": true,
                     "original": "rule"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/network_acl_rule.html",
             "name": "NetworkAclRuleResource",
             "threaded": true,
             "attributes": [],
@@ -2597,6 +3076,7 @@
                     "original": "virtual_machine_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/nic.html",
             "name": "NicResource",
             "threaded": true,
             "attributes": [
@@ -2671,7 +3151,7 @@
                     "name": "_forward",
                     "method": "forward",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Forward s)]",
+                    "type": "TF.Attr s [TF.Attr s (PortForwardForward s)]",
                     "class": "HasForward",
                     "validate": true,
                     "optional": false,
@@ -2726,6 +3206,7 @@
                     "original": "project"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/port_forward.html",
             "name": "PortForwardResource",
             "threaded": true,
             "attributes": [],
@@ -2740,7 +3221,7 @@
                     "name": "_forward",
                     "method": "forward",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Forward s)]",
+                    "type": "TF.Attr s [TF.Attr s (PortForwardForward s)]",
                     "class": "HasForward",
                     "validate": true,
                     "optional": false,
@@ -2902,6 +3383,7 @@
                     "original": "vpc_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/private_gateway.html",
             "name": "PrivateGatewayResource",
             "threaded": true,
             "attributes": [],
@@ -3030,6 +3512,7 @@
                     "original": "virtual_machine_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/secondary_ipaddress.html",
             "name": "SecondaryIpaddressResource",
             "threaded": true,
             "attributes": [
@@ -3111,6 +3594,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/security_group.html",
             "name": "SecurityGroupResource",
             "threaded": true,
             "attributes": [
@@ -3217,7 +3701,7 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
+                    "type": "TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)]",
                     "class": "HasRule",
                     "validate": true,
                     "optional": false,
@@ -3240,6 +3724,7 @@
                     "original": "security_group_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/security_group_rule.html",
             "name": "SecurityGroupRuleResource",
             "threaded": true,
             "attributes": [],
@@ -3254,7 +3739,7 @@
                     "name": "_rule",
                     "method": "rule",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rule s)]",
+                    "type": "TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)]",
                     "class": "HasRule",
                     "validate": true,
                     "optional": false,
@@ -3336,6 +3821,7 @@
                     "original": "public_key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/ssh_keypair.html",
             "name": "SshKeypairResource",
             "threaded": true,
             "attributes": [
@@ -3433,6 +3919,7 @@
                     "original": "virtual_machine_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/static_nat.html",
             "name": "StaticNatResource",
             "threaded": true,
             "attributes": [
@@ -3546,6 +4033,7 @@
                     "original": "gateway_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/static_route.html",
             "name": "StaticRouteResource",
             "threaded": true,
             "attributes": [],
@@ -3706,6 +4194,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/template.html",
             "name": "TemplateResource",
             "threaded": true,
             "attributes": [
@@ -4027,6 +4516,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpc.html",
             "name": "VpcResource",
             "threaded": true,
             "attributes": [
@@ -4220,6 +4710,7 @@
                     "original": "vpn_gateway_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpn_connection.html",
             "name": "VpnConnectionResource",
             "threaded": true,
             "attributes": [],
@@ -4364,6 +4855,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpn_customer_gateway.html",
             "name": "VpnCustomerGatewayResource",
             "threaded": true,
             "attributes": [
@@ -4557,6 +5049,7 @@
                     "original": "vpc_id"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/cloudstack/r/vpn_gateway.html",
             "name": "VpnGatewayResource",
             "threaded": true,
             "attributes": [
