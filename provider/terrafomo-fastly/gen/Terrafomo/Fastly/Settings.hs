@@ -1000,10 +1000,6 @@ data Backend s = Backend'
     -- ^ @ssl_client_key@ - (Optional)
     -- SSL key file for client connections to backend.
     --
-    , _sslHostname         :: TF.Attr s P.Text
-    -- ^ @ssl_hostname@ - (Optional)
-    -- SSL certificate hostname
-    --
     , _sslSniHostname      :: TF.Attr s P.Text
     -- ^ @ssl_sni_hostname@ - (Optional)
     -- SSL certificate hostname for SNI verification
@@ -1045,7 +1041,6 @@ newBackend _address _name =
         , _sslCiphers = TF.Nil
         , _sslClientCert = TF.Nil
         , _sslClientKey = TF.Nil
-        , _sslHostname = TF.Nil
         , _sslSniHostname = TF.Nil
         , _useSsl = TF.value P.False
         , _weight = TF.value 100
@@ -1075,7 +1070,6 @@ instance TF.IsObject (Backend s) where
         , TF.assign "ssl_ciphers" <$> TF.attribute _sslCiphers
         , TF.assign "ssl_client_cert" <$> TF.attribute _sslClientCert
         , TF.assign "ssl_client_key" <$> TF.attribute _sslClientKey
-        , TF.assign "ssl_hostname" <$> TF.attribute _sslHostname
         , TF.assign "ssl_sni_hostname" <$> TF.attribute _sslSniHostname
         , TF.assign "use_ssl" <$> TF.attribute _useSsl
         , TF.assign "weight" <$> TF.attribute _weight
@@ -1183,11 +1177,6 @@ instance P.HasSslClientKey (Backend s) (TF.Attr s P.Text) where
     sslClientKey =
         P.lens (_sslClientKey :: Backend s -> TF.Attr s P.Text)
                (\s a -> s { _sslClientKey = a } :: Backend s)
-
-instance P.HasSslHostname (Backend s) (TF.Attr s P.Text) where
-    sslHostname =
-        P.lens (_sslHostname :: Backend s -> TF.Attr s P.Text)
-               (\s a -> s { _sslHostname = a } :: Backend s)
 
 instance P.HasSslSniHostname (Backend s) (TF.Attr s P.Text) where
     sslSniHostname =

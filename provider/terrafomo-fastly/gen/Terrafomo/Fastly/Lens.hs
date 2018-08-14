@@ -30,7 +30,6 @@ module Terrafomo.Fastly.Lens
     , HasCondition (..)
     , HasS3logging (..)
     , HasBigquerylogging (..)
-    , HasSslHostname (..)
     , HasStatement (..)
     , HasSslClientCert (..)
     , HasVcl (..)
@@ -220,12 +219,6 @@ class HasBigquerylogging a b | a -> b where
 
 instance HasBigquerylogging a b => HasBigquerylogging (TF.Schema l p a) b where
     bigquerylogging = TF.configuration . bigquerylogging
-
-class HasSslHostname a b | a -> b where
-    sslHostname :: P.Lens' a b
-
-instance HasSslHostname a b => HasSslHostname (TF.Schema l p a) b where
-    sslHostname = TF.configuration . sslHostname
 
 class HasStatement a b | a -> b where
     statement :: P.Lens' a b
