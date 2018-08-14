@@ -1640,12 +1640,6 @@ data NetworkSecurityGroupSecurityRule s = NetworkSecurityGroupSecurityRule'
     , _sourcePortRanges                       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @source_port_ranges@ - (Optional)
     --
-    , _destinationApplicationSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @destination_application_security_group_ids@ - (Optional)
-    --
-    , _sourceApplicationSecurityGroupIds      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @source_application_security_group_ids@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newNetworkSecurityGroupSecurityRule
@@ -1673,8 +1667,6 @@ newNetworkSecurityGroupSecurityRule _access _direction _name _priority _protocol
         , _sourceApplicationSecurityGroupIds = TF.Nil
         , _sourcePortRange = TF.Nil
         , _sourcePortRanges = TF.Nil
-        , _destinationApplicationSecurityGroupIds = TF.Nil
-        , _sourceApplicationSecurityGroupIds = TF.Nil
         }
 
 instance P.Hashable  (NetworkSecurityGroupSecurityRule s)
@@ -1697,8 +1689,6 @@ instance TF.IsObject (NetworkSecurityGroupSecurityRule s) where
         , TF.assign "source_application_security_group_ids" <$> TF.attribute _sourceApplicationSecurityGroupIds
         , TF.assign "source_port_range" <$> TF.attribute _sourcePortRange
         , TF.assign "source_port_ranges" <$> TF.attribute _sourcePortRanges
-        , TF.assign "destination_application_security_group_ids" <$> TF.attribute _destinationApplicationSecurityGroupIds
-        , TF.assign "source_application_security_group_ids" <$> TF.attribute _sourceApplicationSecurityGroupIds
         ]
 
 instance TF.IsValid (NetworkSecurityGroupSecurityRule s) where
@@ -1783,16 +1773,6 @@ instance P.HasSourcePortRanges (NetworkSecurityGroupSecurityRule s) (TF.Attr s [
     sourcePortRanges =
         P.lens (_sourcePortRanges :: NetworkSecurityGroupSecurityRule s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _sourcePortRanges = a } :: NetworkSecurityGroupSecurityRule s)
-
-instance P.HasDestinationApplicationSecurityGroupIds (NetworkSecurityGroupSecurityRule s) (TF.Attr s [TF.Attr s P.Text]) where
-    destinationApplicationSecurityGroupIds =
-        P.lens (_destinationApplicationSecurityGroupIds :: NetworkSecurityGroupSecurityRule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _destinationApplicationSecurityGroupIds = a } :: NetworkSecurityGroupSecurityRule s)
-
-instance P.HasSourceApplicationSecurityGroupIds (NetworkSecurityGroupSecurityRule s) (TF.Attr s [TF.Attr s P.Text]) where
-    sourceApplicationSecurityGroupIds =
-        P.lens (_sourceApplicationSecurityGroupIds :: NetworkSecurityGroupSecurityRule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sourceApplicationSecurityGroupIds = a } :: NetworkSecurityGroupSecurityRule s)
 
 instance s ~ s' => P.HasComputedAccess (TF.Ref s' (NetworkSecurityGroupSecurityRule s)) (TF.Attr s P.Text) where
     computedAccess x = TF.compute (TF.refKey x) "access"
@@ -3788,20 +3768,8 @@ instance s ~ s' => P.HasComputedLoadBalancerInboundNatRulesIds (TF.Ref s' (Netwo
 instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s P.Bool) where
     computedPrimary x = TF.compute (TF.refKey x) "primary"
 
-instance s ~ s' => P.HasComputedApplicationGatewayBackendAddressPoolsIds (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedApplicationGatewayBackendAddressPoolsIds x = TF.compute (TF.refKey x) "application_gateway_backend_address_pools_ids"
-
-instance s ~ s' => P.HasComputedLoadBalancerBackendAddressPoolsIds (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedLoadBalancerBackendAddressPoolsIds x = TF.compute (TF.refKey x) "load_balancer_backend_address_pools_ids"
-
-instance s ~ s' => P.HasComputedLoadBalancerInboundNatRulesIds (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedLoadBalancerInboundNatRulesIds x = TF.compute (TF.refKey x) "load_balancer_inbound_nat_rules_ids"
-
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedPrimary (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s P.Bool) where
-    computedPrimary x = TF.compute (TF.refKey x) "primary"
 
 instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (NetworkInterfaceIpConfiguration s)) (TF.Attr s P.Text) where
     computedPrivateIpAddress x = TF.compute (TF.refKey x) "private_ip_address"
@@ -4238,24 +4206,15 @@ data OsProfileLinuxConfigSshKeys s = OsProfileLinuxConfigSshKeys'
     , _path    :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
     --
-    , _keyData :: TF.Attr s P.Text
-    -- ^ @key_data@ - (Optional)
-    --
-    , _path    :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newOsProfileLinuxConfigSshKeys
     :: TF.Attr s P.Text -- ^ @key_data@ - 'P.keyData'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> OsProfileLinuxConfigSshKeys s
-newOsProfileLinuxConfigSshKeys _keyData _path _path =
+newOsProfileLinuxConfigSshKeys _keyData _path =
     OsProfileLinuxConfigSshKeys'
         { _keyData = _keyData
-        , _path = _path
-        , _keyData = TF.Nil
         , _path = _path
         }
 
@@ -4265,22 +4224,10 @@ instance TF.IsObject (OsProfileLinuxConfigSshKeys s) where
     toObject OsProfileLinuxConfigSshKeys'{..} = P.catMaybes
         [ TF.assign "key_data" <$> TF.attribute _keyData
         , TF.assign "path" <$> TF.attribute _path
-        , TF.assign "key_data" <$> TF.attribute _keyData
-        , TF.assign "path" <$> TF.attribute _path
         ]
 
 instance TF.IsValid (OsProfileLinuxConfigSshKeys s) where
     validator = P.mempty
-
-instance P.HasKeyData (OsProfileLinuxConfigSshKeys s) (TF.Attr s P.Text) where
-    keyData =
-        P.lens (_keyData :: OsProfileLinuxConfigSshKeys s -> TF.Attr s P.Text)
-               (\s a -> s { _keyData = a } :: OsProfileLinuxConfigSshKeys s)
-
-instance P.HasPath (OsProfileLinuxConfigSshKeys s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: OsProfileLinuxConfigSshKeys s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: OsProfileLinuxConfigSshKeys s)
 
 instance P.HasKeyData (OsProfileLinuxConfigSshKeys s) (TF.Attr s P.Text) where
     keyData =
@@ -5605,9 +5552,6 @@ instance s ~ s' => P.HasComputedDnsPrefix (TF.Ref s' (KubernetesClusterAgentPool
 
 instance s ~ s' => P.HasComputedCount (TF.Ref s' (KubernetesClusterAgentPoolProfile s)) (TF.Attr s P.Integer) where
     computedCount x = TF.compute (TF.refKey x) "count"
-
-instance s ~ s' => P.HasComputedDnsPrefix (TF.Ref s' (KubernetesClusterAgentPoolProfile s)) (TF.Attr s P.Text) where
-    computedDnsPrefix x = TF.compute (TF.refKey x) "dns_prefix"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (KubernetesClusterAgentPoolProfile s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
@@ -7141,9 +7085,6 @@ instance s ~ s' => P.HasComputedAsn (TF.Ref s' (VirtualNetworkGatewayBgpSettings
 instance s ~ s' => P.HasComputedPeerWeight (TF.Ref s' (VirtualNetworkGatewayBgpSettings s)) (TF.Attr s P.Integer) where
     computedPeerWeight x = TF.compute (TF.refKey x) "peer_weight"
 
-instance s ~ s' => P.HasComputedPeeringAddress (TF.Ref s' (VirtualNetworkGatewayBgpSettings s)) (TF.Attr s P.Text) where
-    computedPeeringAddress x = TF.compute (TF.refKey x) "peering_address"
-
 -- | @public_ips_public_ips@ nested settings.
 data PublicIpsPublicIps s = PublicIpsPublicIps'
     deriving (P.Show, P.Eq, P.Generic)
@@ -7829,9 +7770,6 @@ instance s ~ s' => P.HasComputedBlobUri (TF.Ref s' (ImageDataDisk s)) (TF.Attr s
 instance s ~ s' => P.HasComputedSizeGb (TF.Ref s' (ImageDataDisk s)) (TF.Attr s P.Integer) where
     computedSizeGb x = TF.compute (TF.refKey x) "size_gb"
 
-instance s ~ s' => P.HasComputedBlobUri (TF.Ref s' (ImageDataDisk s)) (TF.Attr s P.Text) where
-    computedBlobUri x = TF.compute (TF.refKey x) "blob_uri"
-
 instance s ~ s' => P.HasComputedCaching (TF.Ref s' (ImageDataDisk s)) (TF.Attr s P.Text) where
     computedCaching x = TF.compute (TF.refKey x) "caching"
 
@@ -7840,9 +7778,6 @@ instance s ~ s' => P.HasComputedLun (TF.Ref s' (ImageDataDisk s)) (TF.Attr s P.I
 
 instance s ~ s' => P.HasComputedManagedDiskId (TF.Ref s' (ImageDataDisk s)) (TF.Attr s P.Text) where
     computedManagedDiskId x = TF.compute (TF.refKey x) "managed_disk_id"
-
-instance s ~ s' => P.HasComputedSizeGb (TF.Ref s' (ImageDataDisk s)) (TF.Attr s P.Integer) where
-    computedSizeGb x = TF.compute (TF.refKey x) "size_gb"
 
 -- | @kubernetes_cluster_network_profile@ nested settings.
 data KubernetesClusterNetworkProfile s = KubernetesClusterNetworkProfile'
@@ -7886,20 +7821,8 @@ instance s ~ s' => P.HasComputedPodCidr (TF.Ref s' (KubernetesClusterNetworkProf
 instance s ~ s' => P.HasComputedServiceCidr (TF.Ref s' (KubernetesClusterNetworkProfile s)) (TF.Attr s P.Text) where
     computedServiceCidr x = TF.compute (TF.refKey x) "service_cidr"
 
-instance s ~ s' => P.HasComputedDnsServiceIp (TF.Ref s' (KubernetesClusterNetworkProfile s)) (TF.Attr s P.Text) where
-    computedDnsServiceIp x = TF.compute (TF.refKey x) "dns_service_ip"
-
-instance s ~ s' => P.HasComputedDockerBridgeCidr (TF.Ref s' (KubernetesClusterNetworkProfile s)) (TF.Attr s P.Text) where
-    computedDockerBridgeCidr x = TF.compute (TF.refKey x) "docker_bridge_cidr"
-
 instance s ~ s' => P.HasComputedNetworkPlugin (TF.Ref s' (KubernetesClusterNetworkProfile s)) (TF.Attr s P.Text) where
     computedNetworkPlugin x = TF.compute (TF.refKey x) "network_plugin"
-
-instance s ~ s' => P.HasComputedPodCidr (TF.Ref s' (KubernetesClusterNetworkProfile s)) (TF.Attr s P.Text) where
-    computedPodCidr x = TF.compute (TF.refKey x) "pod_cidr"
-
-instance s ~ s' => P.HasComputedServiceCidr (TF.Ref s' (KubernetesClusterNetworkProfile s)) (TF.Attr s P.Text) where
-    computedServiceCidr x = TF.compute (TF.refKey x) "service_cidr"
 
 -- | @service_fabric_cluster_node_type@ nested settings.
 data ServiceFabricClusterNodeType s = ServiceFabricClusterNodeType'
@@ -8147,19 +8070,14 @@ data LinuxProfileSshKey s = LinuxProfileSshKey'
     { _keyData :: TF.Attr s P.Text
     -- ^ @key_data@ - (Required)
     --
-    , _keyData :: TF.Attr s P.Text
-    -- ^ @key_data@ - (Required, Forces New)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newLinuxProfileSshKey
     :: TF.Attr s P.Text -- ^ @key_data@ - 'P.keyData'
-    -> TF.Attr s P.Text -- ^ @key_data@ - 'P.keyData'
     -> LinuxProfileSshKey s
-newLinuxProfileSshKey _keyData _keyData =
+newLinuxProfileSshKey _keyData =
     LinuxProfileSshKey'
         { _keyData = _keyData
-        , _keyData = _keyData
         }
 
 instance P.Hashable  (LinuxProfileSshKey s)
@@ -8167,16 +8085,10 @@ instance TF.IsValue  (LinuxProfileSshKey s)
 instance TF.IsObject (LinuxProfileSshKey s) where
     toObject LinuxProfileSshKey'{..} = P.catMaybes
         [ TF.assign "key_data" <$> TF.attribute _keyData
-        , TF.assign "key_data" <$> TF.attribute _keyData
         ]
 
 instance TF.IsValid (LinuxProfileSshKey s) where
     validator = P.mempty
-
-instance P.HasKeyData (LinuxProfileSshKey s) (TF.Attr s P.Text) where
-    keyData =
-        P.lens (_keyData :: LinuxProfileSshKey s -> TF.Attr s P.Text)
-               (\s a -> s { _keyData = a } :: LinuxProfileSshKey s)
 
 instance P.HasKeyData (LinuxProfileSshKey s) (TF.Attr s P.Text) where
     keyData =
@@ -8226,9 +8138,6 @@ instance P.HasTier (AppServicePlanSku s) (TF.Attr s P.Text) where
     tier =
         P.lens (_tier :: AppServicePlanSku s -> TF.Attr s P.Text)
                (\s a -> s { _tier = a } :: AppServicePlanSku s)
-
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (AppServicePlanSku s)) (TF.Attr s P.Integer) where
-    computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (AppServicePlanSku s)) (TF.Attr s P.Integer) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
@@ -10184,9 +10093,6 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosdbAccountGeoLocation s)) (T
 instance s ~ s' => P.HasComputedFailoverPriority (TF.Ref s' (CosmosdbAccountGeoLocation s)) (TF.Attr s P.Integer) where
     computedFailoverPriority x = TF.compute (TF.refKey x) "failover_priority"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosdbAccountGeoLocation s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (CosmosdbAccountGeoLocation s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
@@ -10490,23 +10396,14 @@ instance s ~ s' => P.HasComputedManagedDiskId (TF.Ref s' (ImageOsDisk s)) (TF.At
 instance s ~ s' => P.HasComputedSizeGb (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Integer) where
     computedSizeGb x = TF.compute (TF.refKey x) "size_gb"
 
-instance s ~ s' => P.HasComputedBlobUri (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Text) where
-    computedBlobUri x = TF.compute (TF.refKey x) "blob_uri"
-
 instance s ~ s' => P.HasComputedCaching (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Text) where
     computedCaching x = TF.compute (TF.refKey x) "caching"
-
-instance s ~ s' => P.HasComputedManagedDiskId (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Text) where
-    computedManagedDiskId x = TF.compute (TF.refKey x) "managed_disk_id"
 
 instance s ~ s' => P.HasComputedOsState (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Text) where
     computedOsState x = TF.compute (TF.refKey x) "os_state"
 
 instance s ~ s' => P.HasComputedOsType (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Text) where
     computedOsType x = TF.compute (TF.refKey x) "os_type"
-
-instance s ~ s' => P.HasComputedSizeGb (TF.Ref s' (ImageOsDisk s)) (TF.Attr s P.Integer) where
-    computedSizeGb x = TF.compute (TF.refKey x) "size_gb"
 
 -- | @capture_description_destination@ nested settings.
 data CaptureDescriptionDestination s = CaptureDescriptionDestination'
@@ -10853,9 +10750,6 @@ instance s ~ s' => P.HasComputedAddressPrefix (TF.Ref s' (RouteTableRoute s)) (T
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RouteTableRoute s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedNextHopInIpAddress (TF.Ref s' (RouteTableRoute s)) (TF.Attr s P.Text) where
-    computedNextHopInIpAddress x = TF.compute (TF.refKey x) "next_hop_in_ip_address"
 
 instance s ~ s' => P.HasComputedNextHopType (TF.Ref s' (RouteTableRoute s)) (TF.Attr s P.Text) where
     computedNextHopType x = TF.compute (TF.refKey x) "next_hop_type"
