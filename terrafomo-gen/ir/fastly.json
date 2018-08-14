@@ -2640,7 +2640,7 @@
                     "original": "email"
                 },
                 {
-                    "default": "TF.value \"%h %l %u %t \"%r\" %>s %b\"",
+                    "default": "TF.value \"%h %l %u %t \\\"%r\\\" %>s %b\"",
                     "computed": false,
                     "required": false,
                     "help": [
@@ -2854,7 +2854,7 @@
                     "original": "address"
                 },
                 {
-                    "default": "TF.value \"%h %l %u %t \"%r\" %>s %b\"",
+                    "default": "TF.value \"%h %l %u %t \\\"%r\\\" %>s %b\"",
                     "computed": false,
                     "required": false,
                     "help": [
