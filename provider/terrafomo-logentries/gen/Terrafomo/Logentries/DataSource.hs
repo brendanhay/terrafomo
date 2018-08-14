@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @logentries_logset@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Logentries/logentries_logset terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logentries/d/logset.html terraform documentation>
 -- for more information.
 data LogsetData s = LogsetData'
     { _location :: TF.Attr s P.Text

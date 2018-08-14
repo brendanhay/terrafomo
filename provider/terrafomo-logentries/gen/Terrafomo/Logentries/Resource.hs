@@ -55,14 +55,14 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @logentries_log@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Logentries/logentries_log terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logentries/r/log.html terraform documentation>
 -- for more information.
 data LogResource s = LogResource'
     { _filename        :: TF.Attr s P.Text
     -- ^ @filename@ - (Optional)
     --
     , _logsetId        :: TF.Attr s P.Text
-    -- ^ @logset_id@ - (Required)
+    -- ^ @logset_id@ - (Required, Forces New)
     --
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -137,11 +137,11 @@ instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: LogResource s)
 
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "_computedToken"
+    computedToken x = TF.compute (TF.refKey x) "token"
 
 -- | @logentries_logset@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Logentries/logentries_logset terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logentries/r/logset.html terraform documentation>
 -- for more information.
 data LogsetResource s = LogsetResource'
     { _location :: TF.Attr s P.Text

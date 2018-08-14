@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | The @Logentries@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Logentries/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/logentries/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _accountKey :: P.Text
