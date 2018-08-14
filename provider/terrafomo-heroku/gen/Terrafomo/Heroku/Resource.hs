@@ -800,9 +800,6 @@ instance P.HasShield (SpaceResource s) (TF.Attr s P.Bool) where
 instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedOutboundIps x = TF.compute (TF.refKey x) "_computedOutboundIps"
 
-instance s ~ s' => P.HasComputedTrustedIpRanges (TF.Ref s' (SpaceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTrustedIpRanges x = TF.compute (TF.refKey x) "_computedTrustedIpRanges"
-
 -- | @heroku_space_app_access@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/Heroku/heroku_space_app_access terraform documentation>
