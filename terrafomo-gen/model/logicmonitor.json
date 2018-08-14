@@ -258,7 +258,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "properties",
+            "name": "device_properties",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -348,7 +348,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "properties",
+            "name": "device_group_properties",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -379,7 +379,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "filters",
+            "name": "collectors_filters",
             "schemas": [
               {
                 "name": "operator",
@@ -476,7 +476,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "filters",
+            "name": "device_group_filters",
             "schemas": [
               {
                 "name": "custom_property_name",
