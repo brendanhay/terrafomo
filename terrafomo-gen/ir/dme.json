@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/dme/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -249,6 +250,7 @@
                     "original": "weight"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/dme/r/record.html",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [],
