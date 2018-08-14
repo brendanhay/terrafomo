@@ -55,7 +55,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @newrelic_application@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_application terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/d/application.html terraform documentation>
 -- for more information.
 data ApplicationData s = ApplicationData'
     { _name :: TF.Attr s P.Text
@@ -86,14 +86,14 @@ instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ApplicationData s)
 
 instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
-    computedHostIds x = TF.compute (TF.refKey x) "_computedHostIds"
+    computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
 instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
-    computedInstanceIds x = TF.compute (TF.refKey x) "_computedInstanceIds"
+    computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
 
 -- | @newrelic_key_transaction@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_key_transaction terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/d/key_transaction.html terraform documentation>
 -- for more information.
 data KeyTransactionData s = KeyTransactionData'
     { _name :: TF.Attr s P.Text

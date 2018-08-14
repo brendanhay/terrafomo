@@ -18,25 +18,29 @@
 module Terrafomo.NewRelic.Settings
     (
     -- * Settings Datatypes
-    -- ** widget
-      Widget (..)
-    , newWidget
+    -- ** dashboard_widget
+      DashboardWidget (..)
+    , newDashboardWidget
 
-    -- ** critical
-    , Critical (..)
-    , newCritical
+    -- ** infra_alert_condition_warning
+    , InfraAlertConditionWarning (..)
+    , newInfraAlertConditionWarning
 
-    -- ** term
-    , Term (..)
-    , newTerm
+    -- ** alert_condition_term
+    , AlertConditionTerm (..)
+    , newAlertConditionTerm
 
-    -- ** warning
-    , Warning (..)
-    , newWarning
+    -- ** nrql_alert_condition_nrql
+    , NrqlAlertConditionNrql (..)
+    , newNrqlAlertConditionNrql
 
-    -- ** nrql
-    , Nrql (..)
-    , newNrql
+    -- ** nrql_alert_condition_term
+    , NrqlAlertConditionTerm (..)
+    , newNrqlAlertConditionTerm
+
+    -- ** infra_alert_condition_critical
+    , InfraAlertConditionCritical (..)
+    , newInfraAlertConditionCritical
 
     ) where
 
@@ -61,8 +65,8 @@ import qualified Terrafomo.NewRelic.Lens  as P
 import qualified Terrafomo.NewRelic.Types as P
 import qualified Terrafomo.Validator      as TF
 
--- | @widget@ nested settings.
-data Widget s = Widget'
+-- | @dashboard_widget@ nested settings.
+data DashboardWidget s = DashboardWidget'
     { _column        :: TF.Attr s P.Integer
     -- ^ @column@ - (Required)
     --
@@ -89,14 +93,14 @@ data Widget s = Widget'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newWidget
+newDashboardWidget
     :: TF.Attr s P.Integer -- ^ @column@ - 'P.column'
     -> TF.Attr s P.Integer -- ^ @row@ - 'P.row'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> TF.Attr s P.Text -- ^ @visualization@ - 'P.visualization'
-    -> Widget s
-newWidget _column _row _title _visualization =
-    Widget'
+    -> DashboardWidget s
+newDashboardWidget _column _row _title _visualization =
+    DashboardWidget'
         { _column = _column
         , _height = TF.value 1
         , _notes = TF.Nil
@@ -107,10 +111,10 @@ newWidget _column _row _title _visualization =
         , _width = TF.value 1
         }
 
-instance P.Hashable  (Widget s)
-instance TF.IsValue  (Widget s)
-instance TF.IsObject (Widget s) where
-    toObject Widget'{..} = P.catMaybes
+instance P.Hashable  (DashboardWidget s)
+instance TF.IsValue  (DashboardWidget s)
+instance TF.IsObject (DashboardWidget s) where
+    toObject DashboardWidget'{..} = P.catMaybes
         [ TF.assign "column" <$> TF.attribute _column
         , TF.assign "height" <$> TF.attribute _height
         , TF.assign "notes" <$> TF.attribute _notes
@@ -121,51 +125,51 @@ instance TF.IsObject (Widget s) where
         , TF.assign "width" <$> TF.attribute _width
         ]
 
-instance TF.IsValid (Widget s) where
+instance TF.IsValid (DashboardWidget s) where
     validator = P.mempty
 
-instance P.HasColumn (Widget s) (TF.Attr s P.Integer) where
+instance P.HasColumn (DashboardWidget s) (TF.Attr s P.Integer) where
     column =
-        P.lens (_column :: Widget s -> TF.Attr s P.Integer)
-               (\s a -> s { _column = a } :: Widget s)
+        P.lens (_column :: DashboardWidget s -> TF.Attr s P.Integer)
+               (\s a -> s { _column = a } :: DashboardWidget s)
 
-instance P.HasHeight (Widget s) (TF.Attr s P.Integer) where
+instance P.HasHeight (DashboardWidget s) (TF.Attr s P.Integer) where
     height =
-        P.lens (_height :: Widget s -> TF.Attr s P.Integer)
-               (\s a -> s { _height = a } :: Widget s)
+        P.lens (_height :: DashboardWidget s -> TF.Attr s P.Integer)
+               (\s a -> s { _height = a } :: DashboardWidget s)
 
-instance P.HasNotes (Widget s) (TF.Attr s P.Text) where
+instance P.HasNotes (DashboardWidget s) (TF.Attr s P.Text) where
     notes =
-        P.lens (_notes :: Widget s -> TF.Attr s P.Text)
-               (\s a -> s { _notes = a } :: Widget s)
+        P.lens (_notes :: DashboardWidget s -> TF.Attr s P.Text)
+               (\s a -> s { _notes = a } :: DashboardWidget s)
 
-instance P.HasNrql (Widget s) (TF.Attr s P.Text) where
+instance P.HasNrql (DashboardWidget s) (TF.Attr s P.Text) where
     nrql =
-        P.lens (_nrql :: Widget s -> TF.Attr s P.Text)
-               (\s a -> s { _nrql = a } :: Widget s)
+        P.lens (_nrql :: DashboardWidget s -> TF.Attr s P.Text)
+               (\s a -> s { _nrql = a } :: DashboardWidget s)
 
-instance P.HasRow (Widget s) (TF.Attr s P.Integer) where
+instance P.HasRow (DashboardWidget s) (TF.Attr s P.Integer) where
     row =
-        P.lens (_row :: Widget s -> TF.Attr s P.Integer)
-               (\s a -> s { _row = a } :: Widget s)
+        P.lens (_row :: DashboardWidget s -> TF.Attr s P.Integer)
+               (\s a -> s { _row = a } :: DashboardWidget s)
 
-instance P.HasTitle (Widget s) (TF.Attr s P.Text) where
+instance P.HasTitle (DashboardWidget s) (TF.Attr s P.Text) where
     title =
-        P.lens (_title :: Widget s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: Widget s)
+        P.lens (_title :: DashboardWidget s -> TF.Attr s P.Text)
+               (\s a -> s { _title = a } :: DashboardWidget s)
 
-instance P.HasVisualization (Widget s) (TF.Attr s P.Text) where
+instance P.HasVisualization (DashboardWidget s) (TF.Attr s P.Text) where
     visualization =
-        P.lens (_visualization :: Widget s -> TF.Attr s P.Text)
-               (\s a -> s { _visualization = a } :: Widget s)
+        P.lens (_visualization :: DashboardWidget s -> TF.Attr s P.Text)
+               (\s a -> s { _visualization = a } :: DashboardWidget s)
 
-instance P.HasWidth (Widget s) (TF.Attr s P.Integer) where
+instance P.HasWidth (DashboardWidget s) (TF.Attr s P.Integer) where
     width =
-        P.lens (_width :: Widget s -> TF.Attr s P.Integer)
-               (\s a -> s { _width = a } :: Widget s)
+        P.lens (_width :: DashboardWidget s -> TF.Attr s P.Integer)
+               (\s a -> s { _width = a } :: DashboardWidget s)
 
--- | @critical@ nested settings.
-data Critical s = Critical'
+-- | @infra_alert_condition_warning@ nested settings.
+data InfraAlertConditionWarning s = InfraAlertConditionWarning'
     { _duration     :: TF.Attr s P.Integer
     -- ^ @duration@ - (Required)
     --
@@ -177,45 +181,45 @@ data Critical s = Critical'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newCritical
+newInfraAlertConditionWarning
     :: TF.Attr s P.Integer -- ^ @duration@ - 'P.duration'
-    -> Critical s
-newCritical _duration =
-    Critical'
+    -> InfraAlertConditionWarning s
+newInfraAlertConditionWarning _duration =
+    InfraAlertConditionWarning'
         { _duration = _duration
         , _timeFunction = TF.Nil
         , _value = TF.Nil
         }
 
-instance P.Hashable  (Critical s)
-instance TF.IsValue  (Critical s)
-instance TF.IsObject (Critical s) where
-    toObject Critical'{..} = P.catMaybes
+instance P.Hashable  (InfraAlertConditionWarning s)
+instance TF.IsValue  (InfraAlertConditionWarning s)
+instance TF.IsObject (InfraAlertConditionWarning s) where
+    toObject InfraAlertConditionWarning'{..} = P.catMaybes
         [ TF.assign "duration" <$> TF.attribute _duration
         , TF.assign "time_function" <$> TF.attribute _timeFunction
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (Critical s) where
+instance TF.IsValid (InfraAlertConditionWarning s) where
     validator = P.mempty
 
-instance P.HasDuration (Critical s) (TF.Attr s P.Integer) where
+instance P.HasDuration (InfraAlertConditionWarning s) (TF.Attr s P.Integer) where
     duration =
-        P.lens (_duration :: Critical s -> TF.Attr s P.Integer)
-               (\s a -> s { _duration = a } :: Critical s)
+        P.lens (_duration :: InfraAlertConditionWarning s -> TF.Attr s P.Integer)
+               (\s a -> s { _duration = a } :: InfraAlertConditionWarning s)
 
-instance P.HasTimeFunction (Critical s) (TF.Attr s P.Text) where
+instance P.HasTimeFunction (InfraAlertConditionWarning s) (TF.Attr s P.Text) where
     timeFunction =
-        P.lens (_timeFunction :: Critical s -> TF.Attr s P.Text)
-               (\s a -> s { _timeFunction = a } :: Critical s)
+        P.lens (_timeFunction :: InfraAlertConditionWarning s -> TF.Attr s P.Text)
+               (\s a -> s { _timeFunction = a } :: InfraAlertConditionWarning s)
 
-instance P.HasValue (Critical s) (TF.Attr s P.Integer) where
+instance P.HasValue (InfraAlertConditionWarning s) (TF.Attr s P.Integer) where
     value =
-        P.lens (_value :: Critical s -> TF.Attr s P.Integer)
-               (\s a -> s { _value = a } :: Critical s)
+        P.lens (_value :: InfraAlertConditionWarning s -> TF.Attr s P.Integer)
+               (\s a -> s { _value = a } :: InfraAlertConditionWarning s)
 
--- | @term@ nested settings.
-data Term s = Term'
+-- | @alert_condition_term@ nested settings.
+data AlertConditionTerm s = AlertConditionTerm'
     { _duration     :: TF.Attr s P.Integer
     -- ^ @duration@ - (Required)
     --
@@ -233,13 +237,13 @@ data Term s = Term'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newTerm
+newAlertConditionTerm
     :: TF.Attr s P.Integer -- ^ @duration@ - 'P.duration'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @time_function@ - 'P.timeFunction'
-    -> Term s
-newTerm _duration _threshold _timeFunction =
-    Term'
+    -> AlertConditionTerm s
+newAlertConditionTerm _duration _threshold _timeFunction =
+    AlertConditionTerm'
         { _duration = _duration
         , _operator = TF.value "equal"
         , _priority = TF.value "critical"
@@ -247,10 +251,10 @@ newTerm _duration _threshold _timeFunction =
         , _timeFunction = _timeFunction
         }
 
-instance P.Hashable  (Term s)
-instance TF.IsValue  (Term s)
-instance TF.IsObject (Term s) where
-    toObject Term'{..} = P.catMaybes
+instance P.Hashable  (AlertConditionTerm s)
+instance TF.IsValue  (AlertConditionTerm s)
+instance TF.IsObject (AlertConditionTerm s) where
+    toObject AlertConditionTerm'{..} = P.catMaybes
         [ TF.assign "duration" <$> TF.attribute _duration
         , TF.assign "operator" <$> TF.attribute _operator
         , TF.assign "priority" <$> TF.attribute _priority
@@ -258,36 +262,149 @@ instance TF.IsObject (Term s) where
         , TF.assign "time_function" <$> TF.attribute _timeFunction
         ]
 
-instance TF.IsValid (Term s) where
+instance TF.IsValid (AlertConditionTerm s) where
     validator = P.mempty
 
-instance P.HasDuration (Term s) (TF.Attr s P.Integer) where
+instance P.HasDuration (AlertConditionTerm s) (TF.Attr s P.Integer) where
     duration =
-        P.lens (_duration :: Term s -> TF.Attr s P.Integer)
-               (\s a -> s { _duration = a } :: Term s)
+        P.lens (_duration :: AlertConditionTerm s -> TF.Attr s P.Integer)
+               (\s a -> s { _duration = a } :: AlertConditionTerm s)
 
-instance P.HasOperator (Term s) (TF.Attr s P.Text) where
+instance P.HasOperator (AlertConditionTerm s) (TF.Attr s P.Text) where
     operator =
-        P.lens (_operator :: Term s -> TF.Attr s P.Text)
-               (\s a -> s { _operator = a } :: Term s)
+        P.lens (_operator :: AlertConditionTerm s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: AlertConditionTerm s)
 
-instance P.HasPriority (Term s) (TF.Attr s P.Text) where
+instance P.HasPriority (AlertConditionTerm s) (TF.Attr s P.Text) where
     priority =
-        P.lens (_priority :: Term s -> TF.Attr s P.Text)
-               (\s a -> s { _priority = a } :: Term s)
+        P.lens (_priority :: AlertConditionTerm s -> TF.Attr s P.Text)
+               (\s a -> s { _priority = a } :: AlertConditionTerm s)
 
-instance P.HasThreshold (Term s) (TF.Attr s P.Double) where
+instance P.HasThreshold (AlertConditionTerm s) (TF.Attr s P.Double) where
     threshold =
-        P.lens (_threshold :: Term s -> TF.Attr s P.Double)
-               (\s a -> s { _threshold = a } :: Term s)
+        P.lens (_threshold :: AlertConditionTerm s -> TF.Attr s P.Double)
+               (\s a -> s { _threshold = a } :: AlertConditionTerm s)
 
-instance P.HasTimeFunction (Term s) (TF.Attr s P.Text) where
+instance P.HasTimeFunction (AlertConditionTerm s) (TF.Attr s P.Text) where
     timeFunction =
-        P.lens (_timeFunction :: Term s -> TF.Attr s P.Text)
-               (\s a -> s { _timeFunction = a } :: Term s)
+        P.lens (_timeFunction :: AlertConditionTerm s -> TF.Attr s P.Text)
+               (\s a -> s { _timeFunction = a } :: AlertConditionTerm s)
 
--- | @warning@ nested settings.
-data Warning s = Warning'
+-- | @nrql_alert_condition_nrql@ nested settings.
+data NrqlAlertConditionNrql s = NrqlAlertConditionNrql'
+    { _query      :: TF.Attr s P.Text
+    -- ^ @query@ - (Required)
+    --
+    , _sinceValue :: TF.Attr s P.Text
+    -- ^ @since_value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newNrqlAlertConditionNrql
+    :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
+    -> TF.Attr s P.Text -- ^ @since_value@ - 'P.sinceValue'
+    -> NrqlAlertConditionNrql s
+newNrqlAlertConditionNrql _query _sinceValue =
+    NrqlAlertConditionNrql'
+        { _query = _query
+        , _sinceValue = _sinceValue
+        }
+
+instance P.Hashable  (NrqlAlertConditionNrql s)
+instance TF.IsValue  (NrqlAlertConditionNrql s)
+instance TF.IsObject (NrqlAlertConditionNrql s) where
+    toObject NrqlAlertConditionNrql'{..} = P.catMaybes
+        [ TF.assign "query" <$> TF.attribute _query
+        , TF.assign "since_value" <$> TF.attribute _sinceValue
+        ]
+
+instance TF.IsValid (NrqlAlertConditionNrql s) where
+    validator = P.mempty
+
+instance P.HasQuery (NrqlAlertConditionNrql s) (TF.Attr s P.Text) where
+    query =
+        P.lens (_query :: NrqlAlertConditionNrql s -> TF.Attr s P.Text)
+               (\s a -> s { _query = a } :: NrqlAlertConditionNrql s)
+
+instance P.HasSinceValue (NrqlAlertConditionNrql s) (TF.Attr s P.Text) where
+    sinceValue =
+        P.lens (_sinceValue :: NrqlAlertConditionNrql s -> TF.Attr s P.Text)
+               (\s a -> s { _sinceValue = a } :: NrqlAlertConditionNrql s)
+
+-- | @nrql_alert_condition_term@ nested settings.
+data NrqlAlertConditionTerm s = NrqlAlertConditionTerm'
+    { _duration     :: TF.Attr s P.Integer
+    -- ^ @duration@ - (Required)
+    --
+    , _operator     :: TF.Attr s P.Text
+    -- ^ @operator@ - (Optional)
+    --
+    , _priority     :: TF.Attr s P.Text
+    -- ^ @priority@ - (Optional)
+    --
+    , _threshold    :: TF.Attr s P.Double
+    -- ^ @threshold@ - (Required)
+    --
+    , _timeFunction :: TF.Attr s P.Text
+    -- ^ @time_function@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newNrqlAlertConditionTerm
+    :: TF.Attr s P.Integer -- ^ @duration@ - 'P.duration'
+    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
+    -> TF.Attr s P.Text -- ^ @time_function@ - 'P.timeFunction'
+    -> NrqlAlertConditionTerm s
+newNrqlAlertConditionTerm _duration _threshold _timeFunction =
+    NrqlAlertConditionTerm'
+        { _duration = _duration
+        , _operator = TF.value "equal"
+        , _priority = TF.value "critical"
+        , _threshold = _threshold
+        , _timeFunction = _timeFunction
+        }
+
+instance P.Hashable  (NrqlAlertConditionTerm s)
+instance TF.IsValue  (NrqlAlertConditionTerm s)
+instance TF.IsObject (NrqlAlertConditionTerm s) where
+    toObject NrqlAlertConditionTerm'{..} = P.catMaybes
+        [ TF.assign "duration" <$> TF.attribute _duration
+        , TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "time_function" <$> TF.attribute _timeFunction
+        ]
+
+instance TF.IsValid (NrqlAlertConditionTerm s) where
+    validator = P.mempty
+
+instance P.HasDuration (NrqlAlertConditionTerm s) (TF.Attr s P.Integer) where
+    duration =
+        P.lens (_duration :: NrqlAlertConditionTerm s -> TF.Attr s P.Integer)
+               (\s a -> s { _duration = a } :: NrqlAlertConditionTerm s)
+
+instance P.HasOperator (NrqlAlertConditionTerm s) (TF.Attr s P.Text) where
+    operator =
+        P.lens (_operator :: NrqlAlertConditionTerm s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: NrqlAlertConditionTerm s)
+
+instance P.HasPriority (NrqlAlertConditionTerm s) (TF.Attr s P.Text) where
+    priority =
+        P.lens (_priority :: NrqlAlertConditionTerm s -> TF.Attr s P.Text)
+               (\s a -> s { _priority = a } :: NrqlAlertConditionTerm s)
+
+instance P.HasThreshold (NrqlAlertConditionTerm s) (TF.Attr s P.Double) where
+    threshold =
+        P.lens (_threshold :: NrqlAlertConditionTerm s -> TF.Attr s P.Double)
+               (\s a -> s { _threshold = a } :: NrqlAlertConditionTerm s)
+
+instance P.HasTimeFunction (NrqlAlertConditionTerm s) (TF.Attr s P.Text) where
+    timeFunction =
+        P.lens (_timeFunction :: NrqlAlertConditionTerm s -> TF.Attr s P.Text)
+               (\s a -> s { _timeFunction = a } :: NrqlAlertConditionTerm s)
+
+-- | @infra_alert_condition_critical@ nested settings.
+data InfraAlertConditionCritical s = InfraAlertConditionCritical'
     { _duration     :: TF.Attr s P.Integer
     -- ^ @duration@ - (Required)
     --
@@ -299,80 +416,39 @@ data Warning s = Warning'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newWarning
+newInfraAlertConditionCritical
     :: TF.Attr s P.Integer -- ^ @duration@ - 'P.duration'
-    -> Warning s
-newWarning _duration =
-    Warning'
+    -> InfraAlertConditionCritical s
+newInfraAlertConditionCritical _duration =
+    InfraAlertConditionCritical'
         { _duration = _duration
         , _timeFunction = TF.Nil
         , _value = TF.Nil
         }
 
-instance P.Hashable  (Warning s)
-instance TF.IsValue  (Warning s)
-instance TF.IsObject (Warning s) where
-    toObject Warning'{..} = P.catMaybes
+instance P.Hashable  (InfraAlertConditionCritical s)
+instance TF.IsValue  (InfraAlertConditionCritical s)
+instance TF.IsObject (InfraAlertConditionCritical s) where
+    toObject InfraAlertConditionCritical'{..} = P.catMaybes
         [ TF.assign "duration" <$> TF.attribute _duration
         , TF.assign "time_function" <$> TF.attribute _timeFunction
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (Warning s) where
+instance TF.IsValid (InfraAlertConditionCritical s) where
     validator = P.mempty
 
-instance P.HasDuration (Warning s) (TF.Attr s P.Integer) where
+instance P.HasDuration (InfraAlertConditionCritical s) (TF.Attr s P.Integer) where
     duration =
-        P.lens (_duration :: Warning s -> TF.Attr s P.Integer)
-               (\s a -> s { _duration = a } :: Warning s)
+        P.lens (_duration :: InfraAlertConditionCritical s -> TF.Attr s P.Integer)
+               (\s a -> s { _duration = a } :: InfraAlertConditionCritical s)
 
-instance P.HasTimeFunction (Warning s) (TF.Attr s P.Text) where
+instance P.HasTimeFunction (InfraAlertConditionCritical s) (TF.Attr s P.Text) where
     timeFunction =
-        P.lens (_timeFunction :: Warning s -> TF.Attr s P.Text)
-               (\s a -> s { _timeFunction = a } :: Warning s)
+        P.lens (_timeFunction :: InfraAlertConditionCritical s -> TF.Attr s P.Text)
+               (\s a -> s { _timeFunction = a } :: InfraAlertConditionCritical s)
 
-instance P.HasValue (Warning s) (TF.Attr s P.Integer) where
+instance P.HasValue (InfraAlertConditionCritical s) (TF.Attr s P.Integer) where
     value =
-        P.lens (_value :: Warning s -> TF.Attr s P.Integer)
-               (\s a -> s { _value = a } :: Warning s)
-
--- | @nrql@ nested settings.
-data Nrql s = Nrql'
-    { _query      :: TF.Attr s P.Text
-    -- ^ @query@ - (Required)
-    --
-    , _sinceValue :: TF.Attr s P.Text
-    -- ^ @since_value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newNrql
-    :: TF.Attr s P.Text -- ^ @query@ - 'P.query'
-    -> TF.Attr s P.Text -- ^ @since_value@ - 'P.sinceValue'
-    -> Nrql s
-newNrql _query _sinceValue =
-    Nrql'
-        { _query = _query
-        , _sinceValue = _sinceValue
-        }
-
-instance P.Hashable  (Nrql s)
-instance TF.IsValue  (Nrql s)
-instance TF.IsObject (Nrql s) where
-    toObject Nrql'{..} = P.catMaybes
-        [ TF.assign "query" <$> TF.attribute _query
-        , TF.assign "since_value" <$> TF.attribute _sinceValue
-        ]
-
-instance TF.IsValid (Nrql s) where
-    validator = P.mempty
-
-instance P.HasQuery (Nrql s) (TF.Attr s P.Text) where
-    query =
-        P.lens (_query :: Nrql s -> TF.Attr s P.Text)
-               (\s a -> s { _query = a } :: Nrql s)
-
-instance P.HasSinceValue (Nrql s) (TF.Attr s P.Text) where
-    sinceValue =
-        P.lens (_sinceValue :: Nrql s -> TF.Attr s P.Text)
-               (\s a -> s { _sinceValue = a } :: Nrql s)
+        P.lens (_value :: InfraAlertConditionCritical s -> TF.Attr s P.Integer)
+               (\s a -> s { _value = a } :: InfraAlertConditionCritical s)

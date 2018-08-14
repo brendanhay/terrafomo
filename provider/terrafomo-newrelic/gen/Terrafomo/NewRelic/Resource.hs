@@ -75,17 +75,17 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @newrelic_alert_channel@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_alert_channel terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_channel.html terraform documentation>
 -- for more information.
 data AlertChannelResource s = AlertChannelResource'
     { _configuration :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @configuration@ - (Required)
+    -- ^ @configuration@ - (Required, Forces New)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _type'         :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -129,43 +129,43 @@ instance P.HasType' (AlertChannelResource s) (TF.Attr s P.Text) where
 
 -- | @newrelic_alert_condition@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_alert_condition terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_condition.html terraform documentation>
 -- for more information.
 data AlertConditionResource s = AlertConditionResource'
-    { _conditionScope           :: TF.Attr s P.Text
+    { _conditionScope :: TF.Attr s P.Text
     -- ^ @condition_scope@ - (Optional)
     --
-    , _entities                 :: TF.Attr s (P.NonEmpty (TF.Attr s P.Integer))
+    , _entities :: TF.Attr s (P.NonEmpty (TF.Attr s P.Integer))
     -- ^ @entities@ - (Required)
     --
-    , _gcMetric                 :: TF.Attr s P.Text
+    , _gcMetric :: TF.Attr s P.Text
     -- ^ @gc_metric@ - (Optional)
     --
-    , _metric                   :: TF.Attr s P.Text
+    , _metric :: TF.Attr s P.Text
     -- ^ @metric@ - (Required)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _policyId                 :: TF.Attr s P.Integer
-    -- ^ @policy_id@ - (Required)
+    , _policyId :: TF.Attr s P.Integer
+    -- ^ @policy_id@ - (Required, Forces New)
     --
-    , _runbookUrl               :: TF.Attr s P.Text
+    , _runbookUrl :: TF.Attr s P.Text
     -- ^ @runbook_url@ - (Optional)
     --
-    , _term                     :: TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))
+    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s)))
     -- ^ @term@ - (Required)
     --
-    , _type'                    :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _userDefinedMetric        :: TF.Attr s P.Text
+    , _userDefinedMetric :: TF.Attr s P.Text
     -- ^ @user_defined_metric@ - (Optional)
     --
     , _userDefinedValueFunction :: TF.Attr s P.Text
     -- ^ @user_defined_value_function@ - (Optional)
     --
-    , _violationCloseTimer      :: TF.Attr s P.Integer
+    , _violationCloseTimer :: TF.Attr s P.Integer
     -- ^ @violation_close_timer@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -175,7 +175,7 @@ alertConditionResource
     -> TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @policy_id@ - 'P.policyId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (Term s))) -- ^ @term@ - 'P.term'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s))) -- ^ @term@ - 'P.term'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Resource P.Provider (AlertConditionResource s)
 alertConditionResource _entities _metric _name _policyId _term _type' =
@@ -215,7 +215,7 @@ instance TF.IsValid (AlertConditionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_term"
                   (_term
-                      :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Term s))))
+                      :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s))))
                   TF.validator
 
 instance P.HasConditionScope (AlertConditionResource s) (TF.Attr s P.Text) where
@@ -253,9 +253,9 @@ instance P.HasRunbookUrl (AlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_runbookUrl :: AlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _runbookUrl = a } :: AlertConditionResource s)
 
-instance P.HasTerm (AlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))) where
+instance P.HasTerm (AlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s)))) where
     term =
-        P.lens (_term :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Term s))))
+        P.lens (_term :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s))))
                (\s a -> s { _term = a } :: AlertConditionResource s)
 
 instance P.HasType' (AlertConditionResource s) (TF.Attr s P.Text) where
@@ -280,14 +280,14 @@ instance P.HasViolationCloseTimer (AlertConditionResource s) (TF.Attr s P.Intege
 
 -- | @newrelic_alert_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_alert_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy.html terraform documentation>
 -- for more information.
 data AlertPolicyResource s = AlertPolicyResource'
     { _incidentPreference :: TF.Attr s P.Text
-    -- ^ @incident_preference@ - (Optional)
+    -- ^ @incident_preference@ - (Optional, Forces New)
     --
     , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -321,21 +321,21 @@ instance P.HasName (AlertPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: AlertPolicyResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Integer) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Integer) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
 -- | @newrelic_alert_policy_channel@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_alert_policy_channel terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy_channel.html terraform documentation>
 -- for more information.
 data AlertPolicyChannelResource s = AlertPolicyChannelResource'
     { _channelId :: TF.Attr s P.Integer
-    -- ^ @channel_id@ - (Required)
+    -- ^ @channel_id@ - (Required, Forces New)
     --
     , _policyId  :: TF.Attr s P.Integer
-    -- ^ @policy_id@ - (Required)
+    -- ^ @policy_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -371,7 +371,7 @@ instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Integer) wher
 
 -- | @newrelic_dashboard@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_dashboard terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/dashboard.html terraform documentation>
 -- for more information.
 data DashboardResource s = DashboardResource'
     { _editable   :: TF.Attr s P.Text
@@ -386,7 +386,7 @@ data DashboardResource s = DashboardResource'
     , _visibility :: TF.Attr s P.Text
     -- ^ @visibility@ - (Optional)
     --
-    , _widget     :: TF.Attr s [TF.Attr s (Widget s)]
+    , _widget     :: TF.Attr s [TF.Attr s (DashboardWidget s)]
     -- ^ @widget@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -417,7 +417,7 @@ instance TF.IsValid (DashboardResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_widget"
                   (_widget
-                      :: DashboardResource s -> TF.Attr s [TF.Attr s (Widget s)])
+                      :: DashboardResource s -> TF.Attr s [TF.Attr s (DashboardWidget s)])
                   TF.validator
 
 instance P.HasEditable (DashboardResource s) (TF.Attr s P.Text) where
@@ -440,23 +440,23 @@ instance P.HasVisibility (DashboardResource s) (TF.Attr s P.Text) where
         P.lens (_visibility :: DashboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _visibility = a } :: DashboardResource s)
 
-instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (Widget s)]) where
+instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (DashboardWidget s)]) where
     widget =
-        P.lens (_widget :: DashboardResource s -> TF.Attr s [TF.Attr s (Widget s)])
+        P.lens (_widget :: DashboardResource s -> TF.Attr s [TF.Attr s (DashboardWidget s)])
                (\s a -> s { _widget = a } :: DashboardResource s)
 
 instance s ~ s' => P.HasComputedDashboardUrl (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedDashboardUrl x = TF.compute (TF.refKey x) "_computedDashboardUrl"
+    computedDashboardUrl x = TF.compute (TF.refKey x) "dashboard_url"
 
 -- | @newrelic_infra_alert_condition@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_infra_alert_condition terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/infra_alert_condition.html terraform documentation>
 -- for more information.
 data InfraAlertConditionResource s = InfraAlertConditionResource'
     { _comparison   :: TF.Attr s P.Text
     -- ^ @comparison@ - (Optional)
     --
-    , _critical     :: TF.Attr s (Critical s)
+    , _critical     :: TF.Attr s (InfraAlertConditionCritical s)
     -- ^ @critical@ - (Optional)
     --
     , _enabled      :: TF.Attr s P.Bool
@@ -469,7 +469,7 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     -- ^ @name@ - (Required)
     --
     , _policyId     :: TF.Attr s P.Integer
-    -- ^ @policy_id@ - (Required)
+    -- ^ @policy_id@ - (Required, Forces New)
     --
     , _processWhere :: TF.Attr s P.Text
     -- ^ @process_where@ - (Optional)
@@ -478,10 +478,10 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     -- ^ @select@ - (Optional)
     --
     , _type'        :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
-    , _warning      :: TF.Attr s (Warning s)
-    -- ^ @warning@ - (Optional)
+    , _warning      :: TF.Attr s (InfraAlertConditionWarning s)
+    -- ^ @warning@ - (Optional, Forces New)
     --
     , _where'       :: TF.Attr s P.Text
     -- ^ @where@ - (Optional)
@@ -528,11 +528,11 @@ instance TF.IsValid (InfraAlertConditionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_critical"
                   (_critical
-                      :: InfraAlertConditionResource s -> TF.Attr s (Critical s))
+                      :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionCritical s))
                   TF.validator
            P.<> TF.settingsValidator "_warning"
                   (_warning
-                      :: InfraAlertConditionResource s -> TF.Attr s (Warning s))
+                      :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionWarning s))
                   TF.validator
 
 instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) where
@@ -540,9 +540,9 @@ instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) wher
         P.lens (_comparison :: InfraAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _comparison = a } :: InfraAlertConditionResource s)
 
-instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (Critical s)) where
+instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (InfraAlertConditionCritical s)) where
     critical =
-        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (Critical s))
+        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionCritical s))
                (\s a -> s { _critical = a } :: InfraAlertConditionResource s)
 
 instance P.HasEnabled (InfraAlertConditionResource s) (TF.Attr s P.Bool) where
@@ -580,9 +580,9 @@ instance P.HasType' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: InfraAlertConditionResource s)
 
-instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (Warning s)) where
+instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (InfraAlertConditionWarning s)) where
     warning =
-        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (Warning s))
+        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionWarning s))
                (\s a -> s { _warning = a } :: InfraAlertConditionResource s)
 
 instance P.HasWhere' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
@@ -591,32 +591,32 @@ instance P.HasWhere' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _where' = a } :: InfraAlertConditionResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Integer) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Integer) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
 -- | @newrelic_nrql_alert_condition@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/newrelic_nrql_alert_condition terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/r/nrql_alert_condition.html terraform documentation>
 -- for more information.
 data NrqlAlertConditionResource s = NrqlAlertConditionResource'
-    { _enabled       :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nrql          :: TF.Attr s (Nrql s)
+    , _nrql :: TF.Attr s (NrqlAlertConditionNrql s)
     -- ^ @nrql@ - (Required)
     --
-    , _policyId      :: TF.Attr s P.Integer
-    -- ^ @policy_id@ - (Required)
+    , _policyId :: TF.Attr s P.Integer
+    -- ^ @policy_id@ - (Required, Forces New)
     --
-    , _runbookUrl    :: TF.Attr s P.Text
+    , _runbookUrl :: TF.Attr s P.Text
     -- ^ @runbook_url@ - (Optional)
     --
-    , _term          :: TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))
+    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s)))
     -- ^ @term@ - (Required)
     --
     , _valueFunction :: TF.Attr s P.Text
@@ -626,9 +626,9 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource'
 
 nrqlAlertConditionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (Nrql s) -- ^ @nrql@ - 'P.nrql'
+    -> TF.Attr s (NrqlAlertConditionNrql s) -- ^ @nrql@ - 'P.nrql'
     -> TF.Attr s P.Integer -- ^ @policy_id@ - 'P.policyId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (Term s))) -- ^ @term@ - 'P.term'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s))) -- ^ @term@ - 'P.term'
     -> TF.Resource P.Provider (NrqlAlertConditionResource s)
 nrqlAlertConditionResource _name _nrql _policyId _term =
     TF.newResource "newrelic_nrql_alert_condition" TF.validator $
@@ -657,11 +657,11 @@ instance TF.IsValid (NrqlAlertConditionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_nrql"
                   (_nrql
-                      :: NrqlAlertConditionResource s -> TF.Attr s (Nrql s))
+                      :: NrqlAlertConditionResource s -> TF.Attr s (NrqlAlertConditionNrql s))
                   TF.validator
            P.<> TF.settingsValidator "_term"
                   (_term
-                      :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Term s))))
+                      :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s))))
                   TF.validator
 
 instance P.HasEnabled (NrqlAlertConditionResource s) (TF.Attr s P.Bool) where
@@ -674,9 +674,9 @@ instance P.HasName (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
 
-instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (Nrql s)) where
+instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (NrqlAlertConditionNrql s)) where
     nrql =
-        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (Nrql s))
+        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (NrqlAlertConditionNrql s))
                (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
 
 instance P.HasPolicyId (NrqlAlertConditionResource s) (TF.Attr s P.Integer) where
@@ -689,9 +689,9 @@ instance P.HasRunbookUrl (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_runbookUrl :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _runbookUrl = a } :: NrqlAlertConditionResource s)
 
-instance P.HasTerm (NrqlAlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (Term s)))) where
+instance P.HasTerm (NrqlAlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s)))) where
     term =
-        P.lens (_term :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Term s))))
+        P.lens (_term :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s))))
                (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
 
 instance P.HasValueFunction (NrqlAlertConditionResource s) (TF.Attr s P.Text) where

@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @NewRelic@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/NewRelic/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/newrelic/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apiKey      :: P.Text
