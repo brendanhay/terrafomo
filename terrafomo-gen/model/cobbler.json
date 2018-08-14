@@ -191,7 +191,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "mgmt_classes",
+            "name": "distro_mgmt_classes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -239,7 +239,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "owners",
+            "name": "distro_owners",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -453,7 +453,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "mgmt_classes",
+            "name": "profile_mgmt_classes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -501,7 +501,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "name_servers",
+            "name": "profile_name_servers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -525,7 +525,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "name_servers_search",
+            "name": "profile_name_servers_search",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -549,7 +549,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "owners",
+            "name": "profile_owners",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -621,7 +621,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "repos",
+            "name": "profile_repos",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -782,7 +782,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "apt_components",
+            "name": "repo_apt_components",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -806,7 +806,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "apt_dists",
+            "name": "repo_apt_dists",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -938,7 +938,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "owners",
+            "name": "repo_owners",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -974,7 +974,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "rpm_list",
+            "name": "repo_rpm_list",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1116,7 +1116,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "interface",
+            "name": "system_interface",
             "schemas": [
               {
                 "name": "bonding_opts",
@@ -1154,7 +1154,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "cnames",
+                  "name": "interface_cnames",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1286,7 +1286,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "ipv6_secondaries",
+                  "name": "interface_ipv6_secondaries",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1310,7 +1310,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "ipv6_static_routes",
+                  "name": "interface_ipv6_static_routes",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1394,7 +1394,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "static_routes",
+                  "name": "interface_static_routes",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1517,7 +1517,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "mgmt_classes",
+            "name": "system_mgmt_classes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1577,7 +1577,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "name_servers",
+            "name": "system_name_servers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1601,7 +1601,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "name_servers_search",
+            "name": "system_name_servers_search",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1637,7 +1637,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "owners",
+            "name": "system_owners",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
