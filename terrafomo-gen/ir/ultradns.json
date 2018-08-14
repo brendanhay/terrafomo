@@ -2,8 +2,71 @@
     "settings": [
         {
             "con": {
-                "smart": "newIps",
-                "name": "Ips'"
+                "smart": "newNoResponseIpInfo",
+                "name": "NoResponseIpInfo'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ips\" <$> TF.attribute",
+                    "name": "_ips",
+                    "method": "ips",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (IpInfoIps s)]",
+                    "class": "HasIps",
+                    "validate": true,
+                    "optional": true,
+                    "original": "ips"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"is_account_level\" <$> TF.attribute",
+                    "name": "_isAccountLevel",
+                    "method": "isAccountLevel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsAccountLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "is_account_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                }
+            ],
+            "name": "NoResponseIpInfo",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "NoResponseIpInfo s",
+            "original": "no_response_ip_info"
+        },
+        {
+            "con": {
+                "smart": "newIpInfoIps",
+                "name": "IpInfoIps'"
             },
             "arguments": [
                 {
@@ -71,335 +134,18 @@
                     "original": "start"
                 }
             ],
-            "name": "Ips",
+            "name": "IpInfoIps",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "Ips s",
-            "original": "ips"
+            "type": "IpInfoIps s",
+            "original": "ip_info_ips"
         },
         {
             "con": {
-                "smart": "newPingProbe",
-                "name": "PingProbe'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"limit\" <$> TF.attribute",
-                    "name": "_limit",
-                    "method": "limit",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Limit s)]",
-                    "class": "HasLimit",
-                    "validate": true,
-                    "optional": true,
-                    "original": "limit"
-                },
-                {
-                    "default": "TF.value 56",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"packet_size\" <$> TF.attribute",
-                    "name": "_packetSize",
-                    "method": "packetSize",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPacketSize",
-                    "validate": false,
-                    "optional": true,
-                    "original": "packet_size"
-                },
-                {
-                    "default": "TF.value 3",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"packets\" <$> TF.attribute",
-                    "name": "_packets",
-                    "method": "packets",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPackets",
-                    "validate": false,
-                    "optional": true,
-                    "original": "packets"
-                }
-            ],
-            "name": "PingProbe",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "PingProbe s",
-            "original": "ping_probe"
-        },
-        {
-            "con": {
-                "smart": "newNoResponse",
-                "name": "NoResponse'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"all_non_configured\" <$> TF.attribute",
-                    "name": "_allNonConfigured",
-                    "method": "allNonConfigured",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAllNonConfigured",
-                    "validate": false,
-                    "optional": true,
-                    "original": "all_non_configured"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"geo_info\" <$> TF.attribute",
-                    "name": "_geoInfo",
-                    "method": "geoInfo",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (GeoInfo s)]",
-                    "class": "HasGeoInfo",
-                    "validate": true,
-                    "optional": true,
-                    "original": "geo_info"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ip_info\" <$> TF.attribute",
-                    "name": "_ipInfo",
-                    "method": "ipInfo",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (IpInfo s)]",
-                    "class": "HasIpInfo",
-                    "validate": true,
-                    "optional": true,
-                    "original": "ip_info"
-                }
-            ],
-            "name": "NoResponse",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "NoResponse s",
-            "original": "no_response"
-        },
-        {
-            "con": {
-                "smart": "newIpInfo",
-                "name": "IpInfo'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ips\" <$> TF.attribute",
-                    "name": "_ips",
-                    "method": "ips",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Ips s)]",
-                    "class": "HasIps",
-                    "validate": true,
-                    "optional": true,
-                    "original": "ips"
-                },
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"is_account_level\" <$> TF.attribute",
-                    "name": "_isAccountLevel",
-                    "method": "isAccountLevel",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasIsAccountLevel",
-                    "validate": false,
-                    "optional": true,
-                    "original": "is_account_level"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                }
-            ],
-            "name": "IpInfo",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "IpInfo s",
-            "original": "ip_info"
-        },
-        {
-            "con": {
-                "smart": "newTransaction",
-                "name": "Transaction'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.value P.False",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"follow_redirects\" <$> TF.attribute",
-                    "name": "_followRedirects",
-                    "method": "followRedirects",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasFollowRedirects",
-                    "validate": false,
-                    "optional": true,
-                    "original": "follow_redirects"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"limit\" <$> TF.attribute",
-                    "name": "_limit",
-                    "method": "limit",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Limit s)]",
-                    "class": "HasLimit",
-                    "validate": true,
-                    "optional": true,
-                    "original": "limit"
-                },
-                {
-                    "default": "_method",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"method\" <$> TF.attribute",
-                    "name": "_method",
-                    "method": "method",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMethod",
-                    "validate": false,
-                    "optional": false,
-                    "original": "method"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"transmitted_data\" <$> TF.attribute",
-                    "name": "_transmittedData",
-                    "method": "transmittedData",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasTransmittedData",
-                    "validate": false,
-                    "optional": true,
-                    "original": "transmitted_data"
-                },
-                {
-                    "default": "_url",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "_url",
-                    "method": "url",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUrl",
-                    "validate": false,
-                    "optional": false,
-                    "original": "url"
-                }
-            ],
-            "name": "Transaction",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_method",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"method\" <$> TF.attribute",
-                    "name": "_method",
-                    "method": "method",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasMethod",
-                    "validate": false,
-                    "optional": false,
-                    "original": "method"
-                },
-                {
-                    "default": "_url",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"url\" <$> TF.attribute",
-                    "name": "_url",
-                    "method": "url",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasUrl",
-                    "validate": false,
-                    "optional": false,
-                    "original": "url"
-                }
-            ],
-            "conflicts": [],
-            "type": "Transaction s",
-            "original": "transaction"
-        },
-        {
-            "con": {
-                "smart": "newGeoInfo",
-                "name": "GeoInfo'"
+                "smart": "newNoResponseGeoInfo",
+                "name": "NoResponseGeoInfo'"
             },
             "arguments": [
                 {
@@ -451,18 +197,398 @@
                     "original": "name"
                 }
             ],
-            "name": "GeoInfo",
+            "name": "NoResponseGeoInfo",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "GeoInfo s",
-            "original": "geo_info"
+            "type": "NoResponseGeoInfo s",
+            "original": "no_response_geo_info"
         },
         {
             "con": {
-                "smart": "newRdata",
-                "name": "Rdata'"
+                "smart": "newHttpProbeTotalLimits",
+                "name": "HttpProbeTotalLimits'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasCritical",
+                    "validate": false,
+                    "optional": true,
+                    "original": "critical"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fail\" <$> TF.attribute",
+                    "name": "_fail",
+                    "method": "fail",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasFail",
+                    "validate": false,
+                    "optional": true,
+                    "original": "fail"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasWarning",
+                    "validate": false,
+                    "optional": true,
+                    "original": "warning"
+                }
+            ],
+            "name": "HttpProbeTotalLimits",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "HttpProbeTotalLimits s",
+            "original": "http_probe_total_limits"
+        },
+        {
+            "con": {
+                "smart": "newPingProbeLimit",
+                "name": "PingProbeLimit'"
+            },
+            "arguments": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasCritical",
+                    "validate": false,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_fail",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fail\" <$> TF.attribute",
+                    "name": "_fail",
+                    "method": "fail",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasFail",
+                    "validate": false,
+                    "optional": false,
+                    "original": "fail"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasWarning",
+                    "validate": false,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "name": "PingProbeLimit",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasCritical",
+                    "validate": false,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_fail",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"fail\" <$> TF.attribute",
+                    "name": "_fail",
+                    "method": "fail",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasFail",
+                    "validate": false,
+                    "optional": false,
+                    "original": "fail"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasWarning",
+                    "validate": false,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "conflicts": [],
+            "type": "PingProbeLimit s",
+            "original": "ping_probe_limit"
+        },
+        {
+            "con": {
+                "smart": "newProbePingPingProbe",
+                "name": "ProbePingPingProbe'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"limit\" <$> TF.attribute",
+                    "name": "_limit",
+                    "method": "limit",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (PingProbeLimit s)]",
+                    "class": "HasLimit",
+                    "validate": true,
+                    "optional": true,
+                    "original": "limit"
+                },
+                {
+                    "default": "TF.value 56",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"packet_size\" <$> TF.attribute",
+                    "name": "_packetSize",
+                    "method": "packetSize",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPacketSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "packet_size"
+                },
+                {
+                    "default": "TF.value 3",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"packets\" <$> TF.attribute",
+                    "name": "_packets",
+                    "method": "packets",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPackets",
+                    "validate": false,
+                    "optional": true,
+                    "original": "packets"
+                }
+            ],
+            "name": "ProbePingPingProbe",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ProbePingPingProbe s",
+            "original": "probe_ping_ping_probe"
+        },
+        {
+            "con": {
+                "smart": "newProbeHttpHttpProbe",
+                "name": "ProbeHttpHttpProbe'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"total_limits\" <$> TF.attribute",
+                    "name": "_totalLimits",
+                    "method": "totalLimits",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (HttpProbeTotalLimits s)]",
+                    "class": "HasTotalLimits",
+                    "validate": true,
+                    "optional": true,
+                    "original": "total_limits"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"transaction\" <$> TF.attribute",
+                    "name": "_transaction",
+                    "method": "transaction",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (HttpProbeTransaction s)]",
+                    "class": "HasTransaction",
+                    "validate": true,
+                    "optional": true,
+                    "original": "transaction"
+                }
+            ],
+            "name": "ProbeHttpHttpProbe",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "ProbeHttpHttpProbe s",
+            "original": "probe_http_http_probe"
+        },
+        {
+            "con": {
+                "smart": "newRdataIpInfo",
+                "name": "RdataIpInfo'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ips\" <$> TF.attribute",
+                    "name": "_ips",
+                    "method": "ips",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (IpInfoIps s)]",
+                    "class": "HasIps",
+                    "validate": true,
+                    "optional": true,
+                    "original": "ips"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"is_account_level\" <$> TF.attribute",
+                    "name": "_isAccountLevel",
+                    "method": "isAccountLevel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsAccountLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "is_account_level"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                }
+            ],
+            "name": "RdataIpInfo",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "RdataIpInfo s",
+            "original": "rdata_ip_info"
+        },
+        {
+            "con": {
+                "smart": "newTcpoolRdata",
+                "name": "TcpoolRdata'"
             },
             "arguments": [
                 {
@@ -578,7 +704,7 @@
                     "original": "weight"
                 }
             ],
-            "name": "Rdata",
+            "name": "TcpoolRdata",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -600,13 +726,237 @@
                 }
             ],
             "conflicts": [],
-            "type": "Rdata s",
-            "original": "rdata"
+            "type": "TcpoolRdata s",
+            "original": "tcpool_rdata"
         },
         {
             "con": {
-                "smart": "newLimit",
-                "name": "Limit'"
+                "smart": "newDirpoolRdata",
+                "name": "DirpoolRdata'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"all_non_configured\" <$> TF.attribute",
+                    "name": "_allNonConfigured",
+                    "method": "allNonConfigured",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllNonConfigured",
+                    "validate": false,
+                    "optional": true,
+                    "original": "all_non_configured"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"geo_info\" <$> TF.attribute",
+                    "name": "_geoInfo",
+                    "method": "geoInfo",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RdataGeoInfo s)]",
+                    "class": "HasGeoInfo",
+                    "validate": true,
+                    "optional": true,
+                    "original": "geo_info"
+                },
+                {
+                    "default": "_host",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "_host",
+                    "method": "host",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_info\" <$> TF.attribute",
+                    "name": "_ipInfo",
+                    "method": "ipInfo",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RdataIpInfo s)]",
+                    "class": "HasIpInfo",
+                    "validate": true,
+                    "optional": true,
+                    "original": "ip_info"
+                }
+            ],
+            "name": "DirpoolRdata",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_host",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"host\" <$> TF.attribute",
+                    "name": "_host",
+                    "method": "host",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHost",
+                    "validate": false,
+                    "optional": false,
+                    "original": "host"
+                }
+            ],
+            "conflicts": [],
+            "type": "DirpoolRdata s",
+            "original": "dirpool_rdata"
+        },
+        {
+            "con": {
+                "smart": "newHttpProbeTransaction",
+                "name": "HttpProbeTransaction'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"follow_redirects\" <$> TF.attribute",
+                    "name": "_followRedirects",
+                    "method": "followRedirects",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasFollowRedirects",
+                    "validate": false,
+                    "optional": true,
+                    "original": "follow_redirects"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"limit\" <$> TF.attribute",
+                    "name": "_limit",
+                    "method": "limit",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TransactionLimit s)]",
+                    "class": "HasLimit",
+                    "validate": true,
+                    "optional": true,
+                    "original": "limit"
+                },
+                {
+                    "default": "_method",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"method\" <$> TF.attribute",
+                    "name": "_method",
+                    "method": "method",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMethod",
+                    "validate": false,
+                    "optional": false,
+                    "original": "method"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"transmitted_data\" <$> TF.attribute",
+                    "name": "_transmittedData",
+                    "method": "transmittedData",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTransmittedData",
+                    "validate": false,
+                    "optional": true,
+                    "original": "transmitted_data"
+                },
+                {
+                    "default": "_url",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "_url",
+                    "method": "url",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "url"
+                }
+            ],
+            "name": "HttpProbeTransaction",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_method",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"method\" <$> TF.attribute",
+                    "name": "_method",
+                    "method": "method",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMethod",
+                    "validate": false,
+                    "optional": false,
+                    "original": "method"
+                },
+                {
+                    "default": "_url",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"url\" <$> TF.attribute",
+                    "name": "_url",
+                    "method": "url",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUrl",
+                    "validate": false,
+                    "optional": false,
+                    "original": "url"
+                }
+            ],
+            "conflicts": [],
+            "type": "HttpProbeTransaction s",
+            "original": "http_probe_transaction"
+        },
+        {
+            "con": {
+                "smart": "newTransactionLimit",
+                "name": "TransactionLimit'"
             },
             "arguments": [
                 {
@@ -674,7 +1024,7 @@
                     "original": "warning"
                 }
             ],
-            "name": "Limit",
+            "name": "TransactionLimit",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -744,13 +1094,76 @@
                 }
             ],
             "conflicts": [],
-            "type": "Limit s",
-            "original": "limit"
+            "type": "TransactionLimit s",
+            "original": "transaction_limit"
         },
         {
             "con": {
-                "smart": "newHttpProbe",
-                "name": "HttpProbe'"
+                "smart": "newDirpoolNoResponse",
+                "name": "DirpoolNoResponse'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"all_non_configured\" <$> TF.attribute",
+                    "name": "_allNonConfigured",
+                    "method": "allNonConfigured",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAllNonConfigured",
+                    "validate": false,
+                    "optional": true,
+                    "original": "all_non_configured"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"geo_info\" <$> TF.attribute",
+                    "name": "_geoInfo",
+                    "method": "geoInfo",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (NoResponseGeoInfo s)]",
+                    "class": "HasGeoInfo",
+                    "validate": true,
+                    "optional": true,
+                    "original": "geo_info"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_info\" <$> TF.attribute",
+                    "name": "_ipInfo",
+                    "method": "ipInfo",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (NoResponseIpInfo s)]",
+                    "class": "HasIpInfo",
+                    "validate": true,
+                    "optional": true,
+                    "original": "ip_info"
+                }
+            ],
+            "name": "DirpoolNoResponse",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [],
+            "conflicts": [],
+            "type": "DirpoolNoResponse s",
+            "original": "dirpool_no_response"
+        },
+        {
+            "con": {
+                "smart": "newRdataGeoInfo",
+                "name": "RdataGeoInfo'"
             },
             "arguments": [
                 {
@@ -759,15 +1172,31 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"total_limits\" <$> TF.attribute",
-                    "name": "_totalLimits",
-                    "method": "totalLimits",
+                    "encoder": "TF.assign \"codes\" <$> TF.attribute",
+                    "name": "_codes",
+                    "method": "codes",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TotalLimits s)]",
-                    "class": "HasTotalLimits",
-                    "validate": true,
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasCodes",
+                    "validate": false,
                     "optional": true,
-                    "original": "total_limits"
+                    "original": "codes"
+                },
+                {
+                    "default": "TF.value P.False",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"is_account_level\" <$> TF.attribute",
+                    "name": "_isAccountLevel",
+                    "method": "isAccountLevel",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsAccountLevel",
+                    "validate": false,
+                    "optional": true,
+                    "original": "is_account_level"
                 },
                 {
                     "default": "TF.Nil",
@@ -775,89 +1204,27 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"transaction\" <$> TF.attribute",
-                    "name": "_transaction",
-                    "method": "transaction",
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Transaction s)]",
-                    "class": "HasTransaction",
-                    "validate": true,
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
                     "optional": true,
-                    "original": "transaction"
+                    "original": "name"
                 }
             ],
-            "name": "HttpProbe",
+            "name": "RdataGeoInfo",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "HttpProbe s",
-            "original": "http_probe"
-        },
-        {
-            "con": {
-                "smart": "newTotalLimits",
-                "name": "TotalLimits'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasCritical",
-                    "validate": false,
-                    "optional": true,
-                    "original": "critical"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"fail\" <$> TF.attribute",
-                    "name": "_fail",
-                    "method": "fail",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasFail",
-                    "validate": false,
-                    "optional": true,
-                    "original": "fail"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasWarning",
-                    "validate": false,
-                    "optional": true,
-                    "original": "warning"
-                }
-            ],
-            "name": "TotalLimits",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [],
-            "conflicts": [],
-            "type": "TotalLimits s",
-            "original": "total_limits"
+            "type": "RdataGeoInfo s",
+            "original": "rdata_geo_info"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/ultradns/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -924,7 +1291,7 @@
                     "name": "_noResponse",
                     "method": "noResponse",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (NoResponse s)]",
+                    "type": "TF.Attr s [TF.Attr s (DirpoolNoResponse s)]",
                     "class": "HasNoResponse",
                     "validate": true,
                     "optional": true,
@@ -940,7 +1307,7 @@
                     "name": "_rdata",
                     "method": "rdata",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rdata s)]",
+                    "type": "TF.Attr s [TF.Attr s (DirpoolRdata s)]",
                     "class": "HasRdata",
                     "validate": true,
                     "optional": false,
@@ -995,6 +1362,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/ultradns/r/dirpool.html",
             "name": "DirpoolResource",
             "threaded": true,
             "attributes": [
@@ -1058,7 +1426,7 @@
                     "name": "_rdata",
                     "method": "rdata",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rdata s)]",
+                    "type": "TF.Attr s [TF.Attr s (DirpoolRdata s)]",
                     "class": "HasRdata",
                     "validate": true,
                     "optional": false,
@@ -1133,7 +1501,7 @@
                     "name": "_httpProbe",
                     "method": "httpProbe",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (HttpProbe s)]",
+                    "type": "TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]",
                     "class": "HasHttpProbe",
                     "validate": true,
                     "optional": true,
@@ -1220,6 +1588,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/ultradns/r/probe_http.html",
             "name": "ProbeHttpResource",
             "threaded": true,
             "attributes": [
@@ -1374,7 +1743,7 @@
                     "name": "_pingProbe",
                     "method": "pingProbe",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (PingProbe s)]",
+                    "type": "TF.Attr s [TF.Attr s (ProbePingPingProbe s)]",
                     "class": "HasPingProbe",
                     "validate": true,
                     "optional": true,
@@ -1429,6 +1798,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/ultradns/r/probe_ping.html",
             "name": "ProbePingResource",
             "threaded": true,
             "attributes": [
@@ -1622,6 +1992,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/ultradns/r/rdpool.html",
             "name": "RdpoolResource",
             "threaded": true,
             "attributes": [
@@ -1783,6 +2154,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/ultradns/r/record.html",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [
@@ -1985,7 +2357,7 @@
                     "name": "_rdata",
                     "method": "rdata",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rdata s)]",
+                    "type": "TF.Attr s [TF.Attr s (TcpoolRdata s)]",
                     "class": "HasRdata",
                     "validate": true,
                     "optional": false,
@@ -2040,6 +2412,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/ultradns/r/tcpool.html",
             "name": "TcpoolResource",
             "threaded": true,
             "attributes": [
@@ -2103,7 +2476,7 @@
                     "name": "_rdata",
                     "method": "rdata",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rdata s)]",
+                    "type": "TF.Attr s [TF.Attr s (TcpoolRdata s)]",
                     "class": "HasRdata",
                     "validate": true,
                     "optional": false,
