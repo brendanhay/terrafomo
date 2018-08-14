@@ -55,7 +55,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @gitlab_project@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/d/project.html terraform documentation>
 -- for more information.
 data ProjectData s = ProjectData'
     { _id :: TF.Attr s P.Integer
@@ -87,7 +87,7 @@ instance P.HasId (ProjectData s) (TF.Attr s P.Integer) where
 
 -- | @gitlab_user@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/d/user.html terraform documentation>
 -- for more information.
 data UserData s = UserData'
     { _email :: TF.Attr s P.Text

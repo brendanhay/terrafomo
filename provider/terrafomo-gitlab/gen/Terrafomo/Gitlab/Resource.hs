@@ -75,20 +75,20 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @gitlab_deploy_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_deploy_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/deploy_key.html terraform documentation>
 -- for more information.
 data DeployKeyResource s = DeployKeyResource'
     { _canPush :: TF.Attr s P.Bool
-    -- ^ @can_push@ - (Optional)
+    -- ^ @can_push@ - (Optional, Forces New)
     --
     , _key     :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     --
     , _project :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    -- ^ @project@ - (Required, Forces New)
     --
     , _title   :: TF.Attr s P.Text
-    -- ^ @title@ - (Required)
+    -- ^ @title@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -139,7 +139,7 @@ instance P.HasTitle (DeployKeyResource s) (TF.Attr s P.Text) where
 
 -- | @gitlab_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/group.html terraform documentation>
 -- for more information.
 data GroupResource s = GroupResource'
     { _description          :: TF.Attr s P.Text
@@ -152,7 +152,7 @@ data GroupResource s = GroupResource'
     -- ^ @name@ - (Required)
     --
     , _parentId             :: TF.Attr s P.Integer
-    -- ^ @parent_id@ - (Optional)
+    -- ^ @parent_id@ - (Optional, Forces New)
     --
     , _path                 :: TF.Attr s P.Text
     -- ^ @path@ - (Required)
@@ -221,11 +221,11 @@ instance P.HasRequestAccessEnabled (GroupResource s) (TF.Attr s P.Bool) where
                (\s a -> s { _requestAccessEnabled = a } :: GroupResource s)
 
 instance s ~ s' => P.HasComputedVisibilityLevel (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedVisibilityLevel x = TF.compute (TF.refKey x) "_computedVisibilityLevel"
+    computedVisibilityLevel x = TF.compute (TF.refKey x) "visibility_level"
 
 -- | @gitlab_label@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_label terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/label.html terraform documentation>
 -- for more information.
 data LabelResource s = LabelResource'
     { _color       :: TF.Attr s P.Text
@@ -235,7 +235,7 @@ data LabelResource s = LabelResource'
     -- ^ @description@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Required)
@@ -289,7 +289,7 @@ instance P.HasProject (LabelResource s) (TF.Attr s P.Text) where
 
 -- | @gitlab_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/project.html terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
     { _defaultBranch        :: TF.Attr s P.Text
@@ -400,20 +400,20 @@ instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s P.Bool) where
                (\s a -> s { _wikiEnabled = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedHttpUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "_computedHttpUrlToRepo"
+    computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
 
 instance s ~ s' => P.HasComputedNamespaceId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Integer) where
-    computedNamespaceId x = TF.compute (TF.refKey x) "_computedNamespaceId"
+    computedNamespaceId x = TF.compute (TF.refKey x) "namespace_id"
 
 instance s ~ s' => P.HasComputedSshUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedSshUrlToRepo x = TF.compute (TF.refKey x) "_computedSshUrlToRepo"
+    computedSshUrlToRepo x = TF.compute (TF.refKey x) "ssh_url_to_repo"
 
 instance s ~ s' => P.HasComputedWebUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedWebUrl x = TF.compute (TF.refKey x) "_computedWebUrl"
+    computedWebUrl x = TF.compute (TF.refKey x) "web_url"
 
 -- | @gitlab_project_hook@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_project_hook terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/project_hook.html terraform documentation>
 -- for more information.
 data ProjectHookResource s = ProjectHookResource'
     { _enableSslVerification :: TF.Attr s P.Bool
@@ -556,17 +556,17 @@ instance P.HasWikiPageEvents (ProjectHookResource s) (TF.Attr s P.Bool) where
 
 -- | @gitlab_project_membership@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_project_membership terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/project_membership.html terraform documentation>
 -- for more information.
 data ProjectMembershipResource s = ProjectMembershipResource'
     { _accessLevel :: TF.Attr s P.Text
     -- ^ @access_level@ - (Required)
     --
     , _projectId   :: TF.Attr s P.Text
-    -- ^ @project_id@ - (Required)
+    -- ^ @project_id@ - (Required, Forces New)
     --
     , _userId      :: TF.Attr s P.Integer
-    -- ^ @user_id@ - (Required)
+    -- ^ @user_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -610,14 +610,14 @@ instance P.HasUserId (ProjectMembershipResource s) (TF.Attr s P.Integer) where
 
 -- | @gitlab_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Gitlab/gitlab_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/gitlab/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _canCreateGroup   :: TF.Attr s P.Bool
     -- ^ @can_create_group@ - (Optional)
     --
     , _email            :: TF.Attr s P.Text
-    -- ^ @email@ - (Required)
+    -- ^ @email@ - (Required, Forces New)
     --
     , _isAdmin          :: TF.Attr s P.Bool
     -- ^ @is_admin@ - (Optional)
