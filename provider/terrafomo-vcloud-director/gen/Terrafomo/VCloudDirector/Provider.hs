@@ -57,9 +57,6 @@ data Provider = Provider'
     -- If set, VCDClient will permit unverifiable SSL certificates.
     --
     , _maxRetryTimeout    :: P.Maybe P.Integer
-    -- ^ @maxRetryTimeout@ - (Optional)
-    --
-    , _maxRetryTimeout    :: P.Maybe P.Integer
     -- ^ @max_retry_timeout@ - (Optional)
     -- Max num seconds to wait for successful response when operating on resources
     -- within vCloud (defaults to 60)
@@ -96,7 +93,6 @@ newProvider _org _password _url _user =
     Provider'
         { _allowUnverifiedSsl = P.Nothing
         , _maxRetryTimeout = P.Nothing
-        , _maxRetryTimeout = P.Nothing
         , _org = _org
         , _password = _password
         , _url = _url
@@ -115,7 +111,6 @@ instance TF.IsSection Provider where
               (P.catMaybes
                   [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
                   , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , TF.assign "maxRetryTimeout" <$> _maxRetryTimeout
                   , TF.assign "max_retry_timeout" <$> _maxRetryTimeout
                   , P.Just $ TF.assign "org" _org
                   , P.Just $ TF.assign "password" _password
@@ -134,11 +129,6 @@ instance P.HasAllowUnverifiedSsl (Provider) (P.Maybe P.Bool) where
     allowUnverifiedSsl =
         P.lens (_allowUnverifiedSsl :: Provider -> P.Maybe P.Bool)
                (\s a -> s { _allowUnverifiedSsl = a } :: Provider)
-
-instance P.HasMaxRetryTimeout (Provider) (P.Maybe P.Integer) where
-    maxRetryTimeout =
-        P.lens (_maxRetryTimeout :: Provider -> P.Maybe P.Integer)
-               (\s a -> s { _maxRetryTimeout = a } :: Provider)
 
 instance P.HasMaxRetryTimeout (Provider) (P.Maybe P.Integer) where
     maxRetryTimeout =
