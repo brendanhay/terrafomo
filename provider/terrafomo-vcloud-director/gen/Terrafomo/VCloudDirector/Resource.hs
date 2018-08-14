@@ -75,23 +75,23 @@ import qualified Terrafomo.VCloudDirector.Types    as P
 
 -- | @vcd_dnat@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_dnat terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/dnat.html terraform documentation>
 -- for more information.
 data DnatResource s = DnatResource'
     { _edgeGateway    :: TF.Attr s P.Text
-    -- ^ @edge_gateway@ - (Required)
+    -- ^ @edge_gateway@ - (Required, Forces New)
     --
     , _externalIp     :: TF.Attr s P.Text
-    -- ^ @external_ip@ - (Required)
+    -- ^ @external_ip@ - (Required, Forces New)
     --
     , _internalIp     :: TF.Attr s P.Text
-    -- ^ @internal_ip@ - (Required)
+    -- ^ @internal_ip@ - (Required, Forces New)
     --
     , _port           :: TF.Attr s P.Integer
-    -- ^ @port@ - (Required)
+    -- ^ @port@ - (Required, Forces New)
     --
     , _translatedPort :: TF.Attr s P.Integer
-    -- ^ @translated_port@ - (Optional)
+    -- ^ @translated_port@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -150,44 +150,44 @@ instance P.HasTranslatedPort (DnatResource s) (TF.Attr s P.Integer) where
 
 -- | @vcd_edgegateway_vpn@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_edgegateway_vpn terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/edgegateway_vpn.html terraform documentation>
 -- for more information.
 data EdgegatewayVpnResource s = EdgegatewayVpnResource'
-    { _description        :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
     --
-    , _edgeGateway        :: TF.Attr s P.Text
-    -- ^ @edge_gateway@ - (Required)
+    , _edgeGateway :: TF.Attr s P.Text
+    -- ^ @edge_gateway@ - (Required, Forces New)
     --
     , _encryptionProtocol :: TF.Attr s P.Text
-    -- ^ @encryption_protocol@ - (Required)
+    -- ^ @encryption_protocol@ - (Required, Forces New)
     --
-    , _localId            :: TF.Attr s P.Text
-    -- ^ @local_id@ - (Required)
+    , _localId :: TF.Attr s P.Text
+    -- ^ @local_id@ - (Required, Forces New)
     --
-    , _localIpAddress     :: TF.Attr s P.Text
-    -- ^ @local_ip_address@ - (Required)
+    , _localIpAddress :: TF.Attr s P.Text
+    -- ^ @local_ip_address@ - (Required, Forces New)
     --
-    , _localSubnets       :: TF.Attr s [TF.Attr s (LocalSubnets s)]
-    -- ^ @local_subnets@ - (Optional)
+    , _localSubnets :: TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)]
+    -- ^ @local_subnets@ - (Optional, Forces New)
     --
-    , _mtu                :: TF.Attr s P.Integer
-    -- ^ @mtu@ - (Required)
+    , _mtu :: TF.Attr s P.Integer
+    -- ^ @mtu@ - (Required, Forces New)
     --
-    , _name               :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _peerId             :: TF.Attr s P.Text
-    -- ^ @peer_id@ - (Required)
+    , _peerId :: TF.Attr s P.Text
+    -- ^ @peer_id@ - (Required, Forces New)
     --
-    , _peerIpAddress      :: TF.Attr s P.Text
-    -- ^ @peer_ip_address@ - (Required)
+    , _peerIpAddress :: TF.Attr s P.Text
+    -- ^ @peer_ip_address@ - (Required, Forces New)
     --
-    , _peerSubnets        :: TF.Attr s [TF.Attr s (PeerSubnets s)]
-    -- ^ @peer_subnets@ - (Optional)
+    , _peerSubnets :: TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)]
+    -- ^ @peer_subnets@ - (Optional, Forces New)
     --
-    , _sharedSecret       :: TF.Attr s P.Text
-    -- ^ @shared_secret@ - (Required)
+    , _sharedSecret :: TF.Attr s P.Text
+    -- ^ @shared_secret@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -239,11 +239,11 @@ instance TF.IsValid (EdgegatewayVpnResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_localSubnets"
                   (_localSubnets
-                      :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (LocalSubnets s)])
+                      :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)])
                   TF.validator
            P.<> TF.settingsValidator "_peerSubnets"
                   (_peerSubnets
-                      :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (PeerSubnets s)])
+                      :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)])
                   TF.validator
 
 instance P.HasDescription (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
@@ -271,9 +271,9 @@ instance P.HasLocalIpAddress (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
         P.lens (_localIpAddress :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
                (\s a -> s { _localIpAddress = a } :: EdgegatewayVpnResource s)
 
-instance P.HasLocalSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (LocalSubnets s)]) where
+instance P.HasLocalSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)]) where
     localSubnets =
-        P.lens (_localSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (LocalSubnets s)])
+        P.lens (_localSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)])
                (\s a -> s { _localSubnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasMtu (EdgegatewayVpnResource s) (TF.Attr s P.Integer) where
@@ -296,9 +296,9 @@ instance P.HasPeerIpAddress (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
         P.lens (_peerIpAddress :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerIpAddress = a } :: EdgegatewayVpnResource s)
 
-instance P.HasPeerSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (PeerSubnets s)]) where
+instance P.HasPeerSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)]) where
     peerSubnets =
-        P.lens (_peerSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (PeerSubnets s)])
+        P.lens (_peerSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)])
                (\s a -> s { _peerSubnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasSharedSecret (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
@@ -308,17 +308,17 @@ instance P.HasSharedSecret (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
 
 -- | @vcd_firewall_rules@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_firewall_rules terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/firewall_rules.html terraform documentation>
 -- for more information.
 data FirewallRulesResource s = FirewallRulesResource'
     { _defaultAction :: TF.Attr s P.Text
-    -- ^ @default_action@ - (Required)
+    -- ^ @default_action@ - (Required, Forces New)
     --
     , _edgeGateway   :: TF.Attr s P.Text
-    -- ^ @edge_gateway@ - (Required)
+    -- ^ @edge_gateway@ - (Required, Forces New)
     --
-    , _rule          :: TF.Attr s [TF.Attr s (Rule s)]
-    -- ^ @rule@ - (Optional)
+    , _rule          :: TF.Attr s [TF.Attr s (FirewallRulesRule s)]
+    -- ^ @rule@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -345,7 +345,7 @@ instance TF.IsValid (FirewallRulesResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rule"
                   (_rule
-                      :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (Rule s)])
+                      :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (FirewallRulesRule s)])
                   TF.validator
 
 instance P.HasDefaultAction (FirewallRulesResource s) (TF.Attr s P.Text) where
@@ -358,48 +358,48 @@ instance P.HasEdgeGateway (FirewallRulesResource s) (TF.Attr s P.Text) where
         P.lens (_edgeGateway :: FirewallRulesResource s -> TF.Attr s P.Text)
                (\s a -> s { _edgeGateway = a } :: FirewallRulesResource s)
 
-instance P.HasRule (FirewallRulesResource s) (TF.Attr s [TF.Attr s (Rule s)]) where
+instance P.HasRule (FirewallRulesResource s) (TF.Attr s [TF.Attr s (FirewallRulesRule s)]) where
     rule =
-        P.lens (_rule :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (Rule s)])
+        P.lens (_rule :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (FirewallRulesRule s)])
                (\s a -> s { _rule = a } :: FirewallRulesResource s)
 
 -- | @vcd_network@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_network terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/network.html terraform documentation>
 -- for more information.
 data NetworkResource s = NetworkResource'
-    { _dhcpPool     :: TF.Attr s [TF.Attr s (DhcpPool s)]
-    -- ^ @dhcp_pool@ - (Optional)
+    { _dhcpPool     :: TF.Attr s [TF.Attr s (NetworkDhcpPool s)]
+    -- ^ @dhcp_pool@ - (Optional, Forces New)
     --
     , _dns1         :: TF.Attr s P.Text
-    -- ^ @dns1@ - (Optional)
+    -- ^ @dns1@ - (Optional, Forces New)
     --
     , _dns2         :: TF.Attr s P.Text
-    -- ^ @dns2@ - (Optional)
+    -- ^ @dns2@ - (Optional, Forces New)
     --
     , _dnsSuffix    :: TF.Attr s P.Text
-    -- ^ @dns_suffix@ - (Optional)
+    -- ^ @dns_suffix@ - (Optional, Forces New)
     --
     , _edgeGateway  :: TF.Attr s P.Text
-    -- ^ @edge_gateway@ - (Required)
+    -- ^ @edge_gateway@ - (Required, Forces New)
     --
     , _fenceMode    :: TF.Attr s P.Text
-    -- ^ @fence_mode@ - (Optional)
+    -- ^ @fence_mode@ - (Optional, Forces New)
     --
     , _gateway      :: TF.Attr s P.Text
-    -- ^ @gateway@ - (Required)
+    -- ^ @gateway@ - (Required, Forces New)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _netmask      :: TF.Attr s P.Text
-    -- ^ @netmask@ - (Optional)
+    -- ^ @netmask@ - (Optional, Forces New)
     --
     , _shared       :: TF.Attr s P.Bool
-    -- ^ @shared@ - (Optional)
+    -- ^ @shared@ - (Optional, Forces New)
     --
-    , _staticIpPool :: TF.Attr s [TF.Attr s (StaticIpPool s)]
-    -- ^ @static_ip_pool@ - (Optional)
+    , _staticIpPool :: TF.Attr s [TF.Attr s (NetworkStaticIpPool s)]
+    -- ^ @static_ip_pool@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -443,16 +443,16 @@ instance TF.IsValid (NetworkResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dhcpPool"
                   (_dhcpPool
-                      :: NetworkResource s -> TF.Attr s [TF.Attr s (DhcpPool s)])
+                      :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkDhcpPool s)])
                   TF.validator
            P.<> TF.settingsValidator "_staticIpPool"
                   (_staticIpPool
-                      :: NetworkResource s -> TF.Attr s [TF.Attr s (StaticIpPool s)])
+                      :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkStaticIpPool s)])
                   TF.validator
 
-instance P.HasDhcpPool (NetworkResource s) (TF.Attr s [TF.Attr s (DhcpPool s)]) where
+instance P.HasDhcpPool (NetworkResource s) (TF.Attr s [TF.Attr s (NetworkDhcpPool s)]) where
     dhcpPool =
-        P.lens (_dhcpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (DhcpPool s)])
+        P.lens (_dhcpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkDhcpPool s)])
                (\s a -> s { _dhcpPool = a } :: NetworkResource s)
 
 instance P.HasDns1 (NetworkResource s) (TF.Attr s P.Text) where
@@ -500,27 +500,27 @@ instance P.HasShared (NetworkResource s) (TF.Attr s P.Bool) where
         P.lens (_shared :: NetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _shared = a } :: NetworkResource s)
 
-instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (StaticIpPool s)]) where
+instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (NetworkStaticIpPool s)]) where
     staticIpPool =
-        P.lens (_staticIpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (StaticIpPool s)])
+        P.lens (_staticIpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkStaticIpPool s)])
                (\s a -> s { _staticIpPool = a } :: NetworkResource s)
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "_computedHref"
+    computedHref x = TF.compute (TF.refKey x) "href"
 
 -- | @vcd_snat@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_snat terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/snat.html terraform documentation>
 -- for more information.
 data SnatResource s = SnatResource'
     { _edgeGateway :: TF.Attr s P.Text
-    -- ^ @edge_gateway@ - (Required)
+    -- ^ @edge_gateway@ - (Required, Forces New)
     --
     , _externalIp  :: TF.Attr s P.Text
-    -- ^ @external_ip@ - (Required)
+    -- ^ @external_ip@ - (Required, Forces New)
     --
     , _internalIp  :: TF.Attr s P.Text
-    -- ^ @internal_ip@ - (Required)
+    -- ^ @internal_ip@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -564,7 +564,7 @@ instance P.HasInternalIp (SnatResource s) (TF.Attr s P.Text) where
 
 -- | @vcd_vapp@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_vapp terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/vapp.html terraform documentation>
 -- for more information.
 data VappResource s = VappResource'
     { _catalogName    :: TF.Attr s P.Text
@@ -577,7 +577,7 @@ data VappResource s = VappResource'
     -- ^ @description@ - (Optional)
     --
     , _initscript     :: TF.Attr s P.Text
-    -- ^ @initscript@ - (Optional)
+    -- ^ @initscript@ - (Optional, Forces New)
     --
     , _memory         :: TF.Attr s P.Integer
     -- ^ @memory@ - (Optional)
@@ -586,10 +586,10 @@ data VappResource s = VappResource'
     -- ^ @metadata@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _networkName    :: TF.Attr s P.Text
-    -- ^ @network_name@ - (Optional)
+    -- ^ @network_name@ - (Optional, Forces New)
     --
     , _ovf            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @ovf@ - (Optional)
@@ -601,7 +601,7 @@ data VappResource s = VappResource'
     -- ^ @storage_profile@ - (Optional)
     --
     , _templateName   :: TF.Attr s P.Text
-    -- ^ @template_name@ - (Optional)
+    -- ^ @template_name@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -705,45 +705,45 @@ instance P.HasTemplateName (VappResource s) (TF.Attr s P.Text) where
                (\s a -> s { _templateName = a } :: VappResource s)
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "_computedHref"
+    computedHref x = TF.compute (TF.refKey x) "href"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (VappResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
 -- | @vcd_vapp_vm@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/vcd_vapp_vm terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/vcd/r/vapp_vm.html terraform documentation>
 -- for more information.
 data VappVmResource s = VappVmResource'
     { _catalogName  :: TF.Attr s P.Text
-    -- ^ @catalog_name@ - (Required)
+    -- ^ @catalog_name@ - (Required, Forces New)
     --
     , _cpus         :: TF.Attr s P.Integer
     -- ^ @cpus@ - (Optional)
     --
     , _initscript   :: TF.Attr s P.Text
-    -- ^ @initscript@ - (Optional)
+    -- ^ @initscript@ - (Optional, Forces New)
     --
     , _memory       :: TF.Attr s P.Integer
     -- ^ @memory@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _networkHref  :: TF.Attr s P.Text
     -- ^ @network_href@ - (Optional)
     --
     , _networkName  :: TF.Attr s P.Text
-    -- ^ @network_name@ - (Optional)
+    -- ^ @network_name@ - (Optional, Forces New)
     --
     , _powerOn      :: TF.Attr s P.Bool
     -- ^ @power_on@ - (Optional)
     --
     , _templateName :: TF.Attr s P.Text
-    -- ^ @template_name@ - (Required)
+    -- ^ @template_name@ - (Required, Forces New)
     --
     , _vappName     :: TF.Attr s P.Text
-    -- ^ @vapp_name@ - (Required)
+    -- ^ @vapp_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -836,7 +836,7 @@ instance P.HasVappName (VappVmResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vappName = a } :: VappVmResource s)
 
 instance s ~ s' => P.HasComputedHref (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "_computedHref"
+    computedHref x = TF.compute (TF.refKey x) "href"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (VappVmResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
+    computedIp x = TF.compute (TF.refKey x) "ip"

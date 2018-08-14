@@ -49,7 +49,7 @@ import qualified Terrafomo.VCloudDirector.Types as P
 
 -- | The @VCloudDirector@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/VCloudDirector/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/vcd/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _allowUnverifiedSsl :: P.Maybe P.Bool
