@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/external/index.html",
     "dataSources": [
         {
             "con": {
@@ -56,6 +57,7 @@
                     "original": "working_dir"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/external/d/.html",
             "name": "Data",
             "threaded": true,
             "attributes": [
