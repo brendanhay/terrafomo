@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dry_run=$1
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+libraries=( $(${dir}/list-packages) )
+
+git_reset() {
+    git reset
+}
+
+trap git_reset ERR
+
+echo "Committing generated code"
+
+for library in ${libraries[@]}; do
+    git add "${library}" && git commit -m "Regenerating ${library##*/}"
+done
+
+echo "Done."
