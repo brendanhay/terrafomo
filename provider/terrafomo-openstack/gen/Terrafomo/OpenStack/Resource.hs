@@ -4306,9 +4306,6 @@ instance s ~ s' => P.HasComputedEnableSnat (TF.Ref s' (NetworkingRouterV2Resourc
 instance s ~ s' => P.HasComputedExternalFixedIp (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s [TF.Attr s (ExternalFixedIp s)]) where
     computedExternalFixedIp x = TF.compute (TF.refKey x) "_computedExternalFixedIp"
 
-instance s ~ s' => P.HasComputedExternalGateway (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Text) where
-    computedExternalGateway x = TF.compute (TF.refKey x) "_computedExternalGateway"
-
 instance s ~ s' => P.HasComputedExternalNetworkId (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Text) where
     computedExternalNetworkId x = TF.compute (TF.refKey x) "_computedExternalNetworkId"
 

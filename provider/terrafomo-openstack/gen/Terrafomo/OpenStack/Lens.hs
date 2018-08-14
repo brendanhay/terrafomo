@@ -387,7 +387,6 @@ module Terrafomo.OpenStack.Lens
     , HasComputedLifetime (..)
     , HasComputedData (..)
     , HasComputedDevice (..)
-    , HasComputedExternalGateway (..)
     , HasComputedType (..)
     , HasComputedDeleteAt (..)
     , HasComputedRoles (..)
@@ -2289,9 +2288,6 @@ class HasComputedData a b | a -> b where
 
 class HasComputedDevice a b | a -> b where
     computedDevice :: a -> b
-
-class HasComputedExternalGateway a b | a -> b where
-    computedExternalGateway :: a -> b
 
 class HasComputedType a b | a -> b where
     computedType :: a -> b
