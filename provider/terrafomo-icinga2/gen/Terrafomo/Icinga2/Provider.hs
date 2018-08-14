@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Icinga2@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apiPassword           :: P.Text

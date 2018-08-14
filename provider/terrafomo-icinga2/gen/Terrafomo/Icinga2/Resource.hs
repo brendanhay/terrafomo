@@ -71,21 +71,21 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @icinga2_checkcommand@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/icinga2_checkcommand terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/r/checkcommand.html terraform documentation>
 -- for more information.
 data CheckcommandResource s = CheckcommandResource'
     { _arguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @arguments@ - (Optional)
+    -- ^ @arguments@ - (Optional, Forces New)
     --
     , _command   :: TF.Attr s P.Text
-    -- ^ @command@ - (Required)
+    -- ^ @command@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Name
     --
     , _templates :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @templates@ - (Required)
+    -- ^ @templates@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -136,27 +136,27 @@ instance P.HasTemplates (CheckcommandResource s) (TF.Attr s [TF.Attr s P.Text]) 
 
 -- | @icinga2_host@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/icinga2_host terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/r/host.html terraform documentation>
 -- for more information.
 data HostResource s = HostResource'
     { _address      :: TF.Attr s P.Text
-    -- ^ @address@ - (Required)
+    -- ^ @address@ - (Required, Forces New)
     --
     , _checkCommand :: TF.Attr s P.Text
-    -- ^ @check_command@ - (Required)
+    -- ^ @check_command@ - (Required, Forces New)
     --
     , _groups       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @groups@ - (Optional)
+    -- ^ @groups@ - (Optional, Forces New)
     --
     , _hostname     :: TF.Attr s P.Text
-    -- ^ @hostname@ - (Required)
+    -- ^ @hostname@ - (Required, Forces New)
     -- Hostname
     --
     , _templates    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @templates@ - (Optional)
+    -- ^ @templates@ - (Optional, Forces New)
     --
     , _vars         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @vars@ - (Optional)
+    -- ^ @vars@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -221,15 +221,15 @@ instance P.HasVars (HostResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Te
 
 -- | @icinga2_hostgroup@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/icinga2_hostgroup terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/r/hostgroup.html terraform documentation>
 -- for more information.
 data HostgroupResource s = HostgroupResource'
     { _displayName :: TF.Attr s P.Text
-    -- ^ @display_name@ - (Required)
+    -- ^ @display_name@ - (Required, Forces New)
     -- Display name of Host Group
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Name
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -266,29 +266,29 @@ instance P.HasName (HostgroupResource s) (TF.Attr s P.Text) where
 
 -- | @icinga2_notification@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/icinga2_notification terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/r/notification.html terraform documentation>
 -- for more information.
 data NotificationResource s = NotificationResource'
     { _command     :: TF.Attr s P.Text
-    -- ^ @command@ - (Required)
+    -- ^ @command@ - (Required, Forces New)
     --
     , _hostname    :: TF.Attr s P.Text
-    -- ^ @hostname@ - (Required)
+    -- ^ @hostname@ - (Required, Forces New)
     --
     , _interval    :: TF.Attr s P.Integer
-    -- ^ @interval@ - (Optional)
+    -- ^ @interval@ - (Optional, Forces New)
     --
     , _servicename :: TF.Attr s P.Text
-    -- ^ @servicename@ - (Optional)
+    -- ^ @servicename@ - (Optional, Forces New)
     --
     , _templates   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @templates@ - (Optional)
+    -- ^ @templates@ - (Optional, Forces New)
     --
     , _users       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @users@ - (Optional)
+    -- ^ @users@ - (Optional, Forces New)
     --
     , _vars        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @vars@ - (Optional)
+    -- ^ @vars@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -359,19 +359,19 @@ instance P.HasVars (NotificationResource s) (TF.Attr s (P.HashMap P.Text (TF.Att
 
 -- | @icinga2_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/icinga2_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
     { _checkCommand :: TF.Attr s P.Text
-    -- ^ @check_command@ - (Required)
+    -- ^ @check_command@ - (Required, Forces New)
     -- CheckCommand
     --
     , _hostname     :: TF.Attr s P.Text
-    -- ^ @hostname@ - (Required)
+    -- ^ @hostname@ - (Required, Forces New)
     -- Hostname
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- ServiceName
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -416,14 +416,14 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
 
 -- | @icinga2_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Icinga2/icinga2_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/icinga2/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _email :: TF.Attr s P.Text
-    -- ^ @email@ - (Optional)
+    -- ^ @email@ - (Optional, Forces New)
     --
     , _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Username
     --
     } deriving (P.Show, P.Eq, P.Generic)
