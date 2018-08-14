@@ -1904,47 +1904,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "labels"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "An unstructured key value map stored with the storage class that may be used",
-                        "to store arbitrary metadata. More info:",
-                        "http://kubernetes.io/docs/user-guide/annotations"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"annotations\" <$> TF.attribute",
-                    "name": "_annotations",
-                    "method": "annotations",
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
-                    "class": "HasAnnotations",
-                    "validate": false,
-                    "optional": true,
-                    "original": "annotations"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Map of string keys and values that can be used to organize and categorize",
-                        "(scope and select) the storage class. May match selectors of replication",
-                        "controllers and services. More info:",
-                        "http://kubernetes.io/docs/user-guide/labels"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"labels\" <$> TF.attribute",
-                    "name": "_labels",
-                    "method": "labels",
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
-                    "class": "HasLabels",
-                    "validate": false,
-                    "optional": true,
-                    "original": "labels"
                 }
             ],
             "name": "StorageClassMetadata",
@@ -1983,101 +1942,6 @@
                     "conflicts": [
                         "_generateName"
                     ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "An opaque value that represents the internal version of this storage class",
-                        "that can be used by clients to determine when storage class has changed.",
-                        "Read more:",
-                        "https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#concurrency-control-and-consistency"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"resource_version\" <$> TF.attribute",
-                    "name": "_computedResourceVersion",
-                    "method": "computedResourceVersion",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedResourceVersion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "resource_version"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "A URL representing this storage class."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"self_link\" <$> TF.attribute",
-                    "name": "_computedSelfLink",
-                    "method": "computedSelfLink",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedSelfLink",
-                    "validate": false,
-                    "optional": false,
-                    "original": "self_link"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "The unique in time and space value for this storage class. More info:",
-                        "http://kubernetes.io/docs/user-guide/identifiers#uids"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"uid\" <$> TF.attribute",
-                    "name": "_computedUid",
-                    "method": "computedUid",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedUid",
-                    "validate": false,
-                    "optional": false,
-                    "original": "uid"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "A sequence number representing a specific generation of the desired state."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"generation\" <$> TF.attribute",
-                    "name": "_computedGeneration",
-                    "method": "computedGeneration",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedGeneration",
-                    "validate": false,
-                    "optional": false,
-                    "original": "generation"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Name of the storage class, must be unique. Cannot be updated. More info:",
-                        "http://kubernetes.io/docs/user-guide/identifiers#names"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_computedName",
-                    "method": "computedName",
-                    "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
@@ -6368,29 +6232,6 @@
                     "computed": true,
                     "required": false,
                     "help": [
-                        "The port on each node on which this service is exposed when `type` is",
-                        "`NodePort` or `LoadBalancer`. Usually assigned by the system. If specified,",
-                        "it will be allocated to the service if unused or else creation of the",
-                        "service will fail. Default is to auto-allocate a port if the `type` of this",
-                        "service requires one. More info:",
-                        "http://kubernetes.io/docs/user-guide/services#type--nodeport"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"node_port\" <$> TF.attribute",
-                    "name": "_computedNodePort",
-                    "method": "computedNodePort",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedNodePort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "node_port"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
                         "The port that will be exposed by this service."
                     ],
                     "forceNew": false,
@@ -6421,27 +6262,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "protocol"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Number or name of the port to access on the pods targeted by the service.",
-                        "Number must be in the range 1 to 65535. This field is ignored for services",
-                        "with `cluster_ip = \"None\"`. More info:",
-                        "http://kubernetes.io/docs/user-guide/services#defining-a-service"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"target_port\" <$> TF.attribute",
-                    "name": "_computedTargetPort",
-                    "method": "computedTargetPort",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedTargetPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "target_port"
                 }
             ],
             "parameters": [
@@ -10506,29 +10326,6 @@
                     "computed": true,
                     "required": false,
                     "help": [
-                        "The IP address of the service. It is usually assigned randomly by the",
-                        "master. If an address is specified manually and is not in use by others, it",
-                        "will be allocated to the service; otherwise, creation of the service will",
-                        "fail. `None` can be specified for headless services when proxying is not",
-                        "required. Ignored if type is `ExternalName`. More info:",
-                        "http://kubernetes.io/docs/user-guide/services#virtual-ips-and-service-proxies"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cluster_ip\" <$> TF.attribute",
-                    "name": "_computedClusterIp",
-                    "method": "computedClusterIp",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedClusterIp",
-                    "validate": false,
-                    "optional": false,
-                    "original": "cluster_ip"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
                         "A list of IP addresses for which nodes in the cluster will also accept",
                         "traffic for this service. These IPs are not managed by Kubernetes. The user",
                         "is responsible for ensuring that traffic arrives at a node with this IP.  A",
@@ -11351,65 +11148,6 @@
                     "validate": false,
                     "optional": true,
                     "original": "namespace"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "An unstructured key value map stored with the service that may be used to",
-                        "store arbitrary metadata. More info:",
-                        "http://kubernetes.io/docs/user-guide/annotations"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"annotations\" <$> TF.attribute",
-                    "name": "_annotations",
-                    "method": "annotations",
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
-                    "class": "HasAnnotations",
-                    "validate": false,
-                    "optional": true,
-                    "original": "annotations"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Map of string keys and values that can be used to organize and categorize",
-                        "(scope and select) the service. May match selectors of replication",
-                        "controllers and services. More info:",
-                        "http://kubernetes.io/docs/user-guide/labels"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"labels\" <$> TF.attribute",
-                    "name": "_labels",
-                    "method": "labels",
-                    "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
-                    "class": "HasLabels",
-                    "validate": false,
-                    "optional": true,
-                    "original": "labels"
-                },
-                {
-                    "default": "TF.value \"default\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [
-                        "Namespace defines the space within which name of the service must be unique."
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"namespace\" <$> TF.attribute",
-                    "name": "_namespace",
-                    "method": "namespace",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasNamespace",
-                    "validate": false,
-                    "optional": true,
-                    "original": "namespace"
                 }
             ],
             "name": "ServiceMetadata",
@@ -11448,100 +11186,6 @@
                     "conflicts": [
                         "_generateName"
                     ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "An opaque value that represents the internal version of this service that",
-                        "can be used by clients to determine when service has changed. Read more:",
-                        "https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#concurrency-control-and-consistency"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"resource_version\" <$> TF.attribute",
-                    "name": "_computedResourceVersion",
-                    "method": "computedResourceVersion",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedResourceVersion",
-                    "validate": false,
-                    "optional": false,
-                    "original": "resource_version"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "A URL representing this service."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"self_link\" <$> TF.attribute",
-                    "name": "_computedSelfLink",
-                    "method": "computedSelfLink",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedSelfLink",
-                    "validate": false,
-                    "optional": false,
-                    "original": "self_link"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "The unique in time and space value for this service. More info:",
-                        "http://kubernetes.io/docs/user-guide/identifiers#uids"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"uid\" <$> TF.attribute",
-                    "name": "_computedUid",
-                    "method": "computedUid",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedUid",
-                    "validate": false,
-                    "optional": false,
-                    "original": "uid"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "A sequence number representing a specific generation of the desired state."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"generation\" <$> TF.attribute",
-                    "name": "_computedGeneration",
-                    "method": "computedGeneration",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasComputedGeneration",
-                    "validate": false,
-                    "optional": false,
-                    "original": "generation"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [
-                        "Name of the service, must be unique. Cannot be updated. More info:",
-                        "http://kubernetes.io/docs/user-guide/identifiers#names"
-                    ],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_computedName",
-                    "method": "computedName",
-                    "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
