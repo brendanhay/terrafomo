@@ -2,10 +2,74 @@
     "settings": [
         {
             "con": {
-                "smart": "newPart",
-                "name": "Part'"
+                "smart": "newCloudinitConfigPart",
+                "name": "CloudinitConfigPart'"
             },
             "arguments": [
+                {
+                    "default": "_content",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "_content",
+                    "method": "content",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContent",
+                    "validate": false,
+                    "optional": false,
+                    "original": "content"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content_type\" <$> TF.attribute",
+                    "name": "_contentType",
+                    "method": "contentType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContentType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "content_type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"filename\" <$> TF.attribute",
+                    "name": "_filename",
+                    "method": "filename",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasFilename",
+                    "validate": false,
+                    "optional": true,
+                    "original": "filename"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"merge_type\" <$> TF.attribute",
+                    "name": "_mergeType",
+                    "method": "mergeType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasMergeType",
+                    "validate": false,
+                    "optional": true,
+                    "original": "merge_type"
+                },
                 {
                     "default": "_content",
                     "computed": false,
@@ -71,10 +135,26 @@
                     "original": "merge_type"
                 }
             ],
-            "name": "Part",
+            "name": "CloudinitConfigPart",
             "threaded": true,
             "attributes": [],
             "parameters": [
+                {
+                    "default": "_content",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"content\" <$> TF.attribute",
+                    "name": "_content",
+                    "method": "content",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasContent",
+                    "validate": false,
+                    "optional": false,
+                    "original": "content"
+                },
                 {
                     "default": "_content",
                     "computed": false,
@@ -93,10 +173,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Part s",
-            "original": "part"
+            "type": "CloudinitConfigPart s",
+            "original": "cloudinit_config_part"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/template/index.html",
     "dataSources": [
         {
             "con": {
@@ -146,13 +227,14 @@
                     "name": "_part",
                     "method": "part",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Part s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
                     "class": "HasPart",
                     "validate": true,
                     "optional": false,
                     "original": "part"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/template/d/cloudinit_config.html",
             "name": "CloudinitConfigData",
             "threaded": true,
             "attributes": [
@@ -186,7 +268,7 @@
                     "name": "_part",
                     "method": "part",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Part s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
                     "class": "HasPart",
                     "validate": true,
                     "optional": false,
@@ -240,6 +322,7 @@
                     "original": "vars"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/template/d/file.html",
             "name": "FileData",
             "threaded": true,
             "attributes": [
@@ -317,13 +400,14 @@
                     "name": "_part",
                     "method": "part",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Part s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
                     "class": "HasPart",
                     "validate": true,
                     "optional": false,
                     "original": "part"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/template/r/cloudinit_config.html",
             "name": "CloudinitConfigResource",
             "threaded": true,
             "attributes": [
@@ -357,7 +441,7 @@
                     "name": "_part",
                     "method": "part",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Part s)]",
+                    "type": "TF.Attr s [TF.Attr s (CloudinitConfigPart s)]",
                     "class": "HasPart",
                     "validate": true,
                     "optional": false,
@@ -429,6 +513,7 @@
                     "original": "vars"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/template/r/dir.html",
             "name": "DirResource",
             "threaded": true,
             "attributes": [],
@@ -517,6 +602,7 @@
                     "original": "vars"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/template/r/file.html",
             "name": "FileResource",
             "threaded": true,
             "attributes": [
