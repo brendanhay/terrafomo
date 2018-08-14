@@ -381,9 +381,11 @@ module Terrafomo.AliCloud.Lens
     , HasComputedSlbInternet (..)
     , HasComputedSlbIntranet (..)
     , HasComputedPortRange (..)
+    , HasComputedInternetMaxBandwidthOut (..)
     , HasComputedLocalName (..)
     , HasComputedDescription (..)
     , HasComputedVrouterId (..)
+    , HasComputedEngineVersion (..)
     , HasComputedGroupId (..)
     , HasComputedAliDomain (..)
     , HasComputedForwardTableIds (..)
@@ -395,7 +397,9 @@ module Terrafomo.AliCloud.Lens
     , HasComputedPublicIp (..)
     , HasComputedErrorCode (..)
     , HasComputedPolicy (..)
+    , HasComputedCreateTime (..)
     , HasComputedOwner (..)
+    , HasComputedEngine (..)
     , HasComputedRecurrenceValue (..)
     , HasComputedLocked (..)
     , HasComputedIsDefault (..)
@@ -414,6 +418,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedRegions (..)
     , HasComputedSubstitute (..)
     , HasComputedCidrBlock (..)
+    , HasComputedSecurityGroups (..)
     , HasComputedServerSideEncryption (..)
     , HasComputedRoleName (..)
     , HasComputedCapacity (..)
@@ -422,6 +427,8 @@ module Terrafomo.AliCloud.Lens
     , HasComputedNodes (..)
     , HasComputedCreationDate (..)
     , HasComputedEips (..)
+    , HasComputedSpotStrategy (..)
+    , HasComputedMasterInstanceId (..)
     , HasComputedHostName (..)
     , HasComputedState (..)
     , HasComputedBackendServers (..)
@@ -436,14 +443,17 @@ module Terrafomo.AliCloud.Lens
     , HasComputedVswitchId (..)
     , HasComputedPort (..)
     , HasComputedDocument (..)
+    , HasComputedInstanceChargeType (..)
     , HasComputedId (..)
     , HasComputedPriority (..)
     , HasComputedHostRecord (..)
     , HasComputedIsSelfShared (..)
     , HasComputedCurrent (..)
+    , HasComputedDbType (..)
     , HasComputedBeginKey (..)
     , HasComputedWorkerNodes (..)
     , HasComputedMemorySize (..)
+    , HasComputedSnapshotId (..)
     , HasComputedBandwidthPackageIds (..)
     , HasComputedName (..)
     , HasComputedExtranetEndpoint (..)
@@ -485,11 +495,13 @@ module Terrafomo.AliCloud.Lens
     , HasComputedZoneId (..)
     , HasComputedInstanceName (..)
     , HasComputedBandwidth (..)
+    , HasComputedNetType (..)
     , HasComputedType (..)
     , HasComputedRefererConfig (..)
     , HasComputedPlatform (..)
     , HasComputedAllocationId (..)
     , HasComputedRoles (..)
+    , HasComputedReadonlyInstanceIds (..)
     , HasComputedConnectionString (..)
     , HasComputedInitialCredit (..)
     , HasComputedAvailableInstanceTypes (..)
@@ -506,7 +518,9 @@ module Terrafomo.AliCloud.Lens
     , HasComputedCacheId (..)
     , HasComputedFamily (..)
     , HasComputedCreateDate (..)
+    , HasComputedChargeType (..)
     , HasComputedImageVersion (..)
+    , HasComputedConnectionMode (..)
     , HasComputedRules (..)
     , HasComputedLocation (..)
     , HasComputedBurstableInstance (..)
@@ -517,8 +531,11 @@ module Terrafomo.AliCloud.Lens
     , HasComputedInternetMaxBandwidthIn (..)
     , HasComputedHeaderId (..)
     , HasComputedDomainName (..)
+    , HasComputedTempInstanceId (..)
     , HasComputedSize (..)
     , HasComputedRegionId (..)
+    , HasComputedExpireTime (..)
+    , HasComputedGuardInstanceId (..)
     , HasComputedCpuCoreCount (..)
     , HasComputedSnatTableIds (..)
     , HasComputedPunyCode (..)
@@ -528,6 +545,7 @@ module Terrafomo.AliCloud.Lens
     , HasComputedVswitchIds (..)
     , HasComputedInternetChargeType (..)
     , HasComputedConnections (..)
+    , HasComputedComments (..)
     ) where
 
 import GHC.Base ((.))
@@ -2587,6 +2605,9 @@ class HasComputedSlbIntranet a b | a -> b where
 class HasComputedPortRange a b | a -> b where
     computedPortRange :: a -> b
 
+class HasComputedInternetMaxBandwidthOut a b | a -> b where
+    computedInternetMaxBandwidthOut :: a -> b
+
 class HasComputedLocalName a b | a -> b where
     computedLocalName :: a -> b
 
@@ -2595,6 +2616,9 @@ class HasComputedDescription a b | a -> b where
 
 class HasComputedVrouterId a b | a -> b where
     computedVrouterId :: a -> b
+
+class HasComputedEngineVersion a b | a -> b where
+    computedEngineVersion :: a -> b
 
 class HasComputedGroupId a b | a -> b where
     computedGroupId :: a -> b
@@ -2629,8 +2653,14 @@ class HasComputedErrorCode a b | a -> b where
 class HasComputedPolicy a b | a -> b where
     computedPolicy :: a -> b
 
+class HasComputedCreateTime a b | a -> b where
+    computedCreateTime :: a -> b
+
 class HasComputedOwner a b | a -> b where
     computedOwner :: a -> b
+
+class HasComputedEngine a b | a -> b where
+    computedEngine :: a -> b
 
 class HasComputedRecurrenceValue a b | a -> b where
     computedRecurrenceValue :: a -> b
@@ -2686,6 +2716,9 @@ class HasComputedSubstitute a b | a -> b where
 class HasComputedCidrBlock a b | a -> b where
     computedCidrBlock :: a -> b
 
+class HasComputedSecurityGroups a b | a -> b where
+    computedSecurityGroups :: a -> b
+
 class HasComputedServerSideEncryption a b | a -> b where
     computedServerSideEncryption :: a -> b
 
@@ -2709,6 +2742,12 @@ class HasComputedCreationDate a b | a -> b where
 
 class HasComputedEips a b | a -> b where
     computedEips :: a -> b
+
+class HasComputedSpotStrategy a b | a -> b where
+    computedSpotStrategy :: a -> b
+
+class HasComputedMasterInstanceId a b | a -> b where
+    computedMasterInstanceId :: a -> b
 
 class HasComputedHostName a b | a -> b where
     computedHostName :: a -> b
@@ -2752,6 +2791,9 @@ class HasComputedPort a b | a -> b where
 class HasComputedDocument a b | a -> b where
     computedDocument :: a -> b
 
+class HasComputedInstanceChargeType a b | a -> b where
+    computedInstanceChargeType :: a -> b
+
 class HasComputedId a b | a -> b where
     computedId :: a -> b
 
@@ -2767,6 +2809,9 @@ class HasComputedIsSelfShared a b | a -> b where
 class HasComputedCurrent a b | a -> b where
     computedCurrent :: a -> b
 
+class HasComputedDbType a b | a -> b where
+    computedDbType :: a -> b
+
 class HasComputedBeginKey a b | a -> b where
     computedBeginKey :: a -> b
 
@@ -2775,6 +2820,9 @@ class HasComputedWorkerNodes a b | a -> b where
 
 class HasComputedMemorySize a b | a -> b where
     computedMemorySize :: a -> b
+
+class HasComputedSnapshotId a b | a -> b where
+    computedSnapshotId :: a -> b
 
 class HasComputedBandwidthPackageIds a b | a -> b where
     computedBandwidthPackageIds :: a -> b
@@ -2899,6 +2947,9 @@ class HasComputedInstanceName a b | a -> b where
 class HasComputedBandwidth a b | a -> b where
     computedBandwidth :: a -> b
 
+class HasComputedNetType a b | a -> b where
+    computedNetType :: a -> b
+
 class HasComputedType a b | a -> b where
     computedType :: a -> b
 
@@ -2913,6 +2964,9 @@ class HasComputedAllocationId a b | a -> b where
 
 class HasComputedRoles a b | a -> b where
     computedRoles :: a -> b
+
+class HasComputedReadonlyInstanceIds a b | a -> b where
+    computedReadonlyInstanceIds :: a -> b
 
 class HasComputedConnectionString a b | a -> b where
     computedConnectionString :: a -> b
@@ -2962,8 +3016,14 @@ class HasComputedFamily a b | a -> b where
 class HasComputedCreateDate a b | a -> b where
     computedCreateDate :: a -> b
 
+class HasComputedChargeType a b | a -> b where
+    computedChargeType :: a -> b
+
 class HasComputedImageVersion a b | a -> b where
     computedImageVersion :: a -> b
+
+class HasComputedConnectionMode a b | a -> b where
+    computedConnectionMode :: a -> b
 
 class HasComputedRules a b | a -> b where
     computedRules :: a -> b
@@ -2995,11 +3055,20 @@ class HasComputedHeaderId a b | a -> b where
 class HasComputedDomainName a b | a -> b where
     computedDomainName :: a -> b
 
+class HasComputedTempInstanceId a b | a -> b where
+    computedTempInstanceId :: a -> b
+
 class HasComputedSize a b | a -> b where
     computedSize :: a -> b
 
 class HasComputedRegionId a b | a -> b where
     computedRegionId :: a -> b
+
+class HasComputedExpireTime a b | a -> b where
+    computedExpireTime :: a -> b
+
+class HasComputedGuardInstanceId a b | a -> b where
+    computedGuardInstanceId :: a -> b
 
 class HasComputedCpuCoreCount a b | a -> b where
     computedCpuCoreCount :: a -> b
@@ -3027,3 +3096,6 @@ class HasComputedInternetChargeType a b | a -> b where
 
 class HasComputedConnections a b | a -> b where
     computedConnections :: a -> b
+
+class HasComputedComments a b | a -> b where
+    computedComments :: a -> b

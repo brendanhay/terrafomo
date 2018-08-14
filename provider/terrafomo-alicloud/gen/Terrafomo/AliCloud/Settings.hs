@@ -18,193 +18,225 @@
 module Terrafomo.AliCloud.Settings
     (
     -- * Settings Datatypes
-    -- ** images
-      Images (..)
-    , newImages
+    -- ** cdn_domain_auth_config
+      CdnDomainAuthConfig (..)
+    , newCdnDomainAuthConfig
 
-    -- ** cors_rule
-    , CorsRule (..)
-    , newCorsRule
+    -- ** cdn_domain_http_header_config
+    , CdnDomainHttpHeaderConfig (..)
+    , newCdnDomainHttpHeaderConfig
 
-    -- ** primary_key
-    , PrimaryKey (..)
-    , newPrimaryKey
+    -- ** key_pairs_instances
+    , KeyPairsInstances (..)
+    , newKeyPairsInstances
 
-    -- ** groups
-    , Groups (..)
-    , newGroups
+    -- ** regions_regions
+    , RegionsRegions (..)
+    , newRegionsRegions
 
-    -- ** roles
-    , Roles (..)
-    , newRoles
+    -- ** zones_zones
+    , ZonesZones (..)
+    , newZonesZones
 
-    -- ** eips
-    , Eips (..)
-    , newEips
+    -- ** key_pairs_key_pairs
+    , KeyPairsKeyPairs (..)
+    , newKeyPairsKeyPairs
 
-    -- ** users
-    , Users (..)
-    , newUsers
+    -- ** vswitches_vswitches
+    , VswitchesVswitches (..)
+    , newVswitchesVswitches
 
-    -- ** rules
-    , Rules (..)
-    , newRules
+    -- ** eips_eips
+    , EipsEips (..)
+    , newEipsEips
 
-    -- ** statement
-    , Statement (..)
-    , newStatement
+    -- ** instances_instances
+    , InstancesInstances (..)
+    , newInstancesInstances
 
-    -- ** zones
-    , Zones (..)
-    , newZones
+    -- ** instance_types_instance_types
+    , InstanceTypesInstanceTypes (..)
+    , newInstanceTypesInstanceTypes
 
-    -- ** http_header_config
-    , HttpHeaderConfig (..)
-    , newHttpHeaderConfig
+    -- ** cs_kubernetes_connections
+    , CsKubernetesConnections (..)
+    , newCsKubernetesConnections
 
-    -- ** connections
-    , Connections (..)
-    , newConnections
+    -- ** cdn_domain_parameter_filter_config
+    , CdnDomainParameterFilterConfig (..)
+    , newCdnDomainParameterFilterConfig
 
-    -- ** master_nodes
-    , MasterNodes (..)
-    , newMasterNodes
+    -- ** cs_kubernetes_master_nodes
+    , CsKubernetesMasterNodes (..)
+    , newCsKubernetesMasterNodes
 
-    -- ** regions
-    , Regions (..)
-    , newRegions
+    -- ** oss_bucket_logging
+    , OssBucketLogging (..)
+    , newOssBucketLogging
 
-    -- ** expiration
-    , Expiration (..)
-    , newExpiration
+    -- ** cdn_domain_cache_config
+    , CdnDomainCacheConfig (..)
+    , newCdnDomainCacheConfig
 
-    -- ** website
-    , Website (..)
-    , newWebsite
+    -- ** cdn_domain_page_404_config
+    , CdnDomainPage404Config (..)
+    , newCdnDomainPage404Config
 
-    -- ** local_storage
-    , LocalStorage (..)
-    , newLocalStorage
+    -- ** fc_service_vpc_config
+    , FcServiceVpcConfig (..)
+    , newFcServiceVpcConfig
 
-    -- ** vpcs
-    , Vpcs (..)
-    , newVpcs
+    -- ** instance_types_gpu
+    , InstanceTypesGpu (..)
+    , newInstanceTypesGpu
 
-    -- ** servers
-    , Servers (..)
-    , newServers
+    -- ** ram_policy_statement
+    , RamPolicyStatement (..)
+    , newRamPolicyStatement
 
-    -- ** records
-    , Records (..)
-    , newRecords
+    -- ** log_store_index_full_text
+    , LogStoreIndexFullText (..)
+    , newLogStoreIndexFullText
 
-    -- ** cache_config
-    , CacheConfig (..)
-    , newCacheConfig
+    -- ** security_groups_groups
+    , SecurityGroupsGroups (..)
+    , newSecurityGroupsGroups
 
-    -- ** keys
-    , Keys (..)
-    , newKeys
+    -- ** ram_groups_groups
+    , RamGroupsGroups (..)
+    , newRamGroupsGroups
 
-    -- ** referer_config
-    , RefererConfig (..)
-    , newRefererConfig
+    -- ** oss_bucket_lifecycle_rule
+    , OssBucketLifecycleRule (..)
+    , newOssBucketLifecycleRule
 
-    -- ** lifecycle_rule
-    , LifecycleRule (..)
-    , newLifecycleRule
+    -- ** dns_domain_records_records
+    , DnsDomainRecordsRecords (..)
+    , newDnsDomainRecordsRecords
 
-    -- ** shards
-    , Shards (..)
-    , newShards
+    -- ** ram_policies_policies
+    , RamPoliciesPolicies (..)
+    , newRamPoliciesPolicies
 
-    -- ** vswitches
-    , Vswitches (..)
-    , newVswitches
+    -- ** images_disk_device_mappings
+    , ImagesDiskDeviceMappings (..)
+    , newImagesDiskDeviceMappings
 
-    -- ** gpu
-    , Gpu (..)
-    , newGpu
+    -- ** fc_service_log_config
+    , FcServiceLogConfig (..)
+    , newFcServiceLogConfig
 
-    -- ** instances
-    , Instances (..)
-    , newInstances
+    -- ** dns_groups_groups
+    , DnsGroupsGroups (..)
+    , newDnsGroupsGroups
 
-    -- ** disk_device_mappings
-    , DiskDeviceMappings (..)
-    , newDiskDeviceMappings
+    -- ** log_store_index_field_search
+    , LogStoreIndexFieldSearch (..)
+    , newLogStoreIndexFieldSearch
 
-    -- ** worker_nodes
-    , WorkerNodes (..)
-    , newWorkerNodes
+    -- ** instance_types_burstable_instance
+    , InstanceTypesBurstableInstance (..)
+    , newInstanceTypesBurstableInstance
 
-    -- ** data_disk
-    , DataDisk (..)
-    , newDataDisk
+    -- ** cs_application_services
+    , CsApplicationServices (..)
+    , newCsApplicationServices
 
-    -- ** instance_types
-    , InstanceTypes (..)
-    , newInstanceTypes
+    -- ** log_store_shards
+    , LogStoreShards (..)
+    , newLogStoreShards
 
-    -- ** auth_config
-    , AuthConfig (..)
-    , newAuthConfig
+    -- ** vpcs_vpcs
+    , VpcsVpcs (..)
+    , newVpcsVpcs
 
-    -- ** vpc_config
-    , VpcConfig (..)
-    , newVpcConfig
+    -- ** instances_disk_device_mappings
+    , InstancesDiskDeviceMappings (..)
+    , newInstancesDiskDeviceMappings
 
-    -- ** domains
-    , Domains (..)
-    , newDomains
+    -- ** images_images
+    , ImagesImages (..)
+    , newImagesImages
 
-    -- ** parameter_filter_config
-    , ParameterFilterConfig (..)
-    , newParameterFilterConfig
+    -- ** oss_bucket_website
+    , OssBucketWebsite (..)
+    , newOssBucketWebsite
 
-    -- ** refer_config
-    , ReferConfig (..)
-    , newReferConfig
+    -- ** ots_table_primary_key
+    , OtsTablePrimaryKey (..)
+    , newOtsTablePrimaryKey
 
-    -- ** nodes
-    , Nodes (..)
-    , newNodes
+    -- ** cdn_domain_refer_config
+    , CdnDomainReferConfig (..)
+    , newCdnDomainReferConfig
 
-    -- ** field_search
-    , FieldSearch (..)
-    , newFieldSearch
+    -- ** oss_bucket_cors_rule
+    , OssBucketCorsRule (..)
+    , newOssBucketCorsRule
 
-    -- ** logging
-    , Logging (..)
-    , newLogging
+    -- ** oss_bucket_referer_config
+    , OssBucketRefererConfig (..)
+    , newOssBucketRefererConfig
 
-    -- ** burstable_instance
-    , BurstableInstance (..)
-    , newBurstableInstance
+    -- ** kms_keys_keys
+    , KmsKeysKeys (..)
+    , newKmsKeysKeys
 
-    -- ** services
-    , Services (..)
-    , newServices
+    -- ** ess_scaling_configuration_data_disk
+    , EssScalingConfigurationDataDisk (..)
+    , newEssScalingConfigurationDataDisk
 
-    -- ** policies
-    , Policies (..)
-    , newPolicies
+    -- ** cs_kubernetes_worker_nodes
+    , CsKubernetesWorkerNodes (..)
+    , newCsKubernetesWorkerNodes
 
-    -- ** log_config
-    , LogConfig (..)
-    , newLogConfig
+    -- ** lifecycle_rule_expiration
+    , LifecycleRuleExpiration (..)
+    , newLifecycleRuleExpiration
 
-    -- ** full_text
-    , FullText (..)
-    , newFullText
+    -- ** slb_server_group_servers
+    , SlbServerGroupServers (..)
+    , newSlbServerGroupServers
 
-    -- ** key_pairs
-    , KeyPairs (..)
-    , newKeyPairs
+    -- ** security_group_rules_rules
+    , SecurityGroupRulesRules (..)
+    , newSecurityGroupRulesRules
 
-    -- ** page_404_config
-    , Page404Config (..)
-    , newPage404Config
+    -- ** dns_domain_groups_groups
+    , DnsDomainGroupsGroups (..)
+    , newDnsDomainGroupsGroups
+
+    -- ** db_instances_instances
+    , DbInstancesInstances (..)
+    , newDbInstancesInstances
+
+    -- ** container_cluster_nodes
+    , ContainerClusterNodes (..)
+    , newContainerClusterNodes
+
+    -- ** ram_users_users
+    , RamUsersUsers (..)
+    , newRamUsersUsers
+
+    -- ** ram_roles_roles
+    , RamRolesRoles (..)
+    , newRamRolesRoles
+
+    -- ** dns_domains_domains
+    , DnsDomainsDomains (..)
+    , newDnsDomainsDomains
+
+    -- ** cs_swarm_nodes
+    , CsSwarmNodes (..)
+    , newCsSwarmNodes
+
+    -- ** instance_types_local_storage
+    , InstanceTypesLocalStorage (..)
+    , newInstanceTypesLocalStorage
+
+    -- ** dns_records_records
+    , DnsRecordsRecords (..)
+    , newDnsRecordsRecords
 
     ) where
 
@@ -229,501 +261,53 @@ import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Validator      as TF
 
--- | @images@ nested settings.
-data Images s = Images'
-    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
+-- | @cdn_domain_auth_config@ nested settings.
+data CdnDomainAuthConfig s = CdnDomainAuthConfig'
+    { _authType :: TF.Attr s P.Text
+    -- ^ @auth_type@ - (Optional)
+    --
+    , _timeout  :: TF.Attr s P.Integer
+    -- ^ @timeout@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newImages
-    :: Images s
-newImages =
-    Images'
-        { _tags = TF.Nil
+newCdnDomainAuthConfig
+    :: CdnDomainAuthConfig s
+newCdnDomainAuthConfig =
+    CdnDomainAuthConfig'
+        { _authType = TF.value "no_auth"
+        , _timeout = TF.value 1800
         }
 
-instance P.Hashable  (Images s)
-instance TF.IsValue  (Images s)
-instance TF.IsObject (Images s) where
-    toObject Images'{..} = P.catMaybes
-        [ TF.assign "tags" <$> TF.attribute _tags
+instance P.Hashable  (CdnDomainAuthConfig s)
+instance TF.IsValue  (CdnDomainAuthConfig s)
+instance TF.IsObject (CdnDomainAuthConfig s) where
+    toObject CdnDomainAuthConfig'{..} = P.catMaybes
+        [ TF.assign "auth_type" <$> TF.attribute _authType
+        , TF.assign "timeout" <$> TF.attribute _timeout
         ]
 
-instance TF.IsValid (Images s) where
+instance TF.IsValid (CdnDomainAuthConfig s) where
     validator = P.mempty
 
-instance P.HasTags (Images s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: Images s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: Images s)
-
-instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedArchitecture x = TF.compute (TF.refKey x) "_computedArchitecture"
-
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedDiskDeviceMappings (TF.Ref s' (Images s)) (TF.Attr s [TF.Attr s (DiskDeviceMappings s)]) where
-    computedDiskDeviceMappings x = TF.compute (TF.refKey x) "_computedDiskDeviceMappings"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedImageId (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedImageId x = TF.compute (TF.refKey x) "_computedImageId"
-
-instance s ~ s' => P.HasComputedImageOwnerAlias (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedImageOwnerAlias x = TF.compute (TF.refKey x) "_computedImageOwnerAlias"
-
-instance s ~ s' => P.HasComputedImageVersion (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedImageVersion x = TF.compute (TF.refKey x) "_computedImageVersion"
-
-instance s ~ s' => P.HasComputedIsCopied (TF.Ref s' (Images s)) (TF.Attr s P.Bool) where
-    computedIsCopied x = TF.compute (TF.refKey x) "_computedIsCopied"
-
-instance s ~ s' => P.HasComputedIsSelfShared (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedIsSelfShared x = TF.compute (TF.refKey x) "_computedIsSelfShared"
-
-instance s ~ s' => P.HasComputedIsSubscribed (TF.Ref s' (Images s)) (TF.Attr s P.Bool) where
-    computedIsSubscribed x = TF.compute (TF.refKey x) "_computedIsSubscribed"
-
-instance s ~ s' => P.HasComputedIsSupportIoOptimized (TF.Ref s' (Images s)) (TF.Attr s P.Bool) where
-    computedIsSupportIoOptimized x = TF.compute (TF.refKey x) "_computedIsSupportIoOptimized"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
-instance s ~ s' => P.HasComputedOsName (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedOsName x = TF.compute (TF.refKey x) "_computedOsName"
-
-instance s ~ s' => P.HasComputedOsType (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedOsType x = TF.compute (TF.refKey x) "_computedOsType"
-
-instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
-
-instance s ~ s' => P.HasComputedProductCode (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedProductCode x = TF.compute (TF.refKey x) "_computedProductCode"
-
-instance s ~ s' => P.HasComputedProgress (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedProgress x = TF.compute (TF.refKey x) "_computedProgress"
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (Images s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
-instance s ~ s' => P.HasComputedUsage (TF.Ref s' (Images s)) (TF.Attr s P.Text) where
-    computedUsage x = TF.compute (TF.refKey x) "_computedUsage"
-
--- | @cors_rule@ nested settings.
-data CorsRule s = CorsRule'
-    { _allowedHeaders :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @allowed_headers@ - (Optional)
-    --
-    , _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @allowed_methods@ - (Required)
-    --
-    , _allowedOrigins :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @allowed_origins@ - (Required)
-    --
-    , _exposeHeaders  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @expose_headers@ - (Optional)
-    --
-    , _maxAgeSeconds  :: TF.Attr s P.Integer
-    -- ^ @max_age_seconds@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newCorsRule
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_origins@ - 'P.allowedOrigins'
-    -> CorsRule s
-newCorsRule _allowedMethods _allowedOrigins =
-    CorsRule'
-        { _allowedHeaders = TF.Nil
-        , _allowedMethods = _allowedMethods
-        , _allowedOrigins = _allowedOrigins
-        , _exposeHeaders = TF.Nil
-        , _maxAgeSeconds = TF.Nil
-        }
-
-instance P.Hashable  (CorsRule s)
-instance TF.IsValue  (CorsRule s)
-instance TF.IsObject (CorsRule s) where
-    toObject CorsRule'{..} = P.catMaybes
-        [ TF.assign "allowed_headers" <$> TF.attribute _allowedHeaders
-        , TF.assign "allowed_methods" <$> TF.attribute _allowedMethods
-        , TF.assign "allowed_origins" <$> TF.attribute _allowedOrigins
-        , TF.assign "expose_headers" <$> TF.attribute _exposeHeaders
-        , TF.assign "max_age_seconds" <$> TF.attribute _maxAgeSeconds
-        ]
-
-instance TF.IsValid (CorsRule s) where
-    validator = P.mempty
-
-instance P.HasAllowedHeaders (CorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
-    allowedHeaders =
-        P.lens (_allowedHeaders :: CorsRule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _allowedHeaders = a } :: CorsRule s)
-
-instance P.HasAllowedMethods (CorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
-    allowedMethods =
-        P.lens (_allowedMethods :: CorsRule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _allowedMethods = a } :: CorsRule s)
-
-instance P.HasAllowedOrigins (CorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
-    allowedOrigins =
-        P.lens (_allowedOrigins :: CorsRule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _allowedOrigins = a } :: CorsRule s)
-
-instance P.HasExposeHeaders (CorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
-    exposeHeaders =
-        P.lens (_exposeHeaders :: CorsRule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _exposeHeaders = a } :: CorsRule s)
-
-instance P.HasMaxAgeSeconds (CorsRule s) (TF.Attr s P.Integer) where
-    maxAgeSeconds =
-        P.lens (_maxAgeSeconds :: CorsRule s -> TF.Attr s P.Integer)
-               (\s a -> s { _maxAgeSeconds = a } :: CorsRule s)
-
--- | @primary_key@ nested settings.
-data PrimaryKey s = PrimaryKey'
-    { _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newPrimaryKey
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> PrimaryKey s
-newPrimaryKey _name _type' =
-    PrimaryKey'
-        { _name = _name
-        , _type' = _type'
-        }
-
-instance P.Hashable  (PrimaryKey s)
-instance TF.IsValue  (PrimaryKey s)
-instance TF.IsObject (PrimaryKey s) where
-    toObject PrimaryKey'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (PrimaryKey s) where
-    validator = P.mempty
-
-instance P.HasName (PrimaryKey s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: PrimaryKey s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: PrimaryKey s)
-
-instance P.HasType' (PrimaryKey s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: PrimaryKey s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: PrimaryKey s)
-
--- | @groups@ nested settings.
-data Groups s = Groups'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newGroups
-    :: Groups s
-newGroups =
-    Groups'
-
-instance P.Hashable  (Groups s)
-instance TF.IsValue  (Groups s)
-instance TF.IsObject (Groups s) where
-    toObject Groups' = []
-
-instance TF.IsValid (Groups s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (Groups s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Groups s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Groups s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedInnerAccess (TF.Ref s' (Groups s)) (TF.Attr s P.Bool) where
-    computedInnerAccess x = TF.compute (TF.refKey x) "_computedInnerAccess"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Groups s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Groups s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
-
--- | @roles@ nested settings.
-data Roles s = Roles'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newRoles
-    :: Roles s
-newRoles =
-    Roles'
-
-instance P.Hashable  (Roles s)
-instance TF.IsValue  (Roles s)
-instance TF.IsObject (Roles s) where
-    toObject Roles' = []
-
-instance TF.IsValid (Roles s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
-
-instance s ~ s' => P.HasComputedAssumeRolePolicyDocument (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedAssumeRolePolicyDocument x = TF.compute (TF.refKey x) "_computedAssumeRolePolicyDocument"
-
-instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedCreateDate x = TF.compute (TF.refKey x) "_computedCreateDate"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedDocument (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedDocument x = TF.compute (TF.refKey x) "_computedDocument"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
-instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (Roles s)) (TF.Attr s P.Text) where
-    computedUpdateDate x = TF.compute (TF.refKey x) "_computedUpdateDate"
-
--- | @eips@ nested settings.
-data Eips s = Eips'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newEips
-    :: Eips s
-newEips =
-    Eips'
-
-instance P.Hashable  (Eips s)
-instance TF.IsValue  (Eips s)
-instance TF.IsObject (Eips s) where
-    toObject Eips' = []
-
-instance TF.IsValid (Eips s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedBandwidth x = TF.compute (TF.refKey x) "_computedBandwidth"
-
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
-
-instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedInstanceType x = TF.compute (TF.refKey x) "_computedInstanceType"
-
-instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedInternetChargeType x = TF.compute (TF.refKey x) "_computedInternetChargeType"
-
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Eips s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
--- | @users@ nested settings.
-data Users s = Users'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newUsers
-    :: Users s
-newUsers =
-    Users'
-
-instance P.Hashable  (Users s)
-instance TF.IsValue  (Users s)
-instance TF.IsObject (Users s) where
-    toObject Users' = []
-
-instance TF.IsValid (Users s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedCreateDate x = TF.compute (TF.refKey x) "_computedCreateDate"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedLastLoginDate (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedLastLoginDate x = TF.compute (TF.refKey x) "_computedLastLoginDate"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Users s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
--- | @rules@ nested settings.
-data Rules s = Rules'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newRules
-    :: Rules s
-newRules =
-    Rules'
-
-instance P.Hashable  (Rules s)
-instance TF.IsValue  (Rules s)
-instance TF.IsObject (Rules s) where
-    toObject Rules' = []
-
-instance TF.IsValid (Rules s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedDestCidrIp (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedDestCidrIp x = TF.compute (TF.refKey x) "_computedDestCidrIp"
-
-instance s ~ s' => P.HasComputedDestGroupId (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedDestGroupId x = TF.compute (TF.refKey x) "_computedDestGroupId"
-
-instance s ~ s' => P.HasComputedDestGroupOwnerAccount (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedDestGroupOwnerAccount x = TF.compute (TF.refKey x) "_computedDestGroupOwnerAccount"
-
-instance s ~ s' => P.HasComputedDirection (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedDirection x = TF.compute (TF.refKey x) "_computedDirection"
-
-instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedIpProtocol x = TF.compute (TF.refKey x) "_computedIpProtocol"
-
-instance s ~ s' => P.HasComputedNicType (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedNicType x = TF.compute (TF.refKey x) "_computedNicType"
-
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedPolicy x = TF.compute (TF.refKey x) "_computedPolicy"
-
-instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedPortRange x = TF.compute (TF.refKey x) "_computedPortRange"
-
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (Rules s)) (TF.Attr s P.Integer) where
-    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
-
-instance s ~ s' => P.HasComputedSourceCidrIp (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedSourceCidrIp x = TF.compute (TF.refKey x) "_computedSourceCidrIp"
-
-instance s ~ s' => P.HasComputedSourceGroupId (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedSourceGroupId x = TF.compute (TF.refKey x) "_computedSourceGroupId"
-
-instance s ~ s' => P.HasComputedSourceGroupOwnerAccount (TF.Ref s' (Rules s)) (TF.Attr s P.Text) where
-    computedSourceGroupOwnerAccount x = TF.compute (TF.refKey x) "_computedSourceGroupOwnerAccount"
-
--- | @statement@ nested settings.
-data Statement s = Statement'
-    { _action   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @action@ - (Required)
-    --
-    , _effect   :: TF.Attr s P.Text
-    -- ^ @effect@ - (Required)
-    --
-    , _resource :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @resource@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newStatement
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @effect@ - 'P.effect'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @resource@ - 'P.resource'
-    -> Statement s
-newStatement _action _effect _resource =
-    Statement'
-        { _action = _action
-        , _effect = _effect
-        , _resource = _resource
-        }
-
-instance P.Hashable  (Statement s)
-instance TF.IsValue  (Statement s)
-instance TF.IsObject (Statement s) where
-    toObject Statement'{..} = P.catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "effect" <$> TF.attribute _effect
-        , TF.assign "resource" <$> TF.attribute _resource
-        ]
-
-instance TF.IsValid (Statement s) where
-    validator = P.mempty
-
-instance P.HasAction (Statement s) (TF.Attr s [TF.Attr s P.Text]) where
-    action =
-        P.lens (_action :: Statement s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _action = a } :: Statement s)
-
-instance P.HasEffect (Statement s) (TF.Attr s P.Text) where
-    effect =
-        P.lens (_effect :: Statement s -> TF.Attr s P.Text)
-               (\s a -> s { _effect = a } :: Statement s)
-
-instance P.HasResource (Statement s) (TF.Attr s [TF.Attr s P.Text]) where
-    resource =
-        P.lens (_resource :: Statement s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _resource = a } :: Statement s)
-
--- | @zones@ nested settings.
-data Zones s = Zones'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newZones
-    :: Zones s
-newZones =
-    Zones'
-
-instance P.Hashable  (Zones s)
-instance TF.IsValue  (Zones s)
-instance TF.IsObject (Zones s) where
-    toObject Zones' = []
-
-instance TF.IsValid (Zones s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAvailableDiskCategories (TF.Ref s' (Zones s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailableDiskCategories x = TF.compute (TF.refKey x) "_computedAvailableDiskCategories"
-
-instance s ~ s' => P.HasComputedAvailableInstanceTypes (TF.Ref s' (Zones s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailableInstanceTypes x = TF.compute (TF.refKey x) "_computedAvailableInstanceTypes"
-
-instance s ~ s' => P.HasComputedAvailableResourceCreation (TF.Ref s' (Zones s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailableResourceCreation x = TF.compute (TF.refKey x) "_computedAvailableResourceCreation"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Zones s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (Zones s)) (TF.Attr s P.Text) where
-    computedLocalName x = TF.compute (TF.refKey x) "_computedLocalName"
-
--- | @http_header_config@ nested settings.
-data HttpHeaderConfig s = HttpHeaderConfig'
+instance P.HasAuthType (CdnDomainAuthConfig s) (TF.Attr s P.Text) where
+    authType =
+        P.lens (_authType :: CdnDomainAuthConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _authType = a } :: CdnDomainAuthConfig s)
+
+instance P.HasTimeout (CdnDomainAuthConfig s) (TF.Attr s P.Integer) where
+    timeout =
+        P.lens (_timeout :: CdnDomainAuthConfig s -> TF.Attr s P.Integer)
+               (\s a -> s { _timeout = a } :: CdnDomainAuthConfig s)
+
+instance s ~ s' => P.HasComputedMasterKey (TF.Ref s' (CdnDomainAuthConfig s)) (TF.Attr s P.Text) where
+    computedMasterKey x = TF.compute (TF.refKey x) "master_key"
+
+instance s ~ s' => P.HasComputedSlaveKey (TF.Ref s' (CdnDomainAuthConfig s)) (TF.Attr s P.Text) where
+    computedSlaveKey x = TF.compute (TF.refKey x) "slave_key"
+
+-- | @cdn_domain_http_header_config@ nested settings.
+data CdnDomainHttpHeaderConfig s = CdnDomainHttpHeaderConfig'
     { _headerKey   :: TF.Attr s P.Text
     -- ^ @header_key@ - (Required)
     --
@@ -732,376 +316,530 @@ data HttpHeaderConfig s = HttpHeaderConfig'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newHttpHeaderConfig
+newCdnDomainHttpHeaderConfig
     :: TF.Attr s P.Text -- ^ @header_key@ - 'P.headerKey'
     -> TF.Attr s P.Text -- ^ @header_value@ - 'P.headerValue'
-    -> HttpHeaderConfig s
-newHttpHeaderConfig _headerKey _headerValue =
-    HttpHeaderConfig'
+    -> CdnDomainHttpHeaderConfig s
+newCdnDomainHttpHeaderConfig _headerKey _headerValue =
+    CdnDomainHttpHeaderConfig'
         { _headerKey = _headerKey
         , _headerValue = _headerValue
         }
 
-instance P.Hashable  (HttpHeaderConfig s)
-instance TF.IsValue  (HttpHeaderConfig s)
-instance TF.IsObject (HttpHeaderConfig s) where
-    toObject HttpHeaderConfig'{..} = P.catMaybes
+instance P.Hashable  (CdnDomainHttpHeaderConfig s)
+instance TF.IsValue  (CdnDomainHttpHeaderConfig s)
+instance TF.IsObject (CdnDomainHttpHeaderConfig s) where
+    toObject CdnDomainHttpHeaderConfig'{..} = P.catMaybes
         [ TF.assign "header_key" <$> TF.attribute _headerKey
         , TF.assign "header_value" <$> TF.attribute _headerValue
         ]
 
-instance TF.IsValid (HttpHeaderConfig s) where
+instance TF.IsValid (CdnDomainHttpHeaderConfig s) where
     validator = P.mempty
 
-instance P.HasHeaderKey (HttpHeaderConfig s) (TF.Attr s P.Text) where
+instance P.HasHeaderKey (CdnDomainHttpHeaderConfig s) (TF.Attr s P.Text) where
     headerKey =
-        P.lens (_headerKey :: HttpHeaderConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _headerKey = a } :: HttpHeaderConfig s)
+        P.lens (_headerKey :: CdnDomainHttpHeaderConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _headerKey = a } :: CdnDomainHttpHeaderConfig s)
 
-instance P.HasHeaderValue (HttpHeaderConfig s) (TF.Attr s P.Text) where
+instance P.HasHeaderValue (CdnDomainHttpHeaderConfig s) (TF.Attr s P.Text) where
     headerValue =
-        P.lens (_headerValue :: HttpHeaderConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _headerValue = a } :: HttpHeaderConfig s)
+        P.lens (_headerValue :: CdnDomainHttpHeaderConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _headerValue = a } :: CdnDomainHttpHeaderConfig s)
 
-instance s ~ s' => P.HasComputedHeaderId (TF.Ref s' (HttpHeaderConfig s)) (TF.Attr s P.Text) where
-    computedHeaderId x = TF.compute (TF.refKey x) "_computedHeaderId"
+instance s ~ s' => P.HasComputedHeaderId (TF.Ref s' (CdnDomainHttpHeaderConfig s)) (TF.Attr s P.Text) where
+    computedHeaderId x = TF.compute (TF.refKey x) "header_id"
 
--- | @connections@ nested settings.
-data Connections s = Connections'
+-- | @key_pairs_instances@ nested settings.
+data KeyPairsInstances s = KeyPairsInstances'
     deriving (P.Show, P.Eq, P.Generic)
 
-newConnections
-    :: Connections s
-newConnections =
-    Connections'
+newKeyPairsInstances
+    :: KeyPairsInstances s
+newKeyPairsInstances =
+    KeyPairsInstances'
 
-instance P.Hashable  (Connections s)
-instance TF.IsValue  (Connections s)
-instance TF.IsObject (Connections s) where
-    toObject Connections' = []
+instance P.Hashable  (KeyPairsInstances s)
+instance TF.IsValue  (KeyPairsInstances s)
+instance TF.IsObject (KeyPairsInstances s) where
+    toObject KeyPairsInstances' = []
 
-instance TF.IsValid (Connections s) where
+instance TF.IsValid (KeyPairsInstances s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedApiServerInternet (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
-    computedApiServerInternet x = TF.compute (TF.refKey x) "_computedApiServerInternet"
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedApiServerIntranet (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
-    computedApiServerIntranet x = TF.compute (TF.refKey x) "_computedApiServerIntranet"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedMasterPublicIp (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
-    computedMasterPublicIp x = TF.compute (TF.refKey x) "_computedMasterPublicIp"
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
 
-instance s ~ s' => P.HasComputedServiceDomain (TF.Ref s' (Connections s)) (TF.Attr s P.Text) where
-    computedServiceDomain x = TF.compute (TF.refKey x) "_computedServiceDomain"
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
--- | @master_nodes@ nested settings.
-data MasterNodes s = MasterNodes'
+instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedInstanceName x = TF.compute (TF.refKey x) "instance_name"
+
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
+
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+
+instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
+
+instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedRegionId x = TF.compute (TF.refKey x) "region_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (KeyPairsInstances s)) (TF.Attr s P.Text) where
+    computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
+
+-- | @regions_regions@ nested settings.
+data RegionsRegions s = RegionsRegions'
     deriving (P.Show, P.Eq, P.Generic)
 
-newMasterNodes
-    :: MasterNodes s
-newMasterNodes =
-    MasterNodes'
+newRegionsRegions
+    :: RegionsRegions s
+newRegionsRegions =
+    RegionsRegions'
 
-instance P.Hashable  (MasterNodes s)
-instance TF.IsValue  (MasterNodes s)
-instance TF.IsObject (MasterNodes s) where
-    toObject MasterNodes' = []
+instance P.Hashable  (RegionsRegions s)
+instance TF.IsValue  (RegionsRegions s)
+instance TF.IsObject (RegionsRegions s) where
+    toObject RegionsRegions' = []
 
-instance TF.IsValid (MasterNodes s) where
+instance TF.IsValid (RegionsRegions s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MasterNodes s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegionsRegions s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (MasterNodes s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (RegionsRegions s)) (TF.Attr s P.Text) where
+    computedLocalName x = TF.compute (TF.refKey x) "local_name"
 
-instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (MasterNodes s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
+instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (RegionsRegions s)) (TF.Attr s P.Text) where
+    computedRegionId x = TF.compute (TF.refKey x) "region_id"
 
--- | @regions@ nested settings.
-data Regions s = Regions'
+-- | @zones_zones@ nested settings.
+data ZonesZones s = ZonesZones'
     deriving (P.Show, P.Eq, P.Generic)
 
-newRegions
-    :: Regions s
-newRegions =
-    Regions'
+newZonesZones
+    :: ZonesZones s
+newZonesZones =
+    ZonesZones'
 
-instance P.Hashable  (Regions s)
-instance TF.IsValue  (Regions s)
-instance TF.IsObject (Regions s) where
-    toObject Regions' = []
+instance P.Hashable  (ZonesZones s)
+instance TF.IsValue  (ZonesZones s)
+instance TF.IsObject (ZonesZones s) where
+    toObject ZonesZones' = []
 
-instance TF.IsValid (Regions s) where
+instance TF.IsValid (ZonesZones s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Regions s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+instance s ~ s' => P.HasComputedAvailableDiskCategories (TF.Ref s' (ZonesZones s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailableDiskCategories x = TF.compute (TF.refKey x) "available_disk_categories"
 
-instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (Regions s)) (TF.Attr s P.Text) where
-    computedLocalName x = TF.compute (TF.refKey x) "_computedLocalName"
+instance s ~ s' => P.HasComputedAvailableInstanceTypes (TF.Ref s' (ZonesZones s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailableInstanceTypes x = TF.compute (TF.refKey x) "available_instance_types"
 
-instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (Regions s)) (TF.Attr s P.Text) where
-    computedRegionId x = TF.compute (TF.refKey x) "_computedRegionId"
+instance s ~ s' => P.HasComputedAvailableResourceCreation (TF.Ref s' (ZonesZones s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailableResourceCreation x = TF.compute (TF.refKey x) "available_resource_creation"
 
--- | @expiration@ nested settings.
-data Expiration s = Expiration'
-    { _date :: TF.Attr s P.Text
-    -- ^ @date@ - (Optional)
-    --
-    , _days :: TF.Attr s P.Integer
-    -- ^ @days@ - (Optional)
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ZonesZones s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocalName (TF.Ref s' (ZonesZones s)) (TF.Attr s P.Text) where
+    computedLocalName x = TF.compute (TF.refKey x) "local_name"
+
+-- | @key_pairs_key_pairs@ nested settings.
+data KeyPairsKeyPairs s = KeyPairsKeyPairs'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newKeyPairsKeyPairs
+    :: KeyPairsKeyPairs s
+newKeyPairsKeyPairs =
+    KeyPairsKeyPairs'
+
+instance P.Hashable  (KeyPairsKeyPairs s)
+instance TF.IsValue  (KeyPairsKeyPairs s)
+instance TF.IsObject (KeyPairsKeyPairs s) where
+    toObject KeyPairsKeyPairs' = []
+
+instance TF.IsValid (KeyPairsKeyPairs s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairsKeyPairs s)) (TF.Attr s P.Text) where
+    computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairsKeyPairs s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (KeyPairsKeyPairs s)) (TF.Attr s [TF.Attr s (KeyPairsInstances s)]) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
+
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairsKeyPairs s)) (TF.Attr s P.Text) where
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
+
+-- | @vswitches_vswitches@ nested settings.
+data VswitchesVswitches s = VswitchesVswitches'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newVswitchesVswitches
+    :: VswitchesVswitches s
+newVswitchesVswitches =
+    VswitchesVswitches'
+
+instance P.Hashable  (VswitchesVswitches s)
+instance TF.IsValue  (VswitchesVswitches s)
+instance TF.IsObject (VswitchesVswitches s) where
+    toObject VswitchesVswitches' = []
+
+instance TF.IsValid (VswitchesVswitches s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
+
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
+
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Bool) where
+    computedIsDefault x = TF.compute (TF.refKey x) "is_default"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (VswitchesVswitches s)) (TF.Attr s P.Text) where
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
+
+-- | @eips_eips@ nested settings.
+data EipsEips s = EipsEips'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newEipsEips
+    :: EipsEips s
+newEipsEips =
+    EipsEips'
+
+instance P.Hashable  (EipsEips s)
+instance TF.IsValue  (EipsEips s)
+instance TF.IsObject (EipsEips s) where
+    toObject EipsEips' = []
+
+instance TF.IsValid (EipsEips s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedBandwidth (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedBandwidth x = TF.compute (TF.refKey x) "bandwidth"
+
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedInternetChargeType x = TF.compute (TF.refKey x) "internet_charge_type"
+
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipsEips s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+-- | @instances_instances@ nested settings.
+data InstancesInstances s = InstancesInstances'
+    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newExpiration
-    :: Expiration s
-newExpiration =
-    Expiration'
-        { _date = TF.Nil
-        , _days = TF.Nil
+newInstancesInstances
+    :: InstancesInstances s
+newInstancesInstances =
+    InstancesInstances'
+        { _tags = TF.Nil
         }
 
-instance P.Hashable  (Expiration s)
-instance TF.IsValue  (Expiration s)
-instance TF.IsObject (Expiration s) where
-    toObject Expiration'{..} = P.catMaybes
-        [ TF.assign "date" <$> TF.attribute _date
-        , TF.assign "days" <$> TF.attribute _days
+instance P.Hashable  (InstancesInstances s)
+instance TF.IsValue  (InstancesInstances s)
+instance TF.IsObject (InstancesInstances s) where
+    toObject InstancesInstances'{..} = P.catMaybes
+        [ TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance TF.IsValid (Expiration s) where
+instance TF.IsValid (InstancesInstances s) where
     validator = P.mempty
 
-instance P.HasDate (Expiration s) (TF.Attr s P.Text) where
-    date =
-        P.lens (_date :: Expiration s -> TF.Attr s P.Text)
-               (\s a -> s { _date = a } :: Expiration s)
+instance P.HasTags (InstancesInstances s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: InstancesInstances s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: InstancesInstances s)
 
-instance P.HasDays (Expiration s) (TF.Attr s P.Integer) where
-    days =
-        P.lens (_days :: Expiration s -> TF.Attr s P.Integer)
-               (\s a -> s { _days = a } :: Expiration s)
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
--- | @website@ nested settings.
-data Website s = Website'
-    { _errorDocument :: TF.Attr s P.Text
-    -- ^ @error_document@ - (Optional)
-    --
-    , _indexDocument :: TF.Attr s P.Text
-    -- ^ @index_document@ - (Required)
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDiskDeviceMappings (TF.Ref s' (InstancesInstances s)) (TF.Attr s [TF.Attr s (InstancesDiskDeviceMappings s)]) where
+    computedDiskDeviceMappings x = TF.compute (TF.refKey x) "disk_device_mappings"
+
+instance s ~ s' => P.HasComputedEip (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedEip x = TF.compute (TF.refKey x) "eip"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
+
+instance s ~ s' => P.HasComputedInstanceChargeType (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedInstanceChargeType x = TF.compute (TF.refKey x) "instance_charge_type"
+
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedInternetChargeType (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedInternetChargeType x = TF.compute (TF.refKey x) "internet_charge_type"
+
+instance s ~ s' => P.HasComputedInternetMaxBandwidthOut (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Integer) where
+    computedInternetMaxBandwidthOut x = TF.compute (TF.refKey x) "internet_max_bandwidth_out"
+
+instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+
+instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
+
+instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedRegionId x = TF.compute (TF.refKey x) "region_id"
+
+instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (InstancesInstances s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
+
+instance s ~ s' => P.HasComputedSpotStrategy (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedSpotStrategy x = TF.compute (TF.refKey x) "spot_strategy"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (InstancesInstances s)) (TF.Attr s P.Text) where
+    computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
+
+-- | @instance_types_instance_types@ nested settings.
+data InstanceTypesInstanceTypes s = InstanceTypesInstanceTypes'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newInstanceTypesInstanceTypes
+    :: InstanceTypesInstanceTypes s
+newInstanceTypesInstanceTypes =
+    InstanceTypesInstanceTypes'
+
+instance P.Hashable  (InstanceTypesInstanceTypes s)
+instance TF.IsValue  (InstanceTypesInstanceTypes s)
+instance TF.IsObject (InstanceTypesInstanceTypes s) where
+    toObject InstanceTypesInstanceTypes' = []
+
+instance TF.IsValid (InstanceTypesInstanceTypes s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
+
+instance s ~ s' => P.HasComputedBurstableInstance (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s (P.HashMap P.Text (InstanceTypesBurstableInstance s))) where
+    computedBurstableInstance x = TF.compute (TF.refKey x) "burstable_instance"
+
+instance s ~ s' => P.HasComputedCpuCoreCount (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s P.Integer) where
+    computedCpuCoreCount x = TF.compute (TF.refKey x) "cpu_core_count"
+
+instance s ~ s' => P.HasComputedEniAmount (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s P.Integer) where
+    computedEniAmount x = TF.compute (TF.refKey x) "eni_amount"
+
+instance s ~ s' => P.HasComputedFamily (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s P.Text) where
+    computedFamily x = TF.compute (TF.refKey x) "family"
+
+instance s ~ s' => P.HasComputedGpu (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s (P.HashMap P.Text (InstanceTypesGpu s))) where
+    computedGpu x = TF.compute (TF.refKey x) "gpu"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLocalStorage (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s (P.HashMap P.Text (InstanceTypesLocalStorage s))) where
+    computedLocalStorage x = TF.compute (TF.refKey x) "local_storage"
+
+instance s ~ s' => P.HasComputedMemorySize (TF.Ref s' (InstanceTypesInstanceTypes s)) (TF.Attr s P.Double) where
+    computedMemorySize x = TF.compute (TF.refKey x) "memory_size"
+
+-- | @cs_kubernetes_connections@ nested settings.
+data CsKubernetesConnections s = CsKubernetesConnections'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newCsKubernetesConnections
+    :: CsKubernetesConnections s
+newCsKubernetesConnections =
+    CsKubernetesConnections'
+
+instance P.Hashable  (CsKubernetesConnections s)
+instance TF.IsValue  (CsKubernetesConnections s)
+instance TF.IsObject (CsKubernetesConnections s) where
+    toObject CsKubernetesConnections' = []
+
+instance TF.IsValid (CsKubernetesConnections s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedApiServerInternet (TF.Ref s' (CsKubernetesConnections s)) (TF.Attr s P.Text) where
+    computedApiServerInternet x = TF.compute (TF.refKey x) "api_server_internet"
+
+instance s ~ s' => P.HasComputedApiServerIntranet (TF.Ref s' (CsKubernetesConnections s)) (TF.Attr s P.Text) where
+    computedApiServerIntranet x = TF.compute (TF.refKey x) "api_server_intranet"
+
+instance s ~ s' => P.HasComputedMasterPublicIp (TF.Ref s' (CsKubernetesConnections s)) (TF.Attr s P.Text) where
+    computedMasterPublicIp x = TF.compute (TF.refKey x) "master_public_ip"
+
+instance s ~ s' => P.HasComputedServiceDomain (TF.Ref s' (CsKubernetesConnections s)) (TF.Attr s P.Text) where
+    computedServiceDomain x = TF.compute (TF.refKey x) "service_domain"
+
+-- | @cdn_domain_parameter_filter_config@ nested settings.
+data CdnDomainParameterFilterConfig s = CdnDomainParameterFilterConfig'
+    { _enable :: TF.Attr s P.Text
+    -- ^ @enable@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newWebsite
-    :: TF.Attr s P.Text -- ^ @index_document@ - 'P.indexDocument'
-    -> Website s
-newWebsite _indexDocument =
-    Website'
-        { _errorDocument = TF.Nil
-        , _indexDocument = _indexDocument
+newCdnDomainParameterFilterConfig
+    :: CdnDomainParameterFilterConfig s
+newCdnDomainParameterFilterConfig =
+    CdnDomainParameterFilterConfig'
+        { _enable = TF.value "off"
         }
 
-instance P.Hashable  (Website s)
-instance TF.IsValue  (Website s)
-instance TF.IsObject (Website s) where
-    toObject Website'{..} = P.catMaybes
-        [ TF.assign "error_document" <$> TF.attribute _errorDocument
-        , TF.assign "index_document" <$> TF.attribute _indexDocument
+instance P.Hashable  (CdnDomainParameterFilterConfig s)
+instance TF.IsValue  (CdnDomainParameterFilterConfig s)
+instance TF.IsObject (CdnDomainParameterFilterConfig s) where
+    toObject CdnDomainParameterFilterConfig'{..} = P.catMaybes
+        [ TF.assign "enable" <$> TF.attribute _enable
         ]
 
-instance TF.IsValid (Website s) where
+instance TF.IsValid (CdnDomainParameterFilterConfig s) where
     validator = P.mempty
 
-instance P.HasErrorDocument (Website s) (TF.Attr s P.Text) where
-    errorDocument =
-        P.lens (_errorDocument :: Website s -> TF.Attr s P.Text)
-               (\s a -> s { _errorDocument = a } :: Website s)
+instance P.HasEnable (CdnDomainParameterFilterConfig s) (TF.Attr s P.Text) where
+    enable =
+        P.lens (_enable :: CdnDomainParameterFilterConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _enable = a } :: CdnDomainParameterFilterConfig s)
 
-instance P.HasIndexDocument (Website s) (TF.Attr s P.Text) where
-    indexDocument =
-        P.lens (_indexDocument :: Website s -> TF.Attr s P.Text)
-               (\s a -> s { _indexDocument = a } :: Website s)
+instance s ~ s' => P.HasComputedHashKeyArgs (TF.Ref s' (CdnDomainParameterFilterConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedHashKeyArgs x = TF.compute (TF.refKey x) "hash_key_args"
 
--- | @local_storage@ nested settings.
-data LocalStorage s = LocalStorage'
+-- | @cs_kubernetes_master_nodes@ nested settings.
+data CsKubernetesMasterNodes s = CsKubernetesMasterNodes'
     deriving (P.Show, P.Eq, P.Generic)
 
-newLocalStorage
-    :: LocalStorage s
-newLocalStorage =
-    LocalStorage'
+newCsKubernetesMasterNodes
+    :: CsKubernetesMasterNodes s
+newCsKubernetesMasterNodes =
+    CsKubernetesMasterNodes'
 
-instance P.Hashable  (LocalStorage s)
-instance TF.IsValue  (LocalStorage s)
-instance TF.IsObject (LocalStorage s) where
-    toObject LocalStorage' = []
+instance P.Hashable  (CsKubernetesMasterNodes s)
+instance TF.IsValue  (CsKubernetesMasterNodes s)
+instance TF.IsObject (CsKubernetesMasterNodes s) where
+    toObject CsKubernetesMasterNodes' = []
 
-instance TF.IsValid (LocalStorage s) where
+instance TF.IsValid (CsKubernetesMasterNodes s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedAmount (TF.Ref s' (LocalStorage s)) (TF.Attr s P.Text) where
-    computedAmount x = TF.compute (TF.refKey x) "_computedAmount"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsKubernetesMasterNodes s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (LocalStorage s)) (TF.Attr s P.Text) where
-    computedCapacity x = TF.compute (TF.refKey x) "_computedCapacity"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsKubernetesMasterNodes s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedCategory (TF.Ref s' (LocalStorage s)) (TF.Attr s P.Text) where
-    computedCategory x = TF.compute (TF.refKey x) "_computedCategory"
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (CsKubernetesMasterNodes s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
--- | @vpcs@ nested settings.
-data Vpcs s = Vpcs'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newVpcs
-    :: Vpcs s
-newVpcs =
-    Vpcs'
-
-instance P.Hashable  (Vpcs s)
-instance TF.IsValue  (Vpcs s)
-instance TF.IsObject (Vpcs s) where
-    toObject Vpcs' = []
-
-instance TF.IsValid (Vpcs s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "_computedCidrBlock"
-
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (Vpcs s)) (TF.Attr s P.Bool) where
-    computedIsDefault x = TF.compute (TF.refKey x) "_computedIsDefault"
-
-instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedRegionId x = TF.compute (TF.refKey x) "_computedRegionId"
-
-instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedRouteTableId x = TF.compute (TF.refKey x) "_computedRouteTableId"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
-instance s ~ s' => P.HasComputedVpcName (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedVpcName x = TF.compute (TF.refKey x) "_computedVpcName"
-
-instance s ~ s' => P.HasComputedVrouterId (TF.Ref s' (Vpcs s)) (TF.Attr s P.Text) where
-    computedVrouterId x = TF.compute (TF.refKey x) "_computedVrouterId"
-
-instance s ~ s' => P.HasComputedVswitchIds (TF.Ref s' (Vpcs s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVswitchIds x = TF.compute (TF.refKey x) "_computedVswitchIds"
-
--- | @servers@ nested settings.
-data Servers s = Servers'
-    { _port      :: TF.Attr s P.Integer
-    -- ^ @port@ - (Required)
+-- | @oss_bucket_logging@ nested settings.
+data OssBucketLogging s = OssBucketLogging'
+    { _targetBucket :: TF.Attr s P.Text
+    -- ^ @target_bucket@ - (Required)
     --
-    , _serverIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @server_ids@ - (Required)
-    --
-    , _weight    :: TF.Attr s P.Integer
-    -- ^ @weight@ - (Optional)
+    , _targetPrefix :: TF.Attr s P.Text
+    -- ^ @target_prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newServers
-    :: TF.Attr s P.Integer -- ^ @port@ - 'P.port'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @server_ids@ - 'P.serverIds'
-    -> Servers s
-newServers _port _serverIds =
-    Servers'
-        { _port = _port
-        , _serverIds = _serverIds
-        , _weight = TF.value 100
+newOssBucketLogging
+    :: TF.Attr s P.Text -- ^ @target_bucket@ - 'P.targetBucket'
+    -> OssBucketLogging s
+newOssBucketLogging _targetBucket =
+    OssBucketLogging'
+        { _targetBucket = _targetBucket
+        , _targetPrefix = TF.Nil
         }
 
-instance P.Hashable  (Servers s)
-instance TF.IsValue  (Servers s)
-instance TF.IsObject (Servers s) where
-    toObject Servers'{..} = P.catMaybes
-        [ TF.assign "port" <$> TF.attribute _port
-        , TF.assign "server_ids" <$> TF.attribute _serverIds
-        , TF.assign "weight" <$> TF.attribute _weight
+instance P.Hashable  (OssBucketLogging s)
+instance TF.IsValue  (OssBucketLogging s)
+instance TF.IsObject (OssBucketLogging s) where
+    toObject OssBucketLogging'{..} = P.catMaybes
+        [ TF.assign "target_bucket" <$> TF.attribute _targetBucket
+        , TF.assign "target_prefix" <$> TF.attribute _targetPrefix
         ]
 
-instance TF.IsValid (Servers s) where
+instance TF.IsValid (OssBucketLogging s) where
     validator = P.mempty
 
-instance P.HasPort (Servers s) (TF.Attr s P.Integer) where
-    port =
-        P.lens (_port :: Servers s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Servers s)
+instance P.HasTargetBucket (OssBucketLogging s) (TF.Attr s P.Text) where
+    targetBucket =
+        P.lens (_targetBucket :: OssBucketLogging s -> TF.Attr s P.Text)
+               (\s a -> s { _targetBucket = a } :: OssBucketLogging s)
 
-instance P.HasServerIds (Servers s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    serverIds =
-        P.lens (_serverIds :: Servers s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _serverIds = a } :: Servers s)
+instance P.HasTargetPrefix (OssBucketLogging s) (TF.Attr s P.Text) where
+    targetPrefix =
+        P.lens (_targetPrefix :: OssBucketLogging s -> TF.Attr s P.Text)
+               (\s a -> s { _targetPrefix = a } :: OssBucketLogging s)
 
-instance P.HasWeight (Servers s) (TF.Attr s P.Integer) where
-    weight =
-        P.lens (_weight :: Servers s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a } :: Servers s)
-
--- | @records@ nested settings.
-data Records s = Records'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newRecords
-    :: Records s
-newRecords =
-    Records'
-
-instance P.Hashable  (Records s)
-instance TF.IsValue  (Records s)
-instance TF.IsObject (Records s) where
-    toObject Records' = []
-
-instance TF.IsValid (Records s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedDomainName x = TF.compute (TF.refKey x) "_computedDomainName"
-
-instance s ~ s' => P.HasComputedHostRecord (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedHostRecord x = TF.compute (TF.refKey x) "_computedHostRecord"
-
-instance s ~ s' => P.HasComputedLine (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedLine x = TF.compute (TF.refKey x) "_computedLine"
-
-instance s ~ s' => P.HasComputedLocked (TF.Ref s' (Records s)) (TF.Attr s P.Bool) where
-    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
-
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (Records s)) (TF.Attr s P.Integer) where
-    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
-
-instance s ~ s' => P.HasComputedRecordId (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedRecordId x = TF.compute (TF.refKey x) "_computedRecordId"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (Records s)) (TF.Attr s P.Double) where
-    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
-
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (Records s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "_computedValue"
-
--- | @cache_config@ nested settings.
-data CacheConfig s = CacheConfig'
+-- | @cdn_domain_cache_config@ nested settings.
+data CdnDomainCacheConfig s = CdnDomainCacheConfig'
     { _cacheContent :: TF.Attr s P.Text
     -- ^ @cache_content@ - (Required)
     --
@@ -1116,536 +854,99 @@ data CacheConfig s = CacheConfig'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newCacheConfig
+newCdnDomainCacheConfig
     :: TF.Attr s P.Text -- ^ @cache_content@ - 'P.cacheContent'
     -> TF.Attr s P.Text -- ^ @cache_type@ - 'P.cacheType'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
-    -> CacheConfig s
-newCacheConfig _cacheContent _cacheType _ttl =
-    CacheConfig'
+    -> CdnDomainCacheConfig s
+newCdnDomainCacheConfig _cacheContent _cacheType _ttl =
+    CdnDomainCacheConfig'
         { _cacheContent = _cacheContent
         , _cacheType = _cacheType
         , _ttl = _ttl
         , _weight = TF.value 1
         }
 
-instance P.Hashable  (CacheConfig s)
-instance TF.IsValue  (CacheConfig s)
-instance TF.IsObject (CacheConfig s) where
-    toObject CacheConfig'{..} = P.catMaybes
+instance P.Hashable  (CdnDomainCacheConfig s)
+instance TF.IsValue  (CdnDomainCacheConfig s)
+instance TF.IsObject (CdnDomainCacheConfig s) where
+    toObject CdnDomainCacheConfig'{..} = P.catMaybes
         [ TF.assign "cache_content" <$> TF.attribute _cacheContent
         , TF.assign "cache_type" <$> TF.attribute _cacheType
         , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-instance TF.IsValid (CacheConfig s) where
+instance TF.IsValid (CdnDomainCacheConfig s) where
     validator = P.mempty
 
-instance P.HasCacheContent (CacheConfig s) (TF.Attr s P.Text) where
+instance P.HasCacheContent (CdnDomainCacheConfig s) (TF.Attr s P.Text) where
     cacheContent =
-        P.lens (_cacheContent :: CacheConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheContent = a } :: CacheConfig s)
+        P.lens (_cacheContent :: CdnDomainCacheConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheContent = a } :: CdnDomainCacheConfig s)
 
-instance P.HasCacheType (CacheConfig s) (TF.Attr s P.Text) where
+instance P.HasCacheType (CdnDomainCacheConfig s) (TF.Attr s P.Text) where
     cacheType =
-        P.lens (_cacheType :: CacheConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheType = a } :: CacheConfig s)
+        P.lens (_cacheType :: CdnDomainCacheConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheType = a } :: CdnDomainCacheConfig s)
 
-instance P.HasTtl (CacheConfig s) (TF.Attr s P.Integer) where
+instance P.HasTtl (CdnDomainCacheConfig s) (TF.Attr s P.Integer) where
     ttl =
-        P.lens (_ttl :: CacheConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _ttl = a } :: CacheConfig s)
+        P.lens (_ttl :: CdnDomainCacheConfig s -> TF.Attr s P.Integer)
+               (\s a -> s { _ttl = a } :: CdnDomainCacheConfig s)
 
-instance P.HasWeight (CacheConfig s) (TF.Attr s P.Integer) where
+instance P.HasWeight (CdnDomainCacheConfig s) (TF.Attr s P.Integer) where
     weight =
-        P.lens (_weight :: CacheConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a } :: CacheConfig s)
+        P.lens (_weight :: CdnDomainCacheConfig s -> TF.Attr s P.Integer)
+               (\s a -> s { _weight = a } :: CdnDomainCacheConfig s)
 
-instance s ~ s' => P.HasComputedCacheId (TF.Ref s' (CacheConfig s)) (TF.Attr s P.Text) where
-    computedCacheId x = TF.compute (TF.refKey x) "_computedCacheId"
+instance s ~ s' => P.HasComputedCacheId (TF.Ref s' (CdnDomainCacheConfig s)) (TF.Attr s P.Text) where
+    computedCacheId x = TF.compute (TF.refKey x) "cache_id"
 
--- | @keys@ nested settings.
-data Keys s = Keys'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newKeys
-    :: Keys s
-newKeys =
-    Keys'
-
-instance P.Hashable  (Keys s)
-instance TF.IsValue  (Keys s)
-instance TF.IsObject (Keys s) where
-    toObject Keys' = []
-
-instance TF.IsValid (Keys s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
-
-instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
-
-instance s ~ s' => P.HasComputedCreator (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedCreator x = TF.compute (TF.refKey x) "_computedCreator"
-
-instance s ~ s' => P.HasComputedDeleteDate (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedDeleteDate x = TF.compute (TF.refKey x) "_computedDeleteDate"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Keys s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
--- | @referer_config@ nested settings.
-data RefererConfig s = RefererConfig'
-    { _allowEmpty :: TF.Attr s P.Bool
-    -- ^ @allow_empty@ - (Optional)
+-- | @cdn_domain_page_404_config@ nested settings.
+data CdnDomainPage404Config s = CdnDomainPage404Config'
+    { _customPageUrl :: TF.Attr s P.Text
+    -- ^ @custom_page_url@ - (Optional)
     --
-    , _referers   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @referers@ - (Required)
+    , _pageType      :: TF.Attr s P.Text
+    -- ^ @page_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRefererConfig
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @referers@ - 'P.referers'
-    -> RefererConfig s
-newRefererConfig _referers =
-    RefererConfig'
-        { _allowEmpty = TF.Nil
-        , _referers = _referers
+newCdnDomainPage404Config
+    :: CdnDomainPage404Config s
+newCdnDomainPage404Config =
+    CdnDomainPage404Config'
+        { _customPageUrl = TF.Nil
+        , _pageType = TF.value "default"
         }
 
-instance P.Hashable  (RefererConfig s)
-instance TF.IsValue  (RefererConfig s)
-instance TF.IsObject (RefererConfig s) where
-    toObject RefererConfig'{..} = P.catMaybes
-        [ TF.assign "allow_empty" <$> TF.attribute _allowEmpty
-        , TF.assign "referers" <$> TF.attribute _referers
+instance P.Hashable  (CdnDomainPage404Config s)
+instance TF.IsValue  (CdnDomainPage404Config s)
+instance TF.IsObject (CdnDomainPage404Config s) where
+    toObject CdnDomainPage404Config'{..} = P.catMaybes
+        [ TF.assign "custom_page_url" <$> TF.attribute _customPageUrl
+        , TF.assign "page_type" <$> TF.attribute _pageType
         ]
 
-instance TF.IsValid (RefererConfig s) where
+instance TF.IsValid (CdnDomainPage404Config s) where
     validator = P.mempty
 
-instance P.HasAllowEmpty (RefererConfig s) (TF.Attr s P.Bool) where
-    allowEmpty =
-        P.lens (_allowEmpty :: RefererConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowEmpty = a } :: RefererConfig s)
-
-instance P.HasReferers (RefererConfig s) (TF.Attr s [TF.Attr s P.Text]) where
-    referers =
-        P.lens (_referers :: RefererConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _referers = a } :: RefererConfig s)
-
--- | @lifecycle_rule@ nested settings.
-data LifecycleRule s = LifecycleRule'
-    { _enabled    :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Required)
-    --
-    , _expiration :: TF.Attr s [TF.Attr s (Expiration s)]
-    -- ^ @expiration@ - (Required)
-    --
-    , _prefix     :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newLifecycleRule
-    :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
-    -> TF.Attr s [TF.Attr s (Expiration s)] -- ^ @expiration@ - 'P.expiration'
-    -> TF.Attr s P.Text -- ^ @prefix@ - 'P.prefix'
-    -> LifecycleRule s
-newLifecycleRule _enabled _expiration _prefix =
-    LifecycleRule'
-        { _enabled = _enabled
-        , _expiration = _expiration
-        , _prefix = _prefix
-        }
-
-instance P.Hashable  (LifecycleRule s)
-instance TF.IsValue  (LifecycleRule s)
-instance TF.IsObject (LifecycleRule s) where
-    toObject LifecycleRule'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "expiration" <$> TF.attribute _expiration
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        ]
-
-instance TF.IsValid (LifecycleRule s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_expiration"
-                  (_expiration
-                      :: LifecycleRule s -> TF.Attr s [TF.Attr s (Expiration s)])
-                  TF.validator
-
-instance P.HasEnabled (LifecycleRule s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: LifecycleRule s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: LifecycleRule s)
-
-instance P.HasExpiration (LifecycleRule s) (TF.Attr s [TF.Attr s (Expiration s)]) where
-    expiration =
-        P.lens (_expiration :: LifecycleRule s -> TF.Attr s [TF.Attr s (Expiration s)])
-               (\s a -> s { _expiration = a } :: LifecycleRule s)
-
-instance P.HasPrefix (LifecycleRule s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: LifecycleRule s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: LifecycleRule s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LifecycleRule s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
--- | @shards@ nested settings.
-data Shards s = Shards'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newShards
-    :: Shards s
-newShards =
-    Shards'
-
-instance P.Hashable  (Shards s)
-instance TF.IsValue  (Shards s)
-instance TF.IsObject (Shards s) where
-    toObject Shards' = []
-
-instance TF.IsValid (Shards s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedBeginKey (TF.Ref s' (Shards s)) (TF.Attr s P.Text) where
-    computedBeginKey x = TF.compute (TF.refKey x) "_computedBeginKey"
-
-instance s ~ s' => P.HasComputedEndKey (TF.Ref s' (Shards s)) (TF.Attr s P.Text) where
-    computedEndKey x = TF.compute (TF.refKey x) "_computedEndKey"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Shards s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Shards s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
--- | @vswitches@ nested settings.
-data Vswitches s = Vswitches'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newVswitches
-    :: Vswitches s
-newVswitches =
-    Vswitches'
-
-instance P.Hashable  (Vswitches s)
-instance TF.IsValue  (Vswitches s)
-instance TF.IsObject (Vswitches s) where
-    toObject Vswitches' = []
-
-instance TF.IsValid (Vswitches s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "_computedCidrBlock"
-
-instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedCreationTime x = TF.compute (TF.refKey x) "_computedCreationTime"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (Vswitches s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceIds x = TF.compute (TF.refKey x) "_computedInstanceIds"
-
-instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (Vswitches s)) (TF.Attr s P.Bool) where
-    computedIsDefault x = TF.compute (TF.refKey x) "_computedIsDefault"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
-
-instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Vswitches s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
-
--- | @gpu@ nested settings.
-data Gpu s = Gpu'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newGpu
-    :: Gpu s
-newGpu =
-    Gpu'
-
-instance P.Hashable  (Gpu s)
-instance TF.IsValue  (Gpu s)
-instance TF.IsObject (Gpu s) where
-    toObject Gpu' = []
-
-instance TF.IsValid (Gpu s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAmount (TF.Ref s' (Gpu s)) (TF.Attr s P.Text) where
-    computedAmount x = TF.compute (TF.refKey x) "_computedAmount"
-
-instance s ~ s' => P.HasComputedCategory (TF.Ref s' (Gpu s)) (TF.Attr s P.Text) where
-    computedCategory x = TF.compute (TF.refKey x) "_computedCategory"
-
--- | @instances@ nested settings.
-data Instances s = Instances'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newInstances
-    :: Instances s
-newInstances =
-    Instances'
-
-instance P.Hashable  (Instances s)
-instance TF.IsValue  (Instances s)
-instance TF.IsObject (Instances s) where
-    toObject Instances' = []
-
-instance TF.IsValid (Instances s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
-
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedImageId (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedImageId x = TF.compute (TF.refKey x) "_computedImageId"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
-
-instance s ~ s' => P.HasComputedInstanceName (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedInstanceName x = TF.compute (TF.refKey x) "_computedInstanceName"
-
-instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedInstanceType x = TF.compute (TF.refKey x) "_computedInstanceType"
-
-instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedKeyName x = TF.compute (TF.refKey x) "_computedKeyName"
-
-instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
-
-instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "_computedPublicIp"
-
-instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedRegionId x = TF.compute (TF.refKey x) "_computedRegionId"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
-
-instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (Instances s)) (TF.Attr s P.Text) where
-    computedVswitchId x = TF.compute (TF.refKey x) "_computedVswitchId"
-
--- | @disk_device_mappings@ nested settings.
-data DiskDeviceMappings s = DiskDeviceMappings'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newDiskDeviceMappings
-    :: DiskDeviceMappings s
-newDiskDeviceMappings =
-    DiskDeviceMappings'
-
-instance P.Hashable  (DiskDeviceMappings s)
-instance TF.IsValue  (DiskDeviceMappings s)
-instance TF.IsObject (DiskDeviceMappings s) where
-    toObject DiskDeviceMappings' = []
-
-instance TF.IsValid (DiskDeviceMappings s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedCategory (TF.Ref s' (DiskDeviceMappings s)) (TF.Attr s P.Text) where
-    computedCategory x = TF.compute (TF.refKey x) "_computedCategory"
-
-instance s ~ s' => P.HasComputedDevice (TF.Ref s' (DiskDeviceMappings s)) (TF.Attr s P.Text) where
-    computedDevice x = TF.compute (TF.refKey x) "_computedDevice"
-
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DiskDeviceMappings s)) (TF.Attr s P.Integer) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (DiskDeviceMappings s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
-
--- | @worker_nodes@ nested settings.
-data WorkerNodes s = WorkerNodes'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newWorkerNodes
-    :: WorkerNodes s
-newWorkerNodes =
-    WorkerNodes'
-
-instance P.Hashable  (WorkerNodes s)
-instance TF.IsValue  (WorkerNodes s)
-instance TF.IsObject (WorkerNodes s) where
-    toObject WorkerNodes' = []
-
-instance TF.IsValid (WorkerNodes s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (WorkerNodes s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (WorkerNodes s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
-instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (WorkerNodes s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
-
--- | @data_disk@ nested settings.
-data DataDisk s = DataDisk'
-    { _category   :: TF.Attr s P.Text
-    -- ^ @category@ - (Optional)
-    --
-    , _size       :: TF.Attr s P.Integer
-    -- ^ @size@ - (Optional)
-    --
-    , _snapshotId :: TF.Attr s P.Text
-    -- ^ @snapshot_id@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newDataDisk
-    :: DataDisk s
-newDataDisk =
-    DataDisk'
-        { _category = TF.Nil
-        , _size = TF.Nil
-        , _snapshotId = TF.Nil
-        }
-
-instance P.Hashable  (DataDisk s)
-instance TF.IsValue  (DataDisk s)
-instance TF.IsObject (DataDisk s) where
-    toObject DataDisk'{..} = P.catMaybes
-        [ TF.assign "category" <$> TF.attribute _category
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
-        ]
-
-instance TF.IsValid (DataDisk s) where
-    validator = P.mempty
-
-instance P.HasCategory (DataDisk s) (TF.Attr s P.Text) where
-    category =
-        P.lens (_category :: DataDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _category = a } :: DataDisk s)
-
-instance P.HasSize (DataDisk s) (TF.Attr s P.Integer) where
-    size =
-        P.lens (_size :: DataDisk s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a } :: DataDisk s)
-
-instance P.HasSnapshotId (DataDisk s) (TF.Attr s P.Text) where
-    snapshotId =
-        P.lens (_snapshotId :: DataDisk s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotId = a } :: DataDisk s)
-
--- | @instance_types@ nested settings.
-data InstanceTypes s = InstanceTypes'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newInstanceTypes
-    :: InstanceTypes s
-newInstanceTypes =
-    InstanceTypes'
-
-instance P.Hashable  (InstanceTypes s)
-instance TF.IsValue  (InstanceTypes s)
-instance TF.IsObject (InstanceTypes s) where
-    toObject InstanceTypes' = []
-
-instance TF.IsValid (InstanceTypes s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (InstanceTypes s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "_computedAvailabilityZones"
-
-instance s ~ s' => P.HasComputedBurstableInstance (TF.Ref s' (InstanceTypes s)) (TF.Attr s (P.HashMap P.Text (BurstableInstance s))) where
-    computedBurstableInstance x = TF.compute (TF.refKey x) "_computedBurstableInstance"
-
-instance s ~ s' => P.HasComputedCpuCoreCount (TF.Ref s' (InstanceTypes s)) (TF.Attr s P.Integer) where
-    computedCpuCoreCount x = TF.compute (TF.refKey x) "_computedCpuCoreCount"
-
-instance s ~ s' => P.HasComputedEniAmount (TF.Ref s' (InstanceTypes s)) (TF.Attr s P.Integer) where
-    computedEniAmount x = TF.compute (TF.refKey x) "_computedEniAmount"
-
-instance s ~ s' => P.HasComputedFamily (TF.Ref s' (InstanceTypes s)) (TF.Attr s P.Text) where
-    computedFamily x = TF.compute (TF.refKey x) "_computedFamily"
-
-instance s ~ s' => P.HasComputedGpu (TF.Ref s' (InstanceTypes s)) (TF.Attr s (P.HashMap P.Text (Gpu s))) where
-    computedGpu x = TF.compute (TF.refKey x) "_computedGpu"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTypes s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
-
-instance s ~ s' => P.HasComputedLocalStorage (TF.Ref s' (InstanceTypes s)) (TF.Attr s (P.HashMap P.Text (LocalStorage s))) where
-    computedLocalStorage x = TF.compute (TF.refKey x) "_computedLocalStorage"
-
-instance s ~ s' => P.HasComputedMemorySize (TF.Ref s' (InstanceTypes s)) (TF.Attr s P.Double) where
-    computedMemorySize x = TF.compute (TF.refKey x) "_computedMemorySize"
-
--- | @auth_config@ nested settings.
-data AuthConfig s = AuthConfig'
-    { _authType :: TF.Attr s P.Text
-    -- ^ @auth_type@ - (Optional)
-    --
-    , _timeout  :: TF.Attr s P.Integer
-    -- ^ @timeout@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newAuthConfig
-    :: AuthConfig s
-newAuthConfig =
-    AuthConfig'
-        { _authType = TF.value "no_auth"
-        , _timeout = TF.value 1800
-        }
-
-instance P.Hashable  (AuthConfig s)
-instance TF.IsValue  (AuthConfig s)
-instance TF.IsObject (AuthConfig s) where
-    toObject AuthConfig'{..} = P.catMaybes
-        [ TF.assign "auth_type" <$> TF.attribute _authType
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
-instance TF.IsValid (AuthConfig s) where
-    validator = P.mempty
-
-instance P.HasAuthType (AuthConfig s) (TF.Attr s P.Text) where
-    authType =
-        P.lens (_authType :: AuthConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _authType = a } :: AuthConfig s)
-
-instance P.HasTimeout (AuthConfig s) (TF.Attr s P.Integer) where
-    timeout =
-        P.lens (_timeout :: AuthConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeout = a } :: AuthConfig s)
-
-instance s ~ s' => P.HasComputedMasterKey (TF.Ref s' (AuthConfig s)) (TF.Attr s P.Text) where
-    computedMasterKey x = TF.compute (TF.refKey x) "_computedMasterKey"
-
-instance s ~ s' => P.HasComputedSlaveKey (TF.Ref s' (AuthConfig s)) (TF.Attr s P.Text) where
-    computedSlaveKey x = TF.compute (TF.refKey x) "_computedSlaveKey"
-
--- | @vpc_config@ nested settings.
-data VpcConfig s = VpcConfig'
+instance P.HasCustomPageUrl (CdnDomainPage404Config s) (TF.Attr s P.Text) where
+    customPageUrl =
+        P.lens (_customPageUrl :: CdnDomainPage404Config s -> TF.Attr s P.Text)
+               (\s a -> s { _customPageUrl = a } :: CdnDomainPage404Config s)
+
+instance P.HasPageType (CdnDomainPage404Config s) (TF.Attr s P.Text) where
+    pageType =
+        P.lens (_pageType :: CdnDomainPage404Config s -> TF.Attr s P.Text)
+               (\s a -> s { _pageType = a } :: CdnDomainPage404Config s)
+
+instance s ~ s' => P.HasComputedErrorCode (TF.Ref s' (CdnDomainPage404Config s)) (TF.Attr s P.Text) where
+    computedErrorCode x = TF.compute (TF.refKey x) "error_code"
+
+-- | @fc_service_vpc_config@ nested settings.
+data FcServiceVpcConfig s = FcServiceVpcConfig'
     { _securityGroupId :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required)
     --
@@ -1654,200 +955,461 @@ data VpcConfig s = VpcConfig'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newVpcConfig
+newFcServiceVpcConfig
     :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @vswitch_ids@ - 'P.vswitchIds'
-    -> VpcConfig s
-newVpcConfig _securityGroupId _vswitchIds =
-    VpcConfig'
+    -> FcServiceVpcConfig s
+newFcServiceVpcConfig _securityGroupId _vswitchIds =
+    FcServiceVpcConfig'
         { _securityGroupId = _securityGroupId
         , _vswitchIds = _vswitchIds
         }
 
-instance P.Hashable  (VpcConfig s)
-instance TF.IsValue  (VpcConfig s)
-instance TF.IsObject (VpcConfig s) where
-    toObject VpcConfig'{..} = P.catMaybes
+instance P.Hashable  (FcServiceVpcConfig s)
+instance TF.IsValue  (FcServiceVpcConfig s)
+instance TF.IsObject (FcServiceVpcConfig s) where
+    toObject FcServiceVpcConfig'{..} = P.catMaybes
         [ TF.assign "security_group_id" <$> TF.attribute _securityGroupId
         , TF.assign "vswitch_ids" <$> TF.attribute _vswitchIds
         ]
 
-instance TF.IsValid (VpcConfig s) where
+instance TF.IsValid (FcServiceVpcConfig s) where
     validator = P.mempty
 
-instance P.HasSecurityGroupId (VpcConfig s) (TF.Attr s P.Text) where
+instance P.HasSecurityGroupId (FcServiceVpcConfig s) (TF.Attr s P.Text) where
     securityGroupId =
-        P.lens (_securityGroupId :: VpcConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _securityGroupId = a } :: VpcConfig s)
+        P.lens (_securityGroupId :: FcServiceVpcConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _securityGroupId = a } :: FcServiceVpcConfig s)
 
-instance P.HasVswitchIds (VpcConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasVswitchIds (FcServiceVpcConfig s) (TF.Attr s [TF.Attr s P.Text]) where
     vswitchIds =
-        P.lens (_vswitchIds :: VpcConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _vswitchIds = a } :: VpcConfig s)
+        P.lens (_vswitchIds :: FcServiceVpcConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _vswitchIds = a } :: FcServiceVpcConfig s)
 
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcConfig s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (FcServiceVpcConfig s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
--- | @domains@ nested settings.
-data Domains s = Domains'
+-- | @instance_types_gpu@ nested settings.
+data InstanceTypesGpu s = InstanceTypesGpu'
     deriving (P.Show, P.Eq, P.Generic)
 
-newDomains
-    :: Domains s
-newDomains =
-    Domains'
+newInstanceTypesGpu
+    :: InstanceTypesGpu s
+newInstanceTypesGpu =
+    InstanceTypesGpu'
 
-instance P.Hashable  (Domains s)
-instance TF.IsValue  (Domains s)
-instance TF.IsObject (Domains s) where
-    toObject Domains' = []
+instance P.Hashable  (InstanceTypesGpu s)
+instance TF.IsValue  (InstanceTypesGpu s)
+instance TF.IsObject (InstanceTypesGpu s) where
+    toObject InstanceTypesGpu' = []
 
-instance TF.IsValid (Domains s) where
+instance TF.IsValid (InstanceTypesGpu s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedAliDomain (TF.Ref s' (Domains s)) (TF.Attr s P.Bool) where
-    computedAliDomain x = TF.compute (TF.refKey x) "_computedAliDomain"
+instance s ~ s' => P.HasComputedAmount (TF.Ref s' (InstanceTypesGpu s)) (TF.Attr s P.Text) where
+    computedAmount x = TF.compute (TF.refKey x) "amount"
 
-instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (Domains s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDnsServers x = TF.compute (TF.refKey x) "_computedDnsServers"
+instance s ~ s' => P.HasComputedCategory (TF.Ref s' (InstanceTypesGpu s)) (TF.Attr s P.Text) where
+    computedCategory x = TF.compute (TF.refKey x) "category"
 
-instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
-
-instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedDomainName x = TF.compute (TF.refKey x) "_computedDomainName"
-
-instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedGroupId x = TF.compute (TF.refKey x) "_computedGroupId"
-
-instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedGroupName x = TF.compute (TF.refKey x) "_computedGroupName"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
-
-instance s ~ s' => P.HasComputedPunyCode (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedPunyCode x = TF.compute (TF.refKey x) "_computedPunyCode"
-
-instance s ~ s' => P.HasComputedVersionCode (TF.Ref s' (Domains s)) (TF.Attr s P.Text) where
-    computedVersionCode x = TF.compute (TF.refKey x) "_computedVersionCode"
-
--- | @parameter_filter_config@ nested settings.
-data ParameterFilterConfig s = ParameterFilterConfig'
-    { _enable :: TF.Attr s P.Text
-    -- ^ @enable@ - (Optional)
+-- | @ram_policy_statement@ nested settings.
+data RamPolicyStatement s = RamPolicyStatement'
+    { _action   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @action@ - (Required)
+    --
+    , _effect   :: TF.Attr s P.Text
+    -- ^ @effect@ - (Required)
+    --
+    , _resource :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @resource@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newParameterFilterConfig
-    :: ParameterFilterConfig s
-newParameterFilterConfig =
-    ParameterFilterConfig'
-        { _enable = TF.value "off"
+newRamPolicyStatement
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @action@ - 'P.action'
+    -> TF.Attr s P.Text -- ^ @effect@ - 'P.effect'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @resource@ - 'P.resource'
+    -> RamPolicyStatement s
+newRamPolicyStatement _action _effect _resource =
+    RamPolicyStatement'
+        { _action = _action
+        , _effect = _effect
+        , _resource = _resource
         }
 
-instance P.Hashable  (ParameterFilterConfig s)
-instance TF.IsValue  (ParameterFilterConfig s)
-instance TF.IsObject (ParameterFilterConfig s) where
-    toObject ParameterFilterConfig'{..} = P.catMaybes
-        [ TF.assign "enable" <$> TF.attribute _enable
+instance P.Hashable  (RamPolicyStatement s)
+instance TF.IsValue  (RamPolicyStatement s)
+instance TF.IsObject (RamPolicyStatement s) where
+    toObject RamPolicyStatement'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "effect" <$> TF.attribute _effect
+        , TF.assign "resource" <$> TF.attribute _resource
         ]
 
-instance TF.IsValid (ParameterFilterConfig s) where
+instance TF.IsValid (RamPolicyStatement s) where
     validator = P.mempty
 
-instance P.HasEnable (ParameterFilterConfig s) (TF.Attr s P.Text) where
-    enable =
-        P.lens (_enable :: ParameterFilterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _enable = a } :: ParameterFilterConfig s)
+instance P.HasAction (RamPolicyStatement s) (TF.Attr s [TF.Attr s P.Text]) where
+    action =
+        P.lens (_action :: RamPolicyStatement s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _action = a } :: RamPolicyStatement s)
 
-instance s ~ s' => P.HasComputedHashKeyArgs (TF.Ref s' (ParameterFilterConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedHashKeyArgs x = TF.compute (TF.refKey x) "_computedHashKeyArgs"
+instance P.HasEffect (RamPolicyStatement s) (TF.Attr s P.Text) where
+    effect =
+        P.lens (_effect :: RamPolicyStatement s -> TF.Attr s P.Text)
+               (\s a -> s { _effect = a } :: RamPolicyStatement s)
 
--- | @refer_config@ nested settings.
-data ReferConfig s = ReferConfig'
-    { _allowEmpty :: TF.Attr s P.Text
-    -- ^ @allow_empty@ - (Optional)
+instance P.HasResource (RamPolicyStatement s) (TF.Attr s [TF.Attr s P.Text]) where
+    resource =
+        P.lens (_resource :: RamPolicyStatement s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _resource = a } :: RamPolicyStatement s)
+
+-- | @log_store_index_full_text@ nested settings.
+data LogStoreIndexFullText s = LogStoreIndexFullText'
+    { _caseSensitive  :: TF.Attr s P.Bool
+    -- ^ @case_sensitive@ - (Optional)
     --
-    , _referList  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @refer_list@ - (Required)
+    , _includeChinese :: TF.Attr s P.Bool
+    -- ^ @include_chinese@ - (Optional)
     --
-    , _referType  :: TF.Attr s P.Text
-    -- ^ @refer_type@ - (Optional)
+    , _token          :: TF.Attr s P.Text
+    -- ^ @token@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newReferConfig
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @refer_list@ - 'P.referList'
-    -> ReferConfig s
-newReferConfig _referList =
-    ReferConfig'
-        { _allowEmpty = TF.value "on"
-        , _referList = _referList
-        , _referType = TF.value "block"
+newLogStoreIndexFullText
+    :: LogStoreIndexFullText s
+newLogStoreIndexFullText =
+    LogStoreIndexFullText'
+        { _caseSensitive = TF.value P.False
+        , _includeChinese = TF.value P.False
+        , _token = TF.Nil
         }
 
-instance P.Hashable  (ReferConfig s)
-instance TF.IsValue  (ReferConfig s)
-instance TF.IsObject (ReferConfig s) where
-    toObject ReferConfig'{..} = P.catMaybes
-        [ TF.assign "allow_empty" <$> TF.attribute _allowEmpty
-        , TF.assign "refer_list" <$> TF.attribute _referList
-        , TF.assign "refer_type" <$> TF.attribute _referType
+instance P.Hashable  (LogStoreIndexFullText s)
+instance TF.IsValue  (LogStoreIndexFullText s)
+instance TF.IsObject (LogStoreIndexFullText s) where
+    toObject LogStoreIndexFullText'{..} = P.catMaybes
+        [ TF.assign "case_sensitive" <$> TF.attribute _caseSensitive
+        , TF.assign "include_chinese" <$> TF.attribute _includeChinese
+        , TF.assign "token" <$> TF.attribute _token
         ]
 
-instance TF.IsValid (ReferConfig s) where
+instance TF.IsValid (LogStoreIndexFullText s) where
     validator = P.mempty
 
-instance P.HasAllowEmpty (ReferConfig s) (TF.Attr s P.Text) where
-    allowEmpty =
-        P.lens (_allowEmpty :: ReferConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _allowEmpty = a } :: ReferConfig s)
+instance P.HasCaseSensitive (LogStoreIndexFullText s) (TF.Attr s P.Bool) where
+    caseSensitive =
+        P.lens (_caseSensitive :: LogStoreIndexFullText s -> TF.Attr s P.Bool)
+               (\s a -> s { _caseSensitive = a } :: LogStoreIndexFullText s)
 
-instance P.HasReferList (ReferConfig s) (TF.Attr s [TF.Attr s P.Text]) where
-    referList =
-        P.lens (_referList :: ReferConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _referList = a } :: ReferConfig s)
+instance P.HasIncludeChinese (LogStoreIndexFullText s) (TF.Attr s P.Bool) where
+    includeChinese =
+        P.lens (_includeChinese :: LogStoreIndexFullText s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeChinese = a } :: LogStoreIndexFullText s)
 
-instance P.HasReferType (ReferConfig s) (TF.Attr s P.Text) where
-    referType =
-        P.lens (_referType :: ReferConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _referType = a } :: ReferConfig s)
+instance P.HasToken (LogStoreIndexFullText s) (TF.Attr s P.Text) where
+    token =
+        P.lens (_token :: LogStoreIndexFullText s -> TF.Attr s P.Text)
+               (\s a -> s { _token = a } :: LogStoreIndexFullText s)
 
--- | @nodes@ nested settings.
-data Nodes s = Nodes'
+-- | @security_groups_groups@ nested settings.
+data SecurityGroupsGroups s = SecurityGroupsGroups'
     deriving (P.Show, P.Eq, P.Generic)
 
-newNodes
-    :: Nodes s
-newNodes =
-    Nodes'
+newSecurityGroupsGroups
+    :: SecurityGroupsGroups s
+newSecurityGroupsGroups =
+    SecurityGroupsGroups'
 
-instance P.Hashable  (Nodes s)
-instance TF.IsValue  (Nodes s)
-instance TF.IsObject (Nodes s) where
-    toObject Nodes' = []
+instance P.Hashable  (SecurityGroupsGroups s)
+instance TF.IsValue  (SecurityGroupsGroups s)
+instance TF.IsObject (SecurityGroupsGroups s) where
+    toObject SecurityGroupsGroups' = []
 
-instance TF.IsValid (Nodes s) where
+instance TF.IsValid (SecurityGroupsGroups s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedEip (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedEip x = TF.compute (TF.refKey x) "_computedEip"
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (SecurityGroupsGroups s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupsGroups s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupsGroups s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
+instance s ~ s' => P.HasComputedInnerAccess (TF.Ref s' (SecurityGroupsGroups s)) (TF.Attr s P.Bool) where
+    computedInnerAccess x = TF.compute (TF.refKey x) "inner_access"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Nodes s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupsGroups s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
--- | @field_search@ nested settings.
-data FieldSearch s = FieldSearch'
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupsGroups s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+-- | @ram_groups_groups@ nested settings.
+data RamGroupsGroups s = RamGroupsGroups'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newRamGroupsGroups
+    :: RamGroupsGroups s
+newRamGroupsGroups =
+    RamGroupsGroups'
+
+instance P.Hashable  (RamGroupsGroups s)
+instance TF.IsValue  (RamGroupsGroups s)
+instance TF.IsObject (RamGroupsGroups s) where
+    toObject RamGroupsGroups' = []
+
+instance TF.IsValid (RamGroupsGroups s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedComments (TF.Ref s' (RamGroupsGroups s)) (TF.Attr s P.Text) where
+    computedComments x = TF.compute (TF.refKey x) "comments"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamGroupsGroups s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+-- | @oss_bucket_lifecycle_rule@ nested settings.
+data OssBucketLifecycleRule s = OssBucketLifecycleRule'
+    { _enabled    :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Required)
+    --
+    , _expiration :: TF.Attr s [TF.Attr s (LifecycleRuleExpiration s)]
+    -- ^ @expiration@ - (Required)
+    --
+    , _prefix     :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newOssBucketLifecycleRule
+    :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
+    -> TF.Attr s [TF.Attr s (LifecycleRuleExpiration s)] -- ^ @expiration@ - 'P.expiration'
+    -> TF.Attr s P.Text -- ^ @prefix@ - 'P.prefix'
+    -> OssBucketLifecycleRule s
+newOssBucketLifecycleRule _enabled _expiration _prefix =
+    OssBucketLifecycleRule'
+        { _enabled = _enabled
+        , _expiration = _expiration
+        , _prefix = _prefix
+        }
+
+instance P.Hashable  (OssBucketLifecycleRule s)
+instance TF.IsValue  (OssBucketLifecycleRule s)
+instance TF.IsObject (OssBucketLifecycleRule s) where
+    toObject OssBucketLifecycleRule'{..} = P.catMaybes
+        [ TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "expiration" <$> TF.attribute _expiration
+        , TF.assign "prefix" <$> TF.attribute _prefix
+        ]
+
+instance TF.IsValid (OssBucketLifecycleRule s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_expiration"
+                  (_expiration
+                      :: OssBucketLifecycleRule s -> TF.Attr s [TF.Attr s (LifecycleRuleExpiration s)])
+                  TF.validator
+
+instance P.HasEnabled (OssBucketLifecycleRule s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: OssBucketLifecycleRule s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: OssBucketLifecycleRule s)
+
+instance P.HasExpiration (OssBucketLifecycleRule s) (TF.Attr s [TF.Attr s (LifecycleRuleExpiration s)]) where
+    expiration =
+        P.lens (_expiration :: OssBucketLifecycleRule s -> TF.Attr s [TF.Attr s (LifecycleRuleExpiration s)])
+               (\s a -> s { _expiration = a } :: OssBucketLifecycleRule s)
+
+instance P.HasPrefix (OssBucketLifecycleRule s) (TF.Attr s P.Text) where
+    prefix =
+        P.lens (_prefix :: OssBucketLifecycleRule s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: OssBucketLifecycleRule s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketLifecycleRule s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @dns_domain_records_records@ nested settings.
+data DnsDomainRecordsRecords s = DnsDomainRecordsRecords'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDnsDomainRecordsRecords
+    :: DnsDomainRecordsRecords s
+newDnsDomainRecordsRecords =
+    DnsDomainRecordsRecords'
+
+instance P.Hashable  (DnsDomainRecordsRecords s)
+instance TF.IsValue  (DnsDomainRecordsRecords s)
+instance TF.IsObject (DnsDomainRecordsRecords s) where
+    toObject DnsDomainRecordsRecords' = []
+
+instance TF.IsValid (DnsDomainRecordsRecords s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
+
+instance s ~ s' => P.HasComputedHostRecord (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedHostRecord x = TF.compute (TF.refKey x) "host_record"
+
+instance s ~ s' => P.HasComputedLine (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedLine x = TF.compute (TF.refKey x) "line"
+
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Bool) where
+    computedLocked x = TF.compute (TF.refKey x) "locked"
+
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Integer) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
+
+instance s ~ s' => P.HasComputedRecordId (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedRecordId x = TF.compute (TF.refKey x) "record_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Double) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DnsDomainRecordsRecords s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"
+
+-- | @ram_policies_policies@ nested settings.
+data RamPoliciesPolicies s = RamPoliciesPolicies'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newRamPoliciesPolicies
+    :: RamPoliciesPolicies s
+newRamPoliciesPolicies =
+    RamPoliciesPolicies'
+
+instance P.Hashable  (RamPoliciesPolicies s)
+instance TF.IsValue  (RamPoliciesPolicies s)
+instance TF.IsObject (RamPoliciesPolicies s) where
+    toObject RamPoliciesPolicies' = []
+
+instance TF.IsValid (RamPoliciesPolicies s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Integer) where
+    computedAttachmentCount x = TF.compute (TF.refKey x) "attachment_count"
+
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
+
+instance s ~ s' => P.HasComputedDefaultVersion (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedDefaultVersion x = TF.compute (TF.refKey x) "default_version"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedDocument x = TF.compute (TF.refKey x) "document"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (RamPoliciesPolicies s)) (TF.Attr s P.Text) where
+    computedUpdateDate x = TF.compute (TF.refKey x) "update_date"
+
+-- | @images_disk_device_mappings@ nested settings.
+data ImagesDiskDeviceMappings s = ImagesDiskDeviceMappings'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newImagesDiskDeviceMappings
+    :: ImagesDiskDeviceMappings s
+newImagesDiskDeviceMappings =
+    ImagesDiskDeviceMappings'
+
+instance P.Hashable  (ImagesDiskDeviceMappings s)
+instance TF.IsValue  (ImagesDiskDeviceMappings s)
+instance TF.IsObject (ImagesDiskDeviceMappings s) where
+    toObject ImagesDiskDeviceMappings' = []
+
+instance TF.IsValid (ImagesDiskDeviceMappings s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (ImagesDiskDeviceMappings s)) (TF.Attr s P.Text) where
+    computedDevice x = TF.compute (TF.refKey x) "device"
+
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ImagesDiskDeviceMappings s)) (TF.Attr s P.Text) where
+    computedSize x = TF.compute (TF.refKey x) "size"
+
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ImagesDiskDeviceMappings s)) (TF.Attr s P.Text) where
+    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+
+-- | @fc_service_log_config@ nested settings.
+data FcServiceLogConfig s = FcServiceLogConfig'
+    { _logstore :: TF.Attr s P.Text
+    -- ^ @logstore@ - (Required)
+    --
+    , _project  :: TF.Attr s P.Text
+    -- ^ @project@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newFcServiceLogConfig
+    :: TF.Attr s P.Text -- ^ @logstore@ - 'P.logstore'
+    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    -> FcServiceLogConfig s
+newFcServiceLogConfig _logstore _project =
+    FcServiceLogConfig'
+        { _logstore = _logstore
+        , _project = _project
+        }
+
+instance P.Hashable  (FcServiceLogConfig s)
+instance TF.IsValue  (FcServiceLogConfig s)
+instance TF.IsObject (FcServiceLogConfig s) where
+    toObject FcServiceLogConfig'{..} = P.catMaybes
+        [ TF.assign "logstore" <$> TF.attribute _logstore
+        , TF.assign "project" <$> TF.attribute _project
+        ]
+
+instance TF.IsValid (FcServiceLogConfig s) where
+    validator = P.mempty
+
+instance P.HasLogstore (FcServiceLogConfig s) (TF.Attr s P.Text) where
+    logstore =
+        P.lens (_logstore :: FcServiceLogConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _logstore = a } :: FcServiceLogConfig s)
+
+instance P.HasProject (FcServiceLogConfig s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: FcServiceLogConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: FcServiceLogConfig s)
+
+-- | @dns_groups_groups@ nested settings.
+data DnsGroupsGroups s = DnsGroupsGroups'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDnsGroupsGroups
+    :: DnsGroupsGroups s
+newDnsGroupsGroups =
+    DnsGroupsGroups'
+
+instance P.Hashable  (DnsGroupsGroups s)
+instance TF.IsValue  (DnsGroupsGroups s)
+instance TF.IsObject (DnsGroupsGroups s) where
+    toObject DnsGroupsGroups' = []
+
+instance TF.IsValid (DnsGroupsGroups s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (DnsGroupsGroups s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
+
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DnsGroupsGroups s)) (TF.Attr s P.Text) where
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
+
+-- | @log_store_index_field_search@ nested settings.
+data LogStoreIndexFieldSearch s = LogStoreIndexFieldSearch'
     { _alias           :: TF.Attr s P.Text
     -- ^ @alias@ - (Optional)
     --
@@ -1871,11 +1433,11 @@ data FieldSearch s = FieldSearch'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newFieldSearch
+newLogStoreIndexFieldSearch
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> FieldSearch s
-newFieldSearch _name =
-    FieldSearch'
+    -> LogStoreIndexFieldSearch s
+newLogStoreIndexFieldSearch _name =
+    LogStoreIndexFieldSearch'
         { _alias = TF.Nil
         , _caseSensitive = TF.value P.False
         , _enableAnalytics = TF.value P.True
@@ -1885,10 +1447,10 @@ newFieldSearch _name =
         , _type' = TF.Nil
         }
 
-instance P.Hashable  (FieldSearch s)
-instance TF.IsValue  (FieldSearch s)
-instance TF.IsObject (FieldSearch s) where
-    toObject FieldSearch'{..} = P.catMaybes
+instance P.Hashable  (LogStoreIndexFieldSearch s)
+instance TF.IsValue  (LogStoreIndexFieldSearch s)
+instance TF.IsObject (LogStoreIndexFieldSearch s) where
+    toObject LogStoreIndexFieldSearch'{..} = P.catMaybes
         [ TF.assign "alias" <$> TF.attribute _alias
         , TF.assign "case_sensitive" <$> TF.attribute _caseSensitive
         , TF.assign "enable_analytics" <$> TF.attribute _enableAnalytics
@@ -1898,334 +1460,1147 @@ instance TF.IsObject (FieldSearch s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (FieldSearch s) where
+instance TF.IsValid (LogStoreIndexFieldSearch s) where
     validator = P.mempty
 
-instance P.HasAlias (FieldSearch s) (TF.Attr s P.Text) where
+instance P.HasAlias (LogStoreIndexFieldSearch s) (TF.Attr s P.Text) where
     alias =
-        P.lens (_alias :: FieldSearch s -> TF.Attr s P.Text)
-               (\s a -> s { _alias = a } :: FieldSearch s)
+        P.lens (_alias :: LogStoreIndexFieldSearch s -> TF.Attr s P.Text)
+               (\s a -> s { _alias = a } :: LogStoreIndexFieldSearch s)
 
-instance P.HasCaseSensitive (FieldSearch s) (TF.Attr s P.Bool) where
+instance P.HasCaseSensitive (LogStoreIndexFieldSearch s) (TF.Attr s P.Bool) where
     caseSensitive =
-        P.lens (_caseSensitive :: FieldSearch s -> TF.Attr s P.Bool)
-               (\s a -> s { _caseSensitive = a } :: FieldSearch s)
+        P.lens (_caseSensitive :: LogStoreIndexFieldSearch s -> TF.Attr s P.Bool)
+               (\s a -> s { _caseSensitive = a } :: LogStoreIndexFieldSearch s)
 
-instance P.HasEnableAnalytics (FieldSearch s) (TF.Attr s P.Bool) where
+instance P.HasEnableAnalytics (LogStoreIndexFieldSearch s) (TF.Attr s P.Bool) where
     enableAnalytics =
-        P.lens (_enableAnalytics :: FieldSearch s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableAnalytics = a } :: FieldSearch s)
+        P.lens (_enableAnalytics :: LogStoreIndexFieldSearch s -> TF.Attr s P.Bool)
+               (\s a -> s { _enableAnalytics = a } :: LogStoreIndexFieldSearch s)
 
-instance P.HasIncludeChinese (FieldSearch s) (TF.Attr s P.Bool) where
+instance P.HasIncludeChinese (LogStoreIndexFieldSearch s) (TF.Attr s P.Bool) where
     includeChinese =
-        P.lens (_includeChinese :: FieldSearch s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeChinese = a } :: FieldSearch s)
+        P.lens (_includeChinese :: LogStoreIndexFieldSearch s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeChinese = a } :: LogStoreIndexFieldSearch s)
 
-instance P.HasName (FieldSearch s) (TF.Attr s P.Text) where
+instance P.HasName (LogStoreIndexFieldSearch s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: FieldSearch s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: FieldSearch s)
+        P.lens (_name :: LogStoreIndexFieldSearch s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LogStoreIndexFieldSearch s)
 
-instance P.HasToken (FieldSearch s) (TF.Attr s P.Text) where
+instance P.HasToken (LogStoreIndexFieldSearch s) (TF.Attr s P.Text) where
     token =
-        P.lens (_token :: FieldSearch s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a } :: FieldSearch s)
+        P.lens (_token :: LogStoreIndexFieldSearch s -> TF.Attr s P.Text)
+               (\s a -> s { _token = a } :: LogStoreIndexFieldSearch s)
 
-instance P.HasType' (FieldSearch s) (TF.Attr s P.Text) where
+instance P.HasType' (LogStoreIndexFieldSearch s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: FieldSearch s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: FieldSearch s)
+        P.lens (_type' :: LogStoreIndexFieldSearch s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: LogStoreIndexFieldSearch s)
 
--- | @logging@ nested settings.
-data Logging s = Logging'
-    { _targetBucket :: TF.Attr s P.Text
-    -- ^ @target_bucket@ - (Required)
-    --
-    , _targetPrefix :: TF.Attr s P.Text
-    -- ^ @target_prefix@ - (Optional)
+-- | @instance_types_burstable_instance@ nested settings.
+data InstanceTypesBurstableInstance s = InstanceTypesBurstableInstance'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newInstanceTypesBurstableInstance
+    :: InstanceTypesBurstableInstance s
+newInstanceTypesBurstableInstance =
+    InstanceTypesBurstableInstance'
+
+instance P.Hashable  (InstanceTypesBurstableInstance s)
+instance TF.IsValue  (InstanceTypesBurstableInstance s)
+instance TF.IsObject (InstanceTypesBurstableInstance s) where
+    toObject InstanceTypesBurstableInstance' = []
+
+instance TF.IsValid (InstanceTypesBurstableInstance s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedBaselineCredit (TF.Ref s' (InstanceTypesBurstableInstance s)) (TF.Attr s P.Text) where
+    computedBaselineCredit x = TF.compute (TF.refKey x) "baseline_credit"
+
+instance s ~ s' => P.HasComputedInitialCredit (TF.Ref s' (InstanceTypesBurstableInstance s)) (TF.Attr s P.Text) where
+    computedInitialCredit x = TF.compute (TF.refKey x) "initial_credit"
+
+-- | @cs_application_services@ nested settings.
+data CsApplicationServices s = CsApplicationServices'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newCsApplicationServices
+    :: CsApplicationServices s
+newCsApplicationServices =
+    CsApplicationServices'
+
+instance P.Hashable  (CsApplicationServices s)
+instance TF.IsValue  (CsApplicationServices s)
+instance TF.IsObject (CsApplicationServices s) where
+    toObject CsApplicationServices' = []
+
+instance TF.IsValid (CsApplicationServices s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsApplicationServices s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsApplicationServices s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CsApplicationServices s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CsApplicationServices s)) (TF.Attr s P.Text) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+-- | @log_store_shards@ nested settings.
+data LogStoreShards s = LogStoreShards'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newLogStoreShards
+    :: LogStoreShards s
+newLogStoreShards =
+    LogStoreShards'
+
+instance P.Hashable  (LogStoreShards s)
+instance TF.IsValue  (LogStoreShards s)
+instance TF.IsObject (LogStoreShards s) where
+    toObject LogStoreShards' = []
+
+instance TF.IsValid (LogStoreShards s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedBeginKey (TF.Ref s' (LogStoreShards s)) (TF.Attr s P.Text) where
+    computedBeginKey x = TF.compute (TF.refKey x) "begin_key"
+
+instance s ~ s' => P.HasComputedEndKey (TF.Ref s' (LogStoreShards s)) (TF.Attr s P.Text) where
+    computedEndKey x = TF.compute (TF.refKey x) "end_key"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreShards s)) (TF.Attr s P.Integer) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (LogStoreShards s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+-- | @vpcs_vpcs@ nested settings.
+data VpcsVpcs s = VpcsVpcs'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newVpcsVpcs
+    :: VpcsVpcs s
+newVpcsVpcs =
+    VpcsVpcs'
+
+instance P.Hashable  (VpcsVpcs s)
+instance TF.IsValue  (VpcsVpcs s)
+instance TF.IsObject (VpcsVpcs s) where
+    toObject VpcsVpcs' = []
+
+instance TF.IsValid (VpcsVpcs s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
+
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Bool) where
+    computedIsDefault x = TF.compute (TF.refKey x) "is_default"
+
+instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedRegionId x = TF.compute (TF.refKey x) "region_id"
+
+instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedVpcName (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedVpcName x = TF.compute (TF.refKey x) "vpc_name"
+
+instance s ~ s' => P.HasComputedVrouterId (TF.Ref s' (VpcsVpcs s)) (TF.Attr s P.Text) where
+    computedVrouterId x = TF.compute (TF.refKey x) "vrouter_id"
+
+instance s ~ s' => P.HasComputedVswitchIds (TF.Ref s' (VpcsVpcs s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedVswitchIds x = TF.compute (TF.refKey x) "vswitch_ids"
+
+-- | @instances_disk_device_mappings@ nested settings.
+data InstancesDiskDeviceMappings s = InstancesDiskDeviceMappings'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newInstancesDiskDeviceMappings
+    :: InstancesDiskDeviceMappings s
+newInstancesDiskDeviceMappings =
+    InstancesDiskDeviceMappings'
+
+instance P.Hashable  (InstancesDiskDeviceMappings s)
+instance TF.IsValue  (InstancesDiskDeviceMappings s)
+instance TF.IsObject (InstancesDiskDeviceMappings s) where
+    toObject InstancesDiskDeviceMappings' = []
+
+instance TF.IsValid (InstancesDiskDeviceMappings s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedCategory (TF.Ref s' (InstancesDiskDeviceMappings s)) (TF.Attr s P.Text) where
+    computedCategory x = TF.compute (TF.refKey x) "category"
+
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (InstancesDiskDeviceMappings s)) (TF.Attr s P.Text) where
+    computedDevice x = TF.compute (TF.refKey x) "device"
+
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (InstancesDiskDeviceMappings s)) (TF.Attr s P.Integer) where
+    computedSize x = TF.compute (TF.refKey x) "size"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (InstancesDiskDeviceMappings s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+-- | @images_images@ nested settings.
+data ImagesImages s = ImagesImages'
+    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newLogging
-    :: TF.Attr s P.Text -- ^ @target_bucket@ - 'P.targetBucket'
-    -> Logging s
-newLogging _targetBucket =
-    Logging'
-        { _targetBucket = _targetBucket
-        , _targetPrefix = TF.Nil
+newImagesImages
+    :: ImagesImages s
+newImagesImages =
+    ImagesImages'
+        { _tags = TF.Nil
         }
 
-instance P.Hashable  (Logging s)
-instance TF.IsValue  (Logging s)
-instance TF.IsObject (Logging s) where
-    toObject Logging'{..} = P.catMaybes
-        [ TF.assign "target_bucket" <$> TF.attribute _targetBucket
-        , TF.assign "target_prefix" <$> TF.attribute _targetPrefix
+instance P.Hashable  (ImagesImages s)
+instance TF.IsValue  (ImagesImages s)
+instance TF.IsObject (ImagesImages s) where
+    toObject ImagesImages'{..} = P.catMaybes
+        [ TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance TF.IsValid (Logging s) where
+instance TF.IsValid (ImagesImages s) where
     validator = P.mempty
 
-instance P.HasTargetBucket (Logging s) (TF.Attr s P.Text) where
-    targetBucket =
-        P.lens (_targetBucket :: Logging s -> TF.Attr s P.Text)
-               (\s a -> s { _targetBucket = a } :: Logging s)
+instance P.HasTags (ImagesImages s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: ImagesImages s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: ImagesImages s)
 
-instance P.HasTargetPrefix (Logging s) (TF.Attr s P.Text) where
-    targetPrefix =
-        P.lens (_targetPrefix :: Logging s -> TF.Attr s P.Text)
-               (\s a -> s { _targetPrefix = a } :: Logging s)
+instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
--- | @burstable_instance@ nested settings.
-data BurstableInstance s = BurstableInstance'
-    deriving (P.Show, P.Eq, P.Generic)
+instance s ~ s' => P.HasComputedCreationTime (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedCreationTime x = TF.compute (TF.refKey x) "creation_time"
 
-newBurstableInstance
-    :: BurstableInstance s
-newBurstableInstance =
-    BurstableInstance'
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance P.Hashable  (BurstableInstance s)
-instance TF.IsValue  (BurstableInstance s)
-instance TF.IsObject (BurstableInstance s) where
-    toObject BurstableInstance' = []
+instance s ~ s' => P.HasComputedDiskDeviceMappings (TF.Ref s' (ImagesImages s)) (TF.Attr s [TF.Attr s (ImagesDiskDeviceMappings s)]) where
+    computedDiskDeviceMappings x = TF.compute (TF.refKey x) "disk_device_mappings"
 
-instance TF.IsValid (BurstableInstance s) where
-    validator = P.mempty
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedBaselineCredit (TF.Ref s' (BurstableInstance s)) (TF.Attr s P.Text) where
-    computedBaselineCredit x = TF.compute (TF.refKey x) "_computedBaselineCredit"
+instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
 
-instance s ~ s' => P.HasComputedInitialCredit (TF.Ref s' (BurstableInstance s)) (TF.Attr s P.Text) where
-    computedInitialCredit x = TF.compute (TF.refKey x) "_computedInitialCredit"
+instance s ~ s' => P.HasComputedImageOwnerAlias (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedImageOwnerAlias x = TF.compute (TF.refKey x) "image_owner_alias"
 
--- | @services@ nested settings.
-data Services s = Services'
-    deriving (P.Show, P.Eq, P.Generic)
+instance s ~ s' => P.HasComputedImageVersion (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedImageVersion x = TF.compute (TF.refKey x) "image_version"
 
-newServices
-    :: Services s
-newServices =
-    Services'
+instance s ~ s' => P.HasComputedIsCopied (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Bool) where
+    computedIsCopied x = TF.compute (TF.refKey x) "is_copied"
 
-instance P.Hashable  (Services s)
-instance TF.IsValue  (Services s)
-instance TF.IsObject (Services s) where
-    toObject Services' = []
+instance s ~ s' => P.HasComputedIsSelfShared (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedIsSelfShared x = TF.compute (TF.refKey x) "is_self_shared"
 
-instance TF.IsValid (Services s) where
-    validator = P.mempty
+instance s ~ s' => P.HasComputedIsSubscribed (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Bool) where
+    computedIsSubscribed x = TF.compute (TF.refKey x) "is_subscribed"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Services s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+instance s ~ s' => P.HasComputedIsSupportIoOptimized (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Bool) where
+    computedIsSupportIoOptimized x = TF.compute (TF.refKey x) "is_support_io_optimized"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Services s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (Services s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+instance s ~ s' => P.HasComputedOsName (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedOsName x = TF.compute (TF.refKey x) "os_name"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (Services s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+instance s ~ s' => P.HasComputedOsType (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedOsType x = TF.compute (TF.refKey x) "os_type"
 
--- | @policies@ nested settings.
-data Policies s = Policies'
-    deriving (P.Show, P.Eq, P.Generic)
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-newPolicies
-    :: Policies s
-newPolicies =
-    Policies'
+instance s ~ s' => P.HasComputedProductCode (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedProductCode x = TF.compute (TF.refKey x) "product_code"
 
-instance P.Hashable  (Policies s)
-instance TF.IsValue  (Policies s)
-instance TF.IsObject (Policies s) where
-    toObject Policies' = []
+instance s ~ s' => P.HasComputedProgress (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedProgress x = TF.compute (TF.refKey x) "progress"
 
-instance TF.IsValid (Policies s) where
-    validator = P.mempty
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Integer) where
+    computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (Policies s)) (TF.Attr s P.Integer) where
-    computedAttachmentCount x = TF.compute (TF.refKey x) "_computedAttachmentCount"
+instance s ~ s' => P.HasComputedState (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedCreateDate x = TF.compute (TF.refKey x) "_computedCreateDate"
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
-instance s ~ s' => P.HasComputedDefaultVersion (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedDefaultVersion x = TF.compute (TF.refKey x) "_computedDefaultVersion"
+instance s ~ s' => P.HasComputedUsage (TF.Ref s' (ImagesImages s)) (TF.Attr s P.Text) where
+    computedUsage x = TF.compute (TF.refKey x) "usage"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
-
-instance s ~ s' => P.HasComputedDocument (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedDocument x = TF.compute (TF.refKey x) "_computedDocument"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
-
-instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (Policies s)) (TF.Attr s P.Text) where
-    computedUpdateDate x = TF.compute (TF.refKey x) "_computedUpdateDate"
-
--- | @log_config@ nested settings.
-data LogConfig s = LogConfig'
-    { _logstore :: TF.Attr s P.Text
-    -- ^ @logstore@ - (Required)
+-- | @oss_bucket_website@ nested settings.
+data OssBucketWebsite s = OssBucketWebsite'
+    { _errorDocument :: TF.Attr s P.Text
+    -- ^ @error_document@ - (Optional)
     --
-    , _project  :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    , _indexDocument :: TF.Attr s P.Text
+    -- ^ @index_document@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newLogConfig
-    :: TF.Attr s P.Text -- ^ @logstore@ - 'P.logstore'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> LogConfig s
-newLogConfig _logstore _project =
-    LogConfig'
-        { _logstore = _logstore
-        , _project = _project
+newOssBucketWebsite
+    :: TF.Attr s P.Text -- ^ @index_document@ - 'P.indexDocument'
+    -> OssBucketWebsite s
+newOssBucketWebsite _indexDocument =
+    OssBucketWebsite'
+        { _errorDocument = TF.Nil
+        , _indexDocument = _indexDocument
         }
 
-instance P.Hashable  (LogConfig s)
-instance TF.IsValue  (LogConfig s)
-instance TF.IsObject (LogConfig s) where
-    toObject LogConfig'{..} = P.catMaybes
-        [ TF.assign "logstore" <$> TF.attribute _logstore
-        , TF.assign "project" <$> TF.attribute _project
+instance P.Hashable  (OssBucketWebsite s)
+instance TF.IsValue  (OssBucketWebsite s)
+instance TF.IsObject (OssBucketWebsite s) where
+    toObject OssBucketWebsite'{..} = P.catMaybes
+        [ TF.assign "error_document" <$> TF.attribute _errorDocument
+        , TF.assign "index_document" <$> TF.attribute _indexDocument
         ]
 
-instance TF.IsValid (LogConfig s) where
+instance TF.IsValid (OssBucketWebsite s) where
     validator = P.mempty
 
-instance P.HasLogstore (LogConfig s) (TF.Attr s P.Text) where
-    logstore =
-        P.lens (_logstore :: LogConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _logstore = a } :: LogConfig s)
+instance P.HasErrorDocument (OssBucketWebsite s) (TF.Attr s P.Text) where
+    errorDocument =
+        P.lens (_errorDocument :: OssBucketWebsite s -> TF.Attr s P.Text)
+               (\s a -> s { _errorDocument = a } :: OssBucketWebsite s)
 
-instance P.HasProject (LogConfig s) (TF.Attr s P.Text) where
-    project =
-        P.lens (_project :: LogConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _project = a } :: LogConfig s)
+instance P.HasIndexDocument (OssBucketWebsite s) (TF.Attr s P.Text) where
+    indexDocument =
+        P.lens (_indexDocument :: OssBucketWebsite s -> TF.Attr s P.Text)
+               (\s a -> s { _indexDocument = a } :: OssBucketWebsite s)
 
--- | @full_text@ nested settings.
-data FullText s = FullText'
-    { _caseSensitive  :: TF.Attr s P.Bool
-    -- ^ @case_sensitive@ - (Optional)
+-- | @ots_table_primary_key@ nested settings.
+data OtsTablePrimaryKey s = OtsTablePrimaryKey'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
     --
-    , _includeChinese :: TF.Attr s P.Bool
-    -- ^ @include_chinese@ - (Optional)
-    --
-    , _token          :: TF.Attr s P.Text
-    -- ^ @token@ - (Optional)
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newFullText
-    :: FullText s
-newFullText =
-    FullText'
-        { _caseSensitive = TF.value P.False
-        , _includeChinese = TF.value P.False
-        , _token = TF.Nil
+newOtsTablePrimaryKey
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> OtsTablePrimaryKey s
+newOtsTablePrimaryKey _name _type' =
+    OtsTablePrimaryKey'
+        { _name = _name
+        , _type' = _type'
         }
 
-instance P.Hashable  (FullText s)
-instance TF.IsValue  (FullText s)
-instance TF.IsObject (FullText s) where
-    toObject FullText'{..} = P.catMaybes
-        [ TF.assign "case_sensitive" <$> TF.attribute _caseSensitive
-        , TF.assign "include_chinese" <$> TF.attribute _includeChinese
-        , TF.assign "token" <$> TF.attribute _token
+instance P.Hashable  (OtsTablePrimaryKey s)
+instance TF.IsValue  (OtsTablePrimaryKey s)
+instance TF.IsObject (OtsTablePrimaryKey s) where
+    toObject OtsTablePrimaryKey'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (FullText s) where
+instance TF.IsValid (OtsTablePrimaryKey s) where
     validator = P.mempty
 
-instance P.HasCaseSensitive (FullText s) (TF.Attr s P.Bool) where
-    caseSensitive =
-        P.lens (_caseSensitive :: FullText s -> TF.Attr s P.Bool)
-               (\s a -> s { _caseSensitive = a } :: FullText s)
+instance P.HasName (OtsTablePrimaryKey s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: OtsTablePrimaryKey s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: OtsTablePrimaryKey s)
 
-instance P.HasIncludeChinese (FullText s) (TF.Attr s P.Bool) where
-    includeChinese =
-        P.lens (_includeChinese :: FullText s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeChinese = a } :: FullText s)
+instance P.HasType' (OtsTablePrimaryKey s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: OtsTablePrimaryKey s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: OtsTablePrimaryKey s)
 
-instance P.HasToken (FullText s) (TF.Attr s P.Text) where
-    token =
-        P.lens (_token :: FullText s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a } :: FullText s)
+-- | @cdn_domain_refer_config@ nested settings.
+data CdnDomainReferConfig s = CdnDomainReferConfig'
+    { _allowEmpty :: TF.Attr s P.Text
+    -- ^ @allow_empty@ - (Optional)
+    --
+    , _referList  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @refer_list@ - (Required)
+    --
+    , _referType  :: TF.Attr s P.Text
+    -- ^ @refer_type@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
 
--- | @key_pairs@ nested settings.
-data KeyPairs s = KeyPairs'
+newCdnDomainReferConfig
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @refer_list@ - 'P.referList'
+    -> CdnDomainReferConfig s
+newCdnDomainReferConfig _referList =
+    CdnDomainReferConfig'
+        { _allowEmpty = TF.value "on"
+        , _referList = _referList
+        , _referType = TF.value "block"
+        }
+
+instance P.Hashable  (CdnDomainReferConfig s)
+instance TF.IsValue  (CdnDomainReferConfig s)
+instance TF.IsObject (CdnDomainReferConfig s) where
+    toObject CdnDomainReferConfig'{..} = P.catMaybes
+        [ TF.assign "allow_empty" <$> TF.attribute _allowEmpty
+        , TF.assign "refer_list" <$> TF.attribute _referList
+        , TF.assign "refer_type" <$> TF.attribute _referType
+        ]
+
+instance TF.IsValid (CdnDomainReferConfig s) where
+    validator = P.mempty
+
+instance P.HasAllowEmpty (CdnDomainReferConfig s) (TF.Attr s P.Text) where
+    allowEmpty =
+        P.lens (_allowEmpty :: CdnDomainReferConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _allowEmpty = a } :: CdnDomainReferConfig s)
+
+instance P.HasReferList (CdnDomainReferConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+    referList =
+        P.lens (_referList :: CdnDomainReferConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _referList = a } :: CdnDomainReferConfig s)
+
+instance P.HasReferType (CdnDomainReferConfig s) (TF.Attr s P.Text) where
+    referType =
+        P.lens (_referType :: CdnDomainReferConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _referType = a } :: CdnDomainReferConfig s)
+
+-- | @oss_bucket_cors_rule@ nested settings.
+data OssBucketCorsRule s = OssBucketCorsRule'
+    { _allowedHeaders :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_headers@ - (Optional)
+    --
+    , _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_methods@ - (Required)
+    --
+    , _allowedOrigins :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_origins@ - (Required)
+    --
+    , _exposeHeaders  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @expose_headers@ - (Optional)
+    --
+    , _maxAgeSeconds  :: TF.Attr s P.Integer
+    -- ^ @max_age_seconds@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newOssBucketCorsRule
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_origins@ - 'P.allowedOrigins'
+    -> OssBucketCorsRule s
+newOssBucketCorsRule _allowedMethods _allowedOrigins =
+    OssBucketCorsRule'
+        { _allowedHeaders = TF.Nil
+        , _allowedMethods = _allowedMethods
+        , _allowedOrigins = _allowedOrigins
+        , _exposeHeaders = TF.Nil
+        , _maxAgeSeconds = TF.Nil
+        }
+
+instance P.Hashable  (OssBucketCorsRule s)
+instance TF.IsValue  (OssBucketCorsRule s)
+instance TF.IsObject (OssBucketCorsRule s) where
+    toObject OssBucketCorsRule'{..} = P.catMaybes
+        [ TF.assign "allowed_headers" <$> TF.attribute _allowedHeaders
+        , TF.assign "allowed_methods" <$> TF.attribute _allowedMethods
+        , TF.assign "allowed_origins" <$> TF.attribute _allowedOrigins
+        , TF.assign "expose_headers" <$> TF.attribute _exposeHeaders
+        , TF.assign "max_age_seconds" <$> TF.attribute _maxAgeSeconds
+        ]
+
+instance TF.IsValid (OssBucketCorsRule s) where
+    validator = P.mempty
+
+instance P.HasAllowedHeaders (OssBucketCorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedHeaders =
+        P.lens (_allowedHeaders :: OssBucketCorsRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedHeaders = a } :: OssBucketCorsRule s)
+
+instance P.HasAllowedMethods (OssBucketCorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedMethods =
+        P.lens (_allowedMethods :: OssBucketCorsRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedMethods = a } :: OssBucketCorsRule s)
+
+instance P.HasAllowedOrigins (OssBucketCorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedOrigins =
+        P.lens (_allowedOrigins :: OssBucketCorsRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedOrigins = a } :: OssBucketCorsRule s)
+
+instance P.HasExposeHeaders (OssBucketCorsRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    exposeHeaders =
+        P.lens (_exposeHeaders :: OssBucketCorsRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _exposeHeaders = a } :: OssBucketCorsRule s)
+
+instance P.HasMaxAgeSeconds (OssBucketCorsRule s) (TF.Attr s P.Integer) where
+    maxAgeSeconds =
+        P.lens (_maxAgeSeconds :: OssBucketCorsRule s -> TF.Attr s P.Integer)
+               (\s a -> s { _maxAgeSeconds = a } :: OssBucketCorsRule s)
+
+-- | @oss_bucket_referer_config@ nested settings.
+data OssBucketRefererConfig s = OssBucketRefererConfig'
+    { _allowEmpty :: TF.Attr s P.Bool
+    -- ^ @allow_empty@ - (Optional)
+    --
+    , _referers   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @referers@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newOssBucketRefererConfig
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @referers@ - 'P.referers'
+    -> OssBucketRefererConfig s
+newOssBucketRefererConfig _referers =
+    OssBucketRefererConfig'
+        { _allowEmpty = TF.Nil
+        , _referers = _referers
+        }
+
+instance P.Hashable  (OssBucketRefererConfig s)
+instance TF.IsValue  (OssBucketRefererConfig s)
+instance TF.IsObject (OssBucketRefererConfig s) where
+    toObject OssBucketRefererConfig'{..} = P.catMaybes
+        [ TF.assign "allow_empty" <$> TF.attribute _allowEmpty
+        , TF.assign "referers" <$> TF.attribute _referers
+        ]
+
+instance TF.IsValid (OssBucketRefererConfig s) where
+    validator = P.mempty
+
+instance P.HasAllowEmpty (OssBucketRefererConfig s) (TF.Attr s P.Bool) where
+    allowEmpty =
+        P.lens (_allowEmpty :: OssBucketRefererConfig s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowEmpty = a } :: OssBucketRefererConfig s)
+
+instance P.HasReferers (OssBucketRefererConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+    referers =
+        P.lens (_referers :: OssBucketRefererConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _referers = a } :: OssBucketRefererConfig s)
+
+-- | @kms_keys_keys@ nested settings.
+data KmsKeysKeys s = KmsKeysKeys'
     deriving (P.Show, P.Eq, P.Generic)
 
-newKeyPairs
-    :: KeyPairs s
-newKeyPairs =
-    KeyPairs'
+newKmsKeysKeys
+    :: KmsKeysKeys s
+newKmsKeysKeys =
+    KmsKeysKeys'
 
-instance P.Hashable  (KeyPairs s)
-instance TF.IsValue  (KeyPairs s)
-instance TF.IsObject (KeyPairs s) where
-    toObject KeyPairs' = []
+instance P.Hashable  (KmsKeysKeys s)
+instance TF.IsValue  (KmsKeysKeys s)
+instance TF.IsObject (KmsKeysKeys s) where
+    toObject KmsKeysKeys' = []
 
-instance TF.IsValid (KeyPairs s) where
+instance TF.IsValid (KmsKeysKeys s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairs s)) (TF.Attr s P.Text) where
-    computedFingerPrint x = TF.compute (TF.refKey x) "_computedFingerPrint"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairs s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (KeyPairs s)) (TF.Attr s [TF.Attr s (Instances s)]) where
-    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
+instance s ~ s' => P.HasComputedCreator (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedCreator x = TF.compute (TF.refKey x) "creator"
 
-instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairs s)) (TF.Attr s P.Text) where
-    computedKeyName x = TF.compute (TF.refKey x) "_computedKeyName"
+instance s ~ s' => P.HasComputedDeleteDate (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedDeleteDate x = TF.compute (TF.refKey x) "delete_date"
 
--- | @page_404_config@ nested settings.
-data Page404Config s = Page404Config'
-    { _customPageUrl :: TF.Attr s P.Text
-    -- ^ @custom_page_url@ - (Optional)
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (KmsKeysKeys s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+-- | @ess_scaling_configuration_data_disk@ nested settings.
+data EssScalingConfigurationDataDisk s = EssScalingConfigurationDataDisk'
+    { _category   :: TF.Attr s P.Text
+    -- ^ @category@ - (Optional)
     --
-    , _pageType      :: TF.Attr s P.Text
-    -- ^ @page_type@ - (Optional)
+    , _size       :: TF.Attr s P.Integer
+    -- ^ @size@ - (Optional)
+    --
+    , _snapshotId :: TF.Attr s P.Text
+    -- ^ @snapshot_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newPage404Config
-    :: Page404Config s
-newPage404Config =
-    Page404Config'
-        { _customPageUrl = TF.Nil
-        , _pageType = TF.value "default"
+newEssScalingConfigurationDataDisk
+    :: EssScalingConfigurationDataDisk s
+newEssScalingConfigurationDataDisk =
+    EssScalingConfigurationDataDisk'
+        { _category = TF.Nil
+        , _size = TF.Nil
+        , _snapshotId = TF.Nil
         }
 
-instance P.Hashable  (Page404Config s)
-instance TF.IsValue  (Page404Config s)
-instance TF.IsObject (Page404Config s) where
-    toObject Page404Config'{..} = P.catMaybes
-        [ TF.assign "custom_page_url" <$> TF.attribute _customPageUrl
-        , TF.assign "page_type" <$> TF.attribute _pageType
+instance P.Hashable  (EssScalingConfigurationDataDisk s)
+instance TF.IsValue  (EssScalingConfigurationDataDisk s)
+instance TF.IsObject (EssScalingConfigurationDataDisk s) where
+    toObject EssScalingConfigurationDataDisk'{..} = P.catMaybes
+        [ TF.assign "category" <$> TF.attribute _category
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
         ]
 
-instance TF.IsValid (Page404Config s) where
+instance TF.IsValid (EssScalingConfigurationDataDisk s) where
     validator = P.mempty
 
-instance P.HasCustomPageUrl (Page404Config s) (TF.Attr s P.Text) where
-    customPageUrl =
-        P.lens (_customPageUrl :: Page404Config s -> TF.Attr s P.Text)
-               (\s a -> s { _customPageUrl = a } :: Page404Config s)
+instance P.HasCategory (EssScalingConfigurationDataDisk s) (TF.Attr s P.Text) where
+    category =
+        P.lens (_category :: EssScalingConfigurationDataDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _category = a } :: EssScalingConfigurationDataDisk s)
 
-instance P.HasPageType (Page404Config s) (TF.Attr s P.Text) where
-    pageType =
-        P.lens (_pageType :: Page404Config s -> TF.Attr s P.Text)
-               (\s a -> s { _pageType = a } :: Page404Config s)
+instance P.HasSize (EssScalingConfigurationDataDisk s) (TF.Attr s P.Integer) where
+    size =
+        P.lens (_size :: EssScalingConfigurationDataDisk s -> TF.Attr s P.Integer)
+               (\s a -> s { _size = a } :: EssScalingConfigurationDataDisk s)
 
-instance s ~ s' => P.HasComputedErrorCode (TF.Ref s' (Page404Config s)) (TF.Attr s P.Text) where
-    computedErrorCode x = TF.compute (TF.refKey x) "_computedErrorCode"
+instance P.HasSnapshotId (EssScalingConfigurationDataDisk s) (TF.Attr s P.Text) where
+    snapshotId =
+        P.lens (_snapshotId :: EssScalingConfigurationDataDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotId = a } :: EssScalingConfigurationDataDisk s)
+
+-- | @cs_kubernetes_worker_nodes@ nested settings.
+data CsKubernetesWorkerNodes s = CsKubernetesWorkerNodes'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newCsKubernetesWorkerNodes
+    :: CsKubernetesWorkerNodes s
+newCsKubernetesWorkerNodes =
+    CsKubernetesWorkerNodes'
+
+instance P.Hashable  (CsKubernetesWorkerNodes s)
+instance TF.IsValue  (CsKubernetesWorkerNodes s)
+instance TF.IsObject (CsKubernetesWorkerNodes s) where
+    toObject CsKubernetesWorkerNodes' = []
+
+instance TF.IsValid (CsKubernetesWorkerNodes s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsKubernetesWorkerNodes s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsKubernetesWorkerNodes s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (CsKubernetesWorkerNodes s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+
+-- | @lifecycle_rule_expiration@ nested settings.
+data LifecycleRuleExpiration s = LifecycleRuleExpiration'
+    { _date :: TF.Attr s P.Text
+    -- ^ @date@ - (Optional)
+    --
+    , _days :: TF.Attr s P.Integer
+    -- ^ @days@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newLifecycleRuleExpiration
+    :: LifecycleRuleExpiration s
+newLifecycleRuleExpiration =
+    LifecycleRuleExpiration'
+        { _date = TF.Nil
+        , _days = TF.Nil
+        }
+
+instance P.Hashable  (LifecycleRuleExpiration s)
+instance TF.IsValue  (LifecycleRuleExpiration s)
+instance TF.IsObject (LifecycleRuleExpiration s) where
+    toObject LifecycleRuleExpiration'{..} = P.catMaybes
+        [ TF.assign "date" <$> TF.attribute _date
+        , TF.assign "days" <$> TF.attribute _days
+        ]
+
+instance TF.IsValid (LifecycleRuleExpiration s) where
+    validator = P.mempty
+
+instance P.HasDate (LifecycleRuleExpiration s) (TF.Attr s P.Text) where
+    date =
+        P.lens (_date :: LifecycleRuleExpiration s -> TF.Attr s P.Text)
+               (\s a -> s { _date = a } :: LifecycleRuleExpiration s)
+
+instance P.HasDays (LifecycleRuleExpiration s) (TF.Attr s P.Integer) where
+    days =
+        P.lens (_days :: LifecycleRuleExpiration s -> TF.Attr s P.Integer)
+               (\s a -> s { _days = a } :: LifecycleRuleExpiration s)
+
+-- | @slb_server_group_servers@ nested settings.
+data SlbServerGroupServers s = SlbServerGroupServers'
+    { _port      :: TF.Attr s P.Integer
+    -- ^ @port@ - (Required)
+    --
+    , _serverIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @server_ids@ - (Required)
+    --
+    , _weight    :: TF.Attr s P.Integer
+    -- ^ @weight@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newSlbServerGroupServers
+    :: TF.Attr s P.Integer -- ^ @port@ - 'P.port'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @server_ids@ - 'P.serverIds'
+    -> SlbServerGroupServers s
+newSlbServerGroupServers _port _serverIds =
+    SlbServerGroupServers'
+        { _port = _port
+        , _serverIds = _serverIds
+        , _weight = TF.value 100
+        }
+
+instance P.Hashable  (SlbServerGroupServers s)
+instance TF.IsValue  (SlbServerGroupServers s)
+instance TF.IsObject (SlbServerGroupServers s) where
+    toObject SlbServerGroupServers'{..} = P.catMaybes
+        [ TF.assign "port" <$> TF.attribute _port
+        , TF.assign "server_ids" <$> TF.attribute _serverIds
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance TF.IsValid (SlbServerGroupServers s) where
+    validator = P.mempty
+
+instance P.HasPort (SlbServerGroupServers s) (TF.Attr s P.Integer) where
+    port =
+        P.lens (_port :: SlbServerGroupServers s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: SlbServerGroupServers s)
+
+instance P.HasServerIds (SlbServerGroupServers s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    serverIds =
+        P.lens (_serverIds :: SlbServerGroupServers s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _serverIds = a } :: SlbServerGroupServers s)
+
+instance P.HasWeight (SlbServerGroupServers s) (TF.Attr s P.Integer) where
+    weight =
+        P.lens (_weight :: SlbServerGroupServers s -> TF.Attr s P.Integer)
+               (\s a -> s { _weight = a } :: SlbServerGroupServers s)
+
+-- | @security_group_rules_rules@ nested settings.
+data SecurityGroupRulesRules s = SecurityGroupRulesRules'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newSecurityGroupRulesRules
+    :: SecurityGroupRulesRules s
+newSecurityGroupRulesRules =
+    SecurityGroupRulesRules'
+
+instance P.Hashable  (SecurityGroupRulesRules s)
+instance TF.IsValue  (SecurityGroupRulesRules s)
+instance TF.IsObject (SecurityGroupRulesRules s) where
+    toObject SecurityGroupRulesRules' = []
+
+instance TF.IsValid (SecurityGroupRulesRules s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDestCidrIp (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedDestCidrIp x = TF.compute (TF.refKey x) "dest_cidr_ip"
+
+instance s ~ s' => P.HasComputedDestGroupId (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedDestGroupId x = TF.compute (TF.refKey x) "dest_group_id"
+
+instance s ~ s' => P.HasComputedDestGroupOwnerAccount (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedDestGroupOwnerAccount x = TF.compute (TF.refKey x) "dest_group_owner_account"
+
+instance s ~ s' => P.HasComputedDirection (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedDirection x = TF.compute (TF.refKey x) "direction"
+
+instance s ~ s' => P.HasComputedIpProtocol (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedIpProtocol x = TF.compute (TF.refKey x) "ip_protocol"
+
+instance s ~ s' => P.HasComputedNicType (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedNicType x = TF.compute (TF.refKey x) "nic_type"
+
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedPolicy x = TF.compute (TF.refKey x) "policy"
+
+instance s ~ s' => P.HasComputedPortRange (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedPortRange x = TF.compute (TF.refKey x) "port_range"
+
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Integer) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
+
+instance s ~ s' => P.HasComputedSourceCidrIp (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedSourceCidrIp x = TF.compute (TF.refKey x) "source_cidr_ip"
+
+instance s ~ s' => P.HasComputedSourceGroupId (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedSourceGroupId x = TF.compute (TF.refKey x) "source_group_id"
+
+instance s ~ s' => P.HasComputedSourceGroupOwnerAccount (TF.Ref s' (SecurityGroupRulesRules s)) (TF.Attr s P.Text) where
+    computedSourceGroupOwnerAccount x = TF.compute (TF.refKey x) "source_group_owner_account"
+
+-- | @dns_domain_groups_groups@ nested settings.
+data DnsDomainGroupsGroups s = DnsDomainGroupsGroups'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDnsDomainGroupsGroups
+    :: DnsDomainGroupsGroups s
+newDnsDomainGroupsGroups =
+    DnsDomainGroupsGroups'
+
+instance P.Hashable  (DnsDomainGroupsGroups s)
+instance TF.IsValue  (DnsDomainGroupsGroups s)
+instance TF.IsObject (DnsDomainGroupsGroups s) where
+    toObject DnsDomainGroupsGroups' = []
+
+instance TF.IsValid (DnsDomainGroupsGroups s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (DnsDomainGroupsGroups s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
+
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DnsDomainGroupsGroups s)) (TF.Attr s P.Text) where
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
+
+-- | @db_instances_instances@ nested settings.
+data DbInstancesInstances s = DbInstancesInstances'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDbInstancesInstances
+    :: DbInstancesInstances s
+newDbInstancesInstances =
+    DbInstancesInstances'
+
+instance P.Hashable  (DbInstancesInstances s)
+instance TF.IsValue  (DbInstancesInstances s)
+instance TF.IsObject (DbInstancesInstances s) where
+    toObject DbInstancesInstances' = []
+
+instance TF.IsValid (DbInstancesInstances s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
+
+instance s ~ s' => P.HasComputedChargeType (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedChargeType x = TF.compute (TF.refKey x) "charge_type"
+
+instance s ~ s' => P.HasComputedConnectionMode (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedConnectionMode x = TF.compute (TF.refKey x) "connection_mode"
+
+instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+
+instance s ~ s' => P.HasComputedDbType (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedDbType x = TF.compute (TF.refKey x) "db_type"
+
+instance s ~ s' => P.HasComputedEngine (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedEngine x = TF.compute (TF.refKey x) "engine"
+
+instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedEngineVersion x = TF.compute (TF.refKey x) "engine_version"
+
+instance s ~ s' => P.HasComputedExpireTime (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedExpireTime x = TF.compute (TF.refKey x) "expire_time"
+
+instance s ~ s' => P.HasComputedGuardInstanceId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedGuardInstanceId x = TF.compute (TF.refKey x) "guard_instance_id"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceType (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedInstanceType x = TF.compute (TF.refKey x) "instance_type"
+
+instance s ~ s' => P.HasComputedMasterInstanceId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedMasterInstanceId x = TF.compute (TF.refKey x) "master_instance_id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedNetType (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedNetType x = TF.compute (TF.refKey x) "net_type"
+
+instance s ~ s' => P.HasComputedReadonlyInstanceIds (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedReadonlyInstanceIds x = TF.compute (TF.refKey x) "readonly_instance_ids"
+
+instance s ~ s' => P.HasComputedRegionId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedRegionId x = TF.compute (TF.refKey x) "region_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedTempInstanceId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedTempInstanceId x = TF.compute (TF.refKey x) "temp_instance_id"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
+
+instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (DbInstancesInstances s)) (TF.Attr s P.Text) where
+    computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
+
+-- | @container_cluster_nodes@ nested settings.
+data ContainerClusterNodes s = ContainerClusterNodes'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newContainerClusterNodes
+    :: ContainerClusterNodes s
+newContainerClusterNodes =
+    ContainerClusterNodes'
+
+instance P.Hashable  (ContainerClusterNodes s)
+instance TF.IsValue  (ContainerClusterNodes s)
+instance TF.IsObject (ContainerClusterNodes s) where
+    toObject ContainerClusterNodes' = []
+
+instance TF.IsValid (ContainerClusterNodes s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedEip (TF.Ref s' (ContainerClusterNodes s)) (TF.Attr s P.Text) where
+    computedEip x = TF.compute (TF.refKey x) "eip"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterNodes s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterNodes s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (ContainerClusterNodes s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ContainerClusterNodes s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+-- | @ram_users_users@ nested settings.
+data RamUsersUsers s = RamUsersUsers'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newRamUsersUsers
+    :: RamUsersUsers s
+newRamUsersUsers =
+    RamUsersUsers'
+
+instance P.Hashable  (RamUsersUsers s)
+instance TF.IsValue  (RamUsersUsers s)
+instance TF.IsObject (RamUsersUsers s) where
+    toObject RamUsersUsers' = []
+
+instance TF.IsValid (RamUsersUsers s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (RamUsersUsers s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUsersUsers s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedLastLoginDate (TF.Ref s' (RamUsersUsers s)) (TF.Attr s P.Text) where
+    computedLastLoginDate x = TF.compute (TF.refKey x) "last_login_date"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamUsersUsers s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+-- | @ram_roles_roles@ nested settings.
+data RamRolesRoles s = RamRolesRoles'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newRamRolesRoles
+    :: RamRolesRoles s
+newRamRolesRoles =
+    RamRolesRoles'
+
+instance P.Hashable  (RamRolesRoles s)
+instance TF.IsValue  (RamRolesRoles s)
+instance TF.IsObject (RamRolesRoles s) where
+    toObject RamRolesRoles' = []
+
+instance TF.IsValid (RamRolesRoles s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedAssumeRolePolicyDocument (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedAssumeRolePolicyDocument x = TF.compute (TF.refKey x) "assume_role_policy_document"
+
+instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedCreateDate x = TF.compute (TF.refKey x) "create_date"
+
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedDescription x = TF.compute (TF.refKey x) "description"
+
+instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedDocument x = TF.compute (TF.refKey x) "document"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedUpdateDate (TF.Ref s' (RamRolesRoles s)) (TF.Attr s P.Text) where
+    computedUpdateDate x = TF.compute (TF.refKey x) "update_date"
+
+-- | @dns_domains_domains@ nested settings.
+data DnsDomainsDomains s = DnsDomainsDomains'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDnsDomainsDomains
+    :: DnsDomainsDomains s
+newDnsDomainsDomains =
+    DnsDomainsDomains'
+
+instance P.Hashable  (DnsDomainsDomains s)
+instance TF.IsValue  (DnsDomainsDomains s)
+instance TF.IsObject (DnsDomainsDomains s) where
+    toObject DnsDomainsDomains' = []
+
+instance TF.IsValid (DnsDomainsDomains s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAliDomain (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Bool) where
+    computedAliDomain x = TF.compute (TF.refKey x) "ali_domain"
+
+instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
+
+instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
+
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
+
+instance s ~ s' => P.HasComputedGroupId (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedGroupId x = TF.compute (TF.refKey x) "group_id"
+
+instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
+
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+
+instance s ~ s' => P.HasComputedPunyCode (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedPunyCode x = TF.compute (TF.refKey x) "puny_code"
+
+instance s ~ s' => P.HasComputedVersionCode (TF.Ref s' (DnsDomainsDomains s)) (TF.Attr s P.Text) where
+    computedVersionCode x = TF.compute (TF.refKey x) "version_code"
+
+-- | @cs_swarm_nodes@ nested settings.
+data CsSwarmNodes s = CsSwarmNodes'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newCsSwarmNodes
+    :: CsSwarmNodes s
+newCsSwarmNodes =
+    CsSwarmNodes'
+
+instance P.Hashable  (CsSwarmNodes s)
+instance TF.IsValue  (CsSwarmNodes s)
+instance TF.IsObject (CsSwarmNodes s) where
+    toObject CsSwarmNodes' = []
+
+instance TF.IsValid (CsSwarmNodes s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedEip (TF.Ref s' (CsSwarmNodes s)) (TF.Attr s P.Text) where
+    computedEip x = TF.compute (TF.refKey x) "eip"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsSwarmNodes s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CsSwarmNodes s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (CsSwarmNodes s)) (TF.Attr s P.Text) where
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CsSwarmNodes s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+-- | @instance_types_local_storage@ nested settings.
+data InstanceTypesLocalStorage s = InstanceTypesLocalStorage'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newInstanceTypesLocalStorage
+    :: InstanceTypesLocalStorage s
+newInstanceTypesLocalStorage =
+    InstanceTypesLocalStorage'
+
+instance P.Hashable  (InstanceTypesLocalStorage s)
+instance TF.IsValue  (InstanceTypesLocalStorage s)
+instance TF.IsObject (InstanceTypesLocalStorage s) where
+    toObject InstanceTypesLocalStorage' = []
+
+instance TF.IsValid (InstanceTypesLocalStorage s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAmount (TF.Ref s' (InstanceTypesLocalStorage s)) (TF.Attr s P.Text) where
+    computedAmount x = TF.compute (TF.refKey x) "amount"
+
+instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (InstanceTypesLocalStorage s)) (TF.Attr s P.Text) where
+    computedCapacity x = TF.compute (TF.refKey x) "capacity"
+
+instance s ~ s' => P.HasComputedCategory (TF.Ref s' (InstanceTypesLocalStorage s)) (TF.Attr s P.Text) where
+    computedCategory x = TF.compute (TF.refKey x) "category"
+
+-- | @dns_records_records@ nested settings.
+data DnsRecordsRecords s = DnsRecordsRecords'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newDnsRecordsRecords
+    :: DnsRecordsRecords s
+newDnsRecordsRecords =
+    DnsRecordsRecords'
+
+instance P.Hashable  (DnsRecordsRecords s)
+instance TF.IsValue  (DnsRecordsRecords s)
+instance TF.IsObject (DnsRecordsRecords s) where
+    toObject DnsRecordsRecords' = []
+
+instance TF.IsValid (DnsRecordsRecords s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
+
+instance s ~ s' => P.HasComputedHostRecord (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedHostRecord x = TF.compute (TF.refKey x) "host_record"
+
+instance s ~ s' => P.HasComputedLine (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedLine x = TF.compute (TF.refKey x) "line"
+
+instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Bool) where
+    computedLocked x = TF.compute (TF.refKey x) "locked"
+
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Integer) where
+    computedPriority x = TF.compute (TF.refKey x) "priority"
+
+instance s ~ s' => P.HasComputedRecordId (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedRecordId x = TF.compute (TF.refKey x) "record_id"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Double) where
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DnsRecordsRecords s)) (TF.Attr s P.Text) where
+    computedValue x = TF.compute (TF.refKey x) "value"

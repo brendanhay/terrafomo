@@ -323,55 +323,55 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @alicloud_cdn_domain@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_cdn_domain terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/cdn_domain.html terraform documentation>
 -- for more information.
 data CdnDomainResource s = CdnDomainResource'
-    { _authConfig            :: TF.Attr s (AuthConfig s)
+    { _authConfig :: TF.Attr s (CdnDomainAuthConfig s)
     -- ^ @auth_config@ - (Optional)
     --
-    , _blockIps              :: TF.Attr s [TF.Attr s P.Text]
+    , _blockIps :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @block_ips@ - (Optional)
     --
-    , _cacheConfig           :: TF.Attr s [TF.Attr s (CacheConfig s)]
+    , _cacheConfig :: TF.Attr s [TF.Attr s (CdnDomainCacheConfig s)]
     -- ^ @cache_config@ - (Optional)
     --
-    , _cdnType               :: TF.Attr s P.Text
+    , _cdnType :: TF.Attr s P.Text
     -- ^ @cdn_type@ - (Required)
     --
-    , _domainName            :: TF.Attr s P.Text
+    , _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
-    , _httpHeaderConfig      :: TF.Attr s [TF.Attr s (HttpHeaderConfig s)]
+    , _httpHeaderConfig :: TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfig s)]
     -- ^ @http_header_config@ - (Optional)
     --
-    , _optimizeEnable        :: TF.Attr s P.Text
+    , _optimizeEnable :: TF.Attr s P.Text
     -- ^ @optimize_enable@ - (Optional)
     --
-    , _page404Config         :: TF.Attr s (Page404Config s)
+    , _page404Config :: TF.Attr s (CdnDomainPage404Config s)
     -- ^ @page_404_config@ - (Optional)
     --
-    , _pageCompressEnable    :: TF.Attr s P.Text
+    , _pageCompressEnable :: TF.Attr s P.Text
     -- ^ @page_compress_enable@ - (Optional)
     --
-    , _parameterFilterConfig :: TF.Attr s (ParameterFilterConfig s)
+    , _parameterFilterConfig :: TF.Attr s (CdnDomainParameterFilterConfig s)
     -- ^ @parameter_filter_config@ - (Optional)
     --
-    , _rangeEnable           :: TF.Attr s P.Text
+    , _rangeEnable :: TF.Attr s P.Text
     -- ^ @range_enable@ - (Optional)
     --
-    , _referConfig           :: TF.Attr s (ReferConfig s)
+    , _referConfig :: TF.Attr s (CdnDomainReferConfig s)
     -- ^ @refer_config@ - (Optional)
     --
-    , _sourcePort            :: TF.Attr s P.Integer
+    , _sourcePort :: TF.Attr s P.Integer
     -- ^ @source_port@ - (Optional)
     --
-    , _sourceType            :: TF.Attr s P.Text
+    , _sourceType :: TF.Attr s P.Text
     -- ^ @source_type@ - (Optional)
     --
-    , _sources               :: TF.Attr s [TF.Attr s P.Text]
+    , _sources :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @sources@ - (Optional)
     --
-    , _videoSeekEnable       :: TF.Attr s P.Text
+    , _videoSeekEnable :: TF.Attr s P.Text
     -- ^ @video_seek_enable@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -425,32 +425,32 @@ instance TF.IsValid (CdnDomainResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_authConfig"
                   (_authConfig
-                      :: CdnDomainResource s -> TF.Attr s (AuthConfig s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainAuthConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_cacheConfig"
                   (_cacheConfig
-                      :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CacheConfig s)])
+                      :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CdnDomainCacheConfig s)])
                   TF.validator
            P.<> TF.settingsValidator "_httpHeaderConfig"
                   (_httpHeaderConfig
-                      :: CdnDomainResource s -> TF.Attr s [TF.Attr s (HttpHeaderConfig s)])
+                      :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfig s)])
                   TF.validator
            P.<> TF.settingsValidator "_page404Config"
                   (_page404Config
-                      :: CdnDomainResource s -> TF.Attr s (Page404Config s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainPage404Config s))
                   TF.validator
            P.<> TF.settingsValidator "_parameterFilterConfig"
                   (_parameterFilterConfig
-                      :: CdnDomainResource s -> TF.Attr s (ParameterFilterConfig s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainParameterFilterConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_referConfig"
                   (_referConfig
-                      :: CdnDomainResource s -> TF.Attr s (ReferConfig s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainReferConfig s))
                   TF.validator
 
-instance P.HasAuthConfig (CdnDomainResource s) (TF.Attr s (AuthConfig s)) where
+instance P.HasAuthConfig (CdnDomainResource s) (TF.Attr s (CdnDomainAuthConfig s)) where
     authConfig =
-        P.lens (_authConfig :: CdnDomainResource s -> TF.Attr s (AuthConfig s))
+        P.lens (_authConfig :: CdnDomainResource s -> TF.Attr s (CdnDomainAuthConfig s))
                (\s a -> s { _authConfig = a } :: CdnDomainResource s)
 
 instance P.HasBlockIps (CdnDomainResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -458,9 +458,9 @@ instance P.HasBlockIps (CdnDomainResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_blockIps :: CdnDomainResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _blockIps = a } :: CdnDomainResource s)
 
-instance P.HasCacheConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (CacheConfig s)]) where
+instance P.HasCacheConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (CdnDomainCacheConfig s)]) where
     cacheConfig =
-        P.lens (_cacheConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CacheConfig s)])
+        P.lens (_cacheConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CdnDomainCacheConfig s)])
                (\s a -> s { _cacheConfig = a } :: CdnDomainResource s)
 
 instance P.HasCdnType (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -473,9 +473,9 @@ instance P.HasDomainName (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_domainName :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _domainName = a } :: CdnDomainResource s)
 
-instance P.HasHttpHeaderConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (HttpHeaderConfig s)]) where
+instance P.HasHttpHeaderConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfig s)]) where
     httpHeaderConfig =
-        P.lens (_httpHeaderConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (HttpHeaderConfig s)])
+        P.lens (_httpHeaderConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfig s)])
                (\s a -> s { _httpHeaderConfig = a } :: CdnDomainResource s)
 
 instance P.HasOptimizeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -483,9 +483,9 @@ instance P.HasOptimizeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_optimizeEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _optimizeEnable = a } :: CdnDomainResource s)
 
-instance P.HasPage404Config (CdnDomainResource s) (TF.Attr s (Page404Config s)) where
+instance P.HasPage404Config (CdnDomainResource s) (TF.Attr s (CdnDomainPage404Config s)) where
     page404Config =
-        P.lens (_page404Config :: CdnDomainResource s -> TF.Attr s (Page404Config s))
+        P.lens (_page404Config :: CdnDomainResource s -> TF.Attr s (CdnDomainPage404Config s))
                (\s a -> s { _page404Config = a } :: CdnDomainResource s)
 
 instance P.HasPageCompressEnable (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -493,9 +493,9 @@ instance P.HasPageCompressEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_pageCompressEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _pageCompressEnable = a } :: CdnDomainResource s)
 
-instance P.HasParameterFilterConfig (CdnDomainResource s) (TF.Attr s (ParameterFilterConfig s)) where
+instance P.HasParameterFilterConfig (CdnDomainResource s) (TF.Attr s (CdnDomainParameterFilterConfig s)) where
     parameterFilterConfig =
-        P.lens (_parameterFilterConfig :: CdnDomainResource s -> TF.Attr s (ParameterFilterConfig s))
+        P.lens (_parameterFilterConfig :: CdnDomainResource s -> TF.Attr s (CdnDomainParameterFilterConfig s))
                (\s a -> s { _parameterFilterConfig = a } :: CdnDomainResource s)
 
 instance P.HasRangeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -503,9 +503,9 @@ instance P.HasRangeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_rangeEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _rangeEnable = a } :: CdnDomainResource s)
 
-instance P.HasReferConfig (CdnDomainResource s) (TF.Attr s (ReferConfig s)) where
+instance P.HasReferConfig (CdnDomainResource s) (TF.Attr s (CdnDomainReferConfig s)) where
     referConfig =
-        P.lens (_referConfig :: CdnDomainResource s -> TF.Attr s (ReferConfig s))
+        P.lens (_referConfig :: CdnDomainResource s -> TF.Attr s (CdnDomainReferConfig s))
                (\s a -> s { _referConfig = a } :: CdnDomainResource s)
 
 instance P.HasSourcePort (CdnDomainResource s) (TF.Attr s P.Integer) where
@@ -529,18 +529,18 @@ instance P.HasVideoSeekEnable (CdnDomainResource s) (TF.Attr s P.Text) where
                (\s a -> s { _videoSeekEnable = a } :: CdnDomainResource s)
 
 instance s ~ s' => P.HasComputedScope (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
-    computedScope x = TF.compute (TF.refKey x) "_computedScope"
+    computedScope x = TF.compute (TF.refKey x) "scope"
 
 -- | @alicloud_cms_alarm@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_cms_alarm terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/cms_alarm.html terraform documentation>
 -- for more information.
 data CmsAlarmResource s = CmsAlarmResource'
     { _contactGroups  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @contact_groups@ - (Required)
     --
     , _dimensions     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @dimensions@ - (Required)
+    -- ^ @dimensions@ - (Required, Forces New)
     --
     , _enabled        :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
@@ -549,7 +549,7 @@ data CmsAlarmResource s = CmsAlarmResource'
     -- ^ @end_time@ - (Optional)
     --
     , _metric         :: TF.Attr s P.Text
-    -- ^ @metric@ - (Required)
+    -- ^ @metric@ - (Required, Forces New)
     --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -564,7 +564,7 @@ data CmsAlarmResource s = CmsAlarmResource'
     -- ^ @period@ - (Optional)
     --
     , _project        :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    -- ^ @project@ - (Required, Forces New)
     --
     , _silenceTime    :: TF.Attr s P.Integer
     -- ^ @silence_time@ - (Optional)
@@ -709,27 +709,27 @@ instance P.HasTriggeredCount (CmsAlarmResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _triggeredCount = a } :: CmsAlarmResource s)
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @alicloud_container_cluster@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_container_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/container_cluster.html terraform documentation>
 -- for more information.
 data ContainerClusterResource s = ContainerClusterResource'
     { _cidrBlock    :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Required)
+    -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _diskCategory :: TF.Attr s P.Text
-    -- ^ @disk_category@ - (Optional)
+    -- ^ @disk_category@ - (Optional, Forces New)
     --
     , _diskSize     :: TF.Attr s P.Integer
-    -- ^ @disk_size@ - (Optional)
+    -- ^ @disk_size@ - (Optional, Forces New)
     --
     , _imageId      :: TF.Attr s P.Text
-    -- ^ @image_id@ - (Optional)
+    -- ^ @image_id@ - (Optional, Forces New)
     --
     , _instanceType :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Required)
+    -- ^ @instance_type@ - (Required, Forces New)
     --
     , _isOutdated   :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
@@ -741,13 +741,13 @@ data ContainerClusterResource s = ContainerClusterResource'
     -- ^ @node_number@ - (Optional)
     --
     , _password     :: TF.Attr s P.Text
-    -- ^ @password@ - (Required)
+    -- ^ @password@ - (Required, Forces New)
     --
     , _releaseEip   :: TF.Attr s P.Bool
     -- ^ @release_eip@ - (Optional)
     --
     , _vswitchId    :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Required)
+    -- ^ @vswitch_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -847,26 +847,26 @@ instance P.HasVswitchId (ContainerClusterResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vswitchId = a } :: ContainerClusterResource s)
 
 instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedAgentVersion x = TF.compute (TF.refKey x) "_computedAgentVersion"
+    computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (Nodes s)]) where
-    computedNodes x = TF.compute (TF.refKey x) "_computedNodes"
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (ContainerClusterNodes s)]) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedSecurityGroupId x = TF.compute (TF.refKey x) "_computedSecurityGroupId"
+    computedSecurityGroupId x = TF.compute (TF.refKey x) "security_group_id"
 
 instance s ~ s' => P.HasComputedSlbId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedSlbId x = TF.compute (TF.refKey x) "_computedSlbId"
+    computedSlbId x = TF.compute (TF.refKey x) "slb_id"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @alicloud_cs_application@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_cs_application terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/cs_application.html terraform documentation>
 -- for more information.
 data CsApplicationResource s = CsApplicationResource'
     { _blueGreen        :: TF.Attr s P.Bool
@@ -876,7 +876,7 @@ data CsApplicationResource s = CsApplicationResource'
     -- ^ @blue_green_confirm@ - (Optional)
     --
     , _clusterName      :: TF.Attr s P.Text
-    -- ^ @cluster_name@ - (Required)
+    -- ^ @cluster_name@ - (Required, Forces New)
     --
     , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
@@ -888,7 +888,7 @@ data CsApplicationResource s = CsApplicationResource'
     -- ^ @latest_image@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _template         :: TF.Attr s P.Text
     -- ^ @template@ - (Required)
@@ -979,14 +979,14 @@ instance P.HasVersion (CsApplicationResource s) (TF.Attr s P.Text) where
                (\s a -> s { _version = a } :: CsApplicationResource s)
 
 instance s ~ s' => P.HasComputedDefaultDomain (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
-    computedDefaultDomain x = TF.compute (TF.refKey x) "_computedDefaultDomain"
+    computedDefaultDomain x = TF.compute (TF.refKey x) "default_domain"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (CsApplicationResource s)) (TF.Attr s [TF.Attr s (Services s)]) where
-    computedServices x = TF.compute (TF.refKey x) "_computedServices"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CsApplicationResource s)) (TF.Attr s [TF.Attr s (CsApplicationServices s)]) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @alicloud_cs_kubernetes@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_cs_kubernetes terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/cs_kubernetes.html terraform documentation>
 -- for more information.
 data CsKubernetesResource s = CsKubernetesResource'
     { _clientCert          :: TF.Attr s P.Text
@@ -1209,60 +1209,60 @@ instance P.HasWorkerNumber (CsKubernetesResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _workerNumber = a } :: CsKubernetesResource s)
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedConnections (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s (P.HashMap P.Text (Connections s))) where
-    computedConnections x = TF.compute (TF.refKey x) "_computedConnections"
+instance s ~ s' => P.HasComputedConnections (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s (P.HashMap P.Text (CsKubernetesConnections s))) where
+    computedConnections x = TF.compute (TF.refKey x) "connections"
 
 instance s ~ s' => P.HasComputedImageId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedImageId x = TF.compute (TF.refKey x) "_computedImageId"
+    computedImageId x = TF.compute (TF.refKey x) "image_id"
 
-instance s ~ s' => P.HasComputedMasterNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (MasterNodes s)]) where
-    computedMasterNodes x = TF.compute (TF.refKey x) "_computedMasterNodes"
+instance s ~ s' => P.HasComputedMasterNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (CsKubernetesMasterNodes s)]) where
+    computedMasterNodes x = TF.compute (TF.refKey x) "master_nodes"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedNatGatewayId x = TF.compute (TF.refKey x) "_computedNatGatewayId"
+    computedNatGatewayId x = TF.compute (TF.refKey x) "nat_gateway_id"
 
 instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedSecurityGroupId x = TF.compute (TF.refKey x) "_computedSecurityGroupId"
+    computedSecurityGroupId x = TF.compute (TF.refKey x) "security_group_id"
 
 instance s ~ s' => P.HasComputedSlbInternet (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedSlbInternet x = TF.compute (TF.refKey x) "_computedSlbInternet"
+    computedSlbInternet x = TF.compute (TF.refKey x) "slb_internet"
 
 instance s ~ s' => P.HasComputedSlbIntranet (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedSlbIntranet x = TF.compute (TF.refKey x) "_computedSlbIntranet"
+    computedSlbIntranet x = TF.compute (TF.refKey x) "slb_intranet"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
-    computedVswitchId x = TF.compute (TF.refKey x) "_computedVswitchId"
+    computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
-instance s ~ s' => P.HasComputedWorkerNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (WorkerNodes s)]) where
-    computedWorkerNodes x = TF.compute (TF.refKey x) "_computedWorkerNodes"
+instance s ~ s' => P.HasComputedWorkerNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (CsKubernetesWorkerNodes s)]) where
+    computedWorkerNodes x = TF.compute (TF.refKey x) "worker_nodes"
 
 -- | @alicloud_cs_swarm@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_cs_swarm terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/cs_swarm.html terraform documentation>
 -- for more information.
 data CsSwarmResource s = CsSwarmResource'
     { _cidrBlock    :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Required)
+    -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _diskCategory :: TF.Attr s P.Text
-    -- ^ @disk_category@ - (Optional)
+    -- ^ @disk_category@ - (Optional, Forces New)
     --
     , _diskSize     :: TF.Attr s P.Integer
-    -- ^ @disk_size@ - (Optional)
+    -- ^ @disk_size@ - (Optional, Forces New)
     --
     , _imageId      :: TF.Attr s P.Text
-    -- ^ @image_id@ - (Optional)
+    -- ^ @image_id@ - (Optional, Forces New)
     --
     , _instanceType :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Required)
+    -- ^ @instance_type@ - (Required, Forces New)
     --
     , _isOutdated   :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
@@ -1274,13 +1274,13 @@ data CsSwarmResource s = CsSwarmResource'
     -- ^ @node_number@ - (Optional)
     --
     , _password     :: TF.Attr s P.Text
-    -- ^ @password@ - (Required)
+    -- ^ @password@ - (Required, Forces New)
     --
     , _releaseEip   :: TF.Attr s P.Bool
     -- ^ @release_eip@ - (Optional)
     --
     , _vswitchId    :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Required)
+    -- ^ @vswitch_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1380,36 +1380,36 @@ instance P.HasVswitchId (CsSwarmResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vswitchId = a } :: CsSwarmResource s)
 
 instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
-    computedAgentVersion x = TF.compute (TF.refKey x) "_computedAgentVersion"
+    computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CsSwarmResource s)) (TF.Attr s [TF.Attr s (Nodes s)]) where
-    computedNodes x = TF.compute (TF.refKey x) "_computedNodes"
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CsSwarmResource s)) (TF.Attr s [TF.Attr s (CsSwarmNodes s)]) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
-    computedSecurityGroupId x = TF.compute (TF.refKey x) "_computedSecurityGroupId"
+    computedSecurityGroupId x = TF.compute (TF.refKey x) "security_group_id"
 
 instance s ~ s' => P.HasComputedSlbId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
-    computedSlbId x = TF.compute (TF.refKey x) "_computedSlbId"
+    computedSlbId x = TF.compute (TF.refKey x) "slb_id"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @alicloud_db_account@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_account terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_account.html terraform documentation>
 -- for more information.
 data DbAccountResource s = DbAccountResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _instanceId  :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Required)
+    -- ^ @instance_id@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _password    :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
@@ -1473,20 +1473,20 @@ instance P.HasType' (DbAccountResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_db_account_privilege@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_account_privilege terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_account_privilege.html terraform documentation>
 -- for more information.
 data DbAccountPrivilegeResource s = DbAccountPrivilegeResource'
     { _accountName :: TF.Attr s P.Text
-    -- ^ @account_name@ - (Required)
+    -- ^ @account_name@ - (Required, Forces New)
     --
     , _dbNames     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @db_names@ - (Required)
     --
     , _instanceId  :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Required)
+    -- ^ @instance_id@ - (Required, Forces New)
     --
     , _privilege   :: TF.Attr s P.Text
-    -- ^ @privilege@ - (Optional)
+    -- ^ @privilege@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1537,14 +1537,14 @@ instance P.HasPrivilege (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_db_backup_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_backup_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_backup_policy.html terraform documentation>
 -- for more information.
 data DbBackupPolicyResource s = DbBackupPolicyResource'
     { _backupTime         :: TF.Attr s P.Text
     -- ^ @backup_time@ - (Optional)
     --
     , _instanceId         :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Required)
+    -- ^ @instance_id@ - (Required, Forces New)
     --
     , _logBackup          :: TF.Attr s P.Bool
     -- ^ @log_backup@ - (Optional)
@@ -1608,15 +1608,15 @@ instance P.HasRetentionPeriod (DbBackupPolicyResource s) (TF.Attr s P.Integer) w
                (\s a -> s { _retentionPeriod = a } :: DbBackupPolicyResource s)
 
 instance s ~ s' => P.HasComputedBackupPeriod (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedBackupPeriod x = TF.compute (TF.refKey x) "_computedBackupPeriod"
+    computedBackupPeriod x = TF.compute (TF.refKey x) "backup_period"
 
 -- | @alicloud_db_connection@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_connection terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_connection.html terraform documentation>
 -- for more information.
 data DbConnectionResource s = DbConnectionResource'
     { _instanceId :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Required)
+    -- ^ @instance_id@ - (Required, Forces New)
     --
     , _port       :: TF.Attr s P.Text
     -- ^ @port@ - (Optional)
@@ -1653,30 +1653,30 @@ instance P.HasPort (DbConnectionResource s) (TF.Attr s P.Text) where
                (\s a -> s { _port = a } :: DbConnectionResource s)
 
 instance s ~ s' => P.HasComputedConnectionPrefix (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
-    computedConnectionPrefix x = TF.compute (TF.refKey x) "_computedConnectionPrefix"
+    computedConnectionPrefix x = TF.compute (TF.refKey x) "connection_prefix"
 
 instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
-    computedConnectionString x = TF.compute (TF.refKey x) "_computedConnectionString"
+    computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 -- | @alicloud_db_database@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_database terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_database.html terraform documentation>
 -- for more information.
 data DbDatabaseResource s = DbDatabaseResource'
     { _characterSet :: TF.Attr s P.Text
-    -- ^ @character_set@ - (Optional)
+    -- ^ @character_set@ - (Optional, Forces New)
     --
     , _description  :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _instanceId   :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Required)
+    -- ^ @instance_id@ - (Required, Forces New)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1726,17 +1726,17 @@ instance P.HasName (DbDatabaseResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_db_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/db_instance.html terraform documentation>
 -- for more information.
 data DbInstanceResource s = DbInstanceResource'
     { _engine             :: TF.Attr s P.Text
-    -- ^ @engine@ - (Required)
+    -- ^ @engine@ - (Required, Forces New)
     --
     , _engineVersion      :: TF.Attr s P.Text
-    -- ^ @engine_version@ - (Required)
+    -- ^ @engine_version@ - (Required, Forces New)
     --
     , _instanceChargeType :: TF.Attr s P.Text
-    -- ^ @instance_charge_type@ - (Optional)
+    -- ^ @instance_charge_type@ - (Optional, Forces New)
     --
     , _instanceName       :: TF.Attr s P.Text
     -- ^ @instance_name@ - (Optional)
@@ -1751,7 +1751,7 @@ data DbInstanceResource s = DbInstanceResource'
     -- ^ @period@ - (Optional)
     --
     , _vswitchId          :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Optional)
+    -- ^ @vswitch_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1830,33 +1830,33 @@ instance P.HasVswitchId (DbInstanceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vswitchId = a } :: DbInstanceResource s)
 
 instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
-    computedConnectionString x = TF.compute (TF.refKey x) "_computedConnectionString"
+    computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
-    computedPort x = TF.compute (TF.refKey x) "_computedPort"
+    computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedSecurityIps (TF.Ref s' (DbInstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecurityIps x = TF.compute (TF.refKey x) "_computedSecurityIps"
+    computedSecurityIps x = TF.compute (TF.refKey x) "security_ips"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @alicloud_disk@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_disk terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/disk.html terraform documentation>
 -- for more information.
 data DiskResource s = DiskResource'
     { _availabilityZone :: TF.Attr s P.Text
-    -- ^ @availability_zone@ - (Required)
+    -- ^ @availability_zone@ - (Required, Forces New)
     --
     , _category         :: TF.Attr s P.Text
-    -- ^ @category@ - (Optional)
+    -- ^ @category@ - (Optional, Forces New)
     --
     , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _encrypted        :: TF.Attr s P.Bool
-    -- ^ @encrypted@ - (Optional)
+    -- ^ @encrypted@ - (Optional, Forces New)
     --
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
@@ -1944,18 +1944,18 @@ instance P.HasTags (DiskResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Te
                (\s a -> s { _tags = a } :: DiskResource s)
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @alicloud_disk_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_disk_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/disk_attachment.html terraform documentation>
 -- for more information.
 data DiskAttachmentResource s = DiskAttachmentResource'
     { _diskId     :: TF.Attr s P.Text
-    -- ^ @disk_id@ - (Optional)
+    -- ^ @disk_id@ - (Optional, Forces New)
     --
     , _instanceId :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Optional)
+    -- ^ @instance_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1989,7 +1989,7 @@ instance P.HasInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_dns@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/dns.html terraform documentation>
 -- for more information.
 data DnsResource s = DnsResource'
     { _groupId :: TF.Attr s P.Text
@@ -2030,11 +2030,11 @@ instance P.HasName (DnsResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: DnsResource s)
 
 instance s ~ s' => P.HasComputedDnsServer (TF.Ref s' (DnsResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDnsServer x = TF.compute (TF.refKey x) "_computedDnsServer"
+    computedDnsServer x = TF.compute (TF.refKey x) "dns_server"
 
 -- | @alicloud_dns_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/dns_group.html terraform documentation>
 -- for more information.
 data DnsGroupResource s = DnsGroupResource'
     { _name :: TF.Attr s P.Text
@@ -2066,7 +2066,7 @@ instance P.HasName (DnsGroupResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_dns_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/dns_record.html terraform documentation>
 -- for more information.
 data DnsRecordResource s = DnsRecordResource'
     { _hostRecord :: TF.Attr s P.Text
@@ -2160,14 +2160,14 @@ instance P.HasValue (DnsRecordResource s) (TF.Attr s P.Text) where
                (\s a -> s { _value = a } :: DnsRecordResource s)
 
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsRecordResource s)) (TF.Attr s P.Bool) where
-    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
+    computedLocked x = TF.compute (TF.refKey x) "locked"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DnsRecordResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @alicloud_eip@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_eip terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/eip.html terraform documentation>
 -- for more information.
 data EipResource s = EipResource'
     { _bandwidth          :: TF.Attr s P.Integer
@@ -2177,16 +2177,16 @@ data EipResource s = EipResource'
     -- ^ @description@ - (Optional)
     --
     , _instanceChargeType :: TF.Attr s P.Text
-    -- ^ @instance_charge_type@ - (Optional)
+    -- ^ @instance_charge_type@ - (Optional, Forces New)
     --
     , _internetChargeType :: TF.Attr s P.Text
-    -- ^ @internet_charge_type@ - (Optional)
+    -- ^ @internet_charge_type@ - (Optional, Forces New)
     --
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _period             :: TF.Attr s P.Integer
-    -- ^ @period@ - (Optional)
+    -- ^ @period@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2247,17 +2247,17 @@ instance P.HasPeriod (EipResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _period = a } :: EipResource s)
 
 instance s ~ s' => P.HasComputedInstance (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
-    computedInstance x = TF.compute (TF.refKey x) "_computedInstance"
+    computedInstance x = TF.compute (TF.refKey x) "instance"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @alicloud_eip_association@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_eip_association terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/eip_association.html terraform documentation>
 -- for more information.
 data EipAssociationResource s = EipAssociationResource'
     deriving (P.Show, P.Eq, P.Generic)
@@ -2275,14 +2275,14 @@ instance TF.IsValid (EipAssociationResource s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
-    computedAllocationId x = TF.compute (TF.refKey x) "_computedAllocationId"
+    computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 -- | @alicloud_ess_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ess_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_attachment.html terraform documentation>
 -- for more information.
 data EssAttachmentResource s = EssAttachmentResource'
     { _force          :: TF.Attr s P.Bool
@@ -2292,7 +2292,7 @@ data EssAttachmentResource s = EssAttachmentResource'
     -- ^ @instance_ids@ - (Required)
     --
     , _scalingGroupId :: TF.Attr s P.Text
-    -- ^ @scaling_group_id@ - (Required)
+    -- ^ @scaling_group_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2335,11 +2335,11 @@ instance P.HasScalingGroupId (EssAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ess_scaling_configuration@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ess_scaling_configuration terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html terraform documentation>
 -- for more information.
 data EssScalingConfigurationResource s = EssScalingConfigurationResource'
-    { _dataDisk :: TF.Attr s [TF.Attr s (DataDisk s)]
-    -- ^ @data_disk@ - (Optional)
+    { _dataDisk :: TF.Attr s [TF.Attr s (EssScalingConfigurationDataDisk s)]
+    -- ^ @data_disk@ - (Optional, Forces New)
     --
     , _enable :: TF.Attr s P.Bool
     -- ^ @enable@ - (Optional)
@@ -2348,43 +2348,43 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource'
     -- ^ @force_delete@ - (Optional)
     --
     , _imageId :: TF.Attr s P.Text
-    -- ^ @image_id@ - (Required)
+    -- ^ @image_id@ - (Required, Forces New)
     --
     , _instanceName :: TF.Attr s P.Text
     -- ^ @instance_name@ - (Optional)
     --
     , _instanceType :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Required)
+    -- ^ @instance_type@ - (Required, Forces New)
     --
     , _internetChargeType :: TF.Attr s P.Text
-    -- ^ @internet_charge_type@ - (Optional)
+    -- ^ @internet_charge_type@ - (Optional, Forces New)
     --
     , _internetMaxBandwidthOut :: TF.Attr s P.Integer
-    -- ^ @internet_max_bandwidth_out@ - (Optional)
+    -- ^ @internet_max_bandwidth_out@ - (Optional, Forces New)
     --
     , _isOutdated :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
     --
     , _keyName :: TF.Attr s P.Text
-    -- ^ @key_name@ - (Optional)
+    -- ^ @key_name@ - (Optional, Forces New)
     --
     , _roleName :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Optional)
+    -- ^ @role_name@ - (Optional, Forces New)
     --
     , _scalingGroupId :: TF.Attr s P.Text
-    -- ^ @scaling_group_id@ - (Required)
+    -- ^ @scaling_group_id@ - (Required, Forces New)
     --
     , _securityGroupId :: TF.Attr s P.Text
-    -- ^ @security_group_id@ - (Required)
+    -- ^ @security_group_id@ - (Required, Forces New)
     --
     , _systemDiskCategory :: TF.Attr s P.Text
-    -- ^ @system_disk_category@ - (Optional)
+    -- ^ @system_disk_category@ - (Optional, Forces New)
     --
     , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
+    -- ^ @tags@ - (Optional, Forces New)
     --
     , _userData :: TF.Attr s P.Text
-    -- ^ @user_data@ - (Optional)
+    -- ^ @user_data@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2439,12 +2439,12 @@ instance TF.IsValid (EssScalingConfigurationResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dataDisk"
                   (_dataDisk
-                      :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s (DataDisk s)])
+                      :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s (EssScalingConfigurationDataDisk s)])
                   TF.validator
 
-instance P.HasDataDisk (EssScalingConfigurationResource s) (TF.Attr s [TF.Attr s (DataDisk s)]) where
+instance P.HasDataDisk (EssScalingConfigurationResource s) (TF.Attr s [TF.Attr s (EssScalingConfigurationDataDisk s)]) where
     dataDisk =
-        P.lens (_dataDisk :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s (DataDisk s)])
+        P.lens (_dataDisk :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s (EssScalingConfigurationDataDisk s)])
                (\s a -> s { _dataDisk = a } :: EssScalingConfigurationResource s)
 
 instance P.HasEnable (EssScalingConfigurationResource s) (TF.Attr s P.Bool) where
@@ -2523,30 +2523,30 @@ instance P.HasUserData (EssScalingConfigurationResource s) (TF.Attr s P.Text) wh
                (\s a -> s { _userData = a } :: EssScalingConfigurationResource s)
 
 instance s ~ s' => P.HasComputedActive (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Bool) where
-    computedActive x = TF.compute (TF.refKey x) "_computedActive"
+    computedActive x = TF.compute (TF.refKey x) "active"
 
 instance s ~ s' => P.HasComputedInternetMaxBandwidthIn (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Integer) where
-    computedInternetMaxBandwidthIn x = TF.compute (TF.refKey x) "_computedInternetMaxBandwidthIn"
+    computedInternetMaxBandwidthIn x = TF.compute (TF.refKey x) "internet_max_bandwidth_in"
 
 instance s ~ s' => P.HasComputedScalingConfigurationName (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
-    computedScalingConfigurationName x = TF.compute (TF.refKey x) "_computedScalingConfigurationName"
+    computedScalingConfigurationName x = TF.compute (TF.refKey x) "scaling_configuration_name"
 
 instance s ~ s' => P.HasComputedSubstitute (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
-    computedSubstitute x = TF.compute (TF.refKey x) "_computedSubstitute"
+    computedSubstitute x = TF.compute (TF.refKey x) "substitute"
 
 -- | @alicloud_ess_scaling_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ess_scaling_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_group.html terraform documentation>
 -- for more information.
 data EssScalingGroupResource s = EssScalingGroupResource'
     { _dbInstanceIds    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @db_instance_ids@ - (Optional)
+    -- ^ @db_instance_ids@ - (Optional, Forces New)
     --
     , _defaultCooldown  :: TF.Attr s P.Integer
     -- ^ @default_cooldown@ - (Optional)
     --
     , _loadbalancerIds  :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @loadbalancer_ids@ - (Optional)
+    -- ^ @loadbalancer_ids@ - (Optional, Forces New)
     --
     , _maxSize          :: TF.Attr s P.Integer
     -- ^ @max_size@ - (Required)
@@ -2561,7 +2561,7 @@ data EssScalingGroupResource s = EssScalingGroupResource'
     -- ^ @scaling_group_name@ - (Optional)
     --
     , _vswitchIds       :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @vswitch_ids@ - (Optional)
+    -- ^ @vswitch_ids@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -2639,7 +2639,7 @@ instance P.HasVswitchIds (EssScalingGroupResource s) (TF.Attr s (P.NonEmpty (TF.
 
 -- | @alicloud_ess_scaling_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ess_scaling_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_rule.html terraform documentation>
 -- for more information.
 data EssScalingRuleResource s = EssScalingRuleResource'
     { _adjustmentType  :: TF.Attr s P.Text
@@ -2702,14 +2702,14 @@ instance P.HasScalingGroupId (EssScalingRuleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _scalingGroupId = a } :: EssScalingRuleResource s)
 
 instance s ~ s' => P.HasComputedAri (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
-    computedAri x = TF.compute (TF.refKey x) "_computedAri"
+    computedAri x = TF.compute (TF.refKey x) "ari"
 
 instance s ~ s' => P.HasComputedScalingRuleName (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
-    computedScalingRuleName x = TF.compute (TF.refKey x) "_computedScalingRuleName"
+    computedScalingRuleName x = TF.compute (TF.refKey x) "scaling_rule_name"
 
 -- | @alicloud_ess_schedule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ess_schedule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_schedule.html terraform documentation>
 -- for more information.
 data EssScheduleResource s = EssScheduleResource'
     { _launchExpirationTime :: TF.Attr s P.Integer
@@ -2781,20 +2781,20 @@ instance P.HasTaskEnabled (EssScheduleResource s) (TF.Attr s P.Bool) where
                (\s a -> s { _taskEnabled = a } :: EssScheduleResource s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedRecurrenceEndTime (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
-    computedRecurrenceEndTime x = TF.compute (TF.refKey x) "_computedRecurrenceEndTime"
+    computedRecurrenceEndTime x = TF.compute (TF.refKey x) "recurrence_end_time"
 
 instance s ~ s' => P.HasComputedRecurrenceType (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
-    computedRecurrenceType x = TF.compute (TF.refKey x) "_computedRecurrenceType"
+    computedRecurrenceType x = TF.compute (TF.refKey x) "recurrence_type"
 
 instance s ~ s' => P.HasComputedRecurrenceValue (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
-    computedRecurrenceValue x = TF.compute (TF.refKey x) "_computedRecurrenceValue"
+    computedRecurrenceValue x = TF.compute (TF.refKey x) "recurrence_value"
 
 -- | @alicloud_fc_function@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_fc_function terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/fc_function.html terraform documentation>
 -- for more information.
 data FcFunctionResource s = FcFunctionResource'
     { _description :: TF.Attr s P.Text
@@ -2814,7 +2814,7 @@ data FcFunctionResource s = FcFunctionResource'
     -- ^ @memory_size@ - (Optional)
     --
     , _namePrefix  :: TF.Attr s P.Text
-    -- ^ @name_prefix@ - (Optional)
+    -- ^ @name_prefix@ - (Optional, Forces New)
     --
     , _ossBucket   :: TF.Attr s P.Text
     -- ^ @oss_bucket@ - (Optional)
@@ -2832,7 +2832,7 @@ data FcFunctionResource s = FcFunctionResource'
     -- ^ @runtime@ - (Required)
     --
     , _service     :: TF.Attr s P.Text
-    -- ^ @service@ - (Required)
+    -- ^ @service@ - (Required, Forces New)
     --
     , _timeout     :: TF.Attr s P.Integer
     -- ^ @timeout@ - (Optional)
@@ -2943,14 +2943,14 @@ instance P.HasTimeout (FcFunctionResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _timeout = a } :: FcFunctionResource s)
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
-    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @alicloud_fc_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_fc_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/fc_service.html terraform documentation>
 -- for more information.
 data FcServiceResource s = FcServiceResource'
     { _description    :: TF.Attr s P.Text
@@ -2959,16 +2959,16 @@ data FcServiceResource s = FcServiceResource'
     , _internetAccess :: TF.Attr s P.Bool
     -- ^ @internet_access@ - (Optional)
     --
-    , _logConfig      :: TF.Attr s (LogConfig s)
+    , _logConfig      :: TF.Attr s (FcServiceLogConfig s)
     -- ^ @log_config@ - (Optional)
     --
     , _namePrefix     :: TF.Attr s P.Text
-    -- ^ @name_prefix@ - (Optional)
+    -- ^ @name_prefix@ - (Optional, Forces New)
     --
     , _role           :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
-    , _vpcConfig      :: TF.Attr s (VpcConfig s)
+    , _vpcConfig      :: TF.Attr s (FcServiceVpcConfig s)
     -- ^ @vpc_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3000,11 +3000,11 @@ instance TF.IsValid (FcServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_logConfig"
                   (_logConfig
-                      :: FcServiceResource s -> TF.Attr s (LogConfig s))
+                      :: FcServiceResource s -> TF.Attr s (FcServiceLogConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_vpcConfig"
                   (_vpcConfig
-                      :: FcServiceResource s -> TF.Attr s (VpcConfig s))
+                      :: FcServiceResource s -> TF.Attr s (FcServiceVpcConfig s))
                   TF.validator
 
 instance P.HasDescription (FcServiceResource s) (TF.Attr s P.Text) where
@@ -3017,9 +3017,9 @@ instance P.HasInternetAccess (FcServiceResource s) (TF.Attr s P.Bool) where
         P.lens (_internetAccess :: FcServiceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _internetAccess = a } :: FcServiceResource s)
 
-instance P.HasLogConfig (FcServiceResource s) (TF.Attr s (LogConfig s)) where
+instance P.HasLogConfig (FcServiceResource s) (TF.Attr s (FcServiceLogConfig s)) where
     logConfig =
-        P.lens (_logConfig :: FcServiceResource s -> TF.Attr s (LogConfig s))
+        P.lens (_logConfig :: FcServiceResource s -> TF.Attr s (FcServiceLogConfig s))
                (\s a -> s { _logConfig = a } :: FcServiceResource s)
 
 instance P.HasNamePrefix (FcServiceResource s) (TF.Attr s P.Text) where
@@ -3032,42 +3032,42 @@ instance P.HasRole (FcServiceResource s) (TF.Attr s P.Text) where
         P.lens (_role :: FcServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: FcServiceResource s)
 
-instance P.HasVpcConfig (FcServiceResource s) (TF.Attr s (VpcConfig s)) where
+instance P.HasVpcConfig (FcServiceResource s) (TF.Attr s (FcServiceVpcConfig s)) where
     vpcConfig =
-        P.lens (_vpcConfig :: FcServiceResource s -> TF.Attr s (VpcConfig s))
+        P.lens (_vpcConfig :: FcServiceResource s -> TF.Attr s (FcServiceVpcConfig s))
                (\s a -> s { _vpcConfig = a } :: FcServiceResource s)
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
-    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @alicloud_fc_trigger@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_fc_trigger terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/fc_trigger.html terraform documentation>
 -- for more information.
 data FcTriggerResource s = FcTriggerResource'
     { _config     :: TF.Attr s P.Text
     -- ^ @config@ - (Required)
     --
     , _function   :: TF.Attr s P.Text
-    -- ^ @function@ - (Required)
+    -- ^ @function@ - (Required, Forces New)
     --
     , _namePrefix :: TF.Attr s P.Text
-    -- ^ @name_prefix@ - (Optional)
+    -- ^ @name_prefix@ - (Optional, Forces New)
     --
     , _role       :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
     , _service    :: TF.Attr s P.Text
-    -- ^ @service@ - (Required)
+    -- ^ @service@ - (Required, Forces New)
     --
     , _sourceArn  :: TF.Attr s P.Text
-    -- ^ @source_arn@ - (Optional)
+    -- ^ @source_arn@ - (Optional, Forces New)
     --
     , _type'      :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3139,24 +3139,24 @@ instance P.HasType' (FcTriggerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: FcTriggerResource s)
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcTriggerResource s)) (TF.Attr s P.Text) where
-    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (FcTriggerResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @alicloud_forward_entry@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_forward_entry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/forward_entry.html terraform documentation>
 -- for more information.
 data ForwardEntryResource s = ForwardEntryResource'
     { _externalIp     :: TF.Attr s P.Text
-    -- ^ @external_ip@ - (Required)
+    -- ^ @external_ip@ - (Required, Forces New)
     --
     , _externalPort   :: TF.Attr s P.Text
     -- ^ @external_port@ - (Required)
     --
     , _forwardTableId :: TF.Attr s P.Text
-    -- ^ @forward_table_id@ - (Required)
+    -- ^ @forward_table_id@ - (Required, Forces New)
     --
     , _internalIp     :: TF.Attr s P.Text
     -- ^ @internal_ip@ - (Required)
@@ -3233,7 +3233,7 @@ instance P.HasIpProtocol (ForwardEntryResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/instance.html terraform documentation>
 -- for more information.
 data InstanceResource s = InstanceResource'
     { _autoRenewPeriod :: TF.Attr s P.Integer
@@ -3285,13 +3285,13 @@ data InstanceResource s = InstanceResource'
     -- ^ @security_groups@ - (Required)
     --
     , _spotPriceLimit :: TF.Attr s P.Double
-    -- ^ @spot_price_limit@ - (Optional)
+    -- ^ @spot_price_limit@ - (Optional, Forces New)
     --
     , _spotStrategy :: TF.Attr s P.Text
-    -- ^ @spot_strategy@ - (Optional)
+    -- ^ @spot_strategy@ - (Optional, Forces New)
     --
     , _systemDiskCategory :: TF.Attr s P.Text
-    -- ^ @system_disk_category@ - (Optional)
+    -- ^ @system_disk_category@ - (Optional, Forces New)
     --
     , _systemDiskSize :: TF.Attr s P.Integer
     -- ^ @system_disk_size@ - (Optional)
@@ -3300,7 +3300,7 @@ data InstanceResource s = InstanceResource'
     -- ^ @tags@ - (Optional)
     --
     , _userData :: TF.Attr s P.Text
-    -- ^ @user_data@ - (Optional)
+    -- ^ @user_data@ - (Optional, Forces New)
     --
     , _vswitchId :: TF.Attr s P.Text
     -- ^ @vswitch_id@ - (Optional)
@@ -3486,45 +3486,45 @@ instance P.HasVswitchId (InstanceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vswitchId = a } :: InstanceResource s)
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
 instance s ~ s' => P.HasComputedHostName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedHostName x = TF.compute (TF.refKey x) "_computedHostName"
+    computedHostName x = TF.compute (TF.refKey x) "host_name"
 
 instance s ~ s' => P.HasComputedInternetMaxBandwidthIn (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Integer) where
-    computedInternetMaxBandwidthIn x = TF.compute (TF.refKey x) "_computedInternetMaxBandwidthIn"
+    computedInternetMaxBandwidthIn x = TF.compute (TF.refKey x) "internet_max_bandwidth_in"
 
 instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedKeyName x = TF.compute (TF.refKey x) "_computedKeyName"
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
 instance s ~ s' => P.HasComputedPrivateIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPrivateIp x = TF.compute (TF.refKey x) "_computedPrivateIp"
+    computedPrivateIp x = TF.compute (TF.refKey x) "private_ip"
 
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "_computedPublicIp"
+    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
 instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedRoleName x = TF.compute (TF.refKey x) "_computedRoleName"
+    computedRoleName x = TF.compute (TF.refKey x) "role_name"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedSubnetId x = TF.compute (TF.refKey x) "_computedSubnetId"
+    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
 -- | @alicloud_key_pair@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_key_pair terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/key_pair.html terraform documentation>
 -- for more information.
 data KeyPairResource s = KeyPairResource'
     { _keyFile       :: TF.Attr s P.Text
-    -- ^ @key_file@ - (Optional)
+    -- ^ @key_file@ - (Optional, Forces New)
     --
     , _keyNamePrefix :: TF.Attr s P.Text
-    -- ^ @key_name_prefix@ - (Optional)
+    -- ^ @key_name_prefix@ - (Optional, Forces New)
     --
     , _publicKey     :: TF.Attr s P.Text
-    -- ^ @public_key@ - (Optional)
+    -- ^ @public_key@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3564,21 +3564,21 @@ instance P.HasPublicKey (KeyPairResource s) (TF.Attr s P.Text) where
                (\s a -> s { _publicKey = a } :: KeyPairResource s)
 
 instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
-    computedFingerPrint x = TF.compute (TF.refKey x) "_computedFingerPrint"
+    computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
 
 instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
-    computedKeyName x = TF.compute (TF.refKey x) "_computedKeyName"
+    computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
 -- | @alicloud_key_pair_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_key_pair_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/key_pair_attachment.html terraform documentation>
 -- for more information.
 data KeyPairAttachmentResource s = KeyPairAttachmentResource'
     { _instanceIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instance_ids@ - (Required)
+    -- ^ @instance_ids@ - (Required, Forces New)
     --
     , _keyName     :: TF.Attr s P.Text
-    -- ^ @key_name@ - (Required)
+    -- ^ @key_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3614,7 +3614,7 @@ instance P.HasKeyName (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_kms_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_kms_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/kms_key.html terraform documentation>
 -- for more information.
 data KmsKeyResource s = KmsKeyResource'
     { _deletionWindowInDays :: TF.Attr s P.Integer
@@ -3627,7 +3627,7 @@ data KmsKeyResource s = KmsKeyResource'
     -- ^ @is_enabled@ - (Optional)
     --
     , _keyUsage             :: TF.Attr s P.Text
-    -- ^ @key_usage@ - (Optional)
+    -- ^ @key_usage@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3674,11 +3674,11 @@ instance P.HasKeyUsage (KmsKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _keyUsage = a } :: KmsKeyResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @alicloud_log_machine_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_log_machine_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/log_machine_group.html terraform documentation>
 -- for more information.
 data LogMachineGroupResource s = LogMachineGroupResource'
     { _identifyList :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
@@ -3688,10 +3688,10 @@ data LogMachineGroupResource s = LogMachineGroupResource'
     -- ^ @identify_type@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _project      :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    -- ^ @project@ - (Required, Forces New)
     --
     , _topic        :: TF.Attr s P.Text
     -- ^ @topic@ - (Optional)
@@ -3752,14 +3752,14 @@ instance P.HasTopic (LogMachineGroupResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_log_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_log_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/log_project.html terraform documentation>
 -- for more information.
 data LogProjectResource s = LogProjectResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3794,14 +3794,14 @@ instance P.HasName (LogProjectResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_log_store@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_log_store terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/log_store.html terraform documentation>
 -- for more information.
 data LogStoreResource s = LogStoreResource'
     { _name            :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _project         :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    -- ^ @project@ - (Required, Forces New)
     --
     , _retentionPeriod :: TF.Attr s P.Integer
     -- ^ @retention_period@ - (Optional)
@@ -3855,25 +3855,25 @@ instance P.HasShardCount (LogStoreResource s) (TF.Attr s P.Integer) where
         P.lens (_shardCount :: LogStoreResource s -> TF.Attr s P.Integer)
                (\s a -> s { _shardCount = a } :: LogStoreResource s)
 
-instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (Shards s)]) where
-    computedShards x = TF.compute (TF.refKey x) "_computedShards"
+instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (LogStoreShards s)]) where
+    computedShards x = TF.compute (TF.refKey x) "shards"
 
 -- | @alicloud_log_store_index@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_log_store_index terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/log_store_index.html terraform documentation>
 -- for more information.
 data LogStoreIndexResource s = LogStoreIndexResource'
-    { _fieldSearch :: TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearch s)))
+    { _fieldSearch :: TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearch s)))
     -- ^ @field_search@ - (Optional)
     --
-    , _fullText    :: TF.Attr s (FullText s)
+    , _fullText :: TF.Attr s (LogStoreIndexFullText s)
     -- ^ @full_text@ - (Optional)
     --
-    , _logstore    :: TF.Attr s P.Text
-    -- ^ @logstore@ - (Required)
+    , _logstore :: TF.Attr s P.Text
+    -- ^ @logstore@ - (Required, Forces New)
     --
-    , _project     :: TF.Attr s P.Text
-    -- ^ @project@ - (Required)
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3902,21 +3902,21 @@ instance TF.IsValid (LogStoreIndexResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_fieldSearch"
                   (_fieldSearch
-                      :: LogStoreIndexResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearch s))))
+                      :: LogStoreIndexResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearch s))))
                   TF.validator
            P.<> TF.settingsValidator "_fullText"
                   (_fullText
-                      :: LogStoreIndexResource s -> TF.Attr s (FullText s))
+                      :: LogStoreIndexResource s -> TF.Attr s (LogStoreIndexFullText s))
                   TF.validator
 
-instance P.HasFieldSearch (LogStoreIndexResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearch s)))) where
+instance P.HasFieldSearch (LogStoreIndexResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearch s)))) where
     fieldSearch =
-        P.lens (_fieldSearch :: LogStoreIndexResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearch s))))
+        P.lens (_fieldSearch :: LogStoreIndexResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearch s))))
                (\s a -> s { _fieldSearch = a } :: LogStoreIndexResource s)
 
-instance P.HasFullText (LogStoreIndexResource s) (TF.Attr s (FullText s)) where
+instance P.HasFullText (LogStoreIndexResource s) (TF.Attr s (LogStoreIndexFullText s)) where
     fullText =
-        P.lens (_fullText :: LogStoreIndexResource s -> TF.Attr s (FullText s))
+        P.lens (_fullText :: LogStoreIndexResource s -> TF.Attr s (LogStoreIndexFullText s))
                (\s a -> s { _fullText = a } :: LogStoreIndexResource s)
 
 instance P.HasLogstore (LogStoreIndexResource s) (TF.Attr s P.Text) where
@@ -3931,7 +3931,7 @@ instance P.HasProject (LogStoreIndexResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_nat_gateway@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_nat_gateway terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/nat_gateway.html terraform documentation>
 -- for more information.
 data NatGatewayResource s = NatGatewayResource'
     { _description   :: TF.Attr s P.Text
@@ -3941,7 +3941,7 @@ data NatGatewayResource s = NatGatewayResource'
     -- ^ @specification@ - (Optional)
     --
     , _vpcId         :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Required)
+    -- ^ @vpc_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3982,41 +3982,41 @@ instance P.HasVpcId (NatGatewayResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vpcId = a } :: NatGatewayResource s)
 
 instance s ~ s' => P.HasComputedBandwidthPackageIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedBandwidthPackageIds x = TF.compute (TF.refKey x) "_computedBandwidthPackageIds"
+    computedBandwidthPackageIds x = TF.compute (TF.refKey x) "bandwidth_package_ids"
 
 instance s ~ s' => P.HasComputedForwardTableIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedForwardTableIds x = TF.compute (TF.refKey x) "_computedForwardTableIds"
+    computedForwardTableIds x = TF.compute (TF.refKey x) "forward_table_ids"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedSnatTableIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
-    computedSnatTableIds x = TF.compute (TF.refKey x) "_computedSnatTableIds"
+    computedSnatTableIds x = TF.compute (TF.refKey x) "snat_table_ids"
 
 -- | @alicloud_oss_bucket@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_oss_bucket terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/oss_bucket.html terraform documentation>
 -- for more information.
 data OssBucketResource s = OssBucketResource'
     { _acl             :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
     , _bucket          :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Optional)
+    -- ^ @bucket@ - (Optional, Forces New)
     --
-    , _corsRule        :: TF.Attr s [TF.Attr s (CorsRule s)]
+    , _corsRule        :: TF.Attr s [TF.Attr s (OssBucketCorsRule s)]
     -- ^ @cors_rule@ - (Optional)
     --
-    , _lifecycleRule   :: TF.Attr s [TF.Attr s (LifecycleRule s)]
+    , _lifecycleRule   :: TF.Attr s [TF.Attr s (OssBucketLifecycleRule s)]
     -- ^ @lifecycle_rule@ - (Optional)
     --
-    , _logging         :: TF.Attr s (Logging s)
+    , _logging         :: TF.Attr s (OssBucketLogging s)
     -- ^ @logging@ - (Optional)
     --
     , _loggingIsenable :: TF.Attr s P.Bool
     -- ^ @logging_isenable@ - (Optional)
     --
-    , _website         :: TF.Attr s (Website s)
+    , _website         :: TF.Attr s (OssBucketWebsite s)
     -- ^ @website@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4050,19 +4050,19 @@ instance TF.IsValid (OssBucketResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_corsRule"
                   (_corsRule
-                      :: OssBucketResource s -> TF.Attr s [TF.Attr s (CorsRule s)])
+                      :: OssBucketResource s -> TF.Attr s [TF.Attr s (OssBucketCorsRule s)])
                   TF.validator
            P.<> TF.settingsValidator "_lifecycleRule"
                   (_lifecycleRule
-                      :: OssBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRule s)])
+                      :: OssBucketResource s -> TF.Attr s [TF.Attr s (OssBucketLifecycleRule s)])
                   TF.validator
            P.<> TF.settingsValidator "_logging"
                   (_logging
-                      :: OssBucketResource s -> TF.Attr s (Logging s))
+                      :: OssBucketResource s -> TF.Attr s (OssBucketLogging s))
                   TF.validator
            P.<> TF.settingsValidator "_website"
                   (_website
-                      :: OssBucketResource s -> TF.Attr s (Website s))
+                      :: OssBucketResource s -> TF.Attr s (OssBucketWebsite s))
                   TF.validator
 
 instance P.HasAcl (OssBucketResource s) (TF.Attr s P.Text) where
@@ -4075,19 +4075,19 @@ instance P.HasBucket (OssBucketResource s) (TF.Attr s P.Text) where
         P.lens (_bucket :: OssBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: OssBucketResource s)
 
-instance P.HasCorsRule (OssBucketResource s) (TF.Attr s [TF.Attr s (CorsRule s)]) where
+instance P.HasCorsRule (OssBucketResource s) (TF.Attr s [TF.Attr s (OssBucketCorsRule s)]) where
     corsRule =
-        P.lens (_corsRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (CorsRule s)])
+        P.lens (_corsRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (OssBucketCorsRule s)])
                (\s a -> s { _corsRule = a } :: OssBucketResource s)
 
-instance P.HasLifecycleRule (OssBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRule s)]) where
+instance P.HasLifecycleRule (OssBucketResource s) (TF.Attr s [TF.Attr s (OssBucketLifecycleRule s)]) where
     lifecycleRule =
-        P.lens (_lifecycleRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRule s)])
+        P.lens (_lifecycleRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (OssBucketLifecycleRule s)])
                (\s a -> s { _lifecycleRule = a } :: OssBucketResource s)
 
-instance P.HasLogging (OssBucketResource s) (TF.Attr s (Logging s)) where
+instance P.HasLogging (OssBucketResource s) (TF.Attr s (OssBucketLogging s)) where
     logging =
-        P.lens (_logging :: OssBucketResource s -> TF.Attr s (Logging s))
+        P.lens (_logging :: OssBucketResource s -> TF.Attr s (OssBucketLogging s))
                (\s a -> s { _logging = a } :: OssBucketResource s)
 
 instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
@@ -4095,42 +4095,42 @@ instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
         P.lens (_loggingIsenable :: OssBucketResource s -> TF.Attr s P.Bool)
                (\s a -> s { _loggingIsenable = a } :: OssBucketResource s)
 
-instance P.HasWebsite (OssBucketResource s) (TF.Attr s (Website s)) where
+instance P.HasWebsite (OssBucketResource s) (TF.Attr s (OssBucketWebsite s)) where
     website =
-        P.lens (_website :: OssBucketResource s -> TF.Attr s (Website s))
+        P.lens (_website :: OssBucketResource s -> TF.Attr s (OssBucketWebsite s))
                (\s a -> s { _website = a } :: OssBucketResource s)
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedCreationDate x = TF.compute (TF.refKey x) "_computedCreationDate"
+    computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
 instance s ~ s' => P.HasComputedExtranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedExtranetEndpoint x = TF.compute (TF.refKey x) "_computedExtranetEndpoint"
+    computedExtranetEndpoint x = TF.compute (TF.refKey x) "extranet_endpoint"
 
 instance s ~ s' => P.HasComputedIntranetEndpoint (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedIntranetEndpoint x = TF.compute (TF.refKey x) "_computedIntranetEndpoint"
+    computedIntranetEndpoint x = TF.compute (TF.refKey x) "intranet_endpoint"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedLocation x = TF.compute (TF.refKey x) "_computedLocation"
+    computedLocation x = TF.compute (TF.refKey x) "location"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
+    computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s (RefererConfig s)) where
-    computedRefererConfig x = TF.compute (TF.refKey x) "_computedRefererConfig"
+instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s (OssBucketRefererConfig s)) where
+    computedRefererConfig x = TF.compute (TF.refKey x) "referer_config"
 
 instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
-    computedStorageClass x = TF.compute (TF.refKey x) "_computedStorageClass"
+    computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
 
 -- | @alicloud_oss_bucket_object@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_oss_bucket_object terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/oss_bucket_object.html terraform documentation>
 -- for more information.
 data OssBucketObjectResource s = OssBucketObjectResource'
     { _acl                :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
     , _bucket             :: TF.Attr s P.Text
-    -- ^ @bucket@ - (Required)
+    -- ^ @bucket@ - (Required, Forces New)
     --
     , _cacheControl       :: TF.Attr s P.Text
     -- ^ @cache_control@ - (Optional)
@@ -4154,7 +4154,7 @@ data OssBucketObjectResource s = OssBucketObjectResource'
     -- ^ @expires@ - (Optional)
     --
     , _key                :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     --
     , _source             :: TF.Attr s P.Text
     -- ^ @source@ - (Optional)
@@ -4262,33 +4262,33 @@ instance P.HasSource (OssBucketObjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _source = a } :: OssBucketObjectResource s)
 
 instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedContentLength x = TF.compute (TF.refKey x) "_computedContentLength"
+    computedContentLength x = TF.compute (TF.refKey x) "content_length"
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedContentType x = TF.compute (TF.refKey x) "_computedContentType"
+    computedContentType x = TF.compute (TF.refKey x) "content_type"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
-    computedServerSideEncryption x = TF.compute (TF.refKey x) "_computedServerSideEncryption"
+    computedServerSideEncryption x = TF.compute (TF.refKey x) "server_side_encryption"
 
 -- | @alicloud_ots_instance@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ots_instance terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_instance.html terraform documentation>
 -- for more information.
 data OtsInstanceResource s = OtsInstanceResource'
     { _accessedBy   :: TF.Attr s P.Text
     -- ^ @accessed_by@ - (Optional)
     --
     , _description  :: TF.Attr s P.Text
-    -- ^ @description@ - (Required)
+    -- ^ @description@ - (Required, Forces New)
     --
     , _instanceType :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Optional)
+    -- ^ @instance_type@ - (Optional, Forces New)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
@@ -4348,17 +4348,17 @@ instance P.HasTags (OtsInstanceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr
 
 -- | @alicloud_ots_instance_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ots_instance_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_instance_attachment.html terraform documentation>
 -- for more information.
 data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource'
     { _instanceName :: TF.Attr s P.Text
-    -- ^ @instance_name@ - (Required)
+    -- ^ @instance_name@ - (Required, Forces New)
     --
     , _vpcName      :: TF.Attr s P.Text
-    -- ^ @vpc_name@ - (Required)
+    -- ^ @vpc_name@ - (Required, Forces New)
     --
     , _vswitchId    :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Required)
+    -- ^ @vswitch_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4401,24 +4401,24 @@ instance P.HasVswitchId (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) whe
                (\s a -> s { _vswitchId = a } :: OtsInstanceAttachmentResource s)
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @alicloud_ots_table@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ots_table terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_table.html terraform documentation>
 -- for more information.
 data OtsTableResource s = OtsTableResource'
     { _instanceName :: TF.Attr s P.Text
-    -- ^ @instance_name@ - (Required)
+    -- ^ @instance_name@ - (Required, Forces New)
     --
     , _maxVersion   :: TF.Attr s P.Integer
     -- ^ @max_version@ - (Required)
     --
-    , _primaryKey   :: TF.Attr s [TF.Attr s (PrimaryKey s)]
+    , _primaryKey   :: TF.Attr s [TF.Attr s (OtsTablePrimaryKey s)]
     -- ^ @primary_key@ - (Required)
     --
     , _tableName    :: TF.Attr s P.Text
-    -- ^ @table_name@ - (Required)
+    -- ^ @table_name@ - (Required, Forces New)
     --
     , _timeToLive   :: TF.Attr s P.Integer
     -- ^ @time_to_live@ - (Required)
@@ -4428,7 +4428,7 @@ data OtsTableResource s = OtsTableResource'
 otsTableResource
     :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Integer -- ^ @max_version@ - 'P.maxVersion'
-    -> TF.Attr s [TF.Attr s (PrimaryKey s)] -- ^ @primary_key@ - 'P.primaryKey'
+    -> TF.Attr s [TF.Attr s (OtsTablePrimaryKey s)] -- ^ @primary_key@ - 'P.primaryKey'
     -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
     -> TF.Attr s P.Integer -- ^ @time_to_live@ - 'P.timeToLive'
     -> TF.Resource P.Provider (OtsTableResource s)
@@ -4455,7 +4455,7 @@ instance TF.IsValid (OtsTableResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_primaryKey"
                   (_primaryKey
-                      :: OtsTableResource s -> TF.Attr s [TF.Attr s (PrimaryKey s)])
+                      :: OtsTableResource s -> TF.Attr s [TF.Attr s (OtsTablePrimaryKey s)])
                   TF.validator
 
 instance P.HasInstanceName (OtsTableResource s) (TF.Attr s P.Text) where
@@ -4468,9 +4468,9 @@ instance P.HasMaxVersion (OtsTableResource s) (TF.Attr s P.Integer) where
         P.lens (_maxVersion :: OtsTableResource s -> TF.Attr s P.Integer)
                (\s a -> s { _maxVersion = a } :: OtsTableResource s)
 
-instance P.HasPrimaryKey (OtsTableResource s) (TF.Attr s [TF.Attr s (PrimaryKey s)]) where
+instance P.HasPrimaryKey (OtsTableResource s) (TF.Attr s [TF.Attr s (OtsTablePrimaryKey s)]) where
     primaryKey =
-        P.lens (_primaryKey :: OtsTableResource s -> TF.Attr s [TF.Attr s (PrimaryKey s)])
+        P.lens (_primaryKey :: OtsTableResource s -> TF.Attr s [TF.Attr s (OtsTablePrimaryKey s)])
                (\s a -> s { _primaryKey = a } :: OtsTableResource s)
 
 instance P.HasTableName (OtsTableResource s) (TF.Attr s P.Text) where
@@ -4485,17 +4485,17 @@ instance P.HasTimeToLive (OtsTableResource s) (TF.Attr s P.Integer) where
 
 -- | @alicloud_ram_access_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_access_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_access_key.html terraform documentation>
 -- for more information.
 data RamAccessKeyResource s = RamAccessKeyResource'
     { _secretFile :: TF.Attr s P.Text
-    -- ^ @secret_file@ - (Optional)
+    -- ^ @secret_file@ - (Optional, Forces New)
     --
     , _status     :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
     , _userName   :: TF.Attr s P.Text
-    -- ^ @user_name@ - (Optional)
+    -- ^ @user_name@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4536,11 +4536,11 @@ instance P.HasUserName (RamAccessKeyResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_account_alias@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_account_alias terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_account_alias.html terraform documentation>
 -- for more information.
 data RamAccountAliasResource s = RamAccountAliasResource'
     { _accountAlias :: TF.Attr s P.Text
-    -- ^ @account_alias@ - (Required)
+    -- ^ @account_alias@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4568,11 +4568,11 @@ instance P.HasAccountAlias (RamAccountAliasResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_alias@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_alias terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_alias.html terraform documentation>
 -- for more information.
 data RamAliasResource s = RamAliasResource'
     { _accountAlias :: TF.Attr s P.Text
-    -- ^ @account_alias@ - (Required)
+    -- ^ @account_alias@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4600,7 +4600,7 @@ instance P.HasAccountAlias (RamAliasResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group.html terraform documentation>
 -- for more information.
 data RamGroupResource s = RamGroupResource'
     { _comments :: TF.Attr s P.Text
@@ -4652,11 +4652,11 @@ instance P.HasName (RamGroupResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_group_membership@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_group_membership terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group_membership.html terraform documentation>
 -- for more information.
 data RamGroupMembershipResource s = RamGroupMembershipResource'
     { _groupName :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Required)
+    -- ^ @group_name@ - (Required, Forces New)
     --
     , _userNames :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @user_names@ - (Required)
@@ -4695,17 +4695,17 @@ instance P.HasUserNames (RamGroupMembershipResource s) (TF.Attr s [TF.Attr s P.T
 
 -- | @alicloud_ram_group_policy_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_group_policy_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group_policy_attachment.html terraform documentation>
 -- for more information.
 data RamGroupPolicyAttachmentResource s = RamGroupPolicyAttachmentResource'
     { _groupName  :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Required)
+    -- ^ @group_name@ - (Required, Forces New)
     --
     , _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required)
+    -- ^ @policy_name@ - (Required, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Required)
+    -- ^ @policy_type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4749,7 +4749,7 @@ instance P.HasPolicyType (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text)
 
 -- | @alicloud_ram_login_profile@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_login_profile terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_login_profile.html terraform documentation>
 -- for more information.
 data RamLoginProfileResource s = RamLoginProfileResource'
     { _mfaBindRequired       :: TF.Attr s P.Bool
@@ -4762,7 +4762,7 @@ data RamLoginProfileResource s = RamLoginProfileResource'
     -- ^ @password_reset_required@ - (Optional)
     --
     , _userName              :: TF.Attr s P.Text
-    -- ^ @user_name@ - (Required)
+    -- ^ @user_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -4812,17 +4812,17 @@ instance P.HasUserName (RamLoginProfileResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_policy.html terraform documentation>
 -- for more information.
 data RamPolicyResource s = RamPolicyResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _force       :: TF.Attr s P.Bool
     -- ^ @force@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _version     :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
@@ -4873,30 +4873,30 @@ instance P.HasVersion (RamPolicyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _version = a } :: RamPolicyResource s)
 
 instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Integer) where
-    computedAttachmentCount x = TF.compute (TF.refKey x) "_computedAttachmentCount"
+    computedAttachmentCount x = TF.compute (TF.refKey x) "attachment_count"
 
 instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
-    computedDocument x = TF.compute (TF.refKey x) "_computedDocument"
+    computedDocument x = TF.compute (TF.refKey x) "document"
 
-instance s ~ s' => P.HasComputedStatement (TF.Ref s' (RamPolicyResource s)) (TF.Attr s [TF.Attr s (Statement s)]) where
-    computedStatement x = TF.compute (TF.refKey x) "_computedStatement"
+instance s ~ s' => P.HasComputedStatement (TF.Ref s' (RamPolicyResource s)) (TF.Attr s [TF.Attr s (RamPolicyStatement s)]) where
+    computedStatement x = TF.compute (TF.refKey x) "statement"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 -- | @alicloud_ram_role@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_role terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role.html terraform documentation>
 -- for more information.
 data RamRoleResource s = RamRoleResource'
     { _description :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _force       :: TF.Attr s P.Bool
     -- ^ @force@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _version     :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
@@ -4947,27 +4947,27 @@ instance P.HasVersion (RamRoleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _version = a } :: RamRoleResource s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
-    computedDocument x = TF.compute (TF.refKey x) "_computedDocument"
+    computedDocument x = TF.compute (TF.refKey x) "document"
 
 instance s ~ s' => P.HasComputedRamUsers (TF.Ref s' (RamRoleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRamUsers x = TF.compute (TF.refKey x) "_computedRamUsers"
+    computedRamUsers x = TF.compute (TF.refKey x) "ram_users"
 
 instance s ~ s' => P.HasComputedServices (TF.Ref s' (RamRoleResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedServices x = TF.compute (TF.refKey x) "_computedServices"
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @alicloud_ram_role_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_role_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_attachment.html terraform documentation>
 -- for more information.
 data RamRoleAttachmentResource s = RamRoleAttachmentResource'
     { _instanceIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instance_ids@ - (Required)
+    -- ^ @instance_ids@ - (Required, Forces New)
     --
     , _roleName    :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Required)
+    -- ^ @role_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5003,17 +5003,17 @@ instance P.HasRoleName (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_role_policy_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_role_policy_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_policy_attachment.html terraform documentation>
 -- for more information.
 data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource'
     { _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required)
+    -- ^ @policy_name@ - (Required, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Required)
+    -- ^ @policy_type@ - (Required, Forces New)
     --
     , _roleName   :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Required)
+    -- ^ @role_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5057,7 +5057,7 @@ instance P.HasRoleName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) wh
 
 -- | @alicloud_ram_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_user.html terraform documentation>
 -- for more information.
 data RamUserResource s = RamUserResource'
     { _comments    :: TF.Attr s P.Text
@@ -5139,17 +5139,17 @@ instance P.HasName (RamUserResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_ram_user_policy_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_user_policy_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_user_policy_attachment.html terraform documentation>
 -- for more information.
 data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource'
     { _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required)
+    -- ^ @policy_name@ - (Required, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Required)
+    -- ^ @policy_type@ - (Required, Forces New)
     --
     , _userName   :: TF.Attr s P.Text
-    -- ^ @user_name@ - (Required)
+    -- ^ @user_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5193,20 +5193,20 @@ instance P.HasUserName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) wh
 
 -- | @alicloud_route_entry@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_route_entry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/route_entry.html terraform documentation>
 -- for more information.
 data RouteEntryResource s = RouteEntryResource'
     { _destinationCidrblock :: TF.Attr s P.Text
-    -- ^ @destination_cidrblock@ - (Optional)
+    -- ^ @destination_cidrblock@ - (Optional, Forces New)
     --
     , _nexthopId            :: TF.Attr s P.Text
-    -- ^ @nexthop_id@ - (Optional)
+    -- ^ @nexthop_id@ - (Optional, Forces New)
     --
     , _nexthopType          :: TF.Attr s P.Text
-    -- ^ @nexthop_type@ - (Optional)
+    -- ^ @nexthop_type@ - (Optional, Forces New)
     --
     , _routeTableId         :: TF.Attr s P.Text
-    -- ^ @route_table_id@ - (Required)
+    -- ^ @route_table_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5255,7 +5255,7 @@ instance P.HasRouteTableId (RouteEntryResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_router_interface@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_router_interface terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/router_interface.html terraform documentation>
 -- for more information.
 data RouterInterfaceResource s = RouterInterfaceResource'
     { _description         :: TF.Attr s P.Text
@@ -5271,16 +5271,16 @@ data RouterInterfaceResource s = RouterInterfaceResource'
     -- ^ @name@ - (Optional)
     --
     , _oppositeRegion      :: TF.Attr s P.Text
-    -- ^ @opposite_region@ - (Required)
+    -- ^ @opposite_region@ - (Required, Forces New)
     --
     , _role                :: TF.Attr s P.Text
-    -- ^ @role@ - (Required)
+    -- ^ @role@ - (Required, Forces New)
     --
     , _routerId            :: TF.Attr s P.Text
-    -- ^ @router_id@ - (Required)
+    -- ^ @router_id@ - (Required, Forces New)
     --
     , _routerType          :: TF.Attr s P.Text
-    -- ^ @router_type@ - (Required)
+    -- ^ @router_type@ - (Required, Forces New)
     --
     , _specification       :: TF.Attr s P.Text
     -- ^ @specification@ - (Optional)
@@ -5370,17 +5370,17 @@ instance P.HasSpecification (RouterInterfaceResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_router_interface_connection@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_router_interface_connection terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/router_interface_connection.html terraform documentation>
 -- for more information.
 data RouterInterfaceConnectionResource s = RouterInterfaceConnectionResource'
     { _interfaceId         :: TF.Attr s P.Text
-    -- ^ @interface_id@ - (Required)
+    -- ^ @interface_id@ - (Required, Forces New)
     --
     , _oppositeInterfaceId :: TF.Attr s P.Text
-    -- ^ @opposite_interface_id@ - (Required)
+    -- ^ @opposite_interface_id@ - (Required, Forces New)
     --
     , _oppositeRouterType  :: TF.Attr s P.Text
-    -- ^ @opposite_router_type@ - (Optional)
+    -- ^ @opposite_router_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5422,14 +5422,14 @@ instance P.HasOppositeRouterType (RouterInterfaceConnectionResource s) (TF.Attr 
                (\s a -> s { _oppositeRouterType = a } :: RouterInterfaceConnectionResource s)
 
 instance s ~ s' => P.HasComputedOppositeInterfaceOwnerId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
-    computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "_computedOppositeInterfaceOwnerId"
+    computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "opposite_interface_owner_id"
 
 instance s ~ s' => P.HasComputedOppositeRouterId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
-    computedOppositeRouterId x = TF.compute (TF.refKey x) "_computedOppositeRouterId"
+    computedOppositeRouterId x = TF.compute (TF.refKey x) "opposite_router_id"
 
 -- | @alicloud_security_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_security_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/security_group.html terraform documentation>
 -- for more information.
 data SecurityGroupResource s = SecurityGroupResource'
     { _description :: TF.Attr s P.Text
@@ -5442,7 +5442,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     -- ^ @name@ - (Optional)
     --
     , _vpcId       :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Optional)
+    -- ^ @vpc_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5490,41 +5490,41 @@ instance P.HasVpcId (SecurityGroupResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_security_group_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_security_group_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/security_group_rule.html terraform documentation>
 -- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     { _cidrIp                  :: TF.Attr s P.Text
-    -- ^ @cidr_ip@ - (Optional)
+    -- ^ @cidr_ip@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'sourceSecurityGroupId'
     , _ipProtocol              :: TF.Attr s P.Text
-    -- ^ @ip_protocol@ - (Required)
+    -- ^ @ip_protocol@ - (Required, Forces New)
     --
     , _policy                  :: TF.Attr s P.Text
-    -- ^ @policy@ - (Optional)
+    -- ^ @policy@ - (Optional, Forces New)
     --
     , _portRange               :: TF.Attr s P.Text
-    -- ^ @port_range@ - (Optional)
+    -- ^ @port_range@ - (Optional, Forces New)
     --
     , _priority                :: TF.Attr s P.Integer
-    -- ^ @priority@ - (Optional)
+    -- ^ @priority@ - (Optional, Forces New)
     --
     , _securityGroupId         :: TF.Attr s P.Text
-    -- ^ @security_group_id@ - (Required)
+    -- ^ @security_group_id@ - (Required, Forces New)
     --
     , _sourceGroupOwnerAccount :: TF.Attr s P.Text
-    -- ^ @source_group_owner_account@ - (Optional)
+    -- ^ @source_group_owner_account@ - (Optional, Forces New)
     --
     , _sourceSecurityGroupId   :: TF.Attr s P.Text
-    -- ^ @source_security_group_id@ - (Optional)
+    -- ^ @source_security_group_id@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'cidrIp'
     , _type'                   :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     -- Type of rule, ingress (inbound) or egress (outbound).
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5621,18 +5621,18 @@ instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
 instance s ~ s' => P.HasComputedNicType (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
-    computedNicType x = TF.compute (TF.refKey x) "_computedNicType"
+    computedNicType x = TF.compute (TF.refKey x) "nic_type"
 
 -- | @alicloud_slb@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_slb terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/slb.html terraform documentation>
 -- for more information.
 data SlbResource s = SlbResource'
     { _bandwidth          :: TF.Attr s P.Integer
     -- ^ @bandwidth@ - (Optional)
     --
     , _internet           :: TF.Attr s P.Bool
-    -- ^ @internet@ - (Optional)
+    -- ^ @internet@ - (Optional, Forces New)
     --
     , _internetChargeType :: TF.Attr s P.Text
     -- ^ @internet_charge_type@ - (Optional)
@@ -5644,7 +5644,7 @@ data SlbResource s = SlbResource'
     -- ^ @specification@ - (Optional)
     --
     , _vswitchId          :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Optional)
+    -- ^ @vswitch_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -5656,7 +5656,7 @@ slbResource =
             { _bandwidth = TF.value 1
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180814100928966000000001"
+            , _name = TF.value "tf-lb-20180814145811330000000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
@@ -5705,11 +5705,11 @@ instance P.HasVswitchId (SlbResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vswitchId = a } :: SlbResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 -- | @alicloud_slb_attachment@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_slb_attachment terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_attachment.html terraform documentation>
 -- for more information.
 data SlbAttachmentResource s = SlbAttachmentResource'
     { _instanceIds    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
@@ -5761,15 +5761,15 @@ instance P.HasWeight (SlbAttachmentResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _weight = a } :: SlbAttachmentResource s)
 
 instance s ~ s' => P.HasComputedBackendServers (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
-    computedBackendServers x = TF.compute (TF.refKey x) "_computedBackendServers"
+    computedBackendServers x = TF.compute (TF.refKey x) "backend_servers"
 
 -- | @alicloud_slb_listener@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_slb_listener terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_listener.html terraform documentation>
 -- for more information.
 data SlbListenerResource s = SlbListenerResource'
     { _backendPort         :: TF.Attr s P.Integer
-    -- ^ @backend_port@ - (Required)
+    -- ^ @backend_port@ - (Required, Forces New)
     --
     , _bandwidth           :: TF.Attr s P.Integer
     -- ^ @bandwidth@ - (Required)
@@ -5781,7 +5781,7 @@ data SlbListenerResource s = SlbListenerResource'
     -- ^ @cookie_timeout@ - (Optional)
     --
     , _frontendPort        :: TF.Attr s P.Integer
-    -- ^ @frontend_port@ - (Required)
+    -- ^ @frontend_port@ - (Required, Forces New)
     --
     , _healthCheck         :: TF.Attr s P.Text
     -- ^ @health_check@ - (Optional)
@@ -5808,13 +5808,13 @@ data SlbListenerResource s = SlbListenerResource'
     -- ^ @healthy_threshold@ - (Optional)
     --
     , _loadBalancerId      :: TF.Attr s P.Text
-    -- ^ @load_balancer_id@ - (Required)
+    -- ^ @load_balancer_id@ - (Required, Forces New)
     --
     , _persistenceTimeout  :: TF.Attr s P.Integer
     -- ^ @persistence_timeout@ - (Optional)
     --
     , _protocol            :: TF.Attr s P.Text
-    -- ^ @protocol@ - (Required)
+    -- ^ @protocol@ - (Required, Forces New)
     --
     , _scheduler           :: TF.Attr s P.Text
     -- ^ @scheduler@ - (Optional)
@@ -6010,30 +6010,30 @@ instance P.HasUnhealthyThreshold (SlbListenerResource s) (TF.Attr s P.Integer) w
                (\s a -> s { _unhealthyThreshold = a } :: SlbListenerResource s)
 
 instance s ~ s' => P.HasComputedHealthCheckConnectPort (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Integer) where
-    computedHealthCheckConnectPort x = TF.compute (TF.refKey x) "_computedHealthCheckConnectPort"
+    computedHealthCheckConnectPort x = TF.compute (TF.refKey x) "health_check_connect_port"
 
 -- | @alicloud_slb_rule@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_slb_rule terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_rule.html terraform documentation>
 -- for more information.
 data SlbRuleResource s = SlbRuleResource'
     { _domain         :: TF.Attr s P.Text
-    -- ^ @domain@ - (Optional)
+    -- ^ @domain@ - (Optional, Forces New)
     --
     , _frontendPort   :: TF.Attr s P.Integer
-    -- ^ @frontend_port@ - (Required)
+    -- ^ @frontend_port@ - (Required, Forces New)
     --
     , _loadBalancerId :: TF.Attr s P.Text
-    -- ^ @load_balancer_id@ - (Required)
+    -- ^ @load_balancer_id@ - (Required, Forces New)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _serverGroupId  :: TF.Attr s P.Text
     -- ^ @server_group_id@ - (Required)
     --
     , _url            :: TF.Attr s P.Text
-    -- ^ @url@ - (Optional)
+    -- ^ @url@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6098,23 +6098,23 @@ instance P.HasUrl (SlbRuleResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_slb_server_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_slb_server_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_server_group.html terraform documentation>
 -- for more information.
 data SlbServerGroupResource s = SlbServerGroupResource'
     { _loadBalancerId :: TF.Attr s P.Text
-    -- ^ @load_balancer_id@ - (Required)
+    -- ^ @load_balancer_id@ - (Required, Forces New)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _servers        :: TF.Attr s (P.NonEmpty (TF.Attr s (Servers s)))
+    , _servers :: TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServers s)))
     -- ^ @servers@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 slbServerGroupResource
     :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (Servers s))) -- ^ @servers@ - 'P.servers'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServers s))) -- ^ @servers@ - 'P.servers'
     -> TF.Resource P.Provider (SlbServerGroupResource s)
 slbServerGroupResource _loadBalancerId _servers =
     TF.newResource "alicloud_slb_server_group" TF.validator $
@@ -6135,7 +6135,7 @@ instance TF.IsValid (SlbServerGroupResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_servers"
                   (_servers
-                      :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Servers s))))
+                      :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServers s))))
                   TF.validator
 
 instance P.HasLoadBalancerId (SlbServerGroupResource s) (TF.Attr s P.Text) where
@@ -6148,24 +6148,24 @@ instance P.HasName (SlbServerGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SlbServerGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SlbServerGroupResource s)
 
-instance P.HasServers (SlbServerGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (Servers s)))) where
+instance P.HasServers (SlbServerGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServers s)))) where
     servers =
-        P.lens (_servers :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (Servers s))))
+        P.lens (_servers :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServers s))))
                (\s a -> s { _servers = a } :: SlbServerGroupResource s)
 
 -- | @alicloud_snat_entry@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_snat_entry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/snat_entry.html terraform documentation>
 -- for more information.
 data SnatEntryResource s = SnatEntryResource'
     { _snatIp          :: TF.Attr s P.Text
     -- ^ @snat_ip@ - (Required)
     --
     , _snatTableId     :: TF.Attr s P.Text
-    -- ^ @snat_table_id@ - (Required)
+    -- ^ @snat_table_id@ - (Required, Forces New)
     --
     , _sourceVswitchId :: TF.Attr s P.Text
-    -- ^ @source_vswitch_id@ - (Required)
+    -- ^ @source_vswitch_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6209,14 +6209,14 @@ instance P.HasSourceVswitchId (SnatEntryResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_subnet@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_subnet terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/subnet.html terraform documentation>
 -- for more information.
 data SubnetResource s = SubnetResource'
     { _availabilityZone :: TF.Attr s P.Text
-    -- ^ @availability_zone@ - (Required)
+    -- ^ @availability_zone@ - (Required, Forces New)
     --
     , _cidrBlock        :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Required)
+    -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
@@ -6225,7 +6225,7 @@ data SubnetResource s = SubnetResource'
     -- ^ @name@ - (Optional)
     --
     , _vpcId            :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Required)
+    -- ^ @vpc_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -6283,11 +6283,11 @@ instance P.HasVpcId (SubnetResource s) (TF.Attr s P.Text) where
 
 -- | @alicloud_vpc@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_vpc terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/vpc.html terraform documentation>
 -- for more information.
 data VpcResource s = VpcResource'
     { _cidrBlock   :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Required)
+    -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
@@ -6334,21 +6334,21 @@ instance P.HasName (VpcResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: VpcResource s)
 
 instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedRouteTableId x = TF.compute (TF.refKey x) "_computedRouteTableId"
+    computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
 
 instance s ~ s' => P.HasComputedRouterId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
-    computedRouterId x = TF.compute (TF.refKey x) "_computedRouterId"
+    computedRouterId x = TF.compute (TF.refKey x) "router_id"
 
 -- | @alicloud_vswitch@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_vswitch terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/r/vswitch.html terraform documentation>
 -- for more information.
 data VswitchResource s = VswitchResource'
     { _availabilityZone :: TF.Attr s P.Text
-    -- ^ @availability_zone@ - (Required)
+    -- ^ @availability_zone@ - (Required, Forces New)
     --
     , _cidrBlock        :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Required)
+    -- ^ @cidr_block@ - (Required, Forces New)
     --
     , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
@@ -6357,7 +6357,7 @@ data VswitchResource s = VswitchResource'
     -- ^ @name@ - (Optional)
     --
     , _vpcId            :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Required)
+    -- ^ @vpc_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 

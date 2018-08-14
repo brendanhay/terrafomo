@@ -143,7 +143,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @alicloud_db_instances@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_db_instances terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/db_instances.html terraform documentation>
 -- for more information.
 data DbInstancesData s = DbInstancesData'
     { _connectionMode :: TF.Attr s P.Text
@@ -252,16 +252,16 @@ instance P.HasVswitchId (DbInstancesData s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: DbInstancesData s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: DbInstancesData s)
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
-    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (DbInstancesInstances s)]) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
 
 -- | @alicloud_dns_domain_groups@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_domain_groups terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/dns_domain_groups.html terraform documentation>
 -- for more information.
 data DnsDomainGroupsData s = DnsDomainGroupsData'
     { _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
@@ -296,37 +296,37 @@ instance P.HasOutputFile (DnsDomainGroupsData s) (TF.Attr s P.Text) where
         P.lens (_outputFile :: DnsDomainGroupsData s -> TF.Attr s P.Text)
                (\s a -> s { _outputFile = a } :: DnsDomainGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
-    computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (DnsDomainGroupsGroups s)]) where
+    computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_dns_domain_records@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_domain_records terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/dns_domain_records.html terraform documentation>
 -- for more information.
 data DnsDomainRecordsData s = DnsDomainRecordsData'
     { _domainName      :: TF.Attr s P.Text
-    -- ^ @domain_name@ - (Required)
+    -- ^ @domain_name@ - (Required, Forces New)
     --
     , _hostRecordRegex :: TF.Attr s P.Text
-    -- ^ @host_record_regex@ - (Optional)
+    -- ^ @host_record_regex@ - (Optional, Forces New)
     --
     , _isLocked        :: TF.Attr s P.Bool
-    -- ^ @is_locked@ - (Optional)
+    -- ^ @is_locked@ - (Optional, Forces New)
     --
     , _line            :: TF.Attr s P.Text
-    -- ^ @line@ - (Optional)
+    -- ^ @line@ - (Optional, Forces New)
     --
     , _outputFile      :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _status          :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
+    -- ^ @status@ - (Optional, Forces New)
     --
     , _type'           :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     , _valueRegex      :: TF.Attr s P.Text
-    -- ^ @value_regex@ - (Optional)
+    -- ^ @value_regex@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -401,31 +401,31 @@ instance P.HasValueRegex (DnsDomainRecordsData s) (TF.Attr s P.Text) where
         P.lens (_valueRegex :: DnsDomainRecordsData s -> TF.Attr s P.Text)
                (\s a -> s { _valueRegex = a } :: DnsDomainRecordsData s)
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (Records s)]) where
-    computedRecords x = TF.compute (TF.refKey x) "_computedRecords"
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (DnsDomainRecordsRecords s)]) where
+    computedRecords x = TF.compute (TF.refKey x) "records"
 
 -- | @alicloud_dns_domains@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_domains terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/dns_domains.html terraform documentation>
 -- for more information.
 data DnsDomainsData s = DnsDomainsData'
     { _aliDomain       :: TF.Attr s P.Bool
-    -- ^ @ali_domain@ - (Optional)
+    -- ^ @ali_domain@ - (Optional, Forces New)
     --
     , _domainNameRegex :: TF.Attr s P.Text
-    -- ^ @domain_name_regex@ - (Optional)
+    -- ^ @domain_name_regex@ - (Optional, Forces New)
     --
     , _groupNameRegex  :: TF.Attr s P.Text
-    -- ^ @group_name_regex@ - (Optional)
+    -- ^ @group_name_regex@ - (Optional, Forces New)
     --
     , _instanceId      :: TF.Attr s P.Text
-    -- ^ @instance_id@ - (Optional)
+    -- ^ @instance_id@ - (Optional, Forces New)
     --
     , _outputFile      :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _versionCode     :: TF.Attr s P.Text
-    -- ^ @version_code@ - (Optional)
+    -- ^ @version_code@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -485,16 +485,16 @@ instance P.HasVersionCode (DnsDomainsData s) (TF.Attr s P.Text) where
         P.lens (_versionCode :: DnsDomainsData s -> TF.Attr s P.Text)
                (\s a -> s { _versionCode = a } :: DnsDomainsData s)
 
-instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (Domains s)]) where
-    computedDomains x = TF.compute (TF.refKey x) "_computedDomains"
+instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (DnsDomainsDomains s)]) where
+    computedDomains x = TF.compute (TF.refKey x) "domains"
 
 -- | @alicloud_dns_groups@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_groups terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/dns_groups.html terraform documentation>
 -- for more information.
 data DnsGroupsData s = DnsGroupsData'
     { _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
@@ -529,37 +529,37 @@ instance P.HasOutputFile (DnsGroupsData s) (TF.Attr s P.Text) where
         P.lens (_outputFile :: DnsGroupsData s -> TF.Attr s P.Text)
                (\s a -> s { _outputFile = a } :: DnsGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
-    computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (DnsGroupsGroups s)]) where
+    computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_dns_records@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_dns_records terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/dns_records.html terraform documentation>
 -- for more information.
 data DnsRecordsData s = DnsRecordsData'
     { _domainName      :: TF.Attr s P.Text
-    -- ^ @domain_name@ - (Required)
+    -- ^ @domain_name@ - (Required, Forces New)
     --
     , _hostRecordRegex :: TF.Attr s P.Text
-    -- ^ @host_record_regex@ - (Optional)
+    -- ^ @host_record_regex@ - (Optional, Forces New)
     --
     , _isLocked        :: TF.Attr s P.Bool
-    -- ^ @is_locked@ - (Optional)
+    -- ^ @is_locked@ - (Optional, Forces New)
     --
     , _line            :: TF.Attr s P.Text
-    -- ^ @line@ - (Optional)
+    -- ^ @line@ - (Optional, Forces New)
     --
     , _outputFile      :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _status          :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
+    -- ^ @status@ - (Optional, Forces New)
     --
     , _type'           :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     , _valueRegex      :: TF.Attr s P.Text
-    -- ^ @value_regex@ - (Optional)
+    -- ^ @value_regex@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -634,19 +634,19 @@ instance P.HasValueRegex (DnsRecordsData s) (TF.Attr s P.Text) where
         P.lens (_valueRegex :: DnsRecordsData s -> TF.Attr s P.Text)
                (\s a -> s { _valueRegex = a } :: DnsRecordsData s)
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (Records s)]) where
-    computedRecords x = TF.compute (TF.refKey x) "_computedRecords"
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (DnsRecordsRecords s)]) where
+    computedRecords x = TF.compute (TF.refKey x) "records"
 
 -- | @alicloud_eips@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_eips terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/eips.html terraform documentation>
 -- for more information.
 data EipsData s = EipsData'
     { _ids         :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @ids@ - (Optional)
+    -- ^ @ids@ - (Optional, Forces New)
     --
     , _ipAddresses :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @ip_addresses@ - (Optional)
+    -- ^ @ip_addresses@ - (Optional, Forces New)
     --
     , _outputFile  :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
@@ -688,25 +688,25 @@ instance P.HasOutputFile (EipsData s) (TF.Attr s P.Text) where
         P.lens (_outputFile :: EipsData s -> TF.Attr s P.Text)
                (\s a -> s { _outputFile = a } :: EipsData s)
 
-instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (Eips s)]) where
-    computedEips x = TF.compute (TF.refKey x) "_computedEips"
+instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (EipsEips s)]) where
+    computedEips x = TF.compute (TF.refKey x) "eips"
 
 -- | @alicloud_images@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_images terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/images.html terraform documentation>
 -- for more information.
 data ImagesData s = ImagesData'
     { _mostRecent :: TF.Attr s P.Bool
-    -- ^ @most_recent@ - (Optional)
+    -- ^ @most_recent@ - (Optional, Forces New)
     --
     , _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _owners     :: TF.Attr s P.Text
-    -- ^ @owners@ - (Optional)
+    -- ^ @owners@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -752,40 +752,40 @@ instance P.HasOwners (ImagesData s) (TF.Attr s P.Text) where
         P.lens (_owners :: ImagesData s -> TF.Attr s P.Text)
                (\s a -> s { _owners = a } :: ImagesData s)
 
-instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (Images s)]) where
-    computedImages x = TF.compute (TF.refKey x) "_computedImages"
+instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (ImagesImages s)]) where
+    computedImages x = TF.compute (TF.refKey x) "images"
 
 -- | @alicloud_instance_types@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_instance_types terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/instance_types.html terraform documentation>
 -- for more information.
 data InstanceTypesData s = InstanceTypesData'
     { _availabilityZone   :: TF.Attr s P.Text
-    -- ^ @availability_zone@ - (Optional)
+    -- ^ @availability_zone@ - (Optional, Forces New)
     --
     , _cpuCoreCount       :: TF.Attr s P.Integer
-    -- ^ @cpu_core_count@ - (Optional)
+    -- ^ @cpu_core_count@ - (Optional, Forces New)
     --
     , _instanceChargeType :: TF.Attr s P.Text
-    -- ^ @instance_charge_type@ - (Optional)
+    -- ^ @instance_charge_type@ - (Optional, Forces New)
     --
     , _instanceTypeFamily :: TF.Attr s P.Text
-    -- ^ @instance_type_family@ - (Optional)
+    -- ^ @instance_type_family@ - (Optional, Forces New)
     --
     , _isOutdated         :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
     --
     , _memorySize         :: TF.Attr s P.Double
-    -- ^ @memory_size@ - (Optional)
+    -- ^ @memory_size@ - (Optional, Forces New)
     --
     , _networkType        :: TF.Attr s P.Text
-    -- ^ @network_type@ - (Optional)
+    -- ^ @network_type@ - (Optional, Forces New)
     --
     , _outputFile         :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _spotStrategy       :: TF.Attr s P.Text
-    -- ^ @spot_strategy@ - (Optional)
+    -- ^ @spot_strategy@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -866,40 +866,40 @@ instance P.HasSpotStrategy (InstanceTypesData s) (TF.Attr s P.Text) where
         P.lens (_spotStrategy :: InstanceTypesData s -> TF.Attr s P.Text)
                (\s a -> s { _spotStrategy = a } :: InstanceTypesData s)
 
-instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypes s)]) where
-    computedInstanceTypes x = TF.compute (TF.refKey x) "_computedInstanceTypes"
+instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypesInstanceTypes s)]) where
+    computedInstanceTypes x = TF.compute (TF.refKey x) "instance_types"
 
 -- | @alicloud_instances@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_instances terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/instances.html terraform documentation>
 -- for more information.
 data InstancesData s = InstancesData'
     { _availabilityZone :: TF.Attr s P.Text
-    -- ^ @availability_zone@ - (Optional)
+    -- ^ @availability_zone@ - (Optional, Forces New)
     --
     , _ids              :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @ids@ - (Optional)
+    -- ^ @ids@ - (Optional, Forces New)
     --
     , _imageId          :: TF.Attr s P.Text
-    -- ^ @image_id@ - (Optional)
+    -- ^ @image_id@ - (Optional, Forces New)
     --
     , _nameRegex        :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile       :: TF.Attr s P.Text
-    -- ^ @output_file@ - (Optional)
+    -- ^ @output_file@ - (Optional, Forces New)
     --
     , _status           :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
+    -- ^ @status@ - (Optional, Forces New)
     --
     , _tags             :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _vpcId            :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Optional)
+    -- ^ @vpc_id@ - (Optional, Forces New)
     --
     , _vswitchId        :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Optional)
+    -- ^ @vswitch_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -980,16 +980,16 @@ instance P.HasVswitchId (InstancesData s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: InstancesData s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: InstancesData s)
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (Instances s)]) where
-    computedInstances x = TF.compute (TF.refKey x) "_computedInstances"
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (InstancesInstances s)]) where
+    computedInstances x = TF.compute (TF.refKey x) "instances"
 
 -- | @alicloud_key_pairs@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_key_pairs terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/key_pairs.html terraform documentation>
 -- for more information.
 data KeyPairsData s = KeyPairsData'
     { _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
@@ -1025,27 +1025,27 @@ instance P.HasOutputFile (KeyPairsData s) (TF.Attr s P.Text) where
                (\s a -> s { _outputFile = a } :: KeyPairsData s)
 
 instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairsData s)) (TF.Attr s P.Bool) where
-    computedFingerPrint x = TF.compute (TF.refKey x) "_computedFingerPrint"
+    computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
 
-instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairs s)]) where
-    computedKeyPairs x = TF.compute (TF.refKey x) "_computedKeyPairs"
+instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairsKeyPairs s)]) where
+    computedKeyPairs x = TF.compute (TF.refKey x) "key_pairs"
 
 -- | @alicloud_kms_keys@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_kms_keys terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/kms_keys.html terraform documentation>
 -- for more information.
 data KmsKeysData s = KmsKeysData'
     { _descriptionRegex :: TF.Attr s P.Text
-    -- ^ @description_regex@ - (Optional)
+    -- ^ @description_regex@ - (Optional, Forces New)
     --
     , _ids              :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @ids@ - (Optional)
+    -- ^ @ids@ - (Optional, Forces New)
     --
     , _outputFile       :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _status           :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
+    -- ^ @status@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1091,12 +1091,12 @@ instance P.HasStatus (KmsKeysData s) (TF.Attr s P.Text) where
         P.lens (_status :: KmsKeysData s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: KmsKeysData s)
 
-instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (Keys s)]) where
-    computedKeys x = TF.compute (TF.refKey x) "_computedKeys"
+instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (KmsKeysKeys s)]) where
+    computedKeys x = TF.compute (TF.refKey x) "keys"
 
 -- | @alicloud_ram_account_alias@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_account_alias terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/ram_account_alias.html terraform documentation>
 -- for more information.
 data RamAccountAliasData s = RamAccountAliasData'
     { _outputFile :: TF.Attr s P.Text
@@ -1126,11 +1126,11 @@ instance P.HasOutputFile (RamAccountAliasData s) (TF.Attr s P.Text) where
                (\s a -> s { _outputFile = a } :: RamAccountAliasData s)
 
 instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (RamAccountAliasData s)) (TF.Attr s P.Text) where
-    computedAccountAlias x = TF.compute (TF.refKey x) "_computedAccountAlias"
+    computedAccountAlias x = TF.compute (TF.refKey x) "account_alias"
 
 -- | @alicloud_ram_account_aliases@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_account_aliases terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/ram_account_aliases.html terraform documentation>
 -- for more information.
 data RamAccountAliasesData s = RamAccountAliasesData'
     { _outputFile :: TF.Attr s P.Text
@@ -1160,27 +1160,27 @@ instance P.HasOutputFile (RamAccountAliasesData s) (TF.Attr s P.Text) where
                (\s a -> s { _outputFile = a } :: RamAccountAliasesData s)
 
 instance s ~ s' => P.HasComputedAccountAlias (TF.Ref s' (RamAccountAliasesData s)) (TF.Attr s P.Text) where
-    computedAccountAlias x = TF.compute (TF.refKey x) "_computedAccountAlias"
+    computedAccountAlias x = TF.compute (TF.refKey x) "account_alias"
 
 -- | @alicloud_ram_groups@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_groups terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/ram_groups.html terraform documentation>
 -- for more information.
 data RamGroupsData s = RamGroupsData'
     { _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Optional)
+    -- ^ @policy_name@ - (Optional, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Optional)
+    -- ^ @policy_type@ - (Optional, Forces New)
     --
     , _userName   :: TF.Attr s P.Text
-    -- ^ @user_name@ - (Optional)
+    -- ^ @user_name@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1233,31 +1233,31 @@ instance P.HasUserName (RamGroupsData s) (TF.Attr s P.Text) where
         P.lens (_userName :: RamGroupsData s -> TF.Attr s P.Text)
                (\s a -> s { _userName = a } :: RamGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
-    computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (RamGroupsGroups s)]) where
+    computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_ram_policies@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_policies terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/ram_policies.html terraform documentation>
 -- for more information.
 data RamPoliciesData s = RamPoliciesData'
     { _groupName  :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Optional)
+    -- ^ @group_name@ - (Optional, Forces New)
     --
     , _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _roleName   :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Optional)
+    -- ^ @role_name@ - (Optional, Forces New)
     --
     , _type'      :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     , _userName   :: TF.Attr s P.Text
-    -- ^ @user_name@ - (Optional)
+    -- ^ @user_name@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1317,25 +1317,25 @@ instance P.HasUserName (RamPoliciesData s) (TF.Attr s P.Text) where
         P.lens (_userName :: RamPoliciesData s -> TF.Attr s P.Text)
                (\s a -> s { _userName = a } :: RamPoliciesData s)
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (Policies s)]) where
-    computedPolicies x = TF.compute (TF.refKey x) "_computedPolicies"
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (RamPoliciesPolicies s)]) where
+    computedPolicies x = TF.compute (TF.refKey x) "policies"
 
 -- | @alicloud_ram_roles@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_roles terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/ram_roles.html terraform documentation>
 -- for more information.
 data RamRolesData s = RamRolesData'
     { _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Optional)
+    -- ^ @policy_name@ - (Optional, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Optional)
+    -- ^ @policy_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1381,28 +1381,28 @@ instance P.HasPolicyType (RamRolesData s) (TF.Attr s P.Text) where
         P.lens (_policyType :: RamRolesData s -> TF.Attr s P.Text)
                (\s a -> s { _policyType = a } :: RamRolesData s)
 
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (Roles s)]) where
-    computedRoles x = TF.compute (TF.refKey x) "_computedRoles"
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (RamRolesRoles s)]) where
+    computedRoles x = TF.compute (TF.refKey x) "roles"
 
 -- | @alicloud_ram_users@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_ram_users terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/ram_users.html terraform documentation>
 -- for more information.
 data RamUsersData s = RamUsersData'
     { _groupName  :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Optional)
+    -- ^ @group_name@ - (Optional, Forces New)
     --
     , _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Optional)
+    -- ^ @policy_name@ - (Optional, Forces New)
     --
     , _policyType :: TF.Attr s P.Text
-    -- ^ @policy_type@ - (Optional)
+    -- ^ @policy_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1455,12 +1455,12 @@ instance P.HasPolicyType (RamUsersData s) (TF.Attr s P.Text) where
         P.lens (_policyType :: RamUsersData s -> TF.Attr s P.Text)
                (\s a -> s { _policyType = a } :: RamUsersData s)
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (Users s)]) where
-    computedUsers x = TF.compute (TF.refKey x) "_computedUsers"
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (RamUsersUsers s)]) where
+    computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @alicloud_regions@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_regions terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/regions.html terraform documentation>
 -- for more information.
 data RegionsData s = RegionsData'
     { _outputFile :: TF.Attr s P.Text
@@ -1490,17 +1490,17 @@ instance P.HasOutputFile (RegionsData s) (TF.Attr s P.Text) where
                (\s a -> s { _outputFile = a } :: RegionsData s)
 
 instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionsData s)) (TF.Attr s P.Bool) where
-    computedCurrent x = TF.compute (TF.refKey x) "_computedCurrent"
+    computedCurrent x = TF.compute (TF.refKey x) "current"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (Regions s)]) where
-    computedRegions x = TF.compute (TF.refKey x) "_computedRegions"
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (RegionsRegions s)]) where
+    computedRegions x = TF.compute (TF.refKey x) "regions"
 
 -- | @alicloud_security_group_rules@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_security_group_rules terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/security_group_rules.html terraform documentation>
 -- for more information.
 data SecurityGroupRulesData s = SecurityGroupRulesData'
     { _direction  :: TF.Attr s P.Text
@@ -1581,27 +1581,27 @@ instance P.HasPolicy (SecurityGroupRulesData s) (TF.Attr s P.Text) where
                (\s a -> s { _policy = a } :: SecurityGroupRulesData s)
 
 instance s ~ s' => P.HasComputedGroupDesc (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
-    computedGroupDesc x = TF.compute (TF.refKey x) "_computedGroupDesc"
+    computedGroupDesc x = TF.compute (TF.refKey x) "group_desc"
 
 instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
-    computedGroupName x = TF.compute (TF.refKey x) "_computedGroupName"
+    computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (Rules s)]) where
-    computedRules x = TF.compute (TF.refKey x) "_computedRules"
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (SecurityGroupRulesRules s)]) where
+    computedRules x = TF.compute (TF.refKey x) "rules"
 
 -- | @alicloud_security_groups@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_security_groups terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/security_groups.html terraform documentation>
 -- for more information.
 data SecurityGroupsData s = SecurityGroupsData'
     { _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _vpcId      :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Optional)
+    -- ^ @vpc_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1640,31 +1640,31 @@ instance P.HasVpcId (SecurityGroupsData s) (TF.Attr s P.Text) where
         P.lens (_vpcId :: SecurityGroupsData s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: SecurityGroupsData s)
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (Groups s)]) where
-    computedGroups x = TF.compute (TF.refKey x) "_computedGroups"
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (SecurityGroupsGroups s)]) where
+    computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_vpcs@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_vpcs terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/vpcs.html terraform documentation>
 -- for more information.
 data VpcsData s = VpcsData'
     { _cidrBlock  :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Optional)
+    -- ^ @cidr_block@ - (Optional, Forces New)
     --
     , _isDefault  :: TF.Attr s P.Bool
-    -- ^ @is_default@ - (Optional)
+    -- ^ @is_default@ - (Optional, Forces New)
     --
     , _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _status     :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
+    -- ^ @status@ - (Optional, Forces New)
     --
     , _vswitchId  :: TF.Attr s P.Text
-    -- ^ @vswitch_id@ - (Optional)
+    -- ^ @vswitch_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1724,31 +1724,31 @@ instance P.HasVswitchId (VpcsData s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: VpcsData s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: VpcsData s)
 
-instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (Vpcs s)]) where
-    computedVpcs x = TF.compute (TF.refKey x) "_computedVpcs"
+instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (VpcsVpcs s)]) where
+    computedVpcs x = TF.compute (TF.refKey x) "vpcs"
 
 -- | @alicloud_vswitches@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_vswitches terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/vswitches.html terraform documentation>
 -- for more information.
 data VswitchesData s = VswitchesData'
     { _cidrBlock  :: TF.Attr s P.Text
-    -- ^ @cidr_block@ - (Optional)
+    -- ^ @cidr_block@ - (Optional, Forces New)
     --
     , _isDefault  :: TF.Attr s P.Bool
-    -- ^ @is_default@ - (Optional)
+    -- ^ @is_default@ - (Optional, Forces New)
     --
     , _nameRegex  :: TF.Attr s P.Text
-    -- ^ @name_regex@ - (Optional)
+    -- ^ @name_regex@ - (Optional, Forces New)
     --
     , _outputFile :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _vpcId      :: TF.Attr s P.Text
-    -- ^ @vpc_id@ - (Optional)
+    -- ^ @vpc_id@ - (Optional, Forces New)
     --
     , _zoneId     :: TF.Attr s P.Text
-    -- ^ @zone_id@ - (Optional)
+    -- ^ @zone_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1808,37 +1808,37 @@ instance P.HasZoneId (VswitchesData s) (TF.Attr s P.Text) where
         P.lens (_zoneId :: VswitchesData s -> TF.Attr s P.Text)
                (\s a -> s { _zoneId = a } :: VswitchesData s)
 
-instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (Vswitches s)]) where
-    computedVswitches x = TF.compute (TF.refKey x) "_computedVswitches"
+instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (VswitchesVswitches s)]) where
+    computedVswitches x = TF.compute (TF.refKey x) "vswitches"
 
 -- | @alicloud_zones@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AliCloud/alicloud_zones terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/alicloud/d/zones.html terraform documentation>
 -- for more information.
 data ZonesData s = ZonesData'
     { _availableDiskCategory     :: TF.Attr s P.Text
-    -- ^ @available_disk_category@ - (Optional)
+    -- ^ @available_disk_category@ - (Optional, Forces New)
     --
     , _availableInstanceType     :: TF.Attr s P.Text
-    -- ^ @available_instance_type@ - (Optional)
+    -- ^ @available_instance_type@ - (Optional, Forces New)
     --
     , _availableResourceCreation :: TF.Attr s P.Text
-    -- ^ @available_resource_creation@ - (Optional)
+    -- ^ @available_resource_creation@ - (Optional, Forces New)
     --
     , _instanceChargeType        :: TF.Attr s P.Text
-    -- ^ @instance_charge_type@ - (Optional)
+    -- ^ @instance_charge_type@ - (Optional, Forces New)
     --
     , _multi                     :: TF.Attr s P.Bool
     -- ^ @multi@ - (Optional)
     --
     , _networkType               :: TF.Attr s P.Text
-    -- ^ @network_type@ - (Optional)
+    -- ^ @network_type@ - (Optional, Forces New)
     --
     , _outputFile                :: TF.Attr s P.Text
     -- ^ @output_file@ - (Optional)
     --
     , _spotStrategy              :: TF.Attr s P.Text
-    -- ^ @spot_strategy@ - (Optional)
+    -- ^ @spot_strategy@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1912,5 +1912,5 @@ instance P.HasSpotStrategy (ZonesData s) (TF.Attr s P.Text) where
         P.lens (_spotStrategy :: ZonesData s -> TF.Attr s P.Text)
                (\s a -> s { _spotStrategy = a } :: ZonesData s)
 
-instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (Zones s)]) where
-    computedZones x = TF.compute (TF.refKey x) "_computedZones"
+instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (ZonesZones s)]) where
+    computedZones x = TF.compute (TF.refKey x) "zones"
