@@ -87,7 +87,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @consul_agent_config@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_agent_config terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/agent_config.html terraform documentation>
 -- for more information.
 data AgentConfigData s = AgentConfigData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -105,26 +105,26 @@ instance TF.IsValid (AgentConfigData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedNodeId (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
-    computedNodeId x = TF.compute (TF.refKey x) "_computedNodeId"
+    computedNodeId x = TF.compute (TF.refKey x) "node_id"
 
 instance s ~ s' => P.HasComputedNodeName (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
-    computedNodeName x = TF.compute (TF.refKey x) "_computedNodeName"
+    computedNodeName x = TF.compute (TF.refKey x) "node_name"
 
 instance s ~ s' => P.HasComputedRevision (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
-    computedRevision x = TF.compute (TF.refKey x) "_computedRevision"
+    computedRevision x = TF.compute (TF.refKey x) "revision"
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Bool) where
-    computedServer x = TF.compute (TF.refKey x) "_computedServer"
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @consul_agent_self@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_agent_self terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/agent_self.html terraform documentation>
 -- for more information.
 data AgentSelfData s = AgentSelfData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -142,227 +142,227 @@ instance TF.IsValid (AgentSelfData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedAclDatacenter (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAclDatacenter x = TF.compute (TF.refKey x) "_computedAclDatacenter"
+    computedAclDatacenter x = TF.compute (TF.refKey x) "acl_datacenter"
 
 instance s ~ s' => P.HasComputedAclDefaultPolicy (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAclDefaultPolicy x = TF.compute (TF.refKey x) "_computedAclDefaultPolicy"
+    computedAclDefaultPolicy x = TF.compute (TF.refKey x) "acl_default_policy"
 
 instance s ~ s' => P.HasComputedAclDisabledTtl (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAclDisabledTtl x = TF.compute (TF.refKey x) "_computedAclDisabledTtl"
+    computedAclDisabledTtl x = TF.compute (TF.refKey x) "acl_disabled_ttl"
 
 instance s ~ s' => P.HasComputedAclDownPolicy (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAclDownPolicy x = TF.compute (TF.refKey x) "_computedAclDownPolicy"
+    computedAclDownPolicy x = TF.compute (TF.refKey x) "acl_down_policy"
 
 instance s ~ s' => P.HasComputedAclEnforce08Semantics (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedAclEnforce08Semantics x = TF.compute (TF.refKey x) "_computedAclEnforce08Semantics"
+    computedAclEnforce08Semantics x = TF.compute (TF.refKey x) "acl_enforce_0_8_semantics"
 
 instance s ~ s' => P.HasComputedAclTtl (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAclTtl x = TF.compute (TF.refKey x) "_computedAclTtl"
+    computedAclTtl x = TF.compute (TF.refKey x) "acl_ttl"
 
-instance s ~ s' => P.HasComputedAddresses (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (Addresses s))) where
-    computedAddresses x = TF.compute (TF.refKey x) "_computedAddresses"
+instance s ~ s' => P.HasComputedAddresses (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfAddresses s))) where
+    computedAddresses x = TF.compute (TF.refKey x) "addresses"
 
 instance s ~ s' => P.HasComputedAdvertiseAddr (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAdvertiseAddr x = TF.compute (TF.refKey x) "_computedAdvertiseAddr"
+    computedAdvertiseAddr x = TF.compute (TF.refKey x) "advertise_addr"
 
 instance s ~ s' => P.HasComputedAdvertiseAddrWan (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedAdvertiseAddrWan x = TF.compute (TF.refKey x) "_computedAdvertiseAddrWan"
+    computedAdvertiseAddrWan x = TF.compute (TF.refKey x) "advertise_addr_wan"
 
-instance s ~ s' => P.HasComputedAdvertiseAddrs (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AdvertiseAddrs s))) where
-    computedAdvertiseAddrs x = TF.compute (TF.refKey x) "_computedAdvertiseAddrs"
+instance s ~ s' => P.HasComputedAdvertiseAddrs (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfAdvertiseAddrs s))) where
+    computedAdvertiseAddrs x = TF.compute (TF.refKey x) "advertise_addrs"
 
 instance s ~ s' => P.HasComputedAtlasJoin (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedAtlasJoin x = TF.compute (TF.refKey x) "_computedAtlasJoin"
+    computedAtlasJoin x = TF.compute (TF.refKey x) "atlas_join"
 
 instance s ~ s' => P.HasComputedBindAddr (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedBindAddr x = TF.compute (TF.refKey x) "_computedBindAddr"
+    computedBindAddr x = TF.compute (TF.refKey x) "bind_addr"
 
 instance s ~ s' => P.HasComputedBootstrapExpect (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Integer) where
-    computedBootstrapExpect x = TF.compute (TF.refKey x) "_computedBootstrapExpect"
+    computedBootstrapExpect x = TF.compute (TF.refKey x) "bootstrap_expect"
 
 instance s ~ s' => P.HasComputedBootstrapMode (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedBootstrapMode x = TF.compute (TF.refKey x) "_computedBootstrapMode"
+    computedBootstrapMode x = TF.compute (TF.refKey x) "bootstrap_mode"
 
 instance s ~ s' => P.HasComputedCheckDeregisterIntervalMin (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedCheckDeregisterIntervalMin x = TF.compute (TF.refKey x) "_computedCheckDeregisterIntervalMin"
+    computedCheckDeregisterIntervalMin x = TF.compute (TF.refKey x) "check_deregister_interval_min"
 
 instance s ~ s' => P.HasComputedCheckReapInterval (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedCheckReapInterval x = TF.compute (TF.refKey x) "_computedCheckReapInterval"
+    computedCheckReapInterval x = TF.compute (TF.refKey x) "check_reap_interval"
 
 instance s ~ s' => P.HasComputedCheckUpdateInterval (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedCheckUpdateInterval x = TF.compute (TF.refKey x) "_computedCheckUpdateInterval"
+    computedCheckUpdateInterval x = TF.compute (TF.refKey x) "check_update_interval"
 
 instance s ~ s' => P.HasComputedClientAddr (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedClientAddr x = TF.compute (TF.refKey x) "_computedClientAddr"
+    computedClientAddr x = TF.compute (TF.refKey x) "client_addr"
 
 instance s ~ s' => P.HasComputedDataDir (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedDataDir x = TF.compute (TF.refKey x) "_computedDataDir"
+    computedDataDir x = TF.compute (TF.refKey x) "data_dir"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedDevMode (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedDevMode x = TF.compute (TF.refKey x) "_computedDevMode"
+    computedDevMode x = TF.compute (TF.refKey x) "dev_mode"
 
-instance s ~ s' => P.HasComputedDns (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (Dns s))) where
-    computedDns x = TF.compute (TF.refKey x) "_computedDns"
+instance s ~ s' => P.HasComputedDns (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfDns s))) where
+    computedDns x = TF.compute (TF.refKey x) "dns"
 
 instance s ~ s' => P.HasComputedDnsRecursors (TF.Ref s' (AgentSelfData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDnsRecursors x = TF.compute (TF.refKey x) "_computedDnsRecursors"
+    computedDnsRecursors x = TF.compute (TF.refKey x) "dns_recursors"
 
 instance s ~ s' => P.HasComputedDomain (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedDomain x = TF.compute (TF.refKey x) "_computedDomain"
+    computedDomain x = TF.compute (TF.refKey x) "domain"
 
 instance s ~ s' => P.HasComputedEnableAnonymousSignature (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableAnonymousSignature x = TF.compute (TF.refKey x) "_computedEnableAnonymousSignature"
+    computedEnableAnonymousSignature x = TF.compute (TF.refKey x) "enable_anonymous_signature"
 
 instance s ~ s' => P.HasComputedEnableCoordinates (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableCoordinates x = TF.compute (TF.refKey x) "_computedEnableCoordinates"
+    computedEnableCoordinates x = TF.compute (TF.refKey x) "enable_coordinates"
 
 instance s ~ s' => P.HasComputedEnableDebug (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableDebug x = TF.compute (TF.refKey x) "_computedEnableDebug"
+    computedEnableDebug x = TF.compute (TF.refKey x) "enable_debug"
 
 instance s ~ s' => P.HasComputedEnableRemoteExec (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableRemoteExec x = TF.compute (TF.refKey x) "_computedEnableRemoteExec"
+    computedEnableRemoteExec x = TF.compute (TF.refKey x) "enable_remote_exec"
 
 instance s ~ s' => P.HasComputedEnableSyslog (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableSyslog x = TF.compute (TF.refKey x) "_computedEnableSyslog"
+    computedEnableSyslog x = TF.compute (TF.refKey x) "enable_syslog"
 
 instance s ~ s' => P.HasComputedEnableUi (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableUi x = TF.compute (TF.refKey x) "_computedEnableUi"
+    computedEnableUi x = TF.compute (TF.refKey x) "enable_ui"
 
 instance s ~ s' => P.HasComputedEnableUpdateCheck (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedEnableUpdateCheck x = TF.compute (TF.refKey x) "_computedEnableUpdateCheck"
+    computedEnableUpdateCheck x = TF.compute (TF.refKey x) "enable_update_check"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLeaveOnInt (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedLeaveOnInt x = TF.compute (TF.refKey x) "_computedLeaveOnInt"
+    computedLeaveOnInt x = TF.compute (TF.refKey x) "leave_on_int"
 
 instance s ~ s' => P.HasComputedLeaveOnTerm (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedLeaveOnTerm x = TF.compute (TF.refKey x) "_computedLeaveOnTerm"
+    computedLeaveOnTerm x = TF.compute (TF.refKey x) "leave_on_term"
 
 instance s ~ s' => P.HasComputedLogLevel (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedLogLevel x = TF.compute (TF.refKey x) "_computedLogLevel"
+    computedLogLevel x = TF.compute (TF.refKey x) "log_level"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPerformance (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (Performance s))) where
-    computedPerformance x = TF.compute (TF.refKey x) "_computedPerformance"
+instance s ~ s' => P.HasComputedPerformance (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfPerformance s))) where
+    computedPerformance x = TF.compute (TF.refKey x) "performance"
 
 instance s ~ s' => P.HasComputedPidFile (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedPidFile x = TF.compute (TF.refKey x) "_computedPidFile"
+    computedPidFile x = TF.compute (TF.refKey x) "pid_file"
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (Ports s))) where
-    computedPorts x = TF.compute (TF.refKey x) "_computedPorts"
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfPorts s))) where
+    computedPorts x = TF.compute (TF.refKey x) "ports"
 
 instance s ~ s' => P.HasComputedProtocolVersion (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Integer) where
-    computedProtocolVersion x = TF.compute (TF.refKey x) "_computedProtocolVersion"
+    computedProtocolVersion x = TF.compute (TF.refKey x) "protocol_version"
 
 instance s ~ s' => P.HasComputedReconnectTimeoutLan (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedReconnectTimeoutLan x = TF.compute (TF.refKey x) "_computedReconnectTimeoutLan"
+    computedReconnectTimeoutLan x = TF.compute (TF.refKey x) "reconnect_timeout_lan"
 
 instance s ~ s' => P.HasComputedReconnectTimeoutWan (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedReconnectTimeoutWan x = TF.compute (TF.refKey x) "_computedReconnectTimeoutWan"
+    computedReconnectTimeoutWan x = TF.compute (TF.refKey x) "reconnect_timeout_wan"
 
 instance s ~ s' => P.HasComputedRejoinAfterLeave (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedRejoinAfterLeave x = TF.compute (TF.refKey x) "_computedRejoinAfterLeave"
+    computedRejoinAfterLeave x = TF.compute (TF.refKey x) "rejoin_after_leave"
 
 instance s ~ s' => P.HasComputedRetryJoin (TF.Ref s' (AgentSelfData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRetryJoin x = TF.compute (TF.refKey x) "_computedRetryJoin"
+    computedRetryJoin x = TF.compute (TF.refKey x) "retry_join"
 
-instance s ~ s' => P.HasComputedRetryJoinEc2 (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (RetryJoinEc2 s))) where
-    computedRetryJoinEc2 x = TF.compute (TF.refKey x) "_computedRetryJoinEc2"
+instance s ~ s' => P.HasComputedRetryJoinEc2 (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfRetryJoinEc2 s))) where
+    computedRetryJoinEc2 x = TF.compute (TF.refKey x) "retry_join_ec2"
 
-instance s ~ s' => P.HasComputedRetryJoinGce (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (RetryJoinGce s))) where
-    computedRetryJoinGce x = TF.compute (TF.refKey x) "_computedRetryJoinGce"
+instance s ~ s' => P.HasComputedRetryJoinGce (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfRetryJoinGce s))) where
+    computedRetryJoinGce x = TF.compute (TF.refKey x) "retry_join_gce"
 
 instance s ~ s' => P.HasComputedRetryJoinWan (TF.Ref s' (AgentSelfData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRetryJoinWan x = TF.compute (TF.refKey x) "_computedRetryJoinWan"
+    computedRetryJoinWan x = TF.compute (TF.refKey x) "retry_join_wan"
 
 instance s ~ s' => P.HasComputedRetryMaxAttempts (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Integer) where
-    computedRetryMaxAttempts x = TF.compute (TF.refKey x) "_computedRetryMaxAttempts"
+    computedRetryMaxAttempts x = TF.compute (TF.refKey x) "retry_max_attempts"
 
 instance s ~ s' => P.HasComputedRetryMaxAttemptsWan (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Integer) where
-    computedRetryMaxAttemptsWan x = TF.compute (TF.refKey x) "_computedRetryMaxAttemptsWan"
+    computedRetryMaxAttemptsWan x = TF.compute (TF.refKey x) "retry_max_attempts_wan"
 
 instance s ~ s' => P.HasComputedSerfLanBindAddr (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedSerfLanBindAddr x = TF.compute (TF.refKey x) "_computedSerfLanBindAddr"
+    computedSerfLanBindAddr x = TF.compute (TF.refKey x) "serf_lan_bind_addr"
 
 instance s ~ s' => P.HasComputedSerfWanBindAddr (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedSerfWanBindAddr x = TF.compute (TF.refKey x) "_computedSerfWanBindAddr"
+    computedSerfWanBindAddr x = TF.compute (TF.refKey x) "serf_wan_bind_addr"
 
 instance s ~ s' => P.HasComputedServerMode (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedServerMode x = TF.compute (TF.refKey x) "_computedServerMode"
+    computedServerMode x = TF.compute (TF.refKey x) "server_mode"
 
 instance s ~ s' => P.HasComputedServerName (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedServerName x = TF.compute (TF.refKey x) "_computedServerName"
+    computedServerName x = TF.compute (TF.refKey x) "server_name"
 
 instance s ~ s' => P.HasComputedSessionTtlMin (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedSessionTtlMin x = TF.compute (TF.refKey x) "_computedSessionTtlMin"
+    computedSessionTtlMin x = TF.compute (TF.refKey x) "session_ttl_min"
 
 instance s ~ s' => P.HasComputedStartJoin (TF.Ref s' (AgentSelfData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStartJoin x = TF.compute (TF.refKey x) "_computedStartJoin"
+    computedStartJoin x = TF.compute (TF.refKey x) "start_join"
 
 instance s ~ s' => P.HasComputedStartJoinWan (TF.Ref s' (AgentSelfData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStartJoinWan x = TF.compute (TF.refKey x) "_computedStartJoinWan"
+    computedStartJoinWan x = TF.compute (TF.refKey x) "start_join_wan"
 
 instance s ~ s' => P.HasComputedSyslogFacility (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedSyslogFacility x = TF.compute (TF.refKey x) "_computedSyslogFacility"
+    computedSyslogFacility x = TF.compute (TF.refKey x) "syslog_facility"
 
-instance s ~ s' => P.HasComputedTaggedAddresses (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (TaggedAddresses s))) where
-    computedTaggedAddresses x = TF.compute (TF.refKey x) "_computedTaggedAddresses"
+instance s ~ s' => P.HasComputedTaggedAddresses (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfTaggedAddresses s))) where
+    computedTaggedAddresses x = TF.compute (TF.refKey x) "tagged_addresses"
 
-instance s ~ s' => P.HasComputedTelemetry (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (Telemetry s))) where
-    computedTelemetry x = TF.compute (TF.refKey x) "_computedTelemetry"
+instance s ~ s' => P.HasComputedTelemetry (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfTelemetry s))) where
+    computedTelemetry x = TF.compute (TF.refKey x) "telemetry"
 
 instance s ~ s' => P.HasComputedTlsCaFile (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedTlsCaFile x = TF.compute (TF.refKey x) "_computedTlsCaFile"
+    computedTlsCaFile x = TF.compute (TF.refKey x) "tls_ca_file"
 
 instance s ~ s' => P.HasComputedTlsCertFile (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedTlsCertFile x = TF.compute (TF.refKey x) "_computedTlsCertFile"
+    computedTlsCertFile x = TF.compute (TF.refKey x) "tls_cert_file"
 
 instance s ~ s' => P.HasComputedTlsKeyFile (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedTlsKeyFile x = TF.compute (TF.refKey x) "_computedTlsKeyFile"
+    computedTlsKeyFile x = TF.compute (TF.refKey x) "tls_key_file"
 
 instance s ~ s' => P.HasComputedTlsMinVersion (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedTlsMinVersion x = TF.compute (TF.refKey x) "_computedTlsMinVersion"
+    computedTlsMinVersion x = TF.compute (TF.refKey x) "tls_min_version"
 
 instance s ~ s' => P.HasComputedTlsVerifyIncoming (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedTlsVerifyIncoming x = TF.compute (TF.refKey x) "_computedTlsVerifyIncoming"
+    computedTlsVerifyIncoming x = TF.compute (TF.refKey x) "tls_verify_incoming"
 
 instance s ~ s' => P.HasComputedTlsVerifyOutgoing (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedTlsVerifyOutgoing x = TF.compute (TF.refKey x) "_computedTlsVerifyOutgoing"
+    computedTlsVerifyOutgoing x = TF.compute (TF.refKey x) "tls_verify_outgoing"
 
 instance s ~ s' => P.HasComputedTlsVerifyServerHostname (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedTlsVerifyServerHostname x = TF.compute (TF.refKey x) "_computedTlsVerifyServerHostname"
+    computedTlsVerifyServerHostname x = TF.compute (TF.refKey x) "tls_verify_server_hostname"
 
 instance s ~ s' => P.HasComputedTranslateWanAddrs (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Bool) where
-    computedTranslateWanAddrs x = TF.compute (TF.refKey x) "_computedTranslateWanAddrs"
+    computedTranslateWanAddrs x = TF.compute (TF.refKey x) "translate_wan_addrs"
 
 instance s ~ s' => P.HasComputedUiDir (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedUiDir x = TF.compute (TF.refKey x) "_computedUiDir"
+    computedUiDir x = TF.compute (TF.refKey x) "ui_dir"
 
-instance s ~ s' => P.HasComputedUnixSockets (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (UnixSockets s))) where
-    computedUnixSockets x = TF.compute (TF.refKey x) "_computedUnixSockets"
+instance s ~ s' => P.HasComputedUnixSockets (TF.Ref s' (AgentSelfData s)) (TF.Attr s (P.HashMap P.Text (AgentSelfUnixSockets s))) where
+    computedUnixSockets x = TF.compute (TF.refKey x) "unix_sockets"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 instance s ~ s' => P.HasComputedVersionPrerelease (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedVersionPrerelease x = TF.compute (TF.refKey x) "_computedVersionPrerelease"
+    computedVersionPrerelease x = TF.compute (TF.refKey x) "version_prerelease"
 
 instance s ~ s' => P.HasComputedVersionRevision (TF.Ref s' (AgentSelfData s)) (TF.Attr s P.Text) where
-    computedVersionRevision x = TF.compute (TF.refKey x) "_computedVersionRevision"
+    computedVersionRevision x = TF.compute (TF.refKey x) "version_revision"
 
 -- | @consul_catalog_nodes@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_catalog_nodes terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/catalog_nodes.html terraform documentation>
 -- for more information.
 data CatalogNodesData s = CatalogNodesData'
-    { _queryOptions :: TF.Attr s [TF.Attr s (QueryOptions s)]
+    { _queryOptions :: TF.Attr s [TF.Attr s (CatalogNodesQueryOptions s)]
     -- ^ @query_options@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -384,42 +384,42 @@ instance TF.IsValid (CatalogNodesData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_queryOptions"
                   (_queryOptions
-                      :: CatalogNodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                      :: CatalogNodesData s -> TF.Attr s [TF.Attr s (CatalogNodesQueryOptions s)])
                   TF.validator
 
-instance P.HasQueryOptions (CatalogNodesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
+instance P.HasQueryOptions (CatalogNodesData s) (TF.Attr s [TF.Attr s (CatalogNodesQueryOptions s)]) where
     queryOptions =
-        P.lens (_queryOptions :: CatalogNodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+        P.lens (_queryOptions :: CatalogNodesData s -> TF.Attr s [TF.Attr s (CatalogNodesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: CatalogNodesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedNodeIds (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNodeIds x = TF.compute (TF.refKey x) "_computedNodeIds"
+    computedNodeIds x = TF.compute (TF.refKey x) "node_ids"
 
 instance s ~ s' => P.HasComputedNodeNames (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNodeNames x = TF.compute (TF.refKey x) "_computedNodeNames"
+    computedNodeNames x = TF.compute (TF.refKey x) "node_names"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [TF.Attr s (Nodes s)]) where
-    computedNodes x = TF.compute (TF.refKey x) "_computedNodes"
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CatalogNodesData s)) (TF.Attr s [TF.Attr s (CatalogNodesNodes s)]) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 -- | @consul_catalog_service@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_catalog_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/catalog_service.html terraform documentation>
 -- for more information.
 data CatalogServiceData s = CatalogServiceData'
     { _datacenter   :: TF.Attr s P.Text
-    -- ^ @datacenter@ - (Optional)
+    -- ^ @datacenter@ - (Optional, Forces New)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _queryOptions :: TF.Attr s [TF.Attr s (QueryOptions s)]
+    , _queryOptions :: TF.Attr s [TF.Attr s (CatalogServiceQueryOptions s)]
     -- ^ @query_options@ - (Optional)
     --
     , _tag          :: TF.Attr s P.Text
-    -- ^ @tag@ - (Optional)
+    -- ^ @tag@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -447,7 +447,7 @@ instance TF.IsValid (CatalogServiceData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_queryOptions"
                   (_queryOptions
-                      :: CatalogServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                      :: CatalogServiceData s -> TF.Attr s [TF.Attr s (CatalogServiceQueryOptions s)])
                   TF.validator
 
 instance P.HasDatacenter (CatalogServiceData s) (TF.Attr s P.Text) where
@@ -460,9 +460,9 @@ instance P.HasName (CatalogServiceData s) (TF.Attr s P.Text) where
         P.lens (_name :: CatalogServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CatalogServiceData s)
 
-instance P.HasQueryOptions (CatalogServiceData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
+instance P.HasQueryOptions (CatalogServiceData s) (TF.Attr s [TF.Attr s (CatalogServiceQueryOptions s)]) where
     queryOptions =
-        P.lens (_queryOptions :: CatalogServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+        P.lens (_queryOptions :: CatalogServiceData s -> TF.Attr s [TF.Attr s (CatalogServiceQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: CatalogServiceData s)
 
 instance P.HasTag (CatalogServiceData s) (TF.Attr s P.Text) where
@@ -470,15 +470,15 @@ instance P.HasTag (CatalogServiceData s) (TF.Attr s P.Text) where
         P.lens (_tag :: CatalogServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _tag = a } :: CatalogServiceData s)
 
-instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogServiceData s)) (TF.Attr s [TF.Attr s (Service s)]) where
-    computedService x = TF.compute (TF.refKey x) "_computedService"
+instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogServiceData s)) (TF.Attr s [TF.Attr s (CatalogServiceService s)]) where
+    computedService x = TF.compute (TF.refKey x) "service"
 
 -- | @consul_catalog_services@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_catalog_services terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/catalog_services.html terraform documentation>
 -- for more information.
 data CatalogServicesData s = CatalogServicesData'
-    { _queryOptions :: TF.Attr s [TF.Attr s (QueryOptions s)]
+    { _queryOptions :: TF.Attr s [TF.Attr s (CatalogServicesQueryOptions s)]
     -- ^ @query_options@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -500,32 +500,32 @@ instance TF.IsValid (CatalogServicesData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_queryOptions"
                   (_queryOptions
-                      :: CatalogServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                      :: CatalogServicesData s -> TF.Attr s [TF.Attr s (CatalogServicesQueryOptions s)])
                   TF.validator
 
-instance P.HasQueryOptions (CatalogServicesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
+instance P.HasQueryOptions (CatalogServicesData s) (TF.Attr s [TF.Attr s (CatalogServicesQueryOptions s)]) where
     queryOptions =
-        P.lens (_queryOptions :: CatalogServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+        P.lens (_queryOptions :: CatalogServicesData s -> TF.Attr s [TF.Attr s (CatalogServicesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: CatalogServicesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogServicesData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (CatalogServicesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNames x = TF.compute (TF.refKey x) "_computedNames"
+    computedNames x = TF.compute (TF.refKey x) "names"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (CatalogServicesData s)) (TF.Attr s (P.HashMap P.Text (Services s))) where
-    computedServices x = TF.compute (TF.refKey x) "_computedServices"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CatalogServicesData s)) (TF.Attr s (P.HashMap P.Text (CatalogServicesServices s))) where
+    computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @consul_key_prefix@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_key_prefix terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/key_prefix.html terraform documentation>
 -- for more information.
 data KeyPrefixData s = KeyPrefixData'
     { _pathPrefix :: TF.Attr s P.Text
     -- ^ @path_prefix@ - (Required)
     --
-    , _subkey     :: TF.Attr s [TF.Attr s (Subkey s)]
+    , _subkey     :: TF.Attr s [TF.Attr s (KeyPrefixSubkey s)]
     -- ^ @subkey@ - (Optional)
     --
     , _token      :: TF.Attr s P.Text
@@ -555,7 +555,7 @@ instance TF.IsValid (KeyPrefixData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_subkey"
                   (_subkey
-                      :: KeyPrefixData s -> TF.Attr s [TF.Attr s (Subkey s)])
+                      :: KeyPrefixData s -> TF.Attr s [TF.Attr s (KeyPrefixSubkey s)])
                   TF.validator
 
 instance P.HasPathPrefix (KeyPrefixData s) (TF.Attr s P.Text) where
@@ -563,9 +563,9 @@ instance P.HasPathPrefix (KeyPrefixData s) (TF.Attr s P.Text) where
         P.lens (_pathPrefix :: KeyPrefixData s -> TF.Attr s P.Text)
                (\s a -> s { _pathPrefix = a } :: KeyPrefixData s)
 
-instance P.HasSubkey (KeyPrefixData s) (TF.Attr s [TF.Attr s (Subkey s)]) where
+instance P.HasSubkey (KeyPrefixData s) (TF.Attr s [TF.Attr s (KeyPrefixSubkey s)]) where
     subkey =
-        P.lens (_subkey :: KeyPrefixData s -> TF.Attr s [TF.Attr s (Subkey s)])
+        P.lens (_subkey :: KeyPrefixData s -> TF.Attr s [TF.Attr s (KeyPrefixSubkey s)])
                (\s a -> s { _subkey = a } :: KeyPrefixData s)
 
 instance P.HasToken (KeyPrefixData s) (TF.Attr s P.Text) where
@@ -574,20 +574,20 @@ instance P.HasToken (KeyPrefixData s) (TF.Attr s P.Text) where
                (\s a -> s { _token = a } :: KeyPrefixData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedSubkeys (TF.Ref s' (KeyPrefixData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedSubkeys x = TF.compute (TF.refKey x) "_computedSubkeys"
+    computedSubkeys x = TF.compute (TF.refKey x) "subkeys"
 
 instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeyPrefixData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedVar x = TF.compute (TF.refKey x) "_computedVar"
+    computedVar x = TF.compute (TF.refKey x) "var"
 
 -- | @consul_keys@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_keys terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/keys.html terraform documentation>
 -- for more information.
 data KeysData s = KeysData'
-    { _key   :: TF.Attr s [TF.Attr s (Key s)]
+    { _key   :: TF.Attr s [TF.Attr s (KeysKey s)]
     -- ^ @key@ - (Optional)
     --
     , _token :: TF.Attr s P.Text
@@ -614,12 +614,12 @@ instance TF.IsValid (KeysData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_key"
                   (_key
-                      :: KeysData s -> TF.Attr s [TF.Attr s (Key s)])
+                      :: KeysData s -> TF.Attr s [TF.Attr s (KeysKey s)])
                   TF.validator
 
-instance P.HasKey (KeysData s) (TF.Attr s [TF.Attr s (Key s)]) where
+instance P.HasKey (KeysData s) (TF.Attr s [TF.Attr s (KeysKey s)]) where
     key =
-        P.lens (_key :: KeysData s -> TF.Attr s [TF.Attr s (Key s)])
+        P.lens (_key :: KeysData s -> TF.Attr s [TF.Attr s (KeysKey s)])
                (\s a -> s { _key = a } :: KeysData s)
 
 instance P.HasToken (KeysData s) (TF.Attr s P.Text) where
@@ -628,17 +628,17 @@ instance P.HasToken (KeysData s) (TF.Attr s P.Text) where
                (\s a -> s { _token = a } :: KeysData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeysData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedVar x = TF.compute (TF.refKey x) "_computedVar"
+    computedVar x = TF.compute (TF.refKey x) "var"
 
 -- | @consul_nodes@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_nodes terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/nodes.html terraform documentation>
 -- for more information.
 data NodesData s = NodesData'
-    { _queryOptions :: TF.Attr s [TF.Attr s (QueryOptions s)]
+    { _queryOptions :: TF.Attr s [TF.Attr s (NodesQueryOptions s)]
     -- ^ @query_options@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -660,42 +660,42 @@ instance TF.IsValid (NodesData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_queryOptions"
                   (_queryOptions
-                      :: NodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                      :: NodesData s -> TF.Attr s [TF.Attr s (NodesQueryOptions s)])
                   TF.validator
 
-instance P.HasQueryOptions (NodesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
+instance P.HasQueryOptions (NodesData s) (TF.Attr s [TF.Attr s (NodesQueryOptions s)]) where
     queryOptions =
-        P.lens (_queryOptions :: NodesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+        P.lens (_queryOptions :: NodesData s -> TF.Attr s [TF.Attr s (NodesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: NodesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedNodeIds (TF.Ref s' (NodesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNodeIds x = TF.compute (TF.refKey x) "_computedNodeIds"
+    computedNodeIds x = TF.compute (TF.refKey x) "node_ids"
 
 instance s ~ s' => P.HasComputedNodeNames (TF.Ref s' (NodesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNodeNames x = TF.compute (TF.refKey x) "_computedNodeNames"
+    computedNodeNames x = TF.compute (TF.refKey x) "node_names"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (NodesData s)) (TF.Attr s [TF.Attr s (Nodes s)]) where
-    computedNodes x = TF.compute (TF.refKey x) "_computedNodes"
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (NodesData s)) (TF.Attr s [TF.Attr s (NodesNodes s)]) where
+    computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 -- | @consul_service@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/service.html terraform documentation>
 -- for more information.
 data ServiceData s = ServiceData'
     { _datacenter   :: TF.Attr s P.Text
-    -- ^ @datacenter@ - (Optional)
+    -- ^ @datacenter@ - (Optional, Forces New)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _queryOptions :: TF.Attr s [TF.Attr s (QueryOptions s)]
+    , _queryOptions :: TF.Attr s [TF.Attr s (ServiceQueryOptions s)]
     -- ^ @query_options@ - (Optional)
     --
     , _tag          :: TF.Attr s P.Text
-    -- ^ @tag@ - (Optional)
+    -- ^ @tag@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -723,7 +723,7 @@ instance TF.IsValid (ServiceData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_queryOptions"
                   (_queryOptions
-                      :: ServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                      :: ServiceData s -> TF.Attr s [TF.Attr s (ServiceQueryOptions s)])
                   TF.validator
 
 instance P.HasDatacenter (ServiceData s) (TF.Attr s P.Text) where
@@ -736,9 +736,9 @@ instance P.HasName (ServiceData s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceData s)
 
-instance P.HasQueryOptions (ServiceData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
+instance P.HasQueryOptions (ServiceData s) (TF.Attr s [TF.Attr s (ServiceQueryOptions s)]) where
     queryOptions =
-        P.lens (_queryOptions :: ServiceData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+        P.lens (_queryOptions :: ServiceData s -> TF.Attr s [TF.Attr s (ServiceQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: ServiceData s)
 
 instance P.HasTag (ServiceData s) (TF.Attr s P.Text) where
@@ -746,15 +746,15 @@ instance P.HasTag (ServiceData s) (TF.Attr s P.Text) where
         P.lens (_tag :: ServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _tag = a } :: ServiceData s)
 
-instance s ~ s' => P.HasComputedService (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (Service s)]) where
-    computedService x = TF.compute (TF.refKey x) "_computedService"
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (ServiceService s)]) where
+    computedService x = TF.compute (TF.refKey x) "service"
 
 -- | @consul_services@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_services terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/d/services.html terraform documentation>
 -- for more information.
 data ServicesData s = ServicesData'
-    { _queryOptions :: TF.Attr s [TF.Attr s (QueryOptions s)]
+    { _queryOptions :: TF.Attr s [TF.Attr s (ServicesQueryOptions s)]
     -- ^ @query_options@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -776,19 +776,19 @@ instance TF.IsValid (ServicesData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_queryOptions"
                   (_queryOptions
-                      :: ServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+                      :: ServicesData s -> TF.Attr s [TF.Attr s (ServicesQueryOptions s)])
                   TF.validator
 
-instance P.HasQueryOptions (ServicesData s) (TF.Attr s [TF.Attr s (QueryOptions s)]) where
+instance P.HasQueryOptions (ServicesData s) (TF.Attr s [TF.Attr s (ServicesQueryOptions s)]) where
     queryOptions =
-        P.lens (_queryOptions :: ServicesData s -> TF.Attr s [TF.Attr s (QueryOptions s)])
+        P.lens (_queryOptions :: ServicesData s -> TF.Attr s [TF.Attr s (ServicesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: ServicesData s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServicesData s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (ServicesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNames x = TF.compute (TF.refKey x) "_computedNames"
+    computedNames x = TF.compute (TF.refKey x) "names"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (ServicesData s)) (TF.Attr s (P.HashMap P.Text (Services s))) where
-    computedServices x = TF.compute (TF.refKey x) "_computedServices"
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (ServicesData s)) (TF.Attr s (P.HashMap P.Text (ServicesServices s))) where
+    computedServices x = TF.compute (TF.refKey x) "services"

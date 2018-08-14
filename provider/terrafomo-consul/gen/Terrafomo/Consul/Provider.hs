@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | The @Consul@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/consul/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _address       :: P.Maybe P.Text

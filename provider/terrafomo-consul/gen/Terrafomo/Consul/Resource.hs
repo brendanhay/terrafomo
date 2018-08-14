@@ -79,17 +79,17 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @consul_agent_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_agent_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/agent_service.html terraform documentation>
 -- for more information.
 data AgentServiceResource s = AgentServiceResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _port :: TF.Attr s P.Integer
-    -- ^ @port@ - (Optional)
+    -- ^ @port@ - (Optional, Forces New)
     --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @tags@ - (Optional)
+    -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -130,21 +130,21 @@ instance P.HasTags (AgentServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _tags = a } :: AgentServiceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (AgentServiceResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 -- | @consul_catalog_entry@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_catalog_entry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/catalog_entry.html terraform documentation>
 -- for more information.
 data CatalogEntryResource s = CatalogEntryResource'
     { _address :: TF.Attr s P.Text
-    -- ^ @address@ - (Required)
+    -- ^ @address@ - (Required, Forces New)
     --
     , _node    :: TF.Attr s P.Text
-    -- ^ @node@ - (Required)
+    -- ^ @node@ - (Required, Forces New)
     --
-    , _service :: TF.Attr s [TF.Attr s (Service s)]
-    -- ^ @service@ - (Optional)
+    , _service :: TF.Attr s [TF.Attr s (CatalogEntryService s)]
+    -- ^ @service@ - (Optional, Forces New)
     --
     , _token   :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
@@ -176,7 +176,7 @@ instance TF.IsValid (CatalogEntryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_service"
                   (_service
-                      :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (Service s)])
+                      :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (CatalogEntryService s)])
                   TF.validator
 
 instance P.HasAddress (CatalogEntryResource s) (TF.Attr s P.Text) where
@@ -189,9 +189,9 @@ instance P.HasNode (CatalogEntryResource s) (TF.Attr s P.Text) where
         P.lens (_node :: CatalogEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _node = a } :: CatalogEntryResource s)
 
-instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (Service s)]) where
+instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (CatalogEntryService s)]) where
     service =
-        P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (Service s)])
+        P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (CatalogEntryService s)])
                (\s a -> s { _service = a } :: CatalogEntryResource s)
 
 instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
@@ -200,11 +200,11 @@ instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
                (\s a -> s { _token = a } :: CatalogEntryResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogEntryResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 -- | @consul_intention@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_intention terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/intention.html terraform documentation>
 -- for more information.
 data IntentionResource s = IntentionResource'
     { _action          :: TF.Attr s P.Text
@@ -278,11 +278,11 @@ instance P.HasSourceName (IntentionResource s) (TF.Attr s P.Text) where
 
 -- | @consul_key_prefix@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_key_prefix terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/key_prefix.html terraform documentation>
 -- for more information.
 data KeyPrefixResource s = KeyPrefixResource'
     { _pathPrefix :: TF.Attr s P.Text
-    -- ^ @path_prefix@ - (Required)
+    -- ^ @path_prefix@ - (Required, Forces New)
     --
     , _subkeys    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @subkeys@ - (Required)
@@ -330,14 +330,14 @@ instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
                (\s a -> s { _token = a } :: KeyPrefixResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 -- | @consul_keys@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_keys terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/keys.html terraform documentation>
 -- for more information.
 data KeysResource s = KeysResource'
-    { _key   :: TF.Attr s [TF.Attr s (Key s)]
+    { _key   :: TF.Attr s [TF.Attr s (KeysKey s)]
     -- ^ @key@ - (Optional)
     --
     , _token :: TF.Attr s P.Text
@@ -364,12 +364,12 @@ instance TF.IsValid (KeysResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_key"
                   (_key
-                      :: KeysResource s -> TF.Attr s [TF.Attr s (Key s)])
+                      :: KeysResource s -> TF.Attr s [TF.Attr s (KeysKey s)])
                   TF.validator
 
-instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (Key s)]) where
+instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (KeysKey s)]) where
     key =
-        P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (Key s)])
+        P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (KeysKey s)])
                (\s a -> s { _key = a } :: KeysResource s)
 
 instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
@@ -378,21 +378,21 @@ instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
                (\s a -> s { _token = a } :: KeysResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeysResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedVar x = TF.compute (TF.refKey x) "_computedVar"
+    computedVar x = TF.compute (TF.refKey x) "var"
 
 -- | @consul_node@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_node terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/node.html terraform documentation>
 -- for more information.
 data NodeResource s = NodeResource'
     { _address :: TF.Attr s P.Text
-    -- ^ @address@ - (Required)
+    -- ^ @address@ - (Required, Forces New)
     --
     , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _token   :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
@@ -437,20 +437,20 @@ instance P.HasToken (NodeResource s) (TF.Attr s P.Text) where
                (\s a -> s { _token = a } :: NodeResource s)
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 -- | @consul_prepared_query@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_prepared_query terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/prepared_query.html terraform documentation>
 -- for more information.
 data PreparedQueryResource s = PreparedQueryResource'
     { _datacenter  :: TF.Attr s P.Text
     -- ^ @datacenter@ - (Optional)
     --
-    , _dns         :: TF.Attr s (Dns s)
+    , _dns         :: TF.Attr s (PreparedQueryDns s)
     -- ^ @dns@ - (Optional)
     --
-    , _failover    :: TF.Attr s (Failover s)
+    , _failover    :: TF.Attr s (PreparedQueryFailover s)
     -- ^ @failover@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -474,7 +474,7 @@ data PreparedQueryResource s = PreparedQueryResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _template    :: TF.Attr s (Template s)
+    , _template    :: TF.Attr s (PreparedQueryTemplate s)
     -- ^ @template@ - (Optional)
     --
     , _token       :: TF.Attr s P.Text
@@ -523,15 +523,15 @@ instance TF.IsValid (PreparedQueryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dns"
                   (_dns
-                      :: PreparedQueryResource s -> TF.Attr s (Dns s))
+                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryDns s))
                   TF.validator
            P.<> TF.settingsValidator "_failover"
                   (_failover
-                      :: PreparedQueryResource s -> TF.Attr s (Failover s))
+                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryFailover s))
                   TF.validator
            P.<> TF.settingsValidator "_template"
                   (_template
-                      :: PreparedQueryResource s -> TF.Attr s (Template s))
+                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryTemplate s))
                   TF.validator
 
 instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -539,14 +539,14 @@ instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
         P.lens (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
                (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
-instance P.HasDns (PreparedQueryResource s) (TF.Attr s (Dns s)) where
+instance P.HasDns (PreparedQueryResource s) (TF.Attr s (PreparedQueryDns s)) where
     dns =
-        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (Dns s))
+        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (PreparedQueryDns s))
                (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
-instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (Failover s)) where
+instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (PreparedQueryFailover s)) where
     failover =
-        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (Failover s))
+        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (PreparedQueryFailover s))
                (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
 instance P.HasName (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -584,9 +584,9 @@ instance P.HasTags (PreparedQueryResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_tags :: PreparedQueryResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
-instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (Template s)) where
+instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (PreparedQueryTemplate s)) where
     template =
-        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (Template s))
+        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (PreparedQueryTemplate s))
                (\s a -> s { _template = a } :: PreparedQueryResource s)
 
 instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -596,14 +596,14 @@ instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
 
 -- | @consul_service@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Consul/consul_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/consul/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _node :: TF.Attr s P.Text
-    -- ^ @node@ - (Required)
+    -- ^ @node@ - (Required, Forces New)
     --
     , _port :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
@@ -658,10 +658,10 @@ instance P.HasTags (ServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _tags = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "_computedAddress"
+    computedAddress x = TF.compute (TF.refKey x) "address"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedDatacenter x = TF.compute (TF.refKey x) "_computedDatacenter"
+    computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
 instance s ~ s' => P.HasComputedServiceId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
-    computedServiceId x = TF.compute (TF.refKey x) "_computedServiceId"
+    computedServiceId x = TF.compute (TF.refKey x) "service_id"

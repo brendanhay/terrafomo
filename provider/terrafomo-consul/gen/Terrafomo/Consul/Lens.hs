@@ -48,6 +48,8 @@ module Terrafomo.Consul.Lens
     , HasSubkey (..)
     , HasTemplate (..)
     , HasNodeMeta (..)
+    , HasDelete (..)
+    , HasTtl (..)
     , HasAllowStale (..)
     , HasFailover (..)
     , HasNear (..)
@@ -106,6 +108,7 @@ module Terrafomo.Consul.Lens
     , HasComputedPerformance (..)
     , HasComputedProjectName (..)
     , HasComputedStartJoin (..)
+    , HasComputedValue (..)
     , HasComputedRpc (..)
     , HasComputedServerMode (..)
     , HasComputedLan (..)
@@ -404,6 +407,18 @@ class HasNodeMeta a b | a -> b where
 instance HasNodeMeta a b => HasNodeMeta (TF.Schema l p a) b where
     nodeMeta = TF.configuration . nodeMeta
 
+class HasDelete a b | a -> b where
+    delete :: P.Lens' a b
+
+instance HasDelete a b => HasDelete (TF.Schema l p a) b where
+    delete = TF.configuration . delete
+
+class HasTtl a b | a -> b where
+    ttl :: P.Lens' a b
+
+instance HasTtl a b => HasTtl (TF.Schema l p a) b where
+    ttl = TF.configuration . ttl
+
 class HasAllowStale a b | a -> b where
     allowStale :: P.Lens' a b
 
@@ -601,6 +616,9 @@ class HasComputedProjectName a b | a -> b where
 
 class HasComputedStartJoin a b | a -> b where
     computedStartJoin :: a -> b
+
+class HasComputedValue a b | a -> b where
+    computedValue :: a -> b
 
 class HasComputedRpc a b | a -> b where
     computedRpc :: a -> b
