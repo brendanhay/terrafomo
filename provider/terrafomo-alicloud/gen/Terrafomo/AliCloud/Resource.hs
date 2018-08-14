@@ -4253,7 +4253,7 @@ ossBucketResource =
     TF.newResource "alicloud_oss_bucket" TF.validator $
         OssBucketResource'
             { _acl = TF.Nil
-            , _bucket = TF.value "tf-oss-bucket-20180814074752093700000002"
+            , _bucket = TF.Nil
             , _corsRule = TF.Nil
             , _lifecycleRule = TF.Nil
             , _logging = TF.Nil
@@ -5914,7 +5914,7 @@ slbResource =
             , _instances = TF.Nil
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180814074752093700000001"
+            , _name = TF.value "tf-lb-20180814091648170700000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
