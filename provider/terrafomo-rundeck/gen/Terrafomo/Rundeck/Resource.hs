@@ -63,13 +63,13 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @rundeck_job@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rundeck/rundeck_job terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rundeck/r/job.html terraform documentation>
 -- for more information.
 data JobResource s = JobResource'
     { _allowConcurrentExecutions   :: TF.Attr s P.Bool
     -- ^ @allow_concurrent_executions@ - (Optional)
     --
-    , _command                     :: TF.Attr s [TF.Attr s (Command s)]
+    , _command                     :: TF.Attr s [TF.Attr s (JobCommand s)]
     -- ^ @command@ - (Required)
     --
     , _commandOrderingStrategy     :: TF.Attr s P.Text
@@ -82,7 +82,7 @@ data JobResource s = JobResource'
     -- ^ @description@ - (Required)
     --
     , _groupName                   :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Optional)
+    -- ^ @group_name@ - (Optional, Forces New)
     --
     , _logLevel                    :: TF.Attr s P.Text
     -- ^ @log_level@ - (Optional)
@@ -99,11 +99,11 @@ data JobResource s = JobResource'
     , _nodeFilterQuery             :: TF.Attr s P.Text
     -- ^ @node_filter_query@ - (Optional)
     --
-    , _option                      :: TF.Attr s [TF.Attr s (Option s)]
+    , _option                      :: TF.Attr s [TF.Attr s (JobOption s)]
     -- ^ @option@ - (Optional)
     --
     , _projectName                 :: TF.Attr s P.Text
-    -- ^ @project_name@ - (Required)
+    -- ^ @project_name@ - (Required, Forces New)
     --
     , _rankAttribute               :: TF.Attr s P.Text
     -- ^ @rank_attribute@ - (Optional)
@@ -117,7 +117,7 @@ data JobResource s = JobResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 jobResource
-    :: TF.Attr s [TF.Attr s (Command s)] -- ^ @command@ - 'P.command'
+    :: TF.Attr s [TF.Attr s (JobCommand s)] -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_name@ - 'P.projectName'
@@ -167,11 +167,11 @@ instance TF.IsValid (JobResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_command"
                   (_command
-                      :: JobResource s -> TF.Attr s [TF.Attr s (Command s)])
+                      :: JobResource s -> TF.Attr s [TF.Attr s (JobCommand s)])
                   TF.validator
            P.<> TF.settingsValidator "_option"
                   (_option
-                      :: JobResource s -> TF.Attr s [TF.Attr s (Option s)])
+                      :: JobResource s -> TF.Attr s [TF.Attr s (JobOption s)])
                   TF.validator
 
 instance P.HasAllowConcurrentExecutions (JobResource s) (TF.Attr s P.Bool) where
@@ -179,9 +179,9 @@ instance P.HasAllowConcurrentExecutions (JobResource s) (TF.Attr s P.Bool) where
         P.lens (_allowConcurrentExecutions :: JobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowConcurrentExecutions = a } :: JobResource s)
 
-instance P.HasCommand (JobResource s) (TF.Attr s [TF.Attr s (Command s)]) where
+instance P.HasCommand (JobResource s) (TF.Attr s [TF.Attr s (JobCommand s)]) where
     command =
-        P.lens (_command :: JobResource s -> TF.Attr s [TF.Attr s (Command s)])
+        P.lens (_command :: JobResource s -> TF.Attr s [TF.Attr s (JobCommand s)])
                (\s a -> s { _command = a } :: JobResource s)
 
 instance P.HasCommandOrderingStrategy (JobResource s) (TF.Attr s P.Text) where
@@ -229,9 +229,9 @@ instance P.HasNodeFilterQuery (JobResource s) (TF.Attr s P.Text) where
         P.lens (_nodeFilterQuery :: JobResource s -> TF.Attr s P.Text)
                (\s a -> s { _nodeFilterQuery = a } :: JobResource s)
 
-instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (Option s)]) where
+instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (JobOption s)]) where
     option =
-        P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (Option s)])
+        P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (JobOption s)])
                (\s a -> s { _option = a } :: JobResource s)
 
 instance P.HasProjectName (JobResource s) (TF.Attr s P.Text) where
@@ -255,14 +255,14 @@ instance P.HasSchedule (JobResource s) (TF.Attr s P.Text) where
                (\s a -> s { _schedule = a } :: JobResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedPreserveOptionsOrder (TF.Ref s' (JobResource s)) (TF.Attr s P.Bool) where
-    computedPreserveOptionsOrder x = TF.compute (TF.refKey x) "_computedPreserveOptionsOrder"
+    computedPreserveOptionsOrder x = TF.compute (TF.refKey x) "preserve_options_order"
 
 -- | @rundeck_private_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rundeck/rundeck_private_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rundeck/r/private_key.html terraform documentation>
 -- for more information.
 data PrivateKeyResource s = PrivateKeyResource'
     { _keyMaterial :: TF.Attr s P.Text
@@ -270,7 +270,7 @@ data PrivateKeyResource s = PrivateKeyResource'
     -- The private key material to store, in PEM format
     --
     , _path        :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
+    -- ^ @path@ - (Required, Forces New)
     -- Path to the key within the key store
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -307,7 +307,7 @@ instance P.HasPath (PrivateKeyResource s) (TF.Attr s P.Text) where
 
 -- | @rundeck_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rundeck/rundeck_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rundeck/r/project.html terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
     { _defaultNodeExecutorPlugin :: TF.Attr s P.Text
@@ -327,10 +327,10 @@ data ProjectResource s = ProjectResource'
     -- limitations in Terraform's config language.
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     -- Unique name for the project
     --
-    , _resourceModelSource :: TF.Attr s [TF.Attr s (ResourceModelSource s)]
+    , _resourceModelSource :: TF.Attr s [TF.Attr s (ProjectResourceModelSource s)]
     -- ^ @resource_model_source@ - (Required)
     --
     , _sshAuthenticationType :: TF.Attr s P.Text
@@ -346,7 +346,7 @@ data ProjectResource s = ProjectResource'
 
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (ResourceModelSource s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
+    -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
     -> TF.Resource P.Provider (ProjectResource s)
 projectResource _name _resourceModelSource =
     TF.newResource "rundeck_project" TF.validator $
@@ -379,7 +379,7 @@ instance TF.IsValid (ProjectResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_resourceModelSource"
                   (_resourceModelSource
-                      :: ProjectResource s -> TF.Attr s [TF.Attr s (ResourceModelSource s)])
+                      :: ProjectResource s -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)])
                   TF.validator
 
 instance P.HasDefaultNodeExecutorPlugin (ProjectResource s) (TF.Attr s P.Text) where
@@ -407,9 +407,9 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
 
-instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s [TF.Attr s (ResourceModelSource s)]) where
+instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s [TF.Attr s (ProjectResourceModelSource s)]) where
     resourceModelSource =
-        P.lens (_resourceModelSource :: ProjectResource s -> TF.Attr s [TF.Attr s (ResourceModelSource s)])
+        P.lens (_resourceModelSource :: ProjectResource s -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)])
                (\s a -> s { _resourceModelSource = a } :: ProjectResource s)
 
 instance P.HasSshAuthenticationType (ProjectResource s) (TF.Attr s P.Text) where
@@ -428,15 +428,15 @@ instance P.HasSshKeyStoragePath (ProjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _sshKeyStoragePath = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedUiUrl (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
-    computedUiUrl x = TF.compute (TF.refKey x) "_computedUiUrl"
+    computedUiUrl x = TF.compute (TF.refKey x) "ui_url"
 
 -- | @rundeck_public_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Rundeck/rundeck_public_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rundeck/r/public_key.html terraform documentation>
 -- for more information.
 data PublicKeyResource s = PublicKeyResource'
     { _path :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
+    -- ^ @path@ - (Required, Forces New)
     -- Path to the key within the key store
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -464,10 +464,10 @@ instance P.HasPath (PublicKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _path = a } :: PublicKeyResource s)
 
 instance s ~ s' => P.HasComputedDelete (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Bool) where
-    computedDelete x = TF.compute (TF.refKey x) "_computedDelete"
+    computedDelete x = TF.compute (TF.refKey x) "delete"
 
 instance s ~ s' => P.HasComputedKeyMaterial (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
-    computedKeyMaterial x = TF.compute (TF.refKey x) "_computedKeyMaterial"
+    computedKeyMaterial x = TF.compute (TF.refKey x) "key_material"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (PublicKeyResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"

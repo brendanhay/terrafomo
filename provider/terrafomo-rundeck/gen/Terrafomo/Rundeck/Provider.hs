@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Rundeck@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Rundeck/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/rundeck/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _allowUnverifiedSsl :: P.Maybe P.Bool
