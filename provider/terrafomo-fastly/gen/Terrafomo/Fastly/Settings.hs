@@ -1590,7 +1590,7 @@ newBigquerylogging _dataset _name _projectId _table =
     Bigquerylogging'
         { _dataset = _dataset
         , _email = TF.Nil
-        , _format = TF.value "%h %l %u %t "%r" %>s %b"
+        , _format = TF.value "%h %l %u %t \"%r\" %>s %b"
         , _name = _name
         , _projectId = _projectId
         , _responseCondition = TF.Nil
@@ -1710,7 +1710,7 @@ newSyslog
 newSyslog _address _name =
     Syslog'
         { _address = _address
-        , _format = TF.value "%h %l %u %t "%r" %>s %b"
+        , _format = TF.value "%h %l %u %t \"%r\" %>s %b"
         , _formatVersion = TF.value 1
         , _messageType = TF.value "classic"
         , _name = _name
