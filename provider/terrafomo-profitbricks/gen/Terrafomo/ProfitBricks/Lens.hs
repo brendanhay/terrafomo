@@ -50,7 +50,6 @@ module Terrafomo.ProfitBricks.Lens
     , HasAvailabilityZone (..)
     , HasSshKeyPath (..)
     , HasPortRangeEnd (..)
-    , HasRetries (..)
     , HasGroupId (..)
     , HasNic (..)
     , HasDatacenterId (..)
@@ -308,12 +307,6 @@ class HasPortRangeEnd a b | a -> b where
 
 instance HasPortRangeEnd a b => HasPortRangeEnd (TF.Schema l p a) b where
     portRangeEnd = TF.configuration . portRangeEnd
-
-class HasRetries a b | a -> b where
-    retries :: P.Lens' a b
-
-instance HasRetries a b => HasRetries (TF.Schema l p a) b where
-    retries = TF.configuration . retries
 
 class HasGroupId a b | a -> b where
     groupId :: P.Lens' a b

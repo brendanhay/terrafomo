@@ -60,9 +60,6 @@ data Provider = Provider'
     -- ^ @password@ - (Required)
     -- ProfitBricks password for API operations.
     --
-    , _retries  :: P.Integer
-    -- ^ @retries@ - (Optional)
-    --
     , _username :: P.Text
     -- ^ @username@ - (Required)
     -- ProfitBricks username for API operations.
@@ -77,7 +74,6 @@ newProvider _password _username =
     Provider'
         { _endpoint = P.Nothing
         , _password = _password
-        , _retries = 50
         , _username = _username
         }
 
@@ -93,7 +89,6 @@ instance TF.IsSection Provider where
                   [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
                   , TF.assign "endpoint" <$> _endpoint
                   , P.Just $ TF.assign "password" _password
-                  , P.Just $ TF.assign "retries" _retries
                   , P.Just $ TF.assign "username" _username
                   ])
 
@@ -112,11 +107,6 @@ instance P.HasPassword (Provider) (P.Text) where
     password =
         P.lens (_password :: Provider -> P.Text)
                (\s a -> s { _password = a } :: Provider)
-
-instance P.HasRetries (Provider) (P.Integer) where
-    retries =
-        P.lens (_retries :: Provider -> P.Integer)
-               (\s a -> s { _retries = a } :: Provider)
 
 instance P.HasUsername (Provider) (P.Text) where
     username =
