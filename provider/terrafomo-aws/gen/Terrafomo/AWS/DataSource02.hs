@@ -163,7 +163,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @aws_prefix_list@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_prefix_list terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/prefix_list.html terraform documentation>
 -- for more information.
 data PrefixListData s = PrefixListData'
     { _prefixListId :: TF.Attr s P.Text
@@ -193,17 +193,17 @@ instance P.HasPrefixListId (PrefixListData s) (TF.Attr s P.Text) where
                (\s a -> s { _prefixListId = a } :: PrefixListData s)
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (PrefixListData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (PrefixListData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @aws_pricing_product@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_pricing_product terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/pricing_product.html terraform documentation>
 -- for more information.
 data PricingProductData s = PricingProductData'
-    { _filters     :: TF.Attr s (P.NonEmpty (TF.Attr s (Filters s)))
+    { _filters :: TF.Attr s (P.NonEmpty (TF.Attr s (PricingProductFilters s)))
     -- ^ @filters@ - (Required)
     --
     , _serviceCode :: TF.Attr s P.Text
@@ -212,7 +212,7 @@ data PricingProductData s = PricingProductData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 pricingProductData
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (Filters s))) -- ^ @filters@ - 'P.filters'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (PricingProductFilters s))) -- ^ @filters@ - 'P.filters'
     -> TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
     -> TF.DataSource P.Provider (PricingProductData s)
 pricingProductData _filters _serviceCode =
@@ -232,12 +232,12 @@ instance TF.IsValid (PricingProductData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filters"
                   (_filters
-                      :: PricingProductData s -> TF.Attr s (P.NonEmpty (TF.Attr s (Filters s))))
+                      :: PricingProductData s -> TF.Attr s (P.NonEmpty (TF.Attr s (PricingProductFilters s))))
                   TF.validator
 
-instance P.HasFilters (PricingProductData s) (TF.Attr s (P.NonEmpty (TF.Attr s (Filters s)))) where
+instance P.HasFilters (PricingProductData s) (TF.Attr s (P.NonEmpty (TF.Attr s (PricingProductFilters s)))) where
     filters =
-        P.lens (_filters :: PricingProductData s -> TF.Attr s (P.NonEmpty (TF.Attr s (Filters s))))
+        P.lens (_filters :: PricingProductData s -> TF.Attr s (P.NonEmpty (TF.Attr s (PricingProductFilters s))))
                (\s a -> s { _filters = a } :: PricingProductData s)
 
 instance P.HasServiceCode (PricingProductData s) (TF.Attr s P.Text) where
@@ -246,11 +246,11 @@ instance P.HasServiceCode (PricingProductData s) (TF.Attr s P.Text) where
                (\s a -> s { _serviceCode = a } :: PricingProductData s)
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
-    computedResult x = TF.compute (TF.refKey x) "_computedResult"
+    computedResult x = TF.compute (TF.refKey x) "result"
 
 -- | @aws_rds_cluster@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_rds_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/rds_cluster.html terraform documentation>
 -- for more information.
 data RdsClusterData s = RdsClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
@@ -281,83 +281,83 @@ instance P.HasClusterIdentifier (RdsClusterData s) (TF.Attr s P.Text) where
                (\s a -> s { _clusterIdentifier = a } :: RdsClusterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (RdsClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "_computedAvailabilityZones"
+    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
 
 instance s ~ s' => P.HasComputedBackupRetentionPeriod (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Integer) where
-    computedBackupRetentionPeriod x = TF.compute (TF.refKey x) "_computedBackupRetentionPeriod"
+    computedBackupRetentionPeriod x = TF.compute (TF.refKey x) "backup_retention_period"
 
 instance s ~ s' => P.HasComputedClusterMembers (TF.Ref s' (RdsClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedClusterMembers x = TF.compute (TF.refKey x) "_computedClusterMembers"
+    computedClusterMembers x = TF.compute (TF.refKey x) "cluster_members"
 
 instance s ~ s' => P.HasComputedClusterResourceId (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedClusterResourceId x = TF.compute (TF.refKey x) "_computedClusterResourceId"
+    computedClusterResourceId x = TF.compute (TF.refKey x) "cluster_resource_id"
 
 instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedDatabaseName x = TF.compute (TF.refKey x) "_computedDatabaseName"
+    computedDatabaseName x = TF.compute (TF.refKey x) "database_name"
 
 instance s ~ s' => P.HasComputedDbClusterParameterGroupName (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedDbClusterParameterGroupName x = TF.compute (TF.refKey x) "_computedDbClusterParameterGroupName"
+    computedDbClusterParameterGroupName x = TF.compute (TF.refKey x) "db_cluster_parameter_group_name"
 
 instance s ~ s' => P.HasComputedDbSubnetGroupName (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedDbSubnetGroupName x = TF.compute (TF.refKey x) "_computedDbSubnetGroupName"
+    computedDbSubnetGroupName x = TF.compute (TF.refKey x) "db_subnet_group_name"
 
 instance s ~ s' => P.HasComputedEnabledCloudwatchLogsExports (TF.Ref s' (RdsClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedEnabledCloudwatchLogsExports x = TF.compute (TF.refKey x) "_computedEnabledCloudwatchLogsExports"
+    computedEnabledCloudwatchLogsExports x = TF.compute (TF.refKey x) "enabled_cloudwatch_logs_exports"
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
 instance s ~ s' => P.HasComputedEngine (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedEngine x = TF.compute (TF.refKey x) "_computedEngine"
+    computedEngine x = TF.compute (TF.refKey x) "engine"
 
 instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedEngineVersion x = TF.compute (TF.refKey x) "_computedEngineVersion"
+    computedEngineVersion x = TF.compute (TF.refKey x) "engine_version"
 
 instance s ~ s' => P.HasComputedFinalSnapshotIdentifier (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedFinalSnapshotIdentifier x = TF.compute (TF.refKey x) "_computedFinalSnapshotIdentifier"
+    computedFinalSnapshotIdentifier x = TF.compute (TF.refKey x) "final_snapshot_identifier"
 
 instance s ~ s' => P.HasComputedIamDatabaseAuthenticationEnabled (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Bool) where
-    computedIamDatabaseAuthenticationEnabled x = TF.compute (TF.refKey x) "_computedIamDatabaseAuthenticationEnabled"
+    computedIamDatabaseAuthenticationEnabled x = TF.compute (TF.refKey x) "iam_database_authentication_enabled"
 
 instance s ~ s' => P.HasComputedIamRoles (TF.Ref s' (RdsClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIamRoles x = TF.compute (TF.refKey x) "_computedIamRoles"
+    computedIamRoles x = TF.compute (TF.refKey x) "iam_roles"
 
 instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedKmsKeyId x = TF.compute (TF.refKey x) "_computedKmsKeyId"
+    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
 
 instance s ~ s' => P.HasComputedMasterUsername (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedMasterUsername x = TF.compute (TF.refKey x) "_computedMasterUsername"
+    computedMasterUsername x = TF.compute (TF.refKey x) "master_username"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "_computedPort"
+    computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedPreferredBackupWindow (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedPreferredBackupWindow x = TF.compute (TF.refKey x) "_computedPreferredBackupWindow"
+    computedPreferredBackupWindow x = TF.compute (TF.refKey x) "preferred_backup_window"
 
 instance s ~ s' => P.HasComputedPreferredMaintenanceWindow (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "_computedPreferredMaintenanceWindow"
+    computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "preferred_maintenance_window"
 
 instance s ~ s' => P.HasComputedReaderEndpoint (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedReaderEndpoint x = TF.compute (TF.refKey x) "_computedReaderEndpoint"
+    computedReaderEndpoint x = TF.compute (TF.refKey x) "reader_endpoint"
 
 instance s ~ s' => P.HasComputedReplicationSourceIdentifier (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
-    computedReplicationSourceIdentifier x = TF.compute (TF.refKey x) "_computedReplicationSourceIdentifier"
+    computedReplicationSourceIdentifier x = TF.compute (TF.refKey x) "replication_source_identifier"
 
 instance s ~ s' => P.HasComputedStorageEncrypted (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Bool) where
-    computedStorageEncrypted x = TF.compute (TF.refKey x) "_computedStorageEncrypted"
+    computedStorageEncrypted x = TF.compute (TF.refKey x) "storage_encrypted"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (RdsClusterData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RdsClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "_computedVpcSecurityGroupIds"
+    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_redshift_cluster@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_cluster terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/redshift_cluster.html terraform documentation>
 -- for more information.
 data RedshiftClusterData s = RedshiftClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
@@ -398,92 +398,92 @@ instance P.HasTags (RedshiftClusterData s) (TF.Attr s (P.HashMap P.Text (TF.Attr
                (\s a -> s { _tags = a } :: RedshiftClusterData s)
 
 instance s ~ s' => P.HasComputedAllowVersionUpgrade (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
-    computedAllowVersionUpgrade x = TF.compute (TF.refKey x) "_computedAllowVersionUpgrade"
+    computedAllowVersionUpgrade x = TF.compute (TF.refKey x) "allow_version_upgrade"
 
 instance s ~ s' => P.HasComputedAutomatedSnapshotRetentionPeriod (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Integer) where
-    computedAutomatedSnapshotRetentionPeriod x = TF.compute (TF.refKey x) "_computedAutomatedSnapshotRetentionPeriod"
+    computedAutomatedSnapshotRetentionPeriod x = TF.compute (TF.refKey x) "automated_snapshot_retention_period"
 
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
 instance s ~ s' => P.HasComputedBucketName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedBucketName x = TF.compute (TF.refKey x) "_computedBucketName"
+    computedBucketName x = TF.compute (TF.refKey x) "bucket_name"
 
 instance s ~ s' => P.HasComputedClusterParameterGroupName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedClusterParameterGroupName x = TF.compute (TF.refKey x) "_computedClusterParameterGroupName"
+    computedClusterParameterGroupName x = TF.compute (TF.refKey x) "cluster_parameter_group_name"
 
 instance s ~ s' => P.HasComputedClusterPublicKey (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedClusterPublicKey x = TF.compute (TF.refKey x) "_computedClusterPublicKey"
+    computedClusterPublicKey x = TF.compute (TF.refKey x) "cluster_public_key"
 
 instance s ~ s' => P.HasComputedClusterRevisionNumber (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedClusterRevisionNumber x = TF.compute (TF.refKey x) "_computedClusterRevisionNumber"
+    computedClusterRevisionNumber x = TF.compute (TF.refKey x) "cluster_revision_number"
 
 instance s ~ s' => P.HasComputedClusterSecurityGroups (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedClusterSecurityGroups x = TF.compute (TF.refKey x) "_computedClusterSecurityGroups"
+    computedClusterSecurityGroups x = TF.compute (TF.refKey x) "cluster_security_groups"
 
 instance s ~ s' => P.HasComputedClusterSubnetGroupName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedClusterSubnetGroupName x = TF.compute (TF.refKey x) "_computedClusterSubnetGroupName"
+    computedClusterSubnetGroupName x = TF.compute (TF.refKey x) "cluster_subnet_group_name"
 
 instance s ~ s' => P.HasComputedClusterType (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedClusterType x = TF.compute (TF.refKey x) "_computedClusterType"
+    computedClusterType x = TF.compute (TF.refKey x) "cluster_type"
 
 instance s ~ s' => P.HasComputedClusterVersion (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedClusterVersion x = TF.compute (TF.refKey x) "_computedClusterVersion"
+    computedClusterVersion x = TF.compute (TF.refKey x) "cluster_version"
 
 instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedDatabaseName x = TF.compute (TF.refKey x) "_computedDatabaseName"
+    computedDatabaseName x = TF.compute (TF.refKey x) "database_name"
 
 instance s ~ s' => P.HasComputedElasticIp (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedElasticIp x = TF.compute (TF.refKey x) "_computedElasticIp"
+    computedElasticIp x = TF.compute (TF.refKey x) "elastic_ip"
 
 instance s ~ s' => P.HasComputedEnableLogging (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
-    computedEnableLogging x = TF.compute (TF.refKey x) "_computedEnableLogging"
+    computedEnableLogging x = TF.compute (TF.refKey x) "enable_logging"
 
 instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
-    computedEncrypted x = TF.compute (TF.refKey x) "_computedEncrypted"
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
 instance s ~ s' => P.HasComputedEnhancedVpcRouting (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
-    computedEnhancedVpcRouting x = TF.compute (TF.refKey x) "_computedEnhancedVpcRouting"
+    computedEnhancedVpcRouting x = TF.compute (TF.refKey x) "enhanced_vpc_routing"
 
 instance s ~ s' => P.HasComputedIamRoles (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIamRoles x = TF.compute (TF.refKey x) "_computedIamRoles"
+    computedIamRoles x = TF.compute (TF.refKey x) "iam_roles"
 
 instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedKmsKeyId x = TF.compute (TF.refKey x) "_computedKmsKeyId"
+    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
 
 instance s ~ s' => P.HasComputedMasterUsername (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedMasterUsername x = TF.compute (TF.refKey x) "_computedMasterUsername"
+    computedMasterUsername x = TF.compute (TF.refKey x) "master_username"
 
 instance s ~ s' => P.HasComputedNodeType (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedNodeType x = TF.compute (TF.refKey x) "_computedNodeType"
+    computedNodeType x = TF.compute (TF.refKey x) "node_type"
 
 instance s ~ s' => P.HasComputedNumberOfNodes (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Integer) where
-    computedNumberOfNodes x = TF.compute (TF.refKey x) "_computedNumberOfNodes"
+    computedNumberOfNodes x = TF.compute (TF.refKey x) "number_of_nodes"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Integer) where
-    computedPort x = TF.compute (TF.refKey x) "_computedPort"
+    computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedPreferredMaintenanceWindow (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "_computedPreferredMaintenanceWindow"
+    computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "preferred_maintenance_window"
 
 instance s ~ s' => P.HasComputedPubliclyAccessible (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
-    computedPubliclyAccessible x = TF.compute (TF.refKey x) "_computedPubliclyAccessible"
+    computedPubliclyAccessible x = TF.compute (TF.refKey x) "publicly_accessible"
 
 instance s ~ s' => P.HasComputedS3KeyPrefix (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedS3KeyPrefix x = TF.compute (TF.refKey x) "_computedS3KeyPrefix"
+    computedS3KeyPrefix x = TF.compute (TF.refKey x) "s3_key_prefix"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "_computedVpcSecurityGroupIds"
+    computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
 
 -- | @aws_redshift_service_account@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_redshift_service_account terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/redshift_service_account.html terraform documentation>
 -- for more information.
 data RedshiftServiceAccountData s = RedshiftServiceAccountData'
     { _region :: TF.Attr s P.Text
@@ -513,11 +513,11 @@ instance P.HasRegion (RedshiftServiceAccountData s) (TF.Attr s P.Text) where
                (\s a -> s { _region = a } :: RedshiftServiceAccountData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_region@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_region terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/region.html terraform documentation>
 -- for more information.
 data RegionData s = RegionData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -535,17 +535,17 @@ instance TF.IsValid (RegionData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
-    computedEndpoint x = TF.compute (TF.refKey x) "_computedEndpoint"
+    computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 -- | @aws_route@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_route terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/route.html terraform documentation>
 -- for more information.
 data RouteData s = RouteData'
     { _routeTableId :: TF.Attr s P.Text
@@ -576,32 +576,32 @@ instance P.HasRouteTableId (RouteData s) (TF.Attr s P.Text) where
                (\s a -> s { _routeTableId = a } :: RouteData s)
 
 instance s ~ s' => P.HasComputedDestinationCidrBlock (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedDestinationCidrBlock x = TF.compute (TF.refKey x) "_computedDestinationCidrBlock"
+    computedDestinationCidrBlock x = TF.compute (TF.refKey x) "destination_cidr_block"
 
 instance s ~ s' => P.HasComputedDestinationIpv6CidrBlock (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedDestinationIpv6CidrBlock x = TF.compute (TF.refKey x) "_computedDestinationIpv6CidrBlock"
+    computedDestinationIpv6CidrBlock x = TF.compute (TF.refKey x) "destination_ipv6_cidr_block"
 
 instance s ~ s' => P.HasComputedEgressOnlyGatewayId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedEgressOnlyGatewayId x = TF.compute (TF.refKey x) "_computedEgressOnlyGatewayId"
+    computedEgressOnlyGatewayId x = TF.compute (TF.refKey x) "egress_only_gateway_id"
 
 instance s ~ s' => P.HasComputedGatewayId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedGatewayId x = TF.compute (TF.refKey x) "_computedGatewayId"
+    computedGatewayId x = TF.compute (TF.refKey x) "gateway_id"
 
 instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "_computedInstanceId"
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 instance s ~ s' => P.HasComputedNatGatewayId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedNatGatewayId x = TF.compute (TF.refKey x) "_computedNatGatewayId"
+    computedNatGatewayId x = TF.compute (TF.refKey x) "nat_gateway_id"
 
 instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "_computedNetworkInterfaceId"
+    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "network_interface_id"
 
 instance s ~ s' => P.HasComputedVpcPeeringConnectionId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
-    computedVpcPeeringConnectionId x = TF.compute (TF.refKey x) "_computedVpcPeeringConnectionId"
+    computedVpcPeeringConnectionId x = TF.compute (TF.refKey x) "vpc_peering_connection_id"
 
 -- | @aws_route53_zone@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_zone terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/route53_zone.html terraform documentation>
 -- for more information.
 data Route53ZoneData s = Route53ZoneData'
     { _privateZone :: TF.Attr s P.Bool
@@ -631,35 +631,35 @@ instance P.HasPrivateZone (Route53ZoneData s) (TF.Attr s P.Bool) where
                (\s a -> s { _privateZone = a } :: Route53ZoneData s)
 
 instance s ~ s' => P.HasComputedCallerReference (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
-    computedCallerReference x = TF.compute (TF.refKey x) "_computedCallerReference"
+    computedCallerReference x = TF.compute (TF.refKey x) "caller_reference"
 
 instance s ~ s' => P.HasComputedComment (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
-    computedComment x = TF.compute (TF.refKey x) "_computedComment"
+    computedComment x = TF.compute (TF.refKey x) "comment"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (Route53ZoneData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 instance s ~ s' => P.HasComputedResourceRecordSetCount (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Integer) where
-    computedResourceRecordSetCount x = TF.compute (TF.refKey x) "_computedResourceRecordSetCount"
+    computedResourceRecordSetCount x = TF.compute (TF.refKey x) "resource_record_set_count"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (Route53ZoneData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "_computedZoneId"
+    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
 
 -- | @aws_route_table@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_route_table terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/route_table.html terraform documentation>
 -- for more information.
 data RouteTableData s = RouteTableData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (RouteTableFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -681,38 +681,38 @@ instance TF.IsValid (RouteTableData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: RouteTableData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: RouteTableData s -> TF.Attr s [TF.Attr s (RouteTableFilter s)])
                   TF.validator
 
-instance P.HasFilter (RouteTableData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (RouteTableData s) (TF.Attr s [TF.Attr s (RouteTableFilter s)]) where
     filter =
-        P.lens (_filter :: RouteTableData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: RouteTableData s -> TF.Attr s [TF.Attr s (RouteTableFilter s)])
                (\s a -> s { _filter = a } :: RouteTableData s)
 
-instance s ~ s' => P.HasComputedAssociations (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (Associations s)]) where
-    computedAssociations x = TF.compute (TF.refKey x) "_computedAssociations"
+instance s ~ s' => P.HasComputedAssociations (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (RouteTableAssociations s)]) where
+    computedAssociations x = TF.compute (TF.refKey x) "associations"
 
 instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
-    computedRouteTableId x = TF.compute (TF.refKey x) "_computedRouteTableId"
+    computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
 
-instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (Routes s)]) where
-    computedRoutes x = TF.compute (TF.refKey x) "_computedRoutes"
+instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (RouteTableRoutes s)]) where
+    computedRoutes x = TF.compute (TF.refKey x) "routes"
 
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
-    computedSubnetId x = TF.compute (TF.refKey x) "_computedSubnetId"
+    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTableData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_route_tables@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_route_tables terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/route_tables.html terraform documentation>
 -- for more information.
 data RouteTablesData s = RouteTablesData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (RouteTablesFilter s)]
     -- ^ @filter@ - (Optional)
     --
     , _vpcId  :: TF.Attr s P.Text
@@ -739,12 +739,12 @@ instance TF.IsValid (RouteTablesData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: RouteTablesData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: RouteTablesData s -> TF.Attr s [TF.Attr s (RouteTablesFilter s)])
                   TF.validator
 
-instance P.HasFilter (RouteTablesData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (RouteTablesData s) (TF.Attr s [TF.Attr s (RouteTablesFilter s)]) where
     filter =
-        P.lens (_filter :: RouteTablesData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: RouteTablesData s -> TF.Attr s [TF.Attr s (RouteTablesFilter s)])
                (\s a -> s { _filter = a } :: RouteTablesData s)
 
 instance P.HasVpcId (RouteTablesData s) (TF.Attr s P.Text) where
@@ -753,14 +753,14 @@ instance P.HasVpcId (RouteTablesData s) (TF.Attr s P.Text) where
                (\s a -> s { _vpcId = a } :: RouteTablesData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (RouteTablesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIds x = TF.compute (TF.refKey x) "_computedIds"
+    computedIds x = TF.compute (TF.refKey x) "ids"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (RouteTablesData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_s3_bucket@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/s3_bucket.html terraform documentation>
 -- for more information.
 data S3BucketData s = S3BucketData'
     { _bucket :: TF.Attr s P.Text
@@ -791,26 +791,26 @@ instance P.HasBucket (S3BucketData s) (TF.Attr s P.Text) where
                (\s a -> s { _bucket = a } :: S3BucketData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedBucketDomainName (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
-    computedBucketDomainName x = TF.compute (TF.refKey x) "_computedBucketDomainName"
+    computedBucketDomainName x = TF.compute (TF.refKey x) "bucket_domain_name"
 
 instance s ~ s' => P.HasComputedHostedZoneId (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
-    computedHostedZoneId x = TF.compute (TF.refKey x) "_computedHostedZoneId"
+    computedHostedZoneId x = TF.compute (TF.refKey x) "hosted_zone_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedWebsiteDomain (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
-    computedWebsiteDomain x = TF.compute (TF.refKey x) "_computedWebsiteDomain"
+    computedWebsiteDomain x = TF.compute (TF.refKey x) "website_domain"
 
 instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
-    computedWebsiteEndpoint x = TF.compute (TF.refKey x) "_computedWebsiteEndpoint"
+    computedWebsiteEndpoint x = TF.compute (TF.refKey x) "website_endpoint"
 
 -- | @aws_s3_bucket_object@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_object terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/s3_bucket_object.html terraform documentation>
 -- for more information.
 data S3BucketObjectData s = S3BucketObjectData'
     { _bucket :: TF.Attr s P.Text
@@ -862,62 +862,62 @@ instance P.HasRange (S3BucketObjectData s) (TF.Attr s P.Text) where
                (\s a -> s { _range = a } :: S3BucketObjectData s)
 
 instance s ~ s' => P.HasComputedBody (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedBody x = TF.compute (TF.refKey x) "_computedBody"
+    computedBody x = TF.compute (TF.refKey x) "body"
 
 instance s ~ s' => P.HasComputedCacheControl (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedCacheControl x = TF.compute (TF.refKey x) "_computedCacheControl"
+    computedCacheControl x = TF.compute (TF.refKey x) "cache_control"
 
 instance s ~ s' => P.HasComputedContentDisposition (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedContentDisposition x = TF.compute (TF.refKey x) "_computedContentDisposition"
+    computedContentDisposition x = TF.compute (TF.refKey x) "content_disposition"
 
 instance s ~ s' => P.HasComputedContentEncoding (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedContentEncoding x = TF.compute (TF.refKey x) "_computedContentEncoding"
+    computedContentEncoding x = TF.compute (TF.refKey x) "content_encoding"
 
 instance s ~ s' => P.HasComputedContentLanguage (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedContentLanguage x = TF.compute (TF.refKey x) "_computedContentLanguage"
+    computedContentLanguage x = TF.compute (TF.refKey x) "content_language"
 
 instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Integer) where
-    computedContentLength x = TF.compute (TF.refKey x) "_computedContentLength"
+    computedContentLength x = TF.compute (TF.refKey x) "content_length"
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedContentType x = TF.compute (TF.refKey x) "_computedContentType"
+    computedContentType x = TF.compute (TF.refKey x) "content_type"
 
 instance s ~ s' => P.HasComputedEtag (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedEtag x = TF.compute (TF.refKey x) "_computedEtag"
+    computedEtag x = TF.compute (TF.refKey x) "etag"
 
 instance s ~ s' => P.HasComputedExpiration (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedExpiration x = TF.compute (TF.refKey x) "_computedExpiration"
+    computedExpiration x = TF.compute (TF.refKey x) "expiration"
 
 instance s ~ s' => P.HasComputedExpires (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedExpires x = TF.compute (TF.refKey x) "_computedExpires"
+    computedExpires x = TF.compute (TF.refKey x) "expires"
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedLastModified x = TF.compute (TF.refKey x) "_computedLastModified"
+    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedServerSideEncryption x = TF.compute (TF.refKey x) "_computedServerSideEncryption"
+    computedServerSideEncryption x = TF.compute (TF.refKey x) "server_side_encryption"
 
 instance s ~ s' => P.HasComputedSseKmsKeyId (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedSseKmsKeyId x = TF.compute (TF.refKey x) "_computedSseKmsKeyId"
+    computedSseKmsKeyId x = TF.compute (TF.refKey x) "sse_kms_key_id"
 
 instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedStorageClass x = TF.compute (TF.refKey x) "_computedStorageClass"
+    computedStorageClass x = TF.compute (TF.refKey x) "storage_class"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedVersionId x = TF.compute (TF.refKey x) "_computedVersionId"
+    computedVersionId x = TF.compute (TF.refKey x) "version_id"
 
 instance s ~ s' => P.HasComputedWebsiteRedirectLocation (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
-    computedWebsiteRedirectLocation x = TF.compute (TF.refKey x) "_computedWebsiteRedirectLocation"
+    computedWebsiteRedirectLocation x = TF.compute (TF.refKey x) "website_redirect_location"
 
 -- | @aws_secretsmanager_secret@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/secretsmanager_secret.html terraform documentation>
 -- for more information.
 data SecretsmanagerSecretData s = SecretsmanagerSecretData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -935,36 +935,36 @@ instance TF.IsValid (SecretsmanagerSecretData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
-    computedKmsKeyId x = TF.compute (TF.refKey x) "_computedKmsKeyId"
+    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Bool) where
-    computedRotationEnabled x = TF.compute (TF.refKey x) "_computedRotationEnabled"
+    computedRotationEnabled x = TF.compute (TF.refKey x) "rotation_enabled"
 
 instance s ~ s' => P.HasComputedRotationLambdaArn (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
-    computedRotationLambdaArn x = TF.compute (TF.refKey x) "_computedRotationLambdaArn"
+    computedRotationLambdaArn x = TF.compute (TF.refKey x) "rotation_lambda_arn"
 
-instance s ~ s' => P.HasComputedRotationRules (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s [TF.Attr s (RotationRules s)]) where
-    computedRotationRules x = TF.compute (TF.refKey x) "_computedRotationRules"
+instance s ~ s' => P.HasComputedRotationRules (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s [TF.Attr s (SecretsmanagerSecretRotationRules s)]) where
+    computedRotationRules x = TF.compute (TF.refKey x) "rotation_rules"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_secretsmanager_secret_version@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret_version terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/secretsmanager_secret_version.html terraform documentation>
 -- for more information.
 data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
     { _secretId     :: TF.Attr s P.Text
-    -- ^ @secret_id@ - (Required)
+    -- ^ @secret_id@ - (Required, Forces New)
     --
     , _versionStage :: TF.Attr s P.Text
     -- ^ @version_stage@ - (Optional)
@@ -1001,20 +1001,20 @@ instance P.HasVersionStage (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text
                (\s a -> s { _versionStage = a } :: SecretsmanagerSecretVersionData s)
 
 instance s ~ s' => P.HasComputedSecretString (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
-    computedSecretString x = TF.compute (TF.refKey x) "_computedSecretString"
+    computedSecretString x = TF.compute (TF.refKey x) "secret_string"
 
 instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
-    computedVersionId x = TF.compute (TF.refKey x) "_computedVersionId"
+    computedVersionId x = TF.compute (TF.refKey x) "version_id"
 
 instance s ~ s' => P.HasComputedVersionStages (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVersionStages x = TF.compute (TF.refKey x) "_computedVersionStages"
+    computedVersionStages x = TF.compute (TF.refKey x) "version_stages"
 
 -- | @aws_security_group@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_security_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/security_group.html terraform documentation>
 -- for more information.
 data SecurityGroupData s = SecurityGroupData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (SecurityGroupFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1036,39 +1036,39 @@ instance TF.IsValid (SecurityGroupData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: SecurityGroupData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: SecurityGroupData s -> TF.Attr s [TF.Attr s (SecurityGroupFilter s)])
                   TF.validator
 
-instance P.HasFilter (SecurityGroupData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (SecurityGroupData s) (TF.Attr s [TF.Attr s (SecurityGroupFilter s)]) where
     filter =
-        P.lens (_filter :: SecurityGroupData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: SecurityGroupData s -> TF.Attr s [TF.Attr s (SecurityGroupFilter s)])
                (\s a -> s { _filter = a } :: SecurityGroupData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_security_groups@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_security_groups terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/security_groups.html terraform documentation>
 -- for more information.
 data SecurityGroupsData s = SecurityGroupsData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ @filter@ - (Optional)
+    { _filter :: TF.Attr s [TF.Attr s (SecurityGroupsFilter s)]
+    -- ^ @filter@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1089,26 +1089,26 @@ instance TF.IsValid (SecurityGroupsData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (SecurityGroupsFilter s)])
                   TF.validator
 
-instance P.HasFilter (SecurityGroupsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (SecurityGroupsData s) (TF.Attr s [TF.Attr s (SecurityGroupsFilter s)]) where
     filter =
-        P.lens (_filter :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (SecurityGroupsFilter s)])
                (\s a -> s { _filter = a } :: SecurityGroupsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIds x = TF.compute (TF.refKey x) "_computedIds"
+    computedIds x = TF.compute (TF.refKey x) "ids"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcIds (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVpcIds x = TF.compute (TF.refKey x) "_computedVpcIds"
+    computedVpcIds x = TF.compute (TF.refKey x) "vpc_ids"
 
 -- | @aws_sns_topic@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_sns_topic terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/sns_topic.html terraform documentation>
 -- for more information.
 data SnsTopicData s = SnsTopicData'
     { _name :: TF.Attr s P.Text
@@ -1139,11 +1139,11 @@ instance P.HasName (SnsTopicData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SnsTopicData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsTopicData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 -- | @aws_sqs_queue@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_sqs_queue terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/sqs_queue.html terraform documentation>
 -- for more information.
 data SqsQueueData s = SqsQueueData'
     { _name :: TF.Attr s P.Text
@@ -1174,14 +1174,14 @@ instance P.HasName (SqsQueueData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: SqsQueueData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @aws_ssm_parameter@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_ssm_parameter terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/ssm_parameter.html terraform documentation>
 -- for more information.
 data SsmParameterData s = SsmParameterData'
     { _name           :: TF.Attr s P.Text
@@ -1222,17 +1222,17 @@ instance P.HasWithDecryption (SsmParameterData s) (TF.Attr s P.Bool) where
                (\s a -> s { _withDecryption = a } :: SsmParameterData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SsmParameterData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (SsmParameterData s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "_computedType"
+    computedType x = TF.compute (TF.refKey x) "type"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (SsmParameterData s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "_computedValue"
+    computedValue x = TF.compute (TF.refKey x) "value"
 
 -- | @aws_storagegateway_local_disk@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_storagegateway_local_disk terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/storagegateway_local_disk.html terraform documentation>
 -- for more information.
 data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
     { _diskPath   :: TF.Attr s P.Text
@@ -1274,14 +1274,14 @@ instance P.HasGatewayArn (StoragegatewayLocalDiskData s) (TF.Attr s P.Text) wher
                (\s a -> s { _gatewayArn = a } :: StoragegatewayLocalDiskData s)
 
 instance s ~ s' => P.HasComputedDiskId (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
-    computedDiskId x = TF.compute (TF.refKey x) "_computedDiskId"
+    computedDiskId x = TF.compute (TF.refKey x) "disk_id"
 
 -- | @aws_subnet@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_subnet terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/subnet.html terraform documentation>
 -- for more information.
 data SubnetData s = SubnetData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (SubnetFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1303,53 +1303,53 @@ instance TF.IsValid (SubnetData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: SubnetData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: SubnetData s -> TF.Attr s [TF.Attr s (SubnetFilter s)])
                   TF.validator
 
-instance P.HasFilter (SubnetData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (SubnetData s) (TF.Attr s [TF.Attr s (SubnetFilter s)]) where
     filter =
-        P.lens (_filter :: SubnetData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: SubnetData s -> TF.Attr s [TF.Attr s (SubnetFilter s)])
                (\s a -> s { _filter = a } :: SubnetData s)
 
 instance s ~ s' => P.HasComputedAssignIpv6AddressOnCreation (TF.Ref s' (SubnetData s)) (TF.Attr s P.Bool) where
-    computedAssignIpv6AddressOnCreation x = TF.compute (TF.refKey x) "_computedAssignIpv6AddressOnCreation"
+    computedAssignIpv6AddressOnCreation x = TF.compute (TF.refKey x) "assign_ipv6_address_on_creation"
 
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (SubnetData s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
 instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "_computedCidrBlock"
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
 instance s ~ s' => P.HasComputedDefaultForAz (TF.Ref s' (SubnetData s)) (TF.Attr s P.Bool) where
-    computedDefaultForAz x = TF.compute (TF.refKey x) "_computedDefaultForAz"
+    computedDefaultForAz x = TF.compute (TF.refKey x) "default_for_az"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedIpv6CidrBlock x = TF.compute (TF.refKey x) "_computedIpv6CidrBlock"
+    computedIpv6CidrBlock x = TF.compute (TF.refKey x) "ipv6_cidr_block"
 
 instance s ~ s' => P.HasComputedIpv6CidrBlockAssociationId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedIpv6CidrBlockAssociationId x = TF.compute (TF.refKey x) "_computedIpv6CidrBlockAssociationId"
+    computedIpv6CidrBlockAssociationId x = TF.compute (TF.refKey x) "ipv6_cidr_block_association_id"
 
 instance s ~ s' => P.HasComputedMapPublicIpOnLaunch (TF.Ref s' (SubnetData s)) (TF.Attr s P.Bool) where
-    computedMapPublicIpOnLaunch x = TF.compute (TF.refKey x) "_computedMapPublicIpOnLaunch"
+    computedMapPublicIpOnLaunch x = TF.compute (TF.refKey x) "map_public_ip_on_launch"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_subnet_ids@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_subnet_ids terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/subnet_ids.html terraform documentation>
 -- for more information.
 data SubnetIdsData s = SubnetIdsData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (SubnetIdsFilter s)]
     -- ^ @filter@ - (Optional)
     --
     , _vpcId  :: TF.Attr s P.Text
@@ -1377,12 +1377,12 @@ instance TF.IsValid (SubnetIdsData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: SubnetIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: SubnetIdsData s -> TF.Attr s [TF.Attr s (SubnetIdsFilter s)])
                   TF.validator
 
-instance P.HasFilter (SubnetIdsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (SubnetIdsData s) (TF.Attr s [TF.Attr s (SubnetIdsFilter s)]) where
     filter =
-        P.lens (_filter :: SubnetIdsData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: SubnetIdsData s -> TF.Attr s [TF.Attr s (SubnetIdsFilter s)])
                (\s a -> s { _filter = a } :: SubnetIdsData s)
 
 instance P.HasVpcId (SubnetIdsData s) (TF.Attr s P.Text) where
@@ -1391,17 +1391,17 @@ instance P.HasVpcId (SubnetIdsData s) (TF.Attr s P.Text) where
                (\s a -> s { _vpcId = a } :: SubnetIdsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SubnetIdsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIds x = TF.compute (TF.refKey x) "_computedIds"
+    computedIds x = TF.compute (TF.refKey x) "ids"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (SubnetIdsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpc@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpc.html terraform documentation>
 -- for more information.
 data VpcData s = VpcData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (VpcFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1423,59 +1423,59 @@ instance TF.IsValid (VpcData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: VpcData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: VpcData s -> TF.Attr s [TF.Attr s (VpcFilter s)])
                   TF.validator
 
-instance P.HasFilter (VpcData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (VpcData s) (TF.Attr s [TF.Attr s (VpcFilter s)]) where
     filter =
-        P.lens (_filter :: VpcData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: VpcData s -> TF.Attr s [TF.Attr s (VpcFilter s)])
                (\s a -> s { _filter = a } :: VpcData s)
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "_computedArn"
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "_computedCidrBlock"
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
-instance s ~ s' => P.HasComputedCidrBlockAssociations (TF.Ref s' (VpcData s)) (TF.Attr s [TF.Attr s (CidrBlockAssociations s)]) where
-    computedCidrBlockAssociations x = TF.compute (TF.refKey x) "_computedCidrBlockAssociations"
+instance s ~ s' => P.HasComputedCidrBlockAssociations (TF.Ref s' (VpcData s)) (TF.Attr s [TF.Attr s (VpcCidrBlockAssociations s)]) where
+    computedCidrBlockAssociations x = TF.compute (TF.refKey x) "cidr_block_associations"
 
 instance s ~ s' => P.HasComputedDefault (TF.Ref s' (VpcData s)) (TF.Attr s P.Bool) where
-    computedDefault x = TF.compute (TF.refKey x) "_computedDefault"
+    computedDefault x = TF.compute (TF.refKey x) "default"
 
 instance s ~ s' => P.HasComputedDhcpOptionsId (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedDhcpOptionsId x = TF.compute (TF.refKey x) "_computedDhcpOptionsId"
+    computedDhcpOptionsId x = TF.compute (TF.refKey x) "dhcp_options_id"
 
 instance s ~ s' => P.HasComputedEnableDnsHostnames (TF.Ref s' (VpcData s)) (TF.Attr s P.Bool) where
-    computedEnableDnsHostnames x = TF.compute (TF.refKey x) "_computedEnableDnsHostnames"
+    computedEnableDnsHostnames x = TF.compute (TF.refKey x) "enable_dns_hostnames"
 
 instance s ~ s' => P.HasComputedEnableDnsSupport (TF.Ref s' (VpcData s)) (TF.Attr s P.Bool) where
-    computedEnableDnsSupport x = TF.compute (TF.refKey x) "_computedEnableDnsSupport"
+    computedEnableDnsSupport x = TF.compute (TF.refKey x) "enable_dns_support"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInstanceTenancy (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedInstanceTenancy x = TF.compute (TF.refKey x) "_computedInstanceTenancy"
+    computedInstanceTenancy x = TF.compute (TF.refKey x) "instance_tenancy"
 
 instance s ~ s' => P.HasComputedIpv6AssociationId (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedIpv6AssociationId x = TF.compute (TF.refKey x) "_computedIpv6AssociationId"
+    computedIpv6AssociationId x = TF.compute (TF.refKey x) "ipv6_association_id"
 
 instance s ~ s' => P.HasComputedIpv6CidrBlock (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedIpv6CidrBlock x = TF.compute (TF.refKey x) "_computedIpv6CidrBlock"
+    computedIpv6CidrBlock x = TF.compute (TF.refKey x) "ipv6_cidr_block"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpc_dhcp_options@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_dhcp_options terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpc_dhcp_options.html terraform documentation>
 -- for more information.
 data VpcDhcpOptionsData s = VpcDhcpOptionsData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (VpcDhcpOptionsFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1497,38 +1497,38 @@ instance TF.IsValid (VpcDhcpOptionsData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (VpcDhcpOptionsFilter s)])
                   TF.validator
 
-instance P.HasFilter (VpcDhcpOptionsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (VpcDhcpOptionsData s) (TF.Attr s [TF.Attr s (VpcDhcpOptionsFilter s)]) where
     filter =
-        P.lens (_filter :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (VpcDhcpOptionsFilter s)])
                (\s a -> s { _filter = a } :: VpcDhcpOptionsData s)
 
 instance s ~ s' => P.HasComputedDhcpOptionsId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
-    computedDhcpOptionsId x = TF.compute (TF.refKey x) "_computedDhcpOptionsId"
+    computedDhcpOptionsId x = TF.compute (TF.refKey x) "dhcp_options_id"
 
 instance s ~ s' => P.HasComputedDomainName (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
-    computedDomainName x = TF.compute (TF.refKey x) "_computedDomainName"
+    computedDomainName x = TF.compute (TF.refKey x) "domain_name"
 
 instance s ~ s' => P.HasComputedDomainNameServers (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDomainNameServers x = TF.compute (TF.refKey x) "_computedDomainNameServers"
+    computedDomainNameServers x = TF.compute (TF.refKey x) "domain_name_servers"
 
 instance s ~ s' => P.HasComputedNetbiosNameServers (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetbiosNameServers x = TF.compute (TF.refKey x) "_computedNetbiosNameServers"
+    computedNetbiosNameServers x = TF.compute (TF.refKey x) "netbios_name_servers"
 
 instance s ~ s' => P.HasComputedNetbiosNodeType (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
-    computedNetbiosNodeType x = TF.compute (TF.refKey x) "_computedNetbiosNodeType"
+    computedNetbiosNodeType x = TF.compute (TF.refKey x) "netbios_node_type"
 
 instance s ~ s' => P.HasComputedNtpServers (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNtpServers x = TF.compute (TF.refKey x) "_computedNtpServers"
+    computedNtpServers x = TF.compute (TF.refKey x) "ntp_servers"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpc_endpoint@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_endpoint terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpc_endpoint.html terraform documentation>
 -- for more information.
 data VpcEndpointData s = VpcEndpointData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -1546,50 +1546,50 @@ instance TF.IsValid (VpcEndpointData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "_computedCidrBlocks"
+    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-instance s ~ s' => P.HasComputedDnsEntry (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s (DnsEntry s)]) where
-    computedDnsEntry x = TF.compute (TF.refKey x) "_computedDnsEntry"
+instance s ~ s' => P.HasComputedDnsEntry (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s (VpcEndpointDnsEntry s)]) where
+    computedDnsEntry x = TF.compute (TF.refKey x) "dns_entry"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedNetworkInterfaceIds (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNetworkInterfaceIds x = TF.compute (TF.refKey x) "_computedNetworkInterfaceIds"
+    computedNetworkInterfaceIds x = TF.compute (TF.refKey x) "network_interface_ids"
 
 instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Document) where
-    computedPolicy x = TF.compute (TF.refKey x) "_computedPolicy"
+    computedPolicy x = TF.compute (TF.refKey x) "policy"
 
 instance s ~ s' => P.HasComputedPrefixListId (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Text) where
-    computedPrefixListId x = TF.compute (TF.refKey x) "_computedPrefixListId"
+    computedPrefixListId x = TF.compute (TF.refKey x) "prefix_list_id"
 
 instance s ~ s' => P.HasComputedPrivateDnsEnabled (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Bool) where
-    computedPrivateDnsEnabled x = TF.compute (TF.refKey x) "_computedPrivateDnsEnabled"
+    computedPrivateDnsEnabled x = TF.compute (TF.refKey x) "private_dns_enabled"
 
 instance s ~ s' => P.HasComputedRouteTableIds (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRouteTableIds x = TF.compute (TF.refKey x) "_computedRouteTableIds"
+    computedRouteTableIds x = TF.compute (TF.refKey x) "route_table_ids"
 
 instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecurityGroupIds x = TF.compute (TF.refKey x) "_computedSecurityGroupIds"
+    computedSecurityGroupIds x = TF.compute (TF.refKey x) "security_group_ids"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "_computedServiceName"
+    computedServiceName x = TF.compute (TF.refKey x) "service_name"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (VpcEndpointData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSubnetIds x = TF.compute (TF.refKey x) "_computedSubnetIds"
+    computedSubnetIds x = TF.compute (TF.refKey x) "subnet_ids"
 
 instance s ~ s' => P.HasComputedVpcEndpointType (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Text) where
-    computedVpcEndpointType x = TF.compute (TF.refKey x) "_computedVpcEndpointType"
+    computedVpcEndpointType x = TF.compute (TF.refKey x) "vpc_endpoint_type"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcEndpointData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_vpc_endpoint_service@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_endpoint_service terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpc_endpoint_service.html terraform documentation>
 -- for more information.
 data VpcEndpointServiceData s = VpcEndpointServiceData'
     { _service :: TF.Attr s P.Text
@@ -1619,35 +1619,35 @@ instance P.HasService (VpcEndpointServiceData s) (TF.Attr s P.Text) where
                (\s a -> s { _service = a } :: VpcEndpointServiceData s)
 
 instance s ~ s' => P.HasComputedAcceptanceRequired (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Bool) where
-    computedAcceptanceRequired x = TF.compute (TF.refKey x) "_computedAcceptanceRequired"
+    computedAcceptanceRequired x = TF.compute (TF.refKey x) "acceptance_required"
 
 instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "_computedAvailabilityZones"
+    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
 
 instance s ~ s' => P.HasComputedBaseEndpointDnsNames (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedBaseEndpointDnsNames x = TF.compute (TF.refKey x) "_computedBaseEndpointDnsNames"
+    computedBaseEndpointDnsNames x = TF.compute (TF.refKey x) "base_endpoint_dns_names"
 
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Text) where
-    computedOwner x = TF.compute (TF.refKey x) "_computedOwner"
+    computedOwner x = TF.compute (TF.refKey x) "owner"
 
 instance s ~ s' => P.HasComputedPrivateDnsName (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Text) where
-    computedPrivateDnsName x = TF.compute (TF.refKey x) "_computedPrivateDnsName"
+    computedPrivateDnsName x = TF.compute (TF.refKey x) "private_dns_name"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Text) where
-    computedServiceName x = TF.compute (TF.refKey x) "_computedServiceName"
+    computedServiceName x = TF.compute (TF.refKey x) "service_name"
 
 instance s ~ s' => P.HasComputedServiceType (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Text) where
-    computedServiceType x = TF.compute (TF.refKey x) "_computedServiceType"
+    computedServiceType x = TF.compute (TF.refKey x) "service_type"
 
 instance s ~ s' => P.HasComputedVpcEndpointPolicySupported (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Bool) where
-    computedVpcEndpointPolicySupported x = TF.compute (TF.refKey x) "_computedVpcEndpointPolicySupported"
+    computedVpcEndpointPolicySupported x = TF.compute (TF.refKey x) "vpc_endpoint_policy_supported"
 
 -- | @aws_vpc_peering_connection@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpc_peering_connection terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpc_peering_connection.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionData s = VpcPeeringConnectionData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (VpcPeeringConnectionFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1669,59 +1669,59 @@ instance TF.IsValid (VpcPeeringConnectionData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: VpcPeeringConnectionData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: VpcPeeringConnectionData s -> TF.Attr s [TF.Attr s (VpcPeeringConnectionFilter s)])
                   TF.validator
 
-instance P.HasFilter (VpcPeeringConnectionData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (VpcPeeringConnectionData s) (TF.Attr s [TF.Attr s (VpcPeeringConnectionFilter s)]) where
     filter =
-        P.lens (_filter :: VpcPeeringConnectionData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: VpcPeeringConnectionData s -> TF.Attr s [TF.Attr s (VpcPeeringConnectionFilter s)])
                (\s a -> s { _filter = a } :: VpcPeeringConnectionData s)
 
 instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool))) where
-    computedAccepter x = TF.compute (TF.refKey x) "_computedAccepter"
+    computedAccepter x = TF.compute (TF.refKey x) "accepter"
 
 instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "_computedCidrBlock"
+    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedOwnerId (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedOwnerId x = TF.compute (TF.refKey x) "_computedOwnerId"
+    computedOwnerId x = TF.compute (TF.refKey x) "owner_id"
 
 instance s ~ s' => P.HasComputedPeerCidrBlock (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedPeerCidrBlock x = TF.compute (TF.refKey x) "_computedPeerCidrBlock"
+    computedPeerCidrBlock x = TF.compute (TF.refKey x) "peer_cidr_block"
 
 instance s ~ s' => P.HasComputedPeerOwnerId (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedPeerOwnerId x = TF.compute (TF.refKey x) "_computedPeerOwnerId"
+    computedPeerOwnerId x = TF.compute (TF.refKey x) "peer_owner_id"
 
 instance s ~ s' => P.HasComputedPeerRegion (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedPeerRegion x = TF.compute (TF.refKey x) "_computedPeerRegion"
+    computedPeerRegion x = TF.compute (TF.refKey x) "peer_region"
 
 instance s ~ s' => P.HasComputedPeerVpcId (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedPeerVpcId x = TF.compute (TF.refKey x) "_computedPeerVpcId"
+    computedPeerVpcId x = TF.compute (TF.refKey x) "peer_vpc_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool))) where
-    computedRequester x = TF.compute (TF.refKey x) "_computedRequester"
+    computedRequester x = TF.compute (TF.refKey x) "requester"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionData s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "_computedVpcId"
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_vpcs@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpcs terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpcs.html terraform documentation>
 -- for more information.
 data VpcsData s = VpcsData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (VpcsFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1743,26 +1743,26 @@ instance TF.IsValid (VpcsData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: VpcsData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: VpcsData s -> TF.Attr s [TF.Attr s (VpcsFilter s)])
                   TF.validator
 
-instance P.HasFilter (VpcsData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (VpcsData s) (TF.Attr s [TF.Attr s (VpcsFilter s)]) where
     filter =
-        P.lens (_filter :: VpcsData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: VpcsData s -> TF.Attr s [TF.Attr s (VpcsFilter s)])
                (\s a -> s { _filter = a } :: VpcsData s)
 
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIds x = TF.compute (TF.refKey x) "_computedIds"
+    computedIds x = TF.compute (TF.refKey x) "ids"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpcsData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 -- | @aws_vpn_gateway@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_vpn_gateway terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/d/vpn_gateway.html terraform documentation>
 -- for more information.
 data VpnGatewayData s = VpnGatewayData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter :: TF.Attr s [TF.Attr s (VpnGatewayFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1784,28 +1784,28 @@ instance TF.IsValid (VpnGatewayData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: VpnGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: VpnGatewayData s -> TF.Attr s [TF.Attr s (VpnGatewayFilter s)])
                   TF.validator
 
-instance P.HasFilter (VpnGatewayData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (VpnGatewayData s) (TF.Attr s [TF.Attr s (VpnGatewayFilter s)]) where
     filter =
-        P.lens (_filter :: VpnGatewayData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: VpnGatewayData s -> TF.Attr s [TF.Attr s (VpnGatewayFilter s)])
                (\s a -> s { _filter = a } :: VpnGatewayData s)
 
 instance s ~ s' => P.HasComputedAmazonSideAsn (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
-    computedAmazonSideAsn x = TF.compute (TF.refKey x) "_computedAmazonSideAsn"
+    computedAmazonSideAsn x = TF.compute (TF.refKey x) "amazon_side_asn"
 
 instance s ~ s' => P.HasComputedAttachedVpcId (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
-    computedAttachedVpcId x = TF.compute (TF.refKey x) "_computedAttachedVpcId"
+    computedAttachedVpcId x = TF.compute (TF.refKey x) "attached_vpc_id"
 
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
+instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Zone) where
+    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (VpnGatewayData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VpnGatewayData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"

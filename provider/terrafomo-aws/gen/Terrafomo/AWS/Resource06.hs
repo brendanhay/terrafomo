@@ -55,14 +55,14 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @aws_wafregional_web_acl_association@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_wafregional_web_acl_association terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_web_acl_association.html terraform documentation>
 -- for more information.
 data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResource'
     { _resourceArn :: TF.Attr s P.Text
-    -- ^ @resource_arn@ - (Required)
+    -- ^ @resource_arn@ - (Required, Forces New)
     --
     , _webAclId    :: TF.Attr s P.Text
-    -- ^ @web_acl_id@ - (Required)
+    -- ^ @web_acl_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -98,13 +98,13 @@ instance P.HasWebAclId (WafregionalWebAclAssociationResource s) (TF.Attr s P.Tex
 
 -- | @aws_wafregional_xss_match_set@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/AWS/aws_wafregional_xss_match_set terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_xss_match_set.html terraform documentation>
 -- for more information.
 data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
-    { _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    { _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _xssMatchTuple :: TF.Attr s [TF.Attr s (XssMatchTuple s)]
+    , _xssMatchTuple :: TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)]
     -- ^ @xss_match_tuple@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -129,7 +129,7 @@ instance TF.IsValid (WafregionalXssMatchSetResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_xssMatchTuple"
                   (_xssMatchTuple
-                      :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTuple s)])
+                      :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)])
                   TF.validator
 
 instance P.HasName (WafregionalXssMatchSetResource s) (TF.Attr s P.Text) where
@@ -137,7 +137,7 @@ instance P.HasName (WafregionalXssMatchSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafregionalXssMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalXssMatchSetResource s)
 
-instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.Attr s (XssMatchTuple s)]) where
+instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)]) where
     xssMatchTuple =
-        P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTuple s)])
+        P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)])
                (\s a -> s { _xssMatchTuple = a } :: WafregionalXssMatchSetResource s)

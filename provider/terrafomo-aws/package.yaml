@@ -12,12 +12,12 @@ dependencies:
   - unordered-containers
   - text
   - terrafomo
+  - amazonka-iam-policy >= 0.0.4
   - formatting
   - amazonka-core
   - hashable
   - iproute
   - microlens
-  - amazonka-iam-policy >= 0.0.3
 
 library:
   source-dirs:

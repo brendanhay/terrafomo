@@ -9,21 +9,33 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.AWS.Types
-    ( Region (..)
+    (
+    -- * General
+      Region                   (..)
     , fregion
 
-    , Zone (..)
+    , Zone                     (..)
     , fzone
     , fzonesuf
 
     , IPRange
 
+    -- * IAM
     , IAM.Document
     , IAM.Policy
+
+    -- * DynamoDB
+    , DynamoTableAttributeType (..)
+
+    -- * EC2
+    , Ec2Traffic               (..)
+    , Ec2Protocol              (..)
     ) where
 
 import Data.Hashable (Hashable (hashWithSalt))
 import Data.IP       (IPRange)
+import Data.Text     (Text)
+import Data.Word     (Word16)
 
 import Formatting (Format, (%))
 
@@ -85,3 +97,44 @@ instance Hashable IPRange where
 -- Orphan instance for amazonka-iam-policy type.
 instance IsValue IAM.Document where
     toValue = HCL.json
+
+-- DynamoDB
+
+-- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
+data DynamoTableAttributeType
+    = DynamoString
+    | DynamoNumber
+    | DynamoBinary
+      deriving (Show, Eq)
+
+instance IsValue DynamoTableAttributeType where
+    toValue = HCL.string . \case
+        DynamoString -> "S"
+        DynamoNumber -> "N"
+        DynamoBinary -> "B"
+
+-- EC2
+
+data Ec2Traffic
+    = Ingress
+    | Egress
+      deriving (Show, Eq)
+
+instance IsValue Ec2Traffic where
+    toValue = HCL.string . \case
+        Ingress -> "ingress"
+        Egress  -> "egress"
+
+data Ec2Protocol
+    = AllowICMP
+    | AllowTCP
+    | AllowUDP
+    | AllowAll
+      deriving (Show, Eq)
+
+instance IsValue Ec2Protocol where
+    toValue = HCL.string . \case
+        AllowICMP -> "icmp"
+        AllowTCP  -> "tcp"
+        AllowUDP  -> "udp"
+        AllowAll  -> "-1"
