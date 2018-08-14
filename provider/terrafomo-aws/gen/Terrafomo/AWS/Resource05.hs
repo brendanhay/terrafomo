@@ -2090,9 +2090,6 @@ instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (SpotInstanceRequestResource 
 instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
     computedNetworkInterface x = TF.compute (TF.refKey x) "_computedNetworkInterface"
 
-instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "_computedNetworkInterfaceId"
-
 instance s ~ s' => P.HasComputedPasswordData (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Text) where
     computedPasswordData x = TF.compute (TF.refKey x) "_computedPasswordData"
 
@@ -5761,18 +5758,9 @@ instance P.HasXssMatchTuples (WafXssMatchSetResource s) (TF.Attr s [TF.Attr s (X
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_wafregional_byte_match_set terraform documentation>
 -- for more information.
 data WafregionalByteMatchSetResource s = WafregionalByteMatchSetResource'
-    { _byteMatchTuple  :: TF.Attr s [TF.Attr s (ByteMatchTuple s)]
-    -- ^ @byte_match_tuple@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'byteMatchTuples'
-    , _byteMatchTuples :: TF.Attr s [TF.Attr s (ByteMatchTuples s)]
+    { _byteMatchTuples :: TF.Attr s [TF.Attr s (ByteMatchTuples s)]
     -- ^ @byte_match_tuples@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'byteMatchTuple'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -5784,44 +5772,22 @@ wafregionalByteMatchSetResource
 wafregionalByteMatchSetResource _name =
     TF.newResource "aws_wafregional_byte_match_set" TF.validator $
         WafregionalByteMatchSetResource'
-            { _byteMatchTuple = TF.Nil
-            , _byteMatchTuples = TF.Nil
+            { _byteMatchTuples = TF.Nil
             , _name = _name
             }
 
 instance TF.IsObject (WafregionalByteMatchSetResource s) where
     toObject WafregionalByteMatchSetResource'{..} = P.catMaybes
-        [ TF.assign "byte_match_tuple" <$> TF.attribute _byteMatchTuple
-        , TF.assign "byte_match_tuples" <$> TF.attribute _byteMatchTuples
+        [ TF.assign "byte_match_tuples" <$> TF.attribute _byteMatchTuples
         , TF.assign "name" <$> TF.attribute _name
         ]
 
 instance TF.IsValid (WafregionalByteMatchSetResource s) where
-    validator = TF.fieldsValidator (\WafregionalByteMatchSetResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_byteMatchTuple P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_byteMatchTuple",
-                            [ "_byteMatchTuples"
-                            ])
-        , if (_byteMatchTuples P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_byteMatchTuples",
-                            [ "_byteMatchTuple"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_byteMatchTuple"
-                  (_byteMatchTuple
-                      :: WafregionalByteMatchSetResource s -> TF.Attr s [TF.Attr s (ByteMatchTuple s)])
-                  TF.validator
+    validator = P.mempty
            P.<> TF.settingsValidator "_byteMatchTuples"
                   (_byteMatchTuples
                       :: WafregionalByteMatchSetResource s -> TF.Attr s [TF.Attr s (ByteMatchTuples s)])
                   TF.validator
-
-instance P.HasByteMatchTuple (WafregionalByteMatchSetResource s) (TF.Attr s [TF.Attr s (ByteMatchTuple s)]) where
-    byteMatchTuple =
-        P.lens (_byteMatchTuple :: WafregionalByteMatchSetResource s -> TF.Attr s [TF.Attr s (ByteMatchTuple s)])
-               (\s a -> s { _byteMatchTuple = a } :: WafregionalByteMatchSetResource s)
 
 instance P.HasByteMatchTuples (WafregionalByteMatchSetResource s) (TF.Attr s [TF.Attr s (ByteMatchTuples s)]) where
     byteMatchTuples =

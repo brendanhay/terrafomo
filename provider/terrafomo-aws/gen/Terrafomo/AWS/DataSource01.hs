@@ -3326,11 +3326,8 @@ instance s ~ s' => P.HasComputedJson (TF.Ref s' (IamPolicyDocumentData s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_role terraform documentation>
 -- for more information.
 data IamRoleData s = IamRoleData'
-    { _name     :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
-    --
-    , _roleName :: TF.Attr s P.Text
-    -- ^ @role_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -3340,13 +3337,11 @@ iamRoleData =
     TF.newDataSource "aws_iam_role" TF.validator $
         IamRoleData'
             { _name = TF.Nil
-            , _roleName = TF.Nil
             }
 
 instance TF.IsObject (IamRoleData s) where
     toObject IamRoleData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "role_name" <$> TF.attribute _roleName
         ]
 
 instance TF.IsValid (IamRoleData s) where
@@ -3357,19 +3352,11 @@ instance P.HasName (IamRoleData s) (TF.Attr s P.Text) where
         P.lens (_name :: IamRoleData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: IamRoleData s)
 
-instance P.HasRoleName (IamRoleData s) (TF.Attr s P.Text) where
-    roleName =
-        P.lens (_roleName :: IamRoleData s -> TF.Attr s P.Text)
-               (\s a -> s { _roleName = a } :: IamRoleData s)
-
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
 instance s ~ s' => P.HasComputedAssumeRolePolicy (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Document) where
     computedAssumeRolePolicy x = TF.compute (TF.refKey x) "_computedAssumeRolePolicy"
-
-instance s ~ s' => P.HasComputedAssumeRolePolicyDocument (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
-    computedAssumeRolePolicyDocument x = TF.compute (TF.refKey x) "_computedAssumeRolePolicyDocument"
 
 instance s ~ s' => P.HasComputedCreateDate (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedCreateDate x = TF.compute (TF.refKey x) "_computedCreateDate"
@@ -3385,9 +3372,6 @@ instance s ~ s' => P.HasComputedPath (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Te
 
 instance s ~ s' => P.HasComputedPermissionsBoundary (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedPermissionsBoundary x = TF.compute (TF.refKey x) "_computedPermissionsBoundary"
-
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "_computedRoleId"
 
 instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleData s)) (TF.Attr s P.Text) where
     computedUniqueId x = TF.compute (TF.refKey x) "_computedUniqueId"

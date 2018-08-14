@@ -1704,13 +1704,10 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneSubnetGroupResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_network_acl terraform documentation>
 -- for more information.
 data NetworkAclResource s = NetworkAclResource'
-    { _subnetId :: TF.Attr s P.Text
-    -- ^ @subnet_id@ - (Optional)
-    --
-    , _tags     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _tags  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcId    :: TF.Attr s P.Text
+    , _vpcId :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1721,25 +1718,18 @@ networkAclResource
 networkAclResource _vpcId =
     TF.newResource "aws_network_acl" TF.validator $
         NetworkAclResource'
-            { _subnetId = TF.Nil
-            , _tags = TF.Nil
+            { _tags = TF.Nil
             , _vpcId = _vpcId
             }
 
 instance TF.IsObject (NetworkAclResource s) where
     toObject NetworkAclResource'{..} = P.catMaybes
-        [ TF.assign "subnet_id" <$> TF.attribute _subnetId
-        , TF.assign "tags" <$> TF.attribute _tags
+        [ TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "vpc_id" <$> TF.attribute _vpcId
         ]
 
 instance TF.IsValid (NetworkAclResource s) where
     validator = P.mempty
-
-instance P.HasSubnetId (NetworkAclResource s) (TF.Attr s P.Text) where
-    subnetId =
-        P.lens (_subnetId :: NetworkAclResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: NetworkAclResource s)
 
 instance P.HasTags (NetworkAclResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     tags =
@@ -6444,9 +6434,6 @@ instance P.HasTags (RedshiftClusterResource s) (TF.Attr s (P.HashMap P.Text (TF.
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "_computedAvailabilityZone"
 
-instance s ~ s' => P.HasComputedBucketName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
-    computedBucketName x = TF.compute (TF.refKey x) "_computedBucketName"
-
 instance s ~ s' => P.HasComputedClusterParameterGroupName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedClusterParameterGroupName x = TF.compute (TF.refKey x) "_computedClusterParameterGroupName"
 
@@ -6471,9 +6458,6 @@ instance s ~ s' => P.HasComputedDatabaseName (TF.Ref s' (RedshiftClusterResource
 instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedDnsName x = TF.compute (TF.refKey x) "_computedDnsName"
 
-instance s ~ s' => P.HasComputedEnableLogging (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Bool) where
-    computedEnableLogging x = TF.compute (TF.refKey x) "_computedEnableLogging"
-
 instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Bool) where
     computedEncrypted x = TF.compute (TF.refKey x) "_computedEncrypted"
 
@@ -6491,9 +6475,6 @@ instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (RedshiftClusterResource s))
 
 instance s ~ s' => P.HasComputedPreferredMaintenanceWindow (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
     computedPreferredMaintenanceWindow x = TF.compute (TF.refKey x) "_computedPreferredMaintenanceWindow"
-
-instance s ~ s' => P.HasComputedS3KeyPrefix (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s P.Text) where
-    computedS3KeyPrefix x = TF.compute (TF.refKey x) "_computedS3KeyPrefix"
 
 instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (RedshiftClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "_computedVpcSecurityGroupIds"

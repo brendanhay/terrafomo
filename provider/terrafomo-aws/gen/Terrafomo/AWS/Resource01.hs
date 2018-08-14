@@ -1557,9 +1557,6 @@ data ApiGatewayApiKeyResource s = ApiGatewayApiKeyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _stageKey    :: TF.Attr s [TF.Attr s (StageKey s)]
-    -- ^ @stage_key@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 apiGatewayApiKeyResource
@@ -1571,7 +1568,6 @@ apiGatewayApiKeyResource _name =
             { _description = TF.value "Managed by Terraform"
             , _enabled = TF.value P.True
             , _name = _name
-            , _stageKey = TF.Nil
             }
 
 instance TF.IsObject (ApiGatewayApiKeyResource s) where
@@ -1579,15 +1575,10 @@ instance TF.IsObject (ApiGatewayApiKeyResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "stage_key" <$> TF.attribute _stageKey
         ]
 
 instance TF.IsValid (ApiGatewayApiKeyResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_stageKey"
-                  (_stageKey
-                      :: ApiGatewayApiKeyResource s -> TF.Attr s [TF.Attr s (StageKey s)])
-                  TF.validator
 
 instance P.HasDescription (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
     description =
@@ -1603,11 +1594,6 @@ instance P.HasName (ApiGatewayApiKeyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ApiGatewayApiKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ApiGatewayApiKeyResource s)
-
-instance P.HasStageKey (ApiGatewayApiKeyResource s) (TF.Attr s [TF.Attr s (StageKey s)]) where
-    stageKey =
-        P.lens (_stageKey :: ApiGatewayApiKeyResource s -> TF.Attr s [TF.Attr s (StageKey s)])
-               (\s a -> s { _stageKey = a } :: ApiGatewayApiKeyResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ApiGatewayApiKeyResource s)) (TF.Attr s P.Text) where
     computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
@@ -2299,55 +2285,46 @@ instance P.HasStatusCode (ApiGatewayGatewayResponseResource s) (TF.Attr s P.Text
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_integration terraform documentation>
 -- for more information.
 data ApiGatewayIntegrationResource s = ApiGatewayIntegrationResource'
-    { _cacheKeyParameters :: TF.Attr s [TF.Attr s P.Text]
+    { _cacheKeyParameters    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cache_key_parameters@ - (Optional)
     --
-    , _connectionId :: TF.Attr s P.Text
+    , _connectionId          :: TF.Attr s P.Text
     -- ^ @connection_id@ - (Optional)
     --
-    , _connectionType :: TF.Attr s P.Text
+    , _connectionType        :: TF.Attr s P.Text
     -- ^ @connection_type@ - (Optional)
     --
-    , _contentHandling :: TF.Attr s P.Text
+    , _contentHandling       :: TF.Attr s P.Text
     -- ^ @content_handling@ - (Optional)
     --
-    , _credentials :: TF.Attr s P.Text
+    , _credentials           :: TF.Attr s P.Text
     -- ^ @credentials@ - (Optional)
     --
-    , _httpMethod :: TF.Attr s P.Text
+    , _httpMethod            :: TF.Attr s P.Text
     -- ^ @http_method@ - (Required)
     --
     , _integrationHttpMethod :: TF.Attr s P.Text
     -- ^ @integration_http_method@ - (Optional)
     --
-    , _requestParameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _requestParameters     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @request_parameters@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'requestParametersInJson'
-    , _requestParametersInJson :: TF.Attr s P.Text
-    -- ^ @request_parameters_in_json@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'requestParameters'
-    , _requestTemplates :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _requestTemplates      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @request_templates@ - (Optional)
     --
-    , _resourceId :: TF.Attr s P.Text
+    , _resourceId            :: TF.Attr s P.Text
     -- ^ @resource_id@ - (Required)
     --
-    , _restApiId :: TF.Attr s P.Text
+    , _restApiId             :: TF.Attr s P.Text
     -- ^ @rest_api_id@ - (Required)
     --
-    , _timeoutMilliseconds :: TF.Attr s P.Integer
+    , _timeoutMilliseconds   :: TF.Attr s P.Integer
     -- ^ @timeout_milliseconds@ - (Optional)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type'                 :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _uri :: TF.Attr s P.Text
+    , _uri                   :: TF.Attr s P.Text
     -- ^ @uri@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2369,7 +2346,6 @@ apiGatewayIntegrationResource _httpMethod _resourceId _restApiId _type' =
             , _httpMethod = _httpMethod
             , _integrationHttpMethod = TF.Nil
             , _requestParameters = TF.Nil
-            , _requestParametersInJson = TF.Nil
             , _requestTemplates = TF.Nil
             , _resourceId = _resourceId
             , _restApiId = _restApiId
@@ -2388,7 +2364,6 @@ instance TF.IsObject (ApiGatewayIntegrationResource s) where
         , TF.assign "http_method" <$> TF.attribute _httpMethod
         , TF.assign "integration_http_method" <$> TF.attribute _integrationHttpMethod
         , TF.assign "request_parameters" <$> TF.attribute _requestParameters
-        , TF.assign "request_parameters_in_json" <$> TF.attribute _requestParametersInJson
         , TF.assign "request_templates" <$> TF.attribute _requestTemplates
         , TF.assign "resource_id" <$> TF.attribute _resourceId
         , TF.assign "rest_api_id" <$> TF.attribute _restApiId
@@ -2398,18 +2373,7 @@ instance TF.IsObject (ApiGatewayIntegrationResource s) where
         ]
 
 instance TF.IsValid (ApiGatewayIntegrationResource s) where
-    validator = TF.fieldsValidator (\ApiGatewayIntegrationResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_requestParameters P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_requestParameters",
-                            [ "_requestParametersInJson"
-                            ])
-        , if (_requestParametersInJson P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_requestParametersInJson",
-                            [ "_requestParameters"
-                            ])
-        ])
+    validator = P.mempty
 
 instance P.HasCacheKeyParameters (ApiGatewayIntegrationResource s) (TF.Attr s [TF.Attr s P.Text]) where
     cacheKeyParameters =
@@ -2450,11 +2414,6 @@ instance P.HasRequestParameters (ApiGatewayIntegrationResource s) (TF.Attr s (P.
     requestParameters =
         P.lens (_requestParameters :: ApiGatewayIntegrationResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _requestParameters = a } :: ApiGatewayIntegrationResource s)
-
-instance P.HasRequestParametersInJson (ApiGatewayIntegrationResource s) (TF.Attr s P.Text) where
-    requestParametersInJson =
-        P.lens (_requestParametersInJson :: ApiGatewayIntegrationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _requestParametersInJson = a } :: ApiGatewayIntegrationResource s)
 
 instance P.HasRequestTemplates (ApiGatewayIntegrationResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     requestTemplates =
@@ -2497,37 +2456,28 @@ instance s ~ s' => P.HasComputedPassthroughBehavior (TF.Ref s' (ApiGatewayIntegr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_integration_response terraform documentation>
 -- for more information.
 data ApiGatewayIntegrationResponseResource s = ApiGatewayIntegrationResponseResource'
-    { _contentHandling :: TF.Attr s P.Text
+    { _contentHandling    :: TF.Attr s P.Text
     -- ^ @content_handling@ - (Optional)
     --
-    , _httpMethod :: TF.Attr s P.Text
+    , _httpMethod         :: TF.Attr s P.Text
     -- ^ @http_method@ - (Required)
     --
-    , _resourceId :: TF.Attr s P.Text
+    , _resourceId         :: TF.Attr s P.Text
     -- ^ @resource_id@ - (Required)
     --
     , _responseParameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @response_parameters@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'responseParametersInJson'
-    , _responseParametersInJson :: TF.Attr s P.Text
-    -- ^ @response_parameters_in_json@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'responseParameters'
-    , _responseTemplates :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _responseTemplates  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @response_templates@ - (Optional)
     --
-    , _restApiId :: TF.Attr s P.Text
+    , _restApiId          :: TF.Attr s P.Text
     -- ^ @rest_api_id@ - (Required)
     --
-    , _selectionPattern :: TF.Attr s P.Text
+    , _selectionPattern   :: TF.Attr s P.Text
     -- ^ @selection_pattern@ - (Optional)
     --
-    , _statusCode :: TF.Attr s P.Text
+    , _statusCode         :: TF.Attr s P.Text
     -- ^ @status_code@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2545,7 +2495,6 @@ apiGatewayIntegrationResponseResource _httpMethod _resourceId _restApiId _status
             , _httpMethod = _httpMethod
             , _resourceId = _resourceId
             , _responseParameters = TF.Nil
-            , _responseParametersInJson = TF.Nil
             , _responseTemplates = TF.Nil
             , _restApiId = _restApiId
             , _selectionPattern = TF.Nil
@@ -2558,7 +2507,6 @@ instance TF.IsObject (ApiGatewayIntegrationResponseResource s) where
         , TF.assign "http_method" <$> TF.attribute _httpMethod
         , TF.assign "resource_id" <$> TF.attribute _resourceId
         , TF.assign "response_parameters" <$> TF.attribute _responseParameters
-        , TF.assign "response_parameters_in_json" <$> TF.attribute _responseParametersInJson
         , TF.assign "response_templates" <$> TF.attribute _responseTemplates
         , TF.assign "rest_api_id" <$> TF.attribute _restApiId
         , TF.assign "selection_pattern" <$> TF.attribute _selectionPattern
@@ -2566,18 +2514,7 @@ instance TF.IsObject (ApiGatewayIntegrationResponseResource s) where
         ]
 
 instance TF.IsValid (ApiGatewayIntegrationResponseResource s) where
-    validator = TF.fieldsValidator (\ApiGatewayIntegrationResponseResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_responseParameters P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_responseParameters",
-                            [ "_responseParametersInJson"
-                            ])
-        , if (_responseParametersInJson P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_responseParametersInJson",
-                            [ "_responseParameters"
-                            ])
-        ])
+    validator = P.mempty
 
 instance P.HasContentHandling (ApiGatewayIntegrationResponseResource s) (TF.Attr s P.Text) where
     contentHandling =
@@ -2598,11 +2535,6 @@ instance P.HasResponseParameters (ApiGatewayIntegrationResponseResource s) (TF.A
     responseParameters =
         P.lens (_responseParameters :: ApiGatewayIntegrationResponseResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _responseParameters = a } :: ApiGatewayIntegrationResponseResource s)
-
-instance P.HasResponseParametersInJson (ApiGatewayIntegrationResponseResource s) (TF.Attr s P.Text) where
-    responseParametersInJson =
-        P.lens (_responseParametersInJson :: ApiGatewayIntegrationResponseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _responseParametersInJson = a } :: ApiGatewayIntegrationResponseResource s)
 
 instance P.HasResponseTemplates (ApiGatewayIntegrationResponseResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     responseTemplates =
@@ -2629,43 +2561,34 @@ instance P.HasStatusCode (ApiGatewayIntegrationResponseResource s) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_method terraform documentation>
 -- for more information.
 data ApiGatewayMethodResource s = ApiGatewayMethodResource'
-    { _apiKeyRequired :: TF.Attr s P.Bool
+    { _apiKeyRequired      :: TF.Attr s P.Bool
     -- ^ @api_key_required@ - (Optional)
     --
-    , _authorization :: TF.Attr s P.Text
+    , _authorization       :: TF.Attr s P.Text
     -- ^ @authorization@ - (Required)
     --
     , _authorizationScopes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @authorization_scopes@ - (Optional)
     --
-    , _authorizerId :: TF.Attr s P.Text
+    , _authorizerId        :: TF.Attr s P.Text
     -- ^ @authorizer_id@ - (Optional)
     --
-    , _httpMethod :: TF.Attr s P.Text
+    , _httpMethod          :: TF.Attr s P.Text
     -- ^ @http_method@ - (Required)
     --
-    , _requestModels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _requestModels       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @request_models@ - (Optional)
     --
-    , _requestParameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool))
+    , _requestParameters   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool))
     -- ^ @request_parameters@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'requestParametersInJson'
-    , _requestParametersInJson :: TF.Attr s P.Text
-    -- ^ @request_parameters_in_json@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'requestParameters'
-    , _requestValidatorId :: TF.Attr s P.Text
+    , _requestValidatorId  :: TF.Attr s P.Text
     -- ^ @request_validator_id@ - (Optional)
     --
-    , _resourceId :: TF.Attr s P.Text
+    , _resourceId          :: TF.Attr s P.Text
     -- ^ @resource_id@ - (Required)
     --
-    , _restApiId :: TF.Attr s P.Text
+    , _restApiId           :: TF.Attr s P.Text
     -- ^ @rest_api_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2686,7 +2609,6 @@ apiGatewayMethodResource _authorization _httpMethod _resourceId _restApiId =
             , _httpMethod = _httpMethod
             , _requestModels = TF.Nil
             , _requestParameters = TF.Nil
-            , _requestParametersInJson = TF.Nil
             , _requestValidatorId = TF.Nil
             , _resourceId = _resourceId
             , _restApiId = _restApiId
@@ -2701,25 +2623,13 @@ instance TF.IsObject (ApiGatewayMethodResource s) where
         , TF.assign "http_method" <$> TF.attribute _httpMethod
         , TF.assign "request_models" <$> TF.attribute _requestModels
         , TF.assign "request_parameters" <$> TF.attribute _requestParameters
-        , TF.assign "request_parameters_in_json" <$> TF.attribute _requestParametersInJson
         , TF.assign "request_validator_id" <$> TF.attribute _requestValidatorId
         , TF.assign "resource_id" <$> TF.attribute _resourceId
         , TF.assign "rest_api_id" <$> TF.attribute _restApiId
         ]
 
 instance TF.IsValid (ApiGatewayMethodResource s) where
-    validator = TF.fieldsValidator (\ApiGatewayMethodResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_requestParameters P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_requestParameters",
-                            [ "_requestParametersInJson"
-                            ])
-        , if (_requestParametersInJson P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_requestParametersInJson",
-                            [ "_requestParameters"
-                            ])
-        ])
+    validator = P.mempty
 
 instance P.HasApiKeyRequired (ApiGatewayMethodResource s) (TF.Attr s P.Bool) where
     apiKeyRequired =
@@ -2756,11 +2666,6 @@ instance P.HasRequestParameters (ApiGatewayMethodResource s) (TF.Attr s (P.HashM
         P.lens (_requestParameters :: ApiGatewayMethodResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool)))
                (\s a -> s { _requestParameters = a } :: ApiGatewayMethodResource s)
 
-instance P.HasRequestParametersInJson (ApiGatewayMethodResource s) (TF.Attr s P.Text) where
-    requestParametersInJson =
-        P.lens (_requestParametersInJson :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
-               (\s a -> s { _requestParametersInJson = a } :: ApiGatewayMethodResource s)
-
 instance P.HasRequestValidatorId (ApiGatewayMethodResource s) (TF.Attr s P.Text) where
     requestValidatorId =
         P.lens (_requestValidatorId :: ApiGatewayMethodResource s -> TF.Attr s P.Text)
@@ -2781,31 +2686,22 @@ instance P.HasRestApiId (ApiGatewayMethodResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_api_gateway_method_response terraform documentation>
 -- for more information.
 data ApiGatewayMethodResponseResource s = ApiGatewayMethodResponseResource'
-    { _httpMethod :: TF.Attr s P.Text
+    { _httpMethod         :: TF.Attr s P.Text
     -- ^ @http_method@ - (Required)
     --
-    , _resourceId :: TF.Attr s P.Text
+    , _resourceId         :: TF.Attr s P.Text
     -- ^ @resource_id@ - (Required)
     --
-    , _responseModels :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _responseModels     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @response_models@ - (Optional)
     --
     , _responseParameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool))
     -- ^ @response_parameters@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'responseParametersInJson'
-    , _responseParametersInJson :: TF.Attr s P.Text
-    -- ^ @response_parameters_in_json@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'responseParameters'
-    , _restApiId :: TF.Attr s P.Text
+    , _restApiId          :: TF.Attr s P.Text
     -- ^ @rest_api_id@ - (Required)
     --
-    , _statusCode :: TF.Attr s P.Text
+    , _statusCode         :: TF.Attr s P.Text
     -- ^ @status_code@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2823,7 +2719,6 @@ apiGatewayMethodResponseResource _httpMethod _resourceId _restApiId _statusCode 
             , _resourceId = _resourceId
             , _responseModels = TF.Nil
             , _responseParameters = TF.Nil
-            , _responseParametersInJson = TF.Nil
             , _restApiId = _restApiId
             , _statusCode = _statusCode
             }
@@ -2834,24 +2729,12 @@ instance TF.IsObject (ApiGatewayMethodResponseResource s) where
         , TF.assign "resource_id" <$> TF.attribute _resourceId
         , TF.assign "response_models" <$> TF.attribute _responseModels
         , TF.assign "response_parameters" <$> TF.attribute _responseParameters
-        , TF.assign "response_parameters_in_json" <$> TF.attribute _responseParametersInJson
         , TF.assign "rest_api_id" <$> TF.attribute _restApiId
         , TF.assign "status_code" <$> TF.attribute _statusCode
         ]
 
 instance TF.IsValid (ApiGatewayMethodResponseResource s) where
-    validator = TF.fieldsValidator (\ApiGatewayMethodResponseResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_responseParameters P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_responseParameters",
-                            [ "_responseParametersInJson"
-                            ])
-        , if (_responseParametersInJson P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_responseParametersInJson",
-                            [ "_responseParameters"
-                            ])
-        ])
+    validator = P.mempty
 
 instance P.HasHttpMethod (ApiGatewayMethodResponseResource s) (TF.Attr s P.Text) where
     httpMethod =
@@ -2872,11 +2755,6 @@ instance P.HasResponseParameters (ApiGatewayMethodResponseResource s) (TF.Attr s
     responseParameters =
         P.lens (_responseParameters :: ApiGatewayMethodResponseResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Bool)))
                (\s a -> s { _responseParameters = a } :: ApiGatewayMethodResponseResource s)
-
-instance P.HasResponseParametersInJson (ApiGatewayMethodResponseResource s) (TF.Attr s P.Text) where
-    responseParametersInJson =
-        P.lens (_responseParametersInJson :: ApiGatewayMethodResponseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _responseParametersInJson = a } :: ApiGatewayMethodResponseResource s)
 
 instance P.HasRestApiId (ApiGatewayMethodResponseResource s) (TF.Attr s P.Text) where
     restApiId =
@@ -3676,20 +3554,8 @@ instance P.HasName (AppCookieStickinessPolicyResource s) (TF.Attr s P.Text) wher
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_appautoscaling_policy terraform documentation>
 -- for more information.
 data AppautoscalingPolicyResource s = AppautoscalingPolicyResource'
-    { _adjustmentType :: TF.Attr s P.Text
-    -- ^ @adjustment_type@ - (Optional)
-    --
-    , _alarms :: TF.Attr s [TF.Attr s P.Text]
+    { _alarms :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @alarms@ - (Optional)
-    --
-    , _cooldown :: TF.Attr s P.Integer
-    -- ^ @cooldown@ - (Optional)
-    --
-    , _metricAggregationType :: TF.Attr s P.Text
-    -- ^ @metric_aggregation_type@ - (Optional)
-    --
-    , _minAdjustmentMagnitude :: TF.Attr s P.Integer
-    -- ^ @min_adjustment_magnitude@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -3705,9 +3571,6 @@ data AppautoscalingPolicyResource s = AppautoscalingPolicyResource'
     --
     , _serviceNamespace :: TF.Attr s P.Text
     -- ^ @service_namespace@ - (Required)
-    --
-    , _stepAdjustment :: TF.Attr s [TF.Attr s (StepAdjustment s)]
-    -- ^ @step_adjustment@ - (Optional)
     --
     , _stepScalingPolicyConfiguration :: TF.Attr s [TF.Attr s (StepScalingPolicyConfiguration s)]
     -- ^ @step_scaling_policy_configuration@ - (Optional)
@@ -3726,44 +3589,30 @@ appautoscalingPolicyResource
 appautoscalingPolicyResource _name _resourceId _scalableDimension _serviceNamespace =
     TF.newResource "aws_appautoscaling_policy" TF.validator $
         AppautoscalingPolicyResource'
-            { _adjustmentType = TF.Nil
-            , _alarms = TF.Nil
-            , _cooldown = TF.Nil
-            , _metricAggregationType = TF.Nil
-            , _minAdjustmentMagnitude = TF.Nil
+            { _alarms = TF.Nil
             , _name = _name
             , _policyType = TF.value "StepScaling"
             , _resourceId = _resourceId
             , _scalableDimension = _scalableDimension
             , _serviceNamespace = _serviceNamespace
-            , _stepAdjustment = TF.Nil
             , _stepScalingPolicyConfiguration = TF.Nil
             , _targetTrackingScalingPolicyConfiguration = TF.Nil
             }
 
 instance TF.IsObject (AppautoscalingPolicyResource s) where
     toObject AppautoscalingPolicyResource'{..} = P.catMaybes
-        [ TF.assign "adjustment_type" <$> TF.attribute _adjustmentType
-        , TF.assign "alarms" <$> TF.attribute _alarms
-        , TF.assign "cooldown" <$> TF.attribute _cooldown
-        , TF.assign "metric_aggregation_type" <$> TF.attribute _metricAggregationType
-        , TF.assign "min_adjustment_magnitude" <$> TF.attribute _minAdjustmentMagnitude
+        [ TF.assign "alarms" <$> TF.attribute _alarms
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy_type" <$> TF.attribute _policyType
         , TF.assign "resource_id" <$> TF.attribute _resourceId
         , TF.assign "scalable_dimension" <$> TF.attribute _scalableDimension
         , TF.assign "service_namespace" <$> TF.attribute _serviceNamespace
-        , TF.assign "step_adjustment" <$> TF.attribute _stepAdjustment
         , TF.assign "step_scaling_policy_configuration" <$> TF.attribute _stepScalingPolicyConfiguration
         , TF.assign "target_tracking_scaling_policy_configuration" <$> TF.attribute _targetTrackingScalingPolicyConfiguration
         ]
 
 instance TF.IsValid (AppautoscalingPolicyResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_stepAdjustment"
-                  (_stepAdjustment
-                      :: AppautoscalingPolicyResource s -> TF.Attr s [TF.Attr s (StepAdjustment s)])
-                  TF.validator
            P.<> TF.settingsValidator "_stepScalingPolicyConfiguration"
                   (_stepScalingPolicyConfiguration
                       :: AppautoscalingPolicyResource s -> TF.Attr s [TF.Attr s (StepScalingPolicyConfiguration s)])
@@ -3773,30 +3622,10 @@ instance TF.IsValid (AppautoscalingPolicyResource s) where
                       :: AppautoscalingPolicyResource s -> TF.Attr s (TargetTrackingScalingPolicyConfiguration s))
                   TF.validator
 
-instance P.HasAdjustmentType (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
-    adjustmentType =
-        P.lens (_adjustmentType :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _adjustmentType = a } :: AppautoscalingPolicyResource s)
-
 instance P.HasAlarms (AppautoscalingPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) where
     alarms =
         P.lens (_alarms :: AppautoscalingPolicyResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _alarms = a } :: AppautoscalingPolicyResource s)
-
-instance P.HasCooldown (AppautoscalingPolicyResource s) (TF.Attr s P.Integer) where
-    cooldown =
-        P.lens (_cooldown :: AppautoscalingPolicyResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _cooldown = a } :: AppautoscalingPolicyResource s)
-
-instance P.HasMetricAggregationType (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
-    metricAggregationType =
-        P.lens (_metricAggregationType :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _metricAggregationType = a } :: AppautoscalingPolicyResource s)
-
-instance P.HasMinAdjustmentMagnitude (AppautoscalingPolicyResource s) (TF.Attr s P.Integer) where
-    minAdjustmentMagnitude =
-        P.lens (_minAdjustmentMagnitude :: AppautoscalingPolicyResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _minAdjustmentMagnitude = a } :: AppautoscalingPolicyResource s)
 
 instance P.HasName (AppautoscalingPolicyResource s) (TF.Attr s P.Text) where
     name =
@@ -3822,11 +3651,6 @@ instance P.HasServiceNamespace (AppautoscalingPolicyResource s) (TF.Attr s P.Tex
     serviceNamespace =
         P.lens (_serviceNamespace :: AppautoscalingPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceNamespace = a } :: AppautoscalingPolicyResource s)
-
-instance P.HasStepAdjustment (AppautoscalingPolicyResource s) (TF.Attr s [TF.Attr s (StepAdjustment s)]) where
-    stepAdjustment =
-        P.lens (_stepAdjustment :: AppautoscalingPolicyResource s -> TF.Attr s [TF.Attr s (StepAdjustment s)])
-               (\s a -> s { _stepAdjustment = a } :: AppautoscalingPolicyResource s)
 
 instance P.HasStepScalingPolicyConfiguration (AppautoscalingPolicyResource s) (TF.Attr s [TF.Attr s (StepScalingPolicyConfiguration s)]) where
     stepScalingPolicyConfiguration =
@@ -4921,15 +4745,6 @@ data AutoscalingPolicyResource s = AutoscalingPolicyResource'
     , _minAdjustmentMagnitude      :: TF.Attr s P.Integer
     -- ^ @min_adjustment_magnitude@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'minAdjustmentStep'
-    , _minAdjustmentStep           :: TF.Attr s P.Integer
-    -- ^ @min_adjustment_step@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'minAdjustmentMagnitude'
     , _name                        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -4965,7 +4780,6 @@ autoscalingPolicyResource _autoscalingGroupName _name =
             , _cooldown = TF.Nil
             , _estimatedInstanceWarmup = TF.Nil
             , _minAdjustmentMagnitude = TF.Nil
-            , _minAdjustmentStep = TF.Nil
             , _name = _name
             , _policyType = TF.value "SimpleScaling"
             , _scalingAdjustment = TF.Nil
@@ -4980,7 +4794,6 @@ instance TF.IsObject (AutoscalingPolicyResource s) where
         , TF.assign "cooldown" <$> TF.attribute _cooldown
         , TF.assign "estimated_instance_warmup" <$> TF.attribute _estimatedInstanceWarmup
         , TF.assign "min_adjustment_magnitude" <$> TF.attribute _minAdjustmentMagnitude
-        , TF.assign "min_adjustment_step" <$> TF.attribute _minAdjustmentStep
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "policy_type" <$> TF.attribute _policyType
         , TF.assign "scaling_adjustment" <$> TF.attribute _scalingAdjustment
@@ -4990,17 +4803,7 @@ instance TF.IsObject (AutoscalingPolicyResource s) where
 
 instance TF.IsValid (AutoscalingPolicyResource s) where
     validator = TF.fieldsValidator (\AutoscalingPolicyResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_minAdjustmentMagnitude P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_minAdjustmentMagnitude",
-                            [ "_minAdjustmentStep"
-                            ])
-        , if (_minAdjustmentStep P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_minAdjustmentStep",
-                            [ "_minAdjustmentMagnitude"
-                            ])
-        , if (_scalingAdjustment P.== TF.Nil)
+        [ if (_scalingAdjustment P.== TF.Nil)
               then P.Nothing
               else P.Just ("_scalingAdjustment",
                             [ "_stepAdjustment"
@@ -5044,11 +4847,6 @@ instance P.HasMinAdjustmentMagnitude (AutoscalingPolicyResource s) (TF.Attr s P.
     minAdjustmentMagnitude =
         P.lens (_minAdjustmentMagnitude :: AutoscalingPolicyResource s -> TF.Attr s P.Integer)
                (\s a -> s { _minAdjustmentMagnitude = a } :: AutoscalingPolicyResource s)
-
-instance P.HasMinAdjustmentStep (AutoscalingPolicyResource s) (TF.Attr s P.Integer) where
-    minAdjustmentStep =
-        P.lens (_minAdjustmentStep :: AutoscalingPolicyResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _minAdjustmentStep = a } :: AutoscalingPolicyResource s)
 
 instance P.HasName (AutoscalingPolicyResource s) (TF.Attr s P.Text) where
     name =
@@ -5225,9 +5023,6 @@ instance P.HasType' (BatchComputeEnvironmentResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
-
-instance s ~ s' => P.HasComputedEccClusterArn (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
-    computedEccClusterArn x = TF.compute (TF.refKey x) "_computedEccClusterArn"
 
 instance s ~ s' => P.HasComputedEcsClusterArn (TF.Ref s' (BatchComputeEnvironmentResource s)) (TF.Attr s P.Text) where
     computedEcsClusterArn x = TF.compute (TF.refKey x) "_computedEcsClusterArn"
@@ -5728,12 +5523,6 @@ data CloudfrontDistributionResource s = CloudfrontDistributionResource'
     { _aliases              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @aliases@ - (Optional)
     --
-    , _cacheBehavior        :: TF.Attr s [TF.Attr s (CacheBehavior s)]
-    -- ^ @cache_behavior@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'orderedCacheBehavior'
     , _comment              :: TF.Attr s P.Text
     -- ^ @comment@ - (Optional)
     --
@@ -5761,9 +5550,6 @@ data CloudfrontDistributionResource s = CloudfrontDistributionResource'
     , _orderedCacheBehavior :: TF.Attr s [TF.Attr s (OrderedCacheBehavior s)]
     -- ^ @ordered_cache_behavior@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'cacheBehavior'
     , _origin               :: TF.Attr s [TF.Attr s (Origin s)]
     -- ^ @origin@ - (Required)
     --
@@ -5798,7 +5584,6 @@ cloudfrontDistributionResource _defaultCacheBehavior _enabled _origin _restricti
     TF.newResource "aws_cloudfront_distribution" TF.validator $
         CloudfrontDistributionResource'
             { _aliases = TF.Nil
-            , _cacheBehavior = TF.Nil
             , _comment = TF.Nil
             , _customErrorResponse = TF.Nil
             , _defaultCacheBehavior = _defaultCacheBehavior
@@ -5820,7 +5605,6 @@ cloudfrontDistributionResource _defaultCacheBehavior _enabled _origin _restricti
 instance TF.IsObject (CloudfrontDistributionResource s) where
     toObject CloudfrontDistributionResource'{..} = P.catMaybes
         [ TF.assign "aliases" <$> TF.attribute _aliases
-        , TF.assign "cache_behavior" <$> TF.attribute _cacheBehavior
         , TF.assign "comment" <$> TF.attribute _comment
         , TF.assign "custom_error_response" <$> TF.attribute _customErrorResponse
         , TF.assign "default_cache_behavior" <$> TF.attribute _defaultCacheBehavior
@@ -5840,22 +5624,7 @@ instance TF.IsObject (CloudfrontDistributionResource s) where
         ]
 
 instance TF.IsValid (CloudfrontDistributionResource s) where
-    validator = TF.fieldsValidator (\CloudfrontDistributionResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_cacheBehavior P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_cacheBehavior",
-                            [ "_orderedCacheBehavior"
-                            ])
-        , if (_orderedCacheBehavior P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_orderedCacheBehavior",
-                            [ "_cacheBehavior"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_cacheBehavior"
-                  (_cacheBehavior
-                      :: CloudfrontDistributionResource s -> TF.Attr s [TF.Attr s (CacheBehavior s)])
-                  TF.validator
+    validator = P.mempty
            P.<> TF.settingsValidator "_customErrorResponse"
                   (_customErrorResponse
                       :: CloudfrontDistributionResource s -> TF.Attr s [TF.Attr s (CustomErrorResponse s)])
@@ -5889,11 +5658,6 @@ instance P.HasAliases (CloudfrontDistributionResource s) (TF.Attr s [TF.Attr s P
     aliases =
         P.lens (_aliases :: CloudfrontDistributionResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _aliases = a } :: CloudfrontDistributionResource s)
-
-instance P.HasCacheBehavior (CloudfrontDistributionResource s) (TF.Attr s [TF.Attr s (CacheBehavior s)]) where
-    cacheBehavior =
-        P.lens (_cacheBehavior :: CloudfrontDistributionResource s -> TF.Attr s [TF.Attr s (CacheBehavior s)])
-               (\s a -> s { _cacheBehavior = a } :: CloudfrontDistributionResource s)
 
 instance P.HasComment (CloudfrontDistributionResource s) (TF.Attr s P.Text) where
     comment =

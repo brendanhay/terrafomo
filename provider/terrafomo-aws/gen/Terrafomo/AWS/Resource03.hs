@@ -2649,9 +2649,6 @@ instance s ~ s' => P.HasComputedEncryptedSecret (TF.Ref s' (IamAccessKeyResource
 instance s ~ s' => P.HasComputedKeyFingerprint (TF.Ref s' (IamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedKeyFingerprint x = TF.compute (TF.refKey x) "_computedKeyFingerprint"
 
-instance s ~ s' => P.HasComputedSecret (TF.Ref s' (IamAccessKeyResource s)) (TF.Attr s P.Text) where
-    computedSecret x = TF.compute (TF.refKey x) "_computedSecret"
-
 instance s ~ s' => P.HasComputedSesSmtpPassword (TF.Ref s' (IamAccessKeyResource s)) (TF.Attr s P.Text) where
     computedSesSmtpPassword x = TF.compute (TF.refKey x) "_computedSesSmtpPassword"
 
@@ -3008,9 +3005,6 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamInstanceProfileResource s)) 
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
     computedRole x = TF.compute (TF.refKey x) "_computedRole"
-
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRoles x = TF.compute (TF.refKey x) "_computedRoles"
 
 instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamInstanceProfileResource s)) (TF.Attr s P.Text) where
     computedUniqueId x = TF.compute (TF.refKey x) "_computedUniqueId"
@@ -4323,9 +4317,6 @@ instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (InstanceResource s)) (TF.Att
 
 instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (InstanceResource s)) (TF.Attr s [TF.Attr s (NetworkInterface s)]) where
     computedNetworkInterface x = TF.compute (TF.refKey x) "_computedNetworkInterface"
-
-instance s ~ s' => P.HasComputedNetworkInterfaceId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
-    computedNetworkInterfaceId x = TF.compute (TF.refKey x) "_computedNetworkInterfaceId"
 
 instance s ~ s' => P.HasComputedPasswordData (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedPasswordData x = TF.compute (TF.refKey x) "_computedPasswordData"

@@ -306,7 +306,6 @@ module Terrafomo.AWS.Lens
     , HasIngress (..)
     , HasJobAttempts (..)
     , HasElasticsearch (..)
-    , HasMinAdjustmentStep (..)
     , HasGetPasswordData (..)
     , HasSkipGetEc2Platforms (..)
     , HasDataTableName (..)
@@ -511,7 +510,6 @@ module Terrafomo.AWS.Lens
     , HasTargetString (..)
     , HasRequiresCompatibilities (..)
     , HasDeploymentMode (..)
-    , HasByteMatchTuple (..)
     , HasResponseModels (..)
     , HasPassengerVersion (..)
     , HasSkipCredentialsValidation (..)
@@ -711,7 +709,6 @@ module Terrafomo.AWS.Lens
     , HasSnapshotRetentionLimit (..)
     , HasEndpointId (..)
     , HasRestrictionType (..)
-    , HasRequestParametersInJson (..)
     , HasFunctionName (..)
     , HasVersionStage (..)
     , HasEgressOnlyGatewayId (..)
@@ -874,10 +871,8 @@ module Terrafomo.AWS.Lens
     , HasEbsEnabled (..)
     , HasExecutableUsers (..)
     , HasIpv6CidrBlock (..)
-    , HasCacheBehavior (..)
     , HasWaitForCapacityTimeout (..)
     , HasJvmVersion (..)
-    , HasResponseParametersInJson (..)
     , HasCachingEnabled (..)
     , HasLogGroupName (..)
     , HasTargetId (..)
@@ -1050,7 +1045,6 @@ module Terrafomo.AWS.Lens
     , HasField (..)
     , HasExpirationDate (..)
     , HasTerminateInstancesWithExpiration (..)
-    , HasStageKey (..)
     , HasSnapshotName (..)
     , HasCache (..)
     , HasReferenceName (..)
@@ -1472,7 +1466,6 @@ module Terrafomo.AWS.Lens
     , HasInstallUpdatesOnBoot (..)
     , HasTenancy (..)
     , HasRecords (..)
-    , HasPlacementStrategy (..)
     , HasEngineName (..)
     , HasVersion (..)
     , HasS3Import (..)
@@ -1826,7 +1819,6 @@ module Terrafomo.AWS.Lens
     , HasComputedHealthCheckType (..)
     , HasComputedReplicationSourceIdentifier (..)
     , HasComputedMasterPublicDns (..)
-    , HasComputedEccClusterArn (..)
     , HasComputedImageOwnerAlias (..)
     , HasComputedMatcher (..)
     , HasComputedSseKmsKeyId (..)
@@ -1891,7 +1883,6 @@ module Terrafomo.AWS.Lens
     , HasComputedCatalogId (..)
     , HasComputedCostFilters (..)
     , HasComputedAttachments (..)
-    , HasComputedReferenceName (..)
     , HasComputedEncryptedSecret (..)
     , HasComputedTargetArn (..)
     , HasComputedEncryptedPrivateKey (..)
@@ -2103,7 +2094,6 @@ module Terrafomo.AWS.Lens
     , HasComputedDbName (..)
     , HasComputedPrivateKey (..)
     , HasComputedPublic (..)
-    , HasComputedNumberOfConnections (..)
     , HasComputedInProgressValidationBatches (..)
     , HasComputedBody (..)
     , HasComputedIpAddress (..)
@@ -2148,7 +2138,6 @@ module Terrafomo.AWS.Lens
     , HasComputedVersioning (..)
     , HasComputedAwsAccountId (..)
     , HasComputedExecutionArn (..)
-    , HasComputedCurrent (..)
     , HasComputedPrivateIpAddress (..)
     , HasComputedLicenseModel (..)
     , HasComputedContentDisposition (..)
@@ -2288,7 +2277,6 @@ module Terrafomo.AWS.Lens
     , HasComputedLatestVersion (..)
     , HasComputedUploadDate (..)
     , HasComputedOpenShards (..)
-    , HasComputedAssumeRolePolicyDocument (..)
     , HasComputedInfrastructureClass (..)
     , HasComputedNameServers (..)
     , HasComputedDestinationPrefixListId (..)
@@ -2355,7 +2343,6 @@ module Terrafomo.AWS.Lens
     , HasComputedAllocationId (..)
     , HasComputedCiphertextBlob (..)
     , HasComputedReplicationSubnetGroupId (..)
-    , HasComputedRoles (..)
     , HasComputedValidTo (..)
     , HasComputedCreatedTime (..)
     , HasComputedDomain (..)
@@ -4273,12 +4260,6 @@ class HasElasticsearch a b | a -> b where
 instance HasElasticsearch a b => HasElasticsearch (TF.Schema l p a) b where
     elasticsearch = TF.configuration . elasticsearch
 
-class HasMinAdjustmentStep a b | a -> b where
-    minAdjustmentStep :: P.Lens' a b
-
-instance HasMinAdjustmentStep a b => HasMinAdjustmentStep (TF.Schema l p a) b where
-    minAdjustmentStep = TF.configuration . minAdjustmentStep
-
 class HasGetPasswordData a b | a -> b where
     getPasswordData :: P.Lens' a b
 
@@ -5503,12 +5484,6 @@ class HasDeploymentMode a b | a -> b where
 instance HasDeploymentMode a b => HasDeploymentMode (TF.Schema l p a) b where
     deploymentMode = TF.configuration . deploymentMode
 
-class HasByteMatchTuple a b | a -> b where
-    byteMatchTuple :: P.Lens' a b
-
-instance HasByteMatchTuple a b => HasByteMatchTuple (TF.Schema l p a) b where
-    byteMatchTuple = TF.configuration . byteMatchTuple
-
 class HasResponseModels a b | a -> b where
     responseModels :: P.Lens' a b
 
@@ -6703,12 +6678,6 @@ class HasRestrictionType a b | a -> b where
 instance HasRestrictionType a b => HasRestrictionType (TF.Schema l p a) b where
     restrictionType = TF.configuration . restrictionType
 
-class HasRequestParametersInJson a b | a -> b where
-    requestParametersInJson :: P.Lens' a b
-
-instance HasRequestParametersInJson a b => HasRequestParametersInJson (TF.Schema l p a) b where
-    requestParametersInJson = TF.configuration . requestParametersInJson
-
 class HasFunctionName a b | a -> b where
     functionName :: P.Lens' a b
 
@@ -7681,12 +7650,6 @@ class HasIpv6CidrBlock a b | a -> b where
 instance HasIpv6CidrBlock a b => HasIpv6CidrBlock (TF.Schema l p a) b where
     ipv6CidrBlock = TF.configuration . ipv6CidrBlock
 
-class HasCacheBehavior a b | a -> b where
-    cacheBehavior :: P.Lens' a b
-
-instance HasCacheBehavior a b => HasCacheBehavior (TF.Schema l p a) b where
-    cacheBehavior = TF.configuration . cacheBehavior
-
 class HasWaitForCapacityTimeout a b | a -> b where
     waitForCapacityTimeout :: P.Lens' a b
 
@@ -7698,12 +7661,6 @@ class HasJvmVersion a b | a -> b where
 
 instance HasJvmVersion a b => HasJvmVersion (TF.Schema l p a) b where
     jvmVersion = TF.configuration . jvmVersion
-
-class HasResponseParametersInJson a b | a -> b where
-    responseParametersInJson :: P.Lens' a b
-
-instance HasResponseParametersInJson a b => HasResponseParametersInJson (TF.Schema l p a) b where
-    responseParametersInJson = TF.configuration . responseParametersInJson
 
 class HasCachingEnabled a b | a -> b where
     cachingEnabled :: P.Lens' a b
@@ -8736,12 +8693,6 @@ class HasTerminateInstancesWithExpiration a b | a -> b where
 
 instance HasTerminateInstancesWithExpiration a b => HasTerminateInstancesWithExpiration (TF.Schema l p a) b where
     terminateInstancesWithExpiration = TF.configuration . terminateInstancesWithExpiration
-
-class HasStageKey a b | a -> b where
-    stageKey :: P.Lens' a b
-
-instance HasStageKey a b => HasStageKey (TF.Schema l p a) b where
-    stageKey = TF.configuration . stageKey
 
 class HasSnapshotName a b | a -> b where
     snapshotName :: P.Lens' a b
@@ -11269,12 +11220,6 @@ class HasRecords a b | a -> b where
 instance HasRecords a b => HasRecords (TF.Schema l p a) b where
     records = TF.configuration . records
 
-class HasPlacementStrategy a b | a -> b where
-    placementStrategy :: P.Lens' a b
-
-instance HasPlacementStrategy a b => HasPlacementStrategy (TF.Schema l p a) b where
-    placementStrategy = TF.configuration . placementStrategy
-
 class HasEngineName a b | a -> b where
     engineName :: P.Lens' a b
 
@@ -13099,9 +13044,6 @@ class HasComputedReplicationSourceIdentifier a b | a -> b where
 class HasComputedMasterPublicDns a b | a -> b where
     computedMasterPublicDns :: a -> b
 
-class HasComputedEccClusterArn a b | a -> b where
-    computedEccClusterArn :: a -> b
-
 class HasComputedImageOwnerAlias a b | a -> b where
     computedImageOwnerAlias :: a -> b
 
@@ -13293,9 +13235,6 @@ class HasComputedCostFilters a b | a -> b where
 
 class HasComputedAttachments a b | a -> b where
     computedAttachments :: a -> b
-
-class HasComputedReferenceName a b | a -> b where
-    computedReferenceName :: a -> b
 
 class HasComputedEncryptedSecret a b | a -> b where
     computedEncryptedSecret :: a -> b
@@ -13930,9 +13869,6 @@ class HasComputedPrivateKey a b | a -> b where
 class HasComputedPublic a b | a -> b where
     computedPublic :: a -> b
 
-class HasComputedNumberOfConnections a b | a -> b where
-    computedNumberOfConnections :: a -> b
-
 class HasComputedInProgressValidationBatches a b | a -> b where
     computedInProgressValidationBatches :: a -> b
 
@@ -14064,9 +14000,6 @@ class HasComputedAwsAccountId a b | a -> b where
 
 class HasComputedExecutionArn a b | a -> b where
     computedExecutionArn :: a -> b
-
-class HasComputedCurrent a b | a -> b where
-    computedCurrent :: a -> b
 
 class HasComputedPrivateIpAddress a b | a -> b where
     computedPrivateIpAddress :: a -> b
@@ -14485,9 +14418,6 @@ class HasComputedUploadDate a b | a -> b where
 class HasComputedOpenShards a b | a -> b where
     computedOpenShards :: a -> b
 
-class HasComputedAssumeRolePolicyDocument a b | a -> b where
-    computedAssumeRolePolicyDocument :: a -> b
-
 class HasComputedInfrastructureClass a b | a -> b where
     computedInfrastructureClass :: a -> b
 
@@ -14685,9 +14615,6 @@ class HasComputedCiphertextBlob a b | a -> b where
 
 class HasComputedReplicationSubnetGroupId a b | a -> b where
     computedReplicationSubnetGroupId :: a -> b
-
-class HasComputedRoles a b | a -> b where
-    computedRoles :: a -> b
 
 class HasComputedValidTo a b | a -> b where
     computedValidTo :: a -> b

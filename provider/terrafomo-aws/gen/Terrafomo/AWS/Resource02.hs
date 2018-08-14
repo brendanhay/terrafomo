@@ -4530,9 +4530,6 @@ instance P.HasTags (DxLagResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.T
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DxLagResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "_computedArn"
 
-instance s ~ s' => P.HasComputedNumberOfConnections (TF.Ref s' (DxLagResource s)) (TF.Attr s P.Integer) where
-    computedNumberOfConnections x = TF.compute (TF.refKey x) "_computedNumberOfConnections"
-
 -- | @aws_dx_private_virtual_interface@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_dx_private_virtual_interface terraform documentation>
@@ -5394,18 +5391,9 @@ data EcsServiceResource s = EcsServiceResource'
     , _orderedPlacementStrategy :: TF.Attr s [TF.Attr s (OrderedPlacementStrategy s)]
     -- ^ @ordered_placement_strategy@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'placementStrategy'
     , _placementConstraints :: TF.Attr s [TF.Attr s (PlacementConstraints s)]
     -- ^ @placement_constraints@ - (Optional)
     --
-    , _placementStrategy :: TF.Attr s [TF.Attr s (PlacementStrategy s)]
-    -- ^ @placement_strategy@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'orderedPlacementStrategy'
     , _schedulingStrategy :: TF.Attr s P.Text
     -- ^ @scheduling_strategy@ - (Optional)
     --
@@ -5434,7 +5422,6 @@ ecsServiceResource _name _taskDefinition =
             , _networkConfiguration = TF.Nil
             , _orderedPlacementStrategy = TF.Nil
             , _placementConstraints = TF.Nil
-            , _placementStrategy = TF.Nil
             , _schedulingStrategy = TF.value "REPLICA"
             , _serviceRegistries = TF.Nil
             , _taskDefinition = _taskDefinition
@@ -5452,25 +5439,13 @@ instance TF.IsObject (EcsServiceResource s) where
         , TF.assign "network_configuration" <$> TF.attribute _networkConfiguration
         , TF.assign "ordered_placement_strategy" <$> TF.attribute _orderedPlacementStrategy
         , TF.assign "placement_constraints" <$> TF.attribute _placementConstraints
-        , TF.assign "placement_strategy" <$> TF.attribute _placementStrategy
         , TF.assign "scheduling_strategy" <$> TF.attribute _schedulingStrategy
         , TF.assign "service_registries" <$> TF.attribute _serviceRegistries
         , TF.assign "task_definition" <$> TF.attribute _taskDefinition
         ]
 
 instance TF.IsValid (EcsServiceResource s) where
-    validator = TF.fieldsValidator (\EcsServiceResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_orderedPlacementStrategy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_orderedPlacementStrategy",
-                            [ "_placementStrategy"
-                            ])
-        , if (_placementStrategy P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_placementStrategy",
-                            [ "_orderedPlacementStrategy"
-                            ])
-        ])
+    validator = P.mempty
            P.<> TF.settingsValidator "_loadBalancer"
                   (_loadBalancer
                       :: EcsServiceResource s -> TF.Attr s (LoadBalancer s))
@@ -5486,10 +5461,6 @@ instance TF.IsValid (EcsServiceResource s) where
            P.<> TF.settingsValidator "_placementConstraints"
                   (_placementConstraints
                       :: EcsServiceResource s -> TF.Attr s [TF.Attr s (PlacementConstraints s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_placementStrategy"
-                  (_placementStrategy
-                      :: EcsServiceResource s -> TF.Attr s [TF.Attr s (PlacementStrategy s)])
                   TF.validator
            P.<> TF.settingsValidator "_serviceRegistries"
                   (_serviceRegistries
@@ -5545,11 +5516,6 @@ instance P.HasPlacementConstraints (EcsServiceResource s) (TF.Attr s [TF.Attr s 
     placementConstraints =
         P.lens (_placementConstraints :: EcsServiceResource s -> TF.Attr s [TF.Attr s (PlacementConstraints s)])
                (\s a -> s { _placementConstraints = a } :: EcsServiceResource s)
-
-instance P.HasPlacementStrategy (EcsServiceResource s) (TF.Attr s [TF.Attr s (PlacementStrategy s)]) where
-    placementStrategy =
-        P.lens (_placementStrategy :: EcsServiceResource s -> TF.Attr s [TF.Attr s (PlacementStrategy s)])
-               (\s a -> s { _placementStrategy = a } :: EcsServiceResource s)
 
 instance P.HasSchedulingStrategy (EcsServiceResource s) (TF.Attr s P.Text) where
     schedulingStrategy =
@@ -5767,9 +5733,6 @@ instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (EfsFileSystemResource s)) (
 
 instance s ~ s' => P.HasComputedPerformanceMode (TF.Ref s' (EfsFileSystemResource s)) (TF.Attr s P.Text) where
     computedPerformanceMode x = TF.compute (TF.refKey x) "_computedPerformanceMode"
-
-instance s ~ s' => P.HasComputedReferenceName (TF.Ref s' (EfsFileSystemResource s)) (TF.Attr s P.Text) where
-    computedReferenceName x = TF.compute (TF.refKey x) "_computedReferenceName"
 
 -- | @aws_efs_mount_target@ Resource.
 --
@@ -6417,13 +6380,7 @@ instance s ~ s' => P.HasComputedVersionLabel (TF.Ref s' (ElasticBeanstalkEnviron
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elasticache_cluster terraform documentation>
 -- for more information.
 data ElasticacheClusterResource s = ElasticacheClusterResource'
-    { _availabilityZones :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @availability_zones@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'preferredAvailabilityZones'
-    , _clusterId :: TF.Attr s P.Text
+    { _clusterId :: TF.Attr s P.Text
     -- ^ @cluster_id@ - (Required)
     --
     , _notificationTopicArn :: TF.Attr s P.Text
@@ -6435,9 +6392,6 @@ data ElasticacheClusterResource s = ElasticacheClusterResource'
     , _preferredAvailabilityZones :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @preferred_availability_zones@ - (Optional)
     --
-    -- Conflicts with:
-    --
-    -- * 'availabilityZones'
     , _snapshotArns :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @snapshot_arns@ - (Optional)
     --
@@ -6458,8 +6412,7 @@ elasticacheClusterResource
 elasticacheClusterResource _clusterId =
     TF.newResource "aws_elasticache_cluster" TF.validator $
         ElasticacheClusterResource'
-            { _availabilityZones = TF.Nil
-            , _clusterId = _clusterId
+            { _clusterId = _clusterId
             , _notificationTopicArn = TF.Nil
             , _port = TF.Nil
             , _preferredAvailabilityZones = TF.Nil
@@ -6471,8 +6424,7 @@ elasticacheClusterResource _clusterId =
 
 instance TF.IsObject (ElasticacheClusterResource s) where
     toObject ElasticacheClusterResource'{..} = P.catMaybes
-        [ TF.assign "availability_zones" <$> TF.attribute _availabilityZones
-        , TF.assign "cluster_id" <$> TF.attribute _clusterId
+        [ TF.assign "cluster_id" <$> TF.attribute _clusterId
         , TF.assign "notification_topic_arn" <$> TF.attribute _notificationTopicArn
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "preferred_availability_zones" <$> TF.attribute _preferredAvailabilityZones
@@ -6483,23 +6435,7 @@ instance TF.IsObject (ElasticacheClusterResource s) where
         ]
 
 instance TF.IsValid (ElasticacheClusterResource s) where
-    validator = TF.fieldsValidator (\ElasticacheClusterResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_availabilityZones P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_availabilityZones",
-                            [ "_preferredAvailabilityZones"
-                            ])
-        , if (_preferredAvailabilityZones P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_preferredAvailabilityZones",
-                            [ "_availabilityZones"
-                            ])
-        ])
-
-instance P.HasAvailabilityZones (ElasticacheClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    availabilityZones =
-        P.lens (_availabilityZones :: ElasticacheClusterResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _availabilityZones = a } :: ElasticacheClusterResource s)
+    validator = P.mempty
 
 instance P.HasClusterId (ElasticacheClusterResource s) (TF.Attr s P.Text) where
     clusterId =

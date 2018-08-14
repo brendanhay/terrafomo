@@ -534,9 +534,6 @@ instance TF.IsObject (RegionData s) where
 instance TF.IsValid (RegionData s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionData s)) (TF.Attr s P.Bool) where
-    computedCurrent x = TF.compute (TF.refKey x) "_computedCurrent"
-
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
 

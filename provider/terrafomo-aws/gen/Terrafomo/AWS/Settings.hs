@@ -746,10 +746,6 @@ module Terrafomo.AWS.Settings
     , OnPremisesInstanceTagFilter (..)
     , newOnPremisesInstanceTagFilter
 
-    -- ** stage_key
-    , StageKey (..)
-    , newStageKey
-
     -- ** custom_cookbooks_source
     , CustomCookbooksSource (..)
     , newCustomCookbooksSource
@@ -861,10 +857,6 @@ module Terrafomo.AWS.Settings
     -- ** cookies
     , Cookies (..)
     , newCookies
-
-    -- ** cache_behavior
-    , CacheBehavior (..)
-    , newCacheBehavior
 
     -- ** network_interfaces
     , NetworkInterfaces (..)
@@ -993,10 +985,6 @@ module Terrafomo.AWS.Settings
     -- ** kerberos_attributes
     , KerberosAttributes (..)
     , newKerberosAttributes
-
-    -- ** placement_strategy
-    , PlacementStrategy (..)
-    , newPlacementStrategy
 
     -- ** deserializer
     , Deserializer (..)
@@ -1417,10 +1405,6 @@ module Terrafomo.AWS.Settings
     -- ** server_process
     , ServerProcess (..)
     , newServerProcess
-
-    -- ** byte_match_tuple
-    , ByteMatchTuple (..)
-    , newByteMatchTuple
 
     ) where
 
@@ -11283,47 +11267,6 @@ instance P.HasValue (OnPremisesInstanceTagFilter s) (TF.Attr s P.Text) where
         P.lens (_value :: OnPremisesInstanceTagFilter s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: OnPremisesInstanceTagFilter s)
 
--- | @stage_key@ nested settings.
-data StageKey s = StageKey'
-    { _restApiId :: TF.Attr s P.Text
-    -- ^ @rest_api_id@ - (Required)
-    --
-    , _stageName :: TF.Attr s P.Text
-    -- ^ @stage_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newStageKey
-    :: TF.Attr s P.Text -- ^ @rest_api_id@ - 'P.restApiId'
-    -> TF.Attr s P.Text -- ^ @stage_name@ - 'P.stageName'
-    -> StageKey s
-newStageKey _restApiId _stageName =
-    StageKey'
-        { _restApiId = _restApiId
-        , _stageName = _stageName
-        }
-
-instance P.Hashable  (StageKey s)
-instance TF.IsValue  (StageKey s)
-instance TF.IsObject (StageKey s) where
-    toObject StageKey'{..} = P.catMaybes
-        [ TF.assign "rest_api_id" <$> TF.attribute _restApiId
-        , TF.assign "stage_name" <$> TF.attribute _stageName
-        ]
-
-instance TF.IsValid (StageKey s) where
-    validator = P.mempty
-
-instance P.HasRestApiId (StageKey s) (TF.Attr s P.Text) where
-    restApiId =
-        P.lens (_restApiId :: StageKey s -> TF.Attr s P.Text)
-               (\s a -> s { _restApiId = a } :: StageKey s)
-
-instance P.HasStageName (StageKey s) (TF.Attr s P.Text) where
-    stageName =
-        P.lens (_stageName :: StageKey s -> TF.Attr s P.Text)
-               (\s a -> s { _stageName = a } :: StageKey s)
-
 -- | @custom_cookbooks_source@ nested settings.
 data CustomCookbooksSource s = CustomCookbooksSource'
     { _password :: TF.Attr s P.Text
@@ -12812,179 +12755,6 @@ instance P.HasWhitelistedNames (Cookies s) (TF.Attr s [TF.Attr s P.Text]) where
     whitelistedNames =
         P.lens (_whitelistedNames :: Cookies s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _whitelistedNames = a } :: Cookies s)
-
--- | @cache_behavior@ nested settings.
-data CacheBehavior s = CacheBehavior'
-    { _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @allowed_methods@ - (Required)
-    --
-    , _cachedMethods :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @cached_methods@ - (Required)
-    --
-    , _compress :: TF.Attr s P.Bool
-    -- ^ @compress@ - (Optional)
-    --
-    , _defaultTtl :: TF.Attr s P.Integer
-    -- ^ @default_ttl@ - (Optional)
-    --
-    , _fieldLevelEncryptionId :: TF.Attr s P.Text
-    -- ^ @field_level_encryption_id@ - (Optional)
-    --
-    , _forwardedValues :: TF.Attr s (ForwardedValues s)
-    -- ^ @forwarded_values@ - (Required)
-    --
-    , _lambdaFunctionAssociation :: TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)]
-    -- ^ @lambda_function_association@ - (Optional)
-    --
-    , _maxTtl :: TF.Attr s P.Integer
-    -- ^ @max_ttl@ - (Optional)
-    --
-    , _minTtl :: TF.Attr s P.Integer
-    -- ^ @min_ttl@ - (Optional)
-    --
-    , _pathPattern :: TF.Attr s P.Text
-    -- ^ @path_pattern@ - (Required)
-    --
-    , _smoothStreaming :: TF.Attr s P.Bool
-    -- ^ @smooth_streaming@ - (Optional)
-    --
-    , _targetOriginId :: TF.Attr s P.Text
-    -- ^ @target_origin_id@ - (Required)
-    --
-    , _trustedSigners :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @trusted_signers@ - (Optional)
-    --
-    , _viewerProtocolPolicy :: TF.Attr s P.Text
-    -- ^ @viewer_protocol_policy@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newCacheBehavior
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @cached_methods@ - 'P.cachedMethods'
-    -> TF.Attr s (ForwardedValues s) -- ^ @forwarded_values@ - 'P.forwardedValues'
-    -> TF.Attr s P.Text -- ^ @path_pattern@ - 'P.pathPattern'
-    -> TF.Attr s P.Text -- ^ @target_origin_id@ - 'P.targetOriginId'
-    -> TF.Attr s P.Text -- ^ @viewer_protocol_policy@ - 'P.viewerProtocolPolicy'
-    -> CacheBehavior s
-newCacheBehavior _allowedMethods _cachedMethods _forwardedValues _pathPattern _targetOriginId _viewerProtocolPolicy =
-    CacheBehavior'
-        { _allowedMethods = _allowedMethods
-        , _cachedMethods = _cachedMethods
-        , _compress = TF.value P.False
-        , _defaultTtl = TF.value 86400
-        , _fieldLevelEncryptionId = TF.Nil
-        , _forwardedValues = _forwardedValues
-        , _lambdaFunctionAssociation = TF.Nil
-        , _maxTtl = TF.value 31536000
-        , _minTtl = TF.value 0
-        , _pathPattern = _pathPattern
-        , _smoothStreaming = TF.Nil
-        , _targetOriginId = _targetOriginId
-        , _trustedSigners = TF.Nil
-        , _viewerProtocolPolicy = _viewerProtocolPolicy
-        }
-
-instance P.Hashable  (CacheBehavior s)
-instance TF.IsValue  (CacheBehavior s)
-instance TF.IsObject (CacheBehavior s) where
-    toObject CacheBehavior'{..} = P.catMaybes
-        [ TF.assign "allowed_methods" <$> TF.attribute _allowedMethods
-        , TF.assign "cached_methods" <$> TF.attribute _cachedMethods
-        , TF.assign "compress" <$> TF.attribute _compress
-        , TF.assign "default_ttl" <$> TF.attribute _defaultTtl
-        , TF.assign "field_level_encryption_id" <$> TF.attribute _fieldLevelEncryptionId
-        , TF.assign "forwarded_values" <$> TF.attribute _forwardedValues
-        , TF.assign "lambda_function_association" <$> TF.attribute _lambdaFunctionAssociation
-        , TF.assign "max_ttl" <$> TF.attribute _maxTtl
-        , TF.assign "min_ttl" <$> TF.attribute _minTtl
-        , TF.assign "path_pattern" <$> TF.attribute _pathPattern
-        , TF.assign "smooth_streaming" <$> TF.attribute _smoothStreaming
-        , TF.assign "target_origin_id" <$> TF.attribute _targetOriginId
-        , TF.assign "trusted_signers" <$> TF.attribute _trustedSigners
-        , TF.assign "viewer_protocol_policy" <$> TF.attribute _viewerProtocolPolicy
-        ]
-
-instance TF.IsValid (CacheBehavior s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_forwardedValues"
-                  (_forwardedValues
-                      :: CacheBehavior s -> TF.Attr s (ForwardedValues s))
-                  TF.validator
-           P.<> TF.settingsValidator "_lambdaFunctionAssociation"
-                  (_lambdaFunctionAssociation
-                      :: CacheBehavior s -> TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)])
-                  TF.validator
-
-instance P.HasAllowedMethods (CacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
-    allowedMethods =
-        P.lens (_allowedMethods :: CacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _allowedMethods = a } :: CacheBehavior s)
-
-instance P.HasCachedMethods (CacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
-    cachedMethods =
-        P.lens (_cachedMethods :: CacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _cachedMethods = a } :: CacheBehavior s)
-
-instance P.HasCompress (CacheBehavior s) (TF.Attr s P.Bool) where
-    compress =
-        P.lens (_compress :: CacheBehavior s -> TF.Attr s P.Bool)
-               (\s a -> s { _compress = a } :: CacheBehavior s)
-
-instance P.HasDefaultTtl (CacheBehavior s) (TF.Attr s P.Integer) where
-    defaultTtl =
-        P.lens (_defaultTtl :: CacheBehavior s -> TF.Attr s P.Integer)
-               (\s a -> s { _defaultTtl = a } :: CacheBehavior s)
-
-instance P.HasFieldLevelEncryptionId (CacheBehavior s) (TF.Attr s P.Text) where
-    fieldLevelEncryptionId =
-        P.lens (_fieldLevelEncryptionId :: CacheBehavior s -> TF.Attr s P.Text)
-               (\s a -> s { _fieldLevelEncryptionId = a } :: CacheBehavior s)
-
-instance P.HasForwardedValues (CacheBehavior s) (TF.Attr s (ForwardedValues s)) where
-    forwardedValues =
-        P.lens (_forwardedValues :: CacheBehavior s -> TF.Attr s (ForwardedValues s))
-               (\s a -> s { _forwardedValues = a } :: CacheBehavior s)
-
-instance P.HasLambdaFunctionAssociation (CacheBehavior s) (TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)]) where
-    lambdaFunctionAssociation =
-        P.lens (_lambdaFunctionAssociation :: CacheBehavior s -> TF.Attr s [TF.Attr s (LambdaFunctionAssociation s)])
-               (\s a -> s { _lambdaFunctionAssociation = a } :: CacheBehavior s)
-
-instance P.HasMaxTtl (CacheBehavior s) (TF.Attr s P.Integer) where
-    maxTtl =
-        P.lens (_maxTtl :: CacheBehavior s -> TF.Attr s P.Integer)
-               (\s a -> s { _maxTtl = a } :: CacheBehavior s)
-
-instance P.HasMinTtl (CacheBehavior s) (TF.Attr s P.Integer) where
-    minTtl =
-        P.lens (_minTtl :: CacheBehavior s -> TF.Attr s P.Integer)
-               (\s a -> s { _minTtl = a } :: CacheBehavior s)
-
-instance P.HasPathPattern (CacheBehavior s) (TF.Attr s P.Text) where
-    pathPattern =
-        P.lens (_pathPattern :: CacheBehavior s -> TF.Attr s P.Text)
-               (\s a -> s { _pathPattern = a } :: CacheBehavior s)
-
-instance P.HasSmoothStreaming (CacheBehavior s) (TF.Attr s P.Bool) where
-    smoothStreaming =
-        P.lens (_smoothStreaming :: CacheBehavior s -> TF.Attr s P.Bool)
-               (\s a -> s { _smoothStreaming = a } :: CacheBehavior s)
-
-instance P.HasTargetOriginId (CacheBehavior s) (TF.Attr s P.Text) where
-    targetOriginId =
-        P.lens (_targetOriginId :: CacheBehavior s -> TF.Attr s P.Text)
-               (\s a -> s { _targetOriginId = a } :: CacheBehavior s)
-
-instance P.HasTrustedSigners (CacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
-    trustedSigners =
-        P.lens (_trustedSigners :: CacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _trustedSigners = a } :: CacheBehavior s)
-
-instance P.HasViewerProtocolPolicy (CacheBehavior s) (TF.Attr s P.Text) where
-    viewerProtocolPolicy =
-        P.lens (_viewerProtocolPolicy :: CacheBehavior s -> TF.Attr s P.Text)
-               (\s a -> s { _viewerProtocolPolicy = a } :: CacheBehavior s)
 
 -- | @network_interfaces@ nested settings.
 data NetworkInterfaces s = NetworkInterfaces'
@@ -14666,46 +14436,6 @@ instance P.HasRealm (KerberosAttributes s) (TF.Attr s P.Text) where
     realm =
         P.lens (_realm :: KerberosAttributes s -> TF.Attr s P.Text)
                (\s a -> s { _realm = a } :: KerberosAttributes s)
-
--- | @placement_strategy@ nested settings.
-data PlacementStrategy s = PlacementStrategy'
-    { _field :: TF.Attr s P.Text
-    -- ^ @field@ - (Optional)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newPlacementStrategy
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> PlacementStrategy s
-newPlacementStrategy _type' =
-    PlacementStrategy'
-        { _field = TF.Nil
-        , _type' = _type'
-        }
-
-instance P.Hashable  (PlacementStrategy s)
-instance TF.IsValue  (PlacementStrategy s)
-instance TF.IsObject (PlacementStrategy s) where
-    toObject PlacementStrategy'{..} = P.catMaybes
-        [ TF.assign "field" <$> TF.attribute _field
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (PlacementStrategy s) where
-    validator = P.mempty
-
-instance P.HasField (PlacementStrategy s) (TF.Attr s P.Text) where
-    field =
-        P.lens (_field :: PlacementStrategy s -> TF.Attr s P.Text)
-               (\s a -> s { _field = a } :: PlacementStrategy s)
-
-instance P.HasType' (PlacementStrategy s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: PlacementStrategy s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: PlacementStrategy s)
 
 -- | @deserializer@ nested settings.
 data Deserializer s = Deserializer'
@@ -20494,69 +20224,3 @@ instance P.HasParameters (ServerProcess s) (TF.Attr s P.Text) where
     parameters =
         P.lens (_parameters :: ServerProcess s -> TF.Attr s P.Text)
                (\s a -> s { _parameters = a } :: ServerProcess s)
-
--- | @byte_match_tuple@ nested settings.
-data ByteMatchTuple s = ByteMatchTuple'
-    { _fieldToMatch         :: TF.Attr s (FieldToMatch s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _positionalConstraint :: TF.Attr s P.Text
-    -- ^ @positional_constraint@ - (Required)
-    --
-    , _targetString         :: TF.Attr s P.Text
-    -- ^ @target_string@ - (Optional)
-    --
-    , _textTransformation   :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newByteMatchTuple
-    :: TF.Attr s (FieldToMatch s) -- ^ @field_to_match@ - 'P.fieldToMatch'
-    -> TF.Attr s P.Text -- ^ @positional_constraint@ - 'P.positionalConstraint'
-    -> TF.Attr s P.Text -- ^ @text_transformation@ - 'P.textTransformation'
-    -> ByteMatchTuple s
-newByteMatchTuple _fieldToMatch _positionalConstraint _textTransformation =
-    ByteMatchTuple'
-        { _fieldToMatch = _fieldToMatch
-        , _positionalConstraint = _positionalConstraint
-        , _targetString = TF.Nil
-        , _textTransformation = _textTransformation
-        }
-
-instance P.Hashable  (ByteMatchTuple s)
-instance TF.IsValue  (ByteMatchTuple s)
-instance TF.IsObject (ByteMatchTuple s) where
-    toObject ByteMatchTuple'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "positional_constraint" <$> TF.attribute _positionalConstraint
-        , TF.assign "target_string" <$> TF.attribute _targetString
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (ByteMatchTuple s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: ByteMatchTuple s -> TF.Attr s (FieldToMatch s))
-                  TF.validator
-
-instance P.HasFieldToMatch (ByteMatchTuple s) (TF.Attr s (FieldToMatch s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: ByteMatchTuple s -> TF.Attr s (FieldToMatch s))
-               (\s a -> s { _fieldToMatch = a } :: ByteMatchTuple s)
-
-instance P.HasPositionalConstraint (ByteMatchTuple s) (TF.Attr s P.Text) where
-    positionalConstraint =
-        P.lens (_positionalConstraint :: ByteMatchTuple s -> TF.Attr s P.Text)
-               (\s a -> s { _positionalConstraint = a } :: ByteMatchTuple s)
-
-instance P.HasTargetString (ByteMatchTuple s) (TF.Attr s P.Text) where
-    targetString =
-        P.lens (_targetString :: ByteMatchTuple s -> TF.Attr s P.Text)
-               (\s a -> s { _targetString = a } :: ByteMatchTuple s)
-
-instance P.HasTextTransformation (ByteMatchTuple s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: ByteMatchTuple s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: ByteMatchTuple s)
