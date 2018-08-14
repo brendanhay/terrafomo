@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator              as TF
 
 -- | The @CenturyLinkCloud@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/CenturyLinkCloud/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/clc/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _account  :: P.Maybe P.Text

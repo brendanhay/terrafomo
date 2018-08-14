@@ -67,7 +67,7 @@ import qualified Terrafomo.Validator                 as TF
 
 -- | @clc_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/CenturyLinkCloud/clc_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/clc/r/group.html terraform documentation>
 -- for more information.
 data GroupResource s = GroupResource'
     { _customFields :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
@@ -140,11 +140,11 @@ instance P.HasParent (GroupResource s) (TF.Attr s P.Text) where
                (\s a -> s { _parent = a } :: GroupResource s)
 
 instance s ~ s' => P.HasComputedParentGroupId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedParentGroupId x = TF.compute (TF.refKey x) "_computedParentGroupId"
+    computedParentGroupId x = TF.compute (TF.refKey x) "parent_group_id"
 
 -- | @clc_load_balancer@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/CenturyLinkCloud/clc_load_balancer terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/clc/r/load_balancer.html terraform documentation>
 -- for more information.
 data LoadBalancerResource s = LoadBalancerResource'
     { _dataCenter  :: TF.Attr s P.Text
@@ -207,11 +207,11 @@ instance P.HasStatus (LoadBalancerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _status = a } :: LoadBalancerResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 -- | @clc_load_balancer_pool@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/CenturyLinkCloud/clc_load_balancer_pool terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/clc/r/load_balancer_pool.html terraform documentation>
 -- for more information.
 data LoadBalancerPoolResource s = LoadBalancerPoolResource'
     { _dataCenter :: TF.Attr s P.Text
@@ -296,14 +296,14 @@ instance P.HasPort (LoadBalancerPoolResource s) (TF.Attr s P.Integer) where
 
 -- | @clc_public_ip@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/CenturyLinkCloud/clc_public_ip terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/clc/r/public_ip.html terraform documentation>
 -- for more information.
 data PublicIpResource s = PublicIpResource'
     { _ports :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
     -- ^ @ports@ - (Required)
     --
     , _serverId :: TF.Attr s P.Text
-    -- ^ @server_id@ - (Required)
+    -- ^ @server_id@ - (Required, Forces New)
     --
     , _sourceRestrictions :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
     -- ^ @source_restrictions@ - (Optional)
@@ -348,11 +348,11 @@ instance P.HasSourceRestrictions (PublicIpResource s) (TF.Attr s [TF.Attr s (P.H
                (\s a -> s { _sourceRestrictions = a } :: PublicIpResource s)
 
 instance s ~ s' => P.HasComputedInternalIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedInternalIpAddress x = TF.compute (TF.refKey x) "_computedInternalIpAddress"
+    computedInternalIpAddress x = TF.compute (TF.refKey x) "internal_ip_address"
 
 -- | @clc_server@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/CenturyLinkCloud/clc_server terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/clc/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
     { _aaPolicyId :: TF.Attr s P.Text
@@ -362,7 +362,7 @@ data ServerResource s = ServerResource'
     -- ^ @additional_disks@ - (Optional)
     --
     , _configurationId :: TF.Attr s P.Text
-    -- ^ @configuration_id@ - (Optional)
+    -- ^ @configuration_id@ - (Optional, Forces New)
     --
     , _cpu :: TF.Attr s P.Integer
     -- ^ @cpu@ - (Required)
@@ -389,19 +389,19 @@ data ServerResource s = ServerResource'
     -- ^ @network_id@ - (Optional)
     --
     , _osType :: TF.Attr s P.Text
-    -- ^ @os_type@ - (Optional)
+    -- ^ @os_type@ - (Optional, Forces New)
     --
     , _packages :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))]
     -- ^ @packages@ - (Optional)
     --
     , _sourceServerId :: TF.Attr s P.Text
-    -- ^ @source_server_id@ - (Required)
+    -- ^ @source_server_id@ - (Required, Forces New)
     --
     , _storageType :: TF.Attr s P.Text
     -- ^ @storage_type@ - (Optional)
     --
     , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
+    -- ^ @type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -537,22 +537,22 @@ instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedCreatedDate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedCreatedDate x = TF.compute (TF.refKey x) "_computedCreatedDate"
+    computedCreatedDate x = TF.compute (TF.refKey x) "created_date"
 
 instance s ~ s' => P.HasComputedModifiedDate (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedModifiedDate x = TF.compute (TF.refKey x) "_computedModifiedDate"
+    computedModifiedDate x = TF.compute (TF.refKey x) "modified_date"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "_computedPassword"
+    computedPassword x = TF.compute (TF.refKey x) "password"
 
 instance s ~ s' => P.HasComputedPowerState (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPowerState x = TF.compute (TF.refKey x) "_computedPowerState"
+    computedPowerState x = TF.compute (TF.refKey x) "power_state"
 
 instance s ~ s' => P.HasComputedPrivateIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrivateIpAddress x = TF.compute (TF.refKey x) "_computedPrivateIpAddress"
+    computedPrivateIpAddress x = TF.compute (TF.refKey x) "private_ip_address"
 
 instance s ~ s' => P.HasComputedPublicIpAddress (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPublicIpAddress x = TF.compute (TF.refKey x) "_computedPublicIpAddress"
+    computedPublicIpAddress x = TF.compute (TF.refKey x) "public_ip_address"
