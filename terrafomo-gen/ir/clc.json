@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/clc/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -89,6 +90,7 @@
                     "original": "parent"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/clc/r/group.html",
             "name": "GroupResource",
             "threaded": true,
             "attributes": [
@@ -234,6 +236,7 @@
                     "original": "status"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/clc/r/load_balancer.html",
             "name": "LoadBalancerResource",
             "threaded": true,
             "attributes": [
@@ -411,6 +414,7 @@
                     "original": "port"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/clc/r/load_balancer_pool.html",
             "name": "LoadBalancerPoolResource",
             "threaded": true,
             "attributes": [],
@@ -539,6 +543,7 @@
                     "original": "source_restrictions"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/clc/r/public_ip.html",
             "name": "PublicIpResource",
             "threaded": true,
             "attributes": [
@@ -860,6 +865,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/clc/r/server.html",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
