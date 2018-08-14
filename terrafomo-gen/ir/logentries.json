@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/logentries/index.html",
     "dataSources": [
         {
             "con": {
@@ -40,6 +41,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/logentries/d/logset.html",
             "name": "LogsetData",
             "threaded": true,
             "attributes": [],
@@ -170,6 +172,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/logentries/r/log.html",
             "name": "LogResource",
             "threaded": true,
             "attributes": [
@@ -267,6 +270,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/logentries/r/logset.html",
             "name": "LogsetResource",
             "threaded": true,
             "attributes": [],
