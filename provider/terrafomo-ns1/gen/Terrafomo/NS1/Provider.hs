@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator as TF
 
 -- | The @NS1@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/ns1/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apikey    :: P.Maybe P.Text

@@ -83,7 +83,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @ns1_apikey@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_apikey terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/apikey.html terraform documentation>
 -- for more information.
 data ApikeyResource s = ApikeyResource'
     { _accountManageAccountSettings :: TF.Attr s P.Bool
@@ -314,14 +314,14 @@ instance P.HasTeams (ApikeyResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _teams = a } :: ApikeyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (ApikeyResource s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "_computedKey"
+    computedKey x = TF.compute (TF.refKey x) "key"
 
 -- | @ns1_datafeed@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_datafeed terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/datafeed.html terraform documentation>
 -- for more information.
 data DatafeedResource s = DatafeedResource'
     { _config   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -331,7 +331,7 @@ data DatafeedResource s = DatafeedResource'
     -- ^ @name@ - (Required)
     --
     , _sourceId :: TF.Attr s P.Text
-    -- ^ @source_id@ - (Required)
+    -- ^ @source_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -373,11 +373,11 @@ instance P.HasSourceId (DatafeedResource s) (TF.Attr s P.Text) where
                (\s a -> s { _sourceId = a } :: DatafeedResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatafeedResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ns1_datasource@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_datasource terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/datasource.html terraform documentation>
 -- for more information.
 data DatasourceResource s = DatasourceResource'
     { _config     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
@@ -387,7 +387,7 @@ data DatasourceResource s = DatasourceResource'
     -- ^ @name@ - (Required)
     --
     , _sourcetype :: TF.Attr s P.Text
-    -- ^ @sourcetype@ - (Required)
+    -- ^ @sourcetype@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -429,11 +429,11 @@ instance P.HasSourcetype (DatasourceResource s) (TF.Attr s P.Text) where
                (\s a -> s { _sourcetype = a } :: DatasourceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatasourceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ns1_monitoringjob@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_monitoringjob terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/monitoringjob.html terraform documentation>
 -- for more information.
 data MonitoringjobResource s = MonitoringjobResource'
     { _active         :: TF.Attr s P.Bool
@@ -446,7 +446,7 @@ data MonitoringjobResource s = MonitoringjobResource'
     -- ^ @frequency@ - (Required)
     --
     , _jobType        :: TF.Attr s P.Text
-    -- ^ @job_type@ - (Required)
+    -- ^ @job_type@ - (Required, Forces New)
     --
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -478,7 +478,7 @@ data MonitoringjobResource s = MonitoringjobResource'
     , _regions        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @regions@ - (Required)
     --
-    , _rules          :: TF.Attr s [TF.Attr s (Rules s)]
+    , _rules          :: TF.Attr s [TF.Attr s (MonitoringjobRules s)]
     -- ^ @rules@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -533,7 +533,7 @@ instance TF.IsValid (MonitoringjobResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rules"
                   (_rules
-                      :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (Rules s)])
+                      :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (MonitoringjobRules s)])
                   TF.validator
 
 instance P.HasActive (MonitoringjobResource s) (TF.Attr s P.Bool) where
@@ -606,23 +606,23 @@ instance P.HasRegions (MonitoringjobResource s) (TF.Attr s [TF.Attr s P.Text]) w
         P.lens (_regions :: MonitoringjobResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _regions = a } :: MonitoringjobResource s)
 
-instance P.HasRules (MonitoringjobResource s) (TF.Attr s [TF.Attr s (Rules s)]) where
+instance P.HasRules (MonitoringjobResource s) (TF.Attr s [TF.Attr s (MonitoringjobRules s)]) where
     rules =
-        P.lens (_rules :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (Rules s)])
+        P.lens (_rules :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (MonitoringjobRules s)])
                (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ns1_notifylist@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_notifylist terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/notifylist.html terraform documentation>
 -- for more information.
 data NotifylistResource s = NotifylistResource'
     { _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _notifications :: TF.Attr s [TF.Attr s (Notifications s)]
+    , _notifications :: TF.Attr s [TF.Attr s (NotifylistNotifications s)]
     -- ^ @notifications@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -647,7 +647,7 @@ instance TF.IsValid (NotifylistResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_notifications"
                   (_notifications
-                      :: NotifylistResource s -> TF.Attr s [TF.Attr s (Notifications s)])
+                      :: NotifylistResource s -> TF.Attr s [TF.Attr s (NotifylistNotifications s)])
                   TF.validator
 
 instance P.HasName (NotifylistResource s) (TF.Attr s P.Text) where
@@ -655,45 +655,45 @@ instance P.HasName (NotifylistResource s) (TF.Attr s P.Text) where
         P.lens (_name :: NotifylistResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NotifylistResource s)
 
-instance P.HasNotifications (NotifylistResource s) (TF.Attr s [TF.Attr s (Notifications s)]) where
+instance P.HasNotifications (NotifylistResource s) (TF.Attr s [TF.Attr s (NotifylistNotifications s)]) where
     notifications =
-        P.lens (_notifications :: NotifylistResource s -> TF.Attr s [TF.Attr s (Notifications s)])
+        P.lens (_notifications :: NotifylistResource s -> TF.Attr s [TF.Attr s (NotifylistNotifications s)])
                (\s a -> s { _notifications = a } :: NotifylistResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ns1_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _answers         :: TF.Attr s [TF.Attr s (Answers s)]
+    { _answers         :: TF.Attr s [TF.Attr s (RecordAnswers s)]
     -- ^ @answers@ - (Optional)
     --
     , _domain          :: TF.Attr s P.Text
-    -- ^ @domain@ - (Required)
+    -- ^ @domain@ - (Required, Forces New)
     --
-    , _filters         :: TF.Attr s [TF.Attr s (Filters s)]
+    , _filters         :: TF.Attr s [TF.Attr s (RecordFilters s)]
     -- ^ @filters@ - (Optional)
     --
     , _link            :: TF.Attr s P.Text
-    -- ^ @link@ - (Optional)
+    -- ^ @link@ - (Optional, Forces New)
     --
     , _meta            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @meta@ - (Optional)
     --
-    , _regions         :: TF.Attr s [TF.Attr s (Regions s)]
+    , _regions         :: TF.Attr s [TF.Attr s (RecordRegions s)]
     -- ^ @regions@ - (Optional)
     --
     , _type'           :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     , _useClientSubnet :: TF.Attr s P.Bool
     -- ^ @use_client_subnet@ - (Optional)
     --
     , _zone            :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -733,20 +733,20 @@ instance TF.IsValid (RecordResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_answers"
                   (_answers
-                      :: RecordResource s -> TF.Attr s [TF.Attr s (Answers s)])
+                      :: RecordResource s -> TF.Attr s [TF.Attr s (RecordAnswers s)])
                   TF.validator
            P.<> TF.settingsValidator "_filters"
                   (_filters
-                      :: RecordResource s -> TF.Attr s [TF.Attr s (Filters s)])
+                      :: RecordResource s -> TF.Attr s [TF.Attr s (RecordFilters s)])
                   TF.validator
            P.<> TF.settingsValidator "_regions"
                   (_regions
-                      :: RecordResource s -> TF.Attr s [TF.Attr s (Regions s)])
+                      :: RecordResource s -> TF.Attr s [TF.Attr s (RecordRegions s)])
                   TF.validator
 
-instance P.HasAnswers (RecordResource s) (TF.Attr s [TF.Attr s (Answers s)]) where
+instance P.HasAnswers (RecordResource s) (TF.Attr s [TF.Attr s (RecordAnswers s)]) where
     answers =
-        P.lens (_answers :: RecordResource s -> TF.Attr s [TF.Attr s (Answers s)])
+        P.lens (_answers :: RecordResource s -> TF.Attr s [TF.Attr s (RecordAnswers s)])
                (\s a -> s { _answers = a } :: RecordResource s)
 
 instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
@@ -754,9 +754,9 @@ instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_domain :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasFilters (RecordResource s) (TF.Attr s [TF.Attr s (Filters s)]) where
+instance P.HasFilters (RecordResource s) (TF.Attr s [TF.Attr s (RecordFilters s)]) where
     filters =
-        P.lens (_filters :: RecordResource s -> TF.Attr s [TF.Attr s (Filters s)])
+        P.lens (_filters :: RecordResource s -> TF.Attr s [TF.Attr s (RecordFilters s)])
                (\s a -> s { _filters = a } :: RecordResource s)
 
 instance P.HasLink (RecordResource s) (TF.Attr s P.Text) where
@@ -769,9 +769,9 @@ instance P.HasMeta (RecordResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.
         P.lens (_meta :: RecordResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _meta = a } :: RecordResource s)
 
-instance P.HasRegions (RecordResource s) (TF.Attr s [TF.Attr s (Regions s)]) where
+instance P.HasRegions (RecordResource s) (TF.Attr s [TF.Attr s (RecordRegions s)]) where
     regions =
-        P.lens (_regions :: RecordResource s -> TF.Attr s [TF.Attr s (Regions s)])
+        P.lens (_regions :: RecordResource s -> TF.Attr s [TF.Attr s (RecordRegions s)])
                (\s a -> s { _regions = a } :: RecordResource s)
 
 instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
@@ -790,14 +790,14 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 -- | @ns1_team@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_team terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/team.html terraform documentation>
 -- for more information.
 data TeamResource s = TeamResource'
     { _accountManageAccountSettings :: TF.Attr s P.Bool
@@ -1018,11 +1018,11 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: TeamResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ns1_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _accountManageAccountSettings :: TF.Attr s P.Bool
@@ -1285,24 +1285,24 @@ instance P.HasUsername (UserResource s) (TF.Attr s P.Text) where
                (\s a -> s { _username = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @ns1_zone@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/NS1/ns1_zone terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ns1/r/zone.html terraform documentation>
 -- for more information.
 data ZoneResource s = ZoneResource'
     { _link     :: TF.Attr s P.Text
-    -- ^ @link@ - (Optional)
+    -- ^ @link@ - (Optional, Forces New)
     --
     , _networks :: TF.Attr s [TF.Attr s P.Integer]
     -- ^ @networks@ - (Optional)
     --
     , _primary  :: TF.Attr s P.Text
-    -- ^ @primary@ - (Optional)
+    -- ^ @primary@ - (Optional, Forces New)
     --
     , _zone     :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1350,25 +1350,25 @@ instance P.HasZone (ZoneResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: ZoneResource s)
 
 instance s ~ s' => P.HasComputedDnsServers (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedDnsServers x = TF.compute (TF.refKey x) "_computedDnsServers"
+    computedDnsServers x = TF.compute (TF.refKey x) "dns_servers"
 
 instance s ~ s' => P.HasComputedExpiry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedExpiry x = TF.compute (TF.refKey x) "_computedExpiry"
+    computedExpiry x = TF.compute (TF.refKey x) "expiry"
 
 instance s ~ s' => P.HasComputedHostmaster (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedHostmaster x = TF.compute (TF.refKey x) "_computedHostmaster"
+    computedHostmaster x = TF.compute (TF.refKey x) "hostmaster"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedNxTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedNxTtl x = TF.compute (TF.refKey x) "_computedNxTtl"
+    computedNxTtl x = TF.compute (TF.refKey x) "nx_ttl"
 
 instance s ~ s' => P.HasComputedRefresh (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedRefresh x = TF.compute (TF.refKey x) "_computedRefresh"
+    computedRefresh x = TF.compute (TF.refKey x) "refresh"
 
 instance s ~ s' => P.HasComputedRetry (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedRetry x = TF.compute (TF.refKey x) "_computedRetry"
+    computedRetry x = TF.compute (TF.refKey x) "retry"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (ZoneResource s)) (TF.Attr s P.Integer) where
-    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
+    computedTtl x = TF.compute (TF.refKey x) "ttl"

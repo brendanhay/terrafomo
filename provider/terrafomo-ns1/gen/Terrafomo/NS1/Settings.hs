@@ -18,25 +18,25 @@
 module Terrafomo.NS1.Settings
     (
     -- * Settings Datatypes
-    -- ** answers
-      Answers (..)
-    , newAnswers
+    -- ** monitoringjob_rules
+      MonitoringjobRules (..)
+    , newMonitoringjobRules
 
-    -- ** rules
-    , Rules (..)
-    , newRules
+    -- ** record_answers
+    , RecordAnswers (..)
+    , newRecordAnswers
 
-    -- ** regions
-    , Regions (..)
-    , newRegions
+    -- ** notifylist_notifications
+    , NotifylistNotifications (..)
+    , newNotifylistNotifications
 
-    -- ** filters
-    , Filters (..)
-    , newFilters
+    -- ** record_filters
+    , RecordFilters (..)
+    , newRecordFilters
 
-    -- ** notifications
-    , Notifications (..)
-    , newNotifications
+    -- ** record_regions
+    , RecordRegions (..)
+    , newRecordRegions
 
     ) where
 
@@ -61,57 +61,8 @@ import qualified Terrafomo.NS1.Lens  as P
 import qualified Terrafomo.NS1.Types as P
 import qualified Terrafomo.Validator as TF
 
--- | @answers@ nested settings.
-data Answers s = Answers'
-    { _answer :: TF.Attr s P.Text
-    -- ^ @answer@ - (Optional)
-    --
-    , _meta   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @meta@ - (Optional)
-    --
-    , _region :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newAnswers
-    :: Answers s
-newAnswers =
-    Answers'
-        { _answer = TF.Nil
-        , _meta = TF.Nil
-        , _region = TF.Nil
-        }
-
-instance P.Hashable  (Answers s)
-instance TF.IsValue  (Answers s)
-instance TF.IsObject (Answers s) where
-    toObject Answers'{..} = P.catMaybes
-        [ TF.assign "answer" <$> TF.attribute _answer
-        , TF.assign "meta" <$> TF.attribute _meta
-        , TF.assign "region" <$> TF.attribute _region
-        ]
-
-instance TF.IsValid (Answers s) where
-    validator = P.mempty
-
-instance P.HasAnswer (Answers s) (TF.Attr s P.Text) where
-    answer =
-        P.lens (_answer :: Answers s -> TF.Attr s P.Text)
-               (\s a -> s { _answer = a } :: Answers s)
-
-instance P.HasMeta (Answers s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    meta =
-        P.lens (_meta :: Answers s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _meta = a } :: Answers s)
-
-instance P.HasRegion (Answers s) (TF.Attr s P.Text) where
-    region =
-        P.lens (_region :: Answers s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: Answers s)
-
--- | @rules@ nested settings.
-data Rules s = Rules'
+-- | @monitoringjob_rules@ nested settings.
+data MonitoringjobRules s = MonitoringjobRules'
     { _comparison :: TF.Attr s P.Text
     -- ^ @comparison@ - (Required)
     --
@@ -123,87 +74,137 @@ data Rules s = Rules'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRules
+newMonitoringjobRules
     :: TF.Attr s P.Text -- ^ @comparison@ - 'P.comparison'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> Rules s
-newRules _comparison _key _value =
-    Rules'
+    -> MonitoringjobRules s
+newMonitoringjobRules _comparison _key _value =
+    MonitoringjobRules'
         { _comparison = _comparison
         , _key = _key
         , _value = _value
         }
 
-instance P.Hashable  (Rules s)
-instance TF.IsValue  (Rules s)
-instance TF.IsObject (Rules s) where
-    toObject Rules'{..} = P.catMaybes
+instance P.Hashable  (MonitoringjobRules s)
+instance TF.IsValue  (MonitoringjobRules s)
+instance TF.IsObject (MonitoringjobRules s) where
+    toObject MonitoringjobRules'{..} = P.catMaybes
         [ TF.assign "comparison" <$> TF.attribute _comparison
         , TF.assign "key" <$> TF.attribute _key
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (Rules s) where
+instance TF.IsValid (MonitoringjobRules s) where
     validator = P.mempty
 
-instance P.HasComparison (Rules s) (TF.Attr s P.Text) where
+instance P.HasComparison (MonitoringjobRules s) (TF.Attr s P.Text) where
     comparison =
-        P.lens (_comparison :: Rules s -> TF.Attr s P.Text)
-               (\s a -> s { _comparison = a } :: Rules s)
+        P.lens (_comparison :: MonitoringjobRules s -> TF.Attr s P.Text)
+               (\s a -> s { _comparison = a } :: MonitoringjobRules s)
 
-instance P.HasKey (Rules s) (TF.Attr s P.Text) where
+instance P.HasKey (MonitoringjobRules s) (TF.Attr s P.Text) where
     key =
-        P.lens (_key :: Rules s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: Rules s)
+        P.lens (_key :: MonitoringjobRules s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: MonitoringjobRules s)
 
-instance P.HasValue (Rules s) (TF.Attr s P.Text) where
+instance P.HasValue (MonitoringjobRules s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: Rules s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: Rules s)
+        P.lens (_value :: MonitoringjobRules s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: MonitoringjobRules s)
 
--- | @regions@ nested settings.
-data Regions s = Regions'
-    { _meta :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+-- | @record_answers@ nested settings.
+data RecordAnswers s = RecordAnswers'
+    { _answer :: TF.Attr s P.Text
+    -- ^ @answer@ - (Optional)
+    --
+    , _meta   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @meta@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRegions
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Regions s
-newRegions _name =
-    Regions'
-        { _meta = TF.Nil
-        , _name = _name
+newRecordAnswers
+    :: RecordAnswers s
+newRecordAnswers =
+    RecordAnswers'
+        { _answer = TF.Nil
+        , _meta = TF.Nil
+        , _region = TF.Nil
         }
 
-instance P.Hashable  (Regions s)
-instance TF.IsValue  (Regions s)
-instance TF.IsObject (Regions s) where
-    toObject Regions'{..} = P.catMaybes
-        [ TF.assign "meta" <$> TF.attribute _meta
-        , TF.assign "name" <$> TF.attribute _name
+instance P.Hashable  (RecordAnswers s)
+instance TF.IsValue  (RecordAnswers s)
+instance TF.IsObject (RecordAnswers s) where
+    toObject RecordAnswers'{..} = P.catMaybes
+        [ TF.assign "answer" <$> TF.attribute _answer
+        , TF.assign "meta" <$> TF.attribute _meta
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance TF.IsValid (Regions s) where
+instance TF.IsValid (RecordAnswers s) where
     validator = P.mempty
 
-instance P.HasMeta (Regions s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasAnswer (RecordAnswers s) (TF.Attr s P.Text) where
+    answer =
+        P.lens (_answer :: RecordAnswers s -> TF.Attr s P.Text)
+               (\s a -> s { _answer = a } :: RecordAnswers s)
+
+instance P.HasMeta (RecordAnswers s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     meta =
-        P.lens (_meta :: Regions s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _meta = a } :: Regions s)
+        P.lens (_meta :: RecordAnswers s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _meta = a } :: RecordAnswers s)
 
-instance P.HasName (Regions s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: Regions s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Regions s)
+instance P.HasRegion (RecordAnswers s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: RecordAnswers s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: RecordAnswers s)
 
--- | @filters@ nested settings.
-data Filters s = Filters'
+-- | @notifylist_notifications@ nested settings.
+data NotifylistNotifications s = NotifylistNotifications'
+    { _config :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @config@ - (Required)
+    --
+    , _type'  :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newNotifylistNotifications
+    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    -> NotifylistNotifications s
+newNotifylistNotifications _config _type' =
+    NotifylistNotifications'
+        { _config = _config
+        , _type' = _type'
+        }
+
+instance P.Hashable  (NotifylistNotifications s)
+instance TF.IsValue  (NotifylistNotifications s)
+instance TF.IsObject (NotifylistNotifications s) where
+    toObject NotifylistNotifications'{..} = P.catMaybes
+        [ TF.assign "config" <$> TF.attribute _config
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (NotifylistNotifications s) where
+    validator = P.mempty
+
+instance P.HasConfig (NotifylistNotifications s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    config =
+        P.lens (_config :: NotifylistNotifications s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: NotifylistNotifications s)
+
+instance P.HasType' (NotifylistNotifications s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: NotifylistNotifications s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: NotifylistNotifications s)
+
+-- | @record_filters@ nested settings.
+data RecordFilters s = RecordFilters'
     { _config   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @config@ - (Optional)
     --
@@ -215,80 +216,79 @@ data Filters s = Filters'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newFilters
+newRecordFilters
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
-    -> Filters s
-newFilters _filter =
-    Filters'
+    -> RecordFilters s
+newRecordFilters _filter =
+    RecordFilters'
         { _config = TF.Nil
         , _disabled = TF.Nil
         , _filter = _filter
         }
 
-instance P.Hashable  (Filters s)
-instance TF.IsValue  (Filters s)
-instance TF.IsObject (Filters s) where
-    toObject Filters'{..} = P.catMaybes
+instance P.Hashable  (RecordFilters s)
+instance TF.IsValue  (RecordFilters s)
+instance TF.IsObject (RecordFilters s) where
+    toObject RecordFilters'{..} = P.catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "filter" <$> TF.attribute _filter
         ]
 
-instance TF.IsValid (Filters s) where
+instance TF.IsValid (RecordFilters s) where
     validator = P.mempty
 
-instance P.HasConfig (Filters s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasConfig (RecordFilters s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     config =
-        P.lens (_config :: Filters s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _config = a } :: Filters s)
+        P.lens (_config :: RecordFilters s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: RecordFilters s)
 
-instance P.HasDisabled (Filters s) (TF.Attr s P.Bool) where
+instance P.HasDisabled (RecordFilters s) (TF.Attr s P.Bool) where
     disabled =
-        P.lens (_disabled :: Filters s -> TF.Attr s P.Bool)
-               (\s a -> s { _disabled = a } :: Filters s)
+        P.lens (_disabled :: RecordFilters s -> TF.Attr s P.Bool)
+               (\s a -> s { _disabled = a } :: RecordFilters s)
 
-instance P.HasFilter (Filters s) (TF.Attr s P.Text) where
+instance P.HasFilter (RecordFilters s) (TF.Attr s P.Text) where
     filter =
-        P.lens (_filter :: Filters s -> TF.Attr s P.Text)
-               (\s a -> s { _filter = a } :: Filters s)
+        P.lens (_filter :: RecordFilters s -> TF.Attr s P.Text)
+               (\s a -> s { _filter = a } :: RecordFilters s)
 
--- | @notifications@ nested settings.
-data Notifications s = Notifications'
-    { _config :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @config@ - (Required)
+-- | @record_regions@ nested settings.
+data RecordRegions s = RecordRegions'
+    { _meta :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    -- ^ @meta@ - (Optional)
     --
-    , _type'  :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newNotifications
-    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> Notifications s
-newNotifications _config _type' =
-    Notifications'
-        { _config = _config
-        , _type' = _type'
+newRecordRegions
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> RecordRegions s
+newRecordRegions _name =
+    RecordRegions'
+        { _meta = TF.Nil
+        , _name = _name
         }
 
-instance P.Hashable  (Notifications s)
-instance TF.IsValue  (Notifications s)
-instance TF.IsObject (Notifications s) where
-    toObject Notifications'{..} = P.catMaybes
-        [ TF.assign "config" <$> TF.attribute _config
-        , TF.assign "type" <$> TF.attribute _type'
+instance P.Hashable  (RecordRegions s)
+instance TF.IsValue  (RecordRegions s)
+instance TF.IsObject (RecordRegions s) where
+    toObject RecordRegions'{..} = P.catMaybes
+        [ TF.assign "meta" <$> TF.attribute _meta
+        , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance TF.IsValid (Notifications s) where
+instance TF.IsValid (RecordRegions s) where
     validator = P.mempty
 
-instance P.HasConfig (Notifications s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    config =
-        P.lens (_config :: Notifications s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _config = a } :: Notifications s)
+instance P.HasMeta (RecordRegions s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    meta =
+        P.lens (_meta :: RecordRegions s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _meta = a } :: RecordRegions s)
 
-instance P.HasType' (Notifications s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: Notifications s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: Notifications s)
+instance P.HasName (RecordRegions s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: RecordRegions s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RecordRegions s)
