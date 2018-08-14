@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator            as TF
 
 -- | @dme_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DNSMadeEasy/dme_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/dme/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
     { _description  :: TF.Attr s P.Text
