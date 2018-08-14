@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator as TF
 
 -- | The @OPC@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/opc/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _endpoint         :: P.Maybe P.Text

@@ -79,7 +79,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @opc_compute_image_list_entry@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_image_list_entry terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_image_list_entry.html terraform documentation>
 -- for more information.
 data ComputeImageListEntryData s = ComputeImageListEntryData'
     { _entry     :: TF.Attr s P.Integer
@@ -131,17 +131,17 @@ instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
                (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
-    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
 instance s ~ s' => P.HasComputedMachineImages (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMachineImages x = TF.compute (TF.refKey x) "_computedMachineImages"
+    computedMachineImages x = TF.compute (TF.refKey x) "machine_images"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "_computedUri"
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
 -- | @opc_compute_ip_address_reservation@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_ip_address_reservation terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_ip_address_reservation.html terraform documentation>
 -- for more information.
 data ComputeIpAddressReservationData s = ComputeIpAddressReservationData'
     { _name :: TF.Attr s P.Text
@@ -172,23 +172,23 @@ instance P.HasName (ComputeIpAddressReservationData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeIpAddressReservationData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedIpAddressPool (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedIpAddressPool x = TF.compute (TF.refKey x) "_computedIpAddressPool"
+    computedIpAddressPool x = TF.compute (TF.refKey x) "ip_address_pool"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "_computedUri"
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
 -- | @opc_compute_ip_reservation@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_ip_reservation terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_ip_reservation.html terraform documentation>
 -- for more information.
 data ComputeIpReservationData s = ComputeIpReservationData'
     { _name :: TF.Attr s P.Text
@@ -219,23 +219,23 @@ instance P.HasName (ComputeIpReservationData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeIpReservationData s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
 instance s ~ s' => P.HasComputedParentPool (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
-    computedParentPool x = TF.compute (TF.refKey x) "_computedParentPool"
+    computedParentPool x = TF.compute (TF.refKey x) "parent_pool"
 
 instance s ~ s' => P.HasComputedPermanent (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Bool) where
-    computedPermanent x = TF.compute (TF.refKey x) "_computedPermanent"
+    computedPermanent x = TF.compute (TF.refKey x) "permanent"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedUsed (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Bool) where
-    computedUsed x = TF.compute (TF.refKey x) "_computedUsed"
+    computedUsed x = TF.compute (TF.refKey x) "used"
 
 -- | @opc_compute_machine_image@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_machine_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_machine_image.html terraform documentation>
 -- for more information.
 data ComputeMachineImageData s = ComputeMachineImageData'
     { _account :: TF.Attr s P.Text
@@ -277,41 +277,41 @@ instance P.HasName (ComputeMachineImageData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeMachineImageData s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedErrorReason (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedErrorReason x = TF.compute (TF.refKey x) "_computedErrorReason"
+    computedErrorReason x = TF.compute (TF.refKey x) "error_reason"
 
 instance s ~ s' => P.HasComputedFile (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedFile x = TF.compute (TF.refKey x) "_computedFile"
+    computedFile x = TF.compute (TF.refKey x) "file"
 
 instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedHypervisor x = TF.compute (TF.refKey x) "_computedHypervisor"
+    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
 instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedImageFormat x = TF.compute (TF.refKey x) "_computedImageFormat"
+    computedImageFormat x = TF.compute (TF.refKey x) "image_format"
 
 instance s ~ s' => P.HasComputedNoUpload (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Bool) where
-    computedNoUpload x = TF.compute (TF.refKey x) "_computedNoUpload"
+    computedNoUpload x = TF.compute (TF.refKey x) "no_upload"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
+    computedPlatform x = TF.compute (TF.refKey x) "platform"
 
 instance s ~ s' => P.HasComputedSizes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedSizes x = TF.compute (TF.refKey x) "_computedSizes"
+    computedSizes x = TF.compute (TF.refKey x) "sizes"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "_computedState"
+    computedState x = TF.compute (TF.refKey x) "state"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "_computedUri"
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
 -- | @opc_compute_network_interface@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_network_interface terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_network_interface.html terraform documentation>
 -- for more information.
 data ComputeNetworkInterfaceData s = ComputeNetworkInterfaceData'
     { _instanceId   :: TF.Attr s P.Text
@@ -364,47 +364,47 @@ instance P.HasInterface (ComputeNetworkInterfaceData s) (TF.Attr s P.Text) where
                (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDns x = TF.compute (TF.refKey x) "_computedDns"
+    computedDns x = TF.compute (TF.refKey x) "dns"
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedIpNetwork (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedIpNetwork x = TF.compute (TF.refKey x) "_computedIpNetwork"
+    computedIpNetwork x = TF.compute (TF.refKey x) "ip_network"
 
 instance s ~ s' => P.HasComputedIsDefaultGateway (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Bool) where
-    computedIsDefaultGateway x = TF.compute (TF.refKey x) "_computedIsDefaultGateway"
+    computedIsDefaultGateway x = TF.compute (TF.refKey x) "is_default_gateway"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "_computedMacAddress"
+    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
 
 instance s ~ s' => P.HasComputedModel (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedModel x = TF.compute (TF.refKey x) "_computedModel"
+    computedModel x = TF.compute (TF.refKey x) "model"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 instance s ~ s' => P.HasComputedNat (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNat x = TF.compute (TF.refKey x) "_computedNat"
+    computedNat x = TF.compute (TF.refKey x) "nat"
 
 instance s ~ s' => P.HasComputedSearchDomains (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSearchDomains x = TF.compute (TF.refKey x) "_computedSearchDomains"
+    computedSearchDomains x = TF.compute (TF.refKey x) "search_domains"
 
 instance s ~ s' => P.HasComputedSecLists (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecLists x = TF.compute (TF.refKey x) "_computedSecLists"
+    computedSecLists x = TF.compute (TF.refKey x) "sec_lists"
 
 instance s ~ s' => P.HasComputedSharedNetwork (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Bool) where
-    computedSharedNetwork x = TF.compute (TF.refKey x) "_computedSharedNetwork"
+    computedSharedNetwork x = TF.compute (TF.refKey x) "shared_network"
 
 instance s ~ s' => P.HasComputedVnic (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
-    computedVnic x = TF.compute (TF.refKey x) "_computedVnic"
+    computedVnic x = TF.compute (TF.refKey x) "vnic"
 
 instance s ~ s' => P.HasComputedVnicSets (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedVnicSets x = TF.compute (TF.refKey x) "_computedVnicSets"
+    computedVnicSets x = TF.compute (TF.refKey x) "vnic_sets"
 
 -- | @opc_compute_ssh_key@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_ssh_key.html terraform documentation>
 -- for more information.
 data ComputeSshKeyData s = ComputeSshKeyData'
     { _name :: TF.Attr s P.Text
@@ -435,14 +435,14 @@ instance P.HasName (ComputeSshKeyData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeSshKeyData s)
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
 
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "_computedKey"
+    computedKey x = TF.compute (TF.refKey x) "key"
 
 -- | @opc_compute_storage_volume_snapshot@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_storage_volume_snapshot terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_storage_volume_snapshot.html terraform documentation>
 -- for more information.
 data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData'
     { _name :: TF.Attr s P.Text
@@ -473,59 +473,59 @@ instance P.HasName (ComputeStorageVolumeSnapshotData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedAccount x = TF.compute (TF.refKey x) "_computedAccount"
+    computedAccount x = TF.compute (TF.refKey x) "account"
 
 instance s ~ s' => P.HasComputedCollocated (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Bool) where
-    computedCollocated x = TF.compute (TF.refKey x) "_computedCollocated"
+    computedCollocated x = TF.compute (TF.refKey x) "collocated"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedMachineImageName (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedMachineImageName x = TF.compute (TF.refKey x) "_computedMachineImageName"
+    computedMachineImageName x = TF.compute (TF.refKey x) "machine_image_name"
 
 instance s ~ s' => P.HasComputedParentVolumeBootable (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Bool) where
-    computedParentVolumeBootable x = TF.compute (TF.refKey x) "_computedParentVolumeBootable"
+    computedParentVolumeBootable x = TF.compute (TF.refKey x) "parent_volume_bootable"
 
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedPlatform x = TF.compute (TF.refKey x) "_computedPlatform"
+    computedPlatform x = TF.compute (TF.refKey x) "platform"
 
 instance s ~ s' => P.HasComputedProperty (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedProperty x = TF.compute (TF.refKey x) "_computedProperty"
+    computedProperty x = TF.compute (TF.refKey x) "property"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedSnapshotId x = TF.compute (TF.refKey x) "_computedSnapshotId"
+    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
 
 instance s ~ s' => P.HasComputedSnapshotTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "_computedSnapshotTimestamp"
+    computedSnapshotTimestamp x = TF.compute (TF.refKey x) "snapshot_timestamp"
 
 instance s ~ s' => P.HasComputedStartTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStartTimestamp x = TF.compute (TF.refKey x) "_computedStartTimestamp"
+    computedStartTimestamp x = TF.compute (TF.refKey x) "start_timestamp"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 instance s ~ s' => P.HasComputedStatusDetail (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStatusDetail x = TF.compute (TF.refKey x) "_computedStatusDetail"
+    computedStatusDetail x = TF.compute (TF.refKey x) "status_detail"
 
 instance s ~ s' => P.HasComputedStatusTimestamp (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedStatusTimestamp x = TF.compute (TF.refKey x) "_computedStatusTimestamp"
+    computedStatusTimestamp x = TF.compute (TF.refKey x) "status_timestamp"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "_computedUri"
+    computedUri x = TF.compute (TF.refKey x) "uri"
 
 instance s ~ s' => P.HasComputedVolumeName (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
-    computedVolumeName x = TF.compute (TF.refKey x) "_computedVolumeName"
+    computedVolumeName x = TF.compute (TF.refKey x) "volume_name"
 
 -- | @opc_compute_vnic@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OPC/opc_compute_vnic terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opc/d/compute_vnic.html terraform documentation>
 -- for more information.
 data ComputeVnicData s = ComputeVnicData'
     { _name :: TF.Attr s P.Text
@@ -556,16 +556,16 @@ instance P.HasName (ComputeVnicData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeVnicData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "_computedMacAddress"
+    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ComputeVnicData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTransitFlag (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Bool) where
-    computedTransitFlag x = TF.compute (TF.refKey x) "_computedTransitFlag"
+    computedTransitFlag x = TF.compute (TF.refKey x) "transit_flag"
 
 instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
-    computedUri x = TF.compute (TF.refKey x) "_computedUri"
+    computedUri x = TF.compute (TF.refKey x) "uri"
