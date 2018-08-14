@@ -590,9 +590,6 @@ instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NetworkInterface s)) (TF.Att
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "_computedNetwork"
 
-instance s ~ s' => P.HasComputedNetworkIp (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
-    computedNetworkIp x = TF.compute (TF.refKey x) "_computedNetworkIp"
-
 instance s ~ s' => P.HasComputedSubnetwork (TF.Ref s' (NetworkInterface s)) (TF.Attr s P.Text) where
     computedSubnetwork x = TF.compute (TF.refKey x) "_computedSubnetwork"
 
@@ -3616,10 +3613,7 @@ instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (ServerCaCert s)) (TF
 
 -- | @cluster_config@ nested settings.
 data ClusterConfig s = ClusterConfig'
-    { _deleteAutogenBucket  :: TF.Attr s P.Bool
-    -- ^ @delete_autogen_bucket@ - (Optional)
-    --
-    , _initializationAction :: TF.Attr s [TF.Attr s (InitializationAction s)]
+    { _initializationAction :: TF.Attr s [TF.Attr s (InitializationAction s)]
     -- ^ @initialization_action@ - (Optional)
     --
     , _stagingBucket        :: TF.Attr s P.Text
@@ -3631,8 +3625,7 @@ newClusterConfig
     :: ClusterConfig s
 newClusterConfig =
     ClusterConfig'
-        { _deleteAutogenBucket = TF.value P.False
-        , _initializationAction = TF.Nil
+        { _initializationAction = TF.Nil
         , _stagingBucket = TF.Nil
         }
 
@@ -3640,8 +3633,7 @@ instance P.Hashable  (ClusterConfig s)
 instance TF.IsValue  (ClusterConfig s)
 instance TF.IsObject (ClusterConfig s) where
     toObject ClusterConfig'{..} = P.catMaybes
-        [ TF.assign "delete_autogen_bucket" <$> TF.attribute _deleteAutogenBucket
-        , TF.assign "initialization_action" <$> TF.attribute _initializationAction
+        [ TF.assign "initialization_action" <$> TF.attribute _initializationAction
         , TF.assign "staging_bucket" <$> TF.attribute _stagingBucket
         ]
 
@@ -3651,11 +3643,6 @@ instance TF.IsValid (ClusterConfig s) where
                   (_initializationAction
                       :: ClusterConfig s -> TF.Attr s [TF.Attr s (InitializationAction s)])
                   TF.validator
-
-instance P.HasDeleteAutogenBucket (ClusterConfig s) (TF.Attr s P.Bool) where
-    deleteAutogenBucket =
-        P.lens (_deleteAutogenBucket :: ClusterConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleteAutogenBucket = a } :: ClusterConfig s)
 
 instance P.HasInitializationAction (ClusterConfig s) (TF.Attr s [TF.Attr s (InitializationAction s)]) where
     initializationAction =

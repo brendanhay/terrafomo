@@ -21,7 +21,6 @@ module Terrafomo.Google.Lens
     , HasIpVersion (..)
     , HasMaxSurgePercent (..)
     , HasMainPythonFileUri (..)
-    , HasAuthoritative (..)
     , HasPercent (..)
     , HasRemoveDefaultNodePool (..)
     , HasAuthorizedGaeApplications (..)
@@ -36,7 +35,6 @@ module Terrafomo.Google.Lens
     , HasDriverLogLevels (..)
     , HasBgp (..)
     , HasPayloadFormat (..)
-    , HasCreateTimeout (..)
     , HasVerifyServerCertificate (..)
     , HasAge (..)
     , HasImage (..)
@@ -154,7 +152,6 @@ module Terrafomo.Google.Lens
     , HasNotFoundPage (..)
     , HasAttachedDisk (..)
     , HasDatabase (..)
-    , HasDiskEncryptionKeyRaw (..)
     , HasTargetTags (..)
     , HasContinueOnFailure (..)
     , HasSourceImage (..)
@@ -179,7 +176,6 @@ module Terrafomo.Google.Lens
     , HasEnableLegacyAbac (..)
     , HasCanIpForward (..)
     , HasInitializationAction (..)
-    , HasIpv4Range (..)
     , HasClientCertificate (..)
     , HasMqttEnabledState (..)
     , HasFriendlyName (..)
@@ -244,12 +240,9 @@ module Terrafomo.Google.Lens
     , HasClientKey (..)
     , HasServiceName (..)
     , HasCryptoKey (..)
-    , HasDisableProject (..)
     , HasRequestPath (..)
     , HasIkeVersion (..)
-    , HasDeleteAutogenBucket (..)
     , HasAdvertiseMode (..)
-    , HasProtocOutput (..)
     , HasFileUris (..)
     , HasAsn (..)
     , HasScript (..)
@@ -654,7 +647,6 @@ module Terrafomo.Google.Lens
     , HasComputedDiskSizeGb (..)
     , HasComputedCollation (..)
     , HasComputedTargetSize (..)
-    , HasComputedNetworkIp (..)
     , HasComputedScheduling (..)
     , HasComputedLifecycleState (..)
     , HasComputedDisabled (..)
@@ -827,12 +819,6 @@ class HasMainPythonFileUri a b | a -> b where
 instance HasMainPythonFileUri a b => HasMainPythonFileUri (TF.Schema l p a) b where
     mainPythonFileUri = TF.configuration . mainPythonFileUri
 
-class HasAuthoritative a b | a -> b where
-    authoritative :: P.Lens' a b
-
-instance HasAuthoritative a b => HasAuthoritative (TF.Schema l p a) b where
-    authoritative = TF.configuration . authoritative
-
 class HasPercent a b | a -> b where
     percent :: P.Lens' a b
 
@@ -916,12 +902,6 @@ class HasPayloadFormat a b | a -> b where
 
 instance HasPayloadFormat a b => HasPayloadFormat (TF.Schema l p a) b where
     payloadFormat = TF.configuration . payloadFormat
-
-class HasCreateTimeout a b | a -> b where
-    createTimeout :: P.Lens' a b
-
-instance HasCreateTimeout a b => HasCreateTimeout (TF.Schema l p a) b where
-    createTimeout = TF.configuration . createTimeout
 
 class HasVerifyServerCertificate a b | a -> b where
     verifyServerCertificate :: P.Lens' a b
@@ -1625,12 +1605,6 @@ class HasDatabase a b | a -> b where
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
 
-class HasDiskEncryptionKeyRaw a b | a -> b where
-    diskEncryptionKeyRaw :: P.Lens' a b
-
-instance HasDiskEncryptionKeyRaw a b => HasDiskEncryptionKeyRaw (TF.Schema l p a) b where
-    diskEncryptionKeyRaw = TF.configuration . diskEncryptionKeyRaw
-
 class HasTargetTags a b | a -> b where
     targetTags :: P.Lens' a b
 
@@ -1774,12 +1748,6 @@ class HasInitializationAction a b | a -> b where
 
 instance HasInitializationAction a b => HasInitializationAction (TF.Schema l p a) b where
     initializationAction = TF.configuration . initializationAction
-
-class HasIpv4Range a b | a -> b where
-    ipv4Range :: P.Lens' a b
-
-instance HasIpv4Range a b => HasIpv4Range (TF.Schema l p a) b where
-    ipv4Range = TF.configuration . ipv4Range
 
 class HasClientCertificate a b | a -> b where
     clientCertificate :: P.Lens' a b
@@ -2165,12 +2133,6 @@ class HasCryptoKey a b | a -> b where
 instance HasCryptoKey a b => HasCryptoKey (TF.Schema l p a) b where
     cryptoKey = TF.configuration . cryptoKey
 
-class HasDisableProject a b | a -> b where
-    disableProject :: P.Lens' a b
-
-instance HasDisableProject a b => HasDisableProject (TF.Schema l p a) b where
-    disableProject = TF.configuration . disableProject
-
 class HasRequestPath a b | a -> b where
     requestPath :: P.Lens' a b
 
@@ -2183,23 +2145,11 @@ class HasIkeVersion a b | a -> b where
 instance HasIkeVersion a b => HasIkeVersion (TF.Schema l p a) b where
     ikeVersion = TF.configuration . ikeVersion
 
-class HasDeleteAutogenBucket a b | a -> b where
-    deleteAutogenBucket :: P.Lens' a b
-
-instance HasDeleteAutogenBucket a b => HasDeleteAutogenBucket (TF.Schema l p a) b where
-    deleteAutogenBucket = TF.configuration . deleteAutogenBucket
-
 class HasAdvertiseMode a b | a -> b where
     advertiseMode :: P.Lens' a b
 
 instance HasAdvertiseMode a b => HasAdvertiseMode (TF.Schema l p a) b where
     advertiseMode = TF.configuration . advertiseMode
-
-class HasProtocOutput a b | a -> b where
-    protocOutput :: P.Lens' a b
-
-instance HasProtocOutput a b => HasProtocOutput (TF.Schema l p a) b where
-    protocOutput = TF.configuration . protocOutput
 
 class HasFileUris a b | a -> b where
     fileUris :: P.Lens' a b
@@ -3955,9 +3905,6 @@ class HasComputedCollation a b | a -> b where
 
 class HasComputedTargetSize a b | a -> b where
     computedTargetSize :: a -> b
-
-class HasComputedNetworkIp a b | a -> b where
-    computedNetworkIp :: a -> b
 
 class HasComputedScheduling a b | a -> b where
     computedScheduling :: a -> b

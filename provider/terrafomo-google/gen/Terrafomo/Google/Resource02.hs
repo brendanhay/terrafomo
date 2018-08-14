@@ -1163,13 +1163,7 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (ProjectIamMemberResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/Google/google_project_iam_policy terraform documentation>
 -- for more information.
 data ProjectIamPolicyResource s = ProjectIamPolicyResource'
-    { _authoritative  :: TF.Attr s P.Bool
-    -- ^ @authoritative@ - (Optional)
-    --
-    , _disableProject :: TF.Attr s P.Bool
-    -- ^ @disable_project@ - (Optional)
-    --
-    , _policyData     :: TF.Attr s P.Text
+    { _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1180,30 +1174,16 @@ projectIamPolicyResource
 projectIamPolicyResource _policyData =
     TF.newResource "google_project_iam_policy" TF.validator $
         ProjectIamPolicyResource'
-            { _authoritative = TF.Nil
-            , _disableProject = TF.Nil
-            , _policyData = _policyData
+            { _policyData = _policyData
             }
 
 instance TF.IsObject (ProjectIamPolicyResource s) where
     toObject ProjectIamPolicyResource'{..} = P.catMaybes
-        [ TF.assign "authoritative" <$> TF.attribute _authoritative
-        , TF.assign "disable_project" <$> TF.attribute _disableProject
-        , TF.assign "policy_data" <$> TF.attribute _policyData
+        [ TF.assign "policy_data" <$> TF.attribute _policyData
         ]
 
 instance TF.IsValid (ProjectIamPolicyResource s) where
     validator = P.mempty
-
-instance P.HasAuthoritative (ProjectIamPolicyResource s) (TF.Attr s P.Bool) where
-    authoritative =
-        P.lens (_authoritative :: ProjectIamPolicyResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _authoritative = a } :: ProjectIamPolicyResource s)
-
-instance P.HasDisableProject (ProjectIamPolicyResource s) (TF.Attr s P.Bool) where
-    disableProject =
-        P.lens (_disableProject :: ProjectIamPolicyResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableProject = a } :: ProjectIamPolicyResource s)
 
 instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
     policyData =
@@ -2244,9 +2224,6 @@ data ServiceAccountResource s = ServiceAccountResource'
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
-    , _policyData  :: TF.Attr s P.Text
-    -- ^ @policy_data@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 serviceAccountResource
@@ -2257,14 +2234,12 @@ serviceAccountResource _accountId =
         ServiceAccountResource'
             { _accountId = _accountId
             , _displayName = TF.Nil
-            , _policyData = TF.Nil
             }
 
 instance TF.IsObject (ServiceAccountResource s) where
     toObject ServiceAccountResource'{..} = P.catMaybes
         [ TF.assign "account_id" <$> TF.attribute _accountId
         , TF.assign "display_name" <$> TF.attribute _displayName
-        , TF.assign "policy_data" <$> TF.attribute _policyData
         ]
 
 instance TF.IsValid (ServiceAccountResource s) where
@@ -2279,11 +2254,6 @@ instance P.HasDisplayName (ServiceAccountResource s) (TF.Attr s P.Text) where
     displayName =
         P.lens (_displayName :: ServiceAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: ServiceAccountResource s)
-
-instance P.HasPolicyData (ServiceAccountResource s) (TF.Attr s P.Text) where
-    policyData =
-        P.lens (_policyData :: ServiceAccountResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyData = a } :: ServiceAccountResource s)
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "_computedEmail"

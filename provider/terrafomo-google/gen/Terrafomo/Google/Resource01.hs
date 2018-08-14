@@ -1542,9 +1542,6 @@ data ComputeDiskResource s = ComputeDiskResource'
     , _diskEncryptionKey :: TF.Attr s (DiskEncryptionKey s)
     -- ^ @disk_encryption_key@ - (Optional)
     --
-    , _diskEncryptionKeyRaw :: TF.Attr s P.Text
-    -- ^ @disk_encryption_key_raw@ - (Optional)
-    --
     , _image :: TF.Attr s P.Text
     -- ^ @image@ - (Optional)
     --
@@ -1576,7 +1573,6 @@ computeDiskResource _name =
         ComputeDiskResource'
             { _description = TF.Nil
             , _diskEncryptionKey = TF.Nil
-            , _diskEncryptionKeyRaw = TF.Nil
             , _image = TF.Nil
             , _labels = TF.Nil
             , _name = _name
@@ -1590,7 +1586,6 @@ instance TF.IsObject (ComputeDiskResource s) where
     toObject ComputeDiskResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "disk_encryption_key" <$> TF.attribute _diskEncryptionKey
-        , TF.assign "disk_encryption_key_raw" <$> TF.attribute _diskEncryptionKeyRaw
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
@@ -1624,11 +1619,6 @@ instance P.HasDiskEncryptionKey (ComputeDiskResource s) (TF.Attr s (DiskEncrypti
     diskEncryptionKey =
         P.lens (_diskEncryptionKey :: ComputeDiskResource s -> TF.Attr s (DiskEncryptionKey s))
                (\s a -> s { _diskEncryptionKey = a } :: ComputeDiskResource s)
-
-instance P.HasDiskEncryptionKeyRaw (ComputeDiskResource s) (TF.Attr s P.Text) where
-    diskEncryptionKeyRaw =
-        P.lens (_diskEncryptionKeyRaw :: ComputeDiskResource s -> TF.Attr s P.Text)
-               (\s a -> s { _diskEncryptionKeyRaw = a } :: ComputeDiskResource s)
 
 instance P.HasImage (ComputeDiskResource s) (TF.Attr s P.Text) where
     image =
@@ -1667,9 +1657,6 @@ instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "_computedCreationTimestamp"
-
-instance s ~ s' => P.HasComputedDiskEncryptionKeySha256 (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
-    computedDiskEncryptionKeySha256 x = TF.compute (TF.refKey x) "_computedDiskEncryptionKeySha256"
 
 instance s ~ s' => P.HasComputedLabelFingerprint (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
     computedLabelFingerprint x = TF.compute (TF.refKey x) "_computedLabelFingerprint"
@@ -2682,25 +2669,22 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeHttpsHealthCheckReso
 -- See the <https://www.terraform.io/docs/providers/Google/google_compute_image terraform documentation>
 -- for more information.
 data ComputeImageResource s = ComputeImageResource'
-    { _createTimeout :: TF.Attr s P.Integer
-    -- ^ @create_timeout@ - (Optional)
-    --
-    , _description   :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family'       :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ @family@ - (Optional)
     --
-    , _labels        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _labels      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _rawDisk       :: TF.Attr s (RawDisk s)
+    , _rawDisk     :: TF.Attr s (RawDisk s)
     -- ^ @raw_disk@ - (Optional)
     --
-    , _sourceDisk    :: TF.Attr s P.Text
+    , _sourceDisk  :: TF.Attr s P.Text
     -- ^ @source_disk@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2711,8 +2695,7 @@ computeImageResource
 computeImageResource _name =
     TF.newResource "google_compute_image" TF.validator $
         ComputeImageResource'
-            { _createTimeout = TF.Nil
-            , _description = TF.Nil
+            { _description = TF.Nil
             , _family' = TF.Nil
             , _labels = TF.Nil
             , _name = _name
@@ -2722,8 +2705,7 @@ computeImageResource _name =
 
 instance TF.IsObject (ComputeImageResource s) where
     toObject ComputeImageResource'{..} = P.catMaybes
-        [ TF.assign "create_timeout" <$> TF.attribute _createTimeout
-        , TF.assign "description" <$> TF.attribute _description
+        [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "family" <$> TF.attribute _family'
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
@@ -2737,11 +2719,6 @@ instance TF.IsValid (ComputeImageResource s) where
                   (_rawDisk
                       :: ComputeImageResource s -> TF.Attr s (RawDisk s))
                   TF.validator
-
-instance P.HasCreateTimeout (ComputeImageResource s) (TF.Attr s P.Integer) where
-    createTimeout =
-        P.lens (_createTimeout :: ComputeImageResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _createTimeout = a } :: ComputeImageResource s)
 
 instance P.HasDescription (ComputeImageResource s) (TF.Attr s P.Text) where
     description =
@@ -2802,9 +2779,6 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _canIpForward           :: TF.Attr s P.Bool
     -- ^ @can_ip_forward@ - (Optional)
     --
-    , _createTimeout          :: TF.Attr s P.Integer
-    -- ^ @create_timeout@ - (Optional)
-    --
     , _deletionProtection     :: TF.Attr s P.Bool
     -- ^ @deletion_protection@ - (Optional)
     --
@@ -2862,7 +2836,6 @@ computeInstanceResource _bootDisk _machineType _name _networkInterface =
             , _attachedDisk = TF.Nil
             , _bootDisk = _bootDisk
             , _canIpForward = TF.value P.False
-            , _createTimeout = TF.value 4
             , _deletionProtection = TF.value P.False
             , _description = TF.Nil
             , _disk = TF.Nil
@@ -2885,7 +2858,6 @@ instance TF.IsObject (ComputeInstanceResource s) where
         , TF.assign "attached_disk" <$> TF.attribute _attachedDisk
         , TF.assign "boot_disk" <$> TF.attribute _bootDisk
         , TF.assign "can_ip_forward" <$> TF.attribute _canIpForward
-        , TF.assign "create_timeout" <$> TF.attribute _createTimeout
         , TF.assign "deletion_protection" <$> TF.attribute _deletionProtection
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disk" <$> TF.attribute _disk
@@ -2952,11 +2924,6 @@ instance P.HasCanIpForward (ComputeInstanceResource s) (TF.Attr s P.Bool) where
     canIpForward =
         P.lens (_canIpForward :: ComputeInstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _canIpForward = a } :: ComputeInstanceResource s)
-
-instance P.HasCreateTimeout (ComputeInstanceResource s) (TF.Attr s P.Integer) where
-    createTimeout =
-        P.lens (_createTimeout :: ComputeInstanceResource s -> TF.Attr s P.Integer)
-               (\s a -> s { _createTimeout = a } :: ComputeInstanceResource s)
 
 instance P.HasDeletionProtection (ComputeInstanceResource s) (TF.Attr s P.Bool) where
     deletionProtection =
@@ -3630,9 +3597,6 @@ data ComputeNetworkResource s = ComputeNetworkResource'
     , _description           :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _ipv4Range             :: TF.Attr s P.Text
-    -- ^ @ipv4_range@ - (Optional)
-    --
     , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -3646,7 +3610,6 @@ computeNetworkResource _name =
         ComputeNetworkResource'
             { _autoCreateSubnetworks = TF.value P.True
             , _description = TF.Nil
-            , _ipv4Range = TF.Nil
             , _name = _name
             }
 
@@ -3654,7 +3617,6 @@ instance TF.IsObject (ComputeNetworkResource s) where
     toObject ComputeNetworkResource'{..} = P.catMaybes
         [ TF.assign "auto_create_subnetworks" <$> TF.attribute _autoCreateSubnetworks
         , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "ipv4_range" <$> TF.attribute _ipv4Range
         , TF.assign "name" <$> TF.attribute _name
         ]
 
@@ -3670,11 +3632,6 @@ instance P.HasDescription (ComputeNetworkResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: ComputeNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeNetworkResource s)
-
-instance P.HasIpv4Range (ComputeNetworkResource s) (TF.Attr s P.Text) where
-    ipv4Range =
-        P.lens (_ipv4Range :: ComputeNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv4Range = a } :: ComputeNetworkResource s)
 
 instance P.HasName (ComputeNetworkResource s) (TF.Attr s P.Text) where
     name =
@@ -6414,9 +6371,6 @@ instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "_computedName"
 
-instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
-    computedNamePrefix x = TF.compute (TF.refKey x) "_computedNamePrefix"
-
 instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (NodeConfig s)) where
     computedNodeConfig x = TF.compute (TF.refKey x) "_computedNodeConfig"
 
@@ -7000,9 +6954,6 @@ data EndpointsServiceResource s = EndpointsServiceResource'
     --
     -- * 'protocOutputBase64'
     -- * 'grpcConfig'
-    , _protocOutput       :: TF.Attr s P.Text
-    -- ^ @protoc_output@ - (Optional)
-    --
     , _protocOutputBase64 :: TF.Attr s P.Text
     -- ^ @protoc_output_base64@ - (Optional)
     --
@@ -7022,7 +6973,6 @@ endpointsServiceResource _serviceName =
         EndpointsServiceResource'
             { _grpcConfig = TF.Nil
             , _openapiConfig = TF.Nil
-            , _protocOutput = TF.Nil
             , _protocOutputBase64 = TF.Nil
             , _serviceName = _serviceName
             }
@@ -7031,7 +6981,6 @@ instance TF.IsObject (EndpointsServiceResource s) where
     toObject EndpointsServiceResource'{..} = P.catMaybes
         [ TF.assign "grpc_config" <$> TF.attribute _grpcConfig
         , TF.assign "openapi_config" <$> TF.attribute _openapiConfig
-        , TF.assign "protoc_output" <$> TF.attribute _protocOutput
         , TF.assign "protoc_output_base64" <$> TF.attribute _protocOutputBase64
         , TF.assign "service_name" <$> TF.attribute _serviceName
         ]
@@ -7064,11 +7013,6 @@ instance P.HasOpenapiConfig (EndpointsServiceResource s) (TF.Attr s P.Text) wher
     openapiConfig =
         P.lens (_openapiConfig :: EndpointsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _openapiConfig = a } :: EndpointsServiceResource s)
-
-instance P.HasProtocOutput (EndpointsServiceResource s) (TF.Attr s P.Text) where
-    protocOutput =
-        P.lens (_protocOutput :: EndpointsServiceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _protocOutput = a } :: EndpointsServiceResource s)
 
 instance P.HasProtocOutputBase64 (EndpointsServiceResource s) (TF.Attr s P.Text) where
     protocOutputBase64 =
