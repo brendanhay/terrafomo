@@ -63,7 +63,7 @@ import qualified Terrafomo.Validator             as TF
 
 -- | @logicmonitor_collector@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_collector terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/r/collector.html terraform documentation>
 -- for more information.
 data CollectorResource s = CollectorResource'
     { _backupCollectorId             :: TF.Attr s P.Integer
@@ -164,7 +164,7 @@ instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Bool) where
 
 -- | @logicmonitor_collector_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_collector_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/r/collector_group.html terraform documentation>
 -- for more information.
 data CollectorGroupResource s = CollectorGroupResource'
     { _description :: TF.Attr s P.Text
@@ -205,7 +205,7 @@ instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
 
 -- | @logicmonitor_device@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_device terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/r/device.html terraform documentation>
 -- for more information.
 data DeviceResource s = DeviceResource'
     { _collector       :: TF.Attr s P.Integer
@@ -298,7 +298,7 @@ instance P.HasProperties (DeviceResource s) (TF.Attr s (P.HashMap P.Text (TF.Att
 
 -- | @logicmonitor_device_group@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_device_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/r/device_group.html terraform documentation>
 -- for more information.
 data DeviceGroupResource s = DeviceGroupResource'
     { _appliesTo       :: TF.Attr s P.Text

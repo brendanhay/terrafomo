@@ -55,11 +55,11 @@ import qualified Terrafomo.Validator             as TF
 
 -- | @logicmonitor_collectors@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_collectors terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/d/collectors.html terraform documentation>
 -- for more information.
 data CollectorsData s = CollectorsData'
-    { _filters    :: TF.Attr s [TF.Attr s (Filters s)]
-    -- ^ @filters@ - (Optional)
+    { _filters    :: TF.Attr s [TF.Attr s (CollectorsFilters s)]
+    -- ^ @filters@ - (Optional, Forces New)
     --
     , _mostRecent :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
@@ -95,12 +95,12 @@ instance TF.IsValid (CollectorsData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filters"
                   (_filters
-                      :: CollectorsData s -> TF.Attr s [TF.Attr s (Filters s)])
+                      :: CollectorsData s -> TF.Attr s [TF.Attr s (CollectorsFilters s)])
                   TF.validator
 
-instance P.HasFilters (CollectorsData s) (TF.Attr s [TF.Attr s (Filters s)]) where
+instance P.HasFilters (CollectorsData s) (TF.Attr s [TF.Attr s (CollectorsFilters s)]) where
     filters =
-        P.lens (_filters :: CollectorsData s -> TF.Attr s [TF.Attr s (Filters s)])
+        P.lens (_filters :: CollectorsData s -> TF.Attr s [TF.Attr s (CollectorsFilters s)])
                (\s a -> s { _filters = a } :: CollectorsData s)
 
 instance P.HasMostRecent (CollectorsData s) (TF.Attr s P.Bool) where
@@ -120,11 +120,11 @@ instance P.HasSize (CollectorsData s) (TF.Attr s P.Integer) where
 
 -- | @logicmonitor_device_group@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/LogicMonitor/logicmonitor_device_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/logicmonitor/d/device_group.html terraform documentation>
 -- for more information.
 data DeviceGroupData s = DeviceGroupData'
-    { _filters :: TF.Attr s [TF.Attr s (Filters s)]
-    -- ^ @filters@ - (Optional)
+    { _filters :: TF.Attr s [TF.Attr s (DeviceGroupFilters s)]
+    -- ^ @filters@ - (Optional, Forces New)
     --
     , _offset  :: TF.Attr s P.Integer
     -- ^ @offset@ - (Optional)
@@ -155,12 +155,12 @@ instance TF.IsValid (DeviceGroupData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filters"
                   (_filters
-                      :: DeviceGroupData s -> TF.Attr s [TF.Attr s (Filters s)])
+                      :: DeviceGroupData s -> TF.Attr s [TF.Attr s (DeviceGroupFilters s)])
                   TF.validator
 
-instance P.HasFilters (DeviceGroupData s) (TF.Attr s [TF.Attr s (Filters s)]) where
+instance P.HasFilters (DeviceGroupData s) (TF.Attr s [TF.Attr s (DeviceGroupFilters s)]) where
     filters =
-        P.lens (_filters :: DeviceGroupData s -> TF.Attr s [TF.Attr s (Filters s)])
+        P.lens (_filters :: DeviceGroupData s -> TF.Attr s [TF.Attr s (DeviceGroupFilters s)])
                (\s a -> s { _filters = a } :: DeviceGroupData s)
 
 instance P.HasOffset (DeviceGroupData s) (TF.Attr s P.Integer) where
