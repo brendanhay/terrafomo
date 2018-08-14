@@ -153,7 +153,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "cookbook_constraints",
+            "name": "environment_cookbook_constraints",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -310,7 +310,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "run_list",
+            "name": "node_run_list",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -390,7 +390,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "run_list",
+            "name": "role_run_list",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
