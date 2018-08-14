@@ -2,8 +2,1210 @@
     "settings": [
         {
             "con": {
-                "smart": "newIps",
-                "name": "Ips'"
+                "smart": "newMonitoringPolicyThresholds",
+                "name": "MonitoringPolicyThresholds'"
+            },
+            "arguments": [
+                {
+                    "default": "_cpu",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
+                    "name": "_cpu",
+                    "method": "cpu",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsCpu s)]",
+                    "class": "HasCpu",
+                    "validate": true,
+                    "optional": false,
+                    "original": "cpu"
+                },
+                {
+                    "default": "_disk",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "_disk",
+                    "method": "disk",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsDisk s)]",
+                    "class": "HasDisk",
+                    "validate": true,
+                    "optional": false,
+                    "original": "disk"
+                },
+                {
+                    "default": "_internalPing",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"internal_ping\" <$> TF.attribute",
+                    "name": "_internalPing",
+                    "method": "internalPing",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsInternalPing s)]",
+                    "class": "HasInternalPing",
+                    "validate": true,
+                    "optional": false,
+                    "original": "internal_ping"
+                },
+                {
+                    "default": "_ram",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ram\" <$> TF.attribute",
+                    "name": "_ram",
+                    "method": "ram",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsRam s)]",
+                    "class": "HasRam",
+                    "validate": true,
+                    "optional": false,
+                    "original": "ram"
+                },
+                {
+                    "default": "_transfer",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"transfer\" <$> TF.attribute",
+                    "name": "_transfer",
+                    "method": "transfer",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsTransfer s)]",
+                    "class": "HasTransfer",
+                    "validate": true,
+                    "optional": false,
+                    "original": "transfer"
+                }
+            ],
+            "name": "MonitoringPolicyThresholds",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_cpu",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
+                    "name": "_cpu",
+                    "method": "cpu",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsCpu s)]",
+                    "class": "HasCpu",
+                    "validate": true,
+                    "optional": false,
+                    "original": "cpu"
+                },
+                {
+                    "default": "_disk",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
+                    "name": "_disk",
+                    "method": "disk",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsDisk s)]",
+                    "class": "HasDisk",
+                    "validate": true,
+                    "optional": false,
+                    "original": "disk"
+                },
+                {
+                    "default": "_internalPing",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"internal_ping\" <$> TF.attribute",
+                    "name": "_internalPing",
+                    "method": "internalPing",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsInternalPing s)]",
+                    "class": "HasInternalPing",
+                    "validate": true,
+                    "optional": false,
+                    "original": "internal_ping"
+                },
+                {
+                    "default": "_ram",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ram\" <$> TF.attribute",
+                    "name": "_ram",
+                    "method": "ram",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsRam s)]",
+                    "class": "HasRam",
+                    "validate": true,
+                    "optional": false,
+                    "original": "ram"
+                },
+                {
+                    "default": "_transfer",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"transfer\" <$> TF.attribute",
+                    "name": "_transfer",
+                    "method": "transfer",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (ThresholdsTransfer s)]",
+                    "class": "HasTransfer",
+                    "validate": true,
+                    "optional": false,
+                    "original": "transfer"
+                }
+            ],
+            "conflicts": [],
+            "type": "MonitoringPolicyThresholds s",
+            "original": "monitoring_policy_thresholds"
+        },
+        {
+            "con": {
+                "smart": "newFirewallPolicyRules",
+                "name": "FirewallPolicyRules'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_from\" <$> TF.attribute",
+                    "name": "_portFrom",
+                    "method": "portFrom",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPortFrom",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_from"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port_to\" <$> TF.attribute",
+                    "name": "_portTo",
+                    "method": "portTo",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPortTo",
+                    "validate": false,
+                    "optional": true,
+                    "original": "port_to"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"source_ip\" <$> TF.attribute",
+                    "name": "_sourceIp",
+                    "method": "sourceIp",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "source_ip"
+                }
+            ],
+            "name": "FirewallPolicyRules",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
+                }
+            ],
+            "conflicts": [],
+            "type": "FirewallPolicyRules s",
+            "original": "firewall_policy_rules"
+        },
+        {
+            "con": {
+                "smart": "newDiskCritical",
+                "name": "DiskCritical'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "DiskCritical",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "DiskCritical s",
+            "original": "disk_critical"
+        },
+        {
+            "con": {
+                "smart": "newSshKeyServers",
+                "name": "SshKeyServers'"
+            },
+            "arguments": [
+                {
+                    "default": "_id",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "name": "SshKeyServers",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_id",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
+                }
+            ],
+            "conflicts": [],
+            "type": "SshKeyServers s",
+            "original": "ssh_key_servers"
+        },
+        {
+            "con": {
+                "smart": "newMonitoringPolicyProcesses",
+                "name": "MonitoringPolicyProcesses'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert_if\" <$> TF.attribute",
+                    "name": "_alertIf",
+                    "method": "alertIf",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlertIf",
+                    "validate": false,
+                    "optional": true,
+                    "original": "alert_if"
+                },
+                {
+                    "default": "_emailNotification",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
+                    "name": "_emailNotification",
+                    "method": "emailNotification",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEmailNotification",
+                    "validate": false,
+                    "optional": false,
+                    "original": "email_notification"
+                },
+                {
+                    "default": "_process",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"process\" <$> TF.attribute",
+                    "name": "_process",
+                    "method": "process",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProcess",
+                    "validate": false,
+                    "optional": false,
+                    "original": "process"
+                }
+            ],
+            "name": "MonitoringPolicyProcesses",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_emailNotification",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
+                    "name": "_emailNotification",
+                    "method": "emailNotification",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEmailNotification",
+                    "validate": false,
+                    "optional": false,
+                    "original": "email_notification"
+                },
+                {
+                    "default": "_process",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"process\" <$> TF.attribute",
+                    "name": "_process",
+                    "method": "process",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProcess",
+                    "validate": false,
+                    "optional": false,
+                    "original": "process"
+                }
+            ],
+            "conflicts": [],
+            "type": "MonitoringPolicyProcesses s",
+            "original": "monitoring_policy_processes"
+        },
+        {
+            "con": {
+                "smart": "newInternalPingCritical",
+                "name": "InternalPingCritical'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "InternalPingCritical",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "InternalPingCritical s",
+            "original": "internal_ping_critical"
+        },
+        {
+            "con": {
+                "smart": "newTransferCritical",
+                "name": "TransferCritical'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "TransferCritical",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "TransferCritical s",
+            "original": "transfer_critical"
+        },
+        {
+            "con": {
+                "smart": "newCpuCritical",
+                "name": "CpuCritical'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "CpuCritical",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "CpuCritical s",
+            "original": "cpu_critical"
+        },
+        {
+            "con": {
+                "smart": "newRamCritical",
+                "name": "RamCritical'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "RamCritical",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "RamCritical s",
+            "original": "ram_critical"
+        },
+        {
+            "con": {
+                "smart": "newInternalPingWarning",
+                "name": "InternalPingWarning'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "InternalPingWarning",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "InternalPingWarning s",
+            "original": "internal_ping_warning"
+        },
+        {
+            "con": {
+                "smart": "newThresholdsRam",
+                "name": "ThresholdsRam'"
+            },
+            "arguments": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RamCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RamWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "name": "ThresholdsRam",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RamCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (RamWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "conflicts": [],
+            "type": "ThresholdsRam s",
+            "original": "thresholds_ram"
+        },
+        {
+            "con": {
+                "smart": "newThresholdsCpu",
+                "name": "ThresholdsCpu'"
+            },
+            "arguments": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (CpuCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (CpuWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "name": "ThresholdsCpu",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (CpuCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (CpuWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "conflicts": [],
+            "type": "ThresholdsCpu s",
+            "original": "thresholds_cpu"
+        },
+        {
+            "con": {
+                "smart": "newSharedStorageStorageServers",
+                "name": "SharedStorageStorageServers'"
+            },
+            "arguments": [
+                {
+                    "default": "_id",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "_rights",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rights\" <$> TF.attribute",
+                    "name": "_rights",
+                    "method": "rights",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRights",
+                    "validate": false,
+                    "optional": false,
+                    "original": "rights"
+                }
+            ],
+            "name": "SharedStorageStorageServers",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_id",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_id",
+                    "method": "id",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
+                {
+                    "default": "_rights",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"rights\" <$> TF.attribute",
+                    "name": "_rights",
+                    "method": "rights",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRights",
+                    "validate": false,
+                    "optional": false,
+                    "original": "rights"
+                }
+            ],
+            "conflicts": [],
+            "type": "SharedStorageStorageServers s",
+            "original": "shared_storage_storage_servers"
+        },
+        {
+            "con": {
+                "smart": "newServerIps",
+                "name": "ServerIps'"
             },
             "arguments": [
                 {
@@ -23,7 +1225,7 @@
                     "original": "firewall_policy_id"
                 }
             ],
-            "name": "Ips",
+            "name": "ServerIps",
             "threaded": true,
             "attributes": [
                 {
@@ -61,13 +1263,93 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "Ips s",
-            "original": "ips"
+            "type": "ServerIps s",
+            "original": "server_ips"
         },
         {
             "con": {
-                "smart": "newRules",
-                "name": "Rules'"
+                "smart": "newDiskWarning",
+                "name": "DiskWarning'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "DiskWarning",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "DiskWarning s",
+            "original": "disk_warning"
+        },
+        {
+            "con": {
+                "smart": "newLoadbalancerRules",
+                "name": "LoadbalancerRules'"
             },
             "arguments": [
                 {
@@ -135,7 +1417,7 @@
                     "original": "source_ip"
                 }
             ],
-            "name": "Rules",
+            "name": "LoadbalancerRules",
             "threaded": true,
             "attributes": [
                 {
@@ -222,13 +1504,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Rules s",
-            "original": "rules"
+            "type": "LoadbalancerRules s",
+            "original": "loadbalancer_rules"
         },
         {
             "con": {
-                "smart": "newDisk",
-                "name": "Disk'"
+                "smart": "newThresholdsTransfer",
+                "name": "ThresholdsTransfer'"
             },
             "arguments": [
                 {
@@ -241,7 +1523,7 @@
                     "name": "_critical",
                     "method": "critical",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
+                    "type": "TF.Attr s [TF.Attr s (TransferCritical s)]",
                     "class": "HasCritical",
                     "validate": true,
                     "optional": false,
@@ -257,14 +1539,14 @@
                     "name": "_warning",
                     "method": "warning",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
+                    "type": "TF.Attr s [TF.Attr s (TransferWarning s)]",
                     "class": "HasWarning",
                     "validate": true,
                     "optional": false,
                     "original": "warning"
                 }
             ],
-            "name": "Disk",
+            "name": "ThresholdsTransfer",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -278,7 +1560,7 @@
                     "name": "_critical",
                     "method": "critical",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
+                    "type": "TF.Attr s [TF.Attr s (TransferCritical s)]",
                     "class": "HasCritical",
                     "validate": true,
                     "optional": false,
@@ -294,7 +1576,7 @@
                     "name": "_warning",
                     "method": "warning",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
+                    "type": "TF.Attr s [TF.Attr s (TransferWarning s)]",
                     "class": "HasWarning",
                     "validate": true,
                     "optional": false,
@@ -302,93 +1584,13 @@
                 }
             ],
             "conflicts": [],
-            "type": "Disk s",
-            "original": "disk"
+            "type": "ThresholdsTransfer s",
+            "original": "thresholds_transfer"
         },
         {
             "con": {
-                "smart": "newInternalPing",
-                "name": "InternalPing'"
-            },
-            "arguments": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "name": "InternalPing",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "conflicts": [],
-            "type": "InternalPing s",
-            "original": "internal_ping"
-        },
-        {
-            "con": {
-                "smart": "newCritical",
-                "name": "Critical'"
+                "smart": "newRamWarning",
+                "name": "RamWarning'"
             },
             "arguments": [
                 {
@@ -424,7 +1626,7 @@
                     "original": "value"
                 }
             ],
-            "name": "Critical",
+            "name": "RamWarning",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -462,13 +1664,462 @@
                 }
             ],
             "conflicts": [],
-            "type": "Critical s",
-            "original": "critical"
+            "type": "RamWarning s",
+            "original": "ram_warning"
         },
         {
             "con": {
-                "smart": "newHdds",
-                "name": "Hdds'"
+                "smart": "newThresholdsInternalPing",
+                "name": "ThresholdsInternalPing'"
+            },
+            "arguments": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (InternalPingCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (InternalPingWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "name": "ThresholdsInternalPing",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (InternalPingCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (InternalPingWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "conflicts": [],
+            "type": "ThresholdsInternalPing s",
+            "original": "thresholds_internal_ping"
+        },
+        {
+            "con": {
+                "smart": "newCpuWarning",
+                "name": "CpuWarning'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "CpuWarning",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "CpuWarning s",
+            "original": "cpu_warning"
+        },
+        {
+            "con": {
+                "smart": "newMonitoringPolicyPorts",
+                "name": "MonitoringPolicyPorts'"
+            },
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert_if\" <$> TF.attribute",
+                    "name": "_alertIf",
+                    "method": "alertIf",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasAlertIf",
+                    "validate": false,
+                    "optional": true,
+                    "original": "alert_if"
+                },
+                {
+                    "default": "_emailNotification",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
+                    "name": "_emailNotification",
+                    "method": "emailNotification",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEmailNotification",
+                    "validate": false,
+                    "optional": false,
+                    "original": "email_notification"
+                },
+                {
+                    "default": "_port",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": true,
+                    "original": "protocol"
+                }
+            ],
+            "name": "MonitoringPolicyPorts",
+            "threaded": true,
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
+            "parameters": [
+                {
+                    "default": "_emailNotification",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
+                    "name": "_emailNotification",
+                    "method": "emailNotification",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasEmailNotification",
+                    "validate": false,
+                    "optional": false,
+                    "original": "email_notification"
+                },
+                {
+                    "default": "_port",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"port\" <$> TF.attribute",
+                    "name": "_port",
+                    "method": "port",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasPort",
+                    "validate": false,
+                    "optional": false,
+                    "original": "port"
+                }
+            ],
+            "conflicts": [],
+            "type": "MonitoringPolicyPorts s",
+            "original": "monitoring_policy_ports"
+        },
+        {
+            "con": {
+                "smart": "newTransferWarning",
+                "name": "TransferWarning'"
+            },
+            "arguments": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "name": "TransferWarning",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_alert",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
+                    "name": "_alert",
+                    "method": "alert",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasAlert",
+                    "validate": false,
+                    "optional": false,
+                    "original": "alert"
+                },
+                {
+                    "default": "_value",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"value\" <$> TF.attribute",
+                    "name": "_value",
+                    "method": "value",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Integer",
+                    "class": "HasValue",
+                    "validate": false,
+                    "optional": false,
+                    "original": "value"
+                }
+            ],
+            "conflicts": [],
+            "type": "TransferWarning s",
+            "original": "transfer_warning"
+        },
+        {
+            "con": {
+                "smart": "newThresholdsDisk",
+                "name": "ThresholdsDisk'"
+            },
+            "arguments": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (DiskCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (DiskWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "name": "ThresholdsDisk",
+            "threaded": true,
+            "attributes": [],
+            "parameters": [
+                {
+                    "default": "_critical",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
+                    "name": "_critical",
+                    "method": "critical",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (DiskCritical s)]",
+                    "class": "HasCritical",
+                    "validate": true,
+                    "optional": false,
+                    "original": "critical"
+                },
+                {
+                    "default": "_warning",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
+                    "name": "_warning",
+                    "method": "warning",
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (DiskWarning s)]",
+                    "class": "HasWarning",
+                    "validate": true,
+                    "optional": false,
+                    "original": "warning"
+                }
+            ],
+            "conflicts": [],
+            "type": "ThresholdsDisk s",
+            "original": "thresholds_disk"
+        },
+        {
+            "con": {
+                "smart": "newServerHdds",
+                "name": "ServerHdds'"
             },
             "arguments": [
                 {
@@ -504,7 +2155,7 @@
                     "original": "is_main"
                 }
             ],
-            "name": "Hdds",
+            "name": "ServerHdds",
             "threaded": true,
             "attributes": [
                 {
@@ -543,908 +2194,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Hdds s",
-            "original": "hdds"
-        },
-        {
-            "con": {
-                "smart": "newServers",
-                "name": "Servers'"
-            },
-            "arguments": [
-                {
-                    "default": "_id",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "name": "Servers",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_id",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                },
-                {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                }
-            ],
-            "conflicts": [],
-            "type": "Servers s",
-            "original": "servers"
-        },
-        {
-            "con": {
-                "smart": "newThresholds",
-                "name": "Thresholds'"
-            },
-            "arguments": [
-                {
-                    "default": "_cpu",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
-                    "name": "_cpu",
-                    "method": "cpu",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Cpu s)]",
-                    "class": "HasCpu",
-                    "validate": true,
-                    "optional": false,
-                    "original": "cpu"
-                },
-                {
-                    "default": "_disk",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
-                    "name": "_disk",
-                    "method": "disk",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Disk s)]",
-                    "class": "HasDisk",
-                    "validate": true,
-                    "optional": false,
-                    "original": "disk"
-                },
-                {
-                    "default": "_internalPing",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"internal_ping\" <$> TF.attribute",
-                    "name": "_internalPing",
-                    "method": "internalPing",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InternalPing s)]",
-                    "class": "HasInternalPing",
-                    "validate": true,
-                    "optional": false,
-                    "original": "internal_ping"
-                },
-                {
-                    "default": "_ram",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ram\" <$> TF.attribute",
-                    "name": "_ram",
-                    "method": "ram",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Ram s)]",
-                    "class": "HasRam",
-                    "validate": true,
-                    "optional": false,
-                    "original": "ram"
-                },
-                {
-                    "default": "_transfer",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"transfer\" <$> TF.attribute",
-                    "name": "_transfer",
-                    "method": "transfer",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Transfer s)]",
-                    "class": "HasTransfer",
-                    "validate": true,
-                    "optional": false,
-                    "original": "transfer"
-                }
-            ],
-            "name": "Thresholds",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_cpu",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"cpu\" <$> TF.attribute",
-                    "name": "_cpu",
-                    "method": "cpu",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Cpu s)]",
-                    "class": "HasCpu",
-                    "validate": true,
-                    "optional": false,
-                    "original": "cpu"
-                },
-                {
-                    "default": "_disk",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"disk\" <$> TF.attribute",
-                    "name": "_disk",
-                    "method": "disk",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Disk s)]",
-                    "class": "HasDisk",
-                    "validate": true,
-                    "optional": false,
-                    "original": "disk"
-                },
-                {
-                    "default": "_internalPing",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"internal_ping\" <$> TF.attribute",
-                    "name": "_internalPing",
-                    "method": "internalPing",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (InternalPing s)]",
-                    "class": "HasInternalPing",
-                    "validate": true,
-                    "optional": false,
-                    "original": "internal_ping"
-                },
-                {
-                    "default": "_ram",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ram\" <$> TF.attribute",
-                    "name": "_ram",
-                    "method": "ram",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Ram s)]",
-                    "class": "HasRam",
-                    "validate": true,
-                    "optional": false,
-                    "original": "ram"
-                },
-                {
-                    "default": "_transfer",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"transfer\" <$> TF.attribute",
-                    "name": "_transfer",
-                    "method": "transfer",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Transfer s)]",
-                    "class": "HasTransfer",
-                    "validate": true,
-                    "optional": false,
-                    "original": "transfer"
-                }
-            ],
-            "conflicts": [],
-            "type": "Thresholds s",
-            "original": "thresholds"
-        },
-        {
-            "con": {
-                "smart": "newWarning",
-                "name": "Warning'"
-            },
-            "arguments": [
-                {
-                    "default": "_alert",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
-                    "name": "_alert",
-                    "method": "alert",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAlert",
-                    "validate": false,
-                    "optional": false,
-                    "original": "alert"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "name": "Warning",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_alert",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"alert\" <$> TF.attribute",
-                    "name": "_alert",
-                    "method": "alert",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasAlert",
-                    "validate": false,
-                    "optional": false,
-                    "original": "alert"
-                },
-                {
-                    "default": "_value",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"value\" <$> TF.attribute",
-                    "name": "_value",
-                    "method": "value",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasValue",
-                    "validate": false,
-                    "optional": false,
-                    "original": "value"
-                }
-            ],
-            "conflicts": [],
-            "type": "Warning s",
-            "original": "warning"
-        },
-        {
-            "con": {
-                "smart": "newPorts",
-                "name": "Ports'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"alert_if\" <$> TF.attribute",
-                    "name": "_alertIf",
-                    "method": "alertIf",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAlertIf",
-                    "validate": false,
-                    "optional": true,
-                    "original": "alert_if"
-                },
-                {
-                    "default": "_emailNotification",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
-                    "name": "_emailNotification",
-                    "method": "emailNotification",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEmailNotification",
-                    "validate": false,
-                    "optional": false,
-                    "original": "email_notification"
-                },
-                {
-                    "default": "_port",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": true,
-                    "original": "protocol"
-                }
-            ],
-            "name": "Ports",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_emailNotification",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
-                    "name": "_emailNotification",
-                    "method": "emailNotification",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEmailNotification",
-                    "validate": false,
-                    "optional": false,
-                    "original": "email_notification"
-                },
-                {
-                    "default": "_port",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"port\" <$> TF.attribute",
-                    "name": "_port",
-                    "method": "port",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Integer",
-                    "class": "HasPort",
-                    "validate": false,
-                    "optional": false,
-                    "original": "port"
-                }
-            ],
-            "conflicts": [],
-            "type": "Ports s",
-            "original": "ports"
-        },
-        {
-            "con": {
-                "smart": "newProcesses",
-                "name": "Processes'"
-            },
-            "arguments": [
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"alert_if\" <$> TF.attribute",
-                    "name": "_alertIf",
-                    "method": "alertIf",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAlertIf",
-                    "validate": false,
-                    "optional": true,
-                    "original": "alert_if"
-                },
-                {
-                    "default": "_emailNotification",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
-                    "name": "_emailNotification",
-                    "method": "emailNotification",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEmailNotification",
-                    "validate": false,
-                    "optional": false,
-                    "original": "email_notification"
-                },
-                {
-                    "default": "_process",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"process\" <$> TF.attribute",
-                    "name": "_process",
-                    "method": "process",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProcess",
-                    "validate": false,
-                    "optional": false,
-                    "original": "process"
-                }
-            ],
-            "name": "Processes",
-            "threaded": true,
-            "attributes": [
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_computedId",
-                    "method": "computedId",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasComputedId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                }
-            ],
-            "parameters": [
-                {
-                    "default": "_emailNotification",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"email_notification\" <$> TF.attribute",
-                    "name": "_emailNotification",
-                    "method": "emailNotification",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Bool",
-                    "class": "HasEmailNotification",
-                    "validate": false,
-                    "optional": false,
-                    "original": "email_notification"
-                },
-                {
-                    "default": "_process",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"process\" <$> TF.attribute",
-                    "name": "_process",
-                    "method": "process",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProcess",
-                    "validate": false,
-                    "optional": false,
-                    "original": "process"
-                }
-            ],
-            "conflicts": [],
-            "type": "Processes s",
-            "original": "processes"
-        },
-        {
-            "con": {
-                "smart": "newStorageServers",
-                "name": "StorageServers'"
-            },
-            "arguments": [
-                {
-                    "default": "_id",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                },
-                {
-                    "default": "_rights",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"rights\" <$> TF.attribute",
-                    "name": "_rights",
-                    "method": "rights",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRights",
-                    "validate": false,
-                    "optional": false,
-                    "original": "rights"
-                }
-            ],
-            "name": "StorageServers",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_id",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"id\" <$> TF.attribute",
-                    "name": "_id",
-                    "method": "id",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "id"
-                },
-                {
-                    "default": "_rights",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"rights\" <$> TF.attribute",
-                    "name": "_rights",
-                    "method": "rights",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasRights",
-                    "validate": false,
-                    "optional": false,
-                    "original": "rights"
-                }
-            ],
-            "conflicts": [],
-            "type": "StorageServers s",
-            "original": "storage_servers"
-        },
-        {
-            "con": {
-                "smart": "newTransfer",
-                "name": "Transfer'"
-            },
-            "arguments": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "name": "Transfer",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "conflicts": [],
-            "type": "Transfer s",
-            "original": "transfer"
-        },
-        {
-            "con": {
-                "smart": "newRam",
-                "name": "Ram'"
-            },
-            "arguments": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "name": "Ram",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "conflicts": [],
-            "type": "Ram s",
-            "original": "ram"
-        },
-        {
-            "con": {
-                "smart": "newCpu",
-                "name": "Cpu'"
-            },
-            "arguments": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "name": "Cpu",
-            "threaded": true,
-            "attributes": [],
-            "parameters": [
-                {
-                    "default": "_critical",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"critical\" <$> TF.attribute",
-                    "name": "_critical",
-                    "method": "critical",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Critical s)]",
-                    "class": "HasCritical",
-                    "validate": true,
-                    "optional": false,
-                    "original": "critical"
-                },
-                {
-                    "default": "_warning",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"warning\" <$> TF.attribute",
-                    "name": "_warning",
-                    "method": "warning",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Warning s)]",
-                    "class": "HasWarning",
-                    "validate": true,
-                    "optional": false,
-                    "original": "warning"
-                }
-            ],
-            "conflicts": [],
-            "type": "Cpu s",
-            "original": "cpu"
+            "type": "ServerHdds s",
+            "original": "server_hdds"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/oneandone/index.html",
     "dataSources": [
         {
             "con": {
@@ -1524,6 +2278,7 @@
                     "original": "vcores"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/d/instance_size.html",
             "name": "InstanceSizeData",
             "threaded": true,
             "attributes": [],
@@ -1693,6 +2448,7 @@
                     "original": "size"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/block_storage.html",
             "name": "BlockStorageResource",
             "threaded": true,
             "attributes": [],
@@ -1798,13 +2554,14 @@
                     "name": "_rules",
                     "method": "rules",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rules s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallPolicyRules s)]",
                     "class": "HasRules",
                     "validate": true,
                     "optional": false,
                     "original": "rules"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/firewall_policy.html",
             "name": "FirewallPolicyResource",
             "threaded": true,
             "attributes": [],
@@ -1835,7 +2592,7 @@
                     "name": "_rules",
                     "method": "rules",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rules s)]",
+                    "type": "TF.Attr s [TF.Attr s (FirewallPolicyRules s)]",
                     "class": "HasRules",
                     "validate": true,
                     "optional": false,
@@ -2025,6 +2782,7 @@
                     "original": "url"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/image.html",
             "name": "ImageResource",
             "threaded": true,
             "attributes": [],
@@ -2271,13 +3029,14 @@
                     "name": "_rules",
                     "method": "rules",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rules s)]",
+                    "type": "TF.Attr s [TF.Attr s (LoadbalancerRules s)]",
                     "class": "HasRules",
                     "validate": true,
                     "optional": false,
                     "original": "rules"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/loadbalancer.html",
             "name": "LoadbalancerResource",
             "threaded": true,
             "attributes": [],
@@ -2324,7 +3083,7 @@
                     "name": "_rules",
                     "method": "rules",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Rules s)]",
+                    "type": "TF.Attr s [TF.Attr s (LoadbalancerRules s)]",
                     "class": "HasRules",
                     "validate": true,
                     "optional": false,
@@ -2415,7 +3174,7 @@
                     "name": "_ports",
                     "method": "ports",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Ports s)]",
+                    "type": "TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]",
                     "class": "HasPorts",
                     "validate": true,
                     "optional": true,
@@ -2431,7 +3190,7 @@
                     "name": "_processes",
                     "method": "processes",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Processes s)]",
+                    "type": "TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]",
                     "class": "HasProcesses",
                     "validate": true,
                     "optional": true,
@@ -2447,13 +3206,14 @@
                     "name": "_thresholds",
                     "method": "thresholds",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Thresholds s)]",
+                    "type": "TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]",
                     "class": "HasThresholds",
                     "validate": true,
                     "optional": false,
                     "original": "thresholds"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/monitoring_policy.html",
             "name": "MonitoringPolicyResource",
             "threaded": true,
             "attributes": [],
@@ -2500,7 +3260,7 @@
                     "name": "_thresholds",
                     "method": "thresholds",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Thresholds s)]",
+                    "type": "TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]",
                     "class": "HasThresholds",
                     "validate": true,
                     "optional": false,
@@ -2614,6 +3374,7 @@
                     "original": "subnet_mask"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/private_network.html",
             "name": "PrivateNetworkResource",
             "threaded": true,
             "attributes": [],
@@ -2694,6 +3455,7 @@
                     "original": "reverse_dns"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/public_ip.html",
             "name": "PublicIpResource",
             "threaded": true,
             "attributes": [
@@ -2865,7 +3627,7 @@
                             "method": "fixedInstanceSize"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (Hdds s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerHdds s)]",
                     "class": "HasHdds",
                     "validate": true,
                     "optional": true,
@@ -3040,6 +3802,7 @@
                     "original": "vcores"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/server.html",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
@@ -3053,7 +3816,7 @@
                     "name": "_computedIps",
                     "method": "computedIps",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Ips s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerIps s)]",
                     "class": "HasComputedIps",
                     "validate": true,
                     "optional": false,
@@ -3186,7 +3949,7 @@
                             "method": "fixedInstanceSize"
                         }
                     ],
-                    "type": "TF.Attr s [TF.Attr s (Hdds s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerHdds s)]",
                     "class": "HasHdds",
                     "validate": true,
                     "optional": true,
@@ -3364,13 +4127,14 @@
                     "name": "_storageServers",
                     "method": "storageServers",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (StorageServers s)]",
+                    "type": "TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]",
                     "class": "HasStorageServers",
                     "validate": true,
                     "optional": true,
                     "original": "storage_servers"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/shared_storage.html",
             "name": "SharedStorageResource",
             "threaded": true,
             "attributes": [],
@@ -3467,6 +4231,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/ssh_key.html",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [
@@ -3512,7 +4277,7 @@
                     "name": "_computedServers",
                     "method": "computedServers",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Servers s)]",
+                    "type": "TF.Attr s [TF.Attr s (SshKeyServers s)]",
                     "class": "HasComputedServers",
                     "validate": true,
                     "optional": false,
@@ -3596,6 +4361,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/oneandone/r/vpn.html",
             "name": "VpnResource",
             "threaded": true,
             "attributes": [
