@@ -193,25 +193,16 @@ data UserResource s = UserResource'
     --
     -- Conflicts with:
     --
-    -- * 'password'
     -- * 'plaintextPassword'
     , _host              :: TF.Attr s P.Text
     -- ^ @host@ - (Optional)
     --
-    , _password          :: TF.Attr s P.Text
-    -- ^ @password@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'authPlugin'
-    -- * 'plaintextPassword'
     , _plaintextPassword :: TF.Attr s P.Text
     -- ^ @plaintext_password@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'authPlugin'
-    -- * 'password'
     , _user              :: TF.Attr s P.Text
     -- ^ @user@ - (Required)
     --
@@ -225,7 +216,6 @@ userResource _user =
         UserResource'
             { _authPlugin = TF.Nil
             , _host = TF.value "localhost"
-            , _password = TF.Nil
             , _plaintextPassword = TF.Nil
             , _user = _user
             }
@@ -234,7 +224,6 @@ instance TF.IsObject (UserResource s) where
     toObject UserResource'{..} = P.catMaybes
         [ TF.assign "auth_plugin" <$> TF.attribute _authPlugin
         , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "password" <$> TF.attribute _password
         , TF.assign "plaintext_password" <$> TF.attribute _plaintextPassword
         , TF.assign "user" <$> TF.attribute _user
         ]
@@ -244,17 +233,12 @@ instance TF.IsValid (UserResource s) where
         [ if (_authPlugin P.== TF.Nil)
               then P.Nothing
               else P.Just ("_authPlugin",
-                            [ "_password"                            , "_plaintextPassword"
-                            ])
-        , if (_password P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_password",
-                            [ "_authPlugin"                            , "_plaintextPassword"
+                            [ "_plaintextPassword"
                             ])
         , if (_plaintextPassword P.== TF.Nil)
               then P.Nothing
               else P.Just ("_plaintextPassword",
-                            [ "_authPlugin"                            , "_password"
+                            [ "_authPlugin"
                             ])
         ])
 
@@ -267,11 +251,6 @@ instance P.HasHost (UserResource s) (TF.Attr s P.Text) where
     host =
         P.lens (_host :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _host = a } :: UserResource s)
-
-instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
-    password =
-        P.lens (_password :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: UserResource s)
 
 instance P.HasPlaintextPassword (UserResource s) (TF.Attr s P.Text) where
     plaintextPassword =
