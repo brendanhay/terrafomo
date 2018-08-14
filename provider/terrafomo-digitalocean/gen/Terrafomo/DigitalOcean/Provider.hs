@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator          as TF
 
 -- | The @DigitalOcean@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _token :: P.Text

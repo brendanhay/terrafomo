@@ -87,20 +87,20 @@ import qualified Terrafomo.Validator             as TF
 
 -- | @digitalocean_certificate@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_certificate terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/certificate.html terraform documentation>
 -- for more information.
 data CertificateResource s = CertificateResource'
     { _certificateChain :: TF.Attr s P.Text
-    -- ^ @certificate_chain@ - (Optional)
+    -- ^ @certificate_chain@ - (Optional, Forces New)
     --
     , _leafCertificate  :: TF.Attr s P.Text
-    -- ^ @leaf_certificate@ - (Required)
+    -- ^ @leaf_certificate@ - (Required, Forces New)
     --
     , _name             :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _privateKey       :: TF.Attr s P.Text
-    -- ^ @private_key@ - (Required)
+    -- ^ @private_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -150,21 +150,21 @@ instance P.HasPrivateKey (CertificateResource s) (TF.Attr s P.Text) where
                (\s a -> s { _privateKey = a } :: CertificateResource s)
 
 instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedNotAfter x = TF.compute (TF.refKey x) "_computedNotAfter"
+    computedNotAfter x = TF.compute (TF.refKey x) "not_after"
 
 instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (CertificateResource s)) (TF.Attr s P.Text) where
-    computedSha1Fingerprint x = TF.compute (TF.refKey x) "_computedSha1Fingerprint"
+    computedSha1Fingerprint x = TF.compute (TF.refKey x) "sha1_fingerprint"
 
 -- | @digitalocean_domain@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_domain terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/domain.html terraform documentation>
 -- for more information.
 data DomainResource s = DomainResource'
     { _ipAddress :: TF.Attr s P.Text
-    -- ^ @ip_address@ - (Required)
+    -- ^ @ip_address@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -200,20 +200,20 @@ instance P.HasName (DomainResource s) (TF.Attr s P.Text) where
 
 -- | @digitalocean_droplet@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_droplet terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/droplet.html terraform documentation>
 -- for more information.
 data DropletResource s = DropletResource'
     { _backups           :: TF.Attr s P.Bool
     -- ^ @backups@ - (Optional)
     --
     , _image             :: TF.Attr s P.Text
-    -- ^ @image@ - (Required)
+    -- ^ @image@ - (Required, Forces New)
     --
     , _ipv6              :: TF.Attr s P.Bool
     -- ^ @ipv6@ - (Optional)
     --
     , _monitoring        :: TF.Attr s P.Bool
-    -- ^ @monitoring@ - (Optional)
+    -- ^ @monitoring@ - (Optional, Forces New)
     --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
@@ -222,7 +222,7 @@ data DropletResource s = DropletResource'
     -- ^ @private_networking@ - (Optional)
     --
     , _region            :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
+    -- ^ @region@ - (Required, Forces New)
     --
     , _resizeDisk        :: TF.Attr s P.Bool
     -- ^ @resize_disk@ - (Optional)
@@ -237,7 +237,7 @@ data DropletResource s = DropletResource'
     -- ^ @tags@ - (Optional)
     --
     , _userData          :: TF.Attr s P.Text
-    -- ^ @user_data@ - (Optional)
+    -- ^ @user_data@ - (Optional, Forces New)
     --
     , _volumeIds         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @volume_ids@ - (Optional)
@@ -354,50 +354,50 @@ instance P.HasVolumeIds (DropletResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _volumeIds = a } :: DropletResource s)
 
 instance s ~ s' => P.HasComputedDisk (TF.Ref s' (DropletResource s)) (TF.Attr s P.Integer) where
-    computedDisk x = TF.compute (TF.refKey x) "_computedDisk"
+    computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv4Address x = TF.compute (TF.refKey x) "_computedIpv4Address"
+    computedIpv4Address x = TF.compute (TF.refKey x) "ipv4_address"
 
 instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "_computedIpv4AddressPrivate"
+    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "ipv4_address_private"
 
 instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv6Address x = TF.compute (TF.refKey x) "_computedIpv6Address"
+    computedIpv6Address x = TF.compute (TF.refKey x) "ipv6_address"
 
 instance s ~ s' => P.HasComputedIpv6AddressPrivate (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedIpv6AddressPrivate x = TF.compute (TF.refKey x) "_computedIpv6AddressPrivate"
+    computedIpv6AddressPrivate x = TF.compute (TF.refKey x) "ipv6_address_private"
 
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedLocked x = TF.compute (TF.refKey x) "_computedLocked"
+    computedLocked x = TF.compute (TF.refKey x) "locked"
 
 instance s ~ s' => P.HasComputedPriceHourly (TF.Ref s' (DropletResource s)) (TF.Attr s P.Double) where
-    computedPriceHourly x = TF.compute (TF.refKey x) "_computedPriceHourly"
+    computedPriceHourly x = TF.compute (TF.refKey x) "price_hourly"
 
 instance s ~ s' => P.HasComputedPriceMonthly (TF.Ref s' (DropletResource s)) (TF.Attr s P.Double) where
-    computedPriceMonthly x = TF.compute (TF.refKey x) "_computedPriceMonthly"
+    computedPriceMonthly x = TF.compute (TF.refKey x) "price_monthly"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 instance s ~ s' => P.HasComputedVcpus (TF.Ref s' (DropletResource s)) (TF.Attr s P.Integer) where
-    computedVcpus x = TF.compute (TF.refKey x) "_computedVcpus"
+    computedVcpus x = TF.compute (TF.refKey x) "vcpus"
 
 -- | @digitalocean_firewall@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_firewall terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/firewall.html terraform documentation>
 -- for more information.
 data FirewallResource s = FirewallResource'
     { _dropletIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @droplet_ids@ - (Optional)
     --
-    , _inboundRule  :: TF.Attr s [TF.Attr s (InboundRule s)]
+    , _inboundRule  :: TF.Attr s [TF.Attr s (FirewallInboundRule s)]
     -- ^ @inbound_rule@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _outboundRule :: TF.Attr s [TF.Attr s (OutboundRule s)]
+    , _outboundRule :: TF.Attr s [TF.Attr s (FirewallOutboundRule s)]
     -- ^ @outbound_rule@ - (Optional)
     --
     , _tags         :: TF.Attr s [TF.Attr s P.Text]
@@ -431,11 +431,11 @@ instance TF.IsValid (FirewallResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_inboundRule"
                   (_inboundRule
-                      :: FirewallResource s -> TF.Attr s [TF.Attr s (InboundRule s)])
+                      :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallInboundRule s)])
                   TF.validator
            P.<> TF.settingsValidator "_outboundRule"
                   (_outboundRule
-                      :: FirewallResource s -> TF.Attr s [TF.Attr s (OutboundRule s)])
+                      :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallOutboundRule s)])
                   TF.validator
 
 instance P.HasDropletIds (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -443,9 +443,9 @@ instance P.HasDropletIds (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) whe
         P.lens (_dropletIds :: FirewallResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _dropletIds = a } :: FirewallResource s)
 
-instance P.HasInboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (InboundRule s)]) where
+instance P.HasInboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallInboundRule s)]) where
     inboundRule =
-        P.lens (_inboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (InboundRule s)])
+        P.lens (_inboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallInboundRule s)])
                (\s a -> s { _inboundRule = a } :: FirewallResource s)
 
 instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
@@ -453,9 +453,9 @@ instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
         P.lens (_name :: FirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FirewallResource s)
 
-instance P.HasOutboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (OutboundRule s)]) where
+instance P.HasOutboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallOutboundRule s)]) where
     outboundRule =
-        P.lens (_outboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (OutboundRule s)])
+        P.lens (_outboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallOutboundRule s)])
                (\s a -> s { _outboundRule = a } :: FirewallResource s)
 
 instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -464,24 +464,24 @@ instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _tags = a } :: FirewallResource s)
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [TF.Attr s (PendingChanges s)]) where
-    computedPendingChanges x = TF.compute (TF.refKey x) "_computedPendingChanges"
+instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [TF.Attr s (FirewallPendingChanges s)]) where
+    computedPendingChanges x = TF.compute (TF.refKey x) "pending_changes"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @digitalocean_floating_ip@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_floating_ip terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/floating_ip.html terraform documentation>
 -- for more information.
 data FloatingIpResource s = FloatingIpResource'
     { _dropletId :: TF.Attr s P.Integer
     -- ^ @droplet_id@ - (Optional)
     --
     , _region    :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
+    -- ^ @region@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -515,11 +515,11 @@ instance P.HasRegion (FloatingIpResource s) (TF.Attr s P.Text) where
                (\s a -> s { _region = a } :: FloatingIpResource s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (FloatingIpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "_computedIpAddress"
+    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 -- | @digitalocean_loadbalancer@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_loadbalancer terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/loadbalancer.html terraform documentation>
 -- for more information.
 data LoadbalancerResource s = LoadbalancerResource'
     { _algorithm :: TF.Attr s P.Text
@@ -531,10 +531,10 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _dropletTag :: TF.Attr s P.Text
     -- ^ @droplet_tag@ - (Optional)
     --
-    , _forwardingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s)))
+    , _forwardingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))
     -- ^ @forwarding_rule@ - (Required)
     --
-    , _healthcheck :: TF.Attr s (Healthcheck s)
+    , _healthcheck :: TF.Attr s (LoadbalancerHealthcheck s)
     -- ^ @healthcheck@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -544,12 +544,12 @@ data LoadbalancerResource s = LoadbalancerResource'
     -- ^ @redirect_http_to_https@ - (Optional)
     --
     , _region :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
+    -- ^ @region@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 loadbalancerResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Resource P.Provider (LoadbalancerResource s)
@@ -582,11 +582,11 @@ instance TF.IsValid (LoadbalancerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_forwardingRule"
                   (_forwardingRule
-                      :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s))))
+                      :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))))
                   TF.validator
            P.<> TF.settingsValidator "_healthcheck"
                   (_healthcheck
-                      :: LoadbalancerResource s -> TF.Attr s (Healthcheck s))
+                      :: LoadbalancerResource s -> TF.Attr s (LoadbalancerHealthcheck s))
                   TF.validator
 
 instance P.HasAlgorithm (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -604,14 +604,14 @@ instance P.HasDropletTag (LoadbalancerResource s) (TF.Attr s P.Text) where
         P.lens (_dropletTag :: LoadbalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _dropletTag = a } :: LoadbalancerResource s)
 
-instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s)))) where
+instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))) where
     forwardingRule =
-        P.lens (_forwardingRule :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRule s))))
+        P.lens (_forwardingRule :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))))
                (\s a -> s { _forwardingRule = a } :: LoadbalancerResource s)
 
-instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (Healthcheck s)) where
+instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (LoadbalancerHealthcheck s)) where
     healthcheck =
-        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (Healthcheck s))
+        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (LoadbalancerHealthcheck s))
                (\s a -> s { _healthcheck = a } :: LoadbalancerResource s)
 
 instance P.HasName (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -630,27 +630,27 @@ instance P.HasRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
                (\s a -> s { _region = a } :: LoadbalancerResource s)
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "_computedIp"
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (StickySessions s)) where
-    computedStickySessions x = TF.compute (TF.refKey x) "_computedStickySessions"
+instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (LoadbalancerStickySessions s)) where
+    computedStickySessions x = TF.compute (TF.refKey x) "sticky_sessions"
 
 -- | @digitalocean_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
     { _domain :: TF.Attr s P.Text
-    -- ^ @domain@ - (Required)
+    -- ^ @domain@ - (Required, Forces New)
     --
     , _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _tag    :: TF.Attr s P.Text
-    -- ^ @tag@ - (Optional)
+    -- ^ @tag@ - (Optional, Forces New)
     --
     , _type'  :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -699,36 +699,36 @@ instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedFlags (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFlags x = TF.compute (TF.refKey x) "_computedFlags"
+    computedFlags x = TF.compute (TF.refKey x) "flags"
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
 instance s ~ s' => P.HasComputedPort (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedPort x = TF.compute (TF.refKey x) "_computedPort"
+    computedPort x = TF.compute (TF.refKey x) "port"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "_computedPriority"
+    computedPriority x = TF.compute (TF.refKey x) "priority"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
+    computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "_computedValue"
+    computedValue x = TF.compute (TF.refKey x) "value"
 
 instance s ~ s' => P.HasComputedWeight (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedWeight x = TF.compute (TF.refKey x) "_computedWeight"
+    computedWeight x = TF.compute (TF.refKey x) "weight"
 
 -- | @digitalocean_ssh_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/ssh_key.html terraform documentation>
 -- for more information.
 data SshKeyResource s = SshKeyResource'
     { _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _publicKey :: TF.Attr s P.Text
-    -- ^ @public_key@ - (Required)
+    -- ^ @public_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -763,18 +763,18 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _publicKey = a } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @digitalocean_tag@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_tag terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/tag.html terraform documentation>
 -- for more information.
 data TagResource s = TagResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -802,23 +802,23 @@ instance P.HasName (TagResource s) (TF.Attr s P.Text) where
 
 -- | @digitalocean_volume@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/DigitalOcean/digitalocean_volume terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/digitalocean/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
     { _description    :: TF.Attr s P.Text
-    -- ^ @description@ - (Optional)
+    -- ^ @description@ - (Optional, Forces New)
     --
     , _filesystemType :: TF.Attr s P.Text
-    -- ^ @filesystem_type@ - (Optional)
+    -- ^ @filesystem_type@ - (Optional, Forces New)
     --
     , _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _region         :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
+    -- ^ @region@ - (Required, Forces New)
     --
     , _size           :: TF.Attr s P.Integer
-    -- ^ @size@ - (Required)
+    -- ^ @size@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -875,7 +875,7 @@ instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
                (\s a -> s { _size = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedDropletIds (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s P.Integer]) where
-    computedDropletIds x = TF.compute (TF.refKey x) "_computedDropletIds"
+    computedDropletIds x = TF.compute (TF.refKey x) "droplet_ids"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
