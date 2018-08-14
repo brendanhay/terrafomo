@@ -2017,24 +2017,6 @@
         },
         "arguments": [
             {
-                "default": "P.Nothing",
-                "computed": false,
-                "required": false,
-                "help": [
-                    "The API key for Scaleway API operations."
-                ],
-                "forceNew": false,
-                "encoder": "TF.assign \"access_key\" <$>",
-                "name": "_accessKey",
-                "method": "accessKey",
-                "conflicts": [],
-                "type": "P.Maybe P.Text",
-                "class": "HasAccessKey",
-                "validate": false,
-                "optional": true,
-                "original": "access_key"
-            },
-            {
                 "default": "_organization",
                 "computed": false,
                 "required": true,
