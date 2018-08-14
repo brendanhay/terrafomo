@@ -3347,22 +3347,6 @@
                 "original": "password"
             },
             {
-                "default": "50",
-                "computed": false,
-                "required": false,
-                "help": [],
-                "forceNew": false,
-                "encoder": "P.Just $ TF.assign \"retries\"",
-                "name": "_retries",
-                "method": "retries",
-                "conflicts": [],
-                "type": "P.Integer",
-                "class": "HasRetries",
-                "validate": false,
-                "optional": true,
-                "original": "retries"
-            },
-            {
                 "default": "_username",
                 "computed": false,
                 "required": true,
