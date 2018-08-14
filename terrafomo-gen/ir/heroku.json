@@ -2150,22 +2150,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "outbound_ips"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": true,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"trusted_ip_ranges\" <$> TF.attribute",
-                    "name": "_computedTrustedIpRanges",
-                    "method": "computedTrustedIpRanges",
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s P.Text]",
-                    "class": "HasComputedTrustedIpRanges",
-                    "validate": false,
-                    "optional": true,
-                    "original": "trusted_ip_ranges"
                 }
             ],
             "parameters": [
