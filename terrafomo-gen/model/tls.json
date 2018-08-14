@@ -30,7 +30,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_names",
+            "name": "cert_request_dns_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -55,7 +55,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ip_addresses",
+            "name": "cert_request_ip_addresses",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -105,7 +105,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "subject",
+            "name": "cert_request_subject",
             "schemas": [
               {
                 "name": "common_name",
@@ -215,7 +215,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "street_address",
+                  "name": "subject_street_address",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -248,7 +248,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "allowed_uses",
+            "name": "locally_signed_cert_allowed_uses",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -488,7 +488,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "allowed_uses",
+            "name": "self_signed_cert_allowed_uses",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -525,7 +525,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_names",
+            "name": "self_signed_cert_dns_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -564,7 +564,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ip_addresses",
+            "name": "self_signed_cert_ip_addresses",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -627,7 +627,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "subject",
+            "name": "self_signed_cert_subject",
             "schemas": [
               {
                 "name": "common_name",
@@ -737,7 +737,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "street_address",
+                  "name": "subject_street_address",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
