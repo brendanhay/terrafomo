@@ -346,40 +346,40 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Data.Monoid as P
-import qualified Data.HashMap.Strict as P
-import qualified Terrafomo.AWS.Types as P
-import qualified GHC.Generics as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Maybe as P
-import qualified Data.Text as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Data.HashMap.Strict as Map
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_acm_certificate@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_acm_certificate terraform documentation>
 -- for more information.
 data AcmCertificateData s = AcmCertificateData'
-    { _domain :: TF.Attr s P.Text
+    { _domain     :: TF.Attr s P.Text
     -- ^ @domain@ - (Required)
     --
     , _mostRecent :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
     --
-    , _statuses :: TF.Attr s [TF.Attr s P.Text]
+    , _statuses   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @statuses@ - (Optional)
     --
-    , _types :: TF.Attr s [TF.Attr s P.Text]
+    , _types      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @types@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -656,16 +656,16 @@ data AmiData s = AmiData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @executable_users@ - (Optional)
     --
-    , _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    , _filter          :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent      :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
     --
-    , _nameRegex :: TF.Attr s P.Text
+    , _nameRegex       :: TF.Attr s P.Text
     -- ^ @name_regex@ - (Optional)
     --
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @owners@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -803,13 +803,13 @@ data AmiIdsData s = AmiIdsData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @executable_users@ - (Optional)
     --
-    , _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    , _filter          :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _nameRegex :: TF.Attr s P.Text
+    , _nameRegex       :: TF.Attr s P.Text
     -- ^ @name_regex@ - (Optional)
     --
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @owners@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1482,22 +1482,22 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (CognitoUserPoolsData s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_db_cluster_snapshot terraform documentation>
 -- for more information.
 data DbClusterSnapshotData s = DbClusterSnapshotData'
-    { _dbClusterIdentifier :: TF.Attr s P.Text
+    { _dbClusterIdentifier         :: TF.Attr s P.Text
     -- ^ @db_cluster_identifier@ - (Optional)
     --
     , _dbClusterSnapshotIdentifier :: TF.Attr s P.Text
     -- ^ @db_cluster_snapshot_identifier@ - (Optional)
     --
-    , _includePublic :: TF.Attr s P.Bool
+    , _includePublic               :: TF.Attr s P.Bool
     -- ^ @include_public@ - (Optional)
     --
-    , _includeShared :: TF.Attr s P.Bool
+    , _includeShared               :: TF.Attr s P.Bool
     -- ^ @include_shared@ - (Optional)
     --
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent                  :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
     --
-    , _snapshotType :: TF.Attr s P.Text
+    , _snapshotType                :: TF.Attr s P.Text
     -- ^ @snapshot_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1745,16 +1745,16 @@ data DbSnapshotData s = DbSnapshotData'
     , _dbSnapshotIdentifier :: TF.Attr s P.Text
     -- ^ @db_snapshot_identifier@ - (Optional)
     --
-    , _includePublic :: TF.Attr s P.Bool
+    , _includePublic        :: TF.Attr s P.Bool
     -- ^ @include_public@ - (Optional)
     --
-    , _includeShared :: TF.Attr s P.Bool
+    , _includeShared        :: TF.Attr s P.Bool
     -- ^ @include_shared@ - (Optional)
     --
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent           :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
     --
-    , _snapshotType :: TF.Attr s P.Text
+    , _snapshotType         :: TF.Attr s P.Text
     -- ^ @snapshot_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1983,19 +1983,19 @@ instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ebs_snapshot terraform documentation>
 -- for more information.
 data EbsSnapshotData s = EbsSnapshotData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter              :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _mostRecent :: TF.Attr s P.Bool
+    , _mostRecent          :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
     --
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @owners@ - (Optional)
     --
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @restorable_by_user_ids@ - (Optional)
     --
-    , _snapshotIds :: TF.Attr s [TF.Attr s P.Text]
+    , _snapshotIds         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @snapshot_ids@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2091,10 +2091,10 @@ instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (EbsSnapshotData s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ebs_snapshot_ids terraform documentation>
 -- for more information.
 data EbsSnapshotIdsData s = EbsSnapshotIdsData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter              :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _owners :: TF.Attr s [TF.Attr s P.Text]
+    , _owners              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @owners@ - (Optional)
     --
     , _restorableByUserIds :: TF.Attr s [TF.Attr s P.Text]
@@ -2149,7 +2149,7 @@ instance s ~ s' => P.HasComputedIds (TF.Ref s' (EbsSnapshotIdsData s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ebs_volume terraform documentation>
 -- for more information.
 data EbsVolumeData s = EbsVolumeData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter     :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
     , _mostRecent :: TF.Attr s P.Bool
@@ -2312,7 +2312,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (EcsClusterData s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_container_definition terraform documentation>
 -- for more information.
 data EcsContainerDefinitionData s = EcsContainerDefinitionData'
-    { _containerName :: TF.Attr s P.Text
+    { _containerName  :: TF.Attr s P.Text
     -- ^ @container_name@ - (Required)
     --
     , _taskDefinition :: TF.Attr s P.Text
@@ -2379,7 +2379,7 @@ instance s ~ s' => P.HasComputedMemoryReservation (TF.Ref s' (EcsContainerDefini
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ecs_service terraform documentation>
 -- for more information.
 data EcsServiceData s = EcsServiceData'
-    { _clusterArn :: TF.Attr s P.Text
+    { _clusterArn  :: TF.Attr s P.Text
     -- ^ @cluster_arn@ - (Required)
     --
     , _serviceName :: TF.Attr s P.Text
@@ -2686,7 +2686,7 @@ data ElasticBeanstalkSolutionStackData s = ElasticBeanstalkSolutionStackData'
     { _mostRecent :: TF.Attr s P.Bool
     -- ^ @most_recent@ - (Optional)
     --
-    , _nameRegex :: TF.Attr s P.Text
+    , _nameRegex  :: TF.Attr s P.Text
     -- ^ @name_regex@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3033,10 +3033,10 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbServiceAccountData s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_glue_script terraform documentation>
 -- for more information.
 data GlueScriptData s = GlueScriptData'
-    { _dagEdge :: TF.Attr s [TF.Attr s (DagEdge s)]
+    { _dagEdge  :: TF.Attr s [TF.Attr s (DagEdge s)]
     -- ^ @dag_edge@ - (Required)
     --
-    , _dagNode :: TF.Attr s [TF.Attr s (DagNode s)]
+    , _dagNode  :: TF.Attr s [TF.Attr s (DagNode s)]
     -- ^ @dag_node@ - (Required)
     --
     , _language :: TF.Attr s P.Text
@@ -3260,13 +3260,13 @@ data IamPolicyDocumentData s = IamPolicyDocumentData'
     { _overrideJson :: TF.Attr s P.Text
     -- ^ @override_json@ - (Optional)
     --
-    , _policyId :: TF.Attr s P.Text
+    , _policyId     :: TF.Attr s P.Text
     -- ^ @policy_id@ - (Optional)
     --
-    , _sourceJson :: TF.Attr s P.Text
+    , _sourceJson   :: TF.Attr s P.Text
     -- ^ @source_json@ - (Optional)
     --
-    , _statement :: TF.Attr s [TF.Attr s (Statement s)]
+    , _statement    :: TF.Attr s [TF.Attr s (Statement s)]
     -- ^ @statement@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3326,7 +3326,7 @@ instance s ~ s' => P.HasComputedJson (TF.Ref s' (IamPolicyDocumentData s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_role terraform documentation>
 -- for more information.
 data IamRoleData s = IamRoleData'
-    { _name :: TF.Attr s P.Text
+    { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     , _roleName :: TF.Attr s P.Text
@@ -3397,7 +3397,7 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamRoleData s)) (TF.Attr s 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_server_certificate terraform documentation>
 -- for more information.
 data IamServerCertificateData s = IamServerCertificateData'
-    { _latest :: TF.Attr s P.Bool
+    { _latest     :: TF.Attr s P.Bool
     -- ^ @latest@ - (Optional)
     --
     , _namePrefix :: TF.Attr s P.Text
@@ -3535,13 +3535,13 @@ instance s ~ s' => P.HasComputedArns (TF.Ref s' (InspectorRulesPackagesData s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_instance terraform documentation>
 -- for more information.
 data InstanceData s = InstanceData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter          :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
     , _getPasswordData :: TF.Attr s P.Bool
     -- ^ @get_password_data@ - (Optional)
     --
-    , _instanceId :: TF.Attr s P.Text
+    , _instanceId      :: TF.Attr s P.Text
     -- ^ @instance_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3680,7 +3680,7 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceData s))
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_instances terraform documentation>
 -- for more information.
 data InstancesData s = InstancesData'
-    { _filter :: TF.Attr s [TF.Attr s (Filter s)]
+    { _filter             :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
     , _instanceStateNames :: TF.Attr s [TF.Attr s P.Text]
@@ -3803,7 +3803,7 @@ instance s ~ s' => P.HasComputedEndpointAddress (TF.Ref s' (IotEndpointData s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ip_ranges terraform documentation>
 -- for more information.
 data IpRangesData s = IpRangesData'
-    { _regions :: TF.Attr s [TF.Attr s P.Text]
+    { _regions  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @regions@ - (Optional)
     --
     , _services :: TF.Attr s [TF.Attr s P.Text]
@@ -3951,10 +3951,10 @@ instance s ~ s' => P.HasComputedTargetKeyId (TF.Ref s' (KmsAliasData s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_ciphertext terraform documentation>
 -- for more information.
 data KmsCiphertextData s = KmsCiphertextData'
-    { _context :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _context   :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @context@ - (Optional)
     --
-    , _keyId :: TF.Attr s P.Text
+    , _keyId     :: TF.Attr s P.Text
     -- ^ @key_id@ - (Required)
     --
     , _plaintext :: TF.Attr s P.Text
@@ -4010,7 +4010,7 @@ data KmsKeyData s = KmsKeyData'
     { _grantTokens :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @grant_tokens@ - (Optional)
     --
-    , _keyId :: TF.Attr s P.Text
+    , _keyId       :: TF.Attr s P.Text
     -- ^ @key_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4088,7 +4088,7 @@ data KmsSecretData s = KmsSecretData'
     { _hasDynamicAttributes :: TF.Attr s P.Text
     -- ^ @__has_dynamic_attributes@ - (Optional)
     --
-    , _secret :: TF.Attr s [TF.Attr s (Secret s)]
+    , _secret               :: TF.Attr s [TF.Attr s (Secret s)]
     -- ^ @secret@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4173,7 +4173,7 @@ data LambdaFunctionData s = LambdaFunctionData'
     { _functionName :: TF.Attr s P.Text
     -- ^ @function_name@ - (Required)
     --
-    , _qualifier :: TF.Attr s P.Text
+    , _qualifier    :: TF.Attr s P.Text
     -- ^ @qualifier@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4272,10 +4272,10 @@ data LambdaInvocationData s = LambdaInvocationData'
     { _functionName :: TF.Attr s P.Text
     -- ^ @function_name@ - (Required)
     --
-    , _input :: TF.Attr s P.Text
+    , _input        :: TF.Attr s P.Text
     -- ^ @input@ - (Required)
     --
-    , _qualifier :: TF.Attr s P.Text
+    , _qualifier    :: TF.Attr s P.Text
     -- ^ @qualifier@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4693,7 +4693,7 @@ data NetworkAclsData s = NetworkAclsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)

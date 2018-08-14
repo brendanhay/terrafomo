@@ -346,37 +346,37 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Data.Monoid as P
-import qualified Data.HashMap.Strict as P
-import qualified Terrafomo.AWS.Types as P
-import qualified GHC.Generics as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Maybe as P
-import qualified Data.Text as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Data.HashMap.Strict as Map
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_load_balancer_backend_server_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_load_balancer_backend_server_policy terraform documentation>
 -- for more information.
 data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicyResource'
-    { _instancePort :: TF.Attr s P.Integer
+    { _instancePort     :: TF.Attr s P.Integer
     -- ^ @instance_port@ - (Required)
     --
     , _loadBalancerName :: TF.Attr s P.Text
     -- ^ @load_balancer_name@ - (Required)
     --
-    , _policyNames :: TF.Attr s [TF.Attr s P.Text]
+    , _policyNames      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @policy_names@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -429,7 +429,7 @@ data LoadBalancerListenerPolicyResource s = LoadBalancerListenerPolicyResource'
     , _loadBalancerPort :: TF.Attr s P.Integer
     -- ^ @load_balancer_port@ - (Required)
     --
-    , _policyNames :: TF.Attr s [TF.Attr s P.Text]
+    , _policyNames      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @policy_names@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -479,13 +479,13 @@ data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
     { _loadBalancerName :: TF.Attr s P.Text
     -- ^ @load_balancer_name@ - (Required)
     --
-    , _policyAttribute :: TF.Attr s [TF.Attr s (PolicyAttribute s)]
+    , _policyAttribute  :: TF.Attr s [TF.Attr s (PolicyAttribute s)]
     -- ^ @policy_attribute@ - (Optional)
     --
-    , _policyName :: TF.Attr s P.Text
+    , _policyName       :: TF.Attr s P.Text
     -- ^ @policy_name@ - (Required)
     --
-    , _policyTypeName :: TF.Attr s P.Text
+    , _policyTypeName   :: TF.Attr s P.Text
     -- ^ @policy_type_name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -576,13 +576,13 @@ instance P.HasMemberAccountId (MacieMemberAccountAssociationResource s) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_macie_s3_bucket_association terraform documentation>
 -- for more information.
 data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
-    { _bucketName :: TF.Attr s P.Text
+    { _bucketName      :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required)
     --
     , _memberAccountId :: TF.Attr s P.Text
     -- ^ @member_account_id@ - (Optional)
     --
-    , _prefix :: TF.Attr s P.Text
+    , _prefix          :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -634,7 +634,7 @@ data MainRouteTableAssociationResource s = MainRouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
     -- ^ @route_table_id@ - (Required)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId        :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -718,7 +718,7 @@ data MediaStoreContainerPolicyResource s = MediaStoreContainerPolicyResource'
     { _containerName :: TF.Attr s P.Text
     -- ^ @container_name@ - (Required)
     --
-    , _policy :: TF.Attr s P.Document
+    , _policy        :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -758,34 +758,34 @@ instance P.HasPolicy (MediaStoreContainerPolicyResource s) (TF.Attr s P.Document
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_mq_broker terraform documentation>
 -- for more information.
 data MqBrokerResource s = MqBrokerResource'
-    { _applyImmediately :: TF.Attr s P.Bool
+    { _applyImmediately        :: TF.Attr s P.Bool
     -- ^ @apply_immediately@ - (Optional)
     --
     , _autoMinorVersionUpgrade :: TF.Attr s P.Bool
     -- ^ @auto_minor_version_upgrade@ - (Optional)
     --
-    , _brokerName :: TF.Attr s P.Text
+    , _brokerName              :: TF.Attr s P.Text
     -- ^ @broker_name@ - (Required)
     --
-    , _deploymentMode :: TF.Attr s P.Text
+    , _deploymentMode          :: TF.Attr s P.Text
     -- ^ @deployment_mode@ - (Optional)
     --
-    , _engineType :: TF.Attr s P.Text
+    , _engineType              :: TF.Attr s P.Text
     -- ^ @engine_type@ - (Required)
     --
-    , _engineVersion :: TF.Attr s P.Text
+    , _engineVersion           :: TF.Attr s P.Text
     -- ^ @engine_version@ - (Required)
     --
-    , _hostInstanceType :: TF.Attr s P.Text
+    , _hostInstanceType        :: TF.Attr s P.Text
     -- ^ @host_instance_type@ - (Required)
     --
-    , _publiclyAccessible :: TF.Attr s P.Bool
+    , _publiclyAccessible      :: TF.Attr s P.Bool
     -- ^ @publicly_accessible@ - (Optional)
     --
-    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
+    , _securityGroups          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Required)
     --
-    , _user :: TF.Attr s [TF.Attr s (User s)]
+    , _user                    :: TF.Attr s [TF.Attr s (User s)]
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -904,19 +904,19 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (MqBrokerResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_mq_configuration terraform documentation>
 -- for more information.
 data MqConfigurationResource s = MqConfigurationResource'
-    { _data' :: TF.Attr s P.Text
+    { _data'         :: TF.Attr s P.Text
     -- ^ @data@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description   :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _engineType :: TF.Attr s P.Text
+    , _engineType    :: TF.Attr s P.Text
     -- ^ @engine_type@ - (Required)
     --
     , _engineVersion :: TF.Attr s P.Text
     -- ^ @engine_version@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -988,10 +988,10 @@ data NatGatewayResource s = NatGatewayResource'
     { _allocationId :: TF.Attr s P.Text
     -- ^ @allocation_id@ - (Required)
     --
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1397,13 +1397,13 @@ data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResour
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ @parameter@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1469,22 +1469,22 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneClusterParameterGr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_neptune_event_subscription terraform documentation>
 -- for more information.
 data NeptuneEventSubscriptionResource s = NeptuneEventSubscriptionResource'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled         :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
     , _eventCategories :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @event_categories@ - (Optional)
     --
-    , _snsTopicArn :: TF.Attr s P.Text
+    , _snsTopicArn     :: TF.Attr s P.Text
     -- ^ @sns_topic_arn@ - (Required)
     --
-    , _sourceIds :: TF.Attr s [TF.Attr s P.Text]
+    , _sourceIds       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @source_ids@ - (Optional)
     --
-    , _sourceType :: TF.Attr s P.Text
+    , _sourceType      :: TF.Attr s P.Text
     -- ^ @source_type@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1566,16 +1566,16 @@ data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ @parameter@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1646,10 +1646,10 @@ data NeptuneSubnetGroupResource s = NeptuneSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _subnetIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _subnetIds   :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @subnet_ids@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1707,10 +1707,10 @@ data NetworkAclResource s = NetworkAclResource'
     { _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId    :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1765,22 +1765,22 @@ instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (NetworkAclResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_network_acl_rule terraform documentation>
 -- for more information.
 data NetworkAclRuleResource s = NetworkAclRuleResource'
-    { _cidrBlock :: TF.Attr s P.Text
+    { _cidrBlock     :: TF.Attr s P.Text
     -- ^ @cidr_block@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'ipv6CidrBlock'
-    , _egress :: TF.Attr s P.Bool
+    , _egress        :: TF.Attr s P.Bool
     -- ^ @egress@ - (Optional)
     --
-    , _fromPort :: TF.Attr s P.Integer
+    , _fromPort      :: TF.Attr s P.Integer
     -- ^ @from_port@ - (Optional)
     --
-    , _icmpCode :: TF.Attr s P.Text
+    , _icmpCode      :: TF.Attr s P.Text
     -- ^ @icmp_code@ - (Optional)
     --
-    , _icmpType :: TF.Attr s P.Text
+    , _icmpType      :: TF.Attr s P.Text
     -- ^ @icmp_type@ - (Optional)
     --
     , _ipv6CidrBlock :: TF.Attr s P.Text
@@ -1789,19 +1789,19 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
     -- Conflicts with:
     --
     -- * 'cidrBlock'
-    , _networkAclId :: TF.Attr s P.Text
+    , _networkAclId  :: TF.Attr s P.Text
     -- ^ @network_acl_id@ - (Required)
     --
-    , _protocol :: TF.Attr s P.Text
+    , _protocol      :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
-    , _ruleAction :: TF.Attr s P.Text
+    , _ruleAction    :: TF.Attr s P.Text
     -- ^ @rule_action@ - (Required)
     --
-    , _ruleNumber :: TF.Attr s P.Integer
+    , _ruleNumber    :: TF.Attr s P.Integer
     -- ^ @rule_number@ - (Required)
     --
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort        :: TF.Attr s P.Integer
     -- ^ @to_port@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1917,16 +1917,16 @@ instance P.HasToPort (NetworkAclRuleResource s) (TF.Attr s P.Integer) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interface terraform documentation>
 -- for more information.
 data NetworkInterfaceResource s = NetworkInterfaceResource'
-    { _description :: TF.Attr s P.Text
+    { _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _sourceDestCheck :: TF.Attr s P.Bool
     -- ^ @source_dest_check@ - (Optional)
     --
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId        :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1997,10 +1997,10 @@ instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (NetworkInterfaceResou
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_network_interface_attachment terraform documentation>
 -- for more information.
 data NetworkInterfaceAttachmentResource s = NetworkInterfaceAttachmentResource'
-    { _deviceIndex :: TF.Attr s P.Integer
+    { _deviceIndex        :: TF.Attr s P.Integer
     -- ^ @device_index@ - (Required)
     --
-    , _instanceId :: TF.Attr s P.Text
+    , _instanceId         :: TF.Attr s P.Text
     -- ^ @instance_id@ - (Required)
     --
     , _networkInterfaceId :: TF.Attr s P.Text
@@ -2060,7 +2060,7 @@ data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResour
     { _networkInterfaceId :: TF.Attr s P.Text
     -- ^ @network_interface_id@ - (Required)
     --
-    , _securityGroupId :: TF.Attr s P.Text
+    , _securityGroupId    :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2100,49 +2100,49 @@ instance P.HasSecurityGroupId (NetworkInterfaceSgAttachmentResource s) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_application terraform documentation>
 -- for more information.
 data OpsworksApplicationResource s = OpsworksApplicationResource'
-    { _autoBundleOnDeploy :: TF.Attr s P.Text
+    { _autoBundleOnDeploy     :: TF.Attr s P.Text
     -- ^ @auto_bundle_on_deploy@ - (Optional)
     --
-    , _awsFlowRubySettings :: TF.Attr s P.Text
+    , _awsFlowRubySettings    :: TF.Attr s P.Text
     -- ^ @aws_flow_ruby_settings@ - (Optional)
     --
-    , _dataSourceArn :: TF.Attr s P.Text
+    , _dataSourceArn          :: TF.Attr s P.Text
     -- ^ @data_source_arn@ - (Optional)
     --
     , _dataSourceDatabaseName :: TF.Attr s P.Text
     -- ^ @data_source_database_name@ - (Optional)
     --
-    , _dataSourceType :: TF.Attr s P.Text
+    , _dataSourceType         :: TF.Attr s P.Text
     -- ^ @data_source_type@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description            :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _documentRoot :: TF.Attr s P.Text
+    , _documentRoot           :: TF.Attr s P.Text
     -- ^ @document_root@ - (Optional)
     --
-    , _domains :: TF.Attr s [TF.Attr s P.Text]
+    , _domains                :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @domains@ - (Optional)
     --
-    , _enableSsl :: TF.Attr s P.Bool
+    , _enableSsl              :: TF.Attr s P.Bool
     -- ^ @enable_ssl@ - (Optional)
     --
-    , _environment :: TF.Attr s [TF.Attr s (Environment s)]
+    , _environment            :: TF.Attr s [TF.Attr s (Environment s)]
     -- ^ @environment@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _railsEnv :: TF.Attr s P.Text
+    , _railsEnv               :: TF.Attr s P.Text
     -- ^ @rails_env@ - (Optional)
     --
-    , _sslConfiguration :: TF.Attr s [TF.Attr s (SslConfiguration s)]
+    , _sslConfiguration       :: TF.Attr s [TF.Attr s (SslConfiguration s)]
     -- ^ @ssl_configuration@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type'                  :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2288,64 +2288,64 @@ instance s ~ s' => P.HasComputedShortName (TF.Ref s' (OpsworksApplicationResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_custom_layer terraform documentation>
 -- for more information.
 data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _shortName :: TF.Attr s P.Text
+    , _shortName                :: TF.Attr s P.Text
     -- ^ @short_name@ - (Required)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -2526,73 +2526,73 @@ instance P.HasUseEbsOptimizedInstances (OpsworksCustomLayerResource s) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_ganglia_layer terraform documentation>
 -- for more information.
 data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _password :: TF.Attr s P.Text
+    , _password                 :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
-    , _url :: TF.Attr s P.Text
+    , _url                      :: TF.Attr s P.Text
     -- ^ @url@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ @use_ebs_optimized_instances@ - (Optional)
     --
-    , _username :: TF.Attr s P.Text
+    , _username                 :: TF.Attr s P.Text
     -- ^ @username@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2783,79 +2783,79 @@ instance P.HasUsername (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_haproxy_layer terraform documentation>
 -- for more information.
 data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _healthcheckMethod :: TF.Attr s P.Text
+    , _healthcheckMethod        :: TF.Attr s P.Text
     -- ^ @healthcheck_method@ - (Optional)
     --
-    , _healthcheckUrl :: TF.Attr s P.Text
+    , _healthcheckUrl           :: TF.Attr s P.Text
     -- ^ @healthcheck_url@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _statsEnabled :: TF.Attr s P.Bool
+    , _statsEnabled             :: TF.Attr s P.Bool
     -- ^ @stats_enabled@ - (Optional)
     --
-    , _statsPassword :: TF.Attr s P.Text
+    , _statsPassword            :: TF.Attr s P.Text
     -- ^ @stats_password@ - (Required)
     --
-    , _statsUrl :: TF.Attr s P.Text
+    , _statsUrl                 :: TF.Attr s P.Text
     -- ^ @stats_url@ - (Optional)
     --
-    , _statsUser :: TF.Attr s P.Text
+    , _statsUser                :: TF.Attr s P.Text
     -- ^ @stats_user@ - (Optional)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -3070,37 +3070,37 @@ instance P.HasUseEbsOptimizedInstances (OpsworksHaproxyLayerResource s) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_instance terraform documentation>
 -- for more information.
 data OpsworksInstanceResource s = OpsworksInstanceResource'
-    { _agentVersion :: TF.Attr s P.Text
+    { _agentVersion         :: TF.Attr s P.Text
     -- ^ @agent_version@ - (Optional)
     --
-    , _architecture :: TF.Attr s P.Text
+    , _architecture         :: TF.Attr s P.Text
     -- ^ @architecture@ - (Optional)
     --
-    , _autoScalingType :: TF.Attr s P.Text
+    , _autoScalingType      :: TF.Attr s P.Text
     -- ^ @auto_scaling_type@ - (Optional)
     --
-    , _deleteEbs :: TF.Attr s P.Bool
+    , _deleteEbs            :: TF.Attr s P.Bool
     -- ^ @delete_ebs@ - (Optional)
     --
-    , _deleteEip :: TF.Attr s P.Bool
+    , _deleteEip            :: TF.Attr s P.Bool
     -- ^ @delete_eip@ - (Optional)
     --
-    , _ebsOptimized :: TF.Attr s P.Bool
+    , _ebsOptimized         :: TF.Attr s P.Bool
     -- ^ @ebs_optimized@ - (Optional)
     --
     , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceType :: TF.Attr s P.Text
+    , _instanceType         :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Optional)
     --
-    , _layerIds :: TF.Attr s [TF.Attr s P.Text]
+    , _layerIds             :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @layer_ids@ - (Required)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId              :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _state :: TF.Attr s P.Text
+    , _state                :: TF.Attr s P.Text
     -- ^ @state@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3305,76 +3305,76 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (OpsworksInstanceR
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_java_app_layer terraform documentation>
 -- for more information.
 data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
-    { _appServer :: TF.Attr s P.Text
+    { _appServer                :: TF.Attr s P.Text
     -- ^ @app_server@ - (Optional)
     --
-    , _appServerVersion :: TF.Attr s P.Text
+    , _appServerVersion         :: TF.Attr s P.Text
     -- ^ @app_server_version@ - (Optional)
     --
-    , _autoAssignElasticIps :: TF.Attr s P.Bool
+    , _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _jvmOptions :: TF.Attr s P.Text
+    , _jvmOptions               :: TF.Attr s P.Text
     -- ^ @jvm_options@ - (Optional)
     --
-    , _jvmType :: TF.Attr s P.Text
+    , _jvmType                  :: TF.Attr s P.Text
     -- ^ @jvm_type@ - (Optional)
     --
-    , _jvmVersion :: TF.Attr s P.Text
+    , _jvmVersion               :: TF.Attr s P.Text
     -- ^ @jvm_version@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -3581,64 +3581,64 @@ instance P.HasUseEbsOptimizedInstances (OpsworksJavaAppLayerResource s) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_memcached_layer terraform documentation>
 -- for more information.
 data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
-    { _allocatedMemory :: TF.Attr s P.Integer
+    { _allocatedMemory          :: TF.Attr s P.Integer
     -- ^ @allocated_memory@ - (Optional)
     --
-    , _autoAssignElasticIps :: TF.Attr s P.Bool
+    , _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -3817,70 +3817,70 @@ instance P.HasUseEbsOptimizedInstances (OpsworksMemcachedLayerResource s) (TF.At
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_mysql_layer terraform documentation>
 -- for more information.
 data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps       :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps        :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing                :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
-    , _customInstanceProfileArn :: TF.Attr s P.Text
+    , _customInstanceProfileArn   :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson                 :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown         :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                  :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer        :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot       :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout    :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _rootPassword :: TF.Attr s P.Text
+    , _rootPassword               :: TF.Attr s P.Text
     -- ^ @root_password@ - (Optional)
     --
     , _rootPasswordOnAllInstances :: TF.Attr s P.Bool
     -- ^ @root_password_on_all_instances@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                    :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages             :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
-    , _useEbsOptimizedInstances :: TF.Attr s P.Bool
+    , _useEbsOptimizedInstances   :: TF.Attr s P.Bool
     -- ^ @use_ebs_optimized_instances@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4063,64 +4063,64 @@ instance P.HasUseEbsOptimizedInstances (OpsworksMysqlLayerResource s) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_nodejs_app_layer terraform documentation>
 -- for more information.
 data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _nodejsVersion :: TF.Attr s P.Text
+    , _nodejsVersion            :: TF.Attr s P.Text
     -- ^ @nodejs_version@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -4343,61 +4343,61 @@ instance s ~ s' => P.HasComputedStackId (TF.Ref s' (OpsworksPermissionResource s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_php_app_layer terraform documentation>
 -- for more information.
 data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -4569,79 +4569,79 @@ instance P.HasUseEbsOptimizedInstances (OpsworksPhpAppLayerResource s) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_rails_app_layer terraform documentation>
 -- for more information.
 data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
-    { _appServer :: TF.Attr s P.Text
+    { _appServer                :: TF.Attr s P.Text
     -- ^ @app_server@ - (Optional)
     --
-    , _autoAssignElasticIps :: TF.Attr s P.Bool
+    , _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _bundlerVersion :: TF.Attr s P.Text
+    , _bundlerVersion           :: TF.Attr s P.Text
     -- ^ @bundler_version@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _manageBundler :: TF.Attr s P.Bool
+    , _manageBundler            :: TF.Attr s P.Bool
     -- ^ @manage_bundler@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _passengerVersion :: TF.Attr s P.Text
+    , _passengerVersion         :: TF.Attr s P.Text
     -- ^ @passenger_version@ - (Optional)
     --
-    , _rubyVersion :: TF.Attr s P.Text
+    , _rubyVersion              :: TF.Attr s P.Text
     -- ^ @ruby_version@ - (Optional)
     --
-    , _rubygemsVersion :: TF.Attr s P.Text
+    , _rubygemsVersion          :: TF.Attr s P.Text
     -- ^ @rubygems_version@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -4855,16 +4855,16 @@ instance P.HasUseEbsOptimizedInstances (OpsworksRailsAppLayerResource s) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_rds_db_instance terraform documentation>
 -- for more information.
 data OpsworksRdsDbInstanceResource s = OpsworksRdsDbInstanceResource'
-    { _dbPassword :: TF.Attr s P.Text
+    { _dbPassword       :: TF.Attr s P.Text
     -- ^ @db_password@ - (Required)
     --
-    , _dbUser :: TF.Attr s P.Text
+    , _dbUser           :: TF.Attr s P.Text
     -- ^ @db_user@ - (Required)
     --
     , _rdsDbInstanceArn :: TF.Attr s P.Text
     -- ^ @rds_db_instance_arn@ - (Required)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId          :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5136,61 +5136,61 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OpsworksStackResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_opsworks_static_web_layer terraform documentation>
 -- for more information.
 data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
-    { _autoAssignElasticIps :: TF.Attr s P.Bool
+    { _autoAssignElasticIps     :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps :: TF.Attr s P.Bool
+    , _autoAssignPublicIps      :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing :: TF.Attr s P.Bool
+    , _autoHealing              :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson :: TF.Attr s P.Text
+    , _customJson               :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown :: TF.Attr s P.Bool
+    , _drainElbOnShutdown       :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume :: TF.Attr s [TF.Attr s (EbsVolume s)]
+    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer :: TF.Attr s P.Text
+    , _elasticLoadBalancer      :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout :: TF.Attr s P.Integer
+    , _instanceShutdownTimeout  :: TF.Attr s P.Integer
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId :: TF.Attr s P.Text
+    , _stackId                  :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required)
     --
-    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -5365,13 +5365,13 @@ data OpsworksUserProfileResource s = OpsworksUserProfileResource'
     { _allowSelfManagement :: TF.Attr s P.Bool
     -- ^ @allow_self_management@ - (Optional)
     --
-    , _sshPublicKey :: TF.Attr s P.Text
+    , _sshPublicKey        :: TF.Attr s P.Text
     -- ^ @ssh_public_key@ - (Optional)
     --
-    , _sshUsername :: TF.Attr s P.Text
+    , _sshUsername         :: TF.Attr s P.Text
     -- ^ @ssh_username@ - (Required)
     --
-    , _userArn :: TF.Attr s P.Text
+    , _userArn             :: TF.Attr s P.Text
     -- ^ @user_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5425,16 +5425,16 @@ instance P.HasUserArn (OpsworksUserProfileResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_organizations_account terraform documentation>
 -- for more information.
 data OrganizationsAccountResource s = OrganizationsAccountResource'
-    { _email :: TF.Attr s P.Text
+    { _email                  :: TF.Attr s P.Text
     -- ^ @email@ - (Required)
     --
     , _iamUserAccessToBilling :: TF.Attr s P.Text
     -- ^ @iam_user_access_to_billing@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _roleName :: TF.Attr s P.Text
+    , _roleName               :: TF.Attr s P.Text
     -- ^ @role_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5543,16 +5543,16 @@ instance s ~ s' => P.HasComputedMasterAccountId (TF.Ref s' (OrganizationsOrganiz
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_organizations_policy terraform documentation>
 -- for more information.
 data OrganizationsPolicyResource s = OrganizationsPolicyResource'
-    { _content :: TF.Attr s P.Text
+    { _content     :: TF.Attr s P.Text
     -- ^ @content@ - (Required)
     --
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5652,7 +5652,7 @@ instance P.HasTargetId (OrganizationsPolicyAttachmentResource s) (TF.Attr s P.Te
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_placement_group terraform documentation>
 -- for more information.
 data PlacementGroupResource s = PlacementGroupResource'
-    { _name :: TF.Attr s P.Text
+    { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _strategy :: TF.Attr s P.Text
@@ -5698,7 +5698,7 @@ data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
     { _instancePorts :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @instance_ports@ - (Required)
     --
-    , _loadBalancer :: TF.Attr s P.Text
+    , _loadBalancer  :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6153,13 +6153,13 @@ data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ @parameter@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6506,13 +6506,13 @@ data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _family' :: TF.Attr s P.Text
+    , _family'     :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parameter :: TF.Attr s [TF.Attr s (Parameter s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (Parameter s)]
     -- ^ @parameter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6573,10 +6573,10 @@ data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _ingress :: TF.Attr s [TF.Attr s (Ingress s)]
+    , _ingress     :: TF.Attr s [TF.Attr s (Ingress s)]
     -- ^ @ingress@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6630,13 +6630,13 @@ data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6690,16 +6690,16 @@ instance P.HasTags (RedshiftSubnetGroupResource s) (TF.Attr s (P.HashMap P.Text 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_route terraform documentation>
 -- for more information.
 data RouteResource s = RouteResource'
-    { _destinationCidrBlock :: TF.Attr s P.Text
+    { _destinationCidrBlock     :: TF.Attr s P.Text
     -- ^ @destination_cidr_block@ - (Optional)
     --
     , _destinationIpv6CidrBlock :: TF.Attr s P.Text
     -- ^ @destination_ipv6_cidr_block@ - (Optional)
     --
-    , _routeTableId :: TF.Attr s P.Text
+    , _routeTableId             :: TF.Attr s P.Text
     -- ^ @route_table_id@ - (Required)
     --
-    , _vpcPeeringConnectionId :: TF.Attr s P.Text
+    , _vpcPeeringConnectionId   :: TF.Attr s P.Text
     -- ^ @vpc_peering_connection_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7021,7 +7021,7 @@ data Route53QueryLogResource s = Route53QueryLogResource'
     { _cloudwatchLogGroupArn :: TF.Attr s P.Text
     -- ^ @cloudwatch_log_group_arn@ - (Required)
     --
-    , _zoneId :: TF.Attr s P.Text
+    , _zoneId                :: TF.Attr s P.Text
     -- ^ @zone_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7349,7 +7349,7 @@ instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Route53RecordResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_zone terraform documentation>
 -- for more information.
 data Route53ZoneResource s = Route53ZoneResource'
-    { _comment :: TF.Attr s P.Text
+    { _comment         :: TF.Attr s P.Text
     -- ^ @comment@ - (Optional)
     --
     , _delegationSetId :: TF.Attr s P.Text
@@ -7358,16 +7358,16 @@ data Route53ZoneResource s = Route53ZoneResource'
     -- Conflicts with:
     --
     -- * 'vpcId'
-    , _forceDestroy :: TF.Attr s P.Bool
+    , _forceDestroy    :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId           :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional)
     --
     -- Conflicts with:
@@ -7457,7 +7457,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (Route53ZoneResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_route53_zone_association terraform documentation>
 -- for more information.
 data Route53ZoneAssociationResource s = Route53ZoneAssociationResource'
-    { _vpcId :: TF.Attr s P.Text
+    { _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     , _zoneId :: TF.Attr s P.Text
@@ -7503,7 +7503,7 @@ instance s ~ s' => P.HasComputedVpcRegion (TF.Ref s' (Route53ZoneAssociationReso
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_route_table terraform documentation>
 -- for more information.
 data RouteTableResource s = RouteTableResource'
-    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _tags  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _vpcId :: TF.Attr s P.Text
@@ -7554,7 +7554,7 @@ data RouteTableAssociationResource s = RouteTableAssociationResource'
     { _routeTableId :: TF.Attr s P.Text
     -- ^ @route_table_id@ - (Required)
     --
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7782,28 +7782,28 @@ instance s ~ s' => P.HasComputedWebsiteEndpoint (TF.Ref s' (S3BucketResource s))
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_inventory terraform documentation>
 -- for more information.
 data S3BucketInventoryResource s = S3BucketInventoryResource'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket                 :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
-    , _destination :: TF.Attr s (Destination s)
+    , _destination            :: TF.Attr s (Destination s)
     -- ^ @destination@ - (Required)
     --
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled                :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _filter :: TF.Attr s (Filter s)
+    , _filter                 :: TF.Attr s (Filter s)
     -- ^ @filter@ - (Optional)
     --
     , _includedObjectVersions :: TF.Attr s P.Text
     -- ^ @included_object_versions@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _optionalFields :: TF.Attr s [TF.Attr s P.Text]
+    , _optionalFields         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @optional_fields@ - (Optional)
     --
-    , _schedule :: TF.Attr s (Schedule s)
+    , _schedule               :: TF.Attr s (Schedule s)
     -- ^ @schedule@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7906,7 +7906,7 @@ data S3BucketMetricResource s = S3BucketMetricResource'
     , _filter :: TF.Attr s (Filter s)
     -- ^ @filter@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7957,16 +7957,16 @@ instance P.HasName (S3BucketMetricResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_notification terraform documentation>
 -- for more information.
 data S3BucketNotificationResource s = S3BucketNotificationResource'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket         :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
     , _lambdaFunction :: TF.Attr s [TF.Attr s (LambdaFunction s)]
     -- ^ @lambda_function@ - (Optional)
     --
-    , _queue :: TF.Attr s [TF.Attr s (Queue s)]
+    , _queue          :: TF.Attr s [TF.Attr s (Queue s)]
     -- ^ @queue@ - (Optional)
     --
-    , _topic :: TF.Attr s [TF.Attr s (Topic s)]
+    , _topic          :: TF.Attr s [TF.Attr s (Topic s)]
     -- ^ @topic@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8031,23 +8031,23 @@ instance P.HasTopic (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (Topi
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_s3_bucket_object terraform documentation>
 -- for more information.
 data S3BucketObjectResource s = S3BucketObjectResource'
-    { _acl :: TF.Attr s P.Text
+    { _acl                :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
-    , _bucket :: TF.Attr s P.Text
+    , _bucket             :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
-    , _cacheControl :: TF.Attr s P.Text
+    , _cacheControl       :: TF.Attr s P.Text
     -- ^ @cache_control@ - (Optional)
     --
-    , _content :: TF.Attr s P.Text
+    , _content            :: TF.Attr s P.Text
     -- ^ @content@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'source'
     -- * 'contentBase64'
-    , _contentBase64 :: TF.Attr s P.Text
+    , _contentBase64      :: TF.Attr s P.Text
     -- ^ @content_base64@ - (Optional)
     --
     -- Conflicts with:
@@ -8057,29 +8057,29 @@ data S3BucketObjectResource s = S3BucketObjectResource'
     , _contentDisposition :: TF.Attr s P.Text
     -- ^ @content_disposition@ - (Optional)
     --
-    , _contentEncoding :: TF.Attr s P.Text
+    , _contentEncoding    :: TF.Attr s P.Text
     -- ^ @content_encoding@ - (Optional)
     --
-    , _contentLanguage :: TF.Attr s P.Text
+    , _contentLanguage    :: TF.Attr s P.Text
     -- ^ @content_language@ - (Optional)
     --
-    , _key :: TF.Attr s P.Text
+    , _key                :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId           :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
-    , _source :: TF.Attr s P.Text
+    , _source             :: TF.Attr s P.Text
     -- ^ @source@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'contentBase64'
     -- * 'content'
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags               :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _websiteRedirect :: TF.Attr s P.Text
+    , _websiteRedirect    :: TF.Attr s P.Text
     -- ^ @website_redirect@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8270,28 +8270,28 @@ instance P.HasPolicy (S3BucketPolicyResource s) (TF.Attr s P.Document) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret terraform documentation>
 -- for more information.
 data SecretsmanagerSecretResource s = SecretsmanagerSecretResource'
-    { _description :: TF.Attr s P.Text
+    { _description          :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId             :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _policy :: TF.Attr s P.Document
+    , _policy               :: TF.Attr s P.Document
     -- ^ @policy@ - (Optional)
     --
     , _recoveryWindowInDays :: TF.Attr s P.Integer
     -- ^ @recovery_window_in_days@ - (Optional)
     --
-    , _rotationLambdaArn :: TF.Attr s P.Text
+    , _rotationLambdaArn    :: TF.Attr s P.Text
     -- ^ @rotation_lambda_arn@ - (Optional)
     --
-    , _rotationRules :: TF.Attr s (RotationRules s)
+    , _rotationRules        :: TF.Attr s (RotationRules s)
     -- ^ @rotation_rules@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8382,7 +8382,7 @@ instance s ~ s' => P.HasComputedRotationEnabled (TF.Ref s' (SecretsmanagerSecret
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret_version terraform documentation>
 -- for more information.
 data SecretsmanagerSecretVersionResource s = SecretsmanagerSecretVersionResource'
-    { _secretId :: TF.Attr s P.Text
+    { _secretId     :: TF.Attr s P.Text
     -- ^ @secret_id@ - (Required)
     --
     , _secretString :: TF.Attr s P.Text
@@ -8431,16 +8431,16 @@ instance s ~ s' => P.HasComputedVersionStages (TF.Ref s' (SecretsmanagerSecretVe
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_security_group terraform documentation>
 -- for more information.
 data SecurityGroupResource s = SecurityGroupResource'
-    { _description :: TF.Attr s P.Text
+    { _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix          :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
     , _revokeRulesOnDelete :: TF.Attr s P.Bool
     -- ^ @revoke_rules_on_delete@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8510,34 +8510,34 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (SecurityGroupResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_security_group_rule terraform documentation>
 -- for more information.
 data SecurityGroupRuleResource s = SecurityGroupRuleResource'
-    { _cidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    { _cidrBlocks      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_blocks@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _fromPort :: TF.Attr s P.Integer
+    , _fromPort        :: TF.Attr s P.Integer
     -- ^ @from_port@ - (Required)
     --
-    , _ipv6CidrBlocks :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6CidrBlocks  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ipv6_cidr_blocks@ - (Optional)
     --
-    , _prefixListIds :: TF.Attr s [TF.Attr s P.Text]
+    , _prefixListIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @prefix_list_ids@ - (Optional)
     --
-    , _protocol :: TF.Attr s P.Text
+    , _protocol        :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
     , _securityGroupId :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required)
     --
-    , _self :: TF.Attr s P.Bool
+    , _self            :: TF.Attr s P.Bool
     -- ^ @self@ - (Optional)
     --
-    , _toPort :: TF.Attr s P.Integer
+    , _toPort          :: TF.Attr s P.Integer
     -- ^ @to_port@ - (Required)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type'           :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     -- Type of rule, ingress (inbound) or egress (outbound).
     --
@@ -8643,10 +8643,10 @@ data ServiceDiscoveryPrivateDnsNamespaceResource s = ServiceDiscoveryPrivateDnsN
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _vpc :: TF.Attr s P.Text
+    , _vpc         :: TF.Attr s P.Text
     -- ^ @vpc@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8702,7 +8702,7 @@ data ServiceDiscoveryPublicDnsNamespaceResource s = ServiceDiscoveryPublicDnsNam
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8747,19 +8747,19 @@ instance s ~ s' => P.HasComputedHostedZone (TF.Ref s' (ServiceDiscoveryPublicDns
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_service_discovery_service terraform documentation>
 -- for more information.
 data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource'
-    { _description :: TF.Attr s P.Text
+    { _description             :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _dnsConfig :: TF.Attr s (DnsConfig s)
+    , _dnsConfig               :: TF.Attr s (DnsConfig s)
     -- ^ @dns_config@ - (Required)
     --
-    , _healthCheckConfig :: TF.Attr s (HealthCheckConfig s)
+    , _healthCheckConfig       :: TF.Attr s (HealthCheckConfig s)
     -- ^ @health_check_config@ - (Optional)
     --
     , _healthCheckCustomConfig :: TF.Attr s (HealthCheckCustomConfig s)
     -- ^ @health_check_custom_config@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -8835,13 +8835,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ServiceDiscoveryServiceResource 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_servicecatalog_portfolio terraform documentation>
 -- for more information.
 data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource'
-    { _name :: TF.Attr s P.Text
+    { _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _providerName :: TF.Attr s P.Text
     -- ^ @provider_name@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -9071,10 +9071,10 @@ data SesDomainMailFromResource s = SesDomainMailFromResource'
     { _behaviorOnMxFailure :: TF.Attr s P.Text
     -- ^ @behavior_on_mx_failure@ - (Optional)
     --
-    , _domain :: TF.Attr s P.Text
+    , _domain              :: TF.Attr s P.Text
     -- ^ @domain@ - (Required)
     --
-    , _mailFromDomain :: TF.Attr s P.Text
+    , _mailFromDomain      :: TF.Attr s P.Text
     -- ^ @mail_from_domain@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)

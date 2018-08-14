@@ -346,52 +346,52 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Data.Monoid as P
-import qualified Data.HashMap.Strict as P
-import qualified Terrafomo.AWS.Types as P
-import qualified GHC.Generics as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Maybe as P
-import qualified Data.Text as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Data.HashMap.Strict as Map
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_elastictranscoder_preset@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elastictranscoder_preset terraform documentation>
 -- for more information.
 data ElastictranscoderPresetResource s = ElastictranscoderPresetResource'
-    { _audio :: TF.Attr s (Audio s)
+    { _audio             :: TF.Attr s (Audio s)
     -- ^ @audio@ - (Optional)
     --
     , _audioCodecOptions :: TF.Attr s (AudioCodecOptions s)
     -- ^ @audio_codec_options@ - (Optional)
     --
-    , _container :: TF.Attr s P.Text
+    , _container         :: TF.Attr s P.Text
     -- ^ @container@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _thumbnails :: TF.Attr s (Thumbnails s)
+    , _thumbnails        :: TF.Attr s (Thumbnails s)
     -- ^ @thumbnails@ - (Optional)
     --
-    , _video :: TF.Attr s (Video s)
+    , _video             :: TF.Attr s (Video s)
     -- ^ @video@ - (Optional)
     --
     , _videoCodecOptions :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @video_codec_options@ - (Optional)
     --
-    , _videoWatermarks :: TF.Attr s [TF.Attr s (VideoWatermarks s)]
+    , _videoWatermarks   :: TF.Attr s [TF.Attr s (VideoWatermarks s)]
     -- ^ @video_watermarks@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -647,7 +647,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ElbResource s)) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_elb_attachment terraform documentation>
 -- for more information.
 data ElbAttachmentResource s = ElbAttachmentResource'
-    { _elb :: TF.Attr s P.Text
+    { _elb       :: TF.Attr s P.Text
     -- ^ @elb@ - (Required)
     --
     , _instance' :: TF.Attr s P.Text
@@ -690,70 +690,70 @@ instance P.HasInstance' (ElbAttachmentResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_emr_cluster terraform documentation>
 -- for more information.
 data EmrClusterResource s = EmrClusterResource'
-    { _additionalInfo :: TF.Attr s P.Text
+    { _additionalInfo        :: TF.Attr s P.Text
     -- ^ @additional_info@ - (Optional)
     --
-    , _applications :: TF.Attr s [TF.Attr s P.Text]
+    , _applications          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @applications@ - (Optional)
     --
-    , _autoscalingRole :: TF.Attr s P.Text
+    , _autoscalingRole       :: TF.Attr s P.Text
     -- ^ @autoscaling_role@ - (Optional)
     --
-    , _bootstrapAction :: TF.Attr s [TF.Attr s (BootstrapAction s)]
+    , _bootstrapAction       :: TF.Attr s [TF.Attr s (BootstrapAction s)]
     -- ^ @bootstrap_action@ - (Optional)
     --
-    , _configurations :: TF.Attr s P.Text
+    , _configurations        :: TF.Attr s P.Text
     -- ^ @configurations@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'configurationsJson'
-    , _configurationsJson :: TF.Attr s P.Text
+    , _configurationsJson    :: TF.Attr s P.Text
     -- ^ @configurations_json@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'configurations'
-    , _coreInstanceCount :: TF.Attr s P.Integer
+    , _coreInstanceCount     :: TF.Attr s P.Integer
     -- ^ @core_instance_count@ - (Optional)
     --
-    , _customAmiId :: TF.Attr s P.Text
+    , _customAmiId           :: TF.Attr s P.Text
     -- ^ @custom_ami_id@ - (Optional)
     --
-    , _ebsRootVolumeSize :: TF.Attr s P.Integer
+    , _ebsRootVolumeSize     :: TF.Attr s P.Integer
     -- ^ @ebs_root_volume_size@ - (Optional)
     --
-    , _ec2Attributes :: TF.Attr s (Ec2Attributes s)
+    , _ec2Attributes         :: TF.Attr s (Ec2Attributes s)
     -- ^ @ec2_attributes@ - (Optional)
     --
-    , _instanceGroup :: TF.Attr s [TF.Attr s (InstanceGroup s)]
+    , _instanceGroup         :: TF.Attr s [TF.Attr s (InstanceGroup s)]
     -- ^ @instance_group@ - (Optional)
     --
-    , _kerberosAttributes :: TF.Attr s (KerberosAttributes s)
+    , _kerberosAttributes    :: TF.Attr s (KerberosAttributes s)
     -- ^ @kerberos_attributes@ - (Optional)
     --
-    , _logUri :: TF.Attr s P.Text
+    , _logUri                :: TF.Attr s P.Text
     -- ^ @log_uri@ - (Optional)
     --
-    , _masterInstanceType :: TF.Attr s P.Text
+    , _masterInstanceType    :: TF.Attr s P.Text
     -- ^ @master_instance_type@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _releaseLabel :: TF.Attr s P.Text
+    , _releaseLabel          :: TF.Attr s P.Text
     -- ^ @release_label@ - (Required)
     --
     , _securityConfiguration :: TF.Attr s P.Text
     -- ^ @security_configuration@ - (Optional)
     --
-    , _serviceRole :: TF.Attr s P.Text
+    , _serviceRole           :: TF.Attr s P.Text
     -- ^ @service_role@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _visibleToAllUsers :: TF.Attr s P.Bool
+    , _visibleToAllUsers     :: TF.Attr s P.Bool
     -- ^ @visible_to_all_users@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -968,22 +968,22 @@ instance s ~ s' => P.HasComputedTerminationProtection (TF.Ref s' (EmrClusterReso
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_emr_instance_group terraform documentation>
 -- for more information.
 data EmrInstanceGroupResource s = EmrInstanceGroupResource'
-    { _clusterId :: TF.Attr s P.Text
+    { _clusterId     :: TF.Attr s P.Text
     -- ^ @cluster_id@ - (Required)
     --
-    , _ebsConfig :: TF.Attr s [TF.Attr s (EbsConfig s)]
+    , _ebsConfig     :: TF.Attr s [TF.Attr s (EbsConfig s)]
     -- ^ @ebs_config@ - (Optional)
     --
-    , _ebsOptimized :: TF.Attr s P.Bool
+    , _ebsOptimized  :: TF.Attr s P.Bool
     -- ^ @ebs_optimized@ - (Optional)
     --
     , _instanceCount :: TF.Attr s P.Integer
     -- ^ @instance_count@ - (Optional)
     --
-    , _instanceType :: TF.Attr s P.Text
+    , _instanceType  :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1064,7 +1064,7 @@ data EmrSecurityConfigurationResource s = EmrSecurityConfigurationResource'
     { _configuration :: TF.Attr s P.Text
     -- ^ @configuration@ - (Required)
     --
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix    :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1109,30 +1109,30 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (EmrSecurityConfigurationResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_flow_log terraform documentation>
 -- for more information.
 data FlowLogResource s = FlowLogResource'
-    { _eniId :: TF.Attr s P.Text
+    { _eniId        :: TF.Attr s P.Text
     -- ^ @eni_id@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'subnetId'
     -- * 'vpcId'
-    , _iamRoleArn :: TF.Attr s P.Text
+    , _iamRoleArn   :: TF.Attr s P.Text
     -- ^ @iam_role_arn@ - (Required)
     --
     , _logGroupName :: TF.Attr s P.Text
     -- ^ @log_group_name@ - (Required)
     --
-    , _subnetId :: TF.Attr s P.Text
+    , _subnetId     :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'vpcId'
     -- * 'eniId'
-    , _trafficType :: TF.Attr s P.Text
+    , _trafficType  :: TF.Attr s P.Text
     -- ^ @traffic_type@ - (Required)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId        :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional)
     --
     -- Conflicts with:
@@ -1221,10 +1221,10 @@ instance P.HasVpcId (FlowLogResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_gamelift_alias terraform documentation>
 -- for more information.
 data GameliftAliasResource s = GameliftAliasResource'
-    { _description :: TF.Attr s P.Text
+    { _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _routingStrategy :: TF.Attr s (RoutingStrategy s)
@@ -1281,7 +1281,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (GameliftAliasResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_gamelift_build terraform documentation>
 -- for more information.
 data GameliftBuildResource s = GameliftBuildResource'
-    { _name :: TF.Attr s P.Text
+    { _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _operatingSystem :: TF.Attr s P.Text
@@ -1290,7 +1290,7 @@ data GameliftBuildResource s = GameliftBuildResource'
     , _storageLocation :: TF.Attr s (StorageLocation s)
     -- ^ @storage_location@ - (Required)
     --
-    , _version :: TF.Attr s P.Text
+    , _version         :: TF.Attr s P.Text
     -- ^ @version@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1480,13 +1480,13 @@ data GlacierVaultResource s = GlacierVaultResource'
     { _accessPolicy :: TF.Attr s P.Text
     -- ^ @access_policy@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _notification :: TF.Attr s [TF.Attr s (Notification s)]
     -- ^ @notification@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1555,10 +1555,10 @@ data GlueCatalogDatabaseResource s = GlueCatalogDatabaseResource'
     , _locationUri :: TF.Attr s P.Text
     -- ^ @location_uri@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @parameters@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1614,37 +1614,37 @@ instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (GlueCatalogDatabaseResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_glue_catalog_table terraform documentation>
 -- for more information.
 data GlueCatalogTableResource s = GlueCatalogTableResource'
-    { _databaseName :: TF.Attr s P.Text
+    { _databaseName      :: TF.Attr s P.Text
     -- ^ @database_name@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _owner :: TF.Attr s P.Text
+    , _owner             :: TF.Attr s P.Text
     -- ^ @owner@ - (Optional)
     --
-    , _parameters :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _parameters        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @parameters@ - (Optional)
     --
-    , _partitionKeys :: TF.Attr s [TF.Attr s (PartitionKeys s)]
+    , _partitionKeys     :: TF.Attr s [TF.Attr s (PartitionKeys s)]
     -- ^ @partition_keys@ - (Optional)
     --
-    , _retention :: TF.Attr s P.Integer
+    , _retention         :: TF.Attr s P.Integer
     -- ^ @retention@ - (Optional)
     --
     , _storageDescriptor :: TF.Attr s (StorageDescriptor s)
     -- ^ @storage_descriptor@ - (Optional)
     --
-    , _tableType :: TF.Attr s P.Text
+    , _tableType         :: TF.Attr s P.Text
     -- ^ @table_type@ - (Optional)
     --
-    , _viewExpandedText :: TF.Attr s P.Text
+    , _viewExpandedText  :: TF.Attr s P.Text
     -- ^ @view_expanded_text@ - (Optional)
     --
-    , _viewOriginalText :: TF.Attr s P.Text
+    , _viewOriginalText  :: TF.Attr s P.Text
     -- ^ @view_original_text@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -1772,10 +1772,10 @@ data GlueClassifierResource s = GlueClassifierResource'
     --
     -- * 'xmlClassifier'
     -- * 'grokClassifier'
-    , _name :: TF.Attr s P.Text
+    , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _xmlClassifier :: TF.Attr s (XmlClassifier s)
+    , _xmlClassifier  :: TF.Attr s (XmlClassifier s)
     -- ^ @xml_classifier@ - (Optional)
     --
     -- Conflicts with:
@@ -2113,28 +2113,28 @@ data GlueJobResource s = GlueJobResource'
     { _allocatedCapacity :: TF.Attr s P.Integer
     -- ^ @allocated_capacity@ - (Optional)
     --
-    , _command :: TF.Attr s (Command s)
+    , _command           :: TF.Attr s (Command s)
     -- ^ @command@ - (Required)
     --
-    , _connections :: TF.Attr s [TF.Attr s P.Text]
+    , _connections       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @connections@ - (Optional)
     --
-    , _defaultArguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _defaultArguments  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @default_arguments@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _maxRetries :: TF.Attr s P.Integer
+    , _maxRetries        :: TF.Attr s P.Integer
     -- ^ @max_retries@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _roleArn :: TF.Attr s P.Text
+    , _roleArn           :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
-    , _timeout :: TF.Attr s P.Integer
+    , _timeout           :: TF.Attr s P.Integer
     -- ^ @timeout@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2231,25 +2231,25 @@ instance s ~ s' => P.HasComputedExecutionProperty (TF.Ref s' (GlueJobResource s)
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_glue_trigger terraform documentation>
 -- for more information.
 data GlueTriggerResource s = GlueTriggerResource'
-    { _actions :: TF.Attr s (P.NonEmpty (TF.Attr s (Actions s)))
+    { _actions     :: TF.Attr s (P.NonEmpty (TF.Attr s (Actions s)))
     -- ^ @actions@ - (Required)
     --
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled     :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _predicate :: TF.Attr s (Predicate s)
+    , _predicate   :: TF.Attr s (Predicate s)
     -- ^ @predicate@ - (Optional)
     --
-    , _schedule :: TF.Attr s P.Text
+    , _schedule    :: TF.Attr s P.Text
     -- ^ @schedule@ - (Optional)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type'       :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2367,19 +2367,19 @@ instance s ~ s' => P.HasComputedAccountId (TF.Ref s' (GuarddutyDetectorResource 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_guardduty_ipset terraform documentation>
 -- for more information.
 data GuarddutyIpsetResource s = GuarddutyIpsetResource'
-    { _activate :: TF.Attr s P.Bool
+    { _activate   :: TF.Attr s P.Bool
     -- ^ @activate@ - (Required)
     --
     , _detectorId :: TF.Attr s P.Text
     -- ^ @detector_id@ - (Required)
     --
-    , _format :: TF.Attr s P.Text
+    , _format     :: TF.Attr s P.Text
     -- ^ @format@ - (Required)
     --
-    , _location :: TF.Attr s P.Text
+    , _location   :: TF.Attr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2443,22 +2443,22 @@ instance P.HasName (GuarddutyIpsetResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_guardduty_member terraform documentation>
 -- for more information.
 data GuarddutyMemberResource s = GuarddutyMemberResource'
-    { _accountId :: TF.Attr s P.Text
+    { _accountId                :: TF.Attr s P.Text
     -- ^ @account_id@ - (Required)
     --
-    , _detectorId :: TF.Attr s P.Text
+    , _detectorId               :: TF.Attr s P.Text
     -- ^ @detector_id@ - (Required)
     --
     , _disableEmailNotification :: TF.Attr s P.Bool
     -- ^ @disable_email_notification@ - (Optional)
     --
-    , _email :: TF.Attr s P.Text
+    , _email                    :: TF.Attr s P.Text
     -- ^ @email@ - (Required)
     --
-    , _invitationMessage :: TF.Attr s P.Text
+    , _invitationMessage        :: TF.Attr s P.Text
     -- ^ @invitation_message@ - (Optional)
     --
-    , _invite :: TF.Attr s P.Bool
+    , _invite                   :: TF.Attr s P.Bool
     -- ^ @invite@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2530,19 +2530,19 @@ instance s ~ s' => P.HasComputedRelationshipStatus (TF.Ref s' (GuarddutyMemberRe
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_guardduty_threatintelset terraform documentation>
 -- for more information.
 data GuarddutyThreatintelsetResource s = GuarddutyThreatintelsetResource'
-    { _activate :: TF.Attr s P.Bool
+    { _activate   :: TF.Attr s P.Bool
     -- ^ @activate@ - (Required)
     --
     , _detectorId :: TF.Attr s P.Text
     -- ^ @detector_id@ - (Required)
     --
-    , _format :: TF.Attr s P.Text
+    , _format     :: TF.Attr s P.Text
     -- ^ @format@ - (Required)
     --
-    , _location :: TF.Attr s P.Text
+    , _location   :: TF.Attr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2609,7 +2609,7 @@ data IamAccessKeyResource s = IamAccessKeyResource'
     { _pgpKey :: TF.Attr s P.Text
     -- ^ @pgp_key@ - (Optional)
     --
-    , _user :: TF.Attr s P.Text
+    , _user   :: TF.Attr s P.Text
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2698,7 +2698,7 @@ data IamAccountPasswordPolicyResource s = IamAccountPasswordPolicyResource'
     { _allowUsersToChangePassword :: TF.Attr s P.Bool
     -- ^ @allow_users_to_change_password@ - (Optional)
     --
-    , _minimumPasswordLength :: TF.Attr s P.Integer
+    , _minimumPasswordLength      :: TF.Attr s P.Integer
     -- ^ @minimum_password_length@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2811,7 +2811,7 @@ data IamGroupMembershipResource s = IamGroupMembershipResource'
     { _group :: TF.Attr s P.Text
     -- ^ @group@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _users :: TF.Attr s [TF.Attr s P.Text]
@@ -2862,13 +2862,13 @@ instance P.HasUsers (IamGroupMembershipResource s) (TF.Attr s [TF.Attr s P.Text]
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_group_policy terraform documentation>
 -- for more information.
 data IamGroupPolicyResource s = IamGroupPolicyResource'
-    { _group :: TF.Attr s P.Text
+    { _group      :: TF.Attr s P.Text
     -- ^ @group@ - (Required)
     --
     , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _policy :: TF.Attr s P.Document
+    , _policy     :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -2918,7 +2918,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamGroupPolicyResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_group_policy_attachment terraform documentation>
 -- for more information.
 data IamGroupPolicyAttachmentResource s = IamGroupPolicyAttachmentResource'
-    { _group :: TF.Attr s P.Text
+    { _group     :: TF.Attr s P.Text
     -- ^ @group@ - (Required)
     --
     , _policyArn :: TF.Attr s P.Text
@@ -2964,7 +2964,7 @@ data IamInstanceProfileResource s = IamInstanceProfileResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _path :: TF.Attr s P.Text
+    , _path       :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3020,13 +3020,13 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamInstanceProfileResource 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_openid_connect_provider terraform documentation>
 -- for more information.
 data IamOpenidConnectProviderResource s = IamOpenidConnectProviderResource'
-    { _clientIdList :: TF.Attr s [TF.Attr s P.Text]
+    { _clientIdList   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @client_id_list@ - (Required)
     --
     , _thumbprintList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @thumbprint_list@ - (Required)
     --
-    , _url :: TF.Attr s P.Text
+    , _url            :: TF.Attr s P.Text
     -- ^ @url@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3080,13 +3080,13 @@ data IamPolicyResource s = IamPolicyResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix  :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _path :: TF.Attr s P.Text
+    , _path        :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
-    , _policy :: TF.Attr s P.Document
+    , _policy      :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3145,19 +3145,19 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (IamPolicyResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_policy_attachment terraform documentation>
 -- for more information.
 data IamPolicyAttachmentResource s = IamPolicyAttachmentResource'
-    { _groups :: TF.Attr s [TF.Attr s P.Text]
+    { _groups    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @groups@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _policyArn :: TF.Attr s P.Text
     -- ^ @policy_arn@ - (Required)
     --
-    , _roles :: TF.Attr s [TF.Attr s P.Text]
+    , _roles     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @roles@ - (Optional)
     --
-    , _users :: TF.Attr s [TF.Attr s P.Text]
+    , _users     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @users@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3218,22 +3218,22 @@ instance P.HasUsers (IamPolicyAttachmentResource s) (TF.Attr s [TF.Attr s P.Text
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_role terraform documentation>
 -- for more information.
 data IamRoleResource s = IamRoleResource'
-    { _assumeRolePolicy :: TF.Attr s P.Document
+    { _assumeRolePolicy    :: TF.Attr s P.Document
     -- ^ @assume_role_policy@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _forceDetachPolicies :: TF.Attr s P.Bool
     -- ^ @force_detach_policies@ - (Optional)
     --
-    , _maxSessionDuration :: TF.Attr s P.Integer
+    , _maxSessionDuration  :: TF.Attr s P.Integer
     -- ^ @max_session_duration@ - (Optional)
     --
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix          :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _path :: TF.Attr s P.Text
+    , _path                :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
     , _permissionsBoundary :: TF.Attr s P.Text
@@ -3325,10 +3325,10 @@ data IamRolePolicyResource s = IamRolePolicyResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _policy :: TF.Attr s P.Document
+    , _policy     :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
-    , _role :: TF.Attr s P.Text
+    , _role       :: TF.Attr s P.Text
     -- ^ @role@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3381,7 +3381,7 @@ data IamRolePolicyAttachmentResource s = IamRolePolicyAttachmentResource'
     { _policyArn :: TF.Attr s P.Text
     -- ^ @policy_arn@ - (Required)
     --
-    , _role :: TF.Attr s P.Text
+    , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3421,7 +3421,7 @@ instance P.HasRole (IamRolePolicyAttachmentResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_saml_provider terraform documentation>
 -- for more information.
 data IamSamlProviderResource s = IamSamlProviderResource'
-    { _name :: TF.Attr s P.Text
+    { _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _samlMetadataDocument :: TF.Attr s P.Text
@@ -3470,19 +3470,19 @@ instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (IamSamlProviderResource s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_server_certificate terraform documentation>
 -- for more information.
 data IamServerCertificateResource s = IamServerCertificateResource'
-    { _certificateBody :: TF.Attr s P.Text
+    { _certificateBody  :: TF.Attr s P.Text
     -- ^ @certificate_body@ - (Required)
     --
     , _certificateChain :: TF.Attr s P.Text
     -- ^ @certificate_chain@ - (Optional)
     --
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix       :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _path :: TF.Attr s P.Text
+    , _path             :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
-    , _privateKey :: TF.Attr s P.Text
+    , _privateKey       :: TF.Attr s P.Text
     -- ^ @private_key@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3552,10 +3552,10 @@ data IamServiceLinkedRoleResource s = IamServiceLinkedRoleResource'
     { _awsServiceName :: TF.Attr s P.Text
     -- ^ @aws_service_name@ - (Required)
     --
-    , _customSuffix :: TF.Attr s P.Text
+    , _customSuffix   :: TF.Attr s P.Text
     -- ^ @custom_suffix@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3616,15 +3616,15 @@ instance s ~ s' => P.HasComputedUniqueId (TF.Ref s' (IamServiceLinkedRoleResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_user terraform documentation>
 -- for more information.
 data IamUserResource s = IamUserResource'
-    { _forceDestroy :: TF.Attr s P.Bool
+    { _forceDestroy        :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
     -- Delete user even if it has non-Terraform-managed IAM access keys, login
     -- profile or MFA devices
     --
-    , _name :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _path :: TF.Attr s P.Text
+    , _path                :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
     , _permissionsBoundary :: TF.Attr s P.Text
@@ -3689,7 +3689,7 @@ data IamUserGroupMembershipResource s = IamUserGroupMembershipResource'
     { _groups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @groups@ - (Required)
     --
-    , _user :: TF.Attr s P.Text
+    , _user   :: TF.Attr s P.Text
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3729,16 +3729,16 @@ instance P.HasUser (IamUserGroupMembershipResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_user_login_profile terraform documentation>
 -- for more information.
 data IamUserLoginProfileResource s = IamUserLoginProfileResource'
-    { _passwordLength :: TF.Attr s P.Integer
+    { _passwordLength        :: TF.Attr s P.Integer
     -- ^ @password_length@ - (Optional)
     --
     , _passwordResetRequired :: TF.Attr s P.Bool
     -- ^ @password_reset_required@ - (Optional)
     --
-    , _pgpKey :: TF.Attr s P.Text
+    , _pgpKey                :: TF.Attr s P.Text
     -- ^ @pgp_key@ - (Required)
     --
-    , _user :: TF.Attr s P.Text
+    , _user                  :: TF.Attr s P.Text
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3801,10 +3801,10 @@ data IamUserPolicyResource s = IamUserPolicyResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _policy :: TF.Attr s P.Document
+    , _policy     :: TF.Attr s P.Document
     -- ^ @policy@ - (Required)
     --
-    , _user :: TF.Attr s P.Text
+    , _user       :: TF.Attr s P.Text
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3857,7 +3857,7 @@ data IamUserPolicyAttachmentResource s = IamUserPolicyAttachmentResource'
     { _policyArn :: TF.Attr s P.Text
     -- ^ @policy_arn@ - (Required)
     --
-    , _user :: TF.Attr s P.Text
+    , _user      :: TF.Attr s P.Text
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3897,13 +3897,13 @@ instance P.HasUser (IamUserPolicyAttachmentResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iam_user_ssh_key terraform documentation>
 -- for more information.
 data IamUserSshKeyResource s = IamUserSshKeyResource'
-    { _encoding :: TF.Attr s P.Text
+    { _encoding  :: TF.Attr s P.Text
     -- ^ @encoding@ - (Required)
     --
     , _publicKey :: TF.Attr s P.Text
     -- ^ @public_key@ - (Required)
     --
-    , _username :: TF.Attr s P.Text
+    , _username  :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -3960,7 +3960,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (IamUserSshKeyResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_inspector_assessment_target terraform documentation>
 -- for more information.
 data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource'
-    { _name :: TF.Attr s P.Text
+    { _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _resourceGroupArn :: TF.Attr s P.Text
@@ -4006,16 +4006,16 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (InspectorAssessmentTargetResourc
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_inspector_assessment_template terraform documentation>
 -- for more information.
 data InspectorAssessmentTemplateResource s = InspectorAssessmentTemplateResource'
-    { _duration :: TF.Attr s P.Integer
+    { _duration         :: TF.Attr s P.Integer
     -- ^ @duration@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _rulesPackageArns :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @rules_package_arns@ - (Required)
     --
-    , _targetArn :: TF.Attr s P.Text
+    , _targetArn        :: TF.Attr s P.Text
     -- ^ @target_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4371,7 +4371,7 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (InstanceResource
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_internet_gateway terraform documentation>
 -- for more information.
 data InternetGatewayResource s = InternetGatewayResource'
-    { _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _tags  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _vpcId :: TF.Attr s P.Text
@@ -4415,7 +4415,7 @@ data IotCertificateResource s = IotCertificateResource'
     { _active :: TF.Attr s P.Bool
     -- ^ @active@ - (Required)
     --
-    , _csr :: TF.Attr s P.Text
+    , _csr    :: TF.Attr s P.Text
     -- ^ @csr@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4458,7 +4458,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IotCertificateResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iot_policy terraform documentation>
 -- for more information.
 data IotPolicyResource s = IotPolicyResource'
-    { _name :: TF.Attr s P.Text
+    { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _policy :: TF.Attr s P.Document
@@ -4507,10 +4507,10 @@ instance s ~ s' => P.HasComputedDefaultVersionId (TF.Ref s' (IotPolicyResource s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iot_thing terraform documentation>
 -- for more information.
 data IotThingResource s = IotThingResource'
-    { _attributes :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _attributes    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @attributes@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _thingTypeName :: TF.Attr s P.Text
@@ -4571,7 +4571,7 @@ data IotThingTypeResource s = IotThingTypeResource'
     { _deprecated :: TF.Attr s P.Bool
     -- ^ @deprecated@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _properties :: TF.Attr s (Properties s)
@@ -4627,52 +4627,52 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (IotThingTypeResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_iot_topic_rule terraform documentation>
 -- for more information.
 data IotTopicRuleResource s = IotTopicRuleResource'
-    { _cloudwatchAlarm :: TF.Attr s [TF.Attr s (CloudwatchAlarm s)]
+    { _cloudwatchAlarm  :: TF.Attr s [TF.Attr s (CloudwatchAlarm s)]
     -- ^ @cloudwatch_alarm@ - (Optional)
     --
     , _cloudwatchMetric :: TF.Attr s [TF.Attr s (CloudwatchMetric s)]
     -- ^ @cloudwatch_metric@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _dynamodb :: TF.Attr s [TF.Attr s (Dynamodb s)]
+    , _dynamodb         :: TF.Attr s [TF.Attr s (Dynamodb s)]
     -- ^ @dynamodb@ - (Optional)
     --
-    , _elasticsearch :: TF.Attr s [TF.Attr s (Elasticsearch s)]
+    , _elasticsearch    :: TF.Attr s [TF.Attr s (Elasticsearch s)]
     -- ^ @elasticsearch@ - (Optional)
     --
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled          :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Required)
     --
-    , _firehose :: TF.Attr s [TF.Attr s (Firehose s)]
+    , _firehose         :: TF.Attr s [TF.Attr s (Firehose s)]
     -- ^ @firehose@ - (Optional)
     --
-    , _kinesis :: TF.Attr s [TF.Attr s (Kinesis s)]
+    , _kinesis          :: TF.Attr s [TF.Attr s (Kinesis s)]
     -- ^ @kinesis@ - (Optional)
     --
-    , _lambda :: TF.Attr s [TF.Attr s (Lambda s)]
+    , _lambda           :: TF.Attr s [TF.Attr s (Lambda s)]
     -- ^ @lambda@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _republish :: TF.Attr s [TF.Attr s (Republish s)]
+    , _republish        :: TF.Attr s [TF.Attr s (Republish s)]
     -- ^ @republish@ - (Optional)
     --
-    , _s3 :: TF.Attr s [TF.Attr s (S3 s)]
+    , _s3               :: TF.Attr s [TF.Attr s (S3 s)]
     -- ^ @s3@ - (Optional)
     --
-    , _sns :: TF.Attr s [TF.Attr s (Sns s)]
+    , _sns              :: TF.Attr s [TF.Attr s (Sns s)]
     -- ^ @sns@ - (Optional)
     --
-    , _sql :: TF.Attr s P.Text
+    , _sql              :: TF.Attr s P.Text
     -- ^ @sql@ - (Required)
     --
-    , _sqlVersion :: TF.Attr s P.Text
+    , _sqlVersion       :: TF.Attr s P.Text
     -- ^ @sql_version@ - (Required)
     --
-    , _sqs :: TF.Attr s [TF.Attr s (Sqs s)]
+    , _sqs              :: TF.Attr s [TF.Attr s (Sqs s)]
     -- ^ @sqs@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4862,7 +4862,7 @@ data KeyPairResource s = KeyPairResource'
     { _keyNamePrefix :: TF.Attr s P.Text
     -- ^ @key_name_prefix@ - (Optional)
     --
-    , _publicKey :: TF.Attr s P.Text
+    , _publicKey     :: TF.Attr s P.Text
     -- ^ @public_key@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -4907,13 +4907,13 @@ instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (KeyPairResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_kinesis_firehose_delivery_stream terraform documentation>
 -- for more information.
 data KinesisFirehoseDeliveryStreamResource s = KinesisFirehoseDeliveryStreamResource'
-    { _destination :: TF.Attr s P.Text
+    { _destination                :: TF.Attr s P.Text
     -- ^ @destination@ - (Required)
     --
     , _elasticsearchConfiguration :: TF.Attr s (ElasticsearchConfiguration s)
     -- ^ @elasticsearch_configuration@ - (Optional)
     --
-    , _extendedS3Configuration :: TF.Attr s (ExtendedS3Configuration s)
+    , _extendedS3Configuration    :: TF.Attr s (ExtendedS3Configuration s)
     -- ^ @extended_s3_configuration@ - (Optional)
     --
     -- Conflicts with:
@@ -4922,19 +4922,19 @@ data KinesisFirehoseDeliveryStreamResource s = KinesisFirehoseDeliveryStreamReso
     , _kinesisSourceConfiguration :: TF.Attr s (KinesisSourceConfiguration s)
     -- ^ @kinesis_source_configuration@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                       :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _redshiftConfiguration :: TF.Attr s (RedshiftConfiguration s)
+    , _redshiftConfiguration      :: TF.Attr s (RedshiftConfiguration s)
     -- ^ @redshift_configuration@ - (Optional)
     --
-    , _s3Configuration :: TF.Attr s (S3Configuration s)
+    , _s3Configuration            :: TF.Attr s (S3Configuration s)
     -- ^ @s3_configuration@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'extendedS3Configuration'
-    , _splunkConfiguration :: TF.Attr s (SplunkConfiguration s)
+    , _splunkConfiguration        :: TF.Attr s (SplunkConfiguration s)
     -- ^ @splunk_configuration@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5060,25 +5060,25 @@ instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (KinesisFirehoseDeliveryStr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_kinesis_stream terraform documentation>
 -- for more information.
 data KinesisStreamResource s = KinesisStreamResource'
-    { _encryptionType :: TF.Attr s P.Text
+    { _encryptionType    :: TF.Attr s P.Text
     -- ^ @encryption_type@ - (Optional)
     --
-    , _kmsKeyId :: TF.Attr s P.Text
+    , _kmsKeyId          :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _retentionPeriod :: TF.Attr s P.Integer
+    , _retentionPeriod   :: TF.Attr s P.Integer
     -- ^ @retention_period@ - (Optional)
     --
-    , _shardCount :: TF.Attr s P.Integer
+    , _shardCount        :: TF.Attr s P.Integer
     -- ^ @shard_count@ - (Required)
     --
     , _shardLevelMetrics :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @shard_level_metrics@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5156,13 +5156,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (KinesisStreamResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_alias terraform documentation>
 -- for more information.
 data KmsAliasResource s = KmsAliasResource'
-    { _name :: TF.Attr s P.Text
+    { _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'namePrefix'
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix  :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
     -- Conflicts with:
@@ -5231,28 +5231,28 @@ instance s ~ s' => P.HasComputedTargetKeyArn (TF.Ref s' (KmsAliasResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_kms_grant terraform documentation>
 -- for more information.
 data KmsGrantResource s = KmsGrantResource'
-    { _constraints :: TF.Attr s [TF.Attr s (Constraints s)]
+    { _constraints         :: TF.Attr s [TF.Attr s (Constraints s)]
     -- ^ @constraints@ - (Optional)
     --
     , _grantCreationTokens :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @grant_creation_tokens@ - (Optional)
     --
-    , _granteePrincipal :: TF.Attr s P.Text
+    , _granteePrincipal    :: TF.Attr s P.Text
     -- ^ @grantee_principal@ - (Required)
     --
-    , _keyId :: TF.Attr s P.Text
+    , _keyId               :: TF.Attr s P.Text
     -- ^ @key_id@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _operations :: TF.Attr s [TF.Attr s P.Text]
+    , _operations          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @operations@ - (Required)
     --
-    , _retireOnDelete :: TF.Attr s P.Bool
+    , _retireOnDelete      :: TF.Attr s P.Bool
     -- ^ @retire_on_delete@ - (Optional)
     --
-    , _retiringPrincipal :: TF.Attr s P.Text
+    , _retiringPrincipal   :: TF.Attr s P.Text
     -- ^ @retiring_principal@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5348,13 +5348,13 @@ data KmsKeyResource s = KmsKeyResource'
     { _deletionWindowInDays :: TF.Attr s P.Integer
     -- ^ @deletion_window_in_days@ - (Optional)
     --
-    , _enableKeyRotation :: TF.Attr s P.Bool
+    , _enableKeyRotation    :: TF.Attr s P.Bool
     -- ^ @enable_key_rotation@ - (Optional)
     --
-    , _isEnabled :: TF.Attr s P.Bool
+    , _isEnabled            :: TF.Attr s P.Bool
     -- ^ @is_enabled@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                 :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5421,19 +5421,19 @@ instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (KmsKeyResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_lambda_alias terraform documentation>
 -- for more information.
 data LambdaAliasResource s = LambdaAliasResource'
-    { _description :: TF.Attr s P.Text
+    { _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _functionName :: TF.Attr s P.Text
+    , _functionName    :: TF.Attr s P.Text
     -- ^ @function_name@ - (Required)
     --
     , _functionVersion :: TF.Attr s P.Text
     -- ^ @function_version@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _routingConfig :: TF.Attr s (RoutingConfig s)
+    , _routingConfig   :: TF.Attr s (RoutingConfig s)
     -- ^ @routing_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -5502,16 +5502,16 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (LambdaAliasResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_lambda_event_source_mapping terraform documentation>
 -- for more information.
 data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource'
-    { _batchSize :: TF.Attr s P.Integer
+    { _batchSize        :: TF.Attr s P.Integer
     -- ^ @batch_size@ - (Optional)
     --
-    , _enabled :: TF.Attr s P.Bool
+    , _enabled          :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _eventSourceArn :: TF.Attr s P.Text
+    , _eventSourceArn   :: TF.Attr s P.Text
     -- ^ @event_source_arn@ - (Required)
     --
-    , _functionName :: TF.Attr s P.Text
+    , _functionName     :: TF.Attr s P.Text
     -- ^ @function_name@ - (Required)
     --
     , _startingPosition :: TF.Attr s P.Text
@@ -5869,25 +5869,25 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (LambdaFunctionResource s)) (
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_lambda_permission terraform documentation>
 -- for more information.
 data LambdaPermissionResource s = LambdaPermissionResource'
-    { _action :: TF.Attr s P.Text
+    { _action            :: TF.Attr s P.Text
     -- ^ @action@ - (Required)
     --
-    , _eventSourceToken :: TF.Attr s P.Text
+    , _eventSourceToken  :: TF.Attr s P.Text
     -- ^ @event_source_token@ - (Optional)
     --
-    , _functionName :: TF.Attr s P.Text
+    , _functionName      :: TF.Attr s P.Text
     -- ^ @function_name@ - (Required)
     --
-    , _principal :: TF.Attr s P.Text
+    , _principal         :: TF.Attr s P.Text
     -- ^ @principal@ - (Required)
     --
-    , _qualifier :: TF.Attr s P.Text
+    , _qualifier         :: TF.Attr s P.Text
     -- ^ @qualifier@ - (Optional)
     --
-    , _sourceAccount :: TF.Attr s P.Text
+    , _sourceAccount     :: TF.Attr s P.Text
     -- ^ @source_account@ - (Optional)
     --
-    , _sourceArn :: TF.Attr s P.Text
+    , _sourceArn         :: TF.Attr s P.Text
     -- ^ @source_arn@ - (Optional)
     --
     , _statementIdPrefix :: TF.Attr s P.Text
@@ -6621,13 +6621,13 @@ data LbCookieStickinessPolicyResource s = LbCookieStickinessPolicyResource'
     { _cookieExpirationPeriod :: TF.Attr s P.Integer
     -- ^ @cookie_expiration_period@ - (Optional)
     --
-    , _lbPort :: TF.Attr s P.Integer
+    , _lbPort                 :: TF.Attr s P.Integer
     -- ^ @lb_port@ - (Required)
     --
-    , _loadBalancer :: TF.Attr s P.Text
+    , _loadBalancer           :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6682,19 +6682,19 @@ instance P.HasName (LbCookieStickinessPolicyResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_lb_listener terraform documentation>
 -- for more information.
 data LbListenerResource s = LbListenerResource'
-    { _certificateArn :: TF.Attr s P.Text
+    { _certificateArn  :: TF.Attr s P.Text
     -- ^ @certificate_arn@ - (Optional)
     --
-    , _defaultAction :: TF.Attr s [TF.Attr s (DefaultAction s)]
+    , _defaultAction   :: TF.Attr s [TF.Attr s (DefaultAction s)]
     -- ^ @default_action@ - (Required)
     --
     , _loadBalancerArn :: TF.Attr s P.Text
     -- ^ @load_balancer_arn@ - (Required)
     --
-    , _port :: TF.Attr s P.Integer
+    , _port            :: TF.Attr s P.Integer
     -- ^ @port@ - (Required)
     --
-    , _protocol :: TF.Attr s P.Text
+    , _protocol        :: TF.Attr s P.Text
     -- ^ @protocol@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6769,7 +6769,7 @@ data LbListenerCertificateResource s = LbListenerCertificateResource'
     { _certificateArn :: TF.Attr s P.Text
     -- ^ @certificate_arn@ - (Required)
     --
-    , _listenerArn :: TF.Attr s P.Text
+    , _listenerArn    :: TF.Attr s P.Text
     -- ^ @listener_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6809,10 +6809,10 @@ instance P.HasListenerArn (LbListenerCertificateResource s) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_lb_listener_rule terraform documentation>
 -- for more information.
 data LbListenerRuleResource s = LbListenerRuleResource'
-    { _action :: TF.Attr s [TF.Attr s (Action s)]
+    { _action      :: TF.Attr s [TF.Attr s (Action s)]
     -- ^ @action@ - (Required)
     --
-    , _condition :: TF.Attr s [TF.Attr s (Condition s)]
+    , _condition   :: TF.Attr s [TF.Attr s (Condition s)]
     -- ^ @condition@ - (Required)
     --
     , _listenerArn :: TF.Attr s P.Text
@@ -6877,16 +6877,16 @@ instance s ~ s' => P.HasComputedPriority (TF.Ref s' (LbListenerRuleResource s)) 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_lb_ssl_negotiation_policy terraform documentation>
 -- for more information.
 data LbSslNegotiationPolicyResource s = LbSslNegotiationPolicyResource'
-    { _attribute :: TF.Attr s [TF.Attr s (Attribute s)]
+    { _attribute    :: TF.Attr s [TF.Attr s (Attribute s)]
     -- ^ @attribute@ - (Optional)
     --
-    , _lbPort :: TF.Attr s P.Integer
+    , _lbPort       :: TF.Attr s P.Integer
     -- ^ @lb_port@ - (Required)
     --
     , _loadBalancer :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -6948,28 +6948,28 @@ data LbTargetGroupResource s = LbTargetGroupResource'
     { _deregistrationDelay :: TF.Attr s P.Integer
     -- ^ @deregistration_delay@ - (Optional)
     --
-    , _namePrefix :: TF.Attr s P.Text
+    , _namePrefix          :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _port :: TF.Attr s P.Integer
+    , _port                :: TF.Attr s P.Integer
     -- ^ @port@ - (Required)
     --
-    , _protocol :: TF.Attr s P.Text
+    , _protocol            :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
-    , _proxyProtocolV2 :: TF.Attr s P.Bool
+    , _proxyProtocolV2     :: TF.Attr s P.Bool
     -- ^ @proxy_protocol_v2@ - (Optional)
     --
-    , _slowStart :: TF.Attr s P.Integer
+    , _slowStart           :: TF.Attr s P.Integer
     -- ^ @slow_start@ - (Optional)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags                :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _targetType :: TF.Attr s P.Text
+    , _targetType          :: TF.Attr s P.Text
     -- ^ @target_type@ - (Optional)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId               :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7077,13 +7077,13 @@ data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional)
     --
-    , _port :: TF.Attr s P.Integer
+    , _port             :: TF.Attr s P.Integer
     -- ^ @port@ - (Optional)
     --
-    , _targetGroupArn :: TF.Attr s P.Text
+    , _targetGroupArn   :: TF.Attr s P.Text
     -- ^ @target_group_arn@ - (Required)
     --
-    , _targetId :: TF.Attr s P.Text
+    , _targetId         :: TF.Attr s P.Text
     -- ^ @target_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7175,19 +7175,19 @@ data LightsailInstanceResource s = LightsailInstanceResource'
     { _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Required)
     --
-    , _blueprintId :: TF.Attr s P.Text
+    , _blueprintId      :: TF.Attr s P.Text
     -- ^ @blueprint_id@ - (Required)
     --
-    , _bundleId :: TF.Attr s P.Text
+    , _bundleId         :: TF.Attr s P.Text
     -- ^ @bundle_id@ - (Required)
     --
-    , _keyPairName :: TF.Attr s P.Text
+    , _keyPairName      :: TF.Attr s P.Text
     -- ^ @key_pair_name@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _userData :: TF.Attr s P.Text
+    , _userData         :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -7287,7 +7287,7 @@ data LightsailKeyPairResource s = LightsailKeyPairResource'
     { _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional)
     --
-    , _pgpKey :: TF.Attr s P.Text
+    , _pgpKey     :: TF.Attr s P.Text
     -- ^ @pgp_key@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)

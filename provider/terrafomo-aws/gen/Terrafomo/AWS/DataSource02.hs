@@ -142,24 +142,24 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Data.Monoid as P
-import qualified Data.HashMap.Strict as P
-import qualified Terrafomo.AWS.Types as P
-import qualified GHC.Generics as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Maybe as P
-import qualified Data.Text as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Data.HashMap.Strict as Map
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_prefix_list@ DataSource.
 --
@@ -203,7 +203,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (PrefixListData s)) (TF.Attr s P
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_pricing_product terraform documentation>
 -- for more information.
 data PricingProductData s = PricingProductData'
-    { _filters :: TF.Attr s (P.NonEmpty (TF.Attr s (Filters s)))
+    { _filters     :: TF.Attr s (P.NonEmpty (TF.Attr s (Filters s)))
     -- ^ @filters@ - (Required)
     --
     , _serviceCode :: TF.Attr s P.Text
@@ -363,7 +363,7 @@ data RedshiftClusterData s = RedshiftClusterData'
     { _clusterIdentifier :: TF.Attr s P.Text
     -- ^ @cluster_identifier@ - (Required)
     --
-    , _tags :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _tags              :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -718,7 +718,7 @@ data RouteTablesData s = RouteTablesData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -819,10 +819,10 @@ data S3BucketObjectData s = S3BucketObjectData'
     { _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required)
     --
-    , _key :: TF.Attr s P.Text
+    , _key    :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
-    , _range :: TF.Attr s P.Text
+    , _range  :: TF.Attr s P.Text
     -- ^ @range@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -966,7 +966,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SecretsmanagerSecretData s)) (T
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_secretsmanager_secret_version terraform documentation>
 -- for more information.
 data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
-    { _secretId :: TF.Attr s P.Text
+    { _secretId     :: TF.Attr s P.Text
     -- ^ @secret_id@ - (Required)
     --
     , _versionStage :: TF.Attr s P.Text
@@ -1187,7 +1187,7 @@ instance s ~ s' => P.HasComputedUrl (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Te
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_ssm_parameter terraform documentation>
 -- for more information.
 data SsmParameterData s = SsmParameterData'
-    { _name :: TF.Attr s P.Text
+    { _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _withDecryption :: TF.Attr s P.Bool
@@ -1238,7 +1238,7 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (SsmParameterData s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_storagegateway_local_disk terraform documentation>
 -- for more information.
 data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
-    { _diskPath :: TF.Attr s P.Text
+    { _diskPath   :: TF.Attr s P.Text
     -- ^ @disk_path@ - (Required)
     --
     , _gatewayArn :: TF.Attr s P.Text
@@ -1355,7 +1355,7 @@ data SubnetIdsData s = SubnetIdsData'
     { _filter :: TF.Attr s [TF.Attr s (Filter s)]
     -- ^ @filter@ - (Optional)
     --
-    , _vpcId :: TF.Attr s P.Text
+    , _vpcId  :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)

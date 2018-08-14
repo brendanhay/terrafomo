@@ -25,15 +25,15 @@ module Terrafomo.AWS
     , module Terrafomo.AWS.Resource05
     ) where
 
-import Terrafomo.AWS.Resource02
-import Terrafomo.AWS.Provider
-import Terrafomo.AWS.Types
-import Terrafomo.AWS.Lens
 import Terrafomo.AWS.DataSource01
+import Terrafomo.AWS.DataSource02
+import Terrafomo.AWS.Lens
+import Terrafomo.AWS.Provider
+import Terrafomo.AWS.Resource01
+import Terrafomo.AWS.Resource02
+import Terrafomo.AWS.Resource03
+import Terrafomo.AWS.Resource04
+import Terrafomo.AWS.Resource05
 import Terrafomo.AWS.Resource06
 import Terrafomo.AWS.Settings
-import Terrafomo.AWS.Resource04
-import Terrafomo.AWS.Resource03
-import Terrafomo.AWS.Resource01
-import Terrafomo.AWS.DataSource02
-import Terrafomo.AWS.Resource05
+import Terrafomo.AWS.Types

@@ -34,24 +34,24 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as Map
+import qualified Data.List.NonEmpty     as P
+import qualified Data.Maybe             as P
+import qualified Data.Monoid            as P
+import qualified Data.Text              as P
+import qualified GHC.Generics           as P
+import qualified Lens.Micro             as P
+import qualified Prelude                as P
+import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
-import qualified Data.Monoid as P
-import qualified Data.HashMap.Strict as P
-import qualified Terrafomo.AWS.Types as P
-import qualified GHC.Generics as P
-import qualified Terrafomo.AWS.Lens as P
-import qualified Data.Hashable as P
-import qualified Data.List.NonEmpty as P
-import qualified Data.Maybe as P
-import qualified Data.Text as P
-import qualified Prelude as P
-import qualified Lens.Micro as P
-import qualified Data.HashMap.Strict as Map
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validator    as TF
 
 -- | @aws_wafregional_web_acl_association@ Resource.
 --
@@ -61,7 +61,7 @@ data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResour
     { _resourceArn :: TF.Attr s P.Text
     -- ^ @resource_arn@ - (Required)
     --
-    , _webAclId :: TF.Attr s P.Text
+    , _webAclId    :: TF.Attr s P.Text
     -- ^ @web_acl_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -101,7 +101,7 @@ instance P.HasWebAclId (WafregionalWebAclAssociationResource s) (TF.Attr s P.Tex
 -- See the <https://www.terraform.io/docs/providers/AWS/aws_wafregional_xss_match_set terraform documentation>
 -- for more information.
 data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
-    { _name :: TF.Attr s P.Text
+    { _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _xssMatchTuple :: TF.Attr s [TF.Attr s (XssMatchTuple s)]
