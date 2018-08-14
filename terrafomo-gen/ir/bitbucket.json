@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/bitbucket/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -57,6 +58,7 @@
                     "original": "reviewers"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/bitbucket/r/default_reviewers.html",
             "name": "DefaultReviewersResource",
             "threaded": true,
             "attributes": [],
@@ -233,6 +235,7 @@
                     "original": "url"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/bitbucket/r/hook.html",
             "name": "HookResource",
             "threaded": true,
             "attributes": [
@@ -522,6 +525,7 @@
                     "original": "website"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/bitbucket/r/repository.html",
             "name": "RepositoryResource",
             "threaded": true,
             "attributes": [
