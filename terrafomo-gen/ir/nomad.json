@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newRegionLimit",
-                "name": "RegionLimit'"
+                "smart": "newLimitsRegionLimit",
+                "name": "LimitsRegionLimit'"
             },
             "arguments": [
                 {
@@ -39,18 +39,18 @@
                     "original": "memory_mb"
                 }
             ],
-            "name": "RegionLimit",
+            "name": "LimitsRegionLimit",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "RegionLimit s",
-            "original": "region_limit"
+            "type": "LimitsRegionLimit s",
+            "original": "limits_region_limit"
         },
         {
             "con": {
-                "smart": "newLimits",
-                "name": "Limits'"
+                "smart": "newQuotaSpecificationLimits",
+                "name": "QuotaSpecificationLimits'"
             },
             "arguments": [
                 {
@@ -83,14 +83,14 @@
                     "name": "_regionLimit",
                     "method": "regionLimit",
                     "conflicts": [],
-                    "type": "TF.Attr s (RegionLimit s)",
+                    "type": "TF.Attr s (LimitsRegionLimit s)",
                     "class": "HasRegionLimit",
                     "validate": true,
                     "optional": false,
                     "original": "region_limit"
                 }
             ],
-            "name": "Limits",
+            "name": "QuotaSpecificationLimits",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -124,7 +124,7 @@
                     "name": "_regionLimit",
                     "method": "regionLimit",
                     "conflicts": [],
-                    "type": "TF.Attr s (RegionLimit s)",
+                    "type": "TF.Attr s (LimitsRegionLimit s)",
                     "class": "HasRegionLimit",
                     "validate": true,
                     "optional": false,
@@ -132,10 +132,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Limits s",
-            "original": "limits"
+            "type": "QuotaSpecificationLimits s",
+            "original": "quota_specification_limits"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/nomad/index.html",
     "dataSources": [
         {
             "con": {
@@ -143,6 +144,7 @@
                 "name": "RegionsData'"
             },
             "arguments": [],
+            "url": "https://www.terraform.io/docs/providers/nomad/d/regions.html",
             "name": "RegionsData",
             "threaded": true,
             "attributes": [
@@ -232,6 +234,7 @@
                     "original": "rules_hcl"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/nomad/r/acl_policy.html",
             "name": "AclPolicyResource",
             "threaded": true,
             "attributes": [],
@@ -357,6 +360,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/nomad/r/acl_token.html",
             "name": "AclTokenResource",
             "threaded": true,
             "attributes": [
@@ -500,6 +504,7 @@
                     "original": "policy_override"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/nomad/r/job.html",
             "name": "JobResource",
             "threaded": true,
             "attributes": [],
@@ -588,6 +593,7 @@
                     "original": "quota"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/nomad/r/namespace.html",
             "name": "NamespaceResource",
             "threaded": true,
             "attributes": [],
@@ -651,7 +657,7 @@
                     "name": "_limits",
                     "method": "limits",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Limits s)]",
+                    "type": "TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]",
                     "class": "HasLimits",
                     "validate": true,
                     "optional": false,
@@ -676,6 +682,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/nomad/r/quota_specification.html",
             "name": "QuotaSpecificationResource",
             "threaded": true,
             "attributes": [],
@@ -692,7 +699,7 @@
                     "name": "_limits",
                     "method": "limits",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Limits s)]",
+                    "type": "TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]",
                     "class": "HasLimits",
                     "validate": true,
                     "optional": false,
@@ -819,6 +826,7 @@
                     "original": "scope"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/nomad/r/sentinel_policy.html",
             "name": "SentinelPolicyResource",
             "threaded": true,
             "attributes": [],
