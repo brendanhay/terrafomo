@@ -123,12 +123,6 @@ instance P.HasProjectId (CloudRegionData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
 
-instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
-
-instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
-
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
 
@@ -447,12 +441,6 @@ instance P.HasProjectId (PubliccloudRegionData s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
-
-instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedContinentCode x = TF.compute (TF.refKey x) "_computedContinentCode"
-
-instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
-    computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "_computedDatacenterLocation"
