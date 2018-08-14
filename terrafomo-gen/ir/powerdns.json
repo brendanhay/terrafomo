@@ -1,5 +1,6 @@
 {
     "settings": [],
+    "url": "https://www.terraform.io/docs/providers/powerdns/index.html",
     "dataSources": [],
     "resources": [
         {
@@ -89,6 +90,7 @@
                     "original": "zone"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/powerdns/r/record.html",
             "name": "RecordResource",
             "threaded": true,
             "attributes": [],
