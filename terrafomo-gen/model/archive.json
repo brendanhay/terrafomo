@@ -21,7 +21,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "excludes",
+            "name": "file_excludes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -113,7 +113,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "source",
+            "name": "file_source",
             "schemas": [
               {
                 "name": "content",
@@ -239,7 +239,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "excludes",
+            "name": "file_excludes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -331,7 +331,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "source",
+            "name": "file_source",
             "schemas": [
               {
                 "name": "content",
