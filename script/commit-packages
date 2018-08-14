@@ -19,12 +19,12 @@ git_commit() {
 
     if [ -n "$(git status --porcelain $target)" ]; then
         echo "Committing $target"
-#        git add $target && git commit -m $message
+        git add $target && git commit -m "$message"
     fi
 }
 
 git_reset() {
-    git reset
+    git reset >/dev/null
 }
 
 trap git_reset ERR
