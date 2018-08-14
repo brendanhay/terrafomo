@@ -27,6 +27,7 @@ module Terrafomo.OpenStack.Lens
     , HasSizeMin (..)
     , HasMinDisk (..)
     , HasBuildNearHostIp (..)
+    , HasEnd (..)
     , HasConfigurationId (..)
     , HasAuthUrl (..)
     , HasWaitUntilAssociated (..)
@@ -116,6 +117,7 @@ module Terrafomo.OpenStack.Lens
     , HasDescription (..)
     , HasMember (..)
     , HasMonitorIds (..)
+    , HasAccessNetwork (..)
     , HasImageCachePath (..)
     , HasVendorOptions (..)
     , HasMostRecent (..)
@@ -209,6 +211,7 @@ module Terrafomo.OpenStack.Lens
     , HasProjectDomainId (..)
     , HasUserData (..)
     , HasIgnoreLockoutFailureAttempts (..)
+    , HasStart (..)
     , HasEthertype (..)
     , HasRegion (..)
     , HasQuery (..)
@@ -312,6 +315,8 @@ module Terrafomo.OpenStack.Lens
     , HasComputedMountPointBase (..)
     , HasComputedPortId (..)
     , HasComputedOwner (..)
+    , HasComputedMac (..)
+    , HasComputedUuid (..)
     , HasComputedIsDefault (..)
     , HasComputedProtocol (..)
     , HasComputedContentType (..)
@@ -334,6 +339,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedDefaultPrefixlen (..)
     , HasComputedChecksum (..)
     , HasComputedGatewayIp (..)
+    , HasComputedFixedIpV6 (..)
     , HasComputedUpdateAt (..)
     , HasComputedConnectionLimit (..)
     , HasComputedPrivateKey (..)
@@ -342,6 +348,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedShared (..)
     , HasComputedHostRoutes (..)
     , HasComputedCreatedAt (..)
+    , HasComputedPort (..)
     , HasComputedId (..)
     , HasComputedDnsNameservers (..)
     , HasComputedAvailabilityZoneHints (..)
@@ -390,6 +397,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedType (..)
     , HasComputedDeleteAt (..)
     , HasComputedRoles (..)
+    , HasComputedFloatingIp (..)
     , HasComputedInterval (..)
     , HasComputedMinPrefixlen (..)
     , HasComputedMaxPrefixlen (..)
@@ -419,6 +427,7 @@ module Terrafomo.OpenStack.Lens
     , HasComputedVipAddress (..)
     , HasComputedUserId (..)
     , HasComputedRemoteIpPrefix (..)
+    , HasComputedFixedIpV4 (..)
     , HasComputedDeviceId (..)
     , HasComputedEncapsulationMode (..)
     , HasComputedLbProvider (..)
@@ -500,6 +509,12 @@ class HasBuildNearHostIp a b | a -> b where
 
 instance HasBuildNearHostIp a b => HasBuildNearHostIp (TF.Schema l p a) b where
     buildNearHostIp = TF.configuration . buildNearHostIp
+
+class HasEnd a b | a -> b where
+    end :: P.Lens' a b
+
+instance HasEnd a b => HasEnd (TF.Schema l p a) b where
+    end = TF.configuration . end
 
 class HasConfigurationId a b | a -> b where
     configurationId :: P.Lens' a b
@@ -1034,6 +1049,12 @@ class HasMonitorIds a b | a -> b where
 
 instance HasMonitorIds a b => HasMonitorIds (TF.Schema l p a) b where
     monitorIds = TF.configuration . monitorIds
+
+class HasAccessNetwork a b | a -> b where
+    accessNetwork :: P.Lens' a b
+
+instance HasAccessNetwork a b => HasAccessNetwork (TF.Schema l p a) b where
+    accessNetwork = TF.configuration . accessNetwork
 
 class HasImageCachePath a b | a -> b where
     imageCachePath :: P.Lens' a b
@@ -1593,6 +1614,12 @@ class HasIgnoreLockoutFailureAttempts a b | a -> b where
 instance HasIgnoreLockoutFailureAttempts a b => HasIgnoreLockoutFailureAttempts (TF.Schema l p a) b where
     ignoreLockoutFailureAttempts = TF.configuration . ignoreLockoutFailureAttempts
 
+class HasStart a b | a -> b where
+    start :: P.Lens' a b
+
+instance HasStart a b => HasStart (TF.Schema l p a) b where
+    start = TF.configuration . start
+
 class HasEthertype a b | a -> b where
     ethertype :: P.Lens' a b
 
@@ -2064,6 +2091,12 @@ class HasComputedPortId a b | a -> b where
 class HasComputedOwner a b | a -> b where
     computedOwner :: a -> b
 
+class HasComputedMac a b | a -> b where
+    computedMac :: a -> b
+
+class HasComputedUuid a b | a -> b where
+    computedUuid :: a -> b
+
 class HasComputedIsDefault a b | a -> b where
     computedIsDefault :: a -> b
 
@@ -2130,6 +2163,9 @@ class HasComputedChecksum a b | a -> b where
 class HasComputedGatewayIp a b | a -> b where
     computedGatewayIp :: a -> b
 
+class HasComputedFixedIpV6 a b | a -> b where
+    computedFixedIpV6 :: a -> b
+
 class HasComputedUpdateAt a b | a -> b where
     computedUpdateAt :: a -> b
 
@@ -2153,6 +2189,9 @@ class HasComputedHostRoutes a b | a -> b where
 
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: a -> b
+
+class HasComputedPort a b | a -> b where
+    computedPort :: a -> b
 
 class HasComputedId a b | a -> b where
     computedId :: a -> b
@@ -2298,6 +2337,9 @@ class HasComputedDeleteAt a b | a -> b where
 class HasComputedRoles a b | a -> b where
     computedRoles :: a -> b
 
+class HasComputedFloatingIp a b | a -> b where
+    computedFloatingIp :: a -> b
+
 class HasComputedInterval a b | a -> b where
     computedInterval :: a -> b
 
@@ -2384,6 +2426,9 @@ class HasComputedUserId a b | a -> b where
 
 class HasComputedRemoteIpPrefix a b | a -> b where
     computedRemoteIpPrefix :: a -> b
+
+class HasComputedFixedIpV4 a b | a -> b where
+    computedFixedIpV4 :: a -> b
 
 class HasComputedDeviceId a b | a -> b where
     computedDeviceId :: a -> b

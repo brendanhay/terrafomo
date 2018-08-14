@@ -111,32 +111,32 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @openstack_compute_flavor_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_compute_flavor_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/compute_flavor_v2.html terraform documentation>
 -- for more information.
 data ComputeFlavorV2Data s = ComputeFlavorV2Data'
     { _disk       :: TF.Attr s P.Integer
-    -- ^ @disk@ - (Optional)
+    -- ^ @disk@ - (Optional, Forces New)
     --
     , _minDisk    :: TF.Attr s P.Integer
-    -- ^ @min_disk@ - (Optional)
+    -- ^ @min_disk@ - (Optional, Forces New)
     --
     , _minRam     :: TF.Attr s P.Integer
-    -- ^ @min_ram@ - (Optional)
+    -- ^ @min_ram@ - (Optional, Forces New)
     --
     , _name       :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _ram        :: TF.Attr s P.Integer
-    -- ^ @ram@ - (Optional)
+    -- ^ @ram@ - (Optional, Forces New)
     --
     , _rxTxFactor :: TF.Attr s P.Double
-    -- ^ @rx_tx_factor@ - (Optional)
+    -- ^ @rx_tx_factor@ - (Optional, Forces New)
     --
     , _swap       :: TF.Attr s P.Integer
-    -- ^ @swap@ - (Optional)
+    -- ^ @swap@ - (Optional, Forces New)
     --
     , _vcpus      :: TF.Attr s P.Integer
-    -- ^ @vcpus@ - (Optional)
+    -- ^ @vcpus@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -211,14 +211,14 @@ instance P.HasVcpus (ComputeFlavorV2Data s) (TF.Attr s P.Integer) where
                (\s a -> s { _vcpus = a } :: ComputeFlavorV2Data s)
 
 instance s ~ s' => P.HasComputedIsPublic (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Bool) where
-    computedIsPublic x = TF.compute (TF.refKey x) "_computedIsPublic"
+    computedIsPublic x = TF.compute (TF.refKey x) "is_public"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFlavorV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @openstack_compute_keypair_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_compute_keypair_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/compute_keypair_v2.html terraform documentation>
 -- for more information.
 data ComputeKeypairV2Data s = ComputeKeypairV2Data'
     { _name :: TF.Attr s P.Text
@@ -249,14 +249,14 @@ instance P.HasName (ComputeKeypairV2Data s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ComputeKeypairV2Data s)
 
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (ComputeKeypairV2Data s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "_computedPublicKey"
+    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeKeypairV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @openstack_dns_zone_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_dns_zone_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/dns_zone_v2.html terraform documentation>
 -- for more information.
 data DnsZoneV2Data s = DnsZoneV2Data'
     { _description :: TF.Attr s P.Text
@@ -336,38 +336,38 @@ instance P.HasType' (DnsZoneV2Data s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: DnsZoneV2Data s)
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedAttributes x = TF.compute (TF.refKey x) "_computedAttributes"
+    computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
 instance s ~ s' => P.HasComputedMasters (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMasters x = TF.compute (TF.refKey x) "_computedMasters"
+    computedMasters x = TF.compute (TF.refKey x) "masters"
 
 instance s ~ s' => P.HasComputedPoolId (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
-    computedPoolId x = TF.compute (TF.refKey x) "_computedPoolId"
+    computedPoolId x = TF.compute (TF.refKey x) "pool_id"
 
 instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "_computedProjectId"
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSerial (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Integer) where
-    computedSerial x = TF.compute (TF.refKey x) "_computedSerial"
+    computedSerial x = TF.compute (TF.refKey x) "serial"
 
 instance s ~ s' => P.HasComputedTransferredAt (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
-    computedTransferredAt x = TF.compute (TF.refKey x) "_computedTransferredAt"
+    computedTransferredAt x = TF.compute (TF.refKey x) "transferred_at"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Text) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DnsZoneV2Data s)) (TF.Attr s P.Integer) where
-    computedVersion x = TF.compute (TF.refKey x) "_computedVersion"
+    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @openstack_fw_policy_v1@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_fw_policy_v1 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/fw_policy_v1.html terraform documentation>
 -- for more information.
 data FwPolicyV1Data s = FwPolicyV1Data'
     { _name     :: TF.Attr s P.Text
@@ -407,30 +407,30 @@ instance P.HasPolicyId (FwPolicyV1Data s) (TF.Attr s P.Text) where
                (\s a -> s { _policyId = a } :: FwPolicyV1Data s)
 
 instance s ~ s' => P.HasComputedAudited (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s P.Bool) where
-    computedAudited x = TF.compute (TF.refKey x) "_computedAudited"
+    computedAudited x = TF.compute (TF.refKey x) "audited"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedRules (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRules x = TF.compute (TF.refKey x) "_computedRules"
+    computedRules x = TF.compute (TF.refKey x) "rules"
 
 instance s ~ s' => P.HasComputedShared (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s P.Bool) where
-    computedShared x = TF.compute (TF.refKey x) "_computedShared"
+    computedShared x = TF.compute (TF.refKey x) "shared"
 
 instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (FwPolicyV1Data s)) (TF.Attr s P.Text) where
-    computedTenantId x = TF.compute (TF.refKey x) "_computedTenantId"
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
 
 -- | @openstack_identity_auth_scope_v3@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_identity_auth_scope_v3 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/identity_auth_scope_v3.html terraform documentation>
 -- for more information.
 data IdentityAuthScopeV3Data s = IdentityAuthScopeV3Data'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -457,48 +457,48 @@ instance P.HasName (IdentityAuthScopeV3Data s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: IdentityAuthScopeV3Data s)
 
 instance s ~ s' => P.HasComputedProjectDomainId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedProjectDomainId x = TF.compute (TF.refKey x) "_computedProjectDomainId"
+    computedProjectDomainId x = TF.compute (TF.refKey x) "project_domain_id"
 
 instance s ~ s' => P.HasComputedProjectDomainName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedProjectDomainName x = TF.compute (TF.refKey x) "_computedProjectDomainName"
+    computedProjectDomainName x = TF.compute (TF.refKey x) "project_domain_name"
 
 instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "_computedProjectId"
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
 instance s ~ s' => P.HasComputedProjectName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedProjectName x = TF.compute (TF.refKey x) "_computedProjectName"
+    computedProjectName x = TF.compute (TF.refKey x) "project_name"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s [TF.Attr s (Roles s)]) where
-    computedRoles x = TF.compute (TF.refKey x) "_computedRoles"
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s [TF.Attr s (IdentityAuthScopeV3Roles s)]) where
+    computedRoles x = TF.compute (TF.refKey x) "roles"
 
 instance s ~ s' => P.HasComputedUserDomainId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedUserDomainId x = TF.compute (TF.refKey x) "_computedUserDomainId"
+    computedUserDomainId x = TF.compute (TF.refKey x) "user_domain_id"
 
 instance s ~ s' => P.HasComputedUserDomainName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedUserDomainName x = TF.compute (TF.refKey x) "_computedUserDomainName"
+    computedUserDomainName x = TF.compute (TF.refKey x) "user_domain_name"
 
 instance s ~ s' => P.HasComputedUserId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedUserId x = TF.compute (TF.refKey x) "_computedUserId"
+    computedUserId x = TF.compute (TF.refKey x) "user_id"
 
 instance s ~ s' => P.HasComputedUserName (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
-    computedUserName x = TF.compute (TF.refKey x) "_computedUserName"
+    computedUserName x = TF.compute (TF.refKey x) "user_name"
 
 -- | @openstack_identity_endpoint_v3@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_identity_endpoint_v3 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/identity_endpoint_v3.html terraform documentation>
 -- for more information.
 data IdentityEndpointV3Data s = IdentityEndpointV3Data'
     { _interface   :: TF.Attr s P.Text
-    -- ^ @interface@ - (Optional)
+    -- ^ @interface@ - (Optional, Forces New)
     --
     , _serviceId   :: TF.Attr s P.Text
-    -- ^ @service_id@ - (Optional)
+    -- ^ @service_id@ - (Optional, Forces New)
     --
     , _serviceName :: TF.Attr s P.Text
-    -- ^ @service_name@ - (Optional)
+    -- ^ @service_name@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -538,14 +538,14 @@ instance P.HasServiceName (IdentityEndpointV3Data s) (TF.Attr s P.Text) where
                (\s a -> s { _serviceName = a } :: IdentityEndpointV3Data s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (IdentityEndpointV3Data s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @openstack_identity_group_v3@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_identity_group_v3 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/identity_group_v3.html terraform documentation>
 -- for more information.
 data IdentityGroupV3Data s = IdentityGroupV3Data'
     { _name :: TF.Attr s P.Text
@@ -576,14 +576,14 @@ instance P.HasName (IdentityGroupV3Data s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: IdentityGroupV3Data s)
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityGroupV3Data s)) (TF.Attr s P.Text) where
-    computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityGroupV3Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @openstack_identity_project_v3@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_identity_project_v3 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/identity_project_v3.html terraform documentation>
 -- for more information.
 data IdentityProjectV3Data s = IdentityProjectV3Data'
     { _enabled  :: TF.Attr s P.Bool
@@ -643,17 +643,17 @@ instance P.HasParentId (IdentityProjectV3Data s) (TF.Attr s P.Text) where
                (\s a -> s { _parentId = a } :: IdentityProjectV3Data s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
-    computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityProjectV3Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @openstack_identity_role_v3@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_identity_role_v3 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/identity_role_v3.html terraform documentation>
 -- for more information.
 data IdentityRoleV3Data s = IdentityRoleV3Data'
     { _name :: TF.Attr s P.Text
@@ -684,14 +684,14 @@ instance P.HasName (IdentityRoleV3Data s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: IdentityRoleV3Data s)
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityRoleV3Data s)) (TF.Attr s P.Text) where
-    computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityRoleV3Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @openstack_identity_user_v3@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_identity_user_v3 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/identity_user_v3.html terraform documentation>
 -- for more information.
 data IdentityUserV3Data s = IdentityUserV3Data'
     { _enabled           :: TF.Attr s P.Bool
@@ -771,51 +771,51 @@ instance P.HasUniqueId (IdentityUserV3Data s) (TF.Attr s P.Text) where
                (\s a -> s { _uniqueId = a } :: IdentityUserV3Data s)
 
 instance s ~ s' => P.HasComputedDefaultProjectId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
-    computedDefaultProjectId x = TF.compute (TF.refKey x) "_computedDefaultProjectId"
+    computedDefaultProjectId x = TF.compute (TF.refKey x) "default_project_id"
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
-    computedDomainId x = TF.compute (TF.refKey x) "_computedDomainId"
+    computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityUserV3Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 -- | @openstack_images_image_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_images_image_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/images_image_v2.html terraform documentation>
 -- for more information.
 data ImagesImageV2Data s = ImagesImageV2Data'
     { _memberStatus  :: TF.Attr s P.Text
-    -- ^ @member_status@ - (Optional)
+    -- ^ @member_status@ - (Optional, Forces New)
     --
     , _mostRecent    :: TF.Attr s P.Bool
-    -- ^ @most_recent@ - (Optional)
+    -- ^ @most_recent@ - (Optional, Forces New)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _owner         :: TF.Attr s P.Text
-    -- ^ @owner@ - (Optional)
+    -- ^ @owner@ - (Optional, Forces New)
     --
     , _properties    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @properties@ - (Optional)
+    -- ^ @properties@ - (Optional, Forces New)
     --
     , _sizeMax       :: TF.Attr s P.Integer
-    -- ^ @size_max@ - (Optional)
+    -- ^ @size_max@ - (Optional, Forces New)
     --
     , _sizeMin       :: TF.Attr s P.Integer
-    -- ^ @size_min@ - (Optional)
+    -- ^ @size_min@ - (Optional, Forces New)
     --
     , _sortDirection :: TF.Attr s P.Text
-    -- ^ @sort_direction@ - (Optional)
+    -- ^ @sort_direction@ - (Optional, Forces New)
     --
     , _sortKey       :: TF.Attr s P.Text
-    -- ^ @sort_key@ - (Optional)
+    -- ^ @sort_key@ - (Optional, Forces New)
     --
     , _tag           :: TF.Attr s P.Text
-    -- ^ @tag@ - (Optional)
+    -- ^ @tag@ - (Optional, Forces New)
     --
     , _visibility    :: TF.Attr s P.Text
-    -- ^ @visibility@ - (Optional)
+    -- ^ @visibility@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -911,44 +911,44 @@ instance P.HasVisibility (ImagesImageV2Data s) (TF.Attr s P.Text) where
                (\s a -> s { _visibility = a } :: ImagesImageV2Data s)
 
 instance s ~ s' => P.HasComputedChecksum (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedChecksum x = TF.compute (TF.refKey x) "_computedChecksum"
+    computedChecksum x = TF.compute (TF.refKey x) "checksum"
 
 instance s ~ s' => P.HasComputedContainerFormat (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedContainerFormat x = TF.compute (TF.refKey x) "_computedContainerFormat"
+    computedContainerFormat x = TF.compute (TF.refKey x) "container_format"
 
 instance s ~ s' => P.HasComputedDiskFormat (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedDiskFormat x = TF.compute (TF.refKey x) "_computedDiskFormat"
+    computedDiskFormat x = TF.compute (TF.refKey x) "disk_format"
 
 instance s ~ s' => P.HasComputedFile (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedFile x = TF.compute (TF.refKey x) "_computedFile"
+    computedFile x = TF.compute (TF.refKey x) "file"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedMetadata x = TF.compute (TF.refKey x) "_computedMetadata"
+    computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
 instance s ~ s' => P.HasComputedMinDiskGb (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Integer) where
-    computedMinDiskGb x = TF.compute (TF.refKey x) "_computedMinDiskGb"
+    computedMinDiskGb x = TF.compute (TF.refKey x) "min_disk_gb"
 
 instance s ~ s' => P.HasComputedMinRamMb (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Integer) where
-    computedMinRamMb x = TF.compute (TF.refKey x) "_computedMinRamMb"
+    computedMinRamMb x = TF.compute (TF.refKey x) "min_ram_mb"
 
 instance s ~ s' => P.HasComputedProtected (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Bool) where
-    computedProtected x = TF.compute (TF.refKey x) "_computedProtected"
+    computedProtected x = TF.compute (TF.refKey x) "protected"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSchema (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedSchema x = TF.compute (TF.refKey x) "_computedSchema"
+    computedSchema x = TF.compute (TF.refKey x) "schema"
 
 instance s ~ s' => P.HasComputedSizeBytes (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Integer) where
-    computedSizeBytes x = TF.compute (TF.refKey x) "_computedSizeBytes"
+    computedSizeBytes x = TF.compute (TF.refKey x) "size_bytes"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (ImagesImageV2Data s)) (TF.Attr s P.Text) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
 
 -- | @openstack_networking_floatingip_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_networking_floatingip_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/networking_floatingip_v2.html terraform documentation>
 -- for more information.
 data NetworkingFloatingipV2Data s = NetworkingFloatingipV2Data'
     { _address  :: TF.Attr s P.Text
@@ -1039,7 +1039,7 @@ instance P.HasTenantId (NetworkingFloatingipV2Data s) (TF.Attr s P.Text) where
 
 -- | @openstack_networking_network_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_networking_network_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/networking_network_v2.html terraform documentation>
 -- for more information.
 data NetworkingNetworkV2Data s = NetworkingNetworkV2Data'
     { _external           :: TF.Attr s P.Bool
@@ -1120,20 +1120,20 @@ instance P.HasTenantId (NetworkingNetworkV2Data s) (TF.Attr s P.Text) where
                (\s a -> s { _tenantId = a } :: NetworkingNetworkV2Data s)
 
 instance s ~ s' => P.HasComputedAdminStateUp (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
-    computedAdminStateUp x = TF.compute (TF.refKey x) "_computedAdminStateUp"
+    computedAdminStateUp x = TF.compute (TF.refKey x) "admin_state_up"
 
 instance s ~ s' => P.HasComputedAvailabilityZoneHints (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "_computedAvailabilityZoneHints"
+    computedAvailabilityZoneHints x = TF.compute (TF.refKey x) "availability_zone_hints"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedShared (TF.Ref s' (NetworkingNetworkV2Data s)) (TF.Attr s P.Text) where
-    computedShared x = TF.compute (TF.refKey x) "_computedShared"
+    computedShared x = TF.compute (TF.refKey x) "shared"
 
 -- | @openstack_networking_secgroup_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_networking_secgroup_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/networking_secgroup_v2.html terraform documentation>
 -- for more information.
 data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data'
     { _name       :: TF.Attr s P.Text
@@ -1173,14 +1173,14 @@ instance P.HasSecgroupId (NetworkingSecgroupV2Data s) (TF.Attr s P.Text) where
                (\s a -> s { _secgroupId = a } :: NetworkingSecgroupV2Data s)
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSecgroupV2Data s)) (TF.Attr s P.Text) where
-    computedTenantId x = TF.compute (TF.refKey x) "_computedTenantId"
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
 
 -- | @openstack_networking_subnet_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_networking_subnet_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/networking_subnet_v2.html terraform documentation>
 -- for more information.
 data NetworkingSubnetV2Data s = NetworkingSubnetV2Data'
     { _dhcpDisabled :: TF.Attr s P.Bool
@@ -1236,54 +1236,54 @@ instance P.HasDhcpEnabled (NetworkingSubnetV2Data s) (TF.Attr s P.Bool) where
         P.lens (_dhcpEnabled :: NetworkingSubnetV2Data s -> TF.Attr s P.Bool)
                (\s a -> s { _dhcpEnabled = a } :: NetworkingSubnetV2Data s)
 
-instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (AllocationPools s)]) where
-    computedAllocationPools x = TF.compute (TF.refKey x) "_computedAllocationPools"
+instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPools s)]) where
+    computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedCidr x = TF.compute (TF.refKey x) "_computedCidr"
+    computedCidr x = TF.compute (TF.refKey x) "cidr"
 
 instance s ~ s' => P.HasComputedDnsNameservers (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedDnsNameservers x = TF.compute (TF.refKey x) "_computedDnsNameservers"
+    computedDnsNameservers x = TF.compute (TF.refKey x) "dns_nameservers"
 
 instance s ~ s' => P.HasComputedEnableDhcp (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Bool) where
-    computedEnableDhcp x = TF.compute (TF.refKey x) "_computedEnableDhcp"
+    computedEnableDhcp x = TF.compute (TF.refKey x) "enable_dhcp"
 
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedGatewayIp x = TF.compute (TF.refKey x) "_computedGatewayIp"
+    computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (HostRoutes s)]) where
-    computedHostRoutes x = TF.compute (TF.refKey x) "_computedHostRoutes"
+instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutes s)]) where
+    computedHostRoutes x = TF.compute (TF.refKey x) "host_routes"
 
 instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Integer) where
-    computedIpVersion x = TF.compute (TF.refKey x) "_computedIpVersion"
+    computedIpVersion x = TF.compute (TF.refKey x) "ip_version"
 
 instance s ~ s' => P.HasComputedIpv6AddressMode (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedIpv6AddressMode x = TF.compute (TF.refKey x) "_computedIpv6AddressMode"
+    computedIpv6AddressMode x = TF.compute (TF.refKey x) "ipv6_address_mode"
 
 instance s ~ s' => P.HasComputedIpv6RaMode (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedIpv6RaMode x = TF.compute (TF.refKey x) "_computedIpv6RaMode"
+    computedIpv6RaMode x = TF.compute (TF.refKey x) "ipv6_ra_mode"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedNetworkId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedNetworkId x = TF.compute (TF.refKey x) "_computedNetworkId"
+    computedNetworkId x = TF.compute (TF.refKey x) "network_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedSubnetId x = TF.compute (TF.refKey x) "_computedSubnetId"
+    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
 
 instance s ~ s' => P.HasComputedSubnetpoolId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedSubnetpoolId x = TF.compute (TF.refKey x) "_computedSubnetpoolId"
+    computedSubnetpoolId x = TF.compute (TF.refKey x) "subnetpool_id"
 
 instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
-    computedTenantId x = TF.compute (TF.refKey x) "_computedTenantId"
+    computedTenantId x = TF.compute (TF.refKey x) "tenant_id"
 
 -- | @openstack_networking_subnetpool_v2@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/openstack_networking_subnetpool_v2 terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/openstack/d/networking_subnetpool_v2.html terraform documentation>
 -- for more information.
 data NetworkingSubnetpoolV2Data s = NetworkingSubnetpoolV2Data'
     deriving (P.Show, P.Eq, P.Generic)
@@ -1301,49 +1301,49 @@ instance TF.IsValid (NetworkingSubnetpoolV2Data s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedAddressScopeId (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedAddressScopeId x = TF.compute (TF.refKey x) "_computedAddressScopeId"
+    computedAddressScopeId x = TF.compute (TF.refKey x) "address_scope_id"
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
 instance s ~ s' => P.HasComputedDefaultPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Integer) where
-    computedDefaultPrefixlen x = TF.compute (TF.refKey x) "_computedDefaultPrefixlen"
+    computedDefaultPrefixlen x = TF.compute (TF.refKey x) "default_prefixlen"
 
 instance s ~ s' => P.HasComputedDefaultQuota (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Integer) where
-    computedDefaultQuota x = TF.compute (TF.refKey x) "_computedDefaultQuota"
+    computedDefaultQuota x = TF.compute (TF.refKey x) "default_quota"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Integer) where
-    computedIpVersion x = TF.compute (TF.refKey x) "_computedIpVersion"
+    computedIpVersion x = TF.compute (TF.refKey x) "ip_version"
 
 instance s ~ s' => P.HasComputedIsDefault (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Bool) where
-    computedIsDefault x = TF.compute (TF.refKey x) "_computedIsDefault"
+    computedIsDefault x = TF.compute (TF.refKey x) "is_default"
 
 instance s ~ s' => P.HasComputedMaxPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Integer) where
-    computedMaxPrefixlen x = TF.compute (TF.refKey x) "_computedMaxPrefixlen"
+    computedMaxPrefixlen x = TF.compute (TF.refKey x) "max_prefixlen"
 
 instance s ~ s' => P.HasComputedMinPrefixlen (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Integer) where
-    computedMinPrefixlen x = TF.compute (TF.refKey x) "_computedMinPrefixlen"
+    computedMinPrefixlen x = TF.compute (TF.refKey x) "min_prefixlen"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedPrefixes (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedPrefixes x = TF.compute (TF.refKey x) "_computedPrefixes"
+    computedPrefixes x = TF.compute (TF.refKey x) "prefixes"
 
 instance s ~ s' => P.HasComputedProjectId (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedProjectId x = TF.compute (TF.refKey x) "_computedProjectId"
+    computedProjectId x = TF.compute (TF.refKey x) "project_id"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "_computedRegion"
+    computedRegion x = TF.compute (TF.refKey x) "region"
 
 instance s ~ s' => P.HasComputedRevisionNumber (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Integer) where
-    computedRevisionNumber x = TF.compute (TF.refKey x) "_computedRevisionNumber"
+    computedRevisionNumber x = TF.compute (TF.refKey x) "revision_number"
 
 instance s ~ s' => P.HasComputedShared (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Bool) where
-    computedShared x = TF.compute (TF.refKey x) "_computedShared"
+    computedShared x = TF.compute (TF.refKey x) "shared"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (NetworkingSubnetpoolV2Data s)) (TF.Attr s P.Text) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"

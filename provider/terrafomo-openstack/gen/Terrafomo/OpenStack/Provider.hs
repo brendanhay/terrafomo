@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | The @OpenStack@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/OpenStack/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/openstack/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _authUrl           :: P.Maybe P.Text
