@@ -51,11 +51,11 @@ import qualified Terrafomo.Validator           as TF
 
 -- | @cloudstack_template@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/CloudStack/cloudstack_template terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cloudstack/d/template.html terraform documentation>
 -- for more information.
 data TemplateData s = TemplateData'
-    { _filter         :: TF.Attr s [TF.Attr s (Filter s)]
-    -- ^ @filter@ - (Required)
+    { _filter         :: TF.Attr s [TF.Attr s (TemplateFilter s)]
+    -- ^ @filter@ - (Required, Forces New)
     --
     , _templateFilter :: TF.Attr s P.Text
     -- ^ @template_filter@ - (Required)
@@ -63,7 +63,7 @@ data TemplateData s = TemplateData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 templateData
-    :: TF.Attr s [TF.Attr s (Filter s)] -- ^ @filter@ - 'P.filter'
+    :: TF.Attr s [TF.Attr s (TemplateFilter s)] -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
     -> TF.DataSource P.Provider (TemplateData s)
 templateData _filter _templateFilter =
@@ -83,12 +83,12 @@ instance TF.IsValid (TemplateData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: TemplateData s -> TF.Attr s [TF.Attr s (Filter s)])
+                      :: TemplateData s -> TF.Attr s [TF.Attr s (TemplateFilter s)])
                   TF.validator
 
-instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (Filter s)]) where
+instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (TemplateFilter s)]) where
     filter =
-        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (Filter s)])
+        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (TemplateFilter s)])
                (\s a -> s { _filter = a } :: TemplateData s)
 
 instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
@@ -97,28 +97,28 @@ instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
                (\s a -> s { _templateFilter = a } :: TemplateData s)
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedAccount x = TF.compute (TF.refKey x) "_computedAccount"
+    computedAccount x = TF.compute (TF.refKey x) "account"
 
 instance s ~ s' => P.HasComputedCreated (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "_computedCreated"
+    computedCreated x = TF.compute (TF.refKey x) "created"
 
 instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedDisplayText x = TF.compute (TF.refKey x) "_computedDisplayText"
+    computedDisplayText x = TF.compute (TF.refKey x) "display_text"
 
 instance s ~ s' => P.HasComputedFormat (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedFormat x = TF.compute (TF.refKey x) "_computedFormat"
+    computedFormat x = TF.compute (TF.refKey x) "format"
 
 instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedHypervisor x = TF.compute (TF.refKey x) "_computedHypervisor"
+    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedSize (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "_computedSize"
+    computedSize x = TF.compute (TF.refKey x) "size"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "_computedTags"
+    computedTags x = TF.compute (TF.refKey x) "tags"
 
 instance s ~ s' => P.HasComputedTemplateId (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedTemplateId x = TF.compute (TF.refKey x) "_computedTemplateId"
+    computedTemplateId x = TF.compute (TF.refKey x) "template_id"

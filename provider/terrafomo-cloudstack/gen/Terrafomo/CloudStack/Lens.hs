@@ -80,6 +80,7 @@ module Terrafomo.CloudStack.Lens
     , HasHttpGetOnly (..)
     , HasOsType (..)
     , HasIpsecPsk (..)
+    , HasAction (..)
     , HasNetworkOffering (..)
     , HasVlan (..)
 
@@ -521,6 +522,12 @@ class HasIpsecPsk a b | a -> b where
 
 instance HasIpsecPsk a b => HasIpsecPsk (TF.Schema l p a) b where
     ipsecPsk = TF.configuration . ipsecPsk
+
+class HasAction a b | a -> b where
+    action :: P.Lens' a b
+
+instance HasAction a b => HasAction (TF.Schema l p a) b where
+    action = TF.configuration . action
 
 class HasNetworkOffering a b | a -> b where
     networkOffering :: P.Lens' a b

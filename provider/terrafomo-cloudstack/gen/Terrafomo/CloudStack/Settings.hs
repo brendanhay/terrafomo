@@ -18,17 +18,29 @@
 module Terrafomo.CloudStack.Settings
     (
     -- * Settings Datatypes
-    -- ** forward
-      Forward (..)
-    , newForward
+    -- ** network_acl_rule_rule
+      NetworkAclRuleRule (..)
+    , newNetworkAclRuleRule
 
-    -- ** rule
-    , Rule (..)
-    , newRule
+    -- ** firewall_rule
+    , FirewallRule (..)
+    , newFirewallRule
 
-    -- ** filter
-    , Filter (..)
-    , newFilter
+    -- ** security_group_rule_rule
+    , SecurityGroupRuleRule (..)
+    , newSecurityGroupRuleRule
+
+    -- ** template_filter
+    , TemplateFilter (..)
+    , newTemplateFilter
+
+    -- ** egress_firewall_rule
+    , EgressFirewallRule (..)
+    , newEgressFirewallRule
+
+    -- ** port_forward_forward
+    , PortForwardForward (..)
+    , newPortForwardForward
 
     ) where
 
@@ -53,84 +65,148 @@ import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Validator        as TF
 
--- | @forward@ nested settings.
-data Forward s = Forward'
-    { _privatePort      :: TF.Attr s P.Integer
-    -- ^ @private_port@ - (Required)
+-- | @network_acl_rule_rule@ nested settings.
+data NetworkAclRuleRule s = NetworkAclRuleRule'
+    { _action      :: TF.Attr s P.Text
+    -- ^ @action@ - (Optional)
     --
-    , _protocol         :: TF.Attr s P.Text
+    , _cidrList    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @cidr_list@ - (Required)
+    --
+    , _ports       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ports@ - (Optional)
+    --
+    , _protocol    :: TF.Attr s P.Text
     -- ^ @protocol@ - (Required)
     --
-    , _publicPort       :: TF.Attr s P.Integer
-    -- ^ @public_port@ - (Required)
-    --
-    , _virtualMachineId :: TF.Attr s P.Text
-    -- ^ @virtual_machine_id@ - (Required)
-    --
-    , _vmGuestIp        :: TF.Attr s P.Text
-    -- ^ @vm_guest_ip@ - (Optional)
+    , _trafficType :: TF.Attr s P.Text
+    -- ^ @traffic_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newForward
-    :: TF.Attr s P.Integer -- ^ @private_port@ - 'P.privatePort'
+newNetworkAclRuleRule
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @cidr_list@ - 'P.cidrList'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Attr s P.Integer -- ^ @public_port@ - 'P.publicPort'
-    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
-    -> Forward s
-newForward _privatePort _protocol _publicPort _virtualMachineId =
-    Forward'
-        { _privatePort = _privatePort
+    -> NetworkAclRuleRule s
+newNetworkAclRuleRule _cidrList _protocol =
+    NetworkAclRuleRule'
+        { _action = TF.value "allow"
+        , _cidrList = _cidrList
+        , _ports = TF.Nil
         , _protocol = _protocol
-        , _publicPort = _publicPort
-        , _virtualMachineId = _virtualMachineId
-        , _vmGuestIp = TF.Nil
+        , _trafficType = TF.value "ingress"
         }
 
-instance P.Hashable  (Forward s)
-instance TF.IsValue  (Forward s)
-instance TF.IsObject (Forward s) where
-    toObject Forward'{..} = P.catMaybes
-        [ TF.assign "private_port" <$> TF.attribute _privatePort
+instance P.Hashable  (NetworkAclRuleRule s)
+instance TF.IsValue  (NetworkAclRuleRule s)
+instance TF.IsObject (NetworkAclRuleRule s) where
+    toObject NetworkAclRuleRule'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "cidr_list" <$> TF.attribute _cidrList
+        , TF.assign "ports" <$> TF.attribute _ports
         , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "public_port" <$> TF.attribute _publicPort
-        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
-        , TF.assign "vm_guest_ip" <$> TF.attribute _vmGuestIp
+        , TF.assign "traffic_type" <$> TF.attribute _trafficType
         ]
 
-instance TF.IsValid (Forward s) where
+instance TF.IsValid (NetworkAclRuleRule s) where
     validator = P.mempty
 
-instance P.HasPrivatePort (Forward s) (TF.Attr s P.Integer) where
-    privatePort =
-        P.lens (_privatePort :: Forward s -> TF.Attr s P.Integer)
-               (\s a -> s { _privatePort = a } :: Forward s)
+instance P.HasAction (NetworkAclRuleRule s) (TF.Attr s P.Text) where
+    action =
+        P.lens (_action :: NetworkAclRuleRule s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: NetworkAclRuleRule s)
 
-instance P.HasProtocol (Forward s) (TF.Attr s P.Text) where
+instance P.HasCidrList (NetworkAclRuleRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    cidrList =
+        P.lens (_cidrList :: NetworkAclRuleRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cidrList = a } :: NetworkAclRuleRule s)
+
+instance P.HasPorts (NetworkAclRuleRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    ports =
+        P.lens (_ports :: NetworkAclRuleRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ports = a } :: NetworkAclRuleRule s)
+
+instance P.HasProtocol (NetworkAclRuleRule s) (TF.Attr s P.Text) where
     protocol =
-        P.lens (_protocol :: Forward s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: Forward s)
+        P.lens (_protocol :: NetworkAclRuleRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: NetworkAclRuleRule s)
 
-instance P.HasPublicPort (Forward s) (TF.Attr s P.Integer) where
-    publicPort =
-        P.lens (_publicPort :: Forward s -> TF.Attr s P.Integer)
-               (\s a -> s { _publicPort = a } :: Forward s)
+instance P.HasTrafficType (NetworkAclRuleRule s) (TF.Attr s P.Text) where
+    trafficType =
+        P.lens (_trafficType :: NetworkAclRuleRule s -> TF.Attr s P.Text)
+               (\s a -> s { _trafficType = a } :: NetworkAclRuleRule s)
 
-instance P.HasVirtualMachineId (Forward s) (TF.Attr s P.Text) where
-    virtualMachineId =
-        P.lens (_virtualMachineId :: Forward s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualMachineId = a } :: Forward s)
+instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (NetworkAclRuleRule s)) (TF.Attr s P.Integer) where
+    computedIcmpCode x = TF.compute (TF.refKey x) "icmp_code"
 
-instance P.HasVmGuestIp (Forward s) (TF.Attr s P.Text) where
-    vmGuestIp =
-        P.lens (_vmGuestIp :: Forward s -> TF.Attr s P.Text)
-               (\s a -> s { _vmGuestIp = a } :: Forward s)
+instance s ~ s' => P.HasComputedIcmpType (TF.Ref s' (NetworkAclRuleRule s)) (TF.Attr s P.Integer) where
+    computedIcmpType x = TF.compute (TF.refKey x) "icmp_type"
 
-instance s ~ s' => P.HasComputedUuid (TF.Ref s' (Forward s)) (TF.Attr s P.Text) where
-    computedUuid x = TF.compute (TF.refKey x) "_computedUuid"
+instance s ~ s' => P.HasComputedUuids (TF.Ref s' (NetworkAclRuleRule s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedUuids x = TF.compute (TF.refKey x) "uuids"
 
--- | @rule@ nested settings.
-data Rule s = Rule'
+-- | @firewall_rule@ nested settings.
+data FirewallRule s = FirewallRule'
+    { _cidrList :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @cidr_list@ - (Required)
+    --
+    , _ports    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ports@ - (Optional)
+    --
+    , _protocol :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newFirewallRule
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @cidr_list@ - 'P.cidrList'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> FirewallRule s
+newFirewallRule _cidrList _protocol =
+    FirewallRule'
+        { _cidrList = _cidrList
+        , _ports = TF.Nil
+        , _protocol = _protocol
+        }
+
+instance P.Hashable  (FirewallRule s)
+instance TF.IsValue  (FirewallRule s)
+instance TF.IsObject (FirewallRule s) where
+    toObject FirewallRule'{..} = P.catMaybes
+        [ TF.assign "cidr_list" <$> TF.attribute _cidrList
+        , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        ]
+
+instance TF.IsValid (FirewallRule s) where
+    validator = P.mempty
+
+instance P.HasCidrList (FirewallRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    cidrList =
+        P.lens (_cidrList :: FirewallRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cidrList = a } :: FirewallRule s)
+
+instance P.HasPorts (FirewallRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    ports =
+        P.lens (_ports :: FirewallRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ports = a } :: FirewallRule s)
+
+instance P.HasProtocol (FirewallRule s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: FirewallRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: FirewallRule s)
+
+instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (FirewallRule s)) (TF.Attr s P.Integer) where
+    computedIcmpCode x = TF.compute (TF.refKey x) "icmp_code"
+
+instance s ~ s' => P.HasComputedIcmpType (TF.Ref s' (FirewallRule s)) (TF.Attr s P.Integer) where
+    computedIcmpType x = TF.compute (TF.refKey x) "icmp_type"
+
+instance s ~ s' => P.HasComputedUuids (TF.Ref s' (FirewallRule s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedUuids x = TF.compute (TF.refKey x) "uuids"
+
+-- | @security_group_rule_rule@ nested settings.
+data SecurityGroupRuleRule s = SecurityGroupRuleRule'
     { _cidrList              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @cidr_list@ - (Optional)
     --
@@ -148,11 +224,11 @@ data Rule s = Rule'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newRule
+newSecurityGroupRuleRule
     :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> Rule s
-newRule _protocol =
-    Rule'
+    -> SecurityGroupRuleRule s
+newSecurityGroupRuleRule _protocol =
+    SecurityGroupRuleRule'
         { _cidrList = TF.Nil
         , _ports = TF.Nil
         , _protocol = _protocol
@@ -160,10 +236,10 @@ newRule _protocol =
         , _userSecurityGroupList = TF.Nil
         }
 
-instance P.Hashable  (Rule s)
-instance TF.IsValue  (Rule s)
-instance TF.IsObject (Rule s) where
-    toObject Rule'{..} = P.catMaybes
+instance P.Hashable  (SecurityGroupRuleRule s)
+instance TF.IsValue  (SecurityGroupRuleRule s)
+instance TF.IsObject (SecurityGroupRuleRule s) where
+    toObject SecurityGroupRuleRule'{..} = P.catMaybes
         [ TF.assign "cidr_list" <$> TF.attribute _cidrList
         , TF.assign "ports" <$> TF.attribute _ports
         , TF.assign "protocol" <$> TF.attribute _protocol
@@ -171,45 +247,45 @@ instance TF.IsObject (Rule s) where
         , TF.assign "user_security_group_list" <$> TF.attribute _userSecurityGroupList
         ]
 
-instance TF.IsValid (Rule s) where
+instance TF.IsValid (SecurityGroupRuleRule s) where
     validator = P.mempty
 
-instance P.HasCidrList (Rule s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCidrList (SecurityGroupRuleRule s) (TF.Attr s [TF.Attr s P.Text]) where
     cidrList =
-        P.lens (_cidrList :: Rule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _cidrList = a } :: Rule s)
+        P.lens (_cidrList :: SecurityGroupRuleRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cidrList = a } :: SecurityGroupRuleRule s)
 
-instance P.HasPorts (Rule s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasPorts (SecurityGroupRuleRule s) (TF.Attr s [TF.Attr s P.Text]) where
     ports =
-        P.lens (_ports :: Rule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ports = a } :: Rule s)
+        P.lens (_ports :: SecurityGroupRuleRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ports = a } :: SecurityGroupRuleRule s)
 
-instance P.HasProtocol (Rule s) (TF.Attr s P.Text) where
+instance P.HasProtocol (SecurityGroupRuleRule s) (TF.Attr s P.Text) where
     protocol =
-        P.lens (_protocol :: Rule s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: Rule s)
+        P.lens (_protocol :: SecurityGroupRuleRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: SecurityGroupRuleRule s)
 
-instance P.HasTrafficType (Rule s) (TF.Attr s P.Text) where
+instance P.HasTrafficType (SecurityGroupRuleRule s) (TF.Attr s P.Text) where
     trafficType =
-        P.lens (_trafficType :: Rule s -> TF.Attr s P.Text)
-               (\s a -> s { _trafficType = a } :: Rule s)
+        P.lens (_trafficType :: SecurityGroupRuleRule s -> TF.Attr s P.Text)
+               (\s a -> s { _trafficType = a } :: SecurityGroupRuleRule s)
 
-instance P.HasUserSecurityGroupList (Rule s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasUserSecurityGroupList (SecurityGroupRuleRule s) (TF.Attr s [TF.Attr s P.Text]) where
     userSecurityGroupList =
-        P.lens (_userSecurityGroupList :: Rule s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _userSecurityGroupList = a } :: Rule s)
+        P.lens (_userSecurityGroupList :: SecurityGroupRuleRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _userSecurityGroupList = a } :: SecurityGroupRuleRule s)
 
-instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (Rule s)) (TF.Attr s P.Integer) where
-    computedIcmpCode x = TF.compute (TF.refKey x) "_computedIcmpCode"
+instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (SecurityGroupRuleRule s)) (TF.Attr s P.Integer) where
+    computedIcmpCode x = TF.compute (TF.refKey x) "icmp_code"
 
-instance s ~ s' => P.HasComputedIcmpType (TF.Ref s' (Rule s)) (TF.Attr s P.Integer) where
-    computedIcmpType x = TF.compute (TF.refKey x) "_computedIcmpType"
+instance s ~ s' => P.HasComputedIcmpType (TF.Ref s' (SecurityGroupRuleRule s)) (TF.Attr s P.Integer) where
+    computedIcmpType x = TF.compute (TF.refKey x) "icmp_type"
 
-instance s ~ s' => P.HasComputedUuids (TF.Ref s' (Rule s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    computedUuids x = TF.compute (TF.refKey x) "_computedUuids"
+instance s ~ s' => P.HasComputedUuids (TF.Ref s' (SecurityGroupRuleRule s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedUuids x = TF.compute (TF.refKey x) "uuids"
 
--- | @filter@ nested settings.
-data Filter s = Filter'
+-- | @template_filter@ nested settings.
+data TemplateFilter s = TemplateFilter'
     { _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -218,33 +294,169 @@ data Filter s = Filter'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newFilter
+newTemplateFilter
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> Filter s
-newFilter _name _value =
-    Filter'
+    -> TemplateFilter s
+newTemplateFilter _name _value =
+    TemplateFilter'
         { _name = _name
         , _value = _value
         }
 
-instance P.Hashable  (Filter s)
-instance TF.IsValue  (Filter s)
-instance TF.IsObject (Filter s) where
-    toObject Filter'{..} = P.catMaybes
+instance P.Hashable  (TemplateFilter s)
+instance TF.IsValue  (TemplateFilter s)
+instance TF.IsObject (TemplateFilter s) where
+    toObject TemplateFilter'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (Filter s) where
+instance TF.IsValid (TemplateFilter s) where
     validator = P.mempty
 
-instance P.HasName (Filter s) (TF.Attr s P.Text) where
+instance P.HasName (TemplateFilter s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Filter s)
+        P.lens (_name :: TemplateFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TemplateFilter s)
 
-instance P.HasValue (Filter s) (TF.Attr s P.Text) where
+instance P.HasValue (TemplateFilter s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: Filter s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: Filter s)
+        P.lens (_value :: TemplateFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: TemplateFilter s)
+
+-- | @egress_firewall_rule@ nested settings.
+data EgressFirewallRule s = EgressFirewallRule'
+    { _cidrList :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @cidr_list@ - (Required)
+    --
+    , _ports    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @ports@ - (Optional)
+    --
+    , _protocol :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newEgressFirewallRule
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @cidr_list@ - 'P.cidrList'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> EgressFirewallRule s
+newEgressFirewallRule _cidrList _protocol =
+    EgressFirewallRule'
+        { _cidrList = _cidrList
+        , _ports = TF.Nil
+        , _protocol = _protocol
+        }
+
+instance P.Hashable  (EgressFirewallRule s)
+instance TF.IsValue  (EgressFirewallRule s)
+instance TF.IsObject (EgressFirewallRule s) where
+    toObject EgressFirewallRule'{..} = P.catMaybes
+        [ TF.assign "cidr_list" <$> TF.attribute _cidrList
+        , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        ]
+
+instance TF.IsValid (EgressFirewallRule s) where
+    validator = P.mempty
+
+instance P.HasCidrList (EgressFirewallRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    cidrList =
+        P.lens (_cidrList :: EgressFirewallRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cidrList = a } :: EgressFirewallRule s)
+
+instance P.HasPorts (EgressFirewallRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    ports =
+        P.lens (_ports :: EgressFirewallRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ports = a } :: EgressFirewallRule s)
+
+instance P.HasProtocol (EgressFirewallRule s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: EgressFirewallRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: EgressFirewallRule s)
+
+instance s ~ s' => P.HasComputedIcmpCode (TF.Ref s' (EgressFirewallRule s)) (TF.Attr s P.Integer) where
+    computedIcmpCode x = TF.compute (TF.refKey x) "icmp_code"
+
+instance s ~ s' => P.HasComputedIcmpType (TF.Ref s' (EgressFirewallRule s)) (TF.Attr s P.Integer) where
+    computedIcmpType x = TF.compute (TF.refKey x) "icmp_type"
+
+instance s ~ s' => P.HasComputedUuids (TF.Ref s' (EgressFirewallRule s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+    computedUuids x = TF.compute (TF.refKey x) "uuids"
+
+-- | @port_forward_forward@ nested settings.
+data PortForwardForward s = PortForwardForward'
+    { _privatePort      :: TF.Attr s P.Integer
+    -- ^ @private_port@ - (Required)
+    --
+    , _protocol         :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    , _publicPort       :: TF.Attr s P.Integer
+    -- ^ @public_port@ - (Required)
+    --
+    , _virtualMachineId :: TF.Attr s P.Text
+    -- ^ @virtual_machine_id@ - (Required)
+    --
+    , _vmGuestIp        :: TF.Attr s P.Text
+    -- ^ @vm_guest_ip@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newPortForwardForward
+    :: TF.Attr s P.Integer -- ^ @private_port@ - 'P.privatePort'
+    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    -> TF.Attr s P.Integer -- ^ @public_port@ - 'P.publicPort'
+    -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
+    -> PortForwardForward s
+newPortForwardForward _privatePort _protocol _publicPort _virtualMachineId =
+    PortForwardForward'
+        { _privatePort = _privatePort
+        , _protocol = _protocol
+        , _publicPort = _publicPort
+        , _virtualMachineId = _virtualMachineId
+        , _vmGuestIp = TF.Nil
+        }
+
+instance P.Hashable  (PortForwardForward s)
+instance TF.IsValue  (PortForwardForward s)
+instance TF.IsObject (PortForwardForward s) where
+    toObject PortForwardForward'{..} = P.catMaybes
+        [ TF.assign "private_port" <$> TF.attribute _privatePort
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "public_port" <$> TF.attribute _publicPort
+        , TF.assign "virtual_machine_id" <$> TF.attribute _virtualMachineId
+        , TF.assign "vm_guest_ip" <$> TF.attribute _vmGuestIp
+        ]
+
+instance TF.IsValid (PortForwardForward s) where
+    validator = P.mempty
+
+instance P.HasPrivatePort (PortForwardForward s) (TF.Attr s P.Integer) where
+    privatePort =
+        P.lens (_privatePort :: PortForwardForward s -> TF.Attr s P.Integer)
+               (\s a -> s { _privatePort = a } :: PortForwardForward s)
+
+instance P.HasProtocol (PortForwardForward s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: PortForwardForward s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: PortForwardForward s)
+
+instance P.HasPublicPort (PortForwardForward s) (TF.Attr s P.Integer) where
+    publicPort =
+        P.lens (_publicPort :: PortForwardForward s -> TF.Attr s P.Integer)
+               (\s a -> s { _publicPort = a } :: PortForwardForward s)
+
+instance P.HasVirtualMachineId (PortForwardForward s) (TF.Attr s P.Text) where
+    virtualMachineId =
+        P.lens (_virtualMachineId :: PortForwardForward s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualMachineId = a } :: PortForwardForward s)
+
+instance P.HasVmGuestIp (PortForwardForward s) (TF.Attr s P.Text) where
+    vmGuestIp =
+        P.lens (_vmGuestIp :: PortForwardForward s -> TF.Attr s P.Text)
+               (\s a -> s { _vmGuestIp = a } :: PortForwardForward s)
+
+instance s ~ s' => P.HasComputedUuid (TF.Ref s' (PortForwardForward s)) (TF.Attr s P.Text) where
+    computedUuid x = TF.compute (TF.refKey x) "uuid"
