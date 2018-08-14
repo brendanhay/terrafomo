@@ -163,7 +163,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "agent_service_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -228,7 +228,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service",
+            "name": "catalog_entry_service",
             "schemas": [
               {
                 "name": "address",
@@ -290,7 +290,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "service_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -370,7 +370,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "meta",
+            "name": "intention_meta",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -435,7 +435,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "subkeys",
+            "name": "key_prefix_subkeys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -488,7 +488,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "key",
+            "name": "keys_key",
             "schemas": [
               {
                 "name": "default",
@@ -661,7 +661,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "dns",
+            "name": "prepared_query_dns",
             "schemas": [
               {
                 "name": "ttl",
@@ -690,7 +690,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "failover",
+            "name": "prepared_query_failover",
             "schemas": [
               {
                 "name": "datacenters",
@@ -704,7 +704,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "datacenters",
+                  "name": "failover_datacenters",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -815,7 +815,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "prepared_query_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -839,7 +839,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "template",
+            "name": "prepared_query_template",
             "schemas": [
               {
                 "name": "regexp",
@@ -969,7 +969,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "service_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1155,7 +1155,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "addresses",
+            "name": "agent_self_addresses",
             "schemas": [
               {
                 "name": "dns",
@@ -1244,7 +1244,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "advertise_addrs",
+            "name": "agent_self_advertise_addrs",
             "schemas": [
               {
                 "name": "rpc",
@@ -1429,7 +1429,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "dns",
+            "name": "agent_self_dns",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -1554,7 +1554,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns_recursors",
+            "name": "agent_self_dns_recursors",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1734,7 +1734,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "performance",
+            "name": "agent_self_performance",
             "schemas": [
               {
                 "name": "raft_multiplier",
@@ -1775,7 +1775,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "ports",
+            "name": "agent_self_ports",
             "schemas": [
               {
                 "name": "dns",
@@ -1924,7 +1924,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "retry_join",
+            "name": "agent_self_retry_join",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1948,7 +1948,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "retry_join_ec2",
+            "name": "agent_self_retry_join_ec2",
             "schemas": [
               {
                 "name": "region",
@@ -2001,7 +2001,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "retry_join_gce",
+            "name": "agent_self_retry_join_gce",
             "schemas": [
               {
                 "name": "credentials_file",
@@ -2066,7 +2066,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "retry_join_wan",
+            "name": "agent_self_retry_join_wan",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2174,7 +2174,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "start_join",
+            "name": "agent_self_start_join",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2198,7 +2198,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "start_join_wan",
+            "name": "agent_self_start_join_wan",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2234,7 +2234,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "tagged_addresses",
+            "name": "agent_self_tagged_addresses",
             "schemas": [
               {
                 "name": "lan",
@@ -2275,7 +2275,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "telemetry",
+            "name": "agent_self_telemetry",
             "schemas": [
               {
                 "name": "circonus_api_app",
@@ -2457,7 +2457,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "dogstatsd_tags",
+                  "name": "telemetry_dogstatsd_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2640,7 +2640,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "unix_sockets",
+            "name": "agent_self_unix_sockets",
             "schemas": [
               {
                 "name": "group",
@@ -2746,7 +2746,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "node_ids",
+            "name": "catalog_nodes_node_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2770,7 +2770,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "node_names",
+            "name": "catalog_nodes_node_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2794,7 +2794,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "nodes",
+            "name": "catalog_nodes_nodes",
             "schemas": [
               {
                 "name": "address",
@@ -2856,7 +2856,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "tagged_addresses",
+                  "name": "nodes_tagged_addresses",
                   "schemas": [
                     {
                       "name": "lan",
@@ -2900,7 +2900,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "query_options",
+            "name": "catalog_nodes_query_options",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -3044,7 +3044,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "query_options",
+            "name": "catalog_service_query_options",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -3159,7 +3159,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service",
+            "name": "catalog_service_service",
             "schemas": [
               {
                 "name": "address",
@@ -3305,7 +3305,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "tagged_addresses",
+                  "name": "service_tagged_addresses",
                   "schemas": [
                     {
                       "name": "lan",
@@ -3346,7 +3346,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "service_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3402,7 +3402,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "names",
+            "name": "catalog_services_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3426,7 +3426,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "query_options",
+            "name": "catalog_services_query_options",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -3541,7 +3541,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "services",
+            "name": "catalog_services_services",
             "schemas": [
               {
                 "name": "tags",
@@ -3555,7 +3555,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "services_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -3611,7 +3611,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "subkey",
+            "name": "key_prefix_subkey",
             "schemas": [
               {
                 "name": "default",
@@ -3664,7 +3664,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "subkeys",
+            "name": "key_prefix_subkeys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3729,7 +3729,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "key",
+            "name": "keys_key",
             "schemas": [
               {
                 "name": "default",
@@ -3823,7 +3823,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "node_ids",
+            "name": "nodes_node_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3847,7 +3847,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "node_names",
+            "name": "nodes_node_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3871,7 +3871,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "nodes",
+            "name": "nodes_nodes",
             "schemas": [
               {
                 "name": "address",
@@ -3933,7 +3933,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "tagged_addresses",
+                  "name": "nodes_tagged_addresses",
                   "schemas": [
                     {
                       "name": "lan",
@@ -3977,7 +3977,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "query_options",
+            "name": "nodes_query_options",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -4121,7 +4121,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "query_options",
+            "name": "service_query_options",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -4236,7 +4236,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "service",
+            "name": "service_service",
             "schemas": [
               {
                 "name": "address",
@@ -4382,7 +4382,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "tagged_addresses",
+                  "name": "service_tagged_addresses",
                   "schemas": [
                     {
                       "name": "lan",
@@ -4423,7 +4423,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "service_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -4479,7 +4479,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "names",
+            "name": "services_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4503,7 +4503,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "query_options",
+            "name": "services_query_options",
             "schemas": [
               {
                 "name": "allow_stale",
@@ -4618,7 +4618,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "services",
+            "name": "services_services",
             "schemas": [
               {
                 "name": "tags",
@@ -4632,7 +4632,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "services_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
