@@ -26,7 +26,6 @@ module Terrafomo.Chef.Lens
     , HasClientName (..)
     , HasOverrideAttributesJson (..)
     , HasDefaultAttributesJson (..)
-    , HasPrivateKeyPem (..)
     , HasName (..)
     , HasAllowUnverifiedSsl (..)
     , HasEnvironmentName (..)
@@ -107,12 +106,6 @@ class HasDefaultAttributesJson a b | a -> b where
 
 instance HasDefaultAttributesJson a b => HasDefaultAttributesJson (TF.Schema l p a) b where
     defaultAttributesJson = TF.configuration . defaultAttributesJson
-
-class HasPrivateKeyPem a b | a -> b where
-    privateKeyPem :: P.Lens' a b
-
-instance HasPrivateKeyPem a b => HasPrivateKeyPem (TF.Schema l p a) b where
-    privateKeyPem = TF.configuration . privateKeyPem
 
 class HasName a b | a -> b where
     name :: P.Lens' a b

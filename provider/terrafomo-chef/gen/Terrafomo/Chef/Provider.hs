@@ -63,10 +63,6 @@ data Provider = Provider'
     , _keyMaterial        :: P.Maybe P.Text
     -- ^ @key_material@ - (Optional)
     --
-    , _privateKeyPem      :: P.Maybe P.Text
-    -- ^ @private_key_pem@ - (Optional)
-    -- PEM-formatted private key for client authentication.
-    --
     , _serverUrl          :: P.Text
     -- ^ @server_url@ - (Required)
     -- URL of the root of the target Chef server or organization.
@@ -82,7 +78,6 @@ newProvider _clientName _serverUrl =
         { _allowUnverifiedSsl = P.Nothing
         , _clientName = _clientName
         , _keyMaterial = P.Nothing
-        , _privateKeyPem = P.Nothing
         , _serverUrl = _serverUrl
         }
 
@@ -99,7 +94,6 @@ instance TF.IsSection Provider where
                   , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
                   , P.Just $ TF.assign "client_name" _clientName
                   , TF.assign "key_material" <$> _keyMaterial
-                  , TF.assign "private_key_pem" <$> _privateKeyPem
                   , P.Just $ TF.assign "server_url" _serverUrl
                   ])
 
@@ -123,11 +117,6 @@ instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
     keyMaterial =
         P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
                (\s a -> s { _keyMaterial = a } :: Provider)
-
-instance P.HasPrivateKeyPem (Provider) (P.Maybe P.Text) where
-    privateKeyPem =
-        P.lens (_privateKeyPem :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _privateKeyPem = a } :: Provider)
 
 instance P.HasServerUrl (Provider) (P.Text) where
     serverUrl =
