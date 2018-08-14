@@ -55,13 +55,13 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @opsgenie_team@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OpsGenie/opsgenie_team terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opsgenie/r/team.html terraform documentation>
 -- for more information.
 data TeamResource s = TeamResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _member      :: TF.Attr s [TF.Attr s (Member s)]
+    , _member      :: TF.Attr s [TF.Attr s (TeamMember s)]
     -- ^ @member@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -91,7 +91,7 @@ instance TF.IsValid (TeamResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_member"
                   (_member
-                      :: TeamResource s -> TF.Attr s [TF.Attr s (Member s)])
+                      :: TeamResource s -> TF.Attr s [TF.Attr s (TeamMember s)])
                   TF.validator
 
 instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
@@ -99,9 +99,9 @@ instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
         P.lens (_description :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TeamResource s)
 
-instance P.HasMember (TeamResource s) (TF.Attr s [TF.Attr s (Member s)]) where
+instance P.HasMember (TeamResource s) (TF.Attr s [TF.Attr s (TeamMember s)]) where
     member =
-        P.lens (_member :: TeamResource s -> TF.Attr s [TF.Attr s (Member s)])
+        P.lens (_member :: TeamResource s -> TF.Attr s [TF.Attr s (TeamMember s)])
                (\s a -> s { _member = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
@@ -111,7 +111,7 @@ instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
 
 -- | @opsgenie_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/OpsGenie/opsgenie_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opsgenie/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _fullName :: TF.Attr s P.Text
@@ -127,7 +127,7 @@ data UserResource s = UserResource'
     -- ^ @timezone@ - (Optional)
     --
     , _username :: TF.Attr s P.Text
-    -- ^ @username@ - (Required)
+    -- ^ @username@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 

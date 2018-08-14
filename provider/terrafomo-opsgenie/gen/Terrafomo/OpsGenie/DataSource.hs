@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @opsgenie_user@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/OpsGenie/opsgenie_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/opsgenie/d/user.html terraform documentation>
 -- for more information.
 data UserData s = UserData'
     { _username :: TF.Attr s P.Text
@@ -82,7 +82,7 @@ instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
                (\s a -> s { _username = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedFullName x = TF.compute (TF.refKey x) "_computedFullName"
+    computedFullName x = TF.compute (TF.refKey x) "full_name"
 
 instance s ~ s' => P.HasComputedRole (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "_computedRole"
+    computedRole x = TF.compute (TF.refKey x) "role"
