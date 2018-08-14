@@ -108,7 +108,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "required_pull_request_reviews",
+            "name": "branch_protection_required_pull_request_reviews",
             "schemas": [
               {
                 "name": "dismiss_stale_reviews",
@@ -135,7 +135,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "dismissal_teams",
+                  "name": "required_pull_request_reviews_dismissal_teams",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -159,7 +159,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "dismissal_users",
+                  "name": "required_pull_request_reviews_dismissal_users",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -212,7 +212,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "required_status_checks",
+            "name": "branch_protection_required_status_checks",
             "schemas": [
               {
                 "name": "contexts",
@@ -226,7 +226,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "contexts",
+                  "name": "required_status_checks_contexts",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -280,7 +280,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "restrictions",
+            "name": "branch_protection_restrictions",
             "schemas": [
               {
                 "name": "teams",
@@ -294,7 +294,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "teams",
+                  "name": "restrictions_teams",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -318,7 +318,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "users",
+                  "name": "restrictions_users",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -511,7 +511,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "events",
+            "name": "organization_webhook_events",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -833,7 +833,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "topics",
+            "name": "repository_topics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1036,7 +1036,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "events",
+            "name": "repository_webhook_events",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1323,7 +1323,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "git",
+            "name": "ip_ranges_git",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1347,7 +1347,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "hooks",
+            "name": "ip_ranges_hooks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1371,7 +1371,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "importer",
+            "name": "ip_ranges_importer",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1395,7 +1395,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "pages",
+            "name": "ip_ranges_pages",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1656,7 +1656,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "topics",
+            "name": "repository_topics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1697,7 +1697,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "members",
+            "name": "team_members",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1870,7 +1870,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "gpg_keys",
+            "name": "user_gpg_keys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1978,7 +1978,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ssh_keys",
+            "name": "user_ssh_keys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
