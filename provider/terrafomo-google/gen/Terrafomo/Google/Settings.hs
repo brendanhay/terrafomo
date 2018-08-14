@@ -934,15 +934,6 @@ instance s ~ s' => P.HasComputedKey (TF.Ref s' (NodeConfigTaint s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (NodeConfigTaint s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
-instance s ~ s' => P.HasComputedEffect (TF.Ref s' (NodeConfigTaint s)) (TF.Attr s P.Text) where
-    computedEffect x = TF.compute (TF.refKey x) "effect"
-
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (NodeConfigTaint s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
-
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (NodeConfigTaint s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
-
 -- | @credentials_public_key_certificate@ nested settings.
 data CredentialsPublicKeyCertificate s = CredentialsPublicKeyCertificate'
     { _certificate :: TF.Attr s P.Text
@@ -2181,9 +2172,6 @@ instance P.HasNodeMetadata (NodeConfigWorkloadMetadataConfig s) (TF.Attr s P.Tex
 instance s ~ s' => P.HasComputedNodeMetadata (TF.Ref s' (NodeConfigWorkloadMetadataConfig s)) (TF.Attr s P.Text) where
     computedNodeMetadata x = TF.compute (TF.refKey x) "node_metadata"
 
-instance s ~ s' => P.HasComputedNodeMetadata (TF.Ref s' (NodeConfigWorkloadMetadataConfig s)) (TF.Attr s P.Text) where
-    computedNodeMetadata x = TF.compute (TF.refKey x) "node_metadata"
-
 -- | @rule_match@ nested settings.
 data RuleMatch s = RuleMatch'
     { _config        :: TF.Attr s (MatchConfig s)
@@ -2479,12 +2467,6 @@ instance s ~ s' => P.HasComputedCount (TF.Ref s' (NodeConfigGuestAccelerator s))
 instance s ~ s' => P.HasComputedType (TF.Ref s' (NodeConfigGuestAccelerator s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedCount (TF.Ref s' (NodeConfigGuestAccelerator s)) (TF.Attr s P.Integer) where
-    computedCount x = TF.compute (TF.refKey x) "count"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (NodeConfigGuestAccelerator s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "type"
-
 -- | @sql_database_instance_replica_configuration@ nested settings.
 data SqlDatabaseInstanceReplicaConfiguration s = SqlDatabaseInstanceReplicaConfiguration'
     { _caCertificate           :: TF.Attr s P.Text
@@ -2686,9 +2668,6 @@ instance P.HasStartTime (MaintenancePolicyDailyMaintenanceWindow s) (TF.Attr s P
     startTime =
         P.lens (_startTime :: MaintenancePolicyDailyMaintenanceWindow s -> TF.Attr s P.Text)
                (\s a -> s { _startTime = a } :: MaintenancePolicyDailyMaintenanceWindow s)
-
-instance s ~ s' => P.HasComputedDuration (TF.Ref s' (MaintenancePolicyDailyMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computedDuration x = TF.compute (TF.refKey x) "duration"
 
 instance s ~ s' => P.HasComputedDuration (TF.Ref s' (MaintenancePolicyDailyMaintenanceWindow s)) (TF.Attr s P.Text) where
     computedDuration x = TF.compute (TF.refKey x) "duration"
@@ -3109,26 +3088,8 @@ instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (ContainerClusterNodeConf
 instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Text) where
     computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Integer) where
-    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
-
-instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
-
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s [TF.Attr s (NodeConfigGuestAccelerator s)]) where
-    computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
-
-instance s ~ s' => P.HasComputedImageType (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Text) where
-    computedImageType x = TF.compute (TF.refKey x) "image_type"
-
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
-
-instance s ~ s' => P.HasComputedLocalSsdCount (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Integer) where
-    computedLocalSsdCount x = TF.compute (TF.refKey x) "local_ssd_count"
-
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
@@ -3136,14 +3097,8 @@ instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (ContainerClusterNodeConfig 
 instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Text) where
     computedMinCpuPlatform x = TF.compute (TF.refKey x) "min_cpu_platform"
 
-instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOauthScopes x = TF.compute (TF.refKey x) "oauth_scopes"
-
 instance s ~ s' => P.HasComputedPreemptible (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Bool) where
     computedPreemptible x = TF.compute (TF.refKey x) "preemptible"
-
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s P.Text) where
-    computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ContainerClusterNodeConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedTags x = TF.compute (TF.refKey x) "tags"
@@ -3657,28 +3612,14 @@ data NetworkInterfaceAliasIpRange s = NetworkInterfaceAliasIpRange'
     , _subnetworkRangeName :: TF.Attr s P.Text
     -- ^ @subnetwork_range_name@ - (Optional)
     --
-    , _ipCidrRange         :: TF.Attr s P.Text
-    -- ^ @ip_cidr_range@ - (Required)
-    --
-    , _ipCidrRange         :: TF.Attr s P.Text
-    -- ^ @ip_cidr_range@ - (Required, Forces New)
-    --
-    , _subnetworkRangeName :: TF.Attr s P.Text
-    -- ^ @subnetwork_range_name@ - (Optional, Forces New)
-    --
     } deriving (P.Show, P.Eq, P.Generic)
 
 newNetworkInterfaceAliasIpRange
     :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
-    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
-    -> TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
     -> NetworkInterfaceAliasIpRange s
-newNetworkInterfaceAliasIpRange _ipCidrRange _ipCidrRange _ipCidrRange =
+newNetworkInterfaceAliasIpRange _ipCidrRange =
     NetworkInterfaceAliasIpRange'
         { _ipCidrRange = _ipCidrRange
-        , _subnetworkRangeName = TF.Nil
-        , _ipCidrRange = _ipCidrRange
-        , _ipCidrRange = _ipCidrRange
         , _subnetworkRangeName = TF.Nil
         }
 
@@ -3688,28 +3629,10 @@ instance TF.IsObject (NetworkInterfaceAliasIpRange s) where
     toObject NetworkInterfaceAliasIpRange'{..} = P.catMaybes
         [ TF.assign "ip_cidr_range" <$> TF.attribute _ipCidrRange
         , TF.assign "subnetwork_range_name" <$> TF.attribute _subnetworkRangeName
-        , TF.assign "ip_cidr_range" <$> TF.attribute _ipCidrRange
-        , TF.assign "ip_cidr_range" <$> TF.attribute _ipCidrRange
-        , TF.assign "subnetwork_range_name" <$> TF.attribute _subnetworkRangeName
         ]
 
 instance TF.IsValid (NetworkInterfaceAliasIpRange s) where
     validator = P.mempty
-
-instance P.HasIpCidrRange (NetworkInterfaceAliasIpRange s) (TF.Attr s P.Text) where
-    ipCidrRange =
-        P.lens (_ipCidrRange :: NetworkInterfaceAliasIpRange s -> TF.Attr s P.Text)
-               (\s a -> s { _ipCidrRange = a } :: NetworkInterfaceAliasIpRange s)
-
-instance P.HasSubnetworkRangeName (NetworkInterfaceAliasIpRange s) (TF.Attr s P.Text) where
-    subnetworkRangeName =
-        P.lens (_subnetworkRangeName :: NetworkInterfaceAliasIpRange s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetworkRangeName = a } :: NetworkInterfaceAliasIpRange s)
-
-instance P.HasIpCidrRange (NetworkInterfaceAliasIpRange s) (TF.Attr s P.Text) where
-    ipCidrRange =
-        P.lens (_ipCidrRange :: NetworkInterfaceAliasIpRange s -> TF.Attr s P.Text)
-               (\s a -> s { _ipCidrRange = a } :: NetworkInterfaceAliasIpRange s)
 
 instance P.HasIpCidrRange (NetworkInterfaceAliasIpRange s) (TF.Attr s P.Text) where
     ipCidrRange =
@@ -4434,17 +4357,8 @@ instance s ~ s' => P.HasComputedClientKey (TF.Ref s' (ContainerClusterMasterAuth
 instance s ~ s' => P.HasComputedClusterCaCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
     computedClusterCaCertificate x = TF.compute (TF.refKey x) "cluster_ca_certificate"
 
-instance s ~ s' => P.HasComputedClientCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedClientCertificate x = TF.compute (TF.refKey x) "client_certificate"
-
 instance s ~ s' => P.HasComputedClientCertificateConfig (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s [TF.Attr s (MasterAuthClientCertificateConfig s)]) where
     computedClientCertificateConfig x = TF.compute (TF.refKey x) "client_certificate_config"
-
-instance s ~ s' => P.HasComputedClientKey (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedClientKey x = TF.compute (TF.refKey x) "client_key"
-
-instance s ~ s' => P.HasComputedClusterCaCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedClusterCaCertificate x = TF.compute (TF.refKey x) "cluster_ca_certificate"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
     computedPassword x = TF.compute (TF.refKey x) "password"
@@ -4539,9 +4453,6 @@ instance TF.IsObject (ContainerClusterMasterAuthorizedNetworksConfig s) where
 
 instance TF.IsValid (ContainerClusterMasterAuthorizedNetworksConfig s) where
     validator = P.mempty
-
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (ContainerClusterMasterAuthorizedNetworksConfig s)) (TF.Attr s [TF.Attr s (MasterAuthorizedNetworksConfigCidrBlocks s)]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (ContainerClusterMasterAuthorizedNetworksConfig s)) (TF.Attr s [TF.Attr s (MasterAuthorizedNetworksConfigCidrBlocks s)]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -4863,29 +4774,8 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ContainerClusterNodePool s))
 instance s ~ s' => P.HasComputedAutoscaling (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s [TF.Attr s (NodePoolAutoscaling s)]) where
     computedAutoscaling x = TF.compute (TF.refKey x) "autoscaling"
 
-instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s P.Integer) where
-    computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
-
-instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
-
-instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s [TF.Attr s (NodePoolManagement s)]) where
-    computedManagement x = TF.compute (TF.refKey x) "management"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
 instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s P.Text) where
     computedNamePrefix x = TF.compute (TF.refKey x) "name_prefix"
-
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s [TF.Attr s (NodePoolNodeConfig s)]) where
-    computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
-
-instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s P.Integer) where
-    computedNodeCount x = TF.compute (TF.refKey x) "node_count"
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ContainerClusterNodePool s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
 
 -- | @folder_organization_policy_boolean_policy@ nested settings.
 data FolderOrganizationPolicyBooleanPolicy s = FolderOrganizationPolicyBooleanPolicy'
@@ -6266,36 +6156,6 @@ instance s ~ s' => P.HasComputedServingStatus (TF.Ref s' (ProjectAppEngine s)) (
 instance s ~ s' => P.HasComputedUrlDispatchRule (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s [TF.Attr s (AppEngineUrlDispatchRule s)]) where
     computedUrlDispatchRule x = TF.compute (TF.refKey x) "url_dispatch_rule"
 
-instance s ~ s' => P.HasComputedAuthDomain (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedAuthDomain x = TF.compute (TF.refKey x) "auth_domain"
-
-instance s ~ s' => P.HasComputedCodeBucket (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedCodeBucket x = TF.compute (TF.refKey x) "code_bucket"
-
-instance s ~ s' => P.HasComputedDefaultBucket (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedDefaultBucket x = TF.compute (TF.refKey x) "default_bucket"
-
-instance s ~ s' => P.HasComputedDefaultHostname (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedDefaultHostname x = TF.compute (TF.refKey x) "default_hostname"
-
-instance s ~ s' => P.HasComputedFeatureSettings (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s [TF.Attr s (AppEngineFeatureSettings s)]) where
-    computedFeatureSettings x = TF.compute (TF.refKey x) "feature_settings"
-
-instance s ~ s' => P.HasComputedGcrDomain (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedGcrDomain x = TF.compute (TF.refKey x) "gcr_domain"
-
-instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedLocationId x = TF.compute (TF.refKey x) "location_id"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedServingStatus (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedServingStatus x = TF.compute (TF.refKey x) "serving_status"
-
-instance s ~ s' => P.HasComputedUrlDispatchRule (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s [TF.Attr s (AppEngineUrlDispatchRule s)]) where
-    computedUrlDispatchRule x = TF.compute (TF.refKey x) "url_dispatch_rule"
-
 -- | @compute_instance_from_template_guest_accelerator@ nested settings.
 data ComputeInstanceFromTemplateGuestAccelerator s = ComputeInstanceFromTemplateGuestAccelerator'
     { _count :: TF.Attr s P.Integer
@@ -6375,26 +6235,8 @@ instance s ~ s' => P.HasComputedNatIp (TF.Ref s' (NetworkInterfaceAccessConfig s
 instance s ~ s' => P.HasComputedNetworkTier (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
     computedNetworkTier x = TF.compute (TF.refKey x) "network_tier"
 
-instance s ~ s' => P.HasComputedAssignedNatIp (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
-    computedAssignedNatIp x = TF.compute (TF.refKey x) "assigned_nat_ip"
-
-instance s ~ s' => P.HasComputedNatIp (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
-    computedNatIp x = TF.compute (TF.refKey x) "nat_ip"
-
-instance s ~ s' => P.HasComputedNetworkTier (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
-    computedNetworkTier x = TF.compute (TF.refKey x) "network_tier"
-
 instance s ~ s' => P.HasComputedPublicPtrDomainName (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
     computedPublicPtrDomainName x = TF.compute (TF.refKey x) "public_ptr_domain_name"
-
-instance s ~ s' => P.HasComputedAssignedNatIp (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
-    computedAssignedNatIp x = TF.compute (TF.refKey x) "assigned_nat_ip"
-
-instance s ~ s' => P.HasComputedNatIp (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
-    computedNatIp x = TF.compute (TF.refKey x) "nat_ip"
-
-instance s ~ s' => P.HasComputedNetworkTier (TF.Ref s' (NetworkInterfaceAccessConfig s)) (TF.Attr s P.Text) where
-    computedNetworkTier x = TF.compute (TF.refKey x) "network_tier"
 
 -- | @dataproc_job_pig_config@ nested settings.
 data DataprocJobPigConfig s = DataprocJobPigConfig'
@@ -7457,18 +7299,6 @@ instance s ~ s' => P.HasComputedKubernetesDashboard (TF.Ref s' (ContainerCluster
     computedKubernetesDashboard x = TF.compute (TF.refKey x) "kubernetes_dashboard"
 
 instance s ~ s' => P.HasComputedNetworkPolicyConfig (TF.Ref s' (ContainerClusterAddonsConfig s)) (TF.Attr s (AddonsConfigNetworkPolicyConfig s)) where
-    computedNetworkPolicyConfig x = TF.compute (TF.refKey x) "network_policy_config"
-
-instance s ~ s' => P.HasComputedHorizontalPodAutoscaling (TF.Ref s' (ContainerClusterAddonsConfig s)) (TF.Attr s [TF.Attr s (AddonsConfigHorizontalPodAutoscaling s)]) where
-    computedHorizontalPodAutoscaling x = TF.compute (TF.refKey x) "horizontal_pod_autoscaling"
-
-instance s ~ s' => P.HasComputedHttpLoadBalancing (TF.Ref s' (ContainerClusterAddonsConfig s)) (TF.Attr s [TF.Attr s (AddonsConfigHttpLoadBalancing s)]) where
-    computedHttpLoadBalancing x = TF.compute (TF.refKey x) "http_load_balancing"
-
-instance s ~ s' => P.HasComputedKubernetesDashboard (TF.Ref s' (ContainerClusterAddonsConfig s)) (TF.Attr s [TF.Attr s (AddonsConfigKubernetesDashboard s)]) where
-    computedKubernetesDashboard x = TF.compute (TF.refKey x) "kubernetes_dashboard"
-
-instance s ~ s' => P.HasComputedNetworkPolicyConfig (TF.Ref s' (ContainerClusterAddonsConfig s)) (TF.Attr s [TF.Attr s (AddonsConfigNetworkPolicyConfig s)]) where
     computedNetworkPolicyConfig x = TF.compute (TF.refKey x) "network_policy_config"
 
 -- | @dataproc_cluster_cluster_config@ nested settings.
@@ -8965,26 +8795,8 @@ instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (NodePoolNodeConfig s)) (
 instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Text) where
     computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Integer) where
-    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
-
-instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
-
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s [TF.Attr s (NodeConfigGuestAccelerator s)]) where
-    computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
-
-instance s ~ s' => P.HasComputedImageType (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedImageType x = TF.compute (TF.refKey x) "image_type"
-
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
-
-instance s ~ s' => P.HasComputedLocalSsdCount (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Integer) where
-    computedLocalSsdCount x = TF.compute (TF.refKey x) "local_ssd_count"
-
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
 
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
@@ -8992,14 +8804,8 @@ instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (NodePoolNodeConfig s)) (TF.
 instance s ~ s' => P.HasComputedMinCpuPlatform (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Text) where
     computedMinCpuPlatform x = TF.compute (TF.refKey x) "min_cpu_platform"
 
-instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOauthScopes x = TF.compute (TF.refKey x) "oauth_scopes"
-
 instance s ~ s' => P.HasComputedPreemptible (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Bool) where
     computedPreemptible x = TF.compute (TF.refKey x) "preemptible"
-
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NodePoolNodeConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedTags x = TF.compute (TF.refKey x) "tags"
