@@ -2,11 +2,60 @@
     "settings": [
         {
             "con": {
-                "smart": "newMember",
-                "name": "Member'"
+                "smart": "newEnvironmentMember",
+                "name": "EnvironmentMember'"
             },
-            "arguments": [],
-            "name": "Member",
+            "arguments": [
+                {
+                    "default": "_externalId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_id\" <$> TF.attribute",
+                    "name": "_externalId",
+                    "method": "externalId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasExternalId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_id"
+                },
+                {
+                    "default": "_externalIdType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_id_type\" <$> TF.attribute",
+                    "name": "_externalIdType",
+                    "method": "externalIdType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasExternalIdType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_id_type"
+                },
+                {
+                    "default": "_role",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "_role",
+                    "method": "role",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRole",
+                    "validate": false,
+                    "optional": false,
+                    "original": "role"
+                }
+            ],
+            "name": "EnvironmentMember",
             "threaded": true,
             "attributes": [
                 {
@@ -58,12 +107,62 @@
                     "original": "role"
                 }
             ],
-            "parameters": [],
+            "parameters": [
+                {
+                    "default": "_externalId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_id\" <$> TF.attribute",
+                    "name": "_externalId",
+                    "method": "externalId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasExternalId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_id"
+                },
+                {
+                    "default": "_externalIdType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"external_id_type\" <$> TF.attribute",
+                    "name": "_externalIdType",
+                    "method": "externalIdType",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasExternalIdType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "external_id_type"
+                },
+                {
+                    "default": "_role",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"role\" <$> TF.attribute",
+                    "name": "_role",
+                    "method": "role",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRole",
+                    "validate": false,
+                    "optional": false,
+                    "original": "role"
+                }
+            ],
             "conflicts": [],
-            "type": "Member s",
-            "original": "member"
+            "type": "EnvironmentMember s",
+            "original": "environment_member"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/rancher/index.html",
     "dataSources": [
         {
             "con": {
@@ -104,6 +203,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/d/certificate.html",
             "name": "CertificateData",
             "threaded": true,
             "attributes": [
@@ -345,6 +445,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/d/environment.html",
             "name": "EnvironmentData",
             "threaded": true,
             "attributes": [
@@ -374,7 +475,7 @@
                     "name": "_computedMember",
                     "method": "computedMember",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Member s)]",
+                    "type": "TF.Attr s [TF.Attr s (EnvironmentMember s)]",
                     "class": "HasComputedMember",
                     "validate": true,
                     "optional": false,
@@ -458,6 +559,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/d/setting.html",
             "name": "SettingData",
             "threaded": true,
             "attributes": [
@@ -605,6 +707,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/certificate.html",
             "name": "CertificateResource",
             "threaded": true,
             "attributes": [
@@ -894,6 +997,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/environment.html",
             "name": "EnvironmentResource",
             "threaded": true,
             "attributes": [
@@ -923,7 +1027,7 @@
                     "name": "_computedMember",
                     "method": "computedMember",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Member s)]",
+                    "type": "TF.Attr s [TF.Attr s (EnvironmentMember s)]",
                     "class": "HasComputedMember",
                     "validate": true,
                     "optional": true,
@@ -1075,6 +1179,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/host.html",
             "name": "HostResource",
             "threaded": true,
             "attributes": [
@@ -1236,6 +1341,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/registration_token.html",
             "name": "RegistrationTokenResource",
             "threaded": true,
             "attributes": [
@@ -1429,6 +1535,7 @@
                     "original": "server_address"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/registry.html",
             "name": "RegistryResource",
             "threaded": true,
             "attributes": [
@@ -1590,6 +1697,7 @@
                     "original": "secret_value"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/registry_credential.html",
             "name": "RegistryCredentialResource",
             "threaded": true,
             "attributes": [
@@ -1751,6 +1859,7 @@
                     "original": "value"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/secret.html",
             "name": "SecretResource",
             "threaded": true,
             "attributes": [
@@ -1976,6 +2085,7 @@
                     "original": "scope"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/stack.html",
             "name": "StackResource",
             "threaded": true,
             "attributes": [
@@ -2153,6 +2263,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/rancher/r/volume.html",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
