@@ -55,7 +55,7 @@ import qualified Terrafomo.Validator          as TF
 
 -- | @softlayer_ssh_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/SoftLayer/softlayer_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/softlayer/r/ssh_key.html terraform documentation>
 -- for more information.
 data SshKeyResource s = SshKeyResource'
     { _name      :: TF.Attr s P.Text
@@ -65,7 +65,7 @@ data SshKeyResource s = SshKeyResource'
     -- ^ @notes@ - (Optional)
     --
     , _publicKey :: TF.Attr s P.Text
-    -- ^ @public_key@ - (Required)
+    -- ^ @public_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -107,27 +107,27 @@ instance P.HasPublicKey (SshKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _publicKey = a } :: SshKeyResource s)
 
 instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedFingerprint x = TF.compute (TF.refKey x) "_computedFingerprint"
+    computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Integer) where
-    computedId x = TF.compute (TF.refKey x) "_computedId"
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @softlayer_virtual_guest@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/SoftLayer/softlayer_virtual_guest terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/softlayer/r/virtual_guest.html terraform documentation>
 -- for more information.
 data VirtualGuestResource s = VirtualGuestResource'
     { _backendVlanId               :: TF.Attr s P.Text
-    -- ^ @backend_vlan_id@ - (Optional)
+    -- ^ @backend_vlan_id@ - (Optional, Forces New)
     --
     , _blockDeviceTemplateGroupGid :: TF.Attr s P.Text
-    -- ^ @block_device_template_group_gid@ - (Optional)
+    -- ^ @block_device_template_group_gid@ - (Optional, Forces New)
     --
     , _cpu                         :: TF.Attr s P.Integer
-    -- ^ @cpu@ - (Required)
+    -- ^ @cpu@ - (Required, Forces New)
     --
     , _dedicatedAcctHostOnly       :: TF.Attr s P.Bool
-    -- ^ @dedicated_acct_host_only@ - (Optional)
+    -- ^ @dedicated_acct_host_only@ - (Optional, Forces New)
     --
     , _disks                       :: TF.Attr s [TF.Attr s P.Integer]
     -- ^ @disks@ - (Optional)
@@ -136,25 +136,25 @@ data VirtualGuestResource s = VirtualGuestResource'
     -- ^ @domain@ - (Required)
     --
     , _frontendVlanId              :: TF.Attr s P.Text
-    -- ^ @frontend_vlan_id@ - (Optional)
+    -- ^ @frontend_vlan_id@ - (Optional, Forces New)
     --
     , _hourlyBilling               :: TF.Attr s P.Bool
-    -- ^ @hourly_billing@ - (Required)
+    -- ^ @hourly_billing@ - (Required, Forces New)
     --
     , _image                       :: TF.Attr s P.Text
-    -- ^ @image@ - (Optional)
+    -- ^ @image@ - (Optional, Forces New)
     --
     , _localDisk                   :: TF.Attr s P.Bool
-    -- ^ @local_disk@ - (Required)
+    -- ^ @local_disk@ - (Required, Forces New)
     --
     , _name                        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     , _postInstallScriptUri        :: TF.Attr s P.Text
-    -- ^ @post_install_script_uri@ - (Optional)
+    -- ^ @post_install_script_uri@ - (Optional, Forces New)
     --
     , _privateNetworkOnly          :: TF.Attr s P.Bool
-    -- ^ @private_network_only@ - (Optional)
+    -- ^ @private_network_only@ - (Optional, Forces New)
     --
     , _publicNetworkSpeed          :: TF.Attr s P.Integer
     -- ^ @public_network_speed@ - (Optional)
@@ -163,7 +163,7 @@ data VirtualGuestResource s = VirtualGuestResource'
     -- ^ @ram@ - (Required)
     --
     , _region                      :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
+    -- ^ @region@ - (Required, Forces New)
     --
     , _sshKeys                     :: TF.Attr s [TF.Attr s P.Integer]
     -- ^ @ssh_keys@ - (Optional)
@@ -321,7 +321,7 @@ instance P.HasUserData (VirtualGuestResource s) (TF.Attr s P.Text) where
                (\s a -> s { _userData = a } :: VirtualGuestResource s)
 
 instance s ~ s' => P.HasComputedIpv4Address (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
-    computedIpv4Address x = TF.compute (TF.refKey x) "_computedIpv4Address"
+    computedIpv4Address x = TF.compute (TF.refKey x) "ipv4_address"
 
 instance s ~ s' => P.HasComputedIpv4AddressPrivate (TF.Ref s' (VirtualGuestResource s)) (TF.Attr s P.Text) where
-    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "_computedIpv4AddressPrivate"
+    computedIpv4AddressPrivate x = TF.compute (TF.refKey x) "ipv4_address_private"
