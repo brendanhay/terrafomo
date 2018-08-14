@@ -471,26 +471,6 @@
                     "computed": false,
                     "required": false,
                     "help": [
-                        "The file name of the disk. This can be either a name or path relative to the",
-                        "root of the datastore. If simply a name, the disk is located with the",
-                        "virtual machine."
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": true,
-                    "original": "name"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [
                         "The size of the disk, in GB."
                     ],
                     "forceNew": false,
@@ -12402,22 +12382,6 @@
             },
             "arguments": [
                 {
-                    "default": "TF.value \"lsiLogic\"",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"adapter_type\" <$> TF.attribute",
-                    "name": "_adapterType",
-                    "method": "adapterType",
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasAdapterType",
-                    "validate": false,
-                    "optional": true,
-                    "original": "adapter_type"
-                },
-                {
                     "default": "TF.Nil",
                     "computed": false,
                     "required": false,
@@ -14658,22 +14622,6 @@
                 "validate": false,
                 "optional": false,
                 "original": "user"
-            },
-            {
-                "default": "P.Nothing",
-                "computed": false,
-                "required": false,
-                "help": [],
-                "forceNew": false,
-                "encoder": "TF.assign \"vcenter_server\" <$>",
-                "name": "_vcenterServer",
-                "method": "vcenterServer",
-                "conflicts": [],
-                "type": "P.Maybe P.Text",
-                "class": "HasVcenterServer",
-                "validate": false,
-                "optional": true,
-                "original": "vcenter_server"
             },
             {
                 "default": "P.Nothing",
