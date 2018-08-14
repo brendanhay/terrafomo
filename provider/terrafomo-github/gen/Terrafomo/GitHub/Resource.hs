@@ -107,25 +107,25 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @github_branch_protection@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_branch_protection terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/branch_protection.html terraform documentation>
 -- for more information.
 data BranchProtectionResource s = BranchProtectionResource'
-    { _branch                     :: TF.Attr s P.Text
-    -- ^ @branch@ - (Required)
+    { _branch :: TF.Attr s P.Text
+    -- ^ @branch@ - (Required, Forces New)
     --
-    , _enforceAdmins              :: TF.Attr s P.Bool
+    , _enforceAdmins :: TF.Attr s P.Bool
     -- ^ @enforce_admins@ - (Optional)
     --
-    , _repository                 :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    , _repository :: TF.Attr s P.Text
+    -- ^ @repository@ - (Required, Forces New)
     --
-    , _requiredPullRequestReviews :: TF.Attr s (RequiredPullRequestReviews s)
+    , _requiredPullRequestReviews :: TF.Attr s (BranchProtectionRequiredPullRequestReviews s)
     -- ^ @required_pull_request_reviews@ - (Optional)
     --
-    , _requiredStatusChecks       :: TF.Attr s (RequiredStatusChecks s)
+    , _requiredStatusChecks :: TF.Attr s (BranchProtectionRequiredStatusChecks s)
     -- ^ @required_status_checks@ - (Optional)
     --
-    , _restrictions               :: TF.Attr s (Restrictions s)
+    , _restrictions :: TF.Attr s (BranchProtectionRestrictions s)
     -- ^ @restrictions@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Generic)
@@ -159,15 +159,15 @@ instance TF.IsValid (BranchProtectionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_requiredPullRequestReviews"
                   (_requiredPullRequestReviews
-                      :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviews s))
+                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredPullRequestReviews s))
                   TF.validator
            P.<> TF.settingsValidator "_requiredStatusChecks"
                   (_requiredStatusChecks
-                      :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecks s))
+                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredStatusChecks s))
                   TF.validator
            P.<> TF.settingsValidator "_restrictions"
                   (_restrictions
-                      :: BranchProtectionResource s -> TF.Attr s (Restrictions s))
+                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRestrictions s))
                   TF.validator
 
 instance P.HasBranch (BranchProtectionResource s) (TF.Attr s P.Text) where
@@ -185,24 +185,24 @@ instance P.HasRepository (BranchProtectionResource s) (TF.Attr s P.Text) where
         P.lens (_repository :: BranchProtectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: BranchProtectionResource s)
 
-instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (RequiredPullRequestReviews s)) where
+instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (BranchProtectionRequiredPullRequestReviews s)) where
     requiredPullRequestReviews =
-        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviews s))
+        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredPullRequestReviews s))
                (\s a -> s { _requiredPullRequestReviews = a } :: BranchProtectionResource s)
 
-instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (RequiredStatusChecks s)) where
+instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (BranchProtectionRequiredStatusChecks s)) where
     requiredStatusChecks =
-        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecks s))
+        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredStatusChecks s))
                (\s a -> s { _requiredStatusChecks = a } :: BranchProtectionResource s)
 
-instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (Restrictions s)) where
+instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (BranchProtectionRestrictions s)) where
     restrictions =
-        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (Restrictions s))
+        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRestrictions s))
                (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
 -- | @github_issue_label@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_issue_label terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/issue_label.html terraform documentation>
 -- for more information.
 data IssueLabelResource s = IssueLabelResource'
     { _color       :: TF.Attr s P.Text
@@ -215,7 +215,7 @@ data IssueLabelResource s = IssueLabelResource'
     -- ^ @name@ - (Required)
     --
     , _repository  :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -265,18 +265,18 @@ instance P.HasRepository (IssueLabelResource s) (TF.Attr s P.Text) where
                (\s a -> s { _repository = a } :: IssueLabelResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (IssueLabelResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @github_membership@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_membership terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/membership.html terraform documentation>
 -- for more information.
 data MembershipResource s = MembershipResource'
     { _role     :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
     , _username :: TF.Attr s P.Text
-    -- ^ @username@ - (Required)
+    -- ^ @username@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -311,7 +311,7 @@ instance P.HasUsername (MembershipResource s) (TF.Attr s P.Text) where
 
 -- | @github_organization_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_organization_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/organization_project.html terraform documentation>
 -- for more information.
 data OrganizationProjectResource s = OrganizationProjectResource'
     { _body :: TF.Attr s P.Text
@@ -352,11 +352,11 @@ instance P.HasName (OrganizationProjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: OrganizationProjectResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationProjectResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @github_organization_webhook@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_organization_webhook terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/organization_webhook.html terraform documentation>
 -- for more information.
 data OrganizationWebhookResource s = OrganizationWebhookResource'
     { _active        :: TF.Attr s P.Bool
@@ -369,7 +369,7 @@ data OrganizationWebhookResource s = OrganizationWebhookResource'
     -- ^ @events@ - (Required)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -418,11 +418,11 @@ instance P.HasName (OrganizationWebhookResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: OrganizationWebhookResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (OrganizationWebhookResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @github_repository@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_repository terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/repository.html terraform documentation>
 -- for more information.
 data RepositoryResource s = RepositoryResource'
     { _allowMergeCommit  :: TF.Attr s P.Bool
@@ -465,7 +465,7 @@ data RepositoryResource s = RepositoryResource'
     -- ^ @license_template@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _private           :: TF.Attr s P.Bool
     -- ^ @private@ - (Optional)
@@ -603,39 +603,39 @@ instance P.HasTopics (RepositoryResource s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _topics = a } :: RepositoryResource s)
 
 instance s ~ s' => P.HasComputedDefaultBranch (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedDefaultBranch x = TF.compute (TF.refKey x) "_computedDefaultBranch"
+    computedDefaultBranch x = TF.compute (TF.refKey x) "default_branch"
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedFullName x = TF.compute (TF.refKey x) "_computedFullName"
+    computedFullName x = TF.compute (TF.refKey x) "full_name"
 
 instance s ~ s' => P.HasComputedGitCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedGitCloneUrl x = TF.compute (TF.refKey x) "_computedGitCloneUrl"
+    computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
 instance s ~ s' => P.HasComputedHttpCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedHttpCloneUrl x = TF.compute (TF.refKey x) "_computedHttpCloneUrl"
+    computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
 
 instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSshCloneUrl x = TF.compute (TF.refKey x) "_computedSshCloneUrl"
+    computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
 
 instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (RepositoryResource s)) (TF.Attr s P.Text) where
-    computedSvnUrl x = TF.compute (TF.refKey x) "_computedSvnUrl"
+    computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
 -- | @github_repository_collaborator@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_repository_collaborator terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_collaborator.html terraform documentation>
 -- for more information.
 data RepositoryCollaboratorResource s = RepositoryCollaboratorResource'
     { _permission :: TF.Attr s P.Text
-    -- ^ @permission@ - (Optional)
+    -- ^ @permission@ - (Optional, Forces New)
     --
     , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     , _username   :: TF.Attr s P.Text
-    -- ^ @username@ - (Required)
+    -- ^ @username@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -678,20 +678,20 @@ instance P.HasUsername (RepositoryCollaboratorResource s) (TF.Attr s P.Text) whe
 
 -- | @github_repository_deploy_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_repository_deploy_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_deploy_key.html terraform documentation>
 -- for more information.
 data RepositoryDeployKeyResource s = RepositoryDeployKeyResource'
     { _key        :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     --
     , _readOnly   :: TF.Attr s P.Bool
-    -- ^ @read_only@ - (Optional)
+    -- ^ @read_only@ - (Optional, Forces New)
     --
     , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     , _title      :: TF.Attr s P.Text
-    -- ^ @title@ - (Required)
+    -- ^ @title@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -742,7 +742,7 @@ instance P.HasTitle (RepositoryDeployKeyResource s) (TF.Attr s P.Text) where
 
 -- | @github_repository_project@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_repository_project terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_project.html terraform documentation>
 -- for more information.
 data RepositoryProjectResource s = RepositoryProjectResource'
     { _body       :: TF.Attr s P.Text
@@ -752,7 +752,7 @@ data RepositoryProjectResource s = RepositoryProjectResource'
     -- ^ @name@ - (Required)
     --
     , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -794,11 +794,11 @@ instance P.HasRepository (RepositoryProjectResource s) (TF.Attr s P.Text) where
                (\s a -> s { _repository = a } :: RepositoryProjectResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryProjectResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @github_repository_webhook@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_repository_webhook terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/repository_webhook.html terraform documentation>
 -- for more information.
 data RepositoryWebhookResource s = RepositoryWebhookResource'
     { _active        :: TF.Attr s P.Bool
@@ -811,10 +811,10 @@ data RepositoryWebhookResource s = RepositoryWebhookResource'
     -- ^ @events@ - (Required)
     --
     , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _repository    :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -871,11 +871,11 @@ instance P.HasRepository (RepositoryWebhookResource s) (TF.Attr s P.Text) where
                (\s a -> s { _repository = a } :: RepositoryWebhookResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (RepositoryWebhookResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"
 
 -- | @github_team@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_team terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/team.html terraform documentation>
 -- for more information.
 data TeamResource s = TeamResource'
     { _description  :: TF.Attr s P.Text
@@ -947,17 +947,17 @@ instance P.HasPrivacy (TeamResource s) (TF.Attr s P.Text) where
 
 -- | @github_team_membership@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_team_membership terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/team_membership.html terraform documentation>
 -- for more information.
 data TeamMembershipResource s = TeamMembershipResource'
     { _role     :: TF.Attr s P.Text
-    -- ^ @role@ - (Optional)
+    -- ^ @role@ - (Optional, Forces New)
     --
     , _teamId   :: TF.Attr s P.Text
-    -- ^ @team_id@ - (Required)
+    -- ^ @team_id@ - (Required, Forces New)
     --
     , _username :: TF.Attr s P.Text
-    -- ^ @username@ - (Required)
+    -- ^ @username@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1000,17 +1000,17 @@ instance P.HasUsername (TeamMembershipResource s) (TF.Attr s P.Text) where
 
 -- | @github_team_repository@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_team_repository terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/team_repository.html terraform documentation>
 -- for more information.
 data TeamRepositoryResource s = TeamRepositoryResource'
     { _permission :: TF.Attr s P.Text
     -- ^ @permission@ - (Optional)
     --
     , _repository :: TF.Attr s P.Text
-    -- ^ @repository@ - (Required)
+    -- ^ @repository@ - (Required, Forces New)
     --
     , _teamId     :: TF.Attr s P.Text
-    -- ^ @team_id@ - (Required)
+    -- ^ @team_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1053,11 +1053,11 @@ instance P.HasTeamId (TeamRepositoryResource s) (TF.Attr s P.Text) where
 
 -- | @github_user_gpg_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_user_gpg_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/user_gpg_key.html terraform documentation>
 -- for more information.
 data UserGpgKeyResource s = UserGpgKeyResource'
     { _armoredPublicKey :: TF.Attr s P.Text
-    -- ^ @armored_public_key@ - (Required)
+    -- ^ @armored_public_key@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1084,18 +1084,18 @@ instance P.HasArmoredPublicKey (UserGpgKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _armoredPublicKey = a } :: UserGpgKeyResource s)
 
 instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (UserGpgKeyResource s)) (TF.Attr s P.Text) where
-    computedKeyId x = TF.compute (TF.refKey x) "_computedKeyId"
+    computedKeyId x = TF.compute (TF.refKey x) "key_id"
 
 -- | @github_user_ssh_key@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_user_ssh_key terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/r/user_ssh_key.html terraform documentation>
 -- for more information.
 data UserSshKeyResource s = UserSshKeyResource'
     { _key   :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
+    -- ^ @key@ - (Required, Forces New)
     --
     , _title :: TF.Attr s P.Text
-    -- ^ @title@ - (Required)
+    -- ^ @title@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -1130,4 +1130,4 @@ instance P.HasTitle (UserSshKeyResource s) (TF.Attr s P.Text) where
                (\s a -> s { _title = a } :: UserSshKeyResource s)
 
 instance s ~ s' => P.HasComputedUrl (TF.Ref s' (UserSshKeyResource s)) (TF.Attr s P.Text) where
-    computedUrl x = TF.compute (TF.refKey x) "_computedUrl"
+    computedUrl x = TF.compute (TF.refKey x) "url"

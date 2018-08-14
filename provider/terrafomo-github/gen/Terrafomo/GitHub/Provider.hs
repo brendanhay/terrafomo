@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | The @GitHub@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/github/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _baseUrl      :: P.Maybe P.Text

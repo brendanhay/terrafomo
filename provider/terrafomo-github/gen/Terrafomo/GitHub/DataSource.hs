@@ -63,7 +63,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @github_ip_ranges@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_ip_ranges terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/d/ip_ranges.html terraform documentation>
 -- for more information.
 data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
@@ -81,20 +81,20 @@ instance TF.IsValid (IpRangesData s) where
     validator = P.mempty
 
 instance s ~ s' => P.HasComputedGit (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedGit x = TF.compute (TF.refKey x) "_computedGit"
+    computedGit x = TF.compute (TF.refKey x) "git"
 
 instance s ~ s' => P.HasComputedHooks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedHooks x = TF.compute (TF.refKey x) "_computedHooks"
+    computedHooks x = TF.compute (TF.refKey x) "hooks"
 
 instance s ~ s' => P.HasComputedImporter (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedImporter x = TF.compute (TF.refKey x) "_computedImporter"
+    computedImporter x = TF.compute (TF.refKey x) "importer"
 
 instance s ~ s' => P.HasComputedPages (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedPages x = TF.compute (TF.refKey x) "_computedPages"
+    computedPages x = TF.compute (TF.refKey x) "pages"
 
 -- | @github_repository@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_repository terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/d/repository.html terraform documentation>
 -- for more information.
 data RepositoryData s = RepositoryData'
     { _fullName :: TF.Attr s P.Text
@@ -151,62 +151,62 @@ instance P.HasName (RepositoryData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: RepositoryData s)
 
 instance s ~ s' => P.HasComputedAllowMergeCommit (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedAllowMergeCommit x = TF.compute (TF.refKey x) "_computedAllowMergeCommit"
+    computedAllowMergeCommit x = TF.compute (TF.refKey x) "allow_merge_commit"
 
 instance s ~ s' => P.HasComputedAllowRebaseMerge (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedAllowRebaseMerge x = TF.compute (TF.refKey x) "_computedAllowRebaseMerge"
+    computedAllowRebaseMerge x = TF.compute (TF.refKey x) "allow_rebase_merge"
 
 instance s ~ s' => P.HasComputedAllowSquashMerge (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedAllowSquashMerge x = TF.compute (TF.refKey x) "_computedAllowSquashMerge"
+    computedAllowSquashMerge x = TF.compute (TF.refKey x) "allow_squash_merge"
 
 instance s ~ s' => P.HasComputedArchived (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedArchived x = TF.compute (TF.refKey x) "_computedArchived"
+    computedArchived x = TF.compute (TF.refKey x) "archived"
 
 instance s ~ s' => P.HasComputedDefaultBranch (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedDefaultBranch x = TF.compute (TF.refKey x) "_computedDefaultBranch"
+    computedDefaultBranch x = TF.compute (TF.refKey x) "default_branch"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedGitCloneUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedGitCloneUrl x = TF.compute (TF.refKey x) "_computedGitCloneUrl"
+    computedGitCloneUrl x = TF.compute (TF.refKey x) "git_clone_url"
 
 instance s ~ s' => P.HasComputedHasDownloads (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedHasDownloads x = TF.compute (TF.refKey x) "_computedHasDownloads"
+    computedHasDownloads x = TF.compute (TF.refKey x) "has_downloads"
 
 instance s ~ s' => P.HasComputedHasIssues (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedHasIssues x = TF.compute (TF.refKey x) "_computedHasIssues"
+    computedHasIssues x = TF.compute (TF.refKey x) "has_issues"
 
 instance s ~ s' => P.HasComputedHasProjects (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedHasProjects x = TF.compute (TF.refKey x) "_computedHasProjects"
+    computedHasProjects x = TF.compute (TF.refKey x) "has_projects"
 
 instance s ~ s' => P.HasComputedHasWiki (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedHasWiki x = TF.compute (TF.refKey x) "_computedHasWiki"
+    computedHasWiki x = TF.compute (TF.refKey x) "has_wiki"
 
 instance s ~ s' => P.HasComputedHomepageUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedHomepageUrl x = TF.compute (TF.refKey x) "_computedHomepageUrl"
+    computedHomepageUrl x = TF.compute (TF.refKey x) "homepage_url"
 
 instance s ~ s' => P.HasComputedHtmlUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedHtmlUrl x = TF.compute (TF.refKey x) "_computedHtmlUrl"
+    computedHtmlUrl x = TF.compute (TF.refKey x) "html_url"
 
 instance s ~ s' => P.HasComputedHttpCloneUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedHttpCloneUrl x = TF.compute (TF.refKey x) "_computedHttpCloneUrl"
+    computedHttpCloneUrl x = TF.compute (TF.refKey x) "http_clone_url"
 
 instance s ~ s' => P.HasComputedPrivate (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
-    computedPrivate x = TF.compute (TF.refKey x) "_computedPrivate"
+    computedPrivate x = TF.compute (TF.refKey x) "private"
 
 instance s ~ s' => P.HasComputedSshCloneUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedSshCloneUrl x = TF.compute (TF.refKey x) "_computedSshCloneUrl"
+    computedSshCloneUrl x = TF.compute (TF.refKey x) "ssh_clone_url"
 
 instance s ~ s' => P.HasComputedSvnUrl (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
-    computedSvnUrl x = TF.compute (TF.refKey x) "_computedSvnUrl"
+    computedSvnUrl x = TF.compute (TF.refKey x) "svn_url"
 
 instance s ~ s' => P.HasComputedTopics (TF.Ref s' (RepositoryData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedTopics x = TF.compute (TF.refKey x) "_computedTopics"
+    computedTopics x = TF.compute (TF.refKey x) "topics"
 
 -- | @github_team@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_team terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/d/team.html terraform documentation>
 -- for more information.
 data TeamData s = TeamData'
     { _slug :: TF.Attr s P.Text
@@ -237,23 +237,23 @@ instance P.HasSlug (TeamData s) (TF.Attr s P.Text) where
                (\s a -> s { _slug = a } :: TeamData s)
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "_computedDescription"
+    computedDescription x = TF.compute (TF.refKey x) "description"
 
 instance s ~ s' => P.HasComputedMembers (TF.Ref s' (TeamData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMembers x = TF.compute (TF.refKey x) "_computedMembers"
+    computedMembers x = TF.compute (TF.refKey x) "members"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedPermission (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedPermission x = TF.compute (TF.refKey x) "_computedPermission"
+    computedPermission x = TF.compute (TF.refKey x) "permission"
 
 instance s ~ s' => P.HasComputedPrivacy (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
-    computedPrivacy x = TF.compute (TF.refKey x) "_computedPrivacy"
+    computedPrivacy x = TF.compute (TF.refKey x) "privacy"
 
 -- | @github_user@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/GitHub/github_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/github/d/user.html terraform documentation>
 -- for more information.
 data UserData s = UserData'
     { _username :: TF.Attr s P.Text
@@ -284,55 +284,55 @@ instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
                (\s a -> s { _username = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedAvatarUrl x = TF.compute (TF.refKey x) "_computedAvatarUrl"
+    computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
 
 instance s ~ s' => P.HasComputedBio (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedBio x = TF.compute (TF.refKey x) "_computedBio"
+    computedBio x = TF.compute (TF.refKey x) "bio"
 
 instance s ~ s' => P.HasComputedBlog (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedBlog x = TF.compute (TF.refKey x) "_computedBlog"
+    computedBlog x = TF.compute (TF.refKey x) "blog"
 
 instance s ~ s' => P.HasComputedCompany (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedCompany x = TF.compute (TF.refKey x) "_computedCompany"
+    computedCompany x = TF.compute (TF.refKey x) "company"
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "_computedCreatedAt"
+    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "_computedEmail"
+    computedEmail x = TF.compute (TF.refKey x) "email"
 
 instance s ~ s' => P.HasComputedFollowers (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
-    computedFollowers x = TF.compute (TF.refKey x) "_computedFollowers"
+    computedFollowers x = TF.compute (TF.refKey x) "followers"
 
 instance s ~ s' => P.HasComputedFollowing (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
-    computedFollowing x = TF.compute (TF.refKey x) "_computedFollowing"
+    computedFollowing x = TF.compute (TF.refKey x) "following"
 
 instance s ~ s' => P.HasComputedGpgKeys (TF.Ref s' (UserData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedGpgKeys x = TF.compute (TF.refKey x) "_computedGpgKeys"
+    computedGpgKeys x = TF.compute (TF.refKey x) "gpg_keys"
 
 instance s ~ s' => P.HasComputedGravatarId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedGravatarId x = TF.compute (TF.refKey x) "_computedGravatarId"
+    computedGravatarId x = TF.compute (TF.refKey x) "gravatar_id"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedLocation x = TF.compute (TF.refKey x) "_computedLocation"
+    computedLocation x = TF.compute (TF.refKey x) "location"
 
 instance s ~ s' => P.HasComputedLogin (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedLogin x = TF.compute (TF.refKey x) "_computedLogin"
+    computedLogin x = TF.compute (TF.refKey x) "login"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "_computedName"
+    computedName x = TF.compute (TF.refKey x) "name"
 
 instance s ~ s' => P.HasComputedPublicGists (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
-    computedPublicGists x = TF.compute (TF.refKey x) "_computedPublicGists"
+    computedPublicGists x = TF.compute (TF.refKey x) "public_gists"
 
 instance s ~ s' => P.HasComputedPublicRepos (TF.Ref s' (UserData s)) (TF.Attr s P.Integer) where
-    computedPublicRepos x = TF.compute (TF.refKey x) "_computedPublicRepos"
+    computedPublicRepos x = TF.compute (TF.refKey x) "public_repos"
 
 instance s ~ s' => P.HasComputedSiteAdmin (TF.Ref s' (UserData s)) (TF.Attr s P.Bool) where
-    computedSiteAdmin x = TF.compute (TF.refKey x) "_computedSiteAdmin"
+    computedSiteAdmin x = TF.compute (TF.refKey x) "site_admin"
 
 instance s ~ s' => P.HasComputedSshKeys (TF.Ref s' (UserData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSshKeys x = TF.compute (TF.refKey x) "_computedSshKeys"
+    computedSshKeys x = TF.compute (TF.refKey x) "ssh_keys"
 
 instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "_computedUpdatedAt"
+    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
