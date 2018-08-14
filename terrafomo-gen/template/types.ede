@@ -1,7 +1,5 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
-{-# OPTIONS_GHC -fno-warn-dodgy-exports #-}
-
 {% include "_include/license.ede" %}
 --
 module {{ namespace }} where

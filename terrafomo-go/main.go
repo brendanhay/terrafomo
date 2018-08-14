@@ -31,10 +31,10 @@ var ignoredSchemaDefaults = map[string]map[string]bool{
 	},
 }
 
-func ignoreDefault(s string, f string) bool {
-	cfg, sok := ignoredSchemaDefaults[s]
+func ignore(m map[string]map[string]bool, parent string, schema string) bool {
+	cfg, sok := m[parent]
 	if sok {
-		ignore, fok := cfg[f]
+		ignore, fok := cfg[schema]
 		if fok {
 			return ignore
 		}
@@ -170,7 +170,7 @@ func newSchema(parent string, k string, v *schema.Schema) *Schema {
 		s.Removed = &v.Removed
 	}
 
-	if !ignoreDefault(parent, k) {
+	if !ignore(ignoredSchemaDefaults, parent, k) {
 		switch d := v.Default.(type) {
 		case string:
 			if d != "" {

@@ -14,7 +14,7 @@ import Control.Monad.State.Strict (StateT)
 import Data.Bifunctor      (second)
 import Data.HashMap.Strict (HashMap)
 import Data.HashSet        (HashSet)
-import Data.Maybe          (fromMaybe, mapMaybe)
+import Data.Maybe          (fromMaybe, isNothing, mapMaybe)
 import Data.Semigroup      ((<>))
 import Data.Text           (Text)
 
@@ -170,11 +170,13 @@ elabArguments name =
     fmap applyConflicts
         . traverse (elabField >=> applyRules name)
             . filter (not . Go.schemaComputed)
+            . filter (isNothing . Go.schemaDeprecated)
 
 elabAttributes :: Text -> [Go.Schema] -> Elab [Field LabelName]
 elabAttributes name =
     traverse (elabField >=> applyRules name)
         . filter Go.schemaComputed
+        . filter (isNothing . Go.schemaDeprecated)
 
 elabField :: Go.Schema -> Elab (Field LabelName)
 elabField schema = do
