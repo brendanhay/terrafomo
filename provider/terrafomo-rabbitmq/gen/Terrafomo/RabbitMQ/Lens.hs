@@ -18,6 +18,7 @@ module Terrafomo.RabbitMQ.Lens
       HasWrite (..)
     , HasDurable (..)
     , HasApplyTo (..)
+    , HasType' (..)
     , HasAutoDelete (..)
     , HasRoutingKey (..)
     , HasRead (..)
@@ -69,6 +70,12 @@ class HasApplyTo a b | a -> b where
 
 instance HasApplyTo a b => HasApplyTo (TF.Schema l p a) b where
     applyTo = TF.configuration . applyTo
+
+class HasType' a b | a -> b where
+    type' :: P.Lens' a b
+
+instance HasType' a b => HasType' (TF.Schema l p a) b where
+    type' = TF.configuration . type'
 
 class HasAutoDelete a b | a -> b where
     autoDelete :: P.Lens' a b

@@ -75,26 +75,26 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @rabbitmq_binding@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_binding terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/binding.html terraform documentation>
 -- for more information.
 data BindingResource s = BindingResource'
     { _arguments       :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @arguments@ - (Optional)
+    -- ^ @arguments@ - (Optional, Forces New)
     --
     , _destination     :: TF.Attr s P.Text
-    -- ^ @destination@ - (Required)
+    -- ^ @destination@ - (Required, Forces New)
     --
     , _destinationType :: TF.Attr s P.Text
-    -- ^ @destination_type@ - (Required)
+    -- ^ @destination_type@ - (Required, Forces New)
     --
     , _routingKey      :: TF.Attr s P.Text
-    -- ^ @routing_key@ - (Optional)
+    -- ^ @routing_key@ - (Optional, Forces New)
     --
     , _source          :: TF.Attr s P.Text
-    -- ^ @source@ - (Required)
+    -- ^ @source@ - (Required, Forces New)
     --
     , _vhost           :: TF.Attr s P.Text
-    -- ^ @vhost@ - (Required)
+    -- ^ @vhost@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -159,27 +159,27 @@ instance P.HasVhost (BindingResource s) (TF.Attr s P.Text) where
                (\s a -> s { _vhost = a } :: BindingResource s)
 
 instance s ~ s' => P.HasComputedPropertiesKey (TF.Ref s' (BindingResource s)) (TF.Attr s P.Text) where
-    computedPropertiesKey x = TF.compute (TF.refKey x) "_computedPropertiesKey"
+    computedPropertiesKey x = TF.compute (TF.refKey x) "properties_key"
 
 -- | @rabbitmq_exchange@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_exchange terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/exchange.html terraform documentation>
 -- for more information.
 data ExchangeResource s = ExchangeResource'
     { _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (Settings s)
-    -- ^ @settings@ - (Required)
+    , _settings :: TF.Attr s (ExchangeSettings s)
+    -- ^ @settings@ - (Required, Forces New)
     --
     , _vhost    :: TF.Attr s P.Text
-    -- ^ @vhost@ - (Optional)
+    -- ^ @vhost@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 exchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (ExchangeSettings s) -- ^ @settings@ - 'P.settings'
     -> TF.Resource P.Provider (ExchangeResource s)
 exchangeResource _name _settings =
     TF.newResource "rabbitmq_exchange" TF.validator $
@@ -200,7 +200,7 @@ instance TF.IsValid (ExchangeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: ExchangeResource s -> TF.Attr s (Settings s))
+                      :: ExchangeResource s -> TF.Attr s (ExchangeSettings s))
                   TF.validator
 
 instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
@@ -208,9 +208,9 @@ instance P.HasName (ExchangeResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ExchangeResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ExchangeResource s)
 
-instance P.HasSettings (ExchangeResource s) (TF.Attr s (Settings s)) where
+instance P.HasSettings (ExchangeResource s) (TF.Attr s (ExchangeSettings s)) where
     settings =
-        P.lens (_settings :: ExchangeResource s -> TF.Attr s (Settings s))
+        P.lens (_settings :: ExchangeResource s -> TF.Attr s (ExchangeSettings s))
                (\s a -> s { _settings = a } :: ExchangeResource s)
 
 instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
@@ -220,22 +220,22 @@ instance P.HasVhost (ExchangeResource s) (TF.Attr s P.Text) where
 
 -- | @rabbitmq_permissions@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_permissions terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/permissions.html terraform documentation>
 -- for more information.
 data PermissionsResource s = PermissionsResource'
-    { _permissions :: TF.Attr s (Permissions s)
+    { _permissions :: TF.Attr s (PermissionsPermissions s)
     -- ^ @permissions@ - (Required)
     --
     , _user        :: TF.Attr s P.Text
-    -- ^ @user@ - (Required)
+    -- ^ @user@ - (Required, Forces New)
     --
     , _vhost       :: TF.Attr s P.Text
-    -- ^ @vhost@ - (Optional)
+    -- ^ @vhost@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 permissionsResource
-    :: TF.Attr s (Permissions s) -- ^ @permissions@ - 'P.permissions'
+    :: TF.Attr s (PermissionsPermissions s) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> TF.Resource P.Provider (PermissionsResource s)
 permissionsResource _permissions _user =
@@ -257,12 +257,12 @@ instance TF.IsValid (PermissionsResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_permissions"
                   (_permissions
-                      :: PermissionsResource s -> TF.Attr s (Permissions s))
+                      :: PermissionsResource s -> TF.Attr s (PermissionsPermissions s))
                   TF.validator
 
-instance P.HasPermissions (PermissionsResource s) (TF.Attr s (Permissions s)) where
+instance P.HasPermissions (PermissionsResource s) (TF.Attr s (PermissionsPermissions s)) where
     permissions =
-        P.lens (_permissions :: PermissionsResource s -> TF.Attr s (Permissions s))
+        P.lens (_permissions :: PermissionsResource s -> TF.Attr s (PermissionsPermissions s))
                (\s a -> s { _permissions = a } :: PermissionsResource s)
 
 instance P.HasUser (PermissionsResource s) (TF.Attr s P.Text) where
@@ -277,23 +277,23 @@ instance P.HasVhost (PermissionsResource s) (TF.Attr s P.Text) where
 
 -- | @rabbitmq_policy@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_policy terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/policy.html terraform documentation>
 -- for more information.
 data PolicyResource s = PolicyResource'
     { _name   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _policy :: TF.Attr s (Policy s)
+    , _policy :: TF.Attr s (PolicyPolicy s)
     -- ^ @policy@ - (Required)
     --
     , _vhost  :: TF.Attr s P.Text
-    -- ^ @vhost@ - (Required)
+    -- ^ @vhost@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (Policy s) -- ^ @policy@ - 'P.policy'
+    -> TF.Attr s (PolicyPolicy s) -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
     -> TF.Resource P.Provider (PolicyResource s)
 policyResource _name _policy _vhost =
@@ -315,7 +315,7 @@ instance TF.IsValid (PolicyResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_policy"
                   (_policy
-                      :: PolicyResource s -> TF.Attr s (Policy s))
+                      :: PolicyResource s -> TF.Attr s (PolicyPolicy s))
                   TF.validator
 
 instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
@@ -323,9 +323,9 @@ instance P.HasName (PolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: PolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PolicyResource s)
 
-instance P.HasPolicy (PolicyResource s) (TF.Attr s (Policy s)) where
+instance P.HasPolicy (PolicyResource s) (TF.Attr s (PolicyPolicy s)) where
     policy =
-        P.lens (_policy :: PolicyResource s -> TF.Attr s (Policy s))
+        P.lens (_policy :: PolicyResource s -> TF.Attr s (PolicyPolicy s))
                (\s a -> s { _policy = a } :: PolicyResource s)
 
 instance P.HasVhost (PolicyResource s) (TF.Attr s P.Text) where
@@ -335,23 +335,23 @@ instance P.HasVhost (PolicyResource s) (TF.Attr s P.Text) where
 
 -- | @rabbitmq_queue@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_queue terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/queue.html terraform documentation>
 -- for more information.
 data QueueResource s = QueueResource'
     { _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (Settings s)
-    -- ^ @settings@ - (Required)
+    , _settings :: TF.Attr s (QueueSettings s)
+    -- ^ @settings@ - (Required, Forces New)
     --
     , _vhost    :: TF.Attr s P.Text
-    -- ^ @vhost@ - (Optional)
+    -- ^ @vhost@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
 queueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s (Settings s) -- ^ @settings@ - 'P.settings'
+    -> TF.Attr s (QueueSettings s) -- ^ @settings@ - 'P.settings'
     -> TF.Resource P.Provider (QueueResource s)
 queueResource _name _settings =
     TF.newResource "rabbitmq_queue" TF.validator $
@@ -372,7 +372,7 @@ instance TF.IsValid (QueueResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: QueueResource s -> TF.Attr s (Settings s))
+                      :: QueueResource s -> TF.Attr s (QueueSettings s))
                   TF.validator
 
 instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
@@ -380,9 +380,9 @@ instance P.HasName (QueueResource s) (TF.Attr s P.Text) where
         P.lens (_name :: QueueResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: QueueResource s)
 
-instance P.HasSettings (QueueResource s) (TF.Attr s (Settings s)) where
+instance P.HasSettings (QueueResource s) (TF.Attr s (QueueSettings s)) where
     settings =
-        P.lens (_settings :: QueueResource s -> TF.Attr s (Settings s))
+        P.lens (_settings :: QueueResource s -> TF.Attr s (QueueSettings s))
                (\s a -> s { _settings = a } :: QueueResource s)
 
 instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
@@ -392,11 +392,11 @@ instance P.HasVhost (QueueResource s) (TF.Attr s P.Text) where
 
 -- | @rabbitmq_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
@@ -445,11 +445,11 @@ instance P.HasTags (UserResource s) (TF.Attr s [TF.Attr s P.Text]) where
 
 -- | @rabbitmq_vhost@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/rabbitmq_vhost terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/r/vhost.html terraform documentation>
 -- for more information.
 data VhostResource s = VhostResource'
     { _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 

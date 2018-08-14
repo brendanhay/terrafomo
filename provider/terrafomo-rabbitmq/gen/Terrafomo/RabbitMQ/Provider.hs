@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @RabbitMQ@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/RabbitMQ/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/rabbitmq/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _cacertFile :: P.Maybe P.Text
