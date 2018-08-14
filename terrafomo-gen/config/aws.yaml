@@ -6,18 +6,28 @@ extra-deps:
   - amazonka-core
   - formatting
   - iproute
-  - amazonka-iam-policy >= 0.0.3
+  - amazonka-iam-policy >= 0.0.4
 
 field-overrides:
   - exact: assume_role_policy
-    type: TF.Attr s P.Document
+    type: 'TF.Attr s P.Document'
 
   - exact: policy
-    type: TF.Attr s P.Document
+    type: 'TF.Attr s P.Document'
+
+  - exact: availability_zone
+    type: 'TF.Attr s P.Zone'
 
 datatype-overrides:
   provider:
-    region: P.Region
+    region: 'P.Region'
 
   assume_role:
-    policy: P.Maybe P.Document
+    policy: 'P.Maybe P.Document'
+
+  dynamodb_table_attribute:
+    type: 'TF.Attr s P.DynamoTableAttributeType'
+
+  aws_security_group_rule:
+    type: 'TF.Attr s P.Ec2Traffic'
+    protocol: 'TF.Attr s P.Ec2Protocol'
