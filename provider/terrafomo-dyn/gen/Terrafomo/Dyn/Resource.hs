@@ -51,20 +51,20 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @dyn_record@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Dyn/dyn_record terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/dyn/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
     { _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    -- ^ @type@ - (Required, Forces New)
     --
     , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     , _zone  :: TF.Attr s P.Text
-    -- ^ @zone@ - (Required)
+    -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -114,7 +114,7 @@ instance P.HasZone (RecordResource s) (TF.Attr s P.Text) where
                (\s a -> s { _zone = a } :: RecordResource s)
 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedFqdn x = TF.compute (TF.refKey x) "_computedFqdn"
+    computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
-    computedTtl x = TF.compute (TF.refKey x) "_computedTtl"
+    computedTtl x = TF.compute (TF.refKey x) "ttl"

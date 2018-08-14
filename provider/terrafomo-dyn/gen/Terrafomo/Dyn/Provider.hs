@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator as TF
 
 -- | The @Dyn@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Dyn/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/dyn/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _customerName :: P.Text
