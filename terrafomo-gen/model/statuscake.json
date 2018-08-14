@@ -189,7 +189,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "node_locations",
+            "name": "test_node_locations",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
