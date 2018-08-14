@@ -157,7 +157,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "disks",
+            "name": "virtual_guest_disks",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
@@ -339,7 +339,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ssh_keys",
+            "name": "virtual_guest_ssh_keys",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
