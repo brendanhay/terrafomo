@@ -33,6 +33,7 @@ module Terrafomo.Circonus.Lens
     , HasMatch (..)
     , HasAutoTag (..)
     , HasNotes (..)
+    , HasExtract (..)
     , HasCollector (..)
     , HasService (..)
     , HasType' (..)
@@ -49,6 +50,7 @@ module Terrafomo.Circonus.Lens
     , HasDimmensions (..)
     , HasAuthUser (..)
     , HasRight (..)
+    , HasBodyRegexp (..)
     , HasId (..)
     , HasNode (..)
     , HasPostgresql (..)
@@ -88,6 +90,7 @@ module Terrafomo.Circonus.Lens
     , HasUser (..)
     , HasChanged (..)
     , HasPort (..)
+    , HasCode (..)
     , HasWarning (..)
     , HasDefinition (..)
     , HasContains (..)
@@ -309,6 +312,12 @@ class HasNotes a b | a -> b where
 instance HasNotes a b => HasNotes (TF.Schema l p a) b where
     notes = TF.configuration . notes
 
+class HasExtract a b | a -> b where
+    extract :: P.Lens' a b
+
+instance HasExtract a b => HasExtract (TF.Schema l p a) b where
+    extract = TF.configuration . extract
+
 class HasCollector a b | a -> b where
     collector :: P.Lens' a b
 
@@ -404,6 +413,12 @@ class HasRight a b | a -> b where
 
 instance HasRight a b => HasRight (TF.Schema l p a) b where
     right = TF.configuration . right
+
+class HasBodyRegexp a b | a -> b where
+    bodyRegexp :: P.Lens' a b
+
+instance HasBodyRegexp a b => HasBodyRegexp (TF.Schema l p a) b where
+    bodyRegexp = TF.configuration . bodyRegexp
 
 class HasId a b | a -> b where
     id :: P.Lens' a b
@@ -638,6 +653,12 @@ class HasPort a b | a -> b where
 
 instance HasPort a b => HasPort (TF.Schema l p a) b where
     port = TF.configuration . port
+
+class HasCode a b | a -> b where
+    code :: P.Lens' a b
+
+instance HasCode a b => HasCode (TF.Schema l p a) b where
+    code = TF.configuration . code
 
 class HasWarning a b | a -> b where
     warning :: P.Lens' a b

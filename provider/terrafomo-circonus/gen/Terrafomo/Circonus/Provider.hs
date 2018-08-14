@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator      as TF
 
 -- | The @Circonus@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Circonus/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/circonus/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apiUrl  :: P.Text
