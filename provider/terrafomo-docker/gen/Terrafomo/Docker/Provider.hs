@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator    as TF
 
 -- | The @Docker@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Docker/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/docker/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _caMaterial   :: P.Maybe P.Text

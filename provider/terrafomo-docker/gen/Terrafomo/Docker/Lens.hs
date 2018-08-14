@@ -101,6 +101,7 @@ module Terrafomo.Docker.Lens
     , HasVolumeName (..)
     , HasUsername (..)
     , HasArchitecture (..)
+    , HasInternal (..)
     , HasTmpfsOptions (..)
     , HasMonitor (..)
     , HasNetworkAlias (..)
@@ -154,6 +155,7 @@ module Terrafomo.Docker.Lens
     , HasDisable (..)
     , HasNanoCpus (..)
     , HasPullTriggers (..)
+    , HasExternal (..)
     , HasPrivileges (..)
     , HasLogOpts (..)
     , HasKeyMaterial (..)
@@ -706,6 +708,12 @@ class HasArchitecture a b | a -> b where
 instance HasArchitecture a b => HasArchitecture (TF.Schema l p a) b where
     architecture = TF.configuration . architecture
 
+class HasInternal a b | a -> b where
+    internal :: P.Lens' a b
+
+instance HasInternal a b => HasInternal (TF.Schema l p a) b where
+    internal = TF.configuration . internal
+
 class HasTmpfsOptions a b | a -> b where
     tmpfsOptions :: P.Lens' a b
 
@@ -1023,6 +1031,12 @@ class HasPullTriggers a b | a -> b where
 
 instance HasPullTriggers a b => HasPullTriggers (TF.Schema l p a) b where
     pullTriggers = TF.configuration . pullTriggers
+
+class HasExternal a b | a -> b where
+    external :: P.Lens' a b
+
+instance HasExternal a b => HasExternal (TF.Schema l p a) b where
+    external = TF.configuration . external
 
 class HasPrivileges a b | a -> b where
     privileges :: P.Lens' a b

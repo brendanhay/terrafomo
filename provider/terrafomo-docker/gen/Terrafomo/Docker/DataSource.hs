@@ -51,7 +51,7 @@ import qualified Terrafomo.Validator       as TF
 
 -- | @docker_registry_image@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Docker/docker_registry_image terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/docker/d/registry_image.html terraform documentation>
 -- for more information.
 data RegistryImageData s = RegistryImageData'
     { _name :: TF.Attr s P.Text
@@ -81,4 +81,4 @@ instance P.HasName (RegistryImageData s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: RegistryImageData s)
 
 instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
-    computedSha256Digest x = TF.compute (TF.refKey x) "_computedSha256Digest"
+    computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"
