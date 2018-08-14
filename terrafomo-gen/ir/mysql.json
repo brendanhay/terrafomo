@@ -244,11 +244,6 @@
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "name": "_password",
-                            "method": "password"
-                        },
-                        {
-                            "default": "TF.Nil",
                             "name": "_plaintextPassword",
                             "method": "plaintextPassword"
                         }
@@ -281,33 +276,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "_password",
-                    "method": "password",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_authPlugin",
-                            "method": "authPlugin"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_plaintextPassword",
-                            "method": "plaintextPassword"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPassword",
-                    "validate": false,
-                    "optional": true,
-                    "original": "password"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"plaintext_password\" <$> TF.attribute",
                     "name": "_plaintextPassword",
                     "method": "plaintextPassword",
@@ -316,11 +284,6 @@
                             "default": "TF.Nil",
                             "name": "_authPlugin",
                             "method": "authPlugin"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_password",
-                            "method": "password"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
@@ -380,11 +343,6 @@
                     "conflicts": [
                         {
                             "default": "TF.Nil",
-                            "name": "_password",
-                            "method": "password"
-                        },
-                        {
-                            "default": "TF.Nil",
                             "name": "_plaintextPassword",
                             "method": "plaintextPassword"
                         }
@@ -401,33 +359,6 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
-                    "encoder": "TF.assign \"password\" <$> TF.attribute",
-                    "name": "_password",
-                    "method": "password",
-                    "conflicts": [
-                        {
-                            "default": "TF.Nil",
-                            "name": "_authPlugin",
-                            "method": "authPlugin"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_plaintextPassword",
-                            "method": "plaintextPassword"
-                        }
-                    ],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasPassword",
-                    "validate": false,
-                    "optional": true,
-                    "original": "password"
-                },
-                {
-                    "default": "TF.Nil",
-                    "computed": false,
-                    "required": false,
-                    "help": [],
-                    "forceNew": false,
                     "encoder": "TF.assign \"plaintext_password\" <$> TF.attribute",
                     "name": "_plaintextPassword",
                     "method": "plaintextPassword",
@@ -436,11 +367,6 @@
                             "default": "TF.Nil",
                             "name": "_authPlugin",
                             "method": "authPlugin"
-                        },
-                        {
-                            "default": "TF.Nil",
-                            "name": "_password",
-                            "method": "password"
                         }
                     ],
                     "type": "TF.Attr s P.Text",
