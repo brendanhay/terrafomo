@@ -5914,7 +5914,7 @@ slbResource =
             , _instances = TF.Nil
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180814091648170700000001"
+            , _name = TF.value "tf-lb-20180814094303055900000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
