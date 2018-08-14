@@ -67,7 +67,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @datadog_downtime@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Datadog/datadog_downtime terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/datadog/r/downtime.html terraform documentation>
 -- for more information.
 data DowntimeResource s = DowntimeResource'
     { _active     :: TF.Attr s P.Bool
@@ -85,7 +85,7 @@ data DowntimeResource s = DowntimeResource'
     , _monitorId  :: TF.Attr s P.Integer
     -- ^ @monitor_id@ - (Optional)
     --
-    , _recurrence :: TF.Attr s (Recurrence s)
+    , _recurrence :: TF.Attr s (DowntimeRecurrence s)
     -- ^ @recurrence@ - (Optional)
     --
     , _scope      :: TF.Attr s [TF.Attr s P.Text]
@@ -128,7 +128,7 @@ instance TF.IsValid (DowntimeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_recurrence"
                   (_recurrence
-                      :: DowntimeResource s -> TF.Attr s (Recurrence s))
+                      :: DowntimeResource s -> TF.Attr s (DowntimeRecurrence s))
                   TF.validator
 
 instance P.HasActive (DowntimeResource s) (TF.Attr s P.Bool) where
@@ -156,9 +156,9 @@ instance P.HasMonitorId (DowntimeResource s) (TF.Attr s P.Integer) where
         P.lens (_monitorId :: DowntimeResource s -> TF.Attr s P.Integer)
                (\s a -> s { _monitorId = a } :: DowntimeResource s)
 
-instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (Recurrence s)) where
+instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (DowntimeRecurrence s)) where
     recurrence =
-        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (Recurrence s))
+        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (DowntimeRecurrence s))
                (\s a -> s { _recurrence = a } :: DowntimeResource s)
 
 instance P.HasScope (DowntimeResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -173,7 +173,7 @@ instance P.HasStart (DowntimeResource s) (TF.Attr s P.Integer) where
 
 -- | @datadog_metric_metadata@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Datadog/datadog_metric_metadata terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/datadog/r/metric_metadata.html terraform documentation>
 -- for more information.
 data MetricMetadataResource s = MetricMetadataResource'
     { _description    :: TF.Attr s P.Text
@@ -265,7 +265,7 @@ instance P.HasUnit (MetricMetadataResource s) (TF.Attr s P.Text) where
 
 -- | @datadog_monitor@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Datadog/datadog_monitor terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/datadog/r/monitor.html terraform documentation>
 -- for more information.
 data MonitorResource s = MonitorResource'
     { _escalationMessage :: TF.Attr s P.Text
@@ -307,7 +307,7 @@ data MonitorResource s = MonitorResource'
     , _tags              :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _thresholds        :: TF.Attr s (P.HashMap P.Text (Thresholds s))
+    , _thresholds        :: TF.Attr s (P.HashMap P.Text (MonitorThresholds s))
     -- ^ @thresholds@ - (Optional)
     --
     , _timeoutH          :: TF.Attr s P.Integer
@@ -369,7 +369,7 @@ instance TF.IsValid (MonitorResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_thresholds"
                   (_thresholds
-                      :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (Thresholds s)))
+                      :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (MonitorThresholds s)))
                   TF.validator
 
 instance P.HasEscalationMessage (MonitorResource s) (TF.Attr s P.Text) where
@@ -437,9 +437,9 @@ instance P.HasTags (MonitorResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: MonitorResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: MonitorResource s)
 
-instance P.HasThresholds (MonitorResource s) (TF.Attr s (P.HashMap P.Text (Thresholds s))) where
+instance P.HasThresholds (MonitorResource s) (TF.Attr s (P.HashMap P.Text (MonitorThresholds s))) where
     thresholds =
-        P.lens (_thresholds :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (Thresholds s)))
+        P.lens (_thresholds :: MonitorResource s -> TF.Attr s (P.HashMap P.Text (MonitorThresholds s)))
                (\s a -> s { _thresholds = a } :: MonitorResource s)
 
 instance P.HasTimeoutH (MonitorResource s) (TF.Attr s P.Integer) where
@@ -453,28 +453,28 @@ instance P.HasType' (MonitorResource s) (TF.Attr s P.Text) where
                (\s a -> s { _type' = a } :: MonitorResource s)
 
 instance s ~ s' => P.HasComputedEvaluationDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Integer) where
-    computedEvaluationDelay x = TF.compute (TF.refKey x) "_computedEvaluationDelay"
+    computedEvaluationDelay x = TF.compute (TF.refKey x) "evaluation_delay"
 
 instance s ~ s' => P.HasComputedNewHostDelay (TF.Ref s' (MonitorResource s)) (TF.Attr s P.Integer) where
-    computedNewHostDelay x = TF.compute (TF.refKey x) "_computedNewHostDelay"
+    computedNewHostDelay x = TF.compute (TF.refKey x) "new_host_delay"
 
 -- | @datadog_timeboard@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Datadog/datadog_timeboard terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/datadog/r/timeboard.html terraform documentation>
 -- for more information.
 data TimeboardResource s = TimeboardResource'
     { _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Required)
     -- A description of the dashboard's content.
     --
-    , _graph            :: TF.Attr s [TF.Attr s (Graph s)]
+    , _graph            :: TF.Attr s [TF.Attr s (TimeboardGraph s)]
     -- ^ @graph@ - (Required)
     -- A list of graph definitions.
     --
     , _readOnly         :: TF.Attr s P.Bool
     -- ^ @read_only@ - (Optional)
     --
-    , _templateVariable :: TF.Attr s [TF.Attr s (TemplateVariable s)]
+    , _templateVariable :: TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)]
     -- ^ @template_variable@ - (Optional)
     -- A list of template variables for using Dashboard templating.
     --
@@ -486,7 +486,7 @@ data TimeboardResource s = TimeboardResource'
 
 timeboardResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s [TF.Attr s (Graph s)] -- ^ @graph@ - 'P.graph'
+    -> TF.Attr s [TF.Attr s (TimeboardGraph s)] -- ^ @graph@ - 'P.graph'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> TF.Resource P.Provider (TimeboardResource s)
 timeboardResource _description _graph _title =
@@ -512,11 +512,11 @@ instance TF.IsValid (TimeboardResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_graph"
                   (_graph
-                      :: TimeboardResource s -> TF.Attr s [TF.Attr s (Graph s)])
+                      :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardGraph s)])
                   TF.validator
            P.<> TF.settingsValidator "_templateVariable"
                   (_templateVariable
-                      :: TimeboardResource s -> TF.Attr s [TF.Attr s (TemplateVariable s)])
+                      :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)])
                   TF.validator
 
 instance P.HasDescription (TimeboardResource s) (TF.Attr s P.Text) where
@@ -524,9 +524,9 @@ instance P.HasDescription (TimeboardResource s) (TF.Attr s P.Text) where
         P.lens (_description :: TimeboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TimeboardResource s)
 
-instance P.HasGraph (TimeboardResource s) (TF.Attr s [TF.Attr s (Graph s)]) where
+instance P.HasGraph (TimeboardResource s) (TF.Attr s [TF.Attr s (TimeboardGraph s)]) where
     graph =
-        P.lens (_graph :: TimeboardResource s -> TF.Attr s [TF.Attr s (Graph s)])
+        P.lens (_graph :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardGraph s)])
                (\s a -> s { _graph = a } :: TimeboardResource s)
 
 instance P.HasReadOnly (TimeboardResource s) (TF.Attr s P.Bool) where
@@ -534,9 +534,9 @@ instance P.HasReadOnly (TimeboardResource s) (TF.Attr s P.Bool) where
         P.lens (_readOnly :: TimeboardResource s -> TF.Attr s P.Bool)
                (\s a -> s { _readOnly = a } :: TimeboardResource s)
 
-instance P.HasTemplateVariable (TimeboardResource s) (TF.Attr s [TF.Attr s (TemplateVariable s)]) where
+instance P.HasTemplateVariable (TimeboardResource s) (TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)]) where
     templateVariable =
-        P.lens (_templateVariable :: TimeboardResource s -> TF.Attr s [TF.Attr s (TemplateVariable s)])
+        P.lens (_templateVariable :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardTemplateVariable s)])
                (\s a -> s { _templateVariable = a } :: TimeboardResource s)
 
 instance P.HasTitle (TimeboardResource s) (TF.Attr s P.Text) where
@@ -546,7 +546,7 @@ instance P.HasTitle (TimeboardResource s) (TF.Attr s P.Text) where
 
 -- | @datadog_user@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Datadog/datadog_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/datadog/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
     { _disabled :: TF.Attr s P.Bool
@@ -619,4 +619,4 @@ instance P.HasName (UserResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: UserResource s)
 
 instance s ~ s' => P.HasComputedVerified (TF.Ref s' (UserResource s)) (TF.Attr s P.Bool) where
-    computedVerified x = TF.compute (TF.refKey x) "_computedVerified"
+    computedVerified x = TF.compute (TF.refKey x) "verified"
