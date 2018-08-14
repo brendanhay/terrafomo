@@ -14,6 +14,7 @@ CONFIGS     := .stack.yaml .travis.yml
 default: $(PROVIDERS)
 	@script/generate
 	@$(MAKE) format
+	@stack build --fast
 
 .PHONY: $(GENERATE)
 
