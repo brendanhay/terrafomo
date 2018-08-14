@@ -37,7 +37,6 @@ module Terrafomo.Random.Lens
 
     -- ** Computed Attributes
     , HasComputedDec (..)
-    , HasComputedB64 (..)
     , HasComputedResult (..)
     , HasComputedB64Std (..)
     , HasComputedHex (..)
@@ -165,9 +164,6 @@ instance HasPrefix a b => HasPrefix (TF.Schema l p a) b where
 
 class HasComputedDec a b | a -> b where
     computedDec :: a -> b
-
-class HasComputedB64 a b | a -> b where
-    computedB64 :: a -> b
 
 class HasComputedResult a b | a -> b where
     computedResult :: a -> b

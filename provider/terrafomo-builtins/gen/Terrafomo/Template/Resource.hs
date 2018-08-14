@@ -177,20 +177,10 @@ instance P.HasVars (DirResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Tex
 -- See the <https://www.terraform.io/docs/providers/Template/template_file terraform documentation>
 -- for more information.
 data FileResource s = FileResource'
-    { _filename :: TF.Attr s P.Text
-    -- ^ @filename@ - (Optional)
-    -- File to read template from
-    --
-    -- Conflicts with:
-    --
-    -- * 'template'
-    , _template :: TF.Attr s P.Text
+    { _template :: TF.Attr s P.Text
     -- ^ @template@ - (Optional)
     -- Contents of the template
     --
-    -- Conflicts with:
-    --
-    -- * 'filename'
     , _vars     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     -- ^ @vars@ - (Optional)
     -- Variables to substitute
@@ -202,36 +192,18 @@ fileResource
 fileResource =
     TF.newResource "template_file" TF.validator $
         FileResource'
-            { _filename = TF.Nil
-            , _template = TF.Nil
+            { _template = TF.Nil
             , _vars = TF.Nil
             }
 
 instance TF.IsObject (FileResource s) where
     toObject FileResource'{..} = P.catMaybes
-        [ TF.assign "filename" <$> TF.attribute _filename
-        , TF.assign "template" <$> TF.attribute _template
+        [ TF.assign "template" <$> TF.attribute _template
         , TF.assign "vars" <$> TF.attribute _vars
         ]
 
 instance TF.IsValid (FileResource s) where
-    validator = TF.fieldsValidator (\FileResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_filename P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_filename",
-                            [ "_template"
-                            ])
-        , if (_template P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_template",
-                            [ "_filename"
-                            ])
-        ])
-
-instance P.HasFilename (FileResource s) (TF.Attr s P.Text) where
-    filename =
-        P.lens (_filename :: FileResource s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: FileResource s)
+    validator = P.mempty
 
 instance P.HasTemplate (FileResource s) (TF.Attr s P.Text) where
     template =

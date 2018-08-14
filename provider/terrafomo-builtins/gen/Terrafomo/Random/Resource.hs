@@ -121,9 +121,6 @@ instance P.HasPrefix (IdResource s) (TF.Attr s P.Text) where
         P.lens (_prefix :: IdResource s -> TF.Attr s P.Text)
                (\s a -> s { _prefix = a } :: IdResource s)
 
-instance s ~ s' => P.HasComputedB64 (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
-    computedB64 x = TF.compute (TF.refKey x) "_computedB64"
-
 instance s ~ s' => P.HasComputedB64Std (TF.Ref s' (IdResource s)) (TF.Attr s P.Text) where
     computedB64Std x = TF.compute (TF.refKey x) "_computedB64Std"
 
