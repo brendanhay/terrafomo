@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator        as TF
 
 -- | The @Cloudflare@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Cloudflare/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/cloudflare/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _apiClientLogging :: P.Maybe P.Bool

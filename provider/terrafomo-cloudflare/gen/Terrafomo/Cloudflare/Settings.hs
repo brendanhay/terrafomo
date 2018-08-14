@@ -18,73 +18,89 @@
 module Terrafomo.Cloudflare.Settings
     (
     -- * Settings Datatypes
-    -- ** pop_pools
-      PopPools (..)
-    , newPopPools
+    -- ** settings_security_header
+      SettingsSecurityHeader (..)
+    , newSettingsSecurityHeader
 
-    -- ** actions
-    , Actions (..)
-    , newActions
+    -- ** rate_limit_correlate
+    , RateLimitCorrelate (..)
+    , newRateLimitCorrelate
 
-    -- ** settings
-    , Settings (..)
-    , newSettings
+    -- ** action_response
+    , ActionResponse (..)
+    , newActionResponse
 
-    -- ** correlate
-    , Correlate (..)
-    , newCorrelate
+    -- ** zone_settings_override_settings
+    , ZoneSettingsOverrideSettings (..)
+    , newZoneSettingsOverrideSettings
 
-    -- ** data
-    , Data' (..)
-    , newData'
+    -- ** load_balancer_pop_pools
+    , LoadBalancerPopPools (..)
+    , newLoadBalancerPopPools
 
-    -- ** response
-    , Response (..)
-    , newResponse
+    -- ** match_request
+    , MatchRequest (..)
+    , newMatchRequest
 
-    -- ** action
-    , Action (..)
-    , newAction
+    -- ** load_balancer_monitor_header
+    , LoadBalancerMonitorHeader (..)
+    , newLoadBalancerMonitorHeader
 
-    -- ** minify
-    , Minify (..)
-    , newMinify
+    -- ** settings_minify
+    , SettingsMinify (..)
+    , newSettingsMinify
 
-    -- ** initial_settings
-    , InitialSettings (..)
-    , newInitialSettings
+    -- ** rate_limit_action
+    , RateLimitAction (..)
+    , newRateLimitAction
 
-    -- ** origins
-    , Origins (..)
-    , newOrigins
+    -- ** zone_settings_override_initial_settings
+    , ZoneSettingsOverrideInitialSettings (..)
+    , newZoneSettingsOverrideInitialSettings
 
-    -- ** header
-    , Header (..)
-    , newHeader
+    -- ** rate_limit_match
+    , RateLimitMatch (..)
+    , newRateLimitMatch
 
-    -- ** forwarding_url
-    , ForwardingUrl (..)
-    , newForwardingUrl
+    -- ** match_response
+    , MatchResponse (..)
+    , newMatchResponse
 
-    -- ** mobile_redirect
-    , MobileRedirect (..)
-    , newMobileRedirect
+    -- ** initial_settings_minify
+    , InitialSettingsMinify (..)
+    , newInitialSettingsMinify
 
-    -- ** region_pools
-    , RegionPools (..)
-    , newRegionPools
+    -- ** settings_mobile_redirect
+    , SettingsMobileRedirect (..)
+    , newSettingsMobileRedirect
 
-    -- ** match
-    , Match (..)
-    , newMatch
+    -- ** record_data
+    , RecordData (..)
+    , newRecordData
 
-    -- ** security_header
-    , SecurityHeader (..)
-    , newSecurityHeader
+    -- ** load_balancer_region_pools
+    , LoadBalancerRegionPools (..)
+    , newLoadBalancerRegionPools
 
-    -- ** request
-    , Request (..)
-    , newRequest
+    -- ** initial_settings_security_header
+    , InitialSettingsSecurityHeader (..)
+    , newInitialSettingsSecurityHeader
+
+    -- ** actions_forwarding_url
+    , ActionsForwardingUrl (..)
+    , newActionsForwardingUrl
+
+    -- ** page_rule_actions
+    , PageRuleActions (..)
+    , newPageRuleActions
+
+    -- ** load_balancer_pool_origins
+    , LoadBalancerPoolOrigins (..)
+    , newLoadBalancerPoolOrigins
+
+    -- ** initial_settings_mobile_redirect
+    , InitialSettingsMobileRedirect (..)
+    , newInitialSettingsMobileRedirect
 
     ) where
 
@@ -109,8 +125,256 @@ import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Name             as TF
 import qualified Terrafomo.Validator        as TF
 
--- | @pop_pools@ nested settings.
-data PopPools s = PopPools'
+-- | @settings_security_header@ nested settings.
+data SettingsSecurityHeader s = SettingsSecurityHeader'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newSettingsSecurityHeader
+    :: SettingsSecurityHeader s
+newSettingsSecurityHeader =
+    SettingsSecurityHeader'
+
+instance P.Hashable  (SettingsSecurityHeader s)
+instance TF.IsValue  (SettingsSecurityHeader s)
+instance TF.IsObject (SettingsSecurityHeader s) where
+    toObject SettingsSecurityHeader' = []
+
+instance TF.IsValid (SettingsSecurityHeader s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedIncludeSubdomains (TF.Ref s' (SettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedIncludeSubdomains x = TF.compute (TF.refKey x) "include_subdomains"
+
+instance s ~ s' => P.HasComputedMaxAge (TF.Ref s' (SettingsSecurityHeader s)) (TF.Attr s P.Integer) where
+    computedMaxAge x = TF.compute (TF.refKey x) "max_age"
+
+instance s ~ s' => P.HasComputedNosniff (TF.Ref s' (SettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedNosniff x = TF.compute (TF.refKey x) "nosniff"
+
+instance s ~ s' => P.HasComputedPreload (TF.Ref s' (SettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedPreload x = TF.compute (TF.refKey x) "preload"
+
+-- | @rate_limit_correlate@ nested settings.
+data RateLimitCorrelate s = RateLimitCorrelate'
+    { _by :: TF.Attr s P.Text
+    -- ^ @by@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newRateLimitCorrelate
+    :: RateLimitCorrelate s
+newRateLimitCorrelate =
+    RateLimitCorrelate'
+        { _by = TF.Nil
+        }
+
+instance P.Hashable  (RateLimitCorrelate s)
+instance TF.IsValue  (RateLimitCorrelate s)
+instance TF.IsObject (RateLimitCorrelate s) where
+    toObject RateLimitCorrelate'{..} = P.catMaybes
+        [ TF.assign "by" <$> TF.attribute _by
+        ]
+
+instance TF.IsValid (RateLimitCorrelate s) where
+    validator = P.mempty
+
+instance P.HasBy (RateLimitCorrelate s) (TF.Attr s P.Text) where
+    by =
+        P.lens (_by :: RateLimitCorrelate s -> TF.Attr s P.Text)
+               (\s a -> s { _by = a } :: RateLimitCorrelate s)
+
+-- | @action_response@ nested settings.
+data ActionResponse s = ActionResponse'
+    { _body        :: TF.Attr s P.Text
+    -- ^ @body@ - (Required)
+    --
+    , _contentType :: TF.Attr s P.Text
+    -- ^ @content_type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newActionResponse
+    :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
+    -> TF.Attr s P.Text -- ^ @content_type@ - 'P.contentType'
+    -> ActionResponse s
+newActionResponse _body _contentType =
+    ActionResponse'
+        { _body = _body
+        , _contentType = _contentType
+        }
+
+instance P.Hashable  (ActionResponse s)
+instance TF.IsValue  (ActionResponse s)
+instance TF.IsObject (ActionResponse s) where
+    toObject ActionResponse'{..} = P.catMaybes
+        [ TF.assign "body" <$> TF.attribute _body
+        , TF.assign "content_type" <$> TF.attribute _contentType
+        ]
+
+instance TF.IsValid (ActionResponse s) where
+    validator = P.mempty
+
+instance P.HasBody (ActionResponse s) (TF.Attr s P.Text) where
+    body =
+        P.lens (_body :: ActionResponse s -> TF.Attr s P.Text)
+               (\s a -> s { _body = a } :: ActionResponse s)
+
+instance P.HasContentType (ActionResponse s) (TF.Attr s P.Text) where
+    contentType =
+        P.lens (_contentType :: ActionResponse s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: ActionResponse s)
+
+-- | @zone_settings_override_settings@ nested settings.
+data ZoneSettingsOverrideSettings s = ZoneSettingsOverrideSettings'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newZoneSettingsOverrideSettings
+    :: ZoneSettingsOverrideSettings s
+newZoneSettingsOverrideSettings =
+    ZoneSettingsOverrideSettings'
+
+instance P.Hashable  (ZoneSettingsOverrideSettings s)
+instance TF.IsValue  (ZoneSettingsOverrideSettings s)
+instance TF.IsObject (ZoneSettingsOverrideSettings s) where
+    toObject ZoneSettingsOverrideSettings' = []
+
+instance TF.IsValid (ZoneSettingsOverrideSettings s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedAdvancedDdos x = TF.compute (TF.refKey x) "advanced_ddos"
+
+instance s ~ s' => P.HasComputedAlwaysOnline (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedAlwaysOnline x = TF.compute (TF.refKey x) "always_online"
+
+instance s ~ s' => P.HasComputedAlwaysUseHttps (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "always_use_https"
+
+instance s ~ s' => P.HasComputedAutomaticHttpsRewrites (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "automatic_https_rewrites"
+
+instance s ~ s' => P.HasComputedBrotli (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedBrotli x = TF.compute (TF.refKey x) "brotli"
+
+instance s ~ s' => P.HasComputedBrowserCacheTtl (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Integer) where
+    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "browser_cache_ttl"
+
+instance s ~ s' => P.HasComputedBrowserCheck (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedBrowserCheck x = TF.compute (TF.refKey x) "browser_check"
+
+instance s ~ s' => P.HasComputedCacheLevel (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedCacheLevel x = TF.compute (TF.refKey x) "cache_level"
+
+instance s ~ s' => P.HasComputedChallengeTtl (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Integer) where
+    computedChallengeTtl x = TF.compute (TF.refKey x) "challenge_ttl"
+
+instance s ~ s' => P.HasComputedCnameFlattening (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedCnameFlattening x = TF.compute (TF.refKey x) "cname_flattening"
+
+instance s ~ s' => P.HasComputedDevelopmentMode (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedDevelopmentMode x = TF.compute (TF.refKey x) "development_mode"
+
+instance s ~ s' => P.HasComputedEdgeCacheTtl (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Integer) where
+    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "edge_cache_ttl"
+
+instance s ~ s' => P.HasComputedEmailObfuscation (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedEmailObfuscation x = TF.compute (TF.refKey x) "email_obfuscation"
+
+instance s ~ s' => P.HasComputedHotlinkProtection (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedHotlinkProtection x = TF.compute (TF.refKey x) "hotlink_protection"
+
+instance s ~ s' => P.HasComputedHttp2 (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedHttp2 x = TF.compute (TF.refKey x) "http2"
+
+instance s ~ s' => P.HasComputedIpGeolocation (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedIpGeolocation x = TF.compute (TF.refKey x) "ip_geolocation"
+
+instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
+
+instance s ~ s' => P.HasComputedMaxUpload (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Integer) where
+    computedMaxUpload x = TF.compute (TF.refKey x) "max_upload"
+
+instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedMinTlsVersion x = TF.compute (TF.refKey x) "min_tls_version"
+
+instance s ~ s' => P.HasComputedMinify (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s (SettingsMinify s)) where
+    computedMinify x = TF.compute (TF.refKey x) "minify"
+
+instance s ~ s' => P.HasComputedMirage (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedMirage x = TF.compute (TF.refKey x) "mirage"
+
+instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s (SettingsMobileRedirect s)) where
+    computedMobileRedirect x = TF.compute (TF.refKey x) "mobile_redirect"
+
+instance s ~ s' => P.HasComputedOpportunisticEncryption (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "opportunistic_encryption"
+
+instance s ~ s' => P.HasComputedOriginErrorPagePassThru (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "origin_error_page_pass_thru"
+
+instance s ~ s' => P.HasComputedPolish (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedPolish x = TF.compute (TF.refKey x) "polish"
+
+instance s ~ s' => P.HasComputedPrefetchPreload (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedPrefetchPreload x = TF.compute (TF.refKey x) "prefetch_preload"
+
+instance s ~ s' => P.HasComputedPrivacyPass (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedPrivacyPass x = TF.compute (TF.refKey x) "privacy_pass"
+
+instance s ~ s' => P.HasComputedPseudoIpv4 (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedPseudoIpv4 x = TF.compute (TF.refKey x) "pseudo_ipv4"
+
+instance s ~ s' => P.HasComputedResponseBuffering (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedResponseBuffering x = TF.compute (TF.refKey x) "response_buffering"
+
+instance s ~ s' => P.HasComputedRocketLoader (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedRocketLoader x = TF.compute (TF.refKey x) "rocket_loader"
+
+instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s (SettingsSecurityHeader s)) where
+    computedSecurityHeader x = TF.compute (TF.refKey x) "security_header"
+
+instance s ~ s' => P.HasComputedSecurityLevel (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedSecurityLevel x = TF.compute (TF.refKey x) "security_level"
+
+instance s ~ s' => P.HasComputedServerSideExclude (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedServerSideExclude x = TF.compute (TF.refKey x) "server_side_exclude"
+
+instance s ~ s' => P.HasComputedSha1Support (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedSha1Support x = TF.compute (TF.refKey x) "sha1_support"
+
+instance s ~ s' => P.HasComputedSortQueryStringForCache (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "sort_query_string_for_cache"
+
+instance s ~ s' => P.HasComputedSsl (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedSsl x = TF.compute (TF.refKey x) "ssl"
+
+instance s ~ s' => P.HasComputedTls12Only (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedTls12Only x = TF.compute (TF.refKey x) "tls_1_2_only"
+
+instance s ~ s' => P.HasComputedTls13 (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedTls13 x = TF.compute (TF.refKey x) "tls_1_3"
+
+instance s ~ s' => P.HasComputedTlsClientAuth (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedTlsClientAuth x = TF.compute (TF.refKey x) "tls_client_auth"
+
+instance s ~ s' => P.HasComputedTrueClientIpHeader (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "true_client_ip_header"
+
+instance s ~ s' => P.HasComputedWaf (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedWaf x = TF.compute (TF.refKey x) "waf"
+
+instance s ~ s' => P.HasComputedWebp (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedWebp x = TF.compute (TF.refKey x) "webp"
+
+instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (ZoneSettingsOverrideSettings s)) (TF.Attr s P.Text) where
+    computedWebsockets x = TF.compute (TF.refKey x) "websockets"
+
+-- | @load_balancer_pop_pools@ nested settings.
+data LoadBalancerPopPools s = LoadBalancerPopPools'
     { _poolIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @pool_ids@ - (Required)
     --
@@ -119,577 +383,509 @@ data PopPools s = PopPools'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newPopPools
+newLoadBalancerPopPools
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
     -> TF.Attr s P.Text -- ^ @pop@ - 'P.pop'
-    -> PopPools s
-newPopPools _poolIds _pop =
-    PopPools'
+    -> LoadBalancerPopPools s
+newLoadBalancerPopPools _poolIds _pop =
+    LoadBalancerPopPools'
         { _poolIds = _poolIds
         , _pop = _pop
         }
 
-instance P.Hashable  (PopPools s)
-instance TF.IsValue  (PopPools s)
-instance TF.IsObject (PopPools s) where
-    toObject PopPools'{..} = P.catMaybes
+instance P.Hashable  (LoadBalancerPopPools s)
+instance TF.IsValue  (LoadBalancerPopPools s)
+instance TF.IsObject (LoadBalancerPopPools s) where
+    toObject LoadBalancerPopPools'{..} = P.catMaybes
         [ TF.assign "pool_ids" <$> TF.attribute _poolIds
         , TF.assign "pop" <$> TF.attribute _pop
         ]
 
-instance TF.IsValid (PopPools s) where
+instance TF.IsValid (LoadBalancerPopPools s) where
     validator = P.mempty
 
-instance P.HasPoolIds (PopPools s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasPoolIds (LoadBalancerPopPools s) (TF.Attr s [TF.Attr s P.Text]) where
     poolIds =
-        P.lens (_poolIds :: PopPools s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _poolIds = a } :: PopPools s)
+        P.lens (_poolIds :: LoadBalancerPopPools s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _poolIds = a } :: LoadBalancerPopPools s)
 
-instance P.HasPop (PopPools s) (TF.Attr s P.Text) where
+instance P.HasPop (LoadBalancerPopPools s) (TF.Attr s P.Text) where
     pop =
-        P.lens (_pop :: PopPools s -> TF.Attr s P.Text)
-               (\s a -> s { _pop = a } :: PopPools s)
+        P.lens (_pop :: LoadBalancerPopPools s -> TF.Attr s P.Text)
+               (\s a -> s { _pop = a } :: LoadBalancerPopPools s)
 
--- | @actions@ nested settings.
-data Actions s = Actions'
-    { _alwaysOnline            :: TF.Attr s P.Text
-    -- ^ @always_online@ - (Optional)
-    --
-    , _alwaysUseHttps          :: TF.Attr s P.Bool
-    -- ^ @always_use_https@ - (Optional)
-    --
-    , _automaticHttpsRewrites  :: TF.Attr s P.Text
-    -- ^ @automatic_https_rewrites@ - (Optional)
-    --
-    , _browserCacheTtl         :: TF.Attr s P.Integer
-    -- ^ @browser_cache_ttl@ - (Optional)
-    --
-    , _browserCheck            :: TF.Attr s P.Text
-    -- ^ @browser_check@ - (Optional)
-    --
-    , _bypassCacheOnCookie     :: TF.Attr s P.Text
-    -- ^ @bypass_cache_on_cookie@ - (Optional)
-    --
-    , _cacheByDeviceType       :: TF.Attr s P.Text
-    -- ^ @cache_by_device_type@ - (Optional)
-    --
-    , _cacheDeceptionArmor     :: TF.Attr s P.Text
-    -- ^ @cache_deception_armor@ - (Optional)
-    --
-    , _cacheLevel              :: TF.Attr s P.Text
-    -- ^ @cache_level@ - (Optional)
-    --
-    , _cacheOnCookie           :: TF.Attr s P.Text
-    -- ^ @cache_on_cookie@ - (Optional)
-    --
-    , _disableApps             :: TF.Attr s P.Bool
-    -- ^ @disable_apps@ - (Optional)
-    --
-    , _disablePerformance      :: TF.Attr s P.Bool
-    -- ^ @disable_performance@ - (Optional)
-    --
-    , _disableRailgun          :: TF.Attr s P.Bool
-    -- ^ @disable_railgun@ - (Optional)
-    --
-    , _disableSecurity         :: TF.Attr s P.Bool
-    -- ^ @disable_security@ - (Optional)
-    --
-    , _edgeCacheTtl            :: TF.Attr s P.Integer
-    -- ^ @edge_cache_ttl@ - (Optional)
-    --
-    , _emailObfuscation        :: TF.Attr s P.Text
-    -- ^ @email_obfuscation@ - (Optional)
-    --
-    , _explicitCacheControl    :: TF.Attr s P.Text
-    -- ^ @explicit_cache_control@ - (Optional)
-    --
-    , _forwardingUrl           :: TF.Attr s (ForwardingUrl s)
-    -- ^ @forwarding_url@ - (Optional)
-    --
-    , _hostHeaderOverride      :: TF.Attr s P.Text
-    -- ^ @host_header_override@ - (Optional)
-    --
-    , _ipGeolocation           :: TF.Attr s P.Text
-    -- ^ @ip_geolocation@ - (Optional)
-    --
-    , _mirage                  :: TF.Attr s P.Text
-    -- ^ @mirage@ - (Optional)
-    --
-    , _opportunisticEncryption :: TF.Attr s P.Text
-    -- ^ @opportunistic_encryption@ - (Optional)
-    --
-    , _originErrorPagePassThru :: TF.Attr s P.Text
-    -- ^ @origin_error_page_pass_thru@ - (Optional)
-    --
-    , _polish                  :: TF.Attr s P.Text
-    -- ^ @polish@ - (Optional)
-    --
-    , _resolveOverride         :: TF.Attr s P.Text
-    -- ^ @resolve_override@ - (Optional)
-    --
-    , _respectStrongEtag       :: TF.Attr s P.Text
-    -- ^ @respect_strong_etag@ - (Optional)
-    --
-    , _responseBuffering       :: TF.Attr s P.Text
-    -- ^ @response_buffering@ - (Optional)
-    --
-    , _rocketLoader            :: TF.Attr s P.Text
-    -- ^ @rocket_loader@ - (Optional)
-    --
-    , _securityLevel           :: TF.Attr s P.Text
-    -- ^ @security_level@ - (Optional)
-    --
-    , _serverSideExclude       :: TF.Attr s P.Text
-    -- ^ @server_side_exclude@ - (Optional)
-    --
-    , _sortQueryStringForCache :: TF.Attr s P.Text
-    -- ^ @sort_query_string_for_cache@ - (Optional)
-    --
-    , _ssl                     :: TF.Attr s P.Text
-    -- ^ @ssl@ - (Optional)
-    --
-    , _trueClientIpHeader      :: TF.Attr s P.Text
-    -- ^ @true_client_ip_header@ - (Optional)
-    --
-    , _waf                     :: TF.Attr s P.Text
-    -- ^ @waf@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newActions
-    :: Actions s
-newActions =
-    Actions'
-        { _alwaysOnline = TF.Nil
-        , _alwaysUseHttps = TF.value P.False
-        , _automaticHttpsRewrites = TF.Nil
-        , _browserCacheTtl = TF.Nil
-        , _browserCheck = TF.Nil
-        , _bypassCacheOnCookie = TF.Nil
-        , _cacheByDeviceType = TF.Nil
-        , _cacheDeceptionArmor = TF.Nil
-        , _cacheLevel = TF.Nil
-        , _cacheOnCookie = TF.Nil
-        , _disableApps = TF.value P.False
-        , _disablePerformance = TF.value P.False
-        , _disableRailgun = TF.value P.False
-        , _disableSecurity = TF.value P.False
-        , _edgeCacheTtl = TF.Nil
-        , _emailObfuscation = TF.Nil
-        , _explicitCacheControl = TF.Nil
-        , _forwardingUrl = TF.Nil
-        , _hostHeaderOverride = TF.Nil
-        , _ipGeolocation = TF.Nil
-        , _mirage = TF.Nil
-        , _opportunisticEncryption = TF.Nil
-        , _originErrorPagePassThru = TF.Nil
-        , _polish = TF.Nil
-        , _resolveOverride = TF.Nil
-        , _respectStrongEtag = TF.Nil
-        , _responseBuffering = TF.Nil
-        , _rocketLoader = TF.Nil
-        , _securityLevel = TF.Nil
-        , _serverSideExclude = TF.Nil
-        , _sortQueryStringForCache = TF.Nil
-        , _ssl = TF.Nil
-        , _trueClientIpHeader = TF.Nil
-        , _waf = TF.Nil
-        }
-
-instance P.Hashable  (Actions s)
-instance TF.IsValue  (Actions s)
-instance TF.IsObject (Actions s) where
-    toObject Actions'{..} = P.catMaybes
-        [ TF.assign "always_online" <$> TF.attribute _alwaysOnline
-        , TF.assign "always_use_https" <$> TF.attribute _alwaysUseHttps
-        , TF.assign "automatic_https_rewrites" <$> TF.attribute _automaticHttpsRewrites
-        , TF.assign "browser_cache_ttl" <$> TF.attribute _browserCacheTtl
-        , TF.assign "browser_check" <$> TF.attribute _browserCheck
-        , TF.assign "bypass_cache_on_cookie" <$> TF.attribute _bypassCacheOnCookie
-        , TF.assign "cache_by_device_type" <$> TF.attribute _cacheByDeviceType
-        , TF.assign "cache_deception_armor" <$> TF.attribute _cacheDeceptionArmor
-        , TF.assign "cache_level" <$> TF.attribute _cacheLevel
-        , TF.assign "cache_on_cookie" <$> TF.attribute _cacheOnCookie
-        , TF.assign "disable_apps" <$> TF.attribute _disableApps
-        , TF.assign "disable_performance" <$> TF.attribute _disablePerformance
-        , TF.assign "disable_railgun" <$> TF.attribute _disableRailgun
-        , TF.assign "disable_security" <$> TF.attribute _disableSecurity
-        , TF.assign "edge_cache_ttl" <$> TF.attribute _edgeCacheTtl
-        , TF.assign "email_obfuscation" <$> TF.attribute _emailObfuscation
-        , TF.assign "explicit_cache_control" <$> TF.attribute _explicitCacheControl
-        , TF.assign "forwarding_url" <$> TF.attribute _forwardingUrl
-        , TF.assign "host_header_override" <$> TF.attribute _hostHeaderOverride
-        , TF.assign "ip_geolocation" <$> TF.attribute _ipGeolocation
-        , TF.assign "mirage" <$> TF.attribute _mirage
-        , TF.assign "opportunistic_encryption" <$> TF.attribute _opportunisticEncryption
-        , TF.assign "origin_error_page_pass_thru" <$> TF.attribute _originErrorPagePassThru
-        , TF.assign "polish" <$> TF.attribute _polish
-        , TF.assign "resolve_override" <$> TF.attribute _resolveOverride
-        , TF.assign "respect_strong_etag" <$> TF.attribute _respectStrongEtag
-        , TF.assign "response_buffering" <$> TF.attribute _responseBuffering
-        , TF.assign "rocket_loader" <$> TF.attribute _rocketLoader
-        , TF.assign "security_level" <$> TF.attribute _securityLevel
-        , TF.assign "server_side_exclude" <$> TF.attribute _serverSideExclude
-        , TF.assign "sort_query_string_for_cache" <$> TF.attribute _sortQueryStringForCache
-        , TF.assign "ssl" <$> TF.attribute _ssl
-        , TF.assign "true_client_ip_header" <$> TF.attribute _trueClientIpHeader
-        , TF.assign "waf" <$> TF.attribute _waf
-        ]
-
-instance TF.IsValid (Actions s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_forwardingUrl"
-                  (_forwardingUrl
-                      :: Actions s -> TF.Attr s (ForwardingUrl s))
-                  TF.validator
-
-instance P.HasAlwaysOnline (Actions s) (TF.Attr s P.Text) where
-    alwaysOnline =
-        P.lens (_alwaysOnline :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _alwaysOnline = a } :: Actions s)
-
-instance P.HasAlwaysUseHttps (Actions s) (TF.Attr s P.Bool) where
-    alwaysUseHttps =
-        P.lens (_alwaysUseHttps :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _alwaysUseHttps = a } :: Actions s)
-
-instance P.HasAutomaticHttpsRewrites (Actions s) (TF.Attr s P.Text) where
-    automaticHttpsRewrites =
-        P.lens (_automaticHttpsRewrites :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _automaticHttpsRewrites = a } :: Actions s)
-
-instance P.HasBrowserCacheTtl (Actions s) (TF.Attr s P.Integer) where
-    browserCacheTtl =
-        P.lens (_browserCacheTtl :: Actions s -> TF.Attr s P.Integer)
-               (\s a -> s { _browserCacheTtl = a } :: Actions s)
-
-instance P.HasBrowserCheck (Actions s) (TF.Attr s P.Text) where
-    browserCheck =
-        P.lens (_browserCheck :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _browserCheck = a } :: Actions s)
-
-instance P.HasBypassCacheOnCookie (Actions s) (TF.Attr s P.Text) where
-    bypassCacheOnCookie =
-        P.lens (_bypassCacheOnCookie :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _bypassCacheOnCookie = a } :: Actions s)
-
-instance P.HasCacheByDeviceType (Actions s) (TF.Attr s P.Text) where
-    cacheByDeviceType =
-        P.lens (_cacheByDeviceType :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheByDeviceType = a } :: Actions s)
-
-instance P.HasCacheDeceptionArmor (Actions s) (TF.Attr s P.Text) where
-    cacheDeceptionArmor =
-        P.lens (_cacheDeceptionArmor :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheDeceptionArmor = a } :: Actions s)
-
-instance P.HasCacheLevel (Actions s) (TF.Attr s P.Text) where
-    cacheLevel =
-        P.lens (_cacheLevel :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheLevel = a } :: Actions s)
-
-instance P.HasCacheOnCookie (Actions s) (TF.Attr s P.Text) where
-    cacheOnCookie =
-        P.lens (_cacheOnCookie :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _cacheOnCookie = a } :: Actions s)
-
-instance P.HasDisableApps (Actions s) (TF.Attr s P.Bool) where
-    disableApps =
-        P.lens (_disableApps :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableApps = a } :: Actions s)
-
-instance P.HasDisablePerformance (Actions s) (TF.Attr s P.Bool) where
-    disablePerformance =
-        P.lens (_disablePerformance :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disablePerformance = a } :: Actions s)
-
-instance P.HasDisableRailgun (Actions s) (TF.Attr s P.Bool) where
-    disableRailgun =
-        P.lens (_disableRailgun :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableRailgun = a } :: Actions s)
-
-instance P.HasDisableSecurity (Actions s) (TF.Attr s P.Bool) where
-    disableSecurity =
-        P.lens (_disableSecurity :: Actions s -> TF.Attr s P.Bool)
-               (\s a -> s { _disableSecurity = a } :: Actions s)
-
-instance P.HasEdgeCacheTtl (Actions s) (TF.Attr s P.Integer) where
-    edgeCacheTtl =
-        P.lens (_edgeCacheTtl :: Actions s -> TF.Attr s P.Integer)
-               (\s a -> s { _edgeCacheTtl = a } :: Actions s)
-
-instance P.HasEmailObfuscation (Actions s) (TF.Attr s P.Text) where
-    emailObfuscation =
-        P.lens (_emailObfuscation :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _emailObfuscation = a } :: Actions s)
-
-instance P.HasExplicitCacheControl (Actions s) (TF.Attr s P.Text) where
-    explicitCacheControl =
-        P.lens (_explicitCacheControl :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _explicitCacheControl = a } :: Actions s)
-
-instance P.HasForwardingUrl (Actions s) (TF.Attr s (ForwardingUrl s)) where
-    forwardingUrl =
-        P.lens (_forwardingUrl :: Actions s -> TF.Attr s (ForwardingUrl s))
-               (\s a -> s { _forwardingUrl = a } :: Actions s)
-
-instance P.HasHostHeaderOverride (Actions s) (TF.Attr s P.Text) where
-    hostHeaderOverride =
-        P.lens (_hostHeaderOverride :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _hostHeaderOverride = a } :: Actions s)
-
-instance P.HasIpGeolocation (Actions s) (TF.Attr s P.Text) where
-    ipGeolocation =
-        P.lens (_ipGeolocation :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _ipGeolocation = a } :: Actions s)
-
-instance P.HasMirage (Actions s) (TF.Attr s P.Text) where
-    mirage =
-        P.lens (_mirage :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _mirage = a } :: Actions s)
-
-instance P.HasOpportunisticEncryption (Actions s) (TF.Attr s P.Text) where
-    opportunisticEncryption =
-        P.lens (_opportunisticEncryption :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _opportunisticEncryption = a } :: Actions s)
-
-instance P.HasOriginErrorPagePassThru (Actions s) (TF.Attr s P.Text) where
-    originErrorPagePassThru =
-        P.lens (_originErrorPagePassThru :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _originErrorPagePassThru = a } :: Actions s)
-
-instance P.HasPolish (Actions s) (TF.Attr s P.Text) where
-    polish =
-        P.lens (_polish :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _polish = a } :: Actions s)
-
-instance P.HasResolveOverride (Actions s) (TF.Attr s P.Text) where
-    resolveOverride =
-        P.lens (_resolveOverride :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _resolveOverride = a } :: Actions s)
-
-instance P.HasRespectStrongEtag (Actions s) (TF.Attr s P.Text) where
-    respectStrongEtag =
-        P.lens (_respectStrongEtag :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _respectStrongEtag = a } :: Actions s)
-
-instance P.HasResponseBuffering (Actions s) (TF.Attr s P.Text) where
-    responseBuffering =
-        P.lens (_responseBuffering :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _responseBuffering = a } :: Actions s)
-
-instance P.HasRocketLoader (Actions s) (TF.Attr s P.Text) where
-    rocketLoader =
-        P.lens (_rocketLoader :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _rocketLoader = a } :: Actions s)
-
-instance P.HasSecurityLevel (Actions s) (TF.Attr s P.Text) where
-    securityLevel =
-        P.lens (_securityLevel :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _securityLevel = a } :: Actions s)
-
-instance P.HasServerSideExclude (Actions s) (TF.Attr s P.Text) where
-    serverSideExclude =
-        P.lens (_serverSideExclude :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _serverSideExclude = a } :: Actions s)
-
-instance P.HasSortQueryStringForCache (Actions s) (TF.Attr s P.Text) where
-    sortQueryStringForCache =
-        P.lens (_sortQueryStringForCache :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _sortQueryStringForCache = a } :: Actions s)
-
-instance P.HasSsl (Actions s) (TF.Attr s P.Text) where
-    ssl =
-        P.lens (_ssl :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _ssl = a } :: Actions s)
-
-instance P.HasTrueClientIpHeader (Actions s) (TF.Attr s P.Text) where
-    trueClientIpHeader =
-        P.lens (_trueClientIpHeader :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _trueClientIpHeader = a } :: Actions s)
-
-instance P.HasWaf (Actions s) (TF.Attr s P.Text) where
-    waf =
-        P.lens (_waf :: Actions s -> TF.Attr s P.Text)
-               (\s a -> s { _waf = a } :: Actions s)
-
--- | @settings@ nested settings.
-data Settings s = Settings'
+-- | @match_request@ nested settings.
+data MatchRequest s = MatchRequest'
     deriving (P.Show, P.Eq, P.Generic)
 
-newSettings
-    :: Settings s
-newSettings =
-    Settings'
+newMatchRequest
+    :: MatchRequest s
+newMatchRequest =
+    MatchRequest'
 
-instance P.Hashable  (Settings s)
-instance TF.IsValue  (Settings s)
-instance TF.IsObject (Settings s) where
-    toObject Settings' = []
+instance P.Hashable  (MatchRequest s)
+instance TF.IsValue  (MatchRequest s)
+instance TF.IsObject (MatchRequest s) where
+    toObject MatchRequest' = []
 
-instance TF.IsValid (Settings s) where
+instance TF.IsValid (MatchRequest s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAdvancedDdos x = TF.compute (TF.refKey x) "_computedAdvancedDdos"
+instance s ~ s' => P.HasComputedMethods (TF.Ref s' (MatchRequest s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedMethods x = TF.compute (TF.refKey x) "methods"
 
-instance s ~ s' => P.HasComputedAlwaysOnline (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAlwaysOnline x = TF.compute (TF.refKey x) "_computedAlwaysOnline"
+instance s ~ s' => P.HasComputedSchemes (TF.Ref s' (MatchRequest s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedSchemes x = TF.compute (TF.refKey x) "schemes"
 
-instance s ~ s' => P.HasComputedAlwaysUseHttps (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "_computedAlwaysUseHttps"
+instance s ~ s' => P.HasComputedUrlPattern (TF.Ref s' (MatchRequest s)) (TF.Attr s P.Text) where
+    computedUrlPattern x = TF.compute (TF.refKey x) "url_pattern"
 
-instance s ~ s' => P.HasComputedAutomaticHttpsRewrites (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "_computedAutomaticHttpsRewrites"
-
-instance s ~ s' => P.HasComputedBrotli (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedBrotli x = TF.compute (TF.refKey x) "_computedBrotli"
-
-instance s ~ s' => P.HasComputedBrowserCacheTtl (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "_computedBrowserCacheTtl"
-
-instance s ~ s' => P.HasComputedBrowserCheck (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedBrowserCheck x = TF.compute (TF.refKey x) "_computedBrowserCheck"
-
-instance s ~ s' => P.HasComputedCacheLevel (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedCacheLevel x = TF.compute (TF.refKey x) "_computedCacheLevel"
-
-instance s ~ s' => P.HasComputedChallengeTtl (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedChallengeTtl x = TF.compute (TF.refKey x) "_computedChallengeTtl"
-
-instance s ~ s' => P.HasComputedCnameFlattening (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedCnameFlattening x = TF.compute (TF.refKey x) "_computedCnameFlattening"
-
-instance s ~ s' => P.HasComputedDevelopmentMode (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedDevelopmentMode x = TF.compute (TF.refKey x) "_computedDevelopmentMode"
-
-instance s ~ s' => P.HasComputedEdgeCacheTtl (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "_computedEdgeCacheTtl"
-
-instance s ~ s' => P.HasComputedEmailObfuscation (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedEmailObfuscation x = TF.compute (TF.refKey x) "_computedEmailObfuscation"
-
-instance s ~ s' => P.HasComputedHotlinkProtection (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedHotlinkProtection x = TF.compute (TF.refKey x) "_computedHotlinkProtection"
-
-instance s ~ s' => P.HasComputedHttp2 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedHttp2 x = TF.compute (TF.refKey x) "_computedHttp2"
-
-instance s ~ s' => P.HasComputedIpGeolocation (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedIpGeolocation x = TF.compute (TF.refKey x) "_computedIpGeolocation"
-
-instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedIpv6 x = TF.compute (TF.refKey x) "_computedIpv6"
-
-instance s ~ s' => P.HasComputedMaxUpload (TF.Ref s' (Settings s)) (TF.Attr s P.Integer) where
-    computedMaxUpload x = TF.compute (TF.refKey x) "_computedMaxUpload"
-
-instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedMinTlsVersion x = TF.compute (TF.refKey x) "_computedMinTlsVersion"
-
-instance s ~ s' => P.HasComputedMinify (TF.Ref s' (Settings s)) (TF.Attr s (Minify s)) where
-    computedMinify x = TF.compute (TF.refKey x) "_computedMinify"
-
-instance s ~ s' => P.HasComputedMirage (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedMirage x = TF.compute (TF.refKey x) "_computedMirage"
-
-instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (Settings s)) (TF.Attr s (MobileRedirect s)) where
-    computedMobileRedirect x = TF.compute (TF.refKey x) "_computedMobileRedirect"
-
-instance s ~ s' => P.HasComputedOpportunisticEncryption (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "_computedOpportunisticEncryption"
-
-instance s ~ s' => P.HasComputedOriginErrorPagePassThru (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "_computedOriginErrorPagePassThru"
-
-instance s ~ s' => P.HasComputedPolish (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPolish x = TF.compute (TF.refKey x) "_computedPolish"
-
-instance s ~ s' => P.HasComputedPrefetchPreload (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPrefetchPreload x = TF.compute (TF.refKey x) "_computedPrefetchPreload"
-
-instance s ~ s' => P.HasComputedPrivacyPass (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPrivacyPass x = TF.compute (TF.refKey x) "_computedPrivacyPass"
-
-instance s ~ s' => P.HasComputedPseudoIpv4 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedPseudoIpv4 x = TF.compute (TF.refKey x) "_computedPseudoIpv4"
-
-instance s ~ s' => P.HasComputedResponseBuffering (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedResponseBuffering x = TF.compute (TF.refKey x) "_computedResponseBuffering"
-
-instance s ~ s' => P.HasComputedRocketLoader (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedRocketLoader x = TF.compute (TF.refKey x) "_computedRocketLoader"
-
-instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (Settings s)) (TF.Attr s (SecurityHeader s)) where
-    computedSecurityHeader x = TF.compute (TF.refKey x) "_computedSecurityHeader"
-
-instance s ~ s' => P.HasComputedSecurityLevel (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSecurityLevel x = TF.compute (TF.refKey x) "_computedSecurityLevel"
-
-instance s ~ s' => P.HasComputedServerSideExclude (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedServerSideExclude x = TF.compute (TF.refKey x) "_computedServerSideExclude"
-
-instance s ~ s' => P.HasComputedSha1Support (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSha1Support x = TF.compute (TF.refKey x) "_computedSha1Support"
-
-instance s ~ s' => P.HasComputedSortQueryStringForCache (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "_computedSortQueryStringForCache"
-
-instance s ~ s' => P.HasComputedSsl (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedSsl x = TF.compute (TF.refKey x) "_computedSsl"
-
-instance s ~ s' => P.HasComputedTls12Only (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTls12Only x = TF.compute (TF.refKey x) "_computedTls12Only"
-
-instance s ~ s' => P.HasComputedTls13 (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTls13 x = TF.compute (TF.refKey x) "_computedTls13"
-
-instance s ~ s' => P.HasComputedTlsClientAuth (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTlsClientAuth x = TF.compute (TF.refKey x) "_computedTlsClientAuth"
-
-instance s ~ s' => P.HasComputedTrueClientIpHeader (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "_computedTrueClientIpHeader"
-
-instance s ~ s' => P.HasComputedWaf (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedWaf x = TF.compute (TF.refKey x) "_computedWaf"
-
-instance s ~ s' => P.HasComputedWebp (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedWebp x = TF.compute (TF.refKey x) "_computedWebp"
-
-instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (Settings s)) (TF.Attr s P.Text) where
-    computedWebsockets x = TF.compute (TF.refKey x) "_computedWebsockets"
-
--- | @correlate@ nested settings.
-data Correlate s = Correlate'
-    { _by :: TF.Attr s P.Text
-    -- ^ @by@ - (Optional)
+-- | @load_balancer_monitor_header@ nested settings.
+data LoadBalancerMonitorHeader s = LoadBalancerMonitorHeader'
+    { _header :: TF.Attr s P.Text
+    -- ^ @header@ - (Required)
+    --
+    , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @values@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newCorrelate
-    :: Correlate s
-newCorrelate =
-    Correlate'
-        { _by = TF.Nil
+newLoadBalancerMonitorHeader
+    :: TF.Attr s P.Text -- ^ @header@ - 'P.header'
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @values@ - 'P.values'
+    -> LoadBalancerMonitorHeader s
+newLoadBalancerMonitorHeader _header _values =
+    LoadBalancerMonitorHeader'
+        { _header = _header
+        , _values = _values
         }
 
-instance P.Hashable  (Correlate s)
-instance TF.IsValue  (Correlate s)
-instance TF.IsObject (Correlate s) where
-    toObject Correlate'{..} = P.catMaybes
-        [ TF.assign "by" <$> TF.attribute _by
+instance P.Hashable  (LoadBalancerMonitorHeader s)
+instance TF.IsValue  (LoadBalancerMonitorHeader s)
+instance TF.IsObject (LoadBalancerMonitorHeader s) where
+    toObject LoadBalancerMonitorHeader'{..} = P.catMaybes
+        [ TF.assign "header" <$> TF.attribute _header
+        , TF.assign "values" <$> TF.attribute _values
         ]
 
-instance TF.IsValid (Correlate s) where
+instance TF.IsValid (LoadBalancerMonitorHeader s) where
     validator = P.mempty
 
-instance P.HasBy (Correlate s) (TF.Attr s P.Text) where
-    by =
-        P.lens (_by :: Correlate s -> TF.Attr s P.Text)
-               (\s a -> s { _by = a } :: Correlate s)
+instance P.HasHeader (LoadBalancerMonitorHeader s) (TF.Attr s P.Text) where
+    header =
+        P.lens (_header :: LoadBalancerMonitorHeader s -> TF.Attr s P.Text)
+               (\s a -> s { _header = a } :: LoadBalancerMonitorHeader s)
 
--- | @data@ nested settings.
-data Data' s = Data''
+instance P.HasValues (LoadBalancerMonitorHeader s) (TF.Attr s [TF.Attr s P.Text]) where
+    values =
+        P.lens (_values :: LoadBalancerMonitorHeader s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: LoadBalancerMonitorHeader s)
+
+-- | @settings_minify@ nested settings.
+data SettingsMinify s = SettingsMinify'
+    { _css  :: TF.Attr s P.Text
+    -- ^ @css@ - (Required)
+    --
+    , _html :: TF.Attr s P.Text
+    -- ^ @html@ - (Required)
+    --
+    , _js   :: TF.Attr s P.Text
+    -- ^ @js@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newSettingsMinify
+    :: TF.Attr s P.Text -- ^ @css@ - 'P.css'
+    -> TF.Attr s P.Text -- ^ @html@ - 'P.html'
+    -> TF.Attr s P.Text -- ^ @js@ - 'P.js'
+    -> SettingsMinify s
+newSettingsMinify _css _html _js =
+    SettingsMinify'
+        { _css = _css
+        , _html = _html
+        , _js = _js
+        }
+
+instance P.Hashable  (SettingsMinify s)
+instance TF.IsValue  (SettingsMinify s)
+instance TF.IsObject (SettingsMinify s) where
+    toObject SettingsMinify'{..} = P.catMaybes
+        [ TF.assign "css" <$> TF.attribute _css
+        , TF.assign "html" <$> TF.attribute _html
+        , TF.assign "js" <$> TF.attribute _js
+        ]
+
+instance TF.IsValid (SettingsMinify s) where
+    validator = P.mempty
+
+instance P.HasCss (SettingsMinify s) (TF.Attr s P.Text) where
+    css =
+        P.lens (_css :: SettingsMinify s -> TF.Attr s P.Text)
+               (\s a -> s { _css = a } :: SettingsMinify s)
+
+instance P.HasHtml (SettingsMinify s) (TF.Attr s P.Text) where
+    html =
+        P.lens (_html :: SettingsMinify s -> TF.Attr s P.Text)
+               (\s a -> s { _html = a } :: SettingsMinify s)
+
+instance P.HasJs (SettingsMinify s) (TF.Attr s P.Text) where
+    js =
+        P.lens (_js :: SettingsMinify s -> TF.Attr s P.Text)
+               (\s a -> s { _js = a } :: SettingsMinify s)
+
+-- | @rate_limit_action@ nested settings.
+data RateLimitAction s = RateLimitAction'
+    { _mode     :: TF.Attr s P.Text
+    -- ^ @mode@ - (Required)
+    --
+    , _response :: TF.Attr s (ActionResponse s)
+    -- ^ @response@ - (Optional)
+    --
+    , _timeout  :: TF.Attr s P.Integer
+    -- ^ @timeout@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newRateLimitAction
+    :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
+    -> TF.Attr s P.Integer -- ^ @timeout@ - 'P.timeout'
+    -> RateLimitAction s
+newRateLimitAction _mode _timeout =
+    RateLimitAction'
+        { _mode = _mode
+        , _response = TF.Nil
+        , _timeout = _timeout
+        }
+
+instance P.Hashable  (RateLimitAction s)
+instance TF.IsValue  (RateLimitAction s)
+instance TF.IsObject (RateLimitAction s) where
+    toObject RateLimitAction'{..} = P.catMaybes
+        [ TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "response" <$> TF.attribute _response
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (RateLimitAction s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_response"
+                  (_response
+                      :: RateLimitAction s -> TF.Attr s (ActionResponse s))
+                  TF.validator
+
+instance P.HasMode (RateLimitAction s) (TF.Attr s P.Text) where
+    mode =
+        P.lens (_mode :: RateLimitAction s -> TF.Attr s P.Text)
+               (\s a -> s { _mode = a } :: RateLimitAction s)
+
+instance P.HasResponse (RateLimitAction s) (TF.Attr s (ActionResponse s)) where
+    response =
+        P.lens (_response :: RateLimitAction s -> TF.Attr s (ActionResponse s))
+               (\s a -> s { _response = a } :: RateLimitAction s)
+
+instance P.HasTimeout (RateLimitAction s) (TF.Attr s P.Integer) where
+    timeout =
+        P.lens (_timeout :: RateLimitAction s -> TF.Attr s P.Integer)
+               (\s a -> s { _timeout = a } :: RateLimitAction s)
+
+-- | @zone_settings_override_initial_settings@ nested settings.
+data ZoneSettingsOverrideInitialSettings s = ZoneSettingsOverrideInitialSettings'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newZoneSettingsOverrideInitialSettings
+    :: ZoneSettingsOverrideInitialSettings s
+newZoneSettingsOverrideInitialSettings =
+    ZoneSettingsOverrideInitialSettings'
+
+instance P.Hashable  (ZoneSettingsOverrideInitialSettings s)
+instance TF.IsValue  (ZoneSettingsOverrideInitialSettings s)
+instance TF.IsObject (ZoneSettingsOverrideInitialSettings s) where
+    toObject ZoneSettingsOverrideInitialSettings' = []
+
+instance TF.IsValid (ZoneSettingsOverrideInitialSettings s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedAdvancedDdos x = TF.compute (TF.refKey x) "advanced_ddos"
+
+instance s ~ s' => P.HasComputedAlwaysOnline (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedAlwaysOnline x = TF.compute (TF.refKey x) "always_online"
+
+instance s ~ s' => P.HasComputedAlwaysUseHttps (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "always_use_https"
+
+instance s ~ s' => P.HasComputedAutomaticHttpsRewrites (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "automatic_https_rewrites"
+
+instance s ~ s' => P.HasComputedBrotli (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedBrotli x = TF.compute (TF.refKey x) "brotli"
+
+instance s ~ s' => P.HasComputedBrowserCacheTtl (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Integer) where
+    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "browser_cache_ttl"
+
+instance s ~ s' => P.HasComputedBrowserCheck (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedBrowserCheck x = TF.compute (TF.refKey x) "browser_check"
+
+instance s ~ s' => P.HasComputedCacheLevel (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedCacheLevel x = TF.compute (TF.refKey x) "cache_level"
+
+instance s ~ s' => P.HasComputedChallengeTtl (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Integer) where
+    computedChallengeTtl x = TF.compute (TF.refKey x) "challenge_ttl"
+
+instance s ~ s' => P.HasComputedCnameFlattening (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedCnameFlattening x = TF.compute (TF.refKey x) "cname_flattening"
+
+instance s ~ s' => P.HasComputedDevelopmentMode (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedDevelopmentMode x = TF.compute (TF.refKey x) "development_mode"
+
+instance s ~ s' => P.HasComputedEdgeCacheTtl (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Integer) where
+    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "edge_cache_ttl"
+
+instance s ~ s' => P.HasComputedEmailObfuscation (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedEmailObfuscation x = TF.compute (TF.refKey x) "email_obfuscation"
+
+instance s ~ s' => P.HasComputedHotlinkProtection (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedHotlinkProtection x = TF.compute (TF.refKey x) "hotlink_protection"
+
+instance s ~ s' => P.HasComputedHttp2 (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedHttp2 x = TF.compute (TF.refKey x) "http2"
+
+instance s ~ s' => P.HasComputedIpGeolocation (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedIpGeolocation x = TF.compute (TF.refKey x) "ip_geolocation"
+
+instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedIpv6 x = TF.compute (TF.refKey x) "ipv6"
+
+instance s ~ s' => P.HasComputedMaxUpload (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Integer) where
+    computedMaxUpload x = TF.compute (TF.refKey x) "max_upload"
+
+instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedMinTlsVersion x = TF.compute (TF.refKey x) "min_tls_version"
+
+instance s ~ s' => P.HasComputedMinify (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s (InitialSettingsMinify s)) where
+    computedMinify x = TF.compute (TF.refKey x) "minify"
+
+instance s ~ s' => P.HasComputedMirage (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedMirage x = TF.compute (TF.refKey x) "mirage"
+
+instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s (InitialSettingsMobileRedirect s)) where
+    computedMobileRedirect x = TF.compute (TF.refKey x) "mobile_redirect"
+
+instance s ~ s' => P.HasComputedOpportunisticEncryption (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "opportunistic_encryption"
+
+instance s ~ s' => P.HasComputedOriginErrorPagePassThru (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "origin_error_page_pass_thru"
+
+instance s ~ s' => P.HasComputedPolish (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedPolish x = TF.compute (TF.refKey x) "polish"
+
+instance s ~ s' => P.HasComputedPrefetchPreload (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedPrefetchPreload x = TF.compute (TF.refKey x) "prefetch_preload"
+
+instance s ~ s' => P.HasComputedPrivacyPass (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedPrivacyPass x = TF.compute (TF.refKey x) "privacy_pass"
+
+instance s ~ s' => P.HasComputedPseudoIpv4 (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedPseudoIpv4 x = TF.compute (TF.refKey x) "pseudo_ipv4"
+
+instance s ~ s' => P.HasComputedResponseBuffering (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedResponseBuffering x = TF.compute (TF.refKey x) "response_buffering"
+
+instance s ~ s' => P.HasComputedRocketLoader (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedRocketLoader x = TF.compute (TF.refKey x) "rocket_loader"
+
+instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s (InitialSettingsSecurityHeader s)) where
+    computedSecurityHeader x = TF.compute (TF.refKey x) "security_header"
+
+instance s ~ s' => P.HasComputedSecurityLevel (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedSecurityLevel x = TF.compute (TF.refKey x) "security_level"
+
+instance s ~ s' => P.HasComputedServerSideExclude (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedServerSideExclude x = TF.compute (TF.refKey x) "server_side_exclude"
+
+instance s ~ s' => P.HasComputedSha1Support (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedSha1Support x = TF.compute (TF.refKey x) "sha1_support"
+
+instance s ~ s' => P.HasComputedSortQueryStringForCache (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "sort_query_string_for_cache"
+
+instance s ~ s' => P.HasComputedSsl (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedSsl x = TF.compute (TF.refKey x) "ssl"
+
+instance s ~ s' => P.HasComputedTls12Only (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedTls12Only x = TF.compute (TF.refKey x) "tls_1_2_only"
+
+instance s ~ s' => P.HasComputedTls13 (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedTls13 x = TF.compute (TF.refKey x) "tls_1_3"
+
+instance s ~ s' => P.HasComputedTlsClientAuth (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedTlsClientAuth x = TF.compute (TF.refKey x) "tls_client_auth"
+
+instance s ~ s' => P.HasComputedTrueClientIpHeader (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "true_client_ip_header"
+
+instance s ~ s' => P.HasComputedWaf (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedWaf x = TF.compute (TF.refKey x) "waf"
+
+instance s ~ s' => P.HasComputedWebp (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedWebp x = TF.compute (TF.refKey x) "webp"
+
+instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (ZoneSettingsOverrideInitialSettings s)) (TF.Attr s P.Text) where
+    computedWebsockets x = TF.compute (TF.refKey x) "websockets"
+
+-- | @rate_limit_match@ nested settings.
+data RateLimitMatch s = RateLimitMatch'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newRateLimitMatch
+    :: RateLimitMatch s
+newRateLimitMatch =
+    RateLimitMatch'
+
+instance P.Hashable  (RateLimitMatch s)
+instance TF.IsValue  (RateLimitMatch s)
+instance TF.IsObject (RateLimitMatch s) where
+    toObject RateLimitMatch' = []
+
+instance TF.IsValid (RateLimitMatch s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedRequest (TF.Ref s' (RateLimitMatch s)) (TF.Attr s (MatchRequest s)) where
+    computedRequest x = TF.compute (TF.refKey x) "request"
+
+instance s ~ s' => P.HasComputedResponse (TF.Ref s' (RateLimitMatch s)) (TF.Attr s (MatchResponse s)) where
+    computedResponse x = TF.compute (TF.refKey x) "response"
+
+-- | @match_response@ nested settings.
+data MatchResponse s = MatchResponse'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newMatchResponse
+    :: MatchResponse s
+newMatchResponse =
+    MatchResponse'
+
+instance P.Hashable  (MatchResponse s)
+instance TF.IsValue  (MatchResponse s)
+instance TF.IsObject (MatchResponse s) where
+    toObject MatchResponse' = []
+
+instance TF.IsValid (MatchResponse s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedOriginTraffic (TF.Ref s' (MatchResponse s)) (TF.Attr s P.Bool) where
+    computedOriginTraffic x = TF.compute (TF.refKey x) "origin_traffic"
+
+instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (MatchResponse s)) (TF.Attr s [TF.Attr s P.Integer]) where
+    computedStatuses x = TF.compute (TF.refKey x) "statuses"
+
+-- | @initial_settings_minify@ nested settings.
+data InitialSettingsMinify s = InitialSettingsMinify'
+    { _css  :: TF.Attr s P.Text
+    -- ^ @css@ - (Required)
+    --
+    , _html :: TF.Attr s P.Text
+    -- ^ @html@ - (Required)
+    --
+    , _js   :: TF.Attr s P.Text
+    -- ^ @js@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newInitialSettingsMinify
+    :: TF.Attr s P.Text -- ^ @css@ - 'P.css'
+    -> TF.Attr s P.Text -- ^ @html@ - 'P.html'
+    -> TF.Attr s P.Text -- ^ @js@ - 'P.js'
+    -> InitialSettingsMinify s
+newInitialSettingsMinify _css _html _js =
+    InitialSettingsMinify'
+        { _css = _css
+        , _html = _html
+        , _js = _js
+        }
+
+instance P.Hashable  (InitialSettingsMinify s)
+instance TF.IsValue  (InitialSettingsMinify s)
+instance TF.IsObject (InitialSettingsMinify s) where
+    toObject InitialSettingsMinify'{..} = P.catMaybes
+        [ TF.assign "css" <$> TF.attribute _css
+        , TF.assign "html" <$> TF.attribute _html
+        , TF.assign "js" <$> TF.attribute _js
+        ]
+
+instance TF.IsValid (InitialSettingsMinify s) where
+    validator = P.mempty
+
+instance P.HasCss (InitialSettingsMinify s) (TF.Attr s P.Text) where
+    css =
+        P.lens (_css :: InitialSettingsMinify s -> TF.Attr s P.Text)
+               (\s a -> s { _css = a } :: InitialSettingsMinify s)
+
+instance P.HasHtml (InitialSettingsMinify s) (TF.Attr s P.Text) where
+    html =
+        P.lens (_html :: InitialSettingsMinify s -> TF.Attr s P.Text)
+               (\s a -> s { _html = a } :: InitialSettingsMinify s)
+
+instance P.HasJs (InitialSettingsMinify s) (TF.Attr s P.Text) where
+    js =
+        P.lens (_js :: InitialSettingsMinify s -> TF.Attr s P.Text)
+               (\s a -> s { _js = a } :: InitialSettingsMinify s)
+
+-- | @settings_mobile_redirect@ nested settings.
+data SettingsMobileRedirect s = SettingsMobileRedirect'
+    { _mobileSubdomain :: TF.Attr s P.Text
+    -- ^ @mobile_subdomain@ - (Required)
+    --
+    , _status          :: TF.Attr s P.Text
+    -- ^ @status@ - (Required)
+    --
+    , _stripUri        :: TF.Attr s P.Bool
+    -- ^ @strip_uri@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newSettingsMobileRedirect
+    :: TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
+    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    -> TF.Attr s P.Bool -- ^ @strip_uri@ - 'P.stripUri'
+    -> SettingsMobileRedirect s
+newSettingsMobileRedirect _mobileSubdomain _status _stripUri =
+    SettingsMobileRedirect'
+        { _mobileSubdomain = _mobileSubdomain
+        , _status = _status
+        , _stripUri = _stripUri
+        }
+
+instance P.Hashable  (SettingsMobileRedirect s)
+instance TF.IsValue  (SettingsMobileRedirect s)
+instance TF.IsObject (SettingsMobileRedirect s) where
+    toObject SettingsMobileRedirect'{..} = P.catMaybes
+        [ TF.assign "mobile_subdomain" <$> TF.attribute _mobileSubdomain
+        , TF.assign "status" <$> TF.attribute _status
+        , TF.assign "strip_uri" <$> TF.attribute _stripUri
+        ]
+
+instance TF.IsValid (SettingsMobileRedirect s) where
+    validator = P.mempty
+
+instance P.HasMobileSubdomain (SettingsMobileRedirect s) (TF.Attr s P.Text) where
+    mobileSubdomain =
+        P.lens (_mobileSubdomain :: SettingsMobileRedirect s -> TF.Attr s P.Text)
+               (\s a -> s { _mobileSubdomain = a } :: SettingsMobileRedirect s)
+
+instance P.HasStatus (SettingsMobileRedirect s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: SettingsMobileRedirect s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: SettingsMobileRedirect s)
+
+instance P.HasStripUri (SettingsMobileRedirect s) (TF.Attr s P.Bool) where
+    stripUri =
+        P.lens (_stripUri :: SettingsMobileRedirect s -> TF.Attr s P.Bool)
+               (\s a -> s { _stripUri = a } :: SettingsMobileRedirect s)
+
+-- | @record_data@ nested settings.
+data RecordData s = RecordData'
     { _algorithm     :: TF.Attr s P.Integer
     -- ^ @algorithm@ - (Optional)
     --
@@ -803,10 +999,10 @@ data Data' s = Data''
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newData'
-    :: Data' s
-newData' =
-    Data''
+newRecordData
+    :: RecordData s
+newRecordData =
+    RecordData'
         { _algorithm = TF.Nil
         , _altitude = TF.Nil
         , _certificate = TF.Nil
@@ -846,10 +1042,10 @@ newData' =
         , _weight = TF.Nil
         }
 
-instance P.Hashable  (Data' s)
-instance TF.IsValue  (Data' s)
-instance TF.IsObject (Data' s) where
-    toObject Data''{..} = P.catMaybes
+instance P.Hashable  (RecordData s)
+instance TF.IsValue  (RecordData s)
+instance TF.IsObject (RecordData s) where
+    toObject RecordData'{..} = P.catMaybes
         [ TF.assign "algorithm" <$> TF.attribute _algorithm
         , TF.assign "altitude" <$> TF.attribute _altitude
         , TF.assign "certificate" <$> TF.attribute _certificate
@@ -889,472 +1085,673 @@ instance TF.IsObject (Data' s) where
         , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-instance TF.IsValid (Data' s) where
+instance TF.IsValid (RecordData s) where
     validator = P.mempty
 
-instance P.HasAlgorithm (Data' s) (TF.Attr s P.Integer) where
+instance P.HasAlgorithm (RecordData s) (TF.Attr s P.Integer) where
     algorithm =
-        P.lens (_algorithm :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _algorithm = a } :: Data' s)
+        P.lens (_algorithm :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _algorithm = a } :: RecordData s)
 
-instance P.HasAltitude (Data' s) (TF.Attr s P.Double) where
+instance P.HasAltitude (RecordData s) (TF.Attr s P.Double) where
     altitude =
-        P.lens (_altitude :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _altitude = a } :: Data' s)
+        P.lens (_altitude :: RecordData s -> TF.Attr s P.Double)
+               (\s a -> s { _altitude = a } :: RecordData s)
 
-instance P.HasCertificate (Data' s) (TF.Attr s P.Text) where
+instance P.HasCertificate (RecordData s) (TF.Attr s P.Text) where
     certificate =
-        P.lens (_certificate :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _certificate = a } :: Data' s)
+        P.lens (_certificate :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _certificate = a } :: RecordData s)
 
-instance P.HasContent (Data' s) (TF.Attr s P.Text) where
+instance P.HasContent (RecordData s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: Data' s)
+        P.lens (_content :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: RecordData s)
 
-instance P.HasDigest (Data' s) (TF.Attr s P.Text) where
+instance P.HasDigest (RecordData s) (TF.Attr s P.Text) where
     digest =
-        P.lens (_digest :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _digest = a } :: Data' s)
+        P.lens (_digest :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _digest = a } :: RecordData s)
 
-instance P.HasDigestType (Data' s) (TF.Attr s P.Integer) where
+instance P.HasDigestType (RecordData s) (TF.Attr s P.Integer) where
     digestType =
-        P.lens (_digestType :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _digestType = a } :: Data' s)
+        P.lens (_digestType :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _digestType = a } :: RecordData s)
 
-instance P.HasFingerprint (Data' s) (TF.Attr s P.Text) where
+instance P.HasFingerprint (RecordData s) (TF.Attr s P.Text) where
     fingerprint =
-        P.lens (_fingerprint :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _fingerprint = a } :: Data' s)
+        P.lens (_fingerprint :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _fingerprint = a } :: RecordData s)
 
-instance P.HasFlags (Data' s) (TF.Attr s P.Text) where
+instance P.HasFlags (RecordData s) (TF.Attr s P.Text) where
     flags =
-        P.lens (_flags :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _flags = a } :: Data' s)
+        P.lens (_flags :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _flags = a } :: RecordData s)
 
-instance P.HasKeyTag (Data' s) (TF.Attr s P.Integer) where
+instance P.HasKeyTag (RecordData s) (TF.Attr s P.Integer) where
     keyTag =
-        P.lens (_keyTag :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _keyTag = a } :: Data' s)
+        P.lens (_keyTag :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _keyTag = a } :: RecordData s)
 
-instance P.HasLatDegrees (Data' s) (TF.Attr s P.Integer) where
+instance P.HasLatDegrees (RecordData s) (TF.Attr s P.Integer) where
     latDegrees =
-        P.lens (_latDegrees :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _latDegrees = a } :: Data' s)
+        P.lens (_latDegrees :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _latDegrees = a } :: RecordData s)
 
-instance P.HasLatDirection (Data' s) (TF.Attr s P.Text) where
+instance P.HasLatDirection (RecordData s) (TF.Attr s P.Text) where
     latDirection =
-        P.lens (_latDirection :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _latDirection = a } :: Data' s)
+        P.lens (_latDirection :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _latDirection = a } :: RecordData s)
 
-instance P.HasLatMinutes (Data' s) (TF.Attr s P.Integer) where
+instance P.HasLatMinutes (RecordData s) (TF.Attr s P.Integer) where
     latMinutes =
-        P.lens (_latMinutes :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _latMinutes = a } :: Data' s)
+        P.lens (_latMinutes :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _latMinutes = a } :: RecordData s)
 
-instance P.HasLatSeconds (Data' s) (TF.Attr s P.Double) where
+instance P.HasLatSeconds (RecordData s) (TF.Attr s P.Double) where
     latSeconds =
-        P.lens (_latSeconds :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _latSeconds = a } :: Data' s)
+        P.lens (_latSeconds :: RecordData s -> TF.Attr s P.Double)
+               (\s a -> s { _latSeconds = a } :: RecordData s)
 
-instance P.HasLongDegrees (Data' s) (TF.Attr s P.Integer) where
+instance P.HasLongDegrees (RecordData s) (TF.Attr s P.Integer) where
     longDegrees =
-        P.lens (_longDegrees :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _longDegrees = a } :: Data' s)
+        P.lens (_longDegrees :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _longDegrees = a } :: RecordData s)
 
-instance P.HasLongDirection (Data' s) (TF.Attr s P.Text) where
+instance P.HasLongDirection (RecordData s) (TF.Attr s P.Text) where
     longDirection =
-        P.lens (_longDirection :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _longDirection = a } :: Data' s)
+        P.lens (_longDirection :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _longDirection = a } :: RecordData s)
 
-instance P.HasLongMinutes (Data' s) (TF.Attr s P.Integer) where
+instance P.HasLongMinutes (RecordData s) (TF.Attr s P.Integer) where
     longMinutes =
-        P.lens (_longMinutes :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _longMinutes = a } :: Data' s)
+        P.lens (_longMinutes :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _longMinutes = a } :: RecordData s)
 
-instance P.HasLongSeconds (Data' s) (TF.Attr s P.Double) where
+instance P.HasLongSeconds (RecordData s) (TF.Attr s P.Double) where
     longSeconds =
-        P.lens (_longSeconds :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _longSeconds = a } :: Data' s)
+        P.lens (_longSeconds :: RecordData s -> TF.Attr s P.Double)
+               (\s a -> s { _longSeconds = a } :: RecordData s)
 
-instance P.HasMatchingType (Data' s) (TF.Attr s P.Integer) where
+instance P.HasMatchingType (RecordData s) (TF.Attr s P.Integer) where
     matchingType =
-        P.lens (_matchingType :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _matchingType = a } :: Data' s)
+        P.lens (_matchingType :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _matchingType = a } :: RecordData s)
 
-instance P.HasName (Data' s) (TF.Attr s P.Text) where
+instance P.HasName (RecordData s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Data' s)
+        P.lens (_name :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: RecordData s)
 
-instance P.HasOrder (Data' s) (TF.Attr s P.Integer) where
+instance P.HasOrder (RecordData s) (TF.Attr s P.Integer) where
     order =
-        P.lens (_order :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _order = a } :: Data' s)
+        P.lens (_order :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _order = a } :: RecordData s)
 
-instance P.HasPort (Data' s) (TF.Attr s P.Integer) where
+instance P.HasPort (RecordData s) (TF.Attr s P.Integer) where
     port =
-        P.lens (_port :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _port = a } :: Data' s)
+        P.lens (_port :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _port = a } :: RecordData s)
 
-instance P.HasPrecisionHorz (Data' s) (TF.Attr s P.Double) where
+instance P.HasPrecisionHorz (RecordData s) (TF.Attr s P.Double) where
     precisionHorz =
-        P.lens (_precisionHorz :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _precisionHorz = a } :: Data' s)
+        P.lens (_precisionHorz :: RecordData s -> TF.Attr s P.Double)
+               (\s a -> s { _precisionHorz = a } :: RecordData s)
 
-instance P.HasPrecisionVert (Data' s) (TF.Attr s P.Double) where
+instance P.HasPrecisionVert (RecordData s) (TF.Attr s P.Double) where
     precisionVert =
-        P.lens (_precisionVert :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _precisionVert = a } :: Data' s)
+        P.lens (_precisionVert :: RecordData s -> TF.Attr s P.Double)
+               (\s a -> s { _precisionVert = a } :: RecordData s)
 
-instance P.HasPreference (Data' s) (TF.Attr s P.Integer) where
+instance P.HasPreference (RecordData s) (TF.Attr s P.Integer) where
     preference =
-        P.lens (_preference :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _preference = a } :: Data' s)
+        P.lens (_preference :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _preference = a } :: RecordData s)
 
-instance P.HasPriority (Data' s) (TF.Attr s P.Integer) where
+instance P.HasPriority (RecordData s) (TF.Attr s P.Integer) where
     priority =
-        P.lens (_priority :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _priority = a } :: Data' s)
+        P.lens (_priority :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _priority = a } :: RecordData s)
 
-instance P.HasProto (Data' s) (TF.Attr s P.Text) where
+instance P.HasProto (RecordData s) (TF.Attr s P.Text) where
     proto =
-        P.lens (_proto :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _proto = a } :: Data' s)
+        P.lens (_proto :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _proto = a } :: RecordData s)
 
-instance P.HasProtocol (Data' s) (TF.Attr s P.Integer) where
+instance P.HasProtocol (RecordData s) (TF.Attr s P.Integer) where
     protocol =
-        P.lens (_protocol :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _protocol = a } :: Data' s)
+        P.lens (_protocol :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _protocol = a } :: RecordData s)
 
-instance P.HasPublicKey (Data' s) (TF.Attr s P.Text) where
+instance P.HasPublicKey (RecordData s) (TF.Attr s P.Text) where
     publicKey =
-        P.lens (_publicKey :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _publicKey = a } :: Data' s)
+        P.lens (_publicKey :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _publicKey = a } :: RecordData s)
 
-instance P.HasRegex (Data' s) (TF.Attr s P.Text) where
+instance P.HasRegex (RecordData s) (TF.Attr s P.Text) where
     regex =
-        P.lens (_regex :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _regex = a } :: Data' s)
+        P.lens (_regex :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _regex = a } :: RecordData s)
 
-instance P.HasReplacement (Data' s) (TF.Attr s P.Text) where
+instance P.HasReplacement (RecordData s) (TF.Attr s P.Text) where
     replacement =
-        P.lens (_replacement :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _replacement = a } :: Data' s)
+        P.lens (_replacement :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _replacement = a } :: RecordData s)
 
-instance P.HasSelector (Data' s) (TF.Attr s P.Integer) where
+instance P.HasSelector (RecordData s) (TF.Attr s P.Integer) where
     selector =
-        P.lens (_selector :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _selector = a } :: Data' s)
+        P.lens (_selector :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _selector = a } :: RecordData s)
 
-instance P.HasService (Data' s) (TF.Attr s P.Text) where
+instance P.HasService (RecordData s) (TF.Attr s P.Text) where
     service =
-        P.lens (_service :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a } :: Data' s)
+        P.lens (_service :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _service = a } :: RecordData s)
 
-instance P.HasSize (Data' s) (TF.Attr s P.Double) where
+instance P.HasSize (RecordData s) (TF.Attr s P.Double) where
     size =
-        P.lens (_size :: Data' s -> TF.Attr s P.Double)
-               (\s a -> s { _size = a } :: Data' s)
+        P.lens (_size :: RecordData s -> TF.Attr s P.Double)
+               (\s a -> s { _size = a } :: RecordData s)
 
-instance P.HasTarget (Data' s) (TF.Attr s P.Text) where
+instance P.HasTarget (RecordData s) (TF.Attr s P.Text) where
     target =
-        P.lens (_target :: Data' s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a } :: Data' s)
+        P.lens (_target :: RecordData s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: RecordData s)
 
-instance P.HasType' (Data' s) (TF.Attr s P.Integer) where
+instance P.HasType' (RecordData s) (TF.Attr s P.Integer) where
     type' =
-        P.lens (_type' :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _type' = a } :: Data' s)
+        P.lens (_type' :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _type' = a } :: RecordData s)
 
-instance P.HasUsage (Data' s) (TF.Attr s P.Integer) where
+instance P.HasUsage (RecordData s) (TF.Attr s P.Integer) where
     usage =
-        P.lens (_usage :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _usage = a } :: Data' s)
+        P.lens (_usage :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _usage = a } :: RecordData s)
 
-instance P.HasWeight (Data' s) (TF.Attr s P.Integer) where
+instance P.HasWeight (RecordData s) (TF.Attr s P.Integer) where
     weight =
-        P.lens (_weight :: Data' s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a } :: Data' s)
+        P.lens (_weight :: RecordData s -> TF.Attr s P.Integer)
+               (\s a -> s { _weight = a } :: RecordData s)
 
--- | @response@ nested settings.
-data Response s = Response'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newResponse
-    :: Response s
-newResponse =
-    Response'
-
-instance P.Hashable  (Response s)
-instance TF.IsValue  (Response s)
-instance TF.IsObject (Response s) where
-    toObject Response' = []
-
-instance TF.IsValid (Response s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedOriginTraffic (TF.Ref s' (Response s)) (TF.Attr s P.Bool) where
-    computedOriginTraffic x = TF.compute (TF.refKey x) "_computedOriginTraffic"
-
-instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (Response s)) (TF.Attr s [TF.Attr s P.Integer]) where
-    computedStatuses x = TF.compute (TF.refKey x) "_computedStatuses"
-
--- | @action@ nested settings.
-data Action s = Action'
-    { _mode     :: TF.Attr s P.Text
-    -- ^ @mode@ - (Required)
+-- | @load_balancer_region_pools@ nested settings.
+data LoadBalancerRegionPools s = LoadBalancerRegionPools'
+    { _poolIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @pool_ids@ - (Required)
     --
-    , _response :: TF.Attr s (Response s)
-    -- ^ @response@ - (Optional)
-    --
-    , _timeout  :: TF.Attr s P.Integer
-    -- ^ @timeout@ - (Required)
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newAction
-    :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
-    -> TF.Attr s P.Integer -- ^ @timeout@ - 'P.timeout'
-    -> Action s
-newAction _mode _timeout =
-    Action'
-        { _mode = _mode
-        , _response = TF.Nil
-        , _timeout = _timeout
+newLoadBalancerRegionPools
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
+    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    -> LoadBalancerRegionPools s
+newLoadBalancerRegionPools _poolIds _region =
+    LoadBalancerRegionPools'
+        { _poolIds = _poolIds
+        , _region = _region
         }
 
-instance P.Hashable  (Action s)
-instance TF.IsValue  (Action s)
-instance TF.IsObject (Action s) where
-    toObject Action'{..} = P.catMaybes
-        [ TF.assign "mode" <$> TF.attribute _mode
-        , TF.assign "response" <$> TF.attribute _response
-        , TF.assign "timeout" <$> TF.attribute _timeout
+instance P.Hashable  (LoadBalancerRegionPools s)
+instance TF.IsValue  (LoadBalancerRegionPools s)
+instance TF.IsObject (LoadBalancerRegionPools s) where
+    toObject LoadBalancerRegionPools'{..} = P.catMaybes
+        [ TF.assign "pool_ids" <$> TF.attribute _poolIds
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
-instance TF.IsValid (Action s) where
+instance TF.IsValid (LoadBalancerRegionPools s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_response"
-                  (_response
-                      :: Action s -> TF.Attr s (Response s))
+
+instance P.HasPoolIds (LoadBalancerRegionPools s) (TF.Attr s [TF.Attr s P.Text]) where
+    poolIds =
+        P.lens (_poolIds :: LoadBalancerRegionPools s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _poolIds = a } :: LoadBalancerRegionPools s)
+
+instance P.HasRegion (LoadBalancerRegionPools s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: LoadBalancerRegionPools s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: LoadBalancerRegionPools s)
+
+-- | @initial_settings_security_header@ nested settings.
+data InitialSettingsSecurityHeader s = InitialSettingsSecurityHeader'
+    deriving (P.Show, P.Eq, P.Generic)
+
+newInitialSettingsSecurityHeader
+    :: InitialSettingsSecurityHeader s
+newInitialSettingsSecurityHeader =
+    InitialSettingsSecurityHeader'
+
+instance P.Hashable  (InitialSettingsSecurityHeader s)
+instance TF.IsValue  (InitialSettingsSecurityHeader s)
+instance TF.IsObject (InitialSettingsSecurityHeader s) where
+    toObject InitialSettingsSecurityHeader' = []
+
+instance TF.IsValid (InitialSettingsSecurityHeader s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (InitialSettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedIncludeSubdomains (TF.Ref s' (InitialSettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedIncludeSubdomains x = TF.compute (TF.refKey x) "include_subdomains"
+
+instance s ~ s' => P.HasComputedMaxAge (TF.Ref s' (InitialSettingsSecurityHeader s)) (TF.Attr s P.Integer) where
+    computedMaxAge x = TF.compute (TF.refKey x) "max_age"
+
+instance s ~ s' => P.HasComputedNosniff (TF.Ref s' (InitialSettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedNosniff x = TF.compute (TF.refKey x) "nosniff"
+
+instance s ~ s' => P.HasComputedPreload (TF.Ref s' (InitialSettingsSecurityHeader s)) (TF.Attr s P.Bool) where
+    computedPreload x = TF.compute (TF.refKey x) "preload"
+
+-- | @actions_forwarding_url@ nested settings.
+data ActionsForwardingUrl s = ActionsForwardingUrl'
+    { _statusCode :: TF.Attr s P.Integer
+    -- ^ @status_code@ - (Required)
+    --
+    , _url        :: TF.Attr s P.Text
+    -- ^ @url@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newActionsForwardingUrl
+    :: TF.Attr s P.Integer -- ^ @status_code@ - 'P.statusCode'
+    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    -> ActionsForwardingUrl s
+newActionsForwardingUrl _statusCode _url =
+    ActionsForwardingUrl'
+        { _statusCode = _statusCode
+        , _url = _url
+        }
+
+instance P.Hashable  (ActionsForwardingUrl s)
+instance TF.IsValue  (ActionsForwardingUrl s)
+instance TF.IsObject (ActionsForwardingUrl s) where
+    toObject ActionsForwardingUrl'{..} = P.catMaybes
+        [ TF.assign "status_code" <$> TF.attribute _statusCode
+        , TF.assign "url" <$> TF.attribute _url
+        ]
+
+instance TF.IsValid (ActionsForwardingUrl s) where
+    validator = P.mempty
+
+instance P.HasStatusCode (ActionsForwardingUrl s) (TF.Attr s P.Integer) where
+    statusCode =
+        P.lens (_statusCode :: ActionsForwardingUrl s -> TF.Attr s P.Integer)
+               (\s a -> s { _statusCode = a } :: ActionsForwardingUrl s)
+
+instance P.HasUrl (ActionsForwardingUrl s) (TF.Attr s P.Text) where
+    url =
+        P.lens (_url :: ActionsForwardingUrl s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: ActionsForwardingUrl s)
+
+-- | @page_rule_actions@ nested settings.
+data PageRuleActions s = PageRuleActions'
+    { _alwaysOnline            :: TF.Attr s P.Text
+    -- ^ @always_online@ - (Optional)
+    --
+    , _alwaysUseHttps          :: TF.Attr s P.Bool
+    -- ^ @always_use_https@ - (Optional)
+    --
+    , _automaticHttpsRewrites  :: TF.Attr s P.Text
+    -- ^ @automatic_https_rewrites@ - (Optional)
+    --
+    , _browserCacheTtl         :: TF.Attr s P.Integer
+    -- ^ @browser_cache_ttl@ - (Optional)
+    --
+    , _browserCheck            :: TF.Attr s P.Text
+    -- ^ @browser_check@ - (Optional)
+    --
+    , _bypassCacheOnCookie     :: TF.Attr s P.Text
+    -- ^ @bypass_cache_on_cookie@ - (Optional)
+    --
+    , _cacheByDeviceType       :: TF.Attr s P.Text
+    -- ^ @cache_by_device_type@ - (Optional)
+    --
+    , _cacheDeceptionArmor     :: TF.Attr s P.Text
+    -- ^ @cache_deception_armor@ - (Optional)
+    --
+    , _cacheLevel              :: TF.Attr s P.Text
+    -- ^ @cache_level@ - (Optional)
+    --
+    , _cacheOnCookie           :: TF.Attr s P.Text
+    -- ^ @cache_on_cookie@ - (Optional)
+    --
+    , _disableApps             :: TF.Attr s P.Bool
+    -- ^ @disable_apps@ - (Optional)
+    --
+    , _disablePerformance      :: TF.Attr s P.Bool
+    -- ^ @disable_performance@ - (Optional)
+    --
+    , _disableRailgun          :: TF.Attr s P.Bool
+    -- ^ @disable_railgun@ - (Optional)
+    --
+    , _disableSecurity         :: TF.Attr s P.Bool
+    -- ^ @disable_security@ - (Optional)
+    --
+    , _edgeCacheTtl            :: TF.Attr s P.Integer
+    -- ^ @edge_cache_ttl@ - (Optional)
+    --
+    , _emailObfuscation        :: TF.Attr s P.Text
+    -- ^ @email_obfuscation@ - (Optional)
+    --
+    , _explicitCacheControl    :: TF.Attr s P.Text
+    -- ^ @explicit_cache_control@ - (Optional)
+    --
+    , _forwardingUrl           :: TF.Attr s (ActionsForwardingUrl s)
+    -- ^ @forwarding_url@ - (Optional)
+    --
+    , _hostHeaderOverride      :: TF.Attr s P.Text
+    -- ^ @host_header_override@ - (Optional)
+    --
+    , _ipGeolocation           :: TF.Attr s P.Text
+    -- ^ @ip_geolocation@ - (Optional)
+    --
+    , _mirage                  :: TF.Attr s P.Text
+    -- ^ @mirage@ - (Optional)
+    --
+    , _opportunisticEncryption :: TF.Attr s P.Text
+    -- ^ @opportunistic_encryption@ - (Optional)
+    --
+    , _originErrorPagePassThru :: TF.Attr s P.Text
+    -- ^ @origin_error_page_pass_thru@ - (Optional)
+    --
+    , _polish                  :: TF.Attr s P.Text
+    -- ^ @polish@ - (Optional)
+    --
+    , _resolveOverride         :: TF.Attr s P.Text
+    -- ^ @resolve_override@ - (Optional)
+    --
+    , _respectStrongEtag       :: TF.Attr s P.Text
+    -- ^ @respect_strong_etag@ - (Optional)
+    --
+    , _responseBuffering       :: TF.Attr s P.Text
+    -- ^ @response_buffering@ - (Optional)
+    --
+    , _rocketLoader            :: TF.Attr s P.Text
+    -- ^ @rocket_loader@ - (Optional)
+    --
+    , _securityLevel           :: TF.Attr s P.Text
+    -- ^ @security_level@ - (Optional)
+    --
+    , _serverSideExclude       :: TF.Attr s P.Text
+    -- ^ @server_side_exclude@ - (Optional)
+    --
+    , _sortQueryStringForCache :: TF.Attr s P.Text
+    -- ^ @sort_query_string_for_cache@ - (Optional)
+    --
+    , _ssl                     :: TF.Attr s P.Text
+    -- ^ @ssl@ - (Optional)
+    --
+    , _trueClientIpHeader      :: TF.Attr s P.Text
+    -- ^ @true_client_ip_header@ - (Optional)
+    --
+    , _waf                     :: TF.Attr s P.Text
+    -- ^ @waf@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Generic)
+
+newPageRuleActions
+    :: PageRuleActions s
+newPageRuleActions =
+    PageRuleActions'
+        { _alwaysOnline = TF.Nil
+        , _alwaysUseHttps = TF.value P.False
+        , _automaticHttpsRewrites = TF.Nil
+        , _browserCacheTtl = TF.Nil
+        , _browserCheck = TF.Nil
+        , _bypassCacheOnCookie = TF.Nil
+        , _cacheByDeviceType = TF.Nil
+        , _cacheDeceptionArmor = TF.Nil
+        , _cacheLevel = TF.Nil
+        , _cacheOnCookie = TF.Nil
+        , _disableApps = TF.value P.False
+        , _disablePerformance = TF.value P.False
+        , _disableRailgun = TF.value P.False
+        , _disableSecurity = TF.value P.False
+        , _edgeCacheTtl = TF.Nil
+        , _emailObfuscation = TF.Nil
+        , _explicitCacheControl = TF.Nil
+        , _forwardingUrl = TF.Nil
+        , _hostHeaderOverride = TF.Nil
+        , _ipGeolocation = TF.Nil
+        , _mirage = TF.Nil
+        , _opportunisticEncryption = TF.Nil
+        , _originErrorPagePassThru = TF.Nil
+        , _polish = TF.Nil
+        , _resolveOverride = TF.Nil
+        , _respectStrongEtag = TF.Nil
+        , _responseBuffering = TF.Nil
+        , _rocketLoader = TF.Nil
+        , _securityLevel = TF.Nil
+        , _serverSideExclude = TF.Nil
+        , _sortQueryStringForCache = TF.Nil
+        , _ssl = TF.Nil
+        , _trueClientIpHeader = TF.Nil
+        , _waf = TF.Nil
+        }
+
+instance P.Hashable  (PageRuleActions s)
+instance TF.IsValue  (PageRuleActions s)
+instance TF.IsObject (PageRuleActions s) where
+    toObject PageRuleActions'{..} = P.catMaybes
+        [ TF.assign "always_online" <$> TF.attribute _alwaysOnline
+        , TF.assign "always_use_https" <$> TF.attribute _alwaysUseHttps
+        , TF.assign "automatic_https_rewrites" <$> TF.attribute _automaticHttpsRewrites
+        , TF.assign "browser_cache_ttl" <$> TF.attribute _browserCacheTtl
+        , TF.assign "browser_check" <$> TF.attribute _browserCheck
+        , TF.assign "bypass_cache_on_cookie" <$> TF.attribute _bypassCacheOnCookie
+        , TF.assign "cache_by_device_type" <$> TF.attribute _cacheByDeviceType
+        , TF.assign "cache_deception_armor" <$> TF.attribute _cacheDeceptionArmor
+        , TF.assign "cache_level" <$> TF.attribute _cacheLevel
+        , TF.assign "cache_on_cookie" <$> TF.attribute _cacheOnCookie
+        , TF.assign "disable_apps" <$> TF.attribute _disableApps
+        , TF.assign "disable_performance" <$> TF.attribute _disablePerformance
+        , TF.assign "disable_railgun" <$> TF.attribute _disableRailgun
+        , TF.assign "disable_security" <$> TF.attribute _disableSecurity
+        , TF.assign "edge_cache_ttl" <$> TF.attribute _edgeCacheTtl
+        , TF.assign "email_obfuscation" <$> TF.attribute _emailObfuscation
+        , TF.assign "explicit_cache_control" <$> TF.attribute _explicitCacheControl
+        , TF.assign "forwarding_url" <$> TF.attribute _forwardingUrl
+        , TF.assign "host_header_override" <$> TF.attribute _hostHeaderOverride
+        , TF.assign "ip_geolocation" <$> TF.attribute _ipGeolocation
+        , TF.assign "mirage" <$> TF.attribute _mirage
+        , TF.assign "opportunistic_encryption" <$> TF.attribute _opportunisticEncryption
+        , TF.assign "origin_error_page_pass_thru" <$> TF.attribute _originErrorPagePassThru
+        , TF.assign "polish" <$> TF.attribute _polish
+        , TF.assign "resolve_override" <$> TF.attribute _resolveOverride
+        , TF.assign "respect_strong_etag" <$> TF.attribute _respectStrongEtag
+        , TF.assign "response_buffering" <$> TF.attribute _responseBuffering
+        , TF.assign "rocket_loader" <$> TF.attribute _rocketLoader
+        , TF.assign "security_level" <$> TF.attribute _securityLevel
+        , TF.assign "server_side_exclude" <$> TF.attribute _serverSideExclude
+        , TF.assign "sort_query_string_for_cache" <$> TF.attribute _sortQueryStringForCache
+        , TF.assign "ssl" <$> TF.attribute _ssl
+        , TF.assign "true_client_ip_header" <$> TF.attribute _trueClientIpHeader
+        , TF.assign "waf" <$> TF.attribute _waf
+        ]
+
+instance TF.IsValid (PageRuleActions s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_forwardingUrl"
+                  (_forwardingUrl
+                      :: PageRuleActions s -> TF.Attr s (ActionsForwardingUrl s))
                   TF.validator
 
-instance P.HasMode (Action s) (TF.Attr s P.Text) where
-    mode =
-        P.lens (_mode :: Action s -> TF.Attr s P.Text)
-               (\s a -> s { _mode = a } :: Action s)
+instance P.HasAlwaysOnline (PageRuleActions s) (TF.Attr s P.Text) where
+    alwaysOnline =
+        P.lens (_alwaysOnline :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _alwaysOnline = a } :: PageRuleActions s)
 
-instance P.HasResponse (Action s) (TF.Attr s (Response s)) where
-    response =
-        P.lens (_response :: Action s -> TF.Attr s (Response s))
-               (\s a -> s { _response = a } :: Action s)
+instance P.HasAlwaysUseHttps (PageRuleActions s) (TF.Attr s P.Bool) where
+    alwaysUseHttps =
+        P.lens (_alwaysUseHttps :: PageRuleActions s -> TF.Attr s P.Bool)
+               (\s a -> s { _alwaysUseHttps = a } :: PageRuleActions s)
 
-instance P.HasTimeout (Action s) (TF.Attr s P.Integer) where
-    timeout =
-        P.lens (_timeout :: Action s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeout = a } :: Action s)
+instance P.HasAutomaticHttpsRewrites (PageRuleActions s) (TF.Attr s P.Text) where
+    automaticHttpsRewrites =
+        P.lens (_automaticHttpsRewrites :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _automaticHttpsRewrites = a } :: PageRuleActions s)
 
--- | @minify@ nested settings.
-data Minify s = Minify'
-    { _css  :: TF.Attr s P.Text
-    -- ^ @css@ - (Required)
-    --
-    , _html :: TF.Attr s P.Text
-    -- ^ @html@ - (Required)
-    --
-    , _js   :: TF.Attr s P.Text
-    -- ^ @js@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+instance P.HasBrowserCacheTtl (PageRuleActions s) (TF.Attr s P.Integer) where
+    browserCacheTtl =
+        P.lens (_browserCacheTtl :: PageRuleActions s -> TF.Attr s P.Integer)
+               (\s a -> s { _browserCacheTtl = a } :: PageRuleActions s)
 
-newMinify
-    :: TF.Attr s P.Text -- ^ @css@ - 'P.css'
-    -> TF.Attr s P.Text -- ^ @html@ - 'P.html'
-    -> TF.Attr s P.Text -- ^ @js@ - 'P.js'
-    -> Minify s
-newMinify _css _html _js =
-    Minify'
-        { _css = _css
-        , _html = _html
-        , _js = _js
-        }
+instance P.HasBrowserCheck (PageRuleActions s) (TF.Attr s P.Text) where
+    browserCheck =
+        P.lens (_browserCheck :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _browserCheck = a } :: PageRuleActions s)
 
-instance P.Hashable  (Minify s)
-instance TF.IsValue  (Minify s)
-instance TF.IsObject (Minify s) where
-    toObject Minify'{..} = P.catMaybes
-        [ TF.assign "css" <$> TF.attribute _css
-        , TF.assign "html" <$> TF.attribute _html
-        , TF.assign "js" <$> TF.attribute _js
-        ]
+instance P.HasBypassCacheOnCookie (PageRuleActions s) (TF.Attr s P.Text) where
+    bypassCacheOnCookie =
+        P.lens (_bypassCacheOnCookie :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _bypassCacheOnCookie = a } :: PageRuleActions s)
 
-instance TF.IsValid (Minify s) where
-    validator = P.mempty
+instance P.HasCacheByDeviceType (PageRuleActions s) (TF.Attr s P.Text) where
+    cacheByDeviceType =
+        P.lens (_cacheByDeviceType :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheByDeviceType = a } :: PageRuleActions s)
 
-instance P.HasCss (Minify s) (TF.Attr s P.Text) where
-    css =
-        P.lens (_css :: Minify s -> TF.Attr s P.Text)
-               (\s a -> s { _css = a } :: Minify s)
+instance P.HasCacheDeceptionArmor (PageRuleActions s) (TF.Attr s P.Text) where
+    cacheDeceptionArmor =
+        P.lens (_cacheDeceptionArmor :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheDeceptionArmor = a } :: PageRuleActions s)
 
-instance P.HasHtml (Minify s) (TF.Attr s P.Text) where
-    html =
-        P.lens (_html :: Minify s -> TF.Attr s P.Text)
-               (\s a -> s { _html = a } :: Minify s)
+instance P.HasCacheLevel (PageRuleActions s) (TF.Attr s P.Text) where
+    cacheLevel =
+        P.lens (_cacheLevel :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheLevel = a } :: PageRuleActions s)
 
-instance P.HasJs (Minify s) (TF.Attr s P.Text) where
-    js =
-        P.lens (_js :: Minify s -> TF.Attr s P.Text)
-               (\s a -> s { _js = a } :: Minify s)
+instance P.HasCacheOnCookie (PageRuleActions s) (TF.Attr s P.Text) where
+    cacheOnCookie =
+        P.lens (_cacheOnCookie :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _cacheOnCookie = a } :: PageRuleActions s)
 
--- | @initial_settings@ nested settings.
-data InitialSettings s = InitialSettings'
-    deriving (P.Show, P.Eq, P.Generic)
+instance P.HasDisableApps (PageRuleActions s) (TF.Attr s P.Bool) where
+    disableApps =
+        P.lens (_disableApps :: PageRuleActions s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableApps = a } :: PageRuleActions s)
 
-newInitialSettings
-    :: InitialSettings s
-newInitialSettings =
-    InitialSettings'
+instance P.HasDisablePerformance (PageRuleActions s) (TF.Attr s P.Bool) where
+    disablePerformance =
+        P.lens (_disablePerformance :: PageRuleActions s -> TF.Attr s P.Bool)
+               (\s a -> s { _disablePerformance = a } :: PageRuleActions s)
 
-instance P.Hashable  (InitialSettings s)
-instance TF.IsValue  (InitialSettings s)
-instance TF.IsObject (InitialSettings s) where
-    toObject InitialSettings' = []
+instance P.HasDisableRailgun (PageRuleActions s) (TF.Attr s P.Bool) where
+    disableRailgun =
+        P.lens (_disableRailgun :: PageRuleActions s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableRailgun = a } :: PageRuleActions s)
 
-instance TF.IsValid (InitialSettings s) where
-    validator = P.mempty
+instance P.HasDisableSecurity (PageRuleActions s) (TF.Attr s P.Bool) where
+    disableSecurity =
+        P.lens (_disableSecurity :: PageRuleActions s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableSecurity = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedAdvancedDdos (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAdvancedDdos x = TF.compute (TF.refKey x) "_computedAdvancedDdos"
+instance P.HasEdgeCacheTtl (PageRuleActions s) (TF.Attr s P.Integer) where
+    edgeCacheTtl =
+        P.lens (_edgeCacheTtl :: PageRuleActions s -> TF.Attr s P.Integer)
+               (\s a -> s { _edgeCacheTtl = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedAlwaysOnline (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAlwaysOnline x = TF.compute (TF.refKey x) "_computedAlwaysOnline"
+instance P.HasEmailObfuscation (PageRuleActions s) (TF.Attr s P.Text) where
+    emailObfuscation =
+        P.lens (_emailObfuscation :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _emailObfuscation = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedAlwaysUseHttps (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAlwaysUseHttps x = TF.compute (TF.refKey x) "_computedAlwaysUseHttps"
+instance P.HasExplicitCacheControl (PageRuleActions s) (TF.Attr s P.Text) where
+    explicitCacheControl =
+        P.lens (_explicitCacheControl :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _explicitCacheControl = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedAutomaticHttpsRewrites (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedAutomaticHttpsRewrites x = TF.compute (TF.refKey x) "_computedAutomaticHttpsRewrites"
+instance P.HasForwardingUrl (PageRuleActions s) (TF.Attr s (ActionsForwardingUrl s)) where
+    forwardingUrl =
+        P.lens (_forwardingUrl :: PageRuleActions s -> TF.Attr s (ActionsForwardingUrl s))
+               (\s a -> s { _forwardingUrl = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedBrotli (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedBrotli x = TF.compute (TF.refKey x) "_computedBrotli"
+instance P.HasHostHeaderOverride (PageRuleActions s) (TF.Attr s P.Text) where
+    hostHeaderOverride =
+        P.lens (_hostHeaderOverride :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _hostHeaderOverride = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedBrowserCacheTtl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedBrowserCacheTtl x = TF.compute (TF.refKey x) "_computedBrowserCacheTtl"
+instance P.HasIpGeolocation (PageRuleActions s) (TF.Attr s P.Text) where
+    ipGeolocation =
+        P.lens (_ipGeolocation :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _ipGeolocation = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedBrowserCheck (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedBrowserCheck x = TF.compute (TF.refKey x) "_computedBrowserCheck"
+instance P.HasMirage (PageRuleActions s) (TF.Attr s P.Text) where
+    mirage =
+        P.lens (_mirage :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _mirage = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedCacheLevel (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedCacheLevel x = TF.compute (TF.refKey x) "_computedCacheLevel"
+instance P.HasOpportunisticEncryption (PageRuleActions s) (TF.Attr s P.Text) where
+    opportunisticEncryption =
+        P.lens (_opportunisticEncryption :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _opportunisticEncryption = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedChallengeTtl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedChallengeTtl x = TF.compute (TF.refKey x) "_computedChallengeTtl"
+instance P.HasOriginErrorPagePassThru (PageRuleActions s) (TF.Attr s P.Text) where
+    originErrorPagePassThru =
+        P.lens (_originErrorPagePassThru :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _originErrorPagePassThru = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedCnameFlattening (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedCnameFlattening x = TF.compute (TF.refKey x) "_computedCnameFlattening"
+instance P.HasPolish (PageRuleActions s) (TF.Attr s P.Text) where
+    polish =
+        P.lens (_polish :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _polish = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedDevelopmentMode (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedDevelopmentMode x = TF.compute (TF.refKey x) "_computedDevelopmentMode"
+instance P.HasResolveOverride (PageRuleActions s) (TF.Attr s P.Text) where
+    resolveOverride =
+        P.lens (_resolveOverride :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _resolveOverride = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedEdgeCacheTtl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedEdgeCacheTtl x = TF.compute (TF.refKey x) "_computedEdgeCacheTtl"
+instance P.HasRespectStrongEtag (PageRuleActions s) (TF.Attr s P.Text) where
+    respectStrongEtag =
+        P.lens (_respectStrongEtag :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _respectStrongEtag = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedEmailObfuscation (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedEmailObfuscation x = TF.compute (TF.refKey x) "_computedEmailObfuscation"
+instance P.HasResponseBuffering (PageRuleActions s) (TF.Attr s P.Text) where
+    responseBuffering =
+        P.lens (_responseBuffering :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _responseBuffering = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedHotlinkProtection (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedHotlinkProtection x = TF.compute (TF.refKey x) "_computedHotlinkProtection"
+instance P.HasRocketLoader (PageRuleActions s) (TF.Attr s P.Text) where
+    rocketLoader =
+        P.lens (_rocketLoader :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _rocketLoader = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedHttp2 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedHttp2 x = TF.compute (TF.refKey x) "_computedHttp2"
+instance P.HasSecurityLevel (PageRuleActions s) (TF.Attr s P.Text) where
+    securityLevel =
+        P.lens (_securityLevel :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _securityLevel = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedIpGeolocation (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedIpGeolocation x = TF.compute (TF.refKey x) "_computedIpGeolocation"
+instance P.HasServerSideExclude (PageRuleActions s) (TF.Attr s P.Text) where
+    serverSideExclude =
+        P.lens (_serverSideExclude :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _serverSideExclude = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedIpv6 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedIpv6 x = TF.compute (TF.refKey x) "_computedIpv6"
+instance P.HasSortQueryStringForCache (PageRuleActions s) (TF.Attr s P.Text) where
+    sortQueryStringForCache =
+        P.lens (_sortQueryStringForCache :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _sortQueryStringForCache = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedMaxUpload (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Integer) where
-    computedMaxUpload x = TF.compute (TF.refKey x) "_computedMaxUpload"
+instance P.HasSsl (PageRuleActions s) (TF.Attr s P.Text) where
+    ssl =
+        P.lens (_ssl :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _ssl = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedMinTlsVersion (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedMinTlsVersion x = TF.compute (TF.refKey x) "_computedMinTlsVersion"
+instance P.HasTrueClientIpHeader (PageRuleActions s) (TF.Attr s P.Text) where
+    trueClientIpHeader =
+        P.lens (_trueClientIpHeader :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _trueClientIpHeader = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedMinify (TF.Ref s' (InitialSettings s)) (TF.Attr s (Minify s)) where
-    computedMinify x = TF.compute (TF.refKey x) "_computedMinify"
+instance P.HasWaf (PageRuleActions s) (TF.Attr s P.Text) where
+    waf =
+        P.lens (_waf :: PageRuleActions s -> TF.Attr s P.Text)
+               (\s a -> s { _waf = a } :: PageRuleActions s)
 
-instance s ~ s' => P.HasComputedMirage (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedMirage x = TF.compute (TF.refKey x) "_computedMirage"
-
-instance s ~ s' => P.HasComputedMobileRedirect (TF.Ref s' (InitialSettings s)) (TF.Attr s (MobileRedirect s)) where
-    computedMobileRedirect x = TF.compute (TF.refKey x) "_computedMobileRedirect"
-
-instance s ~ s' => P.HasComputedOpportunisticEncryption (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedOpportunisticEncryption x = TF.compute (TF.refKey x) "_computedOpportunisticEncryption"
-
-instance s ~ s' => P.HasComputedOriginErrorPagePassThru (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedOriginErrorPagePassThru x = TF.compute (TF.refKey x) "_computedOriginErrorPagePassThru"
-
-instance s ~ s' => P.HasComputedPolish (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPolish x = TF.compute (TF.refKey x) "_computedPolish"
-
-instance s ~ s' => P.HasComputedPrefetchPreload (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPrefetchPreload x = TF.compute (TF.refKey x) "_computedPrefetchPreload"
-
-instance s ~ s' => P.HasComputedPrivacyPass (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPrivacyPass x = TF.compute (TF.refKey x) "_computedPrivacyPass"
-
-instance s ~ s' => P.HasComputedPseudoIpv4 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedPseudoIpv4 x = TF.compute (TF.refKey x) "_computedPseudoIpv4"
-
-instance s ~ s' => P.HasComputedResponseBuffering (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedResponseBuffering x = TF.compute (TF.refKey x) "_computedResponseBuffering"
-
-instance s ~ s' => P.HasComputedRocketLoader (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedRocketLoader x = TF.compute (TF.refKey x) "_computedRocketLoader"
-
-instance s ~ s' => P.HasComputedSecurityHeader (TF.Ref s' (InitialSettings s)) (TF.Attr s (SecurityHeader s)) where
-    computedSecurityHeader x = TF.compute (TF.refKey x) "_computedSecurityHeader"
-
-instance s ~ s' => P.HasComputedSecurityLevel (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSecurityLevel x = TF.compute (TF.refKey x) "_computedSecurityLevel"
-
-instance s ~ s' => P.HasComputedServerSideExclude (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedServerSideExclude x = TF.compute (TF.refKey x) "_computedServerSideExclude"
-
-instance s ~ s' => P.HasComputedSha1Support (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSha1Support x = TF.compute (TF.refKey x) "_computedSha1Support"
-
-instance s ~ s' => P.HasComputedSortQueryStringForCache (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSortQueryStringForCache x = TF.compute (TF.refKey x) "_computedSortQueryStringForCache"
-
-instance s ~ s' => P.HasComputedSsl (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedSsl x = TF.compute (TF.refKey x) "_computedSsl"
-
-instance s ~ s' => P.HasComputedTls12Only (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTls12Only x = TF.compute (TF.refKey x) "_computedTls12Only"
-
-instance s ~ s' => P.HasComputedTls13 (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTls13 x = TF.compute (TF.refKey x) "_computedTls13"
-
-instance s ~ s' => P.HasComputedTlsClientAuth (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTlsClientAuth x = TF.compute (TF.refKey x) "_computedTlsClientAuth"
-
-instance s ~ s' => P.HasComputedTrueClientIpHeader (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedTrueClientIpHeader x = TF.compute (TF.refKey x) "_computedTrueClientIpHeader"
-
-instance s ~ s' => P.HasComputedWaf (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedWaf x = TF.compute (TF.refKey x) "_computedWaf"
-
-instance s ~ s' => P.HasComputedWebp (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedWebp x = TF.compute (TF.refKey x) "_computedWebp"
-
-instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (InitialSettings s)) (TF.Attr s P.Text) where
-    computedWebsockets x = TF.compute (TF.refKey x) "_computedWebsockets"
-
--- | @origins@ nested settings.
-data Origins s = Origins'
+-- | @load_balancer_pool_origins@ nested settings.
+data LoadBalancerPoolOrigins s = LoadBalancerPoolOrigins'
     { _address :: TF.Attr s P.Text
     -- ^ @address@ - (Required)
     --
@@ -1366,128 +1763,46 @@ data Origins s = Origins'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newOrigins
+newLoadBalancerPoolOrigins
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> Origins s
-newOrigins _address _name =
-    Origins'
+    -> LoadBalancerPoolOrigins s
+newLoadBalancerPoolOrigins _address _name =
+    LoadBalancerPoolOrigins'
         { _address = _address
         , _enabled = TF.value P.True
         , _name = _name
         }
 
-instance P.Hashable  (Origins s)
-instance TF.IsValue  (Origins s)
-instance TF.IsObject (Origins s) where
-    toObject Origins'{..} = P.catMaybes
+instance P.Hashable  (LoadBalancerPoolOrigins s)
+instance TF.IsValue  (LoadBalancerPoolOrigins s)
+instance TF.IsObject (LoadBalancerPoolOrigins s) where
+    toObject LoadBalancerPoolOrigins'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "enabled" <$> TF.attribute _enabled
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance TF.IsValid (Origins s) where
+instance TF.IsValid (LoadBalancerPoolOrigins s) where
     validator = P.mempty
 
-instance P.HasAddress (Origins s) (TF.Attr s P.Text) where
+instance P.HasAddress (LoadBalancerPoolOrigins s) (TF.Attr s P.Text) where
     address =
-        P.lens (_address :: Origins s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: Origins s)
+        P.lens (_address :: LoadBalancerPoolOrigins s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: LoadBalancerPoolOrigins s)
 
-instance P.HasEnabled (Origins s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (LoadBalancerPoolOrigins s) (TF.Attr s P.Bool) where
     enabled =
-        P.lens (_enabled :: Origins s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: Origins s)
+        P.lens (_enabled :: LoadBalancerPoolOrigins s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: LoadBalancerPoolOrigins s)
 
-instance P.HasName (Origins s) (TF.Attr s P.Text) where
+instance P.HasName (LoadBalancerPoolOrigins s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: Origins s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: Origins s)
+        P.lens (_name :: LoadBalancerPoolOrigins s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: LoadBalancerPoolOrigins s)
 
--- | @header@ nested settings.
-data Header s = Header'
-    { _header :: TF.Attr s P.Text
-    -- ^ @header@ - (Required)
-    --
-    , _values :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @values@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newHeader
-    :: TF.Attr s P.Text -- ^ @header@ - 'P.header'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @values@ - 'P.values'
-    -> Header s
-newHeader _header _values =
-    Header'
-        { _header = _header
-        , _values = _values
-        }
-
-instance P.Hashable  (Header s)
-instance TF.IsValue  (Header s)
-instance TF.IsObject (Header s) where
-    toObject Header'{..} = P.catMaybes
-        [ TF.assign "header" <$> TF.attribute _header
-        , TF.assign "values" <$> TF.attribute _values
-        ]
-
-instance TF.IsValid (Header s) where
-    validator = P.mempty
-
-instance P.HasHeader (Header s) (TF.Attr s P.Text) where
-    header =
-        P.lens (_header :: Header s -> TF.Attr s P.Text)
-               (\s a -> s { _header = a } :: Header s)
-
-instance P.HasValues (Header s) (TF.Attr s [TF.Attr s P.Text]) where
-    values =
-        P.lens (_values :: Header s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: Header s)
-
--- | @forwarding_url@ nested settings.
-data ForwardingUrl s = ForwardingUrl'
-    { _statusCode :: TF.Attr s P.Integer
-    -- ^ @status_code@ - (Required)
-    --
-    , _url        :: TF.Attr s P.Text
-    -- ^ @url@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newForwardingUrl
-    :: TF.Attr s P.Integer -- ^ @status_code@ - 'P.statusCode'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> ForwardingUrl s
-newForwardingUrl _statusCode _url =
-    ForwardingUrl'
-        { _statusCode = _statusCode
-        , _url = _url
-        }
-
-instance P.Hashable  (ForwardingUrl s)
-instance TF.IsValue  (ForwardingUrl s)
-instance TF.IsObject (ForwardingUrl s) where
-    toObject ForwardingUrl'{..} = P.catMaybes
-        [ TF.assign "status_code" <$> TF.attribute _statusCode
-        , TF.assign "url" <$> TF.attribute _url
-        ]
-
-instance TF.IsValid (ForwardingUrl s) where
-    validator = P.mempty
-
-instance P.HasStatusCode (ForwardingUrl s) (TF.Attr s P.Integer) where
-    statusCode =
-        P.lens (_statusCode :: ForwardingUrl s -> TF.Attr s P.Integer)
-               (\s a -> s { _statusCode = a } :: ForwardingUrl s)
-
-instance P.HasUrl (ForwardingUrl s) (TF.Attr s P.Text) where
-    url =
-        P.lens (_url :: ForwardingUrl s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: ForwardingUrl s)
-
--- | @mobile_redirect@ nested settings.
-data MobileRedirect s = MobileRedirect'
+-- | @initial_settings_mobile_redirect@ nested settings.
+data InitialSettingsMobileRedirect s = InitialSettingsMobileRedirect'
     { _mobileSubdomain :: TF.Attr s P.Text
     -- ^ @mobile_subdomain@ - (Required)
     --
@@ -1499,163 +1814,41 @@ data MobileRedirect s = MobileRedirect'
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
-newMobileRedirect
+newInitialSettingsMobileRedirect
     :: TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
     -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
     -> TF.Attr s P.Bool -- ^ @strip_uri@ - 'P.stripUri'
-    -> MobileRedirect s
-newMobileRedirect _mobileSubdomain _status _stripUri =
-    MobileRedirect'
+    -> InitialSettingsMobileRedirect s
+newInitialSettingsMobileRedirect _mobileSubdomain _status _stripUri =
+    InitialSettingsMobileRedirect'
         { _mobileSubdomain = _mobileSubdomain
         , _status = _status
         , _stripUri = _stripUri
         }
 
-instance P.Hashable  (MobileRedirect s)
-instance TF.IsValue  (MobileRedirect s)
-instance TF.IsObject (MobileRedirect s) where
-    toObject MobileRedirect'{..} = P.catMaybes
+instance P.Hashable  (InitialSettingsMobileRedirect s)
+instance TF.IsValue  (InitialSettingsMobileRedirect s)
+instance TF.IsObject (InitialSettingsMobileRedirect s) where
+    toObject InitialSettingsMobileRedirect'{..} = P.catMaybes
         [ TF.assign "mobile_subdomain" <$> TF.attribute _mobileSubdomain
         , TF.assign "status" <$> TF.attribute _status
         , TF.assign "strip_uri" <$> TF.attribute _stripUri
         ]
 
-instance TF.IsValid (MobileRedirect s) where
+instance TF.IsValid (InitialSettingsMobileRedirect s) where
     validator = P.mempty
 
-instance P.HasMobileSubdomain (MobileRedirect s) (TF.Attr s P.Text) where
+instance P.HasMobileSubdomain (InitialSettingsMobileRedirect s) (TF.Attr s P.Text) where
     mobileSubdomain =
-        P.lens (_mobileSubdomain :: MobileRedirect s -> TF.Attr s P.Text)
-               (\s a -> s { _mobileSubdomain = a } :: MobileRedirect s)
+        P.lens (_mobileSubdomain :: InitialSettingsMobileRedirect s -> TF.Attr s P.Text)
+               (\s a -> s { _mobileSubdomain = a } :: InitialSettingsMobileRedirect s)
 
-instance P.HasStatus (MobileRedirect s) (TF.Attr s P.Text) where
+instance P.HasStatus (InitialSettingsMobileRedirect s) (TF.Attr s P.Text) where
     status =
-        P.lens (_status :: MobileRedirect s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a } :: MobileRedirect s)
+        P.lens (_status :: InitialSettingsMobileRedirect s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: InitialSettingsMobileRedirect s)
 
-instance P.HasStripUri (MobileRedirect s) (TF.Attr s P.Bool) where
+instance P.HasStripUri (InitialSettingsMobileRedirect s) (TF.Attr s P.Bool) where
     stripUri =
-        P.lens (_stripUri :: MobileRedirect s -> TF.Attr s P.Bool)
-               (\s a -> s { _stripUri = a } :: MobileRedirect s)
-
--- | @region_pools@ nested settings.
-data RegionPools s = RegionPools'
-    { _poolIds :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @pool_ids@ - (Required)
-    --
-    , _region  :: TF.Attr s P.Text
-    -- ^ @region@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newRegionPools
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> RegionPools s
-newRegionPools _poolIds _region =
-    RegionPools'
-        { _poolIds = _poolIds
-        , _region = _region
-        }
-
-instance P.Hashable  (RegionPools s)
-instance TF.IsValue  (RegionPools s)
-instance TF.IsObject (RegionPools s) where
-    toObject RegionPools'{..} = P.catMaybes
-        [ TF.assign "pool_ids" <$> TF.attribute _poolIds
-        , TF.assign "region" <$> TF.attribute _region
-        ]
-
-instance TF.IsValid (RegionPools s) where
-    validator = P.mempty
-
-instance P.HasPoolIds (RegionPools s) (TF.Attr s [TF.Attr s P.Text]) where
-    poolIds =
-        P.lens (_poolIds :: RegionPools s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _poolIds = a } :: RegionPools s)
-
-instance P.HasRegion (RegionPools s) (TF.Attr s P.Text) where
-    region =
-        P.lens (_region :: RegionPools s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: RegionPools s)
-
--- | @match@ nested settings.
-data Match s = Match'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newMatch
-    :: Match s
-newMatch =
-    Match'
-
-instance P.Hashable  (Match s)
-instance TF.IsValue  (Match s)
-instance TF.IsObject (Match s) where
-    toObject Match' = []
-
-instance TF.IsValid (Match s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedRequest (TF.Ref s' (Match s)) (TF.Attr s (Request s)) where
-    computedRequest x = TF.compute (TF.refKey x) "_computedRequest"
-
-instance s ~ s' => P.HasComputedResponse (TF.Ref s' (Match s)) (TF.Attr s (Response s)) where
-    computedResponse x = TF.compute (TF.refKey x) "_computedResponse"
-
--- | @security_header@ nested settings.
-data SecurityHeader s = SecurityHeader'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newSecurityHeader
-    :: SecurityHeader s
-newSecurityHeader =
-    SecurityHeader'
-
-instance P.Hashable  (SecurityHeader s)
-instance TF.IsValue  (SecurityHeader s)
-instance TF.IsObject (SecurityHeader s) where
-    toObject SecurityHeader' = []
-
-instance TF.IsValid (SecurityHeader s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "_computedEnabled"
-
-instance s ~ s' => P.HasComputedIncludeSubdomains (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedIncludeSubdomains x = TF.compute (TF.refKey x) "_computedIncludeSubdomains"
-
-instance s ~ s' => P.HasComputedMaxAge (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Integer) where
-    computedMaxAge x = TF.compute (TF.refKey x) "_computedMaxAge"
-
-instance s ~ s' => P.HasComputedNosniff (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedNosniff x = TF.compute (TF.refKey x) "_computedNosniff"
-
-instance s ~ s' => P.HasComputedPreload (TF.Ref s' (SecurityHeader s)) (TF.Attr s P.Bool) where
-    computedPreload x = TF.compute (TF.refKey x) "_computedPreload"
-
--- | @request@ nested settings.
-data Request s = Request'
-    deriving (P.Show, P.Eq, P.Generic)
-
-newRequest
-    :: Request s
-newRequest =
-    Request'
-
-instance P.Hashable  (Request s)
-instance TF.IsValue  (Request s)
-instance TF.IsObject (Request s) where
-    toObject Request' = []
-
-instance TF.IsValid (Request s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedMethods (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMethods x = TF.compute (TF.refKey x) "_computedMethods"
-
-instance s ~ s' => P.HasComputedSchemes (TF.Ref s' (Request s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSchemes x = TF.compute (TF.refKey x) "_computedSchemes"
-
-instance s ~ s' => P.HasComputedUrlPattern (TF.Ref s' (Request s)) (TF.Attr s P.Text) where
-    computedUrlPattern x = TF.compute (TF.refKey x) "_computedUrlPattern"
+        P.lens (_stripUri :: InitialSettingsMobileRedirect s -> TF.Attr s P.Bool)
+               (\s a -> s { _stripUri = a } :: InitialSettingsMobileRedirect s)

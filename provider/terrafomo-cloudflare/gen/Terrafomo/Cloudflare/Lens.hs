@@ -48,6 +48,7 @@ module Terrafomo.Cloudflare.Lens
     , HasLongMinutes (..)
     , HasCacheOnCookie (..)
     , HasThreshold (..)
+    , HasContentType (..)
     , HasOriginErrorPagePassThru (..)
     , HasLongDegrees (..)
     , HasLatMinutes (..)
@@ -126,6 +127,7 @@ module Terrafomo.Cloudflare.Lens
     , HasSecurityLevel (..)
     , HasPolish (..)
     , HasDigestType (..)
+    , HasBody (..)
     , HasName (..)
     , HasAltitude (..)
     , HasRuleId (..)
@@ -421,6 +423,12 @@ class HasThreshold a b | a -> b where
 
 instance HasThreshold a b => HasThreshold (TF.Schema l p a) b where
     threshold = TF.configuration . threshold
+
+class HasContentType a b | a -> b where
+    contentType :: P.Lens' a b
+
+instance HasContentType a b => HasContentType (TF.Schema l p a) b where
+    contentType = TF.configuration . contentType
 
 class HasOriginErrorPagePassThru a b | a -> b where
     originErrorPagePassThru :: P.Lens' a b
@@ -889,6 +897,12 @@ class HasDigestType a b | a -> b where
 
 instance HasDigestType a b => HasDigestType (TF.Schema l p a) b where
     digestType = TF.configuration . digestType
+
+class HasBody a b | a -> b where
+    body :: P.Lens' a b
+
+instance HasBody a b => HasBody (TF.Schema l p a) b where
+    body = TF.configuration . body
 
 class HasName a b | a -> b where
     name :: P.Lens' a b
