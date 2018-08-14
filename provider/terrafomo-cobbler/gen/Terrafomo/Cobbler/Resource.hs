@@ -71,11 +71,11 @@ import qualified Terrafomo.Validator        as TF
 
 -- | @cobbler_distro@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/cobbler_distro terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/r/distro.html terraform documentation>
 -- for more information.
 data DistroResource s = DistroResource'
     { _breed     :: TF.Attr s P.Text
-    -- ^ @breed@ - (Required)
+    -- ^ @breed@ - (Required, Forces New)
     --
     , _initrd    :: TF.Attr s P.Text
     -- ^ @initrd@ - (Required)
@@ -146,48 +146,48 @@ instance P.HasOsVersion (DistroResource s) (TF.Attr s P.Text) where
                (\s a -> s { _osVersion = a } :: DistroResource s)
 
 instance s ~ s' => P.HasComputedArch (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedArch x = TF.compute (TF.refKey x) "_computedArch"
+    computedArch x = TF.compute (TF.refKey x) "arch"
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedBootFiles x = TF.compute (TF.refKey x) "_computedBootFiles"
+    computedBootFiles x = TF.compute (TF.refKey x) "boot_files"
 
 instance s ~ s' => P.HasComputedComment (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedComment x = TF.compute (TF.refKey x) "_computedComment"
+    computedComment x = TF.compute (TF.refKey x) "comment"
 
 instance s ~ s' => P.HasComputedFetchableFiles (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedFetchableFiles x = TF.compute (TF.refKey x) "_computedFetchableFiles"
+    computedFetchableFiles x = TF.compute (TF.refKey x) "fetchable_files"
 
 instance s ~ s' => P.HasComputedKernelOptions (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedKernelOptions x = TF.compute (TF.refKey x) "_computedKernelOptions"
+    computedKernelOptions x = TF.compute (TF.refKey x) "kernel_options"
 
 instance s ~ s' => P.HasComputedKernelOptionsPost (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedKernelOptionsPost x = TF.compute (TF.refKey x) "_computedKernelOptionsPost"
+    computedKernelOptionsPost x = TF.compute (TF.refKey x) "kernel_options_post"
 
 instance s ~ s' => P.HasComputedMgmtClasses (TF.Ref s' (DistroResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMgmtClasses x = TF.compute (TF.refKey x) "_computedMgmtClasses"
+    computedMgmtClasses x = TF.compute (TF.refKey x) "mgmt_classes"
 
 instance s ~ s' => P.HasComputedOwners (TF.Ref s' (DistroResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOwners x = TF.compute (TF.refKey x) "_computedOwners"
+    computedOwners x = TF.compute (TF.refKey x) "owners"
 
 instance s ~ s' => P.HasComputedRedhatManagementKey (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedRedhatManagementKey x = TF.compute (TF.refKey x) "_computedRedhatManagementKey"
+    computedRedhatManagementKey x = TF.compute (TF.refKey x) "redhat_management_key"
 
 instance s ~ s' => P.HasComputedRedhatManagementServer (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedRedhatManagementServer x = TF.compute (TF.refKey x) "_computedRedhatManagementServer"
+    computedRedhatManagementServer x = TF.compute (TF.refKey x) "redhat_management_server"
 
 instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
-    computedTemplateFiles x = TF.compute (TF.refKey x) "_computedTemplateFiles"
+    computedTemplateFiles x = TF.compute (TF.refKey x) "template_files"
 
 -- | @cobbler_kickstart_file@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/cobbler_kickstart_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/r/kickstart_file.html terraform documentation>
 -- for more information.
 data KickstartFileResource s = KickstartFileResource'
     { _body :: TF.Attr s P.Text
     -- ^ @body@ - (Required)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -223,14 +223,14 @@ instance P.HasName (KickstartFileResource s) (TF.Attr s P.Text) where
 
 -- | @cobbler_profile@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/cobbler_profile terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/r/profile.html terraform documentation>
 -- for more information.
 data ProfileResource s = ProfileResource'
     { _distro :: TF.Attr s P.Text
     -- ^ @distro@ - (Required)
     --
     , _name   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -265,102 +265,102 @@ instance P.HasName (ProfileResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: ProfileResource s)
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedBootFiles x = TF.compute (TF.refKey x) "_computedBootFiles"
+    computedBootFiles x = TF.compute (TF.refKey x) "boot_files"
 
 instance s ~ s' => P.HasComputedComment (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedComment x = TF.compute (TF.refKey x) "_computedComment"
+    computedComment x = TF.compute (TF.refKey x) "comment"
 
 instance s ~ s' => P.HasComputedEnableGpxe (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Bool) where
-    computedEnableGpxe x = TF.compute (TF.refKey x) "_computedEnableGpxe"
+    computedEnableGpxe x = TF.compute (TF.refKey x) "enable_gpxe"
 
 instance s ~ s' => P.HasComputedEnableMenu (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Bool) where
-    computedEnableMenu x = TF.compute (TF.refKey x) "_computedEnableMenu"
+    computedEnableMenu x = TF.compute (TF.refKey x) "enable_menu"
 
 instance s ~ s' => P.HasComputedFetchableFiles (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedFetchableFiles x = TF.compute (TF.refKey x) "_computedFetchableFiles"
+    computedFetchableFiles x = TF.compute (TF.refKey x) "fetchable_files"
 
 instance s ~ s' => P.HasComputedKernelOptions (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedKernelOptions x = TF.compute (TF.refKey x) "_computedKernelOptions"
+    computedKernelOptions x = TF.compute (TF.refKey x) "kernel_options"
 
 instance s ~ s' => P.HasComputedKernelOptionsPost (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedKernelOptionsPost x = TF.compute (TF.refKey x) "_computedKernelOptionsPost"
+    computedKernelOptionsPost x = TF.compute (TF.refKey x) "kernel_options_post"
 
 instance s ~ s' => P.HasComputedKickstart (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedKickstart x = TF.compute (TF.refKey x) "_computedKickstart"
+    computedKickstart x = TF.compute (TF.refKey x) "kickstart"
 
 instance s ~ s' => P.HasComputedKsMeta (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedKsMeta x = TF.compute (TF.refKey x) "_computedKsMeta"
+    computedKsMeta x = TF.compute (TF.refKey x) "ks_meta"
 
 instance s ~ s' => P.HasComputedMgmtClasses (TF.Ref s' (ProfileResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMgmtClasses x = TF.compute (TF.refKey x) "_computedMgmtClasses"
+    computedMgmtClasses x = TF.compute (TF.refKey x) "mgmt_classes"
 
 instance s ~ s' => P.HasComputedMgmtParameters (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedMgmtParameters x = TF.compute (TF.refKey x) "_computedMgmtParameters"
+    computedMgmtParameters x = TF.compute (TF.refKey x) "mgmt_parameters"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (ProfileResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 instance s ~ s' => P.HasComputedNameServersSearch (TF.Ref s' (ProfileResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServersSearch x = TF.compute (TF.refKey x) "_computedNameServersSearch"
+    computedNameServersSearch x = TF.compute (TF.refKey x) "name_servers_search"
 
 instance s ~ s' => P.HasComputedOwners (TF.Ref s' (ProfileResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOwners x = TF.compute (TF.refKey x) "_computedOwners"
+    computedOwners x = TF.compute (TF.refKey x) "owners"
 
 instance s ~ s' => P.HasComputedParent (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedParent x = TF.compute (TF.refKey x) "_computedParent"
+    computedParent x = TF.compute (TF.refKey x) "parent"
 
 instance s ~ s' => P.HasComputedProxy (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedProxy x = TF.compute (TF.refKey x) "_computedProxy"
+    computedProxy x = TF.compute (TF.refKey x) "proxy"
 
 instance s ~ s' => P.HasComputedRedhatManagementKey (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedRedhatManagementKey x = TF.compute (TF.refKey x) "_computedRedhatManagementKey"
+    computedRedhatManagementKey x = TF.compute (TF.refKey x) "redhat_management_key"
 
 instance s ~ s' => P.HasComputedRedhatManagementServer (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedRedhatManagementServer x = TF.compute (TF.refKey x) "_computedRedhatManagementServer"
+    computedRedhatManagementServer x = TF.compute (TF.refKey x) "redhat_management_server"
 
 instance s ~ s' => P.HasComputedRepos (TF.Ref s' (ProfileResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRepos x = TF.compute (TF.refKey x) "_computedRepos"
+    computedRepos x = TF.compute (TF.refKey x) "repos"
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedServer x = TF.compute (TF.refKey x) "_computedServer"
+    computedServer x = TF.compute (TF.refKey x) "server"
 
 instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedTemplateFiles x = TF.compute (TF.refKey x) "_computedTemplateFiles"
+    computedTemplateFiles x = TF.compute (TF.refKey x) "template_files"
 
 instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Integer) where
-    computedTemplateRemoteKickstarts x = TF.compute (TF.refKey x) "_computedTemplateRemoteKickstarts"
+    computedTemplateRemoteKickstarts x = TF.compute (TF.refKey x) "template_remote_kickstarts"
 
 instance s ~ s' => P.HasComputedVirtAutoBoot (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtAutoBoot x = TF.compute (TF.refKey x) "_computedVirtAutoBoot"
+    computedVirtAutoBoot x = TF.compute (TF.refKey x) "virt_auto_boot"
 
 instance s ~ s' => P.HasComputedVirtBridge (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtBridge x = TF.compute (TF.refKey x) "_computedVirtBridge"
+    computedVirtBridge x = TF.compute (TF.refKey x) "virt_bridge"
 
 instance s ~ s' => P.HasComputedVirtCpus (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtCpus x = TF.compute (TF.refKey x) "_computedVirtCpus"
+    computedVirtCpus x = TF.compute (TF.refKey x) "virt_cpus"
 
 instance s ~ s' => P.HasComputedVirtDiskDriver (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtDiskDriver x = TF.compute (TF.refKey x) "_computedVirtDiskDriver"
+    computedVirtDiskDriver x = TF.compute (TF.refKey x) "virt_disk_driver"
 
 instance s ~ s' => P.HasComputedVirtFileSize (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtFileSize x = TF.compute (TF.refKey x) "_computedVirtFileSize"
+    computedVirtFileSize x = TF.compute (TF.refKey x) "virt_file_size"
 
 instance s ~ s' => P.HasComputedVirtPath (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtPath x = TF.compute (TF.refKey x) "_computedVirtPath"
+    computedVirtPath x = TF.compute (TF.refKey x) "virt_path"
 
 instance s ~ s' => P.HasComputedVirtRam (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtRam x = TF.compute (TF.refKey x) "_computedVirtRam"
+    computedVirtRam x = TF.compute (TF.refKey x) "virt_ram"
 
 instance s ~ s' => P.HasComputedVirtType (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
-    computedVirtType x = TF.compute (TF.refKey x) "_computedVirtType"
+    computedVirtType x = TF.compute (TF.refKey x) "virt_type"
 
 -- | @cobbler_repo@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/cobbler_repo terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/r/repo.html terraform documentation>
 -- for more information.
 data RepoResource s = RepoResource'
     { _breed  :: TF.Attr s P.Text
-    -- ^ @breed@ - (Required)
+    -- ^ @breed@ - (Required, Forces New)
     --
     , _mirror :: TF.Attr s P.Text
     -- ^ @mirror@ - (Required)
@@ -409,48 +409,48 @@ instance P.HasName (RepoResource s) (TF.Attr s P.Text) where
                (\s a -> s { _name = a } :: RepoResource s)
 
 instance s ~ s' => P.HasComputedAptComponents (TF.Ref s' (RepoResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAptComponents x = TF.compute (TF.refKey x) "_computedAptComponents"
+    computedAptComponents x = TF.compute (TF.refKey x) "apt_components"
 
 instance s ~ s' => P.HasComputedAptDists (TF.Ref s' (RepoResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAptDists x = TF.compute (TF.refKey x) "_computedAptDists"
+    computedAptDists x = TF.compute (TF.refKey x) "apt_dists"
 
 instance s ~ s' => P.HasComputedArch (TF.Ref s' (RepoResource s)) (TF.Attr s P.Text) where
-    computedArch x = TF.compute (TF.refKey x) "_computedArch"
+    computedArch x = TF.compute (TF.refKey x) "arch"
 
 instance s ~ s' => P.HasComputedComment (TF.Ref s' (RepoResource s)) (TF.Attr s P.Text) where
-    computedComment x = TF.compute (TF.refKey x) "_computedComment"
+    computedComment x = TF.compute (TF.refKey x) "comment"
 
 instance s ~ s' => P.HasComputedCreaterepoFlags (TF.Ref s' (RepoResource s)) (TF.Attr s P.Text) where
-    computedCreaterepoFlags x = TF.compute (TF.refKey x) "_computedCreaterepoFlags"
+    computedCreaterepoFlags x = TF.compute (TF.refKey x) "createrepo_flags"
 
 instance s ~ s' => P.HasComputedEnvironment (TF.Ref s' (RepoResource s)) (TF.Attr s P.Text) where
-    computedEnvironment x = TF.compute (TF.refKey x) "_computedEnvironment"
+    computedEnvironment x = TF.compute (TF.refKey x) "environment"
 
 instance s ~ s' => P.HasComputedKeepUpdated (TF.Ref s' (RepoResource s)) (TF.Attr s P.Bool) where
-    computedKeepUpdated x = TF.compute (TF.refKey x) "_computedKeepUpdated"
+    computedKeepUpdated x = TF.compute (TF.refKey x) "keep_updated"
 
 instance s ~ s' => P.HasComputedMirrorLocally (TF.Ref s' (RepoResource s)) (TF.Attr s P.Bool) where
-    computedMirrorLocally x = TF.compute (TF.refKey x) "_computedMirrorLocally"
+    computedMirrorLocally x = TF.compute (TF.refKey x) "mirror_locally"
 
 instance s ~ s' => P.HasComputedOwners (TF.Ref s' (RepoResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOwners x = TF.compute (TF.refKey x) "_computedOwners"
+    computedOwners x = TF.compute (TF.refKey x) "owners"
 
 instance s ~ s' => P.HasComputedProxy (TF.Ref s' (RepoResource s)) (TF.Attr s P.Text) where
-    computedProxy x = TF.compute (TF.refKey x) "_computedProxy"
+    computedProxy x = TF.compute (TF.refKey x) "proxy"
 
 instance s ~ s' => P.HasComputedRpmList (TF.Ref s' (RepoResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRpmList x = TF.compute (TF.refKey x) "_computedRpmList"
+    computedRpmList x = TF.compute (TF.refKey x) "rpm_list"
 
 -- | @cobbler_snippet@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/cobbler_snippet terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/r/snippet.html terraform documentation>
 -- for more information.
 data SnippetResource s = SnippetResource'
     { _body :: TF.Attr s P.Text
     -- ^ @body@ - (Required)
     --
     , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -486,11 +486,11 @@ instance P.HasName (SnippetResource s) (TF.Attr s P.Text) where
 
 -- | @cobbler_system@ Resource.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/cobbler_system terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/r/system.html terraform documentation>
 -- for more information.
 data SystemResource s = SystemResource'
     { _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _profile :: TF.Attr s P.Text
     -- ^ @profile@ - (Required)
@@ -528,124 +528,124 @@ instance P.HasProfile (SystemResource s) (TF.Attr s P.Text) where
                (\s a -> s { _profile = a } :: SystemResource s)
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedBootFiles x = TF.compute (TF.refKey x) "_computedBootFiles"
+    computedBootFiles x = TF.compute (TF.refKey x) "boot_files"
 
 instance s ~ s' => P.HasComputedComment (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedComment x = TF.compute (TF.refKey x) "_computedComment"
+    computedComment x = TF.compute (TF.refKey x) "comment"
 
 instance s ~ s' => P.HasComputedEnableGpxe (TF.Ref s' (SystemResource s)) (TF.Attr s P.Bool) where
-    computedEnableGpxe x = TF.compute (TF.refKey x) "_computedEnableGpxe"
+    computedEnableGpxe x = TF.compute (TF.refKey x) "enable_gpxe"
 
 instance s ~ s' => P.HasComputedFetchableFiles (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedFetchableFiles x = TF.compute (TF.refKey x) "_computedFetchableFiles"
+    computedFetchableFiles x = TF.compute (TF.refKey x) "fetchable_files"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "_computedGateway"
+    computedGateway x = TF.compute (TF.refKey x) "gateway"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedHostname x = TF.compute (TF.refKey x) "_computedHostname"
+    computedHostname x = TF.compute (TF.refKey x) "hostname"
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedImage x = TF.compute (TF.refKey x) "_computedImage"
+    computedImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (Interface s)]) where
-    computedInterface x = TF.compute (TF.refKey x) "_computedInterface"
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (SystemInterface s)]) where
+    computedInterface x = TF.compute (TF.refKey x) "interface"
 
 instance s ~ s' => P.HasComputedIpv6DefaultDevice (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedIpv6DefaultDevice x = TF.compute (TF.refKey x) "_computedIpv6DefaultDevice"
+    computedIpv6DefaultDevice x = TF.compute (TF.refKey x) "ipv6_default_device"
 
 instance s ~ s' => P.HasComputedKernelOptions (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedKernelOptions x = TF.compute (TF.refKey x) "_computedKernelOptions"
+    computedKernelOptions x = TF.compute (TF.refKey x) "kernel_options"
 
 instance s ~ s' => P.HasComputedKernelOptionsPost (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedKernelOptionsPost x = TF.compute (TF.refKey x) "_computedKernelOptionsPost"
+    computedKernelOptionsPost x = TF.compute (TF.refKey x) "kernel_options_post"
 
 instance s ~ s' => P.HasComputedKickstart (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedKickstart x = TF.compute (TF.refKey x) "_computedKickstart"
+    computedKickstart x = TF.compute (TF.refKey x) "kickstart"
 
 instance s ~ s' => P.HasComputedKsMeta (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedKsMeta x = TF.compute (TF.refKey x) "_computedKsMeta"
+    computedKsMeta x = TF.compute (TF.refKey x) "ks_meta"
 
 instance s ~ s' => P.HasComputedLdapEnabled (TF.Ref s' (SystemResource s)) (TF.Attr s P.Bool) where
-    computedLdapEnabled x = TF.compute (TF.refKey x) "_computedLdapEnabled"
+    computedLdapEnabled x = TF.compute (TF.refKey x) "ldap_enabled"
 
 instance s ~ s' => P.HasComputedLdapType (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedLdapType x = TF.compute (TF.refKey x) "_computedLdapType"
+    computedLdapType x = TF.compute (TF.refKey x) "ldap_type"
 
 instance s ~ s' => P.HasComputedMgmtClasses (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMgmtClasses x = TF.compute (TF.refKey x) "_computedMgmtClasses"
+    computedMgmtClasses x = TF.compute (TF.refKey x) "mgmt_classes"
 
 instance s ~ s' => P.HasComputedMgmtParameters (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedMgmtParameters x = TF.compute (TF.refKey x) "_computedMgmtParameters"
+    computedMgmtParameters x = TF.compute (TF.refKey x) "mgmt_parameters"
 
 instance s ~ s' => P.HasComputedMonitEnabled (TF.Ref s' (SystemResource s)) (TF.Attr s P.Bool) where
-    computedMonitEnabled x = TF.compute (TF.refKey x) "_computedMonitEnabled"
+    computedMonitEnabled x = TF.compute (TF.refKey x) "monit_enabled"
 
 instance s ~ s' => P.HasComputedNameServers (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServers x = TF.compute (TF.refKey x) "_computedNameServers"
+    computedNameServers x = TF.compute (TF.refKey x) "name_servers"
 
 instance s ~ s' => P.HasComputedNameServersSearch (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedNameServersSearch x = TF.compute (TF.refKey x) "_computedNameServersSearch"
+    computedNameServersSearch x = TF.compute (TF.refKey x) "name_servers_search"
 
 instance s ~ s' => P.HasComputedNetbootEnabled (TF.Ref s' (SystemResource s)) (TF.Attr s P.Bool) where
-    computedNetbootEnabled x = TF.compute (TF.refKey x) "_computedNetbootEnabled"
+    computedNetbootEnabled x = TF.compute (TF.refKey x) "netboot_enabled"
 
 instance s ~ s' => P.HasComputedOwners (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOwners x = TF.compute (TF.refKey x) "_computedOwners"
+    computedOwners x = TF.compute (TF.refKey x) "owners"
 
 instance s ~ s' => P.HasComputedPowerAddress (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedPowerAddress x = TF.compute (TF.refKey x) "_computedPowerAddress"
+    computedPowerAddress x = TF.compute (TF.refKey x) "power_address"
 
 instance s ~ s' => P.HasComputedPowerId (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedPowerId x = TF.compute (TF.refKey x) "_computedPowerId"
+    computedPowerId x = TF.compute (TF.refKey x) "power_id"
 
 instance s ~ s' => P.HasComputedPowerPass (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedPowerPass x = TF.compute (TF.refKey x) "_computedPowerPass"
+    computedPowerPass x = TF.compute (TF.refKey x) "power_pass"
 
 instance s ~ s' => P.HasComputedPowerType (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedPowerType x = TF.compute (TF.refKey x) "_computedPowerType"
+    computedPowerType x = TF.compute (TF.refKey x) "power_type"
 
 instance s ~ s' => P.HasComputedPowerUser (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedPowerUser x = TF.compute (TF.refKey x) "_computedPowerUser"
+    computedPowerUser x = TF.compute (TF.refKey x) "power_user"
 
 instance s ~ s' => P.HasComputedProxy (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedProxy x = TF.compute (TF.refKey x) "_computedProxy"
+    computedProxy x = TF.compute (TF.refKey x) "proxy"
 
 instance s ~ s' => P.HasComputedRedhatManagementKey (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedRedhatManagementKey x = TF.compute (TF.refKey x) "_computedRedhatManagementKey"
+    computedRedhatManagementKey x = TF.compute (TF.refKey x) "redhat_management_key"
 
 instance s ~ s' => P.HasComputedRedhatManagementServer (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedRedhatManagementServer x = TF.compute (TF.refKey x) "_computedRedhatManagementServer"
+    computedRedhatManagementServer x = TF.compute (TF.refKey x) "redhat_management_server"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "_computedStatus"
+    computedStatus x = TF.compute (TF.refKey x) "status"
 
 instance s ~ s' => P.HasComputedTemplateFiles (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedTemplateFiles x = TF.compute (TF.refKey x) "_computedTemplateFiles"
+    computedTemplateFiles x = TF.compute (TF.refKey x) "template_files"
 
 instance s ~ s' => P.HasComputedTemplateRemoteKickstarts (TF.Ref s' (SystemResource s)) (TF.Attr s P.Integer) where
-    computedTemplateRemoteKickstarts x = TF.compute (TF.refKey x) "_computedTemplateRemoteKickstarts"
+    computedTemplateRemoteKickstarts x = TF.compute (TF.refKey x) "template_remote_kickstarts"
 
 instance s ~ s' => P.HasComputedVirtAutoBoot (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtAutoBoot x = TF.compute (TF.refKey x) "_computedVirtAutoBoot"
+    computedVirtAutoBoot x = TF.compute (TF.refKey x) "virt_auto_boot"
 
 instance s ~ s' => P.HasComputedVirtCpus (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtCpus x = TF.compute (TF.refKey x) "_computedVirtCpus"
+    computedVirtCpus x = TF.compute (TF.refKey x) "virt_cpus"
 
 instance s ~ s' => P.HasComputedVirtDiskDriver (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtDiskDriver x = TF.compute (TF.refKey x) "_computedVirtDiskDriver"
+    computedVirtDiskDriver x = TF.compute (TF.refKey x) "virt_disk_driver"
 
 instance s ~ s' => P.HasComputedVirtFileSize (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtFileSize x = TF.compute (TF.refKey x) "_computedVirtFileSize"
+    computedVirtFileSize x = TF.compute (TF.refKey x) "virt_file_size"
 
 instance s ~ s' => P.HasComputedVirtPath (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtPath x = TF.compute (TF.refKey x) "_computedVirtPath"
+    computedVirtPath x = TF.compute (TF.refKey x) "virt_path"
 
 instance s ~ s' => P.HasComputedVirtPxeBoot (TF.Ref s' (SystemResource s)) (TF.Attr s P.Integer) where
-    computedVirtPxeBoot x = TF.compute (TF.refKey x) "_computedVirtPxeBoot"
+    computedVirtPxeBoot x = TF.compute (TF.refKey x) "virt_pxe_boot"
 
 instance s ~ s' => P.HasComputedVirtRam (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtRam x = TF.compute (TF.refKey x) "_computedVirtRam"
+    computedVirtRam x = TF.compute (TF.refKey x) "virt_ram"
 
 instance s ~ s' => P.HasComputedVirtType (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
-    computedVirtType x = TF.compute (TF.refKey x) "_computedVirtType"
+    computedVirtType x = TF.compute (TF.refKey x) "virt_type"

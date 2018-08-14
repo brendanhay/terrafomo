@@ -49,7 +49,7 @@ import qualified Terrafomo.Validator     as TF
 
 -- | The @Cobbler@ Terraform provider configuration.
 --
--- See the <https://www.terraform.io/docs/providers/Cobbler/index.html terraform documenation>
+-- See the <https://www.terraform.io/docs/providers/cobbler/index.html terraform documentation>
 -- for more information.
 data Provider = Provider'
     { _cacertFile :: P.Maybe P.Text
