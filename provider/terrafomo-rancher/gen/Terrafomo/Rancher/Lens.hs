@@ -29,7 +29,6 @@ module Terrafomo.Rancher.Lens
     , HasScope (..)
     , HasDescription (..)
     , HasApiUrl (..)
-    , HasEmail (..)
     , HasDockerCompose (..)
     , HasHostLabels (..)
     , HasLabels (..)
@@ -160,12 +159,6 @@ class HasApiUrl a b | a -> b where
 
 instance HasApiUrl a b => HasApiUrl (TF.Schema l p a) b where
     apiUrl = TF.configuration . apiUrl
-
-class HasEmail a b | a -> b where
-    email :: P.Lens' a b
-
-instance HasEmail a b => HasEmail (TF.Schema l p a) b where
-    email = TF.configuration . email
 
 class HasDockerCompose a b | a -> b where
     dockerCompose :: P.Lens' a b

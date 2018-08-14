@@ -493,9 +493,6 @@ data RegistryCredentialResource s = RegistryCredentialResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _email       :: TF.Attr s P.Text
-    -- ^ @email@ - (Optional)
-    --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
@@ -520,7 +517,6 @@ registryCredentialResource _name _publicValue _registryId _secretValue =
     TF.newResource "rancher_registry_credential" TF.validator $
         RegistryCredentialResource'
             { _description = TF.Nil
-            , _email = TF.Nil
             , _name = _name
             , _publicValue = _publicValue
             , _registryId = _registryId
@@ -530,7 +526,6 @@ registryCredentialResource _name _publicValue _registryId _secretValue =
 instance TF.IsObject (RegistryCredentialResource s) where
     toObject RegistryCredentialResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "email" <$> TF.attribute _email
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "public_value" <$> TF.attribute _publicValue
         , TF.assign "registry_id" <$> TF.attribute _registryId
@@ -544,11 +539,6 @@ instance P.HasDescription (RegistryCredentialResource s) (TF.Attr s P.Text) wher
     description =
         P.lens (_description :: RegistryCredentialResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: RegistryCredentialResource s)
-
-instance P.HasEmail (RegistryCredentialResource s) (TF.Attr s P.Text) where
-    email =
-        P.lens (_email :: RegistryCredentialResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a } :: RegistryCredentialResource s)
 
 instance P.HasName (RegistryCredentialResource s) (TF.Attr s P.Text) where
     name =
