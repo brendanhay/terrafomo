@@ -91,11 +91,11 @@ import qualified Terrafomo.Validator         as TF
 
 -- | @ignition_config@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_config terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/config.html terraform documentation>
 -- for more information.
 data ConfigData s = ConfigData'
-    { _append      :: TF.Attr s [TF.Attr s (Append s)]
-    -- ^ @append@ - (Optional)
+    { _append      :: TF.Attr s [TF.Attr s (ConfigAppend s)]
+    -- ^ @append@ - (Optional, Forces New)
     --
     , _arrays      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @arrays@ - (Optional)
@@ -121,8 +121,8 @@ data ConfigData s = ConfigData'
     , _networkd    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networkd@ - (Optional)
     --
-    , _replace     :: TF.Attr s (Replace s)
-    -- ^ @replace@ - (Optional)
+    , _replace     :: TF.Attr s (ConfigReplace s)
+    -- ^ @replace@ - (Optional, Forces New)
     --
     , _systemd     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @systemd@ - (Optional)
@@ -171,16 +171,16 @@ instance TF.IsValid (ConfigData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_append"
                   (_append
-                      :: ConfigData s -> TF.Attr s [TF.Attr s (Append s)])
+                      :: ConfigData s -> TF.Attr s [TF.Attr s (ConfigAppend s)])
                   TF.validator
            P.<> TF.settingsValidator "_replace"
                   (_replace
-                      :: ConfigData s -> TF.Attr s (Replace s))
+                      :: ConfigData s -> TF.Attr s (ConfigReplace s))
                   TF.validator
 
-instance P.HasAppend (ConfigData s) (TF.Attr s [TF.Attr s (Append s)]) where
+instance P.HasAppend (ConfigData s) (TF.Attr s [TF.Attr s (ConfigAppend s)]) where
     append =
-        P.lens (_append :: ConfigData s -> TF.Attr s [TF.Attr s (Append s)])
+        P.lens (_append :: ConfigData s -> TF.Attr s [TF.Attr s (ConfigAppend s)])
                (\s a -> s { _append = a } :: ConfigData s)
 
 instance P.HasArrays (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -223,9 +223,9 @@ instance P.HasNetworkd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_networkd :: ConfigData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networkd = a } :: ConfigData s)
 
-instance P.HasReplace (ConfigData s) (TF.Attr s (Replace s)) where
+instance P.HasReplace (ConfigData s) (TF.Attr s (ConfigReplace s)) where
     replace =
-        P.lens (_replace :: ConfigData s -> TF.Attr s (Replace s))
+        P.lens (_replace :: ConfigData s -> TF.Attr s (ConfigReplace s))
                (\s a -> s { _replace = a } :: ConfigData s)
 
 instance P.HasSystemd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -239,27 +239,27 @@ instance P.HasUsers (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
                (\s a -> s { _users = a } :: ConfigData s)
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (ConfigData s)) (TF.Attr s P.Text) where
-    computedRendered x = TF.compute (TF.refKey x) "_computedRendered"
+    computedRendered x = TF.compute (TF.refKey x) "rendered"
 
 -- | @ignition_directory@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_directory terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/directory.html terraform documentation>
 -- for more information.
 data DirectoryData s = DirectoryData'
     { _filesystem :: TF.Attr s P.Text
-    -- ^ @filesystem@ - (Required)
+    -- ^ @filesystem@ - (Required, Forces New)
     --
     , _gid        :: TF.Attr s P.Integer
-    -- ^ @gid@ - (Optional)
+    -- ^ @gid@ - (Optional, Forces New)
     --
     , _mode       :: TF.Attr s P.Integer
-    -- ^ @mode@ - (Optional)
+    -- ^ @mode@ - (Optional, Forces New)
     --
     , _path       :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
+    -- ^ @path@ - (Required, Forces New)
     --
     , _uid        :: TF.Attr s P.Integer
-    -- ^ @uid@ - (Optional)
+    -- ^ @uid@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -316,17 +316,17 @@ instance P.HasUid (DirectoryData s) (TF.Attr s P.Integer) where
 
 -- | @ignition_disk@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_disk terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/disk.html terraform documentation>
 -- for more information.
 data DiskData s = DiskData'
     { _device    :: TF.Attr s P.Text
-    -- ^ @device@ - (Required)
+    -- ^ @device@ - (Required, Forces New)
     --
-    , _partition :: TF.Attr s [TF.Attr s (Partition s)]
-    -- ^ @partition@ - (Optional)
+    , _partition :: TF.Attr s [TF.Attr s (DiskPartition s)]
+    -- ^ @partition@ - (Optional, Forces New)
     --
     , _wipeTable :: TF.Attr s P.Bool
-    -- ^ @wipe_table@ - (Optional)
+    -- ^ @wipe_table@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -352,7 +352,7 @@ instance TF.IsValid (DiskData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_partition"
                   (_partition
-                      :: DiskData s -> TF.Attr s [TF.Attr s (Partition s)])
+                      :: DiskData s -> TF.Attr s [TF.Attr s (DiskPartition s)])
                   TF.validator
 
 instance P.HasDevice (DiskData s) (TF.Attr s P.Text) where
@@ -360,9 +360,9 @@ instance P.HasDevice (DiskData s) (TF.Attr s P.Text) where
         P.lens (_device :: DiskData s -> TF.Attr s P.Text)
                (\s a -> s { _device = a } :: DiskData s)
 
-instance P.HasPartition (DiskData s) (TF.Attr s [TF.Attr s (Partition s)]) where
+instance P.HasPartition (DiskData s) (TF.Attr s [TF.Attr s (DiskPartition s)]) where
     partition =
-        P.lens (_partition :: DiskData s -> TF.Attr s [TF.Attr s (Partition s)])
+        P.lens (_partition :: DiskData s -> TF.Attr s [TF.Attr s (DiskPartition s)])
                (\s a -> s { _partition = a } :: DiskData s)
 
 instance P.HasWipeTable (DiskData s) (TF.Attr s P.Bool) where
@@ -372,29 +372,29 @@ instance P.HasWipeTable (DiskData s) (TF.Attr s P.Bool) where
 
 -- | @ignition_file@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_file terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
-    { _content    :: TF.Attr s (Content s)
-    -- ^ @content@ - (Optional)
+    { _content    :: TF.Attr s (FileContent s)
+    -- ^ @content@ - (Optional, Forces New)
     --
     , _filesystem :: TF.Attr s P.Text
-    -- ^ @filesystem@ - (Required)
+    -- ^ @filesystem@ - (Required, Forces New)
     --
     , _gid        :: TF.Attr s P.Integer
-    -- ^ @gid@ - (Optional)
+    -- ^ @gid@ - (Optional, Forces New)
     --
     , _mode       :: TF.Attr s P.Integer
-    -- ^ @mode@ - (Optional)
+    -- ^ @mode@ - (Optional, Forces New)
     --
     , _path       :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
+    -- ^ @path@ - (Required, Forces New)
     --
-    , _source     :: TF.Attr s (Source s)
-    -- ^ @source@ - (Optional)
+    , _source     :: TF.Attr s (FileSource s)
+    -- ^ @source@ - (Optional, Forces New)
     --
     , _uid        :: TF.Attr s P.Integer
-    -- ^ @uid@ - (Optional)
+    -- ^ @uid@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -429,16 +429,16 @@ instance TF.IsValid (FileData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_content"
                   (_content
-                      :: FileData s -> TF.Attr s (Content s))
+                      :: FileData s -> TF.Attr s (FileContent s))
                   TF.validator
            P.<> TF.settingsValidator "_source"
                   (_source
-                      :: FileData s -> TF.Attr s (Source s))
+                      :: FileData s -> TF.Attr s (FileSource s))
                   TF.validator
 
-instance P.HasContent (FileData s) (TF.Attr s (Content s)) where
+instance P.HasContent (FileData s) (TF.Attr s (FileContent s)) where
     content =
-        P.lens (_content :: FileData s -> TF.Attr s (Content s))
+        P.lens (_content :: FileData s -> TF.Attr s (FileContent s))
                (\s a -> s { _content = a } :: FileData s)
 
 instance P.HasFilesystem (FileData s) (TF.Attr s P.Text) where
@@ -461,9 +461,9 @@ instance P.HasPath (FileData s) (TF.Attr s P.Text) where
         P.lens (_path :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: FileData s)
 
-instance P.HasSource (FileData s) (TF.Attr s (Source s)) where
+instance P.HasSource (FileData s) (TF.Attr s (FileSource s)) where
     source =
-        P.lens (_source :: FileData s -> TF.Attr s (Source s))
+        P.lens (_source :: FileData s -> TF.Attr s (FileSource s))
                (\s a -> s { _source = a } :: FileData s)
 
 instance P.HasUid (FileData s) (TF.Attr s P.Integer) where
@@ -473,17 +473,17 @@ instance P.HasUid (FileData s) (TF.Attr s P.Integer) where
 
 -- | @ignition_filesystem@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_filesystem terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/filesystem.html terraform documentation>
 -- for more information.
 data FilesystemData s = FilesystemData'
-    { _mount :: TF.Attr s (Mount s)
-    -- ^ @mount@ - (Optional)
+    { _mount :: TF.Attr s (FilesystemMount s)
+    -- ^ @mount@ - (Optional, Forces New)
     --
     , _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
+    -- ^ @name@ - (Optional, Forces New)
     --
     , _path  :: TF.Attr s P.Text
-    -- ^ @path@ - (Optional)
+    -- ^ @path@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -508,12 +508,12 @@ instance TF.IsValid (FilesystemData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_mount"
                   (_mount
-                      :: FilesystemData s -> TF.Attr s (Mount s))
+                      :: FilesystemData s -> TF.Attr s (FilesystemMount s))
                   TF.validator
 
-instance P.HasMount (FilesystemData s) (TF.Attr s (Mount s)) where
+instance P.HasMount (FilesystemData s) (TF.Attr s (FilesystemMount s)) where
     mount =
-        P.lens (_mount :: FilesystemData s -> TF.Attr s (Mount s))
+        P.lens (_mount :: FilesystemData s -> TF.Attr s (FilesystemMount s))
                (\s a -> s { _mount = a } :: FilesystemData s)
 
 instance P.HasName (FilesystemData s) (TF.Attr s P.Text) where
@@ -528,17 +528,17 @@ instance P.HasPath (FilesystemData s) (TF.Attr s P.Text) where
 
 -- | @ignition_group@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_group terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/group.html terraform documentation>
 -- for more information.
 data GroupData s = GroupData'
     { _gid          :: TF.Attr s P.Integer
-    -- ^ @gid@ - (Optional)
+    -- ^ @gid@ - (Optional, Forces New)
     --
     , _name         :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _passwordHash :: TF.Attr s P.Text
-    -- ^ @password_hash@ - (Optional)
+    -- ^ @password_hash@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -580,26 +580,26 @@ instance P.HasPasswordHash (GroupData s) (TF.Attr s P.Text) where
 
 -- | @ignition_link@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_link terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/link.html terraform documentation>
 -- for more information.
 data LinkData s = LinkData'
     { _filesystem :: TF.Attr s P.Text
-    -- ^ @filesystem@ - (Required)
+    -- ^ @filesystem@ - (Required, Forces New)
     --
     , _gid        :: TF.Attr s P.Integer
-    -- ^ @gid@ - (Optional)
+    -- ^ @gid@ - (Optional, Forces New)
     --
     , _hard       :: TF.Attr s P.Bool
-    -- ^ @hard@ - (Optional)
+    -- ^ @hard@ - (Optional, Forces New)
     --
     , _path       :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
+    -- ^ @path@ - (Required, Forces New)
     --
     , _target     :: TF.Attr s P.Text
-    -- ^ @target@ - (Required)
+    -- ^ @target@ - (Required, Forces New)
     --
     , _uid        :: TF.Attr s P.Integer
-    -- ^ @uid@ - (Optional)
+    -- ^ @uid@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -664,14 +664,14 @@ instance P.HasUid (LinkData s) (TF.Attr s P.Integer) where
 
 -- | @ignition_networkd_unit@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_networkd_unit terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/networkd_unit.html terraform documentation>
 -- for more information.
 data NetworkdUnitData s = NetworkdUnitData'
     { _content :: TF.Attr s P.Text
-    -- ^ @content@ - (Optional)
+    -- ^ @content@ - (Optional, Forces New)
     --
     , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -706,20 +706,20 @@ instance P.HasName (NetworkdUnitData s) (TF.Attr s P.Text) where
 
 -- | @ignition_raid@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_raid terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/raid.html terraform documentation>
 -- for more information.
 data RaidData s = RaidData'
     { _devices :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @devices@ - (Optional)
+    -- ^ @devices@ - (Optional, Forces New)
     --
     , _level   :: TF.Attr s P.Text
-    -- ^ @level@ - (Required)
+    -- ^ @level@ - (Required, Forces New)
     --
     , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _spares  :: TF.Attr s P.Integer
-    -- ^ @spares@ - (Optional)
+    -- ^ @spares@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -769,23 +769,23 @@ instance P.HasSpares (RaidData s) (TF.Attr s P.Integer) where
 
 -- | @ignition_systemd_unit@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_systemd_unit terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/systemd_unit.html terraform documentation>
 -- for more information.
 data SystemdUnitData s = SystemdUnitData'
     { _content :: TF.Attr s P.Text
-    -- ^ @content@ - (Optional)
+    -- ^ @content@ - (Optional, Forces New)
     --
-    , _dropin  :: TF.Attr s [TF.Attr s (Dropin s)]
-    -- ^ @dropin@ - (Optional)
+    , _dropin  :: TF.Attr s [TF.Attr s (SystemdUnitDropin s)]
+    -- ^ @dropin@ - (Optional, Forces New)
     --
     , _enabled :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
+    -- ^ @enabled@ - (Optional, Forces New)
     --
     , _mask    :: TF.Attr s P.Bool
-    -- ^ @mask@ - (Optional)
+    -- ^ @mask@ - (Optional, Forces New)
     --
     , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
@@ -815,7 +815,7 @@ instance TF.IsValid (SystemdUnitData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dropin"
                   (_dropin
-                      :: SystemdUnitData s -> TF.Attr s [TF.Attr s (Dropin s)])
+                      :: SystemdUnitData s -> TF.Attr s [TF.Attr s (SystemdUnitDropin s)])
                   TF.validator
 
 instance P.HasContent (SystemdUnitData s) (TF.Attr s P.Text) where
@@ -823,9 +823,9 @@ instance P.HasContent (SystemdUnitData s) (TF.Attr s P.Text) where
         P.lens (_content :: SystemdUnitData s -> TF.Attr s P.Text)
                (\s a -> s { _content = a } :: SystemdUnitData s)
 
-instance P.HasDropin (SystemdUnitData s) (TF.Attr s [TF.Attr s (Dropin s)]) where
+instance P.HasDropin (SystemdUnitData s) (TF.Attr s [TF.Attr s (SystemdUnitDropin s)]) where
     dropin =
-        P.lens (_dropin :: SystemdUnitData s -> TF.Attr s [TF.Attr s (Dropin s)])
+        P.lens (_dropin :: SystemdUnitData s -> TF.Attr s [TF.Attr s (SystemdUnitDropin s)])
                (\s a -> s { _dropin = a } :: SystemdUnitData s)
 
 instance P.HasEnabled (SystemdUnitData s) (TF.Attr s P.Bool) where
@@ -845,47 +845,47 @@ instance P.HasName (SystemdUnitData s) (TF.Attr s P.Text) where
 
 -- | @ignition_user@ DataSource.
 --
--- See the <https://www.terraform.io/docs/providers/Ignition/ignition_user terraform documentation>
+-- See the <https://www.terraform.io/docs/providers/ignition/d/user.html terraform documentation>
 -- for more information.
 data UserData s = UserData'
     { _gecos             :: TF.Attr s P.Text
-    -- ^ @gecos@ - (Optional)
+    -- ^ @gecos@ - (Optional, Forces New)
     --
     , _groups            :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @groups@ - (Optional)
+    -- ^ @groups@ - (Optional, Forces New)
     --
     , _homeDir           :: TF.Attr s P.Text
-    -- ^ @home_dir@ - (Optional)
+    -- ^ @home_dir@ - (Optional, Forces New)
     --
     , _name              :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    -- ^ @name@ - (Required, Forces New)
     --
     , _noCreateHome      :: TF.Attr s P.Bool
-    -- ^ @no_create_home@ - (Optional)
+    -- ^ @no_create_home@ - (Optional, Forces New)
     --
     , _noLogInit         :: TF.Attr s P.Bool
-    -- ^ @no_log_init@ - (Optional)
+    -- ^ @no_log_init@ - (Optional, Forces New)
     --
     , _noUserGroup       :: TF.Attr s P.Bool
-    -- ^ @no_user_group@ - (Optional)
+    -- ^ @no_user_group@ - (Optional, Forces New)
     --
     , _passwordHash      :: TF.Attr s P.Text
-    -- ^ @password_hash@ - (Optional)
+    -- ^ @password_hash@ - (Optional, Forces New)
     --
     , _primaryGroup      :: TF.Attr s P.Text
-    -- ^ @primary_group@ - (Optional)
+    -- ^ @primary_group@ - (Optional, Forces New)
     --
     , _shell             :: TF.Attr s P.Text
-    -- ^ @shell@ - (Optional)
+    -- ^ @shell@ - (Optional, Forces New)
     --
     , _sshAuthorizedKeys :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @ssh_authorized_keys@ - (Optional)
+    -- ^ @ssh_authorized_keys@ - (Optional, Forces New)
     --
     , _system            :: TF.Attr s P.Bool
-    -- ^ @system@ - (Optional)
+    -- ^ @system@ - (Optional, Forces New)
     --
     , _uid               :: TF.Attr s P.Integer
-    -- ^ @uid@ - (Optional)
+    -- ^ @uid@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Generic)
 
