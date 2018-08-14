@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newVolume",
-                "name": "Volume'"
+                "smart": "newServerVolume",
+                "name": "ServerVolume'"
             },
             "arguments": [
                 {
@@ -39,7 +39,7 @@
                     "original": "type"
                 }
             ],
-            "name": "Volume",
+            "name": "ServerVolume",
             "threaded": true,
             "attributes": [
                 {
@@ -94,10 +94,11 @@
                 }
             ],
             "conflicts": [],
-            "type": "Volume s",
-            "original": "volume"
+            "type": "ServerVolume s",
+            "original": "server_volume"
         }
     ],
+    "url": "https://www.terraform.io/docs/providers/scaleway/index.html",
     "dataSources": [
         {
             "con": {
@@ -142,6 +143,7 @@
                     "original": "name_filter"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/d/bootscript.html",
             "name": "BootscriptData",
             "threaded": true,
             "attributes": [
@@ -350,6 +352,7 @@
                     "original": "name_filter"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/d/image.html",
             "name": "ImageData",
             "threaded": true,
             "attributes": [
@@ -524,6 +527,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/d/security_group.html",
             "name": "SecurityGroupData",
             "threaded": true,
             "attributes": [
@@ -609,6 +613,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/d/volume.html",
             "name": "VolumeData",
             "threaded": true,
             "attributes": [
@@ -716,6 +721,7 @@
                     "original": "reverse"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/ip.html",
             "name": "IpResource",
             "threaded": true,
             "attributes": [
@@ -822,6 +828,7 @@
                     "original": "name"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/security_group.html",
             "name": "SecurityGroupResource",
             "threaded": true,
             "attributes": [],
@@ -983,6 +990,7 @@
                     "original": "security_group"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/security_group_rule.html",
             "name": "SecurityGroupRuleResource",
             "threaded": true,
             "attributes": [],
@@ -1245,13 +1253,14 @@
                     "name": "_volume",
                     "method": "volume",
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (Volume s)]",
+                    "type": "TF.Attr s [TF.Attr s (ServerVolume s)]",
                     "class": "HasVolume",
                     "validate": true,
                     "optional": true,
                     "original": "volume"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/server.html",
             "name": "ServerResource",
             "threaded": true,
             "attributes": [
@@ -1449,6 +1458,7 @@
                     "original": "key"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/ssh_key.html",
             "name": "SshKeyResource",
             "threaded": true,
             "attributes": [],
@@ -1537,6 +1547,7 @@
                     "original": "password"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/token.html",
             "name": "TokenResource",
             "threaded": true,
             "attributes": [
@@ -1715,6 +1726,7 @@
                     "original": "value"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/user_data.html",
             "name": "UserDataResource",
             "threaded": true,
             "attributes": [],
@@ -1839,6 +1851,7 @@
                     "original": "type"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/volume.html",
             "name": "VolumeResource",
             "threaded": true,
             "attributes": [
@@ -1964,6 +1977,7 @@
                     "original": "volume"
                 }
             ],
+            "url": "https://www.terraform.io/docs/providers/scaleway/r/volume_attachment.html",
             "name": "VolumeAttachmentResource",
             "threaded": true,
             "attributes": [],
