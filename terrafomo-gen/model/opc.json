@@ -172,7 +172,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_acl_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -267,7 +267,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "machine_images",
+            "name": "compute_image_list_entry_machine_images",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -356,7 +356,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "boot_order",
+            "name": "compute_instance_boot_order",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
@@ -524,7 +524,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "networking_info",
+            "name": "compute_instance_networking_info",
             "schemas": [
               {
                 "name": "dns",
@@ -538,7 +538,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "dns",
+                  "name": "networking_info_dns",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -622,7 +622,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "name_servers",
+                  "name": "networking_info_name_servers",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -646,7 +646,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "nat",
+                  "name": "networking_info_nat",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -670,7 +670,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "search_domains",
+                  "name": "networking_info_search_domains",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -694,7 +694,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "sec_lists",
+                  "name": "networking_info_sec_lists",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -743,7 +743,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "vnic_sets",
+                  "name": "networking_info_vnic_sets",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -770,7 +770,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "placement_requirements",
+            "name": "compute_instance_placement_requirements",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -830,7 +830,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "relationships",
+            "name": "compute_instance_relationships",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -854,7 +854,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "resolvers",
+            "name": "compute_instance_resolvers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -915,7 +915,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ssh_keys",
+            "name": "compute_instance_ssh_keys",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -963,7 +963,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "storage",
+            "name": "compute_instance_storage",
             "schemas": [
               {
                 "name": "index",
@@ -1016,7 +1016,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_instance_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1122,7 +1122,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_address_association_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1199,7 +1199,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "prefixes",
+            "name": "compute_ip_address_prefix_set_prefixes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1223,7 +1223,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_address_prefix_set_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1312,7 +1312,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_address_reservation_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1455,7 +1455,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_network_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1520,7 +1520,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_network_exchange_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1610,7 +1610,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_reservation_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1824,7 +1824,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "instance",
+            "name": "compute_orchestrated_instance_instance",
             "schemas": [
               {
                 "name": "attributes",
@@ -1862,7 +1862,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "boot_order",
+                  "name": "instance_boot_order",
                   "type": "TypeInt",
                   "conflictsWith": [],
                   "optional": false,
@@ -2030,7 +2030,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "networking_info",
+                  "name": "instance_networking_info",
                   "schemas": [
                     {
                       "name": "dns",
@@ -2044,7 +2044,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "dns",
+                        "name": "networking_info_dns",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2128,7 +2128,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "name_servers",
+                        "name": "networking_info_name_servers",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2152,7 +2152,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "nat",
+                        "name": "networking_info_nat",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2176,7 +2176,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "search_domains",
+                        "name": "networking_info_search_domains",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2200,7 +2200,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "sec_lists",
+                        "name": "networking_info_sec_lists",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2249,7 +2249,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "vnic_sets",
+                        "name": "networking_info_vnic_sets",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -2289,7 +2289,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "placement_requirements",
+                  "name": "instance_placement_requirements",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2349,7 +2349,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "relationships",
+                  "name": "instance_relationships",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2373,7 +2373,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "resolvers",
+                  "name": "instance_resolvers",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2434,7 +2434,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "ssh_keys",
+                  "name": "instance_ssh_keys",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2482,7 +2482,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "storage",
+                  "name": "instance_storage",
                   "schemas": [
                     {
                       "name": "index",
@@ -2535,7 +2535,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "tags",
+                  "name": "instance_tags",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2610,7 +2610,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_orchestrated_instance_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2716,7 +2716,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_route_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2965,7 +2965,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ip_entries",
+            "name": "compute_security_ip_list_ip_entries",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3073,7 +3073,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dst_ports",
+            "name": "compute_security_protocol_dst_ports",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3122,7 +3122,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "src_ports",
+            "name": "compute_security_protocol_src_ports",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3146,7 +3146,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_security_protocol_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3211,7 +3211,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dst_ip_address_prefixes",
+            "name": "compute_security_rule_dst_ip_address_prefixes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3284,7 +3284,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "security_protocols",
+            "name": "compute_security_rule_security_protocols",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3308,7 +3308,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "src_ip_address_prefixes",
+            "name": "compute_security_rule_src_ip_address_prefixes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3344,7 +3344,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_security_rule_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3751,7 +3751,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_storage_volume_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -3979,7 +3979,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_storage_volume_snapshot_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4036,7 +4036,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "applied_acls",
+            "name": "compute_vnic_set_applied_acls",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4084,7 +4084,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_vnic_set_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4108,7 +4108,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "virtual_nics",
+            "name": "compute_vnic_set_virtual_nics",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4238,7 +4238,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "certificates",
+            "name": "lbaas_listener_certificates",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4323,7 +4323,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "path_prefixes",
+            "name": "lbaas_listener_path_prefixes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4347,7 +4347,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "policies",
+            "name": "lbaas_listener_policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4419,7 +4419,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "lbaas_listener_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4455,7 +4455,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "virtual_hosts",
+            "name": "lbaas_listener_virtual_hosts",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4484,7 +4484,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "balancer_vips",
+            "name": "lbaas_load_balancer_balancer_vips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4593,7 +4593,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "permitted_clients",
+            "name": "lbaas_load_balancer_permitted_clients",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4617,7 +4617,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "permitted_methods",
+            "name": "lbaas_load_balancer_permitted_methods",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4641,7 +4641,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "policies",
+            "name": "lbaas_load_balancer_policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4701,7 +4701,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "lbaas_load_balancer_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -4752,7 +4752,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "application_cookie_stickiness_policy",
+            "name": "lbaas_policy_application_cookie_stickiness_policy",
             "schemas": [
               {
                 "name": "cookie_name",
@@ -4791,7 +4791,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "cloudgate_policy",
+            "name": "lbaas_policy_cloudgate_policy",
             "schemas": [
               {
                 "name": "cloudgate_application",
@@ -4878,7 +4878,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "load_balancer_cookie_stickiness_policy",
+            "name": "lbaas_policy_load_balancer_cookie_stickiness_policy",
             "schemas": [
               {
                 "name": "cookie_expiration_period",
@@ -4917,7 +4917,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "load_balancing_mechanism_policy",
+            "name": "lbaas_policy_load_balancing_mechanism_policy",
             "schemas": [
               {
                 "name": "load_balancing_mechanism",
@@ -4968,7 +4968,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "rate_limiting_request_policy",
+            "name": "lbaas_policy_rate_limiting_request_policy",
             "schemas": [
               {
                 "name": "burst_size",
@@ -5095,7 +5095,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "redirect_policy",
+            "name": "lbaas_policy_redirect_policy",
             "schemas": [
               {
                 "name": "redirect_uri",
@@ -5146,7 +5146,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "resource_access_control_policy",
+            "name": "lbaas_policy_resource_access_control_policy",
             "schemas": [
               {
                 "name": "denied_clients",
@@ -5160,7 +5160,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "denied_clients",
+                  "name": "resource_access_control_policy_denied_clients",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5196,7 +5196,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "permitted_clients",
+                  "name": "resource_access_control_policy_permitted_clients",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5233,7 +5233,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "set_request_header_policy",
+            "name": "lbaas_policy_set_request_header_policy",
             "schemas": [
               {
                 "name": "action_when_header_exists",
@@ -5259,7 +5259,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "action_when_header_value_is",
+                  "name": "set_request_header_policy_action_when_header_value_is",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5283,7 +5283,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "action_when_header_value_is_not",
+                  "name": "set_request_header_policy_action_when_header_value_is_not",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5344,7 +5344,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "ssl_negotiation_policy",
+            "name": "lbaas_policy_ssl_negotiation_policy",
             "schemas": [
               {
                 "name": "port",
@@ -5382,7 +5382,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "ssl_ciphers",
+                  "name": "ssl_negotiation_policy_ssl_ciphers",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5406,7 +5406,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "ssl_protocol",
+                  "name": "ssl_negotiation_policy_ssl_protocol",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5455,7 +5455,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "trusted_certificate_policy",
+            "name": "lbaas_policy_trusted_certificate_policy",
             "schemas": [
               {
                 "name": "trusted_certificate",
@@ -5538,7 +5538,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "health_check",
+            "name": "lbaas_server_pool_health_check",
             "schemas": [
               {
                 "name": "accepted_return_codes",
@@ -5552,7 +5552,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "accepted_return_codes",
+                  "name": "health_check_accepted_return_codes",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -5705,7 +5705,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "servers",
+            "name": "lbaas_server_pool_servers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5753,7 +5753,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "lbaas_server_pool_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5806,7 +5806,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "allowed_origins",
+            "name": "storage_container_allowed_origins",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5830,7 +5830,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "exposed_headers",
+            "name": "storage_container_exposed_headers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5926,7 +5926,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "read_acls",
+            "name": "storage_container_read_acls",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -5962,7 +5962,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "write_acls",
+            "name": "storage_container_write_acls",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6276,7 +6276,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "machine_images",
+            "name": "compute_image_list_entry_machine_images",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6377,7 +6377,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_address_reservation_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6466,7 +6466,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_ip_reservation_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6668,7 +6668,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "dns",
+            "name": "compute_network_interface_dns",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6788,7 +6788,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "name_servers",
+            "name": "compute_network_interface_name_servers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6812,7 +6812,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "nat",
+            "name": "compute_network_interface_nat",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6836,7 +6836,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "search_domains",
+            "name": "compute_network_interface_search_domains",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6860,7 +6860,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "sec_lists",
+            "name": "compute_network_interface_sec_lists",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -6908,7 +6908,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "vnic_sets",
+            "name": "compute_network_interface_vnic_sets",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -7158,7 +7158,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_storage_volume_snapshot_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -7247,7 +7247,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "tags",
+            "name": "compute_vnic_tags",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
