@@ -16,7 +16,6 @@ module Terrafomo.PostgreSQL.Lens
     -- * Overloaded Fields
     -- ** Arguments
       HasLogin (..)
-    , HasSslMode (..)
     , HasSslmode (..)
     , HasUsage (..)
     , HasConnectionLimit (..)
@@ -26,7 +25,6 @@ module Terrafomo.PostgreSQL.Lens
     , HasIfNotExists (..)
     , HasCreateRole (..)
     , HasDatabase (..)
-    , HasEncrypted (..)
     , HasUsageWithGrant (..)
     , HasHost (..)
     , HasUsername (..)
@@ -71,12 +69,6 @@ class HasLogin a b | a -> b where
 
 instance HasLogin a b => HasLogin (TF.Schema l p a) b where
     login = TF.configuration . login
-
-class HasSslMode a b | a -> b where
-    sslMode :: P.Lens' a b
-
-instance HasSslMode a b => HasSslMode (TF.Schema l p a) b where
-    sslMode = TF.configuration . sslMode
 
 class HasSslmode a b | a -> b where
     sslmode :: P.Lens' a b
@@ -131,12 +123,6 @@ class HasDatabase a b | a -> b where
 
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
-
-class HasEncrypted a b | a -> b where
-    encrypted :: P.Lens' a b
-
-instance HasEncrypted a b => HasEncrypted (TF.Schema l p a) b where
-    encrypted = TF.configuration . encrypted
 
 class HasUsageWithGrant a b | a -> b where
     usageWithGrant :: P.Lens' a b

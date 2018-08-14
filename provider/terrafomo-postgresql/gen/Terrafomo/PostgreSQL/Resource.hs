@@ -196,9 +196,6 @@ data RoleResource s = RoleResource'
     -- ^ @create_role@ - (Optional)
     -- Determine whether this role will be permitted to create new roles
     --
-    , _encrypted              :: TF.Attr s P.Text
-    -- ^ @encrypted@ - (Optional)
-    --
     , _encryptedPassword      :: TF.Attr s P.Bool
     -- ^ @encrypted_password@ - (Optional)
     -- Control whether the password is stored encrypted in the system catalogs
@@ -251,7 +248,6 @@ roleResource _name =
             , _connectionLimit = TF.value (-1)
             , _createDatabase = TF.value P.False
             , _createRole = TF.value P.False
-            , _encrypted = TF.Nil
             , _encryptedPassword = TF.value P.True
             , _inherit = TF.value P.True
             , _login = TF.value P.False
@@ -269,7 +265,6 @@ instance TF.IsObject (RoleResource s) where
         , TF.assign "connection_limit" <$> TF.attribute _connectionLimit
         , TF.assign "create_database" <$> TF.attribute _createDatabase
         , TF.assign "create_role" <$> TF.attribute _createRole
-        , TF.assign "encrypted" <$> TF.attribute _encrypted
         , TF.assign "encrypted_password" <$> TF.attribute _encryptedPassword
         , TF.assign "inherit" <$> TF.attribute _inherit
         , TF.assign "login" <$> TF.attribute _login
@@ -303,11 +298,6 @@ instance P.HasCreateRole (RoleResource s) (TF.Attr s P.Bool) where
     createRole =
         P.lens (_createRole :: RoleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _createRole = a } :: RoleResource s)
-
-instance P.HasEncrypted (RoleResource s) (TF.Attr s P.Text) where
-    encrypted =
-        P.lens (_encrypted :: RoleResource s -> TF.Attr s P.Text)
-               (\s a -> s { _encrypted = a } :: RoleResource s)
 
 instance P.HasEncryptedPassword (RoleResource s) (TF.Attr s P.Bool) where
     encryptedPassword =

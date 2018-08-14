@@ -84,9 +84,6 @@ data Provider = Provider'
     -- The PostgreSQL port number to connect to at the server host, or socket file
     -- name extension for Unix-domain connections
     --
-    , _sslMode         :: P.Maybe P.Text
-    -- ^ @ssl_mode@ - (Optional)
-    --
     , _sslmode         :: P.Maybe P.Text
     -- ^ @sslmode@ - (Optional)
     -- This option determines whether or with what priority a secure SSL TCP/IP
@@ -109,7 +106,6 @@ newProvider =
         , _maxConnections = P.Nothing
         , _password = P.Nothing
         , _port = P.Nothing
-        , _sslMode = P.Nothing
         , _sslmode = P.Nothing
         , _username = P.Nothing
         }
@@ -131,7 +127,6 @@ instance TF.IsSection Provider where
                   , TF.assign "max_connections" <$> _maxConnections
                   , TF.assign "password" <$> _password
                   , TF.assign "port" <$> _port
-                  , TF.assign "ssl_mode" <$> _sslMode
                   , TF.assign "sslmode" <$> _sslmode
                   , TF.assign "username" <$> _username
                   ])
@@ -176,11 +171,6 @@ instance P.HasPort (Provider) (P.Maybe P.Integer) where
     port =
         P.lens (_port :: Provider -> P.Maybe P.Integer)
                (\s a -> s { _port = a } :: Provider)
-
-instance P.HasSslMode (Provider) (P.Maybe P.Text) where
-    sslMode =
-        P.lens (_sslMode :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _sslMode = a } :: Provider)
 
 instance P.HasSslmode (Provider) (P.Maybe P.Text) where
     sslmode =
