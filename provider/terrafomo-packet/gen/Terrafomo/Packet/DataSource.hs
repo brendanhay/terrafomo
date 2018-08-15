@@ -73,7 +73,7 @@ precreatedIpBlockData
     -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
-    -> TF.DataSource P.Provider (PrecreatedIpBlockData s)
+    -> P.DataSource (PrecreatedIpBlockData s)
 precreatedIpBlockData _addressFamily _facility _projectId _public =
     TF.newDataSource "packet_precreated_ip_block" TF.validator $
         PrecreatedIpBlockData'
@@ -113,6 +113,9 @@ instance P.HasPublic (PrecreatedIpBlockData s) (TF.Attr s P.Bool) where
     public =
         P.lens (_public :: PrecreatedIpBlockData s -> TF.Attr s P.Bool)
                (\s a -> s { _public = a } :: PrecreatedIpBlockData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"

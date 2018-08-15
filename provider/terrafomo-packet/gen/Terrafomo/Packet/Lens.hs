@@ -61,6 +61,7 @@ module Terrafomo.Packet.Lens
     , HasComputedAccessPublicIpv6 (..)
     , HasComputedPublic (..)
     , HasComputedHardwareReservationId (..)
+    , HasComputedId (..)
     , HasComputedManagement (..)
     , HasComputedName (..)
     , HasComputedQuantity (..)
@@ -300,6 +301,9 @@ class HasComputedPublic a b | a -> b where
 
 class HasComputedHardwareReservationId a b | a -> b where
     computedHardwareReservationId :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedManagement a b | a -> b where
     computedManagement :: a -> b

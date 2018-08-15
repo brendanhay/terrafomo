@@ -18,6 +18,7 @@ module Terrafomo.Packet
     , module Terrafomo.Packet.Resource
     , module Terrafomo.Packet.DataSource
     , module Terrafomo.Packet.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Packet.DataSource

@@ -127,7 +127,7 @@ deviceResource
     -> TF.Attr s P.Text -- ^ @operating_system@ - 'P.operatingSystem'
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Resource P.Provider (DeviceResource s)
+    -> P.Resource (DeviceResource s)
 deviceResource _billingCycle _facility _hostname _operatingSystem _plan _projectId =
     TF.newResource "packet_device" TF.validator $
         DeviceResource'
@@ -273,7 +273,7 @@ data IpAttachmentResource s = IpAttachmentResource'
 ipAttachmentResource
     :: TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
     -> TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
-    -> TF.Resource P.Provider (IpAttachmentResource s)
+    -> P.Resource (IpAttachmentResource s)
 ipAttachmentResource _cidrNotation _deviceId =
     TF.newResource "packet_ip_attachment" TF.validator $
         IpAttachmentResource'
@@ -351,7 +351,7 @@ data OrganizationResource s = OrganizationResource'
 
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (OrganizationResource s)
+    -> P.Resource (OrganizationResource s)
 organizationResource _name =
     TF.newResource "packet_organization" TF.validator $
         OrganizationResource'
@@ -417,7 +417,7 @@ data ProjectResource s = ProjectResource'
 
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ProjectResource s)
+    -> P.Resource (ProjectResource s)
 projectResource _name =
     TF.newResource "packet_project" TF.validator $
         ProjectResource'
@@ -469,7 +469,7 @@ reservedIpBlockResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Integer -- ^ @quantity@ - 'P.quantity'
-    -> TF.Resource P.Provider (ReservedIpBlockResource s)
+    -> P.Resource (ReservedIpBlockResource s)
 reservedIpBlockResource _facility _projectId _quantity =
     TF.newResource "packet_reserved_ip_block" TF.validator $
         ReservedIpBlockResource'
@@ -549,7 +549,7 @@ data SshKeyResource s = SshKeyResource'
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Resource P.Provider (SshKeyResource s)
+    -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
     TF.newResource "packet_ssh_key" TF.validator $
         SshKeyResource'
@@ -618,7 +618,7 @@ volumeResource
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
-    -> TF.Resource P.Provider (VolumeResource s)
+    -> P.Resource (VolumeResource s)
 volumeResource _facility _plan _projectId _size =
     TF.newResource "packet_volume" TF.validator $
         VolumeResource'
@@ -718,7 +718,7 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
-    -> TF.Resource P.Provider (VolumeAttachmentResource s)
+    -> P.Resource (VolumeAttachmentResource s)
 volumeAttachmentResource _deviceId _volumeId =
     TF.newResource "packet_volume_attachment" TF.validator $
         VolumeAttachmentResource'
