@@ -57,7 +57,7 @@ data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
 ipRangesData
-    :: TF.DataSource P.Provider (IpRangesData s)
+    :: P.DataSource (IpRangesData s)
 ipRangesData =
     TF.newDataSource "fastly_ip_ranges" TF.validator $
         IpRangesData'
@@ -67,6 +67,9 @@ instance TF.IsObject (IpRangesData s) where
 
 instance TF.IsValid (IpRangesData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"

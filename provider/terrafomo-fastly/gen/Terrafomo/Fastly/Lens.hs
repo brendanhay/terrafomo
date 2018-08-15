@@ -118,6 +118,7 @@ module Terrafomo.Fastly.Lens
 
     -- ** Computed Attributes
     , HasComputedActiveVersion (..)
+    , HasComputedId (..)
     , HasComputedSubstitution (..)
     , HasComputedRegex (..)
     , HasComputedDefaultHost (..)
@@ -732,6 +733,9 @@ instance HasRedundancy a b => HasRedundancy (TF.Schema l p a) b where
 
 class HasComputedActiveVersion a b | a -> b where
     computedActiveVersion :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedSubstitution a b | a -> b where
     computedSubstitution :: a -> b

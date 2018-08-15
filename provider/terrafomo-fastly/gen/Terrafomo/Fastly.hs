@@ -18,6 +18,7 @@ module Terrafomo.Fastly
     , module Terrafomo.Fastly.Types
     , module Terrafomo.Fastly.Lens
     , module Terrafomo.Fastly.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Fastly.DataSource

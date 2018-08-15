@@ -121,7 +121,7 @@ data ServiceV1Resource s = ServiceV1Resource'
 serviceV1Resource
     :: TF.Attr s [TF.Attr s (ServiceV1Domain s)] -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ServiceV1Resource s)
+    -> P.Resource (ServiceV1Resource s)
 serviceV1Resource _domain _name =
     TF.newResource "fastly_service_v1" TF.validator $
         ServiceV1Resource'
