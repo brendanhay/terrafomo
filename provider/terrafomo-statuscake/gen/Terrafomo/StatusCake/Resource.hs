@@ -150,7 +150,7 @@ testResource
     :: TF.Attr s P.Text -- ^ @test_type@ - 'P.testType'
     -> TF.Attr s P.Text -- ^ @website_name@ - 'P.websiteName'
     -> TF.Attr s P.Text -- ^ @website_url@ - 'P.websiteUrl'
-    -> TF.Resource P.Provider (TestResource s)
+    -> P.Resource (TestResource s)
 testResource _testType _websiteName _websiteUrl =
     TF.newResource "statuscake_test" TF.validator $
         TestResource'

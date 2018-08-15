@@ -17,6 +17,7 @@ module Terrafomo.StatusCake
     , module Terrafomo.StatusCake.Lens
     , module Terrafomo.StatusCake.Provider
     , module Terrafomo.StatusCake.Resource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.StatusCake.Lens
