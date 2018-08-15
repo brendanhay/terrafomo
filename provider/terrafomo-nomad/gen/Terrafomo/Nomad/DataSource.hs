@@ -57,7 +57,7 @@ data RegionsData s = RegionsData'
     deriving (P.Show, P.Eq, P.Generic)
 
 regionsData
-    :: TF.DataSource P.Provider (RegionsData s)
+    :: P.DataSource (RegionsData s)
 regionsData =
     TF.newDataSource "nomad_regions" TF.validator $
         RegionsData'
@@ -67,6 +67,9 @@ instance TF.IsObject (RegionsData s) where
 
 instance TF.IsValid (RegionsData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"

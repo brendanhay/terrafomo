@@ -92,7 +92,7 @@ data AclPolicyResource s = AclPolicyResource'
 aclPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @rules_hcl@ - 'P.rulesHcl'
-    -> TF.Resource P.Provider (AclPolicyResource s)
+    -> P.Resource (AclPolicyResource s)
 aclPolicyResource _name _rulesHcl =
     TF.newResource "nomad_acl_policy" TF.validator $
         AclPolicyResource'
@@ -151,7 +151,7 @@ data AclTokenResource s = AclTokenResource'
 
 aclTokenResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (AclTokenResource s)
+    -> P.Resource (AclTokenResource s)
 aclTokenResource _type' =
     TF.newResource "nomad_acl_token" TF.validator $
         AclTokenResource'
@@ -223,7 +223,7 @@ data JobResource s = JobResource'
 
 jobResource
     :: TF.Attr s P.Text -- ^ @jobspec@ - 'P.jobspec'
-    -> TF.Resource P.Provider (JobResource s)
+    -> P.Resource (JobResource s)
 jobResource _jobspec =
     TF.newResource "nomad_job" TF.validator $
         JobResource'
@@ -285,7 +285,7 @@ data NamespaceResource s = NamespaceResource'
 
 namespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NamespaceResource s)
+    -> P.Resource (NamespaceResource s)
 namespaceResource _name =
     TF.newResource "nomad_namespace" TF.validator $
         NamespaceResource'
@@ -341,7 +341,7 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
 quotaSpecificationResource
     :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)] -- ^ @limits@ - 'P.limits'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (QuotaSpecificationResource s)
+    -> P.Resource (QuotaSpecificationResource s)
 quotaSpecificationResource _limits _name =
     TF.newResource "nomad_quota_specification" TF.validator $
         QuotaSpecificationResource'
@@ -412,7 +412,7 @@ sentinelPolicyResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
-    -> TF.Resource P.Provider (SentinelPolicyResource s)
+    -> P.Resource (SentinelPolicyResource s)
 sentinelPolicyResource _enforcementLevel _name _policy _scope =
     TF.newResource "nomad_sentinel_policy" TF.validator $
         SentinelPolicyResource'

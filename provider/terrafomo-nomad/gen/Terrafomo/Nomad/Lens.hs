@@ -43,6 +43,7 @@ module Terrafomo.Nomad.Lens
 
     -- ** Computed Attributes
     , HasComputedRegions (..)
+    , HasComputedId (..)
     , HasComputedSecretId (..)
     , HasComputedAccessorId (..)
     ) where
@@ -204,6 +205,9 @@ instance HasName a b => HasName (TF.Schema l p a) b where
 
 class HasComputedRegions a b | a -> b where
     computedRegions :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedSecretId a b | a -> b where
     computedSecretId :: a -> b

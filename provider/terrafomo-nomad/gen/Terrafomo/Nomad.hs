@@ -18,6 +18,7 @@ module Terrafomo.Nomad
     , module Terrafomo.Nomad.Resource
     , module Terrafomo.Nomad.Types
     , module Terrafomo.Nomad.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Nomad.DataSource
