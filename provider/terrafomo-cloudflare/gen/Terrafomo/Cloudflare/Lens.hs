@@ -180,6 +180,7 @@ module Terrafomo.Cloudflare.Lens
     , HasComputedZoneStatus (..)
     , HasComputedCheckRegions (..)
     , HasComputedBrowserCheck (..)
+    , HasComputedId (..)
     , HasComputedIpv6CidrBlocks (..)
     , HasComputedMetadata (..)
     , HasComputedPrivacyPass (..)
@@ -1089,6 +1090,9 @@ class HasComputedCheckRegions a b | a -> b where
 
 class HasComputedBrowserCheck a b | a -> b where
     computedBrowserCheck :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedIpv6CidrBlocks a b | a -> b where
     computedIpv6CidrBlocks :: a -> b

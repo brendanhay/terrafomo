@@ -107,7 +107,7 @@ loadBalancerResource
     -> TF.Attr s P.Text -- ^ @fallback_pool_id@ - 'P.fallbackPoolId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (LoadBalancerResource s)
+    -> P.Resource (LoadBalancerResource s)
 loadBalancerResource _defaultPoolIds _fallbackPoolId _name _zone =
     TF.newResource "cloudflare_load_balancer" TF.validator $
         LoadBalancerResource'
@@ -220,7 +220,7 @@ data LoadBalancerMonitorResource s = LoadBalancerMonitorResource'
 loadBalancerMonitorResource
     :: TF.Attr s P.Text -- ^ @expected_body@ - 'P.expectedBody'
     -> TF.Attr s P.Text -- ^ @expected_codes@ - 'P.expectedCodes'
-    -> TF.Resource P.Provider (LoadBalancerMonitorResource s)
+    -> P.Resource (LoadBalancerMonitorResource s)
 loadBalancerMonitorResource _expectedBody _expectedCodes =
     TF.newResource "cloudflare_load_balancer_monitor" TF.validator $
         LoadBalancerMonitorResource'
@@ -344,7 +344,7 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource'
 loadBalancerPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (LoadBalancerPoolOrigins s)] -- ^ @origins@ - 'P.origins'
-    -> TF.Resource P.Provider (LoadBalancerPoolResource s)
+    -> P.Resource (LoadBalancerPoolResource s)
 loadBalancerPoolResource _name _origins =
     TF.newResource "cloudflare_load_balancer_pool" TF.validator $
         LoadBalancerPoolResource'
@@ -445,7 +445,7 @@ pageRuleResource
     :: TF.Attr s (PageRuleActions s) -- ^ @actions@ - 'P.actions'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (PageRuleResource s)
+    -> P.Resource (PageRuleResource s)
 pageRuleResource _actions _target _zone =
     TF.newResource "cloudflare_page_rule" TF.validator $
         PageRuleResource'
@@ -536,7 +536,7 @@ rateLimitResource
     -> TF.Attr s P.Integer -- ^ @period@ - 'P.period'
     -> TF.Attr s P.Integer -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (RateLimitResource s)
+    -> P.Resource (RateLimitResource s)
 rateLimitResource _action _period _threshold _zone =
     TF.newResource "cloudflare_rate_limit" TF.validator $
         RateLimitResource'
@@ -648,7 +648,7 @@ recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (RecordResource s)
+    -> P.Resource (RecordResource s)
 recordResource _domain _name _type' =
     TF.newResource "cloudflare_record" TF.validator $
         RecordResource'
@@ -751,7 +751,7 @@ wafRuleResource
     :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
     -> TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (WafRuleResource s)
+    -> P.Resource (WafRuleResource s)
 wafRuleResource _mode _ruleId _zone =
     TF.newResource "cloudflare_waf_rule" TF.validator $
         WafRuleResource'
@@ -803,7 +803,7 @@ data ZoneSettingsOverrideResource s = ZoneSettingsOverrideResource'
 
 zoneSettingsOverrideResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ZoneSettingsOverrideResource s)
+    -> P.Resource (ZoneSettingsOverrideResource s)
 zoneSettingsOverrideResource _name =
     TF.newResource "cloudflare_zone_settings_override" TF.validator $
         ZoneSettingsOverrideResource'

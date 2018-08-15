@@ -18,6 +18,7 @@ module Terrafomo.Cloudflare
     , module Terrafomo.Cloudflare.Types
     , module Terrafomo.Cloudflare.Lens
     , module Terrafomo.Cloudflare.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Cloudflare.DataSource
