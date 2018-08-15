@@ -98,6 +98,7 @@ module Terrafomo.OVH.Lens
     , HasComputedPlanCode (..)
     , HasComputedContinentCode (..)
     , HasComputedLastUpdate (..)
+    , HasComputedId (..)
     , HasComputedName (..)
     , HasComputedStatus (..)
     , HasComputedVrackEligibility (..)
@@ -529,6 +530,9 @@ class HasComputedContinentCode a b | a -> b where
 
 class HasComputedLastUpdate a b | a -> b where
     computedLastUpdate :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b

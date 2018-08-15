@@ -93,7 +93,7 @@ data CloudRegionData s = CloudRegionData'
 cloudRegionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.DataSource P.Provider (CloudRegionData s)
+    -> P.DataSource (CloudRegionData s)
 cloudRegionData _name _projectId =
     TF.newDataSource "ovh_cloud_region" TF.validator $
         CloudRegionData'
@@ -120,6 +120,9 @@ instance P.HasProjectId (CloudRegionData s) (TF.Attr s P.Text) where
         P.lens (_projectId :: CloudRegionData s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: CloudRegionData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
@@ -141,7 +144,7 @@ data CloudRegionsData s = CloudRegionsData'
 
 cloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.DataSource P.Provider (CloudRegionsData s)
+    -> P.DataSource (CloudRegionsData s)
 cloudRegionsData _projectId =
     TF.newDataSource "ovh_cloud_regions" TF.validator $
         CloudRegionsData'
@@ -161,6 +164,9 @@ instance P.HasProjectId (CloudRegionsData s) (TF.Attr s P.Text) where
         P.lens (_projectId :: CloudRegionsData s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: CloudRegionsData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudRegionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (CloudRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "names"
 
@@ -176,7 +182,7 @@ data DomainZoneData s = DomainZoneData'
 
 domainZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (DomainZoneData s)
+    -> P.DataSource (DomainZoneData s)
 domainZoneData _name =
     TF.newDataSource "ovh_domain_zone" TF.validator $
         DomainZoneData'
@@ -195,6 +201,9 @@ instance P.HasName (DomainZoneData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DomainZoneData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DomainZoneData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDnssecSupported (TF.Ref s' (DomainZoneData s)) (TF.Attr s P.Bool) where
     computedDnssecSupported x = TF.compute (TF.refKey x) "dnssec_supported"
@@ -216,7 +225,7 @@ data IploadbalancingData s = IploadbalancingData'
     deriving (P.Show, P.Eq, P.Generic)
 
 iploadbalancingData
-    :: TF.DataSource P.Provider (IploadbalancingData s)
+    :: P.DataSource (IploadbalancingData s)
 iploadbalancingData =
     TF.newDataSource "ovh_iploadbalancing" TF.validator $
         IploadbalancingData'
@@ -226,6 +235,9 @@ instance TF.IsObject (IploadbalancingData s) where
 
 instance TF.IsValid (IploadbalancingData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
@@ -283,7 +295,7 @@ data MePaymentmeanBankaccountData s = MePaymentmeanBankaccountData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 mePaymentmeanBankaccountData
-    :: TF.DataSource P.Provider (MePaymentmeanBankaccountData s)
+    :: P.DataSource (MePaymentmeanBankaccountData s)
 mePaymentmeanBankaccountData =
     TF.newDataSource "ovh_me_paymentmean_bankaccount" TF.validator $
         MePaymentmeanBankaccountData'
@@ -317,6 +329,9 @@ instance P.HasUseOldest (MePaymentmeanBankaccountData s) (TF.Attr s P.Bool) wher
         P.lens (_useOldest :: MePaymentmeanBankaccountData s -> TF.Attr s P.Bool)
                (\s a -> s { _useOldest = a } :: MePaymentmeanBankaccountData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDefault (TF.Ref s' (MePaymentmeanBankaccountData s)) (TF.Attr s P.Bool) where
     computedDefault x = TF.compute (TF.refKey x) "default"
 
@@ -346,7 +361,7 @@ data MePaymentmeanCreditcardData s = MePaymentmeanCreditcardData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 mePaymentmeanCreditcardData
-    :: TF.DataSource P.Provider (MePaymentmeanCreditcardData s)
+    :: P.DataSource (MePaymentmeanCreditcardData s)
 mePaymentmeanCreditcardData =
     TF.newDataSource "ovh_me_paymentmean_creditcard" TF.validator $
         MePaymentmeanCreditcardData'
@@ -387,6 +402,9 @@ instance P.HasUseLastToExpire (MePaymentmeanCreditcardData s) (TF.Attr s P.Bool)
         P.lens (_useLastToExpire :: MePaymentmeanCreditcardData s -> TF.Attr s P.Bool)
                (\s a -> s { _useLastToExpire = a } :: MePaymentmeanCreditcardData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDefault (TF.Ref s' (MePaymentmeanCreditcardData s)) (TF.Attr s P.Bool) where
     computedDefault x = TF.compute (TF.refKey x) "default"
 
@@ -412,7 +430,7 @@ data PubliccloudRegionData s = PubliccloudRegionData'
 publiccloudRegionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.DataSource P.Provider (PubliccloudRegionData s)
+    -> P.DataSource (PubliccloudRegionData s)
 publiccloudRegionData _name _projectId =
     TF.newDataSource "ovh_publiccloud_region" TF.validator $
         PubliccloudRegionData'
@@ -439,6 +457,9 @@ instance P.HasProjectId (PubliccloudRegionData s) (TF.Attr s P.Text) where
         P.lens (_projectId :: PubliccloudRegionData s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: PubliccloudRegionData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
     computedContinentCode x = TF.compute (TF.refKey x) "continent_code"
 
@@ -460,7 +481,7 @@ data PubliccloudRegionsData s = PubliccloudRegionsData'
 
 publiccloudRegionsData
     :: TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.DataSource P.Provider (PubliccloudRegionsData s)
+    -> P.DataSource (PubliccloudRegionsData s)
 publiccloudRegionsData _projectId =
     TF.newDataSource "ovh_publiccloud_regions" TF.validator $
         PubliccloudRegionsData'
@@ -479,6 +500,9 @@ instance P.HasProjectId (PubliccloudRegionsData s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: PubliccloudRegionsData s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: PubliccloudRegionsData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PubliccloudRegionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (PubliccloudRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "names"

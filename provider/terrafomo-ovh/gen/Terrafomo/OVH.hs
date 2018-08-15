@@ -18,6 +18,7 @@ module Terrafomo.OVH
     , module Terrafomo.OVH.Provider
     , module Terrafomo.OVH.Resource
     , module Terrafomo.OVH.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.OVH.DataSource
