@@ -18,6 +18,7 @@ module Terrafomo.GitHub
     , module Terrafomo.GitHub.Lens
     , module Terrafomo.GitHub.Settings
     , module Terrafomo.GitHub.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.GitHub.DataSource

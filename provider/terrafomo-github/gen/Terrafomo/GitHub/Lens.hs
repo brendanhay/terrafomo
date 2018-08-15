@@ -96,6 +96,7 @@ module Terrafomo.GitHub.Lens
     , HasComputedLogin (..)
     , HasComputedFullName (..)
     , HasComputedCreatedAt (..)
+    , HasComputedId (..)
     , HasComputedName (..)
     , HasComputedTopics (..)
     , HasComputedArchived (..)
@@ -514,6 +515,9 @@ class HasComputedFullName a b | a -> b where
 
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b

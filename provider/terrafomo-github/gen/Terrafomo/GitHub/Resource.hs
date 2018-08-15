@@ -133,7 +133,7 @@ data BranchProtectionResource s = BranchProtectionResource'
 branchProtectionResource
     :: TF.Attr s P.Text -- ^ @branch@ - 'P.branch'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Resource P.Provider (BranchProtectionResource s)
+    -> P.Resource (BranchProtectionResource s)
 branchProtectionResource _branch _repository =
     TF.newResource "github_branch_protection" TF.validator $
         BranchProtectionResource'
@@ -223,7 +223,7 @@ issueLabelResource
     :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Resource P.Provider (IssueLabelResource s)
+    -> P.Resource (IssueLabelResource s)
 issueLabelResource _color _name _repository =
     TF.newResource "github_issue_label" TF.validator $
         IssueLabelResource'
@@ -282,7 +282,7 @@ data MembershipResource s = MembershipResource'
 
 membershipResource
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (MembershipResource s)
+    -> P.Resource (MembershipResource s)
 membershipResource _username =
     TF.newResource "github_membership" TF.validator $
         MembershipResource'
@@ -324,7 +324,7 @@ data OrganizationProjectResource s = OrganizationProjectResource'
 
 organizationProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (OrganizationProjectResource s)
+    -> P.Resource (OrganizationProjectResource s)
 organizationProjectResource _name =
     TF.newResource "github_organization_project" TF.validator $
         OrganizationProjectResource'
@@ -376,7 +376,7 @@ data OrganizationWebhookResource s = OrganizationWebhookResource'
 organizationWebhookResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (OrganizationWebhookResource s)
+    -> P.Resource (OrganizationWebhookResource s)
 organizationWebhookResource _events _name =
     TF.newResource "github_organization_webhook" TF.validator $
         OrganizationWebhookResource'
@@ -477,7 +477,7 @@ data RepositoryResource s = RepositoryResource'
 
 repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RepositoryResource s)
+    -> P.Resource (RepositoryResource s)
 repositoryResource _name =
     TF.newResource "github_repository" TF.validator $
         RepositoryResource'
@@ -642,7 +642,7 @@ data RepositoryCollaboratorResource s = RepositoryCollaboratorResource'
 repositoryCollaboratorResource
     :: TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (RepositoryCollaboratorResource s)
+    -> P.Resource (RepositoryCollaboratorResource s)
 repositoryCollaboratorResource _repository _username =
     TF.newResource "github_repository_collaborator" TF.validator $
         RepositoryCollaboratorResource'
@@ -699,7 +699,7 @@ repositoryDeployKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Resource P.Provider (RepositoryDeployKeyResource s)
+    -> P.Resource (RepositoryDeployKeyResource s)
 repositoryDeployKeyResource _key _repository _title =
     TF.newResource "github_repository_deploy_key" TF.validator $
         RepositoryDeployKeyResource'
@@ -759,7 +759,7 @@ data RepositoryProjectResource s = RepositoryProjectResource'
 repositoryProjectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Resource P.Provider (RepositoryProjectResource s)
+    -> P.Resource (RepositoryProjectResource s)
 repositoryProjectResource _name _repository =
     TF.newResource "github_repository_project" TF.validator $
         RepositoryProjectResource'
@@ -822,7 +822,7 @@ repositoryWebhookResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Resource P.Provider (RepositoryWebhookResource s)
+    -> P.Resource (RepositoryWebhookResource s)
 repositoryWebhookResource _events _name _repository =
     TF.newResource "github_repository_webhook" TF.validator $
         RepositoryWebhookResource'
@@ -897,7 +897,7 @@ data TeamResource s = TeamResource'
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (TeamResource s)
+    -> P.Resource (TeamResource s)
 teamResource _name =
     TF.newResource "github_team" TF.validator $
         TeamResource'
@@ -964,7 +964,7 @@ data TeamMembershipResource s = TeamMembershipResource'
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (TeamMembershipResource s)
+    -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _username =
     TF.newResource "github_team_membership" TF.validator $
         TeamMembershipResource'
@@ -1017,7 +1017,7 @@ data TeamRepositoryResource s = TeamRepositoryResource'
 teamRepositoryResource
     :: TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
-    -> TF.Resource P.Provider (TeamRepositoryResource s)
+    -> P.Resource (TeamRepositoryResource s)
 teamRepositoryResource _repository _teamId =
     TF.newResource "github_team_repository" TF.validator $
         TeamRepositoryResource'
@@ -1063,7 +1063,7 @@ data UserGpgKeyResource s = UserGpgKeyResource'
 
 userGpgKeyResource
     :: TF.Attr s P.Text -- ^ @armored_public_key@ - 'P.armoredPublicKey'
-    -> TF.Resource P.Provider (UserGpgKeyResource s)
+    -> P.Resource (UserGpgKeyResource s)
 userGpgKeyResource _armoredPublicKey =
     TF.newResource "github_user_gpg_key" TF.validator $
         UserGpgKeyResource'
@@ -1102,7 +1102,7 @@ data UserSshKeyResource s = UserSshKeyResource'
 userSshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Resource P.Provider (UserSshKeyResource s)
+    -> P.Resource (UserSshKeyResource s)
 userSshKeyResource _key _title =
     TF.newResource "github_user_ssh_key" TF.validator $
         UserSshKeyResource'

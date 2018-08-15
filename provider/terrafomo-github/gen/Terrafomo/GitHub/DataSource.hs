@@ -69,7 +69,7 @@ data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
 ipRangesData
-    :: TF.DataSource P.Provider (IpRangesData s)
+    :: P.DataSource (IpRangesData s)
 ipRangesData =
     TF.newDataSource "github_ip_ranges" TF.validator $
         IpRangesData'
@@ -79,6 +79,9 @@ instance TF.IsObject (IpRangesData s) where
 
 instance TF.IsValid (IpRangesData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpRangesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedGit (TF.Ref s' (IpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedGit x = TF.compute (TF.refKey x) "git"
@@ -112,7 +115,7 @@ data RepositoryData s = RepositoryData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 repositoryData
-    :: TF.DataSource P.Provider (RepositoryData s)
+    :: P.DataSource (RepositoryData s)
 repositoryData =
     TF.newDataSource "github_repository" TF.validator $
         RepositoryData'
@@ -149,6 +152,9 @@ instance P.HasName (RepositoryData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RepositoryData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RepositoryData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllowMergeCommit (TF.Ref s' (RepositoryData s)) (TF.Attr s P.Bool) where
     computedAllowMergeCommit x = TF.compute (TF.refKey x) "allow_merge_commit"
@@ -216,7 +222,7 @@ data TeamData s = TeamData'
 
 teamData
     :: TF.Attr s P.Text -- ^ @slug@ - 'P.slug'
-    -> TF.DataSource P.Provider (TeamData s)
+    -> P.DataSource (TeamData s)
 teamData _slug =
     TF.newDataSource "github_team" TF.validator $
         TeamData'
@@ -235,6 +241,9 @@ instance P.HasSlug (TeamData s) (TF.Attr s P.Text) where
     slug =
         P.lens (_slug :: TeamData s -> TF.Attr s P.Text)
                (\s a -> s { _slug = a } :: TeamData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -263,7 +272,7 @@ data UserData s = UserData'
 
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.DataSource P.Provider (UserData s)
+    -> P.DataSource (UserData s)
 userData _username =
     TF.newDataSource "github_user" TF.validator $
         UserData'
@@ -282,6 +291,9 @@ instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: UserData s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: UserData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAvatarUrl (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedAvatarUrl x = TF.compute (TF.refKey x) "avatar_url"
