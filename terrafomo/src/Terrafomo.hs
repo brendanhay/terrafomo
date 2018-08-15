@@ -39,8 +39,6 @@ module Terrafomo
     , false
 
     -- * Declarations
-    , DataSource
-    , Resource
     , Schema
 
     -- ** References

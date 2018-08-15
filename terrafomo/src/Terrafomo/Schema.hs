@@ -2,12 +2,9 @@
 
 -- | Shared type representing datasources and resources.
 module Terrafomo.Schema
-    ( Dependency      (..)
+    ( Dependency (..)
 
-    , DataSource
-    , Resource
-    , Schema          (..)
-
+    , Schema     (..)
     , newDataSource
     , newResource
 
@@ -45,9 +42,6 @@ instance HCL.IsValue Dependency where
 
 -- Schema Types
 
-type DataSource p a = Schema ()            p a
-type Resource   p a = Schema (Lifecycle a) p a
-
 data Schema l p a where
     Schema
         :: (Eq l, Monoid l, HCL.IsObject l, IsProvider p, HCL.IsObject a)
@@ -61,7 +55,7 @@ data Schema l p a where
            }
         -> Schema l p a
 
-instance HasLifecycle (Resource p a) a where
+instance HasLifecycle (Schema (Lifecycle a) p a) a where
     lifecycle = lens _schemaLifecycle (\s a -> s { _schemaLifecycle = a })
 
 instance ( HCL.IsObject l
@@ -89,7 +83,7 @@ newDataSource
     => Text
     -> Validator a
     -> a
-    -> DataSource p a
+    -> Schema () p a
 newDataSource name validator cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = ()
@@ -107,7 +101,7 @@ newResource
     => Text
     -> Validator a
     -> a
-    -> Resource p a
+    -> Schema (Lifecycle a) p a
 newResource name validator cfg =
     Schema { _schemaProvider  = Nothing
            , _schemaLifecycle = mempty
