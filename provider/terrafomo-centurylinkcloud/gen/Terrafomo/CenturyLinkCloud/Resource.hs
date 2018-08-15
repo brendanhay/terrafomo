@@ -91,7 +91,7 @@ groupResource
     :: TF.Attr s P.Text -- ^ @location_id@ - 'P.locationId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
-    -> TF.Resource P.Provider (GroupResource s)
+    -> P.Resource (GroupResource s)
 groupResource _locationId _name _parent =
     TF.newResource "clc_group" TF.validator $
         GroupResource'
@@ -165,7 +165,7 @@ loadBalancerResource
     :: TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LoadBalancerResource s)
+    -> P.Resource (LoadBalancerResource s)
 loadBalancerResource _dataCenter _description _name =
     TF.newResource "clc_load_balancer" TF.validator $
         LoadBalancerResource'
@@ -239,7 +239,7 @@ loadBalancerPoolResource
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))] -- ^ @nodes@ - 'P.nodes'
     -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
-    -> TF.Resource P.Provider (LoadBalancerPoolResource s)
+    -> P.Resource (LoadBalancerPoolResource s)
 loadBalancerPoolResource _dataCenter _loadBalancer _nodes _port =
     TF.newResource "clc_load_balancer_pool" TF.validator $
         LoadBalancerPoolResource'
@@ -313,7 +313,7 @@ data PublicIpResource s = PublicIpResource'
 publicIpResource
     :: TF.Attr s [TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
-    -> TF.Resource P.Provider (PublicIpResource s)
+    -> P.Resource (PublicIpResource s)
 publicIpResource _ports _serverId =
     TF.newResource "clc_public_ip" TF.validator $
         PublicIpResource'
@@ -411,7 +411,7 @@ serverResource
     -> TF.Attr s P.Integer -- ^ @memory_mb@ - 'P.memoryMb'
     -> TF.Attr s P.Text -- ^ @name_template@ - 'P.nameTemplate'
     -> TF.Attr s P.Text -- ^ @source_server_id@ - 'P.sourceServerId'
-    -> TF.Resource P.Provider (ServerResource s)
+    -> P.Resource (ServerResource s)
 serverResource _cpu _groupId _memoryMb _nameTemplate _sourceServerId =
     TF.newResource "clc_server" TF.validator $
         ServerResource'

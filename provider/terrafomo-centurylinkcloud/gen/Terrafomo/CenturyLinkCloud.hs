@@ -17,6 +17,7 @@ module Terrafomo.CenturyLinkCloud
     , module Terrafomo.CenturyLinkCloud.Resource
     , module Terrafomo.CenturyLinkCloud.Types
     , module Terrafomo.CenturyLinkCloud.Provider
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.CenturyLinkCloud.Lens
