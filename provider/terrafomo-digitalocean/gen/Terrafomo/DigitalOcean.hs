@@ -18,6 +18,7 @@ module Terrafomo.DigitalOcean
     , module Terrafomo.DigitalOcean.Resource
     , module Terrafomo.DigitalOcean.Settings
     , module Terrafomo.DigitalOcean.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.DigitalOcean.DataSource

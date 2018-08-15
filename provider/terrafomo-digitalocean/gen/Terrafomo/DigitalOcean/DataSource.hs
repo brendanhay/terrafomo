@@ -70,7 +70,7 @@ data DomainData s = DomainData'
 
 domainData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (DomainData s)
+    -> P.DataSource (DomainData s)
 domainData _name =
     TF.newDataSource "digitalocean_domain" TF.validator $
         DomainData'
@@ -89,6 +89,9 @@ instance P.HasName (DomainData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DomainData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DomainData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DomainData s)) (TF.Attr s P.Integer) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
@@ -109,7 +112,7 @@ data ImageData s = ImageData'
 
 imageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ImageData s)
+    -> P.DataSource (ImageData s)
 imageData _name =
     TF.newDataSource "digitalocean_image" TF.validator $
         ImageData'
@@ -128,6 +131,9 @@ instance P.HasName (ImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ImageData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ImageData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
@@ -162,7 +168,7 @@ data RecordData s = RecordData'
 recordData
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (RecordData s)
+    -> P.DataSource (RecordData s)
 recordData _domain _name =
     TF.newDataSource "digitalocean_record" TF.validator $
         RecordData'

@@ -108,7 +108,7 @@ certificateResource
     :: TF.Attr s P.Text -- ^ @leaf_certificate@ - 'P.leafCertificate'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
-    -> TF.Resource P.Provider (CertificateResource s)
+    -> P.Resource (CertificateResource s)
 certificateResource _leafCertificate _name _privateKey =
     TF.newResource "digitalocean_certificate" TF.validator $
         CertificateResource'
@@ -171,7 +171,7 @@ data DomainResource s = DomainResource'
 domainResource
     :: TF.Attr s P.Text -- ^ @ip_address@ - 'P.ipAddress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DomainResource s)
+    -> P.Resource (DomainResource s)
 domainResource _ipAddress _name =
     TF.newResource "digitalocean_domain" TF.validator $
         DomainResource'
@@ -249,7 +249,7 @@ dropletResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
-    -> TF.Resource P.Provider (DropletResource s)
+    -> P.Resource (DropletResource s)
 dropletResource _image _name _region _size =
     TF.newResource "digitalocean_droplet" TF.validator $
         DropletResource'
@@ -407,7 +407,7 @@ data FirewallResource s = FirewallResource'
 
 firewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (FirewallResource s)
+    -> P.Resource (FirewallResource s)
 firewallResource _name =
     TF.newResource "digitalocean_firewall" TF.validator $
         FirewallResource'
@@ -487,7 +487,7 @@ data FloatingIpResource s = FloatingIpResource'
 
 floatingIpResource
     :: TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Resource P.Provider (FloatingIpResource s)
+    -> P.Resource (FloatingIpResource s)
 floatingIpResource _region =
     TF.newResource "digitalocean_floating_ip" TF.validator $
         FloatingIpResource'
@@ -552,7 +552,7 @@ loadbalancerResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))) -- ^ @forwarding_rule@ - 'P.forwardingRule'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Resource P.Provider (LoadbalancerResource s)
+    -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _forwardingRule _name _region =
     TF.newResource "digitalocean_loadbalancer" TF.validator $
         LoadbalancerResource'
@@ -657,7 +657,7 @@ data RecordResource s = RecordResource'
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (RecordResource s)
+    -> P.Resource (RecordResource s)
 recordResource _domain _type' =
     TF.newResource "digitalocean_record" TF.validator $
         RecordResource'
@@ -735,7 +735,7 @@ data SshKeyResource s = SshKeyResource'
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Resource P.Provider (SshKeyResource s)
+    -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
     TF.newResource "digitalocean_ssh_key" TF.validator $
         SshKeyResource'
@@ -780,7 +780,7 @@ data TagResource s = TagResource'
 
 tagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (TagResource s)
+    -> P.Resource (TagResource s)
 tagResource _name =
     TF.newResource "digitalocean_tag" TF.validator $
         TagResource'
@@ -826,7 +826,7 @@ volumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
-    -> TF.Resource P.Provider (VolumeResource s)
+    -> P.Resource (VolumeResource s)
 volumeResource _name _region _size =
     TF.newResource "digitalocean_volume" TF.validator $
         VolumeResource'
