@@ -17,6 +17,7 @@ module Terrafomo.Cobbler
     , module Terrafomo.Cobbler.Provider
     , module Terrafomo.Cobbler.Lens
     , module Terrafomo.Cobbler.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Cobbler.Lens

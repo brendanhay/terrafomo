@@ -97,7 +97,7 @@ distroResource
     -> TF.Attr s P.Text -- ^ @kernel@ - 'P.kernel'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @os_version@ - 'P.osVersion'
-    -> TF.Resource P.Provider (DistroResource s)
+    -> P.Resource (DistroResource s)
 distroResource _breed _initrd _kernel _name _osVersion =
     TF.newResource "cobbler_distro" TF.validator $
         DistroResource'
@@ -194,7 +194,7 @@ data KickstartFileResource s = KickstartFileResource'
 kickstartFileResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (KickstartFileResource s)
+    -> P.Resource (KickstartFileResource s)
 kickstartFileResource _body _name =
     TF.newResource "cobbler_kickstart_file" TF.validator $
         KickstartFileResource'
@@ -237,7 +237,7 @@ data ProfileResource s = ProfileResource'
 profileResource
     :: TF.Attr s P.Text -- ^ @distro@ - 'P.distro'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ProfileResource s)
+    -> P.Resource (ProfileResource s)
 profileResource _distro _name =
     TF.newResource "cobbler_profile" TF.validator $
         ProfileResource'
@@ -374,7 +374,7 @@ repoResource
     :: TF.Attr s P.Text -- ^ @breed@ - 'P.breed'
     -> TF.Attr s P.Text -- ^ @mirror@ - 'P.mirror'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RepoResource s)
+    -> P.Resource (RepoResource s)
 repoResource _breed _mirror _name =
     TF.newResource "cobbler_repo" TF.validator $
         RepoResource'
@@ -457,7 +457,7 @@ data SnippetResource s = SnippetResource'
 snippetResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SnippetResource s)
+    -> P.Resource (SnippetResource s)
 snippetResource _body _name =
     TF.newResource "cobbler_snippet" TF.validator $
         SnippetResource'
@@ -500,7 +500,7 @@ data SystemResource s = SystemResource'
 systemResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @profile@ - 'P.profile'
-    -> TF.Resource P.Provider (SystemResource s)
+    -> P.Resource (SystemResource s)
 systemResource _name _profile =
     TF.newResource "cobbler_system" TF.validator $
         SystemResource'
