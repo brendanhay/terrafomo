@@ -18,6 +18,7 @@ module Terrafomo.VSphere
     , module Terrafomo.VSphere.Provider
     , module Terrafomo.VSphere.Lens
     , module Terrafomo.VSphere.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.VSphere.DataSource

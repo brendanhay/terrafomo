@@ -359,6 +359,7 @@ module Terrafomo.VSphere.Lens
     , HasComputedProtocolEndpoint (..)
     , HasComputedAllowPromiscuous (..)
     , HasComputedMacAddresses (..)
+    , HasComputedId (..)
     , HasComputedManagementShareCount (..)
     , HasComputedVirtualmachineShareLevel (..)
     , HasComputedVdpReservationMbit (..)
@@ -2296,6 +2297,9 @@ class HasComputedAllowPromiscuous a b | a -> b where
 
 class HasComputedMacAddresses a b | a -> b where
     computedMacAddresses :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedManagementShareCount a b | a -> b where
     computedManagementShareCount :: a -> b
