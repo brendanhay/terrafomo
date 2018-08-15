@@ -106,7 +106,7 @@ dirpoolResource
     -> TF.Attr s [TF.Attr s (DirpoolRdata s)] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (DirpoolResource s)
+    -> P.Resource (DirpoolResource s)
 dirpoolResource _description _name _rdata _type' _zone =
     TF.newResource "ultradns_dirpool" TF.validator $
         DirpoolResource'
@@ -219,7 +219,7 @@ probeHttpResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (ProbeHttpResource s)
+    -> P.Resource (ProbeHttpResource s)
 probeHttpResource _agents _name _threshold _zone =
     TF.newResource "ultradns_probe_http" TF.validator $
         ProbeHttpResource'
@@ -321,7 +321,7 @@ probePingResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (ProbePingResource s)
+    -> P.Resource (ProbePingResource s)
 probePingResource _agents _name _threshold _zone =
     TF.newResource "ultradns_probe_ping" TF.validator $
         ProbePingResource'
@@ -419,7 +419,7 @@ rdpoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (RdpoolResource s)
+    -> P.Resource (RdpoolResource s)
 rdpoolResource _name _rdata _zone =
     TF.newResource "ultradns_rdpool" TF.validator $
         RdpoolResource'
@@ -504,7 +504,7 @@ recordResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (RecordResource s)
+    -> P.Resource (RecordResource s)
 recordResource _name _rdata _type' _zone =
     TF.newResource "ultradns_record" TF.validator $
         RecordResource'
@@ -597,7 +597,7 @@ tcpoolResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (TcpoolRdata s)] -- ^ @rdata@ - 'P.rdata'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (TcpoolResource s)
+    -> P.Resource (TcpoolResource s)
 tcpoolResource _description _name _rdata _zone =
     TF.newResource "ultradns_tcpool" TF.validator $
         TcpoolResource'

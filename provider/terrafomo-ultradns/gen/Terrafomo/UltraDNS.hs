@@ -17,6 +17,7 @@ module Terrafomo.UltraDNS
     , module Terrafomo.UltraDNS.Provider
     , module Terrafomo.UltraDNS.Lens
     , module Terrafomo.UltraDNS.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.UltraDNS.Lens
