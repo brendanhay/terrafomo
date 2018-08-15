@@ -27,6 +27,7 @@ module Terrafomo.OpsGenie.Lens
 
     -- ** Computed Attributes
     , HasComputedFullName (..)
+    , HasComputedId (..)
     , HasComputedRole (..)
     ) where
 
@@ -91,6 +92,9 @@ instance HasFullName a b => HasFullName (TF.Schema l p a) b where
 
 class HasComputedFullName a b | a -> b where
     computedFullName :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedRole a b | a -> b where
     computedRole :: a -> b

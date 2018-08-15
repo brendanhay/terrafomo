@@ -71,7 +71,7 @@ data TeamResource s = TeamResource'
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (TeamResource s)
+    -> P.Resource (TeamResource s)
 teamResource _name =
     TF.newResource "opsgenie_team" TF.validator $
         TeamResource'
@@ -135,7 +135,7 @@ userResource
     :: TF.Attr s P.Text -- ^ @full_name@ - 'P.fullName'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _fullName _role _username =
     TF.newResource "opsgenie_user" TF.validator $
         UserResource'

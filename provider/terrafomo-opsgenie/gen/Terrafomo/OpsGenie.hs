@@ -18,6 +18,7 @@ module Terrafomo.OpsGenie
     , module Terrafomo.OpsGenie.Lens
     , module Terrafomo.OpsGenie.Types
     , module Terrafomo.OpsGenie.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.OpsGenie.DataSource

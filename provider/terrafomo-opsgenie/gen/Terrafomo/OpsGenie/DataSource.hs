@@ -61,7 +61,7 @@ data UserData s = UserData'
 
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.DataSource P.Provider (UserData s)
+    -> P.DataSource (UserData s)
 userData _username =
     TF.newDataSource "opsgenie_user" TF.validator $
         UserData'
@@ -80,6 +80,9 @@ instance P.HasUsername (UserData s) (TF.Attr s P.Text) where
     username =
         P.lens (_username :: UserData s -> TF.Attr s P.Text)
                (\s a -> s { _username = a } :: UserData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedFullName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedFullName x = TF.compute (TF.refKey x) "full_name"
