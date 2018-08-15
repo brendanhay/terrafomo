@@ -17,6 +17,7 @@ module Terrafomo.Lailgun
     , module Terrafomo.Lailgun.Settings
     , module Terrafomo.Lailgun.Lens
     , module Terrafomo.Lailgun.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Lailgun.Lens
