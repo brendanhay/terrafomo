@@ -17,6 +17,7 @@ module Terrafomo.PostgreSQL
     , module Terrafomo.PostgreSQL.Provider
     , module Terrafomo.PostgreSQL.Settings
     , module Terrafomo.PostgreSQL.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.PostgreSQL.Lens

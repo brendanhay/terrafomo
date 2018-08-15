@@ -82,7 +82,7 @@ data DatabaseResource s = DatabaseResource'
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DatabaseResource s)
+    -> P.Resource (DatabaseResource s)
 databaseResource _name =
     TF.newResource "postgresql_database" TF.validator $
         DatabaseResource'
@@ -149,7 +149,7 @@ data ExtensionResource s = ExtensionResource'
 
 extensionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ExtensionResource s)
+    -> P.Resource (ExtensionResource s)
 extensionResource _name =
     TF.newResource "postgresql_extension" TF.validator $
         ExtensionResource'
@@ -240,7 +240,7 @@ data RoleResource s = RoleResource'
 
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RoleResource s)
+    -> P.Resource (RoleResource s)
 roleResource _name =
     TF.newResource "postgresql_role" TF.validator $
         RoleResource'
@@ -364,7 +364,7 @@ data SchemaResource s = SchemaResource'
 
 schemaResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SchemaResource s)
+    -> P.Resource (SchemaResource s)
 schemaResource _name =
     TF.newResource "postgresql_schema" TF.validator $
         SchemaResource'
