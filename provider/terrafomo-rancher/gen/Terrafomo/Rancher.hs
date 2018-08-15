@@ -18,6 +18,7 @@ module Terrafomo.Rancher
     , module Terrafomo.Rancher.Resource
     , module Terrafomo.Rancher.Types
     , module Terrafomo.Rancher.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Rancher.DataSource

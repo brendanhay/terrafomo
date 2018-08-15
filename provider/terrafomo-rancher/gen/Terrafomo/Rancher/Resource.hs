@@ -111,7 +111,7 @@ certificateResource
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (CertificateResource s)
+    -> P.Resource (CertificateResource s)
 certificateResource _cert _environmentId _key _name =
     TF.newResource "rancher_certificate" TF.validator $
         CertificateResource'
@@ -214,7 +214,7 @@ data EnvironmentResource s = EnvironmentResource'
 
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (EnvironmentResource s)
+    -> P.Resource (EnvironmentResource s)
 environmentResource _name =
     TF.newResource "rancher_environment" TF.validator $
         EnvironmentResource'
@@ -279,7 +279,7 @@ hostResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (HostResource s)
+    -> P.Resource (HostResource s)
 hostResource _environmentId _hostname _name =
     TF.newResource "rancher_host" TF.validator $
         HostResource'
@@ -355,7 +355,7 @@ data RegistrationTokenResource s = RegistrationTokenResource'
 registrationTokenResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RegistrationTokenResource s)
+    -> P.Resource (RegistrationTokenResource s)
 registrationTokenResource _environmentId _name =
     TF.newResource "rancher_registration_token" TF.validator $
         RegistrationTokenResource'
@@ -441,7 +441,7 @@ registryResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @server_address@ - 'P.serverAddress'
-    -> TF.Resource P.Provider (RegistryResource s)
+    -> P.Resource (RegistryResource s)
 registryResource _environmentId _name _serverAddress =
     TF.newResource "rancher_registry" TF.validator $
         RegistryResource'
@@ -512,7 +512,7 @@ registryCredentialResource
     -> TF.Attr s P.Text -- ^ @public_value@ - 'P.publicValue'
     -> TF.Attr s P.Text -- ^ @registry_id@ - 'P.registryId'
     -> TF.Attr s P.Text -- ^ @secret_value@ - 'P.secretValue'
-    -> TF.Resource P.Provider (RegistryCredentialResource s)
+    -> P.Resource (RegistryCredentialResource s)
 registryCredentialResource _name _publicValue _registryId _secretValue =
     TF.newResource "rancher_registry_credential" TF.validator $
         RegistryCredentialResource'
@@ -586,7 +586,7 @@ secretResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Resource P.Provider (SecretResource s)
+    -> P.Resource (SecretResource s)
 secretResource _environmentId _name _value =
     TF.newResource "rancher_secret" TF.validator $
         SecretResource'
@@ -667,7 +667,7 @@ data StackResource s = StackResource'
 stackResource
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (StackResource s)
+    -> P.Resource (StackResource s)
 stackResource _environmentId _name =
     TF.newResource "rancher_stack" TF.validator $
         StackResource'
@@ -778,7 +778,7 @@ volumeResource
     :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
     -> TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (VolumeResource s)
+    -> P.Resource (VolumeResource s)
 volumeResource _driver _environmentId _name =
     TF.newResource "rancher_volume" TF.validator $
         VolumeResource'

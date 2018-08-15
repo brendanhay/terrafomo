@@ -73,7 +73,7 @@ data CertificateData s = CertificateData'
 certificateData
     :: TF.Attr s P.Text -- ^ @environment_id@ - 'P.environmentId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (CertificateData s)
+    -> P.DataSource (CertificateData s)
 certificateData _environmentId _name =
     TF.newDataSource "rancher_certificate" TF.validator $
         CertificateData'
@@ -99,6 +99,9 @@ instance P.HasName (CertificateData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CertificateData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CertificateData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (CertificateData s)) (TF.Attr s P.Text) where
     computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
@@ -145,7 +148,7 @@ data EnvironmentData s = EnvironmentData'
 
 environmentData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (EnvironmentData s)
+    -> P.DataSource (EnvironmentData s)
 environmentData _name =
     TF.newDataSource "rancher_environment" TF.validator $
         EnvironmentData'
@@ -164,6 +167,9 @@ instance P.HasName (EnvironmentData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: EnvironmentData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EnvironmentData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EnvironmentData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -189,7 +195,7 @@ data SettingData s = SettingData'
 
 settingData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SettingData s)
+    -> P.DataSource (SettingData s)
 settingData _name =
     TF.newDataSource "rancher_setting" TF.validator $
         SettingData'
@@ -208,6 +214,9 @@ instance P.HasName (SettingData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SettingData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SettingData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SettingData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedValue (TF.Ref s' (SettingData s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
