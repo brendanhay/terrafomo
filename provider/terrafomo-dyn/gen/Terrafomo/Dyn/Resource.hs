@@ -72,7 +72,7 @@ recordResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (RecordResource s)
+    -> P.Resource (RecordResource s)
 recordResource _type' _value _zone =
     TF.newResource "dyn_record" TF.validator $
         RecordResource'

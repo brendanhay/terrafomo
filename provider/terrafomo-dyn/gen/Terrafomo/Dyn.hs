@@ -17,6 +17,7 @@ module Terrafomo.Dyn
     , module Terrafomo.Dyn.Resource
     , module Terrafomo.Dyn.Types
     , module Terrafomo.Dyn.Provider
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Dyn.Lens
