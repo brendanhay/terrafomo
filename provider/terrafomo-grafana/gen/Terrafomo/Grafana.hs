@@ -17,6 +17,7 @@ module Terrafomo.Grafana
     , module Terrafomo.Grafana.Resource
     , module Terrafomo.Grafana.Settings
     , module Terrafomo.Grafana.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Grafana.Lens

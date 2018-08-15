@@ -83,7 +83,7 @@ data AlertNotificationResource s = AlertNotificationResource'
 alertNotificationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (AlertNotificationResource s)
+    -> P.Resource (AlertNotificationResource s)
 alertNotificationResource _name _type' =
     TF.newResource "grafana_alert_notification" TF.validator $
         AlertNotificationResource'
@@ -139,7 +139,7 @@ data DashboardResource s = DashboardResource'
 
 dashboardResource
     :: TF.Attr s P.Text -- ^ @config_json@ - 'P.configJson'
-    -> TF.Resource P.Provider (DashboardResource s)
+    -> P.Resource (DashboardResource s)
 dashboardResource _configJson =
     TF.newResource "grafana_dashboard" TF.validator $
         DashboardResource'
@@ -211,7 +211,7 @@ data DataSourceResource s = DataSourceResource'
 dataSourceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (DataSourceResource s)
+    -> P.Resource (DataSourceResource s)
 dataSourceResource _name _type' =
     TF.newResource "grafana_data_source" TF.validator $
         DataSourceResource'
@@ -353,7 +353,7 @@ data OrganizationResource s = OrganizationResource'
 
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (OrganizationResource s)
+    -> P.Resource (OrganizationResource s)
 organizationResource _name =
     TF.newResource "grafana_organization" TF.validator $
         OrganizationResource'
