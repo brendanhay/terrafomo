@@ -91,6 +91,7 @@ module Terrafomo.Triton.Lens
     , HasComputedPublic (..)
     , HasComputedEndpoint (..)
     , HasComputedFabric (..)
+    , HasComputedId (..)
     , HasComputedMetadata (..)
     , HasComputedResolvers (..)
     , HasComputedName (..)
@@ -492,6 +493,9 @@ class HasComputedEndpoint a b | a -> b where
 
 class HasComputedFabric a b | a -> b where
     computedFabric :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedMetadata a b | a -> b where
     computedMetadata :: a -> b

@@ -18,6 +18,7 @@ module Terrafomo.Triton
     , module Terrafomo.Triton.Provider
     , module Terrafomo.Triton.DataSource
     , module Terrafomo.Triton.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Triton.DataSource

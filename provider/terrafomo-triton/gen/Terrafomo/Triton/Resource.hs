@@ -122,7 +122,7 @@ fabricResource
     -> TF.Attr s P.Text -- ^ @provision_start_ip@ - 'P.provisionStartIp'
     -> TF.Attr s P.Text -- ^ @subnet@ - 'P.subnet'
     -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
-    -> TF.Resource P.Provider (FabricResource s)
+    -> P.Resource (FabricResource s)
 fabricResource _name _provisionEndIp _provisionStartIp _subnet _vlanId =
     TF.newResource "triton_fabric" TF.validator $
         FabricResource'
@@ -224,7 +224,7 @@ data FirewallRuleResource s = FirewallRuleResource'
 
 firewallRuleResource
     :: TF.Attr s P.Text -- ^ @rule@ - 'P.rule'
-    -> TF.Resource P.Provider (FirewallRuleResource s)
+    -> P.Resource (FirewallRuleResource s)
 firewallRuleResource _rule =
     TF.newResource "triton_firewall_rule" TF.validator $
         FirewallRuleResource'
@@ -288,7 +288,7 @@ instanceTemplateResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
     -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
-    -> TF.Resource P.Provider (InstanceTemplateResource s)
+    -> P.Resource (InstanceTemplateResource s)
 instanceTemplateResource _image _package _templateName =
     TF.newResource "triton_instance_template" TF.validator $
         InstanceTemplateResource'
@@ -354,7 +354,7 @@ data KeyResource s = KeyResource'
 
 keyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Resource P.Provider (KeyResource s)
+    -> P.Resource (KeyResource s)
 keyResource _key =
     TF.newResource "triton_key" TF.validator $
         KeyResource'
@@ -439,7 +439,7 @@ data MachineResource s = MachineResource'
 machineResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
-    -> TF.Resource P.Provider (MachineResource s)
+    -> P.Resource (MachineResource s)
 machineResource _image _package =
     TF.newResource "triton_machine" TF.validator $
         MachineResource'
@@ -604,7 +604,7 @@ data ServiceGroupResource s = ServiceGroupResource'
 serviceGroupResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
-    -> TF.Resource P.Provider (ServiceGroupResource s)
+    -> P.Resource (ServiceGroupResource s)
 serviceGroupResource _groupName _template =
     TF.newResource "triton_service_group" TF.validator $
         ServiceGroupResource'
@@ -650,7 +650,7 @@ data SnapshotResource s = SnapshotResource'
 snapshotResource
     :: TF.Attr s P.Text -- ^ @machine_id@ - 'P.machineId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SnapshotResource s)
+    -> P.Resource (SnapshotResource s)
 snapshotResource _machineId _name =
     TF.newResource "triton_snapshot" TF.validator $
         SnapshotResource'
@@ -702,7 +702,7 @@ data VlanResource s = VlanResource'
 vlanResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
-    -> TF.Resource P.Provider (VlanResource s)
+    -> P.Resource (VlanResource s)
 vlanResource _name _vlanId =
     TF.newResource "triton_vlan" TF.validator $
         VlanResource'
