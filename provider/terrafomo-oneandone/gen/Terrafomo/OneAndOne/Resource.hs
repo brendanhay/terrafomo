@@ -115,7 +115,7 @@ blockStorageResource
     :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
-    -> TF.Resource P.Provider (BlockStorageResource s)
+    -> P.Resource (BlockStorageResource s)
 blockStorageResource _datacenter _name _size =
     TF.newResource "oneandone_block_storage" TF.validator $
         BlockStorageResource'
@@ -182,7 +182,7 @@ data FirewallPolicyResource s = FirewallPolicyResource'
 firewallPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)] -- ^ @rules@ - 'P.rules'
-    -> TF.Resource P.Provider (FirewallPolicyResource s)
+    -> P.Resource (FirewallPolicyResource s)
 firewallPolicyResource _name _rules =
     TF.newResource "oneandone_firewall_policy" TF.validator $
         FirewallPolicyResource'
@@ -265,7 +265,7 @@ data ImageResource s = ImageResource'
 
 imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ImageResource s)
+    -> P.Resource (ImageResource s)
 imageResource _name =
     TF.newResource "oneandone_image" TF.validator $
         ImageResource'
@@ -403,7 +403,7 @@ loadbalancerResource
     :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (LoadbalancerRules s)] -- ^ @rules@ - 'P.rules'
-    -> TF.Resource P.Provider (LoadbalancerResource s)
+    -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _method _name _rules =
     TF.newResource "oneandone_loadbalancer" TF.validator $
         LoadbalancerResource'
@@ -529,7 +529,7 @@ monitoringPolicyResource
     :: TF.Attr s P.Bool -- ^ @agent@ - 'P.agent'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)] -- ^ @thresholds@ - 'P.thresholds'
-    -> TF.Resource P.Provider (MonitoringPolicyResource s)
+    -> P.Resource (MonitoringPolicyResource s)
 monitoringPolicyResource _agent _name _thresholds =
     TF.newResource "oneandone_monitoring_policy" TF.validator $
         MonitoringPolicyResource'
@@ -630,7 +630,7 @@ data PrivateNetworkResource s = PrivateNetworkResource'
 
 privateNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (PrivateNetworkResource s)
+    -> P.Resource (PrivateNetworkResource s)
 privateNetworkResource _name =
     TF.newResource "oneandone_private_network" TF.validator $
         PrivateNetworkResource'
@@ -703,7 +703,7 @@ data PublicIpResource s = PublicIpResource'
 
 publicIpResource
     :: TF.Attr s P.Text -- ^ @ip_type@ - 'P.ipType'
-    -> TF.Resource P.Provider (PublicIpResource s)
+    -> P.Resource (PublicIpResource s)
 publicIpResource _ipType =
     TF.newResource "oneandone_public_ip" TF.validator $
         PublicIpResource'
@@ -819,7 +819,7 @@ data ServerResource s = ServerResource'
 serverResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ServerResource s)
+    -> P.Resource (ServerResource s)
 serverResource _image _name =
     TF.newResource "oneandone_server" TF.validator $
         ServerResource'
@@ -1009,7 +1009,7 @@ sharedStorageResource
     :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
-    -> TF.Resource P.Provider (SharedStorageResource s)
+    -> P.Resource (SharedStorageResource s)
 sharedStorageResource _datacenter _name _size =
     TF.newResource "oneandone_shared_storage" TF.validator $
         SharedStorageResource'
@@ -1076,7 +1076,7 @@ data SshKeyResource s = SshKeyResource'
 
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SshKeyResource s)
+    -> P.Resource (SshKeyResource s)
 sshKeyResource _name =
     TF.newResource "oneandone_ssh_key" TF.validator $
         SshKeyResource'
@@ -1130,7 +1130,7 @@ data VpnResource s = VpnResource'
 
 vpnResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (VpnResource s)
+    -> P.Resource (VpnResource s)
 vpnResource _name =
     TF.newResource "oneandone_vpn" TF.validator $
         VpnResource'

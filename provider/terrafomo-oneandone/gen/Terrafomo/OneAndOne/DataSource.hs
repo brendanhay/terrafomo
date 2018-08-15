@@ -76,7 +76,7 @@ data InstanceSizeData s = InstanceSizeData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 instanceSizeData
-    :: TF.DataSource P.Provider (InstanceSizeData s)
+    :: P.DataSource (InstanceSizeData s)
 instanceSizeData =
     TF.newDataSource "oneandone_instance_size" TF.validator $
         InstanceSizeData'
@@ -125,3 +125,6 @@ instance P.HasVcores (InstanceSizeData s) (TF.Attr s P.Integer) where
     vcores =
         P.lens (_vcores :: InstanceSizeData s -> TF.Attr s P.Integer)
                (\s a -> s { _vcores = a } :: InstanceSizeData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceSizeData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

@@ -18,6 +18,7 @@ module Terrafomo.OneAndOne
     , module Terrafomo.OneAndOne.Resource
     , module Terrafomo.OneAndOne.Types
     , module Terrafomo.OneAndOne.Provider
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.OneAndOne.DataSource
