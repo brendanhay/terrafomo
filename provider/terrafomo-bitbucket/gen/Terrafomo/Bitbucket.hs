@@ -17,6 +17,7 @@ module Terrafomo.Bitbucket
     , module Terrafomo.Bitbucket.Provider
     , module Terrafomo.Bitbucket.Resource
     , module Terrafomo.Bitbucket.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Bitbucket.Lens

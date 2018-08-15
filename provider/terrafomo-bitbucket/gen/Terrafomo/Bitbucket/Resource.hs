@@ -77,7 +77,7 @@ defaultReviewersResource
     :: TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @reviewers@ - 'P.reviewers'
-    -> TF.Resource P.Provider (DefaultReviewersResource s)
+    -> P.Resource (DefaultReviewersResource s)
 defaultReviewersResource _owner _repository _reviewers =
     TF.newResource "bitbucket_default_reviewers" TF.validator $
         DefaultReviewersResource'
@@ -145,7 +145,7 @@ hookResource
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> TF.Resource P.Provider (HookResource s)
+    -> P.Resource (HookResource s)
 hookResource _description _events _owner _repository _url =
     TF.newResource "bitbucket_hook" TF.validator $
         HookResource'
@@ -253,7 +253,7 @@ data RepositoryResource s = RepositoryResource'
 repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
-    -> TF.Resource P.Provider (RepositoryResource s)
+    -> P.Resource (RepositoryResource s)
 repositoryResource _name _owner =
     TF.newResource "bitbucket_repository" TF.validator $
         RepositoryResource'
