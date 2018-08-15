@@ -77,7 +77,7 @@ recordResource
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (RecordResource s)
+    -> P.Resource (RecordResource s)
 recordResource _name _records _ttl _type' _zone =
     TF.newResource "powerdns_record" TF.validator $
         RecordResource'

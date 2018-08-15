@@ -17,6 +17,7 @@ module Terrafomo.PowerDNS
     , module Terrafomo.PowerDNS.Settings
     , module Terrafomo.PowerDNS.Lens
     , module Terrafomo.PowerDNS.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.PowerDNS.Lens
