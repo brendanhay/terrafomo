@@ -77,7 +77,7 @@ data BootscriptData s = BootscriptData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 bootscriptData
-    :: TF.DataSource P.Provider (BootscriptData s)
+    :: P.DataSource (BootscriptData s)
 bootscriptData =
     TF.newDataSource "scaleway_bootscript" TF.validator $
         BootscriptData'
@@ -103,6 +103,9 @@ instance P.HasNameFilter (BootscriptData s) (TF.Attr s P.Text) where
     nameFilter =
         P.lens (_nameFilter :: BootscriptData s -> TF.Attr s P.Text)
                (\s a -> s { _nameFilter = a } :: BootscriptData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (BootscriptData s)) (TF.Attr s P.Text) where
     computedArchitecture x = TF.compute (TF.refKey x) "architecture"
@@ -152,7 +155,7 @@ data ImageData s = ImageData'
 
 imageData
     :: TF.Attr s P.Text -- ^ @architecture@ - 'P.architecture'
-    -> TF.DataSource P.Provider (ImageData s)
+    -> P.DataSource (ImageData s)
 imageData _architecture =
     TF.newDataSource "scaleway_image" TF.validator $
         ImageData'
@@ -197,6 +200,9 @@ instance P.HasNameFilter (ImageData s) (TF.Attr s P.Text) where
         P.lens (_nameFilter :: ImageData s -> TF.Attr s P.Text)
                (\s a -> s { _nameFilter = a } :: ImageData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
 
@@ -222,7 +228,7 @@ data SecurityGroupData s = SecurityGroupData'
 
 securityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SecurityGroupData s)
+    -> P.DataSource (SecurityGroupData s)
 securityGroupData _name =
     TF.newDataSource "scaleway_security_group" TF.validator $
         SecurityGroupData'
@@ -241,6 +247,9 @@ instance P.HasName (SecurityGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SecurityGroupData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SecurityGroupData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (SecurityGroupData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -261,7 +270,7 @@ data VolumeData s = VolumeData'
 
 volumeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (VolumeData s)
+    -> P.DataSource (VolumeData s)
 volumeData _name =
     TF.newDataSource "scaleway_volume" TF.validator $
         VolumeData'
@@ -280,6 +289,9 @@ instance P.HasName (VolumeData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VolumeData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VolumeData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedServer (TF.Ref s' (VolumeData s)) (TF.Attr s P.Text) where
     computedServer x = TF.compute (TF.refKey x) "server"

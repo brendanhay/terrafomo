@@ -57,6 +57,7 @@ module Terrafomo.Scaleway.Lens
     , HasComputedCreationDate (..)
     , HasComputedState (..)
     , HasComputedPublic (..)
+    , HasComputedId (..)
     , HasComputedInitrd (..)
     , HasComputedSecretKey (..)
     , HasComputedBootCmdArgs (..)
@@ -287,6 +288,9 @@ class HasComputedState a b | a -> b where
 
 class HasComputedPublic a b | a -> b where
     computedPublic :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedInitrd a b | a -> b where
     computedInitrd :: a -> b

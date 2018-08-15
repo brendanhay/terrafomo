@@ -93,7 +93,7 @@ data IpResource s = IpResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 ipResource
-    :: TF.Resource P.Provider (IpResource s)
+    :: P.Resource (IpResource s)
 ipResource =
     TF.newResource "scaleway_ip" TF.validator $
         IpResource'
@@ -141,7 +141,7 @@ data SecurityGroupResource s = SecurityGroupResource'
 securityGroupResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SecurityGroupResource s)
+    -> P.Resource (SecurityGroupResource s)
 securityGroupResource _description _name =
     TF.newResource "scaleway_security_group" TF.validator $
         SecurityGroupResource'
@@ -213,7 +213,7 @@ securityGroupRuleResource
     -> TF.Attr s P.Text -- ^ @ip_range@ - 'P.ipRange'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @security_group@ - 'P.securityGroup'
-    -> TF.Resource P.Provider (SecurityGroupRuleResource s)
+    -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _action _direction _ipRange _protocol _securityGroup =
     TF.newResource "scaleway_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
@@ -315,7 +315,7 @@ serverResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (ServerResource s)
+    -> P.Resource (ServerResource s)
 serverResource _image _name _type' =
     TF.newResource "scaleway_server" TF.validator $
         ServerResource'
@@ -426,7 +426,7 @@ data SshKeyResource s = SshKeyResource'
 
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Resource P.Provider (SshKeyResource s)
+    -> P.Resource (SshKeyResource s)
 sshKeyResource _key =
     TF.newResource "scaleway_ssh_key" TF.validator $
         SshKeyResource'
@@ -466,7 +466,7 @@ data TokenResource s = TokenResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 tokenResource
-    :: TF.Resource P.Provider (TokenResource s)
+    :: P.Resource (TokenResource s)
 tokenResource =
     TF.newResource "scaleway_token" TF.validator $
         TokenResource'
@@ -541,7 +541,7 @@ userDataResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Resource P.Provider (UserDataResource s)
+    -> P.Resource (UserDataResource s)
 userDataResource _key _server _value =
     TF.newResource "scaleway_user_data" TF.validator $
         UserDataResource'
@@ -598,7 +598,7 @@ volumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @size_in_gb@ - 'P.sizeInGb'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (VolumeResource s)
+    -> P.Resource (VolumeResource s)
 volumeResource _name _sizeInGb _type' =
     TF.newResource "scaleway_volume" TF.validator $
         VolumeResource'
@@ -653,7 +653,7 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @server@ - 'P.server'
     -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
-    -> TF.Resource P.Provider (VolumeAttachmentResource s)
+    -> P.Resource (VolumeAttachmentResource s)
 volumeAttachmentResource _server _volume =
     TF.newResource "scaleway_volume_attachment" TF.validator $
         VolumeAttachmentResource'

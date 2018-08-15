@@ -18,6 +18,7 @@ module Terrafomo.Scaleway
     , module Terrafomo.Scaleway.Lens
     , module Terrafomo.Scaleway.Settings
     , module Terrafomo.Scaleway.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Scaleway.DataSource
