@@ -68,6 +68,7 @@ module Terrafomo.NewRelic.Lens
     , HasComputedHostIds (..)
     , HasComputedInstanceIds (..)
     , HasComputedCreatedAt (..)
+    , HasComputedId (..)
     , HasComputedDashboardUrl (..)
     ) where
 
@@ -369,6 +370,9 @@ class HasComputedInstanceIds a b | a -> b where
 
 class HasComputedCreatedAt a b | a -> b where
     computedCreatedAt :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedDashboardUrl a b | a -> b where
     computedDashboardUrl :: a -> b

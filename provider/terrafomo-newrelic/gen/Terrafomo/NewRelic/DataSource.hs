@@ -65,7 +65,7 @@ data ApplicationData s = ApplicationData'
 
 applicationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ApplicationData s)
+    -> P.DataSource (ApplicationData s)
 applicationData _name =
     TF.newDataSource "newrelic_application" TF.validator $
         ApplicationData'
@@ -85,6 +85,9 @@ instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
         P.lens (_name :: ApplicationData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ApplicationData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Integer]) where
     computedHostIds x = TF.compute (TF.refKey x) "host_ids"
 
@@ -103,7 +106,7 @@ data KeyTransactionData s = KeyTransactionData'
 
 keyTransactionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (KeyTransactionData s)
+    -> P.DataSource (KeyTransactionData s)
 keyTransactionData _name =
     TF.newDataSource "newrelic_key_transaction" TF.validator $
         KeyTransactionData'
@@ -122,3 +125,6 @@ instance P.HasName (KeyTransactionData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KeyTransactionData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KeyTransactionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyTransactionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

@@ -18,6 +18,7 @@ module Terrafomo.NewRelic
     , module Terrafomo.NewRelic.Lens
     , module Terrafomo.NewRelic.Settings
     , module Terrafomo.NewRelic.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.NewRelic.DataSource
