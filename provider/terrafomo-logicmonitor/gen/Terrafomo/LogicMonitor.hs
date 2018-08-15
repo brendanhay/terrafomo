@@ -18,6 +18,7 @@ module Terrafomo.LogicMonitor
     , module Terrafomo.LogicMonitor.Provider
     , module Terrafomo.LogicMonitor.DataSource
     , module Terrafomo.LogicMonitor.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.LogicMonitor.DataSource

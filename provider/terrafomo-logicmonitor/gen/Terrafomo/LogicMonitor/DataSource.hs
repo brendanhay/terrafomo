@@ -73,7 +73,7 @@ data CollectorsData s = CollectorsData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 collectorsData
-    :: TF.DataSource P.Provider (CollectorsData s)
+    :: P.DataSource (CollectorsData s)
 collectorsData =
     TF.newDataSource "logicmonitor_collectors" TF.validator $
         CollectorsData'
@@ -118,6 +118,9 @@ instance P.HasSize (CollectorsData s) (TF.Attr s P.Integer) where
         P.lens (_size :: CollectorsData s -> TF.Attr s P.Integer)
                (\s a -> s { _size = a } :: CollectorsData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @logicmonitor_device_group@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/d/device_group.html terraform documentation>
@@ -135,7 +138,7 @@ data DeviceGroupData s = DeviceGroupData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 deviceGroupData
-    :: TF.DataSource P.Provider (DeviceGroupData s)
+    :: P.DataSource (DeviceGroupData s)
 deviceGroupData =
     TF.newDataSource "logicmonitor_device_group" TF.validator $
         DeviceGroupData'
@@ -172,3 +175,6 @@ instance P.HasSize (DeviceGroupData s) (TF.Attr s P.Integer) where
     size =
         P.lens (_size :: DeviceGroupData s -> TF.Attr s P.Integer)
                (\s a -> s { _size = a } :: DeviceGroupData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

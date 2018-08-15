@@ -93,7 +93,7 @@ data CollectorResource s = CollectorResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 collectorResource
-    :: TF.Resource P.Provider (CollectorResource s)
+    :: P.Resource (CollectorResource s)
 collectorResource =
     TF.newResource "logicmonitor_collector" TF.validator $
         CollectorResource'
@@ -176,7 +176,7 @@ data CollectorGroupResource s = CollectorGroupResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 collectorGroupResource
-    :: TF.Resource P.Provider (CollectorGroupResource s)
+    :: P.Resource (CollectorGroupResource s)
 collectorGroupResource =
     TF.newResource "logicmonitor_collector_group" TF.validator $
         CollectorGroupResource'
@@ -234,7 +234,7 @@ data DeviceResource s = DeviceResource'
 deviceResource
     :: TF.Attr s P.Integer -- ^ @collector@ - 'P.collector'
     -> TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
-    -> TF.Resource P.Provider (DeviceResource s)
+    -> P.Resource (DeviceResource s)
 deviceResource _collector _ipAddr =
     TF.newResource "logicmonitor_device" TF.validator $
         DeviceResource'
@@ -323,7 +323,7 @@ data DeviceGroupResource s = DeviceGroupResource'
 
 deviceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DeviceGroupResource s)
+    -> P.Resource (DeviceGroupResource s)
 deviceGroupResource _name =
     TF.newResource "logicmonitor_device_group" TF.validator $
         DeviceGroupResource'

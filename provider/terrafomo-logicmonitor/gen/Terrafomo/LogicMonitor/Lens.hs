@@ -46,6 +46,7 @@ module Terrafomo.LogicMonitor.Lens
     , HasCollectorGroupId (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -226,3 +227,6 @@ class HasCollectorGroupId a b | a -> b where
 
 instance HasCollectorGroupId a b => HasCollectorGroupId (TF.Schema l p a) b where
     collectorGroupId = TF.configuration . collectorGroupId
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
