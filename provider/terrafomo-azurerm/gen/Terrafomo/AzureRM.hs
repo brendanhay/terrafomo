@@ -19,6 +19,7 @@ module Terrafomo.AzureRM
     , module Terrafomo.AzureRM.Resource01
     , module Terrafomo.AzureRM.Types
     , module Terrafomo.AzureRM.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.AzureRM.DataSource

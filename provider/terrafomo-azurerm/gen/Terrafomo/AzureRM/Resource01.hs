@@ -395,7 +395,7 @@ appServiceResource
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (AppServiceResource s)
+    -> P.Resource (AppServiceResource s)
 appServiceResource _appServicePlanId _location _name _resourceGroupName =
     TF.newResource "azurerm_app_service" TF.validator $
         AppServiceResource'
@@ -500,7 +500,7 @@ appServiceActiveSlotResource
     :: TF.Attr s P.Text -- ^ @app_service_name@ - 'P.appServiceName'
     -> TF.Attr s P.Text -- ^ @app_service_slot_name@ - 'P.appServiceSlotName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (AppServiceActiveSlotResource s)
+    -> P.Resource (AppServiceActiveSlotResource s)
 appServiceActiveSlotResource _appServiceName _appServiceSlotName _resourceGroupName =
     TF.newResource "azurerm_app_service_active_slot" TF.validator $
         AppServiceActiveSlotResource'
@@ -554,7 +554,7 @@ appServiceCustomHostnameBindingResource
     :: TF.Attr s P.Text -- ^ @app_service_name@ - 'P.appServiceName'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (AppServiceCustomHostnameBindingResource s)
+    -> P.Resource (AppServiceCustomHostnameBindingResource s)
 appServiceCustomHostnameBindingResource _appServiceName _hostname _resourceGroupName =
     TF.newResource "azurerm_app_service_custom_hostname_binding" TF.validator $
         AppServiceCustomHostnameBindingResource'
@@ -615,7 +615,7 @@ appServicePlanResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s (AppServicePlanSku s) -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (AppServicePlanResource s)
+    -> P.Resource (AppServicePlanResource s)
 appServicePlanResource _location _name _resourceGroupName _sku =
     TF.newResource "azurerm_app_service_plan" TF.validator $
         AppServicePlanResource'
@@ -713,7 +713,7 @@ appServiceSlotResource
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (AppServiceSlotResource s)
+    -> P.Resource (AppServiceSlotResource s)
 appServiceSlotResource _appServiceName _appServicePlanId _location _name _resourceGroupName =
     TF.newResource "azurerm_app_service_slot" TF.validator $
         AppServiceSlotResource'
@@ -874,7 +874,7 @@ applicationGatewayResource
     -> TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayRequestRoutingRule s))) -- ^ @request_routing_rule@ - 'P.requestRoutingRule'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s (ApplicationGatewaySku s) -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (ApplicationGatewayResource s)
+    -> P.Resource (ApplicationGatewayResource s)
 applicationGatewayResource _backendAddressPool _backendHttpSettings _frontendIpConfiguration _frontendPort _gatewayIpConfiguration _httpListener _location _name _requestRoutingRule _resourceGroupName _sku =
     TF.newResource "azurerm_application_gateway" TF.validator $
         ApplicationGatewayResource'
@@ -1085,7 +1085,7 @@ applicationInsightsResource
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ApplicationInsightsResource s)
+    -> P.Resource (ApplicationInsightsResource s)
 applicationInsightsResource _applicationType _location _name _resourceGroupName =
     TF.newResource "azurerm_application_insights" TF.validator $
         ApplicationInsightsResource'
@@ -1155,7 +1155,7 @@ applicationSecurityGroupResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ApplicationSecurityGroupResource s)
+    -> P.Resource (ApplicationSecurityGroupResource s)
 applicationSecurityGroupResource _location _name _resourceGroupName =
     TF.newResource "azurerm_application_security_group" TF.validator $
         ApplicationSecurityGroupResource'
@@ -1216,7 +1216,7 @@ automationAccountResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s (AutomationAccountSku s) -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (AutomationAccountResource s)
+    -> P.Resource (AutomationAccountResource s)
 automationAccountResource _location _name _resourceGroupName _sku =
     TF.newResource "azurerm_automation_account" TF.validator $
         AutomationAccountResource'
@@ -1295,7 +1295,7 @@ automationCredentialResource
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (AutomationCredentialResource s)
+    -> P.Resource (AutomationCredentialResource s)
 automationCredentialResource _accountName _name _password _resourceGroupName _username =
     TF.newResource "azurerm_automation_credential" TF.validator $
         AutomationCredentialResource'
@@ -1393,7 +1393,7 @@ automationRunbookResource
     -> TF.Attr s (AutomationRunbookPublishContentLink s) -- ^ @publish_content_link@ - 'P.publishContentLink'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @runbook_type@ - 'P.runbookType'
-    -> TF.Resource P.Provider (AutomationRunbookResource s)
+    -> P.Resource (AutomationRunbookResource s)
 automationRunbookResource _accountName _location _logProgress _logVerbose _name _publishContentLink _resourceGroupName _runbookType =
     TF.newResource "azurerm_automation_runbook" TF.validator $
         AutomationRunbookResource'
@@ -1502,7 +1502,7 @@ automationScheduleResource
     :: TF.Attr s P.Text -- ^ @frequency@ - 'P.frequency'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (AutomationScheduleResource s)
+    -> P.Resource (AutomationScheduleResource s)
 automationScheduleResource _frequency _name _resourceGroupName =
     TF.newResource "azurerm_automation_schedule" TF.validator $
         AutomationScheduleResource'
@@ -1596,7 +1596,7 @@ autoscaleSettingResource
     -> TF.Attr s [TF.Attr s (AutoscaleSettingProfile s)] -- ^ @profile@ - 'P.profile'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @target_resource_id@ - 'P.targetResourceId'
-    -> TF.Resource P.Provider (AutoscaleSettingResource s)
+    -> P.Resource (AutoscaleSettingResource s)
 autoscaleSettingResource _location _name _profile _resourceGroupName _targetResourceId =
     TF.newResource "azurerm_autoscale_setting" TF.validator $
         AutoscaleSettingResource'
@@ -1698,7 +1698,7 @@ availabilitySetResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (AvailabilitySetResource s)
+    -> P.Resource (AvailabilitySetResource s)
 availabilitySetResource _location _name _resourceGroupName =
     TF.newResource "azurerm_availability_set" TF.validator $
         AvailabilitySetResource'
@@ -1774,7 +1774,7 @@ data AzureadApplicationResource s = AzureadApplicationResource'
 
 azureadApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (AzureadApplicationResource s)
+    -> P.Resource (AzureadApplicationResource s)
 azureadApplicationResource _name =
     TF.newResource "azurerm_azuread_application" TF.validator $
         AzureadApplicationResource'
@@ -1832,7 +1832,7 @@ data AzureadServicePrincipalResource s = AzureadServicePrincipalResource'
 
 azureadServicePrincipalResource
     :: TF.Attr s P.Text -- ^ @application_id@ - 'P.applicationId'
-    -> TF.Resource P.Provider (AzureadServicePrincipalResource s)
+    -> P.Resource (AzureadServicePrincipalResource s)
 azureadServicePrincipalResource _applicationId =
     TF.newResource "azurerm_azuread_service_principal" TF.validator $
         AzureadServicePrincipalResource'
@@ -1875,7 +1875,7 @@ azureadServicePrincipalPasswordResource
     :: TF.Attr s P.Text -- ^ @end_date@ - 'P.endDate'
     -> TF.Attr s P.Text -- ^ @service_principal_id@ - 'P.servicePrincipalId'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Resource P.Provider (AzureadServicePrincipalPasswordResource s)
+    -> P.Resource (AzureadServicePrincipalPasswordResource s)
 azureadServicePrincipalPasswordResource _endDate _servicePrincipalId _value =
     TF.newResource "azurerm_azuread_service_principal_password" TF.validator $
         AzureadServicePrincipalPasswordResource'
@@ -1961,7 +1961,7 @@ cdnEndpointResource
     -> TF.Attr s [TF.Attr s (CdnEndpointOrigin s)] -- ^ @origin@ - 'P.origin'
     -> TF.Attr s P.Text -- ^ @profile_name@ - 'P.profileName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (CdnEndpointResource s)
+    -> P.Resource (CdnEndpointResource s)
 cdnEndpointResource _location _name _origin _profileName _resourceGroupName =
     TF.newResource "azurerm_cdn_endpoint" TF.validator $
         CdnEndpointResource'
@@ -2101,7 +2101,7 @@ cdnProfileResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (CdnProfileResource s)
+    -> P.Resource (CdnProfileResource s)
 cdnProfileResource _location _name _resourceGroupName _sku =
     TF.newResource "azurerm_cdn_profile" TF.validator $
         CdnProfileResource'
@@ -2185,7 +2185,7 @@ containerGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @os_type@ - 'P.osType'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ContainerGroupResource s)
+    -> P.Resource (ContainerGroupResource s)
 containerGroupResource _container _location _name _osType _resourceGroupName =
     TF.newResource "azurerm_container_group" TF.validator $
         ContainerGroupResource'
@@ -2307,7 +2307,7 @@ containerRegistryResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ContainerRegistryResource s)
+    -> P.Resource (ContainerRegistryResource s)
 containerRegistryResource _location _name _resourceGroupName =
     TF.newResource "azurerm_container_registry" TF.validator $
         ContainerRegistryResource'
@@ -2417,7 +2417,7 @@ containerServiceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @orchestration_platform@ - 'P.orchestrationPlatform'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ContainerServiceResource s)
+    -> P.Resource (ContainerServiceResource s)
 containerServiceResource _agentPoolProfile _diagnosticsProfile _linuxProfile _location _masterProfile _name _orchestrationPlatform _resourceGroupName =
     TF.newResource "azurerm_container_service" TF.validator $
         ContainerServiceResource'
@@ -2556,7 +2556,7 @@ cosmosdbAccountResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @offer_type@ - 'P.offerType'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (CosmosdbAccountResource s)
+    -> P.Resource (CosmosdbAccountResource s)
 cosmosdbAccountResource _consistencyPolicy _location _name _offerType _resourceGroupName =
     TF.newResource "azurerm_cosmosdb_account" TF.validator $
         CosmosdbAccountResource'
@@ -2697,7 +2697,7 @@ dataLakeAnalyticsAccountResource
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (DataLakeAnalyticsAccountResource s)
+    -> P.Resource (DataLakeAnalyticsAccountResource s)
 dataLakeAnalyticsAccountResource _defaultStoreAccountName _location _name _resourceGroupName =
     TF.newResource "azurerm_data_lake_analytics_account" TF.validator $
         DataLakeAnalyticsAccountResource'
@@ -2776,7 +2776,7 @@ dataLakeAnalyticsFirewallRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
-    -> TF.Resource P.Provider (DataLakeAnalyticsFirewallRuleResource s)
+    -> P.Resource (DataLakeAnalyticsFirewallRuleResource s)
 dataLakeAnalyticsFirewallRuleResource _accountName _endIpAddress _name _resourceGroupName _startIpAddress =
     TF.newResource "azurerm_data_lake_analytics_firewall_rule" TF.validator $
         DataLakeAnalyticsFirewallRuleResource'
@@ -2856,7 +2856,7 @@ dataLakeStoreResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (DataLakeStoreResource s)
+    -> P.Resource (DataLakeStoreResource s)
 dataLakeStoreResource _location _name _resourceGroupName =
     TF.newResource "azurerm_data_lake_store" TF.validator $
         DataLakeStoreResource'
@@ -2944,7 +2944,7 @@ dataLakeStoreFileResource
     :: TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
     -> TF.Attr s P.Text -- ^ @local_file_path@ - 'P.localFilePath'
     -> TF.Attr s P.Text -- ^ @remote_file_path@ - 'P.remoteFilePath'
-    -> TF.Resource P.Provider (DataLakeStoreFileResource s)
+    -> P.Resource (DataLakeStoreFileResource s)
 dataLakeStoreFileResource _accountName _localFilePath _remoteFilePath =
     TF.newResource "azurerm_data_lake_store_file" TF.validator $
         DataLakeStoreFileResource'
@@ -3006,7 +3006,7 @@ dataLakeStoreFirewallRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
-    -> TF.Resource P.Provider (DataLakeStoreFirewallRuleResource s)
+    -> P.Resource (DataLakeStoreFirewallRuleResource s)
 dataLakeStoreFirewallRuleResource _accountName _endIpAddress _name _resourceGroupName _startIpAddress =
     TF.newResource "azurerm_data_lake_store_firewall_rule" TF.validator $
         DataLakeStoreFirewallRuleResource'
@@ -3082,7 +3082,7 @@ dnsARecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsARecordResource s)
+    -> P.Resource (DnsARecordResource s)
 dnsARecordResource _name _records _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_a_record" TF.validator $
         DnsARecordResource'
@@ -3161,7 +3161,7 @@ dnsAaaaRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsAaaaRecordResource s)
+    -> P.Resource (DnsAaaaRecordResource s)
 dnsAaaaRecordResource _name _records _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_aaaa_record" TF.validator $
         DnsAaaaRecordResource'
@@ -3240,7 +3240,7 @@ dnsCaaRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsCaaRecordResource s)
+    -> P.Resource (DnsCaaRecordResource s)
 dnsCaaRecordResource _name _record _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_caa_record" TF.validator $
         DnsCaaRecordResource'
@@ -3326,7 +3326,7 @@ dnsCnameRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsCnameRecordResource s)
+    -> P.Resource (DnsCnameRecordResource s)
 dnsCnameRecordResource _name _record _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_cname_record" TF.validator $
         DnsCnameRecordResource'
@@ -3412,7 +3412,7 @@ dnsMxRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsMxRecordResource s)
+    -> P.Resource (DnsMxRecordResource s)
 dnsMxRecordResource _name _record _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_mx_record" TF.validator $
         DnsMxRecordResource'
@@ -3491,7 +3491,7 @@ dnsNsRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsNsRecordResource s)
+    -> P.Resource (DnsNsRecordResource s)
 dnsNsRecordResource _name _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_ns_record" TF.validator $
         DnsNsRecordResource'
@@ -3566,7 +3566,7 @@ dnsPtrRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsPtrRecordResource s)
+    -> P.Resource (DnsPtrRecordResource s)
 dnsPtrRecordResource _name _records _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_ptr_record" TF.validator $
         DnsPtrRecordResource'
@@ -3645,7 +3645,7 @@ dnsSrvRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsSrvRecordResource s)
+    -> P.Resource (DnsSrvRecordResource s)
 dnsSrvRecordResource _name _record _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_srv_record" TF.validator $
         DnsSrvRecordResource'
@@ -3728,7 +3728,7 @@ dnsTxtRecordResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @zone_name@ - 'P.zoneName'
-    -> TF.Resource P.Provider (DnsTxtRecordResource s)
+    -> P.Resource (DnsTxtRecordResource s)
 dnsTxtRecordResource _name _record _resourceGroupName _ttl _zoneName =
     TF.newResource "azurerm_dns_txt_record" TF.validator $
         DnsTxtRecordResource'
@@ -3808,7 +3808,7 @@ data DnsZoneResource s = DnsZoneResource'
 dnsZoneResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (DnsZoneResource s)
+    -> P.Resource (DnsZoneResource s)
 dnsZoneResource _name _resourceGroupName =
     TF.newResource "azurerm_dns_zone" TF.validator $
         DnsZoneResource'
@@ -3888,7 +3888,7 @@ eventgridTopicResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (EventgridTopicResource s)
+    -> P.Resource (EventgridTopicResource s)
 eventgridTopicResource _location _name _resourceGroupName =
     TF.newResource "azurerm_eventgrid_topic" TF.validator $
         EventgridTopicResource'
@@ -3965,7 +3965,7 @@ eventhubResource
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
     -> TF.Attr s P.Integer -- ^ @partition_count@ - 'P.partitionCount'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (EventhubResource s)
+    -> P.Resource (EventhubResource s)
 eventhubResource _messageRetention _name _namespaceName _partitionCount _resourceGroupName =
     TF.newResource "azurerm_eventhub" TF.validator $
         EventhubResource'
@@ -4060,7 +4060,7 @@ eventhubAuthorizationRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (EventhubAuthorizationRuleResource s)
+    -> P.Resource (EventhubAuthorizationRuleResource s)
 eventhubAuthorizationRuleResource _eventhubName _name _namespaceName _resourceGroupName =
     TF.newResource "azurerm_eventhub_authorization_rule" TF.validator $
         EventhubAuthorizationRuleResource'
@@ -4161,7 +4161,7 @@ eventhubConsumerGroupResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (EventhubConsumerGroupResource s)
+    -> P.Resource (EventhubConsumerGroupResource s)
 eventhubConsumerGroupResource _eventhubName _name _namespaceName _resourceGroupName =
     TF.newResource "azurerm_eventhub_consumer_group" TF.validator $
         EventhubConsumerGroupResource'
@@ -4239,7 +4239,7 @@ eventhubNamespaceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (EventhubNamespaceResource s)
+    -> P.Resource (EventhubNamespaceResource s)
 eventhubNamespaceResource _location _name _resourceGroupName _sku =
     TF.newResource "azurerm_eventhub_namespace" TF.validator $
         EventhubNamespaceResource'
@@ -4341,7 +4341,7 @@ eventhubNamespaceAuthorizationRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (EventhubNamespaceAuthorizationRuleResource s)
+    -> P.Resource (EventhubNamespaceAuthorizationRuleResource s)
 eventhubNamespaceAuthorizationRuleResource _name _namespaceName _resourceGroupName =
     TF.newResource "azurerm_eventhub_namespace_authorization_rule" TF.validator $
         EventhubNamespaceAuthorizationRuleResource'
@@ -4447,7 +4447,7 @@ expressRouteCircuitResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @service_provider_name@ - 'P.serviceProviderName'
     -> TF.Attr s (ExpressRouteCircuitSku s) -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (ExpressRouteCircuitResource s)
+    -> P.Resource (ExpressRouteCircuitResource s)
 expressRouteCircuitResource _bandwidthInMbps _location _name _peeringLocation _resourceGroupName _serviceProviderName _sku =
     TF.newResource "azurerm_express_route_circuit" TF.validator $
         ExpressRouteCircuitResource'
@@ -4549,7 +4549,7 @@ expressRouteCircuitAuthorizationResource
     :: TF.Attr s P.Text -- ^ @express_route_circuit_name@ - 'P.expressRouteCircuitName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ExpressRouteCircuitAuthorizationResource s)
+    -> P.Resource (ExpressRouteCircuitAuthorizationResource s)
 expressRouteCircuitAuthorizationResource _expressRouteCircuitName _name _resourceGroupName =
     TF.newResource "azurerm_express_route_circuit_authorization" TF.validator $
         ExpressRouteCircuitAuthorizationResource'
@@ -4627,7 +4627,7 @@ expressRouteCircuitPeeringResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @secondary_peer_address_prefix@ - 'P.secondaryPeerAddressPrefix'
     -> TF.Attr s P.Integer -- ^ @vlan_id@ - 'P.vlanId'
-    -> TF.Resource P.Provider (ExpressRouteCircuitPeeringResource s)
+    -> P.Resource (ExpressRouteCircuitPeeringResource s)
 expressRouteCircuitPeeringResource _expressRouteCircuitName _peeringType _primaryPeerAddressPrefix _resourceGroupName _secondaryPeerAddressPrefix _vlanId =
     TF.newResource "azurerm_express_route_circuit_peering" TF.validator $
         ExpressRouteCircuitPeeringResource'
@@ -4752,7 +4752,7 @@ functionAppResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @storage_connection_string@ - 'P.storageConnectionString'
-    -> TF.Resource P.Provider (FunctionAppResource s)
+    -> P.Resource (FunctionAppResource s)
 functionAppResource _appServicePlanId _location _name _resourceGroupName _storageConnectionString =
     TF.newResource "azurerm_function_app" TF.validator $
         FunctionAppResource'
@@ -4881,7 +4881,7 @@ imageResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (ImageResource s)
+    -> P.Resource (ImageResource s)
 imageResource _location _name _resourceGroupName =
     TF.newResource "azurerm_image" TF.validator $
         ImageResource'
@@ -4971,7 +4971,7 @@ iothubResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s (IothubSku s) -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (IothubResource s)
+    -> P.Resource (IothubResource s)
 iothubResource _location _name _resourceGroupName _sku =
     TF.newResource "azurerm_iothub" TF.validator $
         IothubResource'
@@ -5065,7 +5065,7 @@ keyVaultResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s [TF.Attr s (KeyVaultSku s)] -- ^ @sku@ - 'P.sku'
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
-    -> TF.Resource P.Provider (KeyVaultResource s)
+    -> P.Resource (KeyVaultResource s)
 keyVaultResource _location _name _resourceGroupName _sku _tenantId =
     TF.newResource "azurerm_key_vault" TF.validator $
         KeyVaultResource'
@@ -5185,7 +5185,7 @@ keyVaultAccessPolicyResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @secret_permissions@ - 'P.secretPermissions'
     -> TF.Attr s P.Text -- ^ @tenant_id@ - 'P.tenantId'
     -> TF.Attr s P.Text -- ^ @vault_name@ - 'P.vaultName'
-    -> TF.Resource P.Provider (KeyVaultAccessPolicyResource s)
+    -> P.Resource (KeyVaultAccessPolicyResource s)
 keyVaultAccessPolicyResource _keyPermissions _objectId _resourceGroupName _secretPermissions _tenantId _vaultName =
     TF.newResource "azurerm_key_vault_access_policy" TF.validator $
         KeyVaultAccessPolicyResource'
@@ -5277,7 +5277,7 @@ keyVaultCertificateResource
     :: TF.Attr s (KeyVaultCertificateCertificatePolicy s) -- ^ @certificate_policy@ - 'P.certificatePolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
-    -> TF.Resource P.Provider (KeyVaultCertificateResource s)
+    -> P.Resource (KeyVaultCertificateResource s)
 keyVaultCertificateResource _certificatePolicy _name _vaultUri =
     TF.newResource "azurerm_key_vault_certificate" TF.validator $
         KeyVaultCertificateResource'
@@ -5366,7 +5366,7 @@ keyVaultKeyResource
     -> TF.Attr s P.Text -- ^ @key_type@ - 'P.keyType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
-    -> TF.Resource P.Provider (KeyVaultKeyResource s)
+    -> P.Resource (KeyVaultKeyResource s)
 keyVaultKeyResource _keyOpts _keySize _keyType _name _vaultUri =
     TF.newResource "azurerm_key_vault_key" TF.validator $
         KeyVaultKeyResource'
@@ -5449,7 +5449,7 @@ keyVaultSecretResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
-    -> TF.Resource P.Provider (KeyVaultSecretResource s)
+    -> P.Resource (KeyVaultSecretResource s)
 keyVaultSecretResource _name _value _vaultUri =
     TF.newResource "azurerm_key_vault_secret" TF.validator $
         KeyVaultSecretResource'
@@ -5532,7 +5532,7 @@ kubernetesClusterResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s (KubernetesClusterServicePrincipal s) -- ^ @service_principal@ - 'P.servicePrincipal'
-    -> TF.Resource P.Provider (KubernetesClusterResource s)
+    -> P.Resource (KubernetesClusterResource s)
 kubernetesClusterResource _agentPoolProfile _dnsPrefix _linuxProfile _location _name _resourceGroupName _servicePrincipal =
     TF.newResource "azurerm_kubernetes_cluster" TF.validator $
         KubernetesClusterResource'
@@ -5653,7 +5653,7 @@ lbResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LbResource s)
+    -> P.Resource (LbResource s)
 lbResource _location _name _resourceGroupName =
     TF.newResource "azurerm_lb" TF.validator $
         LbResource'
@@ -5734,7 +5734,7 @@ lbBackendAddressPoolResource
     :: TF.Attr s P.Text -- ^ @loadbalancer_id@ - 'P.loadbalancerId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LbBackendAddressPoolResource s)
+    -> P.Resource (LbBackendAddressPoolResource s)
 lbBackendAddressPoolResource _loadbalancerId _name _resourceGroupName =
     TF.newResource "azurerm_lb_backend_address_pool" TF.validator $
         LbBackendAddressPoolResource'
@@ -5814,7 +5814,7 @@ lbNatPoolResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LbNatPoolResource s)
+    -> P.Resource (LbNatPoolResource s)
 lbNatPoolResource _backendPort _frontendIpConfigurationName _frontendPortEnd _frontendPortStart _loadbalancerId _name _protocol _resourceGroupName =
     TF.newResource "azurerm_lb_nat_pool" TF.validator $
         LbNatPoolResource'
@@ -5922,7 +5922,7 @@ lbNatRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LbNatRuleResource s)
+    -> P.Resource (LbNatRuleResource s)
 lbNatRuleResource _backendPort _frontendIpConfigurationName _frontendPort _loadbalancerId _name _protocol _resourceGroupName =
     TF.newResource "azurerm_lb_nat_rule" TF.validator $
         LbNatRuleResource'
@@ -6026,7 +6026,7 @@ lbProbeResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LbProbeResource s)
+    -> P.Resource (LbProbeResource s)
 lbProbeResource _loadbalancerId _name _port _resourceGroupName =
     TF.newResource "azurerm_lb_probe" TF.validator $
         LbProbeResource'
@@ -6133,7 +6133,7 @@ lbRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LbRuleResource s)
+    -> P.Resource (LbRuleResource s)
 lbRuleResource _backendPort _frontendIpConfigurationName _frontendPort _loadbalancerId _name _protocol _resourceGroupName =
     TF.newResource "azurerm_lb_rule" TF.validator $
         LbRuleResource'
@@ -6248,7 +6248,7 @@ localNetworkGatewayResource
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LocalNetworkGatewayResource s)
+    -> P.Resource (LocalNetworkGatewayResource s)
 localNetworkGatewayResource _addressSpace _gatewayAddress _location _name _resourceGroupName =
     TF.newResource "azurerm_local_network_gateway" TF.validator $
         LocalNetworkGatewayResource'
@@ -6342,7 +6342,7 @@ logAnalyticsSolutionResource
     -> TF.Attr s P.Text -- ^ @solution_name@ - 'P.solutionName'
     -> TF.Attr s P.Text -- ^ @workspace_name@ - 'P.workspaceName'
     -> TF.Attr s P.Text -- ^ @workspace_resource_id@ - 'P.workspaceResourceId'
-    -> TF.Resource P.Provider (LogAnalyticsSolutionResource s)
+    -> P.Resource (LogAnalyticsSolutionResource s)
 logAnalyticsSolutionResource _location _plan _resourceGroupName _solutionName _workspaceName _workspaceResourceId =
     TF.newResource "azurerm_log_analytics_solution" TF.validator $
         LogAnalyticsSolutionResource'
@@ -6425,7 +6425,7 @@ logAnalyticsWorkspaceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
-    -> TF.Resource P.Provider (LogAnalyticsWorkspaceResource s)
+    -> P.Resource (LogAnalyticsWorkspaceResource s)
 logAnalyticsWorkspaceResource _location _name _resourceGroupName _sku =
     TF.newResource "azurerm_log_analytics_workspace" TF.validator $
         LogAnalyticsWorkspaceResource'
@@ -6504,7 +6504,7 @@ logicAppActionCustomResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LogicAppActionCustomResource s)
+    -> P.Resource (LogicAppActionCustomResource s)
 logicAppActionCustomResource _body _logicAppId _name =
     TF.newResource "azurerm_logic_app_action_custom" TF.validator $
         LogicAppActionCustomResource'
@@ -6568,7 +6568,7 @@ logicAppActionHttpResource
     -> TF.Attr s P.Text -- ^ @method@ - 'P.method'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @uri@ - 'P.uri'
-    -> TF.Resource P.Provider (LogicAppActionHttpResource s)
+    -> P.Resource (LogicAppActionHttpResource s)
 logicAppActionHttpResource _logicAppId _method _name _uri =
     TF.newResource "azurerm_logic_app_action_http" TF.validator $
         LogicAppActionHttpResource'
@@ -6643,7 +6643,7 @@ logicAppTriggerCustomResource
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LogicAppTriggerCustomResource s)
+    -> P.Resource (LogicAppTriggerCustomResource s)
 logicAppTriggerCustomResource _body _logicAppId _name =
     TF.newResource "azurerm_logic_app_trigger_custom" TF.validator $
         LogicAppTriggerCustomResource'
@@ -6703,7 +6703,7 @@ logicAppTriggerHttpRequestResource
     :: TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @schema@ - 'P.schema'
-    -> TF.Resource P.Provider (LogicAppTriggerHttpRequestResource s)
+    -> P.Resource (LogicAppTriggerHttpRequestResource s)
 logicAppTriggerHttpRequestResource _logicAppId _name _schema =
     TF.newResource "azurerm_logic_app_trigger_http_request" TF.validator $
         LogicAppTriggerHttpRequestResource'
@@ -6775,7 +6775,7 @@ logicAppTriggerRecurrenceResource
     -> TF.Attr s P.Integer -- ^ @interval@ - 'P.interval'
     -> TF.Attr s P.Text -- ^ @logic_app_id@ - 'P.logicAppId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LogicAppTriggerRecurrenceResource s)
+    -> P.Resource (LogicAppTriggerRecurrenceResource s)
 logicAppTriggerRecurrenceResource _frequency _interval _logicAppId _name =
     TF.newResource "azurerm_logic_app_trigger_recurrence" TF.validator $
         LogicAppTriggerRecurrenceResource'
@@ -6845,7 +6845,7 @@ logicAppWorkflowResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (LogicAppWorkflowResource s)
+    -> P.Resource (LogicAppWorkflowResource s)
 logicAppWorkflowResource _location _name _resourceGroupName =
     TF.newResource "azurerm_logic_app_workflow" TF.validator $
         LogicAppWorkflowResource'
@@ -6949,7 +6949,7 @@ managedDiskResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @storage_account_type@ - 'P.storageAccountType'
-    -> TF.Resource P.Provider (ManagedDiskResource s)
+    -> P.Resource (ManagedDiskResource s)
 managedDiskResource _createOption _location _name _resourceGroupName _storageAccountType =
     TF.newResource "azurerm_managed_disk" TF.validator $
         ManagedDiskResource'
@@ -7068,7 +7068,7 @@ managementLockResource
     :: TF.Attr s P.Text -- ^ @lock_level@ - 'P.lockLevel'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
-    -> TF.Resource P.Provider (ManagementLockResource s)
+    -> P.Resource (ManagementLockResource s)
 managementLockResource _lockLevel _name _scope =
     TF.newResource "azurerm_management_lock" TF.validator $
         ManagementLockResource'
@@ -7156,7 +7156,7 @@ metricAlertruleResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
-    -> TF.Resource P.Provider (MetricAlertruleResource s)
+    -> P.Resource (MetricAlertruleResource s)
 metricAlertruleResource _aggregation _location _metricName _name _operator _period _resourceGroupName _resourceId _threshold =
     TF.newResource "azurerm_metric_alertrule" TF.validator $
         MetricAlertruleResource'
@@ -7283,7 +7283,7 @@ monitorActionGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @short_name@ - 'P.shortName'
-    -> TF.Resource P.Provider (MonitorActionGroupResource s)
+    -> P.Resource (MonitorActionGroupResource s)
 monitorActionGroupResource _name _resourceGroupName _shortName =
     TF.newResource "azurerm_monitor_action_group" TF.validator $
         MonitorActionGroupResource'
@@ -7384,7 +7384,7 @@ mysqlConfigurationResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Resource P.Provider (MysqlConfigurationResource s)
+    -> P.Resource (MysqlConfigurationResource s)
 mysqlConfigurationResource _name _resourceGroupName _serverName _value =
     TF.newResource "azurerm_mysql_configuration" TF.validator $
         MysqlConfigurationResource'
@@ -7453,7 +7453,7 @@ mysqlDatabaseResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
-    -> TF.Resource P.Provider (MysqlDatabaseResource s)
+    -> P.Resource (MysqlDatabaseResource s)
 mysqlDatabaseResource _charset _collation _name _resourceGroupName _serverName =
     TF.newResource "azurerm_mysql_database" TF.validator $
         MysqlDatabaseResource'
@@ -7529,7 +7529,7 @@ mysqlFirewallRuleResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @server_name@ - 'P.serverName'
     -> TF.Attr s P.Text -- ^ @start_ip_address@ - 'P.startIpAddress'
-    -> TF.Resource P.Provider (MysqlFirewallRuleResource s)
+    -> P.Resource (MysqlFirewallRuleResource s)
 mysqlFirewallRuleResource _endIpAddress _name _resourceGroupName _serverName _startIpAddress =
     TF.newResource "azurerm_mysql_firewall_rule" TF.validator $
         MysqlFirewallRuleResource'
@@ -7621,7 +7621,7 @@ mysqlServerResource
     -> TF.Attr s P.Text -- ^ @ssl_enforcement@ - 'P.sslEnforcement'
     -> TF.Attr s (MysqlServerStorageProfile s) -- ^ @storage_profile@ - 'P.storageProfile'
     -> TF.Attr s P.Text -- ^ @version@ - 'P.version'
-    -> TF.Resource P.Provider (MysqlServerResource s)
+    -> P.Resource (MysqlServerResource s)
 mysqlServerResource _administratorLogin _administratorLoginPassword _location _name _resourceGroupName _sku _sslEnforcement _storageProfile _version =
     TF.newResource "azurerm_mysql_server" TF.validator $
         MysqlServerResource'
@@ -7744,7 +7744,7 @@ networkInterfaceResource
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.Resource P.Provider (NetworkInterfaceResource s)
+    -> P.Resource (NetworkInterfaceResource s)
 networkInterfaceResource _ipConfiguration _location _name _resourceGroupName =
     TF.newResource "azurerm_network_interface" TF.validator $
         NetworkInterfaceResource'

@@ -225,7 +225,7 @@ data AppServiceData s = AppServiceData'
 appServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (AppServiceData s)
+    -> P.DataSource (AppServiceData s)
 appServiceData _name _resourceGroupName =
     TF.newDataSource "azurerm_app_service" TF.validator $
         AppServiceData'
@@ -251,6 +251,9 @@ instance P.HasResourceGroupName (AppServiceData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: AppServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServiceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAppServicePlanId (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
     computedAppServicePlanId x = TF.compute (TF.refKey x) "app_service_plan_id"
@@ -307,7 +310,7 @@ data AppServicePlanData s = AppServicePlanData'
 appServicePlanData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (AppServicePlanData s)
+    -> P.DataSource (AppServicePlanData s)
 appServicePlanData _name _resourceGroupName =
     TF.newDataSource "azurerm_app_service_plan" TF.validator $
         AppServicePlanData'
@@ -333,6 +336,9 @@ instance P.HasResourceGroupName (AppServicePlanData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: AppServicePlanData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServicePlanData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedKind (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Text) where
     computedKind x = TF.compute (TF.refKey x) "kind"
@@ -368,7 +374,7 @@ data ApplicationSecurityGroupData s = ApplicationSecurityGroupData'
 applicationSecurityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (ApplicationSecurityGroupData s)
+    -> P.DataSource (ApplicationSecurityGroupData s)
 applicationSecurityGroupData _name _resourceGroupName =
     TF.newDataSource "azurerm_application_security_group" TF.validator $
         ApplicationSecurityGroupData'
@@ -395,6 +401,9 @@ instance P.HasResourceGroupName (ApplicationSecurityGroupData s) (TF.Attr s P.Te
         P.lens (_resourceGroupName :: ApplicationSecurityGroupData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ApplicationSecurityGroupData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ApplicationSecurityGroupData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
@@ -409,7 +418,7 @@ data AzureadApplicationData s = AzureadApplicationData'
     deriving (P.Show, P.Eq, P.Generic)
 
 azureadApplicationData
-    :: TF.DataSource P.Provider (AzureadApplicationData s)
+    :: P.DataSource (AzureadApplicationData s)
 azureadApplicationData =
     TF.newDataSource "azurerm_azuread_application" TF.validator $
         AzureadApplicationData'
@@ -419,6 +428,9 @@ instance TF.IsObject (AzureadApplicationData s) where
 
 instance TF.IsValid (AzureadApplicationData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedApplicationId (TF.Ref s' (AzureadApplicationData s)) (TF.Attr s P.Text) where
     computedApplicationId x = TF.compute (TF.refKey x) "application_id"
@@ -452,7 +464,7 @@ data AzureadServicePrincipalData s = AzureadServicePrincipalData'
     deriving (P.Show, P.Eq, P.Generic)
 
 azureadServicePrincipalData
-    :: TF.DataSource P.Provider (AzureadServicePrincipalData s)
+    :: P.DataSource (AzureadServicePrincipalData s)
 azureadServicePrincipalData =
     TF.newDataSource "azurerm_azuread_service_principal" TF.validator $
         AzureadServicePrincipalData'
@@ -462,6 +474,9 @@ instance TF.IsObject (AzureadServicePrincipalData s) where
 
 instance TF.IsValid (AzureadServicePrincipalData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedApplicationId (TF.Ref s' (AzureadServicePrincipalData s)) (TF.Attr s P.Text) where
     computedApplicationId x = TF.compute (TF.refKey x) "application_id"
@@ -484,7 +499,7 @@ data BuiltinRoleDefinitionData s = BuiltinRoleDefinitionData'
 
 builtinRoleDefinitionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (BuiltinRoleDefinitionData s)
+    -> P.DataSource (BuiltinRoleDefinitionData s)
 builtinRoleDefinitionData _name =
     TF.newDataSource "azurerm_builtin_role_definition" TF.validator $
         BuiltinRoleDefinitionData'
@@ -503,6 +518,9 @@ instance P.HasName (BuiltinRoleDefinitionData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: BuiltinRoleDefinitionData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: BuiltinRoleDefinitionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAssignableScopes x = TF.compute (TF.refKey x) "assignable_scopes"
@@ -532,7 +550,7 @@ data CdnProfileData s = CdnProfileData'
 cdnProfileData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (CdnProfileData s)
+    -> P.DataSource (CdnProfileData s)
 cdnProfileData _name _resourceGroupName =
     TF.newDataSource "azurerm_cdn_profile" TF.validator $
         CdnProfileData'
@@ -559,6 +577,9 @@ instance P.HasResourceGroupName (CdnProfileData s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: CdnProfileData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: CdnProfileData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (CdnProfileData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
@@ -576,7 +597,7 @@ data ClientConfigData s = ClientConfigData'
     deriving (P.Show, P.Eq, P.Generic)
 
 clientConfigData
-    :: TF.DataSource P.Provider (ClientConfigData s)
+    :: P.DataSource (ClientConfigData s)
 clientConfigData =
     TF.newDataSource "azurerm_client_config" TF.validator $
         ClientConfigData'
@@ -586,6 +607,9 @@ instance TF.IsObject (ClientConfigData s) where
 
 instance TF.IsValid (ClientConfigData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedClientId (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedClientId x = TF.compute (TF.refKey x) "client_id"
@@ -618,7 +642,7 @@ data ContainerRegistryData s = ContainerRegistryData'
 containerRegistryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (ContainerRegistryData s)
+    -> P.DataSource (ContainerRegistryData s)
 containerRegistryData _name _resourceGroupName =
     TF.newDataSource "azurerm_container_registry" TF.validator $
         ContainerRegistryData'
@@ -644,6 +668,9 @@ instance P.HasResourceGroupName (ContainerRegistryData s) (TF.Attr s P.Text) whe
     resourceGroupName =
         P.lens (_resourceGroupName :: ContainerRegistryData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ContainerRegistryData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAdminEnabled (TF.Ref s' (ContainerRegistryData s)) (TF.Attr s P.Bool) where
     computedAdminEnabled x = TF.compute (TF.refKey x) "admin_enabled"
@@ -682,7 +709,7 @@ data CosmosdbAccountData s = CosmosdbAccountData'
 cosmosdbAccountData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (CosmosdbAccountData s)
+    -> P.DataSource (CosmosdbAccountData s)
 cosmosdbAccountData _name _resourceGroupName =
     TF.newDataSource "azurerm_cosmosdb_account" TF.validator $
         CosmosdbAccountData'
@@ -708,6 +735,9 @@ instance P.HasResourceGroupName (CosmosdbAccountData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: CosmosdbAccountData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: CosmosdbAccountData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (CosmosdbAccountCapabilities s)]) where
     computedCapabilities x = TF.compute (TF.refKey x) "capabilities"
@@ -773,7 +803,7 @@ data DataLakeStoreData s = DataLakeStoreData'
 dataLakeStoreData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (DataLakeStoreData s)
+    -> P.DataSource (DataLakeStoreData s)
 dataLakeStoreData _name _resourceGroupName =
     TF.newDataSource "azurerm_data_lake_store" TF.validator $
         DataLakeStoreData'
@@ -799,6 +829,9 @@ instance P.HasResourceGroupName (DataLakeStoreData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: DataLakeStoreData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: DataLakeStoreData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEncryptionState (TF.Ref s' (DataLakeStoreData s)) (TF.Attr s P.Text) where
     computedEncryptionState x = TF.compute (TF.refKey x) "encryption_state"
@@ -833,7 +866,7 @@ data DnsZoneData s = DnsZoneData'
 
 dnsZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (DnsZoneData s)
+    -> P.DataSource (DnsZoneData s)
 dnsZoneData _name =
     TF.newDataSource "azurerm_dns_zone" TF.validator $
         DnsZoneData'
@@ -852,6 +885,9 @@ instance P.HasName (DnsZoneData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsZoneData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsZoneData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedMaxNumberOfRecordSets (TF.Ref s' (DnsZoneData s)) (TF.Attr s P.Text) where
     computedMaxNumberOfRecordSets x = TF.compute (TF.refKey x) "max_number_of_record_sets"
@@ -893,7 +929,7 @@ data EventhubNamespaceData s = EventhubNamespaceData'
 eventhubNamespaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (EventhubNamespaceData s)
+    -> P.DataSource (EventhubNamespaceData s)
 eventhubNamespaceData _name _resourceGroupName =
     TF.newDataSource "azurerm_eventhub_namespace" TF.validator $
         EventhubNamespaceData'
@@ -919,6 +955,9 @@ instance P.HasResourceGroupName (EventhubNamespaceData s) (TF.Attr s P.Text) whe
     resourceGroupName =
         P.lens (_resourceGroupName :: EventhubNamespaceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: EventhubNamespaceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAutoInflateEnabled (TF.Ref s' (EventhubNamespaceData s)) (TF.Attr s P.Bool) where
     computedAutoInflateEnabled x = TF.compute (TF.refKey x) "auto_inflate_enabled"
@@ -977,7 +1016,7 @@ data ImageData s = ImageData'
 
 imageData
     :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (ImageData s)
+    -> P.DataSource (ImageData s)
 imageData _resourceGroupName =
     TF.newDataSource "azurerm_image" TF.validator $
         ImageData'
@@ -1029,6 +1068,9 @@ instance P.HasSortDescending (ImageData s) (TF.Attr s P.Bool) where
         P.lens (_sortDescending :: ImageData s -> TF.Attr s P.Bool)
                (\s a -> s { _sortDescending = a } :: ImageData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDataDisk (TF.Ref s' (ImageData s)) (TF.Attr s [TF.Attr s (ImageDataDisk s)]) where
     computedDataDisk x = TF.compute (TF.refKey x) "data_disk"
 
@@ -1057,7 +1099,7 @@ data KeyVaultData s = KeyVaultData'
 keyVaultData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (KeyVaultData s)
+    -> P.DataSource (KeyVaultData s)
 keyVaultData _name _resourceGroupName =
     TF.newDataSource "azurerm_key_vault" TF.validator $
         KeyVaultData'
@@ -1083,6 +1125,9 @@ instance P.HasResourceGroupName (KeyVaultData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: KeyVaultData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: KeyVaultData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (KeyVaultData s)) (TF.Attr s [TF.Attr s (KeyVaultAccessPolicy s)]) where
     computedAccessPolicy x = TF.compute (TF.refKey x) "access_policy"
@@ -1123,7 +1168,7 @@ data KeyVaultAccessPolicyData s = KeyVaultAccessPolicyData'
 
 keyVaultAccessPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (KeyVaultAccessPolicyData s)
+    -> P.DataSource (KeyVaultAccessPolicyData s)
 keyVaultAccessPolicyData _name =
     TF.newDataSource "azurerm_key_vault_access_policy" TF.validator $
         KeyVaultAccessPolicyData'
@@ -1142,6 +1187,9 @@ instance P.HasName (KeyVaultAccessPolicyData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KeyVaultAccessPolicyData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KeyVaultAccessPolicyData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCertificatePermissions (TF.Ref s' (KeyVaultAccessPolicyData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCertificatePermissions x = TF.compute (TF.refKey x) "certificate_permissions"
@@ -1168,7 +1216,7 @@ data KeyVaultSecretData s = KeyVaultSecretData'
 keyVaultSecretData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vault_uri@ - 'P.vaultUri'
-    -> TF.DataSource P.Provider (KeyVaultSecretData s)
+    -> P.DataSource (KeyVaultSecretData s)
 keyVaultSecretData _name _vaultUri =
     TF.newDataSource "azurerm_key_vault_secret" TF.validator $
         KeyVaultSecretData'
@@ -1194,6 +1242,9 @@ instance P.HasVaultUri (KeyVaultSecretData s) (TF.Attr s P.Text) where
     vaultUri =
         P.lens (_vaultUri :: KeyVaultSecretData s -> TF.Attr s P.Text)
                (\s a -> s { _vaultUri = a } :: KeyVaultSecretData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedContentType (TF.Ref s' (KeyVaultSecretData s)) (TF.Attr s P.Text) where
     computedContentType x = TF.compute (TF.refKey x) "content_type"
@@ -1223,7 +1274,7 @@ data KubernetesClusterData s = KubernetesClusterData'
 kubernetesClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (KubernetesClusterData s)
+    -> P.DataSource (KubernetesClusterData s)
 kubernetesClusterData _name _resourceGroupName =
     TF.newDataSource "azurerm_kubernetes_cluster" TF.validator $
         KubernetesClusterData'
@@ -1249,6 +1300,9 @@ instance P.HasResourceGroupName (KubernetesClusterData s) (TF.Attr s P.Text) whe
     resourceGroupName =
         P.lens (_resourceGroupName :: KubernetesClusterData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: KubernetesClusterData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAgentPoolProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubernetesClusterAgentPoolProfile s)]) where
     computedAgentPoolProfile x = TF.compute (TF.refKey x) "agent_pool_profile"
@@ -1302,7 +1356,7 @@ data LogicAppWorkflowData s = LogicAppWorkflowData'
 logicAppWorkflowData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (LogicAppWorkflowData s)
+    -> P.DataSource (LogicAppWorkflowData s)
 logicAppWorkflowData _name _resourceGroupName =
     TF.newDataSource "azurerm_logic_app_workflow" TF.validator $
         LogicAppWorkflowData'
@@ -1328,6 +1382,9 @@ instance P.HasResourceGroupName (LogicAppWorkflowData s) (TF.Attr s P.Text) wher
     resourceGroupName =
         P.lens (_resourceGroupName :: LogicAppWorkflowData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: LogicAppWorkflowData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessEndpoint (TF.Ref s' (LogicAppWorkflowData s)) (TF.Attr s P.Text) where
     computedAccessEndpoint x = TF.compute (TF.refKey x) "access_endpoint"
@@ -1363,7 +1420,7 @@ data ManagedDiskData s = ManagedDiskData'
 managedDiskData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (ManagedDiskData s)
+    -> P.DataSource (ManagedDiskData s)
 managedDiskData _name _resourceGroupName =
     TF.newDataSource "azurerm_managed_disk" TF.validator $
         ManagedDiskData'
@@ -1389,6 +1446,9 @@ instance P.HasResourceGroupName (ManagedDiskData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: ManagedDiskData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ManagedDiskData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ManagedDiskData s)) (TF.Attr s P.Integer) where
     computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
@@ -1427,7 +1487,7 @@ data NetworkInterfaceData s = NetworkInterfaceData'
 networkInterfaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (NetworkInterfaceData s)
+    -> P.DataSource (NetworkInterfaceData s)
 networkInterfaceData _name _resourceGroupName =
     TF.newDataSource "azurerm_network_interface" TF.validator $
         NetworkInterfaceData'
@@ -1453,6 +1513,9 @@ instance P.HasResourceGroupName (NetworkInterfaceData s) (TF.Attr s P.Text) wher
     resourceGroupName =
         P.lens (_resourceGroupName :: NetworkInterfaceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: NetworkInterfaceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAppliedDnsServers (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAppliedDnsServers x = TF.compute (TF.refKey x) "applied_dns_servers"
@@ -1512,7 +1575,7 @@ data NetworkSecurityGroupData s = NetworkSecurityGroupData'
 networkSecurityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (NetworkSecurityGroupData s)
+    -> P.DataSource (NetworkSecurityGroupData s)
 networkSecurityGroupData _name _resourceGroupName =
     TF.newDataSource "azurerm_network_security_group" TF.validator $
         NetworkSecurityGroupData'
@@ -1538,6 +1601,9 @@ instance P.HasResourceGroupName (NetworkSecurityGroupData s) (TF.Attr s P.Text) 
     resourceGroupName =
         P.lens (_resourceGroupName :: NetworkSecurityGroupData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: NetworkSecurityGroupData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
@@ -1568,7 +1634,7 @@ notificationHubData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @namespace_name@ - 'P.namespaceName'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (NotificationHubData s)
+    -> P.DataSource (NotificationHubData s)
 notificationHubData _name _namespaceName _resourceGroupName =
     TF.newDataSource "azurerm_notification_hub" TF.validator $
         NotificationHubData'
@@ -1602,6 +1668,9 @@ instance P.HasResourceGroupName (NotificationHubData s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: NotificationHubData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: NotificationHubData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedApnsCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s [TF.Attr s (NotificationHubApnsCredential s)]) where
     computedApnsCredential x = TF.compute (TF.refKey x) "apns_credential"
 
@@ -1627,7 +1696,7 @@ data NotificationHubNamespaceData s = NotificationHubNamespaceData'
 notificationHubNamespaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (NotificationHubNamespaceData s)
+    -> P.DataSource (NotificationHubNamespaceData s)
 notificationHubNamespaceData _name _resourceGroupName =
     TF.newDataSource "azurerm_notification_hub_namespace" TF.validator $
         NotificationHubNamespaceData'
@@ -1653,6 +1722,9 @@ instance P.HasResourceGroupName (NotificationHubNamespaceData s) (TF.Attr s P.Te
     resourceGroupName =
         P.lens (_resourceGroupName :: NotificationHubNamespaceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: NotificationHubNamespaceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Bool) where
     computedEnabled x = TF.compute (TF.refKey x) "enabled"
@@ -1693,7 +1765,7 @@ platformImageData
     -> TF.Attr s P.Text -- ^ @offer@ - 'P.offer'
     -> TF.Attr s P.Text -- ^ @publisher@ - 'P.publisher'
     -> TF.Attr s P.Text -- ^ @sku@ - 'P.sku'
-    -> TF.DataSource P.Provider (PlatformImageData s)
+    -> P.DataSource (PlatformImageData s)
 platformImageData _location _offer _publisher _sku =
     TF.newDataSource "azurerm_platform_image" TF.validator $
         PlatformImageData'
@@ -1734,6 +1806,9 @@ instance P.HasSku (PlatformImageData s) (TF.Attr s P.Text) where
         P.lens (_sku :: PlatformImageData s -> TF.Attr s P.Text)
                (\s a -> s { _sku = a } :: PlatformImageData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedVersion (TF.Ref s' (PlatformImageData s)) (TF.Attr s P.Text) where
     computedVersion x = TF.compute (TF.refKey x) "version"
 
@@ -1753,7 +1828,7 @@ data PublicIpData s = PublicIpData'
 publicIpData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (PublicIpData s)
+    -> P.DataSource (PublicIpData s)
 publicIpData _name _resourceGroupName =
     TF.newDataSource "azurerm_public_ip" TF.validator $
         PublicIpData'
@@ -1779,6 +1854,9 @@ instance P.HasResourceGroupName (PublicIpData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: PublicIpData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: PublicIpData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDomainNameLabel (TF.Ref s' (PublicIpData s)) (TF.Attr s P.Text) where
     computedDomainNameLabel x = TF.compute (TF.refKey x) "domain_name_label"
@@ -1816,7 +1894,7 @@ data PublicIpsData s = PublicIpsData'
 
 publicIpsData
     :: TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (PublicIpsData s)
+    -> P.DataSource (PublicIpsData s)
 publicIpsData _resourceGroupName =
     TF.newDataSource "azurerm_public_ips" TF.validator $
         PublicIpsData'
@@ -1857,6 +1935,9 @@ instance P.HasResourceGroupName (PublicIpsData s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: PublicIpsData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: PublicIpsData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (PublicIpsData s)) (TF.Attr s [TF.Attr s (PublicIpsPublicIps s)]) where
     computedPublicIps x = TF.compute (TF.refKey x) "public_ips"
 
@@ -1876,7 +1957,7 @@ data RecoveryServicesVaultData s = RecoveryServicesVaultData'
 recoveryServicesVaultData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (RecoveryServicesVaultData s)
+    -> P.DataSource (RecoveryServicesVaultData s)
 recoveryServicesVaultData _name _resourceGroupName =
     TF.newDataSource "azurerm_recovery_services_vault" TF.validator $
         RecoveryServicesVaultData'
@@ -1903,6 +1984,9 @@ instance P.HasResourceGroupName (RecoveryServicesVaultData s) (TF.Attr s P.Text)
         P.lens (_resourceGroupName :: RecoveryServicesVaultData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: RecoveryServicesVaultData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (RecoveryServicesVaultData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
@@ -1924,7 +2008,7 @@ data ResourceGroupData s = ResourceGroupData'
 
 resourceGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ResourceGroupData s)
+    -> P.DataSource (ResourceGroupData s)
 resourceGroupData _name =
     TF.newDataSource "azurerm_resource_group" TF.validator $
         ResourceGroupData'
@@ -1943,6 +2027,9 @@ instance P.HasName (ResourceGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ResourceGroupData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ResourceGroupData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ResourceGroupData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
@@ -1966,7 +2053,7 @@ data RoleDefinitionData s = RoleDefinitionData'
 roleDefinitionData
     :: TF.Attr s P.Text -- ^ @role_definition_id@ - 'P.roleDefinitionId'
     -> TF.Attr s P.Text -- ^ @scope@ - 'P.scope'
-    -> TF.DataSource P.Provider (RoleDefinitionData s)
+    -> P.DataSource (RoleDefinitionData s)
 roleDefinitionData _roleDefinitionId _scope =
     TF.newDataSource "azurerm_role_definition" TF.validator $
         RoleDefinitionData'
@@ -1992,6 +2079,9 @@ instance P.HasScope (RoleDefinitionData s) (TF.Attr s P.Text) where
     scope =
         P.lens (_scope :: RoleDefinitionData s -> TF.Attr s P.Text)
                (\s a -> s { _scope = a } :: RoleDefinitionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAssignableScopes x = TF.compute (TF.refKey x) "assignable_scopes"
@@ -2024,7 +2114,7 @@ data RouteTableData s = RouteTableData'
 routeTableData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (RouteTableData s)
+    -> P.DataSource (RouteTableData s)
 routeTableData _name _resourceGroupName =
     TF.newDataSource "azurerm_route_table" TF.validator $
         RouteTableData'
@@ -2050,6 +2140,9 @@ instance P.HasResourceGroupName (RouteTableData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: RouteTableData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: RouteTableData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
@@ -2079,7 +2172,7 @@ data SchedulerJobCollectionData s = SchedulerJobCollectionData'
 schedulerJobCollectionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (SchedulerJobCollectionData s)
+    -> P.DataSource (SchedulerJobCollectionData s)
 schedulerJobCollectionData _name _resourceGroupName =
     TF.newDataSource "azurerm_scheduler_job_collection" TF.validator $
         SchedulerJobCollectionData'
@@ -2105,6 +2198,9 @@ instance P.HasResourceGroupName (SchedulerJobCollectionData s) (TF.Attr s P.Text
     resourceGroupName =
         P.lens (_resourceGroupName :: SchedulerJobCollectionData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: SchedulerJobCollectionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
@@ -2137,7 +2233,7 @@ data SnapshotData s = SnapshotData'
 snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (SnapshotData s)
+    -> P.DataSource (SnapshotData s)
 snapshotData _name _resourceGroupName =
     TF.newDataSource "azurerm_snapshot" TF.validator $
         SnapshotData'
@@ -2163,6 +2259,9 @@ instance P.HasResourceGroupName (SnapshotData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: SnapshotData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: SnapshotData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationOption (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedCreationOption x = TF.compute (TF.refKey x) "creation_option"
@@ -2204,7 +2303,7 @@ data StorageAccountData s = StorageAccountData'
 storageAccountData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (StorageAccountData s)
+    -> P.DataSource (StorageAccountData s)
 storageAccountData _name _resourceGroupName =
     TF.newDataSource "azurerm_storage_account" TF.validator $
         StorageAccountData'
@@ -2230,6 +2329,9 @@ instance P.HasResourceGroupName (StorageAccountData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: StorageAccountData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: StorageAccountData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessTier (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccessTier x = TF.compute (TF.refKey x) "access_tier"
@@ -2344,7 +2446,7 @@ storageAccountSasData
     -> TF.Attr s (StorageAccountSasResourceTypes s) -- ^ @resource_types@ - 'P.resourceTypes'
     -> TF.Attr s (StorageAccountSasServices s) -- ^ @services@ - 'P.services'
     -> TF.Attr s P.Text -- ^ @start@ - 'P.start'
-    -> TF.DataSource P.Provider (StorageAccountSasData s)
+    -> P.DataSource (StorageAccountSasData s)
 storageAccountSasData _connectionString _expiry _permissions _resourceTypes _services _start =
     TF.newDataSource "azurerm_storage_account_sas" TF.validator $
         StorageAccountSasData'
@@ -2418,6 +2520,9 @@ instance P.HasStart (StorageAccountSasData s) (TF.Attr s P.Text) where
         P.lens (_start :: StorageAccountSasData s -> TF.Attr s P.Text)
                (\s a -> s { _start = a } :: StorageAccountSasData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedSas (TF.Ref s' (StorageAccountSasData s)) (TF.Attr s P.Text) where
     computedSas x = TF.compute (TF.refKey x) "sas"
 
@@ -2441,7 +2546,7 @@ subnetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
     -> TF.Attr s P.Text -- ^ @virtual_network_name@ - 'P.virtualNetworkName'
-    -> TF.DataSource P.Provider (SubnetData s)
+    -> P.DataSource (SubnetData s)
 subnetData _name _resourceGroupName _virtualNetworkName =
     TF.newDataSource "azurerm_subnet" TF.validator $
         SubnetData'
@@ -2475,6 +2580,9 @@ instance P.HasVirtualNetworkName (SubnetData s) (TF.Attr s P.Text) where
         P.lens (_virtualNetworkName :: SubnetData s -> TF.Attr s P.Text)
                (\s a -> s { _virtualNetworkName = a } :: SubnetData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAddressPrefix (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
     computedAddressPrefix x = TF.compute (TF.refKey x) "address_prefix"
 
@@ -2495,7 +2603,7 @@ data SubscriptionData s = SubscriptionData'
     deriving (P.Show, P.Eq, P.Generic)
 
 subscriptionData
-    :: TF.DataSource P.Provider (SubscriptionData s)
+    :: P.DataSource (SubscriptionData s)
 subscriptionData =
     TF.newDataSource "azurerm_subscription" TF.validator $
         SubscriptionData'
@@ -2505,6 +2613,9 @@ instance TF.IsObject (SubscriptionData s) where
 
 instance TF.IsValid (SubscriptionData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (SubscriptionData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
@@ -2532,7 +2643,7 @@ data SubscriptionsData s = SubscriptionsData'
     deriving (P.Show, P.Eq, P.Generic)
 
 subscriptionsData
-    :: TF.DataSource P.Provider (SubscriptionsData s)
+    :: P.DataSource (SubscriptionsData s)
 subscriptionsData =
     TF.newDataSource "azurerm_subscriptions" TF.validator $
         SubscriptionsData'
@@ -2542,6 +2653,9 @@ instance TF.IsObject (SubscriptionsData s) where
 
 instance TF.IsValid (SubscriptionsData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedSubscriptions (TF.Ref s' (SubscriptionsData s)) (TF.Attr s [TF.Attr s (SubscriptionsSubscriptions s)]) where
     computedSubscriptions x = TF.compute (TF.refKey x) "subscriptions"
@@ -2558,7 +2672,7 @@ data TrafficManagerGeographicalLocationData s = TrafficManagerGeographicalLocati
 
 trafficManagerGeographicalLocationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (TrafficManagerGeographicalLocationData s)
+    -> P.DataSource (TrafficManagerGeographicalLocationData s)
 trafficManagerGeographicalLocationData _name =
     TF.newDataSource "azurerm_traffic_manager_geographical_location" TF.validator $
         TrafficManagerGeographicalLocationData'
@@ -2578,6 +2692,9 @@ instance P.HasName (TrafficManagerGeographicalLocationData s) (TF.Attr s P.Text)
         P.lens (_name :: TrafficManagerGeographicalLocationData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TrafficManagerGeographicalLocationData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TrafficManagerGeographicalLocationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @azurerm_virtual_network@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/azurerm/d/virtual_network.html terraform documentation>
@@ -2594,7 +2711,7 @@ data VirtualNetworkData s = VirtualNetworkData'
 virtualNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (VirtualNetworkData s)
+    -> P.DataSource (VirtualNetworkData s)
 virtualNetworkData _name _resourceGroupName =
     TF.newDataSource "azurerm_virtual_network" TF.validator $
         VirtualNetworkData'
@@ -2620,6 +2737,9 @@ instance P.HasResourceGroupName (VirtualNetworkData s) (TF.Attr s P.Text) where
     resourceGroupName =
         P.lens (_resourceGroupName :: VirtualNetworkData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualNetworkData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddressSpaces (TF.Ref s' (VirtualNetworkData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAddressSpaces x = TF.compute (TF.refKey x) "address_spaces"
@@ -2649,7 +2769,7 @@ data VirtualNetworkGatewayData s = VirtualNetworkGatewayData'
 virtualNetworkGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_name@ - 'P.resourceGroupName'
-    -> TF.DataSource P.Provider (VirtualNetworkGatewayData s)
+    -> P.DataSource (VirtualNetworkGatewayData s)
 virtualNetworkGatewayData _name _resourceGroupName =
     TF.newDataSource "azurerm_virtual_network_gateway" TF.validator $
         VirtualNetworkGatewayData'
@@ -2675,6 +2795,9 @@ instance P.HasResourceGroupName (VirtualNetworkGatewayData s) (TF.Attr s P.Text)
     resourceGroupName =
         P.lens (_resourceGroupName :: VirtualNetworkGatewayData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualNetworkGatewayData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Bool) where
     computedActiveActive x = TF.compute (TF.refKey x) "active_active"
