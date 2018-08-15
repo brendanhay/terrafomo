@@ -95,7 +95,7 @@ data AgentServiceResource s = AgentServiceResource'
 
 agentServiceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (AgentServiceResource s)
+    -> P.Resource (AgentServiceResource s)
 agentServiceResource _name =
     TF.newResource "consul_agent_service" TF.validator $
         AgentServiceResource'
@@ -154,7 +154,7 @@ data CatalogEntryResource s = CatalogEntryResource'
 catalogEntryResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
-    -> TF.Resource P.Provider (CatalogEntryResource s)
+    -> P.Resource (CatalogEntryResource s)
 catalogEntryResource _address _node =
     TF.newResource "consul_catalog_entry" TF.validator $
         CatalogEntryResource'
@@ -228,7 +228,7 @@ intentionResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @destination_name@ - 'P.destinationName'
     -> TF.Attr s P.Text -- ^ @source_name@ - 'P.sourceName'
-    -> TF.Resource P.Provider (IntentionResource s)
+    -> P.Resource (IntentionResource s)
 intentionResource _action _destinationName _sourceName =
     TF.newResource "consul_intention" TF.validator $
         IntentionResource'
@@ -295,7 +295,7 @@ data KeyPrefixResource s = KeyPrefixResource'
 keyPrefixResource
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
     -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
-    -> TF.Resource P.Provider (KeyPrefixResource s)
+    -> P.Resource (KeyPrefixResource s)
 keyPrefixResource _pathPrefix _subkeys =
     TF.newResource "consul_key_prefix" TF.validator $
         KeyPrefixResource'
@@ -346,7 +346,7 @@ data KeysResource s = KeysResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 keysResource
-    :: TF.Resource P.Provider (KeysResource s)
+    :: P.Resource (KeysResource s)
 keysResource =
     TF.newResource "consul_keys" TF.validator $
         KeysResource'
@@ -402,7 +402,7 @@ data NodeResource s = NodeResource'
 nodeResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NodeResource s)
+    -> P.Resource (NodeResource s)
 nodeResource _address _name =
     TF.newResource "consul_node" TF.validator $
         NodeResource'
@@ -485,7 +485,7 @@ data PreparedQueryResource s = PreparedQueryResource'
 preparedQueryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
-    -> TF.Resource P.Provider (PreparedQueryResource s)
+    -> P.Resource (PreparedQueryResource s)
 preparedQueryResource _name _service =
     TF.newResource "consul_prepared_query" TF.validator $
         PreparedQueryResource'
@@ -616,7 +616,7 @@ data ServiceResource s = ServiceResource'
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
-    -> TF.Resource P.Provider (ServiceResource s)
+    -> P.Resource (ServiceResource s)
 serviceResource _name _node =
     TF.newResource "consul_service" TF.validator $
         ServiceResource'

@@ -18,6 +18,7 @@ module Terrafomo.Consul
     , module Terrafomo.Consul.Resource
     , module Terrafomo.Consul.DataSource
     , module Terrafomo.Consul.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Consul.DataSource

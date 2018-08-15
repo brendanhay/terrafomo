@@ -93,7 +93,7 @@ data AgentConfigData s = AgentConfigData'
     deriving (P.Show, P.Eq, P.Generic)
 
 agentConfigData
-    :: TF.DataSource P.Provider (AgentConfigData s)
+    :: P.DataSource (AgentConfigData s)
 agentConfigData =
     TF.newDataSource "consul_agent_config" TF.validator $
         AgentConfigData'
@@ -103,6 +103,9 @@ instance TF.IsObject (AgentConfigData s) where
 
 instance TF.IsValid (AgentConfigData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (AgentConfigData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -130,7 +133,7 @@ data AgentSelfData s = AgentSelfData'
     deriving (P.Show, P.Eq, P.Generic)
 
 agentSelfData
-    :: TF.DataSource P.Provider (AgentSelfData s)
+    :: P.DataSource (AgentSelfData s)
 agentSelfData =
     TF.newDataSource "consul_agent_self" TF.validator $
         AgentSelfData'
@@ -368,7 +371,7 @@ data CatalogNodesData s = CatalogNodesData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 catalogNodesData
-    :: TF.DataSource P.Provider (CatalogNodesData s)
+    :: P.DataSource (CatalogNodesData s)
 catalogNodesData =
     TF.newDataSource "consul_catalog_nodes" TF.validator $
         CatalogNodesData'
@@ -391,6 +394,9 @@ instance P.HasQueryOptions (CatalogNodesData s) (TF.Attr s [TF.Attr s (CatalogNo
     queryOptions =
         P.lens (_queryOptions :: CatalogNodesData s -> TF.Attr s [TF.Attr s (CatalogNodesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: CatalogNodesData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogNodesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -425,7 +431,7 @@ data CatalogServiceData s = CatalogServiceData'
 
 catalogServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (CatalogServiceData s)
+    -> P.DataSource (CatalogServiceData s)
 catalogServiceData _name =
     TF.newDataSource "consul_catalog_service" TF.validator $
         CatalogServiceData'
@@ -470,6 +476,9 @@ instance P.HasTag (CatalogServiceData s) (TF.Attr s P.Text) where
         P.lens (_tag :: CatalogServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _tag = a } :: CatalogServiceData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CatalogServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedService (TF.Ref s' (CatalogServiceData s)) (TF.Attr s [TF.Attr s (CatalogServiceService s)]) where
     computedService x = TF.compute (TF.refKey x) "service"
 
@@ -484,7 +493,7 @@ data CatalogServicesData s = CatalogServicesData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 catalogServicesData
-    :: TF.DataSource P.Provider (CatalogServicesData s)
+    :: P.DataSource (CatalogServicesData s)
 catalogServicesData =
     TF.newDataSource "consul_catalog_services" TF.validator $
         CatalogServicesData'
@@ -507,6 +516,9 @@ instance P.HasQueryOptions (CatalogServicesData s) (TF.Attr s [TF.Attr s (Catalo
     queryOptions =
         P.lens (_queryOptions :: CatalogServicesData s -> TF.Attr s [TF.Attr s (CatalogServicesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: CatalogServicesData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CatalogServicesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (CatalogServicesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -535,7 +547,7 @@ data KeyPrefixData s = KeyPrefixData'
 
 keyPrefixData
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
-    -> TF.DataSource P.Provider (KeyPrefixData s)
+    -> P.DataSource (KeyPrefixData s)
 keyPrefixData _pathPrefix =
     TF.newDataSource "consul_key_prefix" TF.validator $
         KeyPrefixData'
@@ -573,6 +585,9 @@ instance P.HasToken (KeyPrefixData s) (TF.Attr s P.Text) where
         P.lens (_token :: KeyPrefixData s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: KeyPrefixData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPrefixData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
@@ -596,7 +611,7 @@ data KeysData s = KeysData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 keysData
-    :: TF.DataSource P.Provider (KeysData s)
+    :: P.DataSource (KeysData s)
 keysData =
     TF.newDataSource "consul_keys" TF.validator $
         KeysData'
@@ -627,6 +642,9 @@ instance P.HasToken (KeysData s) (TF.Attr s P.Text) where
         P.lens (_token :: KeysData s -> TF.Attr s P.Text)
                (\s a -> s { _token = a } :: KeysData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeysData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
@@ -644,7 +662,7 @@ data NodesData s = NodesData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 nodesData
-    :: TF.DataSource P.Provider (NodesData s)
+    :: P.DataSource (NodesData s)
 nodesData =
     TF.newDataSource "consul_nodes" TF.validator $
         NodesData'
@@ -667,6 +685,9 @@ instance P.HasQueryOptions (NodesData s) (TF.Attr s [TF.Attr s (NodesQueryOption
     queryOptions =
         P.lens (_queryOptions :: NodesData s -> TF.Attr s [TF.Attr s (NodesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: NodesData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (NodesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
@@ -701,7 +722,7 @@ data ServiceData s = ServiceData'
 
 serviceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ServiceData s)
+    -> P.DataSource (ServiceData s)
 serviceData _name =
     TF.newDataSource "consul_service" TF.validator $
         ServiceData'
@@ -746,6 +767,9 @@ instance P.HasTag (ServiceData s) (TF.Attr s P.Text) where
         P.lens (_tag :: ServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _tag = a } :: ServiceData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedService (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (ServiceService s)]) where
     computedService x = TF.compute (TF.refKey x) "service"
 
@@ -760,7 +784,7 @@ data ServicesData s = ServicesData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 servicesData
-    :: TF.DataSource P.Provider (ServicesData s)
+    :: P.DataSource (ServicesData s)
 servicesData =
     TF.newDataSource "consul_services" TF.validator $
         ServicesData'
@@ -783,6 +807,9 @@ instance P.HasQueryOptions (ServicesData s) (TF.Attr s [TF.Attr s (ServicesQuery
     queryOptions =
         P.lens (_queryOptions :: ServicesData s -> TF.Attr s [TF.Attr s (ServicesQueryOptions s)])
                (\s a -> s { _queryOptions = a } :: ServicesData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServicesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (ServicesData s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
