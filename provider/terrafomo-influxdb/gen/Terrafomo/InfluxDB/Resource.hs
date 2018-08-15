@@ -77,7 +77,7 @@ continuousQueryResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
-    -> TF.Resource P.Provider (ContinuousQueryResource s)
+    -> P.Resource (ContinuousQueryResource s)
 continuousQueryResource _database _name _query =
     TF.newResource "influxdb_continuous_query" TF.validator $
         ContinuousQueryResource'
@@ -126,7 +126,7 @@ data DatabaseResource s = DatabaseResource'
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DatabaseResource s)
+    -> P.Resource (DatabaseResource s)
 databaseResource _name =
     TF.newResource "influxdb_database" TF.validator $
         DatabaseResource'
@@ -176,7 +176,7 @@ data UserResource s = UserResource'
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _name _password =
     TF.newResource "influxdb_user" TF.validator $
         UserResource'

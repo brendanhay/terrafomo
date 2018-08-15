@@ -17,6 +17,7 @@ module Terrafomo.InfluxDB
     , module Terrafomo.InfluxDB.Provider
     , module Terrafomo.InfluxDB.Settings
     , module Terrafomo.InfluxDB.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.InfluxDB.Lens
