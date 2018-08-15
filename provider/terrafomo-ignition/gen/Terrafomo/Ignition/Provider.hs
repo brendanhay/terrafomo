@@ -20,6 +20,10 @@ module Terrafomo.Ignition.Provider
     -- * Ignition Provider Datatype
       Provider (..)
     , newProvider
+
+    -- * Ignition Specific Aliases
+    , DataSource
+    , Resource
     ) where
 
 import Data.Function ((&))
@@ -43,9 +47,14 @@ import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Ignition.Lens  as P
 import qualified Terrafomo.Ignition.Types as P
+import qualified Terrafomo.Lifecycle      as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Provider       as TF
+import qualified Terrafomo.Schema         as TF
 import qualified Terrafomo.Validator      as TF
+
+type DataSource a = TF.Schema ()               Provider a
+type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
 -- | The @Ignition@ Terraform provider configuration.
 --

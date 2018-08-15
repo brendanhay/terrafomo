@@ -17,6 +17,7 @@ module Terrafomo.Ignition
     , module Terrafomo.Ignition.Lens
     , module Terrafomo.Ignition.Settings
     , module Terrafomo.Ignition.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Ignition.DataSource

@@ -71,6 +71,7 @@ module Terrafomo.Ignition.Lens
     , HasDropin (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedRendered (..)
     ) where
 
@@ -402,6 +403,9 @@ class HasDropin a b | a -> b where
 
 instance HasDropin a b => HasDropin (TF.Schema l p a) b where
     dropin = TF.configuration . dropin
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedRendered a b | a -> b where
     computedRendered :: a -> b

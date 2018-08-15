@@ -133,7 +133,7 @@ data ConfigData s = ConfigData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 configData
-    :: TF.DataSource P.Provider (ConfigData s)
+    :: P.DataSource (ConfigData s)
 configData =
     TF.newDataSource "ignition_config" TF.validator $
         ConfigData'
@@ -238,6 +238,9 @@ instance P.HasUsers (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_users :: ConfigData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _users = a } :: ConfigData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (ConfigData s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"
 
@@ -266,7 +269,7 @@ data DirectoryData s = DirectoryData'
 directoryData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.DataSource P.Provider (DirectoryData s)
+    -> P.DataSource (DirectoryData s)
 directoryData _filesystem _path =
     TF.newDataSource "ignition_directory" TF.validator $
         DirectoryData'
@@ -314,6 +317,9 @@ instance P.HasUid (DirectoryData s) (TF.Attr s P.Integer) where
         P.lens (_uid :: DirectoryData s -> TF.Attr s P.Integer)
                (\s a -> s { _uid = a } :: DirectoryData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_disk@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/disk.html terraform documentation>
@@ -332,7 +338,7 @@ data DiskData s = DiskData'
 
 diskData
     :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
-    -> TF.DataSource P.Provider (DiskData s)
+    -> P.DataSource (DiskData s)
 diskData _device =
     TF.newDataSource "ignition_disk" TF.validator $
         DiskData'
@@ -370,6 +376,9 @@ instance P.HasWipeTable (DiskData s) (TF.Attr s P.Bool) where
         P.lens (_wipeTable :: DiskData s -> TF.Attr s P.Bool)
                (\s a -> s { _wipeTable = a } :: DiskData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_file@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/file.html terraform documentation>
@@ -401,7 +410,7 @@ data FileData s = FileData'
 fileData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.DataSource P.Provider (FileData s)
+    -> P.DataSource (FileData s)
 fileData _filesystem _path =
     TF.newDataSource "ignition_file" TF.validator $
         FileData'
@@ -471,6 +480,9 @@ instance P.HasUid (FileData s) (TF.Attr s P.Integer) where
         P.lens (_uid :: FileData s -> TF.Attr s P.Integer)
                (\s a -> s { _uid = a } :: FileData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_filesystem@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/filesystem.html terraform documentation>
@@ -488,7 +500,7 @@ data FilesystemData s = FilesystemData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 filesystemData
-    :: TF.DataSource P.Provider (FilesystemData s)
+    :: P.DataSource (FilesystemData s)
 filesystemData =
     TF.newDataSource "ignition_filesystem" TF.validator $
         FilesystemData'
@@ -526,6 +538,9 @@ instance P.HasPath (FilesystemData s) (TF.Attr s P.Text) where
         P.lens (_path :: FilesystemData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: FilesystemData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FilesystemData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_group@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/group.html terraform documentation>
@@ -544,7 +559,7 @@ data GroupData s = GroupData'
 
 groupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (GroupData s)
+    -> P.DataSource (GroupData s)
 groupData _name =
     TF.newDataSource "ignition_group" TF.validator $
         GroupData'
@@ -578,6 +593,9 @@ instance P.HasPasswordHash (GroupData s) (TF.Attr s P.Text) where
         P.lens (_passwordHash :: GroupData s -> TF.Attr s P.Text)
                (\s a -> s { _passwordHash = a } :: GroupData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_link@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/link.html terraform documentation>
@@ -607,7 +625,7 @@ linkData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.DataSource P.Provider (LinkData s)
+    -> P.DataSource (LinkData s)
 linkData _filesystem _path _target =
     TF.newDataSource "ignition_link" TF.validator $
         LinkData'
@@ -662,6 +680,9 @@ instance P.HasUid (LinkData s) (TF.Attr s P.Integer) where
         P.lens (_uid :: LinkData s -> TF.Attr s P.Integer)
                (\s a -> s { _uid = a } :: LinkData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LinkData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_networkd_unit@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/networkd_unit.html terraform documentation>
@@ -677,7 +698,7 @@ data NetworkdUnitData s = NetworkdUnitData'
 
 networkdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (NetworkdUnitData s)
+    -> P.DataSource (NetworkdUnitData s)
 networkdUnitData _name =
     TF.newDataSource "ignition_networkd_unit" TF.validator $
         NetworkdUnitData'
@@ -704,6 +725,9 @@ instance P.HasName (NetworkdUnitData s) (TF.Attr s P.Text) where
         P.lens (_name :: NetworkdUnitData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NetworkdUnitData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkdUnitData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_raid@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/raid.html terraform documentation>
@@ -726,7 +750,7 @@ data RaidData s = RaidData'
 raidData
     :: TF.Attr s P.Text -- ^ @level@ - 'P.level'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (RaidData s)
+    -> P.DataSource (RaidData s)
 raidData _level _name =
     TF.newDataSource "ignition_raid" TF.validator $
         RaidData'
@@ -767,6 +791,9 @@ instance P.HasSpares (RaidData s) (TF.Attr s P.Integer) where
         P.lens (_spares :: RaidData s -> TF.Attr s P.Integer)
                (\s a -> s { _spares = a } :: RaidData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RaidData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_systemd_unit@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/systemd_unit.html terraform documentation>
@@ -791,7 +818,7 @@ data SystemdUnitData s = SystemdUnitData'
 
 systemdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SystemdUnitData s)
+    -> P.DataSource (SystemdUnitData s)
 systemdUnitData _name =
     TF.newDataSource "ignition_systemd_unit" TF.validator $
         SystemdUnitData'
@@ -843,6 +870,9 @@ instance P.HasName (SystemdUnitData s) (TF.Attr s P.Text) where
         P.lens (_name :: SystemdUnitData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SystemdUnitData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SystemdUnitData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @ignition_user@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/ignition/d/user.html terraform documentation>
@@ -891,7 +921,7 @@ data UserData s = UserData'
 
 userData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (UserData s)
+    -> P.DataSource (UserData s)
 userData _name =
     TF.newDataSource "ignition_user" TF.validator $
         UserData'
@@ -994,3 +1024,6 @@ instance P.HasUid (UserData s) (TF.Attr s P.Integer) where
     uid =
         P.lens (_uid :: UserData s -> TF.Attr s P.Integer)
                (\s a -> s { _uid = a } :: UserData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
