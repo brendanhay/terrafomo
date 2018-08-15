@@ -17,6 +17,7 @@ module Terrafomo.Librato
     , module Terrafomo.Librato.Provider
     , module Terrafomo.Librato.Lens
     , module Terrafomo.Librato.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Librato.Lens

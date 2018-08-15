@@ -95,7 +95,7 @@ data AlertResource s = AlertResource'
 
 alertResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (AlertResource s)
+    -> P.Resource (AlertResource s)
 alertResource _name =
     TF.newResource "librato_alert" TF.validator $
         AlertResource'
@@ -196,7 +196,7 @@ data MetricResource s = MetricResource'
 metricResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (MetricResource s)
+    -> P.Resource (MetricResource s)
 metricResource _name _type' =
     TF.newResource "librato_metric" TF.validator $
         MetricResource'
@@ -282,7 +282,7 @@ serviceResource
     :: TF.Attr s P.Text -- ^ @settings@ - 'P.settings'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (ServiceResource s)
+    -> P.Resource (ServiceResource s)
 serviceResource _settings _title _type' =
     TF.newResource "librato_service" TF.validator $
         ServiceResource'
@@ -331,7 +331,7 @@ data SpaceResource s = SpaceResource'
 
 spaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SpaceResource s)
+    -> P.Resource (SpaceResource s)
 spaceResource _name =
     TF.newResource "librato_space" TF.validator $
         SpaceResource'
@@ -389,7 +389,7 @@ spaceChartResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @space_id@ - 'P.spaceId'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (SpaceChartResource s)
+    -> P.Resource (SpaceChartResource s)
 spaceChartResource _name _spaceId _type' =
     TF.newResource "librato_space_chart" TF.validator $
         SpaceChartResource'
