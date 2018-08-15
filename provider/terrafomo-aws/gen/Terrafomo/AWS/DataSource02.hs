@@ -172,7 +172,7 @@ data PrefixListData s = PrefixListData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 prefixListData
-    :: TF.DataSource P.Provider (PrefixListData s)
+    :: P.DataSource (PrefixListData s)
 prefixListData =
     TF.newDataSource "aws_prefix_list" TF.validator $
         PrefixListData'
@@ -191,6 +191,9 @@ instance P.HasPrefixListId (PrefixListData s) (TF.Attr s P.Text) where
     prefixListId =
         P.lens (_prefixListId :: PrefixListData s -> TF.Attr s P.Text)
                (\s a -> s { _prefixListId = a } :: PrefixListData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrefixListData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (PrefixListData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -214,7 +217,7 @@ data PricingProductData s = PricingProductData'
 pricingProductData
     :: TF.Attr s (P.NonEmpty (TF.Attr s (PricingProductFilters s))) -- ^ @filters@ - 'P.filters'
     -> TF.Attr s P.Text -- ^ @service_code@ - 'P.serviceCode'
-    -> TF.DataSource P.Provider (PricingProductData s)
+    -> P.DataSource (PricingProductData s)
 pricingProductData _filters _serviceCode =
     TF.newDataSource "aws_pricing_product" TF.validator $
         PricingProductData'
@@ -245,6 +248,9 @@ instance P.HasServiceCode (PricingProductData s) (TF.Attr s P.Text) where
         P.lens (_serviceCode :: PricingProductData s -> TF.Attr s P.Text)
                (\s a -> s { _serviceCode = a } :: PricingProductData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (PricingProductData s)) (TF.Attr s P.Text) where
     computedResult x = TF.compute (TF.refKey x) "result"
 
@@ -260,7 +266,7 @@ data RdsClusterData s = RdsClusterData'
 
 rdsClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
-    -> TF.DataSource P.Provider (RdsClusterData s)
+    -> P.DataSource (RdsClusterData s)
 rdsClusterData _clusterIdentifier =
     TF.newDataSource "aws_rds_cluster" TF.validator $
         RdsClusterData'
@@ -279,6 +285,9 @@ instance P.HasClusterIdentifier (RdsClusterData s) (TF.Attr s P.Text) where
     clusterIdentifier =
         P.lens (_clusterIdentifier :: RdsClusterData s -> TF.Attr s P.Text)
                (\s a -> s { _clusterIdentifier = a } :: RdsClusterData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RdsClusterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -370,7 +379,7 @@ data RedshiftClusterData s = RedshiftClusterData'
 
 redshiftClusterData
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
-    -> TF.DataSource P.Provider (RedshiftClusterData s)
+    -> P.DataSource (RedshiftClusterData s)
 redshiftClusterData _clusterIdentifier =
     TF.newDataSource "aws_redshift_cluster" TF.validator $
         RedshiftClusterData'
@@ -396,6 +405,9 @@ instance P.HasTags (RedshiftClusterData s) (TF.Attr s (P.HashMap P.Text (TF.Attr
     tags =
         P.lens (_tags :: RedshiftClusterData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: RedshiftClusterData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllowVersionUpgrade (TF.Ref s' (RedshiftClusterData s)) (TF.Attr s P.Bool) where
     computedAllowVersionUpgrade x = TF.compute (TF.refKey x) "allow_version_upgrade"
@@ -492,7 +504,7 @@ data RedshiftServiceAccountData s = RedshiftServiceAccountData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 redshiftServiceAccountData
-    :: TF.DataSource P.Provider (RedshiftServiceAccountData s)
+    :: P.DataSource (RedshiftServiceAccountData s)
 redshiftServiceAccountData =
     TF.newDataSource "aws_redshift_service_account" TF.validator $
         RedshiftServiceAccountData'
@@ -512,6 +524,9 @@ instance P.HasRegion (RedshiftServiceAccountData s) (TF.Attr s P.Text) where
         P.lens (_region :: RedshiftServiceAccountData s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: RedshiftServiceAccountData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RedshiftServiceAccountData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -523,7 +538,7 @@ data RegionData s = RegionData'
     deriving (P.Show, P.Eq, P.Generic)
 
 regionData
-    :: TF.DataSource P.Provider (RegionData s)
+    :: P.DataSource (RegionData s)
 regionData =
     TF.newDataSource "aws_region" TF.validator $
         RegionData'
@@ -533,6 +548,9 @@ instance TF.IsObject (RegionData s) where
 
 instance TF.IsValid (RegionData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RegionData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -555,7 +573,7 @@ data RouteData s = RouteData'
 
 routeData
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
-    -> TF.DataSource P.Provider (RouteData s)
+    -> P.DataSource (RouteData s)
 routeData _routeTableId =
     TF.newDataSource "aws_route" TF.validator $
         RouteData'
@@ -574,6 +592,9 @@ instance P.HasRouteTableId (RouteData s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: RouteData s -> TF.Attr s P.Text)
                (\s a -> s { _routeTableId = a } :: RouteData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDestinationCidrBlock (TF.Ref s' (RouteData s)) (TF.Attr s P.Text) where
     computedDestinationCidrBlock x = TF.compute (TF.refKey x) "destination_cidr_block"
@@ -610,7 +631,7 @@ data Route53ZoneData s = Route53ZoneData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 route53ZoneData
-    :: TF.DataSource P.Provider (Route53ZoneData s)
+    :: P.DataSource (Route53ZoneData s)
 route53ZoneData =
     TF.newDataSource "aws_route53_zone" TF.validator $
         Route53ZoneData'
@@ -629,6 +650,9 @@ instance P.HasPrivateZone (Route53ZoneData s) (TF.Attr s P.Bool) where
     privateZone =
         P.lens (_privateZone :: Route53ZoneData s -> TF.Attr s P.Bool)
                (\s a -> s { _privateZone = a } :: Route53ZoneData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCallerReference (TF.Ref s' (Route53ZoneData s)) (TF.Attr s P.Text) where
     computedCallerReference x = TF.compute (TF.refKey x) "caller_reference"
@@ -665,7 +689,7 @@ data RouteTableData s = RouteTableData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 routeTableData
-    :: TF.DataSource P.Provider (RouteTableData s)
+    :: P.DataSource (RouteTableData s)
 routeTableData =
     TF.newDataSource "aws_route_table" TF.validator $
         RouteTableData'
@@ -688,6 +712,9 @@ instance P.HasFilter (RouteTableData s) (TF.Attr s [TF.Attr s (RouteTableFilter 
     filter =
         P.lens (_filter :: RouteTableData s -> TF.Attr s [TF.Attr s (RouteTableFilter s)])
                (\s a -> s { _filter = a } :: RouteTableData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAssociations (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (RouteTableAssociations s)]) where
     computedAssociations x = TF.compute (TF.refKey x) "associations"
@@ -721,7 +748,7 @@ data RouteTablesData s = RouteTablesData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 routeTablesData
-    :: TF.DataSource P.Provider (RouteTablesData s)
+    :: P.DataSource (RouteTablesData s)
 routeTablesData =
     TF.newDataSource "aws_route_tables" TF.validator $
         RouteTablesData'
@@ -752,6 +779,9 @@ instance P.HasVpcId (RouteTablesData s) (TF.Attr s P.Text) where
         P.lens (_vpcId :: RouteTablesData s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: RouteTablesData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTablesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (RouteTablesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
@@ -770,7 +800,7 @@ data S3BucketData s = S3BucketData'
 
 s3BucketData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.DataSource P.Provider (S3BucketData s)
+    -> P.DataSource (S3BucketData s)
 s3BucketData _bucket =
     TF.newDataSource "aws_s3_bucket" TF.validator $
         S3BucketData'
@@ -789,6 +819,9 @@ instance P.HasBucket (S3BucketData s) (TF.Attr s P.Text) where
     bucket =
         P.lens (_bucket :: S3BucketData s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: S3BucketData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (S3BucketData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -827,7 +860,7 @@ data S3BucketObjectData s = S3BucketObjectData'
 s3BucketObjectData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.DataSource P.Provider (S3BucketObjectData s)
+    -> P.DataSource (S3BucketObjectData s)
 s3BucketObjectData _bucket _key =
     TF.newDataSource "aws_s3_bucket_object" TF.validator $
         S3BucketObjectData'
@@ -860,6 +893,9 @@ instance P.HasRange (S3BucketObjectData s) (TF.Attr s P.Text) where
     range =
         P.lens (_range :: S3BucketObjectData s -> TF.Attr s P.Text)
                (\s a -> s { _range = a } :: S3BucketObjectData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBody (TF.Ref s' (S3BucketObjectData s)) (TF.Attr s P.Text) where
     computedBody x = TF.compute (TF.refKey x) "body"
@@ -923,7 +959,7 @@ data SecretsmanagerSecretData s = SecretsmanagerSecretData'
     deriving (P.Show, P.Eq, P.Generic)
 
 secretsmanagerSecretData
-    :: TF.DataSource P.Provider (SecretsmanagerSecretData s)
+    :: P.DataSource (SecretsmanagerSecretData s)
 secretsmanagerSecretData =
     TF.newDataSource "aws_secretsmanager_secret" TF.validator $
         SecretsmanagerSecretData'
@@ -933,6 +969,9 @@ instance TF.IsObject (SecretsmanagerSecretData s) where
 
 instance TF.IsValid (SecretsmanagerSecretData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -973,7 +1012,7 @@ data SecretsmanagerSecretVersionData s = SecretsmanagerSecretVersionData'
 
 secretsmanagerSecretVersionData
     :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
-    -> TF.DataSource P.Provider (SecretsmanagerSecretVersionData s)
+    -> P.DataSource (SecretsmanagerSecretVersionData s)
 secretsmanagerSecretVersionData _secretId =
     TF.newDataSource "aws_secretsmanager_secret_version" TF.validator $
         SecretsmanagerSecretVersionData'
@@ -1000,6 +1039,9 @@ instance P.HasVersionStage (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text
         P.lens (_versionStage :: SecretsmanagerSecretVersionData s -> TF.Attr s P.Text)
                (\s a -> s { _versionStage = a } :: SecretsmanagerSecretVersionData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedSecretString (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
     computedSecretString x = TF.compute (TF.refKey x) "secret_string"
 
@@ -1020,7 +1062,7 @@ data SecurityGroupData s = SecurityGroupData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 securityGroupData
-    :: TF.DataSource P.Provider (SecurityGroupData s)
+    :: P.DataSource (SecurityGroupData s)
 securityGroupData =
     TF.newDataSource "aws_security_group" TF.validator $
         SecurityGroupData'
@@ -1073,7 +1115,7 @@ data SecurityGroupsData s = SecurityGroupsData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 securityGroupsData
-    :: TF.DataSource P.Provider (SecurityGroupsData s)
+    :: P.DataSource (SecurityGroupsData s)
 securityGroupsData =
     TF.newDataSource "aws_security_groups" TF.validator $
         SecurityGroupsData'
@@ -1097,6 +1139,9 @@ instance P.HasFilter (SecurityGroupsData s) (TF.Attr s [TF.Attr s (SecurityGroup
         P.lens (_filter :: SecurityGroupsData s -> TF.Attr s [TF.Attr s (SecurityGroupsFilter s)])
                (\s a -> s { _filter = a } :: SecurityGroupsData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
@@ -1118,7 +1163,7 @@ data SnsTopicData s = SnsTopicData'
 
 snsTopicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SnsTopicData s)
+    -> P.DataSource (SnsTopicData s)
 snsTopicData _name =
     TF.newDataSource "aws_sns_topic" TF.validator $
         SnsTopicData'
@@ -1138,6 +1183,9 @@ instance P.HasName (SnsTopicData s) (TF.Attr s P.Text) where
         P.lens (_name :: SnsTopicData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SnsTopicData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnsTopicData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SnsTopicData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -1153,7 +1201,7 @@ data SqsQueueData s = SqsQueueData'
 
 sqsQueueData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SqsQueueData s)
+    -> P.DataSource (SqsQueueData s)
 sqsQueueData _name =
     TF.newDataSource "aws_sqs_queue" TF.validator $
         SqsQueueData'
@@ -1172,6 +1220,9 @@ instance P.HasName (SqsQueueData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SqsQueueData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SqsQueueData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SqsQueueData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -1194,7 +1245,7 @@ data SsmParameterData s = SsmParameterData'
 
 ssmParameterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SsmParameterData s)
+    -> P.DataSource (SsmParameterData s)
 ssmParameterData _name =
     TF.newDataSource "aws_ssm_parameter" TF.validator $
         SsmParameterData'
@@ -1221,6 +1272,9 @@ instance P.HasWithDecryption (SsmParameterData s) (TF.Attr s P.Bool) where
         P.lens (_withDecryption :: SsmParameterData s -> TF.Attr s P.Bool)
                (\s a -> s { _withDecryption = a } :: SsmParameterData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SsmParameterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SsmParameterData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -1246,7 +1300,7 @@ data StoragegatewayLocalDiskData s = StoragegatewayLocalDiskData'
 storagegatewayLocalDiskData
     :: TF.Attr s P.Text -- ^ @disk_path@ - 'P.diskPath'
     -> TF.Attr s P.Text -- ^ @gateway_arn@ - 'P.gatewayArn'
-    -> TF.DataSource P.Provider (StoragegatewayLocalDiskData s)
+    -> P.DataSource (StoragegatewayLocalDiskData s)
 storagegatewayLocalDiskData _diskPath _gatewayArn =
     TF.newDataSource "aws_storagegateway_local_disk" TF.validator $
         StoragegatewayLocalDiskData'
@@ -1273,6 +1327,9 @@ instance P.HasGatewayArn (StoragegatewayLocalDiskData s) (TF.Attr s P.Text) wher
         P.lens (_gatewayArn :: StoragegatewayLocalDiskData s -> TF.Attr s P.Text)
                (\s a -> s { _gatewayArn = a } :: StoragegatewayLocalDiskData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDiskId (TF.Ref s' (StoragegatewayLocalDiskData s)) (TF.Attr s P.Text) where
     computedDiskId x = TF.compute (TF.refKey x) "disk_id"
 
@@ -1287,7 +1344,7 @@ data SubnetData s = SubnetData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 subnetData
-    :: TF.DataSource P.Provider (SubnetData s)
+    :: P.DataSource (SubnetData s)
 subnetData =
     TF.newDataSource "aws_subnet" TF.validator $
         SubnetData'
@@ -1359,7 +1416,7 @@ data SubnetIdsData s = SubnetIdsData'
 
 subnetIdsData
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.DataSource P.Provider (SubnetIdsData s)
+    -> P.DataSource (SubnetIdsData s)
 subnetIdsData _vpcId =
     TF.newDataSource "aws_subnet_ids" TF.validator $
         SubnetIdsData'
@@ -1390,6 +1447,9 @@ instance P.HasVpcId (SubnetIdsData s) (TF.Attr s P.Text) where
         P.lens (_vpcId :: SubnetIdsData s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: SubnetIdsData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetIdsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (SubnetIdsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
@@ -1407,7 +1467,7 @@ data VpcData s = VpcData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 vpcData
-    :: TF.DataSource P.Provider (VpcData s)
+    :: P.DataSource (VpcData s)
 vpcData =
     TF.newDataSource "aws_vpc" TF.validator $
         VpcData'
@@ -1481,7 +1541,7 @@ data VpcDhcpOptionsData s = VpcDhcpOptionsData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 vpcDhcpOptionsData
-    :: TF.DataSource P.Provider (VpcDhcpOptionsData s)
+    :: P.DataSource (VpcDhcpOptionsData s)
 vpcDhcpOptionsData =
     TF.newDataSource "aws_vpc_dhcp_options" TF.validator $
         VpcDhcpOptionsData'
@@ -1504,6 +1564,9 @@ instance P.HasFilter (VpcDhcpOptionsData s) (TF.Attr s [TF.Attr s (VpcDhcpOption
     filter =
         P.lens (_filter :: VpcDhcpOptionsData s -> TF.Attr s [TF.Attr s (VpcDhcpOptionsFilter s)])
                (\s a -> s { _filter = a } :: VpcDhcpOptionsData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDhcpOptionsId (TF.Ref s' (VpcDhcpOptionsData s)) (TF.Attr s P.Text) where
     computedDhcpOptionsId x = TF.compute (TF.refKey x) "dhcp_options_id"
@@ -1534,7 +1597,7 @@ data VpcEndpointData s = VpcEndpointData'
     deriving (P.Show, P.Eq, P.Generic)
 
 vpcEndpointData
-    :: TF.DataSource P.Provider (VpcEndpointData s)
+    :: P.DataSource (VpcEndpointData s)
 vpcEndpointData =
     TF.newDataSource "aws_vpc_endpoint" TF.validator $
         VpcEndpointData'
@@ -1598,7 +1661,7 @@ data VpcEndpointServiceData s = VpcEndpointServiceData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 vpcEndpointServiceData
-    :: TF.DataSource P.Provider (VpcEndpointServiceData s)
+    :: P.DataSource (VpcEndpointServiceData s)
 vpcEndpointServiceData =
     TF.newDataSource "aws_vpc_endpoint_service" TF.validator $
         VpcEndpointServiceData'
@@ -1617,6 +1680,9 @@ instance P.HasService (VpcEndpointServiceData s) (TF.Attr s P.Text) where
     service =
         P.lens (_service :: VpcEndpointServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _service = a } :: VpcEndpointServiceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAcceptanceRequired (TF.Ref s' (VpcEndpointServiceData s)) (TF.Attr s P.Bool) where
     computedAcceptanceRequired x = TF.compute (TF.refKey x) "acceptance_required"
@@ -1653,7 +1719,7 @@ data VpcPeeringConnectionData s = VpcPeeringConnectionData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 vpcPeeringConnectionData
-    :: TF.DataSource P.Provider (VpcPeeringConnectionData s)
+    :: P.DataSource (VpcPeeringConnectionData s)
 vpcPeeringConnectionData =
     TF.newDataSource "aws_vpc_peering_connection" TF.validator $
         VpcPeeringConnectionData'
@@ -1727,7 +1793,7 @@ data VpcsData s = VpcsData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 vpcsData
-    :: TF.DataSource P.Provider (VpcsData s)
+    :: P.DataSource (VpcsData s)
 vpcsData =
     TF.newDataSource "aws_vpcs" TF.validator $
         VpcsData'
@@ -1751,6 +1817,9 @@ instance P.HasFilter (VpcsData s) (TF.Attr s [TF.Attr s (VpcsFilter s)]) where
         P.lens (_filter :: VpcsData s -> TF.Attr s [TF.Attr s (VpcsFilter s)])
                (\s a -> s { _filter = a } :: VpcsData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedIds (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIds x = TF.compute (TF.refKey x) "ids"
 
@@ -1768,7 +1837,7 @@ data VpnGatewayData s = VpnGatewayData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 vpnGatewayData
-    :: TF.DataSource P.Provider (VpnGatewayData s)
+    :: P.DataSource (VpnGatewayData s)
 vpnGatewayData =
     TF.newDataSource "aws_vpn_gateway" TF.validator $
         VpnGatewayData'

@@ -384,7 +384,7 @@ data LoadBalancerBackendServerPolicyResource s = LoadBalancerBackendServerPolicy
 loadBalancerBackendServerPolicyResource
     :: TF.Attr s P.Integer -- ^ @instance_port@ - 'P.instancePort'
     -> TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
-    -> TF.Resource P.Provider (LoadBalancerBackendServerPolicyResource s)
+    -> P.Resource (LoadBalancerBackendServerPolicyResource s)
 loadBalancerBackendServerPolicyResource _instancePort _loadBalancerName =
     TF.newResource "aws_load_balancer_backend_server_policy" TF.validator $
         LoadBalancerBackendServerPolicyResource'
@@ -437,7 +437,7 @@ data LoadBalancerListenerPolicyResource s = LoadBalancerListenerPolicyResource'
 loadBalancerListenerPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> TF.Attr s P.Integer -- ^ @load_balancer_port@ - 'P.loadBalancerPort'
-    -> TF.Resource P.Provider (LoadBalancerListenerPolicyResource s)
+    -> P.Resource (LoadBalancerListenerPolicyResource s)
 loadBalancerListenerPolicyResource _loadBalancerName _loadBalancerPort =
     TF.newResource "aws_load_balancer_listener_policy" TF.validator $
         LoadBalancerListenerPolicyResource'
@@ -494,7 +494,7 @@ loadBalancerPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer_name@ - 'P.loadBalancerName'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
     -> TF.Attr s P.Text -- ^ @policy_type_name@ - 'P.policyTypeName'
-    -> TF.Resource P.Provider (LoadBalancerPolicyResource s)
+    -> P.Resource (LoadBalancerPolicyResource s)
 loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
     TF.newResource "aws_load_balancer_policy" TF.validator $
         LoadBalancerPolicyResource'
@@ -551,7 +551,7 @@ data MacieMemberAccountAssociationResource s = MacieMemberAccountAssociationReso
 
 macieMemberAccountAssociationResource
     :: TF.Attr s P.Text -- ^ @member_account_id@ - 'P.memberAccountId'
-    -> TF.Resource P.Provider (MacieMemberAccountAssociationResource s)
+    -> P.Resource (MacieMemberAccountAssociationResource s)
 macieMemberAccountAssociationResource _memberAccountId =
     TF.newResource "aws_macie_member_account_association" TF.validator $
         MacieMemberAccountAssociationResource'
@@ -589,7 +589,7 @@ data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
 
 macieS3BucketAssociationResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
-    -> TF.Resource P.Provider (MacieS3BucketAssociationResource s)
+    -> P.Resource (MacieS3BucketAssociationResource s)
 macieS3BucketAssociationResource _bucketName =
     TF.newResource "aws_macie_s3_bucket_association" TF.validator $
         MacieS3BucketAssociationResource'
@@ -642,7 +642,7 @@ data MainRouteTableAssociationResource s = MainRouteTableAssociationResource'
 mainRouteTableAssociationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (MainRouteTableAssociationResource s)
+    -> P.Resource (MainRouteTableAssociationResource s)
 mainRouteTableAssociationResource _routeTableId _vpcId =
     TF.newResource "aws_main_route_table_association" TF.validator $
         MainRouteTableAssociationResource'
@@ -684,7 +684,7 @@ data MediaStoreContainerResource s = MediaStoreContainerResource'
 
 mediaStoreContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (MediaStoreContainerResource s)
+    -> P.Resource (MediaStoreContainerResource s)
 mediaStoreContainerResource _name =
     TF.newResource "aws_media_store_container" TF.validator $
         MediaStoreContainerResource'
@@ -726,7 +726,7 @@ data MediaStoreContainerPolicyResource s = MediaStoreContainerPolicyResource'
 mediaStoreContainerPolicyResource
     :: TF.Attr s P.Text -- ^ @container_name@ - 'P.containerName'
     -> TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
-    -> TF.Resource P.Provider (MediaStoreContainerPolicyResource s)
+    -> P.Resource (MediaStoreContainerPolicyResource s)
 mediaStoreContainerPolicyResource _containerName _policy =
     TF.newResource "aws_media_store_container_policy" TF.validator $
         MediaStoreContainerPolicyResource'
@@ -797,7 +797,7 @@ mqBrokerResource
     -> TF.Attr s P.Text -- ^ @host_instance_type@ - 'P.hostInstanceType'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
     -> TF.Attr s [TF.Attr s (MqBrokerUser s)] -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (MqBrokerResource s)
+    -> P.Resource (MqBrokerResource s)
 mqBrokerResource _brokerName _engineType _engineVersion _hostInstanceType _securityGroups _user =
     TF.newResource "aws_mq_broker" TF.validator $
         MqBrokerResource'
@@ -926,7 +926,7 @@ mqConfigurationResource
     -> TF.Attr s P.Text -- ^ @engine_type@ - 'P.engineType'
     -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (MqConfigurationResource s)
+    -> P.Resource (MqConfigurationResource s)
 mqConfigurationResource _data' _engineType _engineVersion _name =
     TF.newResource "aws_mq_configuration" TF.validator $
         MqConfigurationResource'
@@ -999,7 +999,7 @@ data NatGatewayResource s = NatGatewayResource'
 natGatewayResource
     :: TF.Attr s P.Text -- ^ @allocation_id@ - 'P.allocationId'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Resource P.Provider (NatGatewayResource s)
+    -> P.Resource (NatGatewayResource s)
 natGatewayResource _allocationId _subnetId =
     TF.newResource "aws_nat_gateway" TF.validator $
         NatGatewayResource'
@@ -1086,7 +1086,7 @@ data NeptuneClusterResource s = NeptuneClusterResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 neptuneClusterResource
-    :: TF.Resource P.Provider (NeptuneClusterResource s)
+    :: P.Resource (NeptuneClusterResource s)
 neptuneClusterResource =
     TF.newResource "aws_neptune_cluster" TF.validator $
         NeptuneClusterResource'
@@ -1268,7 +1268,7 @@ data NeptuneClusterInstanceResource s = NeptuneClusterInstanceResource'
 neptuneClusterInstanceResource
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
-    -> TF.Resource P.Provider (NeptuneClusterInstanceResource s)
+    -> P.Resource (NeptuneClusterInstanceResource s)
 neptuneClusterInstanceResource _clusterIdentifier _instanceClass =
     TF.newResource "aws_neptune_cluster_instance" TF.validator $
         NeptuneClusterInstanceResource'
@@ -1410,7 +1410,7 @@ data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResour
 
 neptuneClusterParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
-    -> TF.Resource P.Provider (NeptuneClusterParameterGroupResource s)
+    -> P.Resource (NeptuneClusterParameterGroupResource s)
 neptuneClusterParameterGroupResource _family' =
     TF.newResource "aws_neptune_cluster_parameter_group" TF.validator $
         NeptuneClusterParameterGroupResource'
@@ -1491,7 +1491,7 @@ data NeptuneEventSubscriptionResource s = NeptuneEventSubscriptionResource'
 
 neptuneEventSubscriptionResource
     :: TF.Attr s P.Text -- ^ @sns_topic_arn@ - 'P.snsTopicArn'
-    -> TF.Resource P.Provider (NeptuneEventSubscriptionResource s)
+    -> P.Resource (NeptuneEventSubscriptionResource s)
 neptuneEventSubscriptionResource _snsTopicArn =
     TF.newResource "aws_neptune_event_subscription" TF.validator $
         NeptuneEventSubscriptionResource'
@@ -1583,7 +1583,7 @@ data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
 neptuneParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NeptuneParameterGroupResource s)
+    -> P.Resource (NeptuneParameterGroupResource s)
 neptuneParameterGroupResource _family' _name =
     TF.newResource "aws_neptune_parameter_group" TF.validator $
         NeptuneParameterGroupResource'
@@ -1656,7 +1656,7 @@ data NeptuneSubnetGroupResource s = NeptuneSubnetGroupResource'
 
 neptuneSubnetGroupResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @subnet_ids@ - 'P.subnetIds'
-    -> TF.Resource P.Provider (NeptuneSubnetGroupResource s)
+    -> P.Resource (NeptuneSubnetGroupResource s)
 neptuneSubnetGroupResource _subnetIds =
     TF.newResource "aws_neptune_subnet_group" TF.validator $
         NeptuneSubnetGroupResource'
@@ -1714,7 +1714,7 @@ data NetworkAclResource s = NetworkAclResource'
 
 networkAclResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (NetworkAclResource s)
+    -> P.Resource (NetworkAclResource s)
 networkAclResource _vpcId =
     TF.newResource "aws_network_acl" TF.validator $
         NetworkAclResource'
@@ -1801,7 +1801,7 @@ networkAclRuleResource
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @rule_action@ - 'P.ruleAction'
     -> TF.Attr s P.Integer -- ^ @rule_number@ - 'P.ruleNumber'
-    -> TF.Resource P.Provider (NetworkAclRuleResource s)
+    -> P.Resource (NetworkAclRuleResource s)
 networkAclRuleResource _networkAclId _protocol _ruleAction _ruleNumber =
     TF.newResource "aws_network_acl_rule" TF.validator $
         NetworkAclRuleResource'
@@ -1923,7 +1923,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource'
 
 networkInterfaceResource
     :: TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Resource P.Provider (NetworkInterfaceResource s)
+    -> P.Resource (NetworkInterfaceResource s)
 networkInterfaceResource _subnetId =
     TF.newResource "aws_network_interface" TF.validator $
         NetworkInterfaceResource'
@@ -2002,7 +2002,7 @@ networkInterfaceAttachmentResource
     :: TF.Attr s P.Integer -- ^ @device_index@ - 'P.deviceIndex'
     -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
-    -> TF.Resource P.Provider (NetworkInterfaceAttachmentResource s)
+    -> P.Resource (NetworkInterfaceAttachmentResource s)
 networkInterfaceAttachmentResource _deviceIndex _instanceId _networkInterfaceId =
     TF.newResource "aws_network_interface_attachment" TF.validator $
         NetworkInterfaceAttachmentResource'
@@ -2058,7 +2058,7 @@ data NetworkInterfaceSgAttachmentResource s = NetworkInterfaceSgAttachmentResour
 networkInterfaceSgAttachmentResource
     :: TF.Attr s P.Text -- ^ @network_interface_id@ - 'P.networkInterfaceId'
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
-    -> TF.Resource P.Provider (NetworkInterfaceSgAttachmentResource s)
+    -> P.Resource (NetworkInterfaceSgAttachmentResource s)
 networkInterfaceSgAttachmentResource _networkInterfaceId _securityGroupId =
     TF.newResource "aws_network_interface_sg_attachment" TF.validator $
         NetworkInterfaceSgAttachmentResource'
@@ -2141,7 +2141,7 @@ opsworksApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (OpsworksApplicationResource s)
+    -> P.Resource (OpsworksApplicationResource s)
 opsworksApplicationResource _name _stackId _type' =
     TF.newResource "aws_opsworks_application" TF.validator $
         OpsworksApplicationResource'
@@ -2347,7 +2347,7 @@ opsworksCustomLayerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @short_name@ - 'P.shortName'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksCustomLayerResource s)
+    -> P.Resource (OpsworksCustomLayerResource s)
 opsworksCustomLayerResource _name _shortName _stackId =
     TF.newResource "aws_opsworks_custom_layer" TF.validator $
         OpsworksCustomLayerResource'
@@ -2590,7 +2590,7 @@ data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
 opsworksGangliaLayerResource
     :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksGangliaLayerResource s)
+    -> P.Resource (OpsworksGangliaLayerResource s)
 opsworksGangliaLayerResource _password _stackId =
     TF.newResource "aws_opsworks_ganglia_layer" TF.validator $
         OpsworksGangliaLayerResource'
@@ -2856,7 +2856,7 @@ data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
 opsworksHaproxyLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
     -> TF.Attr s P.Text -- ^ @stats_password@ - 'P.statsPassword'
-    -> TF.Resource P.Provider (OpsworksHaproxyLayerResource s)
+    -> P.Resource (OpsworksHaproxyLayerResource s)
 opsworksHaproxyLayerResource _stackId _statsPassword =
     TF.newResource "aws_opsworks_haproxy_layer" TF.validator $
         OpsworksHaproxyLayerResource'
@@ -3098,7 +3098,7 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
 opsworksInstanceResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @layer_ids@ - 'P.layerIds'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksInstanceResource s)
+    -> P.Resource (OpsworksInstanceResource s)
 opsworksInstanceResource _layerIds _stackId =
     TF.newResource "aws_opsworks_instance" TF.validator $
         OpsworksInstanceResource'
@@ -3374,7 +3374,7 @@ data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
 
 opsworksJavaAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksJavaAppLayerResource s)
+    -> P.Resource (OpsworksJavaAppLayerResource s)
 opsworksJavaAppLayerResource _stackId =
     TF.newResource "aws_opsworks_java_app_layer" TF.validator $
         OpsworksJavaAppLayerResource'
@@ -3638,7 +3638,7 @@ data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
 
 opsworksMemcachedLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksMemcachedLayerResource s)
+    -> P.Resource (OpsworksMemcachedLayerResource s)
 opsworksMemcachedLayerResource _stackId =
     TF.newResource "aws_opsworks_memcached_layer" TF.validator $
         OpsworksMemcachedLayerResource'
@@ -3877,7 +3877,7 @@ data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
 
 opsworksMysqlLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksMysqlLayerResource s)
+    -> P.Resource (OpsworksMysqlLayerResource s)
 opsworksMysqlLayerResource _stackId =
     TF.newResource "aws_opsworks_mysql_layer" TF.validator $
         OpsworksMysqlLayerResource'
@@ -4120,7 +4120,7 @@ data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
 
 opsworksNodejsAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksNodejsAppLayerResource s)
+    -> P.Resource (OpsworksNodejsAppLayerResource s)
 opsworksNodejsAppLayerResource _stackId =
     TF.newResource "aws_opsworks_nodejs_app_layer" TF.validator $
         OpsworksNodejsAppLayerResource'
@@ -4296,7 +4296,7 @@ data OpsworksPermissionResource s = OpsworksPermissionResource'
 
 opsworksPermissionResource
     :: TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
-    -> TF.Resource P.Provider (OpsworksPermissionResource s)
+    -> P.Resource (OpsworksPermissionResource s)
 opsworksPermissionResource _userArn =
     TF.newResource "aws_opsworks_permission" TF.validator $
         OpsworksPermissionResource'
@@ -4397,7 +4397,7 @@ data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
 
 opsworksPhpAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksPhpAppLayerResource s)
+    -> P.Resource (OpsworksPhpAppLayerResource s)
 opsworksPhpAppLayerResource _stackId =
     TF.newResource "aws_opsworks_php_app_layer" TF.validator $
         OpsworksPhpAppLayerResource'
@@ -4641,7 +4641,7 @@ data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
 
 opsworksRailsAppLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksRailsAppLayerResource s)
+    -> P.Resource (OpsworksRailsAppLayerResource s)
 opsworksRailsAppLayerResource _stackId =
     TF.newResource "aws_opsworks_rails_app_layer" TF.validator $
         OpsworksRailsAppLayerResource'
@@ -4864,7 +4864,7 @@ opsworksRdsDbInstanceResource
     -> TF.Attr s P.Text -- ^ @db_user@ - 'P.dbUser'
     -> TF.Attr s P.Text -- ^ @rds_db_instance_arn@ - 'P.rdsDbInstanceArn'
     -> TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksRdsDbInstanceResource s)
+    -> P.Resource (OpsworksRdsDbInstanceResource s)
 opsworksRdsDbInstanceResource _dbPassword _dbUser _rdsDbInstanceArn _stackId =
     TF.newResource "aws_opsworks_rds_db_instance" TF.validator $
         OpsworksRdsDbInstanceResource'
@@ -4968,7 +4968,7 @@ opsworksStackResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Attr s P.Text -- ^ @service_role_arn@ - 'P.serviceRoleArn'
-    -> TF.Resource P.Provider (OpsworksStackResource s)
+    -> P.Resource (OpsworksStackResource s)
 opsworksStackResource _defaultInstanceProfileArn _name _region _serviceRoleArn =
     TF.newResource "aws_opsworks_stack" TF.validator $
         OpsworksStackResource'
@@ -5190,7 +5190,7 @@ data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
 
 opsworksStaticWebLayerResource
     :: TF.Attr s P.Text -- ^ @stack_id@ - 'P.stackId'
-    -> TF.Resource P.Provider (OpsworksStaticWebLayerResource s)
+    -> P.Resource (OpsworksStaticWebLayerResource s)
 opsworksStaticWebLayerResource _stackId =
     TF.newResource "aws_opsworks_static_web_layer" TF.validator $
         OpsworksStaticWebLayerResource'
@@ -5369,7 +5369,7 @@ data OpsworksUserProfileResource s = OpsworksUserProfileResource'
 opsworksUserProfileResource
     :: TF.Attr s P.Text -- ^ @ssh_username@ - 'P.sshUsername'
     -> TF.Attr s P.Text -- ^ @user_arn@ - 'P.userArn'
-    -> TF.Resource P.Provider (OpsworksUserProfileResource s)
+    -> P.Resource (OpsworksUserProfileResource s)
 opsworksUserProfileResource _sshUsername _userArn =
     TF.newResource "aws_opsworks_user_profile" TF.validator $
         OpsworksUserProfileResource'
@@ -5432,7 +5432,7 @@ data OrganizationsAccountResource s = OrganizationsAccountResource'
 organizationsAccountResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (OrganizationsAccountResource s)
+    -> P.Resource (OrganizationsAccountResource s)
 organizationsAccountResource _email _name =
     TF.newResource "aws_organizations_account" TF.validator $
         OrganizationsAccountResource'
@@ -5496,7 +5496,7 @@ data OrganizationsOrganizationResource s = OrganizationsOrganizationResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 organizationsOrganizationResource
-    :: TF.Resource P.Provider (OrganizationsOrganizationResource s)
+    :: P.Resource (OrganizationsOrganizationResource s)
 organizationsOrganizationResource =
     TF.newResource "aws_organizations_organization" TF.validator $
         OrganizationsOrganizationResource'
@@ -5550,7 +5550,7 @@ data OrganizationsPolicyResource s = OrganizationsPolicyResource'
 organizationsPolicyResource
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (OrganizationsPolicyResource s)
+    -> P.Resource (OrganizationsPolicyResource s)
 organizationsPolicyResource _content _name =
     TF.newResource "aws_organizations_policy" TF.validator $
         OrganizationsPolicyResource'
@@ -5610,7 +5610,7 @@ data OrganizationsPolicyAttachmentResource s = OrganizationsPolicyAttachmentReso
 organizationsPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
-    -> TF.Resource P.Provider (OrganizationsPolicyAttachmentResource s)
+    -> P.Resource (OrganizationsPolicyAttachmentResource s)
 organizationsPolicyAttachmentResource _policyId _targetId =
     TF.newResource "aws_organizations_policy_attachment" TF.validator $
         OrganizationsPolicyAttachmentResource'
@@ -5653,7 +5653,7 @@ data PlacementGroupResource s = PlacementGroupResource'
 placementGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @strategy@ - 'P.strategy'
-    -> TF.Resource P.Provider (PlacementGroupResource s)
+    -> P.Resource (PlacementGroupResource s)
 placementGroupResource _name _strategy =
     TF.newResource "aws_placement_group" TF.validator $
         PlacementGroupResource'
@@ -5696,7 +5696,7 @@ data ProxyProtocolPolicyResource s = ProxyProtocolPolicyResource'
 proxyProtocolPolicyResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ports@ - 'P.instancePorts'
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Resource P.Provider (ProxyProtocolPolicyResource s)
+    -> P.Resource (ProxyProtocolPolicyResource s)
 proxyProtocolPolicyResource _instancePorts _loadBalancer =
     TF.newResource "aws_proxy_protocol_policy" TF.validator $
         ProxyProtocolPolicyResource'
@@ -5782,7 +5782,7 @@ data RdsClusterResource s = RdsClusterResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 rdsClusterResource
-    :: TF.Resource P.Provider (RdsClusterResource s)
+    :: P.Resource (RdsClusterResource s)
 rdsClusterResource =
     TF.newResource "aws_rds_cluster" TF.validator $
         RdsClusterResource'
@@ -6009,7 +6009,7 @@ data RdsClusterInstanceResource s = RdsClusterInstanceResource'
 rdsClusterInstanceResource
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> TF.Attr s P.Text -- ^ @instance_class@ - 'P.instanceClass'
-    -> TF.Resource P.Provider (RdsClusterInstanceResource s)
+    -> P.Resource (RdsClusterInstanceResource s)
 rdsClusterInstanceResource _clusterIdentifier _instanceClass =
     TF.newResource "aws_rds_cluster_instance" TF.validator $
         RdsClusterInstanceResource'
@@ -6156,7 +6156,7 @@ data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
 
 rdsClusterParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
-    -> TF.Resource P.Provider (RdsClusterParameterGroupResource s)
+    -> P.Resource (RdsClusterParameterGroupResource s)
 rdsClusterParameterGroupResource _family' =
     TF.newResource "aws_rds_cluster_parameter_group" TF.validator $
         RdsClusterParameterGroupResource'
@@ -6277,7 +6277,7 @@ data RedshiftClusterResource s = RedshiftClusterResource'
 redshiftClusterResource
     :: TF.Attr s P.Text -- ^ @cluster_identifier@ - 'P.clusterIdentifier'
     -> TF.Attr s P.Text -- ^ @node_type@ - 'P.nodeType'
-    -> TF.Resource P.Provider (RedshiftClusterResource s)
+    -> P.Resource (RedshiftClusterResource s)
 redshiftClusterResource _clusterIdentifier _nodeType =
     TF.newResource "aws_redshift_cluster" TF.validator $
         RedshiftClusterResource'
@@ -6501,7 +6501,7 @@ data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
 redshiftParameterGroupResource
     :: TF.Attr s P.Text -- ^ @family@ - 'P.family''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RedshiftParameterGroupResource s)
+    -> P.Resource (RedshiftParameterGroupResource s)
 redshiftParameterGroupResource _family' _name =
     TF.newResource "aws_redshift_parameter_group" TF.validator $
         RedshiftParameterGroupResource'
@@ -6565,7 +6565,7 @@ data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
 redshiftSecurityGroupResource
     :: TF.Attr s [TF.Attr s (RedshiftSecurityGroupIngress s)] -- ^ @ingress@ - 'P.ingress'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RedshiftSecurityGroupResource s)
+    -> P.Resource (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource _ingress _name =
     TF.newResource "aws_redshift_security_group" TF.validator $
         RedshiftSecurityGroupResource'
@@ -6625,7 +6625,7 @@ data RedshiftSubnetGroupResource s = RedshiftSubnetGroupResource'
 redshiftSubnetGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @subnet_ids@ - 'P.subnetIds'
-    -> TF.Resource P.Provider (RedshiftSubnetGroupResource s)
+    -> P.Resource (RedshiftSubnetGroupResource s)
 redshiftSubnetGroupResource _name _subnetIds =
     TF.newResource "aws_redshift_subnet_group" TF.validator $
         RedshiftSubnetGroupResource'
@@ -6687,7 +6687,7 @@ data RouteResource s = RouteResource'
 
 routeResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
-    -> TF.Resource P.Provider (RouteResource s)
+    -> P.Resource (RouteResource s)
 routeResource _routeTableId =
     TF.newResource "aws_route" TF.validator $
         RouteResource'
@@ -6766,7 +6766,7 @@ data Route53DelegationSetResource s = Route53DelegationSetResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 route53DelegationSetResource
-    :: TF.Resource P.Provider (Route53DelegationSetResource s)
+    :: P.Resource (Route53DelegationSetResource s)
 route53DelegationSetResource =
     TF.newResource "aws_route53_delegation_set" TF.validator $
         Route53DelegationSetResource'
@@ -6852,7 +6852,7 @@ data Route53HealthCheckResource s = Route53HealthCheckResource'
 
 route53HealthCheckResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (Route53HealthCheckResource s)
+    -> P.Resource (Route53HealthCheckResource s)
 route53HealthCheckResource _type' =
     TF.newResource "aws_route53_health_check" TF.validator $
         Route53HealthCheckResource'
@@ -7010,7 +7010,7 @@ data Route53QueryLogResource s = Route53QueryLogResource'
 route53QueryLogResource
     :: TF.Attr s P.Text -- ^ @cloudwatch_log_group_arn@ - 'P.cloudwatchLogGroupArn'
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
-    -> TF.Resource P.Provider (Route53QueryLogResource s)
+    -> P.Resource (Route53QueryLogResource s)
 route53QueryLogResource _cloudwatchLogGroupArn _zoneId =
     TF.newResource "aws_route53_query_log" TF.validator $
         Route53QueryLogResource'
@@ -7136,7 +7136,7 @@ route53RecordResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
-    -> TF.Resource P.Provider (Route53RecordResource s)
+    -> P.Resource (Route53RecordResource s)
 route53RecordResource _name _type' _zoneId =
     TF.newResource "aws_route53_record" TF.validator $
         Route53RecordResource'
@@ -7358,7 +7358,7 @@ data Route53ZoneResource s = Route53ZoneResource'
 
 route53ZoneResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (Route53ZoneResource s)
+    -> P.Resource (Route53ZoneResource s)
 route53ZoneResource _name =
     TF.newResource "aws_route53_zone" TF.validator $
         Route53ZoneResource'
@@ -7449,7 +7449,7 @@ data Route53ZoneAssociationResource s = Route53ZoneAssociationResource'
 route53ZoneAssociationResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
-    -> TF.Resource P.Provider (Route53ZoneAssociationResource s)
+    -> P.Resource (Route53ZoneAssociationResource s)
 route53ZoneAssociationResource _vpcId _zoneId =
     TF.newResource "aws_route53_zone_association" TF.validator $
         Route53ZoneAssociationResource'
@@ -7494,7 +7494,7 @@ data RouteTableResource s = RouteTableResource'
 
 routeTableResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (RouteTableResource s)
+    -> P.Resource (RouteTableResource s)
 routeTableResource _vpcId =
     TF.newResource "aws_route_table" TF.validator $
         RouteTableResource'
@@ -7543,7 +7543,7 @@ data RouteTableAssociationResource s = RouteTableAssociationResource'
 routeTableAssociationResource
     :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
-    -> TF.Resource P.Provider (RouteTableAssociationResource s)
+    -> P.Resource (RouteTableAssociationResource s)
 routeTableAssociationResource _routeTableId _subnetId =
     TF.newResource "aws_route_table_association" TF.validator $
         RouteTableAssociationResource'
@@ -7611,7 +7611,7 @@ data S3BucketResource s = S3BucketResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 s3BucketResource
-    :: TF.Resource P.Provider (S3BucketResource s)
+    :: P.Resource (S3BucketResource s)
 s3BucketResource =
     TF.newResource "aws_s3_bucket" TF.validator $
         S3BucketResource'
@@ -7795,7 +7795,7 @@ s3BucketInventoryResource
     -> TF.Attr s P.Text -- ^ @included_object_versions@ - 'P.includedObjectVersions'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (S3BucketInventorySchedule s) -- ^ @schedule@ - 'P.schedule'
-    -> TF.Resource P.Provider (S3BucketInventoryResource s)
+    -> P.Resource (S3BucketInventoryResource s)
 s3BucketInventoryResource _bucket _destination _includedObjectVersions _name _schedule =
     TF.newResource "aws_s3_bucket_inventory" TF.validator $
         S3BucketInventoryResource'
@@ -7895,7 +7895,7 @@ data S3BucketMetricResource s = S3BucketMetricResource'
 s3BucketMetricResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (S3BucketMetricResource s)
+    -> P.Resource (S3BucketMetricResource s)
 s3BucketMetricResource _bucket _name =
     TF.newResource "aws_s3_bucket_metric" TF.validator $
         S3BucketMetricResource'
@@ -7954,7 +7954,7 @@ data S3BucketNotificationResource s = S3BucketNotificationResource'
 
 s3BucketNotificationResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Resource P.Provider (S3BucketNotificationResource s)
+    -> P.Resource (S3BucketNotificationResource s)
 s3BucketNotificationResource _bucket =
     TF.newResource "aws_s3_bucket_notification" TF.validator $
         S3BucketNotificationResource'
@@ -8068,7 +8068,7 @@ data S3BucketObjectResource s = S3BucketObjectResource'
 s3BucketObjectResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Resource P.Provider (S3BucketObjectResource s)
+    -> P.Resource (S3BucketObjectResource s)
 s3BucketObjectResource _bucket _key =
     TF.newResource "aws_s3_bucket_object" TF.validator $
         S3BucketObjectResource'
@@ -8219,7 +8219,7 @@ data S3BucketPolicyResource s = S3BucketPolicyResource'
 s3BucketPolicyResource
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
-    -> TF.Resource P.Provider (S3BucketPolicyResource s)
+    -> P.Resource (S3BucketPolicyResource s)
 s3BucketPolicyResource _bucket _policy =
     TF.newResource "aws_s3_bucket_policy" TF.validator $
         S3BucketPolicyResource'
@@ -8279,7 +8279,7 @@ data SecretsmanagerSecretResource s = SecretsmanagerSecretResource'
 
 secretsmanagerSecretResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SecretsmanagerSecretResource s)
+    -> P.Resource (SecretsmanagerSecretResource s)
 secretsmanagerSecretResource _name =
     TF.newResource "aws_secretsmanager_secret" TF.validator $
         SecretsmanagerSecretResource'
@@ -8374,7 +8374,7 @@ data SecretsmanagerSecretVersionResource s = SecretsmanagerSecretVersionResource
 secretsmanagerSecretVersionResource
     :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
     -> TF.Attr s P.Text -- ^ @secret_string@ - 'P.secretString'
-    -> TF.Resource P.Provider (SecretsmanagerSecretVersionResource s)
+    -> P.Resource (SecretsmanagerSecretVersionResource s)
 secretsmanagerSecretVersionResource _secretId _secretString =
     TF.newResource "aws_secretsmanager_secret_version" TF.validator $
         SecretsmanagerSecretVersionResource'
@@ -8427,7 +8427,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 securityGroupResource
-    :: TF.Resource P.Provider (SecurityGroupResource s)
+    :: P.Resource (SecurityGroupResource s)
 securityGroupResource =
     TF.newResource "aws_security_group" TF.validator $
         SecurityGroupResource'
@@ -8530,7 +8530,7 @@ securityGroupRuleResource
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> TF.Attr s P.Integer -- ^ @to_port@ - 'P.toPort'
     -> TF.Attr s P.NetworkTraffic -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (SecurityGroupRuleResource s)
+    -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _fromPort _protocol _securityGroupId _toPort _type' =
     TF.newResource "aws_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
@@ -8635,7 +8635,7 @@ data ServiceDiscoveryPrivateDnsNamespaceResource s = ServiceDiscoveryPrivateDnsN
 serviceDiscoveryPrivateDnsNamespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vpc@ - 'P.vpc'
-    -> TF.Resource P.Provider (ServiceDiscoveryPrivateDnsNamespaceResource s)
+    -> P.Resource (ServiceDiscoveryPrivateDnsNamespaceResource s)
 serviceDiscoveryPrivateDnsNamespaceResource _name _vpc =
     TF.newResource "aws_service_discovery_private_dns_namespace" TF.validator $
         ServiceDiscoveryPrivateDnsNamespaceResource'
@@ -8690,7 +8690,7 @@ data ServiceDiscoveryPublicDnsNamespaceResource s = ServiceDiscoveryPublicDnsNam
 
 serviceDiscoveryPublicDnsNamespaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ServiceDiscoveryPublicDnsNamespaceResource s)
+    -> P.Resource (ServiceDiscoveryPublicDnsNamespaceResource s)
 serviceDiscoveryPublicDnsNamespaceResource _name =
     TF.newResource "aws_service_discovery_public_dns_namespace" TF.validator $
         ServiceDiscoveryPublicDnsNamespaceResource'
@@ -8748,7 +8748,7 @@ data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource'
 serviceDiscoveryServiceResource
     :: TF.Attr s (ServiceDiscoveryServiceDnsConfig s) -- ^ @dns_config@ - 'P.dnsConfig'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ServiceDiscoveryServiceResource s)
+    -> P.Resource (ServiceDiscoveryServiceResource s)
 serviceDiscoveryServiceResource _dnsConfig _name =
     TF.newResource "aws_service_discovery_service" TF.validator $
         ServiceDiscoveryServiceResource'
@@ -8829,7 +8829,7 @@ data ServicecatalogPortfolioResource s = ServicecatalogPortfolioResource'
 
 servicecatalogPortfolioResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ServicecatalogPortfolioResource s)
+    -> P.Resource (ServicecatalogPortfolioResource s)
 servicecatalogPortfolioResource _name =
     TF.newResource "aws_servicecatalog_portfolio" TF.validator $
         ServicecatalogPortfolioResource'
@@ -8884,7 +8884,7 @@ data SesActiveReceiptRuleSetResource s = SesActiveReceiptRuleSetResource'
 
 sesActiveReceiptRuleSetResource
     :: TF.Attr s P.Text -- ^ @rule_set_name@ - 'P.ruleSetName'
-    -> TF.Resource P.Provider (SesActiveReceiptRuleSetResource s)
+    -> P.Resource (SesActiveReceiptRuleSetResource s)
 sesActiveReceiptRuleSetResource _ruleSetName =
     TF.newResource "aws_ses_active_receipt_rule_set" TF.validator $
         SesActiveReceiptRuleSetResource'
@@ -8916,7 +8916,7 @@ data SesConfigurationSetResource s = SesConfigurationSetResource'
 
 sesConfigurationSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SesConfigurationSetResource s)
+    -> P.Resource (SesConfigurationSetResource s)
 sesConfigurationSetResource _name =
     TF.newResource "aws_ses_configuration_set" TF.validator $
         SesConfigurationSetResource'
@@ -8948,7 +8948,7 @@ data SesDomainDkimResource s = SesDomainDkimResource'
 
 sesDomainDkimResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Resource P.Provider (SesDomainDkimResource s)
+    -> P.Resource (SesDomainDkimResource s)
 sesDomainDkimResource _domain =
     TF.newResource "aws_ses_domain_dkim" TF.validator $
         SesDomainDkimResource'
@@ -8983,7 +8983,7 @@ data SesDomainIdentityResource s = SesDomainIdentityResource'
 
 sesDomainIdentityResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Resource P.Provider (SesDomainIdentityResource s)
+    -> P.Resource (SesDomainIdentityResource s)
 sesDomainIdentityResource _domain =
     TF.newResource "aws_ses_domain_identity" TF.validator $
         SesDomainIdentityResource'
@@ -9021,7 +9021,7 @@ data SesDomainIdentityVerificationResource s = SesDomainIdentityVerificationReso
 
 sesDomainIdentityVerificationResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
-    -> TF.Resource P.Provider (SesDomainIdentityVerificationResource s)
+    -> P.Resource (SesDomainIdentityVerificationResource s)
 sesDomainIdentityVerificationResource _domain =
     TF.newResource "aws_ses_domain_identity_verification" TF.validator $
         SesDomainIdentityVerificationResource'
@@ -9063,7 +9063,7 @@ data SesDomainMailFromResource s = SesDomainMailFromResource'
 sesDomainMailFromResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @mail_from_domain@ - 'P.mailFromDomain'
-    -> TF.Resource P.Provider (SesDomainMailFromResource s)
+    -> P.Resource (SesDomainMailFromResource s)
 sesDomainMailFromResource _domain _mailFromDomain =
     TF.newResource "aws_ses_domain_mail_from" TF.validator $
         SesDomainMailFromResource'

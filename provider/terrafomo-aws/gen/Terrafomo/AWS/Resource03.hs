@@ -398,7 +398,7 @@ data ElastictranscoderPresetResource s = ElastictranscoderPresetResource'
 
 elastictranscoderPresetResource
     :: TF.Attr s P.Text -- ^ @container@ - 'P.container'
-    -> TF.Resource P.Provider (ElastictranscoderPresetResource s)
+    -> P.Resource (ElastictranscoderPresetResource s)
 elastictranscoderPresetResource _container =
     TF.newResource "aws_elastictranscoder_preset" TF.validator $
         ElastictranscoderPresetResource'
@@ -529,7 +529,7 @@ data ElbResource s = ElbResource'
 
 elbResource
     :: TF.Attr s [TF.Attr s (ElbListener s)] -- ^ @listener@ - 'P.listener'
-    -> TF.Resource P.Provider (ElbResource s)
+    -> P.Resource (ElbResource s)
 elbResource _listener =
     TF.newResource "aws_elb" TF.validator $
         ElbResource'
@@ -658,7 +658,7 @@ data ElbAttachmentResource s = ElbAttachmentResource'
 elbAttachmentResource
     :: TF.Attr s P.Text -- ^ @elb@ - 'P.elb'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Resource P.Provider (ElbAttachmentResource s)
+    -> P.Resource (ElbAttachmentResource s)
 elbAttachmentResource _elb _instance' =
     TF.newResource "aws_elb_attachment" TF.validator $
         ElbAttachmentResource'
@@ -762,7 +762,7 @@ emrClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @release_label@ - 'P.releaseLabel'
     -> TF.Attr s P.Text -- ^ @service_role@ - 'P.serviceRole'
-    -> TF.Resource P.Provider (EmrClusterResource s)
+    -> P.Resource (EmrClusterResource s)
 emrClusterResource _name _releaseLabel _serviceRole =
     TF.newResource "aws_emr_cluster" TF.validator $
         EmrClusterResource'
@@ -991,7 +991,7 @@ data EmrInstanceGroupResource s = EmrInstanceGroupResource'
 emrInstanceGroupResource
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Resource P.Provider (EmrInstanceGroupResource s)
+    -> P.Resource (EmrInstanceGroupResource s)
 emrInstanceGroupResource _clusterId _instanceType =
     TF.newResource "aws_emr_instance_group" TF.validator $
         EmrInstanceGroupResource'
@@ -1071,7 +1071,7 @@ data EmrSecurityConfigurationResource s = EmrSecurityConfigurationResource'
 
 emrSecurityConfigurationResource
     :: TF.Attr s P.Text -- ^ @configuration@ - 'P.configuration'
-    -> TF.Resource P.Provider (EmrSecurityConfigurationResource s)
+    -> P.Resource (EmrSecurityConfigurationResource s)
 emrSecurityConfigurationResource _configuration =
     TF.newResource "aws_emr_security_configuration" TF.validator $
         EmrSecurityConfigurationResource'
@@ -1145,7 +1145,7 @@ flowLogResource
     :: TF.Attr s P.Text -- ^ @iam_role_arn@ - 'P.iamRoleArn'
     -> TF.Attr s P.Text -- ^ @log_group_name@ - 'P.logGroupName'
     -> TF.Attr s P.Text -- ^ @traffic_type@ - 'P.trafficType'
-    -> TF.Resource P.Provider (FlowLogResource s)
+    -> P.Resource (FlowLogResource s)
 flowLogResource _iamRoleArn _logGroupName _trafficType =
     TF.newResource "aws_flow_log" TF.validator $
         FlowLogResource'
@@ -1235,7 +1235,7 @@ data GameliftAliasResource s = GameliftAliasResource'
 gameliftAliasResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (GameliftAliasRoutingStrategy s) -- ^ @routing_strategy@ - 'P.routingStrategy'
-    -> TF.Resource P.Provider (GameliftAliasResource s)
+    -> P.Resource (GameliftAliasResource s)
 gameliftAliasResource _name _routingStrategy =
     TF.newResource "aws_gamelift_alias" TF.validator $
         GameliftAliasResource'
@@ -1299,7 +1299,7 @@ gameliftBuildResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @operating_system@ - 'P.operatingSystem'
     -> TF.Attr s (GameliftBuildStorageLocation s) -- ^ @storage_location@ - 'P.storageLocation'
-    -> TF.Resource P.Provider (GameliftBuildResource s)
+    -> P.Resource (GameliftBuildResource s)
 gameliftBuildResource _name _operatingSystem _storageLocation =
     TF.newResource "aws_gamelift_build" TF.validator $
         GameliftBuildResource'
@@ -1379,7 +1379,7 @@ gameliftFleetResource
     :: TF.Attr s P.Text -- ^ @build_id@ - 'P.buildId'
     -> TF.Attr s P.Text -- ^ @ec2_instance_type@ - 'P.ec2InstanceType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GameliftFleetResource s)
+    -> P.Resource (GameliftFleetResource s)
 gameliftFleetResource _buildId _ec2InstanceType _name =
     TF.newResource "aws_gamelift_fleet" TF.validator $
         GameliftFleetResource'
@@ -1493,7 +1493,7 @@ data GlacierVaultResource s = GlacierVaultResource'
 
 glacierVaultResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GlacierVaultResource s)
+    -> P.Resource (GlacierVaultResource s)
 glacierVaultResource _name =
     TF.newResource "aws_glacier_vault" TF.validator $
         GlacierVaultResource'
@@ -1565,7 +1565,7 @@ data GlueCatalogDatabaseResource s = GlueCatalogDatabaseResource'
 
 glueCatalogDatabaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GlueCatalogDatabaseResource s)
+    -> P.Resource (GlueCatalogDatabaseResource s)
 glueCatalogDatabaseResource _name =
     TF.newResource "aws_glue_catalog_database" TF.validator $
         GlueCatalogDatabaseResource'
@@ -1652,7 +1652,7 @@ data GlueCatalogTableResource s = GlueCatalogTableResource'
 glueCatalogTableResource
     :: TF.Attr s P.Text -- ^ @database_name@ - 'P.databaseName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GlueCatalogTableResource s)
+    -> P.Resource (GlueCatalogTableResource s)
 glueCatalogTableResource _databaseName _name =
     TF.newResource "aws_glue_catalog_table" TF.validator $
         GlueCatalogTableResource'
@@ -1786,7 +1786,7 @@ data GlueClassifierResource s = GlueClassifierResource'
 
 glueClassifierResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GlueClassifierResource s)
+    -> P.Resource (GlueClassifierResource s)
 glueClassifierResource _name =
     TF.newResource "aws_glue_classifier" TF.validator $
         GlueClassifierResource'
@@ -1883,7 +1883,7 @@ data GlueConnectionResource s = GlueConnectionResource'
 glueConnectionResource
     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @connection_properties@ - 'P.connectionProperties'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GlueConnectionResource s)
+    -> P.Resource (GlueConnectionResource s)
 glueConnectionResource _connectionProperties _name =
     TF.newResource "aws_glue_connection" TF.validator $
         GlueConnectionResource'
@@ -1992,7 +1992,7 @@ glueCrawlerResource
     :: TF.Attr s P.Text -- ^ @database_name@ - 'P.databaseName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (GlueCrawlerResource s)
+    -> P.Resource (GlueCrawlerResource s)
 glueCrawlerResource _databaseName _name _role =
     TF.newResource "aws_glue_crawler" TF.validator $
         GlueCrawlerResource'
@@ -2143,7 +2143,7 @@ glueJobResource
     :: TF.Attr s (GlueJobCommand s) -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @role_arn@ - 'P.roleArn'
-    -> TF.Resource P.Provider (GlueJobResource s)
+    -> P.Resource (GlueJobResource s)
 glueJobResource _command _name _roleArn =
     TF.newResource "aws_glue_job" TF.validator $
         GlueJobResource'
@@ -2258,7 +2258,7 @@ glueTriggerResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (GlueTriggerActions s))) -- ^ @actions@ - 'P.actions'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (GlueTriggerResource s)
+    -> P.Resource (GlueTriggerResource s)
 glueTriggerResource _actions _name _type' =
     TF.newResource "aws_glue_trigger" TF.validator $
         GlueTriggerResource'
@@ -2339,7 +2339,7 @@ data GuarddutyDetectorResource s = GuarddutyDetectorResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 guarddutyDetectorResource
-    :: TF.Resource P.Provider (GuarddutyDetectorResource s)
+    :: P.Resource (GuarddutyDetectorResource s)
 guarddutyDetectorResource =
     TF.newResource "aws_guardduty_detector" TF.validator $
         GuarddutyDetectorResource'
@@ -2390,7 +2390,7 @@ guarddutyIpsetResource
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GuarddutyIpsetResource s)
+    -> P.Resource (GuarddutyIpsetResource s)
 guarddutyIpsetResource _activate _detectorId _format _location _name =
     TF.newResource "aws_guardduty_ipset" TF.validator $
         GuarddutyIpsetResource'
@@ -2467,7 +2467,7 @@ guarddutyMemberResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @detector_id@ - 'P.detectorId'
     -> TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Resource P.Provider (GuarddutyMemberResource s)
+    -> P.Resource (GuarddutyMemberResource s)
 guarddutyMemberResource _accountId _detectorId _email =
     TF.newResource "aws_guardduty_member" TF.validator $
         GuarddutyMemberResource'
@@ -2553,7 +2553,7 @@ guarddutyThreatintelsetResource
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
     -> TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GuarddutyThreatintelsetResource s)
+    -> P.Resource (GuarddutyThreatintelsetResource s)
 guarddutyThreatintelsetResource _activate _detectorId _format _location _name =
     TF.newResource "aws_guardduty_threatintelset" TF.validator $
         GuarddutyThreatintelsetResource'
@@ -2616,7 +2616,7 @@ data IamAccessKeyResource s = IamAccessKeyResource'
 
 iamAccessKeyResource
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (IamAccessKeyResource s)
+    -> P.Resource (IamAccessKeyResource s)
 iamAccessKeyResource _user =
     TF.newResource "aws_iam_access_key" TF.validator $
         IamAccessKeyResource'
@@ -2667,7 +2667,7 @@ data IamAccountAliasResource s = IamAccountAliasResource'
 
 iamAccountAliasResource
     :: TF.Attr s P.Text -- ^ @account_alias@ - 'P.accountAlias'
-    -> TF.Resource P.Provider (IamAccountAliasResource s)
+    -> P.Resource (IamAccountAliasResource s)
 iamAccountAliasResource _accountAlias =
     TF.newResource "aws_iam_account_alias" TF.validator $
         IamAccountAliasResource'
@@ -2701,7 +2701,7 @@ data IamAccountPasswordPolicyResource s = IamAccountPasswordPolicyResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 iamAccountPasswordPolicyResource
-    :: TF.Resource P.Provider (IamAccountPasswordPolicyResource s)
+    :: P.Resource (IamAccountPasswordPolicyResource s)
 iamAccountPasswordPolicyResource =
     TF.newResource "aws_iam_account_password_policy" TF.validator $
         IamAccountPasswordPolicyResource'
@@ -2767,7 +2767,7 @@ data IamGroupResource s = IamGroupResource'
 
 iamGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (IamGroupResource s)
+    -> P.Resource (IamGroupResource s)
 iamGroupResource _name =
     TF.newResource "aws_iam_group" TF.validator $
         IamGroupResource'
@@ -2820,7 +2820,7 @@ iamGroupMembershipResource
     :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @users@ - 'P.users'
-    -> TF.Resource P.Provider (IamGroupMembershipResource s)
+    -> P.Resource (IamGroupMembershipResource s)
 iamGroupMembershipResource _group _name _users =
     TF.newResource "aws_iam_group_membership" TF.validator $
         IamGroupMembershipResource'
@@ -2873,7 +2873,7 @@ data IamGroupPolicyResource s = IamGroupPolicyResource'
 iamGroupPolicyResource
     :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
     -> TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
-    -> TF.Resource P.Provider (IamGroupPolicyResource s)
+    -> P.Resource (IamGroupPolicyResource s)
 iamGroupPolicyResource _group _policy =
     TF.newResource "aws_iam_group_policy" TF.validator $
         IamGroupPolicyResource'
@@ -2926,7 +2926,7 @@ data IamGroupPolicyAttachmentResource s = IamGroupPolicyAttachmentResource'
 iamGroupPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @group@ - 'P.group'
     -> TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
-    -> TF.Resource P.Provider (IamGroupPolicyAttachmentResource s)
+    -> P.Resource (IamGroupPolicyAttachmentResource s)
 iamGroupPolicyAttachmentResource _group _policyArn =
     TF.newResource "aws_iam_group_policy_attachment" TF.validator $
         IamGroupPolicyAttachmentResource'
@@ -2967,7 +2967,7 @@ data IamInstanceProfileResource s = IamInstanceProfileResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 iamInstanceProfileResource
-    :: TF.Resource P.Provider (IamInstanceProfileResource s)
+    :: P.Resource (IamInstanceProfileResource s)
 iamInstanceProfileResource =
     TF.newResource "aws_iam_instance_profile" TF.validator $
         IamInstanceProfileResource'
@@ -3029,7 +3029,7 @@ iamOpenidConnectProviderResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @client_id_list@ - 'P.clientIdList'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @thumbprint_list@ - 'P.thumbprintList'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> TF.Resource P.Provider (IamOpenidConnectProviderResource s)
+    -> P.Resource (IamOpenidConnectProviderResource s)
 iamOpenidConnectProviderResource _clientIdList _thumbprintList _url =
     TF.newResource "aws_iam_openid_connect_provider" TF.validator $
         IamOpenidConnectProviderResource'
@@ -3087,7 +3087,7 @@ data IamPolicyResource s = IamPolicyResource'
 
 iamPolicyResource
     :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
-    -> TF.Resource P.Provider (IamPolicyResource s)
+    -> P.Resource (IamPolicyResource s)
 iamPolicyResource _policy =
     TF.newResource "aws_iam_policy" TF.validator $
         IamPolicyResource'
@@ -3159,7 +3159,7 @@ data IamPolicyAttachmentResource s = IamPolicyAttachmentResource'
 iamPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
-    -> TF.Resource P.Provider (IamPolicyAttachmentResource s)
+    -> P.Resource (IamPolicyAttachmentResource s)
 iamPolicyAttachmentResource _name _policyArn =
     TF.newResource "aws_iam_policy_attachment" TF.validator $
         IamPolicyAttachmentResource'
@@ -3237,7 +3237,7 @@ data IamRoleResource s = IamRoleResource'
 
 iamRoleResource
     :: TF.Attr s P.Document -- ^ @assume_role_policy@ - 'P.assumeRolePolicy'
-    -> TF.Resource P.Provider (IamRoleResource s)
+    -> P.Resource (IamRoleResource s)
 iamRoleResource _assumeRolePolicy =
     TF.newResource "aws_iam_role" TF.validator $
         IamRoleResource'
@@ -3330,7 +3330,7 @@ data IamRolePolicyResource s = IamRolePolicyResource'
 iamRolePolicyResource
     :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (IamRolePolicyResource s)
+    -> P.Resource (IamRolePolicyResource s)
 iamRolePolicyResource _policy _role =
     TF.newResource "aws_iam_role_policy" TF.validator $
         IamRolePolicyResource'
@@ -3383,7 +3383,7 @@ data IamRolePolicyAttachmentResource s = IamRolePolicyAttachmentResource'
 iamRolePolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (IamRolePolicyAttachmentResource s)
+    -> P.Resource (IamRolePolicyAttachmentResource s)
 iamRolePolicyAttachmentResource _policyArn _role =
     TF.newResource "aws_iam_role_policy_attachment" TF.validator $
         IamRolePolicyAttachmentResource'
@@ -3426,7 +3426,7 @@ data IamSamlProviderResource s = IamSamlProviderResource'
 iamSamlProviderResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @saml_metadata_document@ - 'P.samlMetadataDocument'
-    -> TF.Resource P.Provider (IamSamlProviderResource s)
+    -> P.Resource (IamSamlProviderResource s)
 iamSamlProviderResource _name _samlMetadataDocument =
     TF.newResource "aws_iam_saml_provider" TF.validator $
         IamSamlProviderResource'
@@ -3484,7 +3484,7 @@ data IamServerCertificateResource s = IamServerCertificateResource'
 iamServerCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_body@ - 'P.certificateBody'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
-    -> TF.Resource P.Provider (IamServerCertificateResource s)
+    -> P.Resource (IamServerCertificateResource s)
 iamServerCertificateResource _certificateBody _privateKey =
     TF.newResource "aws_iam_server_certificate" TF.validator $
         IamServerCertificateResource'
@@ -3556,7 +3556,7 @@ data IamServiceLinkedRoleResource s = IamServiceLinkedRoleResource'
 
 iamServiceLinkedRoleResource
     :: TF.Attr s P.Text -- ^ @aws_service_name@ - 'P.awsServiceName'
-    -> TF.Resource P.Provider (IamServiceLinkedRoleResource s)
+    -> P.Resource (IamServiceLinkedRoleResource s)
 iamServiceLinkedRoleResource _awsServiceName =
     TF.newResource "aws_iam_service_linked_role" TF.validator $
         IamServiceLinkedRoleResource'
@@ -3628,7 +3628,7 @@ data IamUserResource s = IamUserResource'
 
 iamUserResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (IamUserResource s)
+    -> P.Resource (IamUserResource s)
 iamUserResource _name =
     TF.newResource "aws_iam_user" TF.validator $
         IamUserResource'
@@ -3691,7 +3691,7 @@ data IamUserGroupMembershipResource s = IamUserGroupMembershipResource'
 iamUserGroupMembershipResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @groups@ - 'P.groups'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (IamUserGroupMembershipResource s)
+    -> P.Resource (IamUserGroupMembershipResource s)
 iamUserGroupMembershipResource _groups _user =
     TF.newResource "aws_iam_user_group_membership" TF.validator $
         IamUserGroupMembershipResource'
@@ -3740,7 +3740,7 @@ data IamUserLoginProfileResource s = IamUserLoginProfileResource'
 iamUserLoginProfileResource
     :: TF.Attr s P.Text -- ^ @pgp_key@ - 'P.pgpKey'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (IamUserLoginProfileResource s)
+    -> P.Resource (IamUserLoginProfileResource s)
 iamUserLoginProfileResource _pgpKey _user =
     TF.newResource "aws_iam_user_login_profile" TF.validator $
         IamUserLoginProfileResource'
@@ -3806,7 +3806,7 @@ data IamUserPolicyResource s = IamUserPolicyResource'
 iamUserPolicyResource
     :: TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (IamUserPolicyResource s)
+    -> P.Resource (IamUserPolicyResource s)
 iamUserPolicyResource _policy _user =
     TF.newResource "aws_iam_user_policy" TF.validator $
         IamUserPolicyResource'
@@ -3859,7 +3859,7 @@ data IamUserPolicyAttachmentResource s = IamUserPolicyAttachmentResource'
 iamUserPolicyAttachmentResource
     :: TF.Attr s P.Text -- ^ @policy_arn@ - 'P.policyArn'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (IamUserPolicyAttachmentResource s)
+    -> P.Resource (IamUserPolicyAttachmentResource s)
 iamUserPolicyAttachmentResource _policyArn _user =
     TF.newResource "aws_iam_user_policy_attachment" TF.validator $
         IamUserPolicyAttachmentResource'
@@ -3906,7 +3906,7 @@ iamUserSshKeyResource
     :: TF.Attr s P.Text -- ^ @encoding@ - 'P.encoding'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (IamUserSshKeyResource s)
+    -> P.Resource (IamUserSshKeyResource s)
 iamUserSshKeyResource _encoding _publicKey _username =
     TF.newResource "aws_iam_user_ssh_key" TF.validator $
         IamUserSshKeyResource'
@@ -3965,7 +3965,7 @@ data InspectorAssessmentTargetResource s = InspectorAssessmentTargetResource'
 inspectorAssessmentTargetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @resource_group_arn@ - 'P.resourceGroupArn'
-    -> TF.Resource P.Provider (InspectorAssessmentTargetResource s)
+    -> P.Resource (InspectorAssessmentTargetResource s)
 inspectorAssessmentTargetResource _name _resourceGroupArn =
     TF.newResource "aws_inspector_assessment_target" TF.validator $
         InspectorAssessmentTargetResource'
@@ -4019,7 +4019,7 @@ inspectorAssessmentTemplateResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rules_package_arns@ - 'P.rulesPackageArns'
     -> TF.Attr s P.Text -- ^ @target_arn@ - 'P.targetArn'
-    -> TF.Resource P.Provider (InspectorAssessmentTemplateResource s)
+    -> P.Resource (InspectorAssessmentTemplateResource s)
 inspectorAssessmentTemplateResource _duration _name _rulesPackageArns _targetArn =
     TF.newResource "aws_inspector_assessment_template" TF.validator $
         InspectorAssessmentTemplateResource'
@@ -4075,7 +4075,7 @@ data InspectorResourceGroupResource s = InspectorResourceGroupResource'
 
 inspectorResourceGroupResource
     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @tags@ - 'P.tags'
-    -> TF.Resource P.Provider (InspectorResourceGroupResource s)
+    -> P.Resource (InspectorResourceGroupResource s)
 inspectorResourceGroupResource _tags =
     TF.newResource "aws_inspector_resource_group" TF.validator $
         InspectorResourceGroupResource'
@@ -4156,7 +4156,7 @@ data InstanceResource s = InstanceResource'
 instanceResource
     :: TF.Attr s P.Text -- ^ @ami@ - 'P.ami'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Resource P.Provider (InstanceResource s)
+    -> P.Resource (InstanceResource s)
 instanceResource _ami _instanceType =
     TF.newResource "aws_instance" TF.validator $
         InstanceResource'
@@ -4371,7 +4371,7 @@ data InternetGatewayResource s = InternetGatewayResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 internetGatewayResource
-    :: TF.Resource P.Provider (InternetGatewayResource s)
+    :: P.Resource (InternetGatewayResource s)
 internetGatewayResource =
     TF.newResource "aws_internet_gateway" TF.validator $
         InternetGatewayResource'
@@ -4414,7 +4414,7 @@ data IotCertificateResource s = IotCertificateResource'
 iotCertificateResource
     :: TF.Attr s P.Bool -- ^ @active@ - 'P.active'
     -> TF.Attr s P.Text -- ^ @csr@ - 'P.csr'
-    -> TF.Resource P.Provider (IotCertificateResource s)
+    -> P.Resource (IotCertificateResource s)
 iotCertificateResource _active _csr =
     TF.newResource "aws_iot_certificate" TF.validator $
         IotCertificateResource'
@@ -4460,7 +4460,7 @@ data IotPolicyResource s = IotPolicyResource'
 iotPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Document -- ^ @policy@ - 'P.policy'
-    -> TF.Resource P.Provider (IotPolicyResource s)
+    -> P.Resource (IotPolicyResource s)
 iotPolicyResource _name _policy =
     TF.newResource "aws_iot_policy" TF.validator $
         IotPolicyResource'
@@ -4511,7 +4511,7 @@ data IotThingResource s = IotThingResource'
 
 iotThingResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (IotThingResource s)
+    -> P.Resource (IotThingResource s)
 iotThingResource _name =
     TF.newResource "aws_iot_thing" TF.validator $
         IotThingResource'
@@ -4572,7 +4572,7 @@ data IotThingTypeResource s = IotThingTypeResource'
 
 iotThingTypeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (IotThingTypeResource s)
+    -> P.Resource (IotThingTypeResource s)
 iotThingTypeResource _name =
     TF.newResource "aws_iot_thing_type" TF.validator $
         IotThingTypeResource'
@@ -4673,7 +4673,7 @@ iotTopicRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @sql@ - 'P.sql'
     -> TF.Attr s P.Text -- ^ @sql_version@ - 'P.sqlVersion'
-    -> TF.Resource P.Provider (IotTopicRuleResource s)
+    -> P.Resource (IotTopicRuleResource s)
 iotTopicRuleResource _enabled _name _sql _sqlVersion =
     TF.newResource "aws_iot_topic_rule" TF.validator $
         IotTopicRuleResource'
@@ -4860,7 +4860,7 @@ data KeyPairResource s = KeyPairResource'
 
 keyPairResource
     :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Resource P.Provider (KeyPairResource s)
+    -> P.Resource (KeyPairResource s)
 keyPairResource _publicKey =
     TF.newResource "aws_key_pair" TF.validator $
         KeyPairResource'
@@ -4933,7 +4933,7 @@ data KinesisFirehoseDeliveryStreamResource s = KinesisFirehoseDeliveryStreamReso
 kinesisFirehoseDeliveryStreamResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (KinesisFirehoseDeliveryStreamResource s)
+    -> P.Resource (KinesisFirehoseDeliveryStreamResource s)
 kinesisFirehoseDeliveryStreamResource _destination _name =
     TF.newResource "aws_kinesis_firehose_delivery_stream" TF.validator $
         KinesisFirehoseDeliveryStreamResource'
@@ -5077,7 +5077,7 @@ data KinesisStreamResource s = KinesisStreamResource'
 kinesisStreamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @shard_count@ - 'P.shardCount'
-    -> TF.Resource P.Provider (KinesisStreamResource s)
+    -> P.Resource (KinesisStreamResource s)
 kinesisStreamResource _name _shardCount =
     TF.newResource "aws_kinesis_stream" TF.validator $
         KinesisStreamResource'
@@ -5166,7 +5166,7 @@ data KmsAliasResource s = KmsAliasResource'
 
 kmsAliasResource
     :: TF.Attr s P.Text -- ^ @target_key_id@ - 'P.targetKeyId'
-    -> TF.Resource P.Provider (KmsAliasResource s)
+    -> P.Resource (KmsAliasResource s)
 kmsAliasResource _targetKeyId =
     TF.newResource "aws_kms_alias" TF.validator $
         KmsAliasResource'
@@ -5252,7 +5252,7 @@ kmsGrantResource
     :: TF.Attr s P.Text -- ^ @grantee_principal@ - 'P.granteePrincipal'
     -> TF.Attr s P.Text -- ^ @key_id@ - 'P.keyId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @operations@ - 'P.operations'
-    -> TF.Resource P.Provider (KmsGrantResource s)
+    -> P.Resource (KmsGrantResource s)
 kmsGrantResource _granteePrincipal _keyId _operations =
     TF.newResource "aws_kms_grant" TF.validator $
         KmsGrantResource'
@@ -5351,7 +5351,7 @@ data KmsKeyResource s = KmsKeyResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 kmsKeyResource
-    :: TF.Resource P.Provider (KmsKeyResource s)
+    :: P.Resource (KmsKeyResource s)
 kmsKeyResource =
     TF.newResource "aws_kms_key" TF.validator $
         KmsKeyResource'
@@ -5433,7 +5433,7 @@ lambdaAliasResource
     :: TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.Attr s P.Text -- ^ @function_version@ - 'P.functionVersion'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LambdaAliasResource s)
+    -> P.Resource (LambdaAliasResource s)
 lambdaAliasResource _functionName _functionVersion _name =
     TF.newResource "aws_lambda_alias" TF.validator $
         LambdaAliasResource'
@@ -5513,7 +5513,7 @@ data LambdaEventSourceMappingResource s = LambdaEventSourceMappingResource'
 lambdaEventSourceMappingResource
     :: TF.Attr s P.Text -- ^ @event_source_arn@ - 'P.eventSourceArn'
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
-    -> TF.Resource P.Provider (LambdaEventSourceMappingResource s)
+    -> P.Resource (LambdaEventSourceMappingResource s)
 lambdaEventSourceMappingResource _eventSourceArn _functionName =
     TF.newResource "aws_lambda_event_source_mapping" TF.validator $
         LambdaEventSourceMappingResource'
@@ -5659,7 +5659,7 @@ lambdaFunctionResource
     -> TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> TF.Attr s P.Text -- ^ @runtime@ - 'P.runtime'
-    -> TF.Resource P.Provider (LambdaFunctionResource s)
+    -> P.Resource (LambdaFunctionResource s)
 lambdaFunctionResource _functionName _handler _role _runtime =
     TF.newResource "aws_lambda_function" TF.validator $
         LambdaFunctionResource'
@@ -5890,7 +5890,7 @@ lambdaPermissionResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @function_name@ - 'P.functionName'
     -> TF.Attr s P.Text -- ^ @principal@ - 'P.principal'
-    -> TF.Resource P.Provider (LambdaPermissionResource s)
+    -> P.Resource (LambdaPermissionResource s)
 lambdaPermissionResource _action _functionName _principal =
     TF.newResource "aws_lambda_permission" TF.validator $
         LambdaPermissionResource'
@@ -6020,7 +6020,7 @@ data LaunchConfigurationResource s = LaunchConfigurationResource'
 launchConfigurationResource
     :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
     -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Resource P.Provider (LaunchConfigurationResource s)
+    -> P.Resource (LaunchConfigurationResource s)
 launchConfigurationResource _imageId _instanceType =
     TF.newResource "aws_launch_configuration" TF.validator $
         LaunchConfigurationResource'
@@ -6244,7 +6244,7 @@ data LaunchTemplateResource s = LaunchTemplateResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 launchTemplateResource
-    :: TF.Resource P.Provider (LaunchTemplateResource s)
+    :: P.Resource (LaunchTemplateResource s)
 launchTemplateResource =
     TF.newResource "aws_launch_template" TF.validator $
         LaunchTemplateResource'
@@ -6506,7 +6506,7 @@ data LbResource s = LbResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 lbResource
-    :: TF.Resource P.Provider (LbResource s)
+    :: P.Resource (LbResource s)
 lbResource =
     TF.newResource "aws_lb" TF.validator $
         LbResource'
@@ -6627,7 +6627,7 @@ lbCookieStickinessPolicyResource
     :: TF.Attr s P.Integer -- ^ @lb_port@ - 'P.lbPort'
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LbCookieStickinessPolicyResource s)
+    -> P.Resource (LbCookieStickinessPolicyResource s)
 lbCookieStickinessPolicyResource _lbPort _loadBalancer _name =
     TF.newResource "aws_lb_cookie_stickiness_policy" TF.validator $
         LbCookieStickinessPolicyResource'
@@ -6694,7 +6694,7 @@ lbListenerResource
     :: TF.Attr s [TF.Attr s (LbListenerDefaultAction s)] -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @load_balancer_arn@ - 'P.loadBalancerArn'
     -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
-    -> TF.Resource P.Provider (LbListenerResource s)
+    -> P.Resource (LbListenerResource s)
 lbListenerResource _defaultAction _loadBalancerArn _port =
     TF.newResource "aws_lb_listener" TF.validator $
         LbListenerResource'
@@ -6768,7 +6768,7 @@ data LbListenerCertificateResource s = LbListenerCertificateResource'
 lbListenerCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_arn@ - 'P.certificateArn'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
-    -> TF.Resource P.Provider (LbListenerCertificateResource s)
+    -> P.Resource (LbListenerCertificateResource s)
 lbListenerCertificateResource _certificateArn _listenerArn =
     TF.newResource "aws_lb_listener_certificate" TF.validator $
         LbListenerCertificateResource'
@@ -6815,7 +6815,7 @@ lbListenerRuleResource
     :: TF.Attr s [TF.Attr s (LbListenerRuleAction s)] -- ^ @action@ - 'P.action'
     -> TF.Attr s [TF.Attr s (LbListenerRuleCondition s)] -- ^ @condition@ - 'P.condition'
     -> TF.Attr s P.Text -- ^ @listener_arn@ - 'P.listenerArn'
-    -> TF.Resource P.Provider (LbListenerRuleResource s)
+    -> P.Resource (LbListenerRuleResource s)
 lbListenerRuleResource _action _condition _listenerArn =
     TF.newResource "aws_lb_listener_rule" TF.validator $
         LbListenerRuleResource'
@@ -6886,7 +6886,7 @@ lbSslNegotiationPolicyResource
     :: TF.Attr s P.Integer -- ^ @lb_port@ - 'P.lbPort'
     -> TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LbSslNegotiationPolicyResource s)
+    -> P.Resource (LbSslNegotiationPolicyResource s)
 lbSslNegotiationPolicyResource _lbPort _loadBalancer _name =
     TF.newResource "aws_lb_ssl_negotiation_policy" TF.validator $
         LbSslNegotiationPolicyResource'
@@ -6969,7 +6969,7 @@ lbTargetGroupResource
     :: TF.Attr s P.Integer -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (LbTargetGroupResource s)
+    -> P.Resource (LbTargetGroupResource s)
 lbTargetGroupResource _port _protocol _vpcId =
     TF.newResource "aws_lb_target_group" TF.validator $
         LbTargetGroupResource'
@@ -7082,7 +7082,7 @@ data LbTargetGroupAttachmentResource s = LbTargetGroupAttachmentResource'
 lbTargetGroupAttachmentResource
     :: TF.Attr s P.Text -- ^ @target_group_arn@ - 'P.targetGroupArn'
     -> TF.Attr s P.Text -- ^ @target_id@ - 'P.targetId'
-    -> TF.Resource P.Provider (LbTargetGroupAttachmentResource s)
+    -> P.Resource (LbTargetGroupAttachmentResource s)
 lbTargetGroupAttachmentResource _targetGroupArn _targetId =
     TF.newResource "aws_lb_target_group_attachment" TF.validator $
         LbTargetGroupAttachmentResource'
@@ -7135,7 +7135,7 @@ data LightsailDomainResource s = LightsailDomainResource'
 
 lightsailDomainResource
     :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
-    -> TF.Resource P.Provider (LightsailDomainResource s)
+    -> P.Resource (LightsailDomainResource s)
 lightsailDomainResource _domainName =
     TF.newResource "aws_lightsail_domain" TF.validator $
         LightsailDomainResource'
@@ -7188,7 +7188,7 @@ lightsailInstanceResource
     -> TF.Attr s P.Text -- ^ @blueprint_id@ - 'P.blueprintId'
     -> TF.Attr s P.Text -- ^ @bundle_id@ - 'P.bundleId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LightsailInstanceResource s)
+    -> P.Resource (LightsailInstanceResource s)
 lightsailInstanceResource _availabilityZone _blueprintId _bundleId _name =
     TF.newResource "aws_lightsail_instance" TF.validator $
         LightsailInstanceResource'
@@ -7284,7 +7284,7 @@ data LightsailKeyPairResource s = LightsailKeyPairResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 lightsailKeyPairResource
-    :: TF.Resource P.Provider (LightsailKeyPairResource s)
+    :: P.Resource (LightsailKeyPairResource s)
 lightsailKeyPairResource =
     TF.newResource "aws_lightsail_key_pair" TF.validator $
         LightsailKeyPairResource'
@@ -7344,7 +7344,7 @@ data LightsailStaticIpResource s = LightsailStaticIpResource'
 
 lightsailStaticIpResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LightsailStaticIpResource s)
+    -> P.Resource (LightsailStaticIpResource s)
 lightsailStaticIpResource _name =
     TF.newResource "aws_lightsail_static_ip" TF.validator $
         LightsailStaticIpResource'
@@ -7389,7 +7389,7 @@ data LightsailStaticIpAttachmentResource s = LightsailStaticIpAttachmentResource
 lightsailStaticIpAttachmentResource
     :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @static_ip_name@ - 'P.staticIpName'
-    -> TF.Resource P.Provider (LightsailStaticIpAttachmentResource s)
+    -> P.Resource (LightsailStaticIpAttachmentResource s)
 lightsailStaticIpAttachmentResource _instanceName _staticIpName =
     TF.newResource "aws_lightsail_static_ip_attachment" TF.validator $
         LightsailStaticIpAttachmentResource'

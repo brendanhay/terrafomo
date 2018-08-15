@@ -24,6 +24,7 @@ module Terrafomo.AWS
     , module Terrafomo.AWS.Resource01
     , module Terrafomo.AWS.DataSource02
     , module Terrafomo.AWS.Resource05
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.AWS.DataSource01

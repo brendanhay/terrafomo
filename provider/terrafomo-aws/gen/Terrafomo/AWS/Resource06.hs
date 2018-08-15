@@ -69,7 +69,7 @@ data WafregionalWebAclAssociationResource s = WafregionalWebAclAssociationResour
 wafregionalWebAclAssociationResource
     :: TF.Attr s P.Text -- ^ @resource_arn@ - 'P.resourceArn'
     -> TF.Attr s P.Text -- ^ @web_acl_id@ - 'P.webAclId'
-    -> TF.Resource P.Provider (WafregionalWebAclAssociationResource s)
+    -> P.Resource (WafregionalWebAclAssociationResource s)
 wafregionalWebAclAssociationResource _resourceArn _webAclId =
     TF.newResource "aws_wafregional_web_acl_association" TF.validator $
         WafregionalWebAclAssociationResource'
@@ -111,7 +111,7 @@ data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
 
 wafregionalXssMatchSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (WafregionalXssMatchSetResource s)
+    -> P.Resource (WafregionalXssMatchSetResource s)
 wafregionalXssMatchSetResource _name =
     TF.newResource "aws_wafregional_xss_match_set" TF.validator $
         WafregionalXssMatchSetResource'
