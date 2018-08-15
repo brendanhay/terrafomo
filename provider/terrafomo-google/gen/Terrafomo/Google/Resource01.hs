@@ -392,7 +392,7 @@ data BigqueryDatasetResource s = BigqueryDatasetResource'
 
 bigqueryDatasetResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
-    -> TF.Resource P.Provider (BigqueryDatasetResource s)
+    -> P.Resource (BigqueryDatasetResource s)
 bigqueryDatasetResource _datasetId =
     TF.newResource "google_bigquery_dataset" TF.validator $
         BigqueryDatasetResource'
@@ -493,7 +493,7 @@ data BigqueryTableResource s = BigqueryTableResource'
 bigqueryTableResource
     :: TF.Attr s P.Text -- ^ @dataset_id@ - 'P.datasetId'
     -> TF.Attr s P.Text -- ^ @table_id@ - 'P.tableId'
-    -> TF.Resource P.Provider (BigqueryTableResource s)
+    -> P.Resource (BigqueryTableResource s)
 bigqueryTableResource _datasetId _tableId =
     TF.newResource "google_bigquery_table" TF.validator $
         BigqueryTableResource'
@@ -624,7 +624,7 @@ data BigtableInstanceResource s = BigtableInstanceResource'
 bigtableInstanceResource
     :: TF.Attr s P.Text -- ^ @cluster_id@ - 'P.clusterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (BigtableInstanceResource s)
+    -> P.Resource (BigtableInstanceResource s)
 bigtableInstanceResource _clusterId _name =
     TF.newResource "google_bigtable_instance" TF.validator $
         BigtableInstanceResource'
@@ -700,7 +700,7 @@ data BigtableTableResource s = BigtableTableResource'
 bigtableTableResource
     :: TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (BigtableTableResource s)
+    -> P.Resource (BigtableTableResource s)
 bigtableTableResource _instanceName _name =
     TF.newResource "google_bigtable_table" TF.validator $
         BigtableTableResource'
@@ -767,7 +767,7 @@ data CloudbuildTriggerResource s = CloudbuildTriggerResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 cloudbuildTriggerResource
-    :: TF.Resource P.Provider (CloudbuildTriggerResource s)
+    :: P.Resource (CloudbuildTriggerResource s)
 cloudbuildTriggerResource =
     TF.newResource "google_cloudbuild_trigger" TF.validator $
         CloudbuildTriggerResource'
@@ -900,7 +900,7 @@ cloudfunctionsFunctionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_archive_bucket@ - 'P.sourceArchiveBucket'
     -> TF.Attr s P.Text -- ^ @source_archive_object@ - 'P.sourceArchiveObject'
-    -> TF.Resource P.Provider (CloudfunctionsFunctionResource s)
+    -> P.Resource (CloudfunctionsFunctionResource s)
 cloudfunctionsFunctionResource _name _sourceArchiveBucket _sourceArchiveObject =
     TF.newResource "google_cloudfunctions_function" TF.validator $
         CloudfunctionsFunctionResource'
@@ -1054,7 +1054,7 @@ data CloudiotRegistryResource s = CloudiotRegistryResource'
 
 cloudiotRegistryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (CloudiotRegistryResource s)
+    -> P.Resource (CloudiotRegistryResource s)
 cloudiotRegistryResource _name =
     TF.newResource "google_cloudiot_registry" TF.validator $
         CloudiotRegistryResource'
@@ -1156,7 +1156,7 @@ data ComputeAddressResource s = ComputeAddressResource'
 
 computeAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeAddressResource s)
+    -> P.Resource (ComputeAddressResource s)
 computeAddressResource _name =
     TF.newResource "google_compute_address" TF.validator $
         ComputeAddressResource'
@@ -1247,7 +1247,7 @@ computeAutoscalerResource
     :: TF.Attr s (ComputeAutoscalerAutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.Resource P.Provider (ComputeAutoscalerResource s)
+    -> P.Resource (ComputeAutoscalerResource s)
 computeAutoscalerResource _autoscalingPolicy _name _target =
     TF.newResource "google_compute_autoscaler" TF.validator $
         ComputeAutoscalerResource'
@@ -1326,7 +1326,7 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource'
 computeBackendBucketResource
     :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeBackendBucketResource s)
+    -> P.Resource (ComputeBackendBucketResource s)
 computeBackendBucketResource _bucketName _name =
     TF.newResource "google_compute_backend_bucket" TF.validator $
         ComputeBackendBucketResource'
@@ -1416,7 +1416,7 @@ data ComputeBackendServiceResource s = ComputeBackendServiceResource'
 computeBackendServiceResource
     :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeBackendServiceResource s)
+    -> P.Resource (ComputeBackendServiceResource s)
 computeBackendServiceResource _healthChecks _name =
     TF.newResource "google_compute_backend_service" TF.validator $
         ComputeBackendServiceResource'
@@ -1567,7 +1567,7 @@ data ComputeDiskResource s = ComputeDiskResource'
 
 computeDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeDiskResource s)
+    -> P.Resource (ComputeDiskResource s)
 computeDiskResource _name =
     TF.newResource "google_compute_disk" TF.validator $
         ComputeDiskResource'
@@ -1753,7 +1753,7 @@ data ComputeFirewallResource s = ComputeFirewallResource'
 computeFirewallResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Resource P.Provider (ComputeFirewallResource s)
+    -> P.Resource (ComputeFirewallResource s)
 computeFirewallResource _name _network =
     TF.newResource "google_compute_firewall" TF.validator $
         ComputeFirewallResource'
@@ -1936,7 +1936,7 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
 
 computeForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeForwardingRuleResource s)
+    -> P.Resource (ComputeForwardingRuleResource s)
 computeForwardingRuleResource _name =
     TF.newResource "google_compute_forwarding_rule" TF.validator $
         ComputeForwardingRuleResource'
@@ -2073,7 +2073,7 @@ data ComputeGlobalAddressResource s = ComputeGlobalAddressResource'
 
 computeGlobalAddressResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeGlobalAddressResource s)
+    -> P.Resource (ComputeGlobalAddressResource s)
 computeGlobalAddressResource _name =
     TF.newResource "google_compute_global_address" TF.validator $
         ComputeGlobalAddressResource'
@@ -2160,7 +2160,7 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
 computeGlobalForwardingRuleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.Resource P.Provider (ComputeGlobalForwardingRuleResource s)
+    -> P.Resource (ComputeGlobalForwardingRuleResource s)
 computeGlobalForwardingRuleResource _name _target =
     TF.newResource "google_compute_global_forwarding_rule" TF.validator $
         ComputeGlobalForwardingRuleResource'
@@ -2296,7 +2296,7 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
 
 computeHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeHealthCheckResource s)
+    -> P.Resource (ComputeHealthCheckResource s)
 computeHealthCheckResource _name =
     TF.newResource "google_compute_health_check" TF.validator $
         ComputeHealthCheckResource'
@@ -2458,7 +2458,7 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
 
 computeHttpHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeHttpHealthCheckResource s)
+    -> P.Resource (ComputeHttpHealthCheckResource s)
 computeHttpHealthCheckResource _name =
     TF.newResource "google_compute_http_health_check" TF.validator $
         ComputeHttpHealthCheckResource'
@@ -2579,7 +2579,7 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
 
 computeHttpsHealthCheckResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeHttpsHealthCheckResource s)
+    -> P.Resource (ComputeHttpsHealthCheckResource s)
 computeHttpsHealthCheckResource _name =
     TF.newResource "google_compute_https_health_check" TF.validator $
         ComputeHttpsHealthCheckResource'
@@ -2691,7 +2691,7 @@ data ComputeImageResource s = ComputeImageResource'
 
 computeImageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeImageResource s)
+    -> P.Resource (ComputeImageResource s)
 computeImageResource _name =
     TF.newResource "google_compute_image" TF.validator $
         ComputeImageResource'
@@ -2828,7 +2828,7 @@ computeInstanceResource
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkInterface s)] -- ^ @network_interface@ - 'P.networkInterface'
-    -> TF.Resource P.Provider (ComputeInstanceResource s)
+    -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _bootDisk _machineType _name _networkInterface =
     TF.newResource "google_compute_instance" TF.validator $
         ComputeInstanceResource'
@@ -3041,7 +3041,7 @@ data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource
 computeInstanceFromTemplateResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_instance_template@ - 'P.sourceInstanceTemplate'
-    -> TF.Resource P.Provider (ComputeInstanceFromTemplateResource s)
+    -> P.Resource (ComputeInstanceFromTemplateResource s)
 computeInstanceFromTemplateResource _name _sourceInstanceTemplate =
     TF.newResource "google_compute_instance_from_template" TF.validator $
         ComputeInstanceFromTemplateResource'
@@ -3161,7 +3161,7 @@ data ComputeInstanceGroupResource s = ComputeInstanceGroupResource'
 
 computeInstanceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeInstanceGroupResource s)
+    -> P.Resource (ComputeInstanceGroupResource s)
 computeInstanceGroupResource _name =
     TF.newResource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupResource'
@@ -3257,7 +3257,7 @@ data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource
 computeInstanceGroupManagerResource
     :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeInstanceGroupManagerResource s)
+    -> P.Resource (ComputeInstanceGroupManagerResource s)
 computeInstanceGroupManagerResource _baseInstanceName _name =
     TF.newResource "google_compute_instance_group_manager" TF.validator $
         ComputeInstanceGroupManagerResource'
@@ -3428,7 +3428,7 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
 computeInstanceTemplateResource
     :: TF.Attr s [TF.Attr s (ComputeInstanceTemplateDisk s)] -- ^ @disk@ - 'P.disk'
     -> TF.Attr s P.Text -- ^ @machine_type@ - 'P.machineType'
-    -> TF.Resource P.Provider (ComputeInstanceTemplateResource s)
+    -> P.Resource (ComputeInstanceTemplateResource s)
 computeInstanceTemplateResource _disk _machineType =
     TF.newResource "google_compute_instance_template" TF.validator $
         ComputeInstanceTemplateResource'
@@ -3604,7 +3604,7 @@ data ComputeNetworkResource s = ComputeNetworkResource'
 
 computeNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeNetworkResource s)
+    -> P.Resource (ComputeNetworkResource s)
 computeNetworkResource _name =
     TF.newResource "google_compute_network" TF.validator $
         ComputeNetworkResource'
@@ -3673,7 +3673,7 @@ computeNetworkPeeringResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
     -> TF.Attr s P.Text -- ^ @peer_network@ - 'P.peerNetwork'
-    -> TF.Resource P.Provider (ComputeNetworkPeeringResource s)
+    -> P.Resource (ComputeNetworkPeeringResource s)
 computeNetworkPeeringResource _name _network _peerNetwork =
     TF.newResource "google_compute_network_peering" TF.validator $
         ComputeNetworkPeeringResource'
@@ -3732,7 +3732,7 @@ data ComputeProjectMetadataResource s = ComputeProjectMetadataResource'
 
 computeProjectMetadataResource
     :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (ComputeProjectMetadataResource s)
+    -> P.Resource (ComputeProjectMetadataResource s)
 computeProjectMetadataResource _metadata =
     TF.newResource "google_compute_project_metadata" TF.validator $
         ComputeProjectMetadataResource'
@@ -3771,7 +3771,7 @@ data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource'
 computeProjectMetadataItemResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> TF.Resource P.Provider (ComputeProjectMetadataItemResource s)
+    -> P.Resource (ComputeProjectMetadataItemResource s)
 computeProjectMetadataItemResource _key _value =
     TF.newResource "google_compute_project_metadata_item" TF.validator $
         ComputeProjectMetadataItemResource'
@@ -3824,7 +3824,7 @@ computeRegionAutoscalerResource
     :: TF.Attr s (ComputeRegionAutoscalerAutoscalingPolicy s) -- ^ @autoscaling_policy@ - 'P.autoscalingPolicy'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
-    -> TF.Resource P.Provider (ComputeRegionAutoscalerResource s)
+    -> P.Resource (ComputeRegionAutoscalerResource s)
 computeRegionAutoscalerResource _autoscalingPolicy _name _target =
     TF.newResource "google_compute_region_autoscaler" TF.validator $
         ComputeRegionAutoscalerResource'
@@ -3906,7 +3906,7 @@ data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource
 computeRegionBackendServiceResource
     :: TF.Attr s P.Text -- ^ @health_checks@ - 'P.healthChecks'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeRegionBackendServiceResource s)
+    -> P.Resource (ComputeRegionBackendServiceResource s)
 computeRegionBackendServiceResource _healthChecks _name =
     TF.newResource "google_compute_region_backend_service" TF.validator $
         ComputeRegionBackendServiceResource'
@@ -4013,7 +4013,7 @@ data ComputeRegionDiskResource s = ComputeRegionDiskResource'
 computeRegionDiskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @replica_zones@ - 'P.replicaZones'
-    -> TF.Resource P.Provider (ComputeRegionDiskResource s)
+    -> P.Resource (ComputeRegionDiskResource s)
 computeRegionDiskResource _name _replicaZones =
     TF.newResource "google_compute_region_disk" TF.validator $
         ComputeRegionDiskResource'
@@ -4164,7 +4164,7 @@ computeRegionInstanceGroupManagerResource
     :: TF.Attr s P.Text -- ^ @base_instance_name@ - 'P.baseInstanceName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Resource P.Provider (ComputeRegionInstanceGroupManagerResource s)
+    -> P.Resource (ComputeRegionInstanceGroupManagerResource s)
 computeRegionInstanceGroupManagerResource _baseInstanceName _name _region =
     TF.newResource "google_compute_region_instance_group_manager" TF.validator $
         ComputeRegionInstanceGroupManagerResource'
@@ -4331,7 +4331,7 @@ computeRouteResource
     :: TF.Attr s P.Text -- ^ @dest_range@ - 'P.destRange'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Resource P.Provider (ComputeRouteResource s)
+    -> P.Resource (ComputeRouteResource s)
 computeRouteResource _destRange _name _network =
     TF.newResource "google_compute_route" TF.validator $
         ComputeRouteResource'
@@ -4452,7 +4452,7 @@ data ComputeRouterResource s = ComputeRouterResource'
 computeRouterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Resource P.Provider (ComputeRouterResource s)
+    -> P.Resource (ComputeRouterResource s)
 computeRouterResource _name _network =
     TF.newResource "google_compute_router" TF.validator $
         ComputeRouterResource'
@@ -4532,7 +4532,7 @@ computeRouterInterfaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
     -> TF.Attr s P.Text -- ^ @vpn_tunnel@ - 'P.vpnTunnel'
-    -> TF.Resource P.Provider (ComputeRouterInterfaceResource s)
+    -> P.Resource (ComputeRouterInterfaceResource s)
 computeRouterInterfaceResource _name _router _vpnTunnel =
     TF.newResource "google_compute_router_interface" TF.validator $
         ComputeRouterInterfaceResource'
@@ -4609,7 +4609,7 @@ computeRouterPeerResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @peer_asn@ - 'P.peerAsn'
     -> TF.Attr s P.Text -- ^ @router@ - 'P.router'
-    -> TF.Resource P.Provider (ComputeRouterPeerResource s)
+    -> P.Resource (ComputeRouterPeerResource s)
 computeRouterPeerResource _interface _name _peerAsn _router =
     TF.newResource "google_compute_router_peer" TF.validator $
         ComputeRouterPeerResource'
@@ -4688,7 +4688,7 @@ data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource'
 
 computeSecurityPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSecurityPolicyResource s)
+    -> P.Resource (ComputeSecurityPolicyResource s)
 computeSecurityPolicyResource _name =
     TF.newResource "google_compute_security_policy" TF.validator $
         ComputeSecurityPolicyResource'
@@ -4739,7 +4739,7 @@ data ComputeSharedVpcHostProjectResource s = ComputeSharedVpcHostProjectResource
 
 computeSharedVpcHostProjectResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> TF.Resource P.Provider (ComputeSharedVpcHostProjectResource s)
+    -> P.Resource (ComputeSharedVpcHostProjectResource s)
 computeSharedVpcHostProjectResource _project =
     TF.newResource "google_compute_shared_vpc_host_project" TF.validator $
         ComputeSharedVpcHostProjectResource'
@@ -4775,7 +4775,7 @@ data ComputeSharedVpcServiceProjectResource s = ComputeSharedVpcServiceProjectRe
 computeSharedVpcServiceProjectResource
     :: TF.Attr s P.Text -- ^ @host_project@ - 'P.hostProject'
     -> TF.Attr s P.Text -- ^ @service_project@ - 'P.serviceProject'
-    -> TF.Resource P.Provider (ComputeSharedVpcServiceProjectResource s)
+    -> P.Resource (ComputeSharedVpcServiceProjectResource s)
 computeSharedVpcServiceProjectResource _hostProject _serviceProject =
     TF.newResource "google_compute_shared_vpc_service_project" TF.validator $
         ComputeSharedVpcServiceProjectResource'
@@ -4827,7 +4827,7 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
 computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_disk@ - 'P.sourceDisk'
-    -> TF.Resource P.Provider (ComputeSnapshotResource s)
+    -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _name _sourceDisk =
     TF.newResource "google_compute_snapshot" TF.validator $
         ComputeSnapshotResource'
@@ -4915,7 +4915,7 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource'
 computeSslCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate@ - 'P.certificate'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
-    -> TF.Resource P.Provider (ComputeSslCertificateResource s)
+    -> P.Resource (ComputeSslCertificateResource s)
 computeSslCertificateResource _certificate _privateKey =
     TF.newResource "google_compute_ssl_certificate" TF.validator $
         ComputeSslCertificateResource'
@@ -4988,7 +4988,7 @@ data ComputeSslPolicyResource s = ComputeSslPolicyResource'
 
 computeSslPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSslPolicyResource s)
+    -> P.Resource (ComputeSslPolicyResource s)
 computeSslPolicyResource _name =
     TF.newResource "google_compute_ssl_policy" TF.validator $
         ComputeSslPolicyResource'
@@ -5080,7 +5080,7 @@ computeSubnetworkResource
     :: TF.Attr s P.Text -- ^ @ip_cidr_range@ - 'P.ipCidrRange'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Resource P.Provider (ComputeSubnetworkResource s)
+    -> P.Resource (ComputeSubnetworkResource s)
 computeSubnetworkResource _ipCidrRange _name _network =
     TF.newResource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkResource'
@@ -5176,7 +5176,7 @@ computeSubnetworkIamBindingResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
-    -> TF.Resource P.Provider (ComputeSubnetworkIamBindingResource s)
+    -> P.Resource (ComputeSubnetworkIamBindingResource s)
 computeSubnetworkIamBindingResource _members _role _subnetwork =
     TF.newResource "google_compute_subnetwork_iam_binding" TF.validator $
         ComputeSubnetworkIamBindingResource'
@@ -5239,7 +5239,7 @@ computeSubnetworkIamMemberResource
     :: TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
-    -> TF.Resource P.Provider (ComputeSubnetworkIamMemberResource s)
+    -> P.Resource (ComputeSubnetworkIamMemberResource s)
 computeSubnetworkIamMemberResource _member _role _subnetwork =
     TF.newResource "google_compute_subnetwork_iam_member" TF.validator $
         ComputeSubnetworkIamMemberResource'
@@ -5298,7 +5298,7 @@ data ComputeSubnetworkIamPolicyResource s = ComputeSubnetworkIamPolicyResource'
 computeSubnetworkIamPolicyResource
     :: TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
     -> TF.Attr s P.Text -- ^ @subnetwork@ - 'P.subnetwork'
-    -> TF.Resource P.Provider (ComputeSubnetworkIamPolicyResource s)
+    -> P.Resource (ComputeSubnetworkIamPolicyResource s)
 computeSubnetworkIamPolicyResource _policyData _subnetwork =
     TF.newResource "google_compute_subnetwork_iam_policy" TF.validator $
         ComputeSubnetworkIamPolicyResource'
@@ -5353,7 +5353,7 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
 computeTargetHttpProxyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
-    -> TF.Resource P.Provider (ComputeTargetHttpProxyResource s)
+    -> P.Resource (ComputeTargetHttpProxyResource s)
 computeTargetHttpProxyResource _name _urlMap =
     TF.newResource "google_compute_target_http_proxy" TF.validator $
         ComputeTargetHttpProxyResource'
@@ -5428,7 +5428,7 @@ computeTargetHttpsProxyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @ssl_certificates@ - 'P.sslCertificates'
     -> TF.Attr s P.Text -- ^ @url_map@ - 'P.urlMap'
-    -> TF.Resource P.Provider (ComputeTargetHttpsProxyResource s)
+    -> P.Resource (ComputeTargetHttpsProxyResource s)
 computeTargetHttpsProxyResource _name _sslCertificates _urlMap =
     TF.newResource "google_compute_target_https_proxy" TF.validator $
         ComputeTargetHttpsProxyResource'
@@ -5522,7 +5522,7 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource'
 
 computeTargetPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeTargetPoolResource s)
+    -> P.Resource (ComputeTargetPoolResource s)
 computeTargetPoolResource _name =
     TF.newResource "google_compute_target_pool" TF.validator $
         ComputeTargetPoolResource'
@@ -5618,7 +5618,7 @@ computeTargetSslProxyResource
     :: TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @ssl_certificates@ - 'P.sslCertificates'
-    -> TF.Resource P.Provider (ComputeTargetSslProxyResource s)
+    -> P.Resource (ComputeTargetSslProxyResource s)
 computeTargetSslProxyResource _backendService _name _sslCertificates =
     TF.newResource "google_compute_target_ssl_proxy" TF.validator $
         ComputeTargetSslProxyResource'
@@ -5707,7 +5707,7 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
 computeTargetTcpProxyResource
     :: TF.Attr s P.Text -- ^ @backend_service@ - 'P.backendService'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeTargetTcpProxyResource s)
+    -> P.Resource (ComputeTargetTcpProxyResource s)
 computeTargetTcpProxyResource _backendService _name =
     TF.newResource "google_compute_target_tcp_proxy" TF.validator $
         ComputeTargetTcpProxyResource'
@@ -5788,7 +5788,7 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
 computeUrlMapResource
     :: TF.Attr s P.Text -- ^ @default_service@ - 'P.defaultService'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeUrlMapResource s)
+    -> P.Resource (ComputeUrlMapResource s)
 computeUrlMapResource _defaultService _name =
     TF.newResource "google_compute_url_map" TF.validator $
         ComputeUrlMapResource'
@@ -5886,7 +5886,7 @@ data ComputeVpnGatewayResource s = ComputeVpnGatewayResource'
 computeVpnGatewayResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network@ - 'P.network'
-    -> TF.Resource P.Provider (ComputeVpnGatewayResource s)
+    -> P.Resource (ComputeVpnGatewayResource s)
 computeVpnGatewayResource _name _network =
     TF.newResource "google_compute_vpn_gateway" TF.validator $
         ComputeVpnGatewayResource'
@@ -5968,7 +5968,7 @@ computeVpnTunnelResource
     -> TF.Attr s P.Text -- ^ @peer_ip@ - 'P.peerIp'
     -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
     -> TF.Attr s P.Text -- ^ @target_vpn_gateway@ - 'P.targetVpnGateway'
-    -> TF.Resource P.Provider (ComputeVpnTunnelResource s)
+    -> P.Resource (ComputeVpnTunnelResource s)
 computeVpnTunnelResource _name _peerIp _sharedSecret _targetVpnGateway =
     TF.newResource "google_compute_vpn_tunnel" TF.validator $
         ComputeVpnTunnelResource'
@@ -6118,7 +6118,7 @@ data ContainerClusterResource s = ContainerClusterResource'
 
 containerClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ContainerClusterResource s)
+    -> P.Resource (ContainerClusterResource s)
 containerClusterResource _name =
     TF.newResource "google_container_cluster" TF.validator $
         ContainerClusterResource'
@@ -6321,7 +6321,7 @@ data ContainerNodePoolResource s = ContainerNodePoolResource'
 
 containerNodePoolResource
     :: TF.Attr s P.Text -- ^ @cluster@ - 'P.cluster'
-    -> TF.Resource P.Provider (ContainerNodePoolResource s)
+    -> P.Resource (ContainerNodePoolResource s)
 containerNodePoolResource _cluster =
     TF.newResource "google_container_node_pool" TF.validator $
         ContainerNodePoolResource'
@@ -6421,7 +6421,7 @@ dataflowJobResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @temp_gcs_location@ - 'P.tempGcsLocation'
     -> TF.Attr s P.Text -- ^ @template_gcs_path@ - 'P.templateGcsPath'
-    -> TF.Resource P.Provider (DataflowJobResource s)
+    -> P.Resource (DataflowJobResource s)
 dataflowJobResource _name _tempGcsLocation _templateGcsPath =
     TF.newResource "google_dataflow_job" TF.validator $
         DataflowJobResource'
@@ -6508,7 +6508,7 @@ data DataprocClusterResource s = DataprocClusterResource'
 
 dataprocClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DataprocClusterResource s)
+    -> P.Resource (DataprocClusterResource s)
 dataprocClusterResource _name =
     TF.newResource "google_dataproc_cluster" TF.validator $
         DataprocClusterResource'
@@ -6630,7 +6630,7 @@ data DataprocJobResource s = DataprocJobResource'
 
 dataprocJobResource
     :: TF.Attr s (DataprocJobPlacement s) -- ^ @placement@ - 'P.placement'
-    -> TF.Resource P.Provider (DataprocJobResource s)
+    -> P.Resource (DataprocJobResource s)
 dataprocJobResource _placement =
     TF.newResource "google_dataproc_job" TF.validator $
         DataprocJobResource'
@@ -6817,7 +6817,7 @@ data DnsManagedZoneResource s = DnsManagedZoneResource'
 dnsManagedZoneResource
     :: TF.Attr s P.Text -- ^ @dns_name@ - 'P.dnsName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DnsManagedZoneResource s)
+    -> P.Resource (DnsManagedZoneResource s)
 dnsManagedZoneResource _dnsName _name =
     TF.newResource "google_dns_managed_zone" TF.validator $
         DnsManagedZoneResource'
@@ -6885,7 +6885,7 @@ dnsRecordSetResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @rrdatas@ - 'P.rrdatas'
     -> TF.Attr s P.Integer -- ^ @ttl@ - 'P.ttl'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (DnsRecordSetResource s)
+    -> P.Resource (DnsRecordSetResource s)
 dnsRecordSetResource _managedZone _name _rrdatas _ttl _type' =
     TF.newResource "google_dns_record_set" TF.validator $
         DnsRecordSetResource'
@@ -6967,7 +6967,7 @@ data EndpointsServiceResource s = EndpointsServiceResource'
 
 endpointsServiceResource
     :: TF.Attr s P.Text -- ^ @service_name@ - 'P.serviceName'
-    -> TF.Resource P.Provider (EndpointsServiceResource s)
+    -> P.Resource (EndpointsServiceResource s)
 endpointsServiceResource _serviceName =
     TF.newResource "google_endpoints_service" TF.validator $
         EndpointsServiceResource'
@@ -7055,7 +7055,7 @@ data FolderResource s = FolderResource'
 folderResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
-    -> TF.Resource P.Provider (FolderResource s)
+    -> P.Resource (FolderResource s)
 folderResource _displayName _parent =
     TF.newResource "google_folder" TF.validator $
         FolderResource'
@@ -7111,7 +7111,7 @@ folderIamBindingResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (FolderIamBindingResource s)
+    -> P.Resource (FolderIamBindingResource s)
 folderIamBindingResource _folder _members _role =
     TF.newResource "google_folder_iam_binding" TF.validator $
         FolderIamBindingResource'
@@ -7168,7 +7168,7 @@ folderIamMemberResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (FolderIamMemberResource s)
+    -> P.Resource (FolderIamMemberResource s)
 folderIamMemberResource _folder _member _role =
     TF.newResource "google_folder_iam_member" TF.validator $
         FolderIamMemberResource'
@@ -7221,7 +7221,7 @@ data FolderIamPolicyResource s = FolderIamPolicyResource'
 folderIamPolicyResource
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Resource P.Provider (FolderIamPolicyResource s)
+    -> P.Resource (FolderIamPolicyResource s)
 folderIamPolicyResource _folder _policyData =
     TF.newResource "google_folder_iam_policy" TF.validator $
         FolderIamPolicyResource'
@@ -7288,7 +7288,7 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
 folderOrganizationPolicyResource
     :: TF.Attr s P.Text -- ^ @constraint@ - 'P.constraint'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.Resource P.Provider (FolderOrganizationPolicyResource s)
+    -> P.Resource (FolderOrganizationPolicyResource s)
 folderOrganizationPolicyResource _constraint _folder =
     TF.newResource "google_folder_organization_policy" TF.validator $
         FolderOrganizationPolicyResource'
@@ -7392,7 +7392,7 @@ data KmsCryptoKeyResource s = KmsCryptoKeyResource'
 kmsCryptoKeyResource
     :: TF.Attr s P.Text -- ^ @key_ring@ - 'P.keyRing'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (KmsCryptoKeyResource s)
+    -> P.Resource (KmsCryptoKeyResource s)
 kmsCryptoKeyResource _keyRing _name =
     TF.newResource "google_kms_crypto_key" TF.validator $
         KmsCryptoKeyResource'
@@ -7446,7 +7446,7 @@ kmsCryptoKeyIamBindingResource
     :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (KmsCryptoKeyIamBindingResource s)
+    -> P.Resource (KmsCryptoKeyIamBindingResource s)
 kmsCryptoKeyIamBindingResource _cryptoKeyId _members _role =
     TF.newResource "google_kms_crypto_key_iam_binding" TF.validator $
         KmsCryptoKeyIamBindingResource'
@@ -7503,7 +7503,7 @@ kmsCryptoKeyIamMemberResource
     :: TF.Attr s P.Text -- ^ @crypto_key_id@ - 'P.cryptoKeyId'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (KmsCryptoKeyIamMemberResource s)
+    -> P.Resource (KmsCryptoKeyIamMemberResource s)
 kmsCryptoKeyIamMemberResource _cryptoKeyId _member _role =
     TF.newResource "google_kms_crypto_key_iam_member" TF.validator $
         KmsCryptoKeyIamMemberResource'
@@ -7556,7 +7556,7 @@ data KmsKeyRingResource s = KmsKeyRingResource'
 kmsKeyRingResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (KmsKeyRingResource s)
+    -> P.Resource (KmsKeyRingResource s)
 kmsKeyRingResource _location _name =
     TF.newResource "google_kms_key_ring" TF.validator $
         KmsKeyRingResource'
@@ -7606,7 +7606,7 @@ kmsKeyRingIamBindingResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @members@ - 'P.members'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (KmsKeyRingIamBindingResource s)
+    -> P.Resource (KmsKeyRingIamBindingResource s)
 kmsKeyRingIamBindingResource _keyRingId _members _role =
     TF.newResource "google_kms_key_ring_iam_binding" TF.validator $
         KmsKeyRingIamBindingResource'
@@ -7663,7 +7663,7 @@ kmsKeyRingIamMemberResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> TF.Attr s P.Text -- ^ @member@ - 'P.member'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (KmsKeyRingIamMemberResource s)
+    -> P.Resource (KmsKeyRingIamMemberResource s)
 kmsKeyRingIamMemberResource _keyRingId _member _role =
     TF.newResource "google_kms_key_ring_iam_member" TF.validator $
         KmsKeyRingIamMemberResource'
@@ -7716,7 +7716,7 @@ data KmsKeyRingIamPolicyResource s = KmsKeyRingIamPolicyResource'
 kmsKeyRingIamPolicyResource
     :: TF.Attr s P.Text -- ^ @key_ring_id@ - 'P.keyRingId'
     -> TF.Attr s P.Text -- ^ @policy_data@ - 'P.policyData'
-    -> TF.Resource P.Provider (KmsKeyRingIamPolicyResource s)
+    -> P.Resource (KmsKeyRingIamPolicyResource s)
 kmsKeyRingIamPolicyResource _keyRingId _policyData =
     TF.newResource "google_kms_key_ring_iam_policy" TF.validator $
         KmsKeyRingIamPolicyResource'
@@ -7772,7 +7772,7 @@ loggingBillingAccountExclusionResource
     :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
     -> TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LoggingBillingAccountExclusionResource s)
+    -> P.Resource (LoggingBillingAccountExclusionResource s)
 loggingBillingAccountExclusionResource _billingAccount _filter _name =
     TF.newResource "google_logging_billing_account_exclusion" TF.validator $
         LoggingBillingAccountExclusionResource'
@@ -7843,7 +7843,7 @@ loggingBillingAccountSinkResource
     :: TF.Attr s P.Text -- ^ @billing_account@ - 'P.billingAccount'
     -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LoggingBillingAccountSinkResource s)
+    -> P.Resource (LoggingBillingAccountSinkResource s)
 loggingBillingAccountSinkResource _billingAccount _destination _name =
     TF.newResource "google_logging_billing_account_sink" TF.validator $
         LoggingBillingAccountSinkResource'
@@ -7913,7 +7913,7 @@ loggingFolderExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LoggingFolderExclusionResource s)
+    -> P.Resource (LoggingFolderExclusionResource s)
 loggingFolderExclusionResource _filter _folder _name =
     TF.newResource "google_logging_folder_exclusion" TF.validator $
         LoggingFolderExclusionResource'
@@ -7987,7 +7987,7 @@ loggingFolderSinkResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LoggingFolderSinkResource s)
+    -> P.Resource (LoggingFolderSinkResource s)
 loggingFolderSinkResource _destination _folder _name =
     TF.newResource "google_logging_folder_sink" TF.validator $
         LoggingFolderSinkResource'
@@ -8064,7 +8064,7 @@ loggingOrganizationExclusionResource
     :: TF.Attr s P.Text -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @org_id@ - 'P.orgId'
-    -> TF.Resource P.Provider (LoggingOrganizationExclusionResource s)
+    -> P.Resource (LoggingOrganizationExclusionResource s)
 loggingOrganizationExclusionResource _filter _name _orgId =
     TF.newResource "google_logging_organization_exclusion" TF.validator $
         LoggingOrganizationExclusionResource'

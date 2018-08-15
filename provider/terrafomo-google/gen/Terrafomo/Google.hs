@@ -19,6 +19,7 @@ module Terrafomo.Google
     , module Terrafomo.Google.Resource02
     , module Terrafomo.Google.Provider
     , module Terrafomo.Google.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Google.DataSource

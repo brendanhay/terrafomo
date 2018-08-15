@@ -197,7 +197,7 @@ data ActiveFolderData s = ActiveFolderData'
 activeFolderData
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
-    -> TF.DataSource P.Provider (ActiveFolderData s)
+    -> P.DataSource (ActiveFolderData s)
 activeFolderData _displayName _parent =
     TF.newDataSource "google_active_folder" TF.validator $
         ActiveFolderData'
@@ -224,6 +224,9 @@ instance P.HasParent (ActiveFolderData s) (TF.Attr s P.Text) where
         P.lens (_parent :: ActiveFolderData s -> TF.Attr s P.Text)
                (\s a -> s { _parent = a } :: ActiveFolderData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ActiveFolderData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ActiveFolderData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -238,7 +241,7 @@ data BillingAccountData s = BillingAccountData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 billingAccountData
-    :: TF.DataSource P.Provider (BillingAccountData s)
+    :: P.DataSource (BillingAccountData s)
 billingAccountData =
     TF.newDataSource "google_billing_account" TF.validator $
         BillingAccountData'
@@ -257,6 +260,9 @@ instance P.HasBillingAccount (BillingAccountData s) (TF.Attr s P.Text) where
     billingAccount =
         P.lens (_billingAccount :: BillingAccountData s -> TF.Attr s P.Text)
                (\s a -> s { _billingAccount = a } :: BillingAccountData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
@@ -278,7 +284,7 @@ data ClientConfigData s = ClientConfigData'
     deriving (P.Show, P.Eq, P.Generic)
 
 clientConfigData
-    :: TF.DataSource P.Provider (ClientConfigData s)
+    :: P.DataSource (ClientConfigData s)
 clientConfigData =
     TF.newDataSource "google_client_config" TF.validator $
         ClientConfigData'
@@ -288,6 +294,9 @@ instance TF.IsObject (ClientConfigData s) where
 
 instance TF.IsValid (ClientConfigData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessToken (TF.Ref s' (ClientConfigData s)) (TF.Attr s P.Text) where
     computedAccessToken x = TF.compute (TF.refKey x) "access_token"
@@ -316,7 +325,7 @@ data CloudfunctionsFunctionData s = CloudfunctionsFunctionData'
 
 cloudfunctionsFunctionData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (CloudfunctionsFunctionData s)
+    -> P.DataSource (CloudfunctionsFunctionData s)
 cloudfunctionsFunctionData _name =
     TF.newDataSource "google_cloudfunctions_function" TF.validator $
         CloudfunctionsFunctionData'
@@ -349,6 +358,9 @@ instance P.HasRegion (CloudfunctionsFunctionData s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: CloudfunctionsFunctionData s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: CloudfunctionsFunctionData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAvailableMemoryMb (TF.Ref s' (CloudfunctionsFunctionData s)) (TF.Attr s P.Integer) where
     computedAvailableMemoryMb x = TF.compute (TF.refKey x) "available_memory_mb"
@@ -398,7 +410,7 @@ data ComputeAddressData s = ComputeAddressData'
 
 computeAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeAddressData s)
+    -> P.DataSource (ComputeAddressData s)
 computeAddressData _name =
     TF.newDataSource "google_compute_address" TF.validator $
         ComputeAddressData'
@@ -417,6 +429,9 @@ instance P.HasName (ComputeAddressData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeAddressData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeAddressData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -448,7 +463,7 @@ data ComputeBackendServiceData s = ComputeBackendServiceData'
 
 computeBackendServiceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeBackendServiceData s)
+    -> P.DataSource (ComputeBackendServiceData s)
 computeBackendServiceData _name =
     TF.newDataSource "google_compute_backend_service" TF.validator $
         ComputeBackendServiceData'
@@ -474,6 +489,9 @@ instance P.HasProject (ComputeBackendServiceData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ComputeBackendServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ComputeBackendServiceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceBackend s)]) where
     computedBackend x = TF.compute (TF.refKey x) "backend"
@@ -531,7 +549,7 @@ data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
 computeDefaultServiceAccountData
-    :: TF.DataSource P.Provider (ComputeDefaultServiceAccountData s)
+    :: P.DataSource (ComputeDefaultServiceAccountData s)
 computeDefaultServiceAccountData =
     TF.newDataSource "google_compute_default_service_account" TF.validator $
         ComputeDefaultServiceAccountData'
@@ -541,6 +559,9 @@ instance TF.IsObject (ComputeDefaultServiceAccountData s) where
 
 instance TF.IsValid (ComputeDefaultServiceAccountData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
     computedEmail x = TF.compute (TF.refKey x) "email"
@@ -560,7 +581,7 @@ data ComputeForwardingRuleData s = ComputeForwardingRuleData'
 
 computeForwardingRuleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeForwardingRuleData s)
+    -> P.DataSource (ComputeForwardingRuleData s)
 computeForwardingRuleData _name =
     TF.newDataSource "google_compute_forwarding_rule" TF.validator $
         ComputeForwardingRuleData'
@@ -579,6 +600,9 @@ instance P.HasName (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeForwardingRuleData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBackendService (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
     computedBackendService x = TF.compute (TF.refKey x) "backend_service"
@@ -631,7 +655,7 @@ data ComputeGlobalAddressData s = ComputeGlobalAddressData'
 
 computeGlobalAddressData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeGlobalAddressData s)
+    -> P.DataSource (ComputeGlobalAddressData s)
 computeGlobalAddressData _name =
     TF.newDataSource "google_compute_global_address" TF.validator $
         ComputeGlobalAddressData'
@@ -650,6 +674,9 @@ instance P.HasName (ComputeGlobalAddressData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -671,7 +698,7 @@ data ComputeImageData s = ComputeImageData'
     deriving (P.Show, P.Eq, P.Generic)
 
 computeImageData
-    :: TF.DataSource P.Provider (ComputeImageData s)
+    :: P.DataSource (ComputeImageData s)
 computeImageData =
     TF.newDataSource "google_compute_image" TF.validator $
         ComputeImageData'
@@ -681,6 +708,9 @@ instance TF.IsObject (ComputeImageData s) where
 
 instance TF.IsValid (ComputeImageData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArchiveSizeBytes (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Integer) where
     computedArchiveSizeBytes x = TF.compute (TF.refKey x) "archive_size_bytes"
@@ -747,7 +777,7 @@ data ComputeInstanceGroupData s = ComputeInstanceGroupData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeInstanceGroupData
-    :: TF.DataSource P.Provider (ComputeInstanceGroupData s)
+    :: P.DataSource (ComputeInstanceGroupData s)
 computeInstanceGroupData =
     TF.newDataSource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupData'
@@ -766,6 +796,9 @@ instance P.HasName (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -799,7 +832,7 @@ data ComputeLbIpRangesData s = ComputeLbIpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
 computeLbIpRangesData
-    :: TF.DataSource P.Provider (ComputeLbIpRangesData s)
+    :: P.DataSource (ComputeLbIpRangesData s)
 computeLbIpRangesData =
     TF.newDataSource "google_compute_lb_ip_ranges" TF.validator $
         ComputeLbIpRangesData'
@@ -809,6 +842,9 @@ instance TF.IsObject (ComputeLbIpRangesData s) where
 
 instance TF.IsValid (ComputeLbIpRangesData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedHttpSslTcpInternal (TF.Ref s' (ComputeLbIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedHttpSslTcpInternal x = TF.compute (TF.refKey x) "http_ssl_tcp_internal"
@@ -831,7 +867,7 @@ data ComputeNetworkData s = ComputeNetworkData'
 
 computeNetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeNetworkData s)
+    -> P.DataSource (ComputeNetworkData s)
 computeNetworkData _name =
     TF.newDataSource "google_compute_network" TF.validator $
         ComputeNetworkData'
@@ -858,6 +894,9 @@ instance P.HasProject (ComputeNetworkData s) (TF.Attr s P.Text) where
         P.lens (_project :: ComputeNetworkData s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ComputeNetworkData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeNetworkData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
@@ -878,7 +917,7 @@ data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
     deriving (P.Show, P.Eq, P.Generic)
 
 computeRegionInstanceGroupData
-    :: TF.DataSource P.Provider (ComputeRegionInstanceGroupData s)
+    :: P.DataSource (ComputeRegionInstanceGroupData s)
 computeRegionInstanceGroupData =
     TF.newDataSource "google_compute_region_instance_group" TF.validator $
         ComputeRegionInstanceGroupData'
@@ -888,6 +927,9 @@ instance TF.IsObject (ComputeRegionInstanceGroupData s) where
 
 instance TF.IsValid (ComputeRegionInstanceGroupData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupInstances s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
@@ -918,7 +960,7 @@ data ComputeRegionsData s = ComputeRegionsData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeRegionsData
-    :: TF.DataSource P.Provider (ComputeRegionsData s)
+    :: P.DataSource (ComputeRegionsData s)
 computeRegionsData =
     TF.newDataSource "google_compute_regions" TF.validator $
         ComputeRegionsData'
@@ -937,6 +979,9 @@ instance P.HasStatus (ComputeRegionsData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: ComputeRegionsData s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: ComputeRegionsData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeRegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "names"
@@ -959,7 +1004,7 @@ data ComputeSslPolicyData s = ComputeSslPolicyData'
 
 computeSslPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeSslPolicyData s)
+    -> P.DataSource (ComputeSslPolicyData s)
 computeSslPolicyData _name =
     TF.newDataSource "google_compute_ssl_policy" TF.validator $
         ComputeSslPolicyData'
@@ -985,6 +1030,9 @@ instance P.HasProject (ComputeSslPolicyData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ComputeSslPolicyData s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ComputeSslPolicyData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationTimestamp (TF.Ref s' (ComputeSslPolicyData s)) (TF.Attr s P.Text) where
     computedCreationTimestamp x = TF.compute (TF.refKey x) "creation_timestamp"
@@ -1022,7 +1070,7 @@ data ComputeSubnetworkData s = ComputeSubnetworkData'
 
 computeSubnetworkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeSubnetworkData s)
+    -> P.DataSource (ComputeSubnetworkData s)
 computeSubnetworkData _name =
     TF.newDataSource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkData'
@@ -1041,6 +1089,9 @@ instance P.HasName (ComputeSubnetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeSubnetworkData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeSubnetworkData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -1081,7 +1132,7 @@ data ComputeVpnGatewayData s = ComputeVpnGatewayData'
 
 computeVpnGatewayData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeVpnGatewayData s)
+    -> P.DataSource (ComputeVpnGatewayData s)
 computeVpnGatewayData _name =
     TF.newDataSource "google_compute_vpn_gateway" TF.validator $
         ComputeVpnGatewayData'
@@ -1100,6 +1151,9 @@ instance P.HasName (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeVpnGatewayData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -1130,7 +1184,7 @@ data ComputeZonesData s = ComputeZonesData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 computeZonesData
-    :: TF.DataSource P.Provider (ComputeZonesData s)
+    :: P.DataSource (ComputeZonesData s)
 computeZonesData =
     TF.newDataSource "google_compute_zones" TF.validator $
         ComputeZonesData'
@@ -1156,6 +1210,9 @@ instance P.HasStatus (ComputeZonesData s) (TF.Attr s P.Text) where
     status =
         P.lens (_status :: ComputeZonesData s -> TF.Attr s P.Text)
                (\s a -> s { _status = a } :: ComputeZonesData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeZonesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedNames (TF.Ref s' (ComputeZonesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedNames x = TF.compute (TF.refKey x) "names"
@@ -1184,7 +1241,7 @@ data ContainerClusterData s = ContainerClusterData'
 
 containerClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ContainerClusterData s)
+    -> P.DataSource (ContainerClusterData s)
 containerClusterData _name =
     TF.newDataSource "google_container_cluster" TF.validator $
         ContainerClusterData'
@@ -1224,6 +1281,9 @@ instance P.HasZone (ContainerClusterData s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: ContainerClusterData s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: ContainerClusterData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
@@ -1323,7 +1383,7 @@ data ContainerEngineVersionsData s = ContainerEngineVersionsData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 containerEngineVersionsData
-    :: TF.DataSource P.Provider (ContainerEngineVersionsData s)
+    :: P.DataSource (ContainerEngineVersionsData s)
 containerEngineVersionsData =
     TF.newDataSource "google_container_engine_versions" TF.validator $
         ContainerEngineVersionsData'
@@ -1349,6 +1409,9 @@ instance P.HasZone (ContainerEngineVersionsData s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: ContainerEngineVersionsData s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: ContainerEngineVersionsData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDefaultClusterVersion (TF.Ref s' (ContainerEngineVersionsData s)) (TF.Attr s P.Text) where
     computedDefaultClusterVersion x = TF.compute (TF.refKey x) "default_cluster_version"
@@ -1386,7 +1449,7 @@ data ContainerRegistryImageData s = ContainerRegistryImageData'
 
 containerRegistryImageData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ContainerRegistryImageData s)
+    -> P.DataSource (ContainerRegistryImageData s)
 containerRegistryImageData _name =
     TF.newDataSource "google_container_registry_image" TF.validator $
         ContainerRegistryImageData'
@@ -1427,6 +1490,9 @@ instance P.HasTag (ContainerRegistryImageData s) (TF.Attr s P.Text) where
         P.lens (_tag :: ContainerRegistryImageData s -> TF.Attr s P.Text)
                (\s a -> s { _tag = a } :: ContainerRegistryImageData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedImageUrl (TF.Ref s' (ContainerRegistryImageData s)) (TF.Attr s P.Text) where
     computedImageUrl x = TF.compute (TF.refKey x) "image_url"
 
@@ -1444,7 +1510,7 @@ data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 containerRegistryRepositoryData
-    :: TF.DataSource P.Provider (ContainerRegistryRepositoryData s)
+    :: P.DataSource (ContainerRegistryRepositoryData s)
 containerRegistryRepositoryData =
     TF.newDataSource "google_container_registry_repository" TF.validator $
         ContainerRegistryRepositoryData'
@@ -1463,6 +1529,9 @@ instance P.HasRegion (ContainerRegistryRepositoryData s) (TF.Attr s P.Text) wher
     region =
         P.lens (_region :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ContainerRegistryRepositoryData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerRegistryRepositoryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerRegistryRepositoryData s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
@@ -1485,7 +1554,7 @@ data DnsManagedZoneData s = DnsManagedZoneData'
 
 dnsManagedZoneData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (DnsManagedZoneData s)
+    -> P.DataSource (DnsManagedZoneData s)
 dnsManagedZoneData _name =
     TF.newDataSource "google_dns_managed_zone" TF.validator $
         DnsManagedZoneData'
@@ -1512,6 +1581,9 @@ instance P.HasProject (DnsManagedZoneData s) (TF.Attr s P.Text) where
         P.lens (_project :: DnsManagedZoneData s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: DnsManagedZoneData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DnsManagedZoneData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
@@ -1536,7 +1608,7 @@ data FolderData s = FolderData'
 
 folderData
     :: TF.Attr s P.Text -- ^ @folder@ - 'P.folder'
-    -> TF.DataSource P.Provider (FolderData s)
+    -> P.DataSource (FolderData s)
 folderData _folder =
     TF.newDataSource "google_folder" TF.validator $
         FolderData'
@@ -1562,6 +1634,9 @@ instance P.HasLookupOrganization (FolderData s) (TF.Attr s P.Bool) where
     lookupOrganization =
         P.lens (_lookupOrganization :: FolderData s -> TF.Attr s P.Bool)
                (\s a -> s { _lookupOrganization = a } :: FolderData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (FolderData s)) (TF.Attr s P.Text) where
     computedCreateTime x = TF.compute (TF.refKey x) "create_time"
@@ -1593,7 +1668,7 @@ data IamPolicyData s = IamPolicyData'
 
 iamPolicyData
     :: TF.Attr s [TF.Attr s (IamPolicyBinding s)] -- ^ @binding@ - 'P.binding'
-    -> TF.DataSource P.Provider (IamPolicyData s)
+    -> P.DataSource (IamPolicyData s)
 iamPolicyData _binding =
     TF.newDataSource "google_iam_policy" TF.validator $
         IamPolicyData'
@@ -1617,6 +1692,9 @@ instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (IamPolicyBinding 
         P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (IamPolicyBinding s)])
                (\s a -> s { _binding = a } :: IamPolicyData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedPolicyData (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
     computedPolicyData x = TF.compute (TF.refKey x) "policy_data"
 
@@ -1636,7 +1714,7 @@ data KmsSecretData s = KmsSecretData'
 kmsSecretData
     :: TF.Attr s P.Text -- ^ @ciphertext@ - 'P.ciphertext'
     -> TF.Attr s P.Text -- ^ @crypto_key@ - 'P.cryptoKey'
-    -> TF.DataSource P.Provider (KmsSecretData s)
+    -> P.DataSource (KmsSecretData s)
 kmsSecretData _ciphertext _cryptoKey =
     TF.newDataSource "google_kms_secret" TF.validator $
         KmsSecretData'
@@ -1663,6 +1741,9 @@ instance P.HasCryptoKey (KmsSecretData s) (TF.Attr s P.Text) where
         P.lens (_cryptoKey :: KmsSecretData s -> TF.Attr s P.Text)
                (\s a -> s { _cryptoKey = a } :: KmsSecretData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsSecretData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedPlaintext (TF.Ref s' (KmsSecretData s)) (TF.Attr s P.Text) where
     computedPlaintext x = TF.compute (TF.refKey x) "plaintext"
 
@@ -1674,7 +1755,7 @@ data NetblockIpRangesData s = NetblockIpRangesData'
     deriving (P.Show, P.Eq, P.Generic)
 
 netblockIpRangesData
-    :: TF.DataSource P.Provider (NetblockIpRangesData s)
+    :: P.DataSource (NetblockIpRangesData s)
 netblockIpRangesData =
     TF.newDataSource "google_netblock_ip_ranges" TF.validator $
         NetblockIpRangesData'
@@ -1684,6 +1765,9 @@ instance TF.IsObject (NetblockIpRangesData s) where
 
 instance TF.IsValid (NetblockIpRangesData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (NetblockIpRangesData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
@@ -1705,7 +1789,7 @@ data OrganizationData s = OrganizationData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 organizationData
-    :: TF.DataSource P.Provider (OrganizationData s)
+    :: P.DataSource (OrganizationData s)
 organizationData =
     TF.newDataSource "google_organization" TF.validator $
         OrganizationData'
@@ -1724,6 +1808,9 @@ instance P.HasOrganization (OrganizationData s) (TF.Attr s P.Text) where
     organization =
         P.lens (_organization :: OrganizationData s -> TF.Attr s P.Text)
                (\s a -> s { _organization = a } :: OrganizationData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (OrganizationData s)) (TF.Attr s P.Text) where
     computedCreateTime x = TF.compute (TF.refKey x) "create_time"
@@ -1751,7 +1838,7 @@ data ProjectData s = ProjectData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 projectData
-    :: TF.DataSource P.Provider (ProjectData s)
+    :: P.DataSource (ProjectData s)
 projectData =
     TF.newDataSource "google_project" TF.validator $
         ProjectData'
@@ -1770,6 +1857,9 @@ instance P.HasProjectId (ProjectData s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: ProjectData s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: ProjectData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (ProjectAppEngine s)]) where
     computedAppEngine x = TF.compute (TF.refKey x) "app_engine"
@@ -1819,7 +1909,7 @@ data ServiceAccountData s = ServiceAccountData'
 
 serviceAccountData
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
-    -> TF.DataSource P.Provider (ServiceAccountData s)
+    -> P.DataSource (ServiceAccountData s)
 serviceAccountData _accountId =
     TF.newDataSource "google_service_account" TF.validator $
         ServiceAccountData'
@@ -1845,6 +1935,9 @@ instance P.HasProject (ServiceAccountData s) (TF.Attr s P.Text) where
     project =
         P.lens (_project :: ServiceAccountData s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ServiceAccountData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ServiceAccountData s)) (TF.Attr s P.Text) where
     computedDisplayName x = TF.compute (TF.refKey x) "display_name"
@@ -1876,7 +1969,7 @@ data ServiceAccountKeyData s = ServiceAccountKeyData'
 
 serviceAccountKeyData
     :: TF.Attr s P.Text -- ^ @service_account_id@ - 'P.serviceAccountId'
-    -> TF.DataSource P.Provider (ServiceAccountKeyData s)
+    -> P.DataSource (ServiceAccountKeyData s)
 serviceAccountKeyData _serviceAccountId =
     TF.newDataSource "google_service_account_key" TF.validator $
         ServiceAccountKeyData'
@@ -1909,6 +2002,9 @@ instance P.HasServiceAccountId (ServiceAccountKeyData s) (TF.Attr s P.Text) wher
     serviceAccountId =
         P.lens (_serviceAccountId :: ServiceAccountKeyData s -> TF.Attr s P.Text)
                (\s a -> s { _serviceAccountId = a } :: ServiceAccountKeyData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedKeyAlgorithm (TF.Ref s' (ServiceAccountKeyData s)) (TF.Attr s P.Text) where
     computedKeyAlgorithm x = TF.compute (TF.refKey x) "key_algorithm"
@@ -1953,7 +2049,7 @@ data StorageObjectSignedUrlData s = StorageObjectSignedUrlData'
 storageObjectSignedUrlData
     :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.DataSource P.Provider (StorageObjectSignedUrlData s)
+    -> P.DataSource (StorageObjectSignedUrlData s)
 storageObjectSignedUrlData _bucket _path =
     TF.newDataSource "google_storage_object_signed_url" TF.validator $
         StorageObjectSignedUrlData'
@@ -2022,6 +2118,9 @@ instance P.HasPath (StorageObjectSignedUrlData s) (TF.Attr s P.Text) where
         P.lens (_path :: StorageObjectSignedUrlData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: StorageObjectSignedUrlData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData s)) (TF.Attr s P.Text) where
     computedSignedUrl x = TF.compute (TF.refKey x) "signed_url"
 
@@ -2033,7 +2132,7 @@ data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
 storageProjectServiceAccountData
-    :: TF.DataSource P.Provider (StorageProjectServiceAccountData s)
+    :: P.DataSource (StorageProjectServiceAccountData s)
 storageProjectServiceAccountData =
     TF.newDataSource "google_storage_project_service_account" TF.validator $
         StorageProjectServiceAccountData'
@@ -2043,6 +2142,9 @@ instance TF.IsObject (StorageProjectServiceAccountData s) where
 
 instance TF.IsValid (StorageProjectServiceAccountData s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"

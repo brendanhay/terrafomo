@@ -645,6 +645,7 @@ module Terrafomo.Google.Lens
     , HasComputedBillingAccount (..)
     , HasComputedServiceAccountScopes (..)
     , HasComputedNumBytes (..)
+    , HasComputedId (..)
     , HasComputedCrc32c (..)
     , HasComputedLogObjectPrefix (..)
     , HasComputedMinCpuPlatform (..)
@@ -4077,6 +4078,9 @@ class HasComputedServiceAccountScopes a b | a -> b where
 
 class HasComputedNumBytes a b | a -> b where
     computedNumBytes :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedCrc32c a b | a -> b where
     computedCrc32c :: a -> b
