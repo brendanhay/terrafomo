@@ -18,6 +18,7 @@ module Terrafomo.AliCloud
     , module Terrafomo.AliCloud.Types
     , module Terrafomo.AliCloud.Lens
     , module Terrafomo.AliCloud.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.AliCloud.DataSource
