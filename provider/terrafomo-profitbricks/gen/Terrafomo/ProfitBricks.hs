@@ -18,6 +18,7 @@ module Terrafomo.ProfitBricks
     , module Terrafomo.ProfitBricks.Resource
     , module Terrafomo.ProfitBricks.Settings
     , module Terrafomo.ProfitBricks.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.ProfitBricks.DataSource

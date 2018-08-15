@@ -80,7 +80,7 @@ data DatacenterData s = DatacenterData'
 
 datacenterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (DatacenterData s)
+    -> P.DataSource (DatacenterData s)
 datacenterData _name =
     TF.newDataSource "profitbricks_datacenter" TF.validator $
         DatacenterData'
@@ -107,6 +107,9 @@ instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
         P.lens (_name :: DatacenterData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatacenterData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @profitbricks_image@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/image.html terraform documentation>
@@ -127,7 +130,7 @@ data ImageData s = ImageData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 imageData
-    :: TF.DataSource P.Provider (ImageData s)
+    :: P.DataSource (ImageData s)
 imageData =
     TF.newDataSource "profitbricks_image" TF.validator $
         ImageData'
@@ -168,6 +171,9 @@ instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
         P.lens (_version :: ImageData s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: ImageData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @profitbricks_location@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/location.html terraform documentation>
@@ -182,7 +188,7 @@ data LocationData s = LocationData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 locationData
-    :: TF.DataSource P.Provider (LocationData s)
+    :: P.DataSource (LocationData s)
 locationData =
     TF.newDataSource "profitbricks_location" TF.validator $
         LocationData'
@@ -209,6 +215,9 @@ instance P.HasName (LocationData s) (TF.Attr s P.Text) where
         P.lens (_name :: LocationData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LocationData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LocationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @profitbricks_resource@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/resource.html terraform documentation>
@@ -223,7 +232,7 @@ data ResourceData s = ResourceData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 resourceData
-    :: TF.DataSource P.Provider (ResourceData s)
+    :: P.DataSource (ResourceData s)
 resourceData =
     TF.newDataSource "profitbricks_resource" TF.validator $
         ResourceData'
@@ -250,6 +259,9 @@ instance P.HasResourceType (ResourceData s) (TF.Attr s P.Text) where
         P.lens (_resourceType :: ResourceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceType = a } :: ResourceData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @profitbricks_snapshot@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/snapshot.html terraform documentation>
@@ -268,7 +280,7 @@ data SnapshotData s = SnapshotData'
 
 snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SnapshotData s)
+    -> P.DataSource (SnapshotData s)
 snapshotData _name =
     TF.newDataSource "profitbricks_snapshot" TF.validator $
         SnapshotData'
@@ -301,3 +313,6 @@ instance P.HasSize (SnapshotData s) (TF.Attr s P.Integer) where
     size =
         P.lens (_size :: SnapshotData s -> TF.Attr s P.Integer)
                (\s a -> s { _size = a } :: SnapshotData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

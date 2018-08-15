@@ -85,6 +85,7 @@ module Terrafomo.ProfitBricks.Lens
     , HasComputedSshkey (..)
     , HasComputedForceSecAuth (..)
     , HasComputedBootVolume (..)
+    , HasComputedId (..)
     , HasComputedLastName (..)
     , HasComputedPrimaryNic (..)
     , HasComputedBootImage (..)
@@ -478,6 +479,9 @@ class HasComputedForceSecAuth a b | a -> b where
 
 class HasComputedBootVolume a b | a -> b where
     computedBootVolume :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedLastName a b | a -> b where
     computedLastName :: a -> b
