@@ -98,7 +98,7 @@ data DowntimeResource s = DowntimeResource'
 
 downtimeResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @scope@ - 'P.scope'
-    -> TF.Resource P.Provider (DowntimeResource s)
+    -> P.Resource (DowntimeResource s)
 downtimeResource _scope =
     TF.newResource "datadog_downtime" TF.validator $
         DowntimeResource'
@@ -201,7 +201,7 @@ data MetricMetadataResource s = MetricMetadataResource'
 
 metricMetadataResource
     :: TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
-    -> TF.Resource P.Provider (MetricMetadataResource s)
+    -> P.Resource (MetricMetadataResource s)
 metricMetadataResource _metric =
     TF.newResource "datadog_metric_metadata" TF.validator $
         MetricMetadataResource'
@@ -323,7 +323,7 @@ monitorResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (MonitorResource s)
+    -> P.Resource (MonitorResource s)
 monitorResource _message _name _query _type' =
     TF.newResource "datadog_monitor" TF.validator $
         MonitorResource'
@@ -488,7 +488,7 @@ timeboardResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s [TF.Attr s (TimeboardGraph s)] -- ^ @graph@ - 'P.graph'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Resource P.Provider (TimeboardResource s)
+    -> P.Resource (TimeboardResource s)
 timeboardResource _description _graph _title =
     TF.newResource "datadog_timeboard" TF.validator $
         TimeboardResource'
@@ -570,7 +570,7 @@ userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @handle@ - 'P.handle'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _email _handle _name =
     TF.newResource "datadog_user" TF.validator $
         UserResource'

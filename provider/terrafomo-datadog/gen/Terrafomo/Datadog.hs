@@ -17,6 +17,7 @@ module Terrafomo.Datadog
     , module Terrafomo.Datadog.Settings
     , module Terrafomo.Datadog.Lens
     , module Terrafomo.Datadog.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Datadog.Lens
