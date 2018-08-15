@@ -60,7 +60,7 @@ data RegistryImageData s = RegistryImageData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 registryImageData
-    :: TF.DataSource P.Provider (RegistryImageData s)
+    :: P.DataSource (RegistryImageData s)
 registryImageData =
     TF.newDataSource "docker_registry_image" TF.validator $
         RegistryImageData'
@@ -79,6 +79,9 @@ instance P.HasName (RegistryImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: RegistryImageData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RegistryImageData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedSha256Digest (TF.Ref s' (RegistryImageData s)) (TF.Attr s P.Text) where
     computedSha256Digest x = TF.compute (TF.refKey x) "sha256_digest"

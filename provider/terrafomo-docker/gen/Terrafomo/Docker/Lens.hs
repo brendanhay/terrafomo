@@ -172,6 +172,7 @@ module Terrafomo.Docker.Lens
     , HasComputedLabels (..)
     , HasComputedReplicated (..)
     , HasComputedIpAddress (..)
+    , HasComputedId (..)
     , HasComputedPlacement (..)
     , HasComputedDnsConfig (..)
     , HasComputedName (..)
@@ -1088,6 +1089,9 @@ class HasComputedReplicated a b | a -> b where
 
 class HasComputedIpAddress a b | a -> b where
     computedIpAddress :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedPlacement a b | a -> b where
     computedPlacement :: a -> b

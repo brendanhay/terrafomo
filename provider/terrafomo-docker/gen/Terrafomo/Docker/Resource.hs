@@ -91,7 +91,7 @@ data ConfigResource s = ConfigResource'
 configResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ConfigResource s)
+    -> P.Resource (ConfigResource s)
 configResource _data' _name =
     TF.newResource "docker_config" TF.validator $
         ConfigResource'
@@ -227,7 +227,7 @@ data ContainerResource s = ContainerResource'
 containerResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ContainerResource s)
+    -> P.Resource (ContainerResource s)
 containerResource _image _name =
     TF.newResource "docker_container" TF.validator $
         ContainerResource'
@@ -529,7 +529,7 @@ data ImageResource s = ImageResource'
 
 imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ImageResource s)
+    -> P.Resource (ImageResource s)
 imageResource _name =
     TF.newResource "docker_image" TF.validator $
         ImageResource'
@@ -587,7 +587,7 @@ data NetworkResource s = NetworkResource'
 
 networkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NetworkResource s)
+    -> P.Resource (NetworkResource s)
 networkResource _name =
     TF.newResource "docker_network" TF.validator $
         NetworkResource'
@@ -662,7 +662,7 @@ data SecretResource s = SecretResource'
 secretResource
     :: TF.Attr s P.Text -- ^ @data@ - 'P.data''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SecretResource s)
+    -> P.Resource (SecretResource s)
 secretResource _data' _name =
     TF.newResource "docker_secret" TF.validator $
         SecretResource'
@@ -723,7 +723,7 @@ data ServiceResource s = ServiceResource'
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (ServiceTaskSpec s) -- ^ @task_spec@ - 'P.taskSpec'
-    -> TF.Resource P.Provider (ServiceResource s)
+    -> P.Resource (ServiceResource s)
 serviceResource _name _taskSpec =
     TF.newResource "docker_service" TF.validator $
         ServiceResource'
@@ -818,7 +818,7 @@ data VolumeResource s = VolumeResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 volumeResource
-    :: TF.Resource P.Provider (VolumeResource s)
+    :: P.Resource (VolumeResource s)
 volumeResource =
     TF.newResource "docker_volume" TF.validator $
         VolumeResource'

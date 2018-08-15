@@ -18,6 +18,7 @@ module Terrafomo.Docker
     , module Terrafomo.Docker.Resource
     , module Terrafomo.Docker.Settings
     , module Terrafomo.Docker.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Docker.DataSource
