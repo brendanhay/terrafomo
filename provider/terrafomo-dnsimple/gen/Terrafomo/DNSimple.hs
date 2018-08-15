@@ -17,6 +17,7 @@ module Terrafomo.DNSimple
     , module Terrafomo.DNSimple.Resource
     , module Terrafomo.DNSimple.Settings
     , module Terrafomo.DNSimple.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.DNSimple.Lens
