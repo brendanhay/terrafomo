@@ -229,6 +229,7 @@ module Terrafomo.Kubernetes.Lens
     , HasComputedClusterIp (..)
     , HasComputedPort (..)
     , HasComputedSpec (..)
+    , HasComputedId (..)
     , HasComputedName (..)
     , HasComputedLoadBalancerSourceRanges (..)
     , HasComputedImagePullSecrets (..)
@@ -1469,6 +1470,9 @@ class HasComputedPort a b | a -> b where
 
 class HasComputedSpec a b | a -> b where
     computedSpec :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b

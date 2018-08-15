@@ -67,7 +67,7 @@ data ServiceData s = ServiceData'
 
 serviceData
     :: TF.Attr s (ServiceMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.DataSource P.Provider (ServiceData s)
+    -> P.DataSource (ServiceData s)
 serviceData _metadata =
     TF.newDataSource "kubernetes_service" TF.validator $
         ServiceData'
@@ -91,6 +91,9 @@ instance P.HasMetadata (ServiceData s) (TF.Attr s (ServiceMetadata s)) where
         P.lens (_metadata :: ServiceData s -> TF.Attr s (ServiceMetadata s))
                (\s a -> s { _metadata = a } :: ServiceData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (ServiceLoadBalancerIngress s)]) where
     computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
 
@@ -111,7 +114,7 @@ data StorageClassData s = StorageClassData'
 
 storageClassData
     :: TF.Attr s (StorageClassMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.DataSource P.Provider (StorageClassData s)
+    -> P.DataSource (StorageClassData s)
 storageClassData _metadata =
     TF.newDataSource "kubernetes_storage_class" TF.validator $
         StorageClassData'
@@ -134,6 +137,9 @@ instance P.HasMetadata (StorageClassData s) (TF.Attr s (StorageClassMetadata s))
     metadata =
         P.lens (_metadata :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
                (\s a -> s { _metadata = a } :: StorageClassData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedParameters x = TF.compute (TF.refKey x) "parameters"

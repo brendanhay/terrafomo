@@ -115,7 +115,7 @@ data ConfigMapResource s = ConfigMapResource'
 
 configMapResource
     :: TF.Attr s (ConfigMapMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (ConfigMapResource s)
+    -> P.Resource (ConfigMapResource s)
 configMapResource _metadata =
     TF.newResource "kubernetes_config_map" TF.validator $
         ConfigMapResource'
@@ -166,7 +166,7 @@ data HorizontalPodAutoscalerResource s = HorizontalPodAutoscalerResource'
 horizontalPodAutoscalerResource
     :: TF.Attr s (HorizontalPodAutoscalerMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (HorizontalPodAutoscalerSpec s) -- ^ @spec@ - 'P.spec'
-    -> TF.Resource P.Provider (HorizontalPodAutoscalerResource s)
+    -> P.Resource (HorizontalPodAutoscalerResource s)
 horizontalPodAutoscalerResource _metadata _spec =
     TF.newResource "kubernetes_horizontal_pod_autoscaler" TF.validator $
         HorizontalPodAutoscalerResource'
@@ -220,7 +220,7 @@ data LimitRangeResource s = LimitRangeResource'
 
 limitRangeResource
     :: TF.Attr s (LimitRangeMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (LimitRangeResource s)
+    -> P.Resource (LimitRangeResource s)
 limitRangeResource _metadata =
     TF.newResource "kubernetes_limit_range" TF.validator $
         LimitRangeResource'
@@ -269,7 +269,7 @@ data NamespaceResource s = NamespaceResource'
 
 namespaceResource
     :: TF.Attr s (NamespaceMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (NamespaceResource s)
+    -> P.Resource (NamespaceResource s)
 namespaceResource _metadata =
     TF.newResource "kubernetes_namespace" TF.validator $
         NamespaceResource'
@@ -312,7 +312,7 @@ data PersistentVolumeResource s = PersistentVolumeResource'
 persistentVolumeResource
     :: TF.Attr s (PersistentVolumeMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s [TF.Attr s (PersistentVolumeSpec s)] -- ^ @spec@ - 'P.spec'
-    -> TF.Resource P.Provider (PersistentVolumeResource s)
+    -> P.Resource (PersistentVolumeResource s)
 persistentVolumeResource _metadata _spec =
     TF.newResource "kubernetes_persistent_volume" TF.validator $
         PersistentVolumeResource'
@@ -373,7 +373,7 @@ data PersistentVolumeClaimResource s = PersistentVolumeClaimResource'
 persistentVolumeClaimResource
     :: TF.Attr s (PersistentVolumeClaimMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (PersistentVolumeClaimSpec s) -- ^ @spec@ - 'P.spec'
-    -> TF.Resource P.Provider (PersistentVolumeClaimResource s)
+    -> P.Resource (PersistentVolumeClaimResource s)
 persistentVolumeClaimResource _metadata _spec =
     TF.newResource "kubernetes_persistent_volume_claim" TF.validator $
         PersistentVolumeClaimResource'
@@ -434,7 +434,7 @@ data PodResource s = PodResource'
 podResource
     :: TF.Attr s (PodMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (PodSpec s) -- ^ @spec@ - 'P.spec'
-    -> TF.Resource P.Provider (PodResource s)
+    -> P.Resource (PodResource s)
 podResource _metadata _spec =
     TF.newResource "kubernetes_pod" TF.validator $
         PodResource'
@@ -490,7 +490,7 @@ data ReplicationControllerResource s = ReplicationControllerResource'
 replicationControllerResource
     :: TF.Attr s (ReplicationControllerMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (ReplicationControllerSpec s) -- ^ @spec@ - 'P.spec'
-    -> TF.Resource P.Provider (ReplicationControllerResource s)
+    -> P.Resource (ReplicationControllerResource s)
 replicationControllerResource _metadata _spec =
     TF.newResource "kubernetes_replication_controller" TF.validator $
         ReplicationControllerResource'
@@ -544,7 +544,7 @@ data ResourceQuotaResource s = ResourceQuotaResource'
 
 resourceQuotaResource
     :: TF.Attr s (ResourceQuotaMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (ResourceQuotaResource s)
+    -> P.Resource (ResourceQuotaResource s)
 resourceQuotaResource _metadata =
     TF.newResource "kubernetes_resource_quota" TF.validator $
         ResourceQuotaResource'
@@ -601,7 +601,7 @@ data SecretResource s = SecretResource'
 
 secretResource
     :: TF.Attr s (SecretMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (SecretResource s)
+    -> P.Resource (SecretResource s)
 secretResource _metadata =
     TF.newResource "kubernetes_secret" TF.validator $
         SecretResource'
@@ -659,7 +659,7 @@ data ServiceResource s = ServiceResource'
 serviceResource
     :: TF.Attr s (ServiceMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s (ServiceSpec s) -- ^ @spec@ - 'P.spec'
-    -> TF.Resource P.Provider (ServiceResource s)
+    -> P.Resource (ServiceResource s)
 serviceResource _metadata _spec =
     TF.newResource "kubernetes_service" TF.validator $
         ServiceResource'
@@ -722,7 +722,7 @@ data ServiceAccountResource s = ServiceAccountResource'
 
 serviceAccountResource
     :: TF.Attr s (ServiceAccountMetadata s) -- ^ @metadata@ - 'P.metadata'
-    -> TF.Resource P.Provider (ServiceAccountResource s)
+    -> P.Resource (ServiceAccountResource s)
 serviceAccountResource _metadata =
     TF.newResource "kubernetes_service_account" TF.validator $
         ServiceAccountResource'
@@ -795,7 +795,7 @@ data StorageClassResource s = StorageClassResource'
 storageClassResource
     :: TF.Attr s (StorageClassMetadata s) -- ^ @metadata@ - 'P.metadata'
     -> TF.Attr s P.Text -- ^ @storage_provisioner@ - 'P.storageProvisioner'
-    -> TF.Resource P.Provider (StorageClassResource s)
+    -> P.Resource (StorageClassResource s)
 storageClassResource _metadata _storageProvisioner =
     TF.newResource "kubernetes_storage_class" TF.validator $
         StorageClassResource'

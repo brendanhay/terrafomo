@@ -18,6 +18,7 @@ module Terrafomo.Kubernetes
     , module Terrafomo.Kubernetes.Provider
     , module Terrafomo.Kubernetes.DataSource
     , module Terrafomo.Kubernetes.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Kubernetes.DataSource
