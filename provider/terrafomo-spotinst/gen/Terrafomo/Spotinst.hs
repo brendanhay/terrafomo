@@ -17,6 +17,7 @@ module Terrafomo.Spotinst
     , module Terrafomo.Spotinst.Provider
     , module Terrafomo.Spotinst.Resource
     , module Terrafomo.Spotinst.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Spotinst.Lens

@@ -252,7 +252,7 @@ elastigroupAwsResource
     -> TF.Attr s P.Text -- ^ @orientation@ - 'P.orientation'
     -> TF.Attr s P.Text -- ^ @product@ - 'P.product'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
-    -> TF.Resource P.Provider (ElastigroupAwsResource s)
+    -> P.Resource (ElastigroupAwsResource s)
 elastigroupAwsResource _description _fallbackToOndemand _instanceTypesOndemand _instanceTypesSpot _name _orientation _product _securityGroups =
     TF.newResource "spotinst_elastigroup_aws" TF.validator $
         ElastigroupAwsResource'
@@ -812,7 +812,7 @@ subscriptionResource
     -> TF.Attr s P.Text -- ^ @event_type@ - 'P.eventType'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
-    -> TF.Resource P.Provider (SubscriptionResource s)
+    -> P.Resource (SubscriptionResource s)
 subscriptionResource _endpoint _eventType _protocol _resourceId =
     TF.newResource "spotinst_subscription" TF.validator $
         SubscriptionResource'
