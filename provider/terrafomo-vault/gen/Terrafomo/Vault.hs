@@ -18,6 +18,7 @@ module Terrafomo.Vault
     , module Terrafomo.Vault.Provider
     , module Terrafomo.Vault.DataSource
     , module Terrafomo.Vault.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Vault.DataSource

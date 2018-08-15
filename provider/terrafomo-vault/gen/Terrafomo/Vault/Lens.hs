@@ -127,6 +127,7 @@ module Terrafomo.Vault.Lens
     , HasComputedRoleId (..)
     , HasComputedAccessor (..)
     , HasComputedNonce (..)
+    , HasComputedId (..)
     , HasComputedMetadata (..)
     , HasComputedTagValue (..)
     , HasComputedSecretKey (..)
@@ -791,6 +792,9 @@ class HasComputedAccessor a b | a -> b where
 
 class HasComputedNonce a b | a -> b where
     computedNonce :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedMetadata a b | a -> b where
     computedMetadata :: a -> b

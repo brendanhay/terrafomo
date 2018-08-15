@@ -74,7 +74,7 @@ data ApproleAuthBackendRoleIdData s = ApproleAuthBackendRoleIdData'
 
 approleAuthBackendRoleIdData
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
-    -> TF.DataSource P.Provider (ApproleAuthBackendRoleIdData s)
+    -> P.DataSource (ApproleAuthBackendRoleIdData s)
 approleAuthBackendRoleIdData _roleName =
     TF.newDataSource "vault_approle_auth_backend_role_id" TF.validator $
         ApproleAuthBackendRoleIdData'
@@ -100,6 +100,9 @@ instance P.HasRoleName (ApproleAuthBackendRoleIdData s) (TF.Attr s P.Text) where
     roleName =
         P.lens (_roleName :: ApproleAuthBackendRoleIdData s -> TF.Attr s P.Text)
                (\s a -> s { _roleName = a } :: ApproleAuthBackendRoleIdData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApproleAuthBackendRoleIdData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (ApproleAuthBackendRoleIdData s)) (TF.Attr s P.Text) where
     computedRoleId x = TF.compute (TF.refKey x) "role_id"
@@ -127,7 +130,7 @@ data AwsAccessCredentialsData s = AwsAccessCredentialsData'
 awsAccessCredentialsData
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.DataSource P.Provider (AwsAccessCredentialsData s)
+    -> P.DataSource (AwsAccessCredentialsData s)
 awsAccessCredentialsData _backend _role =
     TF.newDataSource "vault_aws_access_credentials" TF.validator $
         AwsAccessCredentialsData'
@@ -160,6 +163,9 @@ instance P.HasType' (AwsAccessCredentialsData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: AwsAccessCredentialsData s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AwsAccessCredentialsData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
     computedAccessKey x = TF.compute (TF.refKey x) "access_key"
@@ -195,7 +201,7 @@ data GenericSecretData s = GenericSecretData'
 
 genericSecretData
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.DataSource P.Provider (GenericSecretData s)
+    -> P.DataSource (GenericSecretData s)
 genericSecretData _path =
     TF.newDataSource "vault_generic_secret" TF.validator $
         GenericSecretData'
@@ -214,6 +220,9 @@ instance P.HasPath (GenericSecretData s) (TF.Attr s P.Text) where
     path =
         P.lens (_path :: GenericSecretData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: GenericSecretData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedData x = TF.compute (TF.refKey x) "data"

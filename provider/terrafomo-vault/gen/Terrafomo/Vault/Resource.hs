@@ -150,7 +150,7 @@ data ApproleAuthBackendLoginResource s = ApproleAuthBackendLoginResource'
 
 approleAuthBackendLoginResource
     :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
-    -> TF.Resource P.Provider (ApproleAuthBackendLoginResource s)
+    -> P.Resource (ApproleAuthBackendLoginResource s)
 approleAuthBackendLoginResource _roleId =
     TF.newResource "vault_approle_auth_backend_login" TF.validator $
         ApproleAuthBackendLoginResource'
@@ -265,7 +265,7 @@ data ApproleAuthBackendRoleResource s = ApproleAuthBackendRoleResource'
 
 approleAuthBackendRoleResource
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
-    -> TF.Resource P.Provider (ApproleAuthBackendRoleResource s)
+    -> P.Resource (ApproleAuthBackendRoleResource s)
 approleAuthBackendRoleResource _roleName =
     TF.newResource "vault_approle_auth_backend_role" TF.validator $
         ApproleAuthBackendRoleResource'
@@ -383,7 +383,7 @@ data ApproleAuthBackendRoleSecretIdResource s = ApproleAuthBackendRoleSecretIdRe
 
 approleAuthBackendRoleSecretIdResource
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
-    -> TF.Resource P.Provider (ApproleAuthBackendRoleSecretIdResource s)
+    -> P.Resource (ApproleAuthBackendRoleSecretIdResource s)
 approleAuthBackendRoleSecretIdResource _roleName =
     TF.newResource "vault_approle_auth_backend_role_secret_id" TF.validator $
         ApproleAuthBackendRoleSecretIdResource'
@@ -447,7 +447,7 @@ data AuthBackendResource s = AuthBackendResource'
 
 authBackendResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (AuthBackendResource s)
+    -> P.Resource (AuthBackendResource s)
 authBackendResource _type' =
     TF.newResource "vault_auth_backend" TF.validator $
         AuthBackendResource'
@@ -505,7 +505,7 @@ data AwsAuthBackendCertResource s = AwsAuthBackendCertResource'
 awsAuthBackendCertResource
     :: TF.Attr s P.Text -- ^ @aws_public_cert@ - 'P.awsPublicCert'
     -> TF.Attr s P.Text -- ^ @cert_name@ - 'P.certName'
-    -> TF.Resource P.Provider (AwsAuthBackendCertResource s)
+    -> P.Resource (AwsAuthBackendCertResource s)
 awsAuthBackendCertResource _awsPublicCert _certName =
     TF.newResource "vault_aws_auth_backend_cert" TF.validator $
         AwsAuthBackendCertResource'
@@ -583,7 +583,7 @@ data AwsAuthBackendClientResource s = AwsAuthBackendClientResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 awsAuthBackendClientResource
-    :: TF.Resource P.Provider (AwsAuthBackendClientResource s)
+    :: P.Resource (AwsAuthBackendClientResource s)
 awsAuthBackendClientResource =
     TF.newResource "vault_aws_auth_backend_client" TF.validator $
         AwsAuthBackendClientResource'
@@ -666,7 +666,7 @@ data AwsAuthBackendIdentityWhitelistResource s = AwsAuthBackendIdentityWhitelist
     } deriving (P.Show, P.Eq, P.Generic)
 
 awsAuthBackendIdentityWhitelistResource
-    :: TF.Resource P.Provider (AwsAuthBackendIdentityWhitelistResource s)
+    :: P.Resource (AwsAuthBackendIdentityWhitelistResource s)
 awsAuthBackendIdentityWhitelistResource =
     TF.newResource "vault_aws_auth_backend_identity_whitelist" TF.validator $
         AwsAuthBackendIdentityWhitelistResource'
@@ -743,7 +743,7 @@ data AwsAuthBackendLoginResource s = AwsAuthBackendLoginResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 awsAuthBackendLoginResource
-    :: TF.Resource P.Provider (AwsAuthBackendLoginResource s)
+    :: P.Resource (AwsAuthBackendLoginResource s)
 awsAuthBackendLoginResource =
     TF.newResource "vault_aws_auth_backend_login" TF.validator $
         AwsAuthBackendLoginResource'
@@ -932,7 +932,7 @@ data AwsAuthBackendRoleResource s = AwsAuthBackendRoleResource'
 
 awsAuthBackendRoleResource
     :: TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (AwsAuthBackendRoleResource s)
+    -> P.Resource (AwsAuthBackendRoleResource s)
 awsAuthBackendRoleResource _role =
     TF.newResource "vault_aws_auth_backend_role" TF.validator $
         AwsAuthBackendRoleResource'
@@ -1122,7 +1122,7 @@ data AwsAuthBackendRoleTagResource s = AwsAuthBackendRoleTagResource'
 
 awsAuthBackendRoleTagResource
     :: TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Resource P.Provider (AwsAuthBackendRoleTagResource s)
+    -> P.Resource (AwsAuthBackendRoleTagResource s)
 awsAuthBackendRoleTagResource _role =
     TF.newResource "vault_aws_auth_backend_role_tag" TF.validator $
         AwsAuthBackendRoleTagResource'
@@ -1213,7 +1213,7 @@ data AwsAuthBackendStsRoleResource s = AwsAuthBackendStsRoleResource'
 awsAuthBackendStsRoleResource
     :: TF.Attr s P.Text -- ^ @account_id@ - 'P.accountId'
     -> TF.Attr s P.Text -- ^ @sts_role@ - 'P.stsRole'
-    -> TF.Resource P.Provider (AwsAuthBackendStsRoleResource s)
+    -> P.Resource (AwsAuthBackendStsRoleResource s)
 awsAuthBackendStsRoleResource _accountId _stsRole =
     TF.newResource "vault_aws_auth_backend_sts_role" TF.validator $
         AwsAuthBackendStsRoleResource'
@@ -1273,7 +1273,7 @@ data AwsSecretBackendResource s = AwsSecretBackendResource'
 awsSecretBackendResource
     :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
     -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
-    -> TF.Resource P.Provider (AwsSecretBackendResource s)
+    -> P.Resource (AwsSecretBackendResource s)
 awsSecretBackendResource _accessKey _secretKey =
     TF.newResource "vault_aws_secret_backend" TF.validator $
         AwsSecretBackendResource'
@@ -1355,7 +1355,7 @@ data AwsSecretBackendRoleResource s = AwsSecretBackendRoleResource'
 awsSecretBackendRoleResource
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (AwsSecretBackendRoleResource s)
+    -> P.Resource (AwsSecretBackendRoleResource s)
 awsSecretBackendRoleResource _backend _name =
     TF.newResource "vault_aws_secret_backend_role" TF.validator $
         AwsSecretBackendRoleResource'
@@ -1517,7 +1517,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
 databaseSecretBackendConnectionResource
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DatabaseSecretBackendConnectionResource s)
+    -> P.Resource (DatabaseSecretBackendConnectionResource s)
 databaseSecretBackendConnectionResource _backend _name =
     TF.newResource "vault_database_secret_backend_connection" TF.validator $
         DatabaseSecretBackendConnectionResource'
@@ -1720,7 +1720,7 @@ databaseSecretBackendRoleResource
     -> TF.Attr s P.Text -- ^ @creation_statements@ - 'P.creationStatements'
     -> TF.Attr s P.Text -- ^ @db_name@ - 'P.dbName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DatabaseSecretBackendRoleResource s)
+    -> P.Resource (DatabaseSecretBackendRoleResource s)
 databaseSecretBackendRoleResource _backend _creationStatements _dbName _name =
     TF.newResource "vault_database_secret_backend_role" TF.validator $
         DatabaseSecretBackendRoleResource'
@@ -1818,7 +1818,7 @@ data GenericSecretResource s = GenericSecretResource'
 genericSecretResource
     :: TF.Attr s P.Text -- ^ @data_json@ - 'P.dataJson'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Resource P.Provider (GenericSecretResource s)
+    -> P.Resource (GenericSecretResource s)
 genericSecretResource _dataJson _path =
     TF.newResource "vault_generic_secret" TF.validator $
         GenericSecretResource'
@@ -1874,7 +1874,7 @@ data MountResource s = MountResource'
 mountResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (MountResource s)
+    -> P.Resource (MountResource s)
 mountResource _path _type' =
     TF.newResource "vault_mount" TF.validator $
         MountResource'
@@ -1954,7 +1954,7 @@ data OktaAuthBackendResource s = OktaAuthBackendResource'
 
 oktaAuthBackendResource
     :: TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
-    -> TF.Resource P.Provider (OktaAuthBackendResource s)
+    -> P.Resource (OktaAuthBackendResource s)
 oktaAuthBackendResource _organization =
     TF.newResource "vault_okta_auth_backend" TF.validator $
         OktaAuthBackendResource'
@@ -2044,7 +2044,7 @@ data OktaAuthBackendGroupResource s = OktaAuthBackendGroupResource'
 oktaAuthBackendGroupResource
     :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Resource P.Provider (OktaAuthBackendGroupResource s)
+    -> P.Resource (OktaAuthBackendGroupResource s)
 oktaAuthBackendGroupResource _groupName _path =
     TF.newResource "vault_okta_auth_backend_group" TF.validator $
         OktaAuthBackendGroupResource'
@@ -2104,7 +2104,7 @@ data OktaAuthBackendUserResource s = OktaAuthBackendUserResource'
 oktaAuthBackendUserResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (OktaAuthBackendUserResource s)
+    -> P.Resource (OktaAuthBackendUserResource s)
 oktaAuthBackendUserResource _path _username =
     TF.newResource "vault_okta_auth_backend_user" TF.validator $
         OktaAuthBackendUserResource'
@@ -2163,7 +2163,7 @@ data PolicyResource s = PolicyResource'
 policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @policy@ - 'P.policy'
-    -> TF.Resource P.Provider (PolicyResource s)
+    -> P.Resource (PolicyResource s)
 policyResource _name _policy =
     TF.newResource "vault_policy" TF.validator $
         PolicyResource'
