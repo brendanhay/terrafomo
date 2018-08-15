@@ -93,7 +93,7 @@ checkcommandResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @templates@ - 'P.templates'
-    -> TF.Resource P.Provider (CheckcommandResource s)
+    -> P.Resource (CheckcommandResource s)
 checkcommandResource _command _name _templates =
     TF.newResource "icinga2_checkcommand" TF.validator $
         CheckcommandResource'
@@ -164,7 +164,7 @@ hostResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Resource P.Provider (HostResource s)
+    -> P.Resource (HostResource s)
 hostResource _address _checkCommand _hostname =
     TF.newResource "icinga2_host" TF.validator $
         HostResource'
@@ -237,7 +237,7 @@ data HostgroupResource s = HostgroupResource'
 hostgroupResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (HostgroupResource s)
+    -> P.Resource (HostgroupResource s)
 hostgroupResource _displayName _name =
     TF.newResource "icinga2_hostgroup" TF.validator $
         HostgroupResource'
@@ -295,7 +295,7 @@ data NotificationResource s = NotificationResource'
 notificationResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Resource P.Provider (NotificationResource s)
+    -> P.Resource (NotificationResource s)
 notificationResource _command _hostname =
     TF.newResource "icinga2_notification" TF.validator $
         NotificationResource'
@@ -380,7 +380,7 @@ serviceResource
     :: TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ServiceResource s)
+    -> P.Resource (ServiceResource s)
 serviceResource _checkCommand _hostname _name =
     TF.newResource "icinga2_service" TF.validator $
         ServiceResource'
@@ -430,7 +430,7 @@ data UserResource s = UserResource'
 
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _name =
     TF.newResource "icinga2_user" TF.validator $
         UserResource'

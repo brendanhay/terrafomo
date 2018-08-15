@@ -17,6 +17,7 @@ module Terrafomo.Icinga2
     , module Terrafomo.Icinga2.Provider
     , module Terrafomo.Icinga2.Resource
     , module Terrafomo.Icinga2.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Icinga2.Lens
