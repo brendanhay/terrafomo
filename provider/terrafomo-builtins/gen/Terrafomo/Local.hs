@@ -18,6 +18,7 @@ module Terrafomo.Local
     , module Terrafomo.Local.Lens
     , module Terrafomo.Local.Settings
     , module Terrafomo.Local.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Local.DataSource

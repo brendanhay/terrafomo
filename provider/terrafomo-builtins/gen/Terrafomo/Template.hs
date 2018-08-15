@@ -18,6 +18,7 @@ module Terrafomo.Template
     , module Terrafomo.Template.Resource
     , module Terrafomo.Template.DataSource
     , module Terrafomo.Template.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Template.DataSource

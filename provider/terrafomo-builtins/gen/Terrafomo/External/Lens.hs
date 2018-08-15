@@ -21,6 +21,7 @@ module Terrafomo.External.Lens
 
     -- ** Computed Attributes
     , HasComputedResult (..)
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -48,3 +49,6 @@ instance HasProgram a b => HasProgram (TF.Schema l p a) b where
 
 class HasComputedResult a b | a -> b where
     computedResult :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b

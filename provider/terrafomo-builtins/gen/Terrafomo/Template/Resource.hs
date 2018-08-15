@@ -75,7 +75,7 @@ data CloudinitConfigResource s = CloudinitConfigResource'
 
 cloudinitConfigResource
     :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ - 'P.part'
-    -> TF.Resource P.Provider (CloudinitConfigResource s)
+    -> P.Resource (CloudinitConfigResource s)
 cloudinitConfigResource _part =
     TF.newResource "template_cloudinit_config" TF.validator $
         CloudinitConfigResource'
@@ -138,7 +138,7 @@ data DirResource s = DirResource'
 dirResource
     :: TF.Attr s P.Text -- ^ @destination_dir@ - 'P.destinationDir'
     -> TF.Attr s P.Text -- ^ @source_dir@ - 'P.sourceDir'
-    -> TF.Resource P.Provider (DirResource s)
+    -> P.Resource (DirResource s)
 dirResource _destinationDir _sourceDir =
     TF.newResource "template_dir" TF.validator $
         DirResource'
@@ -188,7 +188,7 @@ data FileResource s = FileResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 fileResource
-    :: TF.Resource P.Provider (FileResource s)
+    :: P.Resource (FileResource s)
 fileResource =
     TF.newResource "template_file" TF.validator $
         FileResource'

@@ -20,6 +20,7 @@ module Terrafomo.HTTP.Lens
 
     -- ** Computed Attributes
     , HasComputedBody (..)
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -41,3 +42,6 @@ instance HasRequestHeaders a b => HasRequestHeaders (TF.Schema l p a) b where
 
 class HasComputedBody a b | a -> b where
     computedBody :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b

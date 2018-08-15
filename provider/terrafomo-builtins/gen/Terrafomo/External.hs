@@ -17,6 +17,7 @@ module Terrafomo.External
     , module Terrafomo.External.Types
     , module Terrafomo.External.Lens
     , module Terrafomo.External.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.External.DataSource

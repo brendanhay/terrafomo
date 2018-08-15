@@ -18,6 +18,7 @@ module Terrafomo.Archive
     , module Terrafomo.Archive.Provider
     , module Terrafomo.Archive.DataSource
     , module Terrafomo.Archive.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Archive.DataSource

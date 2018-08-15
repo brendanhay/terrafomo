@@ -20,6 +20,7 @@ module Terrafomo.Local.Lens
     , HasFilename (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedContent (..)
     ) where
 
@@ -45,6 +46,9 @@ class HasFilename a b | a -> b where
 
 instance HasFilename a b => HasFilename (TF.Schema l p a) b where
     filename = TF.configuration . filename
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedContent a b | a -> b where
     computedContent :: a -> b

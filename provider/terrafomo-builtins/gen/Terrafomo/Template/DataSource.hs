@@ -71,7 +71,7 @@ data CloudinitConfigData s = CloudinitConfigData'
 
 cloudinitConfigData
     :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ - 'P.part'
-    -> TF.DataSource P.Provider (CloudinitConfigData s)
+    -> P.DataSource (CloudinitConfigData s)
 cloudinitConfigData _part =
     TF.newDataSource "template_cloudinit_config" TF.validator $
         CloudinitConfigData'
@@ -109,6 +109,9 @@ instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (CloudinitConfi
         P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
                (\s a -> s { _part = a } :: CloudinitConfigData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"
 
@@ -128,7 +131,7 @@ data FileData s = FileData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 fileData
-    :: TF.DataSource P.Provider (FileData s)
+    :: P.DataSource (FileData s)
 fileData =
     TF.newDataSource "template_file" TF.validator $
         FileData'
@@ -154,6 +157,9 @@ instance P.HasVars (FileData s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
     vars =
         P.lens (_vars :: FileData s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: FileData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRendered (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedRendered x = TF.compute (TF.refKey x) "rendered"

@@ -46,6 +46,7 @@ module Terrafomo.TLS.Lens
     , HasComputedCertPem (..)
     , HasComputedValidityEndTime (..)
     , HasComputedPublicKeyOpenssh (..)
+    , HasComputedId (..)
     , HasComputedPublicKeyPem (..)
     , HasComputedAlgorithm (..)
     , HasComputedValidityStartTime (..)
@@ -218,6 +219,9 @@ class HasComputedValidityEndTime a b | a -> b where
 
 class HasComputedPublicKeyOpenssh a b | a -> b where
     computedPublicKeyOpenssh :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedPublicKeyPem a b | a -> b where
     computedPublicKeyPem :: a -> b

@@ -17,6 +17,7 @@ module Terrafomo.HTTP
     , module Terrafomo.HTTP.Provider
     , module Terrafomo.HTTP.DataSource
     , module Terrafomo.HTTP.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.HTTP.DataSource

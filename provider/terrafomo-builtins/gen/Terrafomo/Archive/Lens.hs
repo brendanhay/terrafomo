@@ -28,6 +28,7 @@ module Terrafomo.Archive.Lens
     -- ** Computed Attributes
     , HasComputedOutputBase64sha256 (..)
     , HasComputedOutputSha (..)
+    , HasComputedId (..)
     , HasComputedOutputMd5 (..)
     , HasComputedOutputSize (..)
     , HasComputedSource (..)
@@ -97,6 +98,9 @@ class HasComputedOutputBase64sha256 a b | a -> b where
 
 class HasComputedOutputSha a b | a -> b where
     computedOutputSha :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedOutputMd5 a b | a -> b where
     computedOutputMd5 :: a -> b

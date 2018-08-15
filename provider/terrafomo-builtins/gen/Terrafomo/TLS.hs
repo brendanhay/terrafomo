@@ -18,6 +18,7 @@ module Terrafomo.TLS
     , module Terrafomo.TLS.Types
     , module Terrafomo.TLS.Provider
     , module Terrafomo.TLS.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.TLS.DataSource

@@ -28,6 +28,7 @@ module Terrafomo.Template.Lens
     , HasVars (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedRendered (..)
     ) where
 
@@ -101,6 +102,9 @@ class HasVars a b | a -> b where
 
 instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedRendered a b | a -> b where
     computedRendered :: a -> b

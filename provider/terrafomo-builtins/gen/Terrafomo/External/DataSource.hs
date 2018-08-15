@@ -67,7 +67,7 @@ data Data s = Data'
 
 data'
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ - 'P.program'
-    -> TF.DataSource P.Provider (Data s)
+    -> P.DataSource (Data s)
 data' _program =
     TF.newDataSource "external" TF.validator $
         Data'
@@ -100,6 +100,9 @@ instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
     workingDir =
         P.lens (_workingDir :: Data s -> TF.Attr s P.Text)
                (\s a -> s { _workingDir = a } :: Data s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
     computedResult x = TF.compute (TF.refKey x) "result"

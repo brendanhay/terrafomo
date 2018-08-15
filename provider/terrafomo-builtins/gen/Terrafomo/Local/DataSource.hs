@@ -62,7 +62,7 @@ data FileData s = FileData'
 
 fileData
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
-    -> TF.DataSource P.Provider (FileData s)
+    -> P.DataSource (FileData s)
 fileData _filename =
     TF.newDataSource "local_file" TF.validator $
         FileData'
@@ -81,6 +81,9 @@ instance P.HasFilename (FileData s) (TF.Attr s P.Text) where
     filename =
         P.lens (_filename :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _filename = a } :: FileData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedContent x = TF.compute (TF.refKey x) "content"

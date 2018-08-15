@@ -106,7 +106,7 @@ data FileResource s = FileResource'
 fileResource
     :: TF.Attr s P.Text -- ^ @output_path@ - 'P.outputPath'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (FileResource s)
+    -> P.Resource (FileResource s)
 fileResource _outputPath _type' =
     TF.newResource "archive_file" TF.validator $
         FileResource'

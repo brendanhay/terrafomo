@@ -62,7 +62,7 @@ data PublicKeyData s = PublicKeyData'
 
 publicKeyData
     :: TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
-    -> TF.DataSource P.Provider (PublicKeyData s)
+    -> P.DataSource (PublicKeyData s)
 publicKeyData _privateKeyPem =
     TF.newDataSource "tls_public_key" TF.validator $
         PublicKeyData'
@@ -81,6 +81,9 @@ instance P.HasPrivateKeyPem (PublicKeyData s) (TF.Attr s P.Text) where
     privateKeyPem =
         P.lens (_privateKeyPem :: PublicKeyData s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: PublicKeyData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
     computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"

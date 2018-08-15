@@ -91,7 +91,7 @@ certRequestResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ - 'P.keyAlgorithm'
     -> TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> TF.Attr s [TF.Attr s (CertRequestSubject s)] -- ^ @subject@ - 'P.subject'
-    -> TF.Resource P.Provider (CertRequestResource s)
+    -> P.Resource (CertRequestResource s)
 certRequestResource _keyAlgorithm _privateKeyPem _subject =
     TF.newResource "tls_cert_request" TF.validator $
         CertRequestResource'
@@ -193,7 +193,7 @@ locallySignedCertResource
     -> TF.Attr s P.Text -- ^ @ca_private_key_pem@ - 'P.caPrivateKeyPem'
     -> TF.Attr s P.Text -- ^ @cert_request_pem@ - 'P.certRequestPem'
     -> TF.Attr s P.Integer -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
-    -> TF.Resource P.Provider (LocallySignedCertResource s)
+    -> P.Resource (LocallySignedCertResource s)
 locallySignedCertResource _allowedUses _caCertPem _caKeyAlgorithm _caPrivateKeyPem _certRequestPem _validityPeriodHours =
     TF.newResource "tls_locally_signed_cert" TF.validator $
         LocallySignedCertResource'
@@ -292,7 +292,7 @@ data PrivateKeyResource s = PrivateKeyResource'
 
 privateKeyResource
     :: TF.Attr s P.Text -- ^ @algorithm@ - 'P.algorithm'
-    -> TF.Resource P.Provider (PrivateKeyResource s)
+    -> P.Resource (PrivateKeyResource s)
 privateKeyResource _algorithm =
     TF.newResource "tls_private_key" TF.validator $
         PrivateKeyResource'
@@ -384,7 +384,7 @@ selfSignedCertResource
     -> TF.Attr s P.Text -- ^ @private_key_pem@ - 'P.privateKeyPem'
     -> TF.Attr s [TF.Attr s (SelfSignedCertSubject s)] -- ^ @subject@ - 'P.subject'
     -> TF.Attr s P.Integer -- ^ @validity_period_hours@ - 'P.validityPeriodHours'
-    -> TF.Resource P.Provider (SelfSignedCertResource s)
+    -> P.Resource (SelfSignedCertResource s)
 selfSignedCertResource _allowedUses _keyAlgorithm _privateKeyPem _subject _validityPeriodHours =
     TF.newResource "tls_self_signed_cert" TF.validator $
         SelfSignedCertResource'

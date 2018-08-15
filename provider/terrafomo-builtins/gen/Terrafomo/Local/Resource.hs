@@ -74,7 +74,7 @@ data FileResource s = FileResource'
 
 fileResource
     :: TF.Attr s P.Text -- ^ @filename@ - 'P.filename'
-    -> TF.Resource P.Provider (FileResource s)
+    -> P.Resource (FileResource s)
 fileResource _filename =
     TF.newResource "local_file" TF.validator $
         FileResource'

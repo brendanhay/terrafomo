@@ -87,7 +87,7 @@ data IdResource s = IdResource'
 
 idResource
     :: TF.Attr s P.Integer -- ^ @byte_length@ - 'P.byteLength'
-    -> TF.Resource P.Provider (IdResource s)
+    -> P.Resource (IdResource s)
 idResource _byteLength =
     TF.newResource "random_id" TF.validator $
         IdResource'
@@ -155,7 +155,7 @@ data IntegerResource s = IntegerResource'
 integerResource
     :: TF.Attr s P.Integer -- ^ @max@ - 'P.max'
     -> TF.Attr s P.Integer -- ^ @min@ - 'P.min'
-    -> TF.Resource P.Provider (IntegerResource s)
+    -> P.Resource (IntegerResource s)
 integerResource _max _min =
     TF.newResource "random_integer" TF.validator $
         IntegerResource'
@@ -219,7 +219,7 @@ data PetResource s = PetResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 petResource
-    :: TF.Resource P.Provider (PetResource s)
+    :: P.Resource (PetResource s)
 petResource =
     TF.newResource "random_pet" TF.validator $
         PetResource'
@@ -281,7 +281,7 @@ data ShuffleResource s = ShuffleResource'
 
 shuffleResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @input@ - 'P.input'
-    -> TF.Resource P.Provider (ShuffleResource s)
+    -> P.Resource (ShuffleResource s)
 shuffleResource _input =
     TF.newResource "random_shuffle" TF.validator $
         ShuffleResource'
@@ -367,7 +367,7 @@ data StringResource s = StringResource'
 
 stringResource
     :: TF.Attr s P.Integer -- ^ @length@ - 'P.length'
-    -> TF.Resource P.Provider (StringResource s)
+    -> P.Resource (StringResource s)
 stringResource _length =
     TF.newResource "random_string" TF.validator $
         StringResource'
@@ -471,7 +471,7 @@ data UuidResource s = UuidResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 uuidResource
-    :: TF.Resource P.Provider (UuidResource s)
+    :: P.Resource (UuidResource s)
 uuidResource =
     TF.newResource "random_uuid" TF.validator $
         UuidResource'

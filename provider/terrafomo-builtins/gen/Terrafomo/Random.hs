@@ -17,6 +17,7 @@ module Terrafomo.Random
     , module Terrafomo.Random.Resource
     , module Terrafomo.Random.Types
     , module Terrafomo.Random.Provider
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Random.Lens

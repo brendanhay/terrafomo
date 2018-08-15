@@ -106,7 +106,7 @@ data FileData s = FileData'
 fileData
     :: TF.Attr s P.Text -- ^ @output_path@ - 'P.outputPath'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.DataSource P.Provider (FileData s)
+    -> P.DataSource (FileData s)
 fileData _outputPath _type' =
     TF.newDataSource "archive_file" TF.validator $
         FileData'
@@ -193,6 +193,9 @@ instance P.HasType' (FileData s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: FileData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedOutputBase64sha256 (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
     computedOutputBase64sha256 x = TF.compute (TF.refKey x) "output_base64sha256"

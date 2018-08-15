@@ -64,7 +64,7 @@ data Data s = Data'
 
 data'
     :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> TF.DataSource P.Provider (Data s)
+    -> P.DataSource (Data s)
 data' _url =
     TF.newDataSource "http" TF.validator $
         Data'
@@ -90,6 +90,9 @@ instance P.HasUrl (Data s) (TF.Attr s P.Text) where
     url =
         P.lens (_url :: Data s -> TF.Attr s P.Text)
                (\s a -> s { _url = a } :: Data s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBody (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
     computedBody x = TF.compute (TF.refKey x) "body"
