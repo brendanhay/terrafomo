@@ -109,6 +109,7 @@ module Terrafomo.CloudStack.Lens
     , HasComputedPrivateKey (..)
     , HasComputedIpAddress (..)
     , HasComputedIcmpType (..)
+    , HasComputedId (..)
     , HasComputedName (..)
     , HasComputedHypervisor (..)
     , HasComputedFormat (..)
@@ -612,6 +613,9 @@ class HasComputedIpAddress a b | a -> b where
 
 class HasComputedIcmpType a b | a -> b where
     computedIcmpType :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b

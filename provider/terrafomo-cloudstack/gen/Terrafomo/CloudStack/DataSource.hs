@@ -65,7 +65,7 @@ data TemplateData s = TemplateData'
 templateData
     :: TF.Attr s [TF.Attr s (TemplateFilter s)] -- ^ @filter@ - 'P.filter'
     -> TF.Attr s P.Text -- ^ @template_filter@ - 'P.templateFilter'
-    -> TF.DataSource P.Provider (TemplateData s)
+    -> P.DataSource (TemplateData s)
 templateData _filter _templateFilter =
     TF.newDataSource "cloudstack_template" TF.validator $
         TemplateData'
@@ -95,6 +95,9 @@ instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
     templateFilter =
         P.lens (_templateFilter :: TemplateData s -> TF.Attr s P.Text)
                (\s a -> s { _templateFilter = a } :: TemplateData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"

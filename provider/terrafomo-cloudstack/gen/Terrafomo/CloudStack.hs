@@ -18,6 +18,7 @@ module Terrafomo.CloudStack
     , module Terrafomo.CloudStack.Lens
     , module Terrafomo.CloudStack.Settings
     , module Terrafomo.CloudStack.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.CloudStack.DataSource

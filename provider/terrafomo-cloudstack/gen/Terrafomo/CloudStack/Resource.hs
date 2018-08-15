@@ -160,7 +160,7 @@ data AffinityGroupResource s = AffinityGroupResource'
 affinityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (AffinityGroupResource s)
+    -> P.Resource (AffinityGroupResource s)
 affinityGroupResource _name _type' =
     TF.newResource "cloudstack_affinity_group" TF.validator $
         AffinityGroupResource'
@@ -225,7 +225,7 @@ data DiskResource s = DiskResource'
 diskResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (DiskResource s)
+    -> P.Resource (DiskResource s)
 diskResource _name _zone =
     TF.newResource "cloudstack_disk" TF.validator $
         DiskResource'
@@ -313,7 +313,7 @@ data EgressFirewallResource s = EgressFirewallResource'
 
 egressFirewallResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
-    -> TF.Resource P.Provider (EgressFirewallResource s)
+    -> P.Resource (EgressFirewallResource s)
 egressFirewallResource _networkId =
     TF.newResource "cloudstack_egress_firewall" TF.validator $
         EgressFirewallResource'
@@ -379,7 +379,7 @@ data FirewallResource s = FirewallResource'
 
 firewallResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
-    -> TF.Resource P.Provider (FirewallResource s)
+    -> P.Resource (FirewallResource s)
 firewallResource _ipAddressId =
     TF.newResource "cloudstack_firewall" TF.validator $
         FirewallResource'
@@ -477,7 +477,7 @@ instanceResource
     :: TF.Attr s P.Text -- ^ @service_offering@ - 'P.serviceOffering'
     -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (InstanceResource s)
+    -> P.Resource (InstanceResource s)
 instanceResource _serviceOffering _template _zone =
     TF.newResource "cloudstack_instance" TF.validator $
         InstanceResource'
@@ -625,7 +625,7 @@ data IpaddressResource s = IpaddressResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 ipaddressResource
-    :: TF.Resource P.Provider (IpaddressResource s)
+    :: P.Resource (IpaddressResource s)
 ipaddressResource =
     TF.newResource "cloudstack_ipaddress" TF.validator $
         IpaddressResource'
@@ -710,7 +710,7 @@ loadbalancerRuleResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @private_port@ - 'P.privatePort'
     -> TF.Attr s P.Integer -- ^ @public_port@ - 'P.publicPort'
-    -> TF.Resource P.Provider (LoadbalancerRuleResource s)
+    -> P.Resource (LoadbalancerRuleResource s)
 loadbalancerRuleResource _algorithm _ipAddressId _memberIds _name _privatePort _publicPort =
     TF.newResource "cloudstack_loadbalancer_rule" TF.validator $
         LoadbalancerRuleResource'
@@ -814,7 +814,7 @@ networkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @network_offering@ - 'P.networkOffering'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (NetworkResource s)
+    -> P.Resource (NetworkResource s)
 networkResource _cidr _name _networkOffering _zone =
     TF.newResource "cloudstack_network" TF.validator $
         NetworkResource'
@@ -916,7 +916,7 @@ data NetworkAclResource s = NetworkAclResource'
 networkAclResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (NetworkAclResource s)
+    -> P.Resource (NetworkAclResource s)
 networkAclResource _name _vpcId =
     TF.newResource "cloudstack_network_acl" TF.validator $
         NetworkAclResource'
@@ -977,7 +977,7 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
 
 networkAclRuleResource
     :: TF.Attr s P.Text -- ^ @acl_id@ - 'P.aclId'
-    -> TF.Resource P.Provider (NetworkAclRuleResource s)
+    -> P.Resource (NetworkAclRuleResource s)
 networkAclRuleResource _aclId =
     TF.newResource "cloudstack_network_acl_rule" TF.validator $
         NetworkAclRuleResource'
@@ -1045,7 +1045,7 @@ data NicResource s = NicResource'
 nicResource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
-    -> TF.Resource P.Provider (NicResource s)
+    -> P.Resource (NicResource s)
 nicResource _networkId _virtualMachineId =
     TF.newResource "cloudstack_nic" TF.validator $
         NicResource'
@@ -1097,7 +1097,7 @@ data PortForwardResource s = PortForwardResource'
 portForwardResource
     :: TF.Attr s [TF.Attr s (PortForwardForward s)] -- ^ @forward@ - 'P.forward'
     -> TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
-    -> TF.Resource P.Provider (PortForwardResource s)
+    -> P.Resource (PortForwardResource s)
 portForwardResource _forward _ipAddressId =
     TF.newResource "cloudstack_port_forward" TF.validator $
         PortForwardResource'
@@ -1180,7 +1180,7 @@ privateGatewayResource
     -> TF.Attr s P.Text -- ^ @netmask@ - 'P.netmask'
     -> TF.Attr s P.Text -- ^ @vlan@ - 'P.vlan'
     -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (PrivateGatewayResource s)
+    -> P.Resource (PrivateGatewayResource s)
 privateGatewayResource _aclId _gateway _ipAddress _netmask _vlan _vpcId =
     TF.newResource "cloudstack_private_gateway" TF.validator $
         PrivateGatewayResource'
@@ -1261,7 +1261,7 @@ data SecondaryIpaddressResource s = SecondaryIpaddressResource'
 
 secondaryIpaddressResource
     :: TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
-    -> TF.Resource P.Provider (SecondaryIpaddressResource s)
+    -> P.Resource (SecondaryIpaddressResource s)
 secondaryIpaddressResource _virtualMachineId =
     TF.newResource "cloudstack_secondary_ipaddress" TF.validator $
         SecondaryIpaddressResource'
@@ -1299,7 +1299,7 @@ data SecurityGroupResource s = SecurityGroupResource'
 
 securityGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SecurityGroupResource s)
+    -> P.Resource (SecurityGroupResource s)
 securityGroupResource _name =
     TF.newResource "cloudstack_security_group" TF.validator $
         SecurityGroupResource'
@@ -1347,7 +1347,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
 securityGroupRuleResource
     :: TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)] -- ^ @rule@ - 'P.rule'
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
-    -> TF.Resource P.Provider (SecurityGroupRuleResource s)
+    -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _rule _securityGroupId =
     TF.newResource "cloudstack_security_group_rule" TF.validator $
         SecurityGroupRuleResource'
@@ -1410,7 +1410,7 @@ data SshKeypairResource s = SshKeypairResource'
 
 sshKeypairResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (SshKeypairResource s)
+    -> P.Resource (SshKeypairResource s)
 sshKeypairResource _name =
     TF.newResource "cloudstack_ssh_keypair" TF.validator $
         SshKeypairResource'
@@ -1466,7 +1466,7 @@ data StaticNatResource s = StaticNatResource'
 staticNatResource
     :: TF.Attr s P.Text -- ^ @ip_address_id@ - 'P.ipAddressId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
-    -> TF.Resource P.Provider (StaticNatResource s)
+    -> P.Resource (StaticNatResource s)
 staticNatResource _ipAddressId _virtualMachineId =
     TF.newResource "cloudstack_static_nat" TF.validator $
         StaticNatResource'
@@ -1515,7 +1515,7 @@ data StaticRouteResource s = StaticRouteResource'
 staticRouteResource
     :: TF.Attr s P.Text -- ^ @cidr@ - 'P.cidr'
     -> TF.Attr s P.Text -- ^ @gateway_id@ - 'P.gatewayId'
-    -> TF.Resource P.Provider (StaticRouteResource s)
+    -> P.Resource (StaticRouteResource s)
 staticRouteResource _cidr _gatewayId =
     TF.newResource "cloudstack_static_route" TF.validator $
         StaticRouteResource'
@@ -1577,7 +1577,7 @@ templateResource
     -> TF.Attr s P.Text -- ^ @os_type@ - 'P.osType'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (TemplateResource s)
+    -> P.Resource (TemplateResource s)
 templateResource _format _hypervisor _name _osType _url _zone =
     TF.newResource "cloudstack_template" TF.validator $
         TemplateResource'
@@ -1690,7 +1690,7 @@ vpcResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @vpc_offering@ - 'P.vpcOffering'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (VpcResource s)
+    -> P.Resource (VpcResource s)
 vpcResource _cidr _name _vpcOffering _zone =
     TF.newResource "cloudstack_vpc" TF.validator $
         VpcResource'
@@ -1762,7 +1762,7 @@ data VpnConnectionResource s = VpnConnectionResource'
 vpnConnectionResource
     :: TF.Attr s P.Text -- ^ @customer_gateway_id@ - 'P.customerGatewayId'
     -> TF.Attr s P.Text -- ^ @vpn_gateway_id@ - 'P.vpnGatewayId'
-    -> TF.Resource P.Provider (VpnConnectionResource s)
+    -> P.Resource (VpnConnectionResource s)
 vpnConnectionResource _customerGatewayId _vpnGatewayId =
     TF.newResource "cloudstack_vpn_connection" TF.validator $
         VpnConnectionResource'
@@ -1821,7 +1821,7 @@ vpnCustomerGatewayResource
     -> TF.Attr s P.Text -- ^ @ike_policy@ - 'P.ikePolicy'
     -> TF.Attr s P.Text -- ^ @ipsec_psk@ - 'P.ipsecPsk'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (VpnCustomerGatewayResource s)
+    -> P.Resource (VpnCustomerGatewayResource s)
 vpnCustomerGatewayResource _cidr _espPolicy _gateway _ikePolicy _ipsecPsk _name =
     TF.newResource "cloudstack_vpn_customer_gateway" TF.validator $
         VpnCustomerGatewayResource'
@@ -1900,7 +1900,7 @@ data VpnGatewayResource s = VpnGatewayResource'
 
 vpnGatewayResource
     :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Resource P.Provider (VpnGatewayResource s)
+    -> P.Resource (VpnGatewayResource s)
 vpnGatewayResource _vpcId =
     TF.newResource "cloudstack_vpn_gateway" TF.validator $
         VpnGatewayResource'
