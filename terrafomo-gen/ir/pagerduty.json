@@ -922,7 +922,24 @@
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/escalation_policy.html",
             "name": "EscalationPolicyData",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_name",
@@ -972,6 +989,22 @@
             "name": "ExtensionSchemaData",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -1037,7 +1070,24 @@
             "url": "https://www.terraform.io/docs/providers/pagerduty/d/schedule.html",
             "name": "ScheduleData",
             "threaded": true,
-            "attributes": [],
+            "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                }
+            ],
             "parameters": [
                 {
                     "default": "_name",
@@ -1089,6 +1139,22 @@
             "name": "TeamData",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -1157,6 +1223,22 @@
             "name": "UserData",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
@@ -1239,6 +1321,22 @@
             "name": "VendorData",
             "threaded": true,
             "attributes": [
+                {
+                    "default": "TF.Nil",
+                    "computed": true,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"id\" <$> TF.attribute",
+                    "name": "_computedId",
+                    "method": "computedId",
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasComputedId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "id"
+                },
                 {
                     "default": "TF.Nil",
                     "computed": true,
