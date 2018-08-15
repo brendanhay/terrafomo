@@ -72,7 +72,7 @@ data SshKeyResource s = SshKeyResource'
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
-    -> TF.Resource P.Provider (SshKeyResource s)
+    -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
     TF.newResource "softlayer_ssh_key" TF.validator $
         SshKeyResource'
@@ -181,7 +181,7 @@ virtualGuestResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @ram@ - 'P.ram'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Resource P.Provider (VirtualGuestResource s)
+    -> P.Resource (VirtualGuestResource s)
 virtualGuestResource _cpu _domain _hourlyBilling _localDisk _name _ram _region =
     TF.newResource "softlayer_virtual_guest" TF.validator $
         VirtualGuestResource'

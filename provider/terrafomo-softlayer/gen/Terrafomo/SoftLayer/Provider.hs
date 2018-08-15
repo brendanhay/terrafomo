@@ -20,6 +20,10 @@ module Terrafomo.SoftLayer.Provider
     -- * SoftLayer Provider Datatype
       Provider (..)
     , newProvider
+
+    -- * SoftLayer Specific Aliases
+    , DataSource
+    , Resource
     ) where
 
 import Data.Function ((&))
@@ -41,11 +45,16 @@ import qualified GHC.Generics              as P
 import qualified Lens.Micro                as P
 import qualified Prelude                   as P
 import qualified Terrafomo.HCL             as TF
+import qualified Terrafomo.Lifecycle       as TF
 import qualified Terrafomo.Name            as TF
 import qualified Terrafomo.Provider        as TF
+import qualified Terrafomo.Schema          as TF
 import qualified Terrafomo.SoftLayer.Lens  as P
 import qualified Terrafomo.SoftLayer.Types as P
 import qualified Terrafomo.Validator       as TF
+
+type DataSource a = TF.Schema ()               Provider a
+type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
 -- | The @SoftLayer@ Terraform provider configuration.
 --

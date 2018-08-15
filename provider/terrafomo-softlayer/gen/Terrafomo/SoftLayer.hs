@@ -17,6 +17,7 @@ module Terrafomo.SoftLayer
     , module Terrafomo.SoftLayer.Types
     , module Terrafomo.SoftLayer.Lens
     , module Terrafomo.SoftLayer.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.SoftLayer.Lens
