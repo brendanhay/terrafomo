@@ -25,6 +25,7 @@ module Terrafomo.Logentries.Lens
     , HasName (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     , HasComputedToken (..)
     ) where
 
@@ -80,6 +81,9 @@ class HasName a b | a -> b where
 
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedToken a b | a -> b where
     computedToken :: a -> b

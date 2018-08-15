@@ -64,7 +64,7 @@ data LogsetData s = LogsetData'
 
 logsetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (LogsetData s)
+    -> P.DataSource (LogsetData s)
 logsetData _name =
     TF.newDataSource "logentries_logset" TF.validator $
         LogsetData'
@@ -90,3 +90,6 @@ instance P.HasName (LogsetData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LogsetData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LogsetData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogsetData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

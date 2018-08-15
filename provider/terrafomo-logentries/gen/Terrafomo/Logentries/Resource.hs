@@ -81,7 +81,7 @@ data LogResource s = LogResource'
 logResource
     :: TF.Attr s P.Text -- ^ @logset_id@ - 'P.logsetId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LogResource s)
+    -> P.Resource (LogResource s)
 logResource _logsetId _name =
     TF.newResource "logentries_log" TF.validator $
         LogResource'
@@ -154,7 +154,7 @@ data LogsetResource s = LogsetResource'
 
 logsetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LogsetResource s)
+    -> P.Resource (LogsetResource s)
 logsetResource _name =
     TF.newResource "logentries_logset" TF.validator $
         LogsetResource'

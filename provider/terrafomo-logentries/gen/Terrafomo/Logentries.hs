@@ -18,6 +18,7 @@ module Terrafomo.Logentries
     , module Terrafomo.Logentries.Provider
     , module Terrafomo.Logentries.Settings
     , module Terrafomo.Logentries.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Logentries.DataSource
