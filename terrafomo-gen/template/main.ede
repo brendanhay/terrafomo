@@ -6,9 +6,10 @@
 {% include "_include/license.ede" %}
 --
 module {{ namespace }}
-    {% for export in reexports %}
+  {% for export in reexports %}
     {% if export.first %}({% else %},{% endif %} module {{ export.value }}
-    {% endfor %}
+  {% endfor %}
+    -- * Provider Aliases
     ) where
 
 {% for export in reexports %}

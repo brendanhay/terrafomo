@@ -49,9 +49,9 @@ data {{ resource.value.type }} = {{ resource.value.con.name }}
 {{ resource.value.con.smart }}
   {% for param in resource.value.parameters %}
     {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ - 'P.{{ param.value.method }}'{% if param.last %}
-    -> TF.{{ type }} P.Provider ({{ resource.value.type }}){% endif %}
+    -> P.{{ type }} ({{ resource.value.type }}){% endif %}
   {% else %}
-    :: TF.{{ type }} P.Provider ({{ resource.value.type }})
+    :: P.{{ type }} ({{ resource.value.type }})
   {% endfor %}
 {{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
     TF.new{{ type }} "{{ resource.value.original }}" TF.validator $

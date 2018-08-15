@@ -18,6 +18,7 @@ import Data.HashSet        (HashSet)
 import Data.Maybe          (fromMaybe, isNothing, mapMaybe)
 import Data.Semigroup      ((<>))
 import Data.Text           (Text)
+import Data.Traversable    (for)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
@@ -35,17 +36,13 @@ import qualified Data.HashSet               as Set
 import qualified Data.List                  as List
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
-import qualified Data.Traversable           as Traverse
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Text         as Text
 import qualified Terrafomo.Gen.Type         as Type
 import qualified Terrafomo.Gen.URL          as URL
 
-type Elab =
-    ReaderT (Config, Bool)
-        (StateT (HashMap Text Settings)
-            (Except String))
+type Elab = ReaderT (Config, Bool) (StateT (HashMap Text Settings) (Except String))
 
 run :: Config -> Go.Provider -> Either String Provider
 run cfg provider =
@@ -55,12 +52,12 @@ run cfg provider =
                 let original = Go.providerName provider
 
                 resources   <-
-                    Traverse.for (Go.providerResources provider) $ \x ->
+                    for (Go.providerResources provider) $ \x ->
                         elabResource original
                             (Go.resourceName x) (Go.resourceSchemas x)
 
                 datasources <-
-                    Traverse.for (Go.providerDataSources provider) $ \x ->
+                    for (Go.providerDataSources provider) $ \x ->
                         elabDataSource original
                             (Go.resourceName x) (Go.resourceSchemas x)
 
@@ -69,7 +66,7 @@ run cfg provider =
                          (Go.providerSchemas provider)
 
                 settings    <-
-                     State.gets (Map.elems . Map.delete "provider")
+                    State.gets (Map.elems . Map.delete "provider")
 
                 pure $! Provider'
                     { providerName         = configProviderName cfg
@@ -103,39 +100,44 @@ classes p = (lenses, getters)
         ++ map fromSettings   (providerSchema p : providerSettings p)
 
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
-elabResource provider original =
-    withThreaded
-        . fmap (Resource' (URL.resource provider original))
-            . elabSchema original (Name.resourceNames original)
+elabResource provider original schemas =
+    withThreaded $
+        Resource' (URL.resource provider original)
+            <$> elabSchema original (Name.resourceNames original) schemas Nothing
 
 elabDataSource :: Text -> Text -> [Go.Schema] -> Elab Resource
-elabDataSource provider original =
-    withThreaded
-        . fmap (Resource' (URL.datasource provider original))
-            . elabSchema original (Name.dataSourceNames original)
+elabDataSource provider original schemas =
+    withThreaded $ do
+        x <- elabSchema original (Name.dataSourceNames original) schemas Nothing
+        Resource' (URL.datasource provider original)
+            <$> elabIdAttribute x
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
-    settings <-
-        Settings' <$> elabSchema original (Name.settingsNames original) schemas
+    y <- State.gets (Map.lookup original)
+    x <- Settings'
+             <$> elabSchema original (Name.settingsNames original) schemas
+                     (fmap fromSettings y)
 
-    State.modify' (Map.insert original settings)
+    State.modify' $
+        Map.insert original x
 
-    pure settings
+    pure x
 
 elabSchema
     :: Text
     -> (DataName, ConName, VarName)
     -> [Go.Schema]
+    -> Maybe (Schema Conflict)
     -> Elab (Schema Conflict)
-elabSchema original (data_, con, smart) schemas = do
+elabSchema original (data_, con, smart) schemas existing = do
     thread <- isThreaded
     args   <- elabArguments  original schemas
     attrs  <- elabAttributes original schemas
     typ    <- elabData data_
 
-    schema <-
-        mergeSchema original $ Schema'
+    pure $! mergeSchema existing $
+        Schema'
             { schemaName       = data_
             , schemaOriginal   = original
             , schemaType       = typ
@@ -147,31 +149,32 @@ elabSchema original (data_, con, smart) schemas = do
             , schemaAttributes = attrs
             }
 
-    pure $! schema
-        { schemaConflicts  = filterConflicts  (schemaArguments schema)
-        , schemaParameters = filterParameters (schemaArguments schema)
-        }
-
-mergeSchema :: Text -> Schema Conflict -> Elab (Schema Conflict)
-mergeSchema original a =
-    State.gets (Map.lookup original) >>= \case
-        Just (Settings' b) | a /= b -> merge b a
-        _                           -> pure a
+mergeSchema
+    :: Maybe (Schema Conflict)
+    -> Schema Conflict
+    -> Schema Conflict
+mergeSchema Nothing  a = a
+mergeSchema (Just b) a
+    | a == b    = b
+    | otherwise = merge b a
   where
-    merge old new = do
-        refresh <-
-            pure $! old
-                { schemaArguments  =
-                    List.nubBy (on (==) fieldOriginal)
-                        ( schemaArguments old
-                       ++ schemaArguments new
-                        )
+    merge old new =
+        let args    =
+                List.nubBy (on (==) fieldOriginal)
+                    ( schemaArguments old
+                   ++ schemaArguments new
+                    )
 
-                , schemaAttributes =
-                    List.nubBy (on (==) fieldOriginal)
-                        ( schemaAttributes old
-                       ++ schemaAttributes new
-                        )
+            attrs   =
+                List.nubBy (on (==) fieldOriginal)
+                    ( schemaAttributes old
+                   ++ schemaAttributes new
+                    )
+
+         in old { schemaArguments  = args
+                , schemaAttributes = attrs
+                , schemaConflicts  = filterConflicts  args
+                , schemaParameters = filterParameters args
                 }
 
             -- FIXME: revisit safe/saner merging strategies
@@ -189,10 +192,6 @@ mergeSchema original a =
             --                            , "Old => " ++ ppShow old
             --                            , "New => " ++ ppShow new
             --                            ]
-
-        State.modify' (Map.insert original (Settings' refresh))
-
-        pure refresh
 
 elabNestedSchema :: Go.Schema -> Elab Type
 elabNestedSchema schema
@@ -233,6 +232,39 @@ elabAttributes name =
     traverse (elabField >=> applyRules name)
         . filter Go.schemaComputed
         . filter (isNothing . Go.schemaDeprecated)
+
+elabIdAttribute :: Schema Conflict -> Elab (Schema Conflict)
+elabIdAttribute schema =
+    let attrs         = schemaAttributes schema
+        name          = "id"
+        (label, _, _) = Name.fieldNames True name
+        input         =
+            Go.Schema
+                { Go.schemaName          = name
+                , Go.schemaType          = Go.TypeString
+                , Go.schemaDescription   = Nothing
+                , Go.schemaDeprecated    = Nothing
+                , Go.schemaRemoved       = Nothing
+                , Go.schemaConflictsWith = mempty
+                , Go.schemaOptional      = False
+                , Go.schemaRequired      = False
+                , Go.schemaComputed      = True
+                , Go.schemaForceNew      = False
+                , Go.schemaSensitive     = False
+                , Go.schemaMinItems      = 0
+                , Go.schemaMaxItems      = 0
+                , Go.schemaDefault       = Nothing
+                , Go.schemaSchema        = Nothing
+                , Go.schemaResource      = Nothing
+                }
+
+     in case List.find ((label ==) . fieldName) attrs of
+            Just _  -> pure schema
+            Nothing -> do
+                field <- elabField input
+                pure $! schema
+                    { schemaAttributes = field : attrs
+                    }
 
 elabField :: Go.Schema -> Elab (Field LabelName)
 elabField schema = do
