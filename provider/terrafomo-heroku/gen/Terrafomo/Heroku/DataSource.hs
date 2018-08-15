@@ -69,7 +69,7 @@ data AppData s = AppData'
 
 appData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (AppData s)
+    -> P.DataSource (AppData s)
 appData _name =
     TF.newDataSource "heroku_app" TF.validator $
         AppData'
@@ -88,6 +88,9 @@ instance P.HasName (AppData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: AppData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AppData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAcm (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
     computedAcm x = TF.compute (TF.refKey x) "acm"
@@ -134,7 +137,7 @@ data SpaceData s = SpaceData'
 
 spaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SpaceData s)
+    -> P.DataSource (SpaceData s)
 spaceData _name =
     TF.newDataSource "heroku_space" TF.validator $
         SpaceData'
@@ -153,6 +156,9 @@ instance P.HasName (SpaceData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SpaceData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SpaceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (SpaceData s)) (TF.Attr s P.Text) where
     computedOrganization x = TF.compute (TF.refKey x) "organization"
@@ -184,7 +190,7 @@ data SpacePeeringInfoData s = SpacePeeringInfoData'
 
 spacePeeringInfoData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (SpacePeeringInfoData s)
+    -> P.DataSource (SpacePeeringInfoData s)
 spacePeeringInfoData _name =
     TF.newDataSource "heroku_space_peering_info" TF.validator $
         SpacePeeringInfoData'
@@ -203,6 +209,9 @@ instance P.HasName (SpacePeeringInfoData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SpacePeeringInfoData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SpacePeeringInfoData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAwsAccountId (TF.Ref s' (SpacePeeringInfoData s)) (TF.Attr s P.Text) where
     computedAwsAccountId x = TF.compute (TF.refKey x) "aws_account_id"

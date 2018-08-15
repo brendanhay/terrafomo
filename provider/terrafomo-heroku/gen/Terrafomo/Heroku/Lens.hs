@@ -70,6 +70,7 @@ module Terrafomo.Heroku.Lens
     , HasComputedOrganization (..)
     , HasComputedAllConfigVars (..)
     , HasComputedState (..)
+    , HasComputedId (..)
     , HasComputedHerokuHostname (..)
     , HasComputedAwsAccountId (..)
     , HasComputedTunnels (..)
@@ -359,6 +360,9 @@ class HasComputedAllConfigVars a b | a -> b where
 
 class HasComputedState a b | a -> b where
     computedState :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedHerokuHostname a b | a -> b where
     computedHerokuHostname :: a -> b

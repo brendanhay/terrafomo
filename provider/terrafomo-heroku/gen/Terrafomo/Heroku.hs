@@ -18,6 +18,7 @@ module Terrafomo.Heroku
     , module Terrafomo.Heroku.Provider
     , module Terrafomo.Heroku.Settings
     , module Terrafomo.Heroku.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Heroku.DataSource

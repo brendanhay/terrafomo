@@ -132,7 +132,7 @@ data AddonResource s = AddonResource'
 addonResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
-    -> TF.Resource P.Provider (AddonResource s)
+    -> P.Resource (AddonResource s)
 addonResource _app _plan =
     TF.newResource "heroku_addon" TF.validator $
         AddonResource'
@@ -191,7 +191,7 @@ data AddonAttachmentResource s = AddonAttachmentResource'
 addonAttachmentResource
     :: TF.Attr s P.Text -- ^ @addon_id@ - 'P.addonId'
     -> TF.Attr s P.Text -- ^ @app_id@ - 'P.appId'
-    -> TF.Resource P.Provider (AddonAttachmentResource s)
+    -> P.Resource (AddonAttachmentResource s)
 addonAttachmentResource _addonId _appId =
     TF.newResource "heroku_addon_attachment" TF.validator $
         AddonAttachmentResource'
@@ -249,7 +249,7 @@ data AppResource s = AppResource'
 appResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
-    -> TF.Resource P.Provider (AppResource s)
+    -> P.Resource (AppResource s)
 appResource _name _region =
     TF.newResource "heroku_app" TF.validator $
         AppResource'
@@ -348,7 +348,7 @@ data AppFeatureResource s = AppFeatureResource'
 appFeatureResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (AppFeatureResource s)
+    -> P.Resource (AppFeatureResource s)
 appFeatureResource _app _name =
     TF.newResource "heroku_app_feature" TF.validator $
         AppFeatureResource'
@@ -398,7 +398,7 @@ data AppReleaseResource s = AppReleaseResource'
 appReleaseResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @slug_id@ - 'P.slugId'
-    -> TF.Resource P.Provider (AppReleaseResource s)
+    -> P.Resource (AppReleaseResource s)
 appReleaseResource _app _slugId =
     TF.newResource "heroku_app_release" TF.validator $
         AppReleaseResource'
@@ -448,7 +448,7 @@ certResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @certificate_chain@ - 'P.certificateChain'
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
-    -> TF.Resource P.Provider (CertResource s)
+    -> P.Resource (CertResource s)
 certResource _app _certificateChain _privateKey =
     TF.newResource "heroku_cert" TF.validator $
         CertResource'
@@ -504,7 +504,7 @@ data DomainResource s = DomainResource'
 domainResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
-    -> TF.Resource P.Provider (DomainResource s)
+    -> P.Resource (DomainResource s)
 domainResource _app _hostname =
     TF.newResource "heroku_domain" TF.validator $
         DomainResource'
@@ -550,7 +550,7 @@ data DrainResource s = DrainResource'
 drainResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> TF.Resource P.Provider (DrainResource s)
+    -> P.Resource (DrainResource s)
 drainResource _app _url =
     TF.newResource "heroku_drain" TF.validator $
         DrainResource'
@@ -604,7 +604,7 @@ formationResource
     -> TF.Attr s P.Integer -- ^ @quantity@ - 'P.quantity'
     -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (FormationResource s)
+    -> P.Resource (FormationResource s)
 formationResource _app _quantity _size _type' =
     TF.newResource "heroku_formation" TF.validator $
         FormationResource'
@@ -657,7 +657,7 @@ data PipelineResource s = PipelineResource'
 
 pipelineResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (PipelineResource s)
+    -> P.Resource (PipelineResource s)
 pipelineResource _name =
     TF.newResource "heroku_pipeline" TF.validator $
         PipelineResource'
@@ -697,7 +697,7 @@ pipelineCouplingResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @pipeline@ - 'P.pipeline'
     -> TF.Attr s P.Text -- ^ @stage@ - 'P.stage'
-    -> TF.Resource P.Provider (PipelineCouplingResource s)
+    -> P.Resource (PipelineCouplingResource s)
 pipelineCouplingResource _app _pipeline _stage =
     TF.newResource "heroku_pipeline_coupling" TF.validator $
         PipelineCouplingResource'
@@ -756,7 +756,7 @@ data SpaceResource s = SpaceResource'
 spaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
-    -> TF.Resource P.Provider (SpaceResource s)
+    -> P.Resource (SpaceResource s)
 spaceResource _name _organization =
     TF.newResource "heroku_space" TF.validator $
         SpaceResource'
@@ -820,7 +820,7 @@ spaceAppAccessResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
-    -> TF.Resource P.Provider (SpaceAppAccessResource s)
+    -> P.Resource (SpaceAppAccessResource s)
 spaceAppAccessResource _email _permissions _space =
     TF.newResource "heroku_space_app_access" TF.validator $
         SpaceAppAccessResource'
@@ -870,7 +870,7 @@ data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
 spaceInboundRulesetResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRule s))) -- ^ @rule@ - 'P.rule'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
-    -> TF.Resource P.Provider (SpaceInboundRulesetResource s)
+    -> P.Resource (SpaceInboundRulesetResource s)
 spaceInboundRulesetResource _rule _space =
     TF.newResource "heroku_space_inbound_ruleset" TF.validator $
         SpaceInboundRulesetResource'
@@ -917,7 +917,7 @@ data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterRe
 spacePeeringConnectionAccepterResource
     :: TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
-    -> TF.Resource P.Provider (SpacePeeringConnectionAccepterResource s)
+    -> P.Resource (SpacePeeringConnectionAccepterResource s)
 spacePeeringConnectionAccepterResource _space _vpcPeeringConnectionId =
     TF.newResource "heroku_space_peering_connection_accepter" TF.validator $
         SpacePeeringConnectionAccepterResource'
@@ -974,7 +974,7 @@ spaceVpnConnectionResource
     -> TF.Attr s P.Text -- ^ @public_ip@ - 'P.publicIp'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ - 'P.routableCidrs'
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
-    -> TF.Resource P.Provider (SpaceVpnConnectionResource s)
+    -> P.Resource (SpaceVpnConnectionResource s)
 spaceVpnConnectionResource _name _publicIp _routableCidrs _space =
     TF.newResource "heroku_space_vpn_connection" TF.validator $
         SpaceVpnConnectionResource'
@@ -1044,7 +1044,7 @@ teamCollaboratorResource
     :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
     -> TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
-    -> TF.Resource P.Provider (TeamCollaboratorResource s)
+    -> P.Resource (TeamCollaboratorResource s)
 teamCollaboratorResource _app _email _permissions =
     TF.newResource "heroku_team_collaborator" TF.validator $
         TeamCollaboratorResource'
