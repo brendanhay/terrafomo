@@ -100,7 +100,7 @@ dnatResource
     -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
     -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
     -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
-    -> TF.Resource P.Provider (DnatResource s)
+    -> P.Resource (DnatResource s)
 dnatResource _edgeGateway _externalIp _internalIp _port =
     TF.newResource "vcd_dnat" TF.validator $
         DnatResource'
@@ -201,7 +201,7 @@ edgegatewayVpnResource
     -> TF.Attr s P.Text -- ^ @peer_id@ - 'P.peerId'
     -> TF.Attr s P.Text -- ^ @peer_ip_address@ - 'P.peerIpAddress'
     -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
-    -> TF.Resource P.Provider (EdgegatewayVpnResource s)
+    -> P.Resource (EdgegatewayVpnResource s)
 edgegatewayVpnResource _edgeGateway _encryptionProtocol _localId _localIpAddress _mtu _name _peerId _peerIpAddress _sharedSecret =
     TF.newResource "vcd_edgegateway_vpn" TF.validator $
         EdgegatewayVpnResource'
@@ -325,7 +325,7 @@ data FirewallRulesResource s = FirewallRulesResource'
 firewallRulesResource
     :: TF.Attr s P.Text -- ^ @default_action@ - 'P.defaultAction'
     -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
-    -> TF.Resource P.Provider (FirewallRulesResource s)
+    -> P.Resource (FirewallRulesResource s)
 firewallRulesResource _defaultAction _edgeGateway =
     TF.newResource "vcd_firewall_rules" TF.validator $
         FirewallRulesResource'
@@ -407,7 +407,7 @@ networkResource
     :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> TF.Attr s P.Text -- ^ @gateway@ - 'P.gateway'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NetworkResource s)
+    -> P.Resource (NetworkResource s)
 networkResource _edgeGateway _gateway _name =
     TF.newResource "vcd_network" TF.validator $
         NetworkResource'
@@ -528,7 +528,7 @@ snatResource
     :: TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
     -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
-    -> TF.Resource P.Provider (SnatResource s)
+    -> P.Resource (SnatResource s)
 snatResource _edgeGateway _externalIp _internalIp =
     TF.newResource "vcd_snat" TF.validator $
         SnatResource'
@@ -607,7 +607,7 @@ data VappResource s = VappResource'
 
 vappResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (VappResource s)
+    -> P.Resource (VappResource s)
 vappResource _name =
     TF.newResource "vcd_vapp" TF.validator $
         VappResource'
@@ -752,7 +752,7 @@ vappVmResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
     -> TF.Attr s P.Text -- ^ @vapp_name@ - 'P.vappName'
-    -> TF.Resource P.Provider (VappVmResource s)
+    -> P.Resource (VappVmResource s)
 vappVmResource _catalogName _name _templateName _vappName =
     TF.newResource "vcd_vapp_vm" TF.validator $
         VappVmResource'

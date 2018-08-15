@@ -17,6 +17,7 @@ module Terrafomo.VCloudDirector
     , module Terrafomo.VCloudDirector.Provider
     , module Terrafomo.VCloudDirector.Lens
     , module Terrafomo.VCloudDirector.Settings
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.VCloudDirector.Lens
