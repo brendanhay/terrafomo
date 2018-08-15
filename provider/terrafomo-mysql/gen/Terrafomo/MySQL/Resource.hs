@@ -75,7 +75,7 @@ data DatabaseResource s = DatabaseResource'
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DatabaseResource s)
+    -> P.Resource (DatabaseResource s)
 databaseResource _name =
     TF.newResource "mysql_database" TF.validator $
         DatabaseResource'
@@ -135,7 +135,7 @@ grantResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @privileges@ - 'P.privileges'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (GrantResource s)
+    -> P.Resource (GrantResource s)
 grantResource _database _privileges _user =
     TF.newResource "mysql_grant" TF.validator $
         GrantResource'
@@ -210,7 +210,7 @@ data UserResource s = UserResource'
 
 userResource
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _user =
     TF.newResource "mysql_user" TF.validator $
         UserResource'

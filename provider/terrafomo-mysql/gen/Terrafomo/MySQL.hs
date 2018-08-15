@@ -17,6 +17,7 @@ module Terrafomo.MySQL
     , module Terrafomo.MySQL.Lens
     , module Terrafomo.MySQL.Resource
     , module Terrafomo.MySQL.Provider
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.MySQL.Lens
