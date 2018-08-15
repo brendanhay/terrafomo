@@ -18,6 +18,7 @@ module Terrafomo.OPC
     , module Terrafomo.OPC.Resource
     , module Terrafomo.OPC.Settings
     , module Terrafomo.OPC.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.OPC.DataSource

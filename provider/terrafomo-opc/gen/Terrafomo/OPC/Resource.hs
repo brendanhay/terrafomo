@@ -202,7 +202,7 @@ data ComputeAclResource s = ComputeAclResource'
 
 computeAclResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeAclResource s)
+    -> P.Resource (ComputeAclResource s)
 computeAclResource _name =
     TF.newResource "opc_compute_acl" TF.validator $
         ComputeAclResource'
@@ -265,7 +265,7 @@ data ComputeImageListResource s = ComputeImageListResource'
 computeImageListResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeImageListResource s)
+    -> P.Resource (ComputeImageListResource s)
 computeImageListResource _description _name =
     TF.newResource "opc_compute_image_list" TF.validator $
         ComputeImageListResource'
@@ -322,7 +322,7 @@ computeImageListEntryResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @machine_images@ - 'P.machineImages'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @version@ - 'P.version'
-    -> TF.Resource P.Provider (ComputeImageListEntryResource s)
+    -> P.Resource (ComputeImageListEntryResource s)
 computeImageListEntryResource _machineImages _name _version =
     TF.newResource "opc_compute_image_list_entry" TF.validator $
         ComputeImageListEntryResource'
@@ -406,7 +406,7 @@ data ComputeInstanceResource s = ComputeInstanceResource'
 computeInstanceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @shape@ - 'P.shape'
-    -> TF.Resource P.Provider (ComputeInstanceResource s)
+    -> P.Resource (ComputeInstanceResource s)
 computeInstanceResource _name _shape =
     TF.newResource "opc_compute_instance" TF.validator $
         ComputeInstanceResource'
@@ -586,7 +586,7 @@ data ComputeIpAddressAssociationResource s = ComputeIpAddressAssociationResource
 
 computeIpAddressAssociationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeIpAddressAssociationResource s)
+    -> P.Resource (ComputeIpAddressAssociationResource s)
 computeIpAddressAssociationResource _name =
     TF.newResource "opc_compute_ip_address_association" TF.validator $
         ComputeIpAddressAssociationResource'
@@ -658,7 +658,7 @@ data ComputeIpAddressPrefixSetResource s = ComputeIpAddressPrefixSetResource'
 
 computeIpAddressPrefixSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeIpAddressPrefixSetResource s)
+    -> P.Resource (ComputeIpAddressPrefixSetResource s)
 computeIpAddressPrefixSetResource _name =
     TF.newResource "opc_compute_ip_address_prefix_set" TF.validator $
         ComputeIpAddressPrefixSetResource'
@@ -724,7 +724,7 @@ data ComputeIpAddressReservationResource s = ComputeIpAddressReservationResource
 computeIpAddressReservationResource
     :: TF.Attr s P.Text -- ^ @ip_address_pool@ - 'P.ipAddressPool'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeIpAddressReservationResource s)
+    -> P.Resource (ComputeIpAddressReservationResource s)
 computeIpAddressReservationResource _ipAddressPool _name =
     TF.newResource "opc_compute_ip_address_reservation" TF.validator $
         ComputeIpAddressReservationResource'
@@ -787,7 +787,7 @@ data ComputeIpAssociationResource s = ComputeIpAssociationResource'
 computeIpAssociationResource
     :: TF.Attr s P.Text -- ^ @parent_pool@ - 'P.parentPool'
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
-    -> TF.Resource P.Provider (ComputeIpAssociationResource s)
+    -> P.Resource (ComputeIpAssociationResource s)
 computeIpAssociationResource _parentPool _vcable =
     TF.newResource "opc_compute_ip_association" TF.validator $
         ComputeIpAssociationResource'
@@ -845,7 +845,7 @@ data ComputeIpNetworkResource s = ComputeIpNetworkResource'
 computeIpNetworkResource
     :: TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeIpNetworkResource s)
+    -> P.Resource (ComputeIpNetworkResource s)
 computeIpNetworkResource _ipAddressPrefix _name =
     TF.newResource "opc_compute_ip_network" TF.validator $
         ComputeIpNetworkResource'
@@ -921,7 +921,7 @@ data ComputeIpNetworkExchangeResource s = ComputeIpNetworkExchangeResource'
 
 computeIpNetworkExchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeIpNetworkExchangeResource s)
+    -> P.Resource (ComputeIpNetworkExchangeResource s)
 computeIpNetworkExchangeResource _name =
     TF.newResource "opc_compute_ip_network_exchange" TF.validator $
         ComputeIpNetworkExchangeResource'
@@ -976,7 +976,7 @@ data ComputeIpReservationResource s = ComputeIpReservationResource'
 
 computeIpReservationResource
     :: TF.Attr s P.Bool -- ^ @permanent@ - 'P.permanent'
-    -> TF.Resource P.Provider (ComputeIpReservationResource s)
+    -> P.Resource (ComputeIpReservationResource s)
 computeIpReservationResource _permanent =
     TF.newResource "opc_compute_ip_reservation" TF.validator $
         ComputeIpReservationResource'
@@ -1045,7 +1045,7 @@ computeMachineImageResource
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
     -> TF.Attr s P.Text -- ^ @file@ - 'P.file'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeMachineImageResource s)
+    -> P.Resource (ComputeMachineImageResource s)
 computeMachineImageResource _account _file _name =
     TF.newResource "opc_compute_machine_image" TF.validator $
         ComputeMachineImageResource'
@@ -1140,7 +1140,7 @@ computeOrchestratedInstanceResource
     :: TF.Attr s P.Text -- ^ @desired_state@ - 'P.desiredState'
     -> TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstance s)] -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeOrchestratedInstanceResource s)
+    -> P.Resource (ComputeOrchestratedInstanceResource s)
 computeOrchestratedInstanceResource _desiredState _instance' _name =
     TF.newResource "opc_compute_orchestrated_instance" TF.validator $
         ComputeOrchestratedInstanceResource'
@@ -1224,7 +1224,7 @@ computeRouteResource
     :: TF.Attr s P.Text -- ^ @ip_address_prefix@ - 'P.ipAddressPrefix'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @next_hop_vnic_set@ - 'P.nextHopVnicSet'
-    -> TF.Resource P.Provider (ComputeRouteResource s)
+    -> P.Resource (ComputeRouteResource s)
 computeRouteResource _ipAddressPrefix _name _nextHopVnicSet =
     TF.newResource "opc_compute_route" TF.validator $
         ComputeRouteResource'
@@ -1313,7 +1313,7 @@ computeSecRuleResource
     -> TF.Attr s P.Text -- ^ @destination_list@ - 'P.destinationList'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_list@ - 'P.sourceList'
-    -> TF.Resource P.Provider (ComputeSecRuleResource s)
+    -> P.Resource (ComputeSecRuleResource s)
 computeSecRuleResource _action _application _destinationList _name _sourceList =
     TF.newResource "opc_compute_sec_rule" TF.validator $
         ComputeSecRuleResource'
@@ -1403,7 +1403,7 @@ data ComputeSecurityApplicationResource s = ComputeSecurityApplicationResource'
 computeSecurityApplicationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
-    -> TF.Resource P.Provider (ComputeSecurityApplicationResource s)
+    -> P.Resource (ComputeSecurityApplicationResource s)
 computeSecurityApplicationResource _name _protocol =
     TF.newResource "opc_compute_security_application" TF.validator $
         ComputeSecurityApplicationResource'
@@ -1474,7 +1474,7 @@ data ComputeSecurityAssociationResource s = ComputeSecurityAssociationResource'
 computeSecurityAssociationResource
     :: TF.Attr s P.Text -- ^ @seclist@ - 'P.seclist'
     -> TF.Attr s P.Text -- ^ @vcable@ - 'P.vcable'
-    -> TF.Resource P.Provider (ComputeSecurityAssociationResource s)
+    -> P.Resource (ComputeSecurityAssociationResource s)
 computeSecurityAssociationResource _seclist _vcable =
     TF.newResource "opc_compute_security_association" TF.validator $
         ComputeSecurityAssociationResource'
@@ -1523,7 +1523,7 @@ data ComputeSecurityIpListResource s = ComputeSecurityIpListResource'
 computeSecurityIpListResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @ip_entries@ - 'P.ipEntries'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSecurityIpListResource s)
+    -> P.Resource (ComputeSecurityIpListResource s)
 computeSecurityIpListResource _ipEntries _name =
     TF.newResource "opc_compute_security_ip_list" TF.validator $
         ComputeSecurityIpListResource'
@@ -1578,7 +1578,7 @@ data ComputeSecurityListResource s = ComputeSecurityListResource'
 
 computeSecurityListResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSecurityListResource s)
+    -> P.Resource (ComputeSecurityListResource s)
 computeSecurityListResource _name =
     TF.newResource "opc_compute_security_list" TF.validator $
         ComputeSecurityListResource'
@@ -1646,7 +1646,7 @@ data ComputeSecurityProtocolResource s = ComputeSecurityProtocolResource'
 
 computeSecurityProtocolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSecurityProtocolResource s)
+    -> P.Resource (ComputeSecurityProtocolResource s)
 computeSecurityProtocolResource _name =
     TF.newResource "opc_compute_security_protocol" TF.validator $
         ComputeSecurityProtocolResource'
@@ -1747,7 +1747,7 @@ data ComputeSecurityRuleResource s = ComputeSecurityRuleResource'
 computeSecurityRuleResource
     :: TF.Attr s P.Text -- ^ @flow_direction@ - 'P.flowDirection'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSecurityRuleResource s)
+    -> P.Resource (ComputeSecurityRuleResource s)
 computeSecurityRuleResource _flowDirection _name =
     TF.newResource "opc_compute_security_rule" TF.validator $
         ComputeSecurityRuleResource'
@@ -1855,7 +1855,7 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
 
 computeSnapshotResource
     :: TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
-    -> TF.Resource P.Provider (ComputeSnapshotResource s)
+    -> P.Resource (ComputeSnapshotResource s)
 computeSnapshotResource _instance' =
     TF.newResource "opc_compute_snapshot" TF.validator $
         ComputeSnapshotResource'
@@ -1913,7 +1913,7 @@ data ComputeSshKeyResource s = ComputeSshKeyResource'
 computeSshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeSshKeyResource s)
+    -> P.Resource (ComputeSshKeyResource s)
 computeSshKeyResource _key _name =
     TF.newResource "opc_compute_ssh_key" TF.validator $
         ComputeSshKeyResource'
@@ -1967,7 +1967,7 @@ computeStorageAttachmentResource
     :: TF.Attr s P.Integer -- ^ @index@ - 'P.index'
     -> TF.Attr s P.Text -- ^ @instance@ - 'P.instance''
     -> TF.Attr s P.Text -- ^ @storage_volume@ - 'P.storageVolume'
-    -> TF.Resource P.Provider (ComputeStorageAttachmentResource s)
+    -> P.Resource (ComputeStorageAttachmentResource s)
 computeStorageAttachmentResource _index _instance' _storageVolume =
     TF.newResource "opc_compute_storage_attachment" TF.validator $
         ComputeStorageAttachmentResource'
@@ -2035,7 +2035,7 @@ data ComputeStorageVolumeResource s = ComputeStorageVolumeResource'
 computeStorageVolumeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
-    -> TF.Resource P.Provider (ComputeStorageVolumeResource s)
+    -> P.Resource (ComputeStorageVolumeResource s)
 computeStorageVolumeResource _name _size =
     TF.newResource "opc_compute_storage_volume" TF.validator $
         ComputeStorageVolumeResource'
@@ -2161,7 +2161,7 @@ data ComputeStorageVolumeSnapshotResource s = ComputeStorageVolumeSnapshotResour
 
 computeStorageVolumeSnapshotResource
     :: TF.Attr s P.Text -- ^ @volume_name@ - 'P.volumeName'
-    -> TF.Resource P.Provider (ComputeStorageVolumeSnapshotResource s)
+    -> P.Resource (ComputeStorageVolumeSnapshotResource s)
 computeStorageVolumeSnapshotResource _volumeName =
     TF.newResource "opc_compute_storage_volume_snapshot" TF.validator $
         ComputeStorageVolumeSnapshotResource'
@@ -2269,7 +2269,7 @@ data ComputeVnicSetResource s = ComputeVnicSetResource'
 
 computeVnicSetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ComputeVnicSetResource s)
+    -> P.Resource (ComputeVnicSetResource s)
 computeVnicSetResource _name =
     TF.newResource "opc_compute_vnic_set" TF.validator $
         ComputeVnicSetResource'
@@ -2339,7 +2339,7 @@ lbaasCertificateResource
     :: TF.Attr s P.Text -- ^ @certificate_body@ - 'P.certificateBody'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (LbaasCertificateResource s)
+    -> P.Resource (LbaasCertificateResource s)
 lbaasCertificateResource _certificateBody _name _type' =
     TF.newResource "opc_lbaas_certificate" TF.validator $
         LbaasCertificateResource'
@@ -2442,7 +2442,7 @@ lbaasListenerResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Integer -- ^ @port@ - 'P.port'
     -> TF.Attr s P.Text -- ^ @server_protocol@ - 'P.serverProtocol'
-    -> TF.Resource P.Provider (LbaasListenerResource s)
+    -> P.Resource (LbaasListenerResource s)
 lbaasListenerResource _balancerProtocol _loadBalancer _name _port _serverProtocol =
     TF.newResource "opc_lbaas_listener" TF.validator $
         LbaasListenerResource'
@@ -2595,7 +2595,7 @@ lbaasLoadBalancerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> TF.Attr s P.Text -- ^ @scheme@ - 'P.scheme'
-    -> TF.Resource P.Provider (LbaasLoadBalancerResource s)
+    -> P.Resource (LbaasLoadBalancerResource s)
 lbaasLoadBalancerResource _name _region _scheme =
     TF.newResource "opc_lbaas_load_balancer" TF.validator $
         LbaasLoadBalancerResource'
@@ -2856,7 +2856,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
 lbaasPolicyResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (LbaasPolicyResource s)
+    -> P.Resource (LbaasPolicyResource s)
 lbaasPolicyResource _loadBalancer _name =
     TF.newResource "opc_lbaas_policy" TF.validator $
         LbaasPolicyResource'
@@ -3085,7 +3085,7 @@ lbaasServerPoolResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @servers@ - 'P.servers'
-    -> TF.Resource P.Provider (LbaasServerPoolResource s)
+    -> P.Resource (LbaasServerPoolResource s)
 lbaasServerPoolResource _loadBalancer _name _servers =
     TF.newResource "opc_lbaas_server_pool" TF.validator $
         LbaasServerPoolResource'
@@ -3196,7 +3196,7 @@ data StorageContainerResource s = StorageContainerResource'
 
 storageContainerResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (StorageContainerResource s)
+    -> P.Resource (StorageContainerResource s)
 storageContainerResource _name =
     TF.newResource "opc_storage_container" TF.validator $
         StorageContainerResource'
@@ -3324,7 +3324,7 @@ data StorageObjectResource s = StorageObjectResource'
 storageObjectResource
     :: TF.Attr s P.Text -- ^ @container@ - 'P.container'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (StorageObjectResource s)
+    -> P.Resource (StorageObjectResource s)
 storageObjectResource _container _name =
     TF.newResource "opc_storage_object" TF.validator $
         StorageObjectResource'

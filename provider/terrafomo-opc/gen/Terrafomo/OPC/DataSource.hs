@@ -96,7 +96,7 @@ data ComputeImageListEntryData s = ComputeImageListEntryData'
 computeImageListEntryData
     :: TF.Attr s P.Text -- ^ @image_list@ - 'P.imageList'
     -> TF.Attr s P.Integer -- ^ @version@ - 'P.version'
-    -> TF.DataSource P.Provider (ComputeImageListEntryData s)
+    -> P.DataSource (ComputeImageListEntryData s)
 computeImageListEntryData _imageList _version =
     TF.newDataSource "opc_compute_image_list_entry" TF.validator $
         ComputeImageListEntryData'
@@ -130,6 +130,9 @@ instance P.HasVersion (ComputeImageListEntryData s) (TF.Attr s P.Integer) where
         P.lens (_version :: ComputeImageListEntryData s -> TF.Attr s P.Integer)
                (\s a -> s { _version = a } :: ComputeImageListEntryData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeImageListEntryData s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
@@ -151,7 +154,7 @@ data ComputeIpAddressReservationData s = ComputeIpAddressReservationData'
 
 computeIpAddressReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeIpAddressReservationData s)
+    -> P.DataSource (ComputeIpAddressReservationData s)
 computeIpAddressReservationData _name =
     TF.newDataSource "opc_compute_ip_address_reservation" TF.validator $
         ComputeIpAddressReservationData'
@@ -170,6 +173,9 @@ instance P.HasName (ComputeIpAddressReservationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeIpAddressReservationData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeIpAddressReservationData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeIpAddressReservationData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -198,7 +204,7 @@ data ComputeIpReservationData s = ComputeIpReservationData'
 
 computeIpReservationData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeIpReservationData s)
+    -> P.DataSource (ComputeIpReservationData s)
 computeIpReservationData _name =
     TF.newDataSource "opc_compute_ip_reservation" TF.validator $
         ComputeIpReservationData'
@@ -217,6 +223,9 @@ instance P.HasName (ComputeIpReservationData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeIpReservationData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeIpReservationData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (ComputeIpReservationData s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
@@ -249,7 +258,7 @@ data ComputeMachineImageData s = ComputeMachineImageData'
 computeMachineImageData
     :: TF.Attr s P.Text -- ^ @account@ - 'P.account'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeMachineImageData s)
+    -> P.DataSource (ComputeMachineImageData s)
 computeMachineImageData _account _name =
     TF.newDataSource "opc_compute_machine_image" TF.validator $
         ComputeMachineImageData'
@@ -275,6 +284,9 @@ instance P.HasName (ComputeMachineImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeMachineImageData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeMachineImageData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (ComputeMachineImageData s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "attributes"
@@ -329,7 +341,7 @@ computeNetworkInterfaceData
     :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
     -> TF.Attr s P.Text -- ^ @interface@ - 'P.interface'
-    -> TF.DataSource P.Provider (ComputeNetworkInterfaceData s)
+    -> P.DataSource (ComputeNetworkInterfaceData s)
 computeNetworkInterfaceData _instanceId _instanceName _interface =
     TF.newDataSource "opc_compute_network_interface" TF.validator $
         ComputeNetworkInterfaceData'
@@ -362,6 +374,9 @@ instance P.HasInterface (ComputeNetworkInterfaceData s) (TF.Attr s P.Text) where
     interface =
         P.lens (_interface :: ComputeNetworkInterfaceData s -> TF.Attr s P.Text)
                (\s a -> s { _interface = a } :: ComputeNetworkInterfaceData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDns (TF.Ref s' (ComputeNetworkInterfaceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDns x = TF.compute (TF.refKey x) "dns"
@@ -414,7 +429,7 @@ data ComputeSshKeyData s = ComputeSshKeyData'
 
 computeSshKeyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeSshKeyData s)
+    -> P.DataSource (ComputeSshKeyData s)
 computeSshKeyData _name =
     TF.newDataSource "opc_compute_ssh_key" TF.validator $
         ComputeSshKeyData'
@@ -434,6 +449,9 @@ instance P.HasName (ComputeSshKeyData s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeSshKeyData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeSshKeyData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ComputeSshKeyData s)) (TF.Attr s P.Bool) where
     computedEnabled x = TF.compute (TF.refKey x) "enabled"
 
@@ -452,7 +470,7 @@ data ComputeStorageVolumeSnapshotData s = ComputeStorageVolumeSnapshotData'
 
 computeStorageVolumeSnapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeStorageVolumeSnapshotData s)
+    -> P.DataSource (ComputeStorageVolumeSnapshotData s)
 computeStorageVolumeSnapshotData _name =
     TF.newDataSource "opc_compute_storage_volume_snapshot" TF.validator $
         ComputeStorageVolumeSnapshotData'
@@ -471,6 +489,9 @@ instance P.HasName (ComputeStorageVolumeSnapshotData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeStorageVolumeSnapshotData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeStorageVolumeSnapshotData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccount (TF.Ref s' (ComputeStorageVolumeSnapshotData s)) (TF.Attr s P.Text) where
     computedAccount x = TF.compute (TF.refKey x) "account"
@@ -535,7 +556,7 @@ data ComputeVnicData s = ComputeVnicData'
 
 computeVnicData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ComputeVnicData s)
+    -> P.DataSource (ComputeVnicData s)
 computeVnicData _name =
     TF.newDataSource "opc_compute_vnic" TF.validator $
         ComputeVnicData'
@@ -554,6 +575,9 @@ instance P.HasName (ComputeVnicData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeVnicData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeVnicData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeVnicData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
