@@ -17,6 +17,7 @@ module Terrafomo.DNSMadeEasy
     , module Terrafomo.DNSMadeEasy.Resource
     , module Terrafomo.DNSMadeEasy.Provider
     , module Terrafomo.DNSMadeEasy.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.DNSMadeEasy.Lens
