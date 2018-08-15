@@ -121,7 +121,7 @@ jobResource
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project_name@ - 'P.projectName'
-    -> TF.Resource P.Provider (JobResource s)
+    -> P.Resource (JobResource s)
 jobResource _command _description _name _projectName =
     TF.newResource "rundeck_job" TF.validator $
         JobResource'
@@ -278,7 +278,7 @@ data PrivateKeyResource s = PrivateKeyResource'
 privateKeyResource
     :: TF.Attr s P.Text -- ^ @key_material@ - 'P.keyMaterial'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Resource P.Provider (PrivateKeyResource s)
+    -> P.Resource (PrivateKeyResource s)
 privateKeyResource _keyMaterial _path =
     TF.newResource "rundeck_private_key" TF.validator $
         PrivateKeyResource'
@@ -347,7 +347,7 @@ data ProjectResource s = ProjectResource'
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
-    -> TF.Resource P.Provider (ProjectResource s)
+    -> P.Resource (ProjectResource s)
 projectResource _name _resourceModelSource =
     TF.newResource "rundeck_project" TF.validator $
         ProjectResource'
@@ -443,7 +443,7 @@ data PublicKeyResource s = PublicKeyResource'
 
 publicKeyResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Resource P.Provider (PublicKeyResource s)
+    -> P.Resource (PublicKeyResource s)
 publicKeyResource _path =
     TF.newResource "rundeck_public_key" TF.validator $
         PublicKeyResource'

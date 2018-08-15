@@ -17,6 +17,7 @@ module Terrafomo.Rundeck
     , module Terrafomo.Rundeck.Provider
     , module Terrafomo.Rundeck.Resource
     , module Terrafomo.Rundeck.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Rundeck.Lens
