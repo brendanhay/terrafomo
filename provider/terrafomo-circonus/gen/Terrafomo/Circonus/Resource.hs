@@ -137,7 +137,7 @@ data CheckResource s = CheckResource'
     } deriving (P.Show, P.Eq, P.Generic)
 
 checkResource
-    :: TF.Resource P.Provider (CheckResource s)
+    :: P.Resource (CheckResource s)
 checkResource =
     TF.newResource "circonus_check" TF.validator $
         CheckResource'
@@ -412,7 +412,7 @@ data ContactGroupResource s = ContactGroupResource'
 
 contactGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ContactGroupResource s)
+    -> P.Resource (ContactGroupResource s)
 contactGroupResource _name =
     TF.newResource "circonus_contact_group" TF.validator $
         ContactGroupResource'
@@ -627,7 +627,7 @@ data GraphResource s = GraphResource'
 
 graphResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (GraphResource s)
+    -> P.Resource (GraphResource s)
 graphResource _name =
     TF.newResource "circonus_graph" TF.validator $
         GraphResource'
@@ -748,7 +748,7 @@ data MetricResource s = MetricResource'
 metricResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Resource P.Provider (MetricResource s)
+    -> P.Resource (MetricResource s)
 metricResource _name _type' =
     TF.newResource "circonus_metric" TF.validator $
         MetricResource'
@@ -817,7 +817,7 @@ data MetricClusterResource s = MetricClusterResource'
 
 metricClusterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (MetricClusterResource s)
+    -> P.Resource (MetricClusterResource s)
 metricClusterResource _name =
     TF.newResource "circonus_metric_cluster" TF.validator $
         MetricClusterResource'
@@ -892,7 +892,7 @@ ruleSetResource
     :: TF.Attr s P.Text -- ^ @check@ - 'P.check'
     -> TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIf s))) -- ^ @if@ - 'P.if''
     -> TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Resource P.Provider (RuleSetResource s)
+    -> P.Resource (RuleSetResource s)
 ruleSetResource _check _if' _metricName =
     TF.newResource "circonus_rule_set" TF.validator $
         RuleSetResource'

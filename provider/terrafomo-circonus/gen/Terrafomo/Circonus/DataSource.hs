@@ -61,7 +61,7 @@ data AccountData s = AccountData'
     deriving (P.Show, P.Eq, P.Generic)
 
 accountData
-    :: TF.DataSource P.Provider (AccountData s)
+    :: P.DataSource (AccountData s)
 accountData =
     TF.newDataSource "circonus_account" TF.validator $
         AccountData'
@@ -134,7 +134,7 @@ data CollectorData s = CollectorData'
     } deriving (P.Show, P.Eq, P.Generic)
 
 collectorData
-    :: TF.DataSource P.Provider (CollectorData s)
+    :: P.DataSource (CollectorData s)
 collectorData =
     TF.newDataSource "circonus_collector" TF.validator $
         CollectorData'

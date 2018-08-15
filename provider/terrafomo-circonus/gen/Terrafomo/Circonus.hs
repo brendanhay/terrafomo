@@ -18,6 +18,7 @@ module Terrafomo.Circonus
     , module Terrafomo.Circonus.Resource
     , module Terrafomo.Circonus.Settings
     , module Terrafomo.Circonus.Lens
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Circonus.DataSource
