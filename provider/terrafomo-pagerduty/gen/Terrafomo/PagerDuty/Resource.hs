@@ -105,7 +105,7 @@ data AddonResource s = AddonResource'
 addonResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @src@ - 'P.src'
-    -> TF.Resource P.Provider (AddonResource s)
+    -> P.Resource (AddonResource s)
 addonResource _name _src =
     TF.newResource "pagerduty_addon" TF.validator $
         AddonResource'
@@ -157,7 +157,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
 escalationPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (EscalationPolicyRule s)] -- ^ @rule@ - 'P.rule'
-    -> TF.Resource P.Provider (EscalationPolicyResource s)
+    -> P.Resource (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
     TF.newResource "pagerduty_escalation_policy" TF.validator $
         EscalationPolicyResource'
@@ -228,7 +228,7 @@ data ExtensionResource s = ExtensionResource'
 extensionResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @extension_objects@ - 'P.extensionObjects'
     -> TF.Attr s P.Text -- ^ @extension_schema@ - 'P.extensionSchema'
-    -> TF.Resource P.Provider (ExtensionResource s)
+    -> P.Resource (ExtensionResource s)
 extensionResource _extensionObjects _extensionSchema =
     TF.newResource "pagerduty_extension" TF.validator $
         ExtensionResource'
@@ -291,7 +291,7 @@ maintenanceWindowResource
     :: TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
     -> TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
-    -> TF.Resource P.Provider (MaintenanceWindowResource s)
+    -> P.Resource (MaintenanceWindowResource s)
 maintenanceWindowResource _endTime _services _startTime =
     TF.newResource "pagerduty_maintenance_window" TF.validator $
         MaintenanceWindowResource'
@@ -357,7 +357,7 @@ data ScheduleResource s = ScheduleResource'
 scheduleResource
     :: TF.Attr s [TF.Attr s (ScheduleLayer s)] -- ^ @layer@ - 'P.layer'
     -> TF.Attr s P.Text -- ^ @time_zone@ - 'P.timeZone'
-    -> TF.Resource P.Provider (ScheduleResource s)
+    -> P.Resource (ScheduleResource s)
 scheduleResource _layer _timeZone =
     TF.newResource "pagerduty_schedule" TF.validator $
         ScheduleResource'
@@ -442,7 +442,7 @@ data ServiceResource s = ServiceResource'
 
 serviceResource
     :: TF.Attr s P.Text -- ^ @escalation_policy@ - 'P.escalationPolicy'
-    -> TF.Resource P.Provider (ServiceResource s)
+    -> P.Resource (ServiceResource s)
 serviceResource _escalationPolicy =
     TF.newResource "pagerduty_service" TF.validator $
         ServiceResource'
@@ -546,7 +546,7 @@ data ServiceIntegrationResource s = ServiceIntegrationResource'
 
 serviceIntegrationResource
     :: TF.Attr s P.Text -- ^ @service@ - 'P.service'
-    -> TF.Resource P.Provider (ServiceIntegrationResource s)
+    -> P.Resource (ServiceIntegrationResource s)
 serviceIntegrationResource _service =
     TF.newResource "pagerduty_service_integration" TF.validator $
         ServiceIntegrationResource'
@@ -603,7 +603,7 @@ data TeamResource s = TeamResource'
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (TeamResource s)
+    -> P.Resource (TeamResource s)
 teamResource _name =
     TF.newResource "pagerduty_team" TF.validator $
         TeamResource'
@@ -646,7 +646,7 @@ data TeamMembershipResource s = TeamMembershipResource'
 teamMembershipResource
     :: TF.Attr s P.Text -- ^ @team_id@ - 'P.teamId'
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
-    -> TF.Resource P.Provider (TeamMembershipResource s)
+    -> P.Resource (TeamMembershipResource s)
 teamMembershipResource _teamId _userId =
     TF.newResource "pagerduty_team_membership" TF.validator $
         TeamMembershipResource'
@@ -701,7 +701,7 @@ data UserResource s = UserResource'
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _email _name =
     TF.newResource "pagerduty_user" TF.validator $
         UserResource'
@@ -801,7 +801,7 @@ userContactMethodResource
     -> TF.Attr s P.Text -- ^ @label@ - 'P.label'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
-    -> TF.Resource P.Provider (UserContactMethodResource s)
+    -> P.Resource (UserContactMethodResource s)
 userContactMethodResource _address _label _type' _userId =
     TF.newResource "pagerduty_user_contact_method" TF.validator $
         UserContactMethodResource'

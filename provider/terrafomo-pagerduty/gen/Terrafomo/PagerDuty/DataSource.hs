@@ -81,7 +81,7 @@ data EscalationPolicyData s = EscalationPolicyData'
 
 escalationPolicyData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (EscalationPolicyData s)
+    -> P.DataSource (EscalationPolicyData s)
 escalationPolicyData _name =
     TF.newDataSource "pagerduty_escalation_policy" TF.validator $
         EscalationPolicyData'
@@ -101,6 +101,9 @@ instance P.HasName (EscalationPolicyData s) (TF.Attr s P.Text) where
         P.lens (_name :: EscalationPolicyData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EscalationPolicyData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EscalationPolicyData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @pagerduty_extension_schema@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/pagerduty/d/extension_schema.html terraform documentation>
@@ -113,7 +116,7 @@ data ExtensionSchemaData s = ExtensionSchemaData'
 
 extensionSchemaData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ExtensionSchemaData s)
+    -> P.DataSource (ExtensionSchemaData s)
 extensionSchemaData _name =
     TF.newDataSource "pagerduty_extension_schema" TF.validator $
         ExtensionSchemaData'
@@ -133,6 +136,9 @@ instance P.HasName (ExtensionSchemaData s) (TF.Attr s P.Text) where
         P.lens (_name :: ExtensionSchemaData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ExtensionSchemaData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedType (TF.Ref s' (ExtensionSchemaData s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"
 
@@ -148,7 +154,7 @@ data ScheduleData s = ScheduleData'
 
 scheduleData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (ScheduleData s)
+    -> P.DataSource (ScheduleData s)
 scheduleData _name =
     TF.newDataSource "pagerduty_schedule" TF.validator $
         ScheduleData'
@@ -168,6 +174,9 @@ instance P.HasName (ScheduleData s) (TF.Attr s P.Text) where
         P.lens (_name :: ScheduleData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ScheduleData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ScheduleData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @pagerduty_team@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/pagerduty/d/team.html terraform documentation>
@@ -181,7 +190,7 @@ data TeamData s = TeamData'
 
 teamData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (TeamData s)
+    -> P.DataSource (TeamData s)
 teamData _name =
     TF.newDataSource "pagerduty_team" TF.validator $
         TeamData'
@@ -201,6 +210,9 @@ instance P.HasName (TeamData s) (TF.Attr s P.Text) where
         P.lens (_name :: TeamData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TeamData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (TeamData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
@@ -216,7 +228,7 @@ data UserData s = UserData'
 
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.DataSource P.Provider (UserData s)
+    -> P.DataSource (UserData s)
 userData _email =
     TF.newDataSource "pagerduty_user" TF.validator $
         UserData'
@@ -236,6 +248,9 @@ instance P.HasEmail (UserData s) (TF.Attr s P.Text) where
         P.lens (_email :: UserData s -> TF.Attr s P.Text)
                (\s a -> s { _email = a } :: UserData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedName (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
@@ -254,7 +269,7 @@ data VendorData s = VendorData'
 
 vendorData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.DataSource P.Provider (VendorData s)
+    -> P.DataSource (VendorData s)
 vendorData _name =
     TF.newDataSource "pagerduty_vendor" TF.validator $
         VendorData'
@@ -280,6 +295,9 @@ instance P.HasNameRegex (VendorData s) (TF.Attr s P.Text) where
     nameRegex =
         P.lens (_nameRegex :: VendorData s -> TF.Attr s P.Text)
                (\s a -> s { _nameRegex = a } :: VendorData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (VendorData s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"

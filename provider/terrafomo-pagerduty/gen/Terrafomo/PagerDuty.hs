@@ -18,6 +18,7 @@ module Terrafomo.PagerDuty
     , module Terrafomo.PagerDuty.Lens
     , module Terrafomo.PagerDuty.Settings
     , module Terrafomo.PagerDuty.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.PagerDuty.DataSource
