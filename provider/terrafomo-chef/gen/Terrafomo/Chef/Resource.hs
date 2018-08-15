@@ -77,7 +77,7 @@ data DataBagResource s = DataBagResource'
 
 dataBagResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (DataBagResource s)
+    -> P.Resource (DataBagResource s)
 dataBagResource _name =
     TF.newResource "chef_data_bag" TF.validator $
         DataBagResource'
@@ -116,7 +116,7 @@ data DataBagItemResource s = DataBagItemResource'
 dataBagItemResource
     :: TF.Attr s P.Text -- ^ @content_json@ - 'P.contentJson'
     -> TF.Attr s P.Text -- ^ @data_bag_name@ - 'P.dataBagName'
-    -> TF.Resource P.Provider (DataBagItemResource s)
+    -> P.Resource (DataBagItemResource s)
 dataBagItemResource _contentJson _dataBagName =
     TF.newResource "chef_data_bag_item" TF.validator $
         DataBagItemResource'
@@ -170,7 +170,7 @@ data EnvironmentResource s = EnvironmentResource'
 
 environmentResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (EnvironmentResource s)
+    -> P.Resource (EnvironmentResource s)
 environmentResource _name =
     TF.newResource "chef_environment" TF.validator $
         EnvironmentResource'
@@ -248,7 +248,7 @@ data NodeResource s = NodeResource'
 
 nodeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NodeResource s)
+    -> P.Resource (NodeResource s)
 nodeResource _name =
     TF.newResource "chef_node" TF.validator $
         NodeResource'
@@ -334,7 +334,7 @@ data RoleResource s = RoleResource'
 
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (RoleResource s)
+    -> P.Resource (RoleResource s)
 roleResource _name =
     TF.newResource "chef_role" TF.validator $
         RoleResource'

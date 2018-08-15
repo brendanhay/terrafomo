@@ -17,6 +17,7 @@ module Terrafomo.Chef
     , module Terrafomo.Chef.Provider
     , module Terrafomo.Chef.Resource
     , module Terrafomo.Chef.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Chef.Lens
