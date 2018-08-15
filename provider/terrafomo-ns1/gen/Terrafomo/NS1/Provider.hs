@@ -20,6 +20,10 @@ module Terrafomo.NS1.Provider
     -- * NS1 Provider Datatype
       Provider (..)
     , newProvider
+
+    -- * NS1 Specific Aliases
+    , DataSource
+    , Resource
     ) where
 
 import Data.Function ((&))
@@ -41,11 +45,16 @@ import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
 import qualified Prelude             as P
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Lifecycle as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.NS1.Lens  as P
 import qualified Terrafomo.NS1.Types as P
 import qualified Terrafomo.Provider  as TF
+import qualified Terrafomo.Schema    as TF
 import qualified Terrafomo.Validator as TF
+
+type DataSource a = TF.Schema ()               Provider a
+type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
 -- | The @NS1@ Terraform provider configuration.
 --

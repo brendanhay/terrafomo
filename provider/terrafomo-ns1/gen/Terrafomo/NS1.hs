@@ -17,6 +17,7 @@ module Terrafomo.NS1
     , module Terrafomo.NS1.Settings
     , module Terrafomo.NS1.Lens
     , module Terrafomo.NS1.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.NS1.Lens

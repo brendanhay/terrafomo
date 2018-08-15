@@ -153,7 +153,7 @@ data ApikeyResource s = ApikeyResource'
 
 apikeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ApikeyResource s)
+    -> P.Resource (ApikeyResource s)
 apikeyResource _name =
     TF.newResource "ns1_apikey" TF.validator $
         ApikeyResource'
@@ -338,7 +338,7 @@ data DatafeedResource s = DatafeedResource'
 datafeedResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
-    -> TF.Resource P.Provider (DatafeedResource s)
+    -> P.Resource (DatafeedResource s)
 datafeedResource _name _sourceId =
     TF.newResource "ns1_datafeed" TF.validator $
         DatafeedResource'
@@ -394,7 +394,7 @@ data DatasourceResource s = DatasourceResource'
 datasourceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @sourcetype@ - 'P.sourcetype'
-    -> TF.Resource P.Provider (DatasourceResource s)
+    -> P.Resource (DatasourceResource s)
 datasourceResource _name _sourcetype =
     TF.newResource "ns1_datasource" TF.validator $
         DatasourceResource'
@@ -489,7 +489,7 @@ monitoringjobResource
     -> TF.Attr s P.Text -- ^ @job_type@ - 'P.jobType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @regions@ - 'P.regions'
-    -> TF.Resource P.Provider (MonitoringjobResource s)
+    -> P.Resource (MonitoringjobResource s)
 monitoringjobResource _config _frequency _jobType _name _regions =
     TF.newResource "ns1_monitoringjob" TF.validator $
         MonitoringjobResource'
@@ -629,7 +629,7 @@ data NotifylistResource s = NotifylistResource'
 
 notifylistResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (NotifylistResource s)
+    -> P.Resource (NotifylistResource s)
 notifylistResource _name =
     TF.newResource "ns1_notifylist" TF.validator $
         NotifylistResource'
@@ -701,7 +701,7 @@ recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (RecordResource s)
+    -> P.Resource (RecordResource s)
 recordResource _domain _type' _zone =
     TF.newResource "ns1_record" TF.validator $
         RecordResource'
@@ -864,7 +864,7 @@ data TeamResource s = TeamResource'
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (TeamResource s)
+    -> P.Resource (TeamResource s)
 teamResource _name =
     TF.newResource "ns1_team" TF.validator $
         TeamResource'
@@ -1103,7 +1103,7 @@ userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _email _name _username =
     TF.newResource "ns1_user" TF.validator $
         UserResource'
@@ -1308,7 +1308,7 @@ data ZoneResource s = ZoneResource'
 
 zoneResource
     :: TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
-    -> TF.Resource P.Provider (ZoneResource s)
+    -> P.Resource (ZoneResource s)
 zoneResource _zone =
     TF.newResource "ns1_zone" TF.validator $
         ZoneResource'
