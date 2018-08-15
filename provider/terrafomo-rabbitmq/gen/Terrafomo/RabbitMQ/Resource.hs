@@ -103,7 +103,7 @@ bindingResource
     -> TF.Attr s P.Text -- ^ @destination_type@ - 'P.destinationType'
     -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
-    -> TF.Resource P.Provider (BindingResource s)
+    -> P.Resource (BindingResource s)
 bindingResource _destination _destinationType _source _vhost =
     TF.newResource "rabbitmq_binding" TF.validator $
         BindingResource'
@@ -180,7 +180,7 @@ data ExchangeResource s = ExchangeResource'
 exchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (ExchangeSettings s) -- ^ @settings@ - 'P.settings'
-    -> TF.Resource P.Provider (ExchangeResource s)
+    -> P.Resource (ExchangeResource s)
 exchangeResource _name _settings =
     TF.newResource "rabbitmq_exchange" TF.validator $
         ExchangeResource'
@@ -237,7 +237,7 @@ data PermissionsResource s = PermissionsResource'
 permissionsResource
     :: TF.Attr s (PermissionsPermissions s) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
-    -> TF.Resource P.Provider (PermissionsResource s)
+    -> P.Resource (PermissionsResource s)
 permissionsResource _permissions _user =
     TF.newResource "rabbitmq_permissions" TF.validator $
         PermissionsResource'
@@ -295,7 +295,7 @@ policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (PolicyPolicy s) -- ^ @policy@ - 'P.policy'
     -> TF.Attr s P.Text -- ^ @vhost@ - 'P.vhost'
-    -> TF.Resource P.Provider (PolicyResource s)
+    -> P.Resource (PolicyResource s)
 policyResource _name _policy _vhost =
     TF.newResource "rabbitmq_policy" TF.validator $
         PolicyResource'
@@ -352,7 +352,7 @@ data QueueResource s = QueueResource'
 queueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (QueueSettings s) -- ^ @settings@ - 'P.settings'
-    -> TF.Resource P.Provider (QueueResource s)
+    -> P.Resource (QueueResource s)
 queueResource _name _settings =
     TF.newResource "rabbitmq_queue" TF.validator $
         QueueResource'
@@ -409,7 +409,7 @@ data UserResource s = UserResource'
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _name _password =
     TF.newResource "rabbitmq_user" TF.validator $
         UserResource'
@@ -455,7 +455,7 @@ data VhostResource s = VhostResource'
 
 vhostResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (VhostResource s)
+    -> P.Resource (VhostResource s)
 vhostResource _name =
     TF.newResource "rabbitmq_vhost" TF.validator $
         VhostResource'

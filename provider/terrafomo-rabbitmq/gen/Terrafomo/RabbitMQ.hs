@@ -17,6 +17,7 @@ module Terrafomo.RabbitMQ
     , module Terrafomo.RabbitMQ.Lens
     , module Terrafomo.RabbitMQ.Resource
     , module Terrafomo.RabbitMQ.Provider
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.RabbitMQ.Lens
