@@ -18,6 +18,7 @@ module Terrafomo.OpenStack
     , module Terrafomo.OpenStack.Provider
     , module Terrafomo.OpenStack.DataSource
     , module Terrafomo.OpenStack.Types
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.OpenStack.DataSource
