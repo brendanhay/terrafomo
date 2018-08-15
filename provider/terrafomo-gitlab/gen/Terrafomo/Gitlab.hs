@@ -18,6 +18,7 @@ module Terrafomo.Gitlab
     , module Terrafomo.Gitlab.Lens
     , module Terrafomo.Gitlab.Settings
     , module Terrafomo.Gitlab.DataSource
+    -- * Provider Aliases
     ) where
 
 import Terrafomo.Gitlab.DataSource

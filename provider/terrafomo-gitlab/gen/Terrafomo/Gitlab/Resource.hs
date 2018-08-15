@@ -96,7 +96,7 @@ deployKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
-    -> TF.Resource P.Provider (DeployKeyResource s)
+    -> P.Resource (DeployKeyResource s)
 deployKeyResource _key _project _title =
     TF.newResource "gitlab_deploy_key" TF.validator $
         DeployKeyResource'
@@ -165,7 +165,7 @@ data GroupResource s = GroupResource'
 groupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Resource P.Provider (GroupResource s)
+    -> P.Resource (GroupResource s)
 groupResource _name _path =
     TF.newResource "gitlab_group" TF.validator $
         GroupResource'
@@ -246,7 +246,7 @@ labelResource
     :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> TF.Resource P.Provider (LabelResource s)
+    -> P.Resource (LabelResource s)
 labelResource _color _name _project =
     TF.newResource "gitlab_label" TF.validator $
         LabelResource'
@@ -323,7 +323,7 @@ data ProjectResource s = ProjectResource'
 
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Resource P.Provider (ProjectResource s)
+    -> P.Resource (ProjectResource s)
 projectResource _name =
     TF.newResource "gitlab_project" TF.validator $
         ProjectResource'
@@ -457,7 +457,7 @@ data ProjectHookResource s = ProjectHookResource'
 projectHookResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> TF.Resource P.Provider (ProjectHookResource s)
+    -> P.Resource (ProjectHookResource s)
 projectHookResource _project _url =
     TF.newResource "gitlab_project_hook" TF.validator $
         ProjectHookResource'
@@ -574,7 +574,7 @@ projectMembershipResource
     :: TF.Attr s P.Text -- ^ @access_level@ - 'P.accessLevel'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Integer -- ^ @user_id@ - 'P.userId'
-    -> TF.Resource P.Provider (ProjectMembershipResource s)
+    -> P.Resource (ProjectMembershipResource s)
 projectMembershipResource _accessLevel _projectId _userId =
     TF.newResource "gitlab_project_membership" TF.validator $
         ProjectMembershipResource'
@@ -647,7 +647,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
-    -> TF.Resource P.Provider (UserResource s)
+    -> P.Resource (UserResource s)
 userResource _email _name _password _username =
     TF.newResource "gitlab_user" TF.validator $
         UserResource'

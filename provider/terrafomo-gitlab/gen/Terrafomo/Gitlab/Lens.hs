@@ -63,6 +63,7 @@ module Terrafomo.Gitlab.Lens
     , HasComputedNamespaceId (..)
     , HasComputedHttpUrlToRepo (..)
     , HasComputedVisibilityLevel (..)
+    , HasComputedId (..)
     , HasComputedSshUrlToRepo (..)
     , HasComputedWebUrl (..)
     ) where
@@ -338,6 +339,9 @@ class HasComputedHttpUrlToRepo a b | a -> b where
 
 class HasComputedVisibilityLevel a b | a -> b where
     computedVisibilityLevel :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedSshUrlToRepo a b | a -> b where
     computedSshUrlToRepo :: a -> b

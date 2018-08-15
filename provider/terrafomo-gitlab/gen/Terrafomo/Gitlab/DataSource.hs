@@ -65,7 +65,7 @@ data ProjectData s = ProjectData'
 
 projectData
     :: TF.Attr s P.Integer -- ^ @id@ - 'P.id'
-    -> TF.DataSource P.Provider (ProjectData s)
+    -> P.DataSource (ProjectData s)
 projectData _id =
     TF.newDataSource "gitlab_project" TF.validator $
         ProjectData'
@@ -85,6 +85,9 @@ instance P.HasId (ProjectData s) (TF.Attr s P.Integer) where
         P.lens (_id :: ProjectData s -> TF.Attr s P.Integer)
                (\s a -> s { _id = a } :: ProjectData s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @gitlab_user@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/gitlab/d/user.html terraform documentation>
@@ -97,7 +100,7 @@ data UserData s = UserData'
 
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.DataSource P.Provider (UserData s)
+    -> P.DataSource (UserData s)
 userData _email =
     TF.newDataSource "gitlab_user" TF.validator $
         UserData'
@@ -116,3 +119,6 @@ instance P.HasEmail (UserData s) (TF.Attr s P.Text) where
     email =
         P.lens (_email :: UserData s -> TF.Attr s P.Text)
                (\s a -> s { _email = a } :: UserData s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
