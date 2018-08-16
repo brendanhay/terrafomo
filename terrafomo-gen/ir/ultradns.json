@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newGeoInfoSetting",
+                "smart": "geoInfoSetting",
                 "name": "GeoInfoSetting'"
             },
             "arguments": [
@@ -69,7 +69,7 @@
         },
         {
             "con": {
-                "smart": "newHttpProbeSetting",
+                "smart": "httpProbeSetting",
                 "name": "HttpProbeSetting'"
             },
             "arguments": [
@@ -119,7 +119,7 @@
         },
         {
             "con": {
-                "smart": "newIpInfoSetting",
+                "smart": "ipInfoSetting",
                 "name": "IpInfoSetting'"
             },
             "arguments": [
@@ -186,7 +186,7 @@
         },
         {
             "con": {
-                "smart": "newIpsSetting",
+                "smart": "ipsSetting",
                 "name": "IpsSetting'"
             },
             "arguments": [
@@ -270,7 +270,7 @@
         },
         {
             "con": {
-                "smart": "newLimitSetting",
+                "smart": "limitSetting",
                 "name": "LimitSetting'"
             },
             "arguments": [
@@ -423,7 +423,7 @@
         },
         {
             "con": {
-                "smart": "newNoResponseSetting",
+                "smart": "noResponseSetting",
                 "name": "NoResponseSetting'"
             },
             "arguments": [
@@ -490,7 +490,7 @@
         },
         {
             "con": {
-                "smart": "newPingProbeSetting",
+                "smart": "pingProbeSetting",
                 "name": "PingProbeSetting'"
             },
             "arguments": [
@@ -557,7 +557,7 @@
         },
         {
             "con": {
-                "smart": "newRdataSetting",
+                "smart": "rdataSetting",
                 "name": "RdataSetting'"
             },
             "arguments": [
@@ -761,7 +761,7 @@
         },
         {
             "con": {
-                "smart": "newTotalLimitsSetting",
+                "smart": "totalLimitsSetting",
                 "name": "TotalLimitsSetting'"
             },
             "arguments": [
@@ -828,7 +828,7 @@
         },
         {
             "con": {
-                "smart": "newTransactionSetting",
+                "smart": "transactionSetting",
                 "name": "TransactionSetting'"
             },
             "arguments": [
