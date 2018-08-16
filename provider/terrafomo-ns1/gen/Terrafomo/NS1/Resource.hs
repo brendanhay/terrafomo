@@ -335,10 +335,10 @@ data DatafeedResource s = DatafeedResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 datafeedResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
+    :: TF.Attr s P.Text -- ^ @source_id@ - 'P.sourceId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatafeedResource s)
-datafeedResource _name _sourceId =
+datafeedResource _sourceId _name =
     TF.unsafeResource "ns1_datafeed" TF.validator $
         DatafeedResource'
             { _config = TF.Nil
@@ -485,11 +485,11 @@ data MonitoringjobResource s = MonitoringjobResource'
 monitoringjobResource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
     -> TF.Attr s P.Int -- ^ @frequency@ - 'P.frequency'
-    -> TF.Attr s P.Text -- ^ @job_type@ - 'P.jobType'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @regions@ - 'P.regions'
+    -> TF.Attr s P.Text -- ^ @job_type@ - 'P.jobType'
     -> P.Resource (MonitoringjobResource s)
-monitoringjobResource _config _frequency _jobType _name _regions =
+monitoringjobResource _config _frequency _name _regions _jobType =
     TF.unsafeResource "ns1_monitoringjob" TF.validator $
         MonitoringjobResource'
             { _active = TF.value P.True
