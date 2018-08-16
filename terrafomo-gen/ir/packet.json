@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAttachmentsSetting",
+                "smart": "attachmentsSetting",
                 "name": "AttachmentsSetting'"
             },
             "arguments": [],
@@ -35,7 +35,7 @@
         },
         {
             "con": {
-                "smart": "newNetworkSetting",
+                "smart": "networkSetting",
                 "name": "NetworkSetting'"
             },
             "arguments": [],
@@ -136,7 +136,7 @@
         },
         {
             "con": {
-                "smart": "newSnapshotPoliciesSetting",
+                "smart": "snapshotPoliciesSetting",
                 "name": "SnapshotPoliciesSetting'"
             },
             "arguments": [
