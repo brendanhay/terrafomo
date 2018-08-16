@@ -87,9 +87,9 @@ data GroupResource s = GroupResource'
 
 -- | Define a new @clc_group@ resource value.
 groupResource
-    :: TF.Attr s P.Text -- ^ @location_id@ - 'P.locationId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @parent@ - 'P.parent'
+    :: TF.Attr s P.Text -- ^ @location_id@ ('P._locationId', 'P.locationId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @parent@ ('P._parent', 'P.parent')
     -> P.Resource (GroupResource s)
 groupResource _locationId _name _parent =
     TF.unsafeResource "clc_group" TF.validator $
@@ -165,9 +165,9 @@ data LoadBalancerResource s = LoadBalancerResource'
 
 -- | Define a new @clc_load_balancer@ resource value.
 loadBalancerResource
-    :: TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
-    -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @data_center@ ('P._dataCenter', 'P.dataCenter')
+    -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LoadBalancerResource s)
 loadBalancerResource _dataCenter _description _name =
     TF.unsafeResource "clc_load_balancer" TF.validator $
@@ -242,10 +242,10 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource'
 
 -- | Define a new @clc_load_balancer_pool@ resource value.
 loadBalancerPoolResource
-    :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
-    -> TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
-    -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @nodes@ - 'P.nodes'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ @load_balancer@ ('P._loadBalancer', 'P.loadBalancer')
+    -> TF.Attr s P.Text -- ^ @data_center@ ('P._dataCenter', 'P.dataCenter')
+    -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @nodes@ ('P._nodes', 'P.nodes')
+    -> TF.Attr s P.Int -- ^ @port@ ('P._port', 'P.port')
     -> P.Resource (LoadBalancerPoolResource s)
 loadBalancerPoolResource _loadBalancer _dataCenter _nodes _port =
     TF.unsafeResource "clc_load_balancer_pool" TF.validator $
@@ -322,8 +322,8 @@ data PublicIpResource s = PublicIpResource'
 
 -- | Define a new @clc_public_ip@ resource value.
 publicIpResource
-    :: TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
-    -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
+    :: TF.Attr s P.Text -- ^ @server_id@ ('P._serverId', 'P.serverId')
+    -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @ports@ ('P._ports', 'P.ports')
     -> P.Resource (PublicIpResource s)
 publicIpResource _serverId _ports =
     TF.unsafeResource "clc_public_ip" TF.validator $
@@ -421,11 +421,11 @@ data ServerResource s = ServerResource'
 
 -- | Define a new @clc_server@ resource value.
 serverResource
-    :: TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
-    -> TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
-    -> TF.Attr s P.Text -- ^ @source_server_id@ - 'P.sourceServerId'
-    -> TF.Attr s P.Int -- ^ @memory_mb@ - 'P.memoryMb'
-    -> TF.Attr s P.Text -- ^ @name_template@ - 'P.nameTemplate'
+    :: TF.Attr s P.Int -- ^ @cpu@ ('P._cpu', 'P.cpu')
+    -> TF.Attr s P.Text -- ^ @group_id@ ('P._groupId', 'P.groupId')
+    -> TF.Attr s P.Text -- ^ @source_server_id@ ('P._sourceServerId', 'P.sourceServerId')
+    -> TF.Attr s P.Int -- ^ @memory_mb@ ('P._memoryMb', 'P.memoryMb')
+    -> TF.Attr s P.Text -- ^ @name_template@ ('P._nameTemplate', 'P.nameTemplate')
     -> P.Resource (ServerResource s)
 serverResource _cpu _groupId _sourceServerId _memoryMb _nameTemplate =
     TF.unsafeResource "clc_server" TF.validator $
