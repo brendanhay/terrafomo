@@ -18,141 +18,125 @@
 module Terrafomo.Spotinst.Settings
     (
     -- * Settings Datatypes
-    -- ** integration_ecs_autoscale_attributes
-      IntegrationEcsAutoscaleAttributes (..)
-    , newIntegrationEcsAutoscaleAttributes
+    -- ** autoscale_attributes
+      AutoscaleAttributesSetting (..)
+    , newAutoscaleAttributesSetting
 
-    -- ** elastigroup_aws_integration_nomad
-    , ElastigroupAwsIntegrationNomad (..)
-    , newElastigroupAwsIntegrationNomad
+    -- ** autoscale_constraints
+    , AutoscaleConstraintsSetting (..)
+    , newAutoscaleConstraintsSetting
 
-    -- ** elastigroup_aws_scaling_up_policy
-    , ElastigroupAwsScalingUpPolicy (..)
-    , newElastigroupAwsScalingUpPolicy
+    -- ** autoscale_down
+    , AutoscaleDownSetting (..)
+    , newAutoscaleDownSetting
 
-    -- ** elastigroup_aws_integration_rancher
-    , ElastigroupAwsIntegrationRancher (..)
-    , newElastigroupAwsIntegrationRancher
+    -- ** autoscale_headroom
+    , AutoscaleHeadroomSetting (..)
+    , newAutoscaleHeadroomSetting
 
-    -- ** elastigroup_aws_integration_kubernetes
-    , ElastigroupAwsIntegrationKubernetes (..)
-    , newElastigroupAwsIntegrationKubernetes
+    -- ** autoscale_labels
+    , AutoscaleLabelsSetting (..)
+    , newAutoscaleLabelsSetting
 
-    -- ** elastigroup_aws_signal
-    , ElastigroupAwsSignal (..)
-    , newElastigroupAwsSignal
+    -- ** deployment_groups
+    , DeploymentGroupsSetting (..)
+    , newDeploymentGroupsSetting
 
-    -- ** elastigroup_aws_update_policy
-    , ElastigroupAwsUpdatePolicy (..)
-    , newElastigroupAwsUpdatePolicy
+    -- ** ebs_block_device
+    , EbsBlockDeviceSetting (..)
+    , newEbsBlockDeviceSetting
 
-    -- ** elastigroup_aws_ephemeral_block_device
-    , ElastigroupAwsEphemeralBlockDevice (..)
-    , newElastigroupAwsEphemeralBlockDevice
+    -- ** ephemeral_block_device
+    , EphemeralBlockDeviceSetting (..)
+    , newEphemeralBlockDeviceSetting
 
-    -- ** elastigroup_aws_revert_to_spot
-    , ElastigroupAwsRevertToSpot (..)
-    , newElastigroupAwsRevertToSpot
+    -- ** instance_types_weights
+    , InstanceTypesWeightsSetting (..)
+    , newInstanceTypesWeightsSetting
 
-    -- ** elastigroup_aws_instance_types_weights
-    , ElastigroupAwsInstanceTypesWeights (..)
-    , newElastigroupAwsInstanceTypesWeights
+    -- ** integration_codedeploy
+    , IntegrationCodedeploySetting (..)
+    , newIntegrationCodedeploySetting
 
-    -- ** integration_nomad_autoscale_down
-    , IntegrationNomadAutoscaleDown (..)
-    , newIntegrationNomadAutoscaleDown
+    -- ** integration_ecs
+    , IntegrationEcsSetting (..)
+    , newIntegrationEcsSetting
 
-    -- ** elastigroup_aws_network_interface
-    , ElastigroupAwsNetworkInterface (..)
-    , newElastigroupAwsNetworkInterface
+    -- ** integration_gitlab
+    , IntegrationGitlabSetting (..)
+    , newIntegrationGitlabSetting
 
-    -- ** integration_nomad_autoscale_headroom
-    , IntegrationNomadAutoscaleHeadroom (..)
-    , newIntegrationNomadAutoscaleHeadroom
+    -- ** integration_kubernetes
+    , IntegrationKubernetesSetting (..)
+    , newIntegrationKubernetesSetting
 
-    -- ** elastigroup_aws_integration_codedeploy
-    , ElastigroupAwsIntegrationCodedeploy (..)
-    , newElastigroupAwsIntegrationCodedeploy
+    -- ** integration_mesosphere
+    , IntegrationMesosphereSetting (..)
+    , newIntegrationMesosphereSetting
 
-    -- ** integration_kubernetes_autoscale_down
-    , IntegrationKubernetesAutoscaleDown (..)
-    , newIntegrationKubernetesAutoscaleDown
+    -- ** integration_multai_runtime
+    , IntegrationMultaiRuntimeSetting (..)
+    , newIntegrationMultaiRuntimeSetting
 
-    -- ** elastigroup_aws_integration_multai_runtime
-    , ElastigroupAwsIntegrationMultaiRuntime (..)
-    , newElastigroupAwsIntegrationMultaiRuntime
+    -- ** integration_nomad
+    , IntegrationNomadSetting (..)
+    , newIntegrationNomadSetting
 
-    -- ** elastigroup_aws_ebs_block_device
-    , ElastigroupAwsEbsBlockDevice (..)
-    , newElastigroupAwsEbsBlockDevice
+    -- ** integration_rancher
+    , IntegrationRancherSetting (..)
+    , newIntegrationRancherSetting
 
-    -- ** integration_nomad_autoscale_constraints
-    , IntegrationNomadAutoscaleConstraints (..)
-    , newIntegrationNomadAutoscaleConstraints
+    -- ** multai_target_sets
+    , MultaiTargetSetsSetting (..)
+    , newMultaiTargetSetsSetting
 
-    -- ** update_policy_roll_config
-    , UpdatePolicyRollConfig (..)
-    , newUpdatePolicyRollConfig
+    -- ** network_interface
+    , NetworkInterfaceSetting (..)
+    , newNetworkInterfaceSetting
 
-    -- ** integration_kubernetes_autoscale_labels
-    , IntegrationKubernetesAutoscaleLabels (..)
-    , newIntegrationKubernetesAutoscaleLabels
+    -- ** revert_to_spot
+    , RevertToSpotSetting (..)
+    , newRevertToSpotSetting
 
-    -- ** elastigroup_aws_multai_target_sets
-    , ElastigroupAwsMultaiTargetSets (..)
-    , newElastigroupAwsMultaiTargetSets
+    -- ** roll_config
+    , RollConfigSetting (..)
+    , newRollConfigSetting
 
-    -- ** integration_ecs_autoscale_headroom
-    , IntegrationEcsAutoscaleHeadroom (..)
-    , newIntegrationEcsAutoscaleHeadroom
+    -- ** runner
+    , RunnerSetting (..)
+    , newRunnerSetting
 
-    -- ** elastigroup_aws_scheduled_task
-    , ElastigroupAwsScheduledTask (..)
-    , newElastigroupAwsScheduledTask
+    -- ** scaling_down_policy
+    , ScalingDownPolicySetting (..)
+    , newScalingDownPolicySetting
 
-    -- ** elastigroup_aws_stateful_deallocation
-    , ElastigroupAwsStatefulDeallocation (..)
-    , newElastigroupAwsStatefulDeallocation
+    -- ** scaling_target_policy
+    , ScalingTargetPolicySetting (..)
+    , newScalingTargetPolicySetting
 
-    -- ** integration_codedeploy_deployment_groups
-    , IntegrationCodedeployDeploymentGroups (..)
-    , newIntegrationCodedeployDeploymentGroups
+    -- ** scaling_up_policy
+    , ScalingUpPolicySetting (..)
+    , newScalingUpPolicySetting
 
-    -- ** elastigroup_aws_tags
-    , ElastigroupAwsTags (..)
-    , newElastigroupAwsTags
+    -- ** scheduled_task
+    , ScheduledTaskSetting (..)
+    , newScheduledTaskSetting
 
-    -- ** elastigroup_aws_integration_ecs
-    , ElastigroupAwsIntegrationEcs (..)
-    , newElastigroupAwsIntegrationEcs
+    -- ** signal
+    , SignalSetting (..)
+    , newSignalSetting
 
-    -- ** elastigroup_aws_integration_mesosphere
-    , ElastigroupAwsIntegrationMesosphere (..)
-    , newElastigroupAwsIntegrationMesosphere
+    -- ** stateful_deallocation
+    , StatefulDeallocationSetting (..)
+    , newStatefulDeallocationSetting
 
-    -- ** elastigroup_aws_integration_gitlab
-    , ElastigroupAwsIntegrationGitlab (..)
-    , newElastigroupAwsIntegrationGitlab
+    -- ** tags
+    , TagsSetting (..)
+    , newTagsSetting
 
-    -- ** elastigroup_aws_scaling_target_policy
-    , ElastigroupAwsScalingTargetPolicy (..)
-    , newElastigroupAwsScalingTargetPolicy
-
-    -- ** integration_kubernetes_autoscale_headroom
-    , IntegrationKubernetesAutoscaleHeadroom (..)
-    , newIntegrationKubernetesAutoscaleHeadroom
-
-    -- ** elastigroup_aws_scaling_down_policy
-    , ElastigroupAwsScalingDownPolicy (..)
-    , newElastigroupAwsScalingDownPolicy
-
-    -- ** integration_gitlab_runner
-    , IntegrationGitlabRunner (..)
-    , newIntegrationGitlabRunner
-
-    -- ** integration_ecs_autoscale_down
-    , IntegrationEcsAutoscaleDown (..)
-    , newIntegrationEcsAutoscaleDown
+    -- ** update_policy
+    , UpdatePolicySetting (..)
+    , newUpdatePolicySetting
 
     ) where
 
@@ -160,10 +144,10 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
+
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -177,62 +161,779 @@ import qualified Terrafomo.Spotinst.Lens  as P
 import qualified Terrafomo.Spotinst.Types as P
 import qualified Terrafomo.Validator      as TF
 
--- | @integration_ecs_autoscale_attributes@ nested settings.
-data IntegrationEcsAutoscaleAttributes s = IntegrationEcsAutoscaleAttributes'
+-- | @autoscale_attributes@ nested settings.
+data AutoscaleAttributesSetting s = AutoscaleAttributesSetting'
     { _key   :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newIntegrationEcsAutoscaleAttributes
+newAutoscaleAttributesSetting
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> IntegrationEcsAutoscaleAttributes s
-newIntegrationEcsAutoscaleAttributes _key _value =
-    IntegrationEcsAutoscaleAttributes'
+    -> AutoscaleAttributesSetting s
+newAutoscaleAttributesSetting _key _value =
+    AutoscaleAttributesSetting'
         { _key = _key
         , _value = _value
         }
 
-instance P.Hashable  (IntegrationEcsAutoscaleAttributes s)
-instance TF.IsValue  (IntegrationEcsAutoscaleAttributes s)
-instance TF.IsObject (IntegrationEcsAutoscaleAttributes s) where
-    toObject IntegrationEcsAutoscaleAttributes'{..} = P.catMaybes
+instance TF.IsValue  (AutoscaleAttributesSetting s)
+instance TF.IsObject (AutoscaleAttributesSetting s) where
+    toObject AutoscaleAttributesSetting'{..} = P.catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (IntegrationEcsAutoscaleAttributes s) where
+instance TF.IsValid (AutoscaleAttributesSetting s) where
     validator = P.mempty
 
-instance P.HasKey (IntegrationEcsAutoscaleAttributes s) (TF.Attr s P.Text) where
+instance P.HasKey (AutoscaleAttributesSetting s) (TF.Attr s P.Text) where
     key =
-        P.lens (_key :: IntegrationEcsAutoscaleAttributes s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: IntegrationEcsAutoscaleAttributes s)
+        P.lens (_key :: AutoscaleAttributesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: AutoscaleAttributesSetting s)
 
-instance P.HasValue (IntegrationEcsAutoscaleAttributes s) (TF.Attr s P.Text) where
+instance P.HasValue (AutoscaleAttributesSetting s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: IntegrationEcsAutoscaleAttributes s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: IntegrationEcsAutoscaleAttributes s)
+        P.lens (_value :: AutoscaleAttributesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AutoscaleAttributesSetting s)
 
--- | @elastigroup_aws_integration_nomad@ nested settings.
-data ElastigroupAwsIntegrationNomad s = ElastigroupAwsIntegrationNomad'
+-- | @autoscale_constraints@ nested settings.
+data AutoscaleConstraintsSetting s = AutoscaleConstraintsSetting'
+    { _key   :: TF.Attr s P.Text
+    -- ^ @key@ - (Required)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newAutoscaleConstraintsSetting
+    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    -> AutoscaleConstraintsSetting s
+newAutoscaleConstraintsSetting _key _value =
+    AutoscaleConstraintsSetting'
+        { _key = _key
+        , _value = _value
+        }
+
+instance TF.IsValue  (AutoscaleConstraintsSetting s)
+instance TF.IsObject (AutoscaleConstraintsSetting s) where
+    toObject AutoscaleConstraintsSetting'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (AutoscaleConstraintsSetting s) where
+    validator = P.mempty
+
+instance P.HasKey (AutoscaleConstraintsSetting s) (TF.Attr s P.Text) where
+    key =
+        P.lens (_key :: AutoscaleConstraintsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: AutoscaleConstraintsSetting s)
+
+instance P.HasValue (AutoscaleConstraintsSetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: AutoscaleConstraintsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AutoscaleConstraintsSetting s)
+
+-- | @autoscale_down@ nested settings.
+data AutoscaleDownSetting s = AutoscaleDownSetting'
+    { _evaluationPeriods :: TF.Attr s P.Int
+    -- ^ @evaluation_periods@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newAutoscaleDownSetting
+    :: AutoscaleDownSetting s
+newAutoscaleDownSetting =
+    AutoscaleDownSetting'
+        { _evaluationPeriods = TF.Nil
+        }
+
+instance TF.IsValue  (AutoscaleDownSetting s)
+instance TF.IsObject (AutoscaleDownSetting s) where
+    toObject AutoscaleDownSetting'{..} = P.catMaybes
+        [ TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
+        ]
+
+instance TF.IsValid (AutoscaleDownSetting s) where
+    validator = P.mempty
+
+instance P.HasEvaluationPeriods (AutoscaleDownSetting s) (TF.Attr s P.Int) where
+    evaluationPeriods =
+        P.lens (_evaluationPeriods :: AutoscaleDownSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _evaluationPeriods = a } :: AutoscaleDownSetting s)
+
+-- | @autoscale_headroom@ nested settings.
+data AutoscaleHeadroomSetting s = AutoscaleHeadroomSetting'
+    { _cpuPerUnit    :: TF.Attr s P.Int
+    -- ^ @cpu_per_unit@ - (Optional)
+    --
+    , _memoryPerUnit :: TF.Attr s P.Int
+    -- ^ @memory_per_unit@ - (Optional)
+    --
+    , _numOfUnits    :: TF.Attr s P.Int
+    -- ^ @num_of_units@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newAutoscaleHeadroomSetting
+    :: AutoscaleHeadroomSetting s
+newAutoscaleHeadroomSetting =
+    AutoscaleHeadroomSetting'
+        { _cpuPerUnit = TF.Nil
+        , _memoryPerUnit = TF.Nil
+        , _numOfUnits = TF.Nil
+        }
+
+instance TF.IsValue  (AutoscaleHeadroomSetting s)
+instance TF.IsObject (AutoscaleHeadroomSetting s) where
+    toObject AutoscaleHeadroomSetting'{..} = P.catMaybes
+        [ TF.assign "cpu_per_unit" <$> TF.attribute _cpuPerUnit
+        , TF.assign "memory_per_unit" <$> TF.attribute _memoryPerUnit
+        , TF.assign "num_of_units" <$> TF.attribute _numOfUnits
+        ]
+
+instance TF.IsValid (AutoscaleHeadroomSetting s) where
+    validator = P.mempty
+
+instance P.HasCpuPerUnit (AutoscaleHeadroomSetting s) (TF.Attr s P.Int) where
+    cpuPerUnit =
+        P.lens (_cpuPerUnit :: AutoscaleHeadroomSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _cpuPerUnit = a } :: AutoscaleHeadroomSetting s)
+
+instance P.HasMemoryPerUnit (AutoscaleHeadroomSetting s) (TF.Attr s P.Int) where
+    memoryPerUnit =
+        P.lens (_memoryPerUnit :: AutoscaleHeadroomSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _memoryPerUnit = a } :: AutoscaleHeadroomSetting s)
+
+instance P.HasNumOfUnits (AutoscaleHeadroomSetting s) (TF.Attr s P.Int) where
+    numOfUnits =
+        P.lens (_numOfUnits :: AutoscaleHeadroomSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _numOfUnits = a } :: AutoscaleHeadroomSetting s)
+
+-- | @autoscale_labels@ nested settings.
+data AutoscaleLabelsSetting s = AutoscaleLabelsSetting'
+    { _key   :: TF.Attr s P.Text
+    -- ^ @key@ - (Required)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newAutoscaleLabelsSetting
+    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    -> AutoscaleLabelsSetting s
+newAutoscaleLabelsSetting _key _value =
+    AutoscaleLabelsSetting'
+        { _key = _key
+        , _value = _value
+        }
+
+instance TF.IsValue  (AutoscaleLabelsSetting s)
+instance TF.IsObject (AutoscaleLabelsSetting s) where
+    toObject AutoscaleLabelsSetting'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (AutoscaleLabelsSetting s) where
+    validator = P.mempty
+
+instance P.HasKey (AutoscaleLabelsSetting s) (TF.Attr s P.Text) where
+    key =
+        P.lens (_key :: AutoscaleLabelsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: AutoscaleLabelsSetting s)
+
+instance P.HasValue (AutoscaleLabelsSetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: AutoscaleLabelsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AutoscaleLabelsSetting s)
+
+-- | @deployment_groups@ nested settings.
+data DeploymentGroupsSetting s = DeploymentGroupsSetting'
+    { _applicationName     :: TF.Attr s P.Text
+    -- ^ @application_name@ - (Required)
+    --
+    , _deploymentGroupName :: TF.Attr s P.Text
+    -- ^ @deployment_group_name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newDeploymentGroupsSetting
+    :: TF.Attr s P.Text -- ^ @application_name@ - 'P.applicationName'
+    -> TF.Attr s P.Text -- ^ @deployment_group_name@ - 'P.deploymentGroupName'
+    -> DeploymentGroupsSetting s
+newDeploymentGroupsSetting _applicationName _deploymentGroupName =
+    DeploymentGroupsSetting'
+        { _applicationName = _applicationName
+        , _deploymentGroupName = _deploymentGroupName
+        }
+
+instance TF.IsValue  (DeploymentGroupsSetting s)
+instance TF.IsObject (DeploymentGroupsSetting s) where
+    toObject DeploymentGroupsSetting'{..} = P.catMaybes
+        [ TF.assign "application_name" <$> TF.attribute _applicationName
+        , TF.assign "deployment_group_name" <$> TF.attribute _deploymentGroupName
+        ]
+
+instance TF.IsValid (DeploymentGroupsSetting s) where
+    validator = P.mempty
+
+instance P.HasApplicationName (DeploymentGroupsSetting s) (TF.Attr s P.Text) where
+    applicationName =
+        P.lens (_applicationName :: DeploymentGroupsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _applicationName = a } :: DeploymentGroupsSetting s)
+
+instance P.HasDeploymentGroupName (DeploymentGroupsSetting s) (TF.Attr s P.Text) where
+    deploymentGroupName =
+        P.lens (_deploymentGroupName :: DeploymentGroupsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deploymentGroupName = a } :: DeploymentGroupsSetting s)
+
+-- | @ebs_block_device@ nested settings.
+data EbsBlockDeviceSetting s = EbsBlockDeviceSetting'
+    { _deviceName :: TF.Attr s P.Text
+    -- ^ @device_name@ - (Required)
+    --
+    , _iops       :: TF.Attr s P.Int
+    -- ^ @iops@ - (Optional)
+    --
+    , _kmsKeyId   :: TF.Attr s P.Text
+    -- ^ @kms_key_id@ - (Optional)
+    --
+    , _snapshotId :: TF.Attr s P.Text
+    -- ^ @snapshot_id@ - (Optional)
+    --
+    , _volumeSize :: TF.Attr s P.Int
+    -- ^ @volume_size@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newEbsBlockDeviceSetting
+    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
+    -> EbsBlockDeviceSetting s
+newEbsBlockDeviceSetting _deviceName =
+    EbsBlockDeviceSetting'
+        { _deviceName = _deviceName
+        , _iops = TF.Nil
+        , _kmsKeyId = TF.Nil
+        , _snapshotId = TF.Nil
+        , _volumeSize = TF.Nil
+        }
+
+instance TF.IsValue  (EbsBlockDeviceSetting s)
+instance TF.IsObject (EbsBlockDeviceSetting s) where
+    toObject EbsBlockDeviceSetting'{..} = P.catMaybes
+        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "iops" <$> TF.attribute _iops
+        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        ]
+
+instance TF.IsValid (EbsBlockDeviceSetting s) where
+    validator = P.mempty
+
+instance P.HasDeviceName (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
+    deviceName =
+        P.lens (_deviceName :: EbsBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceName = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasIops (EbsBlockDeviceSetting s) (TF.Attr s P.Int) where
+    iops =
+        P.lens (_iops :: EbsBlockDeviceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _iops = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasKmsKeyId (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
+    kmsKeyId =
+        P.lens (_kmsKeyId :: EbsBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _kmsKeyId = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasSnapshotId (EbsBlockDeviceSetting s) (TF.Attr s P.Text) where
+    snapshotId =
+        P.lens (_snapshotId :: EbsBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotId = a } :: EbsBlockDeviceSetting s)
+
+instance P.HasVolumeSize (EbsBlockDeviceSetting s) (TF.Attr s P.Int) where
+    volumeSize =
+        P.lens (_volumeSize :: EbsBlockDeviceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSize = a } :: EbsBlockDeviceSetting s)
+
+instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (EbsBlockDeviceSetting s)) (TF.Attr s P.Bool) where
+    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
+
+instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (EbsBlockDeviceSetting s)) (TF.Attr s P.Bool) where
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
+
+instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsBlockDeviceSetting s)) (TF.Attr s P.Text) where
+    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
+
+-- | @ephemeral_block_device@ nested settings.
+data EphemeralBlockDeviceSetting s = EphemeralBlockDeviceSetting'
+    { _deviceName  :: TF.Attr s P.Text
+    -- ^ @device_name@ - (Required)
+    --
+    , _virtualName :: TF.Attr s P.Text
+    -- ^ @virtual_name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newEphemeralBlockDeviceSetting
+    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
+    -> TF.Attr s P.Text -- ^ @virtual_name@ - 'P.virtualName'
+    -> EphemeralBlockDeviceSetting s
+newEphemeralBlockDeviceSetting _deviceName _virtualName =
+    EphemeralBlockDeviceSetting'
+        { _deviceName = _deviceName
+        , _virtualName = _virtualName
+        }
+
+instance TF.IsValue  (EphemeralBlockDeviceSetting s)
+instance TF.IsObject (EphemeralBlockDeviceSetting s) where
+    toObject EphemeralBlockDeviceSetting'{..} = P.catMaybes
+        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "virtual_name" <$> TF.attribute _virtualName
+        ]
+
+instance TF.IsValid (EphemeralBlockDeviceSetting s) where
+    validator = P.mempty
+
+instance P.HasDeviceName (EphemeralBlockDeviceSetting s) (TF.Attr s P.Text) where
+    deviceName =
+        P.lens (_deviceName :: EphemeralBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceName = a } :: EphemeralBlockDeviceSetting s)
+
+instance P.HasVirtualName (EphemeralBlockDeviceSetting s) (TF.Attr s P.Text) where
+    virtualName =
+        P.lens (_virtualName :: EphemeralBlockDeviceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualName = a } :: EphemeralBlockDeviceSetting s)
+
+-- | @instance_types_weights@ nested settings.
+data InstanceTypesWeightsSetting s = InstanceTypesWeightsSetting'
+    { _instanceType :: TF.Attr s P.Text
+    -- ^ @instance_type@ - (Required)
+    --
+    , _weight       :: TF.Attr s P.Int
+    -- ^ @weight@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newInstanceTypesWeightsSetting
+    :: TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    -> TF.Attr s P.Int -- ^ @weight@ - 'P.weight'
+    -> InstanceTypesWeightsSetting s
+newInstanceTypesWeightsSetting _instanceType _weight =
+    InstanceTypesWeightsSetting'
+        { _instanceType = _instanceType
+        , _weight = _weight
+        }
+
+instance TF.IsValue  (InstanceTypesWeightsSetting s)
+instance TF.IsObject (InstanceTypesWeightsSetting s) where
+    toObject InstanceTypesWeightsSetting'{..} = P.catMaybes
+        [ TF.assign "instance_type" <$> TF.attribute _instanceType
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance TF.IsValid (InstanceTypesWeightsSetting s) where
+    validator = P.mempty
+
+instance P.HasInstanceType (InstanceTypesWeightsSetting s) (TF.Attr s P.Text) where
+    instanceType =
+        P.lens (_instanceType :: InstanceTypesWeightsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceType = a } :: InstanceTypesWeightsSetting s)
+
+instance P.HasWeight (InstanceTypesWeightsSetting s) (TF.Attr s P.Int) where
+    weight =
+        P.lens (_weight :: InstanceTypesWeightsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _weight = a } :: InstanceTypesWeightsSetting s)
+
+-- | @integration_codedeploy@ nested settings.
+data IntegrationCodedeploySetting s = IntegrationCodedeploySetting'
+    { _cleanupOnFailure :: TF.Attr s P.Bool
+    -- ^ @cleanup_on_failure@ - (Required)
+    --
+    , _deploymentGroups :: TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)]
+    -- ^ @deployment_groups@ - (Required)
+    --
+    , _terminateInstanceOnFailure :: TF.Attr s P.Bool
+    -- ^ @terminate_instance_on_failure@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationCodedeploySetting
+    :: TF.Attr s P.Bool -- ^ @cleanup_on_failure@ - 'P.cleanupOnFailure'
+    -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)] -- ^ @deployment_groups@ - 'P.deploymentGroups'
+    -> TF.Attr s P.Bool -- ^ @terminate_instance_on_failure@ - 'P.terminateInstanceOnFailure'
+    -> IntegrationCodedeploySetting s
+newIntegrationCodedeploySetting _cleanupOnFailure _deploymentGroups _terminateInstanceOnFailure =
+    IntegrationCodedeploySetting'
+        { _cleanupOnFailure = _cleanupOnFailure
+        , _deploymentGroups = _deploymentGroups
+        , _terminateInstanceOnFailure = _terminateInstanceOnFailure
+        }
+
+instance TF.IsValue  (IntegrationCodedeploySetting s)
+instance TF.IsObject (IntegrationCodedeploySetting s) where
+    toObject IntegrationCodedeploySetting'{..} = P.catMaybes
+        [ TF.assign "cleanup_on_failure" <$> TF.attribute _cleanupOnFailure
+        , TF.assign "deployment_groups" <$> TF.attribute _deploymentGroups
+        , TF.assign "terminate_instance_on_failure" <$> TF.attribute _terminateInstanceOnFailure
+        ]
+
+instance TF.IsValid (IntegrationCodedeploySetting s) where
+    validator = P.mempty
+
+instance P.HasCleanupOnFailure (IntegrationCodedeploySetting s) (TF.Attr s P.Bool) where
+    cleanupOnFailure =
+        P.lens (_cleanupOnFailure :: IntegrationCodedeploySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _cleanupOnFailure = a } :: IntegrationCodedeploySetting s)
+
+instance P.HasDeploymentGroups (IntegrationCodedeploySetting s) (TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)]) where
+    deploymentGroups =
+        P.lens (_deploymentGroups :: IntegrationCodedeploySetting s -> TF.Attr s [TF.Attr s (DeploymentGroupsSetting s)])
+               (\s a -> s { _deploymentGroups = a } :: IntegrationCodedeploySetting s)
+
+instance P.HasTerminateInstanceOnFailure (IntegrationCodedeploySetting s) (TF.Attr s P.Bool) where
+    terminateInstanceOnFailure =
+        P.lens (_terminateInstanceOnFailure :: IntegrationCodedeploySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _terminateInstanceOnFailure = a } :: IntegrationCodedeploySetting s)
+
+-- | @integration_ecs@ nested settings.
+data IntegrationEcsSetting s = IntegrationEcsSetting'
+    { _autoscaleAttributes :: TF.Attr s [TF.Attr s (AutoscaleAttributesSetting s)]
+    -- ^ @autoscale_attributes@ - (Optional)
+    --
+    , _autoscaleCooldown :: TF.Attr s P.Int
+    -- ^ @autoscale_cooldown@ - (Optional)
+    --
+    , _autoscaleDown :: TF.Attr s (AutoscaleDownSetting s)
+    -- ^ @autoscale_down@ - (Optional)
+    --
+    , _autoscaleHeadroom :: TF.Attr s (AutoscaleHeadroomSetting s)
+    -- ^ @autoscale_headroom@ - (Optional)
+    --
+    , _autoscaleIsEnabled :: TF.Attr s P.Bool
+    -- ^ @autoscale_is_enabled@ - (Optional)
+    --
+    , _autoscaleScaleDownNonServiceTasks :: TF.Attr s P.Bool
+    -- ^ @autoscale_scale_down_non_service_tasks@ - (Optional)
+    --
+    , _clusterName :: TF.Attr s P.Text
+    -- ^ @cluster_name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationEcsSetting
+    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
+    -> IntegrationEcsSetting s
+newIntegrationEcsSetting _clusterName =
+    IntegrationEcsSetting'
+        { _autoscaleAttributes = TF.Nil
+        , _autoscaleCooldown = TF.Nil
+        , _autoscaleDown = TF.Nil
+        , _autoscaleHeadroom = TF.Nil
+        , _autoscaleIsEnabled = TF.Nil
+        , _autoscaleScaleDownNonServiceTasks = TF.Nil
+        , _clusterName = _clusterName
+        }
+
+instance TF.IsValue  (IntegrationEcsSetting s)
+instance TF.IsObject (IntegrationEcsSetting s) where
+    toObject IntegrationEcsSetting'{..} = P.catMaybes
+        [ TF.assign "autoscale_attributes" <$> TF.attribute _autoscaleAttributes
+        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
+        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
+        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
+        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
+        , TF.assign "autoscale_scale_down_non_service_tasks" <$> TF.attribute _autoscaleScaleDownNonServiceTasks
+        , TF.assign "cluster_name" <$> TF.attribute _clusterName
+        ]
+
+instance TF.IsValid (IntegrationEcsSetting s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_autoscaleDown"
+                  (_autoscaleDown
+                      :: IntegrationEcsSetting s -> TF.Attr s (AutoscaleDownSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleHeadroom"
+                  (_autoscaleHeadroom
+                      :: IntegrationEcsSetting s -> TF.Attr s (AutoscaleHeadroomSetting s))
+                  TF.validator
+
+instance P.HasAutoscaleAttributes (IntegrationEcsSetting s) (TF.Attr s [TF.Attr s (AutoscaleAttributesSetting s)]) where
+    autoscaleAttributes =
+        P.lens (_autoscaleAttributes :: IntegrationEcsSetting s -> TF.Attr s [TF.Attr s (AutoscaleAttributesSetting s)])
+               (\s a -> s { _autoscaleAttributes = a } :: IntegrationEcsSetting s)
+
+instance P.HasAutoscaleCooldown (IntegrationEcsSetting s) (TF.Attr s P.Int) where
+    autoscaleCooldown =
+        P.lens (_autoscaleCooldown :: IntegrationEcsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _autoscaleCooldown = a } :: IntegrationEcsSetting s)
+
+instance P.HasAutoscaleDown (IntegrationEcsSetting s) (TF.Attr s (AutoscaleDownSetting s)) where
+    autoscaleDown =
+        P.lens (_autoscaleDown :: IntegrationEcsSetting s -> TF.Attr s (AutoscaleDownSetting s))
+               (\s a -> s { _autoscaleDown = a } :: IntegrationEcsSetting s)
+
+instance P.HasAutoscaleHeadroom (IntegrationEcsSetting s) (TF.Attr s (AutoscaleHeadroomSetting s)) where
+    autoscaleHeadroom =
+        P.lens (_autoscaleHeadroom :: IntegrationEcsSetting s -> TF.Attr s (AutoscaleHeadroomSetting s))
+               (\s a -> s { _autoscaleHeadroom = a } :: IntegrationEcsSetting s)
+
+instance P.HasAutoscaleIsEnabled (IntegrationEcsSetting s) (TF.Attr s P.Bool) where
+    autoscaleIsEnabled =
+        P.lens (_autoscaleIsEnabled :: IntegrationEcsSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoscaleIsEnabled = a } :: IntegrationEcsSetting s)
+
+instance P.HasAutoscaleScaleDownNonServiceTasks (IntegrationEcsSetting s) (TF.Attr s P.Bool) where
+    autoscaleScaleDownNonServiceTasks =
+        P.lens (_autoscaleScaleDownNonServiceTasks :: IntegrationEcsSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoscaleScaleDownNonServiceTasks = a } :: IntegrationEcsSetting s)
+
+instance P.HasClusterName (IntegrationEcsSetting s) (TF.Attr s P.Text) where
+    clusterName =
+        P.lens (_clusterName :: IntegrationEcsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _clusterName = a } :: IntegrationEcsSetting s)
+
+-- | @integration_gitlab@ nested settings.
+data IntegrationGitlabSetting s = IntegrationGitlabSetting'
+    { _runner :: TF.Attr s (RunnerSetting s)
+    -- ^ @runner@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationGitlabSetting
+    :: IntegrationGitlabSetting s
+newIntegrationGitlabSetting =
+    IntegrationGitlabSetting'
+        { _runner = TF.Nil
+        }
+
+instance TF.IsValue  (IntegrationGitlabSetting s)
+instance TF.IsObject (IntegrationGitlabSetting s) where
+    toObject IntegrationGitlabSetting'{..} = P.catMaybes
+        [ TF.assign "runner" <$> TF.attribute _runner
+        ]
+
+instance TF.IsValid (IntegrationGitlabSetting s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_runner"
+                  (_runner
+                      :: IntegrationGitlabSetting s -> TF.Attr s (RunnerSetting s))
+                  TF.validator
+
+instance P.HasRunner (IntegrationGitlabSetting s) (TF.Attr s (RunnerSetting s)) where
+    runner =
+        P.lens (_runner :: IntegrationGitlabSetting s -> TF.Attr s (RunnerSetting s))
+               (\s a -> s { _runner = a } :: IntegrationGitlabSetting s)
+
+-- | @integration_kubernetes@ nested settings.
+data IntegrationKubernetesSetting s = IntegrationKubernetesSetting'
+    { _apiServer             :: TF.Attr s P.Text
+    -- ^ @api_server@ - (Optional)
+    --
+    , _autoscaleCooldown     :: TF.Attr s P.Int
+    -- ^ @autoscale_cooldown@ - (Optional)
+    --
+    , _autoscaleDown         :: TF.Attr s (AutoscaleDownSetting s)
+    -- ^ @autoscale_down@ - (Optional)
+    --
+    , _autoscaleHeadroom     :: TF.Attr s (AutoscaleHeadroomSetting s)
+    -- ^ @autoscale_headroom@ - (Optional)
+    --
+    , _autoscaleIsAutoConfig :: TF.Attr s P.Bool
+    -- ^ @autoscale_is_auto_config@ - (Optional)
+    --
+    , _autoscaleIsEnabled    :: TF.Attr s P.Bool
+    -- ^ @autoscale_is_enabled@ - (Optional)
+    --
+    , _autoscaleLabels       :: TF.Attr s [TF.Attr s (AutoscaleLabelsSetting s)]
+    -- ^ @autoscale_labels@ - (Optional)
+    --
+    , _clusterIdentifier     :: TF.Attr s P.Text
+    -- ^ @cluster_identifier@ - (Optional)
+    --
+    , _integrationMode       :: TF.Attr s P.Text
+    -- ^ @integration_mode@ - (Optional)
+    --
+    , _token                 :: TF.Attr s P.Text
+    -- ^ @token@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationKubernetesSetting
+    :: IntegrationKubernetesSetting s
+newIntegrationKubernetesSetting =
+    IntegrationKubernetesSetting'
+        { _apiServer = TF.Nil
+        , _autoscaleCooldown = TF.Nil
+        , _autoscaleDown = TF.Nil
+        , _autoscaleHeadroom = TF.Nil
+        , _autoscaleIsAutoConfig = TF.Nil
+        , _autoscaleIsEnabled = TF.Nil
+        , _autoscaleLabels = TF.Nil
+        , _clusterIdentifier = TF.Nil
+        , _integrationMode = TF.Nil
+        , _token = TF.Nil
+        }
+
+instance TF.IsValue  (IntegrationKubernetesSetting s)
+instance TF.IsObject (IntegrationKubernetesSetting s) where
+    toObject IntegrationKubernetesSetting'{..} = P.catMaybes
+        [ TF.assign "api_server" <$> TF.attribute _apiServer
+        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
+        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
+        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
+        , TF.assign "autoscale_is_auto_config" <$> TF.attribute _autoscaleIsAutoConfig
+        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
+        , TF.assign "autoscale_labels" <$> TF.attribute _autoscaleLabels
+        , TF.assign "cluster_identifier" <$> TF.attribute _clusterIdentifier
+        , TF.assign "integration_mode" <$> TF.attribute _integrationMode
+        , TF.assign "token" <$> TF.attribute _token
+        ]
+
+instance TF.IsValid (IntegrationKubernetesSetting s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_autoscaleDown"
+                  (_autoscaleDown
+                      :: IntegrationKubernetesSetting s -> TF.Attr s (AutoscaleDownSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_autoscaleHeadroom"
+                  (_autoscaleHeadroom
+                      :: IntegrationKubernetesSetting s -> TF.Attr s (AutoscaleHeadroomSetting s))
+                  TF.validator
+
+instance P.HasApiServer (IntegrationKubernetesSetting s) (TF.Attr s P.Text) where
+    apiServer =
+        P.lens (_apiServer :: IntegrationKubernetesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _apiServer = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasAutoscaleCooldown (IntegrationKubernetesSetting s) (TF.Attr s P.Int) where
+    autoscaleCooldown =
+        P.lens (_autoscaleCooldown :: IntegrationKubernetesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _autoscaleCooldown = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasAutoscaleDown (IntegrationKubernetesSetting s) (TF.Attr s (AutoscaleDownSetting s)) where
+    autoscaleDown =
+        P.lens (_autoscaleDown :: IntegrationKubernetesSetting s -> TF.Attr s (AutoscaleDownSetting s))
+               (\s a -> s { _autoscaleDown = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasAutoscaleHeadroom (IntegrationKubernetesSetting s) (TF.Attr s (AutoscaleHeadroomSetting s)) where
+    autoscaleHeadroom =
+        P.lens (_autoscaleHeadroom :: IntegrationKubernetesSetting s -> TF.Attr s (AutoscaleHeadroomSetting s))
+               (\s a -> s { _autoscaleHeadroom = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasAutoscaleIsAutoConfig (IntegrationKubernetesSetting s) (TF.Attr s P.Bool) where
+    autoscaleIsAutoConfig =
+        P.lens (_autoscaleIsAutoConfig :: IntegrationKubernetesSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoscaleIsAutoConfig = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasAutoscaleIsEnabled (IntegrationKubernetesSetting s) (TF.Attr s P.Bool) where
+    autoscaleIsEnabled =
+        P.lens (_autoscaleIsEnabled :: IntegrationKubernetesSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoscaleIsEnabled = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasAutoscaleLabels (IntegrationKubernetesSetting s) (TF.Attr s [TF.Attr s (AutoscaleLabelsSetting s)]) where
+    autoscaleLabels =
+        P.lens (_autoscaleLabels :: IntegrationKubernetesSetting s -> TF.Attr s [TF.Attr s (AutoscaleLabelsSetting s)])
+               (\s a -> s { _autoscaleLabels = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasClusterIdentifier (IntegrationKubernetesSetting s) (TF.Attr s P.Text) where
+    clusterIdentifier =
+        P.lens (_clusterIdentifier :: IntegrationKubernetesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _clusterIdentifier = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasIntegrationMode (IntegrationKubernetesSetting s) (TF.Attr s P.Text) where
+    integrationMode =
+        P.lens (_integrationMode :: IntegrationKubernetesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _integrationMode = a } :: IntegrationKubernetesSetting s)
+
+instance P.HasToken (IntegrationKubernetesSetting s) (TF.Attr s P.Text) where
+    token =
+        P.lens (_token :: IntegrationKubernetesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _token = a } :: IntegrationKubernetesSetting s)
+
+-- | @integration_mesosphere@ nested settings.
+data IntegrationMesosphereSetting s = IntegrationMesosphereSetting'
+    { _apiServer :: TF.Attr s P.Text
+    -- ^ @api_server@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationMesosphereSetting
+    :: TF.Attr s P.Text -- ^ @api_server@ - 'P.apiServer'
+    -> IntegrationMesosphereSetting s
+newIntegrationMesosphereSetting _apiServer =
+    IntegrationMesosphereSetting'
+        { _apiServer = _apiServer
+        }
+
+instance TF.IsValue  (IntegrationMesosphereSetting s)
+instance TF.IsObject (IntegrationMesosphereSetting s) where
+    toObject IntegrationMesosphereSetting'{..} = P.catMaybes
+        [ TF.assign "api_server" <$> TF.attribute _apiServer
+        ]
+
+instance TF.IsValid (IntegrationMesosphereSetting s) where
+    validator = P.mempty
+
+instance P.HasApiServer (IntegrationMesosphereSetting s) (TF.Attr s P.Text) where
+    apiServer =
+        P.lens (_apiServer :: IntegrationMesosphereSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _apiServer = a } :: IntegrationMesosphereSetting s)
+
+-- | @integration_multai_runtime@ nested settings.
+data IntegrationMultaiRuntimeSetting s = IntegrationMultaiRuntimeSetting'
+    { _deploymentId :: TF.Attr s P.Text
+    -- ^ @deployment_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationMultaiRuntimeSetting
+    :: TF.Attr s P.Text -- ^ @deployment_id@ - 'P.deploymentId'
+    -> IntegrationMultaiRuntimeSetting s
+newIntegrationMultaiRuntimeSetting _deploymentId =
+    IntegrationMultaiRuntimeSetting'
+        { _deploymentId = _deploymentId
+        }
+
+instance TF.IsValue  (IntegrationMultaiRuntimeSetting s)
+instance TF.IsObject (IntegrationMultaiRuntimeSetting s) where
+    toObject IntegrationMultaiRuntimeSetting'{..} = P.catMaybes
+        [ TF.assign "deployment_id" <$> TF.attribute _deploymentId
+        ]
+
+instance TF.IsValid (IntegrationMultaiRuntimeSetting s) where
+    validator = P.mempty
+
+instance P.HasDeploymentId (IntegrationMultaiRuntimeSetting s) (TF.Attr s P.Text) where
+    deploymentId =
+        P.lens (_deploymentId :: IntegrationMultaiRuntimeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deploymentId = a } :: IntegrationMultaiRuntimeSetting s)
+
+-- | @integration_nomad@ nested settings.
+data IntegrationNomadSetting s = IntegrationNomadSetting'
     { _aclToken :: TF.Attr s P.Text
     -- ^ @acl_token@ - (Optional)
     --
-    , _autoscaleConstraints :: TF.Attr s [TF.Attr s (IntegrationNomadAutoscaleConstraints s)]
+    , _autoscaleConstraints :: TF.Attr s [TF.Attr s (AutoscaleConstraintsSetting s)]
     -- ^ @autoscale_constraints@ - (Optional)
     --
-    , _autoscaleCooldown :: TF.Attr s P.Integer
+    , _autoscaleCooldown :: TF.Attr s P.Int
     -- ^ @autoscale_cooldown@ - (Optional)
     --
-    , _autoscaleDown :: TF.Attr s (IntegrationNomadAutoscaleDown s)
+    , _autoscaleDown :: TF.Attr s (AutoscaleDownSetting s)
     -- ^ @autoscale_down@ - (Optional)
     --
-    , _autoscaleHeadroom :: TF.Attr s (IntegrationNomadAutoscaleHeadroom s)
+    , _autoscaleHeadroom :: TF.Attr s (AutoscaleHeadroomSetting s)
     -- ^ @autoscale_headroom@ - (Optional)
     --
     , _autoscaleIsEnabled :: TF.Attr s P.Bool
@@ -241,17 +942,17 @@ data ElastigroupAwsIntegrationNomad s = ElastigroupAwsIntegrationNomad'
     , _masterHost :: TF.Attr s P.Text
     -- ^ @master_host@ - (Required)
     --
-    , _masterPort :: TF.Attr s P.Integer
+    , _masterPort :: TF.Attr s P.Int
     -- ^ @master_port@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsIntegrationNomad
+newIntegrationNomadSetting
     :: TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
-    -> TF.Attr s P.Integer -- ^ @master_port@ - 'P.masterPort'
-    -> ElastigroupAwsIntegrationNomad s
-newElastigroupAwsIntegrationNomad _masterHost _masterPort =
-    ElastigroupAwsIntegrationNomad'
+    -> TF.Attr s P.Int -- ^ @master_port@ - 'P.masterPort'
+    -> IntegrationNomadSetting s
+newIntegrationNomadSetting _masterHost _masterPort =
+    IntegrationNomadSetting'
         { _aclToken = TF.Nil
         , _autoscaleConstraints = TF.Nil
         , _autoscaleCooldown = TF.Nil
@@ -262,10 +963,9 @@ newElastigroupAwsIntegrationNomad _masterHost _masterPort =
         , _masterPort = _masterPort
         }
 
-instance P.Hashable  (ElastigroupAwsIntegrationNomad s)
-instance TF.IsValue  (ElastigroupAwsIntegrationNomad s)
-instance TF.IsObject (ElastigroupAwsIntegrationNomad s) where
-    toObject ElastigroupAwsIntegrationNomad'{..} = P.catMaybes
+instance TF.IsValue  (IntegrationNomadSetting s)
+instance TF.IsObject (IntegrationNomadSetting s) where
+    toObject IntegrationNomadSetting'{..} = P.catMaybes
         [ TF.assign "acl_token" <$> TF.attribute _aclToken
         , TF.assign "autoscale_constraints" <$> TF.attribute _autoscaleConstraints
         , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
@@ -276,70 +976,356 @@ instance TF.IsObject (ElastigroupAwsIntegrationNomad s) where
         , TF.assign "master_port" <$> TF.attribute _masterPort
         ]
 
-instance TF.IsValid (ElastigroupAwsIntegrationNomad s) where
+instance TF.IsValid (IntegrationNomadSetting s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_autoscaleConstraints"
-                  (_autoscaleConstraints
-                      :: ElastigroupAwsIntegrationNomad s -> TF.Attr s [TF.Attr s (IntegrationNomadAutoscaleConstraints s)])
-                  TF.validator
            P.<> TF.settingsValidator "_autoscaleDown"
                   (_autoscaleDown
-                      :: ElastigroupAwsIntegrationNomad s -> TF.Attr s (IntegrationNomadAutoscaleDown s))
+                      :: IntegrationNomadSetting s -> TF.Attr s (AutoscaleDownSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_autoscaleHeadroom"
                   (_autoscaleHeadroom
-                      :: ElastigroupAwsIntegrationNomad s -> TF.Attr s (IntegrationNomadAutoscaleHeadroom s))
+                      :: IntegrationNomadSetting s -> TF.Attr s (AutoscaleHeadroomSetting s))
                   TF.validator
 
-instance P.HasAclToken (ElastigroupAwsIntegrationNomad s) (TF.Attr s P.Text) where
+instance P.HasAclToken (IntegrationNomadSetting s) (TF.Attr s P.Text) where
     aclToken =
-        P.lens (_aclToken :: ElastigroupAwsIntegrationNomad s -> TF.Attr s P.Text)
-               (\s a -> s { _aclToken = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_aclToken :: IntegrationNomadSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _aclToken = a } :: IntegrationNomadSetting s)
 
-instance P.HasAutoscaleConstraints (ElastigroupAwsIntegrationNomad s) (TF.Attr s [TF.Attr s (IntegrationNomadAutoscaleConstraints s)]) where
+instance P.HasAutoscaleConstraints (IntegrationNomadSetting s) (TF.Attr s [TF.Attr s (AutoscaleConstraintsSetting s)]) where
     autoscaleConstraints =
-        P.lens (_autoscaleConstraints :: ElastigroupAwsIntegrationNomad s -> TF.Attr s [TF.Attr s (IntegrationNomadAutoscaleConstraints s)])
-               (\s a -> s { _autoscaleConstraints = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_autoscaleConstraints :: IntegrationNomadSetting s -> TF.Attr s [TF.Attr s (AutoscaleConstraintsSetting s)])
+               (\s a -> s { _autoscaleConstraints = a } :: IntegrationNomadSetting s)
 
-instance P.HasAutoscaleCooldown (ElastigroupAwsIntegrationNomad s) (TF.Attr s P.Integer) where
+instance P.HasAutoscaleCooldown (IntegrationNomadSetting s) (TF.Attr s P.Int) where
     autoscaleCooldown =
-        P.lens (_autoscaleCooldown :: ElastigroupAwsIntegrationNomad s -> TF.Attr s P.Integer)
-               (\s a -> s { _autoscaleCooldown = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_autoscaleCooldown :: IntegrationNomadSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _autoscaleCooldown = a } :: IntegrationNomadSetting s)
 
-instance P.HasAutoscaleDown (ElastigroupAwsIntegrationNomad s) (TF.Attr s (IntegrationNomadAutoscaleDown s)) where
+instance P.HasAutoscaleDown (IntegrationNomadSetting s) (TF.Attr s (AutoscaleDownSetting s)) where
     autoscaleDown =
-        P.lens (_autoscaleDown :: ElastigroupAwsIntegrationNomad s -> TF.Attr s (IntegrationNomadAutoscaleDown s))
-               (\s a -> s { _autoscaleDown = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_autoscaleDown :: IntegrationNomadSetting s -> TF.Attr s (AutoscaleDownSetting s))
+               (\s a -> s { _autoscaleDown = a } :: IntegrationNomadSetting s)
 
-instance P.HasAutoscaleHeadroom (ElastigroupAwsIntegrationNomad s) (TF.Attr s (IntegrationNomadAutoscaleHeadroom s)) where
+instance P.HasAutoscaleHeadroom (IntegrationNomadSetting s) (TF.Attr s (AutoscaleHeadroomSetting s)) where
     autoscaleHeadroom =
-        P.lens (_autoscaleHeadroom :: ElastigroupAwsIntegrationNomad s -> TF.Attr s (IntegrationNomadAutoscaleHeadroom s))
-               (\s a -> s { _autoscaleHeadroom = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_autoscaleHeadroom :: IntegrationNomadSetting s -> TF.Attr s (AutoscaleHeadroomSetting s))
+               (\s a -> s { _autoscaleHeadroom = a } :: IntegrationNomadSetting s)
 
-instance P.HasAutoscaleIsEnabled (ElastigroupAwsIntegrationNomad s) (TF.Attr s P.Bool) where
+instance P.HasAutoscaleIsEnabled (IntegrationNomadSetting s) (TF.Attr s P.Bool) where
     autoscaleIsEnabled =
-        P.lens (_autoscaleIsEnabled :: ElastigroupAwsIntegrationNomad s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsEnabled = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_autoscaleIsEnabled :: IntegrationNomadSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoscaleIsEnabled = a } :: IntegrationNomadSetting s)
 
-instance P.HasMasterHost (ElastigroupAwsIntegrationNomad s) (TF.Attr s P.Text) where
+instance P.HasMasterHost (IntegrationNomadSetting s) (TF.Attr s P.Text) where
     masterHost =
-        P.lens (_masterHost :: ElastigroupAwsIntegrationNomad s -> TF.Attr s P.Text)
-               (\s a -> s { _masterHost = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_masterHost :: IntegrationNomadSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _masterHost = a } :: IntegrationNomadSetting s)
 
-instance P.HasMasterPort (ElastigroupAwsIntegrationNomad s) (TF.Attr s P.Integer) where
+instance P.HasMasterPort (IntegrationNomadSetting s) (TF.Attr s P.Int) where
     masterPort =
-        P.lens (_masterPort :: ElastigroupAwsIntegrationNomad s -> TF.Attr s P.Integer)
-               (\s a -> s { _masterPort = a } :: ElastigroupAwsIntegrationNomad s)
+        P.lens (_masterPort :: IntegrationNomadSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _masterPort = a } :: IntegrationNomadSetting s)
 
--- | @elastigroup_aws_scaling_up_policy@ nested settings.
-data ElastigroupAwsScalingUpPolicy s = ElastigroupAwsScalingUpPolicy'
+-- | @integration_rancher@ nested settings.
+data IntegrationRancherSetting s = IntegrationRancherSetting'
+    { _accessKey  :: TF.Attr s P.Text
+    -- ^ @access_key@ - (Required)
+    --
+    , _masterHost :: TF.Attr s P.Text
+    -- ^ @master_host@ - (Required)
+    --
+    , _secretKey  :: TF.Attr s P.Text
+    -- ^ @secret_key@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newIntegrationRancherSetting
+    :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
+    -> TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
+    -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
+    -> IntegrationRancherSetting s
+newIntegrationRancherSetting _accessKey _masterHost _secretKey =
+    IntegrationRancherSetting'
+        { _accessKey = _accessKey
+        , _masterHost = _masterHost
+        , _secretKey = _secretKey
+        }
+
+instance TF.IsValue  (IntegrationRancherSetting s)
+instance TF.IsObject (IntegrationRancherSetting s) where
+    toObject IntegrationRancherSetting'{..} = P.catMaybes
+        [ TF.assign "access_key" <$> TF.attribute _accessKey
+        , TF.assign "master_host" <$> TF.attribute _masterHost
+        , TF.assign "secret_key" <$> TF.attribute _secretKey
+        ]
+
+instance TF.IsValid (IntegrationRancherSetting s) where
+    validator = P.mempty
+
+instance P.HasAccessKey (IntegrationRancherSetting s) (TF.Attr s P.Text) where
+    accessKey =
+        P.lens (_accessKey :: IntegrationRancherSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _accessKey = a } :: IntegrationRancherSetting s)
+
+instance P.HasMasterHost (IntegrationRancherSetting s) (TF.Attr s P.Text) where
+    masterHost =
+        P.lens (_masterHost :: IntegrationRancherSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _masterHost = a } :: IntegrationRancherSetting s)
+
+instance P.HasSecretKey (IntegrationRancherSetting s) (TF.Attr s P.Text) where
+    secretKey =
+        P.lens (_secretKey :: IntegrationRancherSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _secretKey = a } :: IntegrationRancherSetting s)
+
+-- | @multai_target_sets@ nested settings.
+data MultaiTargetSetsSetting s = MultaiTargetSetsSetting'
+    { _balancerId  :: TF.Attr s P.Text
+    -- ^ @balancer_id@ - (Required)
+    --
+    , _targetSetId :: TF.Attr s P.Text
+    -- ^ @target_set_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newMultaiTargetSetsSetting
+    :: TF.Attr s P.Text -- ^ @balancer_id@ - 'P.balancerId'
+    -> TF.Attr s P.Text -- ^ @target_set_id@ - 'P.targetSetId'
+    -> MultaiTargetSetsSetting s
+newMultaiTargetSetsSetting _balancerId _targetSetId =
+    MultaiTargetSetsSetting'
+        { _balancerId = _balancerId
+        , _targetSetId = _targetSetId
+        }
+
+instance TF.IsValue  (MultaiTargetSetsSetting s)
+instance TF.IsObject (MultaiTargetSetsSetting s) where
+    toObject MultaiTargetSetsSetting'{..} = P.catMaybes
+        [ TF.assign "balancer_id" <$> TF.attribute _balancerId
+        , TF.assign "target_set_id" <$> TF.attribute _targetSetId
+        ]
+
+instance TF.IsValid (MultaiTargetSetsSetting s) where
+    validator = P.mempty
+
+instance P.HasBalancerId (MultaiTargetSetsSetting s) (TF.Attr s P.Text) where
+    balancerId =
+        P.lens (_balancerId :: MultaiTargetSetsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _balancerId = a } :: MultaiTargetSetsSetting s)
+
+instance P.HasTargetSetId (MultaiTargetSetsSetting s) (TF.Attr s P.Text) where
+    targetSetId =
+        P.lens (_targetSetId :: MultaiTargetSetsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _targetSetId = a } :: MultaiTargetSetsSetting s)
+
+-- | @network_interface@ nested settings.
+data NetworkInterfaceSetting s = NetworkInterfaceSetting'
+    { _associatePublicIpAddress       :: TF.Attr s P.Bool
+    -- ^ @associate_public_ip_address@ - (Optional)
+    --
+    , _description                    :: TF.Attr s P.Text
+    -- ^ @description@ - (Required)
+    --
+    , _deviceIndex                    :: TF.Attr s P.Text
+    -- ^ @device_index@ - (Required)
+    --
+    , _networkInterfaceId             :: TF.Attr s P.Text
+    -- ^ @network_interface_id@ - (Optional)
+    --
+    , _privateIpAddress               :: TF.Attr s P.Text
+    -- ^ @private_ip_address@ - (Optional)
+    --
+    , _secondaryPrivateIpAddressCount :: TF.Attr s P.Text
+    -- ^ @secondary_private_ip_address_count@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newNetworkInterfaceSetting
+    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
+    -> TF.Attr s P.Text -- ^ @device_index@ - 'P.deviceIndex'
+    -> NetworkInterfaceSetting s
+newNetworkInterfaceSetting _description _deviceIndex =
+    NetworkInterfaceSetting'
+        { _associatePublicIpAddress = TF.Nil
+        , _description = _description
+        , _deviceIndex = _deviceIndex
+        , _networkInterfaceId = TF.Nil
+        , _privateIpAddress = TF.Nil
+        , _secondaryPrivateIpAddressCount = TF.Nil
+        }
+
+instance TF.IsValue  (NetworkInterfaceSetting s)
+instance TF.IsObject (NetworkInterfaceSetting s) where
+    toObject NetworkInterfaceSetting'{..} = P.catMaybes
+        [ TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "device_index" <$> TF.attribute _deviceIndex
+        , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
+        , TF.assign "private_ip_address" <$> TF.attribute _privateIpAddress
+        , TF.assign "secondary_private_ip_address_count" <$> TF.attribute _secondaryPrivateIpAddressCount
+        ]
+
+instance TF.IsValid (NetworkInterfaceSetting s) where
+    validator = P.mempty
+
+instance P.HasAssociatePublicIpAddress (NetworkInterfaceSetting s) (TF.Attr s P.Bool) where
+    associatePublicIpAddress =
+        P.lens (_associatePublicIpAddress :: NetworkInterfaceSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _associatePublicIpAddress = a } :: NetworkInterfaceSetting s)
+
+instance P.HasDescription (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: NetworkInterfaceSetting s)
+
+instance P.HasDeviceIndex (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    deviceIndex =
+        P.lens (_deviceIndex :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceIndex = a } :: NetworkInterfaceSetting s)
+
+instance P.HasNetworkInterfaceId (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    networkInterfaceId =
+        P.lens (_networkInterfaceId :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _networkInterfaceId = a } :: NetworkInterfaceSetting s)
+
+instance P.HasPrivateIpAddress (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    privateIpAddress =
+        P.lens (_privateIpAddress :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _privateIpAddress = a } :: NetworkInterfaceSetting s)
+
+instance P.HasSecondaryPrivateIpAddressCount (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    secondaryPrivateIpAddressCount =
+        P.lens (_secondaryPrivateIpAddressCount :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _secondaryPrivateIpAddressCount = a } :: NetworkInterfaceSetting s)
+
+instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (NetworkInterfaceSetting s)) (TF.Attr s P.Bool) where
+    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
+
+-- | @revert_to_spot@ nested settings.
+data RevertToSpotSetting s = RevertToSpotSetting'
+    { _performAt   :: TF.Attr s P.Text
+    -- ^ @perform_at@ - (Required)
+    --
+    , _timeWindows :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @time_windows@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newRevertToSpotSetting
+    :: TF.Attr s P.Text -- ^ @perform_at@ - 'P.performAt'
+    -> RevertToSpotSetting s
+newRevertToSpotSetting _performAt =
+    RevertToSpotSetting'
+        { _performAt = _performAt
+        , _timeWindows = TF.Nil
+        }
+
+instance TF.IsValue  (RevertToSpotSetting s)
+instance TF.IsObject (RevertToSpotSetting s) where
+    toObject RevertToSpotSetting'{..} = P.catMaybes
+        [ TF.assign "perform_at" <$> TF.attribute _performAt
+        , TF.assign "time_windows" <$> TF.attribute _timeWindows
+        ]
+
+instance TF.IsValid (RevertToSpotSetting s) where
+    validator = P.mempty
+
+instance P.HasPerformAt (RevertToSpotSetting s) (TF.Attr s P.Text) where
+    performAt =
+        P.lens (_performAt :: RevertToSpotSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _performAt = a } :: RevertToSpotSetting s)
+
+instance P.HasTimeWindows (RevertToSpotSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    timeWindows =
+        P.lens (_timeWindows :: RevertToSpotSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _timeWindows = a } :: RevertToSpotSetting s)
+
+-- | @roll_config@ nested settings.
+data RollConfigSetting s = RollConfigSetting'
+    { _batchSizePercentage :: TF.Attr s P.Int
+    -- ^ @batch_size_percentage@ - (Required)
+    --
+    , _gracePeriod         :: TF.Attr s P.Int
+    -- ^ @grace_period@ - (Optional)
+    --
+    , _healthCheckType     :: TF.Attr s P.Text
+    -- ^ @health_check_type@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newRollConfigSetting
+    :: TF.Attr s P.Int -- ^ @batch_size_percentage@ - 'P.batchSizePercentage'
+    -> RollConfigSetting s
+newRollConfigSetting _batchSizePercentage =
+    RollConfigSetting'
+        { _batchSizePercentage = _batchSizePercentage
+        , _gracePeriod = TF.value (-1)
+        , _healthCheckType = TF.Nil
+        }
+
+instance TF.IsValue  (RollConfigSetting s)
+instance TF.IsObject (RollConfigSetting s) where
+    toObject RollConfigSetting'{..} = P.catMaybes
+        [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
+        , TF.assign "grace_period" <$> TF.attribute _gracePeriod
+        , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
+        ]
+
+instance TF.IsValid (RollConfigSetting s) where
+    validator = P.mempty
+
+instance P.HasBatchSizePercentage (RollConfigSetting s) (TF.Attr s P.Int) where
+    batchSizePercentage =
+        P.lens (_batchSizePercentage :: RollConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _batchSizePercentage = a } :: RollConfigSetting s)
+
+instance P.HasGracePeriod (RollConfigSetting s) (TF.Attr s P.Int) where
+    gracePeriod =
+        P.lens (_gracePeriod :: RollConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _gracePeriod = a } :: RollConfigSetting s)
+
+instance P.HasHealthCheckType (RollConfigSetting s) (TF.Attr s P.Text) where
+    healthCheckType =
+        P.lens (_healthCheckType :: RollConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _healthCheckType = a } :: RollConfigSetting s)
+
+-- | @runner@ nested settings.
+data RunnerSetting s = RunnerSetting'
+    { _isEnabled :: TF.Attr s P.Bool
+    -- ^ @is_enabled@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newRunnerSetting
+    :: RunnerSetting s
+newRunnerSetting =
+    RunnerSetting'
+        { _isEnabled = TF.Nil
+        }
+
+instance TF.IsValue  (RunnerSetting s)
+instance TF.IsObject (RunnerSetting s) where
+    toObject RunnerSetting'{..} = P.catMaybes
+        [ TF.assign "is_enabled" <$> TF.attribute _isEnabled
+        ]
+
+instance TF.IsValid (RunnerSetting s) where
+    validator = P.mempty
+
+instance P.HasIsEnabled (RunnerSetting s) (TF.Attr s P.Bool) where
+    isEnabled =
+        P.lens (_isEnabled :: RunnerSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _isEnabled = a } :: RunnerSetting s)
+
+-- | @scaling_down_policy@ nested settings.
+data ScalingDownPolicySetting s = ScalingDownPolicySetting'
     { _actionType        :: TF.Attr s P.Text
     -- ^ @action_type@ - (Optional)
     --
     , _adjustment        :: TF.Attr s P.Text
     -- ^ @adjustment@ - (Optional)
     --
-    , _dimensions        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _dimensions        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @dimensions@ - (Optional)
     --
     , _maxTargetCapacity :: TF.Attr s P.Text
@@ -372,17 +1358,17 @@ data ElastigroupAwsScalingUpPolicy s = ElastigroupAwsScalingUpPolicy'
     , _unit              :: TF.Attr s P.Text
     -- ^ @unit@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsScalingUpPolicy
+newScalingDownPolicySetting
     :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
     -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
     -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
     -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
     -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
-    -> ElastigroupAwsScalingUpPolicy s
-newElastigroupAwsScalingUpPolicy _metricName _namespace _policyName _threshold _unit =
-    ElastigroupAwsScalingUpPolicy'
+    -> ScalingDownPolicySetting s
+newScalingDownPolicySetting _metricName _namespace _policyName _threshold _unit =
+    ScalingDownPolicySetting'
         { _actionType = TF.Nil
         , _adjustment = TF.Nil
         , _dimensions = TF.Nil
@@ -398,10 +1384,9 @@ newElastigroupAwsScalingUpPolicy _metricName _namespace _policyName _threshold _
         , _unit = _unit
         }
 
-instance P.Hashable  (ElastigroupAwsScalingUpPolicy s)
-instance TF.IsValue  (ElastigroupAwsScalingUpPolicy s)
-instance TF.IsObject (ElastigroupAwsScalingUpPolicy s) where
-    toObject ElastigroupAwsScalingUpPolicy'{..} = P.catMaybes
+instance TF.IsValue  (ScalingDownPolicySetting s)
+instance TF.IsObject (ScalingDownPolicySetting s) where
+    toObject ScalingDownPolicySetting'{..} = P.catMaybes
         [ TF.assign "action_type" <$> TF.attribute _actionType
         , TF.assign "adjustment" <$> TF.attribute _adjustment
         , TF.assign "dimensions" <$> TF.attribute _dimensions
@@ -417,1072 +1402,357 @@ instance TF.IsObject (ElastigroupAwsScalingUpPolicy s) where
         , TF.assign "unit" <$> TF.attribute _unit
         ]
 
-instance TF.IsValid (ElastigroupAwsScalingUpPolicy s) where
+instance TF.IsValid (ScalingDownPolicySetting s) where
     validator = P.mempty
 
-instance P.HasActionType (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasActionType (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     actionType =
-        P.lens (_actionType :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _actionType = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_actionType :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _actionType = a } :: ScalingDownPolicySetting s)
 
-instance P.HasAdjustment (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasAdjustment (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     adjustment =
-        P.lens (_adjustment :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _adjustment = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_adjustment :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _adjustment = a } :: ScalingDownPolicySetting s)
 
-instance P.HasDimensions (ElastigroupAwsScalingUpPolicy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasDimensions (ScalingDownPolicySetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     dimensions =
-        P.lens (_dimensions :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimensions = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_dimensions :: ScalingDownPolicySetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _dimensions = a } :: ScalingDownPolicySetting s)
 
-instance P.HasMaxTargetCapacity (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasMaxTargetCapacity (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     maxTargetCapacity =
-        P.lens (_maxTargetCapacity :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maxTargetCapacity = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_maxTargetCapacity :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _maxTargetCapacity = a } :: ScalingDownPolicySetting s)
 
-instance P.HasMaximum (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasMaximum (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     maximum =
-        P.lens (_maximum :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maximum = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_maximum :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _maximum = a } :: ScalingDownPolicySetting s)
 
-instance P.HasMetricName (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasMetricName (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     metricName =
-        P.lens (_metricName :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_metricName :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: ScalingDownPolicySetting s)
 
-instance P.HasMinTargetCapacity (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasMinTargetCapacity (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     minTargetCapacity =
-        P.lens (_minTargetCapacity :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minTargetCapacity = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_minTargetCapacity :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minTargetCapacity = a } :: ScalingDownPolicySetting s)
 
-instance P.HasMinimum (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasMinimum (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     minimum =
-        P.lens (_minimum :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minimum = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_minimum :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minimum = a } :: ScalingDownPolicySetting s)
 
-instance P.HasNamespace (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasNamespace (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     namespace =
-        P.lens (_namespace :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_namespace :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: ScalingDownPolicySetting s)
 
-instance P.HasPolicyName (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasPolicyName (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     policyName =
-        P.lens (_policyName :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_policyName :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _policyName = a } :: ScalingDownPolicySetting s)
 
-instance P.HasTarget (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasTarget (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     target =
-        P.lens (_target :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_target :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: ScalingDownPolicySetting s)
 
-instance P.HasThreshold (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Double) where
+instance P.HasThreshold (ScalingDownPolicySetting s) (TF.Attr s P.Double) where
     threshold =
-        P.lens (_threshold :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Double)
-               (\s a -> s { _threshold = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_threshold :: ScalingDownPolicySetting s -> TF.Attr s P.Double)
+               (\s a -> s { _threshold = a } :: ScalingDownPolicySetting s)
 
-instance P.HasUnit (ElastigroupAwsScalingUpPolicy s) (TF.Attr s P.Text) where
+instance P.HasUnit (ScalingDownPolicySetting s) (TF.Attr s P.Text) where
     unit =
-        P.lens (_unit :: ElastigroupAwsScalingUpPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a } :: ElastigroupAwsScalingUpPolicy s)
+        P.lens (_unit :: ScalingDownPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _unit = a } :: ScalingDownPolicySetting s)
 
-instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ElastigroupAwsScalingUpPolicy s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingDownPolicySetting s)) (TF.Attr s P.Int) where
     computedCooldown x = TF.compute (TF.refKey x) "cooldown"
 
-instance s ~ s' => P.HasComputedEvaluationPeriods (TF.Ref s' (ElastigroupAwsScalingUpPolicy s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedEvaluationPeriods (TF.Ref s' (ScalingDownPolicySetting s)) (TF.Attr s P.Int) where
     computedEvaluationPeriods x = TF.compute (TF.refKey x) "evaluation_periods"
 
-instance s ~ s' => P.HasComputedOperator (TF.Ref s' (ElastigroupAwsScalingUpPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedOperator (TF.Ref s' (ScalingDownPolicySetting s)) (TF.Attr s P.Text) where
     computedOperator x = TF.compute (TF.refKey x) "operator"
 
-instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ElastigroupAwsScalingUpPolicy s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ScalingDownPolicySetting s)) (TF.Attr s P.Int) where
     computedPeriod x = TF.compute (TF.refKey x) "period"
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (ElastigroupAwsScalingUpPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ScalingDownPolicySetting s)) (TF.Attr s P.Text) where
     computedSource x = TF.compute (TF.refKey x) "source"
 
-instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ElastigroupAwsScalingUpPolicy s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingDownPolicySetting s)) (TF.Attr s P.Text) where
     computedStatistic x = TF.compute (TF.refKey x) "statistic"
 
--- | @elastigroup_aws_integration_rancher@ nested settings.
-data ElastigroupAwsIntegrationRancher s = ElastigroupAwsIntegrationRancher'
-    { _accessKey  :: TF.Attr s P.Text
-    -- ^ @access_key@ - (Required)
+-- | @scaling_target_policy@ nested settings.
+data ScalingTargetPolicySetting s = ScalingTargetPolicySetting'
+    { _dimensions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @dimensions@ - (Optional)
     --
-    , _masterHost :: TF.Attr s P.Text
-    -- ^ @master_host@ - (Required)
+    , _metricName :: TF.Attr s P.Text
+    -- ^ @metric_name@ - (Required)
     --
-    , _secretKey  :: TF.Attr s P.Text
-    -- ^ @secret_key@ - (Required)
+    , _namespace  :: TF.Attr s P.Text
+    -- ^ @namespace@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    , _policyName :: TF.Attr s P.Text
+    -- ^ @policy_name@ - (Required)
+    --
+    , _target     :: TF.Attr s P.Double
+    -- ^ @target@ - (Required)
+    --
+    , _unit       :: TF.Attr s P.Text
+    -- ^ @unit@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsIntegrationRancher
-    :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> TF.Attr s P.Text -- ^ @master_host@ - 'P.masterHost'
-    -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
-    -> ElastigroupAwsIntegrationRancher s
-newElastigroupAwsIntegrationRancher _accessKey _masterHost _secretKey =
-    ElastigroupAwsIntegrationRancher'
-        { _accessKey = _accessKey
-        , _masterHost = _masterHost
-        , _secretKey = _secretKey
+newScalingTargetPolicySetting
+    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
+    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
+    -> TF.Attr s P.Double -- ^ @target@ - 'P.target'
+    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
+    -> ScalingTargetPolicySetting s
+newScalingTargetPolicySetting _metricName _namespace _policyName _target _unit =
+    ScalingTargetPolicySetting'
+        { _dimensions = TF.Nil
+        , _metricName = _metricName
+        , _namespace = _namespace
+        , _policyName = _policyName
+        , _target = _target
+        , _unit = _unit
         }
 
-instance P.Hashable  (ElastigroupAwsIntegrationRancher s)
-instance TF.IsValue  (ElastigroupAwsIntegrationRancher s)
-instance TF.IsObject (ElastigroupAwsIntegrationRancher s) where
-    toObject ElastigroupAwsIntegrationRancher'{..} = P.catMaybes
-        [ TF.assign "access_key" <$> TF.attribute _accessKey
-        , TF.assign "master_host" <$> TF.attribute _masterHost
-        , TF.assign "secret_key" <$> TF.attribute _secretKey
+instance TF.IsValue  (ScalingTargetPolicySetting s)
+instance TF.IsObject (ScalingTargetPolicySetting s) where
+    toObject ScalingTargetPolicySetting'{..} = P.catMaybes
+        [ TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "unit" <$> TF.attribute _unit
         ]
 
-instance TF.IsValid (ElastigroupAwsIntegrationRancher s) where
+instance TF.IsValid (ScalingTargetPolicySetting s) where
     validator = P.mempty
 
-instance P.HasAccessKey (ElastigroupAwsIntegrationRancher s) (TF.Attr s P.Text) where
-    accessKey =
-        P.lens (_accessKey :: ElastigroupAwsIntegrationRancher s -> TF.Attr s P.Text)
-               (\s a -> s { _accessKey = a } :: ElastigroupAwsIntegrationRancher s)
+instance P.HasDimensions (ScalingTargetPolicySetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    dimensions =
+        P.lens (_dimensions :: ScalingTargetPolicySetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _dimensions = a } :: ScalingTargetPolicySetting s)
 
-instance P.HasMasterHost (ElastigroupAwsIntegrationRancher s) (TF.Attr s P.Text) where
-    masterHost =
-        P.lens (_masterHost :: ElastigroupAwsIntegrationRancher s -> TF.Attr s P.Text)
-               (\s a -> s { _masterHost = a } :: ElastigroupAwsIntegrationRancher s)
+instance P.HasMetricName (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
+    metricName =
+        P.lens (_metricName :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: ScalingTargetPolicySetting s)
 
-instance P.HasSecretKey (ElastigroupAwsIntegrationRancher s) (TF.Attr s P.Text) where
-    secretKey =
-        P.lens (_secretKey :: ElastigroupAwsIntegrationRancher s -> TF.Attr s P.Text)
-               (\s a -> s { _secretKey = a } :: ElastigroupAwsIntegrationRancher s)
+instance P.HasNamespace (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
+    namespace =
+        P.lens (_namespace :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: ScalingTargetPolicySetting s)
 
--- | @elastigroup_aws_integration_kubernetes@ nested settings.
-data ElastigroupAwsIntegrationKubernetes s = ElastigroupAwsIntegrationKubernetes'
-    { _apiServer :: TF.Attr s P.Text
-    -- ^ @api_server@ - (Optional)
-    --
-    , _autoscaleCooldown :: TF.Attr s P.Integer
-    -- ^ @autoscale_cooldown@ - (Optional)
-    --
-    , _autoscaleDown :: TF.Attr s (IntegrationKubernetesAutoscaleDown s)
-    -- ^ @autoscale_down@ - (Optional)
-    --
-    , _autoscaleHeadroom :: TF.Attr s (IntegrationKubernetesAutoscaleHeadroom s)
-    -- ^ @autoscale_headroom@ - (Optional)
-    --
-    , _autoscaleIsAutoConfig :: TF.Attr s P.Bool
-    -- ^ @autoscale_is_auto_config@ - (Optional)
-    --
-    , _autoscaleIsEnabled :: TF.Attr s P.Bool
-    -- ^ @autoscale_is_enabled@ - (Optional)
-    --
-    , _autoscaleLabels :: TF.Attr s [TF.Attr s (IntegrationKubernetesAutoscaleLabels s)]
-    -- ^ @autoscale_labels@ - (Optional)
-    --
-    , _clusterIdentifier :: TF.Attr s P.Text
-    -- ^ @cluster_identifier@ - (Optional)
-    --
-    , _integrationMode :: TF.Attr s P.Text
-    -- ^ @integration_mode@ - (Optional)
-    --
-    , _token :: TF.Attr s P.Text
-    -- ^ @token@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+instance P.HasPolicyName (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
+    policyName =
+        P.lens (_policyName :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _policyName = a } :: ScalingTargetPolicySetting s)
 
-newElastigroupAwsIntegrationKubernetes
-    :: ElastigroupAwsIntegrationKubernetes s
-newElastigroupAwsIntegrationKubernetes =
-    ElastigroupAwsIntegrationKubernetes'
-        { _apiServer = TF.Nil
-        , _autoscaleCooldown = TF.Nil
-        , _autoscaleDown = TF.Nil
-        , _autoscaleHeadroom = TF.Nil
-        , _autoscaleIsAutoConfig = TF.Nil
-        , _autoscaleIsEnabled = TF.Nil
-        , _autoscaleLabels = TF.Nil
-        , _clusterIdentifier = TF.Nil
-        , _integrationMode = TF.Nil
-        , _token = TF.Nil
+instance P.HasTarget (ScalingTargetPolicySetting s) (TF.Attr s P.Double) where
+    target =
+        P.lens (_target :: ScalingTargetPolicySetting s -> TF.Attr s P.Double)
+               (\s a -> s { _target = a } :: ScalingTargetPolicySetting s)
+
+instance P.HasUnit (ScalingTargetPolicySetting s) (TF.Attr s P.Text) where
+    unit =
+        P.lens (_unit :: ScalingTargetPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _unit = a } :: ScalingTargetPolicySetting s)
+
+instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingTargetPolicySetting s)) (TF.Attr s P.Int) where
+    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
+
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ScalingTargetPolicySetting s)) (TF.Attr s P.Text) where
+    computedSource x = TF.compute (TF.refKey x) "source"
+
+instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingTargetPolicySetting s)) (TF.Attr s P.Text) where
+    computedStatistic x = TF.compute (TF.refKey x) "statistic"
+
+-- | @scaling_up_policy@ nested settings.
+data ScalingUpPolicySetting s = ScalingUpPolicySetting'
+    { _actionType        :: TF.Attr s P.Text
+    -- ^ @action_type@ - (Optional)
+    --
+    , _adjustment        :: TF.Attr s P.Text
+    -- ^ @adjustment@ - (Optional)
+    --
+    , _dimensions        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @dimensions@ - (Optional)
+    --
+    , _maxTargetCapacity :: TF.Attr s P.Text
+    -- ^ @max_target_capacity@ - (Optional)
+    --
+    , _maximum           :: TF.Attr s P.Text
+    -- ^ @maximum@ - (Optional)
+    --
+    , _metricName        :: TF.Attr s P.Text
+    -- ^ @metric_name@ - (Required)
+    --
+    , _minTargetCapacity :: TF.Attr s P.Text
+    -- ^ @min_target_capacity@ - (Optional)
+    --
+    , _minimum           :: TF.Attr s P.Text
+    -- ^ @minimum@ - (Optional)
+    --
+    , _namespace         :: TF.Attr s P.Text
+    -- ^ @namespace@ - (Required)
+    --
+    , _policyName        :: TF.Attr s P.Text
+    -- ^ @policy_name@ - (Required)
+    --
+    , _target            :: TF.Attr s P.Text
+    -- ^ @target@ - (Optional)
+    --
+    , _threshold         :: TF.Attr s P.Double
+    -- ^ @threshold@ - (Required)
+    --
+    , _unit              :: TF.Attr s P.Text
+    -- ^ @unit@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newScalingUpPolicySetting
+    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
+    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
+    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
+    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
+    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
+    -> ScalingUpPolicySetting s
+newScalingUpPolicySetting _metricName _namespace _policyName _threshold _unit =
+    ScalingUpPolicySetting'
+        { _actionType = TF.Nil
+        , _adjustment = TF.Nil
+        , _dimensions = TF.Nil
+        , _maxTargetCapacity = TF.Nil
+        , _maximum = TF.Nil
+        , _metricName = _metricName
+        , _minTargetCapacity = TF.Nil
+        , _minimum = TF.Nil
+        , _namespace = _namespace
+        , _policyName = _policyName
+        , _target = TF.Nil
+        , _threshold = _threshold
+        , _unit = _unit
         }
 
-instance P.Hashable  (ElastigroupAwsIntegrationKubernetes s)
-instance TF.IsValue  (ElastigroupAwsIntegrationKubernetes s)
-instance TF.IsObject (ElastigroupAwsIntegrationKubernetes s) where
-    toObject ElastigroupAwsIntegrationKubernetes'{..} = P.catMaybes
-        [ TF.assign "api_server" <$> TF.attribute _apiServer
-        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
-        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
-        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
-        , TF.assign "autoscale_is_auto_config" <$> TF.attribute _autoscaleIsAutoConfig
-        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
-        , TF.assign "autoscale_labels" <$> TF.attribute _autoscaleLabels
-        , TF.assign "cluster_identifier" <$> TF.attribute _clusterIdentifier
-        , TF.assign "integration_mode" <$> TF.attribute _integrationMode
-        , TF.assign "token" <$> TF.attribute _token
+instance TF.IsValue  (ScalingUpPolicySetting s)
+instance TF.IsObject (ScalingUpPolicySetting s) where
+    toObject ScalingUpPolicySetting'{..} = P.catMaybes
+        [ TF.assign "action_type" <$> TF.attribute _actionType
+        , TF.assign "adjustment" <$> TF.attribute _adjustment
+        , TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
+        , TF.assign "maximum" <$> TF.attribute _maximum
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
+        , TF.assign "minimum" <$> TF.attribute _minimum
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "unit" <$> TF.attribute _unit
         ]
 
-instance TF.IsValid (ElastigroupAwsIntegrationKubernetes s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_autoscaleDown"
-                  (_autoscaleDown
-                      :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s (IntegrationKubernetesAutoscaleDown s))
-                  TF.validator
-           P.<> TF.settingsValidator "_autoscaleHeadroom"
-                  (_autoscaleHeadroom
-                      :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s (IntegrationKubernetesAutoscaleHeadroom s))
-                  TF.validator
-           P.<> TF.settingsValidator "_autoscaleLabels"
-                  (_autoscaleLabels
-                      :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s [TF.Attr s (IntegrationKubernetesAutoscaleLabels s)])
-                  TF.validator
-
-instance P.HasApiServer (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Text) where
-    apiServer =
-        P.lens (_apiServer :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _apiServer = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasAutoscaleCooldown (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Integer) where
-    autoscaleCooldown =
-        P.lens (_autoscaleCooldown :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Integer)
-               (\s a -> s { _autoscaleCooldown = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasAutoscaleDown (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s (IntegrationKubernetesAutoscaleDown s)) where
-    autoscaleDown =
-        P.lens (_autoscaleDown :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s (IntegrationKubernetesAutoscaleDown s))
-               (\s a -> s { _autoscaleDown = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasAutoscaleHeadroom (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s (IntegrationKubernetesAutoscaleHeadroom s)) where
-    autoscaleHeadroom =
-        P.lens (_autoscaleHeadroom :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s (IntegrationKubernetesAutoscaleHeadroom s))
-               (\s a -> s { _autoscaleHeadroom = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasAutoscaleIsAutoConfig (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Bool) where
-    autoscaleIsAutoConfig =
-        P.lens (_autoscaleIsAutoConfig :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsAutoConfig = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasAutoscaleIsEnabled (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Bool) where
-    autoscaleIsEnabled =
-        P.lens (_autoscaleIsEnabled :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsEnabled = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasAutoscaleLabels (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s [TF.Attr s (IntegrationKubernetesAutoscaleLabels s)]) where
-    autoscaleLabels =
-        P.lens (_autoscaleLabels :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s [TF.Attr s (IntegrationKubernetesAutoscaleLabels s)])
-               (\s a -> s { _autoscaleLabels = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasClusterIdentifier (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Text) where
-    clusterIdentifier =
-        P.lens (_clusterIdentifier :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterIdentifier = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasIntegrationMode (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Text) where
-    integrationMode =
-        P.lens (_integrationMode :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _integrationMode = a } :: ElastigroupAwsIntegrationKubernetes s)
-
-instance P.HasToken (ElastigroupAwsIntegrationKubernetes s) (TF.Attr s P.Text) where
-    token =
-        P.lens (_token :: ElastigroupAwsIntegrationKubernetes s -> TF.Attr s P.Text)
-               (\s a -> s { _token = a } :: ElastigroupAwsIntegrationKubernetes s)
-
--- | @elastigroup_aws_signal@ nested settings.
-data ElastigroupAwsSignal s = ElastigroupAwsSignal'
-    { _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _timeout :: TF.Attr s P.Integer
-    -- ^ @timeout@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsSignal
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> ElastigroupAwsSignal s
-newElastigroupAwsSignal _name =
-    ElastigroupAwsSignal'
-        { _name = _name
-        , _timeout = TF.Nil
-        }
-
-instance P.Hashable  (ElastigroupAwsSignal s)
-instance TF.IsValue  (ElastigroupAwsSignal s)
-instance TF.IsObject (ElastigroupAwsSignal s) where
-    toObject ElastigroupAwsSignal'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
-instance TF.IsValid (ElastigroupAwsSignal s) where
+instance TF.IsValid (ScalingUpPolicySetting s) where
     validator = P.mempty
 
-instance P.HasName (ElastigroupAwsSignal s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ElastigroupAwsSignal s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ElastigroupAwsSignal s)
-
-instance P.HasTimeout (ElastigroupAwsSignal s) (TF.Attr s P.Integer) where
-    timeout =
-        P.lens (_timeout :: ElastigroupAwsSignal s -> TF.Attr s P.Integer)
-               (\s a -> s { _timeout = a } :: ElastigroupAwsSignal s)
-
--- | @elastigroup_aws_update_policy@ nested settings.
-data ElastigroupAwsUpdatePolicy s = ElastigroupAwsUpdatePolicy'
-    { _rollConfig           :: TF.Attr s (UpdatePolicyRollConfig s)
-    -- ^ @roll_config@ - (Optional)
-    --
-    , _shouldResumeStateful :: TF.Attr s P.Bool
-    -- ^ @should_resume_stateful@ - (Required)
-    --
-    , _shouldRoll           :: TF.Attr s P.Bool
-    -- ^ @should_roll@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsUpdatePolicy
-    :: TF.Attr s P.Bool -- ^ @should_resume_stateful@ - 'P.shouldResumeStateful'
-    -> TF.Attr s P.Bool -- ^ @should_roll@ - 'P.shouldRoll'
-    -> ElastigroupAwsUpdatePolicy s
-newElastigroupAwsUpdatePolicy _shouldResumeStateful _shouldRoll =
-    ElastigroupAwsUpdatePolicy'
-        { _rollConfig = TF.Nil
-        , _shouldResumeStateful = _shouldResumeStateful
-        , _shouldRoll = _shouldRoll
-        }
-
-instance P.Hashable  (ElastigroupAwsUpdatePolicy s)
-instance TF.IsValue  (ElastigroupAwsUpdatePolicy s)
-instance TF.IsObject (ElastigroupAwsUpdatePolicy s) where
-    toObject ElastigroupAwsUpdatePolicy'{..} = P.catMaybes
-        [ TF.assign "roll_config" <$> TF.attribute _rollConfig
-        , TF.assign "should_resume_stateful" <$> TF.attribute _shouldResumeStateful
-        , TF.assign "should_roll" <$> TF.attribute _shouldRoll
-        ]
-
-instance TF.IsValid (ElastigroupAwsUpdatePolicy s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_rollConfig"
-                  (_rollConfig
-                      :: ElastigroupAwsUpdatePolicy s -> TF.Attr s (UpdatePolicyRollConfig s))
-                  TF.validator
-
-instance P.HasRollConfig (ElastigroupAwsUpdatePolicy s) (TF.Attr s (UpdatePolicyRollConfig s)) where
-    rollConfig =
-        P.lens (_rollConfig :: ElastigroupAwsUpdatePolicy s -> TF.Attr s (UpdatePolicyRollConfig s))
-               (\s a -> s { _rollConfig = a } :: ElastigroupAwsUpdatePolicy s)
-
-instance P.HasShouldResumeStateful (ElastigroupAwsUpdatePolicy s) (TF.Attr s P.Bool) where
-    shouldResumeStateful =
-        P.lens (_shouldResumeStateful :: ElastigroupAwsUpdatePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldResumeStateful = a } :: ElastigroupAwsUpdatePolicy s)
-
-instance P.HasShouldRoll (ElastigroupAwsUpdatePolicy s) (TF.Attr s P.Bool) where
-    shouldRoll =
-        P.lens (_shouldRoll :: ElastigroupAwsUpdatePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldRoll = a } :: ElastigroupAwsUpdatePolicy s)
-
--- | @elastigroup_aws_ephemeral_block_device@ nested settings.
-data ElastigroupAwsEphemeralBlockDevice s = ElastigroupAwsEphemeralBlockDevice'
-    { _deviceName  :: TF.Attr s P.Text
-    -- ^ @device_name@ - (Required)
-    --
-    , _virtualName :: TF.Attr s P.Text
-    -- ^ @virtual_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsEphemeralBlockDevice
-    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
-    -> TF.Attr s P.Text -- ^ @virtual_name@ - 'P.virtualName'
-    -> ElastigroupAwsEphemeralBlockDevice s
-newElastigroupAwsEphemeralBlockDevice _deviceName _virtualName =
-    ElastigroupAwsEphemeralBlockDevice'
-        { _deviceName = _deviceName
-        , _virtualName = _virtualName
-        }
-
-instance P.Hashable  (ElastigroupAwsEphemeralBlockDevice s)
-instance TF.IsValue  (ElastigroupAwsEphemeralBlockDevice s)
-instance TF.IsObject (ElastigroupAwsEphemeralBlockDevice s) where
-    toObject ElastigroupAwsEphemeralBlockDevice'{..} = P.catMaybes
-        [ TF.assign "device_name" <$> TF.attribute _deviceName
-        , TF.assign "virtual_name" <$> TF.attribute _virtualName
-        ]
-
-instance TF.IsValid (ElastigroupAwsEphemeralBlockDevice s) where
-    validator = P.mempty
-
-instance P.HasDeviceName (ElastigroupAwsEphemeralBlockDevice s) (TF.Attr s P.Text) where
-    deviceName =
-        P.lens (_deviceName :: ElastigroupAwsEphemeralBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceName = a } :: ElastigroupAwsEphemeralBlockDevice s)
-
-instance P.HasVirtualName (ElastigroupAwsEphemeralBlockDevice s) (TF.Attr s P.Text) where
-    virtualName =
-        P.lens (_virtualName :: ElastigroupAwsEphemeralBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualName = a } :: ElastigroupAwsEphemeralBlockDevice s)
-
--- | @elastigroup_aws_revert_to_spot@ nested settings.
-data ElastigroupAwsRevertToSpot s = ElastigroupAwsRevertToSpot'
-    { _performAt   :: TF.Attr s P.Text
-    -- ^ @perform_at@ - (Required)
-    --
-    , _timeWindows :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @time_windows@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsRevertToSpot
-    :: TF.Attr s P.Text -- ^ @perform_at@ - 'P.performAt'
-    -> ElastigroupAwsRevertToSpot s
-newElastigroupAwsRevertToSpot _performAt =
-    ElastigroupAwsRevertToSpot'
-        { _performAt = _performAt
-        , _timeWindows = TF.Nil
-        }
-
-instance P.Hashable  (ElastigroupAwsRevertToSpot s)
-instance TF.IsValue  (ElastigroupAwsRevertToSpot s)
-instance TF.IsObject (ElastigroupAwsRevertToSpot s) where
-    toObject ElastigroupAwsRevertToSpot'{..} = P.catMaybes
-        [ TF.assign "perform_at" <$> TF.attribute _performAt
-        , TF.assign "time_windows" <$> TF.attribute _timeWindows
-        ]
-
-instance TF.IsValid (ElastigroupAwsRevertToSpot s) where
-    validator = P.mempty
-
-instance P.HasPerformAt (ElastigroupAwsRevertToSpot s) (TF.Attr s P.Text) where
-    performAt =
-        P.lens (_performAt :: ElastigroupAwsRevertToSpot s -> TF.Attr s P.Text)
-               (\s a -> s { _performAt = a } :: ElastigroupAwsRevertToSpot s)
-
-instance P.HasTimeWindows (ElastigroupAwsRevertToSpot s) (TF.Attr s [TF.Attr s P.Text]) where
-    timeWindows =
-        P.lens (_timeWindows :: ElastigroupAwsRevertToSpot s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _timeWindows = a } :: ElastigroupAwsRevertToSpot s)
-
--- | @elastigroup_aws_instance_types_weights@ nested settings.
-data ElastigroupAwsInstanceTypesWeights s = ElastigroupAwsInstanceTypesWeights'
-    { _instanceType :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Required)
-    --
-    , _weight       :: TF.Attr s P.Integer
-    -- ^ @weight@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsInstanceTypesWeights
-    :: TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s P.Integer -- ^ @weight@ - 'P.weight'
-    -> ElastigroupAwsInstanceTypesWeights s
-newElastigroupAwsInstanceTypesWeights _instanceType _weight =
-    ElastigroupAwsInstanceTypesWeights'
-        { _instanceType = _instanceType
-        , _weight = _weight
-        }
-
-instance P.Hashable  (ElastigroupAwsInstanceTypesWeights s)
-instance TF.IsValue  (ElastigroupAwsInstanceTypesWeights s)
-instance TF.IsObject (ElastigroupAwsInstanceTypesWeights s) where
-    toObject ElastigroupAwsInstanceTypesWeights'{..} = P.catMaybes
-        [ TF.assign "instance_type" <$> TF.attribute _instanceType
-        , TF.assign "weight" <$> TF.attribute _weight
-        ]
-
-instance TF.IsValid (ElastigroupAwsInstanceTypesWeights s) where
-    validator = P.mempty
-
-instance P.HasInstanceType (ElastigroupAwsInstanceTypesWeights s) (TF.Attr s P.Text) where
-    instanceType =
-        P.lens (_instanceType :: ElastigroupAwsInstanceTypesWeights s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceType = a } :: ElastigroupAwsInstanceTypesWeights s)
-
-instance P.HasWeight (ElastigroupAwsInstanceTypesWeights s) (TF.Attr s P.Integer) where
-    weight =
-        P.lens (_weight :: ElastigroupAwsInstanceTypesWeights s -> TF.Attr s P.Integer)
-               (\s a -> s { _weight = a } :: ElastigroupAwsInstanceTypesWeights s)
-
--- | @integration_nomad_autoscale_down@ nested settings.
-data IntegrationNomadAutoscaleDown s = IntegrationNomadAutoscaleDown'
-    { _evaluationPeriods :: TF.Attr s P.Integer
-    -- ^ @evaluation_periods@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationNomadAutoscaleDown
-    :: IntegrationNomadAutoscaleDown s
-newIntegrationNomadAutoscaleDown =
-    IntegrationNomadAutoscaleDown'
-        { _evaluationPeriods = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationNomadAutoscaleDown s)
-instance TF.IsValue  (IntegrationNomadAutoscaleDown s)
-instance TF.IsObject (IntegrationNomadAutoscaleDown s) where
-    toObject IntegrationNomadAutoscaleDown'{..} = P.catMaybes
-        [ TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
-        ]
-
-instance TF.IsValid (IntegrationNomadAutoscaleDown s) where
-    validator = P.mempty
-
-instance P.HasEvaluationPeriods (IntegrationNomadAutoscaleDown s) (TF.Attr s P.Integer) where
-    evaluationPeriods =
-        P.lens (_evaluationPeriods :: IntegrationNomadAutoscaleDown s -> TF.Attr s P.Integer)
-               (\s a -> s { _evaluationPeriods = a } :: IntegrationNomadAutoscaleDown s)
-
--- | @elastigroup_aws_network_interface@ nested settings.
-data ElastigroupAwsNetworkInterface s = ElastigroupAwsNetworkInterface'
-    { _associatePublicIpAddress       :: TF.Attr s P.Bool
-    -- ^ @associate_public_ip_address@ - (Optional)
-    --
-    , _description                    :: TF.Attr s P.Text
-    -- ^ @description@ - (Required)
-    --
-    , _deviceIndex                    :: TF.Attr s P.Text
-    -- ^ @device_index@ - (Required)
-    --
-    , _networkInterfaceId             :: TF.Attr s P.Text
-    -- ^ @network_interface_id@ - (Optional)
-    --
-    , _privateIpAddress               :: TF.Attr s P.Text
-    -- ^ @private_ip_address@ - (Optional)
-    --
-    , _secondaryPrivateIpAddressCount :: TF.Attr s P.Text
-    -- ^ @secondary_private_ip_address_count@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsNetworkInterface
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @device_index@ - 'P.deviceIndex'
-    -> ElastigroupAwsNetworkInterface s
-newElastigroupAwsNetworkInterface _description _deviceIndex =
-    ElastigroupAwsNetworkInterface'
-        { _associatePublicIpAddress = TF.Nil
-        , _description = _description
-        , _deviceIndex = _deviceIndex
-        , _networkInterfaceId = TF.Nil
-        , _privateIpAddress = TF.Nil
-        , _secondaryPrivateIpAddressCount = TF.Nil
-        }
-
-instance P.Hashable  (ElastigroupAwsNetworkInterface s)
-instance TF.IsValue  (ElastigroupAwsNetworkInterface s)
-instance TF.IsObject (ElastigroupAwsNetworkInterface s) where
-    toObject ElastigroupAwsNetworkInterface'{..} = P.catMaybes
-        [ TF.assign "associate_public_ip_address" <$> TF.attribute _associatePublicIpAddress
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "device_index" <$> TF.attribute _deviceIndex
-        , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
-        , TF.assign "private_ip_address" <$> TF.attribute _privateIpAddress
-        , TF.assign "secondary_private_ip_address_count" <$> TF.attribute _secondaryPrivateIpAddressCount
-        ]
-
-instance TF.IsValid (ElastigroupAwsNetworkInterface s) where
-    validator = P.mempty
-
-instance P.HasAssociatePublicIpAddress (ElastigroupAwsNetworkInterface s) (TF.Attr s P.Bool) where
-    associatePublicIpAddress =
-        P.lens (_associatePublicIpAddress :: ElastigroupAwsNetworkInterface s -> TF.Attr s P.Bool)
-               (\s a -> s { _associatePublicIpAddress = a } :: ElastigroupAwsNetworkInterface s)
-
-instance P.HasDescription (ElastigroupAwsNetworkInterface s) (TF.Attr s P.Text) where
-    description =
-        P.lens (_description :: ElastigroupAwsNetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ElastigroupAwsNetworkInterface s)
-
-instance P.HasDeviceIndex (ElastigroupAwsNetworkInterface s) (TF.Attr s P.Text) where
-    deviceIndex =
-        P.lens (_deviceIndex :: ElastigroupAwsNetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceIndex = a } :: ElastigroupAwsNetworkInterface s)
-
-instance P.HasNetworkInterfaceId (ElastigroupAwsNetworkInterface s) (TF.Attr s P.Text) where
-    networkInterfaceId =
-        P.lens (_networkInterfaceId :: ElastigroupAwsNetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _networkInterfaceId = a } :: ElastigroupAwsNetworkInterface s)
-
-instance P.HasPrivateIpAddress (ElastigroupAwsNetworkInterface s) (TF.Attr s P.Text) where
-    privateIpAddress =
-        P.lens (_privateIpAddress :: ElastigroupAwsNetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _privateIpAddress = a } :: ElastigroupAwsNetworkInterface s)
-
-instance P.HasSecondaryPrivateIpAddressCount (ElastigroupAwsNetworkInterface s) (TF.Attr s P.Text) where
-    secondaryPrivateIpAddressCount =
-        P.lens (_secondaryPrivateIpAddressCount :: ElastigroupAwsNetworkInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _secondaryPrivateIpAddressCount = a } :: ElastigroupAwsNetworkInterface s)
-
-instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (ElastigroupAwsNetworkInterface s)) (TF.Attr s P.Bool) where
-    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
-
--- | @integration_nomad_autoscale_headroom@ nested settings.
-data IntegrationNomadAutoscaleHeadroom s = IntegrationNomadAutoscaleHeadroom'
-    { _cpuPerUnit    :: TF.Attr s P.Integer
-    -- ^ @cpu_per_unit@ - (Optional)
-    --
-    , _memoryPerUnit :: TF.Attr s P.Integer
-    -- ^ @memory_per_unit@ - (Optional)
-    --
-    , _numOfUnits    :: TF.Attr s P.Integer
-    -- ^ @num_of_units@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationNomadAutoscaleHeadroom
-    :: IntegrationNomadAutoscaleHeadroom s
-newIntegrationNomadAutoscaleHeadroom =
-    IntegrationNomadAutoscaleHeadroom'
-        { _cpuPerUnit = TF.Nil
-        , _memoryPerUnit = TF.Nil
-        , _numOfUnits = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationNomadAutoscaleHeadroom s)
-instance TF.IsValue  (IntegrationNomadAutoscaleHeadroom s)
-instance TF.IsObject (IntegrationNomadAutoscaleHeadroom s) where
-    toObject IntegrationNomadAutoscaleHeadroom'{..} = P.catMaybes
-        [ TF.assign "cpu_per_unit" <$> TF.attribute _cpuPerUnit
-        , TF.assign "memory_per_unit" <$> TF.attribute _memoryPerUnit
-        , TF.assign "num_of_units" <$> TF.attribute _numOfUnits
-        ]
-
-instance TF.IsValid (IntegrationNomadAutoscaleHeadroom s) where
-    validator = P.mempty
-
-instance P.HasCpuPerUnit (IntegrationNomadAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    cpuPerUnit =
-        P.lens (_cpuPerUnit :: IntegrationNomadAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _cpuPerUnit = a } :: IntegrationNomadAutoscaleHeadroom s)
-
-instance P.HasMemoryPerUnit (IntegrationNomadAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    memoryPerUnit =
-        P.lens (_memoryPerUnit :: IntegrationNomadAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _memoryPerUnit = a } :: IntegrationNomadAutoscaleHeadroom s)
-
-instance P.HasNumOfUnits (IntegrationNomadAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    numOfUnits =
-        P.lens (_numOfUnits :: IntegrationNomadAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _numOfUnits = a } :: IntegrationNomadAutoscaleHeadroom s)
-
--- | @elastigroup_aws_integration_codedeploy@ nested settings.
-data ElastigroupAwsIntegrationCodedeploy s = ElastigroupAwsIntegrationCodedeploy'
-    { _cleanupOnFailure :: TF.Attr s P.Bool
-    -- ^ @cleanup_on_failure@ - (Required)
-    --
-    , _deploymentGroups :: TF.Attr s [TF.Attr s (IntegrationCodedeployDeploymentGroups s)]
-    -- ^ @deployment_groups@ - (Required)
-    --
-    , _terminateInstanceOnFailure :: TF.Attr s P.Bool
-    -- ^ @terminate_instance_on_failure@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsIntegrationCodedeploy
-    :: TF.Attr s P.Bool -- ^ @cleanup_on_failure@ - 'P.cleanupOnFailure'
-    -> TF.Attr s [TF.Attr s (IntegrationCodedeployDeploymentGroups s)] -- ^ @deployment_groups@ - 'P.deploymentGroups'
-    -> TF.Attr s P.Bool -- ^ @terminate_instance_on_failure@ - 'P.terminateInstanceOnFailure'
-    -> ElastigroupAwsIntegrationCodedeploy s
-newElastigroupAwsIntegrationCodedeploy _cleanupOnFailure _deploymentGroups _terminateInstanceOnFailure =
-    ElastigroupAwsIntegrationCodedeploy'
-        { _cleanupOnFailure = _cleanupOnFailure
-        , _deploymentGroups = _deploymentGroups
-        , _terminateInstanceOnFailure = _terminateInstanceOnFailure
-        }
-
-instance P.Hashable  (ElastigroupAwsIntegrationCodedeploy s)
-instance TF.IsValue  (ElastigroupAwsIntegrationCodedeploy s)
-instance TF.IsObject (ElastigroupAwsIntegrationCodedeploy s) where
-    toObject ElastigroupAwsIntegrationCodedeploy'{..} = P.catMaybes
-        [ TF.assign "cleanup_on_failure" <$> TF.attribute _cleanupOnFailure
-        , TF.assign "deployment_groups" <$> TF.attribute _deploymentGroups
-        , TF.assign "terminate_instance_on_failure" <$> TF.attribute _terminateInstanceOnFailure
-        ]
-
-instance TF.IsValid (ElastigroupAwsIntegrationCodedeploy s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_deploymentGroups"
-                  (_deploymentGroups
-                      :: ElastigroupAwsIntegrationCodedeploy s -> TF.Attr s [TF.Attr s (IntegrationCodedeployDeploymentGroups s)])
-                  TF.validator
-
-instance P.HasCleanupOnFailure (ElastigroupAwsIntegrationCodedeploy s) (TF.Attr s P.Bool) where
-    cleanupOnFailure =
-        P.lens (_cleanupOnFailure :: ElastigroupAwsIntegrationCodedeploy s -> TF.Attr s P.Bool)
-               (\s a -> s { _cleanupOnFailure = a } :: ElastigroupAwsIntegrationCodedeploy s)
-
-instance P.HasDeploymentGroups (ElastigroupAwsIntegrationCodedeploy s) (TF.Attr s [TF.Attr s (IntegrationCodedeployDeploymentGroups s)]) where
-    deploymentGroups =
-        P.lens (_deploymentGroups :: ElastigroupAwsIntegrationCodedeploy s -> TF.Attr s [TF.Attr s (IntegrationCodedeployDeploymentGroups s)])
-               (\s a -> s { _deploymentGroups = a } :: ElastigroupAwsIntegrationCodedeploy s)
-
-instance P.HasTerminateInstanceOnFailure (ElastigroupAwsIntegrationCodedeploy s) (TF.Attr s P.Bool) where
-    terminateInstanceOnFailure =
-        P.lens (_terminateInstanceOnFailure :: ElastigroupAwsIntegrationCodedeploy s -> TF.Attr s P.Bool)
-               (\s a -> s { _terminateInstanceOnFailure = a } :: ElastigroupAwsIntegrationCodedeploy s)
-
--- | @integration_kubernetes_autoscale_down@ nested settings.
-data IntegrationKubernetesAutoscaleDown s = IntegrationKubernetesAutoscaleDown'
-    { _evaluationPeriods :: TF.Attr s P.Integer
-    -- ^ @evaluation_periods@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationKubernetesAutoscaleDown
-    :: IntegrationKubernetesAutoscaleDown s
-newIntegrationKubernetesAutoscaleDown =
-    IntegrationKubernetesAutoscaleDown'
-        { _evaluationPeriods = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationKubernetesAutoscaleDown s)
-instance TF.IsValue  (IntegrationKubernetesAutoscaleDown s)
-instance TF.IsObject (IntegrationKubernetesAutoscaleDown s) where
-    toObject IntegrationKubernetesAutoscaleDown'{..} = P.catMaybes
-        [ TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
-        ]
-
-instance TF.IsValid (IntegrationKubernetesAutoscaleDown s) where
-    validator = P.mempty
-
-instance P.HasEvaluationPeriods (IntegrationKubernetesAutoscaleDown s) (TF.Attr s P.Integer) where
-    evaluationPeriods =
-        P.lens (_evaluationPeriods :: IntegrationKubernetesAutoscaleDown s -> TF.Attr s P.Integer)
-               (\s a -> s { _evaluationPeriods = a } :: IntegrationKubernetesAutoscaleDown s)
-
--- | @elastigroup_aws_integration_multai_runtime@ nested settings.
-data ElastigroupAwsIntegrationMultaiRuntime s = ElastigroupAwsIntegrationMultaiRuntime'
-    { _deploymentId :: TF.Attr s P.Text
-    -- ^ @deployment_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsIntegrationMultaiRuntime
-    :: TF.Attr s P.Text -- ^ @deployment_id@ - 'P.deploymentId'
-    -> ElastigroupAwsIntegrationMultaiRuntime s
-newElastigroupAwsIntegrationMultaiRuntime _deploymentId =
-    ElastigroupAwsIntegrationMultaiRuntime'
-        { _deploymentId = _deploymentId
-        }
-
-instance P.Hashable  (ElastigroupAwsIntegrationMultaiRuntime s)
-instance TF.IsValue  (ElastigroupAwsIntegrationMultaiRuntime s)
-instance TF.IsObject (ElastigroupAwsIntegrationMultaiRuntime s) where
-    toObject ElastigroupAwsIntegrationMultaiRuntime'{..} = P.catMaybes
-        [ TF.assign "deployment_id" <$> TF.attribute _deploymentId
-        ]
-
-instance TF.IsValid (ElastigroupAwsIntegrationMultaiRuntime s) where
-    validator = P.mempty
-
-instance P.HasDeploymentId (ElastigroupAwsIntegrationMultaiRuntime s) (TF.Attr s P.Text) where
-    deploymentId =
-        P.lens (_deploymentId :: ElastigroupAwsIntegrationMultaiRuntime s -> TF.Attr s P.Text)
-               (\s a -> s { _deploymentId = a } :: ElastigroupAwsIntegrationMultaiRuntime s)
-
--- | @elastigroup_aws_ebs_block_device@ nested settings.
-data ElastigroupAwsEbsBlockDevice s = ElastigroupAwsEbsBlockDevice'
-    { _deviceName :: TF.Attr s P.Text
-    -- ^ @device_name@ - (Required)
-    --
-    , _iops       :: TF.Attr s P.Integer
-    -- ^ @iops@ - (Optional)
-    --
-    , _kmsKeyId   :: TF.Attr s P.Text
-    -- ^ @kms_key_id@ - (Optional)
-    --
-    , _snapshotId :: TF.Attr s P.Text
-    -- ^ @snapshot_id@ - (Optional)
-    --
-    , _volumeSize :: TF.Attr s P.Integer
-    -- ^ @volume_size@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsEbsBlockDevice
-    :: TF.Attr s P.Text -- ^ @device_name@ - 'P.deviceName'
-    -> ElastigroupAwsEbsBlockDevice s
-newElastigroupAwsEbsBlockDevice _deviceName =
-    ElastigroupAwsEbsBlockDevice'
-        { _deviceName = _deviceName
-        , _iops = TF.Nil
-        , _kmsKeyId = TF.Nil
-        , _snapshotId = TF.Nil
-        , _volumeSize = TF.Nil
-        }
-
-instance P.Hashable  (ElastigroupAwsEbsBlockDevice s)
-instance TF.IsValue  (ElastigroupAwsEbsBlockDevice s)
-instance TF.IsObject (ElastigroupAwsEbsBlockDevice s) where
-    toObject ElastigroupAwsEbsBlockDevice'{..} = P.catMaybes
-        [ TF.assign "device_name" <$> TF.attribute _deviceName
-        , TF.assign "iops" <$> TF.attribute _iops
-        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
-        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
-        , TF.assign "volume_size" <$> TF.attribute _volumeSize
-        ]
-
-instance TF.IsValid (ElastigroupAwsEbsBlockDevice s) where
-    validator = P.mempty
-
-instance P.HasDeviceName (ElastigroupAwsEbsBlockDevice s) (TF.Attr s P.Text) where
-    deviceName =
-        P.lens (_deviceName :: ElastigroupAwsEbsBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceName = a } :: ElastigroupAwsEbsBlockDevice s)
-
-instance P.HasIops (ElastigroupAwsEbsBlockDevice s) (TF.Attr s P.Integer) where
-    iops =
-        P.lens (_iops :: ElastigroupAwsEbsBlockDevice s -> TF.Attr s P.Integer)
-               (\s a -> s { _iops = a } :: ElastigroupAwsEbsBlockDevice s)
-
-instance P.HasKmsKeyId (ElastigroupAwsEbsBlockDevice s) (TF.Attr s P.Text) where
-    kmsKeyId =
-        P.lens (_kmsKeyId :: ElastigroupAwsEbsBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyId = a } :: ElastigroupAwsEbsBlockDevice s)
-
-instance P.HasSnapshotId (ElastigroupAwsEbsBlockDevice s) (TF.Attr s P.Text) where
-    snapshotId =
-        P.lens (_snapshotId :: ElastigroupAwsEbsBlockDevice s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotId = a } :: ElastigroupAwsEbsBlockDevice s)
-
-instance P.HasVolumeSize (ElastigroupAwsEbsBlockDevice s) (TF.Attr s P.Integer) where
-    volumeSize =
-        P.lens (_volumeSize :: ElastigroupAwsEbsBlockDevice s -> TF.Attr s P.Integer)
-               (\s a -> s { _volumeSize = a } :: ElastigroupAwsEbsBlockDevice s)
-
-instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (ElastigroupAwsEbsBlockDevice s)) (TF.Attr s P.Bool) where
-    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
-
-instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (ElastigroupAwsEbsBlockDevice s)) (TF.Attr s P.Bool) where
-    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (ElastigroupAwsEbsBlockDevice s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
-
--- | @integration_nomad_autoscale_constraints@ nested settings.
-data IntegrationNomadAutoscaleConstraints s = IntegrationNomadAutoscaleConstraints'
-    { _key   :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
-    --
-    , _value :: TF.Attr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationNomadAutoscaleConstraints
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> IntegrationNomadAutoscaleConstraints s
-newIntegrationNomadAutoscaleConstraints _key _value =
-    IntegrationNomadAutoscaleConstraints'
-        { _key = _key
-        , _value = _value
-        }
-
-instance P.Hashable  (IntegrationNomadAutoscaleConstraints s)
-instance TF.IsValue  (IntegrationNomadAutoscaleConstraints s)
-instance TF.IsObject (IntegrationNomadAutoscaleConstraints s) where
-    toObject IntegrationNomadAutoscaleConstraints'{..} = P.catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (IntegrationNomadAutoscaleConstraints s) where
-    validator = P.mempty
-
-instance P.HasKey (IntegrationNomadAutoscaleConstraints s) (TF.Attr s P.Text) where
-    key =
-        P.lens (_key :: IntegrationNomadAutoscaleConstraints s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: IntegrationNomadAutoscaleConstraints s)
-
-instance P.HasValue (IntegrationNomadAutoscaleConstraints s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: IntegrationNomadAutoscaleConstraints s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: IntegrationNomadAutoscaleConstraints s)
-
--- | @update_policy_roll_config@ nested settings.
-data UpdatePolicyRollConfig s = UpdatePolicyRollConfig'
-    { _batchSizePercentage :: TF.Attr s P.Integer
-    -- ^ @batch_size_percentage@ - (Required)
-    --
-    , _gracePeriod         :: TF.Attr s P.Integer
-    -- ^ @grace_period@ - (Optional)
-    --
-    , _healthCheckType     :: TF.Attr s P.Text
-    -- ^ @health_check_type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newUpdatePolicyRollConfig
-    :: TF.Attr s P.Integer -- ^ @batch_size_percentage@ - 'P.batchSizePercentage'
-    -> UpdatePolicyRollConfig s
-newUpdatePolicyRollConfig _batchSizePercentage =
-    UpdatePolicyRollConfig'
-        { _batchSizePercentage = _batchSizePercentage
-        , _gracePeriod = TF.value (-1)
-        , _healthCheckType = TF.Nil
-        }
-
-instance P.Hashable  (UpdatePolicyRollConfig s)
-instance TF.IsValue  (UpdatePolicyRollConfig s)
-instance TF.IsObject (UpdatePolicyRollConfig s) where
-    toObject UpdatePolicyRollConfig'{..} = P.catMaybes
-        [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
-        , TF.assign "grace_period" <$> TF.attribute _gracePeriod
-        , TF.assign "health_check_type" <$> TF.attribute _healthCheckType
-        ]
-
-instance TF.IsValid (UpdatePolicyRollConfig s) where
-    validator = P.mempty
-
-instance P.HasBatchSizePercentage (UpdatePolicyRollConfig s) (TF.Attr s P.Integer) where
-    batchSizePercentage =
-        P.lens (_batchSizePercentage :: UpdatePolicyRollConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _batchSizePercentage = a } :: UpdatePolicyRollConfig s)
-
-instance P.HasGracePeriod (UpdatePolicyRollConfig s) (TF.Attr s P.Integer) where
-    gracePeriod =
-        P.lens (_gracePeriod :: UpdatePolicyRollConfig s -> TF.Attr s P.Integer)
-               (\s a -> s { _gracePeriod = a } :: UpdatePolicyRollConfig s)
-
-instance P.HasHealthCheckType (UpdatePolicyRollConfig s) (TF.Attr s P.Text) where
-    healthCheckType =
-        P.lens (_healthCheckType :: UpdatePolicyRollConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _healthCheckType = a } :: UpdatePolicyRollConfig s)
-
--- | @integration_kubernetes_autoscale_labels@ nested settings.
-data IntegrationKubernetesAutoscaleLabels s = IntegrationKubernetesAutoscaleLabels'
-    { _key   :: TF.Attr s P.Text
-    -- ^ @key@ - (Required)
-    --
-    , _value :: TF.Attr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationKubernetesAutoscaleLabels
-    :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> IntegrationKubernetesAutoscaleLabels s
-newIntegrationKubernetesAutoscaleLabels _key _value =
-    IntegrationKubernetesAutoscaleLabels'
-        { _key = _key
-        , _value = _value
-        }
-
-instance P.Hashable  (IntegrationKubernetesAutoscaleLabels s)
-instance TF.IsValue  (IntegrationKubernetesAutoscaleLabels s)
-instance TF.IsObject (IntegrationKubernetesAutoscaleLabels s) where
-    toObject IntegrationKubernetesAutoscaleLabels'{..} = P.catMaybes
-        [ TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (IntegrationKubernetesAutoscaleLabels s) where
-    validator = P.mempty
-
-instance P.HasKey (IntegrationKubernetesAutoscaleLabels s) (TF.Attr s P.Text) where
-    key =
-        P.lens (_key :: IntegrationKubernetesAutoscaleLabels s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: IntegrationKubernetesAutoscaleLabels s)
-
-instance P.HasValue (IntegrationKubernetesAutoscaleLabels s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: IntegrationKubernetesAutoscaleLabels s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: IntegrationKubernetesAutoscaleLabels s)
-
--- | @elastigroup_aws_multai_target_sets@ nested settings.
-data ElastigroupAwsMultaiTargetSets s = ElastigroupAwsMultaiTargetSets'
-    { _balancerId  :: TF.Attr s P.Text
-    -- ^ @balancer_id@ - (Required)
-    --
-    , _targetSetId :: TF.Attr s P.Text
-    -- ^ @target_set_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsMultaiTargetSets
-    :: TF.Attr s P.Text -- ^ @balancer_id@ - 'P.balancerId'
-    -> TF.Attr s P.Text -- ^ @target_set_id@ - 'P.targetSetId'
-    -> ElastigroupAwsMultaiTargetSets s
-newElastigroupAwsMultaiTargetSets _balancerId _targetSetId =
-    ElastigroupAwsMultaiTargetSets'
-        { _balancerId = _balancerId
-        , _targetSetId = _targetSetId
-        }
-
-instance P.Hashable  (ElastigroupAwsMultaiTargetSets s)
-instance TF.IsValue  (ElastigroupAwsMultaiTargetSets s)
-instance TF.IsObject (ElastigroupAwsMultaiTargetSets s) where
-    toObject ElastigroupAwsMultaiTargetSets'{..} = P.catMaybes
-        [ TF.assign "balancer_id" <$> TF.attribute _balancerId
-        , TF.assign "target_set_id" <$> TF.attribute _targetSetId
-        ]
-
-instance TF.IsValid (ElastigroupAwsMultaiTargetSets s) where
-    validator = P.mempty
-
-instance P.HasBalancerId (ElastigroupAwsMultaiTargetSets s) (TF.Attr s P.Text) where
-    balancerId =
-        P.lens (_balancerId :: ElastigroupAwsMultaiTargetSets s -> TF.Attr s P.Text)
-               (\s a -> s { _balancerId = a } :: ElastigroupAwsMultaiTargetSets s)
-
-instance P.HasTargetSetId (ElastigroupAwsMultaiTargetSets s) (TF.Attr s P.Text) where
-    targetSetId =
-        P.lens (_targetSetId :: ElastigroupAwsMultaiTargetSets s -> TF.Attr s P.Text)
-               (\s a -> s { _targetSetId = a } :: ElastigroupAwsMultaiTargetSets s)
-
--- | @integration_ecs_autoscale_headroom@ nested settings.
-data IntegrationEcsAutoscaleHeadroom s = IntegrationEcsAutoscaleHeadroom'
-    { _cpuPerUnit    :: TF.Attr s P.Integer
-    -- ^ @cpu_per_unit@ - (Optional)
-    --
-    , _memoryPerUnit :: TF.Attr s P.Integer
-    -- ^ @memory_per_unit@ - (Optional)
-    --
-    , _numOfUnits    :: TF.Attr s P.Integer
-    -- ^ @num_of_units@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationEcsAutoscaleHeadroom
-    :: IntegrationEcsAutoscaleHeadroom s
-newIntegrationEcsAutoscaleHeadroom =
-    IntegrationEcsAutoscaleHeadroom'
-        { _cpuPerUnit = TF.Nil
-        , _memoryPerUnit = TF.Nil
-        , _numOfUnits = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationEcsAutoscaleHeadroom s)
-instance TF.IsValue  (IntegrationEcsAutoscaleHeadroom s)
-instance TF.IsObject (IntegrationEcsAutoscaleHeadroom s) where
-    toObject IntegrationEcsAutoscaleHeadroom'{..} = P.catMaybes
-        [ TF.assign "cpu_per_unit" <$> TF.attribute _cpuPerUnit
-        , TF.assign "memory_per_unit" <$> TF.attribute _memoryPerUnit
-        , TF.assign "num_of_units" <$> TF.attribute _numOfUnits
-        ]
-
-instance TF.IsValid (IntegrationEcsAutoscaleHeadroom s) where
-    validator = P.mempty
-
-instance P.HasCpuPerUnit (IntegrationEcsAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    cpuPerUnit =
-        P.lens (_cpuPerUnit :: IntegrationEcsAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _cpuPerUnit = a } :: IntegrationEcsAutoscaleHeadroom s)
-
-instance P.HasMemoryPerUnit (IntegrationEcsAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    memoryPerUnit =
-        P.lens (_memoryPerUnit :: IntegrationEcsAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _memoryPerUnit = a } :: IntegrationEcsAutoscaleHeadroom s)
-
-instance P.HasNumOfUnits (IntegrationEcsAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    numOfUnits =
-        P.lens (_numOfUnits :: IntegrationEcsAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _numOfUnits = a } :: IntegrationEcsAutoscaleHeadroom s)
-
--- | @elastigroup_aws_scheduled_task@ nested settings.
-data ElastigroupAwsScheduledTask s = ElastigroupAwsScheduledTask'
+instance P.HasActionType (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    actionType =
+        P.lens (_actionType :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _actionType = a } :: ScalingUpPolicySetting s)
+
+instance P.HasAdjustment (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    adjustment =
+        P.lens (_adjustment :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _adjustment = a } :: ScalingUpPolicySetting s)
+
+instance P.HasDimensions (ScalingUpPolicySetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    dimensions =
+        P.lens (_dimensions :: ScalingUpPolicySetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _dimensions = a } :: ScalingUpPolicySetting s)
+
+instance P.HasMaxTargetCapacity (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    maxTargetCapacity =
+        P.lens (_maxTargetCapacity :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _maxTargetCapacity = a } :: ScalingUpPolicySetting s)
+
+instance P.HasMaximum (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    maximum =
+        P.lens (_maximum :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _maximum = a } :: ScalingUpPolicySetting s)
+
+instance P.HasMetricName (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    metricName =
+        P.lens (_metricName :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: ScalingUpPolicySetting s)
+
+instance P.HasMinTargetCapacity (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    minTargetCapacity =
+        P.lens (_minTargetCapacity :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minTargetCapacity = a } :: ScalingUpPolicySetting s)
+
+instance P.HasMinimum (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    minimum =
+        P.lens (_minimum :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minimum = a } :: ScalingUpPolicySetting s)
+
+instance P.HasNamespace (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    namespace =
+        P.lens (_namespace :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: ScalingUpPolicySetting s)
+
+instance P.HasPolicyName (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    policyName =
+        P.lens (_policyName :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _policyName = a } :: ScalingUpPolicySetting s)
+
+instance P.HasTarget (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    target =
+        P.lens (_target :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: ScalingUpPolicySetting s)
+
+instance P.HasThreshold (ScalingUpPolicySetting s) (TF.Attr s P.Double) where
+    threshold =
+        P.lens (_threshold :: ScalingUpPolicySetting s -> TF.Attr s P.Double)
+               (\s a -> s { _threshold = a } :: ScalingUpPolicySetting s)
+
+instance P.HasUnit (ScalingUpPolicySetting s) (TF.Attr s P.Text) where
+    unit =
+        P.lens (_unit :: ScalingUpPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _unit = a } :: ScalingUpPolicySetting s)
+
+instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ScalingUpPolicySetting s)) (TF.Attr s P.Int) where
+    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
+
+instance s ~ s' => P.HasComputedEvaluationPeriods (TF.Ref s' (ScalingUpPolicySetting s)) (TF.Attr s P.Int) where
+    computedEvaluationPeriods x = TF.compute (TF.refKey x) "evaluation_periods"
+
+instance s ~ s' => P.HasComputedOperator (TF.Ref s' (ScalingUpPolicySetting s)) (TF.Attr s P.Text) where
+    computedOperator x = TF.compute (TF.refKey x) "operator"
+
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ScalingUpPolicySetting s)) (TF.Attr s P.Int) where
+    computedPeriod x = TF.compute (TF.refKey x) "period"
+
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (ScalingUpPolicySetting s)) (TF.Attr s P.Text) where
+    computedSource x = TF.compute (TF.refKey x) "source"
+
+instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ScalingUpPolicySetting s)) (TF.Attr s P.Text) where
+    computedStatistic x = TF.compute (TF.refKey x) "statistic"
+
+-- | @scheduled_task@ nested settings.
+data ScheduledTaskSetting s = ScheduledTaskSetting'
     { _batchSizePercentage :: TF.Attr s P.Text
     -- ^ @batch_size_percentage@ - (Optional)
     --
@@ -1522,13 +1792,13 @@ data ElastigroupAwsScheduledTask s = ElastigroupAwsScheduledTask'
     , _taskType            :: TF.Attr s P.Text
     -- ^ @task_type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsScheduledTask
+newScheduledTaskSetting
     :: TF.Attr s P.Text -- ^ @task_type@ - 'P.taskType'
-    -> ElastigroupAwsScheduledTask s
-newElastigroupAwsScheduledTask _taskType =
-    ElastigroupAwsScheduledTask'
+    -> ScheduledTaskSetting s
+newScheduledTaskSetting _taskType =
+    ScheduledTaskSetting'
         { _batchSizePercentage = TF.Nil
         , _cronExpression = TF.Nil
         , _frequency = TF.Nil
@@ -1544,10 +1814,9 @@ newElastigroupAwsScheduledTask _taskType =
         , _taskType = _taskType
         }
 
-instance P.Hashable  (ElastigroupAwsScheduledTask s)
-instance TF.IsValue  (ElastigroupAwsScheduledTask s)
-instance TF.IsObject (ElastigroupAwsScheduledTask s) where
-    toObject ElastigroupAwsScheduledTask'{..} = P.catMaybes
+instance TF.IsValue  (ScheduledTaskSetting s)
+instance TF.IsObject (ScheduledTaskSetting s) where
+    toObject ScheduledTaskSetting'{..} = P.catMaybes
         [ TF.assign "batch_size_percentage" <$> TF.attribute _batchSizePercentage
         , TF.assign "cron_expression" <$> TF.attribute _cronExpression
         , TF.assign "frequency" <$> TF.attribute _frequency
@@ -1563,76 +1832,115 @@ instance TF.IsObject (ElastigroupAwsScheduledTask s) where
         , TF.assign "task_type" <$> TF.attribute _taskType
         ]
 
-instance TF.IsValid (ElastigroupAwsScheduledTask s) where
+instance TF.IsValid (ScheduledTaskSetting s) where
     validator = P.mempty
 
-instance P.HasBatchSizePercentage (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasBatchSizePercentage (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     batchSizePercentage =
-        P.lens (_batchSizePercentage :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _batchSizePercentage = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_batchSizePercentage :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _batchSizePercentage = a } :: ScheduledTaskSetting s)
 
-instance P.HasCronExpression (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasCronExpression (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     cronExpression =
-        P.lens (_cronExpression :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _cronExpression = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_cronExpression :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _cronExpression = a } :: ScheduledTaskSetting s)
 
-instance P.HasFrequency (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasFrequency (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     frequency =
-        P.lens (_frequency :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _frequency = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_frequency :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _frequency = a } :: ScheduledTaskSetting s)
 
-instance P.HasGracePeriod (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasGracePeriod (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     gracePeriod =
-        P.lens (_gracePeriod :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _gracePeriod = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_gracePeriod :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _gracePeriod = a } :: ScheduledTaskSetting s)
 
-instance P.HasIsEnabled (ElastigroupAwsScheduledTask s) (TF.Attr s P.Bool) where
+instance P.HasIsEnabled (ScheduledTaskSetting s) (TF.Attr s P.Bool) where
     isEnabled =
-        P.lens (_isEnabled :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Bool)
-               (\s a -> s { _isEnabled = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_isEnabled :: ScheduledTaskSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _isEnabled = a } :: ScheduledTaskSetting s)
 
-instance P.HasMaxCapacity (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasMaxCapacity (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     maxCapacity =
-        P.lens (_maxCapacity :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _maxCapacity = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_maxCapacity :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _maxCapacity = a } :: ScheduledTaskSetting s)
 
-instance P.HasMinCapacity (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasMinCapacity (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     minCapacity =
-        P.lens (_minCapacity :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _minCapacity = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_minCapacity :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _minCapacity = a } :: ScheduledTaskSetting s)
 
-instance P.HasScaleMaxCapacity (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasScaleMaxCapacity (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     scaleMaxCapacity =
-        P.lens (_scaleMaxCapacity :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleMaxCapacity = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_scaleMaxCapacity :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _scaleMaxCapacity = a } :: ScheduledTaskSetting s)
 
-instance P.HasScaleMinCapacity (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasScaleMinCapacity (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     scaleMinCapacity =
-        P.lens (_scaleMinCapacity :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleMinCapacity = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_scaleMinCapacity :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _scaleMinCapacity = a } :: ScheduledTaskSetting s)
 
-instance P.HasScaleTargetCapacity (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasScaleTargetCapacity (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     scaleTargetCapacity =
-        P.lens (_scaleTargetCapacity :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleTargetCapacity = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_scaleTargetCapacity :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _scaleTargetCapacity = a } :: ScheduledTaskSetting s)
 
-instance P.HasStartTime (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasStartTime (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     startTime =
-        P.lens (_startTime :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_startTime :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _startTime = a } :: ScheduledTaskSetting s)
 
-instance P.HasTargetCapacity (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasTargetCapacity (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     targetCapacity =
-        P.lens (_targetCapacity :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _targetCapacity = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_targetCapacity :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _targetCapacity = a } :: ScheduledTaskSetting s)
 
-instance P.HasTaskType (ElastigroupAwsScheduledTask s) (TF.Attr s P.Text) where
+instance P.HasTaskType (ScheduledTaskSetting s) (TF.Attr s P.Text) where
     taskType =
-        P.lens (_taskType :: ElastigroupAwsScheduledTask s -> TF.Attr s P.Text)
-               (\s a -> s { _taskType = a } :: ElastigroupAwsScheduledTask s)
+        P.lens (_taskType :: ScheduledTaskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _taskType = a } :: ScheduledTaskSetting s)
 
--- | @elastigroup_aws_stateful_deallocation@ nested settings.
-data ElastigroupAwsStatefulDeallocation s = ElastigroupAwsStatefulDeallocation'
+-- | @signal@ nested settings.
+data SignalSetting s = SignalSetting'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _timeout :: TF.Attr s P.Int
+    -- ^ @timeout@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newSignalSetting
+    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    -> SignalSetting s
+newSignalSetting _name =
+    SignalSetting'
+        { _name = _name
+        , _timeout = TF.Nil
+        }
+
+instance TF.IsValue  (SignalSetting s)
+instance TF.IsObject (SignalSetting s) where
+    toObject SignalSetting'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (SignalSetting s) where
+    validator = P.mempty
+
+instance P.HasName (SignalSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SignalSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SignalSetting s)
+
+instance P.HasTimeout (SignalSetting s) (TF.Attr s P.Int) where
+    timeout =
+        P.lens (_timeout :: SignalSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: SignalSetting s)
+
+-- | @stateful_deallocation@ nested settings.
+data StatefulDeallocationSetting s = StatefulDeallocationSetting'
     { _shouldDeleteImages            :: TF.Attr s P.Bool
     -- ^ @should_delete_images@ - (Optional)
     --
@@ -1645,666 +1953,140 @@ data ElastigroupAwsStatefulDeallocation s = ElastigroupAwsStatefulDeallocation'
     , _shouldDeleteVolumes           :: TF.Attr s P.Bool
     -- ^ @should_delete_volumes@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsStatefulDeallocation
-    :: ElastigroupAwsStatefulDeallocation s
-newElastigroupAwsStatefulDeallocation =
-    ElastigroupAwsStatefulDeallocation'
+newStatefulDeallocationSetting
+    :: StatefulDeallocationSetting s
+newStatefulDeallocationSetting =
+    StatefulDeallocationSetting'
         { _shouldDeleteImages = TF.Nil
         , _shouldDeleteNetworkInterfaces = TF.Nil
         , _shouldDeleteSnapshots = TF.Nil
         , _shouldDeleteVolumes = TF.Nil
         }
 
-instance P.Hashable  (ElastigroupAwsStatefulDeallocation s)
-instance TF.IsValue  (ElastigroupAwsStatefulDeallocation s)
-instance TF.IsObject (ElastigroupAwsStatefulDeallocation s) where
-    toObject ElastigroupAwsStatefulDeallocation'{..} = P.catMaybes
+instance TF.IsValue  (StatefulDeallocationSetting s)
+instance TF.IsObject (StatefulDeallocationSetting s) where
+    toObject StatefulDeallocationSetting'{..} = P.catMaybes
         [ TF.assign "should_delete_images" <$> TF.attribute _shouldDeleteImages
         , TF.assign "should_delete_network_interfaces" <$> TF.attribute _shouldDeleteNetworkInterfaces
         , TF.assign "should_delete_snapshots" <$> TF.attribute _shouldDeleteSnapshots
         , TF.assign "should_delete_volumes" <$> TF.attribute _shouldDeleteVolumes
         ]
 
-instance TF.IsValid (ElastigroupAwsStatefulDeallocation s) where
+instance TF.IsValid (StatefulDeallocationSetting s) where
     validator = P.mempty
 
-instance P.HasShouldDeleteImages (ElastigroupAwsStatefulDeallocation s) (TF.Attr s P.Bool) where
+instance P.HasShouldDeleteImages (StatefulDeallocationSetting s) (TF.Attr s P.Bool) where
     shouldDeleteImages =
-        P.lens (_shouldDeleteImages :: ElastigroupAwsStatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteImages = a } :: ElastigroupAwsStatefulDeallocation s)
+        P.lens (_shouldDeleteImages :: StatefulDeallocationSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _shouldDeleteImages = a } :: StatefulDeallocationSetting s)
 
-instance P.HasShouldDeleteNetworkInterfaces (ElastigroupAwsStatefulDeallocation s) (TF.Attr s P.Bool) where
+instance P.HasShouldDeleteNetworkInterfaces (StatefulDeallocationSetting s) (TF.Attr s P.Bool) where
     shouldDeleteNetworkInterfaces =
-        P.lens (_shouldDeleteNetworkInterfaces :: ElastigroupAwsStatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteNetworkInterfaces = a } :: ElastigroupAwsStatefulDeallocation s)
+        P.lens (_shouldDeleteNetworkInterfaces :: StatefulDeallocationSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _shouldDeleteNetworkInterfaces = a } :: StatefulDeallocationSetting s)
 
-instance P.HasShouldDeleteSnapshots (ElastigroupAwsStatefulDeallocation s) (TF.Attr s P.Bool) where
+instance P.HasShouldDeleteSnapshots (StatefulDeallocationSetting s) (TF.Attr s P.Bool) where
     shouldDeleteSnapshots =
-        P.lens (_shouldDeleteSnapshots :: ElastigroupAwsStatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteSnapshots = a } :: ElastigroupAwsStatefulDeallocation s)
+        P.lens (_shouldDeleteSnapshots :: StatefulDeallocationSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _shouldDeleteSnapshots = a } :: StatefulDeallocationSetting s)
 
-instance P.HasShouldDeleteVolumes (ElastigroupAwsStatefulDeallocation s) (TF.Attr s P.Bool) where
+instance P.HasShouldDeleteVolumes (StatefulDeallocationSetting s) (TF.Attr s P.Bool) where
     shouldDeleteVolumes =
-        P.lens (_shouldDeleteVolumes :: ElastigroupAwsStatefulDeallocation s -> TF.Attr s P.Bool)
-               (\s a -> s { _shouldDeleteVolumes = a } :: ElastigroupAwsStatefulDeallocation s)
+        P.lens (_shouldDeleteVolumes :: StatefulDeallocationSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _shouldDeleteVolumes = a } :: StatefulDeallocationSetting s)
 
--- | @integration_codedeploy_deployment_groups@ nested settings.
-data IntegrationCodedeployDeploymentGroups s = IntegrationCodedeployDeploymentGroups'
-    { _applicationName     :: TF.Attr s P.Text
-    -- ^ @application_name@ - (Required)
-    --
-    , _deploymentGroupName :: TF.Attr s P.Text
-    -- ^ @deployment_group_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationCodedeployDeploymentGroups
-    :: TF.Attr s P.Text -- ^ @application_name@ - 'P.applicationName'
-    -> TF.Attr s P.Text -- ^ @deployment_group_name@ - 'P.deploymentGroupName'
-    -> IntegrationCodedeployDeploymentGroups s
-newIntegrationCodedeployDeploymentGroups _applicationName _deploymentGroupName =
-    IntegrationCodedeployDeploymentGroups'
-        { _applicationName = _applicationName
-        , _deploymentGroupName = _deploymentGroupName
-        }
-
-instance P.Hashable  (IntegrationCodedeployDeploymentGroups s)
-instance TF.IsValue  (IntegrationCodedeployDeploymentGroups s)
-instance TF.IsObject (IntegrationCodedeployDeploymentGroups s) where
-    toObject IntegrationCodedeployDeploymentGroups'{..} = P.catMaybes
-        [ TF.assign "application_name" <$> TF.attribute _applicationName
-        , TF.assign "deployment_group_name" <$> TF.attribute _deploymentGroupName
-        ]
-
-instance TF.IsValid (IntegrationCodedeployDeploymentGroups s) where
-    validator = P.mempty
-
-instance P.HasApplicationName (IntegrationCodedeployDeploymentGroups s) (TF.Attr s P.Text) where
-    applicationName =
-        P.lens (_applicationName :: IntegrationCodedeployDeploymentGroups s -> TF.Attr s P.Text)
-               (\s a -> s { _applicationName = a } :: IntegrationCodedeployDeploymentGroups s)
-
-instance P.HasDeploymentGroupName (IntegrationCodedeployDeploymentGroups s) (TF.Attr s P.Text) where
-    deploymentGroupName =
-        P.lens (_deploymentGroupName :: IntegrationCodedeployDeploymentGroups s -> TF.Attr s P.Text)
-               (\s a -> s { _deploymentGroupName = a } :: IntegrationCodedeployDeploymentGroups s)
-
--- | @elastigroup_aws_tags@ nested settings.
-data ElastigroupAwsTags s = ElastigroupAwsTags'
+-- | @tags@ nested settings.
+data TagsSetting s = TagsSetting'
     { _key   :: TF.Attr s P.Text
     -- ^ @key@ - (Required)
     --
     , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsTags
+newTagsSetting
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
-    -> ElastigroupAwsTags s
-newElastigroupAwsTags _key _value =
-    ElastigroupAwsTags'
+    -> TagsSetting s
+newTagsSetting _key _value =
+    TagsSetting'
         { _key = _key
         , _value = _value
         }
 
-instance P.Hashable  (ElastigroupAwsTags s)
-instance TF.IsValue  (ElastigroupAwsTags s)
-instance TF.IsObject (ElastigroupAwsTags s) where
-    toObject ElastigroupAwsTags'{..} = P.catMaybes
+instance TF.IsValue  (TagsSetting s)
+instance TF.IsObject (TagsSetting s) where
+    toObject TagsSetting'{..} = P.catMaybes
         [ TF.assign "key" <$> TF.attribute _key
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (ElastigroupAwsTags s) where
+instance TF.IsValid (TagsSetting s) where
     validator = P.mempty
 
-instance P.HasKey (ElastigroupAwsTags s) (TF.Attr s P.Text) where
+instance P.HasKey (TagsSetting s) (TF.Attr s P.Text) where
     key =
-        P.lens (_key :: ElastigroupAwsTags s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: ElastigroupAwsTags s)
+        P.lens (_key :: TagsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: TagsSetting s)
 
-instance P.HasValue (ElastigroupAwsTags s) (TF.Attr s P.Text) where
+instance P.HasValue (TagsSetting s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: ElastigroupAwsTags s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: ElastigroupAwsTags s)
+        P.lens (_value :: TagsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: TagsSetting s)
 
--- | @elastigroup_aws_integration_ecs@ nested settings.
-data ElastigroupAwsIntegrationEcs s = ElastigroupAwsIntegrationEcs'
-    { _autoscaleAttributes :: TF.Attr s [TF.Attr s (IntegrationEcsAutoscaleAttributes s)]
-    -- ^ @autoscale_attributes@ - (Optional)
+-- | @update_policy@ nested settings.
+data UpdatePolicySetting s = UpdatePolicySetting'
+    { _rollConfig           :: TF.Attr s (RollConfigSetting s)
+    -- ^ @roll_config@ - (Optional)
     --
-    , _autoscaleCooldown :: TF.Attr s P.Integer
-    -- ^ @autoscale_cooldown@ - (Optional)
+    , _shouldResumeStateful :: TF.Attr s P.Bool
+    -- ^ @should_resume_stateful@ - (Required)
     --
-    , _autoscaleDown :: TF.Attr s (IntegrationEcsAutoscaleDown s)
-    -- ^ @autoscale_down@ - (Optional)
+    , _shouldRoll           :: TF.Attr s P.Bool
+    -- ^ @should_roll@ - (Required)
     --
-    , _autoscaleHeadroom :: TF.Attr s (IntegrationEcsAutoscaleHeadroom s)
-    -- ^ @autoscale_headroom@ - (Optional)
-    --
-    , _autoscaleIsEnabled :: TF.Attr s P.Bool
-    -- ^ @autoscale_is_enabled@ - (Optional)
-    --
-    , _autoscaleScaleDownNonServiceTasks :: TF.Attr s P.Bool
-    -- ^ @autoscale_scale_down_non_service_tasks@ - (Optional)
-    --
-    , _clusterName :: TF.Attr s P.Text
-    -- ^ @cluster_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newElastigroupAwsIntegrationEcs
-    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
-    -> ElastigroupAwsIntegrationEcs s
-newElastigroupAwsIntegrationEcs _clusterName =
-    ElastigroupAwsIntegrationEcs'
-        { _autoscaleAttributes = TF.Nil
-        , _autoscaleCooldown = TF.Nil
-        , _autoscaleDown = TF.Nil
-        , _autoscaleHeadroom = TF.Nil
-        , _autoscaleIsEnabled = TF.Nil
-        , _autoscaleScaleDownNonServiceTasks = TF.Nil
-        , _clusterName = _clusterName
+newUpdatePolicySetting
+    :: TF.Attr s P.Bool -- ^ @should_resume_stateful@ - 'P.shouldResumeStateful'
+    -> TF.Attr s P.Bool -- ^ @should_roll@ - 'P.shouldRoll'
+    -> UpdatePolicySetting s
+newUpdatePolicySetting _shouldResumeStateful _shouldRoll =
+    UpdatePolicySetting'
+        { _rollConfig = TF.Nil
+        , _shouldResumeStateful = _shouldResumeStateful
+        , _shouldRoll = _shouldRoll
         }
 
-instance P.Hashable  (ElastigroupAwsIntegrationEcs s)
-instance TF.IsValue  (ElastigroupAwsIntegrationEcs s)
-instance TF.IsObject (ElastigroupAwsIntegrationEcs s) where
-    toObject ElastigroupAwsIntegrationEcs'{..} = P.catMaybes
-        [ TF.assign "autoscale_attributes" <$> TF.attribute _autoscaleAttributes
-        , TF.assign "autoscale_cooldown" <$> TF.attribute _autoscaleCooldown
-        , TF.assign "autoscale_down" <$> TF.attribute _autoscaleDown
-        , TF.assign "autoscale_headroom" <$> TF.attribute _autoscaleHeadroom
-        , TF.assign "autoscale_is_enabled" <$> TF.attribute _autoscaleIsEnabled
-        , TF.assign "autoscale_scale_down_non_service_tasks" <$> TF.attribute _autoscaleScaleDownNonServiceTasks
-        , TF.assign "cluster_name" <$> TF.attribute _clusterName
+instance TF.IsValue  (UpdatePolicySetting s)
+instance TF.IsObject (UpdatePolicySetting s) where
+    toObject UpdatePolicySetting'{..} = P.catMaybes
+        [ TF.assign "roll_config" <$> TF.attribute _rollConfig
+        , TF.assign "should_resume_stateful" <$> TF.attribute _shouldResumeStateful
+        , TF.assign "should_roll" <$> TF.attribute _shouldRoll
         ]
 
-instance TF.IsValid (ElastigroupAwsIntegrationEcs s) where
+instance TF.IsValid (UpdatePolicySetting s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_autoscaleAttributes"
-                  (_autoscaleAttributes
-                      :: ElastigroupAwsIntegrationEcs s -> TF.Attr s [TF.Attr s (IntegrationEcsAutoscaleAttributes s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_autoscaleDown"
-                  (_autoscaleDown
-                      :: ElastigroupAwsIntegrationEcs s -> TF.Attr s (IntegrationEcsAutoscaleDown s))
-                  TF.validator
-           P.<> TF.settingsValidator "_autoscaleHeadroom"
-                  (_autoscaleHeadroom
-                      :: ElastigroupAwsIntegrationEcs s -> TF.Attr s (IntegrationEcsAutoscaleHeadroom s))
+           P.<> TF.settingsValidator "_rollConfig"
+                  (_rollConfig
+                      :: UpdatePolicySetting s -> TF.Attr s (RollConfigSetting s))
                   TF.validator
 
-instance P.HasAutoscaleAttributes (ElastigroupAwsIntegrationEcs s) (TF.Attr s [TF.Attr s (IntegrationEcsAutoscaleAttributes s)]) where
-    autoscaleAttributes =
-        P.lens (_autoscaleAttributes :: ElastigroupAwsIntegrationEcs s -> TF.Attr s [TF.Attr s (IntegrationEcsAutoscaleAttributes s)])
-               (\s a -> s { _autoscaleAttributes = a } :: ElastigroupAwsIntegrationEcs s)
-
-instance P.HasAutoscaleCooldown (ElastigroupAwsIntegrationEcs s) (TF.Attr s P.Integer) where
-    autoscaleCooldown =
-        P.lens (_autoscaleCooldown :: ElastigroupAwsIntegrationEcs s -> TF.Attr s P.Integer)
-               (\s a -> s { _autoscaleCooldown = a } :: ElastigroupAwsIntegrationEcs s)
-
-instance P.HasAutoscaleDown (ElastigroupAwsIntegrationEcs s) (TF.Attr s (IntegrationEcsAutoscaleDown s)) where
-    autoscaleDown =
-        P.lens (_autoscaleDown :: ElastigroupAwsIntegrationEcs s -> TF.Attr s (IntegrationEcsAutoscaleDown s))
-               (\s a -> s { _autoscaleDown = a } :: ElastigroupAwsIntegrationEcs s)
-
-instance P.HasAutoscaleHeadroom (ElastigroupAwsIntegrationEcs s) (TF.Attr s (IntegrationEcsAutoscaleHeadroom s)) where
-    autoscaleHeadroom =
-        P.lens (_autoscaleHeadroom :: ElastigroupAwsIntegrationEcs s -> TF.Attr s (IntegrationEcsAutoscaleHeadroom s))
-               (\s a -> s { _autoscaleHeadroom = a } :: ElastigroupAwsIntegrationEcs s)
-
-instance P.HasAutoscaleIsEnabled (ElastigroupAwsIntegrationEcs s) (TF.Attr s P.Bool) where
-    autoscaleIsEnabled =
-        P.lens (_autoscaleIsEnabled :: ElastigroupAwsIntegrationEcs s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleIsEnabled = a } :: ElastigroupAwsIntegrationEcs s)
-
-instance P.HasAutoscaleScaleDownNonServiceTasks (ElastigroupAwsIntegrationEcs s) (TF.Attr s P.Bool) where
-    autoscaleScaleDownNonServiceTasks =
-        P.lens (_autoscaleScaleDownNonServiceTasks :: ElastigroupAwsIntegrationEcs s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscaleScaleDownNonServiceTasks = a } :: ElastigroupAwsIntegrationEcs s)
-
-instance P.HasClusterName (ElastigroupAwsIntegrationEcs s) (TF.Attr s P.Text) where
-    clusterName =
-        P.lens (_clusterName :: ElastigroupAwsIntegrationEcs s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterName = a } :: ElastigroupAwsIntegrationEcs s)
-
--- | @elastigroup_aws_integration_mesosphere@ nested settings.
-data ElastigroupAwsIntegrationMesosphere s = ElastigroupAwsIntegrationMesosphere'
-    { _apiServer :: TF.Attr s P.Text
-    -- ^ @api_server@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsIntegrationMesosphere
-    :: TF.Attr s P.Text -- ^ @api_server@ - 'P.apiServer'
-    -> ElastigroupAwsIntegrationMesosphere s
-newElastigroupAwsIntegrationMesosphere _apiServer =
-    ElastigroupAwsIntegrationMesosphere'
-        { _apiServer = _apiServer
-        }
-
-instance P.Hashable  (ElastigroupAwsIntegrationMesosphere s)
-instance TF.IsValue  (ElastigroupAwsIntegrationMesosphere s)
-instance TF.IsObject (ElastigroupAwsIntegrationMesosphere s) where
-    toObject ElastigroupAwsIntegrationMesosphere'{..} = P.catMaybes
-        [ TF.assign "api_server" <$> TF.attribute _apiServer
-        ]
-
-instance TF.IsValid (ElastigroupAwsIntegrationMesosphere s) where
-    validator = P.mempty
-
-instance P.HasApiServer (ElastigroupAwsIntegrationMesosphere s) (TF.Attr s P.Text) where
-    apiServer =
-        P.lens (_apiServer :: ElastigroupAwsIntegrationMesosphere s -> TF.Attr s P.Text)
-               (\s a -> s { _apiServer = a } :: ElastigroupAwsIntegrationMesosphere s)
-
--- | @elastigroup_aws_integration_gitlab@ nested settings.
-data ElastigroupAwsIntegrationGitlab s = ElastigroupAwsIntegrationGitlab'
-    { _runner :: TF.Attr s (IntegrationGitlabRunner s)
-    -- ^ @runner@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsIntegrationGitlab
-    :: ElastigroupAwsIntegrationGitlab s
-newElastigroupAwsIntegrationGitlab =
-    ElastigroupAwsIntegrationGitlab'
-        { _runner = TF.Nil
-        }
-
-instance P.Hashable  (ElastigroupAwsIntegrationGitlab s)
-instance TF.IsValue  (ElastigroupAwsIntegrationGitlab s)
-instance TF.IsObject (ElastigroupAwsIntegrationGitlab s) where
-    toObject ElastigroupAwsIntegrationGitlab'{..} = P.catMaybes
-        [ TF.assign "runner" <$> TF.attribute _runner
-        ]
-
-instance TF.IsValid (ElastigroupAwsIntegrationGitlab s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_runner"
-                  (_runner
-                      :: ElastigroupAwsIntegrationGitlab s -> TF.Attr s (IntegrationGitlabRunner s))
-                  TF.validator
-
-instance P.HasRunner (ElastigroupAwsIntegrationGitlab s) (TF.Attr s (IntegrationGitlabRunner s)) where
-    runner =
-        P.lens (_runner :: ElastigroupAwsIntegrationGitlab s -> TF.Attr s (IntegrationGitlabRunner s))
-               (\s a -> s { _runner = a } :: ElastigroupAwsIntegrationGitlab s)
-
--- | @elastigroup_aws_scaling_target_policy@ nested settings.
-data ElastigroupAwsScalingTargetPolicy s = ElastigroupAwsScalingTargetPolicy'
-    { _dimensions :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @dimensions@ - (Optional)
-    --
-    , _metricName :: TF.Attr s P.Text
-    -- ^ @metric_name@ - (Required)
-    --
-    , _namespace  :: TF.Attr s P.Text
-    -- ^ @namespace@ - (Required)
-    --
-    , _policyName :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required)
-    --
-    , _target     :: TF.Attr s P.Double
-    -- ^ @target@ - (Required)
-    --
-    , _unit       :: TF.Attr s P.Text
-    -- ^ @unit@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsScalingTargetPolicy
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Double -- ^ @target@ - 'P.target'
-    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
-    -> ElastigroupAwsScalingTargetPolicy s
-newElastigroupAwsScalingTargetPolicy _metricName _namespace _policyName _target _unit =
-    ElastigroupAwsScalingTargetPolicy'
-        { _dimensions = TF.Nil
-        , _metricName = _metricName
-        , _namespace = _namespace
-        , _policyName = _policyName
-        , _target = _target
-        , _unit = _unit
-        }
-
-instance P.Hashable  (ElastigroupAwsScalingTargetPolicy s)
-instance TF.IsValue  (ElastigroupAwsScalingTargetPolicy s)
-instance TF.IsObject (ElastigroupAwsScalingTargetPolicy s) where
-    toObject ElastigroupAwsScalingTargetPolicy'{..} = P.catMaybes
-        [ TF.assign "dimensions" <$> TF.attribute _dimensions
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "namespace" <$> TF.attribute _namespace
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "unit" <$> TF.attribute _unit
-        ]
-
-instance TF.IsValid (ElastigroupAwsScalingTargetPolicy s) where
-    validator = P.mempty
-
-instance P.HasDimensions (ElastigroupAwsScalingTargetPolicy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    dimensions =
-        P.lens (_dimensions :: ElastigroupAwsScalingTargetPolicy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimensions = a } :: ElastigroupAwsScalingTargetPolicy s)
-
-instance P.HasMetricName (ElastigroupAwsScalingTargetPolicy s) (TF.Attr s P.Text) where
-    metricName =
-        P.lens (_metricName :: ElastigroupAwsScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a } :: ElastigroupAwsScalingTargetPolicy s)
-
-instance P.HasNamespace (ElastigroupAwsScalingTargetPolicy s) (TF.Attr s P.Text) where
-    namespace =
-        P.lens (_namespace :: ElastigroupAwsScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: ElastigroupAwsScalingTargetPolicy s)
-
-instance P.HasPolicyName (ElastigroupAwsScalingTargetPolicy s) (TF.Attr s P.Text) where
-    policyName =
-        P.lens (_policyName :: ElastigroupAwsScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: ElastigroupAwsScalingTargetPolicy s)
-
-instance P.HasTarget (ElastigroupAwsScalingTargetPolicy s) (TF.Attr s P.Double) where
-    target =
-        P.lens (_target :: ElastigroupAwsScalingTargetPolicy s -> TF.Attr s P.Double)
-               (\s a -> s { _target = a } :: ElastigroupAwsScalingTargetPolicy s)
-
-instance P.HasUnit (ElastigroupAwsScalingTargetPolicy s) (TF.Attr s P.Text) where
-    unit =
-        P.lens (_unit :: ElastigroupAwsScalingTargetPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a } :: ElastigroupAwsScalingTargetPolicy s)
-
-instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ElastigroupAwsScalingTargetPolicy s)) (TF.Attr s P.Integer) where
-    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
-
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (ElastigroupAwsScalingTargetPolicy s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
-
-instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ElastigroupAwsScalingTargetPolicy s)) (TF.Attr s P.Text) where
-    computedStatistic x = TF.compute (TF.refKey x) "statistic"
-
--- | @integration_kubernetes_autoscale_headroom@ nested settings.
-data IntegrationKubernetesAutoscaleHeadroom s = IntegrationKubernetesAutoscaleHeadroom'
-    { _cpuPerUnit    :: TF.Attr s P.Integer
-    -- ^ @cpu_per_unit@ - (Optional)
-    --
-    , _memoryPerUnit :: TF.Attr s P.Integer
-    -- ^ @memory_per_unit@ - (Optional)
-    --
-    , _numOfUnits    :: TF.Attr s P.Integer
-    -- ^ @num_of_units@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationKubernetesAutoscaleHeadroom
-    :: IntegrationKubernetesAutoscaleHeadroom s
-newIntegrationKubernetesAutoscaleHeadroom =
-    IntegrationKubernetesAutoscaleHeadroom'
-        { _cpuPerUnit = TF.Nil
-        , _memoryPerUnit = TF.Nil
-        , _numOfUnits = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationKubernetesAutoscaleHeadroom s)
-instance TF.IsValue  (IntegrationKubernetesAutoscaleHeadroom s)
-instance TF.IsObject (IntegrationKubernetesAutoscaleHeadroom s) where
-    toObject IntegrationKubernetesAutoscaleHeadroom'{..} = P.catMaybes
-        [ TF.assign "cpu_per_unit" <$> TF.attribute _cpuPerUnit
-        , TF.assign "memory_per_unit" <$> TF.attribute _memoryPerUnit
-        , TF.assign "num_of_units" <$> TF.attribute _numOfUnits
-        ]
-
-instance TF.IsValid (IntegrationKubernetesAutoscaleHeadroom s) where
-    validator = P.mempty
-
-instance P.HasCpuPerUnit (IntegrationKubernetesAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    cpuPerUnit =
-        P.lens (_cpuPerUnit :: IntegrationKubernetesAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _cpuPerUnit = a } :: IntegrationKubernetesAutoscaleHeadroom s)
-
-instance P.HasMemoryPerUnit (IntegrationKubernetesAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    memoryPerUnit =
-        P.lens (_memoryPerUnit :: IntegrationKubernetesAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _memoryPerUnit = a } :: IntegrationKubernetesAutoscaleHeadroom s)
-
-instance P.HasNumOfUnits (IntegrationKubernetesAutoscaleHeadroom s) (TF.Attr s P.Integer) where
-    numOfUnits =
-        P.lens (_numOfUnits :: IntegrationKubernetesAutoscaleHeadroom s -> TF.Attr s P.Integer)
-               (\s a -> s { _numOfUnits = a } :: IntegrationKubernetesAutoscaleHeadroom s)
-
--- | @elastigroup_aws_scaling_down_policy@ nested settings.
-data ElastigroupAwsScalingDownPolicy s = ElastigroupAwsScalingDownPolicy'
-    { _actionType        :: TF.Attr s P.Text
-    -- ^ @action_type@ - (Optional)
-    --
-    , _adjustment        :: TF.Attr s P.Text
-    -- ^ @adjustment@ - (Optional)
-    --
-    , _dimensions        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
-    -- ^ @dimensions@ - (Optional)
-    --
-    , _maxTargetCapacity :: TF.Attr s P.Text
-    -- ^ @max_target_capacity@ - (Optional)
-    --
-    , _maximum           :: TF.Attr s P.Text
-    -- ^ @maximum@ - (Optional)
-    --
-    , _metricName        :: TF.Attr s P.Text
-    -- ^ @metric_name@ - (Required)
-    --
-    , _minTargetCapacity :: TF.Attr s P.Text
-    -- ^ @min_target_capacity@ - (Optional)
-    --
-    , _minimum           :: TF.Attr s P.Text
-    -- ^ @minimum@ - (Optional)
-    --
-    , _namespace         :: TF.Attr s P.Text
-    -- ^ @namespace@ - (Required)
-    --
-    , _policyName        :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required)
-    --
-    , _target            :: TF.Attr s P.Text
-    -- ^ @target@ - (Optional)
-    --
-    , _threshold         :: TF.Attr s P.Double
-    -- ^ @threshold@ - (Required)
-    --
-    , _unit              :: TF.Attr s P.Text
-    -- ^ @unit@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newElastigroupAwsScalingDownPolicy
-    :: TF.Attr s P.Text -- ^ @metric_name@ - 'P.metricName'
-    -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Double -- ^ @threshold@ - 'P.threshold'
-    -> TF.Attr s P.Text -- ^ @unit@ - 'P.unit'
-    -> ElastigroupAwsScalingDownPolicy s
-newElastigroupAwsScalingDownPolicy _metricName _namespace _policyName _threshold _unit =
-    ElastigroupAwsScalingDownPolicy'
-        { _actionType = TF.Nil
-        , _adjustment = TF.Nil
-        , _dimensions = TF.Nil
-        , _maxTargetCapacity = TF.Nil
-        , _maximum = TF.Nil
-        , _metricName = _metricName
-        , _minTargetCapacity = TF.Nil
-        , _minimum = TF.Nil
-        , _namespace = _namespace
-        , _policyName = _policyName
-        , _target = TF.Nil
-        , _threshold = _threshold
-        , _unit = _unit
-        }
-
-instance P.Hashable  (ElastigroupAwsScalingDownPolicy s)
-instance TF.IsValue  (ElastigroupAwsScalingDownPolicy s)
-instance TF.IsObject (ElastigroupAwsScalingDownPolicy s) where
-    toObject ElastigroupAwsScalingDownPolicy'{..} = P.catMaybes
-        [ TF.assign "action_type" <$> TF.attribute _actionType
-        , TF.assign "adjustment" <$> TF.attribute _adjustment
-        , TF.assign "dimensions" <$> TF.attribute _dimensions
-        , TF.assign "max_target_capacity" <$> TF.attribute _maxTargetCapacity
-        , TF.assign "maximum" <$> TF.attribute _maximum
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "min_target_capacity" <$> TF.attribute _minTargetCapacity
-        , TF.assign "minimum" <$> TF.attribute _minimum
-        , TF.assign "namespace" <$> TF.attribute _namespace
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "threshold" <$> TF.attribute _threshold
-        , TF.assign "unit" <$> TF.attribute _unit
-        ]
-
-instance TF.IsValid (ElastigroupAwsScalingDownPolicy s) where
-    validator = P.mempty
-
-instance P.HasActionType (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    actionType =
-        P.lens (_actionType :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _actionType = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasAdjustment (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    adjustment =
-        P.lens (_adjustment :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _adjustment = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasDimensions (ElastigroupAwsScalingDownPolicy s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
-    dimensions =
-        P.lens (_dimensions :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimensions = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasMaxTargetCapacity (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    maxTargetCapacity =
-        P.lens (_maxTargetCapacity :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maxTargetCapacity = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasMaximum (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    maximum =
-        P.lens (_maximum :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _maximum = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasMetricName (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    metricName =
-        P.lens (_metricName :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasMinTargetCapacity (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    minTargetCapacity =
-        P.lens (_minTargetCapacity :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minTargetCapacity = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasMinimum (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    minimum =
-        P.lens (_minimum :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _minimum = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasNamespace (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    namespace =
-        P.lens (_namespace :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasPolicyName (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    policyName =
-        P.lens (_policyName :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasTarget (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    target =
-        P.lens (_target :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasThreshold (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Double) where
-    threshold =
-        P.lens (_threshold :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Double)
-               (\s a -> s { _threshold = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance P.HasUnit (ElastigroupAwsScalingDownPolicy s) (TF.Attr s P.Text) where
-    unit =
-        P.lens (_unit :: ElastigroupAwsScalingDownPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a } :: ElastigroupAwsScalingDownPolicy s)
-
-instance s ~ s' => P.HasComputedCooldown (TF.Ref s' (ElastigroupAwsScalingDownPolicy s)) (TF.Attr s P.Integer) where
-    computedCooldown x = TF.compute (TF.refKey x) "cooldown"
-
-instance s ~ s' => P.HasComputedEvaluationPeriods (TF.Ref s' (ElastigroupAwsScalingDownPolicy s)) (TF.Attr s P.Integer) where
-    computedEvaluationPeriods x = TF.compute (TF.refKey x) "evaluation_periods"
-
-instance s ~ s' => P.HasComputedOperator (TF.Ref s' (ElastigroupAwsScalingDownPolicy s)) (TF.Attr s P.Text) where
-    computedOperator x = TF.compute (TF.refKey x) "operator"
-
-instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (ElastigroupAwsScalingDownPolicy s)) (TF.Attr s P.Integer) where
-    computedPeriod x = TF.compute (TF.refKey x) "period"
-
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (ElastigroupAwsScalingDownPolicy s)) (TF.Attr s P.Text) where
-    computedSource x = TF.compute (TF.refKey x) "source"
-
-instance s ~ s' => P.HasComputedStatistic (TF.Ref s' (ElastigroupAwsScalingDownPolicy s)) (TF.Attr s P.Text) where
-    computedStatistic x = TF.compute (TF.refKey x) "statistic"
-
--- | @integration_gitlab_runner@ nested settings.
-data IntegrationGitlabRunner s = IntegrationGitlabRunner'
-    { _isEnabled :: TF.Attr s P.Bool
-    -- ^ @is_enabled@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationGitlabRunner
-    :: IntegrationGitlabRunner s
-newIntegrationGitlabRunner =
-    IntegrationGitlabRunner'
-        { _isEnabled = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationGitlabRunner s)
-instance TF.IsValue  (IntegrationGitlabRunner s)
-instance TF.IsObject (IntegrationGitlabRunner s) where
-    toObject IntegrationGitlabRunner'{..} = P.catMaybes
-        [ TF.assign "is_enabled" <$> TF.attribute _isEnabled
-        ]
-
-instance TF.IsValid (IntegrationGitlabRunner s) where
-    validator = P.mempty
-
-instance P.HasIsEnabled (IntegrationGitlabRunner s) (TF.Attr s P.Bool) where
-    isEnabled =
-        P.lens (_isEnabled :: IntegrationGitlabRunner s -> TF.Attr s P.Bool)
-               (\s a -> s { _isEnabled = a } :: IntegrationGitlabRunner s)
-
--- | @integration_ecs_autoscale_down@ nested settings.
-data IntegrationEcsAutoscaleDown s = IntegrationEcsAutoscaleDown'
-    { _evaluationPeriods :: TF.Attr s P.Integer
-    -- ^ @evaluation_periods@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newIntegrationEcsAutoscaleDown
-    :: IntegrationEcsAutoscaleDown s
-newIntegrationEcsAutoscaleDown =
-    IntegrationEcsAutoscaleDown'
-        { _evaluationPeriods = TF.Nil
-        }
-
-instance P.Hashable  (IntegrationEcsAutoscaleDown s)
-instance TF.IsValue  (IntegrationEcsAutoscaleDown s)
-instance TF.IsObject (IntegrationEcsAutoscaleDown s) where
-    toObject IntegrationEcsAutoscaleDown'{..} = P.catMaybes
-        [ TF.assign "evaluation_periods" <$> TF.attribute _evaluationPeriods
-        ]
-
-instance TF.IsValid (IntegrationEcsAutoscaleDown s) where
-    validator = P.mempty
-
-instance P.HasEvaluationPeriods (IntegrationEcsAutoscaleDown s) (TF.Attr s P.Integer) where
-    evaluationPeriods =
-        P.lens (_evaluationPeriods :: IntegrationEcsAutoscaleDown s -> TF.Attr s P.Integer)
-               (\s a -> s { _evaluationPeriods = a } :: IntegrationEcsAutoscaleDown s)
+instance P.HasRollConfig (UpdatePolicySetting s) (TF.Attr s (RollConfigSetting s)) where
+    rollConfig =
+        P.lens (_rollConfig :: UpdatePolicySetting s -> TF.Attr s (RollConfigSetting s))
+               (\s a -> s { _rollConfig = a } :: UpdatePolicySetting s)
+
+instance P.HasShouldResumeStateful (UpdatePolicySetting s) (TF.Attr s P.Bool) where
+    shouldResumeStateful =
+        P.lens (_shouldResumeStateful :: UpdatePolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _shouldResumeStateful = a } :: UpdatePolicySetting s)
+
+instance P.HasShouldRoll (UpdatePolicySetting s) (TF.Attr s P.Bool) where
+    shouldRoll =
+        P.lens (_shouldRoll :: UpdatePolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _shouldRoll = a } :: UpdatePolicySetting s)
