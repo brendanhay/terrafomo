@@ -345,7 +345,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "group_users",
+            "name": "users",
             "schemas": [
               {
                 "name": "administrator",
@@ -445,7 +445,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "ipblock_ips",
+            "name": "ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -670,7 +670,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "loadbalancer_nic_ids",
+            "name": "nic_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -753,7 +753,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "nic_ips",
+            "name": "ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -944,7 +944,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "server_nic",
+            "name": "nic",
             "schemas": [
               {
                 "name": "dhcp",
@@ -970,7 +970,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "nic_firewall",
+                  "name": "firewall",
                   "schemas": [
                     {
                       "name": "icmp_code",
@@ -1020,7 +1020,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "firewall_ips",
+                        "name": "ips",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -1155,7 +1155,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "nic_ips",
+                  "name": "ips",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1254,7 +1254,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "server_volume",
+            "name": "volume",
             "schemas": [
               {
                 "name": "availability_zone",
@@ -1364,7 +1364,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "volume_ssh_key_path",
+                  "name": "ssh_key_path",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1711,7 +1711,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "volume_ssh_key_path",
+            "name": "ssh_key_path",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
