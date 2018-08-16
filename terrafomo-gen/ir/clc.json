@@ -577,6 +577,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"internal_ip_address\" <$> TF.attribute",
+                    "name": "_internalIpAddress",
+                    "method": "internalIpAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasInternalIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "internal_ip_address"
+                },
+                {
                     "default": "_ports",
                     "computed": false,
                     "required": true,
@@ -664,7 +681,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedInternalIpAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "internal_ip_address"
                 }
             ],
@@ -936,6 +953,57 @@
                     "original": "packages"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_password",
+                    "method": "password",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"power_state\" <$> TF.attribute",
+                    "name": "_powerState",
+                    "method": "powerState",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPowerState",
+                    "validate": false,
+                    "optional": true,
+                    "original": "power_state"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"private_ip_address\" <$> TF.attribute",
+                    "name": "_privateIpAddress",
+                    "method": "privateIpAddress",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPrivateIpAddress",
+                    "validate": false,
+                    "optional": true,
+                    "original": "private_ip_address"
+                },
+                {
                     "default": "_sourceServerId",
                     "computed": false,
                     "required": true,
@@ -1074,7 +1142,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPassword",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "password"
                 },
                 {
@@ -1091,7 +1159,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPowerState",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "power_state"
                 },
                 {
@@ -1108,7 +1176,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPrivateIpAddress",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "private_ip_address"
                 },
                 {
