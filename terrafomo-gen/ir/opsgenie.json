@@ -2,8 +2,8 @@
     "settings": [
         {
             "con": {
-                "smart": "newTeamMember",
-                "name": "TeamMember'"
+                "smart": "newMemberSetting",
+                "name": "MemberSetting'"
             },
             "arguments": [
                 {
@@ -15,6 +15,7 @@
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
                     "name": "_role",
                     "method": "role",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRole",
@@ -31,6 +32,7 @@
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
                     "name": "_username",
                     "method": "username",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
@@ -39,7 +41,8 @@
                     "original": "username"
                 }
             ],
-            "name": "TeamMember",
+            "key": "opsgenie_team.member",
+            "name": "MemberSetting",
             "threaded": true,
             "attributes": [],
             "parameters": [
@@ -52,6 +55,7 @@
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
                     "name": "_username",
                     "method": "username",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
@@ -61,8 +65,8 @@
                 }
             ],
             "conflicts": [],
-            "type": "TeamMember s",
-            "original": "team_member"
+            "type": "MemberSetting s",
+            "original": "member"
         }
     ],
     "url": "https://www.terraform.io/docs/providers/opsgenie/index.html",
@@ -82,6 +86,7 @@
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
                     "name": "_username",
                     "method": "username",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
@@ -91,6 +96,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/d/user.html",
+            "key": "opsgenie_user",
             "name": "UserData",
             "threaded": true,
             "attributes": [
@@ -103,6 +109,7 @@
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
                     "name": "_computedId",
                     "method": "computedId",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
@@ -119,6 +126,7 @@
                     "encoder": "TF.assign \"full_name\" <$> TF.attribute",
                     "name": "_computedFullName",
                     "method": "computedFullName",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedFullName",
@@ -135,6 +143,7 @@
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
                     "name": "_computedRole",
                     "method": "computedRole",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRole",
@@ -153,6 +162,7 @@
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
                     "name": "_username",
                     "method": "username",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
@@ -182,6 +192,7 @@
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
                     "name": "_description",
                     "method": "description",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasDescription",
@@ -198,10 +209,11 @@
                     "encoder": "TF.assign \"member\" <$> TF.attribute",
                     "name": "_member",
                     "method": "member",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (TeamMember s)]",
+                    "type": "TF.Attr s [TF.Attr s (MemberSetting s)]",
                     "class": "HasMember",
-                    "validate": true,
+                    "validate": false,
                     "optional": true,
                     "original": "member"
                 },
@@ -214,6 +226,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -223,6 +236,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/r/team.html",
+            "key": "opsgenie_team",
             "name": "TeamResource",
             "threaded": true,
             "attributes": [],
@@ -236,6 +250,7 @@
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasName",
@@ -263,6 +278,7 @@
                     "encoder": "TF.assign \"full_name\" <$> TF.attribute",
                     "name": "_fullName",
                     "method": "fullName",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFullName",
@@ -279,6 +295,7 @@
                     "encoder": "TF.assign \"locale\" <$> TF.attribute",
                     "name": "_locale",
                     "method": "locale",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasLocale",
@@ -295,6 +312,7 @@
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
                     "name": "_role",
                     "method": "role",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRole",
@@ -311,6 +329,7 @@
                     "encoder": "TF.assign \"timezone\" <$> TF.attribute",
                     "name": "_timezone",
                     "method": "timezone",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasTimezone",
@@ -327,6 +346,7 @@
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
                     "name": "_username",
                     "method": "username",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
@@ -336,6 +356,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/opsgenie/r/user.html",
+            "key": "opsgenie_user",
             "name": "UserResource",
             "threaded": true,
             "attributes": [],
@@ -349,6 +370,7 @@
                     "encoder": "TF.assign \"full_name\" <$> TF.attribute",
                     "name": "_fullName",
                     "method": "fullName",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasFullName",
@@ -365,6 +387,7 @@
                     "encoder": "TF.assign \"role\" <$> TF.attribute",
                     "name": "_role",
                     "method": "role",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasRole",
@@ -381,6 +404,7 @@
                     "encoder": "TF.assign \"username\" <$> TF.attribute",
                     "name": "_username",
                     "method": "username",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUsername",
@@ -409,6 +433,7 @@
                 "encoder": "P.Just $ TF.assign \"api_key\"",
                 "name": "_apiKey",
                 "method": "apiKey",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Text",
                 "class": "HasApiKey",
@@ -417,6 +442,7 @@
                 "original": "api_key"
             }
         ],
+        "key": "provider",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
@@ -430,6 +456,7 @@
                 "encoder": "P.Just $ TF.assign \"api_key\"",
                 "name": "_apiKey",
                 "method": "apiKey",
+                "threaded": false,
                 "conflicts": [],
                 "type": "P.Text",
                 "class": "HasApiKey",
@@ -443,14 +470,15 @@
         "original": "provider"
     },
     "dependencies": [
+        "aeson",
         "base",
-        "unordered-containers",
-        "text",
+        "containers",
+        "microlens",
         "terrafomo",
-        "hashable",
-        "microlens"
+        "text"
     ],
     "name": "OpsGenie",
     "package": "terrafomo-opsgenie",
+    "primitives": [],
     "original": "opsgenie"
 }
