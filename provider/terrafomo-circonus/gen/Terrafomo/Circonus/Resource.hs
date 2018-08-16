@@ -298,6 +298,9 @@ instance P.HasTcp (CheckResource s) (TF.Attr s (TcpSetting s)) where
         P.lens (_tcp :: CheckResource s -> TF.Attr s (TcpSetting s))
                (\s a -> s { _tcp = a } :: CheckResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCheckByCollector (TF.Ref s' (CheckResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedCheckByCollector x = TF.compute (TF.refKey x) "check_by_collector"
 
@@ -535,6 +538,9 @@ instance P.HasXmpp (ContactGroupResource s) (TF.Attr s [TF.Attr s (XmppSetting s
         P.lens (_xmpp :: ContactGroupResource s -> TF.Attr s [TF.Attr s (XmppSetting s)])
                (\s a -> s { _xmpp = a } :: ContactGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Int) where
     computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
@@ -665,6 +671,9 @@ instance P.HasTags (GraphResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: GraphResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: GraphResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GraphResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @circonus_metric@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/metric.html terraform documentation>
@@ -742,6 +751,9 @@ instance P.HasUnit (MetricResource s) (TF.Attr s P.Text) where
     unit =
         P.lens (_unit :: MetricResource s -> TF.Attr s P.Text)
                (\s a -> s { _unit = a } :: MetricResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @circonus_metric_cluster@ Resource.
 --
@@ -882,6 +894,9 @@ instance P.HasTags (RuleSetResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: RuleSetResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: RuleSetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLink (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
     computedLink x = TF.compute (TF.refKey x) "link"
