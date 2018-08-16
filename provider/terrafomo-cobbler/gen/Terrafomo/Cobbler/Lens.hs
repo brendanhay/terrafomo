@@ -48,6 +48,7 @@ module Terrafomo.Cobbler.Lens
     , HasComputedFetchableFiles (..)
     , HasComputedGateway (..)
     , HasComputedHostname (..)
+    , HasComputedId (..)
     , HasComputedImage (..)
     , HasComputedInterface (..)
     , HasComputedInterfaceMaster (..)
@@ -244,6 +245,9 @@ class HasComputedGateway a b | a -> b where
 
 class HasComputedHostname a b | a -> b where
     computedHostname :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedImage a b | a -> b where
     computedImage :: a -> b

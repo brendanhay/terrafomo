@@ -144,6 +144,9 @@ instance P.HasOsVersion (DistroResource s) (TF.Attr s P.Text) where
         P.lens (_osVersion :: DistroResource s -> TF.Attr s P.Text)
                (\s a -> s { _osVersion = a } :: DistroResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArch (TF.Ref s' (DistroResource s)) (TF.Attr s P.Text) where
     computedArch x = TF.compute (TF.refKey x) "arch"
 
@@ -220,6 +223,9 @@ instance P.HasName (KickstartFileResource s) (TF.Attr s P.Text) where
         P.lens (_name :: KickstartFileResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KickstartFileResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KickstartFileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cobbler_profile@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cobbler/r/profile.html terraform documentation>
@@ -262,6 +268,9 @@ instance P.HasName (ProfileResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ProfileResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProfileResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (ProfileResource s)) (TF.Attr s P.Text) where
     computedBootFiles x = TF.compute (TF.refKey x) "boot_files"
@@ -407,6 +416,9 @@ instance P.HasName (RepoResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RepoResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RepoResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RepoResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAptComponents (TF.Ref s' (RepoResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAptComponents x = TF.compute (TF.refKey x) "apt_components"
 
@@ -483,6 +495,9 @@ instance P.HasName (SnippetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SnippetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SnippetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnippetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @cobbler_system@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/cobbler/r/system.html terraform documentation>
@@ -525,6 +540,9 @@ instance P.HasProfile (SystemResource s) (TF.Attr s P.Text) where
     profile =
         P.lens (_profile :: SystemResource s -> TF.Attr s P.Text)
                (\s a -> s { _profile = a } :: SystemResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBootFiles (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedBootFiles x = TF.compute (TF.refKey x) "boot_files"
