@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Librato
-    ( module Terrafomo.Librato.Resource
-    , module Terrafomo.Librato.Types
+    ( module Terrafomo.Librato.Lens
     , module Terrafomo.Librato.Provider
-    , module Terrafomo.Librato.Lens
+    , module Terrafomo.Librato.Resource
     , module Terrafomo.Librato.Settings
+    , module Terrafomo.Librato.Types
     -- * Provider Aliases
     ) where
 
