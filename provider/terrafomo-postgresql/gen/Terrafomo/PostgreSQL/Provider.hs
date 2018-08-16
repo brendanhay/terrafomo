@@ -122,7 +122,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "postgresql"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "connect_timeout" <$> _connectTimeout
             , TF.assign "database" <$> _database

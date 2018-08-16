@@ -24,26 +24,36 @@ module Terrafomo.PostgreSQL.Lens
     , HasCreateRole (..)
     , HasCreateWithGrant (..)
     , HasDatabase (..)
+    , HasEncoding (..)
     , HasEncryptedPassword (..)
     , HasExpectedVersion (..)
     , HasHost (..)
     , HasIfNotExists (..)
     , HasInherit (..)
+    , HasIsTemplate (..)
+    , HasLcCollate (..)
+    , HasLcCtype (..)
     , HasLogin (..)
     , HasMaxConnections (..)
     , HasName (..)
+    , HasOwner (..)
     , HasPassword (..)
+    , HasPolicy (..)
     , HasPort (..)
     , HasReplication (..)
     , HasRole (..)
+    , HasSchema (..)
     , HasSkipDropRole (..)
     , HasSkipReassignOwned (..)
     , HasSslmode (..)
     , HasSuperuser (..)
+    , HasTablespaceName (..)
+    , HasTemplate (..)
     , HasUsage (..)
     , HasUsageWithGrant (..)
     , HasUsername (..)
     , HasValidUntil (..)
+    , HasVersion (..)
 
     -- ** Computed Attributes
     , HasComputedEncoding (..)
@@ -119,6 +129,12 @@ class HasDatabase a b | a -> b where
 instance HasDatabase a b => HasDatabase (TF.Schema l p a) b where
     database = TF.configuration . database
 
+class HasEncoding a b | a -> b where
+    encoding :: P.Lens' a b
+
+instance HasEncoding a b => HasEncoding (TF.Schema l p a) b where
+    encoding = TF.configuration . encoding
+
 class HasEncryptedPassword a b | a -> b where
     encryptedPassword :: P.Lens' a b
 
@@ -149,6 +165,24 @@ class HasInherit a b | a -> b where
 instance HasInherit a b => HasInherit (TF.Schema l p a) b where
     inherit = TF.configuration . inherit
 
+class HasIsTemplate a b | a -> b where
+    isTemplate :: P.Lens' a b
+
+instance HasIsTemplate a b => HasIsTemplate (TF.Schema l p a) b where
+    isTemplate = TF.configuration . isTemplate
+
+class HasLcCollate a b | a -> b where
+    lcCollate :: P.Lens' a b
+
+instance HasLcCollate a b => HasLcCollate (TF.Schema l p a) b where
+    lcCollate = TF.configuration . lcCollate
+
+class HasLcCtype a b | a -> b where
+    lcCtype :: P.Lens' a b
+
+instance HasLcCtype a b => HasLcCtype (TF.Schema l p a) b where
+    lcCtype = TF.configuration . lcCtype
+
 class HasLogin a b | a -> b where
     login :: P.Lens' a b
 
@@ -167,11 +201,23 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
+class HasOwner a b | a -> b where
+    owner :: P.Lens' a b
+
+instance HasOwner a b => HasOwner (TF.Schema l p a) b where
+    owner = TF.configuration . owner
+
 class HasPassword a b | a -> b where
     password :: P.Lens' a b
 
 instance HasPassword a b => HasPassword (TF.Schema l p a) b where
     password = TF.configuration . password
+
+class HasPolicy a b | a -> b where
+    policy :: P.Lens' a b
+
+instance HasPolicy a b => HasPolicy (TF.Schema l p a) b where
+    policy = TF.configuration . policy
 
 class HasPort a b | a -> b where
     port :: P.Lens' a b
@@ -190,6 +236,12 @@ class HasRole a b | a -> b where
 
 instance HasRole a b => HasRole (TF.Schema l p a) b where
     role = TF.configuration . role
+
+class HasSchema a b | a -> b where
+    schema :: P.Lens' a b
+
+instance HasSchema a b => HasSchema (TF.Schema l p a) b where
+    schema = TF.configuration . schema
 
 class HasSkipDropRole a b | a -> b where
     skipDropRole :: P.Lens' a b
@@ -215,6 +267,18 @@ class HasSuperuser a b | a -> b where
 instance HasSuperuser a b => HasSuperuser (TF.Schema l p a) b where
     superuser = TF.configuration . superuser
 
+class HasTablespaceName a b | a -> b where
+    tablespaceName :: P.Lens' a b
+
+instance HasTablespaceName a b => HasTablespaceName (TF.Schema l p a) b where
+    tablespaceName = TF.configuration . tablespaceName
+
+class HasTemplate a b | a -> b where
+    template :: P.Lens' a b
+
+instance HasTemplate a b => HasTemplate (TF.Schema l p a) b where
+    template = TF.configuration . template
+
 class HasUsage a b | a -> b where
     usage :: P.Lens' a b
 
@@ -238,6 +302,12 @@ class HasValidUntil a b | a -> b where
 
 instance HasValidUntil a b => HasValidUntil (TF.Schema l p a) b where
     validUntil = TF.configuration . validUntil
+
+class HasVersion a b | a -> b where
+    version :: P.Lens' a b
+
+instance HasVersion a b => HasVersion (TF.Schema l p a) b where
+    version = TF.configuration . version
 
 class HasComputedEncoding a b | a -> b where
     computedEncoding :: a -> b

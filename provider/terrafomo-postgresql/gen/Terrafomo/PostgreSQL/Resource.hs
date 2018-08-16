@@ -72,9 +72,38 @@ data DatabaseResource s = DatabaseResource'
     -- ^ @connection_limit@ - (Optional)
     -- How many concurrent connections can be made to this database
     --
+    , _encoding         :: TF.Attr s P.Text
+    -- ^ @encoding@ - (Optional, Forces New)
+    -- Character set encoding to use in the new database
+    --
+    , _isTemplate       :: TF.Attr s P.Bool
+    -- ^ @is_template@ - (Optional)
+    -- If true, then this database can be cloned by any user with CREATEDB
+    -- privileges
+    --
+    , _lcCollate        :: TF.Attr s P.Text
+    -- ^ @lc_collate@ - (Optional, Forces New)
+    -- Collation order (LC_COLLATE) to use in the new database
+    --
+    , _lcCtype          :: TF.Attr s P.Text
+    -- ^ @lc_ctype@ - (Optional, Forces New)
+    -- Character classification (LC_CTYPE) to use in the new database
+    --
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     -- The PostgreSQL database name to connect to
+    --
+    , _owner            :: TF.Attr s P.Text
+    -- ^ @owner@ - (Optional)
+    -- The ROLE which owns the database
+    --
+    , _tablespaceName   :: TF.Attr s P.Text
+    -- ^ @tablespace_name@ - (Optional)
+    -- The name of the tablespace that will be associated with the new database
+    --
+    , _template         :: TF.Attr s P.Text
+    -- ^ @template@ - (Optional, Forces New)
+    -- The name of the template from which to create the new database
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -87,14 +116,28 @@ databaseResource _name =
         DatabaseResource'
             { _allowConnections = TF.value P.True
             , _connectionLimit = TF.value (-1)
+            , _encoding = TF.Nil
+            , _isTemplate = TF.Nil
+            , _lcCollate = TF.Nil
+            , _lcCtype = TF.Nil
             , _name = _name
+            , _owner = TF.Nil
+            , _tablespaceName = TF.Nil
+            , _template = TF.Nil
             }
 
 instance TF.IsObject (DatabaseResource s) where
     toObject DatabaseResource'{..} = P.catMaybes
         [ TF.assign "allow_connections" <$> TF.attribute _allowConnections
         , TF.assign "connection_limit" <$> TF.attribute _connectionLimit
+        , TF.assign "encoding" <$> TF.attribute _encoding
+        , TF.assign "is_template" <$> TF.attribute _isTemplate
+        , TF.assign "lc_collate" <$> TF.attribute _lcCollate
+        , TF.assign "lc_ctype" <$> TF.attribute _lcCtype
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "tablespace_name" <$> TF.attribute _tablespaceName
+        , TF.assign "template" <$> TF.attribute _template
         ]
 
 instance TF.IsValid (DatabaseResource s) where
@@ -110,10 +153,45 @@ instance P.HasConnectionLimit (DatabaseResource s) (TF.Attr s P.Int) where
         P.lens (_connectionLimit :: DatabaseResource s -> TF.Attr s P.Int)
                (\s a -> s { _connectionLimit = a } :: DatabaseResource s)
 
+instance P.HasEncoding (DatabaseResource s) (TF.Attr s P.Text) where
+    encoding =
+        P.lens (_encoding :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _encoding = a } :: DatabaseResource s)
+
+instance P.HasIsTemplate (DatabaseResource s) (TF.Attr s P.Bool) where
+    isTemplate =
+        P.lens (_isTemplate :: DatabaseResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _isTemplate = a } :: DatabaseResource s)
+
+instance P.HasLcCollate (DatabaseResource s) (TF.Attr s P.Text) where
+    lcCollate =
+        P.lens (_lcCollate :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lcCollate = a } :: DatabaseResource s)
+
+instance P.HasLcCtype (DatabaseResource s) (TF.Attr s P.Text) where
+    lcCtype =
+        P.lens (_lcCtype :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _lcCtype = a } :: DatabaseResource s)
+
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseResource s)
+
+instance P.HasOwner (DatabaseResource s) (TF.Attr s P.Text) where
+    owner =
+        P.lens (_owner :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _owner = a } :: DatabaseResource s)
+
+instance P.HasTablespaceName (DatabaseResource s) (TF.Attr s P.Text) where
+    tablespaceName =
+        P.lens (_tablespaceName :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _tablespaceName = a } :: DatabaseResource s)
+
+instance P.HasTemplate (DatabaseResource s) (TF.Attr s P.Text) where
+    template =
+        P.lens (_template :: DatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _template = a } :: DatabaseResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -144,8 +222,16 @@ instance s ~ s' => P.HasComputedTemplate (TF.Ref s' (DatabaseResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/postgresql/r/extension.html terraform documentation>
 -- for more information.
 data ExtensionResource s = ExtensionResource'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _schema  :: TF.Attr s P.Text
+    -- ^ @schema@ - (Optional)
+    -- Sets the schema of an extension
+    --
+    , _version :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    -- Sets the version number of the extension
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -157,11 +243,15 @@ extensionResource _name =
     TF.unsafeResource "postgresql_extension" TF.validator $
         ExtensionResource'
             { _name = _name
+            , _schema = TF.Nil
+            , _version = TF.Nil
             }
 
 instance TF.IsObject (ExtensionResource s) where
     toObject ExtensionResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "schema" <$> TF.attribute _schema
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (ExtensionResource s) where
@@ -171,6 +261,16 @@ instance P.HasName (ExtensionResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ExtensionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ExtensionResource s)
+
+instance P.HasSchema (ExtensionResource s) (TF.Attr s P.Text) where
+    schema =
+        P.lens (_schema :: ExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _schema = a } :: ExtensionResource s)
+
+instance P.HasVersion (ExtensionResource s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: ExtensionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: ExtensionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ExtensionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -219,6 +319,10 @@ data RoleResource s = RoleResource'
     -- ^ @name@ - (Required)
     -- The name of the role
     --
+    , _password               :: TF.Attr s P.Text
+    -- ^ @password@ - (Optional)
+    -- Sets the role's password
+    --
     , _replication            :: TF.Attr s P.Bool
     -- ^ @replication@ - (Optional)
     -- Determine whether a role is allowed to initiate streaming replication or put
@@ -259,6 +363,7 @@ roleResource _name =
             , _inherit = TF.value P.True
             , _login = TF.value P.False
             , _name = _name
+            , _password = TF.Nil
             , _replication = TF.value P.False
             , _skipDropRole = TF.value P.False
             , _skipReassignOwned = TF.value P.False
@@ -276,6 +381,7 @@ instance TF.IsObject (RoleResource s) where
         , TF.assign "inherit" <$> TF.attribute _inherit
         , TF.assign "login" <$> TF.attribute _login
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "password" <$> TF.attribute _password
         , TF.assign "replication" <$> TF.attribute _replication
         , TF.assign "skip_drop_role" <$> TF.attribute _skipDropRole
         , TF.assign "skip_reassign_owned" <$> TF.attribute _skipReassignOwned
@@ -326,6 +432,11 @@ instance P.HasName (RoleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RoleResource s)
 
+instance P.HasPassword (RoleResource s) (TF.Attr s P.Text) where
+    password =
+        P.lens (_password :: RoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: RoleResource s)
+
 instance P.HasReplication (RoleResource s) (TF.Attr s P.Bool) where
     replication =
         P.lens (_replication :: RoleResource s -> TF.Attr s P.Bool)
@@ -370,6 +481,13 @@ data SchemaResource s = SchemaResource'
     -- ^ @name@ - (Required)
     -- The name of the schema
     --
+    , _owner       :: TF.Attr s P.Text
+    -- ^ @owner@ - (Optional)
+    -- The ROLE name who owns the schema
+    --
+    , _policy      :: TF.Attr s [TF.Attr s (PolicySetting s)]
+    -- ^ @policy@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @postgresql_schema@ resource value.
@@ -381,12 +499,16 @@ schemaResource _name =
         SchemaResource'
             { _ifNotExists = TF.value P.True
             , _name = _name
+            , _owner = TF.Nil
+            , _policy = TF.Nil
             }
 
 instance TF.IsObject (SchemaResource s) where
     toObject SchemaResource'{..} = P.catMaybes
         [ TF.assign "if_not_exists" <$> TF.attribute _ifNotExists
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "owner" <$> TF.attribute _owner
+        , TF.assign "policy" <$> TF.attribute _policy
         ]
 
 instance TF.IsValid (SchemaResource s) where
@@ -401,6 +523,16 @@ instance P.HasName (SchemaResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SchemaResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SchemaResource s)
+
+instance P.HasOwner (SchemaResource s) (TF.Attr s P.Text) where
+    owner =
+        P.lens (_owner :: SchemaResource s -> TF.Attr s P.Text)
+               (\s a -> s { _owner = a } :: SchemaResource s)
+
+instance P.HasPolicy (SchemaResource s) (TF.Attr s [TF.Attr s (PolicySetting s)]) where
+    policy =
+        P.lens (_policy :: SchemaResource s -> TF.Attr s [TF.Attr s (PolicySetting s)])
+               (\s a -> s { _policy = a } :: SchemaResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
