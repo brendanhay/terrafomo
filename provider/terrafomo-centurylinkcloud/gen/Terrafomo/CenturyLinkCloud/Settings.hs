@@ -17,7 +17,6 @@
 --
 module Terrafomo.CenturyLinkCloud.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

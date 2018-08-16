@@ -17,11 +17,10 @@
 --
 module Terrafomo.CenturyLinkCloud.Provider
     (
-    -- * CenturyLinkCloud Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * CenturyLinkCloud Specific Aliases
+    -- ** CenturyLinkCloud Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -89,7 +88,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "clc"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "account" <$> _account
             , P.Just $ TF.assign "password" _password

@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.CenturyLinkCloud
-    ( module Terrafomo.CenturyLinkCloud.Lens
-    , module Terrafomo.CenturyLinkCloud.Provider
-    , module Terrafomo.CenturyLinkCloud.Resource
-    , module Terrafomo.CenturyLinkCloud.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.CenturyLinkCloud.Provider
+
+    -- * Custom Types
     , module Terrafomo.CenturyLinkCloud.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.CenturyLinkCloud.Resource
+
+    -- * Settings
+    , module Terrafomo.CenturyLinkCloud.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.CenturyLinkCloud.Lens
     ) where
 
 import Terrafomo.CenturyLinkCloud.Lens

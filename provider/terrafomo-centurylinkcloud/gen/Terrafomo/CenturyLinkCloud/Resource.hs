@@ -17,7 +17,6 @@
 --
 module Terrafomo.CenturyLinkCloud.Resource
     (
-    -- * Resource Datatypes
     -- ** clc_group
       GroupResource (..)
     , groupResource
@@ -86,6 +85,7 @@ data GroupResource s = GroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @clc_group@ resource value.
 groupResource
     :: TF.Attr s P.Text -- ^ @location_id@ - 'P.locationId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -163,6 +163,7 @@ data LoadBalancerResource s = LoadBalancerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @clc_load_balancer@ resource value.
 loadBalancerResource
     :: TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
     -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
@@ -239,6 +240,7 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @clc_load_balancer_pool@ resource value.
 loadBalancerPoolResource
     :: TF.Attr s P.Text -- ^ @load_balancer@ - 'P.loadBalancer'
     -> TF.Attr s P.Text -- ^ @data_center@ - 'P.dataCenter'
@@ -318,6 +320,7 @@ data PublicIpResource s = PublicIpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @clc_public_ip@ resource value.
 publicIpResource
     :: TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
     -> TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))] -- ^ @ports@ - 'P.ports'
@@ -416,6 +419,7 @@ data ServerResource s = ServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @clc_server@ resource value.
 serverResource
     :: TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'
     -> TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
