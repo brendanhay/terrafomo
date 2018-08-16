@@ -2006,10 +2006,10 @@ data SecretsSetting s = SecretsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newSecretsSetting
-    :: TF.Attr s P.Text -- ^ @file_name@ - 'P.fileName'
-    -> TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
+    :: TF.Attr s P.Text -- ^ @secret_id@ - 'P.secretId'
+    -> TF.Attr s P.Text -- ^ @file_name@ - 'P.fileName'
     -> SecretsSetting s
-newSecretsSetting _fileName _secretId =
+newSecretsSetting _secretId _fileName =
     SecretsSetting'
         { _fileName = _fileName
         , _secretId = _secretId
