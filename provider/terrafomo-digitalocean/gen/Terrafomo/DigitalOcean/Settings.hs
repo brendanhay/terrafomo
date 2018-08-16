@@ -19,27 +19,27 @@ module Terrafomo.DigitalOcean.Settings
     (
     -- ** forwarding_rule
       ForwardingRuleSetting (..)
-    , newForwardingRuleSetting
+    , forwardingRuleSetting
 
     -- ** healthcheck
     , HealthcheckSetting (..)
-    , newHealthcheckSetting
+    , healthcheckSetting
 
     -- ** inbound_rule
     , InboundRuleSetting (..)
-    , newInboundRuleSetting
+    , inboundRuleSetting
 
     -- ** outbound_rule
     , OutboundRuleSetting (..)
-    , newOutboundRuleSetting
+    , outboundRuleSetting
 
     -- ** pending_changes
     , PendingChangesSetting (..)
-    , newPendingChangesSetting
+    , pendingChangesSetting
 
     -- ** sticky_sessions
     , StickySessionsSetting (..)
-    , newStickySessionsSetting
+    , stickySessionsSetting
 
     ) where
 
@@ -87,13 +87,13 @@ data ForwardingRuleSetting s = ForwardingRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @forwarding_rule@ settings value.
-newForwardingRuleSetting
+forwardingRuleSetting
     :: TF.Attr s P.Int -- ^ 'P._entryPort': @entry_port@
     -> TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
     -> TF.Attr s P.Text -- ^ 'P._entryProtocol': @entry_protocol@
     -> TF.Attr s P.Text -- ^ 'P._targetProtocol': @target_protocol@
     -> ForwardingRuleSetting s
-newForwardingRuleSetting _entryPort _targetPort _entryProtocol _targetProtocol =
+forwardingRuleSetting _entryPort _targetPort _entryProtocol _targetProtocol =
     ForwardingRuleSetting'
         { _certificateId = TF.Nil
         , _entryPort = _entryPort
@@ -173,11 +173,11 @@ data HealthcheckSetting s = HealthcheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @healthcheck@ settings value.
-newHealthcheckSetting
+healthcheckSetting
     :: TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> HealthcheckSetting s
-newHealthcheckSetting _port _protocol =
+healthcheckSetting _port _protocol =
     HealthcheckSetting'
         { _checkIntervalSeconds = TF.value 10
         , _healthyThreshold = TF.value 5
@@ -261,9 +261,9 @@ data InboundRuleSetting s = InboundRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @inbound_rule@ settings value.
-newInboundRuleSetting
+inboundRuleSetting
     :: InboundRuleSetting s
-newInboundRuleSetting =
+inboundRuleSetting =
     InboundRuleSetting'
         { _portRange = TF.Nil
         , _protocol = TF.Nil
@@ -340,9 +340,9 @@ data OutboundRuleSetting s = OutboundRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @outbound_rule@ settings value.
-newOutboundRuleSetting
+outboundRuleSetting
     :: OutboundRuleSetting s
-newOutboundRuleSetting =
+outboundRuleSetting =
     OutboundRuleSetting'
         { _destinationAddresses = TF.Nil
         , _destinationDropletIds = TF.Nil
@@ -410,9 +410,9 @@ data PendingChangesSetting s = PendingChangesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @pending_changes@ settings value.
-newPendingChangesSetting
+pendingChangesSetting
     :: PendingChangesSetting s
-newPendingChangesSetting =
+pendingChangesSetting =
     PendingChangesSetting'
         { _dropletId = TF.Nil
         , _removing = TF.Nil
@@ -459,9 +459,9 @@ data StickySessionsSetting s = StickySessionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sticky_sessions@ settings value.
-newStickySessionsSetting
+stickySessionsSetting
     :: StickySessionsSetting s
-newStickySessionsSetting =
+stickySessionsSetting =
     StickySessionsSetting'
         { _cookieName = TF.Nil
         , _cookieTtlSeconds = TF.Nil
