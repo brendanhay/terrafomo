@@ -17,7 +17,6 @@
 --
 module Terrafomo.Cloudflare.DataSource
     (
-    -- * DataSource Datatypes
     -- ** cloudflare_ip_ranges
       IpRangesData (..)
     , ipRangesData
@@ -55,6 +54,7 @@ import qualified Terrafomo.Validator           as TF
 data IpRangesData s = IpRangesData'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_ip_ranges@ datasource value.
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =

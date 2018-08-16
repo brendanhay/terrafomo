@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Cloudflare
-    ( module Terrafomo.Cloudflare.DataSource
-    , module Terrafomo.Cloudflare.Lens
-    , module Terrafomo.Cloudflare.Provider
-    , module Terrafomo.Cloudflare.Resource
-    , module Terrafomo.Cloudflare.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Cloudflare.Provider
+
+    -- * Custom Types
     , module Terrafomo.Cloudflare.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.Cloudflare.DataSource
+
+    -- * Resources
+    , module Terrafomo.Cloudflare.Resource
+
+    -- * Settings
+    , module Terrafomo.Cloudflare.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Cloudflare.Lens
     ) where
 
 import Terrafomo.Cloudflare.DataSource

@@ -17,7 +17,6 @@
 --
 module Terrafomo.Cloudflare.Settings
     (
-    -- * Settings Datatypes
     -- ** action
       ActionSetting (..)
     , newActionSetting
@@ -122,6 +121,7 @@ data ActionSetting s = ActionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @action@ settings value.
 newActionSetting
     :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
     -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
@@ -269,6 +269,7 @@ data ActionsSetting s = ActionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @actions@ settings value.
 newActionsSetting
     :: ActionsSetting s
 newActionsSetting =
@@ -532,6 +533,7 @@ data CorrelateSetting s = CorrelateSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @correlate@ settings value.
 newCorrelateSetting
     :: CorrelateSetting s
 newCorrelateSetting =
@@ -668,6 +670,7 @@ data DataSetting s = DataSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @data@ settings value.
 newDataSetting
     :: DataSetting s
 newDataSetting =
@@ -951,6 +954,7 @@ data ForwardingUrlSetting s = ForwardingUrlSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @forwarding_url@ settings value.
 newForwardingUrlSetting
     :: TF.Attr s P.Int -- ^ @status_code@ - 'P.statusCode'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
@@ -991,6 +995,7 @@ data HeaderSetting s = HeaderSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @header@ settings value.
 newHeaderSetting
     :: TF.Attr s P.Text -- ^ @header@ - 'P.header'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @values@ - 'P.values'
@@ -1025,6 +1030,7 @@ instance P.HasValues (HeaderSetting s) (TF.Attr s [TF.Attr s P.Text]) where
 data InitialSettingsSetting s = InitialSettingsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @initial_settings@ settings value.
 newInitialSettingsSetting
     :: InitialSettingsSetting s
 newInitialSettingsSetting =
@@ -1170,6 +1176,7 @@ instance s ~ s' => P.HasComputedWebsockets (TF.Ref s' (InitialSettingsSetting s)
 data MatchSetting s = MatchSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @match@ settings value.
 newMatchSetting
     :: MatchSetting s
 newMatchSetting =
@@ -1201,6 +1208,7 @@ data MinifySetting s = MinifySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @minify@ settings value.
 newMinifySetting
     :: TF.Attr s P.Text -- ^ @css@ - 'P.css'
     -> TF.Attr s P.Text -- ^ @html@ - 'P.html'
@@ -1252,6 +1260,7 @@ data MobileRedirectSetting s = MobileRedirectSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mobile_redirect@ settings value.
 newMobileRedirectSetting
     :: TF.Attr s P.Text -- ^ @status@ - 'P.status'
     -> TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
@@ -1303,6 +1312,7 @@ data OriginsSetting s = OriginsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @origins@ settings value.
 newOriginsSetting
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1350,6 +1360,7 @@ data PopPoolsSetting s = PopPoolsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @pop_pools@ settings value.
 newPopPoolsSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
     -> TF.Attr s P.Text -- ^ @pop@ - 'P.pop'
@@ -1390,6 +1401,7 @@ data RegionPoolsSetting s = RegionPoolsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @region_pools@ settings value.
 newRegionPoolsSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
@@ -1424,6 +1436,7 @@ instance P.HasRegion (RegionPoolsSetting s) (TF.Attr s P.Text) where
 data RequestSetting s = RequestSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @request@ settings value.
 newRequestSetting
     :: RequestSetting s
 newRequestSetting =
@@ -1455,6 +1468,7 @@ data ResponseSetting s = ResponseSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @response@ settings value.
 newResponseSetting
     :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
     -> TF.Attr s P.Text -- ^ @content_type@ - 'P.contentType'
@@ -1495,6 +1509,7 @@ instance s ~ s' => P.HasComputedStatuses (TF.Ref s' (ResponseSetting s)) (TF.Att
 data SecurityHeaderSetting s = SecurityHeaderSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @security_header@ settings value.
 newSecurityHeaderSetting
     :: SecurityHeaderSetting s
 newSecurityHeaderSetting =
@@ -1526,6 +1541,7 @@ instance s ~ s' => P.HasComputedPreload (TF.Ref s' (SecurityHeaderSetting s)) (T
 data SettingsSetting s = SettingsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @settings@ settings value.
 newSettingsSetting
     :: SettingsSetting s
 newSettingsSetting =

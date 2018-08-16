@@ -17,7 +17,6 @@
 --
 module Terrafomo.Cloudflare.Resource
     (
-    -- * Resource Datatypes
     -- ** cloudflare_load_balancer
       LoadBalancerResource (..)
     , loadBalancerResource
@@ -101,6 +100,7 @@ data LoadBalancerResource s = LoadBalancerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_load_balancer@ resource value.
 loadBalancerResource
     :: TF.Attr s P.Text -- ^ @fallback_pool_id@ - 'P.fallbackPoolId'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @default_pool_ids@ - 'P.defaultPoolIds'
@@ -219,6 +219,7 @@ data LoadBalancerMonitorResource s = LoadBalancerMonitorResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_load_balancer_monitor@ resource value.
 loadBalancerMonitorResource
     :: TF.Attr s P.Text -- ^ @expected_body@ - 'P.expectedBody'
     -> TF.Attr s P.Text -- ^ @expected_codes@ - 'P.expectedCodes'
@@ -342,6 +343,7 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_load_balancer_pool@ resource value.
 loadBalancerPoolResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (OriginsSetting s)] -- ^ @origins@ - 'P.origins'
@@ -441,6 +443,7 @@ data PageRuleResource s = PageRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_page_rule@ resource value.
 pageRuleResource
     :: TF.Attr s (ActionsSetting s) -- ^ @actions@ - 'P.actions'
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
@@ -534,6 +537,7 @@ data RateLimitResource s = RateLimitResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_rate_limit@ resource value.
 rateLimitResource
     :: TF.Attr s (ActionSetting s) -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Int -- ^ @period@ - 'P.period'
@@ -650,6 +654,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -752,6 +757,7 @@ data WafRuleResource s = WafRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_waf_rule@ resource value.
 wafRuleResource
     :: TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
     -> TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
@@ -809,6 +815,7 @@ data ZoneSettingsOverrideResource s = ZoneSettingsOverrideResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @cloudflare_zone_settings_override@ resource value.
 zoneSettingsOverrideResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ZoneSettingsOverrideResource s)
