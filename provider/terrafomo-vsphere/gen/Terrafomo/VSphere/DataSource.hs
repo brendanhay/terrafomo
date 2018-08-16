@@ -17,7 +17,6 @@
 --
 module Terrafomo.VSphere.DataSource
     (
-    -- * DataSource Datatypes
     -- ** vsphere_compute_cluster
       ComputeClusterData (..)
     , computeClusterData
@@ -112,6 +111,7 @@ data ComputeClusterData s = ComputeClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster@ datasource value.
 computeClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeClusterData s)
@@ -158,6 +158,7 @@ data CustomAttributeData s = CustomAttributeData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_custom_attribute@ datasource value.
 customAttributeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (CustomAttributeData s)
@@ -198,6 +199,7 @@ data DatacenterData s = DatacenterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_datacenter@ datasource value.
 datacenterData
     :: P.DataSource (DatacenterData s)
 datacenterData =
@@ -239,6 +241,7 @@ data DatastoreData s = DatastoreData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_datastore@ datasource value.
 datastoreData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatastoreData s)
@@ -287,6 +290,7 @@ data DatastoreClusterData s = DatastoreClusterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_datastore_cluster@ datasource value.
 datastoreClusterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatastoreClusterData s)
@@ -336,6 +340,7 @@ data DistributedVirtualSwitchData s = DistributedVirtualSwitchData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_distributed_virtual_switch@ datasource value.
 distributedVirtualSwitchData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DistributedVirtualSwitchData s)
@@ -387,6 +392,7 @@ data HostData s = HostData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_host@ datasource value.
 hostData
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> P.DataSource (HostData s)
@@ -439,6 +445,7 @@ data NetworkData s = NetworkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_network@ datasource value.
 networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkData s)
@@ -491,6 +498,7 @@ data ResourcePoolData s = ResourcePoolData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_resource_pool@ datasource value.
 resourcePoolData
     :: P.DataSource (ResourcePoolData s)
 resourcePoolData =
@@ -537,6 +545,7 @@ data TagData s = TagData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_tag@ datasource value.
 tagData
     :: TF.Attr s P.Text -- ^ @category_id@ - 'P.categoryId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -584,6 +593,7 @@ data TagCategoryData s = TagCategoryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_tag_category@ datasource value.
 tagCategoryData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (TagCategoryData s)
@@ -640,6 +650,7 @@ data VirtualMachineData s = VirtualMachineData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_virtual_machine@ datasource value.
 virtualMachineData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VirtualMachineData s)
@@ -721,6 +732,7 @@ data VmfsDisksData s = VmfsDisksData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_vmfs_disks@ datasource value.
 vmfsDisksData
     :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
     -> P.DataSource (VmfsDisksData s)

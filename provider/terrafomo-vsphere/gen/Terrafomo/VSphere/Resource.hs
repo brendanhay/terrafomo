@@ -17,7 +17,6 @@
 --
 module Terrafomo.VSphere.Resource
     (
-    -- * Resource Datatypes
     -- ** vsphere_compute_cluster
       ComputeClusterResource (..)
     , computeClusterResource
@@ -460,6 +459,7 @@ data ComputeClusterResource s = ComputeClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster@ resource value.
 computeClusterResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -865,6 +865,7 @@ data ComputeClusterHostGroupResource s = ComputeClusterHostGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster_host_group@ resource value.
 computeClusterHostGroupResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -933,6 +934,7 @@ data ComputeClusterVmAffinityRuleResource s = ComputeClusterVmAffinityRuleResour
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster_vm_affinity_rule@ resource value.
 computeClusterVmAffinityRuleResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
@@ -1016,6 +1018,7 @@ data ComputeClusterVmAntiAffinityRuleResource s = ComputeClusterVmAntiAffinityRu
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster_vm_anti_affinity_rule@ resource value.
 computeClusterVmAntiAffinityRuleResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
@@ -1107,6 +1110,7 @@ data ComputeClusterVmDependencyRuleResource s = ComputeClusterVmDependencyRuleRe
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster_vm_dependency_rule@ resource value.
 computeClusterVmDependencyRuleResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @dependency_vm_group_name@ - 'P.dependencyVmGroupName'
@@ -1189,6 +1193,7 @@ data ComputeClusterVmGroupResource s = ComputeClusterVmGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster_vm_group@ resource value.
 computeClusterVmGroupResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1273,6 +1278,7 @@ data ComputeClusterVmHostRuleResource s = ComputeClusterVmHostRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_compute_cluster_vm_host_rule@ resource value.
 computeClusterVmHostRuleResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1369,6 +1375,7 @@ data CustomAttributeResource s = CustomAttributeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_custom_attribute@ resource value.
 customAttributeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (CustomAttributeResource s)
@@ -1422,6 +1429,7 @@ data DatacenterResource s = DatacenterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_datacenter@ resource value.
 datacenterResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatacenterResource s)
@@ -1596,6 +1604,7 @@ data DatastoreClusterResource s = DatastoreClusterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_datastore_cluster@ resource value.
 datastoreClusterResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1819,6 +1828,7 @@ data DatastoreClusterVmAntiAffinityRuleResource s = DatastoreClusterVmAntiAffini
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_datastore_cluster_vm_anti_affinity_rule@ resource value.
 datastoreClusterVmAntiAffinityRuleResource
     :: TF.Attr s P.Text -- ^ @datastore_cluster_id@ - 'P.datastoreClusterId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @virtual_machine_ids@ - 'P.virtualMachineIds'
@@ -1965,6 +1975,7 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_distributed_port_group@ resource value.
 distributedPortGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @distributed_virtual_switch_uuid@ - 'P.distributedVirtualSwitchUuid'
@@ -2300,6 +2311,7 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_distributed_virtual_switch@ resource value.
 distributedVirtualSwitchResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -2690,6 +2702,7 @@ data DpmHostOverrideResource s = DpmHostOverrideResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_dpm_host_override@ resource value.
 dpmHostOverrideResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
@@ -2761,6 +2774,7 @@ data DrsVmOverrideResource s = DrsVmOverrideResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_drs_vm_override@ resource value.
 drsVmOverrideResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
@@ -2836,6 +2850,7 @@ data FileResource s = FileResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_file@ resource value.
 fileResource
     :: TF.Attr s P.Text -- ^ @datastore@ - 'P.datastore'
     -> TF.Attr s P.Text -- ^ @destination_file@ - 'P.destinationFile'
@@ -2934,6 +2949,7 @@ data FolderResource s = FolderResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_folder@ resource value.
 folderResource
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -3080,6 +3096,7 @@ data HaVmOverrideResource s = HaVmOverrideResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_ha_vm_override@ resource value.
 haVmOverrideResource
     :: TF.Attr s P.Text -- ^ @compute_cluster_id@ - 'P.computeClusterId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
@@ -3289,6 +3306,7 @@ data HostPortGroupResource s = HostPortGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_host_port_group@ resource value.
 hostPortGroupResource
     :: TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -3538,6 +3556,7 @@ data HostVirtualSwitchResource s = HostVirtualSwitchResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_host_virtual_switch@ resource value.
 hostVirtualSwitchResource
     :: TF.Attr s [TF.Attr s P.Text] -- ^ @network_adapters@ - 'P.networkAdapters'
     -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
@@ -3720,6 +3739,7 @@ data LicenseResource s = LicenseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_license@ resource value.
 licenseResource
     :: TF.Attr s P.Text -- ^ @license_key@ - 'P.licenseKey'
     -> P.Resource (LicenseResource s)
@@ -3824,6 +3844,7 @@ data NasDatastoreResource s = NasDatastoreResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_nas_datastore@ resource value.
 nasDatastoreResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @remote_hosts@ - 'P.remoteHosts'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @host_system_ids@ - 'P.hostSystemIds'
@@ -4021,6 +4042,7 @@ data ResourcePoolResource s = ResourcePoolResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_resource_pool@ resource value.
 resourcePoolResource
     :: TF.Attr s P.Text -- ^ @parent_resource_pool_id@ - 'P.parentResourcePoolId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4157,6 +4179,7 @@ data StorageDrsVmOverrideResource s = StorageDrsVmOverrideResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_storage_drs_vm_override@ resource value.
 storageDrsVmOverrideResource
     :: TF.Attr s P.Text -- ^ @datastore_cluster_id@ - 'P.datastoreClusterId'
     -> TF.Attr s P.Text -- ^ @virtual_machine_id@ - 'P.virtualMachineId'
@@ -4231,6 +4254,7 @@ data TagResource s = TagResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_tag@ resource value.
 tagResource
     :: TF.Attr s P.Text -- ^ @category_id@ - 'P.categoryId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4296,6 +4320,7 @@ data TagCategoryResource s = TagCategoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_tag_category@ resource value.
 tagCategoryResource
     :: TF.Attr s P.Text -- ^ @cardinality@ - 'P.cardinality'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4412,6 +4437,7 @@ data VappContainerResource s = VappContainerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_vapp_container@ resource value.
 vappContainerResource
     :: TF.Attr s P.Text -- ^ @parent_resource_pool_id@ - 'P.parentResourcePoolId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -4553,6 +4579,7 @@ data VirtualDiskResource s = VirtualDiskResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_virtual_disk@ resource value.
 virtualDiskResource
     :: TF.Attr s P.Text -- ^ @datastore@ - 'P.datastore'
     -> TF.Attr s P.Text -- ^ @vmdk_path@ - 'P.vmdkPath'
@@ -4872,6 +4899,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_virtual_machine@ resource value.
 virtualMachineResource
     :: TF.Attr s P.Text -- ^ @resource_pool_id@ - 'P.resourcePoolId'
     -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ - 'P.networkInterface'
@@ -5348,6 +5376,7 @@ data VirtualMachineSnapshotResource s = VirtualMachineSnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_virtual_machine_snapshot@ resource value.
 virtualMachineSnapshotResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Bool -- ^ @memory@ - 'P.memory'
@@ -5460,6 +5489,7 @@ data VmfsDatastoreResource s = VmfsDatastoreResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @vsphere_vmfs_datastore@ resource value.
 vmfsDatastoreResource
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @disks@ - 'P.disks'
     -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'

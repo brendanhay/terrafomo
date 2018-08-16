@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.VSphere
-    ( module Terrafomo.VSphere.DataSource
-    , module Terrafomo.VSphere.Lens
-    , module Terrafomo.VSphere.Provider
-    , module Terrafomo.VSphere.Resource
-    , module Terrafomo.VSphere.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.VSphere.Provider
+
+    -- * Custom Types
     , module Terrafomo.VSphere.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.VSphere.DataSource
+
+    -- * Resources
+    , module Terrafomo.VSphere.Resource
+
+    -- * Settings
+    , module Terrafomo.VSphere.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.VSphere.Lens
     ) where
 
 import Terrafomo.VSphere.DataSource

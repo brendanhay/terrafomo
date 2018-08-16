@@ -17,7 +17,6 @@
 --
 module Terrafomo.VSphere.Settings
     (
-    -- * Settings Datatypes
     -- ** cdrom
       CdromSetting (..)
     , newCdromSetting
@@ -105,6 +104,7 @@ data CdromSetting s = CdromSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @cdrom@ settings value.
 newCdromSetting
     :: CdromSetting s
 newCdromSetting =
@@ -168,6 +168,7 @@ data CloneSetting s = CloneSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @clone@ settings value.
 newCloneSetting
     :: TF.Attr s P.Text -- ^ @template_uuid@ - 'P.templateUuid'
     -> CloneSetting s
@@ -275,6 +276,7 @@ data CustomizeSetting s = CustomizeSetting'
     -- * 'windowsOptions'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @customize@ settings value.
 newCustomizeSetting
     :: CustomizeSetting s
 newCustomizeSetting =
@@ -452,6 +454,7 @@ data DiskSetting s = DiskSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @disk@ settings value.
 newDiskSetting
     :: DiskSetting s
 newDiskSetting =
@@ -587,6 +590,7 @@ instance s ~ s' => P.HasComputedUuid (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Te
 data DisksSetting s = DisksSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @disks@ settings value.
 newDisksSetting
     :: DisksSetting s
 newDisksSetting =
@@ -620,6 +624,7 @@ data HostSetting s = HostSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @host@ settings value.
 newHostSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @devices@ - 'P.devices'
     -> TF.Attr s P.Text -- ^ @host_system_id@ - 'P.hostSystemId'
@@ -671,6 +676,7 @@ data LinuxOptionsSetting s = LinuxOptionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @linux_options@ settings value.
 newLinuxOptionsSetting
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @host_name@ - 'P.hostName'
@@ -774,6 +780,7 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @network_interface@ settings value.
 newNetworkInterfaceSetting
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> NetworkInterfaceSetting s
@@ -889,6 +896,7 @@ instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkInterfaceSetting s
 data PortsSetting s = PortsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @ports@ settings value.
 newPortsSetting
     :: PortsSetting s
 newPortsSetting =
@@ -919,6 +927,7 @@ data VappSetting s = VappSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vapp@ settings value.
 newVappSetting
     :: VappSetting s
 newVappSetting =
@@ -952,6 +961,7 @@ data VlanRangeSetting s = VlanRangeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @vlan_range@ settings value.
 newVlanRangeSetting
     :: TF.Attr s P.Int -- ^ @max_vlan@ - 'P.maxVlan'
     -> TF.Attr s P.Int -- ^ @min_vlan@ - 'P.minVlan'
@@ -1056,6 +1066,7 @@ data WindowsOptionsSetting s = WindowsOptionsSetting'
     -- * 'joinDomain'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @windows_options@ settings value.
 newWindowsOptionsSetting
     :: TF.Attr s P.Text -- ^ @computer_name@ - 'P.computerName'
     -> WindowsOptionsSetting s
