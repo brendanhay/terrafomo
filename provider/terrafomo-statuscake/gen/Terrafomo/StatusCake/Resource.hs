@@ -146,11 +146,11 @@ data TestResource s = TestResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 testResource
-    :: TF.Attr s P.Text -- ^ @test_type@ - 'P.testType'
-    -> TF.Attr s P.Text -- ^ @website_name@ - 'P.websiteName'
+    :: TF.Attr s P.Text -- ^ @website_name@ - 'P.websiteName'
+    -> TF.Attr s P.Text -- ^ @test_type@ - 'P.testType'
     -> TF.Attr s P.Text -- ^ @website_url@ - 'P.websiteUrl'
     -> P.Resource (TestResource s)
-testResource _testType _websiteName _websiteUrl =
+testResource _websiteName _testType _websiteUrl =
     TF.unsafeResource "statuscake_test" TF.validator $
         TestResource'
             { _basicPass = TF.Nil
