@@ -196,7 +196,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "fabric_resolvers",
+            "name": "resolvers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -363,7 +363,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "instance_template_networks",
+            "name": "networks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -501,7 +501,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "machine_affinity",
+            "name": "affinity",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -539,7 +539,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "machine_cns",
+            "name": "cns",
             "schemas": [
               {
                 "name": "disable",
@@ -567,7 +567,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "cns_services",
+                  "name": "services",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -661,7 +661,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "machine_domain_names",
+            "name": "domain_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -713,7 +713,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "machine_ips",
+            "name": "ips",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -739,7 +739,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "machine_locality",
+            "name": "locality",
             "schemas": [
               {
                 "name": "close_to",
@@ -754,7 +754,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "locality_close_to",
+                  "name": "close_to",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -779,7 +779,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "locality_far_from",
+                  "name": "far_from",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -846,7 +846,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "machine_networks",
+            "name": "networks",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -871,7 +871,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "machine_nic",
+            "name": "nic",
             "schemas": [
               {
                 "name": "gateway",
@@ -1403,7 +1403,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "fabric_network_resolvers",
+            "name": "resolvers",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1427,7 +1427,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "fabric_network_routes",
+            "name": "routes",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1676,7 +1676,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "package_filter",
+            "name": "filter",
             "schemas": [
               {
                 "name": "disk",
