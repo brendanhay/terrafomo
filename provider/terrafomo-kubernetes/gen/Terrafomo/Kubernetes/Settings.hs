@@ -319,7 +319,7 @@ data AwsElasticBlockStoreSetting s = AwsElasticBlockStoreSetting'
 
 -- | Construct a new @aws_elastic_block_store@ settings value.
 newAwsElasticBlockStoreSetting
-    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ 'P._volumeId': @volume_id@
     -> AwsElasticBlockStoreSetting s
 newAwsElasticBlockStoreSetting _volumeId =
     AwsElasticBlockStoreSetting'
@@ -390,9 +390,9 @@ data AzureDiskSetting s = AzureDiskSetting'
 
 -- | Construct a new @azure_disk@ settings value.
 newAzureDiskSetting
-    :: TF.Attr s P.Text -- ^ @caching_mode@ - 'P.cachingMode'
-    -> TF.Attr s P.Text -- ^ @disk_name@ - 'P.diskName'
-    -> TF.Attr s P.Text -- ^ @data_disk_uri@ - 'P.dataDiskUri'
+    :: TF.Attr s P.Text -- ^ 'P._cachingMode': @caching_mode@
+    -> TF.Attr s P.Text -- ^ 'P._diskName': @disk_name@
+    -> TF.Attr s P.Text -- ^ 'P._dataDiskUri': @data_disk_uri@
     -> AzureDiskSetting s
 newAzureDiskSetting _cachingMode _diskName _dataDiskUri =
     AzureDiskSetting'
@@ -460,8 +460,8 @@ data AzureFileSetting s = AzureFileSetting'
 
 -- | Construct a new @azure_file@ settings value.
 newAzureFileSetting
-    :: TF.Attr s P.Text -- ^ @secret_name@ - 'P.secretName'
-    -> TF.Attr s P.Text -- ^ @share_name@ - 'P.shareName'
+    :: TF.Attr s P.Text -- ^ 'P._secretName': @secret_name@
+    -> TF.Attr s P.Text -- ^ 'P._shareName': @share_name@
     -> AzureFileSetting s
 newAzureFileSetting _secretName _shareName =
     AzureFileSetting'
@@ -574,7 +574,7 @@ data CephFsSetting s = CephFsSetting'
 
 -- | Construct a new @ceph_fs@ settings value.
 newCephFsSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @monitors@ - 'P.monitors'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._monitors': @monitors@
     -> CephFsSetting s
 newCephFsSetting _monitors =
     CephFsSetting'
@@ -658,7 +658,7 @@ data CinderSetting s = CinderSetting'
 
 -- | Construct a new @cinder@ settings value.
 newCinderSetting
-    :: TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
+    :: TF.Attr s P.Text -- ^ 'P._volumeId': @volume_id@
     -> CinderSetting s
 newCinderSetting _volumeId =
     CinderSetting'
@@ -908,7 +908,7 @@ data ContainerSetting s = ContainerSetting'
 
 -- | Construct a new @container@ settings value.
 newContainerSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ContainerSetting s
 newContainerSetting _name =
     ContainerSetting'
@@ -1163,7 +1163,7 @@ data EnvSetting s = EnvSetting'
 
 -- | Construct a new @env@ settings value.
 newEnvSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> EnvSetting s
 newEnvSetting _name =
     EnvSetting'
@@ -1261,8 +1261,8 @@ data FcSetting s = FcSetting'
 
 -- | Construct a new @fc@ settings value.
 newFcSetting
-    :: TF.Attr s P.Int -- ^ @lun@ - 'P.lun'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @target_ww_ns@ - 'P.targetWwNs'
+    :: TF.Attr s P.Int -- ^ 'P._lun': @lun@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._targetWwNs': @target_ww_ns@
     -> FcSetting s
 newFcSetting _lun _targetWwNs =
     FcSetting'
@@ -1378,7 +1378,7 @@ data FlexVolumeSetting s = FlexVolumeSetting'
 
 -- | Construct a new @flex_volume@ settings value.
 newFlexVolumeSetting
-    :: TF.Attr s P.Text -- ^ @driver@ - 'P.driver'
+    :: TF.Attr s P.Text -- ^ 'P._driver': @driver@
     -> FlexVolumeSetting s
 newFlexVolumeSetting _driver =
     FlexVolumeSetting'
@@ -1504,7 +1504,7 @@ data GcePersistentDiskSetting s = GcePersistentDiskSetting'
 
 -- | Construct a new @gce_persistent_disk@ settings value.
 newGcePersistentDiskSetting
-    :: TF.Attr s P.Text -- ^ @pd_name@ - 'P.pdName'
+    :: TF.Attr s P.Text -- ^ 'P._pdName': @pd_name@
     -> GcePersistentDiskSetting s
 newGcePersistentDiskSetting _pdName =
     GcePersistentDiskSetting'
@@ -1623,8 +1623,8 @@ data GlusterfsSetting s = GlusterfsSetting'
 
 -- | Construct a new @glusterfs@ settings value.
 newGlusterfsSetting
-    :: TF.Attr s P.Text -- ^ @endpoints_name@ - 'P.endpointsName'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ 'P._endpointsName': @endpoints_name@
+    -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> GlusterfsSetting s
 newGlusterfsSetting _endpointsName _path =
     GlusterfsSetting'
@@ -1849,7 +1849,7 @@ data ImagePullSecretsSetting s = ImagePullSecretsSetting'
 
 -- | Construct a new @image_pull_secrets@ settings value.
 newImagePullSecretsSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ImagePullSecretsSetting s
 newImagePullSecretsSetting _name =
     ImagePullSecretsSetting'
@@ -1980,7 +1980,7 @@ data InitContainerSetting s = InitContainerSetting'
 
 -- | Construct a new @init_container@ settings value.
 newInitContainerSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> InitContainerSetting s
 newInitContainerSetting _name =
     InitContainerSetting'
@@ -2163,8 +2163,8 @@ data IscsiSetting s = IscsiSetting'
 
 -- | Construct a new @iscsi@ settings value.
 newIscsiSetting
-    :: TF.Attr s P.Text -- ^ @iqn@ - 'P.iqn'
-    -> TF.Attr s P.Text -- ^ @target_portal@ - 'P.targetPortal'
+    :: TF.Attr s P.Text -- ^ 'P._iqn': @iqn@
+    -> TF.Attr s P.Text -- ^ 'P._targetPortal': @target_portal@
     -> IscsiSetting s
 newIscsiSetting _iqn _targetPortal =
     IscsiSetting'
@@ -2254,7 +2254,7 @@ data ItemsSetting s = ItemsSetting'
 
 -- | Construct a new @items@ settings value.
 newItemsSetting
-    :: TF.Attr s (FieldRefSetting s) -- ^ @field_ref@ - 'P.fieldRef'
+    :: TF.Attr s (FieldRefSetting s) -- ^ 'P._fieldRef': @field_ref@
     -> ItemsSetting s
 newItemsSetting _fieldRef =
     ItemsSetting'
@@ -2773,8 +2773,8 @@ data NfsSetting s = NfsSetting'
 
 -- | Construct a new @nfs@ settings value.
 newNfsSetting
-    :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
-    -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
+    :: TF.Attr s P.Text -- ^ 'P._path': @path@
+    -> TF.Attr s P.Text -- ^ 'P._server': @server@
     -> NfsSetting s
 newNfsSetting _path _server =
     NfsSetting'
@@ -3160,7 +3160,7 @@ data PhotonPersistentDiskSetting s = PhotonPersistentDiskSetting'
 
 -- | Construct a new @photon_persistent_disk@ settings value.
 newPhotonPersistentDiskSetting
-    :: TF.Attr s P.Text -- ^ @pd_id@ - 'P.pdId'
+    :: TF.Attr s P.Text -- ^ 'P._pdId': @pd_id@
     -> PhotonPersistentDiskSetting s
 newPhotonPersistentDiskSetting _pdId =
     PhotonPersistentDiskSetting'
@@ -3223,8 +3223,8 @@ data PortSetting s = PortSetting'
 
 -- | Construct a new @port@ settings value.
 newPortSetting
-    :: TF.Attr s P.Int -- ^ @container_port@ - 'P.containerPort'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Int -- ^ 'P._containerPort': @container_port@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> PortSetting s
 newPortSetting _containerPort _port =
     PortSetting'
@@ -3447,8 +3447,8 @@ data QuobyteSetting s = QuobyteSetting'
 
 -- | Construct a new @quobyte@ settings value.
 newQuobyteSetting
-    :: TF.Attr s P.Text -- ^ @registry@ - 'P.registry'
-    -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
+    :: TF.Attr s P.Text -- ^ 'P._registry': @registry@
+    -> TF.Attr s P.Text -- ^ 'P._volume': @volume@
     -> QuobyteSetting s
 newQuobyteSetting _registry _volume =
     QuobyteSetting'
@@ -3542,8 +3542,8 @@ data RbdSetting s = RbdSetting'
 
 -- | Construct a new @rbd@ settings value.
 newRbdSetting
-    :: TF.Attr s P.Text -- ^ @rbd_image@ - 'P.rbdImage'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @ceph_monitors@ - 'P.cephMonitors'
+    :: TF.Attr s P.Text -- ^ 'P._rbdImage': @rbd_image@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._cephMonitors': @ceph_monitors@
     -> RbdSetting s
 newRbdSetting _rbdImage _cephMonitors =
     RbdSetting'
@@ -3773,7 +3773,7 @@ data ResourceFieldRefSetting s = ResourceFieldRefSetting'
 
 -- | Construct a new @resource_field_ref@ settings value.
 newResourceFieldRefSetting
-    :: TF.Attr s P.Text -- ^ @resource@ - 'P.resource''
+    :: TF.Attr s P.Text -- ^ 'P._resource'': @resource@
     -> ResourceFieldRefSetting s
 newResourceFieldRefSetting _resource' =
     ResourceFieldRefSetting'
@@ -3879,8 +3879,8 @@ data ScaleTargetRefSetting s = ScaleTargetRefSetting'
 
 -- | Construct a new @scale_target_ref@ settings value.
 newScaleTargetRefSetting
-    :: TF.Attr s P.Text -- ^ @kind@ - 'P.kind'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._kind': @kind@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ScaleTargetRefSetting s
 newScaleTargetRefSetting _kind _name =
     ScaleTargetRefSetting'
@@ -4520,13 +4520,13 @@ data SpecSetting s = SpecSetting'
 
 -- | Construct a new @spec@ settings value.
 newSpecSetting
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @capacity@ - 'P.capacity'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @access_modes@ - 'P.accessModes'
-    -> TF.Attr s (ScaleTargetRefSetting s) -- ^ @scale_target_ref@ - 'P.scaleTargetRef'
-    -> TF.Attr s P.Int -- ^ @max_replicas@ - 'P.maxReplicas'
-    -> TF.Attr s (ResourcesSetting s) -- ^ @resources@ - 'P.resources'
-    -> TF.Attr s (PersistentVolumeSourceSetting s) -- ^ @persistent_volume_source@ - 'P.persistentVolumeSource'
-    -> TF.Attr s (TemplateSetting s) -- ^ @template@ - 'P.template'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._capacity': @capacity@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._accessModes': @access_modes@
+    -> TF.Attr s (ScaleTargetRefSetting s) -- ^ 'P._scaleTargetRef': @scale_target_ref@
+    -> TF.Attr s P.Int -- ^ 'P._maxReplicas': @max_replicas@
+    -> TF.Attr s (ResourcesSetting s) -- ^ 'P._resources': @resources@
+    -> TF.Attr s (PersistentVolumeSourceSetting s) -- ^ 'P._persistentVolumeSource': @persistent_volume_source@
+    -> TF.Attr s (TemplateSetting s) -- ^ 'P._template': @template@
     -> SpecSetting s
 newSpecSetting _capacity _accessModes _scaleTargetRef _maxReplicas _resources _persistentVolumeSource _template =
     SpecSetting'
@@ -4875,7 +4875,7 @@ data TcpSocketSetting s = TcpSocketSetting'
 
 -- | Construct a new @tcp_socket@ settings value.
 newTcpSocketSetting
-    :: TF.Attr s P.Text -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ 'P._port': @port@
     -> TcpSocketSetting s
 newTcpSocketSetting _port =
     TcpSocketSetting'
@@ -5605,8 +5605,8 @@ data VolumeMountSetting s = VolumeMountSetting'
 
 -- | Construct a new @volume_mount@ settings value.
 newVolumeMountSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @mount_path@ - 'P.mountPath'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._mountPath': @mount_path@
     -> VolumeMountSetting s
 newVolumeMountSetting _name _mountPath =
     VolumeMountSetting'
@@ -5664,7 +5664,7 @@ data VsphereVolumeSetting s = VsphereVolumeSetting'
 
 -- | Construct a new @vsphere_volume@ settings value.
 newVsphereVolumeSetting
-    :: TF.Attr s P.Text -- ^ @volume_path@ - 'P.volumePath'
+    :: TF.Attr s P.Text -- ^ 'P._volumePath': @volume_path@
     -> VsphereVolumeSetting s
 newVsphereVolumeSetting _volumePath =
     VsphereVolumeSetting'

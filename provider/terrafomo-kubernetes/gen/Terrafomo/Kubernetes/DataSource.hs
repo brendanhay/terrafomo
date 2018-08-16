@@ -65,7 +65,7 @@ data ServiceData s = ServiceData'
 
 -- | Define a new @kubernetes_service@ datasource value.
 serviceData
-    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
     -> P.DataSource (ServiceData s)
 serviceData _metadata =
     TF.unsafeDataSource "kubernetes_service" TF.validator $
@@ -113,7 +113,7 @@ data StorageClassData s = StorageClassData'
 
 -- | Define a new @kubernetes_storage_class@ datasource value.
 storageClassData
-    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
+    :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
     -> P.DataSource (StorageClassData s)
 storageClassData _metadata =
     TF.unsafeDataSource "kubernetes_storage_class" TF.validator $
