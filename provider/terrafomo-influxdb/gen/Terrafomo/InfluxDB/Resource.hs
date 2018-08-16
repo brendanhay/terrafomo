@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.InfluxDB.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -71,7 +70,7 @@ data ContinuousQueryResource s = ContinuousQueryResource'
     , _query    :: TF.Attr s P.Text
     -- ^ @query@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 continuousQueryResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
@@ -79,7 +78,7 @@ continuousQueryResource
     -> TF.Attr s P.Text -- ^ @query@ - 'P.query'
     -> P.Resource (ContinuousQueryResource s)
 continuousQueryResource _database _name _query =
-    TF.newResource "influxdb_continuous_query" TF.validator $
+    TF.unsafeResource "influxdb_continuous_query" P.defaultProvider TF.validator $
         ContinuousQueryResource'
             { _database = _database
             , _name = _name
@@ -119,16 +118,16 @@ data DatabaseResource s = DatabaseResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _retentionPolicies :: TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]
+    , _retentionPolicies :: TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)]
     -- ^ @retention_policies@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
-    TF.newResource "influxdb_database" TF.validator $
+    TF.unsafeResource "influxdb_database" P.defaultProvider TF.validator $
         DatabaseResource'
             { _name = _name
             , _retentionPolicies = TF.Nil
@@ -142,19 +141,15 @@ instance TF.IsObject (DatabaseResource s) where
 
 instance TF.IsValid (DatabaseResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_retentionPolicies"
-                  (_retentionPolicies
-                      :: DatabaseResource s -> TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)])
-                  TF.validator
 
 instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]) where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)]) where
     retentionPolicies =
-        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)])
+        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)])
                (\s a -> s { _retentionPolicies = a } :: DatabaseResource s)
 
 -- | @influxdb_user@ Resource.
@@ -162,7 +157,7 @@ instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (Data
 -- See the <https://www.terraform.io/docs/providers/influxdb/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
-    { _grant    :: TF.Attr s [TF.Attr s (UserGrant s)]
+    { _grant    :: TF.Attr s [TF.Attr s (GrantSetting s)]
     -- ^ @grant@ - (Optional)
     --
     , _name     :: TF.Attr s P.Text
@@ -171,14 +166,14 @@ data UserResource s = UserResource'
     , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
     -> P.Resource (UserResource s)
 userResource _name _password =
-    TF.newResource "influxdb_user" TF.validator $
+    TF.unsafeResource "influxdb_user" P.defaultProvider TF.validator $
         UserResource'
             { _grant = TF.Nil
             , _name = _name
@@ -194,14 +189,10 @@ instance TF.IsObject (UserResource s) where
 
 instance TF.IsValid (UserResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_grant"
-                  (_grant
-                      :: UserResource s -> TF.Attr s [TF.Attr s (UserGrant s)])
-                  TF.validator
 
-instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (UserGrant s)]) where
+instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (GrantSetting s)]) where
     grant =
-        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (UserGrant s)])
+        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (GrantSetting s)])
                (\s a -> s { _grant = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where

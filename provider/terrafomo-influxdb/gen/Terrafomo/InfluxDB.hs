@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.InfluxDB
-    ( module Terrafomo.InfluxDB.Types
-    , module Terrafomo.InfluxDB.Resource
+    ( module Terrafomo.InfluxDB.Lens
     , module Terrafomo.InfluxDB.Provider
+    , module Terrafomo.InfluxDB.Resource
     , module Terrafomo.InfluxDB.Settings
-    , module Terrafomo.InfluxDB.Lens
+    , module Terrafomo.InfluxDB.Types
     -- * Provider Aliases
     ) where
 
