@@ -96,7 +96,7 @@ alertResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AlertResource s)
 alertResource _name =
-    TF.unsafeResource "librato_alert" P.defaultProvider TF.validator $
+    TF.unsafeResource "librato_alert" TF.validator $
         AlertResource'
             { _active = TF.value P.True
             , _attributes = TF.Nil
@@ -193,7 +193,7 @@ metricResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (MetricResource s)
 metricResource _name _type' =
-    TF.unsafeResource "librato_metric" P.defaultProvider TF.validator $
+    TF.unsafeResource "librato_metric" TF.validator $
         MetricResource'
             { _attributes = TF.Nil
             , _composite = TF.Nil
@@ -279,7 +279,7 @@ serviceResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (ServiceResource s)
 serviceResource _settings _title _type' =
-    TF.unsafeResource "librato_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "librato_service" TF.validator $
         ServiceResource'
             { _settings = _settings
             , _title = _title
@@ -328,7 +328,7 @@ spaceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SpaceResource s)
 spaceResource _name =
-    TF.unsafeResource "librato_space" P.defaultProvider TF.validator $
+    TF.unsafeResource "librato_space" TF.validator $
         SpaceResource'
             { _name = _name
             }
@@ -386,7 +386,7 @@ spaceChartResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (SpaceChartResource s)
 spaceChartResource _name _spaceId _type' =
-    TF.unsafeResource "librato_space_chart" P.defaultProvider TF.validator $
+    TF.unsafeResource "librato_space_chart" TF.validator $
         SpaceChartResource'
             { _label = TF.Nil
             , _max = TF.value (0 P./ 0)
