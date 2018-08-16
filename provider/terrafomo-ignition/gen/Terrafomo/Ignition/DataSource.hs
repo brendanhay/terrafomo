@@ -17,7 +17,6 @@
 --
 module Terrafomo.Ignition.DataSource
     (
-    -- * DataSource Datatypes
     -- ** ignition_config
       ConfigData (..)
     , configData
@@ -131,6 +130,7 @@ data ConfigData s = ConfigData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_config@ datasource value.
 configData
     :: P.DataSource (ConfigData s)
 configData =
@@ -261,6 +261,7 @@ data DirectoryData s = DirectoryData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_directory@ datasource value.
 directoryData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -331,6 +332,7 @@ data DiskData s = DiskData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_disk@ datasource value.
 diskData
     :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
     -> P.DataSource (DiskData s)
@@ -398,6 +400,7 @@ data FileData s = FileData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_file@ datasource value.
 fileData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -490,6 +493,7 @@ data FilesystemData s = FilesystemData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_filesystem@ datasource value.
 filesystemData
     :: P.DataSource (FilesystemData s)
 filesystemData =
@@ -548,6 +552,7 @@ data GroupData s = GroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_group@ datasource value.
 groupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (GroupData s)
@@ -612,6 +617,7 @@ data LinkData s = LinkData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_link@ datasource value.
 linkData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
@@ -687,6 +693,7 @@ data NetworkdUnitData s = NetworkdUnitData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_networkd_unit@ datasource value.
 networkdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkdUnitData s)
@@ -738,6 +745,7 @@ data RaidData s = RaidData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_raid@ datasource value.
 raidData
     :: TF.Attr s P.Text -- ^ @level@ - 'P.level'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -807,6 +815,7 @@ data SystemdUnitData s = SystemdUnitData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_systemd_unit@ datasource value.
 systemdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SystemdUnitData s)
@@ -906,6 +915,7 @@ data UserData s = UserData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @ignition_user@ datasource value.
 userData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (UserData s)

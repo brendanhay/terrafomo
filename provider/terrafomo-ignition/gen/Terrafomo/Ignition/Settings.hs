@@ -17,7 +17,6 @@
 --
 module Terrafomo.Ignition.Settings
     (
-    -- * Settings Datatypes
     -- ** append
       AppendSetting (..)
     , newAppendSetting
@@ -79,6 +78,7 @@ data AppendSetting s = AppendSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @append@ settings value.
 newAppendSetting
     :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
     -> AppendSetting s
@@ -118,6 +118,7 @@ data ContentSetting s = ContentSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @content@ settings value.
 newContentSetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
     -> ContentSetting s
@@ -157,6 +158,7 @@ data DropinSetting s = DropinSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @dropin@ settings value.
 newDropinSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> DropinSetting s
@@ -208,6 +210,7 @@ data MountSetting s = MountSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @mount@ settings value.
 newMountSetting
     :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
@@ -285,6 +288,7 @@ data PartitionSetting s = PartitionSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @partition@ settings value.
 newPartitionSetting
     :: PartitionSetting s
 newPartitionSetting =
@@ -344,6 +348,7 @@ data ReplaceSetting s = ReplaceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @replace@ settings value.
 newReplaceSetting
     :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
     -> ReplaceSetting s
@@ -386,6 +391,7 @@ data SourceSetting s = SourceSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @source@ settings value.
 newSourceSetting
     :: SourceSetting s
 newSourceSetting =

@@ -17,11 +17,10 @@
 --
 module Terrafomo.Ignition.Provider
     (
-    -- * Ignition Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Ignition Specific Aliases
+    -- ** Ignition Specific Aliases
     , DataSource
     , Resource
     ) where
