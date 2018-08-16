@@ -930,7 +930,195 @@
                 "smart": "iploadbalancingData",
                 "name": "IploadbalancingData'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"display_name\" <$> TF.attribute",
+                    "name": "_displayName",
+                    "method": "displayName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDisplayName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "display_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip_loadbalancing\" <$> TF.attribute",
+                    "name": "_ipLoadbalancing",
+                    "method": "ipLoadbalancing",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpLoadbalancing",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip_loadbalancing"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv4\" <$> TF.attribute",
+                    "name": "_ipv4",
+                    "method": "ipv4",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv4",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv4"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ipv6\" <$> TF.attribute",
+                    "name": "_ipv6",
+                    "method": "ipv6",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIpv6",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ipv6"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"offer\" <$> TF.attribute",
+                    "name": "_offer",
+                    "method": "offer",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOffer",
+                    "validate": false,
+                    "optional": true,
+                    "original": "offer"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"service_name\" <$> TF.attribute",
+                    "name": "_serviceName",
+                    "method": "serviceName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasServiceName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "service_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ssl_configuration\" <$> TF.attribute",
+                    "name": "_sslConfiguration",
+                    "method": "sslConfiguration",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSslConfiguration",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ssl_configuration"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "_state",
+                    "method": "state",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasState",
+                    "validate": false,
+                    "optional": true,
+                    "original": "state"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vrack_eligibility\" <$> TF.attribute",
+                    "name": "_vrackEligibility",
+                    "method": "vrackEligibility",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasVrackEligibility",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vrack_eligibility"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"vrack_name\" <$> TF.attribute",
+                    "name": "_vrackName",
+                    "method": "vrackName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVrackName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vrack_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"zone\" <$> TF.attribute",
+                    "name": "_zone",
+                    "method": "zone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasZone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "zone"
+                }
+            ],
             "url": "https://www.terraform.io/docs/providers/ovh/d/iploadbalancing.html",
             "key": "ovh_iploadbalancing",
             "name": "IploadbalancingData",
@@ -967,7 +1155,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDisplayName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "display_name"
                 },
                 {
@@ -984,7 +1172,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpLoadbalancing",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip_loadbalancing"
                 },
                 {
@@ -1001,7 +1189,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv4",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv4"
                 },
                 {
@@ -1018,7 +1206,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIpv6",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ipv6"
                 },
                 {
@@ -1052,7 +1240,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOffer",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "offer"
                 },
                 {
@@ -1086,7 +1274,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedServiceName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "service_name"
                 },
                 {
@@ -1103,7 +1291,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSslConfiguration",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ssl_configuration"
                 },
                 {
@@ -1120,7 +1308,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedState",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "state"
                 },
                 {
@@ -1137,7 +1325,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedVrackEligibility",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vrack_eligibility"
                 },
                 {
@@ -1154,7 +1342,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVrackName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vrack_name"
                 },
                 {
@@ -1171,7 +1359,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedZone",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "zone"
                 }
             ],
@@ -1202,6 +1390,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "description_regexp"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"state\" <$> TF.attribute",
+                    "name": "_state",
+                    "method": "state",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasState",
+                    "validate": false,
+                    "optional": true,
+                    "original": "state"
                 },
                 {
                     "default": "TF.value P.False",
@@ -1308,7 +1513,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedState",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "state"
                 }
             ],
@@ -1756,6 +1961,23 @@
                     "original": "project_id"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"regions\" <$> TF.attribute",
+                    "name": "_regions",
+                    "method": "regions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRegions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "regions"
+                },
+                {
                     "default": "TF.value 0",
                     "computed": false,
                     "required": false,
@@ -1809,7 +2031,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRegions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "regions"
                 },
                 {
@@ -2253,6 +2475,23 @@
                     "original": "description"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"openstack_rc\" <$> TF.attribute",
+                    "name": "_openstackRc",
+                    "method": "openstackRc",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasOpenstackRc",
+                    "validate": false,
+                    "optional": true,
+                    "original": "openstack_rc"
+                },
+                {
                     "default": "_projectId",
                     "computed": false,
                     "required": true,
@@ -2323,7 +2562,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedOpenstackRc",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "openstack_rc"
                 },
                 {
@@ -2820,6 +3059,23 @@
                     "original": "display_name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"frontend_id\" <$> TF.attribute",
+                    "name": "_frontendId",
+                    "method": "frontendId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasFrontendId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "frontend_id"
+                },
+                {
                     "default": "_serviceName",
                     "computed": false,
                     "required": true,
@@ -2890,7 +3146,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedFrontendId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "frontend_id"
                 }
             ],
@@ -3746,6 +4002,23 @@
                     "original": "project_id"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"regions\" <$> TF.attribute",
+                    "name": "_regions",
+                    "method": "regions",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasRegions",
+                    "validate": false,
+                    "optional": true,
+                    "original": "regions"
+                },
+                {
                     "default": "TF.value 0",
                     "computed": false,
                     "required": false,
@@ -3799,7 +4072,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedRegions",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "regions"
                 },
                 {
@@ -4243,6 +4516,23 @@
                     "original": "description"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"openstack_rc\" <$> TF.attribute",
+                    "name": "_openstackRc",
+                    "method": "openstackRc",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasOpenstackRc",
+                    "validate": false,
+                    "optional": true,
+                    "original": "openstack_rc"
+                },
+                {
                     "default": "_projectId",
                     "computed": false,
                     "required": true,
@@ -4313,7 +4603,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedOpenstackRc",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "openstack_rc"
                 },
                 {
