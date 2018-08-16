@@ -35,6 +35,7 @@ module Terrafomo.Icinga2.Lens
     , HasVars (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -149,3 +150,6 @@ class HasVars a b | a -> b where
 
 instance HasVars a b => HasVars (TF.Schema l p a) b where
     vars = TF.configuration . vars
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b

@@ -133,6 +133,9 @@ instance P.HasTemplates (CheckcommandResource s) (TF.Attr s [TF.Attr s P.Text]) 
         P.lens (_templates :: CheckcommandResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _templates = a } :: CheckcommandResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CheckcommandResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @icinga2_host@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/icinga2/r/host.html terraform documentation>
@@ -218,6 +221,9 @@ instance P.HasVars (HostResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
         P.lens (_vars :: HostResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: HostResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @icinga2_hostgroup@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/icinga2/r/hostgroup.html terraform documentation>
@@ -262,6 +268,9 @@ instance P.HasName (HostgroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: HostgroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: HostgroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (HostgroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @icinga2_notification@ Resource.
 --
@@ -356,6 +365,9 @@ instance P.HasVars (NotificationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s 
         P.lens (_vars :: NotificationResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: NotificationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @icinga2_service@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/icinga2/r/service.html terraform documentation>
@@ -413,6 +425,9 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @icinga2_user@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/icinga2/r/user.html terraform documentation>
@@ -455,3 +470,6 @@ instance P.HasName (UserResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: UserResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
