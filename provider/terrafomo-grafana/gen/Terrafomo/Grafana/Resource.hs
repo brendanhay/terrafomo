@@ -158,6 +158,9 @@ instance P.HasConfigJson (DashboardResource s) (TF.Attr s P.Text) where
         P.lens (_configJson :: DashboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _configJson = a } :: DashboardResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
     computedSlug x = TF.compute (TF.refKey x) "slug"
 
@@ -398,6 +401,9 @@ instance P.HasViewers (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) wh
     viewers =
         P.lens (_viewers :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _viewers = a } :: OrganizationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Int) where
     computedOrgId x = TF.compute (TF.refKey x) "org_id"
