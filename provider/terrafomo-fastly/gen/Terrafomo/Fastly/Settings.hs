@@ -19,71 +19,71 @@ module Terrafomo.Fastly.Settings
     (
     -- ** backend
       BackendSetting (..)
-    , newBackendSetting
+    , backendSetting
 
     -- ** bigquerylogging
     , BigqueryloggingSetting (..)
-    , newBigqueryloggingSetting
+    , bigqueryloggingSetting
 
     -- ** cache_setting
     , CacheSettingSetting (..)
-    , newCacheSettingSetting
+    , cacheSettingSetting
 
     -- ** condition
     , ConditionSetting (..)
-    , newConditionSetting
+    , conditionSetting
 
     -- ** domain
     , DomainSetting (..)
-    , newDomainSetting
+    , domainSetting
 
     -- ** gcslogging
     , GcsloggingSetting (..)
-    , newGcsloggingSetting
+    , gcsloggingSetting
 
     -- ** gzip
     , GzipSetting (..)
-    , newGzipSetting
+    , gzipSetting
 
     -- ** header
     , HeaderSetting (..)
-    , newHeaderSetting
+    , headerSetting
 
     -- ** healthcheck
     , HealthcheckSetting (..)
-    , newHealthcheckSetting
+    , healthcheckSetting
 
     -- ** logentries
     , LogentriesSetting (..)
-    , newLogentriesSetting
+    , logentriesSetting
 
     -- ** papertrail
     , PapertrailSetting (..)
-    , newPapertrailSetting
+    , papertrailSetting
 
     -- ** request_setting
     , RequestSettingSetting (..)
-    , newRequestSettingSetting
+    , requestSettingSetting
 
     -- ** response_object
     , ResponseObjectSetting (..)
-    , newResponseObjectSetting
+    , responseObjectSetting
 
     -- ** s3logging
     , S3loggingSetting (..)
-    , newS3loggingSetting
+    , s3loggingSetting
 
     -- ** sumologic
     , SumologicSetting (..)
-    , newSumologicSetting
+    , sumologicSetting
 
     -- ** syslog
     , SyslogSetting (..)
-    , newSyslogSetting
+    , syslogSetting
 
     -- ** vcl
     , VclSetting (..)
-    , newVclSetting
+    , vclSetting
 
     ) where
 
@@ -207,11 +207,11 @@ data BackendSetting s = BackendSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @backend@ settings value.
-newBackendSetting
+backendSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> BackendSetting s
-newBackendSetting _address _name =
+backendSetting _address _name =
     BackendSetting'
         { _address = _address
         , _autoLoadbalance = TF.value P.True
@@ -422,13 +422,13 @@ data BigqueryloggingSetting s = BigqueryloggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @bigquerylogging@ settings value.
-newBigqueryloggingSetting
+bigqueryloggingSetting
     :: TF.Attr s P.Text -- ^ 'P._dataset': @dataset@
     -> TF.Attr s P.Text -- ^ 'P._projectId': @project_id@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._table': @table@
     -> BigqueryloggingSetting s
-newBigqueryloggingSetting _dataset _projectId _name _table =
+bigqueryloggingSetting _dataset _projectId _name _table =
     BigqueryloggingSetting'
         { _dataset = _dataset
         , _email = TF.Nil
@@ -521,10 +521,10 @@ data CacheSettingSetting s = CacheSettingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cache_setting@ settings value.
-newCacheSettingSetting
+cacheSettingSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> CacheSettingSetting s
-newCacheSettingSetting _name =
+cacheSettingSetting _name =
     CacheSettingSetting'
         { _action = TF.Nil
         , _cacheCondition = TF.Nil
@@ -592,12 +592,12 @@ data ConditionSetting s = ConditionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @condition@ settings value.
-newConditionSetting
+conditionSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._statement': @statement@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ConditionSetting s
-newConditionSetting _name _statement _type' =
+conditionSetting _name _statement _type' =
     ConditionSetting'
         { _name = _name
         , _priority = TF.value 10
@@ -649,10 +649,10 @@ data DomainSetting s = DomainSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @domain@ settings value.
-newDomainSetting
+domainSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DomainSetting s
-newDomainSetting _name =
+domainSetting _name =
     DomainSetting'
         { _comment = TF.Nil
         , _name = _name
@@ -728,11 +728,11 @@ data GcsloggingSetting s = GcsloggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gcslogging@ settings value.
-newGcsloggingSetting
+gcsloggingSetting
     :: TF.Attr s P.Text -- ^ 'P._bucketName': @bucket_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GcsloggingSetting s
-newGcsloggingSetting _bucketName _name =
+gcsloggingSetting _bucketName _name =
     GcsloggingSetting'
         { _bucketName = _bucketName
         , _email = TF.Nil
@@ -842,10 +842,10 @@ data GzipSetting s = GzipSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @gzip@ settings value.
-newGzipSetting
+gzipSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GzipSetting s
-newGzipSetting _name =
+gzipSetting _name =
     GzipSetting'
         { _cacheCondition = TF.Nil
         , _contentTypes = TF.Nil
@@ -927,13 +927,13 @@ data HeaderSetting s = HeaderSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @header@ settings value.
-newHeaderSetting
+headerSetting
     :: TF.Attr s P.Text -- ^ 'P._action': @action@
     -> TF.Attr s P.Text -- ^ 'P._destination': @destination@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> HeaderSetting s
-newHeaderSetting _action _destination _name _type' =
+headerSetting _action _destination _name _type' =
     HeaderSetting'
         { _action = _action
         , _cacheCondition = TF.Nil
@@ -1066,12 +1066,12 @@ data HealthcheckSetting s = HealthcheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @healthcheck@ settings value.
-newHealthcheckSetting
+healthcheckSetting
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> HealthcheckSetting s
-newHealthcheckSetting _host _name _path =
+healthcheckSetting _host _name _path =
     HealthcheckSetting'
         { _checkInterval = TF.value 5000
         , _expectedResponse = TF.value 200
@@ -1194,11 +1194,11 @@ data LogentriesSetting s = LogentriesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @logentries@ settings value.
-newLogentriesSetting
+logentriesSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._token': @token@
     -> LogentriesSetting s
-newLogentriesSetting _name _token =
+logentriesSetting _name _token =
     LogentriesSetting'
         { _format = TF.value "%h %l %u %t %r %>s"
         , _formatVersion = TF.value 1
@@ -1284,12 +1284,12 @@ data PapertrailSetting s = PapertrailSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @papertrail@ settings value.
-newPapertrailSetting
+papertrailSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> PapertrailSetting s
-newPapertrailSetting _address _name _port =
+papertrailSetting _address _name _port =
     PapertrailSetting'
         { _address = _address
         , _format = TF.value "%h %l %u %t %r %>s"
@@ -1391,10 +1391,10 @@ data RequestSettingSetting s = RequestSettingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @request_setting@ settings value.
-newRequestSettingSetting
+requestSettingSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RequestSettingSetting s
-newRequestSettingSetting _name =
+requestSettingSetting _name =
     RequestSettingSetting'
         { _action = TF.Nil
         , _bypassBusyWait = TF.Nil
@@ -1525,10 +1525,10 @@ data ResponseObjectSetting s = ResponseObjectSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @response_object@ settings value.
-newResponseObjectSetting
+responseObjectSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ResponseObjectSetting s
-newResponseObjectSetting _name =
+responseObjectSetting _name =
     ResponseObjectSetting'
         { _cacheCondition = TF.Nil
         , _content = TF.Nil
@@ -1651,11 +1651,11 @@ data S3loggingSetting s = S3loggingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @s3logging@ settings value.
-newS3loggingSetting
+s3loggingSetting
     :: TF.Attr s P.Text -- ^ 'P._bucketName': @bucket_name@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> S3loggingSetting s
-newS3loggingSetting _bucketName _name =
+s3loggingSetting _bucketName _name =
     S3loggingSetting'
         { _bucketName = _bucketName
         , _domain = TF.value "s3.amazonaws.com"
@@ -1795,11 +1795,11 @@ data SumologicSetting s = SumologicSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sumologic@ settings value.
-newSumologicSetting
+sumologicSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> SumologicSetting s
-newSumologicSetting _name _url =
+sumologicSetting _name _url =
     SumologicSetting'
         { _format = TF.value "%h %l %u %t %r %>s"
         , _formatVersion = TF.value 1
@@ -1902,11 +1902,11 @@ data SyslogSetting s = SyslogSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @syslog@ settings value.
-newSyslogSetting
+syslogSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> SyslogSetting s
-newSyslogSetting _address _name =
+syslogSetting _address _name =
     SyslogSetting'
         { _address = _address
         , _format = TF.value "%h %l %u %t \"%r\" %>s %b"
@@ -2012,11 +2012,11 @@ data VclSetting s = VclSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vcl@ settings value.
-newVclSetting
+vclSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> VclSetting s
-newVclSetting _content _name =
+vclSetting _content _name =
     VclSetting'
         { _content = _content
         , _main = TF.value P.False
