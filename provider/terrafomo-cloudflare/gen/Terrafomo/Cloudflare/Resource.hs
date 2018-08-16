@@ -161,6 +161,9 @@ instance P.HasZone (LoadBalancerResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: LoadBalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: LoadBalancerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
 
@@ -302,6 +305,9 @@ instance P.HasType' (LoadBalancerMonitorResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: LoadBalancerMonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: LoadBalancerMonitorResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerMonitorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerMonitorResource s)) (TF.Attr s P.Text) where
     computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
 
@@ -401,6 +407,9 @@ instance P.HasOrigins (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s (Origin
         P.lens (_origins :: LoadBalancerPoolResource s -> TF.Attr s [TF.Attr s (OriginsSetting s)])
                (\s a -> s { _origins = a } :: LoadBalancerPoolResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCheckRegions (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCheckRegions x = TF.compute (TF.refKey x) "check_regions"
 
@@ -487,6 +496,9 @@ instance P.HasZone (PageRuleResource s) (TF.Attr s P.Text) where
     zone =
         P.lens (_zone :: PageRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: PageRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PageRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (PageRuleResource s)) (TF.Attr s P.Text) where
     computedZoneId x = TF.compute (TF.refKey x) "zone_id"
@@ -604,6 +616,9 @@ instance P.HasZone (RateLimitResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: RateLimitResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: RateLimitResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RateLimitResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedMatch (TF.Ref s' (RateLimitResource s)) (TF.Attr s (MatchSetting s)) where
     computedMatch x = TF.compute (TF.refKey x) "match"
 
@@ -694,6 +709,9 @@ instance P.HasType' (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: RecordResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
     computedCreatedOn x = TF.compute (TF.refKey x) "created_on"
 
@@ -772,6 +790,9 @@ instance P.HasZone (WafRuleResource s) (TF.Attr s P.Text) where
         P.lens (_zone :: WafRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _zone = a } :: WafRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedPackageId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
     computedPackageId x = TF.compute (TF.refKey x) "package_id"
 
@@ -809,6 +830,9 @@ instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ZoneSettingsOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ZoneSettingsOverrideResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (InitialSettingsSetting s)) where
     computedInitialSettings x = TF.compute (TF.refKey x) "initial_settings"
