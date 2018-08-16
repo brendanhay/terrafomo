@@ -73,9 +73,9 @@ data DefaultReviewersResource s = DefaultReviewersResource'
 
 -- | Define a new @bitbucket_default_reviewers@ resource value.
 defaultReviewersResource
-    :: TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
-    -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @reviewers@ - 'P.reviewers'
+    :: TF.Attr s P.Text -- ^ @owner@ ('P._owner', 'P.owner')
+    -> TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @reviewers@ ('P._reviewers', 'P.reviewers')
     -> P.Resource (DefaultReviewersResource s)
 defaultReviewersResource _owner _repository _reviewers =
     TF.unsafeResource "bitbucket_default_reviewers" TF.validator $
@@ -143,11 +143,11 @@ data HookResource s = HookResource'
 
 -- | Define a new @bitbucket_hook@ resource value.
 hookResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
-    -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
-    -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @events@ ('P._events', 'P.events')
+    -> TF.Attr s P.Text -- ^ @owner@ ('P._owner', 'P.owner')
+    -> TF.Attr s P.Text -- ^ @repository@ ('P._repository', 'P.repository')
+    -> TF.Attr s P.Text -- ^ @url@ ('P._url', 'P.url')
     -> P.Resource (HookResource s)
 hookResource _description _events _owner _repository _url =
     TF.unsafeResource "bitbucket_hook" TF.validator $
@@ -258,8 +258,8 @@ data RepositoryResource s = RepositoryResource'
 
 -- | Define a new @bitbucket_repository@ resource value.
 repositoryResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @owner@ ('P._owner', 'P.owner')
     -> P.Resource (RepositoryResource s)
 repositoryResource _name _owner =
     TF.unsafeResource "bitbucket_repository" TF.validator $
