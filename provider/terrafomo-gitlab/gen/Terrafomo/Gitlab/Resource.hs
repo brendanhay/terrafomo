@@ -54,10 +54,9 @@ import GHC.Base (($))
 
 import Terrafomo.Gitlab.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -90,7 +89,7 @@ data DeployKeyResource s = DeployKeyResource'
     , _title   :: TF.Attr s P.Text
     -- ^ @title@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 deployKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
@@ -98,7 +97,7 @@ deployKeyResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (DeployKeyResource s)
 deployKeyResource _key _project _title =
-    TF.newResource "gitlab_deploy_key" TF.validator $
+    TF.unsafeResource "gitlab_deploy_key" P.defaultProvider TF.validator $
         DeployKeyResource'
             { _canPush = TF.value P.False
             , _key = _key
@@ -151,7 +150,7 @@ data GroupResource s = GroupResource'
     , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parentId             :: TF.Attr s P.Integer
+    , _parentId             :: TF.Attr s P.Int
     -- ^ @parent_id@ - (Optional, Forces New)
     --
     , _path                 :: TF.Attr s P.Text
@@ -160,14 +159,14 @@ data GroupResource s = GroupResource'
     , _requestAccessEnabled :: TF.Attr s P.Bool
     -- ^ @request_access_enabled@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 groupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (GroupResource s)
 groupResource _name _path =
-    TF.newResource "gitlab_group" TF.validator $
+    TF.unsafeResource "gitlab_group" P.defaultProvider TF.validator $
         GroupResource'
             { _description = TF.Nil
             , _lfsEnabled = TF.value P.True
@@ -205,9 +204,9 @@ instance P.HasName (GroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: GroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: GroupResource s)
 
-instance P.HasParentId (GroupResource s) (TF.Attr s P.Integer) where
+instance P.HasParentId (GroupResource s) (TF.Attr s P.Int) where
     parentId =
-        P.lens (_parentId :: GroupResource s -> TF.Attr s P.Integer)
+        P.lens (_parentId :: GroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _parentId = a } :: GroupResource s)
 
 instance P.HasPath (GroupResource s) (TF.Attr s P.Text) where
@@ -240,7 +239,7 @@ data LabelResource s = LabelResource'
     , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 labelResource
     :: TF.Attr s P.Text -- ^ @color@ - 'P.color'
@@ -248,7 +247,7 @@ labelResource
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> P.Resource (LabelResource s)
 labelResource _color _name _project =
-    TF.newResource "gitlab_label" TF.validator $
+    TF.unsafeResource "gitlab_label" P.defaultProvider TF.validator $
         LabelResource'
             { _color = _color
             , _description = TF.Nil
@@ -319,13 +318,13 @@ data ProjectResource s = ProjectResource'
     , _wikiEnabled          :: TF.Attr s P.Bool
     -- ^ @wiki_enabled@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
 projectResource _name =
-    TF.newResource "gitlab_project" TF.validator $
+    TF.unsafeResource "gitlab_project" P.defaultProvider TF.validator $
         ProjectResource'
             { _defaultBranch = TF.Nil
             , _description = TF.Nil
@@ -402,7 +401,7 @@ instance P.HasWikiEnabled (ProjectResource s) (TF.Attr s P.Bool) where
 instance s ~ s' => P.HasComputedHttpUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedHttpUrlToRepo x = TF.compute (TF.refKey x) "http_url_to_repo"
 
-instance s ~ s' => P.HasComputedNamespaceId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedNamespaceId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Int) where
     computedNamespaceId x = TF.compute (TF.refKey x) "namespace_id"
 
 instance s ~ s' => P.HasComputedSshUrlToRepo (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
@@ -452,14 +451,14 @@ data ProjectHookResource s = ProjectHookResource'
     , _wikiPageEvents        :: TF.Attr s P.Bool
     -- ^ @wiki_page_events@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectHookResource
     :: TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.Resource (ProjectHookResource s)
 projectHookResource _project _url =
-    TF.newResource "gitlab_project_hook" TF.validator $
+    TF.unsafeResource "gitlab_project_hook" P.defaultProvider TF.validator $
         ProjectHookResource'
             { _enableSslVerification = TF.value P.True
             , _issuesEvents = TF.value P.False
@@ -565,18 +564,18 @@ data ProjectMembershipResource s = ProjectMembershipResource'
     , _projectId   :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    , _userId      :: TF.Attr s P.Integer
+    , _userId      :: TF.Attr s P.Int
     -- ^ @user_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectMembershipResource
     :: TF.Attr s P.Text -- ^ @access_level@ - 'P.accessLevel'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Integer -- ^ @user_id@ - 'P.userId'
+    -> TF.Attr s P.Int -- ^ @user_id@ - 'P.userId'
     -> P.Resource (ProjectMembershipResource s)
 projectMembershipResource _accessLevel _projectId _userId =
-    TF.newResource "gitlab_project_membership" TF.validator $
+    TF.unsafeResource "gitlab_project_membership" P.defaultProvider TF.validator $
         ProjectMembershipResource'
             { _accessLevel = _accessLevel
             , _projectId = _projectId
@@ -603,9 +602,9 @@ instance P.HasProjectId (ProjectMembershipResource s) (TF.Attr s P.Text) where
         P.lens (_projectId :: ProjectMembershipResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: ProjectMembershipResource s)
 
-instance P.HasUserId (ProjectMembershipResource s) (TF.Attr s P.Integer) where
+instance P.HasUserId (ProjectMembershipResource s) (TF.Attr s P.Int) where
     userId =
-        P.lens (_userId :: ProjectMembershipResource s -> TF.Attr s P.Integer)
+        P.lens (_userId :: ProjectMembershipResource s -> TF.Attr s P.Int)
                (\s a -> s { _userId = a } :: ProjectMembershipResource s)
 
 -- | @gitlab_user@ Resource.
@@ -631,7 +630,7 @@ data UserResource s = UserResource'
     , _password         :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    , _projectsLimit    :: TF.Attr s P.Integer
+    , _projectsLimit    :: TF.Attr s P.Int
     -- ^ @projects_limit@ - (Optional)
     --
     , _skipConfirmation :: TF.Attr s P.Bool
@@ -640,7 +639,7 @@ data UserResource s = UserResource'
     , _username         :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
@@ -649,7 +648,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (UserResource s)
 userResource _email _name _password _username =
-    TF.newResource "gitlab_user" TF.validator $
+    TF.unsafeResource "gitlab_user" P.defaultProvider TF.validator $
         UserResource'
             { _canCreateGroup = TF.value P.False
             , _email = _email
@@ -708,9 +707,9 @@ instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
         P.lens (_password :: UserResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: UserResource s)
 
-instance P.HasProjectsLimit (UserResource s) (TF.Attr s P.Integer) where
+instance P.HasProjectsLimit (UserResource s) (TF.Attr s P.Int) where
     projectsLimit =
-        P.lens (_projectsLimit :: UserResource s -> TF.Attr s P.Integer)
+        P.lens (_projectsLimit :: UserResource s -> TF.Attr s P.Int)
                (\s a -> s { _projectsLimit = a } :: UserResource s)
 
 instance P.HasSkipConfirmation (UserResource s) (TF.Attr s P.Bool) where

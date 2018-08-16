@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.Gitlab.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -58,16 +57,16 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/gitlab/d/project.html terraform documentation>
 -- for more information.
 data ProjectData s = ProjectData'
-    { _id :: TF.Attr s P.Integer
+    { _id :: TF.Attr s P.Int
     -- ^ @id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectData
-    :: TF.Attr s P.Integer -- ^ @id@ - 'P.id'
+    :: TF.Attr s P.Int -- ^ @id@ - 'P.id'
     -> P.DataSource (ProjectData s)
 projectData _id =
-    TF.newDataSource "gitlab_project" TF.validator $
+    TF.unsafeDataSource "gitlab_project" P.defaultProvider TF.validator $
         ProjectData'
             { _id = _id
             }
@@ -80,9 +79,9 @@ instance TF.IsObject (ProjectData s) where
 instance TF.IsValid (ProjectData s) where
     validator = P.mempty
 
-instance P.HasId (ProjectData s) (TF.Attr s P.Integer) where
+instance P.HasId (ProjectData s) (TF.Attr s P.Int) where
     id =
-        P.lens (_id :: ProjectData s -> TF.Attr s P.Integer)
+        P.lens (_id :: ProjectData s -> TF.Attr s P.Int)
                (\s a -> s { _id = a } :: ProjectData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
@@ -96,13 +95,13 @@ data UserData s = UserData'
     { _email :: TF.Attr s P.Text
     -- ^ @email@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.DataSource (UserData s)
 userData _email =
-    TF.newDataSource "gitlab_user" TF.validator $
+    TF.unsafeDataSource "gitlab_user" P.defaultProvider TF.validator $
         UserData'
             { _email = _email
             }
