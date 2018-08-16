@@ -164,7 +164,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P
 -- See the <https://www.terraform.io/docs/providers/influxdb/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
-    { _grant    :: TF.Attr s [TF.Attr s (GrantSetting s)]
+    { _admin    :: TF.Attr s P.Bool
+    -- ^ @admin@ - (Optional)
+    --
+    , _grant    :: TF.Attr s [TF.Attr s (GrantSetting s)]
     -- ^ @grant@ - (Optional)
     --
     , _name     :: TF.Attr s P.Text
@@ -183,20 +186,27 @@ userResource
 userResource _name _password =
     TF.unsafeResource "influxdb_user" TF.validator $
         UserResource'
-            { _grant = TF.Nil
+            { _admin = TF.Nil
+            , _grant = TF.Nil
             , _name = _name
             , _password = _password
             }
 
 instance TF.IsObject (UserResource s) where
     toObject UserResource'{..} = P.catMaybes
-        [ TF.assign "grant" <$> TF.attribute _grant
+        [ TF.assign "admin" <$> TF.attribute _admin
+        , TF.assign "grant" <$> TF.attribute _grant
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password" <$> TF.attribute _password
         ]
 
 instance TF.IsValid (UserResource s) where
     validator = P.mempty
+
+instance P.HasAdmin (UserResource s) (TF.Attr s P.Bool) where
+    admin =
+        P.lens (_admin :: UserResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _admin = a } :: UserResource s)
 
 instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (GrantSetting s)]) where
     grant =

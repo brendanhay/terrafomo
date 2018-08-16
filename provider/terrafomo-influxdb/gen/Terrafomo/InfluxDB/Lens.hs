@@ -15,7 +15,8 @@ module Terrafomo.InfluxDB.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasDatabase (..)
+      HasAdmin (..)
+    , HasDatabase (..)
     , HasDefault' (..)
     , HasDuration (..)
     , HasGrant (..)
@@ -37,6 +38,12 @@ import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
+
+class HasAdmin a b | a -> b where
+    admin :: P.Lens' a b
+
+instance HasAdmin a b => HasAdmin (TF.Schema l p a) b where
+    admin = TF.configuration . admin
 
 class HasDatabase a b | a -> b where
     database :: P.Lens' a b
