@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "actionSetting",
+                "smart": "newActionSetting",
                 "name": "ActionSetting'"
             },
             "arguments": [
@@ -104,7 +104,7 @@
         },
         {
             "con": {
-                "smart": "actionsSetting",
+                "smart": "newActionsSetting",
                 "name": "ActionsSetting'"
             },
             "arguments": [
@@ -698,7 +698,7 @@
         },
         {
             "con": {
-                "smart": "correlateSetting",
+                "smart": "newCorrelateSetting",
                 "name": "CorrelateSetting'"
             },
             "arguments": [
@@ -731,8 +731,8 @@
         },
         {
             "con": {
-                "smart": "dataSetting",
-                "name": "DataSetting'"
+                "smart": "newData'Setting",
+                "name": "Data'Setting'"
             },
             "arguments": [
                 {
@@ -1366,17 +1366,17 @@
                 }
             ],
             "key": "cloudflare_record.data",
-            "name": "DataSetting",
+            "name": "Data'Setting",
             "threaded": true,
             "attributes": [],
             "parameters": [],
             "conflicts": [],
-            "type": "DataSetting s",
+            "type": "Data'Setting s",
             "original": "data"
         },
         {
             "con": {
-                "smart": "forwardingUrlSetting",
+                "smart": "newForwardingUrlSetting",
                 "name": "ForwardingUrlSetting'"
             },
             "arguments": [
@@ -1461,7 +1461,7 @@
         },
         {
             "con": {
-                "smart": "headerSetting",
+                "smart": "newHeaderSetting",
                 "name": "HeaderSetting'"
             },
             "arguments": [
@@ -1546,8 +1546,8 @@
         },
         {
             "con": {
-                "smart": "initialSettingsSetting",
-                "name": "InitialSettingsSetting'"
+                "smart": "newInitialSettings",
+                "name": "InitialSettings'"
             },
             "arguments": [
                 {
@@ -2283,7 +2283,7 @@
                 }
             ],
             "key": "cloudflare_zone_settings_override.initial_settings",
-            "name": "InitialSettingsSetting",
+            "name": "InitialSettings",
             "threaded": true,
             "attributes": [
                 {
@@ -3020,12 +3020,12 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "InitialSettingsSetting s",
+            "type": "InitialSettings s",
             "original": "initial_settings"
         },
         {
             "con": {
-                "smart": "matchSetting",
+                "smart": "newMatchSetting",
                 "name": "MatchSetting'"
             },
             "arguments": [
@@ -3110,7 +3110,7 @@
         },
         {
             "con": {
-                "smart": "minifySetting",
+                "smart": "newMinifySetting",
                 "name": "MinifySetting'"
             },
             "arguments": [
@@ -3229,7 +3229,7 @@
         },
         {
             "con": {
-                "smart": "mobileRedirectSetting",
+                "smart": "newMobileRedirectSetting",
                 "name": "MobileRedirectSetting'"
             },
             "arguments": [
@@ -3348,7 +3348,7 @@
         },
         {
             "con": {
-                "smart": "originsSetting",
+                "smart": "newOriginsSetting",
                 "name": "OriginsSetting'"
             },
             "arguments": [
@@ -3450,7 +3450,7 @@
         },
         {
             "con": {
-                "smart": "popPoolsSetting",
+                "smart": "newPopPoolsSetting",
                 "name": "PopPoolsSetting'"
             },
             "arguments": [
@@ -3535,7 +3535,7 @@
         },
         {
             "con": {
-                "smart": "regionPoolsSetting",
+                "smart": "newRegionPoolsSetting",
                 "name": "RegionPoolsSetting'"
             },
             "arguments": [
@@ -3620,7 +3620,7 @@
         },
         {
             "con": {
-                "smart": "requestSetting",
+                "smart": "newRequestSetting",
                 "name": "RequestSetting'"
             },
             "arguments": [
@@ -3739,7 +3739,7 @@
         },
         {
             "con": {
-                "smart": "responseSetting",
+                "smart": "newResponseSetting",
                 "name": "ResponseSetting'"
             },
             "arguments": [
@@ -3893,7 +3893,7 @@
         },
         {
             "con": {
-                "smart": "securityHeaderSetting",
+                "smart": "newSecurityHeaderSetting",
                 "name": "SecurityHeaderSetting'"
             },
             "arguments": [
@@ -4080,8 +4080,8 @@
         },
         {
             "con": {
-                "smart": "settingsSetting",
-                "name": "SettingsSetting'"
+                "smart": "newSettings",
+                "name": "Settings'"
             },
             "arguments": [
                 {
@@ -4817,7 +4817,7 @@
                 }
             ],
             "key": "cloudflare_zone_settings_override.settings",
-            "name": "SettingsSetting",
+            "name": "Settings",
             "threaded": true,
             "attributes": [
                 {
@@ -5554,7 +5554,7 @@
             ],
             "parameters": [],
             "conflicts": [],
-            "type": "SettingsSetting s",
+            "type": "Settings s",
             "original": "settings"
         }
     ],
@@ -7101,7 +7101,7 @@
                             "method": "value"
                         }
                     ],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s)))",
                     "class": "HasData'",
                     "validate": false,
                     "optional": true,
@@ -7465,7 +7465,7 @@
                             "method": "value"
                         }
                     ],
-                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (DataSetting s)))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s)))",
                     "class": "HasData'",
                     "validate": false,
                     "optional": true,
@@ -7704,7 +7704,7 @@
                     "method": "settings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SettingsSetting s)",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasSettings",
                     "validate": true,
                     "optional": true,
@@ -7744,7 +7744,7 @@
                     "method": "computedInitialSettings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (InitialSettingsSetting s)",
+                    "type": "TF.Attr s (InitialSettings s)",
                     "class": "HasComputedInitialSettings",
                     "validate": true,
                     "optional": false,
@@ -7795,7 +7795,7 @@
                     "method": "computedSettings",
                     "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (SettingsSetting s)",
+                    "type": "TF.Attr s (Settings s)",
                     "class": "HasComputedSettings",
                     "validate": true,
                     "optional": false,
