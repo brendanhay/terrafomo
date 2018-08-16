@@ -17,7 +17,6 @@
 --
 module Terrafomo.RabbitMQ.Resource
     (
-    -- * Resource Datatypes
     -- ** rabbitmq_binding
       BindingResource (..)
     , bindingResource
@@ -97,6 +96,7 @@ data BindingResource s = BindingResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_binding@ resource value.
 bindingResource
     :: TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
     -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
@@ -179,6 +179,7 @@ data ExchangeResource s = ExchangeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_exchange@ resource value.
 exchangeResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
@@ -239,6 +240,7 @@ data PermissionsResource s = PermissionsResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_permissions@ resource value.
 permissionsResource
     :: TF.Attr s (PermissionsSetting s) -- ^ @permissions@ - 'P.permissions'
     -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
@@ -299,6 +301,7 @@ data PolicyResource s = PolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_policy@ resource value.
 policyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (PolicySetting s) -- ^ @policy@ - 'P.policy'
@@ -360,6 +363,7 @@ data QueueResource s = QueueResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_queue@ resource value.
 queueResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s (SettingsSetting s) -- ^ @settings@ - 'P.settings'
@@ -420,6 +424,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
@@ -470,6 +475,7 @@ data VhostResource s = VhostResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @rabbitmq_vhost@ resource value.
 vhostResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VhostResource s)

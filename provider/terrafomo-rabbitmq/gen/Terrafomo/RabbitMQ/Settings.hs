@@ -17,7 +17,6 @@
 --
 module Terrafomo.RabbitMQ.Settings
     (
-    -- * Settings Datatypes
     -- ** permissions
       PermissionsSetting (..)
     , newPermissionsSetting
@@ -66,6 +65,7 @@ data PermissionsSetting s = PermissionsSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @permissions@ settings value.
 newPermissionsSetting
     :: TF.Attr s P.Text -- ^ @configure@ - 'P.configure'
     -> TF.Attr s P.Text -- ^ @read@ - 'P.read'
@@ -120,6 +120,7 @@ data PolicySetting s = PolicySetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @policy@ settings value.
 newPolicySetting
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @definition@ - 'P.definition'
     -> TF.Attr s P.Text -- ^ @pattern@ - 'P.pattern''
@@ -188,6 +189,7 @@ data SettingsSetting s = SettingsSetting'
     -- * 'arguments'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @settings@ settings value.
 newSettingsSetting
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> SettingsSetting s

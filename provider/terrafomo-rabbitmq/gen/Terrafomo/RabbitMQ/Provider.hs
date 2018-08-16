@@ -17,11 +17,10 @@
 --
 module Terrafomo.RabbitMQ.Provider
     (
-    -- * RabbitMQ Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * RabbitMQ Specific Aliases
+    -- ** RabbitMQ Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -95,7 +94,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "rabbitmq"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "cacert_file" <$> _cacertFile
             , P.Just $ TF.assign "endpoint" _endpoint

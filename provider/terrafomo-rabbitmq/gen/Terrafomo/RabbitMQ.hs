@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.RabbitMQ
-    ( module Terrafomo.RabbitMQ.Lens
-    , module Terrafomo.RabbitMQ.Provider
-    , module Terrafomo.RabbitMQ.Resource
-    , module Terrafomo.RabbitMQ.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.RabbitMQ.Provider
+
+    -- * Custom Types
     , module Terrafomo.RabbitMQ.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.RabbitMQ.Resource
+
+    -- * Settings
+    , module Terrafomo.RabbitMQ.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.RabbitMQ.Lens
     ) where
 
 import Terrafomo.RabbitMQ.Lens
