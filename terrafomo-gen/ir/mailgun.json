@@ -196,6 +196,23 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"smtp_login\" <$> TF.attribute",
+                    "name": "_smtpLogin",
+                    "method": "smtpLogin",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSmtpLogin",
+                    "validate": false,
+                    "optional": true,
+                    "original": "smtp_login"
+                },
+                {
                     "default": "_smtpPassword",
                     "computed": false,
                     "required": true,
@@ -211,6 +228,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "smtp_password"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"spam_action\" <$> TF.attribute",
+                    "name": "_spamAction",
+                    "method": "spamAction",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSpamAction",
+                    "validate": false,
+                    "optional": true,
+                    "original": "spam_action"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"wildcard\" <$> TF.attribute",
+                    "name": "_wildcard",
+                    "method": "wildcard",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasWildcard",
+                    "validate": false,
+                    "optional": true,
+                    "original": "wildcard"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/mailgun/r/domain.html",
@@ -283,7 +334,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSmtpLogin",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "smtp_login"
                 },
                 {
@@ -300,7 +351,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSpamAction",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "spam_action"
                 },
                 {
@@ -317,7 +368,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedWildcard",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "wildcard"
                 }
             ],
