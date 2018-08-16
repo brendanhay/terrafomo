@@ -17,11 +17,10 @@
 --
 module Terrafomo.DNSMadeEasy.Provider
     (
-    -- * DNSMadeEasy Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * DNSMadeEasy Specific Aliases
+    -- ** DNSMadeEasy Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -90,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "dme"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "akey" _akey
             , P.Just $ TF.assign "skey" _skey

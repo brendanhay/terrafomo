@@ -17,7 +17,6 @@
 --
 module Terrafomo.DNSMadeEasy.Resource
     (
-    -- * Resource Datatypes
     -- ** dme_record
       RecordResource (..)
     , recordResource
@@ -100,6 +99,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @dme_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @domainid@ - 'P.domainid'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
