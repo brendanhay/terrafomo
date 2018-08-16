@@ -17,7 +17,6 @@
 --
 module Terrafomo.ProfitBricks.DataSource
     (
-    -- * DataSource Datatypes
     -- ** profitbricks_datacenter
       DatacenterData (..)
     , datacenterData
@@ -77,6 +76,7 @@ data DatacenterData s = DatacenterData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_datacenter@ datasource value.
 datacenterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatacenterData s)
@@ -128,6 +128,7 @@ data ImageData s = ImageData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_image@ datasource value.
 imageData
     :: P.DataSource (ImageData s)
 imageData =
@@ -186,6 +187,7 @@ data LocationData s = LocationData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_location@ datasource value.
 locationData
     :: P.DataSource (LocationData s)
 locationData =
@@ -230,6 +232,7 @@ data ResourceData s = ResourceData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_resource@ datasource value.
 resourceData
     :: P.DataSource (ResourceData s)
 resourceData =
@@ -277,6 +280,7 @@ data SnapshotData s = SnapshotData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_snapshot@ datasource value.
 snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SnapshotData s)

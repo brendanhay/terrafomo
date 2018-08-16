@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.ProfitBricks
-    ( module Terrafomo.ProfitBricks.DataSource
-    , module Terrafomo.ProfitBricks.Lens
-    , module Terrafomo.ProfitBricks.Provider
-    , module Terrafomo.ProfitBricks.Resource
-    , module Terrafomo.ProfitBricks.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.ProfitBricks.Provider
+
+    -- * Custom Types
     , module Terrafomo.ProfitBricks.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.ProfitBricks.DataSource
+
+    -- * Resources
+    , module Terrafomo.ProfitBricks.Resource
+
+    -- * Settings
+    , module Terrafomo.ProfitBricks.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.ProfitBricks.Lens
     ) where
 
 import Terrafomo.ProfitBricks.DataSource

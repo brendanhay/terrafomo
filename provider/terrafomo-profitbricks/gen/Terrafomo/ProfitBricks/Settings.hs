@@ -17,7 +17,6 @@
 --
 module Terrafomo.ProfitBricks.Settings
     (
-    -- * Settings Datatypes
     -- ** firewall
       FirewallSetting (..)
     , newFirewallSetting
@@ -94,6 +93,7 @@ data FirewallSetting s = FirewallSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @firewall@ settings value.
 newFirewallSetting
     :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> FirewallSetting s
@@ -211,6 +211,7 @@ data NicSetting s = NicSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @nic@ settings value.
 newNicSetting
     :: TF.Attr s P.Int -- ^ @lan@ - 'P.lan'
     -> NicSetting s
@@ -282,6 +283,7 @@ instance s ~ s' => P.HasComputedIps (TF.Ref s' (NicSetting s)) (TF.Attr s [TF.At
 data UsersSetting s = UsersSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @users@ settings value.
 newUsersSetting
     :: UsersSetting s
 newUsersSetting =
@@ -343,6 +345,7 @@ data VolumeSetting s = VolumeSetting'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @volume@ settings value.
 newVolumeSetting
     :: TF.Attr s P.Text -- ^ @image_name@ - 'P.imageName'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'

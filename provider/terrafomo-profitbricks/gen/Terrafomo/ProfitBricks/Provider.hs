@@ -17,11 +17,10 @@
 --
 module Terrafomo.ProfitBricks.Provider
     (
-    -- * ProfitBricks Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * ProfitBricks Specific Aliases
+    -- ** ProfitBricks Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -89,7 +88,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "profitbricks"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "endpoint" <$> _endpoint
             , P.Just $ TF.assign "password" _password

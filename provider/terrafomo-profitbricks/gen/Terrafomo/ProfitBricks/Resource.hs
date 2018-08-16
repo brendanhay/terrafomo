@@ -17,7 +17,6 @@
 --
 module Terrafomo.ProfitBricks.Resource
     (
-    -- * Resource Datatypes
     -- ** profitbricks_datacenter
       DatacenterResource (..)
     , datacenterResource
@@ -109,6 +108,7 @@ data DatacenterResource s = DatacenterResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_datacenter@ resource value.
 datacenterResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -188,6 +188,7 @@ data FirewallResource s = FirewallResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_firewall@ resource value.
 firewallResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @nic_id@ - 'P.nicId'
@@ -318,6 +319,7 @@ data GroupResource s = GroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_group@ resource value.
 groupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (GroupResource s)
@@ -397,6 +399,7 @@ data IpblockResource s = IpblockResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_ipblock@ resource value.
 ipblockResource
     :: TF.Attr s P.Text -- ^ @location@ - 'P.location'
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
@@ -459,6 +462,7 @@ data IpfailoverResource s = IpfailoverResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_ipfailover@ resource value.
 ipfailoverResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @lan_id@ - 'P.lanId'
@@ -524,6 +528,7 @@ data LanResource s = LanResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_lan@ resource value.
 lanResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
@@ -586,6 +591,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_loadbalancer@ resource value.
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @nic_ids@ - 'P.nicIds'
@@ -672,6 +678,7 @@ data NicResource s = NicResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_nic@ resource value.
 nicResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
@@ -785,6 +792,7 @@ data ServerResource s = ServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_server@ resource value.
 serverResource
     :: TF.Attr s P.Int -- ^ @cores@ - 'P.cores'
     -> TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
@@ -905,6 +913,7 @@ data ShareResource s = ShareResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_share@ resource value.
 shareResource
     :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
     -> TF.Attr s P.Text -- ^ @resource_id@ - 'P.resourceId'
@@ -970,6 +979,7 @@ data SnapshotResource s = SnapshotResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_snapshot@ resource value.
 snapshotResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
@@ -1036,6 +1046,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_user@ resource value.
 userResource
     :: TF.Attr s P.Bool -- ^ @administrator@ - 'P.administrator'
     -> TF.Attr s P.Bool -- ^ @force_sec_auth@ - 'P.forceSecAuth'
@@ -1141,6 +1152,7 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @profitbricks_volume@ resource value.
 volumeResource
     :: TF.Attr s P.Text -- ^ @datacenter_id@ - 'P.datacenterId'
     -> TF.Attr s P.Text -- ^ @server_id@ - 'P.serverId'
