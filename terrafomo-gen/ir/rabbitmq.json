@@ -200,23 +200,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_applyTo",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"apply_to\" <$> TF.attribute",
-                    "name": "_applyTo",
-                    "method": "applyTo",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasApplyTo",
-                    "validate": false,
-                    "optional": false,
-                    "original": "apply_to"
-                },
-                {
                     "default": "_definition",
                     "computed": false,
                     "required": true,
@@ -266,6 +249,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "priority"
+                },
+                {
+                    "default": "_applyTo",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"apply_to\" <$> TF.attribute",
+                    "name": "_applyTo",
+                    "method": "applyTo",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasApplyTo",
+                    "validate": false,
+                    "optional": false,
+                    "original": "apply_to"
                 }
             ],
             "conflicts": [],
@@ -576,23 +576,6 @@
                     "original": "destination"
                 },
                 {
-                    "default": "_destinationType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"destination_type\" <$> TF.attribute",
-                    "name": "_destinationType",
-                    "method": "destinationType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDestinationType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "destination_type"
-                },
-                {
                     "default": "_source",
                     "computed": false,
                     "required": true,
@@ -608,6 +591,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "source"
+                },
+                {
+                    "default": "_destinationType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"destination_type\" <$> TF.attribute",
+                    "name": "_destinationType",
+                    "method": "destinationType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDestinationType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "destination_type"
                 },
                 {
                     "default": "_vhost",
