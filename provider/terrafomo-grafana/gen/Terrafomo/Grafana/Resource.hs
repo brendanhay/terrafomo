@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.Grafana.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -72,20 +71,20 @@ data AlertNotificationResource s = AlertNotificationResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _settings  :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _settings  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @settings@ - (Optional)
     --
     , _type'     :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 alertNotificationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (AlertNotificationResource s)
 alertNotificationResource _name _type' =
-    TF.newResource "grafana_alert_notification" TF.validator $
+    TF.unsafeResource "grafana_alert_notification" P.defaultProvider TF.validator $
         AlertNotificationResource'
             { _isDefault = TF.value P.False
             , _name = _name
@@ -114,9 +113,9 @@ instance P.HasName (AlertNotificationResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AlertNotificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AlertNotificationResource s)
 
-instance P.HasSettings (AlertNotificationResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasSettings (AlertNotificationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     settings =
-        P.lens (_settings :: AlertNotificationResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_settings :: AlertNotificationResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _settings = a } :: AlertNotificationResource s)
 
 instance P.HasType' (AlertNotificationResource s) (TF.Attr s P.Text) where
@@ -135,13 +134,13 @@ data DashboardResource s = DashboardResource'
     { _configJson :: TF.Attr s P.Text
     -- ^ @config_json@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dashboardResource
     :: TF.Attr s P.Text -- ^ @config_json@ - 'P.configJson'
     -> P.Resource (DashboardResource s)
 dashboardResource _configJson =
-    TF.newResource "grafana_dashboard" TF.validator $
+    TF.unsafeResource "grafana_dashboard" P.defaultProvider TF.validator $
         DashboardResource'
             { _configJson = _configJson
             }
@@ -185,7 +184,7 @@ data DataSourceResource s = DataSourceResource'
     , _isDefault         :: TF.Attr s P.Bool
     -- ^ @is_default@ - (Optional)
     --
-    , _jsonData          :: TF.Attr s [TF.Attr s (DataSourceJsonData s)]
+    , _jsonData          :: TF.Attr s [TF.Attr s (JsonDataSetting s)]
     -- ^ @json_data@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
@@ -194,7 +193,7 @@ data DataSourceResource s = DataSourceResource'
     , _password          :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _secureJsonData    :: TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]
+    , _secureJsonData    :: TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]
     -- ^ @secure_json_data@ - (Optional)
     --
     , _type'             :: TF.Attr s P.Text
@@ -206,14 +205,14 @@ data DataSourceResource s = DataSourceResource'
     , _username          :: TF.Attr s P.Text
     -- ^ @username@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 dataSourceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (DataSourceResource s)
 dataSourceResource _name _type' =
-    TF.newResource "grafana_data_source" TF.validator $
+    TF.unsafeResource "grafana_data_source" P.defaultProvider TF.validator $
         DataSourceResource'
             { _accessMode = TF.value "proxy"
             , _basicAuthEnabled = TF.value P.False
@@ -249,14 +248,6 @@ instance TF.IsObject (DataSourceResource s) where
 
 instance TF.IsValid (DataSourceResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_jsonData"
-                  (_jsonData
-                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonData s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_secureJsonData"
-                  (_secureJsonData
-                      :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)])
-                  TF.validator
 
 instance P.HasAccessMode (DataSourceResource s) (TF.Attr s P.Text) where
     accessMode =
@@ -288,9 +279,9 @@ instance P.HasIsDefault (DataSourceResource s) (TF.Attr s P.Bool) where
         P.lens (_isDefault :: DataSourceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isDefault = a } :: DataSourceResource s)
 
-instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceJsonData s)]) where
+instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (JsonDataSetting s)]) where
     jsonData =
-        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonData s)])
+        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonDataSetting s)])
                (\s a -> s { _jsonData = a } :: DataSourceResource s)
 
 instance P.HasName (DataSourceResource s) (TF.Attr s P.Text) where
@@ -303,9 +294,9 @@ instance P.HasPassword (DataSourceResource s) (TF.Attr s P.Text) where
         P.lens (_password :: DataSourceResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]) where
+instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]) where
     secureJsonData =
-        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)])
+        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonDataSetting s)])
                (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
 
 instance P.HasType' (DataSourceResource s) (TF.Attr s P.Text) where
@@ -349,13 +340,13 @@ data OrganizationResource s = OrganizationResource'
     , _viewers     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @viewers@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
-    TF.newResource "grafana_organization" TF.validator $
+    TF.unsafeResource "grafana_organization" P.defaultProvider TF.validator $
         OrganizationResource'
             { _adminUser = TF.value "admin"
             , _admins = TF.Nil
@@ -408,5 +399,5 @@ instance P.HasViewers (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) wh
         P.lens (_viewers :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _viewers = a } :: OrganizationResource s)
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Int) where
     computedOrgId x = TF.compute (TF.refKey x) "org_id"
