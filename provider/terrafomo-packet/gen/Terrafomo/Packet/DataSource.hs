@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Packet.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -54,7 +53,7 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/packet/d/precreated_ip_block.html terraform documentation>
 -- for more information.
 data PrecreatedIpBlockData s = PrecreatedIpBlockData'
-    { _addressFamily :: TF.Attr s P.Integer
+    { _addressFamily :: TF.Attr s P.Int
     -- ^ @address_family@ - (Required)
     --
     , _facility      :: TF.Attr s P.Text
@@ -66,16 +65,16 @@ data PrecreatedIpBlockData s = PrecreatedIpBlockData'
     , _public        :: TF.Attr s P.Bool
     -- ^ @public@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 precreatedIpBlockData
-    :: TF.Attr s P.Integer -- ^ @address_family@ - 'P.addressFamily'
+    :: TF.Attr s P.Int -- ^ @address_family@ - 'P.addressFamily'
     -> TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
     -> P.DataSource (PrecreatedIpBlockData s)
 precreatedIpBlockData _addressFamily _facility _projectId _public =
-    TF.newDataSource "packet_precreated_ip_block" TF.validator $
+    TF.unsafeDataSource "packet_precreated_ip_block" P.defaultProvider TF.validator $
         PrecreatedIpBlockData'
             { _addressFamily = _addressFamily
             , _facility = _facility
@@ -94,9 +93,9 @@ instance TF.IsObject (PrecreatedIpBlockData s) where
 instance TF.IsValid (PrecreatedIpBlockData s) where
     validator = P.mempty
 
-instance P.HasAddressFamily (PrecreatedIpBlockData s) (TF.Attr s P.Integer) where
+instance P.HasAddressFamily (PrecreatedIpBlockData s) (TF.Attr s P.Int) where
     addressFamily =
-        P.lens (_addressFamily :: PrecreatedIpBlockData s -> TF.Attr s P.Integer)
+        P.lens (_addressFamily :: PrecreatedIpBlockData s -> TF.Attr s P.Int)
                (\s a -> s { _addressFamily = a } :: PrecreatedIpBlockData s)
 
 instance P.HasFacility (PrecreatedIpBlockData s) (TF.Attr s P.Text) where
@@ -120,7 +119,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Att
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Int) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
 instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
@@ -141,5 +140,5 @@ instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (PrecreatedIpBlockData s)) (T
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedQuantity (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedQuantity (TF.Ref s' (PrecreatedIpBlockData s)) (TF.Attr s P.Int) where
     computedQuantity x = TF.compute (TF.refKey x) "quantity"

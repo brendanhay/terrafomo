@@ -58,10 +58,9 @@ import GHC.Base (($))
 
 import Terrafomo.Packet.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -118,7 +117,7 @@ data DeviceResource s = DeviceResource'
     , _userData        :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 deviceResource
     :: TF.Attr s P.Text -- ^ @billing_cycle@ - 'P.billingCycle'
@@ -129,7 +128,7 @@ deviceResource
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (DeviceResource s)
 deviceResource _billingCycle _facility _hostname _operatingSystem _plan _projectId =
-    TF.newResource "packet_device" TF.validator $
+    TF.unsafeResource "packet_device" P.defaultProvider TF.validator $
         DeviceResource'
             { _alwaysPxe = TF.value P.False
             , _billingCycle = _billingCycle
@@ -242,10 +241,10 @@ instance s ~ s' => P.HasComputedHardwareReservationId (TF.Ref s' (DeviceResource
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Bool) where
     computedLocked x = TF.compute (TF.refKey x) "locked"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (DeviceNetwork s)]) where
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Int) where
     computedPublicIpv4SubnetSize x = TF.compute (TF.refKey x) "public_ipv4_subnet_size"
 
 instance s ~ s' => P.HasComputedRootPassword (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
@@ -268,14 +267,14 @@ data IpAttachmentResource s = IpAttachmentResource'
     , _deviceId     :: TF.Attr s P.Text
     -- ^ @device_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 ipAttachmentResource
     :: TF.Attr s P.Text -- ^ @cidr_notation@ - 'P.cidrNotation'
     -> TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> P.Resource (IpAttachmentResource s)
 ipAttachmentResource _cidrNotation _deviceId =
-    TF.newResource "packet_ip_attachment" TF.validator $
+    TF.unsafeResource "packet_ip_attachment" P.defaultProvider TF.validator $
         IpAttachmentResource'
             { _cidrNotation = _cidrNotation
             , _deviceId = _deviceId
@@ -303,10 +302,10 @@ instance P.HasDeviceId (IpAttachmentResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Int) where
     computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Int) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
 instance s ~ s' => P.HasComputedGateway (TF.Ref s' (IpAttachmentResource s)) (TF.Attr s P.Text) where
@@ -347,13 +346,13 @@ data OrganizationResource s = OrganizationResource'
     , _website     :: TF.Attr s P.Text
     -- ^ @website@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
-    TF.newResource "packet_organization" TF.validator $
+    TF.unsafeResource "packet_organization" P.defaultProvider TF.validator $
         OrganizationResource'
             { _description = TF.Nil
             , _logo = TF.Nil
@@ -413,13 +412,13 @@ data ProjectResource s = ProjectResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
 projectResource _name =
-    TF.newResource "packet_project" TF.validator $
+    TF.unsafeResource "packet_project" P.defaultProvider TF.validator $
         ProjectResource'
             { _name = _name
             }
@@ -460,18 +459,18 @@ data ReservedIpBlockResource s = ReservedIpBlockResource'
     , _projectId :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    , _quantity  :: TF.Attr s P.Integer
+    , _quantity  :: TF.Attr s P.Int
     -- ^ @quantity@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 reservedIpBlockResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Integer -- ^ @quantity@ - 'P.quantity'
+    -> TF.Attr s P.Int -- ^ @quantity@ - 'P.quantity'
     -> P.Resource (ReservedIpBlockResource s)
 reservedIpBlockResource _facility _projectId _quantity =
-    TF.newResource "packet_reserved_ip_block" TF.validator $
+    TF.unsafeResource "packet_reserved_ip_block" P.defaultProvider TF.validator $
         ReservedIpBlockResource'
             { _facility = _facility
             , _projectId = _projectId
@@ -498,18 +497,18 @@ instance P.HasProjectId (ReservedIpBlockResource s) (TF.Attr s P.Text) where
         P.lens (_projectId :: ReservedIpBlockResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: ReservedIpBlockResource s)
 
-instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Integer) where
+instance P.HasQuantity (ReservedIpBlockResource s) (TF.Attr s P.Int) where
     quantity =
-        P.lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s P.Integer)
+        P.lens (_quantity :: ReservedIpBlockResource s -> TF.Attr s P.Int)
                (\s a -> s { _quantity = a } :: ReservedIpBlockResource s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedAddressFamily (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Int) where
     computedAddressFamily x = TF.compute (TF.refKey x) "address_family"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Int) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
 instance s ~ s' => P.HasComputedCidrNotation (TF.Ref s' (ReservedIpBlockResource s)) (TF.Attr s P.Text) where
@@ -544,14 +543,14 @@ data SshKeyResource s = SshKeyResource'
     , _publicKey :: TF.Attr s P.Text
     -- ^ @public_key@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
-    TF.newResource "packet_ssh_key" TF.validator $
+    TF.unsafeResource "packet_ssh_key" P.defaultProvider TF.validator $
         SshKeyResource'
             { _name = _name
             , _publicKey = _publicKey
@@ -605,22 +604,22 @@ data VolumeResource s = VolumeResource'
     , _projectId        :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
     --
-    , _size             :: TF.Attr s P.Integer
+    , _size             :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
-    , _snapshotPolicies :: TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)]
+    , _snapshotPolicies :: TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)]
     -- ^ @snapshot_policies@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeResource
     :: TF.Attr s P.Text -- ^ @facility@ - 'P.facility'
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Integer -- ^ @size@ - 'P.size'
+    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (VolumeResource s)
 volumeResource _facility _plan _projectId _size =
-    TF.newResource "packet_volume" TF.validator $
+    TF.unsafeResource "packet_volume" P.defaultProvider TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _facility = _facility
@@ -644,10 +643,6 @@ instance TF.IsObject (VolumeResource s) where
 
 instance TF.IsValid (VolumeResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_snapshotPolicies"
-                  (_snapshotPolicies
-                      :: VolumeResource s -> TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)])
-                  TF.validator
 
 instance P.HasDescription (VolumeResource s) (TF.Attr s P.Text) where
     description =
@@ -674,17 +669,17 @@ instance P.HasProjectId (VolumeResource s) (TF.Attr s P.Text) where
         P.lens (_projectId :: VolumeResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: VolumeResource s)
 
-instance P.HasSize (VolumeResource s) (TF.Attr s P.Integer) where
+instance P.HasSize (VolumeResource s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: VolumeResource s -> TF.Attr s P.Integer)
+        P.lens (_size :: VolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)]) where
+instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)]) where
     snapshotPolicies =
-        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)])
+        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)])
                (\s a -> s { _snapshotPolicies = a } :: VolumeResource s)
 
-instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (VolumeAttachments s)]) where
+instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (AttachmentsSetting s)]) where
     computedAttachments x = TF.compute (TF.refKey x) "attachments"
 
 instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
@@ -713,14 +708,14 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     , _volumeId :: TF.Attr s P.Text
     -- ^ @volume_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (VolumeAttachmentResource s)
 volumeAttachmentResource _deviceId _volumeId =
-    TF.newResource "packet_volume_attachment" TF.validator $
+    TF.unsafeResource "packet_volume_attachment" P.defaultProvider TF.validator $
         VolumeAttachmentResource'
             { _deviceId = _deviceId
             , _volumeId = _volumeId
