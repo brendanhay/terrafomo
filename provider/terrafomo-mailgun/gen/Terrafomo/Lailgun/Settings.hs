@@ -17,7 +17,6 @@
 --
 module Terrafomo.Lailgun.Settings
     (
-    -- * Settings Datatypes
     -- ** receiving_records
       ReceivingRecordsSetting (..)
     , newReceivingRecordsSetting
@@ -53,6 +52,7 @@ import qualified Terrafomo.Validator     as TF
 data ReceivingRecordsSetting s = ReceivingRecordsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @receiving_records@ settings value.
 newReceivingRecordsSetting
     :: ReceivingRecordsSetting s
 newReceivingRecordsSetting =
@@ -81,6 +81,7 @@ instance s ~ s' => P.HasComputedValue (TF.Ref s' (ReceivingRecordsSetting s)) (T
 data SendingRecordsSetting s = SendingRecordsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @sending_records@ settings value.
 newSendingRecordsSetting
     :: SendingRecordsSetting s
 newSendingRecordsSetting =

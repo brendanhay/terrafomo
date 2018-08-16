@@ -17,7 +17,6 @@
 --
 module Terrafomo.Lailgun.Resource
     (
-    -- * Resource Datatypes
     -- ** mailgun_domain
       DomainResource (..)
     , domainResource
@@ -61,6 +60,7 @@ data DomainResource s = DomainResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @mailgun_domain@ resource value.
 domainResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @smtp_password@ - 'P.smtpPassword'

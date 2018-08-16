@@ -17,11 +17,10 @@
 --
 module Terrafomo.Lailgun.Provider
     (
-    -- * Lailgun Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Lailgun Specific Aliases
+    -- ** Lailgun Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -77,7 +76,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "mailgun"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "api_key" _apiKey
             ]
