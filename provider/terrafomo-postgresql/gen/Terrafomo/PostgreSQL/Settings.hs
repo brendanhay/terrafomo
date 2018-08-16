@@ -17,7 +17,6 @@
 --
 module Terrafomo.PostgreSQL.Settings
     (
-    -- * Settings Datatypes
     -- ** policy
       PolicySetting (..)
     , newPolicySetting
@@ -84,6 +83,7 @@ data PolicySetting s = PolicySetting'
     -- * 'usage'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Construct a new @policy@ settings value.
 newPolicySetting
     :: PolicySetting s
 newPolicySetting =

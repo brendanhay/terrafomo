@@ -17,7 +17,6 @@
 --
 module Terrafomo.PostgreSQL.Resource
     (
-    -- * Resource Datatypes
     -- ** postgresql_database
       DatabaseResource (..)
     , databaseResource
@@ -79,6 +78,7 @@ data DatabaseResource s = DatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @postgresql_database@ resource value.
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
@@ -149,6 +149,7 @@ data ExtensionResource s = ExtensionResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @postgresql_extension@ resource value.
 extensionResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ExtensionResource s)
@@ -243,6 +244,7 @@ data RoleResource s = RoleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @postgresql_role@ resource value.
 roleResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (RoleResource s)
@@ -370,6 +372,7 @@ data SchemaResource s = SchemaResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @postgresql_schema@ resource value.
 schemaResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SchemaResource s)
