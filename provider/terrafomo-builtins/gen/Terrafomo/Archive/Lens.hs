@@ -19,6 +19,7 @@ module Terrafomo.Archive.Lens
     , HasExcludes (..)
     , HasFilename (..)
     , HasOutputPath (..)
+    , HasSource (..)
     , HasSourceContent (..)
     , HasSourceContentFilename (..)
     , HasSourceDir (..)
@@ -62,6 +63,12 @@ class HasOutputPath a b | a -> b where
 
 instance HasOutputPath a b => HasOutputPath (TF.Schema l p a) b where
     outputPath = TF.configuration . outputPath
+
+class HasSource a b | a -> b where
+    source :: P.Lens' a b
+
+instance HasSource a b => HasSource (TF.Schema l p a) b where
+    source = TF.configuration . source
 
 class HasSourceContent a b | a -> b where
     sourceContent :: P.Lens' a b

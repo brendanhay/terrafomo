@@ -63,12 +63,22 @@ data FileResource s = FileResource'
     , _outputPath            :: TF.Attr s P.Text
     -- ^ @output_path@ - (Required, Forces New)
     --
+    , _source                :: TF.Attr s [TF.Attr s (SourceSetting s)]
+    -- ^ @source@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sourceContent'
+    -- * 'sourceContentFilename'
+    -- * 'sourceDir'
+    -- * 'sourceFile'
     , _sourceContent         :: TF.Attr s P.Text
     -- ^ @source_content@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'excludes'
+    -- * 'source'
     -- * 'sourceDir'
     -- * 'sourceFile'
     , _sourceContentFilename :: TF.Attr s P.Text
@@ -77,6 +87,7 @@ data FileResource s = FileResource'
     -- Conflicts with:
     --
     -- * 'excludes'
+    -- * 'source'
     -- * 'sourceDir'
     -- * 'sourceFile'
     , _sourceDir             :: TF.Attr s P.Text
@@ -84,6 +95,7 @@ data FileResource s = FileResource'
     --
     -- Conflicts with:
     --
+    -- * 'source'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
     -- * 'sourceFile'
@@ -93,6 +105,7 @@ data FileResource s = FileResource'
     -- Conflicts with:
     --
     -- * 'excludes'
+    -- * 'source'
     -- * 'sourceContent'
     -- * 'sourceContentFilename'
     -- * 'sourceDir'
@@ -111,6 +124,7 @@ fileResource _outputPath _type' =
         FileResource'
             { _excludes = TF.Nil
             , _outputPath = _outputPath
+            , _source = TF.Nil
             , _sourceContent = TF.Nil
             , _sourceContentFilename = TF.Nil
             , _sourceDir = TF.Nil
@@ -122,6 +136,7 @@ instance TF.IsObject (FileResource s) where
     toObject FileResource'{..} = P.catMaybes
         [ TF.assign "excludes" <$> TF.attribute _excludes
         , TF.assign "output_path" <$> TF.attribute _outputPath
+        , TF.assign "source" <$> TF.attribute _source
         , TF.assign "source_content" <$> TF.attribute _sourceContent
         , TF.assign "source_content_filename" <$> TF.attribute _sourceContentFilename
         , TF.assign "source_dir" <$> TF.attribute _sourceDir
@@ -136,25 +151,30 @@ instance TF.IsValid (FileResource s) where
               else P.Just ("_excludes",
                             [ "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceFile"
                             ])
+        , if (_source P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_source",
+                            [ "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceDir"                            , "_sourceFile"
+                            ])
         , if (_sourceContent P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceContent",
-                            [ "_excludes"                            , "_sourceDir"                            , "_sourceFile"
+                            [ "_excludes"                            , "_source"                            , "_sourceDir"                            , "_sourceFile"
                             ])
         , if (_sourceContentFilename P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceContentFilename",
-                            [ "_excludes"                            , "_sourceDir"                            , "_sourceFile"
+                            [ "_excludes"                            , "_source"                            , "_sourceDir"                            , "_sourceFile"
                             ])
         , if (_sourceDir P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceDir",
-                            [ "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceFile"
+                            [ "_source"                            , "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceFile"
                             ])
         , if (_sourceFile P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceFile",
-                            [ "_excludes"                            , "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceDir"
+                            [ "_excludes"                            , "_source"                            , "_sourceContent"                            , "_sourceContentFilename"                            , "_sourceDir"
                             ])
         ])
 
@@ -167,6 +187,11 @@ instance P.HasOutputPath (FileResource s) (TF.Attr s P.Text) where
     outputPath =
         P.lens (_outputPath :: FileResource s -> TF.Attr s P.Text)
                (\s a -> s { _outputPath = a } :: FileResource s)
+
+instance P.HasSource (FileResource s) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
+    source =
+        P.lens (_source :: FileResource s -> TF.Attr s [TF.Attr s (SourceSetting s)])
+               (\s a -> s { _source = a } :: FileResource s)
 
 instance P.HasSourceContent (FileResource s) (TF.Attr s P.Text) where
     sourceContent =
