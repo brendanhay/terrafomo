@@ -50,10 +50,9 @@ import GHC.Base (($))
 
 import Terrafomo.Icinga2.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -74,7 +73,7 @@ import qualified Terrafomo.Validator        as TF
 -- See the <https://www.terraform.io/docs/providers/icinga2/r/checkcommand.html terraform documentation>
 -- for more information.
 data CheckcommandResource s = CheckcommandResource'
-    { _arguments :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    { _arguments :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @arguments@ - (Optional, Forces New)
     --
     , _command   :: TF.Attr s P.Text
@@ -87,7 +86,7 @@ data CheckcommandResource s = CheckcommandResource'
     , _templates :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @templates@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 checkcommandResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
@@ -95,7 +94,7 @@ checkcommandResource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @templates@ - 'P.templates'
     -> P.Resource (CheckcommandResource s)
 checkcommandResource _command _name _templates =
-    TF.newResource "icinga2_checkcommand" TF.validator $
+    TF.unsafeResource "icinga2_checkcommand" P.defaultProvider TF.validator $
         CheckcommandResource'
             { _arguments = TF.Nil
             , _command = _command
@@ -114,9 +113,9 @@ instance TF.IsObject (CheckcommandResource s) where
 instance TF.IsValid (CheckcommandResource s) where
     validator = P.mempty
 
-instance P.HasArguments (CheckcommandResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasArguments (CheckcommandResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     arguments =
-        P.lens (_arguments :: CheckcommandResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_arguments :: CheckcommandResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _arguments = a } :: CheckcommandResource s)
 
 instance P.HasCommand (CheckcommandResource s) (TF.Attr s P.Text) where
@@ -155,10 +154,10 @@ data HostResource s = HostResource'
     , _templates    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @templates@ - (Optional, Forces New)
     --
-    , _vars         :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _vars         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @vars@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 hostResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
@@ -166,7 +165,7 @@ hostResource
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> P.Resource (HostResource s)
 hostResource _address _checkCommand _hostname =
-    TF.newResource "icinga2_host" TF.validator $
+    TF.unsafeResource "icinga2_host" P.defaultProvider TF.validator $
         HostResource'
             { _address = _address
             , _checkCommand = _checkCommand
@@ -214,9 +213,9 @@ instance P.HasTemplates (HostResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_templates :: HostResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _templates = a } :: HostResource s)
 
-instance P.HasVars (HostResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasVars (HostResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     vars =
-        P.lens (_vars :: HostResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_vars :: HostResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: HostResource s)
 
 -- | @icinga2_hostgroup@ Resource.
@@ -232,14 +231,14 @@ data HostgroupResource s = HostgroupResource'
     -- ^ @name@ - (Required, Forces New)
     -- Name
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 hostgroupResource
     :: TF.Attr s P.Text -- ^ @display_name@ - 'P.displayName'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (HostgroupResource s)
 hostgroupResource _displayName _name =
-    TF.newResource "icinga2_hostgroup" TF.validator $
+    TF.unsafeResource "icinga2_hostgroup" P.defaultProvider TF.validator $
         HostgroupResource'
             { _displayName = _displayName
             , _name = _name
@@ -275,7 +274,7 @@ data NotificationResource s = NotificationResource'
     , _hostname    :: TF.Attr s P.Text
     -- ^ @hostname@ - (Required, Forces New)
     --
-    , _interval    :: TF.Attr s P.Integer
+    , _interval    :: TF.Attr s P.Int
     -- ^ @interval@ - (Optional, Forces New)
     --
     , _servicename :: TF.Attr s P.Text
@@ -287,17 +286,17 @@ data NotificationResource s = NotificationResource'
     , _users       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @users@ - (Optional, Forces New)
     --
-    , _vars        :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _vars        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @vars@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 notificationResource
     :: TF.Attr s P.Text -- ^ @command@ - 'P.command'
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> P.Resource (NotificationResource s)
 notificationResource _command _hostname =
-    TF.newResource "icinga2_notification" TF.validator $
+    TF.unsafeResource "icinga2_notification" P.defaultProvider TF.validator $
         NotificationResource'
             { _command = _command
             , _hostname = _hostname
@@ -332,9 +331,9 @@ instance P.HasHostname (NotificationResource s) (TF.Attr s P.Text) where
         P.lens (_hostname :: NotificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _hostname = a } :: NotificationResource s)
 
-instance P.HasInterval (NotificationResource s) (TF.Attr s P.Integer) where
+instance P.HasInterval (NotificationResource s) (TF.Attr s P.Int) where
     interval =
-        P.lens (_interval :: NotificationResource s -> TF.Attr s P.Integer)
+        P.lens (_interval :: NotificationResource s -> TF.Attr s P.Int)
                (\s a -> s { _interval = a } :: NotificationResource s)
 
 instance P.HasServicename (NotificationResource s) (TF.Attr s P.Text) where
@@ -352,9 +351,9 @@ instance P.HasUsers (NotificationResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_users :: NotificationResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _users = a } :: NotificationResource s)
 
-instance P.HasVars (NotificationResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasVars (NotificationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     vars =
-        P.lens (_vars :: NotificationResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_vars :: NotificationResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _vars = a } :: NotificationResource s)
 
 -- | @icinga2_service@ Resource.
@@ -374,7 +373,7 @@ data ServiceResource s = ServiceResource'
     -- ^ @name@ - (Required, Forces New)
     -- ServiceName
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceResource
     :: TF.Attr s P.Text -- ^ @check_command@ - 'P.checkCommand'
@@ -382,7 +381,7 @@ serviceResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServiceResource s)
 serviceResource _checkCommand _hostname _name =
-    TF.newResource "icinga2_service" TF.validator $
+    TF.unsafeResource "icinga2_service" P.defaultProvider TF.validator $
         ServiceResource'
             { _checkCommand = _checkCommand
             , _hostname = _hostname
@@ -426,13 +425,13 @@ data UserResource s = UserResource'
     -- ^ @name@ - (Required, Forces New)
     -- Username
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (UserResource s)
 userResource _name =
-    TF.newResource "icinga2_user" TF.validator $
+    TF.unsafeResource "icinga2_user" P.defaultProvider TF.validator $
         UserResource'
             { _email = TF.Nil
             , _name = _name

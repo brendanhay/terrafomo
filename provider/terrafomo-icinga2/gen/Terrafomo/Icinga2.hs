@@ -13,9 +13,9 @@
 --
 module Terrafomo.Icinga2
     ( module Terrafomo.Icinga2.Lens
-    , module Terrafomo.Icinga2.Settings
     , module Terrafomo.Icinga2.Provider
     , module Terrafomo.Icinga2.Resource
+    , module Terrafomo.Icinga2.Settings
     , module Terrafomo.Icinga2.Types
     -- * Provider Aliases
     ) where
