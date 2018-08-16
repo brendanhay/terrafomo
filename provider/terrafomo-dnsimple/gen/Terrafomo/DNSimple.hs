@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.DNSimple
-    ( module Terrafomo.DNSimple.Lens
-    , module Terrafomo.DNSimple.Provider
-    , module Terrafomo.DNSimple.Resource
-    , module Terrafomo.DNSimple.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.DNSimple.Provider
+
+    -- * Custom Types
     , module Terrafomo.DNSimple.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.DNSimple.Resource
+
+    -- * Settings
+    , module Terrafomo.DNSimple.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.DNSimple.Lens
     ) where
 
 import Terrafomo.DNSimple.Lens

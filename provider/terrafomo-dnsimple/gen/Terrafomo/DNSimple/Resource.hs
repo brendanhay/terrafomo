@@ -17,7 +17,6 @@
 --
 module Terrafomo.DNSimple.Resource
     (
-    -- * Resource Datatypes
     -- ** dnsimple_record
       RecordResource (..)
     , recordResource
@@ -70,6 +69,7 @@ data RecordResource s = RecordResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @dnsimple_record@ resource value.
 recordResource
     :: TF.Attr s P.Text -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
