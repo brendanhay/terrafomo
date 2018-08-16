@@ -291,6 +291,83 @@
                     "original": "connection_limit"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Character set encoding to use in the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"encoding\" <$> TF.attribute",
+                    "name": "_encoding",
+                    "method": "encoding",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasEncoding",
+                    "validate": false,
+                    "optional": true,
+                    "original": "encoding"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "If true, then this database can be cloned by any user with CREATEDB",
+                        "privileges"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"is_template\" <$> TF.attribute",
+                    "name": "_isTemplate",
+                    "method": "isTemplate",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasIsTemplate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "is_template"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Collation order (LC_COLLATE) to use in the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"lc_collate\" <$> TF.attribute",
+                    "name": "_lcCollate",
+                    "method": "lcCollate",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLcCollate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lc_collate"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Character classification (LC_CTYPE) to use in the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"lc_ctype\" <$> TF.attribute",
+                    "name": "_lcCtype",
+                    "method": "lcCtype",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasLcCtype",
+                    "validate": false,
+                    "optional": true,
+                    "original": "lc_ctype"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -308,6 +385,63 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ROLE which owns the database"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owner\" <$> TF.attribute",
+                    "name": "_owner",
+                    "method": "owner",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOwner",
+                    "validate": false,
+                    "optional": true,
+                    "original": "owner"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The name of the tablespace that will be associated with the new database"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tablespace_name\" <$> TF.attribute",
+                    "name": "_tablespaceName",
+                    "method": "tablespaceName",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTablespaceName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tablespace_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The name of the template from which to create the new database"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"template\" <$> TF.attribute",
+                    "name": "_template",
+                    "method": "template",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTemplate",
+                    "validate": false,
+                    "optional": true,
+                    "original": "template"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/database.html",
@@ -348,7 +482,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedEncoding",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "encoding"
                 },
                 {
@@ -368,7 +502,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedIsTemplate",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "is_template"
                 },
                 {
@@ -387,7 +521,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLcCollate",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lc_collate"
                 },
                 {
@@ -406,7 +540,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedLcCtype",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "lc_ctype"
                 },
                 {
@@ -425,7 +559,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOwner",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "owner"
                 },
                 {
@@ -444,7 +578,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTablespaceName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tablespace_name"
                 },
                 {
@@ -463,7 +597,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTemplate",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "template"
                 }
             ],
@@ -514,6 +648,44 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Sets the schema of an extension"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"schema\" <$> TF.attribute",
+                    "name": "_schema",
+                    "method": "schema",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSchema",
+                    "validate": false,
+                    "optional": true,
+                    "original": "schema"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Sets the version number of the extension"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"version\" <$> TF.attribute",
+                    "name": "_version",
+                    "method": "version",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVersion",
+                    "validate": false,
+                    "optional": true,
+                    "original": "version"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/extension.html",
@@ -554,7 +726,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedSchema",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "schema"
                 },
                 {
@@ -573,7 +745,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVersion",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "version"
                 }
             ],
@@ -760,6 +932,25 @@
                     "original": "name"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Sets the role's password"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"password\" <$> TF.attribute",
+                    "name": "_password",
+                    "method": "password",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPassword",
+                    "validate": false,
+                    "optional": true,
+                    "original": "password"
+                },
+                {
                     "default": "TF.value P.False",
                     "computed": false,
                     "required": false,
@@ -896,7 +1087,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPassword",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "password"
                 }
             ],
@@ -968,6 +1159,42 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "The ROLE name who owns the schema"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"owner\" <$> TF.attribute",
+                    "name": "_owner",
+                    "method": "owner",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOwner",
+                    "validate": false,
+                    "optional": true,
+                    "original": "owner"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"policy\" <$> TF.attribute",
+                    "name": "_policy",
+                    "method": "policy",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (PolicySetting s)]",
+                    "class": "HasPolicy",
+                    "validate": false,
+                    "optional": true,
+                    "original": "policy"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/postgresql/r/schema.html",
@@ -1008,7 +1235,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOwner",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "owner"
                 },
                 {
@@ -1025,7 +1252,7 @@
                     "type": "TF.Attr s [TF.Attr s (PolicySetting s)]",
                     "class": "HasComputedPolicy",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "policy"
                 }
             ],
