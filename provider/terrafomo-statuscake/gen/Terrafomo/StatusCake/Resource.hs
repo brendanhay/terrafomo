@@ -146,9 +146,9 @@ data TestResource s = TestResource'
 
 -- | Define a new @statuscake_test@ resource value.
 testResource
-    :: TF.Attr s P.Text -- ^ @website_name@ - 'P.websiteName'
-    -> TF.Attr s P.Text -- ^ @test_type@ - 'P.testType'
-    -> TF.Attr s P.Text -- ^ @website_url@ - 'P.websiteUrl'
+    :: TF.Attr s P.Text -- ^ @website_name@ ('P._websiteName', 'P.websiteName')
+    -> TF.Attr s P.Text -- ^ @test_type@ ('P._testType', 'P.testType')
+    -> TF.Attr s P.Text -- ^ @website_url@ ('P._websiteUrl', 'P.websiteUrl')
     -> P.Resource (TestResource s)
 testResource _websiteName _testType _websiteUrl =
     TF.unsafeResource "statuscake_test" TF.validator $

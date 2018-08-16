@@ -17,10 +17,11 @@
 --
 module Terrafomo.StatusCake.Provider
     (
+    -- * StatusCake Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** StatusCake Specific Aliases
+    -- * StatusCake Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -70,8 +71,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @apikey@ - 'P.apikey'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @apikey@ ('P._apikey', 'P.apikey')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _apikey _username =
     Provider'
@@ -83,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "statuscake"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "apikey" _apikey
             , P.Just $ TF.assign "username" _username
