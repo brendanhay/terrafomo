@@ -337,7 +337,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "egress_firewall_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "cidr_list",
@@ -351,7 +351,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_cidr_list",
+                  "name": "cidr_list",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -399,7 +399,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_ports",
+                  "name": "ports",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -493,7 +493,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "firewall_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "cidr_list",
@@ -507,7 +507,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_cidr_list",
+                  "name": "cidr_list",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -555,7 +555,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_ports",
+                  "name": "ports",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -613,7 +613,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "instance_affinity_group_ids",
+            "name": "affinity_group_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -639,7 +639,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "instance_affinity_group_names",
+            "name": "affinity_group_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -774,7 +774,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "instance_security_group_ids",
+            "name": "security_group_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -800,7 +800,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "instance_security_group_names",
+            "name": "security_group_names",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1015,7 +1015,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "loadbalancer_rule_member_ids",
+            "name": "member_ids",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1393,7 +1393,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "network_acl_rule_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "action",
@@ -1420,7 +1420,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_cidr_list",
+                  "name": "cidr_list",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1468,7 +1468,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_ports",
+                  "name": "ports",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1578,7 +1578,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "port_forward_forward",
+            "name": "forward",
             "schemas": [
               {
                 "name": "private_port",
@@ -1917,7 +1917,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "security_group_rule_rule",
+            "name": "rule",
             "schemas": [
               {
                 "name": "cidr_list",
@@ -1931,7 +1931,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_cidr_list",
+                  "name": "cidr_list",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1979,7 +1979,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_ports",
+                  "name": "ports",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2028,7 +2028,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "rule_user_security_group_list",
+                  "name": "user_security_group_list",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2763,7 +2763,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "template_filter",
+            "name": "filter",
             "schemas": [
               {
                 "name": "name",
