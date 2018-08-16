@@ -222,3 +222,6 @@ instance P.HasWeight (RecordResource s) (TF.Attr s P.Int) where
     weight =
         P.lens (_weight :: RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: RecordResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"

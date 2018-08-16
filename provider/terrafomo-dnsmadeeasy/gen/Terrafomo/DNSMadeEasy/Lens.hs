@@ -35,6 +35,7 @@ module Terrafomo.DNSMadeEasy.Lens
     , HasWeight (..)
 
     -- ** Computed Attributes
+    , HasComputedId (..)
     ) where
 
 import GHC.Base ((.))
@@ -149,3 +150,6 @@ class HasWeight a b | a -> b where
 
 instance HasWeight a b => HasWeight (TF.Schema l p a) b where
     weight = TF.configuration . weight
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
