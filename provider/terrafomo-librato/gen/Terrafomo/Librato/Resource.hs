@@ -381,11 +381,11 @@ data SpaceChartResource s = SpaceChartResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 spaceChartResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @space_id@ - 'P.spaceId'
+    :: TF.Attr s P.Int -- ^ @space_id@ - 'P.spaceId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (SpaceChartResource s)
-spaceChartResource _name _spaceId _type' =
+spaceChartResource _spaceId _name _type' =
     TF.unsafeResource "librato_space_chart" TF.validator $
         SpaceChartResource'
             { _label = TF.Nil
