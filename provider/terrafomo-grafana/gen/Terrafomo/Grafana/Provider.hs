@@ -20,7 +20,6 @@ module Terrafomo.Grafana.Provider
     -- * Grafana Provider Datatype
       Provider (..)
     , newProvider
-    , defaultProvider
 
     -- * Grafana Specific Aliases
     , DataSource
@@ -56,7 +55,7 @@ import qualified Terrafomo.Validator     as TF
 type DataSource a = TF.Schema ()               Provider a
 type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
 
--- | The @Grafana@ Terraform provider configuration.
+-- | The @grafana@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/grafana/index.html terraform documentation>
 -- for more information.
@@ -81,19 +80,20 @@ newProvider _auth _url =
         , _url = _url
         }
 
-defaultProvider :: TF.Provider (P.Maybe Provider)
-defaultProvider =
-    TF.Provider
-        { _providerType   = TF.Type P.Nothing "provider"
-        , _providerAlias  = P.Nothing
-        , _providerConfig = P.Nothing
-        }
+instance TF.IsProvider Provider where
+    type ProviderType Provider = "grafana"
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} = P.catMaybes
-        [  P.Just $ TF.assign "auth" _auth
-        ,  P.Just $ TF.assign "url" _url
-        ]
+instance TF.IsSection Provider where
+    toSection x@Provider'{..} =
+        let typ = TF.providerType (Proxy :: Proxy Provider)
+            key = TF.providerKey x
+         in TF.section "provider" [TF.type_ typ]
+          & TF.pairs
+              (P.catMaybes
+                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
+                  , P.Just $ TF.assign "auth" _auth
+                  , P.Just $ TF.assign "url" _url
+                  ])
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
