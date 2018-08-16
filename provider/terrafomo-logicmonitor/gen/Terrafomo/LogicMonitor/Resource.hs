@@ -161,6 +161,9 @@ instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Bool) where
         P.lens (_suppressAlertClear :: CollectorResource s -> TF.Attr s P.Bool)
                (\s a -> s { _suppressAlertClear = a } :: CollectorResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @logicmonitor_collector_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/r/collector_group.html terraform documentation>
@@ -201,6 +204,9 @@ instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CollectorGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CollectorGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @logicmonitor_device@ Resource.
 --
@@ -295,6 +301,9 @@ instance P.HasProperties (DeviceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s 
         P.lens (_properties :: DeviceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _properties = a } :: DeviceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @logicmonitor_device_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/r/device_group.html terraform documentation>
@@ -376,3 +385,6 @@ instance P.HasProperties (DeviceGroupResource s) (TF.Attr s (P.Map P.Text (TF.At
     properties =
         P.lens (_properties :: DeviceGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _properties = a } :: DeviceGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DeviceGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
