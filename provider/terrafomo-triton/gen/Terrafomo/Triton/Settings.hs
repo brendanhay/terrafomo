@@ -19,15 +19,15 @@ module Terrafomo.Triton.Settings
     (
     -- ** cns
       CnsSetting (..)
-    , newCnsSetting
+    , cnsSetting
 
     -- ** filter
     , FilterSetting (..)
-    , newFilterSetting
+    , filterSetting
 
     -- ** nic
     , NicSetting (..)
-    , newNicSetting
+    , nicSetting
 
     ) where
 
@@ -65,9 +65,9 @@ data CnsSetting s = CnsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cns@ settings value.
-newCnsSetting
+cnsSetting
     :: CnsSetting s
-newCnsSetting =
+cnsSetting =
     CnsSetting'
         { _disable = TF.Nil
         , _services = TF.Nil
@@ -122,9 +122,9 @@ data FilterSetting s = FilterSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @filter@ settings value.
-newFilterSetting
+filterSetting
     :: FilterSetting s
-newFilterSetting =
+filterSetting =
     FilterSetting'
         { _disk = TF.Nil
         , _group = TF.Nil
@@ -201,10 +201,10 @@ data NicSetting s = NicSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @nic@ settings value.
-newNicSetting
+nicSetting
     :: TF.Attr s P.Text -- ^ 'P._network': @network@
     -> NicSetting s
-newNicSetting _network =
+nicSetting _network =
     NicSetting'
         { _network = _network
         }
