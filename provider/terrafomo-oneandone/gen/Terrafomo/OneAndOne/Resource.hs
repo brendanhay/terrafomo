@@ -17,7 +17,6 @@
 --
 module Terrafomo.OneAndOne.Resource
     (
-    -- * Resource Datatypes
     -- ** oneandone_block_storage
       BlockStorageResource (..)
     , blockStorageResource
@@ -110,6 +109,7 @@ data BlockStorageResource s = BlockStorageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_block_storage@ resource value.
 blockStorageResource
     :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -181,6 +181,7 @@ data FirewallPolicyResource s = FirewallPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_firewall_policy@ resource value.
 firewallPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ - 'P.rules'
@@ -264,6 +265,7 @@ data ImageResource s = ImageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_image@ resource value.
 imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImageResource s)
@@ -403,6 +405,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_loadbalancer@ resource value.
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -528,6 +531,7 @@ data MonitoringPolicyResource s = MonitoringPolicyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_monitoring_policy@ resource value.
 monitoringPolicyResource
     :: TF.Attr s P.Bool -- ^ @agent@ - 'P.agent'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -622,6 +626,7 @@ data PrivateNetworkResource s = PrivateNetworkResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_private_network@ resource value.
 privateNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PrivateNetworkResource s)
@@ -698,6 +703,7 @@ data PublicIpResource s = PublicIpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_public_ip@ resource value.
 publicIpResource
     :: TF.Attr s P.Text -- ^ @ip_type@ - 'P.ipType'
     -> P.Resource (PublicIpResource s)
@@ -816,6 +822,7 @@ data ServerResource s = ServerResource'
     -- * 'fixedInstanceSize'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_server@ resource value.
 serverResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1004,6 +1011,7 @@ data SharedStorageResource s = SharedStorageResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_shared_storage@ resource value.
 sharedStorageResource
     :: TF.Attr s P.Text -- ^ @datacenter@ - 'P.datacenter'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -1072,6 +1080,7 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_ssh_key@ resource value.
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeyResource s)
@@ -1129,6 +1138,7 @@ data VpnResource s = VpnResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_vpn@ resource value.
 vpnResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VpnResource s)

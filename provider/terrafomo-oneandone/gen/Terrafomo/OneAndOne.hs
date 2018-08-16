@@ -12,13 +12,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.OneAndOne
-    ( module Terrafomo.OneAndOne.DataSource
-    , module Terrafomo.OneAndOne.Lens
-    , module Terrafomo.OneAndOne.Provider
-    , module Terrafomo.OneAndOne.Resource
-    , module Terrafomo.OneAndOne.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.OneAndOne.Provider
+
+    -- * Custom Types
     , module Terrafomo.OneAndOne.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+    , module Terrafomo.OneAndOne.DataSource
+
+    -- * Resources
+    , module Terrafomo.OneAndOne.Resource
+
+    -- * Settings
+    , module Terrafomo.OneAndOne.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.OneAndOne.Lens
     ) where
 
 import Terrafomo.OneAndOne.DataSource

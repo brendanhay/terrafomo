@@ -17,11 +17,10 @@
 --
 module Terrafomo.OneAndOne.Provider
     (
-    -- * OneAndOne Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * OneAndOne Specific Aliases
+    -- ** OneAndOne Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -86,7 +85,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "oneandone"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "endpoint" _endpoint
             , P.Just $ TF.assign "retries" _retries

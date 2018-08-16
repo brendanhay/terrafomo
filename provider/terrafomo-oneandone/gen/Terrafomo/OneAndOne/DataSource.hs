@@ -17,7 +17,6 @@
 --
 module Terrafomo.OneAndOne.DataSource
     (
-    -- * DataSource Datatypes
     -- ** oneandone_instance_size
       InstanceSizeData (..)
     , instanceSizeData
@@ -74,6 +73,7 @@ data InstanceSizeData s = InstanceSizeData'
     -- * 'name'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @oneandone_instance_size@ datasource value.
 instanceSizeData
     :: P.DataSource (InstanceSizeData s)
 instanceSizeData =
