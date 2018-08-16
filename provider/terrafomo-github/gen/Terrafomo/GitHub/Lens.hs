@@ -28,6 +28,7 @@ module Terrafomo.GitHub.Lens
     , HasColor (..)
     , HasConfiguration (..)
     , HasContexts (..)
+    , HasDefaultBranch (..)
     , HasDescription (..)
     , HasDismissStaleReviews (..)
     , HasDismissalTeams (..)
@@ -200,6 +201,12 @@ class HasContexts a b | a -> b where
 
 instance HasContexts a b => HasContexts (TF.Schema l p a) b where
     contexts = TF.configuration . contexts
+
+class HasDefaultBranch a b | a -> b where
+    defaultBranch :: P.Lens' a b
+
+instance HasDefaultBranch a b => HasDefaultBranch (TF.Schema l p a) b where
+    defaultBranch = TF.configuration . defaultBranch
 
 class HasDescription a b | a -> b where
     description :: P.Lens' a b

@@ -458,6 +458,11 @@ data RepositoryResource s = RepositoryResource'
     , _autoInit          :: TF.Attr s P.Bool
     -- ^ @auto_init@ - (Optional)
     --
+    , _defaultBranch     :: TF.Attr s P.Text
+    -- ^ @default_branch@ - (Optional)
+    -- Can only be set after initial repository creation, and only if the target
+    -- branch exists
+    --
     , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
@@ -505,6 +510,7 @@ repositoryResource _name =
             , _allowSquashMerge = TF.value P.True
             , _archived = TF.value P.False
             , _autoInit = TF.Nil
+            , _defaultBranch = TF.Nil
             , _description = TF.Nil
             , _gitignoreTemplate = TF.Nil
             , _hasDownloads = TF.Nil
@@ -525,6 +531,7 @@ instance TF.IsObject (RepositoryResource s) where
         , TF.assign "allow_squash_merge" <$> TF.attribute _allowSquashMerge
         , TF.assign "archived" <$> TF.attribute _archived
         , TF.assign "auto_init" <$> TF.attribute _autoInit
+        , TF.assign "default_branch" <$> TF.attribute _defaultBranch
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "gitignore_template" <$> TF.attribute _gitignoreTemplate
         , TF.assign "has_downloads" <$> TF.attribute _hasDownloads
@@ -565,6 +572,11 @@ instance P.HasAutoInit (RepositoryResource s) (TF.Attr s P.Bool) where
     autoInit =
         P.lens (_autoInit :: RepositoryResource s -> TF.Attr s P.Bool)
                (\s a -> s { _autoInit = a } :: RepositoryResource s)
+
+instance P.HasDefaultBranch (RepositoryResource s) (TF.Attr s P.Text) where
+    defaultBranch =
+        P.lens (_defaultBranch :: RepositoryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultBranch = a } :: RepositoryResource s)
 
 instance P.HasDescription (RepositoryResource s) (TF.Attr s P.Text) where
     description =

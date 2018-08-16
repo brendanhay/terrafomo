@@ -94,7 +94,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "github"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "base_url" <$> _baseUrl
             , P.Just $ TF.assign "insecure" _insecure
