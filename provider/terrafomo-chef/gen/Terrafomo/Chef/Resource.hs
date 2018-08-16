@@ -96,6 +96,9 @@ instance P.HasName (DataBagResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DataBagResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DataBagResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedApiUri (TF.Ref s' (DataBagResource s)) (TF.Attr s P.Text) where
     computedApiUri x = TF.compute (TF.refKey x) "api_uri"
 
@@ -217,6 +220,9 @@ instance P.HasOverrideAttributesJson (EnvironmentResource s) (TF.Attr s P.Text) 
         P.lens (_overrideAttributesJson :: EnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _overrideAttributesJson = a } :: EnvironmentResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @chef_node@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/chef/r/node.html terraform documentation>
@@ -309,6 +315,9 @@ instance P.HasRunList (NodeResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_runList :: NodeResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _runList = a } :: NodeResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NodeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @chef_role@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/chef/r/role.html terraform documentation>
@@ -380,3 +389,6 @@ instance P.HasRunList (RoleResource s) (TF.Attr s [TF.Attr s P.Text]) where
     runList =
         P.lens (_runList :: RoleResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _runList = a } :: RoleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
