@@ -66,8 +66,8 @@ data JsonDataSetting s = JsonDataSetting'
 
 -- | Construct a new @json_data@ settings value.
 newJsonDataSetting
-    :: TF.Attr s P.Text -- ^ @default_region@ - 'P.defaultRegion'
-    -> TF.Attr s P.Text -- ^ @auth_type@ - 'P.authType'
+    :: TF.Attr s P.Text -- ^ 'P._defaultRegion': @default_region@
+    -> TF.Attr s P.Text -- ^ 'P._authType': @auth_type@
     -> JsonDataSetting s
 newJsonDataSetting _defaultRegion _authType =
     JsonDataSetting'
@@ -121,8 +121,8 @@ data SecureJsonDataSetting s = SecureJsonDataSetting'
 
 -- | Construct a new @secure_json_data@ settings value.
 newSecureJsonDataSetting
-    :: TF.Attr s P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> TF.Attr s P.Text -- ^ @secret_key@ - 'P.secretKey'
+    :: TF.Attr s P.Text -- ^ 'P._accessKey': @access_key@
+    -> TF.Attr s P.Text -- ^ 'P._secretKey': @secret_key@
     -> SecureJsonDataSetting s
 newSecureJsonDataSetting _accessKey _secretKey =
     SecureJsonDataSetting'

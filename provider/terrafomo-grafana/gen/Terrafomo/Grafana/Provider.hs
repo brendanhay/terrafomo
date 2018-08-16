@@ -17,10 +17,11 @@
 --
 module Terrafomo.Grafana.Provider
     (
+    -- * Grafana Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Grafana Specific Aliases
+    -- * Grafana Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -70,8 +71,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @auth@ - 'P.auth'
-    -> P.Text -- ^ @url@ - 'P.url'
+    :: P.Text -- ^ @auth@ ('P._auth', 'P.auth')
+    -> P.Text -- ^ @url@ ('P._url', 'P.url')
     -> Provider
 newProvider _auth _url =
     Provider'
@@ -83,7 +84,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "grafana"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "auth" _auth
             , P.Just $ TF.assign "url" _url

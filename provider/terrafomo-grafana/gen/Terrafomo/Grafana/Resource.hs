@@ -80,8 +80,8 @@ data AlertNotificationResource s = AlertNotificationResource'
 
 -- | Define a new @grafana_alert_notification@ resource value.
 alertNotificationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (AlertNotificationResource s)
 alertNotificationResource _name _type' =
     TF.unsafeResource "grafana_alert_notification" TF.validator $
@@ -138,7 +138,7 @@ data DashboardResource s = DashboardResource'
 
 -- | Define a new @grafana_dashboard@ resource value.
 dashboardResource
-    :: TF.Attr s P.Text -- ^ @config_json@ - 'P.configJson'
+    :: TF.Attr s P.Text -- ^ @config_json@ ('P._configJson', 'P.configJson')
     -> P.Resource (DashboardResource s)
 dashboardResource _configJson =
     TF.unsafeResource "grafana_dashboard" TF.validator $
@@ -213,8 +213,8 @@ data DataSourceResource s = DataSourceResource'
 
 -- | Define a new @grafana_data_source@ resource value.
 dataSourceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (DataSourceResource s)
 dataSourceResource _name _type' =
     TF.unsafeResource "grafana_data_source" TF.validator $
@@ -349,7 +349,7 @@ data OrganizationResource s = OrganizationResource'
 
 -- | Define a new @grafana_organization@ resource value.
 organizationResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
     TF.unsafeResource "grafana_organization" TF.validator $
