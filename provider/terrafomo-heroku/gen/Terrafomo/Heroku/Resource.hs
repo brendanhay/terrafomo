@@ -129,8 +129,8 @@ data AddonResource s = AddonResource'
 
 -- | Define a new @heroku_addon@ resource value.
 addonResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @plan@ ('P._plan', 'P.plan')
     -> P.Resource (AddonResource s)
 addonResource _app _plan =
     TF.unsafeResource "heroku_addon" TF.validator $
@@ -192,8 +192,8 @@ data AddonAttachmentResource s = AddonAttachmentResource'
 
 -- | Define a new @heroku_addon_attachment@ resource value.
 addonAttachmentResource
-    :: TF.Attr s P.Text -- ^ @addon_id@ - 'P.addonId'
-    -> TF.Attr s P.Text -- ^ @app_id@ - 'P.appId'
+    :: TF.Attr s P.Text -- ^ @addon_id@ ('P._addonId', 'P.addonId')
+    -> TF.Attr s P.Text -- ^ @app_id@ ('P._appId', 'P.appId')
     -> P.Resource (AddonAttachmentResource s)
 addonAttachmentResource _addonId _appId =
     TF.unsafeResource "heroku_addon_attachment" TF.validator $
@@ -254,8 +254,8 @@ data AppResource s = AppResource'
 
 -- | Define a new @heroku_app@ resource value.
 appResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> P.Resource (AppResource s)
 appResource _name _region =
     TF.unsafeResource "heroku_app" TF.validator $
@@ -353,8 +353,8 @@ data AppFeatureResource s = AppFeatureResource'
 
 -- | Define a new @heroku_app_feature@ resource value.
 appFeatureResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (AppFeatureResource s)
 appFeatureResource _app _name =
     TF.unsafeResource "heroku_app_feature" TF.validator $
@@ -407,8 +407,8 @@ data AppReleaseResource s = AppReleaseResource'
 
 -- | Define a new @heroku_app_release@ resource value.
 appReleaseResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @slug_id@ - 'P.slugId'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @slug_id@ ('P._slugId', 'P.slugId')
     -> P.Resource (AppReleaseResource s)
 appReleaseResource _app _slugId =
     TF.unsafeResource "heroku_app_release" TF.validator $
@@ -460,9 +460,9 @@ data CertResource s = CertResource'
 
 -- | Define a new @heroku_cert@ resource value.
 certResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @certificate_chain@ - 'P.certificateChain'
-    -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @certificate_chain@ ('P._certificateChain', 'P.certificateChain')
+    -> TF.Attr s P.Text -- ^ @private_key@ ('P._privateKey', 'P.privateKey')
     -> P.Resource (CertResource s)
 certResource _app _certificateChain _privateKey =
     TF.unsafeResource "heroku_cert" TF.validator $
@@ -521,8 +521,8 @@ data DomainResource s = DomainResource'
 
 -- | Define a new @heroku_domain@ resource value.
 domainResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @hostname@ ('P._hostname', 'P.hostname')
     -> P.Resource (DomainResource s)
 domainResource _app _hostname =
     TF.unsafeResource "heroku_domain" TF.validator $
@@ -571,8 +571,8 @@ data DrainResource s = DrainResource'
 
 -- | Define a new @heroku_drain@ resource value.
 drainResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @url@ ('P._url', 'P.url')
     -> P.Resource (DrainResource s)
 drainResource _app _url =
     TF.unsafeResource "heroku_drain" TF.validator $
@@ -627,10 +627,10 @@ data FormationResource s = FormationResource'
 
 -- | Define a new @heroku_formation@ resource value.
 formationResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Int -- ^ @quantity@ - 'P.quantity'
-    -> TF.Attr s P.Text -- ^ @size@ - 'P.size'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Int -- ^ @quantity@ ('P._quantity', 'P.quantity')
+    -> TF.Attr s P.Text -- ^ @size@ ('P._size', 'P.size')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (FormationResource s)
 formationResource _app _quantity _size _type' =
     TF.unsafeResource "heroku_formation" TF.validator $
@@ -687,7 +687,7 @@ data PipelineResource s = PipelineResource'
 
 -- | Define a new @heroku_pipeline@ resource value.
 pipelineResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (PipelineResource s)
 pipelineResource _name =
     TF.unsafeResource "heroku_pipeline" TF.validator $
@@ -729,9 +729,9 @@ data PipelineCouplingResource s = PipelineCouplingResource'
 
 -- | Define a new @heroku_pipeline_coupling@ resource value.
 pipelineCouplingResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @pipeline@ - 'P.pipeline'
-    -> TF.Attr s P.Text -- ^ @stage@ - 'P.stage'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @pipeline@ ('P._pipeline', 'P.pipeline')
+    -> TF.Attr s P.Text -- ^ @stage@ ('P._stage', 'P.stage')
     -> P.Resource (PipelineCouplingResource s)
 pipelineCouplingResource _app _pipeline _stage =
     TF.unsafeResource "heroku_pipeline_coupling" TF.validator $
@@ -793,8 +793,8 @@ data SpaceResource s = SpaceResource'
 
 -- | Define a new @heroku_space@ resource value.
 spaceResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @organization@ ('P._organization', 'P.organization')
     -> P.Resource (SpaceResource s)
 spaceResource _name _organization =
     TF.unsafeResource "heroku_space" TF.validator $
@@ -860,9 +860,9 @@ data SpaceAppAccessResource s = SpaceAppAccessResource'
 
 -- | Define a new @heroku_space_app_access@ resource value.
 spaceAppAccessResource
-    :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @permissions@ - 'P.permissions'
-    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    :: TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s P.Text -- ^ @space@ ('P._space', 'P.space')
     -> P.Resource (SpaceAppAccessResource s)
 spaceAppAccessResource _email _permissions _space =
     TF.unsafeResource "heroku_space_app_access" TF.validator $
@@ -915,8 +915,8 @@ data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
 
 -- | Define a new @heroku_space_inbound_ruleset@ resource value.
 spaceInboundRulesetResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))) -- ^ @rule@ - 'P.rule'
-    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))) -- ^ @rule@ ('P._rule', 'P.rule')
+    -> TF.Attr s P.Text -- ^ @space@ ('P._space', 'P.space')
     -> P.Resource (SpaceInboundRulesetResource s)
 spaceInboundRulesetResource _rule _space =
     TF.unsafeResource "heroku_space_inbound_ruleset" TF.validator $
@@ -962,8 +962,8 @@ data SpacePeeringConnectionAccepterResource s = SpacePeeringConnectionAccepterRe
 
 -- | Define a new @heroku_space_peering_connection_accepter@ resource value.
 spacePeeringConnectionAccepterResource
-    :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
-    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    :: TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ ('P._vpcPeeringConnectionId', 'P.vpcPeeringConnectionId')
+    -> TF.Attr s P.Text -- ^ @space@ ('P._space', 'P.space')
     -> P.Resource (SpacePeeringConnectionAccepterResource s)
 spacePeeringConnectionAccepterResource _vpcPeeringConnectionId _space =
     TF.unsafeResource "heroku_space_peering_connection_accepter" TF.validator $
@@ -1021,10 +1021,10 @@ data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
 
 -- | Define a new @heroku_space_vpn_connection@ resource value.
 spaceVpnConnectionResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ - 'P.routableCidrs'
-    -> TF.Attr s P.Text -- ^ @public_ip@ - 'P.publicIp'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @routable_cidrs@ ('P._routableCidrs', 'P.routableCidrs')
+    -> TF.Attr s P.Text -- ^ @public_ip@ ('P._publicIp', 'P.publicIp')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @space@ ('P._space', 'P.space')
     -> P.Resource (SpaceVpnConnectionResource s)
 spaceVpnConnectionResource _routableCidrs _publicIp _name _space =
     TF.unsafeResource "heroku_space_vpn_connection" TF.validator $
@@ -1096,9 +1096,9 @@ data TeamCollaboratorResource s = TeamCollaboratorResource'
 
 -- | Define a new @heroku_team_collaborator@ resource value.
 teamCollaboratorResource
-    :: TF.Attr s P.Text -- ^ @app@ - 'P.app'
-    -> TF.Attr s P.Text -- ^ @email@ - 'P.email'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
+    :: TF.Attr s P.Text -- ^ @app@ ('P._app', 'P.app')
+    -> TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ ('P._permissions', 'P.permissions')
     -> P.Resource (TeamCollaboratorResource s)
 teamCollaboratorResource _app _email _permissions =
     TF.unsafeResource "heroku_team_collaborator" TF.validator $

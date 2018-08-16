@@ -67,7 +67,7 @@ data OrganizationSetting s = OrganizationSetting'
 
 -- | Construct a new @organization@ settings value.
 newOrganizationSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OrganizationSetting s
 newOrganizationSetting _name =
     OrganizationSetting'
@@ -123,8 +123,8 @@ data RuleSetting s = RuleSetting'
 
 -- | Construct a new @rule@ settings value.
 newRuleSetting
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    :: TF.Attr s P.Text -- ^ 'P._action': @action@
+    -> TF.Attr s P.Text -- ^ 'P._source': @source@
     -> RuleSetting s
 newRuleSetting _action _source =
     RuleSetting'

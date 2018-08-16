@@ -67,7 +67,7 @@ data AppData s = AppData'
 
 -- | Define a new @heroku_app@ datasource value.
 appData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (AppData s)
 appData _name =
     TF.unsafeDataSource "heroku_app" TF.validator $
@@ -136,7 +136,7 @@ data SpaceData s = SpaceData'
 
 -- | Define a new @heroku_space@ datasource value.
 spaceData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SpaceData s)
 spaceData _name =
     TF.unsafeDataSource "heroku_space" TF.validator $
@@ -190,7 +190,7 @@ data SpacePeeringInfoData s = SpacePeeringInfoData'
 
 -- | Define a new @heroku_space_peering_info@ datasource value.
 spacePeeringInfoData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SpacePeeringInfoData s)
 spacePeeringInfoData _name =
     TF.unsafeDataSource "heroku_space_peering_info" TF.validator $
