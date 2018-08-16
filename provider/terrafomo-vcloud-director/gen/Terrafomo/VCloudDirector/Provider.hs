@@ -111,22 +111,17 @@ newProvider _org _password _url _user =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "vcd"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
-                  , TF.assign "max_retry_timeout" <$> _maxRetryTimeout
-                  , P.Just $ TF.assign "org" _org
-                  , P.Just $ TF.assign "password" _password
-                  , P.Just $ TF.assign "url" _url
-                  , P.Just $ TF.assign "user" _user
-                  , TF.assign "vdc" <$> _vdc
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "allow_unverified_ssl" <$> _allowUnverifiedSsl
+            , TF.assign "max_retry_timeout" <$> _maxRetryTimeout
+            , P.Just $ TF.assign "org" _org
+            , P.Just $ TF.assign "password" _password
+            , P.Just $ TF.assign "url" _url
+            , P.Just $ TF.assign "user" _user
+            , TF.assign "vdc" <$> _vdc
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

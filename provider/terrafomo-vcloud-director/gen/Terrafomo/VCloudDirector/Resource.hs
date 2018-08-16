@@ -101,7 +101,7 @@ dnatResource
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (DnatResource s)
 dnatResource _edgeGateway _externalIp _internalIp _port =
-    TF.unsafeResource "vcd_dnat" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_dnat" TF.validator $
         DnatResource'
             { _edgeGateway = _edgeGateway
             , _externalIp = _externalIp
@@ -202,7 +202,7 @@ edgegatewayVpnResource
     -> TF.Attr s P.Text -- ^ @shared_secret@ - 'P.sharedSecret'
     -> P.Resource (EdgegatewayVpnResource s)
 edgegatewayVpnResource _edgeGateway _encryptionProtocol _localId _localIpAddress _mtu _name _peerId _peerIpAddress _sharedSecret =
-    TF.unsafeResource "vcd_edgegateway_vpn" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_edgegateway_vpn" TF.validator $
         EdgegatewayVpnResource'
             { _description = TF.Nil
             , _edgeGateway = _edgeGateway
@@ -318,7 +318,7 @@ firewallRulesResource
     -> TF.Attr s P.Text -- ^ @edge_gateway@ - 'P.edgeGateway'
     -> P.Resource (FirewallRulesResource s)
 firewallRulesResource _defaultAction _edgeGateway =
-    TF.unsafeResource "vcd_firewall_rules" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_firewall_rules" TF.validator $
         FirewallRulesResource'
             { _defaultAction = _defaultAction
             , _edgeGateway = _edgeGateway
@@ -396,7 +396,7 @@ networkResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkResource s)
 networkResource _edgeGateway _gateway _name =
-    TF.unsafeResource "vcd_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_network" TF.validator $
         NetworkResource'
             { _dhcpPool = TF.Nil
             , _dns1 = TF.value "8.8.8.8"
@@ -509,7 +509,7 @@ snatResource
     -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
     -> P.Resource (SnatResource s)
 snatResource _edgeGateway _externalIp _internalIp =
-    TF.unsafeResource "vcd_snat" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_snat" TF.validator $
         SnatResource'
             { _edgeGateway = _edgeGateway
             , _externalIp = _externalIp
@@ -588,7 +588,7 @@ vappResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VappResource s)
 vappResource _name =
-    TF.unsafeResource "vcd_vapp" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_vapp" TF.validator $
         VappResource'
             { _catalogName = TF.Nil
             , _cpus = TF.Nil
@@ -733,7 +733,7 @@ vappVmResource
     -> TF.Attr s P.Text -- ^ @vapp_name@ - 'P.vappName'
     -> P.Resource (VappVmResource s)
 vappVmResource _catalogName _name _templateName _vappName =
-    TF.unsafeResource "vcd_vapp_vm" P.defaultProvider TF.validator $
+    TF.unsafeResource "vcd_vapp_vm" TF.validator $
         VappVmResource'
             { _catalogName = _catalogName
             , _cpus = TF.Nil
