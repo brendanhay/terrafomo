@@ -17,11 +17,10 @@
 --
 module Terrafomo.Bitbucket.Provider
     (
-    -- * Bitbucket Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Bitbucket Specific Aliases
+    -- ** Bitbucket Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -82,7 +81,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "bitbucket"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "password" _password
             , P.Just $ TF.assign "username" _username

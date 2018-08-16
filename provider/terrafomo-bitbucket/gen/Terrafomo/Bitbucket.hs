@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Bitbucket
-    ( module Terrafomo.Bitbucket.Lens
-    , module Terrafomo.Bitbucket.Provider
-    , module Terrafomo.Bitbucket.Resource
-    , module Terrafomo.Bitbucket.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.Bitbucket.Provider
+
+    -- * Custom Types
     , module Terrafomo.Bitbucket.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.Bitbucket.Resource
+
+    -- * Settings
+    , module Terrafomo.Bitbucket.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.Bitbucket.Lens
     ) where
 
 import Terrafomo.Bitbucket.Lens

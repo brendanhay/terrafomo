@@ -17,7 +17,6 @@
 --
 module Terrafomo.Bitbucket.Resource
     (
-    -- * Resource Datatypes
     -- ** bitbucket_default_reviewers
       DefaultReviewersResource (..)
     , defaultReviewersResource
@@ -72,6 +71,7 @@ data DefaultReviewersResource s = DefaultReviewersResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @bitbucket_default_reviewers@ resource value.
 defaultReviewersResource
     :: TF.Attr s P.Text -- ^ @owner@ - 'P.owner'
     -> TF.Attr s P.Text -- ^ @repository@ - 'P.repository'
@@ -141,6 +141,7 @@ data HookResource s = HookResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @bitbucket_hook@ resource value.
 hookResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @events@ - 'P.events'
@@ -255,6 +256,7 @@ data RepositoryResource s = RepositoryResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @bitbucket_repository@ resource value.
 repositoryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @owner@ - 'P.owner'

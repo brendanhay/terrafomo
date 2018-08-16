@@ -17,7 +17,6 @@
 --
 module Terrafomo.Bitbucket.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))
