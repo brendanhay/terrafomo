@@ -938,23 +938,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_sourceId",
                     "computed": false,
                     "required": true,
@@ -970,6 +953,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "source_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 }
             ],
             "conflicts": [],
@@ -1418,23 +1418,6 @@
                     "original": "frequency"
                 },
                 {
-                    "default": "_jobType",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"job_type\" <$> TF.attribute",
-                    "name": "_jobType",
-                    "method": "jobType",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasJobType",
-                    "validate": false,
-                    "optional": false,
-                    "original": "job_type"
-                },
-                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1467,6 +1450,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "regions"
+                },
+                {
+                    "default": "_jobType",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"job_type\" <$> TF.attribute",
+                    "name": "_jobType",
+                    "method": "jobType",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasJobType",
+                    "validate": false,
+                    "optional": false,
+                    "original": "job_type"
                 }
             ],
             "conflicts": [],
