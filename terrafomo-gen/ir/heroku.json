@@ -227,7 +227,42 @@
                 "smart": "tunnelsSetting",
                 "name": "TunnelsSetting'"
             },
-            "arguments": [],
+            "arguments": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ip\" <$> TF.attribute",
+                    "name": "_ip",
+                    "method": "ip",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIp",
+                    "validate": false,
+                    "optional": true,
+                    "original": "ip"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"pre_shared_key\" <$> TF.attribute",
+                    "name": "_preSharedKey",
+                    "method": "preSharedKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPreSharedKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "pre_shared_key"
+                }
+            ],
             "key": "heroku_space_vpn_connection.tunnels",
             "name": "TunnelsSetting",
             "threaded": true,
@@ -246,7 +281,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIp",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "ip"
                 },
                 {
@@ -263,7 +298,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPreSharedKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "pre_shared_key"
                 }
             ],
@@ -1089,6 +1124,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "app_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/addon_attachment.html",
@@ -1127,7 +1179,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -1212,6 +1264,40 @@
                     "original": "buildpacks"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"config_vars\" <$> TF.attribute",
+                    "name": "_configVars",
+                    "method": "configVars",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]",
+                    "class": "HasConfigVars",
+                    "validate": false,
+                    "optional": true,
+                    "original": "config_vars"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"internal_routing\" <$> TF.attribute",
+                    "name": "_internalRouting",
+                    "method": "internalRouting",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Bool",
+                    "class": "HasInternalRouting",
+                    "validate": false,
+                    "optional": true,
+                    "original": "internal_routing"
+                },
+                {
                     "default": "_name",
                     "computed": false,
                     "required": true,
@@ -1278,6 +1364,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "space"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"stack\" <$> TF.attribute",
+                    "name": "_stack",
+                    "method": "stack",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasStack",
+                    "validate": false,
+                    "optional": true,
+                    "original": "stack"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/app.html",
@@ -1333,7 +1436,7 @@
                     "type": "TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]",
                     "class": "HasComputedConfigVars",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "config_vars"
                 },
                 {
@@ -1384,7 +1487,7 @@
                     "type": "TF.Attr s P.Bool",
                     "class": "HasComputedInternalRouting",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "internal_routing"
                 },
                 {
@@ -1401,7 +1504,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedStack",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "stack"
                 },
                 {
@@ -1607,6 +1710,23 @@
                     "original": "app"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"description\" <$> TF.attribute",
+                    "name": "_description",
+                    "method": "description",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDescription",
+                    "validate": false,
+                    "optional": true,
+                    "original": "description"
+                },
+                {
                     "default": "_slugId",
                     "computed": false,
                     "required": true,
@@ -1660,7 +1780,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedDescription",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "description"
                 }
             ],
@@ -3123,6 +3243,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "space"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"tunnels\" <$> TF.attribute",
+                    "name": "_tunnels",
+                    "method": "tunnels",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (TunnelsSetting s)]",
+                    "class": "HasTunnels",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tunnels"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/heroku/r/space_vpn_connection.html",
@@ -3195,7 +3332,7 @@
                     "type": "TF.Attr s [TF.Attr s (TunnelsSetting s)]",
                     "class": "HasComputedTunnels",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tunnels"
                 }
             ],
