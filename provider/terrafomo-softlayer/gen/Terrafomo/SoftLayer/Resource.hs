@@ -17,7 +17,6 @@
 --
 module Terrafomo.SoftLayer.Resource
     (
-    -- * Resource Datatypes
     -- ** softlayer_ssh_key
       SshKeyResource (..)
     , sshKeyResource
@@ -68,6 +67,7 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @softlayer_ssh_key@ resource value.
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -172,6 +172,7 @@ data VirtualGuestResource s = VirtualGuestResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @softlayer_virtual_guest@ resource value.
 virtualGuestResource
     :: TF.Attr s P.Bool -- ^ @hourly_billing@ - 'P.hourlyBilling'
     -> TF.Attr s P.Int -- ^ @cpu@ - 'P.cpu'

@@ -17,7 +17,6 @@
 --
 module Terrafomo.SoftLayer.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))

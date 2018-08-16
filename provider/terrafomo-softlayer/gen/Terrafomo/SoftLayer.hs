@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.SoftLayer
-    ( module Terrafomo.SoftLayer.Lens
-    , module Terrafomo.SoftLayer.Provider
-    , module Terrafomo.SoftLayer.Resource
-    , module Terrafomo.SoftLayer.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.SoftLayer.Provider
+
+    -- * Custom Types
     , module Terrafomo.SoftLayer.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.SoftLayer.Resource
+
+    -- * Settings
+    , module Terrafomo.SoftLayer.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.SoftLayer.Lens
     ) where
 
 import Terrafomo.SoftLayer.Lens
