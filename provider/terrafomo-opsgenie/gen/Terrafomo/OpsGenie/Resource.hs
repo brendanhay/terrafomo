@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.OpsGenie.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -61,19 +60,19 @@ data TeamResource s = TeamResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _member      :: TF.Attr s [TF.Attr s (TeamMember s)]
+    , _member      :: TF.Attr s [TF.Attr s (MemberSetting s)]
     -- ^ @member@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 teamResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (TeamResource s)
 teamResource _name =
-    TF.newResource "opsgenie_team" TF.validator $
+    TF.unsafeResource "opsgenie_team" P.defaultProvider TF.validator $
         TeamResource'
             { _description = TF.Nil
             , _member = TF.Nil
@@ -89,19 +88,15 @@ instance TF.IsObject (TeamResource s) where
 
 instance TF.IsValid (TeamResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_member"
-                  (_member
-                      :: TeamResource s -> TF.Attr s [TF.Attr s (TeamMember s)])
-                  TF.validator
 
 instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
     description =
         P.lens (_description :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TeamResource s)
 
-instance P.HasMember (TeamResource s) (TF.Attr s [TF.Attr s (TeamMember s)]) where
+instance P.HasMember (TeamResource s) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
     member =
-        P.lens (_member :: TeamResource s -> TF.Attr s [TF.Attr s (TeamMember s)])
+        P.lens (_member :: TeamResource s -> TF.Attr s [TF.Attr s (MemberSetting s)])
                (\s a -> s { _member = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) (TF.Attr s P.Text) where
@@ -129,7 +124,7 @@ data UserResource s = UserResource'
     , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userResource
     :: TF.Attr s P.Text -- ^ @full_name@ - 'P.fullName'
@@ -137,7 +132,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (UserResource s)
 userResource _fullName _role _username =
-    TF.newResource "opsgenie_user" TF.validator $
+    TF.unsafeResource "opsgenie_user" P.defaultProvider TF.validator $
         UserResource'
             { _fullName = _fullName
             , _locale = TF.value "en_US"

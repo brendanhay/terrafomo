@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.OpsGenie.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -57,13 +56,13 @@ data UserData s = UserData'
     { _username :: TF.Attr s P.Text
     -- ^ @username@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userData
     :: TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.DataSource (UserData s)
 userData _username =
-    TF.newDataSource "opsgenie_user" TF.validator $
+    TF.unsafeDataSource "opsgenie_user" P.defaultProvider TF.validator $
         UserData'
             { _username = _username
             }
