@@ -116,10 +116,10 @@ data JobResource s = JobResource'
 
 -- | Define a new @rundeck_job@ resource value.
 jobResource
-    :: TF.Attr s [TF.Attr s (CommandSetting s)] -- ^ @command@ - 'P.command'
-    -> TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project_name@ - 'P.projectName'
+    :: TF.Attr s [TF.Attr s (CommandSetting s)] -- ^ @command@ ('P._command', 'P.command')
+    -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @project_name@ ('P._projectName', 'P.projectName')
     -> P.Resource (JobResource s)
 jobResource _command _description _name _projectName =
     TF.unsafeResource "rundeck_job" TF.validator $
@@ -268,8 +268,8 @@ data PrivateKeyResource s = PrivateKeyResource'
 
 -- | Define a new @rundeck_private_key@ resource value.
 privateKeyResource
-    :: TF.Attr s P.Text -- ^ @key_material@ - 'P.keyMaterial'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ @key_material@ ('P._keyMaterial', 'P.keyMaterial')
+    -> TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
     -> P.Resource (PrivateKeyResource s)
 privateKeyResource _keyMaterial _path =
     TF.unsafeResource "rundeck_private_key" TF.validator $
@@ -341,8 +341,8 @@ data ProjectResource s = ProjectResource'
 
 -- | Define a new @rundeck_project@ resource value.
 projectResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)] -- ^ @resource_model_source@ - 'P.resourceModelSource'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)] -- ^ @resource_model_source@ ('P._resourceModelSource', 'P.resourceModelSource')
     -> P.Resource (ProjectResource s)
 projectResource _name _resourceModelSource =
     TF.unsafeResource "rundeck_project" TF.validator $
@@ -438,7 +438,7 @@ data PublicKeyResource s = PublicKeyResource'
 
 -- | Define a new @rundeck_public_key@ resource value.
 publicKeyResource
-    :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ @path@ ('P._path', 'P.path')
     -> P.Resource (PublicKeyResource s)
 publicKeyResource _path =
     TF.unsafeResource "rundeck_public_key" TF.validator $

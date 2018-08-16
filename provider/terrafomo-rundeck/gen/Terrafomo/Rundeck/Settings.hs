@@ -181,7 +181,7 @@ data JobSetting s = JobSetting'
 
 -- | Construct a new @job@ settings value.
 newJobSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> JobSetting s
 newJobSetting _name =
     JobSetting'
@@ -235,7 +235,7 @@ data NodeStepPluginSetting s = NodeStepPluginSetting'
 
 -- | Construct a new @node_step_plugin@ settings value.
 newNodeStepPluginSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> NodeStepPluginSetting s
 newNodeStepPluginSetting _type' =
     NodeStepPluginSetting'
@@ -305,7 +305,7 @@ data OptionSetting s = OptionSetting'
 
 -- | Construct a new @option@ settings value.
 newOptionSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OptionSetting s
 newOptionSetting _name =
     OptionSetting'
@@ -417,8 +417,8 @@ data ResourceModelSourceSetting s = ResourceModelSourceSetting'
 
 -- | Construct a new @resource_model_source@ settings value.
 newResourceModelSourceSetting
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._config': @config@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ResourceModelSourceSetting s
 newResourceModelSourceSetting _config _type' =
     ResourceModelSourceSetting'
@@ -458,7 +458,7 @@ data StepPluginSetting s = StepPluginSetting'
 
 -- | Construct a new @step_plugin@ settings value.
 newStepPluginSetting
-    :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> StepPluginSetting s
 newStepPluginSetting _type' =
     StepPluginSetting'
