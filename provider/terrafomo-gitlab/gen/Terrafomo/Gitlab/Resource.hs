@@ -97,7 +97,7 @@ deployKeyResource
     -> TF.Attr s P.Text -- ^ @title@ - 'P.title'
     -> P.Resource (DeployKeyResource s)
 deployKeyResource _key _project _title =
-    TF.unsafeResource "gitlab_deploy_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_deploy_key" TF.validator $
         DeployKeyResource'
             { _canPush = TF.value P.False
             , _key = _key
@@ -166,7 +166,7 @@ groupResource
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.Resource (GroupResource s)
 groupResource _name _path =
-    TF.unsafeResource "gitlab_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_group" TF.validator $
         GroupResource'
             { _description = TF.Nil
             , _lfsEnabled = TF.value P.True
@@ -247,7 +247,7 @@ labelResource
     -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
     -> P.Resource (LabelResource s)
 labelResource _color _name _project =
-    TF.unsafeResource "gitlab_label" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_label" TF.validator $
         LabelResource'
             { _color = _color
             , _description = TF.Nil
@@ -324,7 +324,7 @@ projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
 projectResource _name =
-    TF.unsafeResource "gitlab_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_project" TF.validator $
         ProjectResource'
             { _defaultBranch = TF.Nil
             , _description = TF.Nil
@@ -458,7 +458,7 @@ projectHookResource
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.Resource (ProjectHookResource s)
 projectHookResource _project _url =
-    TF.unsafeResource "gitlab_project_hook" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_project_hook" TF.validator $
         ProjectHookResource'
             { _enableSslVerification = TF.value P.True
             , _issuesEvents = TF.value P.False
@@ -575,7 +575,7 @@ projectMembershipResource
     -> TF.Attr s P.Int -- ^ @user_id@ - 'P.userId'
     -> P.Resource (ProjectMembershipResource s)
 projectMembershipResource _accessLevel _projectId _userId =
-    TF.unsafeResource "gitlab_project_membership" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_project_membership" TF.validator $
         ProjectMembershipResource'
             { _accessLevel = _accessLevel
             , _projectId = _projectId
@@ -648,7 +648,7 @@ userResource
     -> TF.Attr s P.Text -- ^ @username@ - 'P.username'
     -> P.Resource (UserResource s)
 userResource _email _name _password _username =
-    TF.unsafeResource "gitlab_user" P.defaultProvider TF.validator $
+    TF.unsafeResource "gitlab_user" TF.validator $
         UserResource'
             { _canCreateGroup = TF.value P.False
             , _email = _email

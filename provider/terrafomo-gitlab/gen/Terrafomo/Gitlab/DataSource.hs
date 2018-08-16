@@ -66,7 +66,7 @@ projectData
     :: TF.Attr s P.Int -- ^ @id@ - 'P.id'
     -> P.DataSource (ProjectData s)
 projectData _id =
-    TF.unsafeDataSource "gitlab_project" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "gitlab_project" TF.validator $
         ProjectData'
             { _id = _id
             }
@@ -101,7 +101,7 @@ userData
     :: TF.Attr s P.Text -- ^ @email@ - 'P.email'
     -> P.DataSource (UserData s)
 userData _email =
-    TF.unsafeDataSource "gitlab_user" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "gitlab_user" TF.validator $
         UserData'
             { _email = _email
             }
