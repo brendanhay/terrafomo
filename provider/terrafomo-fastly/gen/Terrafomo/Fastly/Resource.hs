@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Fastly.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -54,76 +53,76 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/fastly/r/service_v1.html terraform documentation>
 -- for more information.
 data ServiceV1Resource s = ServiceV1Resource'
-    { _backend         :: TF.Attr s [TF.Attr s (ServiceV1Backend s)]
+    { _backend         :: TF.Attr s [TF.Attr s (BackendSetting s)]
     -- ^ @backend@ - (Optional)
     --
-    , _bigquerylogging :: TF.Attr s [TF.Attr s (ServiceV1Bigquerylogging s)]
+    , _bigquerylogging :: TF.Attr s [TF.Attr s (BigqueryloggingSetting s)]
     -- ^ @bigquerylogging@ - (Optional)
     --
-    , _cacheSetting    :: TF.Attr s [TF.Attr s (ServiceV1CacheSetting s)]
+    , _cacheSetting    :: TF.Attr s [TF.Attr s (CacheSettingSetting s)]
     -- ^ @cache_setting@ - (Optional)
     --
-    , _condition       :: TF.Attr s [TF.Attr s (ServiceV1Condition s)]
+    , _condition       :: TF.Attr s [TF.Attr s (ConditionSetting s)]
     -- ^ @condition@ - (Optional)
     --
-    , _defaultTtl      :: TF.Attr s P.Integer
+    , _defaultTtl      :: TF.Attr s P.Int
     -- ^ @default_ttl@ - (Optional)
     -- The default Time-to-live (TTL) for the version
     --
-    , _domain          :: TF.Attr s [TF.Attr s (ServiceV1Domain s)]
+    , _domain          :: TF.Attr s [TF.Attr s (DomainSetting s)]
     -- ^ @domain@ - (Required)
     --
     , _forceDestroy    :: TF.Attr s P.Bool
     -- ^ @force_destroy@ - (Optional)
     --
-    , _gcslogging      :: TF.Attr s [TF.Attr s (ServiceV1Gcslogging s)]
+    , _gcslogging      :: TF.Attr s [TF.Attr s (GcsloggingSetting s)]
     -- ^ @gcslogging@ - (Optional)
     --
-    , _gzip            :: TF.Attr s [TF.Attr s (ServiceV1Gzip s)]
+    , _gzip            :: TF.Attr s [TF.Attr s (GzipSetting s)]
     -- ^ @gzip@ - (Optional)
     --
-    , _header          :: TF.Attr s [TF.Attr s (ServiceV1Header s)]
+    , _header          :: TF.Attr s [TF.Attr s (HeaderSetting s)]
     -- ^ @header@ - (Optional)
     --
-    , _healthcheck     :: TF.Attr s [TF.Attr s (ServiceV1Healthcheck s)]
+    , _healthcheck     :: TF.Attr s [TF.Attr s (HealthcheckSetting s)]
     -- ^ @healthcheck@ - (Optional)
     --
-    , _logentries      :: TF.Attr s [TF.Attr s (ServiceV1Logentries s)]
+    , _logentries      :: TF.Attr s [TF.Attr s (LogentriesSetting s)]
     -- ^ @logentries@ - (Optional)
     --
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     -- Unique name for this Service
     --
-    , _papertrail      :: TF.Attr s [TF.Attr s (ServiceV1Papertrail s)]
+    , _papertrail      :: TF.Attr s [TF.Attr s (PapertrailSetting s)]
     -- ^ @papertrail@ - (Optional)
     --
-    , _requestSetting  :: TF.Attr s [TF.Attr s (ServiceV1RequestSetting s)]
+    , _requestSetting  :: TF.Attr s [TF.Attr s (RequestSettingSetting s)]
     -- ^ @request_setting@ - (Optional)
     --
-    , _responseObject  :: TF.Attr s [TF.Attr s (ServiceV1ResponseObject s)]
+    , _responseObject  :: TF.Attr s [TF.Attr s (ResponseObjectSetting s)]
     -- ^ @response_object@ - (Optional)
     --
-    , _s3logging       :: TF.Attr s [TF.Attr s (ServiceV1S3logging s)]
+    , _s3logging       :: TF.Attr s [TF.Attr s (S3loggingSetting s)]
     -- ^ @s3logging@ - (Optional)
     --
-    , _sumologic       :: TF.Attr s [TF.Attr s (ServiceV1Sumologic s)]
+    , _sumologic       :: TF.Attr s [TF.Attr s (SumologicSetting s)]
     -- ^ @sumologic@ - (Optional)
     --
-    , _syslog          :: TF.Attr s [TF.Attr s (ServiceV1Syslog s)]
+    , _syslog          :: TF.Attr s [TF.Attr s (SyslogSetting s)]
     -- ^ @syslog@ - (Optional)
     --
-    , _vcl             :: TF.Attr s [TF.Attr s (ServiceV1Vcl s)]
+    , _vcl             :: TF.Attr s [TF.Attr s (VclSetting s)]
     -- ^ @vcl@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceV1Resource
-    :: TF.Attr s [TF.Attr s (ServiceV1Domain s)] -- ^ @domain@ - 'P.domain'
+    :: TF.Attr s [TF.Attr s (DomainSetting s)] -- ^ @domain@ - 'P.domain'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServiceV1Resource s)
 serviceV1Resource _domain _name =
-    TF.newResource "fastly_service_v1" TF.validator $
+    TF.unsafeResource "fastly_service_v1" P.defaultProvider TF.validator $
         ServiceV1Resource'
             { _backend = TF.Nil
             , _bigquerylogging = TF.Nil
@@ -173,103 +172,35 @@ instance TF.IsObject (ServiceV1Resource s) where
 
 instance TF.IsValid (ServiceV1Resource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_backend"
-                  (_backend
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Backend s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_bigquerylogging"
-                  (_bigquerylogging
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Bigquerylogging s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_cacheSetting"
-                  (_cacheSetting
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1CacheSetting s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_condition"
-                  (_condition
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Condition s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_domain"
-                  (_domain
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Domain s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_gcslogging"
-                  (_gcslogging
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Gcslogging s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_gzip"
-                  (_gzip
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Gzip s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_header"
-                  (_header
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Header s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_healthcheck"
-                  (_healthcheck
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Healthcheck s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_logentries"
-                  (_logentries
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Logentries s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_papertrail"
-                  (_papertrail
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Papertrail s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_requestSetting"
-                  (_requestSetting
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1RequestSetting s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_responseObject"
-                  (_responseObject
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1ResponseObject s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_s3logging"
-                  (_s3logging
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1S3logging s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_sumologic"
-                  (_sumologic
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Sumologic s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_syslog"
-                  (_syslog
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Syslog s)])
-                  TF.validator
-           P.<> TF.settingsValidator "_vcl"
-                  (_vcl
-                      :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Vcl s)])
-                  TF.validator
 
-instance P.HasBackend (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Backend s)]) where
+instance P.HasBackend (ServiceV1Resource s) (TF.Attr s [TF.Attr s (BackendSetting s)]) where
     backend =
-        P.lens (_backend :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Backend s)])
+        P.lens (_backend :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (BackendSetting s)])
                (\s a -> s { _backend = a } :: ServiceV1Resource s)
 
-instance P.HasBigquerylogging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Bigquerylogging s)]) where
+instance P.HasBigquerylogging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (BigqueryloggingSetting s)]) where
     bigquerylogging =
-        P.lens (_bigquerylogging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Bigquerylogging s)])
+        P.lens (_bigquerylogging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (BigqueryloggingSetting s)])
                (\s a -> s { _bigquerylogging = a } :: ServiceV1Resource s)
 
-instance P.HasCacheSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1CacheSetting s)]) where
+instance P.HasCacheSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (CacheSettingSetting s)]) where
     cacheSetting =
-        P.lens (_cacheSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1CacheSetting s)])
+        P.lens (_cacheSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (CacheSettingSetting s)])
                (\s a -> s { _cacheSetting = a } :: ServiceV1Resource s)
 
-instance P.HasCondition (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Condition s)]) where
+instance P.HasCondition (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ConditionSetting s)]) where
     condition =
-        P.lens (_condition :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Condition s)])
+        P.lens (_condition :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ConditionSetting s)])
                (\s a -> s { _condition = a } :: ServiceV1Resource s)
 
-instance P.HasDefaultTtl (ServiceV1Resource s) (TF.Attr s P.Integer) where
+instance P.HasDefaultTtl (ServiceV1Resource s) (TF.Attr s P.Int) where
     defaultTtl =
-        P.lens (_defaultTtl :: ServiceV1Resource s -> TF.Attr s P.Integer)
+        P.lens (_defaultTtl :: ServiceV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _defaultTtl = a } :: ServiceV1Resource s)
 
-instance P.HasDomain (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Domain s)]) where
+instance P.HasDomain (ServiceV1Resource s) (TF.Attr s [TF.Attr s (DomainSetting s)]) where
     domain =
-        P.lens (_domain :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Domain s)])
+        P.lens (_domain :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (DomainSetting s)])
                (\s a -> s { _domain = a } :: ServiceV1Resource s)
 
 instance P.HasForceDestroy (ServiceV1Resource s) (TF.Attr s P.Bool) where
@@ -277,29 +208,29 @@ instance P.HasForceDestroy (ServiceV1Resource s) (TF.Attr s P.Bool) where
         P.lens (_forceDestroy :: ServiceV1Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDestroy = a } :: ServiceV1Resource s)
 
-instance P.HasGcslogging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Gcslogging s)]) where
+instance P.HasGcslogging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (GcsloggingSetting s)]) where
     gcslogging =
-        P.lens (_gcslogging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Gcslogging s)])
+        P.lens (_gcslogging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (GcsloggingSetting s)])
                (\s a -> s { _gcslogging = a } :: ServiceV1Resource s)
 
-instance P.HasGzip (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Gzip s)]) where
+instance P.HasGzip (ServiceV1Resource s) (TF.Attr s [TF.Attr s (GzipSetting s)]) where
     gzip =
-        P.lens (_gzip :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Gzip s)])
+        P.lens (_gzip :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (GzipSetting s)])
                (\s a -> s { _gzip = a } :: ServiceV1Resource s)
 
-instance P.HasHeader (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Header s)]) where
+instance P.HasHeader (ServiceV1Resource s) (TF.Attr s [TF.Attr s (HeaderSetting s)]) where
     header =
-        P.lens (_header :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Header s)])
+        P.lens (_header :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (HeaderSetting s)])
                (\s a -> s { _header = a } :: ServiceV1Resource s)
 
-instance P.HasHealthcheck (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Healthcheck s)]) where
+instance P.HasHealthcheck (ServiceV1Resource s) (TF.Attr s [TF.Attr s (HealthcheckSetting s)]) where
     healthcheck =
-        P.lens (_healthcheck :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Healthcheck s)])
+        P.lens (_healthcheck :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (HealthcheckSetting s)])
                (\s a -> s { _healthcheck = a } :: ServiceV1Resource s)
 
-instance P.HasLogentries (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Logentries s)]) where
+instance P.HasLogentries (ServiceV1Resource s) (TF.Attr s [TF.Attr s (LogentriesSetting s)]) where
     logentries =
-        P.lens (_logentries :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Logentries s)])
+        P.lens (_logentries :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (LogentriesSetting s)])
                (\s a -> s { _logentries = a } :: ServiceV1Resource s)
 
 instance P.HasName (ServiceV1Resource s) (TF.Attr s P.Text) where
@@ -307,42 +238,42 @@ instance P.HasName (ServiceV1Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceV1Resource s)
 
-instance P.HasPapertrail (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Papertrail s)]) where
+instance P.HasPapertrail (ServiceV1Resource s) (TF.Attr s [TF.Attr s (PapertrailSetting s)]) where
     papertrail =
-        P.lens (_papertrail :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Papertrail s)])
+        P.lens (_papertrail :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (PapertrailSetting s)])
                (\s a -> s { _papertrail = a } :: ServiceV1Resource s)
 
-instance P.HasRequestSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1RequestSetting s)]) where
+instance P.HasRequestSetting (ServiceV1Resource s) (TF.Attr s [TF.Attr s (RequestSettingSetting s)]) where
     requestSetting =
-        P.lens (_requestSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1RequestSetting s)])
+        P.lens (_requestSetting :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (RequestSettingSetting s)])
                (\s a -> s { _requestSetting = a } :: ServiceV1Resource s)
 
-instance P.HasResponseObject (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1ResponseObject s)]) where
+instance P.HasResponseObject (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ResponseObjectSetting s)]) where
     responseObject =
-        P.lens (_responseObject :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1ResponseObject s)])
+        P.lens (_responseObject :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ResponseObjectSetting s)])
                (\s a -> s { _responseObject = a } :: ServiceV1Resource s)
 
-instance P.HasS3logging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1S3logging s)]) where
+instance P.HasS3logging (ServiceV1Resource s) (TF.Attr s [TF.Attr s (S3loggingSetting s)]) where
     s3logging =
-        P.lens (_s3logging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1S3logging s)])
+        P.lens (_s3logging :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (S3loggingSetting s)])
                (\s a -> s { _s3logging = a } :: ServiceV1Resource s)
 
-instance P.HasSumologic (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Sumologic s)]) where
+instance P.HasSumologic (ServiceV1Resource s) (TF.Attr s [TF.Attr s (SumologicSetting s)]) where
     sumologic =
-        P.lens (_sumologic :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Sumologic s)])
+        P.lens (_sumologic :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (SumologicSetting s)])
                (\s a -> s { _sumologic = a } :: ServiceV1Resource s)
 
-instance P.HasSyslog (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Syslog s)]) where
+instance P.HasSyslog (ServiceV1Resource s) (TF.Attr s [TF.Attr s (SyslogSetting s)]) where
     syslog =
-        P.lens (_syslog :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Syslog s)])
+        P.lens (_syslog :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (SyslogSetting s)])
                (\s a -> s { _syslog = a } :: ServiceV1Resource s)
 
-instance P.HasVcl (ServiceV1Resource s) (TF.Attr s [TF.Attr s (ServiceV1Vcl s)]) where
+instance P.HasVcl (ServiceV1Resource s) (TF.Attr s [TF.Attr s (VclSetting s)]) where
     vcl =
-        P.lens (_vcl :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (ServiceV1Vcl s)])
+        P.lens (_vcl :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (VclSetting s)])
                (\s a -> s { _vcl = a } :: ServiceV1Resource s)
 
-instance s ~ s' => P.HasComputedActiveVersion (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedActiveVersion (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Int) where
     computedActiveVersion x = TF.compute (TF.refKey x) "active_version"
 
 instance s ~ s' => P.HasComputedDefaultHost (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where

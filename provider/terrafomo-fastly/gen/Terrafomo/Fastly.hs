@@ -13,11 +13,11 @@
 --
 module Terrafomo.Fastly
     ( module Terrafomo.Fastly.DataSource
+    , module Terrafomo.Fastly.Lens
     , module Terrafomo.Fastly.Provider
     , module Terrafomo.Fastly.Resource
-    , module Terrafomo.Fastly.Types
-    , module Terrafomo.Fastly.Lens
     , module Terrafomo.Fastly.Settings
+    , module Terrafomo.Fastly.Types
     -- * Provider Aliases
     ) where
 

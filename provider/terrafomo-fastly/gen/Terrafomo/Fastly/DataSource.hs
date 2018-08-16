@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Fastly.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -54,12 +53,12 @@ import qualified Terrafomo.Validator       as TF
 -- See the <https://www.terraform.io/docs/providers/fastly/d/ip_ranges.html terraform documentation>
 -- for more information.
 data IpRangesData s = IpRangesData'
-    deriving (P.Show, P.Eq, P.Generic)
+    deriving (P.Show, P.Eq, P.Ord)
 
 ipRangesData
     :: P.DataSource (IpRangesData s)
 ipRangesData =
-    TF.newDataSource "fastly_ip_ranges" TF.validator $
+    TF.unsafeDataSource "fastly_ip_ranges" P.defaultProvider TF.validator $
         IpRangesData'
 
 instance TF.IsObject (IpRangesData s) where
