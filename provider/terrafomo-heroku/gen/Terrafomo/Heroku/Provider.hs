@@ -83,18 +83,13 @@ newProvider =
 instance TF.IsProvider Provider where
     type ProviderType Provider = "heroku"
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy Provider)
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "api_key" <$> _apiKey
-                  , TF.assign "email" <$> _email
-                  , TF.assign "headers" <$> _headers
-                  ])
+instance TF.IsObject Provider where
+    toObject x@Provider'{..} =
+        P.catMaybes
+            [ TF.assign "api_key" <$> _apiKey
+            , TF.assign "email" <$> _email
+            , TF.assign "headers" <$> _headers
+            ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

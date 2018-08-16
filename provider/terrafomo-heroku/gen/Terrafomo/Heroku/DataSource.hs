@@ -70,7 +70,7 @@ appData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (AppData s)
 appData _name =
-    TF.unsafeDataSource "heroku_app" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "heroku_app" TF.validator $
         AppData'
             { _name = _name
             }
@@ -138,7 +138,7 @@ spaceData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SpaceData s)
 spaceData _name =
-    TF.unsafeDataSource "heroku_space" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "heroku_space" TF.validator $
         SpaceData'
             { _name = _name
             }
@@ -191,7 +191,7 @@ spacePeeringInfoData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SpacePeeringInfoData s)
 spacePeeringInfoData _name =
-    TF.unsafeDataSource "heroku_space_peering_info" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "heroku_space_peering_info" TF.validator $
         SpacePeeringInfoData'
             { _name = _name
             }

@@ -133,7 +133,7 @@ addonResource
     -> TF.Attr s P.Text -- ^ @plan@ - 'P.plan'
     -> P.Resource (AddonResource s)
 addonResource _app _plan =
-    TF.unsafeResource "heroku_addon" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_addon" TF.validator $
         AddonResource'
             { _app = _app
             , _config = TF.Nil
@@ -192,7 +192,7 @@ addonAttachmentResource
     -> TF.Attr s P.Text -- ^ @app_id@ - 'P.appId'
     -> P.Resource (AddonAttachmentResource s)
 addonAttachmentResource _addonId _appId =
-    TF.unsafeResource "heroku_addon_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_addon_attachment" TF.validator $
         AddonAttachmentResource'
             { _addonId = _addonId
             , _appId = _appId
@@ -250,7 +250,7 @@ appResource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (AppResource s)
 appResource _name _region =
-    TF.unsafeResource "heroku_app" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_app" TF.validator $
         AppResource'
             { _acm = TF.Nil
             , _buildpacks = TF.Nil
@@ -345,7 +345,7 @@ appFeatureResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AppFeatureResource s)
 appFeatureResource _app _name =
-    TF.unsafeResource "heroku_app_feature" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_app_feature" TF.validator $
         AppFeatureResource'
             { _app = _app
             , _enabled = TF.value P.True
@@ -395,7 +395,7 @@ appReleaseResource
     -> TF.Attr s P.Text -- ^ @slug_id@ - 'P.slugId'
     -> P.Resource (AppReleaseResource s)
 appReleaseResource _app _slugId =
-    TF.unsafeResource "heroku_app_release" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_app_release" TF.validator $
         AppReleaseResource'
             { _app = _app
             , _slugId = _slugId
@@ -445,7 +445,7 @@ certResource
     -> TF.Attr s P.Text -- ^ @private_key@ - 'P.privateKey'
     -> P.Resource (CertResource s)
 certResource _app _certificateChain _privateKey =
-    TF.unsafeResource "heroku_cert" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_cert" TF.validator $
         CertResource'
             { _app = _app
             , _certificateChain = _certificateChain
@@ -501,7 +501,7 @@ domainResource
     -> TF.Attr s P.Text -- ^ @hostname@ - 'P.hostname'
     -> P.Resource (DomainResource s)
 domainResource _app _hostname =
-    TF.unsafeResource "heroku_domain" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_domain" TF.validator $
         DomainResource'
             { _app = _app
             , _hostname = _hostname
@@ -547,7 +547,7 @@ drainResource
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> P.Resource (DrainResource s)
 drainResource _app _url =
-    TF.unsafeResource "heroku_drain" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_drain" TF.validator $
         DrainResource'
             { _app = _app
             , _url = _url
@@ -601,7 +601,7 @@ formationResource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (FormationResource s)
 formationResource _app _quantity _size _type' =
-    TF.unsafeResource "heroku_formation" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_formation" TF.validator $
         FormationResource'
             { _app = _app
             , _quantity = _quantity
@@ -654,7 +654,7 @@ pipelineResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PipelineResource s)
 pipelineResource _name =
-    TF.unsafeResource "heroku_pipeline" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_pipeline" TF.validator $
         PipelineResource'
             { _name = _name
             }
@@ -694,7 +694,7 @@ pipelineCouplingResource
     -> TF.Attr s P.Text -- ^ @stage@ - 'P.stage'
     -> P.Resource (PipelineCouplingResource s)
 pipelineCouplingResource _app _pipeline _stage =
-    TF.unsafeResource "heroku_pipeline_coupling" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_pipeline_coupling" TF.validator $
         PipelineCouplingResource'
             { _app = _app
             , _pipeline = _pipeline
@@ -753,7 +753,7 @@ spaceResource
     -> TF.Attr s P.Text -- ^ @organization@ - 'P.organization'
     -> P.Resource (SpaceResource s)
 spaceResource _name _organization =
-    TF.unsafeResource "heroku_space" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_space" TF.validator $
         SpaceResource'
             { _name = _name
             , _organization = _organization
@@ -817,7 +817,7 @@ spaceAppAccessResource
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceAppAccessResource s)
 spaceAppAccessResource _email _permissions _space =
-    TF.unsafeResource "heroku_space_app_access" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_space_app_access" TF.validator $
         SpaceAppAccessResource'
             { _email = _email
             , _permissions = _permissions
@@ -867,7 +867,7 @@ spaceInboundRulesetResource
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceInboundRulesetResource s)
 spaceInboundRulesetResource _rule _space =
-    TF.unsafeResource "heroku_space_inbound_ruleset" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_space_inbound_ruleset" TF.validator $
         SpaceInboundRulesetResource'
             { _rule = _rule
             , _space = _space
@@ -910,7 +910,7 @@ spacePeeringConnectionAccepterResource
     -> TF.Attr s P.Text -- ^ @vpc_peering_connection_id@ - 'P.vpcPeeringConnectionId'
     -> P.Resource (SpacePeeringConnectionAccepterResource s)
 spacePeeringConnectionAccepterResource _space _vpcPeeringConnectionId =
-    TF.unsafeResource "heroku_space_peering_connection_accepter" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_space_peering_connection_accepter" TF.validator $
         SpacePeeringConnectionAccepterResource'
             { _space = _space
             , _vpcPeeringConnectionId = _vpcPeeringConnectionId
@@ -967,7 +967,7 @@ spaceVpnConnectionResource
     -> TF.Attr s P.Text -- ^ @space@ - 'P.space'
     -> P.Resource (SpaceVpnConnectionResource s)
 spaceVpnConnectionResource _name _publicIp _routableCidrs _space =
-    TF.unsafeResource "heroku_space_vpn_connection" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_space_vpn_connection" TF.validator $
         SpaceVpnConnectionResource'
             { _name = _name
             , _publicIp = _publicIp
@@ -1037,7 +1037,7 @@ teamCollaboratorResource
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @permissions@ - 'P.permissions'
     -> P.Resource (TeamCollaboratorResource s)
 teamCollaboratorResource _app _email _permissions =
-    TF.unsafeResource "heroku_team_collaborator" P.defaultProvider TF.validator $
+    TF.unsafeResource "heroku_team_collaborator" TF.validator $
         TeamCollaboratorResource'
             { _app = _app
             , _email = _email
