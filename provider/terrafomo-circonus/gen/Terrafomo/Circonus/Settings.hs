@@ -289,14 +289,14 @@ data CloudwatchSetting s = CloudwatchSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newCloudwatchSetting
-    :: TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> TF.Attr s P.Text -- ^ @api_secret@ - 'P.apiSecret'
-    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimmensions@ - 'P.dimmensions'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimmensions@ - 'P.dimmensions'
+    -> TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @metric@ - 'P.metric'
     -> TF.Attr s P.Text -- ^ @namespace@ - 'P.namespace'
+    -> TF.Attr s P.Text -- ^ @api_secret@ - 'P.apiSecret'
     -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> CloudwatchSetting s
-newCloudwatchSetting _apiKey _apiSecret _dimmensions _metric _namespace _url =
+newCloudwatchSetting _dimmensions _apiKey _metric _namespace _apiSecret _url =
     CloudwatchSetting'
         { _apiKey = _apiKey
         , _apiSecret = _apiSecret
@@ -785,10 +785,10 @@ data HttpSetting s = HttpSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newHttpSetting
-    :: TF.Attr s P.Text -- ^ @url@ - 'P.url'
-    -> TF.Attr s P.Text -- ^ @address@ - 'P.address'
+    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
+    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
     -> HttpSetting s
-newHttpSetting _url _address =
+newHttpSetting _address _url =
     HttpSetting'
         { _authMethod = TF.Nil
         , _authPassword = TF.Nil
@@ -1359,10 +1359,10 @@ data MetricSetting s = MetricSetting'
 
 newMetricSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> TF.Attr s P.Text -- ^ @metric_type@ - 'P.metricType'
+    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> MetricSetting s
-newMetricSetting _name _type' _metricType =
+newMetricSetting _name _metricType _type' =
     MetricSetting'
         { _active = TF.value P.True
         , _name = _name
@@ -2438,13 +2438,13 @@ data VictoropsSetting s = VictoropsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newVictoropsSetting
-    :: TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
-    -> TF.Attr s P.Int -- ^ @critical@ - 'P.critical'
+    :: TF.Attr s P.Int -- ^ @critical@ - 'P.critical'
     -> TF.Attr s P.Int -- ^ @info@ - 'P.info'
+    -> TF.Attr s P.Text -- ^ @api_key@ - 'P.apiKey'
     -> TF.Attr s P.Text -- ^ @team@ - 'P.team'
     -> TF.Attr s P.Int -- ^ @warning@ - 'P.warning'
     -> VictoropsSetting s
-newVictoropsSetting _apiKey _critical _info _team _warning =
+newVictoropsSetting _critical _info _apiKey _team _warning =
     VictoropsSetting'
         { _apiKey = _apiKey
         , _contactGroupFallback = TF.Nil
