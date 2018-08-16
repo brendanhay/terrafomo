@@ -32,7 +32,6 @@ library:
     - Terrafomo.Provider
     - Terrafomo.RemoteState
     - Terrafomo.Schema
-    - Terrafomo.TH
     - Terrafomo.Validator
 
   dependencies:
@@ -42,12 +41,10 @@ library:
     - formatting >= 6.2.5
     - iproute
     - microlens
-    - microlens-th
     - mmorph
     - mtl
     - prettyprinter
     - random
-    - template-haskell
     - text
     - transformers
 
