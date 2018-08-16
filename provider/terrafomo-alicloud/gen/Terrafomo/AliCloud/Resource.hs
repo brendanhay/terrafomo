@@ -519,6 +519,9 @@ instance P.HasVideoSeekEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_videoSeekEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _videoSeekEnable = a } :: CdnDomainResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedScope (TF.Ref s' (CdnDomainResource s)) (TF.Attr s P.Text) where
     computedScope x = TF.compute (TF.refKey x) "scope"
 
@@ -699,6 +702,9 @@ instance P.HasTriggeredCount (CmsAlarmResource s) (TF.Attr s P.Int) where
         P.lens (_triggeredCount :: CmsAlarmResource s -> TF.Attr s P.Int)
                (\s a -> s { _triggeredCount = a } :: CmsAlarmResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CmsAlarmResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
@@ -837,6 +843,9 @@ instance P.HasVswitchId (ContainerClusterResource s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: ContainerClusterResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
 
@@ -968,6 +977,9 @@ instance P.HasVersion (CsApplicationResource s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: CsApplicationResource s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: CsApplicationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDefaultDomain (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
     computedDefaultDomain x = TF.compute (TF.refKey x) "default_domain"
@@ -1199,6 +1211,9 @@ instance P.HasWorkerNumber (CsKubernetesResource s) (TF.Attr s P.Int) where
         P.lens (_workerNumber :: CsKubernetesResource s -> TF.Attr s P.Int)
                (\s a -> s { _workerNumber = a } :: CsKubernetesResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
@@ -1370,6 +1385,9 @@ instance P.HasVswitchId (CsSwarmResource s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: CsSwarmResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: CsSwarmResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedAgentVersion x = TF.compute (TF.refKey x) "agent_version"
 
@@ -1462,6 +1480,9 @@ instance P.HasType' (DbAccountResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: DbAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: DbAccountResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_db_account_privilege@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/db_account_privilege.html terraform documentation>
@@ -1525,6 +1546,9 @@ instance P.HasPrivilege (DbAccountPrivilegeResource s) (TF.Attr s P.Text) where
     privilege =
         P.lens (_privilege :: DbAccountPrivilegeResource s -> TF.Attr s P.Text)
                (\s a -> s { _privilege = a } :: DbAccountPrivilegeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbAccountPrivilegeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_db_backup_policy@ Resource.
 --
@@ -1598,6 +1622,9 @@ instance P.HasRetentionPeriod (DbBackupPolicyResource s) (TF.Attr s P.Int) where
         P.lens (_retentionPeriod :: DbBackupPolicyResource s -> TF.Attr s P.Int)
                (\s a -> s { _retentionPeriod = a } :: DbBackupPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedBackupPeriod (TF.Ref s' (DbBackupPolicyResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedBackupPeriod x = TF.compute (TF.refKey x) "backup_period"
 
@@ -1642,6 +1669,9 @@ instance P.HasPort (DbConnectionResource s) (TF.Attr s P.Text) where
     port =
         P.lens (_port :: DbConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _port = a } :: DbConnectionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedConnectionPrefix (TF.Ref s' (DbConnectionResource s)) (TF.Attr s P.Text) where
     computedConnectionPrefix x = TF.compute (TF.refKey x) "connection_prefix"
@@ -1714,6 +1744,9 @@ instance P.HasName (DbDatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DbDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DbDatabaseResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbDatabaseResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_db_instance@ Resource.
 --
@@ -1819,6 +1852,9 @@ instance P.HasVswitchId (DbInstanceResource s) (TF.Attr s P.Text) where
     vswitchId =
         P.lens (_vswitchId :: DbInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: DbInstanceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (DbInstanceResource s)) (TF.Attr s P.Text) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
@@ -1934,6 +1970,9 @@ instance P.HasTags (DiskResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
         P.lens (_tags :: DiskResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DiskResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DiskResource s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
@@ -1978,6 +2017,9 @@ instance P.HasInstanceId (DiskAttachmentResource s) (TF.Attr s P.Text) where
         P.lens (_instanceId :: DiskAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceId = a } :: DiskAttachmentResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_dns@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/dns.html terraform documentation>
@@ -2020,6 +2062,9 @@ instance P.HasName (DnsResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedDnsServer (TF.Ref s' (DnsResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedDnsServer x = TF.compute (TF.refKey x) "dns_server"
 
@@ -2054,6 +2099,9 @@ instance P.HasName (DnsGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_dns_record@ Resource.
 --
@@ -2150,6 +2198,9 @@ instance P.HasValue (DnsRecordResource s) (TF.Attr s P.Text) where
         P.lens (_value :: DnsRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _value = a } :: DnsRecordResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsRecordResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DnsRecordResource s)) (TF.Attr s P.Bool) where
     computedLocked x = TF.compute (TF.refKey x) "locked"
 
@@ -2237,6 +2288,9 @@ instance P.HasPeriod (EipResource s) (TF.Attr s P.Int) where
         P.lens (_period :: EipResource s -> TF.Attr s P.Int)
                (\s a -> s { _period = a } :: EipResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedInstance (TF.Ref s' (EipResource s)) (TF.Attr s P.Text) where
     computedInstance x = TF.compute (TF.refKey x) "instance"
 
@@ -2264,6 +2318,9 @@ instance TF.IsObject (EipAssociationResource s) where
 
 instance TF.IsValid (EipAssociationResource s) where
     validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (EipAssociationResource s)) (TF.Attr s P.Text) where
     computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
@@ -2323,6 +2380,9 @@ instance P.HasScalingGroupId (EssAttachmentResource s) (TF.Attr s P.Text) where
     scalingGroupId =
         P.lens (_scalingGroupId :: EssAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _scalingGroupId = a } :: EssAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ess_scaling_configuration@ Resource.
 --
@@ -2509,6 +2569,9 @@ instance P.HasUserData (EssScalingConfigurationResource s) (TF.Attr s P.Text) wh
         P.lens (_userData :: EssScalingConfigurationResource s -> TF.Attr s P.Text)
                (\s a -> s { _userData = a } :: EssScalingConfigurationResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedActive (TF.Ref s' (EssScalingConfigurationResource s)) (TF.Attr s P.Bool) where
     computedActive x = TF.compute (TF.refKey x) "active"
 
@@ -2624,6 +2687,9 @@ instance P.HasVswitchIds (EssScalingGroupResource s) (TF.Attr s (P.NonEmpty (TF.
         P.lens (_vswitchIds :: EssScalingGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _vswitchIds = a } :: EssScalingGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ess_scaling_rule@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_rule.html terraform documentation>
@@ -2687,6 +2753,9 @@ instance P.HasScalingGroupId (EssScalingRuleResource s) (TF.Attr s P.Text) where
     scalingGroupId =
         P.lens (_scalingGroupId :: EssScalingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _scalingGroupId = a } :: EssScalingRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAri (TF.Ref s' (EssScalingRuleResource s)) (TF.Attr s P.Text) where
     computedAri x = TF.compute (TF.refKey x) "ari"
@@ -2766,6 +2835,9 @@ instance P.HasTaskEnabled (EssScheduleResource s) (TF.Attr s P.Bool) where
     taskEnabled =
         P.lens (_taskEnabled :: EssScheduleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _taskEnabled = a } :: EssScheduleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (EssScheduleResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
@@ -2929,6 +3001,9 @@ instance P.HasTimeout (FcFunctionResource s) (TF.Attr s P.Int) where
         P.lens (_timeout :: FcFunctionResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeout = a } :: FcFunctionResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcFunctionResource s)) (TF.Attr s P.Text) where
     computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
@@ -3023,6 +3098,9 @@ instance P.HasVpcConfig (FcServiceResource s) (TF.Attr s (VpcConfigSetting s)) w
     vpcConfig =
         P.lens (_vpcConfig :: FcServiceResource s -> TF.Attr s (VpcConfigSetting s))
                (\s a -> s { _vpcConfig = a } :: FcServiceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
     computedLastModified x = TF.compute (TF.refKey x) "last_modified"
@@ -3125,6 +3203,9 @@ instance P.HasType' (FcTriggerResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: FcTriggerResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: FcTriggerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FcTriggerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (FcTriggerResource s)) (TF.Attr s P.Text) where
     computedLastModified x = TF.compute (TF.refKey x) "last_modified"
 
@@ -3217,6 +3298,9 @@ instance P.HasIpProtocol (ForwardEntryResource s) (TF.Attr s P.Text) where
     ipProtocol =
         P.lens (_ipProtocol :: ForwardEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipProtocol = a } :: ForwardEntryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ForwardEntryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_instance@ Resource.
 --
@@ -3472,6 +3556,9 @@ instance P.HasVswitchId (InstanceResource s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: InstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: InstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (InstanceResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
@@ -3550,6 +3637,9 @@ instance P.HasPublicKey (KeyPairResource s) (TF.Attr s P.Text) where
         P.lens (_publicKey :: KeyPairResource s -> TF.Attr s P.Text)
                (\s a -> s { _publicKey = a } :: KeyPairResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairResource s)) (TF.Attr s P.Text) where
     computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
 
@@ -3598,6 +3688,9 @@ instance P.HasKeyName (KeyPairAttachmentResource s) (TF.Attr s P.Text) where
     keyName =
         P.lens (_keyName :: KeyPairAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _keyName = a } :: KeyPairAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_kms_key@ Resource.
 --
@@ -3659,6 +3752,9 @@ instance P.HasKeyUsage (KmsKeyResource s) (TF.Attr s P.Text) where
     keyUsage =
         P.lens (_keyUsage :: KmsKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _keyUsage = a } :: KmsKeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (KmsKeyResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
@@ -3737,6 +3833,9 @@ instance P.HasTopic (LogMachineGroupResource s) (TF.Attr s P.Text) where
         P.lens (_topic :: LogMachineGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _topic = a } :: LogMachineGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogMachineGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_log_project@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/log_project.html terraform documentation>
@@ -3778,6 +3877,9 @@ instance P.HasName (LogProjectResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LogProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LogProjectResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogProjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_log_store@ Resource.
 --
@@ -3841,6 +3943,9 @@ instance P.HasShardCount (LogStoreResource s) (TF.Attr s P.Int) where
     shardCount =
         P.lens (_shardCount :: LogStoreResource s -> TF.Attr s P.Int)
                (\s a -> s { _shardCount = a } :: LogStoreResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (ShardsSetting s)]) where
     computedShards x = TF.compute (TF.refKey x) "shards"
@@ -3912,6 +4017,9 @@ instance P.HasProject (LogStoreIndexResource s) (TF.Attr s P.Text) where
         P.lens (_project :: LogStoreIndexResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: LogStoreIndexResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreIndexResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_nat_gateway@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/nat_gateway.html terraform documentation>
@@ -3963,6 +4071,9 @@ instance P.HasVpcId (NatGatewayResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: NatGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: NatGatewayResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBandwidthPackageIds (TF.Ref s' (NatGatewayResource s)) (TF.Attr s P.Text) where
     computedBandwidthPackageIds x = TF.compute (TF.refKey x) "bandwidth_package_ids"
@@ -4074,6 +4185,9 @@ instance P.HasWebsite (OssBucketResource s) (TF.Attr s (WebsiteSetting s)) where
     website =
         P.lens (_website :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
                (\s a -> s { _website = a } :: OssBucketResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedCreationDate x = TF.compute (TF.refKey x) "creation_date"
@@ -4236,6 +4350,9 @@ instance P.HasSource (OssBucketObjectResource s) (TF.Attr s P.Text) where
         P.lens (_source :: OssBucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _source = a } :: OssBucketObjectResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedContentLength (TF.Ref s' (OssBucketObjectResource s)) (TF.Attr s P.Text) where
     computedContentLength x = TF.compute (TF.refKey x) "content_length"
 
@@ -4321,6 +4438,9 @@ instance P.HasTags (OtsInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P
         P.lens (_tags :: OtsInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: OtsInstanceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ots_instance_attachment@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ots_instance_attachment.html terraform documentation>
@@ -4374,6 +4494,9 @@ instance P.HasVswitchId (OtsInstanceAttachmentResource s) (TF.Attr s P.Text) whe
     vswitchId =
         P.lens (_vswitchId :: OtsInstanceAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: OtsInstanceAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OtsInstanceAttachmentResource s)) (TF.Attr s P.Text) where
     computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
@@ -4454,6 +4577,9 @@ instance P.HasTimeToLive (OtsTableResource s) (TF.Attr s P.Int) where
         P.lens (_timeToLive :: OtsTableResource s -> TF.Attr s P.Int)
                (\s a -> s { _timeToLive = a } :: OtsTableResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OtsTableResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_access_key@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_access_key.html terraform documentation>
@@ -4505,6 +4631,9 @@ instance P.HasUserName (RamAccessKeyResource s) (TF.Attr s P.Text) where
         P.lens (_userName :: RamAccessKeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _userName = a } :: RamAccessKeyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamAccessKeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_account_alias@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_account_alias.html terraform documentation>
@@ -4537,6 +4666,9 @@ instance P.HasAccountAlias (RamAccountAliasResource s) (TF.Attr s P.Text) where
         P.lens (_accountAlias :: RamAccountAliasResource s -> TF.Attr s P.Text)
                (\s a -> s { _accountAlias = a } :: RamAccountAliasResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamAccountAliasResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_alias@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_alias.html terraform documentation>
@@ -4568,6 +4700,9 @@ instance P.HasAccountAlias (RamAliasResource s) (TF.Attr s P.Text) where
     accountAlias =
         P.lens (_accountAlias :: RamAliasResource s -> TF.Attr s P.Text)
                (\s a -> s { _accountAlias = a } :: RamAliasResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamAliasResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ram_group@ Resource.
 --
@@ -4621,6 +4756,9 @@ instance P.HasName (RamGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RamGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RamGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_group_membership@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_group_membership.html terraform documentation>
@@ -4663,6 +4801,9 @@ instance P.HasUserNames (RamGroupMembershipResource s) (TF.Attr s [TF.Attr s P.T
     userNames =
         P.lens (_userNames :: RamGroupMembershipResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _userNames = a } :: RamGroupMembershipResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupMembershipResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ram_group_policy_attachment@ Resource.
 --
@@ -4717,6 +4858,9 @@ instance P.HasPolicyType (RamGroupPolicyAttachmentResource s) (TF.Attr s P.Text)
     policyType =
         P.lens (_policyType :: RamGroupPolicyAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyType = a } :: RamGroupPolicyAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ram_login_profile@ Resource.
 --
@@ -4781,6 +4925,9 @@ instance P.HasUserName (RamLoginProfileResource s) (TF.Attr s P.Text) where
         P.lens (_userName :: RamLoginProfileResource s -> TF.Attr s P.Text)
                (\s a -> s { _userName = a } :: RamLoginProfileResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamLoginProfileResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_policy.html terraform documentation>
@@ -4842,6 +4989,9 @@ instance P.HasVersion (RamPolicyResource s) (TF.Attr s P.Text) where
     version =
         P.lens (_version :: RamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: RamPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Int) where
     computedAttachmentCount x = TF.compute (TF.refKey x) "attachment_count"
@@ -4917,6 +5067,9 @@ instance P.HasVersion (RamRoleResource s) (TF.Attr s P.Text) where
         P.lens (_version :: RamRoleResource s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: RamRoleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (RamRoleResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
@@ -4972,6 +5125,9 @@ instance P.HasRoleName (RamRoleAttachmentResource s) (TF.Attr s P.Text) where
         P.lens (_roleName :: RamRoleAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _roleName = a } :: RamRoleAttachmentResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRoleAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_role_policy_attachment@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_role_policy_attachment.html terraform documentation>
@@ -5025,6 +5181,9 @@ instance P.HasRoleName (RamRolePolicyAttachmentResource s) (TF.Attr s P.Text) wh
     roleName =
         P.lens (_roleName :: RamRolePolicyAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _roleName = a } :: RamRolePolicyAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolePolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_ram_user@ Resource.
 --
@@ -5108,6 +5267,9 @@ instance P.HasName (RamUserResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RamUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RamUserResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_ram_user_policy_attachment@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ram_user_policy_attachment.html terraform documentation>
@@ -5161,6 +5323,9 @@ instance P.HasUserName (RamUserPolicyAttachmentResource s) (TF.Attr s P.Text) wh
     userName =
         P.lens (_userName :: RamUserPolicyAttachmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _userName = a } :: RamUserPolicyAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUserPolicyAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_route_entry@ Resource.
 --
@@ -5223,6 +5388,9 @@ instance P.HasRouteTableId (RouteEntryResource s) (TF.Attr s P.Text) where
     routeTableId =
         P.lens (_routeTableId :: RouteEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _routeTableId = a } :: RouteEntryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteEntryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_router_interface@ Resource.
 --
@@ -5339,6 +5507,9 @@ instance P.HasSpecification (RouterInterfaceResource s) (TF.Attr s P.Text) where
         P.lens (_specification :: RouterInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _specification = a } :: RouterInterfaceResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_router_interface_connection@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/router_interface_connection.html terraform documentation>
@@ -5391,6 +5562,9 @@ instance P.HasOppositeRouterType (RouterInterfaceConnectionResource s) (TF.Attr 
     oppositeRouterType =
         P.lens (_oppositeRouterType :: RouterInterfaceConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _oppositeRouterType = a } :: RouterInterfaceConnectionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedOppositeInterfaceOwnerId (TF.Ref s' (RouterInterfaceConnectionResource s)) (TF.Attr s P.Text) where
     computedOppositeInterfaceOwnerId x = TF.compute (TF.refKey x) "opposite_interface_owner_id"
@@ -5458,6 +5632,9 @@ instance P.HasVpcId (SecurityGroupResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: SecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: SecurityGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_security_group_rule@ Resource.
 --
@@ -5591,6 +5768,9 @@ instance P.HasType' (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: SecurityGroupRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedNicType (TF.Ref s' (SecurityGroupRuleResource s)) (TF.Attr s P.Text) where
     computedNicType x = TF.compute (TF.refKey x) "nic_type"
 
@@ -5675,6 +5855,9 @@ instance P.HasVswitchId (SlbResource s) (TF.Attr s P.Text) where
         P.lens (_vswitchId :: SlbResource s -> TF.Attr s P.Text)
                (\s a -> s { _vswitchId = a } :: SlbResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (SlbResource s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
@@ -5730,6 +5913,9 @@ instance P.HasWeight (SlbAttachmentResource s) (TF.Attr s P.Int) where
     weight =
         P.lens (_weight :: SlbAttachmentResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: SlbAttachmentResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedBackendServers (TF.Ref s' (SlbAttachmentResource s)) (TF.Attr s P.Text) where
     computedBackendServers x = TF.compute (TF.refKey x) "backend_servers"
@@ -5980,6 +6166,9 @@ instance P.HasUnhealthyThreshold (SlbListenerResource s) (TF.Attr s P.Int) where
         P.lens (_unhealthyThreshold :: SlbListenerResource s -> TF.Attr s P.Int)
                (\s a -> s { _unhealthyThreshold = a } :: SlbListenerResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedHealthCheckConnectPort (TF.Ref s' (SlbListenerResource s)) (TF.Attr s P.Int) where
     computedHealthCheckConnectPort x = TF.compute (TF.refKey x) "health_check_connect_port"
 
@@ -6067,6 +6256,9 @@ instance P.HasUrl (SlbRuleResource s) (TF.Attr s P.Text) where
         P.lens (_url :: SlbRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _url = a } :: SlbRuleResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_slb_server_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/slb_server_group.html terraform documentation>
@@ -6119,6 +6311,9 @@ instance P.HasServers (SlbServerGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr
     servers =
         P.lens (_servers :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s))))
                (\s a -> s { _servers = a } :: SlbServerGroupResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbServerGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_snat_entry@ Resource.
 --
@@ -6173,6 +6368,9 @@ instance P.HasSourceVswitchId (SnatEntryResource s) (TF.Attr s P.Text) where
     sourceVswitchId =
         P.lens (_sourceVswitchId :: SnatEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceVswitchId = a } :: SnatEntryResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnatEntryResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @alicloud_subnet@ Resource.
 --
@@ -6248,6 +6446,9 @@ instance P.HasVpcId (SubnetResource s) (TF.Attr s P.Text) where
         P.lens (_vpcId :: SubnetResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: SubnetResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @alicloud_vpc@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/vpc.html terraform documentation>
@@ -6299,6 +6500,9 @@ instance P.HasName (VpcResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: VpcResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VpcResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (VpcResource s)) (TF.Attr s P.Text) where
     computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
@@ -6379,3 +6583,6 @@ instance P.HasVpcId (VswitchResource s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: VswitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: VswitchResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VswitchResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
