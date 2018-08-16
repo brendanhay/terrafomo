@@ -169,6 +169,7 @@ module Terrafomo.Spotinst.Lens
     , HasComputedEbsOptimized (..)
     , HasComputedEncrypted (..)
     , HasComputedEvaluationPeriods (..)
+    , HasComputedId (..)
     , HasComputedMaxSize (..)
     , HasComputedMinSize (..)
     , HasComputedOperator (..)
@@ -1076,6 +1077,9 @@ class HasComputedEncrypted a b | a -> b where
 
 class HasComputedEvaluationPeriods a b | a -> b where
     computedEvaluationPeriods :: a -> b
+
+class HasComputedId a b | a -> b where
+    computedId :: a -> b
 
 class HasComputedMaxSize a b | a -> b where
     computedMaxSize :: a -> b

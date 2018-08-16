@@ -728,6 +728,9 @@ instance P.HasUtilizeReservedInstances (ElastigroupAwsResource s) (TF.Attr s P.B
         P.lens (_utilizeReservedInstances :: ElastigroupAwsResource s -> TF.Attr s P.Bool)
                (\s a -> s { _utilizeReservedInstances = a } :: ElastigroupAwsResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCapacityUnit (TF.Ref s' (ElastigroupAwsResource s)) (TF.Attr s P.Text) where
     computedCapacityUnit x = TF.compute (TF.refKey x) "capacity_unit"
 
@@ -814,3 +817,6 @@ instance P.HasResourceId (SubscriptionResource s) (TF.Attr s P.Text) where
     resourceId =
         P.lens (_resourceId :: SubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceId = a } :: SubscriptionResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
