@@ -118,8 +118,8 @@ data ServiceV1Resource s = ServiceV1Resource'
 
 -- | Define a new @fastly_service_v1@ resource value.
 serviceV1Resource
-    :: TF.Attr s [TF.Attr s (DomainSetting s)] -- ^ @domain@ - 'P.domain'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s [TF.Attr s (DomainSetting s)] -- ^ @domain@ ('P._domain', 'P.domain')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ServiceV1Resource s)
 serviceV1Resource _domain _name =
     TF.unsafeResource "fastly_service_v1" TF.validator $

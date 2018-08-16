@@ -17,10 +17,11 @@
 --
 module Terrafomo.Fastly.Provider
     (
+    -- * Fastly Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** Fastly Specific Aliases
+    -- * Fastly Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -81,7 +82,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "fastly"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ TF.assign "api_key" <$> _apiKey
             , TF.assign "base_url" <$> _baseUrl

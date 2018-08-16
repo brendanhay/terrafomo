@@ -208,8 +208,8 @@ data BackendSetting s = BackendSetting'
 
 -- | Construct a new @backend@ settings value.
 newBackendSetting
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._address': @address@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> BackendSetting s
 newBackendSetting _address _name =
     BackendSetting'
@@ -423,10 +423,10 @@ data BigqueryloggingSetting s = BigqueryloggingSetting'
 
 -- | Construct a new @bigquerylogging@ settings value.
 newBigqueryloggingSetting
-    :: TF.Attr s P.Text -- ^ @dataset@ - 'P.dataset'
-    -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @table@ - 'P.table'
+    :: TF.Attr s P.Text -- ^ 'P._dataset': @dataset@
+    -> TF.Attr s P.Text -- ^ 'P._projectId': @project_id@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._table': @table@
     -> BigqueryloggingSetting s
 newBigqueryloggingSetting _dataset _projectId _name _table =
     BigqueryloggingSetting'
@@ -522,7 +522,7 @@ data CacheSettingSetting s = CacheSettingSetting'
 
 -- | Construct a new @cache_setting@ settings value.
 newCacheSettingSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> CacheSettingSetting s
 newCacheSettingSetting _name =
     CacheSettingSetting'
@@ -593,9 +593,9 @@ data ConditionSetting s = ConditionSetting'
 
 -- | Construct a new @condition@ settings value.
 newConditionSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @statement@ - 'P.statement'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._statement': @statement@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> ConditionSetting s
 newConditionSetting _name _statement _type' =
     ConditionSetting'
@@ -650,7 +650,7 @@ data DomainSetting s = DomainSetting'
 
 -- | Construct a new @domain@ settings value.
 newDomainSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DomainSetting s
 newDomainSetting _name =
     DomainSetting'
@@ -729,8 +729,8 @@ data GcsloggingSetting s = GcsloggingSetting'
 
 -- | Construct a new @gcslogging@ settings value.
 newGcsloggingSetting
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._bucketName': @bucket_name@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GcsloggingSetting s
 newGcsloggingSetting _bucketName _name =
     GcsloggingSetting'
@@ -843,7 +843,7 @@ data GzipSetting s = GzipSetting'
 
 -- | Construct a new @gzip@ settings value.
 newGzipSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> GzipSetting s
 newGzipSetting _name =
     GzipSetting'
@@ -928,10 +928,10 @@ data HeaderSetting s = HeaderSetting'
 
 -- | Construct a new @header@ settings value.
 newHeaderSetting
-    :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @destination@ - 'P.destination'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._action': @action@
+    -> TF.Attr s P.Text -- ^ 'P._destination': @destination@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> HeaderSetting s
 newHeaderSetting _action _destination _name _type' =
     HeaderSetting'
@@ -1067,9 +1067,9 @@ data HealthcheckSetting s = HealthcheckSetting'
 
 -- | Construct a new @healthcheck@ settings value.
 newHealthcheckSetting
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._path': @path@
     -> HealthcheckSetting s
 newHealthcheckSetting _host _name _path =
     HealthcheckSetting'
@@ -1195,8 +1195,8 @@ data LogentriesSetting s = LogentriesSetting'
 
 -- | Construct a new @logentries@ settings value.
 newLogentriesSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @token@ - 'P.token'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._token': @token@
     -> LogentriesSetting s
 newLogentriesSetting _name _token =
     LogentriesSetting'
@@ -1285,9 +1285,9 @@ data PapertrailSetting s = PapertrailSetting'
 
 -- | Construct a new @papertrail@ settings value.
 newPapertrailSetting
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s P.Text -- ^ 'P._address': @address@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> PapertrailSetting s
 newPapertrailSetting _address _name _port =
     PapertrailSetting'
@@ -1392,7 +1392,7 @@ data RequestSettingSetting s = RequestSettingSetting'
 
 -- | Construct a new @request_setting@ settings value.
 newRequestSettingSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> RequestSettingSetting s
 newRequestSettingSetting _name =
     RequestSettingSetting'
@@ -1526,7 +1526,7 @@ data ResponseObjectSetting s = ResponseObjectSetting'
 
 -- | Construct a new @response_object@ settings value.
 newResponseObjectSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> ResponseObjectSetting s
 newResponseObjectSetting _name =
     ResponseObjectSetting'
@@ -1652,8 +1652,8 @@ data S3loggingSetting s = S3loggingSetting'
 
 -- | Construct a new @s3logging@ settings value.
 newS3loggingSetting
-    :: TF.Attr s P.Text -- ^ @bucket_name@ - 'P.bucketName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._bucketName': @bucket_name@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> S3loggingSetting s
 newS3loggingSetting _bucketName _name =
     S3loggingSetting'
@@ -1796,8 +1796,8 @@ data SumologicSetting s = SumologicSetting'
 
 -- | Construct a new @sumologic@ settings value.
 newSumologicSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> SumologicSetting s
 newSumologicSetting _name _url =
     SumologicSetting'
@@ -1903,8 +1903,8 @@ data SyslogSetting s = SyslogSetting'
 
 -- | Construct a new @syslog@ settings value.
 newSyslogSetting
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._address': @address@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> SyslogSetting s
 newSyslogSetting _address _name =
     SyslogSetting'
@@ -2013,8 +2013,8 @@ data VclSetting s = VclSetting'
 
 -- | Construct a new @vcl@ settings value.
 newVclSetting
-    :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> VclSetting s
 newVclSetting _content _name =
     VclSetting'
