@@ -145,10 +145,10 @@ data FabricNetworkData s = FabricNetworkData'
     } deriving (P.Show, P.Eq, P.Ord)
 
 fabricNetworkData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
+    :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (FabricNetworkData s)
-fabricNetworkData _name _vlanId =
+fabricNetworkData _vlanId _name =
     TF.unsafeDataSource "triton_fabric_network" TF.validator $
         FabricNetworkData'
             { _name = _name

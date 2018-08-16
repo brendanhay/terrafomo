@@ -116,13 +116,13 @@ data FabricResource s = FabricResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 fabricResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> TF.Attr s P.Text -- ^ @provision_end_ip@ - 'P.provisionEndIp'
     -> TF.Attr s P.Text -- ^ @provision_start_ip@ - 'P.provisionStartIp'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @subnet@ - 'P.subnet'
-    -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.Resource (FabricResource s)
-fabricResource _name _provisionEndIp _provisionStartIp _subnet _vlanId =
+fabricResource _vlanId _provisionEndIp _provisionStartIp _name _subnet =
     TF.unsafeResource "triton_fabric" TF.validator $
         FabricResource'
             { _description = TF.Nil
@@ -285,10 +285,10 @@ data InstanceTemplateResource s = InstanceTemplateResource'
 
 instanceTemplateResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
-    -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
     -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
+    -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
     -> P.Resource (InstanceTemplateResource s)
-instanceTemplateResource _image _package _templateName =
+instanceTemplateResource _image _templateName _package =
     TF.unsafeResource "triton_instance_template" TF.validator $
         InstanceTemplateResource'
             { _firewallEnabled = TF.value P.False
@@ -699,10 +699,10 @@ data VlanResource s = VlanResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 vlanResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
+    :: TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
+    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VlanResource s)
-vlanResource _name _vlanId =
+vlanResource _vlanId _name =
     TF.unsafeResource "triton_vlan" TF.validator $
         VlanResource'
             { _description = TF.Nil
