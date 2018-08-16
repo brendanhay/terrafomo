@@ -6,5 +6,12 @@
 /terrafomo-gen/schema
 *.rej
 
+# profiling
+*.prof
+*.aux
+*.hp
+*.ps
+*.pdf
+
 # hpack
 *.cabal
