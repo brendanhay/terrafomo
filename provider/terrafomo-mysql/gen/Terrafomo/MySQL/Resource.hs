@@ -73,7 +73,7 @@ data DatabaseResource s = DatabaseResource'
 
 -- | Define a new @mysql_database@ resource value.
 databaseResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
     TF.unsafeResource "mysql_database" TF.validator $
@@ -135,9 +135,9 @@ data GrantResource s = GrantResource'
 
 -- | Define a new @mysql_grant@ resource value.
 grantResource
-    :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @privileges@ - 'P.privileges'
-    -> TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s P.Text -- ^ @database@ ('P._database', 'P.database')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @privileges@ ('P._privileges', 'P.privileges')
+    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (GrantResource s)
 grantResource _database _privileges _user =
     TF.unsafeResource "mysql_grant" TF.validator $
@@ -216,7 +216,7 @@ data UserResource s = UserResource'
 
 -- | Define a new @mysql_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
+    :: TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
     -> P.Resource (UserResource s)
 userResource _user =
     TF.unsafeResource "mysql_user" TF.validator $

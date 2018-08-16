@@ -17,10 +17,11 @@
 --
 module Terrafomo.MySQL.Provider
     (
+    -- * MySQL Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** MySQL Specific Aliases
+    -- * MySQL Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -71,8 +72,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @endpoint@ - 'P.endpoint'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @endpoint@ ('P._endpoint', 'P.endpoint')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _endpoint _username =
     Provider'
@@ -85,7 +86,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "mysql"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "endpoint" _endpoint
             , TF.assign "password" <$> _password
