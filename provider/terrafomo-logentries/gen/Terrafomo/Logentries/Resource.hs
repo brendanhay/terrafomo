@@ -135,6 +135,9 @@ instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: LogResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: LogResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
     computedToken x = TF.compute (TF.refKey x) "token"
 
@@ -179,3 +182,6 @@ instance P.HasName (LogsetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LogsetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LogsetResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogsetResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
