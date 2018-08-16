@@ -19,7 +19,7 @@ module Terrafomo.LogicMonitor.Settings
     (
     -- ** filters
       FiltersSetting (..)
-    , newFiltersSetting
+    , filtersSetting
 
     ) where
 
@@ -64,9 +64,9 @@ data FiltersSetting s = FiltersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @filters@ settings value.
-newFiltersSetting
+filtersSetting
     :: FiltersSetting s
-newFiltersSetting =
+filtersSetting =
     FiltersSetting'
         { _operator = TF.Nil
         , _property = TF.Nil
