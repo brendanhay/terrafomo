@@ -20,6 +20,7 @@ module Terrafomo.LogicMonitor.Provider
     -- * LogicMonitor Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * LogicMonitor Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.LogicMonitor.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
-import qualified Data.HashMap.Strict          as Map
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
+import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
 import qualified Data.Monoid                  as P
 import qualified Data.Text                    as P
@@ -70,7 +70,7 @@ data Provider = Provider'
     , _company :: P.Text
     -- ^ @company@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @api_id@ - 'P.apiId'
@@ -84,23 +84,20 @@ newProvider _apiId _apiKey _company =
         , _company = _company
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "api_id" _apiId
-                  , P.Just $ TF.assign "api_key" _apiKey
-                  , P.Just $ TF.assign "company" _company
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  P.Just $ TF.assign "api_id" _apiId
+        ,  P.Just $ TF.assign "api_key" _apiKey
+        ,  P.Just $ TF.assign "company" _company
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.LogicMonitor
-    ( module Terrafomo.LogicMonitor.Settings
+    ( module Terrafomo.LogicMonitor.DataSource
     , module Terrafomo.LogicMonitor.Lens
-    , module Terrafomo.LogicMonitor.Resource
     , module Terrafomo.LogicMonitor.Provider
-    , module Terrafomo.LogicMonitor.DataSource
+    , module Terrafomo.LogicMonitor.Resource
+    , module Terrafomo.LogicMonitor.Settings
     , module Terrafomo.LogicMonitor.Types
     -- * Provider Aliases
     ) where

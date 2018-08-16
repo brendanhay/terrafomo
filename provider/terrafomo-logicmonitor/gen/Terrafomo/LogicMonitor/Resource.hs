@@ -42,10 +42,9 @@ import GHC.Base (($))
 
 import Terrafomo.LogicMonitor.Settings
 
-import qualified Data.Hashable                   as P
-import qualified Data.HashMap.Strict             as P
-import qualified Data.HashMap.Strict             as Map
 import qualified Data.List.NonEmpty              as P
+import qualified Data.Map.Strict                 as P
+import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
 import qualified Data.Monoid                     as P
 import qualified Data.Text                       as P
@@ -66,10 +65,10 @@ import qualified Terrafomo.Validator             as TF
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/r/collector.html terraform documentation>
 -- for more information.
 data CollectorResource s = CollectorResource'
-    { _backupCollectorId             :: TF.Attr s P.Integer
+    { _backupCollectorId             :: TF.Attr s P.Int
     -- ^ @backup_collector_id@ - (Optional)
     --
-    , _collectorGroupId              :: TF.Attr s P.Integer
+    , _collectorGroupId              :: TF.Attr s P.Int
     -- ^ @collector_group_id@ - (Optional)
     --
     , _description                   :: TF.Attr s P.Text
@@ -81,21 +80,21 @@ data CollectorResource s = CollectorResource'
     , _enableFailback                :: TF.Attr s P.Bool
     -- ^ @enable_failback@ - (Optional)
     --
-    , _escalationChainId             :: TF.Attr s P.Integer
+    , _escalationChainId             :: TF.Attr s P.Int
     -- ^ @escalation_chain_id@ - (Optional)
     --
-    , _resendInterval                :: TF.Attr s P.Integer
+    , _resendInterval                :: TF.Attr s P.Int
     -- ^ @resend_interval@ - (Optional)
     --
     , _suppressAlertClear            :: TF.Attr s P.Bool
     -- ^ @suppress_alert_clear@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 collectorResource
     :: P.Resource (CollectorResource s)
 collectorResource =
-    TF.newResource "logicmonitor_collector" TF.validator $
+    TF.unsafeResource "logicmonitor_collector" P.defaultProvider TF.validator $
         CollectorResource'
             { _backupCollectorId = TF.Nil
             , _collectorGroupId = TF.value 1
@@ -122,14 +121,14 @@ instance TF.IsObject (CollectorResource s) where
 instance TF.IsValid (CollectorResource s) where
     validator = P.mempty
 
-instance P.HasBackupCollectorId (CollectorResource s) (TF.Attr s P.Integer) where
+instance P.HasBackupCollectorId (CollectorResource s) (TF.Attr s P.Int) where
     backupCollectorId =
-        P.lens (_backupCollectorId :: CollectorResource s -> TF.Attr s P.Integer)
+        P.lens (_backupCollectorId :: CollectorResource s -> TF.Attr s P.Int)
                (\s a -> s { _backupCollectorId = a } :: CollectorResource s)
 
-instance P.HasCollectorGroupId (CollectorResource s) (TF.Attr s P.Integer) where
+instance P.HasCollectorGroupId (CollectorResource s) (TF.Attr s P.Int) where
     collectorGroupId =
-        P.lens (_collectorGroupId :: CollectorResource s -> TF.Attr s P.Integer)
+        P.lens (_collectorGroupId :: CollectorResource s -> TF.Attr s P.Int)
                (\s a -> s { _collectorGroupId = a } :: CollectorResource s)
 
 instance P.HasDescription (CollectorResource s) (TF.Attr s P.Text) where
@@ -147,14 +146,14 @@ instance P.HasEnableFailback (CollectorResource s) (TF.Attr s P.Bool) where
         P.lens (_enableFailback :: CollectorResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableFailback = a } :: CollectorResource s)
 
-instance P.HasEscalationChainId (CollectorResource s) (TF.Attr s P.Integer) where
+instance P.HasEscalationChainId (CollectorResource s) (TF.Attr s P.Int) where
     escalationChainId =
-        P.lens (_escalationChainId :: CollectorResource s -> TF.Attr s P.Integer)
+        P.lens (_escalationChainId :: CollectorResource s -> TF.Attr s P.Int)
                (\s a -> s { _escalationChainId = a } :: CollectorResource s)
 
-instance P.HasResendInterval (CollectorResource s) (TF.Attr s P.Integer) where
+instance P.HasResendInterval (CollectorResource s) (TF.Attr s P.Int) where
     resendInterval =
-        P.lens (_resendInterval :: CollectorResource s -> TF.Attr s P.Integer)
+        P.lens (_resendInterval :: CollectorResource s -> TF.Attr s P.Int)
                (\s a -> s { _resendInterval = a } :: CollectorResource s)
 
 instance P.HasSuppressAlertClear (CollectorResource s) (TF.Attr s P.Bool) where
@@ -173,12 +172,12 @@ data CollectorGroupResource s = CollectorGroupResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 collectorGroupResource
     :: P.Resource (CollectorGroupResource s)
 collectorGroupResource =
-    TF.newResource "logicmonitor_collector_group" TF.validator $
+    TF.unsafeResource "logicmonitor_collector_group" P.defaultProvider TF.validator $
         CollectorGroupResource'
             { _description = TF.Nil
             , _name = TF.Nil
@@ -208,7 +207,7 @@ instance P.HasName (CollectorGroupResource s) (TF.Attr s P.Text) where
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/r/device.html terraform documentation>
 -- for more information.
 data DeviceResource s = DeviceResource'
-    { _collector       :: TF.Attr s P.Integer
+    { _collector       :: TF.Attr s P.Int
     -- ^ @collector@ - (Required)
     --
     , _description     :: TF.Attr s P.Text
@@ -226,17 +225,17 @@ data DeviceResource s = DeviceResource'
     , _ipAddr          :: TF.Attr s P.Text
     -- ^ @ip_addr@ - (Required)
     --
-    , _properties      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _properties      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @properties@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 deviceResource
-    :: TF.Attr s P.Integer -- ^ @collector@ - 'P.collector'
+    :: TF.Attr s P.Int -- ^ @collector@ - 'P.collector'
     -> TF.Attr s P.Text -- ^ @ip_addr@ - 'P.ipAddr'
     -> P.Resource (DeviceResource s)
 deviceResource _collector _ipAddr =
-    TF.newResource "logicmonitor_device" TF.validator $
+    TF.unsafeResource "logicmonitor_device" P.defaultProvider TF.validator $
         DeviceResource'
             { _collector = _collector
             , _description = TF.Nil
@@ -261,9 +260,9 @@ instance TF.IsObject (DeviceResource s) where
 instance TF.IsValid (DeviceResource s) where
     validator = P.mempty
 
-instance P.HasCollector (DeviceResource s) (TF.Attr s P.Integer) where
+instance P.HasCollector (DeviceResource s) (TF.Attr s P.Int) where
     collector =
-        P.lens (_collector :: DeviceResource s -> TF.Attr s P.Integer)
+        P.lens (_collector :: DeviceResource s -> TF.Attr s P.Int)
                (\s a -> s { _collector = a } :: DeviceResource s)
 
 instance P.HasDescription (DeviceResource s) (TF.Attr s P.Text) where
@@ -291,9 +290,9 @@ instance P.HasIpAddr (DeviceResource s) (TF.Attr s P.Text) where
         P.lens (_ipAddr :: DeviceResource s -> TF.Attr s P.Text)
                (\s a -> s { _ipAddr = a } :: DeviceResource s)
 
-instance P.HasProperties (DeviceResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DeviceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     properties =
-        P.lens (_properties :: DeviceResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_properties :: DeviceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _properties = a } :: DeviceResource s)
 
 -- | @logicmonitor_device_group@ Resource.
@@ -313,19 +312,19 @@ data DeviceGroupResource s = DeviceGroupResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _parentId        :: TF.Attr s P.Integer
+    , _parentId        :: TF.Attr s P.Int
     -- ^ @parent_id@ - (Optional)
     --
-    , _properties      :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _properties      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @properties@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 deviceGroupResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DeviceGroupResource s)
 deviceGroupResource _name =
-    TF.newResource "logicmonitor_device_group" TF.validator $
+    TF.unsafeResource "logicmonitor_device_group" P.defaultProvider TF.validator $
         DeviceGroupResource'
             { _appliesTo = TF.Nil
             , _description = TF.Nil
@@ -368,12 +367,12 @@ instance P.HasName (DeviceGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DeviceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DeviceGroupResource s)
 
-instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Integer) where
+instance P.HasParentId (DeviceGroupResource s) (TF.Attr s P.Int) where
     parentId =
-        P.lens (_parentId :: DeviceGroupResource s -> TF.Attr s P.Integer)
+        P.lens (_parentId :: DeviceGroupResource s -> TF.Attr s P.Int)
                (\s a -> s { _parentId = a } :: DeviceGroupResource s)
 
-instance P.HasProperties (DeviceGroupResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DeviceGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     properties =
-        P.lens (_properties :: DeviceGroupResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_properties :: DeviceGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _properties = a } :: DeviceGroupResource s)
