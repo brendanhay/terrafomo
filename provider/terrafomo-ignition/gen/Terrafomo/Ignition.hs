@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Ignition
-    ( module Terrafomo.Ignition.Provider
-    , module Terrafomo.Ignition.Types
+    ( module Terrafomo.Ignition.DataSource
     , module Terrafomo.Ignition.Lens
+    , module Terrafomo.Ignition.Provider
     , module Terrafomo.Ignition.Settings
-    , module Terrafomo.Ignition.DataSource
+    , module Terrafomo.Ignition.Types
     -- * Provider Aliases
     ) where
 

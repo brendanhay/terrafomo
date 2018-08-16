@@ -18,33 +18,33 @@
 module Terrafomo.Ignition.Settings
     (
     -- * Settings Datatypes
-    -- ** file_source
-      FileSource (..)
-    , newFileSource
+    -- ** append
+      AppendSetting (..)
+    , newAppendSetting
 
-    -- ** file_content
-    , FileContent (..)
-    , newFileContent
+    -- ** content
+    , ContentSetting (..)
+    , newContentSetting
 
-    -- ** config_replace
-    , ConfigReplace (..)
-    , newConfigReplace
+    -- ** dropin
+    , DropinSetting (..)
+    , newDropinSetting
 
-    -- ** systemd_unit_dropin
-    , SystemdUnitDropin (..)
-    , newSystemdUnitDropin
+    -- ** mount
+    , MountSetting (..)
+    , newMountSetting
 
-    -- ** disk_partition
-    , DiskPartition (..)
-    , newDiskPartition
+    -- ** partition
+    , PartitionSetting (..)
+    , newPartitionSetting
 
-    -- ** config_append
-    , ConfigAppend (..)
-    , newConfigAppend
+    -- ** replace
+    , ReplaceSetting (..)
+    , newReplaceSetting
 
-    -- ** filesystem_mount
-    , FilesystemMount (..)
-    , newFilesystemMount
+    -- ** source
+    , SourceSetting (..)
+    , newSourceSetting
 
     ) where
 
@@ -52,10 +52,10 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
+
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -69,286 +69,125 @@ import qualified Terrafomo.Ignition.Types as P
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Validator      as TF
 
--- | @file_source@ nested settings.
-data FileSource s = FileSource'
-    { _compression  :: TF.Attr s P.Text
-    -- ^ @compression@ - (Optional, Forces New)
-    --
-    , _source       :: TF.Attr s P.Text
-    -- ^ @source@ - (Optional, Forces New)
+-- | @append@ nested settings.
+data AppendSetting s = AppendSetting'
+    { _source       :: TF.Attr s P.Text
+    -- ^ @source@ - (Required, Forces New)
     --
     , _verification :: TF.Attr s P.Text
     -- ^ @verification@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newFileSource
-    :: FileSource s
-newFileSource =
-    FileSource'
-        { _compression = TF.Nil
-        , _source = TF.Nil
+newAppendSetting
+    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    -> AppendSetting s
+newAppendSetting _source =
+    AppendSetting'
+        { _source = _source
         , _verification = TF.Nil
         }
 
-instance P.Hashable  (FileSource s)
-instance TF.IsValue  (FileSource s)
-instance TF.IsObject (FileSource s) where
-    toObject FileSource'{..} = P.catMaybes
-        [ TF.assign "compression" <$> TF.attribute _compression
-        , TF.assign "source" <$> TF.attribute _source
+instance TF.IsValue  (AppendSetting s)
+instance TF.IsObject (AppendSetting s) where
+    toObject AppendSetting'{..} = P.catMaybes
+        [ TF.assign "source" <$> TF.attribute _source
         , TF.assign "verification" <$> TF.attribute _verification
         ]
 
-instance TF.IsValid (FileSource s) where
+instance TF.IsValid (AppendSetting s) where
     validator = P.mempty
 
-instance P.HasCompression (FileSource s) (TF.Attr s P.Text) where
-    compression =
-        P.lens (_compression :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _compression = a } :: FileSource s)
-
-instance P.HasSource (FileSource s) (TF.Attr s P.Text) where
+instance P.HasSource (AppendSetting s) (TF.Attr s P.Text) where
     source =
-        P.lens (_source :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: FileSource s)
+        P.lens (_source :: AppendSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: AppendSetting s)
 
-instance P.HasVerification (FileSource s) (TF.Attr s P.Text) where
+instance P.HasVerification (AppendSetting s) (TF.Attr s P.Text) where
     verification =
-        P.lens (_verification :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _verification = a } :: FileSource s)
+        P.lens (_verification :: AppendSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _verification = a } :: AppendSetting s)
 
--- | @file_content@ nested settings.
-data FileContent s = FileContent'
+-- | @content@ nested settings.
+data ContentSetting s = ContentSetting'
     { _content :: TF.Attr s P.Text
     -- ^ @content@ - (Required, Forces New)
     --
     , _mime    :: TF.Attr s P.Text
     -- ^ @mime@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newFileContent
+newContentSetting
     :: TF.Attr s P.Text -- ^ @content@ - 'P.content'
-    -> FileContent s
-newFileContent _content =
-    FileContent'
+    -> ContentSetting s
+newContentSetting _content =
+    ContentSetting'
         { _content = _content
         , _mime = TF.value "text/plain"
         }
 
-instance P.Hashable  (FileContent s)
-instance TF.IsValue  (FileContent s)
-instance TF.IsObject (FileContent s) where
-    toObject FileContent'{..} = P.catMaybes
+instance TF.IsValue  (ContentSetting s)
+instance TF.IsObject (ContentSetting s) where
+    toObject ContentSetting'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "mime" <$> TF.attribute _mime
         ]
 
-instance TF.IsValid (FileContent s) where
+instance TF.IsValid (ContentSetting s) where
     validator = P.mempty
 
-instance P.HasContent (FileContent s) (TF.Attr s P.Text) where
+instance P.HasContent (ContentSetting s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: FileContent s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: FileContent s)
+        P.lens (_content :: ContentSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: ContentSetting s)
 
-instance P.HasMime (FileContent s) (TF.Attr s P.Text) where
+instance P.HasMime (ContentSetting s) (TF.Attr s P.Text) where
     mime =
-        P.lens (_mime :: FileContent s -> TF.Attr s P.Text)
-               (\s a -> s { _mime = a } :: FileContent s)
+        P.lens (_mime :: ContentSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _mime = a } :: ContentSetting s)
 
--- | @config_replace@ nested settings.
-data ConfigReplace s = ConfigReplace'
-    { _source       :: TF.Attr s P.Text
-    -- ^ @source@ - (Required, Forces New)
-    --
-    , _verification :: TF.Attr s P.Text
-    -- ^ @verification@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newConfigReplace
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
-    -> ConfigReplace s
-newConfigReplace _source =
-    ConfigReplace'
-        { _source = _source
-        , _verification = TF.Nil
-        }
-
-instance P.Hashable  (ConfigReplace s)
-instance TF.IsValue  (ConfigReplace s)
-instance TF.IsObject (ConfigReplace s) where
-    toObject ConfigReplace'{..} = P.catMaybes
-        [ TF.assign "source" <$> TF.attribute _source
-        , TF.assign "verification" <$> TF.attribute _verification
-        ]
-
-instance TF.IsValid (ConfigReplace s) where
-    validator = P.mempty
-
-instance P.HasSource (ConfigReplace s) (TF.Attr s P.Text) where
-    source =
-        P.lens (_source :: ConfigReplace s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: ConfigReplace s)
-
-instance P.HasVerification (ConfigReplace s) (TF.Attr s P.Text) where
-    verification =
-        P.lens (_verification :: ConfigReplace s -> TF.Attr s P.Text)
-               (\s a -> s { _verification = a } :: ConfigReplace s)
-
--- | @systemd_unit_dropin@ nested settings.
-data SystemdUnitDropin s = SystemdUnitDropin'
+-- | @dropin@ nested settings.
+data DropinSetting s = DropinSetting'
     { _content :: TF.Attr s P.Text
     -- ^ @content@ - (Optional, Forces New)
     --
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newSystemdUnitDropin
+newDropinSetting
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> SystemdUnitDropin s
-newSystemdUnitDropin _name =
-    SystemdUnitDropin'
+    -> DropinSetting s
+newDropinSetting _name =
+    DropinSetting'
         { _content = TF.Nil
         , _name = _name
         }
 
-instance P.Hashable  (SystemdUnitDropin s)
-instance TF.IsValue  (SystemdUnitDropin s)
-instance TF.IsObject (SystemdUnitDropin s) where
-    toObject SystemdUnitDropin'{..} = P.catMaybes
+instance TF.IsValue  (DropinSetting s)
+instance TF.IsObject (DropinSetting s) where
+    toObject DropinSetting'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance TF.IsValid (SystemdUnitDropin s) where
+instance TF.IsValid (DropinSetting s) where
     validator = P.mempty
 
-instance P.HasContent (SystemdUnitDropin s) (TF.Attr s P.Text) where
+instance P.HasContent (DropinSetting s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: SystemdUnitDropin s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: SystemdUnitDropin s)
+        P.lens (_content :: DropinSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: DropinSetting s)
 
-instance P.HasName (SystemdUnitDropin s) (TF.Attr s P.Text) where
+instance P.HasName (DropinSetting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: SystemdUnitDropin s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SystemdUnitDropin s)
+        P.lens (_name :: DropinSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DropinSetting s)
 
--- | @disk_partition@ nested settings.
-data DiskPartition s = DiskPartition'
-    { _label    :: TF.Attr s P.Text
-    -- ^ @label@ - (Optional, Forces New)
-    --
-    , _number   :: TF.Attr s P.Integer
-    -- ^ @number@ - (Optional, Forces New)
-    --
-    , _size     :: TF.Attr s P.Integer
-    -- ^ @size@ - (Optional, Forces New)
-    --
-    , _start    :: TF.Attr s P.Integer
-    -- ^ @start@ - (Optional, Forces New)
-    --
-    , _typeGuid :: TF.Attr s P.Text
-    -- ^ @type_guid@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newDiskPartition
-    :: DiskPartition s
-newDiskPartition =
-    DiskPartition'
-        { _label = TF.Nil
-        , _number = TF.Nil
-        , _size = TF.Nil
-        , _start = TF.Nil
-        , _typeGuid = TF.Nil
-        }
-
-instance P.Hashable  (DiskPartition s)
-instance TF.IsValue  (DiskPartition s)
-instance TF.IsObject (DiskPartition s) where
-    toObject DiskPartition'{..} = P.catMaybes
-        [ TF.assign "label" <$> TF.attribute _label
-        , TF.assign "number" <$> TF.attribute _number
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "start" <$> TF.attribute _start
-        , TF.assign "type_guid" <$> TF.attribute _typeGuid
-        ]
-
-instance TF.IsValid (DiskPartition s) where
-    validator = P.mempty
-
-instance P.HasLabel (DiskPartition s) (TF.Attr s P.Text) where
-    label =
-        P.lens (_label :: DiskPartition s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a } :: DiskPartition s)
-
-instance P.HasNumber (DiskPartition s) (TF.Attr s P.Integer) where
-    number =
-        P.lens (_number :: DiskPartition s -> TF.Attr s P.Integer)
-               (\s a -> s { _number = a } :: DiskPartition s)
-
-instance P.HasSize (DiskPartition s) (TF.Attr s P.Integer) where
-    size =
-        P.lens (_size :: DiskPartition s -> TF.Attr s P.Integer)
-               (\s a -> s { _size = a } :: DiskPartition s)
-
-instance P.HasStart (DiskPartition s) (TF.Attr s P.Integer) where
-    start =
-        P.lens (_start :: DiskPartition s -> TF.Attr s P.Integer)
-               (\s a -> s { _start = a } :: DiskPartition s)
-
-instance P.HasTypeGuid (DiskPartition s) (TF.Attr s P.Text) where
-    typeGuid =
-        P.lens (_typeGuid :: DiskPartition s -> TF.Attr s P.Text)
-               (\s a -> s { _typeGuid = a } :: DiskPartition s)
-
--- | @config_append@ nested settings.
-data ConfigAppend s = ConfigAppend'
-    { _source       :: TF.Attr s P.Text
-    -- ^ @source@ - (Required, Forces New)
-    --
-    , _verification :: TF.Attr s P.Text
-    -- ^ @verification@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
-newConfigAppend
-    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
-    -> ConfigAppend s
-newConfigAppend _source =
-    ConfigAppend'
-        { _source = _source
-        , _verification = TF.Nil
-        }
-
-instance P.Hashable  (ConfigAppend s)
-instance TF.IsValue  (ConfigAppend s)
-instance TF.IsObject (ConfigAppend s) where
-    toObject ConfigAppend'{..} = P.catMaybes
-        [ TF.assign "source" <$> TF.attribute _source
-        , TF.assign "verification" <$> TF.attribute _verification
-        ]
-
-instance TF.IsValid (ConfigAppend s) where
-    validator = P.mempty
-
-instance P.HasSource (ConfigAppend s) (TF.Attr s P.Text) where
-    source =
-        P.lens (_source :: ConfigAppend s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: ConfigAppend s)
-
-instance P.HasVerification (ConfigAppend s) (TF.Attr s P.Text) where
-    verification =
-        P.lens (_verification :: ConfigAppend s -> TF.Attr s P.Text)
-               (\s a -> s { _verification = a } :: ConfigAppend s)
-
--- | @filesystem_mount@ nested settings.
-data FilesystemMount s = FilesystemMount'
+-- | @mount@ nested settings.
+data MountSetting s = MountSetting'
     { _device         :: TF.Attr s P.Text
     -- ^ @device@ - (Required, Forces New)
     --
@@ -367,14 +206,14 @@ data FilesystemMount s = FilesystemMount'
     , _wipeFilesystem :: TF.Attr s P.Bool
     -- ^ @wipe_filesystem@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
-newFilesystemMount
+newMountSetting
     :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
     -> TF.Attr s P.Text -- ^ @format@ - 'P.format'
-    -> FilesystemMount s
-newFilesystemMount _device _format =
-    FilesystemMount'
+    -> MountSetting s
+newMountSetting _device _format =
+    MountSetting'
         { _device = _device
         , _format = _format
         , _label = TF.Nil
@@ -383,10 +222,9 @@ newFilesystemMount _device _format =
         , _wipeFilesystem = TF.Nil
         }
 
-instance P.Hashable  (FilesystemMount s)
-instance TF.IsValue  (FilesystemMount s)
-instance TF.IsObject (FilesystemMount s) where
-    toObject FilesystemMount'{..} = P.catMaybes
+instance TF.IsValue  (MountSetting s)
+instance TF.IsObject (MountSetting s) where
+    toObject MountSetting'{..} = P.catMaybes
         [ TF.assign "device" <$> TF.attribute _device
         , TF.assign "format" <$> TF.attribute _format
         , TF.assign "label" <$> TF.attribute _label
@@ -395,35 +233,190 @@ instance TF.IsObject (FilesystemMount s) where
         , TF.assign "wipe_filesystem" <$> TF.attribute _wipeFilesystem
         ]
 
-instance TF.IsValid (FilesystemMount s) where
+instance TF.IsValid (MountSetting s) where
     validator = P.mempty
 
-instance P.HasDevice (FilesystemMount s) (TF.Attr s P.Text) where
+instance P.HasDevice (MountSetting s) (TF.Attr s P.Text) where
     device =
-        P.lens (_device :: FilesystemMount s -> TF.Attr s P.Text)
-               (\s a -> s { _device = a } :: FilesystemMount s)
+        P.lens (_device :: MountSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _device = a } :: MountSetting s)
 
-instance P.HasFormat (FilesystemMount s) (TF.Attr s P.Text) where
+instance P.HasFormat (MountSetting s) (TF.Attr s P.Text) where
     format =
-        P.lens (_format :: FilesystemMount s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: FilesystemMount s)
+        P.lens (_format :: MountSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: MountSetting s)
 
-instance P.HasLabel (FilesystemMount s) (TF.Attr s P.Text) where
+instance P.HasLabel (MountSetting s) (TF.Attr s P.Text) where
     label =
-        P.lens (_label :: FilesystemMount s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a } :: FilesystemMount s)
+        P.lens (_label :: MountSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: MountSetting s)
 
-instance P.HasOptions (FilesystemMount s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasOptions (MountSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     options =
-        P.lens (_options :: FilesystemMount s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _options = a } :: FilesystemMount s)
+        P.lens (_options :: MountSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _options = a } :: MountSetting s)
 
-instance P.HasUuid (FilesystemMount s) (TF.Attr s P.Text) where
+instance P.HasUuid (MountSetting s) (TF.Attr s P.Text) where
     uuid =
-        P.lens (_uuid :: FilesystemMount s -> TF.Attr s P.Text)
-               (\s a -> s { _uuid = a } :: FilesystemMount s)
+        P.lens (_uuid :: MountSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _uuid = a } :: MountSetting s)
 
-instance P.HasWipeFilesystem (FilesystemMount s) (TF.Attr s P.Bool) where
+instance P.HasWipeFilesystem (MountSetting s) (TF.Attr s P.Bool) where
     wipeFilesystem =
-        P.lens (_wipeFilesystem :: FilesystemMount s -> TF.Attr s P.Bool)
-               (\s a -> s { _wipeFilesystem = a } :: FilesystemMount s)
+        P.lens (_wipeFilesystem :: MountSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _wipeFilesystem = a } :: MountSetting s)
+
+-- | @partition@ nested settings.
+data PartitionSetting s = PartitionSetting'
+    { _label    :: TF.Attr s P.Text
+    -- ^ @label@ - (Optional, Forces New)
+    --
+    , _number   :: TF.Attr s P.Int
+    -- ^ @number@ - (Optional, Forces New)
+    --
+    , _size     :: TF.Attr s P.Int
+    -- ^ @size@ - (Optional, Forces New)
+    --
+    , _start    :: TF.Attr s P.Int
+    -- ^ @start@ - (Optional, Forces New)
+    --
+    , _typeGuid :: TF.Attr s P.Text
+    -- ^ @type_guid@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newPartitionSetting
+    :: PartitionSetting s
+newPartitionSetting =
+    PartitionSetting'
+        { _label = TF.Nil
+        , _number = TF.Nil
+        , _size = TF.Nil
+        , _start = TF.Nil
+        , _typeGuid = TF.Nil
+        }
+
+instance TF.IsValue  (PartitionSetting s)
+instance TF.IsObject (PartitionSetting s) where
+    toObject PartitionSetting'{..} = P.catMaybes
+        [ TF.assign "label" <$> TF.attribute _label
+        , TF.assign "number" <$> TF.attribute _number
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "start" <$> TF.attribute _start
+        , TF.assign "type_guid" <$> TF.attribute _typeGuid
+        ]
+
+instance TF.IsValid (PartitionSetting s) where
+    validator = P.mempty
+
+instance P.HasLabel (PartitionSetting s) (TF.Attr s P.Text) where
+    label =
+        P.lens (_label :: PartitionSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: PartitionSetting s)
+
+instance P.HasNumber (PartitionSetting s) (TF.Attr s P.Int) where
+    number =
+        P.lens (_number :: PartitionSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _number = a } :: PartitionSetting s)
+
+instance P.HasSize (PartitionSetting s) (TF.Attr s P.Int) where
+    size =
+        P.lens (_size :: PartitionSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _size = a } :: PartitionSetting s)
+
+instance P.HasStart (PartitionSetting s) (TF.Attr s P.Int) where
+    start =
+        P.lens (_start :: PartitionSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _start = a } :: PartitionSetting s)
+
+instance P.HasTypeGuid (PartitionSetting s) (TF.Attr s P.Text) where
+    typeGuid =
+        P.lens (_typeGuid :: PartitionSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _typeGuid = a } :: PartitionSetting s)
+
+-- | @replace@ nested settings.
+data ReplaceSetting s = ReplaceSetting'
+    { _source       :: TF.Attr s P.Text
+    -- ^ @source@ - (Required, Forces New)
+    --
+    , _verification :: TF.Attr s P.Text
+    -- ^ @verification@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newReplaceSetting
+    :: TF.Attr s P.Text -- ^ @source@ - 'P.source'
+    -> ReplaceSetting s
+newReplaceSetting _source =
+    ReplaceSetting'
+        { _source = _source
+        , _verification = TF.Nil
+        }
+
+instance TF.IsValue  (ReplaceSetting s)
+instance TF.IsObject (ReplaceSetting s) where
+    toObject ReplaceSetting'{..} = P.catMaybes
+        [ TF.assign "source" <$> TF.attribute _source
+        , TF.assign "verification" <$> TF.attribute _verification
+        ]
+
+instance TF.IsValid (ReplaceSetting s) where
+    validator = P.mempty
+
+instance P.HasSource (ReplaceSetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: ReplaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: ReplaceSetting s)
+
+instance P.HasVerification (ReplaceSetting s) (TF.Attr s P.Text) where
+    verification =
+        P.lens (_verification :: ReplaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _verification = a } :: ReplaceSetting s)
+
+-- | @source@ nested settings.
+data SourceSetting s = SourceSetting'
+    { _compression  :: TF.Attr s P.Text
+    -- ^ @compression@ - (Optional, Forces New)
+    --
+    , _source       :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional, Forces New)
+    --
+    , _verification :: TF.Attr s P.Text
+    -- ^ @verification@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+newSourceSetting
+    :: SourceSetting s
+newSourceSetting =
+    SourceSetting'
+        { _compression = TF.Nil
+        , _source = TF.Nil
+        , _verification = TF.Nil
+        }
+
+instance TF.IsValue  (SourceSetting s)
+instance TF.IsObject (SourceSetting s) where
+    toObject SourceSetting'{..} = P.catMaybes
+        [ TF.assign "compression" <$> TF.attribute _compression
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "verification" <$> TF.attribute _verification
+        ]
+
+instance TF.IsValid (SourceSetting s) where
+    validator = P.mempty
+
+instance P.HasCompression (SourceSetting s) (TF.Attr s P.Text) where
+    compression =
+        P.lens (_compression :: SourceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _compression = a } :: SourceSetting s)
+
+instance P.HasSource (SourceSetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: SourceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: SourceSetting s)
+
+instance P.HasVerification (SourceSetting s) (TF.Attr s P.Text) where
+    verification =
+        P.lens (_verification :: SourceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _verification = a } :: SourceSetting s)

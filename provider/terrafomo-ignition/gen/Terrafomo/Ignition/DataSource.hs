@@ -70,10 +70,9 @@ import GHC.Base (($))
 
 import Terrafomo.Ignition.Settings
 
-import qualified Data.Hashable               as P
-import qualified Data.HashMap.Strict         as P
-import qualified Data.HashMap.Strict         as Map
 import qualified Data.List.NonEmpty          as P
+import qualified Data.Map.Strict             as P
+import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
 import qualified Data.Monoid                 as P
 import qualified Data.Text                   as P
@@ -94,7 +93,7 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/ignition/d/config.html terraform documentation>
 -- for more information.
 data ConfigData s = ConfigData'
-    { _append      :: TF.Attr s [TF.Attr s (ConfigAppend s)]
+    { _append      :: TF.Attr s [TF.Attr s (AppendSetting s)]
     -- ^ @append@ - (Optional, Forces New)
     --
     , _arrays      :: TF.Attr s [TF.Attr s P.Text]
@@ -121,7 +120,7 @@ data ConfigData s = ConfigData'
     , _networkd    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networkd@ - (Optional)
     --
-    , _replace     :: TF.Attr s (ConfigReplace s)
+    , _replace     :: TF.Attr s (ReplaceSetting s)
     -- ^ @replace@ - (Optional, Forces New)
     --
     , _systemd     :: TF.Attr s [TF.Attr s P.Text]
@@ -130,12 +129,12 @@ data ConfigData s = ConfigData'
     , _users       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @users@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 configData
     :: P.DataSource (ConfigData s)
 configData =
-    TF.newDataSource "ignition_config" TF.validator $
+    TF.unsafeDataSource "ignition_config" P.defaultProvider TF.validator $
         ConfigData'
             { _append = TF.Nil
             , _arrays = TF.Nil
@@ -169,18 +168,14 @@ instance TF.IsObject (ConfigData s) where
 
 instance TF.IsValid (ConfigData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_append"
-                  (_append
-                      :: ConfigData s -> TF.Attr s [TF.Attr s (ConfigAppend s)])
-                  TF.validator
            P.<> TF.settingsValidator "_replace"
                   (_replace
-                      :: ConfigData s -> TF.Attr s (ConfigReplace s))
+                      :: ConfigData s -> TF.Attr s (ReplaceSetting s))
                   TF.validator
 
-instance P.HasAppend (ConfigData s) (TF.Attr s [TF.Attr s (ConfigAppend s)]) where
+instance P.HasAppend (ConfigData s) (TF.Attr s [TF.Attr s (AppendSetting s)]) where
     append =
-        P.lens (_append :: ConfigData s -> TF.Attr s [TF.Attr s (ConfigAppend s)])
+        P.lens (_append :: ConfigData s -> TF.Attr s [TF.Attr s (AppendSetting s)])
                (\s a -> s { _append = a } :: ConfigData s)
 
 instance P.HasArrays (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -223,9 +218,9 @@ instance P.HasNetworkd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_networkd :: ConfigData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networkd = a } :: ConfigData s)
 
-instance P.HasReplace (ConfigData s) (TF.Attr s (ConfigReplace s)) where
+instance P.HasReplace (ConfigData s) (TF.Attr s (ReplaceSetting s)) where
     replace =
-        P.lens (_replace :: ConfigData s -> TF.Attr s (ConfigReplace s))
+        P.lens (_replace :: ConfigData s -> TF.Attr s (ReplaceSetting s))
                (\s a -> s { _replace = a } :: ConfigData s)
 
 instance P.HasSystemd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -252,26 +247,26 @@ data DirectoryData s = DirectoryData'
     { _filesystem :: TF.Attr s P.Text
     -- ^ @filesystem@ - (Required, Forces New)
     --
-    , _gid        :: TF.Attr s P.Integer
+    , _gid        :: TF.Attr s P.Int
     -- ^ @gid@ - (Optional, Forces New)
     --
-    , _mode       :: TF.Attr s P.Integer
+    , _mode       :: TF.Attr s P.Int
     -- ^ @mode@ - (Optional, Forces New)
     --
     , _path       :: TF.Attr s P.Text
     -- ^ @path@ - (Required, Forces New)
     --
-    , _uid        :: TF.Attr s P.Integer
+    , _uid        :: TF.Attr s P.Int
     -- ^ @uid@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 directoryData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (DirectoryData s)
 directoryData _filesystem _path =
-    TF.newDataSource "ignition_directory" TF.validator $
+    TF.unsafeDataSource "ignition_directory" P.defaultProvider TF.validator $
         DirectoryData'
             { _filesystem = _filesystem
             , _gid = TF.Nil
@@ -297,14 +292,14 @@ instance P.HasFilesystem (DirectoryData s) (TF.Attr s P.Text) where
         P.lens (_filesystem :: DirectoryData s -> TF.Attr s P.Text)
                (\s a -> s { _filesystem = a } :: DirectoryData s)
 
-instance P.HasGid (DirectoryData s) (TF.Attr s P.Integer) where
+instance P.HasGid (DirectoryData s) (TF.Attr s P.Int) where
     gid =
-        P.lens (_gid :: DirectoryData s -> TF.Attr s P.Integer)
+        P.lens (_gid :: DirectoryData s -> TF.Attr s P.Int)
                (\s a -> s { _gid = a } :: DirectoryData s)
 
-instance P.HasMode (DirectoryData s) (TF.Attr s P.Integer) where
+instance P.HasMode (DirectoryData s) (TF.Attr s P.Int) where
     mode =
-        P.lens (_mode :: DirectoryData s -> TF.Attr s P.Integer)
+        P.lens (_mode :: DirectoryData s -> TF.Attr s P.Int)
                (\s a -> s { _mode = a } :: DirectoryData s)
 
 instance P.HasPath (DirectoryData s) (TF.Attr s P.Text) where
@@ -312,9 +307,9 @@ instance P.HasPath (DirectoryData s) (TF.Attr s P.Text) where
         P.lens (_path :: DirectoryData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: DirectoryData s)
 
-instance P.HasUid (DirectoryData s) (TF.Attr s P.Integer) where
+instance P.HasUid (DirectoryData s) (TF.Attr s P.Int) where
     uid =
-        P.lens (_uid :: DirectoryData s -> TF.Attr s P.Integer)
+        P.lens (_uid :: DirectoryData s -> TF.Attr s P.Int)
                (\s a -> s { _uid = a } :: DirectoryData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryData s)) (TF.Attr s P.Text) where
@@ -328,19 +323,19 @@ data DiskData s = DiskData'
     { _device    :: TF.Attr s P.Text
     -- ^ @device@ - (Required, Forces New)
     --
-    , _partition :: TF.Attr s [TF.Attr s (DiskPartition s)]
+    , _partition :: TF.Attr s [TF.Attr s (PartitionSetting s)]
     -- ^ @partition@ - (Optional, Forces New)
     --
     , _wipeTable :: TF.Attr s P.Bool
     -- ^ @wipe_table@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 diskData
     :: TF.Attr s P.Text -- ^ @device@ - 'P.device'
     -> P.DataSource (DiskData s)
 diskData _device =
-    TF.newDataSource "ignition_disk" TF.validator $
+    TF.unsafeDataSource "ignition_disk" P.defaultProvider TF.validator $
         DiskData'
             { _device = _device
             , _partition = TF.Nil
@@ -356,19 +351,15 @@ instance TF.IsObject (DiskData s) where
 
 instance TF.IsValid (DiskData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_partition"
-                  (_partition
-                      :: DiskData s -> TF.Attr s [TF.Attr s (DiskPartition s)])
-                  TF.validator
 
 instance P.HasDevice (DiskData s) (TF.Attr s P.Text) where
     device =
         P.lens (_device :: DiskData s -> TF.Attr s P.Text)
                (\s a -> s { _device = a } :: DiskData s)
 
-instance P.HasPartition (DiskData s) (TF.Attr s [TF.Attr s (DiskPartition s)]) where
+instance P.HasPartition (DiskData s) (TF.Attr s [TF.Attr s (PartitionSetting s)]) where
     partition =
-        P.lens (_partition :: DiskData s -> TF.Attr s [TF.Attr s (DiskPartition s)])
+        P.lens (_partition :: DiskData s -> TF.Attr s [TF.Attr s (PartitionSetting s)])
                (\s a -> s { _partition = a } :: DiskData s)
 
 instance P.HasWipeTable (DiskData s) (TF.Attr s P.Bool) where
@@ -384,35 +375,35 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskData s)) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/ignition/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
-    { _content    :: TF.Attr s (FileContent s)
+    { _content    :: TF.Attr s (ContentSetting s)
     -- ^ @content@ - (Optional, Forces New)
     --
     , _filesystem :: TF.Attr s P.Text
     -- ^ @filesystem@ - (Required, Forces New)
     --
-    , _gid        :: TF.Attr s P.Integer
+    , _gid        :: TF.Attr s P.Int
     -- ^ @gid@ - (Optional, Forces New)
     --
-    , _mode       :: TF.Attr s P.Integer
+    , _mode       :: TF.Attr s P.Int
     -- ^ @mode@ - (Optional, Forces New)
     --
     , _path       :: TF.Attr s P.Text
     -- ^ @path@ - (Required, Forces New)
     --
-    , _source     :: TF.Attr s (FileSource s)
+    , _source     :: TF.Attr s (SourceSetting s)
     -- ^ @source@ - (Optional, Forces New)
     --
-    , _uid        :: TF.Attr s P.Integer
+    , _uid        :: TF.Attr s P.Int
     -- ^ @uid@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 fileData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
     -> TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (FileData s)
 fileData _filesystem _path =
-    TF.newDataSource "ignition_file" TF.validator $
+    TF.unsafeDataSource "ignition_file" P.defaultProvider TF.validator $
         FileData'
             { _content = TF.Nil
             , _filesystem = _filesystem
@@ -438,16 +429,16 @@ instance TF.IsValid (FileData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_content"
                   (_content
-                      :: FileData s -> TF.Attr s (FileContent s))
+                      :: FileData s -> TF.Attr s (ContentSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_source"
                   (_source
-                      :: FileData s -> TF.Attr s (FileSource s))
+                      :: FileData s -> TF.Attr s (SourceSetting s))
                   TF.validator
 
-instance P.HasContent (FileData s) (TF.Attr s (FileContent s)) where
+instance P.HasContent (FileData s) (TF.Attr s (ContentSetting s)) where
     content =
-        P.lens (_content :: FileData s -> TF.Attr s (FileContent s))
+        P.lens (_content :: FileData s -> TF.Attr s (ContentSetting s))
                (\s a -> s { _content = a } :: FileData s)
 
 instance P.HasFilesystem (FileData s) (TF.Attr s P.Text) where
@@ -455,14 +446,14 @@ instance P.HasFilesystem (FileData s) (TF.Attr s P.Text) where
         P.lens (_filesystem :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _filesystem = a } :: FileData s)
 
-instance P.HasGid (FileData s) (TF.Attr s P.Integer) where
+instance P.HasGid (FileData s) (TF.Attr s P.Int) where
     gid =
-        P.lens (_gid :: FileData s -> TF.Attr s P.Integer)
+        P.lens (_gid :: FileData s -> TF.Attr s P.Int)
                (\s a -> s { _gid = a } :: FileData s)
 
-instance P.HasMode (FileData s) (TF.Attr s P.Integer) where
+instance P.HasMode (FileData s) (TF.Attr s P.Int) where
     mode =
-        P.lens (_mode :: FileData s -> TF.Attr s P.Integer)
+        P.lens (_mode :: FileData s -> TF.Attr s P.Int)
                (\s a -> s { _mode = a } :: FileData s)
 
 instance P.HasPath (FileData s) (TF.Attr s P.Text) where
@@ -470,14 +461,14 @@ instance P.HasPath (FileData s) (TF.Attr s P.Text) where
         P.lens (_path :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: FileData s)
 
-instance P.HasSource (FileData s) (TF.Attr s (FileSource s)) where
+instance P.HasSource (FileData s) (TF.Attr s (SourceSetting s)) where
     source =
-        P.lens (_source :: FileData s -> TF.Attr s (FileSource s))
+        P.lens (_source :: FileData s -> TF.Attr s (SourceSetting s))
                (\s a -> s { _source = a } :: FileData s)
 
-instance P.HasUid (FileData s) (TF.Attr s P.Integer) where
+instance P.HasUid (FileData s) (TF.Attr s P.Int) where
     uid =
-        P.lens (_uid :: FileData s -> TF.Attr s P.Integer)
+        P.lens (_uid :: FileData s -> TF.Attr s P.Int)
                (\s a -> s { _uid = a } :: FileData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
@@ -488,7 +479,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/ignition/d/filesystem.html terraform documentation>
 -- for more information.
 data FilesystemData s = FilesystemData'
-    { _mount :: TF.Attr s (FilesystemMount s)
+    { _mount :: TF.Attr s (MountSetting s)
     -- ^ @mount@ - (Optional, Forces New)
     --
     , _name  :: TF.Attr s P.Text
@@ -497,12 +488,12 @@ data FilesystemData s = FilesystemData'
     , _path  :: TF.Attr s P.Text
     -- ^ @path@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 filesystemData
     :: P.DataSource (FilesystemData s)
 filesystemData =
-    TF.newDataSource "ignition_filesystem" TF.validator $
+    TF.unsafeDataSource "ignition_filesystem" P.defaultProvider TF.validator $
         FilesystemData'
             { _mount = TF.Nil
             , _name = TF.Nil
@@ -520,12 +511,12 @@ instance TF.IsValid (FilesystemData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_mount"
                   (_mount
-                      :: FilesystemData s -> TF.Attr s (FilesystemMount s))
+                      :: FilesystemData s -> TF.Attr s (MountSetting s))
                   TF.validator
 
-instance P.HasMount (FilesystemData s) (TF.Attr s (FilesystemMount s)) where
+instance P.HasMount (FilesystemData s) (TF.Attr s (MountSetting s)) where
     mount =
-        P.lens (_mount :: FilesystemData s -> TF.Attr s (FilesystemMount s))
+        P.lens (_mount :: FilesystemData s -> TF.Attr s (MountSetting s))
                (\s a -> s { _mount = a } :: FilesystemData s)
 
 instance P.HasName (FilesystemData s) (TF.Attr s P.Text) where
@@ -546,7 +537,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (FilesystemData s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/ignition/d/group.html terraform documentation>
 -- for more information.
 data GroupData s = GroupData'
-    { _gid          :: TF.Attr s P.Integer
+    { _gid          :: TF.Attr s P.Int
     -- ^ @gid@ - (Optional, Forces New)
     --
     , _name         :: TF.Attr s P.Text
@@ -555,13 +546,13 @@ data GroupData s = GroupData'
     , _passwordHash :: TF.Attr s P.Text
     -- ^ @password_hash@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 groupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (GroupData s)
 groupData _name =
-    TF.newDataSource "ignition_group" TF.validator $
+    TF.unsafeDataSource "ignition_group" P.defaultProvider TF.validator $
         GroupData'
             { _gid = TF.Nil
             , _name = _name
@@ -578,9 +569,9 @@ instance TF.IsObject (GroupData s) where
 instance TF.IsValid (GroupData s) where
     validator = P.mempty
 
-instance P.HasGid (GroupData s) (TF.Attr s P.Integer) where
+instance P.HasGid (GroupData s) (TF.Attr s P.Int) where
     gid =
-        P.lens (_gid :: GroupData s -> TF.Attr s P.Integer)
+        P.lens (_gid :: GroupData s -> TF.Attr s P.Int)
                (\s a -> s { _gid = a } :: GroupData s)
 
 instance P.HasName (GroupData s) (TF.Attr s P.Text) where
@@ -604,7 +595,7 @@ data LinkData s = LinkData'
     { _filesystem :: TF.Attr s P.Text
     -- ^ @filesystem@ - (Required, Forces New)
     --
-    , _gid        :: TF.Attr s P.Integer
+    , _gid        :: TF.Attr s P.Int
     -- ^ @gid@ - (Optional, Forces New)
     --
     , _hard       :: TF.Attr s P.Bool
@@ -616,10 +607,10 @@ data LinkData s = LinkData'
     , _target     :: TF.Attr s P.Text
     -- ^ @target@ - (Required, Forces New)
     --
-    , _uid        :: TF.Attr s P.Integer
+    , _uid        :: TF.Attr s P.Int
     -- ^ @uid@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 linkData
     :: TF.Attr s P.Text -- ^ @filesystem@ - 'P.filesystem'
@@ -627,7 +618,7 @@ linkData
     -> TF.Attr s P.Text -- ^ @target@ - 'P.target'
     -> P.DataSource (LinkData s)
 linkData _filesystem _path _target =
-    TF.newDataSource "ignition_link" TF.validator $
+    TF.unsafeDataSource "ignition_link" P.defaultProvider TF.validator $
         LinkData'
             { _filesystem = _filesystem
             , _gid = TF.Nil
@@ -655,9 +646,9 @@ instance P.HasFilesystem (LinkData s) (TF.Attr s P.Text) where
         P.lens (_filesystem :: LinkData s -> TF.Attr s P.Text)
                (\s a -> s { _filesystem = a } :: LinkData s)
 
-instance P.HasGid (LinkData s) (TF.Attr s P.Integer) where
+instance P.HasGid (LinkData s) (TF.Attr s P.Int) where
     gid =
-        P.lens (_gid :: LinkData s -> TF.Attr s P.Integer)
+        P.lens (_gid :: LinkData s -> TF.Attr s P.Int)
                (\s a -> s { _gid = a } :: LinkData s)
 
 instance P.HasHard (LinkData s) (TF.Attr s P.Bool) where
@@ -675,9 +666,9 @@ instance P.HasTarget (LinkData s) (TF.Attr s P.Text) where
         P.lens (_target :: LinkData s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: LinkData s)
 
-instance P.HasUid (LinkData s) (TF.Attr s P.Integer) where
+instance P.HasUid (LinkData s) (TF.Attr s P.Int) where
     uid =
-        P.lens (_uid :: LinkData s -> TF.Attr s P.Integer)
+        P.lens (_uid :: LinkData s -> TF.Attr s P.Int)
                (\s a -> s { _uid = a } :: LinkData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LinkData s)) (TF.Attr s P.Text) where
@@ -694,13 +685,13 @@ data NetworkdUnitData s = NetworkdUnitData'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 networkdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkdUnitData s)
 networkdUnitData _name =
-    TF.newDataSource "ignition_networkd_unit" TF.validator $
+    TF.unsafeDataSource "ignition_networkd_unit" P.defaultProvider TF.validator $
         NetworkdUnitData'
             { _content = TF.Nil
             , _name = _name
@@ -742,17 +733,17 @@ data RaidData s = RaidData'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _spares  :: TF.Attr s P.Integer
+    , _spares  :: TF.Attr s P.Int
     -- ^ @spares@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 raidData
     :: TF.Attr s P.Text -- ^ @level@ - 'P.level'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (RaidData s)
 raidData _level _name =
-    TF.newDataSource "ignition_raid" TF.validator $
+    TF.unsafeDataSource "ignition_raid" P.defaultProvider TF.validator $
         RaidData'
             { _devices = TF.Nil
             , _level = _level
@@ -786,9 +777,9 @@ instance P.HasName (RaidData s) (TF.Attr s P.Text) where
         P.lens (_name :: RaidData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RaidData s)
 
-instance P.HasSpares (RaidData s) (TF.Attr s P.Integer) where
+instance P.HasSpares (RaidData s) (TF.Attr s P.Int) where
     spares =
-        P.lens (_spares :: RaidData s -> TF.Attr s P.Integer)
+        P.lens (_spares :: RaidData s -> TF.Attr s P.Int)
                (\s a -> s { _spares = a } :: RaidData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RaidData s)) (TF.Attr s P.Text) where
@@ -802,7 +793,7 @@ data SystemdUnitData s = SystemdUnitData'
     { _content :: TF.Attr s P.Text
     -- ^ @content@ - (Optional, Forces New)
     --
-    , _dropin  :: TF.Attr s [TF.Attr s (SystemdUnitDropin s)]
+    , _dropin  :: TF.Attr s [TF.Attr s (DropinSetting s)]
     -- ^ @dropin@ - (Optional, Forces New)
     --
     , _enabled :: TF.Attr s P.Bool
@@ -814,13 +805,13 @@ data SystemdUnitData s = SystemdUnitData'
     , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 systemdUnitData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SystemdUnitData s)
 systemdUnitData _name =
-    TF.newDataSource "ignition_systemd_unit" TF.validator $
+    TF.unsafeDataSource "ignition_systemd_unit" P.defaultProvider TF.validator $
         SystemdUnitData'
             { _content = TF.Nil
             , _dropin = TF.Nil
@@ -840,19 +831,15 @@ instance TF.IsObject (SystemdUnitData s) where
 
 instance TF.IsValid (SystemdUnitData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_dropin"
-                  (_dropin
-                      :: SystemdUnitData s -> TF.Attr s [TF.Attr s (SystemdUnitDropin s)])
-                  TF.validator
 
 instance P.HasContent (SystemdUnitData s) (TF.Attr s P.Text) where
     content =
         P.lens (_content :: SystemdUnitData s -> TF.Attr s P.Text)
                (\s a -> s { _content = a } :: SystemdUnitData s)
 
-instance P.HasDropin (SystemdUnitData s) (TF.Attr s [TF.Attr s (SystemdUnitDropin s)]) where
+instance P.HasDropin (SystemdUnitData s) (TF.Attr s [TF.Attr s (DropinSetting s)]) where
     dropin =
-        P.lens (_dropin :: SystemdUnitData s -> TF.Attr s [TF.Attr s (SystemdUnitDropin s)])
+        P.lens (_dropin :: SystemdUnitData s -> TF.Attr s [TF.Attr s (DropinSetting s)])
                (\s a -> s { _dropin = a } :: SystemdUnitData s)
 
 instance P.HasEnabled (SystemdUnitData s) (TF.Attr s P.Bool) where
@@ -914,16 +901,16 @@ data UserData s = UserData'
     , _system            :: TF.Attr s P.Bool
     -- ^ @system@ - (Optional, Forces New)
     --
-    , _uid               :: TF.Attr s P.Integer
+    , _uid               :: TF.Attr s P.Int
     -- ^ @uid@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 userData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (UserData s)
 userData _name =
-    TF.newDataSource "ignition_user" TF.validator $
+    TF.unsafeDataSource "ignition_user" P.defaultProvider TF.validator $
         UserData'
             { _gecos = TF.Nil
             , _groups = TF.Nil
@@ -1020,9 +1007,9 @@ instance P.HasSystem (UserData s) (TF.Attr s P.Bool) where
         P.lens (_system :: UserData s -> TF.Attr s P.Bool)
                (\s a -> s { _system = a } :: UserData s)
 
-instance P.HasUid (UserData s) (TF.Attr s P.Integer) where
+instance P.HasUid (UserData s) (TF.Attr s P.Int) where
     uid =
-        P.lens (_uid :: UserData s -> TF.Attr s P.Integer)
+        P.lens (_uid :: UserData s -> TF.Attr s P.Int)
                (\s a -> s { _uid = a } :: UserData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (UserData s)) (TF.Attr s P.Text) where
