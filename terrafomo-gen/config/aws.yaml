@@ -14,6 +14,18 @@ field-overrides:
   provider.assume_role:
     policy: 'P.Maybe P.Document'
 
+  aws_iam_role:
+    assume_role_policy: 'TF.Attr s P.Document'
+
+  aws_iam_role_policy:
+    policy: 'TF.Attr s P.Document'
+
+  aws_iam_policy:
+    policy: 'TF.Attr s P.Document'
+
+  aws_iam_group_policy:
+    policy: 'TF.Attr s P.Document'
+
   aws_security_group_rule:
     type: 'TF.Attr s P.NetworkTraffic'
     protocol: 'TF.Attr s P.NetworkProtocol'
