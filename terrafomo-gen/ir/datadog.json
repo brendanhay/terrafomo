@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "conditionalFormatSetting",
+                "smart": "newConditionalFormatSetting",
                 "name": "ConditionalFormatSetting'"
             },
             "arguments": [
@@ -133,7 +133,7 @@
         },
         {
             "con": {
-                "smart": "graphSetting",
+                "smart": "newGraphSetting",
                 "name": "GraphSetting'"
             },
             "arguments": [
@@ -478,7 +478,7 @@
         },
         {
             "con": {
-                "smart": "markerSetting",
+                "smart": "newMarkerSetting",
                 "name": "MarkerSetting'"
             },
             "arguments": [
@@ -580,7 +580,7 @@
         },
         {
             "con": {
-                "smart": "recurrenceSetting",
+                "smart": "newRecurrenceSetting",
                 "name": "RecurrenceSetting'"
             },
             "arguments": [
@@ -775,7 +775,7 @@
         },
         {
             "con": {
-                "smart": "requestSetting",
+                "smart": "newRequestSetting",
                 "name": "RequestSetting'"
             },
             "arguments": [
@@ -1027,7 +1027,7 @@
         },
         {
             "con": {
-                "smart": "templateVariableSetting",
+                "smart": "newTemplateVariableSetting",
                 "name": "TemplateVariableSetting'"
             },
             "arguments": [
@@ -1121,7 +1121,7 @@
         },
         {
             "con": {
-                "smart": "thresholdsSetting",
+                "smart": "newThresholdsSetting",
                 "name": "ThresholdsSetting'"
             },
             "arguments": [
