@@ -679,25 +679,6 @@
                     "original": "dataset"
                 },
                 {
-                    "default": "_name",
-                    "computed": false,
-                    "required": true,
-                    "help": [
-                        "Unique name to refer to this logging setup"
-                    ],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"name\" <$> TF.attribute",
-                    "name": "_name",
-                    "method": "name",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasName",
-                    "validate": false,
-                    "optional": false,
-                    "original": "name"
-                },
-                {
                     "default": "_projectId",
                     "computed": false,
                     "required": true,
@@ -715,6 +696,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "project_id"
+                },
+                {
+                    "default": "_name",
+                    "computed": false,
+                    "required": true,
+                    "help": [
+                        "Unique name to refer to this logging setup"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": false,
+                    "original": "name"
                 },
                 {
                     "default": "_table",
