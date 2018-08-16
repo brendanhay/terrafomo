@@ -78,8 +78,8 @@ data LogResource s = LogResource'
 
 -- | Define a new @logentries_log@ resource value.
 logResource
-    :: TF.Attr s P.Text -- ^ @logset_id@ - 'P.logsetId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @logset_id@ ('P._logsetId', 'P.logsetId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LogResource s)
 logResource _logsetId _name =
     TF.unsafeResource "logentries_log" TF.validator $
@@ -156,7 +156,7 @@ data LogsetResource s = LogsetResource'
 
 -- | Define a new @logentries_logset@ resource value.
 logsetResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LogsetResource s)
 logsetResource _name =
     TF.unsafeResource "logentries_logset" TF.validator $

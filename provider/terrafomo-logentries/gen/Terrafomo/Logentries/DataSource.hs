@@ -62,7 +62,7 @@ data LogsetData s = LogsetData'
 
 -- | Define a new @logentries_logset@ datasource value.
 logsetData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (LogsetData s)
 logsetData _name =
     TF.unsafeDataSource "logentries_logset" TF.validator $
