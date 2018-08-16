@@ -1253,11 +1253,11 @@ data MobileRedirectSetting s = MobileRedirectSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newMobileRedirectSetting
-    :: TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
-    -> TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    :: TF.Attr s P.Text -- ^ @status@ - 'P.status'
+    -> TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
     -> TF.Attr s P.Bool -- ^ @strip_uri@ - 'P.stripUri'
     -> MobileRedirectSetting s
-newMobileRedirectSetting _mobileSubdomain _status _stripUri =
+newMobileRedirectSetting _status _mobileSubdomain _stripUri =
     MobileRedirectSetting'
         { _mobileSubdomain = _mobileSubdomain
         , _status = _status

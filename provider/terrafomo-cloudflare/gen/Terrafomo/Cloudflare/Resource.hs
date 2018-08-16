@@ -102,12 +102,12 @@ data LoadBalancerResource s = LoadBalancerResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 loadBalancerResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @default_pool_ids@ - 'P.defaultPoolIds'
-    -> TF.Attr s P.Text -- ^ @fallback_pool_id@ - 'P.fallbackPoolId'
+    :: TF.Attr s P.Text -- ^ @fallback_pool_id@ - 'P.fallbackPoolId'
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @default_pool_ids@ - 'P.defaultPoolIds'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (LoadBalancerResource s)
-loadBalancerResource _defaultPoolIds _fallbackPoolId _name _zone =
+loadBalancerResource _fallbackPoolId _defaultPoolIds _name _zone =
     TF.unsafeResource "cloudflare_load_balancer" TF.validator $
         LoadBalancerResource'
             { _defaultPoolIds = _defaultPoolIds
@@ -735,11 +735,11 @@ data WafRuleResource s = WafRuleResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 wafRuleResource
-    :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
-    -> TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
+    :: TF.Attr s P.Text -- ^ @rule_id@ - 'P.ruleId'
+    -> TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (WafRuleResource s)
-wafRuleResource _mode _ruleId _zone =
+wafRuleResource _ruleId _mode _zone =
     TF.unsafeResource "cloudflare_waf_rule" TF.validator $
         WafRuleResource'
             { _mode = _mode
