@@ -338,7 +338,7 @@ data DnsDomainRecordsData s = DnsDomainRecordsData'
 
 -- | Define a new @alicloud_dns_domain_records@ datasource value.
 dnsDomainRecordsData
-    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    :: TF.Attr s P.Text -- ^ @domain_name@ ('P._domainName', 'P.domainName')
     -> P.DataSource (DnsDomainRecordsData s)
 dnsDomainRecordsData _domainName =
     TF.unsafeDataSource "alicloud_dns_domain_records" TF.validator $
@@ -583,7 +583,7 @@ data DnsRecordsData s = DnsRecordsData'
 
 -- | Define a new @alicloud_dns_records@ datasource value.
 dnsRecordsData
-    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
+    :: TF.Attr s P.Text -- ^ @domain_name@ ('P._domainName', 'P.domainName')
     -> P.DataSource (DnsRecordsData s)
 dnsRecordsData _domainName =
     TF.unsafeDataSource "alicloud_dns_records" TF.validator $
@@ -1599,7 +1599,7 @@ data SecurityGroupRulesData s = SecurityGroupRulesData'
 
 -- | Define a new @alicloud_security_group_rules@ datasource value.
 securityGroupRulesData
-    :: TF.Attr s P.Text -- ^ @group_id@ - 'P.groupId'
+    :: TF.Attr s P.Text -- ^ @group_id@ ('P._groupId', 'P.groupId')
     -> P.DataSource (SecurityGroupRulesData s)
 securityGroupRulesData _groupId =
     TF.unsafeDataSource "alicloud_security_group_rules" TF.validator $

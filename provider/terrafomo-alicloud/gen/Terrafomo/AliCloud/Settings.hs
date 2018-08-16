@@ -314,9 +314,9 @@ data CacheConfigSetting s = CacheConfigSetting'
 
 -- | Construct a new @cache_config@ settings value.
 newCacheConfigSetting
-    :: TF.Attr s P.Text -- ^ @cache_content@ - 'P.cacheContent'
-    -> TF.Attr s P.Int -- ^ @ttl@ - 'P.ttl'
-    -> TF.Attr s P.Text -- ^ @cache_type@ - 'P.cacheType'
+    :: TF.Attr s P.Text -- ^ 'P._cacheContent': @cache_content@
+    -> TF.Attr s P.Int -- ^ 'P._ttl': @ttl@
+    -> TF.Attr s P.Text -- ^ 'P._cacheType': @cache_type@
     -> CacheConfigSetting s
 newCacheConfigSetting _cacheContent _ttl _cacheType =
     CacheConfigSetting'
@@ -411,8 +411,8 @@ data CorsRuleSetting s = CorsRuleSetting'
 
 -- | Construct a new @cors_rule@ settings value.
 newCorsRuleSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_methods@ - 'P.allowedMethods'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_origins@ - 'P.allowedOrigins'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._allowedMethods': @allowed_methods@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._allowedOrigins': @allowed_origins@
     -> CorsRuleSetting s
 newCorsRuleSetting _allowedMethods _allowedOrigins =
     CorsRuleSetting'
@@ -693,7 +693,7 @@ data FieldSearchSetting s = FieldSearchSetting'
 
 -- | Construct a new @field_search@ settings value.
 newFieldSearchSetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> FieldSearchSetting s
 newFieldSearchSetting _name =
     FieldSearchSetting'
@@ -884,8 +884,8 @@ data HttpHeaderConfigSetting s = HttpHeaderConfigSetting'
 
 -- | Construct a new @http_header_config@ settings value.
 newHttpHeaderConfigSetting
-    :: TF.Attr s P.Text -- ^ @header_key@ - 'P.headerKey'
-    -> TF.Attr s P.Text -- ^ @header_value@ - 'P.headerValue'
+    :: TF.Attr s P.Text -- ^ 'P._headerKey': @header_key@
+    -> TF.Attr s P.Text -- ^ 'P._headerValue': @header_value@
     -> HttpHeaderConfigSetting s
 newHttpHeaderConfigSetting _headerKey _headerValue =
     HttpHeaderConfigSetting'
@@ -1271,9 +1271,9 @@ data LifecycleRuleSetting s = LifecycleRuleSetting'
 
 -- | Construct a new @lifecycle_rule@ settings value.
 newLifecycleRuleSetting
-    :: TF.Attr s P.Bool -- ^ @enabled@ - 'P.enabled'
-    -> TF.Attr s [TF.Attr s (ExpirationSetting s)] -- ^ @expiration@ - 'P.expiration'
-    -> TF.Attr s P.Text -- ^ @prefix@ - 'P.prefix'
+    :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
+    -> TF.Attr s [TF.Attr s (ExpirationSetting s)] -- ^ 'P._expiration': @expiration@
+    -> TF.Attr s P.Text -- ^ 'P._prefix': @prefix@
     -> LifecycleRuleSetting s
 newLifecycleRuleSetting _enabled _expiration _prefix =
     LifecycleRuleSetting'
@@ -1349,8 +1349,8 @@ data LogConfigSetting s = LogConfigSetting'
 
 -- | Construct a new @log_config@ settings value.
 newLogConfigSetting
-    :: TF.Attr s P.Text -- ^ @logstore@ - 'P.logstore'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s P.Text -- ^ 'P._logstore': @logstore@
+    -> TF.Attr s P.Text -- ^ 'P._project': @project@
     -> LogConfigSetting s
 newLogConfigSetting _logstore _project =
     LogConfigSetting'
@@ -1390,7 +1390,7 @@ data LoggingSetting s = LoggingSetting'
 
 -- | Construct a new @logging@ settings value.
 newLoggingSetting
-    :: TF.Attr s P.Text -- ^ @target_bucket@ - 'P.targetBucket'
+    :: TF.Attr s P.Text -- ^ 'P._targetBucket': @target_bucket@
     -> LoggingSetting s
 newLoggingSetting _targetBucket =
     LoggingSetting'
@@ -1603,8 +1603,8 @@ data PrimaryKeySetting s = PrimaryKeySetting'
 
 -- | Construct a new @primary_key@ settings value.
 newPrimaryKeySetting
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
     -> PrimaryKeySetting s
 newPrimaryKeySetting _name _type' =
     PrimaryKeySetting'
@@ -1694,7 +1694,7 @@ data ReferConfigSetting s = ReferConfigSetting'
 
 -- | Construct a new @refer_config@ settings value.
 newReferConfigSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @refer_list@ - 'P.referList'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._referList': @refer_list@
     -> ReferConfigSetting s
 newReferConfigSetting _referList =
     ReferConfigSetting'
@@ -1741,7 +1741,7 @@ data RefererConfigSetting s = RefererConfigSetting'
 
 -- | Construct a new @referer_config@ settings value.
 newRefererConfigSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @referers@ - 'P.referers'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._referers': @referers@
     -> RefererConfigSetting s
 newRefererConfigSetting _referers =
     RefererConfigSetting'
@@ -1907,8 +1907,8 @@ data ServersSetting s = ServersSetting'
 
 -- | Construct a new @servers@ settings value.
 newServersSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @server_ids@ - 'P.serverIds'
-    -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._serverIds': @server_ids@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
     -> ServersSetting s
 newServersSetting _serverIds _port =
     ServersSetting'
@@ -2016,9 +2016,9 @@ data StatementSetting s = StatementSetting'
 
 -- | Construct a new @statement@ settings value.
 newStatementSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @action@ - 'P.action'
-    -> TF.Attr s P.Text -- ^ @effect@ - 'P.effect'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @resource@ - 'P.resource''
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._action': @action@
+    -> TF.Attr s P.Text -- ^ 'P._effect': @effect@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._resource'': @resource@
     -> StatementSetting s
 newStatementSetting _action _effect _resource' =
     StatementSetting'
@@ -2094,8 +2094,8 @@ data VpcConfigSetting s = VpcConfigSetting'
 
 -- | Construct a new @vpc_config@ settings value.
 newVpcConfigSetting
-    :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @vswitch_ids@ - 'P.vswitchIds'
+    :: TF.Attr s P.Text -- ^ 'P._securityGroupId': @security_group_id@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._vswitchIds': @vswitch_ids@
     -> VpcConfigSetting s
 newVpcConfigSetting _securityGroupId _vswitchIds =
     VpcConfigSetting'
@@ -2232,7 +2232,7 @@ data WebsiteSetting s = WebsiteSetting'
 
 -- | Construct a new @website@ settings value.
 newWebsiteSetting
-    :: TF.Attr s P.Text -- ^ @index_document@ - 'P.indexDocument'
+    :: TF.Attr s P.Text -- ^ 'P._indexDocument': @index_document@
     -> WebsiteSetting s
 newWebsiteSetting _indexDocument =
     WebsiteSetting'

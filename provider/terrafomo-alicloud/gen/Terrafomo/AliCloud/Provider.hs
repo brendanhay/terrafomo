@@ -17,10 +17,11 @@
 --
 module Terrafomo.AliCloud.Provider
     (
+    -- * AliCloud Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** AliCloud Specific Aliases
+    -- * AliCloud Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -90,9 +91,9 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @access_key@ - 'P.accessKey'
-    -> P.Text -- ^ @secret_key@ - 'P.secretKey'
-    -> P.Text -- ^ @region@ - 'P.region'
+    :: P.Text -- ^ @access_key@ ('P._accessKey', 'P.accessKey')
+    -> P.Text -- ^ @secret_key@ ('P._secretKey', 'P.secretKey')
+    -> P.Text -- ^ @region@ ('P._region', 'P.region')
     -> Provider
 newProvider _accessKey _secretKey _region =
     Provider'
@@ -109,7 +110,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "alicloud"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "access_key" _accessKey
             , TF.assign "account_id" <$> _accountId

@@ -376,8 +376,8 @@ data CdnDomainResource s = CdnDomainResource'
 
 -- | Define a new @alicloud_cdn_domain@ resource value.
 cdnDomainResource
-    :: TF.Attr s P.Text -- ^ @domain_name@ - 'P.domainName'
-    -> TF.Attr s P.Text -- ^ @cdn_type@ - 'P.cdnType'
+    :: TF.Attr s P.Text -- ^ @domain_name@ ('P._domainName', 'P.domainName')
+    -> TF.Attr s P.Text -- ^ @cdn_type@ ('P._cdnType', 'P.cdnType')
     -> P.Resource (CdnDomainResource s)
 cdnDomainResource _domainName _cdnType =
     TF.unsafeResource "alicloud_cdn_domain" TF.validator $
@@ -579,12 +579,12 @@ data CmsAlarmResource s = CmsAlarmResource'
 
 -- | Define a new @alicloud_cms_alarm@ resource value.
 cmsAlarmResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimensions@ - 'P.dimensions'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @contact_groups@ - 'P.contactGroups'
-    -> TF.Attr s P.Text -- ^ @metric@ - 'P.metric'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
-    -> TF.Attr s P.Text -- ^ @threshold@ - 'P.threshold'
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @dimensions@ ('P._dimensions', 'P.dimensions')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @contact_groups@ ('P._contactGroups', 'P.contactGroups')
+    -> TF.Attr s P.Text -- ^ @metric@ ('P._metric', 'P.metric')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
+    -> TF.Attr s P.Text -- ^ @threshold@ ('P._threshold', 'P.threshold')
     -> P.Resource (CmsAlarmResource s)
 cmsAlarmResource _dimensions _contactGroups _metric _name _project _threshold =
     TF.unsafeResource "alicloud_cms_alarm" TF.validator $
@@ -751,10 +751,10 @@ data ContainerClusterResource s = ContainerClusterResource'
 
 -- | Define a new @alicloud_container_cluster@ resource value.
 containerClusterResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
-    -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
+    -> TF.Attr s P.Text -- ^ @vswitch_id@ ('P._vswitchId', 'P.vswitchId')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
     -> P.Resource (ContainerClusterResource s)
 containerClusterResource _cidrBlock _vswitchId _password _instanceType =
     TF.unsafeResource "alicloud_container_cluster" TF.validator $
@@ -902,9 +902,9 @@ data CsApplicationResource s = CsApplicationResource'
 
 -- | Define a new @alicloud_cs_application@ resource value.
 csApplicationResource
-    :: TF.Attr s P.Text -- ^ @cluster_name@ - 'P.clusterName'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
+    :: TF.Attr s P.Text -- ^ @cluster_name@ ('P._clusterName', 'P.clusterName')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @template@ ('P._template', 'P.template')
     -> P.Resource (CsApplicationResource s)
 csApplicationResource _clusterName _name _template =
     TF.unsafeResource "alicloud_cs_application" TF.validator $
@@ -1059,9 +1059,9 @@ data CsKubernetesResource s = CsKubernetesResource'
 
 -- | Define a new @alicloud_cs_kubernetes@ resource value.
 csKubernetesResource
-    :: TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @master_instance_type@ - 'P.masterInstanceType'
-    -> TF.Attr s P.Text -- ^ @worker_instance_type@ - 'P.workerInstanceType'
+    :: TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> TF.Attr s P.Text -- ^ @master_instance_type@ ('P._masterInstanceType', 'P.masterInstanceType')
+    -> TF.Attr s P.Text -- ^ @worker_instance_type@ ('P._workerInstanceType', 'P.workerInstanceType')
     -> P.Resource (CsKubernetesResource s)
 csKubernetesResource _password _masterInstanceType _workerInstanceType =
     TF.unsafeResource "alicloud_cs_kubernetes" TF.validator $
@@ -1296,10 +1296,10 @@ data CsSwarmResource s = CsSwarmResource'
 
 -- | Define a new @alicloud_cs_swarm@ resource value.
 csSwarmResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
-    -> TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
+    -> TF.Attr s P.Text -- ^ @vswitch_id@ ('P._vswitchId', 'P.vswitchId')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
     -> P.Resource (CsSwarmResource s)
 csSwarmResource _cidrBlock _vswitchId _password _instanceType =
     TF.unsafeResource "alicloud_cs_swarm" TF.validator $
@@ -1435,9 +1435,9 @@ data DbAccountResource s = DbAccountResource'
 
 -- | Define a new @alicloud_db_account@ resource value.
 dbAccountResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
     -> P.Resource (DbAccountResource s)
 dbAccountResource _instanceId _name _password =
     TF.unsafeResource "alicloud_db_account" TF.validator $
@@ -1510,9 +1510,9 @@ data DbAccountPrivilegeResource s = DbAccountPrivilegeResource'
 
 -- | Define a new @alicloud_db_account_privilege@ resource value.
 dbAccountPrivilegeResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @account_name@ - 'P.accountName'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @db_names@ - 'P.dbNames'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @account_name@ ('P._accountName', 'P.accountName')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @db_names@ ('P._dbNames', 'P.dbNames')
     -> P.Resource (DbAccountPrivilegeResource s)
 dbAccountPrivilegeResource _instanceId _accountName _dbNames =
     TF.unsafeResource "alicloud_db_account_privilege" TF.validator $
@@ -1581,7 +1581,7 @@ data DbBackupPolicyResource s = DbBackupPolicyResource'
 
 -- | Define a new @alicloud_db_backup_policy@ resource value.
 dbBackupPolicyResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
     -> P.Resource (DbBackupPolicyResource s)
 dbBackupPolicyResource _instanceId =
     TF.unsafeResource "alicloud_db_backup_policy" TF.validator $
@@ -1651,7 +1651,7 @@ data DbConnectionResource s = DbConnectionResource'
 
 -- | Define a new @alicloud_db_connection@ resource value.
 dbConnectionResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
     -> P.Resource (DbConnectionResource s)
 dbConnectionResource _instanceId =
     TF.unsafeResource "alicloud_db_connection" TF.validator $
@@ -1712,8 +1712,8 @@ data DbDatabaseResource s = DbDatabaseResource'
 
 -- | Define a new @alicloud_db_database@ resource value.
 dbDatabaseResource
-    :: TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @instance_id@ ('P._instanceId', 'P.instanceId')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DbDatabaseResource s)
 dbDatabaseResource _instanceId _name =
     TF.unsafeResource "alicloud_db_database" TF.validator $
@@ -1791,10 +1791,10 @@ data DbInstanceResource s = DbInstanceResource'
 
 -- | Define a new @alicloud_db_instance@ resource value.
 dbInstanceResource
-    :: TF.Attr s P.Text -- ^ @engine@ - 'P.engine'
-    -> TF.Attr s P.Int -- ^ @instance_storage@ - 'P.instanceStorage'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
-    -> TF.Attr s P.Text -- ^ @engine_version@ - 'P.engineVersion'
+    :: TF.Attr s P.Text -- ^ @engine@ ('P._engine', 'P.engine')
+    -> TF.Attr s P.Int -- ^ @instance_storage@ ('P._instanceStorage', 'P.instanceStorage')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
+    -> TF.Attr s P.Text -- ^ @engine_version@ ('P._engineVersion', 'P.engineVersion')
     -> P.Resource (DbInstanceResource s)
 dbInstanceResource _engine _instanceStorage _instanceType _engineVersion =
     TF.unsafeResource "alicloud_db_instance" TF.validator $
@@ -1912,7 +1912,7 @@ data DiskResource s = DiskResource'
 
 -- | Define a new @alicloud_disk@ resource value.
 diskResource
-    :: TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
+    :: TF.Attr s P.Text -- ^ @availability_zone@ ('P._availabilityZone', 'P.availabilityZone')
     -> P.Resource (DiskResource s)
 diskResource _availabilityZone =
     TF.unsafeResource "alicloud_disk" TF.validator $
@@ -2048,7 +2048,7 @@ data DnsResource s = DnsResource'
 
 -- | Define a new @alicloud_dns@ resource value.
 dnsResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DnsResource s)
 dnsResource _name =
     TF.unsafeResource "alicloud_dns" TF.validator $
@@ -2094,7 +2094,7 @@ data DnsGroupResource s = DnsGroupResource'
 
 -- | Define a new @alicloud_dns_group@ resource value.
 dnsGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DnsGroupResource s)
 dnsGroupResource _name =
     TF.unsafeResource "alicloud_dns_group" TF.validator $
@@ -2148,10 +2148,10 @@ data DnsRecordResource s = DnsRecordResource'
 
 -- | Define a new @alicloud_dns_record@ resource value.
 dnsRecordResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @host_record@ - 'P.hostRecord'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @value@ - 'P.value'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @host_record@ ('P._hostRecord', 'P.hostRecord')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @value@ ('P._value', 'P.value')
     -> P.Resource (DnsRecordResource s)
 dnsRecordResource _name _hostRecord _type' _value =
     TF.unsafeResource "alicloud_dns_record" TF.validator $
@@ -2364,8 +2364,8 @@ data EssAttachmentResource s = EssAttachmentResource'
 
 -- | Define a new @alicloud_ess_attachment@ resource value.
 essAttachmentResource
-    :: TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
+    :: TF.Attr s P.Text -- ^ @scaling_group_id@ ('P._scalingGroupId', 'P.scalingGroupId')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
     -> P.Resource (EssAttachmentResource s)
 essAttachmentResource _scalingGroupId _instanceIds =
     TF.unsafeResource "alicloud_ess_attachment" TF.validator $
@@ -2460,10 +2460,10 @@ data EssScalingConfigurationResource s = EssScalingConfigurationResource'
 
 -- | Define a new @alicloud_ess_scaling_configuration@ resource value.
 essScalingConfigurationResource
-    :: TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
-    -> TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
-    -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    :: TF.Attr s P.Text -- ^ @image_id@ ('P._imageId', 'P.imageId')
+    -> TF.Attr s P.Text -- ^ @scaling_group_id@ ('P._scalingGroupId', 'P.scalingGroupId')
+    -> TF.Attr s P.Text -- ^ @security_group_id@ ('P._securityGroupId', 'P.securityGroupId')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
     -> P.Resource (EssScalingConfigurationResource s)
 essScalingConfigurationResource _imageId _scalingGroupId _securityGroupId _instanceType =
     TF.unsafeResource "alicloud_ess_scaling_configuration" TF.validator $
@@ -2637,8 +2637,8 @@ data EssScalingGroupResource s = EssScalingGroupResource'
 
 -- | Define a new @alicloud_ess_scaling_group@ resource value.
 essScalingGroupResource
-    :: TF.Attr s P.Int -- ^ @max_size@ - 'P.maxSize'
-    -> TF.Attr s P.Int -- ^ @min_size@ - 'P.minSize'
+    :: TF.Attr s P.Int -- ^ @max_size@ ('P._maxSize', 'P.maxSize')
+    -> TF.Attr s P.Int -- ^ @min_size@ ('P._minSize', 'P.minSize')
     -> P.Resource (EssScalingGroupResource s)
 essScalingGroupResource _maxSize _minSize =
     TF.unsafeResource "alicloud_ess_scaling_group" TF.validator $
@@ -2732,9 +2732,9 @@ data EssScalingRuleResource s = EssScalingRuleResource'
 
 -- | Define a new @alicloud_ess_scaling_rule@ resource value.
 essScalingRuleResource
-    :: TF.Attr s P.Text -- ^ @scaling_group_id@ - 'P.scalingGroupId'
-    -> TF.Attr s P.Text -- ^ @adjustment_type@ - 'P.adjustmentType'
-    -> TF.Attr s P.Int -- ^ @adjustment_value@ - 'P.adjustmentValue'
+    :: TF.Attr s P.Text -- ^ @scaling_group_id@ ('P._scalingGroupId', 'P.scalingGroupId')
+    -> TF.Attr s P.Text -- ^ @adjustment_type@ ('P._adjustmentType', 'P.adjustmentType')
+    -> TF.Attr s P.Int -- ^ @adjustment_value@ ('P._adjustmentValue', 'P.adjustmentValue')
     -> P.Resource (EssScalingRuleResource s)
 essScalingRuleResource _scalingGroupId _adjustmentType _adjustmentValue =
     TF.unsafeResource "alicloud_ess_scaling_rule" TF.validator $
@@ -2809,8 +2809,8 @@ data EssScheduleResource s = EssScheduleResource'
 
 -- | Define a new @alicloud_ess_schedule@ resource value.
 essScheduleResource
-    :: TF.Attr s P.Text -- ^ @scheduled_action@ - 'P.scheduledAction'
-    -> TF.Attr s P.Text -- ^ @launch_time@ - 'P.launchTime'
+    :: TF.Attr s P.Text -- ^ @scheduled_action@ ('P._scheduledAction', 'P.scheduledAction')
+    -> TF.Attr s P.Text -- ^ @launch_time@ ('P._launchTime', 'P.launchTime')
     -> P.Resource (EssScheduleResource s)
 essScheduleResource _scheduledAction _launchTime =
     TF.unsafeResource "alicloud_ess_schedule" TF.validator $
@@ -2923,9 +2923,9 @@ data FcFunctionResource s = FcFunctionResource'
 
 -- | Define a new @alicloud_fc_function@ resource value.
 fcFunctionResource
-    :: TF.Attr s P.Text -- ^ @handler@ - 'P.handler'
-    -> TF.Attr s P.Text -- ^ @runtime@ - 'P.runtime'
-    -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
+    :: TF.Attr s P.Text -- ^ @handler@ ('P._handler', 'P.handler')
+    -> TF.Attr s P.Text -- ^ @runtime@ ('P._runtime', 'P.runtime')
+    -> TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
     -> P.Resource (FcFunctionResource s)
 fcFunctionResource _handler _runtime _service =
     TF.unsafeResource "alicloud_fc_function" TF.validator $
@@ -3163,10 +3163,10 @@ data FcTriggerResource s = FcTriggerResource'
 
 -- | Define a new @alicloud_fc_trigger@ resource value.
 fcTriggerResource
-    :: TF.Attr s P.Text -- ^ @config@ - 'P.config'
-    -> TF.Attr s P.Text -- ^ @function@ - 'P.function'
-    -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @config@ ('P._config', 'P.config')
+    -> TF.Attr s P.Text -- ^ @function@ ('P._function', 'P.function')
+    -> TF.Attr s P.Text -- ^ @service@ ('P._service', 'P.service')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (FcTriggerResource s)
 fcTriggerResource _config _function _service _type' =
     TF.unsafeResource "alicloud_fc_trigger" TF.validator $
@@ -3265,12 +3265,12 @@ data ForwardEntryResource s = ForwardEntryResource'
 
 -- | Define a new @alicloud_forward_entry@ resource value.
 forwardEntryResource
-    :: TF.Attr s P.Text -- ^ @forward_table_id@ - 'P.forwardTableId'
-    -> TF.Attr s P.Text -- ^ @external_ip@ - 'P.externalIp'
-    -> TF.Attr s P.Text -- ^ @internal_ip@ - 'P.internalIp'
-    -> TF.Attr s P.Text -- ^ @external_port@ - 'P.externalPort'
-    -> TF.Attr s P.Text -- ^ @internal_port@ - 'P.internalPort'
-    -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
+    :: TF.Attr s P.Text -- ^ @forward_table_id@ ('P._forwardTableId', 'P.forwardTableId')
+    -> TF.Attr s P.Text -- ^ @external_ip@ ('P._externalIp', 'P.externalIp')
+    -> TF.Attr s P.Text -- ^ @internal_ip@ ('P._internalIp', 'P.internalIp')
+    -> TF.Attr s P.Text -- ^ @external_port@ ('P._externalPort', 'P.externalPort')
+    -> TF.Attr s P.Text -- ^ @internal_port@ ('P._internalPort', 'P.internalPort')
+    -> TF.Attr s P.Text -- ^ @ip_protocol@ ('P._ipProtocol', 'P.ipProtocol')
     -> P.Resource (ForwardEntryResource s)
 forwardEntryResource _forwardTableId _externalIp _internalIp _externalPort _internalPort _ipProtocol =
     TF.unsafeResource "alicloud_forward_entry" TF.validator $
@@ -3407,9 +3407,9 @@ data InstanceResource s = InstanceResource'
 
 -- | Define a new @alicloud_instance@ resource value.
 instanceResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ - 'P.securityGroups'
-    -> TF.Attr s P.Text -- ^ @image_id@ - 'P.imageId'
-    -> TF.Attr s P.Text -- ^ @instance_type@ - 'P.instanceType'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @security_groups@ ('P._securityGroups', 'P.securityGroups')
+    -> TF.Attr s P.Text -- ^ @image_id@ ('P._imageId', 'P.imageId')
+    -> TF.Attr s P.Text -- ^ @instance_type@ ('P._instanceType', 'P.instanceType')
     -> P.Resource (InstanceResource s)
 instanceResource _securityGroups _imageId _instanceType =
     TF.unsafeResource "alicloud_instance" TF.validator $
@@ -3690,8 +3690,8 @@ data KeyPairAttachmentResource s = KeyPairAttachmentResource'
 
 -- | Define a new @alicloud_key_pair_attachment@ resource value.
 keyPairAttachmentResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ - 'P.instanceIds'
-    -> TF.Attr s P.Text -- ^ @key_name@ - 'P.keyName'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
+    -> TF.Attr s P.Text -- ^ @key_name@ ('P._keyName', 'P.keyName')
     -> P.Resource (KeyPairAttachmentResource s)
 keyPairAttachmentResource _instanceIds _keyName =
     TF.unsafeResource "alicloud_key_pair_attachment" TF.validator $
@@ -3814,9 +3814,9 @@ data LogMachineGroupResource s = LogMachineGroupResource'
 
 -- | Define a new @alicloud_log_machine_group@ resource value.
 logMachineGroupResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @identify_list@ - 'P.identifyList'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @identify_list@ ('P._identifyList', 'P.identifyList')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
     -> P.Resource (LogMachineGroupResource s)
 logMachineGroupResource _identifyList _name _project =
     TF.unsafeResource "alicloud_log_machine_group" TF.validator $
@@ -3883,7 +3883,7 @@ data LogProjectResource s = LogProjectResource'
 
 -- | Define a new @alicloud_log_project@ resource value.
 logProjectResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (LogProjectResource s)
 logProjectResource _name =
     TF.unsafeResource "alicloud_log_project" TF.validator $
@@ -3935,8 +3935,8 @@ data LogStoreResource s = LogStoreResource'
 
 -- | Define a new @alicloud_log_store@ resource value.
 logStoreResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
     -> P.Resource (LogStoreResource s)
 logStoreResource _name _project =
     TF.unsafeResource "alicloud_log_store" TF.validator $
@@ -4005,8 +4005,8 @@ data LogStoreIndexResource s = LogStoreIndexResource'
 
 -- | Define a new @alicloud_log_store_index@ resource value.
 logStoreIndexResource
-    :: TF.Attr s P.Text -- ^ @logstore@ - 'P.logstore'
-    -> TF.Attr s P.Text -- ^ @project@ - 'P.project'
+    :: TF.Attr s P.Text -- ^ @logstore@ ('P._logstore', 'P.logstore')
+    -> TF.Attr s P.Text -- ^ @project@ ('P._project', 'P.project')
     -> P.Resource (LogStoreIndexResource s)
 logStoreIndexResource _logstore _project =
     TF.unsafeResource "alicloud_log_store_index" TF.validator $
@@ -4073,7 +4073,7 @@ data NatGatewayResource s = NatGatewayResource'
 
 -- | Define a new @alicloud_nat_gateway@ resource value.
 natGatewayResource
-    :: TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
+    :: TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
     -> P.Resource (NatGatewayResource s)
 natGatewayResource _vpcId =
     TF.unsafeResource "alicloud_nat_gateway" TF.validator $
@@ -4292,8 +4292,8 @@ data OssBucketObjectResource s = OssBucketObjectResource'
 
 -- | Define a new @alicloud_oss_bucket_object@ resource value.
 ossBucketObjectResource
-    :: TF.Attr s P.Text -- ^ @bucket@ - 'P.bucket'
-    -> TF.Attr s P.Text -- ^ @key@ - 'P.key'
+    :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
+    -> TF.Attr s P.Text -- ^ @key@ ('P._key', 'P.key')
     -> P.Resource (OssBucketObjectResource s)
 ossBucketObjectResource _bucket _key =
     TF.unsafeResource "alicloud_oss_bucket_object" TF.validator $
@@ -4427,8 +4427,8 @@ data OtsInstanceResource s = OtsInstanceResource'
 
 -- | Define a new @alicloud_ots_instance@ resource value.
 otsInstanceResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (OtsInstanceResource s)
 otsInstanceResource _description _name =
     TF.unsafeResource "alicloud_ots_instance" TF.validator $
@@ -4498,9 +4498,9 @@ data OtsInstanceAttachmentResource s = OtsInstanceAttachmentResource'
 
 -- | Define a new @alicloud_ots_instance_attachment@ resource value.
 otsInstanceAttachmentResource
-    :: TF.Attr s P.Text -- ^ @vswitch_id@ - 'P.vswitchId'
-    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
-    -> TF.Attr s P.Text -- ^ @vpc_name@ - 'P.vpcName'
+    :: TF.Attr s P.Text -- ^ @vswitch_id@ ('P._vswitchId', 'P.vswitchId')
+    -> TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
+    -> TF.Attr s P.Text -- ^ @vpc_name@ ('P._vpcName', 'P.vpcName')
     -> P.Resource (OtsInstanceAttachmentResource s)
 otsInstanceAttachmentResource _vswitchId _instanceName _vpcName =
     TF.unsafeResource "alicloud_ots_instance_attachment" TF.validator $
@@ -4565,11 +4565,11 @@ data OtsTableResource s = OtsTableResource'
 
 -- | Define a new @alicloud_ots_table@ resource value.
 otsTableResource
-    :: TF.Attr s [TF.Attr s (PrimaryKeySetting s)] -- ^ @primary_key@ - 'P.primaryKey'
-    -> TF.Attr s P.Int -- ^ @time_to_live@ - 'P.timeToLive'
-    -> TF.Attr s P.Text -- ^ @instance_name@ - 'P.instanceName'
-    -> TF.Attr s P.Text -- ^ @table_name@ - 'P.tableName'
-    -> TF.Attr s P.Int -- ^ @max_version@ - 'P.maxVersion'
+    :: TF.Attr s [TF.Attr s (PrimaryKeySetting s)] -- ^ @primary_key@ ('P._primaryKey', 'P.primaryKey')
+    -> TF.Attr s P.Int -- ^ @time_to_live@ ('P._timeToLive', 'P.timeToLive')
+    -> TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
+    -> TF.Attr s P.Text -- ^ @table_name@ ('P._tableName', 'P.tableName')
+    -> TF.Attr s P.Int -- ^ @max_version@ ('P._maxVersion', 'P.maxVersion')
     -> P.Resource (OtsTableResource s)
 otsTableResource _primaryKey _timeToLive _instanceName _tableName _maxVersion =
     TF.unsafeResource "alicloud_ots_table" TF.validator $
@@ -4688,7 +4688,7 @@ data RamAccountAliasResource s = RamAccountAliasResource'
 
 -- | Define a new @alicloud_ram_account_alias@ resource value.
 ramAccountAliasResource
-    :: TF.Attr s P.Text -- ^ @account_alias@ - 'P.accountAlias'
+    :: TF.Attr s P.Text -- ^ @account_alias@ ('P._accountAlias', 'P.accountAlias')
     -> P.Resource (RamAccountAliasResource s)
 ramAccountAliasResource _accountAlias =
     TF.unsafeResource "alicloud_ram_account_alias" TF.validator $
@@ -4724,7 +4724,7 @@ data RamAliasResource s = RamAliasResource'
 
 -- | Define a new @alicloud_ram_alias@ resource value.
 ramAliasResource
-    :: TF.Attr s P.Text -- ^ @account_alias@ - 'P.accountAlias'
+    :: TF.Attr s P.Text -- ^ @account_alias@ ('P._accountAlias', 'P.accountAlias')
     -> P.Resource (RamAliasResource s)
 ramAliasResource _accountAlias =
     TF.unsafeResource "alicloud_ram_alias" TF.validator $
@@ -4766,7 +4766,7 @@ data RamGroupResource s = RamGroupResource'
 
 -- | Define a new @alicloud_ram_group@ resource value.
 ramGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RamGroupResource s)
 ramGroupResource _name =
     TF.unsafeResource "alicloud_ram_group" TF.validator $
@@ -4819,8 +4819,8 @@ data RamGroupMembershipResource s = RamGroupMembershipResource'
 
 -- | Define a new @alicloud_ram_group_membership@ resource value.
 ramGroupMembershipResource
-    :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @user_names@ - 'P.userNames'
+    :: TF.Attr s P.Text -- ^ @group_name@ ('P._groupName', 'P.groupName')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @user_names@ ('P._userNames', 'P.userNames')
     -> P.Resource (RamGroupMembershipResource s)
 ramGroupMembershipResource _groupName _userNames =
     TF.unsafeResource "alicloud_ram_group_membership" TF.validator $
@@ -4869,9 +4869,9 @@ data RamGroupPolicyAttachmentResource s = RamGroupPolicyAttachmentResource'
 
 -- | Define a new @alicloud_ram_group_policy_attachment@ resource value.
 ramGroupPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @group_name@ - 'P.groupName'
-    -> TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
+    :: TF.Attr s P.Text -- ^ @group_name@ ('P._groupName', 'P.groupName')
+    -> TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
+    -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
     -> P.Resource (RamGroupPolicyAttachmentResource s)
 ramGroupPolicyAttachmentResource _groupName _policyName _policyType =
     TF.unsafeResource "alicloud_ram_group_policy_attachment" TF.validator $
@@ -4930,8 +4930,8 @@ data RamLoginProfileResource s = RamLoginProfileResource'
 
 -- | Define a new @alicloud_ram_login_profile@ resource value.
 ramLoginProfileResource
-    :: TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
-    -> TF.Attr s P.Text -- ^ @password@ - 'P.password'
+    :: TF.Attr s P.Text -- ^ @user_name@ ('P._userName', 'P.userName')
+    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
     -> P.Resource (RamLoginProfileResource s)
 ramLoginProfileResource _userName _password =
     TF.unsafeResource "alicloud_ram_login_profile" TF.validator $
@@ -4997,7 +4997,7 @@ data RamPolicyResource s = RamPolicyResource'
 
 -- | Define a new @alicloud_ram_policy@ resource value.
 ramPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RamPolicyResource s)
 ramPolicyResource _name =
     TF.unsafeResource "alicloud_ram_policy" TF.validator $
@@ -5075,7 +5075,7 @@ data RamRoleResource s = RamRoleResource'
 
 -- | Define a new @alicloud_ram_role@ resource value.
 ramRoleResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RamRoleResource s)
 ramRoleResource _name =
     TF.unsafeResource "alicloud_ram_role" TF.validator $
@@ -5147,8 +5147,8 @@ data RamRoleAttachmentResource s = RamRoleAttachmentResource'
 
 -- | Define a new @alicloud_ram_role_attachment@ resource value.
 ramRoleAttachmentResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ - 'P.instanceIds'
-    -> TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
+    -> TF.Attr s P.Text -- ^ @role_name@ ('P._roleName', 'P.roleName')
     -> P.Resource (RamRoleAttachmentResource s)
 ramRoleAttachmentResource _instanceIds _roleName =
     TF.unsafeResource "alicloud_ram_role_attachment" TF.validator $
@@ -5197,9 +5197,9 @@ data RamRolePolicyAttachmentResource s = RamRolePolicyAttachmentResource'
 
 -- | Define a new @alicloud_ram_role_policy_attachment@ resource value.
 ramRolePolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
-    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
+    :: TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
+    -> TF.Attr s P.Text -- ^ @role_name@ ('P._roleName', 'P.roleName')
+    -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
     -> P.Resource (RamRolePolicyAttachmentResource s)
 ramRolePolicyAttachmentResource _policyName _roleName _policyType =
     TF.unsafeResource "alicloud_ram_role_policy_attachment" TF.validator $
@@ -5264,7 +5264,7 @@ data RamUserResource s = RamUserResource'
 
 -- | Define a new @alicloud_ram_user@ resource value.
 ramUserResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RamUserResource s)
 ramUserResource _name =
     TF.unsafeResource "alicloud_ram_user" TF.validator $
@@ -5341,9 +5341,9 @@ data RamUserPolicyAttachmentResource s = RamUserPolicyAttachmentResource'
 
 -- | Define a new @alicloud_ram_user_policy_attachment@ resource value.
 ramUserPolicyAttachmentResource
-    :: TF.Attr s P.Text -- ^ @policy_name@ - 'P.policyName'
-    -> TF.Attr s P.Text -- ^ @user_name@ - 'P.userName'
-    -> TF.Attr s P.Text -- ^ @policy_type@ - 'P.policyType'
+    :: TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
+    -> TF.Attr s P.Text -- ^ @user_name@ ('P._userName', 'P.userName')
+    -> TF.Attr s P.Text -- ^ @policy_type@ ('P._policyType', 'P.policyType')
     -> P.Resource (RamUserPolicyAttachmentResource s)
 ramUserPolicyAttachmentResource _policyName _userName _policyType =
     TF.unsafeResource "alicloud_ram_user_policy_attachment" TF.validator $
@@ -5402,7 +5402,7 @@ data RouteEntryResource s = RouteEntryResource'
 
 -- | Define a new @alicloud_route_entry@ resource value.
 routeEntryResource
-    :: TF.Attr s P.Text -- ^ @route_table_id@ - 'P.routeTableId'
+    :: TF.Attr s P.Text -- ^ @route_table_id@ ('P._routeTableId', 'P.routeTableId')
     -> P.Resource (RouteEntryResource s)
 routeEntryResource _routeTableId =
     TF.unsafeResource "alicloud_route_entry" TF.validator $
@@ -5483,10 +5483,10 @@ data RouterInterfaceResource s = RouterInterfaceResource'
 
 -- | Define a new @alicloud_router_interface@ resource value.
 routerInterfaceResource
-    :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
-    -> TF.Attr s P.Text -- ^ @opposite_region@ - 'P.oppositeRegion'
-    -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
-    -> TF.Attr s P.Text -- ^ @router_type@ - 'P.routerType'
+    :: TF.Attr s P.Text -- ^ @router_id@ ('P._routerId', 'P.routerId')
+    -> TF.Attr s P.Text -- ^ @opposite_region@ ('P._oppositeRegion', 'P.oppositeRegion')
+    -> TF.Attr s P.Text -- ^ @role@ ('P._role', 'P.role')
+    -> TF.Attr s P.Text -- ^ @router_type@ ('P._routerType', 'P.routerType')
     -> P.Resource (RouterInterfaceResource s)
 routerInterfaceResource _routerId _oppositeRegion _role _routerType =
     TF.unsafeResource "alicloud_router_interface" TF.validator $
@@ -5584,8 +5584,8 @@ data RouterInterfaceConnectionResource s = RouterInterfaceConnectionResource'
 
 -- | Define a new @alicloud_router_interface_connection@ resource value.
 routerInterfaceConnectionResource
-    :: TF.Attr s P.Text -- ^ @interface_id@ - 'P.interfaceId'
-    -> TF.Attr s P.Text -- ^ @opposite_interface_id@ - 'P.oppositeInterfaceId'
+    :: TF.Attr s P.Text -- ^ @interface_id@ ('P._interfaceId', 'P.interfaceId')
+    -> TF.Attr s P.Text -- ^ @opposite_interface_id@ ('P._oppositeInterfaceId', 'P.oppositeInterfaceId')
     -> P.Resource (RouterInterfaceConnectionResource s)
 routerInterfaceConnectionResource _interfaceId _oppositeInterfaceId =
     TF.unsafeResource "alicloud_router_interface_connection" TF.validator $
@@ -5737,9 +5737,9 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
 
 -- | Define a new @alicloud_security_group_rule@ resource value.
 securityGroupRuleResource
-    :: TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
-    -> TF.Attr s P.Text -- ^ @ip_protocol@ - 'P.ipProtocol'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
+    :: TF.Attr s P.Text -- ^ @security_group_id@ ('P._securityGroupId', 'P.securityGroupId')
+    -> TF.Attr s P.Text -- ^ @ip_protocol@ ('P._ipProtocol', 'P.ipProtocol')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _securityGroupId _ipProtocol _type' =
     TF.unsafeResource "alicloud_security_group_rule" TF.validator $
@@ -5939,8 +5939,8 @@ data SlbAttachmentResource s = SlbAttachmentResource'
 
 -- | Define a new @alicloud_slb_attachment@ resource value.
 slbAttachmentResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ - 'P.instanceIds'
+    :: TF.Attr s P.Text -- ^ @load_balancer_id@ ('P._loadBalancerId', 'P.loadBalancerId')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ @instance_ids@ ('P._instanceIds', 'P.instanceIds')
     -> P.Resource (SlbAttachmentResource s)
 slbAttachmentResource _loadBalancerId _instanceIds =
     TF.unsafeResource "alicloud_slb_attachment" TF.validator $
@@ -6056,11 +6056,11 @@ data SlbListenerResource s = SlbListenerResource'
 
 -- | Define a new @alicloud_slb_listener@ resource value.
 slbListenerResource
-    :: TF.Attr s P.Int -- ^ @bandwidth@ - 'P.bandwidth'
-    -> TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
-    -> TF.Attr s P.Int -- ^ @backend_port@ - 'P.backendPort'
-    -> TF.Attr s P.Int -- ^ @frontend_port@ - 'P.frontendPort'
-    -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Int -- ^ @bandwidth@ ('P._bandwidth', 'P.bandwidth')
+    -> TF.Attr s P.Text -- ^ @load_balancer_id@ ('P._loadBalancerId', 'P.loadBalancerId')
+    -> TF.Attr s P.Int -- ^ @backend_port@ ('P._backendPort', 'P.backendPort')
+    -> TF.Attr s P.Int -- ^ @frontend_port@ ('P._frontendPort', 'P.frontendPort')
+    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
     -> P.Resource (SlbListenerResource s)
 slbListenerResource _bandwidth _loadBalancerId _backendPort _frontendPort _protocol =
     TF.unsafeResource "alicloud_slb_listener" TF.validator $
@@ -6261,9 +6261,9 @@ data SlbRuleResource s = SlbRuleResource'
 
 -- | Define a new @alicloud_slb_rule@ resource value.
 slbRuleResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
-    -> TF.Attr s P.Text -- ^ @server_group_id@ - 'P.serverGroupId'
-    -> TF.Attr s P.Int -- ^ @frontend_port@ - 'P.frontendPort'
+    :: TF.Attr s P.Text -- ^ @load_balancer_id@ ('P._loadBalancerId', 'P.loadBalancerId')
+    -> TF.Attr s P.Text -- ^ @server_group_id@ ('P._serverGroupId', 'P.serverGroupId')
+    -> TF.Attr s P.Int -- ^ @frontend_port@ ('P._frontendPort', 'P.frontendPort')
     -> P.Resource (SlbRuleResource s)
 slbRuleResource _loadBalancerId _serverGroupId _frontendPort =
     TF.unsafeResource "alicloud_slb_rule" TF.validator $
@@ -6340,8 +6340,8 @@ data SlbServerGroupResource s = SlbServerGroupResource'
 
 -- | Define a new @alicloud_slb_server_group@ resource value.
 slbServerGroupResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_id@ - 'P.loadBalancerId'
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s))) -- ^ @servers@ - 'P.servers'
+    :: TF.Attr s P.Text -- ^ @load_balancer_id@ ('P._loadBalancerId', 'P.loadBalancerId')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s))) -- ^ @servers@ ('P._servers', 'P.servers')
     -> P.Resource (SlbServerGroupResource s)
 slbServerGroupResource _loadBalancerId _servers =
     TF.unsafeResource "alicloud_slb_server_group" TF.validator $
@@ -6397,9 +6397,9 @@ data SnatEntryResource s = SnatEntryResource'
 
 -- | Define a new @alicloud_snat_entry@ resource value.
 snatEntryResource
-    :: TF.Attr s P.Text -- ^ @snat_table_id@ - 'P.snatTableId'
-    -> TF.Attr s P.Text -- ^ @source_vswitch_id@ - 'P.sourceVswitchId'
-    -> TF.Attr s P.Text -- ^ @snat_ip@ - 'P.snatIp'
+    :: TF.Attr s P.Text -- ^ @snat_table_id@ ('P._snatTableId', 'P.snatTableId')
+    -> TF.Attr s P.Text -- ^ @source_vswitch_id@ ('P._sourceVswitchId', 'P.sourceVswitchId')
+    -> TF.Attr s P.Text -- ^ @snat_ip@ ('P._snatIp', 'P.snatIp')
     -> P.Resource (SnatEntryResource s)
 snatEntryResource _snatTableId _sourceVswitchId _snatIp =
     TF.unsafeResource "alicloud_snat_entry" TF.validator $
@@ -6461,9 +6461,9 @@ data SubnetResource s = SubnetResource'
 
 -- | Define a new @alicloud_subnet@ resource value.
 subnetResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
+    -> TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
+    -> TF.Attr s P.Text -- ^ @availability_zone@ ('P._availabilityZone', 'P.availabilityZone')
     -> P.Resource (SubnetResource s)
 subnetResource _cidrBlock _vpcId _availabilityZone =
     TF.unsafeResource "alicloud_subnet" TF.validator $
@@ -6533,7 +6533,7 @@ data VpcResource s = VpcResource'
 
 -- | Define a new @alicloud_vpc@ resource value.
 vpcResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
     -> P.Resource (VpcResource s)
 vpcResource _cidrBlock =
     TF.unsafeResource "alicloud_vpc" TF.validator $
@@ -6601,9 +6601,9 @@ data VswitchResource s = VswitchResource'
 
 -- | Define a new @alicloud_vswitch@ resource value.
 vswitchResource
-    :: TF.Attr s P.Text -- ^ @cidr_block@ - 'P.cidrBlock'
-    -> TF.Attr s P.Text -- ^ @vpc_id@ - 'P.vpcId'
-    -> TF.Attr s P.Text -- ^ @availability_zone@ - 'P.availabilityZone'
+    :: TF.Attr s P.Text -- ^ @cidr_block@ ('P._cidrBlock', 'P.cidrBlock')
+    -> TF.Attr s P.Text -- ^ @vpc_id@ ('P._vpcId', 'P.vpcId')
+    -> TF.Attr s P.Text -- ^ @availability_zone@ ('P._availabilityZone', 'P.availabilityZone')
     -> P.Resource (VswitchResource s)
 vswitchResource _cidrBlock _vpcId _availabilityZone =
     TF.unsafeResource "alicloud_vswitch" TF.validator $
