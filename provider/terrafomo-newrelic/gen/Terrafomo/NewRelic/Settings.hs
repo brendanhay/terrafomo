@@ -19,23 +19,23 @@ module Terrafomo.NewRelic.Settings
     (
     -- ** critical
       CriticalSetting (..)
-    , newCriticalSetting
+    , criticalSetting
 
     -- ** nrql
     , NrqlSetting (..)
-    , newNrqlSetting
+    , nrqlSetting
 
     -- ** term
     , TermSetting (..)
-    , newTermSetting
+    , termSetting
 
     -- ** warning
     , WarningSetting (..)
-    , newWarningSetting
+    , warningSetting
 
     -- ** widget
     , WidgetSetting (..)
-    , newWidgetSetting
+    , widgetSetting
 
     ) where
 
@@ -74,10 +74,10 @@ data CriticalSetting s = CriticalSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @critical@ settings value.
-newCriticalSetting
+criticalSetting
     :: TF.Attr s P.Int -- ^ 'P._duration': @duration@
     -> CriticalSetting s
-newCriticalSetting _duration =
+criticalSetting _duration =
     CriticalSetting'
         { _duration = _duration
         , _timeFunction = TF.Nil
@@ -121,11 +121,11 @@ data NrqlSetting s = NrqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @nrql@ settings value.
-newNrqlSetting
+nrqlSetting
     :: TF.Attr s P.Text -- ^ 'P._query': @query@
     -> TF.Attr s P.Text -- ^ 'P._sinceValue': @since_value@
     -> NrqlSetting s
-newNrqlSetting _query _sinceValue =
+nrqlSetting _query _sinceValue =
     NrqlSetting'
         { _query = _query
         , _sinceValue = _sinceValue
@@ -171,12 +171,12 @@ data TermSetting s = TermSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @term@ settings value.
-newTermSetting
+termSetting
     :: TF.Attr s P.Int -- ^ 'P._duration': @duration@
     -> TF.Attr s P.Text -- ^ 'P._timeFunction': @time_function@
     -> TF.Attr s P.Double -- ^ 'P._threshold': @threshold@
     -> TermSetting s
-newTermSetting _duration _timeFunction _threshold =
+termSetting _duration _timeFunction _threshold =
     TermSetting'
         { _duration = _duration
         , _operator = TF.value "equal"
@@ -237,10 +237,10 @@ data WarningSetting s = WarningSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @warning@ settings value.
-newWarningSetting
+warningSetting
     :: TF.Attr s P.Int -- ^ 'P._duration': @duration@
     -> WarningSetting s
-newWarningSetting _duration =
+warningSetting _duration =
     WarningSetting'
         { _duration = _duration
         , _timeFunction = TF.Nil
@@ -302,13 +302,13 @@ data WidgetSetting s = WidgetSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @widget@ settings value.
-newWidgetSetting
+widgetSetting
     :: TF.Attr s P.Int -- ^ 'P._column': @column@
     -> TF.Attr s P.Int -- ^ 'P._row': @row@
     -> TF.Attr s P.Text -- ^ 'P._title': @title@
     -> TF.Attr s P.Text -- ^ 'P._visualization': @visualization@
     -> WidgetSetting s
-newWidgetSetting _column _row _title _visualization =
+widgetSetting _column _row _title _visualization =
     WidgetSetting'
         { _column = _column
         , _height = TF.value 1
