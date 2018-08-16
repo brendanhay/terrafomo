@@ -107,7 +107,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "dirpool_no_response",
+            "name": "no_response",
             "schemas": [
               {
                 "name": "all_non_configured",
@@ -134,7 +134,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "no_response_geo_info",
+                  "name": "geo_info",
                   "schemas": [
                     {
                       "name": "codes",
@@ -148,7 +148,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "geo_info_codes",
+                        "name": "codes",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -200,7 +200,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "no_response_ip_info",
+                  "name": "ip_info",
                   "schemas": [
                     {
                       "name": "ips",
@@ -214,7 +214,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "ip_info_ips",
+                        "name": "ips",
                         "schemas": [
                           {
                             "name": "address",
@@ -310,7 +310,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "dirpool_rdata",
+            "name": "rdata",
             "schemas": [
               {
                 "name": "all_non_configured",
@@ -337,7 +337,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "rdata_geo_info",
+                  "name": "geo_info",
                   "schemas": [
                     {
                       "name": "codes",
@@ -351,7 +351,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "schema": {
-                        "name": "geo_info_codes",
+                        "name": "codes",
                         "type": "TypeString",
                         "conflictsWith": [],
                         "optional": false,
@@ -415,7 +415,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "rdata_ip_info",
+                  "name": "ip_info",
                   "schemas": [
                     {
                       "name": "ips",
@@ -429,7 +429,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "ip_info_ips",
+                        "name": "ips",
                         "schemas": [
                           {
                             "name": "address",
@@ -567,7 +567,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "probe_http_agents",
+            "name": "agents",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -591,7 +591,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "probe_http_http_probe",
+            "name": "http_probe",
             "schemas": [
               {
                 "name": "total_limits",
@@ -605,7 +605,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "http_probe_total_limits",
+                  "name": "total_limits",
                   "schemas": [
                     {
                       "name": "critical",
@@ -658,7 +658,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "http_probe_transaction",
+                  "name": "transaction",
                   "schemas": [
                     {
                       "name": "follow_redirects",
@@ -685,7 +685,7 @@
                       "minItems": 0,
                       "maxItems": 0,
                       "resource": {
-                        "name": "transaction_limit",
+                        "name": "limit",
                         "schemas": [
                           {
                             "name": "critical",
@@ -870,7 +870,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "probe_ping_agents",
+            "name": "agents",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -931,7 +931,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "probe_ping_ping_probe",
+            "name": "ping_probe",
             "schemas": [
               {
                 "name": "limit",
@@ -945,7 +945,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "resource": {
-                  "name": "ping_probe_limit",
+                  "name": "limit",
                   "schemas": [
                     {
                       "name": "critical",
@@ -1129,7 +1129,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "rdpool_rdata",
+            "name": "rdata",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1207,7 +1207,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "record_rdata",
+            "name": "rdata",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1358,7 +1358,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "tcpool_rdata",
+            "name": "rdata",
             "schemas": [
               {
                 "name": "failover_delay",
