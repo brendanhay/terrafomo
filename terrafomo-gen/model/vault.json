@@ -207,7 +207,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "approle_auth_backend_login_metadata",
+            "name": "metadata",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -232,7 +232,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "approle_auth_backend_login_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -329,7 +329,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "approle_auth_backend_role_bound_cidr_list",
+            "name": "bound_cidr_list",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -367,7 +367,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "approle_auth_backend_role_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -515,7 +515,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "approle_auth_backend_role_secret_id_cidr_list",
+            "name": "cidr_list",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1011,7 +1011,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "aws_auth_backend_login_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1290,7 +1290,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "aws_auth_backend_role_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1438,7 +1438,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "aws_auth_backend_role_tag_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1708,7 +1708,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "database_secret_backend_connection_allowed_roles",
+            "name": "allowed_roles",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1753,7 +1753,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_cassandra",
+            "name": "cassandra",
             "schemas": [
               {
                 "name": "connect_timeout",
@@ -1782,7 +1782,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "cassandra_hosts",
+                  "name": "hosts",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -1925,7 +1925,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_hana",
+            "name": "hana",
             "schemas": [
               {
                 "name": "connection_url",
@@ -2003,7 +2003,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_mongodb",
+            "name": "mongodb",
             "schemas": [
               {
                 "name": "connection_url",
@@ -2041,7 +2041,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_mssql",
+            "name": "mssql",
             "schemas": [
               {
                 "name": "connection_url",
@@ -2119,7 +2119,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_mysql",
+            "name": "mysql",
             "schemas": [
               {
                 "name": "connection_url",
@@ -2210,7 +2210,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_oracle",
+            "name": "oracle",
             "schemas": [
               {
                 "name": "connection_url",
@@ -2288,7 +2288,7 @@
           "minItems": 0,
           "maxItems": 1,
           "resource": {
-            "name": "database_secret_backend_connection_postgresql",
+            "name": "postgresql",
             "schemas": [
               {
                 "name": "connection_url",
@@ -2654,7 +2654,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "okta_auth_backend_group",
+            "name": "group",
             "schemas": [
               {
                 "name": "group_name",
@@ -2682,7 +2682,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "group_policies",
+                  "name": "policies",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2775,7 +2775,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "okta_auth_backend_user",
+            "name": "user",
             "schemas": [
               {
                 "name": "groups",
@@ -2790,7 +2790,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "user_groups",
+                  "name": "groups",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2815,7 +2815,7 @@
                 "minItems": 0,
                 "maxItems": 0,
                 "schema": {
-                  "name": "user_policies",
+                  "name": "policies",
                   "type": "TypeString",
                   "conflictsWith": [],
                   "optional": false,
@@ -2887,7 +2887,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "okta_auth_backend_group_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2917,7 +2917,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "okta_auth_backend_user_groups",
+            "name": "groups",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -2955,7 +2955,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "okta_auth_backend_user_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
