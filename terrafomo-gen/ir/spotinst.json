@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "autoscaleAttributesSetting",
+                "smart": "newAutoscaleAttributesSetting",
                 "name": "AutoscaleAttributesSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "autoscaleConstraintsSetting",
+                "smart": "newAutoscaleConstraintsSetting",
                 "name": "AutoscaleConstraintsSetting'"
             },
             "arguments": [
@@ -172,7 +172,7 @@
         },
         {
             "con": {
-                "smart": "autoscaleDownSetting",
+                "smart": "newAutoscaleDownSetting",
                 "name": "AutoscaleDownSetting'"
             },
             "arguments": [
@@ -205,7 +205,7 @@
         },
         {
             "con": {
-                "smart": "autoscaleHeadroomSetting",
+                "smart": "newAutoscaleHeadroomSetting",
                 "name": "AutoscaleHeadroomSetting'"
             },
             "arguments": [
@@ -272,7 +272,7 @@
         },
         {
             "con": {
-                "smart": "autoscaleLabelsSetting",
+                "smart": "newAutoscaleLabelsSetting",
                 "name": "AutoscaleLabelsSetting'"
             },
             "arguments": [
@@ -357,7 +357,7 @@
         },
         {
             "con": {
-                "smart": "deploymentGroupsSetting",
+                "smart": "newDeploymentGroupsSetting",
                 "name": "DeploymentGroupsSetting'"
             },
             "arguments": [
@@ -442,7 +442,7 @@
         },
         {
             "con": {
-                "smart": "ebsBlockDeviceSetting",
+                "smart": "newEbsBlockDeviceSetting",
                 "name": "EbsBlockDeviceSetting'"
             },
             "arguments": [
@@ -664,7 +664,7 @@
         },
         {
             "con": {
-                "smart": "ephemeralBlockDeviceSetting",
+                "smart": "newEphemeralBlockDeviceSetting",
                 "name": "EphemeralBlockDeviceSetting'"
             },
             "arguments": [
@@ -749,7 +749,7 @@
         },
         {
             "con": {
-                "smart": "instanceTypesWeightsSetting",
+                "smart": "newInstanceTypesWeightsSetting",
                 "name": "InstanceTypesWeightsSetting'"
             },
             "arguments": [
@@ -834,7 +834,7 @@
         },
         {
             "con": {
-                "smart": "integrationCodedeploySetting",
+                "smart": "newIntegrationCodedeploySetting",
                 "name": "IntegrationCodedeploySetting'"
             },
             "arguments": [
@@ -953,7 +953,7 @@
         },
         {
             "con": {
-                "smart": "integrationEcsSetting",
+                "smart": "newIntegrationEcsSetting",
                 "name": "IntegrationEcsSetting'"
             },
             "arguments": [
@@ -1106,7 +1106,7 @@
         },
         {
             "con": {
-                "smart": "integrationGitlabSetting",
+                "smart": "newIntegrationGitlabSetting",
                 "name": "IntegrationGitlabSetting'"
             },
             "arguments": [
@@ -1139,7 +1139,7 @@
         },
         {
             "con": {
-                "smart": "integrationKubernetesSetting",
+                "smart": "newIntegrationKubernetesSetting",
                 "name": "IntegrationKubernetesSetting'"
             },
             "arguments": [
@@ -1325,7 +1325,7 @@
         },
         {
             "con": {
-                "smart": "integrationMesosphereSetting",
+                "smart": "newIntegrationMesosphereSetting",
                 "name": "IntegrationMesosphereSetting'"
             },
             "arguments": [
@@ -1376,7 +1376,7 @@
         },
         {
             "con": {
-                "smart": "integrationMultaiRuntimeSetting",
+                "smart": "newIntegrationMultaiRuntimeSetting",
                 "name": "IntegrationMultaiRuntimeSetting'"
             },
             "arguments": [
@@ -1427,7 +1427,7 @@
         },
         {
             "con": {
-                "smart": "integrationNomadSetting",
+                "smart": "newIntegrationNomadSetting",
                 "name": "IntegrationNomadSetting'"
             },
             "arguments": [
@@ -1614,7 +1614,7 @@
         },
         {
             "con": {
-                "smart": "integrationRancherSetting",
+                "smart": "newIntegrationRancherSetting",
                 "name": "IntegrationRancherSetting'"
             },
             "arguments": [
@@ -1733,7 +1733,7 @@
         },
         {
             "con": {
-                "smart": "multaiTargetSetsSetting",
+                "smart": "newMultaiTargetSetsSetting",
                 "name": "MultaiTargetSetsSetting'"
             },
             "arguments": [
@@ -1818,7 +1818,7 @@
         },
         {
             "con": {
-                "smart": "networkInterfaceSetting",
+                "smart": "newNetworkInterfaceSetting",
                 "name": "NetworkInterfaceSetting'"
             },
             "arguments": [
@@ -2006,7 +2006,7 @@
         },
         {
             "con": {
-                "smart": "revertToSpotSetting",
+                "smart": "newRevertToSpotSetting",
                 "name": "RevertToSpotSetting'"
             },
             "arguments": [
@@ -2074,7 +2074,7 @@
         },
         {
             "con": {
-                "smart": "rollConfigSetting",
+                "smart": "newRollConfigSetting",
                 "name": "RollConfigSetting'"
             },
             "arguments": [
@@ -2159,7 +2159,7 @@
         },
         {
             "con": {
-                "smart": "runnerSetting",
+                "smart": "newRunnerSetting",
                 "name": "RunnerSetting'"
             },
             "arguments": [
@@ -2192,7 +2192,7 @@
         },
         {
             "con": {
-                "smart": "scalingDownPolicySetting",
+                "smart": "newScalingDownPolicySetting",
                 "name": "ScalingDownPolicySetting'"
             },
             "arguments": [
@@ -2720,7 +2720,7 @@
         },
         {
             "con": {
-                "smart": "scalingTargetPolicySetting",
+                "smart": "newScalingTargetPolicySetting",
                 "name": "ScalingTargetPolicySetting'"
             },
             "arguments": [
@@ -3027,7 +3027,7 @@
         },
         {
             "con": {
-                "smart": "scalingUpPolicySetting",
+                "smart": "newScalingUpPolicySetting",
                 "name": "ScalingUpPolicySetting'"
             },
             "arguments": [
@@ -3555,7 +3555,7 @@
         },
         {
             "con": {
-                "smart": "scheduledTaskSetting",
+                "smart": "newScheduledTaskSetting",
                 "name": "ScheduledTaskSetting'"
             },
             "arguments": [
@@ -3810,7 +3810,7 @@
         },
         {
             "con": {
-                "smart": "signalSetting",
+                "smart": "newSignalSetting",
                 "name": "SignalSetting'"
             },
             "arguments": [
@@ -3878,7 +3878,7 @@
         },
         {
             "con": {
-                "smart": "statefulDeallocationSetting",
+                "smart": "newStatefulDeallocationSetting",
                 "name": "StatefulDeallocationSetting'"
             },
             "arguments": [
@@ -3962,7 +3962,7 @@
         },
         {
             "con": {
-                "smart": "tagsSetting",
+                "smart": "newTagsSetting",
                 "name": "TagsSetting'"
             },
             "arguments": [
@@ -4047,7 +4047,7 @@
         },
         {
             "con": {
-                "smart": "updatePolicySetting",
+                "smart": "newUpdatePolicySetting",
                 "name": "UpdatePolicySetting'"
             },
             "arguments": [
