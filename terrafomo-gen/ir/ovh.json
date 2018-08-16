@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newActionSetting",
+                "smart": "actionSetting",
                 "name": "ActionSetting'"
             },
             "arguments": [
@@ -87,7 +87,7 @@
         },
         {
             "con": {
-                "smart": "newIpPoolsSetting",
+                "smart": "ipPoolsSetting",
                 "name": "IpPoolsSetting'"
             },
             "arguments": [],
@@ -188,7 +188,7 @@
         },
         {
             "con": {
-                "smart": "newOrderableZoneSetting",
+                "smart": "orderableZoneSetting",
                 "name": "OrderableZoneSetting'"
             },
             "arguments": [],
@@ -238,7 +238,7 @@
         },
         {
             "con": {
-                "smart": "newProbeSetting",
+                "smart": "probeSetting",
                 "name": "ProbeSetting'"
             },
             "arguments": [
@@ -425,7 +425,7 @@
         },
         {
             "con": {
-                "smart": "newRegionsStatusSetting",
+                "smart": "regionsStatusSetting",
                 "name": "RegionsStatusSetting'"
             },
             "arguments": [
@@ -494,7 +494,7 @@
         },
         {
             "con": {
-                "smart": "newServicesSetting",
+                "smart": "servicesSetting",
                 "name": "ServicesSetting'"
             },
             "arguments": [],
