@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newDhcpPoolSetting",
+                "smart": "dhcpPoolSetting",
                 "name": "DhcpPoolSetting'"
             },
             "arguments": [
@@ -121,7 +121,7 @@
         },
         {
             "con": {
-                "smart": "newLocalSubnetsSetting",
+                "smart": "localSubnetsSetting",
                 "name": "LocalSubnetsSetting'"
             },
             "arguments": [
@@ -240,7 +240,7 @@
         },
         {
             "con": {
-                "smart": "newPeerSubnetsSetting",
+                "smart": "peerSubnetsSetting",
                 "name": "PeerSubnetsSetting'"
             },
             "arguments": [
@@ -359,7 +359,7 @@
         },
         {
             "con": {
-                "smart": "newRuleSetting",
+                "smart": "ruleSetting",
                 "name": "RuleSetting'"
             },
             "arguments": [
@@ -632,7 +632,7 @@
         },
         {
             "con": {
-                "smart": "newStaticIpPoolSetting",
+                "smart": "staticIpPoolSetting",
                 "name": "StaticIpPoolSetting'"
             },
             "arguments": [
