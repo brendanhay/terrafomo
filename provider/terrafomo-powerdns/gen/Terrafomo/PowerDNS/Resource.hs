@@ -78,7 +78,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _name _records _ttl _type' _zone =
-    TF.unsafeResource "powerdns_record" P.defaultProvider TF.validator $
+    TF.unsafeResource "powerdns_record" TF.validator $
         RecordResource'
             { _name = _name
             , _records = _records
