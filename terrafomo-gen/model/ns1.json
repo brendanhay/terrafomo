@@ -211,7 +211,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "apikey_dns_zones_allow",
+            "name": "dns_zones_allow",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -247,7 +247,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "apikey_dns_zones_deny",
+            "name": "dns_zones_deny",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -343,7 +343,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "apikey_teams",
+            "name": "teams",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -649,7 +649,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "monitoringjob_regions",
+            "name": "regions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -673,7 +673,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "monitoringjob_rules",
+            "name": "rules",
             "schemas": [
               {
                 "name": "comparison",
@@ -755,7 +755,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "notifylist_notifications",
+            "name": "notifications",
             "schemas": [
               {
                 "name": "config",
@@ -801,7 +801,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "record_answers",
+            "name": "answers",
             "schemas": [
               {
                 "name": "answer",
@@ -866,7 +866,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "record_filters",
+            "name": "filters",
             "schemas": [
               {
                 "name": "config",
@@ -955,7 +955,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "record_regions",
+            "name": "regions",
             "schemas": [
               {
                 "name": "meta",
@@ -1206,7 +1206,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "team_dns_zones_allow",
+            "name": "dns_zones_allow",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1242,7 +1242,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "team_dns_zones_deny",
+            "name": "dns_zones_deny",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1487,7 +1487,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "user_dns_zones_allow",
+            "name": "dns_zones_allow",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1523,7 +1523,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "user_dns_zones_deny",
+            "name": "dns_zones_deny",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1631,7 +1631,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "user_teams",
+            "name": "teams",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -1732,7 +1732,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "zone_networks",
+            "name": "networks",
             "type": "TypeInt",
             "conflictsWith": [],
             "optional": false,
