@@ -68,7 +68,7 @@ serviceData
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.DataSource (ServiceData s)
 serviceData _metadata =
-    TF.unsafeDataSource "kubernetes_service" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "kubernetes_service" TF.validator $
         ServiceData'
             { _metadata = _metadata
             }
@@ -115,7 +115,7 @@ storageClassData
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.DataSource (StorageClassData s)
 storageClassData _metadata =
-    TF.unsafeDataSource "kubernetes_storage_class" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "kubernetes_storage_class" TF.validator $
         StorageClassData'
             { _metadata = _metadata
             }

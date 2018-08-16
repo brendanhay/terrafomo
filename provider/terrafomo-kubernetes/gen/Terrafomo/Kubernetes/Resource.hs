@@ -116,7 +116,7 @@ configMapResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ConfigMapResource s)
 configMapResource _metadata =
-    TF.unsafeResource "kubernetes_config_map" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_config_map" TF.validator $
         ConfigMapResource'
             { _data' = TF.Nil
             , _metadata = _metadata
@@ -167,7 +167,7 @@ horizontalPodAutoscalerResource
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
     -> P.Resource (HorizontalPodAutoscalerResource s)
 horizontalPodAutoscalerResource _metadata _spec =
-    TF.unsafeResource "kubernetes_horizontal_pod_autoscaler" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_horizontal_pod_autoscaler" TF.validator $
         HorizontalPodAutoscalerResource'
             { _metadata = _metadata
             , _spec = _spec
@@ -221,7 +221,7 @@ limitRangeResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (LimitRangeResource s)
 limitRangeResource _metadata =
-    TF.unsafeResource "kubernetes_limit_range" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_limit_range" TF.validator $
         LimitRangeResource'
             { _metadata = _metadata
             , _spec = TF.Nil
@@ -270,7 +270,7 @@ namespaceResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (NamespaceResource s)
 namespaceResource _metadata =
-    TF.unsafeResource "kubernetes_namespace" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_namespace" TF.validator $
         NamespaceResource'
             { _metadata = _metadata
             }
@@ -313,7 +313,7 @@ persistentVolumeResource
     -> TF.Attr s [TF.Attr s (SpecSetting s)] -- ^ @spec@ - 'P.spec'
     -> P.Resource (PersistentVolumeResource s)
 persistentVolumeResource _metadata _spec =
-    TF.unsafeResource "kubernetes_persistent_volume" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_persistent_volume" TF.validator $
         PersistentVolumeResource'
             { _metadata = _metadata
             , _spec = _spec
@@ -370,7 +370,7 @@ persistentVolumeClaimResource
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
     -> P.Resource (PersistentVolumeClaimResource s)
 persistentVolumeClaimResource _metadata _spec =
-    TF.unsafeResource "kubernetes_persistent_volume_claim" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_persistent_volume_claim" TF.validator $
         PersistentVolumeClaimResource'
             { _metadata = _metadata
             , _spec = _spec
@@ -431,7 +431,7 @@ podResource
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
     -> P.Resource (PodResource s)
 podResource _metadata _spec =
-    TF.unsafeResource "kubernetes_pod" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_pod" TF.validator $
         PodResource'
             { _metadata = _metadata
             , _spec = _spec
@@ -487,7 +487,7 @@ replicationControllerResource
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
     -> P.Resource (ReplicationControllerResource s)
 replicationControllerResource _metadata _spec =
-    TF.unsafeResource "kubernetes_replication_controller" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_replication_controller" TF.validator $
         ReplicationControllerResource'
             { _metadata = _metadata
             , _spec = _spec
@@ -541,7 +541,7 @@ resourceQuotaResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ResourceQuotaResource s)
 resourceQuotaResource _metadata =
-    TF.unsafeResource "kubernetes_resource_quota" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_resource_quota" TF.validator $
         ResourceQuotaResource'
             { _metadata = _metadata
             , _spec = TF.Nil
@@ -598,7 +598,7 @@ secretResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (SecretResource s)
 secretResource _metadata =
-    TF.unsafeResource "kubernetes_secret" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_secret" TF.validator $
         SecretResource'
             { _data' = TF.Nil
             , _metadata = _metadata
@@ -656,7 +656,7 @@ serviceResource
     -> TF.Attr s (SpecSetting s) -- ^ @spec@ - 'P.spec'
     -> P.Resource (ServiceResource s)
 serviceResource _metadata _spec =
-    TF.unsafeResource "kubernetes_service" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_service" TF.validator $
         ServiceResource'
             { _metadata = _metadata
             , _spec = _spec
@@ -719,7 +719,7 @@ serviceAccountResource
     :: TF.Attr s (MetadataSetting s) -- ^ @metadata@ - 'P.metadata'
     -> P.Resource (ServiceAccountResource s)
 serviceAccountResource _metadata =
-    TF.unsafeResource "kubernetes_service_account" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_service_account" TF.validator $
         ServiceAccountResource'
             { _imagePullSecret = TF.Nil
             , _metadata = _metadata
@@ -784,7 +784,7 @@ storageClassResource
     -> TF.Attr s P.Text -- ^ @storage_provisioner@ - 'P.storageProvisioner'
     -> P.Resource (StorageClassResource s)
 storageClassResource _metadata _storageProvisioner =
-    TF.unsafeResource "kubernetes_storage_class" P.defaultProvider TF.validator $
+    TF.unsafeResource "kubernetes_storage_class" TF.validator $
         StorageClassResource'
             { _metadata = _metadata
             , _parameters = TF.Nil
