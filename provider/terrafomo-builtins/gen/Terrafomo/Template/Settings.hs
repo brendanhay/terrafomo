@@ -19,7 +19,7 @@ module Terrafomo.Template.Settings
     (
     -- ** part
       PartSetting (..)
-    , partSetting
+    , newPartSetting
 
     ) where
 
@@ -61,10 +61,10 @@ data PartSetting s = PartSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @part@ settings value.
-partSetting
+newPartSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> PartSetting s
-partSetting _content =
+newPartSetting _content =
     PartSetting'
         { _content = _content
         , _contentType = TF.Nil
