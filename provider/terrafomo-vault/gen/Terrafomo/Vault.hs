@@ -12,11 +12,11 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.Vault
-    ( module Terrafomo.Vault.Settings
+    ( module Terrafomo.Vault.DataSource
     , module Terrafomo.Vault.Lens
-    , module Terrafomo.Vault.Resource
     , module Terrafomo.Vault.Provider
-    , module Terrafomo.Vault.DataSource
+    , module Terrafomo.Vault.Resource
+    , module Terrafomo.Vault.Settings
     , module Terrafomo.Vault.Types
     -- * Provider Aliases
     ) where

@@ -20,6 +20,7 @@ module Terrafomo.Vault.Provider
     -- * Vault Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * Vault Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.Vault.Settings
 
-import qualified Data.Hashable         as P
-import qualified Data.HashMap.Strict   as P
-import qualified Data.HashMap.Strict   as Map
 import qualified Data.List.NonEmpty    as P
+import qualified Data.Map.Strict       as P
+import qualified Data.Map.Strict       as Map
 import qualified Data.Maybe            as P
 import qualified Data.Monoid           as P
 import qualified Data.Text             as P
@@ -74,11 +74,11 @@ data Provider = Provider'
     -- ^ @ca_cert_file@ - (Optional)
     -- Path to a CA certificate file to validate the server's certificate.
     --
-    , _clientAuth         :: P.Maybe [ClientAuth]
+    , _clientAuth         :: P.Maybe [ClientAuthSetting]
     -- ^ @client_auth@ - (Optional)
     -- Client authentication credentials.
     --
-    , _maxLeaseTtlSeconds :: P.Maybe P.Integer
+    , _maxLeaseTtlSeconds :: P.Maybe P.Int
     -- ^ @max_lease_ttl_seconds@ - (Optional)
     -- Maximum TTL for secret leases requested by this provider
     --
@@ -91,7 +91,7 @@ data Provider = Provider'
     -- ^ @token@ - (Required)
     -- Token to use to authenticate to Vault.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: P.Text -- ^ @address@ - 'P.address'
@@ -108,34 +108,27 @@ newProvider _address _token =
         , _token = _token
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , P.Just $ TF.assign "address" _address
-                  , TF.assign "ca_cert_dir" <$> _caCertDir
-                  , TF.assign "ca_cert_file" <$> _caCertFile
-                  , TF.assign "client_auth" <$> _clientAuth
-                  , TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
-                  , TF.assign "skip_tls_verify" <$> _skipTlsVerify
-                  , P.Just $ TF.assign "token" _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  P.Just $ TF.assign "address" _address
+        ,  TF.assign "ca_cert_dir" <$> _caCertDir
+        ,  TF.assign "ca_cert_file" <$> _caCertFile
+        ,  TF.assign "client_auth" <$> _clientAuth
+        ,  TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
+        ,  TF.assign "skip_tls_verify" <$> _skipTlsVerify
+        ,  P.Just $ TF.assign "token" _token
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_clientAuth"
-                  (_clientAuth
-                      :: Provider -> P.Maybe [ClientAuth])
-                  TF.validator
 
 instance P.HasAddress (Provider) (P.Text) where
     address =
@@ -152,14 +145,14 @@ instance P.HasCaCertFile (Provider) (P.Maybe P.Text) where
         P.lens (_caCertFile :: Provider -> P.Maybe P.Text)
                (\s a -> s { _caCertFile = a } :: Provider)
 
-instance P.HasClientAuth (Provider) (P.Maybe [ClientAuth]) where
+instance P.HasClientAuth (Provider) (P.Maybe [ClientAuthSetting]) where
     clientAuth =
-        P.lens (_clientAuth :: Provider -> P.Maybe [ClientAuth])
+        P.lens (_clientAuth :: Provider -> P.Maybe [ClientAuthSetting])
                (\s a -> s { _clientAuth = a } :: Provider)
 
-instance P.HasMaxLeaseTtlSeconds (Provider) (P.Maybe P.Integer) where
+instance P.HasMaxLeaseTtlSeconds (Provider) (P.Maybe P.Int) where
     maxLeaseTtlSeconds =
-        P.lens (_maxLeaseTtlSeconds :: Provider -> P.Maybe P.Integer)
+        P.lens (_maxLeaseTtlSeconds :: Provider -> P.Maybe P.Int)
                (\s a -> s { _maxLeaseTtlSeconds = a } :: Provider)
 
 instance P.HasSkipTlsVerify (Provider) (P.Maybe P.Bool) where

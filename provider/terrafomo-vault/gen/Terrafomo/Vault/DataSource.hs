@@ -38,10 +38,9 @@ import GHC.Base (($))
 
 import Terrafomo.Vault.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
-import qualified Data.HashMap.Strict      as Map
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
+import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
 import qualified Data.Monoid              as P
 import qualified Data.Text                as P
@@ -70,13 +69,13 @@ data ApproleAuthBackendRoleIdData s = ApproleAuthBackendRoleIdData'
     -- ^ @role_name@ - (Required, Forces New)
     -- Name of the role.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 approleAuthBackendRoleIdData
     :: TF.Attr s P.Text -- ^ @role_name@ - 'P.roleName'
     -> P.DataSource (ApproleAuthBackendRoleIdData s)
 approleAuthBackendRoleIdData _roleName =
-    TF.newDataSource "vault_approle_auth_backend_role_id" TF.validator $
+    TF.unsafeDataSource "vault_approle_auth_backend_role_id" P.defaultProvider TF.validator $
         ApproleAuthBackendRoleIdData'
             { _backend = TF.value "approle"
             , _roleName = _roleName
@@ -125,14 +124,14 @@ data AwsAccessCredentialsData s = AwsAccessCredentialsData'
     -- Type of credentials to read. Must be either 'creds' for Access Key and
     -- Secret Key, or 'sts' for STS.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 awsAccessCredentialsData
     :: TF.Attr s P.Text -- ^ @backend@ - 'P.backend'
     -> TF.Attr s P.Text -- ^ @role@ - 'P.role'
     -> P.DataSource (AwsAccessCredentialsData s)
 awsAccessCredentialsData _backend _role =
-    TF.newDataSource "vault_aws_access_credentials" TF.validator $
+    TF.unsafeDataSource "vault_aws_access_credentials" P.defaultProvider TF.validator $
         AwsAccessCredentialsData'
             { _backend = _backend
             , _role = _role
@@ -170,7 +169,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsAccessCredentialsData s)) (TF.
 instance s ~ s' => P.HasComputedAccessKey (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
     computedAccessKey x = TF.compute (TF.refKey x) "access_key"
 
-instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Int) where
     computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (AwsAccessCredentialsData s)) (TF.Attr s P.Text) where
@@ -197,13 +196,13 @@ data GenericSecretData s = GenericSecretData'
     -- ^ @path@ - (Required)
     -- Full path from which a secret will be read.
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 genericSecretData
     :: TF.Attr s P.Text -- ^ @path@ - 'P.path'
     -> P.DataSource (GenericSecretData s)
 genericSecretData _path =
-    TF.newDataSource "vault_generic_secret" TF.validator $
+    TF.unsafeDataSource "vault_generic_secret" P.defaultProvider TF.validator $
         GenericSecretData'
             { _path = _path
             }
@@ -224,13 +223,13 @@ instance P.HasPath (GenericSecretData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedData (TF.Ref s' (GenericSecretData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedData x = TF.compute (TF.refKey x) "data"
 
 instance s ~ s' => P.HasComputedDataJson (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
     computedDataJson x = TF.compute (TF.refKey x) "data_json"
 
-instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Integer) where
+instance s ~ s' => P.HasComputedLeaseDuration (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Int) where
     computedLeaseDuration x = TF.compute (TF.refKey x) "lease_duration"
 
 instance s ~ s' => P.HasComputedLeaseId (TF.Ref s' (GenericSecretData s)) (TF.Attr s P.Text) where
