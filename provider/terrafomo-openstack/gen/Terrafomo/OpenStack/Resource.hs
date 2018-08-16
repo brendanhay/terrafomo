@@ -312,7 +312,7 @@ blockstorageVolumeAttachV2Resource
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (BlockstorageVolumeAttachV2Resource s)
 blockstorageVolumeAttachV2Resource _hostName _volumeId =
-    TF.unsafeResource "openstack_blockstorage_volume_attach_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_attach_v2" TF.validator $
         BlockstorageVolumeAttachV2Resource'
             { _attachMode = TF.Nil
             , _device = TF.Nil
@@ -464,7 +464,7 @@ blockstorageVolumeAttachV3Resource
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (BlockstorageVolumeAttachV3Resource s)
 blockstorageVolumeAttachV3Resource _hostName _volumeId =
-    TF.unsafeResource "openstack_blockstorage_volume_attach_v3" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_attach_v3" TF.validator $
         BlockstorageVolumeAttachV3Resource'
             { _attachMode = TF.Nil
             , _device = TF.Nil
@@ -593,7 +593,7 @@ blockstorageVolumeV1Resource
     :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV1Resource s)
 blockstorageVolumeV1Resource _size =
-    TF.unsafeResource "openstack_blockstorage_volume_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_v1" TF.validator $
         BlockstorageVolumeV1Resource'
             { _description = TF.Nil
             , _imageId = TF.Nil
@@ -696,7 +696,7 @@ blockstorageVolumeV2Resource
     :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV2Resource s)
 blockstorageVolumeV2Resource _size =
-    TF.unsafeResource "openstack_blockstorage_volume_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_v2" TF.validator $
         BlockstorageVolumeV2Resource'
             { _consistencyGroupId = TF.Nil
             , _description = TF.Nil
@@ -816,7 +816,7 @@ blockstorageVolumeV3Resource
     :: TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockstorageVolumeV3Resource s)
 blockstorageVolumeV3Resource _size =
-    TF.unsafeResource "openstack_blockstorage_volume_v3" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_blockstorage_volume_v3" TF.validator $
         BlockstorageVolumeV3Resource'
             { _consistencyGroupId = TF.Nil
             , _description = TF.Nil
@@ -943,7 +943,7 @@ computeFlavorV2Resource
     -> TF.Attr s P.Int -- ^ @vcpus@ - 'P.vcpus'
     -> P.Resource (ComputeFlavorV2Resource s)
 computeFlavorV2Resource _disk _name _ram _vcpus =
-    TF.unsafeResource "openstack_compute_flavor_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_flavor_v2" TF.validator $
         ComputeFlavorV2Resource'
             { _disk = _disk
             , _ephemeral = TF.Nil
@@ -1040,7 +1040,7 @@ computeFloatingipAssociateV2Resource
     -> TF.Attr s P.Text -- ^ @instance_id@ - 'P.instanceId'
     -> P.Resource (ComputeFloatingipAssociateV2Resource s)
 computeFloatingipAssociateV2Resource _floatingIp _instanceId =
-    TF.unsafeResource "openstack_compute_floatingip_associate_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_floatingip_associate_v2" TF.validator $
         ComputeFloatingipAssociateV2Resource'
             { _fixedIp = TF.Nil
             , _floatingIp = _floatingIp
@@ -1096,7 +1096,7 @@ computeFloatingipV2Resource
     :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
     -> P.Resource (ComputeFloatingipV2Resource s)
 computeFloatingipV2Resource _pool =
-    TF.unsafeResource "openstack_compute_floatingip_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_floatingip_v2" TF.validator $
         ComputeFloatingipV2Resource'
             { _pool = _pool
             }
@@ -1179,7 +1179,7 @@ computeInstanceV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeInstanceV2Resource s)
 computeInstanceV2Resource _name =
-    TF.unsafeResource "openstack_compute_instance_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_instance_v2" TF.validator $
         ComputeInstanceV2Resource'
             { _adminPass = TF.Nil
             , _blockDevice = TF.Nil
@@ -1338,7 +1338,7 @@ computeKeypairV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeKeypairV2Resource s)
 computeKeypairV2Resource _name =
-    TF.unsafeResource "openstack_compute_keypair_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_keypair_v2" TF.validator $
         ComputeKeypairV2Resource'
             { _name = _name
             , _valueSpecs = TF.Nil
@@ -1393,7 +1393,7 @@ computeSecgroupV2Resource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeSecgroupV2Resource s)
 computeSecgroupV2Resource _description _name =
-    TF.unsafeResource "openstack_compute_secgroup_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_secgroup_v2" TF.validator $
         ComputeSecgroupV2Resource'
             { _description = _description
             , _name = _name
@@ -1444,7 +1444,7 @@ computeServergroupV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ComputeServergroupV2Resource s)
 computeServergroupV2Resource _name =
-    TF.unsafeResource "openstack_compute_servergroup_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_servergroup_v2" TF.validator $
         ComputeServergroupV2Resource'
             { _name = _name
             , _policies = TF.Nil
@@ -1500,7 +1500,7 @@ computeVolumeAttachV2Resource
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (ComputeVolumeAttachV2Resource s)
 computeVolumeAttachV2Resource _instanceId _volumeId =
-    TF.unsafeResource "openstack_compute_volume_attach_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_compute_volume_attach_v2" TF.validator $
         ComputeVolumeAttachV2Resource'
             { _instanceId = _instanceId
             , _volumeId = _volumeId
@@ -1560,7 +1560,7 @@ dbConfigurationV1Resource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (DbConfigurationV1Resource s)
 dbConfigurationV1Resource _datastore _description _name _region =
-    TF.unsafeResource "openstack_db_configuration_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_db_configuration_v1" TF.validator $
         DbConfigurationV1Resource'
             { _configuration = TF.Nil
             , _datastore = _datastore
@@ -1631,7 +1631,7 @@ dbDatabaseV1Resource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DbDatabaseV1Resource s)
 dbDatabaseV1Resource _instanceId _name =
-    TF.unsafeResource "openstack_db_database_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_db_database_v1" TF.validator $
         DbDatabaseV1Resource'
             { _instanceId = _instanceId
             , _name = _name
@@ -1701,7 +1701,7 @@ dbInstanceV1Resource
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (DbInstanceV1Resource s)
 dbInstanceV1Resource _datastore _name _region _size =
-    TF.unsafeResource "openstack_db_instance_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_db_instance_v1" TF.validator $
         DbInstanceV1Resource'
             { _configurationId = TF.Nil
             , _database = TF.Nil
@@ -1804,7 +1804,7 @@ dbUserV1Resource
     -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
     -> P.Resource (DbUserV1Resource s)
 dbUserV1Resource _instanceId _name _password _region =
-    TF.unsafeResource "openstack_db_user_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_db_user_v1" TF.validator $
         DbUserV1Resource'
             { _host = TF.Nil
             , _instanceId = _instanceId
@@ -1880,7 +1880,7 @@ dnsRecordsetV2Resource
     -> TF.Attr s P.Text -- ^ @zone_id@ - 'P.zoneId'
     -> P.Resource (DnsRecordsetV2Resource s)
 dnsRecordsetV2Resource _name _zoneId =
-    TF.unsafeResource "openstack_dns_recordset_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_dns_recordset_v2" TF.validator $
         DnsRecordsetV2Resource'
             { _description = TF.Nil
             , _name = _name
@@ -1964,7 +1964,7 @@ dnsZoneV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DnsZoneV2Resource s)
 dnsZoneV2Resource _name =
-    TF.unsafeResource "openstack_dns_zone_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_dns_zone_v2" TF.validator $
         DnsZoneV2Resource'
             { _attributes = TF.Nil
             , _description = TF.Nil
@@ -2055,7 +2055,7 @@ fwFirewallV1Resource
     :: TF.Attr s P.Text -- ^ @policy_id@ - 'P.policyId'
     -> P.Resource (FwFirewallV1Resource s)
 fwFirewallV1Resource _policyId =
-    TF.unsafeResource "openstack_fw_firewall_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_fw_firewall_v1" TF.validator $
         FwFirewallV1Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -2145,7 +2145,7 @@ data FwPolicyV1Resource s = FwPolicyV1Resource'
 fwPolicyV1Resource
     :: P.Resource (FwPolicyV1Resource s)
 fwPolicyV1Resource =
-    TF.unsafeResource "openstack_fw_policy_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_fw_policy_v1" TF.validator $
         FwPolicyV1Resource'
             { _audited = TF.value P.False
             , _description = TF.Nil
@@ -2252,7 +2252,7 @@ fwRuleV1Resource
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (FwRuleV1Resource s)
 fwRuleV1Resource _action _protocol =
-    TF.unsafeResource "openstack_fw_rule_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_fw_rule_v1" TF.validator $
         FwRuleV1Resource'
             { _action = _action
             , _description = TF.Nil
@@ -2372,7 +2372,7 @@ data IdentityProjectV3Resource s = IdentityProjectV3Resource'
 identityProjectV3Resource
     :: P.Resource (IdentityProjectV3Resource s)
 identityProjectV3Resource =
-    TF.unsafeResource "openstack_identity_project_v3" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_identity_project_v3" TF.validator $
         IdentityProjectV3Resource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -2458,7 +2458,7 @@ identityRoleAssignmentV3Resource
     :: TF.Attr s P.Text -- ^ @role_id@ - 'P.roleId'
     -> P.Resource (IdentityRoleAssignmentV3Resource s)
 identityRoleAssignmentV3Resource _roleId =
-    TF.unsafeResource "openstack_identity_role_assignment_v3" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_identity_role_assignment_v3" TF.validator $
         IdentityRoleAssignmentV3Resource'
             { _domainId = TF.Nil
             , _groupId = TF.Nil
@@ -2539,7 +2539,7 @@ identityRoleV3Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (IdentityRoleV3Resource s)
 identityRoleV3Resource _name =
-    TF.unsafeResource "openstack_identity_role_v3" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_identity_role_v3" TF.validator $
         IdentityRoleV3Resource'
             { _name = _name
             }
@@ -2603,7 +2603,7 @@ data IdentityUserV3Resource s = IdentityUserV3Resource'
 identityUserV3Resource
     :: P.Resource (IdentityUserV3Resource s)
 identityUserV3Resource =
-    TF.unsafeResource "openstack_identity_user_v3" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_identity_user_v3" TF.validator $
         IdentityUserV3Resource'
             { _description = TF.Nil
             , _enabled = TF.value P.True
@@ -2748,7 +2748,7 @@ imagesImageV2Resource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImagesImageV2Resource s)
 imagesImageV2Resource _containerFormat _diskFormat _name =
-    TF.unsafeResource "openstack_images_image_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_images_image_v2" TF.validator $
         ImagesImageV2Resource'
             { _containerFormat = _containerFormat
             , _diskFormat = _diskFormat
@@ -2921,7 +2921,7 @@ lbListenerV2Resource
     -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
     -> P.Resource (LbListenerV2Resource s)
 lbListenerV2Resource _loadbalancerId _protocol _protocolPort =
-    TF.unsafeResource "openstack_lb_listener_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_listener_v2" TF.validator $
         LbListenerV2Resource'
             { _adminStateUp = TF.value P.True
             , _defaultTlsContainerRef = TF.Nil
@@ -3022,7 +3022,7 @@ lbLoadbalancerV2Resource
     :: TF.Attr s P.Text -- ^ @vip_subnet_id@ - 'P.vipSubnetId'
     -> P.Resource (LbLoadbalancerV2Resource s)
 lbLoadbalancerV2Resource _vipSubnetId =
-    TF.unsafeResource "openstack_lb_loadbalancer_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_loadbalancer_v2" TF.validator $
         LbLoadbalancerV2Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -3111,7 +3111,7 @@ lbMemberV1Resource
     -> TF.Attr s P.Int -- ^ @port@ - 'P.port'
     -> P.Resource (LbMemberV1Resource s)
 lbMemberV1Resource _address _poolId _port =
-    TF.unsafeResource "openstack_lb_member_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_member_v1" TF.validator $
         LbMemberV1Resource'
             { _address = _address
             , _poolId = _poolId
@@ -3190,7 +3190,7 @@ lbMemberV2Resource
     -> TF.Attr s P.Int -- ^ @protocol_port@ - 'P.protocolPort'
     -> P.Resource (LbMemberV2Resource s)
 lbMemberV2Resource _address _poolId _protocolPort =
-    TF.unsafeResource "openstack_lb_member_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_member_v2" TF.validator $
         LbMemberV2Resource'
             { _address = _address
             , _adminStateUp = TF.value P.True
@@ -3287,7 +3287,7 @@ lbMonitorV1Resource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbMonitorV1Resource s)
 lbMonitorV1Resource _delay _maxRetries _timeout _type' =
-    TF.unsafeResource "openstack_lb_monitor_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_monitor_v1" TF.validator $
         LbMonitorV1Resource'
             { _delay = _delay
             , _expectedCodes = TF.Nil
@@ -3392,7 +3392,7 @@ lbMonitorV2Resource
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> P.Resource (LbMonitorV2Resource s)
 lbMonitorV2Resource _delay _maxRetries _poolId _timeout _type' =
-    TF.unsafeResource "openstack_lb_monitor_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_monitor_v2" TF.validator $
         LbMonitorV2Resource'
             { _adminStateUp = TF.value P.True
             , _delay = _delay
@@ -3499,7 +3499,7 @@ lbPoolV1Resource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (LbPoolV1Resource s)
 lbPoolV1Resource _lbMethod _name _protocol _subnetId =
-    TF.unsafeResource "openstack_lb_pool_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_pool_v1" TF.validator $
         LbPoolV1Resource'
             { _lbMethod = _lbMethod
             , _member = TF.Nil
@@ -3597,7 +3597,7 @@ lbPoolV2Resource
     -> TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
     -> P.Resource (LbPoolV2Resource s)
 lbPoolV2Resource _lbMethod _protocol =
-    TF.unsafeResource "openstack_lb_pool_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_pool_v2" TF.validator $
         LbPoolV2Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -3706,7 +3706,7 @@ lbVipV1Resource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (LbVipV1Resource s)
 lbVipV1Resource _name _poolId _port _protocol _subnetId =
-    TF.unsafeResource "openstack_lb_vip_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_lb_vip_v1" TF.validator $
         LbVipV1Resource'
             { _floatingIp = TF.Nil
             , _name = _name
@@ -3805,7 +3805,7 @@ networkingFloatingipAssociateV2Resource
     -> TF.Attr s P.Text -- ^ @port_id@ - 'P.portId'
     -> P.Resource (NetworkingFloatingipAssociateV2Resource s)
 networkingFloatingipAssociateV2Resource _floatingIp _portId =
-    TF.unsafeResource "openstack_networking_floatingip_associate_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_floatingip_associate_v2" TF.validator $
         NetworkingFloatingipAssociateV2Resource'
             { _floatingIp = _floatingIp
             , _portId = _portId
@@ -3853,7 +3853,7 @@ networkingFloatingipV2Resource
     :: TF.Attr s P.Text -- ^ @pool@ - 'P.pool'
     -> P.Resource (NetworkingFloatingipV2Resource s)
 networkingFloatingipV2Resource _pool =
-    TF.unsafeResource "openstack_networking_floatingip_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_floatingip_v2" TF.validator $
         NetworkingFloatingipV2Resource'
             { _pool = _pool
             , _subnetId = TF.Nil
@@ -3919,7 +3919,7 @@ data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource'
 networkingNetworkV2Resource
     :: P.Resource (NetworkingNetworkV2Resource s)
 networkingNetworkV2Resource =
-    TF.unsafeResource "openstack_networking_network_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_network_v2" TF.validator $
         NetworkingNetworkV2Resource'
             { _name = TF.Nil
             , _segments = TF.Nil
@@ -4001,7 +4001,7 @@ networkingPortV2Resource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (NetworkingPortV2Resource s)
 networkingPortV2Resource _networkId =
-    TF.unsafeResource "openstack_networking_port_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_port_v2" TF.validator $
         NetworkingPortV2Resource'
             { _allowedAddressPairs = TF.Nil
             , _fixedIp = TF.Nil
@@ -4099,7 +4099,7 @@ networkingRouterInterfaceV2Resource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (NetworkingRouterInterfaceV2Resource s)
 networkingRouterInterfaceV2Resource _routerId =
-    TF.unsafeResource "openstack_networking_router_interface_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_router_interface_v2" TF.validator $
         NetworkingRouterInterfaceV2Resource'
             { _routerId = _routerId
             }
@@ -4148,7 +4148,7 @@ networkingRouterRouteV2Resource
     -> TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (NetworkingRouterRouteV2Resource s)
 networkingRouterRouteV2Resource _destinationCidr _nextHop _routerId =
-    TF.unsafeResource "openstack_networking_router_route_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_router_route_v2" TF.validator $
         NetworkingRouterRouteV2Resource'
             { _destinationCidr = _destinationCidr
             , _nextHop = _nextHop
@@ -4202,7 +4202,7 @@ data NetworkingRouterV2Resource s = NetworkingRouterV2Resource'
 networkingRouterV2Resource
     :: P.Resource (NetworkingRouterV2Resource s)
 networkingRouterV2Resource =
-    TF.unsafeResource "openstack_networking_router_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_router_v2" TF.validator $
         NetworkingRouterV2Resource'
             { _name = TF.Nil
             , _valueSpecs = TF.Nil
@@ -4284,7 +4284,7 @@ networkingSecgroupRuleV2Resource
     -> TF.Attr s P.Text -- ^ @security_group_id@ - 'P.securityGroupId'
     -> P.Resource (NetworkingSecgroupRuleV2Resource s)
 networkingSecgroupRuleV2Resource _direction _ethertype _securityGroupId =
-    TF.unsafeResource "openstack_networking_secgroup_rule_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_secgroup_rule_v2" TF.validator $
         NetworkingSecgroupRuleV2Resource'
             { _direction = _direction
             , _ethertype = _ethertype
@@ -4354,7 +4354,7 @@ networkingSecgroupV2Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NetworkingSecgroupV2Resource s)
 networkingSecgroupV2Resource _name =
-    TF.unsafeResource "openstack_networking_secgroup_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_secgroup_v2" TF.validator $
         NetworkingSecgroupV2Resource'
             { _deleteDefaultRules = TF.Nil
             , _name = _name
@@ -4410,7 +4410,7 @@ networkingSubnetRouteV2Resource
     -> TF.Attr s P.Text -- ^ @subnet_id@ - 'P.subnetId'
     -> P.Resource (NetworkingSubnetRouteV2Resource s)
 networkingSubnetRouteV2Resource _destinationCidr _nextHop _subnetId =
-    TF.unsafeResource "openstack_networking_subnet_route_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_subnet_route_v2" TF.validator $
         NetworkingSubnetRouteV2Resource'
             { _destinationCidr = _destinationCidr
             , _nextHop = _nextHop
@@ -4483,7 +4483,7 @@ networkingSubnetV2Resource
     :: TF.Attr s P.Text -- ^ @network_id@ - 'P.networkId'
     -> P.Resource (NetworkingSubnetV2Resource s)
 networkingSubnetV2Resource _networkId =
-    TF.unsafeResource "openstack_networking_subnet_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_subnet_v2" TF.validator $
         NetworkingSubnetV2Resource'
             { _dnsNameservers = TF.Nil
             , _enableDhcp = TF.value P.True
@@ -4614,7 +4614,7 @@ networkingSubnetpoolV2Resource
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @prefixes@ - 'P.prefixes'
     -> P.Resource (NetworkingSubnetpoolV2Resource s)
 networkingSubnetpoolV2Resource _name _prefixes =
-    TF.unsafeResource "openstack_networking_subnetpool_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_networking_subnetpool_v2" TF.validator $
         NetworkingSubnetpoolV2Resource'
             { _addressScopeId = TF.Nil
             , _defaultQuota = TF.Nil
@@ -4743,7 +4743,7 @@ objectstorageContainerV1Resource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ObjectstorageContainerV1Resource s)
 objectstorageContainerV1Resource _name =
-    TF.unsafeResource "openstack_objectstorage_container_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_objectstorage_container_v1" TF.validator $
         ObjectstorageContainerV1Resource'
             { _containerRead = TF.Nil
             , _containerSyncKey = TF.Nil
@@ -4861,7 +4861,7 @@ objectstorageObjectV1Resource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ObjectstorageObjectV1Resource s)
 objectstorageObjectV1Resource _containerName _name =
-    TF.unsafeResource "openstack_objectstorage_object_v1" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_objectstorage_object_v1" TF.validator $
         ObjectstorageObjectV1Resource'
             { _containerName = _containerName
             , _content = TF.Nil
@@ -4999,7 +4999,7 @@ data VpnaasEndpointGroupV2Resource s = VpnaasEndpointGroupV2Resource'
 vpnaasEndpointGroupV2Resource
     :: P.Resource (VpnaasEndpointGroupV2Resource s)
 vpnaasEndpointGroupV2Resource =
-    TF.unsafeResource "openstack_vpnaas_endpoint_group_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_vpnaas_endpoint_group_v2" TF.validator $
         VpnaasEndpointGroupV2Resource'
             { _description = TF.Nil
             , _endpoints = TF.Nil
@@ -5081,7 +5081,7 @@ data VpnaasIkePolicyV2Resource s = VpnaasIkePolicyV2Resource'
 vpnaasIkePolicyV2Resource
     :: P.Resource (VpnaasIkePolicyV2Resource s)
 vpnaasIkePolicyV2Resource =
-    TF.unsafeResource "openstack_vpnaas_ike_policy_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_vpnaas_ike_policy_v2" TF.validator $
         VpnaasIkePolicyV2Resource'
             { _authAlgorithm = TF.value "sha1"
             , _description = TF.Nil
@@ -5176,7 +5176,7 @@ data VpnaasIpsecPolicyV2Resource s = VpnaasIpsecPolicyV2Resource'
 vpnaasIpsecPolicyV2Resource
     :: P.Resource (VpnaasIpsecPolicyV2Resource s)
 vpnaasIpsecPolicyV2Resource =
-    TF.unsafeResource "openstack_vpnaas_ipsec_policy_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_vpnaas_ipsec_policy_v2" TF.validator $
         VpnaasIpsecPolicyV2Resource'
             { _description = TF.Nil
             , _name = TF.Nil
@@ -5261,7 +5261,7 @@ vpnaasServiceV2Resource
     :: TF.Attr s P.Text -- ^ @router_id@ - 'P.routerId'
     -> P.Resource (VpnaasServiceV2Resource s)
 vpnaasServiceV2Resource _routerId =
-    TF.unsafeResource "openstack_vpnaas_service_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_vpnaas_service_v2" TF.validator $
         VpnaasServiceV2Resource'
             { _adminStateUp = TF.value P.True
             , _description = TF.Nil
@@ -5387,7 +5387,7 @@ vpnaasSiteConnectionV2Resource
     -> TF.Attr s P.Text -- ^ @vpnservice_id@ - 'P.vpnserviceId'
     -> P.Resource (VpnaasSiteConnectionV2Resource s)
 vpnaasSiteConnectionV2Resource _ikepolicyId _ipsecpolicyId _peerAddress _peerId _psk _vpnserviceId =
-    TF.unsafeResource "openstack_vpnaas_site_connection_v2" P.defaultProvider TF.validator $
+    TF.unsafeResource "openstack_vpnaas_site_connection_v2" TF.validator $
         VpnaasSiteConnectionV2Resource'
             { _adminStateUp = TF.value P.False
             , _description = TF.Nil

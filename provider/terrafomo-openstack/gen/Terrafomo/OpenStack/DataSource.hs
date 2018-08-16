@@ -142,7 +142,7 @@ data ComputeFlavorV2Data s = ComputeFlavorV2Data'
 computeFlavorV2Data
     :: P.DataSource (ComputeFlavorV2Data s)
 computeFlavorV2Data =
-    TF.unsafeDataSource "openstack_compute_flavor_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_compute_flavor_v2" TF.validator $
         ComputeFlavorV2Data'
             { _disk = TF.Nil
             , _minDisk = TF.Nil
@@ -232,7 +232,7 @@ computeKeypairV2Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (ComputeKeypairV2Data s)
 computeKeypairV2Data _name =
-    TF.unsafeDataSource "openstack_compute_keypair_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_compute_keypair_v2" TF.validator $
         ComputeKeypairV2Data'
             { _name = _name
             }
@@ -287,7 +287,7 @@ data DnsZoneV2Data s = DnsZoneV2Data'
 dnsZoneV2Data
     :: P.DataSource (DnsZoneV2Data s)
 dnsZoneV2Data =
-    TF.unsafeDataSource "openstack_dns_zone_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_dns_zone_v2" TF.validator $
         DnsZoneV2Data'
             { _description = TF.Nil
             , _email = TF.Nil
@@ -389,7 +389,7 @@ data FwPolicyV1Data s = FwPolicyV1Data'
 fwPolicyV1Data
     :: P.DataSource (FwPolicyV1Data s)
 fwPolicyV1Data =
-    TF.unsafeDataSource "openstack_fw_policy_v1" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_fw_policy_v1" TF.validator $
         FwPolicyV1Data'
             { _name = TF.Nil
             , _policyId = TF.Nil
@@ -449,7 +449,7 @@ identityAuthScopeV3Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IdentityAuthScopeV3Data s)
 identityAuthScopeV3Data _name =
-    TF.unsafeDataSource "openstack_identity_auth_scope_v3" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_identity_auth_scope_v3" TF.validator $
         IdentityAuthScopeV3Data'
             { _name = _name
             }
@@ -519,7 +519,7 @@ data IdentityEndpointV3Data s = IdentityEndpointV3Data'
 identityEndpointV3Data
     :: P.DataSource (IdentityEndpointV3Data s)
 identityEndpointV3Data =
-    TF.unsafeDataSource "openstack_identity_endpoint_v3" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_identity_endpoint_v3" TF.validator $
         IdentityEndpointV3Data'
             { _interface = TF.value "public"
             , _serviceId = TF.Nil
@@ -574,7 +574,7 @@ identityGroupV3Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IdentityGroupV3Data s)
 identityGroupV3Data _name =
-    TF.unsafeDataSource "openstack_identity_group_v3" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_identity_group_v3" TF.validator $
         IdentityGroupV3Data'
             { _name = _name
             }
@@ -623,7 +623,7 @@ data IdentityProjectV3Data s = IdentityProjectV3Data'
 identityProjectV3Data
     :: P.DataSource (IdentityProjectV3Data s)
 identityProjectV3Data =
-    TF.unsafeDataSource "openstack_identity_project_v3" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_identity_project_v3" TF.validator $
         IdentityProjectV3Data'
             { _enabled = TF.value P.True
             , _isDomain = TF.value P.False
@@ -688,7 +688,7 @@ identityRoleV3Data
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (IdentityRoleV3Data s)
 identityRoleV3Data _name =
-    TF.unsafeDataSource "openstack_identity_role_v3" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_identity_role_v3" TF.validator $
         IdentityRoleV3Data'
             { _name = _name
             }
@@ -743,7 +743,7 @@ data IdentityUserV3Data s = IdentityUserV3Data'
 identityUserV3Data
     :: P.DataSource (IdentityUserV3Data s)
 identityUserV3Data =
-    TF.unsafeDataSource "openstack_identity_user_v3" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_identity_user_v3" TF.validator $
         IdentityUserV3Data'
             { _enabled = TF.value P.True
             , _idpId = TF.Nil
@@ -851,7 +851,7 @@ data ImagesImageV2Data s = ImagesImageV2Data'
 imagesImageV2Data
     :: P.DataSource (ImagesImageV2Data s)
 imagesImageV2Data =
-    TF.unsafeDataSource "openstack_images_image_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_images_image_v2" TF.validator $
         ImagesImageV2Data'
             { _memberStatus = TF.Nil
             , _mostRecent = TF.value P.False
@@ -1009,7 +1009,7 @@ data NetworkingFloatingipV2Data s = NetworkingFloatingipV2Data'
 networkingFloatingipV2Data
     :: P.DataSource (NetworkingFloatingipV2Data s)
 networkingFloatingipV2Data =
-    TF.unsafeDataSource "openstack_networking_floatingip_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_networking_floatingip_v2" TF.validator $
         NetworkingFloatingipV2Data'
             { _address = TF.Nil
             , _fixedIp = TF.Nil
@@ -1101,7 +1101,7 @@ data NetworkingNetworkV2Data s = NetworkingNetworkV2Data'
 networkingNetworkV2Data
     :: P.DataSource (NetworkingNetworkV2Data s)
 networkingNetworkV2Data =
-    TF.unsafeDataSource "openstack_networking_network_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_networking_network_v2" TF.validator $
         NetworkingNetworkV2Data'
             { _external = TF.Nil
             , _matchingSubnetCidr = TF.Nil
@@ -1185,7 +1185,7 @@ data NetworkingSecgroupV2Data s = NetworkingSecgroupV2Data'
 networkingSecgroupV2Data
     :: P.DataSource (NetworkingSecgroupV2Data s)
 networkingSecgroupV2Data =
-    TF.unsafeDataSource "openstack_networking_secgroup_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_networking_secgroup_v2" TF.validator $
         NetworkingSecgroupV2Data'
             { _name = TF.Nil
             , _secgroupId = TF.Nil
@@ -1241,7 +1241,7 @@ data NetworkingSubnetV2Data s = NetworkingSubnetV2Data'
 networkingSubnetV2Data
     :: P.DataSource (NetworkingSubnetV2Data s)
 networkingSubnetV2Data =
-    TF.unsafeDataSource "openstack_networking_subnet_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_networking_subnet_v2" TF.validator $
         NetworkingSubnetV2Data'
             { _dhcpDisabled = TF.Nil
             , _dhcpEnabled = TF.Nil
@@ -1335,7 +1335,7 @@ data NetworkingSubnetpoolV2Data s = NetworkingSubnetpoolV2Data'
 networkingSubnetpoolV2Data
     :: P.DataSource (NetworkingSubnetpoolV2Data s)
 networkingSubnetpoolV2Data =
-    TF.unsafeDataSource "openstack_networking_subnetpool_v2" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "openstack_networking_subnetpool_v2" TF.validator $
         NetworkingSubnetpoolV2Data'
 
 instance TF.IsObject (NetworkingSubnetpoolV2Data s) where
