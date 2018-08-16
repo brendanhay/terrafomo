@@ -74,7 +74,7 @@ precreatedIpBlockData
     -> TF.Attr s P.Bool -- ^ @public@ - 'P.public'
     -> P.DataSource (PrecreatedIpBlockData s)
 precreatedIpBlockData _addressFamily _facility _projectId _public =
-    TF.unsafeDataSource "packet_precreated_ip_block" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "packet_precreated_ip_block" TF.validator $
         PrecreatedIpBlockData'
             { _addressFamily = _addressFamily
             , _facility = _facility

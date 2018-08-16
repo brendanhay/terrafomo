@@ -128,7 +128,7 @@ deviceResource
     -> TF.Attr s P.Text -- ^ @project_id@ - 'P.projectId'
     -> P.Resource (DeviceResource s)
 deviceResource _billingCycle _facility _hostname _operatingSystem _plan _projectId =
-    TF.unsafeResource "packet_device" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_device" TF.validator $
         DeviceResource'
             { _alwaysPxe = TF.value P.False
             , _billingCycle = _billingCycle
@@ -274,7 +274,7 @@ ipAttachmentResource
     -> TF.Attr s P.Text -- ^ @device_id@ - 'P.deviceId'
     -> P.Resource (IpAttachmentResource s)
 ipAttachmentResource _cidrNotation _deviceId =
-    TF.unsafeResource "packet_ip_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_ip_attachment" TF.validator $
         IpAttachmentResource'
             { _cidrNotation = _cidrNotation
             , _deviceId = _deviceId
@@ -352,7 +352,7 @@ organizationResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
-    TF.unsafeResource "packet_organization" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_organization" TF.validator $
         OrganizationResource'
             { _description = TF.Nil
             , _logo = TF.Nil
@@ -418,7 +418,7 @@ projectResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ProjectResource s)
 projectResource _name =
-    TF.unsafeResource "packet_project" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_project" TF.validator $
         ProjectResource'
             { _name = _name
             }
@@ -470,7 +470,7 @@ reservedIpBlockResource
     -> TF.Attr s P.Int -- ^ @quantity@ - 'P.quantity'
     -> P.Resource (ReservedIpBlockResource s)
 reservedIpBlockResource _facility _projectId _quantity =
-    TF.unsafeResource "packet_reserved_ip_block" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_reserved_ip_block" TF.validator $
         ReservedIpBlockResource'
             { _facility = _facility
             , _projectId = _projectId
@@ -550,7 +550,7 @@ sshKeyResource
     -> TF.Attr s P.Text -- ^ @public_key@ - 'P.publicKey'
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name _publicKey =
-    TF.unsafeResource "packet_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_ssh_key" TF.validator $
         SshKeyResource'
             { _name = _name
             , _publicKey = _publicKey
@@ -619,7 +619,7 @@ volumeResource
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (VolumeResource s)
 volumeResource _facility _plan _projectId _size =
-    TF.unsafeResource "packet_volume" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_volume" TF.validator $
         VolumeResource'
             { _description = TF.Nil
             , _facility = _facility
@@ -715,7 +715,7 @@ volumeAttachmentResource
     -> TF.Attr s P.Text -- ^ @volume_id@ - 'P.volumeId'
     -> P.Resource (VolumeAttachmentResource s)
 volumeAttachmentResource _deviceId _volumeId =
-    TF.unsafeResource "packet_volume_attachment" P.defaultProvider TF.validator $
+    TF.unsafeResource "packet_volume_attachment" TF.validator $
         VolumeAttachmentResource'
             { _deviceId = _deviceId
             , _volumeId = _volumeId
