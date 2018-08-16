@@ -19,59 +19,59 @@ module Terrafomo.OPC.Settings
     (
     -- ** application_cookie_stickiness_policy
       ApplicationCookieStickinessPolicySetting (..)
-    , applicationCookieStickinessPolicySetting
+    , newApplicationCookieStickinessPolicySetting
 
     -- ** cloudgate_policy
     , CloudgatePolicySetting (..)
-    , cloudgatePolicySetting
+    , newCloudgatePolicySetting
 
     -- ** health_check
     , HealthCheckSetting (..)
-    , healthCheckSetting
+    , newHealthCheckSetting
 
     -- ** instance
-    , InstanceSetting (..)
-    , instanceSetting
+    , Instance'Setting (..)
+    , newInstance'Setting
 
     -- ** load_balancer_cookie_stickiness_policy
     , LoadBalancerCookieStickinessPolicySetting (..)
-    , loadBalancerCookieStickinessPolicySetting
+    , newLoadBalancerCookieStickinessPolicySetting
 
     -- ** load_balancing_mechanism_policy
     , LoadBalancingMechanismPolicySetting (..)
-    , loadBalancingMechanismPolicySetting
+    , newLoadBalancingMechanismPolicySetting
 
     -- ** networking_info
     , NetworkingInfoSetting (..)
-    , networkingInfoSetting
+    , newNetworkingInfoSetting
 
     -- ** rate_limiting_request_policy
     , RateLimitingRequestPolicySetting (..)
-    , rateLimitingRequestPolicySetting
+    , newRateLimitingRequestPolicySetting
 
     -- ** redirect_policy
     , RedirectPolicySetting (..)
-    , redirectPolicySetting
+    , newRedirectPolicySetting
 
     -- ** resource_access_control_policy
     , ResourceAccessControlPolicySetting (..)
-    , resourceAccessControlPolicySetting
+    , newResourceAccessControlPolicySetting
 
     -- ** set_request_header_policy
     , SetRequestHeaderPolicySetting (..)
-    , setRequestHeaderPolicySetting
+    , newSetRequestHeaderPolicySetting
 
     -- ** ssl_negotiation_policy
     , SslNegotiationPolicySetting (..)
-    , sslNegotiationPolicySetting
+    , newSslNegotiationPolicySetting
 
     -- ** storage
     , StorageSetting (..)
-    , storageSetting
+    , newStorageSetting
 
     -- ** trusted_certificate_policy
     , TrustedCertificatePolicySetting (..)
-    , trustedCertificatePolicySetting
+    , newTrustedCertificatePolicySetting
 
     ) where
 
@@ -104,10 +104,10 @@ data ApplicationCookieStickinessPolicySetting s = ApplicationCookieStickinessPol
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @application_cookie_stickiness_policy@ settings value.
-applicationCookieStickinessPolicySetting
+newApplicationCookieStickinessPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._cookieName': @cookie_name@
     -> ApplicationCookieStickinessPolicySetting s
-applicationCookieStickinessPolicySetting _cookieName =
+newApplicationCookieStickinessPolicySetting _cookieName =
     ApplicationCookieStickinessPolicySetting'
         { _cookieName = _cookieName
         }
@@ -143,10 +143,10 @@ data CloudgatePolicySetting s = CloudgatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cloudgate_policy@ settings value.
-cloudgatePolicySetting
+newCloudgatePolicySetting
     :: TF.Attr s P.Text -- ^ 'P._virtualHostnameForPolicyAttribution': @virtual_hostname_for_policy_attribution@
     -> CloudgatePolicySetting s
-cloudgatePolicySetting _virtualHostnameForPolicyAttribution =
+newCloudgatePolicySetting _virtualHostnameForPolicyAttribution =
     CloudgatePolicySetting'
         { _cloudgateApplication = TF.Nil
         , _cloudgatePolicyName = TF.Nil
@@ -215,9 +215,9 @@ data HealthCheckSetting s = HealthCheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @health_check@ settings value.
-healthCheckSetting
+newHealthCheckSetting
     :: HealthCheckSetting s
-healthCheckSetting =
+newHealthCheckSetting =
     HealthCheckSetting'
         { _acceptedReturnCodes = TF.Nil
         , _enabled = TF.value P.True
@@ -289,7 +289,7 @@ instance s ~ s' => P.HasComputedAcceptedReturnCodes (TF.Ref s' (HealthCheckSetti
     computedAcceptedReturnCodes x = TF.compute (TF.refKey x) "accepted_return_codes"
 
 -- | @instance@ nested settings.
-data InstanceSetting s = InstanceSetting'
+data Instance'Setting s = Instance'Setting'
     { _bootOrder      :: TF.Attr s [TF.Attr s P.Int]
     -- ^ @boot_order@ - (Optional, Forces New)
     --
@@ -329,12 +329,12 @@ data InstanceSetting s = InstanceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @instance@ settings value.
-instanceSetting
+newInstance'Setting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._shape': @shape@
-    -> InstanceSetting s
-instanceSetting _name _shape =
-    InstanceSetting'
+    -> Instance'Setting s
+newInstance'Setting _name _shape =
+    Instance'Setting'
         { _bootOrder = TF.Nil
         , _hostname = TF.Nil
         , _imageList = TF.Nil
@@ -349,9 +349,9 @@ instanceSetting _name _shape =
         , _tags = TF.Nil
         }
 
-instance TF.IsValue  (InstanceSetting s)
-instance TF.IsObject (InstanceSetting s) where
-    toObject InstanceSetting'{..} = P.catMaybes
+instance TF.IsValue  (Instance'Setting s)
+instance TF.IsObject (Instance'Setting s) where
+    toObject Instance'Setting'{..} = P.catMaybes
         [ TF.assign "boot_order" <$> TF.attribute _bootOrder
         , TF.assign "hostname" <$> TF.attribute _hostname
         , TF.assign "image_list" <$> TF.attribute _imageList
@@ -366,142 +366,142 @@ instance TF.IsObject (InstanceSetting s) where
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
-instance TF.IsValid (InstanceSetting s) where
+instance TF.IsValid (Instance'Setting s) where
     validator = P.mempty
 
-instance P.HasBootOrder (InstanceSetting s) (TF.Attr s [TF.Attr s P.Int]) where
+instance P.HasBootOrder (Instance'Setting s) (TF.Attr s [TF.Attr s P.Int]) where
     bootOrder =
-        P.lens (_bootOrder :: InstanceSetting s -> TF.Attr s [TF.Attr s P.Int])
-               (\s a -> s { _bootOrder = a } :: InstanceSetting s)
+        P.lens (_bootOrder :: Instance'Setting s -> TF.Attr s [TF.Attr s P.Int])
+               (\s a -> s { _bootOrder = a } :: Instance'Setting s)
 
-instance P.HasHostname (InstanceSetting s) (TF.Attr s P.Text) where
+instance P.HasHostname (Instance'Setting s) (TF.Attr s P.Text) where
     hostname =
-        P.lens (_hostname :: InstanceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a } :: InstanceSetting s)
+        P.lens (_hostname :: Instance'Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: Instance'Setting s)
 
-instance P.HasImageList (InstanceSetting s) (TF.Attr s P.Text) where
+instance P.HasImageList (Instance'Setting s) (TF.Attr s P.Text) where
     imageList =
-        P.lens (_imageList :: InstanceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _imageList = a } :: InstanceSetting s)
+        P.lens (_imageList :: Instance'Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _imageList = a } :: Instance'Setting s)
 
-instance P.HasLabel (InstanceSetting s) (TF.Attr s P.Text) where
+instance P.HasLabel (Instance'Setting s) (TF.Attr s P.Text) where
     label =
-        P.lens (_label :: InstanceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a } :: InstanceSetting s)
+        P.lens (_label :: Instance'Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: Instance'Setting s)
 
-instance P.HasName (InstanceSetting s) (TF.Attr s P.Text) where
+instance P.HasName (Instance'Setting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: InstanceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: InstanceSetting s)
+        P.lens (_name :: Instance'Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: Instance'Setting s)
 
-instance P.HasNetworkingInfo (InstanceSetting s) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
+instance P.HasNetworkingInfo (Instance'Setting s) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
     networkingInfo =
-        P.lens (_networkingInfo :: InstanceSetting s -> TF.Attr s [TF.Attr s (NetworkingInfoSetting s)])
-               (\s a -> s { _networkingInfo = a } :: InstanceSetting s)
+        P.lens (_networkingInfo :: Instance'Setting s -> TF.Attr s [TF.Attr s (NetworkingInfoSetting s)])
+               (\s a -> s { _networkingInfo = a } :: Instance'Setting s)
 
-instance P.HasPersistent (InstanceSetting s) (TF.Attr s P.Bool) where
+instance P.HasPersistent (Instance'Setting s) (TF.Attr s P.Bool) where
     persistent =
-        P.lens (_persistent :: InstanceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _persistent = a } :: InstanceSetting s)
+        P.lens (_persistent :: Instance'Setting s -> TF.Attr s P.Bool)
+               (\s a -> s { _persistent = a } :: Instance'Setting s)
 
-instance P.HasReverseDns (InstanceSetting s) (TF.Attr s P.Bool) where
+instance P.HasReverseDns (Instance'Setting s) (TF.Attr s P.Bool) where
     reverseDns =
-        P.lens (_reverseDns :: InstanceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _reverseDns = a } :: InstanceSetting s)
+        P.lens (_reverseDns :: Instance'Setting s -> TF.Attr s P.Bool)
+               (\s a -> s { _reverseDns = a } :: Instance'Setting s)
 
-instance P.HasShape (InstanceSetting s) (TF.Attr s P.Text) where
+instance P.HasShape (Instance'Setting s) (TF.Attr s P.Text) where
     shape =
-        P.lens (_shape :: InstanceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _shape = a } :: InstanceSetting s)
+        P.lens (_shape :: Instance'Setting s -> TF.Attr s P.Text)
+               (\s a -> s { _shape = a } :: Instance'Setting s)
 
-instance P.HasSshKeys (InstanceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSshKeys (Instance'Setting s) (TF.Attr s [TF.Attr s P.Text]) where
     sshKeys =
-        P.lens (_sshKeys :: InstanceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sshKeys = a } :: InstanceSetting s)
+        P.lens (_sshKeys :: Instance'Setting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sshKeys = a } :: Instance'Setting s)
 
-instance P.HasStorage (InstanceSetting s) (TF.Attr s [TF.Attr s (StorageSetting s)]) where
+instance P.HasStorage (Instance'Setting s) (TF.Attr s [TF.Attr s (StorageSetting s)]) where
     storage =
-        P.lens (_storage :: InstanceSetting s -> TF.Attr s [TF.Attr s (StorageSetting s)])
-               (\s a -> s { _storage = a } :: InstanceSetting s)
+        P.lens (_storage :: Instance'Setting s -> TF.Attr s [TF.Attr s (StorageSetting s)])
+               (\s a -> s { _storage = a } :: Instance'Setting s)
 
-instance P.HasTags (InstanceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (Instance'Setting s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
-        P.lens (_tags :: InstanceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: InstanceSetting s)
+        P.lens (_tags :: Instance'Setting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: Instance'Setting s)
 
-instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAttributes (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedAttributes x = TF.compute (TF.refKey x) "attributes"
 
-instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAvailabilityDomain (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedAvailabilityDomain x = TF.compute (TF.refKey x) "availability_domain"
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedDomain x = TF.compute (TF.refKey x) "domain"
 
-instance s ~ s' => P.HasComputedEntry (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedEntry (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Int) where
     computedEntry x = TF.compute (TF.refKey x) "entry"
 
-instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedFingerprint x = TF.compute (TF.refKey x) "fingerprint"
 
-instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance s ~ s' => P.HasComputedHostname (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedHostname (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedImageFormat (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedImageFormat x = TF.compute (TF.refKey x) "image_format"
 
-instance s ~ s' => P.HasComputedInstanceAttributes (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceAttributes (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedInstanceAttributes x = TF.compute (TF.refKey x) "instance_attributes"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputedLabel (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedLabel (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedLabel x = TF.compute (TF.refKey x) "label"
 
-instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (InstanceSetting s)) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
+instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (Instance'Setting s)) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
     computedNetworkingInfo x = TF.compute (TF.refKey x) "networking_info"
 
-instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (InstanceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (Instance'Setting s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedPlacementRequirements x = TF.compute (TF.refKey x) "placement_requirements"
 
-instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedQuotaReservation (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedQuotaReservation x = TF.compute (TF.refKey x) "quota_reservation"
 
-instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (InstanceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedRelationships (TF.Ref s' (Instance'Setting s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRelationships x = TF.compute (TF.refKey x) "relationships"
 
-instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (InstanceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedResolvers (TF.Ref s' (Instance'Setting s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedResolvers x = TF.compute (TF.refKey x) "resolvers"
 
-instance s ~ s' => P.HasComputedSite (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedSite (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedSite x = TF.compute (TF.refKey x) "site"
 
-instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedStartTime x = TF.compute (TF.refKey x) "start_time"
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedState (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
 
-instance s ~ s' => P.HasComputedVcable (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVcable (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedVcable x = TF.compute (TF.refKey x) "vcable"
 
-instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Bool) where
+instance s ~ s' => P.HasComputedVirtio (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Bool) where
     computedVirtio x = TF.compute (TF.refKey x) "virtio"
 
-instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (InstanceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVncAddress (TF.Ref s' (Instance'Setting s)) (TF.Attr s P.Text) where
     computedVncAddress x = TF.compute (TF.refKey x) "vnc_address"
 
 -- | @load_balancer_cookie_stickiness_policy@ nested settings.
@@ -512,10 +512,10 @@ data LoadBalancerCookieStickinessPolicySetting s = LoadBalancerCookieStickinessP
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @load_balancer_cookie_stickiness_policy@ settings value.
-loadBalancerCookieStickinessPolicySetting
+newLoadBalancerCookieStickinessPolicySetting
     :: TF.Attr s P.Int -- ^ 'P._cookieExpirationPeriod': @cookie_expiration_period@
     -> LoadBalancerCookieStickinessPolicySetting s
-loadBalancerCookieStickinessPolicySetting _cookieExpirationPeriod =
+newLoadBalancerCookieStickinessPolicySetting _cookieExpirationPeriod =
     LoadBalancerCookieStickinessPolicySetting'
         { _cookieExpirationPeriod = _cookieExpirationPeriod
         }
@@ -542,10 +542,10 @@ data LoadBalancingMechanismPolicySetting s = LoadBalancingMechanismPolicySetting
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @load_balancing_mechanism_policy@ settings value.
-loadBalancingMechanismPolicySetting
+newLoadBalancingMechanismPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._loadBalancingMechanism': @load_balancing_mechanism@
     -> LoadBalancingMechanismPolicySetting s
-loadBalancingMechanismPolicySetting _loadBalancingMechanism =
+newLoadBalancingMechanismPolicySetting _loadBalancingMechanism =
     LoadBalancingMechanismPolicySetting'
         { _loadBalancingMechanism = _loadBalancingMechanism
         }
@@ -608,10 +608,10 @@ data NetworkingInfoSetting s = NetworkingInfoSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @networking_info@ settings value.
-networkingInfoSetting
+newNetworkingInfoSetting
     :: TF.Attr s P.Int -- ^ 'P._index': @index@
     -> NetworkingInfoSetting s
-networkingInfoSetting _index =
+newNetworkingInfoSetting _index =
     NetworkingInfoSetting'
         { _dns = TF.Nil
         , _index = _index
@@ -752,13 +752,13 @@ data RateLimitingRequestPolicySetting s = RateLimitingRequestPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rate_limiting_request_policy@ settings value.
-rateLimitingRequestPolicySetting
+newRateLimitingRequestPolicySetting
     :: TF.Attr s P.Bool -- ^ 'P._delayExcessiveRequests': @delay_excessive_requests@
     -> TF.Attr s P.Int -- ^ 'P._requestsPerSecond': @requests_per_second@
     -> TF.Attr s P.Int -- ^ 'P._burstSize': @burst_size@
     -> TF.Attr s P.Text -- ^ 'P._zone': @zone@
     -> RateLimitingRequestPolicySetting s
-rateLimitingRequestPolicySetting _delayExcessiveRequests _requestsPerSecond _burstSize _zone =
+newRateLimitingRequestPolicySetting _delayExcessiveRequests _requestsPerSecond _burstSize _zone =
     RateLimitingRequestPolicySetting'
         { _burstSize = _burstSize
         , _delayExcessiveRequests = _delayExcessiveRequests
@@ -837,11 +837,11 @@ data RedirectPolicySetting s = RedirectPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @redirect_policy@ settings value.
-redirectPolicySetting
+newRedirectPolicySetting
     :: TF.Attr s P.Int -- ^ 'P._responseCode': @response_code@
     -> TF.Attr s P.Text -- ^ 'P._redirectUri': @redirect_uri@
     -> RedirectPolicySetting s
-redirectPolicySetting _responseCode _redirectUri =
+newRedirectPolicySetting _responseCode _redirectUri =
     RedirectPolicySetting'
         { _redirectUri = _redirectUri
         , _responseCode = _responseCode
@@ -881,10 +881,10 @@ data ResourceAccessControlPolicySetting s = ResourceAccessControlPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @resource_access_control_policy@ settings value.
-resourceAccessControlPolicySetting
+newResourceAccessControlPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._disposition': @disposition@
     -> ResourceAccessControlPolicySetting s
-resourceAccessControlPolicySetting _disposition =
+newResourceAccessControlPolicySetting _disposition =
     ResourceAccessControlPolicySetting'
         { _deniedClients = TF.Nil
         , _disposition = _disposition
@@ -937,10 +937,10 @@ data SetRequestHeaderPolicySetting s = SetRequestHeaderPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @set_request_header_policy@ settings value.
-setRequestHeaderPolicySetting
+newSetRequestHeaderPolicySetting
     :: TF.Attr s P.Text -- ^ 'P._headerName': @header_name@
     -> SetRequestHeaderPolicySetting s
-setRequestHeaderPolicySetting _headerName =
+newSetRequestHeaderPolicySetting _headerName =
     SetRequestHeaderPolicySetting'
         { _actionWhenHeaderExists = TF.Nil
         , _actionWhenHeaderValueIs = TF.Nil
@@ -1004,11 +1004,11 @@ data SslNegotiationPolicySetting s = SslNegotiationPolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ssl_negotiation_policy@ settings value.
-sslNegotiationPolicySetting
+newSslNegotiationPolicySetting
     :: TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._sslProtocol': @ssl_protocol@
     -> SslNegotiationPolicySetting s
-sslNegotiationPolicySetting _port _sslProtocol =
+newSslNegotiationPolicySetting _port _sslProtocol =
     SslNegotiationPolicySetting'
         { _port = _port
         , _serverOrderPreference = TF.Nil
@@ -1059,11 +1059,11 @@ data StorageSetting s = StorageSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage@ settings value.
-storageSetting
+newStorageSetting
     :: TF.Attr s P.Int -- ^ 'P._index': @index@
     -> TF.Attr s P.Text -- ^ 'P._volume': @volume@
     -> StorageSetting s
-storageSetting _index _volume =
+newStorageSetting _index _volume =
     StorageSetting'
         { _index = _index
         , _volume = _volume
@@ -1100,10 +1100,10 @@ data TrustedCertificatePolicySetting s = TrustedCertificatePolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @trusted_certificate_policy@ settings value.
-trustedCertificatePolicySetting
+newTrustedCertificatePolicySetting
     :: TF.Attr s P.Text -- ^ 'P._trustedCertificate': @trusted_certificate@
     -> TrustedCertificatePolicySetting s
-trustedCertificatePolicySetting _trustedCertificate =
+newTrustedCertificatePolicySetting _trustedCertificate =
     TrustedCertificatePolicySetting'
         { _trustedCertificate = _trustedCertificate
         }

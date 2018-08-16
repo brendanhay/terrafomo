@@ -1217,7 +1217,7 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
     , _desiredState :: TF.Attr s P.Text
     -- ^ @desired_state@ - (Required)
     --
-    , _instance'    :: TF.Attr s [TF.Attr s (InstanceSetting s)]
+    , _instance'    :: TF.Attr s [TF.Attr s (Instance'Setting s)]
     -- ^ @instance@ - (Required)
     --
     , _name         :: TF.Attr s P.Text
@@ -1230,7 +1230,7 @@ data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource
 
 -- | Define a new @opc_compute_orchestrated_instance@ resource value.
 computeOrchestratedInstanceResource
-    :: TF.Attr s [TF.Attr s (InstanceSetting s)] -- ^ @instance@ ('P._instance'', 'P.instance'')
+    :: TF.Attr s [TF.Attr s (Instance'Setting s)] -- ^ @instance@ ('P._instance'', 'P.instance'')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @desired_state@ ('P._desiredState', 'P.desiredState')
     -> P.Resource (ComputeOrchestratedInstanceResource s)
@@ -1266,9 +1266,9 @@ instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s P.
         P.lens (_desiredState :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _desiredState = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s (InstanceSetting s)]) where
+instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s (Instance'Setting s)]) where
     instance' =
-        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (InstanceSetting s)])
+        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (Instance'Setting s)])
                (\s a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource s)
 
 instance P.HasName (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
