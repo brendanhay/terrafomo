@@ -19,51 +19,51 @@ module Terrafomo.VSphere.Settings
     (
     -- ** cdrom
       CdromSetting (..)
-    , newCdromSetting
+    , cdromSetting
 
     -- ** clone
     , CloneSetting (..)
-    , newCloneSetting
+    , cloneSetting
 
     -- ** customize
     , CustomizeSetting (..)
-    , newCustomizeSetting
+    , customizeSetting
 
     -- ** disk
     , DiskSetting (..)
-    , newDiskSetting
+    , diskSetting
 
     -- ** disks
     , DisksSetting (..)
-    , newDisksSetting
+    , disksSetting
 
     -- ** host
     , HostSetting (..)
-    , newHostSetting
+    , hostSetting
 
     -- ** linux_options
     , LinuxOptionsSetting (..)
-    , newLinuxOptionsSetting
+    , linuxOptionsSetting
 
     -- ** network_interface
     , NetworkInterfaceSetting (..)
-    , newNetworkInterfaceSetting
+    , networkInterfaceSetting
 
     -- ** ports
     , PortsSetting (..)
-    , newPortsSetting
+    , portsSetting
 
     -- ** vapp
     , VappSetting (..)
-    , newVappSetting
+    , vappSetting
 
     -- ** vlan_range
     , VlanRangeSetting (..)
-    , newVlanRangeSetting
+    , vlanRangeSetting
 
     -- ** windows_options
     , WindowsOptionsSetting (..)
-    , newWindowsOptionsSetting
+    , windowsOptionsSetting
 
     ) where
 
@@ -105,9 +105,9 @@ data CdromSetting s = CdromSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cdrom@ settings value.
-newCdromSetting
+cdromSetting
     :: CdromSetting s
-newCdromSetting =
+cdromSetting =
     CdromSetting'
         { _clientDevice = TF.Nil
         , _datastoreId = TF.Nil
@@ -169,10 +169,10 @@ data CloneSetting s = CloneSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @clone@ settings value.
-newCloneSetting
+cloneSetting
     :: TF.Attr s P.Text -- ^ 'P._templateUuid': @template_uuid@
     -> CloneSetting s
-newCloneSetting _templateUuid =
+cloneSetting _templateUuid =
     CloneSetting'
         { _customize = TF.Nil
         , _linkedClone = TF.Nil
@@ -277,9 +277,9 @@ data CustomizeSetting s = CustomizeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @customize@ settings value.
-newCustomizeSetting
+customizeSetting
     :: CustomizeSetting s
-newCustomizeSetting =
+customizeSetting =
     CustomizeSetting'
         { _dnsServerList = TF.Nil
         , _dnsSuffixList = TF.Nil
@@ -455,9 +455,9 @@ data DiskSetting s = DiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disk@ settings value.
-newDiskSetting
+diskSetting
     :: DiskSetting s
-newDiskSetting =
+diskSetting =
     DiskSetting'
         { _attach = TF.value P.False
         , _datastoreId = TF.Nil
@@ -591,9 +591,9 @@ data DisksSetting s = DisksSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disks@ settings value.
-newDisksSetting
+disksSetting
     :: DisksSetting s
-newDisksSetting =
+disksSetting =
     DisksSetting'
 
 instance TF.IsValue  (DisksSetting s)
@@ -625,11 +625,11 @@ data HostSetting s = HostSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @host@ settings value.
-newHostSetting
+hostSetting
     :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._devices': @devices@
     -> TF.Attr s P.Text -- ^ 'P._hostSystemId': @host_system_id@
     -> HostSetting s
-newHostSetting _devices _hostSystemId =
+hostSetting _devices _hostSystemId =
     HostSetting'
         { _devices = _devices
         , _hostSystemId = _hostSystemId
@@ -677,11 +677,11 @@ data LinuxOptionsSetting s = LinuxOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @linux_options@ settings value.
-newLinuxOptionsSetting
+linuxOptionsSetting
     :: TF.Attr s P.Text -- ^ 'P._domain': @domain@
     -> TF.Attr s P.Text -- ^ 'P._hostName': @host_name@
     -> LinuxOptionsSetting s
-newLinuxOptionsSetting _domain _hostName =
+linuxOptionsSetting _domain _hostName =
     LinuxOptionsSetting'
         { _domain = _domain
         , _hostName = _hostName
@@ -781,10 +781,10 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network_interface@ settings value.
-newNetworkInterfaceSetting
+networkInterfaceSetting
     :: TF.Attr s P.Text -- ^ 'P._networkId': @network_id@
     -> NetworkInterfaceSetting s
-newNetworkInterfaceSetting _networkId =
+networkInterfaceSetting _networkId =
     NetworkInterfaceSetting'
         { _dnsDomain = TF.Nil
         , _dnsServerList = TF.Nil
@@ -897,9 +897,9 @@ data PortsSetting s = PortsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ports@ settings value.
-newPortsSetting
+portsSetting
     :: PortsSetting s
-newPortsSetting =
+portsSetting =
     PortsSetting'
 
 instance TF.IsValue  (PortsSetting s)
@@ -928,9 +928,9 @@ data VappSetting s = VappSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vapp@ settings value.
-newVappSetting
+vappSetting
     :: VappSetting s
-newVappSetting =
+vappSetting =
     VappSetting'
         { _properties = TF.Nil
         }
@@ -962,11 +962,11 @@ data VlanRangeSetting s = VlanRangeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vlan_range@ settings value.
-newVlanRangeSetting
+vlanRangeSetting
     :: TF.Attr s P.Int -- ^ 'P._maxVlan': @max_vlan@
     -> TF.Attr s P.Int -- ^ 'P._minVlan': @min_vlan@
     -> VlanRangeSetting s
-newVlanRangeSetting _maxVlan _minVlan =
+vlanRangeSetting _maxVlan _minVlan =
     VlanRangeSetting'
         { _maxVlan = _maxVlan
         , _minVlan = _minVlan
@@ -1067,10 +1067,10 @@ data WindowsOptionsSetting s = WindowsOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @windows_options@ settings value.
-newWindowsOptionsSetting
+windowsOptionsSetting
     :: TF.Attr s P.Text -- ^ 'P._computerName': @computer_name@
     -> WindowsOptionsSetting s
-newWindowsOptionsSetting _computerName =
+windowsOptionsSetting _computerName =
     WindowsOptionsSetting'
         { _adminPassword = TF.Nil
         , _autoLogon = TF.Nil
