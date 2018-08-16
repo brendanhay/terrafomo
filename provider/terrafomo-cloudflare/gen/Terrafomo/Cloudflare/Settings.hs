@@ -123,8 +123,8 @@ data ActionSetting s = ActionSetting'
 
 -- | Construct a new @action@ settings value.
 newActionSetting
-    :: TF.Attr s P.Text -- ^ @mode@ - 'P.mode'
-    -> TF.Attr s P.Int -- ^ @timeout@ - 'P.timeout'
+    :: TF.Attr s P.Text -- ^ 'P._mode': @mode@
+    -> TF.Attr s P.Int -- ^ 'P._timeout': @timeout@
     -> ActionSetting s
 newActionSetting _mode _timeout =
     ActionSetting'
@@ -956,8 +956,8 @@ data ForwardingUrlSetting s = ForwardingUrlSetting'
 
 -- | Construct a new @forwarding_url@ settings value.
 newForwardingUrlSetting
-    :: TF.Attr s P.Int -- ^ @status_code@ - 'P.statusCode'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Int -- ^ 'P._statusCode': @status_code@
+    -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> ForwardingUrlSetting s
 newForwardingUrlSetting _statusCode _url =
     ForwardingUrlSetting'
@@ -997,8 +997,8 @@ data HeaderSetting s = HeaderSetting'
 
 -- | Construct a new @header@ settings value.
 newHeaderSetting
-    :: TF.Attr s P.Text -- ^ @header@ - 'P.header'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @values@ - 'P.values'
+    :: TF.Attr s P.Text -- ^ 'P._header': @header@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
     -> HeaderSetting s
 newHeaderSetting _header _values =
     HeaderSetting'
@@ -1210,9 +1210,9 @@ data MinifySetting s = MinifySetting'
 
 -- | Construct a new @minify@ settings value.
 newMinifySetting
-    :: TF.Attr s P.Text -- ^ @css@ - 'P.css'
-    -> TF.Attr s P.Text -- ^ @html@ - 'P.html'
-    -> TF.Attr s P.Text -- ^ @js@ - 'P.js'
+    :: TF.Attr s P.Text -- ^ 'P._css': @css@
+    -> TF.Attr s P.Text -- ^ 'P._html': @html@
+    -> TF.Attr s P.Text -- ^ 'P._js': @js@
     -> MinifySetting s
 newMinifySetting _css _html _js =
     MinifySetting'
@@ -1262,9 +1262,9 @@ data MobileRedirectSetting s = MobileRedirectSetting'
 
 -- | Construct a new @mobile_redirect@ settings value.
 newMobileRedirectSetting
-    :: TF.Attr s P.Text -- ^ @status@ - 'P.status'
-    -> TF.Attr s P.Text -- ^ @mobile_subdomain@ - 'P.mobileSubdomain'
-    -> TF.Attr s P.Bool -- ^ @strip_uri@ - 'P.stripUri'
+    :: TF.Attr s P.Text -- ^ 'P._status': @status@
+    -> TF.Attr s P.Text -- ^ 'P._mobileSubdomain': @mobile_subdomain@
+    -> TF.Attr s P.Bool -- ^ 'P._stripUri': @strip_uri@
     -> MobileRedirectSetting s
 newMobileRedirectSetting _status _mobileSubdomain _stripUri =
     MobileRedirectSetting'
@@ -1314,8 +1314,8 @@ data OriginsSetting s = OriginsSetting'
 
 -- | Construct a new @origins@ settings value.
 newOriginsSetting
-    :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ 'P._address': @address@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OriginsSetting s
 newOriginsSetting _address _name =
     OriginsSetting'
@@ -1362,8 +1362,8 @@ data PopPoolsSetting s = PopPoolsSetting'
 
 -- | Construct a new @pop_pools@ settings value.
 newPopPoolsSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
-    -> TF.Attr s P.Text -- ^ @pop@ - 'P.pop'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._poolIds': @pool_ids@
+    -> TF.Attr s P.Text -- ^ 'P._pop': @pop@
     -> PopPoolsSetting s
 newPopPoolsSetting _poolIds _pop =
     PopPoolsSetting'
@@ -1403,8 +1403,8 @@ data RegionPoolsSetting s = RegionPoolsSetting'
 
 -- | Construct a new @region_pools@ settings value.
 newRegionPoolsSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @pool_ids@ - 'P.poolIds'
-    -> TF.Attr s P.Text -- ^ @region@ - 'P.region'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._poolIds': @pool_ids@
+    -> TF.Attr s P.Text -- ^ 'P._region': @region@
     -> RegionPoolsSetting s
 newRegionPoolsSetting _poolIds _region =
     RegionPoolsSetting'
@@ -1470,8 +1470,8 @@ data ResponseSetting s = ResponseSetting'
 
 -- | Construct a new @response@ settings value.
 newResponseSetting
-    :: TF.Attr s P.Text -- ^ @body@ - 'P.body'
-    -> TF.Attr s P.Text -- ^ @content_type@ - 'P.contentType'
+    :: TF.Attr s P.Text -- ^ 'P._body': @body@
+    -> TF.Attr s P.Text -- ^ 'P._contentType': @content_type@
     -> ResponseSetting s
 newResponseSetting _body _contentType =
     ResponseSetting'
