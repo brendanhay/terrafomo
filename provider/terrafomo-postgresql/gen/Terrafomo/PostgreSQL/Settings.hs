@@ -19,7 +19,7 @@ module Terrafomo.PostgreSQL.Settings
     (
     -- ** policy
       PolicySetting (..)
-    , newPolicySetting
+    , policySetting
 
     ) where
 
@@ -84,9 +84,9 @@ data PolicySetting s = PolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @policy@ settings value.
-newPolicySetting
+policySetting
     :: PolicySetting s
-newPolicySetting =
+policySetting =
     PolicySetting'
         { _create = TF.value P.False
         , _createWithGrant = TF.value P.False
