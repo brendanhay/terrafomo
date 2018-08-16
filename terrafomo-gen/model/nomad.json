@@ -194,7 +194,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "acl_token_policies",
+            "name": "policies",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
@@ -366,7 +366,7 @@
           "minItems": 0,
           "maxItems": 0,
           "resource": {
-            "name": "quota_specification_limits",
+            "name": "limits",
             "schemas": [
               {
                 "name": "region",
@@ -394,7 +394,7 @@
                 "minItems": 0,
                 "maxItems": 1,
                 "resource": {
-                  "name": "limits_region_limit",
+                  "name": "region_limit",
                   "schemas": [
                     {
                       "name": "cpu",
@@ -528,7 +528,7 @@
           "minItems": 0,
           "maxItems": 0,
           "schema": {
-            "name": "regions_regions",
+            "name": "regions",
             "type": "TypeString",
             "conflictsWith": [],
             "optional": false,
