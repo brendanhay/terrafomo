@@ -123,7 +123,7 @@ fabricResource
     -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.Resource (FabricResource s)
 fabricResource _name _provisionEndIp _provisionStartIp _subnet _vlanId =
-    TF.unsafeResource "triton_fabric" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_fabric" TF.validator $
         FabricResource'
             { _description = TF.Nil
             , _gateway = TF.Nil
@@ -225,7 +225,7 @@ firewallRuleResource
     :: TF.Attr s P.Text -- ^ @rule@ - 'P.rule'
     -> P.Resource (FirewallRuleResource s)
 firewallRuleResource _rule =
-    TF.unsafeResource "triton_firewall_rule" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_firewall_rule" TF.validator $
         FirewallRuleResource'
             { _description = TF.Nil
             , _enabled = TF.value P.False
@@ -289,7 +289,7 @@ instanceTemplateResource
     -> TF.Attr s P.Text -- ^ @template_name@ - 'P.templateName'
     -> P.Resource (InstanceTemplateResource s)
 instanceTemplateResource _image _package _templateName =
-    TF.unsafeResource "triton_instance_template" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_instance_template" TF.validator $
         InstanceTemplateResource'
             { _firewallEnabled = TF.value P.False
             , _image = _image
@@ -355,7 +355,7 @@ keyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> P.Resource (KeyResource s)
 keyResource _key =
-    TF.unsafeResource "triton_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_key" TF.validator $
         KeyResource'
             { _key = _key
             }
@@ -440,7 +440,7 @@ machineResource
     -> TF.Attr s P.Text -- ^ @package@ - 'P.package'
     -> P.Resource (MachineResource s)
 machineResource _image _package =
-    TF.unsafeResource "triton_machine" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_machine" TF.validator $
         MachineResource'
             { _administratorPw = TF.Nil
             , _affinity = TF.Nil
@@ -605,7 +605,7 @@ serviceGroupResource
     -> TF.Attr s P.Text -- ^ @template@ - 'P.template'
     -> P.Resource (ServiceGroupResource s)
 serviceGroupResource _groupName _template =
-    TF.unsafeResource "triton_service_group" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_service_group" TF.validator $
         ServiceGroupResource'
             { _groupName = _groupName
             , _template = _template
@@ -651,7 +651,7 @@ snapshotResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SnapshotResource s)
 snapshotResource _machineId _name =
-    TF.unsafeResource "triton_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_snapshot" TF.validator $
         SnapshotResource'
             { _machineId = _machineId
             , _name = _name
@@ -703,7 +703,7 @@ vlanResource
     -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.Resource (VlanResource s)
 vlanResource _name _vlanId =
-    TF.unsafeResource "triton_vlan" P.defaultProvider TF.validator $
+    TF.unsafeResource "triton_vlan" TF.validator $
         VlanResource'
             { _description = TF.Nil
             , _name = _name

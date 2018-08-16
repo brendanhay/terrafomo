@@ -82,7 +82,7 @@ data AccountData s = AccountData'
 accountData
     :: P.DataSource (AccountData s)
 accountData =
-    TF.unsafeDataSource "triton_account" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_account" TF.validator $
         AccountData'
 
 instance TF.IsObject (AccountData s) where
@@ -113,7 +113,7 @@ data DatacenterData s = DatacenterData'
 datacenterData
     :: P.DataSource (DatacenterData s)
 datacenterData =
-    TF.unsafeDataSource "triton_datacenter" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_datacenter" TF.validator $
         DatacenterData'
 
 instance TF.IsObject (DatacenterData s) where
@@ -149,7 +149,7 @@ fabricNetworkData
     -> TF.Attr s P.Int -- ^ @vlan_id@ - 'P.vlanId'
     -> P.DataSource (FabricNetworkData s)
 fabricNetworkData _name _vlanId =
-    TF.unsafeDataSource "triton_fabric_network" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_fabric_network" TF.validator $
         FabricNetworkData'
             { _name = _name
             , _vlanId = _vlanId
@@ -226,7 +226,7 @@ data FabricVlanData s = FabricVlanData'
 fabricVlanData
     :: P.DataSource (FabricVlanData s)
 fabricVlanData =
-    TF.unsafeDataSource "triton_fabric_vlan" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_fabric_vlan" TF.validator $
         FabricVlanData'
             { _description = TF.Nil
             , _name = TF.Nil
@@ -295,7 +295,7 @@ data ImageData s = ImageData'
 imageData
     :: P.DataSource (ImageData s)
 imageData =
-    TF.unsafeDataSource "triton_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_image" TF.validator $
         ImageData'
             { _mostRecent = TF.value P.False
             , _name = TF.Nil
@@ -379,7 +379,7 @@ networkData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (NetworkData s)
 networkData _name =
-    TF.unsafeDataSource "triton_network" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_network" TF.validator $
         NetworkData'
             { _name = _name
             }
@@ -420,7 +420,7 @@ packageData
     :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ - 'P.filter'
     -> P.DataSource (PackageData s)
 packageData _filter =
-    TF.unsafeDataSource "triton_package" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "triton_package" TF.validator $
         PackageData'
             { _filter = _filter
             }
