@@ -34,10 +34,9 @@ import GHC.Base (($))
 
 import Terrafomo.Logentries.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -76,14 +75,14 @@ data LogResource s = LogResource'
     , _type'           :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 logResource
     :: TF.Attr s P.Text -- ^ @logset_id@ - 'P.logsetId'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LogResource s)
 logResource _logsetId _name =
-    TF.newResource "logentries_log" TF.validator $
+    TF.unsafeResource "logentries_log" P.defaultProvider TF.validator $
         LogResource'
             { _filename = TF.Nil
             , _logsetId = _logsetId
@@ -150,13 +149,13 @@ data LogsetResource s = LogsetResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 logsetResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (LogsetResource s)
 logsetResource _name =
-    TF.newResource "logentries_logset" TF.validator $
+    TF.unsafeResource "logentries_logset" P.defaultProvider TF.validator $
         LogsetResource'
             { _location = TF.value "nonlocation"
             , _name = _name

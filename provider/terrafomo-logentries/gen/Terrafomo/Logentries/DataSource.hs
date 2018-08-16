@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Logentries.Settings
 
-import qualified Data.Hashable                 as P
-import qualified Data.HashMap.Strict           as P
-import qualified Data.HashMap.Strict           as Map
 import qualified Data.List.NonEmpty            as P
+import qualified Data.Map.Strict               as P
+import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
 import qualified Data.Monoid                   as P
 import qualified Data.Text                     as P
@@ -60,13 +59,13 @@ data LogsetData s = LogsetData'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 logsetData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (LogsetData s)
 logsetData _name =
-    TF.newDataSource "logentries_logset" TF.validator $
+    TF.unsafeDataSource "logentries_logset" P.defaultProvider TF.validator $
         LogsetData'
             { _location = TF.value "nonlocation"
             , _name = _name
