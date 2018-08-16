@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newAppendSetting",
+                "smart": "appendSetting",
                 "name": "AppendSetting'"
             },
             "arguments": [
@@ -70,7 +70,7 @@
         },
         {
             "con": {
-                "smart": "newContentSetting",
+                "smart": "contentSetting",
                 "name": "ContentSetting'"
             },
             "arguments": [
@@ -138,7 +138,7 @@
         },
         {
             "con": {
-                "smart": "newDropinSetting",
+                "smart": "dropinSetting",
                 "name": "DropinSetting'"
             },
             "arguments": [
@@ -206,7 +206,7 @@
         },
         {
             "con": {
-                "smart": "newMountSetting",
+                "smart": "mountSetting",
                 "name": "MountSetting'"
             },
             "arguments": [
@@ -359,7 +359,7 @@
         },
         {
             "con": {
-                "smart": "newPartitionSetting",
+                "smart": "partitionSetting",
                 "name": "PartitionSetting'"
             },
             "arguments": [
@@ -460,7 +460,7 @@
         },
         {
             "con": {
-                "smart": "newReplaceSetting",
+                "smart": "replaceSetting",
                 "name": "ReplaceSetting'"
             },
             "arguments": [
@@ -528,7 +528,7 @@
         },
         {
             "con": {
-                "smart": "newSourceSetting",
+                "smart": "sourceSetting",
                 "name": "SourceSetting'"
             },
             "arguments": [
