@@ -116,7 +116,7 @@ blockStorageResource
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (BlockStorageResource s)
 blockStorageResource _datacenter _name _size =
-    TF.unsafeResource "oneandone_block_storage" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_block_storage" TF.validator $
         BlockStorageResource'
             { _datacenter = _datacenter
             , _description = TF.Nil
@@ -183,7 +183,7 @@ firewallPolicyResource
     -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ - 'P.rules'
     -> P.Resource (FirewallPolicyResource s)
 firewallPolicyResource _name _rules =
-    TF.unsafeResource "oneandone_firewall_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_firewall_policy" TF.validator $
         FirewallPolicyResource'
             { _description = TF.Nil
             , _name = _name
@@ -262,7 +262,7 @@ imageResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ImageResource s)
 imageResource _name =
-    TF.unsafeResource "oneandone_image" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_image" TF.validator $
         ImageResource'
             { _datacenter = TF.Nil
             , _description = TF.Nil
@@ -400,7 +400,7 @@ loadbalancerResource
     -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ - 'P.rules'
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _method _name _rules =
-    TF.unsafeResource "oneandone_loadbalancer" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_loadbalancer" TF.validator $
         LoadbalancerResource'
             { _datacenter = TF.Nil
             , _description = TF.Nil
@@ -522,7 +522,7 @@ monitoringPolicyResource
     -> TF.Attr s [TF.Attr s (ThresholdsSetting s)] -- ^ @thresholds@ - 'P.thresholds'
     -> P.Resource (MonitoringPolicyResource s)
 monitoringPolicyResource _agent _name _thresholds =
-    TF.unsafeResource "oneandone_monitoring_policy" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_monitoring_policy" TF.validator $
         MonitoringPolicyResource'
             { _agent = _agent
             , _description = TF.Nil
@@ -611,7 +611,7 @@ privateNetworkResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (PrivateNetworkResource s)
 privateNetworkResource _name =
-    TF.unsafeResource "oneandone_private_network" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_private_network" TF.validator $
         PrivateNetworkResource'
             { _datacenter = TF.Nil
             , _description = TF.Nil
@@ -684,7 +684,7 @@ publicIpResource
     :: TF.Attr s P.Text -- ^ @ip_type@ - 'P.ipType'
     -> P.Resource (PublicIpResource s)
 publicIpResource _ipType =
-    TF.unsafeResource "oneandone_public_ip" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_public_ip" TF.validator $
         PublicIpResource'
             { _datacenter = TF.Nil
             , _ipType = _ipType
@@ -800,7 +800,7 @@ serverResource
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (ServerResource s)
 serverResource _image _name =
-    TF.unsafeResource "oneandone_server" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_server" TF.validator $
         ServerResource'
             { _coresPerProcessor = TF.Nil
             , _datacenter = TF.Nil
@@ -986,7 +986,7 @@ sharedStorageResource
     -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
     -> P.Resource (SharedStorageResource s)
 sharedStorageResource _datacenter _name _size =
-    TF.unsafeResource "oneandone_shared_storage" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_shared_storage" TF.validator $
         SharedStorageResource'
             { _datacenter = _datacenter
             , _description = TF.Nil
@@ -1049,7 +1049,7 @@ sshKeyResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name =
-    TF.unsafeResource "oneandone_ssh_key" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_ssh_key" TF.validator $
         SshKeyResource'
             { _description = TF.Nil
             , _name = _name
@@ -1103,7 +1103,7 @@ vpnResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (VpnResource s)
 vpnResource _name =
-    TF.unsafeResource "oneandone_vpn" P.defaultProvider TF.validator $
+    TF.unsafeResource "oneandone_vpn" TF.validator $
         VpnResource'
             { _datacenter = TF.Nil
             , _description = TF.Nil

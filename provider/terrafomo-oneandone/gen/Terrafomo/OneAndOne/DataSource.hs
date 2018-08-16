@@ -77,7 +77,7 @@ data InstanceSizeData s = InstanceSizeData'
 instanceSizeData
     :: P.DataSource (InstanceSizeData s)
 instanceSizeData =
-    TF.unsafeDataSource "oneandone_instance_size" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "oneandone_instance_size" TF.validator $
         InstanceSizeData'
             { _name = TF.Nil
             , _ram = TF.Nil
