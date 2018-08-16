@@ -17,8 +17,9 @@
                     "encoder": "TF.assign \"request_headers\" <$> TF.attribute",
                     "name": "_requestHeaders",
                     "method": "requestHeaders",
+                    "threaded": true,
                     "conflicts": [],
-                    "type": "TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))",
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasRequestHeaders",
                     "validate": false,
                     "optional": true,
@@ -33,6 +34,7 @@
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
                     "name": "_url",
                     "method": "url",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
@@ -42,6 +44,7 @@
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/http/d/.html",
+            "key": "http",
             "name": "Data",
             "threaded": true,
             "attributes": [
@@ -54,6 +57,7 @@
                     "encoder": "TF.assign \"id\" <$> TF.attribute",
                     "name": "_computedId",
                     "method": "computedId",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedId",
@@ -70,6 +74,7 @@
                     "encoder": "TF.assign \"body\" <$> TF.attribute",
                     "name": "_computedBody",
                     "method": "computedBody",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBody",
@@ -88,6 +93,7 @@
                     "encoder": "TF.assign \"url\" <$> TF.attribute",
                     "name": "_url",
                     "method": "url",
+                    "threaded": true,
                     "conflicts": [],
                     "type": "TF.Attr s P.Text",
                     "class": "HasUrl",
@@ -108,6 +114,7 @@
             "name": "Provider'"
         },
         "arguments": [],
+        "key": "provider",
         "name": "Provider",
         "threaded": false,
         "attributes": [],
@@ -117,14 +124,15 @@
         "original": "provider"
     },
     "dependencies": [
+        "aeson",
         "base",
-        "unordered-containers",
-        "text",
+        "containers",
+        "microlens",
         "terrafomo",
-        "hashable",
-        "microlens"
+        "text"
     ],
     "name": "HTTP",
     "package": "terrafomo-builtins",
+    "primitives": [],
     "original": "http"
 }
