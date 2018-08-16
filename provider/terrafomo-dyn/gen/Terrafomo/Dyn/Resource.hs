@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Dyn.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -66,7 +65,7 @@ data RecordResource s = RecordResource'
     , _zone  :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 recordResource
     :: TF.Attr s P.Text -- ^ @type@ - 'P.type''
@@ -74,7 +73,7 @@ recordResource
     -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
     -> P.Resource (RecordResource s)
 recordResource _type' _value _zone =
-    TF.newResource "dyn_record" TF.validator $
+    TF.unsafeResource "dyn_record" P.defaultProvider TF.validator $
         RecordResource'
             { _name = TF.Nil
             , _type' = _type'

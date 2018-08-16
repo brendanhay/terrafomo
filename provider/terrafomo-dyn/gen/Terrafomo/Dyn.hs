@@ -13,10 +13,10 @@
 --
 module Terrafomo.Dyn
     ( module Terrafomo.Dyn.Lens
-    , module Terrafomo.Dyn.Settings
-    , module Terrafomo.Dyn.Resource
-    , module Terrafomo.Dyn.Types
     , module Terrafomo.Dyn.Provider
+    , module Terrafomo.Dyn.Resource
+    , module Terrafomo.Dyn.Settings
+    , module Terrafomo.Dyn.Types
     -- * Provider Aliases
     ) where
 
