@@ -367,11 +367,11 @@ data RestrictionSetting s = RestrictionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newRestrictionSetting
-    :: TF.Attr s P.Int -- ^ @duration_seconds@ - 'P.durationSeconds'
-    -> TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
+    :: TF.Attr s P.Text -- ^ @start_time_of_day@ - 'P.startTimeOfDay'
+    -> TF.Attr s P.Int -- ^ @duration_seconds@ - 'P.durationSeconds'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
     -> RestrictionSetting s
-newRestrictionSetting _durationSeconds _startTimeOfDay _type' =
+newRestrictionSetting _startTimeOfDay _durationSeconds _type' =
     RestrictionSetting'
         { _durationSeconds = _durationSeconds
         , _startDayOfWeek = TF.Nil

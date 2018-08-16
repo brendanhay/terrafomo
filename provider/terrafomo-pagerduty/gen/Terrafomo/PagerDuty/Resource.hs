@@ -283,11 +283,11 @@ data MaintenanceWindowResource s = MaintenanceWindowResource'
     } deriving (P.Show, P.Eq, P.Ord)
 
 maintenanceWindowResource
-    :: TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @services@ - 'P.services'
+    -> TF.Attr s P.Text -- ^ @end_time@ - 'P.endTime'
     -> TF.Attr s P.Text -- ^ @start_time@ - 'P.startTime'
     -> P.Resource (MaintenanceWindowResource s)
-maintenanceWindowResource _endTime _services _startTime =
+maintenanceWindowResource _services _endTime _startTime =
     TF.unsafeResource "pagerduty_maintenance_window" TF.validator $
         MaintenanceWindowResource'
             { _description = TF.value "Managed by Terraform"
@@ -785,11 +785,11 @@ data UserContactMethodResource s = UserContactMethodResource'
 
 userContactMethodResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
+    -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> TF.Attr s P.Text -- ^ @label@ - 'P.label'
     -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @user_id@ - 'P.userId'
     -> P.Resource (UserContactMethodResource s)
-userContactMethodResource _address _label _type' _userId =
+userContactMethodResource _address _userId _label _type' =
     TF.unsafeResource "pagerduty_user_contact_method" TF.validator $
         UserContactMethodResource'
             { _address = _address
