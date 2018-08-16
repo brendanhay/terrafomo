@@ -100,10 +100,13 @@ import qualified Terrafomo.Validator             as TF
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterResource s = DatacenterResource'
-    { _location :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional)
+    --
+    , _location    :: TF.Attr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -116,18 +119,25 @@ datacenterResource
 datacenterResource _location _name =
     TF.unsafeResource "profitbricks_datacenter" TF.validator $
         DatacenterResource'
-            { _location = _location
+            { _description = TF.Nil
+            , _location = _location
             , _name = _name
             }
 
 instance TF.IsObject (DatacenterResource s) where
     toObject DatacenterResource'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
+        [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         ]
 
 instance TF.IsValid (DatacenterResource s) where
     validator = P.mempty
+
+instance P.HasDescription (DatacenterResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: DatacenterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: DatacenterResource s)
 
 instance P.HasLocation (DatacenterResource s) (TF.Attr s P.Text) where
     location =

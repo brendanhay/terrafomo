@@ -24,6 +24,7 @@ module Terrafomo.ProfitBricks.Lens
     , HasCreateDatacenter (..)
     , HasCreateSnapshot (..)
     , HasDatacenterId (..)
+    , HasDescription (..)
     , HasDhcp (..)
     , HasDiskType (..)
     , HasEditPrivilege (..)
@@ -152,6 +153,12 @@ class HasDatacenterId a b | a -> b where
 
 instance HasDatacenterId a b => HasDatacenterId (TF.Schema l p a) b where
     datacenterId = TF.configuration . datacenterId
+
+class HasDescription a b | a -> b where
+    description :: P.Lens' a b
+
+instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+    description = TF.configuration . description
 
 class HasDhcp a b | a -> b where
     dhcp :: P.Lens' a b

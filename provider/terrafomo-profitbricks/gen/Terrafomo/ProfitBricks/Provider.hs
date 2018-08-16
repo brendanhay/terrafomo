@@ -89,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "profitbricks"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "endpoint" <$> _endpoint
             , P.Just $ TF.assign "password" _password
