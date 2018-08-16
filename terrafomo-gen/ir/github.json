@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "newRequiredPullRequestReviewsSetting",
+                "smart": "requiredPullRequestReviewsSetting",
                 "name": "RequiredPullRequestReviewsSetting'"
             },
             "arguments": [
@@ -86,7 +86,7 @@
         },
         {
             "con": {
-                "smart": "newRequiredStatusChecksSetting",
+                "smart": "requiredStatusChecksSetting",
                 "name": "RequiredStatusChecksSetting'"
             },
             "arguments": [
@@ -136,7 +136,7 @@
         },
         {
             "con": {
-                "smart": "newRestrictionsSetting",
+                "smart": "restrictionsSetting",
                 "name": "RestrictionsSetting'"
             },
             "arguments": [
