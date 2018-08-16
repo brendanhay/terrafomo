@@ -78,7 +78,7 @@ data DatacenterData s = DatacenterData'
 
 -- | Define a new @profitbricks_datacenter@ datasource value.
 datacenterData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (DatacenterData s)
 datacenterData _name =
     TF.unsafeDataSource "profitbricks_datacenter" TF.validator $
@@ -282,7 +282,7 @@ data SnapshotData s = SnapshotData'
 
 -- | Define a new @profitbricks_snapshot@ datasource value.
 snapshotData
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.DataSource (SnapshotData s)
 snapshotData _name =
     TF.unsafeDataSource "profitbricks_snapshot" TF.validator $

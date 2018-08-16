@@ -95,7 +95,7 @@ data FirewallSetting s = FirewallSetting'
 
 -- | Construct a new @firewall@ settings value.
 newFirewallSetting
-    :: TF.Attr s P.Text -- ^ @protocol@ - 'P.protocol'
+    :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
     -> FirewallSetting s
 newFirewallSetting _protocol =
     FirewallSetting'
@@ -213,7 +213,7 @@ data NicSetting s = NicSetting'
 
 -- | Construct a new @nic@ settings value.
 newNicSetting
-    :: TF.Attr s P.Int -- ^ @lan@ - 'P.lan'
+    :: TF.Attr s P.Int -- ^ 'P._lan': @lan@
     -> NicSetting s
 newNicSetting _lan =
     NicSetting'
@@ -347,9 +347,9 @@ data VolumeSetting s = VolumeSetting'
 
 -- | Construct a new @volume@ settings value.
 newVolumeSetting
-    :: TF.Attr s P.Text -- ^ @image_name@ - 'P.imageName'
-    -> TF.Attr s P.Int -- ^ @size@ - 'P.size'
-    -> TF.Attr s P.Text -- ^ @disk_type@ - 'P.diskType'
+    :: TF.Attr s P.Text -- ^ 'P._imageName': @image_name@
+    -> TF.Attr s P.Int -- ^ 'P._size': @size@
+    -> TF.Attr s P.Text -- ^ 'P._diskType': @disk_type@
     -> VolumeSetting s
 newVolumeSetting _imageName _size _diskType =
     VolumeSetting'
