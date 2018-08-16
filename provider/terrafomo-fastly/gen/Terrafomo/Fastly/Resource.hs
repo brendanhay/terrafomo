@@ -273,6 +273,9 @@ instance P.HasVcl (ServiceV1Resource s) (TF.Attr s [TF.Attr s (VclSetting s)]) w
         P.lens (_vcl :: ServiceV1Resource s -> TF.Attr s [TF.Attr s (VclSetting s)])
                (\s a -> s { _vcl = a } :: ServiceV1Resource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedActiveVersion (TF.Ref s' (ServiceV1Resource s)) (TF.Attr s P.Int) where
     computedActiveVersion x = TF.compute (TF.refKey x) "active_version"
 
