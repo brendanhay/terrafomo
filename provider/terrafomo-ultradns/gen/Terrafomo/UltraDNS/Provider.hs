@@ -17,10 +17,11 @@
 --
 module Terrafomo.UltraDNS.Provider
     (
+    -- * UltraDNS Provider Datatype
       Provider (..)
     , newProvider
 
-    -- ** UltraDNS Specific Aliases
+    -- * UltraDNS Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -74,8 +75,8 @@ data Provider = Provider'
     } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
-    :: P.Text -- ^ @password@ - 'P.password'
-    -> P.Text -- ^ @username@ - 'P.username'
+    :: P.Text -- ^ @password@ ('P._password', 'P.password')
+    -> P.Text -- ^ @username@ ('P._username', 'P.username')
     -> Provider
 newProvider _password _username =
     Provider'
@@ -88,7 +89,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "ultradns"
 
 instance TF.IsObject Provider where
-    toObject Provider'{..} =
+    toObject x@Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "baseurl" _baseurl
             , P.Just $ TF.assign "password" _password

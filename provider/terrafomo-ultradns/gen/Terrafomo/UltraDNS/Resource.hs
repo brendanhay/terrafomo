@@ -100,11 +100,11 @@ data DirpoolResource s = DirpoolResource'
 
 -- | Define a new @ultradns_dirpool@ resource value.
 dirpoolResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ - 'P.rdata'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ ('P._rdata', 'P.rdata')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (DirpoolResource s)
 dirpoolResource _description _name _rdata _type' _zone =
     TF.unsafeResource "ultradns_dirpool" TF.validator $
@@ -210,10 +210,10 @@ data ProbeHttpResource s = ProbeHttpResource'
 
 -- | Define a new @ultradns_probe_http@ resource value.
 probeHttpResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ - 'P.agents'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @threshold@ - 'P.threshold'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ ('P._agents', 'P.agents')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @threshold@ ('P._threshold', 'P.threshold')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (ProbeHttpResource s)
 probeHttpResource _agents _name _threshold _zone =
     TF.unsafeResource "ultradns_probe_http" TF.validator $
@@ -309,10 +309,10 @@ data ProbePingResource s = ProbePingResource'
 
 -- | Define a new @ultradns_probe_ping@ resource value.
 probePingResource
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ - 'P.agents'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @threshold@ - 'P.threshold'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ @agents@ ('P._agents', 'P.agents')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Int -- ^ @threshold@ ('P._threshold', 'P.threshold')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (ProbePingResource s)
 probePingResource _agents _name _threshold _zone =
     TF.unsafeResource "ultradns_probe_ping" TF.validator $
@@ -405,9 +405,9 @@ data RdpoolResource s = RdpoolResource'
 
 -- | Define a new @ultradns_rdpool@ resource value.
 rdpoolResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ - 'P.rdata'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ ('P._rdata', 'P.rdata')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (RdpoolResource s)
 rdpoolResource _name _rdata _zone =
     TF.unsafeResource "ultradns_rdpool" TF.validator $
@@ -493,10 +493,10 @@ data RecordResource s = RecordResource'
 
 -- | Define a new @ultradns_record@ resource value.
 recordResource
-    :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ - 'P.rdata'
-    -> TF.Attr s P.Text -- ^ @type@ - 'P.type''
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ @rdata@ ('P._rdata', 'P.rdata')
+    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (RecordResource s)
 recordResource _name _rdata _type' _zone =
     TF.unsafeResource "ultradns_record" TF.validator $
@@ -590,10 +590,10 @@ data TcpoolResource s = TcpoolResource'
 
 -- | Define a new @ultradns_tcpool@ resource value.
 tcpoolResource
-    :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ - 'P.rdata'
-    -> TF.Attr s P.Text -- ^ @zone@ - 'P.zone'
+    :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ ('P._rdata', 'P.rdata')
+    -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (TcpoolResource s)
 tcpoolResource _description _name _rdata _zone =
     TF.unsafeResource "ultradns_tcpool" TF.validator $

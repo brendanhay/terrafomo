@@ -294,10 +294,10 @@ data LimitSetting s = LimitSetting'
 
 -- | Construct a new @limit@ settings value.
 newLimitSetting
-    :: TF.Attr s P.Int -- ^ @critical@ - 'P.critical'
-    -> TF.Attr s P.Int -- ^ @fail@ - 'P.fail'
-    -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
-    -> TF.Attr s P.Int -- ^ @warning@ - 'P.warning'
+    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
+    -> TF.Attr s P.Int -- ^ 'P._fail': @fail@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
     -> LimitSetting s
 newLimitSetting _critical _fail _name _warning =
     LimitSetting'
@@ -473,7 +473,7 @@ data RdataSetting s = RdataSetting'
 
 -- | Construct a new @rdata@ settings value.
 newRdataSetting
-    :: TF.Attr s P.Text -- ^ @host@ - 'P.host'
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> RdataSetting s
 newRdataSetting _host =
     RdataSetting'
@@ -627,8 +627,8 @@ data TransactionSetting s = TransactionSetting'
 
 -- | Construct a new @transaction@ settings value.
 newTransactionSetting
-    :: TF.Attr s P.Text -- ^ @method@ - 'P.method'
-    -> TF.Attr s P.Text -- ^ @url@ - 'P.url'
+    :: TF.Attr s P.Text -- ^ 'P._method': @method@
+    -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> TransactionSetting s
 newTransactionSetting _method _url =
     TransactionSetting'
