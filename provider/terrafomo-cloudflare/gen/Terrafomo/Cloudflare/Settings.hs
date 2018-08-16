@@ -19,71 +19,71 @@ module Terrafomo.Cloudflare.Settings
     (
     -- ** action
       ActionSetting (..)
-    , newActionSetting
+    , actionSetting
 
     -- ** actions
     , ActionsSetting (..)
-    , newActionsSetting
+    , actionsSetting
 
     -- ** correlate
     , CorrelateSetting (..)
-    , newCorrelateSetting
+    , correlateSetting
 
     -- ** data
     , DataSetting (..)
-    , newDataSetting
+    , dataSetting
 
     -- ** forwarding_url
     , ForwardingUrlSetting (..)
-    , newForwardingUrlSetting
+    , forwardingUrlSetting
 
     -- ** header
     , HeaderSetting (..)
-    , newHeaderSetting
+    , headerSetting
 
     -- ** initial_settings
     , InitialSettingsSetting (..)
-    , newInitialSettingsSetting
+    , initialSettingsSetting
 
     -- ** match
     , MatchSetting (..)
-    , newMatchSetting
+    , matchSetting
 
     -- ** minify
     , MinifySetting (..)
-    , newMinifySetting
+    , minifySetting
 
     -- ** mobile_redirect
     , MobileRedirectSetting (..)
-    , newMobileRedirectSetting
+    , mobileRedirectSetting
 
     -- ** origins
     , OriginsSetting (..)
-    , newOriginsSetting
+    , originsSetting
 
     -- ** pop_pools
     , PopPoolsSetting (..)
-    , newPopPoolsSetting
+    , popPoolsSetting
 
     -- ** region_pools
     , RegionPoolsSetting (..)
-    , newRegionPoolsSetting
+    , regionPoolsSetting
 
     -- ** request
     , RequestSetting (..)
-    , newRequestSetting
+    , requestSetting
 
     -- ** response
     , ResponseSetting (..)
-    , newResponseSetting
+    , responseSetting
 
     -- ** security_header
     , SecurityHeaderSetting (..)
-    , newSecurityHeaderSetting
+    , securityHeaderSetting
 
     -- ** settings
     , SettingsSetting (..)
-    , newSettingsSetting
+    , settingsSetting
 
     ) where
 
@@ -122,11 +122,11 @@ data ActionSetting s = ActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @action@ settings value.
-newActionSetting
+actionSetting
     :: TF.Attr s P.Text -- ^ 'P._mode': @mode@
     -> TF.Attr s P.Int -- ^ 'P._timeout': @timeout@
     -> ActionSetting s
-newActionSetting _mode _timeout =
+actionSetting _mode _timeout =
     ActionSetting'
         { _mode = _mode
         , _response = TF.Nil
@@ -270,9 +270,9 @@ data ActionsSetting s = ActionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @actions@ settings value.
-newActionsSetting
+actionsSetting
     :: ActionsSetting s
-newActionsSetting =
+actionsSetting =
     ActionsSetting'
         { _alwaysOnline = TF.Nil
         , _alwaysUseHttps = TF.value P.False
@@ -534,9 +534,9 @@ data CorrelateSetting s = CorrelateSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @correlate@ settings value.
-newCorrelateSetting
+correlateSetting
     :: CorrelateSetting s
-newCorrelateSetting =
+correlateSetting =
     CorrelateSetting'
         { _by = TF.Nil
         }
@@ -671,9 +671,9 @@ data DataSetting s = DataSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @data@ settings value.
-newDataSetting
+dataSetting
     :: DataSetting s
-newDataSetting =
+dataSetting =
     DataSetting'
         { _algorithm = TF.Nil
         , _altitude = TF.Nil
@@ -955,11 +955,11 @@ data ForwardingUrlSetting s = ForwardingUrlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @forwarding_url@ settings value.
-newForwardingUrlSetting
+forwardingUrlSetting
     :: TF.Attr s P.Int -- ^ 'P._statusCode': @status_code@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
     -> ForwardingUrlSetting s
-newForwardingUrlSetting _statusCode _url =
+forwardingUrlSetting _statusCode _url =
     ForwardingUrlSetting'
         { _statusCode = _statusCode
         , _url = _url
@@ -996,11 +996,11 @@ data HeaderSetting s = HeaderSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @header@ settings value.
-newHeaderSetting
+headerSetting
     :: TF.Attr s P.Text -- ^ 'P._header': @header@
     -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
     -> HeaderSetting s
-newHeaderSetting _header _values =
+headerSetting _header _values =
     HeaderSetting'
         { _header = _header
         , _values = _values
@@ -1031,9 +1031,9 @@ data InitialSettingsSetting s = InitialSettingsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @initial_settings@ settings value.
-newInitialSettingsSetting
+initialSettingsSetting
     :: InitialSettingsSetting s
-newInitialSettingsSetting =
+initialSettingsSetting =
     InitialSettingsSetting'
 
 instance TF.IsValue  (InitialSettingsSetting s)
@@ -1177,9 +1177,9 @@ data MatchSetting s = MatchSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @match@ settings value.
-newMatchSetting
+matchSetting
     :: MatchSetting s
-newMatchSetting =
+matchSetting =
     MatchSetting'
 
 instance TF.IsValue  (MatchSetting s)
@@ -1209,12 +1209,12 @@ data MinifySetting s = MinifySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @minify@ settings value.
-newMinifySetting
+minifySetting
     :: TF.Attr s P.Text -- ^ 'P._css': @css@
     -> TF.Attr s P.Text -- ^ 'P._html': @html@
     -> TF.Attr s P.Text -- ^ 'P._js': @js@
     -> MinifySetting s
-newMinifySetting _css _html _js =
+minifySetting _css _html _js =
     MinifySetting'
         { _css = _css
         , _html = _html
@@ -1261,12 +1261,12 @@ data MobileRedirectSetting s = MobileRedirectSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mobile_redirect@ settings value.
-newMobileRedirectSetting
+mobileRedirectSetting
     :: TF.Attr s P.Text -- ^ 'P._status': @status@
     -> TF.Attr s P.Text -- ^ 'P._mobileSubdomain': @mobile_subdomain@
     -> TF.Attr s P.Bool -- ^ 'P._stripUri': @strip_uri@
     -> MobileRedirectSetting s
-newMobileRedirectSetting _status _mobileSubdomain _stripUri =
+mobileRedirectSetting _status _mobileSubdomain _stripUri =
     MobileRedirectSetting'
         { _mobileSubdomain = _mobileSubdomain
         , _status = _status
@@ -1313,11 +1313,11 @@ data OriginsSetting s = OriginsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @origins@ settings value.
-newOriginsSetting
+originsSetting
     :: TF.Attr s P.Text -- ^ 'P._address': @address@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> OriginsSetting s
-newOriginsSetting _address _name =
+originsSetting _address _name =
     OriginsSetting'
         { _address = _address
         , _enabled = TF.value P.True
@@ -1361,11 +1361,11 @@ data PopPoolsSetting s = PopPoolsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @pop_pools@ settings value.
-newPopPoolsSetting
+popPoolsSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._poolIds': @pool_ids@
     -> TF.Attr s P.Text -- ^ 'P._pop': @pop@
     -> PopPoolsSetting s
-newPopPoolsSetting _poolIds _pop =
+popPoolsSetting _poolIds _pop =
     PopPoolsSetting'
         { _poolIds = _poolIds
         , _pop = _pop
@@ -1402,11 +1402,11 @@ data RegionPoolsSetting s = RegionPoolsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @region_pools@ settings value.
-newRegionPoolsSetting
+regionPoolsSetting
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._poolIds': @pool_ids@
     -> TF.Attr s P.Text -- ^ 'P._region': @region@
     -> RegionPoolsSetting s
-newRegionPoolsSetting _poolIds _region =
+regionPoolsSetting _poolIds _region =
     RegionPoolsSetting'
         { _poolIds = _poolIds
         , _region = _region
@@ -1437,9 +1437,9 @@ data RequestSetting s = RequestSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @request@ settings value.
-newRequestSetting
+requestSetting
     :: RequestSetting s
-newRequestSetting =
+requestSetting =
     RequestSetting'
 
 instance TF.IsValue  (RequestSetting s)
@@ -1469,11 +1469,11 @@ data ResponseSetting s = ResponseSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @response@ settings value.
-newResponseSetting
+responseSetting
     :: TF.Attr s P.Text -- ^ 'P._body': @body@
     -> TF.Attr s P.Text -- ^ 'P._contentType': @content_type@
     -> ResponseSetting s
-newResponseSetting _body _contentType =
+responseSetting _body _contentType =
     ResponseSetting'
         { _body = _body
         , _contentType = _contentType
@@ -1510,9 +1510,9 @@ data SecurityHeaderSetting s = SecurityHeaderSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @security_header@ settings value.
-newSecurityHeaderSetting
+securityHeaderSetting
     :: SecurityHeaderSetting s
-newSecurityHeaderSetting =
+securityHeaderSetting =
     SecurityHeaderSetting'
 
 instance TF.IsValue  (SecurityHeaderSetting s)
@@ -1542,9 +1542,9 @@ data SettingsSetting s = SettingsSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @settings@ settings value.
-newSettingsSetting
+settingsSetting
     :: SettingsSetting s
-newSettingsSetting =
+settingsSetting =
     SettingsSetting'
 
 instance TF.IsValue  (SettingsSetting s)
