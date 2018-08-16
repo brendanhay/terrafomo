@@ -466,6 +466,9 @@ data BigqueryDatasetResource s = BigqueryDatasetResource'
     , _location                 :: TF.Attr s P.Text
     -- ^ @location@ - (Optional, Forces New)
     --
+    , _project                  :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_bigquery_dataset@ resource value.
@@ -481,6 +484,7 @@ bigqueryDatasetResource _datasetId =
             , _friendlyName = TF.Nil
             , _labels = TF.Nil
             , _location = TF.value "US"
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (BigqueryDatasetResource s) where
@@ -491,6 +495,7 @@ instance TF.IsObject (BigqueryDatasetResource s) where
         , TF.assign "friendly_name" <$> TF.attribute _friendlyName
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "location" <$> TF.attribute _location
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (BigqueryDatasetResource s) where
@@ -526,6 +531,11 @@ instance P.HasLocation (BigqueryDatasetResource s) (TF.Attr s P.Text) where
         P.lens (_location :: BigqueryDatasetResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: BigqueryDatasetResource s)
 
+instance P.HasProject (BigqueryDatasetResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: BigqueryDatasetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: BigqueryDatasetResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BigqueryDatasetResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -555,11 +565,20 @@ data BigqueryTableResource s = BigqueryTableResource'
     , _description      :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
+    , _expirationTime   :: TF.Attr s P.Int
+    -- ^ @expiration_time@ - (Optional)
+    --
     , _friendlyName     :: TF.Attr s P.Text
     -- ^ @friendly_name@ - (Optional)
     --
     , _labels           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
+    --
+    , _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _schema           :: TF.Attr s P.Text
+    -- ^ @schema@ - (Optional)
     --
     , _tableId          :: TF.Attr s P.Text
     -- ^ @table_id@ - (Required, Forces New)
@@ -582,8 +601,11 @@ bigqueryTableResource _datasetId _tableId =
         BigqueryTableResource'
             { _datasetId = _datasetId
             , _description = TF.Nil
+            , _expirationTime = TF.Nil
             , _friendlyName = TF.Nil
             , _labels = TF.Nil
+            , _project = TF.Nil
+            , _schema = TF.Nil
             , _tableId = _tableId
             , _timePartitioning = TF.Nil
             , _view = TF.Nil
@@ -593,8 +615,11 @@ instance TF.IsObject (BigqueryTableResource s) where
     toObject BigqueryTableResource'{..} = P.catMaybes
         [ TF.assign "dataset_id" <$> TF.attribute _datasetId
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "expiration_time" <$> TF.attribute _expirationTime
         , TF.assign "friendly_name" <$> TF.attribute _friendlyName
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "schema" <$> TF.attribute _schema
         , TF.assign "table_id" <$> TF.attribute _tableId
         , TF.assign "time_partitioning" <$> TF.attribute _timePartitioning
         , TF.assign "view" <$> TF.attribute _view
@@ -621,6 +646,11 @@ instance P.HasDescription (BigqueryTableResource s) (TF.Attr s P.Text) where
         P.lens (_description :: BigqueryTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: BigqueryTableResource s)
 
+instance P.HasExpirationTime (BigqueryTableResource s) (TF.Attr s P.Int) where
+    expirationTime =
+        P.lens (_expirationTime :: BigqueryTableResource s -> TF.Attr s P.Int)
+               (\s a -> s { _expirationTime = a } :: BigqueryTableResource s)
+
 instance P.HasFriendlyName (BigqueryTableResource s) (TF.Attr s P.Text) where
     friendlyName =
         P.lens (_friendlyName :: BigqueryTableResource s -> TF.Attr s P.Text)
@@ -630,6 +660,16 @@ instance P.HasLabels (BigqueryTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr
     labels =
         P.lens (_labels :: BigqueryTableResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: BigqueryTableResource s)
+
+instance P.HasProject (BigqueryTableResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: BigqueryTableResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: BigqueryTableResource s)
+
+instance P.HasSchema (BigqueryTableResource s) (TF.Attr s P.Text) where
+    schema =
+        P.lens (_schema :: BigqueryTableResource s -> TF.Attr s P.Text)
+               (\s a -> s { _schema = a } :: BigqueryTableResource s)
 
 instance P.HasTableId (BigqueryTableResource s) (TF.Attr s P.Text) where
     tableId =
@@ -693,6 +733,9 @@ data BigtableInstanceResource s = BigtableInstanceResource'
     { _clusterId    :: TF.Attr s P.Text
     -- ^ @cluster_id@ - (Required, Forces New)
     --
+    , _displayName  :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional, Forces New)
+    --
     , _instanceType :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Optional, Forces New)
     --
@@ -702,8 +745,14 @@ data BigtableInstanceResource s = BigtableInstanceResource'
     , _numNodes     :: TF.Attr s P.Int
     -- ^ @num_nodes@ - (Optional, Forces New)
     --
+    , _project      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _storageType  :: TF.Attr s P.Text
     -- ^ @storage_type@ - (Optional, Forces New)
+    --
+    , _zone         :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -716,19 +765,25 @@ bigtableInstanceResource _clusterId _name =
     TF.unsafeResource "google_bigtable_instance" TF.validator $
         BigtableInstanceResource'
             { _clusterId = _clusterId
+            , _displayName = TF.Nil
             , _instanceType = TF.value "PRODUCTION"
             , _name = _name
             , _numNodes = TF.Nil
+            , _project = TF.Nil
             , _storageType = TF.value "SSD"
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (BigtableInstanceResource s) where
     toObject BigtableInstanceResource'{..} = P.catMaybes
         [ TF.assign "cluster_id" <$> TF.attribute _clusterId
+        , TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "instance_type" <$> TF.attribute _instanceType
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "num_nodes" <$> TF.attribute _numNodes
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "storage_type" <$> TF.attribute _storageType
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (BigtableInstanceResource s) where
@@ -738,6 +793,11 @@ instance P.HasClusterId (BigtableInstanceResource s) (TF.Attr s P.Text) where
     clusterId =
         P.lens (_clusterId :: BigtableInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _clusterId = a } :: BigtableInstanceResource s)
+
+instance P.HasDisplayName (BigtableInstanceResource s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: BigtableInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: BigtableInstanceResource s)
 
 instance P.HasInstanceType (BigtableInstanceResource s) (TF.Attr s P.Text) where
     instanceType =
@@ -754,10 +814,20 @@ instance P.HasNumNodes (BigtableInstanceResource s) (TF.Attr s P.Int) where
         P.lens (_numNodes :: BigtableInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _numNodes = a } :: BigtableInstanceResource s)
 
+instance P.HasProject (BigtableInstanceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: BigtableInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: BigtableInstanceResource s)
+
 instance P.HasStorageType (BigtableInstanceResource s) (TF.Attr s P.Text) where
     storageType =
         P.lens (_storageType :: BigtableInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageType = a } :: BigtableInstanceResource s)
+
+instance P.HasZone (BigtableInstanceResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: BigtableInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: BigtableInstanceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BigtableInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -782,6 +852,9 @@ data BigtableTableResource s = BigtableTableResource'
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _splitKeys    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @split_keys@ - (Optional, Forces New)
     --
@@ -797,6 +870,7 @@ bigtableTableResource _instanceName _name =
         BigtableTableResource'
             { _instanceName = _instanceName
             , _name = _name
+            , _project = TF.Nil
             , _splitKeys = TF.Nil
             }
 
@@ -804,6 +878,7 @@ instance TF.IsObject (BigtableTableResource s) where
     toObject BigtableTableResource'{..} = P.catMaybes
         [ TF.assign "instance_name" <$> TF.attribute _instanceName
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "split_keys" <$> TF.attribute _splitKeys
         ]
 
@@ -819,6 +894,11 @@ instance P.HasName (BigtableTableResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: BigtableTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: BigtableTableResource s)
+
+instance P.HasProject (BigtableTableResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: BigtableTableResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: BigtableTableResource s)
 
 instance P.HasSplitKeys (BigtableTableResource s) (TF.Attr s [TF.Attr s P.Text]) where
     splitKeys =
@@ -852,6 +932,9 @@ data CloudbuildTriggerResource s = CloudbuildTriggerResource'
     -- Conflicts with:
     --
     -- * 'build'
+    , _project         :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _substitutions   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @substitutions@ - (Optional, Forces New)
     --
@@ -869,6 +952,7 @@ cloudbuildTriggerResource =
             { _build = TF.Nil
             , _description = TF.Nil
             , _filename = TF.Nil
+            , _project = TF.Nil
             , _substitutions = TF.Nil
             , _triggerTemplate = TF.Nil
             }
@@ -878,6 +962,7 @@ instance TF.IsObject (CloudbuildTriggerResource s) where
         [ TF.assign "build" <$> TF.attribute _build
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "filename" <$> TF.attribute _filename
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "substitutions" <$> TF.attribute _substitutions
         , TF.assign "trigger_template" <$> TF.attribute _triggerTemplate
         ]
@@ -919,6 +1004,11 @@ instance P.HasFilename (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
         P.lens (_filename :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
                (\s a -> s { _filename = a } :: CloudbuildTriggerResource s)
 
+instance P.HasProject (CloudbuildTriggerResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: CloudbuildTriggerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: CloudbuildTriggerResource s)
+
 instance P.HasSubstitutions (CloudbuildTriggerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     substitutions =
         P.lens (_substitutions :: CloudbuildTriggerResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -949,11 +1039,20 @@ data CloudfunctionsFunctionResource s = CloudfunctionsFunctionResource'
     , _entryPoint          :: TF.Attr s P.Text
     -- ^ @entry_point@ - (Optional, Forces New)
     --
+    , _httpsTriggerUrl     :: TF.Attr s P.Text
+    -- ^ @https_trigger_url@ - (Optional)
+    --
     , _labels              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project             :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region              :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
     --
     , _retryOnFailure      :: TF.Attr s P.Bool
     -- ^ @retry_on_failure@ - (Optional)
@@ -1006,8 +1105,11 @@ cloudfunctionsFunctionResource _sourceArchiveBucket _name _sourceArchiveObject =
             { _availableMemoryMb = TF.value 256
             , _description = TF.Nil
             , _entryPoint = TF.Nil
+            , _httpsTriggerUrl = TF.Nil
             , _labels = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _retryOnFailure = TF.Nil
             , _sourceArchiveBucket = _sourceArchiveBucket
             , _sourceArchiveObject = _sourceArchiveObject
@@ -1022,8 +1124,11 @@ instance TF.IsObject (CloudfunctionsFunctionResource s) where
         [ TF.assign "available_memory_mb" <$> TF.attribute _availableMemoryMb
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "entry_point" <$> TF.attribute _entryPoint
+        , TF.assign "https_trigger_url" <$> TF.attribute _httpsTriggerUrl
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "retry_on_failure" <$> TF.attribute _retryOnFailure
         , TF.assign "source_archive_bucket" <$> TF.attribute _sourceArchiveBucket
         , TF.assign "source_archive_object" <$> TF.attribute _sourceArchiveObject
@@ -1072,6 +1177,11 @@ instance P.HasEntryPoint (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) w
         P.lens (_entryPoint :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
                (\s a -> s { _entryPoint = a } :: CloudfunctionsFunctionResource s)
 
+instance P.HasHttpsTriggerUrl (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+    httpsTriggerUrl =
+        P.lens (_httpsTriggerUrl :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _httpsTriggerUrl = a } :: CloudfunctionsFunctionResource s)
+
 instance P.HasLabels (CloudfunctionsFunctionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
         P.lens (_labels :: CloudfunctionsFunctionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -1081,6 +1191,16 @@ instance P.HasName (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CloudfunctionsFunctionResource s)
+
+instance P.HasProject (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: CloudfunctionsFunctionResource s)
+
+instance P.HasRegion (CloudfunctionsFunctionResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: CloudfunctionsFunctionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: CloudfunctionsFunctionResource s)
 
 instance P.HasRetryOnFailure (CloudfunctionsFunctionResource s) (TF.Attr s P.Bool) where
     retryOnFailure =
@@ -1149,6 +1269,12 @@ data CloudiotRegistryResource s = CloudiotRegistryResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _stateNotificationConfig :: TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s)))
     -- ^ @state_notification_config@ - (Optional)
     --
@@ -1166,6 +1292,8 @@ cloudiotRegistryResource _name =
             , _httpConfig = TF.Nil
             , _mqttConfig = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _stateNotificationConfig = TF.Nil
             }
 
@@ -1176,6 +1304,8 @@ instance TF.IsObject (CloudiotRegistryResource s) where
         , TF.assign "http_config" <$> TF.attribute _httpConfig
         , TF.assign "mqtt_config" <$> TF.attribute _mqttConfig
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "state_notification_config" <$> TF.attribute _stateNotificationConfig
         ]
 
@@ -1207,6 +1337,16 @@ instance P.HasName (CloudiotRegistryResource s) (TF.Attr s P.Text) where
         P.lens (_name :: CloudiotRegistryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CloudiotRegistryResource s)
 
+instance P.HasProject (CloudiotRegistryResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: CloudiotRegistryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: CloudiotRegistryResource s)
+
+instance P.HasRegion (CloudiotRegistryResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: CloudiotRegistryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: CloudiotRegistryResource s)
+
 instance P.HasStateNotificationConfig (CloudiotRegistryResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s)))) where
     stateNotificationConfig =
         P.lens (_stateNotificationConfig :: CloudiotRegistryResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (StateNotificationConfigSetting s))))
@@ -1226,7 +1366,10 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudiotRegistryResource s)) 
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_address.html terraform documentation>
 -- for more information.
 data ComputeAddressResource s = ComputeAddressResource'
-    { _addressType :: TF.Attr s P.Text
+    { _address     :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional, Forces New)
+    --
+    , _addressType :: TF.Attr s P.Text
     -- ^ @address_type@ - (Optional, Forces New)
     --
     , _description :: TF.Attr s P.Text
@@ -1238,6 +1381,18 @@ data ComputeAddressResource s = ComputeAddressResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _networkTier :: TF.Attr s P.Text
+    -- ^ @network_tier@ - (Optional, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region      :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _subnetwork  :: TF.Attr s P.Text
+    -- ^ @subnetwork@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_address@ resource value.
@@ -1247,22 +1402,37 @@ computeAddressResource
 computeAddressResource _name =
     TF.unsafeResource "google_compute_address" TF.validator $
         ComputeAddressResource'
-            { _addressType = TF.value "EXTERNAL"
+            { _address = TF.Nil
+            , _addressType = TF.value "EXTERNAL"
             , _description = TF.Nil
             , _labels = TF.Nil
             , _name = _name
+            , _networkTier = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
+            , _subnetwork = TF.Nil
             }
 
 instance TF.IsObject (ComputeAddressResource s) where
     toObject ComputeAddressResource'{..} = P.catMaybes
-        [ TF.assign "address_type" <$> TF.attribute _addressType
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "address_type" <$> TF.attribute _addressType
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network_tier" <$> TF.attribute _networkTier
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         ]
 
 instance TF.IsValid (ComputeAddressResource s) where
     validator = P.mempty
+
+instance P.HasAddress (ComputeAddressResource s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ComputeAddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ComputeAddressResource s)
 
 instance P.HasAddressType (ComputeAddressResource s) (TF.Attr s P.Text) where
     addressType =
@@ -1283,6 +1453,26 @@ instance P.HasName (ComputeAddressResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeAddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeAddressResource s)
+
+instance P.HasNetworkTier (ComputeAddressResource s) (TF.Attr s P.Text) where
+    networkTier =
+        P.lens (_networkTier :: ComputeAddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkTier = a } :: ComputeAddressResource s)
+
+instance P.HasProject (ComputeAddressResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeAddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeAddressResource s)
+
+instance P.HasRegion (ComputeAddressResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeAddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeAddressResource s)
+
+instance P.HasSubnetwork (ComputeAddressResource s) (TF.Attr s P.Text) where
+    subnetwork =
+        P.lens (_subnetwork :: ComputeAddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetwork = a } :: ComputeAddressResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAddressResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1328,8 +1518,14 @@ data ComputeAutoscalerResource s = ComputeAutoscalerResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project           :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
+    --
+    , _zone              :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1345,7 +1541,9 @@ computeAutoscalerResource _name _autoscalingPolicy _target =
             { _autoscalingPolicy = _autoscalingPolicy
             , _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _target = _target
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeAutoscalerResource s) where
@@ -1353,7 +1551,9 @@ instance TF.IsObject (ComputeAutoscalerResource s) where
         [ TF.assign "autoscaling_policy" <$> TF.attribute _autoscalingPolicy
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeAutoscalerResource s) where
@@ -1378,10 +1578,20 @@ instance P.HasName (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeAutoscalerResource s)
 
+instance P.HasProject (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeAutoscalerResource s)
+
 instance P.HasTarget (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
     target =
         P.lens (_target :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
                (\s a -> s { _target = a } :: ComputeAutoscalerResource s)
+
+instance P.HasZone (ComputeAutoscalerResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeAutoscalerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeAutoscalerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAutoscalerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1415,6 +1625,9 @@ data ComputeBackendBucketResource s = ComputeBackendBucketResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_backend_bucket@ resource value.
@@ -1429,6 +1642,7 @@ computeBackendBucketResource _bucketName _name =
             , _description = TF.Nil
             , _enableCdn = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ComputeBackendBucketResource s) where
@@ -1437,6 +1651,7 @@ instance TF.IsObject (ComputeBackendBucketResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "enable_cdn" <$> TF.attribute _enableCdn
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ComputeBackendBucketResource s) where
@@ -1462,6 +1677,11 @@ instance P.HasName (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeBackendBucketResource s)
 
+instance P.HasProject (ComputeBackendBucketResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeBackendBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeBackendBucketResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendBucketResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -1481,6 +1701,9 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeBackendBucketResourc
 data ComputeBackendServiceResource s = ComputeBackendServiceResource'
     { _backend                      :: TF.Attr s [TF.Attr s (BackendSetting s)]
     -- ^ @backend@ - (Optional)
+    --
+    , _cdnPolicy                    :: TF.Attr s (CdnPolicySetting s)
+    -- ^ @cdn_policy@ - (Optional)
     --
     , _connectionDrainingTimeoutSec :: TF.Attr s P.Int
     -- ^ @connection_draining_timeout_sec@ - (Optional)
@@ -1503,11 +1726,26 @@ data ComputeBackendServiceResource s = ComputeBackendServiceResource'
     , _name                         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _portName                     :: TF.Attr s P.Text
+    -- ^ @port_name@ - (Optional)
+    --
+    , _project                      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _protocol                     :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional)
+    --
     , _region                       :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
     , _securityPolicy               :: TF.Attr s P.Text
     -- ^ @security_policy@ - (Optional)
+    --
+    , _sessionAffinity              :: TF.Attr s P.Text
+    -- ^ @session_affinity@ - (Optional)
+    --
+    , _timeoutSec                   :: TF.Attr s P.Int
+    -- ^ @timeout_sec@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1520,6 +1758,7 @@ computeBackendServiceResource _healthChecks _name =
     TF.unsafeResource "google_compute_backend_service" TF.validator $
         ComputeBackendServiceResource'
             { _backend = TF.Nil
+            , _cdnPolicy = TF.Nil
             , _connectionDrainingTimeoutSec = TF.value 300
             , _customRequestHeaders = TF.Nil
             , _description = TF.Nil
@@ -1527,13 +1766,19 @@ computeBackendServiceResource _healthChecks _name =
             , _healthChecks = _healthChecks
             , _iap = TF.Nil
             , _name = _name
+            , _portName = TF.Nil
+            , _project = TF.Nil
+            , _protocol = TF.Nil
             , _region = TF.Nil
             , _securityPolicy = TF.Nil
+            , _sessionAffinity = TF.Nil
+            , _timeoutSec = TF.Nil
             }
 
 instance TF.IsObject (ComputeBackendServiceResource s) where
     toObject ComputeBackendServiceResource'{..} = P.catMaybes
         [ TF.assign "backend" <$> TF.attribute _backend
+        , TF.assign "cdn_policy" <$> TF.attribute _cdnPolicy
         , TF.assign "connection_draining_timeout_sec" <$> TF.attribute _connectionDrainingTimeoutSec
         , TF.assign "custom_request_headers" <$> TF.attribute _customRequestHeaders
         , TF.assign "description" <$> TF.attribute _description
@@ -1541,12 +1786,21 @@ instance TF.IsObject (ComputeBackendServiceResource s) where
         , TF.assign "health_checks" <$> TF.attribute _healthChecks
         , TF.assign "iap" <$> TF.attribute _iap
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "port_name" <$> TF.attribute _portName
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "protocol" <$> TF.attribute _protocol
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "security_policy" <$> TF.attribute _securityPolicy
+        , TF.assign "session_affinity" <$> TF.attribute _sessionAffinity
+        , TF.assign "timeout_sec" <$> TF.attribute _timeoutSec
         ]
 
 instance TF.IsValid (ComputeBackendServiceResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cdnPolicy"
+                  (_cdnPolicy
+                      :: ComputeBackendServiceResource s -> TF.Attr s (CdnPolicySetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_iap"
                   (_iap
                       :: ComputeBackendServiceResource s -> TF.Attr s (IapSetting s))
@@ -1556,6 +1810,11 @@ instance P.HasBackend (ComputeBackendServiceResource s) (TF.Attr s [TF.Attr s (B
     backend =
         P.lens (_backend :: ComputeBackendServiceResource s -> TF.Attr s [TF.Attr s (BackendSetting s)])
                (\s a -> s { _backend = a } :: ComputeBackendServiceResource s)
+
+instance P.HasCdnPolicy (ComputeBackendServiceResource s) (TF.Attr s (CdnPolicySetting s)) where
+    cdnPolicy =
+        P.lens (_cdnPolicy :: ComputeBackendServiceResource s -> TF.Attr s (CdnPolicySetting s))
+               (\s a -> s { _cdnPolicy = a } :: ComputeBackendServiceResource s)
 
 instance P.HasConnectionDrainingTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Int) where
     connectionDrainingTimeoutSec =
@@ -1592,6 +1851,21 @@ instance P.HasName (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeBackendServiceResource s)
 
+instance P.HasPortName (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+    portName =
+        P.lens (_portName :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _portName = a } :: ComputeBackendServiceResource s)
+
+instance P.HasProject (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeBackendServiceResource s)
+
+instance P.HasProtocol (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: ComputeBackendServiceResource s)
+
 instance P.HasRegion (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
@@ -1601,6 +1875,16 @@ instance P.HasSecurityPolicy (ComputeBackendServiceResource s) (TF.Attr s P.Text
     securityPolicy =
         P.lens (_securityPolicy :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _securityPolicy = a } :: ComputeBackendServiceResource s)
+
+instance P.HasSessionAffinity (ComputeBackendServiceResource s) (TF.Attr s P.Text) where
+    sessionAffinity =
+        P.lens (_sessionAffinity :: ComputeBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sessionAffinity = a } :: ComputeBackendServiceResource s)
+
+instance P.HasTimeoutSec (ComputeBackendServiceResource s) (TF.Attr s P.Int) where
+    timeoutSec =
+        P.lens (_timeoutSec :: ComputeBackendServiceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _timeoutSec = a } :: ComputeBackendServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendServiceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1649,6 +1933,12 @@ data ComputeDiskResource s = ComputeDiskResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _size :: TF.Attr s P.Int
+    -- ^ @size@ - (Optional)
+    --
     , _snapshot :: TF.Attr s P.Text
     -- ^ @snapshot@ - (Optional, Forces New)
     --
@@ -1660,6 +1950,9 @@ data ComputeDiskResource s = ComputeDiskResource'
     --
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
+    --
+    , _zone :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1675,10 +1968,13 @@ computeDiskResource _name =
             , _image = TF.Nil
             , _labels = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _size = TF.Nil
             , _snapshot = TF.Nil
             , _sourceImageEncryptionKey = TF.Nil
             , _sourceSnapshotEncryptionKey = TF.Nil
             , _type' = TF.value "pd-standard"
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeDiskResource s) where
@@ -1688,10 +1984,13 @@ instance TF.IsObject (ComputeDiskResource s) where
         , TF.assign "image" <$> TF.attribute _image
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "size" <$> TF.attribute _size
         , TF.assign "snapshot" <$> TF.attribute _snapshot
         , TF.assign "source_image_encryption_key" <$> TF.attribute _sourceImageEncryptionKey
         , TF.assign "source_snapshot_encryption_key" <$> TF.attribute _sourceSnapshotEncryptionKey
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeDiskResource s) where
@@ -1734,6 +2033,16 @@ instance P.HasName (ComputeDiskResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeDiskResource s)
 
+instance P.HasProject (ComputeDiskResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeDiskResource s)
+
+instance P.HasSize (ComputeDiskResource s) (TF.Attr s P.Int) where
+    size =
+        P.lens (_size :: ComputeDiskResource s -> TF.Attr s P.Int)
+               (\s a -> s { _size = a } :: ComputeDiskResource s)
+
 instance P.HasSnapshot (ComputeDiskResource s) (TF.Attr s P.Text) where
     snapshot =
         P.lens (_snapshot :: ComputeDiskResource s -> TF.Attr s P.Text)
@@ -1753,6 +2062,11 @@ instance P.HasType' (ComputeDiskResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: ComputeDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ComputeDiskResource s)
+
+instance P.HasZone (ComputeDiskResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeDiskResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeDiskResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1810,6 +2124,16 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     , _description           :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
+    , _destinationRanges     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @destination_ranges@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'sourceRanges'
+    -- * 'sourceTags'
+    , _direction             :: TF.Attr s P.Text
+    -- ^ @direction@ - (Optional, Forces New)
+    --
     , _disabled              :: TF.Attr s P.Bool
     -- ^ @disabled@ - (Optional)
     --
@@ -1822,6 +2146,15 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     , _priority              :: TF.Attr s P.Int
     -- ^ @priority@ - (Optional, Forces New)
     --
+    , _project               :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _sourceRanges          :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @source_ranges@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'destinationRanges'
     , _sourceServiceAccounts :: TF.Attr s P.Text
     -- ^ @source_service_accounts@ - (Optional, Forces New)
     --
@@ -1834,6 +2167,7 @@ data ComputeFirewallResource s = ComputeFirewallResource'
     --
     -- Conflicts with:
     --
+    -- * 'destinationRanges'
     -- * 'sourceServiceAccounts'
     -- * 'targetServiceAccounts'
     , _targetServiceAccounts :: TF.Attr s P.Text
@@ -1863,10 +2197,14 @@ computeFirewallResource _name _network =
             { _allow = TF.Nil
             , _deny = TF.Nil
             , _description = TF.Nil
+            , _destinationRanges = TF.Nil
+            , _direction = TF.Nil
             , _disabled = TF.Nil
             , _name = _name
             , _network = _network
             , _priority = TF.value 1000
+            , _project = TF.Nil
+            , _sourceRanges = TF.Nil
             , _sourceServiceAccounts = TF.Nil
             , _sourceTags = TF.Nil
             , _targetServiceAccounts = TF.Nil
@@ -1878,10 +2216,14 @@ instance TF.IsObject (ComputeFirewallResource s) where
         [ TF.assign "allow" <$> TF.attribute _allow
         , TF.assign "deny" <$> TF.attribute _deny
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "destination_ranges" <$> TF.attribute _destinationRanges
+        , TF.assign "direction" <$> TF.attribute _direction
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
         , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "source_ranges" <$> TF.attribute _sourceRanges
         , TF.assign "source_service_accounts" <$> TF.attribute _sourceServiceAccounts
         , TF.assign "source_tags" <$> TF.attribute _sourceTags
         , TF.assign "target_service_accounts" <$> TF.attribute _targetServiceAccounts
@@ -1900,6 +2242,16 @@ instance TF.IsValid (ComputeFirewallResource s) where
               else P.Just ("_deny",
                             [ "_allow"
                             ])
+        , if (_destinationRanges P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_destinationRanges",
+                            [ "_sourceRanges"                            , "_sourceTags"
+                            ])
+        , if (_sourceRanges P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_sourceRanges",
+                            [ "_destinationRanges"
+                            ])
         , if (_sourceServiceAccounts P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceServiceAccounts",
@@ -1908,7 +2260,7 @@ instance TF.IsValid (ComputeFirewallResource s) where
         , if (_sourceTags P.== TF.Nil)
               then P.Nothing
               else P.Just ("_sourceTags",
-                            [ "_sourceServiceAccounts"                            , "_targetServiceAccounts"
+                            [ "_destinationRanges"                            , "_sourceServiceAccounts"                            , "_targetServiceAccounts"
                             ])
         , if (_targetServiceAccounts P.== TF.Nil)
               then P.Nothing
@@ -1937,6 +2289,16 @@ instance P.HasDescription (ComputeFirewallResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ComputeFirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeFirewallResource s)
 
+instance P.HasDestinationRanges (ComputeFirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    destinationRanges =
+        P.lens (_destinationRanges :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _destinationRanges = a } :: ComputeFirewallResource s)
+
+instance P.HasDirection (ComputeFirewallResource s) (TF.Attr s P.Text) where
+    direction =
+        P.lens (_direction :: ComputeFirewallResource s -> TF.Attr s P.Text)
+               (\s a -> s { _direction = a } :: ComputeFirewallResource s)
+
 instance P.HasDisabled (ComputeFirewallResource s) (TF.Attr s P.Bool) where
     disabled =
         P.lens (_disabled :: ComputeFirewallResource s -> TF.Attr s P.Bool)
@@ -1956,6 +2318,16 @@ instance P.HasPriority (ComputeFirewallResource s) (TF.Attr s P.Int) where
     priority =
         P.lens (_priority :: ComputeFirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _priority = a } :: ComputeFirewallResource s)
+
+instance P.HasProject (ComputeFirewallResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeFirewallResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeFirewallResource s)
+
+instance P.HasSourceRanges (ComputeFirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    sourceRanges =
+        P.lens (_sourceRanges :: ComputeFirewallResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sourceRanges = a } :: ComputeFirewallResource s)
 
 instance P.HasSourceServiceAccounts (ComputeFirewallResource s) (TF.Attr s P.Text) where
     sourceServiceAccounts =
@@ -2006,6 +2378,12 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
     , _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _ipAddress           :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional, Forces New)
+    --
+    , _ipProtocol          :: TF.Attr s P.Text
+    -- ^ @ip_protocol@ - (Optional, Forces New)
+    --
     , _ipVersion           :: TF.Attr s P.Text
     -- ^ @ip_version@ - (Optional, Forces New)
     --
@@ -2018,14 +2396,29 @@ data ComputeForwardingRuleResource s = ComputeForwardingRuleResource'
     , _name                :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _network             :: TF.Attr s P.Text
+    -- ^ @network@ - (Optional, Forces New)
+    --
+    , _networkTier         :: TF.Attr s P.Text
+    -- ^ @network_tier@ - (Optional, Forces New)
+    --
     , _portRange           :: TF.Attr s P.Text
     -- ^ @port_range@ - (Optional, Forces New)
     --
     , _ports               :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ports@ - (Optional, Forces New)
     --
+    , _project             :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region              :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _serviceLabel        :: TF.Attr s P.Text
     -- ^ @service_label@ - (Optional, Forces New)
+    --
+    , _subnetwork          :: TF.Attr s P.Text
+    -- ^ @subnetwork@ - (Optional, Forces New)
     --
     , _target              :: TF.Attr s P.Text
     -- ^ @target@ - (Optional)
@@ -2041,13 +2434,20 @@ computeForwardingRuleResource _name =
         ComputeForwardingRuleResource'
             { _backendService = TF.Nil
             , _description = TF.Nil
+            , _ipAddress = TF.Nil
+            , _ipProtocol = TF.Nil
             , _ipVersion = TF.Nil
             , _labels = TF.Nil
             , _loadBalancingScheme = TF.value "EXTERNAL"
             , _name = _name
+            , _network = TF.Nil
+            , _networkTier = TF.Nil
             , _portRange = TF.Nil
             , _ports = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _serviceLabel = TF.Nil
+            , _subnetwork = TF.Nil
             , _target = TF.Nil
             }
 
@@ -2055,13 +2455,20 @@ instance TF.IsObject (ComputeForwardingRuleResource s) where
     toObject ComputeForwardingRuleResource'{..} = P.catMaybes
         [ TF.assign "backend_service" <$> TF.attribute _backendService
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
         , TF.assign "ip_version" <$> TF.attribute _ipVersion
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "load_balancing_scheme" <$> TF.attribute _loadBalancingScheme
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "network_tier" <$> TF.attribute _networkTier
         , TF.assign "port_range" <$> TF.attribute _portRange
         , TF.assign "ports" <$> TF.attribute _ports
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "service_label" <$> TF.attribute _serviceLabel
+        , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         , TF.assign "target" <$> TF.attribute _target
         ]
 
@@ -2077,6 +2484,16 @@ instance P.HasDescription (ComputeForwardingRuleResource s) (TF.Attr s P.Text) w
     description =
         P.lens (_description :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeForwardingRuleResource s)
+
+instance P.HasIpAddress (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: ComputeForwardingRuleResource s)
+
+instance P.HasIpProtocol (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    ipProtocol =
+        P.lens (_ipProtocol :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipProtocol = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasIpVersion (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
     ipVersion =
@@ -2098,6 +2515,16 @@ instance P.HasName (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeForwardingRuleResource s)
 
+instance P.HasNetwork (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    network =
+        P.lens (_network :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: ComputeForwardingRuleResource s)
+
+instance P.HasNetworkTier (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    networkTier =
+        P.lens (_networkTier :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkTier = a } :: ComputeForwardingRuleResource s)
+
 instance P.HasPortRange (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
     portRange =
         P.lens (_portRange :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
@@ -2108,10 +2535,25 @@ instance P.HasPorts (ComputeForwardingRuleResource s) (TF.Attr s [TF.Attr s P.Te
         P.lens (_ports :: ComputeForwardingRuleResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _ports = a } :: ComputeForwardingRuleResource s)
 
+instance P.HasProject (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeForwardingRuleResource s)
+
+instance P.HasRegion (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeForwardingRuleResource s)
+
 instance P.HasServiceLabel (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
     serviceLabel =
         P.lens (_serviceLabel :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceLabel = a } :: ComputeForwardingRuleResource s)
+
+instance P.HasSubnetwork (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
+    subnetwork =
+        P.lens (_subnetwork :: ComputeForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetwork = a } :: ComputeForwardingRuleResource s)
 
 instance P.HasTarget (ComputeForwardingRuleResource s) (TF.Attr s P.Text) where
     target =
@@ -2171,6 +2613,9 @@ data ComputeGlobalAddressResource s = ComputeGlobalAddressResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_global_address@ resource value.
@@ -2184,6 +2629,7 @@ computeGlobalAddressResource _name =
             , _ipVersion = TF.Nil
             , _labels = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ComputeGlobalAddressResource s) where
@@ -2192,6 +2638,7 @@ instance TF.IsObject (ComputeGlobalAddressResource s) where
         , TF.assign "ip_version" <$> TF.attribute _ipVersion
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ComputeGlobalAddressResource s) where
@@ -2216,6 +2663,11 @@ instance P.HasName (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeGlobalAddressResource s)
+
+instance P.HasProject (ComputeGlobalAddressResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeGlobalAddressResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeGlobalAddressResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeGlobalAddressResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2243,6 +2695,12 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _ipAddress   :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional, Forces New)
+    --
+    , _ipProtocol  :: TF.Attr s P.Text
+    -- ^ @ip_protocol@ - (Optional, Forces New)
+    --
     , _ipVersion   :: TF.Attr s P.Text
     -- ^ @ip_version@ - (Optional, Forces New)
     --
@@ -2254,6 +2712,9 @@ data ComputeGlobalForwardingRuleResource s = ComputeGlobalForwardingRuleResource
     --
     , _portRange   :: TF.Attr s P.Text
     -- ^ @port_range@ - (Optional, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _region      :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
@@ -2272,10 +2733,13 @@ computeGlobalForwardingRuleResource _name _target =
     TF.unsafeResource "google_compute_global_forwarding_rule" TF.validator $
         ComputeGlobalForwardingRuleResource'
             { _description = TF.Nil
+            , _ipAddress = TF.Nil
+            , _ipProtocol = TF.Nil
             , _ipVersion = TF.Nil
             , _labels = TF.Nil
             , _name = _name
             , _portRange = TF.Nil
+            , _project = TF.Nil
             , _region = TF.Nil
             , _target = _target
             }
@@ -2283,10 +2747,13 @@ computeGlobalForwardingRuleResource _name _target =
 instance TF.IsObject (ComputeGlobalForwardingRuleResource s) where
     toObject ComputeGlobalForwardingRuleResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
         , TF.assign "ip_version" <$> TF.attribute _ipVersion
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port_range" <$> TF.attribute _portRange
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "target" <$> TF.attribute _target
         ]
@@ -2298,6 +2765,16 @@ instance P.HasDescription (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.T
     description =
         P.lens (_description :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeGlobalForwardingRuleResource s)
+
+instance P.HasIpAddress (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: ComputeGlobalForwardingRuleResource s)
+
+instance P.HasIpProtocol (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+    ipProtocol =
+        P.lens (_ipProtocol :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _ipProtocol = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasIpVersion (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
     ipVersion =
@@ -2318,6 +2795,11 @@ instance P.HasPortRange (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Tex
     portRange =
         P.lens (_portRange :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _portRange = a } :: ComputeGlobalForwardingRuleResource s)
+
+instance P.HasProject (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeGlobalForwardingRuleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeGlobalForwardingRuleResource s)
 
 instance P.HasRegion (ComputeGlobalForwardingRuleResource s) (TF.Attr s P.Text) where
     region =
@@ -2380,6 +2862,9 @@ data ComputeHealthCheckResource s = ComputeHealthCheckResource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project            :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _sslHealthCheck     :: TF.Attr s (SslHealthCheckSetting s)
     -- ^ @ssl_health_check@ - (Optional)
     --
@@ -2417,6 +2902,7 @@ computeHealthCheckResource _name =
             , _httpHealthCheck = TF.Nil
             , _httpsHealthCheck = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _sslHealthCheck = TF.Nil
             , _tcpHealthCheck = TF.Nil
             , _timeoutSec = TF.value 5
@@ -2431,6 +2917,7 @@ instance TF.IsObject (ComputeHealthCheckResource s) where
         , TF.assign "http_health_check" <$> TF.attribute _httpHealthCheck
         , TF.assign "https_health_check" <$> TF.attribute _httpsHealthCheck
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "ssl_health_check" <$> TF.attribute _sslHealthCheck
         , TF.assign "tcp_health_check" <$> TF.attribute _tcpHealthCheck
         , TF.assign "timeout_sec" <$> TF.attribute _timeoutSec
@@ -2507,6 +2994,11 @@ instance P.HasName (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeHealthCheckResource s)
 
+instance P.HasProject (ComputeHealthCheckResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeHealthCheckResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeHealthCheckResource s)
+
 instance P.HasSslHealthCheck (ComputeHealthCheckResource s) (TF.Attr s (SslHealthCheckSetting s)) where
     sslHealthCheck =
         P.lens (_sslHealthCheck :: ComputeHealthCheckResource s -> TF.Attr s (SslHealthCheckSetting s))
@@ -2559,6 +3051,9 @@ data ComputeHttpHealthCheckResource s = ComputeHttpHealthCheckResource'
     , _port               :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
+    , _project            :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _requestPath        :: TF.Attr s P.Text
     -- ^ @request_path@ - (Optional)
     --
@@ -2583,6 +3078,7 @@ computeHttpHealthCheckResource _name =
             , _host = TF.Nil
             , _name = _name
             , _port = TF.value 80
+            , _project = TF.Nil
             , _requestPath = TF.value "/"
             , _timeoutSec = TF.value 5
             , _unhealthyThreshold = TF.value 2
@@ -2596,6 +3092,7 @@ instance TF.IsObject (ComputeHttpHealthCheckResource s) where
         , TF.assign "host" <$> TF.attribute _host
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "request_path" <$> TF.attribute _requestPath
         , TF.assign "timeout_sec" <$> TF.attribute _timeoutSec
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthyThreshold
@@ -2633,6 +3130,11 @@ instance P.HasPort (ComputeHttpHealthCheckResource s) (TF.Attr s P.Int) where
     port =
         P.lens (_port :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: ComputeHttpHealthCheckResource s)
+
+instance P.HasProject (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeHttpHealthCheckResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeHttpHealthCheckResource s)
 
 instance P.HasRequestPath (ComputeHttpHealthCheckResource s) (TF.Attr s P.Text) where
     requestPath =
@@ -2684,6 +3186,9 @@ data ComputeHttpsHealthCheckResource s = ComputeHttpsHealthCheckResource'
     , _port               :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
+    , _project            :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _requestPath        :: TF.Attr s P.Text
     -- ^ @request_path@ - (Optional)
     --
@@ -2708,6 +3213,7 @@ computeHttpsHealthCheckResource _name =
             , _host = TF.Nil
             , _name = _name
             , _port = TF.value 443
+            , _project = TF.Nil
             , _requestPath = TF.value "/"
             , _timeoutSec = TF.value 5
             , _unhealthyThreshold = TF.value 2
@@ -2721,6 +3227,7 @@ instance TF.IsObject (ComputeHttpsHealthCheckResource s) where
         , TF.assign "host" <$> TF.attribute _host
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "request_path" <$> TF.attribute _requestPath
         , TF.assign "timeout_sec" <$> TF.attribute _timeoutSec
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthyThreshold
@@ -2758,6 +3265,11 @@ instance P.HasPort (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Int) where
     port =
         P.lens (_port :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: ComputeHttpsHealthCheckResource s)
+
+instance P.HasProject (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeHttpsHealthCheckResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeHttpsHealthCheckResource s)
 
 instance P.HasRequestPath (ComputeHttpsHealthCheckResource s) (TF.Attr s P.Text) where
     requestPath =
@@ -2800,8 +3312,14 @@ data ComputeImageResource s = ComputeImageResource'
     , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
+    , _licenses    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @licenses@ - (Optional, Forces New)
+    --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _rawDisk     :: TF.Attr s (RawDiskSetting s)
     -- ^ @raw_disk@ - (Optional, Forces New)
@@ -2821,7 +3339,9 @@ computeImageResource _name =
             { _description = TF.Nil
             , _family' = TF.Nil
             , _labels = TF.Nil
+            , _licenses = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _rawDisk = TF.Nil
             , _sourceDisk = TF.Nil
             }
@@ -2831,7 +3351,9 @@ instance TF.IsObject (ComputeImageResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "family" <$> TF.attribute _family'
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "licenses" <$> TF.attribute _licenses
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "raw_disk" <$> TF.attribute _rawDisk
         , TF.assign "source_disk" <$> TF.attribute _sourceDisk
         ]
@@ -2858,10 +3380,20 @@ instance P.HasLabels (ComputeImageResource s) (TF.Attr s (P.Map P.Text (TF.Attr 
         P.lens (_labels :: ComputeImageResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeImageResource s)
 
+instance P.HasLicenses (ComputeImageResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    licenses =
+        P.lens (_licenses :: ComputeImageResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _licenses = a } :: ComputeImageResource s)
+
 instance P.HasName (ComputeImageResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeImageResource s)
+
+instance P.HasProject (ComputeImageResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeImageResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeImageResource s)
 
 instance P.HasRawDisk (ComputeImageResource s) (TF.Attr s (RawDiskSetting s)) where
     rawDisk =
@@ -2914,6 +3446,9 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _disk :: TF.Attr s [TF.Attr s (DiskSetting s)]
     -- ^ @disk@ - (Optional, Forces New)
     --
+    , _guestAccelerator :: TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]
+    -- ^ @guest_accelerator@ - (Optional, Forces New)
+    --
     , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
@@ -2938,6 +3473,12 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
     -- ^ @network_interface@ - (Required, Forces New)
     --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _scheduling :: TF.Attr s (SchedulingSetting s)
+    -- ^ @scheduling@ - (Optional)
+    --
     , _scratchDisk :: TF.Attr s [TF.Attr s (ScratchDiskSetting s)]
     -- ^ @scratch_disk@ - (Optional, Forces New)
     --
@@ -2946,6 +3487,9 @@ data ComputeInstanceResource s = ComputeInstanceResource'
     --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
+    --
+    , _zone :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2966,6 +3510,7 @@ computeInstanceResource _bootDisk _networkInterface _name _machineType =
             , _deletionProtection = TF.value P.False
             , _description = TF.Nil
             , _disk = TF.Nil
+            , _guestAccelerator = TF.Nil
             , _labels = TF.Nil
             , _machineType = _machineType
             , _metadata = TF.Nil
@@ -2974,9 +3519,12 @@ computeInstanceResource _bootDisk _networkInterface _name _machineType =
             , _name = _name
             , _network = TF.Nil
             , _networkInterface = _networkInterface
+            , _project = TF.Nil
+            , _scheduling = TF.Nil
             , _scratchDisk = TF.Nil
             , _serviceAccount = TF.Nil
             , _tags = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeInstanceResource s) where
@@ -2988,6 +3536,7 @@ instance TF.IsObject (ComputeInstanceResource s) where
         , TF.assign "deletion_protection" <$> TF.attribute _deletionProtection
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "guest_accelerator" <$> TF.attribute _guestAccelerator
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "machine_type" <$> TF.attribute _machineType
         , TF.assign "metadata" <$> TF.attribute _metadata
@@ -2996,9 +3545,12 @@ instance TF.IsObject (ComputeInstanceResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
         , TF.assign "network_interface" <$> TF.attribute _networkInterface
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "scheduling" <$> TF.attribute _scheduling
         , TF.assign "scratch_disk" <$> TF.attribute _scratchDisk
         , TF.assign "service_account" <$> TF.attribute _serviceAccount
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeInstanceResource s) where
@@ -3006,6 +3558,10 @@ instance TF.IsValid (ComputeInstanceResource s) where
            P.<> TF.settingsValidator "_bootDisk"
                   (_bootDisk
                       :: ComputeInstanceResource s -> TF.Attr s (BootDiskSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_scheduling"
+                  (_scheduling
+                      :: ComputeInstanceResource s -> TF.Attr s (SchedulingSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_serviceAccount"
                   (_serviceAccount
@@ -3047,6 +3603,11 @@ instance P.HasDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (DiskSettin
         P.lens (_disk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (DiskSetting s)])
                (\s a -> s { _disk = a } :: ComputeInstanceResource s)
 
+instance P.HasGuestAccelerator (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]) where
+    guestAccelerator =
+        P.lens (_guestAccelerator :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)])
+               (\s a -> s { _guestAccelerator = a } :: ComputeInstanceResource s)
+
 instance P.HasLabels (ComputeInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
         P.lens (_labels :: ComputeInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -3087,6 +3648,16 @@ instance P.HasNetworkInterface (ComputeInstanceResource s) (TF.Attr s [TF.Attr s
         P.lens (_networkInterface :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
                (\s a -> s { _networkInterface = a } :: ComputeInstanceResource s)
 
+instance P.HasProject (ComputeInstanceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeInstanceResource s)
+
+instance P.HasScheduling (ComputeInstanceResource s) (TF.Attr s (SchedulingSetting s)) where
+    scheduling =
+        P.lens (_scheduling :: ComputeInstanceResource s -> TF.Attr s (SchedulingSetting s))
+               (\s a -> s { _scheduling = a } :: ComputeInstanceResource s)
+
 instance P.HasScratchDisk (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ScratchDiskSetting s)]) where
     scratchDisk =
         P.lens (_scratchDisk :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ScratchDiskSetting s)])
@@ -3101,6 +3672,11 @@ instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) wh
     tags =
         P.lens (_tags :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: ComputeInstanceResource s)
+
+instance P.HasZone (ComputeInstanceResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeInstanceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3140,11 +3716,59 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ComputeInstanceResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_instance_from_template.html terraform documentation>
 -- for more information.
 data ComputeInstanceFromTemplateResource s = ComputeInstanceFromTemplateResource'
-    { _name                   :: TF.Attr s P.Text
+    { _allowStoppingForUpdate :: TF.Attr s P.Bool
+    -- ^ @allow_stopping_for_update@ - (Optional)
+    --
+    , _attachedDisk :: TF.Attr s [TF.Attr s (AttachedDiskSetting s)]
+    -- ^ @attached_disk@ - (Optional)
+    --
+    , _canIpForward :: TF.Attr s P.Bool
+    -- ^ @can_ip_forward@ - (Optional, Forces New)
+    --
+    , _deletionProtection :: TF.Attr s P.Bool
+    -- ^ @deletion_protection@ - (Optional)
+    --
+    , _description :: TF.Attr s P.Text
+    -- ^ @description@ - (Optional, Forces New)
+    --
+    , _guestAccelerator :: TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]
+    -- ^ @guest_accelerator@ - (Optional, Forces New)
+    --
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    --
+    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @metadata@ - (Optional)
+    --
+    , _metadataStartupScript :: TF.Attr s P.Text
+    -- ^ @metadata_startup_script@ - (Optional, Forces New)
+    --
+    , _minCpuPlatform :: TF.Attr s P.Text
+    -- ^ @min_cpu_platform@ - (Optional)
+    --
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _scheduling :: TF.Attr s (SchedulingSetting s)
+    -- ^ @scheduling@ - (Optional)
+    --
+    , _scratchDisk :: TF.Attr s [TF.Attr s (ScratchDiskSetting s)]
+    -- ^ @scratch_disk@ - (Optional, Forces New)
+    --
+    , _serviceAccount :: TF.Attr s (ServiceAccountSetting s)
+    -- ^ @service_account@ - (Optional)
     --
     , _sourceInstanceTemplate :: TF.Attr s P.Text
     -- ^ @source_instance_template@ - (Required, Forces New)
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    --
+    , _zone :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3156,28 +3780,148 @@ computeInstanceFromTemplateResource
 computeInstanceFromTemplateResource _name _sourceInstanceTemplate =
     TF.unsafeResource "google_compute_instance_from_template" TF.validator $
         ComputeInstanceFromTemplateResource'
-            { _name = _name
+            { _allowStoppingForUpdate = TF.Nil
+            , _attachedDisk = TF.Nil
+            , _canIpForward = TF.Nil
+            , _deletionProtection = TF.Nil
+            , _description = TF.Nil
+            , _guestAccelerator = TF.Nil
+            , _labels = TF.Nil
+            , _metadata = TF.Nil
+            , _metadataStartupScript = TF.Nil
+            , _minCpuPlatform = TF.Nil
+            , _name = _name
+            , _project = TF.Nil
+            , _scheduling = TF.Nil
+            , _scratchDisk = TF.Nil
+            , _serviceAccount = TF.Nil
             , _sourceInstanceTemplate = _sourceInstanceTemplate
+            , _tags = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeInstanceFromTemplateResource s) where
     toObject ComputeInstanceFromTemplateResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "allow_stopping_for_update" <$> TF.attribute _allowStoppingForUpdate
+        , TF.assign "attached_disk" <$> TF.attribute _attachedDisk
+        , TF.assign "can_ip_forward" <$> TF.attribute _canIpForward
+        , TF.assign "deletion_protection" <$> TF.attribute _deletionProtection
+        , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "guest_accelerator" <$> TF.attribute _guestAccelerator
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "metadata_startup_script" <$> TF.attribute _metadataStartupScript
+        , TF.assign "min_cpu_platform" <$> TF.attribute _minCpuPlatform
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "scheduling" <$> TF.attribute _scheduling
+        , TF.assign "scratch_disk" <$> TF.attribute _scratchDisk
+        , TF.assign "service_account" <$> TF.attribute _serviceAccount
         , TF.assign "source_instance_template" <$> TF.attribute _sourceInstanceTemplate
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeInstanceFromTemplateResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_scheduling"
+                  (_scheduling
+                      :: ComputeInstanceFromTemplateResource s -> TF.Attr s (SchedulingSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_serviceAccount"
+                  (_serviceAccount
+                      :: ComputeInstanceFromTemplateResource s -> TF.Attr s (ServiceAccountSetting s))
+                  TF.validator
+
+instance P.HasAllowStoppingForUpdate (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Bool) where
+    allowStoppingForUpdate =
+        P.lens (_allowStoppingForUpdate :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowStoppingForUpdate = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasAttachedDisk (ComputeInstanceFromTemplateResource s) (TF.Attr s [TF.Attr s (AttachedDiskSetting s)]) where
+    attachedDisk =
+        P.lens (_attachedDisk :: ComputeInstanceFromTemplateResource s -> TF.Attr s [TF.Attr s (AttachedDiskSetting s)])
+               (\s a -> s { _attachedDisk = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasCanIpForward (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Bool) where
+    canIpForward =
+        P.lens (_canIpForward :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _canIpForward = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasDeletionProtection (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Bool) where
+    deletionProtection =
+        P.lens (_deletionProtection :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _deletionProtection = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasDescription (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
+    description =
+        P.lens (_description :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasGuestAccelerator (ComputeInstanceFromTemplateResource s) (TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]) where
+    guestAccelerator =
+        P.lens (_guestAccelerator :: ComputeInstanceFromTemplateResource s -> TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)])
+               (\s a -> s { _guestAccelerator = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasLabels (ComputeInstanceFromTemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: ComputeInstanceFromTemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasMetadata (ComputeInstanceFromTemplateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    metadata =
+        P.lens (_metadata :: ComputeInstanceFromTemplateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _metadata = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasMetadataStartupScript (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
+    metadataStartupScript =
+        P.lens (_metadataStartupScript :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _metadataStartupScript = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasMinCpuPlatform (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
+    minCpuPlatform =
+        P.lens (_minCpuPlatform :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _minCpuPlatform = a } :: ComputeInstanceFromTemplateResource s)
 
 instance P.HasName (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceFromTemplateResource s)
 
+instance P.HasProject (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasScheduling (ComputeInstanceFromTemplateResource s) (TF.Attr s (SchedulingSetting s)) where
+    scheduling =
+        P.lens (_scheduling :: ComputeInstanceFromTemplateResource s -> TF.Attr s (SchedulingSetting s))
+               (\s a -> s { _scheduling = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasScratchDisk (ComputeInstanceFromTemplateResource s) (TF.Attr s [TF.Attr s (ScratchDiskSetting s)]) where
+    scratchDisk =
+        P.lens (_scratchDisk :: ComputeInstanceFromTemplateResource s -> TF.Attr s [TF.Attr s (ScratchDiskSetting s)])
+               (\s a -> s { _scratchDisk = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasServiceAccount (ComputeInstanceFromTemplateResource s) (TF.Attr s (ServiceAccountSetting s)) where
+    serviceAccount =
+        P.lens (_serviceAccount :: ComputeInstanceFromTemplateResource s -> TF.Attr s (ServiceAccountSetting s))
+               (\s a -> s { _serviceAccount = a } :: ComputeInstanceFromTemplateResource s)
+
 instance P.HasSourceInstanceTemplate (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
     sourceInstanceTemplate =
         P.lens (_sourceInstanceTemplate :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceInstanceTemplate = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasTags (ComputeInstanceFromTemplateResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: ComputeInstanceFromTemplateResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: ComputeInstanceFromTemplateResource s)
+
+instance P.HasZone (ComputeInstanceFromTemplateResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeInstanceFromTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeInstanceFromTemplateResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceFromTemplateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3265,11 +4009,23 @@ data ComputeInstanceGroupResource s = ComputeInstanceGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _instances   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @instances@ - (Optional)
+    --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _namedPort   :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
     -- ^ @named_port@ - (Optional)
+    --
+    , _network     :: TF.Attr s P.Text
+    -- ^ @network@ - (Optional, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _zone        :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3281,15 +4037,23 @@ computeInstanceGroupResource _name =
     TF.unsafeResource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupResource'
             { _description = TF.Nil
+            , _instances = TF.Nil
             , _name = _name
             , _namedPort = TF.Nil
+            , _network = TF.Nil
+            , _project = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeInstanceGroupResource s) where
     toObject ComputeInstanceGroupResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
+        , TF.assign "instances" <$> TF.attribute _instances
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "named_port" <$> TF.attribute _namedPort
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeInstanceGroupResource s) where
@@ -3300,6 +4064,11 @@ instance P.HasDescription (ComputeInstanceGroupResource s) (TF.Attr s P.Text) wh
         P.lens (_description :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeInstanceGroupResource s)
 
+instance P.HasInstances (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    instances =
+        P.lens (_instances :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instances = a } :: ComputeInstanceGroupResource s)
+
 instance P.HasName (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
@@ -3309,6 +4078,21 @@ instance P.HasNamedPort (ComputeInstanceGroupResource s) (TF.Attr s [TF.Attr s (
     namedPort =
         P.lens (_namedPort :: ComputeInstanceGroupResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupResource s)
+
+instance P.HasNetwork (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
+    network =
+        P.lens (_network :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: ComputeInstanceGroupResource s)
+
+instance P.HasProject (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeInstanceGroupResource s)
+
+instance P.HasZone (ComputeInstanceGroupResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeInstanceGroupResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeInstanceGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3354,17 +4138,29 @@ data ComputeInstanceGroupManagerResource s = ComputeInstanceGroupManagerResource
     , _namedPort           :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
     -- ^ @named_port@ - (Optional)
     --
+    , _project             :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _rollingUpdatePolicy :: TF.Attr s (RollingUpdatePolicySetting s)
     -- ^ @rolling_update_policy@ - (Optional)
     --
     , _targetPools         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_pools@ - (Optional)
     --
+    , _targetSize          :: TF.Attr s P.Int
+    -- ^ @target_size@ - (Optional)
+    --
     , _updateStrategy      :: TF.Attr s P.Text
     -- ^ @update_strategy@ - (Optional)
     --
+    , _version             :: TF.Attr s [TF.Attr s (VersionSetting s)]
+    -- ^ @version@ - (Optional)
+    --
     , _waitForInstances    :: TF.Attr s P.Bool
     -- ^ @wait_for_instances@ - (Optional)
+    --
+    , _zone                :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3382,10 +4178,14 @@ computeInstanceGroupManagerResource _baseInstanceName _name =
             , _instanceTemplate = TF.Nil
             , _name = _name
             , _namedPort = TF.Nil
+            , _project = TF.Nil
             , _rollingUpdatePolicy = TF.Nil
             , _targetPools = TF.Nil
+            , _targetSize = TF.Nil
             , _updateStrategy = TF.value "RESTART"
+            , _version = TF.Nil
             , _waitForInstances = TF.value P.False
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeInstanceGroupManagerResource s) where
@@ -3396,10 +4196,14 @@ instance TF.IsObject (ComputeInstanceGroupManagerResource s) where
         , TF.assign "instance_template" <$> TF.attribute _instanceTemplate
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "named_port" <$> TF.attribute _namedPort
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "rolling_update_policy" <$> TF.attribute _rollingUpdatePolicy
         , TF.assign "target_pools" <$> TF.attribute _targetPools
+        , TF.assign "target_size" <$> TF.attribute _targetSize
         , TF.assign "update_strategy" <$> TF.attribute _updateStrategy
+        , TF.assign "version" <$> TF.attribute _version
         , TF.assign "wait_for_instances" <$> TF.attribute _waitForInstances
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeInstanceGroupManagerResource s) where
@@ -3443,6 +4247,11 @@ instance P.HasNamedPort (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.A
         P.lens (_namedPort :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeInstanceGroupManagerResource s)
 
+instance P.HasProject (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeInstanceGroupManagerResource s)
+
 instance P.HasRollingUpdatePolicy (ComputeInstanceGroupManagerResource s) (TF.Attr s (RollingUpdatePolicySetting s)) where
     rollingUpdatePolicy =
         P.lens (_rollingUpdatePolicy :: ComputeInstanceGroupManagerResource s -> TF.Attr s (RollingUpdatePolicySetting s))
@@ -3453,15 +4262,30 @@ instance P.HasTargetPools (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF
         P.lens (_targetPools :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _targetPools = a } :: ComputeInstanceGroupManagerResource s)
 
+instance P.HasTargetSize (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Int) where
+    targetSize =
+        P.lens (_targetSize :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _targetSize = a } :: ComputeInstanceGroupManagerResource s)
+
 instance P.HasUpdateStrategy (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
     updateStrategy =
         P.lens (_updateStrategy :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _updateStrategy = a } :: ComputeInstanceGroupManagerResource s)
 
+instance P.HasVersion (ComputeInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (VersionSetting s)]) where
+    version =
+        P.lens (_version :: ComputeInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (VersionSetting s)])
+               (\s a -> s { _version = a } :: ComputeInstanceGroupManagerResource s)
+
 instance P.HasWaitForInstances (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Bool) where
     waitForInstances =
         P.lens (_waitForInstances :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _waitForInstances = a } :: ComputeInstanceGroupManagerResource s)
+
+instance P.HasZone (ComputeInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeInstanceGroupManagerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeInstanceGroupManagerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceGroupManagerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3525,11 +4349,32 @@ data ComputeInstanceTemplateResource s = ComputeInstanceTemplateResource'
     , _minCpuPlatform :: TF.Attr s P.Text
     -- ^ @min_cpu_platform@ - (Optional, Forces New)
     --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
+    , _namePrefix :: TF.Attr s P.Text
+    -- ^ @name_prefix@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
     -- ^ @network_interface@ - (Optional, Forces New)
     --
     , _onHostMaintenance :: TF.Attr s P.Text
     -- ^ @on_host_maintenance@ - (Optional, Forces New)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _scheduling :: TF.Attr s [TF.Attr s (SchedulingSetting s)]
+    -- ^ @scheduling@ - (Optional, Forces New)
     --
     , _serviceAccount :: TF.Attr s (ServiceAccountSetting s)
     -- ^ @service_account@ - (Optional, Forces New)
@@ -3558,8 +4403,13 @@ computeInstanceTemplateResource _disk _machineType =
             , _metadata = TF.Nil
             , _metadataStartupScript = TF.Nil
             , _minCpuPlatform = TF.Nil
+            , _name = TF.Nil
+            , _namePrefix = TF.Nil
             , _networkInterface = TF.Nil
             , _onHostMaintenance = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
+            , _scheduling = TF.Nil
             , _serviceAccount = TF.Nil
             , _tags = TF.Nil
             }
@@ -3577,14 +4427,30 @@ instance TF.IsObject (ComputeInstanceTemplateResource s) where
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "metadata_startup_script" <$> TF.attribute _metadataStartupScript
         , TF.assign "min_cpu_platform" <$> TF.attribute _minCpuPlatform
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "network_interface" <$> TF.attribute _networkInterface
         , TF.assign "on_host_maintenance" <$> TF.attribute _onHostMaintenance
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "scheduling" <$> TF.attribute _scheduling
         , TF.assign "service_account" <$> TF.attribute _serviceAccount
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
 instance TF.IsValid (ComputeInstanceTemplateResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ComputeInstanceTemplateResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
            P.<> TF.settingsValidator "_serviceAccount"
                   (_serviceAccount
                       :: ComputeInstanceTemplateResource s -> TF.Attr s (ServiceAccountSetting s))
@@ -3645,6 +4511,16 @@ instance P.HasMinCpuPlatform (ComputeInstanceTemplateResource s) (TF.Attr s P.Te
         P.lens (_minCpuPlatform :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _minCpuPlatform = a } :: ComputeInstanceTemplateResource s)
 
+instance P.HasName (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeInstanceTemplateResource s)
+
+instance P.HasNamePrefix (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        P.lens (_namePrefix :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namePrefix = a } :: ComputeInstanceTemplateResource s)
+
 instance P.HasNetworkInterface (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
     networkInterface =
         P.lens (_networkInterface :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
@@ -3654,6 +4530,21 @@ instance P.HasOnHostMaintenance (ComputeInstanceTemplateResource s) (TF.Attr s P
     onHostMaintenance =
         P.lens (_onHostMaintenance :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _onHostMaintenance = a } :: ComputeInstanceTemplateResource s)
+
+instance P.HasProject (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeInstanceTemplateResource s)
+
+instance P.HasRegion (ComputeInstanceTemplateResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeInstanceTemplateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeInstanceTemplateResource s)
+
+instance P.HasScheduling (ComputeInstanceTemplateResource s) (TF.Attr s [TF.Attr s (SchedulingSetting s)]) where
+    scheduling =
+        P.lens (_scheduling :: ComputeInstanceTemplateResource s -> TF.Attr s [TF.Attr s (SchedulingSetting s)])
+               (\s a -> s { _scheduling = a } :: ComputeInstanceTemplateResource s)
 
 instance P.HasServiceAccount (ComputeInstanceTemplateResource s) (TF.Attr s (ServiceAccountSetting s)) where
     serviceAccount =
@@ -3706,6 +4597,12 @@ data ComputeNetworkResource s = ComputeNetworkResource'
     , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project               :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _routingMode           :: TF.Attr s P.Text
+    -- ^ @routing_mode@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_network@ resource value.
@@ -3718,6 +4615,8 @@ computeNetworkResource _name =
             { _autoCreateSubnetworks = TF.value P.True
             , _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _routingMode = TF.Nil
             }
 
 instance TF.IsObject (ComputeNetworkResource s) where
@@ -3725,6 +4624,8 @@ instance TF.IsObject (ComputeNetworkResource s) where
         [ TF.assign "auto_create_subnetworks" <$> TF.attribute _autoCreateSubnetworks
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "routing_mode" <$> TF.attribute _routingMode
         ]
 
 instance TF.IsValid (ComputeNetworkResource s) where
@@ -3744,6 +4645,16 @@ instance P.HasName (ComputeNetworkResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeNetworkResource s)
+
+instance P.HasProject (ComputeNetworkResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeNetworkResource s)
+
+instance P.HasRoutingMode (ComputeNetworkResource s) (TF.Attr s P.Text) where
+    routingMode =
+        P.lens (_routingMode :: ComputeNetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _routingMode = a } :: ComputeNetworkResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeNetworkResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3842,6 +4753,9 @@ data ComputeProjectMetadataResource s = ComputeProjectMetadataResource'
     { _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Required)
     --
+    , _project  :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_project_metadata@ resource value.
@@ -3852,11 +4766,13 @@ computeProjectMetadataResource _metadata =
     TF.unsafeResource "google_compute_project_metadata" TF.validator $
         ComputeProjectMetadataResource'
             { _metadata = _metadata
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ComputeProjectMetadataResource s) where
     toObject ComputeProjectMetadataResource'{..} = P.catMaybes
         [ TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ComputeProjectMetadataResource s) where
@@ -3866,6 +4782,11 @@ instance P.HasMetadata (ComputeProjectMetadataResource s) (TF.Attr s (P.Map P.Te
     metadata =
         P.lens (_metadata :: ComputeProjectMetadataResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: ComputeProjectMetadataResource s)
+
+instance P.HasProject (ComputeProjectMetadataResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeProjectMetadataResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeProjectMetadataResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeProjectMetadataResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -3878,10 +4799,13 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeProjectMetadataResour
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_project_metadata_item.html terraform documentation>
 -- for more information.
 data ComputeProjectMetadataItemResource s = ComputeProjectMetadataItemResource'
-    { _key   :: TF.Attr s P.Text
+    { _key     :: TF.Attr s P.Text
     -- ^ @key@ - (Required, Forces New)
     --
-    , _value :: TF.Attr s P.Text
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _value   :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3895,12 +4819,14 @@ computeProjectMetadataItemResource _key _value =
     TF.unsafeResource "google_compute_project_metadata_item" TF.validator $
         ComputeProjectMetadataItemResource'
             { _key = _key
+            , _project = TF.Nil
             , _value = _value
             }
 
 instance TF.IsObject (ComputeProjectMetadataItemResource s) where
     toObject ComputeProjectMetadataItemResource'{..} = P.catMaybes
         [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "value" <$> TF.attribute _value
         ]
 
@@ -3911,6 +4837,11 @@ instance P.HasKey (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) wher
     key =
         P.lens (_key :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
                (\s a -> s { _key = a } :: ComputeProjectMetadataItemResource s)
+
+instance P.HasProject (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeProjectMetadataItemResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeProjectMetadataItemResource s)
 
 instance P.HasValue (ComputeProjectMetadataItemResource s) (TF.Attr s P.Text) where
     value =
@@ -3937,6 +4868,12 @@ data ComputeRegionAutoscalerResource s = ComputeRegionAutoscalerResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project           :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region            :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _target            :: TF.Attr s P.Text
     -- ^ @target@ - (Required)
     --
@@ -3954,6 +4891,8 @@ computeRegionAutoscalerResource _name _autoscalingPolicy _target =
             { _autoscalingPolicy = _autoscalingPolicy
             , _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _target = _target
             }
 
@@ -3962,6 +4901,8 @@ instance TF.IsObject (ComputeRegionAutoscalerResource s) where
         [ TF.assign "autoscaling_policy" <$> TF.attribute _autoscalingPolicy
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "target" <$> TF.attribute _target
         ]
 
@@ -3986,6 +4927,16 @@ instance P.HasName (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRegionAutoscalerResource s)
+
+instance P.HasProject (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRegionAutoscalerResource s)
+
+instance P.HasRegion (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRegionAutoscalerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRegionAutoscalerResource s)
 
 instance P.HasTarget (ComputeRegionAutoscalerResource s) (TF.Attr s P.Text) where
     target =
@@ -4027,6 +4978,21 @@ data ComputeRegionBackendServiceResource s = ComputeRegionBackendServiceResource
     , _name                         :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project                      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _protocol                     :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional)
+    --
+    , _region                       :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _sessionAffinity              :: TF.Attr s P.Text
+    -- ^ @session_affinity@ - (Optional)
+    --
+    , _timeoutSec                   :: TF.Attr s P.Int
+    -- ^ @timeout_sec@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_region_backend_service@ resource value.
@@ -4042,6 +5008,11 @@ computeRegionBackendServiceResource _healthChecks _name =
             , _description = TF.Nil
             , _healthChecks = _healthChecks
             , _name = _name
+            , _project = TF.Nil
+            , _protocol = TF.Nil
+            , _region = TF.Nil
+            , _sessionAffinity = TF.Nil
+            , _timeoutSec = TF.Nil
             }
 
 instance TF.IsObject (ComputeRegionBackendServiceResource s) where
@@ -4051,6 +5022,11 @@ instance TF.IsObject (ComputeRegionBackendServiceResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "health_checks" <$> TF.attribute _healthChecks
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "session_affinity" <$> TF.attribute _sessionAffinity
+        , TF.assign "timeout_sec" <$> TF.attribute _timeoutSec
         ]
 
 instance TF.IsValid (ComputeRegionBackendServiceResource s) where
@@ -4080,6 +5056,31 @@ instance P.HasName (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) wh
     name =
         P.lens (_name :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRegionBackendServiceResource s)
+
+instance P.HasProject (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRegionBackendServiceResource s)
+
+instance P.HasProtocol (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: ComputeRegionBackendServiceResource s)
+
+instance P.HasRegion (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRegionBackendServiceResource s)
+
+instance P.HasSessionAffinity (ComputeRegionBackendServiceResource s) (TF.Attr s P.Text) where
+    sessionAffinity =
+        P.lens (_sessionAffinity :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sessionAffinity = a } :: ComputeRegionBackendServiceResource s)
+
+instance P.HasTimeoutSec (ComputeRegionBackendServiceResource s) (TF.Attr s P.Int) where
+    timeoutSec =
+        P.lens (_timeoutSec :: ComputeRegionBackendServiceResource s -> TF.Attr s P.Int)
+               (\s a -> s { _timeoutSec = a } :: ComputeRegionBackendServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionBackendServiceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4122,8 +5123,17 @@ data ComputeRegionDiskResource s = ComputeRegionDiskResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _replicaZones :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @replica_zones@ - (Required, Forces New)
+    --
+    , _size :: TF.Attr s P.Int
+    -- ^ @size@ - (Optional)
     --
     , _snapshot :: TF.Attr s P.Text
     -- ^ @snapshot@ - (Optional, Forces New)
@@ -4148,7 +5158,10 @@ computeRegionDiskResource _name _replicaZones =
             , _diskEncryptionKey = TF.Nil
             , _labels = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _replicaZones = _replicaZones
+            , _size = TF.Nil
             , _snapshot = TF.Nil
             , _sourceSnapshotEncryptionKey = TF.Nil
             , _type' = TF.value "pd-standard"
@@ -4160,7 +5173,10 @@ instance TF.IsObject (ComputeRegionDiskResource s) where
         , TF.assign "disk_encryption_key" <$> TF.attribute _diskEncryptionKey
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "replica_zones" <$> TF.attribute _replicaZones
+        , TF.assign "size" <$> TF.attribute _size
         , TF.assign "snapshot" <$> TF.attribute _snapshot
         , TF.assign "source_snapshot_encryption_key" <$> TF.attribute _sourceSnapshotEncryptionKey
         , TF.assign "type" <$> TF.attribute _type'
@@ -4197,10 +5213,25 @@ instance P.HasName (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRegionDiskResource s)
 
+instance P.HasProject (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRegionDiskResource s)
+
+instance P.HasRegion (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRegionDiskResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRegionDiskResource s)
+
 instance P.HasReplicaZones (ComputeRegionDiskResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     replicaZones =
         P.lens (_replicaZones :: ComputeRegionDiskResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _replicaZones = a } :: ComputeRegionDiskResource s)
+
+instance P.HasSize (ComputeRegionDiskResource s) (TF.Attr s P.Int) where
+    size =
+        P.lens (_size :: ComputeRegionDiskResource s -> TF.Attr s P.Int)
+               (\s a -> s { _size = a } :: ComputeRegionDiskResource s)
 
 instance P.HasSnapshot (ComputeRegionDiskResource s) (TF.Attr s P.Text) where
     snapshot =
@@ -4255,37 +5286,49 @@ instance s ~ s' => P.HasComputedUsers (TF.Ref s' (ComputeRegionDiskResource s)) 
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_region_instance_group_manager.html terraform documentation>
 -- for more information.
 data ComputeRegionInstanceGroupManagerResource s = ComputeRegionInstanceGroupManagerResource'
-    { _autoHealingPolicies :: TF.Attr s (AutoHealingPoliciesSetting s)
+    { _autoHealingPolicies     :: TF.Attr s (AutoHealingPoliciesSetting s)
     -- ^ @auto_healing_policies@ - (Optional)
     --
-    , _baseInstanceName    :: TF.Attr s P.Text
+    , _baseInstanceName        :: TF.Attr s P.Text
     -- ^ @base_instance_name@ - (Required, Forces New)
     --
-    , _description         :: TF.Attr s P.Text
+    , _description             :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _instanceTemplate    :: TF.Attr s P.Text
+    , _distributionPolicyZones :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @distribution_policy_zones@ - (Optional, Forces New)
+    --
+    , _instanceTemplate        :: TF.Attr s P.Text
     -- ^ @instance_template@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name                    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namedPort           :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
+    , _namedPort               :: TF.Attr s [TF.Attr s (NamedPortSetting s)]
     -- ^ @named_port@ - (Optional)
     --
-    , _region              :: TF.Attr s P.Text
+    , _project                 :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region                  :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    , _rollingUpdatePolicy :: TF.Attr s (RollingUpdatePolicySetting s)
+    , _rollingUpdatePolicy     :: TF.Attr s (RollingUpdatePolicySetting s)
     -- ^ @rolling_update_policy@ - (Optional)
     --
-    , _targetPools         :: TF.Attr s [TF.Attr s P.Text]
+    , _targetPools             :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @target_pools@ - (Optional)
     --
-    , _updateStrategy      :: TF.Attr s P.Text
+    , _targetSize              :: TF.Attr s P.Int
+    -- ^ @target_size@ - (Optional)
+    --
+    , _updateStrategy          :: TF.Attr s P.Text
     -- ^ @update_strategy@ - (Optional)
     --
-    , _waitForInstances    :: TF.Attr s P.Bool
+    , _version                 :: TF.Attr s [TF.Attr s (VersionSetting s)]
+    -- ^ @version@ - (Optional)
+    --
+    , _waitForInstances        :: TF.Attr s P.Bool
     -- ^ @wait_for_instances@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4302,13 +5345,17 @@ computeRegionInstanceGroupManagerResource _baseInstanceName _name _region =
             { _autoHealingPolicies = TF.Nil
             , _baseInstanceName = _baseInstanceName
             , _description = TF.Nil
+            , _distributionPolicyZones = TF.Nil
             , _instanceTemplate = TF.Nil
             , _name = _name
             , _namedPort = TF.Nil
+            , _project = TF.Nil
             , _region = _region
             , _rollingUpdatePolicy = TF.Nil
             , _targetPools = TF.Nil
+            , _targetSize = TF.Nil
             , _updateStrategy = TF.value "NONE"
+            , _version = TF.Nil
             , _waitForInstances = TF.value P.False
             }
 
@@ -4317,13 +5364,17 @@ instance TF.IsObject (ComputeRegionInstanceGroupManagerResource s) where
         [ TF.assign "auto_healing_policies" <$> TF.attribute _autoHealingPolicies
         , TF.assign "base_instance_name" <$> TF.attribute _baseInstanceName
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "distribution_policy_zones" <$> TF.attribute _distributionPolicyZones
         , TF.assign "instance_template" <$> TF.attribute _instanceTemplate
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "named_port" <$> TF.attribute _namedPort
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "rolling_update_policy" <$> TF.attribute _rollingUpdatePolicy
         , TF.assign "target_pools" <$> TF.attribute _targetPools
+        , TF.assign "target_size" <$> TF.attribute _targetSize
         , TF.assign "update_strategy" <$> TF.attribute _updateStrategy
+        , TF.assign "version" <$> TF.attribute _version
         , TF.assign "wait_for_instances" <$> TF.attribute _waitForInstances
         ]
 
@@ -4353,6 +5404,11 @@ instance P.HasDescription (ComputeRegionInstanceGroupManagerResource s) (TF.Attr
         P.lens (_description :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeRegionInstanceGroupManagerResource s)
 
+instance P.HasDistributionPolicyZones (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    distributionPolicyZones =
+        P.lens (_distributionPolicyZones :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _distributionPolicyZones = a } :: ComputeRegionInstanceGroupManagerResource s)
+
 instance P.HasInstanceTemplate (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
     instanceTemplate =
         P.lens (_instanceTemplate :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
@@ -4367,6 +5423,11 @@ instance P.HasNamedPort (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s
     namedPort =
         P.lens (_namedPort :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (NamedPortSetting s)])
                (\s a -> s { _namedPort = a } :: ComputeRegionInstanceGroupManagerResource s)
+
+instance P.HasProject (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasRegion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
     region =
@@ -4383,10 +5444,20 @@ instance P.HasTargetPools (ComputeRegionInstanceGroupManagerResource s) (TF.Attr
         P.lens (_targetPools :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _targetPools = a } :: ComputeRegionInstanceGroupManagerResource s)
 
+instance P.HasTargetSize (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Int) where
+    targetSize =
+        P.lens (_targetSize :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Int)
+               (\s a -> s { _targetSize = a } :: ComputeRegionInstanceGroupManagerResource s)
+
 instance P.HasUpdateStrategy (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Text) where
     updateStrategy =
         P.lens (_updateStrategy :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s P.Text)
                (\s a -> s { _updateStrategy = a } :: ComputeRegionInstanceGroupManagerResource s)
+
+instance P.HasVersion (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s [TF.Attr s (VersionSetting s)]) where
+    version =
+        P.lens (_version :: ComputeRegionInstanceGroupManagerResource s -> TF.Attr s [TF.Attr s (VersionSetting s)])
+               (\s a -> s { _version = a } :: ComputeRegionInstanceGroupManagerResource s)
 
 instance P.HasWaitForInstances (ComputeRegionInstanceGroupManagerResource s) (TF.Attr s P.Bool) where
     waitForInstances =
@@ -4452,6 +5523,9 @@ data ComputeRouteResource s = ComputeRouteResource'
     , _priority            :: TF.Attr s P.Int
     -- ^ @priority@ - (Optional, Forces New)
     --
+    , _project             :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _tags                :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
@@ -4476,6 +5550,7 @@ computeRouteResource _name _network _destRange =
             , _nextHopIp = TF.Nil
             , _nextHopVpnTunnel = TF.Nil
             , _priority = TF.value 1000
+            , _project = TF.Nil
             , _tags = TF.Nil
             }
 
@@ -4491,6 +5566,7 @@ instance TF.IsObject (ComputeRouteResource s) where
         , TF.assign "next_hop_ip" <$> TF.attribute _nextHopIp
         , TF.assign "next_hop_vpn_tunnel" <$> TF.attribute _nextHopVpnTunnel
         , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "tags" <$> TF.attribute _tags
         ]
 
@@ -4547,6 +5623,11 @@ instance P.HasPriority (ComputeRouteResource s) (TF.Attr s P.Int) where
         P.lens (_priority :: ComputeRouteResource s -> TF.Attr s P.Int)
                (\s a -> s { _priority = a } :: ComputeRouteResource s)
 
+instance P.HasProject (ComputeRouteResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRouteResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRouteResource s)
+
 instance P.HasTags (ComputeRouteResource s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
         P.lens (_tags :: ComputeRouteResource s -> TF.Attr s [TF.Attr s P.Text])
@@ -4581,6 +5662,12 @@ data ComputeRouterResource s = ComputeRouterResource'
     , _network     :: TF.Attr s P.Text
     -- ^ @network@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region      :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_router@ resource value.
@@ -4595,6 +5682,8 @@ computeRouterResource _name _network =
             , _description = TF.Nil
             , _name = _name
             , _network = _network
+            , _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeRouterResource s) where
@@ -4603,6 +5692,8 @@ instance TF.IsObject (ComputeRouterResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeRouterResource s) where
@@ -4632,6 +5723,16 @@ instance P.HasNetwork (ComputeRouterResource s) (TF.Attr s P.Text) where
         P.lens (_network :: ComputeRouterResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ComputeRouterResource s)
 
+instance P.HasProject (ComputeRouterResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRouterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRouterResource s)
+
+instance P.HasRegion (ComputeRouterResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRouterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRouterResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRouterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -4658,6 +5759,12 @@ data ComputeRouterInterfaceResource s = ComputeRouterInterfaceResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region    :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _router    :: TF.Attr s P.Text
     -- ^ @router@ - (Required, Forces New)
     --
@@ -4677,6 +5784,8 @@ computeRouterInterfaceResource _name _router _vpnTunnel =
         ComputeRouterInterfaceResource'
             { _ipRange = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _router = _router
             , _vpnTunnel = _vpnTunnel
             }
@@ -4685,6 +5794,8 @@ instance TF.IsObject (ComputeRouterInterfaceResource s) where
     toObject ComputeRouterInterfaceResource'{..} = P.catMaybes
         [ TF.assign "ip_range" <$> TF.attribute _ipRange
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "router" <$> TF.attribute _router
         , TF.assign "vpn_tunnel" <$> TF.attribute _vpnTunnel
         ]
@@ -4701,6 +5812,16 @@ instance P.HasName (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeRouterInterfaceResource s)
+
+instance P.HasProject (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRouterInterfaceResource s)
+
+instance P.HasRegion (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRouterInterfaceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRouterInterfaceResource s)
 
 instance P.HasRouter (ComputeRouterInterfaceResource s) (TF.Attr s P.Text) where
     router =
@@ -4741,6 +5862,12 @@ data ComputeRouterPeerResource s = ComputeRouterPeerResource'
     , _peerIpAddress           :: TF.Attr s P.Text
     -- ^ @peer_ip_address@ - (Optional, Forces New)
     --
+    , _project                 :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region                  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _router                  :: TF.Attr s P.Text
     -- ^ @router@ - (Required, Forces New)
     --
@@ -4761,6 +5888,8 @@ computeRouterPeerResource _peerAsn _interface _name _router =
             , _name = _name
             , _peerAsn = _peerAsn
             , _peerIpAddress = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _router = _router
             }
 
@@ -4771,6 +5900,8 @@ instance TF.IsObject (ComputeRouterPeerResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "peer_asn" <$> TF.attribute _peerAsn
         , TF.assign "peer_ip_address" <$> TF.attribute _peerIpAddress
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "router" <$> TF.attribute _router
         ]
 
@@ -4802,6 +5933,16 @@ instance P.HasPeerIpAddress (ComputeRouterPeerResource s) (TF.Attr s P.Text) whe
         P.lens (_peerIpAddress :: ComputeRouterPeerResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerIpAddress = a } :: ComputeRouterPeerResource s)
 
+instance P.HasProject (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRouterPeerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRouterPeerResource s)
+
+instance P.HasRegion (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRouterPeerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRouterPeerResource s)
+
 instance P.HasRouter (ComputeRouterPeerResource s) (TF.Attr s P.Text) where
     router =
         P.lens (_router :: ComputeRouterPeerResource s -> TF.Attr s P.Text)
@@ -4830,6 +5971,12 @@ data ComputeSecurityPolicyResource s = ComputeSecurityPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    -- ^ @rule@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_security_policy@ resource value.
@@ -4841,12 +5988,16 @@ computeSecurityPolicyResource _name =
         ComputeSecurityPolicyResource'
             { _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _rule = TF.Nil
             }
 
 instance TF.IsObject (ComputeSecurityPolicyResource s) where
     toObject ComputeSecurityPolicyResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "rule" <$> TF.attribute _rule
         ]
 
 instance TF.IsValid (ComputeSecurityPolicyResource s) where
@@ -4861,6 +6012,16 @@ instance P.HasName (ComputeSecurityPolicyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeSecurityPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeSecurityPolicyResource s)
+
+instance P.HasProject (ComputeSecurityPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSecurityPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSecurityPolicyResource s)
+
+instance P.HasRule (ComputeSecurityPolicyResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+    rule =
+        P.lens (_rule :: ComputeSecurityPolicyResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+               (\s a -> s { _rule = a } :: ComputeSecurityPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSecurityPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -4971,6 +6132,9 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
     , _name                       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project                    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _snapshotEncryptionKeyRaw   :: TF.Attr s P.Text
     -- ^ @snapshot_encryption_key_raw@ - (Optional, Forces New)
     --
@@ -4979,6 +6143,9 @@ data ComputeSnapshotResource s = ComputeSnapshotResource'
     --
     , _sourceDiskEncryptionKeyRaw :: TF.Attr s P.Text
     -- ^ @source_disk_encryption_key_raw@ - (Optional, Forces New)
+    --
+    , _zone                       :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -4992,18 +6159,22 @@ computeSnapshotResource _sourceDisk _name =
         ComputeSnapshotResource'
             { _labels = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _snapshotEncryptionKeyRaw = TF.Nil
             , _sourceDisk = _sourceDisk
             , _sourceDiskEncryptionKeyRaw = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeSnapshotResource s) where
     toObject ComputeSnapshotResource'{..} = P.catMaybes
         [ TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "snapshot_encryption_key_raw" <$> TF.attribute _snapshotEncryptionKeyRaw
         , TF.assign "source_disk" <$> TF.attribute _sourceDisk
         , TF.assign "source_disk_encryption_key_raw" <$> TF.attribute _sourceDiskEncryptionKeyRaw
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeSnapshotResource s) where
@@ -5019,6 +6190,11 @@ instance P.HasName (ComputeSnapshotResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeSnapshotResource s)
 
+instance P.HasProject (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSnapshotResource s)
+
 instance P.HasSnapshotEncryptionKeyRaw (ComputeSnapshotResource s) (TF.Attr s P.Text) where
     snapshotEncryptionKeyRaw =
         P.lens (_snapshotEncryptionKeyRaw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
@@ -5033,6 +6209,11 @@ instance P.HasSourceDiskEncryptionKeyRaw (ComputeSnapshotResource s) (TF.Attr s 
     sourceDiskEncryptionKeyRaw =
         P.lens (_sourceDiskEncryptionKeyRaw :: ComputeSnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _sourceDiskEncryptionKeyRaw = a } :: ComputeSnapshotResource s)
+
+instance P.HasZone (ComputeSnapshotResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeSnapshotResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSnapshotResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5069,8 +6250,23 @@ data ComputeSslCertificateResource s = ComputeSslCertificateResource'
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'namePrefix'
+    , _namePrefix  :: TF.Attr s P.Text
+    -- ^ @name_prefix@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
     , _privateKey  :: TF.Attr s P.Text
     -- ^ @private_key@ - (Required, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5084,18 +6280,35 @@ computeSslCertificateResource _certificate _privateKey =
         ComputeSslCertificateResource'
             { _certificate = _certificate
             , _description = TF.Nil
+            , _name = TF.Nil
+            , _namePrefix = TF.Nil
             , _privateKey = _privateKey
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ComputeSslCertificateResource s) where
     toObject ComputeSslCertificateResource'{..} = P.catMaybes
         [ TF.assign "certificate" <$> TF.attribute _certificate
         , TF.assign "description" <$> TF.attribute _description
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "name_prefix" <$> TF.attribute _namePrefix
         , TF.assign "private_key" <$> TF.attribute _privateKey
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ComputeSslCertificateResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ComputeSslCertificateResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_namePrefix"
+                            ])
+        , if (_namePrefix P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_namePrefix",
+                            [ "_name"
+                            ])
+        ])
 
 instance P.HasCertificate (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
     certificate =
@@ -5107,10 +6320,25 @@ instance P.HasDescription (ComputeSslCertificateResource s) (TF.Attr s P.Text) w
         P.lens (_description :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ComputeSslCertificateResource s)
 
+instance P.HasName (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeSslCertificateResource s)
+
+instance P.HasNamePrefix (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+    namePrefix =
+        P.lens (_namePrefix :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _namePrefix = a } :: ComputeSslCertificateResource s)
+
 instance P.HasPrivateKey (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
     privateKey =
         P.lens (_privateKey :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKey = a } :: ComputeSslCertificateResource s)
+
+instance P.HasProject (ComputeSslCertificateResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSslCertificateResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSslCertificateResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSslCertificateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -5150,6 +6378,9 @@ data ComputeSslPolicyResource s = ComputeSslPolicyResource'
     , _profile        :: TF.Attr s P.Text
     -- ^ @profile@ - (Optional)
     --
+    , _project        :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_ssl_policy@ resource value.
@@ -5164,6 +6395,7 @@ computeSslPolicyResource _name =
             , _minTlsVersion = TF.value "TLS_1_0"
             , _name = _name
             , _profile = TF.value "COMPATIBLE"
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ComputeSslPolicyResource s) where
@@ -5173,6 +6405,7 @@ instance TF.IsObject (ComputeSslPolicyResource s) where
         , TF.assign "min_tls_version" <$> TF.attribute _minTlsVersion
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "profile" <$> TF.attribute _profile
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ComputeSslPolicyResource s) where
@@ -5203,6 +6436,11 @@ instance P.HasProfile (ComputeSslPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_profile :: ComputeSslPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _profile = a } :: ComputeSslPolicyResource s)
 
+instance P.HasProject (ComputeSslPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSslPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSslPolicyResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSslPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -5226,23 +6464,32 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslPolicyResource s)
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html terraform documentation>
 -- for more information.
 data ComputeSubnetworkResource s = ComputeSubnetworkResource'
-    { _description           :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _enableFlowLogs        :: TF.Attr s P.Bool
+    , _enableFlowLogs :: TF.Attr s P.Bool
     -- ^ @enable_flow_logs@ - (Optional)
     --
-    , _ipCidrRange           :: TF.Attr s P.Text
+    , _ipCidrRange :: TF.Attr s P.Text
     -- ^ @ip_cidr_range@ - (Required)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _network               :: TF.Attr s P.Text
+    , _network :: TF.Attr s P.Text
     -- ^ @network@ - (Required, Forces New)
     --
     , _privateIpGoogleAccess :: TF.Attr s P.Bool
     -- ^ @private_ip_google_access@ - (Optional)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _secondaryIpRange :: TF.Attr s [TF.Attr s (SecondaryIpRangeSetting s)]
+    -- ^ @secondary_ip_range@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -5261,6 +6508,9 @@ computeSubnetworkResource _name _network _ipCidrRange =
             , _name = _name
             , _network = _network
             , _privateIpGoogleAccess = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
+            , _secondaryIpRange = TF.Nil
             }
 
 instance TF.IsObject (ComputeSubnetworkResource s) where
@@ -5271,6 +6521,9 @@ instance TF.IsObject (ComputeSubnetworkResource s) where
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
         , TF.assign "private_ip_google_access" <$> TF.attribute _privateIpGoogleAccess
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "secondary_ip_range" <$> TF.attribute _secondaryIpRange
         ]
 
 instance TF.IsValid (ComputeSubnetworkResource s) where
@@ -5306,6 +6559,21 @@ instance P.HasPrivateIpGoogleAccess (ComputeSubnetworkResource s) (TF.Attr s P.B
         P.lens (_privateIpGoogleAccess :: ComputeSubnetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _privateIpGoogleAccess = a } :: ComputeSubnetworkResource s)
 
+instance P.HasProject (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSubnetworkResource s)
+
+instance P.HasRegion (ComputeSubnetworkResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeSubnetworkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeSubnetworkResource s)
+
+instance P.HasSecondaryIpRange (ComputeSubnetworkResource s) (TF.Attr s [TF.Attr s (SecondaryIpRangeSetting s)]) where
+    secondaryIpRange =
+        P.lens (_secondaryIpRange :: ComputeSubnetworkResource s -> TF.Attr s [TF.Attr s (SecondaryIpRangeSetting s)])
+               (\s a -> s { _secondaryIpRange = a } :: ComputeSubnetworkResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -5338,6 +6606,12 @@ data ComputeSubnetworkIamBindingResource s = ComputeSubnetworkIamBindingResource
     { _members    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region     :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _role       :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -5356,6 +6630,8 @@ computeSubnetworkIamBindingResource _members _role _subnetwork =
     TF.unsafeResource "google_compute_subnetwork_iam_binding" TF.validator $
         ComputeSubnetworkIamBindingResource'
             { _members = _members
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _role = _role
             , _subnetwork = _subnetwork
             }
@@ -5363,6 +6639,8 @@ computeSubnetworkIamBindingResource _members _role _subnetwork =
 instance TF.IsObject (ComputeSubnetworkIamBindingResource s) where
     toObject ComputeSubnetworkIamBindingResource'{..} = P.catMaybes
         [ TF.assign "members" <$> TF.attribute _members
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         ]
@@ -5374,6 +6652,16 @@ instance P.HasMembers (ComputeSubnetworkIamBindingResource s) (TF.Attr s [TF.Att
     members =
         P.lens (_members :: ComputeSubnetworkIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _members = a } :: ComputeSubnetworkIamBindingResource s)
+
+instance P.HasProject (ComputeSubnetworkIamBindingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSubnetworkIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSubnetworkIamBindingResource s)
+
+instance P.HasRegion (ComputeSubnetworkIamBindingResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeSubnetworkIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeSubnetworkIamBindingResource s)
 
 instance P.HasRole (ComputeSubnetworkIamBindingResource s) (TF.Attr s P.Text) where
     role =
@@ -5405,6 +6693,12 @@ data ComputeSubnetworkIamMemberResource s = ComputeSubnetworkIamMemberResource'
     { _member     :: TF.Attr s P.Text
     -- ^ @member@ - (Required, Forces New)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region     :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _role       :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -5423,6 +6717,8 @@ computeSubnetworkIamMemberResource _member _role _subnetwork =
     TF.unsafeResource "google_compute_subnetwork_iam_member" TF.validator $
         ComputeSubnetworkIamMemberResource'
             { _member = _member
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _role = _role
             , _subnetwork = _subnetwork
             }
@@ -5430,6 +6726,8 @@ computeSubnetworkIamMemberResource _member _role _subnetwork =
 instance TF.IsObject (ComputeSubnetworkIamMemberResource s) where
     toObject ComputeSubnetworkIamMemberResource'{..} = P.catMaybes
         [ TF.assign "member" <$> TF.attribute _member
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         ]
@@ -5441,6 +6739,16 @@ instance P.HasMember (ComputeSubnetworkIamMemberResource s) (TF.Attr s P.Text) w
     member =
         P.lens (_member :: ComputeSubnetworkIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _member = a } :: ComputeSubnetworkIamMemberResource s)
+
+instance P.HasProject (ComputeSubnetworkIamMemberResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSubnetworkIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSubnetworkIamMemberResource s)
+
+instance P.HasRegion (ComputeSubnetworkIamMemberResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeSubnetworkIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeSubnetworkIamMemberResource s)
 
 instance P.HasRole (ComputeSubnetworkIamMemberResource s) (TF.Attr s P.Text) where
     role =
@@ -5472,6 +6780,12 @@ data ComputeSubnetworkIamPolicyResource s = ComputeSubnetworkIamPolicyResource'
     { _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region     :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     , _subnetwork :: TF.Attr s P.Text
     -- ^ @subnetwork@ - (Required, Forces New)
     --
@@ -5486,12 +6800,16 @@ computeSubnetworkIamPolicyResource _policyData _subnetwork =
     TF.unsafeResource "google_compute_subnetwork_iam_policy" TF.validator $
         ComputeSubnetworkIamPolicyResource'
             { _policyData = _policyData
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _subnetwork = _subnetwork
             }
 
 instance TF.IsObject (ComputeSubnetworkIamPolicyResource s) where
     toObject ComputeSubnetworkIamPolicyResource'{..} = P.catMaybes
         [ TF.assign "policy_data" <$> TF.attribute _policyData
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         ]
 
@@ -5502,6 +6820,16 @@ instance P.HasPolicyData (ComputeSubnetworkIamPolicyResource s) (TF.Attr s P.Tex
     policyData =
         P.lens (_policyData :: ComputeSubnetworkIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: ComputeSubnetworkIamPolicyResource s)
+
+instance P.HasProject (ComputeSubnetworkIamPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSubnetworkIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSubnetworkIamPolicyResource s)
+
+instance P.HasRegion (ComputeSubnetworkIamPolicyResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeSubnetworkIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeSubnetworkIamPolicyResource s)
 
 instance P.HasSubnetwork (ComputeSubnetworkIamPolicyResource s) (TF.Attr s P.Text) where
     subnetwork =
@@ -5531,6 +6859,9 @@ data ComputeTargetHttpProxyResource s = ComputeTargetHttpProxyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _urlMap      :: TF.Attr s P.Text
     -- ^ @url_map@ - (Required)
     --
@@ -5546,6 +6877,7 @@ computeTargetHttpProxyResource _urlMap _name =
         ComputeTargetHttpProxyResource'
             { _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _urlMap = _urlMap
             }
 
@@ -5553,6 +6885,7 @@ instance TF.IsObject (ComputeTargetHttpProxyResource s) where
     toObject ComputeTargetHttpProxyResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "url_map" <$> TF.attribute _urlMap
         ]
 
@@ -5568,6 +6901,11 @@ instance P.HasName (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeTargetHttpProxyResource s)
+
+instance P.HasProject (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeTargetHttpProxyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeTargetHttpProxyResource s)
 
 instance P.HasUrlMap (ComputeTargetHttpProxyResource s) (TF.Attr s P.Text) where
     urlMap =
@@ -5600,6 +6938,9 @@ data ComputeTargetHttpsProxyResource s = ComputeTargetHttpsProxyResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project         :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _quicOverride    :: TF.Attr s P.Text
     -- ^ @quic_override@ - (Optional)
     --
@@ -5625,6 +6966,7 @@ computeTargetHttpsProxyResource _sslCertificates _urlMap _name =
         ComputeTargetHttpsProxyResource'
             { _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _quicOverride = TF.Nil
             , _sslCertificates = _sslCertificates
             , _sslPolicy = TF.Nil
@@ -5635,6 +6977,7 @@ instance TF.IsObject (ComputeTargetHttpsProxyResource s) where
     toObject ComputeTargetHttpsProxyResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "quic_override" <$> TF.attribute _quicOverride
         , TF.assign "ssl_certificates" <$> TF.attribute _sslCertificates
         , TF.assign "ssl_policy" <$> TF.attribute _sslPolicy
@@ -5653,6 +6996,11 @@ instance P.HasName (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeTargetHttpsProxyResource s)
+
+instance P.HasProject (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeTargetHttpsProxyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeTargetHttpsProxyResource s)
 
 instance P.HasQuicOverride (ComputeTargetHttpsProxyResource s) (TF.Attr s P.Text) where
     quicOverride =
@@ -5706,8 +7054,17 @@ data ComputeTargetPoolResource s = ComputeTargetPoolResource'
     , _healthChecks    :: TF.Attr s P.Text
     -- ^ @health_checks@ - (Optional)
     --
+    , _instances       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @instances@ - (Optional)
+    --
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project         :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region          :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
     --
     , _sessionAffinity :: TF.Attr s P.Text
     -- ^ @session_affinity@ - (Optional, Forces New)
@@ -5725,7 +7082,10 @@ computeTargetPoolResource _name =
             , _description = TF.Nil
             , _failoverRatio = TF.Nil
             , _healthChecks = TF.Nil
+            , _instances = TF.Nil
             , _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _sessionAffinity = TF.value "NONE"
             }
 
@@ -5735,7 +7095,10 @@ instance TF.IsObject (ComputeTargetPoolResource s) where
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "failover_ratio" <$> TF.attribute _failoverRatio
         , TF.assign "health_checks" <$> TF.attribute _healthChecks
+        , TF.assign "instances" <$> TF.attribute _instances
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "session_affinity" <$> TF.attribute _sessionAffinity
         ]
 
@@ -5762,10 +7125,25 @@ instance P.HasHealthChecks (ComputeTargetPoolResource s) (TF.Attr s P.Text) wher
         P.lens (_healthChecks :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _healthChecks = a } :: ComputeTargetPoolResource s)
 
+instance P.HasInstances (ComputeTargetPoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    instances =
+        P.lens (_instances :: ComputeTargetPoolResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instances = a } :: ComputeTargetPoolResource s)
+
 instance P.HasName (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeTargetPoolResource s)
+
+instance P.HasProject (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeTargetPoolResource s)
+
+instance P.HasRegion (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeTargetPoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeTargetPoolResource s)
 
 instance P.HasSessionAffinity (ComputeTargetPoolResource s) (TF.Attr s P.Text) where
     sessionAffinity =
@@ -5801,6 +7179,9 @@ data ComputeTargetSslProxyResource s = ComputeTargetSslProxyResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project         :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _proxyHeader     :: TF.Attr s P.Text
     -- ^ @proxy_header@ - (Optional)
     --
@@ -5824,6 +7205,7 @@ computeTargetSslProxyResource _sslCertificates _name _backendService =
             { _backendService = _backendService
             , _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _proxyHeader = TF.value "NONE"
             , _sslCertificates = _sslCertificates
             , _sslPolicy = TF.Nil
@@ -5834,6 +7216,7 @@ instance TF.IsObject (ComputeTargetSslProxyResource s) where
         [ TF.assign "backend_service" <$> TF.attribute _backendService
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "proxy_header" <$> TF.attribute _proxyHeader
         , TF.assign "ssl_certificates" <$> TF.attribute _sslCertificates
         , TF.assign "ssl_policy" <$> TF.attribute _sslPolicy
@@ -5856,6 +7239,11 @@ instance P.HasName (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeTargetSslProxyResource s)
+
+instance P.HasProject (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeTargetSslProxyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeTargetSslProxyResource s)
 
 instance P.HasProxyHeader (ComputeTargetSslProxyResource s) (TF.Attr s P.Text) where
     proxyHeader =
@@ -5901,6 +7289,9 @@ data ComputeTargetTcpProxyResource s = ComputeTargetTcpProxyResource'
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project        :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _proxyHeader    :: TF.Attr s P.Text
     -- ^ @proxy_header@ - (Optional)
     --
@@ -5917,6 +7308,7 @@ computeTargetTcpProxyResource _name _backendService =
             { _backendService = _backendService
             , _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _proxyHeader = TF.value "NONE"
             }
 
@@ -5925,6 +7317,7 @@ instance TF.IsObject (ComputeTargetTcpProxyResource s) where
         [ TF.assign "backend_service" <$> TF.attribute _backendService
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "proxy_header" <$> TF.attribute _proxyHeader
         ]
 
@@ -5945,6 +7338,11 @@ instance P.HasName (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeTargetTcpProxyResource s)
+
+instance P.HasProject (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeTargetTcpProxyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeTargetTcpProxyResource s)
 
 instance P.HasProxyHeader (ComputeTargetTcpProxyResource s) (TF.Attr s P.Text) where
     proxyHeader =
@@ -5986,6 +7384,9 @@ data ComputeUrlMapResource s = ComputeUrlMapResource'
     , _pathMatcher    :: TF.Attr s [TF.Attr s (PathMatcherSetting s)]
     -- ^ @path_matcher@ - (Optional)
     --
+    , _project        :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _test           :: TF.Attr s [TF.Attr s (TestSetting s)]
     -- ^ @test@ - (Optional)
     --
@@ -6004,6 +7405,7 @@ computeUrlMapResource _name _defaultService =
             , _hostRule = TF.Nil
             , _name = _name
             , _pathMatcher = TF.Nil
+            , _project = TF.Nil
             , _test = TF.Nil
             }
 
@@ -6014,6 +7416,7 @@ instance TF.IsObject (ComputeUrlMapResource s) where
         , TF.assign "host_rule" <$> TF.attribute _hostRule
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "path_matcher" <$> TF.attribute _pathMatcher
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "test" <$> TF.attribute _test
         ]
 
@@ -6044,6 +7447,11 @@ instance P.HasPathMatcher (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (PathM
     pathMatcher =
         P.lens (_pathMatcher :: ComputeUrlMapResource s -> TF.Attr s [TF.Attr s (PathMatcherSetting s)])
                (\s a -> s { _pathMatcher = a } :: ComputeUrlMapResource s)
+
+instance P.HasProject (ComputeUrlMapResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeUrlMapResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeUrlMapResource s)
 
 instance P.HasTest (ComputeUrlMapResource s) (TF.Attr s [TF.Attr s (TestSetting s)]) where
     test =
@@ -6079,6 +7487,12 @@ data ComputeVpnGatewayResource s = ComputeVpnGatewayResource'
     , _network     :: TF.Attr s P.Text
     -- ^ @network@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region      :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_vpn_gateway@ resource value.
@@ -6092,6 +7506,8 @@ computeVpnGatewayResource _name _network =
             { _description = TF.Nil
             , _name = _name
             , _network = _network
+            , _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeVpnGatewayResource s) where
@@ -6099,6 +7515,8 @@ instance TF.IsObject (ComputeVpnGatewayResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeVpnGatewayResource s) where
@@ -6118,6 +7536,16 @@ instance P.HasNetwork (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
     network =
         P.lens (_network :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ComputeVpnGatewayResource s)
+
+instance P.HasProject (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeVpnGatewayResource s)
+
+instance P.HasRegion (ComputeVpnGatewayResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeVpnGatewayResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeVpnGatewayResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVpnGatewayResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -6139,28 +7567,40 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnGatewayResource s
 -- See the <https://www.terraform.io/docs/providers/google/r/compute_vpn_tunnel.html terraform documentation>
 -- for more information.
 data ComputeVpnTunnelResource s = ComputeVpnTunnelResource'
-    { _description      :: TF.Attr s P.Text
+    { _description           :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _ikeVersion       :: TF.Attr s P.Int
+    , _ikeVersion            :: TF.Attr s P.Int
     -- ^ @ike_version@ - (Optional, Forces New)
     --
-    , _labels           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _labels                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _name             :: TF.Attr s P.Text
+    , _localTrafficSelector  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @local_traffic_selector@ - (Optional, Forces New)
+    --
+    , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _peerIp           :: TF.Attr s P.Text
+    , _peerIp                :: TF.Attr s P.Text
     -- ^ @peer_ip@ - (Required, Forces New)
     --
-    , _router           :: TF.Attr s P.Text
+    , _project               :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region                :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _remoteTrafficSelector :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @remote_traffic_selector@ - (Optional, Forces New)
+    --
+    , _router                :: TF.Attr s P.Text
     -- ^ @router@ - (Optional, Forces New)
     --
-    , _sharedSecret     :: TF.Attr s P.Text
+    , _sharedSecret          :: TF.Attr s P.Text
     -- ^ @shared_secret@ - (Required, Forces New)
     --
-    , _targetVpnGateway :: TF.Attr s P.Text
+    , _targetVpnGateway      :: TF.Attr s P.Text
     -- ^ @target_vpn_gateway@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6178,8 +7618,12 @@ computeVpnTunnelResource _targetVpnGateway _peerIp _name _sharedSecret =
             { _description = TF.Nil
             , _ikeVersion = TF.value 2
             , _labels = TF.Nil
+            , _localTrafficSelector = TF.Nil
             , _name = _name
             , _peerIp = _peerIp
+            , _project = TF.Nil
+            , _region = TF.Nil
+            , _remoteTrafficSelector = TF.Nil
             , _router = TF.Nil
             , _sharedSecret = _sharedSecret
             , _targetVpnGateway = _targetVpnGateway
@@ -6190,8 +7634,12 @@ instance TF.IsObject (ComputeVpnTunnelResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "ike_version" <$> TF.attribute _ikeVersion
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "local_traffic_selector" <$> TF.attribute _localTrafficSelector
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "peer_ip" <$> TF.attribute _peerIp
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "remote_traffic_selector" <$> TF.attribute _remoteTrafficSelector
         , TF.assign "router" <$> TF.attribute _router
         , TF.assign "shared_secret" <$> TF.attribute _sharedSecret
         , TF.assign "target_vpn_gateway" <$> TF.attribute _targetVpnGateway
@@ -6215,6 +7663,11 @@ instance P.HasLabels (ComputeVpnTunnelResource s) (TF.Attr s (P.Map P.Text (TF.A
         P.lens (_labels :: ComputeVpnTunnelResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ComputeVpnTunnelResource s)
 
+instance P.HasLocalTrafficSelector (ComputeVpnTunnelResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    localTrafficSelector =
+        P.lens (_localTrafficSelector :: ComputeVpnTunnelResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _localTrafficSelector = a } :: ComputeVpnTunnelResource s)
+
 instance P.HasName (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
@@ -6224,6 +7677,21 @@ instance P.HasPeerIp (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
     peerIp =
         P.lens (_peerIp :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerIp = a } :: ComputeVpnTunnelResource s)
+
+instance P.HasProject (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeVpnTunnelResource s)
+
+instance P.HasRegion (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeVpnTunnelResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeVpnTunnelResource s)
+
+instance P.HasRemoteTrafficSelector (ComputeVpnTunnelResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    remoteTrafficSelector =
+        P.lens (_remoteTrafficSelector :: ComputeVpnTunnelResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _remoteTrafficSelector = a } :: ComputeVpnTunnelResource s)
 
 instance P.HasRouter (ComputeVpnTunnelResource s) (TF.Attr s P.Text) where
     router =
@@ -6275,7 +7743,16 @@ instance s ~ s' => P.HasComputedSharedSecretHash (TF.Ref s' (ComputeVpnTunnelRes
 -- See the <https://www.terraform.io/docs/providers/google/r/container_cluster.html terraform documentation>
 -- for more information.
 data ContainerClusterResource s = ContainerClusterResource'
-    { _description :: TF.Attr s P.Text
+    { _additionalZones :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @additional_zones@ - (Optional)
+    --
+    , _addonsConfig :: TF.Attr s (AddonsConfigSetting s)
+    -- ^ @addons_config@ - (Optional)
+    --
+    , _clusterIpv4Cidr :: TF.Attr s P.Text
+    -- ^ @cluster_ipv4_cidr@ - (Optional, Forces New)
+    --
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
     , _enableKubernetesAlpha :: TF.Attr s P.Bool
@@ -6290,8 +7767,14 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _ipAllocationPolicy :: TF.Attr s (IpAllocationPolicySetting s)
     -- ^ @ip_allocation_policy@ - (Optional, Forces New)
     --
+    , _loggingService :: TF.Attr s P.Text
+    -- ^ @logging_service@ - (Optional)
+    --
     , _maintenancePolicy :: TF.Attr s (MaintenancePolicySetting s)
     -- ^ @maintenance_policy@ - (Optional)
+    --
+    , _masterAuth :: TF.Attr s (MasterAuthSetting s)
+    -- ^ @master_auth@ - (Optional, Forces New)
     --
     , _masterAuthorizedNetworksConfig :: TF.Attr s (MasterAuthorizedNetworksConfigSetting s)
     -- ^ @master_authorized_networks_config@ - (Optional)
@@ -6302,11 +7785,26 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _minMasterVersion :: TF.Attr s P.Text
     -- ^ @min_master_version@ - (Optional)
     --
+    , _monitoringService :: TF.Attr s P.Text
+    -- ^ @monitoring_service@ - (Optional)
+    --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _network :: TF.Attr s P.Text
     -- ^ @network@ - (Optional, Forces New)
+    --
+    , _networkPolicy :: TF.Attr s (NetworkPolicySetting s)
+    -- ^ @network_policy@ - (Optional)
+    --
+    , _nodeConfig :: TF.Attr s (NodeConfigSetting s)
+    -- ^ @node_config@ - (Optional, Forces New)
+    --
+    , _nodePool :: TF.Attr s [TF.Attr s (NodePoolSetting s)]
+    -- ^ @node_pool@ - (Optional, Forces New)
+    --
+    , _nodeVersion :: TF.Attr s P.Text
+    -- ^ @node_version@ - (Optional)
     --
     , _podSecurityPolicyConfig :: TF.Attr s (PodSecurityPolicyConfigSetting s)
     -- ^ @pod_security_policy_config@ - (Optional)
@@ -6314,12 +7812,30 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _privateCluster :: TF.Attr s P.Bool
     -- ^ @private_cluster@ - (Optional, Forces New)
     --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'zone'
     , _removeDefaultNodePool :: TF.Attr s P.Bool
     -- ^ @remove_default_node_pool@ - (Optional)
     --
     , _resourceLabels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @resource_labels@ - (Optional)
     --
+    , _subnetwork :: TF.Attr s P.Text
+    -- ^ @subnetwork@ - (Optional, Forces New)
+    --
+    , _zone :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'region'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_container_cluster@ resource value.
@@ -6329,44 +7845,87 @@ containerClusterResource
 containerClusterResource _name =
     TF.unsafeResource "google_container_cluster" TF.validator $
         ContainerClusterResource'
-            { _description = TF.Nil
+            { _additionalZones = TF.Nil
+            , _addonsConfig = TF.Nil
+            , _clusterIpv4Cidr = TF.Nil
+            , _description = TF.Nil
             , _enableKubernetesAlpha = TF.value P.False
             , _enableLegacyAbac = TF.value P.False
             , _initialNodeCount = TF.Nil
             , _ipAllocationPolicy = TF.Nil
+            , _loggingService = TF.Nil
             , _maintenancePolicy = TF.Nil
+            , _masterAuth = TF.Nil
             , _masterAuthorizedNetworksConfig = TF.Nil
             , _masterIpv4CidrBlock = TF.Nil
             , _minMasterVersion = TF.Nil
+            , _monitoringService = TF.Nil
             , _name = _name
             , _network = TF.value "default"
+            , _networkPolicy = TF.Nil
+            , _nodeConfig = TF.Nil
+            , _nodePool = TF.Nil
+            , _nodeVersion = TF.Nil
             , _podSecurityPolicyConfig = TF.Nil
             , _privateCluster = TF.value P.False
+            , _project = TF.Nil
+            , _region = TF.Nil
             , _removeDefaultNodePool = TF.Nil
             , _resourceLabels = TF.Nil
+            , _subnetwork = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ContainerClusterResource s) where
     toObject ContainerClusterResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
+        [ TF.assign "additional_zones" <$> TF.attribute _additionalZones
+        , TF.assign "addons_config" <$> TF.attribute _addonsConfig
+        , TF.assign "cluster_ipv4_cidr" <$> TF.attribute _clusterIpv4Cidr
+        , TF.assign "description" <$> TF.attribute _description
         , TF.assign "enable_kubernetes_alpha" <$> TF.attribute _enableKubernetesAlpha
         , TF.assign "enable_legacy_abac" <$> TF.attribute _enableLegacyAbac
         , TF.assign "initial_node_count" <$> TF.attribute _initialNodeCount
         , TF.assign "ip_allocation_policy" <$> TF.attribute _ipAllocationPolicy
+        , TF.assign "logging_service" <$> TF.attribute _loggingService
         , TF.assign "maintenance_policy" <$> TF.attribute _maintenancePolicy
+        , TF.assign "master_auth" <$> TF.attribute _masterAuth
         , TF.assign "master_authorized_networks_config" <$> TF.attribute _masterAuthorizedNetworksConfig
         , TF.assign "master_ipv4_cidr_block" <$> TF.attribute _masterIpv4CidrBlock
         , TF.assign "min_master_version" <$> TF.attribute _minMasterVersion
+        , TF.assign "monitoring_service" <$> TF.attribute _monitoringService
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "network_policy" <$> TF.attribute _networkPolicy
+        , TF.assign "node_config" <$> TF.attribute _nodeConfig
+        , TF.assign "node_pool" <$> TF.attribute _nodePool
+        , TF.assign "node_version" <$> TF.attribute _nodeVersion
         , TF.assign "pod_security_policy_config" <$> TF.attribute _podSecurityPolicyConfig
         , TF.assign "private_cluster" <$> TF.attribute _privateCluster
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "remove_default_node_pool" <$> TF.attribute _removeDefaultNodePool
         , TF.assign "resource_labels" <$> TF.attribute _resourceLabels
+        , TF.assign "subnetwork" <$> TF.attribute _subnetwork
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ContainerClusterResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ContainerClusterResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_region P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_region",
+                            [ "_zone"
+                            ])
+        , if (_zone P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_zone",
+                            [ "_region"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_addonsConfig"
+                  (_addonsConfig
+                      :: ContainerClusterResource s -> TF.Attr s (AddonsConfigSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_ipAllocationPolicy"
                   (_ipAllocationPolicy
                       :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicySetting s))
@@ -6375,14 +7934,41 @@ instance TF.IsValid (ContainerClusterResource s) where
                   (_maintenancePolicy
                       :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicySetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_masterAuth"
+                  (_masterAuth
+                      :: ContainerClusterResource s -> TF.Attr s (MasterAuthSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_masterAuthorizedNetworksConfig"
                   (_masterAuthorizedNetworksConfig
                       :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_networkPolicy"
+                  (_networkPolicy
+                      :: ContainerClusterResource s -> TF.Attr s (NetworkPolicySetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_nodeConfig"
+                  (_nodeConfig
+                      :: ContainerClusterResource s -> TF.Attr s (NodeConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_podSecurityPolicyConfig"
                   (_podSecurityPolicyConfig
                       :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfigSetting s))
                   TF.validator
+
+instance P.HasAdditionalZones (ContainerClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    additionalZones =
+        P.lens (_additionalZones :: ContainerClusterResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _additionalZones = a } :: ContainerClusterResource s)
+
+instance P.HasAddonsConfig (ContainerClusterResource s) (TF.Attr s (AddonsConfigSetting s)) where
+    addonsConfig =
+        P.lens (_addonsConfig :: ContainerClusterResource s -> TF.Attr s (AddonsConfigSetting s))
+               (\s a -> s { _addonsConfig = a } :: ContainerClusterResource s)
+
+instance P.HasClusterIpv4Cidr (ContainerClusterResource s) (TF.Attr s P.Text) where
+    clusterIpv4Cidr =
+        P.lens (_clusterIpv4Cidr :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _clusterIpv4Cidr = a } :: ContainerClusterResource s)
 
 instance P.HasDescription (ContainerClusterResource s) (TF.Attr s P.Text) where
     description =
@@ -6409,10 +7995,20 @@ instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (IpAllo
         P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicySetting s))
                (\s a -> s { _ipAllocationPolicy = a } :: ContainerClusterResource s)
 
+instance P.HasLoggingService (ContainerClusterResource s) (TF.Attr s P.Text) where
+    loggingService =
+        P.lens (_loggingService :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _loggingService = a } :: ContainerClusterResource s)
+
 instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (MaintenancePolicySetting s)) where
     maintenancePolicy =
         P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicySetting s))
                (\s a -> s { _maintenancePolicy = a } :: ContainerClusterResource s)
+
+instance P.HasMasterAuth (ContainerClusterResource s) (TF.Attr s (MasterAuthSetting s)) where
+    masterAuth =
+        P.lens (_masterAuth :: ContainerClusterResource s -> TF.Attr s (MasterAuthSetting s))
+               (\s a -> s { _masterAuth = a } :: ContainerClusterResource s)
 
 instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (MasterAuthorizedNetworksConfigSetting s)) where
     masterAuthorizedNetworksConfig =
@@ -6429,6 +8025,11 @@ instance P.HasMinMasterVersion (ContainerClusterResource s) (TF.Attr s P.Text) w
         P.lens (_minMasterVersion :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _minMasterVersion = a } :: ContainerClusterResource s)
 
+instance P.HasMonitoringService (ContainerClusterResource s) (TF.Attr s P.Text) where
+    monitoringService =
+        P.lens (_monitoringService :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _monitoringService = a } :: ContainerClusterResource s)
+
 instance P.HasName (ContainerClusterResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ContainerClusterResource s -> TF.Attr s P.Text)
@@ -6438,6 +8039,26 @@ instance P.HasNetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
     network =
         P.lens (_network :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ContainerClusterResource s)
+
+instance P.HasNetworkPolicy (ContainerClusterResource s) (TF.Attr s (NetworkPolicySetting s)) where
+    networkPolicy =
+        P.lens (_networkPolicy :: ContainerClusterResource s -> TF.Attr s (NetworkPolicySetting s))
+               (\s a -> s { _networkPolicy = a } :: ContainerClusterResource s)
+
+instance P.HasNodeConfig (ContainerClusterResource s) (TF.Attr s (NodeConfigSetting s)) where
+    nodeConfig =
+        P.lens (_nodeConfig :: ContainerClusterResource s -> TF.Attr s (NodeConfigSetting s))
+               (\s a -> s { _nodeConfig = a } :: ContainerClusterResource s)
+
+instance P.HasNodePool (ContainerClusterResource s) (TF.Attr s [TF.Attr s (NodePoolSetting s)]) where
+    nodePool =
+        P.lens (_nodePool :: ContainerClusterResource s -> TF.Attr s [TF.Attr s (NodePoolSetting s)])
+               (\s a -> s { _nodePool = a } :: ContainerClusterResource s)
+
+instance P.HasNodeVersion (ContainerClusterResource s) (TF.Attr s P.Text) where
+    nodeVersion =
+        P.lens (_nodeVersion :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _nodeVersion = a } :: ContainerClusterResource s)
 
 instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (PodSecurityPolicyConfigSetting s)) where
     podSecurityPolicyConfig =
@@ -6449,6 +8070,16 @@ instance P.HasPrivateCluster (ContainerClusterResource s) (TF.Attr s P.Bool) whe
         P.lens (_privateCluster :: ContainerClusterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _privateCluster = a } :: ContainerClusterResource s)
 
+instance P.HasProject (ContainerClusterResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ContainerClusterResource s)
+
+instance P.HasRegion (ContainerClusterResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ContainerClusterResource s)
+
 instance P.HasRemoveDefaultNodePool (ContainerClusterResource s) (TF.Attr s P.Bool) where
     removeDefaultNodePool =
         P.lens (_removeDefaultNodePool :: ContainerClusterResource s -> TF.Attr s P.Bool)
@@ -6458,6 +8089,16 @@ instance P.HasResourceLabels (ContainerClusterResource s) (TF.Attr s (P.Map P.Te
     resourceLabels =
         P.lens (_resourceLabels :: ContainerClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _resourceLabels = a } :: ContainerClusterResource s)
+
+instance P.HasSubnetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
+    subnetwork =
+        P.lens (_subnetwork :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetwork = a } :: ContainerClusterResource s)
+
+instance P.HasZone (ContainerClusterResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ContainerClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ContainerClusterResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -6518,14 +8159,38 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerClusterResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/r/container_node_pool.html terraform documentation>
 -- for more information.
 data ContainerNodePoolResource s = ContainerNodePoolResource'
-    { _autoscaling :: TF.Attr s (AutoscalingSetting s)
+    { _autoscaling      :: TF.Attr s (AutoscalingSetting s)
     -- ^ @autoscaling@ - (Optional)
     --
-    , _cluster     :: TF.Attr s P.Text
+    , _cluster          :: TF.Attr s P.Text
     -- ^ @cluster@ - (Required, Forces New)
     --
-    , _region      :: TF.Attr s P.Text
+    , _initialNodeCount :: TF.Attr s P.Int
+    -- ^ @initial_node_count@ - (Optional, Forces New)
+    --
+    , _management       :: TF.Attr s (ManagementSetting s)
+    -- ^ @management@ - (Optional)
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _nodeConfig       :: TF.Attr s (NodeConfigSetting s)
+    -- ^ @node_config@ - (Optional, Forces New)
+    --
+    , _nodeCount        :: TF.Attr s P.Int
+    -- ^ @node_count@ - (Optional)
+    --
+    , _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region           :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
+    --
+    , _version          :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    --
+    , _zone             :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -6538,14 +8203,30 @@ containerNodePoolResource _cluster =
         ContainerNodePoolResource'
             { _autoscaling = TF.Nil
             , _cluster = _cluster
+            , _initialNodeCount = TF.Nil
+            , _management = TF.Nil
+            , _name = TF.Nil
+            , _nodeConfig = TF.Nil
+            , _nodeCount = TF.Nil
+            , _project = TF.Nil
             , _region = TF.Nil
+            , _version = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ContainerNodePoolResource s) where
     toObject ContainerNodePoolResource'{..} = P.catMaybes
         [ TF.assign "autoscaling" <$> TF.attribute _autoscaling
         , TF.assign "cluster" <$> TF.attribute _cluster
+        , TF.assign "initial_node_count" <$> TF.attribute _initialNodeCount
+        , TF.assign "management" <$> TF.attribute _management
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "node_config" <$> TF.attribute _nodeConfig
+        , TF.assign "node_count" <$> TF.attribute _nodeCount
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "version" <$> TF.attribute _version
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ContainerNodePoolResource s) where
@@ -6553,6 +8234,14 @@ instance TF.IsValid (ContainerNodePoolResource s) where
            P.<> TF.settingsValidator "_autoscaling"
                   (_autoscaling
                       :: ContainerNodePoolResource s -> TF.Attr s (AutoscalingSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_management"
+                  (_management
+                      :: ContainerNodePoolResource s -> TF.Attr s (ManagementSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_nodeConfig"
+                  (_nodeConfig
+                      :: ContainerNodePoolResource s -> TF.Attr s (NodeConfigSetting s))
                   TF.validator
 
 instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (AutoscalingSetting s)) where
@@ -6565,10 +8254,50 @@ instance P.HasCluster (ContainerNodePoolResource s) (TF.Attr s P.Text) where
         P.lens (_cluster :: ContainerNodePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _cluster = a } :: ContainerNodePoolResource s)
 
+instance P.HasInitialNodeCount (ContainerNodePoolResource s) (TF.Attr s P.Int) where
+    initialNodeCount =
+        P.lens (_initialNodeCount :: ContainerNodePoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _initialNodeCount = a } :: ContainerNodePoolResource s)
+
+instance P.HasManagement (ContainerNodePoolResource s) (TF.Attr s (ManagementSetting s)) where
+    management =
+        P.lens (_management :: ContainerNodePoolResource s -> TF.Attr s (ManagementSetting s))
+               (\s a -> s { _management = a } :: ContainerNodePoolResource s)
+
+instance P.HasName (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ContainerNodePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ContainerNodePoolResource s)
+
+instance P.HasNodeConfig (ContainerNodePoolResource s) (TF.Attr s (NodeConfigSetting s)) where
+    nodeConfig =
+        P.lens (_nodeConfig :: ContainerNodePoolResource s -> TF.Attr s (NodeConfigSetting s))
+               (\s a -> s { _nodeConfig = a } :: ContainerNodePoolResource s)
+
+instance P.HasNodeCount (ContainerNodePoolResource s) (TF.Attr s P.Int) where
+    nodeCount =
+        P.lens (_nodeCount :: ContainerNodePoolResource s -> TF.Attr s P.Int)
+               (\s a -> s { _nodeCount = a } :: ContainerNodePoolResource s)
+
+instance P.HasProject (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ContainerNodePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ContainerNodePoolResource s)
+
 instance P.HasRegion (ContainerNodePoolResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: ContainerNodePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ContainerNodePoolResource s)
+
+instance P.HasVersion (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: ContainerNodePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: ContainerNodePoolResource s)
+
+instance P.HasZone (ContainerNodePoolResource s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ContainerNodePoolResource s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ContainerNodePoolResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -6716,10 +8445,19 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (DataflowJobResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/google/r/dataproc_cluster.html terraform documentation>
 -- for more information.
 data DataprocClusterResource s = DataprocClusterResource'
-    { _name   :: TF.Attr s P.Text
+    { _clusterConfig :: TF.Attr s (ClusterConfigSetting s)
+    -- ^ @cluster_config@ - (Optional)
+    --
+    , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    --
+    , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _region :: TF.Attr s P.Text
+    , _project       :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region        :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6731,23 +8469,48 @@ dataprocClusterResource
 dataprocClusterResource _name =
     TF.unsafeResource "google_dataproc_cluster" TF.validator $
         DataprocClusterResource'
-            { _name = _name
+            { _clusterConfig = TF.Nil
+            , _labels = TF.Nil
+            , _name = _name
+            , _project = TF.Nil
             , _region = TF.value "global"
             }
 
 instance TF.IsObject (DataprocClusterResource s) where
     toObject DataprocClusterResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "cluster_config" <$> TF.attribute _clusterConfig
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (DataprocClusterResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_clusterConfig"
+                  (_clusterConfig
+                      :: DataprocClusterResource s -> TF.Attr s (ClusterConfigSetting s))
+                  TF.validator
+
+instance P.HasClusterConfig (DataprocClusterResource s) (TF.Attr s (ClusterConfigSetting s)) where
+    clusterConfig =
+        P.lens (_clusterConfig :: DataprocClusterResource s -> TF.Attr s (ClusterConfigSetting s))
+               (\s a -> s { _clusterConfig = a } :: DataprocClusterResource s)
+
+instance P.HasLabels (DataprocClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: DataprocClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: DataprocClusterResource s)
 
 instance P.HasName (DataprocClusterResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DataprocClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DataprocClusterResource s)
+
+instance P.HasProject (DataprocClusterResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: DataprocClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: DataprocClusterResource s)
 
 instance P.HasRegion (DataprocClusterResource s) (TF.Attr s P.Text) where
     region =
@@ -6811,6 +8574,9 @@ data DataprocJobResource s = DataprocJobResource'
     , _placement      :: TF.Attr s (PlacementSetting s)
     -- ^ @placement@ - (Required)
     --
+    , _project        :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _pysparkConfig  :: TF.Attr s (PysparkConfigSetting s)
     -- ^ @pyspark_config@ - (Optional, Forces New)
     --
@@ -6821,6 +8587,9 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pigConfig'
     -- * 'sparkConfig'
     -- * 'sparksqlConfig'
+    , _reference      :: TF.Attr s (ReferenceSetting s)
+    -- ^ @reference@ - (Optional)
+    --
     , _region         :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
@@ -6863,7 +8632,9 @@ dataprocJobResource _placement =
             , _labels = TF.Nil
             , _pigConfig = TF.Nil
             , _placement = _placement
+            , _project = TF.Nil
             , _pysparkConfig = TF.Nil
+            , _reference = TF.Nil
             , _region = TF.value "global"
             , _scheduling = TF.Nil
             , _sparkConfig = TF.Nil
@@ -6878,7 +8649,9 @@ instance TF.IsObject (DataprocJobResource s) where
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "pig_config" <$> TF.attribute _pigConfig
         , TF.assign "placement" <$> TF.attribute _placement
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "pyspark_config" <$> TF.attribute _pysparkConfig
+        , TF.assign "reference" <$> TF.attribute _reference
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "scheduling" <$> TF.attribute _scheduling
         , TF.assign "spark_config" <$> TF.attribute _sparkConfig
@@ -6938,6 +8711,10 @@ instance TF.IsValid (DataprocJobResource s) where
                   (_pysparkConfig
                       :: DataprocJobResource s -> TF.Attr s (PysparkConfigSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_reference"
+                  (_reference
+                      :: DataprocJobResource s -> TF.Attr s (ReferenceSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_scheduling"
                   (_scheduling
                       :: DataprocJobResource s -> TF.Attr s (SchedulingSetting s))
@@ -6981,10 +8758,20 @@ instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (PlacementSetting s))
         P.lens (_placement :: DataprocJobResource s -> TF.Attr s (PlacementSetting s))
                (\s a -> s { _placement = a } :: DataprocJobResource s)
 
+instance P.HasProject (DataprocJobResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: DataprocJobResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: DataprocJobResource s)
+
 instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (PysparkConfigSetting s)) where
     pysparkConfig =
         P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (PysparkConfigSetting s))
                (\s a -> s { _pysparkConfig = a } :: DataprocJobResource s)
+
+instance P.HasReference (DataprocJobResource s) (TF.Attr s (ReferenceSetting s)) where
+    reference =
+        P.lens (_reference :: DataprocJobResource s -> TF.Attr s (ReferenceSetting s))
+               (\s a -> s { _reference = a } :: DataprocJobResource s)
 
 instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
     region =
@@ -7038,6 +8825,9 @@ data DnsManagedZoneResource s = DnsManagedZoneResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_dns_managed_zone@ resource value.
@@ -7051,6 +8841,7 @@ dnsManagedZoneResource _dnsName _name =
             { _description = TF.value "Managed by Terraform"
             , _dnsName = _dnsName
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (DnsManagedZoneResource s) where
@@ -7058,6 +8849,7 @@ instance TF.IsObject (DnsManagedZoneResource s) where
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "dns_name" <$> TF.attribute _dnsName
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (DnsManagedZoneResource s) where
@@ -7078,6 +8870,11 @@ instance P.HasName (DnsManagedZoneResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsManagedZoneResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsManagedZoneResource s)
 
+instance P.HasProject (DnsManagedZoneResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: DnsManagedZoneResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: DnsManagedZoneResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsManagedZoneResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -7097,6 +8894,9 @@ data DnsRecordSetResource s = DnsRecordSetResource'
     --
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _rrdatas     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @rrdatas@ - (Required)
@@ -7122,6 +8922,7 @@ dnsRecordSetResource _name _rrdatas _ttl _type' _managedZone =
         DnsRecordSetResource'
             { _managedZone = _managedZone
             , _name = _name
+            , _project = TF.Nil
             , _rrdatas = _rrdatas
             , _ttl = _ttl
             , _type' = _type'
@@ -7131,6 +8932,7 @@ instance TF.IsObject (DnsRecordSetResource s) where
     toObject DnsRecordSetResource'{..} = P.catMaybes
         [ TF.assign "managed_zone" <$> TF.attribute _managedZone
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "rrdatas" <$> TF.attribute _rrdatas
         , TF.assign "ttl" <$> TF.attribute _ttl
         , TF.assign "type" <$> TF.attribute _type'
@@ -7148,6 +8950,11 @@ instance P.HasName (DnsRecordSetResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: DnsRecordSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsRecordSetResource s)
+
+instance P.HasProject (DnsRecordSetResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: DnsRecordSetResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: DnsRecordSetResource s)
 
 instance P.HasRrdatas (DnsRecordSetResource s) (TF.Attr s [TF.Attr s P.Text]) where
     rrdatas =
@@ -7188,6 +8995,9 @@ data EndpointsServiceResource s = EndpointsServiceResource'
     --
     -- * 'grpcConfig'
     -- * 'protocOutputBase64'
+    , _project            :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _protocOutputBase64 :: TF.Attr s P.Text
     -- ^ @protoc_output_base64@ - (Optional)
     --
@@ -7208,6 +9018,7 @@ endpointsServiceResource _serviceName =
         EndpointsServiceResource'
             { _grpcConfig = TF.Nil
             , _openapiConfig = TF.Nil
+            , _project = TF.Nil
             , _protocOutputBase64 = TF.Nil
             , _serviceName = _serviceName
             }
@@ -7216,6 +9027,7 @@ instance TF.IsObject (EndpointsServiceResource s) where
     toObject EndpointsServiceResource'{..} = P.catMaybes
         [ TF.assign "grpc_config" <$> TF.attribute _grpcConfig
         , TF.assign "openapi_config" <$> TF.attribute _openapiConfig
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "protoc_output_base64" <$> TF.attribute _protocOutputBase64
         , TF.assign "service_name" <$> TF.attribute _serviceName
         ]
@@ -7248,6 +9060,11 @@ instance P.HasOpenapiConfig (EndpointsServiceResource s) (TF.Attr s P.Text) wher
     openapiConfig =
         P.lens (_openapiConfig :: EndpointsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _openapiConfig = a } :: EndpointsServiceResource s)
+
+instance P.HasProject (EndpointsServiceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: EndpointsServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: EndpointsServiceResource s)
 
 instance P.HasProtocOutputBase64 (EndpointsServiceResource s) (TF.Attr s P.Text) where
     protocOutputBase64 =
@@ -7537,6 +9354,9 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
     --
     -- * 'booleanPolicy'
     -- * 'listPolicy'
+    , _version       :: TF.Attr s P.Int
+    -- ^ @version@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_folder_organization_policy@ resource value.
@@ -7552,6 +9372,7 @@ folderOrganizationPolicyResource _constraint _folder =
             , _folder = _folder
             , _listPolicy = TF.Nil
             , _restorePolicy = TF.Nil
+            , _version = TF.Nil
             }
 
 instance TF.IsObject (FolderOrganizationPolicyResource s) where
@@ -7561,6 +9382,7 @@ instance TF.IsObject (FolderOrganizationPolicyResource s) where
         , TF.assign "folder" <$> TF.attribute _folder
         , TF.assign "list_policy" <$> TF.attribute _listPolicy
         , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (FolderOrganizationPolicyResource s) where
@@ -7618,6 +9440,11 @@ instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (Res
     restorePolicy =
         P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: FolderOrganizationPolicyResource s)
+
+instance P.HasVersion (FolderOrganizationPolicyResource s) (TF.Attr s P.Int) where
+    version =
+        P.lens (_version :: FolderOrganizationPolicyResource s -> TF.Attr s P.Int)
+               (\s a -> s { _version = a } :: FolderOrganizationPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FolderOrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -7821,6 +9648,9 @@ data KmsKeyRingResource s = KmsKeyRingResource'
     , _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project  :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_kms_key_ring@ resource value.
@@ -7833,12 +9663,14 @@ kmsKeyRingResource _location _name =
         KmsKeyRingResource'
             { _location = _location
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (KmsKeyRingResource s) where
     toObject KmsKeyRingResource'{..} = P.catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (KmsKeyRingResource s) where
@@ -7853,6 +9685,11 @@ instance P.HasName (KmsKeyRingResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: KmsKeyRingResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KmsKeyRingResource s)
+
+instance P.HasProject (KmsKeyRingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: KmsKeyRingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: KmsKeyRingResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeyRingResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -8516,6 +10353,9 @@ data LoggingProjectExclusionResource s = LoggingProjectExclusionResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_logging_project_exclusion@ resource value.
@@ -8530,6 +10370,7 @@ loggingProjectExclusionResource _filter _name =
             , _disabled = TF.Nil
             , _filter = _filter
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (LoggingProjectExclusionResource s) where
@@ -8538,6 +10379,7 @@ instance TF.IsObject (LoggingProjectExclusionResource s) where
         , TF.assign "disabled" <$> TF.attribute _disabled
         , TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (LoggingProjectExclusionResource s) where
@@ -8563,6 +10405,11 @@ instance P.HasName (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingProjectExclusionResource s)
 
+instance P.HasProject (LoggingProjectExclusionResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: LoggingProjectExclusionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: LoggingProjectExclusionResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoggingProjectExclusionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -8583,6 +10430,9 @@ data LoggingProjectSinkResource s = LoggingProjectSinkResource'
     , _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project              :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _uniqueWriterIdentity :: TF.Attr s P.Bool
     -- ^ @unique_writer_identity@ - (Optional, Forces New)
     --
@@ -8599,6 +10449,7 @@ loggingProjectSinkResource _destination _name =
             { _destination = _destination
             , _filter = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _uniqueWriterIdentity = TF.value P.False
             }
 
@@ -8607,6 +10458,7 @@ instance TF.IsObject (LoggingProjectSinkResource s) where
         [ TF.assign "destination" <$> TF.attribute _destination
         , TF.assign "filter" <$> TF.attribute _filter
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "unique_writer_identity" <$> TF.attribute _uniqueWriterIdentity
         ]
 
@@ -8627,6 +10479,11 @@ instance P.HasName (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoggingProjectSinkResource s)
+
+instance P.HasProject (LoggingProjectSinkResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: LoggingProjectSinkResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: LoggingProjectSinkResource s)
 
 instance P.HasUniqueWriterIdentity (LoggingProjectSinkResource s) (TF.Attr s P.Bool) where
     uniqueWriterIdentity =
@@ -8945,6 +10802,9 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     --
     -- * 'booleanPolicy'
     -- * 'listPolicy'
+    , _version       :: TF.Attr s P.Int
+    -- ^ @version@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_organization_policy@ resource value.
@@ -8960,6 +10820,7 @@ organizationPolicyResource _constraint _orgId =
             , _listPolicy = TF.Nil
             , _orgId = _orgId
             , _restorePolicy = TF.Nil
+            , _version = TF.Nil
             }
 
 instance TF.IsObject (OrganizationPolicyResource s) where
@@ -8969,6 +10830,7 @@ instance TF.IsObject (OrganizationPolicyResource s) where
         , TF.assign "list_policy" <$> TF.attribute _listPolicy
         , TF.assign "org_id" <$> TF.attribute _orgId
         , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (OrganizationPolicyResource s) where
@@ -9027,6 +10889,11 @@ instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (RestorePo
         P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: OrganizationPolicyResource s)
 
+instance P.HasVersion (OrganizationPolicyResource s) (TF.Attr s P.Int) where
+    version =
+        P.lens (_version :: OrganizationPolicyResource s -> TF.Attr s P.Int)
+               (\s a -> s { _version = a } :: OrganizationPolicyResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -9053,14 +10920,26 @@ data ProjectResource s = ProjectResource'
     , _billingAccount    :: TF.Attr s P.Text
     -- ^ @billing_account@ - (Optional)
     --
+    , _folderId          :: TF.Attr s P.Text
+    -- ^ @folder_id@ - (Optional)
+    --
     , _labels            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
+    , _orgId             :: TF.Attr s P.Text
+    -- ^ @org_id@ - (Optional)
+    --
+    , _policyData        :: TF.Attr s P.Text
+    -- ^ @policy_data@ - (Optional)
+    --
     , _projectId         :: TF.Attr s P.Text
     -- ^ @project_id@ - (Required, Forces New)
+    --
+    , _skipDelete        :: TF.Attr s P.Bool
+    -- ^ @skip_delete@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -9075,9 +10954,13 @@ projectResource _projectId _name =
             { _appEngine = TF.Nil
             , _autoCreateNetwork = TF.value P.True
             , _billingAccount = TF.Nil
+            , _folderId = TF.Nil
             , _labels = TF.Nil
             , _name = _name
+            , _orgId = TF.Nil
+            , _policyData = TF.Nil
             , _projectId = _projectId
+            , _skipDelete = TF.Nil
             }
 
 instance TF.IsObject (ProjectResource s) where
@@ -9085,9 +10968,13 @@ instance TF.IsObject (ProjectResource s) where
         [ TF.assign "app_engine" <$> TF.attribute _appEngine
         , TF.assign "auto_create_network" <$> TF.attribute _autoCreateNetwork
         , TF.assign "billing_account" <$> TF.attribute _billingAccount
+        , TF.assign "folder_id" <$> TF.attribute _folderId
         , TF.assign "labels" <$> TF.attribute _labels
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "org_id" <$> TF.attribute _orgId
+        , TF.assign "policy_data" <$> TF.attribute _policyData
         , TF.assign "project_id" <$> TF.attribute _projectId
+        , TF.assign "skip_delete" <$> TF.attribute _skipDelete
         ]
 
 instance TF.IsValid (ProjectResource s) where
@@ -9112,6 +10999,11 @@ instance P.HasBillingAccount (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_billingAccount :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _billingAccount = a } :: ProjectResource s)
 
+instance P.HasFolderId (ProjectResource s) (TF.Attr s P.Text) where
+    folderId =
+        P.lens (_folderId :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _folderId = a } :: ProjectResource s)
+
 instance P.HasLabels (ProjectResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
         P.lens (_labels :: ProjectResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
@@ -9122,10 +11014,25 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
 
+instance P.HasOrgId (ProjectResource s) (TF.Attr s P.Text) where
+    orgId =
+        P.lens (_orgId :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _orgId = a } :: ProjectResource s)
+
+instance P.HasPolicyData (ProjectResource s) (TF.Attr s P.Text) where
+    policyData =
+        P.lens (_policyData :: ProjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyData = a } :: ProjectResource s)
+
 instance P.HasProjectId (ProjectResource s) (TF.Attr s P.Text) where
     projectId =
         P.lens (_projectId :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _projectId = a } :: ProjectResource s)
+
+instance P.HasSkipDelete (ProjectResource s) (TF.Attr s P.Bool) where
+    skipDelete =
+        P.lens (_skipDelete :: ProjectResource s -> TF.Attr s P.Bool)
+               (\s a -> s { _skipDelete = a } :: ProjectResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -9222,6 +11129,9 @@ data ProjectIamCustomRoleResource s = ProjectIamCustomRoleResource'
     , _permissions :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @permissions@ - (Required)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _roleId      :: TF.Attr s P.Text
     -- ^ @role_id@ - (Required, Forces New)
     --
@@ -9245,6 +11155,7 @@ projectIamCustomRoleResource _roleId _permissions _title =
             { _deleted = TF.value P.False
             , _description = TF.Nil
             , _permissions = _permissions
+            , _project = TF.Nil
             , _roleId = _roleId
             , _stage = TF.value "GA"
             , _title = _title
@@ -9255,6 +11166,7 @@ instance TF.IsObject (ProjectIamCustomRoleResource s) where
         [ TF.assign "deleted" <$> TF.attribute _deleted
         , TF.assign "description" <$> TF.attribute _description
         , TF.assign "permissions" <$> TF.attribute _permissions
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role_id" <$> TF.attribute _roleId
         , TF.assign "stage" <$> TF.attribute _stage
         , TF.assign "title" <$> TF.attribute _title
@@ -9277,6 +11189,11 @@ instance P.HasPermissions (ProjectIamCustomRoleResource s) (TF.Attr s (P.NonEmpt
     permissions =
         P.lens (_permissions :: ProjectIamCustomRoleResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
                (\s a -> s { _permissions = a } :: ProjectIamCustomRoleResource s)
+
+instance P.HasProject (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectIamCustomRoleResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectIamCustomRoleResource s)
 
 instance P.HasRoleId (ProjectIamCustomRoleResource s) (TF.Attr s P.Text) where
     roleId =
@@ -9367,6 +11284,9 @@ data ProjectIamPolicyResource s = ProjectIamPolicyResource'
     { _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_project_iam_policy@ resource value.
@@ -9377,11 +11297,13 @@ projectIamPolicyResource _policyData =
     TF.unsafeResource "google_project_iam_policy" TF.validator $
         ProjectIamPolicyResource'
             { _policyData = _policyData
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ProjectIamPolicyResource s) where
     toObject ProjectIamPolicyResource'{..} = P.catMaybes
         [ TF.assign "policy_data" <$> TF.attribute _policyData
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ProjectIamPolicyResource s) where
@@ -9391,6 +11313,11 @@ instance P.HasPolicyData (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
     policyData =
         P.lens (_policyData :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: ProjectIamPolicyResource s)
+
+instance P.HasProject (ProjectIamPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectIamPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -9436,6 +11363,9 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     --
     -- * 'booleanPolicy'
     -- * 'listPolicy'
+    , _version       :: TF.Attr s P.Int
+    -- ^ @version@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_project_organization_policy@ resource value.
@@ -9451,6 +11381,7 @@ projectOrganizationPolicyResource _constraint _project =
             , _listPolicy = TF.Nil
             , _project = _project
             , _restorePolicy = TF.Nil
+            , _version = TF.Nil
             }
 
 instance TF.IsObject (ProjectOrganizationPolicyResource s) where
@@ -9460,6 +11391,7 @@ instance TF.IsObject (ProjectOrganizationPolicyResource s) where
         , TF.assign "list_policy" <$> TF.attribute _listPolicy
         , TF.assign "project" <$> TF.attribute _project
         , TF.assign "restore_policy" <$> TF.attribute _restorePolicy
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (ProjectOrganizationPolicyResource s) where
@@ -9518,6 +11450,11 @@ instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (Re
         P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
                (\s a -> s { _restorePolicy = a } :: ProjectOrganizationPolicyResource s)
 
+instance P.HasVersion (ProjectOrganizationPolicyResource s) (TF.Attr s P.Int) where
+    version =
+        P.lens (_version :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Int)
+               (\s a -> s { _version = a } :: ProjectOrganizationPolicyResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectOrganizationPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -9538,6 +11475,9 @@ data ProjectServiceResource s = ProjectServiceResource'
     { _disableOnDestroy :: TF.Attr s P.Bool
     -- ^ @disable_on_destroy@ - (Optional)
     --
+    , _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _service          :: TF.Attr s P.Text
     -- ^ @service@ - (Required, Forces New)
     --
@@ -9551,12 +11491,14 @@ projectServiceResource _service =
     TF.unsafeResource "google_project_service" TF.validator $
         ProjectServiceResource'
             { _disableOnDestroy = TF.value P.True
+            , _project = TF.Nil
             , _service = _service
             }
 
 instance TF.IsObject (ProjectServiceResource s) where
     toObject ProjectServiceResource'{..} = P.catMaybes
         [ TF.assign "disable_on_destroy" <$> TF.attribute _disableOnDestroy
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "service" <$> TF.attribute _service
         ]
 
@@ -9567,6 +11509,11 @@ instance P.HasDisableOnDestroy (ProjectServiceResource s) (TF.Attr s P.Bool) whe
     disableOnDestroy =
         P.lens (_disableOnDestroy :: ProjectServiceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disableOnDestroy = a } :: ProjectServiceResource s)
+
+instance P.HasProject (ProjectServiceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectServiceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectServiceResource s)
 
 instance P.HasService (ProjectServiceResource s) (TF.Attr s P.Text) where
     service =
@@ -9587,6 +11534,9 @@ data ProjectServicesResource s = ProjectServicesResource'
     { _disableOnDestroy :: TF.Attr s P.Bool
     -- ^ @disable_on_destroy@ - (Optional)
     --
+    , _project          :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _services         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @services@ - (Required)
     --
@@ -9600,12 +11550,14 @@ projectServicesResource _services =
     TF.unsafeResource "google_project_services" TF.validator $
         ProjectServicesResource'
             { _disableOnDestroy = TF.value P.True
+            , _project = TF.Nil
             , _services = _services
             }
 
 instance TF.IsObject (ProjectServicesResource s) where
     toObject ProjectServicesResource'{..} = P.catMaybes
         [ TF.assign "disable_on_destroy" <$> TF.attribute _disableOnDestroy
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "services" <$> TF.attribute _services
         ]
 
@@ -9616,6 +11568,11 @@ instance P.HasDisableOnDestroy (ProjectServicesResource s) (TF.Attr s P.Bool) wh
     disableOnDestroy =
         P.lens (_disableOnDestroy :: ProjectServicesResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disableOnDestroy = a } :: ProjectServicesResource s)
+
+instance P.HasProject (ProjectServicesResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectServicesResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectServicesResource s)
 
 instance P.HasServices (ProjectServicesResource s) (TF.Attr s [TF.Attr s P.Text]) where
     services =
@@ -9639,6 +11596,9 @@ data ProjectUsageExportBucketResource s = ProjectUsageExportBucketResource'
     , _prefix     :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional, Forces New)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_project_usage_export_bucket@ resource value.
@@ -9650,12 +11610,14 @@ projectUsageExportBucketResource _bucketName =
         ProjectUsageExportBucketResource'
             { _bucketName = _bucketName
             , _prefix = TF.Nil
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ProjectUsageExportBucketResource s) where
     toObject ProjectUsageExportBucketResource'{..} = P.catMaybes
         [ TF.assign "bucket_name" <$> TF.attribute _bucketName
         , TF.assign "prefix" <$> TF.attribute _prefix
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ProjectUsageExportBucketResource s) where
@@ -9671,6 +11633,11 @@ instance P.HasPrefix (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) whe
         P.lens (_prefix :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _prefix = a } :: ProjectUsageExportBucketResource s)
 
+instance P.HasProject (ProjectUsageExportBucketResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ProjectUsageExportBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ProjectUsageExportBucketResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectUsageExportBucketResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -9682,13 +11649,19 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ProjectUsageExportBucketReso
 -- See the <https://www.terraform.io/docs/providers/google/r/pubsub_subscription.html terraform documentation>
 -- for more information.
 data PubsubSubscriptionResource s = PubsubSubscriptionResource'
-    { _name       :: TF.Attr s P.Text
+    { _ackDeadlineSeconds :: TF.Attr s P.Int
+    -- ^ @ack_deadline_seconds@ - (Optional, Forces New)
+    --
+    , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _pushConfig :: TF.Attr s (PushConfigSetting s)
+    , _project            :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _pushConfig         :: TF.Attr s (PushConfigSetting s)
     -- ^ @push_config@ - (Optional)
     --
-    , _topic      :: TF.Attr s P.Text
+    , _topic              :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -9701,14 +11674,18 @@ pubsubSubscriptionResource
 pubsubSubscriptionResource _name _topic =
     TF.unsafeResource "google_pubsub_subscription" TF.validator $
         PubsubSubscriptionResource'
-            { _name = _name
+            { _ackDeadlineSeconds = TF.Nil
+            , _name = _name
+            , _project = TF.Nil
             , _pushConfig = TF.Nil
             , _topic = _topic
             }
 
 instance TF.IsObject (PubsubSubscriptionResource s) where
     toObject PubsubSubscriptionResource'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
+        [ TF.assign "ack_deadline_seconds" <$> TF.attribute _ackDeadlineSeconds
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "push_config" <$> TF.attribute _pushConfig
         , TF.assign "topic" <$> TF.attribute _topic
         ]
@@ -9720,10 +11697,20 @@ instance TF.IsValid (PubsubSubscriptionResource s) where
                       :: PubsubSubscriptionResource s -> TF.Attr s (PushConfigSetting s))
                   TF.validator
 
+instance P.HasAckDeadlineSeconds (PubsubSubscriptionResource s) (TF.Attr s P.Int) where
+    ackDeadlineSeconds =
+        P.lens (_ackDeadlineSeconds :: PubsubSubscriptionResource s -> TF.Attr s P.Int)
+               (\s a -> s { _ackDeadlineSeconds = a } :: PubsubSubscriptionResource s)
+
 instance P.HasName (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PubsubSubscriptionResource s)
+
+instance P.HasProject (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubSubscriptionResource s)
 
 instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PushConfigSetting s)) where
     pushConfig =
@@ -9755,6 +11742,9 @@ data PubsubSubscriptionIamBindingResource s = PubsubSubscriptionIamBindingResour
     { _members      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
+    , _project      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _role         :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -9773,6 +11763,7 @@ pubsubSubscriptionIamBindingResource _members _role _subscription =
     TF.unsafeResource "google_pubsub_subscription_iam_binding" TF.validator $
         PubsubSubscriptionIamBindingResource'
             { _members = _members
+            , _project = TF.Nil
             , _role = _role
             , _subscription = _subscription
             }
@@ -9780,6 +11771,7 @@ pubsubSubscriptionIamBindingResource _members _role _subscription =
 instance TF.IsObject (PubsubSubscriptionIamBindingResource s) where
     toObject PubsubSubscriptionIamBindingResource'{..} = P.catMaybes
         [ TF.assign "members" <$> TF.attribute _members
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "subscription" <$> TF.attribute _subscription
         ]
@@ -9791,6 +11783,11 @@ instance P.HasMembers (PubsubSubscriptionIamBindingResource s) (TF.Attr s [TF.At
     members =
         P.lens (_members :: PubsubSubscriptionIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _members = a } :: PubsubSubscriptionIamBindingResource s)
+
+instance P.HasProject (PubsubSubscriptionIamBindingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubSubscriptionIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubSubscriptionIamBindingResource s)
 
 instance P.HasRole (PubsubSubscriptionIamBindingResource s) (TF.Attr s P.Text) where
     role =
@@ -9819,6 +11816,9 @@ data PubsubSubscriptionIamMemberResource s = PubsubSubscriptionIamMemberResource
     { _member       :: TF.Attr s P.Text
     -- ^ @member@ - (Required, Forces New)
     --
+    , _project      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _role         :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -9837,6 +11837,7 @@ pubsubSubscriptionIamMemberResource _member _role _subscription =
     TF.unsafeResource "google_pubsub_subscription_iam_member" TF.validator $
         PubsubSubscriptionIamMemberResource'
             { _member = _member
+            , _project = TF.Nil
             , _role = _role
             , _subscription = _subscription
             }
@@ -9844,6 +11845,7 @@ pubsubSubscriptionIamMemberResource _member _role _subscription =
 instance TF.IsObject (PubsubSubscriptionIamMemberResource s) where
     toObject PubsubSubscriptionIamMemberResource'{..} = P.catMaybes
         [ TF.assign "member" <$> TF.attribute _member
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "subscription" <$> TF.attribute _subscription
         ]
@@ -9855,6 +11857,11 @@ instance P.HasMember (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) 
     member =
         P.lens (_member :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _member = a } :: PubsubSubscriptionIamMemberResource s)
+
+instance P.HasProject (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubSubscriptionIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubSubscriptionIamMemberResource s)
 
 instance P.HasRole (PubsubSubscriptionIamMemberResource s) (TF.Attr s P.Text) where
     role =

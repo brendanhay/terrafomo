@@ -191,6 +191,9 @@ data PubsubSubscriptionIamPolicyResource s = PubsubSubscriptionIamPolicyResource
     { _policyData   :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
+    , _project      :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _subscription :: TF.Attr s P.Text
     -- ^ @subscription@ - (Required, Forces New)
     --
@@ -205,12 +208,14 @@ pubsubSubscriptionIamPolicyResource _policyData _subscription =
     TF.unsafeResource "google_pubsub_subscription_iam_policy" TF.validator $
         PubsubSubscriptionIamPolicyResource'
             { _policyData = _policyData
+            , _project = TF.Nil
             , _subscription = _subscription
             }
 
 instance TF.IsObject (PubsubSubscriptionIamPolicyResource s) where
     toObject PubsubSubscriptionIamPolicyResource'{..} = P.catMaybes
         [ TF.assign "policy_data" <$> TF.attribute _policyData
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "subscription" <$> TF.attribute _subscription
         ]
 
@@ -221,6 +226,11 @@ instance P.HasPolicyData (PubsubSubscriptionIamPolicyResource s) (TF.Attr s P.Te
     policyData =
         P.lens (_policyData :: PubsubSubscriptionIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: PubsubSubscriptionIamPolicyResource s)
+
+instance P.HasProject (PubsubSubscriptionIamPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubSubscriptionIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubSubscriptionIamPolicyResource s)
 
 instance P.HasSubscription (PubsubSubscriptionIamPolicyResource s) (TF.Attr s P.Text) where
     subscription =
@@ -241,8 +251,11 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubSubscriptionIamPolicyR
 -- See the <https://www.terraform.io/docs/providers/google/r/pubsub_topic.html terraform documentation>
 -- for more information.
 data PubsubTopicResource s = PubsubTopicResource'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -254,11 +267,13 @@ pubsubTopicResource _name =
     TF.unsafeResource "google_pubsub_topic" TF.validator $
         PubsubTopicResource'
             { _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (PubsubTopicResource s) where
     toObject PubsubTopicResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (PubsubTopicResource s) where
@@ -268,6 +283,11 @@ instance P.HasName (PubsubTopicResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: PubsubTopicResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: PubsubTopicResource s)
+
+instance P.HasProject (PubsubTopicResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubTopicResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubTopicResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (PubsubTopicResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -282,6 +302,9 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicResource s)) (TF.
 data PubsubTopicIamBindingResource s = PubsubTopicIamBindingResource'
     { _members :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     , _role    :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
@@ -301,6 +324,7 @@ pubsubTopicIamBindingResource _members _role _topic =
     TF.unsafeResource "google_pubsub_topic_iam_binding" TF.validator $
         PubsubTopicIamBindingResource'
             { _members = _members
+            , _project = TF.Nil
             , _role = _role
             , _topic = _topic
             }
@@ -308,6 +332,7 @@ pubsubTopicIamBindingResource _members _role _topic =
 instance TF.IsObject (PubsubTopicIamBindingResource s) where
     toObject PubsubTopicIamBindingResource'{..} = P.catMaybes
         [ TF.assign "members" <$> TF.attribute _members
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "topic" <$> TF.attribute _topic
         ]
@@ -319,6 +344,11 @@ instance P.HasMembers (PubsubTopicIamBindingResource s) (TF.Attr s [TF.Attr s P.
     members =
         P.lens (_members :: PubsubTopicIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _members = a } :: PubsubTopicIamBindingResource s)
+
+instance P.HasProject (PubsubTopicIamBindingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubTopicIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubTopicIamBindingResource s)
 
 instance P.HasRole (PubsubTopicIamBindingResource s) (TF.Attr s P.Text) where
     role =
@@ -344,13 +374,16 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamBindingResourc
 -- See the <https://www.terraform.io/docs/providers/google/r/pubsub_topic_iam_member.html terraform documentation>
 -- for more information.
 data PubsubTopicIamMemberResource s = PubsubTopicIamMemberResource'
-    { _member :: TF.Attr s P.Text
+    { _member  :: TF.Attr s P.Text
     -- ^ @member@ - (Required, Forces New)
     --
-    , _role   :: TF.Attr s P.Text
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _role    :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
-    , _topic  :: TF.Attr s P.Text
+    , _topic   :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -365,6 +398,7 @@ pubsubTopicIamMemberResource _member _role _topic =
     TF.unsafeResource "google_pubsub_topic_iam_member" TF.validator $
         PubsubTopicIamMemberResource'
             { _member = _member
+            , _project = TF.Nil
             , _role = _role
             , _topic = _topic
             }
@@ -372,6 +406,7 @@ pubsubTopicIamMemberResource _member _role _topic =
 instance TF.IsObject (PubsubTopicIamMemberResource s) where
     toObject PubsubTopicIamMemberResource'{..} = P.catMaybes
         [ TF.assign "member" <$> TF.attribute _member
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         , TF.assign "topic" <$> TF.attribute _topic
         ]
@@ -383,6 +418,11 @@ instance P.HasMember (PubsubTopicIamMemberResource s) (TF.Attr s P.Text) where
     member =
         P.lens (_member :: PubsubTopicIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _member = a } :: PubsubTopicIamMemberResource s)
+
+instance P.HasProject (PubsubTopicIamMemberResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubTopicIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubTopicIamMemberResource s)
 
 instance P.HasRole (PubsubTopicIamMemberResource s) (TF.Attr s P.Text) where
     role =
@@ -411,6 +451,9 @@ data PubsubTopicIamPolicyResource s = PubsubTopicIamPolicyResource'
     { _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _topic      :: TF.Attr s P.Text
     -- ^ @topic@ - (Required, Forces New)
     --
@@ -425,12 +468,14 @@ pubsubTopicIamPolicyResource _policyData _topic =
     TF.unsafeResource "google_pubsub_topic_iam_policy" TF.validator $
         PubsubTopicIamPolicyResource'
             { _policyData = _policyData
+            , _project = TF.Nil
             , _topic = _topic
             }
 
 instance TF.IsObject (PubsubTopicIamPolicyResource s) where
     toObject PubsubTopicIamPolicyResource'{..} = P.catMaybes
         [ TF.assign "policy_data" <$> TF.attribute _policyData
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "topic" <$> TF.attribute _topic
         ]
 
@@ -441,6 +486,11 @@ instance P.HasPolicyData (PubsubTopicIamPolicyResource s) (TF.Attr s P.Text) whe
     policyData =
         P.lens (_policyData :: PubsubTopicIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: PubsubTopicIamPolicyResource s)
+
+instance P.HasProject (PubsubTopicIamPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: PubsubTopicIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: PubsubTopicIamPolicyResource s)
 
 instance P.HasTopic (PubsubTopicIamPolicyResource s) (TF.Attr s P.Text) where
     topic =
@@ -461,22 +511,43 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (PubsubTopicIamPolicyResource
 -- See the <https://www.terraform.io/docs/providers/google/r/redis_instance.html terraform documentation>
 -- for more information.
 data RedisInstanceResource s = RedisInstanceResource'
-    { _displayName  :: TF.Attr s P.Text
+    { _alternativeLocationId :: TF.Attr s P.Text
+    -- ^ @alternative_location_id@ - (Optional, Forces New)
+    --
+    , _authorizedNetwork     :: TF.Attr s P.Text
+    -- ^ @authorized_network@ - (Optional, Forces New)
+    --
+    , _displayName           :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
-    , _labels       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _labels                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _memorySizeGb :: TF.Attr s P.Int
+    , _locationId            :: TF.Attr s P.Text
+    -- ^ @location_id@ - (Optional, Forces New)
+    --
+    , _memorySizeGb          :: TF.Attr s P.Int
     -- ^ @memory_size_gb@ - (Required)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name                  :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _redisConfigs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _project               :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _redisConfigs          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @redis_configs@ - (Optional)
     --
-    , _tier         :: TF.Attr s P.Text
+    , _redisVersion          :: TF.Attr s P.Text
+    -- ^ @redis_version@ - (Optional, Forces New)
+    --
+    , _region                :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _reservedIpRange       :: TF.Attr s P.Text
+    -- ^ @reserved_ip_range@ - (Optional, Forces New)
+    --
+    , _tier                  :: TF.Attr s P.Text
     -- ^ @tier@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -489,26 +560,50 @@ redisInstanceResource
 redisInstanceResource _memorySizeGb _name =
     TF.unsafeResource "google_redis_instance" TF.validator $
         RedisInstanceResource'
-            { _displayName = TF.Nil
+            { _alternativeLocationId = TF.Nil
+            , _authorizedNetwork = TF.Nil
+            , _displayName = TF.Nil
             , _labels = TF.Nil
+            , _locationId = TF.Nil
             , _memorySizeGb = _memorySizeGb
             , _name = _name
+            , _project = TF.Nil
             , _redisConfigs = TF.Nil
+            , _redisVersion = TF.Nil
+            , _region = TF.Nil
+            , _reservedIpRange = TF.Nil
             , _tier = TF.value "BASIC"
             }
 
 instance TF.IsObject (RedisInstanceResource s) where
     toObject RedisInstanceResource'{..} = P.catMaybes
-        [ TF.assign "display_name" <$> TF.attribute _displayName
+        [ TF.assign "alternative_location_id" <$> TF.attribute _alternativeLocationId
+        , TF.assign "authorized_network" <$> TF.attribute _authorizedNetwork
+        , TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "location_id" <$> TF.attribute _locationId
         , TF.assign "memory_size_gb" <$> TF.attribute _memorySizeGb
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "redis_configs" <$> TF.attribute _redisConfigs
+        , TF.assign "redis_version" <$> TF.attribute _redisVersion
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "reserved_ip_range" <$> TF.attribute _reservedIpRange
         , TF.assign "tier" <$> TF.attribute _tier
         ]
 
 instance TF.IsValid (RedisInstanceResource s) where
     validator = P.mempty
+
+instance P.HasAlternativeLocationId (RedisInstanceResource s) (TF.Attr s P.Text) where
+    alternativeLocationId =
+        P.lens (_alternativeLocationId :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _alternativeLocationId = a } :: RedisInstanceResource s)
+
+instance P.HasAuthorizedNetwork (RedisInstanceResource s) (TF.Attr s P.Text) where
+    authorizedNetwork =
+        P.lens (_authorizedNetwork :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _authorizedNetwork = a } :: RedisInstanceResource s)
 
 instance P.HasDisplayName (RedisInstanceResource s) (TF.Attr s P.Text) where
     displayName =
@@ -520,6 +615,11 @@ instance P.HasLabels (RedisInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr
         P.lens (_labels :: RedisInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: RedisInstanceResource s)
 
+instance P.HasLocationId (RedisInstanceResource s) (TF.Attr s P.Text) where
+    locationId =
+        P.lens (_locationId :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _locationId = a } :: RedisInstanceResource s)
+
 instance P.HasMemorySizeGb (RedisInstanceResource s) (TF.Attr s P.Int) where
     memorySizeGb =
         P.lens (_memorySizeGb :: RedisInstanceResource s -> TF.Attr s P.Int)
@@ -530,10 +630,30 @@ instance P.HasName (RedisInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RedisInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RedisInstanceResource s)
 
+instance P.HasProject (RedisInstanceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: RedisInstanceResource s)
+
 instance P.HasRedisConfigs (RedisInstanceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     redisConfigs =
         P.lens (_redisConfigs :: RedisInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _redisConfigs = a } :: RedisInstanceResource s)
+
+instance P.HasRedisVersion (RedisInstanceResource s) (TF.Attr s P.Text) where
+    redisVersion =
+        P.lens (_redisVersion :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _redisVersion = a } :: RedisInstanceResource s)
+
+instance P.HasRegion (RedisInstanceResource s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: RedisInstanceResource s)
+
+instance P.HasReservedIpRange (RedisInstanceResource s) (TF.Attr s P.Text) where
+    reservedIpRange =
+        P.lens (_reservedIpRange :: RedisInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _reservedIpRange = a } :: RedisInstanceResource s)
 
 instance P.HasTier (RedisInstanceResource s) (TF.Attr s P.Text) where
     tier =
@@ -662,6 +782,9 @@ data RuntimeconfigConfigResource s = RuntimeconfigConfigResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_runtimeconfig_config@ resource value.
@@ -673,12 +796,14 @@ runtimeconfigConfigResource _name =
         RuntimeconfigConfigResource'
             { _description = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (RuntimeconfigConfigResource s) where
     toObject RuntimeconfigConfigResource'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (RuntimeconfigConfigResource s) where
@@ -694,6 +819,11 @@ instance P.HasName (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RuntimeconfigConfigResource s)
 
+instance P.HasProject (RuntimeconfigConfigResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: RuntimeconfigConfigResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: RuntimeconfigConfigResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RuntimeconfigConfigResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -705,19 +835,22 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (RuntimeconfigConfigResource 
 -- See the <https://www.terraform.io/docs/providers/google/r/runtimeconfig_variable.html terraform documentation>
 -- for more information.
 data RuntimeconfigVariableResource s = RuntimeconfigVariableResource'
-    { _name   :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _parent :: TF.Attr s P.Text
+    , _parent  :: TF.Attr s P.Text
     -- ^ @parent@ - (Required, Forces New)
     --
-    , _text   :: TF.Attr s P.Text
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _text    :: TF.Attr s P.Text
     -- ^ @text@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'value'
-    , _value  :: TF.Attr s P.Text
+    , _value   :: TF.Attr s P.Text
     -- ^ @value@ - (Optional)
     --
     -- Conflicts with:
@@ -735,6 +868,7 @@ runtimeconfigVariableResource _name _parent =
         RuntimeconfigVariableResource'
             { _name = _name
             , _parent = _parent
+            , _project = TF.Nil
             , _text = TF.Nil
             , _value = TF.Nil
             }
@@ -743,6 +877,7 @@ instance TF.IsObject (RuntimeconfigVariableResource s) where
     toObject RuntimeconfigVariableResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
         , TF.assign "parent" <$> TF.attribute _parent
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "text" <$> TF.attribute _text
         , TF.assign "value" <$> TF.attribute _value
         ]
@@ -770,6 +905,11 @@ instance P.HasParent (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
     parent =
         P.lens (_parent :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
                (\s a -> s { _parent = a } :: RuntimeconfigVariableResource s)
+
+instance P.HasProject (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: RuntimeconfigVariableResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: RuntimeconfigVariableResource s)
 
 instance P.HasText (RuntimeconfigVariableResource s) (TF.Attr s P.Text) where
     text =
@@ -801,6 +941,9 @@ data ServiceAccountResource s = ServiceAccountResource'
     , _displayName :: TF.Attr s P.Text
     -- ^ @display_name@ - (Optional)
     --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_service_account@ resource value.
@@ -812,12 +955,14 @@ serviceAccountResource _accountId =
         ServiceAccountResource'
             { _accountId = _accountId
             , _displayName = TF.Nil
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ServiceAccountResource s) where
     toObject ServiceAccountResource'{..} = P.catMaybes
         [ TF.assign "account_id" <$> TF.attribute _accountId
         , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ServiceAccountResource s) where
@@ -832,6 +977,11 @@ instance P.HasDisplayName (ServiceAccountResource s) (TF.Attr s P.Text) where
     displayName =
         P.lens (_displayName :: ServiceAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _displayName = a } :: ServiceAccountResource s)
+
+instance P.HasProject (ServiceAccountResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ServiceAccountResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ServiceAccountResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceAccountResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1122,8 +1272,11 @@ instance s ~ s' => P.HasComputedValidBefore (TF.Ref s' (ServiceAccountKeyResourc
 -- See the <https://www.terraform.io/docs/providers/google/r/sourcerepo_repository.html terraform documentation>
 -- for more information.
 data SourcerepoRepositoryResource s = SourcerepoRepositoryResource'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1135,11 +1288,13 @@ sourcerepoRepositoryResource _name =
     TF.unsafeResource "google_sourcerepo_repository" TF.validator $
         SourcerepoRepositoryResource'
             { _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SourcerepoRepositoryResource s) where
     toObject SourcerepoRepositoryResource'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SourcerepoRepositoryResource s) where
@@ -1149,6 +1304,11 @@ instance P.HasName (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SourcerepoRepositoryResource s)
+
+instance P.HasProject (SourcerepoRepositoryResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SourcerepoRepositoryResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SourcerepoRepositoryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SourcerepoRepositoryResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1176,6 +1336,9 @@ data SpannerDatabaseResource s = SpannerDatabaseResource'
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_spanner_database@ resource value.
@@ -1189,6 +1352,7 @@ spannerDatabaseResource _instance' _name =
             { _ddl = TF.Nil
             , _instance' = _instance'
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SpannerDatabaseResource s) where
@@ -1196,6 +1360,7 @@ instance TF.IsObject (SpannerDatabaseResource s) where
         [ TF.assign "ddl" <$> TF.attribute _ddl
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SpannerDatabaseResource s) where
@@ -1215,6 +1380,11 @@ instance P.HasName (SpannerDatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SpannerDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SpannerDatabaseResource s)
+
+instance P.HasProject (SpannerDatabaseResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerDatabaseResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerDatabaseResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1239,6 +1409,9 @@ data SpannerDatabaseIamBindingResource s = SpannerDatabaseIamBindingResource'
     , _members   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -1257,6 +1430,7 @@ spannerDatabaseIamBindingResource _database _instance' _members _role =
             { _database = _database
             , _instance' = _instance'
             , _members = _members
+            , _project = TF.Nil
             , _role = _role
             }
 
@@ -1265,6 +1439,7 @@ instance TF.IsObject (SpannerDatabaseIamBindingResource s) where
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "members" <$> TF.attribute _members
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         ]
 
@@ -1285,6 +1460,11 @@ instance P.HasMembers (SpannerDatabaseIamBindingResource s) (TF.Attr s [TF.Attr 
     members =
         P.lens (_members :: SpannerDatabaseIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _members = a } :: SpannerDatabaseIamBindingResource s)
+
+instance P.HasProject (SpannerDatabaseIamBindingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerDatabaseIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerDatabaseIamBindingResource s)
 
 instance P.HasRole (SpannerDatabaseIamBindingResource s) (TF.Attr s P.Text) where
     role =
@@ -1314,6 +1494,9 @@ data SpannerDatabaseIamMemberResource s = SpannerDatabaseIamMemberResource'
     , _member    :: TF.Attr s P.Text
     -- ^ @member@ - (Required, Forces New)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -1332,6 +1515,7 @@ spannerDatabaseIamMemberResource _database _instance' _member _role =
             { _database = _database
             , _instance' = _instance'
             , _member = _member
+            , _project = TF.Nil
             , _role = _role
             }
 
@@ -1340,6 +1524,7 @@ instance TF.IsObject (SpannerDatabaseIamMemberResource s) where
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "member" <$> TF.attribute _member
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         ]
 
@@ -1360,6 +1545,11 @@ instance P.HasMember (SpannerDatabaseIamMemberResource s) (TF.Attr s P.Text) whe
     member =
         P.lens (_member :: SpannerDatabaseIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _member = a } :: SpannerDatabaseIamMemberResource s)
+
+instance P.HasProject (SpannerDatabaseIamMemberResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerDatabaseIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerDatabaseIamMemberResource s)
 
 instance P.HasRole (SpannerDatabaseIamMemberResource s) (TF.Attr s P.Text) where
     role =
@@ -1389,6 +1579,9 @@ data SpannerDatabaseIamPolicyResource s = SpannerDatabaseIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_spanner_database_iam_policy@ resource value.
@@ -1403,6 +1596,7 @@ spannerDatabaseIamPolicyResource _policyData _database _instance' =
             { _database = _database
             , _instance' = _instance'
             , _policyData = _policyData
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SpannerDatabaseIamPolicyResource s) where
@@ -1410,6 +1604,7 @@ instance TF.IsObject (SpannerDatabaseIamPolicyResource s) where
         [ TF.assign "database" <$> TF.attribute _database
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "policy_data" <$> TF.attribute _policyData
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SpannerDatabaseIamPolicyResource s) where
@@ -1429,6 +1624,11 @@ instance P.HasPolicyData (SpannerDatabaseIamPolicyResource s) (TF.Attr s P.Text)
     policyData =
         P.lens (_policyData :: SpannerDatabaseIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: SpannerDatabaseIamPolicyResource s)
+
+instance P.HasProject (SpannerDatabaseIamPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerDatabaseIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerDatabaseIamPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerDatabaseIamPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1453,8 +1653,14 @@ data SpannerInstanceResource s = SpannerInstanceResource'
     , _labels      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
+    , _name        :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
     , _numNodes    :: TF.Attr s P.Int
     -- ^ @num_nodes@ - (Optional)
+    --
+    , _project     :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1469,7 +1675,9 @@ spannerInstanceResource _config _displayName =
             { _config = _config
             , _displayName = _displayName
             , _labels = TF.Nil
+            , _name = TF.Nil
             , _numNodes = TF.value 1
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SpannerInstanceResource s) where
@@ -1477,7 +1685,9 @@ instance TF.IsObject (SpannerInstanceResource s) where
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "display_name" <$> TF.attribute _displayName
         , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "name" <$> TF.attribute _name
         , TF.assign "num_nodes" <$> TF.attribute _numNodes
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SpannerInstanceResource s) where
@@ -1498,10 +1708,20 @@ instance P.HasLabels (SpannerInstanceResource s) (TF.Attr s (P.Map P.Text (TF.At
         P.lens (_labels :: SpannerInstanceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: SpannerInstanceResource s)
 
+instance P.HasName (SpannerInstanceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SpannerInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SpannerInstanceResource s)
+
 instance P.HasNumNodes (SpannerInstanceResource s) (TF.Attr s P.Int) where
     numNodes =
         P.lens (_numNodes :: SpannerInstanceResource s -> TF.Attr s P.Int)
                (\s a -> s { _numNodes = a } :: SpannerInstanceResource s)
+
+instance P.HasProject (SpannerInstanceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerInstanceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerInstanceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1526,6 +1746,9 @@ data SpannerInstanceIamBindingResource s = SpannerInstanceIamBindingResource'
     , _members   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @members@ - (Required)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -1542,6 +1765,7 @@ spannerInstanceIamBindingResource _instance' _members _role =
         SpannerInstanceIamBindingResource'
             { _instance' = _instance'
             , _members = _members
+            , _project = TF.Nil
             , _role = _role
             }
 
@@ -1549,6 +1773,7 @@ instance TF.IsObject (SpannerInstanceIamBindingResource s) where
     toObject SpannerInstanceIamBindingResource'{..} = P.catMaybes
         [ TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "members" <$> TF.attribute _members
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         ]
 
@@ -1564,6 +1789,11 @@ instance P.HasMembers (SpannerInstanceIamBindingResource s) (TF.Attr s [TF.Attr 
     members =
         P.lens (_members :: SpannerInstanceIamBindingResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _members = a } :: SpannerInstanceIamBindingResource s)
+
+instance P.HasProject (SpannerInstanceIamBindingResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerInstanceIamBindingResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerInstanceIamBindingResource s)
 
 instance P.HasRole (SpannerInstanceIamBindingResource s) (TF.Attr s P.Text) where
     role =
@@ -1590,6 +1820,9 @@ data SpannerInstanceIamMemberResource s = SpannerInstanceIamMemberResource'
     , _member    :: TF.Attr s P.Text
     -- ^ @member@ - (Required, Forces New)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _role      :: TF.Attr s P.Text
     -- ^ @role@ - (Required, Forces New)
     --
@@ -1606,6 +1839,7 @@ spannerInstanceIamMemberResource _instance' _member _role =
         SpannerInstanceIamMemberResource'
             { _instance' = _instance'
             , _member = _member
+            , _project = TF.Nil
             , _role = _role
             }
 
@@ -1613,6 +1847,7 @@ instance TF.IsObject (SpannerInstanceIamMemberResource s) where
     toObject SpannerInstanceIamMemberResource'{..} = P.catMaybes
         [ TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "member" <$> TF.attribute _member
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "role" <$> TF.attribute _role
         ]
 
@@ -1628,6 +1863,11 @@ instance P.HasMember (SpannerInstanceIamMemberResource s) (TF.Attr s P.Text) whe
     member =
         P.lens (_member :: SpannerInstanceIamMemberResource s -> TF.Attr s P.Text)
                (\s a -> s { _member = a } :: SpannerInstanceIamMemberResource s)
+
+instance P.HasProject (SpannerInstanceIamMemberResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerInstanceIamMemberResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerInstanceIamMemberResource s)
 
 instance P.HasRole (SpannerInstanceIamMemberResource s) (TF.Attr s P.Text) where
     role =
@@ -1654,6 +1894,9 @@ data SpannerInstanceIamPolicyResource s = SpannerInstanceIamPolicyResource'
     , _policyData :: TF.Attr s P.Text
     -- ^ @policy_data@ - (Required)
     --
+    , _project    :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_spanner_instance_iam_policy@ resource value.
@@ -1666,12 +1909,14 @@ spannerInstanceIamPolicyResource _policyData _instance' =
         SpannerInstanceIamPolicyResource'
             { _instance' = _instance'
             , _policyData = _policyData
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SpannerInstanceIamPolicyResource s) where
     toObject SpannerInstanceIamPolicyResource'{..} = P.catMaybes
         [ TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "policy_data" <$> TF.attribute _policyData
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SpannerInstanceIamPolicyResource s) where
@@ -1687,6 +1932,11 @@ instance P.HasPolicyData (SpannerInstanceIamPolicyResource s) (TF.Attr s P.Text)
         P.lens (_policyData :: SpannerInstanceIamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _policyData = a } :: SpannerInstanceIamPolicyResource s)
 
+instance P.HasProject (SpannerInstanceIamPolicyResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SpannerInstanceIamPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SpannerInstanceIamPolicyResource s)
+
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpannerInstanceIamPolicyResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
@@ -1701,11 +1951,20 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (SpannerInstanceIamPolicyReso
 -- See the <https://www.terraform.io/docs/providers/google/r/sql_database.html terraform documentation>
 -- for more information.
 data SqlDatabaseResource s = SqlDatabaseResource'
-    { _instance' :: TF.Attr s P.Text
+    { _charset   :: TF.Attr s P.Text
+    -- ^ @charset@ - (Optional)
+    --
+    , _collation :: TF.Attr s P.Text
+    -- ^ @collation@ - (Optional)
+    --
+    , _instance' :: TF.Attr s P.Text
     -- ^ @instance@ - (Required, Forces New)
     --
     , _name      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
+    --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1717,18 +1976,34 @@ sqlDatabaseResource
 sqlDatabaseResource _instance' _name =
     TF.unsafeResource "google_sql_database" TF.validator $
         SqlDatabaseResource'
-            { _instance' = _instance'
+            { _charset = TF.Nil
+            , _collation = TF.Nil
+            , _instance' = _instance'
             , _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SqlDatabaseResource s) where
     toObject SqlDatabaseResource'{..} = P.catMaybes
-        [ TF.assign "instance" <$> TF.attribute _instance'
+        [ TF.assign "charset" <$> TF.attribute _charset
+        , TF.assign "collation" <$> TF.attribute _collation
+        , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SqlDatabaseResource s) where
     validator = P.mempty
+
+instance P.HasCharset (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    charset =
+        P.lens (_charset :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _charset = a } :: SqlDatabaseResource s)
+
+instance P.HasCollation (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    collation =
+        P.lens (_collation :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _collation = a } :: SqlDatabaseResource s)
 
 instance P.HasInstance' (SqlDatabaseResource s) (TF.Attr s P.Text) where
     instance' =
@@ -1739,6 +2014,11 @@ instance P.HasName (SqlDatabaseResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SqlDatabaseResource s)
+
+instance P.HasProject (SqlDatabaseResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SqlDatabaseResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SqlDatabaseResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlDatabaseResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1760,13 +2040,25 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/google/r/sql_database_instance.html terraform documentation>
 -- for more information.
 data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
-    { _databaseVersion :: TF.Attr s P.Text
+    { _databaseVersion      :: TF.Attr s P.Text
     -- ^ @database_version@ - (Optional, Forces New)
     --
-    , _region          :: TF.Attr s P.Text
+    , _masterInstanceName   :: TF.Attr s P.Text
+    -- ^ @master_instance_name@ - (Optional, Forces New)
+    --
+    , _name                 :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _project              :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region               :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _settings        :: TF.Attr s (SettingsSetting s)
+    , _replicaConfiguration :: TF.Attr s (ReplicaConfigurationSetting s)
+    -- ^ @replica_configuration@ - (Optional)
+    --
+    , _settings             :: TF.Attr s (SettingsSetting s)
     -- ^ @settings@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1779,19 +2071,31 @@ sqlDatabaseInstanceResource _settings =
     TF.unsafeResource "google_sql_database_instance" TF.validator $
         SqlDatabaseInstanceResource'
             { _databaseVersion = TF.value "MYSQL_5_6"
+            , _masterInstanceName = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
             , _region = TF.Nil
+            , _replicaConfiguration = TF.Nil
             , _settings = _settings
             }
 
 instance TF.IsObject (SqlDatabaseInstanceResource s) where
     toObject SqlDatabaseInstanceResource'{..} = P.catMaybes
         [ TF.assign "database_version" <$> TF.attribute _databaseVersion
+        , TF.assign "master_instance_name" <$> TF.attribute _masterInstanceName
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "replica_configuration" <$> TF.attribute _replicaConfiguration
         , TF.assign "settings" <$> TF.attribute _settings
         ]
 
 instance TF.IsValid (SqlDatabaseInstanceResource s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_replicaConfiguration"
+                  (_replicaConfiguration
+                      :: SqlDatabaseInstanceResource s -> TF.Attr s (ReplicaConfigurationSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_settings"
                   (_settings
                       :: SqlDatabaseInstanceResource s -> TF.Attr s (SettingsSetting s))
@@ -1802,10 +2106,30 @@ instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text)
         P.lens (_databaseVersion :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _databaseVersion = a } :: SqlDatabaseInstanceResource s)
 
+instance P.HasMasterInstanceName (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+    masterInstanceName =
+        P.lens (_masterInstanceName :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _masterInstanceName = a } :: SqlDatabaseInstanceResource s)
+
+instance P.HasName (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SqlDatabaseInstanceResource s)
+
+instance P.HasProject (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SqlDatabaseInstanceResource s)
+
 instance P.HasRegion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
     region =
         P.lens (_region :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
+
+instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) (TF.Attr s (ReplicaConfigurationSetting s)) where
+    replicaConfiguration =
+        P.lens (_replicaConfiguration :: SqlDatabaseInstanceResource s -> TF.Attr s (ReplicaConfigurationSetting s))
+               (\s a -> s { _replicaConfiguration = a } :: SqlDatabaseInstanceResource s)
 
 instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SettingsSetting s)) where
     settings =
@@ -1859,6 +2183,9 @@ data SqlUserResource s = SqlUserResource'
     , _password  :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
+    , _project   :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_sql_user@ resource value.
@@ -1873,6 +2200,7 @@ sqlUserResource _instance' _name =
             , _instance' = _instance'
             , _name = _name
             , _password = TF.Nil
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (SqlUserResource s) where
@@ -1881,6 +2209,7 @@ instance TF.IsObject (SqlUserResource s) where
         , TF.assign "instance" <$> TF.attribute _instance'
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password" <$> TF.attribute _password
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (SqlUserResource s) where
@@ -1905,6 +2234,11 @@ instance P.HasPassword (SqlUserResource s) (TF.Attr s P.Text) where
     password =
         P.lens (_password :: SqlUserResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: SqlUserResource s)
+
+instance P.HasProject (SqlUserResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: SqlUserResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: SqlUserResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlUserResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1941,6 +2275,9 @@ data StorageBucketResource s = StorageBucketResource'
     , _predefinedAcl :: TF.Attr s P.Text
     -- ^ @predefined_acl@ - (Optional, Forces New)
     --
+    , _project       :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
     , _storageClass  :: TF.Attr s P.Text
     -- ^ @storage_class@ - (Optional, Forces New)
     --
@@ -1967,6 +2304,7 @@ storageBucketResource _name =
             , _logging = TF.Nil
             , _name = _name
             , _predefinedAcl = TF.Nil
+            , _project = TF.Nil
             , _storageClass = TF.value "STANDARD"
             , _versioning = TF.Nil
             , _website = TF.Nil
@@ -1982,6 +2320,7 @@ instance TF.IsObject (StorageBucketResource s) where
         , TF.assign "logging" <$> TF.attribute _logging
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "predefined_acl" <$> TF.attribute _predefinedAcl
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "storage_class" <$> TF.attribute _storageClass
         , TF.assign "versioning" <$> TF.attribute _versioning
         , TF.assign "website" <$> TF.attribute _website
@@ -2038,6 +2377,11 @@ instance P.HasPredefinedAcl (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_predefinedAcl :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _predefinedAcl = a } :: StorageBucketResource s)
 
+instance P.HasProject (StorageBucketResource s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: StorageBucketResource s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: StorageBucketResource s)
+
 instance P.HasStorageClass (StorageBucketResource s) (TF.Attr s P.Text) where
     storageClass =
         P.lens (_storageClass :: StorageBucketResource s -> TF.Attr s P.Text)
@@ -2079,6 +2423,15 @@ data StorageBucketAclResource s = StorageBucketAclResource'
     , _predefinedAcl :: TF.Attr s P.Text
     -- ^ @predefined_acl@ - (Optional, Forces New)
     --
+    -- Conflicts with:
+    --
+    -- * 'roleEntity'
+    , _roleEntity    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @role_entity@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'predefinedAcl'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_storage_bucket_acl@ resource value.
@@ -2091,6 +2444,7 @@ storageBucketAclResource _bucket =
             { _bucket = _bucket
             , _defaultAcl = TF.Nil
             , _predefinedAcl = TF.Nil
+            , _roleEntity = TF.Nil
             }
 
 instance TF.IsObject (StorageBucketAclResource s) where
@@ -2098,10 +2452,22 @@ instance TF.IsObject (StorageBucketAclResource s) where
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "default_acl" <$> TF.attribute _defaultAcl
         , TF.assign "predefined_acl" <$> TF.attribute _predefinedAcl
+        , TF.assign "role_entity" <$> TF.attribute _roleEntity
         ]
 
 instance TF.IsValid (StorageBucketAclResource s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\StorageBucketAclResource'{..} -> Map.fromList $ P.catMaybes
+        [ if (_predefinedAcl P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_predefinedAcl",
+                            [ "_roleEntity"
+                            ])
+        , if (_roleEntity P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_roleEntity",
+                            [ "_predefinedAcl"
+                            ])
+        ])
 
 instance P.HasBucket (StorageBucketAclResource s) (TF.Attr s P.Text) where
     bucket =
@@ -2117,6 +2483,11 @@ instance P.HasPredefinedAcl (StorageBucketAclResource s) (TF.Attr s P.Text) wher
     predefinedAcl =
         P.lens (_predefinedAcl :: StorageBucketAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _predefinedAcl = a } :: StorageBucketAclResource s)
+
+instance P.HasRoleEntity (StorageBucketAclResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    roleEntity =
+        P.lens (_roleEntity :: StorageBucketAclResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _roleEntity = a } :: StorageBucketAclResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketAclResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2322,6 +2693,9 @@ data StorageBucketObjectResource s = StorageBucketObjectResource'
     , _contentLanguage    :: TF.Attr s P.Text
     -- ^ @content_language@ - (Optional, Forces New)
     --
+    , _contentType        :: TF.Attr s P.Text
+    -- ^ @content_type@ - (Optional, Forces New)
+    --
     , _detectMd5hash      :: TF.Attr s P.Text
     -- ^ @detect_md5hash@ - (Optional, Forces New)
     --
@@ -2337,6 +2711,9 @@ data StorageBucketObjectResource s = StorageBucketObjectResource'
     -- Conflicts with:
     --
     -- * 'content'
+    , _storageClass       :: TF.Attr s P.Text
+    -- ^ @storage_class@ - (Optional, Forces New)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_storage_bucket_object@ resource value.
@@ -2353,10 +2730,12 @@ storageBucketObjectResource _bucket _name =
             , _contentDisposition = TF.Nil
             , _contentEncoding = TF.Nil
             , _contentLanguage = TF.Nil
+            , _contentType = TF.Nil
             , _detectMd5hash = TF.value "different hash"
             , _name = _name
             , _predefinedAcl = TF.Nil
             , _source = TF.Nil
+            , _storageClass = TF.Nil
             }
 
 instance TF.IsObject (StorageBucketObjectResource s) where
@@ -2367,10 +2746,12 @@ instance TF.IsObject (StorageBucketObjectResource s) where
         , TF.assign "content_disposition" <$> TF.attribute _contentDisposition
         , TF.assign "content_encoding" <$> TF.attribute _contentEncoding
         , TF.assign "content_language" <$> TF.attribute _contentLanguage
+        , TF.assign "content_type" <$> TF.attribute _contentType
         , TF.assign "detect_md5hash" <$> TF.attribute _detectMd5hash
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "predefined_acl" <$> TF.attribute _predefinedAcl
         , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "storage_class" <$> TF.attribute _storageClass
         ]
 
 instance TF.IsValid (StorageBucketObjectResource s) where
@@ -2417,6 +2798,11 @@ instance P.HasContentLanguage (StorageBucketObjectResource s) (TF.Attr s P.Text)
         P.lens (_contentLanguage :: StorageBucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _contentLanguage = a } :: StorageBucketObjectResource s)
 
+instance P.HasContentType (StorageBucketObjectResource s) (TF.Attr s P.Text) where
+    contentType =
+        P.lens (_contentType :: StorageBucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: StorageBucketObjectResource s)
+
 instance P.HasDetectMd5hash (StorageBucketObjectResource s) (TF.Attr s P.Text) where
     detectMd5hash =
         P.lens (_detectMd5hash :: StorageBucketObjectResource s -> TF.Attr s P.Text)
@@ -2436,6 +2822,11 @@ instance P.HasSource (StorageBucketObjectResource s) (TF.Attr s P.Text) where
     source =
         P.lens (_source :: StorageBucketObjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _source = a } :: StorageBucketObjectResource s)
+
+instance P.HasStorageClass (StorageBucketObjectResource s) (TF.Attr s P.Text) where
+    storageClass =
+        P.lens (_storageClass :: StorageBucketObjectResource s -> TF.Attr s P.Text)
+               (\s a -> s { _storageClass = a } :: StorageBucketObjectResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketObjectResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2457,8 +2848,11 @@ instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (StorageBucketObjectReso
 -- See the <https://www.terraform.io/docs/providers/google/r/storage_default_object_acl.html terraform documentation>
 -- for more information.
 data StorageDefaultObjectAclResource s = StorageDefaultObjectAclResource'
-    { _bucket :: TF.Attr s P.Text
+    { _bucket     :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
+    --
+    , _roleEntity :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @role_entity@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2470,11 +2864,13 @@ storageDefaultObjectAclResource _bucket =
     TF.unsafeResource "google_storage_default_object_acl" TF.validator $
         StorageDefaultObjectAclResource'
             { _bucket = _bucket
+            , _roleEntity = TF.Nil
             }
 
 instance TF.IsObject (StorageDefaultObjectAclResource s) where
     toObject StorageDefaultObjectAclResource'{..} = P.catMaybes
         [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "role_entity" <$> TF.attribute _roleEntity
         ]
 
 instance TF.IsValid (StorageDefaultObjectAclResource s) where
@@ -2484,6 +2880,11 @@ instance P.HasBucket (StorageDefaultObjectAclResource s) (TF.Attr s P.Text) wher
     bucket =
         P.lens (_bucket :: StorageDefaultObjectAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: StorageDefaultObjectAclResource s)
+
+instance P.HasRoleEntity (StorageDefaultObjectAclResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    roleEntity =
+        P.lens (_roleEntity :: StorageDefaultObjectAclResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _roleEntity = a } :: StorageDefaultObjectAclResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageDefaultObjectAclResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -2596,6 +2997,9 @@ data StorageObjectAclResource s = StorageObjectAclResource'
     , _predefinedAcl :: TF.Attr s P.Text
     -- ^ @predefined_acl@ - (Optional, Forces New)
     --
+    , _roleEntity    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @role_entity@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_storage_object_acl@ resource value.
@@ -2609,6 +3013,7 @@ storageObjectAclResource _bucket _object =
             { _bucket = _bucket
             , _object = _object
             , _predefinedAcl = TF.Nil
+            , _roleEntity = TF.Nil
             }
 
 instance TF.IsObject (StorageObjectAclResource s) where
@@ -2616,6 +3021,7 @@ instance TF.IsObject (StorageObjectAclResource s) where
         [ TF.assign "bucket" <$> TF.attribute _bucket
         , TF.assign "object" <$> TF.attribute _object
         , TF.assign "predefined_acl" <$> TF.attribute _predefinedAcl
+        , TF.assign "role_entity" <$> TF.attribute _roleEntity
         ]
 
 instance TF.IsValid (StorageObjectAclResource s) where
@@ -2635,6 +3041,11 @@ instance P.HasPredefinedAcl (StorageObjectAclResource s) (TF.Attr s P.Text) wher
     predefinedAcl =
         P.lens (_predefinedAcl :: StorageObjectAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _predefinedAcl = a } :: StorageObjectAclResource s)
+
+instance P.HasRoleEntity (StorageObjectAclResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    roleEntity =
+        P.lens (_roleEntity :: StorageObjectAclResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _roleEntity = a } :: StorageObjectAclResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageObjectAclResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

@@ -88,7 +88,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "google"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ TF.assign "credentials" <$> _credentials
             , TF.assign "project" <$> _project

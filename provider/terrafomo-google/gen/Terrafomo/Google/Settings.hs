@@ -538,7 +538,13 @@ import qualified Terrafomo.Validator    as TF
 
 -- | @access_config@ nested settings.
 data AccessConfigSetting s = AccessConfigSetting'
-    { _publicPtrDomainName :: TF.Attr s P.Text
+    { _natIp               :: TF.Attr s P.Text
+    -- ^ @nat_ip@ - (Optional)
+    --
+    , _networkTier         :: TF.Attr s P.Text
+    -- ^ @network_tier@ - (Optional)
+    --
+    , _publicPtrDomainName :: TF.Attr s P.Text
     -- ^ @public_ptr_domain_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -548,17 +554,31 @@ accessConfigSetting
     :: AccessConfigSetting s
 accessConfigSetting =
     AccessConfigSetting'
-        { _publicPtrDomainName = TF.Nil
+        { _natIp = TF.Nil
+        , _networkTier = TF.Nil
+        , _publicPtrDomainName = TF.Nil
         }
 
 instance TF.IsValue  (AccessConfigSetting s)
 instance TF.IsObject (AccessConfigSetting s) where
     toObject AccessConfigSetting'{..} = P.catMaybes
-        [ TF.assign "public_ptr_domain_name" <$> TF.attribute _publicPtrDomainName
+        [ TF.assign "nat_ip" <$> TF.attribute _natIp
+        , TF.assign "network_tier" <$> TF.attribute _networkTier
+        , TF.assign "public_ptr_domain_name" <$> TF.attribute _publicPtrDomainName
         ]
 
 instance TF.IsValid (AccessConfigSetting s) where
     validator = P.mempty
+
+instance P.HasNatIp (AccessConfigSetting s) (TF.Attr s P.Text) where
+    natIp =
+        P.lens (_natIp :: AccessConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _natIp = a } :: AccessConfigSetting s)
+
+instance P.HasNetworkTier (AccessConfigSetting s) (TF.Attr s P.Text) where
+    networkTier =
+        P.lens (_networkTier :: AccessConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _networkTier = a } :: AccessConfigSetting s)
 
 instance P.HasPublicPtrDomainName (AccessConfigSetting s) (TF.Attr s P.Text) where
     publicPtrDomainName =
@@ -619,20 +639,78 @@ instance P.HasType' (ActionSetting s) (TF.Attr s P.Text) where
 
 -- | @addons_config@ nested settings.
 data AddonsConfigSetting s = AddonsConfigSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _horizontalPodAutoscaling :: TF.Attr s (HorizontalPodAutoscalingSetting s)
+    -- ^ @horizontal_pod_autoscaling@ - (Optional)
+    --
+    , _httpLoadBalancing        :: TF.Attr s (HttpLoadBalancingSetting s)
+    -- ^ @http_load_balancing@ - (Optional)
+    --
+    , _kubernetesDashboard      :: TF.Attr s (KubernetesDashboardSetting s)
+    -- ^ @kubernetes_dashboard@ - (Optional)
+    --
+    , _networkPolicyConfig      :: TF.Attr s (NetworkPolicyConfigSetting s)
+    -- ^ @network_policy_config@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @addons_config@ settings value.
 addonsConfigSetting
     :: AddonsConfigSetting s
 addonsConfigSetting =
     AddonsConfigSetting'
+        { _horizontalPodAutoscaling = TF.Nil
+        , _httpLoadBalancing = TF.Nil
+        , _kubernetesDashboard = TF.Nil
+        , _networkPolicyConfig = TF.Nil
+        }
 
 instance TF.IsValue  (AddonsConfigSetting s)
 instance TF.IsObject (AddonsConfigSetting s) where
-    toObject AddonsConfigSetting' = []
+    toObject AddonsConfigSetting'{..} = P.catMaybes
+        [ TF.assign "horizontal_pod_autoscaling" <$> TF.attribute _horizontalPodAutoscaling
+        , TF.assign "http_load_balancing" <$> TF.attribute _httpLoadBalancing
+        , TF.assign "kubernetes_dashboard" <$> TF.attribute _kubernetesDashboard
+        , TF.assign "network_policy_config" <$> TF.attribute _networkPolicyConfig
+        ]
 
 instance TF.IsValid (AddonsConfigSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_horizontalPodAutoscaling"
+                  (_horizontalPodAutoscaling
+                      :: AddonsConfigSetting s -> TF.Attr s (HorizontalPodAutoscalingSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_httpLoadBalancing"
+                  (_httpLoadBalancing
+                      :: AddonsConfigSetting s -> TF.Attr s (HttpLoadBalancingSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_kubernetesDashboard"
+                  (_kubernetesDashboard
+                      :: AddonsConfigSetting s -> TF.Attr s (KubernetesDashboardSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_networkPolicyConfig"
+                  (_networkPolicyConfig
+                      :: AddonsConfigSetting s -> TF.Attr s (NetworkPolicyConfigSetting s))
+                  TF.validator
+
+instance P.HasHorizontalPodAutoscaling (AddonsConfigSetting s) (TF.Attr s (HorizontalPodAutoscalingSetting s)) where
+    horizontalPodAutoscaling =
+        P.lens (_horizontalPodAutoscaling :: AddonsConfigSetting s -> TF.Attr s (HorizontalPodAutoscalingSetting s))
+               (\s a -> s { _horizontalPodAutoscaling = a } :: AddonsConfigSetting s)
+
+instance P.HasHttpLoadBalancing (AddonsConfigSetting s) (TF.Attr s (HttpLoadBalancingSetting s)) where
+    httpLoadBalancing =
+        P.lens (_httpLoadBalancing :: AddonsConfigSetting s -> TF.Attr s (HttpLoadBalancingSetting s))
+               (\s a -> s { _httpLoadBalancing = a } :: AddonsConfigSetting s)
+
+instance P.HasKubernetesDashboard (AddonsConfigSetting s) (TF.Attr s (KubernetesDashboardSetting s)) where
+    kubernetesDashboard =
+        P.lens (_kubernetesDashboard :: AddonsConfigSetting s -> TF.Attr s (KubernetesDashboardSetting s))
+               (\s a -> s { _kubernetesDashboard = a } :: AddonsConfigSetting s)
+
+instance P.HasNetworkPolicyConfig (AddonsConfigSetting s) (TF.Attr s (NetworkPolicyConfigSetting s)) where
+    networkPolicyConfig =
+        P.lens (_networkPolicyConfig :: AddonsConfigSetting s -> TF.Attr s (NetworkPolicyConfigSetting s))
+               (\s a -> s { _networkPolicyConfig = a } :: AddonsConfigSetting s)
 
 instance s ~ s' => P.HasComputedHorizontalPodAutoscaling (TF.Ref s' (AddonsConfigSetting s)) (TF.Attr s (HorizontalPodAutoscalingSetting s)) where
     computedHorizontalPodAutoscaling x = TF.compute (TF.refKey x) "horizontal_pod_autoscaling"
@@ -836,20 +914,66 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ApisSetting s)) (TF.Attr s P
 
 -- | @app_engine@ nested settings.
 data AppEngineSetting s = AppEngineSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _authDomain      :: TF.Attr s P.Text
+    -- ^ @auth_domain@ - (Optional)
+    --
+    , _featureSettings :: TF.Attr s (FeatureSettingsSetting s)
+    -- ^ @feature_settings@ - (Optional)
+    --
+    , _locationId      :: TF.Attr s P.Text
+    -- ^ @location_id@ - (Optional)
+    --
+    , _servingStatus   :: TF.Attr s P.Text
+    -- ^ @serving_status@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @app_engine@ settings value.
 appEngineSetting
     :: AppEngineSetting s
 appEngineSetting =
     AppEngineSetting'
+        { _authDomain = TF.Nil
+        , _featureSettings = TF.Nil
+        , _locationId = TF.Nil
+        , _servingStatus = TF.Nil
+        }
 
 instance TF.IsValue  (AppEngineSetting s)
 instance TF.IsObject (AppEngineSetting s) where
-    toObject AppEngineSetting' = []
+    toObject AppEngineSetting'{..} = P.catMaybes
+        [ TF.assign "auth_domain" <$> TF.attribute _authDomain
+        , TF.assign "feature_settings" <$> TF.attribute _featureSettings
+        , TF.assign "location_id" <$> TF.attribute _locationId
+        , TF.assign "serving_status" <$> TF.attribute _servingStatus
+        ]
 
 instance TF.IsValid (AppEngineSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_featureSettings"
+                  (_featureSettings
+                      :: AppEngineSetting s -> TF.Attr s (FeatureSettingsSetting s))
+                  TF.validator
+
+instance P.HasAuthDomain (AppEngineSetting s) (TF.Attr s P.Text) where
+    authDomain =
+        P.lens (_authDomain :: AppEngineSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _authDomain = a } :: AppEngineSetting s)
+
+instance P.HasFeatureSettings (AppEngineSetting s) (TF.Attr s (FeatureSettingsSetting s)) where
+    featureSettings =
+        P.lens (_featureSettings :: AppEngineSetting s -> TF.Attr s (FeatureSettingsSetting s))
+               (\s a -> s { _featureSettings = a } :: AppEngineSetting s)
+
+instance P.HasLocationId (AppEngineSetting s) (TF.Attr s P.Text) where
+    locationId =
+        P.lens (_locationId :: AppEngineSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _locationId = a } :: AppEngineSetting s)
+
+instance P.HasServingStatus (AppEngineSetting s) (TF.Attr s P.Text) where
+    servingStatus =
+        P.lens (_servingStatus :: AppEngineSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _servingStatus = a } :: AppEngineSetting s)
 
 instance s ~ s' => P.HasComputedAuthDomain (TF.Ref s' (AppEngineSetting s)) (TF.Attr s P.Text) where
     computedAuthDomain x = TF.compute (TF.refKey x) "auth_domain"
@@ -883,7 +1007,10 @@ instance s ~ s' => P.HasComputedUrlDispatchRule (TF.Ref s' (AppEngineSetting s))
 
 -- | @attached_disk@ nested settings.
 data AttachedDiskSetting s = AttachedDiskSetting'
-    { _diskEncryptionKeyRaw :: TF.Attr s P.Text
+    { _deviceName           :: TF.Attr s P.Text
+    -- ^ @device_name@ - (Optional)
+    --
+    , _diskEncryptionKeyRaw :: TF.Attr s P.Text
     -- ^ @disk_encryption_key_raw@ - (Optional)
     --
     , _mode                 :: TF.Attr s P.Text
@@ -900,7 +1027,8 @@ attachedDiskSetting
     -> AttachedDiskSetting s
 attachedDiskSetting _source =
     AttachedDiskSetting'
-        { _diskEncryptionKeyRaw = TF.Nil
+        { _deviceName = TF.Nil
+        , _diskEncryptionKeyRaw = TF.Nil
         , _mode = TF.value "READ_WRITE"
         , _source = _source
         }
@@ -908,13 +1036,19 @@ attachedDiskSetting _source =
 instance TF.IsValue  (AttachedDiskSetting s)
 instance TF.IsObject (AttachedDiskSetting s) where
     toObject AttachedDiskSetting'{..} = P.catMaybes
-        [ TF.assign "disk_encryption_key_raw" <$> TF.attribute _diskEncryptionKeyRaw
+        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "disk_encryption_key_raw" <$> TF.attribute _diskEncryptionKeyRaw
         , TF.assign "mode" <$> TF.attribute _mode
         , TF.assign "source" <$> TF.attribute _source
         ]
 
 instance TF.IsValid (AttachedDiskSetting s) where
     validator = P.mempty
+
+instance P.HasDeviceName (AttachedDiskSetting s) (TF.Attr s P.Text) where
+    deviceName =
+        P.lens (_deviceName :: AttachedDiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceName = a } :: AttachedDiskSetting s)
 
 instance P.HasDiskEncryptionKeyRaw (AttachedDiskSetting s) (TF.Attr s P.Text) where
     diskEncryptionKeyRaw =
@@ -1085,6 +1219,9 @@ data AutoscalingPolicySetting s = AutoscalingPolicySetting'
     { _cooldownPeriod           :: TF.Attr s P.Int
     -- ^ @cooldown_period@ - (Optional)
     --
+    , _cpuUtilization           :: TF.Attr s (CpuUtilizationSetting s)
+    -- ^ @cpu_utilization@ - (Optional)
+    --
     , _loadBalancingUtilization :: TF.Attr s (LoadBalancingUtilizationSetting s)
     -- ^ @load_balancing_utilization@ - (Optional)
     --
@@ -1107,6 +1244,7 @@ autoscalingPolicySetting
 autoscalingPolicySetting _maxReplicas _minReplicas =
     AutoscalingPolicySetting'
         { _cooldownPeriod = TF.value 60
+        , _cpuUtilization = TF.Nil
         , _loadBalancingUtilization = TF.Nil
         , _maxReplicas = _maxReplicas
         , _metric = TF.Nil
@@ -1117,6 +1255,7 @@ instance TF.IsValue  (AutoscalingPolicySetting s)
 instance TF.IsObject (AutoscalingPolicySetting s) where
     toObject AutoscalingPolicySetting'{..} = P.catMaybes
         [ TF.assign "cooldown_period" <$> TF.attribute _cooldownPeriod
+        , TF.assign "cpu_utilization" <$> TF.attribute _cpuUtilization
         , TF.assign "load_balancing_utilization" <$> TF.attribute _loadBalancingUtilization
         , TF.assign "max_replicas" <$> TF.attribute _maxReplicas
         , TF.assign "metric" <$> TF.attribute _metric
@@ -1125,6 +1264,10 @@ instance TF.IsObject (AutoscalingPolicySetting s) where
 
 instance TF.IsValid (AutoscalingPolicySetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_cpuUtilization"
+                  (_cpuUtilization
+                      :: AutoscalingPolicySetting s -> TF.Attr s (CpuUtilizationSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_loadBalancingUtilization"
                   (_loadBalancingUtilization
                       :: AutoscalingPolicySetting s -> TF.Attr s (LoadBalancingUtilizationSetting s))
@@ -1134,6 +1277,11 @@ instance P.HasCooldownPeriod (AutoscalingPolicySetting s) (TF.Attr s P.Int) wher
     cooldownPeriod =
         P.lens (_cooldownPeriod :: AutoscalingPolicySetting s -> TF.Attr s P.Int)
                (\s a -> s { _cooldownPeriod = a } :: AutoscalingPolicySetting s)
+
+instance P.HasCpuUtilization (AutoscalingPolicySetting s) (TF.Attr s (CpuUtilizationSetting s)) where
+    cpuUtilization =
+        P.lens (_cpuUtilization :: AutoscalingPolicySetting s -> TF.Attr s (CpuUtilizationSetting s))
+               (\s a -> s { _cpuUtilization = a } :: AutoscalingPolicySetting s)
 
 instance P.HasLoadBalancingUtilization (AutoscalingPolicySetting s) (TF.Attr s (LoadBalancingUtilizationSetting s)) where
     loadBalancingUtilization =
@@ -1302,6 +1450,9 @@ data BackupConfigurationSetting s = BackupConfigurationSetting'
     , _enabled          :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
+    , _startTime        :: TF.Attr s P.Text
+    -- ^ @start_time@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @backup_configuration@ settings value.
@@ -1311,6 +1462,7 @@ backupConfigurationSetting =
     BackupConfigurationSetting'
         { _binaryLogEnabled = TF.Nil
         , _enabled = TF.Nil
+        , _startTime = TF.Nil
         }
 
 instance TF.IsValue  (BackupConfigurationSetting s)
@@ -1318,6 +1470,7 @@ instance TF.IsObject (BackupConfigurationSetting s) where
     toObject BackupConfigurationSetting'{..} = P.catMaybes
         [ TF.assign "binary_log_enabled" <$> TF.attribute _binaryLogEnabled
         , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "start_time" <$> TF.attribute _startTime
         ]
 
 instance TF.IsValid (BackupConfigurationSetting s) where
@@ -1332,6 +1485,11 @@ instance P.HasEnabled (BackupConfigurationSetting s) (TF.Attr s P.Bool) where
     enabled =
         P.lens (_enabled :: BackupConfigurationSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: BackupConfigurationSetting s)
+
+instance P.HasStartTime (BackupConfigurationSetting s) (TF.Attr s P.Text) where
+    startTime =
+        P.lens (_startTime :: BackupConfigurationSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _startTime = a } :: BackupConfigurationSetting s)
 
 instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (BackupConfigurationSetting s)) (TF.Attr s P.Text) where
     computedStartTime x = TF.compute (TF.refKey x) "start_time"
@@ -1472,9 +1630,24 @@ data BootDiskSetting s = BootDiskSetting'
     { _autoDelete           :: TF.Attr s P.Bool
     -- ^ @auto_delete@ - (Optional, Forces New)
     --
+    , _deviceName           :: TF.Attr s P.Text
+    -- ^ @device_name@ - (Optional, Forces New)
+    --
     , _diskEncryptionKeyRaw :: TF.Attr s P.Text
     -- ^ @disk_encryption_key_raw@ - (Optional, Forces New)
     --
+    , _initializeParams     :: TF.Attr s (InitializeParamsSetting s)
+    -- ^ @initialize_params@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'source'
+    , _source               :: TF.Attr s P.Text
+    -- ^ @source@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'initializeParams'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @boot_disk@ settings value.
@@ -1483,28 +1656,64 @@ bootDiskSetting
 bootDiskSetting =
     BootDiskSetting'
         { _autoDelete = TF.value P.True
+        , _deviceName = TF.Nil
         , _diskEncryptionKeyRaw = TF.Nil
+        , _initializeParams = TF.Nil
+        , _source = TF.Nil
         }
 
 instance TF.IsValue  (BootDiskSetting s)
 instance TF.IsObject (BootDiskSetting s) where
     toObject BootDiskSetting'{..} = P.catMaybes
         [ TF.assign "auto_delete" <$> TF.attribute _autoDelete
+        , TF.assign "device_name" <$> TF.attribute _deviceName
         , TF.assign "disk_encryption_key_raw" <$> TF.attribute _diskEncryptionKeyRaw
+        , TF.assign "initialize_params" <$> TF.attribute _initializeParams
+        , TF.assign "source" <$> TF.attribute _source
         ]
 
 instance TF.IsValid (BootDiskSetting s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\BootDiskSetting'{..} -> Map.fromList $ P.catMaybes
+        [ if (_initializeParams P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_initializeParams",
+                            [ "_source"
+                            ])
+        , if (_source P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_source",
+                            [ "_initializeParams"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_initializeParams"
+                  (_initializeParams
+                      :: BootDiskSetting s -> TF.Attr s (InitializeParamsSetting s))
+                  TF.validator
 
 instance P.HasAutoDelete (BootDiskSetting s) (TF.Attr s P.Bool) where
     autoDelete =
         P.lens (_autoDelete :: BootDiskSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _autoDelete = a } :: BootDiskSetting s)
 
+instance P.HasDeviceName (BootDiskSetting s) (TF.Attr s P.Text) where
+    deviceName =
+        P.lens (_deviceName :: BootDiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceName = a } :: BootDiskSetting s)
+
 instance P.HasDiskEncryptionKeyRaw (BootDiskSetting s) (TF.Attr s P.Text) where
     diskEncryptionKeyRaw =
         P.lens (_diskEncryptionKeyRaw :: BootDiskSetting s -> TF.Attr s P.Text)
                (\s a -> s { _diskEncryptionKeyRaw = a } :: BootDiskSetting s)
+
+instance P.HasInitializeParams (BootDiskSetting s) (TF.Attr s (InitializeParamsSetting s)) where
+    initializeParams =
+        P.lens (_initializeParams :: BootDiskSetting s -> TF.Attr s (InitializeParamsSetting s))
+               (\s a -> s { _initializeParams = a } :: BootDiskSetting s)
+
+instance P.HasSource (BootDiskSetting s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: BootDiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: BootDiskSetting s)
 
 instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (BootDiskSetting s)) (TF.Attr s P.Text) where
     computedDeviceName x = TF.compute (TF.refKey x) "device_name"
@@ -1791,11 +2000,26 @@ instance s ~ s' => P.HasComputedIssueClientCertificate (TF.Ref s' (ClientCertifi
 
 -- | @cluster_config@ nested settings.
 data ClusterConfigSetting s = ClusterConfigSetting'
-    { _initializationAction :: TF.Attr s [TF.Attr s (InitializationActionSetting s)]
+    { _gceClusterConfig :: TF.Attr s (GceClusterConfigSetting s)
+    -- ^ @gce_cluster_config@ - (Optional)
+    --
+    , _initializationAction :: TF.Attr s [TF.Attr s (InitializationActionSetting s)]
     -- ^ @initialization_action@ - (Optional, Forces New)
+    --
+    , _masterConfig :: TF.Attr s (MasterConfigSetting s)
+    -- ^ @master_config@ - (Optional)
+    --
+    , _preemptibleWorkerConfig :: TF.Attr s (PreemptibleWorkerConfigSetting s)
+    -- ^ @preemptible_worker_config@ - (Optional)
+    --
+    , _softwareConfig :: TF.Attr s (SoftwareConfigSetting s)
+    -- ^ @software_config@ - (Optional)
     --
     , _stagingBucket :: TF.Attr s P.Text
     -- ^ @staging_bucket@ - (Optional, Forces New)
+    --
+    , _workerConfig :: TF.Attr s (WorkerConfigSetting s)
+    -- ^ @worker_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1804,29 +2028,84 @@ clusterConfigSetting
     :: ClusterConfigSetting s
 clusterConfigSetting =
     ClusterConfigSetting'
-        { _initializationAction = TF.Nil
+        { _gceClusterConfig = TF.Nil
+        , _initializationAction = TF.Nil
+        , _masterConfig = TF.Nil
+        , _preemptibleWorkerConfig = TF.Nil
+        , _softwareConfig = TF.Nil
         , _stagingBucket = TF.Nil
+        , _workerConfig = TF.Nil
         }
 
 instance TF.IsValue  (ClusterConfigSetting s)
 instance TF.IsObject (ClusterConfigSetting s) where
     toObject ClusterConfigSetting'{..} = P.catMaybes
-        [ TF.assign "initialization_action" <$> TF.attribute _initializationAction
+        [ TF.assign "gce_cluster_config" <$> TF.attribute _gceClusterConfig
+        , TF.assign "initialization_action" <$> TF.attribute _initializationAction
+        , TF.assign "master_config" <$> TF.attribute _masterConfig
+        , TF.assign "preemptible_worker_config" <$> TF.attribute _preemptibleWorkerConfig
+        , TF.assign "software_config" <$> TF.attribute _softwareConfig
         , TF.assign "staging_bucket" <$> TF.attribute _stagingBucket
+        , TF.assign "worker_config" <$> TF.attribute _workerConfig
         ]
 
 instance TF.IsValid (ClusterConfigSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_gceClusterConfig"
+                  (_gceClusterConfig
+                      :: ClusterConfigSetting s -> TF.Attr s (GceClusterConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_masterConfig"
+                  (_masterConfig
+                      :: ClusterConfigSetting s -> TF.Attr s (MasterConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_preemptibleWorkerConfig"
+                  (_preemptibleWorkerConfig
+                      :: ClusterConfigSetting s -> TF.Attr s (PreemptibleWorkerConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_softwareConfig"
+                  (_softwareConfig
+                      :: ClusterConfigSetting s -> TF.Attr s (SoftwareConfigSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_workerConfig"
+                  (_workerConfig
+                      :: ClusterConfigSetting s -> TF.Attr s (WorkerConfigSetting s))
+                  TF.validator
+
+instance P.HasGceClusterConfig (ClusterConfigSetting s) (TF.Attr s (GceClusterConfigSetting s)) where
+    gceClusterConfig =
+        P.lens (_gceClusterConfig :: ClusterConfigSetting s -> TF.Attr s (GceClusterConfigSetting s))
+               (\s a -> s { _gceClusterConfig = a } :: ClusterConfigSetting s)
 
 instance P.HasInitializationAction (ClusterConfigSetting s) (TF.Attr s [TF.Attr s (InitializationActionSetting s)]) where
     initializationAction =
         P.lens (_initializationAction :: ClusterConfigSetting s -> TF.Attr s [TF.Attr s (InitializationActionSetting s)])
                (\s a -> s { _initializationAction = a } :: ClusterConfigSetting s)
 
+instance P.HasMasterConfig (ClusterConfigSetting s) (TF.Attr s (MasterConfigSetting s)) where
+    masterConfig =
+        P.lens (_masterConfig :: ClusterConfigSetting s -> TF.Attr s (MasterConfigSetting s))
+               (\s a -> s { _masterConfig = a } :: ClusterConfigSetting s)
+
+instance P.HasPreemptibleWorkerConfig (ClusterConfigSetting s) (TF.Attr s (PreemptibleWorkerConfigSetting s)) where
+    preemptibleWorkerConfig =
+        P.lens (_preemptibleWorkerConfig :: ClusterConfigSetting s -> TF.Attr s (PreemptibleWorkerConfigSetting s))
+               (\s a -> s { _preemptibleWorkerConfig = a } :: ClusterConfigSetting s)
+
+instance P.HasSoftwareConfig (ClusterConfigSetting s) (TF.Attr s (SoftwareConfigSetting s)) where
+    softwareConfig =
+        P.lens (_softwareConfig :: ClusterConfigSetting s -> TF.Attr s (SoftwareConfigSetting s))
+               (\s a -> s { _softwareConfig = a } :: ClusterConfigSetting s)
+
 instance P.HasStagingBucket (ClusterConfigSetting s) (TF.Attr s P.Text) where
     stagingBucket =
         P.lens (_stagingBucket :: ClusterConfigSetting s -> TF.Attr s P.Text)
                (\s a -> s { _stagingBucket = a } :: ClusterConfigSetting s)
+
+instance P.HasWorkerConfig (ClusterConfigSetting s) (TF.Attr s (WorkerConfigSetting s)) where
+    workerConfig =
+        P.lens (_workerConfig :: ClusterConfigSetting s -> TF.Attr s (WorkerConfigSetting s))
+               (\s a -> s { _workerConfig = a } :: ClusterConfigSetting s)
 
 instance s ~ s' => P.HasComputedBucket (TF.Ref s' (ClusterConfigSetting s)) (TF.Attr s P.Text) where
     computedBucket x = TF.compute (TF.refKey x) "bucket"
@@ -2241,11 +2520,23 @@ data DiskSetting s = DiskSetting'
     , _type'                :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
     --
+    , _boot                 :: TF.Attr s P.Bool
+    -- ^ @boot@ - (Optional, Forces New)
+    --
     , _diskName             :: TF.Attr s P.Text
     -- ^ @disk_name@ - (Optional, Forces New)
     --
     , _diskSizeGb           :: TF.Attr s P.Int
     -- ^ @disk_size_gb@ - (Optional, Forces New)
+    --
+    , _diskType             :: TF.Attr s P.Text
+    -- ^ @disk_type@ - (Optional, Forces New)
+    --
+    , _interface            :: TF.Attr s P.Text
+    -- ^ @interface@ - (Optional, Forces New)
+    --
+    , _mode                 :: TF.Attr s P.Text
+    -- ^ @mode@ - (Optional, Forces New)
     --
     , _source               :: TF.Attr s P.Text
     -- ^ @source@ - (Optional, Forces New)
@@ -2268,8 +2559,12 @@ diskSetting =
         , _scratch = TF.Nil
         , _size = TF.Nil
         , _type' = TF.Nil
+        , _boot = TF.Nil
         , _diskName = TF.Nil
         , _diskSizeGb = TF.Nil
+        , _diskType = TF.Nil
+        , _interface = TF.Nil
+        , _mode = TF.Nil
         , _source = TF.Nil
         , _sourceImage = TF.Nil
         }
@@ -2285,8 +2580,12 @@ instance TF.IsObject (DiskSetting s) where
         , TF.assign "scratch" <$> TF.attribute _scratch
         , TF.assign "size" <$> TF.attribute _size
         , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "boot" <$> TF.attribute _boot
         , TF.assign "disk_name" <$> TF.attribute _diskName
         , TF.assign "disk_size_gb" <$> TF.attribute _diskSizeGb
+        , TF.assign "disk_type" <$> TF.attribute _diskType
+        , TF.assign "interface" <$> TF.attribute _interface
+        , TF.assign "mode" <$> TF.attribute _mode
         , TF.assign "source" <$> TF.attribute _source
         , TF.assign "source_image" <$> TF.attribute _sourceImage
         ]
@@ -2334,6 +2633,11 @@ instance P.HasType' (DiskSetting s) (TF.Attr s P.Text) where
         P.lens (_type' :: DiskSetting s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: DiskSetting s)
 
+instance P.HasBoot (DiskSetting s) (TF.Attr s P.Bool) where
+    boot =
+        P.lens (_boot :: DiskSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _boot = a } :: DiskSetting s)
+
 instance P.HasDiskName (DiskSetting s) (TF.Attr s P.Text) where
     diskName =
         P.lens (_diskName :: DiskSetting s -> TF.Attr s P.Text)
@@ -2343,6 +2647,21 @@ instance P.HasDiskSizeGb (DiskSetting s) (TF.Attr s P.Int) where
     diskSizeGb =
         P.lens (_diskSizeGb :: DiskSetting s -> TF.Attr s P.Int)
                (\s a -> s { _diskSizeGb = a } :: DiskSetting s)
+
+instance P.HasDiskType (DiskSetting s) (TF.Attr s P.Text) where
+    diskType =
+        P.lens (_diskType :: DiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _diskType = a } :: DiskSetting s)
+
+instance P.HasInterface (DiskSetting s) (TF.Attr s P.Text) where
+    interface =
+        P.lens (_interface :: DiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _interface = a } :: DiskSetting s)
+
+instance P.HasMode (DiskSetting s) (TF.Attr s P.Text) where
+    mode =
+        P.lens (_mode :: DiskSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _mode = a } :: DiskSetting s)
 
 instance P.HasSource (DiskSetting s) (TF.Attr s P.Text) where
     source =
@@ -2377,20 +2696,42 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Te
 
 -- | @disk_config@ nested settings.
 data DiskConfigSetting s = DiskConfigSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _bootDiskSizeGb :: TF.Attr s P.Int
+    -- ^ @boot_disk_size_gb@ - (Optional, Forces New)
+    --
+    , _numLocalSsds   :: TF.Attr s P.Int
+    -- ^ @num_local_ssds@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disk_config@ settings value.
 diskConfigSetting
     :: DiskConfigSetting s
 diskConfigSetting =
     DiskConfigSetting'
+        { _bootDiskSizeGb = TF.Nil
+        , _numLocalSsds = TF.Nil
+        }
 
 instance TF.IsValue  (DiskConfigSetting s)
 instance TF.IsObject (DiskConfigSetting s) where
-    toObject DiskConfigSetting' = []
+    toObject DiskConfigSetting'{..} = P.catMaybes
+        [ TF.assign "boot_disk_size_gb" <$> TF.attribute _bootDiskSizeGb
+        , TF.assign "num_local_ssds" <$> TF.attribute _numLocalSsds
+        ]
 
 instance TF.IsValid (DiskConfigSetting s) where
     validator = P.mempty
+
+instance P.HasBootDiskSizeGb (DiskConfigSetting s) (TF.Attr s P.Int) where
+    bootDiskSizeGb =
+        P.lens (_bootDiskSizeGb :: DiskConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _bootDiskSizeGb = a } :: DiskConfigSetting s)
+
+instance P.HasNumLocalSsds (DiskConfigSetting s) (TF.Attr s P.Int) where
+    numLocalSsds =
+        P.lens (_numLocalSsds :: DiskConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _numLocalSsds = a } :: DiskConfigSetting s)
 
 instance s ~ s' => P.HasComputedBootDiskSizeGb (TF.Ref s' (DiskConfigSetting s)) (TF.Attr s P.Int) where
     computedBootDiskSizeGb x = TF.compute (TF.refKey x) "boot_disk_size_gb"
@@ -2517,20 +2858,35 @@ instance s ~ s' => P.HasComputedSplitHealthChecks (TF.Ref s' (FeatureSettingsSet
 
 -- | @gce_cluster_config@ nested settings.
 data GceClusterConfigSetting s = GceClusterConfigSetting'
-    { _internalIpOnly :: TF.Attr s P.Bool
+    { _internalIpOnly       :: TF.Attr s P.Bool
     -- ^ @internal_ip_only@ - (Optional, Forces New)
     --
-    , _metadata       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _metadata             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional, Forces New)
     --
-    , _serviceAccount :: TF.Attr s P.Text
+    , _network              :: TF.Attr s P.Text
+    -- ^ @network@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'subnetwork'
+    , _serviceAccount       :: TF.Attr s P.Text
     -- ^ @service_account@ - (Optional, Forces New)
     --
-    , _subnetwork     :: TF.Attr s P.Text
+    , _serviceAccountScopes :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @service_account_scopes@ - (Optional, Forces New)
+    --
+    , _subnetwork           :: TF.Attr s P.Text
     -- ^ @subnetwork@ - (Optional, Forces New)
     --
-    , _tags           :: TF.Attr s [TF.Attr s P.Text]
+    -- Conflicts with:
+    --
+    -- * 'network'
+    , _tags                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
+    --
+    , _zone                 :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -2541,9 +2897,12 @@ gceClusterConfigSetting =
     GceClusterConfigSetting'
         { _internalIpOnly = TF.value P.False
         , _metadata = TF.Nil
+        , _network = TF.Nil
         , _serviceAccount = TF.Nil
+        , _serviceAccountScopes = TF.Nil
         , _subnetwork = TF.Nil
         , _tags = TF.Nil
+        , _zone = TF.Nil
         }
 
 instance TF.IsValue  (GceClusterConfigSetting s)
@@ -2551,13 +2910,27 @@ instance TF.IsObject (GceClusterConfigSetting s) where
     toObject GceClusterConfigSetting'{..} = P.catMaybes
         [ TF.assign "internal_ip_only" <$> TF.attribute _internalIpOnly
         , TF.assign "metadata" <$> TF.attribute _metadata
+        , TF.assign "network" <$> TF.attribute _network
         , TF.assign "service_account" <$> TF.attribute _serviceAccount
+        , TF.assign "service_account_scopes" <$> TF.attribute _serviceAccountScopes
         , TF.assign "subnetwork" <$> TF.attribute _subnetwork
         , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (GceClusterConfigSetting s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\GceClusterConfigSetting'{..} -> Map.fromList $ P.catMaybes
+        [ if (_network P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_network",
+                            [ "_subnetwork"
+                            ])
+        , if (_subnetwork P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_subnetwork",
+                            [ "_network"
+                            ])
+        ])
 
 instance P.HasInternalIpOnly (GceClusterConfigSetting s) (TF.Attr s P.Bool) where
     internalIpOnly =
@@ -2569,10 +2942,20 @@ instance P.HasMetadata (GceClusterConfigSetting s) (TF.Attr s (P.Map P.Text (TF.
         P.lens (_metadata :: GceClusterConfigSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _metadata = a } :: GceClusterConfigSetting s)
 
+instance P.HasNetwork (GceClusterConfigSetting s) (TF.Attr s P.Text) where
+    network =
+        P.lens (_network :: GceClusterConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: GceClusterConfigSetting s)
+
 instance P.HasServiceAccount (GceClusterConfigSetting s) (TF.Attr s P.Text) where
     serviceAccount =
         P.lens (_serviceAccount :: GceClusterConfigSetting s -> TF.Attr s P.Text)
                (\s a -> s { _serviceAccount = a } :: GceClusterConfigSetting s)
+
+instance P.HasServiceAccountScopes (GceClusterConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    serviceAccountScopes =
+        P.lens (_serviceAccountScopes :: GceClusterConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _serviceAccountScopes = a } :: GceClusterConfigSetting s)
 
 instance P.HasSubnetwork (GceClusterConfigSetting s) (TF.Attr s P.Text) where
     subnetwork =
@@ -2583,6 +2966,11 @@ instance P.HasTags (GceClusterConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) wh
     tags =
         P.lens (_tags :: GceClusterConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: GceClusterConfigSetting s)
+
+instance P.HasZone (GceClusterConfigSetting s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: GceClusterConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: GceClusterConfigSetting s)
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (GceClusterConfigSetting s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
@@ -2654,6 +3042,10 @@ data HadoopConfigSetting s = HadoopConfigSetting'
     , _jarFileUris    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
+    , _loggingConfig  :: TF.Attr s (LoggingConfigSetting s)
+    -- ^ @logging_config@ - (Optional)
+    -- The runtime logging config of the job
+    --
     , _mainClass      :: TF.Attr s P.Text
     -- ^ @main_class@ - (Optional, Forces New)
     --
@@ -2680,6 +3072,7 @@ hadoopConfigSetting =
         , _args = TF.Nil
         , _fileUris = TF.Nil
         , _jarFileUris = TF.Nil
+        , _loggingConfig = TF.Nil
         , _mainClass = TF.Nil
         , _mainJarFileUri = TF.Nil
         , _properties = TF.Nil
@@ -2692,6 +3085,7 @@ instance TF.IsObject (HadoopConfigSetting s) where
         , TF.assign "args" <$> TF.attribute _args
         , TF.assign "file_uris" <$> TF.attribute _fileUris
         , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
+        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
         , TF.assign "main_class" <$> TF.attribute _mainClass
         , TF.assign "main_jar_file_uri" <$> TF.attribute _mainJarFileUri
         , TF.assign "properties" <$> TF.attribute _properties
@@ -2710,6 +3104,10 @@ instance TF.IsValid (HadoopConfigSetting s) where
                             [ "_mainClass"
                             ])
         ])
+           P.<> TF.settingsValidator "_loggingConfig"
+                  (_loggingConfig
+                      :: HadoopConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+                  TF.validator
 
 instance P.HasArchiveUris (HadoopConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     archiveUris =
@@ -2730,6 +3128,11 @@ instance P.HasJarFileUris (HadoopConfigSetting s) (TF.Attr s [TF.Attr s P.Text])
     jarFileUris =
         P.lens (_jarFileUris :: HadoopConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _jarFileUris = a } :: HadoopConfigSetting s)
+
+instance P.HasLoggingConfig (HadoopConfigSetting s) (TF.Attr s (LoggingConfigSetting s)) where
+    loggingConfig =
+        P.lens (_loggingConfig :: HadoopConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+               (\s a -> s { _loggingConfig = a } :: HadoopConfigSetting s)
 
 instance P.HasMainClass (HadoopConfigSetting s) (TF.Attr s P.Text) where
     mainClass =
@@ -3197,20 +3600,52 @@ instance P.HasTimeoutSec (InitializationActionSetting s) (TF.Attr s P.Int) where
 
 -- | @initialize_params@ nested settings.
 data InitializeParamsSetting s = InitializeParamsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _image :: TF.Attr s P.Text
+    -- ^ @image@ - (Optional, Forces New)
+    --
+    , _size  :: TF.Attr s P.Int
+    -- ^ @size@ - (Optional, Forces New)
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @initialize_params@ settings value.
 initializeParamsSetting
     :: InitializeParamsSetting s
 initializeParamsSetting =
     InitializeParamsSetting'
+        { _image = TF.Nil
+        , _size = TF.Nil
+        , _type' = TF.Nil
+        }
 
 instance TF.IsValue  (InitializeParamsSetting s)
 instance TF.IsObject (InitializeParamsSetting s) where
-    toObject InitializeParamsSetting' = []
+    toObject InitializeParamsSetting'{..} = P.catMaybes
+        [ TF.assign "image" <$> TF.attribute _image
+        , TF.assign "size" <$> TF.attribute _size
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
 
 instance TF.IsValid (InitializeParamsSetting s) where
     validator = P.mempty
+
+instance P.HasImage (InitializeParamsSetting s) (TF.Attr s P.Text) where
+    image =
+        P.lens (_image :: InitializeParamsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _image = a } :: InitializeParamsSetting s)
+
+instance P.HasSize (InitializeParamsSetting s) (TF.Attr s P.Int) where
+    size =
+        P.lens (_size :: InitializeParamsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _size = a } :: InitializeParamsSetting s)
+
+instance P.HasType' (InitializeParamsSetting s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: InitializeParamsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: InitializeParamsSetting s)
 
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (InitializeParamsSetting s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
@@ -3267,20 +3702,32 @@ instance s ~ s' => P.HasComputedNamedPorts (TF.Ref s' (InstancesSetting s)) (TF.
 
 -- | @ip_address@ nested settings.
 data IpAddressSetting s = IpAddressSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _timeToRetire :: TF.Attr s P.Text
+    -- ^ @time_to_retire@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ip_address@ settings value.
 ipAddressSetting
     :: IpAddressSetting s
 ipAddressSetting =
     IpAddressSetting'
+        { _timeToRetire = TF.Nil
+        }
 
 instance TF.IsValue  (IpAddressSetting s)
 instance TF.IsObject (IpAddressSetting s) where
-    toObject IpAddressSetting' = []
+    toObject IpAddressSetting'{..} = P.catMaybes
+        [ TF.assign "time_to_retire" <$> TF.attribute _timeToRetire
+        ]
 
 instance TF.IsValid (IpAddressSetting s) where
     validator = P.mempty
+
+instance P.HasTimeToRetire (IpAddressSetting s) (TF.Attr s P.Text) where
+    timeToRetire =
+        P.lens (_timeToRetire :: IpAddressSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _timeToRetire = a } :: IpAddressSetting s)
 
 instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (IpAddressSetting s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
@@ -3338,6 +3785,9 @@ data IpConfigurationSetting s = IpConfigurationSetting'
     { _authorizedNetworks :: TF.Attr s [TF.Attr s (AuthorizedNetworksSetting s)]
     -- ^ @authorized_networks@ - (Optional)
     --
+    , _ipv4Enabled        :: TF.Attr s P.Bool
+    -- ^ @ipv4_enabled@ - (Optional)
+    --
     , _requireSsl         :: TF.Attr s P.Bool
     -- ^ @require_ssl@ - (Optional)
     --
@@ -3349,6 +3799,7 @@ ipConfigurationSetting
 ipConfigurationSetting =
     IpConfigurationSetting'
         { _authorizedNetworks = TF.Nil
+        , _ipv4Enabled = TF.Nil
         , _requireSsl = TF.Nil
         }
 
@@ -3356,6 +3807,7 @@ instance TF.IsValue  (IpConfigurationSetting s)
 instance TF.IsObject (IpConfigurationSetting s) where
     toObject IpConfigurationSetting'{..} = P.catMaybes
         [ TF.assign "authorized_networks" <$> TF.attribute _authorizedNetworks
+        , TF.assign "ipv4_enabled" <$> TF.attribute _ipv4Enabled
         , TF.assign "require_ssl" <$> TF.attribute _requireSsl
         ]
 
@@ -3366,6 +3818,11 @@ instance P.HasAuthorizedNetworks (IpConfigurationSetting s) (TF.Attr s [TF.Attr 
     authorizedNetworks =
         P.lens (_authorizedNetworks :: IpConfigurationSetting s -> TF.Attr s [TF.Attr s (AuthorizedNetworksSetting s)])
                (\s a -> s { _authorizedNetworks = a } :: IpConfigurationSetting s)
+
+instance P.HasIpv4Enabled (IpConfigurationSetting s) (TF.Attr s P.Bool) where
+    ipv4Enabled =
+        P.lens (_ipv4Enabled :: IpConfigurationSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _ipv4Enabled = a } :: IpConfigurationSetting s)
 
 instance P.HasRequireSsl (IpConfigurationSetting s) (TF.Attr s P.Bool) where
     requireSsl =
@@ -3458,18 +3915,21 @@ instance P.HasCondition (LifecycleRuleSetting s) (TF.Attr s (ConditionSetting s)
 
 -- | @list_policy@ nested settings.
 data ListPolicySetting s = ListPolicySetting'
-    { _allow :: TF.Attr s (AllowSetting s)
+    { _allow          :: TF.Attr s (AllowSetting s)
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny  :: TF.Attr s (DenySetting s)
+    , _deny           :: TF.Attr s (DenySetting s)
     -- ^ @deny@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'allow'
+    , _suggestedValue :: TF.Attr s P.Text
+    -- ^ @suggested_value@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @list_policy@ settings value.
@@ -3479,6 +3939,7 @@ listPolicySetting =
     ListPolicySetting'
         { _allow = TF.Nil
         , _deny = TF.Nil
+        , _suggestedValue = TF.Nil
         }
 
 instance TF.IsValue  (ListPolicySetting s)
@@ -3486,6 +3947,7 @@ instance TF.IsObject (ListPolicySetting s) where
     toObject ListPolicySetting'{..} = P.catMaybes
         [ TF.assign "allow" <$> TF.attribute _allow
         , TF.assign "deny" <$> TF.attribute _deny
+        , TF.assign "suggested_value" <$> TF.attribute _suggestedValue
         ]
 
 instance TF.IsValid (ListPolicySetting s) where
@@ -3519,6 +3981,11 @@ instance P.HasDeny (ListPolicySetting s) (TF.Attr s (DenySetting s)) where
     deny =
         P.lens (_deny :: ListPolicySetting s -> TF.Attr s (DenySetting s))
                (\s a -> s { _deny = a } :: ListPolicySetting s)
+
+instance P.HasSuggestedValue (ListPolicySetting s) (TF.Attr s P.Text) where
+    suggestedValue =
+        P.lens (_suggestedValue :: ListPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _suggestedValue = a } :: ListPolicySetting s)
 
 instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (ListPolicySetting s)) (TF.Attr s P.Text) where
     computedSuggestedValue x = TF.compute (TF.refKey x) "suggested_value"
@@ -3594,8 +4061,11 @@ instance P.HasZone (LocationPreferenceSetting s) (TF.Attr s P.Text) where
 
 -- | @logging@ nested settings.
 data LoggingSetting s = LoggingSetting'
-    { _logBucket :: TF.Attr s P.Text
+    { _logBucket       :: TF.Attr s P.Text
     -- ^ @log_bucket@ - (Required)
+    --
+    , _logObjectPrefix :: TF.Attr s P.Text
+    -- ^ @log_object_prefix@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -3606,12 +4076,14 @@ loggingSetting
 loggingSetting _logBucket =
     LoggingSetting'
         { _logBucket = _logBucket
+        , _logObjectPrefix = TF.Nil
         }
 
 instance TF.IsValue  (LoggingSetting s)
 instance TF.IsObject (LoggingSetting s) where
     toObject LoggingSetting'{..} = P.catMaybes
         [ TF.assign "log_bucket" <$> TF.attribute _logBucket
+        , TF.assign "log_object_prefix" <$> TF.attribute _logObjectPrefix
         ]
 
 instance TF.IsValid (LoggingSetting s) where
@@ -3621,6 +4093,11 @@ instance P.HasLogBucket (LoggingSetting s) (TF.Attr s P.Text) where
     logBucket =
         P.lens (_logBucket :: LoggingSetting s -> TF.Attr s P.Text)
                (\s a -> s { _logBucket = a } :: LoggingSetting s)
+
+instance P.HasLogObjectPrefix (LoggingSetting s) (TF.Attr s P.Text) where
+    logObjectPrefix =
+        P.lens (_logObjectPrefix :: LoggingSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _logObjectPrefix = a } :: LoggingSetting s)
 
 instance s ~ s' => P.HasComputedLogObjectPrefix (TF.Ref s' (LoggingSetting s)) (TF.Attr s P.Text) where
     computedLogObjectPrefix x = TF.compute (TF.refKey x) "log_object_prefix"
@@ -3863,40 +4340,88 @@ instance s ~ s' => P.HasComputedUsername (TF.Ref s' (MasterAuthSetting s)) (TF.A
 
 -- | @master_authorized_networks_config@ nested settings.
 data MasterAuthorizedNetworksConfigSetting s = MasterAuthorizedNetworksConfigSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _cidrBlocks :: TF.Attr s [TF.Attr s (CidrBlocksSetting s)]
+    -- ^ @cidr_blocks@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @master_authorized_networks_config@ settings value.
 masterAuthorizedNetworksConfigSetting
     :: MasterAuthorizedNetworksConfigSetting s
 masterAuthorizedNetworksConfigSetting =
     MasterAuthorizedNetworksConfigSetting'
+        { _cidrBlocks = TF.Nil
+        }
 
 instance TF.IsValue  (MasterAuthorizedNetworksConfigSetting s)
 instance TF.IsObject (MasterAuthorizedNetworksConfigSetting s) where
-    toObject MasterAuthorizedNetworksConfigSetting' = []
+    toObject MasterAuthorizedNetworksConfigSetting'{..} = P.catMaybes
+        [ TF.assign "cidr_blocks" <$> TF.attribute _cidrBlocks
+        ]
 
 instance TF.IsValid (MasterAuthorizedNetworksConfigSetting s) where
     validator = P.mempty
+
+instance P.HasCidrBlocks (MasterAuthorizedNetworksConfigSetting s) (TF.Attr s [TF.Attr s (CidrBlocksSetting s)]) where
+    cidrBlocks =
+        P.lens (_cidrBlocks :: MasterAuthorizedNetworksConfigSetting s -> TF.Attr s [TF.Attr s (CidrBlocksSetting s)])
+               (\s a -> s { _cidrBlocks = a } :: MasterAuthorizedNetworksConfigSetting s)
 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (MasterAuthorizedNetworksConfigSetting s)) (TF.Attr s [TF.Attr s (CidrBlocksSetting s)]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
 -- | @master_config@ nested settings.
 data MasterConfigSetting s = MasterConfigSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _diskConfig   :: TF.Attr s (DiskConfigSetting s)
+    -- ^ @disk_config@ - (Optional)
+    --
+    , _machineType  :: TF.Attr s P.Text
+    -- ^ @machine_type@ - (Optional, Forces New)
+    --
+    , _numInstances :: TF.Attr s P.Int
+    -- ^ @num_instances@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @master_config@ settings value.
 masterConfigSetting
     :: MasterConfigSetting s
 masterConfigSetting =
     MasterConfigSetting'
+        { _diskConfig = TF.Nil
+        , _machineType = TF.Nil
+        , _numInstances = TF.Nil
+        }
 
 instance TF.IsValue  (MasterConfigSetting s)
 instance TF.IsObject (MasterConfigSetting s) where
-    toObject MasterConfigSetting' = []
+    toObject MasterConfigSetting'{..} = P.catMaybes
+        [ TF.assign "disk_config" <$> TF.attribute _diskConfig
+        , TF.assign "machine_type" <$> TF.attribute _machineType
+        , TF.assign "num_instances" <$> TF.attribute _numInstances
+        ]
 
 instance TF.IsValid (MasterConfigSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_diskConfig"
+                  (_diskConfig
+                      :: MasterConfigSetting s -> TF.Attr s (DiskConfigSetting s))
+                  TF.validator
+
+instance P.HasDiskConfig (MasterConfigSetting s) (TF.Attr s (DiskConfigSetting s)) where
+    diskConfig =
+        P.lens (_diskConfig :: MasterConfigSetting s -> TF.Attr s (DiskConfigSetting s))
+               (\s a -> s { _diskConfig = a } :: MasterConfigSetting s)
+
+instance P.HasMachineType (MasterConfigSetting s) (TF.Attr s P.Text) where
+    machineType =
+        P.lens (_machineType :: MasterConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _machineType = a } :: MasterConfigSetting s)
+
+instance P.HasNumInstances (MasterConfigSetting s) (TF.Attr s P.Int) where
+    numInstances =
+        P.lens (_numInstances :: MasterConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _numInstances = a } :: MasterConfigSetting s)
 
 instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (MasterConfigSetting s)) (TF.Attr s (DiskConfigSetting s)) where
     computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
@@ -4205,11 +4730,23 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkSetting s)) (TF.Attr s P
 
 -- | @network_interface@ nested settings.
 data NetworkInterfaceSetting s = NetworkInterfaceSetting'
-    { _accessConfig :: TF.Attr s [TF.Attr s (AccessConfigSetting s)]
+    { _accessConfig      :: TF.Attr s [TF.Attr s (AccessConfigSetting s)]
     -- ^ @access_config@ - (Optional)
     --
-    , _aliasIpRange :: TF.Attr s (AliasIpRangeSetting s)
+    , _address           :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional, Forces New)
+    --
+    , _aliasIpRange      :: TF.Attr s (AliasIpRangeSetting s)
     -- ^ @alias_ip_range@ - (Optional)
+    --
+    , _network           :: TF.Attr s P.Text
+    -- ^ @network@ - (Optional, Forces New)
+    --
+    , _subnetwork        :: TF.Attr s P.Text
+    -- ^ @subnetwork@ - (Optional, Forces New)
+    --
+    , _subnetworkProject :: TF.Attr s P.Text
+    -- ^ @subnetwork_project@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -4219,14 +4756,22 @@ networkInterfaceSetting
 networkInterfaceSetting =
     NetworkInterfaceSetting'
         { _accessConfig = TF.Nil
+        , _address = TF.Nil
         , _aliasIpRange = TF.Nil
+        , _network = TF.Nil
+        , _subnetwork = TF.Nil
+        , _subnetworkProject = TF.Nil
         }
 
 instance TF.IsValue  (NetworkInterfaceSetting s)
 instance TF.IsObject (NetworkInterfaceSetting s) where
     toObject NetworkInterfaceSetting'{..} = P.catMaybes
         [ TF.assign "access_config" <$> TF.attribute _accessConfig
+        , TF.assign "address" <$> TF.attribute _address
         , TF.assign "alias_ip_range" <$> TF.attribute _aliasIpRange
+        , TF.assign "network" <$> TF.attribute _network
+        , TF.assign "subnetwork" <$> TF.attribute _subnetwork
+        , TF.assign "subnetwork_project" <$> TF.attribute _subnetworkProject
         ]
 
 instance TF.IsValid (NetworkInterfaceSetting s) where
@@ -4241,10 +4786,30 @@ instance P.HasAccessConfig (NetworkInterfaceSetting s) (TF.Attr s [TF.Attr s (Ac
         P.lens (_accessConfig :: NetworkInterfaceSetting s -> TF.Attr s [TF.Attr s (AccessConfigSetting s)])
                (\s a -> s { _accessConfig = a } :: NetworkInterfaceSetting s)
 
+instance P.HasAddress (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: NetworkInterfaceSetting s)
+
 instance P.HasAliasIpRange (NetworkInterfaceSetting s) (TF.Attr s (AliasIpRangeSetting s)) where
     aliasIpRange =
         P.lens (_aliasIpRange :: NetworkInterfaceSetting s -> TF.Attr s (AliasIpRangeSetting s))
                (\s a -> s { _aliasIpRange = a } :: NetworkInterfaceSetting s)
+
+instance P.HasNetwork (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    network =
+        P.lens (_network :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _network = a } :: NetworkInterfaceSetting s)
+
+instance P.HasSubnetwork (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    subnetwork =
+        P.lens (_subnetwork :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetwork = a } :: NetworkInterfaceSetting s)
+
+instance P.HasSubnetworkProject (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+    subnetworkProject =
+        P.lens (_subnetworkProject :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetworkProject = a } :: NetworkInterfaceSetting s)
 
 instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NetworkInterfaceSetting s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
@@ -4346,22 +4911,46 @@ instance s ~ s' => P.HasComputedDisabled (TF.Ref s' (NetworkPolicyConfigSetting 
 
 -- | @node_config@ nested settings.
 data NodeConfigSetting s = NodeConfigSetting'
-    { _labels                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _diskSizeGb :: TF.Attr s P.Int
+    -- ^ @disk_size_gb@ - (Optional, Forces New)
+    --
+    , _diskType :: TF.Attr s P.Text
+    -- ^ @disk_type@ - (Optional, Forces New)
+    --
+    , _guestAccelerator :: TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]
+    -- ^ @guest_accelerator@ - (Optional, Forces New)
+    --
+    , _imageType :: TF.Attr s P.Text
+    -- ^ @image_type@ - (Optional)
+    --
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional, Forces New)
     --
-    , _metadata               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _localSsdCount :: TF.Attr s P.Int
+    -- ^ @local_ssd_count@ - (Optional, Forces New)
+    --
+    , _machineType :: TF.Attr s P.Text
+    -- ^ @machine_type@ - (Optional, Forces New)
+    --
+    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional, Forces New)
     --
-    , _minCpuPlatform         :: TF.Attr s P.Text
+    , _minCpuPlatform :: TF.Attr s P.Text
     -- ^ @min_cpu_platform@ - (Optional, Forces New)
     --
-    , _preemptible            :: TF.Attr s P.Bool
+    , _oauthScopes :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @oauth_scopes@ - (Optional, Forces New)
+    --
+    , _preemptible :: TF.Attr s P.Bool
     -- ^ @preemptible@ - (Optional, Forces New)
     --
-    , _tags                   :: TF.Attr s [TF.Attr s P.Text]
+    , _serviceAccount :: TF.Attr s P.Text
+    -- ^ @service_account@ - (Optional, Forces New)
+    --
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    , _taint                  :: TF.Attr s [TF.Attr s (TaintSetting s)]
+    , _taint :: TF.Attr s [TF.Attr s (TaintSetting s)]
     -- ^ @taint@ - (Optional, Forces New)
     --
     , _workloadMetadataConfig :: TF.Attr s (WorkloadMetadataConfigSetting s)
@@ -4374,10 +4963,18 @@ nodeConfigSetting
     :: NodeConfigSetting s
 nodeConfigSetting =
     NodeConfigSetting'
-        { _labels = TF.Nil
+        { _diskSizeGb = TF.Nil
+        , _diskType = TF.Nil
+        , _guestAccelerator = TF.Nil
+        , _imageType = TF.Nil
+        , _labels = TF.Nil
+        , _localSsdCount = TF.Nil
+        , _machineType = TF.Nil
         , _metadata = TF.Nil
         , _minCpuPlatform = TF.Nil
+        , _oauthScopes = TF.Nil
         , _preemptible = TF.value P.False
+        , _serviceAccount = TF.Nil
         , _tags = TF.Nil
         , _taint = TF.Nil
         , _workloadMetadataConfig = TF.Nil
@@ -4386,10 +4983,18 @@ nodeConfigSetting =
 instance TF.IsValue  (NodeConfigSetting s)
 instance TF.IsObject (NodeConfigSetting s) where
     toObject NodeConfigSetting'{..} = P.catMaybes
-        [ TF.assign "labels" <$> TF.attribute _labels
+        [ TF.assign "disk_size_gb" <$> TF.attribute _diskSizeGb
+        , TF.assign "disk_type" <$> TF.attribute _diskType
+        , TF.assign "guest_accelerator" <$> TF.attribute _guestAccelerator
+        , TF.assign "image_type" <$> TF.attribute _imageType
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "local_ssd_count" <$> TF.attribute _localSsdCount
+        , TF.assign "machine_type" <$> TF.attribute _machineType
         , TF.assign "metadata" <$> TF.attribute _metadata
         , TF.assign "min_cpu_platform" <$> TF.attribute _minCpuPlatform
+        , TF.assign "oauth_scopes" <$> TF.attribute _oauthScopes
         , TF.assign "preemptible" <$> TF.attribute _preemptible
+        , TF.assign "service_account" <$> TF.attribute _serviceAccount
         , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "taint" <$> TF.attribute _taint
         , TF.assign "workload_metadata_config" <$> TF.attribute _workloadMetadataConfig
@@ -4402,10 +5007,40 @@ instance TF.IsValid (NodeConfigSetting s) where
                       :: NodeConfigSetting s -> TF.Attr s (WorkloadMetadataConfigSetting s))
                   TF.validator
 
+instance P.HasDiskSizeGb (NodeConfigSetting s) (TF.Attr s P.Int) where
+    diskSizeGb =
+        P.lens (_diskSizeGb :: NodeConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _diskSizeGb = a } :: NodeConfigSetting s)
+
+instance P.HasDiskType (NodeConfigSetting s) (TF.Attr s P.Text) where
+    diskType =
+        P.lens (_diskType :: NodeConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _diskType = a } :: NodeConfigSetting s)
+
+instance P.HasGuestAccelerator (NodeConfigSetting s) (TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)]) where
+    guestAccelerator =
+        P.lens (_guestAccelerator :: NodeConfigSetting s -> TF.Attr s [TF.Attr s (GuestAcceleratorSetting s)])
+               (\s a -> s { _guestAccelerator = a } :: NodeConfigSetting s)
+
+instance P.HasImageType (NodeConfigSetting s) (TF.Attr s P.Text) where
+    imageType =
+        P.lens (_imageType :: NodeConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _imageType = a } :: NodeConfigSetting s)
+
 instance P.HasLabels (NodeConfigSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     labels =
         P.lens (_labels :: NodeConfigSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: NodeConfigSetting s)
+
+instance P.HasLocalSsdCount (NodeConfigSetting s) (TF.Attr s P.Int) where
+    localSsdCount =
+        P.lens (_localSsdCount :: NodeConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _localSsdCount = a } :: NodeConfigSetting s)
+
+instance P.HasMachineType (NodeConfigSetting s) (TF.Attr s P.Text) where
+    machineType =
+        P.lens (_machineType :: NodeConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _machineType = a } :: NodeConfigSetting s)
 
 instance P.HasMetadata (NodeConfigSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     metadata =
@@ -4417,10 +5052,20 @@ instance P.HasMinCpuPlatform (NodeConfigSetting s) (TF.Attr s P.Text) where
         P.lens (_minCpuPlatform :: NodeConfigSetting s -> TF.Attr s P.Text)
                (\s a -> s { _minCpuPlatform = a } :: NodeConfigSetting s)
 
+instance P.HasOauthScopes (NodeConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    oauthScopes =
+        P.lens (_oauthScopes :: NodeConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _oauthScopes = a } :: NodeConfigSetting s)
+
 instance P.HasPreemptible (NodeConfigSetting s) (TF.Attr s P.Bool) where
     preemptible =
         P.lens (_preemptible :: NodeConfigSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _preemptible = a } :: NodeConfigSetting s)
+
+instance P.HasServiceAccount (NodeConfigSetting s) (TF.Attr s P.Text) where
+    serviceAccount =
+        P.lens (_serviceAccount :: NodeConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceAccount = a } :: NodeConfigSetting s)
 
 instance P.HasTags (NodeConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     tags =
@@ -4484,8 +5129,26 @@ instance s ~ s' => P.HasComputedWorkloadMetadataConfig (TF.Ref s' (NodeConfigSet
 
 -- | @node_pool@ nested settings.
 data NodePoolSetting s = NodePoolSetting'
-    { _autoscaling :: TF.Attr s (AutoscalingSetting s)
+    { _autoscaling      :: TF.Attr s (AutoscalingSetting s)
     -- ^ @autoscaling@ - (Optional)
+    --
+    , _initialNodeCount :: TF.Attr s P.Int
+    -- ^ @initial_node_count@ - (Optional, Forces New)
+    --
+    , _management       :: TF.Attr s (ManagementSetting s)
+    -- ^ @management@ - (Optional)
+    --
+    , _name             :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _nodeConfig       :: TF.Attr s (NodeConfigSetting s)
+    -- ^ @node_config@ - (Optional, Forces New)
+    --
+    , _nodeCount        :: TF.Attr s P.Int
+    -- ^ @node_count@ - (Optional)
+    --
+    , _version          :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -4495,12 +5158,24 @@ nodePoolSetting
 nodePoolSetting =
     NodePoolSetting'
         { _autoscaling = TF.Nil
+        , _initialNodeCount = TF.Nil
+        , _management = TF.Nil
+        , _name = TF.Nil
+        , _nodeConfig = TF.Nil
+        , _nodeCount = TF.Nil
+        , _version = TF.Nil
         }
 
 instance TF.IsValue  (NodePoolSetting s)
 instance TF.IsObject (NodePoolSetting s) where
     toObject NodePoolSetting'{..} = P.catMaybes
         [ TF.assign "autoscaling" <$> TF.attribute _autoscaling
+        , TF.assign "initial_node_count" <$> TF.attribute _initialNodeCount
+        , TF.assign "management" <$> TF.attribute _management
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "node_config" <$> TF.attribute _nodeConfig
+        , TF.assign "node_count" <$> TF.attribute _nodeCount
+        , TF.assign "version" <$> TF.attribute _version
         ]
 
 instance TF.IsValid (NodePoolSetting s) where
@@ -4509,11 +5184,49 @@ instance TF.IsValid (NodePoolSetting s) where
                   (_autoscaling
                       :: NodePoolSetting s -> TF.Attr s (AutoscalingSetting s))
                   TF.validator
+           P.<> TF.settingsValidator "_management"
+                  (_management
+                      :: NodePoolSetting s -> TF.Attr s (ManagementSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_nodeConfig"
+                  (_nodeConfig
+                      :: NodePoolSetting s -> TF.Attr s (NodeConfigSetting s))
+                  TF.validator
 
 instance P.HasAutoscaling (NodePoolSetting s) (TF.Attr s (AutoscalingSetting s)) where
     autoscaling =
         P.lens (_autoscaling :: NodePoolSetting s -> TF.Attr s (AutoscalingSetting s))
                (\s a -> s { _autoscaling = a } :: NodePoolSetting s)
+
+instance P.HasInitialNodeCount (NodePoolSetting s) (TF.Attr s P.Int) where
+    initialNodeCount =
+        P.lens (_initialNodeCount :: NodePoolSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _initialNodeCount = a } :: NodePoolSetting s)
+
+instance P.HasManagement (NodePoolSetting s) (TF.Attr s (ManagementSetting s)) where
+    management =
+        P.lens (_management :: NodePoolSetting s -> TF.Attr s (ManagementSetting s))
+               (\s a -> s { _management = a } :: NodePoolSetting s)
+
+instance P.HasName (NodePoolSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: NodePoolSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: NodePoolSetting s)
+
+instance P.HasNodeConfig (NodePoolSetting s) (TF.Attr s (NodeConfigSetting s)) where
+    nodeConfig =
+        P.lens (_nodeConfig :: NodePoolSetting s -> TF.Attr s (NodeConfigSetting s))
+               (\s a -> s { _nodeConfig = a } :: NodePoolSetting s)
+
+instance P.HasNodeCount (NodePoolSetting s) (TF.Attr s P.Int) where
+    nodeCount =
+        P.lens (_nodeCount :: NodePoolSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _nodeCount = a } :: NodePoolSetting s)
+
+instance P.HasVersion (NodePoolSetting s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: NodePoolSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: NodePoolSetting s)
 
 instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (NodePoolSetting s)) (TF.Attr s P.Int) where
     computedInitialNodeCount x = TF.compute (TF.refKey x) "initial_node_count"
@@ -4652,6 +5365,10 @@ data PigConfigSetting s = PigConfigSetting'
     , _jarFileUris       :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
+    , _loggingConfig     :: TF.Attr s (LoggingConfigSetting s)
+    -- ^ @logging_config@ - (Optional)
+    -- The runtime logging config of the job
+    --
     , _properties        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @properties@ - (Optional, Forces New)
     --
@@ -4679,6 +5396,7 @@ pigConfigSetting =
     PigConfigSetting'
         { _continueOnFailure = TF.Nil
         , _jarFileUris = TF.Nil
+        , _loggingConfig = TF.Nil
         , _properties = TF.Nil
         , _queryFileUri = TF.Nil
         , _queryList = TF.Nil
@@ -4690,6 +5408,7 @@ instance TF.IsObject (PigConfigSetting s) where
     toObject PigConfigSetting'{..} = P.catMaybes
         [ TF.assign "continue_on_failure" <$> TF.attribute _continueOnFailure
         , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
+        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
         , TF.assign "properties" <$> TF.attribute _properties
         , TF.assign "query_file_uri" <$> TF.attribute _queryFileUri
         , TF.assign "query_list" <$> TF.attribute _queryList
@@ -4709,6 +5428,10 @@ instance TF.IsValid (PigConfigSetting s) where
                             [ "_queryFileUri"
                             ])
         ])
+           P.<> TF.settingsValidator "_loggingConfig"
+                  (_loggingConfig
+                      :: PigConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+                  TF.validator
 
 instance P.HasContinueOnFailure (PigConfigSetting s) (TF.Attr s P.Bool) where
     continueOnFailure =
@@ -4719,6 +5442,11 @@ instance P.HasJarFileUris (PigConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) wh
     jarFileUris =
         P.lens (_jarFileUris :: PigConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _jarFileUris = a } :: PigConfigSetting s)
+
+instance P.HasLoggingConfig (PigConfigSetting s) (TF.Attr s (LoggingConfigSetting s)) where
+    loggingConfig =
+        P.lens (_loggingConfig :: PigConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+               (\s a -> s { _loggingConfig = a } :: PigConfigSetting s)
 
 instance P.HasProperties (PigConfigSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     properties =
@@ -4812,20 +5540,46 @@ instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (PodSecurityPolicyConfigSetti
 
 -- | @preemptible_worker_config@ nested settings.
 data PreemptibleWorkerConfigSetting s = PreemptibleWorkerConfigSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _diskConfig   :: TF.Attr s (DiskConfigSetting s)
+    -- ^ @disk_config@ - (Optional)
+    --
+    , _numInstances :: TF.Attr s P.Int
+    -- ^ @num_instances@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @preemptible_worker_config@ settings value.
 preemptibleWorkerConfigSetting
     :: PreemptibleWorkerConfigSetting s
 preemptibleWorkerConfigSetting =
     PreemptibleWorkerConfigSetting'
+        { _diskConfig = TF.Nil
+        , _numInstances = TF.Nil
+        }
 
 instance TF.IsValue  (PreemptibleWorkerConfigSetting s)
 instance TF.IsObject (PreemptibleWorkerConfigSetting s) where
-    toObject PreemptibleWorkerConfigSetting' = []
+    toObject PreemptibleWorkerConfigSetting'{..} = P.catMaybes
+        [ TF.assign "disk_config" <$> TF.attribute _diskConfig
+        , TF.assign "num_instances" <$> TF.attribute _numInstances
+        ]
 
 instance TF.IsValid (PreemptibleWorkerConfigSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_diskConfig"
+                  (_diskConfig
+                      :: PreemptibleWorkerConfigSetting s -> TF.Attr s (DiskConfigSetting s))
+                  TF.validator
+
+instance P.HasDiskConfig (PreemptibleWorkerConfigSetting s) (TF.Attr s (DiskConfigSetting s)) where
+    diskConfig =
+        P.lens (_diskConfig :: PreemptibleWorkerConfigSetting s -> TF.Attr s (DiskConfigSetting s))
+               (\s a -> s { _diskConfig = a } :: PreemptibleWorkerConfigSetting s)
+
+instance P.HasNumInstances (PreemptibleWorkerConfigSetting s) (TF.Attr s P.Int) where
+    numInstances =
+        P.lens (_numInstances :: PreemptibleWorkerConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _numInstances = a } :: PreemptibleWorkerConfigSetting s)
 
 instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (PreemptibleWorkerConfigSetting s)) (TF.Attr s (DiskConfigSetting s)) where
     computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
@@ -4940,6 +5694,10 @@ data PysparkConfigSetting s = PysparkConfigSetting'
     -- Optional. HCFS URIs of jar files to add to the CLASSPATHs of the Python
     -- driver and tasks
     --
+    , _loggingConfig     :: TF.Attr s (LoggingConfigSetting s)
+    -- ^ @logging_config@ - (Optional)
+    -- The runtime logging config of the job
+    --
     , _mainPythonFileUri :: TF.Attr s P.Text
     -- ^ @main_python_file_uri@ - (Required, Forces New)
     -- Required. The HCFS URI of the main Python file to use as the driver. Must be
@@ -4969,6 +5727,7 @@ pysparkConfigSetting _mainPythonFileUri =
         , _args = TF.Nil
         , _fileUris = TF.Nil
         , _jarFileUris = TF.Nil
+        , _loggingConfig = TF.Nil
         , _mainPythonFileUri = _mainPythonFileUri
         , _properties = TF.Nil
         , _pythonFileUris = TF.Nil
@@ -4981,6 +5740,7 @@ instance TF.IsObject (PysparkConfigSetting s) where
         , TF.assign "args" <$> TF.attribute _args
         , TF.assign "file_uris" <$> TF.attribute _fileUris
         , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
+        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
         , TF.assign "main_python_file_uri" <$> TF.attribute _mainPythonFileUri
         , TF.assign "properties" <$> TF.attribute _properties
         , TF.assign "python_file_uris" <$> TF.attribute _pythonFileUris
@@ -4988,6 +5748,10 @@ instance TF.IsObject (PysparkConfigSetting s) where
 
 instance TF.IsValid (PysparkConfigSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_loggingConfig"
+                  (_loggingConfig
+                      :: PysparkConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+                  TF.validator
 
 instance P.HasArchiveUris (PysparkConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     archiveUris =
@@ -5008,6 +5772,11 @@ instance P.HasJarFileUris (PysparkConfigSetting s) (TF.Attr s [TF.Attr s P.Text]
     jarFileUris =
         P.lens (_jarFileUris :: PysparkConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _jarFileUris = a } :: PysparkConfigSetting s)
+
+instance P.HasLoggingConfig (PysparkConfigSetting s) (TF.Attr s (LoggingConfigSetting s)) where
+    loggingConfig =
+        P.lens (_loggingConfig :: PysparkConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+               (\s a -> s { _loggingConfig = a } :: PysparkConfigSetting s)
 
 instance P.HasMainPythonFileUri (PysparkConfigSetting s) (TF.Attr s P.Text) where
     mainPythonFileUri =
@@ -5079,20 +5848,35 @@ instance P.HasSource (RawDiskSetting s) (TF.Attr s P.Text) where
 
 -- | @reference@ nested settings.
 data ReferenceSetting s = ReferenceSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _jobId :: TF.Attr s P.Text
+    -- ^ @job_id@ - (Optional, Forces New)
+    -- The job ID, which must be unique within the project. The job ID is generated
+    -- by the server upon job submission or provided by the user as a means to
+    -- perform retries without creating duplicate jobs
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @reference@ settings value.
 referenceSetting
     :: ReferenceSetting s
 referenceSetting =
     ReferenceSetting'
+        { _jobId = TF.Nil
+        }
 
 instance TF.IsValue  (ReferenceSetting s)
 instance TF.IsObject (ReferenceSetting s) where
-    toObject ReferenceSetting' = []
+    toObject ReferenceSetting'{..} = P.catMaybes
+        [ TF.assign "job_id" <$> TF.attribute _jobId
+        ]
 
 instance TF.IsValid (ReferenceSetting s) where
     validator = P.mempty
+
+instance P.HasJobId (ReferenceSetting s) (TF.Attr s P.Text) where
+    jobId =
+        P.lens (_jobId :: ReferenceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _jobId = a } :: ReferenceSetting s)
 
 instance s ~ s' => P.HasComputedJobId (TF.Ref s' (ReferenceSetting s)) (TF.Attr s P.Text) where
     computedJobId x = TF.compute (TF.refKey x) "job_id"
@@ -5461,6 +6245,9 @@ data SchedulingSetting s = SchedulingSetting'
     { _automaticRestart   :: TF.Attr s P.Bool
     -- ^ @automatic_restart@ - (Optional)
     --
+    , _onHostMaintenance  :: TF.Attr s P.Text
+    -- ^ @on_host_maintenance@ - (Optional)
+    --
     , _preemptible        :: TF.Attr s P.Bool
     -- ^ @preemptible@ - (Optional, Forces New)
     --
@@ -5477,6 +6264,7 @@ schedulingSetting
 schedulingSetting =
     SchedulingSetting'
         { _automaticRestart = TF.value P.True
+        , _onHostMaintenance = TF.Nil
         , _preemptible = TF.value P.False
         , _maxFailuresPerHour = TF.Nil
         }
@@ -5485,6 +6273,7 @@ instance TF.IsValue  (SchedulingSetting s)
 instance TF.IsObject (SchedulingSetting s) where
     toObject SchedulingSetting'{..} = P.catMaybes
         [ TF.assign "automatic_restart" <$> TF.attribute _automaticRestart
+        , TF.assign "on_host_maintenance" <$> TF.attribute _onHostMaintenance
         , TF.assign "preemptible" <$> TF.attribute _preemptible
         , TF.assign "max_failures_per_hour" <$> TF.attribute _maxFailuresPerHour
         ]
@@ -5496,6 +6285,11 @@ instance P.HasAutomaticRestart (SchedulingSetting s) (TF.Attr s P.Bool) where
     automaticRestart =
         P.lens (_automaticRestart :: SchedulingSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _automaticRestart = a } :: SchedulingSetting s)
+
+instance P.HasOnHostMaintenance (SchedulingSetting s) (TF.Attr s P.Text) where
+    onHostMaintenance =
+        P.lens (_onHostMaintenance :: SchedulingSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _onHostMaintenance = a } :: SchedulingSetting s)
 
 instance P.HasPreemptible (SchedulingSetting s) (TF.Attr s P.Bool) where
     preemptible =
@@ -5629,7 +6423,10 @@ instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (ServerCaCertSetting 
 
 -- | @service_account@ nested settings.
 data ServiceAccountSetting s = ServiceAccountSetting'
-    { _scopes :: TF.Attr s [TF.Attr s P.Text]
+    { _email  :: TF.Attr s P.Text
+    -- ^ @email@ - (Optional)
+    --
+    , _scopes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @scopes@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5640,17 +6437,24 @@ serviceAccountSetting
     -> ServiceAccountSetting s
 serviceAccountSetting _scopes =
     ServiceAccountSetting'
-        { _scopes = _scopes
+        { _email = TF.Nil
+        , _scopes = _scopes
         }
 
 instance TF.IsValue  (ServiceAccountSetting s)
 instance TF.IsObject (ServiceAccountSetting s) where
     toObject ServiceAccountSetting'{..} = P.catMaybes
-        [ TF.assign "scopes" <$> TF.attribute _scopes
+        [ TF.assign "email" <$> TF.attribute _email
+        , TF.assign "scopes" <$> TF.attribute _scopes
         ]
 
 instance TF.IsValid (ServiceAccountSetting s) where
     validator = P.mempty
+
+instance P.HasEmail (ServiceAccountSetting s) (TF.Attr s P.Text) where
+    email =
+        P.lens (_email :: ServiceAccountSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _email = a } :: ServiceAccountSetting s)
 
 instance P.HasScopes (ServiceAccountSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     scopes =
@@ -5662,14 +6466,38 @@ instance s ~ s' => P.HasComputedEmail (TF.Ref s' (ServiceAccountSetting s)) (TF.
 
 -- | @settings@ nested settings.
 data SettingsSetting s = SettingsSetting'
-    { _authorizedGaeApplications :: TF.Attr s [TF.Attr s P.Text]
+    { _activationPolicy :: TF.Attr s P.Text
+    -- ^ @activation_policy@ - (Optional)
+    --
+    , _authorizedGaeApplications :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @authorized_gae_applications@ - (Optional)
+    --
+    , _availabilityType :: TF.Attr s P.Text
+    -- ^ @availability_type@ - (Optional)
+    --
+    , _backupConfiguration :: TF.Attr s (BackupConfigurationSetting s)
+    -- ^ @backup_configuration@ - (Optional)
+    --
+    , _crashSafeReplication :: TF.Attr s P.Bool
+    -- ^ @crash_safe_replication@ - (Optional)
     --
     , _databaseFlags :: TF.Attr s [TF.Attr s (DatabaseFlagsSetting s)]
     -- ^ @database_flags@ - (Optional)
     --
     , _diskAutoresize :: TF.Attr s P.Bool
     -- ^ @disk_autoresize@ - (Optional)
+    --
+    , _diskSize :: TF.Attr s P.Int
+    -- ^ @disk_size@ - (Optional)
+    --
+    , _diskType :: TF.Attr s P.Text
+    -- ^ @disk_type@ - (Optional)
+    --
+    , _ipConfiguration :: TF.Attr s (IpConfigurationSetting s)
+    -- ^ @ip_configuration@ - (Optional)
+    --
+    , _locationPreference :: TF.Attr s (LocationPreferenceSetting s)
+    -- ^ @location_preference@ - (Optional)
     --
     , _maintenanceWindow :: TF.Attr s (MaintenanceWindowSetting s)
     -- ^ @maintenance_window@ - (Optional)
@@ -5694,9 +6522,17 @@ settingsSetting
     -> SettingsSetting s
 settingsSetting _tier =
     SettingsSetting'
-        { _authorizedGaeApplications = TF.Nil
+        { _activationPolicy = TF.Nil
+        , _authorizedGaeApplications = TF.Nil
+        , _availabilityType = TF.Nil
+        , _backupConfiguration = TF.Nil
+        , _crashSafeReplication = TF.Nil
         , _databaseFlags = TF.Nil
         , _diskAutoresize = TF.value P.True
+        , _diskSize = TF.Nil
+        , _diskType = TF.Nil
+        , _ipConfiguration = TF.Nil
+        , _locationPreference = TF.Nil
         , _maintenanceWindow = TF.Nil
         , _pricingPlan = TF.value "PER_USE"
         , _replicationType = TF.value "SYNCHRONOUS"
@@ -5707,9 +6543,17 @@ settingsSetting _tier =
 instance TF.IsValue  (SettingsSetting s)
 instance TF.IsObject (SettingsSetting s) where
     toObject SettingsSetting'{..} = P.catMaybes
-        [ TF.assign "authorized_gae_applications" <$> TF.attribute _authorizedGaeApplications
+        [ TF.assign "activation_policy" <$> TF.attribute _activationPolicy
+        , TF.assign "authorized_gae_applications" <$> TF.attribute _authorizedGaeApplications
+        , TF.assign "availability_type" <$> TF.attribute _availabilityType
+        , TF.assign "backup_configuration" <$> TF.attribute _backupConfiguration
+        , TF.assign "crash_safe_replication" <$> TF.attribute _crashSafeReplication
         , TF.assign "database_flags" <$> TF.attribute _databaseFlags
         , TF.assign "disk_autoresize" <$> TF.attribute _diskAutoresize
+        , TF.assign "disk_size" <$> TF.attribute _diskSize
+        , TF.assign "disk_type" <$> TF.attribute _diskType
+        , TF.assign "ip_configuration" <$> TF.attribute _ipConfiguration
+        , TF.assign "location_preference" <$> TF.attribute _locationPreference
         , TF.assign "maintenance_window" <$> TF.attribute _maintenanceWindow
         , TF.assign "pricing_plan" <$> TF.attribute _pricingPlan
         , TF.assign "replication_type" <$> TF.attribute _replicationType
@@ -5719,15 +6563,47 @@ instance TF.IsObject (SettingsSetting s) where
 
 instance TF.IsValid (SettingsSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_backupConfiguration"
+                  (_backupConfiguration
+                      :: SettingsSetting s -> TF.Attr s (BackupConfigurationSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_ipConfiguration"
+                  (_ipConfiguration
+                      :: SettingsSetting s -> TF.Attr s (IpConfigurationSetting s))
+                  TF.validator
+           P.<> TF.settingsValidator "_locationPreference"
+                  (_locationPreference
+                      :: SettingsSetting s -> TF.Attr s (LocationPreferenceSetting s))
+                  TF.validator
            P.<> TF.settingsValidator "_maintenanceWindow"
                   (_maintenanceWindow
                       :: SettingsSetting s -> TF.Attr s (MaintenanceWindowSetting s))
                   TF.validator
 
+instance P.HasActivationPolicy (SettingsSetting s) (TF.Attr s P.Text) where
+    activationPolicy =
+        P.lens (_activationPolicy :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _activationPolicy = a } :: SettingsSetting s)
+
 instance P.HasAuthorizedGaeApplications (SettingsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     authorizedGaeApplications =
         P.lens (_authorizedGaeApplications :: SettingsSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _authorizedGaeApplications = a } :: SettingsSetting s)
+
+instance P.HasAvailabilityType (SettingsSetting s) (TF.Attr s P.Text) where
+    availabilityType =
+        P.lens (_availabilityType :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _availabilityType = a } :: SettingsSetting s)
+
+instance P.HasBackupConfiguration (SettingsSetting s) (TF.Attr s (BackupConfigurationSetting s)) where
+    backupConfiguration =
+        P.lens (_backupConfiguration :: SettingsSetting s -> TF.Attr s (BackupConfigurationSetting s))
+               (\s a -> s { _backupConfiguration = a } :: SettingsSetting s)
+
+instance P.HasCrashSafeReplication (SettingsSetting s) (TF.Attr s P.Bool) where
+    crashSafeReplication =
+        P.lens (_crashSafeReplication :: SettingsSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _crashSafeReplication = a } :: SettingsSetting s)
 
 instance P.HasDatabaseFlags (SettingsSetting s) (TF.Attr s [TF.Attr s (DatabaseFlagsSetting s)]) where
     databaseFlags =
@@ -5738,6 +6614,26 @@ instance P.HasDiskAutoresize (SettingsSetting s) (TF.Attr s P.Bool) where
     diskAutoresize =
         P.lens (_diskAutoresize :: SettingsSetting s -> TF.Attr s P.Bool)
                (\s a -> s { _diskAutoresize = a } :: SettingsSetting s)
+
+instance P.HasDiskSize (SettingsSetting s) (TF.Attr s P.Int) where
+    diskSize =
+        P.lens (_diskSize :: SettingsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _diskSize = a } :: SettingsSetting s)
+
+instance P.HasDiskType (SettingsSetting s) (TF.Attr s P.Text) where
+    diskType =
+        P.lens (_diskType :: SettingsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _diskType = a } :: SettingsSetting s)
+
+instance P.HasIpConfiguration (SettingsSetting s) (TF.Attr s (IpConfigurationSetting s)) where
+    ipConfiguration =
+        P.lens (_ipConfiguration :: SettingsSetting s -> TF.Attr s (IpConfigurationSetting s))
+               (\s a -> s { _ipConfiguration = a } :: SettingsSetting s)
+
+instance P.HasLocationPreference (SettingsSetting s) (TF.Attr s (LocationPreferenceSetting s)) where
+    locationPreference =
+        P.lens (_locationPreference :: SettingsSetting s -> TF.Attr s (LocationPreferenceSetting s))
+               (\s a -> s { _locationPreference = a } :: SettingsSetting s)
 
 instance P.HasMaintenanceWindow (SettingsSetting s) (TF.Attr s (MaintenanceWindowSetting s)) where
     maintenanceWindow =
@@ -5793,7 +6689,10 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (SettingsSetting s)) (TF.Attr
 
 -- | @software_config@ nested settings.
 data SoftwareConfigSetting s = SoftwareConfigSetting'
-    { _overrideProperties :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _imageVersion       :: TF.Attr s P.Text
+    -- ^ @image_version@ - (Optional, Forces New)
+    --
+    , _overrideProperties :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @override_properties@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5803,17 +6702,24 @@ softwareConfigSetting
     :: SoftwareConfigSetting s
 softwareConfigSetting =
     SoftwareConfigSetting'
-        { _overrideProperties = TF.Nil
+        { _imageVersion = TF.Nil
+        , _overrideProperties = TF.Nil
         }
 
 instance TF.IsValue  (SoftwareConfigSetting s)
 instance TF.IsObject (SoftwareConfigSetting s) where
     toObject SoftwareConfigSetting'{..} = P.catMaybes
-        [ TF.assign "override_properties" <$> TF.attribute _overrideProperties
+        [ TF.assign "image_version" <$> TF.attribute _imageVersion
+        , TF.assign "override_properties" <$> TF.attribute _overrideProperties
         ]
 
 instance TF.IsValid (SoftwareConfigSetting s) where
     validator = P.mempty
+
+instance P.HasImageVersion (SoftwareConfigSetting s) (TF.Attr s P.Text) where
+    imageVersion =
+        P.lens (_imageVersion :: SoftwareConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _imageVersion = a } :: SoftwareConfigSetting s)
 
 instance P.HasOverrideProperties (SoftwareConfigSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     overrideProperties =
@@ -5904,6 +6810,10 @@ data SparkConfigSetting s = SparkConfigSetting'
     , _jarFileUris    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
+    , _loggingConfig  :: TF.Attr s (LoggingConfigSetting s)
+    -- ^ @logging_config@ - (Optional)
+    -- The runtime logging config of the job
+    --
     , _mainClass      :: TF.Attr s P.Text
     -- ^ @main_class@ - (Optional, Forces New)
     --
@@ -5930,6 +6840,7 @@ sparkConfigSetting =
         , _args = TF.Nil
         , _fileUris = TF.Nil
         , _jarFileUris = TF.Nil
+        , _loggingConfig = TF.Nil
         , _mainClass = TF.Nil
         , _mainJarFileUri = TF.Nil
         , _properties = TF.Nil
@@ -5942,6 +6853,7 @@ instance TF.IsObject (SparkConfigSetting s) where
         , TF.assign "args" <$> TF.attribute _args
         , TF.assign "file_uris" <$> TF.attribute _fileUris
         , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
+        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
         , TF.assign "main_class" <$> TF.attribute _mainClass
         , TF.assign "main_jar_file_uri" <$> TF.attribute _mainJarFileUri
         , TF.assign "properties" <$> TF.attribute _properties
@@ -5960,6 +6872,10 @@ instance TF.IsValid (SparkConfigSetting s) where
                             [ "_mainClass"
                             ])
         ])
+           P.<> TF.settingsValidator "_loggingConfig"
+                  (_loggingConfig
+                      :: SparkConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+                  TF.validator
 
 instance P.HasArchiveUris (SparkConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     archiveUris =
@@ -5980,6 +6896,11 @@ instance P.HasJarFileUris (SparkConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) 
     jarFileUris =
         P.lens (_jarFileUris :: SparkConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _jarFileUris = a } :: SparkConfigSetting s)
+
+instance P.HasLoggingConfig (SparkConfigSetting s) (TF.Attr s (LoggingConfigSetting s)) where
+    loggingConfig =
+        P.lens (_loggingConfig :: SparkConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+               (\s a -> s { _loggingConfig = a } :: SparkConfigSetting s)
 
 instance P.HasMainClass (SparkConfigSetting s) (TF.Attr s P.Text) where
     mainClass =
@@ -6003,6 +6924,10 @@ instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (SparkConfigSetting s))
 data SparksqlConfigSetting s = SparksqlConfigSetting'
     { _jarFileUris     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @jar_file_uris@ - (Optional, Forces New)
+    --
+    , _loggingConfig   :: TF.Attr s (LoggingConfigSetting s)
+    -- ^ @logging_config@ - (Optional)
+    -- The runtime logging config of the job
     --
     , _properties      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @properties@ - (Optional, Forces New)
@@ -6030,6 +6955,7 @@ sparksqlConfigSetting
 sparksqlConfigSetting =
     SparksqlConfigSetting'
         { _jarFileUris = TF.Nil
+        , _loggingConfig = TF.Nil
         , _properties = TF.Nil
         , _queryFileUri = TF.Nil
         , _queryList = TF.Nil
@@ -6040,6 +6966,7 @@ instance TF.IsValue  (SparksqlConfigSetting s)
 instance TF.IsObject (SparksqlConfigSetting s) where
     toObject SparksqlConfigSetting'{..} = P.catMaybes
         [ TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
+        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
         , TF.assign "properties" <$> TF.attribute _properties
         , TF.assign "query_file_uri" <$> TF.attribute _queryFileUri
         , TF.assign "query_list" <$> TF.attribute _queryList
@@ -6059,11 +6986,20 @@ instance TF.IsValid (SparksqlConfigSetting s) where
                             [ "_queryFileUri"
                             ])
         ])
+           P.<> TF.settingsValidator "_loggingConfig"
+                  (_loggingConfig
+                      :: SparksqlConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+                  TF.validator
 
 instance P.HasJarFileUris (SparksqlConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     jarFileUris =
         P.lens (_jarFileUris :: SparksqlConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _jarFileUris = a } :: SparksqlConfigSetting s)
+
+instance P.HasLoggingConfig (SparksqlConfigSetting s) (TF.Attr s (LoggingConfigSetting s)) where
+    loggingConfig =
+        P.lens (_loggingConfig :: SparksqlConfigSetting s -> TF.Attr s (LoggingConfigSetting s))
+               (\s a -> s { _loggingConfig = a } :: SparksqlConfigSetting s)
 
 instance P.HasProperties (SparksqlConfigSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     properties =
@@ -6786,20 +7722,56 @@ instance P.HasNotFoundPage (WebsiteSetting s) (TF.Attr s P.Text) where
 
 -- | @worker_config@ nested settings.
 data WorkerConfigSetting s = WorkerConfigSetting'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _diskConfig   :: TF.Attr s (DiskConfigSetting s)
+    -- ^ @disk_config@ - (Optional)
+    --
+    , _machineType  :: TF.Attr s P.Text
+    -- ^ @machine_type@ - (Optional, Forces New)
+    --
+    , _numInstances :: TF.Attr s P.Int
+    -- ^ @num_instances@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @worker_config@ settings value.
 workerConfigSetting
     :: WorkerConfigSetting s
 workerConfigSetting =
     WorkerConfigSetting'
+        { _diskConfig = TF.Nil
+        , _machineType = TF.Nil
+        , _numInstances = TF.Nil
+        }
 
 instance TF.IsValue  (WorkerConfigSetting s)
 instance TF.IsObject (WorkerConfigSetting s) where
-    toObject WorkerConfigSetting' = []
+    toObject WorkerConfigSetting'{..} = P.catMaybes
+        [ TF.assign "disk_config" <$> TF.attribute _diskConfig
+        , TF.assign "machine_type" <$> TF.attribute _machineType
+        , TF.assign "num_instances" <$> TF.attribute _numInstances
+        ]
 
 instance TF.IsValid (WorkerConfigSetting s) where
     validator = P.mempty
+           P.<> TF.settingsValidator "_diskConfig"
+                  (_diskConfig
+                      :: WorkerConfigSetting s -> TF.Attr s (DiskConfigSetting s))
+                  TF.validator
+
+instance P.HasDiskConfig (WorkerConfigSetting s) (TF.Attr s (DiskConfigSetting s)) where
+    diskConfig =
+        P.lens (_diskConfig :: WorkerConfigSetting s -> TF.Attr s (DiskConfigSetting s))
+               (\s a -> s { _diskConfig = a } :: WorkerConfigSetting s)
+
+instance P.HasMachineType (WorkerConfigSetting s) (TF.Attr s P.Text) where
+    machineType =
+        P.lens (_machineType :: WorkerConfigSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _machineType = a } :: WorkerConfigSetting s)
+
+instance P.HasNumInstances (WorkerConfigSetting s) (TF.Attr s P.Int) where
+    numInstances =
+        P.lens (_numInstances :: WorkerConfigSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _numInstances = a } :: WorkerConfigSetting s)
 
 instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (WorkerConfigSetting s)) (TF.Attr s (DiskConfigSetting s)) where
     computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"

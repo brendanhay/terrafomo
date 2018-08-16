@@ -237,6 +237,18 @@ data BillingAccountData s = BillingAccountData'
     { _billingAccount :: TF.Attr s P.Text
     -- ^ @billing_account@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'displayName'
+    , _displayName    :: TF.Attr s P.Text
+    -- ^ @display_name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'billingAccount'
+    , _open           :: TF.Attr s P.Bool
+    -- ^ @open@ - (Optional)
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_billing_account@ datasource value.
@@ -246,20 +258,45 @@ billingAccountData =
     TF.unsafeDataSource "google_billing_account" TF.validator $
         BillingAccountData'
             { _billingAccount = TF.Nil
+            , _displayName = TF.Nil
+            , _open = TF.Nil
             }
 
 instance TF.IsObject (BillingAccountData s) where
     toObject BillingAccountData'{..} = P.catMaybes
         [ TF.assign "billing_account" <$> TF.attribute _billingAccount
+        , TF.assign "display_name" <$> TF.attribute _displayName
+        , TF.assign "open" <$> TF.attribute _open
         ]
 
 instance TF.IsValid (BillingAccountData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\BillingAccountData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_billingAccount P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_billingAccount",
+                            [ "_displayName"
+                            ])
+        , if (_displayName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_displayName",
+                            [ "_billingAccount"
+                            ])
+        ])
 
 instance P.HasBillingAccount (BillingAccountData s) (TF.Attr s P.Text) where
     billingAccount =
         P.lens (_billingAccount :: BillingAccountData s -> TF.Attr s P.Text)
                (\s a -> s { _billingAccount = a } :: BillingAccountData s)
+
+instance P.HasDisplayName (BillingAccountData s) (TF.Attr s P.Text) where
+    displayName =
+        P.lens (_displayName :: BillingAccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _displayName = a } :: BillingAccountData s)
+
+instance P.HasOpen (BillingAccountData s) (TF.Attr s P.Bool) where
+    open =
+        P.lens (_open :: BillingAccountData s -> TF.Attr s P.Bool)
+               (\s a -> s { _open = a } :: BillingAccountData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BillingAccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -405,8 +442,14 @@ instance s ~ s' => P.HasComputedTriggerTopic (TF.Ref s' (CloudfunctionsFunctionD
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_address.html terraform documentation>
 -- for more information.
 data ComputeAddressData s = ComputeAddressData'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -418,11 +461,15 @@ computeAddressData _name =
     TF.unsafeDataSource "google_compute_address" TF.validator $
         ComputeAddressData'
             { _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeAddressData s) where
     toObject ComputeAddressData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeAddressData s) where
@@ -432,6 +479,16 @@ instance P.HasName (ComputeAddressData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeAddressData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeAddressData s)
+
+instance P.HasProject (ComputeAddressData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeAddressData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeAddressData s)
+
+instance P.HasRegion (ComputeAddressData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeAddressData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeAddressData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeAddressData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -550,7 +607,10 @@ instance s ~ s' => P.HasComputedTimeoutSec (TF.Ref s' (ComputeBackendServiceData
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_default_service_account.html terraform documentation>
 -- for more information.
 data ComputeDefaultServiceAccountData s = ComputeDefaultServiceAccountData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_default_service_account@ datasource value.
 computeDefaultServiceAccountData
@@ -558,12 +618,21 @@ computeDefaultServiceAccountData
 computeDefaultServiceAccountData =
     TF.unsafeDataSource "google_compute_default_service_account" TF.validator $
         ComputeDefaultServiceAccountData'
+            { _project = TF.Nil
+            }
 
 instance TF.IsObject (ComputeDefaultServiceAccountData s) where
-    toObject _ = []
+    toObject ComputeDefaultServiceAccountData'{..} = P.catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        ]
 
 instance TF.IsValid (ComputeDefaultServiceAccountData s) where
     validator = P.mempty
+
+instance P.HasProject (ComputeDefaultServiceAccountData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeDefaultServiceAccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeDefaultServiceAccountData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeDefaultServiceAccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -579,8 +648,14 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeDefaultServiceAccount
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_forwarding_rule.html terraform documentation>
 -- for more information.
 data ComputeForwardingRuleData s = ComputeForwardingRuleData'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -592,11 +667,15 @@ computeForwardingRuleData _name =
     TF.unsafeDataSource "google_compute_forwarding_rule" TF.validator $
         ComputeForwardingRuleData'
             { _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeForwardingRuleData s) where
     toObject ComputeForwardingRuleData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeForwardingRuleData s) where
@@ -606,6 +685,16 @@ instance P.HasName (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeForwardingRuleData s)
+
+instance P.HasProject (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeForwardingRuleData s)
+
+instance P.HasRegion (ComputeForwardingRuleData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeForwardingRuleData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeForwardingRuleData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeForwardingRuleData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -654,8 +743,11 @@ instance s ~ s' => P.HasComputedTarget (TF.Ref s' (ComputeForwardingRuleData s))
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_global_address.html terraform documentation>
 -- for more information.
 data ComputeGlobalAddressData s = ComputeGlobalAddressData'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -667,11 +759,13 @@ computeGlobalAddressData _name =
     TF.unsafeDataSource "google_compute_global_address" TF.validator $
         ComputeGlobalAddressData'
             { _name = _name
+            , _project = TF.Nil
             }
 
 instance TF.IsObject (ComputeGlobalAddressData s) where
     toObject ComputeGlobalAddressData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         ]
 
 instance TF.IsValid (ComputeGlobalAddressData s) where
@@ -681,6 +775,11 @@ instance P.HasName (ComputeGlobalAddressData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeGlobalAddressData s)
+
+instance P.HasProject (ComputeGlobalAddressData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeGlobalAddressData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeGlobalAddressData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeGlobalAddressData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -702,7 +801,22 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeGlobalAddressData s)) 
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_image.html terraform documentation>
 -- for more information.
 data ComputeImageData s = ComputeImageData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _family' :: TF.Attr s P.Text
+    -- ^ @family@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    -- Conflicts with:
+    --
+    -- * 'family''
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_image@ datasource value.
 computeImageData
@@ -710,12 +824,46 @@ computeImageData
 computeImageData =
     TF.unsafeDataSource "google_compute_image" TF.validator $
         ComputeImageData'
+            { _family' = TF.Nil
+            , _name = TF.Nil
+            , _project = TF.Nil
+            }
 
 instance TF.IsObject (ComputeImageData s) where
-    toObject _ = []
+    toObject ComputeImageData'{..} = P.catMaybes
+        [ TF.assign "family" <$> TF.attribute _family'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        ]
 
 instance TF.IsValid (ComputeImageData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ComputeImageData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_family' P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_family'",
+                            [ "_name"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_family'"
+                            ])
+        ])
+
+instance P.HasFamily' (ComputeImageData s) (TF.Attr s P.Text) where
+    family' =
+        P.lens (_family' :: ComputeImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _family' = a } :: ComputeImageData s)
+
+instance P.HasName (ComputeImageData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeImageData s)
+
+instance P.HasProject (ComputeImageData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeImageData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -779,9 +927,28 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ComputeImageData s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_instance_group.html terraform documentation>
 -- for more information.
 data ComputeInstanceGroupData s = ComputeInstanceGroupData'
-    { _name :: TF.Attr s P.Text
+    { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'selfLink'
+    , _project  :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _selfLink :: TF.Attr s P.Text
+    -- ^ @self_link@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    -- * 'zone'
+    , _zone     :: TF.Attr s P.Text
+    -- ^ @zone@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'selfLink'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_instance_group@ datasource value.
@@ -791,20 +958,57 @@ computeInstanceGroupData =
     TF.unsafeDataSource "google_compute_instance_group" TF.validator $
         ComputeInstanceGroupData'
             { _name = TF.Nil
+            , _project = TF.Nil
+            , _selfLink = TF.Nil
+            , _zone = TF.Nil
             }
 
 instance TF.IsObject (ComputeInstanceGroupData s) where
     toObject ComputeInstanceGroupData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "self_link" <$> TF.attribute _selfLink
+        , TF.assign "zone" <$> TF.attribute _zone
         ]
 
 instance TF.IsValid (ComputeInstanceGroupData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\ComputeInstanceGroupData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_selfLink"
+                            ])
+        , if (_selfLink P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_selfLink",
+                            [ "_name"                            , "_zone"
+                            ])
+        , if (_zone P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_zone",
+                            [ "_selfLink"
+                            ])
+        ])
 
 instance P.HasName (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceGroupData s)
+
+instance P.HasProject (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeInstanceGroupData s)
+
+instance P.HasSelfLink (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
+    selfLink =
+        P.lens (_selfLink :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _selfLink = a } :: ComputeInstanceGroupData s)
+
+instance P.HasZone (ComputeInstanceGroupData s) (TF.Attr s P.Text) where
+    zone =
+        P.lens (_zone :: ComputeInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _zone = a } :: ComputeInstanceGroupData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -925,7 +1129,19 @@ instance s ~ s' => P.HasComputedSubnetworksSelfLinks (TF.Ref s' (ComputeNetworkD
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_region_instance_group.html terraform documentation>
 -- for more information.
 data ComputeRegionInstanceGroupData s = ComputeRegionInstanceGroupData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _project  :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    , _region   :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional, Forces New)
+    --
+    , _selfLink :: TF.Attr s P.Text
+    -- ^ @self_link@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_compute_region_instance_group@ datasource value.
 computeRegionInstanceGroupData
@@ -933,12 +1149,42 @@ computeRegionInstanceGroupData
 computeRegionInstanceGroupData =
     TF.unsafeDataSource "google_compute_region_instance_group" TF.validator $
         ComputeRegionInstanceGroupData'
+            { _name = TF.Nil
+            , _project = TF.Nil
+            , _region = TF.Nil
+            , _selfLink = TF.Nil
+            }
 
 instance TF.IsObject (ComputeRegionInstanceGroupData s) where
-    toObject _ = []
+    toObject ComputeRegionInstanceGroupData'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
+        , TF.assign "self_link" <$> TF.attribute _selfLink
+        ]
 
 instance TF.IsValid (ComputeRegionInstanceGroupData s) where
     validator = P.mempty
+
+instance P.HasName (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeRegionInstanceGroupData s)
+
+instance P.HasProject (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRegionInstanceGroupData s)
+
+instance P.HasRegion (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeRegionInstanceGroupData s)
+
+instance P.HasSelfLink (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) where
+    selfLink =
+        P.lens (_selfLink :: ComputeRegionInstanceGroupData s -> TF.Attr s P.Text)
+               (\s a -> s { _selfLink = a } :: ComputeRegionInstanceGroupData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -966,7 +1212,10 @@ instance s ~ s' => P.HasComputedSize (TF.Ref s' (ComputeRegionInstanceGroupData 
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_regions.html terraform documentation>
 -- for more information.
 data ComputeRegionsData s = ComputeRegionsData'
-    { _status :: TF.Attr s P.Text
+    { _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _status  :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -977,16 +1226,23 @@ computeRegionsData
 computeRegionsData =
     TF.unsafeDataSource "google_compute_regions" TF.validator $
         ComputeRegionsData'
-            { _status = TF.Nil
+            { _project = TF.Nil
+            , _status = TF.Nil
             }
 
 instance TF.IsObject (ComputeRegionsData s) where
     toObject ComputeRegionsData'{..} = P.catMaybes
-        [ TF.assign "status" <$> TF.attribute _status
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "status" <$> TF.attribute _status
         ]
 
 instance TF.IsValid (ComputeRegionsData s) where
     validator = P.mempty
+
+instance P.HasProject (ComputeRegionsData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeRegionsData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeRegionsData s)
 
 instance P.HasStatus (ComputeRegionsData s) (TF.Attr s P.Text) where
     status =
@@ -1077,8 +1333,14 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSslPolicyData s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_subnetwork.html terraform documentation>
 -- for more information.
 data ComputeSubnetworkData s = ComputeSubnetworkData'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1090,11 +1352,15 @@ computeSubnetworkData _name =
     TF.unsafeDataSource "google_compute_subnetwork" TF.validator $
         ComputeSubnetworkData'
             { _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeSubnetworkData s) where
     toObject ComputeSubnetworkData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeSubnetworkData s) where
@@ -1104,6 +1370,16 @@ instance P.HasName (ComputeSubnetworkData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeSubnetworkData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeSubnetworkData s)
+
+instance P.HasProject (ComputeSubnetworkData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeSubnetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeSubnetworkData s)
+
+instance P.HasRegion (ComputeSubnetworkData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeSubnetworkData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeSubnetworkData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1140,8 +1416,14 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkData s)) (
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_vpn_gateway.html terraform documentation>
 -- for more information.
 data ComputeVpnGatewayData s = ComputeVpnGatewayData'
-    { _name :: TF.Attr s P.Text
+    { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
+    --
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
+    -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
@@ -1153,11 +1435,15 @@ computeVpnGatewayData _name =
     TF.unsafeDataSource "google_compute_vpn_gateway" TF.validator $
         ComputeVpnGatewayData'
             { _name = _name
+            , _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ComputeVpnGatewayData s) where
     toObject ComputeVpnGatewayData'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ComputeVpnGatewayData s) where
@@ -1167,6 +1453,16 @@ instance P.HasName (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeVpnGatewayData s)
+
+instance P.HasProject (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeVpnGatewayData s)
+
+instance P.HasRegion (ComputeVpnGatewayData s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: ComputeVpnGatewayData s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: ComputeVpnGatewayData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeVpnGatewayData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
@@ -1191,10 +1487,13 @@ instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeVpnGatewayData s)) (
 -- See the <https://www.terraform.io/docs/providers/google/d/compute_zones.html terraform documentation>
 -- for more information.
 data ComputeZonesData s = ComputeZonesData'
-    { _region :: TF.Attr s P.Text
+    { _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
-    , _status :: TF.Attr s P.Text
+    , _status  :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1205,18 +1504,25 @@ computeZonesData
 computeZonesData =
     TF.unsafeDataSource "google_compute_zones" TF.validator $
         ComputeZonesData'
-            { _region = TF.Nil
+            { _project = TF.Nil
+            , _region = TF.Nil
             , _status = TF.Nil
             }
 
 instance TF.IsObject (ComputeZonesData s) where
     toObject ComputeZonesData'{..} = P.catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         , TF.assign "status" <$> TF.attribute _status
         ]
 
 instance TF.IsValid (ComputeZonesData s) where
     validator = P.mempty
+
+instance P.HasProject (ComputeZonesData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ComputeZonesData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ComputeZonesData s)
 
 instance P.HasRegion (ComputeZonesData s) (TF.Attr s P.Text) where
     region =
@@ -1452,16 +1758,19 @@ instance s ~ s' => P.HasComputedValidNodeVersions (TF.Ref s' (ContainerEngineVer
 -- See the <https://www.terraform.io/docs/providers/google/d/container_registry_image.html terraform documentation>
 -- for more information.
 data ContainerRegistryImageData s = ContainerRegistryImageData'
-    { _digest :: TF.Attr s P.Text
+    { _digest  :: TF.Attr s P.Text
     -- ^ @digest@ - (Optional)
     --
-    , _name   :: TF.Attr s P.Text
+    , _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _region :: TF.Attr s P.Text
+    , _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
-    , _tag    :: TF.Attr s P.Text
+    , _tag     :: TF.Attr s P.Text
     -- ^ @tag@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1475,6 +1784,7 @@ containerRegistryImageData _name =
         ContainerRegistryImageData'
             { _digest = TF.Nil
             , _name = _name
+            , _project = TF.Nil
             , _region = TF.Nil
             , _tag = TF.Nil
             }
@@ -1483,6 +1793,7 @@ instance TF.IsObject (ContainerRegistryImageData s) where
     toObject ContainerRegistryImageData'{..} = P.catMaybes
         [ TF.assign "digest" <$> TF.attribute _digest
         , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "project" <$> TF.attribute _project
         , TF.assign "region" <$> TF.attribute _region
         , TF.assign "tag" <$> TF.attribute _tag
         ]
@@ -1499,6 +1810,11 @@ instance P.HasName (ContainerRegistryImageData s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: ContainerRegistryImageData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ContainerRegistryImageData s)
+
+instance P.HasProject (ContainerRegistryImageData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ContainerRegistryImageData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ContainerRegistryImageData s)
 
 instance P.HasRegion (ContainerRegistryImageData s) (TF.Attr s P.Text) where
     region =
@@ -1524,7 +1840,10 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ContainerRegistryImageData s
 -- See the <https://www.terraform.io/docs/providers/google/d/container_registry_repository.html terraform documentation>
 -- for more information.
 data ContainerRegistryRepositoryData s = ContainerRegistryRepositoryData'
-    { _region :: TF.Attr s P.Text
+    { _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional)
+    --
+    , _region  :: TF.Attr s P.Text
     -- ^ @region@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1535,16 +1854,23 @@ containerRegistryRepositoryData
 containerRegistryRepositoryData =
     TF.unsafeDataSource "google_container_registry_repository" TF.validator $
         ContainerRegistryRepositoryData'
-            { _region = TF.Nil
+            { _project = TF.Nil
+            , _region = TF.Nil
             }
 
 instance TF.IsObject (ContainerRegistryRepositoryData s) where
     toObject ContainerRegistryRepositoryData'{..} = P.catMaybes
-        [ TF.assign "region" <$> TF.attribute _region
+        [ TF.assign "project" <$> TF.attribute _project
+        , TF.assign "region" <$> TF.attribute _region
         ]
 
 instance TF.IsValid (ContainerRegistryRepositoryData s) where
     validator = P.mempty
+
+instance P.HasProject (ContainerRegistryRepositoryData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: ContainerRegistryRepositoryData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: ContainerRegistryRepositoryData s)
 
 instance P.HasRegion (ContainerRegistryRepositoryData s) (TF.Attr s P.Text) where
     region =
@@ -1805,9 +2131,18 @@ instance s ~ s' => P.HasComputedCidrBlocksIpv6 (TF.Ref s' (NetblockIpRangesData 
 -- See the <https://www.terraform.io/docs/providers/google/d/organization.html terraform documentation>
 -- for more information.
 data OrganizationData s = OrganizationData'
-    { _organization :: TF.Attr s P.Text
+    { _domain       :: TF.Attr s P.Text
+    -- ^ @domain@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'organization'
+    , _organization :: TF.Attr s P.Text
     -- ^ @organization@ - (Optional)
     --
+    -- Conflicts with:
+    --
+    -- * 'domain'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_organization@ datasource value.
@@ -1816,16 +2151,34 @@ organizationData
 organizationData =
     TF.unsafeDataSource "google_organization" TF.validator $
         OrganizationData'
-            { _organization = TF.Nil
+            { _domain = TF.Nil
+            , _organization = TF.Nil
             }
 
 instance TF.IsObject (OrganizationData s) where
     toObject OrganizationData'{..} = P.catMaybes
-        [ TF.assign "organization" <$> TF.attribute _organization
+        [ TF.assign "domain" <$> TF.attribute _domain
+        , TF.assign "organization" <$> TF.attribute _organization
         ]
 
 instance TF.IsValid (OrganizationData s) where
-    validator = P.mempty
+    validator = TF.fieldsValidator (\OrganizationData'{..} -> Map.fromList $ P.catMaybes
+        [ if (_domain P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_domain",
+                            [ "_organization"
+                            ])
+        , if (_organization P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_organization",
+                            [ "_domain"
+                            ])
+        ])
+
+instance P.HasDomain (OrganizationData s) (TF.Attr s P.Text) where
+    domain =
+        P.lens (_domain :: OrganizationData s -> TF.Attr s P.Text)
+               (\s a -> s { _domain = a } :: OrganizationData s)
 
 instance P.HasOrganization (OrganizationData s) (TF.Attr s P.Text) where
     organization =
@@ -2156,7 +2509,10 @@ instance s ~ s' => P.HasComputedSignedUrl (TF.Ref s' (StorageObjectSignedUrlData
 -- See the <https://www.terraform.io/docs/providers/google/d/storage_project_service_account.html terraform documentation>
 -- for more information.
 data StorageProjectServiceAccountData s = StorageProjectServiceAccountData'
-    deriving (P.Show, P.Eq, P.Ord)
+    { _project :: TF.Attr s P.Text
+    -- ^ @project@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_storage_project_service_account@ datasource value.
 storageProjectServiceAccountData
@@ -2164,12 +2520,21 @@ storageProjectServiceAccountData
 storageProjectServiceAccountData =
     TF.unsafeDataSource "google_storage_project_service_account" TF.validator $
         StorageProjectServiceAccountData'
+            { _project = TF.Nil
+            }
 
 instance TF.IsObject (StorageProjectServiceAccountData s) where
-    toObject _ = []
+    toObject StorageProjectServiceAccountData'{..} = P.catMaybes
+        [ TF.assign "project" <$> TF.attribute _project
+        ]
 
 instance TF.IsValid (StorageProjectServiceAccountData s) where
     validator = P.mempty
+
+instance P.HasProject (StorageProjectServiceAccountData s) (TF.Attr s P.Text) where
+    project =
+        P.lens (_project :: StorageProjectServiceAccountData s -> TF.Attr s P.Text)
+               (\s a -> s { _project = a } :: StorageProjectServiceAccountData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageProjectServiceAccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
