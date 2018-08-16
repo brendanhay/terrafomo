@@ -190,6 +190,9 @@ instance P.HasVlanId (FabricResource s) (TF.Attr s P.Int) where
         P.lens (_vlanId :: FabricResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: FabricResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FabricResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedFabric (TF.Ref s' (FabricResource s)) (TF.Attr s P.Bool) where
     computedFabric x = TF.compute (TF.refKey x) "fabric"
 
@@ -256,6 +259,9 @@ instance P.HasRule (FirewallRuleResource s) (TF.Attr s P.Text) where
     rule =
         P.lens (_rule :: FirewallRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _rule = a } :: FirewallRuleResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallRuleResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedGlobal (TF.Ref s' (FirewallRuleResource s)) (TF.Attr s P.Bool) where
     computedGlobal x = TF.compute (TF.refKey x) "global"
@@ -328,6 +334,9 @@ instance P.HasTemplateName (InstanceTemplateResource s) (TF.Attr s P.Text) where
         P.lens (_templateName :: InstanceTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _templateName = a } :: InstanceTemplateResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedMetadata (TF.Ref s' (InstanceTemplateResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedMetadata x = TF.compute (TF.refKey x) "metadata"
 
@@ -372,6 +381,9 @@ instance P.HasKey (KeyResource s) (TF.Attr s P.Text) where
     key =
         P.lens (_key :: KeyResource s -> TF.Attr s P.Text)
                (\s a -> s { _key = a } :: KeyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (KeyResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
@@ -546,6 +558,9 @@ instance P.HasUserScript (MachineResource s) (TF.Attr s P.Text) where
         P.lens (_userScript :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _userScript = a } :: MachineResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedComputeNode (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedComputeNode x = TF.compute (TF.refKey x) "compute_node"
 
@@ -630,6 +645,9 @@ instance P.HasTemplate (ServiceGroupResource s) (TF.Attr s P.Text) where
         P.lens (_template :: ServiceGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _template = a } :: ServiceGroupResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 instance s ~ s' => P.HasComputedCapacity (TF.Ref s' (ServiceGroupResource s)) (TF.Attr s P.Int) where
     computedCapacity x = TF.compute (TF.refKey x) "capacity"
 
@@ -675,6 +693,9 @@ instance P.HasName (SnapshotResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: SnapshotResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SnapshotResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedState (TF.Ref s' (SnapshotResource s)) (TF.Attr s P.Text) where
     computedState x = TF.compute (TF.refKey x) "state"
@@ -734,3 +755,6 @@ instance P.HasVlanId (VlanResource s) (TF.Attr s P.Int) where
     vlanId =
         P.lens (_vlanId :: VlanResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: VlanResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VlanResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
