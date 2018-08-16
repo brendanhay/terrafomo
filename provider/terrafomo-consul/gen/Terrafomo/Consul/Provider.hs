@@ -20,6 +20,7 @@ module Terrafomo.Consul.Provider
     -- * Consul Provider Datatype
       Provider (..)
     , newProvider
+    , defaultProvider
 
     -- * Consul Specific Aliases
     , DataSource
@@ -34,10 +35,9 @@ import GHC.Base (($))
 
 import Terrafomo.Consul.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
-import qualified Data.HashMap.Strict    as Map
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
+import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
 import qualified Data.Monoid            as P
 import qualified Data.Text              as P
@@ -88,7 +88,7 @@ data Provider = Provider'
     , _token         :: P.Maybe P.Text
     -- ^ @token@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 newProvider
     :: Provider
@@ -105,29 +105,26 @@ newProvider =
         , _token = P.Nothing
         }
 
-instance P.Hashable Provider
+defaultProvider :: TF.Provider (P.Maybe Provider)
+defaultProvider =
+    TF.Provider
+        { _providerType   = TF.Type P.Nothing "provider"
+        , _providerAlias  = P.Nothing
+        , _providerConfig = P.Nothing
+        }
 
-instance TF.IsSection Provider where
-    toSection x@Provider'{..} =
-        let typ = TF.providerType (Proxy :: Proxy (Provider))
-            key = TF.providerKey x
-         in TF.section "provider" [TF.type_ typ]
-          & TF.pairs
-              (P.catMaybes
-                  [ P.Just $ TF.assign "alias" (TF.toValue (TF.keyName key))
-                  , TF.assign "address" <$> _address
-                  , TF.assign "ca_file" <$> _caFile
-                  , TF.assign "cert_file" <$> _certFile
-                  , TF.assign "datacenter" <$> _datacenter
-                  , TF.assign "http_auth" <$> _httpAuth
-                  , P.Just $ TF.assign "insecure_https" _insecureHttps
-                  , TF.assign "key_file" <$> _keyFile
-                  , TF.assign "scheme" <$> _scheme
-                  , TF.assign "token" <$> _token
-                  ])
-
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "provider"
+instance TF.IsObject Provider where
+    toObject Provider'{..} = P.catMaybes
+        [  TF.assign "address" <$> _address
+        ,  TF.assign "ca_file" <$> _caFile
+        ,  TF.assign "cert_file" <$> _certFile
+        ,  TF.assign "datacenter" <$> _datacenter
+        ,  TF.assign "http_auth" <$> _httpAuth
+        ,  P.Just $ TF.assign "insecure_https" _insecureHttps
+        ,  TF.assign "key_file" <$> _keyFile
+        ,  TF.assign "scheme" <$> _scheme
+        ,  TF.assign "token" <$> _token
+        ]
 
 instance TF.IsValid (Provider) where
     validator = P.mempty

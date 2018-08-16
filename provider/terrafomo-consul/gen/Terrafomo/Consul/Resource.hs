@@ -58,10 +58,9 @@ import GHC.Base (($))
 
 import Terrafomo.Consul.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
-import qualified Data.HashMap.Strict       as Map
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
+import qualified Data.Map.Strict           as Map
 import qualified Data.Maybe                as P
 import qualified Data.Monoid               as P
 import qualified Data.Text                 as P
@@ -85,19 +84,19 @@ data AgentServiceResource s = AgentServiceResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _port :: TF.Attr s P.Integer
+    , _port :: TF.Attr s P.Int
     -- ^ @port@ - (Optional, Forces New)
     --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 agentServiceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (AgentServiceResource s)
 agentServiceResource _name =
-    TF.newResource "consul_agent_service" TF.validator $
+    TF.unsafeResource "consul_agent_service" P.defaultProvider TF.validator $
         AgentServiceResource'
             { _name = _name
             , _port = TF.Nil
@@ -119,9 +118,9 @@ instance P.HasName (AgentServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AgentServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AgentServiceResource s)
 
-instance P.HasPort (AgentServiceResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (AgentServiceResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: AgentServiceResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: AgentServiceResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: AgentServiceResource s)
 
 instance P.HasTags (AgentServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -143,20 +142,20 @@ data CatalogEntryResource s = CatalogEntryResource'
     , _node    :: TF.Attr s P.Text
     -- ^ @node@ - (Required, Forces New)
     --
-    , _service :: TF.Attr s [TF.Attr s (CatalogEntryService s)]
+    , _service :: TF.Attr s [TF.Attr s (ServiceSetting s)]
     -- ^ @service@ - (Optional, Forces New)
     --
     , _token   :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 catalogEntryResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
     -> P.Resource (CatalogEntryResource s)
 catalogEntryResource _address _node =
-    TF.newResource "consul_catalog_entry" TF.validator $
+    TF.unsafeResource "consul_catalog_entry" P.defaultProvider TF.validator $
         CatalogEntryResource'
             { _address = _address
             , _node = _node
@@ -174,10 +173,6 @@ instance TF.IsObject (CatalogEntryResource s) where
 
 instance TF.IsValid (CatalogEntryResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_service"
-                  (_service
-                      :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (CatalogEntryService s)])
-                  TF.validator
 
 instance P.HasAddress (CatalogEntryResource s) (TF.Attr s P.Text) where
     address =
@@ -189,9 +184,9 @@ instance P.HasNode (CatalogEntryResource s) (TF.Attr s P.Text) where
         P.lens (_node :: CatalogEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _node = a } :: CatalogEntryResource s)
 
-instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (CatalogEntryService s)]) where
+instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (ServiceSetting s)]) where
     service =
-        P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (CatalogEntryService s)])
+        P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (ServiceSetting s)])
                (\s a -> s { _service = a } :: CatalogEntryResource s)
 
 instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
@@ -216,13 +211,13 @@ data IntentionResource s = IntentionResource'
     , _destinationName :: TF.Attr s P.Text
     -- ^ @destination_name@ - (Required)
     --
-    , _meta            :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _meta            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @meta@ - (Optional)
     --
     , _sourceName      :: TF.Attr s P.Text
     -- ^ @source_name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 intentionResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
@@ -230,7 +225,7 @@ intentionResource
     -> TF.Attr s P.Text -- ^ @source_name@ - 'P.sourceName'
     -> P.Resource (IntentionResource s)
 intentionResource _action _destinationName _sourceName =
-    TF.newResource "consul_intention" TF.validator $
+    TF.unsafeResource "consul_intention" P.defaultProvider TF.validator $
         IntentionResource'
             { _action = _action
             , _description = TF.Nil
@@ -266,9 +261,9 @@ instance P.HasDestinationName (IntentionResource s) (TF.Attr s P.Text) where
         P.lens (_destinationName :: IntentionResource s -> TF.Attr s P.Text)
                (\s a -> s { _destinationName = a } :: IntentionResource s)
 
-instance P.HasMeta (IntentionResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasMeta (IntentionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     meta =
-        P.lens (_meta :: IntentionResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_meta :: IntentionResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _meta = a } :: IntentionResource s)
 
 instance P.HasSourceName (IntentionResource s) (TF.Attr s P.Text) where
@@ -284,20 +279,20 @@ data KeyPrefixResource s = KeyPrefixResource'
     { _pathPrefix :: TF.Attr s P.Text
     -- ^ @path_prefix@ - (Required, Forces New)
     --
-    , _subkeys    :: TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))
+    , _subkeys    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @subkeys@ - (Required)
     --
     , _token      :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 keyPrefixResource
     :: TF.Attr s P.Text -- ^ @path_prefix@ - 'P.pathPrefix'
-    -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
+    -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @subkeys@ - 'P.subkeys'
     -> P.Resource (KeyPrefixResource s)
 keyPrefixResource _pathPrefix _subkeys =
-    TF.newResource "consul_key_prefix" TF.validator $
+    TF.unsafeResource "consul_key_prefix" P.defaultProvider TF.validator $
         KeyPrefixResource'
             { _pathPrefix = _pathPrefix
             , _subkeys = _subkeys
@@ -319,9 +314,9 @@ instance P.HasPathPrefix (KeyPrefixResource s) (TF.Attr s P.Text) where
         P.lens (_pathPrefix :: KeyPrefixResource s -> TF.Attr s P.Text)
                (\s a -> s { _pathPrefix = a } :: KeyPrefixResource s)
 
-instance P.HasSubkeys (KeyPrefixResource s) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance P.HasSubkeys (KeyPrefixResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     subkeys =
-        P.lens (_subkeys :: KeyPrefixResource s -> TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text)))
+        P.lens (_subkeys :: KeyPrefixResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _subkeys = a } :: KeyPrefixResource s)
 
 instance P.HasToken (KeyPrefixResource s) (TF.Attr s P.Text) where
@@ -337,18 +332,18 @@ instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeyPrefixResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/consul/r/keys.html terraform documentation>
 -- for more information.
 data KeysResource s = KeysResource'
-    { _key   :: TF.Attr s [TF.Attr s (KeysKey s)]
+    { _key   :: TF.Attr s [TF.Attr s (KeySetting s)]
     -- ^ @key@ - (Optional)
     --
     , _token :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 keysResource
     :: P.Resource (KeysResource s)
 keysResource =
-    TF.newResource "consul_keys" TF.validator $
+    TF.unsafeResource "consul_keys" P.defaultProvider TF.validator $
         KeysResource'
             { _key = TF.Nil
             , _token = TF.Nil
@@ -362,14 +357,10 @@ instance TF.IsObject (KeysResource s) where
 
 instance TF.IsValid (KeysResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_key"
-                  (_key
-                      :: KeysResource s -> TF.Attr s [TF.Attr s (KeysKey s)])
-                  TF.validator
 
-instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (KeysKey s)]) where
+instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (KeySetting s)]) where
     key =
-        P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (KeysKey s)])
+        P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (KeySetting s)])
                (\s a -> s { _key = a } :: KeysResource s)
 
 instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
@@ -380,7 +371,7 @@ instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedDatacenter (TF.Ref s' (KeysResource s)) (TF.Attr s P.Text) where
     computedDatacenter x = TF.compute (TF.refKey x) "datacenter"
 
-instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeysResource s)) (TF.Attr s (P.HashMap P.Text (TF.Attr s P.Text))) where
+instance s ~ s' => P.HasComputedVar (TF.Ref s' (KeysResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedVar x = TF.compute (TF.refKey x) "var"
 
 -- | @consul_node@ Resource.
@@ -397,14 +388,14 @@ data NodeResource s = NodeResource'
     , _token   :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 nodeResource
     :: TF.Attr s P.Text -- ^ @address@ - 'P.address'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (NodeResource s)
 nodeResource _address _name =
-    TF.newResource "consul_node" TF.validator $
+    TF.unsafeResource "consul_node" P.defaultProvider TF.validator $
         NodeResource'
             { _address = _address
             , _name = _name
@@ -447,10 +438,10 @@ data PreparedQueryResource s = PreparedQueryResource'
     { _datacenter  :: TF.Attr s P.Text
     -- ^ @datacenter@ - (Optional)
     --
-    , _dns         :: TF.Attr s (PreparedQueryDns s)
+    , _dns         :: TF.Attr s (DnsSetting s)
     -- ^ @dns@ - (Optional)
     --
-    , _failover    :: TF.Attr s (PreparedQueryFailover s)
+    , _failover    :: TF.Attr s (FailoverSetting s)
     -- ^ @failover@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -474,20 +465,20 @@ data PreparedQueryResource s = PreparedQueryResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _template    :: TF.Attr s (PreparedQueryTemplate s)
+    , _template    :: TF.Attr s (TemplateSetting s)
     -- ^ @template@ - (Optional)
     --
     , _token       :: TF.Attr s P.Text
     -- ^ @token@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 preparedQueryResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @service@ - 'P.service'
     -> P.Resource (PreparedQueryResource s)
 preparedQueryResource _name _service =
-    TF.newResource "consul_prepared_query" TF.validator $
+    TF.unsafeResource "consul_prepared_query" P.defaultProvider TF.validator $
         PreparedQueryResource'
             { _datacenter = TF.Nil
             , _dns = TF.Nil
@@ -523,15 +514,15 @@ instance TF.IsValid (PreparedQueryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dns"
                   (_dns
-                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryDns s))
+                      :: PreparedQueryResource s -> TF.Attr s (DnsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_failover"
                   (_failover
-                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryFailover s))
+                      :: PreparedQueryResource s -> TF.Attr s (FailoverSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_template"
                   (_template
-                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryTemplate s))
+                      :: PreparedQueryResource s -> TF.Attr s (TemplateSetting s))
                   TF.validator
 
 instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -539,14 +530,14 @@ instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
         P.lens (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
                (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
-instance P.HasDns (PreparedQueryResource s) (TF.Attr s (PreparedQueryDns s)) where
+instance P.HasDns (PreparedQueryResource s) (TF.Attr s (DnsSetting s)) where
     dns =
-        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (PreparedQueryDns s))
+        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (DnsSetting s))
                (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
-instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (PreparedQueryFailover s)) where
+instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (FailoverSetting s)) where
     failover =
-        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (PreparedQueryFailover s))
+        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (FailoverSetting s))
                (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
 instance P.HasName (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -584,9 +575,9 @@ instance P.HasTags (PreparedQueryResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_tags :: PreparedQueryResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
-instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (PreparedQueryTemplate s)) where
+instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (TemplateSetting s)) where
     template =
-        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (PreparedQueryTemplate s))
+        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (TemplateSetting s))
                (\s a -> s { _template = a } :: PreparedQueryResource s)
 
 instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -605,20 +596,20 @@ data ServiceResource s = ServiceResource'
     , _node :: TF.Attr s P.Text
     -- ^ @node@ - (Required, Forces New)
     --
-    , _port :: TF.Attr s P.Integer
+    , _port :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @node@ - 'P.node'
     -> P.Resource (ServiceResource s)
 serviceResource _name _node =
-    TF.newResource "consul_service" TF.validator $
+    TF.unsafeResource "consul_service" P.defaultProvider TF.validator $
         ServiceResource'
             { _name = _name
             , _node = _node
@@ -647,9 +638,9 @@ instance P.HasNode (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_node :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _node = a } :: ServiceResource s)
 
-instance P.HasPort (ServiceResource s) (TF.Attr s P.Integer) where
+instance P.HasPort (ServiceResource s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: ServiceResource s -> TF.Attr s P.Integer)
+        P.lens (_port :: ServiceResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: ServiceResource s)
 
 instance P.HasTags (ServiceResource s) (TF.Attr s [TF.Attr s P.Text]) where
