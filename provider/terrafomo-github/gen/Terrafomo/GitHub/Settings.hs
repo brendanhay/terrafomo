@@ -19,15 +19,15 @@ module Terrafomo.GitHub.Settings
     (
     -- ** required_pull_request_reviews
       RequiredPullRequestReviewsSetting (..)
-    , newRequiredPullRequestReviewsSetting
+    , requiredPullRequestReviewsSetting
 
     -- ** required_status_checks
     , RequiredStatusChecksSetting (..)
-    , newRequiredStatusChecksSetting
+    , requiredStatusChecksSetting
 
     -- ** restrictions
     , RestrictionsSetting (..)
-    , newRestrictionsSetting
+    , restrictionsSetting
 
     ) where
 
@@ -69,9 +69,9 @@ data RequiredPullRequestReviewsSetting s = RequiredPullRequestReviewsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @required_pull_request_reviews@ settings value.
-newRequiredPullRequestReviewsSetting
+requiredPullRequestReviewsSetting
     :: RequiredPullRequestReviewsSetting s
-newRequiredPullRequestReviewsSetting =
+requiredPullRequestReviewsSetting =
     RequiredPullRequestReviewsSetting'
         { _dismissStaleReviews = TF.value P.False
         , _dismissalTeams = TF.Nil
@@ -122,9 +122,9 @@ data RequiredStatusChecksSetting s = RequiredStatusChecksSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @required_status_checks@ settings value.
-newRequiredStatusChecksSetting
+requiredStatusChecksSetting
     :: RequiredStatusChecksSetting s
-newRequiredStatusChecksSetting =
+requiredStatusChecksSetting =
     RequiredStatusChecksSetting'
         { _contexts = TF.Nil
         , _strict = TF.value P.False
@@ -161,9 +161,9 @@ data RestrictionsSetting s = RestrictionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @restrictions@ settings value.
-newRestrictionsSetting
+restrictionsSetting
     :: RestrictionsSetting s
-newRestrictionsSetting =
+restrictionsSetting =
     RestrictionsSetting'
         { _teams = TF.Nil
         , _users = TF.Nil
