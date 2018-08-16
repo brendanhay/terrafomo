@@ -30,10 +30,9 @@ import GHC.Base (($))
 
 import Terrafomo.Lailgun.Settings
 
-import qualified Data.Hashable              as P
-import qualified Data.HashMap.Strict        as P
-import qualified Data.HashMap.Strict        as Map
 import qualified Data.List.NonEmpty         as P
+import qualified Data.Map.Strict            as P
+import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
 import qualified Data.Monoid                as P
 import qualified Data.Text                  as P
@@ -60,14 +59,14 @@ data DomainResource s = DomainResource'
     , _smtpPassword :: TF.Attr s P.Text
     -- ^ @smtp_password@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show, P.Eq, P.Ord)
 
 domainResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> TF.Attr s P.Text -- ^ @smtp_password@ - 'P.smtpPassword'
     -> P.Resource (DomainResource s)
 domainResource _name _smtpPassword =
-    TF.newResource "mailgun_domain" TF.validator $
+    TF.unsafeResource "mailgun_domain" P.defaultProvider TF.validator $
         DomainResource'
             { _name = _name
             , _smtpPassword = _smtpPassword
@@ -92,10 +91,10 @@ instance P.HasSmtpPassword (DomainResource s) (TF.Attr s P.Text) where
         P.lens (_smtpPassword :: DomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _smtpPassword = a } :: DomainResource s)
 
-instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (DomainReceivingRecords s)]) where
+instance s ~ s' => P.HasComputedReceivingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (ReceivingRecordsSetting s)]) where
     computedReceivingRecords x = TF.compute (TF.refKey x) "receiving_records"
 
-instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (DomainSendingRecords s)]) where
+instance s ~ s' => P.HasComputedSendingRecords (TF.Ref s' (DomainResource s)) (TF.Attr s [TF.Attr s (SendingRecordsSetting s)]) where
     computedSendingRecords x = TF.compute (TF.refKey x) "sending_records"
 
 instance s ~ s' => P.HasComputedSmtpLogin (TF.Ref s' (DomainResource s)) (TF.Attr s P.Text) where

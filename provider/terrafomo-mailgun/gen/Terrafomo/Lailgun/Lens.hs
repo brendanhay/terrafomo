@@ -15,33 +15,27 @@ module Terrafomo.Lailgun.Lens
     (
     -- * Overloaded Fields
     -- ** Arguments
-      HasSmtpPassword (..)
-    , HasApiKey (..)
+      HasApiKey (..)
     , HasName (..)
+    , HasSmtpPassword (..)
 
     -- ** Computed Attributes
-    , HasComputedValid (..)
-    , HasComputedValue (..)
-    , HasComputedSendingRecords (..)
-    , HasComputedPriority (..)
-    , HasComputedWildcard (..)
-    , HasComputedSmtpLogin (..)
     , HasComputedName (..)
+    , HasComputedPriority (..)
     , HasComputedReceivingRecords (..)
     , HasComputedRecordType (..)
+    , HasComputedSendingRecords (..)
+    , HasComputedSmtpLogin (..)
     , HasComputedSpamAction (..)
+    , HasComputedValid (..)
+    , HasComputedValue (..)
+    , HasComputedWildcard (..)
     ) where
 
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
-
-class HasSmtpPassword a b | a -> b where
-    smtpPassword :: P.Lens' a b
-
-instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
-    smtpPassword = TF.configuration . smtpPassword
 
 class HasApiKey a b | a -> b where
     apiKey :: P.Lens' a b
@@ -55,26 +49,17 @@ class HasName a b | a -> b where
 instance HasName a b => HasName (TF.Schema l p a) b where
     name = TF.configuration . name
 
-class HasComputedValid a b | a -> b where
-    computedValid :: a -> b
+class HasSmtpPassword a b | a -> b where
+    smtpPassword :: P.Lens' a b
 
-class HasComputedValue a b | a -> b where
-    computedValue :: a -> b
-
-class HasComputedSendingRecords a b | a -> b where
-    computedSendingRecords :: a -> b
-
-class HasComputedPriority a b | a -> b where
-    computedPriority :: a -> b
-
-class HasComputedWildcard a b | a -> b where
-    computedWildcard :: a -> b
-
-class HasComputedSmtpLogin a b | a -> b where
-    computedSmtpLogin :: a -> b
+instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
+    smtpPassword = TF.configuration . smtpPassword
 
 class HasComputedName a b | a -> b where
     computedName :: a -> b
+
+class HasComputedPriority a b | a -> b where
+    computedPriority :: a -> b
 
 class HasComputedReceivingRecords a b | a -> b where
     computedReceivingRecords :: a -> b
@@ -82,5 +67,20 @@ class HasComputedReceivingRecords a b | a -> b where
 class HasComputedRecordType a b | a -> b where
     computedRecordType :: a -> b
 
+class HasComputedSendingRecords a b | a -> b where
+    computedSendingRecords :: a -> b
+
+class HasComputedSmtpLogin a b | a -> b where
+    computedSmtpLogin :: a -> b
+
 class HasComputedSpamAction a b | a -> b where
     computedSpamAction :: a -> b
+
+class HasComputedValid a b | a -> b where
+    computedValid :: a -> b
+
+class HasComputedValue a b | a -> b where
+    computedValue :: a -> b
+
+class HasComputedWildcard a b | a -> b where
+    computedWildcard :: a -> b
