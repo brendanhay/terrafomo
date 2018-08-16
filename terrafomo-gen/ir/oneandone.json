@@ -969,23 +969,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_protocol",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
-                    "name": "_protocol",
-                    "method": "protocol",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasProtocol",
-                    "validate": false,
-                    "optional": false,
-                    "original": "protocol"
-                },
-                {
                     "default": "_portBalancer",
                     "computed": false,
                     "required": true,
@@ -1001,6 +984,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "port_balancer"
+                },
+                {
+                    "default": "_protocol",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"protocol\" <$> TF.attribute",
+                    "name": "_protocol",
+                    "method": "protocol",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasProtocol",
+                    "validate": false,
+                    "optional": false,
+                    "original": "protocol"
                 },
                 {
                     "default": "_portServer",
