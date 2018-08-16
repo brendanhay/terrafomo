@@ -231,6 +231,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"restriction\" <$> TF.attribute",
                     "name": "_restriction",
                     "method": "restriction",
@@ -346,7 +363,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -1778,6 +1795,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "extension_schema"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/extension.html",
@@ -1816,7 +1867,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -1833,7 +1884,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "type"
                 }
             ],
@@ -2284,6 +2335,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"incident_urgency_rule\" <$> TF.attribute",
+                    "name": "_incidentUrgencyRule",
+                    "method": "incidentUrgencyRule",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (IncidentUrgencyRuleSetting s)",
+                    "class": "HasIncidentUrgencyRule",
+                    "validate": true,
+                    "optional": true,
+                    "original": "incident_urgency_rule"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
@@ -2383,7 +2451,7 @@
                     "type": "TF.Attr s (IncidentUrgencyRuleSetting s)",
                     "class": "HasComputedIncidentUrgencyRule",
                     "validate": true,
-                    "optional": true,
+                    "optional": false,
                     "original": "incident_urgency_rule"
                 },
                 {
@@ -2456,6 +2524,40 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"integration_email\" <$> TF.attribute",
+                    "name": "_integrationEmail",
+                    "method": "integrationEmail",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIntegrationEmail",
+                    "validate": false,
+                    "optional": true,
+                    "original": "integration_email"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"integration_key\" <$> TF.attribute",
+                    "name": "_integrationKey",
+                    "method": "integrationKey",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasIntegrationKey",
+                    "validate": false,
+                    "optional": true,
+                    "original": "integration_key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"name\" <$> TF.attribute",
                     "name": "_name",
                     "method": "name",
@@ -2483,6 +2585,52 @@
                     "validate": false,
                     "optional": false,
                     "original": "service"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vendor",
+                            "method": "vendor"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vendor\" <$> TF.attribute",
+                    "name": "_vendor",
+                    "method": "vendor",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_type'",
+                            "method": "type'"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVendor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vendor"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/service_integration.html",
@@ -2538,7 +2686,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIntegrationEmail",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "integration_email"
                 },
                 {
@@ -2555,7 +2703,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedIntegrationKey",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "integration_key"
                 },
                 {
@@ -2574,7 +2722,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedType",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "type"
                 },
                 {
@@ -2593,7 +2741,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedVendor",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "vendor"
                 }
             ],
@@ -2616,7 +2764,54 @@
                     "original": "service"
                 }
             ],
-            "conflicts": [],
+            "conflicts": [
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"type\" <$> TF.attribute",
+                    "name": "_type'",
+                    "method": "type'",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_vendor",
+                            "method": "vendor"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasType'",
+                    "validate": false,
+                    "optional": true,
+                    "original": "type"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"vendor\" <$> TF.attribute",
+                    "name": "_vendor",
+                    "method": "vendor",
+                    "threaded": true,
+                    "conflicts": [
+                        {
+                            "default": "TF.Nil",
+                            "name": "_type'",
+                            "method": "type'"
+                        }
+                    ],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasVendor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "vendor"
+                }
+            ],
             "type": "ServiceIntegrationResource s",
             "original": "pagerduty_service_integration"
         },
@@ -2818,6 +3013,23 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"color\" <$> TF.attribute",
+                    "name": "_color",
+                    "method": "color",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasColor",
+                    "validate": false,
+                    "optional": true,
+                    "original": "color"
+                },
+                {
                     "default": "TF.value \"Managed by Terraform\"",
                     "computed": false,
                     "required": false,
@@ -2918,6 +3130,23 @@
                     "validate": false,
                     "optional": true,
                     "original": "teams"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"time_zone\" <$> TF.attribute",
+                    "name": "_timeZone",
+                    "method": "timeZone",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasTimeZone",
+                    "validate": false,
+                    "optional": true,
+                    "original": "time_zone"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/pagerduty/r/user.html",
@@ -2973,7 +3202,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedColor",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "color"
                 },
                 {
@@ -3024,7 +3253,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedTimeZone",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "time_zone"
                 }
             ],
