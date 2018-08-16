@@ -81,7 +81,7 @@ datacenterData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (DatacenterData s)
 datacenterData _name =
-    TF.unsafeDataSource "profitbricks_datacenter" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "profitbricks_datacenter" TF.validator $
         DatacenterData'
             { _location = TF.Nil
             , _name = _name
@@ -131,7 +131,7 @@ data ImageData s = ImageData'
 imageData
     :: P.DataSource (ImageData s)
 imageData =
-    TF.unsafeDataSource "profitbricks_image" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "profitbricks_image" TF.validator $
         ImageData'
             { _location = TF.Nil
             , _name = TF.Nil
@@ -189,7 +189,7 @@ data LocationData s = LocationData'
 locationData
     :: P.DataSource (LocationData s)
 locationData =
-    TF.unsafeDataSource "profitbricks_location" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "profitbricks_location" TF.validator $
         LocationData'
             { _feature = TF.Nil
             , _name = TF.Nil
@@ -233,7 +233,7 @@ data ResourceData s = ResourceData'
 resourceData
     :: P.DataSource (ResourceData s)
 resourceData =
-    TF.unsafeDataSource "profitbricks_resource" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "profitbricks_resource" TF.validator $
         ResourceData'
             { _resourceId = TF.Nil
             , _resourceType = TF.Nil
@@ -281,7 +281,7 @@ snapshotData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SnapshotData s)
 snapshotData _name =
-    TF.unsafeDataSource "profitbricks_snapshot" P.defaultProvider TF.validator $
+    TF.unsafeDataSource "profitbricks_snapshot" TF.validator $
         SnapshotData'
             { _location = TF.Nil
             , _name = _name
