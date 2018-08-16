@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "awsElasticBlockStoreSetting",
+                "smart": "newAwsElasticBlockStoreSetting",
                 "name": "AwsElasticBlockStoreSetting'"
             },
             "arguments": [
@@ -124,7 +124,7 @@
         },
         {
             "con": {
-                "smart": "azureDiskSetting",
+                "smart": "newAzureDiskSetting",
                 "name": "AzureDiskSetting'"
             },
             "arguments": [
@@ -296,7 +296,7 @@
         },
         {
             "con": {
-                "smart": "azureFileSetting",
+                "smart": "newAzureFileSetting",
                 "name": "AzureFileSetting'"
             },
             "arguments": [
@@ -409,7 +409,7 @@
         },
         {
             "con": {
-                "smart": "capabilitiesSetting",
+                "smart": "newCapabilitiesSetting",
                 "name": "CapabilitiesSetting'"
             },
             "arguments": [
@@ -463,7 +463,7 @@
         },
         {
             "con": {
-                "smart": "cephFsSetting",
+                "smart": "newCephFsSetting",
                 "name": "CephFsSetting'"
             },
             "arguments": [
@@ -621,7 +621,7 @@
         },
         {
             "con": {
-                "smart": "cinderSetting",
+                "smart": "newCinderSetting",
                 "name": "CinderSetting'"
             },
             "arguments": [
@@ -721,7 +721,7 @@
         },
         {
             "con": {
-                "smart": "configMapSetting",
+                "smart": "newConfigMapSetting",
                 "name": "ConfigMapSetting'"
             },
             "arguments": [
@@ -805,7 +805,7 @@
         },
         {
             "con": {
-                "smart": "configMapKeyRefSetting",
+                "smart": "newConfigMapKeyRefSetting",
                 "name": "ConfigMapKeyRefSetting'"
             },
             "arguments": [
@@ -860,7 +860,7 @@
         },
         {
             "con": {
-                "smart": "containerSetting",
+                "smart": "newContainerSetting",
                 "name": "ContainerSetting'"
             },
             "arguments": [
@@ -1324,7 +1324,7 @@
         },
         {
             "con": {
-                "smart": "downwardApiSetting",
+                "smart": "newDownwardApiSetting",
                 "name": "DownwardApiSetting'"
             },
             "arguments": [
@@ -1388,7 +1388,7 @@
         },
         {
             "con": {
-                "smart": "emptyDirSetting",
+                "smart": "newEmptyDirSetting",
                 "name": "EmptyDirSetting'"
             },
             "arguments": [
@@ -1426,7 +1426,7 @@
         },
         {
             "con": {
-                "smart": "envSetting",
+                "smart": "newEnvSetting",
                 "name": "EnvSetting'"
             },
             "arguments": [
@@ -1524,7 +1524,7 @@
         },
         {
             "con": {
-                "smart": "execSetting",
+                "smart": "newExecSetting",
                 "name": "ExecSetting'"
             },
             "arguments": [
@@ -1563,7 +1563,7 @@
         },
         {
             "con": {
-                "smart": "fcSetting",
+                "smart": "newFcSetting",
                 "name": "FcSetting'"
             },
             "arguments": [
@@ -1697,7 +1697,7 @@
         },
         {
             "con": {
-                "smart": "fieldRefSetting",
+                "smart": "newFieldRefSetting",
                 "name": "FieldRefSetting'"
             },
             "arguments": [
@@ -1752,7 +1752,7 @@
         },
         {
             "con": {
-                "smart": "flexVolumeSetting",
+                "smart": "newFlexVolumeSetting",
                 "name": "FlexVolumeSetting'"
             },
             "arguments": [
@@ -1889,7 +1889,7 @@
         },
         {
             "con": {
-                "smart": "flockerSetting",
+                "smart": "newFlockerSetting",
                 "name": "FlockerSetting'"
             },
             "arguments": [
@@ -1944,7 +1944,7 @@
         },
         {
             "con": {
-                "smart": "gcePersistentDiskSetting",
+                "smart": "newGcePersistentDiskSetting",
                 "name": "GcePersistentDiskSetting'"
             },
             "arguments": [
@@ -2066,7 +2066,7 @@
         },
         {
             "con": {
-                "smart": "gitRepoSetting",
+                "smart": "newGitRepoSetting",
                 "name": "GitRepoSetting'"
             },
             "arguments": [
@@ -2142,7 +2142,7 @@
         },
         {
             "con": {
-                "smart": "glusterfsSetting",
+                "smart": "newGlusterfsSetting",
                 "name": "GlusterfsSetting'"
             },
             "arguments": [
@@ -2260,7 +2260,7 @@
         },
         {
             "con": {
-                "smart": "hostPathSetting",
+                "smart": "newHostPathSetting",
                 "name": "HostPathSetting'"
             },
             "arguments": [
@@ -2296,7 +2296,7 @@
         },
         {
             "con": {
-                "smart": "httpGetSetting",
+                "smart": "newHttpGetSetting",
                 "name": "HttpGetSetting'"
             },
             "arguments": [
@@ -2409,7 +2409,7 @@
         },
         {
             "con": {
-                "smart": "httpHeaderSetting",
+                "smart": "newHttpHeaderSetting",
                 "name": "HttpHeaderSetting'"
             },
             "arguments": [
@@ -2463,7 +2463,7 @@
         },
         {
             "con": {
-                "smart": "imagePullSecretSetting",
+                "smart": "newImagePullSecretSetting",
                 "name": "ImagePullSecretSetting'"
             },
             "arguments": [
@@ -2499,7 +2499,7 @@
         },
         {
             "con": {
-                "smart": "imagePullSecretsSetting",
+                "smart": "newImagePullSecretsSetting",
                 "name": "ImagePullSecretsSetting'"
             },
             "arguments": [
@@ -2556,7 +2556,7 @@
         },
         {
             "con": {
-                "smart": "initContainerSetting",
+                "smart": "newInitContainerSetting",
                 "name": "InitContainerSetting'"
             },
             "arguments": [
@@ -3020,7 +3020,7 @@
         },
         {
             "con": {
-                "smart": "iscsiSetting",
+                "smart": "newIscsiSetting",
                 "name": "IscsiSetting'"
             },
             "arguments": [
@@ -3195,7 +3195,7 @@
         },
         {
             "con": {
-                "smart": "itemsSetting",
+                "smart": "newItemsSetting",
                 "name": "ItemsSetting'"
             },
             "arguments": [
@@ -3335,7 +3335,7 @@
         },
         {
             "con": {
-                "smart": "lifecycleSetting",
+                "smart": "newLifecycleSetting",
                 "name": "LifecycleSetting'"
             },
             "arguments": [
@@ -3398,7 +3398,7 @@
         },
         {
             "con": {
-                "smart": "limitSetting",
+                "smart": "newLimitSetting",
                 "name": "LimitSetting'"
             },
             "arguments": [
@@ -3553,7 +3553,7 @@
         },
         {
             "con": {
-                "smart": "limitsSetting",
+                "smart": "newLimitsSetting",
                 "name": "LimitsSetting'"
             },
             "arguments": [
@@ -3638,7 +3638,7 @@
         },
         {
             "con": {
-                "smart": "livenessProbeSetting",
+                "smart": "newLivenessProbeSetting",
                 "name": "LivenessProbeSetting'"
             },
             "arguments": [
@@ -3812,7 +3812,7 @@
         },
         {
             "con": {
-                "smart": "loadBalancerIngressSetting",
+                "smart": "newLoadBalancerIngressSetting",
                 "name": "LoadBalancerIngressSetting'"
             },
             "arguments": [],
@@ -3862,7 +3862,7 @@
         },
         {
             "con": {
-                "smart": "matchExpressionsSetting",
+                "smart": "newMatchExpressionsSetting",
                 "name": "MatchExpressionsSetting'"
             },
             "arguments": [
@@ -3939,7 +3939,7 @@
         },
         {
             "con": {
-                "smart": "metadataSetting",
+                "smart": "newMetadataSetting",
                 "name": "MetadataSetting'"
             },
             "arguments": [
@@ -4229,7 +4229,7 @@
         },
         {
             "con": {
-                "smart": "nfsSetting",
+                "smart": "newNfsSetting",
                 "name": "NfsSetting'"
             },
             "arguments": [
@@ -4347,7 +4347,7 @@
         },
         {
             "con": {
-                "smart": "persistentVolumeClaimSetting",
+                "smart": "newPersistentVolumeClaimSetting",
                 "name": "PersistentVolumeClaimSetting'"
             },
             "arguments": [
@@ -4401,7 +4401,7 @@
         },
         {
             "con": {
-                "smart": "persistentVolumeSourceSetting",
+                "smart": "newPersistentVolumeSourceSetting",
                 "name": "PersistentVolumeSourceSetting'"
             },
             "arguments": [
@@ -4760,7 +4760,7 @@
         },
         {
             "con": {
-                "smart": "photonPersistentDiskSetting",
+                "smart": "newPhotonPersistentDiskSetting",
                 "name": "PhotonPersistentDiskSetting'"
             },
             "arguments": [
@@ -4836,7 +4836,7 @@
         },
         {
             "con": {
-                "smart": "portSetting",
+                "smart": "newPortSetting",
                 "name": "PortSetting'"
             },
             "arguments": [
@@ -5163,7 +5163,7 @@
         },
         {
             "con": {
-                "smart": "postStartSetting",
+                "smart": "newPostStartSetting",
                 "name": "PostStartSetting'"
             },
             "arguments": [
@@ -5237,7 +5237,7 @@
         },
         {
             "con": {
-                "smart": "preStopSetting",
+                "smart": "newPreStopSetting",
                 "name": "PreStopSetting'"
             },
             "arguments": [
@@ -5311,7 +5311,7 @@
         },
         {
             "con": {
-                "smart": "quobyteSetting",
+                "smart": "newQuobyteSetting",
                 "name": "QuobyteSetting'"
             },
             "arguments": [
@@ -5468,7 +5468,7 @@
         },
         {
             "con": {
-                "smart": "rbdSetting",
+                "smart": "newRbdSetting",
                 "name": "RbdSetting'"
             },
             "arguments": [
@@ -5712,7 +5712,7 @@
         },
         {
             "con": {
-                "smart": "readinessProbeSetting",
+                "smart": "newReadinessProbeSetting",
                 "name": "ReadinessProbeSetting'"
             },
             "arguments": [
@@ -5886,7 +5886,7 @@
         },
         {
             "con": {
-                "smart": "requestsSetting",
+                "smart": "newRequestsSetting",
                 "name": "RequestsSetting'"
             },
             "arguments": [
@@ -5971,7 +5971,7 @@
         },
         {
             "con": {
-                "smart": "resourceFieldRefSetting",
+                "smart": "newResourceFieldRefSetting",
                 "name": "ResourceFieldRefSetting'"
             },
             "arguments": [
@@ -6060,7 +6060,7 @@
         },
         {
             "con": {
-                "smart": "resourcesSetting",
+                "smart": "newResourcesSetting",
                 "name": "ResourcesSetting'"
             },
             "arguments": [
@@ -6156,7 +6156,7 @@
         },
         {
             "con": {
-                "smart": "scaleTargetRefSetting",
+                "smart": "newScaleTargetRefSetting",
                 "name": "ScaleTargetRefSetting'"
             },
             "arguments": [
@@ -6272,7 +6272,7 @@
         },
         {
             "con": {
-                "smart": "seLinuxOptionsSetting",
+                "smart": "newSeLinuxOptionsSetting",
                 "name": "SeLinuxOptionsSetting'"
             },
             "arguments": [
@@ -6364,7 +6364,7 @@
         },
         {
             "con": {
-                "smart": "secretSetting",
+                "smart": "newSecretSetting",
                 "name": "SecretSetting'"
             },
             "arguments": [
@@ -6487,7 +6487,7 @@
         },
         {
             "con": {
-                "smart": "secretKeyRefSetting",
+                "smart": "newSecretKeyRefSetting",
                 "name": "SecretKeyRefSetting'"
             },
             "arguments": [
@@ -6542,7 +6542,7 @@
         },
         {
             "con": {
-                "smart": "secretRefSetting",
+                "smart": "newSecretRefSetting",
                 "name": "SecretRefSetting'"
             },
             "arguments": [
@@ -6578,7 +6578,7 @@
         },
         {
             "con": {
-                "smart": "securityContextSetting",
+                "smart": "newSecurityContextSetting",
                 "name": "SecurityContextSetting'"
             },
             "arguments": [
@@ -6763,7 +6763,7 @@
         },
         {
             "con": {
-                "smart": "selectorSetting",
+                "smart": "newSelectorSetting",
                 "name": "SelectorSetting'"
             },
             "arguments": [
@@ -6820,7 +6820,7 @@
         },
         {
             "con": {
-                "smart": "specSetting",
+                "smart": "newSpecSetting",
                 "name": "SpecSetting'"
             },
             "arguments": [
@@ -8208,7 +8208,7 @@
         },
         {
             "con": {
-                "smart": "tcpSocketSetting",
+                "smart": "newTcpSocketSetting",
                 "name": "TcpSocketSetting'"
             },
             "arguments": [
@@ -8265,7 +8265,7 @@
         },
         {
             "con": {
-                "smart": "templateSetting",
+                "smart": "newTemplateSetting",
                 "name": "TemplateSetting'"
             },
             "arguments": [
@@ -8721,7 +8721,7 @@
         },
         {
             "con": {
-                "smart": "valueFromSetting",
+                "smart": "newValueFromSetting",
                 "name": "ValueFromSetting'"
             },
             "arguments": [
@@ -8819,7 +8819,7 @@
         },
         {
             "con": {
-                "smart": "volumeSetting",
+                "smart": "newVolumeSetting",
                 "name": "VolumeSetting'"
             },
             "arguments": [
@@ -9315,7 +9315,7 @@
         },
         {
             "con": {
-                "smart": "volumeMountSetting",
+                "smart": "newVolumeMountSetting",
                 "name": "VolumeMountSetting'"
             },
             "arguments": [
@@ -9450,7 +9450,7 @@
         },
         {
             "con": {
-                "smart": "vsphereVolumeSetting",
+                "smart": "newVsphereVolumeSetting",
                 "name": "VsphereVolumeSetting'"
             },
             "arguments": [
