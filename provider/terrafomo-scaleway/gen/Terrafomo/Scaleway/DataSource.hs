@@ -17,7 +17,6 @@
 --
 module Terrafomo.Scaleway.DataSource
     (
-    -- * DataSource Datatypes
     -- ** scaleway_bootscript
       BootscriptData (..)
     , bootscriptData
@@ -75,6 +74,7 @@ data BootscriptData s = BootscriptData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_bootscript@ datasource value.
 bootscriptData
     :: P.DataSource (BootscriptData s)
 bootscriptData =
@@ -152,6 +152,7 @@ data ImageData s = ImageData'
     -- * 'mostRecent'
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_image@ datasource value.
 imageData
     :: TF.Attr s P.Text -- ^ @architecture@ - 'P.architecture'
     -> P.DataSource (ImageData s)
@@ -225,6 +226,7 @@ data SecurityGroupData s = SecurityGroupData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_security_group@ datasource value.
 securityGroupData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (SecurityGroupData s)
@@ -267,6 +269,7 @@ data VolumeData s = VolumeData'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_volume@ datasource value.
 volumeData
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.DataSource (VolumeData s)

@@ -17,11 +17,10 @@
 --
 module Terrafomo.Scaleway.Provider
     (
-    -- * Scaleway Provider Datatype
       Provider (..)
     , newProvider
 
-    -- * Scaleway Specific Aliases
+    -- ** Scaleway Specific Aliases
     , DataSource
     , Resource
     ) where
@@ -89,7 +88,7 @@ instance TF.IsProvider Provider where
     type ProviderType Provider = "scaleway"
 
 instance TF.IsObject Provider where
-    toObject x@Provider'{..} =
+    toObject Provider'{..} =
         P.catMaybes
             [ P.Just $ TF.assign "organization" _organization
             , TF.assign "region" <$> _region

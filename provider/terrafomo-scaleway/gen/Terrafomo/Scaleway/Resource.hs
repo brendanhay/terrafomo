@@ -17,7 +17,6 @@
 --
 module Terrafomo.Scaleway.Resource
     (
-    -- * Resource Datatypes
     -- ** scaleway_ip
       IpResource (..)
     , ipResource
@@ -91,6 +90,7 @@ data IpResource s = IpResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_ip@ resource value.
 ipResource
     :: P.Resource (IpResource s)
 ipResource =
@@ -140,6 +140,7 @@ data SecurityGroupResource s = SecurityGroupResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_security_group@ resource value.
 securityGroupResource
     :: TF.Attr s P.Text -- ^ @description@ - 'P.description'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -212,6 +213,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_security_group_rule@ resource value.
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @action@ - 'P.action'
     -> TF.Attr s P.Text -- ^ @direction@ - 'P.direction'
@@ -319,6 +321,7 @@ data ServerResource s = ServerResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_server@ resource value.
 serverResource
     :: TF.Attr s P.Text -- ^ @image@ - 'P.image'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -431,6 +434,7 @@ data SshKeyResource s = SshKeyResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_ssh_key@ resource value.
 sshKeyResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> P.Resource (SshKeyResource s)
@@ -475,6 +479,7 @@ data TokenResource s = TokenResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_token@ resource value.
 tokenResource
     :: P.Resource (TokenResource s)
 tokenResource =
@@ -550,6 +555,7 @@ data UserDataResource s = UserDataResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_user_data@ resource value.
 userDataResource
     :: TF.Attr s P.Text -- ^ @key@ - 'P.key'
     -> TF.Attr s P.Text -- ^ @server@ - 'P.server'
@@ -610,6 +616,7 @@ data VolumeResource s = VolumeResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_volume@ resource value.
 volumeResource
     :: TF.Attr s P.Int -- ^ @size_in_gb@ - 'P.sizeInGb'
     -> TF.Attr s P.Text -- ^ @name@ - 'P.name'
@@ -669,6 +676,7 @@ data VolumeAttachmentResource s = VolumeAttachmentResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @scaleway_volume_attachment@ resource value.
 volumeAttachmentResource
     :: TF.Attr s P.Text -- ^ @server@ - 'P.server'
     -> TF.Attr s P.Text -- ^ @volume@ - 'P.volume'
