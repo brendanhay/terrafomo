@@ -2,7 +2,7 @@
     "settings": [
         {
             "con": {
-                "smart": "partSetting",
+                "smart": "newPartSetting",
                 "name": "PartSetting'"
             },
             "arguments": [
