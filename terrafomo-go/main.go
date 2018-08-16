@@ -8,8 +8,8 @@ import (
 	"log"
 	"sort"
 	"strconv"
-	"strings"
 	"time"
+	"strings"
 )
 
 func main() {
@@ -190,16 +190,16 @@ func newSchema(parent string, k string, v *schema.Schema) *Schema {
 	}
 
 	prefix := strings.TrimPrefix(parent, "replace_provider")
-	name := strings.TrimLeft(fmt.Sprintf("%s_%s", prefix, k), "_")
+	path := strings.TrimLeft(fmt.Sprintf("%s_%s", prefix, k), "_")
 
 	switch e := v.Elem.(type) {
 	case *schema.Resource:
 		s.Resource = &Resource{
-			Name:    name,
-			Schemas: newSchemaSlice(k, e.Schema),
+			Name:    k,
+			Schemas: newSchemaSlice(path, e.Schema),
 		}
 	case *schema.Schema:
-		s.Schema = newSchema(k, name, e)
+		s.Schema = newSchema(path, k, e)
 	}
 
 	return &s
