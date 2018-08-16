@@ -446,23 +446,6 @@
             "attributes": [],
             "parameters": [
                 {
-                    "default": "_dataCenter",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"data_center\" <$> TF.attribute",
-                    "name": "_dataCenter",
-                    "method": "dataCenter",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasDataCenter",
-                    "validate": false,
-                    "optional": false,
-                    "original": "data_center"
-                },
-                {
                     "default": "_loadBalancer",
                     "computed": false,
                     "required": true,
@@ -478,6 +461,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "load_balancer"
+                },
+                {
+                    "default": "_dataCenter",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"data_center\" <$> TF.attribute",
+                    "name": "_dataCenter",
+                    "method": "dataCenter",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasDataCenter",
+                    "validate": false,
+                    "optional": false,
+                    "original": "data_center"
                 },
                 {
                     "default": "_nodes",
@@ -601,23 +601,6 @@
             ],
             "parameters": [
                 {
-                    "default": "_ports",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": false,
-                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
-                    "name": "_ports",
-                    "method": "ports",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]",
-                    "class": "HasPorts",
-                    "validate": false,
-                    "optional": false,
-                    "original": "ports"
-                },
-                {
                     "default": "_serverId",
                     "computed": false,
                     "required": true,
@@ -633,6 +616,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "server_id"
+                },
+                {
+                    "default": "_ports",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"ports\" <$> TF.attribute",
+                    "name": "_ports",
+                    "method": "ports",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (P.Map P.Text (TF.Attr s P.Text))]",
+                    "class": "HasPorts",
+                    "validate": false,
+                    "optional": false,
+                    "original": "ports"
                 }
             ],
             "conflicts": [],
@@ -1079,6 +1079,23 @@
                     "original": "group_id"
                 },
                 {
+                    "default": "_sourceServerId",
+                    "computed": false,
+                    "required": true,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"source_server_id\" <$> TF.attribute",
+                    "name": "_sourceServerId",
+                    "method": "sourceServerId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasSourceServerId",
+                    "validate": false,
+                    "optional": false,
+                    "original": "source_server_id"
+                },
+                {
                     "default": "_memoryMb",
                     "computed": false,
                     "required": true,
@@ -1111,23 +1128,6 @@
                     "validate": false,
                     "optional": false,
                     "original": "name_template"
-                },
-                {
-                    "default": "_sourceServerId",
-                    "computed": false,
-                    "required": true,
-                    "help": [],
-                    "forceNew": true,
-                    "encoder": "TF.assign \"source_server_id\" <$> TF.attribute",
-                    "name": "_sourceServerId",
-                    "method": "sourceServerId",
-                    "threaded": true,
-                    "conflicts": [],
-                    "type": "TF.Attr s P.Text",
-                    "class": "HasSourceServerId",
-                    "validate": false,
-                    "optional": false,
-                    "original": "source_server_id"
                 }
             ],
             "conflicts": [],
