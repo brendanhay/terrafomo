@@ -624,6 +624,23 @@
                     "original": "facility"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"hardware_reservation_id\" <$> TF.attribute",
+                    "name": "_hardwareReservationId",
+                    "method": "hardwareReservationId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasHardwareReservationId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "hardware_reservation_id"
+                },
+                {
                     "default": "_hostname",
                     "computed": false,
                     "required": true,
@@ -707,6 +724,23 @@
                     "validate": false,
                     "optional": false,
                     "original": "project_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"public_ipv4_subnet_size\" <$> TF.attribute",
+                    "name": "_publicIpv4SubnetSize",
+                    "method": "publicIpv4SubnetSize",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasPublicIpv4SubnetSize",
+                    "validate": false,
+                    "optional": true,
+                    "original": "public_ipv4_subnet_size"
                 },
                 {
                     "default": "TF.Nil",
@@ -864,7 +898,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedHardwareReservationId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "hardware_reservation_id"
                 },
                 {
@@ -915,7 +949,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedPublicIpv4SubnetSize",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "public_ipv4_subnet_size"
                 },
                 {
@@ -1529,6 +1563,40 @@
                     "validate": false,
                     "optional": false,
                     "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"organization_id\" <$> TF.attribute",
+                    "name": "_organizationId",
+                    "method": "organizationId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasOrganizationId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "organization_id"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"payment_method_id\" <$> TF.attribute",
+                    "name": "_paymentMethodId",
+                    "method": "paymentMethodId",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasPaymentMethodId",
+                    "validate": false,
+                    "optional": true,
+                    "original": "payment_method_id"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/packet/r/project.html",
@@ -1584,7 +1652,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedOrganizationId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "organization_id"
                 },
                 {
@@ -1601,7 +1669,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedPaymentMethodId",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "payment_method_id"
                 },
                 {
@@ -2120,6 +2188,23 @@
                     "required": false,
                     "help": [],
                     "forceNew": false,
+                    "encoder": "TF.assign \"billing_cycle\" <$> TF.attribute",
+                    "name": "_billingCycle",
+                    "method": "billingCycle",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasBillingCycle",
+                    "validate": false,
+                    "optional": true,
+                    "original": "billing_cycle"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [],
+                    "forceNew": false,
                     "encoder": "TF.assign \"description\" <$> TF.attribute",
                     "name": "_description",
                     "method": "description",
@@ -2287,7 +2372,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedBillingCycle",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "billing_cycle"
                 },
                 {
