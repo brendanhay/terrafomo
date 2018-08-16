@@ -125,6 +125,9 @@ instance P.HasRulesHcl (AclPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_rulesHcl :: AclPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _rulesHcl = a } :: AclPolicyResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AclPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @nomad_acl_token@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/nomad/r/acl_token.html terraform documentation>
@@ -190,6 +193,9 @@ instance P.HasType' (AclTokenResource s) (TF.Attr s P.Text) where
     type' =
         P.lens (_type' :: AclTokenResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: AclTokenResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 instance s ~ s' => P.HasComputedAccessorId (TF.Ref s' (AclTokenResource s)) (TF.Attr s P.Text) where
     computedAccessorId x = TF.compute (TF.refKey x) "accessor_id"
@@ -263,6 +269,9 @@ instance P.HasPolicyOverride (JobResource s) (TF.Attr s P.Bool) where
         P.lens (_policyOverride :: JobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _policyOverride = a } :: JobResource s)
 
+instance s ~ s' => P.HasComputedId (TF.Ref s' (JobResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
 -- | @nomad_namespace@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/nomad/r/namespace.html terraform documentation>
@@ -317,6 +326,9 @@ instance P.HasQuota (NamespaceResource s) (TF.Attr s P.Text) where
     quota =
         P.lens (_quota :: NamespaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _quota = a } :: NamespaceResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NamespaceResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @nomad_quota_specification@ Resource.
 --
@@ -373,6 +385,9 @@ instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where
     name =
         P.lens (_name :: QuotaSpecificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: QuotaSpecificationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (QuotaSpecificationResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @nomad_sentinel_policy@ Resource.
 --
@@ -454,3 +469,6 @@ instance P.HasScope (SentinelPolicyResource s) (TF.Attr s P.Text) where
     scope =
         P.lens (_scope :: SentinelPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _scope = a } :: SentinelPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SentinelPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
