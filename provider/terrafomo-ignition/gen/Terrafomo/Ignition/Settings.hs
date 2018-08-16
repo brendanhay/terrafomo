@@ -19,31 +19,31 @@ module Terrafomo.Ignition.Settings
     (
     -- ** append
       AppendSetting (..)
-    , appendSetting
+    , newAppendSetting
 
     -- ** content
     , ContentSetting (..)
-    , contentSetting
+    , newContentSetting
 
     -- ** dropin
     , DropinSetting (..)
-    , dropinSetting
+    , newDropinSetting
 
     -- ** mount
     , MountSetting (..)
-    , mountSetting
+    , newMountSetting
 
     -- ** partition
     , PartitionSetting (..)
-    , partitionSetting
+    , newPartitionSetting
 
     -- ** replace
     , ReplaceSetting (..)
-    , replaceSetting
+    , newReplaceSetting
 
     -- ** source
     , SourceSetting (..)
-    , sourceSetting
+    , newSourceSetting
 
     ) where
 
@@ -79,10 +79,10 @@ data AppendSetting s = AppendSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @append@ settings value.
-appendSetting
+newAppendSetting
     :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> AppendSetting s
-appendSetting _source =
+newAppendSetting _source =
     AppendSetting'
         { _source = _source
         , _verification = TF.Nil
@@ -119,10 +119,10 @@ data ContentSetting s = ContentSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @content@ settings value.
-contentSetting
+newContentSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> ContentSetting s
-contentSetting _content =
+newContentSetting _content =
     ContentSetting'
         { _content = _content
         , _mime = TF.value "text/plain"
@@ -159,10 +159,10 @@ data DropinSetting s = DropinSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @dropin@ settings value.
-dropinSetting
+newDropinSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> DropinSetting s
-dropinSetting _name =
+newDropinSetting _name =
     DropinSetting'
         { _content = TF.Nil
         , _name = _name
@@ -211,11 +211,11 @@ data MountSetting s = MountSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mount@ settings value.
-mountSetting
+newMountSetting
     :: TF.Attr s P.Text -- ^ 'P._device': @device@
     -> TF.Attr s P.Text -- ^ 'P._format': @format@
     -> MountSetting s
-mountSetting _device _format =
+newMountSetting _device _format =
     MountSetting'
         { _device = _device
         , _format = _format
@@ -289,9 +289,9 @@ data PartitionSetting s = PartitionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @partition@ settings value.
-partitionSetting
+newPartitionSetting
     :: PartitionSetting s
-partitionSetting =
+newPartitionSetting =
     PartitionSetting'
         { _label = TF.Nil
         , _number = TF.Nil
@@ -349,10 +349,10 @@ data ReplaceSetting s = ReplaceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @replace@ settings value.
-replaceSetting
+newReplaceSetting
     :: TF.Attr s P.Text -- ^ 'P._source': @source@
     -> ReplaceSetting s
-replaceSetting _source =
+newReplaceSetting _source =
     ReplaceSetting'
         { _source = _source
         , _verification = TF.Nil
@@ -392,9 +392,9 @@ data SourceSetting s = SourceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @source@ settings value.
-sourceSetting
+newSourceSetting
     :: SourceSetting s
-sourceSetting =
+newSourceSetting =
     SourceSetting'
         { _compression = TF.Nil
         , _source = TF.Nil
