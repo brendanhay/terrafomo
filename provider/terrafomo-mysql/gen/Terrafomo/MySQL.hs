@@ -12,12 +12,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Terrafomo.MySQL
-    ( module Terrafomo.MySQL.Lens
-    , module Terrafomo.MySQL.Provider
-    , module Terrafomo.MySQL.Resource
-    , module Terrafomo.MySQL.Settings
+    (
+    -- * Provider Datatype
+      module Terrafomo.MySQL.Provider
+
+    -- * Custom Types
     , module Terrafomo.MySQL.Types
-    -- * Provider Aliases
+
+    -- * DataSources
+
+    -- * Resources
+    , module Terrafomo.MySQL.Resource
+
+    -- * Settings
+    , module Terrafomo.MySQL.Settings
+
+    -- * Overloaded Lenses
+    , module Terrafomo.MySQL.Lens
     ) where
 
 import Terrafomo.MySQL.Lens

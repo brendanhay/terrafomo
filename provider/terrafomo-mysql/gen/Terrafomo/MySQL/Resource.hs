@@ -17,7 +17,6 @@
 --
 module Terrafomo.MySQL.Resource
     (
-    -- * Resource Datatypes
     -- ** mysql_database
       DatabaseResource (..)
     , databaseResource
@@ -72,6 +71,7 @@ data DatabaseResource s = DatabaseResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @mysql_database@ resource value.
 databaseResource
     :: TF.Attr s P.Text -- ^ @name@ - 'P.name'
     -> P.Resource (DatabaseResource s)
@@ -133,6 +133,7 @@ data GrantResource s = GrantResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @mysql_grant@ resource value.
 grantResource
     :: TF.Attr s P.Text -- ^ @database@ - 'P.database'
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @privileges@ - 'P.privileges'
@@ -213,6 +214,7 @@ data UserResource s = UserResource'
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
+-- | Define a new @mysql_user@ resource value.
 userResource
     :: TF.Attr s P.Text -- ^ @user@ - 'P.user'
     -> P.Resource (UserResource s)

@@ -17,7 +17,6 @@
 --
 module Terrafomo.MySQL.Settings
     (
-    -- * Settings Datatypes
     ) where
 
 import Data.Functor ((<$>))
