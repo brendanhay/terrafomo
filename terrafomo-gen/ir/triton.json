@@ -1496,6 +1496,44 @@
                     "original": "provision_start_ip"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "List of IP addresses for DNS resolvers"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"resolvers\" <$> TF.attribute",
+                    "name": "_resolvers",
+                    "method": "resolvers",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasResolvers",
+                    "validate": false,
+                    "optional": true,
+                    "original": "resolvers"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Map of CIDR block to Gateway IP address"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"routes\" <$> TF.attribute",
+                    "name": "_routes",
+                    "method": "routes",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasRoutes",
+                    "validate": false,
+                    "optional": true,
+                    "original": "routes"
+                },
+                {
                     "default": "_subnet",
                     "computed": false,
                     "required": true,
@@ -1610,7 +1648,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedResolvers",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "resolvers"
                 },
                 {
@@ -1629,7 +1667,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedRoutes",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "routes"
                 }
             ],
@@ -1910,6 +1948,44 @@
                     "original": "image"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Metadata for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"metadata\" <$> TF.attribute",
+                    "name": "_metadata",
+                    "method": "metadata",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasMetadata",
+                    "validate": false,
+                    "optional": true,
+                    "original": "metadata"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Network IDs for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"networks\" <$> TF.attribute",
+                    "name": "_networks",
+                    "method": "networks",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s P.Text]",
+                    "class": "HasNetworks",
+                    "validate": false,
+                    "optional": true,
+                    "original": "networks"
+                },
+                {
                     "default": "_package",
                     "computed": false,
                     "required": true,
@@ -1929,6 +2005,25 @@
                     "original": "package"
                 },
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Tags for group instances"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"tags\" <$> TF.attribute",
+                    "name": "_tags",
+                    "method": "tags",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
+                    "class": "HasTags",
+                    "validate": false,
+                    "optional": true,
+                    "original": "tags"
+                },
+                {
                     "default": "_templateName",
                     "computed": false,
                     "required": true,
@@ -1946,6 +2041,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "template_name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Data copied to instance on boot"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"userdata\" <$> TF.attribute",
+                    "name": "_userdata",
+                    "method": "userdata",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasUserdata",
+                    "validate": false,
+                    "optional": true,
+                    "original": "userdata"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/instance_template.html",
@@ -1986,7 +2100,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedMetadata",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "metadata"
                 },
                 {
@@ -2005,7 +2119,7 @@
                     "type": "TF.Attr s [TF.Attr s P.Text]",
                     "class": "HasComputedNetworks",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "networks"
                 },
                 {
@@ -2024,7 +2138,7 @@
                     "type": "TF.Attr s (P.Map P.Text (TF.Attr s P.Text))",
                     "class": "HasComputedTags",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "tags"
                 },
                 {
@@ -2043,7 +2157,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedUserdata",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "userdata"
                 }
             ],
@@ -2134,6 +2248,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "key"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Name of the key (generated from the key comment if not set)"
+                    ],
+                    "forceNew": true,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
                 }
             ],
             "url": "https://www.terraform.io/docs/providers/triton/r/key.html",
@@ -2174,7 +2307,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 }
             ],
@@ -2366,6 +2499,25 @@
                     "computed": false,
                     "required": false,
                     "help": [
+                        "Friendly name for machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"name\" <$> TF.attribute",
+                    "name": "_name",
+                    "method": "name",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasName",
+                    "validate": false,
+                    "optional": true,
+                    "original": "name"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
                         "Desired network IDs"
                     ],
                     "forceNew": false,
@@ -2379,6 +2531,25 @@
                     "validate": false,
                     "optional": true,
                     "original": "networks"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Network interface"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"nic\" <$> TF.attribute",
+                    "name": "_nic",
+                    "method": "nic",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s [TF.Attr s (NicSetting s)]",
+                    "class": "HasNic",
+                    "validate": false,
+                    "optional": true,
+                    "original": "nic"
                 },
                 {
                     "default": "_package",
@@ -2398,6 +2569,25 @@
                     "validate": false,
                     "optional": false,
                     "original": "package"
+                },
+                {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Authorized keys for the root user on this machine"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"root_authorized_keys\" <$> TF.attribute",
+                    "name": "_rootAuthorizedKeys",
+                    "method": "rootAuthorizedKeys",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Text",
+                    "class": "HasRootAuthorizedKeys",
+                    "validate": false,
+                    "optional": true,
+                    "original": "root_authorized_keys"
                 },
                 {
                     "default": "TF.Nil",
@@ -2628,7 +2818,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedName",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "name"
                 },
                 {
@@ -2647,7 +2837,7 @@
                     "type": "TF.Attr s [TF.Attr s (NicSetting s)]",
                     "class": "HasComputedNic",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "nic"
                 },
                 {
@@ -2685,7 +2875,7 @@
                     "type": "TF.Attr s P.Text",
                     "class": "HasComputedRootAuthorizedKeys",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "root_authorized_keys"
                 },
                 {
@@ -2778,6 +2968,25 @@
             },
             "arguments": [
                 {
+                    "default": "TF.Nil",
+                    "computed": false,
+                    "required": false,
+                    "help": [
+                        "Number of instances to launch and monitor"
+                    ],
+                    "forceNew": false,
+                    "encoder": "TF.assign \"capacity\" <$> TF.attribute",
+                    "name": "_capacity",
+                    "method": "capacity",
+                    "threaded": true,
+                    "conflicts": [],
+                    "type": "TF.Attr s P.Int",
+                    "class": "HasCapacity",
+                    "validate": false,
+                    "optional": true,
+                    "original": "capacity"
+                },
+                {
                     "default": "_groupName",
                     "computed": false,
                     "required": true,
@@ -2854,7 +3063,7 @@
                     "type": "TF.Attr s P.Int",
                     "class": "HasComputedCapacity",
                     "validate": false,
-                    "optional": true,
+                    "optional": false,
                     "original": "capacity"
                 }
             ],
