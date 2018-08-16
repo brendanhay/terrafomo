@@ -19,11 +19,11 @@ module Terrafomo.Nomad.Settings
     (
     -- ** limits
       LimitsSetting (..)
-    , limitsSetting
+    , newLimitsSetting
 
     -- ** region_limit
     , RegionLimitSetting (..)
-    , regionLimitSetting
+    , newRegionLimitSetting
 
     ) where
 
@@ -61,11 +61,11 @@ data LimitsSetting s = LimitsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @limits@ settings value.
-limitsSetting
+newLimitsSetting
     :: TF.Attr s (RegionLimitSetting s) -- ^ 'P._regionLimit': @region_limit@
     -> TF.Attr s P.Text -- ^ 'P._region': @region@
     -> LimitsSetting s
-limitsSetting _regionLimit _region =
+newLimitsSetting _regionLimit _region =
     LimitsSetting'
         { _region = _region
         , _regionLimit = _regionLimit
@@ -106,9 +106,9 @@ data RegionLimitSetting s = RegionLimitSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @region_limit@ settings value.
-regionLimitSetting
+newRegionLimitSetting
     :: RegionLimitSetting s
-regionLimitSetting =
+newRegionLimitSetting =
     RegionLimitSetting'
         { _cpu = TF.Nil
         , _memoryMb = TF.Nil
